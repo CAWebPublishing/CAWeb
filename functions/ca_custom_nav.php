@@ -301,7 +301,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 <ul class="et_font_icon menu-icon-list" id="menu-icon-list-<?= $item_id; ?>">
 	<?php
 
-		foreach(et_pb_get_font_icon_symbols(false) as $name=>$code){
+		foreach(get_ca_icon_list() as $name=>$code){
 			printf('<li data-icon="%1$s" class="icon-option %3$s"  name="%2$s"></li>',
              esc_attr( $code ), $name, (!empty($tmp['_caweb_menu_icon'][0] ) && $name == $tmp['_caweb_menu_icon'][0]  ? 'is_selected' : '' )  );
 		}
