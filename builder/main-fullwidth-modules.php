@@ -92,7 +92,7 @@ function get_fields() {
 			'label'           => esc_html__( 'Button Link','et_builder' ),
 			'type'            => 'text',
 			'option_category' => 'basic_option',
-			'description'     => esc_html__( 'Here you can enter the URL for the button.','et_builder' ),
+			'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
 			'depends_show_if' => "on",
 			),
 	'content_new' => array(
@@ -392,7 +392,7 @@ function get_fields() {
 		'label' => esc_html__( 'Button URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Input a destination URL for the slide button.', 'et_builder' ),
+		'description' => esc_html__( 'Input a destination URL for the slide button. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 		),
 		'background_image' => array(
@@ -570,7 +570,7 @@ $this->fullwidth       = true;
 				'label' => esc_html__( 'Link URL', 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'URL destination for the button.', 'et_builder' ),
+				'description' => esc_html__( 'URL destination for the button. (http:// must be included)', 'et_builder' ),
 				'depends_show_if' => 'on',
 				),
 			'section_content' => array(
@@ -898,7 +898,7 @@ function get_fields() {
 		'label' => esc_html__( 'Read More URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the url for the Read More Button.', 'et_builder' ),
+		'description' => esc_html__( 'Define the url for the Read More Button. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 	),
 	'display_link_as_button' => array(
@@ -933,7 +933,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 1 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link2_show' => array(
@@ -959,7 +959,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 2 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link3_show' => array(
@@ -985,7 +985,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 3 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link4_show' => array(
@@ -1011,7 +1011,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 4 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link5_show' => array(
@@ -1037,7 +1037,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 5 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link6_show' => array(
@@ -1063,7 +1063,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 6 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link7_show' => array(
@@ -1089,7 +1089,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 7 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link8_show' => array(
@@ -1115,7 +1115,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 8 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link9_show' => array(
@@ -1141,7 +1141,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 9 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 	'group_link10_show' => array(
@@ -1167,7 +1167,7 @@ function get_fields() {
 		'label' => esc_html__( 'Link 10 URL', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
-		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
+		'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
 				'module_id' => array(
@@ -1524,7 +1524,7 @@ function get_fields(){
 			'label' => esc_html__( 'Slide URL', 'et_builder' ),
 			'type'=> 'text',
 			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the url for the slide', 'et_builder' ),
+			'description' => esc_html__( 'Define the url for the slide. (http:// must be included)', 'et_builder' ),
 			'depends_show_if' => 'on',
 			),
 	'slide_desc' => array(
