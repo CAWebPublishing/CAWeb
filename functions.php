@@ -109,6 +109,10 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 
 	// Enable Post Thumbnails
 	add_theme_support( 'post-thumbnails' );
+
+	// CA Metaboxes
+	require_once(CAWebAbsPath. '/core/update.php');
+
 }
 
 add_action('after_setup_theme', 'ca_setup_theme');
@@ -136,6 +140,14 @@ function ca_init(){
 
 add_action('init', 'ca_init');
 
+function ca_admin_init(){
+	global $caweb_core_updates;
+
+	$caweb_core_updates = new caweb_auto_update (wp_get_theme()->Version, wp_get_theme()->Name);
+
+}
+
+add_action('admin_init', 'ca_admin_init');
 
 /* Enqueue Scripts and Styles at the bottom */
 function ca_theme_enqueue_style() {
