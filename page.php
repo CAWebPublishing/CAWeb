@@ -17,7 +17,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <?php if ( ! ca_version_check(4) ) : ?>
 
-	<div class="ca_wp_container">
+	<!--div class="ca_wp_container"-->
 
 
 <?php endif; ?>
@@ -34,19 +34,22 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
     <!-- Page Title-->
 <?php if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) : ?>
-<h1 class="page-title" ><?php echo $post->post_title; ?></h1>
+<h1 class="page-title et_pb_row" ><?php echo $post->post_title; ?></h1>
 
 <?php endif; ?>
 
-					<?php
-
-						the_content();
-
-						if ( ! $is_page_builder_used )
-
-							wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
-
-					?>
+<?php
+	if ( ! $is_page_builder_used ){
+		print '<div class="et_pb_row">';
+	}
+	the_content();
+	if ( ! $is_page_builder_used ){
+		wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
+	}
+	if ( ! $is_page_builder_used ){
+		print '</div>';
+	}
+?>
 
 
 					</div> <!-- .entry-content -->
@@ -69,7 +72,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 <?php if ( ! ca_version_check(4) ) : ?>
-  </div>
+  <!--/div-->
 
 <?php endif; ?>
 

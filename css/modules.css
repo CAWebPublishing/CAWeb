@@ -4,10 +4,9 @@ overflow: hidden;
 }
 
 
-.et_pb_ca_section_primary,
+
 .et_pb_ca_fullwidth_section_primary,
-.et_pb_ca_fullwidth_section_footer,
-.et_pb_ca_section_footer{
+.et_pb_ca_fullwidth_section_footer{
     padding: 50px 25px;
 }
 
@@ -79,4 +78,8 @@ ul, ol{
 
 .et_pb_ca_section_carousel button a, .et_pb_ca_section_carousel h2{
   color: white;
+}
+
+ol{
+  margin-left: 16px;
 }

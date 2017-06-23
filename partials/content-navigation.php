@@ -15,9 +15,9 @@ if(get_option('ca_menu_selector_enabled') == true){
 
 ?>
 
-<nav id="navigation" class="main-navigation <?php print $menu_option; ?> hidden-print">
+<nav id="navigation" class=" ca_wp_container main-navigation <?php print $menu_option; ?> hidden-print">
 
-  <ul id="nav_list" class="top-level-nav <?=   ( ca_version_check(5, $post_id) ? 'ca_wp_container' : ''); ?>">
+  <ul id="nav_list" class="top-level-nav">
 
 <?php
 
@@ -54,11 +54,11 @@ if( has_nav_menu('header-menu') ){
 
 // Begin Creation of the Navigation Menu (first-level-links)
 function createNavMenu($menu_option , $menuitems, $ver){
-	
+
 	// Iterate thru menuitems create Top Level (first-level-link)
 	foreach($menuitems as $i => $item){
 		$item_meta = get_post_meta($item->ID);
-		
+
 		// If a top level nav item,
 		// menu_item_parent= 0
 		if(0 == $item->menu_item_parent){
@@ -69,7 +69,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 			$childCount = count($childLinks);
 
 			// Get icon if present
-			
+
 
 			$icon = $item_meta['_caweb_menu_icon'][0];
 			$icon = (!empty($icon) ? get_ca_icon_span($icon) : get_blank_icon_span() );
@@ -81,7 +81,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 
 			// If there are child links create the sub-nav
 			if(0 < $childCount && "singlelevel" != $menu_option ){
-				
+
 				if("megadropdown" == $menu_option){
 					// Sub nav image variables
 					$nav_img = $item_meta['_caweb_menu_image'][0];
@@ -96,7 +96,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 						$sub_img_div = sprintf('<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
 								$nav_img,$nav_img_size, $nav_img_side);
 
-						$nav_item .= sprintf('<div class="sub-nav %4$s">
+						$nav_item .= sprintf('<div class="sub-nav">
 							<div class="%1$s">%2$s</div>%3$s</li>',
 							(!empty($nav_img) ? $sub_img_class : 'full'), createSubNavMenu($childLinks, $ver, $menu_option ), (!empty($nav_img) ? $sub_img_div : ''),
 							( $ver == 5 && "megadropdown" == $menu_option ? 'ca_wp_container' : '') );
@@ -107,7 +107,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 						$sub_img_div = sprintf('<div class="sub-nav-decoration" style="background: url(%1$s); "></div>', $nav_img);
 
 						$nav_item .=
-							sprintf('<div class="sub-nav %2$s">%1$s%3$s</div></li>', createSubNavMenu($childLinks, $ver, $menu_option), 
+							sprintf('<div class="sub-nav %2$s">%1$s%3$s</div></li>', createSubNavMenu($childLinks, $ver, $menu_option),
                       (!empty($nav_img) ? $sub_img_class : 'empty') , (!empty($nav_img) ? $sub_img_div : '') );
 					}
 
@@ -139,11 +139,11 @@ function createSubNavMenu($childLinks, $ver, $menu_option){
 		// Iterate thru $childLinks create Sub Level (second-level-links)
 		foreach($childLinks as $i => $item){
 			$item_meta = get_post_meta($item->ID);
-			
+
 			// Get icon if present
 			$icon = $item_meta['_caweb_menu_icon'][0];
 			$icon = (!empty($icon) ? get_ca_icon_span($icon) : '' );
-			
+
 			// Get desc if present
       $desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');
 

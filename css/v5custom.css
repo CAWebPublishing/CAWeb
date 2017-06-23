@@ -39,9 +39,24 @@ ul.utility-links.social-media-links {
 
 /* Navigation and the List are set to auto width
 and the nav links float to the right */
-#navigation{
+/*#navigation{
   		width: 100%;
   		padding: 0;
+}*/
+
+.top-level-nav{
+  margin-right: -8px;
+}
+@media (min-width: 768px){
+  .utility-links{
+    margin-right: -8px;
+  }
+}
+@media (max-width: 767px){
+  .utility-header .container.ca_wp_container{
+    width: 100%;
+    padding-bottom: 2px;
+  }
 }
 
 #nav_list{
@@ -143,9 +158,9 @@ and the nav links float to the right */
 
 /* Media Query Styles */
 @media (max-width: 767px) {
-	.et_pb_fullwidth_section{
+	/*.et_pb_fullwidth_section{
 		margin: 0 ;
-	}
+	}*/
 
 	.et_pb_ca_fullwidth_section_primary.et_pb_module .pull-right {
 		padding-left: 0 !important;
@@ -153,9 +168,9 @@ and the nav links float to the right */
 
 }
 @media (min-width: 768px) {
-	.et_pb_fullwidth_section{
+	/*.et_pb_fullwidth_section{
 		margin: 0 -6%;
-	}
+	}*/
 
 }
 
@@ -192,9 +207,9 @@ and the nav links float to the right */
 
 @media (min-width: 1080px){
 
-.et_pb_fullwidth_section{
+/*.et_pb_fullwidth_section{
 		margin: 0 -12.5%;
-	}
+	}*/
 }
 
 @media (min-width: 1280px){
@@ -209,9 +224,9 @@ and the nav links float to the right */
 }
 /* End of Branding & Navigation */
 
-	.et_pb_fullwidth_section{
+	/*.et_pb_fullwidth_section{
 		margin: 0 -21.5%;
-	}
+	}*/
 }
 
 @media (max-width: 992px){
@@ -241,9 +256,14 @@ and the nav links float to the right */
 @media (max-width: 767px) {
   .mobile-controls{
     	background: #fff;
+      padding-right: 70px;
   }
   .mobile-controls .toggle-menu, .mobile-controls .toggle-search{
     color: #046B99;
+  }
+  .mobile-controls .toggle-menu{
+    right: 10px;
+    left: auto;
   }
   #nav_list{
     width: 100%;
@@ -261,10 +281,10 @@ and the nav links float to the right */
 
   .cagov-logo {
     position: initial;
-    padding-left: 65px;
+    /*padding-left: 65px;*/
     float: left;
     text-align: left;
-    width: 84%;
+    width: 80%;
 }
   .cagov-logo img{
   		max-width : 100% ;
@@ -291,9 +311,21 @@ ul.utility-links.social-media-links {
     .branding {
     display: none;
 }
+.et_pb_row.main-navigation{
+      width: 100%;
+    }
 
 }
 /* End of Mobile Control Styles */
+@media (min-width: 768px){
+  .et_pb_row.main-navigation{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    width: 80% !important;
+  }
+}
+
 
 
 /* Section Carousel Version 5 */
@@ -307,3 +339,28 @@ ul.utility-links.social-media-links {
   padding-top: 10px !important;
 }
 
+.ca_wp_container{
+  max-width: 1080px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 980px){
+.ca_wp_container{
+  padding: 0;
+}
+}
+@media (min-width: 981px){
+.ca_wp_container{
+  padding: 0;
+}
+}
+@media (max-width: 767px){
+  .ca_wp_container.main-navigation{
+    width: 100%;
+  }
+  .et_pb_row{
+      width: 90% !important;
+  }
+}

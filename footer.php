@@ -74,10 +74,10 @@ if(document.getElementById('et_pb_ca_fullwidth_banner')){
     <div class="container container ca_wp_container" <?php print (ca_version_check(4, $post_id ) ? 'style="text-align:center;"' : '' ); ?>> Copyright &copy;
 <script>document.write(new Date().getFullYear())</script> State of California </div> </div>
 
-</footer> <!-- Extra Decorative Content --> <div class="decoration-last">&nbsp;</div>
-<?php 
+</footer> <!-- Extra Decorative Content -->  <div class="decoration-last">&nbsp;</div>
+<?php
 	wp_footer();
-	
+
 if("" != get_option('ca_custom_css') ){
 	printf('<style>%1$s</style>', get_option('ca_custom_css'));
 }
