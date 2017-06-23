@@ -45,6 +45,10 @@ function get_ca_nav_menu_theme_locations(){
 if( !function_exists('is_valid_date') ){
 	function is_valid_date($checkdate, $default = false, $pattern = '', $retobj = false){
 		if(!empty($checkdate)){
+				$tmp = preg_split('/\D/', $checkdate);
+				if(3 != count($tmp) || !checkdate($tmp[0], $tmp[1], $tmp[2]) )
+					return $default;
+					
 				$date = date_create($checkdate);
 				if($date instanceof DateTime && "UTC" == $date->getTimezone()->getName()){
 					if( !empty($pattern) ){
@@ -139,6 +143,7 @@ function return_posts($cats = array(), $tags = array(), $post_amount = -1,$order
 						unset($posts_array[$p]);
 				}else{
 					// iterate through the tags
+					$tags = (!is_array($tags) ? preg_split('/\D/', $tags): $tags);
 					foreach($tag_ids as $k){
 						if( !in_array($k, $tags)){
 							unset($posts_array[$p]);
@@ -185,39 +190,60 @@ if( !function_exists('is_caweb_intranet_site') ){
 }
 
 if( !function_exists('caweb_get_shortcode_from_content') ){
-	function caweb_get_shortcode_from_content($con = "", $tag = ""){
+	function caweb_get_shortcode_from_content($con = "", $tag = "", $all_matches = false){
 
 		if( empty($con) || empty($tag) )
 			return array();
 		$content = array();
-		$obj = array();
-		$attr = array();
-		$tmp = array();
-
-		// Get Shortcode from content
-		preg_match(sprintf('/\[(%1$s)[\d\s\w\S]*\[\/\1\]|\[(%1$s)[\d\s\w\S]*\/\]/', $tag), $con, $content );
-
-		if( !empty($content) ){
-			preg_match(sprintf('/\[(%1$s)[\d\s\w\S].*/', $tag), $content[0], $tmp) ;
-		}else{
-			return array() ;
-		}
-
-		// Get Attributes from Shortcode
-		preg_match_all('/\w*="[$\w\s\d:,\/\.\--]*/', $tmp[0], $attr);
-		foreach($attr[0] as $a){
-				preg_match('/\w*/', $a, $key);
-			$obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
-		}
-
-		if(2 == count($content)){
-			preg_match('/\][\s\S]*\[/', $content[0], $obj['content']);
-			$obj['content'] = strip_tags( substr($obj['content'][0], 1, strlen($obj['content'][0]) - 2) );
-		}else{
-			$obj['content'] = '';
-		}
-			
-		return ( (object) $obj );
+		
+		// Get Shortcode Tag from Con and save it to Content
+    $pattern = sprintf('/\[%1$s[\d\s\w\S]*\/\]|\[(%1$s)[\d\s\w\S]*\[\/\1\]/', $tag);
+		preg_match_all($pattern, $con, $content );
+    
+    if(empty($content))
+      return array();
+    
+		
+      $match = $content[0][0];
+      $matches = $content[0];
+      $objects = array();
+     
+      foreach($matches as $match){
+        $obj = array();
+        $attr = array();
+        $tmp = array();
+        preg_match($pattern, $match, $tmp) ;
+        
+    
+        if(2 == count($tmp)){         
+          preg_match('/"\][\s\S]*\[/', $tmp[0], $obj['content']); 
+          $hold = substr($tmp[0], 1, strpos($tmp[0], $obj['content'][0]) );
+           // Get Attributes from Shortcode
+            preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $hold, $attr);
+            foreach($attr[0] as $a){
+                preg_match('/\w*/', $a, $key);
+              $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
+            }
+         
+          $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - 3) ); 
+        }else{
+           // Get Attributes from Shortcode
+            preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $tmp[0], $attr);
+            foreach($attr[0] as $a){
+                preg_match('/\w*/', $a, $key);
+              $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
+            }
+          
+          	$obj['content'] = '';
+        }
+        
+        $objects[] =  (object) $obj ;
+      }
+      
+      if($all_matches)
+        return $objects;
+      
+			return $objects[0];
 	}
 }
 

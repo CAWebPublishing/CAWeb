@@ -259,7 +259,8 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 }
 @media (min-width: 481px){
   .header-organization-banner img {
-    max-width: 475px;
+    max-width: 475px;    
+    max-width: 100%;
     max-height: 90px;
   }
 }
