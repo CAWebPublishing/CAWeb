@@ -246,7 +246,7 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
 }
 
 /* CA.gov Icon Library List */
-function get_ca_icon_list(){
+function get_ca_icon_list($index = -1, $name = '', $keys = false){
 	$icons = array( 'logo'=>'&amp;#xe600;','home'=>'&amp;#xe601;','menu'=>'&amp;#xe602;','apps'=>'&amp;#xe603;','search'=>'&amp;#xe604;','chat'=>'&amp;#xe605;','capitol'=>'&amp;#xe606;',
 													'state'=>'&amp;#xe607;','phone'=>'&amp;#xe608;','email'=>'&amp;#xe609;','contact-us'=>'&amp;#xe66e;','calendar'=>'&amp;#xe60a;','bear'=>'&amp;#xe60b;','chat-bubble'=>'&amp;#xe66f;','info-bubble'=>'&amp;#xe670;',
 													'share-button'=>'&amp;#xe671;','share-facebook'=>'&amp;#xe672;','share-email'=>'&amp;#xe673;','share-flickr'=>'&amp;#xe674;','share-twitter'=>'&amp;#xe675;','share-linkedin'=>'&amp;#xe676;','share-googleplus'=>'&amp;#xe677;',
@@ -311,7 +311,15 @@ function get_ca_icon_list(){
 													'cta'=>'&amp;#x153;','countdown'=>'&amp;#x71;','circle-counter'=>'&amp;#x17e;','blurb'=>'&amp;#x178;','bar-counters'=>'&amp;#xe093;','audio2'=>'&#xe094;','accordion'=>'&amp;#xe095;','icon_gift_alt'=>'&amp;#xe008;','code'=>'&amp;#xe036;');
 
 
-
+	if( 0 < $index )
+		return ( isset( array_values($icons)[$index] ) ? array_values($icons)[$index] : $index );
+	
+	if( !empty($name) )
+		return ( isset( $icons[$name] ) ? $icons[$name] : $name );
+	
+	if( $keys )
+		return array_keys( $icons );
+	
 	return $icons;
 }
 
