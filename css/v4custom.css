@@ -249,7 +249,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 
 
 /* This make the agency logo responsive - this is commented out in cagov.v4core.css at line 3993 */
-@media (max-with: 480px){
+@media (max-width: 480px){
   .header-organization-banner img {
     max-width: 100%;
     height: auto;
@@ -257,7 +257,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 }
 @media (min-width: 481px){
   .header-organization-banner img {
-    max-width: 355px
+    max-width: 475px;
   }
 }
 
@@ -652,4 +652,13 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 .et_pb_ca_fullwidth_section_carousel .container, .et_pb_ca_section_carousel .container{
   padding-top: 50px;
   padding-bottom: 50px;
+}
+
+.main-primary, .main-content{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.et_pb_row{
+  width: 90%;
+  max-width: 1170px;
 }

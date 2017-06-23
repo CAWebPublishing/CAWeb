@@ -504,7 +504,7 @@ a.bg-danger:hover {
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 11px;
+  /*margin-bottom: 11px;*/
 }
 ul ul,
 ol ul,
@@ -8295,7 +8295,7 @@ a.second-level-link [class^="ca-gov-icon-"] {
 .section {
   padding-top: 50px;
   padding-bottom: 50px;
-  background: #fff;
+  /*background: #fff;*/
   position: relative;
   overflow: hidden;
   /* Section extensions */

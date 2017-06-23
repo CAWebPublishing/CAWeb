@@ -1454,9 +1454,9 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
 
 		$output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
-				<div class="container">
+				<div class="">
 				<div class="group">
-				<div class="col-md-10 col-md-offset-1 ">
+				<div class="col-md-12 ">
 				<div class="carousel owl-carousel carousel-content">
 				%5$s </div>
 				</div>

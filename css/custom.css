@@ -3,9 +3,8 @@
   display: none !important;
 }
 
-h1.page-title {
-    margin: 0 !important;
-		padding-top: 25px;
+.page-title.et_pb_row {
+    padding-bottom: 0;
 }
 
 #main-content {
@@ -27,7 +26,6 @@ ul ul{
 
 ul, ol{
   list-style-position: outside !important;
-  margin-left: 15px;
 }
 /* Allows for the Navigation Top Level Links to wrap */
 .first-level-link{
@@ -53,11 +51,11 @@ ul, ol{
   padding: 0 !important;
 }
 
-.et_pb_row{
+/*.et_pb_row{
   	width: auto;
     max-width: 100%;
   	margin: 0;
-}
+}*/
 
 
 /* Media Styles */
@@ -75,7 +73,7 @@ ul, ol{
 	}
   header{
 		position: relative !important;
-	}	
+	}
 	#main-content.main-content{
 			padding-top: 0px !important;
 	}
