@@ -14,9 +14,9 @@
 		global $wp_query;
 	 ?>
 
-	<?php if ( ! ca_version_check(4) ) : ?>
-		<div class="ca_wp_container">
-	<?php endif; ?>
+
+		<div class="et_pb_row">
+	
 	<h1>Search Results</h1>
 	<h4 class="sform"><?php get_search_form() ?></h4><br/>
 	<h4></h4>

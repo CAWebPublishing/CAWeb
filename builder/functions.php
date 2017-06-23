@@ -20,25 +20,6 @@ function et_pb_get_text_sizes(){
 }
 
 
-function et_pb_get_date_picker(){
-	$output ='<input class="datepicker" type="text" />
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-    			jQuery(';
-	$output .= "'.datepicker').datepicker({
-        		dateFormat : 'dd-mm-yy'
-   			 });
-			});
-
-		</script>";
-	return $output;
-}
-
-function et_pb_get_time_picker(){
-
-}
-
-
 function monthName($month_int) {
 
 $month_int = (int)$month_int;

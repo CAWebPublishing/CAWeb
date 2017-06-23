@@ -3,7 +3,8 @@
 // Administration Menu Setup
 function menu_setup(){
   // Add CAWeb Options
-	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options', 'menu_option_setup',  '',  6  );
+	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options', 
+								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
 	add_submenu_page( 'ca_options','CAWeb Options', 'Settings','manage_options', 'ca_options', 'menu_option_setup' );
 
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation

@@ -14,7 +14,7 @@
 </div>
 <form id="ca-options-form" action="options.php" method="POST">
 <?php
-	settings_fields('ca_site_options');
+settings_fields('ca_site_options');
 ?>
 
 <div id="ca-options-container">
@@ -28,9 +28,8 @@
 <tr><th scope="row"><div class="tooltip">Fav Icon
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
-    <!-- preg_split('/', get_option('ca_fav_ico'))[sizeof(preg_split('/', get_option('ca_fav_ico')))-1] -->
-	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" 
-    value="<?php print get_option('ca_fav_ico'); ?>" >
+	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75"
+    value="<?php print substr(get_option('ca_fav_ico'), strrpos(get_option('ca_fav_ico'), '/')+1); ?>" >
 	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico'); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon" data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 		<!--img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php //echo get_option('ca_fav_ico'); ?>"/-->
@@ -41,8 +40,8 @@
 		<span class="tooltiptext">Select one of the California state template versions.</span></div></th>
 		<td>
 			<select id="ca_site_version" name="ca_site_version" onchange="toggleOptions(this)">
-				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0 - beta</option>
-				<option value="4.5" <?= ( get_option('ca_site_version') == '4.5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option>
+				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0</option>
+				<!--option value="4.5" <?= ( get_option('ca_site_version') == '4.5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option-->
 				<option value="4" <?= ( get_option('ca_site_version') == '4' ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
 			</select>
 		</td>
@@ -213,13 +212,11 @@
 		<th scope="row"><div class="tooltip">Organization Logo-Brand
 			<span class="tooltiptext">Select an image to use as the agency logo.</span></div></th>
 		<td>
-			<input type="text" name="header_ca_branding" id="header_ca_branding_filename" size="75" value="<?php echo get_option('header_ca_branding') ?>" >
+			<input type="text" name="header_ca_branding" id="header_ca_branding_filename" size="75" value="<?php echo substr(get_option('header_ca_branding'), strrpos(get_option('header_ca_branding'), '/')+1); ?>" >
 			<input type="hidden" name="header_ca_branding" id="header_ca_branding" size="75" value="<?php echo get_option('header_ca_branding'); ?>" >
 			<input type="button" value="Browse" class="library-link" name="header_ca_branding" data-choose="Choose an Organization Logo-Brand" data-update="Set as Default Logo"/>
 			<br/>
-			<?php if("" != get_option('header_ca_branding')): ?>
 			<img class="header_ca_branding_option" id="header_ca_branding_img" src="<?php echo get_option('header_ca_branding'); ?>"/>
-			<?php endif; ?>
 		</td>
 	</tr>
 
@@ -241,13 +238,11 @@
 	<tr class="base <?= (4.0 == get_option('ca_site_version') ? 'show' : '' ); ?>"><th scope="row"><div class="tooltip">Header Background Image
 		<span class="tooltiptext">Select the image to use as the background in the header of every page.</span></div></th>
 	<td>
-		<input type="text" name="header_ca_background" id="header_ca_background_filename" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
+		<input type="text" name="header_ca_background" id="header_ca_background_filename" size="75" value="<?php echo substr(get_option('header_ca_background'), strrpos(get_option('header_ca_background'), '/')+1); ?>" >
 	<input type="hidden" name="header_ca_background" id="header_ca_background" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
 	<input type="button" value="Browse" class="library-link" name="header_ca_background" data-choose="Choose a Header Background" data-update="Set as Header Background">
 	<br/>
-		<?php if("" != get_option('header_ca_background')): ?>
 	<img class="header_ca_background_option" id="header_ca_background_img" src="<?php echo get_option('header_ca_background'); ?>"/>
-		<?php endif; ?>
 	</td></tr>
 </table>
 	<?php if( !is_caweb_intranet_site() ) : ?>

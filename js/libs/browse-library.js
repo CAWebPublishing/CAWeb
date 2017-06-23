@@ -80,16 +80,19 @@
         if (!uploader) {
           var frame_count = document.getElementsByClassName('media-frame-router').length - 1;
           var current_frame = document.getElementsByClassName('media-frame-router')[frame_count].getElementsByClassName('media-router')[0];
-
-          current_frame.getElementsByClassName('media-menu-item')[1].click();
-          current_frame.getElementsByClassName('media-menu-item')[0].remove();
+				if(document.getElementsByClassName('media-menu-item')[1])
+            current_frame.getElementsByClassName('media-menu-item')[1].click();
+        if(document.getElementsByClassName('media-menu-item')[0])
+            current_frame.getElementsByClassName('media-menu-item')[0].remove();
 
         }
       });
 
       frame.open();
       if (!uploader) {
-        document.getElementsByClassName('media-menu-item')[2].click();
+        if(document.getElementsByClassName('media-menu-item')[2])
+          document.getElementsByClassName('media-menu-item')[2].click();
+        if(document.getElementsByClassName('media-menu-item')[1])
         document.getElementsByClassName('media-menu-item')[1].style.display = "none";
       }
     });

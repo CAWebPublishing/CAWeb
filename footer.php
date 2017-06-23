@@ -4,20 +4,6 @@ global $post;
 $post_id = (is_object($post) ? $post->ID : $post['ID']);
 
 ?>
-<?php if(ca_version_check(4, $post_id ) ): ?>
-
-<script>
- /* Remove the banner from appearing as part of the content */
-if(document.getElementById('et_pb_ca_fullwidth_banner')){
- var banner = document.getElementById('et_pb_ca_fullwidth_banner');
- var banParent = banner.parentElement;
-
- banParent.parentElement.removeChild(banParent);
-}else{
- document.body.classList.remove('primary');
-}
-</script>
-<?php endif; ?>
 <footer id="footer" class="global-footer hidden-print">
 	<div class="container <?=  ( ! ca_version_check(4, $post_id ) ? 'ca_wp_container' : '' ); ?> ">
 
