@@ -1,8 +1,8 @@
 /* -----------------------------------------
    NAVIGATION MENU - /source/js/cagov/navigation.js
 ----------------------------------------- */
-
-jQuery(document).ready(function() {
+$ = jQuery.noConflict();
+$(document).ready(function() {
   // detect partial flexbox support in IE>9
   if ($('.top-level-nav').css('display') == 'table') {
     $('body').addClass('no-flex')

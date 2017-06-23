@@ -1,4 +1,34 @@
+/* Search using Google API 2.0 */
+input.gsc-input:hover, input.gsc-input:focus {
+    border-color: #fbad23;
+}
+table.gsc-search-box td.gsc-input {
+     padding-right: 0px !important; 
+}
+input.gsc-input {
+    background-image: unset !important;
+	    border-radius: 4px;
+    border: 2px solid transparent;
+}
+td.gsc-clear-button {
+    display: none !important;
+}
+.search-container.search-freeze-width {
+    max-width: 35%;
+}
+#head-search {
+    padding-bottom: 2px;
+}
 
+@media (max-width: 767px){
+	.search-container.search-freeze-width {
+    max-width: 100% !important;
+	}
+	.navigation-search {
+     padding-top: 5px; 
+	}
+}
+/* End of Search */
 
 ul{
   line-height: 1.42857143 !important;
@@ -644,7 +674,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 .owl-nav .owl-next {
   margin: -1em 0 0;
 }
-/* END from cagov.core.css */
 
 
 
@@ -672,4 +701,326 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   width: 90%;
   max-width: 1170px;
 }
+
+/*  Services Tiles */
+.more-button {
+  position: relative;
+  overflow: hidden;
+}
+.more-button .more-content {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.more-button .btn-more {
+  position: relative;
+}
+.service-tile-panel {
+  /*Selectivly show when requested by user*/
+  visibility: collapse;
+  position: absolute;
+}
+.service-tile-panel .btn.close {
+  font-size: 56px;
+  font-size: 3.5rem;
+}
+
+.service-tile-full {
+  clear: both;
+  width: 100%;
+  background: #f5f5f5;
+  height: auto;
+}
+.service-tile-full.is-open .service-tile-panel {
+  visibility: visible;
+  position: relative;
+}
+
+.service-tile {
+  float: left;
+  width: 100%;
+  /* Need to keep the two column longer than bootstrap has .make-*-column for */
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  min-height: 240px;
+  color: #E1F2F7;
+  background: #046B99;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (min-width: 450px) {
+  .service-tile {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .service-tile {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 768px) {
+  .service-tile {
+    min-height: 280px;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile {
+    min-height: 240px;
+  }
+}
+@media (min-width: 1280px) {
+  .service-tile {
+    min-height: 320px;
+  }
+}
+.service-tile .icon-fallback {
+  min-width: 100%;
+  line-height: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  vertical-align: middle;
+  display: inline-block;
+  height: 100%;
+  -webkit-transition: opacity .3s;
+          transition: opacity .3s;
+}
+.service-tile .teaser {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000', endColorstr='#000000', GradientType=0);
+  color: #fff;
+  padding: 10px 0;
+}
+.service-tile .teaser .title {
+  margin: 5px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  -webkit-transition: all .3s;
+          transition: all .3s;
+	border-bottom: none;
+}
+.service-tile .teaser .title:hover {
+  color: #FDB81E;
+}
+.title:after {
+  margin-top: 8px !important;
+  font-family: 'CaGov';
+  display: block;
+  font-weight: normal;
+}
+[data-state="closed"].service-tile .title:after,
+[data-state="info"].service-tile .title:after {
+  content: "\50";
+}
+[data-state="open"].service-tile .title:after {
+  content: "\4f";
+}
+[data-state="open"].service-tile:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #000;
+  position: absolute;
+  left: 50%;
+  margin-left: -15px;
+  bottom: -15px;
+  z-index: 5;
+}
+.service-tile-empty {
+  background: #046B99;
+  color: #9FDBF1;
+  overflow: hidden;
+  width: 100%;
+}
+.service-tile-empty span {
+  font-size: 17em;
+  line-height: 1;
+}
+.service-tile-empty .title:after {
+  content: "\e65d" !important;
+}
+.service-tile-empty.half,
+.service-tile-empty.quarter,
+.service-tile-empty.third {
+  width: 100%;
+}
+@media (min-width: 450px) {
+  .service-tile-empty.full {
+    width: 100%;
+  }
+  .service-tile-empty.third {
+    width: 50%;
+  }
+  .service-tile-empty.half {
+    width: 100%;
+  }
+  .service-tile-empty.quarter {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile-empty.full {
+    width: 100%;
+  }
+  .service-tile-empty.third {
+    width: 75%;
+  }
+  .service-tile-empty.half {
+    width: 50%;
+  }
+  .service-tile-empty.quarter {
+    width: 25%;
+  }
+}
+
+/* service tile  card content and close open hover styles */
+.card {
+  position: relative;
+  display: block;
+  margin-bottom: 11px;
+  background-color: #fff;
+  border: 1px solid #f5f5f5;
+  border-radius: 0;
+}
+.card-block {
+  padding: 15px;
+}
+
+
+.close {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+
+/* service tile global more button styles */
+.btn-more {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+.btn-more:focus,
+.btn-more:active:focus,
+.btn-more.active:focus,
+.btn-more.focus,
+.btn-more:active.focus,
+.btn-more.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn-more:hover,
+.btn-more:focus,
+.btn-more.focus {
+  color: #014e77;
+  text-decoration: none;
+}
+.btn-more:active,
+.btn-more.active {
+  outline: 0;
+  background-image: none;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-more.disabled,
+.btn-more[disabled],
+fieldset[disabled] .btn-more {
+  cursor: not-allowed;
+  opacity: 0.35;
+  filter: alpha(opacity=35);
+  box-shadow: none;
+}
+a.btn-more.disabled,
+fieldset[disabled] a.btn-more {
+  pointer-events: none;
+}
+.btn-more:focus {
+  outline: dotted 2px #000;
+}
+.btn-more .more-title {
+  display: block;
+}
+.btn-more .more-icon {
+  font-size: 24px;
+  font-size: 1.5rem;
+}
+.btn-more.inverse {
+  background-color: #000;
+  color: #fff;
+}
+.btn-more.inverse:hover,
+.btn-more.inverse:focus {
+  color: #FDB81E;
+}
+/* End of Service Tiles */
+
+/* END from cagov.core.css */
 

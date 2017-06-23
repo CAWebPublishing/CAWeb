@@ -78,7 +78,7 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	// Set Predefined Category Content Types
 
 	$ca_cats = array(
-		'Courses', 'Events', 'Exams','Jobs',
+		'Courses', 'Events', 'Exams','FAQs', 'Jobs',
 		 'News', 'Profiles','Publications' );
 
 	// Insert Parent Content Type Category
@@ -110,7 +110,6 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	// Enable Post Thumbnails
 	add_theme_support( 'post-thumbnails' );
 
-	// CA Metaboxes
 	require_once(CAWebAbsPath. '/core/update.php');
 
 }
@@ -136,9 +135,24 @@ function ca_init(){
 
 	// Register Menu Navigation Settings
 	register_nav_menus( get_ca_nav_menu_theme_locations() );
+
+
 }
 
 add_action('init', 'ca_init');
+
+
+function get_caweb_icon_url($url = '', $size = 512,  $blog_id){
+	return sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri);
+}
+add_filter('get_site_icon_url', 'get_caweb_icon_url', 10, 3);
+
+function caweb_admin_head(){
+	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
+
+	printf('<link rel="icon" href="%1$s">', $icon);
+}
+add_action('admin_head', 'caweb_admin_head');
 
 function ca_admin_init(){
 	global $caweb_core_updates;
@@ -178,23 +192,18 @@ function ca_theme_enqueue_style() {
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(CAWebUri. '/css/cagov.core.css' );
 
-	wp_enqueue_style( 'ca-media-styles', CAWebUri . '/css/media_styles.css' );
-
-
 	// Enqueue Scripts
 	wp_register_script('cagov-modernizr-script', CAWebUri . '/js/libs/modernizr-2.0.6.min.js', array('jquery'), '1.0', false );
 	wp_register_script('cagov-modernizr-extra-script', CAWebUri . '/js/libs/modernizr-extra.min.js', array('jquery'), '1.0', false );
 
  	wp_register_script('cagov-core-script',	CAWebUri. '/js/cagov.core.js', array('jquery'), '1.0', true );
 	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js', '', '1.0', true );
-	wp_register_script('cagov-search-script',CAWebUri. '/js/search.js', array('jquery'), '1.0', true );
 
 	// Localize the search script with the correct site url
 	wp_localize_script( 'cagov-search-script', 'site', array('site_url' => site_url()) );
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
-  wp_enqueue_script( 'cagov-search-script' );
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
 
@@ -232,9 +241,12 @@ function ca_admin_enqueue_scripts($hook){
 
 	// Enqueue Styles
 	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
+
+
+
 }
 
-add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts' );
+add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
 /* Adjust WP Admin Bar */
 function ca_admin_bar_menu( $wp_admin_bar ) {
@@ -550,7 +562,6 @@ title.innerHTML = "Navigation";
 		max-height: 300px;
 	}
 	.et_font_icon li {
-			background: transparent !important;
 			font-size: 30px;
 	}
 	.et-pb-option-container .description {

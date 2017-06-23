@@ -19,7 +19,7 @@ function init(){
 function get_fields() {
 	$fields = array(
 		'panel_layout' => array(
-			'label'             => esc_html__( 'Panel Style','et_builder' ),
+			'label'             => esc_html__( 'Style','et_builder' ),
 			'type'              => 'select',
 			'option_category'   => 'configuration',
 			'options'           => array(
@@ -51,14 +51,14 @@ function get_fields() {
 			'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
 		),
 		'heading_text_color' => array(
-			'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+			'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
 			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 			'depends_show_if' => 'none',
 		),
 		'use_icon' => array(
-			'label'           => esc_html__( 'Use a Heading Icon', 'et_builder' ),
+			'label'           => esc_html__( 'Head Icon', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -79,7 +79,7 @@ function get_fields() {
 			'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 		),
 		'show_button' => array(
-			'label'           => esc_html__( 'Show Read More Button', 'et_builder' ),
+			'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -236,10 +236,10 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 
     );
 		$this->main_css_element = '%%order_class%%.et_pb_slider';
-		
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'slideshow_banner_removal' ) );
-	
+
 	}
 	function get_fields() {
 		$fields = array(
@@ -332,22 +332,22 @@ $scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
 		);
 		return $output;
 	}
-	
+
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function slideshow_banner_removal() {
 			global $post;
-			
+
 			$remove = (is_object($post) ? ca_version_check(4, $post->ID) : ca_version_check(4, $post['ID'])  );
-			
+
 			if( !$remove )
 				return;
-			
+
 			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
 			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
-			
-			
+
+
 			if( empty($module)  ){
 				?>
 					<script>
@@ -359,9 +359,9 @@ $scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
            <script>
 				var banner = document.getElementById('et_pb_ca_fullwidth_banner');
 				var column = banner.parentNode;
-								 
+
 					if(1 == column.childElementCount){
-						var row = column.parentNode;				
+						var row = column.parentNode;
 						row.removeChild(column);
 						if(0 == row.childElementCount){
 							if(1 == row.parentNode.childElementCount ){
@@ -373,7 +373,7 @@ $scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
 					}else{
 						detail.removeChild(banner);
 					}
-					
+
 			</script>
             <?php
 		}
@@ -405,7 +405,7 @@ function init() {
 function get_fields() {
 	$fields = array(
 		'display_banner_info' => array(
-				'label'           => esc_html__( 'Display Banner Information', 'et_builder' ),
+				'label'           => esc_html__( 'Banner Information', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -423,7 +423,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 		),
 		'display_heading' => array(
-				'label'           => esc_html__( 'Display Heading', 'et_builder' ),
+				'label'           => esc_html__( 'Heading', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'options'         => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
@@ -534,7 +534,7 @@ $this->fullwidth       = true;
 	function get_fields() {
 		$fields = array(
 			'section_background_color' => array(
-					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+					'label'             => esc_html__( 'Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
 					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -546,7 +546,7 @@ $this->fullwidth       = true;
 					'description' => esc_html__( 'Define the title for the section.', 'et_builder' ),
 						),
 						'heading_text_color' => array(
-							'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+							'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 							'type'              => 'color-alpha',
 							'custom_color'      => true,
 							'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
@@ -563,7 +563,7 @@ $this->fullwidth       = true;
 								'depends_show_if' => 'off',
 						),
 			'featured_image_button' => array(
-					'label'           => esc_html__( 'Show Feature Image', 'et_builder' ),
+					'label'           => esc_html__( 'Featured Image', 'et_builder' ),
 					'type'            => 'yes_no_button',
 					'option_category' => 'configuration',
 					'options'         => array(
@@ -576,7 +576,7 @@ $this->fullwidth       = true;
 					),
 			),
 			'left_right_button' => array(
-					'label'           => esc_html__( 'Image Position Left/Right', 'et_builder' ),
+					'label'           => esc_html__( 'Image Position', 'et_builder' ),
 					'type'            => 'yes_no_button',
 					'option_category' => 'configuration',
 					'options'         => array(
@@ -585,7 +585,7 @@ $this->fullwidth       = true;
 					),
 			),
 			'section_image' => array(
-					'label' => esc_html__( 'Section Image', 'et_builder' ),
+					'label' => esc_html__( 'Image', 'et_builder' ),
 					'type' => 'upload',
 					'option_category' => 'basic_option',
 					'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
@@ -603,13 +603,13 @@ $this->fullwidth       = true;
 					),
 				),
 			'section_background_color' => array(
-					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+					'label'             => esc_html__( 'Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
 					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				),
 			'show_more_button' => array(
-					'label'           => esc_html__( 'Show More Information Button', 'et_builder' ),
+					'label'           => esc_html__( 'More Information Button', 'et_builder' ),
 					'type'            => 'yes_no_button',
 					'option_category' => 'configuration',
 					'options'         => array(
@@ -771,7 +771,7 @@ $this->fullwidth = true;
 	function get_fields() {
 		$fields = array(
 			'section_background_color' => array(
-					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+					'label'             => esc_html__( 'Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
 					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -902,25 +902,25 @@ function init() {
 function get_fields() {
 	$fields = array(
 		'heading_color' => array(
-			'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+			'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
 			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 		),
 		'text_color' => array(
-			'label'             => esc_html__( 'Set Text Color', 'et_builder' ),
+			'label'             => esc_html__( 'Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
 			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom text color for the list items.', 'et_builder' ),
 		),
 	'group_title' => array(
-		'label' => esc_html__( 'Group Title', 'et_builder' ),
+		'label' => esc_html__( 'Title', 'et_builder' ),
 		'type' => 'text',
 		'option_category' => 'basic_option',
 		'description' => esc_html__( 'Define the title for the group section.', 'et_builder' ),
 			),
 	'group_icon_button' => array(
-			'label'           => esc_html__( 'Add List Icon', 'et_builder' ),
+			'label'           => esc_html__( 'List Icon', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -942,7 +942,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_show_more_button' => array(
-			'label'           => esc_html__( 'Show Read More Button', 'et_builder' ),
+			'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -968,7 +968,7 @@ function get_fields() {
 				),
 			),
 			'group_link1_show' => array(
-			'label'           => esc_html__( 'Show Link 1', 'et_builder' ),
+			'label'           => esc_html__( 'Link 1', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -994,7 +994,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link2_show' => array(
-			'label'           => esc_html__( 'Show Link 2', 'et_builder' ),
+			'label'           => esc_html__( 'Link 2', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1020,7 +1020,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link3_show' => array(
-			'label'           => esc_html__( 'Show Link 3', 'et_builder' ),
+			'label'           => esc_html__( 'Link 3', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1046,7 +1046,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link4_show' => array(
-			'label'           => esc_html__( 'Show Link 4', 'et_builder' ),
+			'label'           => esc_html__( 'Link 4', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1072,7 +1072,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link5_show' => array(
-			'label'           => esc_html__( 'Show Link 5', 'et_builder' ),
+			'label'           => esc_html__( 'Link 5', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1098,7 +1098,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link6_show' => array(
-			'label'           => esc_html__( 'Show Link 6', 'et_builder' ),
+			'label'           => esc_html__( 'Link 6', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1124,7 +1124,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link7_show' => array(
-			'label'           => esc_html__( 'Show Link 7', 'et_builder' ),
+			'label'           => esc_html__( 'Link 7', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1150,7 +1150,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link8_show' => array(
-			'label'           => esc_html__( 'Show Link 8', 'et_builder' ),
+			'label'           => esc_html__( 'Link 8', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1176,7 +1176,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link9_show' => array(
-			'label'           => esc_html__( 'Show Link 9', 'et_builder' ),
+			'label'           => esc_html__( 'Link 9', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1202,7 +1202,7 @@ function get_fields() {
 		'depends_show_if' => 'on',
 			),
 	'group_link10_show' => array(
-			'label'           => esc_html__( 'Show Link 10', 'et_builder' ),
+			'label'           => esc_html__( 'Link 10', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1422,7 +1422,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 	function get_fields() {
 		$fields = array(
 			'carousel_style' => array(
-							'label'           => esc_html__( 'Carousel Style', 'et_builder' ),
+							'label'           => esc_html__( 'Style', 'et_builder' ),
 							'type'            => 'select',
 							'option_category' => 'configuration',
 							'options'         => array(
@@ -1431,7 +1431,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 							),
 						),
 			'section_background_color' => array(
-					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+					'label'             => esc_html__( 'Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
 					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -1567,7 +1567,7 @@ function get_fields(){
 			'description' => esc_html__( 'Define the title for the slide', 'et_builder' ),
 			),
 	'slide_show_more_button' => array(
-			'label'           => esc_html__( 'Show More Information Button', 'et_builder' ),
+			'label'           => esc_html__( 'More Information Button', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'option_category' => 'configuration',
 			'options'         => array(
@@ -1615,32 +1615,32 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$slide_image = $this->shortcode_atts['slide_image'];
 
-$slide_title = $this->shortcode_atts['slide_title'];
+	$slide_title = $this->shortcode_atts['slide_title'];
 
-$slide_desc = $this->shortcode_atts['slide_desc'];
+	$slide_desc = $this->shortcode_atts['slide_desc'];
 
-$slide_url = $this->shortcode_atts['slide_url'];
+	$slide_url = $this->shortcode_atts['slide_url'];
 
-$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
+	$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
 
-//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+	//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-global $et_pb_slider_item_num;
-global $et_pb_ca_fullwidth_section_carousel_style;
+	global $et_pb_slider_item_num;
+	global $et_pb_ca_fullwidth_section_carousel_style;
 
-$et_pb_slider_item_num++;
+	$et_pb_slider_item_num++;
 
-$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-$class = $et_pb_ca_fullwidth_section_carousel_style . " et_pb_module";
+	$class = $et_pb_ca_fullwidth_section_carousel_style . " et_pb_module";
 
-//$slide_image = sprintf('style="background-image: url(%1$s);"', $slide_image);
+	//$slide_image = sprintf('style="background-image: url(%1$s);"', $slide_image);
 
-$display_button = ("on" == $slide_show_more_button ?
-sprintf('<br><button class="btn btn-primary">
-			<a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
+	$display_button = ("on" == $slide_show_more_button ?
+	sprintf('<br><button class="btn btn-primary">
+				<a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
 
-$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
+				$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
 										<div class="content-container">
 											<div class="content">
 												%6$s%7$s%8$s
@@ -1660,4 +1660,291 @@ $output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
 }
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide;
+
+
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_Module{
+	function init() {
+		$this->name = esc_html__( 'FullWidth Service Tiles', 'et_builder' );
+		$this->fullwidth = true;
+		$this->slug = 'et_pb_ca_fullwidth_service_tiles';
+		$this->child_slug      = 'et_pb_ca_fullwidth_service_tiles_item';
+		$this->child_item_text = esc_html__( 'Tile', 'et_builder' );
+		$this->whitelisted_fields = array('view_more_on_off',
+																			'view_more_text',
+																			'view_more_url',
+																			'module_class',
+																			'module_id',
+																			'admin_label',);
+		$this->fields_defaults = array();
+		$this->main_css_element = '%%order_class%%';
+	}
+	function pre_shortcode_content() {
+		/**/global $titles;
+		global $tile_images;
+		global $tile_sizes;
+		global $tile_links;
+		global $tile_urls;
+		
+		$titles = array();
+		$tile_images = array();
+		$tile_sizes= array();
+		$tile_links= array();
+		$tile_urls= array();
+		
+		global $items_count;
+
+		$items_count = 0;
+		
+	}
+	function get_fields() {
+		$fields = array(
+			'view_more_on_off' => array(
+				'label'           => esc_html__( 'View More', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects' => array(
+							'#et_pb_view_more_url',
+							'#et_pb_view_more_text',
+				),
+			),
+			'view_more_url' => array(
+				'label'             => esc_html__( 'Link Url', 'et_builder'),
+				'type'              => 'text',
+				'depends_show_if'   => 'on',
+			),
+			'view_more_text' => array(
+				'label'             => esc_html__( 'Link Text', 'et_builder'),
+				'type'              => 'text',
+				'depends_show_if'   => 'on',
+			),
+			'disabled_on' => array(
+		  	'label'     => esc_html__( 'Disable on', 'et_builder' ),
+		  	'type'     	=> 'multiple_checkboxes',
+		  	'options'   => array(
+		    	'phone'   	=> esc_html__( 'Phone', 'et_builder' ),
+			    'tablet'  	=> esc_html__( 'Tablet', 'et_builder' ),
+			    'desktop' 	=> esc_html__( 'Desktop', 'et_builder' ),
+		  	),
+			  'additional_att'  => 'disable_on',
+			  'option_category' => 'configuration',
+			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+			),
+			'admin_label' => array(
+			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+			),
+			'module_id' => array(
+			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+			'module_class' => array(
+			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+		);
+		return $fields;
+	}
+	function shortcode_callback( $atts, $content = null, $function_name ) {
+		$module_id            = $this->shortcode_atts['module_id'];
+		$module_class         = $this->shortcode_atts['module_class'];
+		$view_more_on_off     = $this->shortcode_atts['view_more_on_off'];
+		$view_more_text       = $this->shortcode_atts['view_more_text'];
+		$view_more_url        = $this->shortcode_atts['view_more_url'];
+
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+
+		$class = 'et_pb_module et_pb_ca_fullwidth_service_tiles ';
+		
+		global $titles;
+		global $tile_images;
+		global $tile_sizes;
+		global $tile_links;
+		global $tile_urls;
+		
+		global $items_count;
+
+		$view_more = ("on" == $view_more_on_off ? sprintf(
+		'
+		<div class="more-button" >
+			<div class="more-content"></div>
+			<a href="%1$s" class="btn-more inverse">
+				<span class="ca-gov-icon-plus-fill" aria-hidden="true">
+				</span>
+				<span class="more-title">%2$s</span>
+			</a>
+		</div>
+		', $view_more_url, $view_more_text):'');
+	$output = '';
+
+		for($i = 0; $i < $items_count ; $i++){			
+			if("on" == $tile_links[$i]){
+				$output .= sprintf('<div tabindex="%1$s" class="service-tile service-tile-empty %2$s" data-url="%3$s">
+					%4$s<div class="teaser"><h4 class="title">%5$s</h4></div></div>',
+													$i + 1, $tile_sizes[$i], $tile_urls[$i] , 
+													(!empty($tile_images[$i]) ? sprintf('<img src="%1$s" style="background-size: cover; width: 100%%; height: 320px;"/>', $tile_images[$i]) : ''), 
+													$titles[$i]  );
+			}else{
+			
+		$output .= sprintf('<div tabindex="%1$s" class="service-tile %2$s" data-tile-id="panel-%1$s"
+style="background-image:url(%3$s); background-size: cover;"><div class="teaser"><h4 class="title">%4$s</h4></div></div>',
+												$i + 1, $tile_sizes[$i], $tile_images[$i], $titles[$i]  );
+			}
+		}
+
+		$output .= $this->shortcode_content;
+		$output = sprintf('<div class="%3$s%4$s section-understated collapsed">
+<div class="service-group clearfix" id="service-group-123">%1$s</div>%2$s</div>',$output, $view_more,
+											esc_attr($class), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )  );
+
+		return $output;
+		//print_r( $tile_links );
+	}
+}
+new ET_Builder_Module_Fullwidth_CA_Service_Tiles;
+
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_Module{
+	function init() {
+		$this->name = esc_html__( 'FullWidth Service Tile Item', 'et_builder' );
+		$this->slug = 'et_pb_ca_fullwidth_service_tiles_item';
+		$this->fullwidth = true;
+		$this->type = 'child';
+		$this->child_title_var = 'item_title';
+		$this->child_title_fallback_var = 'item_title';
+		$this->whitelisted_fields = array(
+			'module_class', 'module_id', 'item_title',
+			'content_new', 'item_image', 'tile_size', 'tile_link', 'tile_url'
+			);
+		$this->fields_defaults = array(
+			'tile_link' => array( 'off','add_default_setting'),
+			);
+		$this->advanced_setting_title_text = esc_html__( 'New Service Tile', 'et_builder' );
+		$this->settings_text = esc_html__( 'Service Tile Settings', 'et_builder' );
+		$this->main_css_element = '%%order_class%%';
+	}
+	function get_fields() {
+		$fields = array(
+			'item_title' => array(
+					'label' => esc_html__( 'Title', 'et_builder' ),
+					'type'=> 'text',
+					'option_category' => 'basic_option',
+					'description' => esc_html__( 'Define the title for the tile', 'et_builder' ),
+			),
+			'item_image' => array(
+				'label' => esc_html__( 'Image', 'et_builder' ),
+				'type' => 'upload',
+				'option_category' => 'basic_option',
+				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
+				'choose_text' => esc_attr__( 'Choose a Background Image', 'et_builder' ),
+				'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
+				'description' => esc_html__( 'If defined, this image will be used as the background for this tile. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
+			),
+			'tile_size' => array(
+				'label'             => esc_html__( 'Size','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'quarter' => esc_html__( 'Quarter','et_builder'),
+					'half' => esc_html__( 'Half','et_builder'),
+					'full'  => esc_html__( 'Full','et_builder'),
+				),
+				'description'       => esc_html__( 'Here you can choose the size of the tile','et_builder' ),
+			),
+			'tile_link' => array(
+				'label'           => esc_html__( 'Link to URL', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects' => array('#et_pb_content_new', '#et_pb_tile_url'),
+			),
+			'tile_url' => array(
+					'label' => esc_html__( 'URL', 'et_builder' ),
+					'type'=> 'text',
+					'option_category' => 'basic_option',
+					'description' => esc_html__( 'Define the url for the tile. (http:// must be included)', 'et_builder' ),
+					'depends_show_if' => 'on',
+			),
+			'content_new' => array(
+					'label' => esc_html__( 'Tile Content', 'et_builder' ),
+					'type'=> 'tiny_mce',
+					'description' => esc_html__( 'Define the text for the tile content', 'et_builder' ),
+					'depends_show_if' => 'off',
+			),
+			'module_id' => array(
+			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+			'module_class' => array(
+			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+		);
+		return $fields;
+	}
+	function shortcode_callback( $atts, $content = null, $function_name ) {
+		global $titles;
+		global $tile_images;
+		global $tile_sizes;
+		global $tile_links;
+		global $tile_urls;
+
+		global $items_count;
+
+		$module_class         = $this->shortcode_atts['module_class'];
+		$module_id            = $this->shortcode_atts['module_id'];
+		$title                = $this->shortcode_atts['item_title'];
+		$tile_image           = $this->shortcode_atts['item_image'];
+		$tile_size           = $this->shortcode_atts['tile_size'];
+		$tile_url           = $this->shortcode_atts['tile_url'];
+		$tile_link           = $this->shortcode_atts['tile_link'];
+
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+	
+		$class = 'et_pb_module et_pb_ca_fullwidth_service_tiles_item ';
+		
+	
+		$titles[] = $title;
+		$tile_images[] = $tile_image;
+		$tile_sizes[] = $tile_size;
+		$tile_links[] = $tile_link;
+		$tile_urls[] = $tile_url;
+
+		$items_count++;
+
+		$output = '';
+		
+		if("off" == $tile_link)
+			$output = sprintf('<div class="%3$s%4$s service-tile-panel" data-tile-id="panel-%1$s">
+<div class="section section-default" style="padding-top: 25px; padding-bottom: 25px;">
+<div class="container" style="padding-top: 0px;">
+                <div class="card card-block">
+ <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<div class="group" style="padding-left:15px; padding-right: 15px;">%2$s</div></div></div></div></div>', 
+							$items_count , 	$this->shortcode_content,
+											esc_attr($class), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
+		
+		return $output;
+
+	}
+}
+new ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item;
 ?>

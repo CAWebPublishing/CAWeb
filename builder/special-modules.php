@@ -23,11 +23,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 			'exam_published_date', 'exam_published_date_format', 'exam_published_date_custom_format', 'exam_final_filing_date_chooser','exam_final_filing_date','exam_final_filing_date_picker',
       'exam_final_filing_date_format', 'exam_final_filing_date_custom_format', 'exam_type', 'exam_url','exam_address', 'exam_city',  'exam_state', 'exam_zip',
 			'show_course_presenter', 'course_presenter_image', 'course_presenter_name', 'course_presenter_bio',
-			'course_start_date', 'course_start_date_format', 'course_start_date_custom_format', 'course_end_date',  'course_end_date_format', 
+			'course_start_date', 'course_start_date_format', 'course_start_date_custom_format', 'course_end_date',  'course_end_date_format',
       'course_end_date_custom_format', 'show_course_address',	 'course_address',
 			'course_city',  'course_state',  'course_zip', 'course_cost', 'course_registration_type', 'show_course_map');
 
-    
+
 		$this->fields_defaults = array(
 			'news_publish_date_format' => array( 'off','add_default_setting' ),
 			'news_publish_date_custom_format' => array( 'M d, Y','add_default_setting' ),
@@ -52,7 +52,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		);
 
 		$this->main_css_element = '%%order_class%%';
-		
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'remove_general_detail' ) );
 		//add_action( 'admin_footer', array( $this, 'remove_general_detail' ) );
@@ -60,7 +60,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'post_type_layout' => array(
-				'label'             => esc_html__( 'Post Type Style','et_builder' ),
+				'label'             => esc_html__( 'Content Type','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'class'               => array( 'caweb_post_handler_style_selector' ),
@@ -69,6 +69,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'course'  => esc_html__( 'Courses','et_builder'),
 					'event'  => esc_html__( 'Events','et_builder'),
 					'exam'  => esc_html__( 'Exams','et_builder'),
+					'faqs'  => esc_html__( 'FAQs','et_builder'),
 					'jobs'  => esc_html__( 'Jobs','et_builder'),
 					'news' => esc_html__( 'News','et_builder'),
 					'profile'  => esc_html__( 'Profile','et_builder'),
@@ -79,10 +80,10 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 											'show_about_agency','job_title', 'job_hours',
 											'show_job_salary', 'job_posted_date','job_posted_date_format', 'job_position_number', 'job_rpa_number', 'job_ds_url',
 											'job_final_filing_date_chooser', 'show_job_apply_to','show_job_questions',
-											 'show_event_presenter', 'event_start_date', 'event_end_date', 'event_start_date_format', 'event_end_date_format', 
+											 'show_event_presenter', 'event_start_date', 'event_end_date', 'event_start_date_format', 'event_end_date_format',
 											 'show_event_address', 'event_registration_type', 'event_cost', 'exam_id', 'exam_status', 'exam_class',
-											 'exam_published_date', 'exam_published_date_format', 'exam_final_filing_date_chooser', 
-                       'exam_type', 'show_course_presenter', 'course_start_date', 'course_end_date', 'course_start_date_format', 'course_end_date_format', 
+											 'exam_published_date', 'exam_published_date_format', 'exam_final_filing_date_chooser',
+                       'exam_type', 'show_course_presenter', 'course_start_date', 'course_end_date', 'course_start_date_format', 'course_end_date_format',
 											 'course_duration',	'show_course_address', 'course_registration_type', 'course_cost', 'show_course_map'),
 			),
 		);
@@ -110,7 +111,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'options' => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
-				),        
+				),
 				'depends_show_if' => 'news',
 				'affects' => array('news_publish_date_custom_format'),
       	),
@@ -119,8 +120,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'news_city' => array(
@@ -263,8 +264,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
       'exam_final_filing_date_chooser' => array(
@@ -309,12 +310,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
         'depends_show_if' => 'exam',
         'depends_show_if_not' => 'off',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'exam_type' => array(
-				'label'             => esc_html__( 'Select an Exam Type','et_builder' ),
+				'label'             => esc_html__( 'Exam Type','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -420,8 +421,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'course_end_date' => array(
@@ -447,8 +448,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'show_course_address' => array(
@@ -505,7 +506,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'depends_show_if' => 'course',
 			),
 			'show_course_map' => array(
-				'label'             => esc_html__( 'Display Course Map', 'et_builder' ),
+				'label'             => esc_html__( 'Course Map', 'et_builder' ),
 				'type'              => 'yes_no_button',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -572,8 +573,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'event_end_date' => array(
@@ -599,8 +600,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'show_event_address' => array(
@@ -757,7 +758,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'options' => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
-				),        
+				),
 				'depends_show_if' => 'jobs',
 				'affects' => array('job_posted_date_custom_format'),
 				),
@@ -766,8 +767,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'job_position_number' => array(
@@ -790,7 +791,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the duty statement\'s url link for this job item. (http:// must be included)','et_builder' ),
 				'depends_show_if' => 'jobs',
-			),      
+			),
       'job_final_filing_date_chooser' => array(
 				'label'           => esc_html__( 'Use Date Picker for Final Filing Date', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -832,8 +833,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
         'depends_show_if' => 'on',
-				'description'     => et_get_safe_localization( 
-																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ), 
+				'description'     => et_get_safe_localization(
+																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
 				),
 			'show_job_apply_to' => array(
@@ -932,7 +933,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter additional content for this item.','et_builder' ),
 			),
 			'show_tags_button' => array(
-				'label'           => esc_html__( 'Display Post Tags', 'et_builder' ),
+				'label'           => esc_html__( 'Tags', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -941,7 +942,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 		),
 			'show_categories_button' => array(
-				'label'           => esc_html__( 'Display Post Categories', 'et_builder' ),
+				'label'           => esc_html__( 'Categories', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1063,17 +1064,17 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$exam_published_date_format = $this->shortcode_atts['exam_published_date_format'];
 
 		$exam_published_date_custom_format = $this->shortcode_atts['exam_published_date_custom_format'];
-    
+
 		$exam_final_filing_date_chooser = $this->shortcode_atts['exam_final_filing_date_chooser'];
-    
+
 		$exam_final_filing_date = $this->shortcode_atts['exam_final_filing_date'];
-    
+
 		$exam_final_filing_date_picker = $this->shortcode_atts['exam_final_filing_date_picker'];
 
 		$exam_final_filing_date_format = $this->shortcode_atts['exam_final_filing_date_format'];
 
 		$exam_final_filing_date_custom_format = $this->shortcode_atts['exam_final_filing_date_custom_format'];
-    
+
     $exam_type = $this->shortcode_atts['exam_type'];
 
 		$exam_url = $this->shortcode_atts['exam_url'];
@@ -1103,11 +1104,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$job_agency_about    = $this->shortcode_atts['job_agency_about'];
 
 		$job_posted_date    = $this->shortcode_atts['job_posted_date'];
-    
+
 		$job_posted_date_format = $this->shortcode_atts['job_posted_date_format'];
 
 		$job_posted_date_custom_format = $this->shortcode_atts['job_posted_date_custom_format'];
-    
+
 		$job_hours    = $this->shortcode_atts['job_hours'];
 
 		$show_job_salary    = $this->shortcode_atts['show_job_salary'];
@@ -1121,17 +1122,17 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$job_rpa_number    = $this->shortcode_atts['job_rpa_number'];
 
 		$job_ds_url    = $this->shortcode_atts['job_ds_url'];
-    
+
 		$job_final_filing_date_chooser = $this->shortcode_atts['job_final_filing_date_chooser'];
 
 		$job_final_filing_date    = $this->shortcode_atts['job_final_filing_date'];
-    
+
 		$job_final_filing_date_picker = $this->shortcode_atts['job_final_filing_date_picker'];
 
 		$job_final_filing_date_format = $this->shortcode_atts['job_final_filing_date_format'];
 
 		$job_final_filing_date_custom_format = $this->shortcode_atts['job_final_filing_date_custom_format'];
-    
+
 		$show_job_apply_to = $this->shortcode_atts['show_job_apply_to'];
 
 		$job_apply_to_dept = $this->shortcode_atts['job_apply_to_dept'];
@@ -1158,11 +1159,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$news_author               = $this->shortcode_atts['news_author'];
 
 		$news_publish_date               = $this->shortcode_atts['news_publish_date'];
-		
+
     $news_publish_date_format               = $this->shortcode_atts['news_publish_date_format'];
-    
+
 		$news_publish_date_custom_format               = $this->shortcode_atts['news_publish_date_custom_format'];
-    
+
 		$news_city    = $this->shortcode_atts['news_city'];
 
 		// Profile Attributes
@@ -1224,7 +1225,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
       //"
 				$presenter = ("on" == $show_course_presenter ?
 											sprintf('<div class="presenter" style="display: inline-block;margin-bottom: 5px;"><p>
-												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',  
+												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
                               $course_presenter_name, $presenter_image,$course_presenter_bio) : '' );
 
 				$course_addr = implode(', ', array_filter(array($course_address,$course_city,$course_state,$course_zip) ) );
@@ -1232,18 +1233,18 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				$location = ( "on" == $show_course_address ?
 						sprintf('<span class="ca-gov-icon-road-pin"></span>
 									<a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $course_addr) : '');
-      
+
       	$course_start_date = gmdate( $course_start_date_custom_format , strtotime( $course_start_date ) );
-      
+
       	$course_end_date = gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) );
 
 				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s - %2$s<br />%3$s</p>', 	$course_start_date,$course_end_date ,  $location);
 
-				$course_registration_type =  (!empty($course_registration_type)  ? 
+				$course_registration_type =  (!empty($course_registration_type)  ?
                                       sprintf('Registration Type: %1$s', $course_registration_type) : '');
-      	$course_cost = (!empty($course_cost)  ? 
+      	$course_cost = (!empty($course_cost)  ?
                                       sprintf('Registration Cost: %1$s', $course_cost) : '');
-      
+
       	$reg = array_filter(array($course_registration_type , $course_cost));
       	$reg = (!empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg  ) ) : '');
 
@@ -1255,11 +1256,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				}else{
 					$course_map = '';
 				}
-			
+
       	$output = sprintf('<article class="course-detail">%7$s<div class="description">%1$s</div>%2$s<div class="group">
 								<div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s</article>',
 								 $this->shortcode_content, $presenter, $organizer, $reg, $course_map,
-								sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ), 
+								sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
                    (has_post_thumbnail() ? '' : '') );
 				break;
 			// Event
@@ -1276,16 +1277,16 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				$location = ( "on" == $show_event_address ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr) : '');
 
 			 	$event_start_date = gmdate( $event_start_date_custom_format, strtotime( $event_start_date ) );
-      
+
       	$event_end_date = gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) );
 
 				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s - %2$s<br />%3$s</p>', $event_start_date,  $event_end_date,  $location);
-		
-      	$event_registration_type =  (!empty($event_registration_type)  ? 
+
+      	$event_registration_type =  (!empty($event_registration_type)  ?
                                       sprintf('Registration Type: %1$s', $event_registration_type) : '');
-      	$event_cost = (!empty($event_cost)  ? 
+      	$event_cost = (!empty($event_cost)  ?
                                       sprintf('Registration Cost: %1$s', $event_cost) : '');
-      
+
       	$reg = array_filter(array($event_registration_type , $event_cost));
       	$reg = (!empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg  ) ) : '');
 
@@ -1303,14 +1304,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					$exam_addr = array_filter(array($exam_address, $exam_city, $exam_state , $exam_zip ));
 					$exam_location = ( !empty($exam_addr) ? implode(', ', $exam_addr) : '');
 					$exam_location = sprintf('Exam Address: <a href="https://google.com/maps/place/%1$s">%1$s</a><br />',$exam_location);
-				}			
+				}
 
 				$exam_class = ( !empty($exam_class) ? sprintf('Class Code: %1$s', $exam_class) : '');
 				$exam_id = ( !empty($exam_id) ? sprintf('Exam Code: %1$s', $exam_id) : '');
 				$exam_course = array_filter(array($exam_class, $exam_id));
 				$exam_course = ( !empty($exam_course) ? implode(' - ', $exam_course) . '<br />' : '');
 
-      	
+
 				$pub_date = gmdate( $exam_published_date_custom_format, strtotime( $exam_published_date ) );
 
 				$pub_date = (!empty($exam_published_date) ? sprintf('Published Date: %1$s<br />',$pub_date ) : '');
@@ -1323,13 +1324,13 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
           $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date);
 
         }
-				
+
 				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s',$exam_course), $pub_date, $exam_final_filing_date, $exam_location);
-      
+
 				$output = sprintf('<div class="exam-detail"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
 				(has_post_thumbnail() ? get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')): ''),
 							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
-		
+
 				break;
 			// Jobs
 			case 'jobs':
@@ -1341,24 +1342,24 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
                   ( !empty($agency_addr) ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://google.com/maps/place/%1$s">%1$s</a>', $agency_addr) : '')) : '' );
 
 				$job_posted_date = gmdate( $job_posted_date_custom_format , strtotime( $job_posted_date ) );
-            
-        $d1 = date_create( gmdate( 'm/d/Y', strtotime($job_posted_date) ) ); 
-	      $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y') ); 
+
+        $d1 = date_create( gmdate( 'm/d/Y', strtotime($job_posted_date) ) );
+	      $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y') );
       	$tmp = $d1->diff($d2)->format('%a')  ;
       	$days_passed = (0 !== (int) $tmp ? sprintf('&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp) :'');
-     
-      	$job_posted_date = ( !empty($job_posted_date) ? 
+
+      	$job_posted_date = ( !empty($job_posted_date) ?
                           sprintf('<div class="published">Published: <time>%1$s</time>%2$s</div>',
                                   $job_posted_date, $days_passed )  : '' );
-         
+
 				$job_hours    = ( !empty( $job_hours ) ? sprintf('%1$s<br />', $job_hours) : '' );
 
 				$job_salary_min    = is_money($job_salary_min, '$0.00');
 
 				$job_salary_max    = is_money($job_salary_max, '$0.00');
-				
+
       	$job_salary    = ( "on" == $show_job_salary ? sprintf('Salary Range: %1$s - %2$s<br />',$job_salary_min , $job_salary_max ) : '');
-      
+
 				$job_position	= '';
 				if( !empty( $job_position_number ) && !empty( $job_rpa_number )){
 					$job_position    = sprintf('Position Number: %1$s, RPA #%2$s<br />', $job_position_number, $job_rpa_number) ;
@@ -1378,7 +1379,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
           $job_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $job_final_filing_date);
 
         }
-      
+
 				$job_info = sprintf('<div class="half">
 										<div class="well">
 										<div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p>
@@ -1392,7 +1393,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					$location = ( !empty($location) ? implode(", ", $location) : '' );
 
 					$job_apply_to_info = sprintf('<strong>Apply To:</strong><br />%1$s%2$s%3$s',
-                                (!empty($job_apply_to_dept) ? sprintf('%1$s<br />',$job_apply_to_dept) : ''), 
+                                (!empty($job_apply_to_dept) ? sprintf('%1$s<br />',$job_apply_to_dept) : ''),
                                        ( !empty($job_apply_to_name) ? sprintf(' Attn: %1$s<br />', $job_apply_to_name ) : ''), $location );
 
 				}
@@ -1431,11 +1432,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 					break;
 			// News
-			case 'news': 		
+			case 'news':
 			$news_publish_date = gmdate(  $news_publish_date_custom_format, strtotime( $news_publish_date ) );
 
 			$news_publish_date = (!empty($news_publish_date) ? sprintf('Published: %1$s<br />', $news_publish_date) : '');
-      
+
 			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
 													(!empty($news_author) ? sprintf('Author: %1$s<br />', $news_author)  : ''), $news_publish_date,
 													(!empty($news_city)  ? sprintf('%1$s', $news_city) : '') );
@@ -1456,9 +1457,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
 
-				$image = ( has_post_thumbnail() ? 	
-								get_the_post_thumbnail(null, null,  
-										array('class' => $img_align , 'alt' =>  $profile_name, 
+				$image = ( has_post_thumbnail() ?
+								get_the_post_thumbnail(null, null,
+										array('class' => $img_align , 'alt' =>  $profile_name,
 													'style' => 'width: 150px; height: 200px; padding-right: 15px;' ) ) : '');
 
 				$output = sprintf('<article class="profile-detail">%1$s%2$s%3$s%4$s</article>',
@@ -1466,8 +1467,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
 
 				break;
+
+			case 'faqs':
+				$output = sprintf('<article id="faq_post_detail">%1$s%2$s</article>',
+													$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+				break;
+
 			case 'general':
-				$output = "<article id='general_post_detail'></article>";
+				$output = '<article id="general_post_detail"></article>';
 				break;
 		}
 		return $output;
@@ -1478,19 +1485,19 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		// Return value of the JS function must be full HTML code to display.
 		function remove_general_detail() {
 			global $post;
-			
+
 			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
 			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_post_handler');
-			
+
 			if( empty($module) || "general" !== $module->post_type_layout ){
 				return;
 			}else{
 			?>
            <script>
 		   	var detail = document.getElementById('general_post_detail').parentNode;
-			
+
 			if(1 == detail.childElementCount){
-				var row = detail.parentNode;				
+				var row = detail.parentNode;
 				row.removeChild(detail);
 				if(0 == row.childElementCount){
 					if(1 == row.parentNode.childElementCount ){
@@ -1506,7 +1513,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
             <?php
 		}
 	}
-			
+
 }
 new ET_Builder_Module_CAWeb_Post_Handler;
 ?>
