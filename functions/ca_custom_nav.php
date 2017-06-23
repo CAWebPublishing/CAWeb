@@ -21,7 +21,6 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 		// Hooked onto the WordPress Navigation Creation Filter
 		add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
 		add_filter('pre_wp_nav_menu', array($this, 'caweb_nav_menu'), 10, 2 );
-//pre_wp_nav_menu
 
 	} // end constructor
 
@@ -91,7 +90,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
       $navLinks = $this->createNavMenu($args);
 			
 			// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
-			$homeLink = ( !isset($args->home_link) && $args->home_link ? '<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
+			$homeLink = ( isset($args->home_link) && $args->home_link ? '<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
 
 			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) &&
 										(!isset($args->intranet) || !$args->intranet ) ?
@@ -103,7 +102,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			$output = sprintf('<nav id="navigation" class=" ca_wp_container main-navigation %1$s hidden-print">
 								<ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s%5$s</ul></nav>',
 												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $navLinks, $searchLink, $intranetLogout );
-
+			
 			// Footer Menu Construction
 		}elseif('footer-menu' == $args->theme_location && !empty($args->menu)){
       $navLinks = $this->createFooterMenu($args);
@@ -146,7 +145,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$icon = $item_meta['_caweb_menu_icon'][0];
 				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
 				// Create Link
-				$nav_item .= sprintf('<li class="nav-item %1$s %2$s"><a href="%3$s" class="first-level-link">%4$s%5$s</a>',
+				$nav_item .= sprintf('<li class="nav-item %1$s %2$s"><a href="%3$s" class="first-level-link">%4$s %5$s</a>',
 														implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? 'active' : ''),$item->url, $icon,  $item->title);
 
 
@@ -168,7 +167,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 									$nav_img,$nav_img_size, $nav_img_side);
 
 							$nav_item .= sprintf('<div class="sub-nav">
-								<div class="%1$s">%2$s</div>%3$s</li>',
+								<div class="%1$s">%2$s</div>%3$s</div></li>',
 								(!empty($nav_img) ? $sub_img_class : 'full'), $this->createSubNavMenu($childLinks, $args ), (!empty($nav_img) ? $sub_img_div : ''),
 								($args->version == 5 && "megadropdown" == $args->style ? 'ca_wp_container' : '') );
 						}else{
@@ -237,7 +236,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 																$item->url, $nav_media_image	) : '');
 
 							$sub_nav .= sprintf('<li class="unit3"><div class="nav-media">
-									<div class="media">%2$s<div class="media-body"><div class="title"><a href="%1$s">%3$s</a></div><div class="teaser">%4$s</div></div></div></li>',
+<div class="media">%2$s<div class="media-body"><div class="title"><a href="%1$s">%3$s</a></div><div class="teaser">%4$s</div></div></div></div></li>',
 
 								$item->url, $nav_media,	$item->title, $desc  );
 						}

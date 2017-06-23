@@ -26,7 +26,6 @@ add_action( 'admin_head-nav-menus.php', 'ca_nav_menu_meta_boxes' );
 function ca_page_identifier_metabox_callback( $post ) {
 	if("" == get_post_meta($post->ID, 'ca_custom_initial_state',true) ){
 		update_post_meta($post->ID, 'ca_custom_initial_state', true);
-		update_post_meta($post->ID, 'ca_custom_post_title_display', "on");
 		update_post_meta($post->ID, 'ca_default_navigation_menu', get_option('ca_default_navigation_menu') );
 
 	}
@@ -38,7 +37,15 @@ function ca_page_identifier_metabox_callback( $post ) {
 <form action="#" method="post">
 
 <input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"
-	<?php echo( get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); ?> >
+  <?php 
+  // if the post doesnt't have a ca_custom_post_title_display meta field or a page/post ID assumed new page
+  // if new page, then ca_default_post_title_display option determines initial title setting
+  if(!isset( $post->ID ) || ! in_array( 'ca_custom_post_title_display', get_post_custom_keys( $post->ID ) ) ){
+    	echo( !get_option('ca_default_post_title_display',false) ? 'checked="checked"' : '' );
+    // if the post does have a ca_custom_post_title_display meta field let the user selected option override
+  }else{
+     	echo(get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); 
+	}?>>
 Display Title on Page
 
 	<?php if(get_option('ca_menu_selector_enabled') == true): ?>
