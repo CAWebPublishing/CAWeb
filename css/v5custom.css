@@ -1,4 +1,6 @@
-
+.et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
+	width: 80%;
+}
 /* Temporary remove the sub nav arrow until the function in the core script is working */
 .nav-arrow-down{
   	visibility: hidden;
@@ -58,9 +60,8 @@ and the nav links float to the right */
     padding-bottom: 2px;
   }
 }
-
 #nav_list{
-      width: auto;
+    width: auto;
     float: right;
 }
 .sub-nav{
@@ -84,8 +85,6 @@ and the nav links float to the right */
 }
 
 /* MegaDropdown Navigation Styles */
-.empty.sub-nav .second-level-nav .unit2,
-.empty.sub-nav .second-level-nav .unit3,
 .full .second-level-nav .unit1 {
     width: 25%;
 }
@@ -224,7 +223,8 @@ and the nav links float to the right */
 }
 /* End of Branding & Navigation */
 
-	/*.et_pb_fullwidth_section{
+/*
+	.et_pb_fullwidth_section{
 		margin: 0 -21.5%;
 	}*/
 }
@@ -280,17 +280,18 @@ and the nav links float to the right */
   }
 
   .cagov-logo {
+		position:static;
     position: initial;
-    /*padding-left: 65px;*/
     float: left;
     text-align: left;
     width: 80%;
 }
   .cagov-logo img{
-  		max-width : 100% ;
-     height: 90px;
+  	max-width : 100% ;
+    max-height: 90px;
 		margin-bottom: 8px;
   }
+
 
 ul.utility-links.social-media-links {
     max-height: 35px;
@@ -327,7 +328,6 @@ ul.utility-links.social-media-links {
 }
 
 
-
 /* Section Carousel Version 5 */
 .et_pb_ca_section_carousel .container{
   padding-top: 10px !important;
@@ -338,7 +338,6 @@ ul.utility-links.social-media-links {
 .et_pb_ca_fullwidth_section_carousel .container{
   padding-top: 10px !important;
 }
-
 .ca_wp_container{
   max-width: 1080px;
   width: 80%;
@@ -346,11 +345,13 @@ ul.utility-links.social-media-links {
   margin-right: auto;
 }
 
+
 @media (max-width: 980px){
 .ca_wp_container{
   padding: 0;
 }
 }
+
 @media (min-width: 981px){
 .ca_wp_container{
   padding: 0;
@@ -361,6 +362,7 @@ ul.utility-links.social-media-links {
     width: 100%;
   }
   .et_pb_row{
-      width: 90% !important;
+    width: 90% !important;
+
   }
 }

@@ -63,15 +63,15 @@ class CAWeb_Nav_Menu {
 ?>
 
 
-<div class="icon_selector <?= ('unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ) ; ?> description description-wide">
+<div class="icon_selector <?= (!empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ) ; ?> description description-wide">
 <p>Select an Icon
 	<input  name="<?= $item_id; ?>_icon" id="<?= $item_id; ?>_icon"
-	value="<?= $tmp['_caweb_menu_icon'][0]  ; ?>" type="text" /></p>
+	value="<?= !empty($tmp['_caweb_menu_icon'][0] ) ?  $tmp['_caweb_menu_icon'][0] : '' ; ?>" type="text" /></p>
 <ul class="menu-icon-list" id="menu-icon-list-<?= $item_id; ?>">
 	<?php
 		foreach(get_ca_icon_list() as $i=>$ico){
 			printf('<li class="icon-option ca-gov-icon-%1$s %3$s" name="%1$s" ></li>',
-             $ico, $item_id, ($ico == $tmp['_caweb_menu_icon'][0]  ? 'is_selected' : '' ) );
+             $ico, $item_id, (!empty($tmp['_caweb_menu_icon'][0] ) && $ico == $tmp['_caweb_menu_icon'][0]  ? 'is_selected' : '' ) );
 		}
 
 	?>
@@ -89,29 +89,29 @@ class CAWeb_Nav_Menu {
 </select>
 </div>
 
-<div class="media_image <?= (0 != $depth && 'unit3' == $tmp['_caweb_menu_unit_size']  ? 'show' : '' ) ; ?> description description-wide" >
+<div class="media_image <?= (0 != $depth &&  !empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' == $tmp['_caweb_menu_unit_size'][0]  ? 'show' : '' ) ; ?> description description-wide" >
 <p><strong>Navigation Media Image</strong><p>
 <p>Select an Image</p>
 <input  name="<?= $item_id; ?>_media_image" id="<?= $item_id; ?>_media_image" type="text" class="link-text" style="width: 97%;"
-	value="<?= $tmp['_caweb_menu_media_image'][0] ; ?>"/>
-<input type="button" value="Browse" class="library-link" name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
+	value="<?= !empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : '' ; ?>"/>
+<input type="button" class="library-link" value="Browse" id="library-link-<?= $item_id; ?>"   name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
 </div>
 <div class="mega_menu_images <?= (0 == $depth ? 'show' : '' ) ; ?> description description-wide " >
 <p><strong>Mega Menu Image Option</strong><p>
 <p>Select an Image</p>
 <input  name="<?= $item_id; ?>_image" id="<?= $item_id; ?>_image"  type="text" class="link-text" style="width: 97%;"
-	value="<?= $tmp['_caweb_menu_image'][0] ; ?>"/>
-<input type="button" value="Browse" class="library-link" name="<?= $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
+	value="<?= !empty($tmp['_caweb_menu_image'][0]) ? $tmp['_caweb_menu_image'][0] : '' ; ?>"/>
+<input type="button" value="Browse" id="library-link-<?= $item_id; ?>" class="library-link"  name="<?= $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
 
 <p>Select a Side / Select a Size</p>
 <select name="<?= $item_id; ?>_image_side" >
-<option value="left" <?= ('left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ) ;?> >Left</option>
-<option value="right" <?= ('right' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ) ;?> >Right</option>
+<option value="left" <?= (!empty($tmp['_caweb_menu_image_side'][0]) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ) ;?> >Left</option>
+<option value="right" <?= (!empty($tmp['_caweb_menu_image_side'][0]) && 'right' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ) ;?> >Right</option>
 </select>
  /
 <select name="<?= $item_id; ?>_image_size">
-<option value="quarter" <?= ('quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ) ;?> >Quarter</option>
-<option value="half" <?= ('half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ) ;?> >Half</option>
+<option value="quarter" <?= (!empty($tmp['_caweb_menu_image_size'][0]) && 'quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ) ;?> >Quarter</option>
+<option value="half" <?= (!empty($tmp['_caweb_menu_image_size'][0]) &&  'half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ) ;?> >Half</option>
 </select>
 </div>
 
@@ -140,14 +140,14 @@ class CAWeb_Nav_Menu {
 				update_post_meta( $menu_item_db_id, '_caweb_menu_image_size', $args['caweb-menu-item-image-size'] );
 
 
-	}
+		}
 
 		return $menu_item_db_id;
 	}
 
 }
 }
-  // instantiate plugin's class
+// instantiate plugin's class
 new CAWeb_Nav_Menu();
 
 ?>

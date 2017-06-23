@@ -35,6 +35,15 @@ printf('<li><a href="%1$s" class="ca-gov-icon-%2$s hidden-print" title="Share vi
             </div>
             <div class="half settings-links hidden-print">
                 <ul class="utility-links ">
+                    <?php if ( !("" == get_option('ca_utility_link_1')) ):?>
+                      <li><a href="<?php echo get_option('ca_utility_link_1')?>"><?php echo get_option('ca_utility_link_1_name')?></a></li>
+                    <?php endif; ?>
+                    <?php if ( !("" == get_option('ca_utility_link_2')) ):?>
+                      <li><a href="<?php echo get_option('ca_utility_link_2')?>"><?php echo get_option('ca_utility_link_2_name')?></a></li>
+                    <?php endif; ?>
+                    <?php if ( !("" == get_option('ca_utility_link_3')) ):?>
+                      <li><a href="<?php echo get_option('ca_utility_link_3')?>"><?php echo get_option('ca_utility_link_3_name')?></a></li>
+                    <?php endif; ?>
                     <li><a href="<?php echo get_option('ca_contact_us_link'); ?>">Contact Us</a></li>
                     <li><a role="button" data-toggle="collapse" data-target="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>
 

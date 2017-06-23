@@ -1,45 +1,74 @@
 <?php
 class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 	function init() {
-		$this->name = esc_html__( 'CAWeb Post Handler', 'et_builder' );
+		$this->name = esc_html__( 'Post Detail', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_post_handler';
 
 		$this->whitelisted_fields = array(
-			'post_type_layout', 'news_author', 'news_publish_date', 'news_city', 'show_tags_button', 'show_categories_button', 'show_featured_image',
-			 'profile_name_prefix', 'profile_name', 'profile_title', 'content_new', 
+			'post_type_layout', 'show_tags_button', 'show_categories_button', 'content_new', 'module_class', 'module_id', 'admin_label',
+			'news_author', 'news_publish_date', 'news_city',  'profile_name_prefix', 'profile_name',
+			'profile_image_align', 'profile_additional_fields', 'profile_career', 'profile_career_title', 'profile_career_position', 'profile_career_line_1',
+			'profile_career_line_2', 'profile_career_line_3', 'show_about_agency','job_agency_name', 'job_agency_address', 'job_agency_city',
+			'job_final_filing_date', 'job_agency_state', 'job_agency_zip', 'job_agency_about', 'job_hours', 'show_job_salary', 'job_salary_min',
+			'job_salary_max', 'job_posted_date', 'job_position_number', 'job_rpa_number', 'job_ds_url', 'job_final_filing_date','show_job_apply_to',
+			'job_apply_to_dept', 'job_apply_to_name', 'job_apply_to_phone', 'job_apply_to_address', 'job_apply_to_city',  'job_apply_to_state',
+			'job_apply_to_zip', 'job_questions_email', 'show_job_questions', 'job_questions_name', 'job_questions_phone', 'job_qualifications',
+			'job_skills', 'show_event_presenter', 'event_presenter_image', 'event_presenter_name', 'event_presenter_bio',
+			'event_start_date', 'event_end_date','event_start_time', 'event_end_time', 'show_event_address', 'event_address', 'event_city',
+			'event_state', 'event_zip', 'event_cost', 'event_registration_type',  'exam_id', 'exam_class', 'exam_status',
+			'exam_published_date', 'exam_final_filing_date', 'exam_type', 'exam_url','exam_address', 'exam_city',  'exam_state', 'exam_zip',
+			'show_course_presenter', 'course_presenter_image', 'course_presenter_name', 'course_presenter_bio',
+			'course_start_date', 'course_end_date',  'course_start_time', 'course_end_time', 'show_course_address',	 'course_address',
+			'course_city',  'course_state',  'course_zip', 'course_cost', 'course_registration_type', 'show_course_map');
+
+		$this->fields_defaults = array(
+			'job_final_filing_date' => array( 'Until Filled','add_default_setting' ),
+			'exam_final_filing_date' => array( 'Until Filled','add_default_setting' ),
 		);
 
 
 		$this->main_css_element = '%%order_class%%';
-
-		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'admin_footer', array( $this, 'js_frontend' ) );
 	}
 	function get_fields() {
-			
 		$fields = array(
 			'post_type_layout' => array(
 				'label'             => esc_html__( 'Post Type Style','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
+				'class'               => array( 'caweb_post_handler_style_selector' ),
 				'options'           => array(
-					'none' => esc_html__( 'None','et_builder'),
+					'general' => esc_html__( 'General','et_builder'),
+					'course'  => esc_html__( 'Courses','et_builder'),
+					'event'  => esc_html__( 'Events','et_builder'),
+					'exam'  => esc_html__( 'Exams','et_builder'),
 					'jobs'  => esc_html__( 'Jobs','et_builder'),
 					'news' => esc_html__( 'News','et_builder'),
 					'profile'  => esc_html__( 'Profile','et_builder'),
 				),
-				'description'       => esc_html__( 'This is the layout style','et_builder' ),	
-				'affects'           => array('news_author','news_article', 'news_publish_date', 'news_city',
-																		'profile_name_prefix','profile_name','profile_title', ),
+				'description'       => esc_html__( 'This is the layout style','et_builder' ),
+				'affects'           => array('news_author', 'news_publish_date', 'news_city', 'profile_name_prefix', 'profile_name',
+											'profile_title', 'profile_image_align',	'profile_career','profile_additional_fields',
+											'show_about_agency','job_title', 'job_hours',
+											'show_job_salary', 'job_posted_date','job_position_number', 'job_rpa_number', 'job_ds_url',
+											'job_final_filing_date', 'show_job_apply_to','show_job_questions',
+											 'show_event_presenter', 'event_start_date', 'event_end_date',  'event_start_time', 'event_end_time',
+											 'show_event_address', 'event_registration_type',  'exam_id', 'exam_status', 'exam_class',
+											 'exam_published_date', 'exam_final_filing_date', 'exam_type',
+											 'show_course_presenter', 'course_start_date', 'course_end_date',  'course_start_time', 'course_end_time',
+											 'course_duration',	'show_course_address', 'course_registration_type', 'show_course_map'),
 			),
+		);
+
+
+		$news_fields = array(
 			'news_author' => array(
 				'label'           => esc_html__( 'Author','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter an Author for this news item.','et_builder' ),
 				'depends_show_if' => 'news',
-			),			
+			),
 			'news_publish_date' => array(
 				'label'           => esc_html__( 'Publish Date','et_builder' ),
 				'type'            => 'text',
@@ -54,22 +83,16 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter a Location for this news item.','et_builder' ),
 				'depends_show_if' => 'news',
 			),
-				'show_featured_image' => array(
-				'label'             => esc_html__( 'Show Featured Image', 'et_builder' ),
-				'type'              => 'yes_no_button',
-				'option_category'   => 'configuration',
-				'options'           => array(
-					'off' => esc_html__( "No", 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-			),
+		);
+
+		$profile_fields = array(
 			'profile_name_prefix' => array(
 				'label'           => esc_html__( 'Name Prefix','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a prefix for this profile item.','et_builder' ),
 				'depends_show_if' => 'profile',
-			),			
+			),
 			'profile_name' => array(
 				'label'           => esc_html__( 'Profile Name','et_builder' ),
 				'type'            => 'text',
@@ -77,18 +100,637 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter a profile name for this profile item.','et_builder' ),
 				'depends_show_if' => 'profile',
 			),
-			'profile_title' => array(
-				'label'           => esc_html__( 'Profile Tile','et_builder' ),
+			'profile_image_align' => array(
+				'label'             => esc_html__( 'Image Alignment', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Left", 'et_builder' ),
+					'on'  => esc_html__( 'Right', 'et_builder' ),
+				),
+				'depends_show_if' => 'profile',
+				'description' => 'Alignment for the featured profile image',
+			),
+			'profile_career' => array(
+				'label'             => esc_html__( 'Career', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'profile',
+				'description' => 'Job related fields',
+				'affects' => array('profile_career_title', 'profile_career_position')
+			),
+			'profile_career_title' => array(
+				'label'           => esc_html__( 'Title','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter a title for this profile item.','et_builder' ),
-				'depends_show_if' => 'profile',
+				'depends_show_if' => 'on',
 			),
-		'content_new' => array(
+			'profile_career_position' => array(
+				'label'           => esc_html__( 'Position','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'profile_additional_fields' => array(
+				'label'             => esc_html__( 'Additional List Fields', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'profile',
+				'description' => 'Additional information for the Post List.',
+				'affects' => array('profile_career_line_1', 'profile_career_line_2', 'profile_career_line_3')
+			),
+			'profile_career_line_1' => array(
+				'label'           => esc_html__( 'Line 1','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'profile_career_line_2' => array(
+				'label'           => esc_html__( 'Line 2','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'profile_career_line_3' => array(
+				'label'           => esc_html__( 'Line 3','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			);
+
+		$exam_fields = array(
+			'exam_id' => array(
+				'label'           => esc_html__( 'Exam Code','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter an Exam Code for this exam item.','et_builder' ),
+				'depends_show_if' => 'exam',
+			),
+			'exam_class' => array(
+				'label'           => esc_html__( 'Class Code','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter an Class Code for this exam item.','et_builder' ),
+				'depends_show_if' => 'exam',
+			),
+			'exam_status' => array(
+				'label'             => esc_html__( 'Status','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'open' => esc_html__( 'Open','et_builder'),
+					'closed'  => esc_html__( 'Closed','et_builder'),
+				),
+				'depends_show_if' => 'exam',
+				'description'       => esc_html__( 'Select the status for this exam item.','et_builder' ),
+				),
+			'exam_published_date' => array(
+				'label'           => esc_html__( 'Publish Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the Publish Date for this exam item.','et_builder' ),
+				'depends_show_if' => 'exam',
+			),
+			'exam_final_filing_date' => array(
+				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the Final Filing Date for this exam item.','et_builder' ),
+				'depends_show_if' => 'exam',
+			),
+			'exam_type' => array(
+				'label'             => esc_html__( 'Select an Exam Type','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'web' => esc_html__( 'Web','et_builder'),
+					'location'  => esc_html__( 'Classroom','et_builder'),
+				),
+				'depends_show_if' => 'exam',
+				'affects' => array('exam_url', 'exam_address', 'exam_city',  'exam_state', 'exam_zip'),
+			),
+			'exam_url' => array(
+				'label'           => esc_html__( 'URL','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the URL for this exam item.','et_builder' ),
+				'depends_show_if' => 'exam',
+				'depends_show_if_not' => 'location',
+			),
+			'exam_address' => array(
+				'label'           => esc_html__( 'Address','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter address for this job item.','et_builder' ),
+				'depends_show_if' => 'location',
+			),
+			'exam_city' => array(
+				'label'           => esc_html__( 'City','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter city for this job item.','et_builder' ),
+				'depends_show_if' => 'location',
+			),
+			'exam_state' => array(
+				'label'           => esc_html__( 'State','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter state for this job item.','et_builder' ),
+				'depends_show_if' => 'location',
+			),
+			'exam_zip' => array(
+				'label'           => esc_html__( 'Zip','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter zip code for this job item.','et_builder' ),
+				'depends_show_if' => 'location',
+			),
+
+
+			);
+
+		$course_fields = array(
+			'show_course_presenter' => array(
+				'label'             => esc_html__( 'Presenter', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'course',
+				'affects' => array('course_presenter_name', 'course_presenter_image', 'course_presenter_bio' )
+			),
+			'course_presenter_name' => array(
+				'label'           => esc_html__( 'Name','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'course_presenter_image' => array(
+				'label'              => esc_html__( 'Image', 'et_builder' ),
+				'type'               => 'upload',
+				'option_category'    => 'basic_option',
+				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
+				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
+				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'course_presenter_bio' => array(
+				'label'           => esc_html__( 'Short Bio','et_builder' ),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'course_start_date' => array(
+				'label'           => esc_html__( 'Start Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter start date for this course item.','et_builder' ),
+				'depends_show_if' => 'course',
+			),
+			'course_end_date' => array(
+				'label'           => esc_html__( 'End Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter end date for this course item.','et_builder' ),
+				'depends_show_if' => 'course',
+			),
+			'course_start_time' => array(
+				'label'           => esc_html__( 'Start Time','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter a start time for this course item.','et_builder' ),
+				'depends_show_if' => 'course',
+			),
+			'course_end_time' => array(
+				'label'           => esc_html__( 'End Time','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the end time for this course item.','et_builder' ),
+				'depends_show_if' => 'course',
+			),
+			'show_course_address' => array(
+				'label'             => esc_html__( 'Course Location', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'course',
+				'affects' => array('course_address', 'course_city',  'course_state', 'course_zip')
+			),
+			'course_address' => array(
+				'label'           => esc_html__( 'Address','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Course address for this course item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'course_city' => array(
+				'label'           => esc_html__( 'City','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Course city for this course item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'course_state' => array(
+				'label'           => esc_html__( 'State','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Course state for this course item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'course_zip' => array(
+				'label'           => esc_html__( 'Zip','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Course zip code for this course item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'course_registration_type' => array(
+				'label'             => esc_html__( 'Registration Type','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'free' => esc_html__( 'Free','et_builder'),
+					'cost'  => esc_html__( 'Cost','et_builder'),
+				),
+				'description'       => esc_html__( 'Select a registration type for this evein item.','et_builder' ),
+				'affects' => array('course_cost'),
+				'depends_show_if' => 'course',
+				),
+			'course_cost' => array(
+				'label'           => esc_html__( 'Cost','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Course Cost for this course item.','et_builder' ),
+				'depends_show_if' => 'cost',
+			),
+			'show_course_map' => array(
+				'label'             => esc_html__( 'Display Course Map', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'course',
+			),
+		);
+
+		$event_fields = array(
+			'show_event_presenter' => array(
+				'label'             => esc_html__( 'Presenter', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'event',
+				'affects' => array('event_presenter_name', 'event_presenter_image', 'event_presenter_bio' )
+			),
+			'event_presenter_name' => array(
+				'label'           => esc_html__( 'Name','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+				'event_presenter_image' => array(
+				'label'              => esc_html__( 'Image', 'et_builder' ),
+				'type'               => 'upload',
+				'option_category'    => 'basic_option',
+				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
+				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
+				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'event_presenter_bio' => array(
+				'label'           => esc_html__( 'Short Bio','et_builder' ),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'event_start_date' => array(
+				'label'           => esc_html__( 'Start Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter start date for this event item.','et_builder' ),
+				'depends_show_if' => 'event',
+			),
+			'event_end_date' => array(
+				'label'           => esc_html__( 'End Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter end date for this event item.','et_builder' ),
+				'depends_show_if' => 'event',
+			),
+			'event_start_time' => array(
+				'label'           => esc_html__( 'Start Time','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter a start time for this event item.','et_builder' ),
+				'depends_show_if' => 'event',
+			),
+			'event_end_time' => array(
+				'label'           => esc_html__( 'End Time','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the end time for this event item.','et_builder' ),
+				'depends_show_if' => 'event',
+			),
+			'show_event_address' => array(
+				'label'             => esc_html__( 'Event Location', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'event',
+				'affects' => array('event_address', 'event_city',  'event_state', 'event_zip')
+			),
+			'event_address' => array(
+				'label'           => esc_html__( 'Address','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Event address for this event item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'event_city' => array(
+				'label'           => esc_html__( 'City','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Event city for this event item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'event_state' => array(
+				'label'           => esc_html__( 'State','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Event state for this event item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'event_zip' => array(
+				'label'           => esc_html__( 'Zip','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Event zip code for this event item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'event_registration_type' => array(
+				'label'             => esc_html__( 'Registration Type','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'free' => esc_html__( 'Free','et_builder'),
+					'cost'  => esc_html__( 'Cost','et_builder'),
+				),
+				'description'       => esc_html__( 'Select a registration type for this evein item.','et_builder' ),
+				'affects' => array('event_cost'),
+				'depends_show_if' => 'event',
+				),
+			'event_cost' => array(
+				'label'           => esc_html__( 'Cost','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Event Cost for this event item.','et_builder' ),
+				'depends_show_if' => 'cost',
+			),
+		);
+
+		$job_fields = array(
+			'show_about_agency' => array(
+				'label'             => esc_html__( 'Agency', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'jobs',
+				'affects' => array('job_agency_name', 'job_agency_address', 'job_agency_city',
+													'job_agency_state', 'job_agency_zip', 'job_agency_about',)
+			),
+			'job_agency_name' => array(
+				'label'           => esc_html__( 'Agency Name','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter an Agency Name for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_agency_address' => array(
+				'label'           => esc_html__( 'Agency Address','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Agency address for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_agency_city' => array(
+				'label'           => esc_html__( 'Agency City','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Agency city for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_agency_state' => array(
+				'label'           => esc_html__( 'Agency State','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Agency state for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_agency_zip' => array(
+				'label'           => esc_html__( 'Agency Zip','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Agency zip code for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_agency_about' => array(
+				'label'           => esc_html__( 'About Agency','et_builder' ),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter information about the Agency for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_hours' => array(
+				'label'           => esc_html__( 'Job Hours','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter job hours for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'show_job_salary' => array(
+				'label'             => esc_html__( 'Salary', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'jobs',
+				'affects' => array('job_salary_min', 'job_salary_max', )
+			),
+			'job_salary_min' => array(
+				'label'           => esc_html__( 'Minimum Salary','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'job_salary_max' => array(
+				'label'           => esc_html__( 'Maximum Salary','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'on',
+			),
+			'job_posted_date' => array(
+				'label'           => esc_html__( 'Date Posted','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter posted date for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'job_position_number' => array(
+				'label'           => esc_html__( 'Position Number','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter a position number for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'job_rpa_number' => array(
+				'label'           => esc_html__( 'RPA Number','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter a rpa number for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'job_ds_url' => array(
+				'label'           => esc_html__( 'Duty Statement (URL)','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the duty statement\'s url link for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'job_final_filing_date' => array(
+				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter the final filing date for this job item.','et_builder' ),
+				'depends_show_if' => 'jobs',
+			),
+			'show_job_apply_to' => array(
+				'label'             => esc_html__( 'Apply to', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'jobs',
+				'affects' => array('job_apply_to_dept','job_apply_to_name', 'job_apply_to_phone','job_apply_to_address', 'job_apply_to_city',
+													'job_apply_to_state','job_apply_to_zip')
+			),
+			'job_apply_to_dept' => array(
+				'label'           => esc_html__( 'Department','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Department Name for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_name' => array(
+				'label'           => esc_html__( 'Contact Name','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact Name for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_phone' => array(
+				'label'           => esc_html__( 'Contact Phone Number','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact Phone Number for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_address' => array(
+				'label'           => esc_html__( 'Address','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact address for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_city' => array(
+				'label'           => esc_html__( 'City','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact city for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_state' => array(
+				'label'           => esc_html__( 'State','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact state for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_apply_to_zip' => array(
+				'label'           => esc_html__( 'Zip','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact zip code for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'show_job_questions' => array(
+				'label'             => esc_html__( 'Questions', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'off' => esc_html__( "Hide", 'et_builder' ),
+					'on'  => esc_html__( 'Show', 'et_builder' ),
+				),
+				'depends_show_if' => 'jobs',
+				'affects' => array('job_questions_name', 'job_questions_phone', 'job_questions_email'	)
+			),
+			'job_questions_name' => array(
+				'label'           => esc_html__( 'Name','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact Name for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_questions_phone' => array(
+				'label'           => esc_html__( 'Phone Number','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact Phone Number for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+			'job_questions_email' => array(
+				'label'           => esc_html__( 'Email','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Enter Contact Email for this job item.','et_builder' ),
+				'depends_show_if' => 'on',
+			),
+		);
+
+		$ending_fields = array(
+			'content_new' => array(
 				'label'           => esc_html__( 'Content','et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter the content for this item.','et_builder' ),
+				'description'     => esc_html__( 'Enter additional content for this item.','et_builder' ),
 			),
 			'show_tags_button' => array(
 				'label'           => esc_html__( 'Display Post Tags', 'et_builder' ),
@@ -108,92 +750,479 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 		),
+			'admin_label' => array(
+			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+			),
+			'module_id' => array(
+			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+			'module_class' => array(
+			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
 		);
 
-		
-		return $fields;
+		return array_merge($fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $course_fields,  $ending_fields);
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback( $atts, $content = null, $function_name ){
+		global $post;
+
 		$post_type_layout    = $this->shortcode_atts['post_type_layout'];
 
+
+		// Course Attributes
+		$show_course_presenter = $this->shortcode_atts['show_course_presenter'];
+
+		$course_presenter_name = $this->shortcode_atts['course_presenter_name'];
+
+		$course_presenter_image = $this->shortcode_atts['course_presenter_image'];
+
+		$course_presenter_bio = $this->shortcode_atts['course_presenter_bio'];
+
+		$course_start_date = $this->shortcode_atts['course_start_date'];
+
+		$course_end_date = $this->shortcode_atts['course_end_date'];
+
+		$course_start_time = $this->shortcode_atts['course_start_time'];
+
+		$course_end_time = $this->shortcode_atts['course_end_time'];
+
+		$show_course_address = $this->shortcode_atts['show_course_address'];
+
+		$course_address = $this->shortcode_atts['course_address'];
+
+		$course_city = $this->shortcode_atts['course_city'];
+
+		$course_state = $this->shortcode_atts['course_state'];
+
+		$course_zip = $this->shortcode_atts['course_zip'];
+
+		$course_registration_type = $this->shortcode_atts['course_registration_type'];
+
+		$course_cost = $this->shortcode_atts['course_cost'];
+
+		$show_course_map = $this->shortcode_atts['show_course_map'];
+
+		// Event Attributes
+		$show_event_presenter = $this->shortcode_atts['show_event_presenter'];
+
+		$event_presenter_name = $this->shortcode_atts['event_presenter_name'];
+
+		$event_presenter_image = $this->shortcode_atts['event_presenter_image'];
+
+		$event_presenter_bio = $this->shortcode_atts['event_presenter_bio'];
+
+		$event_start_time = $this->shortcode_atts['event_start_time'];
+
+		$event_start_date = $this->shortcode_atts['event_start_date'];
+
+		$event_end_date = $this->shortcode_atts['event_end_date'];
+
+		$event_end_time = $this->shortcode_atts['event_end_time'];
+
+		$show_event_address = $this->shortcode_atts['show_event_address'];
+
+		$event_address = $this->shortcode_atts['event_address'];
+
+		$event_city = $this->shortcode_atts['event_city'];
+
+		$event_state = $this->shortcode_atts['event_state'];
+
+		$event_zip = $this->shortcode_atts['event_zip'];
+
+		$event_registration_type = $this->shortcode_atts['event_registration_type'];
+
+		$event_cost = $this->shortcode_atts['event_cost'];
+
+		// Exam Attributes
+		$exam_id = $this->shortcode_atts['exam_id'];
+
+  		$exam_class = $this->shortcode_atts['exam_class'];
+
+		$exam_status = $this->shortcode_atts['exam_status'];
+
+		$exam_published_date = $this->shortcode_atts['exam_published_date'];
+
+		$exam_final_filing_date = $this->shortcode_atts['exam_final_filing_date'];
+
+		$exam_type = $this->shortcode_atts['exam_type'];
+
+		$exam_url = $this->shortcode_atts['exam_url'];
+
+		$exam_address = $this->shortcode_atts['exam_address'];
+
+		$exam_city = $this->shortcode_atts['exam_city'];
+
+		$exam_state = $this->shortcode_atts['exam_state'];
+
+		$exam_zip = $this->shortcode_atts['exam_zip'];
+
+		// Job Attributes
+
+		$show_about_agency    = $this->shortcode_atts['show_about_agency'];
+
+		$job_agency_name    = $this->shortcode_atts['job_agency_name'];
+
+		$job_agency_address    = $this->shortcode_atts['job_agency_address'];
+
+		$job_agency_city    = $this->shortcode_atts['job_agency_city'];
+
+		$job_agency_state    = $this->shortcode_atts['job_agency_state'];
+
+		$job_agency_zip    = $this->shortcode_atts['job_agency_zip'];
+
+		$job_agency_about    = $this->shortcode_atts['job_agency_about'];
+
+		$job_posted_date    = $this->shortcode_atts['job_posted_date'];
+
+		$job_hours    = $this->shortcode_atts['job_hours'];
+
+		$show_job_salary    = $this->shortcode_atts['show_job_salary'];
+
+		$job_salary_min    = $this->shortcode_atts['job_salary_min'];
+
+		$job_salary_max    = $this->shortcode_atts['job_salary_max'];
+
+		$job_position_number    = $this->shortcode_atts['job_position_number'];
+
+		$job_rpa_number    = $this->shortcode_atts['job_rpa_number'];
+
+		$job_ds_url    = $this->shortcode_atts['job_ds_url'];
+
+		$job_final_filing_date    = $this->shortcode_atts['job_final_filing_date'];
+
+		$show_job_apply_to = $this->shortcode_atts['show_job_apply_to'];
+
+		$job_apply_to_dept = $this->shortcode_atts['job_apply_to_dept'];
+
+		$job_apply_to_name = $this->shortcode_atts['job_apply_to_name'];
+
+		$job_apply_to_phone = $this->shortcode_atts['job_apply_to_phone'];
+
+		$job_apply_to_address = $this->shortcode_atts['job_apply_to_address'];
+
+		$job_apply_to_city = $this->shortcode_atts['job_apply_to_city'];
+
+		$job_apply_to_state = $this->shortcode_atts['job_apply_to_state'];
+
+		$job_apply_to_zip = $this->shortcode_atts['job_apply_to_zip'];
+
+		$show_job_questions = $this->shortcode_atts['show_job_questions'];
+
+		$job_questions_name = $this->shortcode_atts['job_questions_name'];
+
+		$job_questions_phone = $this->shortcode_atts['job_questions_phone'];
+
+		$job_questions_email = $this->shortcode_atts['job_questions_email'];
+
+		// News Attributes
 		$news_author               = $this->shortcode_atts['news_author'];
 
 		$news_publish_date               = $this->shortcode_atts['news_publish_date'];
 
 		$news_city    = $this->shortcode_atts['news_city'];
 
-		$show_featured_image    = $this->shortcode_atts['show_featured_image'];
-		
+		// Profile Attributes
+
 		$profile_name_prefix               = $this->shortcode_atts['profile_name_prefix'];
 
 		$profile_name               = $this->shortcode_atts['profile_name'];
 
-		$profile_title    = $this->shortcode_atts['profile_title'];
+		$profile_career_title    = $this->shortcode_atts['profile_career_title'];
 
-		$content_new    = $this->shortcode_atts['content_new'];
-		
+		$profile_image_align    = $this->shortcode_atts['profile_image_align'];
+
+		// General Attributes
 		$show_tags_button    = $this->shortcode_atts['show_tags_button'];
-		
-		$show_categories_button    = $this->shortcode_atts['show_categories_button'];
-		
-		$class = "et_pb_ca_post_handler et_pb_module";
 
+		$show_categories_button    = $this->shortcode_atts['show_categories_button'];
+
+		$module_id            = $this->shortcode_atts['module_id'];
+
+		$module_class         = $this->shortcode_atts['module_class'];
+
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+
+		$class = "et_pb_ca_post_handler et_pb_module";
 
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
+		setlocale(LC_MONETARY, get_locale());
 
-		global $post;
-		
-		switch($post_type_layout){
-			
-			case 'news':
-				$title = get_the_title($post->ID);
-    	//return posts tags
-				$tag_names = wp_get_post_tags( $post->ID, array( 'fields' => 'names' ) );
-				$tag_list = '';
-			if ( !empty($tag_names) ) {
-				$tag_list = 'Tags or Keywords<ul>';
-				foreach($tag_names as $n){
-					$tag_list .= sprintf('<li>%1$s</li>', $n);
-				}
-				$tag_list = '</ul>';
+		//return posts tags
+		$tag_names = wp_get_post_tags( $post->ID, array( 'fields' => 'names' ) );
+		$tag_list = '';
+		if ( !empty($tag_names) && "on" ==  $show_tags_button ) {
+			$tag_list = '<div style="float:left; margin-right: 25px;">Tags or Keywords<ul>';
+			foreach($tag_names as $n){
+				$tag_list .= sprintf('<li>%1$s</li>', $n);
 			}
-     	$output = sprintf('<article class="news-detail">
-												<header><h1>%1$s</h1>%2$s%3$s</header>%4$s%5$s</article>', 
-													$title , ( !empty($news_publish_date) ? sprintf('<div class="published">Published: %1$s', $news_publish_date) : '') , 
-												( !empty($news_city) ? sprintf('<p>%1$s</p></div>', $news_city) : '</div>') ,$this->shortcode_content,
-												( !empty($tag_names) ? sprintf('<footer class="keywords">%1$s</footer>', $tag_list ) : ''));
-    
-					
-			
-				break;
-			case 'profile':
-			$title = sprintf('%1$s%2$s%3$s', ( !empty($profile_name_prefix) ? $profile_name_prefix . ' ' : '') , $profile_name, ( !empty($profile_title) ? ', ' . $profile_title: '') );
-			
-				$output = sprintf('<article class="profile-detail">%1$s%2$s</h1></article>',
-													( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : ''), $this->shortcode_content);
-				
-				break;
-			default:
-				$output = sprintf('%1$s','<h2>Unknown Content Type</h2>' );
+			$tag_list .= '</ul></div>';
 		}
-		
 
+		// return posts categories
+		$cat_obj = get_the_category( $post->ID  );
+		$cat_list = '';
+		if ( !empty($cat_obj) && "on" ==  $show_categories_button) {
+			$cat_list = 'Categories<ul>';
+			foreach($cat_obj as $n){
+				$cat_list .= sprintf('<li>%1$s</li>', $n->name);
+			}
+			$cat_list .= '</ul>';
+		}
+
+		$output = '';
+
+		// List Style Type
+		switch($post_type_layout){
+			// Course
+			case 'course':
+				$presenter_image = ( !empty($course_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image) : '');
+
+				$presenter = ("on" == $show_course_presenter ?
+											sprintf('<div class="presenter" style="display: inline-block;margin-bottom: 5px;"><p>
+												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>',  
+																$course_presenter_name, $presenter_image,$course_presenter_bio) : '' );
+
+				$course_addr = implode(', ', array_filter(array($course_address,$course_city,$course_state,$course_zip) ) );
+
+				$location = ( "on" == $show_course_address ?
+						sprintf('<span class="ca-gov-icon-road-pin"></span>
+									<a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $course_addr) : '');
+
+				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s %2$s%3$s<br />%4$s</p>',
+													is_valid_date($course_start_date,'Invalid Date'), is_valid_date( $course_start_time, 'Invalid Time'),
+														( !empty($course_end_date) || !empty($course_end_time) ? ' - ' .  trim( sprintf('%1$s %2$s', is_valid_date($course_end_date), is_valid_date($course_end_time) ) ): '' ) ,  $location);
+
+				$course_cost    = is_money($course_cost, 'Invalid Cost');
+
+
+				$reg =  ("free" == $course_registration_type ? '<p>Registration Type: Free</p>' :
+								sprintf('<p>Registration Cost: %1$s</p>', $course_cost));
+
+
+				if("on" == $show_course_map){
+					$map_url = sprintf('https:////www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE', $course_addr);
+					$course_map = sprintf('<div class="third"><iframe src="%1$s"></iframe></div>', $map_url );
+
+				}else{
+					$course_map = '';
+				}
+			//(has_post_thumbnail() ? get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left','style'=>'padding-right:15px;') ) : ''),
+			$output = sprintf('<article class="course-detail">%7$s<div class="description">%1$s</div>%2$s<div class="group">
+								<div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s</article>',
+								 $this->shortcode_content, $presenter, $organizer, $reg, $course_map,
+								sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ), ''  );
+
+				break;
+			// Event
+			case 'event':
+				$presenter_image = ( !empty($event_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image) : '');
+
+				$presenter = ("on" == $show_event_presenter ?
+				sprintf('<div class="presenter">%1$s<p><strong>Presenter:</strong><br><strong class="presenter-name">%2$s</strong></p><p>%3$s</p></div>',
+					$presenter_image, $event_presenter_name, 	 $event_presenter_bio) : '' );
+
+				$event_addr = array_filter(array($event_address,$event_city,$event_state,$event_zip));
+				$event_addr = sprintf('%1$s', implode(', ', $event_addr) );
+
+				$location = ( "on" == $show_event_address ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr) : '');
+
+				$endD = (!empty($event_end_date) ? is_valid_date($event_end_date, 'Invalid Date') : '');
+				$endT = (!empty($event_end_time) ? is_valid_date($event_end_time, 'Invalid Time') : '');
+				$endTime = (implode(" ", array_filter(array($endD, $endT))));
+			
+				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s %2$s%3$s<br />%4$s</p>',
+													is_valid_date($event_start_date, 'Invalid Date'),  is_valid_date($event_start_time, 'Invalid Time'),
+														(!empty($endTime) ? sprintf(' - %1$s',$endTime) : '') ,  $location);
+
+
+				$event_cost    = is_money($event_cost, 'Invalid Cost');
+
+				$reg =  ("free" == $event_registration_type ? '<p>Registration Type: Free</p>' :
+						sprintf('<p>Registration Type: State of CA Employee<br />Registration Cost: %1$s</p>', $event_cost));
+
+				$output = sprintf('<article class="event-detail">%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s</article>',
+													(has_post_thumbnail() ? get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left','style'=>'padding-right:15px;') ) : ''), $this->shortcode_content, $presenter, $organizer, $reg,
+						sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+
+					break;
+
+			// Exams
+			case 'exam':
+				$exam_addr = array_filter(array($exam_address, $exam_city, $exam_state , $exam_zip ));
+				$exam_addr = ( !empty($exam_addr) ? implode(', ', $exam_addr) : '');
+
+				$exam_class = ( !empty($exam_class) ? sprintf('Class Code: %1$s', $exam_class) : '');
+				$exam_id = ( !empty($exam_id) ? sprintf('Exam Code: %1$s', $exam_id) : '');
+				$exam_course = array_filter(array($exam_class, $exam_id));
+				$exam_course = ( !empty($exam_course) ? implode(' - ', $exam_course) . '<br />' : '');
+
+				$pub_date = (!empty($exam_published_date) ? sprintf('Published Date: %1$s<br />', is_valid_date($exam_published_date, 'Invalid Date') ) : '');
+
+				$exam_final_filing_date = ("Until Filled" == $exam_final_filing_date ?
+																	sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date) :
+																	sprintf('Final Filing Date: %1$s<br />', is_valid_date($exam_final_filing_date, 'Invalid Date') ) );
+
+				$exam_info = sprintf('<p>%1$s%2$s%3$s</p>', sprintf('%1$s',$exam_course), $pub_date, $exam_final_filing_date);
+			/*
+   width: 500px;
+    height: 250px;*/
+				$output = sprintf('<div class="exam-detail"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
+						(has_post_thumbnail() ? get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-right: auto;margin-left: auto;margin-bottom: 25px;')): ''),
+							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+
+				break;
+			// Jobs
+			case 'jobs':
+				$agency_addr = array_filter( array($job_agency_address, $job_agency_city, $job_agency_state, $job_agency_zip) );
+				$agency_addr = ( !empty($agency_addr) ? implode(", ", $agency_addr) : '' );
+
+				$agency_info = ( "on" == $show_about_agency ?
+					sprintf('<div class="entity"><strong>%1$s</strong> %2$s</div>', $job_agency_name,
+				( !empty($agency_addr) ? sprintf('<span class="ca-gov-icon-road-pin"></span>%1$s', $agency_addr) : '')) : '' );
+
+
+				if(!empty($job_posted_date) ){
+					$pub_date = is_valid_date($job_posted_date, 'Invalid Date','',true);
+					$dNow = date_create();
+
+					$pub_date = ("Invalid Date" == $pub_date ? '<div class="published">Published: <time>Invalid Date</time> </div>' :
+											sprintf('<div class="published">Published: <time>%1$s</time> %2$s</div>', $job_posted_date , date_diff($pub_date, $dNow)->format('<span class="fuzzy-date">%a days ago</span>')) );
+				}else{
+					$pub_date = '';
+				}
+
+				$job_hours    = ( !empty( $job_hours ) ? sprintf('%1$s<br />', $job_hours) : '' );
+
+				$job_salary_min    = is_money($job_salary_min);
+
+				$job_salary_max    = is_money($job_salary_max);
+
+				$job_salary    = ( "on" == $show_job_salary ?
+								 sprintf('Salary Range: %1$s%2$s<br />',
+						( !empty($job_salary_min) ? $job_salary_min  : '$0.00'),
+						( !empty($job_salary_max) ? sprintf(' &mdash; %1$s', $job_salary_max ) : '') ): '' );
+
+
+
+				$job_position	= '';
+				if( !empty( $job_position_number ) && !empty( $job_rpa_number )){
+					$job_position    = sprintf('Position Number: %1$s, RPA #%2$s<br />', $job_position_number, $job_rpa_number) ;
+				}elseif( !empty( $job_position_number ) ){
+					$job_position    = sprintf('Position Number: %1$s<br />', $job_position_number) ;
+				}elseif( !empty( $job_rpa_number ) ){
+					$job_position    = sprintf('RPA #%1$s<br />', $job_rpa_number) ;
+				}
+
+				$job_ds_url    = ( !empty($job_ds_url) ? sprintf('Duty Statement (<a href="%1$s">PDF</a>)<br />', $job_ds_url) : '');
+
+				$j_filing_date = ("Until Filled" == $job_final_filing_date ? $job_final_filing_date : is_valid_date($job_final_filing_date, 'Invalid Date') );
+				$job_final_filing_date = sprintf('Final Filing Date: <time>%1$s</time>', $j_filing_date);
+
+				$job_info = sprintf('<div class="half">
+										<div class="well">
+										<div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p>
+										</div></div></div>',
+										$job_hours, $job_salary, $job_position, $job_ds_url, $job_final_filing_date);
+
+
+
+				if( "on" == $show_job_apply_to){
+					$location = array_filter( array($job_apply_to_address, $job_apply_to_city, $job_apply_to_state, $job_apply_to_zip) );
+					$location = ( !empty($location) ? implode(", ", $location) : '' );
+
+					$job_apply_to_info = sprintf('<strong>Apply To:</strong><br />%1$s%2$s<br />%3$s',
+																		$job_apply_to_dept, ( !empty($job_apply_to_name) ? sprintf(' Attn: %1$s', $job_apply_to_name ) : ''), $location );
+
+				}
+				if( "on" == $show_job_questions){
+					$jInfo =  ( !empty($job_questions_phone)  && !empty($job_questions_email) ?
+								sprintf(' at %1$s, or %2$s', $job_questions_phone, $job_questions_email) : '');
+					$jInfo =  ( empty($jInfo) && !empty($job_questions_phone)  ? sprintf(' at %1$s', $job_questions_phone) : $jInfo);
+					$jInfo =  ( empty($jInfo) && !empty($job_questions_email) ? sprintf(' at %1$s',  $job_questions_email) : $jInfo);
+
+
+					$job_questions_info = sprintf('<strong>Questions</strong><br />%1$s%2$s', 	$job_questions_name, $jInfo  );
+
+				}
+
+				$job_apply_info = (!empty($job_apply_to_info) || !empty($job_questions_info) ?
+													sprintf('<div class="half"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
+																	( !empty($job_apply_to_info) ? sprintf('<p>%1$s</p>', $job_apply_to_info) : '' ) , ( !empty($job_questions_info) ? sprintf('<p>%1$s</p>', $job_questions_info) : '' )) : '');
+
+
+				$job_agency_about = ("on" == $show_about_agency && !empty($job_agency_about) ?
+														sprintf('<div class="panel panel-understated about-department">
+							<div class="panel-heading">
+									<h4>About this Department</h4>
+							</div>
+							<div class="panel-body">
+									<p>%1$s</p>
+							</div>
+					</div> ', $job_agency_about) : '');
+
+
+				$output = sprintf('<article class="job-detail">
+								<div class="sub-header">%1$s%2$s</div><div class="group">%3$s%4$s</div>%5$s%6$s%7$s
+								</article>',
+								(!empty($agency_info) ? $agency_info : ''), $pub_date, $job_info, $job_apply_info,
+								$job_agency_about,  $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+
+					break;
+			// News
+			case 'news':
+
+			$news_publish_date = (!empty($news_publish_date) ? $news_publish_date = sprintf('Published: %1$s<br />', is_valid_date($news_publish_date, 'Invalid Date')) : '');
+				
+
+			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
+													(!empty($news_author) ? sprintf('Author:%1$s<br />', $news_author)  : ''), $news_publish_date,
+													(!empty($news_city)  ? sprintf('%1$s', $news_city) : '') );
+
+     		$output = sprintf('<article class="news-detail">
+					%1$s%2$s%3$s%4$s</article>',
+				( !empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '') ,
+				( has_post_thumbnail() ? get_the_post_thumbnail(null, array(75,75), array('class' => 'img-left' ) ) : ''),
+				$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+
+
+
+				break;
+			// Profile
+			case 'profile':
+				$title = sprintf('%1$s%2$s%3$s', ( !empty($profile_name_prefix) ? $profile_name_prefix . ' ' : '') , $profile_name,
+				( !empty($profile_career_title) ? ', ' . $profile_career_title: '') );
+
+				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
+
+			$image = ( has_post_thumbnail() ? 	
+								get_the_post_thumbnail(null, null,  
+										array('class' => $img_align , 'alt' =>  $profile_name, 
+													'style' => 'width: 150px; height: 200px; padding-right: 15px;' ) ) : '');
+
+				$output = sprintf('<article class="profile-detail">%1$s%2$s%3$s%4$s</article>',
+							( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : ''),$image,
+						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+
+				break;
+
+
+		}
 		return $output;
 
 	}
-	
-	// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend() {
-			?>
-			<script>
-						console.log("<?php print_r( $this->post_type_layout ); ?>");
-			</script>
-			<?php
-		}
+
 }
 new ET_Builder_Module_CAWeb_Post_Handler;
 ?>

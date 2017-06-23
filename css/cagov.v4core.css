@@ -4014,20 +4014,9 @@ h4, .h4 {
     }
 }
 
-.decoration-last {
-    display: block;
-    position: absolute;
-    top: 145px;
-    padding: 11px 0;
-    font-size: 1.21em;
-    font-weight: bold;
-    width: 100%;
-    z-index: -1
-}
 
-.primary .decoration-last {
-    top: 108px
-}
+
+
 
 @media (min-width: 768px) {
     .header-slideshow-banner.enabled {
