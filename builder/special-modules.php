@@ -7,25 +7,122 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$this->post_types = array('post');
 
 		$this->whitelisted_fields = array(
-			'post_type_layout', 'show_tags_button', 'show_categories_button', 'content_new', 'module_class', 'module_id', 'admin_label',
-			'news_author', 'news_publish_date', 'news_publish_date_format',  'news_publish_date_custom_format', 'news_city',  'profile_name_prefix', 'profile_name',
-			'profile_image_align', 'profile_additional_fields', 'profile_career', 'profile_career_title', 'profile_career_position', 'profile_career_line_1',
-			'profile_career_line_2', 'profile_career_line_3', 'show_about_agency','job_agency_name', 'job_agency_address', 'job_agency_city',
-			'job_final_filing_date_chooser','job_final_filing_date', 'job_final_filing_date_picker', 'job_final_filing_date_format', 'job_final_filing_date_custom_format',
-      'job_agency_state', 'job_agency_zip', 'job_agency_about', 'job_hours', 'show_job_salary', 'job_salary_min',
-			'job_salary_max', 'job_posted_date', 'job_posted_date_format', 'job_posted_date_custom_format', 'job_position_number', 'job_rpa_number', 'job_ds_url','show_job_apply_to',
-			'job_apply_to_dept', 'job_apply_to_name', 'job_apply_to_address', 'job_apply_to_city',  'job_apply_to_state',
-			'job_apply_to_zip', 'job_questions_email', 'show_job_questions', 'job_questions_name', 'job_questions_phone', 'job_qualifications',
-			'job_skills', 'show_event_presenter', 'event_presenter_image', 'event_presenter_name', 'event_presenter_bio',
-			'event_start_date', 'event_start_date_format', 'event_start_date_custom_format', 'event_end_date', 'event_end_date_format', 'event_end_date_custom_format',
-      'show_event_address', 'event_address', 'event_city', 'event_organizer', 
-			'event_state', 'event_zip', 'event_cost', 'event_registration_type',  'exam_id', 'exam_class', 'exam_status',
-			'exam_published_date', 'exam_published_date_format', 'exam_published_date_custom_format', 'exam_final_filing_date_chooser','exam_final_filing_date','exam_final_filing_date_picker',
-      'exam_final_filing_date_format', 'exam_final_filing_date_custom_format', 'exam_type', 'exam_url','exam_address', 'exam_city',  'exam_state', 'exam_zip',
-			'show_course_presenter', 'course_presenter_image', 'course_presenter_name', 'course_presenter_bio',
-			'course_start_date', 'course_start_date_format', 'course_start_date_custom_format', 'course_end_date',  'course_end_date_format',
-      'course_end_date_custom_format', 'show_course_address',	 'course_address',
-			'course_city',  'course_state',  'course_zip', 'course_cost', 'course_registration_type', 'show_course_map');
+			'post_type_layout',
+			'show_tags_button',
+			'show_categories_button',
+			'content_new',
+			'max_width',
+			'max_width_tablet',
+			'max_width_phone',
+			'max_width_last_edited',
+			'disabled_on',
+			'module_class',
+			'module_id',
+			'admin_label',
+			'news_author',
+			'news_publish_date',
+			'news_publish_date_format',
+			'news_publish_date_custom_format',
+			'news_city',
+			'profile_name_prefix',
+			'profile_name',
+			'profile_image_align',
+			'profile_additional_fields',
+			'profile_career',
+			'profile_career_title',
+			'profile_career_position',
+			'profile_career_line_1',
+			'profile_career_line_2',
+			'profile_career_line_3',
+			'show_about_agency',
+			'job_agency_name',
+			'job_agency_address',
+			'job_agency_city',
+			'job_final_filing_date_chooser',
+			'job_final_filing_date',
+			'job_final_filing_date_picker',
+			'job_final_filing_date_format',
+			'job_final_filing_date_custom_format',
+			'job_agency_state',
+			'job_agency_zip',
+			'job_agency_about',
+			'job_hours',
+			'show_job_salary',
+			'job_salary_min',
+			'job_salary_max',
+			'job_posted_date',
+			'job_posted_date_format',
+			'job_posted_date_custom_format',
+			'job_position_number',
+			'job_rpa_number',
+			'job_ds_url',
+			'show_job_apply_to',
+			'job_apply_to_dept',
+			'job_apply_to_name',
+			'job_apply_to_address',
+			'job_apply_to_city',
+			'job_apply_to_state',
+			'job_apply_to_zip',
+			'job_questions_email',
+			'show_job_questions',
+			'job_questions_name',
+			'job_questions_phone',
+			'job_qualifications',
+			'job_skills',
+			'show_event_presenter',
+			'event_presenter_image',
+			'event_presenter_name',
+			'event_presenter_bio',
+			'event_start_date',
+			'event_start_date_format',
+			'event_start_date_custom_format',
+			'event_end_date',
+			'event_end_date_format',
+			'event_end_date_custom_format',
+			'show_event_address',
+			'event_address',
+			'event_city',
+			'event_organizer',
+			'event_state',
+			'event_zip',
+			'event_cost',
+			'event_registration_type',
+			'exam_id',
+			'exam_class',
+			'exam_status',
+			'exam_published_date',
+			'exam_published_date_format',
+			'exam_published_date_custom_format',
+			'exam_final_filing_date_chooser',
+			'exam_final_filing_date',
+			'exam_final_filing_date_picker',
+			'exam_final_filing_date_format',
+			'exam_final_filing_date_custom_format',
+			'exam_type',
+			'exam_url',
+			'exam_address',
+			'exam_city',
+			'exam_state',
+			'exam_zip',
+			'show_course_presenter',
+			'course_presenter_image',
+			'course_presenter_name',
+			'course_presenter_bio',
+			'course_start_date',
+			'course_start_date_format',
+			'course_start_date_custom_format',
+			'course_end_date',
+			'course_end_date_format',
+			'course_end_date_custom_format',
+			'show_course_address',
+			'course_address',
+			'course_city',
+			'course_state',
+			'course_zip',
+			'course_cost',
+			'course_registration_type',
+			'show_course_map',
+		);
 
 
 		$this->fields_defaults = array(
@@ -53,10 +150,37 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 		$this->main_css_element = '%%order_class%%';
 
+		$this->options_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'header' => esc_html__( 'Header', 'et_builder'),
+					'body'   => esc_html__( 'Body'  , 'et_builder'),
+				),
+			),
+			'advanced' => array(
+				'toggles' => array(
+					'text' => array(
+						'title'    => esc_html__( 'Text', 'et_builder' ),
+						'priority' => 49,
+					),
+					'width' => array(
+						'title'    => esc_html__( 'Sizing', 'et_builder' ),
+						'priority' => 65,
+					),
+				),
+			),
+			'custom_css' => array(
+				'toggles' => array(
+				),
+			),
+		);
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'remove_general_detail' ) );
 		//add_action( 'admin_footer', array( $this, 'remove_general_detail' ) );
 	}
+
 	function get_fields() {
 		$fields = array(
 			'post_type_layout' => array(
@@ -84,8 +208,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 											 'show_event_address', 'event_registration_type', 'event_cost', 'exam_id', 'exam_status', 'exam_class',
 											 'exam_published_date', 'exam_published_date_format', 'exam_final_filing_date_chooser',
                        'exam_type', 'show_course_presenter', 'course_start_date', 'course_end_date', 'course_start_date_format', 'course_end_date_format',
-											 'course_duration',	'show_course_address', 'course_registration_type', 'course_cost', 'show_course_map'),
+											 'course_duration',	'show_course_address', 'course_registration_type', 'course_cost', 'show_course_map'
+				 ),
+				 'toggle_slug'  => 'style',
 			),
+
 		);
 
 
@@ -96,6 +223,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter an Author for this news item.','et_builder' ),
 				'depends_show_if' => 'news',
+				'toggle_slug'			=> 'body',
 			),
 			'news_publish_date' => array(
 				'label'           => esc_html__( 'Publish Date','et_builder' ),
@@ -103,6 +231,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a Publish Date for this news item.','et_builder' ),
 				'depends_show_if' => 'news',
+				'toggle_slug'			=> 'body',
 			),
 			'news_publish_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -114,8 +243,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'news',
 				'affects' => array('news_publish_date_custom_format'),
-      	),
-				'news_publish_date_custom_format' => array(
+				'toggle_slug'			=> 'body',
+    	),
+			'news_publish_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
@@ -123,13 +253,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'news_city' => array(
 				'label'           => esc_html__( 'News Location','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a Location for this news item.','et_builder' ),
 				'depends_show_if' => 'news',
+				'toggle_slug'			=> 'body',
 			),
 		);
 
@@ -140,6 +272,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a prefix for this profile item.','et_builder' ),
 				'depends_show_if' => 'profile',
+				'toggle_slug'			=> 'body',
 			),
 			'profile_name' => array(
 				'label'           => esc_html__( 'Profile Name','et_builder' ),
@@ -147,6 +280,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a profile name for this profile item.','et_builder' ),
 				'depends_show_if' => 'profile',
+				'toggle_slug'			=> 'header',
 			),
 			'profile_image_align' => array(
 				'label'             => esc_html__( 'Image Alignment', 'et_builder' ),
@@ -158,6 +292,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'profile',
 				'description' => 'Alignment for the featured profile image',
+				'toggle_slug'			=> 'style',
 			),
 			'profile_career' => array(
 				'label'             => esc_html__( 'Career', 'et_builder' ),
@@ -169,19 +304,22 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'profile',
 				'description' => 'Job related fields',
-				'affects' => array('profile_career_title', 'profile_career_position')
+				'affects' => array('profile_career_title', 'profile_career_position'),
+				'toggle_slug'			=> 'body',
 			),
 			'profile_career_title' => array(
 				'label'           => esc_html__( 'Title','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'profile_career_position' => array(
 				'label'           => esc_html__( 'Position','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'profile_additional_fields' => array(
 				'label'             => esc_html__( 'Additional List Fields', 'et_builder' ),
@@ -193,27 +331,31 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'profile',
 				'description' => 'Additional information for the Post List.',
-				'affects' => array('profile_career_line_1', 'profile_career_line_2', 'profile_career_line_3')
+				'affects' => array('profile_career_line_1', 'profile_career_line_2', 'profile_career_line_3'),
+				'toggle_slug'			=> 'body',
 			),
 			'profile_career_line_1' => array(
 				'label'           => esc_html__( 'Line 1','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'profile_career_line_2' => array(
 				'label'           => esc_html__( 'Line 2','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'profile_career_line_3' => array(
 				'label'           => esc_html__( 'Line 3','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
-			);
+		);
 
 		$exam_fields = array(
 			'exam_id' => array(
@@ -222,6 +364,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter an Exam Code for this exam item.','et_builder' ),
 				'depends_show_if' => 'exam',
+				'toggle_slug'			=> 'header',
 			),
 			'exam_class' => array(
 				'label'           => esc_html__( 'Class Code','et_builder' ),
@@ -229,6 +372,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter an Class Code for this exam item.','et_builder' ),
 				'depends_show_if' => 'exam',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_status' => array(
 				'label'             => esc_html__( 'Status','et_builder' ),
@@ -240,13 +384,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'exam',
 				'description'       => esc_html__( 'Select the status for this exam item.','et_builder' ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'exam_published_date' => array(
 				'label'           => esc_html__( 'Publish Date','et_builder' ),
 				'type'            => 'date_picker',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the Publish Date for this exam item.','et_builder' ),
 				'depends_show_if' => 'exam',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_published_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -258,8 +404,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'exam',
 				'affects' => array('exam_published_date_custom_format'),
-				),
-				'exam_published_date_custom_format' => array(
+				'toggle_slug'			=> 'body',
+			),
+			'exam_published_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
@@ -267,6 +414,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
+				'toggle_slug'			=> 'body',
 				),
       'exam_final_filing_date_chooser' => array(
 				'label'           => esc_html__( 'Use Date Picker for Final Filing Date', 'et_builder' ),
@@ -278,6 +426,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'exam',
 				'affects' => array('exam_final_filing_date', 'exam_final_filing_date_picker', 'exam_final_filing_date_format'),
+				'toggle_slug'			=> 'body',
 				),
 			'exam_final_filing_date' => array(
 				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
@@ -285,6 +434,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the Final Filing Date for this exam item.','et_builder' ),
 				'depends_show_if' => 'off',
+				'toggle_slug'			=> 'body',
 			),
       'exam_final_filing_date_picker' => array(
 				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
@@ -292,6 +442,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the Final Filing Date for this exam item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
       'exam_final_filing_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -303,7 +454,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'on',
 				'affects' => array('exam_final_filing_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'exam_final_filing_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -313,7 +465,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'exam_type' => array(
 				'label'             => esc_html__( 'Exam Type','et_builder' ),
 				'type'              => 'select',
@@ -324,6 +477,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'exam',
 				'affects' => array('exam_url', 'exam_address', 'exam_city',  'exam_state', 'exam_zip'),
+				'toggle_slug'			=> 'body',
 			),
 			'exam_url' => array(
 				'label'           => esc_html__( 'URL','et_builder' ),
@@ -332,6 +486,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter the URL for this exam item. (http:// must be included)','et_builder' ),
 				'depends_show_if' => 'exam',
 				'depends_show_if_not' => 'location',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_address' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
@@ -339,6 +494,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter address for this job item.','et_builder' ),
 				'depends_show_if' => 'location',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_city' => array(
 				'label'           => esc_html__( 'City','et_builder' ),
@@ -346,6 +502,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter city for this job item.','et_builder' ),
 				'depends_show_if' => 'location',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_state' => array(
 				'label'           => esc_html__( 'State','et_builder' ),
@@ -353,6 +510,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter state for this job item.','et_builder' ),
 				'depends_show_if' => 'location',
+				'toggle_slug'			=> 'body',
 			),
 			'exam_zip' => array(
 				'label'           => esc_html__( 'Zip','et_builder' ),
@@ -360,10 +518,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter zip code for this job item.','et_builder' ),
 				'depends_show_if' => 'location',
+				'toggle_slug'			=> 'body',
 			),
-
-
-			);
+		);
 
 		$course_fields = array(
 			'show_course_presenter' => array(
@@ -375,13 +532,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'course',
-				'affects' => array('course_presenter_name', 'course_presenter_image', 'course_presenter_bio' )
+				'affects' => array('course_presenter_name', 'course_presenter_image', 'course_presenter_bio' ),
+				'toggle_slug'			=> 'body',
 			),
 			'course_presenter_name' => array(
 				'label'           => esc_html__( 'Name','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_presenter_image' => array(
 				'label'              => esc_html__( 'Image', 'et_builder' ),
@@ -391,12 +550,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
 				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_presenter_bio' => array(
 				'label'           => esc_html__( 'Short Bio','et_builder' ),
 				'type'            => 'textarea',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_start_date' => array(
 				'label'           => esc_html__( 'Start Date','et_builder' ),
@@ -404,6 +565,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter start date for this course item.','et_builder' ),
 				'depends_show_if' => 'course',
+				'toggle_slug'			=> 'body',
 			),
 			'course_start_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -415,7 +577,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'course',
 				'affects' => array('course_start_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'course_start_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -424,13 +587,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'course_end_date' => array(
 				'label'           => esc_html__( 'End Date','et_builder' ),
 				'type'            => 'date_picker',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter end date for this course item.','et_builder' ),
 				'depends_show_if' => 'course',
+				'toggle_slug'			=> 'body',
 			),
       'course_end_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -442,7 +607,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'course',
 				'affects' => array('course_end_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'course_end_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -451,7 +617,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'show_course_address' => array(
 				'label'             => esc_html__( 'Course Location', 'et_builder' ),
 				'type'              => 'yes_no_button',
@@ -461,7 +628,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'course',
-				'affects' => array('course_address', 'course_city',  'course_state', 'course_zip')
+				'affects' => array('course_address', 'course_city',  'course_state', 'course_zip'),
+				'toggle_slug'			=> 'body',
 			),
 			'course_address' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
@@ -469,6 +637,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Course address for this course item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_city' => array(
 				'label'           => esc_html__( 'City','et_builder' ),
@@ -476,6 +645,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Course city for this course item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_state' => array(
 				'label'           => esc_html__( 'State','et_builder' ),
@@ -483,6 +653,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Course state for this course item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_zip' => array(
 				'label'           => esc_html__( 'Zip','et_builder' ),
@@ -490,6 +661,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Course zip code for this course item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'course_registration_type' => array(
 				'label'             => esc_html__( 'Registration Type','et_builder' ),
@@ -497,6 +669,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category'   => 'basic_option',
 				'description'       => esc_html__( 'Enter a registration type for this course item.','et_builder' ),
 				'depends_show_if' => 'course',
+				'toggle_slug'			=> 'body',
 				),
 			'course_cost' => array(
 				'label'           => esc_html__( 'Cost','et_builder' ),
@@ -504,6 +677,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Course Cost for this course item.','et_builder' ),
 				'depends_show_if' => 'course',
+				'toggle_slug'			=> 'body',
 			),
 			'show_course_map' => array(
 				'label'             => esc_html__( 'Course Map', 'et_builder' ),
@@ -514,6 +688,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'course',
+				'toggle_slug'			=> 'body',
 			),
 		);
 
@@ -524,6 +699,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'event',
 				'description'     => esc_html__( 'Enter the name of the organizer.','et_builder' ),
+				'toggle_slug'			=> 'body',
 			),
 			'show_event_presenter' => array(
 				'label'             => esc_html__( 'Presenter', 'et_builder' ),
@@ -534,13 +710,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'event',
-				'affects' => array('event_presenter_name', 'event_presenter_image', 'event_presenter_bio' )
+				'affects' => array('event_presenter_name', 'event_presenter_image', 'event_presenter_bio' ),
+				'toggle_slug'			=> 'body',
 			),
 			'event_presenter_name' => array(
 				'label'           => esc_html__( 'Name','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 				'event_presenter_image' => array(
 				'label'              => esc_html__( 'Image', 'et_builder' ),
@@ -550,12 +728,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
 				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_presenter_bio' => array(
 				'label'           => esc_html__( 'Short Bio','et_builder' ),
 				'type'            => 'textarea',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_start_date' => array(
 				'label'           => esc_html__( 'Start Date','et_builder' ),
@@ -563,6 +743,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter start date for this event item.','et_builder' ),
 				'depends_show_if' => 'event',
+				'toggle_slug'			=> 'body',
 			),
       'event_start_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -574,7 +755,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'event',
 				'affects' => array('event_start_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'event_start_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -583,13 +765,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'event_end_date' => array(
 				'label'           => esc_html__( 'End Date','et_builder' ),
 				'type'            => 'date_picker',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter end date for this event item.','et_builder' ),
 				'depends_show_if' => 'event',
+				'toggle_slug'			=> 'body',
 			),
       'event_end_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -601,7 +785,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'event',
 				'affects' => array('event_end_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'event_end_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -610,7 +795,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'show_event_address' => array(
 				'label'             => esc_html__( 'Event Location', 'et_builder' ),
 				'type'              => 'yes_no_button',
@@ -620,7 +806,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'event',
-				'affects' => array('event_address', 'event_city',  'event_state', 'event_zip')
+				'affects' => array('event_address', 'event_city',  'event_state', 'event_zip'),
+				'toggle_slug'			=> 'body',
 			),
 			'event_address' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
@@ -628,6 +815,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Event address for this event item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_city' => array(
 				'label'           => esc_html__( 'City','et_builder' ),
@@ -635,6 +823,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Event city for this event item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_state' => array(
 				'label'           => esc_html__( 'State','et_builder' ),
@@ -642,6 +831,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Event state for this event item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_zip' => array(
 				'label'           => esc_html__( 'Zip','et_builder' ),
@@ -649,6 +839,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Event zip code for this event item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'event_registration_type' => array(
 				'label'             => esc_html__( 'Registration Type','et_builder' ),
@@ -656,6 +847,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category'   => 'basic_option',
 				'description'       => esc_html__( 'Enter a registration type for this event item.','et_builder' ),
 				'depends_show_if' => 'event',
+				'toggle_slug'			=> 'body',
 				),
 			'event_cost' => array(
 				'label'           => esc_html__( 'Cost','et_builder' ),
@@ -663,6 +855,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Event Cost for this event item.','et_builder' ),
 				'depends_show_if' => 'event',
+				'toggle_slug'			=> 'body',
 			),
 		);
 
@@ -677,7 +870,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'jobs',
 				'affects' => array('job_agency_name', 'job_agency_address', 'job_agency_city',
-													'job_agency_state', 'job_agency_zip', 'job_agency_about',)
+													'job_agency_state', 'job_agency_zip', 'job_agency_about',),
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_name' => array(
 				'label'           => esc_html__( 'Agency Name','et_builder' ),
@@ -685,6 +879,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter an Agency Name for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_address' => array(
 				'label'           => esc_html__( 'Agency Address','et_builder' ),
@@ -692,6 +887,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Agency address for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_city' => array(
 				'label'           => esc_html__( 'Agency City','et_builder' ),
@@ -699,6 +895,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Agency city for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_state' => array(
 				'label'           => esc_html__( 'Agency State','et_builder' ),
@@ -706,6 +903,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Agency state for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_zip' => array(
 				'label'           => esc_html__( 'Agency Zip','et_builder' ),
@@ -713,6 +911,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Agency zip code for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_agency_about' => array(
 				'label'           => esc_html__( 'About Agency','et_builder' ),
@@ -720,6 +919,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter information about the Agency for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_hours' => array(
 				'label'           => esc_html__( 'Job Hours','et_builder' ),
@@ -727,6 +927,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter job hours for this job item.','et_builder' ),
 				'depends_show_if' => 'jobs',
+				'toggle_slug'			=> 'body',
 			),
 			'show_job_salary' => array(
 				'label'             => esc_html__( 'Salary', 'et_builder' ),
@@ -737,19 +938,22 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'jobs',
-				'affects' => array('job_salary_min', 'job_salary_max', )
+				'affects' => array('job_salary_min', 'job_salary_max', ),
+				'toggle_slug'			=> 'body',
 			),
 			'job_salary_min' => array(
 				'label'           => esc_html__( 'Minimum Salary','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_salary_max' => array(
 				'label'           => esc_html__( 'Maximum Salary','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_posted_date' => array(
 				'label'           => esc_html__( 'Date Posted','et_builder' ),
@@ -757,6 +961,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter posted date for this job item.','et_builder' ),
 				'depends_show_if' => 'jobs',
+				'toggle_slug'			=> 'body',
 			),
       'job_posted_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -768,8 +973,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'jobs',
 				'affects' => array('job_posted_date_custom_format'),
-				),
-				'job_posted_date_custom_format' => array(
+				'toggle_slug'			=> 'body',
+			),
+			'job_posted_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
@@ -777,13 +983,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'job_position_number' => array(
 				'label'           => esc_html__( 'Position Number','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a position number for this job item.','et_builder' ),
 				'depends_show_if' => 'jobs',
+				'toggle_slug'			=> 'body',
 			),
 			'job_rpa_number' => array(
 				'label'           => esc_html__( 'RPA Number','et_builder' ),
@@ -791,6 +999,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a rpa number for this job item.','et_builder' ),
 				'depends_show_if' => 'jobs',
+				'toggle_slug'			=> 'body',
 			),
 			'job_ds_url' => array(
 				'label'           => esc_html__( 'Duty Statement (URL)','et_builder' ),
@@ -798,6 +1007,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the duty statement\'s url link for this job item. (http:// must be included)','et_builder' ),
 				'depends_show_if' => 'jobs',
+				'toggle_slug'			=> 'body',
 			),
       'job_final_filing_date_chooser' => array(
 				'label'           => esc_html__( 'Use Date Picker for Final Filing Date', 'et_builder' ),
@@ -809,6 +1019,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'jobs',
 				'affects' => array('job_final_filing_date', 'job_final_filing_date_picker', 'job_final_filing_date_format'),
+				'toggle_slug'			=> 'body',
 				),
 			'job_final_filing_date' => array(
 				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
@@ -816,6 +1027,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the final filing date for this job item.','et_builder' ),
 				'depends_show_if' => 'off',
+				'toggle_slug'			=> 'body',
 			),
       'job_final_filing_date_picker' => array(
 				'label'           => esc_html__( 'Final Filing Date','et_builder' ),
@@ -823,6 +1035,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter the Final Filing Date for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
       'job_final_filing_date_format' => array(
 				'label'           => esc_html__( 'Custom Date Format', 'et_builder' ),
@@ -834,7 +1047,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'on',
 				'affects' => array('job_final_filing_date_custom_format'),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'job_final_filing_date_custom_format' => array(
 				'label'           => esc_html__( 'Pattern', 'et_builder' ),
 				'type'            => 'text',
@@ -843,7 +1057,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'     => et_get_safe_localization(
 																		sprintf( __( 'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder' ),
 																						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' ) ) ),
-				),
+				'toggle_slug'			=> 'body',
+			),
 			'show_job_apply_to' => array(
 				'label'             => esc_html__( 'Apply to', 'et_builder' ),
 				'type'              => 'yes_no_button',
@@ -854,7 +1069,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'jobs',
 				'affects' => array('job_apply_to_dept','job_apply_to_name','job_apply_to_address', 'job_apply_to_city',
-													'job_apply_to_state','job_apply_to_zip')
+													'job_apply_to_state','job_apply_to_zip'),
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_dept' => array(
 				'label'           => esc_html__( 'Department','et_builder' ),
@@ -862,6 +1078,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Department Name for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_name' => array(
 				'label'           => esc_html__( 'Contact Name','et_builder' ),
@@ -869,6 +1086,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact Name for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_address' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
@@ -876,6 +1094,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact address for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_city' => array(
 				'label'           => esc_html__( 'City','et_builder' ),
@@ -883,6 +1102,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact city for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_state' => array(
 				'label'           => esc_html__( 'State','et_builder' ),
@@ -890,6 +1110,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact state for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_apply_to_zip' => array(
 				'label'           => esc_html__( 'Zip','et_builder' ),
@@ -897,6 +1118,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact zip code for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'show_job_questions' => array(
 				'label'             => esc_html__( 'Questions', 'et_builder' ),
@@ -907,7 +1129,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'on'  => esc_html__( 'Show', 'et_builder' ),
 				),
 				'depends_show_if' => 'jobs',
-				'affects' => array('job_questions_name', 'job_questions_phone', 'job_questions_email'	)
+				'affects' => array('job_questions_name', 'job_questions_phone', 'job_questions_email'	),
+				'toggle_slug'			=> 'body',
 			),
 			'job_questions_name' => array(
 				'label'           => esc_html__( 'Name','et_builder' ),
@@ -915,6 +1138,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact Name for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_questions_phone' => array(
 				'label'           => esc_html__( 'Phone Number','et_builder' ),
@@ -922,6 +1146,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact Phone Number for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 			'job_questions_email' => array(
 				'label'           => esc_html__( 'Email','et_builder' ),
@@ -929,6 +1154,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter Contact Email for this job item.','et_builder' ),
 				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'body',
 			),
 		);
 
@@ -938,6 +1164,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter additional content for this item.','et_builder' ),
+				'toggle_slug'			=> 'body',
 			),
 			'show_tags_button' => array(
 				'label'           => esc_html__( 'Tags', 'et_builder' ),
@@ -947,7 +1174,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-		),
+				'toggle_slug'			=> 'body',
+			),
 			'show_categories_button' => array(
 				'label'           => esc_html__( 'Categories', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -956,17 +1184,20 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-		),
+				'toggle_slug'			=> 'body',
+			),
 			'admin_label' => array(
 			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+				'toggle_slug'			=> 'admin_label',
 			),
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
 			  'option_category' => 'configuration',
 			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
 			'module_class' => array(
@@ -974,13 +1205,53 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 			  'type'            => 'text',
 			  'option_category' => 'configuration',
 			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+			'disabled_on' => array(
+				'label'           => esc_html__( 'Disable on', 'et_builder' ),
+				'type'            => 'multiple_checkboxes',
+				'options'         => array(
+					'phone'   => esc_html__( 'Phone', 'et_builder' ),
+					'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+					'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+				),
+				'additional_att'  => 'disable_on',
+				'option_category' => 'configuration',
+				'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+				'tab_slug'        => 'custom_css',
+				'toggle_slug'     => 'visibility',
+			),
+			'max_width' => array(
+				'label'           => esc_html__( 'Max Width', 'et_builder' ),
+				'type'            => 'skip',
+				'option_category' => 'layout',
+				'mobile_options'  => true,
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'width',
+				'validate_unit'   => true,
+			),
+			'max_width_tablet' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
+			),
+			'max_width_phone' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
+			),
+			'max_width_last_edited' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
 			),
 		);
 
 		return array_merge($fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $course_fields,  $ending_fields);
 
 	}
+
 	function shortcode_callback( $atts, $content = null, $function_name ){
 		global $post;
 
@@ -1026,7 +1297,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 		// Event Attributes
 		$event_organizer = $this->shortcode_atts['event_organizer'];
-		
+
 		$show_event_presenter = $this->shortcode_atts['show_event_presenter'];
 
 		$event_presenter_name = $this->shortcode_atts['event_presenter_name'];
@@ -1186,19 +1457,30 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$profile_image_align    = $this->shortcode_atts['profile_image_align'];
 
 		// General Attributes
+		$max_width            = $this->shortcode_atts['max_width'];
+		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
+		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
+		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
 		$show_tags_button    = $this->shortcode_atts['show_tags_button'];
-
 		$show_categories_button    = $this->shortcode_atts['show_categories_button'];
-
 		$module_id            = $this->shortcode_atts['module_id'];
-
 		$module_class         = $this->shortcode_atts['module_class'];
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
-
 		$class = "et_pb_ca_post_handler et_pb_module";
-
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+
+		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
+			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
+
+			$max_width_values = array(
+				'desktop' => $max_width,
+				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
+				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
+			);
+
+			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
+		}
 
 		setlocale(LC_MONETARY, get_locale());
 
@@ -1289,8 +1571,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
       	$event_end_date = gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) );
 
-				$organizer = sprintf('%1$s<p class="date-time">%2$s - %3$s<br />%4$s</p>', 
-														(!empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : ''), 
+				$organizer = sprintf('%1$s<p class="date-time">%2$s - %3$s<br />%4$s</p>',
+														(!empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : ''),
 														$event_start_date,  $event_end_date,  $location);
 
       	$event_registration_type =  (!empty($event_registration_type)  ?
@@ -1494,6 +1776,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
+
 		function remove_general_detail() {
 			global $post;
 
@@ -1538,10 +1821,20 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		$this->fb_support = true;
 
 		$this->whitelisted_fields = array(
-				'max_width', 'max_width_tablet', 'max_width_phone',
-				'module_class', 'module_id', 'admin_label', 'title',
-			'username', 'client_id', 'client_secret', 'definitions',
-			'per_page', 'disabled_on'
+			'max_width',
+			'max_width_tablet',
+			'max_width_phone',
+			'max_width_last_edited',
+			'module_class',
+			'module_id',
+			'admin_label',
+			'title',
+			'username',
+			'client_id',
+			'client_secret',
+			'definitions',
+			'per_page',
+			'disabled_on'
 		);
 
 		$this->fields_defaults = array(
@@ -1549,6 +1842,32 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		);
 
 		$this->main_css_element = '%%order_class%%';
+
+		$this->options_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'header' => esc_html__( 'Header', 'et_builder'),
+					'body'   => esc_html__( 'Body'  , 'et_builder'),
+				),
+			),
+			'advanced' => array(
+				'toggles' => array(
+					'text' => array(
+						'title'    => esc_html__( 'Text', 'et_builder' ),
+						'priority' => 49,
+					),
+					'width' => array(
+						'title'    => esc_html__( 'Sizing', 'et_builder' ),
+						'priority' => 65,
+					),
+				),
+			),
+			'custom_css' => array(
+				'toggles' => array(
+				),
+			),
+		);
 
 		// Custom handler: Output JS for editor preview in page footer.
 		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
@@ -1559,26 +1878,31 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			  'label'       => esc_html__( 'Title', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
+				'toggle_slug'	=> 'header',
 			),
 			'username' => array(
 			  'label'       => esc_html__( 'Username', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
 			),
 			'client_id' => array(
 			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
 			),
 			'client_secret' => array(
 			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
 			),
 			'per_page' => array(
 			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
+				'toggle_slug'	=> 'style',
 			),
 			'definitions' => array(
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
@@ -1592,6 +1916,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			    'updated_at' => esc_html__( 'Updated Date', 'et_builder' ),
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
+				'toggle_slug'	=> 'body',
 			),
 			'disabled_on' => array(
 			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -1604,17 +1929,21 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			  'additional_att'  => 'disable_on',
 			  'option_category' => 'configuration',
 			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+				'tab_slug'        => 'custom_css',
+				'toggle_slug'     => 'visibility',
 			),
 			'admin_label' => array(
 			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+				'toggle_slug'	=> 'admin_label',
 			),
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
 			  'option_category' => 'configuration',
 			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
 			'module_class' => array(
@@ -1622,6 +1951,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			  'type'            => 'text',
 			  'option_category' => 'configuration',
 			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
@@ -1652,19 +1982,22 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
 
+		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
+
 		$definitions = explode("|", $definitions);
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
+			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
+
 			$max_width_values = array(
 				'desktop' => $max_width,
-				'tablet'  => $max_width_tablet,
-				'phone'   => $max_width_phone,
+				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
+				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
 			);
 
 			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-
 		}
-		
+
 		$class = "et_pb_ca_github et_pb_module ";
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
@@ -1689,10 +2022,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					}else{
 						$name = '';
 					}
-						
-					$desc = ("on" == $definitions[2] && !empty($repo->description) ? 
+
+					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
-						
+
 					$fork = ("on" == $definitions[3] ?
 							sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') ) :
 									'');
@@ -1705,7 +2038,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 					$language =("on" == $definitions[6] ?
 											sprintf('<strong>Language: </strong>%1$s<br />', (!empty( $repo->language ) ? $repo->language : 'English' ) ) : '');
- 
+
 					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
 														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
 														(!empty($fork) ? $fork : '') , (!empty($created_at) ? $created_at : ''),
@@ -1730,7 +2063,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		function js_frontend_preview() {
 			?>
 			<script>
-						
+
 			</script>
 			<?php
 		}
