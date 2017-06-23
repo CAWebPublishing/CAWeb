@@ -1,6 +1,5 @@
 <?php
 
-add_action( 'add_meta_boxes', 'ca_register_meta_boxes' );
 
 // Register Meta Boxes
 function ca_register_meta_boxes(){
@@ -9,10 +8,15 @@ function ca_register_meta_boxes(){
 add_meta_box( 'et_ca_page_meta_box', '<span class="ca-gov-icon-pencil-edit"></span> CA Page Settings',
 		'ca_page_identifier_metabox_callback', array('page','post'),'side','high');
 
-remove_meta_box('et_settings_meta_box', array('post','page'), 'side');
+	remove_meta_box('et_settings_meta_box', array('post','page'), 'side');
 }
+add_action( 'add_meta_boxes', 'ca_register_meta_boxes' );
 
-
+function ca_nav_menu_meta_boxes(){
+	remove_meta_box('add-project_category','nav-menus', 'side');
+	remove_meta_box('add-project_tag','nav-menus', 'side');
+}
+add_action( 'admin_head-nav-menus.php', 'ca_nav_menu_meta_boxes' );
 
 /**
  * Page Option Meta box display callback.
@@ -34,27 +38,23 @@ function ca_page_identifier_metabox_callback( $post ) {
 <form action="#" method="post">
 
 <input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"
-<?php echo( get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); ?> >
-Display Title on Page </input>
+	<?php echo( get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); ?> >
+Display Title on Page
 
+	<?php if(get_option('ca_menu_selector_enabled') == true): ?>
 <p>You may display a different Navigation Menu on this page.</p>
 
 <select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-<?php
-			$page_menu = get_ca_nav_menu_theme_location($post->ID);
-	  	$locations = get_registered_ca_nav_menus();
-			unset($locations['footer-menu']);
+	<option value="megadropdown"
+			<?= ( get_post_meta($post->ID,'ca_default_navigation_menu', true) == 'megadropdown' ? 'selected="selected"' : '' ) ?>>Mega Drop</option>
+			  <option value="dropdown"
+			<?= ( get_post_meta($post->ID,'ca_default_navigation_menu', true) == 'dropdown' ? 'selected="selected"' : '' ) ?>>Drop Down</option>
+			  <option value="singlelevel"
+			<?= ( get_post_meta($post->ID,'ca_default_navigation_menu', true) == 'singlelevel' ? 'selected="selected"' : '' ) ?>>Single Level</option>
 
-	  	foreach($locations as $i => $loc){
-	    print sprintf('<option value="%1$s" %2$s>%3$s</option>',
-				$i, ($page_menu == $loc ?'selected="selected"' : ''),
-				get_ca_nav_menu_theme_location_name(-1, $i) );
-	  	}
-
-?>
 
 </select>
-
+<?php endif; ?>
 </form>
 
 
@@ -72,16 +72,17 @@ function ca_save_post_meta($post_id, $post){
   }
 
 	//skip auto save
-  	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
       		return $post_id;
-  	}
+  }
 
 
 	$option_title_display = (isset($_POST['ca_custom_post_title_display']) ? $_POST['ca_custom_post_title_display'] : '');
-		$default_nav = $_POST['ca_default_navigation_menu'];
-		//$default_nav = (isset($_POST['ca_default_navigation_menu']) ? $_POST['ca_default_navigation_menu'] : '');
-		update_post_meta($post->ID, 'ca_default_navigation_menu', $default_nav);
-		update_post_meta($post->ID, 'ca_custom_post_title_display', $option_title_display);
+	update_post_meta($post->ID, 'ca_custom_post_title_display', $option_title_display);
+
+	if(get_option('ca_menu_selector_enabled') == true){
+		update_post_meta($post->ID, 'ca_default_navigation_menu', $_POST['ca_default_navigation_menu'] );
+	}
 
 }
 add_action( 'save_post', 'ca_save_post_meta', 10, 2 );

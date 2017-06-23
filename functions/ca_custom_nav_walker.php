@@ -1,7 +1,5 @@
 <?php
 
-
-
 /*
 
   WPFront User Role Editor Plugin
@@ -11,7 +9,7 @@
   Website: wpfront.com
 
   Contact: syam@wpfront.com
-
+  
 
 
   WPFront User Role Editor Plugin is distributed under the GNU General Public License, Version 3,
@@ -44,21 +42,15 @@
 
  */
 
-
 if (!defined('ABSPATH')) {
 
     exit();
 
 }
 
-
 require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 
-
-
 if (!class_exists('CAWeb_Nav_Menu_Walker')) {
-
-
 
     /**
 
@@ -72,7 +64,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
     class CAWeb_Nav_Menu_Walker extends Walker_Nav_Menu_Edit {
 
-	
+
 
         /**
 
@@ -130,8 +122,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 		);
 
-
-
 		$original_title = '';
 
 		if ( 'taxonomy' == $item->type ) {
@@ -150,8 +140,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 		}
 
-
-
 		$classes = array(
 
 			'menu-item menu-item-depth-' . $depth,
@@ -162,11 +150,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 		);
 
-
-
 		$title = $item->title;
-
-
 
 		if ( ! empty( $item->_invalid ) ) {
 
@@ -186,19 +170,13 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 		}
 
-
-
 		$title = ( ! isset( $item->label ) || '' == $item->label ) ? $title : $item->label;
-
-
 
 		$submenu_text = '';
 
 		if ( 0 == $depth )
 
 			$submenu_text = 'style="display: none;"';
-
-
 
 		?>
 
@@ -279,8 +257,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 				</div>
 
 			</div>
-
-
 
 			<div class="menu-item-settings" id="menu-item-settings-<?php echo $item_id; ?>">
 
@@ -374,15 +350,11 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 				</p>
 
-
-
-                                <?php 
+                                <?php
 
                                 do_action( 'wp_nav_menu_item_custom_fields', $item_id, $item, $depth, $args );
 
                                 ?>
-
-
 
 				<p class="field-move hide-if-no-js description description-wide">
 
@@ -403,8 +375,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 					</label>
 
 				</p>
-
-
 
 				<div class="menu-item-actions description-wide submitbox">
 
@@ -444,8 +414,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 				</div>
 
-
-
 				<input class="menu-item-data-db-id" type="hidden" name="menu-item-db-id[<?php echo $item_id; ?>]" value="<?php echo $item_id; ?>" />
 
 				<input class="menu-item-data-object-id" type="hidden" name="menu-item-object-id[<?php echo $item_id; ?>]" value="<?php echo esc_attr( $item->object_id ); ?>" />
@@ -468,10 +436,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 	}
 
-
-
     } // Walker_Nav_Menu_Edit
-
-
 
 }

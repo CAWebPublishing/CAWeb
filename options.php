@@ -2,28 +2,46 @@
 
 // Administration Menu Setup
 function menu_setup(){
-	global $menu;
-	global $submenu;
-
-
   // Add CAWeb Options
-	add_menu_page( 'Theme Options', 'CAWeb Options', 'publish_pages', 'ca_options', 'menu_option_setup',  '',  6 );
+	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options', 'menu_option_setup',  '',  6  );
+	add_submenu_page( 'ca_options','CAWeb Options', 'Settings','manage_options', 'ca_options', 'menu_option_setup' );
 
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
-	add_submenu_page( 'ca_options','Navigation', 'Navigation','publish_pages', 'nav-menus.php', '' );
+	add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
-  // Remove Widgets Menu
-  remove_submenu_page('themes.php',  'widgets.php');
-
-  unset($submenu['themes.php'][6]);
-  unset($submenu['themes.php'][20]);
-  //remove_custom_background();
-
-  $menu[60][0] = 'Themes';
-
+  // If user is not a Network Admin 
+	if( ! current_user_can('manage_network_options')){
+		// Remove Themes Menu
+		remove_menu_page('themes.php');
+		
+		// Removal of Tools Submenu Pages
+		remove_submenu_page('tools.php','tools.php');
+		remove_submenu_page('tools.php','import.php');
+		remove_submenu_page('tools.php', 'ms-delete-site.php');
+		remove_submenu_page('tools.php', 'domainmapping');
+		remove_submenu_page('tools.php', 'php-compatibility-checker');
+		
+		// Removal of Divi Submenu Pages
+		remove_submenu_page('et_divi_options','et_divi_options');
+		remove_submenu_page('et_divi_options','customize.php?et_customizer_option_set=theme');
+		remove_submenu_page('et_divi_options','customize.php?et_customizer_option_set=module');
+		remove_submenu_page('et_divi_options','et_divi_role_editor');
+	}
+	
 }
 add_action( 'admin_menu', 'menu_setup' );
+
+// If direct access to certain menus is accessed
+// redirect to admin page
+function redirect_themes_page() {
+	if( ! current_user_can('manage_network_options')){
+		wp_redirect(get_admin_url());
+		exit;
+	}
+}
+add_action( 'load-themes.php', 'redirect_themes_page' );
+add_action( 'load-tools.php', 'redirect_themes_page' );
 
 
 // Administration Initialization
@@ -54,9 +72,9 @@ function get_ca_site_options(){
 
 	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment', 
 							'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id', 
-							'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled', 
-							'ca_breadcrumbs_enabled', 'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled',
-							'ca_google_meta_id');
+							'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',  
+							'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
+							'ca_google_meta_id', 'ca_custom_css');
 }
 
 // Returns and array of all CA Social Options
@@ -94,6 +112,9 @@ function ca_register_settings(){
 	foreach($all_ca_options as $option){
 		register_setting( 'ca_site_options', $option);
 	}
+	
+	// enable admin notices for CAWeb Options
+	settings_errors('ca_options');
 
 	// If first time settings have been registered, initialize defaults
 	if("" == get_option('caweb_initialized') ){
@@ -111,6 +132,25 @@ function ca_register_settings(){
 
 	}
 
+	// Remove the Breadcrumbs option if it had been initialized prior to v1.0.2a
+	delete_option( 'ca_breadcrumbs_enabled' ); 
+	
+	delete_option ('caweb_intranet_enabled');
+	
+	
 }
 
+// admin message hook
+function caweb_option_notices(){
+	
+	
+	// if on the caweb options page and update is made
+	if ( ( isset($_GET['page']) && isset($_GET['settings-updated']) ) ){
+			if ( ( "ca_options" == $_GET['page']  &&  true == $_GET['settings-updated'] ) ){
+			print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+		}
+	}
+	
+}
+add_action('admin_notices', 'caweb_option_notices');
 ?>

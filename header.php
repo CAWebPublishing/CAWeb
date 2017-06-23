@@ -37,7 +37,7 @@
 
 		<!-- Google Meta-->
 		<meta name="google-site-verification" content="<?php echo get_option('ca_google_meta_id'); ?>" />
-	
+
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
     <!-- selectivizr.com, emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8 -->
@@ -55,13 +55,13 @@ printf('<link rel="apple-touch-icon" sizes="72x72" href="%1$s/images/system/appl
 printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
 
 // Nokia
-printf('<link rel="shortcut icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
+//printf('<link rel="shortcut icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
 
 // Everything Else
-printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico')  );
 
 	wp_head();
 
+printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico')  );
 
 
 

@@ -2,14 +2,14 @@
 
  <!--script src="https://www.google.com/jsapi" type="text/javascript">
 
-	 //document.write(unescape("%3Cscript src='" + (("https:" == document.location.protocol) ? "https://" : "http://") + "www.google.com/jsapi' type='text/javascript'%3E%3C/script%3E"));
+	 /*document.write(unescape("%3Cscript src='" + (("https:" == document.location.protocol) ? "https://" : "http://") + "www.google.com/jsapi' type='text/javascript'%3E%3C/script%3E"));*/
 
 </script-->
 
 <script type="text/javascript" src="https://www.google.com/jsapi" >
 
-  google.load('search', '1');
-
+  google.load('search', '1', LoadCustomSearchControl);
+	/*
   google.setOnLoadCallback(function() {
 
     google.search.CustomSearchControl.attachAutoCompletion(
@@ -18,21 +18,20 @@
 
       document.getElementById('search_local_textfield'),
 
-      'local_form');
+      document.getElementById('local_form'));
 
-  });
+});*/
 
 </script>
+<gcse:search enableAutoComplete="true"></gcse:search>
 
-
-
-<form id="local_form" action="http://www.google.com/cse"> <!-- the form action will be changed using javascript -->
+<form id="local_form" action="https://www.google.com/cse" class="hidden-print"> <!-- the form action will be changed using javascript -->
 
     <div class="textfield-container">
 
         <label for="search_local_textfield" accesskey="s" class="hidden">Search this site: </label>
 
-			<input type="text" name="q" id="search_local_textfield" class="search-textfield" size="35" autocomplete="off" value="<?= (isset($_GET['q']) ? $_GET['q'] : 'Search'); ?>" onfocus="if(this.value=='Search')this.value=''" onblur="if(this.value=='')this.value='Search'" />
+			<input type="text" name="q" id="search_local_textfield" class="search-textfield" size="35" autocomplete="off"  onfocus="if(this.value=='Search')this.value=''" onblur="if(this.value=='')this.value='Search'" />
 
 
 

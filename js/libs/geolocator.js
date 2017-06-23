@@ -1,34 +1,20 @@
 jQuery(document).ready(function() {
 
-
-
   var google_map_api_key = "&key=AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE";
 
   var google_map_url = "https://maps.googleapis.com/maps/api/geocode/json?";
-
-
 
   var newLoc;
 
   var displayCities = $('.located-city-name');
 
-
-
-
-
-
-
   navigator.geolocation.getCurrentPosition(successFunc);
-
-
 
   $('.geo-lookup').on('click', function(e) {
 
     e.preventDefault();
 
     var currentCookie = getCookie("cagov__geo");
-
-
 
     if (currentCookie) {
 
@@ -40,47 +26,23 @@ jQuery(document).ready(function() {
 
     }
 
-
-
-
-
     errorCase();
 
-
-
-
-
-
-
   });
-
-
 
   function successFunc(pos) {
 
     newLoc = pos.coords.latitude + "," + pos.coords.longitude;
 
-
-
     //displayCities.html('Geo Locating...');
-
-
 
     var ajax = $.get(google_map_url + "latlng=" + newLoc +
 
       google_map_api_key);
 
-
-
     ajax.done(dataSuccess);
 
-
-
-
-
   }
-
-
 
   function errorCase() {
 
@@ -118,65 +80,35 @@ jQuery(document).ready(function() {
 
       }
 
-
-
     });
-
-
 
     $btn.on('click', function(e) {
 
       e.preventDefault();
 
-
-
       lookByZIP.call($input, e);
-
-
 
     })
 
-
-
   }
-
-
-
-
 
   function lookByZIP(e) {
 
     var zip = $(this).val();
 
-
-
     displayCities.html('Geo Locating...');
-
-
-
-
 
     var ajax = $.get(google_map_url + "address=" + zip + google_map_api_key);
 
-
-
     ajax.done(dataSuccess);
 
-
-
     ajax.fail(function() {
-
-
 
       displayCities.html('Not Found');
 
     })
 
-
-
   }
-
-
 
   function dataSuccess(data) {
 
@@ -186,15 +118,9 @@ jQuery(document).ready(function() {
 
     var state;
 
-
-
-
-
     for (var i = 0; i < address_components.length; i++) {
 
       var types = address_components[i].types;
-
-
 
       if (-1 != types.indexOf('locality') && -1 != types.indexOf(
 
@@ -204,8 +130,6 @@ jQuery(document).ready(function() {
 
       }
 
-
-
       if (-1 != types.indexOf('political') && -1 != types.indexOf(
 
           'administrative_area_level_1') && state !== "") {
@@ -214,19 +138,11 @@ jQuery(document).ready(function() {
 
       }
 
-
-
     }
-
-
 
     $("#locationSettings").collapse("hide");
 
     displayCities.html(city + ", " + state);
-
-
-
-
 
     /*$(".header-single-banner").each(function() {
 
@@ -246,15 +162,9 @@ jQuery(document).ready(function() {
 
              $(" .ask-group").fadeOut('3000', function() {
 
-
-
                $(this).css('background-image', 'url(' +
 
                  image + ')').fadeIn('3000');
-
-
-
-
 
              });
 
@@ -266,8 +176,6 @@ jQuery(document).ready(function() {
 
              $(".header-single-banner").fadeOut('3000', function() {
 
-
-
                var bgImg = $(this).css('background-image',
 
                  'url(' + image + ')').fadeIn('3000',
@@ -278,11 +186,7 @@ jQuery(document).ready(function() {
 
                  })
 
-
-
              });
-
-
 
              $(" .ask-group").css('background-image', 'url(' +
 
@@ -296,11 +200,7 @@ jQuery(document).ready(function() {
 
      });*/
 
-
-
   }
-
-
 
   function getCookie(sKey) {
 
@@ -320,10 +220,6 @@ jQuery(document).ready(function() {
 
   }
 
-
-
-
-
   function hasCookie(sKey) {
 
     if (!sKey) {
@@ -338,7 +234,4 @@ jQuery(document).ready(function() {
 
   }
 
-
-
 } );
-

@@ -7,6 +7,8 @@
     // once the images have loaded.
     var $headers = $('.available-headers');
 
+
+
     $headers.imagesLoaded(function() {
       $headers.masonry({
         itemSelector: '.default-header',
@@ -20,13 +22,20 @@
       el_name = this.name;
       event.preventDefault();
 
-      //alert(Object.keys($el));
+      var types = $el.data('option');
+      var uploader = false == $el.data('uploader') ? false : true;
+      var classes = uploader ? '' : 'hidden-upload';
+
+      if (!!types && types.includes(','))
+        types = types.split(',');
 
       // If the media frame already exists, reopen it.
       if (frame) {
         //frame.open();
         //return;
       }
+
+
 
       // Create the media frame.
       frame = wp.media.frames.customHeader = wp.media({
@@ -35,9 +44,10 @@
 
         // Tell the modal to show only images.
         library: {
-          type: $el.data('option')
+          type: types
         },
 
+        uploader: uploader,
         // Customize the submit button.
         button: {
           // Set the text of the button.
@@ -57,13 +67,33 @@
 
         var input_box = document.getElementById(el_name);
         input_box.value = attachment.attributes.url;
+      });
 
-        // Tell the browser to navigate to the crop step.
-        //window.location = link + '&file=' + attachment.id;
-        //window.location = '#';
+      frame.on('open', function() {
+        if (!uploader) {
+          var frame_count = document.getElementsByClassName(
+            'media-frame-router').length - 1;
+          var current_frame = document.getElementsByClassName(
+            'media-frame-router')[frame_count].getElementsByClassName(
+            'media-router')[0];
+
+          current_frame.getElementsByClassName('media-menu-item')[
+            1].click();
+          current_frame.getElementsByClassName('media-menu-item')[
+            0].remove();
+
+        }
       });
 
       frame.open();
+      if (!uploader) {
+        document.getElementsByClassName('media-menu-item')[2].click();
+        document.getElementsByClassName('media-menu-item')[1].style.display =
+          "none";
+      }
     });
+
   });
+
+
 }(jQuery));

@@ -23,10 +23,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 <?php endif; ?>
 
 <main class="main-primary">
-<!---- BreadCrumbing ----->
-<?php if(!is_front_page() && $post->post_type !=  "post" && get_option('ca_breadcrumbs_enabled')) : ?>
-<!--ol class="breadcrumb dynamic" ></ol-->
-<?php endif; ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
@@ -65,7 +61,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 				</article> <!-- .et_pb_post -->
 
 			<?php endwhile; ?>
-					<span class="return-top"></span>
+					<span class="return-top hidden-print"></span>
 </main>
 
 
