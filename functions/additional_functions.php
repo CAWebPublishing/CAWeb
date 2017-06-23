@@ -336,16 +336,18 @@ function et_pb_ca_font_icon_symbols( $divi_symbols = array() ){
 
 function get_icon_span($font, $style = array()){
 	if( empty($font) )
-		return get_blank_icon_span();
+		return '';
+	
 	$tmp = get_ca_icon_list();
-
-
-	if( isset( $tmp[$font] ) ){
+	
+	if( isset( $tmp[$font] ) )	
 		return sprintf('<span class="ca-gov-icon-%1$s"></span>', $font);
-	}elseif(  preg_match( "/^%%/", trim( $font ) ) ){
-			return sprintf('<span class="ca-gov-icon-">%1$s</span>',
-								 esc_attr( et_pb_process_font_icon( $font ) ) );
-
+	
+	if(  preg_match( "/^%%/", trim( $font ) ) ){
+			$font_index = preg_replace('/%%/','',$font);
+		
+			return sprintf('<span class="ca-gov-icon-%1$s"></span>',
+								 get_ca_icon_list(-1,'',true)[$font_index] );
 	}
 }
 
