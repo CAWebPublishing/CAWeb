@@ -197,16 +197,16 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
 		$content = array();
 		
 		// Get Shortcode Tag from Con and save it to Content
-    $pattern = sprintf('/\[%1$s[\d\s\w\S]*\/\]|\[(%1$s)[\d\s\w\S]*\[\/\1\]/', $tag);
+    $pattern = sprintf('/\[(%1$s)[\d\s\w\S]+?\[\/\1\]|\[(%1$s)[\d\s\w\S]+? \/\]/', $tag);
 		preg_match_all($pattern, $con, $content );
     
     if(empty($content))
       return array();
     
 		
-      $match = $content[0][0];
       $matches = $content[0];
       $objects = array();
+		
      
       foreach($matches as $match){
         $obj = array();
@@ -215,17 +215,21 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
         preg_match($pattern, $match, $tmp) ;
         
     
+				
         if(2 == count($tmp)){         
-          preg_match('/"\][\s\S]*\[/', $tmp[0], $obj['content']); 
+					
+          preg_match(sprintf('/"\][\s\S]*\[\/%1$s/', $tag), $tmp[0], $obj['content']); 
+					
           $hold = substr($tmp[0], 1, strpos($tmp[0], $obj['content'][0]) );
+					
            // Get Attributes from Shortcode
-            preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $hold, $attr);
+            preg_match_all('/\w*="[\w\s\d$:(),@?=+%\/\.\[\]\{\}-]*/', $hold, $attr);
             foreach($attr[0] as $a){
                 preg_match('/\w*/', $a, $key);
               $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
             }
          
-          $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - 3) ); 
+          $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($tag) - 4 ) ); 
         }else{
            // Get Attributes from Shortcode
             preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $tmp[0], $attr);
@@ -281,16 +285,20 @@ function get_blank_icon_span(){
   return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';
 }
 
-function caweb_get_excerpt($con, $excerpt_length){
-	if(str_word_count($con) > $excerpt_length){
-		$excerpt = str_word_count($con,1);
-		$excerpt = array_splice($excerpt,0, $excerpt_length);
-		$excerpt = implode(" ", $excerpt) . '...';
-
-		return $excerpt;
-	}else{
-		return $con;
+if( !function_exists('caweb_get_excerpt') ){
+	function caweb_get_excerpt($con, $excerpt_length){
+		if( empty($con) )
+			return $con;
+				
+		if(count( explode(" ", $con) ) > $excerpt_length){
+			$excerpt = array_splice( explode(" ", $con) , 0, $excerpt_length);
+			$excerpt = implode(" ", $excerpt) . '...';
+	
+			return $excerpt;
+		}else{
+			return $con;	
+		}
+	
 	}
-
 }
 ?>

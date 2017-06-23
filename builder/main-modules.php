@@ -2260,7 +2260,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
                   $date = ( !empty($date) ? sprintf('Published: <time>%1$s</time>',$date) : '');
 																									
 									
-									$element = (!empty($author) || !empty($date) ? sprintf('<div class="published">%1$s<br />%2$s</div>', $author, $date) : '');
+									$element = (!empty($author) || !empty($date) ? 
+															sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter( array($author, $date) ) ) ) : '');
 																				
 									$output .=	sprintf('<article class="news-item">%1$s<div class="info" %5$s>%2$s%3$s%4$s</div></article>',
 														$image, $news_title , $excerpt, $element , ( "on" == $view_featured_image ? 'style="padding-left: 175px;"' : '') );

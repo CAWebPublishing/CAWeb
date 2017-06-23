@@ -12,6 +12,10 @@
   padding-bottom: 0;
 }
 
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+    overflow-x: auto ;
+}
 
 #main-content {
     background-color: #fff !important;
