@@ -71,10 +71,10 @@ function get_all_ca_site_options($with_values = false){
 function get_ca_site_options(){
 
 	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment', 
-							'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id', 
-							'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',  
-							'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
-							'ca_google_meta_id', 'ca_custom_css');
+				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id', 
+				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',  
+				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
+				'ca_google_meta_id', 'ca_custom_css','ca_home_nav_link', 'ca_utility_home_icon');
 }
 
 // Returns and array of all CA Social Options

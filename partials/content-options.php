@@ -106,7 +106,12 @@
 		</th>
   <td><input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" <?= ( get_option('ca_sticky_navigation') == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-
+<tr >
+		<th scope="row"><div class="tooltip">Menu Home Link
+		<span class="tooltiptext">Adds a Home link to the header menu.</span></div>
+		</th>
+  <td><input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" <?= ( get_option('ca_home_nav_link', true) == true ? 'checked="checked"' : '' ) ?> />
+  </td></tr>
 </table>
 <div class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
   <h1 class="option">Utility Header</h1>
@@ -137,6 +142,13 @@
 		<th scope="row"><div class="tooltip">Enable Geo Locator
 			<span class="tooltiptext">Displays a Geo Locator feature at the top right of each page.</span></div></th>
 		<td><input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?= ( get_option('ca_geo_locator_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
+        
+        <tr>
+		<th scope="row"><div class="tooltip">Home Link
+		<span class="tooltiptext">Adds a Home link to the utility header.</span></div>
+		</th>
+  <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
+  </td></tr>
 </table>
   </div>
 
