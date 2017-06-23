@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
 		<!-- Google Meta-->
-		<meta name="google-site-verification" content="<?php get_option('ca_google_meta_id') ;?>" />
+		<meta name="google-site-verification" content="<?php echo get_option('ca_google_meta_id'); ?>" />
 	
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
