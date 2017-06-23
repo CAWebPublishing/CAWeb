@@ -144,7 +144,7 @@ function ca_save_post_list_meta($post_id, $post){
 
 
 
-add_action( 'save_post', 'ca_save_post_list_meta', 10, 2 );
+//add_action( 'save_post', 'ca_save_post_list_meta', 10, 2 );
 
 
 
@@ -164,7 +164,7 @@ function ca_predefined_layouts() {
 
 
 
-ca_get_layouts();
+  //ca_get_layouts();
 
 }
 
