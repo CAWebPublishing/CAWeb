@@ -23,10 +23,13 @@
 
    }
 
-
-
  }
 
+function resetFavIcon(ico){
+	document.getElementById('ca_fav_ico').value = ico;
+	document.getElementById('ca_fav_ico_img').src = ico;
+	document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
+}
  function toggleOptionView(opt) {
    var opts = ['general', 'social-share', 'custom-css'];
 
@@ -61,7 +64,7 @@
 
  jQuery(document).ready(function() {
 	 $ = jQuery.noConflict();
-	 
+
    /* Navigation Page */
    // Get menu count
    var menu_count = $('#menu-to-edit').children().length;
@@ -129,6 +132,7 @@
       var types = $el.data('option');
       var uploader = false == $el.data('uploader') ? false : true;
       var classes = uploader ? '' : 'hidden-upload';
+      var icon_check = false == $el.data('icon-check') ? false : true;
 
       if (!!types && types.includes(','))
         types = types.split(',');
@@ -169,33 +173,51 @@
         var attachment = frame.state().get('selection').first(),
           link = $el.data('updateLink');
 
-        var input_box = document.getElementById(el_name);
-        input_box.value = attachment.attributes.url;
+          var filename = attachment.attributes.url.split("/");
+  				filename = filename[filename.length - 1];
+          var input_box = document.getElementById(el_name);
+          var preview_field = document.getElementById(el_name + "_img");
+          var filename_box = document.getElementById(el_name +  "_filename");
+  				 var data = {
+            'action': 'caweb_fav_icon_check',
+            'icon_url': attachment.attributes.url,
+          };
 
-        var preview_field = document.getElementById(el_name+"_img");
-        preview_field.src = attachment.attributes.url;
+          if( !icon_check){
+            input_box.value = attachment.attributes.url;
 
-        var filename_box = document.getElementById(el_name + "_filename");
-        var filename = attachment.attributes.url.split("/");
-        filename_box.value = filename[filename.length-1];
+            preview_field.src = attachment.attributes.url;
+
+            filename_box.value = filename;
+          }else{
+            jQuery.post(ajaxurl, data, function(response) {
+              if(1 == response){
+                input_box.value = attachment.attributes.url;
+
+                preview_field.src = attachment.attributes.url;
+
+                filename_box.value = filename;
+
+              }else{
+                alert("Invalid Icon Mime Type: " + filename);
+              }
+            });
+          }		
+
       });
 
       frame.on('open', function() {
         if (!uploader) {
-          var frame_count = document.getElementsByClassName('media-frame-router').length - 1;
-          var current_frame = document.getElementsByClassName('media-frame-router')[frame_count].getElementsByClassName('media-router')[0];
+         var tabs = frame.el.getElementsByClassName('media-frame-router')[0].getElementsByClassName('media-router')[0].getElementsByClassName('media-menu-item');
 
-          current_frame.getElementsByClassName('media-menu-item')[1].click();
-          current_frame.getElementsByClassName('media-menu-item')[0].remove();
+					tabs[1].click();
+					tabs[0].remove();
 
         }
       });
 
       frame.open();
-      if (!uploader) {
-        document.getElementsByClassName('media-menu-item')[2].click();
-        document.getElementsByClassName('media-menu-item')[1].style.display = "none";
-      }
+
     });
 
   });

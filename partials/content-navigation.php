@@ -31,7 +31,9 @@ if( has_nav_menu('header-menu') ){
 	$locations = get_nav_menu_locations();
 	$menu = wp_get_nav_menu_object( $locations[ 'header-menu' ] );
 	$menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
-
+	
+	
+	//		update_option('dev', $menuitems);
 	createNavMenu($menu_option , $menuitems, $ver);
 	// otherwise display error message
 }else{
@@ -40,7 +42,7 @@ if( has_nav_menu('header-menu') ){
 }
 
 // If current page is Version 5 add the Search Top Nav Link, unless an Intranet Site
-(5 == $ver && !is_caweb_intranet_site() ? print '<li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
+(5 == $ver && !is_caweb_intranet_site() ? print '<li class="nav-item"><a href="#" class="first-level-link"><span id="nav-item-search" class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
 
 
 	// if current site is a designated CAWeb Intranet Site add LogOut Button to Navigation
@@ -58,6 +60,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 
 	// Iterate thru menuitems create Top Level (first-level-link)
 	foreach($menuitems as $i => $item){
+		//_wp_menu_item_classes_by_context($item);
 		$item_meta = get_post_meta($item->ID);
 
 		// If a top level nav item,
@@ -76,8 +79,8 @@ function createNavMenu($menu_option , $menuitems, $ver){
 			$icon = (!empty($icon) ? get_ca_icon_span($icon) : get_blank_icon_span() );
 			// Create Link
 			$nav_item = ' ';
-			$nav_item .= sprintf('<li class="nav-item"><a href="%1$s" class="first-level-link">%2$s%3$s</a>',
-					$item->url, $icon,  $item->title);
+			$nav_item .= sprintf('<li class="nav-item %1$s %2$s"><a href="%3$s" class="first-level-link">%4$s%5$s</a>',
+													'','',$item->url, $icon,  $item->title);
 
 
 			// If there are child links create the sub-nav

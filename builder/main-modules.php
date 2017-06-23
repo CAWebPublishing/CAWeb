@@ -26,7 +26,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'panel_layout' => array(
-				'label'             => esc_html__( 'Panel Style','et_builder' ),
+				'label'             => esc_html__( 'Style','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -58,14 +58,14 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
 			),
 			'heading_text_color' => array(
-				'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'depends_show_if' => 'none',
 			),
 			'use_icon' => array(
-				'label'           => esc_html__( 'Use a Heading Icon', 'et_builder' ),
+				'label'           => esc_html__( 'Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -86,7 +86,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 			),
 			'show_button' => array(
-				'label'           => esc_html__( 'Show Read More Button', 'et_builder' ),
+				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -282,7 +282,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'card_layout' => array(
-				'label'             => esc_html__( 'Card Style','et_builder' ),
+				'label'             => esc_html__( 'Style','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -319,7 +319,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 				'affects' => array('#et_pb_featured_image',),
 			),
 			'featured_image' => array(
-					'label' => esc_html__( 'Set Featured Image', 'et_builder' ),
+					'label' => esc_html__( 'Featured Image', 'et_builder' ),
 					'type' => 'upload',
 					'option_category' => 'basic_option',
 					'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
@@ -329,7 +329,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 					'depends_show_if' => 'on',
 					),
 					'include_header' => array(
-						'label'           => esc_html__( 'Include Header', 'et_builder' ),
+						'label'           => esc_html__( 'Header', 'et_builder' ),
 						'type'            => 'yes_no_button',
 						'option_category' => 'configuration',
 						'options'         => array(
@@ -339,7 +339,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 						'affects' => array('#et_pb_title',),
 					),
 			'title' => array(
-				'label'           => esc_html__( 'Card Title','et_builder' ),
+				'label'           => esc_html__( 'Title','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a title for the card.','et_builder' ),
@@ -351,7 +351,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 					'description'     => esc_html__( 'Here you can create the content that will be used within the card.','et_builder' ),
 			),
 			'show_button' => array(
-					'label'           => esc_html__( 'Display a button', 'et_builder' ),
+					'label'           => esc_html__( 'Button', 'et_builder' ),
 					'type'            => 'yes_no_button',
 					'option_category' => 'configuration',
 					'options'         => array(
@@ -374,7 +374,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 					'description'     => esc_html__( 'Here you can enter the URL for the location. (http:// must be included)','et_builder' ),
 				),
 			'include_footer' => array(
-						'label'           => esc_html__( 'Display a footer', 'et_builder' ),
+						'label'           => esc_html__( 'Footer', 'et_builder' ),
 						'type'            => 'yes_no_button',
 						'option_category' => 'configuration',
 						'options'         => array(
@@ -539,7 +539,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'location_layout' => array(
-				'label'             => esc_html__( 'Location Style','et_builder' ),
+				'label'             => esc_html__( 'Style','et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -598,7 +598,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter an zip.','et_builder' ),
 			),
 			'show_contact' => array(
-				'label'           => esc_html__( 'Enter contact information', 'et_builder' ),
+				'label'           => esc_html__( 'Contact information', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -622,7 +622,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 			'depends_show_if' => "on",
 		),
 			'show_icon' => array(
-				'label'           => esc_html__( 'Display an icon', 'et_builder' ),
+				'label'           => esc_html__( 'Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -643,7 +643,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'depends_show_if' => 'on',
 			),
 			'show_button' => array(
-				'label'           => esc_html__( 'Display a button', 'et_builder' ),
+				'label'           => esc_html__( 'Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -831,7 +831,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 		'section_background_color' => array(
-				'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -843,7 +843,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				'description' => esc_html__( 'Define the title for the section.', 'et_builder' ),
 					),
 					'heading_text_color' => array(
-						'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+						'label'             => esc_html__( 'Text Color', 'et_builder' ),
 						'type'              => 'color-alpha',
 						'custom_color'      => true,
 						'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
@@ -860,7 +860,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 							'depends_show_if' => 'off',
 					),
 		'featured_image_button' => array(
-				'label'           => esc_html__( 'Show Feature Image', 'et_builder' ),
+				'label'           => esc_html__( 'Featured Image', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -873,7 +873,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				),
 		),
 		'left_right_button' => array(
-				'label'           => esc_html__( 'Image Position Left/Right', 'et_builder' ),
+				'label'           => esc_html__( 'Image Position', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -882,7 +882,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				),
 		),
 		'section_image' => array(
-				'label' => esc_html__( 'Section Image', 'et_builder' ),
+				'label' => esc_html__( 'Image', 'et_builder' ),
 				'type' => 'upload',
 				'option_category' => 'basic_option',
 				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
@@ -900,13 +900,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				),
 			),
 		'section_background_color' => array(
-				'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 			),
 		'show_more_button' => array(
-				'label'           => esc_html__( 'Show More Information Button', 'et_builder' ),
+				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -925,7 +925,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 			),
 		'section_content' => array(
-				'label'           => esc_html__( 'Section Information','et_builder'),
+				'label'           => esc_html__( 'Content','et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
 			'description'     => esc_html__( 'Here you can create the content that will be used within the module.','et_builder' ),
@@ -1075,7 +1075,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 		'section_background_color' => array(
-				'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -1217,25 +1217,25 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'heading_color' => array(
-				'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
+				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 			),
 			'text_color' => array(
-				'label'             => esc_html__( 'Set Text Color', 'et_builder' ),
+				'label'             => esc_html__( 'Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom text color for the list items.', 'et_builder' ),
 			),
 		'group_title' => array(
-			'label' => esc_html__( 'Group Title', 'et_builder' ),
+			'label' => esc_html__( 'Title', 'et_builder' ),
 			'type' => 'text',
 			'option_category' => 'basic_option',
 			'description' => esc_html__( 'Define the title for the group section.', 'et_builder' ),
 				),
 		'group_icon_button' => array(
-				'label'           => esc_html__( 'Add List Icon', 'et_builder' ),
+				'label'           => esc_html__( 'List Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1257,7 +1257,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_show_more_button' => array(
-				'label'           => esc_html__( 'Show Read More Button', 'et_builder' ),
+				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1274,7 +1274,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 		),
 		'display_link_as_button' => array(
-				'label'           => esc_html__( 'Display Links as Button', 'et_builder' ),
+				'label'           => esc_html__( 'Links as Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1283,7 +1283,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 					),
 				),
 				'group_link1_show' => array(
-				'label'           => esc_html__( 'Show Link 1', 'et_builder' ),
+				'label'           => esc_html__( 'Link 1', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1309,7 +1309,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link2_show' => array(
-				'label'           => esc_html__( 'Show Link 2', 'et_builder' ),
+				'label'           => esc_html__( 'Link 2', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1335,7 +1335,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link3_show' => array(
-				'label'           => esc_html__( 'Show Link 3', 'et_builder' ),
+				'label'           => esc_html__( 'Link 3', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1361,7 +1361,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link4_show' => array(
-				'label'           => esc_html__( 'Show Link 4', 'et_builder' ),
+				'label'           => esc_html__( 'Link 4', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1387,7 +1387,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link5_show' => array(
-				'label'           => esc_html__( 'Show Link 5', 'et_builder' ),
+				'label'           => esc_html__( 'Link 5', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1413,7 +1413,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link6_show' => array(
-				'label'           => esc_html__( 'Show Link 6', 'et_builder' ),
+				'label'           => esc_html__( 'Link 6', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1439,7 +1439,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link7_show' => array(
-				'label'           => esc_html__( 'Show Link 7', 'et_builder' ),
+				'label'           => esc_html__( 'Link 7', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1465,7 +1465,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link8_show' => array(
-				'label'           => esc_html__( 'Show Link 8', 'et_builder' ),
+				'label'           => esc_html__( 'Link 8', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1491,7 +1491,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link9_show' => array(
-				'label'           => esc_html__( 'Show Link 9', 'et_builder' ),
+				'label'           => esc_html__( 'Link 9', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1517,7 +1517,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'depends_show_if' => 'on',
 				),
 		'group_link10_show' => array(
-				'label'           => esc_html__( 'Show Link 10', 'et_builder' ),
+				'label'           => esc_html__( 'Link 10', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1748,7 +1748,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'carousel_style' => array(
-							'label'           => esc_html__( 'Carousel Style', 'et_builder' ),
+							'label'           => esc_html__( 'Style', 'et_builder' ),
 							'type'            => 'select',
 							'option_category' => 'configuration',
 							'options'         => array(
@@ -1757,7 +1757,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 							),
 				),
 		'section_background_color' => array(
-				'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
@@ -1906,7 +1906,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'description' => esc_html__( 'Define the title for the slide', 'et_builder' ),
 				),
 		'slide_show_more_button' => array(
-				'label'           => esc_html__( 'Show More Information Button', 'et_builder' ),
+				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -2006,7 +2006,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 		$this->slug = 'et_pb_ca_post_list';
 
 		$this->whitelisted_fields = array('style', 'title',
-			'all_categories_button','include_categories',
+			'all_categories_button','include_categories', 'faq_style',
 			'all_tags_button','include_tags', 'view_featured_image',
 			'posts_number', 'module_class', 'module_id',
 			'orderby', 'admin_label', 'title_size',
@@ -2022,12 +2022,12 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'title' => array(
-				'label'       => esc_html__( 'Post List Title', 'et_builder' ),
+				'label'       => esc_html__( 'Title', 'et_builder' ),
 				'type'        => 'text',
 				'description' => esc_html__( 'Enter a title for the Post List.', 'et_builder' ),
 			),
 			'title_size' => array(
-				'label'       => esc_html__( 'Module Title Size', 'et_builder' ),
+				'label'       => esc_html__( 'Title Size', 'et_builder' ),
 				'type'        => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
@@ -2038,20 +2038,32 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'description' => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
 			),
 			'style' => array(
-				'label'             => esc_html__( 'Style', 'et_builder' ),
+				'label'             => esc_html__( 'Content Type', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
 					'course-list' => esc_html__( 'Course List', 'et_builder'),
 					'events-list'  => esc_html__( 'Event List', 'et_builder' ),
 					'exams-list'  => esc_html__( 'Exam List', 'et_builder' ),
+					'faqs-list'  => esc_html__( 'FAQs List', 'et_builder' ),
 					'general-list'  => esc_html__( 'General List', 'et_builder' ),
 					'jobs-list'  => esc_html__( 'Jobs List', 'et_builder' ),
 					'news-list'  => esc_html__( 'News List', 'et_builder' ),
 					'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
-				'affects' => array('#et_pb_all_categories_button'),
+				'affects' => array('#et_pb_all_categories_button', '#et_pb_faq_style', '#et_pb_view_featured_image'),
+			),
+			'faq_style' => array(
+				'label'             => esc_html__( 'Accordion Style', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'accordion' => esc_html__( 'Accordion', 'et_builder'),
+					'toggle'  => esc_html__( 'Toggle', 'et_builder' ),
+				),
+				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
+				'depends_show_if' => 'faqs-list',
 			),
 			'posts_number' => array(
 				'label'             => esc_html__( 'Posts Number', 'et_builder' ),
@@ -2060,13 +2072,14 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'description'       => esc_html__( 'Choose how many posts you would like to display in the list. Default is all.', 'et_builder' ),
 			),
 			'view_featured_image' => array(
-				'label'           => esc_html__( 'Display Featured Image', 'et_builder' ),
+				'label'           => esc_html__( 'Featured Image', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
+				'depends_show_if_not' => 'faqs-list',
 			),
 				'all_categories_button' => array(
 				'label'           => esc_html__( 'Include All Categories', 'et_builder' ),
@@ -2103,7 +2116,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				),
 			),
 			'include_tags' => array(
-				'label'            => esc_html__( 'Select Tags', 'et_builder' ),
+				'label'            => esc_html__( 'Tags', 'et_builder' ),
 				'renderer'         => 'et_builder_include_tags_option',
 				'option_category'  => 'basic_option',
 				'renderer_options' => array(
@@ -2154,11 +2167,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$module_class         = $this->shortcode_atts['module_class'];
 
-		$title            = $this->shortcode_atts['title'];
+		$list_title            = $this->shortcode_atts['title'];
 
 		$title_size    = $this->shortcode_atts['title_size'];
 
 		$style            = $this->shortcode_atts['style'];
+
+		$faq_style            = $this->shortcode_atts['faq_style'];
 
 		$posts_number            = $this->shortcode_atts['posts_number'];
 
@@ -2180,10 +2195,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$tag_array = array();
 
-    $list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general');
-
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
+		
 		switch( $orderby ) {
 			case 'date_desc':
 					$orderby = 'date';
@@ -2239,20 +2253,23 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 			setlocale(LC_MONETARY, 'en_US.UTF-8');
 
-			if (!empty($title)){
+			if (!empty($list_title)){
 				if ('h-1' == $title_size){
-					$title = sprintf('<h1>%1$s</h1>', $title);
+					$list_title = sprintf('<h1>%1$s</h1>', $list_title);
 				}
 				elseif ('h-2' == $title_size){
-					$title = sprintf('<h2>%1$s</h2>', $title);
+					$list_title = sprintf('<h2>%1$s</h2>', $list_title);
 				}
 				elseif ('h-3' == $title_size) {
-					$title = sprintf('<h3>%1$s</h3>', $title);
+					$list_title = sprintf('<h3>%1$s</h3>', $list_title);
 				}
 			}
 
-			$output = sprintf('<div class="et_pb_ca_post_list">%1$s', ( !empty($title) ? $title : '' ));
-
+			$faqs = '';
+			$output = '';
+			global $faq_accordion_count;
+		//global $faq_count;
+			
 			foreach ($all_posts as $a=>$p){
 				if( $posts_number !== -1 && 0 == $posts_number )
 				  break;
@@ -2291,7 +2308,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
                   $date = ( !empty($date) ? sprintf('Published: <time>%1$s</time>',$date) : '');
 
-																												
+
 									$element = (!empty($author) || !empty($date) ?
 															sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter( array($author, $date) ) ) ) : '');
 
@@ -2475,10 +2492,36 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 									$posts_number--;
 								}
 								break;
+
+						// FAQs List
+						case "faqs-list":
+							
+							if ( "faqs" == $post_content_handler->post_type_layout ){
+									if("toggle" == $faq_style)
+											$faqs .= sprintf('<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $title, $post_content_handler->content );
+
+									if("accordion" == $faq_style){
+										$open_faq = empty($faq_accordion_count) || 0 === $faq_accordion_count;
+										
+										$faqs .= sprintf('<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s">
+																	<div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
+																					$posts_number, $title, (!empty($faq_accordion_count) ? $faq_accordion_count : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
+
+										$faqs .= sprintf('<div class="et_pb_toggle_content clearfix panel-body">
+											%1$s</div></div>',$post_content_handler->content	);
+										$faq_accordion_count++;
+										//$faq_count++;
+									}
+
+								
+								$posts_number--;
+							}
+							break;
+
 						// General List
 						case "general-list":
 								// if post contains a CAWeb News Post Handler
-            		//if ( "general" == $post_content_handler->post_type_layout ){
+								$list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs');
 								if ( in_array( $post_content_handler->post_type_layout, $list_types )){
 
 									$image= ( "on" == $view_featured_image ?
@@ -2504,8 +2547,28 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				} // end of if is_object check
 			}
 
-			$output .= '</div> <!-- .et_pb_ca_post_list -->';
+		global $faq_list_count;
+		
+			$class = sprintf('et_pb_module et_pb_ca_post_list panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', (!empty($faq_list_count) ? $faq_list_count : 0), (!empty($style) ? $style : ''));
+		
+		$class = esc_attr( $class );
+		$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
+		
+			if ( "faqs-list" == $style){
 
+				if("toggle" == $faq_style)
+					$output .= sprintf('<ul class="list-overstated accordion-list" style="list-style-type:none;">%1$s</ul>', $faqs);
+
+				if("accordion" == $faq_style){
+					$output .=  $faqs;
+					$faq_list_count++;
+				}
+			}
+		
+	
+			$output = sprintf('<div class="%1$s">%2$s%3$s</div> <!-- .et_pb_ca_post_list -->', $class,( !empty($list_title) ? $list_title : '' ), $output );
+
+			$faq_accordion_count = 0;
 			return $output;
 
 	}

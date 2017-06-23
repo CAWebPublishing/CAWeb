@@ -81,17 +81,14 @@ printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
 <!-- Version 4 top-right search box always displayed -->
 <!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
 <?php
+$search = ( ca_version_check(5.0, $post_id) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
-printf('<div id="head-search" class="search-container %1$s hidden-print">',
-( ca_version_check(5.0, $post_id) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': ''));
+printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</div>', 
+			$search, ("page-templates/searchpage.php" != get_page_template_slug( $post_id) ?
+								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp') ) : '') );
 
-if("page-templates/searchpage.php" != get_page_template_slug( $post_id) ){
-require_once (get_stylesheet_directory() ."/ssi/search.html");
-}
-          ?>
-<?php
-print '</div>';
 ?>
+					
           <!-- Include Navigation -->
 
 	          <?php get_template_part('partials/content', 'navigation');?>

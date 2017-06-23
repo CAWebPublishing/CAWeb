@@ -3,7 +3,7 @@
 // Administration Menu Setup
 function menu_setup(){
   // Add CAWeb Options
-	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options', 
+	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
 								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
 	add_submenu_page( 'ca_options','CAWeb Options', 'Settings','manage_options', 'ca_options', 'menu_option_setup' );
 
@@ -49,7 +49,7 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 function admin_ca_init(){
 	ca_register_settings();
 
-	
+
 }
 add_action( 'admin_init', 'admin_ca_init' );
 
@@ -157,4 +157,28 @@ function caweb_option_notices(){
 
 }
 add_action('admin_notices', 'caweb_option_notices');
+/*
+	Check the Binary Signature of a file
+	currently only checking for icon 
+
+	Living Standard on Mime Sniffing
+	https://mimesniff.spec.whatwg.org/#image-type-pattern-matching-algorithm
+
+	File checker
+	http://asecuritysite.com/forensics/ico
+*/
+function caweb_fav_icon_checker(){
+	$url = $_POST['icon_url'];
+	
+	$handle = rawurlencode( file_get_contents( $url ) ) ; 
+	$handle = array_splice( array_filter( explode('%',  $handle) ), 0, 4);
+	$handle = implode("", $handle);
+	
+	if("00000100" == $handle)
+		print true;
+	
+	print false ;	
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
 ?>
