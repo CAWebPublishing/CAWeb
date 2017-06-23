@@ -23,9 +23,9 @@
       event.preventDefault();
 
       var types = $el.data('option');
-      var uploader = false == $el.data('uploader') ? false : true;
+       var uploader =  $el.data('uploader') ;
       var classes = uploader ? '' : 'hidden-upload';
-			var icon_check = false == $el.data('icon-check') ? false : true;
+			var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
 
       if (!!types && types.indexOf(',') > 0 )
         types = types.split(',');
@@ -100,12 +100,9 @@
 
       frame.on('open', function() {
         if (!uploader) {
-          var tabs = frame.el.getElementsByClassName(
-            'media-frame-router')[0].getElementsByClassName(
-            'media-router')[0].getElementsByClassName(
-            'media-menu-item');
+         var tabs = frame.el.getElementsByClassName('media-frame-router')[0].getElementsByClassName('media-router')[0].getElementsByClassName('media-menu-item');
 
-          tabs[1].click();
+					tabs[1].click();
           tabs[0].parentNode.removeChild(tabs[0]);
 
         }

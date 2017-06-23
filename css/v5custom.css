@@ -39,16 +39,6 @@ ul.utility-links.social-media-links {
 }
 /* End of Utility Header */
 
-/* Navigation and the List are set to auto width
-and the nav links float to the right */
-/*#navigation{
-  		width: 100%;
-  		padding: 0;
-}*/
-
-.top-level-nav{
-  margin-right: -8px;
-}
 @media (min-width: 768px){
   .utility-links{
     margin-right: -8px;
@@ -62,7 +52,8 @@ and the nav links float to the right */
 }
 #nav_list{
     width: auto;
-    float: right;
+	 float: right; 
+    margin-right: -8px;
 }
 .sub-nav{
 	left:  0;

@@ -5,6 +5,16 @@
 	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-theme-upgrader.php
 	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 */
+if(!class_exists('Theme_Upgrader') ){
+      /** Theme_Upgrader class */
+    	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+      /** Theme_Upgrader class */
+    	require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
+    
+    
+}
+
+
 final class caweb_auto_update{
 			/**
 			* The Themes current version
@@ -61,20 +71,25 @@ final class caweb_auto_update{
 
 				//Define the alternative response for download_package which gets called during theme upgrade
 				add_filter('upgrader_pre_download', array($this, 'download_package'), 10 , 3 );
+				
 			}
 
 		// Alternative theme download for the WordPress Updater
 		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 		public function download_package( $reply, $package ,  $upgrader ){
-			$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
-			// Now use the standard PHP file functions
-			$fp = fopen(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name)  , "w");
-				fwrite($fp, $theme);
-			fclose($fp);
+			if(isset($upgrader->skin->theme_info) && $upgrader->skin->theme_info->get('Name') == $this->theme_name){
 
-			return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
+				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
+				// Now use the standard PHP file functions
+				$fp = fopen(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name)  , "w");
+					fwrite($fp, $theme);
+				fclose($fp);
+				
+				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
+			}
+			return $reply;
 		}
-
+	
 		//alternative API for updating checking
 		public function check_update($update_transient){
 				$caweb_update_themes = get_site_transient( $this->transient_name );
@@ -96,12 +111,17 @@ final class caweb_auto_update{
 						$obj['package'] = $this->getLatest_version();
 						$theme_response = array($this->theme_name => $obj);
 
-						$last_update->response = $theme_response;
+						$last_update->response = (isset($caweb_update_themes->response) ? 
+													$theme_response + $caweb_update_themes->response : 
+													$theme_response);
+													
 						$last_update->last_checked = time();
 						set_site_transient($this->transient_name, $last_update);
-					}else{
-						delete_site_transient($this->transient_name);
+					}elseif( isset($caweb_update_themes->response[$this->theme_name]) ){
+						unset($caweb_update_themes->response[$this->theme_name]);
+						set_site_transient($this->transient_name, $caweb_update_themes);
 					}
+					
 
 					return $update_transient;
 
