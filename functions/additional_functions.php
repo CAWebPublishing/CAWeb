@@ -18,7 +18,7 @@ function ca_version_check($version, $post_id = -1){
 	return $result;
 }
 
-function ca_get_version($post_id){
+function ca_get_version($post_id = -1){
 	switch(get_page_template_slug($post_id)){
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -48,7 +48,7 @@ if( !function_exists('is_valid_date') ){
 				$tmp = preg_split('/\D/', $checkdate);
 				if(3 != count($tmp) || !checkdate($tmp[0], $tmp[1], $tmp[2]) )
 					return $default;
-					
+
 				$date = date_create($checkdate);
 				if($date instanceof DateTime && "UTC" == $date->getTimezone()->getName()){
 					if( !empty($pattern) ){
@@ -72,8 +72,8 @@ if( !function_exists('is_money') ){
 
 			$checkmoney    = (is_string($checkmoney) ? str_replace(',','',$checkmoney) : $checkmoney);
 			$checkmoney    = (is_string($checkmoney) ? str_replace('$','', $checkmoney) : $checkmoney);
-			
-			setlocale(LC_MONETARY, get_locale());	
+
+			setlocale(LC_MONETARY, get_locale());
 			if(is_numeric($checkmoney))
 				return money_format($pattern,  $checkmoney);
 		}
@@ -195,41 +195,35 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
 		if( empty($con) || empty($tag) )
 			return array();
 		$content = array();
-		
+
 		// Get Shortcode Tag from Con and save it to Content
     $pattern = sprintf('/\[(%1$s)[\d\s\w\S]+?\[\/\1\]|\[(%1$s)[\d\s\w\S]+? \/\]/', $tag);
 		preg_match_all($pattern, $con, $content );
-    
+
     if(empty($content))
       return array();
-    
-		
+
       $matches = $content[0];
       $objects = array();
-		
-     
+
       foreach($matches as $match){
         $obj = array();
         $attr = array();
         $tmp = array();
         preg_match($pattern, $match, $tmp) ;
-        
-    
-				
-        if(2 == count($tmp)){         
-					
-          preg_match(sprintf('/"\][\s\S]*\[\/%1$s/', $tag), $tmp[0], $obj['content']); 
-					
+
+
+        if(2 == count($tmp)){
+          preg_match(sprintf('/"\][\s\S]*\[\/%1$s/', $tag), $tmp[0], $obj['content']);
           $hold = substr($tmp[0], 1, strpos($tmp[0], $obj['content'][0]) );
-					
            // Get Attributes from Shortcode
             preg_match_all('/\w*="[\w\s\d$:(),@?=+%\/\.\[\]\{\}-]*/', $hold, $attr);
             foreach($attr[0] as $a){
                 preg_match('/\w*/', $a, $key);
               $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
             }
-         
-          $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($tag) - 4 ) ); 
+
+          $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($tag) - 4 ) );
         }else{
            // Get Attributes from Shortcode
             preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $tmp[0], $attr);
@@ -237,17 +231,17 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
                 preg_match('/\w*/', $a, $key);
               $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
             }
-          
+
           	$obj['content'] = '';
         }
-        
+
         $objects[] =  (object) $obj ;
       }
-      
+
       if($all_matches)
         return $objects;
-      
-			return $objects[0];
+
+		return (!empty($objects) ? $objects[0] : array() );
 	}
 }
 
@@ -273,7 +267,7 @@ function get_ca_icon_list(){
 			'caret-line-two-up', 'caret-line-two-down', 'caret-line-right', 'caret-line-left', 'caret-line-up', 'caret-line-down', 'important-line', 'info-line',
 			'check-line', 'question-line', 'close-line', 'plus-line', 'minus-line', 'question', 'minus-mark', 'plus-mark', 'collapse', 'expand', 'check-mark', 'close-mark',
 			'triangle-right', 'triangle-left', 'triangle-up', 'triangle-down', 'caret-two-right', 'caret-two-left', 'caret-two-down', 'caret-two-up', 'caret-right', 'caret-left',
-			'caret-up', 'caret-down', 'filter');
+			'caret-up', 'caret-down', 'filter', 'caweb');
 
 
 
@@ -289,16 +283,16 @@ if( !function_exists('caweb_get_excerpt') ){
 	function caweb_get_excerpt($con, $excerpt_length){
 		if( empty($con) )
 			return $con;
-				
+
 		if(count( explode(" ", $con) ) > $excerpt_length){
 			$excerpt = array_splice( explode(" ", $con) , 0, $excerpt_length);
 			$excerpt = implode(" ", $excerpt) . '...';
-	
+
 			return $excerpt;
 		}else{
 			return $con;	
 		}
-	
+
 	}
 }
 ?>

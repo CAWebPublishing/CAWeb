@@ -115,7 +115,8 @@ ul.menu-icon-list li:hover{
 }
 
 .header_ca_branding_option, .ca_fav_ico_option, .header_ca_background_option{
-  height: 150px;
+	min-height: 1px;
+  max-height: 150px;
   padding-left: 2px;
   padding-top: 5px;
 }

@@ -4,6 +4,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$this->name = esc_html__( 'Post Detail', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_post_handler';
+		$this->post_types = array('post');
 
 		$this->whitelisted_fields = array(
 			'post_type_layout', 'show_tags_button', 'show_categories_button', 'content_new', 'module_class', 'module_id', 'admin_label',
@@ -1472,10 +1473,18 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		return $output;
 
 	}
-// This is a non-standard function. It outputs JS code to render the
+		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function remove_general_detail() {
+			global $post;
+			
+			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
+			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_post_handler');
+			
+			if( empty($module) || "general" !== $module->post_type_layout ){
+				return;
+			}else{
 			?>
            <script>
 		   	var detail = document.getElementById('general_post_detail').parentNode;
@@ -1496,6 +1505,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 			</script>
             <?php
 		}
+	}
 			
 }
 new ET_Builder_Module_CAWeb_Post_Handler;

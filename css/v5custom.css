@@ -211,11 +211,16 @@ and the nav links float to the right */
 	}*/
 }
 
+.branding .header-cagov-logo img{
+  max-height: 80px;
+}
+
 @media (min-width: 1280px){
 
 /* Branding & Navigation */
    .branding .header-cagov-logo img{
     max-width: 300px;
+    max-height: 80px;
   }
   #nav_list{
     padding-left: 300px;

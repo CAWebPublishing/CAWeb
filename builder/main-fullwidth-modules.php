@@ -53,6 +53,7 @@ function get_fields() {
 		'heading_text_color' => array(
 			'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
+			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 			'depends_show_if' => 'none',
 		),
@@ -235,6 +236,10 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 
     );
 		$this->main_css_element = '%%order_class%%.et_pb_slider';
+		
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'slideshow_banner_removal' ) );
+	
 	}
 	function get_fields() {
 		$fields = array(
@@ -326,6 +331,52 @@ $scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
       esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  get_ca_icon_span($scroll_bar_icon)
 		);
 		return $output;
+	}
+	
+		// This is a non-standard function. It outputs JS code to render the
+		// module preview in the new Divi 3 frontend editor.
+		// Return value of the JS function must be full HTML code to display.
+		function slideshow_banner_removal() {
+			global $post;
+			
+			$remove = (is_object($post) ? ca_version_check(4, $post->ID) : ca_version_check(4, $post['ID'])  );
+			
+			if( !$remove )
+				return;
+			
+			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
+			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
+			
+			
+			if( empty($module)  ){
+				?>
+					<script>
+						document.body.classList.remove('primary');
+					</script>
+				<?php
+			}else{
+			?>
+           <script>
+				var banner = document.getElementById('et_pb_ca_fullwidth_banner');
+				var column = banner.parentNode;
+								 
+					if(1 == column.childElementCount){
+						var row = column.parentNode;				
+						row.removeChild(column);
+						if(0 == row.childElementCount){
+							if(1 == row.parentNode.childElementCount ){
+								row.parentNode.remove();
+							}else{
+								row.parentNode.removeChild(row);
+							}
+						}
+					}else{
+						detail.removeChild(banner);
+					}
+					
+			</script>
+            <?php
+		}
 	}
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;
@@ -485,6 +536,7 @@ $this->fullwidth       = true;
 			'section_background_color' => array(
 					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
+					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				),
 				'section_heading' => array(
@@ -496,6 +548,7 @@ $this->fullwidth       = true;
 						'heading_text_color' => array(
 							'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
 							'type'              => 'color-alpha',
+							'custom_color'      => true,
 							'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 						),
 						'heading_align' => array(
@@ -552,6 +605,7 @@ $this->fullwidth       = true;
 			'section_background_color' => array(
 					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
+					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				),
 			'show_more_button' => array(
@@ -719,6 +773,7 @@ $this->fullwidth = true;
 			'section_background_color' => array(
 					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
+					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				),
 				'disabled_on' => array(
@@ -849,11 +904,13 @@ function get_fields() {
 		'heading_color' => array(
 			'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
+			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 		),
 		'text_color' => array(
 			'label'             => esc_html__( 'Set Text Color', 'et_builder' ),
 			'type'              => 'color-alpha',
+			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom text color for the list items.', 'et_builder' ),
 		),
 	'group_title' => array(
@@ -1376,6 +1433,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 			'section_background_color' => array(
 					'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
 					'type'              => 'color-alpha',
+					'custom_color'      => true,
 					'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				),
 				'disabled_on' => array(

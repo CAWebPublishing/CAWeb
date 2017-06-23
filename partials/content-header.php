@@ -1,46 +1,51 @@
 <?php
 global $post;
-$post_id = (is_object($post) ? $post->ID : $post['ID']);
-$c = "";
+$post_id = -1;
 $h = "";
+$con = "";
+
+if( is_object($post) ){
+	$post_id = $post->ID;
+	$con = $post->post_content;
+}elseif( is_array($post) ){
+	$post_id = $post['ID'];
+	$con = $post['post_content'];
+}
+
 $ver = ca_get_version($post_id);
-$con = ( !empty($post_id) ? get_post($post_id)->post_content : '');
+$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
 
 
 /* Filter the Header Slideshow Banner */
- if(  4 == $ver  && strpos($con, 'et_pb_ca_fullwidth_banner') > 0 ){
-
-      $startPos = strpos($con , '[et_pb_ca_fullwidth_banner_item');
-      $endPos = strpos($con , '[/et_pb_ca_fullwidth_banner]');
-		$banner = substr($con , $startPos, $endPos - $startPos);
-		 $banner = explode('[/et_pb_ca_fullwidth_banner_item]', $banner);
-		unset($banner[count($banner) - 1]);
-
-        $c = '<div class="header-slideshow-banner">
-        <div id="primary-carousel" class="carousel carousel-banner">';
-
-      foreach($banner as $i => $slide){
-        $img = retrieve_layout_attr($slide,'background_image');
-        $displaying_link = retrieve_layout_attr($slide,'display_banner_info');
-        $display_heading = retrieve_layout_attr($slide,'display_heading');
-        $link_heading = retrieve_layout_attr($slide,'heading');
-        $link_text = retrieve_layout_attr($slide,'button_text');
-        $link_url = retrieve_layout_attr($slide,'button_link');
-				$desc = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>',
-												( !empty($link_url) ? $link_url : '#'), ("" != $link_heading ? sprintf('<span class="title" %2$s>%1$s<br /></span>', $link_heading, ("off" == $display_heading ? 'style="display: none"' :'') ) : '' ), $link_text);
-
-        $c .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ',
-                                  $img, ("on" == $displaying_link ? $desc : ''));
+if(  4 == $ver  && !empty($module) ){
+			$slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
+			$carousel = '';
+	 
+      foreach($slides as $i => $slide){
+				$heading = '';
+				$info = '';
+				if("on" == $slide->display_banner_info){
+					$link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
+					
+					if(!isset($slide->display_heading) || "on" == $slide->display_heading )
+						$heading = sprintf('<span class="title">%1$s<br /></span>', $slide->heading);
+					
+					
+					$info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, $slide->button_text);
+					
+				}
+				$carousel .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ',
+													$slide->background_image, $info);
        }
 
-			$c .= '</div></div>';
-
+			$banner = sprintf('<div class="header-slideshow-banner">
+        <div id="primary-carousel" class="carousel carousel-banner">
+					%1$s</div></div>', $carousel);
 
 }elseif(4 == $ver){
-  $h = ( "" != get_option('header_ca_background') ?
-        get_option('header_ca_background') :
-       sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme'))
-);
+		$h = ( "" != get_option('header_ca_background') ? get_option('header_ca_background') :
+						sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme') )
+				);
 }
 
 printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
@@ -114,7 +119,7 @@ print '</div>';
 <?php endif; ?>
 
 
-<?php ( !empty($c) ? print $c : print '') ?>
+<?php ( !empty($banner) ? print $banner : print '') ?>
 
         <div class="header-decoration hidden-print"></div>
 
