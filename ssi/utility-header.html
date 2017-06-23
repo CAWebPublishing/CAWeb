@@ -13,8 +13,9 @@
             <div class="half">
                 <ul class="utility-links social-media-links">
                   <li> <a href="http://www.ca.gov/"  title="CA.gov" ><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" /></a></li>
-
-
+					<?php if( get_option('ca_utility_home_icon', true) ): ?>
+                    	<li> <a href="/" title="Home" ><span class="ca-gov-icon-home"></span></a></li>
+					<?php endif; ?>
                     <?php
 
 $social_share = get_ca_social_options();
