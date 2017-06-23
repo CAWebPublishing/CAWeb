@@ -1,0 +1,79 @@
+"CAWeb v1.0.3
+Date: 12/15/2016"
+-Fixed issue with fullwidth section carousel not displaying
+-Numbered and Bulleted List now indent appropriately
+-Fullwidth section primary now fully responsive
+-The Navigation Menu and Search icons have been removed from Print View
+-Full width banner text box/button has dynamic height
+-Profile Link for the Profile Banner can now be edited 
+"-The Panel Module Heading Label can now be left, centered and right justified"
+-Fixed issue with the Page Title displaying and empty line when page title is turned off.
+-New Google Meta Tag Field in CAWeb Options.
+-Navigation Menu structure has been reworked
+-Search Title has been repositioned
+-The link to the profile disappears in certain screen sizes.
+-Breadcrumbs have been removed on 404 page
+-Several unneeded features have been removed  
+-Notification message now displayed when CAWeb Options have been updated
+-Fullwidth Header Slideshow Banner can now choose to display the Slide Title 
+-Fixed issue with Navigation Header Menu Icons disappearing after saving a Navigation Footer Menu
+
+"CAWeb v1.0.2a
+Date: 12/6/2016"
+-Fixed Google Analytics code not populating on the front end.
+
+"CAWeb v1.0.2
+Date: 11/23/2016"
+-Logo is now responsive vertically
+-Alignment of the CA.gov and the Logo are now the same for all pages
+-Text on the Activation page is now visible
+-Search Term now displayed on search page
+-Logo now justifies correctly when in mobile mode
+-Footer menu items/buttons now shift accordingly
+-Site Template Version' Option renamed to 'State Template Version'
+-If title of Header Slideshow Banner photo description is blank then all the text now shifts upwards 
+-Removed background color
+-Fixed incorrect spacing for Mega Menu
+-Fixed Incorrect spacing of bullets in the text module
+-Removed Breadcrumbs
+
+"CAWeb v1.0.1
+Date: 10/28/2016"
+-Fixed space for Department Logo
+-Fixed Site and CA.Gov Icon placement
+-Fixed the overlaying of the User name and site name.
+-Removed mobile gallery from Utility Header
+-Fixed the Mega Drop Down solution
+-Fixed design for mobile header/menu 
+-Fixed optional breadcrumbs
+-Enabled the Settings feature icon
+"-Activated the ""Contact Us"" link"
+-Activated the Shared icons
+-Fixed the set location
+-Utility header menu items are now right justified
+-Section Footer  bullet color now matches the text
+-Enabled changes to the footer
+-Created Social Media Icon/links
+-Enabled the Agency logo on the site
+-Fixed Drop down (second level) nav links inconsistent in display
+-Fixed error messages appear at the top of the screen
+-Fixed State Logo & Organization Logo Functionality
+-Fixed error that occured after adding CA.gov and Site Logo 
+-Fixed secondary links that weren't formatting correctly
+"-Removed extraneous ""Search"" link from Navigation"
+-Removed link description text
+-Links are not left justified and have padding all around
+-Added option to change the color scheme
+-Added option per page or post to not show article title
+-Added social icons to footer
+-Added image capability to megadropdown
+-Removed Swoosh from showing above the navigation bar
+-Fixed links wrap on the utility header in mobile view
+-Added Google Translate Option
+-Added Google Search Engine ID Option
+-Added Google Analytics ID Option
+-Created a standard 404 error page
+-Fixed Drop down display from  double rendering.
+-Aside column has been shifted to the right
+-Fixed Google Translate from overlaying the logo in mobile mode
+-Created hover text for CA Options
