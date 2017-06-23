@@ -1,12 +1,28 @@
 <!-- Global Footer -->
-<!-- Version 4 Styling -->
-<?php get_template_part('partials/content', 'version-styling'); ?>
+<?php
+global $post;
+$post_id = (is_object($post) ? $post->ID : $post['ID']);
 
+?>
+<?php if(ca_version_check(4, $post_id ) ): ?>
+
+<script>
+ /* Remove the banner from appearing as part of the content */
+if(document.getElementById('et_pb_ca_fullwidth_banner')){
+ var banner = document.getElementById('et_pb_ca_fullwidth_banner');
+ var banParent = banner.parentElement;
+
+ banParent.parentElement.removeChild(banParent);
+}else{
+ document.body.classList.remove('primary');
+}
+</script>
+<?php endif; ?>
 <footer id="footer" class="global-footer">
-  <div class="container ca_wp_container">
+	<div class="container <?=  ( ! ca_version_check(4, $post_id ) ? 'ca_wp_container' : '' ); ?> ">
 
-    <div class="<?php print (ca_version_check(4, $post->ID) ? 'full' : 'three-quarters' ); ?>">
-      <ul class="footer-links" <?php print (ca_version_check(4, $post->ID) ? 'style="text-align:center;"' : '' ); ?>>
+    <div class="<?php print (ca_version_check(4, $post_id ) ? 'full' : 'three-quarters' ); ?>">
+      <ul class="footer-links" <?php print (ca_version_check(4, $post_id ) ? 'style="text-align:center;"' : '' ); ?>>
 
        <?php
       			// if there is a footer menu
@@ -30,8 +46,8 @@
       </ul>
     </div>
 
-    <div class="<?php print (ca_version_check(4, $post->ID) ? 'full' : 'quarter text-right' ); ?>">
-<ul class="socialsharer-container" <?php print (ca_version_check(4, $post->ID) ? 'style="text-align:center; float:none;"' : '' ); ?>>
+    <div class="<?php print (ca_version_check(4, $post_id ) ? 'full' : 'quarter text-right' ); ?>">
+<ul class="socialsharer-container" <?php print (ca_version_check(4, $post_id ) ? 'style="text-align:center; float:none;"' : '' ); ?>>
 
 	<?php
 
@@ -55,7 +71,7 @@
 
   </div> <!-- Copyright Statement -->
   <div class="copyright">
-    <div class="container container ca_wp_container" <?php print (ca_version_check(4, $post->ID) ? 'style="text-align:center;"' : '' ); ?>> Copyright &copy;
+    <div class="container container ca_wp_container" <?php print (ca_version_check(4, $post_id ) ? 'style="text-align:center;"' : '' ); ?>> Copyright &copy;
 <script>document.write(new Date().getFullYear())</script> State of California </div> </div>
 
 </footer> <!-- Extra Decorative Content --> <div class="decoration-last">&nbsp;</div>

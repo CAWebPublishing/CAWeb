@@ -3,6 +3,11 @@
   display: none !important;
 }
 
+h1.page-title {
+    margin: 0 !important;
+		padding-top: 25px;
+}
+
 #main-content {
     background-color: #fff !important;
 }
@@ -14,9 +19,10 @@ ol.breadcrumb{
  text-transform: capitalize;
   margin-bottom: 0;
 }
-.page-title{
-  margin: 0;
-  
+
+/* Remove extra padding when ul is nested inside another ul */
+ul ul{
+	padding-bottom: 0px !important;
 }
 
 /* Allows for the Navigation Top Level Links to wrap */
@@ -26,9 +32,8 @@ ol.breadcrumb{
 
 /* Header Slideshow Banner */
 .slide-text{
-	max-width: 50%;  
-  overflow: hidden;
-  width: auto;
+	max-width: 50%;
+	padding-bottom: 15px !important;
 }
 
 /* WordPress Specific Overrides */
@@ -41,11 +46,21 @@ ol.breadcrumb{
 }
 
 .et_section_regular{
-  padding-top: 0;
+  padding: 0 !important;
 }
 
 .et_pb_row{
   	width: auto;
     max-width: 100%;
   	margin: 0;
+}
+
+
+/* Media Styles */
+@media (min-width: 768px){
+.main-navigation.dropdown .nav-item:hover .sub-nav, 
+.no-js .main-navigation.dropdown .nav-item:hover .sub-nav, 
+.no-js .main-navigation.megadropdown .nav-item:hover .sub-nav {
+    display: none;
+}
 }
