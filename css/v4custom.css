@@ -899,20 +899,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   }
 }
 
-/* service tile  card content and close open hover styles */
-.card {
-  position: relative;
-  display: block;
-  margin-bottom: 11px;
-  background-color: #fff;
-  border: 1px solid #f5f5f5;
-  border-radius: 0;
-}
-.card-block {
-  padding: 15px;
-}
-
-
+/* service tile  and close open hover styles */
 .close {
   float: right;
   font-size: 24px;

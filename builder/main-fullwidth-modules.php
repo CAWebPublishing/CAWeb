@@ -73,7 +73,7 @@ function get_fields() {
 			'type'            => 'text',
 			 'option_category'     => 'configuration',
 			'class'               => array( 'et-pb-font-icon' ),
-			'renderer'            => 'et_pb_get_ca_font_icon_list',
+			'renderer'            => 'et_pb_get_font_icon_list',
 		'renderer_with_field' => true,
 			'depends_show_if' => 'on',
 			'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
@@ -169,7 +169,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-	$display_icon = ("on" == $use_icon ? get_ca_icon_span($icon) : '');
+	$display_icon = ("on" == $use_icon ? get_icon_span($icon) : '');
 
 	if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 		$max_width_values = array(
@@ -254,7 +254,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 							'type'            => 'text',
 							 'option_category'     => 'configuration',
 							'class'               => array( 'et-pb-font-icon' ),
-							'renderer'            => 'et_pb_get_ca_font_icon_list',
+							'renderer'            => 'et_pb_get_font_icon_list',
 						'renderer_with_field' => true,
 							'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 						),
@@ -328,7 +328,7 @@ $scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
 					</div>
 				</div>
 			</div> <!-- .et_pb_ca_banner -->',
-      esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  get_ca_icon_span($scroll_bar_icon)
+      esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  get_icon_span($scroll_bar_icon)
 		);
 		return $output;
 	}
@@ -936,7 +936,7 @@ function get_fields() {
 		'type' => 'text',
 		'option_category'     => 'configuration',
 		'class'    => array( 'et-pb-font-icon' ),
-			'renderer'            => 'et_pb_get_ca_font_icon_list',
+			'renderer'            => 'et_pb_get_font_icon_list',
 		'renderer_with_field' => true,
 		'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
 		'depends_show_if' => 'on',
@@ -1337,7 +1337,7 @@ $display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 	$text_color = ("" != $text_color ?
 	sprintf(' style="color: %1$s" ', $text_color) : '');
 
-	$icon = ("on" == $group_icon_button ? get_ca_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
+	$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
 
 	$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 
