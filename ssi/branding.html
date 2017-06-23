@@ -1,0 +1,17 @@
+<!-- header branding -->
+<div class="branding <?= ( ca_version_check(5) ? 'ca_wp_container' : '') ?>">
+  <?php
+  if(ca_version_check(5, $post->ID)){
+    printf('<div class="header-cagov-logo"><a href="/"><img src="%1$s" /></a></div>', get_option('header_ca_branding'));
+    printf('<div class="header-organization-banner"><a href="/"><img src="%1$s" alt="Organization Title" /></a></div>',get_option('header_ca_branding'));
+
+  }else{
+          $align = ("center" != get_option('header_ca_branding_alignment') ? 'pull-' . get_option('header_ca_branding_alignment') : '');
+
+          printf('<div class="header-cagov-logo"><a href="http://www.ca.gov/"><img src="%1$s" /></a></div>', get_stylesheet_directory_uri() . '/images/system/v4logo.png');
+          printf('<div class="header-organization-banner %2$s"><a href="/"><img src="%1$s" alt="Organization Title" /></a></div>',get_option('header_ca_branding'),$align);
+      }
+  ?>
+
+
+</div>

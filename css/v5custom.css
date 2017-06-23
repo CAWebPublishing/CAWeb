@@ -1,0 +1,283 @@
+
+/* Temporary remove the sub nav arrow until the function in the core script is working */
+.nav-arrow-down{
+  	visibility: hidden;
+}
+
+/* Utility Header */
+.utility-header .half{
+	overflow:	hidden;
+	
+}
+
+.utility-header ul{
+	margin-left: 0;  
+}
+
+.utility-header ul li{
+  cursor: pointer;
+}
+.utility-header, .utility-header .half {
+  	padding: 2px 0;
+  
+}
+ .utility-header .half:first-child{
+      width: 25%;
+  }
+.utility-header .settings-links {
+  width: 75%;
+  
+}
+ul.utility-links.social-media-links {
+    max-height: 32px;
+}
+
+.utility-header .located-city-name {
+  	margin-left: 0;
+}
+/* End of Utility Header */
+
+/* Navigation and the List are set to auto width 
+and the nav links float to the right */
+#navigation{
+  		width: 100%;
+  		padding: 0;
+}
+
+#nav_list{
+      width: auto;
+    float: right;
+}
+.sub-nav{
+	left:  0;
+  right: 0;
+}
+
+.second-level-nav {
+    display: initial;
+}
+.second-level-nav li{  
+     float: left; 
+}
+/* Full Sub-Nav */
+.unit1 .second-level-link{
+  height: 65px;
+}
+
+.unit2 , .unit3, .unit3  .nav-media .media{
+  height: 130px;
+}
+
+/* MegaDropdown Navigation Styles */
+.full .second-level-nav .unit1 {
+    width: 25%;
+}
+
+.full .second-level-nav .unit2,
+.full .second-level-nav .unit3,
+.half .second-level-nav .unit1,
+.half .second-level-nav .unit2,
+.three-quarters .second-level-nav li.unit2,
+.three-quarters .second-level-nav li.unit3{
+     width: 50%;
+}
+.three-quarters .second-level-nav li.unit1{
+  	width: 33.3%;
+}
+
+.half .second-level-nav .unit3 .nav-media .media .unit2{
+  width: 100%;
+}
+/* Dropdown Navigation Styles */
+.main-navigation.dropdown .sub-nav {
+            max-width:250px;
+            left: initial;
+    right: initial;                       
+}
+.main-navigation.dropdown .sub-nav ul li{
+	width: 100%;
+}
+.main-navigation.dropdown .sub-nav ul li img{
+	display: none;
+}
+
+/* End of Branding & Navigation */
+/* Search */
+.featured-search.active .close-search {
+    display: block; 
+}
+.gssb_c{
+	top: 157px !important;
+}
+
+/* Header Slideshow Banner */
+.slide-text{
+	height: 150px;  
+}
+/* position the owl dots */
+.header-slideshow-banner .banner-pager, .header-slideshow-banner .banner-play-pause{
+  top: inherit;
+  bottom: 140px;
+  z-index: 6;
+}
+
+
+/* Footer */
+.global-footer ul > li{
+	padding-left: 0;  
+  
+}
+#footer .ca_wp_container div{
+  padding: 0;
+  overflow: hidden;
+}
+#footer .ca_wp_container .three-quarters{  	
+ 	
+}
+
+#footer .socialsharer-container {
+    height: 22px;
+}
+
+/* End of Footer */
+
+/* Media Query Styles */
+@media (min-width: 768px){
+/* Branding & Navigation */
+ .branding .header-cagov-logo img{
+    max-width: 170px;
+}
+
+#nav_list{
+  	
+    padding-left: calc(170px + 15%);
+}
+  .top-level-nav .nav-item {
+    padding: 0 6px;
+  }
+/* End of Branding & Navigation */
+
+  /* Page Styles */
+.et_pb_fullwidth_section  {
+  margin: 0 -6%;
+}
+
+  
+}
+
+
+@media (min-width: 992px){
+
+/* Branding & Navigation */
+ 
+  
+  .top-level-nav .nav-item {
+    padding: 0 8px;
+  }
+/* End of Branding & Navigation */
+
+  .et_pb_fullwidth_section  {
+  margin: 0 -12.5%;
+}
+}
+
+
+@media (min-width: 1280px){
+
+/* Branding & Navigation */
+   .branding .header-cagov-logo img{
+    max-width: 300px;
+  }
+  #nav_list{
+    padding-left: 300px;
+
+}
+/* End of Branding & Navigation */
+ .et_pb_fullwidth_section  {
+  margin: 0 -21.3% ;
+}
+}
+
+@media (max-width: 992px){
+#footer .socialsharer-container {
+    float: left;
+}
+}
+
+@media (max-width: 991px) and (min-width: 768px){
+.sub-nav .three-quarters {
+    left: 0;
+    width: 50%;
+}
+
+.three-quarters .second-level-nav li.unit1 {
+    width: 100%;
+}
+.three-quarters .second-level-nav li.unit2,
+.three-quarters .second-level-nav li.unit3{
+  width: 100%;
+
+}
+}
+
+/* End of Media Query Styles */
+/* Mobile Control */
+@media (max-width: 767px) {
+  .mobile-controls{
+    	background: #fff;
+  }
+  .mobile-controls .toggle-menu, .mobile-controls .toggle-search{
+    color: #046B99;
+  }
+  #nav_list{
+    width: 100%;
+  }
+  .second-level-nav li {
+    float: none;
+    width: 100% !important;
+  }
+  .second-level-nav .unit2  .link-description,
+  .second-level-nav .unit3 .link-description{
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+  
+  .cagov-logo {
+    position: initial;
+    padding-left: 65px;
+    float: left;
+    text-align: left;
+    width: 84%;
+}
+  .cagov-logo img{
+  		max-width : 100% ; 
+     height: 90px;
+		margin-bottom: 8px;
+  }
+  
+ul.utility-links.social-media-links {
+    max-height: 35px;
+    clip: rect(0 65px 40px 0);
+    height: auto;
+    width: auto;
+}
+	.utility-header .half:first-child{
+      overflow: visible;
+  }
+	
+  .utility-header .settings-links {
+		float: right;
+		text-align: right;
+		width: auto;
+		max-width: 85%;
+}
+    .branding {
+    display: none;
+}
+
+.et_pb_fullwidth_section  {
+  margin: 0 ;
+}
+}
+/* End of Mobile Control Styles */

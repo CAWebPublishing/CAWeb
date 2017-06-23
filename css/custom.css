@@ -1,0 +1,51 @@
+/* HIDE THE 'Enable Visual Builder' Button*/
+#wp-admin-bar-et-use-visual-builder{
+  display: none !important;
+}
+
+#main-content {
+    background-color: #fff !important;
+}
+#main-content .ca_wp_container{
+  	padding-top: 0;
+}
+
+ol.breadcrumb{
+ text-transform: capitalize;
+  margin-bottom: 0;
+}
+.page-title{
+  margin: 0;
+  
+}
+
+/* Allows for the Navigation Top Level Links to wrap */
+  .first-level-link{
+    	white-space: normal;
+  }
+
+/* Header Slideshow Banner */
+.slide-text{
+	max-width: 50%;  
+  overflow: hidden;
+  width: auto;
+}
+
+/* WordPress Specific Overrides */
+#wpadminbar {
+       position: fixed;
+ }
+/* Divi Specific Overrides */
+#page-container{
+  padding-top: 0px;
+}
+
+.et_section_regular{
+  padding-top: 0;
+}
+
+.et_pb_row{
+  	width: auto;
+    max-width: 100%;
+  	margin: 0;
+}
