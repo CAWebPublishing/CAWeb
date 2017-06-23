@@ -1,5 +1,7 @@
-<?php get_header(); ?>
-<?php get_template_part('partials/content', 'header') ?>
+<?php 
+get_header(); 
+get_template_part('partials/content', 'header') 
+?>
 
 
 <div id="main-content" class="main-content">

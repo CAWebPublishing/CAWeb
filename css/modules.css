@@ -1,7 +1,26 @@
  /* Section Primary  */
-.et_pb_ca_section_primary {
+.section{
+overflow: hidden;
+}
+ 
+
+.et_pb_ca_section_primary, 
+.et_pb_ca_fullwidth_section_primary {
     padding: 50px 25px;
 }
 
+/* Section - Carousel */
+.et_pb_ca_section_carousel .container{
+	width: 100%;
+}
 
-/* End of Section Primary Styles */
+/* Panel Style */
+.panel-heading > h1 {
+    margin: 0;
+}
+
+
+/* Divi Accordion Style */
+.et-learn-more h3.heading-more {
+    color: black;
+}

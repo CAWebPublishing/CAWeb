@@ -23,7 +23,7 @@
 */
 
 function retrieve_layout_attr($content, $embedded_attr = "", $mode = 0, $swapped_attr = ""){
-
+	$val = '';
 
 
 	if("" != strpos($content, $embedded_attr) ){
@@ -53,15 +53,17 @@ function retrieve_layout_attr($content, $embedded_attr = "", $mode = 0, $swapped
 
 
 				if(str_word_count($val) > 45){
+					$words =  explode(" ", $val);
+					$word_limit = array_splice($words,0, 45);
 
-					$val =  implode(" ", array_splice(split(" ", $val),0, 45)) . '...';
+					$val =  implode(" ", $word_limit) . '...';
 
 				}
 
 			break;
 
 			case 3:
-			
+
 			$val = substr($content, strpos($content, $embedded_attr) +  3 + strlen( $embedded_attr) * 2);
 
 			$val =substr($val, strpos($val, $swapped_attr ) +  strlen( $swapped_attr) + 2)  ;
@@ -422,7 +424,7 @@ Published: Date
 
 Full Time, Swing, M-F, HH:MM AM — HH:MM PM
 
-Salary Range: $x,xxx — $x,xxx
+Salary Range: x,xxx — x,xxx
 
 Position Number: RPA #11-111-111
 

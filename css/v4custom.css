@@ -1,7 +1,4 @@
 
-.global-footer ul>li{
-  display: inline-flex !important;
-}
 
 ul{
   line-height: 1.42857143 !important;
@@ -28,32 +25,41 @@ ul{
 .panel, .panel-heading{
   border-radius: 0;
 }
-
-/* Section */
-.section{
-   padding-top: 50px;
- padding-bottom: 50px;
-background: #fff;
- position: relative;
-overflow: hidden;
-}
-
-/* Carousel */
-.section .carousel-content .item {
+/* Section - Carousel */
+.et_pb_ca_section_carousel .carousel-content .item {
     position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.section .owl-item .content-container .content{
-  height: 325px;
-  padding: 100px 0;
-  text-align: center;
+.et_pb_ca_section_carousel .content-container{
+		background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10%;
+    text-align: center;
+    max-height: 100%;
+    margin-bottom: 50px;
+		overflow: hidden;
 }
 
-.section .carousel .owl-stage-outer{
-    height: 325px;
+.et_pb_ca_section_carousel .content-container .content{
+		padding: 20px 20px 50px 20px;
+}
+.et_pb_ca_section_carousel .content-container .content h2{
+		color: white;
+}
+
+/* Content Fit Carousel */
+.et_pb_ca_section_carousel.content_fit .container {
+    padding: 0 !important;
+}
+.et_pb_ca_section_carousel.content_fit .et_pb_ca_panel .content-container {
+    margin: 0;
 }
 /* Search Styles */
 	/* Hide the 'X' button that appears in Version 4 search box */
@@ -98,9 +104,6 @@ div#google_translate_element {
 	.header-slideshow-banner{
 		height: 100% !important;
 	}
-.slide-text{
-	height: 145px;  
-}
 
 	/* Navigation */
 .second-level-nav{
@@ -109,14 +112,14 @@ div#google_translate_element {
 }
 
 nav.megadropdown .second-level-nav li{  
-    
-	  float: left; 
+    float: left; 
 		width: 33%;
-		height: 100px;
-		margin-bottom: 14px !important;
+		min-height: 20px;
+		max-height: 70px;
     word-wrap: break-word;
     overflow: hidden;
 }
+
 
 /* Remove underline from top level nav links */
 .top-level-nav>li .first-level-link {
@@ -136,6 +139,14 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 #page-container {
     padding-top: 0px !important;
 }
+
+
+/* Footer Styles */
+.global-footer ul>li{
+  display: inline-flex ;
+	margin-bottom: 5px;
+}
+
 /* Media Query Styles */
 
 @media (min-width: 768px){
@@ -187,6 +198,10 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
     z-index: 1 ;		
     	left: 0 !important;
   }
+    .header-organization-banner img{
+   		width: auto;
+  }
+    
   #head-search.search-container.in {
     display: none;
 }
@@ -199,5 +214,9 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 }
 /* End of Header Styles */
 
+/* Footer Styles */
+.global-footer ul>li{
+  display: inline-block ;
+}
 }
 /* End of Mobile Control Styles */

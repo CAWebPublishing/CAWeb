@@ -9,11 +9,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'max_width', 'max_width_tablet', 'max_width_phone',
 				'module_class', 'module_id', 'admin_label',
 			'panel_layout', 'show_button', 'use_icon', 'icon',
-			'button_link','title','contact_email',
-			'heading_text_color', 'content_new', 'in_panel_button',
-			'contact_addr_button','contact_address','contact_city',
-			'contact_state','contact_zip','contact_phone',
-			'contact_fax',
+			'button_link','title','heading_text_color', 'content_new', 
 		);
 
 		$this->fields_defaults = array(
@@ -37,40 +33,15 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 					'standout highlight'  => esc_html__( 'Standout Highlight','et_builder'),
 					'overstated'  => esc_html__( 'Overstated','et_builder'),
 					'understated'  => esc_html__( 'Understated','et_builder'),
-					'contact'  => esc_html__( 'Contact Widget','et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
-				'affects' => array('#et_pb_heading_text_color', '#et_pb_show_button', '#et_pb_in_panel_button',
-							'#et_pb_contact_addr_button', '#et_pb_contact_phone','#et_pb_contact_fax','#et_pb_contact_email'),
-			),
-			'in_panel_button' => array(
-				'label'           => esc_html__( 'Display Within a Panel', 'et_builder' ),
-				'type'            => 'yes_no_button',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-					'off' => esc_html__( 'No', 'et_builder' ),
-				),
-				'description' => 'Choose whether to display contact info within a Panel',
-				'depends_show_if' => 'contact',
+				'affects' => array('#et_pb_heading_text_color', '#et_pb_show_button'),
 			),
 			'title' => array(
 				'label'           => esc_html__( 'Heading','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a Heading Title.','et_builder' ),
-			),
-			'contact_addr_button' => array(
-				'label'           => esc_html__( 'Enter Contact Address', 'et_builder' ),
-				'type'            => 'yes_no_button',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-					'off' => esc_html__( 'No', 'et_builder' ),
-				),
-				'depends_show_if' => 'contact',
-				'affects' => array('#et_pb_contact_address', '#et_pb_contact_city',
-						 '#et_pb_contact_state', '#et_pb_contact_zip'),
 			),
 			'contact_address' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
@@ -95,24 +66,6 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'depends_show_if' => 'on',
-			),
-			'contact_phone' => array(
-				'label'           => esc_html__( 'Phone','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'contact',
-			),
-			'contact_fax' => array(
-				'label'           => esc_html__( 'Fax','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'contact',
-			),
-			'contact_email' => array(
-				'label'           => esc_html__( 'Email','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'contact',
 			),
 			'heading_text_color' => array(
 				'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
@@ -149,7 +102,6 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'depends_show_if_not' => 'contact',
 				'affects' => array('#et_pb_button_link',),
 			),
 			'button_link' => array(
@@ -226,24 +178,6 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 
 		$button_link    = $this->shortcode_atts['button_link'];
 
-		$in_panel_button = $this->shortcode_atts['in_panel_button'];
-
-		$contact_addr_button= $this->shortcode_atts['contact_addr_button'];
-
-		$contact_address= $this->shortcode_atts['contact_address'];
-
-		$contact_city= $this->shortcode_atts['contact_city'];
-
-		$contact_state= $this->shortcode_atts['contact_state'];
-
-		$contact_zip= $this->shortcode_atts['contact_zip'];
-
-		$contact_phone= $this->shortcode_atts['contact_phone'];
-
-		$contact_fax= $this->shortcode_atts['contact_fax'];
-
-		$contact_email= $this->shortcode_atts['contact_email'];
-
 			$class = "et_pb_ca_panel et_pb_module";
 
 			$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
@@ -262,45 +196,8 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 
 		}
-    if("contact" == $panel_layout){
-       if("on" == $in_panel_button){
-         $output = sprintf('<div%11$s class="%12$s%13$s panel-understated">
-       <div class="panel-heading">
-           <h4>%1$s</h4>
-       </div>
-       <div class="panel-body"
-           <div itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="%2$s">
-               <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                   <span itemprop="streetAddress">%3$s</span><br />
-                   <span itemprop="addressLocality">%4$s</span>, <span itemprop="addressRegion">%5$s</span> <span itemprop="postalCode">%6$s</span><br>
-                   Phone: <span itemprop="telephone">%7$s</span><br/>
-                   Fax: <span itemprop="faxNumber">%8$s</span><br />
-       Email: %9$s
-               </div><br />%10$s</div>
-       </div>
-       </div>',
-			 			$title, get_option('ca_agency_name'), $contact_address, $contact_city, $contact_state,
-                           $contact_zip, $contact_phone, $contact_fax, $contact_email , $this->shortcode_content,
-                           ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
-                           ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
-                          );
-
-     }else{
-    $output = sprintf(' <div%11$s class="%12$s%13$s" itemscope itemtype="http://schema.org/Organization">
-    <h1>%1$s%2$s</h1>
-     <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                <span itemprop="streetAddress">%3$s</span><br />
-                <span itemprop="addressLocality">%4$s</span>, <span itemprop="addressRegion">%5$s</span> <span itemprop="postalCode">%6$s</span><br>
-                Phone: <span itemprop="telephone">%7$s</span><br />
-                Fax: <span itemprop="faxNumber">%8$s</span><br />
-    Email: %9$s
-            </div><br />%10$s</div>',						$display_icon, $title, $contact_address, $contact_city, $contact_state, $contact_zip,
-                      $contact_phone,  $contact_phone, $contact_fax, $contact_email ,  $this->shortcode_content,
-                      ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
-                      ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )						);
-
-    }
-  }else{
+   
+    
 		$headingSize = ("none" == $panel_layout ? 'h1' : 'h2');
 
 		$heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?
@@ -322,7 +219,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
                           ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
                          );
 
-	}
+	
 		return $output;
 
 	}
@@ -555,7 +452,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 
 		$text_color = ("" != $text_color ? sprintf('color: %1$s; ', $text_color) : "" );
 
-		$card_style = sprintf('style="%1$s%2$s" ');
+		$card_style = sprintf('style="%1$s%2$s" ', $card_color, $text_color);
 
 		$display_image = ("on" == $show_image ?
 					sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '') ;
@@ -643,12 +540,6 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'description'     => esc_html__( 'Here you can enter a name for the location.','et_builder' ),
 				'depends_show_if' => 'banner',
 				),
-			'location_link' => array(
-				'label'           => esc_html__( 'Location URL','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the location.','et_builder' ),
-				),
 			'addr' => array(
 				'label'           => esc_html__( 'Address','et_builder' ),
 				'type'            => 'text',
@@ -727,7 +618,16 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'depends_show_if_not' => 'mini',
+				'affects' => array('#et_pb_location_link',),
 			),
+
+			'location_link' => array(
+				'label'           => esc_html__( 'Location URL','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the URL for the location.','et_builder' ),
+				'depends_show_if' => 'on',
+				),
 		'disabled_on' => array(
 		  'label'           => esc_html__( 'Disable on', 'et_builder' ),
 		  'type'            => 'multiple_checkboxes',
@@ -823,7 +723,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		}
 		$display_icon = ("on" == $show_icon ? get_ca_icon_span($icon) : '');
 
-		$address = sprintf('%1$s, %2$s, %3$s, %4$', $addr, $city, $state, $zip);
+		$address = sprintf('%1$s, %2$s, %3$s, %4$s', $addr, $city, $state, $zip);
 
 		if("contact" == 	$location_layout ){
 				$display_other = ("on" == $show_contact ?
@@ -831,7 +731,9 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				("" != $phone ? "General Information: {$phone}<br />" : ''),
 				("" != $fax ?  "FAX: {$fax}" : '')	 ) : '');
 
-				$display_button = ("on" == $show_button ? sprintf('<a href="%1$s" class="btn">View Contact</a>',$location_link) : '' );
+			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">View Contact</a>',$location_link) : '' );
+			$address = ("" != $name ? sprintf('%1$s<br />%2$s', $name, $address) : $address);
+
 
 				$output =sprintf('<div%1$s class="%2$s%3$s contact">
 			    %4$s  <div class="contact">
@@ -856,7 +758,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 					<div class="title">%5$s</div>
 							<div class="address">
 							<span class="ca-gov-icon-road-pin"></span>
-								<a href="%6$s">%7%s</a>
+								<a href="%6$s">%7$s</a>
 								</div></div><div class="summary">
 								<div class="title">Description</div>
 						<div class="description">%8$s</div>
@@ -907,7 +809,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				'label' => esc_html__( 'Title', 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'Define the title for the gallery section.', 'et_builder' ),
+				'description' => esc_html__( 'Define the title for the section.', 'et_builder' ),
 					),
 					'heading_text_color' => array(
 						'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
@@ -1085,7 +987,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 		if("on" == $featured_image_button){
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
-      $img_style = ("on" == $image_pos ? 'style="padding-left:15px;"' : '');
+     $img_style = ("on" == $image_pos ? 'style="padding-left:15px; padding-right: 0;"' : 'style="padding-left: 0;"');
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" %3$s>
 					<img src="%2$s" class="img-responsive"></div>' , $img_class, $section_image, $img_style);
@@ -1239,7 +1141,7 @@ function init() {
 
 	$this->type = 'child';
 
-	$this->child_title_var = 'admin_title';
+	$this->child_title_var = 'heading';
 
 	$this->child_title_fallback_var = 'heading';
 
@@ -1256,7 +1158,7 @@ function init() {
 	 'group_link_url5', 'group_link_text6', 'group_link_url6',
 	 'group_link_text7', 'group_link_url7', 'group_link_text8',
 	 'group_link_url8', 'group_link_text9', 'group_link_url9',
-	 'group_link_text10', 'group_link_url10','module_class', 'module_id', 'admin_label',
+	 'group_link_text10', 'group_link_url10','module_class', 'module_id',
 		);
 
 	$this->fields_defaults = array(
@@ -1607,11 +1509,6 @@ function get_fields() {
 			'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
 			'depends_show_if' => 'on',
 				),
-				'admin_label' => array(
-				  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-				  'type'        => 'text',
-				  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
-				),
 				'module_id' => array(
 				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 				  'type'            => 'text',
@@ -1801,7 +1698,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
-	$this->whitelisted_fields = array('section_background_color','max_width',
+	$this->whitelisted_fields = array('carousel_style', 'section_background_color','max_width',
 						'max_width_tablet', 'max_width_phone','module_class', 'module_id',
 						'admin_label',);
 
@@ -1810,8 +1707,19 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		$this->main_css_element = '%%order_class%%';
 
 	}
+
+
 	function get_fields() {
 		$fields = array(
+			'carousel_style' => array(
+							'label'           => esc_html__( 'Carousel Style', 'et_builder' ),
+							'type'            => 'select',
+							'option_category' => 'configuration',
+							'options'         => array(
+								'content_fit' => esc_html__( 'Content Fit', 'et_builder' ),
+								'image_fit'  => esc_html__( 'Image Fit', 'et_builder' ),
+							),
+				),
 		'section_background_color' => array(
 				'label'             => esc_html__( 'Set Section Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -1853,8 +1761,17 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		return $fields;
 
 	}
+
+		function pre_shortcode_content() {
+		global $et_pb_ca_section_carousel_style;
+
+		$et_pb_ca_section_carousel_style = $this->shortcode_atts['carousel_style'];
+
+	}
+
 	function shortcode_callback( $atts, $content = null, $function_name ) {
-		$module_id            = $this->shortcode_atts['module_id'];
+		$carousel_style            = $this->shortcode_atts['carousel_style'];
+	$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
 
@@ -1870,7 +1787,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		$class = "et_pb_ca_section_carousel et_pb_module";
+		$class = "et_pb_ca_section_carousel et_pb_module " . $carousel_style;
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 		  $max_width_values = array(
@@ -1914,14 +1831,14 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 
 	$this->type = 'child';
 
-	$this->child_title_var = 'admin_title';
+	$this->child_title_var = 'slide_title';
 
-	$this->child_title_fallback_var = 'heading';
+	$this->child_title_fallback_var = 'slide_title';
 
 	$this->whitelisted_fields = array(
 		'slide_image', 'slide_title',
 		 'slide_desc',	'slide_url',
-		'slide_show_more_button','module_class', 'module_id', 'admin_label',
+		'slide_show_more_button','module_class', 'module_id',
 		);
 
 	$this->fields_defaults = array(
@@ -1960,9 +1877,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array(
-							'#et_pb_slide_url',
-				),
+				'affects' => array('#et_pb_slide_url',),
 			),
 		'slide_url' => array(
 				'label' => esc_html__( 'Slide URL', 'et_builder' ),
@@ -1973,14 +1888,9 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				),
 		'slide_desc' => array(
 				'label' => esc_html__( 'Description', 'et_builder' ),
-				'type'=> 'tiny_mce',
+				'type'=> 'textarea',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'Define the title for the slide', 'et_builder' ),
-				),
-				'admin_label' => array(
-				  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-				  'type'        => 'text',
-				  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+				'description' => esc_html__( 'Define the text for the slide content', 'et_builder' ),
 				),
 				'module_id' => array(
 				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
@@ -2016,29 +1926,32 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 
 	$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
 
-	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+		//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
 	global $et_pb_slider_item_num;
+	global $et_pb_ca_section_carousel_style;
 
 	$et_pb_slider_item_num++;
 
 	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-	$class = "et_pb_ca_panel et_pb_module";
-
-	$slide_image = sprintf('style="background-image: url(%1$s);"', $slide_image);
+	$class = 'et_pb_ca_panel et_pb_module';
 
 	$display_button = ("on" == $slide_show_more_button ?
 	sprintf('<button class="btn btn-primary">
 				<a href="%1$s">More Information</a></button>', $slide_url) : '');
 
-	$output = sprintf('<div%1$s class="$2$s%3$s item backdrop" %4$s>
+	$slide_title = ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : '');
+
+	$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
 	<div class="content-container">
 				<div class="content">
-	<h2>%5$s</h2>%6$s%7$s</div></div></div>',
+	%5$s%6$s%7$s</div></div></div>',
 	( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 	esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-	$slide_image,$slide_title, $slide_desc, $display_button );
+		("content_fit" == $et_pb_ca_section_carousel_style ? sprintf('style="background-image: url(%1$s);"', $slide_image) : ''),
+		( "image_fit" == $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s" />', $slide_image ) : '' ),
+		$slide_title, $slide_desc, $display_button );
 
    return $output;
 
@@ -2055,7 +1968,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 		$this->whitelisted_fields = array('style', 'title',
 			'all_categories_button','include_categories',
 			'all_tags_button','include_tags',
-			'posts_number',
+			'posts_number', 'module_class', 'module_id',
 			'orderby', 'admin_label',
 		);
 
@@ -2150,6 +2063,20 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				),
 				'description'       => esc_html__( 'Here you can adjust the order in which posts are displayed.', 'et_builder' ),
 			),
+			'module_id' => array(
+				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+				  'type'            => 'text',
+				  'option_category' => 'configuration',
+				  'tab_slug'        => 'custom_css',
+				  'option_class'    => 'et_pb_custom_css_regular',
+				),
+				'module_class' => array(
+				  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+				  'type'            => 'text',
+				  'option_category' => 'configuration',
+				  'tab_slug'        => 'custom_css',
+				  'option_class'    => 'et_pb_custom_css_regular',
+				),
 			'admin_label' => array(
 			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
 			  'type'        => 'text',
@@ -2161,6 +2088,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 	}
 	function shortcode_callback( $atts, $content = null, $function_name ) {
+			$module_id            = $this->shortcode_atts['module_id'];
+
+		$module_class         = $this->shortcode_atts['module_class'];
+
 	$title            = $this->shortcode_atts['title'];
 
 		$style            = $this->shortcode_atts['style'];
@@ -2398,7 +2329,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		$this->whitelisted_fields = array(
 			'name',
 			'job_title', 'admin_label',
-			'url',
+			'url', 'module_class', 'module_id',
 			'portrait_url',
 		);
 
@@ -2438,6 +2369,20 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
 				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder' ),
 			),
+				'module_id' => array(
+				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+				  'type'            => 'text',
+				  'option_category' => 'configuration',
+				  'tab_slug'        => 'custom_css',
+				  'option_class'    => 'et_pb_custom_css_regular',
+				),
+				'module_class' => array(
+				  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+				  'type'            => 'text',
+				  'option_category' => 'configuration',
+				  'tab_slug'        => 'custom_css',
+				  'option_class'    => 'et_pb_custom_css_regular',
+				),
 			'admin_label' => array(
 			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
 			  'type'        => 'text',
@@ -2449,6 +2394,10 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 
 	}
 	function shortcode_callback( $atts, $content = null, $function_name ) {
+		$module_id            = $this->shortcode_atts['module_id'];
+
+		$module_class         = $this->shortcode_atts['module_class'];
+
 		$name                 = $this->shortcode_atts['name'];
 
 		$job_title              = $this->shortcode_atts['job_title'];

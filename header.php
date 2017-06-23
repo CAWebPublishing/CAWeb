@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -23,23 +23,74 @@
 
     <meta name="Keywords" content="California, government" />
 
+    <!-- Use highest compatibility mode -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+
+    <!-- for Blackberry, AvantGo -->
+    <meta name="MobileOptimized" content="320">
+
+    <!-- for Windows mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+		<!-- Google Meta-->
+		<meta name="google-site-verification" content="<?php get_option('ca_google_meta_id') ;?>" />
+	
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <!-- selectivizr.com, emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8 -->
+
+
+
+		<!-- Google Analytics-->
 <?php
 
+get_template_part('partials/content', 'analytics');
 
+printf('<link rel="apple-touch-icon" sizes="144x144" href="%1$s/images/system/apple-touch-icon-144x144.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" sizes="114x114" href="%1$s/images/system/apple-touch-icon-114x114.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" sizes="72x72" href="%1$s/images/system/apple-touch-icon-72x72.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
+
+// Nokia
+printf('<link rel="shortcut icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
+
+// Everything Else
+printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico')  );
 
 	wp_head();
 
 
 
-	$cssDIR = get_stylesheet_directory_uri();
-
-	$ver = ( ca_version_check(4, $post->ID) ?  'v4' : '');
-
-	print sprintf('<link rel="stylesheet" href="%1$s/css/cagov.%2$score.css">',$cssDIR, $ver);
-	print sprintf('<link rel="stylesheet" href="%1$s/css/colorscheme-%2$s%3$s.css">',$cssDIR, $ver,get_option('ca_site_color_scheme'));  print sprintf('<link rel="stylesheet" href="%1$s/css/custom.css">',$cssDIR);  require_once(get_stylesheet_directory() . '/ssi/head-css-js.html');
 
 ?>
 
+<!--[if (lt IE 9) & (!IEMobile)]>
 
+<script src="<?php printf( '/js/libs/selectivizr-min.js', CAWebUri); ?>"></script>
+
+<![endif]-->
+
+
+<!-- Activate ClearType for Mobile IE -->
+
+<!--[if IE]>
+
+<meta http-equiv="cleartype" content="on">
+
+<![endif]-->
+
+
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 8]>
+
+  <script src="<?php printf( '/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
+
+  <script src="<?php printf( '/js/libs/respond.min.js', CAWebUri) ; ?>"></script>
+
+<![endif]-->
 
 </head>

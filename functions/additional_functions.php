@@ -12,17 +12,27 @@ function ca_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version') ? true : false);
 
 	if(-1 < $post_id  ){
-		switch(get_page_template_slug($post_id)){
-		case "page-templates/page-template-v4.php":
-			$result = (4 == $version ? true : false);
-			break;
-		}
-
+		$result = ($version == get_version($post_id) ? true : false);
 	}
 
 	return $result;
 }
 
+function get_version($post_id){
+	switch(get_page_template_slug($post_id)){
+	case "page-templates/page-template-v4.php":
+		$result = 4;
+		break;
+  case "page-templates/page-template-v5.php":
+		$result = 5;
+		break;
+	default:
+		$result = get_option('ca_site_version');
+		break;
+
+	}
+	return $result;
+}
 // Returns array of Menu Theme Locations
 function get_ca_nav_menu_theme_locations(){
 	return array(
@@ -77,8 +87,11 @@ return $tmp;
 */
 function get_ca_nav_menu_theme_location($postID = -1, $menu_name = ''){
 
-	if(-1 != $postID){
-		$post_menu = get_registered_ca_nav_menus()[get_post_meta($postID, 'ca_default_navigation_menu',true)];
+	if(-1 != $postID ){
+		$post_menu =  get_post_meta($postID, 'ca_default_navigation_menu',true) ;
+
+				$post_menu = ("" != get_post_meta($postID, 'ca_default_navigation_menu',true) ?
+							get_registered_ca_nav_menus()[$post_menu ] : "No Default Menu");
 	}elseif("" != $menu_name ){
 		$tmp = array_flip(get_registered_ca_nav_menus());
 		$post_menu = $tmp[$menu_name];
@@ -279,4 +292,5 @@ function get_ca_icon_list(){
 function get_blank_icon_span(){
   return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';
 }
+
 ?>
