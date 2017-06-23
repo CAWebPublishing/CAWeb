@@ -10,32 +10,32 @@ function menu_setup(){
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
 	add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
-  // If user is not a Network Admin 
+  // If user is not a Network Admin
 	if( ! current_user_can('manage_network_options')){
 		// Remove Themes Menu
 		remove_menu_page('themes.php');
-		
+
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
 		remove_submenu_page('tools.php','import.php');
 		remove_submenu_page('tools.php', 'ms-delete-site.php');
 		remove_submenu_page('tools.php', 'domainmapping');
 		remove_submenu_page('tools.php', 'php-compatibility-checker');
-		
+
 		// Removal of Divi Submenu Pages
 		remove_submenu_page('et_divi_options','et_divi_options');
 		remove_submenu_page('et_divi_options','customize.php?et_customizer_option_set=theme');
 		remove_submenu_page('et_divi_options','customize.php?et_customizer_option_set=module');
 		remove_submenu_page('et_divi_options','et_divi_role_editor');
 	}
-	
+
 }
 add_action( 'admin_menu', 'menu_setup' );
 
 // If direct access to certain menus is accessed
 // redirect to admin page
 function redirect_themes_page() {
-	if( ! current_user_can('manage_network_options')){
+	if( ! current_user_can('manage_options')){
 		wp_redirect(get_admin_url());
 		exit;
 	}
@@ -47,6 +47,8 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 // Administration Initialization
 function admin_ca_init(){
 	ca_register_settings();
+
+	
 }
 add_action( 'admin_init', 'admin_ca_init' );
 
@@ -70,11 +72,12 @@ function get_all_ca_site_options($with_values = false){
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
 
-	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment', 
-				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id', 
-				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',  
+	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
+				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
+				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
 				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
-				'ca_google_meta_id', 'ca_custom_css','ca_home_nav_link', 'ca_utility_home_icon');
+				'ca_google_meta_id', 'ca_custom_css','ca_home_nav_link', 'ca_utility_home_icon', 'ca_utility_link_1',
+				'ca_utility_link_2', 'ca_utility_link_3', 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
 }
 
 // Returns and array of all CA Social Options
@@ -112,7 +115,7 @@ function ca_register_settings(){
 	foreach($all_ca_options as $option){
 		register_setting( 'ca_site_options', $option);
 	}
-	
+
 	// enable admin notices for CAWeb Options
 	settings_errors('ca_options');
 
@@ -133,24 +136,24 @@ function ca_register_settings(){
 	}
 
 	// Remove the Breadcrumbs option if it had been initialized prior to v1.0.2a
-	delete_option( 'ca_breadcrumbs_enabled' ); 
-	
+	delete_option( 'ca_breadcrumbs_enabled' );
+
 	delete_option ('caweb_intranet_enabled');
-	
-	
+
+
 }
 
 // admin message hook
 function caweb_option_notices(){
-	
-	
+
+
 	// if on the caweb options page and update is made
 	if ( ( isset($_GET['page']) && isset($_GET['settings-updated']) ) ){
 			if ( ( "ca_options" == $_GET['page']  &&  true == $_GET['settings-updated'] ) ){
 			print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 		}
 	}
-	
+
 }
 add_action('admin_notices', 'caweb_option_notices');
 ?>

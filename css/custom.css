@@ -2,10 +2,16 @@
 #wp-admin-bar-et-use-visual-builder{
   display: none !important;
 }
-
-.page-title.et_pb_row {
-    padding-bottom: 0;
+.mobile-controls{
+	cursor: auto;
 }
+.mobile-controls span {
+    cursor: pointer;
+}
+.page-title.et_pb_row{
+  padding-bottom: 0;
+}
+
 
 #main-content {
     background-color: #fff !important;

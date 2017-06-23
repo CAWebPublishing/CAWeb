@@ -22,8 +22,10 @@
 */
 
 
-	define('CAWebAbsPath', get_stylesheet_directory()) ;
-	define('CAWebUri', get_stylesheet_directory_uri()) ;
+define('CAWebAbsPath', get_stylesheet_directory()) ;
+define('CAWebUri', get_stylesheet_directory_uri()) ;
+
+define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 
 // This is a temporary fix
 function caweb_login_logo() {
@@ -105,6 +107,8 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 
 	}
 
+	// Enable Post Thumbnails
+	add_theme_support( 'post-thumbnails' );
 }
 
 add_action('after_setup_theme', 'ca_setup_theme');
@@ -173,7 +177,9 @@ function ca_theme_enqueue_style() {
 	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js', '', '1.0', true );
 	wp_register_script('cagov-search-script',CAWebUri. '/js/search.js', array('jquery'), '1.0', true );
 
-
+	// Localize the search script with the correct site url
+	wp_localize_script( 'cagov-search-script', 'site', array('site_url' => site_url()) );
+	
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
   wp_enqueue_script( 'cagov-search-script' );
@@ -201,11 +207,11 @@ function ca_admin_enqueue_scripts($hook){
 
 		wp_enqueue_script( 'custom-header' );
 
-		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),true);
 		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'),true);
+		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),true);
 
-		wp_enqueue_script( 'caweb-admin-scripts' );
 		wp_enqueue_script( 'browse-caweb-library' );
+		wp_enqueue_script( 'caweb-admin-scripts' );
 
 
 	wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
@@ -218,7 +224,7 @@ function ca_admin_enqueue_scripts($hook){
 						font-family: "CaGov";
 					}
 					</style>';
-	
+
 	// Enqueue Styles
 	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
 }
@@ -434,114 +440,63 @@ function wp_ca_body_class( $wp_classes, $extra_classes ) {
 
 add_filter( 'body_class', 'wp_ca_body_class', 12, 2 );
 
-/*
-
-	CA/Divi Custom Modules
-
-	This function gets called during Prep_CA_Custom_Modules
-
-	and is attached to the appropriate action hook.
-
-	Includes the custom modules once Divi Parent Theme ET_Builder_Module exists it should
-
-	remain at the bottom of the Child Theme Functions file.
-
-
-
-*/
-
-function CA_Custom_Modules(){
-
-	if(class_exists("ET_Builder_Module")){
+/*	CAWeb Custom Modules */
+add_action( 'et_builder_ready', 'caweb_initialize_divi_modules' );
+function caweb_initialize_divi_modules() {
+	if ( ! class_exists( 'ET_Builder_Module' ) ) { return; }
 
 		include(CAWebAbsPath . "/builder/functions.php");
 		include(CAWebAbsPath . "/builder/main-modules.php");
 		include(CAWebAbsPath. '/builder/main-fullwidth-modules.php');
-		//include(CAWebAbsPath. '/builder/special-modules.php');
+		include(CAWebAbsPath. '/builder/special-modules.php');
 		include(CAWebAbsPath . "/builder/layouts.php");
- 	}
 
 }
 
-
-
-
-
-function Prep_CA_Custom_Modules(){
-
- 	global $pagenow;
-
-	$is_admin = is_admin();
-
- 	$action_hook = $is_admin ? 'wp_loaded' : 'wp';
-
-
-
-	// list of admin pages where we need to load builder files
-
- 	$required_admin_pages = array(
-
-				'edit.php', 'post.php', 'post-new.php',
-
-				'admin.php', 'customize.php', 'edit-tags.php',
-
-				'admin-ajax.php', 'export.php' );
-
-
-
-
-
-	$specific_filter_pages = array( 'edit.php', 'admin.php', 'edit-tags.php' );
-
-	$is_edit_library_page =
-
-		'edit.php' === $pagenow && isset( $_GET['post_type'] ) && 'et_pb_layout' === $_GET['post_type'];
-
-
-
- 	$is_role_editor_page =
-
-		'admin.php' === $pagenow && isset( $_GET['page'] ) && 'et_divi_role_editor' === $_GET['page'];
-
-
-
- 	$is_import_page = 'admin.php' === $pagenow && isset( $_GET['import'] ) && 'wordpress' === $_GET['import'];
-
-
-
- 	$is_edit_layout_category_page =
-
-		'edit-tags.php' === $pagenow && isset( $_GET['taxonomy'] ) && 'layout_category' === $_GET['taxonomy'];
-
-
-
-	if ( ! $is_admin ||
-
-		( $is_admin && in_array( $pagenow, $required_admin_pages ) &&
-
-			( ! in_array( $pagenow, $specific_filter_pages ) ||
-
-			$is_edit_library_page || $is_role_editor_page ||
-
-			$is_edit_layout_category_page || $is_import_page ) ) )
-
-	{
-
-
-
-		 add_action($action_hook, 'CA_Custom_Modules', 9789);
-
-
-
- 	}
-
+function custom_bundle_js() {
+	// This code assumes you save the file bundle.js in the child-theme root
+  // e.g. /themes/custom-divi/bundle.js
+	$app = trailingslashit( CAWebUri . '/builder/frontend-builder' );
+	$ver = ET_BUILDER_VERSION;
+	/**
+	 * This code is directly copied from the original Divi theme.
+	 * You can find it in Divi/includes/builder/frontend-builder/assets.php
+	 * somewhere around line 107
+	 */
+	$fb_bundle_dependencies = apply_filters(
+		'et_fb_bundle_dependencies',
+		array(
+			'jquery',
+			'jquery-ui-core',
+			'jquery-ui-draggable',
+			'jquery-ui-resizable',
+			'underscore',
+			// 'minicolors',
+			'jquery-ui-sortable',
+			'jquery-effects-core',
+			'iris',
+			'wp-color-picker',
+			'wp-color-picker-alpha',
+			'react-tiny-mce',
+			'easypiechart',
+			'et_pb_admin_date_addon_js',
+			'salvattore',
+			'hashchange',
+			'wp-shortcode',
+		)
+	);
+	// Dequeue official bundle.js
+	wp_dequeue_script( 'et-frontend-builder' );
+	// Enqueue modified bundle.js
+	wp_enqueue_script(
+		'et-frontend-builder',
+		"{$app}/bundle.js",
+		$fb_bundle_dependencies,
+		$ver,
+		true
+	);
 }
-
-
-
-Prep_CA_Custom_Modules();
-
-
+add_action( 'wp_enqueue_scripts', 'custom_bundle_js', 99 );
 
 function caweb_page_customizations(){
 global $pagenow;
@@ -549,7 +504,7 @@ global $pagenow;
 if('nav-menus.php' == $pagenow   ){
 ?>
 
-<script>
+<!--script>
   // Change title of page from 'Menu' to 'Navigation'
 	var title = document.getElementById('wpbody-content');
   title = title.getElementsByClassName('wrap')[0];
@@ -559,7 +514,7 @@ if('nav-menus.php' == $pagenow   ){
 title.innerHTML = "Navigation";
 
 
-</script>
+</script-->
 <?php
 }elseif('post-new.php' == $pagenow || 'post.php' == $pagenow  ){
 
@@ -575,11 +530,11 @@ title.innerHTML = "Navigation";
 	/* This is the background color for the Divi Panel that pops open
 		when inserting modules or sections */
 	.et-pb-main-settings{
-	
+
 	background-color: lightblue;
-	
+
 	}
-	
+
 	ul.et_font_icon {
 		background-color: white !important;
 		max-height: 300px;

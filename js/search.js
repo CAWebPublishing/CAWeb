@@ -116,8 +116,8 @@ $(document).ready(function() {
 ----------------------------------------- */
 
 $(document).ready(function() {
-	var serpLocation = "/serp"; // Location of your search engine results page (SERP)
-
+	var serpLocation = site.site_url + "/serp"; // Location of your search engine results page (SERP)
+	
 	var prepareSearchForm = {
 		init: function() {
 			elemSearchForm = document.getElementById("local_form");
