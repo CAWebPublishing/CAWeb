@@ -4,12 +4,13 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 		$this->name = esc_html__( 'Panel', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_panel';
+		$this->fb_support = true;
 
 		$this->whitelisted_fields = array(
 				'max_width', 'max_width_tablet', 'max_width_phone',
 				'module_class', 'module_id', 'admin_label',
-			'panel_layout', 'show_button', 'use_icon', 'icon',
-			'button_link','title','heading_text_color', 'content_new', 
+			'panel_layout', 'show_button', 'use_icon', 'icon', 'heading_align',
+			'button_link','title','heading_text_color', 'content_new',
 		);
 
 		$this->fields_defaults = array(
@@ -19,6 +20,8 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 
 		$this->main_css_element = '%%order_class%%';
 
+					// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -35,7 +38,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 					'understated'  => esc_html__( 'Understated','et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
-				'affects' => array('#et_pb_heading_text_color', '#et_pb_show_button'),
+				'affects' => array('#et_pb_heading_text_color'),
 			),
 			'title' => array(
 				'label'           => esc_html__( 'Heading','et_builder' ),
@@ -43,29 +46,16 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a Heading Title.','et_builder' ),
 			),
-			'contact_address' => array(
-				'label'           => esc_html__( 'Address','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'on',
-			),
-			'contact_city' => array(
-				'label'           => esc_html__( 'City','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'on',
-			),
-			'contact_state' => array(
-				'label'           => esc_html__( 'State','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'on',
-			),
-			'contact_zip' => array(
-				'label'           => esc_html__( 'Zip','et_builder' ),
-				'type'            => 'text',
-				'option_category' => 'basic_option',
-				'depends_show_if' => 'on',
+			'heading_align' => array(
+				'label'             => esc_html__( 'Heading Alignment','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'left' => esc_html__( 'Left','et_builder'),
+					'center' => esc_html__( 'Center','et_builder'),
+					'right'  => esc_html__( 'Right','et_builder'),
+				),
+				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
 			),
 			'heading_text_color' => array(
 				'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
@@ -103,6 +93,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'affects' => array('#et_pb_button_link',),
+				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
 			),
 			'button_link' => array(
 				'label'           => esc_html__( 'Button Link','et_builder' ),
@@ -172,11 +163,15 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 
 		$title    = $this->shortcode_atts['title'];
 
+		$heading_align    = $this->shortcode_atts['heading_align'];
+
 		$heading_text_color    = $this->shortcode_atts['heading_text_color'];
 
 		$show_button    = $this->shortcode_atts['show_button'];
 
 		$button_link    = $this->shortcode_atts['button_link'];
+
+		$content_new    = $this->shortcode_atts['content_new'];
 
 			$class = "et_pb_ca_panel et_pb_module";
 
@@ -196,33 +191,67 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 
 		}
-   
-    
+
+
 		$headingSize = ("none" == $panel_layout ? 'h1' : 'h2');
 
 		$heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?
 						sprintf(' style="color: %1$s;"', $heading_text_color) : '');
 
+		$option_padding = ("right" == $heading_align ? ' style="padding-left: 10px;"' : '');
+
+		$heading_align = ("left" != $heading_align ? sprintf('text-align: %1$s; width: 100%;', $heading_align ) : '');
+
+		$heading_style = ("" != $heading_text_color || "" != $heading_align ?
+						sprintf(' style="%1$s%2$s"', $heading_text_color, $heading_align )  : '');
+
 		$remove_overflow = ("none" == $panel_layout ? 'style="overflow: visible;"' : '');
 
-		$display_options = ($show_button == "on" ? sprintf('<div class="options">
-		<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link ) : '') ;
+		$display_options = ($show_button == "on" ? sprintf('<div class="options" %2$s>
+		<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
 
-		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s</%1$s>%5$s</div>',
-				$headingSize, $heading_text_color, $display_icon, $title, $display_options) : '');
+		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
+				$headingSize, ("" != $heading_style ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-				$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
+		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
 								%3$s
 									<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->',
-							$panel_layout, $remove_overflow, $display_title,  $this->shortcode_content,
-                          ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
-                          ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
-                         );
+					$panel_layout, $remove_overflow, $display_title,  $this->shortcode_content,
+      	  ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+           );
 
-	
 		return $output;
 
 	}
+
+	// This is a non-standard function. It outputs JS code to render the
+		// module preview in the new Divi 3 frontend editor.
+		// Return value of the JS function must be full HTML code to display.
+		function js_frontend_preview() {
+			?>
+			<script>
+			window.<?php echo $this->slug; ?>_preview = function(args) {
+				var id = !Boolean(args.module_id)  ? ' id="' + args.module_id + '"' : '';
+				var classes =  !Boolean(args.module_class) ?  args.module_class + '"' : '';
+				var heading_size = "none" == args.panel_layout ? "h1" : "h2";
+				var heading_text_color = "none" == args.panel_layout && !Boolean(args.heading_text_color) ? ' style="color: ' + args.heading_text_color + '; "' : '';
+				var option_padding = "right" == args.heading_align ? ' style="padding-left: 10px;"' : '';
+			 	var heading_align = "left" != args.heading_align ? 'text-align: ' + args.heading_align + '; width: 100%;' : '';
+				var heading_style = !Boolean(heading_text_color) || !Boolean(heading_align) ? ' style="' + heading_text_color + heading_align +'"'  : '';
+ 				var remove_overflow = "none" == args.panel_layout ? 'style="overflow: visible;"' : '';
+				var dispay_icon = "on" == args.use_icon ? args.icon : '';
+  			var display_options =  "on" == args.show_button ? '<div class="options" ' + option_padding + '><a href="'+ args.button_link +'" class="btn btn-default">Read More</a></div>' : '' ;
+				var display_title = Boolean(args.title) ? '<div class="panel-heading" ><' + heading_size + heading_style +'>'+ dispay_icon + args.title + display_options +'</' + heading_size + '></div>' : '';
+
+				var output =  '<div' + id + ' class="' + classes + ' panel panel-'+ args.panel_layout +'" ' + remove_overflow + '>' + display_title + '<div class="panel-body">' + this.props.content +'</div></div> <!-- .et_pb_panel -->';
+
+				return output;
+
+			}
+			</script>
+			<?php
+		}
 }
 new ET_Builder_Module_Panel;
 
@@ -232,6 +261,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 
 		$this->slug = 'et_pb_ca_card';
 
+		//$this->fb_support = true;
 		$this->whitelisted_fields = array(
 			'card_color', 'show_image', 'featured_image',
 			 'title', 'content','show_button','button_text',
@@ -954,7 +984,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 		$section_heading = $this->shortcode_atts['section_heading'];
 
-		$section_content = $this->shortcode_atts['section_content '];
+		$section_content = $this->shortcode_atts['section_content'];
 
 		$show_more_button = $this->shortcode_atts['show_more_button'];
 
@@ -1034,7 +1064,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 			'section_background_color',
 		'max_width', 'max_width_tablet', 'max_width_phone',
 		'module_class', 'module_id', 'admin_label',
-);
+		);
 
 		$this->main_css_element = '%%order_class%%';
 
@@ -1111,15 +1141,13 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 
 		}
-		$section_bg_color ("" != $section_background_color ?
+		$section_bg_color = ("" != $section_background_color ?
 					sprintf(' style="background: %1$s" ', $section_background_color): '');
 
 		$output = sprintf(
 			'<div%1$s class="%2$s%3$s" %4$s>
-				<div class="container">
 				<div class="row group">
 					%5$s
-				</div>
 				</div>
 			</div> <!-- .et_pb_ca_section_footer -->',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
@@ -1134,57 +1162,56 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 new ET_Builder_Module_Section_Footer;
 
 class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
-function init() {
-	$this->name = esc_html__( 'Footer Group', 'et_builder' );
+	function init() {
+		$this->name = esc_html__( 'Footer Group', 'et_builder' );
 
-	$this->slug = 'et_pb_ca_section_footer_group';
+		$this->slug = 'et_pb_ca_section_footer_group';
 
-	$this->type = 'child';
+		$this->type = 'child';
 
-	$this->child_title_var = 'heading';
+		$this->child_title_var = 'heading';
 
-	$this->child_title_fallback_var = 'heading';
+		$this->child_title_fallback_var = 'heading';
 
-	$this->whitelisted_fields = array('heading_color', 'text_color',
-		'group_icon', 'group_icon_button', 'group_title',
-		'group_url', 'group_show_more_button', 'display_link_as_button',
-		'group_link1_show',
-		'group_link2_show', 'group_link3_show', 'group_link4_show',
-		'group_link5_show', 'group_link6_show', 'group_link7_show',
-		'group_link8_show', 'group_link9_show', 'group_link10_show',
-	 'group_link_text1', 'group_link_url1','group_link_text2',
-	 'group_link_url2', 'group_link_text3', 'group_link_url3',
-	 'group_link_text4', 'group_link_url4', 'group_link_text5',
-	 'group_link_url5', 'group_link_text6', 'group_link_url6',
-	 'group_link_text7', 'group_link_url7', 'group_link_text8',
-	 'group_link_url8', 'group_link_text9', 'group_link_url9',
-	 'group_link_text10', 'group_link_url10','module_class', 'module_id',
-		);
+		$this->whitelisted_fields = array('heading_color', 'text_color',
+			'group_icon', 'group_icon_button', 'group_title',
+			'group_url', 'group_show_more_button', 'display_link_as_button',
+			'group_link1_show',
+			'group_link2_show', 'group_link3_show', 'group_link4_show',
+			'group_link5_show', 'group_link6_show', 'group_link7_show',
+			'group_link8_show', 'group_link9_show', 'group_link10_show',
+		 'group_link_text1', 'group_link_url1','group_link_text2',
+		 'group_link_url2', 'group_link_text3', 'group_link_url3',
+		 'group_link_text4', 'group_link_url4', 'group_link_text5',
+		 'group_link_url5', 'group_link_text6', 'group_link_url6',
+		 'group_link_text7', 'group_link_url7', 'group_link_text8',
+		 'group_link_url8', 'group_link_text9', 'group_link_url9',
+		 'group_link_text10', 'group_link_url10','module_class', 'module_id',
+			);
 
-	$this->fields_defaults = array(
-		'group_icon' => array('%-1%','add_default_setting'),
-		'group_url' => array( 'http://','add_default_setting'),
-		'group_link_url1' => array( 'http://','add_default_setting'),
-				'group_link_url2' => array( 'http://','add_default_setting'),
-				'group_link_url3' => array( 'http://','add_default_setting'),
-				'group_link_url4' => array( 'http://','add_default_setting'),
-				'group_link_url5' => array( 'http://','add_default_setting'),
-				'group_link_url6' => array( 'http://','add_default_setting'),
-				'group_link_url7' => array( 'http://','add_default_setting'),
-				'group_link_url8' => array( 'http://','add_default_setting'),
-				'group_link_url9' => array( 'http://','add_default_setting'),
-				'group_link_url10' => array( 'http://','add_default_setting'),
-		);
+		$this->fields_defaults = array(
+			'group_icon' => array('%-1%','add_default_setting'),
+			'group_url' => array( 'http://','add_default_setting'),
+			'group_link_url1' => array( 'http://','add_default_setting'),
+					'group_link_url2' => array( 'http://','add_default_setting'),
+					'group_link_url3' => array( 'http://','add_default_setting'),
+					'group_link_url4' => array( 'http://','add_default_setting'),
+					'group_link_url5' => array( 'http://','add_default_setting'),
+					'group_link_url6' => array( 'http://','add_default_setting'),
+					'group_link_url7' => array( 'http://','add_default_setting'),
+					'group_link_url8' => array( 'http://','add_default_setting'),
+					'group_link_url9' => array( 'http://','add_default_setting'),
+					'group_link_url10' => array( 'http://','add_default_setting'),
+			);
 
-	$this->advanced_setting_title_text = esc_html__( 'New Footer Group', 'et_builder' );
+		$this->advanced_setting_title_text = esc_html__( 'New Footer Group', 'et_builder' );
 
-	$this->settings_text = esc_html__( 'Footer Group Settings', 'et_builder' );
+		$this->settings_text = esc_html__( 'Footer Group Settings', 'et_builder' );
 
-	$this->main_css_element = '%%order_class%%';
-
-}
-function get_fields() {
-	$fields = array(
+		$this->main_css_element = '%%order_class%%';
+	}
+	function get_fields() {
+		$fields = array(
 			'heading_color' => array(
 				'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -1527,17 +1554,17 @@ function get_fields() {
 
 		return $fields;
 
-}
-function shortcode_callback( $atts, $content = null, $function_name ) {
-	$module_id            = $this->shortcode_atts['module_id'];
+	}
+	function shortcode_callback( $atts, $content = null, $function_name ) {
+		$module_id            = $this->shortcode_atts['module_id'];
 
-	$module_class         = $this->shortcode_atts['module_class'];
+		$module_class         = $this->shortcode_atts['module_class'];
 
-	$heading_color = $this->shortcode_atts['heading_color'];
+		$heading_color = $this->shortcode_atts['heading_color'];
 
-	$text_color= $this->shortcode_atts['text_color'];
+		$text_color= $this->shortcode_atts['text_color'];
 
-	$group_icon = $this->shortcode_atts['group_icon'];
+		$group_icon = $this->shortcode_atts['group_icon'];
 
 		$group_title = $this->shortcode_atts['group_title'];
 
@@ -1547,7 +1574,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 		$group_show_more_button = $this->shortcode_atts['group_show_more_button'];
 
-$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
+		$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 
 		$group_link1_show = $this->shortcode_atts['group_link1_show'];
 
@@ -1609,82 +1636,80 @@ $display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 
 		$group_link_url10 = $this->shortcode_atts['group_link_url10'];
 
-	global $et_pb_footer_group_item_num;
+		$class = "quarter";
 
-	$et_pb_impact_footer_item_num++;
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-	$class = "quarter";
+		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		$heading_color = ("" != $heading_color ?
+		sprintf(' style="color: %1$s" ', $heading_color) : '');
 
-	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+		$text_color = ("" != $text_color ?
+		sprintf(' style="color: %1$s" ', $text_color) : '');
 
-	$heading_color = ("" != $heading_color ?
-	sprintf(' style="color: %1$s" ', $heading_color) : '');
+		$icon = ("on" == $group_icon_button ? get_ca_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
 
-	$text_color = ("" != $text_color ?
-	sprintf(' style="color: %1$s" ', $text_color) : '');
+		$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 
-	$icon = get_ca_icon_span($group_icon, sprintf('color: %1$s;' , $text_color));
+		$no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
 
-	$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
+		$display_more_button = ("on" == $group_show_more_button ?
+		sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>',$group_url) : '');
 
-	$no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
+		$group_links = '';
 
-	$display_more_button = ("on" == $group_show_more_button ?
-	sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>',$group_url) : '');
+		$group_links .= ("on" == $group_link1_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url1, $link_as_button, $text_color, $icon, $group_link_text1 ) : '');
 
-	$group_links .= ("on" == $group_link1_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url1, $link_as_button, $text_color, $icon, $group_link_text1 ) : '');
+		$group_links .= ("on" == $group_link2_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url2, $link_as_button, $text_color, $icon, $group_link_text2 ) : '');
 
-	$group_links .= ("on" == $group_link2_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url2, $link_as_button, $text_color, $icon, $group_link_text2 ) : '');
+		$group_links .= ("on" == $group_link3_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url3, $link_as_button, $text_color, $icon, $group_link_text3 ) : '');
 
-	$group_links .= ("on" == $group_link3_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url3, $link_as_button, $text_color, $icon, $group_link_text3 ) : '');
+		$group_links .= ("on" == $group_link4_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url4, $link_as_button, $text_color, $icon, $group_link_text4 ) : '');
 
-	$group_links .= ("on" == $group_link4_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url4, $link_as_button, $text_color, $icon, $group_link_text4 ) : '');
+		$group_links .= ("on" == $group_link5_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url5, $link_as_button, $text_color, $icon, $group_link_text5 ) : '');
 
-	$group_links .= ("on" == $group_link5_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url5, $link_as_button, $text_color, $icon, $group_link_text5 ) : '');
+		$group_links .= ("on" == $group_link6_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url6, $link_as_button, $text_color, $icon, $group_link_text6 ) : '');
 
-	$group_links .= ("on" == $group_link6_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url6, $link_as_button, $text_color, $icon, $group_link_text6 ) : '');
+		$group_links .= ("on" == $group_link7_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url7, $link_as_button, $text_color, $icon, $group_link_text7 ) : '');
 
-	$group_links .= ("on" == $group_link7_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url7, $link_as_button, $text_color, $icon, $group_link_text7 ) : '');
+		$group_links .= ("on" == $group_link8_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url8, $link_as_button, $text_color, $icon, $group_link_text8 ) : '');
 
-	$group_links .= ("on" == $group_link8_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url8, $link_as_button, $text_color, $icon, $group_link_text8 ) : '');
+		$group_links .= ("on" == $group_link9_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url9, $link_as_button, $text_color, $icon, $group_link_text9 ) : '');
 
-	$group_links .= ("on" == $group_link9_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url9, $link_as_button, $text_color, $icon, $group_link_text9 ) : '');
+		$group_links .= ("on" == $group_link10_show ?
+		sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+		$group_link_url10, $link_as_button, $text_color, $icon, $group_link_text10 ) : '');
 
-	$group_links .= ("on" == $group_link10_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url10, $link_as_button, $text_color, $icon, $group_link_text10 ) : '');
+		$output = sprintf('<div%1$s class="%2$s%3$s">
+				<h4 %4$s>%5$s</h4>
+				<ul class="list-unstyled" style="list-style-type: none; %6$s">
+				%7$s</ul></div>' ,
+				( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+				esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+				 $heading_color, $group_title, $no_pad, $group_links);
 
-	$output = sprintf('<div%1$s class="%2$s%3$s">
-			<h4 %4$s>%5$s</h4>
-			<ul class="list-unstyled" style="list-style-type: none; %6$s">
-			%7$s</ul></div>' ,
-			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			 $heading_color, $group_title, $no_pad, $group_links);
+		return $output;
 
-	return $body;
-
-}
+	}
 }
 new ET_Builder_Module_Footer_Group;
 
@@ -1698,9 +1723,14 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
-	$this->whitelisted_fields = array('carousel_style', 'section_background_color','max_width',
-						'max_width_tablet', 'max_width_phone','module_class', 'module_id',
-						'admin_label',);
+		$this->whitelisted_fields = array('carousel_style',
+																			'section_background_color',
+																			'max_width',
+																			'max_width_tablet',
+																			'max_width_phone',
+																			'module_class',
+																			'module_id',
+																			'admin_label',);
 
 		$this->fields_defaults = array();
 
@@ -1762,7 +1792,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 	}
 
-		function pre_shortcode_content() {
+	function pre_shortcode_content() {
 		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_ca_section_carousel_style = $this->shortcode_atts['carousel_style'];
@@ -1771,7 +1801,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		$carousel_style            = $this->shortcode_atts['carousel_style'];
-	$module_id            = $this->shortcode_atts['module_id'];
+		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
 
@@ -1787,7 +1817,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		$class = "et_pb_ca_section_carousel et_pb_module " . $carousel_style;
+		$class = "et_pb_ca_section_carousel et_pb_module  " . $carousel_style;
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 		  $max_width_values = array(
@@ -1814,8 +1844,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 			</div> <!-- et_pb_ca_section_carousel -->',
 		( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-		$section_background_color, $this->shortcode_content
-);
+		$section_background_color, $this->shortcode_content);
 
 		return $output;
 
@@ -1825,35 +1854,35 @@ new ET_Builder_Module_CA_Section_Carousel;
 
 class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 	function init() {
-	$this->name = esc_html__( 'Carousel Slide', 'et_builder' );
+		$this->name = esc_html__( 'Carousel Slide', 'et_builder' );
 
-	$this->slug = 'et_pb_ca_section_carousel_slide';
+		$this->slug = 'et_pb_ca_section_carousel_slide';
 
-	$this->type = 'child';
+		$this->type = 'child';
 
-	$this->child_title_var = 'slide_title';
+		$this->child_title_var = 'slide_title';
 
-	$this->child_title_fallback_var = 'slide_title';
+		$this->child_title_fallback_var = 'slide_title';
 
-	$this->whitelisted_fields = array(
-		'slide_image', 'slide_title',
-		 'slide_desc',	'slide_url',
-		'slide_show_more_button','module_class', 'module_id',
-		);
+		$this->whitelisted_fields = array(
+			'slide_image', 'slide_title',
+			 'slide_desc',	'slide_url',
+			'slide_show_more_button','module_class', 'module_id',
+			);
 
-	$this->fields_defaults = array(
-		'slide_url' => array( 'http://','add_default_setting'),
-		);
+		$this->fields_defaults = array(
+			'slide_url' => array( 'http://','add_default_setting'),
+			);
 
-	$this->advanced_setting_title_text = esc_html__( 'New Carousel Slide', 'et_builder' );
+		$this->advanced_setting_title_text = esc_html__( 'New Carousel Slide', 'et_builder' );
 
-	$this->settings_text = esc_html__( 'Carousel Slide Settings', 'et_builder' );
+		$this->settings_text = esc_html__( 'Carousel Slide Settings', 'et_builder' );
 
-	$this->main_css_element = '%%order_class%%';
+		$this->main_css_element = '%%order_class%%';
 
-}
+	}
 	function get_fields(){
-	$fields = array(
+		$fields = array(
 			'slide_image' => array(
 				'label' => esc_html__( 'Image', 'et_builder' ),
 				'type' => 'upload',
@@ -1908,9 +1937,9 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				),
 			);
 
-	return $fields;
+			return $fields;
 
-}
+		}
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		$module_id            = $this->shortcode_atts['module_id'];
 
@@ -1918,44 +1947,48 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 
 		$slide_image = $this->shortcode_atts['slide_image'];
 
-	$slide_title = $this->shortcode_atts['slide_title'];
+		$slide_title = $this->shortcode_atts['slide_title'];
 
-	$slide_desc = $this->shortcode_atts['slide_desc'];
+		$slide_desc = $this->shortcode_atts['slide_desc'];
 
-	$slide_url = $this->shortcode_atts['slide_url'];
+		$slide_url = $this->shortcode_atts['slide_url'];
 
-	$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
+		$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
 
-		//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+			//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-	global $et_pb_slider_item_num;
-	global $et_pb_ca_section_carousel_style;
+		global $et_pb_slider_item_num;
+		global $et_pb_ca_section_carousel_style;
 
-	$et_pb_slider_item_num++;
+		$et_pb_slider_item_num++;
 
-	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-	$class = 'et_pb_ca_panel et_pb_module';
+		$class = $et_pb_ca_section_carousel_style . ' et_pb_module ';
 
-	$display_button = ("on" == $slide_show_more_button ?
-	sprintf('<button class="btn btn-primary">
-				<a href="%1$s">More Information</a></button>', $slide_url) : '');
+		$display_button = ("on" == $slide_show_more_button ?
+		sprintf('<br><button class="btn btn-primary">
+					<a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
 
-	$slide_title = ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : '');
+		$slide_title = ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : '');
 
-	$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
-	<div class="content-container">
-				<div class="content">
-	%5$s%6$s%7$s</div></div></div>',
-	( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-	esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-		("content_fit" == $et_pb_ca_section_carousel_style ? sprintf('style="background-image: url(%1$s);"', $slide_image) : ''),
-		( "image_fit" == $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s" />', $slide_image ) : '' ),
-		$slide_title, $slide_desc, $display_button );
+			$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>
+													%5$s
+													<div class="content-container">
+														<div class="content">
+														%6$s%7$s%8$s
+														</div>
+													</div>
+												</div>',
+		( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			("content_fit" == $et_pb_ca_section_carousel_style ? sprintf('style="background-image: url(%1$s);"', $slide_image) : ''),
+			( "image_fit" == $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s" />', $slide_image ) : '' ),
+			$slide_title, $slide_desc, $display_button );
 
-   return $output;
+			return $output;
 
-}
+	}
 }
 new ET_Builder_Module_CA_Section_Carousel_Slide;
 
@@ -1993,11 +2026,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'options'           => array(
 					'course-list' => esc_html__( 'Course List', 'et_builder'),
 					'events-list'  => esc_html__( 'Event List', 'et_builder' ),
-					'exams-list'  => esc_html__( 'Exam List', 'et_builder' ),
 					'jobs-list'  => esc_html__( 'Jobs List', 'et_builder' ),
-'news-list'  => esc_html__( 'News List', 'et_builder' ),
-			'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
-									'pubs-list'  => esc_html__( 'Publication List', 'et_builder' ),
+					'news-list'  => esc_html__( 'News List', 'et_builder' ),
+					'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
 			),
@@ -2088,11 +2119,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 	}
 	function shortcode_callback( $atts, $content = null, $function_name ) {
-			$module_id            = $this->shortcode_atts['module_id'];
+		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
 
-	$title            = $this->shortcode_atts['title'];
+		$title            = $this->shortcode_atts['title'];
 
 		$style            = $this->shortcode_atts['style'];
 
@@ -2108,9 +2139,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$orderby                 = $this->shortcode_atts['orderby'];
 
-		$order;
+		$order = '';
 
-		//$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		$cat_array = array();
+
+		$tag_array = array();
+
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
 		if ( 'date_desc' !== $orderby ) {
 			switch( $orderby ) {
@@ -2146,177 +2181,111 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 					$cat_array = get_terms( 'category', array('orderby' => $orderby, 'hide_empty' => 0, 'fields' => 'ids'));
 
 			}elseif ( "" !== $include_categories) {
-				$cat_array = split(',', $include_categories) ;
-
+					$cat_array = explode(" ", $include_categories);
 			}
-			if("on" == $all_tags_button ){
-					$tag_array = get_tags( array('orderby' => $orderby, 'hide_empty' => 0, 'fields' => 'ids'));
 
-			}elseif ( "" !== $include_tags) {
-				$tag_array =split(',',  $include_tags) ;
-
+			if("on" !== $all_tags_button){
+				$tag_array = get_tags( array( 'fields' => 'names' ) );
+			}elseif("" !== $include_tags){
+				$tag_array =	explode(" ", $include_tags);
 			}
+
+
 			$posts_number = ( !empty($posts_number) ? $posts_number : -1);
 
-		$all_posts = return_posts($cat_array ,$tag_array, $posts_number );
+			$counter = 1;
 
-		$output = sprintf('<div class="et_pb_ca_post_list"><h1>%1$s</h1>', $title);
+			$all_posts = return_posts($cat_array ,$tag_array, $posts_number );
 
-$counter = 1;
+			$output = sprintf('<div class="et_pb_ca_post_list">%1$s', ( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '' ));
 
-foreach ($all_posts as $a=>$p) {
-		switch($style){
-			case "events-list":
-		$output .= sprintf('<article class="event-item">
-					<h5><a href="%1$s"  class="title">%2$s</a></h5>
-					<div class="description">%3$s</div>
-					<div class="start-date"><time datetime="%4$s %5$s">%6$s</time></div>
-					</article>',
-					get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $excerpt. $sdate, $stime, date_format($date, "D, m/d/Y H:i a")  );
+			foreach ($all_posts as $a=>$p) {
+				switch($style){
+					case "course-list":
+					$date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_date'][0]: '' );
+					$desc= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_excerpt'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_excerpt'][0]: '' );
+					$location= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_location'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_location'][0]: '' );
+					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_image'][0]: '' );
 
-			break;
 
-			case "news-list":
-			$excerpt= get_post_custom( $all_posts[$a]->ID)['ca_news_excerpt'][0];
+					$output .= sprintf('<article class="course-item">
+												<div class="thumbnail" ><img src="%1$s" style="width: 70px; height: 70px;" /></div>
+												<div class="header"> <div class="title"><a href="%2$s">%3$s</a></div>
+												<div class="datetime" >%4$s</div></div><div class="body">
+        								<div class="description">%5$s</div><div class="location">%6$s</div></div>
+												<div class="footer"><a href="%2$s" class="btn btn-default">View More Details</a></div></article>',
+												$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $date, $desc, $location );
 
-			$image= get_post_custom( $all_posts[$a]->ID)['ca_news_image'][0];
 
-		$output .=	sprintf('<article class="news-item" itemscope itemtype="http://schema.org/NewsArticle">
+     			break;
+
+					case "events-list":
+					$desc= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_event_desc'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_event_desc'][0]: '' );
+
+					$date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_event_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_event_date'][0]: '' );
+
+
+							$output .= sprintf('<article class="event-item"><h5><a href="%1$s" class="title">%2$s</a></h5>
+																	<div class="description">%3$s</div>
+																	<div class="start-date"><time>%4$s</time></div></article>',
+										get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $desc, $date );
+
+							break;
+
+					case "jobs-list":
+					$location= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_location'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_location'][0]: '' );
+					$filing_date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_filing_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_filing_date'][0]: '' );
+					$position_type= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_position_type'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_position_type'][0]: '' );
+
+					$output .= sprintf('<article class="job-item"><div class="header"><div class="title"><a href="%1$s">%2$s</a></div>
+											<div class="filing-date"><time>%3$s</time></div></div>
+		 									<div class="body"><div>%4$s</div><div>%5$s</div></div>
+											<div class="footer"><a href="%1$s" class="btn btn-default">View More Details</a></div></article>',
+														get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $filing_date, $position_type, $location );
+
+					break;
+					case "news-list":
+					$excerpt= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_news_excerpt'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_news_excerpt'][0]: '' );
+
+					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_news_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_news_image'][0]: '' );
+
+
+							$output .=	sprintf('<article class="news-item" itemscope itemtype="http://schema.org/NewsArticle">
 			        <div class="thumbnail"  style="width: 150px !important; height: 100px !important;"><img itemprop="thumbnailUrl" src="%1$s" alt=""></div>
 			        <div class="info">
 			            <div class="headline"  itemprop="headline"><a href="%2$s" itemprop="url">%3$s</a></div>
- 				<div class="description" itemprop="articleBody" style="margin-left: 133px !important;"><p>%4$s</p></div>
+ 									<div class="description" itemprop="articleBody" style="margin-left: 133px !important;"><p>%4$s</p></div>
 			            <div class="published" style="margin-left: 133px !important;">Published: <time itemprop="datePublished" datetime="%5$s">%6$s</time></div>
 			        </div>
-			    </article>',
-			$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $excerpt,
-			format_date($all_posts[$a]->post_date, "c"),format_date($all_posts[$a]->post_date, "M d, Y")   );
+			    		</article>',
+							$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $excerpt,
+							format_date($all_posts[$a]->post_date, "c"),format_date($all_posts[$a]->post_date, "M d, Y")   );
 
-			break;
+							break;
 
-		case "course-list":
-			$location= get_post_custom( $all_posts[$a]->ID)['ca_course_location'][0];
+					case "profile-list":
+					$profile_title= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_profile_job_title'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_profile_job_title'][0]: '' );
 
-			$time= get_post_custom( $all_posts[$a]->ID)['ca_course_time'][0];
+					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_profile_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_profile_image'][0]: '' );
 
-			$desc= get_post_custom( $all_posts[$a]->ID)['ca_course_desc'][0];
 
-			$image= get_post_custom( $all_posts[$a]->ID)['ca_course_image'][0];
+							$output .=	sprintf('<article class="profile-item"><div class="thumbnail"><img src="%1$s"></div>
+																	<div class="header"><div class="title"><a href="%2$s">%3$s</a></div></div>
+																	<div class="body"><div class="job">%4$s</div>
+																	<div class="footer"><a href="%2$s" class="btn btn-default">View More Details</a></div></article>',
+																	$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $profile_title);
 
-			$output .= '<article class="course-item"  itemscope itemtype="http://schema.org/Event">
-     <div class="thumbnail" >
-         <img src="'. $image . '" alt=""  itemprop="image" style="width: 70px; height: 70px;">
-     </div>
-     <div class="header">
-         <div class="title"  itemprop="name"><a href="' . get_permalink($all_posts[$a]->ID) . '">' . $all_posts[$a]->post_title . '</a></div>
-         <div class="datetime" itemprop="startDate" >' . $time .'</div>
-     </div>
-     <div class="body">
-         <div class="description">'. $desc. '</div>
-         <div class="location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress">' . $location .'</div>
-     </div>
-     <div class="footer">
-         <a href="' . get_permalink($all_posts[$a]->ID) . '" class="btn btn-default" itemprop="url">View More Details</a>
-     </div>
- </article>';
+							break;
 
-		break;
-
-		case "exams-list":
-	$output .= '<article class="exam-item">
-	<div class="header">
-		<div class="title"><a href="' . get_permalink($all_posts[$a]->ID) . '">' . $all_posts[$a]->post_title . '</a></div>
-			<div class="filing-date">Final Filing Date <time datetime="'. $sdate . ' ' . $stime . '">' .	date_format($date, "m/d/Y") .'</time></div>
-	</div>
-		 <div class="body">
-	 <div class="id">ID: <span>' . $exam_id . '</span></div>
-		 <div class="base">Base:<span>' . $exam_base . '</span></div>
-		 </div>
-		 <div class="footer">
-	 <div class="published">Published: <time datetime="'. $sdate . ' ' . $stime . '">' .
-date_format($date, "M d, Y") .'</time></div>
-				 <a href="' . get_permalink($all_posts[$a]->ID) . '" class="btn btn-default">View More Details</a>
-		 </div>
-	</article>';
-
-		break;
-
-	case "jobs-list":
-		$location= get_post_custom( $all_posts[$a]->ID)['ca_job_location'];
-
-		$filing_date= get_post_custom( $all_posts[$a]->ID)['ca_job_filing_date'];
-
-		$position_type= get_post_custom( $all_posts[$a]->ID)['ca_job_position_type'];
-
-	$output .= '<article class="job-item" itemscope itemtype="http://schema.org/JobPosting">
-	<div class="header">
-			<div class="title"  itemprop="title"><a href="' . get_permalink($all_posts[$a]->ID) . '" itemprop="url">' . $all_posts[$a]->post_title . '</a></div>
-			<div class="filing-date">Final Filing Date <time datetime="">' . $filing_date	 .'</time></div>
-	</div>
-		 <div class="body">
-	 	<div> ' . $position_type. '</div>
-			<div> ' . $location . '</div>
-		 </div>
-		 <div class="footer">
-				 <a href="' . get_permalink($all_posts[$a]->ID) . '" class="btn btn-default" itemprop="url">View More Details</a>
-		 </div>
-	</article>';
-
-		break;
-
-			case "pubs-list":
-			$offset = 'odd';
-
-			if($counter % 2 == 0){
-				$offset = 'even';
-
+					}
 			}
-		$output .=	'<article class="pub-item '. $offset . '">
-			        <div class="thumbnail"><img src="'. $image . '" alt="" style="width: 70px; height: 93px;"></div>
-			        <div class="pub-body">
-			            <div class="pub-title">' . $all_posts[$a]->post_title .
-			'<span class="pub-language">(<a href="'. $doc . '">PDF</a>) | <span class="pub-revision-date">(Revision Date <time datetime="'. $sdate . ' ' . $stime . '">' .
-				date_format($date, "M d, Y") .'</time>)</span></span>
-				</div>
-				</div>
-				 <div class="footer" style="padding-right: 15px;">
-				 <a href="' . get_permalink($all_posts[$a]->ID) . '" class="btn btn-default" style="float: right;">View More Details</a>
-		 </div>
-				</article>';
 
-			$counter++;
 
-			break;
-
-			case "profile-list":
-		$output .=	'<article class="profile-item">
-			        <div class="thumbnail"><img src="'. $image . '" alt=""></div>
-							<div class="header">
-							<div class="title"><a href="' . get_permalink($all_posts[$a]->ID) . '">' . $all_posts[$a]->post_title . ', ' . $profile_title  . '</a></div>
-								</div>
-			        <div class="body">
-							<div class="job">' . $profile_job  . '</div>
-		 			 <div class="appointed">Appointed on <time datetime="2010-12-10">'. $profile_appointed . '</time></div>';
-
-						if("" != $profile_reappointed){
-			 			 $output .= '<div class="reappointed">Reappointed on <time datetime="2011-03-01">'. $profile_reappointed . '</time></div>';
-
-			 			}
-						$output .= '<div class="term-end">Term ends <time datetime="2015-02-28">'. $profile_term_end . '</time></div>
-			        </div>
-							<div class="footer">
-					 			 <a href="' . get_permalink($all_posts[$a]->ID) . '" class="btn btn-default">View More Details</a>
-					 	 </div></article>';
-
-			break;
-
-		}
-}
 		$output .= '</div> <!-- .et_pb_ca_post_list -->';
 
-	return $output;
+			return $output;
 
-}
+	}
 }
 new ET_Builder_Module_CA_Post_List;
 
@@ -2330,7 +2299,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 			'name',
 			'job_title', 'admin_label',
 			'url', 'module_class', 'module_id',
-			'portrait_url',
+			'portrait_url', 'profile_link',
 		);
 
 		$this->fields_defaults = array(
@@ -2353,6 +2322,12 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Input the job title.', 'et_builder' ),
+			),
+			'profile_link' => array(
+				'label'           => esc_html__( 'Profile Link', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Input the text for the profile link.', 'et_builder' ),
 			),
 			'url' => array(
 				'label'           => esc_html__( 'Profile URL', 'et_builder' ),
@@ -2402,21 +2377,23 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 
 		$job_title              = $this->shortcode_atts['job_title'];
 
+		$profile_link              = $this->shortcode_atts['profile_link'];
+
 		$portrait_url           = $this->shortcode_atts['portrait_url'];
 
 		$url                    = $this->shortcode_atts['url'];
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-		$banner_style = 'style="background:url('.get_stylesheet_directory_uri().'/images/banner/banner-blank.png' . ') no-repeat;background-size: 100% 100%; overflow: hidden; height: 90px;"';
+		$banner_style = 'style="background:url('.get_stylesheet_directory_uri().'/images/banner/banner-blank.png' . ') no-repeat; background-size: 100% 100%;"';
 
-		$output = sprintf('<div class="profile-banner" %1$s>
+		$output = sprintf('<div id="profile-banner-wrapper"><a href="%5$s"><div class="profile-banner" %1$s>
 					<img src="%2$s" style="width: 90px; min-height: 90px;float: right;"/>
 					<div class="banner-subtitle">%3$s</div>
 					<div class="banner-title">%4$s</div>
-					<div class="banner-link"><a href="%5$s">Profile</a></div>
-					</div>',
-					$banner_style, $portrait_url, $job_title, $name, $url);
+					<div class="banner-link"><a href="%5$s">%6$s</a></div>
+					</div></a></div>',
+					$banner_style, $portrait_url, $job_title, $name, $url, $profile_link );
 
 		return $output;
 

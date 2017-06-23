@@ -18,7 +18,7 @@ if(document.getElementById('et_pb_ca_fullwidth_banner')){
 }
 </script>
 <?php endif; ?>
-<footer id="footer" class="global-footer">
+<footer id="footer" class="global-footer hidden-print">
 	<div class="container <?=  ( ! ca_version_check(4, $post_id ) ? 'ca_wp_container' : '' ); ?> ">
 
     <div class="<?php print (ca_version_check(4, $post_id ) ? 'full' : 'three-quarters' ); ?>">
@@ -75,4 +75,10 @@ if(document.getElementById('et_pb_ca_fullwidth_banner')){
 <script>document.write(new Date().getFullYear())</script> State of California </div> </div>
 
 </footer> <!-- Extra Decorative Content --> <div class="decoration-last">&nbsp;</div>
-<?php wp_footer(); ?>
+<?php 
+	wp_footer();
+	
+if("" != get_option('ca_custom_css') ){
+	printf('<style>%1$s</style>', get_option('ca_custom_css'));
+}
+?>

@@ -1,48 +1,18 @@
-/* HIDE THE 'Enable Visual Builder' Button*/
-#et_pb_fb_cta{
-  display: none !important;
-}
-
-/* CAWeb Top Level Menu Icon */
-li#toplevel_page_ca_options a div.wp-menu-image::before{
-	content: "\e600";
-	font-family: 'CaGov';
-}
-
-
-/* Backend Page Bulder Styles */
-/* This is the background color for the Divi Panel that pops open
-	when inserting modules or sections */
-.et-pb-main-settings{
-
-background-color: lightblue;
-
-}
-
-ul.et_font_icon {
-	background-color: white !important;
-	max-height: 300px;
-}
-.et_font_icon li {
-    background: transparent !important;
-		font-size: 30px;
-}
-.et-pb-option-container .description {
-    color: black !important;
-}
-/* End of Backend Page Bulder Styles */
-
 /* CAWeb Options Page Styles */
 /* Indent fields under each categoryy */
 .form-table th{
     padding: 20px 10px 20px 50px;
   }
+#custom-css textarea{
+	width: 100%;
+	min-height: 700px;
+}
 
-#general, #social-share, #google_translate_options, .extra , .base {
+#general, #social-share, #google_translate_options, .extra , .base, #custom-css{
     display: none;
 }
 
- #general.show, #social-share.show, #google_translate_options.show, div.show   {
+ #general.show, #social-share.show, #google_translate_options.show,  div.show, #custom-css.show   {
     display: inline;
 }
 
@@ -58,16 +28,12 @@ ul.et_font_icon {
   }
 
 /* CAWeb Navigation Page Styles */
- .mega_menu_images, .media_image, .unit_selector, .icon_selector{
-    display:none;
-  }
-
-   .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
+ .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
     display:block;
   }
 
-.menu-item-edit-inactive .menu-item-settings {
-    display: none !important;
+.mega_menu_images, .media_image, .unit_selector, .icon_selector {
+    display: none ;
 }
   .menu-item-edit-active .menu-item-settings {
     display: inline-block !important;
@@ -76,6 +42,10 @@ ul.et_font_icon {
 h2.nav-tab-wrapper{
   border-bottom: none !important;
 
+}
+/* Remove Auto-add Pages from Navigation menu */
+dl.auto-add-pages {
+    display: none;
 }
 /* Icon List */
   ul.menu-icon-list{
@@ -96,8 +66,6 @@ ul.menu-icon-list li:hover{
  ul.menu-icon-list li.is_selected{
     background-color: cornflowerblue;
 }
-
-
 
 /* Tooltip Styles */
 /* Tooltip container */

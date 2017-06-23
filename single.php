@@ -1,12 +1,8 @@
 <?php
 
-
-
 get_header();
 
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
-
-
 
 ?>
 
@@ -20,8 +16,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <div id="main-content" class="main-content">
 
-
-
 <?php if ( ! ca_version_check(4) ) : ?>
 
 	<div class="ca_wp_container">
@@ -31,18 +25,10 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <main class="main-primary">
 
-<!-- Breadcrumbs (not on Post Pages ol has no class)-->
-<ol></ol>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-
-
-
-
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-
 
 
 					<div class="entry-content">
@@ -50,49 +36,37 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 
  <!-- Page Title-->
+
+
 <?php if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) : ?>
+
+
 <h1 class="page-title" ><?php echo $post->post_title; ?></h1>
+
+
 <?php endif; ?>
+
+
 					<?php
 
 
 						the_content();
 
-
-
 						if ( ! $is_page_builder_used )
-
-
 
 							wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 
 					?>
 
-
-
-
-
 					</div> <!-- .entry-content -->
-
-
 
 				<?php
 
-
-
-
-
 					if ( ! $is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) comments_template( '', true );
-
-
 
 				?>
 
-
-
 				</article> <!-- .et_pb_post -->
-
-
 
 			<?php endwhile; ?>
 
@@ -102,11 +76,11 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 <?php if ( ! ca_version_check(4) ) : ?>
+
+
   </div>
 
 <?php endif; ?>
-
-
 
 </div> <!-- #main-content -->
 
@@ -114,12 +88,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 </div>
 
-
-
 <?php get_footer(); ?>
-
-
-
-
 
 </body>

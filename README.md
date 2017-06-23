@@ -1,5 +1,7 @@
+ ![Screenshot](http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png)
 #Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+The CA Web Publishing service is a dynamic, feature-rich service that provides State agency customers an Enterprise-Level Web Content Management System (WCMS) solution. Agencies can host their websites in this service with the confidence that 
+their sites are supported within a highly secure and highly available technology infrastructure, all run within the State of California Data Center.
 
 #Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:

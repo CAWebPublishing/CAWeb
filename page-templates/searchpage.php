@@ -78,7 +78,6 @@ google.setOnLoadCallback(function() {
 
   </div>
 
-
 <?php endif; ?>
 
 </div> <!-- #main-content -->
@@ -88,8 +87,31 @@ google.setOnLoadCallback(function() {
     visibility: hidden;
 }
   .gssb_c {
-    top: 340px !important;
+		/*	table-layout: fixed;*/
+		top: 340px !important;
 }
 </style>
 
 <?php get_footer(); ?>
+<?php if (  ca_version_check(4) ) : ?>
+<style>
+.section-default .ca_wp_container {
+    margin: 0;
+}
+.textfield-container {
+    float: left;
+    padding-right: 15px;
+    width: calc(97% - 15px);
+}
+input#search_local_textfield {
+    width: 100%;
+}
+div#head-search {
+    display: none;
+}
+div#google_translate_element {
+    top: 10px;
+}
+</style>
+
+<?php endif; ?>

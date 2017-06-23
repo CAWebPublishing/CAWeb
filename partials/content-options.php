@@ -1,34 +1,35 @@
 <div class="wrap option-titles" >
 
-<h1 >CAWeb Options</h1>
+<h1 >Settings</h1>
 
 <h2 class="nav-tab-wrapper wp-clearfix">
 
 	<a href="#general-settings" name="general" class="nav-tab nav-tab-active" onclick="toggleOptionView(this)">General Settings</a>
 
 	<a href="#social-share-settings" name="social-share" class="nav-tab" onclick="toggleOptionView(this)">Social Media Links</a>
+	
+	  <a href="#custom-css-settings" name="custom-css" class="nav-tab" onclick="toggleOptionView(this)">Custom CSS</a>
 
 </h2>
 </div>
 <form id="ca-options-form" action="options.php" method="POST">
 <?php
 	settings_fields('ca_site_options');
-
 ?>
 
 <div id="ca-options-container">
 
 <!-- General Settings -->
-<div id="general" class="show">
+<div id="general" class="show">	
+	
   <h1 class="option">General Settings</h1>
 
 <table class="form-table">
-
 <tr><th scope="row"><div class="tooltip">Fav Icon
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
 	<input type="text" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico'); ?>" >
-	<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon" data-update="Set as Fav Icon" data-option="image/x-icon">
+		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon" data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 	</td></tr>
 
   <tr>
@@ -37,14 +38,14 @@
 		<td>
 			<select id="ca_site_version" name="ca_site_version" onchange="toggleOptions(this)">
 				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0 - beta</option>
-				<option value="4_5" <?= ( get_option('ca_site_version') == '4_5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option>
+				<option value="4.5" <?= ( get_option('ca_site_version') == '4.5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option>
 				<option value="4" <?= ( get_option('ca_site_version') == '4' ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
 			</select>
 		</td>
 	</tr>
 	<tr >
-		<th scope="row"><div class="tooltip">Default Navigation Menu
-			<span class="tooltiptext">Set a Navigation Menu Style as the default on all newly created pages.</span></div></th>
+		<th scope="row"><div class="tooltip">Header Menu Type
+			<span class="tooltiptext">Set a Navigation Menu Style for all pages.</span></div></th>
 		<td>
 			<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
 				<option value="megadropdown"
@@ -57,8 +58,16 @@
 			</select>
 		</td>
 	</tr>
-
-
+	
+<?php if( current_user_can('manage_network_options') ): ?>
+		<tr>
+		<th scope="row"><div class="tooltip">Show Menu Type Selector
+			<span class="tooltiptext">Displays a Header Menu Type Selector on the Page Editor Level.</span></div></th>
+    <td><input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"
+			<?= ( get_option('ca_menu_selector_enabled') == true ? 'checked="checked"' : '' ) ?> />
+    </td>
+	</tr>
+<?php endif; ?>
 
   <tr>
 		<th scope="row"><div class="tooltip">Color Scheme
@@ -83,18 +92,14 @@
 			</select>
 		</td>
 	</tr>
-  	<!--tr>
-		<th scope="row"><div class="tooltip">Show Breadcrumbs
-			<span class="tooltiptext">Display a secondary navigation scheme, from the current page back to the Front Page.</span></div></th>
-    <td><input type="checkbox" name="ca_breadcrumbs_enabled" id="ca_breadcrumbs_enabled" <?= ( get_option('ca_breadcrumbs_enabled') == true ? 'checked="checked"' : '' ) ?> />
-    </td></tr-->
-
+	<?php if ( !is_caweb_intranet_site() ) : ?>
   <tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
 			<span class="tooltiptext">Display a visible search box on the Front Page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
+<?php endif; ?>
   	<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
 		<span class="tooltiptext">This will allow the Navigation Menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
@@ -132,7 +137,6 @@
 		<th scope="row"><div class="tooltip">Enable Geo Locator
 			<span class="tooltiptext">Displays a Geo Locator feature at the top right of each page.</span></div></th>
 		<td><input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?= ( get_option('ca_geo_locator_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
-
 </table>
   </div>
 
@@ -170,6 +174,7 @@
 	<input type="button" value="Browse" class="library-link" name="header_ca_background" data-choose="Choose a Header Background" data-update="Set as Header Background">
 	</td></tr>
 </table>
+	<?php if( !is_caweb_intranet_site() ) : ?>
 <h1 class="option">Google</h1>
 <table class="form-table">
 
@@ -196,7 +201,7 @@
 		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
 
 </table>
-
+<?php endif; ?>
 </div>
 
 
@@ -290,8 +295,34 @@
 	</tr>
 </table>
 </div>
+	
+	<div id="custom-css">
+  <h1 class="option">Custom CSS</h1>
+		<table class="form-table">
+
+		<tr>
+			<th><div class="tooltip">Stylesheet<span class="tooltiptext">Any styles added will override any pre-existing styles. </span></div></th>
+			<td><textarea id="ca_custom_css" name="ca_custom_css" ><?php echo get_option('ca_custom_css'); ?> </textarea></td>
+		</tr>	
+		</table>
+
+	</div>
+	
 </div>
-
 <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
-
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

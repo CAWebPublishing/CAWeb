@@ -104,7 +104,7 @@ $(document).ready(function() {
  $(".textfield-container").click(function() {
   document.getElementById("head-search").classList.add("search-freeze-width")
     });
-  
+
     $(".search-textfield").blur(function() {
         document.getElementById("head-search").classList.remove("search-freeze-width")
 
