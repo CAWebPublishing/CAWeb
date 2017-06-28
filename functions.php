@@ -27,12 +27,6 @@ define('CAWebUri', get_stylesheet_directory_uri()) ;
 
 define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 
-// This is a temporary fix
-function caweb_login_logo() {
-	print '<style>#login h1 a, .login h1 a { background-size: 329px 110px; height: 110px; width: 329px; background-image: url('. CAWebUri .'/images/CAWEB.png); }</style>';
-}
-add_action( 'login_enqueue_scripts', 'caweb_login_logo' );
-
 // After Setup Theme
 function ca_setup_theme(){
 	global $ca_navigation_images;
@@ -191,12 +185,14 @@ function ca_theme_enqueue_style() {
 
  	wp_register_script('cagov-core-script',	CAWebUri. '/js/cagov.core.js', array('jquery'), '1.0', true );
 	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js', '', '1.0', true );
+	wp_register_script('cagov-ga-autotracker-script',	CAWebUri. '/js/libs/AutoTracker.js', '', '1.0', true );
 
 	// Localize the search script with the correct site url
 	wp_localize_script( 'cagov-search-script', 'site', array('site_url' => site_url()) );
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
+  wp_enqueue_script( 'cagov-ga-autotracker-script' );
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
 

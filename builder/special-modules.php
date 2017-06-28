@@ -178,7 +178,6 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'remove_general_detail' ) );
-		//add_action( 'admin_footer', array( $this, 'remove_general_detail' ) );
 	}
 
 	function get_fields() {
@@ -1870,7 +1869,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );		
 	}
 	function get_fields() {
 		$fields = array(
@@ -1954,6 +1953,30 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
+			'max_width' => array(
+				'label'           => esc_html__( 'Max Width', 'et_builder' ),
+				'type'            => 'skip',
+				'option_category' => 'layout',
+				'mobile_options'  => true,
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'width',
+				'validate_unit'   => true,
+			),
+			'max_width_tablet' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
+			),
+			'max_width_phone' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
+			),
+			'max_width_last_edited' => array(
+				'type'        => 'skip',
+				'tab_slug'    => 'advanced',
+				'toggle_slug' => 'width',
+			),
 		);
 
 		return $fields;
@@ -2036,8 +2059,8 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					$updated_at = ("on" == $definitions[5] ?
 												sprintf('<strong>Updated on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->updated_at ) )  ) : '');
 
-					$language =("on" == $definitions[6] ?
-											sprintf('<strong>Language: </strong>%1$s<br />', (!empty( $repo->language ) ? $repo->language : 'English' ) ) : '');
+					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
+											sprintf('<strong>Language: </strong>%1$s<br />', $repo->language  ) : '');
 
 					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
 														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
@@ -2056,6 +2079,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		return $output;
 
 	}
+	
 
 	// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
@@ -2063,7 +2087,65 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		function js_frontend_preview() {
 			?>
 			<script>
+				var newCall = '';
+				var amount = 0;
+				var repos = {};
+									
+				window.<?php echo $this->slug; ?>_preview = function(args) {
+					var output =  '';
+					
+					if( "" !== args.username  && "" !== args.client_id && "" !== args.client_secret ){
+						if("" == newCall || amount !== args.per_page){
+							newCall = args.definitions;
+							amount = args.per_page
+								
+							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page + 
+												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;	
+							
+							jQuery.get(url, function(response){
+										repos = response;
+							});						
+							
+						}
+						
+						var definitions =  undefined !== args.definitions && !Array.isArray(args.definitions) ? args.definitions.split("|") : args.definitions;
+							
+						for (var i = 0; i < repos.length; i++){		
+										if("on" == definitions[0] && "on" !== definitions[1]){
+											var name = '<strong>Project Title: </strong>' + repos[i].name + '<br />';
+										}else if("on" == definitions[0] && "on" == definitions[1]){
+											var name = '<strong>Project Title: </strong><a href="' + repos[i].html_url + '" target="blank">' +  repos[i].name + '</a><br />';
+										}else{
+											var name = '';
+										}
+					
+										var desc = "on" == definitions[2] && null !== repos[i].description ?
+															'<strong>Project Description: </strong>' + repos[i].description + '<br />' : '';
+					
+										var fork = "on" == definitions[3] ?
+												'<strong>Project governed by another organization: </strong>' + ( "" == repos[i].fork ? 'false' : 'true') + '<br />' :	'';
+					
+										var created_at = "on" == definitions[4] ?
+																	'<strong>Created on: </strong>' + repos[i].created_at + '<br />' : '';
+					
+										var updated_at = "on" == definitions[5] ?
+																	'<strong>Updated on: </strong>' + repos[i].updated_at + '<br />' : '';
+					
+										var language = "on" == definitions[6] && null !== repos[i].language?
+																'<strong>Language: </strong>' + repos[i].language   + '<br />' : '';
 
+										output += '<ul style="padding-bottom: 0px;"><li>' + 
+																	name + desc + fork + created_at + updated_at + language + '</li><hr></ul>';
+																				
+							}
+						
+						output = '<div>' + (undefined == args.title ? "<h2>No Title Set</h2>" : "<h2>" + args.title + "</h2>") + output + '</div>';
+				
+						return  output;
+						
+					}
+
+				}
 			</script>
 			<?php
 		}

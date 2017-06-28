@@ -289,7 +289,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 
 	}
 
-	// This is a non-standard function. It outputs JS code to render the
+		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function js_frontend_preview() {
@@ -990,8 +990,10 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		}
 		$display_icon = ("on" == $show_icon ? get_icon_span($icon) : '');
 
-		$address = sprintf('%1$s, %2$s, %3$s, %4$s', $addr, $city, $state, $zip);
-
+		$address = array( $addr, $city, $state, $zip);
+		$address = array_filter( $address);
+		$address = implode(",", $address);
+		
 		if("contact" == 	$location_layout ){
 				$display_other = ("on" == $show_contact ?
 				sprintf('<p class="other">%1$s%2$s</p>',
@@ -1011,11 +1013,11 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 
 		}elseif("mini" == 	$location_layout ){
 			$output = sprintf('<div%1$s class="%2$s%3$s mini">
-				%4$s<div class="contact"><div class="title"><a href="%5$s">%6$s</a></div>
+				%4$s<div class="contact"%8$s><div class="title"><a href="%5$s">%6$s</a></div>
 				<div class="address">%7$s</div></div></div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-				("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name, $address);
+												("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name, $address, ( empty($display_icon) ? ' style="margin-left: 0px;"' : '' ) );
 
 		}else{
 			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">View More Details</a>',$location_link) : '' );
@@ -1044,8 +1046,11 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 			<script>
 			window.<?php echo $this->slug; ?>_preview = function(args) {
 				var output = '';
-				var address = args.addr + ', ' + args.city + ', ' + args.state + ', ' + args.zip;
-
+				var address = [args.addr , args.city , args.state , args.zip];
+				address = address.filter(function(n){  if(n !== undefined) return n.trim(); });
+				address = address.filter(function(n){  return n !== ""  });
+				address = address.join(', ');
+				
 				var icon_list = <?= json_encode( get_ca_icon_list(-1,'',true) ) ?>;
 				var display_icon = "on" == args.show_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
 				
@@ -1072,7 +1077,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 									display_other + display_button + '</div></div>';
 						
 				} else if("mini" == args.location_layout) {
-					var output = '<div class="location mini">' + display_icon + '<div class="contact"><div class="title">' +
+					var output = '<div class="location mini">' + display_icon + '<div class="contact"' + ("" == display_icon ? ' style="margin-left: 0px;"' : '') + '><div class="title">' +
         '<a href="' + args.location_link + '">' + args.name + '</a></div><div class="address">' + address + '</div></div></div>';
 
 				}else{
@@ -1379,14 +1384,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 		if("on" == $featured_image_button){
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
-     $img_style = ("on" == $image_pos ? 'style="padding-left:15px; padding-right: 0;"' : 'style="padding-left: 0;"');
 
-			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" %3$s>
-					<img src="%2$s" class="img-responsive"></div>' , $img_class, $section_image, $img_style);
+			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s">
+					<img src="%2$s" class="img-responsive" style="width: 100%%;"></div>' , $img_class, $section_image);
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
 
-				$section = sprintf('<div class="col-md-15"><h2%1$s>%2$s</h2>%3$s%4$s</div>',
+			$section = sprintf('<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2%1$s>%2$s</h2>%3$s%4$s</div>',
 					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
@@ -1430,14 +1434,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				if("on" == args.featured_image_button){
         	var img_class = "on"== args.slide_image_button  ? ' animated fadeInLeft ' : '';
       		 img_class += "on" == args.left_right_button ? 'pull-right' : 'pull-left' ;
-					var img_style = "on" == args.left_right_button ? 'style="padding-left:15px; padding-right: 0;"' : 'style="padding-left: 0;"';
 
-					var display_image = '<div class="col-md-4 col-md-offset-0 ' + img_class + '" ' + img_style +'>' +
-							'<img src="' + args.section_image + '" class="img-responsive"></div>';
+					var display_image = '<div class="col-md-4 col-md-offset-0 ' + img_class + '">' +
+							'<img src="' + args.section_image + '" class="img-responsive" style="width: 100%;"></div>';
 
 					var heading_style = "" !== heading_text_color ? ' style="' + heading_text_color + '" ' : '';
 
-					var section = '<div class="col-md-15"><h2' + heading_style + '>' + args.section_heading + '</h2><p>' + 
+					var section = '<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2' + heading_style + '>' + args.section_heading + '</h2><p>' + 
 							this.props.content + '</p>' + display_button + '</div>';
 					
 					var body = display_image + section;
@@ -3297,7 +3300,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		$this->name = esc_html__( 'Profile Banner', 'et_builder' );
 
 		$this->slug = 'et_pb_profile_banner';
-
+		$this->fb_support = true;
+		
 		$this->whitelisted_fields = array(
 			'name',
 			'max_width',
@@ -3347,6 +3351,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		  ),
 		);
 
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -3397,7 +3403,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				  'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 			  'description' => esc_html__('Switch to yes if you want round images in the profile banner.'),
-				'toggle_slug'			=> 'style',
+				'toggle_slug'			=> 'body',
 			),
 			'max_width' => array(
 			  'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -3493,8 +3499,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
 
-		$banner_style = 'style="background:url('.get_stylesheet_directory_uri().'/images/banner/banner-blank.png' . ') no-repeat; background-size: 100% 100%;"';
-
 		$image = ('on' !== $round ?
 						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :
 						sprintf('<div class="profile-banner-img-wrapper">
@@ -3502,20 +3506,44 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 						</div>', $portrait_url)
 				  );
 
-		$output = sprintf('<div id="profile-banner-wrapper" class="%8$s%9$s"><a href="%5$s"><div class="profile-banner%7$s" %1$s>
-											%2$s
-											<div class="banner-subtitle">%3$s</div>
-											<div class="banner-title">%4$s</div>
-											<div class="banner-link"><p>%6$s</p>
+		$output = sprintf('<div id="profile-banner-wrapper" class="%7$s%8$s"><a href="%4$s"><div class="profile-banner%6$s">
+											%1$s
+											<div class="banner-subtitle">%2$s</div>
+											<div class="banner-title">%3$s</div>
+											<div class="banner-link"><p>%5$s</p>
 						          </div></div></a></div>',
-					($round == 'off' ? $banner_style : ''),  $image, $job_title, $name, $url,
+											$image, $job_title, $name, $url,
 					$profile_link, ('on' !== $round ? '' : ' round-image'),  esc_attr( $class ),
     	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 
 		return $output;
 
 	}
+	
+		// This is a non-standard function. It outputs JS code to render the
+		// module preview in the new Divi 3 frontend editor.
+		// Return value of the JS function must be full HTML code to display.
+		function js_frontend_preview() {
+			?>
+			<script>
+			window.<?php echo $this->slug; ?>_preview = function(args) {
+				var output = '';
+				
+				var image = ('on' !== args.round_image ?
+						'<img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/>'  :
+						'<div class="profile-banner-img-wrapper"><img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/></div>' );
+
+				output = '<div id="profile-banner-wrapper"><a href="' + args.url + '"><div class="profile-banner' + ('on' !== args.round_image ? '' : ' round-image') + '">' + image +
+								'<div class="banner-subtitle">' + args.job_title+ '</div><div class="banner-title">' + args.name + '</div><div class="banner-link"><p>' + args.profile_link + '</p></div></div></a></div>';
+
+				return output;
+
+			}
+			</script>
+			<?php
+		}
 }
 new ET_Builder_Module_Profile_Banner;
+
 
 ?>

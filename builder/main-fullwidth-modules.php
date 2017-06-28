@@ -3,6 +3,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 	function init(){
 		$this->name = esc_html__( 'FullWidth Panel', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_panel';
+		$this->fb_support = true;
 		$this->fullwidth       = true;
 
 		$this->whitelisted_fields = array(
@@ -56,6 +57,10 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					),
 				),
 			);
+		
+		
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 
 	function get_fields() {
@@ -73,7 +78,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					'understated'  => esc_html__( 'Understated','et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
-				'affects' => array('#et_pb_heading_text_color'),
+				'affects' => array('heading_text_color'),
 				'toggle_slug' => 'style',
 			),
 			'title' => array(
@@ -111,7 +116,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'affects' => array('#et_pb_icon',),
+				'affects' => array('icon',),
 				'description' => 'Choose whether to display an icon before the Heading',
 				'toggle_slug'       => 'header',
 			),
@@ -134,7 +139,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('#et_pb_button_link',),
+				'affects' => array('button_link',),
 				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
 				'toggle_slug'       => 'header',
 			),
@@ -276,6 +281,22 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 
 		return $output;
 	}
+	
+		// This is a non-standard function. It outputs JS code to render the
+		// module preview in the new Divi 3 frontend editor.
+		// Return value of the JS function must be full HTML code to display.
+		function js_frontend_preview() {
+			?>
+			<script>
+			window.<?php echo $this->slug; ?>_preview = function(args) {
+								alert(args);
+				return output;
+
+			}
+			</script>
+			<?php
+		}
+	
 }
 new ET_Builder_Module_Fullwidth_Panel;
 
