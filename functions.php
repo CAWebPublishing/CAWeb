@@ -540,7 +540,7 @@ title.innerHTML = "Navigation";
     color: white;
 }
 	#et_pb_fb_cta{
-		display: none !important;
+		/*display: none !important;*/
 	}
 	/* This is the background color for the Divi Panel that pops open
 		when inserting modules or sections */
@@ -559,12 +559,6 @@ title.innerHTML = "Navigation";
 	}
 	.et-pb-option-container .description {
 			color: black !important;
-	}
-
-	/* Use the CAWeb Logo for all Custom Modules. */
-	li[class^="et_pb_ca"]::before, li[class^="et_pb_profile_banner"]::before {
-		font-family: cagov;
-		content: '\e90b';
 	}
 </style>
 <?php
