@@ -33,7 +33,7 @@
   }
 
 /* CAWeb Navigation Page Styles */
-.wrap .wp-heading-inline +.page-title-action{
+.page-title-action{
   display:none;
 }
  .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
