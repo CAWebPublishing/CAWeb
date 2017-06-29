@@ -35,7 +35,7 @@ function caweb_update_available(){
 									wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s', $payload->release->target_commitish), $args)) )->content );
 
 			// Write message to log
-			fwrite($log,'');
+			fwrite($log, $changelog);
 
 
 			// Close the log file
@@ -50,12 +50,14 @@ function caweb_update_available(){
 				$obj = array();
 				$obj['new_version'] = $payload->release->tag_name;
 				$obj['url'] = $_SERVER['SERVER_NAME'] . $changelog_path . '/changelog.txt';
-				$obj['package'] = $payload->release->zipball_url;
+				$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s',
+																	$payload->release->tag_name);
 				$theme_response = array(wp_get_theme()->Name => $obj);
 
 				$last_update->response = (isset($caweb_update->response) ?
 													$theme_response + $caweb_update->response :
 													$theme_response);
+
 
 				$last_update->last_checked = time();
 				set_site_transient( 'caweb_update_themes' , $last_update);
@@ -110,7 +112,7 @@ final class caweb_auto_update{
 			// Set the class public variables
 			$this->theme_name = $theme->Name;
 			$this->current_version = $theme->Version;
-				
+
 			$this->args = array(
 										'headers' => array(
 											'Authorization' => 'Basic ' . base64_encode( ':' . $this->token ),
@@ -124,11 +126,20 @@ final class caweb_auto_update{
 			// Define the alternative response for information checking
 				add_filter('site_transient_update_themes', array($this, 'add_themes_to_update_notification'));
 
+				//Define the alternative response for upgrader_package_options
+				add_filter('upgrader_package_options', array($this, 'upgrader_package_options'), 10 );
 
 				//Define the alternative response for download_package which gets called during theme upgrade
 				add_filter('upgrader_pre_download', array($this, 'download_package'), 10 , 3 );
 
 			}
+
+	function upgrader_package_options($options){
+		if( isset($options['hook_extra']['theme']) && $options['hook_extra']['theme'] == $this->theme_name )
+			$options['destination'] = sprintf('%1$s/themes/%2$s/', WP_CONTENT_DIR, $this->theme_name);
+
+		return $options;
+	}
 
 		// Alternative theme download for the WordPress Updater
 		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
@@ -137,9 +148,8 @@ final class caweb_auto_update{
 
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
 				// Now use the standard PHP file functions
-				$fp = fopen(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name)  , "w");
-					fwrite($fp, $theme);
-				fclose($fp);
+
+				file_put_contents(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name), $theme);
 
 				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
 			}
@@ -151,46 +161,45 @@ final class caweb_auto_update{
 				$caweb_update_themes = get_site_transient( $this->transient_name );
 
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
-						$payload = json_decode( wp_remote_retrieve_body( 
+						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
-				
+
 					if( -1 == version_compare( $this->current_version, $payload->tag_name ) ){
 							$last_update = new stdClass();
-							
+
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
 							// Changelog location
 						$changelog  = get_stylesheet_directory() . '/core/changelog.txt';
-				
+
 							// Open the log file
 							$log = fopen($changelog, 'w+');
-				
+
 							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
 													wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s',
 																								$payload->target_commitish), $this->args)) )->content );
-				
+
 							// Write message to log
 							fwrite($log, $changelog);
-				
-				
+
 							// Close the log file
 							fclose( $log );
-						
-						$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
-							$obj['package'] = $payload->zipball_url;
-						
+
+							$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
+							$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s', $payload->tag_name);
+
 							$theme_response = array($this->theme_name => $obj);
-			
+
 							$last_update->response = (isset($caweb_update_themes->response) ?
 																$theme_response + $caweb_update_themes->response :
 																$theme_response);
-			
+
 							$last_update->last_checked = time();
 							set_site_transient($this->transient_name, $last_update);
 					}
-					
+
 				}
-				
+
 
 				return $update_transient;
 
