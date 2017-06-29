@@ -5,70 +5,119 @@
 	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-theme-upgrader.php
 	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 */
+
+
+
+
+function caweb_update_available(){
+	if( isset( $_POST['payload'] ) ){
+			global $caweb_update;
+
+			if( !function_exists('get_site_transient') )
+    		require_once ABSPATH . 'wp-includes/options.php';
+
+
+			$args = array('headers' => array(
+											'Authorization' => 'Basic ' . base64_encode( ':' . 'b081a0c27674a7cba62f5f314179f317b9a7a664' ),
+											'Accept:' => 'application/vnd.github.v3+json', 'application/octet-stream'
+										)
+									);
+			$payload = json_decode( stripcslashes( $_POST['payload'] ) );
+
+			// Changelog location
+			$changelog_path = '/wp-content/' . implode('/', explode('wp-content', __DIR__) ) ;
+			$changelog  = __DIR__ . '/changelog.txt';
+
+			// Open the log file
+			$log = fopen($changelog, 'w+');
+
+			$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
+									wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s', $payload->release->target_commitish), $args)) )->content );
+
+			// Write message to log
+			fwrite($log,'');
+
+
+			// Close the log file
+			fclose( $log );
+
+
+			$caweb_update = get_site_transient( 'caweb_update_themes' );
+
+
+				$last_update = new stdClass();
+
+				$obj = array();
+				$obj['new_version'] = $payload->release->tag_name;
+				$obj['url'] = $_SERVER['SERVER_NAME'] . $changelog_path . '/changelog.txt';
+				$obj['package'] = $payload->release->zipball_url;
+				$theme_response = array(wp_get_theme()->Name => $obj);
+
+				$last_update->response = (isset($caweb_update->response) ?
+													$theme_response + $caweb_update->response :
+													$theme_response);
+
+				$last_update->last_checked = time();
+				set_site_transient( 'caweb_update_themes' , $last_update);
+
+	}
+	exit();
+}
+
+add_action('admin_post', 'caweb_update_available');
+add_action('admin_post_nopriv', 'caweb_update_available');
+add_action('admin_post_nopriv_caweb_update_available', 'caweb_update_available');
+add_action('admin_post_caweb_update_available', 'caweb_update_available');
+
+function ca_admin_theme_update_init(){
+	global $caweb_update;
+
+	$caweb_core_updates = new caweb_auto_update (wp_get_theme());
+}
+
+add_action('admin_init', 'ca_admin_theme_update_init');
+
 if(!class_exists('Theme_Upgrader') ){
       /** Theme_Upgrader class */
     	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
       /** Theme_Upgrader class */
     	require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
-    
-    
-}
-function ca_admin_theme_update_init(){
-	global $caweb_core_updates;
 
-  $theme = wp_get_theme();
-  $theme->branch = '';
-  $theme->definitionId = 10;
-  
-	$caweb_core_updates = new caweb_auto_update ($theme);
 
 }
-
-add_action('admin_init', 'ca_admin_theme_update_init');
 
 final class caweb_auto_update{
-			/**
-			* The Themes current version
-			* @var string
-			*/
-			protected $current_version;
-
-			/**
-			* The CAWeb TFS API Variables
-			*
-			*/
 			protected $transient_name = 'caweb_update_themes';
-			protected $token = '4x2v2actzu5tg74ds3io6h5mbvb2fsyl455lfqd42it7gdeh55ga';
-			protected $update_path = 'https://cawebpublishing.visualstudio.com/DefaultCollection/CAWeb/_apis/git/repositories/CAWeb/items?';
-			protected $branch ;
-			protected $definitionId;
-			protected $ver = 'api-version=2.0';
-	 		protected $args ;
+			protected $token = 'b081a0c27674a7cba62f5f314179f317b9a7a664';
+
 			/**
 			* Theme Name
 			*/
+
 			protected $theme_name;
+			protected $current_version;
 
 			private static $_this;
+
+
 
 			/**
 			* Initialize a new instance of the WordPress Auto-Update class
 			* @param string $current_version
 			* @param string $theme_name
 			*/
-			function __construct($theme){
+			function __construct( $theme ){
 			// Set the class public variables
-			$this->current_version = $theme->Version;
 			$this->theme_name = $theme->Name;
-			$this->branch = $theme->branch;
-			$this->definitionId = $theme->definitionId;
-        
+			$this->current_version = $theme->Version;
+				
 			$this->args = array(
 										'headers' => array(
 											'Authorization' => 'Basic ' . base64_encode( ':' . $this->token ),
-											'Accept:' => 'application/zip'
+											'Accept:' =>  'application/vnd.github.v3+json','application/vnd.github.VERSION.raw', 'application/octet-stream'
 										)
 									);
+
 			// define the alternative API for updating checking
 				add_filter('pre_site_transient_update_themes', array($this, 'check_update'));
 
@@ -78,7 +127,7 @@ final class caweb_auto_update{
 
 				//Define the alternative response for download_package which gets called during theme upgrade
 				add_filter('upgrader_pre_download', array($this, 'download_package'), 10 , 3 );
-				
+
 			}
 
 		// Alternative theme download for the WordPress Updater
@@ -91,46 +140,59 @@ final class caweb_auto_update{
 				$fp = fopen(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name)  , "w");
 					fwrite($fp, $theme);
 				fclose($fp);
-				
+
 				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
 			}
 			return $reply;
 		}
-	
+
 		//alternative API for updating checking
 		public function check_update($update_transient){
 				$caweb_update_themes = get_site_transient( $this->transient_name );
 
-
-				$last_update = new stdClass();
-
-					// Get the remote version
-					$remote_version = $this->getRemote_version();
-				//
-					// If a newer version is available, add the update
-					if (version_compare($this->current_version, $remote_version, '<')   ) {
-
-						$log = $this->getLatest_changelog();
-
-						$obj = array();
-						$obj['new_version'] = $remote_version;
-						$obj['url'] = $log;
-						$obj['package'] = $this->getLatest_version();
-						$theme_response = array($this->theme_name => $obj);
-
-						$last_update->response = (isset($caweb_update_themes->response) ? 
-													$theme_response + $caweb_update_themes->response : 
-													$theme_response);
-													
-						$last_update->last_checked = time();
-						set_site_transient($this->transient_name, $last_update);
-					}elseif( isset($caweb_update_themes->response[$this->theme_name]) ){
-						unset($caweb_update_themes->response[$this->theme_name]);
-						set_site_transient($this->transient_name, $caweb_update_themes);
+				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
+						$payload = json_decode( wp_remote_retrieve_body( 
+													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
+				
+					if( -1 == version_compare( $this->current_version, $payload->tag_name ) ){
+							$last_update = new stdClass();
+							
+							$obj = array();
+							$obj['new_version'] = $payload->tag_name;
+							// Changelog location
+						$changelog  = get_stylesheet_directory() . '/core/changelog.txt';
+				
+							// Open the log file
+							$log = fopen($changelog, 'w+');
+				
+							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
+													wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s',
+																								$payload->target_commitish), $this->args)) )->content );
+				
+							// Write message to log
+							fwrite($log, $changelog);
+				
+				
+							// Close the log file
+							fclose( $log );
+						
+						$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
+							$obj['package'] = $payload->zipball_url;
+						
+							$theme_response = array($this->theme_name => $obj);
+			
+							$last_update->response = (isset($caweb_update_themes->response) ?
+																$theme_response + $caweb_update_themes->response :
+																$theme_response);
+			
+							$last_update->last_checked = time();
+							set_site_transient($this->transient_name, $last_update);
 					}
 					
+				}
+				
 
-					return $update_transient;
+				return $update_transient;
 
 		}
 
@@ -153,76 +215,7 @@ final class caweb_auto_update{
 		return $update_transient;
 	}
 
-	 /**
-			* Return the current remote changelog
-			* @return string $remote_version
-			*/
-			public function getLatest_changelog(){
-        $url = sprintf('%1$sscopePath=changelog.txt&%2$s%3$s',
-                       $this->update_path, (!empty($this->branch) ? sprintf('versionType=branch&version=%1$s&', $this->branch) : ''), $this->ver );
-        
-					$request = wp_remote_get($url , $this->args);
-					if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
-							$tmp = wp_remote_retrieve_body($request) ;
-								// Log location
-								$f = CAWebAbsPath . '/core/changelog.txt';
-								// Open the log file
-								$log = fopen($f, 'c+');
-								// Write message to log
-								fwrite($log, $tmp);
-								// Close the log file
-								fclose( $log );
-						return  CAWebUri . '/core/changelog.txt';
-					}
-				return CAWebUri . '/changelog.txt';
-			}
 
-			/**
-			* Return the current remote version
-			* @return string $remote_version
-			*/
-			public function getRemote_version(){
-					$url = sprintf('%1$sscopePath=style.css&%2$s%3$s',
-                       $this->update_path, (!empty($this->branch) ? sprintf('versionType=branch&version=%1$s&', $this->branch) : ''), $this->ver );
-        
-       		$request = wp_remote_get($url, $this->args);
-					if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
-							$tmp = wp_remote_retrieve_body($request) ;
-							preg_match('/Version:.*/', $tmp, $tmp);
-							$tmp = explode(":", $tmp[0]);
-							$tmp = trim($tmp[1]);
-							return   $tmp;
-					}
-					return false;
-			}
-
-			/**
-			* Return the remote latest build download url
-			* @return string $remote_version
-			*/
-			public function getLatest_version(){
-				global $wp_version;
-
-				$url = sprintf('https://cawebpublishing.visualstudio.com/DefaultCollection/CAWeb/_apis/build/builds?api-version=2.0&definitions=%1$s&$top=1', $this->definitionId);
-
-				$request = wp_remote_get($url , $this->args);
-
-				if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
-						$tmp = json_decode(wp_remote_retrieve_body($request) ) ;
-						if( empty($tmp->value) )
-							return false;
-
-						$artifact = sprintf('https://cawebpublishing.visualstudio.com/DefaultCollection/CAWeb/_apis/build/builds/%1$s/artifacts?api-version=2.0',$tmp->value[0]->id);
-						$theme_request = wp_remote_request($artifact, $this->args);
-						if(!is_wp_error($theme_request) || wp_remote_retrieve_response_code($theme_request) === 200 ){
-							$res = json_decode(wp_remote_retrieve_body( $theme_request ) );
-							if( !empty($res->value))
-								return  $res->value[0]->resource->downloadUrl;
-
-						}
-					}
-					return false;
-			}
 }
 
 ?>
