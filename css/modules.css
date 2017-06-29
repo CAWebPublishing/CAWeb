@@ -38,11 +38,14 @@ overflow: hidden;
 
 }
 .profile-banner{
+	background: url('../images/banner/banner-blank.png') no-repeat;
+   background-size: 100% 100%;
    overflow: hidden;
    height: 90px;
 }
 
 .profile-banner.round-image{
+	background: unset;
   height: auto;
   border: none;
 }
