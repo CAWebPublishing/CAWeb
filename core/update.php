@@ -25,7 +25,7 @@ function caweb_update_available(){
 			$payload = json_decode( stripcslashes( $_POST['payload'] ) );
 
 			// Changelog location
-			$changelog_path = '/wp-content/' . implode('/', explode('wp-content', __DIR__) ) ;
+			$changelog_path = '/wp-content' .  explode('wp-content', __DIR__)[1];
 			$changelog  = __DIR__ . '/changelog.txt';
 
 			// Open the log file
@@ -49,7 +49,7 @@ function caweb_update_available(){
 
 				$obj = array();
 				$obj['new_version'] = $payload->release->tag_name;
-				$obj['url'] = $_SERVER['SERVER_NAME'] . $changelog_path . '/changelog.txt';
+				$obj['url'] = $_SERVER['SERVER_HOST'] . $changelog_path . '/changelog.txt';
 				$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s',
 																	$payload->release->tag_name);
 				$theme_response = array(wp_get_theme()->Name => $obj);
@@ -163,8 +163,8 @@ final class caweb_auto_update{
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
 						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
-
-					if( -1 == version_compare( $this->current_version, $payload->tag_name ) ){
+					
+					if( version_compare( $this->current_version, $payload->tag_name ) ){
 							$last_update = new stdClass();
 
 							$obj = array();
