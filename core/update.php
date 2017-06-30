@@ -41,7 +41,7 @@ function caweb_update_available(){
 
 				$obj = array();
 				$obj['new_version'] = $payload->release->tag_name;
-				$obj['url'] = $_SERVER['SERVER_HOST'] . $changelog_path . '/changelog.txt';
+				$obj['url'] =  $changelog_path . '/changelog.txt';
 				$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s',
 																	$payload->release->tag_name);
 				$theme_response = array(wp_get_theme()->Name => $obj);
