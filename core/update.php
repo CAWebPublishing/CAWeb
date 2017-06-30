@@ -26,20 +26,12 @@ function caweb_update_available(){
 
 			// Changelog location
 			$changelog_path = '/wp-content' .  explode('wp-content', __DIR__)[1];
-			$changelog  = __DIR__ . '/changelog.txt';
-
-			// Open the log file
-			$log = fopen($changelog, 'w+');
 
 			$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
 									wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s', $payload->release->target_commitish), $args)) )->content );
 
 			// Write message to log
-			fwrite($log, $changelog);
-
-
-			// Close the log file
-			fclose( $log );
+			file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
 
 
 			$caweb_update = get_site_transient( 'caweb_update_themes' );
@@ -126,36 +118,19 @@ final class caweb_auto_update{
 			// Define the alternative response for information checking
 				add_filter('site_transient_update_themes', array($this, 'add_themes_to_update_notification'));
 
-				//Define the alternative response for upgrader_package_options
-				add_filter('upgrader_package_options', array($this, 'upgrader_package_options'), 10 );
-
 				//Define the alternative response for download_package which gets called during theme upgrade
-				add_filter('upgrader_pre_download', array($this, 'download_package'), 10 , 3 );
+				add_filter('upgrader_pre_download', array($this, 'caweb_upgrader_pre_download'), 10 , 3 );
+
+				//Define the alternative response for upgrader_pre_install
+				add_filter('upgrader_source_selection', array($this, 'caweb_upgrader_source_selection'), 10, 4 );
+				
+				//Define the alternative response for upgrader_pre_install
+				add_filter('upgrader_post_install', array($this, 'caweb_upgrader_post_install'), 10, 4 );
+				
 
 			}
 
-	function upgrader_package_options($options){
-		if( isset($options['hook_extra']['theme']) && $options['hook_extra']['theme'] == $this->theme_name )
-			$options['destination'] = sprintf('%1$s/themes/%2$s/', WP_CONTENT_DIR, $this->theme_name);
-
-		return $options;
-	}
-
-		// Alternative theme download for the WordPress Updater
-		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
-		public function download_package( $reply, $package ,  $upgrader ){
-			if(isset($upgrader->skin->theme_info) && $upgrader->skin->theme_info->get('Name') == $this->theme_name){
-
-				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
-				// Now use the standard PHP file functions
-
-				file_put_contents(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name), $theme);
-
-				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
-			}
-			return $reply;
-		}
-
+	
 		//alternative API for updating checking
 		public function check_update($update_transient){
 				$caweb_update_themes = get_site_transient( $this->transient_name );
@@ -169,21 +144,13 @@ final class caweb_auto_update{
 
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
-							// Changelog location
-						$changelog  = get_stylesheet_directory() . '/core/changelog.txt';
-
-							// Open the log file
-							$log = fopen($changelog, 'w+');
-
+						
 							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
 													wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s',
 																								$payload->target_commitish), $this->args)) )->content );
 
 							// Write message to log
-							fwrite($log, $changelog);
-
-							// Close the log file
-							fclose( $log );
+							file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
 
 							$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
 							$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s', $payload->tag_name);
@@ -224,6 +191,54 @@ final class caweb_auto_update{
 		return $update_transient;
 	}
 
+		// Alternative upgrader_pre_download for the WordPress Updater
+		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+		public function caweb_upgrader_pre_download( $reply, $package ,  $upgrader ){
+			if(isset($upgrader->skin->theme_info) && $upgrader->skin->theme_info->get('Name') == $this->theme_name){
+
+				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
+
+				file_put_contents(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name), $theme);
+
+				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
+			}
+			return $reply;
+		}
+
+
+	// Alternative upgrader_source_selection for the WordPress Updater
+	// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+	function caweb_upgrader_source_selection($src, $rm_src, $upgr, $options ){
+		
+		if( !isset($options['theme']) && !$options['theme'] == $this->theme_name )
+			return $src;
+			
+			$tmp = explode('/', $src);
+			array_shift($tmp);
+			array_pop($tmp);
+			$tmp[count($tmp) -1] = $tmp[count($tmp) -2] ;
+			$tmp = sprintf('/%1$s/',  implode('/', $tmp) );
+			
+			rename($src, $tmp);
+		
+			return $tmp;
+	}
+	
+	// Alternative upgrader_post_install for the WordPress Updater
+	// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+	function caweb_upgrader_post_install($response, $options,  $result){
+		$caweb_update_themes = get_site_transient( $this->transient_name );
+
+		if( isset($options['theme']) && $options['theme'] == $this->theme_name &&
+			 isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) ){
+	
+			unset($caweb_update_themes->response[$this->theme_name]);
+			set_site_transient($this->transient_name, $caweb_update_themes);
+		}
+		
+		set_site_transient($this->transient_name, $caweb_update_themes);
+		return $result;
+	}
 
 }
 
