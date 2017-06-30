@@ -123,10 +123,7 @@ final class caweb_auto_update{
 
 				//Define the alternative response for upgrader_pre_install
 				add_filter('upgrader_source_selection', array($this, 'caweb_upgrader_source_selection'), 10, 4 );
-				
-				//Define the alternative response for upgrader_pre_install
-				add_filter('upgrader_post_install', array($this, 'caweb_upgrader_post_install'), 10, 4 );
-				
+							
 
 			}
 
@@ -163,10 +160,14 @@ final class caweb_auto_update{
 
 							$last_update->last_checked = time();
 							set_site_transient($this->transient_name, $last_update);
-					}
-
-				}
-
+					}		
+					
+				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) && 
+								!version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'] ) ) {
+				
+						unset($caweb_update_themes->response[$this->theme_name]);
+						set_site_transient($this->transient_name, $caweb_update_themes);
+				}	
 
 				return $update_transient;
 
@@ -224,21 +225,6 @@ final class caweb_auto_update{
 			return $tmp;
 	}
 	
-	// Alternative upgrader_post_install for the WordPress Updater
-	// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
-	function caweb_upgrader_post_install($response, $options,  $result){
-		$caweb_update_themes = get_site_transient( $this->transient_name );
-
-		if( isset($options['theme']) && $options['theme'] == $this->theme_name &&
-			 isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) ){
-	
-			unset($caweb_update_themes->response[$this->theme_name]);
-			set_site_transient($this->transient_name, $caweb_update_themes);
-		}
-		
-		set_site_transient($this->transient_name, $caweb_update_themes);
-		return $result;
-	}
 
 }
 
