@@ -145,8 +145,12 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$icon = $item_meta['_caweb_menu_icon'][0];
 				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
 				// Create Link
-				$nav_item .= sprintf('<li class="nav-item %1$s %2$s"><a href="%3$s" class="first-level-link">%4$s %5$s</a>',
-														implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? 'active' : ''),$item->url, $icon,  $item->title);
+				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s" class="first-level-link"%6$s>%7$s %8$s</a>',
+										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
+										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''), 
+										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
+										$item->url, (!empty($item->target) ? sprintf(' target="%1$s"', $item->target) : ''),
+										$icon,  $item->title);
 
 
 				// If there are child links create the sub-nav
