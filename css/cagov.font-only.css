@@ -10,7 +10,7 @@
 }
 .et_font_icon li[class^="ca-gov-icon-"]:before,
 .et_font_icon li[class*=" ca-gov-icon-"]:before,
-[class^="icon-"], [class*=" icon-"] {
+[class^="ca-gov-icon-"], [class*=" ca-gov-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'CaGov' !important;
   speak: none;
