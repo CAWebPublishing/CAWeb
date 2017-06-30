@@ -211,7 +211,7 @@ final class caweb_auto_update{
 	// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 	function caweb_upgrader_source_selection($src, $rm_src, $upgr, $options ){
 		
-		if( !isset($options['theme']) && !$options['theme'] == $this->theme_name )
+		if( !isset($options['theme']) || $options['theme'] !== $this->theme_name )
 			return $src;
 			
 			$tmp = explode('/', $src);
