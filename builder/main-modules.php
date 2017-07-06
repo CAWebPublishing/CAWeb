@@ -1372,12 +1372,15 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
+    
 
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
 		$heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
+    
 		$heading_float = sprintf(' text-align: %1$s; ', $heading_align) ;
+    
 		$display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default">More Information</a></div>', $section_link) : '');
 
@@ -1390,7 +1393,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
 
-			$section = sprintf('<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2%1$s>%2$s</h2>%3$s%4$s</div>',
+			$section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
 					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );

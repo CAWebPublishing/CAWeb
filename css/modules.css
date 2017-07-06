@@ -2,6 +2,15 @@
 .section{
 overflow: hidden;
 }
+/* Adds padding under featured image when in tablet mode */
+@media (max-width: 991px){
+  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive {
+      padding-bottom: 10px;
+  }
+  .et_pb_ca_fullwidth_section_primary.et_pb_module .pull-right {
+      float: none !important;
+  }
+}
 
 
 
