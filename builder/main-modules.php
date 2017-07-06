@@ -992,7 +992,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 
 		$address = array( $addr, $city, $state, $zip);
 		$address = array_filter( $address);
-		$address = implode(",", $address);
+		$address = implode(", ", $address);
 		
 		if("contact" == 	$location_layout ){
 				$display_other = ("on" == $show_contact ?
@@ -1000,8 +1000,10 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				("" != $phone ? "General Information: {$phone}<br />" : ''),
 				("" != $fax ?  "FAX: {$fax}" : '')	 ) : '');
 
-			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">View Contact</a>',$location_link) : '' );
-			$address = ("" != $name ? sprintf('%1$s<br />%2$s', $name, $address) : $address);
+			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">More</a>',$location_link) : '' );
+			
+      $address = ( !empty($name) ? sprintf('%1$s<br />%2$s', $name, caweb_get_google_map_place_link( $address ) ) :
+                  caweb_get_google_map_place_link( $address ) );
 
 
 				$output =sprintf('<div%1$s class="%2$s%3$s contact">
@@ -1014,10 +1016,11 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		}elseif("mini" == 	$location_layout ){
 			$output = sprintf('<div%1$s class="%2$s%3$s mini">
 				%4$s<div class="contact"%8$s><div class="title"><a href="%5$s">%6$s</a></div>
-				<div class="address">%7$s</div></div></div>',
+				%7$s</div></div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-												("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name, $address, ( empty($display_icon) ? ' style="margin-left: 0px;"' : '' ) );
+			("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name, 
+       (!empty($address) ? sprintf('<div class="address">%1$s</div>', caweb_get_google_map_place_link( $address ) ): ''), ( empty($display_icon) ? ' style="margin-left: 0px;"' : '' ) );
 
 		}else{
 			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">View More Details</a>',$location_link) : '' );
@@ -1026,13 +1029,15 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 						<div class="thumbnail"><img src="%4$s"></div>
 						<div class="contact">
 							<div class="title">%5$s</div>
-							<div class="address">	<span class="ca-gov-icon-road-pin"></span><a href="%6$s">%7$s</a></div>
+							<div class="address">%6$s</div>
 						</div>
-						<div class="summary">%8$s%9$s</div>
+						<div class="summary">%7$s%8$s</div>
 					</div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			$featured_image, $name , $location_link, $address , (!empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : '') , $display_button);
+      $featured_image, $name , 
+     (!empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link( $address ) ) : ''), 
+      (!empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : '') , $display_button);
 
 		}
 		return $output;
@@ -1372,12 +1377,15 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
+    
 
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
 		$heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
+    
 		$heading_float = sprintf(' text-align: %1$s; ', $heading_align) ;
+    
 		$display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default">More Information</a></div>', $section_link) : '');
 
@@ -1385,12 +1393,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
 
-			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s">
-					<img src="%2$s" class="img-responsive" style="width: 100%%;"></div>' , $img_class, $section_image);
+			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
+					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>' , 
+                $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
 
-			$section = sprintf('<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2%1$s>%2$s</h2>%3$s%4$s</div>',
+			$section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
 					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
