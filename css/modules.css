@@ -4,16 +4,19 @@ overflow: hidden;
 }
 /* Adds padding under featured image when in tablet mode */
 @media (max-width: 991px){
-  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive {
+  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive,
+  .et_pb_ca_section_primary .col-md-4 img.img-responsive{
       padding-bottom: 10px;
   }
-  .et_pb_ca_fullwidth_section_primary.et_pb_module .pull-right {
+  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4,
+  .et_pb_ca_section_primary.et_pb_module .col-md-4{
       float: none !important;
+    	padding-left: 0;
+    	padding-right: 0;
   }
 }
 
-
-
+.et_pb_ca_section_primary,
 .et_pb_ca_fullwidth_section_primary,
 .et_pb_ca_fullwidth_section_footer{
     padding: 50px 25px;
@@ -40,6 +43,10 @@ overflow: hidden;
 .panel-heading h2{
 	width: 100%;
 }
+/* Location Banner Thumbnail Image Fix*/
+.location.banner .thumbnail img {
+    width: 100%;
+ }
 
 /* Profile Banner */
 .profile-banner .banner-subtitle{

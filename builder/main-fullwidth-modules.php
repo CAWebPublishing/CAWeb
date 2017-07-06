@@ -989,8 +989,9 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
 
-			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s">
-					<img src="%2$s" class="img-responsive" style="width: 100%%;"></div>' , $img_class, $section_image);
+			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
+					<img src="%3$s" class="img-responsive" style="width: 100%%; "></div>' , 
+            $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'),$section_image );
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
 
