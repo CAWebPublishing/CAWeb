@@ -42,6 +42,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 				),
 				'advanced' => array(
 					'toggles' => array(
+            'header' => esc_html__( 'Header', 'et_builder'),
 						'text' => array(
 							'title'    => esc_html__( 'Text', 'et_builder' ),
 							'priority' => 49,
@@ -99,6 +100,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 				),
 				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
 				'toggle_slug'       => 'header',
+				'tab_slug'       => 'advanced',
 			),
 			'heading_text_color' => array(
 				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
@@ -107,9 +109,10 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'depends_show_if'   => 'none',
 				'toggle_slug'       => 'header',
+				'tab_slug'       => 'advanced',
 			),
 			'use_icon' => array(
-				'label'           => esc_html__( 'Head Icon', 'et_builder' ),
+				'label'           => esc_html__( 'Use Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -119,6 +122,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 				'affects' => array('icon',),
 				'description' => 'Choose whether to display an icon before the Heading',
 				'toggle_slug'       => 'header',
+				'tab_slug'       => 'advanced',
 			),
 			'icon' => array(
 				'label'           => esc_html__( 'Heading Icon','et_builder' ),
@@ -130,6 +134,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 				'depends_show_if' => 'on',
 				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 				'toggle_slug'       => 'header',
+				'tab_slug'       => 'advanced',
 			),
 			'show_button' => array(
 				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
@@ -343,10 +348,12 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 						'title'    => esc_html__( 'Sizing', 'et_builder' ),
 						'priority' => 65,
 					),
+          'scroll_bar'  => esc_html__( 'Scroll Bar' , 'et_builder'),
 				),
 			),
 			'custom_css' => array(
 				'toggles' => array(
+         
 				),
 			),
 		);
@@ -373,6 +380,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 				'renderer_with_field' => true,
 				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 				'toggle_slug'     => 'scroll_bar',
+				'tab_slug'     => 'advanced',
 			),
 			'disabled_on' => array(
 			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -728,13 +736,14 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
 					'body'   => esc_html__( 'Body'  , 'et_builder'),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
+					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'header' => esc_html__( 'Header', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -759,6 +768,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'section_heading' => array(
 				'label' => esc_html__( 'Title', 'et_builder' ),
@@ -772,10 +782,11 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
-				'toggle_slug'				=> 'header'
+				'toggle_slug'				=> 'header',
+				'tab_slug'				=> 'advanced',
 			),
 			'heading_align' => array(
-				'label'           => esc_html__( 'Align Heading', 'et_builder' ),
+				'label'           => esc_html__( 'Heading Alignment', 'et_builder' ),
 				'type'            => 'select',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -784,7 +795,8 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 					'right'  => esc_html__( 'Right', 'et_builder' ),
 				),
 				'depends_show_if' => 'off',
-				'toggle_slug'			=> 'header'
+				'toggle_slug'			=> 'header',
+				'tab_slug'				=> 'advanced',
 			),
 			'featured_image_button' => array(
 				'label'           => esc_html__( 'Featured Image', 'et_builder' ),
@@ -1043,13 +1055,11 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
-					'header' => esc_html__( 'Header', 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
+          'style'  => esc_html__( 'Style' , 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -1074,6 +1084,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'max_width' => array(
 				'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -1231,12 +1242,19 @@ function init() {
 				'body'   => esc_html__( 'Body'  , 'et_builder'),
 			),
 		),
+    'advanced' => array(
+			'toggles' => array(
+        'header' => esc_html__( 'Header', 'et_builder'),
+				'body'   => esc_html__( 'Body'  , 'et_builder'),
+			),
+		),
 		'custom_css' => array(
 			'toggles' => array(
 			),
 		),
 	);
 }
+  
 function get_fields() {
 	$fields = array(
 		'heading_color' => array(
@@ -1245,6 +1263,7 @@ function get_fields() {
 			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 			'toggle_slug'				=> 'header',
+			'tab_slug'				=> 'advanced',
 		),
 		'text_color' => array(
 			'label'             => esc_html__( 'Text Color', 'et_builder' ),
@@ -1252,6 +1271,7 @@ function get_fields() {
 			'custom_color'      => true,
 			'description'       => esc_html__( 'Here you can define a custom text color for the list items.', 'et_builder' ),
 			'toggle_slug'				=> 'body',
+			'tab_slug'				=> 'advanced',
 		),
 		'group_title' => array(
 			'label' => esc_html__( 'Title', 'et_builder' ),
@@ -1272,6 +1292,7 @@ function get_fields() {
 				'#et_pb_group_icon',
 			),
 			'toggle_slug'			=> 'body',
+			'tab_slug'				=> 'advanced',
 		),
 		'group_icon' => array(
 			'label' => esc_html__( 'Group Icon', 'et_builder' ),
@@ -1283,6 +1304,7 @@ function get_fields() {
 			'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
 			'depends_show_if' => 'on',
 			'toggle_slug'		=> 'body',
+			'tab_slug'				=> 'advanced',
 		),
 		'group_show_more_button' => array(
 			'label'           => esc_html__( 'Read More Button', 'et_builder' ),
@@ -1811,6 +1833,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 			),
 			'advanced' => array(
 				'toggles' => array(
+          'style'  => esc_html__( 'Style' , 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -1845,6 +1868,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug' => 'style',
+        'tab_slug' => 'advanced',
 			),
 			'max_width' => array(
 				'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -1964,6 +1988,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 	}
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
+
 class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_Module {
 function init() {
 	$this->name = esc_html__( 'FullWidth Carousel Slide', 'et_builder' );
