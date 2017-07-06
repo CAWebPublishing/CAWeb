@@ -47,7 +47,9 @@ overflow: hidden;
 .location.banner .thumbnail img {
     width: 100%;
  }
-
+.et_pb_ca_location_widget .location  .banner .description{
+    padding-bottom: 10px;
+ }
 /* Profile Banner */
 .profile-banner .banner-subtitle{
   color: #333333;
