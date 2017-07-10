@@ -42,6 +42,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+		      'header' => esc_html__( 'Header', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -98,6 +99,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				),
 				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
 				'toggle_slug'				=> 'header',
+				'tab_slug' => 'advanced',
 			),
 			'heading_text_color' => array(
 				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
@@ -106,9 +108,10 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'depends_show_if' 	=> 'none',
 				'toggle_slug'				=> 'header',
+				'tab_slug' => 'advanced',
 			),
 			'use_icon' => array(
-				'label'           => esc_html__( 'Icon', 'et_builder' ),
+				'label'           => esc_html__( 'Use Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -118,6 +121,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'affects' => array('icon',),
 				'description' => 'Choose whether to display an icon before the Heading',
 				'toggle_slug' => 'header',
+				'tab_slug' => 'advanced',
 			),
 			'icon' => array(
 				'label'           => esc_html__( 'Heading Icon','et_builder' ),
@@ -129,6 +133,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'depends_show_if'   	=> 'on',
 				'description'     		=> esc_html__( 'Here you can select a Heading Icon','et_builder' ),
 				'toggle_slug'   			=> 'header',
+				'tab_slug' => 'advanced',
 			),
 			'show_button' => array(
 				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
@@ -365,8 +370,9 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 					'footer'   	=> esc_html__( 'Footer', 'et_builder'),
 		    ),
 		  ),
-		  'advanced' => array(
+		  'advanced' => array(        
 		    'toggles' => array(
+		    'header' 		=> esc_html__( 'Header', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -451,12 +457,13 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 				'toggle_slug'		=> 'header',
 			),			
 			'text_color' => array(
-				'label'             => esc_html__( 'Set Text Color', 'et_builder' ),
+				'label'             => esc_html__( 'Heading Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom text color.', 'et_builder' ),
 				'depends_show_if'			 => 'on',
 				'toggle_slug'		=> 'header',
+				'tab_slug'		=> 'advanced',
 			),
 			'content' => array(
 				'label'           => esc_html__( 'Content','et_builder'),
@@ -726,6 +733,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+          'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -843,7 +851,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'toggle_slug' 		=> 'body',
 			),
 			'show_icon' => array(
-				'label'           => esc_html__( 'Icon', 'et_builder' ),
+				'label'           => esc_html__( 'Use Icon', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -853,6 +861,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'affects' => array('icon',),
 				'depends_show_if_not' => 'banner',
 				'toggle_slug' 		=> 'style',
+				'tab_slug'		=> 'advanced',
 			),
 			'icon' => array(
 				'label'           => esc_html__( 'Icon','et_builder' ),
@@ -864,6 +873,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'description'     => esc_html__( 'Select an icon.','et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug' 		=> 'style',
+				'tab_slug'		=> 'advanced',
 			),
 			'show_button' => array(
 				'label'           => esc_html__( 'Button', 'et_builder' ),
@@ -1142,13 +1152,14 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 		$this->options_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'header' => esc_html__( 'Header', 'et_builder'),
 		      'body'   => esc_html__( 'Body'  , 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+		      'style'  => esc_html__( 'Style' , 'et_builder'),
+		      'header' => esc_html__( 'Header', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -1176,6 +1187,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug'			=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'section_heading' => array(
 				'label' => esc_html__( 'Title', 'et_builder' ),
@@ -1185,14 +1197,15 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				'toggle_slug'			=> 'header',
 			),
 			'heading_text_color' => array(
-				'label'             => esc_html__( 'Text Color', 'et_builder' ),
+				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'toggle_slug'				=> 'header',
+				'tab_slug'				=> 'advanced',
 			),
 			'heading_align' => array(
-				'label'           => esc_html__( 'Align Heading', 'et_builder' ),
+				'label'           => esc_html__( 'Heading Alignment', 'et_builder' ),
 				'type'            => 'select',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1202,6 +1215,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				),
 				'depends_show_if' => 'off',
 				'toggle_slug'			=> 'header',
+				'tab_slug'				=> 'advanced',
 			),
 			'featured_image_button' => array(
 				'label'           => esc_html__( 'Featured Image', 'et_builder' ),
@@ -1500,13 +1514,13 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 		$this->options_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'header' => esc_html__( 'Header', 'et_builder'),
 		      'body'   => esc_html__( 'Body'  , 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -1533,6 +1547,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'max_width' => array(
 			  'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -1724,6 +1739,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			),
 			'advanced' => array(
 				'toggles' => array(
+					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -1751,6 +1767,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'text_color' => array(
 				'label'             => esc_html__( 'Text Color', 'et_builder' ),
@@ -1758,6 +1775,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom text color for the list items.', 'et_builder' ),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'group_title' => array(
 				'label' => esc_html__( 'Title', 'et_builder' ),
@@ -1778,6 +1796,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 					'#et_pb_group_icon',
 				),
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'group_icon' => array(
 				'label' => esc_html__( 'Group Icon', 'et_builder' ),
@@ -1789,6 +1808,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 				'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'				=> 'style',
+				'tab_slug'				=> 'advanced',
 			),
 			'group_show_more_button' => array(
 				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
@@ -1817,7 +1837,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'toggle_slug'				=> 'style',
+				'toggle_slug'				=> 'body',
 			),
 			'group_link1_show' => array(
 				'label'           => esc_html__( 'Link 1', 'et_builder' ),
@@ -2340,6 +2360,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -2377,6 +2398,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom background color for the section.', 'et_builder' ),
 				'toggle_slug'			=> 'style',
+				'tab_slug'			=> 'advanced',
 			),
 			'max_width' => array(
 			  'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -2696,13 +2718,14 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
+					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'body'   => esc_html__( 'Body'  , 'et_builder'),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
+					'header' => esc_html__( 'Header', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -2739,6 +2762,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				),
 				'description' => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
 				'toggle_slug'			=> 'header',
+				'tab_slug'			=> 'advanced',
 			),
 			'style' => array(
 				'label'             => esc_html__( 'Content Type', 'et_builder' ),
@@ -3329,7 +3353,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		);
 
 		$this->fields_defaults = array(
-			'url'       => array( 'http://','add_default_setting' ),
+			'url'       => array( '#','add_default_setting' ),
 		);
 
 		$this->main_css_element = '%%order_class%%.et_pb_profile_banner';
@@ -3344,6 +3368,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
+		      'body'   => esc_html__( 'Body'  , 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -3390,7 +3415,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				'label'           => esc_html__( 'Profile URL', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Input the website of the profile or leave blank for no link.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the website of the profile (http:// must be included).', 'et_builder' ),
 				'toggle_slug'			=> 'body',
 			),
 			'portrait_url' => array(
@@ -3413,6 +3438,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				),
 			  'description' => esc_html__('Switch to yes if you want round images in the profile banner.'),
 				'toggle_slug'			=> 'body',
+				'tab_slug'			=> 'advanced',
 			),
 			'max_width' => array(
 			  'label'           => esc_html__( 'Max Width', 'et_builder' ),
