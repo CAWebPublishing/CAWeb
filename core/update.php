@@ -136,7 +136,7 @@ final class caweb_auto_update{
 						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
 					
-					if( version_compare( $this->current_version, $payload->tag_name ) ){
+          if( version_compare( $this->current_version, $payload->tag_name, '<' ) ){
 							$last_update = new stdClass();
 
 							$obj = array();
@@ -163,7 +163,7 @@ final class caweb_auto_update{
 					}		
 					
 				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) && 
-								!version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'] ) ) {
+								version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'], '>=' ) ) {
 				
 						unset($caweb_update_themes->response[$this->theme_name]);
 						set_site_transient($this->transient_name, $caweb_update_themes);
