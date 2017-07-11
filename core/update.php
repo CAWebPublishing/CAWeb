@@ -28,7 +28,7 @@ function caweb_update_available(){
 			$changelog_path = '/wp-content' .  explode('wp-content', __DIR__)[1];
 
 			$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
-									wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s', $payload->release->target_commitish), $args)) )->content );
+									wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $args)) )->content );
 
 			// Write message to log
 			file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
@@ -42,8 +42,8 @@ function caweb_update_available(){
 				$obj = array();
 				$obj['new_version'] = $payload->release->tag_name;
 				$obj['url'] =  $changelog_path . '/changelog.txt';
-				$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s',
-																	$payload->release->tag_name);
+				$obj['package'] = $payload->release->zipball_url;
+    
 				$theme_response = array(wp_get_theme()->Name => $obj);
 
 				$last_update->response = (isset($caweb_update->response) ?
@@ -135,22 +135,27 @@ final class caweb_auto_update{
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
 						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
+						$payloads = json_decode( wp_remote_retrieve_body(
+													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases', $this->args) ) );
 					
-          if( version_compare( $this->current_version, $payload->tag_name, '<' ) ){
+          // if current version is less than new version and is not a pre-release create update transient,
+          // if current release is a pre-release only create update transient for regression theme 
+          // regression theme name contains -Reg suffix
+          if( version_compare( $this->current_version, $payload->tag_name, '<' ) && 
+             (!$payload->prerelease || ( $payload->prerelease && strpos( $this->theme_name, '-Reg' ) !== false  ) ) ){
 							$last_update = new stdClass();
 
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
 						
 							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
-													wp_remote_get(sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/contents/changelog.txt?ref=%1$s',
-																								$payload->target_commitish), $this->args)) )->content );
+													wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $this->args)) )->content );
 
 							// Write message to log
 							file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
 
 							$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
-							$obj['package'] = sprintf('https://api.github.com/repos/Danny-Guzman/CAWeb/zipball/%1$s', $payload->tag_name);
+							$obj['package'] = $payload->zipball_url;
 
 							$theme_response = array($this->theme_name => $obj);
 

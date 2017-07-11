@@ -372,6 +372,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(        
 		    'toggles' => array(
+		    'style' 		=> esc_html__( 'Style', 'et_builder'),
 		    'header' 		=> esc_html__( 'Header', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
@@ -414,6 +415,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 				'description'       => esc_html__( 'Here you can define a custom card color.', 'et_builder' ),
 				'depends_show_if' => 'custom',
 				'toggle_slug'		=> 'style',
+				'tab_slug'		=> 'advanced',
 			),
 			'show_image' => array(
 				'label'           => esc_html__( 'Include Image', 'et_builder' ),
