@@ -2034,8 +2034,13 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			$url = sprintf('https://api.github.com/users/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s',
 										$username, $per_page, $client_id ,$client_secret );
 
-			$repos = json_decode( wp_remote_retrieve_body( wp_remote_get($url ) ) ) ;
+				
+			$repos =  wp_remote_get($url ) ;
+			$code = wp_remote_retrieve_response_code($repos);
 
+			if(404 !== $code){
+
+				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
 
 				foreach($repos as $r => $repo){
 					if("on" == $definitions[0] && "on" !== $definitions[1]){
@@ -2066,15 +2071,17 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
 														(!empty($fork) ? $fork : '') , (!empty($created_at) ? $created_at : ''),
 														(!empty($updated_at) ? $updated_at : ''), (!empty($language) ? $language : ''));
-
 				}
+			}else{
+					$output = '<strong>No GitHub Repository Found</strong>';	
 
-			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
+			}
+		}
+			$output = sprintf('<div%1$s class="%2$s%3$s">%6$s%4$s%5$s</div>',
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output	);
-		}
-
+										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output, '' );
+		
 
 		return $output;
 
