@@ -742,8 +742,8 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
+					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -2033,7 +2033,7 @@ function get_fields(){
 			'choose_text' => esc_attr__( 'Choose a Background Image', 'et_builder' ),
 			'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
 			'description' => esc_html__( 'If defined, this image will be used as the background for this slide. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
-			'toggle_slug'	=> 'style',
+			'toggle_slug'	=> 'body',
 		),
 		'slide_title' => array(
 			'label' => esc_html__( 'Title', 'et_builder' ),
@@ -2393,8 +2393,8 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_Modul
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
+					'style'  => esc_html__( 'Style' , 'et_builder'),
 					'body'   => esc_html__( 'Body'  , 'et_builder'),
 				),
 			),

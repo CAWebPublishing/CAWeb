@@ -1160,8 +1160,8 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'header' => esc_html__( 'Header', 'et_builder'),
+		      'style'  => esc_html__( 'Style' , 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
