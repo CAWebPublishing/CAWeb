@@ -1,6 +1,6 @@
 /* HIDE THE 'Enable Visual Builder' Button*/
 #wp-admin-bar-et-use-visual-builder{
-  /*display: none !important;*/
+  display: none !important;
 }
 
 /* ID Anchors do not jump to the correct location when the sticky navigation is compacted */
@@ -120,4 +120,3 @@ p{
   margin-bottom: 30px;
 
 }
-

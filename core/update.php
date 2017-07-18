@@ -43,7 +43,7 @@ function caweb_update_available(){
 				$obj['new_version'] = $payload->release->tag_name;
 				$obj['url'] =  $changelog_path . '/changelog.txt';
 				$obj['package'] = $payload->release->zipball_url;
-    
+
 				$theme_response = array(wp_get_theme()->Name => $obj);
 
 				$last_update->response = (isset($caweb_update->response) ?
@@ -123,11 +123,11 @@ final class caweb_auto_update{
 
 				//Define the alternative response for upgrader_pre_install
 				add_filter('upgrader_source_selection', array($this, 'caweb_upgrader_source_selection'), 10, 4 );
-							
+
 
 			}
 
-	
+
 		//alternative API for updating checking
 		public function check_update($update_transient){
 				$caweb_update_themes = get_site_transient( $this->transient_name );
@@ -135,19 +135,19 @@ final class caweb_auto_update{
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
 						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
-						$payloads = json_decode( wp_remote_retrieve_body(
-													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases', $this->args) ) );
-					
+						//$payloads = json_decode( wp_remote_retrieve_body(
+						//							wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases', $this->args) ) );
+
           // if current version is less than new version and is not a pre-release create update transient,
-          // if current release is a pre-release only create update transient for regression theme 
+          // if current release is a pre-release only create update transient for regression theme
           // regression theme name contains -Reg suffix
-          if( version_compare( $this->current_version, $payload->tag_name, '<' ) && 
+          if( version_compare( $this->current_version, $payload->tag_name, '<' ) &&
              (!$payload->prerelease || ( $payload->prerelease && strpos( $this->theme_name, '-Reg' ) !== false  ) ) ){
 							$last_update = new stdClass();
 
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
-						
+
 							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
 													wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $this->args)) )->content );
 
@@ -165,14 +165,14 @@ final class caweb_auto_update{
 
 							$last_update->last_checked = time();
 							set_site_transient($this->transient_name, $last_update);
-					}		
-					
-				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) && 
+					}
+
+				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) &&
 								version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'], '>=' ) ) {
-				
+
 						unset($caweb_update_themes->response[$this->theme_name]);
 						set_site_transient($this->transient_name, $caweb_update_themes);
-				}	
+				}
 
 				return $update_transient;
 
@@ -215,21 +215,21 @@ final class caweb_auto_update{
 	// Alternative upgrader_source_selection for the WordPress Updater
 	// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 	function caweb_upgrader_source_selection($src, $rm_src, $upgr, $options ){
-		
+
 		if( !isset($options['theme']) || $options['theme'] !== $this->theme_name )
 			return $src;
-			
+
 			$tmp = explode('/', $src);
 			array_shift($tmp);
 			array_pop($tmp);
 			$tmp[count($tmp) -1] = $tmp[count($tmp) -2] ;
 			$tmp = sprintf('/%1$s/',  implode('/', $tmp) );
-			
+
 			rename($src, $tmp);
-		
+
 			return $tmp;
 	}
-	
+
 
 }
 

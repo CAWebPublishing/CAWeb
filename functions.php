@@ -536,7 +536,7 @@ title.innerHTML = "Navigation";
     color: white;
 }
 	#et_pb_fb_cta{
-		/*display: none !important;*/
+		display: none !important;
 	}
 	/* This is the background color for the Divi Panel that pops open
 		when inserting modules or sections */
