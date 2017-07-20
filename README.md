@@ -1,18 +1,10 @@
 
-<p align="center">
-    <a href="https://caweb.ca.gov">
-        <img src="http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png" width="auto"></img>
-     </a> 
-</p>
+![CAWeb Logo](http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png)
 
 # Introduction 
 CAWeb is the only service to offer the California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing the the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by configuring a new WordPress environment yourself or using a vendor. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
 
-<p align="center">
-    <a href="https://caweb.ca.gov">
-        <img src="https://user-images.githubusercontent.com/13723805/28390282-30ecc610-6c8e-11e7-9e3e-b2fa1036377a.png" width="90%"></img>
-     </a> 
-</p>
+![CAWeb Screenshot](https://user-images.githubusercontent.com/13723805/28390282-30ecc610-6c8e-11e7-9e3e-b2fa1036377a.png)
 
 # Getting Started
 ### If you're not subscribing to CAWeb
