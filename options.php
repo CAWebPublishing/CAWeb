@@ -2,6 +2,8 @@
 
 // Administration Menu Setup
 function menu_setup(){
+  global $submenu;
+	
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
 								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
@@ -9,13 +11,15 @@ function menu_setup(){
 
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
-	add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
+  add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
   // If user is not a Network Admin
-	if( ! current_user_can('manage_network_options')){
-		// Remove Themes Menu
-		remove_menu_page('themes.php');
-
+	if( ! current_user_can('manage_network_options')){		
+    // Remove Themes, Customize and Background option under Appearance menu
+    unset($submenu['themes.php'][5]); // Themes link
+    unset($submenu['themes.php'][6]); // Customize link
+    unset($submenu['themes.php'][20]); // Background link
+      
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
 		remove_submenu_page('tools.php','import.php');
