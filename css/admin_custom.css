@@ -33,6 +33,9 @@
   }
 
 /* CAWeb Navigation Page Styles */
+.page-title-action{
+  display:none;
+}
  .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
     display:block;
   }

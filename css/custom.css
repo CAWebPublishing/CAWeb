@@ -2,6 +2,11 @@
 #wp-admin-bar-et-use-visual-builder{
   display: none !important;
 }
+
+/* ID Anchors do not jump to the correct location when the sticky navigation is compacted */
+header.fixed.compact + #page-container{
+	padding-top: 136px;
+}
 .mobile-controls{
 	cursor: auto;
 }
@@ -67,11 +72,6 @@ ul, ol{
   	margin: 0;
 }*/
 
-/* Location Banner Thumbnail Image Fix*/
-.location.banner .thumbnail img {
-    width: 100%;
-    height: 75px;
- }
 /* Media Styles */
 @media (min-width: 768px){
   .main-navigation.dropdown .nav-item:hover .sub-nav,
@@ -120,4 +120,3 @@ p{
   margin-bottom: 30px;
 
 }
-

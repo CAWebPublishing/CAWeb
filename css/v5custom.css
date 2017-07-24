@@ -185,17 +185,6 @@ input.gsc-input {
 
 /* End of Footer */
 
-/* Media Query Styles */
-@media (max-width: 767px) {
-	/*.et_pb_fullwidth_section{
-		margin: 0 ;
-	}*/
-
-	.et_pb_ca_fullwidth_section_primary.et_pb_module .pull-right {
-		padding-left: 0 !important;
-	}
-
-}
 @media (min-width: 768px) {
 	/*.et_pb_fullwidth_section{
 		margin: 0 -6%;
@@ -247,13 +236,6 @@ input.gsc-input {
 
 }
 
-@media (min-width: 1080px){
-
-/*.et_pb_fullwidth_section{
-		margin: 0 -12.5%;
-	}*/
-}
-
 .branding .header-cagov-logo img{
   max-height: 80px;
 }
@@ -271,10 +253,6 @@ input.gsc-input {
 }
 /* End of Branding & Navigation */
 
-/*
-	.et_pb_fullwidth_section{
-		margin: 0 -21.5%;
-	}*/
 }
 
 @media (max-width: 992px){
