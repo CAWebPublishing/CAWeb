@@ -1,3 +1,13 @@
+/* HIDE THE 'Enable Visual Builder' Button*/
+#et_pb_fb_cta{
+	display: none !important;
+}
+	/* This is the background color for the Divi Panel that pops open
+		when inserting modules or sections */
+	.et-pb-main-settings{
+		background-color: lightblue;
+	}
+
 /* CAWeb Options Page Styles */
 /* Indent fields under each categoryy */
 .form-table th{
@@ -61,24 +71,30 @@ p.field-move {
 }
 /* Icon List */
   ul.menu-icon-list{
-    width: 400px;
     height: 300px;
     overflow-y: scroll;
   }
-  ul.menu-icon-list li{
-  	float: left;
-    font-size: 30px;
-    padding: 8px;
-  }
 ul.menu-icon-list li:hover{
-	background-color: cornflowerblue;
+	background-color: #008BDB;
 	cursor: pointer;
 }
 
  ul.menu-icon-list li.is_selected{
-    background-color: cornflowerblue;
+    background-color: #008BDB;
 }
 
+	ul.et_font_icon {
+		background-color: white !important;
+		max-height: 300px;
+	}
+	.et_font_icon li {
+		font-size: 30px;
+    float: left;
+    padding: 8px;
+	}
+	.et-pb-option-container .description {
+			color: black !important;
+	}
 /* Tooltip Styles */
 /* Tooltip container */
 .tooltip {

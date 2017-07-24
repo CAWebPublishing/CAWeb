@@ -29,31 +29,6 @@ define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 
 // After Setup Theme
 function ca_setup_theme(){
-	global $ca_navigation_images;
-
-
-
-  $ca_navigation_images = get_option('ca_navigation_images');
-
-	if (!empty($ca_navigation_images) ) {
-		$tmp = array();
-		foreach( $ca_navigation_images as $k => $val){
-			array_push($tmp, substr($k ,0, strpos($k, '_') ) ) ;
-		}
-
-		$menu_ids = array_unique($tmp);
-		foreach( $menu_ids as $k ){
-			update_post_meta( $k, '_caweb_menu_icon', $ca_navigation_images[$k . '_icon'] );
-			update_post_meta( $k, '_caweb_menu_unit_size', $ca_navigation_images[$k . '_unit_size'] );
-			update_post_meta( $k, '_caweb_menu_media_image', $ca_navigation_images[$k . '_media_image'] );
-			update_post_meta( $k, '_caweb_menu_image', $ca_navigation_images[$k . '_image'] );
-			update_post_meta( $k, '_caweb_menu_image_side', $ca_navigation_images[$k . '_image_side'] );
-			update_post_meta( $k, '_caweb_menu_image_size', $ca_navigation_images[$k . '_image_size'] );
-		}
-
-
-		delete_option('ca_navigation_images');
-	}
 
 // Include additional functions
 require_once(CAWebAbsPath. '/functions/additional_functions.php');
@@ -154,51 +129,57 @@ function ca_theme_enqueue_style() {
 	global $pagenow;
 
 	$post_id = (is_object($post) ? $post->ID : $post['ID']);
+  $theme_version = wp_get_theme('CAWeb')->get('Version');
 
 	$ver = ( ca_version_check(4, $post_id) ?  'v4' : '');
 	// Enqueue Styles
 	// Required in order to inherit parent theme style.css
-	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array(), $theme_version );
 
 	if('wp-activate.php' == $pagenow   ){
-		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri) );
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri) );
+		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri), array(), $theme_version );
+		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri), array(), $theme_version );
 	}else{
-		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) );
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme')) );
+		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) , array(), $theme_version);
+		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme')) , array(), $theme_version);
 	}
 
-	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' );
+	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' , array(), $theme_version);
 
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
 
-	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri ) );
-	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) );
+	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri, array(), $theme_version ) );
+	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) , array(), $theme_version);
 
 	// Load editor styling
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(CAWebUri. '/css/cagov.core.css' );
 
 	// Enqueue Scripts
-	wp_register_script('cagov-modernizr-script', CAWebUri . '/js/libs/modernizr-2.0.6.min.js', array('jquery'), '1.0', false );
-	wp_register_script('cagov-modernizr-extra-script', CAWebUri . '/js/libs/modernizr-extra.min.js', array('jquery'), '1.0', false );
+	wp_register_script('cagov-modernizr-script', CAWebUri . '/js/libs/modernizr-2.0.6.min.js', array('jquery'), $theme_version , false );
+	wp_register_script('cagov-modernizr-extra-script', CAWebUri . '/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version , false );
 
- 	wp_register_script('cagov-core-script',	CAWebUri. '/js/cagov.core.js', array('jquery'), '1.0', true );
-	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js', '', '1.0', true );
-	wp_register_script('cagov-ga-autotracker-script',	CAWebUri. '/js/libs/AutoTracker.js', '', '1.0', true );
+ 	wp_register_script('cagov-core-script',	CAWebUri. '/js/cagov.core.js', array('jquery'), $theme_version , true );
+	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js',  $theme_version , true );
+	wp_register_script('cagov-google-script',	CAWebUri. '/js/libs/google.js', $theme_version , true );
+	wp_register_script('cagov-ga-autotracker-script',	CAWebUri. '/js/libs/AutoTracker.js', $theme_version , true );
 
 	// Localize the search script with the correct site url
-	wp_localize_script( 'cagov-search-script', 'site', array('site_url' => site_url()) );
+	wp_localize_script( 'cagov-google-script', 'args', array('ca_google_analytic_id' => get_option('ca_google_analytic_id'),
+                                                  'ca_site_version' => ca_get_version(),
+                                                  'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
+                                                   'ca_google_search_id' => get_option('ca_google_search_id')       ) );
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
+  wp_enqueue_script( 'cagov-google-script' );
   wp_enqueue_script( 'cagov-ga-autotracker-script' );
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
 
 	  /* Version 5 specific scripts */
   if(ca_version_check(5,$post_id) && "on" == get_option('ca_geo_locator_enabled')){
-	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), '1.0', true );
+	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
 
     wp_enqueue_script( 'cagov-geolocator-script' );
 	}
@@ -209,6 +190,7 @@ add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
 function ca_admin_enqueue_scripts($hook){
 	$pages = array( 'toplevel_page_ca_options',  'nav-menus.php');
+  $theme_version = wp_get_theme('CAWeb')->get('Version');
 
 	if( in_array($hook , $pages) ){
 		// Enqueue Scripts
@@ -217,19 +199,19 @@ function ca_admin_enqueue_scripts($hook){
 
 		wp_enqueue_script( 'custom-header' );
 
-		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'),true);
-		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),true);
+		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'), $theme_version);
+		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
 		wp_enqueue_script( 'browse-caweb-library' );
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
 
-		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
 	}
 
 
+		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 	// Enqueue Styles
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
 
 
 
@@ -508,60 +490,5 @@ function custom_bundle_js() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'custom_bundle_js', 99 );
-
-function caweb_page_customizations(){
-global $pagenow;
-
-if('nav-menus.php' == $pagenow   ){
-?>
-
-<!--script>
-  // Change title of page from 'Menu' to 'Navigation'
-	var title = document.getElementById('wpbody-content');
-  title = title.getElementsByClassName('wrap')[0];
-	title = title.getElementsByClassName('page-title-action')[0].parentNode;
-
-
-title.innerHTML = "Navigation";
-
-
-</script-->
-<?php
-}elseif('post-new.php' == $pagenow || 'post.php' == $pagenow  ){
-
- ?>
-<style>
-#et_ca_page_meta_box .hndle  {
-	background-color: <?php echo get_ca_user_color(1); ?> ;
-    color: white;
-}
-	#et_pb_fb_cta{
-		display: none !important;
-	}
-	/* This is the background color for the Divi Panel that pops open
-		when inserting modules or sections */
-	.et-pb-main-settings{
-
-	background-color: lightblue;
-
-	}
-
-	ul.et_font_icon {
-		background-color: white !important;
-		max-height: 300px;
-	}
-	.et_font_icon li {
-			font-size: 30px;
-	}
-	.et-pb-option-container .description {
-			color: black !important;
-	}
-</style>
-<?php
-}
-
-
-}
-add_action('admin_footer', 'caweb_page_customizations');
 
 ?>
