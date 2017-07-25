@@ -3,7 +3,7 @@
 // Administration Menu Setup
 function menu_setup(){
   global $submenu;
-	
+
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
 								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
@@ -14,12 +14,12 @@ function menu_setup(){
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
   // If user is not a Network Admin
-	if( ! current_user_can('manage_network_options')){		
+	if( ! current_user_can('manage_network_options')){
     // Remove Themes, Customize and Background option under Appearance menu
     unset($submenu['themes.php'][5]); // Themes link
     unset($submenu['themes.php'][6]); // Customize link
     unset($submenu['themes.php'][20]); // Background link
-      
+
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
 		remove_submenu_page('tools.php','import.php');
@@ -74,6 +74,12 @@ function get_all_ca_site_options($with_values = false){
 	return array_merge($ca_site_options, $ca_social_options);
 
 }
+
+function update_caweb_owner_info( $old_value, $value,  $option){
+  update_site_option($option, $value);
+}
+add_action('update_option_caweb_username', 'update_caweb_owner_info', 10, 3);
+add_action('update_option_caweb_password', 'update_caweb_owner_info', 10, 3);
 
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
