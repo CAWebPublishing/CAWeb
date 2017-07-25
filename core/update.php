@@ -18,7 +18,7 @@ function caweb_update_available(){
 
 
 			$args = array('headers' => array(
-											'Authorization' => 'Basic ' . base64_encode( ':' . 'b081a0c27674a7cba62f5f314179f317b9a7a664' ),
+											'Authorization' => 'Basic ' . base64_encode( ':' . get_option('caweb_password', '') ),
 											'Accept:' => 'application/vnd.github.v3+json', 'application/octet-stream'
 										)
 									);
@@ -82,7 +82,7 @@ if(!class_exists('Theme_Upgrader') ){
 
 final class caweb_auto_update{
 			protected $transient_name = 'caweb_update_themes';
-			protected $token = 'b081a0c27674a7cba62f5f314179f317b9a7a664';
+			protected $user;
 
 			/**
 			* Theme Name
@@ -102,12 +102,13 @@ final class caweb_auto_update{
 			*/
 			function __construct( $theme ){
 			// Set the class public variables
+      $this->user = get_option('caweb_username', '');
 			$this->theme_name = $theme->Name;
 			$this->current_version = $theme->Version;
-
+			
 			$this->args = array(
 										'headers' => array(
-											'Authorization' => 'Basic ' . base64_encode( ':' . $this->token ),
+											'Authorization' => 'Basic ' . base64_encode( ':' . get_option('caweb_password', '') ),
 											'Accept:' =>  'application/vnd.github.v3+json','application/vnd.github.VERSION.raw', 'application/octet-stream'
 										)
 									);
@@ -134,15 +135,14 @@ final class caweb_auto_update{
 
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
 						$payload = json_decode( wp_remote_retrieve_body(
-													wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases/latest', $this->args) ) );
+													wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
 						//$payloads = json_decode( wp_remote_retrieve_body(
 						//							wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases', $this->args) ) );
 
           // if current version is less than new version and is not a pre-release create update transient,
           // if current release is a pre-release only create update transient for regression theme
           // regression theme name contains -Reg suffix
-          if( version_compare( $this->current_version, $payload->tag_name, '<' ) &&
-             (!$payload->prerelease || ( $payload->prerelease && strpos( $this->theme_name, '-Reg' ) !== false  ) ) ){
+          if( version_compare( $this->current_version, $payload->tag_name, '<' ) ){
 							$last_update = new stdClass();
 
 							$obj = array();

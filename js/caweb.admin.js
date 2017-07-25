@@ -10,14 +10,14 @@
 
 
      if (version >= 5.0) {
-       extra_options[i].classList.add("show");
+       extra_options[i].classList.remove("hidden");
        for (var j = 0; j < base_options.length; j++) {
-         base_options[j].classList.remove("show");
+         base_options[j].classList.add("hidden");
        }
      } else {
-       extra_options[i].classList.remove("show");
+       extra_options[i].classList.add("hidden");
        for (var j = 0; j < base_options.length; j++) {
-         base_options[j].classList.add("show");
+         base_options[j].classList.remove("hidden");
        }
      }
 
@@ -31,7 +31,7 @@ function resetFavIcon(ico){
 	document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
 }
  function toggleOptionView(opt) {
-   var opts = ['general', 'social-share', 'custom-css'];
+   var opts = ['general', 'social-share', 'custom-css', 'update'];
 
    var selected_option = opt.getAttribute("name");
 
@@ -41,13 +41,13 @@ function resetFavIcon(ico){
 
      if (opts[i] != selected_option) {
 
-       document.getElementById(opts[i]).classList.remove("show");
+       document.getElementById(opts[i]).classList.add("hidden");
 
      }
 
    }
 
-   selected_div_option.classList.add("show");
+   selected_div_option.classList.remove("hidden");
 
    //Make all tabs inactive by getting elements with class "nav-tab" and removing class "nav-tab-active"
    var tabs = document.getElementsByClassName("nav-tab");
