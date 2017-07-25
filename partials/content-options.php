@@ -391,7 +391,7 @@ settings_fields('ca_site_options');
   	<h1 class="option">Updates</h1>
     <table class="form-table">
       <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?= get_site_option('caweb_username', ''); ?>"></td></tr>
-      <tr><td><p>Password</p><input type="text" name="caweb_password" size="50" value="<?= get_site_option('caweb_password', ''); ?>"></td></tr>
+      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
 		</table>
   </div>
 </div> <!-- End of CA Options Container -->
