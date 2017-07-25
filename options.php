@@ -78,7 +78,7 @@ function get_all_ca_site_options($with_values = false){
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
 
-	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
+	return array('caweb_username', 'caweb_password','caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
 				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
 				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
 				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
