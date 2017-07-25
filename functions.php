@@ -141,7 +141,7 @@ function ca_theme_enqueue_style() {
 		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri), array(), $theme_version );
 	}else{
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) , array(), $theme_version);
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme')) , array(), $theme_version);
+		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme', 'oceanside')) , array(), $theme_version);
 	}
 
 	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' , array(), $theme_version);

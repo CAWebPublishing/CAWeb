@@ -44,7 +44,7 @@ if(  4 == $ver  && !empty($module) ){
 
 }elseif(4 == $ver){
 		$h = ( "" != get_option('header_ca_background') ? get_option('header_ca_background') :
-						sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme') )
+						sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme', 'oceanside') )
 				);
 }
 
@@ -97,8 +97,6 @@ printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</d
 																						get_option('ca_default_navigation_menu') ),
 																'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
 																'version' => $ver,
-																'search_link' => !is_caweb_intranet_site(),
-																'intranet' => is_caweb_intranet_site() && !current_user_can('edit_pages')  && is_user_logged_in(),
 																)
 												);
 

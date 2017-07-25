@@ -9,7 +9,7 @@
 	<a href="#social-share-settings" name="social-share" class="nav-tab" onclick="toggleOptionView(this)">Social Media Links</a>
 
 	  <a href="#custom-css-settings" name="custom-css" class="nav-tab" onclick="toggleOptionView(this)">Custom CSS</a>
-  
+
 	  <a href="#update-settings" name="update" class="nav-tab" onclick="toggleOptionView(this)">Updates</a>
 
 </h2>
@@ -18,7 +18,7 @@
 <?php
 settings_fields('ca_site_options');
 ?>
- <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />    
+ <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
 <div id="ca-options-container">
 
 <!-- General Settings -->
@@ -31,13 +31,13 @@ settings_fields('ca_site_options');
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
 	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" readonly="true" style="background-color: #fff;"
-    value="<?php print substr(get_option('ca_fav_ico'), strrpos(get_option('ca_fav_ico'), '/')+1); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
+    value="<?php print substr(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), strrpos(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), '/')+1); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
-	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico'); ?>" >
+	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 		<input type="button" value="Reset" onclick="resetFavIcon('<?php echo CAWebUri . '/images/system/favicon.ico';?>')"><br />
-		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico'); ?>"/>
+		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>"/>
 	</td></tr>
 
   <tr>
@@ -85,15 +85,15 @@ settings_fields('ca_site_options');
 				<option value="oceanside"
 				<?= ( get_option('ca_site_color_scheme') == 'oceanside' ? 'selected="selected"' : '' ) ?>>Oceanside</option>
 
-			<option value="orangecounty" 
+			<option value="orangecounty"
 			<?= ( get_option('ca_site_color_scheme') == 'orangecounty' ? 'selected="selected"' : '' ) ?>>Orange County</option>
 
-		<option value="pasorobles" 
+		<option value="pasorobles"
 			<?= ( get_option('ca_site_color_scheme') == 'pasorobles' ? 'selected="selected"' : '' ) ?>>Paso Robles</option>
-		
-		<option value="santabarbara" 
+
+		<option value="santabarbara"
 			<?= ( get_option('ca_site_color_scheme') == 'santabarbara' ? 'selected="selected"' : '' ) ?>>Santa Barbara</option>
-		
+
 		<option value="sierra"
 			<?= ( get_option('ca_site_color_scheme') == 'sierra' ? 'selected="selected"' : '' ) ?>>Sierra</option>
 
@@ -254,7 +254,6 @@ settings_fields('ca_site_options');
 	<img class="header_ca_background_option" id="header_ca_background_img" src="<?php echo get_option('header_ca_background'); ?>"/>
 	</td></tr>
 </table>
-	<?php if( !is_caweb_intranet_site() ) : ?>
 <h1 class="option">Google</h1>
 <table class="form-table">
 
@@ -281,7 +280,6 @@ settings_fields('ca_site_options');
 		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
 
 </table>
-<?php endif; ?>
 </div>
 
 
@@ -395,6 +393,6 @@ settings_fields('ca_site_options');
 		</table>
   </div>
 </div> <!-- End of CA Options Container -->
-  
+
 <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
 </form>

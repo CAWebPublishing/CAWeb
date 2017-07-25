@@ -9,7 +9,7 @@
 
 */
 function ca_version_check($version, $post_id = -1){
-	$result = ($version == get_option('ca_site_version') ? true : false);
+	$result = ($version == get_option('ca_site_version', 5) ? true : false);
 
 	if(-1 < $post_id  ){
 		$result = ($version == ca_get_version($post_id) ? true : false);
@@ -27,7 +27,7 @@ function ca_get_version($post_id = -1){
 		$result = 5;
 		break;
 	default:
-		$result = get_option('ca_site_version');
+		$result = get_option('ca_site_version', 5);
 		break;
 
 	}
@@ -172,16 +172,16 @@ function get_ca_user_color($element){
 
 function caweb_get_google_map_place_link($addr){
   if( empty($addr) ){
-    return;  
+    return;
   }elseif( is_string($addr) ){
     $addr = preg_split('/,/', $addr);
   }
-  
+
   $addr = array_filter( $addr );
-	$addr = implode(", ", $addr);   
-    
+	$addr = implode(", ", $addr);
+
  return sprintf('<a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $addr);
-    
+
 }
 
 function get_tag_ID($tag_name) {
@@ -190,16 +190,6 @@ function get_tag_ID($tag_name) {
 		return $tag->term_id;
 	} else {
 		return 0;
-	}
-}
-
-if( !function_exists('is_caweb_intranet_site') ){
-	function is_caweb_intranet_site($id = -1){
-		$id = -1 == $id ? get_current_blog_id() : $id;
-		$hold= get_site_option( 'caweb_intranet_enabled_sites');
-
-		return ( !empty($hold) ? in_array($id, $hold ) : false ) ;
-
 	}
 }
 
@@ -327,13 +317,13 @@ function get_ca_icon_list($index = -1, $name = '', $keys = false){
 
 	if( 0 < $index )
 		return ( isset( array_values($icons)[$index] ) ? array_values($icons)[$index] : $index );
-	
+
 	if( !empty($name) )
 		return ( isset( $icons[$name] ) ? $icons[$name] : $name );
-	
+
 	if( $keys )
 		return array_keys( $icons );
-	
+
 	return $icons;
 }
 
@@ -351,15 +341,15 @@ function et_pb_ca_font_icon_symbols( $divi_symbols = array() ){
 function get_icon_span($font, $style = array()){
 	if( empty($font) )
 		return '';
-	
+
 	$tmp = get_ca_icon_list();
-	
-	if( isset( $tmp[$font] ) )	
+
+	if( isset( $tmp[$font] ) )
 		return sprintf('<span class="ca-gov-icon-%1$s"></span>', $font);
-	
+
 	if(  preg_match( "/^%%/", trim( $font ) ) ){
 			$font_index = preg_replace('/%%/','',$font);
-		
+
 			return sprintf('<span class="ca-gov-icon-%1$s"></span>',
 								 get_ca_icon_list(-1,'',true)[$font_index] );
 	}

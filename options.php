@@ -25,7 +25,6 @@ function menu_setup(){
 		remove_submenu_page('tools.php','import.php');
 		remove_submenu_page('tools.php', 'ms-delete-site.php');
 		remove_submenu_page('tools.php', 'domainmapping');
-		remove_submenu_page('tools.php', 'php-compatibility-checker');
 
 		// Removal of Divi Submenu Pages
 		remove_submenu_page('et_divi_options','et_divi_options');
@@ -139,28 +138,6 @@ function ca_register_settings(){
 
 	// enable admin notices for CAWeb Options
 	settings_errors('ca_options');
-
-	// If first time settings have been registered, initialize defaults
-	if("" == get_option('caweb_initialized') ){
-			update_option('caweb_initialized', true);
-
-			// Some settings may have already been set from a previous version
-			if("" == get_option('ca_site_version'))
-			 		update_option('ca_site_version', 5) ;
-
-			if("" == get_option('ca_fav_ico'))
-			 		update_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico') ;
-
-			if("" == get_option('ca_site_color_scheme'))
-			 		update_option('ca_site_color_scheme', 'oceanside');
-
-	}
-
-	// Remove the Breadcrumbs option if it had been initialized prior to v1.0.2a
-	delete_option( 'ca_breadcrumbs_enabled' );
-
-	delete_option ('caweb_intranet_enabled');
-
 
 }
 

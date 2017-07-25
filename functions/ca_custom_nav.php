@@ -38,23 +38,23 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			return 'CAWeb_Nav_Menu_Walker';
 
 	}
-	function caweb_nav_menu_args( $args) {		
+	function caweb_nav_menu_args( $args) {
 		if(isset( $args['theme_location'] ) && in_array($args['theme_location'], array('header-menu', 'footer-menu') ) ){
 			$args['fallback_cb'] = array($this, 'caweb_menu_fail');
 		}
-    
+
 		return $args;
 	}
-  
+
 	public function caweb_menu_fail($args){
 	$output= '';
-  
+
    if('header-menu' == $args['theme_location']){
 			$output = '<nav id="navigation" class=" ca_wp_container main-navigation hidden-print"><ul id="nav_list" class="top-level-nav">
 											<li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span><strong>There Is No Navigation Menu Set</strong></a></li></ul></nav>';
 
 		}else{
-     $navLinks = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>'; 
+     $navLinks = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>';
 				$socialLinks = '';
 				$output = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container %1$s">%2$s%3$s</div>
 													<!-- Copyright Statement -->
@@ -66,17 +66,15 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 									(isset($args['ca_custom_css']) && !empty($args['ca_custom_css']) ?
 									sprintf('<style id="ca_custom_css">%1$s</style>', $args['ca_custom_css']) : '') );
 
-		}    
+		}
     print $output;
 	}
-  
+
 	/* Menu Construction
 			Additional $args parameters added and used by CAWeb
 			 style = Default Navigation Menu Style unless overwritten at the page level
 			 home_link = If not currently on the Front Page and Auto Home Nav Link option is true add Link back to Home Page
 			 version = State Template Version
-			 search_link = if current site is not set to Intranet using the CAWeb Intranet Plugin and is version is set to 5,add Search Link
-			 intranet = if current site is set to Intranet using the CAWeb Intranet Plugin, version must be set to 5
 	*/
 	public function caweb_nav_menu( $nav , $args = array() ){
 		global $post;
@@ -84,30 +82,26 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 		$output = '';
   	$locations = get_nav_menu_locations() ;
     $args->menu = ( isset($locations[ $args->theme_location ] ) ? wp_get_nav_menu_object( $locations[ $args->theme_location ] )  : '');
-    
+
 		// Header Menu Construction
 		if('header-menu' == $args->theme_location && !empty($args->menu) ){
       $navLinks = $this->createNavMenu($args);
-			
+
 			// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
 			$homeLink = ( isset($args->home_link) && $args->home_link ? '<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
 
-			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) &&
-										(!isset($args->intranet) || !$args->intranet ) ?
+			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) ?
 									'<li class="nav-item"><a href="#" class="first-level-link"><span id="nav-item-search" class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
 
-			$intranetLogout = ( isset($args->version) && 5 <= $args->version && isset($args->intranet) && $args->intranet  ?
-									sprintf( '<li class="nav-item"><a href="%1$s?caweb_logout=true" class="first-level-link"><span class="ca-gov-icon-lock" aria-hidden="true"></span> Log Out</a></li>', get_permalink() ) : '' );
-
 			$output = sprintf('<nav id="navigation" class=" ca_wp_container main-navigation %1$s hidden-print">
-								<ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s%5$s</ul></nav>',
-												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $navLinks, $searchLink, $intranetLogout );
-			
+								<ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s</ul></nav>',
+												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $navLinks, $searchLink );
+
 			// Footer Menu Construction
 		}elseif('footer-menu' == $args->theme_location && !empty($args->menu)){
       $navLinks = $this->createFooterMenu($args);
       $socialLinks = $this->createFooterSocialMenu($args);
-      
+
 			$output = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container %1$s">%2$s%3$s</div>
 													<!-- Copyright Statement -->
 										<div class="copyright">
@@ -116,14 +110,14 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 									( 4 < $args->version ? 'ca_wp_container' : '' ), $navLinks, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ),
 (isset($args->ca_custom_css) && !empty($args->ca_custom_css) ? sprintf('<style id="ca_custom_css">%1$s</style>', $args->ca_custom_css) : '') );
 		}
-   
+
 			return (!empty($output) ? $output : $nav);
 	}
 
 
 	// Begin Creation of the Navigation Menu (first-level-links)
 	public function createNavMenu($args){
-    
+
     $menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
 			_wp_menu_item_classes_by_context($menuitems);
@@ -147,7 +141,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				// Create Link
 				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s" class="first-level-link"%6$s>%7$s %8$s</a>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
-										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''), 
+										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
 										$item->url, (!empty($item->target) ? sprintf(' target="%1$s"', $item->target) : ''),
 										$icon,  $item->title);
@@ -261,7 +255,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 	public function createFooterMenu($args){
 		$navLinks = '';
-    
+
 		// loop thru and create a link (parent nav item only)
     $menuitems =  wp_get_nav_menu_items( $args->menu->term_id, array( 'order'=> 'DESC'));
 

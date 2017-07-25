@@ -58,7 +58,7 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 
 	wp_head();
 
-printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico')  );
+printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico')  );
 
 
 
