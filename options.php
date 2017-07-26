@@ -106,11 +106,11 @@ add_action('update_option_caweb_username', 'update_caweb_owner_info', 10, 3);
 add_action('update_option_caweb_password', 'update_caweb_owner_info', 10, 3);
 
 function update_caweb_owner_encoded_info( $value, $old_value, $option ){
-  if(base64_decode($value) == $old_value){
+   if(base64_decode($value) == $old_value){
    		return $old_value;
-  }else{
-  		return $value;
-  }
+    }else{
+        return $value;
+    }
 }
 add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
 

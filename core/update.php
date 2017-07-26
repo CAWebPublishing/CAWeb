@@ -70,7 +70,6 @@ final class caweb_auto_update{
           if( !isset($payload->tag_name) )
             return $update_transient;
 
-							update_site_option('dev', $payload->tag_name);
             if( $this->current_version < $payload->tag_name ){
 							$last_update = new stdClass();
 
