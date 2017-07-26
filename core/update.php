@@ -6,80 +6,6 @@
 	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 */
 
-
-
-
-function caweb_update_available(){
-	if( isset( $_POST['payload'] ) ){
-			global $caweb_update;
-
-			if( !function_exists('get_site_transient') )
-    		require_once ABSPATH . 'wp-includes/options.php';
-
-
-			$args = array('headers' => array(
-											'Authorization' => 'Basic ' . base64_encode( ':' . get_site_option('caweb_password', '') ),
-											'Accept:' => 'application/vnd.github.v3+json', 'application/octet-stream'
-										)
-									);
-			$payload = json_decode( stripcslashes( $_POST['payload'] ) );
-
-			// Changelog location
-			$changelog_path = '/wp-content' .  explode('wp-content', __DIR__)[1];
-
-			$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
-									wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $args)) )->content );
-
-			// Write message to log
-			file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
-
-
-			$caweb_update = get_site_transient( 'caweb_update_themes' );
-
-
-				$last_update = new stdClass();
-
-				$obj = array();
-				$obj['new_version'] = $payload->release->tag_name;
-				$obj['url'] =  $changelog_path . '/changelog.txt';
-				$obj['package'] = $payload->release->zipball_url;
-
-				$theme_response = array(wp_get_theme()->Name => $obj);
-
-				$last_update->response = (isset($caweb_update->response) ?
-													$theme_response + $caweb_update->response :
-													$theme_response);
-
-
-				$last_update->last_checked = time();
-				set_site_transient( 'caweb_update_themes' , $last_update);
-
-	}
-	exit();
-}
-
-add_action('admin_post', 'caweb_update_available');
-add_action('admin_post_nopriv', 'caweb_update_available');
-add_action('admin_post_nopriv_caweb_update_available', 'caweb_update_available');
-add_action('admin_post_caweb_update_available', 'caweb_update_available');
-
-function ca_admin_theme_update_init(){
-	global $caweb_update;
-
-	$caweb_core_updates = new caweb_auto_update (wp_get_theme());
-}
-
-add_action('admin_init', 'ca_admin_theme_update_init');
-
-if(!class_exists('Theme_Upgrader') ){
-      /** Theme_Upgrader class */
-    	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-      /** Theme_Upgrader class */
-    	require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
-
-
-}
-
 final class caweb_auto_update{
 			protected $transient_name = 'caweb_update_themes';
 			protected $user;
@@ -113,6 +39,9 @@ final class caweb_auto_update{
 										)
 									);
 
+				add_action('admin_post_nopriv_caweb_update_available', array($this, 'caweb_update_available') );
+				add_action('admin_post_caweb_update_available', array($this, 'caweb_update_available') );
+
 			// define the alternative API for updating checking
 				add_filter('pre_site_transient_update_themes', array($this, 'check_update'));
 
@@ -131,6 +60,7 @@ final class caweb_auto_update{
 
 		//alternative API for updating checking
 		public function check_update($update_transient){
+     
 				$caweb_update_themes = get_site_transient( $this->transient_name );
 
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
@@ -140,7 +70,7 @@ final class caweb_auto_update{
           if( !isset($payload->tag_name) )
             return $update_transient;
 
-
+							update_site_option('dev', $payload->tag_name);
             if( $this->current_version < $payload->tag_name ){
 							$last_update = new stdClass();
 
@@ -199,6 +129,13 @@ final class caweb_auto_update{
 		// Alternative upgrader_pre_download for the WordPress Updater
 		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
 		public function caweb_upgrader_pre_download( $reply, $package ,  $upgrader ){
+      if(!class_exists('Theme_Upgrader') ){
+        /** Theme_Upgrader class */
+        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        /** Theme_Upgrader class */
+        require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
+			}
+      
 			if(isset($upgrader->skin->theme_info) && $upgrader->skin->theme_info->get('Name') == $this->theme_name){
 
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
@@ -229,7 +166,15 @@ final class caweb_auto_update{
 			return $tmp;
 	}
 
+	function caweb_update_available(){
+		if( isset( $_POST['payload'] ) ){
+			$this->check_update(null);
+		}
+		exit();
+	}
 
 }
+
+new caweb_auto_update (wp_get_theme());
 
 ?>
