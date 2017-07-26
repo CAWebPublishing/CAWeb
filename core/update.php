@@ -105,7 +105,7 @@ final class caweb_auto_update{
       $this->user = get_site_option('caweb_username', '');
 			$this->theme_name = $theme->Name;
 			$this->current_version = $theme->Version;
-			
+
 			$this->args = array(
 										'headers' => array(
 											'Authorization' => 'Basic ' . base64_encode( ':' . get_site_option('caweb_password', '') ),
@@ -136,17 +136,12 @@ final class caweb_auto_update{
 				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
 						$payload = json_decode( wp_remote_retrieve_body(
 													wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
-						//$payloads = json_decode( wp_remote_retrieve_body(
-						//							wp_remote_get('https://api.github.com/repos/Danny-Guzman/CAWeb/releases', $this->args) ) );
-							update_site_option('dev', $this->user);
-          // if current version is less than new version and is not a pre-release create update transient,
-          // if current release is a pre-release only create update transient for regression theme
-          // regression theme name contains -Reg suffix
+
           if( !isset($payload->tag_name) )
             return $update_transient;
-          
 
-          if( version_compare( $this->current_version, $payload->tag_name, '<' ) ){
+
+            if( $this->current_version < $payload->tag_name ){
 							$last_update = new stdClass();
 
 							$obj = array();
@@ -172,7 +167,7 @@ final class caweb_auto_update{
 					}
 
 				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) &&
-								version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'], '>=' ) ) {
+								$this->current_version >=  $caweb_update_themes->response[$this->theme_name]['new_version'] ) {
 
 						unset($caweb_update_themes->response[$this->theme_name]);
 						set_site_transient($this->transient_name, $caweb_update_themes);
