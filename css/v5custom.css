@@ -31,11 +31,18 @@
 
 }
 ul.utility-links.social-media-links {
-    max-height: 32px;
+    max-height: 37px;
 }
 
 .utility-header .located-city-name {
   	margin-left: 0;
+}
+
+.utility-header .ca_wp_container{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
 }
 /* End of Utility Header */
 
@@ -324,6 +331,7 @@ ul.utility-links.social-media-links {
     clip: rect(0 65px 40px 0);
     height: auto;
     width: auto;
+    position: initial;
 }
 	.utility-header .half:first-child{
       overflow: visible;
@@ -332,7 +340,6 @@ ul.utility-links.social-media-links {
   .utility-header .settings-links {
 		float: right;
 		text-align: right;
-		width: auto;
 		max-width: 85%;
 }
     .branding {
