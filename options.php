@@ -33,6 +33,10 @@ function menu_setup(){
 		remove_submenu_page('et_divi_options','et_divi_role_editor');
 	}
 
+  if(!is_multisite() || current_user_can('manage_network_options') ){
+    	add_submenu_page( 'ca_options','CAWeb Options', 'API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+  }
+
 }
 add_action( 'admin_menu', 'menu_setup' );
 
@@ -57,11 +61,32 @@ function admin_ca_init(){
 }
 add_action( 'admin_init', 'admin_ca_init' );
 
-// Setup CA Options Menu
+// Setup CAWeb Options Menu
 function menu_option_setup(){
 	// The actual menu file
 	get_template_part('partials/content','options');
 
+}
+// Setup CAWeb API Menu
+function api_menu_option_setup(){
+
+?>
+<style>table td{padding-left: 0 !important; padding-top: 0 !important}</style>
+
+<form id="ca-options-form" action="options.php" method="POST">
+  <?php
+settings_fields('ca_site_options');
+?>
+<div class="wrap">
+  <h1>API Key</h1>
+    <table class="form-table">
+      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?= get_site_option('caweb_username', ''); ?>"></td></tr>
+      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
+		</table>
+  </div>
+  <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+</form>
+<?php
 }
 
 // Returns and array of all CA Site Options

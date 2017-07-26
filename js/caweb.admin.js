@@ -31,7 +31,7 @@ function resetFavIcon(ico){
 	document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
 }
  function toggleOptionView(opt) {
-   var opts = ['general', 'social-share', 'custom-css', 'update'];
+   var opts = ['general', 'social-share', 'custom-css'];
 
    var selected_option = opt.getAttribute("name");
 
@@ -202,7 +202,7 @@ function resetFavIcon(ico){
                 alert("Invalid Icon Mime Type: " + filename);
               }
             });
-          }		
+          }
       });
 
       frame.on('open', function() {
