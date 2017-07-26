@@ -181,9 +181,9 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 
 					}else{
-						$nav_item .= sprintf('<div class="empty sub-nav %2$s">
+						$nav_item .= sprintf('<div class="empty sub-nav">
 													<div>%1$s</div></li>',
-																$this->createSubNavMenu($childLinks,  $args ), ( $args->version == 5  ? 'ca_wp_container' : '') );
+																$this->createSubNavMenu($childLinks,  $args ));
 					}
 
 				}else{
