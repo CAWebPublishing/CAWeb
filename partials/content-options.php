@@ -44,7 +44,6 @@ settings_fields('ca_site_options');
 		<td>
 			<select id="ca_site_version" name="ca_site_version" onchange="toggleOptions(this)">
 				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0</option>
-				<!--option value="4.5" <?= ( get_option('ca_site_version') == '4.5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option-->
 				<option value="4" <?= ( get_option('ca_site_version') == '4' ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
 			</select>
 		</td>
@@ -65,7 +64,7 @@ settings_fields('ca_site_options');
 		</td>
 	</tr>
 
-<?php if( current_user_can('manage_network_options') ): ?>
+<?php if( !is_multisite() || current_user_can('manage_network_options') ): ?>
 		<tr>
 		<th scope="row"><div class="tooltip">Menu Type Selector
 			<span class="tooltiptext">Displays a header menu type selector on the page editor level.</span></div></th>
@@ -98,13 +97,13 @@ settings_fields('ca_site_options');
 			</select>
 		</td>
 	</tr>
-  <tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+  <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
 			<span class="tooltiptext">Display a visible search box on the front page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
-  	<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?> ">
+  	<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
 		<span class="tooltiptext">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
 		</th>
@@ -123,7 +122,7 @@ settings_fields('ca_site_options');
   <td><input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" <?= ( get_option('ca_default_post_title_display', false) ? 'checked="checked"' : '' ) ?> />
   </td></tr>
 </table>
-<div class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<div class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
   <h1 class="option">Utility Header</h1>
 <table class="form-table">
 
