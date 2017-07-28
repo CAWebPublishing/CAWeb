@@ -8,7 +8,7 @@ $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg
 
 $header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ? 
                           get_option('header_ca_background') : $default_background_img );
-$header_style = sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img);
+$header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '' );
 
 $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post_content : $post['content'] ) , $ver );
 
