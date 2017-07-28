@@ -45,7 +45,7 @@ add_action( 'admin_menu', 'menu_setup' );
 // redirect to admin page
 function redirect_themes_page() {
 	global $pagenow;
-  
+
 	if( ( is_multisite() && ! current_user_can('manage_network_options') ) || 'customize.php' == $pagenow ){
 		wp_redirect(get_admin_url());
 		exit;
@@ -107,8 +107,8 @@ function api_menu_option_setup(){
 <div class="wrap">
   <h1>API Key</h1>
     <table class="form-table">
-      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?= get_site_option('caweb_username', ''); ?>"></td></tr>
-      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
+      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>"></td></tr>
+      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?php echo base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
 		</table>
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
@@ -120,9 +120,22 @@ function save_caweb_api_options($values = array()){
   update_option('caweb_username', $values['caweb_username']);
   update_option('caweb_password', $values['caweb_password']);
 
+  update_site_option('caweb_username', $values['caweb_username']);
+  update_site_option('caweb_password', get_option('caweb_password') );
+
   print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 
 }
+
+function update_caweb_owner_encoded_info( $value, $old_value, $option ){
+	$pwd = $value;
+
+   if(base64_decode($value) == $old_value )
+   		$pwd = $old_value;php
+
+	return $pwd;
+}
+add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
 
 // Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
@@ -133,21 +146,6 @@ function get_all_ca_site_options($with_values = false){
 	return array_merge($ca_site_options, $ca_social_options);
 
 }
-
-function update_caweb_owner_info( $old_value, $value,  $option){
-  update_site_option($option, $value);
-}
-add_action('update_option_caweb_username', 'update_caweb_owner_info', 10, 3);
-add_action('update_option_caweb_password', 'update_caweb_owner_info', 10, 3);
-
-function update_caweb_owner_encoded_info( $value, $old_value, $option ){
-   if(base64_decode($value) == $old_value){
-   		return $old_value;
-    }else{
-        return $value;
-    }
-}
-add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
 
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
