@@ -86,10 +86,6 @@ function save_caweb_options($values = array()){
     	update_option($opt, $val);
   }
 
-  foreach($social_options as $option){
-    update_option($option, isset( $values[$option] ) ? true : false );
-  }
-
 }
 // Setup CAWeb API Menu
 function api_menu_option_setup(){
@@ -97,10 +93,11 @@ function api_menu_option_setup(){
 ?>
 <style>table td{padding-left: 0 !important; padding-top: 0 !important}</style>
 
-<form id="ca-options-form" action="options.php" method="GET">
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
-settings_fields('ca_site_options');
-?>
+  if( isset($_POST['caweb_api_options_submit']) )
+  	save_caweb_api_options($_POST);
+  ?>
 <div class="wrap">
   <h1>API Key</h1>
     <table class="form-table">
@@ -108,9 +105,14 @@ settings_fields('ca_site_options');
       <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
 		</table>
   </div>
-  <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+  <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
 </form>
 <?php
+}
+
+function save_caweb_api_options($values = array()){
+      update_option('caweb_username', $values['caweb_username']);
+      update_option('caweb_password', $values['caweb_password']);
 }
 
 // Returns and array of all CAWeb Site Options

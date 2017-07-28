@@ -40,7 +40,6 @@ require_once(CAWebAbsPath. '/options.php');
 // Add CAWeb Navigation Menu Customization to wp-admin/nav-menus.php page
 require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 
-
   // CA Metaboxes
 	require_once(CAWebAbsPath. '/functions/metaboxes.php');
 
@@ -189,9 +188,9 @@ add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 // Admin Enqueue Scripts and Styles
 
 function ca_admin_enqueue_scripts($hook){
-	$pages = array( 'toplevel_page_ca_options',  'nav-menus.php');
+	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
   $theme_version = wp_get_theme('CAWeb')->get('Version');
-
+	
 	if( in_array($hook , $pages) ){
 		// Enqueue Scripts
 		wp_enqueue_script( 'jquery' );
