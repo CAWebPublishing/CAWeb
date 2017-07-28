@@ -3,6 +3,9 @@
 // Administration Menu Setup
 function menu_setup(){
   global $submenu;
+  // Not Supported
+  unset($submenu['themes.php'][6]); // Customize link
+  unset($submenu['themes.php'][20]); // Background link
 
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
@@ -14,11 +17,9 @@ function menu_setup(){
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
   // If user is not a Network Admin
-	if( ! current_user_can('manage_network_options')){
+	if( is_multisite() &&  ! current_user_can('manage_network_options')){
     // Remove Themes, Customize and Background option under Appearance menu
     unset($submenu['themes.php'][5]); // Themes link
-    unset($submenu['themes.php'][6]); // Customize link
-    unset($submenu['themes.php'][20]); // Background link
 
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
@@ -43,7 +44,9 @@ add_action( 'admin_menu', 'menu_setup' );
 // If direct access to certain menus is accessed
 // redirect to admin page
 function redirect_themes_page() {
-	if( ! current_user_can('manage_network_options')){
+	global $pagenow;
+  
+	if( ( is_multisite() && ! current_user_can('manage_network_options') ) || 'customize.php' == $pagenow ){
 		wp_redirect(get_admin_url());
 		exit;
 	}
