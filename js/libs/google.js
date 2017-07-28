@@ -1,7 +1,6 @@
-<!-- Google Analytics -->
-<script type="text/javascript">
+// Google Analytics
    var _gaq = _gaq || [];
-_gaq.push(['_setAccount', "<?php echo get_option('ca_google_analytic_id'); ?>"]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
+_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 _gaq.push(['_gat._anonymizeIp']);
 _gaq.push(['_setDomainName', '.ca.gov']);
 _gaq.push(['_trackPageview']);
@@ -19,11 +18,8 @@ _gaq.push(['b._trackPageview']);
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(ga, s);
 })();
-</script>
 
-<!-- Google Custom Search -->
-<script type="text/javascript">
-
+// Google Custom Search 
 
 	(function() {
 
@@ -37,10 +33,10 @@ _gaq.push(['b._trackPageview']);
 			var $resultsContainer = $('.search-results-container');
 			var $body = $("body");
 
-			<?php if( 4 == ca_get_version() ): ?>
+      if( 4 == args.ca_site_version )
 				$searchText.attr("placeholder", "Search");
-			<?php endif; ?>
-
+			
+      
 			 $searchText.on("click", function() {
 					addSearchResults();
 					$searchContainer.addClass("search-freeze-width");
@@ -58,7 +54,7 @@ _gaq.push(['b._trackPageview']);
             
 			$('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents('.nav-item').on('click', function(e) {
 					$searchText.focus().trigger('focus')
-					<?php if( true == get_option('ca_frontpage_search_enabled') && is_front_page() ): ?>
+            if( true == args.ca_frontpage_search_enabled ){
             // let the user know the input box is where they should search
 						$(".primary #head-search").addClass('play-animation').one(
 						'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
@@ -66,9 +62,9 @@ _gaq.push(['b._trackPageview']);
 							$(this).removeClass('play-animation');
 
 						});           
-        <?php else: ?>
-          addSearchResults();
-					<?php endif; ?>
+             }else{
+                  addSearchResults();
+            }
 					
 
 
@@ -102,16 +98,26 @@ _gaq.push(['b._trackPageview']);
 
     }
 
-
-    var cx = "<?php echo get_option('ca_google_search_id');?>";
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-		gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-
-
+      if("" !== args.ca_google_search_id){
+        var cx = args.ca_google_search_id;
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script');
+        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
+      }
 
   })();
-</script>
+  /* Google Translate */
+if("on" == args.ca_google_trans_enabled){
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  var gtrans = document.createElement('script');
+	gtrans.type = 'text/javascript';
+  gtrans.async = true;
+  gtrans.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  var s = document.getElementsByTagName('script');
+  s[s.length - 1].parentNode.insertBefore(gtrans, s[s.length - 1]);
+}

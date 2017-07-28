@@ -7,7 +7,7 @@ CAWeb is the only service to offer the California State Website Template on Word
 ![CAWeb Screenshot](https://user-images.githubusercontent.com/13723805/28390282-30ecc610-6c8e-11e7-9e3e-b2fa1036377a.png)
 
 # Getting Started
-### If you're not subscribing to CAWeb
+### If you're not subscribing to the CAWeb Publishing Service
 1. Get a WordPress instance from yourself or create a wordpress instance on your own server. Here's a good guide on [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04).
 2. Purchase a Divi license from [Elegant Themes](https://www.elegantthemes.com/join/) and dowload the theme.
 3. Upload the Divi theme to your new WordPress instance.

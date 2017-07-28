@@ -2,6 +2,8 @@
 
 // Administration Menu Setup
 function menu_setup(){
+  global $submenu;
+
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
 								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
@@ -9,19 +11,20 @@ function menu_setup(){
 
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
-	add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
+  add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
 
   // If user is not a Network Admin
 	if( ! current_user_can('manage_network_options')){
-		// Remove Themes Menu
-		remove_menu_page('themes.php');
+    // Remove Themes, Customize and Background option under Appearance menu
+    unset($submenu['themes.php'][5]); // Themes link
+    unset($submenu['themes.php'][6]); // Customize link
+    unset($submenu['themes.php'][20]); // Background link
 
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
 		remove_submenu_page('tools.php','import.php');
 		remove_submenu_page('tools.php', 'ms-delete-site.php');
 		remove_submenu_page('tools.php', 'domainmapping');
-		remove_submenu_page('tools.php', 'php-compatibility-checker');
 
 		// Removal of Divi Submenu Pages
 		remove_submenu_page('et_divi_options','et_divi_options');
@@ -29,6 +32,10 @@ function menu_setup(){
 		remove_submenu_page('et_divi_options','customize.php?et_customizer_option_set=module');
 		remove_submenu_page('et_divi_options','et_divi_role_editor');
 	}
+
+  if(!is_multisite() || current_user_can('manage_network_options') ){
+    	add_submenu_page( 'ca_options','CAWeb Options', 'API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+  }
 
 }
 add_action( 'admin_menu', 'menu_setup' );
@@ -48,20 +55,73 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 
 // Administration Initialization
 function admin_ca_init(){
-	ca_register_settings();
+
 
 
 }
 add_action( 'admin_init', 'admin_ca_init' );
 
-// Setup CA Options Menu
+// Setup CAWeb Options Menu
 function menu_option_setup(){
 	// The actual menu file
 	get_template_part('partials/content','options');
 
 }
 
-// Returns and array of all CA Site Options
+function save_caweb_options($values = array()){
+  $site_options = get_ca_site_options();
+ 	$social_options = get_ca_social_extra_options();
+
+  foreach($site_options as $opt){
+   	if( !array_key_exists($opt, $values) )
+      $values[$opt] = '';
+  }
+
+  unset($values['tab_selected']);
+  unset($values['caweb_options_submit']);
+  unset($values['caweb_username']);
+  unset($values['caweb_password']);
+
+  foreach($values as $opt => $val){
+    	update_option($opt, $val);
+  }
+
+  print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+
+}
+// Setup CAWeb API Menu
+function api_menu_option_setup(){
+
+?>
+<style>table td{padding-left: 0 !important; padding-top: 0 !important}</style>
+
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
+  <?php
+  if( isset($_POST['caweb_api_options_submit']) ){
+  	save_caweb_api_options($_POST);
+  }
+  ?>
+<div class="wrap">
+  <h1>API Key</h1>
+    <table class="form-table">
+      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?= get_site_option('caweb_username', ''); ?>"></td></tr>
+      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
+		</table>
+  </div>
+  <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+</form>
+<?php
+}
+
+function save_caweb_api_options($values = array()){
+  update_option('caweb_username', $values['caweb_username']);
+  update_option('caweb_password', $values['caweb_password']);
+
+  print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+
+}
+
+// Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
 
 	$ca_site_options = get_ca_site_options();
@@ -71,10 +131,25 @@ function get_all_ca_site_options($with_values = false){
 
 }
 
+function update_caweb_owner_info( $old_value, $value,  $option){
+  update_site_option($option, $value);
+}
+add_action('update_option_caweb_username', 'update_caweb_owner_info', 10, 3);
+add_action('update_option_caweb_password', 'update_caweb_owner_info', 10, 3);
+
+function update_caweb_owner_encoded_info( $value, $old_value, $option ){
+   if(base64_decode($value) == $old_value){
+   		return $old_value;
+    }else{
+        return $value;
+    }
+}
+add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
+
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
 
-	return array('caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
+	return array('caweb_username', 'caweb_password','ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
 				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
 				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
 				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
@@ -85,8 +160,9 @@ function get_ca_site_options(){
 // Returns and array of all CA Social Options
 function get_ca_social_options(){
 
-	return array('ca_social_facebook', 'ca_social_twitter' ,  'ca_social_google_plus', 'ca_social_email' ,
-		'ca_social_flickr' , 'ca_social_pinterest' , 'ca_social_youtube', 'ca_social_instagram', 'ca_social_linkedin', 'ca_social_rss');
+	return array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter' , 'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email' ,
+								'Flickr' => 'ca_social_flickr' , 'Pinterest' => 'ca_social_pinterest' , 'YouTube' => 'ca_social_youtube', 'Instagram' => 'ca_social_instagram',
+               'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss');
 }
 
 
@@ -98,66 +174,13 @@ function get_ca_social_extra_options(){
 	$tmp = array();
 
 	foreach($hold as $social){
-
-		array_push($tmp, $social . '_header');
-
-		array_push($tmp, $social . '_footer');
-
+		$tmp[] = $social . '_header';
+		$tmp[] = $social . '_footer';
 	}
 	return $tmp;
 
 }
 
-// Registers all site settings under
-// Global Group Name = 'ca_site_options'
-function ca_register_settings(){
-
-	$all_ca_options = get_all_ca_site_options();
-
-	foreach($all_ca_options as $option){
-		register_setting( 'ca_site_options', $option);
-	}
-
-	// enable admin notices for CAWeb Options
-	settings_errors('ca_options');
-
-	// If first time settings have been registered, initialize defaults
-	if("" == get_option('caweb_initialized') ){
-			update_option('caweb_initialized', true);
-
-			// Some settings may have already been set from a previous version
-			if("" == get_option('ca_site_version'))
-			 		update_option('ca_site_version', 5) ;
-
-			if("" == get_option('ca_fav_ico'))
-			 		update_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico') ;
-
-			if("" == get_option('ca_site_color_scheme'))
-			 		update_option('ca_site_color_scheme', 'oceanside');
-
-	}
-
-	// Remove the Breadcrumbs option if it had been initialized prior to v1.0.2a
-	delete_option( 'ca_breadcrumbs_enabled' );
-
-	delete_option ('caweb_intranet_enabled');
-
-
-}
-
-// admin message hook
-function caweb_option_notices(){
-
-
-	// if on the caweb options page and update is made
-	if ( ( isset($_GET['page']) && isset($_GET['settings-updated']) ) ){
-			if ( ( "ca_options" == $_GET['page']  &&  true == $_GET['settings-updated'] ) ){
-			print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
-		}
-	}
-
-}
-add_action('admin_notices', 'caweb_option_notices');
 /*
 	Check the Binary Signature of a file
 	currently only checking for icon

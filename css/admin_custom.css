@@ -1,4 +1,17 @@
+/* HIDE THE 'Enable Visual Builder' Button*/
+#et_pb_fb_cta{
+	display: none !important;
+}
+	/* This is the background color for the Divi Panel that pops open
+		when inserting modules or sections */
+	.et-pb-main-settings{
+		background-color: lightblue;
+	}
+
 /* CAWeb Options Page Styles */
+#ca-options-container {
+    margin-bottom: 5px;
+}
 /* Indent fields under each categoryy */
 .form-table th{
     padding: 10px 10px 10px 0px;
@@ -7,30 +20,16 @@
 .form-table td{
   padding: 5px 10px;
 }
+
 #custom-css textarea{
 	width: 100%;
 	min-height: 700px;
-}
-
-#general, #social-share, #google_translate_options, .extra , .base, #custom-css{
-    display: none;
-}
-
- #general.show, #social-share.show, #google_translate_options.show,  div.show, #custom-css.show   {
-    display: inline;
 }
 
 .option{
 	text-decoration: underline;
   font-size: 1.2rem;
 }
-  option.show{
-    display:block;
-  }
-
-  tr.show{
-    display:table-row;
-  }
 
 /* CAWeb Navigation Page Styles */
 .page-title-action{
@@ -61,24 +60,30 @@ p.field-move {
 }
 /* Icon List */
   ul.menu-icon-list{
-    width: 400px;
     height: 300px;
     overflow-y: scroll;
   }
-  ul.menu-icon-list li{
-  	float: left;
-    font-size: 30px;
-    padding: 8px;
-  }
 ul.menu-icon-list li:hover{
-	background-color: cornflowerblue;
+	background-color: #008BDB;
 	cursor: pointer;
 }
 
  ul.menu-icon-list li.is_selected{
-    background-color: cornflowerblue;
+    background-color: #008BDB;
 }
 
+	ul.et_font_icon {
+		background-color: white !important;
+		max-height: 300px;
+	}
+	.et_font_icon li {
+		font-size: 30px;
+    float: left;
+    padding: 8px;
+	}
+	.et-pb-option-container .description {
+			color: black !important;
+	}
 /* Tooltip Styles */
 /* Tooltip container */
 .tooltip {
