@@ -107,8 +107,9 @@ function api_menu_option_setup(){
 <div class="wrap">
   <h1>API Key</h1>
     <table class="form-table">
-      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>"></td></tr>
-      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?php echo base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
+      <tr><td><p><div class="tooltip">Username
+		<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></p><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>"></td></tr>
+      <tr><td><p><div class="tooltip">Password<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></p><input type="password" name="caweb_password" size="50" value="<?php echo base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
 		</table>
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
@@ -131,7 +132,7 @@ function update_caweb_owner_encoded_info( $value, $old_value, $option ){
 	$pwd = $value;
 
    if(base64_decode($value) == $old_value )
-   		$pwd = $old_value;php
+   		$pwd = $old_value;
 
 	return $pwd;
 }
