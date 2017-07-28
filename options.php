@@ -86,6 +86,8 @@ function save_caweb_options($values = array()){
     	update_option($opt, $val);
   }
 
+  print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+
 }
 // Setup CAWeb API Menu
 function api_menu_option_setup(){
@@ -95,8 +97,9 @@ function api_menu_option_setup(){
 
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
-  if( isset($_POST['caweb_api_options_submit']) )
+  if( isset($_POST['caweb_api_options_submit']) ){
   	save_caweb_api_options($_POST);
+  }
   ?>
 <div class="wrap">
   <h1>API Key</h1>
@@ -111,8 +114,11 @@ function api_menu_option_setup(){
 }
 
 function save_caweb_api_options($values = array()){
-      update_option('caweb_username', $values['caweb_username']);
-      update_option('caweb_password', $values['caweb_password']);
+  update_option('caweb_username', $values['caweb_username']);
+  update_option('caweb_password', $values['caweb_password']);
+
+  print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+
 }
 
 // Returns and array of all CAWeb Site Options
@@ -175,19 +181,6 @@ function get_ca_social_extra_options(){
 
 }
 
-// admin message hook
-function caweb_option_notices(){
-
-
-	// if on the caweb options page and update is made
-	if ( ( isset($_GET['page']) && isset($_GET['settings-updated']) ) ){
-			if ( ( "ca_options" == $_GET['page']  &&  true == $_GET['settings-updated'] ) ){
-			print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
-		}
-	}
-
-}
-add_action('admin_notices', 'caweb_option_notices');
 /*
 	Check the Binary Signature of a file
 	currently only checking for icon

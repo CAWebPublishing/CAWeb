@@ -104,9 +104,21 @@ _gaq.push(['b._trackPageview']);
         gcse.type = 'text/javascript';
         gcse.async = true;
         gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(gcse, s);
+        var s = document.getElementsByTagName('script');
+        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
       }
 
   })();
-    
+  /* Google Translate */
+if("on" == args.ca_google_trans_enabled){
+  console.log('woks');
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  var gtrans = document.createElement('script');
+	gtrans.type = 'text/javascript';
+  gtrans.async = true;
+  gtrans.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  var s = document.getElementsByTagName('script');
+  s[s.length - 1].parentNode.insertBefore(gtrans, s[s.length - 1]);
+}
