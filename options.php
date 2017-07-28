@@ -55,7 +55,7 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 
 // Administration Initialization
 function admin_ca_init(){
-	ca_register_settings();
+
 
 
 }
@@ -67,13 +67,37 @@ function menu_option_setup(){
 	get_template_part('partials/content','options');
 
 }
+
+function save_caweb_options($values = array()){
+  $site_options = get_ca_site_options();
+ 	$social_options = get_ca_social_extra_options();
+
+  foreach($site_options as $opt){
+   	if( !array_key_exists($opt, $values) )
+      $values[$opt] = '';
+  }
+
+  unset($values['tab_selected']);
+  unset($values['caweb_options_submit']);
+  unset($values['caweb_username']);
+  unset($values['caweb_password']);
+
+  foreach($values as $opt => $val){
+    	update_option($opt, $val);
+  }
+
+  foreach($social_options as $option){
+    update_option($option, isset( $values[$option] ) ? true : false );
+  }
+
+}
 // Setup CAWeb API Menu
 function api_menu_option_setup(){
 
 ?>
 <style>table td{padding-left: 0 !important; padding-top: 0 !important}</style>
 
-<form id="ca-options-form" action="options.php" method="POST">
+<form id="ca-options-form" action="options.php" method="GET">
   <?php
 settings_fields('ca_site_options');
 ?>
@@ -89,7 +113,7 @@ settings_fields('ca_site_options');
 <?php
 }
 
-// Returns and array of all CA Site Options
+// Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
 
 	$ca_site_options = get_ca_site_options();
@@ -117,7 +141,7 @@ add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info'
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
 
-	return array('caweb_username', 'caweb_password','caweb_initialized', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
+	return array('caweb_username', 'caweb_password','ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
 				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
 				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
 				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
@@ -128,8 +152,9 @@ function get_ca_site_options(){
 // Returns and array of all CA Social Options
 function get_ca_social_options(){
 
-	return array('ca_social_facebook', 'ca_social_twitter' ,  'ca_social_google_plus', 'ca_social_email' ,
-		'ca_social_flickr' , 'ca_social_pinterest' , 'ca_social_youtube', 'ca_social_instagram', 'ca_social_linkedin', 'ca_social_rss');
+	return array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter' , 'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email' ,
+								'Flickr' => 'ca_social_flickr' , 'Pinterest' => 'ca_social_pinterest' , 'YouTube' => 'ca_social_youtube', 'Instagram' => 'ca_social_instagram',
+               'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss');
 }
 
 
@@ -141,28 +166,10 @@ function get_ca_social_extra_options(){
 	$tmp = array();
 
 	foreach($hold as $social){
-
-		array_push($tmp, $social . '_header');
-
-		array_push($tmp, $social . '_footer');
-
+		$tmp[] = $social . '_header';
+		$tmp[] = $social . '_footer';
 	}
 	return $tmp;
-
-}
-
-// Registers all site settings under
-// Global Group Name = 'ca_site_options'
-function ca_register_settings(){
-
-	$all_ca_options = get_all_ca_site_options();
-
-	foreach($all_ca_options as $option){
-		register_setting( 'ca_site_options', $option);
-	}
-
-	// enable admin notices for CAWeb Options
-	settings_errors('ca_options');
 
 }
 
