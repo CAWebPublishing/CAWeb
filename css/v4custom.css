@@ -3,7 +3,7 @@ input.gsc-input:hover, input.gsc-input:focus {
     border-color: #fbad23;
 }
 table.gsc-search-box td.gsc-input {
-     padding-right: 0px !important; 
+     padding-right: 0px !important;
 }
 input.gsc-input {
     background-image: unset !important;
@@ -25,7 +25,7 @@ td.gsc-clear-button {
     max-width: 100% !important;
 	}
 	.navigation-search {
-     padding-top: 5px; 
+     padding-top: 5px;
 	}
 }
 /* End of Search */
@@ -143,7 +143,11 @@ div#google_translate_element {
 	-moz-column-count: 1 !important;
 	column-count: 1 !important;
 }
-
+@media (max-width: 768px){}
+  nav.megadropdown .second-level-nav li {
+    width: 100%;
+  }
+}
 nav.megadropdown .second-level-nav li{
     float: left;
 		width: 33%;
@@ -1010,4 +1014,3 @@ fieldset[disabled] a.btn-more {
 /* End of Service Tiles */
 
 /* END from cagov.core.css */
-
