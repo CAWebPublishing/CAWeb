@@ -175,7 +175,7 @@ function ca_theme_enqueue_style() {
   wp_enqueue_script( 'cagov-ga-autotracker-script' );
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
-  
+
 	  /* Version 5 specific scripts */
   if(ca_version_check(5,$post_id) && "on" == get_option('ca_geo_locator_enabled')){
 	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
@@ -190,7 +190,7 @@ add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 function ca_admin_enqueue_scripts($hook){
 	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
   $theme_version = wp_get_theme('CAWeb')->get('Version');
-  
+
 	if( in_array($hook , $pages) ){
 		// Enqueue Scripts
 		wp_enqueue_script( 'jquery' );
@@ -202,6 +202,9 @@ function ca_admin_enqueue_scripts($hook){
 		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
 		wp_enqueue_script( 'browse-caweb-library' );
+    // Localize the search script with the correct site url
+		wp_localize_script( 'caweb-admin-scripts', 'args', array('changeCheck' => $hook) );
+
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
 		// Enqueue Styles
@@ -220,37 +223,37 @@ add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
 function caweb_banner_content_filter($content, $ver = 5){
   $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
-  
+
   /* Filter the Header Slideshow Banner */
   if(  4 == $ver  && !empty($module) ){
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
         $carousel = '';
-  
+
         foreach($slides as $i => $slide){
           $heading = '';
           $info = '';
           if("on" == $slide->display_banner_info){
             $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
-  
+
             if(!isset($slide->display_heading) || "on" == $slide->display_heading )
               $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
-  
-  
+
+
             $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
-  
+
           }
           $carousel .= sprintf('<div class="slide" %1$s>%2$s</div> ',
-                              (isset($slide->background_image) ? 
+                              (isset($slide->background_image) ?
                                sprintf('style="background-image: url(%1$s);"', $slide->background_image) : ""), $info);
          }
-  
+
         $banner = sprintf('<div class="header-slideshow-banner">
           <div id="primary-carousel" class="carousel carousel-banner">
             %1$s</div></div>', $carousel);
-  
+
   			return $banner;
   }
-  
+
 }
 
 /* Adjust WP Admin Bar */
