@@ -103,13 +103,16 @@ ul.utility-links.social-media-links {
   width: 100%;
 }
 /* Dropdown Navigation Styles */
-.main-navigation.dropdown .sub-nav {
-  max-width:250px;
-  left: auto; /* IE does not recognize initial */
-  left: initial;
-  right: auto; /* IE does not recognize initial */
-  right: initial;
+@media (min-width: 768px){
+  .main-navigation.dropdown .sub-nav {
+    max-width:250px;
+    left: auto; /* IE does not recognize initial */
+    left: initial;
+    right: auto; /* IE does not recognize initial */
+    right: initial;
+  }
 }
+
 .main-navigation.dropdown .sub-nav ul li{
 	width: 100%;
 }
