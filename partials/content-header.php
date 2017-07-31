@@ -1,90 +1,55 @@
-<?php
+<?
 global $post;
-$post_id = -1;
-$h = "";
-$con = "";
 
-if( is_object($post) ){
-	$post_id = $post->ID;
-	$con = $post->post_content;
-}elseif( is_array($post) ){
-	$post_id = $post['ID'];
-	$con = $post['post_content'];
-}
+$ver = ca_get_version( get_the_ID() );
+$fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? 'fixed': '');
+$default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg', 
+                                 CAWebUri , get_option('ca_site_color_scheme', 'oceanside'));
 
-$ver = ca_get_version($post_id);
-$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
+$header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ? 
+                          get_option('header_ca_background') : $default_background_img );
+$header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '' );
 
+$slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post_content : $post['content'] ) , $ver );
 
-/* Filter the Header Slideshow Banner */
-if(  4 == $ver  && !empty($module) ){
-			$slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
-			$carousel = '';
+?>
 
-      foreach($slides as $i => $slide){
-				$heading = '';
-				$info = '';
-				if("on" == $slide->display_banner_info){
-					$link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
-
-					if(!isset($slide->display_heading) || "on" == $slide->display_heading )
-						$heading = sprintf('<span class="title">%1$s<br /></span>', $slide->heading);
-
-
-					$info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, $slide->button_text);
-
-				}
-				$carousel .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ',
-													$slide->background_image, $info);
-       }
-
-			$banner = sprintf('<div class="header-slideshow-banner">
-        <div id="primary-carousel" class="carousel carousel-banner">
-					%1$s</div></div>', $carousel);
-
-}elseif(4 == $ver){
-		$h = ( "" != get_option('header_ca_background') ? get_option('header_ca_background') :
-						sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme', 'oceanside') )
-				);
-}
-
-printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
-		( ca_version_check(5.0, $post_id) && get_option('ca_sticky_navigation') ? 'fixed': '') ,
-    ( !empty($h) ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $h) : ''));
+<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
+<?php
 
 		// Version 5.0 Specific
-		if(ca_version_check(5.0, $post_id) ){
+		if(ca_version_check(5.0, get_the_ID()) ){
 
 		print '<!-- Version 5.0 Specific -->';
 		// Location Bar
-    	 	require_once (get_stylesheet_directory() ."/ssi/location-bar.html");
+    	 	require_once (CAWebAbsPath ."/ssi/location-bar.html");
 
         	// Settings Bar
-         	require_once (get_stylesheet_directory() ."/ssi/settings-bar.html");
+         	require_once (CAWebAbsPath ."/ssi/settings-bar.html");
 
           	// Include Utility Header
-           	require_once (get_stylesheet_directory() ."/ssi/utility-header.html");
+           	require_once (CAWebAbsPath ."/ssi/utility-header.html");
 		}
          ?>
 
   <!-- Required by Both Versions-->
  <!-- Include Mobile Controls -->
 
-<?php require_once (get_stylesheet_directory() ."/ssi/mobile-controls.html");?>
+<?php require_once (CAWebAbsPath ."/ssi/mobile-controls.html");?>
 
         <!-- Include Branding -->
 
-<?php require_once (get_stylesheet_directory() ."/ssi/branding.html");?>
+<?php require_once (CAWebAbsPath ."/ssi/branding.html");?>
 
         <div class="navigation-search">
 
 <!-- Version 4 top-right search box always displayed -->
 <!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
 <?php
-$search = ( ca_version_check(5.0, $post_id) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
+$search = ( ca_version_check(5, get_the_ID()) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
 printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</div>',
-			$search, ("page-templates/searchpage.php" != get_page_template_slug( $post_id) ?
+			$search, ("page-templates/searchpage.php" != get_page_template_slug(  get_the_ID()) ?
 								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp') ) : '') );
 
 ?>
@@ -93,10 +58,10 @@ printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</d
 					<?php
 							wp_nav_menu( array('theme_location' => 'header-menu',
 																'style' => (true == get_option('ca_menu_selector_enabled') ?
-																						get_post_meta($post_id, 'ca_default_navigation_menu',true) :
+																						get_post_meta(get_the_ID(), 'ca_default_navigation_menu',true) :
 																						get_option('ca_default_navigation_menu') ),
 																'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
-																'version' => $ver,
+																'version' => ca_get_version( get_the_ID() ),
 																)
 												);
 
@@ -104,22 +69,15 @@ printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</d
 
         </div>
 
-<?php  if("on" == get_option('ca_google_trans_enabled') &&  (ca_version_check(4, $post_id) || ca_version_check(4.5, $post_id)  ) ): ?>
+<?php  if("on" == get_option('ca_google_trans_enabled') &&  (ca_version_check(4, get_the_ID()) ) ): ?>
 
 <div id="google_translate_element" class="hidden-print"></div>
 
- <script>  function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    }
-
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <?php endif; ?>
 
 
-<?php ( !empty($banner) ? print $banner : print '') ?>
+<?php ( !empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
 
         <div class="header-decoration hidden-print"></div>
 

@@ -1,66 +1,74 @@
  /* Functions used on Admin Pages */
  /* CAWeb Option Page */
- function toggleOptions(ele) {
-   var version = ele.options[ele.selectedIndex].value;
-   var extra_options = document.getElementsByClassName("extra");
-   var base_options = document.getElementsByClassName("base");
-   var base = '';
 
-   for (var i = 0; i < extra_options.length; i++) {
+ jQuery(document).ready(function() {
+	 $ = jQuery.noConflict();
+	var changeMade = false;
+   
+  $(window).on('beforeunload', function(){
+    	if( changeMade )
+    			return 'Are you sure you want to leave?';
+    
+	});
 
+    $('.caweb-nav-tab').click(function() {
+      	var tabs = document.getElementsByClassName('caweb-nav-tab');
+      	var selected_tab = this.getAttribute("name");
+      
+        for (i = 0; i < tabs.length; i++) {
+           if( selected_tab !== tabs[i].getAttribute("name") ){
+              tabs[i].classList.remove("nav-tab-active");
+      				document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
+           }else{             
+              tabs[i].classList.add("nav-tab-active");
+             	document.getElementById(selected_tab).classList.remove('hidden');
+           }
+         }
+      
+			 document.getElementById('tab_selected').value = selected_tab;
+    });
 
-     if (version >= 5.0) {
-       extra_options[i].classList.remove("hidden");
-       for (var j = 0; j < base_options.length; j++) {
-         base_options[j].classList.add("hidden");
+    $('#ca_site_version').change(function() {
+      var version = this.options[this.selectedIndex].value;
+       var extra_options = document.getElementsByClassName("extra");
+       var base_options = document.getElementsByClassName("base");
+       var base = '';
+    
+       for (var i = 0; i < extra_options.length; i++) {
+    
+    
+         if (version >= 5.0) {
+           extra_options[i].classList.remove("hidden");
+           for (var j = 0; j < base_options.length; j++) {
+             base_options[j].classList.add("hidden");
+           }
+         } else {
+           extra_options[i].classList.add("hidden");
+           for (var j = 0; j < base_options.length; j++) {
+             base_options[j].classList.remove("hidden");
+           }
+         }
+    
        }
-     } else {
-       extra_options[i].classList.add("hidden");
-       for (var j = 0; j < base_options.length; j++) {
-         base_options[j].classList.remove("hidden");
-       }
-     }
+      
+      changeMade = true;
+    });
 
-   }
+   $('#resetIcon').click(function() {
+      var ico = document.location.origin + '/wp-content/themes/CAWeb/images/system/favicon.ico';
+      	document.getElementById('ca_fav_ico').value = ico;
+        document.getElementById('ca_fav_ico_img').src = ico;
+        document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
+      changeMade = true;
+    });
+   
+   
+$('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
+$('input[type="button"]').click(function(e){changeMade = true; });
 
- }
-
-function resetFavIcon(ico){
-	document.getElementById('ca_fav_ico').value = ico;
-	document.getElementById('ca_fav_ico_img').src = ico;
-	document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
-}
- function toggleOptionView(opt) {
-   var opts = ['general', 'social-share', 'custom-css', 'update'];
-
-   var selected_option = opt.getAttribute("name");
-
-   var selected_div_option = document.getElementById(selected_option);
-
-   for (i = 0; i < opts.length; i++) {
-
-     if (opts[i] != selected_option) {
-
-       document.getElementById(opts[i]).classList.add("hidden");
-
-     }
-
-   }
-
-   selected_div_option.classList.remove("hidden");
-
-   //Make all tabs inactive by getting elements with class "nav-tab" and removing class "nav-tab-active"
-   var tabs = document.getElementsByClassName("nav-tab");
-
-   for (i = 0; i < tabs.length; i++) {
-     tabs[i].classList.remove("nav-tab-active");
-   }
-
-   //Now make clicked tab active by getting element with its name (extracted from opt) and adding class "nav-tab-active"
-
-   opt.className += " nav-tab-active";
- }
+	$('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
  /* End of CAWeb Option Page */
+});
 
  jQuery(document).ready(function() {
 	 $ = jQuery.noConflict();
@@ -202,7 +210,7 @@ function resetFavIcon(ico){
                 alert("Invalid Icon Mime Type: " + filename);
               }
             });
-          }		
+          }
       });
 
       frame.on('open', function() {

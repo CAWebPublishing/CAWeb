@@ -1,23 +1,26 @@
+<?php // This is the CAWeb Options Page ?>
+
 <div class="wrap option-titles" >
 
 <h1 >Settings</h1>
 
 <h2 class="nav-tab-wrapper wp-clearfix">
 
-	<a href="#general-settings" name="general" class="nav-tab nav-tab-active" onclick="toggleOptionView(this)">General Settings</a>
+	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php echo (!isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">General Settings</a>
 
-	<a href="#social-share-settings" name="social-share" class="nav-tab" onclick="toggleOptionView(this)">Social Media Links</a>
+	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Social Media Links</a>
 
-	  <a href="#custom-css-settings" name="custom-css" class="nav-tab" onclick="toggleOptionView(this)">Custom CSS</a>
-
-	  <a href="#update-settings" name="update" class="nav-tab" onclick="toggleOptionView(this)">Updates</a>
-
+	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Custom CSS</a>
 </h2>
 </div>
-<form id="ca-options-form" action="options.php" method="POST">
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
 <?php
-settings_fields('ca_site_options');
+if( isset($_POST['caweb_options_submit']) ){
+  save_caweb_options($_POST);
+}
+
 ?>
+  
  <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
 <div id="ca-options-container">
 
@@ -36,7 +39,7 @@ settings_fields('ca_site_options');
 	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
-		<input type="button" value="Reset" onclick="resetFavIcon('<?php echo CAWebUri . '/images/system/favicon.ico';?>')"><br />
+		<input type="button" value="Reset" id="resetIcon"><br />
 		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>"/>
 	</td></tr>
 
@@ -44,9 +47,8 @@ settings_fields('ca_site_options');
 		<th scope="row"><div class="tooltip">State Template Version
 		<span class="tooltiptext">Select one of the California state template versions.</span></div></th>
 		<td>
-			<select id="ca_site_version" name="ca_site_version" onchange="toggleOptions(this)">
+			<select id="ca_site_version" name="ca_site_version">
 				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0</option>
-				<!--option value="4.5" <?= ( get_option('ca_site_version') == '4.5' ? 'selected="selected"' : '' ) ?>>Version 4.5</option-->
 				<option value="4" <?= ( get_option('ca_site_version') == '4' ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
 			</select>
 		</td>
@@ -67,7 +69,7 @@ settings_fields('ca_site_options');
 		</td>
 	</tr>
 
-<?php if( current_user_can('manage_network_options') ): ?>
+<?php if( !is_multisite() || current_user_can('manage_network_options') ): ?>
 		<tr>
 		<th scope="row"><div class="tooltip">Menu Type Selector
 			<span class="tooltiptext">Displays a header menu type selector on the page editor level.</span></div></th>
@@ -100,13 +102,13 @@ settings_fields('ca_site_options');
 			</select>
 		</td>
 	</tr>
-  <tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+  <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
 			<span class="tooltiptext">Display a visible search box on the front page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
-  	<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?> ">
+  	<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
 		<span class="tooltiptext">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
 		</th>
@@ -125,7 +127,7 @@ settings_fields('ca_site_options');
   <td><input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" <?= ( get_option('ca_default_post_title_display', false) ? 'checked="checked"' : '' ) ?> />
   </td></tr>
 </table>
-<div class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<div class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
   <h1 class="option">Utility Header</h1>
 <table class="form-table">
 
@@ -281,7 +283,7 @@ settings_fields('ca_site_options');
 
 </table>
 </div>
-
+  
 
 <!-- Social Media Links -->
 <div id="social-share" class="<?php echo (!isset($_POST['tab_selected']) || 'social-share' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
@@ -289,110 +291,36 @@ settings_fields('ca_site_options');
 
 <p>Enter the URL for each of your social media profiles.</p>
 <table class="form-table">
+<?php
+			$social_options = get_ca_social_options();
 
-		<tr>
-		<th>Facebook</th>
-		<td><input type="text" name="ca_social_facebook" id="ca_social_facebook" size="60" value="<?php echo get_option('ca_social_facebook'); ?>">
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-    <td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_facebook_header" id="ca_social_facebook_header" <?= ( get_option('ca_social_facebook_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_facebook_footer" id="ca_social_facebook_footer" <?= ( get_option('ca_social_facebook_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>Twitter</th>
-		<td><input type="text" name="ca_social_twitter" id="ca_social_twitter" size="60" value="<?php echo get_option('ca_social_twitter'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_twitter_header" id="ca_social_twitter_header" <?= ( get_option('ca_social_twitter_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_twitter_footer" id="ca_social_twitter_footer" <?= ( get_option('ca_social_twitter_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>Google Plus</th>
-		<td><input type="text" name="ca_social_google_plus" id="ca_social_google_plus" size="60" value="<?php echo get_option('ca_social_google_plus'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_google_plus_header" id="ca_social_google_plus_header" <?= ( get_option('ca_social_google_plus_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_google_plus_footer" id="ca_social_google_plus_footer" <?= ( get_option('ca_social_google_plus_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>Email</th>
-		<td><input type="text" name="ca_social_email" id="ca_social_email" size="60" value="<?php echo get_option('ca_social_email'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_email_header" id="ca_social_email_header" <?= ( get_option('ca_social_email_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_email_footer" id="ca_social_email_footer" <?= ( get_option('ca_social_email_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>Flickr</th>
-		<td><input type="text" name="ca_social_flickr" id="ca_social_flickr" size="60" value="<?php echo get_option('ca_social_flickr'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_flickr_header" id="ca_social_flickr_header" <?= ( get_option('ca_social_flickr_header') == true ? 'checked="checked"' : '' ) ?>></div> Show in footer: <input type="checkbox" name="ca_social_flickr_footer" id="ca_social_flickr_footer" <?= ( get_option('ca_social_flickr_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>Pinterest</th>
-		<td><input type="text" name="ca_social_pinterest" id="ca_social_pinterest" size="60" value="<?php echo get_option('ca_social_pinterest'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_pinterest_header" id="ca_social_pinterest_header" <?= ( get_option('ca_social_pinterest_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_pinterest_footer" id="ca_social_pinterest_footer" <?= ( get_option('ca_social_pinterest_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-	<tr>
-		<th>YouTube</th>
-		<td><input type="text" name="ca_social_youtube" id="ca_social_youtube" size="60" value="<?php echo get_option('ca_social_youtube'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_youtube_header" id="ca_social_youtube_header" <?= ( get_option('ca_social_youtube_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_youtube_footer" id="ca_social_youtube_footer" <?= ( get_option('ca_social_youtube_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-<tr>
-		<th>LinkedIn</th>
-		<td><input type="text" name="ca_social_linkedin" id="ca_social_linkedin" size="60" value="<?php echo get_option('ca_social_linkedin'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_linkedin_header" id="ca_social_linkedin_header" <?= ( get_option('ca_social_linkedin_header') == true ? 'checked="checked"' : '' ) ?>> </div>Show in footer: <input type="checkbox" name="ca_social_linkedin_footer" id="ca_social_linkedin_footer" <?= ( get_option('ca_social_linkedin_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-<tr>
-		<th>Instagram</th>
-		<td><input type="text" name="ca_social_instagram" id="ca_social_instagram" size="60" value="<?php echo get_option('ca_social_instagram'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_instagram_header" id="ca_social_instagram_header" <?= ( get_option('ca_social_instagram_header') == true ? 'checked="checked"' : '' ) ?>></div>Show in footer: <input type="checkbox" name="ca_social_instagram_footer" id="ca_social_instagram_footer" <?= ( get_option('ca_social_instagram_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
-<tr>
-		<th>RSS</th>
-		<td><input type="text" name="ca_social_rss" id="ca_social_rss" size="60" value="<?php echo get_option('ca_social_rss'); ?>"></td>
-	</tr>
-	<tr>
-		<td></td>
-    <td><div class="extra alignleft <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">Show in header: <input type="checkbox" name="ca_social_rss_header" id="ca_social_rss_header" <?= ( get_option('ca_social_rss_header') == true ? 'checked="checked"' : '' ) ?>></div> Show in footer: <input type="checkbox" name="ca_social_rss_footer" id="ca_social_rss_footer" <?= ( get_option('ca_social_rss_footer') == true ? 'checked="checked"' : '' ) ?>></td>
-	</tr>
+			foreach($social_options as $social => $option ){
+        printf('<tr><th>%1$s</th><td><input type="text" name="%2$s" id="%2$s" size="60" value="%3$s" /></td></tr>
+								<tr><td></td><td><label class="extra alignleft%4$s">Show in header: <input type="checkbox" name="%2$s_header" id="%2$s_header"%5$s /></label>
+													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label></td></tr>', 
+               		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'), 
+               	( get_option(sprintf('%1$s_header', $option) ) == true ? ' checked="checked"' : '' ),
+              		( get_option(sprintf('%1$s_footer', $option) ) == true ? ' checked="checked"' : '' ));
+     
+      }
+?>
+
 </table>
 </div>
 
-	<div id="custom-css" class="<?php echo (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
+	<div id="custom-css" class="<?= (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
   <h1 class="option">Custom CSS</h1>
 		<table class="form-table">
 
 		<tr>
 			<th><div class="tooltip">Stylesheet<span class="tooltiptext">Any styles added will override any pre-existing styles. </span></div></th>
-			<td><textarea id="ca_custom_css" name="ca_custom_css" ><?php echo get_option('ca_custom_css'); ?> </textarea></td>
+			<td><textarea id="ca_custom_css" name="ca_custom_css" ><?= get_option('ca_custom_css', ''); ?> </textarea></td>
 		</tr>
 		</table>
 
 	</div>
-<div id="update" class="<?php echo (!isset($_POST['tab_selected']) || 'update' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
-  	<h1 class="option">Updates</h1>
-    <table class="form-table">
-      <tr><td><p>Username</p><input type="text" name="caweb_username" size="50" value="<?= get_site_option('caweb_username', ''); ?>"></td></tr>
-      <tr><td><p>Password</p><input type="password" name="caweb_password" size="50" value="<?= base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
-		</table>
-  </div>
 </div> <!-- End of CA Options Container -->
 
-<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
+<input type="submit" name="caweb_options_submit" id="#submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
 </form>
+

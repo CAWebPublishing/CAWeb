@@ -326,8 +326,8 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 			'module_id',
 		);
 		$this->fields_defaults = array(
-			'scroll_bar_icon' => array( 'arrow-down' ),
-    	'scroll_bar_text' => array( 'Explore' ),
+			'scroll_bar_icon' => array( '%%114%%', 'add_default_setting' ),
+    	'scroll_bar_text' => array( 'Explore', 'add_default_setting' ),
 
     );
 		$this->main_css_element = '%%order_class%%.et_pb_slider';
@@ -501,15 +501,10 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function slideshow_banner_removal() {
-			global $post;
-
-			$remove = (is_object($post) ? ca_version_check(4, $post->ID) : ca_version_check(4, $post['ID'])  );
-
-			if( !$remove )
+			if( ! ca_version_check(4, get_the_ID() )  )
 				return;
 
-			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
-			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
+			$module = caweb_get_shortcode_from_content( get_the_content(), 'et_pb_ca_fullwidth_banner');
 
 
 			if( empty($module)  ){

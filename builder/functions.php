@@ -19,24 +19,6 @@ function et_pb_get_text_sizes(){
 	return $text_size ;
 }
 
-
-function monthName($month_int) {
-
-$month_int = (int)$month_int;
-
-$months = array('','January', 'February', 'March',
-		'April', 'May', 'June', 'July',
-		'August', 'September', 'October',
-		'November', 'December');
-
-return $months[$month_int];
-
-}
-
-function shortMonthName($month_int){
-	return substr(monthName($month_int),0,3);
-}
-
 // Creates a list of checkboxes of all tags
 function et_builder_include_tags_option( $args = array() ) {
 
