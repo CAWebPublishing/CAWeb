@@ -99,7 +99,9 @@ ul.utility-links.social-media-links {
 @media (min-width: 768px){
   .main-navigation.dropdown .sub-nav {
     max-width:250px;
+    left: auto;
     left: initial;
+    right: auto;
     right: initial;
   }
 }
