@@ -12,7 +12,12 @@
 #ca-options-container {
     margin-bottom: 5px;
 }
-/* Indent fields under each categoryy */
+/* Indent fields under each category */
+@media (max-width: 782px){
+  .form-table th {
+    text-align: start !important;
+  }
+}
 .form-table th{
     padding: 10px 10px 10px 0px;
     text-align: end;
