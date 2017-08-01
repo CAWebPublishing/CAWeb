@@ -264,28 +264,34 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'customize-divi-theme' );
 	$wp_admin_bar->remove_node( 'customize-divi-module' );
 
-  /* Add CAWeb WP Admin Bar Nodes */
-  $caweb_args = array(
-		'id'     => 'caweb-options',
-		'title'  => 'CAWeb Options',
-    'href' =>  get_admin_url() . 'admin.php?page=ca_options',
-    'parent' => 'site-name',
-	);
-
 	if ( current_user_can('manage_options') ){
-		$wp_admin_bar->add_node( $caweb_args );
+		/* Add CAWeb WP Admin Bar Nodes */
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-options',
+										'title'  => 'CAWeb Options',
+									'href' =>  get_admin_url() . 'admin.php?page=ca_options',
+									'parent' => 'site-name',
+									)
+								);
+		/* Add (Menu) Navigation Node */						
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-navigation',
+										'title'  => 'Navigation',
+									'href' => get_admin_url() . 'nav-menus.php',
+									'parent' => 'site-name',
+									)
+								);
+								
 	}
 
-  /* Add (Menu) Navigation Node */
-  $menu_args = array(
-		'id'     => 'caweb-navigation',
-		'title'  => 'Navigation',
-    'href' => get_admin_url() . 'nav-menus.php',
-    'parent' => 'site-name',
-	);
-
-	if ( current_user_can('manage_options') ){
-		$wp_admin_bar->add_node( $menu_args );
+	if (!is_multisite() || current_user_can('manage_network_options') ){
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-api',
+										'title'  => 'GitHub API Key',
+									'href' => get_admin_url() . 'admin.php?page=caweb_api',
+									'parent' => 'site-name',
+									)
+								);
 	}
 }
 
