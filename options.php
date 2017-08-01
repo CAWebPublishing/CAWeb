@@ -35,7 +35,7 @@ function menu_setup(){
 	}
 
   if(!is_multisite() || current_user_can('manage_network_options') ){
-    	add_submenu_page( 'ca_options','CAWeb Options', 'API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+    	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
   }
 
 }
@@ -105,7 +105,7 @@ function api_menu_option_setup(){
   }
   ?>
 <div class="wrap">
-  <h1>API Key</h1>
+  <h1>GitHub API Key</h1>
     <table class="form-table">
       <tr><td><p><div class="tooltip">Username
 		<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></p><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>"></td></tr>

@@ -143,11 +143,7 @@ div#google_translate_element {
 	-moz-column-count: 1 !important;
 	column-count: 1 !important;
 }
-@media (max-width: 768px){}
-  nav.megadropdown .second-level-nav li {
-    width: 100%;
-  }
-}
+
 nav.megadropdown .second-level-nav li{
     float: left;
 		width: 33%;
@@ -156,6 +152,11 @@ nav.megadropdown .second-level-nav li{
     overflow: hidden;
 }
 
+@media (max-width: 768px){
+  nav.megadropdown .second-level-nav li {
+    width: 100%;
+  }
+}
 li.unit1{
   height: 50px;
 }
