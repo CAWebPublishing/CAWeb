@@ -158,11 +158,11 @@ nav.megadropdown .second-level-nav li{
   }
 }
 li.unit1{
-  height: 50px;
+  min-height: 50px;
 }
 
 li.unit2{
-  height: 100px;
+  min-height: 100px;
 }
 
 /* Remove underline from top level nav links */
