@@ -1,4 +1,4 @@
-<?
+<?php
 global $post;
 
 $ver = ca_get_version( get_the_ID() );
