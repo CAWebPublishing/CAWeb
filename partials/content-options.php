@@ -151,7 +151,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 1 URL
 			<span class="tooltiptext">Adds a custom link to the utility header.</span>
