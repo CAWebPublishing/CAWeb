@@ -151,7 +151,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-	<?php if(5.0 <= get_option('ca_site_version') ): ?>
+	<?php if(5.0 <= get_option('ca_site_version', 5) ): ?>
 <tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 1 URL
@@ -162,7 +162,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1')?>" />
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 1 Label
 			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
@@ -172,7 +172,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" size="50" value="<?php echo get_option('ca_utility_link_1_name')?>"/>
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 2 URL
 			<span class="tooltiptext">Adds a custom link to the utility header.</span>
@@ -182,7 +182,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_2" id="ca_utility_link_2" size="75" value="<?php echo get_option('ca_utility_link_2')?>" />
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 2 Label
 			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
@@ -192,7 +192,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" size="50" value="<?php echo get_option('ca_utility_link_2_name')?>"/>
 	</td>
 </tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 3 URL
 			<span class="tooltiptext">Adds a custom link to the utility header.</span>
@@ -202,7 +202,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_3" id="ca_utility_link_3" size="75" value="<?php echo get_option('ca_utility_link_3')?>" />
 	</td>
 </tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 3 Label
 			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
