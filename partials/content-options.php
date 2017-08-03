@@ -151,7 +151,6 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-	<?php if(5.0 <= get_option('ca_site_version', 5) ): ?>
 <tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? '' : 'hidden'); ?>">
 	<th scope="row">
 		<div class="tooltip">Custom Link 1 URL
@@ -212,7 +211,6 @@ if( isset($_POST['caweb_options_submit']) ){
 		<input type="text" name="ca_utility_link_3_name" id="ca_utility_link_3_name" size="50" value="<?php echo get_option('ca_utility_link_3_name')?>"/>
 	</td>
 </tr>
-<?php endif; ?>
 </table>
   </div>
 
