@@ -210,7 +210,7 @@ function ca_admin_enqueue_scripts($hook){
 		// Enqueue Styles
 			wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 
-	}elseif(in_array($hook, array('post.php', 'post-new.php') )){
+	}elseif(in_array($hook, array('post.php', 'post-new.php', 'widgets.php') )){
 		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 	}
 
@@ -273,7 +273,7 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 									'parent' => 'site-name',
 									)
 								);
-		/* Add (Menu) Navigation Node */						
+		/* Add (Menu) Navigation Node */
 		$wp_admin_bar->add_node( array(
 										'id'     => 'caweb-navigation',
 										'title'  => 'Navigation',
@@ -281,7 +281,7 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 									'parent' => 'site-name',
 									)
 								);
-								
+
 	}
 
 	if (!is_multisite() || current_user_can('manage_network_options') ){
