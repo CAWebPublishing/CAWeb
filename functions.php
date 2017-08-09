@@ -222,10 +222,10 @@ add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
 
 function caweb_banner_content_filter($content, $ver = 5){
-  $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
+  $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
 
   /* Filter the Header Slideshow Banner */
-  if(  4 == $ver  && !empty($module) ){
+  if( !empty($module) ){
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
         $carousel = '';
 
