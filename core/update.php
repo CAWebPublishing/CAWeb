@@ -60,17 +60,19 @@ final class caweb_auto_update{
 
 		//alternative API for updating checking
 		public function check_update($update_transient){
-     
+
 				$caweb_update_themes = get_site_transient( $this->transient_name );
 
-				if( !isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ){
-						$payload = json_decode( wp_remote_retrieve_body(
-													wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
+				$payload = json_decode( wp_remote_retrieve_body(
+											wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
 
-          if( !isset($payload->tag_name) )
-            return $update_transient;
+				if( !isset($payload->tag_name) ){
+					delete_site_transient( $this->transient_name );
+					return $update_transient;
+				}
+				if( (!isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ) &&
+								$this->current_version < $payload->tag_name){
 
-            if( $this->current_version < $payload->tag_name ){
 							$last_update = new stdClass();
 
 							$obj = array();
@@ -93,10 +95,9 @@ final class caweb_auto_update{
 
 							$last_update->last_checked = time();
 							set_site_transient($this->transient_name, $last_update);
-					}
 
 				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) &&
-								$this->current_version >=  $caweb_update_themes->response[$this->theme_name]['new_version'] ) {
+								$this->current_version >=  $payload->tag_name ) {
 
 						unset($caweb_update_themes->response[$this->theme_name]);
 						set_site_transient($this->transient_name, $caweb_update_themes);
@@ -134,7 +135,7 @@ final class caweb_auto_update{
         /** Theme_Upgrader class */
         require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
 			}
-      
+
 			if(isset($upgrader->skin->theme_info) && $upgrader->skin->theme_info->get('Name') == $this->theme_name){
 
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
