@@ -2407,7 +2407,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
 				'depends_show_if'   	=> 'media',
-				'affects' => array('panel_layout', 'panel_title', 'panel_show_button'),
+				'affects' => array('panel_layout', 'panel_title', 'panel_show_button', 'panel_button_text', 'panel_button_link'),
 				'description' => 'Choose whether to display this carousel inside of a panel',
 				'toggle_slug' => 'style',
 			),
@@ -2563,7 +2563,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-		$class = " et_pb_module  " . $carousel_style;
+		$class = "et_pb_ca_section_carousel et_pb_module  " . $carousel_style;
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
@@ -2584,7 +2584,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
                         sprintf('<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>',
                                 $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
       
-      $output  = sprintf('<div%1$s class="et_pb_ca_panel%2$s%3$s panel panel-%4$s">%5$s
+      $output  = sprintf('<div%1$s class="%2$s%3$s panel panel-%4$s">%5$s
 													<div class="panel-body">
 															<div class="carousel owl-carousel carousel-media">%6$s</div>
 													</div>
@@ -2596,7 +2596,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
                          $this->shortcode_content
            );
     }else{
-      	$output = sprintf('<div%1$s class="et_pb_ca_section_carousel%2$s%3$s section"%4$s>
+      	$output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
               <div class="container">
               <div class="group">
               <div class="col-md-10 col-md-offset-1 ">
@@ -2620,10 +2620,10 @@ new ET_Builder_Module_CA_Section_Carousel;
 
 class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 	function init() {
+    
 		$this->name = esc_html__( 'Carousel Slide', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_section_carousel_slide';
-
 		$this->type = 'child';
 
 		$this->child_title_var = 'slide_title';
@@ -2631,7 +2631,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 		$this->child_title_fallback_var = 'slide_title';
 
 		$this->whitelisted_fields = array(
-			'slide_image', 'slide_title',
+			'slide_image', 'slide_title', 'display_title',
 			 'slide_desc',	'slide_url',
 			'slide_show_more_button','module_class', 'module_id',
 			);
@@ -2673,7 +2673,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 		);
 
 	}
-	function get_fields(){
+	function get_fields(){  
 		$fields = array(
 			'slide_image' => array(
 				'label' => esc_html__( 'Image', 'et_builder' ),
@@ -2735,7 +2735,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
-
+    
 		return $fields;
 
 	}
@@ -2754,20 +2754,22 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 		$et_pb_slider_item_num++;
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
-
-    if("media" == $et_pb_ca_section_carousel_style){
-      $slide = (!empty($slide_image) ? 
-                sprintf('<div class="preview-image"><img src="%1$s"%2$s/>%3$s</div>',
-                        $slide_image, (!empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : ''),
-                        (!empty($slide_desc) ? sprintf('<div class="details">%1$s</div>', $slide_desc) : '') )  : '');
+		$class = $et_pb_ca_section_carousel_style . ' et_pb_module';
+    
+		if("media" == $et_pb_ca_section_carousel_style){
       
-      	$output = sprintf('<div%1$s class="%2$s item">%3$s</div>',
-            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-            ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ), $slide  );
+      $button = ("on" == $slide_show_more_button ? sprintf('<a href="%1$s">%2$s</a>',$slide_url, $slide_title ) : '');
+      
+      $slide = (!empty($slide_image) ? 
+                sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>',
+                        $slide_image, (!empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : '')  )  : '');
+      
+      	$output = sprintf('<div%1$s class="%2$s%3$s item">%4$s%5$s</div>',
+            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
+            ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),  $slide,  
+            (!empty($button) ? sprintf('<div class="details text-center">%1$s</div>', $button) : '') );
       
     }else{
-      
-      $class = $et_pb_ca_section_carousel_style . ' et_pb_module ';
       $display_button = ("on" == $slide_show_more_button ?
       sprintf('<br><button class="btn btn-primary">
             <a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
