@@ -1909,7 +1909,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				'toggle_slug' => 'panel',
 			),      
       'panel_show_button' => array(
-				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
+				'label'           => esc_html__( 'Add More Link', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -1918,22 +1918,22 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				),
 				'affects' => array('panel_button_text', 'panel_button_link',),
 				'depends_show_if'   	=> 'on',
-				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
+				'description'     => esc_html__( 'Here you can select to display a link.','et_builder' ),
 				'toggle_slug'			=> 'panel',
 			),
       'panel_button_text' => array(
-				'label'           => esc_html__( 'Button Text','et_builder' ),
+				'label'           => esc_html__( 'Link Text','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the Text for the button.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the Text for the link.','et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'			=> 'panel',
 			),
 			'panel_button_link' => array(
-				'label'           => esc_html__( 'Button Link','et_builder' ),
+				'label'           => esc_html__( 'Link URL','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the link. (http:// must be included)','et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'			=> 'panel',
 			),
@@ -2052,7 +2052,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 		$section_background_color = ("" != $section_background_color ?
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
 
-     if("on" == $in_panel){
+     if("media" == $carousel_style && "on" == $in_panel){
       $display_button = ("on" == $panel_show_button && !empty($panel_button_link ) ?
                         sprintf('<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>',
                                 $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
