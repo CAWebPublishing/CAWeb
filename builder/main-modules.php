@@ -2736,7 +2736,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'label' => esc_html__( 'Link URL', 'et_builder' ),
 				'type'=> 'text',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'Define the url for the slide. (http:// must be included)', 'et_builder' ),
+				'description' => esc_html__( 'Define the URL for the link. (http:// must be included)', 'et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'	=> 'body',
 			),
