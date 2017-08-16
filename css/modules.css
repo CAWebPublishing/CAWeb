@@ -36,16 +36,16 @@ overflow: hidden;
 	width: 100%;
 }
 
-.et_pb_ca_section_carousel .panel-body .carousel-media .media.item .preview-image,
-.et_pb_ca_fullwidth_section_carousel .panel-body .carousel-media .media.item .preview-image{
+.et_pb_ca_section_carousel .carousel-media .media.item .preview-image,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item .preview-image{
  	height: 150px; 
 }
-.et_pb_ca_section_carousel .panel-body .carousel-media .media.item img,
-.et_pb_ca_fullwidth_section_carousel .panel-body .carousel-media .media.item img{
+.et_pb_ca_section_carousel .carousel-media .media.item img,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item img{
  	height: 100%; 
 }
-.et_pb_ca_section_carousel .panel-body .carousel-media .media.item .details,
-.et_pb_ca_fullwidth_section_carousel .panel-body .carousel-media .media.item .details{
+.et_pb_ca_section_carousel .carousel-media .media.item .details,
+.et_pb_ca_fullwidth_section_carousel  .carousel-media .media.item .details{
  	margin-top: 1em; 
 }
 /* Panel Style */
