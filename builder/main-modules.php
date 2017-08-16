@@ -2446,7 +2446,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 				'toggle_slug' => 'panel',
 			),      
       'panel_show_button' => array(
-				'label'           => esc_html__( 'Add More Link', 'et_builder' ),
+				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -2455,22 +2455,22 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 				),
 				'affects' => array('panel_button_text', 'panel_button_link',),
 				'depends_show_if'   	=> 'on',
-				'description'     => esc_html__( 'Here you can select to display a link.','et_builder' ),
+				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
 				'toggle_slug'			=> 'panel',
 			),
       'panel_button_text' => array(
-				'label'           => esc_html__( 'Link Text','et_builder' ),
+				'label'           => esc_html__( 'Button Text','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the Text for the link.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the Text for the button.','et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'			=> 'panel',
 			),
 			'panel_button_link' => array(
-				'label'           => esc_html__( 'Link URL','et_builder' ),
+				'label'           => esc_html__( 'Button URL','et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the link. (http:// must be included)','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'			=> 'panel',
 			),
@@ -2722,7 +2722,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'toggle_slug'	=> 'header',
 			),
 			'slide_show_more_button' => array(
-				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
+				'label'           => esc_html__( 'Add More Link', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -2733,7 +2733,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'toggle_slug'	=> 'body',
 			),
 			'slide_url' => array(
-				'label' => esc_html__( 'Slide URL', 'et_builder' ),
+				'label' => esc_html__( 'Link URL', 'et_builder' ),
 				'type'=> 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the url for the slide. (http:// must be included)', 'et_builder' ),
