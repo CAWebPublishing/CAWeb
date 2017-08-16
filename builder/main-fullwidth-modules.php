@@ -1807,7 +1807,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 		$this->whitelisted_fields = array(
 			'carousel_style','in_panel', 'panel_layout',
 			'panel_title', 'panel_show_button', 'panel_button_text',
-      'panel_button_link',
+      'panel_button_link', 'slide_amount',
 			'section_background_color',
 			'max_width',
 			'max_width_tablet',
@@ -1817,7 +1817,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 			'module_id',
 			'admin_label',
 		);
-		$this->fields_defaults = array();
+		$this->fields_defaults = array('slide_amount' => array(4, 'add_default_setting'));
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
@@ -1846,6 +1846,9 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				),
 			),
 		);
+    
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1858,10 +1861,17 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 					'image_fit' 			=> esc_html__( 'Image Fit', 'et_builder' ),
 					'media'  => esc_html__( 'Media', 'et_builder' ),
 				),
-				'affects' => array('in_panel',),
+				'affects' => array('in_panel', 'slide_amount'),
 				'toggle_slug' => 'style',
 			),
-      
+       'slide_amount' => array(
+				'label'           => esc_html__( 'Viewable Display Amount','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the amount of slides to display at one time.','et_builder' ),
+				'depends_show_if'   	=> 'media',
+				'toggle_slug'			=> 'style',
+			),
       'in_panel' => array(
 				'label'           => esc_html__( 'Display in Panel', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -1888,7 +1898,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'none' => esc_html__( 'None','et_builder'),
 					'default' => esc_html__( 'Default','et_builder'),
 					'standout'  => esc_html__( 'Standout','et_builder'),
 					'standout highlight'  => esc_html__( 'Standout Highlight','et_builder'),
@@ -2009,6 +2018,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		$carousel_style       = $this->shortcode_atts['carousel_style'];
+		$slide_amount           	= $this->shortcode_atts['slide_amount'];
 		$in_panel           	= $this->shortcode_atts['in_panel'];
 		$panel_layout           	= $this->shortcode_atts['panel_layout'];
 		$panel_title           	= $this->shortcode_atts['panel_title'];
@@ -2049,7 +2059,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
       
       $output  = sprintf('<div%1$s class="%2$s%3$s panel panel-%4$s">%5$s
 													<div class="panel-body">
-															<div class="carousel owl-carousel carousel-media">%6$s</div>
+															<div class="carousel carousel-media">%6$s</div>
 													</div>
 													</div> <!-- .et_pb_panel -->',
                ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),  esc_attr( $class ) ,       
@@ -2060,23 +2070,42 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
            );
     }else{
        $output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
-				<div class="">
-				<div class="group">
-				<div class="col-md-12 ">
-				<div class="carousel owl-carousel carousel-content">
-				%5$s </div>
-				</div>
-				</div>
-				</div>
-			</div> <!-- et_pb_ca_fullwidth_section_carousel -->',
-		( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-		$section_background_color, $this->shortcode_content
-);
+							<div class="carousel carousel-%5$s">%6$s</div></div><!-- et_pb_ca_fullwidth_section_carousel -->',
+              ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+              esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+              $section_background_color, ( "media" == $carousel_style ? $carousel_style : 'content' ), $this->shortcode_content
+                );
      }
 		
 		return $output;
 	}
+  
+  	// This is a non-standard function. It outputs JS code to change items amount for carousel-media.
+		function carousel_fix() {
+			?>
+			<script>
+        $ = jQuery.noConflict();
+        
+       var media_carousels = <?php print_r( json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) ); ?>;
+         
+        media_carousels.forEach(function(element, index) {
+          $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
+          		responsive : false, 
+            items : undefined == element.slide_amount ? 4 : element.slide_amount, 
+          		margin : 10, 
+          		nav : true, 
+          		dots : false,
+          navText: [
+          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
+          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
+        ],
+        })
+        });
+        
+        
+			</script>
+			<?php
+		}
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
 
