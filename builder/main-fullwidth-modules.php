@@ -2058,7 +2058,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
                                 $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
       
       $output  = sprintf('<div%1$s class="%2$s%3$s panel panel-%4$s">%5$s
-													<div class="panel-body">
+													<div class="panel-body"%7$s>
 															<div class="carousel carousel-media">%6$s</div>
 													</div>
 													</div> <!-- .et_pb_panel -->',
@@ -2066,7 +2066,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
                ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),$panel_layout, 
                          (!empty($panel_title) ? 
                           sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>',$panel_title, $display_button) : ''),  
-                         $this->shortcode_content
+                         $this->shortcode_content, $section_background_color
            );
     }else{
        $output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
