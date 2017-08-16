@@ -2052,7 +2052,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 		$section_background_color = ("" != $section_background_color ?
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
 
-     if("on" == $in_panel){
+     if("media" == $carousel_style && "on" == $in_panel){
       $display_button = ("on" == $panel_show_button && !empty($panel_button_link ) ?
                         sprintf('<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>',
                                 $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
