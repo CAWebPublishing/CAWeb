@@ -122,6 +122,18 @@ function caweb_admin_head(){
 }
 add_action('admin_head', 'caweb_admin_head');
 
+/* Defer some scripts */
+function defer_parsing_of_js( $tag, $handle, $src ){
+  $js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script');
+  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
+  if( in_array($handle, $js_scripts) )
+	  return str_replace('src', 'defer src', $tag);
+  
+  return $tag;
+  
+}
+add_filter('script_loader_tag', 'defer_parsing_of_js', 10, 3);
+
 /* Enqueue Scripts and Styles at the bottom */
 function ca_theme_enqueue_style() {
 	global $pagenow;
