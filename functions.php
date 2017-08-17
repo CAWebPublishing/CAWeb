@@ -122,6 +122,18 @@ function caweb_admin_head(){
 }
 add_action('admin_head', 'caweb_admin_head');
 
+/* Defer some scripts */
+function defer_parsing_of_js( $tag, $handle, $src ){
+  $js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script');
+  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
+  if( in_array($handle, $js_scripts) )
+	  return str_replace('src', 'defer src', $tag);
+  
+  return $tag;
+  
+}
+add_filter('script_loader_tag', 'defer_parsing_of_js', 10, 3);
+
 /* Enqueue Scripts and Styles at the bottom */
 function ca_theme_enqueue_style() {
 	global $pagenow;
@@ -182,6 +194,9 @@ function ca_theme_enqueue_style() {
 
     wp_enqueue_script( 'cagov-geolocator-script' );
 	}
+  
+  // This removes Divi Google Font CSS 
+  wp_deregister_style('divi-fonts');
 }
 add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
@@ -220,6 +235,11 @@ function ca_admin_enqueue_scripts($hook){
 
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
+function remove_excess_fonts(){
+   // This removes Divi Builder Google Font CSS 
+  wp_deregister_style('et-builder-googlefonts');
+}
+add_action( 'wp_footer', 'remove_excess_fonts', 11);
 
 function caweb_banner_content_filter($content, $ver = 5){
   $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
