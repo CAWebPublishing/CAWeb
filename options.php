@@ -145,6 +145,11 @@ function update_caweb_owner_encoded_info( $value, $old_value, $option ){
 }
 add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
 
+function update_ca_custom_css( $value, $old_value, $option ){  
+	return stripcslashes($value) ;
+}
+add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
+
 // Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
 

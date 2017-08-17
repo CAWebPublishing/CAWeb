@@ -2,13 +2,13 @@
 <?php
 wp_nav_menu(array(
 						'theme_location'=> 'footer-menu',
-						'version' => ca_get_version( get_the_ID() ),
-						'ca_custom_css' => get_option('ca_custom_css', '')
+						'version' => ca_get_version( get_the_ID() )
 						)	
 					);
 
 wp_footer();
 
+if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '')
 ?>
 
 <script>
