@@ -1,5 +1,5 @@
 CAWeb v1.2.1a
-August 4, 2017
+August 18, 2017
 - New Carousel Media style added to Section Carousel and Fullwidth Section Carousel Modules
 - Anchors have been corrected and now land at the appropriate ID
 - Logo and Nav_list styles have been updated
