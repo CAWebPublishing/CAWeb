@@ -10,3 +10,7 @@ wp_nav_menu(array(
 wp_footer();
 
 ?>
+
+<script>
+$(document).ready(function(){var n=$("header"),o=$("#main-content");$(window).on("scroll",function(){n.hasClass("compact")?o.css({"margin-top":o.css("padding-top")}):o.css({"margin-top":0})})});
+</script>
