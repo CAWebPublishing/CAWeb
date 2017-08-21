@@ -2091,12 +2091,20 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
         media_carousels.forEach(function(element, index) {
           $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
           		responsive : true,
-							responsive: {
-					          0: {
-					            items: undefined == element.slide_amount ? 4 : element.slide_amount,
-								nav: true
-					          },
-					        },
+			responsive: {
+			  0: {
+			    items: 1,
+					nav: true
+			  },
+			  400: {
+			    items: 1,
+					nav: true
+			  },
+			  768: {
+			    items: undefined == element.slide_amount ? 4 : element.slide_amount,
+			    nav: true
+			  },
+			},            	
           		margin : 10,
           		nav : true,
           		dots : false,
