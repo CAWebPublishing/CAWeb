@@ -6,7 +6,7 @@
 </p>
 
 # Introduction 
-CAWeb is the only service to offer the California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing the the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by configuring a new WordPress environment yourself or using a vendor. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
+CAWeb Publishing is the only service to offer the California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing the the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by configuring a WordPress hosting environment yourself or by using a WordPress hosting vendor. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
 
 <p align="center">
     <a href="https://caweb.ca.gov">
@@ -15,8 +15,8 @@ CAWeb is the only service to offer the California State Website Template on Word
 </p>
 
 # Getting Started
-### If you're not subscribing to the CAWeb Publishing Service
-1. Get a WordPress instance from yourself or create a wordpress instance on your own server. Here's a good guide on [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04).
+If your organization is moving to WordPress CMS for your web site, but you are not subscribing to the CAWeb Publishing Service, you'll need cloud hosting and the State Template child theme. Here are the steps:
+1. Procure AWS hosting and install WordPress (takes about 5 minutes). We don't recommend on-premise hosting as it is generally more expensivie to procure and maintain. However, if you are determined to host on-prem, here's a good guide from [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04).
 2. Purchase a Divi license from [Elegant Themes](https://www.elegantthemes.com/join/) and dowload the theme.
 3. Upload the Divi theme to your new WordPress instance.
 4. Download the latest release of the [CAWeb theme](https;//github.com/Office-of-Digital-Innovation/CAWeb/releases/). (You must be part the the Office of Digital Innovation Organization on Github)
