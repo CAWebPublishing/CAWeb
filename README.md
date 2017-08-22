@@ -31,7 +31,7 @@ If your organization is moving to WordPress CMS, but you are not subscribing to 
 5. Perform related tests  
 
 # Contribute / Collaborate
-1. Fork this theme (You must be part the the Office of Digital Innovation Organization on Github)
+1. Fork this theme (You must be part of the Office of Digital Innovation Organization on Github)
 2. Create your changes
 3. Test your changes and ensure they improve the CAWeb theme
 4. Submit a pull request
