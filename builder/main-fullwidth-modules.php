@@ -1846,7 +1846,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				),
 			),
 		);
-    
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
@@ -1907,7 +1907,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
 				'depends_show_if'   	=> 'on',
 				'toggle_slug' => 'panel',
-			),      
+			),
       'panel_show_button' => array(
 				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -2056,16 +2056,16 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
       $display_button = ("on" == $panel_show_button && !empty($panel_button_link ) ?
                         sprintf('<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>',
                                 $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
-      
+
       $output  = sprintf('<div%1$s class="%2$s%3$s panel panel-%4$s">%5$s
 													<div class="panel-body"%7$s>
 															<div class="carousel carousel-media">%6$s</div>
 													</div>
 													</div> <!-- .et_pb_panel -->',
-               ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),  esc_attr( $class ) ,       
-               ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),$panel_layout, 
-                         (!empty($panel_title) ? 
-                          sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>',$panel_title, $display_button) : ''),  
+               ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),  esc_attr( $class ) ,
+               ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),$panel_layout,
+                         (!empty($panel_title) ?
+                          sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>',$panel_title, $display_button) : ''),
                          $this->shortcode_content, $section_background_color
            );
     }else{
@@ -2076,24 +2076,37 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
               $section_background_color, ( "media" == $carousel_style ? $carousel_style : 'content' ), $this->shortcode_content
                 );
      }
-		
+
 		return $output;
 	}
-  
+
   	// This is a non-standard function. It outputs JS code to change items amount for carousel-media.
 		function carousel_fix() {
 			?>
 			<script>
         $ = jQuery.noConflict();
-        
+
        var media_carousels = <?php print_r( json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) ); ?>;
-         
+
         media_carousels.forEach(function(element, index) {
           $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
-          		responsive : false, 
-            items : undefined == element.slide_amount ? 4 : element.slide_amount, 
-          		margin : 10, 
-          		nav : true, 
+          		responsive : true,
+			responsive: {
+			  0: {
+			    items: 1,
+					nav: true
+			  },
+			  400: {
+			    items: 1,
+					nav: true
+			  },
+			  768: {
+			    items: undefined == element.slide_amount ? 4 : element.slide_amount,
+			    nav: true
+			  },
+			},            	
+          		margin : 10,
+          		nav : true,
           		dots : false,
           navText: [
           '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
@@ -2101,8 +2114,8 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
         ],
         })
         });
-        
-        
+
+
 			</script>
 			<?php
 		}
@@ -2231,26 +2244,26 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 	$class = $et_pb_ca_fullwidth_section_carousel_style . " et_pb_module";
-  
+
   if("media" == $et_pb_ca_fullwidth_section_carousel_style){
      $button = ("on" == $slide_show_more_button ? sprintf('<a href="%1$s">%2$s</a>',$slide_url, $slide_title ) : '');
-      
-      $slide = (!empty($slide_image) ? 
+
+      $slide = (!empty($slide_image) ?
                 sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>',
                         $slide_image, (!empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : '') )  : '');
-      
+
       	$output = sprintf('<div%1$s class="%2$s%3$s item">%4$s%5$s</div>',
             ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
             ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ), $slide,
              (!empty($button) ? sprintf('<div class="details text-center">%1$s</div>', $button) : ''));
-      
+
     }else{
-        
-    
+
+
       $display_button = ("on" == $slide_show_more_button ?
       sprintf('<br><button class="btn btn-primary">
             <a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
-    
+
       $output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>%5$s
                         <div class="content-container">
                           <div class="content">
@@ -2266,9 +2279,9 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
         ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : ''),
         $slide_desc,
         $display_button );
-    
+
   	}
-	
+
 
    return $output;
 }
