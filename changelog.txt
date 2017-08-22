@@ -1,3 +1,44 @@
+CAWeb v1.2.1a
+August 18, 2017
+- New Carousel Media style added to Section Carousel and Fullwidth Section Carousel Modules
+- Anchors have been corrected and now land at the appropriate ID
+- Logo and Nav_list styles have been updated
+
+CAWeb v1.2.1
+August 4, 2017
+- Moved Google Scripts to the footer
+- CAWeb styles and scripts now include proper version number
+- Theme Description has been changed
+- Utility Header Contact Us is now optional under CAWeb Options
+- CA.gov logo now includes Alt Text
+- Corrected issue with CAWeb Page Setting Metabox icon and color styles
+- Widget Support has been re-enabled
+- Utility Header links are now vertically aligned
+- GitHub API Key menu added to allow for updates via GitHub
+
+CAWeb v1.2.0a
+July 26, 2017
+- Change IE Compatibility from Edge to IE11 which caused some sites to crash when using IE
+
+CAWeb v1.2.0
+July 20, 2017
+- Added full support of all Navigation Menu Screen Options
+- All modules fields and labels have been mapped to match new Divi Labeling System
+- Google Analytics now tracks document downloads
+- Corrected styling and blank entries in Location Module
+
+CAWeb v1.1.4c
+July 20, 2017
+- Removed Manage Live Preview Button from Navigation Menu
+
+CAWeb v1.1.4b
+June 28, 2017
+- Added full icon class name for modules 
+
+CAWeb v1.1.4a
+June 28, 2017
+- Fixed navigation icons
+
 CAWeb v1.1.4
 June 19, 2017
 - GitHub module links open in separate table
