@@ -35,7 +35,7 @@ function menu_setup(){
 	}
 
   if(!is_multisite() || current_user_can('manage_network_options') ){
-    	add_submenu_page( 'ca_options','CAWeb Options', 'API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+    	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
   }
 
 }
@@ -96,7 +96,7 @@ function save_caweb_options($values = array()){
 function api_menu_option_setup(){
 
 ?>
-<style>table td{padding-left: 0 !important; padding-top: 0 !important}</style>
+<style>table tr td:first-of-type {width: 15px;}</style>
 
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
@@ -105,15 +105,22 @@ function api_menu_option_setup(){
   }
   ?>
 <div class="wrap">
-  <h1>API Key</h1>
-    <table class="form-table">
-      <tr><td><p><div class="tooltip">Username
-		<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></p><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>"></td></tr>
-      <tr><td><p><div class="tooltip">Password<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></p><input type="password" name="caweb_password" size="50" value="<?php echo base64_encode(get_site_option('caweb_password', '')); ?>"></td></tr>
-		</table>
+  <h1>GitHub API Key</h1>
+  <table class="form-table">
+    <tr><td>
+        <div class="tooltip">Username<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
+      		<td><input type="text" name="caweb_username" size="50" value="<?php echo get_site_option('caweb_username', ''); ?>" /></td></tr>
+      <tr><td>
+        <div class="tooltip">Token<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
+  				<td><input type="password" name="caweb_password" size="50" value="<?php echo base64_encode(get_site_option('caweb_password', '')); ?>" /></td></tr>
+  </table>  
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
-</form>
+ </form>
+  
+  
+  
+
 <?php
 }
 
@@ -137,6 +144,11 @@ function update_caweb_owner_encoded_info( $value, $old_value, $option ){
 	return $pwd;
 }
 add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
+
+function update_ca_custom_css( $value, $old_value, $option ){  
+	return stripcslashes($value) ;
+}
+add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
 
 // Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){

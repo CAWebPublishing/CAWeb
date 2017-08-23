@@ -122,6 +122,18 @@ function caweb_admin_head(){
 }
 add_action('admin_head', 'caweb_admin_head');
 
+/* Defer some scripts */
+function defer_parsing_of_js( $tag, $handle, $src ){
+  $js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script');
+  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
+  if( in_array($handle, $js_scripts) )
+	  return str_replace('src', 'defer src', $tag);
+  
+  return $tag;
+  
+}
+add_filter('script_loader_tag', 'defer_parsing_of_js', 10, 3);
+
 /* Enqueue Scripts and Styles at the bottom */
 function ca_theme_enqueue_style() {
 	global $pagenow;
@@ -175,13 +187,16 @@ function ca_theme_enqueue_style() {
   wp_enqueue_script( 'cagov-ga-autotracker-script' );
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
-  
+
 	  /* Version 5 specific scripts */
   if(ca_version_check(5,$post_id) && "on" == get_option('ca_geo_locator_enabled')){
 	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
 
     wp_enqueue_script( 'cagov-geolocator-script' );
 	}
+  
+  // This removes Divi Google Font CSS 
+  wp_deregister_style('divi-fonts');
 }
 add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
@@ -190,7 +205,7 @@ add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 function ca_admin_enqueue_scripts($hook){
 	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
   $theme_version = wp_get_theme('CAWeb')->get('Version');
-  
+
 	if( in_array($hook , $pages) ){
 		// Enqueue Scripts
 		wp_enqueue_script( 'jquery' );
@@ -202,12 +217,15 @@ function ca_admin_enqueue_scripts($hook){
 		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
 		wp_enqueue_script( 'browse-caweb-library' );
+    // Localize the search script with the correct site url
+		wp_localize_script( 'caweb-admin-scripts', 'args', array('changeCheck' => $hook) );
+
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
 		// Enqueue Styles
 			wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 
-	}elseif(in_array($hook, array('post.php', 'post-new.php') )){
+	}elseif(in_array($hook, array('post.php', 'post-new.php', 'widgets.php') )){
 		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 	}
 
@@ -217,40 +235,45 @@ function ca_admin_enqueue_scripts($hook){
 
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
+function remove_excess_fonts(){
+   // This removes Divi Builder Google Font CSS 
+  wp_deregister_style('et-builder-googlefonts');
+}
+add_action( 'wp_footer', 'remove_excess_fonts', 11);
 
 function caweb_banner_content_filter($content, $ver = 5){
-  $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
-  
+  $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
+
   /* Filter the Header Slideshow Banner */
-  if(  4 == $ver  && !empty($module) ){
+  if( !empty($module) ){
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
         $carousel = '';
-  
+
         foreach($slides as $i => $slide){
           $heading = '';
           $info = '';
           if("on" == $slide->display_banner_info){
             $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
-  
+
             if(!isset($slide->display_heading) || "on" == $slide->display_heading )
               $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
-  
-  
+
+
             $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
-  
+
           }
           $carousel .= sprintf('<div class="slide" %1$s>%2$s</div> ',
-                              (isset($slide->background_image) ? 
+                              (isset($slide->background_image) ?
                                sprintf('style="background-image: url(%1$s);"', $slide->background_image) : ""), $info);
          }
-  
+
         $banner = sprintf('<div class="header-slideshow-banner">
           <div id="primary-carousel" class="carousel carousel-banner">
             %1$s</div></div>', $carousel);
-  
+
   			return $banner;
   }
-  
+
 }
 
 /* Adjust WP Admin Bar */
@@ -261,28 +284,34 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'customize-divi-theme' );
 	$wp_admin_bar->remove_node( 'customize-divi-module' );
 
-  /* Add CAWeb WP Admin Bar Nodes */
-  $caweb_args = array(
-		'id'     => 'caweb-options',
-		'title'  => 'CAWeb Options',
-    'href' =>  get_admin_url() . 'admin.php?page=ca_options',
-    'parent' => 'site-name',
-	);
-
 	if ( current_user_can('manage_options') ){
-		$wp_admin_bar->add_node( $caweb_args );
+		/* Add CAWeb WP Admin Bar Nodes */
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-options',
+										'title'  => 'CAWeb Options',
+									'href' =>  get_admin_url() . 'admin.php?page=ca_options',
+									'parent' => 'site-name',
+									)
+								);
+		/* Add (Menu) Navigation Node */
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-navigation',
+										'title'  => 'Navigation',
+									'href' => get_admin_url() . 'nav-menus.php',
+									'parent' => 'site-name',
+									)
+								);
+
 	}
 
-  /* Add (Menu) Navigation Node */
-  $menu_args = array(
-		'id'     => 'caweb-navigation',
-		'title'  => 'Navigation',
-    'href' => get_admin_url() . 'nav-menus.php',
-    'parent' => 'site-name',
-	);
-
-	if ( current_user_can('manage_options') ){
-		$wp_admin_bar->add_node( $menu_args );
+	if (!is_multisite() || current_user_can('manage_network_options') ){
+		$wp_admin_bar->add_node( array(
+										'id'     => 'caweb-api',
+										'title'  => 'GitHub API Key',
+									'href' => get_admin_url() . 'admin.php?page=caweb_api',
+									'parent' => 'site-name',
+									)
+								);
 	}
 }
 

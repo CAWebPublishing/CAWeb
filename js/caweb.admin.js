@@ -6,7 +6,7 @@
 	var changeMade = false;
    
   $(window).on('beforeunload', function(){
-    	if( changeMade )
+    	if( changeMade && "nav-menus.php" !== args.changeCheck)
     			return 'Are you sure you want to leave?';
     
 	});

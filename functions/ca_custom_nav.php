@@ -17,7 +17,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
     add_action('wp_nav_menu_item_custom_fields', array($this, 'menu_item_custom_fields'), 9, 4);
 		add_action( 'wp_update_nav_menu_item', array($this,'ca_wp_update_nav_menu_item') , 10, 3 );
 
-    
+
 		// Hooked onto the WordPress Navigation
     add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
     // https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
@@ -74,9 +74,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 													<!-- Copyright Statement -->
 										<div class="copyright">
 										<div class="container container ca_wp_container" %4$s> Copyright &copy;
-										<script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>%5$s',
-									( 4 < $args->version ? 'ca_wp_container' : '' ), $nav_menu, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ),
-									(isset($args->ca_custom_css) && !empty($args->ca_custom_css) ? sprintf('<style id="ca_custom_css">%1$s</style>', $args->ca_custom_css) : '') );
+										<script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
+									( 4 < $args->version ? 'ca_wp_container' : '' ), $nav_menu, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ) );
     }else{
       $nav_menu = '';
     }
@@ -177,9 +176,9 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
+				$icon = (!empty($icon) ? sprintf('%1$s ', get_icon_span($icon) ) : get_blank_icon_span() );
 				// Create Link
-				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s" class="first-level-link"%6$s>%7$s %8$s</a>',
+				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s" class="first-level-link"%6$s>%7$s%8$s</a>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
@@ -249,7 +248,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : '' );
+				$icon = (!empty($icon) ? sprintf('%1$s ', get_icon_span($icon)) : '' );
 
 				// Get desc if present
 				$desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');
@@ -388,7 +387,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 <?php
 
 	}
-  
+
   // save menu custom fields that are added on to ca_custom_nav_walker
 	public function ca_wp_update_nav_menu_item($menu_id, $menu_item_db_id, $args){
  		// Check if element is properly sent
@@ -408,7 +407,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 		}
 		return $menu_item_db_id;
 	}
-  
+
 	}
 }
 

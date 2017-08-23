@@ -1,12 +1,12 @@
-<?
+<?php
 global $post;
 
 $ver = ca_get_version( get_the_ID() );
-$fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? 'fixed': '');
-$default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg', 
+$fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? ' fixed': '');
+$default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg',
                                  CAWebUri , get_option('ca_site_color_scheme', 'oceanside'));
 
-$header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ? 
+$header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ?
                           get_option('header_ca_background') : $default_background_img );
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '' );
 

@@ -66,7 +66,7 @@ printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico', CAWeb
 
 <!--[if (lt IE 9) & (!IEMobile)]>
 
-<script src="<?php printf( '/js/libs/selectivizr-min.js', CAWebUri); ?>"></script>
+<script src="<?php printf( '%1$s/js/libs/selectivizr-min.js', CAWebUri); ?>"></script>
 
 <![endif]-->
 
@@ -84,9 +84,9 @@ printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico', CAWeb
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 8]>
 
-  <script src="<?php printf( '/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
+  <script src="<?php printf( '%1$s/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
 
-  <script src="<?php printf( '/js/libs/respond.min.js', CAWebUri) ; ?>"></script>
+  <script src="<?php printf( '%1$s/js/libs/respond.min.js', CAWebUri) ; ?>"></script>
 
 <![endif]-->
 
