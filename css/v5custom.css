@@ -61,6 +61,7 @@ ul.utility-links.social-media-links {
     width: auto;
 	 float: right; 
     margin-right: -8px;
+  	padding-left: 25%;
 }
 .sub-nav{
 	left:  0;
@@ -204,23 +205,35 @@ input.gsc-input {
 
 }
 
-
-@media (min-width: 768px){
 /* Branding & Navigation */
- .branding .header-cagov-logo img{
-    max-width: 170px;
+.branding .header-cagov-logo{
+  width: 25%;
 }
-
-#nav_list{
-
-    padding-left: calc(170px + 15%);
+.branding .header-cagov-logo img{
+  max-height: 80px;
+  max-width: 100%;
 }
+@media (min-width: 768px){
   .top-level-nav .nav-item {
     padding: 0 6px;
   }
-/* End of Branding & Navigation */
+}
+@media (min-width: 992px){
+  .top-level-nav .nav-item {
+    padding: 0 8px;
+  }
+}
+@media (min-width: 1280px){
+   .branding .header-cagov-logo img{
+    max-width: 300px;
+    max-height: 80px;
+  }
+  #nav_list{
+    padding-left: 300px;
 
 }
+}
+/* End of Branding & Navigation */
 
 /* Makes social media icons wrap below footer links */
 @media (min-width: 992px){
@@ -236,35 +249,6 @@ input.gsc-input {
       max-width: 25%;
       width: unset;
   }
-}
-@media (min-width: 992px){
-
-/* Branding & Navigation */
-  .top-level-nav .nav-item {
-    padding: 0 8px;
-  }
-/* End of Branding & Navigation */
-
-
-}
-
-.branding .header-cagov-logo img{
-  max-height: 80px;
-}
-
-@media (min-width: 1280px){
-
-/* Branding & Navigation */
-   .branding .header-cagov-logo img{
-    max-width: 300px;
-    max-height: 80px;
-  }
-  #nav_list{
-    padding-left: 300px;
-
-}
-/* End of Branding & Navigation */
-
 }
 
 @media (max-width: 992px){
