@@ -58,7 +58,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 		    ),
 		  ),
 		);
-		
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 
@@ -303,7 +303,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 			window.<?php echo $this->slug; ?>_preview = function(args) {
 				var icon_list = <?= json_encode( get_ca_icon_list(-1,'',true) ) ?>;
 				var dispay_icon = "on" == args.use_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
-				
+
 				var heading_size = "none" == args.panel_layout ? "h1" : "h2";
 				var heading_text_color = "none" == args.panel_layout && !Boolean(args.heading_text_color) ? 'color: ' + args.heading_text_color + '; ' : '';
 			 	var heading_align = "left" != args.heading_align ? 'text-align: ' + args.heading_align + '; width: 100%;' : '';
@@ -311,9 +311,9 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				var option_padding = "right" == args.heading_align ? ' style="padding-left: 10px;"' : '';
   			var readmore =  "on" == args.show_button ? '<div class="options" ' + option_padding + '><a href="'+ args.button_link +'" class="btn btn-default">Read More</a></div>' : '' ;
 				var heading = Boolean(args.title) ? '<div class="panel-heading" ><' + heading_size + heading_style + '>'+ dispay_icon + args.title + readmore +'</' + heading_size + '></div>' : '';
-				
+
  				var remove_overflow = "none" == args.panel_layout ? 'style="overflow: visible;"' : '';
-								
+
 				var output =  '<div class="panel panel-'+ args.panel_layout +'" ' + remove_overflow + '>' + heading + '<div class="panel-body">' + this.props.content +'</div></div> <!-- .et_pb_panel -->';
 
 				return output;
@@ -370,7 +370,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 					'footer'   	=> esc_html__( 'Footer', 'et_builder'),
 		    ),
 		  ),
-		  'advanced' => array(        
+		  'advanced' => array(
 		    'toggles' => array(
 		    'style' 		=> esc_html__( 'Style', 'et_builder'),
 		    'header' 		=> esc_html__( 'Header', 'et_builder'),
@@ -457,7 +457,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 				'description'     => esc_html__( 'Here you can enter a title for the card.','et_builder' ),
 				'depends_show_if'			 => 'on',
 				'toggle_slug'		=> 'header',
-			),			
+			),
 			'text_color' => array(
 				'label'             => esc_html__( 'Heading Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -649,7 +649,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 		return $output;
 
 	}
-	
+
 	// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
@@ -661,22 +661,22 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 				var card_color =  undefined !== args.card_color ? 'background-color: ' + args.card_color + '; ' : "" ;
 				var text_color =  undefined !== args.text_color ? 'color: ' + args.text_color + '; ' : "" ;
 				var card_style =  "" !== card_color || "" !== text_color ? ' style="' + card_color + text_color +'"' : "";
-		
-				var display_image = "on" == args.show_image ? 
+
+				var display_image = "on" == args.show_image ?
 						'<img class="card-img-top img-responsive" src="' + args.featured_image +'" alt="Card image cap">' : '' ;
 
-				var display_header = "on" == args.include_header ? 
+				var display_header = "on" == args.include_header ?
 						'<div class="card-header"><h4 class="card-title">' + args.title + '</h4></div>' : '' 	;
-				
-				var display_button = "on" == args.show_button ? 
+
+				var display_button = "on" == args.show_button ?
 						'<a href="' + args.button_link + '" class="btn btn-default">' + args.button_text + '</a>' : '';
 
 				var display_footer = "on" == args.include_footer ?
 						'<div class="card-footer">' + args.footer_text + '</div>' : ''  ;
-			
+
 				var output = '<div class="card card-' + card_layout + '" ' + card_style + '>' + display_image + display_header +
 						'<div class="card-block"><p>' + this.props.content + '</p>' + display_button +'</div>' + display_footer + '</div>';
-				
+
 				return output;
 
 			}
@@ -1005,7 +1005,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		$address = array( $addr, $city, $state, $zip);
 		$address = array_filter( $address);
 		$address = implode(", ", $address);
-		
+
 		if("contact" == 	$location_layout ){
 				$display_other = ("on" == $show_contact ?
 				sprintf('<p class="other">%1$s%2$s</p>',
@@ -1013,7 +1013,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				("" != $fax ?  "FAX: {$fax}" : '')	 ) : '');
 
 			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">More</a>',$location_link) : '' );
-			
+
       $address = ( !empty($name) ? sprintf('%1$s<br />%2$s', $name, caweb_get_google_map_place_link( $address ) ) :
                   caweb_get_google_map_place_link( $address ) );
 
@@ -1031,7 +1031,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				%7$s</div></div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name, 
+			("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name,
        (!empty($address) ? sprintf('<div class="address">%1$s</div>', caweb_get_google_map_place_link( $address ) ): ''), ( empty($display_icon) ? ' style="margin-left: 0px;"' : '' ) );
 
 		}else{
@@ -1047,8 +1047,8 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 					</div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-      $featured_image, $name , 
-     (!empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link( $address ) ) : ''), 
+      $featured_image, $name ,
+     (!empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link( $address ) ) : ''),
       (!empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : '') , $display_button);
 
 		}
@@ -1067,43 +1067,43 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				address = address.filter(function(n){  if(n !== undefined) return n.trim(); });
 				address = address.filter(function(n){  return n !== ""  });
 				address = address.join(', ');
-				
+
 				var icon_list = <?= json_encode( get_ca_icon_list(-1,'',true) ) ?>;
 				var display_icon = "on" == args.show_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
-				
-				var display_button = "on" == args.show_button && "" !== args.location_link ? 
+
+				var display_button = "on" == args.show_button && "" !== args.location_link ?
 								'<a href="' + args.location_link + '" class="btn">View Contact</a>' : '' ;
-				
+
 				if ("contact" == args.location_layout ) {
 						var display_other = '';
 						if( "on" == args.show_contact ){
 								display_other += "" !== args.phone ? 'General Information: ' + args.phone + '<br />' : '';
 								display_other += "" !== args.fax ?  'FAX: ' + args.fax  : ''	;
-							
+
 								display_other = '<p class="other">' + display_other + '</p>';
 						}
-				
-			
-						var display_button = "on" == args.show_button && "" !== args.location_link ? 
+
+
+						var display_button = "on" == args.show_button && "" !== args.location_link ?
 								'<a href="' + args.location_link + '" class="btn">View Contact</a>' : '' ;
-						
+
 						var address = "" !== args.name ? args.name + '<br />' + address : address;
-			
-			
+
+
 						var output = '<div class="location contact">' + display_icon + '<div class="contact"><p class="address">' + address + '</p>' +
 									display_other + display_button + '</div></div>';
-						
+
 				} else if("mini" == args.location_layout) {
 					var output = '<div class="location mini">' + display_icon + '<div class="contact"' + ("" == display_icon ? ' style="margin-left: 0px;"' : '') + '><div class="title">' +
         '<a href="' + args.location_link + '">' + args.name + '</a></div><div class="address">' + address + '</div></div></div>';
 
 				}else{
 					var display_image = args.featured_image ? '<div class="thumbnail"><img src="' + args.featured_image + '" /></div>' : '';
-					
+
 					var desc = "" !== args.desc ? '<div class="title">Description</div><div class="description">' + args.desc + '</div>' : '';
-					
-					var output = '<div class="location banner">' + display_image + '<div class="contact"><div class="title">' + args.name + 
-							'</div><div class="address"><span class="ca-gov-icon-road-pin"></span><a href="' + args.location_link+'">' + 
+
+					var output = '<div class="location banner">' + display_image + '<div class="contact"><div class="title">' + args.name +
+							'</div><div class="address"><span class="ca-gov-icon-road-pin"></span><a href="' + args.location_link+'">' +
 							address + '</a></div></div><div class="summary">' + desc + display_button +'</div></div>';
 				}
 				return output;
@@ -1393,15 +1393,15 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
-    
+
 
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
 		$heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
-    
+
 		$heading_float = sprintf(' text-align: %1$s; ', $heading_align) ;
-    
+
 		$display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default">More Information</a></div>', $section_link) : '');
 
@@ -1410,7 +1410,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>' , 
+					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>' ,
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
@@ -1448,11 +1448,11 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 				var section_bg_color = "" !==  args.section_background_color ?
 							' style="background: ' + args.section_background_color + ';"' : '';
 
-				var heading_text_color = "" !== args.heading_text_color && undefined !== args.heading_text_color ? 
+				var heading_text_color = "" !== args.heading_text_color && undefined !== args.heading_text_color ?
 													' color: ' + args.heading_text_color + ';'  : '';
 				var heading_float = ' text-align: ' + args.heading_align +'; ' ;
-				
-				
+
+
 				var display_button = args.show_more_button == "on" && args.section_link !== "" ?
 					'<div><a href="' + args.section_link + '" class="btn btn-default">More Information</a></div>' : '';
 
@@ -1465,9 +1465,9 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 					var heading_style = "" !== heading_text_color ? ' style="' + heading_text_color + '" ' : '';
 
-					var section = '<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2' + heading_style + '>' + args.section_heading + '</h2><p>' + 
+					var section = '<div class="col-md-15" style="padding-right: 15px; padding-left: 15px"><h2' + heading_style + '>' + args.section_heading + '</h2><p>' +
 							this.props.content + '</p>' + display_button + '</div>';
-					
+
 					var body = display_image + section;
 
 			}else{
@@ -1475,11 +1475,11 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 				var body = '<div class="col-md-10 col-md-offset-1"><h2' + heading_style +' class="text-center">' + args.section_heading + '</h2>' +
 						'<div  class="text-center"><p>' + this.props.content + '</p></div><div  class="text-center">' + display_button + '</div></div>';
-					
+
 
 			}
 			 var output = '<div class="section" ' + section_bg_color + '>' + body + '</div>';
-				
+
 				return output;
 
 			}
@@ -1658,8 +1658,8 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 		return $output;
 
 	}
-	
-	
+
+
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
@@ -1671,7 +1671,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 					' style="background: ' + args.section_background_color + '" ': '';
 
 				var output = '<div class="section" ' + section_bg_color + '><div class="row group">' + this.props.content + '</div></div>';
-				
+
 				return output;
 
 			}
@@ -1757,7 +1757,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 				),
 			),
 		);
-		
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
@@ -2316,7 +2316,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			window.<?php echo $this->slug; ?>_preview = function(args) {
 				var output = '<div class="quarter"><h4 ' + args.heading_color + '>' + args.group_title + '</h4>' +
 						'<ul class="list-unstyled" style="list-style-type: none;"></ul></div>';
-				
+
 				return output;
 
 			}
@@ -2337,7 +2337,9 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
 		$this->whitelisted_fields = array(
-			'carousel_style',
+			'carousel_style', 'in_panel', 'panel_layout',
+			'panel_title', 'panel_show_button', 'panel_button_text',
+      'panel_button_link', 'slide_amount',
 			'section_background_color',
 			'max_width',
 			'max_width_tablet',
@@ -2348,7 +2350,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 			'admin_label',
 		);
 
-		$this->fields_defaults = array();
+		$this->fields_defaults = array('slide_amount' => array(4, 'add_default_setting'));
 
 		$this->main_css_element = '%%order_class%%';
 
@@ -2356,7 +2358,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		  'general' => array(
 		    'toggles' => array(
 		      'style'  => esc_html__( 'Style' , 'et_builder'),
-		      'header' => esc_html__( 'Header', 'et_builder'),
+		      'panel' => esc_html__( 'Panel', 'et_builder'),
 		      'body'   => esc_html__( 'Body'  , 'et_builder'),
 		    ),
 		  ),
@@ -2379,6 +2381,9 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		  ),
 		);
 
+
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
 
 
@@ -2391,8 +2396,83 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 				'options'         => array(
 					'content_fit' => esc_html__( 'Content Fit', 'et_builder' ),
 					'image_fit'  => esc_html__( 'Image Fit', 'et_builder' ),
+					'media'  => esc_html__( 'Media', 'et_builder' ),
 				),
+				'affects' => array('in_panel', 'slide_amount'),
 				'toggle_slug'			=> 'style',
+			),
+       'slide_amount' => array(
+				'label'           => esc_html__( 'Viewable Display Amount','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the amount of slides to display at one time.','et_builder' ),
+				'depends_show_if'   	=> 'media',
+				'toggle_slug'			=> 'style',
+			),
+      'in_panel' => array(
+				'label'           => esc_html__( 'Display in Panel', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'depends_show_if'   	=> 'media',
+				'affects' => array('panel_layout', 'panel_title', 'panel_show_button', 'panel_button_text', 'panel_button_link'),
+				'description' => 'Choose whether to display this carousel inside of a panel',
+				'toggle_slug' => 'style',
+			),
+      'panel_title' => array(
+				'label'           => esc_html__( 'Heading','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter a Heading Title.','et_builder' ),
+				'depends_show_if'   	=> 'on',
+				'toggle_slug'			=> 'panel',
+			),
+      'panel_layout' => array(
+				'label'             => esc_html__( 'Style','et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'default' => esc_html__( 'Default','et_builder'),
+					'standout'  => esc_html__( 'Standout','et_builder'),
+					'standout highlight'  => esc_html__( 'Standout Highlight','et_builder'),
+					'overstated'  => esc_html__( 'Overstated','et_builder'),
+					'understated'  => esc_html__( 'Understated','et_builder'),
+				),
+				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
+				'depends_show_if'   	=> 'on',
+				'toggle_slug' => 'panel',
+			),
+      'panel_show_button' => array(
+				'label'           => esc_html__( 'Read More Button', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects' => array('panel_button_text', 'panel_button_link',),
+				'depends_show_if'   	=> 'on',
+				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
+				'toggle_slug'			=> 'panel',
+			),
+      'panel_button_text' => array(
+				'label'           => esc_html__( 'Button Text','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the Text for the button.','et_builder' ),
+				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'panel',
+			),
+			'panel_button_link' => array(
+				'label'           => esc_html__( 'Button URL','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
+				'depends_show_if' => 'on',
+				'toggle_slug'			=> 'panel',
 			),
 			'section_background_color' => array(
 				'label'             => esc_html__( 'Background Color', 'et_builder' ),
@@ -2472,11 +2552,17 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_ca_section_carousel_style = $this->shortcode_atts['carousel_style'];
-
 	}
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		$carousel_style           	= $this->shortcode_atts['carousel_style'];
+		$slide_amount           	= $this->shortcode_atts['slide_amount'];
+		$in_panel           	= $this->shortcode_atts['in_panel'];
+		$panel_layout           	= $this->shortcode_atts['panel_layout'];
+		$panel_title           	= $this->shortcode_atts['panel_title'];
+		$panel_show_button           	= $this->shortcode_atts['panel_show_button'];
+		$panel_button_text           	= $this->shortcode_atts['panel_button_text'];
+		$panel_button_link           	= $this->shortcode_atts['panel_button_link'];
 		$module_id            			= $this->shortcode_atts['module_id'];
 		$module_class         			= $this->shortcode_atts['module_class'];
 		$max_width            			= $this->shortcode_atts['max_width'];
@@ -2503,32 +2589,83 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 		$section_background_color = ("" != $section_background_color ?
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
 
-		$output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
-				<div class="container">
-				<div class="group">
-				<div class="col-md-10 col-md-offset-1 ">
-				<div class="carousel owl-carousel carousel-content">
-				%5$s </div>
-				</div>
-				</div>
-				</div>
-			</div> <!-- et_pb_ca_section_carousel -->',
-		( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-		$section_background_color, $this->shortcode_content);
+    if("media" == $carousel_style && "on" == $in_panel){
+      $display_button = ("on" == $panel_show_button && !empty($panel_button_link ) ?
+                        sprintf('<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>',
+                                $panel_button_link , ( !empty($panel_button_text ) ? $panel_button_text : 'Read More')  ) : '') ;
+
+      $output  = sprintf('<div%1$s class="%2$s%3$s panel panel-%4$s">%5$s
+													<div class="panel-body"%7$s>
+															<div class="carousel carousel-media">%6$s</div>
+													</div>
+													</div> <!-- .et_pb_panel -->',
+               ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),  esc_attr( $class ) ,
+               ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),$panel_layout,
+                         (!empty($panel_title) ?
+                          sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>',$panel_title, $display_button) : ''),
+                         $this->shortcode_content, $section_background_color
+           );
+    }else{
+      $output = sprintf('<div%1$s class="%2$s%3$s section"%4$s>
+						<div class="carousel carousel-%5$s">%6$s</div></div><!-- et_pb_ca_section_carousel -->',
+          ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+          esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+                          $section_background_color, ( "media" == $carousel_style  ? $carousel_style : 'content' ),  $this->shortcode_content);
+    }
+
 
 		return $output;
 
 	}
+
+  	// This is a non-standard function. It outputs JS code to change items amount for carousel-media.
+		function carousel_fix() {
+			?>
+			<script>
+        $ = jQuery.noConflict();
+
+       var media_carousels = <?php print_r( json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) ); ?>;
+
+        media_carousels.forEach(function(element, index) {
+          $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
+          		responsive : true,
+							responsive: {
+				          0: {
+				            items: 1,
+							nav: true
+				          },
+				          400: {
+				            items: 1,
+							nav: true
+				          },
+				          768: {
+				            items: undefined == element.slide_amount ? 4 : element.slide_amount,
+				            nav: true
+				          },
+				        },
+          		margin : 10,
+          		nav : true,
+          		dots : false,
+          navText: [
+          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
+          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
+        ],
+        })
+        });
+
+
+			</script>
+			<?php
+		}
 }
 new ET_Builder_Module_CA_Section_Carousel;
 
 class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 	function init() {
+
 		$this->name = esc_html__( 'Carousel Slide', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_section_carousel_slide';
-
 		$this->type = 'child';
 
 		$this->child_title_var = 'slide_title';
@@ -2536,7 +2673,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 		$this->child_title_fallback_var = 'slide_title';
 
 		$this->whitelisted_fields = array(
-			'slide_image', 'slide_title',
+			'slide_image', 'slide_title', 'display_title',
 			 'slide_desc',	'slide_url',
 			'slide_show_more_button','module_class', 'module_id',
 			);
@@ -2598,7 +2735,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'toggle_slug'	=> 'header',
 			),
 			'slide_show_more_button' => array(
-				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
+				'label'           => esc_html__( 'Add More Link', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
@@ -2609,10 +2746,10 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 				'toggle_slug'	=> 'body',
 			),
 			'slide_url' => array(
-				'label' => esc_html__( 'Slide URL', 'et_builder' ),
+				'label' => esc_html__( 'Link URL', 'et_builder' ),
 				'type'=> 'text',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'Define the url for the slide. (http:// must be included)', 'et_builder' ),
+				'description' => esc_html__( 'Define the URL for the link. (http:// must be included)', 'et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'	=> 'body',
 			),
@@ -2653,22 +2790,35 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 		$slide_url = $this->shortcode_atts['slide_url'];
 		$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
 
-			//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
 		global $et_pb_slider_item_num;
 		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_slider_item_num++;
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
-		$class = $et_pb_ca_section_carousel_style . ' et_pb_module ';
-		$display_button = ("on" == $slide_show_more_button ?
-		sprintf('<br><button class="btn btn-primary">
-					<a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
+		$class = $et_pb_ca_section_carousel_style . ' et_pb_module';
 
-		$slide_title = ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : '');
+		if("media" == $et_pb_ca_section_carousel_style){
 
-			$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>
+      $button = ("on" == $slide_show_more_button ? sprintf('<a href="%1$s">%2$s</a>',$slide_url, $slide_title ) : '');
+
+      $slide = (!empty($slide_image) ?
+                sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>',
+                        $slide_image, (!empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : '')  )  : '');
+
+      	$output = sprintf('<div%1$s class="%2$s%3$s item">%4$s%5$s</div>',
+            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
+            ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),  $slide,
+            (!empty($button) ? sprintf('<div class="details text-center">%1$s</div>', $button) : '') );
+
+    }else{
+      $display_button = ("on" == $slide_show_more_button ?
+      sprintf('<br><button class="btn btn-primary">
+            <a href="%1$s"><strong>More Information</strong></a></button>', $slide_url) : '');
+
+      $slide_title = ("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : '');
+
+      $output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>
 													%5$s
 													<div class="content-container">
 														<div class="content">
@@ -2676,11 +2826,13 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 														</div>
 													</div>
 												</div>',
-		( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			("content_fit" == $et_pb_ca_section_carousel_style ? sprintf('style="background-image: url(%1$s);"', $slide_image) : ''),
-			( "image_fit" == $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s" />', $slide_image ) : '' ),
-			$slide_title, $slide_desc, $display_button );
+            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+            esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+              ("content_fit" == $et_pb_ca_section_carousel_style ? sprintf('style="background-image: url(%1$s);"', $slide_image) : ''),
+              ( "image_fit" == $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s" />', $slide_image ) : '' ),
+              $slide_title, $slide_desc, $display_button );
+
+    }
 
 			return $output;
 
@@ -3336,7 +3488,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 
 		$this->slug = 'et_pb_profile_banner';
 		$this->fb_support = true;
-		
+
 		$this->whitelisted_fields = array(
 			'name',
 			'max_width',
@@ -3556,7 +3708,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		return $output;
 
 	}
-	
+
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
@@ -3565,7 +3717,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 			<script>
 			window.<?php echo $this->slug; ?>_preview = function(args) {
 				var output = '';
-				
+
 				var image = ('on' !== args.round_image ?
 						'<img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/>'  :
 						'<div class="profile-banner-img-wrapper"><img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/></div>' );
