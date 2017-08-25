@@ -3,9 +3,6 @@
 // Administration Menu Setup
 function menu_setup(){
   global $submenu;
-  // Not Supported
-  unset($submenu['themes.php'][6]); // Customize link
-  unset($submenu['themes.php'][20]); // Background link
 
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
@@ -46,12 +43,11 @@ add_action( 'admin_menu', 'menu_setup' );
 function redirect_themes_page() {
 	global $pagenow;
 
-	if( ( is_multisite() && ! current_user_can('manage_network_options') ) || 'customize.php' == $pagenow ){
+	if( ( is_multisite() && ! current_user_can('manage_network_options') ) ){
 		wp_redirect(get_admin_url());
 		exit;
 	}
 }
-add_action( 'load-customize.php', 'redirect_themes_page' );
 add_action( 'load-themes.php', 'redirect_themes_page' );
 add_action( 'load-tools.php', 'redirect_themes_page' );
 
