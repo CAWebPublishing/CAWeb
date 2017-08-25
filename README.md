@@ -1,18 +1,10 @@
 
-<p align="center">
-    <a href="https://caweb.ca.gov">
-        <img src="http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png" width="auto"></img>
-     </a> 
-</p>
+![CAWeb Logo](http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png)
 
-# Introduction 
-CAWeb Publishing is the only service to offer the latest California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing the the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by purchasing and configuring WordPress hosting of your choice. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
+# Introduction
+CAWeb Publishing is the only service to offer the latest California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing to the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by purchasing and configuring WordPress hosting of your choice. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
 
-<p align="center">
-    <a href="https://caweb.ca.gov">
-        <img src="https://user-images.githubusercontent.com/13723805/28390282-30ecc610-6c8e-11e7-9e3e-b2fa1036377a.png" width="90%"></img>
-     </a> 
-</p>
+![CAWeb Screenshot](https://user-images.githubusercontent.com/13723805/28390282-30ecc610-6c8e-11e7-9e3e-b2fa1036377a.png)
 
 # Setup
 If your organization is moving to WordPress CMS, but you are not subscribing to the CAWeb Publishing Service, you'll need cloud hosting and the State Template child theme. Here are the steps to get started:
