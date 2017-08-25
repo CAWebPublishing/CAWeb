@@ -1,5 +1,4 @@
-
-![CAWeb Logo](http://blogs.ca.gov/wp-content/blogs.dir/1/files/2016/11/login-logo.png)
+![CAWeb Logo](https://user-images.githubusercontent.com/13723805/29735384-6c10ea28-89ad-11e7-9484-6fc0e1416d8f.png)
 
 # Introduction
 CAWeb Publishing is the only service to offer the latest California State Website Template on WordPress with full setup and customer support. The best way to use this theme is by subscribing to the [CAWeb Publishing Service](https://cdt.ca.gov/services/caweb-publishing/). If you don't want to use the CAWeb Publishing Service you can still use the CAWeb WordPress theme by purchasing and configuring WordPress hosting of your choice. The CAWeb theme is a child theme of Divi by [Elegant Themes](https://www.elegantthemes.com/gallery/divi/).
@@ -23,7 +22,7 @@ If your organization is moving to WordPress CMS, but you are not subscribing to 
 5. Perform related tests  
 
 # Contribute / Collaborate
-1. Fork this theme (You must be part of the Office of Digital Innovation Organization on Github)
+1. Fork this theme (You must be part the the Office of Digital Innovation Organization on Github)
 2. Create your changes
 3. Test your changes and ensure they improve the CAWeb theme
 4. Submit a pull request
