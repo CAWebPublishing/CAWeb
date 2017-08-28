@@ -1832,12 +1832,13 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			'client_id',
 			'client_secret',
 			'definitions',
-			'per_page',
+			'per_page', 'repo_type',
 			'disabled_on'
 		);
 
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
+					'repo_type' => array( 'all' ,'add_default_setting' ),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -1902,6 +1903,18 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
+			),
+      'repo_type' => array(
+				'label'           => esc_html__( 'Repository Type', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'all'  => esc_html__( 'All', 'et_builder' ),
+					'public'  => esc_html__( 'Public', 'et_builder' ),
+					'private' => esc_html__( 'Private', 'et_builder' ),
+				),
+				'description' => 'Choose repository type you wish to display.',
+				'toggle_slug' => 'style'
 			),
 			'definitions' => array(
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
@@ -1994,6 +2007,8 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		$definitions            = $this->shortcode_atts['definitions'];
 
 		$per_page            = $this->shortcode_atts['per_page'];
+    
+		$repo_type            = $this->shortcode_atts['repo_type'];
 
 		$module_id            = $this->shortcode_atts['module_id'];
 
@@ -2029,10 +2044,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 		$output = '';
 
-		if( !empty($username)  && !empty($client_id) && !empty($client_secret) ){
+    if( !empty($username) && !empty($client_id) && !empty($client_secret)  ){
 
-			$url = sprintf('https://api.github.com/users/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s',
-										$username, $per_page, $client_id ,$client_secret );
+			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s&type=%5$s',
+										$username, $per_page, $client_id ,$client_secret, $repo_type );
 
 				
 			$repos =  wp_remote_get($url ) ;
