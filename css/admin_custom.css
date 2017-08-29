@@ -137,3 +137,6 @@ ul.menu-icon-list li:hover{
   padding-left: 2px;
   padding-top: 5px;
 }
+
+/* Customizer Styling */
+#customize-control-caweb_custom_css label textarea{height: 500px; resize: none; overflow-y: scroll;}

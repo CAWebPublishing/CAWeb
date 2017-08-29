@@ -24,17 +24,19 @@ function caweb_customize_register( $wp_customize ) {
     $wp_customize->remove_panel($p);
 
   $wp_customize->remove_section('et_color_schemes');
-
+  $wp_customize->remove_section('themes');
+  $wp_customize->remove_section('custom_css');
+ 
    //All our sections, settings, and controls will be added here
+  // CAWeb Options
   $wp_customize->add_panel('caweb_options', array(
     														'title' => 'CAWeb Options',
   															'priority'   => 30) );
-  
+  // General Settings
   $wp_customize->add_section('caweb_settings', array(
     														'title' => 'Settings',
   															'priority'   => 30,
   																'panel' => 'caweb_options') );
-  
   
   $wp_customize->add_setting('ca_site_version', array(
     														'type' => 'option',
@@ -107,6 +109,12 @@ function caweb_customize_register( $wp_customize ) {
 	'section'    => 'caweb_settings',
 	'settings'   => 'ca_home_nav_link',
 		) ) );
+    
+  // Utility Header
+   $wp_customize->add_section('caweb_utility_header', array(
+    														'title' => 'Utility Header',
+  															'priority'   => 30,
+  															'panel' => 'caweb_options') );
   
   $wp_customize->add_setting('ca_contact_us_link', array(
     														'type' => 'option',
@@ -115,7 +123,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_contact_us_link', array(
 	'label'      => 'Contact Us Page',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_contact_us_link',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -127,8 +135,9 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_geo_locator_enabled', array(
 	'label'      => 'Enable Geo Locator',
   'type' => 'checkbox',
-	'section'    => 'caweb_settings',
-	'settings'   => 'ca_geo_locator_enabled'
+	'section'    => 'caweb_utility_header',
+	'settings'   => 'ca_geo_locator_enabled',
+    'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
   
   $wp_customize->add_setting('ca_utility_home_icon', array(
@@ -138,8 +147,9 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_home_icon', array(
 	'label'      => 'Home Link',
   'type' => 'checkbox',
-	'section'    => 'caweb_settings',
-	'settings'   => 'ca_utility_home_icon'
+	'section'    => 'caweb_utility_header',
+	'settings'   => 'ca_utility_home_icon',
+    'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
   
    $wp_customize->add_setting('ca_utility_link_1', array(
@@ -149,7 +159,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_1', array(
 	'label'      => 'Custom Link 1 URL',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_1',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -161,7 +171,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_1_name', array(
 	'label'      => 'Custom Link 1 Label',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_1_name',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -173,7 +183,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_2', array(
 	'label'      => 'Custom Link 2 URL',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_2',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -185,7 +195,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_2_name', array(
 	'label'      => 'Custom Link 2 Label',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_2_name',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -197,7 +207,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_3', array(
 	'label'      => 'Custom Link 3 URL',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_3',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
@@ -209,10 +219,17 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_3_name', array(
 	'label'      => 'Custom Link 3 Label',
   'type' => 'text',
-	'section'    => 'caweb_settings',
+	'section'    => 'caweb_utility_header',
 	'settings'   => 'ca_utility_link_3_name',
     'active_callback' => 'caweb_customizer_toggle_option'
 		) ) );
+  
+  // Page Header
+   $wp_customize->add_section('caweb_page_header', array(
+    														'title' => 'Page Header',
+  															'priority'   => 30,
+  															'panel' => 'caweb_options') );
+  
   
   
   $wp_customize->add_setting('header_ca_branding', array(
@@ -222,13 +239,162 @@ function caweb_customize_register( $wp_customize ) {
   
   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_ca_branding', array(
 	'label'      => 'Organization Logo-Brand',
-	'section'    => 'caweb_settings',
-	'settings'   => 'header_ca_branding',
+	'section'    => 'caweb_page_header',
+	'settings'   => 'header_ca_branding'
 		) ) );
   
+  $wp_customize->add_setting('header_ca_branding_alignment', array(
+    														'type' => 'option',
+  															'default' => get_option('header_ca_branding_alignment', 'left')) );
+ 
+  $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'header_ca_branding_alignment', array(
+	'label'      => 'Organization Logo Alignment',
+  'type' => 'select',
+   'choices' => array('left'=> 'Left', 'center'=> 'Center', 'right' => 'Right'),
+	'section'    => 'caweb_page_header',
+	'settings'   => 'header_ca_branding_alignment',
+    'active_callback' => 'caweb_customizer_toggle_option'
+		) ) );
   
+   $wp_customize->add_setting('header_ca_background', array(
+    														'type' => 'option',
+  															'default' => get_option('header_ca_background', ''),
+  															'transport' => 'postMessage') );
+  
+  $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_ca_background', array(
+	'label'      => 'Header Background Image',
+	'section'    => 'caweb_page_header',
+	'settings'   => 'header_ca_background',
+    'active_callback' => 'caweb_customizer_toggle_option'
+		) ) );
+  
+  // Google
+   $wp_customize->add_section('caweb_google', array(
+    														'title' => 'Google',
+  															'priority'   => 30,
+  															'panel' => 'caweb_options') );
+  
+   $wp_customize->add_setting('ca_google_search_id', array(
+    														'type' => 'option',
+  															'default' => get_option('ca_google_search_id', '') ) );
+  
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_search_id', array(
+	'label'      => 'Search Engine ID',
+  'type' => 'text',
+	'section'    => 'caweb_google',
+	'settings'   => 'ca_google_search_id',
+    'active_callback' => 'caweb_customizer_toggle_option'
+		) ) );
+  
+  $wp_customize->add_setting('ca_google_analytic_id', array(
+    														'type' => 'option',
+  															'default' => get_option('ca_google_analytic_id', '') ) );
+  
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_analytic_id', array(
+	'label'      => 'Analytics ID',
+  'type' => 'text',
+	'section'    => 'caweb_google',
+	'settings'   => 'ca_google_analytic_id',
+    'active_callback' => 'caweb_customizer_toggle_option'
+		) ) );
+  
+  $wp_customize->add_setting('ca_google_meta_id', array(
+    														'type' => 'option',
+  															'default' => get_option('ca_google_meta_id', '') ) );
+  
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_meta_id', array(
+	'label'      => 'Meta ID',
+  'type' => 'text',
+	'section'    => 'caweb_google',
+	'settings'   => 'ca_google_meta_id',
+    'active_callback' => 'caweb_customizer_toggle_option'
+		) ) );
+  
+   $wp_customize->add_setting('ca_google_trans_enabled', array(
+    														'type' => 'option',
+  															'default' => get_option('ca_google_trans_enabled', true)) );
+  
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_trans_enabled', array(
+	'label'      => 'Enable Google Translate',
+  'type' => 'checkbox',
+	'section'    => 'caweb_google',
+	'settings'   => 'ca_google_trans_enabled'
+		) ) );
+  
+  // Social Media Links
+   $wp_customize->add_section('caweb_social_media', array(
+    														'title' => 'Social Media Links',
+  															'priority'   => 30,
+  															'panel' => 'caweb_options') );
+  
+  $social_options = get_ca_social_options();
+  
+  foreach( $social_options as $social => $option){
+    $wp_customize->add_setting($option, array(
+    														'type' => 'option',
+  															'default' => get_option($option, '') ) );
+    
+     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, $option, array(
+          'label'      => $social,
+          'type' => 'text',
+          'section'    => 'caweb_social_media',
+          'settings'   => $option
+            ) ) );
+    
+    $wp_customize->add_setting(sprintf('%1$s_header',  $option), array(
+    														'type' => 'option',
+  															'default' => get_option(sprintf('%1$s_header',  $option), '') ) );
+    
+     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('%1$s_header',  $option), array(
+          'label'      => 'Show in Header',
+          'type' => 'checkbox',
+          'section'    => 'caweb_social_media',
+          'settings'   => sprintf('%1$s_header',  $option),
+    			'active_callback' => 'caweb_customizer_toggle_option'
+            ) ) );
+    
+    $wp_customize->add_setting(sprintf('%1$s_footer',  $option), array(
+    														'type' => 'option',
+  															'default' => get_option(sprintf('%1$s_footer',  $option), '') ) );
+    
+       $wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('%1$s_footer',  $option), array(
+        'label'      => 'Show in Footer',
+        'type' => 'checkbox',
+        'section'    => 'caweb_social_media',
+        'settings'   => sprintf('%1$s_footer',  $option)
+          ) ) );
+
+  }
+  
+  // Custom CSS
+  $wp_customize->add_section('caweb_custom_css', array(
+    														'title' => 'Custom CSS',
+  															'priority'   => 30,
+  															'panel' => 'caweb_options') );
+  
+   $wp_customize->add_setting('caweb_custom_css', array(
+    														'type' => 'option',
+  															'default' => get_option('ca_custom_css', '') ) );
+    
+     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'caweb_custom_css', array(
+          'label'      => 'CSS',
+          'type' => 'textarea',
+          'section'    => 'caweb_custom_css',
+          'settings'   => 'caweb_custom_css'
+            ) ) );
+    
+  	add_action('wp_footer', 'caweb_customizer_css');
 }
 add_action( 'customize_register', 'caweb_customize_register' );
 
-
+function caweb_customizer_css(){
+?>
+      <!--Customizer CSS--> 
+      <style type="text/css">
+           <?php echo get_option('caweb_custom_css'); ?> 
+           
+      </style> 
+      <!--/Customizer CSS-->
+      <?php  
+}  
 ?>
