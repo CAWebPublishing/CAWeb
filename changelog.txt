@@ -1,5 +1,4 @@
 CAWeb v1.2.2
-CAWeb v1.2.2
 August 28, 2017
 - Google Fonts have all been removed except the CA State Google Font
 - Fixed js/libs javascripts from being linked incorrectly
