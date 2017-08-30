@@ -20,7 +20,7 @@ if( isset($_POST['caweb_options_submit']) ){
 }
 
 ?>
-  
+
  <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
 <div id="ca-options-container">
 
@@ -219,7 +219,7 @@ if( isset($_POST['caweb_options_submit']) ){
 
 	<tr>
 		<th scope="row"><div class="tooltip">Organization Logo-Brand
-			<span class="tooltiptext">Select an image to use as the agency logo.</span></div></th>
+			<span class="tooltiptext">Select an image to use as the agency logo. Recommended size is 300pixels wide by 80pixels tall</span></div></th>
 		<td>
 			<input type="text" name="header_ca_branding" id="header_ca_branding_filename" size="75" value="<?php echo substr(get_option('header_ca_branding'), strrpos(get_option('header_ca_branding'), '/')+1); ?>" >
 			<input type="hidden" name="header_ca_branding" id="header_ca_branding" size="75" value="<?php echo get_option('header_ca_branding'); ?>" >
@@ -281,7 +281,7 @@ if( isset($_POST['caweb_options_submit']) ){
 
 </table>
 </div>
-  
+
 
 <!-- Social Media Links -->
 <div id="social-share" class="<?php echo (!isset($_POST['tab_selected']) || 'social-share' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
@@ -295,11 +295,11 @@ if( isset($_POST['caweb_options_submit']) ){
 			foreach($social_options as $social => $option ){
         printf('<tr><th>%1$s</th><td><input type="text" name="%2$s" id="%2$s" size="60" value="%3$s" /></td></tr>
 								<tr><td></td><td><label class="extra alignleft%4$s">Show in header: <input type="checkbox" name="%2$s_header" id="%2$s_header"%5$s /></label>
-													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label></td></tr>', 
-               		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'), 
+													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label></td></tr>',
+               		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'),
                	( get_option(sprintf('%1$s_header', $option) ) == true ? ' checked="checked"' : '' ),
               		( get_option(sprintf('%1$s_footer', $option) ) == true ? ' checked="checked"' : '' ));
-     
+
       }
 ?>
 
@@ -321,4 +321,3 @@ if( isset($_POST['caweb_options_submit']) ){
 
 <input type="submit" name="caweb_options_submit" id="#submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
 </form>
-
