@@ -1400,8 +1400,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 		$heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
 
-		$heading_float = sprintf(' text-align: %1$s; ', $heading_align) ;
-
 		$display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default">More Information</a></div>', $section_link) : '');
 
@@ -1423,11 +1421,11 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 
 
 		}else{
-				$heading_style = sprintf(' style="%1$s%2$s" ', $heading_float, $heading_text_color);
+			$heading_style = ( !empty($heading_text_color) ?
+										sprintf(' style="%1$s" ', $heading_text_color) : '');
 
-				$body = sprintf('<div class="col-md-10 col-md-offset-1"><h2%1$s class="text-center">%2$s</h2>
-				<div  class="text-center">%3$s</div><div  class="text-center">%4$s</div></div>',
-					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
+					$body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
+					$heading_style, $heading_align, $section_heading, 	$this->shortcode_content, $display_button);
 
 		}
 		$output = sprintf('<div%1$s class="%2$s%3$s section" %4$s>%5$s</div>',

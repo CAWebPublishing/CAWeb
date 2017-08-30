@@ -1,3 +1,15 @@
+CAWeb v1.2.2
+August 28, 2017
+- Google Fonts have all been removed except the CA State Google Font
+- Fixed js/libs javascripts from being linked incorrectly
+- Fixed issue with Custom CSS stripping single and double quotes out
+- Corrected issue with Header Banner Slideshow Module throwing PHP errors
+- GitHub Password fields was changed to Token Field
+- Deferred render blocking template scripts
+- Fixed Section Primary issue when no image is selected
+- Added less padding to Section Primary horizontal/vertical spacing
+- CSS and JS are now minified
+
 CAWeb v1.2.1a
 August 18, 2017
 - New Carousel Media style added to Section Carousel and Fullwidth Section Carousel Modules
