@@ -384,11 +384,16 @@ function caweb_customize_register( $wp_customize ) {
             ) ) );
     
   	add_action('wp_footer', 'caweb_customizer_css');
+
+  
+  /* Navigation */
+	
 }
 add_action( 'customize_register', 'caweb_customize_register' );
 
 function caweb_customizer_css(){
 ?>
+
       <!--Customizer CSS--> 
       <style type="text/css">
            <?php echo get_option('caweb_custom_css'); ?> 
