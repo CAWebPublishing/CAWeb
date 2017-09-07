@@ -3,20 +3,13 @@
 /*
 
 	CAWeb Child Theme Functions
-
 	Author: Jesus D. Guzman
-
-
+	
 	Sources:
-
 	- PHP (http://php.net/)
-
 	- Theme Development (https://codex.wordpress.org/Theme_Development)
-
 	- Developer Resources (https://developer.wordpress.org/?s=)
-
 	- Code Reference (https://developer.wordpress.org/reference/)
-
 	- Plugin Action Reference (https://codex.wordpress.org/Plugin_API/Action_Reference)
 
 */
@@ -473,9 +466,22 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 
 add_filter( 'tiny_mce_before_init', 'ca_mce_before_init_insert_formats' );
 
+function caweb_turn_off_divi_related_videos(){
+ 	?>
+<script>
+(function($) {
+    $(window).bind("load", function() {
+        $('.fluid-width-video-wrapper').each(function() {
+            var src = $(this).find('iframe').attr('src');
+            $(this).find('iframe').attr('src', src + '&amp;rel=0');
+        });
+    });
+})(jQuery)
+</script>
 
-
-
+<?php
+}
+add_action('wp_head','caweb_turn_off_divi_related_videos');
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
     	// List of the classes that need to be removed
