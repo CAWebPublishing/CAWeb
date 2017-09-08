@@ -2092,7 +2092,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
                      sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type, 
                     ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
-				
+				update_site_option('dev', $url );
 			$repos =  wp_remote_get($url ) ;
 			$code = wp_remote_retrieve_response_code($repos);
 
@@ -2103,12 +2103,12 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
           
-          if(!empty($request_email) &&  $repo->private ){
-             $request_link = "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access 
+          $request_link = (!empty($request_email) &&  $repo->private ?
+              "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access 
 								to {$repo->full_name}&body=Thank you for your interest in {$repo->full_name}, 
 								in order to be granted access we will need your GitHub Username.%0D%0A%0D%0A
-								Please Provide GitHub Username: ' style='padding:2px;margin:15px 15px 0 0'>Request Access</a>" ;
-          }
+								Please Provide GitHub Username: ' style='padding:2px;margin:15px 15px 0 0'>Request Access</a>" : '');
+          
           
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
