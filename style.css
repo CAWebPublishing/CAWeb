@@ -16,3 +16,5 @@
     padding: 6px 0 !important;
 }
 header{ z-index: 15 !important;}
+/* This will hide all WPMUDev Dashboard Feeds from Screen Options */
+label[for^="wpmudev_dashboard_item_df"]{display: none;}
