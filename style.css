@@ -5,7 +5,7 @@
  Author:       Jesus D Guzman
  Author URI:   ""
  Template: 	   Divi
- Version:      1.2.2
+ Version:      1.2.3
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  Tags:         light, dark, responsive-layout, accessibility-ready, california, ca
@@ -16,3 +16,5 @@
     padding: 6px 0 !important;
 }
 header{ z-index: 15 !important;}
+/* This will hide all WPMUDev Dashboard Feeds from Screen Options */
+label[for^="wpmudev_dashboard_item_df"]{display: none;}

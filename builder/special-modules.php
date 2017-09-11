@@ -1830,8 +1830,9 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			'title',
 			'username',
 			'client_id',
-			'client_secret',
-			'definitions',
+			'client_secret', 
+      'access_token', 'increase_rate_limit',
+			'definitions', 'request_email',
 			'per_page', 'repo_type',
 			'disabled_on'
 		);
@@ -1874,30 +1875,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 	}
 	function get_fields() {
 		$fields = array(
-			'title' => array(
-			  'label'       => esc_html__( 'Title', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
-				'toggle_slug'	=> 'header',
-			),
-			'username' => array(
-			  'label'       => esc_html__( 'Username', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
-			'client_id' => array(
-			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
-			'client_secret' => array(
-			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
 			'per_page' => array(
 			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
 			  'type'        => 'text',
@@ -1912,15 +1889,72 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					'all'  => esc_html__( 'All', 'et_builder' ),
 					'public'  => esc_html__( 'Public', 'et_builder' ),
 					'private' => esc_html__( 'Private', 'et_builder' ),
+					'forks' => esc_html__( 'Forks', 'et_builder' ),
 				),
 				'description' => 'Choose repository type you wish to display.',
-				'toggle_slug' => 'style'
+				'toggle_slug' => 'style',
+				'affects' => array('access_token', 'request_email')
+			),
+      'access_token' => array(
+			  'label'       => esc_html__( 'Personal Access Token', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This is required for Private Repositories to display.', 'et_builder' ),
+				'toggle_slug'	=> 'style',
+				'depends_show_if_not'	=> 'public',
+			),
+      'request_email' => array(
+			  'label'       => esc_html__( 'Code Request Email', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This is the administrators email that will receive all emails requesting access to private repositories.', 'et_builder' ),
+				'toggle_slug'	=> 'style',
+				'depends_show_if_not'	=> 'public',
+			),
+			'title' => array(
+			  'label'       => esc_html__( 'Title', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
+				'toggle_slug'	=> 'header',
+			),
+			'username' => array(
+			  'label'       => esc_html__( 'Username', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+			),
+      'increase_rate_limit' => array(
+				'label'           => esc_html__( 'Increase Rate Limit', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'affects' => array('client_id, client_secret',),
+				'description' => et_get_safe_localization(
+						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour. 
+										<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ),
+																						esc_url( 'https://developer.github.com/v3/#rate-limiting' ) ) ),
+				'toggle_slug' => 'body',
+			),
+			'client_id' => array(
+			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+				'depends_show_if'	=> 'on',
+			),
+			'client_secret' => array(
+			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+				'depends_show_if'	=> 'on',
 			),
 			'definitions' => array(
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
 			  'type'            => 'multiple_checkboxes',
 			  'options'         => array(
-			    'name'   => esc_html__( 'Name', 'et_builder' ),
+			    'name'  => esc_html__( 'Name', 'et_builder' ),
 			    'url'  => esc_html__( 'URL', 'et_builder' ),
 			    'desc' => esc_html__( 'Description', 'et_builder' ),
 			    'fork' => esc_html__( 'Fork', 'et_builder' ),
@@ -2003,8 +2037,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		$client_id         = $this->shortcode_atts['client_id'];
 
 		$client_secret            = $this->shortcode_atts['client_secret'];
+    
+		$access_token            = $this->shortcode_atts['access_token'];
 
 		$definitions            = $this->shortcode_atts['definitions'];
+    
+		$increase_rate_limit            = $this->shortcode_atts['increase_rate_limit'];
+    
+		$request_email            = $this->shortcode_atts['request_email'];
 
 		$per_page            = $this->shortcode_atts['per_page'];
     
@@ -2044,12 +2084,15 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 		$output = '';
 
-    if( !empty($username) && !empty($client_id) && !empty($client_secret)  ){
+    if( !empty($username)  ){
 
-			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s&type=%5$s',
-										$username, $per_page, $client_id ,$client_secret, $repo_type );
+			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
+										$username, $per_page, 
+                    ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ? 
+                     sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type, 
+                    ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
-				
+				update_site_option('dev', $url );
 			$repos =  wp_remote_get($url ) ;
 			$code = wp_remote_retrieve_response_code($repos);
 
@@ -2058,14 +2101,25 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
 
 				foreach($repos as $r => $repo){
-					if("on" == $definitions[0] && "on" !== $definitions[1]){
-					 	$name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
-					}elseif("on" == $definitions[0] && "on" == $definitions[1]){
-					 	$name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',$repo->html_url, $repo->name);
-					}else{
-						$name = '';
-					}
-
+          $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
+          
+          $request_link = (!empty($request_email) &&  $repo->private ?
+              "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access 
+								to {$repo->full_name}&body=Thank you for your interest in {$repo->full_name}, 
+								in order to be granted access we will need your GitHub Username.%0D%0A%0D%0A
+								Please Provide GitHub Username: ' style='padding:2px;margin:15px 15px 0 0'>Request Access</a>" : '');
+          
+          
+          if("on" == $definitions[0]){
+            if("on" !== $definitions[1] || $repo->private ){
+              $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
+            }elseif("on" == $definitions[1]){
+                $name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',
+                                  $repo->html_url, $repo->name);
+            }  
+          }
+         	   
+                         
 					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
 
@@ -2082,10 +2136,9 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
 											sprintf('<strong>Language: </strong>%1$s<br />', $repo->language  ) : '');
 
-					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
-														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
-														(!empty($fork) ? $fork : '') , (!empty($created_at) ? $created_at : ''),
-														(!empty($updated_at) ? $updated_at : ''), (!empty($language) ? $language : ''));
+					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s</li><hr></ul>',
+											(!empty($name) ? $name : ''), $desc , $fork, $created_at, 
+                       $updated_at, $language, $private, (!empty($request_link) ? $request_link : '') );
 				}
 			}else{
 					$output = '<strong>No GitHub Repository Found</strong>';	
