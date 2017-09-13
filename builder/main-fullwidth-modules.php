@@ -1,5 +1,5 @@
 <?php
-class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 	function init(){
 		$this->name = esc_html__( 'FullWidth Panel', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_panel';
@@ -305,7 +305,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_Panel;
 
-class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Header Slideshow Banner', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_banner';
@@ -540,7 +540,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;
 
-class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Banner Slide', 'et_builder' );
 	$this->slug = 'et_pb_ca_fullwidth_banner_item';
@@ -696,7 +696,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 new ET_Builder_Module_Fullwidth_Banner_Item_Slide;
 
 
-class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Primary', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_section_primary';
@@ -1025,7 +1025,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Primary;
 
-class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
+class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Footer', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_section_footer';
@@ -1185,7 +1185,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
 }
 new ET_Builder_Module_FullWidth_Section_Footer;
 
-class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_Module {
+class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Footer Group', 'et_builder' );
 	$this->slug = 'et_pb_ca_section_fullwidth_footer_group';
@@ -1795,7 +1795,7 @@ $display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 }
 new ET_Builder_Module_FullWidth_Footer_Group;
 
-class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Carousel', 'et_builder' );
 		$this->fullwidth = true;
@@ -2120,7 +2120,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
 
-class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Carousel Slide', 'et_builder' );
 	$this->slug = 'et_pb_ca_fullwidth_section_carousel_slide';
@@ -2287,7 +2287,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide;
 
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_Module{
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Module
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tiles', 'et_builder' );
 		$this->fullwidth = true;
@@ -2515,7 +2515,7 @@ style="background-image:url(%3$s); background-size: cover;"><div class="teaser">
 }
 new ET_Builder_Module_Fullwidth_CA_Service_Tiles;
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_Module{
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb_Module
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tile Item', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_service_tiles_item';
