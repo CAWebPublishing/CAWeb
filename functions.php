@@ -507,6 +507,7 @@ function caweb_initialize_divi_modules() {
 	if ( ! class_exists( 'ET_Builder_Module' ) ) { return; }
 
 		include(CAWebAbsPath . "/builder/functions.php");
+		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
 		include(CAWebAbsPath . "/builder/main-modules.php");
 		include(CAWebAbsPath. '/builder/main-fullwidth-modules.php');
 		include(CAWebAbsPath. '/builder/special-modules.php');
