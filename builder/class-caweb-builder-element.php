@@ -13,47 +13,6 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
   
   /* 
 		This function is an exact copy of the parent function, except for 
-		'icon', 'group_icon', 'scroll_bar_icon' was added to font_icon_ options array
-		$font_icon_options = array('font_icon', 'button_icon', 'button_one_icon', 'button_two_icon' );
-
-	*/
-  
-  /**
-	 * Double quote are saved as "%22" in shortcode attributes.
-	 * Decode them back into "
-	 *
-	 * @return void
-	 */
-	private function _decode_double_quotes() {
-		if ( ! isset( $this->shortcode_atts ) ) {
-			return;
-		}
-
-		$shortcode_attributes = array();
-		$font_icon_options = array('icon', 'group_icon', 'scroll_bar_icon', 'font_icon', 'button_icon', 'button_one_icon', 'button_two_icon' );
-
-		foreach ( $this->shortcode_atts as $attribute_key => $attribute_value ) {
-			// the icon shortcodes are fine.
-			if ( in_array( $attribute_key, $font_icon_options, true ) ) {
-				$shortcode_attributes[ $attribute_key ] = $attribute_value;
-				// icon attributes must not be str_replaced
-				continue;
-			}
-
-			// URLs are weird since they can allow non-ascii characters so we escape those separately.
-			if ( in_array( $attribute_key, array( 'url', 'button_link', 'button_url' ), true ) ) {
-				$shortcode_attributes[ $attribute_key ] = esc_url_raw( $attribute_value );
-			} else {
-				$shortcode_attributes[ $attribute_key ] = str_replace( array( '%22', '%92', '%91', '%93' ), array( '"', '\\', '&#91;', '&#93;' ), $attribute_value );
-			}
-		}
-
-		$this->shortcode_atts = $shortcode_attributes;
-	}
-
-  
-  /* 
-		This function is an exact copy of the parent function, except for 
 		'et_pb_icon', 'et_pb_group_icon', 'et_pb_scroll_bar_icon' was added to font_icon_options array
 		$font_icon_options = array('et_pb_font_icon', 'et_pb_button_icon', 'et_pb_button_one_icon', 'et_pb_button_two_icon' );
 
