@@ -2287,7 +2287,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide;
 
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Module
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tiles', 'et_builder' );
 		$this->fullwidth = true;
@@ -2515,7 +2515,7 @@ style="background-image:url(%3$s); background-size: cover;"><div class="teaser">
 }
 new ET_Builder_Module_Fullwidth_CA_Service_Tiles;
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb_Module
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tile Item', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_service_tiles_item';
