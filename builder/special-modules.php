@@ -1,5 +1,5 @@
 <?php
-class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
+class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Post Detail', 'et_builder' );
 
@@ -1812,7 +1812,7 @@ new ET_Builder_Module_CAWeb_Post_Handler;
 
 
 
-class ET_Builder_Module_GitHub extends ET_Builder_Module {
+class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'GitHub', 'et_builder' );
 
@@ -1830,7 +1830,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			'title',
 			'username',
 			'client_id',
-			'client_secret', 
+			'client_secret',
       'access_token', 'increase_rate_limit',
 			'definitions', 'request_email',
 			'per_page', 'repo_type',
@@ -1871,7 +1871,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );		
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1931,7 +1931,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				),
 				'affects' => array('client_id, client_secret',),
 				'description' => et_get_safe_localization(
-						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour. 
+						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour.
 										<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ),
 																						esc_url( 'https://developer.github.com/v3/#rate-limiting' ) ) ),
 				'toggle_slug' => 'body',
@@ -2037,17 +2037,17 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		$client_id         = $this->shortcode_atts['client_id'];
 
 		$client_secret            = $this->shortcode_atts['client_secret'];
-    
+
 		$access_token            = $this->shortcode_atts['access_token'];
 
 		$definitions            = $this->shortcode_atts['definitions'];
-    
+
 		$increase_rate_limit            = $this->shortcode_atts['increase_rate_limit'];
-    
+
 		$request_email            = $this->shortcode_atts['request_email'];
 
 		$per_page            = $this->shortcode_atts['per_page'];
-    
+
 		$repo_type            = $this->shortcode_atts['repo_type'];
 
 		$module_id            = $this->shortcode_atts['module_id'];
@@ -2087,9 +2087,9 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
     if( !empty($username)  ){
 
 			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
-										$username, $per_page, 
-                    ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ? 
-                     sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type, 
+										$username, $per_page,
+                    ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ?
+                     sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type,
                     ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
 				update_site_option('dev', $url );
@@ -2102,24 +2102,24 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
-          
+
           $request_link = (!empty($request_email) &&  $repo->private ?
-              "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access 
-								to {$repo->full_name}&body=Thank you for your interest in {$repo->full_name}, 
+              "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access
+								to {$repo->full_name}&body=Thank you for your interest in {$repo->full_name},
 								in order to be granted access we will need your GitHub Username.%0D%0A%0D%0A
 								Please Provide GitHub Username: ' style='padding:2px;margin:15px 15px 0 0'>Request Access</a>" : '');
-          
-          
+
+
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
             }elseif("on" == $definitions[1]){
                 $name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',
                                   $repo->html_url, $repo->name);
-            }  
+            }
           }
-         	   
-                         
+
+
 					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
 
@@ -2137,11 +2137,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 											sprintf('<strong>Language: </strong>%1$s<br />', $repo->language  ) : '');
 
 					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s</li><hr></ul>',
-											(!empty($name) ? $name : ''), $desc , $fork, $created_at, 
+											(!empty($name) ? $name : ''), $desc , $fork, $created_at,
                        $updated_at, $language, $private, (!empty($request_link) ? $request_link : '') );
 				}
 			}else{
-					$output = '<strong>No GitHub Repository Found</strong>';	
+					$output = '<strong>No GitHub Repository Found</strong>';
 
 			}
 		}
@@ -2149,12 +2149,12 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output, '' );
-		
+
 
 		return $output;
 
 	}
-	
+
 
 	// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
@@ -2165,27 +2165,27 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				var newCall = '';
 				var amount = 0;
 				var repos = {};
-									
+
 				window.<?php echo $this->slug; ?>_preview = function(args) {
 					var output =  '';
-					
+
 					if( "" !== args.username  && "" !== args.client_id && "" !== args.client_secret ){
 						if("" == newCall || amount !== args.per_page){
 							newCall = args.definitions;
 							amount = args.per_page
-								
-							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page + 
-												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;	
-							
+
+							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page +
+												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;
+
 							jQuery.get(url, function(response){
 										repos = response;
-							});						
-							
+							});
+
 						}
-						
+
 						var definitions =  undefined !== args.definitions && !Array.isArray(args.definitions) ? args.definitions.split("|") : args.definitions;
-							
-						for (var i = 0; i < repos.length; i++){		
+
+						for (var i = 0; i < repos.length; i++){
 										if("on" == definitions[0] && "on" !== definitions[1]){
 											var name = '<strong>Project Title: </strong>' + repos[i].name + '<br />';
 										}else if("on" == definitions[0] && "on" == definitions[1]){
@@ -2193,31 +2193,31 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 										}else{
 											var name = '';
 										}
-					
+
 										var desc = "on" == definitions[2] && null !== repos[i].description ?
 															'<strong>Project Description: </strong>' + repos[i].description + '<br />' : '';
-					
+
 										var fork = "on" == definitions[3] ?
 												'<strong>Project governed by another organization: </strong>' + ( "" == repos[i].fork ? 'false' : 'true') + '<br />' :	'';
-					
+
 										var created_at = "on" == definitions[4] ?
 																	'<strong>Created on: </strong>' + repos[i].created_at + '<br />' : '';
-					
+
 										var updated_at = "on" == definitions[5] ?
 																	'<strong>Updated on: </strong>' + repos[i].updated_at + '<br />' : '';
-					
+
 										var language = "on" == definitions[6] && null !== repos[i].language?
 																'<strong>Language: </strong>' + repos[i].language   + '<br />' : '';
 
-										output += '<ul style="padding-bottom: 0px;"><li>' + 
+										output += '<ul style="padding-bottom: 0px;"><li>' +
 																	name + desc + fork + created_at + updated_at + language + '</li><hr></ul>';
-																				
+
 							}
-						
+
 						output = '<div>' + (undefined == args.title ? "<h2>No Title Set</h2>" : "<h2>" + args.title + "</h2>") + output + '</div>';
-				
+
 						return  output;
-						
+
 					}
 
 				}

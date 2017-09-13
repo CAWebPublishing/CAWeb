@@ -1,5 +1,5 @@
 <?php
-class ET_Builder_Module_Panel extends ET_Builder_Module {
+class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Panel', 'et_builder' );
 
@@ -325,7 +325,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 }
 new ET_Builder_Module_Panel;
 
-class ET_Builder_CA_Card extends ET_Builder_Module {
+class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Card', 'et_builder' );
 
@@ -686,7 +686,7 @@ class ET_Builder_CA_Card extends ET_Builder_Module {
 }
 new ET_Builder_CA_Card;
 
-class ET_Builder_CA_Location extends ET_Builder_Module {
+class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Location', 'et_builder' );
 
@@ -1115,7 +1115,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 }
 new ET_Builder_CA_Location;
 
-class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
+class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Section - Primary', 'et_builder' );
 
@@ -1487,7 +1487,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_Module {
 }
 new ET_Builder_Module_CA_Section_Primary;
 
-class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
+class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Section - Footer', 'et_builder' );
 
@@ -1679,7 +1679,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_Module {
 }
 new ET_Builder_Module_Section_Footer;
 
-class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
+class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Footer Group', 'et_builder' );
 
@@ -2324,7 +2324,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 }
 new ET_Builder_Module_Footer_Group;
 
-class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
+class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Section - Carousel', 'et_builder' );
 
@@ -2658,7 +2658,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_Module {
 }
 new ET_Builder_Module_CA_Section_Carousel;
 
-class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
+class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Module{
 	function init() {
 
 		$this->name = esc_html__( 'Carousel Slide', 'et_builder' );
@@ -2838,7 +2838,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_Module {
 }
 new ET_Builder_Module_CA_Section_Carousel_Slide;
 
-class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
+class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Post List', 'et_builder' );
 
@@ -3480,7 +3480,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 }
 new ET_Builder_Module_CA_Post_List;
 
-class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
+class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Profile Banner', 'et_builder' );
 
