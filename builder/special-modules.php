@@ -1830,16 +1830,17 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			'title',
 			'username',
 			'client_id',
-			'client_secret',
+			'client_secret', 
       'access_token', 'increase_rate_limit',
 			'definitions', 'request_email',
 			'per_page', 'repo_type',
-			'disabled_on'
+			'disabled_on', 'subject_line','email_body'
 		);
 
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
 					'repo_type' => array( 'all' ,'add_default_setting' ),
+					'subject_line' => array( 'Request Access to [Name]' ,'add_default_setting' ),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -1854,6 +1855,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			),
 			'advanced' => array(
 				'toggles' => array(
+          'email' => array(
+						'title'    => esc_html__( 'Request Access Email', 'et_builder' ),
+						'priority' => 49,
+					),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -1893,7 +1898,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				),
 				'description' => 'Choose repository type you wish to display.',
 				'toggle_slug' => 'style',
-				'affects' => array('access_token', 'request_email')
+				'affects' => array('access_token', 'request_email', 'subject_line','email_body')
 			),
       'access_token' => array(
 			  'label'       => esc_html__( 'Personal Access Token', 'et_builder' ),
@@ -1963,6 +1968,27 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
 				'toggle_slug'	=> 'body',
+			),
+      'subject_line' => array(
+			  'label'       => esc_html__( 'Subject', 'et_builder' ),
+			  'type'        => 'text',
+        'description' => esc_html__( 'Enter Subject Line for the Request Access Email. Default: Request Access to (Autofilled with repository name).', 'et_builder' ),
+				'toggle_slug'	=> 'email',
+				'tab_slug'        => 'advanced',
+				'depends_show_if_not'	=> 'public',
+			),
+      'email_body' => array(
+				'label'           => esc_html__( 'Body','et_builder'),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'description'     => et_get_safe_localization(
+						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed) 
+										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
+																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
+        esc_html__( ' ','et_builder' ),
+				'toggle_slug'	=> 'email',
+				'tab_slug'        => 'advanced',
+				'depends_show_if_not'	=> 'public',
 			),
 			'disabled_on' => array(
 			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -2045,7 +2071,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$increase_rate_limit            = $this->shortcode_atts['increase_rate_limit'];
 
 		$request_email            = $this->shortcode_atts['request_email'];
-
+    
+		$subject_line            = $this->shortcode_atts['subject_line'];
+    
+		$email_body            = $this->shortcode_atts['email_body'];
+    
 		$per_page            = $this->shortcode_atts['per_page'];
 
 		$repo_type            = $this->shortcode_atts['repo_type'];
@@ -2085,14 +2115,13 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$output = '';
 
     if( !empty($username)  ){
-
+			
 			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
 										$username, $per_page,
                     ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ?
                      sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type,
                     ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
-				update_site_option('dev', $url );
 			$repos =  wp_remote_get($url ) ;
 			$code = wp_remote_retrieve_response_code($repos);
 
@@ -2103,13 +2132,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
 
-          $request_link = (!empty($request_email) &&  $repo->private ?
-              "<a class='btn btn-default' href='mailto:{$request_email}?subject=Request Access
-								to {$repo->full_name}&body=Thank you for your interest in {$repo->full_name},
-								in order to be granted access we will need your GitHub Username.%0D%0A%0D%0A
-								Please Provide GitHub Username: ' style='padding:2px;margin:15px 15px 0 0'>Request Access</a>" : '');
+          $subject_line = $this->fields_defaults['subject_line'][0] == $subject_line ? sprintf('Request Access to %1$s', $repo->full_name) : $subject_line;
+          
+          $request_link = (!empty($request_email) && $repo->private ?
+              sprintf('<a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s" 
+												style="padding:2px;margin:15px 15px 0 0">Request Access</a>', 
+                      $request_email, $subject_line, $email_body) : '');
 
-
+					update_site_option('dev', $this);
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
