@@ -1840,7 +1840,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
 					'repo_type' => array( 'all' ,'add_default_setting' ),
-					'subject_line' => array( 'Request Access to [Name]' ,'add_default_setting' ),
+					'subject_line' => array( 'Request Access to [FullName]' ,'add_default_setting' ),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -1972,7 +1972,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
       'subject_line' => array(
 			  'label'       => esc_html__( 'Subject', 'et_builder' ),
 			  'type'        => 'text',
-        'description' => esc_html__( 'Enter Subject Line for the Request Access Email. Default: Request Access to (Autofilled with repository name).', 'et_builder' ),
+        'description' => esc_html__( 'Enter Subject Line for the Request Access Email. [FullName] = Owner/Repository Name, [Name] = Repository Name', 'et_builder' ),
 				'toggle_slug'	=> 'email',
 				'tab_slug'        => 'advanced',
 				'depends_show_if_not'	=> 'public',
@@ -1982,7 +1982,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				'type'            => 'textarea',
 				'option_category' => 'basic_option',
 				'description'     => et_get_safe_localization(
-						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed) 
+						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] ) 
 										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
 																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
         esc_html__( ' ','et_builder' ),
@@ -2132,14 +2132,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
 
-          $subject_line = $this->fields_defaults['subject_line'][0] == $subject_line ? sprintf('Request Access to %1$s', $repo->full_name) : $subject_line;
+          $subject_line = str_replace(array('[Name]', '[FullName]'), array($repo->name, $repo->full_name), html_entity_decode($subject_line) );
+          $email_body = str_replace(array('[Name]', '[FullName]'), array($repo->name, $repo->full_name), html_entity_decode($email_body) );
           
           $request_link = (!empty($request_email) && $repo->private ?
               sprintf('<a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s" 
 												style="padding:2px;margin:15px 15px 0 0">Request Access</a>', 
                       $request_email, $subject_line, $email_body) : '');
 
-					update_site_option('dev', $this);
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
