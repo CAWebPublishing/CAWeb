@@ -1840,9 +1840,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
 					'repo_type' => array( 'all' ,'add_default_setting' ),
-					'subject_line' => array( 'Request Access to [FullName]' ,'add_default_setting' ),
+					'subject_line' => array( 'Repository Access Request' ,'add_default_setting' ),
 		);
-
+    
+    
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
@@ -1972,7 +1973,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
       'subject_line' => array(
 			  'label'       => esc_html__( 'Subject', 'et_builder' ),
 			  'type'        => 'text',
-        'description' => esc_html__( 'Enter Subject Line for the Request Access Email. [FullName] = Owner/Repository Name, [Name] = Repository Name', 'et_builder' ),
+        'description' => esc_html__( 'Enter Subject Line for the Request Access Email.', 'et_builder' ),
 				'toggle_slug'	=> 'email',
 				'tab_slug'        => 'advanced',
 				'depends_show_if_not'	=> 'public',
@@ -2128,18 +2129,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			if(404 !== $code){
 
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
-
+				$private_exists = false;
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
-
-          $subject_line = str_replace(array('[Name]', '[FullName]'), array($repo->name, $repo->full_name), html_entity_decode($subject_line) );
-          $email_body = str_replace(array('[Name]', '[FullName]'), array($repo->name, $repo->full_name), html_entity_decode($email_body) );
+          $private_exists = (!$private_exists ? $repo->private : true );
           
-          $request_link = (!empty($request_email) && $repo->private ?
-              sprintf('<a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s" 
-												style="padding:2px;margin:15px 15px 0 0">Request Access</a>', 
-                      $request_email, $subject_line, $email_body) : '');
-
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
@@ -2175,10 +2169,17 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 			}
 		}
-			$output = sprintf('<div%1$s class="%2$s%3$s">%6$s%4$s%5$s</div>',
+    
+         
+     $request_link = (!empty($request_email) && $private_exists ?
+              sprintf('%1$s<a class="btn btn-default" href="mailto:%2$s?subject=%3$s&body=%4$s" 
+												style="padding:2px;margin:15px 15px 0 0">Request Access to Private Repositories</a>', 
+                      (!empty($title) ? '<br />': ''), $request_email, $subject_line, $email_body) : '');
+
+			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output, '' );
+                    (!empty($title) || !empty($request_link) ? sprintf('<h2>%1$s%2$s</h2>', $title, $request_link) : ''), $output );
 
 
 		return $output;
