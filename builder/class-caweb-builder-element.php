@@ -15,9 +15,8 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		This function is an exact copy of the parent function, except for 
 		'et_pb_icon', 'et_pb_group_icon', 'et_pb_scroll_bar_icon' was added to font_icon_options array
 		$font_icon_options = array('et_pb_font_icon', 'et_pb_button_icon', 'et_pb_button_one_icon', 'et_pb_button_two_icon' );
-
 	*/
-  function render_field( $field ) {
+	function render_field( $field ) {
 		$classes = array();
 		$hidden_field = '';
 		$field_el = '';
@@ -70,7 +69,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 			$default = '' === $default ? '||||' : $default;
 		}
 
-		$font_icon_options = array('et_pb_icon', 'et_pb_group_icon', 'et_pb_scroll_bar_icon',
+		$font_icon_options = array( 'et_pb_icon', 'et_pb_group_icon', 'et_pb_scroll_bar_icon',
                                'et_pb_font_icon', 'et_pb_button_icon', 'et_pb_button_one_icon', 'et_pb_button_two_icon' );
 
 		if ( in_array( $field_name, $font_icon_options ) ) {
@@ -95,6 +94,15 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		if ( ! empty( $field['affects'] ) ) {
 			$field['class'] .= ' et-pb-affects';
 			$attributes .= sprintf( ' data-affects="%s"', esc_attr( implode( ', ', $field['affects'] ) ) );
+		}
+
+		if ( ! empty( $field['responsive_affects'] ) ) {
+			$field['class'] .= ' et-pb-responsive-affects';
+			$attributes .= sprintf(
+				' data-responsive-affects="%1$s" data-responsive-desktop-name="%2$s"',
+				esc_attr( implode( ', ', $field['responsive_affects'] ) ),
+				esc_attr( $field['name'] )
+			);
 		}
 
 		if ( 'font' === $field['type'] ) {
@@ -132,6 +140,9 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		}
 
 		switch( $field['type'] ) {
+			case 'background-field':
+				$field_el .= $this->wrap_settings_background_fields( $field['background_fields'], $field['base_name'] );
+				break;
 			case 'warning':
 				$field_el .= sprintf(
 					'<div class="et-pb-option-warning" data-name="%2$s" data-display_if="%3$s">%1$s</div>',
@@ -263,6 +274,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					esc_html__( 'Add New Rule', 'et_builder' )
 				);
 				break;
+			case 'text_align':
 			case 'select':
 			case 'yes_no_button':
 			case 'font':
@@ -272,6 +284,10 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					$field_name     .= '_select';
 					$field['class'] .= ' et-pb-helper-field';
 					$field['options'] = array();
+				}
+
+				if ( 'text_align' === $field['type'] ) {
+					$field['class'] = 'et-pb-text-align-select';
 				}
 
 				$button_options = array();
@@ -303,6 +319,26 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 							%1$s
 						</div> <!-- .et_builder_font_styles -->',
 						$font_style_button_html
+					);
+
+					$field_el .= $hidden_field;
+				}
+
+				if ( 'text_align' === $field['type'] ) {
+					$text_align_options = ! empty( $field[ 'options' ] ) ? array_keys( $field[ 'options' ] ) : array( 'left', 'center', 'right', 'justified' );
+					$is_module_alignment = in_array( $field['name'], array( 'et_pb_module_alignment', 'et_pb_button_alignment' ) ) || ( isset( $field['options_icon'] ) && 'module_align'  === $field['options_icon'] );
+
+					$text_align_style_button_html = sprintf(
+						'<%%= window.et_builder.options_text_align_buttons_output(%1$s, "%2$s") %%>',
+						json_encode( $text_align_options ),
+						$is_module_alignment ? 'module' : 'text'
+					);
+
+					$field_el .= sprintf(
+						'<div class="et_builder_text_aligns mce-toolbar">
+							%1$s
+						</div> <!-- .et_builder_text_aligns -->',
+						$text_align_style_button_html
 					);
 
 					$field_el .= $hidden_field;
@@ -492,6 +528,8 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					$custom_margin_class .= " auto_important";
 				}
 
+				$has_responsive_affects = isset( $field['responsive_affects'] );
+
 				$single_fields_settings = array(
 					'side' => '',
 					'label' => '',
@@ -505,7 +543,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 						%7$s
 						%8$s
 						%9$s
-						<input type="hidden" name="%1$s" data-default="%5$s" id="%2$s" class="et_custom_margin_main et-pb-main-setting%11$s"%12$s %3$s %4$s/>
+						<input type="hidden" name="%1$s" data-default="%5$s" id="%2$s" class="et_custom_margin_main et-pb-main-setting%11$s%14$s"%12$s %3$s %4$s/>
 						%10$s
 						%13$s
 					</div> <!-- .et_custom_margin_padding -->',
@@ -544,8 +582,8 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 						) : '',
 					$need_mobile_options ?
 						sprintf(
-							'<input type="hidden" name="%1$s_tablet" data-default="%4$s" id="%2$s_tablet" class="et-pb-main-setting et_custom_margin_main et_pb_setting_mobile et_pb_setting_mobile_tablet" data-device="tablet" %5$s %3$s %7$s/>
-							<input type="hidden" name="%1$s_phone" data-default="%4$s" id="%2$s_phone" class="et-pb-main-setting et_custom_margin_main et_pb_setting_mobile et_pb_setting_mobile_phone" data-device="phone" %6$s %3$s %8$s/>',
+							'<input type="hidden" name="%1$s_tablet" data-default="%4$s" id="%2$s_tablet" class="et-pb-main-setting et_custom_margin_main et_pb_setting_mobile et_pb_setting_mobile_tablet%9$s" data-device="tablet" %5$s %3$s %7$s/>
+							<input type="hidden" name="%1$s_phone" data-default="%4$s" id="%2$s_phone" class="et-pb-main-setting et_custom_margin_main et_pb_setting_mobile et_pb_setting_mobile_phone%9$s" data-device="phone" %6$s %3$s %8$s/>',
 							esc_attr( $field['name'] ),
 							esc_attr( $field['id'] ),
 							$attributes,
@@ -553,12 +591,14 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 							$mobile_values_array[0],
 							$mobile_values_array[1],
 							$has_saved_value[0],
-							$has_saved_value[1]
+							$has_saved_value[1],
+							$has_responsive_affects ? ' et-pb-responsive-affects' : ''
 						)
 						: '', // #10
 					$need_mobile_options ? esc_attr( $mobile_desktop_class ) : '',
 					$need_mobile_options ? $mobile_desktop_data : '',
-					$need_mobile_options ? $additional_mobile_fields : '' // #13
+					$need_mobile_options ? $additional_mobile_fields : '',
+					$has_responsive_affects ? ' et-pb-responsive-affects' : '' // #14
 				);
 				break;
 			case 'text':
@@ -634,10 +674,29 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 						esc_attr( $field_name . '_last_edited' ),
 						''
 					);
+
+					$class_last_edited = array(
+						'et_pb_mobile_last_edited_field',
+					);
+
+					$attrs = '';
+
+					if ( ! empty( $field['responsive_affects'] ) ) {
+						$class_last_edited[] = 'et-pb-responsive-affects';
+
+						$attrs .= sprintf(
+							' data-responsive-affects="%1$s" data-responsive-desktop-name="%2$s"',
+							esc_attr( implode( ', ', $field['responsive_affects'] ) ),
+							esc_attr( $field['name'] )
+						);
+					}
+
 					// additional field to save the last edited field which will be opened automatically
-					$additional_fields .= sprintf( '<input id="%1$s" type="hidden" class="et_pb_mobile_last_edited_field"%2$s>',
+					$additional_fields .= sprintf( '<input id="%1$s" type="hidden" class="%3$s"%2$s%4$s>',
 						esc_attr( $field_name . '_last_edited' ),
-						$value_last_edited
+						$value_last_edited,
+						esc_attr( implode( ' ', $class_last_edited ) ),
+						$attrs
 					);
 				}
 
