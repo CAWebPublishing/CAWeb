@@ -33,6 +33,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
     	return $args;
   }
    public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance) {
+     update_site_option('dev', $args);
+     
      if( isset($nav_menu_args['menu']) ){
        print $this->createWidgetNavMenu($nav_menu_args['menu']) ;
      }
@@ -134,9 +136,11 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
             // Iterate thru $childLinks create Sub Level (second-level-links)
             foreach($childLinks as $i => $subitem){
               $sub_item_meta = get_post_meta($subitem->ID);
-              $sub_nav_items .= sprintf('<li class="%1$s%2$s"%3$s%4$s><a href="">%5$s</a></li>',
-                                      implode(" ", $subitem->classes),(in_array('current-menu-item', $subitem->classes) ? ' active ' : ''),
-										(!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''),(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->title);
+              $sub_nav_items .= sprintf('<li class="%1$s%2$s"%3$s%4$s><a href="%5$s"%6$s>%7$s</a></li>',
+                                implode(" ", $subitem->classes),(in_array('current-menu-item', $subitem->classes) ? ' active ' : ''),
+                                (!empty($subitem->attr_title) ? sprintf(' title="%1$s" ', $subitem->attr_title) : ''),
+																(!empty($subitem->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->url,
+                                (!empty($subitem->target) ? sprintf(' target="%1$s" ', $subitem->target) : ''),$subitem->title);
             }
 
           $sub_nav = sprintf('<ul class="description">%1$s</ul>', $sub_nav_items) ;
@@ -146,7 +150,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
-                                    $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''), (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav);
+                    $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''), 
+                                    (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav);
       }
     }
 
