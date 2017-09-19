@@ -112,6 +112,9 @@ function caweb_admin_head(){
 	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
 
 	printf('<link rel="icon" href="%1$s">', $icon);
+  
+  /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
+	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
 }
 add_action('admin_head', 'caweb_admin_head');
 
