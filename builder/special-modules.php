@@ -1882,7 +1882,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 	function get_fields() {
 		$fields = array(
 			'per_page' => array(
-			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
+			  'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
