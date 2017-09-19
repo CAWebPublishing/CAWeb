@@ -1960,7 +1960,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
 			  'type'            => 'multiple_checkboxes',
 			  'options'         => array(
-			    'name'  => esc_html__( 'Name', 'et_builder' ),
+			    'name'  => esc_html__( 'Project Title', 'et_builder' ),
 			    'url'  => esc_html__( 'URL', 'et_builder' ),
 			    'desc' => esc_html__( 'Description', 'et_builder' ),
 			    'fork' => esc_html__( 'Fork', 'et_builder' ),
@@ -1968,6 +1968,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			    'updated_at' => esc_html__( 'Updated Date', 'et_builder' ),
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
+        'description' => esc_html__('URL link only applies to public repositories.', 'et_builder'),
 				'toggle_slug'	=> 'body',
 			),
       'subject_line' => array(
