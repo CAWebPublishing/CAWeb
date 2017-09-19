@@ -1961,14 +1961,13 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  'type'            => 'multiple_checkboxes',
 			  'options'         => array(
 			    'name'  => esc_html__( 'Project Title', 'et_builder' ),
-			    'url'  => esc_html__( 'URL', 'et_builder' ),
+          'url'  => esc_html__( 'Add Link to repositories (Public Repositories Only)', 'et_builder' ),
 			    'desc' => esc_html__( 'Description', 'et_builder' ),
 			    'fork' => esc_html__( 'Fork', 'et_builder' ),
 			    'created_at'  => esc_html__( 'Creation Date', 'et_builder' ),
 			    'updated_at' => esc_html__( 'Updated Date', 'et_builder' ),
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
-        'description' => esc_html__('URL link only applies to public repositories.', 'et_builder'),
 				'toggle_slug'	=> 'body',
 			),
       'subject_line' => array(
