@@ -2148,7 +2148,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
 
 					$fork = ("on" == $definitions[3] ?
-							sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') ) :
+							sprintf('<strong>Project forked by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'False' : 'True') ) :
 									'');
 
 					$created_at = ("on" == $definitions[4] ?
