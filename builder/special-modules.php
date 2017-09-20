@@ -1882,7 +1882,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 	function get_fields() {
 		$fields = array(
 			'per_page' => array(
-			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
+			  'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
@@ -2148,7 +2148,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
 
 					$fork = ("on" == $definitions[3] ?
-							sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') ) :
+							sprintf('<strong>Project forked by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'False' : 'True') ) :
 									'');
 
 					$created_at = ("on" == $definitions[4] ?
