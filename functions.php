@@ -539,18 +539,18 @@ function caweb_custom_frontend_builder_js() {
 	wp_dequeue_script( 'et-frontend-builder' );
 	// Enqueue modified bundle.js
   wp_enqueue_script('et-frontend-builder',"{$app}/bundle.js",	$fb_bundle_dependencies,	$ver,		true	);
-  
-  
+    
 }
-add_action( 'wp_enqueue_scripts', 'caweb_custom_frontend_builder_js', 99 );
-	/**
-	 * This function is directly copied from the original Divi theme.
-	 * You can find it in Divi/includes/builder/functions.php
-	 * somewhere around line 2314. Its copied so we can enqueue our
-	 * modified Divi/includes/builder/scripts/builder.js file
-	 * which adds the following line before the et_pb_icon_font_init() function:
-	 * current_symbol_val = current_symbol_val.replace( /"/g, '%22' );
-	 */
+
+/**
+* This function is directly copied from the original Divi theme.
+* You can find it in Divi/includes/builder/functions.php
+* somewhere around line 2314. Its copied so we can enqueue our
+* modified Divi/includes/builder/scripts/builder.js file
+* which adds the following line before the et_pb_icon_font_init() function:
+* current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
+*/
+
 if ( ! function_exists( 'et_pb_add_builder_page_js_css' ) ) :
 function et_pb_add_builder_page_js_css(){
 	global $typenow, $post;
@@ -679,7 +679,9 @@ function et_pb_add_builder_page_js_css(){
 
 	wp_enqueue_script( 'et_pb_media_library', ET_BUILDER_URI . '/scripts/ext/media-library.js', array( 'media-editor' ), ET_BUILDER_VERSION, true );
 
-	wp_enqueue_script( 'et_pb_admin_js', CAWebUri .'/builder/builder.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'backbone', 'chart', 'jquery-tablesorter', 'et_pb_admin_global_js', 'et_pb_media_library' ), ET_BUILDER_VERSION, true );
+	wp_enqueue_script( 'lz_string', ET_BUILDER_URI .'/scripts/lz-string.min.js', array(), ET_BUILDER_VERSION, true );
+
+  wp_enqueue_script( 'et_pb_admin_js',  CAWebUri . '/builder/scripts/builder.js', array( 'jquery', 'jquery-ui-core', 'underscore', 'backbone', 'chart', 'jquery-tablesorter', 'et_pb_admin_global_js', 'et_pb_media_library', 'lz_string' ), ET_BUILDER_VERSION, true );
 
 	wp_localize_script( 'et_pb_admin_js', 'et_pb_options', apply_filters( 'et_pb_options_builder', array_merge( array(
 		'debug'                                    => false,
@@ -956,4 +958,5 @@ function et_pb_add_builder_page_js_css(){
 	wp_add_inline_style( 'et_pb_admin_css', et_pb_ab_get_subject_rank_colors_style() );
 }
 endif;
+
 ?>
