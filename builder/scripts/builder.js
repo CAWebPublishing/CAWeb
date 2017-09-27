@@ -1,8 +1,8 @@
 /* Modified Divi/includes/builder/scripts/builder.js file
 * which adds the following line before the et_pb_icon_font_init() functions:
-* current_symbol_val = current_symbol_val.replace( /"/g, '%22' );
+* current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
 */
-     
+
 var ET_PageBuilder = ET_PageBuilder || {};
 
 window.wp = window.wp || {};
@@ -10,7 +10,7 @@ window.wp = window.wp || {};
 /**
  * The builder version and product name will be updated by grunt release task. Do not edit!
  */
-window.et_builder_version = '3.0.75';
+window.et_builder_version = '3.0.76';
 window.et_builder_product_name = 'Divi';
 
 ( function($) {
@@ -83,15 +83,15 @@ window.et_builder_product_name = 'Divi';
 			for ( et_ls_module_index in et_ls_all_modules ) {
 				var et_ls_module_slug      = et_ls_all_modules[ et_ls_module_index ],
 					et_ls_template_slug    = et_ls_prefix + et_ls_module_slug,
-					et_ls_template_content = localStorage.getItem( et_ls_template_slug );
+					et_ls_template_content = LZString.decompressFromUTF16( localStorage.getItem( et_ls_template_slug ) );
 
 				// count the processed modules
 				processed_modules_count++;
 
-				if ( _.isUndefined( et_ls_template_content ) || _.isNull( et_ls_template_content ) ) {
+				if ( _.isUndefined( et_ls_template_content ) || _.isNull( et_ls_template_content ) || '' === et_ls_template_content ) {
 					missing_modules['missing_modules_array'].push( et_ls_module_slug );
 				} else {
-					local_storage_buffer += localStorage.getItem( et_ls_template_slug );
+					local_storage_buffer += LZString.decompressFromUTF16( localStorage.getItem( et_ls_template_slug ) );
 				}
 
 				// perform ajax request if missing_modules_array length equals to the templates amount setting or if all the modules processed and we need to retrieve something
@@ -111,7 +111,7 @@ window.et_builder_product_name = 'Divi';
 							et_is_loading_missing_modules = false;
 
 							try {
-								localStorage.setItem( et_ls_prefix + data['slug'], data['template'] );
+								localStorage.setItem( et_ls_prefix + data['slug'], LZString.compressToUTF16( data['template'] ) );
 							} catch(e) {
 								// do not use localStorage if it full or any other error occurs
 							}
@@ -120,7 +120,7 @@ window.et_builder_product_name = 'Divi';
 							if ( data.length ) {
 								_.each( data, function( single_module ) {
 									try {
-										localStorage.setItem( et_ls_prefix + single_module['slug'], single_module['template'] );
+										localStorage.setItem( et_ls_prefix + single_module['slug'], LZString.compressToUTF16( single_module['template'] ) );
 									} catch(e) {
 										// do not use localStorage if it full or any other error occurs
 									}
@@ -260,7 +260,7 @@ window.et_builder_product_name = 'Divi';
 					for ( var name in data.templates ) {
 						if ( et_builder_has_storage_support() ) {
 							try {
-								localStorage.setItem( 'et_pb_templates_' + name, data.templates[name] );
+								localStorage.setItem( 'et_pb_templates_' + name, LZString.compressToUTF16( data.templates[name] ) );
 							} catch(e) {
 								// do not use localStorage if it full or any other error occurs
 							}
@@ -4065,8 +4065,7 @@ window.et_builder_product_name = 'Divi';
 							$current_symbol,
 							top_offset,
 							icon_index_number;
-
-            current_symbol_val = current_symbol_val.replace( /"/g, '%22' );
+            current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
             
 						function et_pb_icon_font_init() {
 							if ( current_symbol_val !== '' ) {
@@ -5046,10 +5045,8 @@ window.et_builder_product_name = 'Divi';
 							$current_symbol,
 							top_offset,
 							icon_index_number;
-						
-            	current_symbol_val = current_symbol_val.replace( /"/g, '%22' );
-						
-            function et_pb_icon_font_init() {
+current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
+						function et_pb_icon_font_init() {
 							if ( current_symbol_val !== '' ) {
 								// font icon index is used now in the following format: %%index_number%%
 								if ( current_symbol_val.search( /^%%/ ) !== -1 ) {
@@ -5139,6 +5136,13 @@ window.et_builder_product_name = 'Divi';
 					setting_value = $this_el.is('#et_pb_content_new')
 						? et_pb_get_content( 'et_pb_content_new' )
 						: $this_el.val();
+
+					// Text align specific issue: $('select').val() chooses first value if there is no selected option found.
+					// This causes innacuracy in form of first <option> (left) is automatically selected when there is no selected alignment
+					// Cross-check .et_text_align_activec class-name existence to verify text align's setting_value accuracy
+					if ( $this_el.is( '.et-pb-text-align-select' ) && ! $this_el.parent().find( '.et_text_align_active' ).length ) {
+						return true;
+					}
 
 					// do not save the default values into module attributes
 					if ( '' !== this_model_defaults && typeof this_model_defaults[id] !== 'undefined' && this_model_defaults[id] === setting_value ) {
@@ -8745,18 +8749,26 @@ window.et_builder_product_name = 'Divi';
 		function et_pb_email_lists_add_new_account( $accounts_select, settingsView ) {
 			var provider      = et_pb_email_lists_select_get_provider( $accounts_select );
 			var $container    = $accounts_select.closest( '.et-pb-option--select_with_option_groups' );
-			var $account_name = $container.parent().find('.et_pb_account_name:visible');
-			var account_name  = $account_name.val();
-			var $api_key      = $container.parent().find('.et_pb_api_key:visible');
-			var api_key       = $api_key.val();
+			var $api_fields   = $container.parent().find('[class*="et_pb_email_' + provider + '"]:visible');
+			var data          = {};
+			var nonce_key     = 'et_builder_email_add_account_nonce';
+
+			$api_fields.each( function() {
+				var key = $(this).attr( 'id' ).replace( 'pb_', '' );
+
+				if ( endsWith( key, '_list' ) ) {
+					return;
+				}
+
+				data[key] = $(this).val();
+			} );
 
 			function complete( data ) {
 				$accounts_select
 					.val( $accounts_select.data( 'previous_value' ) )
 					.trigger( 'change' );
 
-				$account_name.val( '' );
-				$api_key.val( '' );
+				$api_fields.val( '' );
 
 				ET_PageBuilder_Events.trigger( 'et-pb-loading:ended' );
 
@@ -8765,22 +8777,19 @@ window.et_builder_product_name = 'Divi';
 				}
 			}
 
+			data.action      = 'et_builder_email_add_account';
+			data[nonce_key]  = et_pb_options.et_builder_email_add_account_nonce;
+			data.et_bb       = true;
+			data.et_provider = provider;
+
 			$.ajax({
 				type: 'POST',
 				url: et_pb_options.ajaxurl,
-				data: {
-					action: 'et_builder_email_add_account',
-					et_builder_email_add_account_nonce: et_pb_options.et_builder_email_add_account_nonce,
-					et_provider: provider,
-					et_account: account_name,
-					et_api_key: api_key,
-					et_bb: true
-				}
-
+				data: data
 			}).done( function( data, status, response ) {
 				data = JSON.parse( data );
 
-				$accounts_select.html( _.template( data.accounts_list )( settingsView.model.attributes ) );
+				$accounts_select.html( _.template( data.accounts_list ).bind( settingsView )( settingsView.model.attributes ) );
 				complete( data );
 
 			}).fail( complete );
@@ -8877,13 +8886,16 @@ window.et_builder_product_name = 'Divi';
 		}
 
 		function et_pb_email_lists_buttons_setup( $add_account_buttons, settingsView ) {
+			var dependencies = window.et_pb_module_field_dependencies.et_pb_signup;
+
 			$add_account_buttons.each( function() {
 				var $add_account_button    = $(this);
 				var $accounts_select       = $add_account_button.siblings( 'select' );
 				var $fetch_lists_button    = $add_account_button.siblings( '.et_pb_email_force_fetch_lists' );
 				var $remove_account_button = $add_account_button.siblings( '.et_pb_email_remove_account' );
 				var $value_field           = $(this).siblings( 'input' );
-				var affects                = $value_field.data( 'affects' ).split(', ');
+				var field_name             = $value_field.closest( '.et-pb-option' ).data( 'option_name' );
+				var affects                = _.keys( dependencies[field_name].affects );
 				var $affects;
 
 				affects  = _.map( affects, function( affect ) { return '#et_pb_' + affect; } ).join( ', ' );
@@ -9031,6 +9043,10 @@ window.et_builder_product_name = 'Divi';
 						.val( 'remove_account' )
 						.trigger( 'change' );
 				});
+
+				setTimeout( function() {
+					$accounts_select.trigger( 'change' );
+				}, 200 );
 			});
 		}
 
@@ -11840,7 +11856,7 @@ window.et_builder_product_name = 'Divi';
 		}
 
 		function et_pb_hide_empty_toggles( $option_el ) {
-			if ( $option_el.lenght === 0 ) {
+			if ( $option_el.length === 0 ) {
 				return;
 			}
 
@@ -13571,6 +13587,98 @@ window.et_builder_product_name = 'Divi';
 				et_pb_reset_element_settings( $(this) );
 			} );
 
+			var module_type       = $container.data( 'module_type' );
+			var $other_et_affects = $();
+
+			if ( has( window.et_pb_module_field_dependencies, module_type ) ) {
+				var field_dependencies = window.et_pb_module_field_dependencies[module_type];
+
+				function et_pb_show_field_decide( new_value, show_if, show_if_not ) {
+					var show = false;
+
+					if ( show_if && show_if_not ) {
+						show_if     = _.isArray( show_if ) ? _.includes( show_if, new_value ) : new_value === show_if;
+						show_if_not = _.isArray( show_if_not ) ? ! _.includes( show_if_not, new_value ) : new_value !== show_if_not;
+
+						show = show_if && show_if_not;
+
+					} else if ( show_if ) {
+						show = _.isArray( show_if ) ? _.includes( show_if, new_value ) : new_value === show_if;
+
+					} else if ( show_if_not ) {
+						show = _.isArray( show_if_not ) ? ! _.includes( show_if_not, new_value ) : new_value !== show_if_not;
+					}
+
+					return show;
+				}
+
+				function et_pb_get_field_dependencies( affected_field ) {
+					var deps = [];
+
+					if ( field_dependencies[affected_field].show_if ) {
+						deps = _.keys( field_dependencies[affected_field].show_if );
+					}
+
+					if ( field_dependencies[affected_field].show_if_not ) {
+						deps = _.union( deps, _.keys( field_dependencies[affected_field].show_if_not ) );
+					}
+
+					return deps;
+				}
+
+				function et_pb_dependency_value_change_handler( affected_field ) {
+					var show    = [];
+					var affects = field_dependencies[affected_field].affects;
+
+					var $affected_field     = $container.find( '#et_pb_' + affected_field );
+					var $affected_container = $affected_field.closest( '.et-pb-option' );
+
+					var dependencies = et_pb_get_field_dependencies( affected_field );
+
+					_.forEach( dependencies, function ( dependency ) {
+						var new_value   = $container.find( '#et_pb_' + dependency ).val();
+						var show_if     = field_dependencies[dependency].affects[affected_field]['show_if'];
+						var show_if_not = field_dependencies[dependency].affects[affected_field]['show_if_not'];
+
+						show.push( et_pb_show_field_decide( new_value, show_if, show_if_not ) );
+					} );
+
+					show = ! _.includes( show, false );
+
+					// shows or hides the affected field container
+					$affected_container.toggle( show ).addClass( 'et_pb_animate_affected' );
+
+					var event = show ? 'et-pb-option-field-shown' : 'et-pb-option-field-hidden';
+					$affected_field.trigger( event );
+
+					setTimeout( function () {
+						$affected_container.removeClass( 'et_pb_animate_affected' );
+						et_pb_hide_empty_toggles( $affected_field );
+					}, 500 );
+
+					if ( ! _.isUndefined( affects ) ) {
+						_.forEach( affects, function ( value, affected_field ) {
+							et_pb_dependency_value_change_handler( affected_field );
+						} );
+					}
+				}
+
+				_.forEach( field_dependencies, function( dependency_info, field_name ) {
+					if ( _.isUndefined( dependency_info.affects ) ) {
+						return;
+					}
+
+					var $dependency = $container.find( '#et_pb_' + field_name );
+
+					$other_et_affects = $other_et_affects.add( $dependency );
+
+					$dependency.on( 'change', function() {
+						_.forEach( dependency_info.affects, function( value, affected_field ) {
+							et_pb_dependency_value_change_handler( affected_field );
+						} );
+					} );
+				});
+			}
 
 			if ( $et_affect_fields.length ) {
 				$et_affect_fields.change( function() {
@@ -13676,6 +13784,9 @@ window.et_builder_product_name = 'Divi';
 				setTimeout( function() {
 					// make all settings visible to properly enable all affected fields
 					$settings_tab.css( { 'display' : 'block' } );
+
+					// include fields using more advanced dependency declaration instead of html5 data attrs
+					$et_affect_fields = $et_affect_fields.add( $other_et_affects );
 
 					$et_affect_fields.data( 'is_rendering_setting_view', true );
 
@@ -13896,8 +14007,9 @@ window.et_builder_product_name = 'Divi';
 			}
 		}
 
-		function et_pb_get_gradient( $wrapper, base_name = 'background' ) {
-			var use_color_gradient      = 'background' === base_name ? 'use_background_color_gradient' : base_name + '_use_color_gradient',
+		function et_pb_get_gradient( $wrapper, base_name ) {
+			var base_name = base_name || 'background',
+				use_color_gradient      = 'background' === base_name ? 'use_background_color_gradient' : base_name + '_use_color_gradient',
 				$use_gradient_input     = $wrapper.find('.et_pb_background-option--' + use_color_gradient + ' select'),
 				$start_input            = $wrapper.find('.et_pb_background-option--' + base_name + '_color_gradient_start .et-pb-color-picker-hex'),
 				$end_input              = $wrapper.find('.et_pb_background-option--' + base_name + '_color_gradient_end .et-pb-color-picker-hex'),
@@ -15492,6 +15604,21 @@ window.et_builder_product_name = 'Divi';
 		}
 
 		/**
+		 * Get value from object located at path.
+		 *
+		 * @see https://stackoverflow.com/a/15643385/2639936
+		 *
+		 * @param obj
+		 * @param path
+		 * @return {*}
+		 */
+		function get( obj, path ) {
+			return _.reduce( path.split( '.' ), function( prev, curr ) {
+				return prev ? prev[curr] : undefined;
+			}, obj );
+		}
+
+		/**
 		 * Check if path exists in object.
 		 *
 		 * @see https://stackoverflow.com/a/42042678/2639936
@@ -15509,6 +15636,17 @@ window.et_builder_product_name = 'Divi';
 			var first_part = _.first( path_parts );
 
 			return _.has( obj, first_part ) && has( obj[first_part], _.rest( path_parts ).join( '.' ) );
+		}
+
+		/**
+		 * Determine whether or not a string ends with another string.
+		 *
+		 * @param string
+		 * @param substring
+		 * @return {boolean}
+		 */
+		function endsWith( string, substring ) {
+			return string.substr( string.length - substring.length, string.length ) === substring;
 		}
 
 		/**
@@ -15533,10 +15671,10 @@ window.et_builder_product_name = 'Divi';
 			set : function( type, content ) {
 				if ( et_pb_has_storage_support() ) {
 					// Save the type of copied content
-					localStorage.setItem( this.key + 'type', type );
+					localStorage.setItem( this.key + 'type', LZString.compressToUTF16( type ) );
 
 					// Save the copied content
-					localStorage.setItem( this.key + 'content', content );
+					localStorage.setItem( this.key + 'content', LZString.compressToUTF16( content ) );
 				} else {
 					alert( et_pb_options.localstorage_unavailability_alert );
 				}
@@ -15544,8 +15682,8 @@ window.et_builder_product_name = 'Divi';
 			get : function( type ) {
 				if ( et_pb_has_storage_support() ) {
 					// Get saved type and content
-					var saved_type =  localStorage.getItem( this.key + 'type' ),
-						saved_content = localStorage.getItem( this.key + 'content' );
+					var saved_type =  LZString.decompressFromUTF16( localStorage.getItem( this.key + 'type' ) ),
+						saved_content = LZString.decompressFromUTF16( localStorage.getItem( this.key + 'content' ) );
 
 					// Check for the compatibility of saved data and paste destination
 					// Return value if the supplied type equal with saved value, or if the getter doesn't care about the content's type
