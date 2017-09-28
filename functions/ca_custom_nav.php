@@ -33,8 +33,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
     	return $args;
   }
    public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance) {
-     update_site_option('dev', $args);
-     
+
      if( isset($nav_menu_args['menu']) ){
        print $this->createWidgetNavMenu($nav_menu_args['menu']) ;
      }
@@ -122,7 +121,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			if(0 == $item->menu_item_parent){
         $sub_nav = '';
         $item_meta = get_post_meta($item->ID);
-        
+
         // Get array of Sub Nav Items (second-level-links)
 				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
 
@@ -147,18 +146,18 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
         } // End of sub-nav
 				$item_nav_image = '';
         if( !empty($item_meta['_caweb_menu_icon'][0]) ){
-          $item_nav_image = sprintf('%1$s ', get_icon_span($item_meta['_caweb_menu_icon'][0], 
-                                               array('font-size:25px', 'vertical-align:middle') ) 
+          $item_nav_image = sprintf('%1$s ', get_icon_span($item_meta['_caweb_menu_icon'][0],
+                                               array('font-size:25px', 'vertical-align:middle') )
                                    );
         }elseif( !empty($item_meta['_caweb_menu_image'][0]) ){
           $item_nav_image = sprintf('<img src="%1$s" style="height:25px;"/>', $item_meta['_caweb_menu_image'][0]);
         }
-        
+
         $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s"%6$s%7$s>%10$s%8$s</a>%9$s</li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
-                    $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''), 
+                    $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''),
                                     (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav, $item_nav_image);
       }
     }
@@ -270,11 +269,11 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// if version 5
 				if(5.0 <= $args->version){
-          	          
+
 						if("unit3" != $li_unit){
 						// Create Link
 							$sub_nav .= sprintf('<li %1$s title="%2$s" %3$s><a href="%4$s" class="second-level-link"%5$s>%6$s%7$s%8$s</a></li>',
-                                  sprintf(' class="%1$s %2$s" ',$li_unit, implode(" ", $item->classes) ), 
+                                  sprintf(' class="%1$s %2$s" ',$li_unit, implode(" ", $item->classes) ),
                                   $item->attr_title, (!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
                         $item->url, (!empty($item->target) ? sprintf(' target="%1$s"', $item->target) : ''),
                     		$icon,  $item->title,( "unit1" != $li_unit  ? $desc : '' )	 );
@@ -290,7 +289,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 							$sub_nav .= sprintf('<li %1$s title="%2$s" %3$s><div class="nav-media">
 																	<div class="media">%4$s<div class="media-body"><div class="title"><a href="%5$s"%6$s>%7$s</a></div>
 																	<div class="teaser">%8$s</div></div></div></div></li>',
-																	sprintf(' class="%1$s %2$s" ',$li_unit, implode(" ", $item->classes) ), $item->attr_title, 
+																	sprintf(' class="%1$s %2$s" ',$li_unit, implode(" ", $item->classes) ), $item->attr_title,
                                   (!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
                                   $nav_media, $item->url, (!empty($item->target) ? sprintf(' target="%1$s"', $item->target) : ''),
                                   $item->title, $desc  );
@@ -321,8 +320,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 		foreach ( $menuitems as $item) {
           if($item->menu_item_parent == 0)
-                $navLinks .= sprintf('<li%1$stitle="%2$s"%3$s><a href="%4$s"%5$s>%6$s</a></li>', 
-                                     (!empty($item->classes) ? sprintf(' class="%1$s" ',implode(" ", $item->classes) )  : ''), $item->attr_title, 
+                $navLinks .= sprintf('<li%1$stitle="%2$s"%3$s><a href="%4$s"%5$s>%6$s</a></li>',
+                                     (!empty($item->classes) ? sprintf(' class="%1$s" ',implode(" ", $item->classes) )  : ''), $item->attr_title,
                                      (!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
                                      $item->url ,(!empty($item->target) ? sprintf(' target="%1$s"', $item->target) : ''),
                                      $item->title);
