@@ -1547,11 +1547,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 					$course_map = '';
 				}
 
-      	$output = sprintf('<article class="course-detail">%7$s<div class="description">%1$s</div>%2$s<div class="group">
+      	$output = sprintf('<article%7$s class="course-detail %8$s%9$s"><div class="description">%1$s</div>%2$s<div class="group">
 								<div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s</article>',
 								 $this->shortcode_content, $presenter, $organizer, $reg, $course_map,
 								sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
-                   (has_post_thumbnail() ? '' : '') );
+                   ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 				break;
 			// Event
 			case 'event':
@@ -1582,9 +1583,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
       	$reg = array_filter(array($event_registration_type , $event_cost));
       	$reg = (!empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg  ) ) : '');
 
-				$output = sprintf('<article class="event-detail">%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s</article>',
+				$output = sprintf('<article%7$s class="event-detail %8$s%9$s">%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s</article>',
 													(has_post_thumbnail() ? get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left','style'=>'padding-right:15px;') ) : ''), $this->shortcode_content, $presenter, $organizer, $reg,
-						sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+						sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                     ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )    );
 
 					break;
 
@@ -1619,9 +1622,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 
 				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s',$exam_course), $pub_date, $exam_final_filing_date, $exam_location);
 
-				$output = sprintf('<div class="exam-detail"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
+				$output = sprintf('<div%5$s class="exam-detail %6$s%7$s"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
 				(has_post_thumbnail() ? get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')): ''),
-							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 				break;
 			// Jobs
@@ -1716,11 +1721,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 					</div> ', $job_agency_about) : '');
 
 
-				$output = sprintf('<article class="job-detail">
+				$output = sprintf('<article%8$s class="job-detail %9$s%10$s">
 								<div class="sub-header">%1$s%2$s</div><div class="group">%3$s%4$s</div>%5$s%6$s%7$s
 								</article>',
 								(!empty($agency_info) ? $agency_info : ''), $job_posted_date, $job_info, $job_apply_info,
-								$job_agency_about,  $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+								$job_agency_about,  $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ), ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 
 					break;
 			// News
@@ -1733,11 +1739,13 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 													(!empty($news_author) ? sprintf('Author: %1$s<br />', $news_author)  : ''), $news_publish_date,
 													(!empty($news_city)  ? sprintf('%1$s', $news_city) : '') );
 
-     		$output = sprintf('<article class="news-detail">
+     		$output = sprintf('<article%5$s class="news-detail %6$s%7$s">
 					%1$s%2$s%3$s%4$s</article>',
 				( !empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '') ,
 				( has_post_thumbnail() ? get_the_post_thumbnail(null, array(75,75), array('class' => 'img-left' ) ) : ''),
-				$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+				$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 
 
@@ -1754,15 +1762,19 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 										array('class' => $img_align , 'alt' =>  $profile_name,
 													'style' => 'width: 150px; height: 200px; padding-right: 15px;' ) ) : '');
 
-				$output = sprintf('<article class="profile-detail">%1$s%2$s%3$s%4$s</article>',
+				$output = sprintf('<article%5$s class="profile-detail %6$s%7$s">%1$s%2$s%3$s%4$s</article>',
 							( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : ''),$image,
-						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 				break;
 
 			case 'faqs':
-				$output = sprintf('<article id="faq_post_detail">%1$s%2$s</article>',
-													$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+				$output = sprintf('<article%3$s class="%4$s%5$s">%1$s%2$s</article>',
+													$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 				break;
 
 			case 'general':
@@ -2131,7 +2143,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
 				$private_exists = false;
 				foreach($repos as $r => $repo){
-          $private = ( $repo->private ? '<p class="btn btn-default" style="padding:2px;cursor:unset;margin:15px 15px 0 0">Private Repository</p>' : '');
+          $private = ( $repo->private ? '<strong>* This is a Private Repository</strong>' : '');
           $private_exists = (!$private_exists ? $repo->private : true );
           
           if("on" == $definitions[0]){
