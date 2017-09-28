@@ -122,7 +122,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			if(0 == $item->menu_item_parent){
         $sub_nav = '';
         $item_meta = get_post_meta($item->ID);
-
+        
         // Get array of Sub Nav Items (second-level-links)
 				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
 
@@ -139,22 +139,29 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
               $sub_nav_items .= sprintf('<li class="%1$s%2$s"%3$s%4$s><a href="%5$s"%6$s>%7$s</a></li>',
                                 implode(" ", $subitem->classes),(in_array('current-menu-item', $subitem->classes) ? ' active ' : ''),
                                 (!empty($subitem->attr_title) ? sprintf(' title="%1$s" ', $subitem->attr_title) : ''),
-																(!empty($subitem->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->url,
+                                        (!empty($subitem->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->url,
                                 (!empty($subitem->target) ? sprintf(' target="%1$s" ', $subitem->target) : ''),$subitem->title);
             }
 
           $sub_nav = sprintf('<ul class="description">%1$s</ul>', $sub_nav_items) ;
         } // End of sub-nav
-
-        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s"%6$s%7$s>%8$s</a>%9$s</li>',
+				$item_nav_image = '';
+        if( !empty($item_meta['_caweb_menu_icon'][0]) ){
+          $item_nav_image = sprintf('%1$s ', get_icon_span($item_meta['_caweb_menu_icon'][0], 
+                                               array('font-size:25px', 'vertical-align:middle') ) 
+                                   );
+        }elseif( !empty($item_meta['_caweb_menu_image'][0]) ){
+          $item_nav_image = sprintf('<img src="%1$s" style="height:25px;"/>', $item_meta['_caweb_menu_image'][0]);
+        }
+        
+        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s"%6$s%7$s>%10$s%8$s</a>%9$s</li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
                     $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''), 
-                                    (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav);
+                                    (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav, $item_nav_image);
       }
     }
-
 
     return sprintf('<ul class="accordion-list">%1$s</ul>', $widget_nav_menu);
   }
