@@ -1216,8 +1216,7 @@ function init() {
  'group_link_url8', 'group_link_text9', 'group_link_url9',
  'group_link_text10', 'group_link_url10','module_class', 'module_id', 'admin_label',
 		);
-  update_site_option('dev', $this->whitelisted_fields);
-  
+
 	$this->fields_defaults = array(
 		'font_icon' => array('%-1%','add_default_setting'),
 		'group_url' => array( 'http://','add_default_setting'),
@@ -1337,7 +1336,7 @@ function get_fields() {
 			),
 			'toggle_slug' => 'body',
 		),);
-	
+
   for($i = 1; $i <= 10; $i++){
       $groups[sprintf('group_link%1$s_show', $i)] = array(
 				'label'           => esc_html__( sprintf('Link %1$s', $i), 'et_builder' ),
@@ -1352,7 +1351,7 @@ function get_fields() {
 				),
 				'toggle_slug'				=> 'body',
 			);
-        
+
 			 $groups[sprintf('group_link_text%1$s', $i)] = array(
 				'label' => esc_html__( sprintf('Link %1$s Text', $i), 'et_builder' ),
 				'type' => 'text',
@@ -1369,8 +1368,8 @@ function get_fields() {
 				'depends_show_if' => 'on',
 				'toggle_slug'				=> 'body',
 			  );
-    } 
-		
+    }
+
   $ending_fields['module_id'] = array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
@@ -1379,7 +1378,7 @@ function get_fields() {
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			);
-                        
+
 			$ending_fields['module_class'] = array(
 			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
 			  'type'            => 'text',
@@ -1388,7 +1387,7 @@ function get_fields() {
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 		);
-    
+
 	return array_merge($fields, $groups, $ending_fields);
 }
 function shortcode_callback( $atts, $content = null, $function_name ) {
@@ -1417,7 +1416,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
       $group_link_text{$i} = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
       $group_link_url{$i} = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
     }
-		
+
 	$class = "quarter";
 
 	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
@@ -1447,7 +1446,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
             $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
 
    }
-	
+
 	$output = sprintf('<div%1$s class="%2$s%3$s">
 			<h4 %4$s>%5$s</h4>
 			<ul class="list-unstyled" style="list-style-type: none; %6$s">
