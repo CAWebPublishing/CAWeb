@@ -26,7 +26,9 @@ function ca_setup_theme(){
 // Include additional functions
 require_once(CAWebAbsPath. '/functions/additional_functions.php');
 
-
+// Include customizer functions
+require_once(CAWebAbsPath. '/functions/customizer.php');
+  
 // Add CA Options Page
 require_once(CAWebAbsPath. '/options.php');
 
@@ -226,10 +228,8 @@ function ca_admin_enqueue_scripts($hook){
 		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 	}
 
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
-
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version ); 
 }
-
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
 function remove_excess_fonts(){
