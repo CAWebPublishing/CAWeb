@@ -1,3 +1,12 @@
+CAWeb v1.2.3
+October 3, 2017
+- Icon field names have been changed in 6 modules to 'font_icon' matching Divi icon field names
+- Shortened Section/Fullwidth Section Footer Group link construction
+- Removed unneeded functions in ET_Builder_CAWeb_Module
+- Divi Builder javascript has been slightly modified at et_pb_icon_font_init() This line was added: current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
+- Related videos have been removed when using Divi Video Module
+- Navigation Screen Options now apply to Header Sub Nav, Footer and Widget Menus
+
 CAWeb v1.2.2
 August 28, 2017
 - Google Fonts have all been removed except the CA State Google Font
