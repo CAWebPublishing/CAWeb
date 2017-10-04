@@ -207,11 +207,11 @@ input.gsc-input {
 
 /* Branding & Navigation */
 .branding .header-cagov-logo{
-  width: 25%;
+  max-width: 25%;
 }
 .branding .header-cagov-logo img{
   max-height: 80px;
-  max-width: 100%;
+  width: 100%;
 }
 @media (min-width: 768px){
   .top-level-nav .nav-item {
