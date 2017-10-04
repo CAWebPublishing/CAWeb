@@ -1511,7 +1511,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
+    //add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
 	function get_fields() {
 		$fields = array(

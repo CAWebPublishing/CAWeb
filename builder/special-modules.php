@@ -2141,41 +2141,43 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			if(404 !== $code){
 
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
+        $repo_list = '';
 				$private_exists = false;
 				foreach($repos as $r => $repo){
-          $private = ( $repo->private ? '<strong>* This is a Private Repository</strong>' : '');
+          $private = ( $repo->private ? '<p>* This is a Private Repository</p>' : '');
           $private_exists = (!$private_exists ? $repo->private : true );
           
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
-              $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
+              $name = sprintf('<h3>%1$s</h3>', $repo->name);
             }elseif("on" == $definitions[1]){
-                $name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',
+                $name = sprintf('<h3><a href="%1$s" target="blank">%2$s</a></h3>',
                                   $repo->html_url, $repo->name);
             }
           }
 
 
 					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
-										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
+										sprintf('<p>Project Description: %1$s</p>', $repo->description) : '');
 
 					$fork = ("on" == $definitions[3] ?
-							sprintf('<strong>Project forked by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'False' : 'True') ) :
+							sprintf('<p>Project forked by another organization: %1$s</p>',  ( empty($repo->fork) ? 'False' : 'True') ) :
 									'');
 
 					$created_at = ("on" == $definitions[4] ?
-												sprintf('<strong>Created on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->created_at) ) ) : '');
+												sprintf('<p>Created on: %1$s</p>', date('m/d/Y', strtotime($repo->created_at) ) ) : '');
 
 					$updated_at = ("on" == $definitions[5] ?
-												sprintf('<strong>Updated on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->updated_at ) )  ) : '');
+												sprintf('<p>Updated on: %1$s</p>', date('m/d/Y', strtotime($repo->updated_at ) )  ) : '');
 
 					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
-											sprintf('<strong>Language: </strong>%1$s<br />', $repo->language  ) : '');
+											sprintf('<p>Language: %1$s</p>', $repo->language  ) : '');
 
-					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s</li><hr></ul>',
+					$repo_list .= sprintf( '<li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s<hr></li>',
 											(!empty($name) ? $name : ''), $desc , $fork, $created_at,
                        $updated_at, $language, $private, (!empty($request_link) ? $request_link : '') );
 				}
+        $output = sprintf( '<ul>%1$s</ul>', $repo_list );
 			}else{
 					$output = '<strong>No GitHub Repository Found</strong>';
 
