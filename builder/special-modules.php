@@ -177,7 +177,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'remove_general_detail' ) );
+		//add_action( 'wp_footer', array( $this, 'remove_general_detail' ) );
 	}
 
 	function get_fields() {
@@ -1842,7 +1842,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			'title',
 			'username',
 			'client_id',
-			'client_secret', 
+			'client_secret',
       'access_token', 'increase_rate_limit',
 			'definitions', 'request_email',
 			'per_page', 'repo_type',
@@ -1854,8 +1854,8 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					'repo_type' => array( 'all' ,'add_default_setting' ),
 					'subject_line' => array( 'Repository Access Request' ,'add_default_setting' ),
 		);
-    
-    
+
+
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
@@ -1889,7 +1889,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1995,7 +1995,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				'type'            => 'textarea',
 				'option_category' => 'basic_option',
 				'description'     => et_get_safe_localization(
-						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] ) 
+						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] )
 										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
 																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
         esc_html__( ' ','et_builder' ),
@@ -2084,11 +2084,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$increase_rate_limit            = $this->shortcode_atts['increase_rate_limit'];
 
 		$request_email            = $this->shortcode_atts['request_email'];
-    
+
 		$subject_line            = $this->shortcode_atts['subject_line'];
-    
+
 		$email_body            = $this->shortcode_atts['email_body'];
-    
+
 		$per_page            = $this->shortcode_atts['per_page'];
 
 		$repo_type            = $this->shortcode_atts['repo_type'];
@@ -2128,7 +2128,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$output = '';
 
     if( !empty($username)  ){
-			
+
 			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
 										$username, $per_page,
                     ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ?
@@ -2146,7 +2146,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				foreach($repos as $r => $repo){
           $private = ( $repo->private ? '<p>* This is a Private Repository</p>' : '');
           $private_exists = (!$private_exists ? $repo->private : true );
-          
+
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<h3>%1$s</h3>', $repo->name);
@@ -2183,11 +2183,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 			}
 		}
-    
-         
+
+
      $request_link = (!empty($request_email) && $private_exists ?
-              sprintf('%1$s<a class="btn btn-default" href="mailto:%2$s?subject=%3$s&body=%4$s" 
-												style="padding:2px;margin:15px 15px 0 0">Request Access to Private Repositories</a>', 
+              sprintf('%1$s<a class="btn btn-default" href="mailto:%2$s?subject=%3$s&body=%4$s"
+												style="padding:2px;margin:15px 15px 0 0">Request Access to Private Repositories</a>',
                       (!empty($title) ? '<br />': ''), $request_email, $subject_line, $email_body) : '');
 
 			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
