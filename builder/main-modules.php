@@ -67,7 +67,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 
 	}
 	function get_fields() {
@@ -397,7 +397,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		  ),
 		);
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -760,7 +760,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1186,7 +1186,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1544,7 +1544,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		  ),
 		);
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1764,7 +1764,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -1845,7 +1845,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'toggle_slug'				=> 'body',
-			)			
+			)
 		);
 
     for($i = 1; $i <= 10; $i++){
@@ -1862,7 +1862,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				),
 				'toggle_slug'				=> 'body',
 			);
-        
+
 			 $groups[sprintf('group_link_text%1$s', $i)] = array(
 				'label' => esc_html__( sprintf('Link %1$s Text', $i), 'et_builder' ),
 				'type' => 'text',
@@ -1879,9 +1879,9 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'depends_show_if' => 'on',
 				'toggle_slug'				=> 'body',
 			  );
-    } 
-    
-      
+    }
+
+
     $ending_fields['module_id'] = array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
@@ -1890,7 +1890,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			);
-                        
+
 			$ending_fields['module_class'] = array(
 			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
 			  'type'            => 'text',
@@ -1899,10 +1899,10 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 		);
-    
-    
+
+
 		return array_merge($fields, $groups, $ending_fields);
-    
+
 
 	}
 	function shortcode_callback( $atts, $content = null, $function_name ) {
@@ -1961,7 +1961,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
         sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
         $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
     }
-    
+
 		$output = sprintf('<div%1$s class="%2$s%3$s">
 				<h4 %4$s>%5$s</h4>
 				<ul class="list-unstyled" style="list-style-type: none; %6$s">
@@ -2049,7 +2049,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
+    //add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
 
 
