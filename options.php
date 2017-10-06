@@ -12,7 +12,12 @@ function menu_setup(){
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
-
+  
+  // Remove Divi Training and re-add it under Divi
+	remove_submenu_page( 'themes.php', 'divi_training');
+  if( is_plugin_active( 'wm-divi-training-xxx/wm-divi-training.php' ) )
+  	add_submenu_page( 'et_divi_options','Divi Training', 'Divi Training','manage_options', 'divi_training', '' );
+  
   // If user is not a Network Admin
 	if( is_multisite() &&  ! current_user_can('manage_network_options')){
     // Remove Themes, Customize and Background option under Appearance menu
@@ -36,7 +41,7 @@ function menu_setup(){
   }
 
 }
-add_action( 'admin_menu', 'menu_setup' );
+add_action( 'admin_menu', 'menu_setup', 15 );
 
 // If direct access to certain menus is accessed
 // redirect to admin page
