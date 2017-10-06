@@ -1846,13 +1846,12 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
       'access_token', 'increase_rate_limit',
 			'definitions', 'request_email',
 			'per_page', 'repo_type',
-			'disabled_on', 'subject_line','email_body'
+			'disabled_on','email_body'
 		);
 
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
 					'repo_type' => array( 'all' ,'add_default_setting' ),
-					'subject_line' => array( 'Repository Access Request' ,'add_default_setting' ),
 		);
 
 
@@ -1982,14 +1981,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  ),
 				'toggle_slug'	=> 'body',
 			),
-      'subject_line' => array(
-			  'label'       => esc_html__( 'Subject', 'et_builder' ),
-			  'type'        => 'text',
-        'description' => esc_html__( 'Enter Subject Line for the Request Access Email.', 'et_builder' ),
-				'toggle_slug'	=> 'email',
-				'tab_slug'        => 'advanced',
-				'depends_show_if_not'	=> 'public',
-			),
       'email_body' => array(
 				'label'           => esc_html__( 'Body','et_builder'),
 				'type'            => 'textarea',
@@ -2085,8 +2076,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 		$request_email            = $this->shortcode_atts['request_email'];
 
-		$subject_line            = $this->shortcode_atts['subject_line'];
-
 		$email_body            = $this->shortcode_atts['email_body'];
 
 		$per_page            = $this->shortcode_atts['per_page'];
@@ -2142,11 +2131,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
         $repo_list = '';
-				$private_exists = false;
+        
 				foreach($repos as $r => $repo){
-          $private = ( $repo->private ? '<p>* This is a Private Repository</p>' : '');
-          $private_exists = (!$private_exists ? $repo->private : true );
-
+          
+     				$request_link = (!empty($request_email) && $repo->private ?
+              sprintf('<p>* This is a Private Repository <a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s">Request Access</a></p>',
+                       $request_email, sprintf('%1$s Repository Access Request', $repo->full_name ), $email_body) : '');
+          
+         
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<h3>%1$s</h3>', $repo->name);
@@ -2173,9 +2165,9 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
 											sprintf('<p>Language: %1$s</p>', $repo->language  ) : '');
 
-					$repo_list .= sprintf( '<li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s<hr></li>',
+					$repo_list .= sprintf( '<li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s<hr></li>',
 											(!empty($name) ? $name : ''), $desc , $fork, $created_at,
-                       $updated_at, $language, $private, (!empty($request_link) ? $request_link : '') );
+                       $updated_at, $language, (!empty($request_link) ? $request_link : '') );
 				}
         $output = sprintf( '<ul>%1$s</ul>', $repo_list );
 			}else{
@@ -2185,15 +2177,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		}
 
 
-     $request_link = (!empty($request_email) && $private_exists ?
-              sprintf('%1$s<a class="btn btn-default" href="mailto:%2$s?subject=%3$s&body=%4$s"
-												style="padding:2px;margin:15px 15px 0 0">Request Access to Private Repositories</a>',
-                      (!empty($title) ? '<br />': ''), $request_email, $subject_line, $email_body) : '');
 
 			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-                    (!empty($title) || !empty($request_link) ? sprintf('<h2>%1$s%2$s</h2>', $title, $request_link) : ''), $output );
+                    (!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output );
 
 
 		return $output;
