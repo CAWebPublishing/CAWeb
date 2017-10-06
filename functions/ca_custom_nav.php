@@ -147,20 +147,22 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$item_nav_image = '';
         if( !empty($item_meta['_caweb_menu_icon'][0]) ){
           $item_nav_image = sprintf('%1$s ', get_icon_span($item_meta['_caweb_menu_icon'][0],
-                                               array('font-size:25px', 'vertical-align:middle') )
-                                   );
+                                               array(), array('widget_nav_menu_icon') ) );
+          
         }elseif( !empty($item_meta['_caweb_menu_image'][0]) ){
           $item_nav_image = sprintf('<img class="widget_nav_menu_img" src="%1$s"/>',
                                     $item_meta['_caweb_menu_image'][0]);
         }
 
         $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s>
-																	<a class="widget_nav_menu_a" href="%5$s"%6$s%7$s>%8$s%9$s</a></li>',
+																	<a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''), 
+                    (!empty($item_nav_image) ? 'class="widget_nav_menu_a"' : ''),
                     $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''),
-                    (0 < $childCount ? ' class="toggle" ' : ''),$item_nav_image , sprintf('<span>%1$s</span>',$item->title) );
+                    (0 < $childCount ? ' class="toggle" ' : ''),$item_nav_image , 
+                      sprintf('<span class="widget_nav_menu_title">%1$s</span>',$item->title) );
       }
     }
 
