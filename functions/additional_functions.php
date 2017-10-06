@@ -338,7 +338,7 @@ function et_pb_ca_font_icon_symbols( $divi_symbols = array() ){
 	return $symbols;
 }
 
-function get_icon_span($font, $style = array()){
+function get_icon_span($font, $style = array(), $classes = array() ){
 	if( empty($font) )
 		return '';
 
@@ -347,15 +347,18 @@ function get_icon_span($font, $style = array()){
  
 	$tmp = get_ca_icon_list();
   $style = !empty($style) ? sprintf('style="%1$s" ',implode($style, ';')) : '';
+  $classes = implode($classes, ' ');
+  
+  
 	if( isset( $tmp[$font] ) )
-		return sprintf('<span class="ca-gov-icon-%1$s" %2$s></span>', $font, $style);
+		return sprintf('<span class="ca-gov-icon-%1$s %2$s" %3$s></span>', $font, $classes, $style);
 
   
 	if(  preg_match( "/^%%/", trim( $font ) ) ){
 			$font_index = preg_replace('/%%/','',$font);
 
-			return sprintf('<span class="ca-gov-icon-%1$s" %2$s></span>',
-								 get_ca_icon_list(-1,'',true)[$font_index], $style );
+			return sprintf('<span class="ca-gov-icon-%1$s %2$s" %3$s></span>',
+								 get_ca_icon_list(-1,'',true)[$font_index], $classes, $style );
 	}
   
   
