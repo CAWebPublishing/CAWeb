@@ -79,10 +79,10 @@
 
 				if( !icon_check){
 					input_box.value = attachment.attributes.url;
-
-					preview_field.src = attachment.attributes.url;
-
-					filename_box.value = filename;
+						if( null !== preview_field )
+            	preview_field.src = attachment.attributes.url;
+						if( null !== filename_box )
+              filename_box.value = filename;
 				}else{
 					jQuery.post(ajaxurl, data, function(response) {
 						if(1 == response){
