@@ -61,6 +61,7 @@ ul, ol{
 /* Wiget Menu Style */
 .widget_nav_menu li{
   border-top:1px solid #d7d7d7;
+  margin-bottom: 0 !important;
 }
 .widget_nav_menu li:first-child{
   border-top:none;
@@ -76,9 +77,16 @@ ul, ol{
 .widget_nav_menu .current-menu-item.active{
   border-left: 4px solid #0071bc;
 }
+
+.widget_nav_menu ul li p{
+  margin-bottom: 0px !important;
+}
 .widget_nav_menu_a .widget_nav_menu_title{
-	margin-left: 40px;
-  display: inline-block;  
+	padding-left: 40px;
+  display: table-cell;  
+  vertical-align: middle;
+  height: 50px;
+  margin-bottom: 0px;
 }
 .widget_nav_menu .widget_nav_menu_icon,
 .widget_nav_menu .widget_nav_menu_img{
@@ -87,7 +95,6 @@ ul, ol{
 }
 .widget_nav_menu .widget_nav_menu_icon{
   font-size: 35px; 
-  top: 35px;
 }
 .widget_nav_menu .widget_nav_menu_img {
   width: 50px;
