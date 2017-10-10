@@ -154,8 +154,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
                                     $item_meta['_caweb_menu_image'][0]);
         }
 
-        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s>
-																	%4$s<a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
+        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
 										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''), 
