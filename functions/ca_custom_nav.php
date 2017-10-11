@@ -59,7 +59,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
 			$homeLink = ( isset($args->home_link) && $args->home_link ? '<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
 
-			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) ?
+			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) && "" !== get_option('ca_google_search_id') ?
 									'<li class="nav-item"><a href="#" class="first-level-link"><span id="nav-item-search" class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
 
 			$nav_menu = sprintf('<nav id="navigation" class=" ca_wp_container main-navigation %1$s hidden-print">

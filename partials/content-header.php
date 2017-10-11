@@ -48,8 +48,9 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
 <?php
 $search = ( ca_version_check(5, get_the_ID()) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
-printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</div>',
-			$search, ("page-templates/searchpage.php" != get_page_template_slug(  get_the_ID()) ?
+printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s</div>',
+       $search, ("" == get_option('ca_google_search_id') ? 'hidden' : '' ),
+       ("page-templates/searchpage.php" !== get_page_template_slug( get_the_ID() ) ?
 								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp') ) : '') );
 
 ?>
