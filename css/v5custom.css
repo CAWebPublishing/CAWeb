@@ -10,6 +10,9 @@
 ul.utility-links.social-media-links{
  max-height: unset !important; 
 }
+.utility-header ul li {
+    padding: 3px 8px;
+}
 /*
 .utility-header .half{
 	overflow:	hidden;
