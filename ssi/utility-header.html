@@ -1,25 +1,25 @@
 <div class="utility-header ">
     <div class="container ca_wp_container">
             <div class="half">
+              <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
-                  <li> <a href="http://www.ca.gov/"  title="CA.gov" ><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a></li>
 					<?php if( get_option('ca_utility_home_icon', true) ): ?>
-                    	<li> <a href="/" title="Home" ><span class="ca-gov-icon-home"></span></a></li>
+                  <li> <a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only"></span></a></li>
 					<?php endif; ?>
                     <?php
 
-$social_share = get_ca_social_options();
-
-foreach($social_share as $opt){
-if(get_option($opt .'_header') && "" != get_option($opt) ){
-
-  $share = substr($opt, 10);
-  $share =  str_replace("_", "-", $share);
-
-
-printf('<li><a href="%1$s" class="ca-gov-icon-%2$s hidden-print" title="Share via %3$s"></a></li>', get_option($opt) ,  $share, ucwords($share));
-}
-}
+  $social_share = get_ca_social_options();
+  
+  foreach($social_share as $opt){
+    if(get_option($opt .'_header') && "" != get_option($opt) ){
+    
+      $share = substr($opt, 10);
+      $share =  str_replace("_", "-", $share);
+    
+    
+printf('<li><a href="%1$s" title="Share via %2$s"><span class="ca-gov-icon-%3$s hidden-print"></span><span class="sr-only">%2$s</span></a></li>', get_option($opt),  ucwords($share), $share);
+    }
+  }
 ?>
                 </ul>
             </div>
