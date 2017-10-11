@@ -33,14 +33,19 @@
        var extra_options = document.getElementsByClassName("extra");
        var base_options = document.getElementsByClassName("base");
        var base = '';
-    
-       for (var i = 0; i < extra_options.length; i++) {
-    
-    
+    		var front_search_option = $('#general table:first tr:nth-child(6)');
+      
+       for (var i = 0; i < extra_options.length; i++) {   
          if (version >= 5.0) {
            extra_options[i].classList.remove("hidden");
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.add("hidden");
+           }
+           
+           if( !$('#ca_google_search_id').val().trim() ){
+             front_search_option.addClass('hidden');
+           }else{
+             front_search_option.removeClass('hidden');             
            }
          } else {
            extra_options[i].classList.add("hidden");
@@ -62,7 +67,16 @@
       changeMade = true;
     });
    
-   
+$('#ca_google_search_id').on('input',function(e){ 
+  var front_search_option = $('#general table:first tr:nth-child(6)');
+  var site_version = $('#ca_site_version option:selected').val();
+  
+  if( !this.value.trim() ){
+    front_search_option.addClass('hidden');
+  }else if(5 <= site_version){
+    front_search_option.removeClass('hidden');
+  }
+});  
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
 $('input[type="button"]').click(function(e){changeMade = true; });
 
