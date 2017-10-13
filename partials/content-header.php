@@ -46,7 +46,7 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
 <!-- Version 4 top-right search box always displayed -->
 <!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
 <?php
-$search = ( ca_version_check(5, get_the_ID()) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
+$search = ( ca_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
 printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s</div>',
        $search, ("" == get_option('ca_google_search_id') ? 'hidden' : '' ),
@@ -58,7 +58,7 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
           <!-- Include Navigation -->
 					<?php
 							wp_nav_menu( array('theme_location' => 'header-menu',
-																'style' => (true == get_option('ca_menu_selector_enabled') ?
+																'style' => ( get_option('ca_menu_selector_enabled') ?
 																						get_post_meta(get_the_ID(), 'ca_default_navigation_menu',true) :
 																						get_option('ca_default_navigation_menu') ),
 																'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
@@ -70,7 +70,7 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 
         </div>
 
-<?php  if("on" == get_option('ca_google_trans_enabled') &&  (ca_version_check(4, get_the_ID()) ) ): ?>
+<?php  if( get_option('ca_google_trans_enabled') &&  (ca_version_check(4, get_the_ID()) ) ): ?>
 
 <div id="google_translate_element" class="hidden-print"></div>
 
