@@ -110,7 +110,7 @@ _gaq.push(['b._trackPageview']);
 
   })();
   /* Google Translate */
-if("on" == args.ca_google_trans_enabled){
+if( args.ca_google_trans_enabled){
   function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }

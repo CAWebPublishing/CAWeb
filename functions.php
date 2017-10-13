@@ -75,6 +75,16 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 
 	require_once(CAWebAbsPath. '/core/update.php');
 
+  // Updating the following CAWeb Checkbox Options, when enabled they saved
+  // as "on" this is being changed to true. 
+  $options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
+  $options = array_merge($options, get_ca_social_extra_options() );
+  foreach( $options as $option ){
+     $val = get_option($option);
+     if("on" == $val )
+       update_option($option, true);     
+   }
+  
 }
 
 add_action('after_setup_theme', 'ca_setup_theme');
@@ -98,12 +108,9 @@ function ca_init(){
 
 	// Register Menu Navigation Settings
 	register_nav_menus( get_ca_nav_menu_theme_locations() );
-
-
+  
 }
-
 add_action('init', 'ca_init');
-
 
 function get_caweb_icon_url($url = '', $size = 512,  $blog_id){
 	return sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri);
