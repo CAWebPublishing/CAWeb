@@ -13,11 +13,6 @@ function menu_setup(){
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
   
-  // Remove Divi Training and re-add it with Read capabilities so everyone can see the Training
-	remove_submenu_page( 'themes.php', 'divi_training');
-  if( is_plugin_active( 'wm-divi-training-xxx/wm-divi-training.php' ) )
-  	add_submenu_page( 'themes.php','Divi Training', 'Divi Training','read', 'divi_training', '' );
-  
   // If user is not a Network Admin
 	if( is_multisite() &&  ! current_user_can('manage_network_options')){
     // Remove Themes, Customize and Background option under Appearance menu
