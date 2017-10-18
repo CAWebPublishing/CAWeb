@@ -398,34 +398,19 @@ function caweb_customize_register( $wp_customize ) {
   															'priority'   => 30,
   															'panel' => 'caweb_options') );
   
-   $wp_customize->add_setting('caweb_custom_css', array(
+   $wp_customize->add_setting('ca_custom_css', array(
     														'type' => 'option',
   															'default' => get_option('ca_custom_css', '') ) );
     
-     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'caweb_custom_css', array(
+     $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_custom_css', array(
           'label'      => 'CSS',
           'type' => 'textarea',
           'section'    => 'caweb_custom_css',
-          'settings'   => 'caweb_custom_css'
+          'settings'   => 'ca_custom_css'
             ) ) );
     
-  	add_action('wp_footer', 'caweb_customizer_css');
-
-  
-  /* Navigation */
 	
 }
 add_action( 'customize_register', 'caweb_customize_register' );
 
-function caweb_customizer_css(){
-?>
-
-      <!--Customizer CSS--> 
-      <style type="text/css">
-           <?php echo get_option('caweb_custom_css'); ?> 
-           
-      </style> 
-      <!--/Customizer CSS-->
-      <?php  
-}  
 ?>
