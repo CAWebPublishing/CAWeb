@@ -338,17 +338,13 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
                   caweb_get_google_map_place_link( $address ) );
 
 
-				$output =sprintf('<div%1$s class="%2$s%3$s contact">
-			    %4$s  <div class="contact">
-				        <p class="address">%5$s</p>%6$s%7$s</div></div>',
+				$output =sprintf('<div%1$s class="%2$s%3$s contact">%4$s<div class="contact"><p class="address">%5$s</p>%6$s%7$s</div></div>',
 								( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 								esc_attr( $class ), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 								$display_icon, $address, $display_other, $display_button );
 
 		}elseif("mini" == 	$location_layout ){
-			$output = sprintf('<div%1$s class="%2$s%3$s mini">
-				%4$s<div class="contact"%8$s><div class="title"><a href="%5$s">%6$s</a></div>
-				%7$s</div></div>',
+			$output = sprintf('<div%1$s class="%2$s%3$s mini">%4$s<div class="contact"%8$s><div class="title"><a href="%5$s">%6$s</a></div>%7$s</div></div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 			("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name,
@@ -357,14 +353,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		}else{
 			$display_button = ("on" == $show_button && "" != $location_link ? sprintf('<a href="%1$s" class="btn">View More Details</a>',$location_link) : '' );
 
-			$output = sprintf('<div%1$s class="%2$s%3$s banner">
-						<div class="thumbnail"><img src="%4$s"></div>
-						<div class="contact">
-							<div class="title">%5$s</div>
-							<div class="address">%6$s</div>
-						</div>
-						<div class="summary">%7$s%8$s</div>
-					</div>',
+			$output = sprintf('<div%1$s class="%2$s%3$s banner"><div class="thumbnail"><img src="%4$s"></div><div class="contact"><div class="title">%5$s</div><div class="address">%6$s</div></div><div class="summary">%7$s%8$s</div></div>',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
       $featured_image, $name ,

@@ -454,13 +454,12 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
 		//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		$heading_color = ("" != $heading_color ?
-		sprintf(' style="color: %1$s" ', $heading_color) : '');
+		$heading_color = ( !empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
 
-		$text_color = ("" != $text_color ?
-		sprintf(' style="color: %1$s" ', $text_color) : '');
-
-		$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
+		$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
+		$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
+	
+    $icon = ("on" == $group_icon_button ? get_icon_span($group_icon, $icon_color) : '');
 
 		$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 
@@ -472,6 +471,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$group_links = '';
 
     for($i = 1; $i <= 10; $i++){
+      $tmp[] = $icon;
       $group_links .= ("on" == $group_link_show{$i} ?
         sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
         $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
@@ -901,13 +901,12 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-	$heading_color = ("" != $heading_color ?
-	sprintf(' style="color: %1$s" ', $heading_color) : '');
+	$heading_color = ( !empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
+  
+	$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
+	$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
 
-	$text_color = ("" != $text_color ?
-	sprintf(' style="color: %1$s" ', $text_color) : '');
-
-	$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
+	$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, $icon_color) : '');
 
 	$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 

@@ -290,7 +290,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$display_options = ($show_button == "on" ? sprintf('<div class="options" %2$s>
 		<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
 
-		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s %4$s%5$s</%1$s></div>',
+		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ("" != $heading_style ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
 		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
@@ -613,7 +613,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 						<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
 
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
-								$headingSize, ("" != $heading_style ? $heading_style : ''), $display_icon, $title, $display_options) : '');
+								$headingSize, ( !empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
 		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
 									%3$s
