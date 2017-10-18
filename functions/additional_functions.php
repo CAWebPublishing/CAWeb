@@ -346,6 +346,7 @@ function get_icon_span($font, $style = array(), $classes = array() ){
   $font = str_replace('"','%22', $font );
  
 	$tmp = get_ca_icon_list();
+  update_site_option('dev',$style);
   $style = !empty($style) ? sprintf('style="%1$s" ',implode($style, ';')) : '';
   $classes = implode($classes, ' ');
   
