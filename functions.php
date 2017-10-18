@@ -518,9 +518,11 @@ function caweb_initialize_divi_modules() {
 
 		include(CAWebAbsPath . "/builder/functions.php");
 		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
-		include(CAWebAbsPath . "/builder/special-modules.php");
-		include(CAWebAbsPath . "/builder/main-modules.php");
-		include(CAWebAbsPath . "/builder/main-fullwidth-modules.php");
+  
+  	$modules = glob( CAWebAbsPath . '/builder/modules/*.php' );
+  	foreach ( $modules as $module_file ) {
+      require_once( $module_file );
+    }
 		include(CAWebAbsPath . "/builder/layouts.php");
 
 }

@@ -11,47 +11,19 @@ ul.utility-links.social-media-links{
  max-height: unset !important; 
 }
 .utility-header ul li {
+    cursor: pointer;
+}
+.utility-header ul li {
     padding: 3px 8px;
 }
-/*
-.utility-header .half{
-	overflow:	hidden;
-
+.utility-geo-locator .ca-gov-icon-compass{
+ margin-right: 5px; 
+}
+.utility-geo-locator .located-city-name{
+  margin-left: 0;
 }
 
-.utility-header ul{
-	margin-left: 0;
-}
-
-.utility-header ul li{
-  cursor: pointer;
-}
-.utility-header, .utility-header .half {
-  	padding: 2px 0;
-
-}
- .utility-header .half:first-child{
-      width: 25%;
-  }
-.utility-header .settings-links {
-  width: 75%;
-
-}
-ul.utility-links.social-media-links {
-    max-height: 37px;
-}
-
-.utility-header .located-city-name {
-  	margin-left: 0;
-}
-
-.utility-header .ca_wp_container{
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-}
-End of Utility Header */
+/* End of Utility Header */
 
 @media (min-width: 768px){
   .utility-links{
