@@ -65,7 +65,7 @@ ul, ol{
 }
 .widget_nav_menu li:first-child{
   border-top:none;
-}  
+}
 .widget_nav_menu li a{
   display: block;
   padding: 0.85rem 1rem 0.85rem 1.8rem;
@@ -73,7 +73,7 @@ ul, ol{
 .widget_nav_menu .current-menu-item.active a{
   color: #046B99;
   font-weight: 700;
-}     
+}
 .widget_nav_menu .current-menu-item.active{
   border-left: 4px solid #0071bc;
 }
@@ -82,8 +82,8 @@ ul, ol{
   margin-bottom: 0px !important;
 }
 .widget_nav_menu_a .widget_nav_menu_title{
-	padding-left: 40px;
-  display: table-cell;  
+	padding-left: 45px;
+  display: table-cell;
   vertical-align: middle;
   height: 50px;
   margin-bottom: 0px;
@@ -91,17 +91,16 @@ ul, ol{
 .widget_nav_menu .widget_nav_menu_icon,
 .widget_nav_menu .widget_nav_menu_img{
   position: absolute;
-  left: .5em;
 }
 .widget_nav_menu .widget_nav_menu_icon{
-  font-size: 35px; 
+  font-size: 35px;
 }
 .widget_nav_menu .widget_nav_menu_img {
   width: 50px;
   height: 35px;
 }
 
-         
+
 
 /* Divi Specific Overrides */
 #page-container{
