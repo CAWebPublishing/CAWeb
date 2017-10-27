@@ -257,8 +257,8 @@ function caweb_customize_register( $wp_customize ) {
   
   $wp_customize->add_setting('header_ca_branding', array(
     														'type' => 'option',
-  															'default' => get_option('header_ca_branding', ''),
-  															'transport' => 'postMessage') );
+  															'default' => get_option('header_ca_branding', '')
+  																) );
   
   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_ca_branding', array(
 	'label'      => 'Organization Logo-Brand',
@@ -400,7 +400,7 @@ function caweb_customize_register( $wp_customize ) {
   
    $wp_customize->add_setting('ca_custom_css', array(
     														'type' => 'option',
-  															'default' => get_option('ca_custom_css', '') ) );
+  															'default' => get_option('ca_custom_css') ) );
     
      $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_custom_css', array(
           'label'      => 'CSS',
@@ -408,9 +408,16 @@ function caweb_customize_register( $wp_customize ) {
           'section'    => 'caweb_custom_css',
           'settings'   => 'ca_custom_css'
             ) ) );
+  
+  add_filter( 'sanitize_option_ca_custom_css', 'caweb_sanitize_option_ca_custom_css', 10, 2 );
     
-	
+
 }
 add_action( 'customize_register', 'caweb_customize_register' );
+
+function caweb_sanitize_option_ca_custom_css($value, $option){
+  
+  return addslashes($value);
+}
 
 ?>
