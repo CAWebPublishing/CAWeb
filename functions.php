@@ -512,19 +512,24 @@ function wp_ca_body_class( $wp_classes, $extra_classes ) {
 add_filter( 'body_class', 'wp_ca_body_class', 12, 2 );
 
 /*	CAWeb Custom Modules */
-add_action( 'et_builder_ready', 'caweb_initialize_divi_modules' );
+add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
 function caweb_initialize_divi_modules() {
-	if ( ! class_exists( 'ET_Builder_Module' ) ) { return; }
 
 		include(CAWebAbsPath . "/builder/functions.php");
-		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
+	  include(CAWebAbsPath . "/builder/layouts.php");
   
+	if (  class_exists( 'ET_Builder_Module' ) ) { 
+		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
   	$modules = glob( CAWebAbsPath . '/builder/modules/*.php' );
   	foreach ( $modules as $module_file ) {
       require_once( $module_file );
     }
-		include(CAWebAbsPath . "/builder/layouts.php");
-
+	}
+		if ( class_exists( 'ET_Builder_Module_Settings_Migration' ) ) { 
+  
+      include(CAWebAbsPath . "/builder/modules/settings/Migration.php");      
+      ET_Builder_CAWeb_Module_Settings_Migration::init();
+	}
 }
 
 
