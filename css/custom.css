@@ -3,10 +3,6 @@
   display: none !important;
 }
 
-/* ID Anchors do not jump to the correct location when the sticky navigation is compacted */
-header.fixed.compact + #page-container{
-	transition: padding-top 500ms;
-}
 .mobile-controls{
 	cursor: auto;
 }
@@ -57,8 +53,13 @@ ul, ol{
 #wpadminbar {
        position: fixed;
  }
+/* Non Divi Widget Style */
+#non_divi_sidebar #sidebar{
+	float: right !important;
+  padding: 28px 20px 28px 0px !important;
+}
 
-/* Wiget Menu Style */
+/* Widget Menu Style */
 .widget_nav_menu li{
   border-top:1px solid #d7d7d7;
   margin-bottom: 0 !important;
