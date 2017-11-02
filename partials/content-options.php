@@ -126,6 +126,12 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" <?= ( get_option('ca_default_post_title_display', false) ? 'checked="checked"' : '' ) ?> />
   </td></tr>
+   <tr >
+		<th scope="row"><div class="tooltip">Display Date for Non-Divi Posts
+		<span class="tooltiptext"> If checked all non-Divi Posts will display the Posts Published Date.</span></div>
+		</th>
+  <td><input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" <?= ( get_option('ca_default_post_date_display', false) ? 'checked="checked"' : '' ) ?> />
+  </td></tr>
 </table>
 <div class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
   <h1 class="option">Utility Header</h1>

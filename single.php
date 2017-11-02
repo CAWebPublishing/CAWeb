@@ -38,13 +38,15 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
  <!-- Page Title-->
 
 
-<?php if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) : ?>
+<?php 
+if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) 
+     echo  the_title('<h1 class="page-title et_pb_row" >', '</h1>'); 
 
 
-<h1 class="page-title et_pb_row" ><?php echo $post->post_title; ?></h1>
+if ( get_option('ca_default_post_date_display') && ! $is_page_builder_used ) 
+   printf('<div class="page-title et_pb_row published">Published: <time datetime="%1$s">%1$s</time></div>', get_the_date('M d, Y') );
 
-
-<?php endif; ?>
+?>
 
 
 					<?php
