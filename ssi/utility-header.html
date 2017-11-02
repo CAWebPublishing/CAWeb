@@ -16,7 +16,8 @@ if(get_option($opt .'_header') && "" !== get_option($opt) ){
       $share =  str_replace("_", "-", $share);
     
 
-printf('<li class="utility-social-%3$s"><a href="%1$s" title="Share via %2$s"><span class="ca-gov-icon-%3$s hidden-print"></span><span class="sr-only">%2$s</span></a></li>', get_option($opt),  ucwords($share), $share);
+printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>', 
+$share, get_option($opt),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
     }
   }
 ?>

@@ -390,7 +390,21 @@ function caweb_customize_register( $wp_customize ) {
         'settings'   => sprintf('%1$s_footer',  $option)
           ) ) );
 
-  }
+    if( 'ca_social_email' !== $option){
+    $wp_customize->add_setting(sprintf('%1$s_new_window',  $option), array(
+    														'type' => 'option',
+  															'default' => get_option(sprintf('%1$s_new_window',  $option)),
+    														'sanitize_callback' => 'caweb_sanitize_customizer_checkbox' ) );
+    
+       $wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('%1$s_new_window',  $option), array(
+        'label'      => 'Open in New Tab',
+        'type' => 'checkbox',
+        'section'    => 'caweb_social_media',
+        'settings'   => sprintf('%1$s_new_window',  $option)
+          ) ) );
+    
+  	}
+}
   
   // Custom CSS
   $wp_customize->add_section('caweb_custom_css', array(
