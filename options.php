@@ -181,6 +181,8 @@ function get_ca_social_extra_options(){
 	foreach($hold as $social){
 		$tmp[] = $social . '_header';
 		$tmp[] = $social . '_footer';
+    if( 'ca_social_email' !== $social )      
+			$tmp[] = $social . '_new_window';
 	}
 	return $tmp;
 }

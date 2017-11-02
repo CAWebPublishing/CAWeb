@@ -295,11 +295,16 @@ if( isset($_POST['caweb_options_submit']) ){
 			foreach($social_options as $social => $option ){
         printf('<tr><th>%1$s</th><td><input type="text" name="%2$s" id="%2$s" size="60" value="%3$s" /></td></tr>
 								<tr><td></td><td><label class="extra alignleft%4$s">Show in header: <input type="checkbox" name="%2$s_header" id="%2$s_header"%5$s /></label>
-													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label></td></tr>',
+													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label>%7$s</td></tr>',
                		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'),
                	get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '' ,
-              	get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '' ) ;
+              	get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '',
+               ('ca_social_email' !== $option ? 
+                sprintf('<label class="alignleft">Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>',$option,
+                      get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '' ) : '')  ) ;
 
+        
+        
       }
 ?>
 
