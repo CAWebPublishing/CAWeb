@@ -9,7 +9,7 @@
 .mobile-controls span {
     cursor: pointer;
 }
-.page-title.et_pb_row{
+.page-title{
   padding-bottom: 0;
 }
 
@@ -54,9 +54,12 @@ ul, ol{
        position: fixed;
  }
 /* Non Divi Widget Style */
+#non_divi_sidebar{
+  padding-right: 0;
+}
 #non_divi_sidebar #sidebar{
-	float: right !important;
-  padding: 28px 20px 28px 0px !important;
+  width: 100%;
+  padding: 28px 0px ;
 }
 
 /* Widget Menu Style */
