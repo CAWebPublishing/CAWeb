@@ -463,8 +463,9 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 	// Insert the array, JSON ENCODED, into 'style_formats'
 
 	$init_array['style_formats'] = json_encode( $style_formats );
-
-
+  
+  // TinyMCE Toolbar Start off unhidden
+	$init_array['wordpress_adv_hidden'] = false;
 
 	return $init_array;
 
