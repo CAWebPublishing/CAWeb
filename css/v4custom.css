@@ -284,13 +284,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   padding: 20px;
 }
 
-
-/* Fullwidth Section carousel Version 4 */
-
-
-/* from cagov.core.css */
-
-
 /* This make the agency logo responsive - this is commented out in cagov.v4core.css at line 3993 */
 @media (max-width: 480px){
   .header-organization-banner img {
@@ -679,9 +672,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 .owl-nav .owl-next {
   margin: -1em 0 0;
 }
-
-
-
 .et_pb_ca_fullwidth_section_carousel .image-fit .content-container{
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);
@@ -697,14 +687,16 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   padding-bottom: 50px;
 }
 
-.main-primary, .main-content{
+.main-content{
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
 .et_pb_row{
-  width: 90%;
-  max-width: 1170px;
+  max-width: unset;
+  width: 100%;
+  margin: 0;
+  padding-bottom:0 !important;
 }
 
 /*  Services Tiles */

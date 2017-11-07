@@ -495,22 +495,29 @@ function caweb_turn_off_divi_related_videos(){
 add_action('wp_head','caweb_turn_off_divi_related_videos');
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
-    	// List of the classes that need to be removed
-   	 $blacklist= array('et_secondary_nav_dropdown_animation_fade',
-				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav');
+  global $post;
+  
+  // List of the classes that need to be removed
+  $blacklist= array('et_secondary_nav_dropdown_animation_fade',
+				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
 
 	// List of extra classes that need to be added to the body
-	$whitelist = array( ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '') ,  );
-
+  if( isset($post->ID) ){
+  	$whitelist = array( (  ! et_pb_is_pagebuilder_used( $post->ID ) ? 'non_divi_builder' : 'divi_builder'),
+                     ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed' ),
+                      sprintf('v%1$s', ca_get_version($post->ID) ) );
+  }
+  $whitelist[] = ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
+   
    	// Remove any classes in the blacklist from the wp_classes
-	$wp_classes = array_diff( $wp_classes, $blacklist);
-
+  $wp_classes = array_diff( $wp_classes, $blacklist);
+  
 	// Return filtered wp class
 	return  array_merge($wp_classes, (array) $whitelist);
 
 }
 
-add_filter( 'body_class', 'wp_ca_body_class', 12, 2 );
+add_filter( 'body_class', 'wp_ca_body_class', 20, 2 );
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
