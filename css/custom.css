@@ -12,6 +12,31 @@
 .page-title{
   padding-bottom: 0;
 }
+.non_divi_builder.title_not_displayed .main-primary{
+ padding-top: 25px; 
+}
+.non_divi_builder .main-primary{
+ padding-bottom: 25px; 
+}
+.page-title.with_date,
+.divi_builder .page-title{
+  margin-bottom: auto;
+}
+.single.non_divi_builder .main-content .main-primary{
+  	width: 75%;
+  	float: left;
+}
+.single .post {
+    padding-bottom: 0; 
+}
+@media(max-width: 768px){
+  .single.non_divi_builder .main-content .main-primary{
+    width: 100% !important;
+  }
+  #non_divi_sidebar{
+   width: 75% !important; 
+  }
+}
 
 /* Makes TablePress Tables Responsive */
 .dataTables_wrapper {
@@ -20,6 +45,7 @@
 
 #main-content {
     background-color: #fff !important;
+  	overflow: hidden;
 }
 #main-content .ca_wp_container{
   	padding-top: 0;
@@ -55,11 +81,12 @@ ul, ol{
  }
 /* Non Divi Widget Style */
 #non_divi_sidebar{
-  padding-right: 0;
+  	float: left;
+    width: 25%;
 }
 #non_divi_sidebar #sidebar{
-  width: 100%;
   padding: 28px 0px ;
+  width: 100%;
 }
 
 /* Widget Menu Style */
@@ -114,12 +141,6 @@ ul, ol{
 .et_section_regular{
   padding: 0 !important;
 }
-
-/*.et_pb_row{
-  	width: auto;
-    max-width: 100%;
-  	margin: 0;
-}*/
 
 /* Media Styles */
 @media (min-width: 768px){
