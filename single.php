@@ -7,7 +7,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 <body <?php body_class('primary'); ?>>
 <?php get_template_part('partials/content', 'header') ?>
   
-  
+<div id="page-container">
+<div id="et-main-area">
+
 <div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
   <main class="main-primary" >
 
@@ -61,6 +63,8 @@ if( ! $is_page_builder_used ){
  ?>
     
 </div> <!-- #main-content -->
+</div>
+</div>
 
 <?php get_footer(); ?>
 
