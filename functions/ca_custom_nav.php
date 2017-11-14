@@ -342,8 +342,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$share = substr($opt, 10);
 				$share =  str_replace("_", "-", $share);
 
-				$socialLinks .= sprintf('<li><a href="%1$s">%2$s<span class="sr-only">%3$s</span></a></li>',
-														get_option($opt), get_icon_span($share), $share) ;
+				$socialLinks .= sprintf('<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>',
+														get_option($opt), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), get_icon_span($share), $share) ;
 			}
 		}
     $socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',

@@ -302,12 +302,14 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 	}
 
   	// This is a non-standard function. It outputs JS code to change items amount for carousel-media.
-		function carousel_fix() {
+		function carousel_fix() {      
+      $carousels = ( !is_404() ? json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) : array() );
+      
 			?>
 			<script>
         $ = jQuery.noConflict();
 
-       var media_carousels = <?php print_r( json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) ); ?>;
+       var media_carousels = <?php print_r( $carousels ); ?>;
 
         media_carousels.forEach(function(element, index) {
           $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
@@ -811,11 +813,13 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 
   	// This is a non-standard function. It outputs JS code to change items amount for carousel-media.
 		function carousel_fix() {
+      $carousels = ( !is_404() ? json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) : array() );
+   
 			?>
 			<script>
         $ = jQuery.noConflict();
 
-       var media_carousels = <?php print_r( json_encode( caweb_get_shortcode_from_content(get_the_content(), $this->slug, true ) ) ); ?>;
+       var media_carousels = <?php print_r( $carousels ); ?>;
 
         media_carousels.forEach(function(element, index) {
           $('.<?php echo $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
