@@ -94,7 +94,6 @@ function api_menu_option_setup(){
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
   if( isset($_POST['caweb_api_options_submit']) ){
-    update_site_option('dev', $_POST);
   	save_caweb_api_options($_POST);
   }
   ?>
