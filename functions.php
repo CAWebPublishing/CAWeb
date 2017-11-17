@@ -185,7 +185,8 @@ function ca_theme_enqueue_style() {
                                                   'ca_site_version' => ca_get_version(),
                                                   'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
                                                    'ca_google_search_id' => get_option('ca_google_search_id'),
-                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled')) );
+                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled'),
+                                                   'caweb_multi_ga' => get_site_option('caweb_multi_ga') ) );
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );

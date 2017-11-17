@@ -9,6 +9,11 @@ _gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not re
 _gaq.push(['b._setDomainName', '.ca.gov']);
 _gaq.push(['b._trackPageview']);
 
+if("" !== args.caweb_multi_ga){
+  _gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
+  _gaq.push(['b._setDomainName', '.ca.gov']);
+  _gaq.push(['b._trackPageview']);
+}
 (function() {
   var ga = document.createElement('script');
   ga.type = 'text/javascript';
