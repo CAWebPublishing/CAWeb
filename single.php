@@ -53,9 +53,9 @@ if ( ! $is_page_builder_used )
 
 </main>
    <?php
-if( ! $is_page_builder_used ){
+if( ! $is_page_builder_used && is_active_sidebar('sidebar-1') ){
    print '<aside id="non_divi_sidebar" class="col-lg-3">';
-		print get_sidebar() ;
+		print get_sidebar('sidebar-1') ;
     print '</aside>';
 }
  ?>

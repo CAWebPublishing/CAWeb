@@ -22,7 +22,7 @@
 .divi_builder .page-title{
   margin-bottom: auto;
 }
-.single.non_divi_builder .main-content .main-primary{
+.single.non_divi_builder.sidebar_displayed .main-content .main-primary{
   	width: 75%;
   	float: left;
 }
