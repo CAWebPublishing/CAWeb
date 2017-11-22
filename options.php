@@ -35,6 +35,7 @@ function menu_setup(){
 
   if(!is_multisite() || current_user_can('manage_network_options') ){
     	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+    	add_submenu_page( 'ca_options','CAWeb Options', 'Multisite GA','manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
   }
 
 }
@@ -64,17 +65,13 @@ function menu_option_setup(){
 
 
 function save_caweb_options($values = array()){
-  $site_options =  get_all_ca_site_options() ;
-
+  $site_options =  array_diff( get_all_ca_site_options() ,get_special_ca_site_options() ) ;
+	$values = array_diff( $values , array('tab_selected' => '', 'caweb_options_submit' => '') );
+  
   foreach($site_options as $opt){
    	if( !array_key_exists($opt, $values) )
       $values[$opt] = '';
   }
-
-  unset($values['tab_selected']);
-  unset($values['caweb_options_submit']);
-  unset($values['caweb_username']);
-  unset($values['caweb_password']);
 
   foreach($values as $opt => $val){
     	if("on" == $val)
@@ -94,7 +91,6 @@ function api_menu_option_setup(){
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
   if( isset($_POST['caweb_api_options_submit']) ){
-    update_site_option('dev', $_POST);
   	save_caweb_api_options($_POST);
   }
   ?>
@@ -114,7 +110,7 @@ function api_menu_option_setup(){
 
 <?php
 }
-
+// Save API Values
 function save_caweb_api_options($values = array()){
   update_option('caweb_username', $values['caweb_username']);
   update_option('caweb_password', $values['caweb_password']);
@@ -136,6 +132,42 @@ function update_caweb_owner_encoded_info( $value, $old_value, $option ){
 }
 add_action('pre_update_option_caweb_password', 'update_caweb_owner_encoded_info', 10, 3);
 
+
+// Setup CAWeb API Menu
+function caweb_multi_ga_menu_option_setup(){
+
+?>
+<style>table tr td:first-of-type {width: 100px;}</style>
+
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_multi_ga'); ?>" method="POST">
+  <?php
+  if( isset($_POST['caweb_multi_ga_options_submit']) ){
+    save_caweb_multi_ga_options($_POST);
+  }
+  ?>
+<div class="wrap">
+  <h1>Multisite Google Analytics</h1>
+  <table class="form-table">
+    <tr><td>
+        <div class="tooltip">Analytics ID<span class="tooltiptext"></span></div></td>
+      		<td><input type="text" name="caweb_multi_ga" size="50" value="<?php echo get_site_option('caweb_multi_ga', ''); ?>" /></td></tr>
+  </table>  
+  </div>
+  <input type="submit" name="caweb_multi_ga_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+ </form>
+
+<?php
+}
+// Save Multisite GA Values
+function save_caweb_multi_ga_options($values = array()){
+  update_option('caweb_multi_ga', $values['caweb_multi_ga']);
+  
+  update_site_option('caweb_multi_ga', $values['caweb_multi_ga']);
+
+  print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+
+}
+
 function update_ca_custom_css( $value, $old_value, $option ){  
 	return stripcslashes($value) ;
 }
@@ -154,7 +186,7 @@ function get_all_ca_site_options($with_values = false){
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
 
-	return array('caweb_username', 'caweb_password','ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
+	return array('caweb_username', 'caweb_password', 'caweb_multi_ga', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
 				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
 				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
 				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
@@ -162,6 +194,11 @@ function get_ca_site_options(){
 				'ca_utility_link_2', 'ca_utility_link_3', 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name', 'ca_default_post_date_display');
 }
 
+// Returns and array of CA MultiSite Options 
+function get_special_ca_site_options(){
+   return array('caweb_username', 'caweb_password', 'caweb_multi_ga');                  
+}
+                   
 // Returns and array of all CA Social Options
 function get_ca_social_options(){
 
