@@ -39,8 +39,10 @@ if("" !== args.caweb_multi_ga){
 			var $body = $("body");
 
       if( 4 == args.ca_site_version )
-				$searchText.attr("placeholder", "Search");
+			$searchText.attr("placeholder", "Search");
 			
+			// search icon is added before search button (search button is set to opacity 0 in css)
+			$("input.gsc-search-button").before("<span class='ca-gov-icon-search search-icon' aria-hidden='true'></span>");
       
 			 $searchText.on("click", function() {
 					addSearchResults();
@@ -54,8 +56,6 @@ if("" !== args.caweb_multi_ga){
 
 				// Close search when close icon is clicked
 				$('div.gsc-clear-button').on('click', function() {	removeSearchResults();   });
-
-      //	$('.gsc-search-button').innerHTML
             
 			$('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents('.nav-item').on('click', function(e) {
 					$searchText.focus().trigger('focus')
