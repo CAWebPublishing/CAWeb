@@ -84,7 +84,13 @@ if( isset($_POST['caweb_options_submit']) ){
 			<span class="tooltiptext">Apply a site wide color scheme.</span></div></th>
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
-				<option value="oceanside"
+      <option value="eureka" class="extra"
+			<?= ( get_option('ca_site_color_scheme') == 'eureka' ? 'selected="selected"' : '' ) ?>>Eureka</option>
+
+		<option value="mono" class="extra"
+			<?= ( get_option('ca_site_color_scheme') == 'mono' ? 'selected="selected"' : '' ) ?>>Mono</option>
+        
+		<option value="oceanside"
 				<?= ( get_option('ca_site_color_scheme') == 'oceanside' ? 'selected="selected"' : '' ) ?>>Oceanside</option>
 
 			<option value="orangecounty"
@@ -99,7 +105,11 @@ if( isset($_POST['caweb_options_submit']) ){
 		<option value="sierra"
 			<?= ( get_option('ca_site_color_scheme') == 'sierra' ? 'selected="selected"' : '' ) ?>>Sierra</option>
 
-			</select>
+    <option value="trinity" class="extra"
+			<?= ( get_option('ca_site_color_scheme') == 'trinity' ? 'selected="selected"' : '' ) ?>>Trinity</option>
+
+    
+      </select>
 		</td>
 	</tr>
   <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
