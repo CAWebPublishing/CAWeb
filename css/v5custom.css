@@ -1,3 +1,6 @@
+body{
+ background-color: #fff; 
+}
 .et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
 	width: 80%;
 }
