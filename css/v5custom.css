@@ -202,6 +202,7 @@ input.gsc-input {
   max-height: 80px;
   width: 100%;
   position: unset;
+  height: unset;
 }
 @media (min-width: 768px){
   .top-level-nav .nav-item {
