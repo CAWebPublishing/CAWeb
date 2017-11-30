@@ -33,6 +33,7 @@
 }
 .archive .main-content article{
  display: inline-block; 
+  width: 100%;
 }
 @media(max-width: 768px){
   .single.non_divi_builder .main-content .main-primary,
