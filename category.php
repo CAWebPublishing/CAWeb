@@ -1,55 +1,97 @@
 <?php
+		get_header();
 
-get_header();
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
-
+		$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 ?>
-<body <?php body_class('primary'); ?>>
+<body <?php body_class('primary') ?>  >
 <?php get_template_part('partials/content', 'header') ?>
+
 
 <div id="page-container">
 <div id="et-main-area">
-
 <div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
-<main class="main-primary">
+	<?php
+		global $wp_query;
+	 ?>
 
-			<?php while ( have_posts() ) : the_post(); ?>
+	<main class="main-primary" >
 
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php
+			if ( have_posts() ) :
+				while ( have_posts() ) : the_post();
+					$post_format = et_pb_post_format(); ?>
 
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 
+				<?php
+					$thumb = '';
+
+					$width = (int) apply_filters( 'et_pb_index_blog_image_width', 1080 );
+
+					$height = (int) apply_filters( 'et_pb_index_blog_image_height', 675 );
+					$classtext = 'et_pb_post_main_image';
+					$titletext = get_the_title();
+					$thumbnail = get_thumbnail( $width, $height, $classtext, $titletext, $titletext, false, 'Blogimage' );
+					$thumb = $thumbnail["thumb"];
+
+					et_divi_post_format_content();
+
+					if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) {
+						if ( 'video' === $post_format && false !== ( $first_video = et_get_first_video() ) ) :
+							printf(
+								'<div class="et_main_video_container">
+									%1$s
+								</div>',
+								$first_video
+							);
+						elseif ( ! in_array( $post_format, array( 'gallery' ) ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb ) : ?>
+							<a href="<?php the_permalink(); ?>">
+								<?php print_thumbnail( $thumb, $thumbnail["use_timthumb"], $titletext, $width, $height ); ?>
+							</a>
+					<?php
+						elseif ( 'gallery' === $post_format ) :
+							et_pb_gallery_images();
+						endif;
+					} ?>
+
+				<?php if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) : ?>
+					<?php if ( ! in_array( $post_format, array( 'link', 'audio' ) ) ) : ?>
+						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+					<?php endif; ?>
 
 					<?php
-					if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) )
-							print the_title(sprintf('<!-- Page Title--><h1 class="page-title %1$s" >', ( $is_page_builder_used ? 'ca_wp_container' : '' ) ), '</h1>');
+						et_divi_post_meta();
 
-							print '<div class="entry-content">';
+						if ( 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
+							truncate_post( 270 );
+						} else {
+							the_content();
+						}
+					?>
+				<?php endif; ?>
 
-						the_content();
+					</article> <!-- .et_pb_post -->
+			<?php
+					endwhile;
 
-						if ( ! $is_page_builder_used )
-							wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
-
-
-							print '</div>';
-
-
-
-					if ( ! $is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) comments_template( '', true );
-
-				?>
-
-				</article> <!-- .et_pb_post -->
-
-			<?php endwhile; ?>
-					<span class="return-top hidden-print"></span>
-</main>
-
+					if ( function_exists( 'wp_pagenavi' ) )
+						wp_pagenavi();
+					else
+						get_template_part( 'includes/navigation', 'index' );
+				else :
+					get_template_part( 'includes/no-results', 'index' );
+				endif;
+			?>
+  </main>
+  <?php
+if( ! $is_page_builder_used && is_active_sidebar('sidebar-1') ){
+   print '<aside id="non_divi_sidebar" class="col-lg-3">';
+		print get_sidebar('sidebar-1') ;
+    print '</aside>';
+}
+ ?>
 </div> <!-- #main-content -->
 </div>
 </div>
 <?php get_footer(); ?>
-
-
 </body>
