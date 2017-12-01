@@ -8,6 +8,10 @@ body{
 .nav-arrow-down{
   	visibility: hidden;
 }
+input.gsc-input {
+    background-image: unset !important;
+  	content: "Search";
+}
 
 /* Utility Header */
 .utility-header .half{
