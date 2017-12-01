@@ -10,7 +10,6 @@ body{
 }
 input.gsc-input {
     background-image: unset !important;
-  	content: "Search";
 }
 
 /* Utility Header */
