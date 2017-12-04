@@ -131,7 +131,9 @@ ul, ol{
   height: 35px;
 }
 
-
+#comment-wrap .comment-body:before{
+	margin: unset;
+}
 
 /* Divi Specific Overrides */
 #page-container{
