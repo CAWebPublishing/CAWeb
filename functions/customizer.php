@@ -14,7 +14,8 @@ add_action( 'customize_preview_init', 'caweb_customize_preview_init');
 
 function caweb_customize_controls_enqueue_scripts(){
    wp_register_script('caweb-customize-controls-script',	CAWebUri . '/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
-  
+  wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( true ), 'all' => caweb_color_schemes() ) );
+
 	wp_enqueue_script( 'caweb-customize-controls-script' );
 }
 add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
@@ -89,8 +90,7 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_site_color_scheme', array(
 	'label'      => 'Color Scheme',
   'type' => 'select',
-   'choices' => array('eureka' => 'Eureka','mono' => 'Mono', 'oceanside'=> 'Oceanside', 'orangecounty'=> 'Orange County', 'pasorobles' => 'Paso Robles',
-                     	'santabarbara'=> 'Santa Barbara', 'sierra' => 'Sierra', 'trinity' => 'Trinity'),
+   'choices' => caweb_color_schemes(),
 	'section'    => 'caweb_settings',
 	'settings'   => 'ca_site_color_scheme'
 		) ) );
