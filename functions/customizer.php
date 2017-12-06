@@ -14,7 +14,8 @@ add_action( 'customize_preview_init', 'caweb_customize_preview_init');
 
 function caweb_customize_controls_enqueue_scripts(){
    wp_register_script('caweb-customize-controls-script',	CAWebUri . '/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
-  
+  wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( true ), 'all' => caweb_color_schemes() ) );
+
 	wp_enqueue_script( 'caweb-customize-controls-script' );
 }
 add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
