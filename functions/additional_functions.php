@@ -8,6 +8,8 @@
 	$version = Specific Page Template Version  returns true/false
 
 */
+
+
 function ca_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version', 5) ? true : false);
 
@@ -40,6 +42,27 @@ function get_ca_nav_menu_theme_locations(){
 		'header-menu' => 'Header Menu',
 		'footer-menu' => 'Footer Menu',
 				);
+}
+
+// Returns array of Theme Color Schemes
+function caweb_color_schemes( $original_only = false ){
+  $original_schemes = array("oceanside" => "Oceanside", 
+                            "orangecounty"  => "Orange County", 
+                            "pasorobles"  => "Paso Robles", 
+                            "santabarbara"  => "Santa Barbara", 
+                            "sierra"  => "Sierra");
+  
+  $schemes = array_merge( array("eureka" => "Eureka", 
+                   "mono" => "Mono", 
+                   "trinity" => "Trinity") ,
+                    $original_schemes);
+  
+  ksort( $schemes );
+  
+  if( $original_only )
+  	return $original_schemes;
+  
+  return $schemes ;
 }
 
 if( !function_exists('is_valid_date') ){
