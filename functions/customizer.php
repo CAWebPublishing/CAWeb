@@ -44,6 +44,7 @@ function caweb_customize_register( $wp_customize ) {
 
   $wp_customize->remove_section('et_color_schemes');
   $wp_customize->remove_section('themes');
+  $wp_customize->remove_panel('themes');
   $wp_customize->remove_section('custom_css');
  
    //All our sections, settings, and controls will be added here
