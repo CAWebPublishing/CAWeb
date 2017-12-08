@@ -230,6 +230,7 @@ ul.utility-links.social-media-links{
   .mobile-controls{
     	background: #fff;
       padding-right: 70px;
+      display: inline-block;
   }
   .mobile-controls .toggle-menu, .mobile-controls .toggle-search{
     color: #046B99;
