@@ -1,5 +1,5 @@
 body{
- background-color: #fff; 
+ background-color: #fff;
 }
 .et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
 	width: 80%;
@@ -14,10 +14,10 @@ input.gsc-input {
 
 /* Utility Header */
 .utility-header .half{
- padding-left: 15px !important; 
+ padding-left: 15px !important;
 }
 ul.utility-links.social-media-links{
- max-height: unset !important; 
+ max-height: unset !important;
 }
 .utility-header ul li {
     cursor: pointer;
@@ -26,7 +26,7 @@ ul.utility-links.social-media-links{
     padding: 3px 8px;
 }
 .utility-geo-locator .ca-gov-icon-compass{
- margin-right: 5px; 
+ margin-right: 5px;
 }
 .utility-geo-locator .located-city-name{
   margin-left: 0;
@@ -47,7 +47,7 @@ ul.utility-links.social-media-links{
 }
 #nav_list{
     width: auto;
-	 float: right; 
+	 float: right;
     margin-right: -8px;
   	padding-left: 25%;
 }
@@ -160,7 +160,7 @@ ul.utility-links.social-media-links{
 }
 .branding .header-cagov-logo img{
   max-height: 80px;
-  width: 100%;
+  width: unset;
   position: unset;
   height: unset;
 }
