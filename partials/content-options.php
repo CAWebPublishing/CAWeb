@@ -295,17 +295,23 @@ if( isset($_POST['caweb_options_submit']) ){
 			$social_options = get_ca_social_options();
 
 			foreach($social_options as $social => $option ){
-        printf('<tr><th>%1$s</th><td><input type="text" name="%2$s" id="%2$s" size="60" value="%3$s" /></td></tr>
-								<tr><td></td><td><label class="extra alignleft%4$s">Show in header: <input type="checkbox" name="%2$s_header" id="%2$s_header"%5$s /></label>
-													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label>%7$s</td></tr>',
-               		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'),
-               	get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '' ,
-              	get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '',
-               ('ca_social_email' !== $option ? 
-                sprintf('<label class="alignleft">Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>',$option,
-                      get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '' ) : '')  ) ;
-
+				$share_email = 'ca_social_email' === $option ? true : false;
         
+        $social = $share_email ? "Share via " . $social : $social;
+        $input_box = !$share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option) ) : '';
+				$hide = 5 <= get_option('ca_site_version') ? '' : ' hidden';
+        $header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
+        $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
+        $new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '' ;
+          
+       printf('<tr><th>%1$s</th>%2$s
+						<td>
+							<label class="extra%3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s /></label>
+							<label>Show in footer: <input type="checkbox" name="%4$s_footer" id="%4$s_footer"%6$s /></label>
+							<label>Open in New Tab: <input type="checkbox" name="%4$s_new_window" id="%4$s_new_window"%7$s /></label>
+						</td>
+					</tr>',
+                 $social, $input_box , $hide, $option, $header_checked, $footer_checked, $new_window_checked   ) ;
         
       }
 ?>
