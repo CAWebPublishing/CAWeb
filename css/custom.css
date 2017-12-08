@@ -13,10 +13,10 @@
   padding-bottom: 0;
 }
 .non_divi_builder.title_not_displayed .main-primary{
- padding-top: 25px; 
+ padding-top: 25px;
 }
 .non_divi_builder .main-primary{
- padding-bottom: 25px; 
+ padding-bottom: 25px;
 }
 .page-title.with_date,
 .divi_builder .page-title{
@@ -27,14 +27,14 @@
   	float: left;
 }
 .single .post {
-    padding-bottom: 0; 
+    padding-bottom: 0;
 }
 @media(max-width: 768px){
   .single.non_divi_builder .main-content .main-primary{
     width: 100% !important;
   }
   #non_divi_sidebar{
-   width: 75% !important; 
+   width: 75% !important;
   }
 }
 
@@ -131,9 +131,8 @@ ul, ol{
   height: 35px;
 }
 
-#comment-wrap .comment-body:before{
-	margin: unset;
-	height: unset;
+#comment-wrap .comment-body{
+	border: 1px dotted transparent;
 }
 
 /* Divi Specific Overrides */
