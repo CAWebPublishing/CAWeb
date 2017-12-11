@@ -26,8 +26,8 @@
 				
 					et_divi_post_format_content();
 				?>
-            <div class="ca_wp_container cat-info">
-						<h2 class="page-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <div class="ca_wp_container author-info">
+						<h2 class="author-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
            <?php et_divi_post_meta(); ?>
             </div>
            <?php 
