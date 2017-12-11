@@ -134,7 +134,10 @@ ul, ol{
 #comment-wrap .comment-body{
 	border: 1px dotted transparent;
 }
-
+#comment-wrap .comment-body:before{
+	margin: unset;
+	height: unset;
+}
 /* Divi Specific Overrides */
 #page-container{
   padding-top: 0px;
