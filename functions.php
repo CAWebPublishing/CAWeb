@@ -478,7 +478,7 @@ function wp_ca_body_class( $wp_classes, $extra_classes ) {
   	$whitelist = array( (  ! et_pb_is_pagebuilder_used( $post->ID ) ? 'non_divi_builder' : 'divi_builder'),
                      ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed' ),
                       sprintf('v%1$s', ca_get_version($post->ID) ),
-                       (! et_pb_is_pagebuilder_used( $post->ID ) && is_active_sidebar('sidebar-1') && is_single() ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
+                       (! et_pb_is_pagebuilder_used( $post->ID ) && is_active_sidebar('sidebar-1') && ( is_single() || is_category() ) ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
   }
   $whitelist[] = ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
    
