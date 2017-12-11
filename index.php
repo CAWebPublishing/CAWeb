@@ -9,28 +9,11 @@
 
 <div id="page-container">
 <div id="et-main-area">
-<div id="main-content" class="main-content">
+<div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
+  <main class="main-primary" >
 	<?php
 		global $wp_query;
-	 ?>
 
-
-		<div class="et_pb_row">
-	
-	<h1>Search Results</h1>
-	<h4 class="sform"><?php get_search_form() ?></h4><br/>
-	<h4></h4>
-	<hr class="divider" style="display: none;"/>
-	<div class="searched-for">
-			<p class="count"><?php echo $wp_query->post_count; ($wp_query->post_count) == 1 ? printf(" result found") : printf(" results found"); ?></p>
-			<p class="query">Results for: <b><?php the_search_query();?></b></p>
-	</div>
-	<br/>
-
-
-
-
-		<?php
 			if ( have_posts() ) :
 				while ( have_posts() ) : the_post();
 					$post_format = et_pb_post_format(); ?>
@@ -96,7 +79,7 @@
 					get_template_part( 'includes/no-results', 'index' );
 				endif;
 			?>
-
+  </main>
 </div> <!-- #main-content -->
 </div>
 </div>
