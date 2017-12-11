@@ -48,11 +48,16 @@ get_template_part('partials/content', 'header')
 </div>
 </div>
 <style>
+.main-content{
+    min-height: 1px;    
+}
+.et_pb_post.not_found{
+    margin-bottom: 0px;
+}
   button.close.close-search {
     visibility: hidden;
 }
   .gssb_c {
-		/*	table-layout: fixed;*/
     top: 340px !important;
 }
 </style>
