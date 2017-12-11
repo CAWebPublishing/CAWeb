@@ -1,3 +1,5 @@
+![CAWeb Build Badge](https://cawebpublishing.visualstudio.com/_apis/public/build/definitions/57d91920-b17a-4a76-be9d-884fe15e1de6/18/badge)
+
 ![CAWeb Logo](https://user-images.githubusercontent.com/13723805/29735384-6c10ea28-89ad-11e7-9484-6fc0e1416d8f.png)
 
 # Introduction

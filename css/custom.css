@@ -12,12 +12,11 @@
 .page-title{
   padding-bottom: 0;
 }
-.non_divi_builder.title_not_displayed .main-primary,
-.archive .main-primary{
- padding-top: 25px; 
+.non_divi_builder.title_not_displayed .main-primary{
+ padding-top: 25px;
 }
 .non_divi_builder .main-primary{
- padding-bottom: 25px; 
+ padding-bottom: 25px;
 }
 .page-title.with_date,
 .divi_builder .page-title{
@@ -29,7 +28,7 @@
   	float: left;
 }
 .single .post {
-    padding-bottom: 0; 
+    padding-bottom: 0;
 }
 .archive .main-content article{
  display: inline-block; 
@@ -41,7 +40,7 @@
     width: 100% !important;
   }
   #non_divi_sidebar{
-   width: 75% !important; 
+   width: 75% !important;
   }
 }
 .pagination{
@@ -140,8 +139,13 @@ ul, ol{
   height: 35px;
 }
 
-
-
+#comment-wrap .comment-body{
+	border: 1px dotted transparent;
+}
+#comment-wrap .comment-body:before{
+	margin: unset;
+	height: unset;
+}
 /* Divi Specific Overrides */
 #page-container{
   padding-top: 0px;
