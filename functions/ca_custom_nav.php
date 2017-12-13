@@ -142,7 +142,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
           $sub_nav = sprintf('<ul class="description">%1$s</ul>', $sub_nav_items) ;
         } // End of sub-nav
-	
+
         $item_nav_image = '';
         if( !empty($item_meta['_caweb_menu_icon'][0]) ){
           $item_nav_image =  get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
@@ -153,10 +153,10 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
         $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
-										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''), 
+										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
                      (!empty($item_nav_image) ? 'class="widget_nav_menu_a"' : ''),
                     $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''),
-                    (0 < $childCount ? ' class="toggle" ' : ''), $item_nav_image , 
+                    (0 < $childCount ? ' class="toggle" ' : ''), $item_nav_image ,
                       sprintf('<p class="widget_nav_menu_title">%1$s</p>',$item->title) );
       }
     }
@@ -338,9 +338,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 		foreach($social_share as $opt){
       $share_email = 'ca_social_email' === $opt ? true : false;
       $mailto = $share_email ? sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) : '';
-                     if( $share_email )
-          delete_option('ca_social_email_new_window');
-       
+
 			if(get_option($opt .'_footer') && ( $share_email || "" !== get_option($opt) ) ){
 				$share = substr($opt, 10);
 				$share =  str_replace("_", "-", $share);
