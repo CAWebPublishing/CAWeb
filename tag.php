@@ -20,17 +20,10 @@
 					$post_format = et_pb_post_format(); ?>
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
-
+						<a href="<?php the_permalink(); ?>" >
+               <?php  if( has_post_thumbnail() ) { the_post_thumbnail( 'medium','style=width:200px;height:200px;padding-right:20px;padding-bottom:15px;float:left;'); } ?>
+						 </a>
 				<?php
-
-				if( has_post_thumbnail() ){
-				 ?>
-				 <a href="<?php the_permalink(); ?>">
-					<?php  the_post_thumbnail( 'medium','style=max-width:200px;height:200px;padding-right:20px;padding-bottom:15px;float:left;'); ?>
-				 </a>
-				 <?php
-
-				}
 					et_divi_post_format_content();
 				?>
             <div class="tag-info">
@@ -38,17 +31,13 @@
            <?php et_divi_post_meta(); ?>
             </div>
            <?php
-					if ( 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
-							truncate_post( 270 );
-						} else {
-							the_content();
-						}
+						truncate_post( 270 );
           ?>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;
 			?>
-      <div class="pagination ca_wp_container clearfix">
+      <div class="pagination clearfix">
         <div class="alignleft"><?php next_posts_link(esc_html__('&laquo; Older Entries','Divi')); ?></div>
         <div class="alignright"><?php previous_posts_link(esc_html__('Next Entries &raquo;', 'Divi')); ?></div>
       </div>
