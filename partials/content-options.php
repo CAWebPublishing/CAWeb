@@ -296,7 +296,6 @@ if( isset($_POST['caweb_options_submit']) ){
 
 			foreach($social_options as $social => $option ){
 				$share_email = 'ca_social_email' === $option ? true : false;
-        
         $social = $share_email ? "Share via " . $social : $social;
         $input_box = !$share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option) ) : '';
 				$hide = 5 <= get_option('ca_site_version') ? '' : ' hidden';
@@ -308,10 +307,11 @@ if( isset($_POST['caweb_options_submit']) ){
 						<td>
 							<label class="extra%3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s /></label>
 							<label>Show in footer: <input type="checkbox" name="%4$s_footer" id="%4$s_footer"%6$s /></label>
-							<label>Open in New Tab: <input type="checkbox" name="%4$s_new_window" id="%4$s_new_window"%7$s /></label>
+							%7$s
 						</td>
 					</tr>',
-                 $social, $input_box , $hide, $option, $header_checked, $footer_checked, $new_window_checked   ) ;
+              $social, $input_box , $hide, $option, $header_checked, $footer_checked, 
+              ( !$share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked ) : '' ) ) ;
         
       }
 ?>

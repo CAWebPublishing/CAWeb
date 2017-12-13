@@ -1,7 +1,5 @@
 <?php
 		get_header();
-
-		$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 ?>
 <body <?php body_class('primary') ?>  >
 <?php get_template_part('partials/content', 'header') ?>
@@ -9,11 +7,11 @@
 
 <div id="page-container">
 <div id="et-main-area">
-<div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
+<div id="main-content" class="main-content ca_wp_container">
 	<main class="main-primary" >
 
 			<?php
-      
+
       global $wp_query;
 
 			if ( have_posts() ) :
@@ -23,14 +21,21 @@
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 
 				<?php
-				
+				if( has_post_thumbnail() ){
+				 ?>
+				 <a href="<?php the_permalink(); ?>">
+					<?php  the_post_thumbnail( 'medium','style=max-width:200px;height:200px;padding-right:20px;padding-bottom:15px;float:left;'); ?>
+				 </a>
+				 <?php
+
+				}
 					et_divi_post_format_content();
 				?>
-            <div class="ca_wp_container cat-info">
+            <div class="cat-info">
 						<h2 class="page-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
            <?php et_divi_post_meta(); ?>
             </div>
-           <?php 
+           <?php
 					if ( 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
 							truncate_post( 270 );
 						} else {
@@ -52,7 +57,7 @@
 			?>
   </main>
   <?php
-if( ! $is_page_builder_used && is_active_sidebar('sidebar-1') ){
+if( is_active_sidebar('sidebar-1') ){
    print '<aside id="non_divi_sidebar" class="col-lg-3">';
 		print get_sidebar('sidebar-1') ;
     print '</aside>';
