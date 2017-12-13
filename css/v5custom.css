@@ -132,10 +132,12 @@ ul.utility-links.social-media-links{
 .branding .header-cagov-logo{
   max-width: 25%;
   height: 88px;
+  line-height: 88px;
 }
 .branding .header-cagov-logo a{
     z-index: 26;
     position: relative;
+	
 }
 .branding .header-cagov-logo img{
   max-height: 80px;
