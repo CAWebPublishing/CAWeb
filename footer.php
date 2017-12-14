@@ -44,7 +44,8 @@ window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
    
    if(makeSpace){
      for(var i = 0, len = articles.length; i < len; i++){
-         articles[i].getElementsByTagName('a')[0].setAttribute("style", "width:200px;height:200px;padding-right:20px;padding-bottom:15px;float:left;");
+       if( ! articles[i].classList.contains('has-post-thumbnail'))
+         articles[i].getElementsByTagName('a')[0].setAttribute("style", "width:200px;height:100px;padding-right:20px;padding-bottom:15px;float:left;");
        
        }
    }
