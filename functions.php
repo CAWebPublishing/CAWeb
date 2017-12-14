@@ -505,17 +505,6 @@ function wp_ca_post_class( $classes ) {
 }
 add_filter( 'post_class', 'wp_ca_post_class', 15 );
 
-function wp_ca_post_class( $classes ) {
-	global $post;
-	
-  if( ""  == get_the_post_thumbnail_url( $post->ID ) && 19979 == $post->ID ){
-		unset( $classes['has-post-thumbnail'] );
-	update_site_option('dev', $post );
-  }
-	return $classes;
-}
-add_filter( 'post_class', 'wp_ca_post_class' );
-
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
 function caweb_initialize_divi_modules() {
