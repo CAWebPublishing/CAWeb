@@ -497,13 +497,21 @@ add_filter( 'body_class', 'wp_ca_body_class', 20, 2 );
 
 function wp_ca_post_class( $classes ) {
 	global $post;
-  
+
   if( has_post_thumbnail( $post->ID ) && "" == get_the_post_thumbnail_url( $post->ID ) )
 		 unset( $classes[ array_search("has-post-thumbnail", $classes) ] );
-  
+
 	return $classes;
 }
 add_filter( 'post_class', 'wp_ca_post_class', 15 );
+
+add_filter('pre_get_posts', 'caweb_limit_posts', 15);
+function caweb_limit_posts($query){
+    if ($query->is_archive || $query->is_category || $query->is_author || $query->is_tag) {
+        $query->set('posts_per_page', 5);
+    }
+    return $query;
+}
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
