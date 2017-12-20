@@ -4,7 +4,7 @@
 
 	CAWeb Child Theme Functions
 	Author: Jesus D. Guzman
-	
+
 	Sources:
 	- PHP (http://php.net/)
 	- Theme Development (https://codex.wordpress.org/Theme_Development)
@@ -28,7 +28,7 @@ require_once(CAWebAbsPath. '/functions/additional_functions.php');
 
 // Include customizer functions
 require_once(CAWebAbsPath. '/functions/customizer.php');
-  
+
 // Add CA Options Page
 require_once(CAWebAbsPath. '/options.php');
 
@@ -76,15 +76,15 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	require_once(CAWebAbsPath. '/core/update.php');
 
   // Updating the following CAWeb Checkbox Options, when enabled they saved
-  // as "on" this is being changed to true. 
+  // as "on" this is being changed to true.
   $options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
   $options = array_merge($options, get_ca_social_extra_options() );
   foreach( $options as $option ){
      $val = get_option($option);
      if("on" == $val )
-       update_option($option, true);     
+       update_option($option, true);
    }
-  
+
 }
 
 add_action('after_setup_theme', 'ca_setup_theme');
@@ -108,7 +108,7 @@ function ca_init(){
 
 	// Register Menu Navigation Settings
 	register_nav_menus( get_ca_nav_menu_theme_locations() );
-  
+
 }
 add_action('init', 'ca_init');
 
@@ -121,7 +121,7 @@ function caweb_admin_head(){
 	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
 
 	printf('<link rel="icon" href="%1$s">', $icon);
-  
+
   /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
 	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
 }
@@ -236,7 +236,7 @@ function ca_admin_enqueue_scripts($hook){
 		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 	}
 
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version ); 
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
 }
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
@@ -334,7 +334,7 @@ function ca_mce_buttons( $buttons ) {
 	**/
   $tmp = array('formatselect', 'bold', 'italic', 'underline');
   array_splice($buttons, 0, 3, $tmp);
-  
+
 	return $buttons;
 
 }
@@ -345,11 +345,11 @@ function ca_mce_buttons_2( $buttons ) {
 	/**
 		Add in a core button that's disabled by default
 	**/
-  
+
 	$tmp = array('styleselect', 'strikethrough', 'hr', 'fontselect', 'fontsizeselect',
                'forecolor', 'backcolor', 'pastetext', 'copy','subscript', 'superscript');
   array_splice($buttons, 0, 5, $tmp);
-  
+
 	return $buttons;
 
 }
@@ -437,12 +437,12 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 
 	// Insert the array, JSON ENCODED, into 'style_formats'
   $init_array['style_formats'] = json_encode( $style_formats );
-  
+
   // TinyMCE Toolbar Start off unhidden
 	$init_array['wordpress_adv_hidden'] = false;
-	
+
   return $init_array;
- 
+
 }
 
 // Attach callback to 'tiny_mce_before_init'
@@ -468,29 +468,50 @@ add_action('wp_head','caweb_turn_off_divi_related_videos');
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
   global $post;
-  
+
   // List of the classes that need to be removed
   $blacklist= array('et_secondary_nav_dropdown_animation_fade',
 				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
 
 	// List of extra classes that need to be added to the body
   if( isset($post->ID) ){
-  	$whitelist = array( (  ! et_pb_is_pagebuilder_used( $post->ID ) ? 'non_divi_builder' : 'divi_builder'),
-                     ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed' ),
+		$divi = et_pb_is_pagebuilder_used( $post->ID );
+		$sidebar_enabled = ! is_page();
+		$special_templates = is_tag() || is_archive() || is_category() || is_author();
+
+  	$whitelist = array( (  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
+                     ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', false) ? 'title_displayed' : 'title_not_displayed' ),
                       sprintf('v%1$s', ca_get_version($post->ID) ),
-                       (! et_pb_is_pagebuilder_used( $post->ID ) && is_active_sidebar('sidebar-1') && is_single() ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
+                       (is_active_sidebar('sidebar-1') && $sidebar_enabled  ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
   }
   $whitelist[] = ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
-   
+
    	// Remove any classes in the blacklist from the wp_classes
   $wp_classes = array_diff( $wp_classes, $blacklist);
-  
+
 	// Return filtered wp class
 	return  array_merge($wp_classes, (array) $whitelist);
 
 }
-
 add_filter( 'body_class', 'wp_ca_body_class', 20, 2 );
+
+function wp_ca_post_class( $classes ) {
+	global $post;
+
+  if( has_post_thumbnail( $post->ID ) && "" == get_the_post_thumbnail_url( $post->ID ) )
+		 unset( $classes[ array_search("has-post-thumbnail", $classes) ] );
+
+	return $classes;
+}
+add_filter( 'post_class', 'wp_ca_post_class', 15 );
+
+add_filter('pre_get_posts', 'caweb_limit_posts', 15);
+function caweb_limit_posts($query){
+    if ($query->is_archive || $query->is_category || $query->is_author || $query->is_tag) {
+        $query->set('posts_per_page', 5);
+    }
+    return $query;
+}
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
@@ -498,17 +519,17 @@ function caweb_initialize_divi_modules() {
 
 		include(CAWebAbsPath . "/builder/functions.php");
 	  include(CAWebAbsPath . "/builder/layouts.php");
-  
-	if (  class_exists( 'ET_Builder_Module' ) ) { 
+
+	if (  class_exists( 'ET_Builder_Module' ) ) {
 		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
   	$modules = glob( CAWebAbsPath . '/builder/modules/*.php' );
   	foreach ( $modules as $module_file ) {
       require_once( $module_file );
     }
 	}
-		if ( class_exists( 'ET_Builder_Module_Settings_Migration' ) ) { 
-  
-      include(CAWebAbsPath . "/builder/modules/settings/Migration.php");      
+		if ( class_exists( 'ET_Builder_Module_Settings_Migration' ) ) {
+
+      include(CAWebAbsPath . "/builder/modules/settings/Migration.php");
       ET_Builder_CAWeb_Module_Settings_Migration::init();
 	}
 }
@@ -534,7 +555,7 @@ function caweb_custom_frontend_builder_js() {
 	wp_dequeue_script( 'et-frontend-builder' );
 	// Enqueue modified bundle.js
   wp_enqueue_script('et-frontend-builder',"{$app}/bundle.js",	$fb_bundle_dependencies,	$ver,		true	);
-    
+
 }
 
 ?>
