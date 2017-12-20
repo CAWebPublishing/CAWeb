@@ -7,9 +7,7 @@ wp_nav_menu(array(
 					);
 
 wp_footer();
-
-if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '')
-  
+ 
 if( !is_404() ) :
 ?>
 
