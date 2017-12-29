@@ -12,7 +12,7 @@
                 
                   foreach($social_share as $opt){
                     	$share_email = 'ca_social_email' === $opt ? true : false;
-                    	$mailto = $share_email ? sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) : '';
+                    	$mailto = $share_email ? esc_attr( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) ) : '';
                     
                       if( get_option($opt .'_header') && ( $share_email || "" !== get_option($opt) ) ){
                             $share = substr($opt, 10);
@@ -20,7 +20,7 @@
                           
                       			
                       		printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>', 
-                             $share, ( $share_email ? $mailto : get_option($opt) ),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
+                             $share, ( $share_email ? $mailto : esc_url( get_option($opt) ) ),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
           						}
             	}
             ?>
@@ -31,15 +31,18 @@
                   
 <?php 
   for($i = 1; $i < 4; $i++){
-		$url = get_option(sprintf('ca_utility_link_%1$s', $i));
-		$text = get_option(sprintf('ca_utility_link_%1$s_name', $i));
+		$url = esc_url( get_option(sprintf('ca_utility_link_%1$s', $i)));
+		$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
+		$text =  strip_tags( preg_replace($p, "", get_option(sprintf('ca_utility_link_%1$s_name', $i)) ) );
+
+
     if ( !empty($url)  &&  !empty($text)  ){
 				printf('<li class="utility-custom-%1$s"><a href="%2$s">%3$s</a></li>', $i, $url, $text);
     }
   }
 ?>
                   <?php if( "" !== get_option('ca_contact_us_link') ): ?>
-                    <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link'); ?>">Contact Us</a></li>
+                    <li class="utility-contact-us"><a href="<?php echo esc_url( get_option('ca_contact_us_link') ); ?>">Contact Us</a></li>
                   <?php endif; ?> 
                   
                   <li class="utility-settings"><a role="button" data-toggle="collapse" data-target="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>
