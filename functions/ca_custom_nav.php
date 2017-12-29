@@ -337,7 +337,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 		foreach($social_share as $opt){
 		  $share_email = 'ca_social_email' === $opt ? true : false;
-		  $mailto = $share_email ? esc_att( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) ) : '';
+		  $mailto = $share_email ? esc_attr( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) ) : '';
 
 			if(get_option($opt .'_footer') && ( $share_email || "" !== get_option($opt) ) ){
 				$share = substr($opt, 10);
