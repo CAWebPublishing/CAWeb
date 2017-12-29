@@ -6,7 +6,7 @@ table.gsc-search-box td.gsc-input {
      padding-right: 0px !important;
 }
 input.gsc-input {
-    background-image: unset !important;
+    background-image: none !important;
 	    border-radius: 4px;
     border: 2px solid transparent;
 }
