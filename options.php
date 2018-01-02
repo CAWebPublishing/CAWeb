@@ -243,4 +243,15 @@ function caweb_fav_icon_checker(){
 	wp_die(); // this is required to terminate immediately and return a proper response
 }
 add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
+
+function caweb_default_favicon_url(){
+		return  esc_url( "https://raw.githubusercontent.com/CAWebPublishing/CAWeb/master/images/system/favicon.ico?token=AXMXyfCXumpiUhi-6nEG4zAj65rhy_aGks5aVQ2TwA==");
+}
+
+function caweb_favicon_name(){
+	$option = get_option('ca_fav_ico', caweb_default_favicon_url() );
+	
+	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr($option, strrpos($option, '/') + 1) );
+
+}
 ?>

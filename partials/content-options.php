@@ -34,13 +34,13 @@ if( isset($_POST['caweb_options_submit']) ){
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
 	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" readonly="true" style="background-color: #fff;"
-    value="<?php print substr(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), strrpos(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), '/')+1); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
+    value="<?php print caweb_favicon_name(); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
-	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>" >
+	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', caweb_default_favicon_url()); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 		<input type="button" value="Reset" id="resetIcon"><br />
-		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>"/>
+		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico',caweb_default_favicon_url()); ?>"/>
 	</td></tr>
 
   <tr>
