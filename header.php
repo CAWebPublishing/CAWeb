@@ -58,8 +58,8 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 
 	wp_head();
 
-printf('<link rel="icon" href="%1$s">',  get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico')  );
-printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico')  );
+printf('<link rel="icon" href="%1$s">',get_option('ca_fav_ico', '/images/system/caweb_logo.ico')  );
+//printf('<link rel="shortcut icon" href="%1$s">',  get_option('ca_fav_ico', CAWebUri . '/images/system/caweb_logo.ico')  );
 
 
 if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '')
