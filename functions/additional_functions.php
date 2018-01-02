@@ -9,6 +9,9 @@
 
 */
 
+function caweb_default_favicon_url(){
+		return  esc_url( "https://raw.githubusercontent.com/CAWebPublishing/CAWeb/master/images/system/favicon.ico?token=AXMXyfCXumpiUhi-6nEG4zAj65rhy_aGks5aVQ2TwA==");
+}
 
 function ca_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version', 5) ? true : false);

@@ -218,8 +218,8 @@ function ca_admin_enqueue_scripts($hook){
 		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
 		wp_enqueue_script( 'browse-caweb-library' );
-    // Localize the search script with the correct site url
-		wp_localize_script( 'caweb-admin-scripts', 'args', array('changeCheck' => $hook) );
+    // Localize the search script with the site domain, and current page hook
+		wp_localize_script( 'caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook) );
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
@@ -457,6 +457,12 @@ function caweb_turn_off_divi_related_videos(){
 </script>
 
 <?php
+
+printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+
+if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '');
+
 }
 add_action('wp_head','caweb_turn_off_divi_related_videos');
 

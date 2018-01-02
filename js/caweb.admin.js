@@ -60,7 +60,7 @@
     });
 
    $('#resetIcon').click(function() {
-      var ico = document.location.origin + '/wp-content/themes/CAWeb/images/system/favicon.ico';
+      var ico = args.defaultFavIcon;
       	document.getElementById('ca_fav_ico').value = ico;
         document.getElementById('ca_fav_ico_img').src = ico;
         document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
