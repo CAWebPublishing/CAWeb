@@ -31,9 +31,6 @@ ul.utility-links.social-media-links{
 .utility-geo-locator .located-city-name{
   margin-left: 0;
 }
-
-/* End of Utility Header */
-
 @media (min-width: 768px){
   .utility-links{
     margin-right: -8px;
@@ -45,6 +42,9 @@ ul.utility-links.social-media-links{
     padding-bottom: 2px;
   }
 }
+
+/* End of Utility Header */
+
 #nav_list{
     width: auto;
 	 float: right;
@@ -233,6 +233,7 @@ ul.utility-links.social-media-links{
   }
   #nav_list{
     width: 100%;
+	padding-left: 0;
   }
   .second-level-nav li {
     float: none;
