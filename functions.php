@@ -85,6 +85,16 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
        update_option($option, true);
    }
 
+	 add_action('pre_get_posts', 'caweb_limit_posts', 11);
+
+}
+function caweb_limit_posts($query){
+	 global $pagenow;
+
+			 if( 'edit.php' !== $pagenow  && ( $query->is_archive() || $query->is_category() || $query->is_author() || $query->is_tag() ))
+			$query->set('posts_per_page', 5);
+
+		return $query;
 }
 
 add_action('after_setup_theme', 'ca_setup_theme');
@@ -115,7 +125,7 @@ add_action('init', 'ca_init');
 function caweb_admin_head(){
 	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
 	printf('<link rel="icon" href="%1$s">', $icon);
-	
+
   /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
 	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
 }
@@ -505,13 +515,6 @@ function wp_ca_post_class( $classes ) {
 }
 add_filter( 'post_class', 'wp_ca_post_class', 15 );
 
-add_filter('pre_get_posts', 'caweb_limit_posts', 15);
-function caweb_limit_posts($query){
-    if ($query->is_archive || $query->is_category || $query->is_author || $query->is_tag) {
-        $query->set('posts_per_page', 5);
-    }
-    return $query;
-}
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
