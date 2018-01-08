@@ -39,35 +39,26 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	require_once(CAWebAbsPath. '/functions/metaboxes.php');
 
 	// Set Predefined Category Content Types
-
 	$ca_cats = array(
 		'Courses', 'Events', 'Exams','FAQs', 'Jobs',
 		 'News', 'Profiles','Publications' );
 
 	// Insert Parent Content Type Category
-
 	wp_insert_term('Content Types', 'category');
 
 	// Rename Default Category to All
-
 	wp_update_term(get_option('default_category'), 'category', array(
-
 			'name' => 'All',
-
 			'slug' => 'all'));
 
 
 
 	/* Loop thru Predefined Categories and create
-
 	Content Categories under Content Types Category */
-
 	foreach($ca_cats as $c){
-
 		wp_insert_term($c, 'category', array(
-
-					'parent' => get_cat_ID('Content Types'),));
-
+					'parent' => get_cat_ID('Content Types'),
+					));
 	}
 
 	// Enable Post Thumbnails
@@ -85,19 +76,28 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
        update_option($option, true);
    }
 
-	 add_action('pre_get_posts', 'caweb_limit_posts', 11);
 
 }
-function caweb_limit_posts($query){
-	 global $pagenow;
-
-			 if( 'edit.php' !== $pagenow  && ( $query->is_archive() || $query->is_category() || $query->is_author() || $query->is_tag() ))
-			$query->set('posts_per_page', 5);
-
-		return $query;
-}
-
 add_action('after_setup_theme', 'ca_setup_theme');
+
+function caweb_limit_posts($query){
+	global $wp_query;
+	$vars = array('year', 'monthnum', 'author_name', 'category_name', 'tag', 'paged');
+	$query_vars = $wp_query->query;
+	
+	foreach( $vars as $var){
+		if( isset( $query_vars[$var] ) )
+			unset($query_vars[$var]);
+	}
+	
+	if( empty($query_vars) )
+		$query->set('posts_per_page', 5);
+	
+	update_site_option('dev', $query);
+	return $query;
+}
+add_action('pre_get_posts', 'caweb_limit_posts', 11);
+
 
 /* Remove Divi Blank Page Template */
 function caweb_remove_page_templates( $templates ) {
