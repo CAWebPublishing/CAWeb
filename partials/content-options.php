@@ -160,7 +160,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		</div>
 	</th>
 	<td>
-		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1')?>" />
+		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1') ?>" />
 	</td>
 </tr>
 <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
