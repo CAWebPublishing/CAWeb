@@ -93,7 +93,6 @@ function caweb_limit_posts($query){
 	if( empty($query_vars) )
 		$query->set('posts_per_page', 5);
 	
-	update_site_option('dev', $query);
 	return $query;
 }
 add_action('pre_get_posts', 'caweb_limit_posts', 11);

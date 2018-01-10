@@ -65,21 +65,22 @@ function menu_option_setup(){
 
 
 function save_caweb_options($values = array()){
-  $site_options =  array_diff( get_all_ca_site_options() ,get_special_ca_site_options() ) ;
+	$site_options =  array_diff( get_all_ca_site_options() ,get_special_ca_site_options() ) ;
 	$values = array_diff( $values , array('tab_selected' => '', 'caweb_options_submit' => '') );
   
-  foreach($site_options as $opt){
-   	if( !array_key_exists($opt, $values) )
-      $values[$opt] = '';
-  }
+	foreach($site_options as $opt){
+		if( !array_key_exists($opt, $values) )
+			$values[$opt] = '';
+	}
 
-  foreach($values as $opt => $val){
-    	if("on" == $val)
-        $val = true;
-    	update_option($opt, $val);
-  }
+	  foreach($values as $opt => $val){
+			if("on" == $val)
+				$val = true;				
+			
+			update_option($opt, $val);
+	  }
 
-  print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+	  print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 
 }
 // Setup CAWeb API Menu
@@ -129,8 +130,7 @@ function update_site_caweb_owner_encoded_info( $value, $old_value, $option ){
 }
 add_action('pre_update_site_option_caweb_password', 'update_site_caweb_owner_encoded_info', 10, 3);
 
-
-// Setup CAWeb API Menu
+// Setup Multisite Google Analytics Menu
 function caweb_multi_ga_menu_option_setup(){
 
 ?>
@@ -167,6 +167,25 @@ function update_ca_custom_css( $value, $old_value, $option ){
 	return stripcslashes($value) ;
 }
 add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
+
+function caweb_clean_utility_link_names( $value, $old_value, $option ){
+	$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
+	
+	$value = strip_tags( preg_replace($p, "", $value ) );
+	$value = preg_replace('/\\\/', 'caweb_backslash', $value );
+	
+	return $value;
+}
+add_action('pre_update_option_ca_utility_link_1_name', 'caweb_clean_utility_link_names', 10, 3);
+add_action('pre_update_option_ca_utility_link_2_name', 'caweb_clean_utility_link_names', 10, 3);
+add_action('pre_update_option_ca_utility_link_3_name', 'caweb_clean_utility_link_names', 10, 3);
+
+function caweb_retrieve_utility_link_names( $value ){
+		return preg_replace( "/caweb_backslashcaweb_backslash/", "\\", $value );
+}
+add_action('option_ca_utility_link_1_name', 'caweb_retrieve_utility_link_names', 10, 3);
+add_action('option_ca_utility_link_2_name', 'caweb_retrieve_utility_link_names', 10, 3);
+add_action('option_ca_utility_link_3_name', 'caweb_retrieve_utility_link_names', 10, 3);
 
 // Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
