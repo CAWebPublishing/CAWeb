@@ -57,7 +57,18 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 
 // Setup CAWeb Options Menu
 function menu_option_setup(){
-  
+	$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
+	$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
+	
+	$options = array_merge( get_ca_social_options(), $utility_link_labels, $utility_link_urls );
+	
+	foreach( $options as $name ){
+		add_action('pre_update_option_' . $name , 'caweb_clean_options', 10, 3);
+		
+		if( in_array( $name , $utility_link_labels) )
+			add_action('option_' . $name , 'caweb_retrieve_options', 10, 3);
+	}
+	
 	// The actual menu file
 	get_template_part('partials/content','options');
 
@@ -168,24 +179,42 @@ function update_ca_custom_css( $value, $old_value, $option ){
 }
 add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
 
-function caweb_clean_utility_link_names( $value, $old_value, $option ){
+// Cleans certain CAWeb Options
+function caweb_clean_options( $value, $old_value, $option ){
 	$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
+	$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
+	$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
+	$social = get_ca_social_options();
+	$options = array_merge( $social, $utility_link_labels, $utility_link_urls );
 	
-	$value = strip_tags( preg_replace($p, "", $value ) );
-	$value = preg_replace('/\\\/', 'caweb_backslash', $value );
+	// if fields contain a script or style remove it
+	if( in_array( $option, $options ) )
+		$value = strip_tags( preg_replace($p, "", $value ) );
+	
+	// if field is a url escape the url
+	if( in_array( $option, $social ) || in_array( $option, $utility_link_urls ) )
+		$value = esc_url( $value );
+	
+	/*
+		if field is a label replace all escape characters with something else to prevent WordPress escaping
+		single quote = caweb_apostrophe
+		backslash = caweb_backslash
+	*/
+	if( in_array( $option, $utility_link_labels  ) ){
+		$value = preg_replace('/\\\\\'/', 'caweb_apostrophe', $value );
+		$value = preg_replace('/\\\/', 'caweb_backslash', $value );
+	}
+	
 	
 	return $value;
 }
-add_action('pre_update_option_ca_utility_link_1_name', 'caweb_clean_utility_link_names', 10, 3);
-add_action('pre_update_option_ca_utility_link_2_name', 'caweb_clean_utility_link_names', 10, 3);
-add_action('pre_update_option_ca_utility_link_3_name', 'caweb_clean_utility_link_names', 10, 3);
 
-function caweb_retrieve_utility_link_names( $value ){
-		return preg_replace( "/caweb_backslashcaweb_backslash/", "\\", $value );
+// Retrieves certain CAWeb Options
+function caweb_retrieve_options( $value ){
+		$value = preg_replace( "/caweb_apostrophe/", "'", $value );
+		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "\\", $value );
+		return $value;
 }
-add_action('option_ca_utility_link_1_name', 'caweb_retrieve_utility_link_names', 10, 3);
-add_action('option_ca_utility_link_2_name', 'caweb_retrieve_utility_link_names', 10, 3);
-add_action('option_ca_utility_link_3_name', 'caweb_retrieve_utility_link_names', 10, 3);
 
 // Returns and array of all CAWeb Site Options
 function get_all_ca_site_options($with_values = false){
