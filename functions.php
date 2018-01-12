@@ -425,9 +425,9 @@ printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_f
 printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
 $ver = ca_get_version(get_the_ID());
-  
-printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/css/cagov.%2$score.css">',  CAWebUri, ( 4 == $ver ? 'v4' : '' ) );  
-printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/css/colorscheme-v%2$s%3$s.css">',  CAWebUri, $ver , get_option('ca_site_color_scheme', 'oceanside') );
+$version = 4 == $ver ? 'v4' : '' ;
+printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/css/cagov.%2$score.css">',  CAWebUri, $version );  
+printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/css/colorscheme-%2$s%3$s.css">',  CAWebUri, $version , get_option('ca_site_color_scheme', 'oceanside') );
 printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/css/modules.css">',  CAWebUri );
 printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/css/cagov.font-only.css">',  CAWebUri );
 printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/css/custom.css">',  CAWebUri );
