@@ -155,21 +155,12 @@ function ca_theme_enqueue_style() {
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array(), $theme_version );
 
+  // If on the activation page
 	if('wp-activate.php' == $pagenow   ){
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri), array(), $theme_version );
 		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri), array(), $theme_version );
-	}else{
-		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) , array(), $theme_version);
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme', 'oceanside')) , array(), $theme_version);
 	}
-
-	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' , array(), $theme_version);
-
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
-
-	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri, array(), $theme_version ) );
-	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) , array(), $theme_version);
-
+  
 	// Load editor styling
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(CAWebUri. '/css/cagov.core.css' );
@@ -433,10 +424,20 @@ function caweb_turn_off_divi_related_videos(){
 printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
-if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '');
+$ver = ca_get_version(get_the_ID());
+  
+printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/css/cagov.%2$score.css">',  CAWebUri, ( 4 == $ver ? 'v4' : '' ) );  
+printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/css/colorscheme-v%2$s%3$s.css">',  CAWebUri, $ver , get_option('ca_site_color_scheme', 'oceanside') );
+printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/css/modules.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/css/cagov.font-only.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/css/custom.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/css/v%2$dcustom.css">',  CAWebUri,  $ver );
+    
+if("" !== get_option('ca_custom_css', '') )
+  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
 
 }
-add_action('wp_head','caweb_turn_off_divi_related_videos');
+add_action('wp_head','caweb_turn_off_divi_related_videos', 105);
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
   global $post;
