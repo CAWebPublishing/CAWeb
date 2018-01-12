@@ -56,22 +56,11 @@ add_action( 'load-tools.php', 'redirect_themes_page' );
 
 
 // Setup CAWeb Options Menu
-function menu_option_setup(){
-	$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
-	$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
+function menu_option_setup(){	
 	
-	$options = array_merge( get_ca_social_options(), $utility_link_labels, $utility_link_urls );
-	
-	foreach( $options as $name ){
-		add_action('pre_update_option_' . $name , 'caweb_clean_options', 10, 3);
-		
-		if( in_array( $name , $utility_link_labels) )
-			add_action('option_' . $name , 'caweb_retrieve_options', 10, 3);
-	}
-	
+
 	// The actual menu file
 	get_template_part('partials/content','options');
-
 }
 
 
@@ -140,7 +129,7 @@ function update_site_caweb_owner_encoded_info( $value, $old_value, $option ){
 	return $pwd;
 }
 add_action('pre_update_site_option_caweb_password', 'update_site_caweb_owner_encoded_info', 10, 3);
-
+	
 // Setup Multisite Google Analytics Menu
 function caweb_multi_ga_menu_option_setup(){
 
@@ -178,6 +167,18 @@ function update_ca_custom_css( $value, $old_value, $option ){
 	return stripcslashes($value) ;
 }
 add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
+
+$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
+$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
+		
+$options = array_merge( get_ca_social_options(), $utility_link_labels, $utility_link_urls );
+		
+foreach( $options as $name ){
+			add_action('pre_update_option_' . $name , 'caweb_clean_options', 10, 3);
+			
+			if( in_array( $name , $utility_link_labels) )
+				add_action('option_' . $name , 'caweb_retrieve_options', 10, 3);
+}
 
 // Cleans certain CAWeb Options
 function caweb_clean_options( $value, $old_value, $option ){
