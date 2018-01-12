@@ -363,79 +363,42 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 
 
 	// Define the style_formats array
-
+	// Each array child is a format with it's own settings
 	$style_formats = array(
-
-		// Each array child is a format with it's own settings
-
 		array(
-
 			'title' => 'Featured Narrative',
-
 			'block' => 'aside',
-
 			'classes' => 'featured-narrative',
-
 			'wrapper' => true,
-
 		),
-
 		array(
-
 			'title' => 'Overstated List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-overstated',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
         			'list-style-type' => 'none'),
-
 		),
-
 		array(
-
 			'title' => 'Standout List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-standout',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
         			'list-style-type' => 'none'),
-
 		),
-
 		array(
-
 			'title' => 'Understated List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-understated',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
-        			'list-style-type' => 'none'),
-
-
-
+        			'list-style-type' => 'none'
+			),
 		),
-
 	);
 
 	// Insert the array, JSON ENCODED, into 'style_formats'
