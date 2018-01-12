@@ -8,6 +8,7 @@
 
 final class caweb_auto_update{
 			protected $transient_name = 'caweb_update_themes';
+			protected $divi_transient_name = 'et_update_themes';
 			protected $user;
 
 			/**
@@ -43,7 +44,7 @@ final class caweb_auto_update{
 				add_action('admin_post_caweb_update_available', array($this, 'caweb_update_available') );
 
 			// define the alternative API for updating checking
-				add_filter('pre_site_transient_update_themes', array($this, 'check_update'));
+        add_filter('pre_site_transient_update_themes', array($this, 'check_update'));
 
 			// Define the alternative response for information checking
 				add_filter('site_transient_update_themes', array($this, 'add_themes_to_update_notification'));
@@ -56,18 +57,19 @@ final class caweb_auto_update{
 
 
 			}
-
-
+  
 		//alternative API for updating checking
 		public function check_update($update_transient){
 
 				$caweb_update_themes = get_site_transient( $this->transient_name );
+				$divi_update_themes = get_site_transient( $this->divi_transient_name );
 
 				$payload = json_decode( wp_remote_retrieve_body(
 											wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
 
 				if( !isset($payload->tag_name) ){
 					delete_site_transient( $this->transient_name );
+					delete_site_transient( $this->divi_transient_name );
 					return $update_transient;
 				}
 				if( (!isset($caweb_update_themes->response) ||  !isset($caweb_update_themes->response[$this->theme_name]) ) &&
@@ -96,12 +98,34 @@ final class caweb_auto_update{
 							$last_update->last_checked = time();
 							set_site_transient($this->transient_name, $last_update);
 
+          		$payload = json_decode( wp_remote_retrieve_body(
+                        wp_remote_get(sprintf('https://api.github.com/repos/%1$s/Divi/releases/latest', $this->user), $this->args) ) );
+            
+              if($payload->tag_name > wp_get_theme( 'Divi' )->version ){
+                
+                $changelog = base64_decode( json_decode( wp_remote_retrieve_body(
+                            wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $this->args)) )->content );
+                file_put_contents(sprintf('%1$s/divi_changelog.txt', __DIR__), $changelog);
+  
+                $divi_update_themes->checked['Divi'] = $payload->tag_name ;
+                
+                $divi_update_themes->response['Divi']['new_version'] = $payload->tag_name ;
+                $divi_update_themes->response['Divi']['url'] = get_stylesheet_directory_uri() . '/core/divi_changelog.txt' ;
+                $divi_update_themes->response['Divi']['package'] = $payload->zipball_url;
+                $divi_update_themes->last_checked = $last_update->last_checked;
+                set_site_transient($this->divi_transient_name,  $divi_update_themes );
+              }
+          
 				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) &&
 								$this->current_version >=  $payload->tag_name ) {
 
-						unset($caweb_update_themes->response[$this->theme_name]);
-						set_site_transient($this->transient_name, $caweb_update_themes);
-				}
+						delete_site_transient($this->transient_name);
+						delete_site_transient($this->divi_transient_name);
+          
+        }elseif( empty($caweb_update_themes) ||  !isset($caweb_update_themes->response[$this->theme_name])){
+          
+          	delete_site_transient( $this->divi_transient_name );
+        }
 
 				return $update_transient;
 
