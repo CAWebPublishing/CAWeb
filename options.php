@@ -13,11 +13,13 @@ function menu_setup(){
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
   
-  // If user is not a Network Admin
+	// If user is not a Network Admin
 	if( is_multisite() &&  ! current_user_can('manage_network_options')){
-    // Remove Themes, Customize and Background option under Appearance menu
-    unset($submenu['themes.php'][5]); // Themes link
-
+    // Remove Themes and Background option under Appearance menu
+		unset($submenu['themes.php'][5]); // Themes link
+		unset($submenu['themes.php'][20]); // Background link
+		unset($submenu['themes.php'][21]); // Background link 
+	
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php','tools.php');
 		remove_submenu_page('tools.php','import.php');
