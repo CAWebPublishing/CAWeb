@@ -205,6 +205,7 @@ function caweb_clean_options( $value, $old_value, $option ){
 	*/
 	if( in_array( $option, $utility_link_labels  ) ){
 		$value = preg_replace('/\\\\\'/', 'caweb_apostrophe', $value );
+		$value = preg_replace('/\\"/', 'caweb_double_quote', $value );
 		$value = preg_replace('/\\\/', 'caweb_backslash', $value );
 	}
 	
@@ -214,8 +215,9 @@ function caweb_clean_options( $value, $old_value, $option ){
 
 // Retrieves certain CAWeb Options
 function caweb_retrieve_options( $value ){
-		$value = preg_replace( "/caweb_apostrophe/", "'", $value );
-		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "\\", $value );
+		$value = preg_replace( "/caweb_apostrophe/", "&apos;", $value );
+		$value = preg_replace( "/caweb_backslashcaweb_double_quote/", '&quot;', $value );
+		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "&bsol;", $value );
 		return $value;
 }
 
