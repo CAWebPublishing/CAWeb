@@ -26,12 +26,11 @@
 					et_divi_post_format_content();
 				?>
             <div class="auth-info">
-					     <h2 class="page-title"><a href="<?php the_permalink(); ?>"><?php ( !empty(the_title('','',false) ) ? the_title() : print 'No Title'); ?></a></h2>
-          <?php et_divi_post_meta(); ?>
+					      <a class="title" href="<?php the_permalink(); ?>"><h2><?php ( !empty(the_title('','',false) ) ? the_title()  : print 'No Title'); ?></h2></a>
+           <?php et_divi_post_meta(); ?>
             </div>
-           <?php
-						truncate_post( 270 );
-          ?>
+            <p> <?php truncate_post( 270 ); ?></p>              
+          	<a class="auth-link" href="<?php the_permalink(); ?>" >Read More</a>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;
