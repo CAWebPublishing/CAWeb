@@ -1,3 +1,27 @@
+CAWeb v1.3.4
+January 22, 2018
+- CAWeb Options are now escaped when saved
+- Navigation Menu is now left justified in Mobile View
+- Fixed issue with pre_get_posts filter applying on backend
+- Background Appearance Menu has been removed
+- Read More button has been added to each post on an Archive, Date, Author, Category and Tag Template Page
+
+CAWeb v1.3.3
+December 19, 
+- WordPress Archive, Date, Author, Category and Tag Template have been created and styled
+- Fixed CAWeb Share Email Feature
+- Fixed issue with logo not adhering to margins- 
+
+CAWeb v1.3.2
+December 11, 2017
+- Template V5 updates have been merged
+- Introduced 3 New Color Schemes Eureka, Mono and Trinity
+- Added Multisite Google Analytics Option
+- Suppressed sidebar when empty on default WP Template Pages
+- Comments properly adhere to margins on Non-Divi Post Pages
+- Fixed issue with button icons not rendering correctly when left aligned
+- Fixed CSS for Post Detail Mobile View
+
 CAWeb v1.3.1
 November 14, 2017
 - TinyMCE toolbar default is expaned
