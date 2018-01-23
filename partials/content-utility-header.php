@@ -45,7 +45,7 @@
                     <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link') ; ?>">Contact Us</a></li>
                   <?php endif; ?> 
                   
-                  <li class="utility-settings"><a role="button" data-toggle="collapse" data-target="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>
+                  <li class="utility-settings"><a role="button" data-toggle="collapse" href="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>
 
                   <?php if( get_option('ca_geo_locator_enabled') ): ?>
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
