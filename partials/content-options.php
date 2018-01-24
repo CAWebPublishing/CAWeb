@@ -15,6 +15,8 @@
 </div>
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
 <?php
+$version5only = (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden');
+
 if( isset($_POST['caweb_options_submit']) ){
   save_caweb_options($_POST);
 }
@@ -98,13 +100,13 @@ if( isset($_POST['caweb_options_submit']) ){
       </select>
 		</td>
 	</tr>
-  <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+  <tr class="extra <?= $version5only ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
 			<span class="tooltiptext">Display a visible search box on the front page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
-  	<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?> ">
+  	<tr class="extra <?= $version5only ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
 		<span class="tooltiptext">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
 		</th>
@@ -129,7 +131,7 @@ if( isset($_POST['caweb_options_submit']) ){
   <td><input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" <?= ( get_option('ca_default_post_date_display', false) ? 'checked="checked"' : '' ) ?> />
   </td></tr>
 </table>
-<div class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+<div class="extra <?= $version5only ?>">
   <h1 class="option">Utility Header</h1>
 <table class="form-table">
 
@@ -153,66 +155,42 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+  <?php
+		$options = get_ca_site_options();
+		
+		for( $link = 1; $link < 3; $link++ ){
+			$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
+			$label = get_option( sprintf('ca_utility_link_%1$s_name', $link ) );
+			$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $link ) );
+	?>
+<tr  class="extra <?= $version5only ?>">
 	<th scope="row">
-		<div class="tooltip">Custom Link 1 URL
+		<div class="tooltip">Custom Link <?= $link ?> URL
 			<span class="tooltiptext">Adds a custom link to the utility header.</span>
 		</div>
 	</th>
 	<td>
-		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1') ?>" />
+		<input type="text" name="ca_utility_link_<?= $link ?>" id="ca_utility_link_<?= $link ?>" size="75" value="<?= $url ?>" />
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+<tr class="extra <?= $version5only ?>">
+	<td>
+		<label>Open in New Tab:<input type="checkbox" name="ca_utility_link_<?= $link ?>_new_window" id="ca_utility_link_<?= $link ?>_new_window" <?= $target ?> /></label>
+	</td>
+</tr>
+<tr class="extra <?= $version5only ?>">
 	<th scope="row">
-		<div class="tooltip">Custom Link 1 Label
+		<div class="tooltip">Custom Link <?= $link ?> Label
 			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
 		</div>
 	</th>
 	<td>
-		<input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" size="50" value="<?php echo get_option('ca_utility_link_1_name')?>"/>
+		<input type="text" name="ca_utility_link_<?= $link ?>_name" id="ca_utility_link_<?= $link ?>_name" size="50" value="<?= $label ?>"/>
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 2 URL
-			<span class="tooltiptext">Adds a custom link to the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_2" id="ca_utility_link_2" size="75" value="<?php echo get_option('ca_utility_link_2')?>" />
-	</td>
-</tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 2 Label
-			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" size="50" value="<?php echo get_option('ca_utility_link_2_name')?>"/>
-	</td>
-</tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 3 URL
-			<span class="tooltiptext">Adds a custom link to the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_3" id="ca_utility_link_3" size="75" value="<?php echo get_option('ca_utility_link_3')?>" />
-	</td>
-</tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 3 Label
-			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_3_name" id="ca_utility_link_3_name" size="50" value="<?php echo get_option('ca_utility_link_3_name')?>"/>
-	</td>
-</tr>
+	<?php
+		} 
+	?>
 </table>
   </div>
 

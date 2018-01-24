@@ -233,13 +233,26 @@ function get_all_ca_site_options($with_values = false){
 
 // Returns and array of just the CA Site Options
 function get_ca_site_options(){
-
-	return array('caweb_username', 'caweb_password', 'caweb_multi_ga', 'ca_fav_ico', 'header_ca_branding', 'header_ca_branding_alignment',
-				'header_ca_background', 'ca_default_navigation_menu', 'ca_google_search_id', 'ca_google_analytic_id',
-				'ca_sticky_navigation', 'ca_site_color_scheme', 'ca_site_version', 'ca_frontpage_search_enabled',
-				'ca_google_trans_enabled',  'ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_menu_selector_enabled',
-				'ca_google_meta_id', 'ca_custom_css','ca_home_nav_link', 'ca_default_post_title_display', 'ca_utility_home_icon', 'ca_utility_link_1',
-				'ca_utility_link_2', 'ca_utility_link_3', 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name', 'ca_default_post_date_display');
+	$caweb_general_options = array('ca_fav_ico', 'ca_site_version', 'ca_default_navigation_menu','ca_menu_selector_enabled',
+									'ca_site_color_scheme',	'ca_frontpage_search_enabled','ca_sticky_navigation',
+									'ca_home_nav_link',	'ca_default_post_title_display','ca_default_post_date_display');
+	
+	$caweb_utility_header_options = array('ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_utility_home_icon',
+									'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window',
+									'ca_utility_link_2', 'ca_utility_link_2_name', 'ca_utility_link_2_new_window',
+									'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window',
+									);
+									
+	$caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alignment','header_ca_background');
+	
+	$caweb_google_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga', 'ca_google_search_id', 
+									'ca_google_analytic_id', 'ca_google_trans_enabled', 'ca_google_meta_id');
+	
+	$caweb_misc_options = array( 'ca_custom_css' );
+	
+	
+	return array_merge( $caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
+						$caweb_google_options, $caweb_misc_options );
 }
 
 // Returns and array of CA MultiSite Options 
