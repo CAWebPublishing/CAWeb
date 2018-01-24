@@ -166,7 +166,18 @@ wp.customize( 'ca_utility_link_1', function( value ) {
     }
 	} );
 } );
-
+// Utility Header Custom Link 1 Target
+wp.customize( 'ca_utility_link_1_new_window', function( value ) {
+	value.bind( function( newval ) {
+    //Do stuff (newval variable contains your "new" setting data)
+     var custom_link_1 = $('.utility-custom-1 a');
+	 
+	 if ( undefined !== custom_link_1 ){
+		custom_link_1.attr("target", newval ? "_blank" : "");
+	 }
+	 
+	 });
+} );
   
 // Utility Header Custom Link 2 Text
 wp.customize( 'ca_utility_link_2_name', function( value ) {
@@ -237,7 +248,18 @@ wp.customize( 'ca_utility_link_2', function( value ) {
     }
 	} );
 } );
-
+// Utility Header Custom Link 2 Target
+wp.customize( 'ca_utility_link_2_new_window', function( value ) {
+	value.bind( function( newval ) {
+    //Do stuff (newval variable contains your "new" setting data)
+     var custom_link_2 = $('.utility-custom-2 a');
+	 
+	 if ( undefined !== custom_link_2 ){
+		custom_link_2.attr("target", newval ? "_blank" : "");
+	 }
+	 
+	 });
+} );
 // Utility Header Custom Link 3 Text
 wp.customize( 'ca_utility_link_3_name', function( value ) {
 	value.bind( function( newval ) {
@@ -315,7 +337,18 @@ wp.customize( 'ca_utility_link_3', function( value ) {
     }
 	} );
 } );
-  
+// Utility Header Custom Link 3 Target
+wp.customize( 'ca_utility_link_3_new_window', function( value ) {
+	value.bind( function( newval ) {
+    //Do stuff (newval variable contains your "new" setting data)
+     var custom_link_3 = $('.utility-custom-3 a');
+	 
+	 if ( undefined !== custom_link_3 ){
+		custom_link_3.attr("target", newval ? "_blank" : "");
+	 }
+	 
+	 });
+} );
   
 // Utility Header Contact Us Link
 wp.customize( 'ca_contact_us_link', function( value ) {

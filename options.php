@@ -215,9 +215,9 @@ function caweb_clean_options( $value, $old_value, $option ){
 
 // Retrieves certain CAWeb Options
 function caweb_retrieve_options( $value ){
-		$value = preg_replace( "/caweb_apostrophe/", "&apos;", $value );
-		$value = preg_replace( "/caweb_backslashcaweb_double_quote/", '&quot;', $value );
-		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "&bsol;", $value );
+		$value = preg_replace( "/caweb_apostrophe/", "&#39;", $value );
+		$value = preg_replace( "/caweb_backslashcaweb_double_quote/", '&#34;', $value );
+		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "&#92;", $value );
 		return $value;
 }
 
