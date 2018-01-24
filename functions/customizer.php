@@ -180,83 +180,58 @@ function caweb_customize_register( $wp_customize ) {
     'active_callback' => 'caweb_customizer_v5_option'
 		) ) );
   
-   $wp_customize->add_setting('ca_utility_link_1', array(
+	// Custom Utility Links
+	$options = get_ca_site_options();
+		
+	for( $link = 1; $link < 4; $link++ ){
+		$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
+		$label = htmlentities( get_option( sprintf('ca_utility_link_%1$s_name', $link ) ) ) ;
+		$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $link ) );
+			
+		// Label
+		$wp_customize->add_setting(sprintf('ca_utility_link_%1$s_name', $link ), array(
+    								'type' => 'option',
+  									'default' => $label  ,
+  									'transport' => 'postMessage') );
+  
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('ca_utility_link_%1$s_name', $link ), array(
+			'label'      => sprintf('Custom Link %1$s Label', $link),
+			'type' => 'text',
+			'section'    => 'caweb_utility_header',
+			'settings'   => sprintf('ca_utility_link_%1$s_name', $link ) ,
+			'active_callback' => 'caweb_customizer_v5_option'
+			) ) );
+		
+		// URL
+		$wp_customize->add_setting(sprintf('ca_utility_link_%1$s', $link ), array(
+									'type' => 'option',
+  									'default' => $url ,
+  									'transport' => 'postMessage') );
+  
+		 $wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('ca_utility_link_%1$s', $link ), array(
+			'label'      => sprintf('Custom Link %1$s URL', $link),
+			'type' => 'text',
+			'section'    => 'caweb_utility_header',
+			'settings'   => sprintf('ca_utility_link_%1$s', $link ),
+			'active_callback' => 'caweb_customizer_v5_option'
+				) ) );
+				
+		// Target
+		$wp_customize->add_setting( sprintf('ca_utility_link_%1$s_new_window', $link ), array(
     														'type' => 'option',
-  															'default' => get_option('ca_utility_link_1', '') ,
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_1', array(
-	'label'      => 'Custom Link 1 URL',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_1',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
-  
-   $wp_customize->add_setting('ca_utility_link_1_name', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_utility_link_1_name', '') ,
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_1_name', array(
-	'label'      => 'Custom Link 1 Label',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_1_name',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
-  
-   $wp_customize->add_setting('ca_utility_link_2', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_utility_link_2', '') ,
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_2', array(
-	'label'      => 'Custom Link 2 URL',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_2',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
-  
-   $wp_customize->add_setting('ca_utility_link_2_name', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_utility_link_2_name', '') ,
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_2_name', array(
-	'label'      => 'Custom Link 2 Label',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_2_name',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
-  
-   $wp_customize->add_setting('ca_utility_link_3', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_utility_link_3', '') ,
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_3', array(
-	'label'      => 'Custom Link 3 URL',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_3',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
-  
-   $wp_customize->add_setting('ca_utility_link_3_name', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_utility_link_3_name', ''),
-  															'transport' => 'postMessage') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_utility_link_3_name', array(
-	'label'      => 'Custom Link 3 Label',
-  'type' => 'text',
-	'section'    => 'caweb_utility_header',
-	'settings'   => 'ca_utility_link_3_name',
-    'active_callback' => 'caweb_customizer_v5_option'
-		) ) );
+  															'default' => $target,    
+															'transport' => 'postMessage',
+    														'sanitize_callback' => 'caweb_sanitize_customizer_checkbox') );
+    
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, sprintf('ca_utility_link_%1$s_new_window', $link ), array(
+          'label'      => 'Open in New Tab',
+          'type' => 'checkbox',
+          'section'    => 'caweb_utility_header',
+          'settings'   => sprintf('ca_utility_link_%1$s_new_window', $link ),
+    			'active_callback' => 'caweb_customizer_v5_option'
+            ) ) );
+				
+	}
   
   // Page Header
    $wp_customize->add_section('caweb_page_header', array(
