@@ -29,18 +29,18 @@
             <div class="half settings-links hidden-print">
                 <ul class="utility-links ">
                   
-<?php 
-  for($i = 1; $i < 4; $i++){
-		$url = get_option(sprintf('ca_utility_link_%1$s', $i));
-		$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
-		$text =  get_option( sprintf('ca_utility_link_%1$s_name', $i));
+					<?php 
+					  for($i = 1; $i < 4; $i++){
+							$url = get_option(sprintf('ca_utility_link_%1$s', $i));
+							$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
+							$text =  get_option( sprintf('ca_utility_link_%1$s_name', $i));
+							$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $i)) ? ' target="_blank"' : '';
 
-
-    if ( !empty($url)  &&  !empty($text)  ){
-				printf('<li class="utility-custom-%1$s"><a href="%2$s">%3$s</a></li>', $i, $url, $text);
-    }
-  }
-?>
+						if ( !empty($url)  &&  !empty($text)  ){
+									printf('<li class="utility-custom-%1$s"><a href="%2$s"%3$s>%4$s</a></li>', $i, $url, $target, $text);
+						}
+					  }
+					?>
                   <?php if( "" !== get_option('ca_contact_us_link') ): ?>
                     <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link') ; ?>">Contact Us</a></li>
                   <?php endif; ?> 

@@ -90,7 +90,7 @@ function caweb_limit_posts($query){
 			unset($query_vars[$var]);
 	}
 	
-	if( empty($query_vars) )
+	if( empty($query_vars) && (is_archive() || is_category() || is_author() || is_tag() ) )
 		$query->set('posts_per_page', 5);
 	
 	return $query;
