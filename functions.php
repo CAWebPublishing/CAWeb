@@ -149,12 +149,12 @@ function ca_theme_enqueue_style() {
 
 	$post_id = get_the_ID() ;
 	$theme_version = wp_get_theme('CAWeb')->get('Version');
-
-	$ver = ca_get_version($post_id);
+	$ver = ca_get_version($post_id);	
+	$color = get_option('ca_site_color_scheme', 'oceanside');
 	
 	// Register Styles
 	wp_register_style('ca-core-styles',sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('ca-color-styles',sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-color-styles',sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $color), array(), $theme_version );
 	wp_register_style('ca-module-styles',sprintf('%1$s/css/modules.css', CAWebUri, $ver), array(), $theme_version );
 	wp_register_style('caweb-font-styles',sprintf('%1$s/css/cagov.font-only.css', CAWebUri, $ver), array(), $theme_version );
 	wp_register_style('ca-custom-styles',sprintf('%1$s/css/custom.css', CAWebUri, $ver), array(), $theme_version );
@@ -435,10 +435,6 @@ function caweb_turn_off_divi_related_videos(){
 
 printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
-
-$ver = ca_get_version(get_the_ID());
-$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
-$color = get_option('ca_site_color_scheme', 'oceanside');
 
 	wp_enqueue_style('ca-core-styles');
 	wp_enqueue_style('ca-color-styles');
