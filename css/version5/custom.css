@@ -139,7 +139,7 @@ ul.utility-links.social-media-links{
   max-height: 80px;
   height: auto;
   position: static;
-  width: 100%;
+  width: auto;
 }
 .header-organization-banner{
   display: none;

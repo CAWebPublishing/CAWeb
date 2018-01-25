@@ -183,6 +183,10 @@ ul, ol{
 p{
   padding-bottom: 0;
 }
+ body.page-template-searchpage.logged-in .gssb_c,
+ body.v4.logged-in .gssb_c{
+	margin-top: 35px;
+ }
 .search-results .et_pb_post{
   margin-bottom: 30px;
 

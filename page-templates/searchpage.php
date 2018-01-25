@@ -4,10 +4,9 @@ Template Name: Search Results Page
 */
 
 get_header(); 
-get_template_part('partials/content', 'header') 
-
 ?>
-
+<body <?php body_class('primary') ?>  >
+<?php get_template_part('partials/content', 'header') ?>
 <div id="page-container">
 <div id="et-main-area">
 <div id="main-content" class="main-content">
@@ -57,62 +56,9 @@ get_template_part('partials/content', 'header')
   button.close.close-search {
     visibility: hidden;
 }
+
 </style>
 
 <?php get_footer(); ?>
-<?php if (  ca_version_check(4) ) : ?>
-<style>
-.section-default .ca_wp_container {
-    margin: 0;
-}
-.textfield-container {
-    float: left;
-    padding-right: 15px;
-    width: calc(97% - 15px);
-}
-input#search_local_textfield {
-    width: 100%;
-}
-div#head-search {
-    display: none;
-}
-div#google_translate_element {
-    top: 10px;
-}
-</style>
 
-<?php else: ?>
-<style>
-  table.gsc-search-box td.gsc-clear-button {
-     display: none; 
-	}
-  td.gsc-search-button{
-    position: relative; 
-  }
-  input.gsc-search-button{
-    position: relative; 
-  }
-  span.search-icon{
-    right: 63px; 
-  }
-  input.gsc-search-button {
-    position: absolute;
-    top: 2px;
-    height: 51px;
-    width: 48px;
-    min-width: 35px ;
-    right: 30px;
-    opacity: 0;
-}
-  input.gsc-input {
-    padding: 14px;
-    height: 55px;
-    border: 3px solid transparent;
-    font-size: 1.1rem !important;
-}
-  input.gsc-input:focus {
-    border-color: transparent;
-  }
-</style>
-
-<?php endif; ?>
+</body>

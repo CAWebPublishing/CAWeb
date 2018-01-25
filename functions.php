@@ -152,15 +152,6 @@ function ca_theme_enqueue_style() {
 	$ver = ca_get_version($post_id);	
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	
-	// Register Styles
-	wp_register_style('ca-core-styles',sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('ca-color-styles',sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $color), array(), $theme_version );
-	wp_register_style('ca-module-styles',sprintf('%1$s/css/modules.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('caweb-font-styles',sprintf('%1$s/css/cagov.font-only.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('ca-custom-styles',sprintf('%1$s/css/custom.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('ca-version-custom-styles',sprintf('%1$s/css/version%2$d/custom.css', CAWebUri, $ver), array(), $theme_version );
-	wp_register_style('ca-print-styles',sprintf('%1$s/css/print.css', CAWebUri, $ver), array(), $theme_version );
-
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array());
 
@@ -215,7 +206,7 @@ add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
 function ca_admin_enqueue_scripts($hook){
 	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
-  $theme_version = wp_get_theme('CAWeb')->get('Version');
+	$theme_version = wp_get_theme('CAWeb')->get('Version');
 
 	if( in_array($hook , $pages) ){
 		// Enqueue Scripts
@@ -245,8 +236,79 @@ function ca_admin_enqueue_scripts($hook){
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
 function caweb_wp_footer(){
-   // This removes Divi Builder Google Font CSS
-  wp_deregister_style('et-builder-googlefonts');
+	$ver = ca_get_version( get_the_ID() );
+	// This removes Divi Builder Google Font CSS
+	wp_deregister_style('et-builder-googlefonts');
+  
+	// if on a SERP Template Page
+	if( "page-templates/searchpage.php" == get_page_template_slug() ){
+		// Version 4
+		if (  4 == $ver ) {
+		?>
+		<style>
+			.section-default .ca_wp_container {
+				margin: 0;
+			}
+			.textfield-container {
+				float: left;
+				padding-right: 15px;
+				width: calc(97% - 15px);
+			}
+			input#search_local_textfield {
+				width: 100%;
+			}
+			div#head-search {
+				display: none;
+			}
+			div#google_translate_element {
+				top: 10px;
+			}
+			
+			</style>
+
+		<?php 
+		// Version 5
+		}else{		
+		?>
+		<style>
+		  table.gsc-search-box td.gsc-clear-button {
+			 display: none; 
+			}
+		  td.gsc-search-button{
+			position: relative; 
+		  }
+		  input.gsc-search-button{
+			position: relative; 
+		  }
+		  span.search-icon{
+			right: 63px; 
+		  }
+		  input.gsc-search-button {
+			position: absolute;
+			top: 2px;
+			height: 51px;
+			width: 48px;
+			min-width: 35px ;
+			right: 30px;
+			opacity: 0;
+		}
+		  input.gsc-input {
+			padding: 14px;
+			height: 55px;
+			border: 3px solid transparent;
+			font-size: 1.1rem !important;
+		}
+		  input.gsc-input:focus {
+			border-color: transparent;
+		  }
+		  .section.section-default{
+			padding-top: 0 !important;
+		  }
+		</style>
+		<?php
+		}
+		
+	}
   
   
 }
@@ -433,45 +495,50 @@ function caweb_turn_off_divi_related_videos(){
 
 <?php
 
-printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
-printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
-	wp_enqueue_style('ca-core-styles');
-	wp_enqueue_style('ca-color-styles');
-	wp_enqueue_style('ca-module-styles');
-	wp_enqueue_style('caweb-font-styles');
-	wp_enqueue_style('ca-custom-styles');
-	wp_enqueue_style('ca-version-custom-styles');
-	wp_enqueue_style('ca-print-styles');
-    
-if("" !== get_option('ca_custom_css', '') )
-  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
+	$cssDir = sprintf('%1$s/css', CAWebUri); 
+	$verDir = sprintf('%1$s/version%2$s',$cssDir,  ca_get_version(get_the_ID())); 
+	
+	$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
+	$color = get_option('ca_site_color_scheme', 'oceanside');
+	
+	printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/cagov.core.css%2$s">',  $verDir, $version );  
+	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">',  $verDir, $color, $version  );
+	printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/modules.css%2$s">',  $cssDir, $version   );
+	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">',  $cssDir, $version   );
+	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">',  $cssDir, $version  );
+	printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/custom.css%2$s">',  $verDir, $version );
+		
+	if("" !== get_option('ca_custom_css', '') )
+	  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
 
 }
 add_action('wp_head','caweb_turn_off_divi_related_videos', 105);
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
-  global $post;
+	global $post;
 
-  // List of the classes that need to be removed
-  $blacklist= array('et_secondary_nav_dropdown_animation_fade',
+	// List of the classes that need to be removed
+	$blacklist= array('et_secondary_nav_dropdown_animation_fade',
 				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
 
 	// List of extra classes that need to be added to the body
-  if( isset($post->ID) ){
+	if( isset($post->ID) ){
 		$divi = et_pb_is_pagebuilder_used( $post->ID );
 		$sidebar_enabled = ! is_page();
 		$special_templates = is_tag() || is_archive() || is_category() || is_author();
 
-  	$whitelist = array( (  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
+		$whitelist = array( (  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
                      ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', false) ? 'title_displayed' : 'title_not_displayed' ),
                       sprintf('v%1$s', ca_get_version($post->ID) ),
                        (is_active_sidebar('sidebar-1') && $sidebar_enabled  ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
-  }
-  $whitelist[] = ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
-
+	}
+	$whitelist[] = ( get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
+	
    	// Remove any classes in the blacklist from the wp_classes
-  $wp_classes = array_diff( $wp_classes, $blacklist);
+	$wp_classes = array_diff( $wp_classes, $blacklist);
 
 	// Return filtered wp class
 	return  array_merge($wp_classes, (array) $whitelist);

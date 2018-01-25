@@ -1,4 +1,5 @@
-/* Search using Google API 2.0 */
+/* Search Styles 
+ Search using Google API 2.0 */
 input.gsc-input:hover, input.gsc-input:focus {
     border-color: #fbad23;
 }
@@ -12,14 +13,24 @@ input.gsc-input {
 td.gsc-clear-button {
     display: none !important;
 }
-.gssb_c {
-     margin-left: 4px ;
- }
- body.logged-in .gssb_c{
-	margin-top: 40px;
- }
+#head-search {
+    padding-bottom: 2px;
+	min-width: 185px;
+	max-width: 375px;
+}
+#head-search.search-container.search-freeze-width{
+	width: 100%;
+}
+/* Media Query Styles */
+@media (max-width: 768px){
+ /* Search Styles */
+  .search-container {
+    		width: 175px;
+	}
+  /* End of Search Styles */
+}
+/* End of Media Query Styles */
 
-/* Search Styles */
 /* Hide the 'X' button that appears in Version 4 search box */
 form#local_form > button.close.close-search {
     display: none;
@@ -47,21 +58,6 @@ td.gsc-search-button span{
   .goog-te-gadget{
       color: #fff;
   }
-.search-container.search-freeze-width {
-    max-width: 35%;
-}
-#head-search {
-    padding-bottom: 2px;
-}
-
-@media (max-width: 767px){
-	.search-container.search-freeze-width {
-    max-width: 100% !important;
-	}
-	.navigation-search {
-     padding-top: 5px;
-	}
-}
 /* End of Search */
 
 ul{
@@ -195,20 +191,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   display: inline-flex ;
 	margin-bottom: 5px;
 }
-
-/* Media Query Styles */
-@media (min-width: 768px){
- /* Search Styles */
-  .search-container {
-    		width: 175px;
-	}
-  /* End of Search Styles */
-}
-
-
-/* End of Media Query Styles */
-
-
 /* Mobile Control */
 @media (max-width: 767px) {
   /* Header Styles */
@@ -250,13 +232,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
    		width: auto;
   }
 
-  #head-search.search-container.in {
-    display: none;
-}
-
-#head-search.search-container.in.active {
-    display: block;
-}
+ 
   div#google_translate_element {
     top: 6px;
 }
