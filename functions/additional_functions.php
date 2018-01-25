@@ -45,24 +45,25 @@ function get_ca_nav_menu_theme_locations(){
 
 // Returns array of Theme Color Schemes
 function caweb_color_schemes( $original_only = false ){
-  $original_schemes = array("oceanside" => "Oceanside", 
-                            "orangecounty"  => "Orange County", 
-                            "pasorobles"  => "Paso Robles", 
-                            "santabarbara"  => "Santa Barbara", 
-                            "sierra"  => "Sierra");
-  $new_schemes = array("eureka" => "Eureka", 
-                   "mono" => "Mono", 
-				   "sacramento" => "Sacramento",
-                   "trinity" => "Trinity");
-				   
-  $schemes = array_merge( $new_schemes , $original_schemes);
+	$cssDir = sprintf( '%1$s/css', CAWebAbsPath);
+	$pattern = '/.*\/([\w\s]*)\.css/';
+	
+	$schemes = array();
+	$v4_schemes = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
+	$v5_schemes = glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
+	
+	$tmp = $original_only ? $v4_schemes : array_merge($v4_schemes, $v5_schemes  );
+	
+	foreach ( $tmp as $css_file ) {
+		$scheme =  ucwords( preg_replace( $pattern , '\1', strtolower($css_file) ) );
+		$schemekey = strtolower( str_replace( ' ' , '', $scheme ) );
+		
+		$schemes[$schemekey] = $scheme;
+    }	
+	
+	ksort( $schemes );
   
-  ksort( $schemes );
-  
-  if( $original_only )
-  	return $original_schemes;
-  
-  return $schemes ;
+	return $schemes ;
 }
 
 if( !function_exists('is_valid_date') ){

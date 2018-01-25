@@ -88,12 +88,12 @@
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
         <?php 
-			$original = caweb_color_schemes( true ); 
-        	$schemes = caweb_color_schemes( ); 
+			$v4schemes = caweb_color_schemes( true ); 
+        	$v5schemes = caweb_color_schemes( ); 
         	
-          foreach( $schemes as $key => $value ){
+          foreach( $v5schemes as $key => $value ){
             printf('<option value="%1$s"%2$s%3$s>%4$s</option>', 
-                   $key, ( !in_array($value, $original) ? sprintf(' class="extra %1$s" ', $version5only ) : ' ' ), 
+                   $key, ( !in_array($value, $v4schemes) ? sprintf(' class="extra %1$s" ', $version5only ) : ' ' ), 
                    ( get_option('ca_site_color_scheme') == $key ? 'selected="selected"' : '' ), $value  );
           }
 					
