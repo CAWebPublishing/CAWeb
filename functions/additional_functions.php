@@ -50,11 +50,12 @@ function caweb_color_schemes( $original_only = false ){
                             "pasorobles"  => "Paso Robles", 
                             "santabarbara"  => "Santa Barbara", 
                             "sierra"  => "Sierra");
-  
-  $schemes = array_merge( array("eureka" => "Eureka", 
+  $new_schemes = array("eureka" => "Eureka", 
                    "mono" => "Mono", 
-                   "trinity" => "Trinity") ,
-                    $original_schemes);
+				   "sacramento" => "Sacramento",
+                   "trinity" => "Trinity");
+				   
+  $schemes = array_merge( $new_schemes , $original_schemes);
   
   ksort( $schemes );
   

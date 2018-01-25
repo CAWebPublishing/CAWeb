@@ -88,7 +88,7 @@
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
         <?php 
-					$original = caweb_color_schemes( true ); 
+			$original = caweb_color_schemes( true ); 
         	$schemes = caweb_color_schemes( ); 
         	
           foreach( $schemes as $key => $value ){
