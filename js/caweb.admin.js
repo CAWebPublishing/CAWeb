@@ -33,32 +33,50 @@ $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
     });
 
     $('#ca_site_version').change(function() {
-      var version = this.options[this.selectedIndex].value;
+		var version = this.options[this.selectedIndex].value;
        var extra_options = document.getElementsByClassName("extra");
        var base_options = document.getElementsByClassName("base");
-       var base = '';
-    		var front_search_option = $('#general table:first tr:nth-child(6)');
-      
+       var front_search_option = $('#general table:first tr:nth-child(6)');
+	   var color_scheme_picker = $('#ca_site_color_scheme')[0];
+	   var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+		var resetColor = false
+	  
        for (var i = 0; i < extra_options.length; i++) {   
          if (version >= 5.0) {
            extra_options[i].classList.remove("hidden");
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.add("hidden");
            }
-           
+		   
+           // if theres no Google Search ID 
            if( !$('#ca_google_search_id').val().trim() ){
              front_search_option.addClass('hidden');
            }else{
              front_search_option.removeClass('hidden');             
            }
+		   
          } else {
+			
            extra_options[i].classList.add("hidden");
+		   
+		   if( extra_options[i].value == color && extra_options[i].classList.contains('extra'))
+				resetColor = true;
+				
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.remove("hidden");
            }
          }
     
        }
+	   
+	   if(resetColor){
+		   for (var i = 0; i < color_scheme_picker.options.length; i++) {  
+				if(  !color_scheme_picker.options[i].classList.contains('extra')  ){
+					color_scheme_picker.selectedIndex = i;
+					break;
+				}
+		   }
+		}
     });
 
    $('#resetIcon').click(function() {
@@ -71,7 +89,7 @@ $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 $('#ca_google_search_id').on('input',function(e){ 
   var front_search_option = $('#general table:first tr:nth-child(6)');
   var site_version = $('#ca_site_version option:selected').val();
-  
+  // if theres no Google Search ID 
   if( !this.value.trim() ){
     front_search_option.addClass('hidden');
   }else if(5 <= site_version){
