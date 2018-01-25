@@ -108,7 +108,6 @@ div#google_translate_element {
     opacity: 0;
 }
   input.gsc-input {
-    background-image: unset !important;
     padding: 14px;
     height: 55px;
     border: 3px solid transparent;

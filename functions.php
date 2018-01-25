@@ -434,6 +434,7 @@ printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/css/modules.css%
 printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/css/cagov.font-only.css%2$s">',  CAWebUri, $version );
 printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/css/custom.css%2$s">',  CAWebUri, $version );
 printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/css/version%2$d/custom.css%3$s">',  CAWebUri,  $ver, $version );
+printf('<link rel="stylesheet" id="ca-print-styles" href="%1$s/css/print.css%2$s">',  CAWebUri, $version );
     
 if("" !== get_option('ca_custom_css', '') )
   printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );

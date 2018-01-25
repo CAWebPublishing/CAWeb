@@ -6,8 +6,7 @@ table.gsc-search-box td.gsc-input {
      padding-right: 0px !important;
 }
 input.gsc-input {
-    background-image: none !important;
-	    border-radius: 4px;
+	border-radius: 4px;
     border: 2px solid transparent;
 }
 td.gsc-clear-button {
@@ -123,6 +122,9 @@ td.gsc-search-button span{
   .goog-te-gadget{
       color: #fff;
   }
+ body.logged-in .gssb_c{
+	margin-top: 40px;
+ }
 
 /* Organizational Banner */
 /* Left */
@@ -194,11 +196,10 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 }
 
 /* Media Query Styles */
-
 @media (min-width: 768px){
  /* Search Styles */
   .search-container {
-    		width: 168px;
+    		width: 175px;
 	}
   /* End of Search Styles */
 }

@@ -1,5 +1,5 @@
 body {
-    background: #5d5d5d url("../images/system/pasorobles/body-background.png") repeat-y 50% 0;
+    background: #5d5d5d url(var(--image-dir-rel-path) + "images/system/pasorobles/body-background.png") repeat-y 50% 0;
     background: -moz-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
     background: -webkit-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
     background: -o-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
@@ -18,20 +18,20 @@ body {
     border-right: 7px solid #5d5d5d
 }
 .primary .header-decoration {
-    background: url("../images/system/pasorobles/ribbon-home.png") no-repeat 66.6667% 0
+    background: url(var(--image-dir-rel-path) + "images/system/pasorobles/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
-    background: url("../images/system/pasorobles/ribbon-two-col.png") no-repeat 66.6667% 0
+    background: url(var(--image-dir-rel-path) + "images/system/pasorobles/ribbon-two-col.png") no-repeat 66.6667% 0
 }
 .primary.two-column .main-content {
-    background: url("../images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%, url("../images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0;
+    background: url(var(--image-dir-rel-path) + "images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%, url(var(--image-dir-rel-path) + "images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0;
     background-color: #fff
 }
 .primary .main-content {
-    background: #fff url("../images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%
+    background: #fff url(var(--image-dir-rel-path) + "images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%
 }
 .two-column .main-content {
-    background: #fff url("../images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0
+    background: #fff url(var(--image-dir-rel-path) + "images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0
 }
 @media (max-width: 991px) {
     .two-column .main-content,
@@ -110,7 +110,7 @@ body {
         display: block
     }
     .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-        background-image: url("../images/system/pasorobles/ribbon.png")
+        background-image: url(var(--image-dir-rel-path) + "images/system/pasorobles/ribbon.png")
     }
 }
 @media (max-width: 767px) {
@@ -165,7 +165,7 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation .sub-nav {
-        background: transparent url("../images/system/pasorobles/megadropdown-ribbon.png") no-repeat 70.3125% 100%
+        background: transparent url(var(--image-dir-rel-path) + "images/system/pasorobles/megadropdown-ribbon.png") no-repeat 70.3125% 100%
     }
 }
 @media (max-width: 991px) {
@@ -614,7 +614,7 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
     background: #f5f5f5
 }
 .panel-standout.highlight .panel-heading .triangle {
-    background: url("../images/system/pasorobles/panel-standout-triangle.png") no-repeat
+    background: url(var(--image-dir-rel-path) + "images/system/pasorobles/panel-standout-triangle.png") no-repeat
 }
 .main-secondary .panel-default {
     border-color: #670000
@@ -674,7 +674,7 @@ figure {
 .main-secondary .nav-tabs>li.active>a:after,
 .main-secondary .nav-tabs>li.active>a:visited:after,
 .main-secondary .nav-tabs>li.active>a:focus:after {
-    background: url("../images/system/pasorobles/panel-standout-triangle.png") no-repeat
+    background: url(var(--image-dir-rel-path) + "images/system/pasorobles/panel-standout-triangle.png") no-repeat
 }
 .location.mini [class^="ca-gov-icon"] {
     background: #5a5a5a;

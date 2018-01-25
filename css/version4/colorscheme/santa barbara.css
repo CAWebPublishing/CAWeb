@@ -1,5 +1,5 @@
 body {
-    background: #07537b url("../images/system/santabarbara/body-background.png") repeat-y 50% 0;
+    background: #07537b url(var(--image-dir-rel-path) + "images/system/santabarbara/body-background.png") repeat-y 50% 0;
     background: -moz-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
     background: -webkit-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
     background: -o-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
@@ -18,20 +18,20 @@ body {
     border-right: 7px solid #07537b
 }
 .primary .header-decoration {
-    background: url("../images/system/santabarbara/ribbon-home.png") no-repeat 66.6667% 0
+    background: url(var(--image-dir-rel-path) + "images/system/santabarbara/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
-    background: url("../images/system/santabarbara/ribbon-two-col.png") no-repeat 66.6667% 0
+    background: url(var(--image-dir-rel-path) + "images/system/santabarbara/ribbon-two-col.png") no-repeat 66.6667% 0
 }
 .primary.two-column .main-content {
-    background: url("../images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%, url("../images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0;
+    background: url(var(--image-dir-rel-path) + "images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%, url(var(--image-dir-rel-path) + "images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0;
     background-color: #fff
 }
 .primary .main-content {
-    background: #fff url("../images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%
+    background: #fff url(var(--image-dir-rel-path) + "images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%
 }
 .two-column .main-content {
-    background: #fff url("../images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0
+    background: #fff url(var(--image-dir-rel-path) + "images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0
 }
 @media (max-width: 991px) {
     .two-column .main-content,
@@ -110,7 +110,7 @@ body {
         display: block
     }
     .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-        background-image: url("../images/system/santabarbara/ribbon.png")
+        background-image: url(var(--image-dir-rel-path) + "images/system/santabarbara/ribbon.png")
     }
 }
 @media (max-width: 767px) {
@@ -165,7 +165,7 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation .sub-nav {
-        background: transparent url("../images/system/santabarbara/megadropdown-ribbon.png") no-repeat 70.3125% 100%
+        background: transparent url(var(--image-dir-rel-path) + "images/system/santabarbara/megadropdown-ribbon.png") no-repeat 70.3125% 100%
     }
 }
 @media (max-width: 991px) {
@@ -614,7 +614,7 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
     background: #f3fbfd
 }
 .panel-standout.highlight .panel-heading .triangle {
-    background: url("../images/system/santabarbara/panel-standout-triangle.png") no-repeat
+    background: url(var(--image-dir-rel-path) + "images/system/santabarbara/panel-standout-triangle.png") no-repeat
 }
 .main-secondary .panel-default {
     border-color: #845901
@@ -674,7 +674,7 @@ figure {
 .main-secondary .nav-tabs>li.active>a:after,
 .main-secondary .nav-tabs>li.active>a:visited:after,
 .main-secondary .nav-tabs>li.active>a:focus:after {
-    background: url("../images/system/santabarbara/panel-standout-triangle.png") no-repeat
+    background: url(var(--image-dir-rel-path) + "images/system/santabarbara/panel-standout-triangle.png") no-repeat
 }
 .location.mini [class^="ca-gov-icon"] {
     background: #014e78;

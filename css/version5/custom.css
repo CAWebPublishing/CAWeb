@@ -8,10 +8,6 @@ body{
 .nav-arrow-down{
   	visibility: hidden;
 }
-input.gsc-input {
-    background-image: unset !important;
-}
-
 /* Utility Header */
 .utility-header .half{
  padding-left: 15px !important;
