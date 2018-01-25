@@ -57,9 +57,6 @@ get_template_part('partials/content', 'header')
   button.close.close-search {
     visibility: hidden;
 }
-  .gssb_c {
-    top: 340px !important;
-}
 </style>
 
 <?php get_footer(); ?>

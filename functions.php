@@ -152,7 +152,15 @@ function ca_theme_enqueue_style() {
 
 	$ver = ca_get_version($post_id);
 	
-	// Enqueue Styles
+	// Register Styles
+	wp_register_style('ca-core-styles',sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-color-styles',sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-module-styles',sprintf('%1$s/css/modules.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('caweb-font-styles',sprintf('%1$s/css/cagov.font-only.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-custom-styles',sprintf('%1$s/css/custom.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-version-custom-styles',sprintf('%1$s/css/version%2$d/custom.css', CAWebUri, $ver), array(), $theme_version );
+	wp_register_style('ca-print-styles',sprintf('%1$s/css/print.css', CAWebUri, $ver), array(), $theme_version );
+
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array());
 
@@ -166,7 +174,9 @@ function ca_theme_enqueue_style() {
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver) );
 
-	// Enqueue Scripts
+	
+	
+	// Register Scripts
 	wp_register_script('cagov-modernizr-script', CAWebUri . '/js/libs/modernizr-2.0.6.min.js', array('jquery'), $theme_version , false );
 	wp_register_script('cagov-modernizr-extra-script', CAWebUri . '/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version , false );
 
@@ -182,7 +192,7 @@ function ca_theme_enqueue_style() {
                                                    'ca_google_search_id' => get_option('ca_google_search_id'),
                                                    'ca_google_trans_enabled' => get_option('ca_google_trans_enabled'),
                                                    'caweb_multi_ga' => get_site_option('caweb_multi_ga') ) );
-
+	// Enqueue Scripts
 	wp_enqueue_script( 'cagov-core-script' );
 	wp_enqueue_script( 'cagov-navigation-script' );
 	wp_enqueue_script( 'cagov-google-script' );
@@ -234,11 +244,13 @@ function ca_admin_enqueue_scripts($hook){
 }
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
-function remove_excess_fonts(){
+function caweb_wp_footer(){
    // This removes Divi Builder Google Font CSS
   wp_deregister_style('et-builder-googlefonts');
+  
+  
 }
-add_action( 'wp_footer', 'remove_excess_fonts', 11);
+add_action( 'wp_footer', 'caweb_wp_footer', 11);
 
 function caweb_banner_content_filter($content, $ver = 5){
   $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
@@ -428,13 +440,13 @@ $ver = ca_get_version(get_the_ID());
 $version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
 $color = get_option('ca_site_color_scheme', 'oceanside');
 
-printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/css/version%2$s/cagov.core.css%3$s">',  CAWebUri, $ver, $version );  
-printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/css/version%2$s/colorscheme/%3$s.css%4$s">',  CAWebUri, $ver , $color, $version );
-printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/css/modules.css%2$s">',  CAWebUri, $version );
-printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/css/cagov.font-only.css%2$s">',  CAWebUri, $version );
-printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/css/custom.css%2$s">',  CAWebUri, $version );
-printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/css/version%2$d/custom.css%3$s">',  CAWebUri,  $ver, $version );
-printf('<link rel="stylesheet" id="ca-print-styles" href="%1$s/css/print.css%2$s">',  CAWebUri, $version );
+	wp_enqueue_style('ca-core-styles');
+	wp_enqueue_style('ca-color-styles');
+	wp_enqueue_style('ca-module-styles');
+	wp_enqueue_style('caweb-font-styles');
+	wp_enqueue_style('ca-custom-styles');
+	wp_enqueue_style('ca-version-custom-styles');
+	wp_enqueue_style('ca-print-styles');
     
 if("" !== get_option('ca_custom_css', '') )
   printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
