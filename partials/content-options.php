@@ -13,10 +13,10 @@
 	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Custom CSS</a>
 </h2>
 </div>
-<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
 	if( isset($_POST['caweb_options_submit']) )
-	  save_caweb_options($_POST);
+	  save_caweb_options($_POST, $_FILES);
 
 
 	$ver = get_option('ca_site_version', 5);
@@ -299,7 +299,21 @@
 </table>
 </div>
 	<div id="custom-css" class="<?= (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
-  <h1 class="option">Custom CSS</h1>
+		<h1 class="option">Upload CSS</h1>
+		<table class="form-table">
+		<tr>
+			<th><div class="tooltip">Stylesheets<span class="tooltiptext"></span></div></th>
+			<td><input type="button" value="Add CSS" id="addCSS"></td>
+			<?php
+				$ext_css = get_option('caweb_external_css', array() );
+				
+				foreach($ext_css as $tmp_name => $name){
+					printf('<tr><td></td><td><input type="file" name="%1$s" id="%1$s_upload" accept=".css"></td></tr>', $name);
+				}
+			?>			
+		</tr>
+		</table>
+		<h1 class="option">Custom CSS</h1>
 		<table class="form-table">
 
 		<tr>

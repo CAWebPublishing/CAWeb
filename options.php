@@ -66,23 +66,50 @@ function menu_option_setup(){
 }
 
 
-function save_caweb_options($values = array()){
+function save_caweb_options($values = array(), $files = array()){
 	$site_options =  array_diff( get_all_ca_site_options() ,get_special_ca_site_options() ) ;
-	$values = array_diff( $values , array('tab_selected' => '', 'caweb_options_submit' => '') );
-  
+	$site_id = get_current_blog_id();
+	$ext_css_dir = sprintf('%1$s/css/external', CAWebAbsPath);
+	$ext_site_css_dir = sprintf('%1$s/css/external/%2$d/', CAWebAbsPath, $site_id);
+	
+	unset( $values['tab_selected'], $values['caweb_options_submit'] );
+	
+	// Regular CAWeb Options
 	foreach($site_options as $opt){
 		if( !array_key_exists($opt, $values) )
 			$values[$opt] = '';
 	}
 
-	  foreach($values as $opt => $val){
-			if("on" == $val)
-				$val = true;				
+	 foreach($values as $opt => $val){
+		if("on" == $val)
+			$val = true;				
 			
-			update_option($opt, $val);
-	  }
+		update_option($opt, $val);
+	}
 
-	  print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+	// External CSS Upload
+	if( empty( $files ) ){		
+		rmdir($ext_site_css_dir);
+	}else{	
+		if( !file_exists( $ext_css_dir ) )
+			mkdir($ext_css_dir);
+		if( !file_exists( $ext_site_css_dir ) )	
+			mkdir($ext_site_css_dir);
+	}	
+	$file_order =  array();
+	
+	foreach( $files as $key => $data){
+		if( !empty($data["name"]) && !empty($data["tmp_name"]) ){
+			$target_file = $ext_site_css_dir . basename( $data["name"] );
+		
+			move_uploaded_file( $data["tmp_name"], $target_file );
+			$file_order[$data["tmp_name"]] = $data["name"];
+		}
+		
+	}
+	update_option('caweb_external_css', $file_order);
+	update_site_option('dev', $file_order);
+	print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 
 }
 // Setup CAWeb API Menu
@@ -248,7 +275,7 @@ function get_ca_site_options(){
 	$caweb_google_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga', 'ca_google_search_id', 
 									'ca_google_analytic_id', 'ca_google_trans_enabled', 'ca_google_meta_id');
 	
-	$caweb_misc_options = array( 'ca_custom_css' );
+	$caweb_misc_options = array( 'caweb_external_css', 'ca_custom_css' );
 	
 	
 	return array_merge( $caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
