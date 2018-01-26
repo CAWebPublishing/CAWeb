@@ -35,6 +35,22 @@
 	text-decoration: underline;
   font-size: 1.2rem;
 }
+#addCSS:hover {
+    cursor: pointer;
+}
+ol#uploadedCSS li p {
+    display: inline;
+    cursor: -webkit-grab;
+}
+ol#uploadedCSS li a:first-of-type {
+    margin-left: -80px;
+}
+ol#uploadedCSS li a:last-of-type {
+    margin-right: 45px;
+	color: red;
+	cursor: pointer
+}
+
 
 /* CAWeb Navigation Page Styles */
 .page-title-action{

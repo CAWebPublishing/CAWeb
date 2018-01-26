@@ -302,15 +302,38 @@
 		<h1 class="option">Upload CSS</h1>
 		<table class="form-table">
 		<tr>
-			<th><div class="tooltip">Stylesheets<span class="tooltiptext"></span></div></th>
-			<td><input type="button" value="Add CSS" id="addCSS"></td>
 			<?php
+			//delete_option('caweb_external_css');
+				//$ext_css = array_filter( (array) get_option('caweb_external_css', array() ) );
 				$ext_css = get_option('caweb_external_css', array() );
+				update_site_option('dev', $ext_css);
+			?>
+			<th><div class="tooltip">Stylesheets
+					<span class="tooltiptext">Any styles added will override any pre-existing styles.
+					Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order,
+					click and drag the name of the file in the order you would like.
+					</span></div></th>
+			<td>
+				<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style"></a>
+			</td>
+			<?php if( !empty( $ext_css ) ): ?>
+			<tr><td></td>
+			<td>
+				<p class="option">Uploaded Styles</p>
 				
-				foreach($ext_css as $tmp_name => $name){
-					printf('<tr><td></td><td><input type="file" name="%1$s" id="%1$s_upload" accept=".css"></td></tr>', $name);
-				}
-			?>			
+				<ol id="uploadedCSS">	
+				<?php	
+					foreach($ext_css as $name){
+						$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+						
+						printf('<li><a class="dashicons dashicons-download" id="downloadStyle" href="%1$s" download="%2$s" title="Download"></a>
+						<a class="dashicons dashicons-dismiss removeStyle" id="" title="Remove Style"></a><p>%2$s</p>
+						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name );
+					}	
+				?>
+			</ol>		
+			</tr>
+			<?php endif; ?>
 		</tr>
 		</table>
 		<h1 class="option">Custom CSS</h1>
