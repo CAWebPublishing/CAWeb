@@ -556,6 +556,30 @@ function wp_ca_post_class( $classes ) {
 }
 add_filter( 'post_class', 'wp_ca_post_class', 15 );
 
+/* Password Reset */
+add_filter( 'lostpassword_url', 'caweb_lostpassword_url', 10, 2 );
+function caweb_lostpassword_url( $lostpassword_url, $redirect ) {
+    return home_url( '/wp-login.php?action=lostpassword' );
+}
+add_filter( 'lostpassword_redirect', 'caweb_lostpassword_redirect', 11);
+function caweb_lostpassword_redirect( $lostpassword_redirect ){
+	return home_url( '/wp-login.php?email=confirm'  );
+}
+//add_action('login_form_lostpassword', 'caweb_login_form_lostpassword');
+function caweb_login_form_lostpassword( ) {
+// Check if have submitted 
+	if( isset( $_POST['redirect_to']) ){
+		wp_redirect( $_POST['redirect_to'] );
+		exit;
+	}
+}
+
+function caweb_retrieve_password_title( $title, $user_login, $user_data ) { 
+    $pattern = '/\[.*\]/';
+	
+    return  preg_replace( $pattern, sprintf('[%1$s]', wp_specialchars_decode( get_bloginfo() , ENT_QUOTES  ) ) , $title) ; 
+}; 
+add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 10, 3 ); 
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
@@ -578,7 +602,7 @@ function caweb_initialize_divi_modules() {
 	}
 }
 
-
+/* CAWeb Front Visual Builder */
 function caweb_custom_frontend_builder_js() {
   /* FrontEnd Visual Builder */
 	// This code assumes you save the file bundle.js in the child-theme root
