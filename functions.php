@@ -48,6 +48,9 @@ function caweb_setup_theme(){
 	// Options Page
 	require_once(CAWebAbsPath. '/options.php');	
 	
+	// Filters
+	require_once("{$inc_dir}/filters.php");	
+	
 	
 	// Set Up Predefined Category Content Types
 	$ca_cats = array(
@@ -186,7 +189,7 @@ function caweb_wp_enqueue_scripts() {
 
 // CAWeb WP Head
 add_action('wp_head','caweb_wp_head', 105);
-function wp_head(){
+function caweb_wp_head(){
 ?>
 	<script>
 	(function($) {

@@ -116,7 +116,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 /* CAWeb Post Body Class */
 add_filter( 'post_class', 'caweb_post_class', 15 );
-function wp_ca_post_class( $classes ) {
+function caweb_post_class( $classes ) {
 	global $post;
 
   if( has_post_thumbnail( $post->ID ) && "" == get_the_post_thumbnail_url( $post->ID ) )
