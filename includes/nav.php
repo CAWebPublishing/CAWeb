@@ -10,9 +10,9 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	 *--------------------------------------------*/
 	function __construct() {
 		// Hooked onto the WordPress Navigation Walker Edit
-		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'ca_edit_walker'), 9999);
-		add_action('wp_nav_menu_item_custom_fields', array($this, 'menu_item_custom_fields'), 9, 4);
-		add_action( 'wp_update_nav_menu_item', array($this,'ca_wp_update_nav_menu_item') , 10, 3 );
+		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'caweb_edit_nav_menu_walker'), 9999);
+		add_action('wp_nav_menu_item_custom_fields', array($this, 'caweb_nav_menu_item_custom_fields'), 9, 4);
+		add_action( 'wp_update_nav_menu_item', array($this,'caweb_update_nav_menu_item') , 10, 3 );
 
 
 			// Hooked onto the WordPress Navigation
@@ -37,7 +37,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
      return $args;
   }
 
-	function ca_edit_walker($current = 'Walker_Nav_Menu_Edit') {
+	function caweb_edit_nav_menu_walker($current = 'Walker_Nav_Menu_Edit') {
     		if ($current !== 'Walker_Nav_Menu_Edit')
           return $current;
 
@@ -350,7 +350,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	}
 
 
-function menu_item_custom_fields($item_id, $item, $depth, $args) {
+function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
 		$tmp = get_post_meta($item->ID);
 ?>
 
@@ -412,7 +412,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 	}
 
   // save menu custom fields that are added on to ca_custom_nav_walker
-	public function ca_wp_update_nav_menu_item($menu_id, $menu_item_db_id, $args){
+	public function caweb_update_nav_menu_item($menu_id, $menu_item_db_id, $args){
  		// Check if element is properly sent
 		if ( isset( $_POST['menu-item-db-id'] ) ){
 			$args['caweb-menu-item-icon'] = $_POST[$menu_item_db_id . '_icon'];
