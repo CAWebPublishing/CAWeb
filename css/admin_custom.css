@@ -42,10 +42,11 @@ ol#uploadedCSS li p {
     display: inline;
     cursor: -webkit-grab;
 }
-ol#uploadedCSS li a:first-of-type {
-    margin-left: -80px;
+ol#uploadedCSS li .previewStyle {
+    margin-left: -105px;
+	color: green;
 }
-ol#uploadedCSS li a:last-of-type {
+ol#uploadedCSS li .removeStyle {
     margin-right: 45px;
 	color: red;
 	cursor: pointer

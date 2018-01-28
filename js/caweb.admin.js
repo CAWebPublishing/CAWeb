@@ -99,7 +99,12 @@ $('#ca_google_search_id').on('input',function(e){
 
 $('.removeStyle').click(function(e){
 	e.preventDefault();
-	this.parentNode.remove();
+	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
+	
+	if (r == true) 
+		this.parentNode.remove();
+	
+	
 });
 $( "#uploadedCSS" ).sortable();
 $( "#uploadedCSS" ).disableSelection();

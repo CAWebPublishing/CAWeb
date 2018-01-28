@@ -303,10 +303,7 @@
 		<table class="form-table">
 		<tr>
 			<?php
-			//delete_option('caweb_external_css');
-				//$ext_css = array_filter( (array) get_option('caweb_external_css', array() ) );
 				$ext_css = get_option('caweb_external_css', array() );
-				update_site_option('dev', $ext_css);
 			?>
 			<th><div class="tooltip">Stylesheets
 					<span class="tooltiptext">Any styles added will override any pre-existing styles.
@@ -323,11 +320,13 @@
 				
 				<ol id="uploadedCSS">	
 				<?php	
+					add_thickbox();
 					foreach($ext_css as $name){
 						$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 						
-						printf('<li><a class="dashicons dashicons-download" id="downloadStyle" href="%1$s" download="%2$s" title="Download"></a>
-						<a class="dashicons dashicons-dismiss removeStyle" id="" title="Remove Style"></a><p>%2$s</p>
+						printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a>
+						<a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a>
+						<a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p>
 						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name );
 					}	
 				?>

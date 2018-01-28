@@ -147,8 +147,8 @@ function save_caweb_options($values = array(), $files = array()){
 			$val = true;				
 		
 		if( 'caweb_external_css' == $opt )
-			$val = array_merge( $val, $file_upload );
-			
+			$val = array_merge( $val, array_diff( $file_upload, $val ) );
+		
 		update_option($opt, $val);
 	}
 
