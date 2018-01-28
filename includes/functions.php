@@ -273,6 +273,41 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
 	}
 }
 
+function caweb_banner_content_filter($content, $ver = 5){
+  $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
+
+  /* Filter the Header Slideshow Banner */
+  if( !empty($module) ){
+        $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
+        $carousel = '';
+
+        foreach($slides as $i => $slide){
+          $heading = '';
+          $info = '';
+          if("on" == $slide->display_banner_info){
+            $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
+
+            if(!isset($slide->display_heading) || "on" == $slide->display_heading )
+              $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
+
+
+            $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
+
+          }
+          $carousel .= sprintf('<div class="slide" %1$s>%2$s</div> ',
+                              (isset($slide->background_image) ?
+                               sprintf('style="background-image: url(%1$s);"', $slide->background_image) : ""), $info);
+         }
+
+        $banner = sprintf('<div class="header-slideshow-banner">
+          <div id="primary-carousel" class="carousel carousel-banner">
+            %1$s</div></div>', $carousel);
+
+  			return $banner;
+  }
+
+}
+
 /* CA.gov Icon Library List */
 function get_ca_icon_list($index = -1, $name = '', $keys = false){
 	$icons = array( 'logo'=>'&amp;#xe600;','home'=>'&amp;#xe601;','menu'=>'&amp;#xe602;','apps'=>'&amp;#xe603;','search'=>'&amp;#xe604;','chat'=>'&amp;#xe605;','capitol'=>'&amp;#xe606;',

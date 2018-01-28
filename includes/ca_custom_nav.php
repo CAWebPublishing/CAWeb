@@ -1,8 +1,5 @@
 <?php
 
-require_once(CAWebAbsPath . '/functions/ca_custom_nav_walker.php');
-
-
 if (!class_exists('CAWeb_Nav_Menu')) {
 
 class CAWeb_Nav_Menu extends Walker_Nav_Menu{
@@ -13,15 +10,15 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	 *--------------------------------------------*/
 	function __construct() {
 		// Hooked onto the WordPress Navigation Walker Edit
-    add_filter( 'wp_edit_nav_menu_walker', array( $this, 'ca_edit_walker'), 9999);
-    add_action('wp_nav_menu_item_custom_fields', array($this, 'menu_item_custom_fields'), 9, 4);
+		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'ca_edit_walker'), 9999);
+		add_action('wp_nav_menu_item_custom_fields', array($this, 'menu_item_custom_fields'), 9, 4);
 		add_action( 'wp_update_nav_menu_item', array($this,'ca_wp_update_nav_menu_item') , 10, 3 );
 
 
-		// Hooked onto the WordPress Navigation
-    add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
-    // https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
-    add_filter('widget_nav_menu_args', array($this, 'caweb_widget_nav_menu_args'), 10, 4 );
+			// Hooked onto the WordPress Navigation
+		add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
+		// https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
+		add_filter('widget_nav_menu_args', array($this, 'caweb_widget_nav_menu_args'), 10, 4 );
 		add_filter('wp_nav_menu', array($this, 'caweb_nav_menu'), 10, 2 );
 
 	} // end constructor
