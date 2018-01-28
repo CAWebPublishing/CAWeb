@@ -210,8 +210,6 @@ function caweb_customize_register( $wp_customize ) {
 		) ) );
   
 	// Custom Utility Links
-	$options = get_ca_site_options();
-		
 	for( $link = 1; $link < 4; $link++ ){
 		$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
 		$label = htmlentities( get_option( sprintf('ca_utility_link_%1$s_name', $link ) ) ) ;
@@ -366,7 +364,7 @@ function caweb_customize_register( $wp_customize ) {
   															'priority'   => 30,
   															'panel' => 'caweb_options') );
   
-  $social_options = get_ca_social_options();
+  $social_options = caweb_get_site_options('social'); 
   
   foreach( $social_options as $social => $option){
     $wp_customize->add_setting($option, array(

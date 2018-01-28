@@ -16,7 +16,7 @@
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
 	if( isset($_POST['caweb_options_submit']) )
-	  save_caweb_options($_POST, $_FILES);
+	  caweb_save_options($_POST, $_FILES);
 
 
 	$ver = get_option('ca_site_version', 5);
@@ -157,8 +157,6 @@
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
   <?php
-		$options = get_ca_site_options();
-		
 		for( $link = 1; $link < 4; $link++ ){
 			$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
 			$label = get_option( sprintf('ca_utility_link_%1$s_name', $link ) );
@@ -274,7 +272,7 @@
 <p>Enter the URL for each of your social media profiles.</p>
 <table class="form-table">
 <?php
-			$social_options = get_ca_social_options();
+			$social_options = caweb_get_site_options('social');
 
 			foreach($social_options as $social => $option ){
 				$share_email = 'ca_social_email' === $option ? true : false;

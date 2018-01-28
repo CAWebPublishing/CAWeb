@@ -329,7 +329,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	}
 
 	public function createFooterSocialMenu($args){
-		$social_share = get_ca_social_options();
+		$social_share = caweb_get_site_options('social');
 		$socialLinks = '';
 
 		foreach($social_share as $opt){
@@ -344,7 +344,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 										( $share_email ? $mailto : esc_url( get_option($opt) ) ), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), caweb_get_icon_span($share), $share) ;
 			}
 		}
-    $socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
+		$socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
 											(4 >= $args->version ? 'full' : 'quarter text-right' ), (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : '' ), $socialLinks	);
 		return $socialLinks;
 	}

@@ -80,7 +80,7 @@ function caweb_setup_theme(){
 	// Updating the following CAWeb Checkbox Options, when enabled they saved
 	// as "on" this is being changed to true.
 	$options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
-	$options = array_merge($options, get_ca_social_extra_options() );
+	$options = array_merge($options, caweb_get_site_options('social-extra') );
 	foreach( $options as $option ){
 		$val = get_option($option);
 		if("on" == $val )

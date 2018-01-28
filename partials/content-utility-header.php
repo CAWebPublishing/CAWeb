@@ -8,7 +8,7 @@
 							if( get_option('ca_utility_home_icon', true) )
                   print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
 
-                  $social_share = get_ca_social_options();
+                  $social_share = caweb_get_site_options('social');
                 
                   foreach($social_share as $opt){
                     	$share_email = 'ca_social_email' === $opt ? true : false;

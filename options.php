@@ -1,13 +1,13 @@
 <?php
 
 // Administration Menu Setup
-function menu_setup(){
+function caweb_admin_menu(){
   global $submenu;
 
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
-								'menu_option_setup',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
-	add_submenu_page( 'ca_options','CAWeb Options', 'Settings','manage_options', 'ca_options', 'menu_option_setup' );
+								'caweb_option_page',  sprintf('%1$s/images/system/caweb_logo.png', CAWebUri),  6  );
+	add_submenu_page( 'ca_options','CAWeb Options', 'Settings','manage_options', 'ca_options', 'caweb_option_page' );
 
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
@@ -36,16 +36,16 @@ function menu_setup(){
     
 
   if( ( !is_multisite() || current_user_can('manage_network_options') ) && 1 == get_current_blog_id() ){
-    	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
+    	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
     	add_submenu_page( 'ca_options','CAWeb Options', 'Multisite GA','manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
   }
 
 }
-add_action( 'admin_menu', 'menu_setup', 15 );
+add_action( 'admin_menu', 'caweb_admin_menu', 15 );
   
 // If direct access to certain menus is accessed
 // redirect to admin page
-function redirect_themes_page() {
+function caweb_load-themes-tools() {
 	global $pagenow;
 
 	if( ( is_multisite() && ! current_user_can('manage_network_options') ) ){
@@ -53,13 +53,12 @@ function redirect_themes_page() {
 		exit;
 	}
 }
-add_action( 'load-themes.php', 'redirect_themes_page' );
-add_action( 'load-tools.php', 'redirect_themes_page' );
+add_action( 'load-themes.php', 'caweb_load-themes-tools' );
+add_action( 'load-tools.php', 'caweb_load-themes-tools' );
 
 
 // Setup CAWeb Options Menu
-function menu_option_setup(){	
-	
+function caweb_option_page(){		
 
 	// The actual menu file
 	get_template_part('partials/content','options');
@@ -80,8 +79,8 @@ function caweb_rrmdir($path) {
 	}
 }
 
-function save_caweb_options($values = array(), $files = array()){
-	$site_options =  array_diff( get_all_ca_site_options() ,get_special_ca_site_options() ) ;
+function caweb_save_options($values = array(), $files = array()){
+	$site_options =  caweb_get_site_options(); 
 	$site_id = get_current_blog_id();
 	$ext_css_dir = sprintf('%1$s/css/external', CAWebAbsPath);
 	$ext_site_css_dir = sprintf('%1$s/css/external/%2$d/', CAWebAbsPath, $site_id);
@@ -156,7 +155,7 @@ function save_caweb_options($values = array(), $files = array()){
 
 }
 // Setup CAWeb API Menu
-function api_menu_option_setup(){
+function caweb_api_menu_option_setup(){
 
 ?>
 <style>table tr td:first-of-type {width: 15px;}</style>
@@ -164,7 +163,7 @@ function api_menu_option_setup(){
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
   if( isset($_POST['caweb_api_options_submit']) ){
-  	save_caweb_api_options($_POST);
+  	caweb_save_api_options($_POST);
   }
   ?>
 <div class="wrap">
@@ -184,7 +183,7 @@ function api_menu_option_setup(){
 <?php
 }
 // Save API Values
-function save_caweb_api_options($values = array()){
+function caweb_save_api_options($values = array()){
   update_site_option('caweb_username', $values['caweb_username']);
   update_site_option('caweb_password', $values['caweb_password']);
 
@@ -192,7 +191,7 @@ function save_caweb_api_options($values = array()){
 
 }
 
-function update_site_caweb_owner_encoded_info( $value, $old_value, $option ){
+function caweb_pre_update_site_option_caweb_password( $value, $old_value, $option ){
 	$pwd = $value;
 
    if(base64_decode($value) == $old_value )
@@ -200,7 +199,7 @@ function update_site_caweb_owner_encoded_info( $value, $old_value, $option ){
 
 	return $pwd;
 }
-add_action('pre_update_site_option_caweb_password', 'update_site_caweb_owner_encoded_info', 10, 3);
+add_action('pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3);
 	
 // Setup Multisite Google Analytics Menu
 function caweb_multi_ga_menu_option_setup(){
@@ -211,7 +210,7 @@ function caweb_multi_ga_menu_option_setup(){
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_multi_ga'); ?>" method="POST">
   <?php
   if( isset($_POST['caweb_multi_ga_options_submit']) ){
-    save_caweb_multi_ga_options($_POST);
+    caweb_save_multi_ga_options($_POST);
   }
   ?>
 <div class="wrap">
@@ -228,44 +227,46 @@ function caweb_multi_ga_menu_option_setup(){
 <?php
 }
 // Save Multisite GA Values
-function save_caweb_multi_ga_options($values = array()){  
+function caweb_save_multi_ga_options($values = array()){  
   update_site_option('caweb_multi_ga', $values['caweb_multi_ga']);
 
   print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 
 }
 
-function update_ca_custom_css( $value, $old_value, $option ){  
+function caweb_pre_update_option_ca_custom_css( $value, $old_value, $option ){  
 	return stripcslashes($value) ;
 }
-add_action('pre_update_option_ca_custom_css', 'update_ca_custom_css', 10, 3);
+add_action('pre_update_option_ca_custom_css', 'caweb_pre_update_option_ca_custom_css', 10, 3);
 
-$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
-$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
+$social =  caweb_get_site_options('social');
+$sanitized = caweb_get_site_options('sanitized');
 		
-$options = array_merge( get_ca_social_options(), $utility_link_labels, $utility_link_urls );
+$options = array_merge( $social, $sanitized  );
 		
 foreach( $options as $name ){
-			add_action('pre_update_option_' . $name , 'caweb_clean_options', 10, 3);
+			add_action('pre_update_option_' . $name , 'caweb_sanitize_various_options', 10, 3);
 			
-			if( in_array( $name , $utility_link_labels) )
-				add_action('option_' . $name , 'caweb_retrieve_options', 10, 3);
+			if( in_array( $name , $sanitized) )
+				add_action('option_' . $name , 'caweb_retrieve_various_sanitized_options', 10, 3);
 }
 
-// Cleans certain CAWeb Options
-function caweb_clean_options( $value, $old_value, $option ){
+// Sanitize certain CAWeb Options
+function caweb_sanitize_various_options( $value, $old_value, $option ){
 	$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
-	$utility_link_labels = array( 'ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name');
-	$utility_link_urls = array('ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3');
-	$social = get_ca_social_options();
-	$options = array_merge( $social, $utility_link_labels, $utility_link_urls );
+	
+	$social =  caweb_get_site_options('social');
+	$sanitized = caweb_get_site_options('sanitized');
+			
+	$options = array_merge( $social, $sanitized  );
 	
 	// if fields contain a script or style remove it
 	if( in_array( $option, $options ) )
 		$value = strip_tags( preg_replace($p, "", $value ) );
 	
 	// if field is a url escape the url
-	if( in_array( $option, $social ) || in_array( $option, $utility_link_urls ) )
+	if( ( in_array( $option, $social ) || in_array( $option, $sanitized ) ) && 
+		false !== strpos($option, '_link'))
 		$value = esc_url( $value );
 	
 	/*
@@ -273,7 +274,7 @@ function caweb_clean_options( $value, $old_value, $option ){
 		single quote = caweb_apostrophe
 		backslash = caweb_backslash
 	*/
-	if( in_array( $option, $utility_link_labels  ) ){
+	if( in_array( $option, $sanitized  ) ){
 		$value = preg_replace('/\\\\\'/', 'caweb_apostrophe', $value );
 		$value = preg_replace('/\\"/', 'caweb_double_quote', $value );
 		$value = preg_replace('/\\\/', 'caweb_backslash', $value );
@@ -284,25 +285,19 @@ function caweb_clean_options( $value, $old_value, $option ){
 }
 
 // Retrieves certain CAWeb Options
-function caweb_retrieve_options( $value ){
+function caweb_retrieve_various_sanitized_options( $value ){
 		$value = preg_replace( "/caweb_apostrophe/", "&#39;", $value );
 		$value = preg_replace( "/caweb_backslashcaweb_double_quote/", '&#34;', $value );
 		$value = preg_replace( "/caweb_backslashcaweb_backslash/", "&#92;", $value );
 		return $value;
 }
 
-// Returns and array of all CAWeb Site Options
-function get_all_ca_site_options($with_values = false){
-
-	$ca_site_options = get_ca_site_options();
-
-	$ca_social_options = array_merge(get_ca_social_options(), get_ca_social_extra_options());
-	return array_merge($ca_site_options, $ca_social_options);
-
-}
-
 // Returns and array of just the CA Site Options
-function get_ca_site_options(){
+function caweb_get_site_options($group = '', $special = false, $with_values = false ){
+	$caweb_sanitized_options = array('ca_utility_link_1_name', 'ca_utility_link_2_name', 'ca_utility_link_3_name',
+							'ca_contact_us_link', 'ca_utility_link_1', 'ca_utility_link_2', 'ca_utility_link_3'
+							);
+	
 	$caweb_general_options = array('ca_fav_ico', 'ca_site_version', 'ca_default_navigation_menu','ca_menu_selector_enabled',
 									'ca_site_color_scheme',	'ca_frontpage_search_enabled','ca_sticky_navigation',
 									'ca_home_nav_link',	'ca_default_post_title_display','ca_default_post_date_display');
@@ -315,45 +310,71 @@ function get_ca_site_options(){
 									
 	$caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alignment','header_ca_background');
 	
-	$caweb_google_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga', 'ca_google_search_id', 
+	$caweb_google_options = array(  'ca_google_search_id', 
 									'ca_google_analytic_id', 'ca_google_trans_enabled', 'ca_google_meta_id');
+	
+	$caweb_social_options = array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter' , 
+								'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email' ,
+								'Flickr' => 'ca_social_flickr' , 'Pinterest' => 'ca_social_pinterest' , 
+								'YouTube' => 'ca_social_youtube', 'Instagram' => 'ca_social_instagram',
+								'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss');
+	
+	$caweb_social_extra_options = array();
+	
+	foreach($caweb_social_options as $social){
+		$caweb_social_extra_options[] = $social . '_header';
+		$caweb_social_extra_options[] = $social . '_footer';
+		if( 'ca_social_email' !== $social )      
+			$caweb_social_extra_options[] = $social . '_new_window';
+	}
 	
 	$caweb_misc_options = array( 'caweb_external_css', 'ca_custom_css' );
 	
+	$caweb_special_options = array('caweb_username', 'caweb_password', 'caweb_multi_ga');
 	
-	return array_merge( $caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
-						$caweb_google_options, $caweb_misc_options );
-}
-
-// Returns and array of CA MultiSite Options 
-function get_special_ca_site_options(){
-   return array('caweb_username', 'caweb_password', 'caweb_multi_ga');                  
-}
-                   
-// Returns and array of all CA Social Options
-function get_ca_social_options(){
-
-	return array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter' , 'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email' ,
-								'Flickr' => 'ca_social_flickr' , 'Pinterest' => 'ca_social_pinterest' , 'YouTube' => 'ca_social_youtube', 'Instagram' => 'ca_social_instagram',
-               'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss');
-}
-
-
-// Returns and array of all CA Social Extra Options
-function get_ca_social_extra_options(){
-
-	$hold = get_ca_social_options();
-
-	$tmp = array();
-
-	foreach($hold as $social){
-		$tmp[] = $social . '_header';
-		$tmp[] = $social . '_footer';
-    if( 'ca_social_email' !== $social )      
-			$tmp[] = $social . '_new_window';
+	switch( $group ){
+		case 'general':
+			$output = $caweb_general_options;
+			break;
+		case 'utility_header':
+			$output = $caweb_utility_header_options;
+			break;
+		case 'page_header':
+			$output = $caweb_page_header_options;
+			break;
+		case 'google':
+			$output = $caweb_google_options;
+			break;
+		case 'social':
+			$output = $caweb_social_options;
+			break;
+		case 'social-extra':
+			$output = $caweb_social_extra_options;
+			break;
+		case 'social-all':
+			$output = array_merge( $caweb_social_options, $caweb_social_extra_options);
+			break;
+		case 'misc':
+			$output = $caweb_misc_options;
+			break;
+		case 'special':
+			$output = $caweb_special_options;
+			break;
+		case 'sanitized':
+			$output = $caweb_sanitized_options;
+			break;
+		default:
+			$output = array_merge( $caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
+							$caweb_google_options, $caweb_social_options, $caweb_social_extra_options, $caweb_misc_options );
+			break;
 	}
-	return $tmp;
+	
+	if( $special )
+		array_merge( $output, $caweb_special_options );
+	
+	return $output;
 }
+
 
 /*
 	Check the Binary Signature of a file
