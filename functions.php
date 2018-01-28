@@ -34,8 +34,8 @@ function caweb_setup_theme(){
 	require_once("{$inc_dir}/customizer.php");
 
 	// Navigation Menu Customization to wp-admin/nav-menus.php page
-	require_once("{$inc_dir}/ca_custom_nav_walker.php");
-	require_once("{$inc_dir}/ca_custom_nav.php");
+	require_once("{$inc_dir}/nav_walker.php");
+	require_once("{$inc_dir}/nav.php");
 
 	 // Metaboxes
 	require_once("{$inc_dir}/metaboxes.php");	
@@ -74,15 +74,15 @@ function caweb_setup_theme(){
 	add_theme_support( 'post-thumbnails' );
 
 
-  // Updating the following CAWeb Checkbox Options, when enabled they saved
-  // as "on" this is being changed to true.
-  $options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
-  $options = array_merge($options, get_ca_social_extra_options() );
-  foreach( $options as $option ){
-     $val = get_option($option);
-     if("on" == $val )
-       update_option($option, true);
-   }
+	// Updating the following CAWeb Checkbox Options, when enabled they saved
+	// as "on" this is being changed to true.
+	$options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
+	$options = array_merge($options, get_ca_social_extra_options() );
+	foreach( $options as $option ){
+		$val = get_option($option);
+		if("on" == $val )
+			update_option($option, true);
+	}
 
 
 }
