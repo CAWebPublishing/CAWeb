@@ -13,10 +13,10 @@
 	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Custom CSS</a>
 </h2>
 </div>
-<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
 	if( isset($_POST['caweb_options_submit']) )
-	  save_caweb_options($_POST);
+	  save_caweb_options($_POST, $_FILES);
 
 
 	$ver = get_option('ca_site_version', 5);
@@ -299,7 +299,43 @@
 </table>
 </div>
 	<div id="custom-css" class="<?= (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
-  <h1 class="option">Custom CSS</h1>
+		<h1 class="option">Upload CSS</h1>
+		<table class="form-table">
+		<tr>
+			<?php
+				$ext_css = get_option('caweb_external_css', array() );
+			?>
+			<th><div class="tooltip">Stylesheets
+					<span class="tooltiptext">Any styles added will override any pre-existing styles.
+					Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order,
+					click and drag the name of the file in the order you would like.
+					</span></div></th>
+			<td>
+				<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style"></a>
+			</td>
+			<?php if( !empty( $ext_css ) ): ?>
+			<tr><td></td>
+			<td>
+				<p class="option">Uploaded Styles</p>
+				
+				<ol id="uploadedCSS">	
+				<?php	
+					add_thickbox();
+					foreach($ext_css as $name){
+						$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+						
+						printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a>
+						<a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a>
+						<a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p>
+						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name );
+					}	
+				?>
+			</ol>		
+			</tr>
+			<?php endif; ?>
+		</tr>
+		</table>
+		<h1 class="option">Custom CSS</h1>
 		<table class="form-table">
 
 		<tr>

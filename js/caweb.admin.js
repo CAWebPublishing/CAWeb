@@ -12,7 +12,7 @@
 	});
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
-$('input[type="button"]').click(function(e){changeMade = true; });
+$('input[type="button"], #removeStyle').click(function(e){changeMade = true; });
 $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 
     $('.caweb-nav-tab').click(function() {
@@ -96,6 +96,43 @@ $('#ca_google_search_id').on('input',function(e){
     front_search_option.removeClass('hidden');
   }
 });  
+
+$('.removeStyle').click(function(e){
+	e.preventDefault();
+	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
+	
+	if (r == true) 
+		this.parentNode.remove();
+	
+	
+});
+$( "#uploadedCSS" ).sortable();
+$( "#uploadedCSS" ).disableSelection();
+	
+$('#addCSS').click(function(e){
+	var ext_css_table = $('#custom-css table:first');
+	var rowCount = ext_css_table.children().children().length;
+	var row = document.createElement('TR');
+	var blankCol = document.createElement('TD');
+	var col = document.createElement('TD');
+	var fileUpload = document.createElement('Input');
+	
+	fileUpload.type = "file";
+	fileUpload.name = rowCount + "_upload";
+	fileUpload.id = rowCount + "_upload";
+	fileUpload.accept = ".css";
+	
+	col.append(fileUpload);
+	
+	row.append(blankCol);
+	row.append(col);
+	
+	ext_css_table.append(row);	
+
+	changeMade = true; 
+	
+});
+
  /* End of CAWeb Option Page */
 });
 

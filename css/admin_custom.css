@@ -35,6 +35,23 @@
 	text-decoration: underline;
   font-size: 1.2rem;
 }
+#addCSS:hover {
+    cursor: pointer;
+}
+ol#uploadedCSS li p {
+    display: inline;
+    cursor: -webkit-grab;
+}
+ol#uploadedCSS li .previewStyle {
+    margin-left: -105px;
+	color: green;
+}
+ol#uploadedCSS li .removeStyle {
+    margin-right: 45px;
+	color: red;
+	cursor: pointer
+}
+
 
 /* CAWeb Navigation Page Styles */
 .page-title-action{

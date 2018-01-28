@@ -510,7 +510,15 @@ function caweb_turn_off_divi_related_videos(){
 	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">',  $cssDir, $version   );
 	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">',  $cssDir, $version  );
 	printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/custom.css%2$s">',  $verDir, $version );
-		
+	
+	$ext_css = array_values( array_filter( get_option('caweb_external_css', array() ) ) );
+	
+	foreach( $ext_css as $index => $name ){
+		$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+			
+		printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $version );
+	}	
+					
 	if("" !== get_option('ca_custom_css', '') )
 	  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
 
