@@ -12,7 +12,7 @@
 	});
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
-$('input[type="button"], .removeStyle').click(function(e){changeMade = true; });
+$('input[type="button"]').click(function(e){changeMade = true; });
 $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 
     $('.caweb-nav-tab').click(function() {
@@ -101,9 +101,10 @@ $('.removeStyle').click(function(e){
 	e.preventDefault();
 	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
 	
-	if (r == true) 
+	if (r == true) {
+		changeMade = true; 
 		this.parentNode.remove();
-	
+	}
 	
 });
 $( "#uploadedCSS" ).sortable();
