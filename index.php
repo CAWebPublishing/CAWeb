@@ -103,7 +103,7 @@
 	float: left;
 }
 </style>
-<?php if (ca_version_check(5)) : ?>
+<?php if (caweb_version_check(5)) : ?>
 <style>
 .divider{
 	display: block !important;

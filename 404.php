@@ -5,7 +5,7 @@ get_template_part('partials/content', 'header')
 
 
 <div id="main-content" class="main-content">
-  <?php if ( ! ca_version_check(4) ) : ?>
+  <?php if ( ! caweb_version_check(4) ) : ?>
 
 	<div class="ca_wp_container">
 
@@ -35,7 +35,7 @@ get_template_part('partials/content', 'header')
         
 </main>
       
-       <?php if ( ! ca_version_check(4) ) : ?>
+       <?php if ( ! caweb_version_check(4) ) : ?>
 
     </div>
 
@@ -51,7 +51,7 @@ get_template_part('partials/content', 'header')
 
 <?php get_footer(); ?>
 
-<?php if (  ca_version_check(4) ) : ?>
+<?php if (  caweb_version_check(4) ) : ?>
 <style>
 .section-default .ca_wp_container {
     margin: 0;

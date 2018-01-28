@@ -12,7 +12,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <div id="main-content" class="main-content">
 
-<?php if ( ! ca_version_check(4, $post->ID) ) : ?>
+<?php if ( ! caweb_version_check(4, $post->ID) ) : ?>
 
 	<!--div class="ca_wp_container"-->
 
@@ -64,7 +64,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 			<?php endwhile; ?>
 					<span class="return-top hidden-print"></span>
 </main>
-<?php if ( ! ca_version_check(4, $post->ID) ) : ?>
+<?php if ( ! caweb_version_check(4, $post->ID) ) : ?>
 
 	<!--/div-->
 

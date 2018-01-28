@@ -320,7 +320,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
-		$display_icon = ("on" == $show_icon ? get_icon_span($icon) : '');
+		$display_icon = ("on" == $show_icon ? caweb_get_icon_span($icon) : '');
 
 		$address = array( $addr, $city, $state, $zip);
 		$address = array_filter( $address);
@@ -377,7 +377,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				address = address.filter(function(n){  return n !== ""  });
 				address = address.join(', ');
 
-				var icon_list = <?= json_encode( get_ca_icon_list(-1,'',true) ) ?>;
+				var icon_list = <?= json_encode( caweb_get_icon_list(-1,'',true) ) ?>;
 				var display_icon = "on" == args.show_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
 
 				var display_button = "on" == args.show_button && "" !== args.location_link ?

@@ -118,7 +118,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
         $item_meta = get_post_meta($item->ID);
 
         // Get array of Sub Nav Items (second-level-links)
-				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
+				$childLinks= caweb_get_nav_menu_item_children($item->ID, $menuitems);
 
 				// Count of Sub Nav Link
 				$childCount = count($childLinks);
@@ -142,7 +142,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
         $item_nav_image = '';
         if( !empty($item_meta['_caweb_menu_icon'][0]) ){
-          $item_nav_image =  get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
+          $item_nav_image =  caweb_get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
         }else if( !empty($item_meta['_caweb_menu_image'][0]) ){
           $item_nav_image = sprintf('<img class="widget_nav_menu_img" src="%1$s"/>', $item_meta['_caweb_menu_image'][0]);
         }
@@ -176,14 +176,14 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			if(0 == $item->menu_item_parent){
 				$item_meta = get_post_meta($item->ID);
 				// Get array of Sub Nav Items (second-level-links)
-				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
+				$childLinks= caweb_get_nav_menu_item_children($item->ID, $menuitems);
 
 				// Count of Sub Nav Link
 				$childCount = count($childLinks);
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
+				$icon = (!empty($icon) ? caweb_get_icon_span($icon) : caweb_get_blank_icon_span() );
 				// Create Link
 				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s%8$s</a>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
@@ -254,7 +254,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : '' );
+				$icon = (!empty($icon) ? caweb_get_icon_span($icon) : '' );
 
 				// Get desc if present
 				$desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');
@@ -341,7 +341,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$share =  str_replace("_", "-", $share);
 
 				$socialLinks .= sprintf('<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>',
-										( $share_email ? $mailto : esc_url( get_option($opt) ) ), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), get_icon_span($share), $share) ;
+										( $share_email ? $mailto : esc_url( get_option($opt) ) ), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), caweb_get_icon_span($share), $share) ;
 			}
 		}
     $socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
@@ -362,7 +362,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 <ul class="et_font_icon menu-icon-list" id="menu-icon-list-<?= $item_id; ?>">
 	<?php
 
-		foreach(get_ca_icon_list() as $name=>$code){
+		foreach(caweb_get_icon_list() as $name=>$code){
 			printf('<li data-icon="%1$s" class="icon-option %3$s"  name="%2$s"></li>',
              esc_attr( $code ), $name, (!empty($tmp['_caweb_menu_icon'][0] ) && $name == $tmp['_caweb_menu_icon'][0]  ? 'is_selected' : '' )  );
 		}

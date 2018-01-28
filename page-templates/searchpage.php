@@ -25,7 +25,7 @@ get_header();
     </div>
  </div>
 
-  <?php if ( ! ca_version_check(4) ) : ?>
+  <?php if ( ! caweb_version_check(4) ) : ?>
 
 	<div class="ca_wp_container">
 
@@ -37,7 +37,7 @@ get_header();
 							<gcse:searchresults></gcse:searchresults>
 				</article> <!-- .et_pb_post -->
 
-<?php if ( ! ca_version_check(4) ) : ?>
+<?php if ( ! caweb_version_check(4) ) : ?>
 
   </div>
 

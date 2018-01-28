@@ -1658,9 +1658,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 
 				$job_hours    = ( !empty( $job_hours ) ? sprintf('%1$s<br />', $job_hours) : '' );
 
-				$job_salary_min    = is_money($job_salary_min, '$0.00');
+				$job_salary_min    = caweb_is_money($job_salary_min, '$0.00');
 
-				$job_salary_max    = is_money($job_salary_max, '$0.00');
+				$job_salary_max    = caweb_is_money($job_salary_max, '$0.00');
 
       	$job_salary    = ( "on" == $show_job_salary ? sprintf('Salary Range: %1$s - %2$s<br />',$job_salary_min , $job_salary_max ) : '');
 

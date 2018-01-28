@@ -322,7 +322,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 			$posts_number = ( !empty($posts_number) ? $posts_number : -1);
 
-			$all_posts = return_posts($cat_array ,$tag_array, -1, $orderby, $order );
+			$all_posts = caweb_return_posts($cat_array ,$tag_array, -1, $orderby, $order );
 
 			setlocale(LC_MONETARY, 'en_US.UTF-8');
 
@@ -456,8 +456,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 									$job_hours =   ( !empty( $post_content_handler->job_hours ) ? sprintf('<div class="schedule">%1$s</div>', $post_content_handler->job_hours) : '' );
 
-									$job_salary_min    = (!empty($post_content_handler->job_salary_min) ? is_money($post_content_handler->job_salary_min,"$0.00") : "$0.00" );
-									$job_salary_max    = (!empty($post_content_handler->job_salary_max) ? is_money($post_content_handler->job_salary_max,"$0.00") : "$0.00" );
+									$job_salary_min    = (!empty($post_content_handler->job_salary_min) ? caweb_is_money($post_content_handler->job_salary_min,"$0.00") : "$0.00" );
+									$job_salary_max    = (!empty($post_content_handler->job_salary_max) ? caweb_is_money($post_content_handler->job_salary_max,"$0.00") : "$0.00" );
 
                   $job_salary_max = sprintf('  &mdash; %1$s', $job_salary_max );
 

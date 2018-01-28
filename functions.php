@@ -124,7 +124,7 @@ function caweb_init(){
 	unregister_nav_menu('footer-menu');
 
 	// Register Menu Navigation Settings
-	register_nav_menus( get_ca_nav_menu_theme_locations() );
+	register_nav_menus( cawen_nav_menu_theme_locations() );
 
 }
 
@@ -135,7 +135,7 @@ function caweb_wp_enqueue_scripts() {
 
 	$post_id = get_the_ID() ;
 	$theme_version = wp_get_theme('CAWeb')->get('Version');
-	$ver = ca_get_version($post_id);	
+	$ver = caweb_get_version($post_id);	
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	
 	// Required in order to inherit parent theme style.css
@@ -208,7 +208,7 @@ function caweb_wp_head(){
 	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
 	$cssDir = sprintf('%1$s/css', CAWebUri); 
-	$verDir = sprintf('%1$s/version%2$s',$cssDir,  ca_get_version(get_the_ID())); 
+	$verDir = sprintf('%1$s/version%2$s',$cssDir,  caweb_get_version(get_the_ID())); 
 	
 	$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
 	$color = get_option('ca_site_color_scheme', 'oceanside');
@@ -236,7 +236,7 @@ function caweb_wp_head(){
 /* CAWeb Footer */
 add_action( 'wp_footer', 'caweb_wp_footer', 11);
 function caweb_wp_footer(){
-	$ver = ca_get_version( get_the_ID() );
+	$ver = caweb_get_version( get_the_ID() );
 	// This removes Divi Builder Google Font CSS
 	wp_deregister_style('et-builder-googlefonts');
   
