@@ -14,8 +14,8 @@ function caweb_add_meta_boxes(){
 	remove_meta_box('et_settings_meta_box', array('post','page'), 'side');
 }
 
-add_action( 'admin_head-nav-menus.php', 'caweb_admin_head-nav-menus' );
-function caweb_admin_head-nav-menus(){
+add_action( 'admin_head-nav-menus.php', 'caweb_admin_head_nav_menus' );
+function caweb_admin_head_nav_menus(){
 	// Remove Divi Metaboxes
 	remove_meta_box('add-project_category','nav-menus', 'side');
 	remove_meta_box('add-project_tag','nav-menus', 'side');

@@ -45,7 +45,7 @@ add_action( 'admin_menu', 'caweb_admin_menu', 15 );
   
 // If direct access to certain menus is accessed
 // redirect to admin page
-function caweb_load-themes-tools() {
+function caweb_load_themes_tools() {
 	global $pagenow;
 
 	if( ( is_multisite() && ! current_user_can('manage_network_options') ) ){
@@ -53,8 +53,8 @@ function caweb_load-themes-tools() {
 		exit;
 	}
 }
-add_action( 'load-themes.php', 'caweb_load-themes-tools' );
-add_action( 'load-tools.php', 'caweb_load-themes-tools' );
+add_action( 'load-themes.php', 'caweb_load_themes_tools' );
+add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 
 
 // Setup CAWeb Options Menu
@@ -243,7 +243,7 @@ $social =  caweb_get_site_options('social');
 $sanitized = caweb_get_site_options('sanitized');
 		
 $options = array_merge( $social, $sanitized  );
-		
+
 foreach( $options as $name ){
 			add_action('pre_update_option_' . $name , 'caweb_sanitize_various_options', 10, 3);
 			
@@ -260,20 +260,24 @@ function caweb_sanitize_various_options( $value, $old_value, $option ){
 			
 	$options = array_merge( $social, $sanitized  );
 	
+		
 	// if fields contain a script or style remove it
 	if( in_array( $option, $options ) )
-		$value = strip_tags( preg_replace($p, "", $value ) );
-	
+		$value = strip_tags( preg_replace($p, "", $value ) );	
+		
 	// if field is a url escape the url
-	if( ( in_array( $option, $social ) || in_array( $option, $sanitized ) ) && 
-		false !== strpos($option, '_link'))
+	// $pattern = regex of fields to exclude
+	$pattern = '/ca_utility_link_\d_name/';
+	if(  in_array( $option, $options ) && 
+		empty( preg_match( $pattern, $option ) ) )
 		$value = esc_url( $value );
+		
 	
 	/*
 		if field is a label replace all escape characters with something else to prevent WordPress escaping
 		single quote = caweb_apostrophe
 		backslash = caweb_backslash
-	*/
+	*/	
 	if( in_array( $option, $sanitized  ) ){
 		$value = preg_replace('/\\\\\'/', 'caweb_apostrophe', $value );
 		$value = preg_replace('/\\"/', 'caweb_double_quote', $value );
