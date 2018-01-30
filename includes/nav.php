@@ -1,8 +1,5 @@
 <?php
 
-require_once(CAWebAbsPath . '/functions/ca_custom_nav_walker.php');
-
-
 if (!class_exists('CAWeb_Nav_Menu')) {
 
 class CAWeb_Nav_Menu extends Walker_Nav_Menu{
@@ -13,15 +10,15 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	 *--------------------------------------------*/
 	function __construct() {
 		// Hooked onto the WordPress Navigation Walker Edit
-    add_filter( 'wp_edit_nav_menu_walker', array( $this, 'ca_edit_walker'), 9999);
-    add_action('wp_nav_menu_item_custom_fields', array($this, 'menu_item_custom_fields'), 9, 4);
-		add_action( 'wp_update_nav_menu_item', array($this,'ca_wp_update_nav_menu_item') , 10, 3 );
+		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'caweb_edit_nav_menu_walker'), 9999);
+		add_action('wp_nav_menu_item_custom_fields', array($this, 'caweb_nav_menu_item_custom_fields'), 9, 4);
+		add_action( 'wp_update_nav_menu_item', array($this,'caweb_update_nav_menu_item') , 10, 3 );
 
 
-		// Hooked onto the WordPress Navigation
-    add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
-    // https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
-    add_filter('widget_nav_menu_args', array($this, 'caweb_widget_nav_menu_args'), 10, 4 );
+			// Hooked onto the WordPress Navigation
+		add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args') );
+		// https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
+		add_filter('widget_nav_menu_args', array($this, 'caweb_widget_nav_menu_args'), 10, 4 );
 		add_filter('wp_nav_menu', array($this, 'caweb_nav_menu'), 10, 2 );
 
 	} // end constructor
@@ -40,7 +37,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
      return $args;
   }
 
-	function ca_edit_walker($current = 'Walker_Nav_Menu_Edit') {
+	function caweb_edit_nav_menu_walker($current = 'Walker_Nav_Menu_Edit') {
     		if ($current !== 'Walker_Nav_Menu_Edit')
           return $current;
 
@@ -121,7 +118,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
         $item_meta = get_post_meta($item->ID);
 
         // Get array of Sub Nav Items (second-level-links)
-				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
+				$childLinks= caweb_get_nav_menu_item_children($item->ID, $menuitems);
 
 				// Count of Sub Nav Link
 				$childCount = count($childLinks);
@@ -145,7 +142,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
         $item_nav_image = '';
         if( !empty($item_meta['_caweb_menu_icon'][0]) ){
-          $item_nav_image =  get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
+          $item_nav_image =  caweb_get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
         }else if( !empty($item_meta['_caweb_menu_image'][0]) ){
           $item_nav_image = sprintf('<img class="widget_nav_menu_img" src="%1$s"/>', $item_meta['_caweb_menu_image'][0]);
         }
@@ -179,14 +176,14 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			if(0 == $item->menu_item_parent){
 				$item_meta = get_post_meta($item->ID);
 				// Get array of Sub Nav Items (second-level-links)
-				$childLinks= get_nav_menu_item_children($item->ID, $menuitems);
+				$childLinks= caweb_get_nav_menu_item_children($item->ID, $menuitems);
 
 				// Count of Sub Nav Link
 				$childCount = count($childLinks);
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
+				$icon = (!empty($icon) ? caweb_get_icon_span($icon) : caweb_get_blank_icon_span() );
 				// Create Link
 				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s%8$s</a>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
@@ -257,7 +254,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? get_icon_span($icon) : '' );
+				$icon = (!empty($icon) ? caweb_get_icon_span($icon) : '' );
 
 				// Get desc if present
 				$desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');
@@ -332,7 +329,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 	}
 
 	public function createFooterSocialMenu($args){
-		$social_share = get_ca_social_options();
+		$social_share = caweb_get_site_options('social');
 		$socialLinks = '';
 
 		foreach($social_share as $opt){
@@ -344,16 +341,16 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 				$share =  str_replace("_", "-", $share);
 
 				$socialLinks .= sprintf('<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>',
-										( $share_email ? $mailto : esc_url( get_option($opt) ) ), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), get_icon_span($share), $share) ;
+										( $share_email ? $mailto : esc_url( get_option($opt) ) ), ( get_option($opt . '_new_window') ? 'target="_blank"' : ''), caweb_get_icon_span($share), $share) ;
 			}
 		}
-    $socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
+		$socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
 											(4 >= $args->version ? 'full' : 'quarter text-right' ), (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : '' ), $socialLinks	);
 		return $socialLinks;
 	}
 
 
-function menu_item_custom_fields($item_id, $item, $depth, $args) {
+function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
 		$tmp = get_post_meta($item->ID);
 ?>
 
@@ -365,7 +362,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 <ul class="et_font_icon menu-icon-list" id="menu-icon-list-<?= $item_id; ?>">
 	<?php
 
-		foreach(get_ca_icon_list() as $name=>$code){
+		foreach(caweb_get_icon_list() as $name=>$code){
 			printf('<li data-icon="%1$s" class="icon-option %3$s"  name="%2$s"></li>',
              esc_attr( $code ), $name, (!empty($tmp['_caweb_menu_icon'][0] ) && $name == $tmp['_caweb_menu_icon'][0]  ? 'is_selected' : '' )  );
 		}
@@ -415,7 +412,7 @@ function menu_item_custom_fields($item_id, $item, $depth, $args) {
 	}
 
   // save menu custom fields that are added on to ca_custom_nav_walker
-	public function ca_wp_update_nav_menu_item($menu_id, $menu_item_db_id, $args){
+	public function caweb_update_nav_menu_item($menu_id, $menu_item_db_id, $args){
  		// Check if element is properly sent
 		if ( isset( $_POST['menu-item-db-id'] ) ){
 			$args['caweb-menu-item-icon'] = $_POST[$menu_item_db_id . '_icon'];

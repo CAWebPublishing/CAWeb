@@ -1,29 +1,32 @@
 <?php
 
 
-// Register Meta Boxes
-function ca_register_meta_boxes(){
+// Add CAWeb Meta Boxes
+add_action( 'add_meta_boxes', 'caweb_add_meta_boxes' );
+function caweb_add_meta_boxes(){
 
-// Page Meta Box
-add_meta_box( 'et_ca_page_meta_box', '<span class="ca-gov-icon-pencil-edit"></span> CA Page Settings',
-		'ca_page_identifier_metabox_callback', array('page','post'),'side','high');
-
+	// Page Meta Box
+	add_meta_box( 'et_ca_page_meta_box', '<span class="ca-gov-icon-pencil-edit"></span> CA Page Settings',
+		'caweb_page_identifier_metabox_callback', array('page','post'),'side','high');
+	
+	
+	// Remove Divi Metaboxes
 	remove_meta_box('et_settings_meta_box', array('post','page'), 'side');
 }
-add_action( 'add_meta_boxes', 'ca_register_meta_boxes' );
 
-function ca_nav_menu_meta_boxes(){
+add_action( 'admin_head-nav-menus.php', 'caweb_admin_head_nav_menus' );
+function caweb_admin_head_nav_menus(){
+	// Remove Divi Metaboxes
 	remove_meta_box('add-project_category','nav-menus', 'side');
 	remove_meta_box('add-project_tag','nav-menus', 'side');
 }
-add_action( 'admin_head-nav-menus.php', 'ca_nav_menu_meta_boxes' );
 
 /**
  * Page Option Meta box display callback.
  *
  * @param WP_Post $post Current post object.
  */
-function ca_page_identifier_metabox_callback( $post ) {
+function caweb_page_identifier_metabox_callback( $post ) {
 	if("" == get_post_meta($post->ID, 'ca_custom_initial_state',true) ){
 		update_post_meta($post->ID, 'ca_custom_initial_state', true);
 		update_post_meta($post->ID, 'ca_default_navigation_menu', get_option('ca_default_navigation_menu') );
@@ -68,10 +71,9 @@ Display Title on Page
 <?php
 
 }
-
-
 /* Save post meta on the 'save_post' hook. */
-function ca_save_post_meta($post_id, $post){
+add_action( 'save_post', 'caweb_save_post', 10, 2 );
+function caweb_save_post($post_id, $post){
 	 /* Verify the nonce before proceeding. */
     if ( !isset( $_POST["ca_page_meta_item_identifier_nonce"] ) ||
 	!wp_verify_nonce( $_POST["ca_page_meta_item_identifier_nonce"], basename( __FILE__ ) ) ){
@@ -92,5 +94,4 @@ function ca_save_post_meta($post_id, $post){
 	}
 
 }
-add_action( 'save_post', 'ca_save_post_meta', 10, 2 );
 ?>

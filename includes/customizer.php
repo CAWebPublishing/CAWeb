@@ -1,5 +1,8 @@
 <?php
-
+/*
+	CAWeb Customizer Preview Init
+*/
+add_action( 'customize_preview_init', 'caweb_customize_preview_init');
 function caweb_customize_preview_init(){
   wp_register_script('caweb-customizer-script',	CAWebUri . '/js/theme-customizer.js', array('jquery','customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
   
@@ -10,16 +13,21 @@ function caweb_customize_preview_init(){
   wp_dequeue_script( 'divi-customizer' );
   
 }
-add_action( 'customize_preview_init', 'caweb_customize_preview_init');
 
+/*
+	CAWeb Customizer Enqueue Scripts
+*/
+add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
 function caweb_customize_controls_enqueue_scripts(){
    wp_register_script('caweb-customize-controls-script',	CAWebUri . '/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
   wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( true ), 'all' => caweb_color_schemes() ) );
 
 	wp_enqueue_script( 'caweb-customize-controls-script' );
 }
-add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
 
+/*
+	CAWeb Active Callbacks
+*/
 function caweb_customizer_v4_option( $customizer ){
   $manager = $customizer->manager; 
     
@@ -29,9 +37,30 @@ function caweb_customizer_v5_option( $customizer ){
   $manager = $customizer->manager;  
   return 5 ==  $manager->get_control('ca_site_version')->value() ? true : false;
 }
+
+/*
+	CAWeb Sanitize Callbacks
+*/
 function caweb_sanitize_customizer_checkbox( $checked ){
    return ( ( isset( $checked ) && true == $checked ) ? "1" : "0" );
 }
+function caweb_sanitize_option_ca_custom_css($value, $option){  
+  return addslashes($value);
+}
+
+/*
+	CAWeb Customizer Styles
+*/
+add_action('customize_controls_print_styles', 'caweb_customize_controls_print_styles');
+function caweb_customize_controls_print_styles(){
+  print '<style>#customize-control-ca_site_version #_customize-input-ca_site_version option:checked:first-child + 
+#customize-control-ca_site_color_scheme #_customize-input-ca_site_color_scheme option:first-child { color: blue; }</style>';
+
+}
+/*
+	CAWeb Register Customizer 
+*/
+add_action( 'customize_register', 'caweb_customize_register' );
 function caweb_customize_register( $wp_customize ) {
   
   // Remove Divi Customization Panels and Sections  
@@ -181,8 +210,6 @@ function caweb_customize_register( $wp_customize ) {
 		) ) );
   
 	// Custom Utility Links
-	$options = get_ca_site_options();
-		
 	for( $link = 1; $link < 4; $link++ ){
 		$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
 		$label = htmlentities( get_option( sprintf('ca_utility_link_%1$s_name', $link ) ) ) ;
@@ -337,7 +364,7 @@ function caweb_customize_register( $wp_customize ) {
   															'priority'   => 30,
   															'panel' => 'caweb_options') );
   
-  $social_options = get_ca_social_options();
+  $social_options = caweb_get_site_options('social'); 
   
   foreach( $social_options as $social => $option){
     $wp_customize->add_setting($option, array(
@@ -413,17 +440,5 @@ function caweb_customize_register( $wp_customize ) {
     
 
 }
-add_action( 'customize_register', 'caweb_customize_register' );
-
-function caweb_sanitize_option_ca_custom_css($value, $option){  
-  return addslashes($value);
-}
-
-function caweb_customize_controls_print_styles(){
-  print '<style>#customize-control-ca_site_version #_customize-input-ca_site_version option:checked:first-child + 
-#customize-control-ca_site_color_scheme #_customize-input-ca_site_color_scheme option:first-child { color: blue; }</style>';
-
-}
-add_action('customize_controls_print_styles', 'caweb_customize_controls_print_styles');
 
 ?>

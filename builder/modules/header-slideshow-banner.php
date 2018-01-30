@@ -196,7 +196,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 					</div>
 				</div>
 			</div> <!-- .et_pb_ca_banner -->',
-      esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  get_icon_span($scroll_bar_icon)
+      esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  caweb_get_icon_span($scroll_bar_icon)
 		);
 		return $output;
 	}
@@ -205,7 +205,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function slideshow_banner_removal() {
-			if( ! ca_version_check(4, get_the_ID() )  )
+			if( ! caweb_version_check(4, get_the_ID() )  )
 				return;
 
       $module = ( !is_404() ? caweb_get_shortcode_from_content( get_the_content(), 'et_pb_ca_fullwidth_banner') : array() );

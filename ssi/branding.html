@@ -4,9 +4,9 @@ global $post;
 
 $post_id = (is_object($post) ? $post->ID : $post['ID']);
 ?>
-<div class="branding <?= ( ca_version_check(5, $post_id) ? 'ca_wp_container' : '') ?>">
+<div class="branding <?= ( caweb_version_check(5, $post_id) ? 'ca_wp_container' : '') ?>">
   <?php
-  if(ca_version_check(5, $post_id)){
+  if(caweb_version_check(5, $post_id)){
     printf('<div class="header-organization-banner hidden-print"><a href="/"><img src="%1$s" alt="Organization Title" /></a></div>', get_stylesheet_directory_uri() . '/images/system/logo.svg');
     
 	printf('<div class="header-cagov-logo"><a href="/">%1$s</a></div>', 

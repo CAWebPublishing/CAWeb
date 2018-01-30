@@ -258,7 +258,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$class = "et_pb_ca_panel et_pb_module";
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-		$display_icon = ("on" == $use_icon ? get_icon_span( $icon ) : '');
+		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
@@ -312,7 +312,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 			?>
 			<script>
 			window.<?php echo $this->slug; ?>_preview = function(args) {
-				var icon_list = <?= json_encode( get_ca_icon_list(-1,'',true) ) ?>;
+				var icon_list = <?= json_encode( caweb_get_icon_list(-1,'',true) ) ?>;
 				var dispay_icon = "on" == args.use_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
 
 				var heading_size = "none" == args.panel_layout ? "h1" : "h2";
@@ -585,7 +585,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$class = "et_pb_ca_fullwidth_panel et_pb_module";
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-		$display_icon = ("on" == $use_icon ? get_icon_span($icon) : '');
+		$display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) : '');
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );

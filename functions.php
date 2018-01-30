@@ -19,26 +19,40 @@ define('CAWebAbsPath', get_stylesheet_directory()) ;
 define('CAWebUri', get_stylesheet_directory_uri()) ;
 
 define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
+/*
+	Actions Ran During any Request
+*/
+// CAWeb After Setup Theme
+add_action('after_setup_theme', 'caweb_setup_theme');
+function caweb_setup_theme(){
+	$inc_dir = CAWebAbsPath. '/includes';
+	
+	// additional functions
+	require_once("{$inc_dir}/functions.php");
 
-// After Setup Theme
-function ca_setup_theme(){
+	// customizer functions
+	require_once("{$inc_dir}/customizer.php");
 
-// Include additional functions
-require_once(CAWebAbsPath. '/functions/additional_functions.php');
+	// Navigation Menu Customization to wp-admin/nav-menus.php page
+	require_once("{$inc_dir}/nav_walker.php");
+	require_once("{$inc_dir}/nav.php");
 
-// Include customizer functions
-require_once(CAWebAbsPath. '/functions/customizer.php');
+	 // Metaboxes
+	require_once("{$inc_dir}/metaboxes.php");	
 
-// Add CA Options Page
-require_once(CAWebAbsPath. '/options.php');
-
-// Add CAWeb Navigation Menu Customization to wp-admin/nav-menus.php page
-require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
-
-  // CA Metaboxes
-	require_once(CAWebAbsPath. '/functions/metaboxes.php');
-
-	// Set Predefined Category Content Types
+	// Password Reset
+	require_once("{$inc_dir}/wp-login.php");
+	// Core Updater
+	require_once(CAWebAbsPath. '/core/update.php');
+	
+	// Options Page
+	require_once(CAWebAbsPath. '/options.php');	
+	
+	// Filters
+	require_once("{$inc_dir}/filters.php");	
+	
+	
+	// Set Up Predefined Category Content Types
 	$ca_cats = array(
 		'Courses', 'Events', 'Exams','FAQs', 'Jobs',
 		 'News', 'Profiles','Publications' );
@@ -51,8 +65,6 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 			'name' => 'All',
 			'slug' => 'all'));
 
-
-
 	/* Loop thru Predefined Categories and create
 	Content Categories under Content Types Category */
 	foreach($ca_cats as $c){
@@ -64,23 +76,23 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	// Enable Post Thumbnails
 	add_theme_support( 'post-thumbnails' );
 
-	require_once(CAWebAbsPath. '/core/update.php');
 
-  // Updating the following CAWeb Checkbox Options, when enabled they saved
-  // as "on" this is being changed to true.
-  $options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
-  $options = array_merge($options, get_ca_social_extra_options() );
-  foreach( $options as $option ){
-     $val = get_option($option);
-     if("on" == $val )
-       update_option($option, true);
-   }
+	// Updating the following CAWeb Checkbox Options, when enabled they saved
+	// as "on" this is being changed to true.
+	$options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
+	$options = array_merge($options, caweb_get_site_options('social-extra') );
+	foreach( $options as $option ){
+		$val = get_option($option);
+		if("on" == $val )
+			update_option($option, true);
+	}
 
 
 }
-add_action('after_setup_theme', 'ca_setup_theme');
 
-function caweb_limit_posts($query){
+// CAWeb Pre Get Posts
+add_action('pre_get_posts', 'caweb_pre_get_posts', 11);
+function caweb_pre_get_posts($query){
 	global $wp_query;
 	$vars = array('year', 'monthnum', 'author_name', 'category_name', 'tag', 'paged');
 	$query_vars = $wp_query->query;
@@ -95,17 +107,13 @@ function caweb_limit_posts($query){
 	
 	return $query;
 }
-add_action('pre_get_posts', 'caweb_limit_posts', 11);
 
-
-/* Remove Divi Blank Page Template */
-function caweb_remove_page_templates( $templates ) {
-    unset( $templates['page-template-blank.php'] );
-    return $templates;
-}
-add_filter( 'theme_page_templates', 'caweb_remove_page_templates' );
-
-function ca_init(){
+/*
+ Actions Ran During a Typical Request
+*/
+// CAWeb Init
+add_action('init', 'caweb_init');
+function caweb_init(){
 
 	// Unregister Divi Project Type
 	unregister_post_type( 'project' );
@@ -116,40 +124,18 @@ function ca_init(){
 	unregister_nav_menu('footer-menu');
 
 	// Register Menu Navigation Settings
-	register_nav_menus( get_ca_nav_menu_theme_locations() );
+	register_nav_menus( cawen_nav_menu_theme_locations() );
 
 }
-add_action('init', 'ca_init');
 
-function caweb_admin_head(){
-	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
-	printf('<link rel="icon" href="%1$s">', $icon);
-
-  /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
-	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
-}
-add_action('admin_head', 'caweb_admin_head');
-
-/* Defer some scripts */
-function defer_parsing_of_js( $tag, $handle, $src ){
-  $js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script', 'cagov-navigation-script',
-						'cagov-ga-autotracker-script', 'cagov-google-script');
-  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
-  if( in_array($handle, $js_scripts) )
-	  return str_replace('src', 'defer src', $tag);
-
-  return $tag;
-
-}
-add_filter('script_loader_tag', 'defer_parsing_of_js', 10, 3);
-
-/* Enqueue Scripts and Styles at the bottom */
-function ca_theme_enqueue_style() {
+/* CAWeb Enqueue Scripts and Styles at the bottom */
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts',15 );
+function caweb_wp_enqueue_scripts() {
 	global $pagenow;
 
 	$post_id = get_the_ID() ;
 	$theme_version = wp_get_theme('CAWeb')->get('Version');
-	$ver = ca_get_version($post_id);	
+	$ver = caweb_get_version($post_id);	
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	
 	// Required in order to inherit parent theme style.css
@@ -200,43 +186,57 @@ function ca_theme_enqueue_style() {
 	// This removes Divi Google Font CSS
 	wp_deregister_style('divi-fonts');
 }
-add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
-// Admin Enqueue Scripts and Styles
+// CAWeb WP Head
+add_action('wp_head','caweb_wp_head', 105);
+function caweb_wp_head(){
+?>
+	<script>
+	(function($) {
+		$(window).bind("load", function() {
+			$('.fluid-width-video-wrapper').each(function() {
+				var src = $(this).find('iframe').attr('src');
+				$(this).find('iframe').attr('src', src + '&amp;rel=0');
+			});
+		});
+	})(jQuery)
+	</script>
 
-function ca_admin_enqueue_scripts($hook){
-	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
-	$theme_version = wp_get_theme('CAWeb')->get('Version');
+<?php
 
-	if( in_array($hook , $pages) ){
-		// Enqueue Scripts
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_media();
+	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
-		wp_enqueue_script( 'custom-header' );
+	$cssDir = sprintf('%1$s/css', CAWebUri); 
+	$verDir = sprintf('%1$s/version%2$s',$cssDir,  caweb_get_version(get_the_ID())); 
+	
+	$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
+	$color = get_option('ca_site_color_scheme', 'oceanside');
+	
+	printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/cagov.core.css%2$s">',  $verDir, $version );  
+	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">',  $verDir, $color, $version  );
+	printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/modules.css%2$s">',  $cssDir, $version   );
+	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">',  $cssDir, $version   );
+	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">',  $cssDir, $version  );
+	printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/custom.css%2$s">',  $verDir, $version );
+	
+	$ext_css = array_values( array_filter( get_option('caweb_external_css', array() ) ) );
+	
+	foreach( $ext_css as $index => $name ){
+		$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+			
+		printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $version );
+	}	
+					
+	if("" !== get_option('ca_custom_css', '') )
+	  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
 
-		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'), $theme_version);
-		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
-
-		wp_enqueue_script( 'browse-caweb-library' );
-    // Localize the search script with the site domain, and current page hook
-		wp_localize_script( 'caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook) );
-
-		wp_enqueue_script( 'caweb-admin-scripts' );
-
-		// Enqueue Styles
-			wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
-
-	}elseif(in_array($hook, array('post.php', 'post-new.php', 'widgets.php') )){
-		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
-	}
-
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
 }
-add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts',15);
 
+/* CAWeb Footer */
+add_action( 'wp_footer', 'caweb_wp_footer', 11);
 function caweb_wp_footer(){
-	$ver = ca_get_version( get_the_ID() );
+	$ver = caweb_get_version( get_the_ID() );
 	// This removes Divi Builder Google Font CSS
 	wp_deregister_style('et-builder-googlefonts');
   
@@ -312,45 +312,55 @@ function caweb_wp_footer(){
   
   
 }
-add_action( 'wp_footer', 'caweb_wp_footer', 11);
 
-function caweb_banner_content_filter($content, $ver = 5){
-  $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
+/*
+	Actions Ran During an Admin Page Request
+*/
+// CAWeb Admin Enqueue Scripts and Styles
+add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts',15);
+function caweb_admin_enqueue_scripts($hook){
+	$pages = array( 'toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php' );
+	$theme_version = wp_get_theme('CAWeb')->get('Version');
 
-  /* Filter the Header Slideshow Banner */
-  if( !empty($module) ){
-        $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
-        $carousel = '';
+	if( in_array($hook , $pages) ){
+		// Enqueue Scripts
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_media();
 
-        foreach($slides as $i => $slide){
-          $heading = '';
-          $info = '';
-          if("on" == $slide->display_banner_info){
-            $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
+		wp_enqueue_script( 'custom-header' );
 
-            if(!isset($slide->display_heading) || "on" == $slide->display_heading )
-              $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
+		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'), $theme_version);
+		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
+		wp_enqueue_script( 'browse-caweb-library' );
+    // Localize the search script with the site domain, and current page hook
+		wp_localize_script( 'caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook) );
 
-            $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
+		wp_enqueue_script( 'caweb-admin-scripts' );
 
-          }
-          $carousel .= sprintf('<div class="slide" %1$s>%2$s</div> ',
-                              (isset($slide->background_image) ?
-                               sprintf('style="background-image: url(%1$s);"', $slide->background_image) : ""), $info);
-         }
+		// Enqueue Styles
+			wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
 
-        $banner = sprintf('<div class="header-slideshow-banner">
-          <div id="primary-carousel" class="carousel carousel-banner">
-            %1$s</div></div>', $carousel);
+	}elseif(in_array($hook, array('post.php', 'post-new.php', 'widgets.php') )){
+		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), $theme_version );
+	}
 
-  			return $banner;
-  }
-
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
 }
 
-/* Adjust WP Admin Bar */
-function ca_admin_bar_menu( $wp_admin_bar ) {
+// CAWeb Admin Head
+add_action('admin_head', 'caweb_admin_head');
+function caweb_admin_head(){
+	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
+	printf('<link rel="icon" href="%1$s">', $icon);
+
+  /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
+	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
+}
+
+/* CAWeb Admin Bar Menu */
+add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
+function caweb_admin_bar_menu( $wp_admin_bar ) {
   /* Remove WP Admin Bar Nodes */
 	$wp_admin_bar->remove_node( 'themes' );
 	$wp_admin_bar->remove_node( 'menus' );
@@ -388,294 +398,22 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 	}
 }
 
-add_action( 'admin_bar_menu', 'ca_admin_bar_menu', 1000 );
-
-
-/*
-	TinyMCE Editor
-*/
-// Add hidden MCE Buttons
-// The primary toolbar (always visible)
-function ca_mce_buttons( $buttons ) {
-	/**
-		Add in a core button that's disabled by default
-	**/
-  $tmp = array('formatselect', 'bold', 'italic', 'underline');
-  array_splice($buttons, 0, 3, $tmp);
-
-	return $buttons;
-
-}
-add_filter( 'mce_buttons', 'ca_mce_buttons' );
-
-function ca_mce_buttons_2( $buttons ) {
-
-	/**
-		Add in a core button that's disabled by default
-	**/
-
-	$tmp = array('styleselect', 'strikethrough', 'hr', 'fontselect', 'fontsizeselect',
-               'forecolor', 'backcolor', 'pastetext', 'copy','subscript', 'superscript');
-  array_splice($buttons, 0, 5, $tmp);
-
-	return $buttons;
-
-}
-add_filter( 'mce_buttons_2', 'ca_mce_buttons_2' );
-
-function ca_mce_before_init_insert_formats( $init_array ) {
-
-
-
-	// Define the style_formats array
-	// Each array child is a format with it's own settings
-	$style_formats = array(
-		array(
-			'title' => 'Featured Narrative',
-			'block' => 'aside',
-			'classes' => 'featured-narrative',
-			'wrapper' => true,
-		),
-		array(
-			'title' => 'Overstated List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-overstated',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'),
-		),
-		array(
-			'title' => 'Standout List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-standout',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'),
-		),
-		array(
-			'title' => 'Understated List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-understated',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'
-			),
-		),
-	);
-
-	// Insert the array, JSON ENCODED, into 'style_formats'
-  $init_array['style_formats'] = json_encode( $style_formats );
-
-  // TinyMCE Toolbar Start off unhidden
-	$init_array['wordpress_adv_hidden'] = false;
-
-  return $init_array;
-
-}
-
-// Attach callback to 'tiny_mce_before_init'
-
-add_filter( 'tiny_mce_before_init', 'ca_mce_before_init_insert_formats' );
-
-function caweb_turn_off_divi_related_videos(){
- 	?>
-<script>
-(function($) {
-    $(window).bind("load", function() {
-        $('.fluid-width-video-wrapper').each(function() {
-            var src = $(this).find('iframe').attr('src');
-            $(this).find('iframe').attr('src', src + '&amp;rel=0');
-        });
-    });
-})(jQuery)
-</script>
-
-<?php
-
-	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
-	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
-
-	$cssDir = sprintf('%1$s/css', CAWebUri); 
-	$verDir = sprintf('%1$s/version%2$s',$cssDir,  ca_get_version(get_the_ID())); 
-	
-	$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
-	$color = get_option('ca_site_color_scheme', 'oceanside');
-	
-	printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/cagov.core.css%2$s">',  $verDir, $version );  
-	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">',  $verDir, $color, $version  );
-	printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/modules.css%2$s">',  $cssDir, $version   );
-	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">',  $cssDir, $version   );
-	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">',  $cssDir, $version  );
-	printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/custom.css%2$s">',  $verDir, $version );
-	
-	$ext_css = array_values( array_filter( get_option('caweb_external_css', array() ) ) );
-	
-	foreach( $ext_css as $index => $name ){
-		$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-			
-		printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $version );
-	}	
-					
-	if("" !== get_option('ca_custom_css', '') )
-	  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
-
-}
-add_action('wp_head','caweb_turn_off_divi_related_videos', 105);
-
-function wp_ca_body_class( $wp_classes, $extra_classes ) {
-	global $post;
-
-	// List of the classes that need to be removed
-	$blacklist= array('et_secondary_nav_dropdown_animation_fade',
-				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
-
-	// List of extra classes that need to be added to the body
-	if( isset($post->ID) ){
-		$divi = et_pb_is_pagebuilder_used( $post->ID );
-		$sidebar_enabled = ! is_page();
-		$special_templates = is_tag() || is_archive() || is_category() || is_author();
-
-		$whitelist = array( (  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
-                     ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', false) ? 'title_displayed' : 'title_not_displayed' ),
-                      sprintf('v%1$s', ca_get_version($post->ID) ),
-                       (is_active_sidebar('sidebar-1') && $sidebar_enabled  ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
-	}
-	$whitelist[] = ( get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
-	
-   	// Remove any classes in the blacklist from the wp_classes
-	$wp_classes = array_diff( $wp_classes, $blacklist);
-
-	// Return filtered wp class
-	return  array_merge($wp_classes, (array) $whitelist);
-
-}
-add_filter( 'body_class', 'wp_ca_body_class', 20, 2 );
-
-function wp_ca_post_class( $classes ) {
-	global $post;
-
-  if( has_post_thumbnail( $post->ID ) && "" == get_the_post_thumbnail_url( $post->ID ) )
-		 unset( $classes[ array_search("has-post-thumbnail", $classes) ] );
-
-	return $classes;
-}
-add_filter( 'post_class', 'wp_ca_post_class', 15 );
-
-/* Password Reset Filters and Actions
-	https://github.com/WordPress/WordPress/blob/master/wp-login.php
-*/
-// Lost your password? URL
-add_filter( 'lostpassword_url', 'caweb_lostpassword_url', 10, 2 );
-function caweb_lostpassword_url( $lostpassword_url, $redirect ) {
-    return home_url( '/wp-login.php?action=lostpassword' );
-}
-// Redirect for after Lost your password has been generated
-add_filter( 'lostpassword_redirect', 'caweb_lostpassword_redirect');
-function caweb_lostpassword_redirect( $lostpassword_redirect ){
-	return home_url( '/wp-login.php?checkemail=confirm'  );
-}
-// Changes Blog Name in title to the correct site Blog Name
-add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 11, 3 ); 
-function caweb_retrieve_password_title( $title, $user_login, $user_data ) { 
-    $pattern = '/\[.*\]/';
-	$siteid = isset( $_POST['siteid'] ) ? $_POST['siteid'] : 1;
-	$blogname =  wp_specialchars_decode( get_blog_details($siteid)->blogname , ENT_QUOTES  ) ;
-	
-    return  preg_replace( $pattern, sprintf('[%1$s]',$blogname), $title) ; 
-}; 
-
-// Changes Blog Name in message to the correct site Blog Name
-add_filter( 'retrieve_password_message', 'caweb_retrieve_password_message', 10, 4 ); 
-function caweb_retrieve_password_message(  $message, $key, $user_login, $user_data ){
-	$pattern = array('/Site Name: .*/', '/<.*(\/wp-login.php)/');
-	$siteid = isset( $_POST['siteid'] ) ? $_POST['siteid'] : 1;
-	$blogname =  wp_specialchars_decode( get_blog_details($siteid)->blogname , ENT_QUOTES  ) ;
-	$blogurl = get_site_url($siteid);	
-	$replacements = array(sprintf('Site Name: %1$s', $blogname), sprintf('%1$s$1', $blogurl));
-
-	$message = preg_replace( $pattern, $replacements,  $message );
-	
-	return $message;
-}
-// Change the Reset Password URL to use the site url instead of the network url
-function caweb_network_site_url( $url,  $path,  $scheme ){
-	if ( false !== strpos($url, '/wp-login.php?action=resetpass') )
-			return site_url('/wp-login.php?caweb=resetpass');
-	
-	return $url;
-}
-// Add Reset Password Confirmation
-add_filter('wp_login_errors', 'caweb_wp_login_errors', 10 , 2);
-function caweb_wp_login_errors( $errors, $redirect_to ){
-	print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
-	if ( isset( $_GET['caweb'] ) && 'resetpass' == $_GET['caweb'] && isset( $_POST['rp_key'])  )
-		$errors->add('updated','<p class="caweb-resetpass">You have successfully reset your password.</p>');
-	
-	return $errors;	
-}
-// Add Site ID to lost password form
-add_action('lostpassword_form', 'caweb_lostpassword_form');
-function caweb_lostpassword_form(){
-	printf('<input type="hidden" name="siteid" value="%1$d" />', get_current_blog_id() );
-}
-// Login form for Lost Password
-add_action('login_form_lostpassword', 'caweb_login_form_lostpassword');
-function caweb_login_form_lostpassword( ) {
-	// Check if have submitted 
-	$http_post     = ( 'POST' == $_SERVER['REQUEST_METHOD'] );
-		
-	if ( $http_post ) {
-		$errors = retrieve_password();
-		if ( ! is_wp_error( $errors ) ) {
-			$redirect_to = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : 'wp-login.php?checkemail=confirm';
-			// wp_safe_redirect only works with local paths
-			wp_redirect( $redirect_to );
-			exit();
-		}
-	}
-}
-// Hide the Confirm Weak Password on Reset Password
-add_action('login_form_rp', 'caweb_login_form_rp');
-function caweb_login_form_rp(){
-	print '<style>.pw-weak{display:none !important;}</style>';
-	
-	add_filter('network_site_url', 'caweb_network_site_url', 10 , 3);
-}
-// Password Reset Strength Validation
- add_action('validate_password_reset','caweb_validate_password_reset',10,2);
- function caweb_validate_password_reset( $errors, $user){
-	 if( !isset($_POST['pass1']) )
-		return;
-	
-	$pass = $_POST['pass1'];
-    $exp = '/^(?=.*\d)((?=.*[a-z])|(?=.*[A-Z])).{12,32}$/';
-
-      if(strlen($pass) < 12 || !preg_match($exp, $pass) )
-               $errors->add( 'error',  'Password must be alphanumeric and contain minimum 12 characters.','');
-}
-add_action('resetpass_form', 'caweb_resetpass_form');
-function caweb_resetpass_form(){
-	
-}
 /*	CAWeb Custom Modules */
-add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
-function caweb_initialize_divi_modules() {
+add_action( 'et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init' );
+function caweb_et_pagebuilder_module_init() {
 
-		include(CAWebAbsPath . "/builder/functions.php");
-	  include(CAWebAbsPath . "/builder/layouts.php");
+	include(CAWebAbsPath . "/builder/functions.php");
+	include(CAWebAbsPath . "/builder/layouts.php");
 
 	if (  class_exists( 'ET_Builder_Module' ) ) {
 		include(CAWebAbsPath . "/builder/class-caweb-builder-element.php");
-  	$modules = glob( CAWebAbsPath . '/builder/modules/*.php' );
-  	foreach ( $modules as $module_file ) {
-      require_once( $module_file );
-    }
+  	
+		$modules = glob( CAWebAbsPath . '/builder/modules/*.php' );
+		foreach ( $modules as $module_file ) {
+		  require_once( $module_file );
+		}
 	}
-		if ( class_exists( 'ET_Builder_Module_Settings_Migration' ) ) {
-
+	if ( class_exists( 'ET_Builder_Module_Settings_Migration' ) ) {
       include(CAWebAbsPath . "/builder/modules/settings/Migration.php");
       ET_Builder_CAWeb_Module_Settings_Migration::init();
 	}

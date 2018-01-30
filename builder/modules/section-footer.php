@@ -459,7 +459,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
 		$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
 	
-    $icon = ("on" == $group_icon_button ? get_icon_span($group_icon, $icon_color) : '');
+    $icon = ("on" == $group_icon_button ? caweb_get_icon_span($group_icon, $icon_color) : '');
 
 		$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 
@@ -906,7 +906,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 	$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
 	$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
 
-	$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, $icon_color) : '');
+	$icon = ("on" == $group_icon_button ? caweb_get_icon_span($group_icon, $icon_color) : '');
 
 	$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 

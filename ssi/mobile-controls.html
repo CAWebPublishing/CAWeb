@@ -1,6 +1,6 @@
 <!-- mobile navigation controls -->
 <div class="mobile-controls ">
-  <?php if(  ca_version_check(5,(is_object($post) ? $post->ID : $post['ID'])) && "" !== get_option('header_ca_branding')) : ?>	
+  <?php if(  caweb_version_check(5,(is_object($post) ? $post->ID : $post['ID'])) && "" !== get_option('header_ca_branding')) : ?>	
     <span class="mobile-control cagov-logo"><a href="/"><img src="<?php echo get_option('header_ca_branding'); ?>" alt="Organization Title" class="mobile-branding"/></a><span class="sr-only"></span></span>
 	 <?php endif; ?>
     <span class="mobile-control toggle-menu hidden-print">

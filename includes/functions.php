@@ -1,25 +1,26 @@
 <?php
 /*
 	Checks the Site Wide Version and Page Slug Template Version
-	$version = 'ca_site_version' Setting returns true/false
-
 	If a $post_id is included will check if $version also matches the
 	Page Template Version
 	$version = Specific Page Template Version  returns true/false
 
 */
-
-function ca_version_check($version, $post_id = -1){
+function caweb_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version', 5) ? true : false);
 
-	if(-1 < $post_id  ){
-		$result = ($version == ca_get_version($post_id) ? true : false);
-	}
+	if(-1 < $post_id  )
+		$result = ($version == caweb_get_version($post_id) ? true : false);
+	
 
 	return $result;
 }
-
-function ca_get_version($post_id = -1){
+/* 
+	Returns the Site Wide Version Setting
+	if post_id is passed will return version 
+	used by the page template
+*/
+function caweb_get_version($post_id = -1){
 	switch(get_page_template_slug($post_id)){
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -36,7 +37,7 @@ function ca_get_version($post_id = -1){
 }
 
 // Returns array of Menu Theme Locations
-function get_ca_nav_menu_theme_locations(){
+function cawen_nav_menu_theme_locations(){
 	return array(
 		'header-menu' => 'Header Menu',
 		'footer-menu' => 'Footer Menu',
@@ -66,32 +67,9 @@ function caweb_color_schemes( $original_only = false ){
 	return $schemes ;
 }
 
-if( !function_exists('is_valid_date') ){
-	function is_valid_date($checkdate, $default = false, $pattern = '', $retobj = false){
-		if(!empty($checkdate)){
-				$tmp = preg_split('/\D/', $checkdate);
-				if(3 != count($tmp) || !checkdate($tmp[0], $tmp[1], $tmp[2]) )
-					return $default;
-
-				$date = date_create($checkdate);
-				if($date instanceof DateTime && "UTC" == $date->getTimezone()->getName()){
-					if( !empty($pattern) ){
-						return date_format($date,$pattern);
-					}elseif($retobj){
-						return $date;
-					}else{
-						return $checkdate;
-					}
-				}
-			}
-
-		return $default;
-	}
-}
-
-
-if( !function_exists('is_money') ){
-	function is_money($checkmoney, $default = false, $pattern = '%.2n'){
+// Validates if the $checkmoney parameter is a valid monetary value
+if( !function_exists('caweb_is_money') ){
+	function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n'){
 		if(!empty($checkmoney)){
 
 			$checkmoney    = (is_string($checkmoney) ? str_replace(',','',$checkmoney) : $checkmoney);
@@ -112,13 +90,13 @@ if( !function_exists('is_money') ){
 * Returns all child nav_menu_items under a specific parent
 * Source http://wpsmith.net/2011/how-to-get-all-the-children-of-a-specific-nav-menu-item/
 
-* @param int the parent nav_menu_item ID
-* @param array nav_menu_items
-* @param bool gives all children or direct children only
-* @return array returns filtered array of nav_menu_items
+* @parent_id int the parent nav_menu_item ID
+* @nav_menu_items array nav_menu_items
+* @depth bool gives all children or direct children only
+* @nav_menu_item_list array returns filtered array of nav_menu_items
 
 */
-function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
+function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
 
 	$nav_menu_item_list = array();
 
@@ -126,7 +104,7 @@ function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true 
 		if ( $nav_menu_item->menu_item_parent == $parent_id ) {
 			$nav_menu_item_list[] = $nav_menu_item;
 			if ( $depth ) {
-			if ( $children = get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) )
+			if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) )
 				$nav_menu_item_list = array_merge( $nav_menu_item_list, $children );
 			}
 		}
@@ -135,10 +113,7 @@ function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true 
 	return $nav_menu_item_list;
 }
 
-
-
-
-function return_posts($cats = array(), $tags = array(), $post_amount = -1,$orderby='post_date',$order = 'DESC'){
+function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1,$orderby='post_date',$order = 'DESC'){
 
 	$posts_array = array();
 
@@ -184,7 +159,7 @@ function return_posts($cats = array(), $tags = array(), $post_amount = -1,$order
 /*
 	Get User Profile Color
 */
-function get_ca_user_color($element){
+function caweb_get_user_color($element){
   	global $_wp_admin_css_colors;
 
     	$admin_color = get_user_option( 'admin_color' );
@@ -208,7 +183,7 @@ function caweb_get_google_map_place_link($addr){
 
 }
 
-function get_tag_ID($tag_name) {
+function caweb_get_tag_ID($tag_name) {
 	$tag = get_term_by('name', $tag_name, 'post_tag');
 	if ($tag) {
 		return $tag->term_id;
@@ -273,8 +248,43 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
 	}
 }
 
+function caweb_banner_content_filter($content, $ver = 5){
+  $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
+
+  /* Filter the Header Slideshow Banner */
+  if( !empty($module) ){
+        $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
+        $carousel = '';
+
+        foreach($slides as $i => $slide){
+          $heading = '';
+          $info = '';
+          if("on" == $slide->display_banner_info){
+            $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
+
+            if(!isset($slide->display_heading) || "on" == $slide->display_heading )
+              $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
+
+
+            $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
+
+          }
+          $carousel .= sprintf('<div class="slide" %1$s>%2$s</div> ',
+                              (isset($slide->background_image) ?
+                               sprintf('style="background-image: url(%1$s);"', $slide->background_image) : ""), $info);
+         }
+
+        $banner = sprintf('<div class="header-slideshow-banner">
+          <div id="primary-carousel" class="carousel carousel-banner">
+            %1$s</div></div>', $carousel);
+
+  			return $banner;
+  }
+
+}
+
 /* CA.gov Icon Library List */
-function get_ca_icon_list($index = -1, $name = '', $keys = false){
+function caweb_get_icon_list($index = -1, $name = '', $keys = false){
 	$icons = array( 'logo'=>'&amp;#xe600;','home'=>'&amp;#xe601;','menu'=>'&amp;#xe602;','apps'=>'&amp;#xe603;','search'=>'&amp;#xe604;','chat'=>'&amp;#xe605;','capitol'=>'&amp;#xe606;',
 													'state'=>'&amp;#xe607;','phone'=>'&amp;#xe608;','email'=>'&amp;#xe609;','contact-us'=>'&amp;#xe66e;','calendar'=>'&amp;#xe60a;','bear'=>'&amp;#xe60b;','chat-bubble'=>'&amp;#xe66f;','info-bubble'=>'&amp;#xe670;',
 													'share-button'=>'&amp;#xe671;','share-facebook'=>'&amp;#xe672;','share-email'=>'&amp;#xe673;','share-flickr'=>'&amp;#xe674;','share-twitter'=>'&amp;#xe675;','share-linkedin'=>'&amp;#xe676;','share-googleplus'=>'&amp;#xe677;',
@@ -353,23 +363,22 @@ function get_ca_icon_list($index = -1, $name = '', $keys = false){
 
 
 /* Merger of Divi and CAWeb Icon Font Library */
-add_filter('et_pb_font_icon_symbols', 'et_pb_ca_font_icon_symbols');
+add_filter('et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols');
+function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ){
 
-function et_pb_ca_font_icon_symbols( $divi_symbols = array() ){
-
-	$symbols = array_values( get_ca_icon_list() );
+	$symbols = array_values( caweb_get_icon_list() );
 
 	return $symbols;
 }
 
-function get_icon_span($font, $style = array(), $classes = array() ){
+function caweb_get_icon_span($font, $style = array(), $classes = array() ){
 	if( empty($font) )
 		return '';
 
   // "%22" are saved as double quotes in shortcode attributes. Encode them back into %22
   $font = str_replace('"','%22', $font );
  
-	$tmp = get_ca_icon_list();
+	$tmp = caweb_get_icon_list();
   
   $style = is_string($style) ? explode(';', $style) : $style;
   $style = !empty($style) ? sprintf('style="%1$s" ',implode($style, ';')) : '';
@@ -383,13 +392,13 @@ function get_icon_span($font, $style = array(), $classes = array() ){
 			$font_index = preg_replace('/%%/','',$font);
 
 			return sprintf('<span class="ca-gov-icon-%1$s %2$s" %3$s></span> ',
-								 get_ca_icon_list(-1,'',true)[$font_index], $classes, $style );
+								 caweb_get_icon_list(-1,'',true)[$font_index], $classes, $style );
 	}
   
   
 }
 
-function get_blank_icon_span(){
+function caweb_get_blank_icon_span(){
   return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';
 }
 
