@@ -46,9 +46,11 @@ add_action( 'admin_menu', 'menu_setup', 15 );
 // If direct access to certain menus is accessed
 // redirect to admin page
 function redirect_themes_page() {
-	global $pagenow;
-
-	if( ( is_multisite() && ! current_user_can('manage_network_options') ) ){
+	$plugin_menus = array('404pagesettings');
+	
+	$allowed = isset($_GET['page']) && in_array($_GET['page'], $plugin_menus );
+		
+	if( !$allowed || ( is_multisite() && ! current_user_can('manage_network_options') ) ){
 		wp_redirect(get_admin_url());
 		exit;
 	}
