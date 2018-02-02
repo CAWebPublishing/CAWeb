@@ -50,7 +50,7 @@ function caweb_load_themes_tools() {
 
 	$allowed = isset($_GET['page']) && in_array($_GET['page'], $plugin_menus );
 
-	if( !$allowed || ( is_multisite() && ! current_user_can('manage_network_options') ) ){
+	if( $allowed || ( is_multisite() && ! current_user_can('manage_network_options') ) ){
 		wp_redirect(get_admin_url());
 		exit;
 	}
