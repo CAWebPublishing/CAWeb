@@ -1,7 +1,8 @@
-<?php 
-get_header(); 
-get_template_part('partials/content', 'header') 
+<?php
+		get_header();
 ?>
+<body <?php body_class('primary') ?>  >
+<?php get_template_part('partials/content', 'header') ?>
 
 
 <div id="main-content" class="main-content">
@@ -73,3 +74,5 @@ div#google_translate_element {
 </style>
 
 <?php endif; ?>
+</body>
+</html>

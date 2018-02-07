@@ -67,3 +67,4 @@ if( ! $is_page_builder_used && is_active_sidebar('sidebar-1') ){
 <?php get_footer(); ?>
 
 </body>
+</html>
