@@ -181,8 +181,8 @@ function caweb_wp_enqueue_scripts() {
 	if(5 >= $ver && "on" == get_option('ca_geo_locator_enabled')){
 		wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
 		wp_enqueue_script( 'cagov-geolocator-script' );
-	}
-
+	}	
+	 
 	// This removes Divi Google Font CSS
 	wp_deregister_style('divi-fonts');
 }
@@ -308,9 +308,14 @@ function caweb_wp_footer(){
 		<?php
 		}
 		
+	}elseif( get_option('ca_google_trans_enabled') ){
+		?>
+			<script>
+				console.log( $('.goog-te-menu-frame.skiptranslate') );
+			</script>
+		<?php
 	}
-  
-  
+	
 }
 
 /*
