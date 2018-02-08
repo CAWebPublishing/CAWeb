@@ -168,7 +168,8 @@ function caweb_wp_enqueue_scripts() {
                                                   'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
                                                    'ca_google_search_id' => get_option('ca_google_search_id'),
                                                    'ca_google_trans_enabled' => get_option('ca_google_trans_enabled'),
-                                                   'caweb_multi_ga' => get_site_option('caweb_multi_ga') ) );
+                                                   'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
+                                                   'ca_google_trans_display' => get_option('ca_google_trans_display') ) );
 	// Enqueue Scripts
 	wp_enqueue_script( 'cagov-core-script' );
 	wp_enqueue_script( 'cagov-navigation-script' );
@@ -181,8 +182,8 @@ function caweb_wp_enqueue_scripts() {
 	if(5 >= $ver && "on" == get_option('ca_geo_locator_enabled')){
 		wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
 		wp_enqueue_script( 'cagov-geolocator-script' );
-	}
-
+	}	
+	 
 	// This removes Divi Google Font CSS
 	wp_deregister_style('divi-fonts');
 }
@@ -309,10 +310,29 @@ function caweb_wp_footer(){
 		}
 		
 	}
-  
-  
+	
 }
 
+
+/* CAWeb Footer */
+add_action( 'wp_footer', 'test_wp_footer', 9999999);
+function test_wp_footer(){
+	if( get_option('ca_google_trans_enabled') ){
+		?>
+			<script>				
+		 		$('document').ready(function() {
+					var translator =  $('.goog-te-menu-frame.skiptranslate');
+					console.log( translator.contents() );
+					console.log( translator.classList );
+					//console.log( translator.getElementsByTagName('table') );
+					
+				});
+			</script>
+		<?php
+	}
+	
+	
+}
 /*
 	Actions Ran During an Admin Page Request
 */
