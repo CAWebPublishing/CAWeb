@@ -312,27 +312,6 @@ function caweb_wp_footer(){
 	}
 	
 }
-
-
-/* CAWeb Footer */
-add_action( 'wp_footer', 'test_wp_footer', 9999999);
-function test_wp_footer(){
-	if( get_option('ca_google_trans_enabled') ){
-		?>
-			<script>				
-		 		$('document').ready(function() {
-					var translator =  $('.goog-te-menu-frame.skiptranslate');
-					console.log( translator.contents() );
-					console.log( translator.classList );
-					//console.log( translator.getElementsByTagName('table') );
-					
-				});
-			</script>
-		<?php
-	}
-	
-	
-}
 /*
 	Actions Ran During an Admin Page Request
 */
