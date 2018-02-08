@@ -258,8 +258,18 @@
 	</td></tr>
 <tr>
 		<th scope="row"><div class="tooltip">Enable Google Translate
-			<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
+			<span class="tooltiptext">Displays the Google Translate feature at the top right of each page.</span></div></th>
 		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
+		
+		<tr>
+			<th scope="row"><div class="tooltip">Google Translate Display
+				<span class="tooltiptext">Apply a display option for the Google Translate.</span></div></th>
+			<td>
+				<select id="ca_google_trans_display" name="ca_google_trans_display">
+				<option value="dropdown" <?= ( get_option('ca_google_trans_display') == 'dropdown' ? 'selected="selected"' : '' ) ?>>Dropdown</option>
+			  <option value="vertical" <?= ( get_option('ca_google_trans_display') == 'vertical' ? 'selected="selected"' : '' ) ?>>Vertical</option>
+			  <option value="horizontal" <?= ( get_option('ca_google_trans_display') == 'horizontal' ? 'selected="selected"' : '' ) ?>>Horizontal</option>
+			</select></td></tr>
 
 </table>
 </div>

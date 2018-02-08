@@ -316,8 +316,8 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 
 	$caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alignment','header_ca_background');
 
-	$caweb_google_options = array(  'ca_google_search_id',
-									'ca_google_analytic_id', 'ca_google_trans_enabled', 'ca_google_meta_id');
+	$caweb_google_options = array(  'ca_google_search_id', 'ca_google_analytic_id', 'ca_google_trans_enabled', 
+                    'ca_google_meta_id', 'ca_google_trans_display');
 
 	$caweb_social_options = array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter' ,
 								'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email' ,

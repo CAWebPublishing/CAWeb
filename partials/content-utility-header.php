@@ -36,9 +36,9 @@
 							$text =  get_option( sprintf('ca_utility_link_%1$s_name', $i));
 							$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $i)) ? ' target="_blank"' : '';
 
-						if ( !empty($url)  &&  !empty($text)  ){
-									printf('<li class="utility-custom-%1$s"><a href="%2$s"%3$s>%4$s</a></li>', $i, $url, $target, $text);
-						}
+  						if ( !empty($url)  &&  !empty($text)  ){
+  									printf('<li class="utility-custom-%1$s"><a href="%2$s"%3$s>%4$s</a></li>', $i, $url, $target, $text);
+  						}
 					  }
 					?>
                   <?php if( "" !== get_option('ca_contact_us_link') ): ?>
@@ -51,7 +51,7 @@
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
                   <?php if( get_option('ca_google_trans_enabled') ): ?>
-                        <li class="utility-g-translate"><div id="google_translate_element"><div class="skiptranslate goog-te-gadget" dir="ltr"><div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;"></div></div></div></li>
+                      <li class="utility-g-translate"><div id="google_translate_element"></div></li>
                   <?php endif; ?>
               </ul>
             </div>
