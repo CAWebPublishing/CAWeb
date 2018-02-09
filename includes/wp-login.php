@@ -38,17 +38,21 @@ function caweb_retrieve_password_message(  $message, $key, $user_login, $user_da
 // Change the Reset Password URL to use the site url instead of the network url
 function caweb_network_site_url( $url,  $path,  $scheme ){
 	if ( false !== strpos($url, '/wp-login.php?action=resetpass') )
-			return site_url('/wp-login.php?caweb=resetpass');
-	
+    return site_url('/wp-login.php?action=resetpass');
+    
+  remove_filter('network_site_url', 'caweb_network_site_url');
 	return $url;
 }
 // Add Reset Password Confirmation
 add_filter('wp_login_errors', 'caweb_wp_login_errors', 10 , 2);
 function caweb_wp_login_errors( $errors, $redirect_to ){
+  global $interim_login;
+  
 	print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
-	if ( isset( $_GET['caweb'] ) && 'resetpass' == $_GET['caweb'] && isset( $_POST['rp_key'])  )
-		$errors->add('updated','<p class="caweb-resetpass">You have successfully reset your password.</p>');
-	
+  
+  if ( !$interim_login && isset( $_GET['caweb'] ) && 'resetpass' == $_GET['caweb'] ) 
+				$errors->add('updated','<p class="caweb-resetpass">You have successfully reset your password.</p>');
+        
 	return $errors;	
 }
 // Add Site ID to lost password form
@@ -82,13 +86,23 @@ function caweb_login_form_rp(){
 // Password Reset Strength Validation
  add_action('validate_password_reset','caweb_validate_password_reset',10,2);
  function caweb_validate_password_reset( $errors, $user){
-	 if( !isset($_POST['pass1']) )
-		return;
-	
-	$pass = $_POST['pass1'];
-    $exp = '/^(?=.*\d)((?=.*[a-z])|(?=.*[A-Z])).{12,32}$/';
+   if( isset($_GET['action']) && 'rp' == $_GET['action'] ){
+     if( !isset($_POST['pass1']) )
+  		return;
+  	
+  	   $pass = $_POST['pass1'];
+      $exp = '/^(?=.*\d)((?=.*[a-z])|(?=.*[A-Z])).{12,32}$/';
 
-      if(strlen($pass) < 12 || !preg_match($exp, $pass) )
-               $errors->add( 'error',  'Password must be alphanumeric and contain minimum 12 characters.','');
+        if(strlen($pass) < 12 || !preg_match($exp, $pass) )
+                 $errors->add( 'error',  'Password must be alphanumeric and contain minimum 12 characters.','');
+     
+   }elseif ( isset($_GET['action']) && 'resetpass' == $_GET['action'] ) {
+     if ( ( ! $errors->get_error_code() ) && isset( $_POST['pass1'] ) && !empty( $_POST['pass1'] ) ) {
+        reset_password($user, $_POST['pass1']);
+        setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+    	   wp_redirect( site_url('/wp-login.php?caweb=resetpass') );
+        exit;
+      }
+   } 
 }
 ?>
