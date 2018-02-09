@@ -20,7 +20,7 @@ function caweb_customize_preview_init(){
 add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
 function caweb_customize_controls_enqueue_scripts(){
    wp_register_script('caweb-customize-controls-script',	CAWebUri . '/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
-  wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( true ), 'all' => caweb_color_schemes() ) );
+  wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( 4, 'displayname' ), 'all' => caweb_color_schemes(0, 'displayname') ) );
 
 	wp_enqueue_script( 'caweb-customize-controls-script' );
 }
@@ -116,11 +116,11 @@ function caweb_customize_register( $wp_customize ) {
    $wp_customize->add_setting('ca_site_color_scheme', array(
     														'type' => 'option',
   															'default' => get_option('ca_site_color_scheme', 'oceanside') ) );
-  
+    
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_site_color_scheme', array(
 	'label'      => 'Color Scheme',
   'type' => 'select',
-   'choices' => caweb_color_schemes(),
+  'choices' => caweb_color_schemes( 0, 'displayname' ),
 	'section'    => 'caweb_settings',
 	'settings'   => 'ca_site_color_scheme'
 		) ) );

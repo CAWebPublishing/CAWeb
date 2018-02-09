@@ -45,21 +45,44 @@ function cawen_nav_menu_theme_locations(){
 }
 
 // Returns array of Theme Color Schemes
-function caweb_color_schemes( $original_only = false ){
+function caweb_color_schemes( $version = 0, $field = '' ){
 	$cssDir = sprintf( '%1$s/css', CAWebAbsPath);
 	$pattern = '/.*\/([\w\s]*)\.css/';
 	
 	$schemes = array();
-	$v4_schemes = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
-	$v5_schemes = glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
-	
-	$tmp = $original_only ? $v4_schemes : array_merge($v4_schemes, $v5_schemes  );
+		
+	switch ( $version ) {
+		case 4:
+			$tmp = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
+			break;
+		case 5:
+			$tmp =  glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
+			break;	
+		default:
+			$v4_schemes = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
+			$v5_schemes = glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
+			$tmp =  array_merge($v4_schemes, $v5_schemes  );
+			break;
+	}
 	
 	foreach ( $tmp as $css_file ) {
-		$scheme =  ucwords( preg_replace( $pattern , '\1', strtolower($css_file) ) );
+		$style = preg_replace( $pattern , '\1', $css_file );
+		$scheme =  ucwords( strtolower( $style ) );
+		
 		$schemekey = strtolower( str_replace( ' ' , '', $scheme ) );
 		
-		$schemes[$schemekey] = $scheme;
+		switch( $field ){
+			case 'filename':			
+				$schemes[$schemekey] =  $style;
+				break;
+			case 'displayname':
+				$schemes[$schemekey] =  $scheme;
+				break;	
+			default:
+				$schemes[$schemekey] = array('filename' => $style, 'displayname' => $scheme);
+				break;
+			
+			}
     }	
 	
 	ksort( $schemes );

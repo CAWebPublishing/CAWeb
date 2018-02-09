@@ -213,9 +213,10 @@ function caweb_wp_head(){
 	
 	$version = sprintf('?ver=%1$s', wp_get_theme()->Version) ;
 	$color = get_option('ca_site_color_scheme', 'oceanside');
+	$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ) , 'filename');	
 	
 	printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/cagov.core.css%2$s">',  $verDir, $version );  
-	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">',  $verDir, $color, $version  );
+	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">',  $verDir, $schemes[$color] , $version  );
 	printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/modules.css%2$s">',  $cssDir, $version   );
 	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">',  $cssDir, $version   );
 	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">',  $cssDir, $version  );
