@@ -139,6 +139,18 @@ $('#addCSS').click(function(e){
 	fileUpload.id = rowCount + "_upload";
 	fileUpload.accept = ".css";
 	
+  fileUpload.addEventListener('change', function () {
+    var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
+    var ext = name.lastIndexOf(".") > 0 ? 
+                      name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
+                      
+    if( "" === ext || "css" !== ext){
+      alert(name + " isn't a valid CSS extension and was not uploaded.");
+      this.parentNode.remove();
+    }               
+    
+  });
+  
 	col.append(fileUpload);
 	
 	row.append(blankCol);
