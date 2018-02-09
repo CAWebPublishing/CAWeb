@@ -70,7 +70,7 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 
         </div>
 
-<?php  if( get_option('ca_google_trans_enabled') &&  (caweb_version_check(4, get_the_ID()) ) ): ?>
+<?php  if( 'none' !== get_option('ca_google_trans_display') &&  (caweb_version_check(4, get_the_ID()) ) ): ?>
 
 <div id="google_translate_element" class="hidden-print"></div>
 

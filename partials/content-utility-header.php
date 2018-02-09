@@ -50,7 +50,7 @@
                   <?php if( get_option('ca_geo_locator_enabled') ): ?>
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
-                  <?php if( get_option('ca_google_trans_enabled') ): ?>
+                  <?php if( 'none' !== get_option('ca_google_trans_display') ): ?>
                       <li class="utility-g-translate"><div id="google_translate_element"></div></li>
                   <?php endif; ?>
               </ul>

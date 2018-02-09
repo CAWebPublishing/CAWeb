@@ -259,30 +259,25 @@
 	<input type="text" name="ca_google_meta_id" id="ca_google_meta_id" size="60" value="<?php echo get_option('ca_google_meta_id'); ?>" >
 	</td></tr>
 <tr>
-		<th scope="row"><div class="tooltip">Enable Google Translate
+		<th scope="row"><div class="tooltip">Google Translate
 			<span class="tooltiptext">Displays the Google Translate feature at the top right of each page.</span></div></th>
-		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
-		
-		<tr>
-			<th scope="row"><div class="tooltip">Google Translate Display
-				<span class="tooltiptext">Apply a display option for Google Translate.</span></div></th>
-			<td>
+		<td>
 				<?php
-					$dropdown = 'dropdown' == get_option('ca_google_trans_display', 'dropdown');					
-					$horizontal = 'horizontal' == get_option('ca_google_trans_display', 'dropdown');
-					$vertical = 'vertical' == get_option('ca_google_trans_display', 'dropdown');
+						$none = 'none' == get_option('ca_google_trans_display', 'none');
+						$horizontal = 'horizontal' == get_option('ca_google_trans_display', 'none');
+						$vertical = 'vertical' == get_option('ca_google_trans_display', 'none');
 				?>
 				<select id="ca_google_trans_display" name="ca_google_trans_display">
-				<option value="dropdown" <?= ( $dropdown ? 'selected="selected"' : '' ) ?>>Dropdown</option>
-			  <option value="horizontal" <?= ( $horizontal ? 'selected="selected"' : '' ) ?>>Horizontal</option>
+				<option value="none" <?= ( $none ? 'selected="selected"' : '' ) ?>>Disabled</option>
+				<option value="horizontal" <?= ( $horizontal ? 'selected="selected"' : '' ) ?>>Horizontal</option>
 			  <option value="vertical" <?= ( $vertical ? 'selected="selected"' : '' ) ?>>Vertical</option>
 			</select>
 			<div>
-			<img class="dropdown <?= ( !$dropdown ? 'hidden' : '' ) ?>" src="<?= sprintf('%1$s/images/google/g_trans_inline_dropdown.png', CAWebUri) ?>" >
 			<img class="horizontal <?= ( !$horizontal ? 'hidden' : '' ) ?>" src="<?= sprintf('%1$s/images/google/g_trans_inline_horz.png', CAWebUri) ?>" >
 			<img class="vertical <?= ( !$vertical ? 'hidden' : '' ) ?>" src="<?= sprintf('%1$s/images/google/g_trans_inline_vert.png', CAWebUri) ?>" >
 			</div>
-			</td></tr>
+		</td>
+	</tr>
 
 </table>
 </div>

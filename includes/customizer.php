@@ -346,18 +346,19 @@ function caweb_customize_register( $wp_customize ) {
 	'settings'   => 'ca_google_meta_id'
 		) ) );
   
-   $wp_customize->add_setting('ca_google_trans_enabled', array(
-    														'type' => 'option',
-  															'default' => get_option('ca_google_trans_enabled'),   
-    														'sanitize_callback' => 'caweb_sanitize_customizer_checkbox') );
-  
-   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_trans_enabled', array(
-	'label'      => 'Enable Google Translate',
-  'type' => 'checkbox',
-	'section'    => 'caweb_google',
-	'settings'   => 'ca_google_trans_enabled'
-		) ) );
-  
+    
+    $wp_customize->add_setting('ca_google_trans_display', array(
+      														'type' => 'option',
+    															'default' => get_option('ca_google_trans_display', 'none') ) );
+    
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_google_trans_display', array(
+  	'label'      => 'Google Translate',
+    'type' => 'select',
+     'choices' => array('none'=> 'Disabled', 'horizontal'=> 'Horizontal', 'vertical' => 'Vertical'),
+  	'section'    => 'caweb_google',
+  	'settings'   => 'ca_google_trans_display',
+  		) ) );
+      
   // Social Media Links
    $wp_customize->add_section('caweb_social_media', array(
     														'title' => 'Social Media Links',

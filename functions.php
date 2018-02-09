@@ -76,18 +76,11 @@ function caweb_setup_theme(){
 	// Enable Post Thumbnails
 	add_theme_support( 'post-thumbnails' );
 
-
-	// Updating the following CAWeb Checkbox Options, when enabled they saved
-	// as "on" this is being changed to true.
-	$options = array('ca_geo_locator_enabled', 'ca_google_trans_enabled');
-	$options = array_merge($options, caweb_get_site_options('social-extra') );
-	foreach( $options as $option ){
-		$val = get_option($option);
-		if("on" == $val )
-			update_option($option, true);
+	if( get_option('ca_google_trans_enabled') || 
+			"on" == get_option('ca_google_trans_enabled')   ){
+		delete_option('ca_google_trans_enabled');
+		update_option('ca_google_trans_display', 'vertical');
 	}
-
-
 }
 
 // CAWeb Pre Get Posts
@@ -167,7 +160,6 @@ function caweb_wp_enqueue_scripts() {
                                                   'ca_site_version' => $ver,
                                                   'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
                                                    'ca_google_search_id' => get_option('ca_google_search_id'),
-                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled'),
                                                    'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
                                                    'ca_google_trans_display' => get_option('ca_google_trans_display') ) );
 	// Enqueue Scripts
