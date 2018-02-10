@@ -55,6 +55,8 @@ final class caweb_auto_update{
 				//Define the alternative response for upgrader_pre_install
 				add_filter('upgrader_source_selection', array($this, 'caweb_upgrader_source_selection'), 10, 4 );
 
+				//Define the alternative response for upgrader_pre_install
+				add_filter('upgrader_post_install', array($this, 'caweb_upgrader_post_install'), 10, 3 );
 
 			}
   
@@ -165,7 +167,12 @@ final class caweb_auto_update{
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package , array_merge($this->args, array('timeout' => 60 ) ) ) );
 
 				file_put_contents(sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name), $theme);
-
+				
+				// move any external site css if external css directory exists
+				if( file_exists( sprintf('%1$s/css/external/', CAWebAbsPath) ) ){
+					rename(sprintf('%1$s/css/external/', CAWebAbsPath), 
+						sprintf('%1$s/caweb_external_css/', wp_upload_dir()['basedir']));
+				}
 				return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
 			}
 			return $reply;
@@ -190,6 +197,14 @@ final class caweb_auto_update{
 			return $tmp;
 	}
 
+	function caweb_upgrader_post_install( $response, $hook_extra, $result){
+		// move any external site css existed move it back
+		if( file_exists( sprintf('%1$s/caweb_external_css/', wp_upload_dir()['basedir']) ) ){
+			rename(	sprintf('%1$s/caweb_external_css/', wp_upload_dir()['basedir']), 
+		 				sprintf('%1$s/css/external/', CAWebAbsPath) );
+		}
+	
+	}
 	function caweb_update_available(){
 		if( isset( $_POST['payload'] ) ){
 			$this->check_update(null);
