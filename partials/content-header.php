@@ -3,8 +3,12 @@ global $post;
 
 $ver = caweb_get_version( get_the_ID() );
 $fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? ' fixed': '');
+$color = get_option('ca_site_color_scheme', 'oceanside');
+$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ) , 'filename');	
+$colorscheme = isset( $schemes[$color] ) ? $color : 'oceanside';
+
 $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg',
-                                 CAWebUri , get_option('ca_site_color_scheme', 'oceanside'));
+                                 CAWebUri , $colorscheme);
 
 $header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ?
                           get_option('header_ca_background') : $default_background_img );
