@@ -2,7 +2,7 @@
 <div class="utility-header ">
     <div class="container ca_wp_container">
             <div class="<?= $gtranslator ? 'third' : 'half' ?>">
-              <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
+              <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php 
               $gtranslator = get_option('ca_google_trans_enabled');
