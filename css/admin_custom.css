@@ -48,12 +48,16 @@ ol#uploadedCSS li .previewStyle {
     margin-left: -105px;
 	color: green;
 }
-ol#uploadedCSS li .removeStyle {
+ol#uploadedCSS li .removeStyle,
+tr.pending-stylesheet td .removeStyle {
     margin-right: 45px;
 	color: red;
 	cursor: pointer
 }
-
+tr.pending-stylesheet td .removeStyle {
+  margin-left: -28px;
+  margin-right: 22px;
+}
 
 /* CAWeb Navigation Page Styles */
 .page-title-action{

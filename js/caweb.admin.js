@@ -97,32 +97,16 @@ $('#ca_google_search_id').on('input',function(e){
   }
 });  
 
-$('#ca_google_trans_display').change(function(e){
-	var previews = this.nextElementSibling.getElementsByTagName('img');
-	var display =  this.options[this.selectedIndex].value;
-
-	for (var i = 0; i < previews.length; i++) {   
-		previews[i].classList.add('hidden');
-		
-		if( previews[i].classList.contains( display ) )
-			previews[i].classList.remove('hidden');
-		
-	}
-	
-	changeMade = true; 
-});
-
-
 $('.removeStyle').click(function(e){
-	e.preventDefault();
+  e.preventDefault();
 	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
 	
 	if (r == true) {
 		changeMade = true; 
 		this.parentNode.remove();
 	}
-	
 });
+
 $( "#uploadedCSS" ).sortable();
 $( "#uploadedCSS" ).disableSelection();
 	
@@ -130,15 +114,29 @@ $('#addCSS').click(function(e){
 	var ext_css_table = $('#custom-css table:first');
 	var rowCount = ext_css_table.children().children().length;
 	var row = document.createElement('TR');
-	var blankCol = document.createElement('TD');
-	var col = document.createElement('TD');
+	var col1 = document.createElement('TD');
+	var rem = document.createElement('A');
+	var col2 = document.createElement('TD');
 	var fileUpload = document.createElement('Input');
 	
+  row.classList = "pending-stylesheet";
+  rem.classList = "dashicons dashicons-dismiss removeStyle";
+  
 	fileUpload.type = "file";
 	fileUpload.name = rowCount + "_upload";
 	fileUpload.id = rowCount + "_upload";
 	fileUpload.accept = ".css";
-	
+  
+  rem.addEventListener('click', function (e) {
+    e.preventDefault();
+    var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
+   
+   if (r == true) {
+  		changeMade = true; 
+  		this.parentNode.parentNode.remove();
+  	}
+  });
+  
   fileUpload.addEventListener('change', function () {
     var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
     var ext = name.lastIndexOf(".") > 0 ? 
@@ -147,14 +145,17 @@ $('#addCSS').click(function(e){
     if( "" === ext || "css" !== ext){
       alert(name + " isn't a valid CSS extension and was not uploaded.");
       this.parentNode.remove();
+    }else{      
+      rem.title = "remove " + name; 
     }               
     
   });
   
-	col.append(fileUpload);
+	col2.append(rem);
+	col2.append(fileUpload);
 	
-	row.append(blankCol);
-	row.append(col);
+	row.append(col1);
+	row.append(col2);
 	
 	ext_css_table.append(row);	
 
