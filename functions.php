@@ -76,11 +76,6 @@ function caweb_setup_theme(){
 	// Enable Post Thumbnails
 	add_theme_support( 'post-thumbnails' );
 
-	if( get_option('ca_google_trans_enabled') || 
-			"on" == get_option('ca_google_trans_enabled')   ){
-		delete_option('ca_google_trans_enabled');
-		update_option('ca_google_trans_display', 'vertical');
-	}
 }
 
 // CAWeb Pre Get Posts
