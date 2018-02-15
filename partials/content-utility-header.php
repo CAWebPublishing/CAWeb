@@ -1,10 +1,12 @@
+<?php      $gtranslator = get_option('ca_google_trans_enabled'); ?>    
 <div class="utility-header ">
     <div class="container ca_wp_container">
-            <div class="half">
+            <div class="<?= $gtranslator ? 'third' : 'half' ?>">
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php 
-
+              $gtranslator = get_option('ca_google_trans_enabled');
+              
 							if( get_option('ca_utility_home_icon', true) )
                   print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
 
@@ -26,7 +28,10 @@
             ?>
                 </ul>
             </div>
-            <div class="half settings-links hidden-print">
+            <?php if(get_option('ca_google_trans_enabled') ): ?>
+              <div class="third pull-right" id="google_translate_element"></div>
+            <?php endif; ?>   
+            <div class="<?= $gtranslator ? 'third pull-right' : 'half' ?> settings-links hidden-print">
                 <ul class="utility-links ">
                   
 					<?php 
@@ -50,11 +55,8 @@
                   <?php if( get_option('ca_geo_locator_enabled') ): ?>
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
-                  <?php if( 'none' !== get_option('ca_google_trans_display') ): ?>
-                      <li class="utility-g-translate"><div id="google_translate_element"></div></li>
-                  <?php endif; ?>
-              </ul>
-            </div>
-
+              </ul>              
+            </div> 
+                  
     </div>
 </div>

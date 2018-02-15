@@ -41,6 +41,9 @@ ul.utility-links.social-media-links{
 
 /* End of Utility Header */
 /* Google Translate */
+#google_translate_element{
+  width: auto;
+}
 #google_translate_element .skiptranslate.goog-te-gadget div {
     color: initial;
 }
@@ -51,6 +54,7 @@ ul.utility-links.social-media-links{
 #nav_list{
     width: auto;
 	 float: right;
+   clear: both;
     margin-right: -8px;
   	padding-left: 25%;
 }

@@ -18,32 +18,35 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
 
 ?>
 
-<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
+<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >  
+<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
 		// Version 5.0 Specific
 		if(caweb_version_check(5.0, get_the_ID()) ){
 
-		print '<!-- Version 5.0 Specific -->';
-		// Location Bar
+		    print '<!-- Location Bar -->';
+		    // Location Bar
     	 	require_once (CAWebAbsPath ."/ssi/location-bar.html");
 
-        	// Settings Bar
-         	require_once (CAWebAbsPath ."/ssi/settings-bar.html");
+        
+      print '<!-- Utility Header -->';
+      // Include Utility Header
+      get_template_part('partials/content', 'utility-header');
+                  
+      
+      print '<!-- Settings Bar -->';
+    	// Settings Bar
+   	  require_once (CAWebAbsPath ."/ssi/settings-bar.html");
 
-          // Include Utility Header
-     			get_template_part('partials/content', 'utility-header');
 		}
          ?>
 
-  <!-- Required by Both Versions-->
- <!-- Include Mobile Controls -->
-
-<?php require_once (CAWebAbsPath ."/ssi/mobile-controls.html");?>
-
-        <!-- Include Branding -->
-
-<?php require_once (CAWebAbsPath ."/ssi/branding.html");?>
+         <!-- Include Branding -->        
+         <?php require_once (CAWebAbsPath ."/ssi/branding.html");?>
+         
+         <!-- Include Mobile Controls -->
+         <?php require_once (CAWebAbsPath ."/ssi/mobile-controls.html");?>
 
         <div class="navigation-search">
 

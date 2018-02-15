@@ -12,7 +12,6 @@ get_header();
 <div id="main-content" class="main-content">
   
 <main class="main-primary">
-  <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 
       <div class="section section-default collapsed p-t-lg">
     <div class="ca_wp_container">

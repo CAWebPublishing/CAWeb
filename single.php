@@ -17,8 +17,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
-
 <!-- Page Title-->
 <?php 
 if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) 

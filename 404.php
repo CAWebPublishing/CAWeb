@@ -18,7 +18,6 @@
   
 				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
 					<div class="entry-content">
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
     <!-- Page Title-->
 					<h1>Page Not Found</h1>
 <div class="description">The page you requested was not found.</div>

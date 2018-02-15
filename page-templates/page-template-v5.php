@@ -12,12 +12,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <div id="main-content" class="main-content">
 
-<?php if ( ! caweb_version_check(4, $post->ID) ) : ?>
-
-	<!--div class="ca_wp_container"-->
-
-
-<?php endif; ?>
 <main class="main-primary">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -26,7 +20,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 					<div class="entry-content">
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
     <!-- Page Title-->
 <?php if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ) : ?>
 <h1 class="page-title et_pb_row" ><?php echo $post->post_title; ?></h1>
@@ -64,12 +57,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 			<?php endwhile; ?>
 					<span class="return-top hidden-print"></span>
 </main>
-<?php if ( ! caweb_version_check(4, $post->ID) ) : ?>
-
-	<!--/div-->
-
-
-<?php endif; ?>
 
 </div> <!-- #main-content -->
 </div>
