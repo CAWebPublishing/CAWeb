@@ -40,7 +40,14 @@ ul.utility-links.social-media-links{
 }
 
 /* End of Utility Header */
-
+/* Google Translate */
+#google_translate_element .skiptranslate.goog-te-gadget div {
+    color: initial;
+}
+#google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
+    color: white;
+}
+/* End of Google Translate */
 #nav_list{
     width: auto;
 	 float: right;
