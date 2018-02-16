@@ -37,6 +37,10 @@ ul.utility-links.social-media-links{
     width: 100%;
     padding-bottom: 2px;
   }
+    
+  .utility-header .utility-links li[class*="utility-custom-"]{
+    display: none;
+  }
 }
 
 /* End of Utility Header */
@@ -50,6 +54,10 @@ ul.utility-links.social-media-links{
 #google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
     color: white;
 }
+.skiptranslate.goog-te-gadget a:hover{
+  color:#fee09c;
+}
+#fee09c
 /* End of Google Translate */
 #nav_list{
     width: auto;

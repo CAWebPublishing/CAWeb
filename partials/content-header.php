@@ -30,14 +30,14 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
     	 	require_once (CAWebAbsPath ."/ssi/location-bar.html");
 
         
+        print '<!-- Settings Bar -->';
+      	// Settings Bar
+     	  require_once (CAWebAbsPath ."/ssi/settings-bar.html");
+        
       print '<!-- Utility Header -->';
       // Include Utility Header
-      get_template_part('partials/content', 'utility-header');
-                  
+      get_template_part('partials/content', 'utility-header');         
       
-      print '<!-- Settings Bar -->';
-    	// Settings Bar
-   	  require_once (CAWebAbsPath ."/ssi/settings-bar.html");
 
 		}
          ?>
@@ -52,7 +52,17 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
 
 <!-- Version 4 top-right search box always displayed -->
 <!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
+<!-- Include Navigation -->
 <?php
+    wp_nav_menu( array('theme_location' => 'header-menu',
+                      'style' => ( get_option('ca_menu_selector_enabled') ?
+                                  get_post_meta(get_the_ID(), 'ca_default_navigation_menu',true) :
+                                  get_option('ca_default_navigation_menu') ),
+                      'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
+                      'version' => caweb_get_version( get_the_ID() ),
+                      )
+              );
+
 $search = ( caweb_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
 printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s</div>',
@@ -61,19 +71,6 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp') ) : '') );
 
 ?>
-
-          <!-- Include Navigation -->
-					<?php
-							wp_nav_menu( array('theme_location' => 'header-menu',
-																'style' => ( get_option('ca_menu_selector_enabled') ?
-																						get_post_meta(get_the_ID(), 'ca_default_navigation_menu',true) :
-																						get_option('ca_default_navigation_menu') ),
-																'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
-																'version' => caweb_get_version( get_the_ID() ),
-																)
-												);
-
-					?>
 
         </div>
 

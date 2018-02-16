@@ -22,6 +22,7 @@
        if( api._value.ca_site_color_scheme._value in colors ){
           $('select[data-customize-setting-link="ca_site_color_scheme"] option[value="' + api._value.ca_site_color_scheme._value + '"]')[0].selected = true;
        }else {
+         api._value.ca_site_color_scheme._value = 'oceanside';
           $('select[data-customize-setting-link="ca_site_color_scheme"] option[value="oceanside"]')[0].selected = true;
        }
                

@@ -336,6 +336,7 @@
 			<?php endif; ?>
 		</tr>
 		</table>
+		<input type="submit" name="caweb_options_submit" id="#submit" class="button button-primary" value="Save Changes">
 		<h1 class="option">Custom CSS</h1>
 		<table class="form-table">
 
