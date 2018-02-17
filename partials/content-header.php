@@ -1,6 +1,6 @@
 <?php
 global $post;
-
+$post_content = isset($post) ? (is_object($post) ? $post->post_content : $post['content']) : '';
 $ver = caweb_get_version( get_the_ID() );
 $fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? ' fixed': '');
 $color = get_option('ca_site_color_scheme', 'oceanside');
@@ -14,7 +14,7 @@ $header_background_img = (4 == $ver && "" !== get_option('header_ca_background')
                           get_option('header_ca_background') : $default_background_img );
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '' );
 
-$slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post_content : $post['content'] ) , $ver );
+$slideshow_banner = caweb_banner_content_filter( $post_content , $ver );
 
 ?>
 
@@ -40,10 +40,12 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
       
 
 		}
+    
+    print '<!-- Branding -->';
+    // Include Utility Header
+    get_template_part('partials/content', 'branding'); 
+    
          ?>
-
-         <!-- Include Branding -->        
-         <?php require_once (CAWebAbsPath ."/ssi/branding.html");?>
          
          <!-- Include Mobile Controls -->
          <?php require_once (CAWebAbsPath ."/ssi/mobile-controls.html");?>

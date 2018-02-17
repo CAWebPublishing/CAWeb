@@ -9,7 +9,8 @@
 
 <div id="page-container">
 <div id="et-main-area">
-<div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
+<div id="main-content" class="main-content">
+<div class="section">
   <main class="main-primary" >
 	<?php
 		global $wp_query;
@@ -81,6 +82,7 @@
 			?>
   </main>
 </div> <!-- #main-content -->
+</div>
 </div>
 </div>
 <style>

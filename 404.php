@@ -5,15 +5,8 @@
 <?php get_template_part('partials/content', 'header') ?>
 
 
-<div id="main-content" class="main-content">
-  <?php if ( ! caweb_version_check(4) ) : ?>
-
-	<div class="ca_wp_container">
-
-
-<?php endif; ?>
-    
-    
+<div id="main-content" class="main-content">    
+<div class="section">
 <main class="main-primary">
   
 				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
@@ -34,14 +27,7 @@
 				</article> <!-- .et_pb_post -->
         
 </main>
-      
-       <?php if ( ! caweb_version_check(4) ) : ?>
-
-    </div>
-
-
-<?php endif; ?>
-    
+</div>
 </div> <!-- #main-content -->
 
 <style>
@@ -52,26 +38,7 @@
 <?php get_footer(); ?>
 
 <?php if (  caweb_version_check(4) ) : ?>
-<style>
-.section-default .ca_wp_container {
-    margin: 0;
-}
-.textfield-container {
-    float: left;
-    padding-right: 15px;
-    width: calc(97% - 15px);
-}
-input#search_local_textfield {
-    width: 100%;
-}
-div#head-search {
-    display: none;
-}
-div#google_translate_element {
-    top: 10px;
-}
-</style>
-
+<style>div#head-search {display: none;}div#google_translate_element { top: 10px;}</style>
 <?php endif; ?>
 </body>
 </html>

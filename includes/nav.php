@@ -59,7 +59,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) && "" !== get_option('ca_google_search_id') ?
 									'<li class="nav-item nav-item-search"><a href="#" class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
 
-			$nav_menu = sprintf('<nav id="navigation" class=" ca_wp_container main-navigation %1$s hidden-print">
+			$nav_menu = sprintf('<nav id="navigation" class="main-navigation %1$s hidden-print">
 								<ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s</ul></nav>',
 												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $nav_menu, $searchLink );
 
@@ -68,12 +68,12 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
       $nav_menu = $this->createFooterMenu($args);
       $socialLinks = $this->createFooterSocialMenu($args);
 
-			$nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container %1$s">%2$s%3$s</div>
+			$nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu">%1$s%2$s</div>
 													<!-- Copyright Statement -->
 										<div class="copyright">
-										<div class="container container ca_wp_container" %4$s> Copyright &copy;
+										<div class="container" %3$s> Copyright &copy;
 										<script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
-									( 4 < $args->version ? 'ca_wp_container' : '' ), $nav_menu, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ) );
+									 $nav_menu, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ) );
     }else{
       $nav_menu = '';
     }
@@ -84,19 +84,18 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
   public function caweb_menu_fail($args){
 		$nav_menu = '';
     if('header-menu' == $args['theme_location'] ){
-        $nav_menu = '<nav id="navigation" class=" ca_wp_container main-navigation hidden-print"><ul id="nav_list" class="top-level-nav">
+        $nav_menu = '<nav id="navigation" class="main-navigation hidden-print"><ul id="nav_list" class="top-level-nav">
                         <li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span><strong>There Is No Navigation Menu Set</strong></a></li></ul></nav>';
 
     }elseif( 'footer-menu' == $args['theme_location']  ){
         $nav_menu = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>';
         $socialLinks = '';
-        $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container %1$s">%2$s%3$s</div>
+        $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container">%1$s%2$s</div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
-                      <div class="container container ca_wp_container" %4$s> Copyright &copy;
+                      <div class="container" %3$s> Copyright &copy;
                       <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
-                    ( 4 < $args['version'] ? 'ca_wp_container' : '' ), $nav_menu, $socialLinks,
-                    ( 4 >= $args['version'] ? 'style="text-align:center;" ' : '' ) );
+                    $nav_menu, $socialLinks, ( 4 >= $args['version'] ? 'style="text-align:center;" ' : '' ) );
     }
 
     echo $nav_menu;
@@ -211,8 +210,8 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 							$nav_item .= sprintf('<div class="sub-nav">
 								<div class="%1$s">%2$s</div>%3$s</div></li>',
-								(!empty($nav_img) ? $sub_img_class : 'full'), $this->createSubNavMenu($childLinks, $args ), (!empty($nav_img) ? $sub_img_div : ''),
-								($args->version == 5 && "megadropdown" == $args->style ? 'ca_wp_container' : '') );
+								(!empty($nav_img) ? $sub_img_class : 'full'), $this->createSubNavMenu($childLinks, $args ), 
+								(!empty($nav_img) ? $sub_img_div : '') );
 						}else{
 							$sub_img_class = sprintf('with-image-%1$s-%2$s',
 								("quarter" == $nav_img_size ? 'sm' : 'md'),$nav_img_side );

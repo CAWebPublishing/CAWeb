@@ -1,14 +1,35 @@
 body{
  background-color: #fff;
 }
-.et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
-	width: 80%;
+#main-content > .section{
+	padding-top: 0;
+}
+#main-content .et_pb_row{
+     max-width: 1280px;
+}
+@media (min-width: 768px){
+#main-content .et_pb_row {
+    width: 750px;
+}
+}
+@media (min-width: 992px){
+#main-content .et_pb_row {
+    width: 970px;
+}
+}
+@media (min-width: 1280px){
+#main-content .et_pb_row {
+    width: 1280px;
+}
 }
 /* Temporary remove the sub nav arrow until the function in the core script is working */
 .nav-arrow-down{
   	visibility: hidden;
 }
 /* Utility Header */
+.utility-header .container{
+     max-width: 1280px;
+} 
 .utility-header .half{
  padding-left: 15px !important;
 }
@@ -32,18 +53,17 @@ ul.utility-links.social-media-links{
     margin-right: -8px;
   }
 }
-@media (max-width: 767px){
-  .utility-header .container.ca_wp_container{
-    width: 100%;
-    padding-bottom: 2px;
-  }
-    
-  .utility-header .utility-links li[class*="utility-custom-"]{
+@media (max-width: 767px){ 
+.utility-header .container{
+      width: 100%;
+}   
+.utility-header .utility-links li[class*="utility-custom-"]{
     display: none;
-  }
+}
 }
 
 /* End of Utility Header */
+
 /* Google Translate */
 #google_translate_element{
   width: auto;
@@ -57,8 +77,8 @@ ul.utility-links.social-media-links{
 .skiptranslate.goog-te-gadget a:hover{
   color:#fee09c;
 }
-#fee09c
 /* End of Google Translate */
+
 #nav_list{
     width: auto;
 	 float: right;
@@ -135,34 +155,10 @@ ul.utility-links.social-media-links{
     padding: 0 8px;
   }
 }
-@media (min-width: 768px){
-  .fixed.compact .header-cagov-logo {
-    height: 55px;
-    line-height: 55px;
+.branding .header-organization-banner img{
+     width: auto;
 }
-.fixed.compact .header-cagov-logo img {
-    height: 45px;
-}
-}
-.branding .header-cagov-logo{
-  max-width: 25%;
-  height: 88px;
-  line-height: 88px;
-}
-.branding .header-cagov-logo a{
-    z-index: 26;
-    position: relative;
-	
-}
-.branding .header-cagov-logo img{
-  max-height: 80px;
-  height: auto;
-  position: static;
-  width: auto;
-}
-.header-organization-banner{
-  display: none;
-}
+
 /* End of Branding & Navigation */
 
 /* Header Slideshow Banner */
@@ -176,18 +172,16 @@ ul.utility-links.social-media-links{
 
 
 /* Footer */
+footer .container{
+     max-width: 1280px;
+}
+footer .container.footer-menu{
+     padding: 0;
+}
 .global-footer ul > li{
 	padding-left: 0;
 
 }
-#footer .ca_wp_container div{
-  padding: 0;
-  overflow: hidden;
-}
-#footer .ca_wp_container .three-quarters{
-
-}
-
 #footer .socialsharer-container {
     height: 22px;
 }
@@ -303,29 +297,8 @@ ul.utility-links.social-media-links{
 .et_pb_ca_fullwidth_section_carousel .container{
   padding-top: 10px !important;
 }
-.ca_wp_container{
-  max-width: 1080px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-
-@media (max-width: 980px){
-.ca_wp_container{
-  padding: 0;
-}
-}
-
-@media (min-width: 981px){
-.ca_wp_container{
-  padding: 0;
-}
-}
 @media (max-width: 767px){
-  .ca_wp_container.main-navigation{
-    width: 100%;
-  }
   .et_pb_row{
     width: 90% !important;
 

@@ -226,80 +226,8 @@ function caweb_wp_head(){
 /* CAWeb Footer */
 add_action( 'wp_footer', 'caweb_wp_footer', 11);
 function caweb_wp_footer(){
-	$ver = caweb_get_version( get_the_ID() );
 	// This removes Divi Builder Google Font CSS
-	wp_deregister_style('et-builder-googlefonts');
-  
-	// if on a SERP Template Page
-	if( "page-templates/searchpage.php" == get_page_template_slug() ){
-		// Version 4
-		if (  4 == $ver ) {
-		?>
-		<style>
-			.section-default .ca_wp_container {
-				margin: 0;
-			}
-			.textfield-container {
-				float: left;
-				padding-right: 15px;
-				width: calc(97% - 15px);
-			}
-			input#search_local_textfield {
-				width: 100%;
-			}
-			div#head-search {
-				display: none;
-			}
-			div#google_translate_element {
-				top: 10px;
-			}
-			
-			</style>
-
-		<?php 
-		// Version 5
-		}else{		
-		?>
-		<style>
-		  table.gsc-search-box td.gsc-clear-button {
-			 display: none; 
-			}
-		  td.gsc-search-button{
-			position: relative; 
-		  }
-		  input.gsc-search-button{
-			position: relative; 
-		  }
-		  span.search-icon{
-			right: 63px; 
-		  }
-		  input.gsc-search-button {
-			position: absolute;
-			top: 2px;
-			height: 51px;
-			width: 48px;
-			min-width: 35px ;
-			right: 30px;
-			opacity: 0;
-		}
-		  input.gsc-input {
-			padding: 14px;
-			height: 55px;
-			border: 3px solid transparent;
-			font-size: 1.1rem !important;
-		}
-		  input.gsc-input:focus {
-			border-color: transparent;
-		  }
-		  .section.section-default{
-			padding-top: 0 !important;
-		  }
-		</style>
-		<?php
-		}
-		
-	}
-	
+	wp_deregister_style('et-builder-googlefonts');	
 }
 /*
 	Actions Ran During an Admin Page Request

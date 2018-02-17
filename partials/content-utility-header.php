@@ -1,7 +1,8 @@
 <?php      $gtranslator = get_option('ca_google_trans_enabled'); ?>    
 <div class="utility-header ">
-    <div class="container ca_wp_container">
-            <div class="<?= $gtranslator ? 'third' : 'half' ?>">
+    <div class="container">
+      <div class="group">
+            <div class="quarter">
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php 
@@ -29,9 +30,9 @@
                 </ul>
             </div>
             <?php if(get_option('ca_google_trans_enabled') ): ?>
-              <div class="third pull-right" id="google_translate_element"></div>
+              <div class="quarter pull-right" id="google_translate_element"></div>
             <?php endif; ?>   
-            <div class="<?= $gtranslator ? 'third pull-right' : 'half' ?> settings-links hidden-print">
+            <div class="<?= $gtranslator ? 'half pull-right' : 'three-quarters' ?> settings-links hidden-print">
                 <ul class="utility-links ">
                   
 					<?php 
@@ -60,6 +61,6 @@
                     <?php endif; ?>
               </ul>              
             </div> 
-                  
+        </div>          
     </div>
 </div>

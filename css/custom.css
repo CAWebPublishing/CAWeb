@@ -66,10 +66,6 @@
     background-color: #fff !important;
   	overflow: hidden;
 }
-#main-content .ca_wp_container{
-  	padding-top: 0;
-}
-
 ol.breadcrumb{
  text-transform: capitalize;
   margin-bottom: 0;

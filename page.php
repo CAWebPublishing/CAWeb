@@ -10,7 +10,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 <div id="page-container">
 <div id="et-main-area">
 
-<div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
+<div id="main-content" class="main-content">
 <main class="main-primary">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -19,7 +19,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <?php
 if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) )
-		print the_title(sprintf('<!-- Page Title--><h1 class="page-title %1$s" >', ( $is_page_builder_used ? 'ca_wp_container' : '' ) ), '</h1>');
+		print the_title(sprintf('<!-- Page Title--><h1 class="page-title %1$s">', ( $is_page_builder_used ? 'et_pb_row' : '' )), '</h1>');
 
   	print '<div class="entry-content">';
 
@@ -42,7 +42,6 @@ if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) )
 			<?php endwhile; ?>
 					<span class="return-top hidden-print"></span>
 </main>
-
 </div> <!-- #main-content -->
 </div>
 </div>
