@@ -36,7 +36,17 @@ body{
 .utility-header .container .group .social-links,
 .utility-header .container .group .settings-links{
      flex-grow: 10;
+     padding-left: 15px;
 } 
+.utility-header ul li {
+    cursor: pointer;
+}
+ul.utility-links.social-media-links{
+ margin-left: 45px;
+}
+.utility-geo-locator .located-city-name{
+  margin-left: 0;
+}
 @media (max-width: 767px){ 
 .utility-header .container{
       width: 100%;

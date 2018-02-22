@@ -166,7 +166,7 @@ function caweb_wp_enqueue_scripts() {
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
 
 	  /* Version 5 specific scripts */
-	if(5 >= $ver && "on" == get_option('ca_geo_locator_enabled')){
+	if(5 >= $ver && ( "on" == get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled') ) ){
 		wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), $theme_version, true );
 		wp_enqueue_script( 'cagov-geolocator-script' );
 	}	
