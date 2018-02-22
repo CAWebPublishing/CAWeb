@@ -6,6 +6,10 @@ body{
 }
 #main-content .et_pb_row{
      max-width: 1280px;
+     margin-right: auto;
+     margin-left: auto;
+     padding-left: 15px;
+     padding-right: 15px;
 }
 @media (min-width: 768px){
 #main-content .et_pb_row {
@@ -21,6 +25,13 @@ body{
 #main-content .et_pb_row {
     width: 1280px;
 }
+}
+@media (max-width: 767px){
+  .et_pb_row{
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 /* Temporary remove the sub nav arrow until the function in the core script is working */
 .nav-arrow-down{
@@ -172,7 +183,6 @@ ul.utility-links.social-media-links{
 /* Footer */
 footer .container{
      max-width: 1280px;
-     padding: 0;
 }
 footer .container .group{
      display: flex;
@@ -189,6 +199,14 @@ footer .container .group{
 #footer .three-quarters {
     flex-grow: 8;
     width: auto;
+}
+
+@media (max-width: 767px){
+  footer .container{
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 /* End of Footer */
 
@@ -278,11 +296,4 @@ footer .container .group{
 /* Fullwidth Section Carousel Version 5 */
 .et_pb_ca_fullwidth_section_carousel .container{
   padding-top: 10px !important;
-}
-
-@media (max-width: 767px){
-  .et_pb_row{
-    width: 90% !important;
-
-  }
 }
