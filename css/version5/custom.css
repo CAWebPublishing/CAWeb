@@ -37,6 +37,7 @@ body{
 .utility-header .container .group .settings-links{
      flex-grow: 10;
      padding-left: 15px;
+     width: auto;
 } 
 .utility-header ul li {
     cursor: pointer;
@@ -171,41 +172,25 @@ ul.utility-links.social-media-links{
 /* Footer */
 footer .container{
      max-width: 1280px;
-}
-footer .container.footer-menu{
      padding: 0;
+}
+footer .container .group{
+     display: flex;
 }
 .global-footer ul > li{
 	padding-left: 0;
 
 }
-#footer .socialsharer-container {
-    height: 22px;
+#footer .quarter {
+    flex-grow: 2;
+    width: auto;
 }
 
-/* End of Footer */
-
-/* Makes social media icons wrap below footer links */
-@media (min-width: 992px){
 #footer .three-quarters {
-	float: left;
-	min-width: 75%;
-	width: unset;
-  }
+    flex-grow: 8;
+    width: auto;
 }
-@media (min-width: 992px){
-  #footer .quarter {
-      float: left;
-      max-width: 25%;
-      width: unset;
-  }
-}
-
-@media (max-width: 992px){
-#footer .socialsharer-container {
-    float: left;
-}
-}
+/* End of Footer */
 
 @media (max-width: 991px) and (min-width: 768px){
 .sub-nav .three-quarters {

@@ -68,7 +68,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
       $nav_menu = $this->createFooterMenu($args);
       $socialLinks = $this->createFooterSocialMenu($args);
 
-			$nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu">%1$s%2$s</div>
+			$nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s%2$s</div></div>
 													<!-- Copyright Statement -->
 										<div class="copyright">
 										<div class="container" %3$s> Copyright &copy;
@@ -90,7 +90,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
     }elseif( 'footer-menu' == $args['theme_location']  ){
         $nav_menu = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>';
         $socialLinks = '';
-        $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container">%1$s%2$s</div>
+        $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="group">%1$s%2$s</div></div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
                       <div class="container" %3$s> Copyright &copy;
@@ -344,7 +344,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 			}
 		}
 		$socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
-											(4 >= $args->version ? 'full' : 'quarter text-right' ), (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : '' ), $socialLinks	);
+											(4 >= $args->version ? 'full' : 'quarter' ), (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : '' ), $socialLinks	);
 		return $socialLinks;
 	}
 
