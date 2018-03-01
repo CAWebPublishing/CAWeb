@@ -18,7 +18,7 @@ body {
     border-right: 7px solid #1d4d4c
 }
 .primary .header-decoration {
-    background: url(var(image-dir-rel-path) "images/system/sierra/ribbon-home.png") no-repeat 66.6667% 0
+    background: url("../../../images/system/sierra/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
     background: url("../../../imagesimages/system/sierra/ribbon-two-col.png") no-repeat 66.6667% 0
