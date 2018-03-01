@@ -1,5 +1,5 @@
 body {
-    background: #484439 url("../../../imagesimages/system/orangecounty/body-background.png") repeat-y 50% 0;
+    background: #484439 url("../../../images/system/orangecounty/body-background.png") repeat-y 50% 0;
     background: -moz-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
     background: -webkit-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
     background: -o-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
@@ -18,20 +18,20 @@ body {
     border-right: 7px solid #484439
 }
 .primary .header-decoration {
-    background: url("../../../imagesimages/system/orangecounty/ribbon-home.png") no-repeat 66.6667% 0
+    background: url("../../../images/system/orangecounty/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
-    background: url("../../../imagesimages/system/orangecounty/ribbon-two-col.png") no-repeat 66.6667% 0
+    background: url("../../../images/system/orangecounty/ribbon-two-col.png") no-repeat 66.6667% 0
 }
 .primary.two-column .main-content {
-    background: url("../../../imagesimages/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%, url("../../../imagesimages/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0;
+    background: url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%, url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0;
     background-color: #fff
 }
 .primary .main-content {
-    background: #fff url("../../../imagesimages/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%
+    background: #fff url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%
 }
 .two-column .main-content {
-    background: #fff url("../../../imagesimages/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0
+    background: #fff url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0
 }
 @media (max-width: 991px) {
     .two-column .main-content,
@@ -110,7 +110,7 @@ body {
         display: block
     }
     .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-        background-image: url("../../../imagesimages/system/orangecounty/ribbon.png")
+        background-image: url("../../../images/system/orangecounty/ribbon.png")
     }
 }
 @media (max-width: 767px) {
@@ -165,7 +165,7 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation .sub-nav {
-        background: transparent url("../../../imagesimages/system/orangecounty/megadropdown-ribbon.png") no-repeat 70.3125% 100%
+        background: transparent url("../../../images/system/orangecounty/megadropdown-ribbon.png") no-repeat 70.3125% 100%
     }
 }
 @media (max-width: 991px) {
@@ -614,7 +614,7 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
     background: #f1ede4
 }
 .panel-standout.highlight .panel-heading .triangle {
-    background: url("../../../imagesimages/system/orangecounty/panel-standout-triangle.png") no-repeat
+    background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat
 }
 .main-secondary .panel-default {
     border-color: #97570b
@@ -674,7 +674,7 @@ figure {
 .main-secondary .nav-tabs>li.active>a:after,
 .main-secondary .nav-tabs>li.active>a:visited:after,
 .main-secondary .nav-tabs>li.active>a:focus:after {
-    background: url("../../../imagesimages/system/orangecounty/panel-standout-triangle.png") no-repeat
+    background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat
 }
 .location.mini [class^="ca-gov-icon"] {
     background: #483723;
