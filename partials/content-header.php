@@ -4,17 +4,17 @@ $post_content = isset($post) ? (is_object($post) ? $post->post_content : $post['
 $ver = caweb_get_version( get_the_ID() );
 $fixed_header = ( 5 == $ver && get_option('ca_sticky_navigation') ? ' fixed': '');
 $color = get_option('ca_site_color_scheme', 'oceanside');
-$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ) , 'filename');	
+$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ), 'filename');
 $colorscheme = isset( $schemes[$color] ) ? $color : 'oceanside';
 
 $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg',
-                                 CAWebUri , $colorscheme);
+                                 CAWebUri, $colorscheme);
 
 $header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ?
                           get_option('header_ca_background') : $default_background_img );
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '' );
 
-$slideshow_banner = caweb_banner_content_filter( $post_content , $ver );
+$slideshow_banner = caweb_banner_content_filter( $post_content, $ver );
 
 ?>
 
@@ -25,30 +25,28 @@ $slideshow_banner = caweb_banner_content_filter( $post_content , $ver );
 		// Version 5.0 Specific
 		if(caweb_version_check(5.0, get_the_ID()) ){
 
-		    print '<!-- Location Bar -->';
+		    echo '<!-- Location Bar -->';
 		    // Location Bar
-    	 	require_once (CAWebAbsPath ."/ssi/location-bar.html");
+    	 	require_once(CAWebAbsPath ."/ssi/location-bar.html");
 
-        
-        print '<!-- Settings Bar -->';
+        echo '<!-- Settings Bar -->';
       	// Settings Bar
-     	  require_once (CAWebAbsPath ."/ssi/settings-bar.html");
-        
-      print '<!-- Utility Header -->';
+     	  require_once(CAWebAbsPath ."/ssi/settings-bar.html");
+
+      echo '<!-- Utility Header -->';
       // Include Utility Header
-      get_template_part('partials/content', 'utility-header');         
-      
+      get_template_part('partials/content', 'utility-header');
 
 		}
-    
-    print '<!-- Branding -->';
+
+    echo '<!-- Branding -->';
     // Include Utility Header
-    get_template_part('partials/content', 'branding'); 
-    
+    get_template_part('partials/content', 'branding');
+
          ?>
          
          <!-- Include Mobile Controls -->
-         <?php require_once (CAWebAbsPath ."/ssi/mobile-controls.html");?>
+         <?php require_once(CAWebAbsPath ."/ssi/mobile-controls.html");?>
 
         <div class="navigation-search">
 
@@ -58,7 +56,7 @@ $slideshow_banner = caweb_banner_content_filter( $post_content , $ver );
 <?php
     wp_nav_menu( array('theme_location' => 'header-menu',
                       'style' => ( get_option('ca_menu_selector_enabled') ?
-                                  get_post_meta(get_the_ID(), 'ca_default_navigation_menu',true) :
+                                  get_post_meta(get_the_ID(), 'ca_default_navigation_menu', true) :
                                   get_option('ca_default_navigation_menu') ),
                       'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
                       'version' => caweb_get_version( get_the_ID() ),
@@ -84,7 +82,7 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 <?php endif; ?>
 
 
-<?php ( !empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
+<?php ( ! empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
 
         <div class="header-decoration hidden-print"></div>
 

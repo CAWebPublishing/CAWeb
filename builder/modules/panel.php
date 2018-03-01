@@ -6,10 +6,7 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
 */
 
-
-/*********************
-	Standard Version 
-**********************/
+// Standard Version
 class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Panel', 'et_builder' );
@@ -37,8 +34,8 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-			'panel_layout' => array( 'default' ),
-			'button_link' => array( 'http://','add_default_setting'),
+			'panel_layout' => array('default'),
+			'button_link' => array('http://','add_default_setting'),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -46,9 +43,9 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$this->options_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
+		      'style'  => esc_html__( 'Style', 'et_builder'),
 		      'header' => esc_html__( 'Header', 'et_builder'),
-		      'body'   => esc_html__( 'Body'  , 'et_builder'),
+		      'body'   => esc_html__( 'Body', 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
@@ -77,38 +74,38 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 	function get_fields() {
 		$fields = array(
 			'panel_layout' => array(
-				'label'             => esc_html__( 'Style','et_builder' ),
+				'label'             => esc_html__( 'Style', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'none' => esc_html__( 'None','et_builder'),
-					'default' => esc_html__( 'Default','et_builder'),
-					'standout'  => esc_html__( 'Standout','et_builder'),
-					'standout highlight'  => esc_html__( 'Standout Highlight','et_builder'),
-					'overstated'  => esc_html__( 'Overstated','et_builder'),
-					'understated'  => esc_html__( 'Understated','et_builder'),
+					'none' => esc_html__( 'None', 'et_builder'),
+					'default' => esc_html__( 'Default', 'et_builder'),
+					'standout'  => esc_html__( 'Standout', 'et_builder'),
+					'standout highlight'  => esc_html__( 'Standout Highlight', 'et_builder'),
+					'overstated'  => esc_html__( 'Overstated', 'et_builder'),
+					'understated'  => esc_html__( 'Understated', 'et_builder'),
 				),
-				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
+				'description'       => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
 				'affects' => array('heading_text_color'),
 				'toggle_slug' => 'style',
 			),
 			'title' => array(
-				'label'           => esc_html__( 'Heading','et_builder' ),
+				'label'           => esc_html__( 'Heading', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter a Heading Title.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter a Heading Title.', 'et_builder' ),
 				'toggle_slug'			=> 'header',
 			),
 			'heading_align' => array(
-				'label'             => esc_html__( 'Heading Alignment','et_builder' ),
+				'label'             => esc_html__( 'Heading Alignment', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'left' => esc_html__( 'Left','et_builder'),
-					'center' => esc_html__( 'Center','et_builder'),
-					'right'  => esc_html__( 'Right','et_builder'),
+					'left' => esc_html__( 'Left', 'et_builder'),
+					'center' => esc_html__( 'Center', 'et_builder'),
+					'right'  => esc_html__( 'Right', 'et_builder'),
 				),
-				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
+				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading', 'et_builder' ),
 				'toggle_slug'				=> 'header',
 				'tab_slug' => 'advanced',
 			),
@@ -135,14 +132,14 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 				'tab_slug' => 'advanced',
 			),
 			'font_icon' => array(
-				'label'           => esc_html__( 'Heading Icon','et_builder' ),
+				'label'           => esc_html__( 'Heading Icon', 'et_builder' ),
 				'type'            => 'text',
 			 	'option_category'     => 'configuration',
-				'class'               => array( 'et-pb-font-icon' ),
+				'class'               => array('et-pb-font-icon'),
   			'renderer'            => 'et_pb_get_font_icon_list',
 				'renderer_with_field' => true,
 				'depends_show_if'   	=> 'on',
-				'description'     		=> esc_html__( 'Here you can select a Heading Icon','et_builder' ),
+				'description'     		=> esc_html__( 'Here you can select a Heading Icon', 'et_builder' ),
 				'toggle_slug'   			=> 'header',
 				'tab_slug' => 'advanced',
 			),
@@ -155,22 +152,22 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'affects' => array('button_link',),
-				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
+				'description'     => esc_html__( 'Here you can select to display a button.', 'et_builder' ),
 				'toggle_slug'			=> 'header',
 			),
 			'button_link' => array(
-				'label'           => esc_html__( 'Button Link','et_builder' ),
+				'label'           => esc_html__( 'Button Link', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)', 'et_builder' ),
 				'depends_show_if' => "on",
 				'toggle_slug'			=> 'header',
 			),
 			'content_new' => array(
-				'label'           => esc_html__( 'Content','et_builder'),
+				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can create the content that will be used within the module.','et_builder' ),
+				'description'     => esc_html__( 'Here you can create the content that will be used within the module.', 'et_builder' ),
 				'toggle_slug'			=> 'body',
 			),
 			'max_width' => array(
@@ -238,7 +235,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id             	= $this->shortcode_atts['module_id'];
 		$module_class          	= $this->shortcode_atts['module_class'];
 		$max_width             	= $this->shortcode_atts['max_width'];
@@ -272,7 +269,6 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
 
-
 		$headingSize = ("none" == $panel_layout ? 'h1' : 'h2');
 
 		$heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?
@@ -288,7 +284,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$remove_overflow = ("none" == $panel_layout ? 'style="overflow: visible;"' : '');
 
 		$display_options = ($show_button == "on" ? sprintf('<div class="options" %2$s>
-		<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
+		<a href="%1$s" class="btn btn-default">Read More</a></div>', $button_link, $option_padding ) : '');
 
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ("" != $heading_style ? $heading_style : ''), $display_icon, $title, $display_options) : '');
@@ -296,8 +292,8 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
 								%3$s
 									<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->',
-					$panel_layout, $remove_overflow, $display_title,  $this->shortcode_content,
-      	  ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+					$panel_layout, $remove_overflow, $display_title, $this->shortcode_content,
+      	  ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
     	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
            );
 
@@ -312,7 +308,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 			?>
 			<script>
 			window.<?php echo $this->slug; ?>_preview = function(args) {
-				var icon_list = <?= json_encode( caweb_get_icon_list(-1,'',true) ) ?>;
+				var icon_list = <?= json_encode( caweb_get_icon_list(-1, '', true) ) ?>;
 				var dispay_icon = "on" == args.use_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
 
 				var heading_size = "none" == args.panel_layout ? "h1" : "h2";
@@ -336,11 +332,9 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 }
 new ET_Builder_Module_Panel;
 
-/*********************
-	Fullwidth Version 
-**********************/
+// Fullwidth Version
 class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
-	function init(){
+	function init() {
 		$this->name = esc_html__( 'FullWidth Panel', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_panel';
 		$this->fb_support = true;
@@ -366,8 +360,8 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 			);
 
 			$this->fields_defaults = array(
-				'panel_layout' => array( 'default' ),
-				'button_link' => array( 'http://','add_default_setting'),
+				'panel_layout' => array('default'),
+				'button_link' => array('http://','add_default_setting'),
 			);
 
 			$this->main_css_element = '%%order_class%%';
@@ -375,9 +369,9 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 			$this->options_toggles = array(
 				'general' => array(
 					'toggles' => array(
-						'style'  => esc_html__( 'Style' , 'et_builder'),
+						'style'  => esc_html__( 'Style', 'et_builder'),
 						'header' => esc_html__( 'Header', 'et_builder'),
-						'body'   => esc_html__( 'Body'  , 'et_builder'),
+						'body'   => esc_html__( 'Body', 'et_builder'),
 					),
 				),
 				'advanced' => array(
@@ -399,7 +393,6 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 				),
 			);
 
-
 		// Custom handler: Output JS for editor preview in page footer.
 		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
@@ -407,38 +400,38 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 	function get_fields() {
 		$fields = array(
 			'panel_layout' => array(
-				'label'             => esc_html__( 'Style','et_builder' ),
+				'label'             => esc_html__( 'Style', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'none' => esc_html__( 'None','et_builder'),
-					'default' => esc_html__( 'Default','et_builder'),
-					'standout'  => esc_html__( 'Standout','et_builder'),
-					'standout highlight'  => esc_html__( 'Standout Highlight','et_builder'),
-					'overstated'  => esc_html__( 'Overstated','et_builder'),
-					'understated'  => esc_html__( 'Understated','et_builder'),
+					'none' => esc_html__( 'None', 'et_builder'),
+					'default' => esc_html__( 'Default', 'et_builder'),
+					'standout'  => esc_html__( 'Standout', 'et_builder'),
+					'standout highlight'  => esc_html__( 'Standout Highlight', 'et_builder'),
+					'overstated'  => esc_html__( 'Overstated', 'et_builder'),
+					'understated'  => esc_html__( 'Understated', 'et_builder'),
 				),
-				'description'       => esc_html__( 'Here you can choose the style of panel to display','et_builder' ),
+				'description'       => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
 				'affects' => array('heading_text_color'),
 				'toggle_slug' => 'style',
 			),
 			'title' => array(
-				'label'           => esc_html__( 'Heading','et_builder' ),
+				'label'           => esc_html__( 'Heading', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter a Heading Title.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter a Heading Title.', 'et_builder' ),
 				'toggle_slug'     => 'header',
 			),
 			'heading_align' => array(
-				'label'             => esc_html__( 'Heading Alignment','et_builder' ),
+				'label'             => esc_html__( 'Heading Alignment', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'left' => esc_html__( 'Left','et_builder'),
-					'center' => esc_html__( 'Center','et_builder'),
-					'right'  => esc_html__( 'Right','et_builder'),
+					'left' => esc_html__( 'Left', 'et_builder'),
+					'center' => esc_html__( 'Center', 'et_builder'),
+					'right'  => esc_html__( 'Right', 'et_builder'),
 				),
-				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading','et_builder' ),
+				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading', 'et_builder' ),
 				'toggle_slug'       => 'header',
 				'tab_slug'       => 'advanced',
 			),
@@ -465,14 +458,14 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 				'tab_slug'       => 'advanced',
 			),
 			'font_icon' => array(
-				'label'           => esc_html__( 'Heading Icon','et_builder' ),
+				'label'           => esc_html__( 'Heading Icon', 'et_builder' ),
 				'type'            => 'text',
 			 	'option_category'     => 'configuration',
-				'class'               => array( 'et-pb-font-icon' ),
+				'class'               => array('et-pb-font-icon'),
 				'renderer'            => 'et_pb_get_font_icon_list',
 				'renderer_with_field' => true,
 				'depends_show_if' => 'on',
-				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
+				'description'     => esc_html__( 'Here you can select a Heading Icon', 'et_builder' ),
 				'toggle_slug'       => 'header',
 				'tab_slug'       => 'advanced',
 			),
@@ -485,22 +478,22 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'affects' => array('button_link',),
-				'description'     => esc_html__( 'Here you can select to display a button.','et_builder' ),
+				'description'     => esc_html__( 'Here you can select to display a button.', 'et_builder' ),
 				'toggle_slug'       => 'header',
 			),
 			'button_link' => array(
-				'label'           => esc_html__( 'Button Link','et_builder' ),
+				'label'           => esc_html__( 'Button Link', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)', 'et_builder' ),
 				'depends_show_if' => "on",
 				'toggle_slug'       => 'header',
 			),
 			'content_new' => array(
-				'label'           => esc_html__( 'Content','et_builder'),
+				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can create the content that will be used within the module.','et_builder' ),
+				'description'     => esc_html__( 'Here you can create the content that will be used within the module.', 'et_builder' ),
 				'toggle_slug'       => 'body',
 			),
 			'max_width' => array(
@@ -566,7 +559,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 			);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$max_width            = $this->shortcode_atts['max_width'];
@@ -610,19 +603,18 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 
 		$remove_overflow = ("none" == $panel_layout ? 'style="overflow: visible;"' : '');
 		$display_options = ($show_button == "on" ? sprintf('<div class="options" %2$s>
-						<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
+						<a href="%1$s" class="btn btn-default">Read More</a></div>', $button_link, $option_padding ) : '');
 
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
-								$headingSize, ( !empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
+								$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
 		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
 									%3$s
 									<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->',
-							$panel_layout, $remove_overflow, $display_title,  $this->shortcode_content,
-							( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+							$panel_layout, $remove_overflow, $display_title, $this->shortcode_content,
+							( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
 							( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
 							 );
-
 
 		return $output;
 	}

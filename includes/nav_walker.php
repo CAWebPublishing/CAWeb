@@ -9,7 +9,7 @@
   Website: wpfront.com
 
   Contact: syam@wpfront.com
-  
+
 
 
   WPFront User Role Editor Plugin is distributed under the GNU General Public License, Version 3,
@@ -42,7 +42,7 @@
 
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH')) {
 
     exit();
 
@@ -50,7 +50,7 @@ if (!defined('ABSPATH')) {
 
 require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
 
-if (!class_exists('CAWeb_Nav_Menu_Walker')) {
+if ( ! class_exists('CAWeb_Nav_Menu_Walker')) {
 
     /**
 
@@ -63,8 +63,6 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
      */
 
     class CAWeb_Nav_Menu_Walker extends Walker_Nav_Menu_Edit {
-
-
 
         /**
 
@@ -94,7 +92,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 	 */
 
-	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 
 		global $_wp_nav_menu_max_depth;
 
@@ -156,7 +154,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 			$classes[] = 'menu-item-invalid';
 
-			/* translators: %s: title of menu item which is invalid */
+			// translators: %s: title of menu item which is invalid
 
 			$title = sprintf( __( '%s (Invalid)' ), $item->title );
 
@@ -164,7 +162,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 			$classes[] = 'pending';
 
-			/* translators: %s: title of menu item in draft status */
+			// translators: %s: title of menu item in draft status
 
 			$title = sprintf( __('%s (Pending)'), $item->title );
 
@@ -342,7 +340,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 						<?php _e( 'Description' ); ?><br />
 
-						<textarea id="edit-menu-item-description-<?php echo $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php echo $item_id; ?>]"><?php echo esc_html( $item->description ); // textarea_escaped ?></textarea>
+						<textarea id="edit-menu-item-description-<?php echo $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php echo $item_id; ?>]"><?php echo esc_html( $item->description ); // textarea_escaped?></textarea>
 
 						<span class="description"><?php _e('The description will be displayed in the menu if the current theme supports it.'); ?></span>
 
@@ -408,7 +406,7 @@ if (!class_exists('CAWeb_Nav_Menu_Walker')) {
 
 						'delete-menu_item_' . $item_id
 
-					); ?>"><?php _e( 'Remove' ); ?></a> <span class="meta-sep hide-if-no-js"> | </span> <a class="item-cancel submitcancel hide-if-no-js" id="cancel-<?php echo $item_id; ?>" href="<?php echo esc_url( add_query_arg( array( 'edit-menu-item' => $item_id, 'cancel' => time() ), admin_url( 'nav-menus.php' ) ) );
+					); ?>"><?php _e( 'Remove' ); ?></a> <span class="meta-sep hide-if-no-js"> | </span> <a class="item-cancel submitcancel hide-if-no-js" id="cancel-<?php echo $item_id; ?>" href="<?php echo esc_url( add_query_arg( array('edit-menu-item' => $item_id, 'cancel' => time()), admin_url( 'nav-menus.php' ) ) );
 
 						?>#menu-item-settings-<?php echo $item_id; ?>"><?php _e('Cancel'); ?></a>
 

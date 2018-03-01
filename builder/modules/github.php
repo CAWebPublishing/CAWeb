@@ -32,19 +32,18 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-					'per_page' => array( 100,'add_default_setting' ),
-					'repo_type' => array( 'all' ,'add_default_setting' ),
+					'per_page' => array(100,'add_default_setting'),
+					'repo_type' => array('all' ,'add_default_setting'),
 		);
-
 
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
@@ -164,14 +163,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				'toggle_slug'	=> 'body',
 			),
       'email_body' => array(
-				'label'           => esc_html__( 'Body','et_builder'),
+				'label'           => esc_html__( 'Body', 'et_builder'),
 				'type'            => 'textarea',
 				'option_category' => 'basic_option',
 				'description'     => et_get_safe_localization(
 						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] )
 										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
 																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
-        esc_html__( ' ','et_builder' ),
+        esc_html__( ' ', 'et_builder' ),
 				'toggle_slug'	=> 'email',
 				'tab_slug'        => 'advanced',
 				'depends_show_if_not'	=> 'public',
@@ -241,7 +240,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$title            = $this->shortcode_atts['title'];
 
 		$username            = $this->shortcode_atts['username'];
@@ -298,29 +297,28 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 		$output = '';
 
-    if( !empty($username)  ){
+    if( ! empty($username)  ){
 
 			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
 										$username, $per_page,
-                    ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ?
+                    ("on" == $increase_rate_limit && ! empty($client_id) && ! empty($client_secret) ?
                      sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type,
-                    ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
+                    ( ! empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
-			$repos =  wp_remote_get($url ) ;
+			$repos =  wp_remote_get($url );
 			$code = wp_remote_retrieve_response_code($repos);
 
 			if(404 !== $code){
 
-				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
+				$repos = json_decode( wp_remote_retrieve_body( $repos ) );
         $repo_list = '';
-        
+
 				foreach($repos as $r => $repo){
-          
-     				$request_link = (!empty($request_email) && $repo->private ?
+
+     				$request_link = ( ! empty($request_email) && $repo->private ?
               sprintf('<p>* This is a Private Repository <a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s">Request Access</a></p>',
                        $request_email, sprintf('%1$s Repository Access Request', $repo->full_name ), $email_body) : '');
-          
-         
+
           if("on" == $definitions[0]){
             if("on" !== $definitions[1] || $repo->private ){
               $name = sprintf('<h3>%1$s</h3>', $repo->name);
@@ -330,12 +328,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
             }
           }
 
-
-					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
+					$desc = ("on" == $definitions[2] && ! empty($repo->description) ?
 										sprintf('<p>Project Description: %1$s</p>', $repo->description) : '');
 
 					$fork = ("on" == $definitions[3] ?
-							sprintf('<p>Project forked by another organization: %1$s</p>',  ( empty($repo->fork) ? 'False' : 'True') ) :
+							sprintf('<p>Project forked by another organization: %1$s</p>', ( empty($repo->fork) ? 'False' : 'True') ) :
 									'');
 
 					$created_at = ("on" == $definitions[4] ?
@@ -344,12 +341,12 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					$updated_at = ("on" == $definitions[5] ?
 												sprintf('<p>Updated on: %1$s</p>', date('m/d/Y', strtotime($repo->updated_at ) )  ) : '');
 
-					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
+					$language =("on" == $definitions[6] && ! empty( $repo->language ) ?
 											sprintf('<p>Language: %1$s</p>', $repo->language  ) : '');
 
 					$repo_list .= sprintf( '<li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s<hr></li>',
-											(!empty($name) ? $name : ''), $desc , $fork, $created_at,
-                       $updated_at, $language, (!empty($request_link) ? $request_link : '') );
+											( ! empty($name) ? $name : ''), $desc , $fork, $created_at,
+                       $updated_at, $language, ( ! empty($request_link) ? $request_link : '') );
 				}
         $output = sprintf( '<ul>%1$s</ul>', $repo_list );
 			}else{
@@ -358,18 +355,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			}
 		}
 
-
-
 			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-                    (!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output );
-
+                    ( ! empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output );
 
 		return $output;
 
 	}
-
 
 	// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.

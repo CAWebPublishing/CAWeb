@@ -1,11 +1,9 @@
 <?php
 
-/*
-	TinyMCE Editor
-*/
+// TinyMCE Editor
 // Attach callback to 'tiny_mce_before_init'
 add_filter( 'tiny_mce_before_init', 'caweb_tiny_mce_before_init' );
-function caweb_tiny_mce_before_init( $init_array ) {
+function caweb_tiny_mce_before_init($init_array) {
 	// Define the style_formats array
 	// Each array child is a format with it's own settings
 	$style_formats = array(
@@ -58,7 +56,7 @@ function caweb_tiny_mce_before_init( $init_array ) {
 // Add hidden MCE Buttons
 // The primary toolbar (always visible)
 add_filter( 'mce_buttons', 'caweb_mce_buttons' );
-function caweb_mce_buttons( $buttons ) {
+function caweb_mce_buttons($buttons) {
 	/**
 		Add in a core button that's disabled by default
 	**/
@@ -70,7 +68,7 @@ function caweb_mce_buttons( $buttons ) {
 }
 
 add_filter( 'mce_buttons_2', 'caweb_mce_buttons_2' );
-function caweb_mce_buttons_2( $buttons ) {
+function caweb_mce_buttons_2($buttons) {
 
 	/**
 		Add in a core button that's disabled by default
@@ -84,9 +82,9 @@ function caweb_mce_buttons_2( $buttons ) {
 
 }
 
-/* CAWeb Page Body Class */
+// CAWeb Page Body Class
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
-function caweb_body_class( $wp_classes, $extra_classes ) {
+function caweb_body_class($wp_classes, $extra_classes) {
 	global $post;
 
 	// List of the classes that need to be removed
@@ -99,13 +97,13 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$sidebar_enabled = ! is_page();
 		$special_templates = is_tag() || is_archive() || is_category() || is_author();
 
-		$whitelist = array( (  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
+		$whitelist = array((  $divi && ! $special_templates ?  'divi_builder' : 'non_divi_builder' ),
                      ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', false) ? 'title_displayed' : 'title_not_displayed' ),
                       sprintf('v%1$s', caweb_get_version($post->ID) ),
-                       (is_active_sidebar('sidebar-1') && $sidebar_enabled  ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
+                       (is_active_sidebar('sidebar-1') && $sidebar_enabled  ? 'sidebar_displayed' : 'sidebar_not_displayed'  ));
 	}
 	$whitelist[] = ( get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
-	
+
    	// Remove any classes in the blacklist from the wp_classes
 	$wp_classes = array_diff( $wp_classes, $blacklist);
 
@@ -114,9 +112,9 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 }
 
-/* CAWeb Post Body Class */
+// CAWeb Post Body Class
 add_filter( 'post_class', 'caweb_post_class', 15 );
-function caweb_post_class( $classes ) {
+function caweb_post_class($classes) {
 	global $post;
 
   if( has_post_thumbnail( $post->ID ) && "" == get_the_post_thumbnail_url( $post->ID ) )
@@ -125,20 +123,20 @@ function caweb_post_class( $classes ) {
 	return $classes;
 }
 
-/* CAWeb Theme Page Templates */
+// CAWeb Theme Page Templates
 add_filter( 'theme_page_templates', 'caweb_theme_page_templates' );
-function caweb_theme_page_templates( $templates ) {
-	// Remove Divi Blank Page Template 
+function caweb_theme_page_templates($templates) {
+	// Remove Divi Blank Page Template
     unset( $templates['page-template-blank.php'] );
     return $templates;
 }
 
-/* CAWeb Script Loader Tags */
+// CAWeb Script Loader Tags
 add_filter('script_loader_tag', 'caweb_script_loader_tag', 10, 3);
-function caweb_script_loader_tag( $tag, $handle, $src ){
+function caweb_script_loader_tag($tag, $handle, $src) {
 	// Defer some scripts
-	$js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script', 
-						'cagov-navigation-script', 'cagov-ga-autotracker-script', 
+	$js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script',
+						'cagov-navigation-script', 'cagov-ga-autotracker-script',
 						'cagov-google-script');
 	  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
 	  if( in_array($handle, $js_scripts) )

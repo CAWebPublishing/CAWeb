@@ -6,9 +6,7 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
 */
 
-/*********************
-	Fullwidth Version 
-**********************/
+// Fullwidth Version
 class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tiles', 'et_builder' );
@@ -33,9 +31,9 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
@@ -57,7 +55,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		);
 	}
 	function pre_shortcode_content() {
-		/**/global $titles;
+		global $titles;
 		global $tile_images;
 		global $tile_sizes;
 		global $tile_links;
@@ -164,7 +162,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$view_more_on_off     = $this->shortcode_atts['view_more_on_off'];
@@ -211,12 +209,12 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		', $view_more_url, $view_more_text):'');
 	$output = '';
 
-		for($i = 0; $i < $items_count ; $i++){
+		for($i = 0; $i < $items_count; $i++){
 			if("on" == $tile_links[$i]){
 				$output .= sprintf('<div tabindex="%1$s" class="service-tile service-tile-empty %2$s" data-url="%3$s">
 					%4$s<div class="teaser"><h4 class="title">%5$s</h4></div></div>',
 													$i + 1, $tile_sizes[$i], $tile_urls[$i] ,
-													(!empty($tile_images[$i]) ? sprintf('<img src="%1$s" style="background-size: cover; width: 100%%; height: 320px;"/>', $tile_images[$i]) : ''),
+													( ! empty($tile_images[$i]) ? sprintf('<img src="%1$s" style="background-size: cover; width: 100%%; height: 320px;"/>', $tile_images[$i]) : ''),
 													$titles[$i]  );
 			}else{
 
@@ -250,7 +248,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 			'content_new', 'item_image', 'tile_size', 'tile_link', 'tile_url'
 			);
 		$this->fields_defaults = array(
-			'tile_link' => array( 'off','add_default_setting'),
+			'tile_link' => array('off','add_default_setting'),
 			);
 		$this->advanced_setting_title_text = esc_html__( 'New Service Tile', 'et_builder' );
 		$this->settings_text = esc_html__( 'Service Tile Settings', 'et_builder' );
@@ -260,8 +258,8 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 			'general' => array(
 				'toggles' => array(
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'style'  => esc_html__( 'Style' , 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'custom_css' => array(
@@ -290,15 +288,15 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 				'toggle_slug'	=> 'body',
 			),
 			'tile_size' => array(
-				'label'             => esc_html__( 'Size','et_builder' ),
+				'label'             => esc_html__( 'Size', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'quarter' => esc_html__( 'Quarter','et_builder'),
-					'half' => esc_html__( 'Half','et_builder'),
-					'full'  => esc_html__( 'Full','et_builder'),
+					'quarter' => esc_html__( 'Quarter', 'et_builder'),
+					'half' => esc_html__( 'Half', 'et_builder'),
+					'full'  => esc_html__( 'Full', 'et_builder'),
 				),
-				'description'       => esc_html__( 'Here you can choose the size of the tile','et_builder' ),
+				'description'       => esc_html__( 'Here you can choose the size of the tile', 'et_builder' ),
 				'toggle_slug'	=> 'style',
 			),
 			'tile_link' => array(
@@ -346,7 +344,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 		);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		global $titles;
 		global $tile_images;
 		global $tile_sizes;
@@ -366,7 +364,6 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
 		$class = 'et_pb_module et_pb_ca_fullwidth_service_tiles_item ';
-
 
 		$titles[] = $title;
 		$tile_images[] = $tile_image;

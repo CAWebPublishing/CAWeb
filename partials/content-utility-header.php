@@ -7,23 +7,22 @@
                 <ul class="utility-links social-media-links">
 					<?php 
               $gtranslator = get_option('ca_google_trans_enabled');
-              
+
 							if( get_option('ca_utility_home_icon', true) )
                   print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
 
                   $social_share = caweb_get_site_options('social');
-                
+
                   foreach($social_share as $opt){
                     	$share_email = 'ca_social_email' === $opt ? true : false;
-                    	$mailto = $share_email ? esc_attr( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) ) : '';
-                    
+                    	$mailto = $share_email ? esc_attr( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s', get_the_title(), get_bloginfo('name'), get_permalink() ) ) : '';
+
                       if( get_option($opt .'_header') && ( $share_email || "" !== get_option($opt) ) ){
                             $share = substr($opt, 10);
                             $share =  str_replace("_", "-", $share);
-                          
-                      			
-                      		printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>', 
-                             $share, ( $share_email ? $mailto : get_option($opt) ),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
+
+                      		printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>',
+                             $share, ( $share_email ? $mailto : get_option($opt) ), ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
           						}
             	}
             ?>
@@ -39,13 +38,13 @@
 							$text =  get_option( sprintf('ca_utility_link_%1$s_name', $i));
 							$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $i)) ? ' target="_blank"' : '';
 
-  						if ( !empty($url)  &&  !empty($text)  ){
+  						if ( ! empty($url)  &&  ! empty($text)  ){
   									printf('<li class="utility-custom-%1$s"><a href="%2$s"%3$s>%4$s</a></li>', $i, $url, $target, $text);
   						}
 					  }
 					?>
                   <?php if( "" !== get_option('ca_contact_us_link') ): ?>
-                    <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link') ; ?>">Contact Us</a></li>
+                    <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link'); ?>">Contact Us</a></li>
                   <?php endif; ?> 
                   
                   <!--li class="utility-settings"><a role="button" data-toggle="collapse" href="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li-->

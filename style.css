@@ -13,6 +13,9 @@
 */
 
 #wpadminbar .ab-submenu {
-    padding: 6px 0 !important;
+  padding: 6px 0 !important;
 }
-header{ z-index: 15 !important;}
+
+header {
+  z-index: 15 !important;
+}

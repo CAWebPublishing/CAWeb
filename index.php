@@ -34,7 +34,7 @@
 
 					et_divi_post_format_content();
 
-					if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) {
+					if ( ! in_array( $post_format, array('link', 'audio', 'quote') ) ) {
 						if ( 'video' === $post_format && false !== ( $first_video = et_get_first_video() ) ) :
 							printf(
 								'<div class="et_main_video_container">
@@ -42,7 +42,7 @@
 								</div>',
 								$first_video
 							);
-						elseif ( ! in_array( $post_format, array( 'gallery' ) ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb ) : ?>
+						elseif ( ! in_array( $post_format, array('gallery') ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb ) : ?>
 							<a href="<?php the_permalink(); ?>">
 								<?php print_thumbnail( $thumb, $thumbnail["use_timthumb"], $titletext, $width, $height ); ?>
 							</a>
@@ -52,8 +52,8 @@
 						endif;
 					} ?>
 
-				<?php if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) : ?>
-					<?php if ( ! in_array( $post_format, array( 'link', 'audio' ) ) ) : ?>
+				<?php if ( ! in_array( $post_format, array('link', 'audio', 'quote') ) ) : ?>
+					<?php if ( ! in_array( $post_format, array('link', 'audio') ) ) : ?>
 						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 					<?php endif; ?>
 

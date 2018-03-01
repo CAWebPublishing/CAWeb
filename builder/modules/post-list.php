@@ -30,7 +30,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-			'orderby'  => array( 'date_desc' ),
+			'orderby'  => array('date_desc'),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -39,8 +39,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 			'general' => array(
 				'toggles' => array(
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'style'  => esc_html__( 'Style' , 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
@@ -235,7 +235,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
@@ -270,40 +270,38 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-
 		switch( $orderby ) {
 			case 'date_desc':
 					$orderby = 'date';
 					$order = 'DESC';
 					break;
-			case 'date_asc' :
+			case 'date_asc':
 					$orderby = 'date';
 
 					$order = 'ASC';
 
 					break;
 
-			case 'title_asc' :
+			case 'title_asc':
 					$orderby = 'title';
 
 					$order = 'ASC';
 
 					break;
 
-			case 'title_desc' :
+			case 'title_desc':
 					$orderby = 'title';
 
 					$order = 'DESC';
 
 					break;
 
-			case 'rand' :
+			case 'rand':
 					$orderby = 'rand';
 
 					break;
 
 		}
-
 
 			if("on" == $all_categories_button ){
 				$cat_array = get_terms( 'category', array('orderby' => $orderby, 'hide_empty' => 0, 'fields' => 'ids'));
@@ -319,14 +317,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				$tag_array =	$include_tags;
 			}
 
+			$posts_number = ( ! empty($posts_number) ? $posts_number : -1);
 
-			$posts_number = ( !empty($posts_number) ? $posts_number : -1);
-
-			$all_posts = caweb_return_posts($cat_array ,$tag_array, -1, $orderby, $order );
+			$all_posts = caweb_return_posts($cat_array, $tag_array, -1, $orderby, $order );
 
 			setlocale(LC_MONETARY, 'en_US.UTF-8');
 
-			if (!empty($list_title)){
+			if ( ! empty($list_title)){
 				if ('h-1' == $title_size){
 					$list_title = sprintf('<h1>%1$s</h1>', $list_title);
 				}
@@ -366,27 +363,24 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
 
                   $image= ( "on" == $view_featured_image ?
-                  				sprintf('<div class="thumbnail" style="">%1$s</div>', get_the_post_thumbnail($post_id,null,array( 'style'=>'width: 150px; height: 100px;') ))  : '' );
-
+                  				sprintf('<div class="thumbnail" style="">%1$s</div>', get_the_post_thumbnail($post_id, null, array('style'=>'width: 150px; height: 100px;') ))  : '' );
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 30);
-									$excerpt = ( !empty($excerpt) ?
+									$excerpt = ( ! empty($excerpt) ?
 															sprintf('<div class="description"><p>%1$s</p></div>', $excerpt ) : '' );
 
-									$author = (!empty($post_content_handler->news_author) ?
+									$author = ( ! empty($post_content_handler->news_author) ?
 															sprintf('Author: %1$s', $post_content_handler->news_author) : '');
 
+                   $date =( ! empty($post_content_handler->news_publish_date) ? gmdate( 'M j, Y', strtotime( $post_content_handler->news_publish_date ) ) : '');
 
-                   $date =( !empty($post_content_handler->news_publish_date) ? gmdate( 'M j, Y', strtotime( $post_content_handler->news_publish_date ) ) : '');
+                  $date = ( ! empty($date) ? sprintf('Published: <time>%1$s</time>', $date) : '');
 
-                  $date = ( !empty($date) ? sprintf('Published: <time>%1$s</time>',$date) : '');
-
-
-									$element = (!empty($author) || !empty($date) ?
+									$element = ( ! empty($author) || ! empty($date) ?
 															sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter( array($author, $date) ) ) ) : '');
 
 									$output .=	sprintf('<article class="news-item">%1$s<div class="info" %5$s>%2$s%3$s%4$s</div></article>',
-														$image, $news_title , $excerpt, $element , ( "on" == $view_featured_image ? 'style="padding-left: 175px;"' : '') );
+														$image, $news_title, $excerpt, $element, ( "on" == $view_featured_image ? 'style="padding-left: 175px;"' : '') );
 
 									$posts_number--;
 								}
@@ -401,28 +395,27 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
                 $no_img = ( empty($image) ? ' style="margin-left: 0px;" ': '');
 
 								$t = sprintf('%1$s%2$s%3$s',
-                             (!empty($post_content_handler->profile_name_prefix) ? sprintf('%1$s ',$post_content_handler->profile_name_prefix) : ''),
-                             (!empty($post_content_handler->profile_name) ? $post_content_handler->profile_name : ''),
-                             ( !empty($post_content_handler->profile_career_title) ? sprintf(', %1$s' , $post_content_handler->profile_career_title) : '') );
+                             ( ! empty($post_content_handler->profile_name_prefix) ? sprintf('%1$s ', $post_content_handler->profile_name_prefix) : ''),
+                             ( ! empty($post_content_handler->profile_name) ? $post_content_handler->profile_name : ''),
+                             ( ! empty($post_content_handler->profile_career_title) ? sprintf(', %1$s', $post_content_handler->profile_career_title) : '') );
 
 								$profile_title = sprintf('<div class="header" %3$s><div class="title" %4$s><a href="%1$s">%2$s</a></div></div>',
-                                         $url, $t, $no_img, ( !empty($image) ? ' style="min-height: 20px;" ': '')  );
+                                         $url, $t, $no_img, ( ! empty($image) ? ' style="min-height: 20px;" ': '')  );
 
-								$position = ( !empty($post_content_handler->profile_career_position) ?
-												sprintf('%1$s',$post_content_handler->profile_career_position  )  : '' );
-								$line1 = ( !empty($post_content_handler->profile_career_line_1) ?
+								$position = ( ! empty($post_content_handler->profile_career_position) ?
+												sprintf('%1$s', $post_content_handler->profile_career_position  )  : '' );
+								$line1 = ( ! empty($post_content_handler->profile_career_line_1) ?
 												sprintf('%1$s', $post_content_handler->profile_career_line_1 )  : '' );
-								$line2 = ( !empty($post_content_handler->profile_career_line_2) ?
-												sprintf('%1$s',$post_content_handler->profile_career_line_2  )  : '' );
-								$line3 = ( !empty($post_content_handler->profile_career_line_3) ?
+								$line2 = ( ! empty($post_content_handler->profile_career_line_2) ?
+												sprintf('%1$s', $post_content_handler->profile_career_line_2  )  : '' );
+								$line3 = ( ! empty($post_content_handler->profile_career_line_3) ?
 												sprintf('%1$s', $post_content_handler->profile_career_line_3 )  : '' );
 
-								$fields = array_filter(array($position, $line1, $line2, $line3 ));
-
+								$fields = array_filter(array($position, $line1, $line2, $line3));
 
 								$output .=	sprintf('<article class="profile-item">%1$s%2$s<div class="body" %5$s><p>%3$s</p></div>
 																		<div class="footer"><a href="%4$s" class="btn btn-default">View More Details</a></div></article>',
-																		$image, $profile_title,  (!empty($fields) ? implode( '<br />', $fields ) : '<br />'), $url,  $no_img);
+																		$image, $profile_title, ( ! empty($fields) ? implode( '<br />', $fields ) : '<br />'), $url, $no_img);
 
 								$posts_number--;
 							}
@@ -434,30 +427,29 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								if ( "jobs" == $post_content_handler->post_type_layout ){
 									$job_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
 
-									$addr = ( !empty($post_content_handler->job_agency_address) ? $post_content_handler->job_agency_address : '');
-									$city = ( !empty($post_content_handler->job_agency_city) ? $post_content_handler->job_agency_city : '');
-									$state = ( !empty($post_content_handler->job_agency_state) ? $post_content_handler->job_agency_state : '');
-									$zip = ( !empty($post_content_handler->job_agency_zip) ? $post_content_handler->job_agency_zip : '');
+									$addr = ( ! empty($post_content_handler->job_agency_address) ? $post_content_handler->job_agency_address : '');
+									$city = ( ! empty($post_content_handler->job_agency_city) ? $post_content_handler->job_agency_city : '');
+									$state = ( ! empty($post_content_handler->job_agency_state) ? $post_content_handler->job_agency_state : '');
+									$zip = ( ! empty($post_content_handler->job_agency_zip) ? $post_content_handler->job_agency_zip : '');
 
 									$location = array_filter( array($addr, $city, $state , $zip) );
 
-									$location = ( !empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location) ) : '' );
+									$location = ( ! empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location) ) : '' );
 
-                  if(!empty($post_content_handler->job_final_filing_date_chooser) && "on" == $post_content_handler->job_final_filing_date_chooser){
+                  if( ! empty($post_content_handler->job_final_filing_date_chooser) && "on" == $post_content_handler->job_final_filing_date_chooser){
                       $job_final_filing_date_picker = gmdate( 'n/j/Y', strtotime( $post_content_handler->job_final_filing_date_picker ) );
                       $filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
 
                    }else{
                       $filing_date = sprintf('Final Filing Date: %1$s<br />',
-                                     (!empty($post_content_handler->job_final_filing_date) ? $post_content_handler->job_final_filing_date : 'Until Filled') );
+                                     ( ! empty($post_content_handler->job_final_filing_date) ? $post_content_handler->job_final_filing_date : 'Until Filled') );
 
                    }
 
+									$job_hours =   ( ! empty( $post_content_handler->job_hours ) ? sprintf('<div class="schedule">%1$s</div>', $post_content_handler->job_hours) : '' );
 
-									$job_hours =   ( !empty( $post_content_handler->job_hours ) ? sprintf('<div class="schedule">%1$s</div>', $post_content_handler->job_hours) : '' );
-
-									$job_salary_min    = (!empty($post_content_handler->job_salary_min) ? caweb_is_money($post_content_handler->job_salary_min,"$0.00") : "$0.00" );
-									$job_salary_max    = (!empty($post_content_handler->job_salary_max) ? caweb_is_money($post_content_handler->job_salary_max,"$0.00") : "$0.00" );
+									$job_salary_min    = ( ! empty($post_content_handler->job_salary_min) ? caweb_is_money($post_content_handler->job_salary_min, "$0.00") : "$0.00" );
+									$job_salary_max    = ( ! empty($post_content_handler->job_salary_max) ? caweb_is_money($post_content_handler->job_salary_max, "$0.00") : "$0.00" );
 
                   $job_salary_max = sprintf('  &mdash; %1$s', $job_salary_max );
 
@@ -466,21 +458,21 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 									sprintf('<div class="salary-range">Salary Range: %1$s%2$s</div>', $job_salary_min, $job_salary_max ) : '' );
 
                   $job_position = '';
-									if( !empty( $post_content_handler->job_position_number ) && !empty( $post_content_handler->job_rpa_number )){
-										$job_position    = sprintf('Position Number: %1$s, RPA #%2$s', $post_content_handler->job_position_number, $post_content_handler->job_rpa_number) ;
-									}elseif( !empty( $post_content_handler->job_position_number ) ){
-										$job_position    = sprintf('Position Number: %1$s', $post_content_handler->job_position_number) ;
-									}elseif( !empty( $post_content_handler->job_rpa_number ) ){
-										$job_position    = sprintf('RPA #%1$s', $post_content_handler->job_rpa_number) ;
+									if( ! empty( $post_content_handler->job_position_number ) && ! empty( $post_content_handler->job_rpa_number )){
+										$job_position    = sprintf('Position Number: %1$s, RPA #%2$s', $post_content_handler->job_position_number, $post_content_handler->job_rpa_number);
+									}elseif( ! empty( $post_content_handler->job_position_number ) ){
+										$job_position    = sprintf('Position Number: %1$s', $post_content_handler->job_position_number);
+									}elseif( ! empty( $post_content_handler->job_rpa_number ) ){
+										$job_position    = sprintf('RPA #%1$s', $post_content_handler->job_rpa_number);
 									}
 
-									$position_type= ( !empty($job_position) ? sprintf('<div class="position-number">%1$s</div>', $job_position) : '' );
+									$position_type= ( ! empty($job_position) ? sprintf('<div class="position-number">%1$s</div>', $job_position) : '' );
 
 									$output .= sprintf('<article class="job-item">
 															<div class="header">%1$s%2$s</div>
 															<div class="body">%3$s%4$s%5$s%6$s</div>
 															<div class="footer"><a href="%7$s" class="btn btn-default">View More Details</a></div></article>',
-																		$job_title, $filing_date , $position_type, $job_hours, $job_salary, $location, $url );
+																		$job_title, $filing_date, $position_type, $job_hours, $job_salary, $location, $url );
 									$posts_number--;
 								}
 								break;
@@ -491,12 +483,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 									$event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;">%2$s</a></h5>', $url, $title);
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 15);
-									$excerpt = ( !empty($excerpt) ?
+									$excerpt = ( ! empty($excerpt) ?
 															sprintf('<div class="description">%1$s</div>', $excerpt ) : '' );
 
-                   $date = (!empty($post_content_handler->event_start_date) ?
+                   $date = ( ! empty($post_content_handler->event_start_date) ?
                           sprintf('<div class="start-date"><time>%1$s</time></div>', gmdate( 'D, n/j/Y g:i a', strtotime($post_content_handler->event_start_date ) ) ) : '');
-
 
 									$output .= sprintf('<article class="event-item">%1$s%2$s%3$s</article>', $event_title, $excerpt, $date );
 
@@ -513,23 +504,22 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 													sprintf('<div class="thumbnail" >%1$s</div>', get_the_post_thumbnail($post_id, array(70, 70))) : '' );
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 20);
-									$excerpt = ( !empty($excerpt) ?
+									$excerpt = ( ! empty($excerpt) ?
 															sprintf('<div class="description">%1$s</div>', $excerpt ) : '' );
 
-									$tmp = array((!empty($post_content_handler->course_address) ? $post_content_handler->course_address: ''),
-															(!empty($post_content_handler->course_city) ? $post_content_handler->course_city: ''),
-															(!empty($post_content_handler->course_state) ? $post_content_handler->course_state: ''),
-															(!empty($post_content_handler->course_zip) ? $post_content_handler->course_zip: ''));
+									$tmp = array(( ! empty($post_content_handler->course_address) ? $post_content_handler->course_address: ''),
+															( ! empty($post_content_handler->course_city) ? $post_content_handler->course_city: ''),
+															( ! empty($post_content_handler->course_state) ? $post_content_handler->course_state: ''),
+															( ! empty($post_content_handler->course_zip) ? $post_content_handler->course_zip: ''));
 
 									$location = array_filter($tmp );
 
-									$location = ( !empty($location) ?
+									$location = ( ! empty($location) ?
 											sprintf('<div class="location">Location: <a href="https://www.google.com/maps/place/%1$s">%1$s</a></div>', implode(", ", $location) ) : '' );
 
-
 									$course_date = sprintf('<div class="datetime">%1$s - %2$s</div>',
-																				(!empty($post_content_handler->course_start_date) ? gmdate( 'M j, Y g:i a', strtotime($post_content_handler->course_start_date ) ) : ''),
-																				( !empty($post_content_handler->course_end_date)? gmdate( 'M j, Y g:i a', strtotime($post_content_handler->course_end_date ) ) :'') );
+																				( ! empty($post_content_handler->course_start_date) ? gmdate( 'M j, Y g:i a', strtotime($post_content_handler->course_start_date ) ) : ''),
+																				( ! empty($post_content_handler->course_end_date)? gmdate( 'M j, Y g:i a', strtotime($post_content_handler->course_end_date ) ) :'') );
 
 									$output .= sprintf('<article class="course-item">
 															%1$s<div class="header">%2$s%3$s</div>
@@ -546,22 +536,22 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								if ( "exam" == $post_content_handler->post_type_layout ){
 									$exam_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
 
-                  $pub = (!empty($post_content_handler->exam_published_date) ?
+                  $pub = ( ! empty($post_content_handler->exam_published_date) ?
                           sprintf('<div class="published">Published: <time>%1$s</time></div>', gmdate( 'M j, Y', strtotime($post_content_handler->exam_published_date ) ) ) : '');
 
-									$filing_date = (!empty($post_content_handler->exam_final_filing_date_chooser) && "on" == $post_content_handler->exam_final_filing_date_chooser ?
+									$filing_date = ( ! empty($post_content_handler->exam_final_filing_date_chooser) && "on" == $post_content_handler->exam_final_filing_date_chooser ?
                             sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate( 'n/j/Y', strtotime( $post_content_handler->exam_final_filing_date_picker ) )) :
                                   sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>',
-                                          (!empty($post_content_handler->exam_final_filing_date) ? $post_content_handler->exam_final_filing_date : 'Until Filled') ) );
+                                          ( ! empty($post_content_handler->exam_final_filing_date) ? $post_content_handler->exam_final_filing_date : 'Until Filled') ) );
 
-									$id = (!empty($post_content_handler->exam_id) ? sprintf('<div class="id">ID: %1$s</div>', $post_content_handler->exam_id) : '');
-									$status = (!empty($post_content_handler->exam_status) ?  sprintf('<div class="base">Status: %1$s</div>', $post_content_handler->exam_status) : '');
+									$id = ( ! empty($post_content_handler->exam_id) ? sprintf('<div class="id">ID: %1$s</div>', $post_content_handler->exam_id) : '');
+									$status = ( ! empty($post_content_handler->exam_status) ?  sprintf('<div class="base">Status: %1$s</div>', $post_content_handler->exam_status) : '');
 
 									$output .= sprintf('<article class="exam-item">
 															<div class="header">%1$s%2$s</div>
 															<div class="body">%3$s%4$s</div>
 															<div class="footer">%5$s<a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
-																		$exam_title, $filing_date , $id, $status, $pub, $url );
+																		$exam_title, $filing_date, $id, $status, $pub, $url );
 									$posts_number--;
 								}
 								break;
@@ -578,14 +568,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 										$faqs .= sprintf('<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s">
 																	<div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
-																					$posts_number, $title, (!empty($faq_accordion_count) ? $faq_accordion_count : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
+																					$posts_number, $title, ( ! empty($faq_accordion_count) ? $faq_accordion_count : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
 
 										$faqs .= sprintf('<div class="et_pb_toggle_content clearfix panel-body">
-											%1$s</div></div>',$post_content_handler->content	);
+											%1$s</div></div>', $post_content_handler->content	);
 										$faq_accordion_count++;
 										//$faq_count++;
 									}
-
 
 								$posts_number--;
 							}
@@ -599,16 +588,15 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 									$image= ( "on" == $view_featured_image ?
 													sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>',
-																	get_the_post_thumbnail($post_id,null,array( 'style'=>'width: 150px; height: 100px;') ))  : '' );
+																	get_the_post_thumbnail($post_id, null, array('style'=>'width: 150px; height: 100px;') ))  : '' );
 
 									$general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
 																		<a href="%2$s" class="title" style="color: #428bca; background: url();">%3$s</a></h5>',
-																			( "on" == $view_featured_image ? '' : '') ,	$url, $title);
+																			( "on" == $view_featured_image ? '' : ''), $url, $title);
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 45);
 									$excerpt = sprintf('<div class="description" %2$s>%1$s</div>', $excerpt,
 																			( "on" == $view_featured_image ? '' : '')  );
-
 
 									$output .= sprintf('<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt );
 
@@ -622,7 +610,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 		global $faq_list_count;
 
-			$class = sprintf('et_pb_module et_pb_ca_post_list panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', (!empty($faq_list_count) ? $faq_list_count : 0), (!empty($style) ? $style : ''));
+			$class = sprintf('et_pb_module et_pb_ca_post_list panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', ( ! empty($faq_list_count) ? $faq_list_count : 0), ( ! empty($style) ? $style : ''));
 
 		$class = esc_attr( $class );
 		$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
@@ -638,8 +626,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				}
 			}
 
-
-			$output = sprintf('<div class="%1$s">%2$s%3$s</div> <!-- .et_pb_ca_post_list -->', $class,( !empty($list_title) ? $list_title : '' ), $output );
+			$output = sprintf('<div class="%1$s">%2$s%3$s</div> <!-- .et_pb_ca_post_list -->', $class, ( ! empty($list_title) ? $list_title : '' ), $output );
 
 			$faq_accordion_count = 0;
 			return $output;

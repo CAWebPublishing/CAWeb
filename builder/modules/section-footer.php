@@ -6,9 +6,7 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
 */
 
-/*********************
-	Standard Version 
-**********************/
+// Standard Version
 class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Section - Footer', 'et_builder' );
@@ -37,12 +35,12 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		  'general' => array(
 		    'toggles' => array(
 		      'header' => esc_html__( 'Header', 'et_builder'),
-		      'body'   => esc_html__( 'Body'  , 'et_builder'),
+		      'body'   => esc_html__( 'Body', 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
+		      'style'  => esc_html__( 'Style', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -136,7 +134,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            		= $this->shortcode_atts['module_id'];
 		$module_class         		= $this->shortcode_atts['module_class'];
 		$max_width            		= $this->shortcode_atts['max_width'];
@@ -171,14 +169,13 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 				</div>
 			</div> <!-- .et_pb_ca_section_footer -->',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			$section_bg_color,	$this->shortcode_content
+			esc_attr( $class ), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			$section_bg_color, $this->shortcode_content
 		);
 
 		return $output;
 
 	}
-
 
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
@@ -232,17 +229,17 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
 		$this->fields_defaults = array(
 			'font_icon' => array('%-1%','add_default_setting'),
-			'group_url' => array( 'http://','add_default_setting'),
-			'group_link_url1' => array( 'http://','add_default_setting'),
-					'group_link_url2' => array( 'http://','add_default_setting'),
-					'group_link_url3' => array( 'http://','add_default_setting'),
-					'group_link_url4' => array( 'http://','add_default_setting'),
-					'group_link_url5' => array( 'http://','add_default_setting'),
-					'group_link_url6' => array( 'http://','add_default_setting'),
-					'group_link_url7' => array( 'http://','add_default_setting'),
-					'group_link_url8' => array( 'http://','add_default_setting'),
-					'group_link_url9' => array( 'http://','add_default_setting'),
-					'group_link_url10' => array( 'http://','add_default_setting'),
+			'group_url' => array('http://','add_default_setting'),
+			'group_link_url1' => array('http://','add_default_setting'),
+					'group_link_url2' => array('http://','add_default_setting'),
+					'group_link_url3' => array('http://','add_default_setting'),
+					'group_link_url4' => array('http://','add_default_setting'),
+					'group_link_url5' => array('http://','add_default_setting'),
+					'group_link_url6' => array('http://','add_default_setting'),
+					'group_link_url7' => array('http://','add_default_setting'),
+					'group_link_url8' => array('http://','add_default_setting'),
+					'group_link_url9' => array('http://','add_default_setting'),
+					'group_link_url10' => array('http://','add_default_setting'),
 			);
 
 		$this->advanced_setting_title_text = esc_html__( 'New Footer Group', 'et_builder' );
@@ -254,14 +251,14 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -324,7 +321,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'label' => esc_html__( 'Group Icon', 'et_builder' ),
 				'type' => 'text',
 	  		'option_category'     => 'configuration',
-				'class'    => array( 'et-pb-font-icon' ),
+				'class'    => array('et-pb-font-icon'),
 				'renderer'            => 'et_pb_get_font_icon_list',
 				'renderer_with_field' => true,
 				'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
@@ -396,7 +393,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 			  );
     }
 
-
     $ending_fields['module_id'] = array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
@@ -415,12 +411,10 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 			  'option_class'    => 'et_pb_custom_css_regular',
 		);
 
-
 		return array_merge($fields, $groups, $ending_fields);
 
-
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
@@ -443,9 +437,9 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
     // Declare variable variables for the 10 groups
     for($i = 1; $i <= 10; $i++){
-      $group_link_show{$i} = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
-      $group_link_text{$i} = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
-      $group_link_url{$i} = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
+      $group_link_show[$i] = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
+      $group_link_text[$i] = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
+      $group_link_url[$i] = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
     }
 
 		$class = "quarter";
@@ -454,11 +448,11 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
 		//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		$heading_color = ( !empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
+		$heading_color = ( ! empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
 
-		$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
-		$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
-	
+		$icon_color = ( ! empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
+		$text_color = ( ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
+
     $icon = ("on" == $group_icon_button ? caweb_get_icon_span($group_icon, $icon_color) : '');
 
 		$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
@@ -466,15 +460,15 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
 
 		$display_more_button = ("on" == $group_show_more_button ?
-		sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>',$group_url) : '');
+		sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>', $group_url) : '');
 
 		$group_links = '';
 
     for($i = 1; $i <= 10; $i++){
       $tmp[] = $icon;
-      $group_links .= ("on" == $group_link_show{$i} ?
-        sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-        $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
+      $group_links .= ("on" == $group_link_show[$i] ?
+        sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>',
+        $group_link_url[$i], $link_as_button, $text_color, $icon, $group_link_text[$i] ) : '');
     }
 
 		$output = sprintf('<div%1$s class="%2$s%3$s">
@@ -507,9 +501,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 }
 new ET_Builder_Module_Footer_Group;
 
-/*********************
-	Fullwidth Version 
-**********************/
+// Fullwidth Version
 class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Footer', 'et_builder' );
@@ -537,7 +529,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 			),
 			'advanced' => array(
 				'toggles' => array(
-          'style'  => esc_html__( 'Style' , 'et_builder'),
+          'style'  => esc_html__( 'Style', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -627,7 +619,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$max_width            = $this->shortcode_atts['max_width'];
@@ -662,8 +654,8 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 				</div>
 			</div> <!-- .et_pb_ca_fullwidth_section_footer -->',
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			$section_bg_color,	$this->shortcode_content
+			esc_attr( $class ), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			$section_bg_color, $this->shortcode_content
 		);
 		return $output;
 	}
@@ -697,17 +689,17 @@ function init() {
 
 	$this->fields_defaults = array(
 		'font_icon' => array('%-1%','add_default_setting'),
-		'group_url' => array( 'http://','add_default_setting'),
-		'group_link_url1' => array( 'http://','add_default_setting'),
-				'group_link_url2' => array( 'http://','add_default_setting'),
-				'group_link_url3' => array( 'http://','add_default_setting'),
-				'group_link_url4' => array( 'http://','add_default_setting'),
-				'group_link_url5' => array( 'http://','add_default_setting'),
-				'group_link_url6' => array( 'http://','add_default_setting'),
-				'group_link_url7' => array( 'http://','add_default_setting'),
-				'group_link_url8' => array( 'http://','add_default_setting'),
-				'group_link_url9' => array( 'http://','add_default_setting'),
-				'group_link_url10' => array( 'http://','add_default_setting'),
+		'group_url' => array('http://','add_default_setting'),
+		'group_link_url1' => array('http://','add_default_setting'),
+				'group_link_url2' => array('http://','add_default_setting'),
+				'group_link_url3' => array('http://','add_default_setting'),
+				'group_link_url4' => array('http://','add_default_setting'),
+				'group_link_url5' => array('http://','add_default_setting'),
+				'group_link_url6' => array('http://','add_default_setting'),
+				'group_link_url7' => array('http://','add_default_setting'),
+				'group_link_url8' => array('http://','add_default_setting'),
+				'group_link_url9' => array('http://','add_default_setting'),
+				'group_link_url10' => array('http://','add_default_setting'),
 		);
 	$this->advanced_setting_title_text = esc_html__( 'New Footer Group', 'et_builder' );
 	$this->settings_text = esc_html__( 'Footer Group Settings', 'et_builder' );
@@ -716,15 +708,15 @@ function init() {
 	$this->options_toggles = array(
 		'general' => array(
 			'toggles' => array(
-				'style'  => esc_html__( 'Style' , 'et_builder'),
+				'style'  => esc_html__( 'Style', 'et_builder'),
 				'header' => esc_html__( 'Header', 'et_builder'),
-				'body'   => esc_html__( 'Body'  , 'et_builder'),
+				'body'   => esc_html__( 'Body', 'et_builder'),
 			),
 		),
     'advanced' => array(
 			'toggles' => array(
         'header' => esc_html__( 'Header', 'et_builder'),
-				'body'   => esc_html__( 'Body'  , 'et_builder'),
+				'body'   => esc_html__( 'Body', 'et_builder'),
 			),
 		),
 		'custom_css' => array(
@@ -777,7 +769,7 @@ function get_fields() {
 			'label' => esc_html__( 'Group Icon', 'et_builder' ),
 			'type' => 'text',
 			'option_category'     => 'configuration',
-			'class'    => array( 'et-pb-font-icon' ),
+			'class'    => array('et-pb-font-icon'),
 				'renderer'            => 'et_pb_get_font_icon_list',
 			'renderer_with_field' => true,
 			'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
@@ -868,7 +860,7 @@ function get_fields() {
 
 	return array_merge($fields, $groups, $ending_fields);
 }
-function shortcode_callback( $atts, $content = null, $function_name ) {
+function shortcode_callback($atts, $content = null, $function_name) {
 	$module_id            = $this->shortcode_atts['module_id'];
 
 	$module_class         = $this->shortcode_atts['module_class'];
@@ -890,9 +882,9 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 		$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 
   	for($i = 1; $i <= 10; $i++){
-      $group_link_show{$i} = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
-      $group_link_text{$i} = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
-      $group_link_url{$i} = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
+      $group_link_show[$i] = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
+      $group_link_text[$i] = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
+      $group_link_url[$i] = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
     }
 
 	$class = "quarter";
@@ -901,10 +893,10 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-	$heading_color = ( !empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
-  
-	$icon_color = ( !empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
-	$text_color = ( !empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
+	$heading_color = ( ! empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
+
+	$icon_color = ( ! empty($text_color) ? sprintf(' color: %1$s;', $text_color) : '');
+	$text_color = ( ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '');
 
 	$icon = ("on" == $group_icon_button ? caweb_get_icon_span($group_icon, $icon_color) : '');
 
@@ -913,14 +905,14 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 	$no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
 
 	$display_more_button = ("on" == $group_show_more_button ?
-	sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>',$group_url) : '');
+	sprintf('<a href="%1$s" class="btn btn-primary">Read More</a>', $group_url) : '');
 
 	$group_links = '';
 
   for($i = 1; $i <= 10; $i++){
-    $group_links .= ("on" == $group_link_show{$i} ?
-            sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-            $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
+    $group_links .= ("on" == $group_link_show[$i] ?
+            sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>',
+            $group_link_url[$i], $link_as_button, $text_color, $icon, $group_link_text[$i] ) : '');
 
    }
 

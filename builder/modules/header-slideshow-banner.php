@@ -6,9 +6,7 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
 */
 
-/*********************
-	Fullwidth Version 
-**********************/
+// Fullwidth Version
 class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Header Slideshow Banner', 'et_builder' );
@@ -30,8 +28,8 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 			'module_id',
 		);
 		$this->fields_defaults = array(
-			'font_icon' => array( '%%114%%', 'add_default_setting' ),
-    	'scroll_bar_text' => array( 'Explore', 'add_default_setting' ),
+			'font_icon' => array('%%114%%', 'add_default_setting'),
+    	'scroll_bar_text' => array('Explore', 'add_default_setting'),
 
     );
 		$this->main_css_element = '%%order_class%%.et_pb_slider';
@@ -39,7 +37,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 		$this->options_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'scroll_bar'  => esc_html__( 'Scroll Bar' , 'et_builder'),
+					'scroll_bar'  => esc_html__( 'Scroll Bar', 'et_builder'),
 				),
 			),
 			'advanced' => array(
@@ -52,7 +50,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 						'title'    => esc_html__( 'Sizing', 'et_builder' ),
 						'priority' => 65,
 					),
-          'scroll_bar'  => esc_html__( 'Scroll Bar' , 'et_builder'),
+          'scroll_bar'  => esc_html__( 'Scroll Bar', 'et_builder'),
 				),
 			),
 			'custom_css' => array(
@@ -63,26 +61,26 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'slideshow_banner_removal' ) );
+		add_action( 'wp_footer', array($this, 'slideshow_banner_removal') );
 
 	}
 	function get_fields() {
 		$fields = array(
 			'scroll_bar_text' => array(
-				'label'           => esc_html__( 'Scroll Bar Text','et_builder' ),
+				'label'           => esc_html__( 'Scroll Bar Text', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the text for the scroll bar.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the text for the scroll bar.', 'et_builder' ),
 				'toggle_slug'     => 'scroll_bar',
 				),
 			'font_icon' => array(
-				'label'           => esc_html__( 'Scroll Bar Icon','et_builder' ),
+				'label'           => esc_html__( 'Scroll Bar Icon', 'et_builder' ),
 				'type'            => 'text',
 				 'option_category'     => 'configuration',
-				'class'               => array( 'et-pb-font-icon' ),
+				'class'               => array('et-pb-font-icon'),
 				'renderer'            => 'et_pb_get_font_icon_list',
 				'renderer_with_field' => true,
-				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
+				'description'     => esc_html__( 'Here you can select a Heading Icon', 'et_builder' ),
 				'toggle_slug'     => 'scroll_bar',
 				'tab_slug'     => 'advanced',
 			),
@@ -149,7 +147,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 		);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_class         = $this->shortcode_atts['module_class'];
 
 		$max_width            = $this->shortcode_atts['max_width'];
@@ -196,7 +194,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 					</div>
 				</div>
 			</div> <!-- .et_pb_ca_banner -->',
-      esc_attr( $class ),$this->shortcode_content, $scroll_bar_text,  caweb_get_icon_span($scroll_bar_icon)
+      esc_attr( $class ), $this->shortcode_content, $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
 		);
 		return $output;
 	}
@@ -208,8 +206,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 			if( ! caweb_version_check(4, get_the_ID() )  )
 				return;
 
-      $module = ( !is_404() ? caweb_get_shortcode_from_content( get_the_content(), 'et_pb_ca_fullwidth_banner') : array() );
-
+      $module = ( ! is_404() ? caweb_get_shortcode_from_content( get_the_content(), 'et_pb_ca_fullwidth_banner') : array() );
 
 			if( empty($module)  ){
 				?>
@@ -258,8 +255,8 @@ function init() {
 				'button_text','button_link','background_image',
 		);
 	$this->fields_defaults = array(
-	'button_link' => array( '#', 'add_default_setting' ),
-	'display_heading' => array( 'on', 'add_default_setting' ),
+	'button_link' => array('#', 'add_default_setting'),
+	'display_heading' => array('on', 'add_default_setting'),
 	);
 	$this->advanced_setting_title_text = esc_html__( 'New Slide', 'et_builder' );
 	$this->settings_text = esc_html__( 'Slide Settings', 'et_builder' );
@@ -269,7 +266,7 @@ function init() {
 		'general' => array(
 			'toggles' => array(
 				'content'  => esc_html__( 'Content', 'et_builder'),
-				'image'    => esc_html__( 'Image'  , 'et_builder'),
+				'image'    => esc_html__( 'Image', 'et_builder'),
 			),
 		),
 		'custom_css' => array(
@@ -360,7 +357,7 @@ function get_fields() {
 	);
 	return $fields;
 }
-function shortcode_callback( $atts, $content = null, $function_name ) {
+function shortcode_callback($atts, $content = null, $function_name) {
 	$module_id            = $this->shortcode_atts['module_id'];
 
 	$module_class         = $this->shortcode_atts['module_class'];

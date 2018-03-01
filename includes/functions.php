@@ -6,21 +6,20 @@
 	$version = Specific Page Template Version  returns true/false
 
 */
-function caweb_version_check($version, $post_id = -1){
+function caweb_version_check($version, $post_id = -1) {
 	$result = ($version == get_option('ca_site_version', 5) ? true : false);
 
 	if(-1 < $post_id  )
 		$result = ($version == caweb_get_version($post_id) ? true : false);
-	
 
 	return $result;
 }
-/* 
+/*
 	Returns the Site Wide Version Setting
-	if post_id is passed will return version 
+	if post_id is passed will return version
 	used by the page template
 */
-function caweb_get_version($post_id = -1){
+function caweb_get_version($post_id = -1) {
 	switch(get_page_template_slug($post_id)){
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -37,7 +36,7 @@ function caweb_get_version($post_id = -1){
 }
 
 // Returns array of Menu Theme Locations
-function cawen_nav_menu_theme_locations(){
+function cawen_nav_menu_theme_locations() {
 	return array(
 		'header-menu' => 'Header Menu',
 		'footer-menu' => 'Footer Menu',
@@ -45,68 +44,66 @@ function cawen_nav_menu_theme_locations(){
 }
 
 // Returns array of Theme Color Schemes
-function caweb_color_schemes( $version = 0, $field = '' ){
+function caweb_color_schemes($version = 0, $field = '') {
 	$cssDir = sprintf( '%1$s/css', CAWebAbsPath);
 	$pattern = '/.*\/([\w\s]*)\.css/';
-	
+
 	$schemes = array();
-		
+
 	switch ( $version ) {
 		case 4:
 			$tmp = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
 			break;
 		case 5:
 			$tmp =  glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
-			break;	
+			break;
 		default:
 			$v4_schemes = glob( sprintf('%1$s/version4/colorscheme/*.css', $cssDir ) );
 			$v5_schemes = glob( sprintf('%1$s/version5/colorscheme/*.css', $cssDir)  );
 			$tmp =  array_merge($v4_schemes, $v5_schemes  );
 			break;
 	}
-	
+
 	foreach ( $tmp as $css_file ) {
-		$style = preg_replace( $pattern , '\1', $css_file );
+		$style = preg_replace( $pattern, '\1', $css_file );
 		$scheme =  ucwords( strtolower( $style ) );
-		
-		$schemekey = strtolower( str_replace( ' ' , '', $scheme ) );
-		
+
+		$schemekey = strtolower( str_replace( ' ', '', $scheme ) );
+
 		switch( $field ){
-			case 'filename':			
+			case 'filename':
 				$schemes[$schemekey] =  $style;
 				break;
 			case 'displayname':
 				$schemes[$schemekey] =  $scheme;
-				break;	
+				break;
 			default:
 				$schemes[$schemekey] = array('filename' => $style, 'displayname' => $scheme);
 				break;
-			
+
 			}
-    }	
-	
+    }
+
 	ksort( $schemes );
-  
-	return $schemes ;
+
+	return $schemes;
 }
 
 // Validates if the $checkmoney parameter is a valid monetary value
-if( !function_exists('caweb_is_money') ){
-	function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n'){
-		if(!empty($checkmoney)){
+if( ! function_exists('caweb_is_money') ){
+	function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n') {
+		if( ! empty($checkmoney)){
 
-			$checkmoney    = (is_string($checkmoney) ? str_replace(',','',$checkmoney) : $checkmoney);
-			$checkmoney    = (is_string($checkmoney) ? str_replace('$','', $checkmoney) : $checkmoney);
+			$checkmoney    = (is_string($checkmoney) ? str_replace(',', '', $checkmoney) : $checkmoney);
+			$checkmoney    = (is_string($checkmoney) ? str_replace('$', '', $checkmoney) : $checkmoney);
 
 			setlocale(LC_MONETARY, get_locale());
 			if(is_numeric($checkmoney))
-				return money_format($pattern,  $checkmoney);
+				return money_format($pattern, $checkmoney);
 		}
 		return $default;
 	}
 }
-
-
 
 /**
 
@@ -119,7 +116,7 @@ if( !function_exists('caweb_is_money') ){
 * @nav_menu_item_list array returns filtered array of nav_menu_items
 
 */
-function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
+function caweb_get_nav_menu_item_children($parent_id, $nav_menu_items, $depth = true) {
 
 	$nav_menu_item_list = array();
 
@@ -136,14 +133,13 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 	return $nav_menu_item_list;
 }
 
-function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1,$orderby='post_date',$order = 'DESC'){
+function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1, $orderby='post_date', $order = 'DESC') {
 
 	$posts_array = array();
 
 	$req_array = array();
 
-
-	$args['category'] = ( ! empty($cats) ? ( is_array($cats) ? implode(',', $cats) : $cats)  : array()) ;
+	$args['category'] = ( ! empty($cats) ? ( is_array($cats) ? implode(',', $cats) : $cats)  : array());
 
 	$args += array(
 				'posts_per_page' => $post_amount ,
@@ -156,18 +152,18 @@ function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1,
 
 	$posts_array = get_posts( $args );
 
-	if(! empty($tags)){
+	if( ! empty($tags)){
 			foreach($posts_array as $p=> $i){
 				//return posts tags
-				$tag_ids = wp_get_post_tags( $i ->ID, array( 'fields' => 'ids' ) );
+				$tag_ids = wp_get_post_tags( $i->ID, array('fields' => 'ids') );
 
 				if( empty($tag_ids) ){
 						unset($posts_array[$p]);
 				}else{
 					// iterate through the tags
-					$tags = (!is_array($tags) ? preg_split('/\D/', $tags): $tags);
+					$tags = ( ! is_array($tags) ? preg_split('/\D/', $tags): $tags);
 					foreach($tag_ids as $k){
-						if( !in_array($k, $tags)){
+						if( ! in_array($k, $tags)){
 							unset($posts_array[$p]);
 						}
 					}
@@ -175,14 +171,12 @@ function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1,
 			}
 	}
 
-	return $posts_array ;
+	return $posts_array;
 
 }
 
-/*
-	Get User Profile Color
-*/
-function caweb_get_user_color($element){
+// Get User Profile Color
+function caweb_get_user_color($element) {
   	global $_wp_admin_css_colors;
 
     	$admin_color = get_user_option( 'admin_color' );
@@ -192,7 +186,7 @@ function caweb_get_user_color($element){
 
 }
 
-function caweb_get_google_map_place_link($addr){
+function caweb_get_google_map_place_link($addr) {
   if( empty($addr) ){
     return;
   }elseif( is_string($addr) ){
@@ -210,13 +204,13 @@ function caweb_get_tag_ID($tag_name) {
 	$tag = get_term_by('name', $tag_name, 'post_tag');
 	if ($tag) {
 		return $tag->term_id;
-	} else {
-		return 0;
 	}
+		return 0;
+
 }
 
-if( !function_exists('caweb_get_shortcode_from_content') ){
-	function caweb_get_shortcode_from_content($con = "", $tag = "", $all_matches = false){
+if( ! function_exists('caweb_get_shortcode_from_content') ){
+	function caweb_get_shortcode_from_content($con = "", $tag = "", $all_matches = false) {
 
 		if( empty($con) || empty($tag) )
 			return array();
@@ -236,8 +230,7 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
         $obj = array();
         $attr = array();
         $tmp = array();
-        preg_match($pattern, $match, $tmp) ;
-
+        preg_match($pattern, $match, $tmp);
 
         if(2 == count($tmp)){
           preg_match(sprintf('/"\][\s\S]*\[\/%1$s/', $tag), $tmp[0], $obj['content']);
@@ -261,21 +254,21 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
           	$obj['content'] = '';
         }
 
-        $objects[] =  (object) $obj ;
+        $objects[] =  (object) $obj;
       }
 
       if($all_matches)
         return $objects;
 
-		return (!empty($objects) ? $objects[0] : array() );
+		return ( ! empty($objects) ? $objects[0] : array() );
 	}
 }
 
-function caweb_banner_content_filter($content, $ver = 5){
+function caweb_banner_content_filter($content, $ver = 5) {
   $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array() );
 
-  /* Filter the Header Slideshow Banner */
-  if( !empty($module) ){
+  // Filter the Header Slideshow Banner
+  if( ! empty($module) ){
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
         $carousel = '';
 
@@ -283,11 +276,10 @@ function caweb_banner_content_filter($content, $ver = 5){
           $heading = '';
           $info = '';
           if("on" == $slide->display_banner_info){
-            $link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
+            $link = ( ! empty( $slide->button_link ) ?  $slide->button_link : '#');
 
-            if(!isset($slide->display_heading) || "on" == $slide->display_heading )
-              $heading = sprintf('<span class="title">%1$s<br /></span>',( isset($slide->heading) ? $slide->heading : '') );
-
+            if( ! isset($slide->display_heading) || "on" == $slide->display_heading )
+              $heading = sprintf('<span class="title">%1$s<br /></span>', ( isset($slide->heading) ? $slide->heading : '') );
 
             $info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset($slide->button_text) ? $slide->button_text : '') );
 
@@ -306,9 +298,9 @@ function caweb_banner_content_filter($content, $ver = 5){
 
 }
 
-/* CA.gov Icon Library List */
-function caweb_get_icon_list($index = -1, $name = '', $keys = false){
-	$icons = array( 'logo'=>'&amp;#xe600;','home'=>'&amp;#xe601;','menu'=>'&amp;#xe602;','apps'=>'&amp;#xe603;','search'=>'&amp;#xe604;','chat'=>'&amp;#xe605;','capitol'=>'&amp;#xe606;',
+// CA.gov Icon Library List
+function caweb_get_icon_list($index = -1, $name = '', $keys = false) {
+	$icons = array('logo'=>'&amp;#xe600;','home'=>'&amp;#xe601;','menu'=>'&amp;#xe602;','apps'=>'&amp;#xe603;','search'=>'&amp;#xe604;','chat'=>'&amp;#xe605;','capitol'=>'&amp;#xe606;',
 													'state'=>'&amp;#xe607;','phone'=>'&amp;#xe608;','email'=>'&amp;#xe609;','contact-us'=>'&amp;#xe66e;','calendar'=>'&amp;#xe60a;','bear'=>'&amp;#xe60b;','chat-bubble'=>'&amp;#xe66f;','info-bubble'=>'&amp;#xe670;',
 													'share-button'=>'&amp;#xe671;','share-facebook'=>'&amp;#xe672;','share-email'=>'&amp;#xe673;','share-flickr'=>'&amp;#xe674;','share-twitter'=>'&amp;#xe675;','share-linkedin'=>'&amp;#xe676;','share-googleplus'=>'&amp;#xe677;',
 													'share-instagram'=>'&amp;#xe678;','share-pinterest'=>'&amp;#xe679;','share-vimeo'=>'&amp;#xe67a;','share-youtube'=>'&amp;#xe67b;','law-enforcement'=>'&amp;#xe60c;','justice-legal'=>'&amp;#xe60d;','at-sign'=>'&amp;#xe60e;',
@@ -371,11 +363,10 @@ function caweb_get_icon_list($index = -1, $name = '', $keys = false){
 													'slider'=>'&amp;#x201c;','sidebar'=>'&amp;#x201d;','share2'=>'&#x2022;','pricing-table'=>'&amp;#x2013;','portfolio'=>'&amp;#x2014;','number-counter'=>'&amp;#x2dc;','header'=>'&amp;#x2122;','filtered-portfolio'=>'&amp;#x161;','divider'=>'&amp;#x203a;',
 													'cta'=>'&amp;#x153;','countdown'=>'&amp;#x71;','circle-counter'=>'&amp;#x17e;','blurb'=>'&amp;#x178;','bar-counters'=>'&amp;#xe093;','audio2'=>'&#xe094;','accordion'=>'&amp;#xe095;','icon_gift_alt'=>'&amp;#xe008;','code'=>'&amp;#xe036;');
 
-
 	if( 0 < $index )
 		return ( isset( array_values($icons)[$index] ) ? array_values($icons)[$index] : $index );
 
-	if( !empty($name) )
+	if( ! empty($name) )
 		return ( isset( $icons[$name] ) ? $icons[$name] : $name );
 
 	if( $keys )
@@ -384,62 +375,58 @@ function caweb_get_icon_list($index = -1, $name = '', $keys = false){
 	return $icons;
 }
 
-
-/* Merger of Divi and CAWeb Icon Font Library */
+// Merger of Divi and CAWeb Icon Font Library
 add_filter('et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols');
-function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ){
+function caweb_et_pb_font_icon_symbols($divi_symbols = array()) {
 
 	$symbols = array_values( caweb_get_icon_list() );
 
 	return $symbols;
 }
 
-function caweb_get_icon_span($font, $style = array(), $classes = array() ){
+function caweb_get_icon_span($font, $style = array(), $classes = array()) {
 	if( empty($font) )
 		return '';
 
   // "%22" are saved as double quotes in shortcode attributes. Encode them back into %22
-  $font = str_replace('"','%22', $font );
- 
+  $font = str_replace('"', '%22', $font );
+
 	$tmp = caweb_get_icon_list();
-  
+
   $style = is_string($style) ? explode(';', $style) : $style;
-  $style = !empty($style) ? sprintf('style="%1$s" ',implode($style, ';')) : '';
+  $style = ! empty($style) ? sprintf('style="%1$s" ', implode($style, ';')) : '';
   $classes = implode($classes, ' ');
-  
-  
+
   if( isset( $tmp[$font] ) )
 		return sprintf('<span class="ca-gov-icon-%1$s %2$s" %3$s></span> ', $font, $classes, $style);
-    
+
 	if(  preg_match( "/^%%/", trim( $font ) ) ){
-			$font_index = preg_replace('/%%/','',$font);
+			$font_index = preg_replace('/%%/', '', $font);
 
 			return sprintf('<span class="ca-gov-icon-%1$s %2$s" %3$s></span> ',
-								 caweb_get_icon_list(-1,'',true)[$font_index], $classes, $style );
+								 caweb_get_icon_list(-1, '', true)[$font_index], $classes, $style );
 	}
-  
-  
+
 }
 
-function caweb_get_blank_icon_span(){
+function caweb_get_blank_icon_span() {
   return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';
 }
 
-if( !function_exists('caweb_get_excerpt') ){
-	function caweb_get_excerpt($con, $excerpt_length){
+if( ! function_exists('caweb_get_excerpt') ){
+	function caweb_get_excerpt($con, $excerpt_length) {
 		if( empty($con) )
 			return $con;
 
     $con_array = explode(" ", $con);
 
 		if(count( $con_array ) > $excerpt_length){
-			$excerpt = array_splice( $con_array , 0, $excerpt_length);
+			$excerpt = array_splice( $con_array, 0, $excerpt_length);
 			$excerpt = implode(" ", $excerpt) . '...';
 
 			return $excerpt;
-		}else{
-			return $con;
 		}
+			return $con;
 
 	}
 }
