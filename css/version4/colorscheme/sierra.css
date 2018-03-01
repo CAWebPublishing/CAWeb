@@ -1,5 +1,5 @@
 body {
-    background: #1d4d4c url(var(--image-dir-rel-path) + "images/system/sierra/body-background.png") repeat-y 50% 0;
+    background: #1d4d4c url("../../../imagesimages/system/sierra/body-background.png") repeat-y 50% 0;
     background: -moz-linear-gradient(left, #1d4d4c 0, #a1cca1 50%, #1d4d4c 100%);
     background: -webkit-linear-gradient(left, #1d4d4c 0, #a1cca1 50%, #1d4d4c 100%);
     background: -o-linear-gradient(left, #1d4d4c 0, #a1cca1 50%, #1d4d4c 100%);
@@ -18,20 +18,20 @@ body {
     border-right: 7px solid #1d4d4c
 }
 .primary .header-decoration {
-    background: url(var(--image-dir-rel-path) + "images/system/sierra/ribbon-home.png") no-repeat 66.6667% 0
+    background: url(var(image-dir-rel-path) "images/system/sierra/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
-    background: url(var(--image-dir-rel-path) + "images/system/sierra/ribbon-two-col.png") no-repeat 66.6667% 0
+    background: url("../../../imagesimages/system/sierra/ribbon-two-col.png") no-repeat 66.6667% 0
 }
 .primary.two-column .main-content {
-    background: url(var(--image-dir-rel-path) + "images/system/sierra/footer-bg.png") no-repeat 66.6667% 100%, url(var(--image-dir-rel-path) + "images/system/sierra/2column-bg.png") repeat-y 66.6667% 0;
+    background: url("../../../imagesimages/system/sierra/footer-bg.png") no-repeat 66.6667% 100%, url("../../../imagesimages/system/sierra/2column-bg.png") repeat-y 66.6667% 0;
     background-color: #fff
 }
 .primary .main-content {
-    background: #fff url(var(--image-dir-rel-path) + "images/system/sierra/footer-bg.png") no-repeat 66.6667% 100%
+    background: #fff url("../../../imagesimages/system/sierra/footer-bg.png") no-repeat 66.6667% 100%
 }
 .two-column .main-content {
-    background: #fff url(var(--image-dir-rel-path) + "images/system/sierra/2column-bg.png") repeat-y 66.6667% 0
+    background: #fff url("../../../imagesimages/system/sierra/2column-bg.png") repeat-y 66.6667% 0
 }
 @media (max-width: 991px) {
     .two-column .main-content,
@@ -111,7 +111,7 @@ body {
             display: block
         }
         .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-            background-image: url(var(--image-dir-rel-path) + "images/system/sierra/ribbon.png")
+            background-image: url("../../../imagesimages/system/sierra/ribbon.png")
         }
     }
     @media (max-width: 767px) {
@@ -166,7 +166,7 @@ body {
     }
     @media (min-width: 768px) {
         .main-navigation .sub-nav {
-            background: transparent url(var(--image-dir-rel-path) + "images/system/sierra/megadropdown-ribbon.png") no-repeat 70.3125% 100%
+            background: transparent url("../../../imagesimages/system/sierra/megadropdown-ribbon.png") no-repeat 70.3125% 100%
         }
     }
     @media (max-width: 991px) {
@@ -615,7 +615,7 @@ body {
         background: #effaf6
     }
     .panel-standout.highlight .panel-heading .triangle {
-        background: url(var(--image-dir-rel-path) + "images/system/sierra/panel-standout-triangle.png") no-repeat
+        background: url("../../../imagesimages/system/sierra/panel-standout-triangle.png") no-repeat
     }
     .main-secondary .panel-default {
         border-color: #31574a
@@ -675,7 +675,7 @@ body {
     .main-secondary .nav-tabs>li.active>a:after,
     .main-secondary .nav-tabs>li.active>a:visited:after,
     .main-secondary .nav-tabs>li.active>a:focus:after {
-        background: url(var(--image-dir-rel-path) + "images/system/sierra/panel-standout-triangle.png") no-repeat
+        background: url("../../../imagesimages/system/sierra/panel-standout-triangle.png") no-repeat
     }
     .location.mini [class^="ca-gov-icon"] {
         background: #194949;

@@ -1,7 +1,5 @@
 @charset "UTF-8";
-:root {
-  --image-dir-rel-path: "../../../";
-}
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
