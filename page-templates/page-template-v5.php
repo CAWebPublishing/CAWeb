@@ -11,7 +11,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 <div id="main-content" class="main-content">
-<div class="section">
 <main class="main-primary">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -42,7 +41,6 @@ if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) )
 			<?php endwhile; ?>
 					<span class="return-top hidden-print"></span>
 </main>
-</div>
 </div> <!-- #main-content -->
 </div>
 </div>
