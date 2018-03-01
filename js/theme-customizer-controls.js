@@ -11,7 +11,7 @@
     $('select[data-customize-setting-link="ca_site_version"]').on("change", correct_colorscheme_visibility );
     
     function correct_colorscheme_visibility(){
-      var colors = 4 >= api._value.ca_site_version._value ? colorschemes.default : colorschemes.all;
+      var colors = 4 >= api._value.ca_site_version._value ? colorschemes.original : colorschemes.all;
       
       $('select[data-customize-setting-link="ca_site_color_scheme"]').find('option').remove();
       
