@@ -6,6 +6,7 @@ body{
 }
 #main-content .et_pb_row{
      max-width: 1280px;
+     width: 100%;
      margin-right: auto;
      margin-left: auto;
      padding-left: 15px;
@@ -13,17 +14,17 @@ body{
 }
 @media (min-width: 768px){
 #main-content .et_pb_row {
-    width: 750px;
+    max-width: 750px;
 }
 }
 @media (min-width: 992px){
 #main-content .et_pb_row {
-    width: 970px;
+    max-width: 970px;
 }
 }
 @media (min-width: 1280px){
 #main-content .et_pb_row {
-    width: 1280px;
+    max-width: 1280px;
 }
 }
 @media (max-width: 767px){
