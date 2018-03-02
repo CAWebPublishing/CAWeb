@@ -319,7 +319,6 @@
 				
 				<ol id="uploadedCSS">	
 				<?php	
-					add_thickbox();
 					foreach($ext_css as $name){
 						$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 

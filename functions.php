@@ -107,6 +107,9 @@ function caweb_init() {
 
 	// Register Menu Navigation Settings
 	register_nav_menus( cawen_nav_menu_theme_locations() );
+	
+	// Enable Thickbox
+	add_thickbox();
 
 }
 
