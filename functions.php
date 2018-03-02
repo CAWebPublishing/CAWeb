@@ -121,15 +121,32 @@ function caweb_wp_enqueue_scripts() {
 	$post_id = get_the_ID();
 	$theme_version = wp_get_theme('CAWeb')->get('Version');
 	$ver = caweb_get_version($post_id);
-	$color = get_option('ca_site_color_scheme', 'oceanside');
-
+	$color = get_option('ca_site_color_scheme', 'oceanside');	
+	$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ), 'filename');
+	$colorscheme = isset( $schemes[$color] ) ? $schemes[$color] : 'oceanside';
+		
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array());
 
 	// If on the activation page
 	if('wp-activate.php' == $pagenow   ){
-		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/oceanside.css', CAWebUri, $ver), array(), $theme_version );
+		wp_enqueue_style( 'caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );
+		wp_enqueue_style( 'caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), $theme_version );
+	}else{
+		wp_enqueue_style(  'caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version);
+		wp_enqueue_style(  'caweb-color-style', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), $theme_version);
+		wp_enqueue_style(  'caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), $theme_version);
+		wp_enqueue_style(  'caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), $theme_version);
+		wp_enqueue_style(  'caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), $theme_version);
+		wp_enqueue_style(  'caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), $theme_version);
+		
+		$ext_css = array_values( array_filter( get_option('caweb_external_css', array() ) ) );
+
+		foreach( $ext_css as $index => $name ){
+			$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+
+			printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $theme_version );
+		}
 	}
 
 	// Load editor styling
@@ -171,11 +188,11 @@ function caweb_wp_enqueue_scripts() {
 }
 
 // CAWeb WP Head
-add_action('wp_head', 'caweb_wp_head', 105);
+add_action('wp_head', 'caweb_wp_head');
 function caweb_wp_head() {
 ?>
 	<script>
-	(function($) {
+	(function($) {	
 		$(window).bind("load", function() {
 			$('.fluid-width-video-wrapper').each(function() {
 				var src = $(this).find('iframe').attr('src');
@@ -190,32 +207,9 @@ function caweb_wp_head() {
 	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
 
-	$cssDir = sprintf('%1$s/css', CAWebUri);
-	$verDir = sprintf('%1$s/version%2$s', $cssDir, caweb_get_version(get_the_ID()));
-
-	$version = sprintf('?ver=%1$s', wp_get_theme()->Version);
-	$color = get_option('ca_site_color_scheme', 'oceanside');
-	$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ), 'filename');
-	$colorscheme = isset( $schemes[$color] ) ? $schemes[$color] : 'oceanside';
-
-	printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/cagov.core.css%2$s">', $verDir, $version );
-	printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/colorscheme/%2$s.css%3$s">', $verDir, $colorscheme, $version  );
-	printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/modules.css%2$s">', $cssDir, $version   );
-	printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/cagov.font-only.css%2$s">', $cssDir, $version   );
-	printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/custom.css%2$s">', $cssDir, $version  );
-	printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/custom.css%2$s">', $verDir, $version );
-
-	$ext_css = array_values( array_filter( get_option('caweb_external_css', array() ) ) );
-
-	foreach( $ext_css as $index => $name ){
-		$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-
-		printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $version );
-	}
-
+	
 	if("" !== get_option('ca_custom_css', '') )
 	  printf('<style id="ca_custom_css">%1$s</style>', get_option('ca_custom_css') );
-
 }
 
 // CAWeb Footer
