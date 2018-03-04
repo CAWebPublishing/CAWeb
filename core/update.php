@@ -17,7 +17,8 @@ final class caweb_auto_update{
 
 			protected $theme_name;
 			protected $current_version;
-
+			protected $changelog;
+			
 			private static $_this;
 
 			/**
@@ -26,26 +27,33 @@ final class caweb_auto_update{
 			* @param string $theme_name
 			*/
 			function __construct($theme) {
+			// Don't allow more than one instance of the class
+			if ( isset( self::$_this ) ) {
+				wp_die( sprintf( esc_html__( '%s: You cannot create a second instance of this class.', 'et-core' ), get_class( $this ) ) );
+			}
+
+			self::$_this = $this;
+				
 			// Set the class public variables
-      $this->user = get_site_option('caweb_username', '');
+      			$this->user = get_site_option('caweb_username', '');
 			$this->theme_name = $theme->Name;
 			$this->current_version = $theme->Version;
-
+			
 			$this->args = array(
-										'headers' => array(
-											'Authorization' => 'Basic ' . base64_encode( ':' . get_site_option('caweb_password', '') ),
-											'Accept:' =>  'application/vnd.github.v3+json','application/vnd.github.VERSION.raw', 'application/octet-stream'
-										)
-									);
+					'headers' => array(
+						'Authorization' => 'Basic ' . base64_encode( ':' . get_site_option('caweb_password', '') ),
+						'Accept:' =>  'application/vnd.github.v3+json','application/vnd.github.VERSION.raw', 'application/octet-stream'
+						)
+					);
 
 				add_action('admin_post_nopriv_caweb_update_available', array($this, 'caweb_update_available') );
 				add_action('admin_post_caweb_update_available', array($this, 'caweb_update_available') );
 
-			// define the alternative API for updating checking
-        add_filter('pre_site_transient_update_themes', array($this, 'check_update'));
+				// define the alternative API for updating checking
+				add_filter('pre_set_site_transient_update_themes', array($this, 'caweb_check_update'));
 
-			// Define the alternative response for information checking
-				add_filter('site_transient_update_themes', array($this, 'add_themes_to_update_notification'));
+				// Define the alternative response for information checking
+				add_filter('site_transient_update_themes', array($this, 'caweb_add_themes_to_update_notification'));
 
 				//Define the alternative response for download_package which gets called during theme upgrade
 				add_filter('upgrader_pre_download', array($this, 'caweb_upgrader_pre_download'), 10, 3 );
@@ -56,83 +64,86 @@ final class caweb_auto_update{
 				//Define the alternative response for upgrader_pre_install
 				add_filter('upgrader_post_install', array($this, 'caweb_upgrader_post_install'), 10, 3 );
 
+				add_action( 'after_setup_theme', array( $this, 'remove_theme_update_actions' ), 11 );
+				
+				add_action('admin_post_caweb_get_changelog', array( $this, 'caweb_get_changelog' ) );
+			
 			}
 
-		//alternative API for updating checking
-		public function check_update($update_transient) {
-
+			function remove_theme_update_actions() {
+				remove_filter( 'pre_set_site_transient_update_themes', 'caweb_check_update' );
+				remove_filter( 'site_transient_update_themes', 'caweb_add_themes_to_update_notification' );
+			}
+			
+			
+			function caweb_get_changelog() {
 				$caweb_update_themes = get_site_transient( $this->transient_name );
-				$divi_update_themes = get_site_transient( $this->divi_transient_name );
-
-				$payload = json_decode( wp_remote_retrieve_body(
-											wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args) ) );
-
-				if( ! isset($payload->tag_name) ){
-					delete_site_transient( $this->transient_name );
-					delete_site_transient( $this->divi_transient_name );
-					return $update_transient;
+				
+				if( !empty($caweb_update_themes) && isset($caweb_update_themes->response[$this->theme_name ]['changelog']) ){
+						$content = wp_remote_get( $caweb_update_themes->response[$this->theme_name ]['changelog'], $this->args );
+						
+						if( ! is_wp_error($content) && 200 == wp_remote_retrieve_response_code($content) ){
+							echo '<pre>' . wp_remote_retrieve_body( $content ) . '</pre>';
+						}else{
+							echo '<pre>No Changelog Available</pre>';
+						}
+					
 				}
-				if( ( ! isset($caweb_update_themes->response) ||  ! isset($caweb_update_themes->response[$this->theme_name]) ) &&
-								$this->current_version < $payload->tag_name){
-
-							$last_update = new stdClass();
-
-							$obj = array();
-							$obj['new_version'] = $payload->tag_name;
-
-							$changelog = base64_decode( json_decode( wp_remote_retrieve_body(
-													wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $this->args)) )->content );
-
-							// Write message to log
-							file_put_contents(sprintf('%1$s/changelog.txt', __DIR__), $changelog);
-
-							$obj['url'] = get_stylesheet_directory_uri() . '/core/changelog.txt';
-							$obj['package'] = $payload->zipball_url;
-
-							$theme_response = array($this->theme_name => $obj);
-
-							$last_update->response = (isset($caweb_update_themes->response) ?
-																$theme_response + $caweb_update_themes->response :
-																$theme_response);
-
-							$last_update->last_checked = time();
-							set_site_transient($this->transient_name, $last_update);
-
-          		$payload = json_decode( wp_remote_retrieve_body(
-                        wp_remote_get(sprintf('https://api.github.com/repos/%1$s/Divi/releases/latest', $this->user), $this->args) ) );
-
-              if($payload->tag_name > wp_get_theme( 'Divi' )->version ){
-
-                $changelog = base64_decode( json_decode( wp_remote_retrieve_body(
-                            wp_remote_get( sprintf('%1$scontents/changelog.txt?ref=%2$s', substr($payload->url, 0, strpos($payload->url, 'releases') ), $payload->target_commitish), $this->args)) )->content );
-                file_put_contents(sprintf('%1$s/divi_changelog.txt', __DIR__), $changelog);
-
-                $divi_update_themes->checked['Divi'] = $payload->tag_name;
-
-                $divi_update_themes->response['Divi']['new_version'] = $payload->tag_name;
-                $divi_update_themes->response['Divi']['url'] = get_stylesheet_directory_uri() . '/core/divi_changelog.txt';
-                $divi_update_themes->response['Divi']['package'] = $payload->zipball_url;
-                $divi_update_themes->last_checked = $last_update->last_checked;
-                set_site_transient($this->divi_transient_name, $divi_update_themes );
-              }
-
-				}elseif(  isset($caweb_update_themes->response, $caweb_update_themes->response[$this->theme_name])    &&
-								$this->current_version >=  $payload->tag_name ) {
-
-						delete_site_transient($this->transient_name);
-						delete_site_transient($this->divi_transient_name);
-
-        }elseif( empty($caweb_update_themes) ||  ! isset($caweb_update_themes->response[$this->theme_name])){
-
-          	delete_site_transient( $this->divi_transient_name );
-        }
-
+				
+				exit();
+			}
+		//alternative API for updating checking
+		public function caweb_check_update($update_transient) {
+			if ( ! isset( $update_transient->checked ) ) {
 				return $update_transient;
+			}
+			
+			$themes = $update_transient->checked;
 
-		}
+			$last_update = new stdClass();
+
+			$payload = wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args);
+			
+			if ( is_wp_error( $payload ) ) {
+				//$options['body']['failed_request'] = 'true';
+				//$theme_request = wp_remote_post( 'https://cdn.elegantthemes.com/api/api.php', $options );
+			}
+			
+			if( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) == 200 ){
+				$payload = json_decode( wp_remote_retrieve_body( $payload ) );			
+				
+				
+					if ( ! empty( $payload ) ) {
+						$obj = array();
+						$obj['new_version'] = $payload->tag_name;
+						
+						$changelog = sprintf('https://raw.githubusercontent.com/%1$s/CAWeb/%2$s/changelog.txt', 
+															$this->user, $payload->target_commitish);
+						$changelog_url = admin_url('admin-post.php?action=caweb_get_changelog') ;
+						
+						$obj['url'] = $changelog_url; 
+						$obj['package'] = $payload->zipball_url;
+						$obj['changelog'] = $changelog;
+						
+						$theme_response = array($this->theme_name => $obj);
+						
+						$update_transient->response = array_merge( ! empty( $update_transient->response ) ? $update_transient->response : array(), $theme_response );
+
+						$last_update->checked  = $themes;
+						$last_update->response = $theme_response;
+				}
+			}			
+			
+
+			$last_update->last_checked = time();
+			set_site_transient( $this->transient_name, $last_update );
+					
+			return $update_transient;
+
+	}
 
 	// Add the CAWeb Update to List of Available Updated
-	public function add_themes_to_update_notification($update_transient) {
+	public function caweb_add_themes_to_update_notification($update_transient) {
 		$caweb_update_themes = get_site_transient( $this->transient_name );
 
 		if ( ! is_object( $caweb_update_themes ) || ! isset( $caweb_update_themes->response ) ) {

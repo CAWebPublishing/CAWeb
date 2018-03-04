@@ -19,6 +19,14 @@ define('CAWebUri', get_stylesheet_directory_uri());
 
 define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 // Actions Ran During any Request
+// CAWeb Admin Init
+add_action('admin_init', 'caweb_admin_init');
+function caweb_admin_init(){
+
+	// Core Updater
+	require_once(CAWebAbsPath. '/core/update.php');	
+}
+
 // CAWeb After Setup Theme
 add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
@@ -39,9 +47,8 @@ function caweb_setup_theme() {
 
 	// Password Reset
 	require_once("{$inc_dir}/wp-login.php");
-	// Core Updater
-	require_once(CAWebAbsPath. '/core/update.php');
-
+	
+	
 	// Options Page
 	require_once(CAWebAbsPath. '/options.php');
 
