@@ -103,6 +103,7 @@ function caweb_pre_get_posts($query) {
 // CAWeb Init
 add_action('init', 'caweb_init');
 function caweb_init() {
+	global $pagenow;
 
 	// Unregister Divi Project Type
 	unregister_post_type( 'project' );
