@@ -116,7 +116,8 @@ function caweb_init() {
 	register_nav_menus( cawen_nav_menu_theme_locations() );
 	
 	// Enable Thickbox
-	add_thickbox();
+	if('wp-login.php' !== $pagenow   )
+		add_thickbox();
 
 }
 
