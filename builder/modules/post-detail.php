@@ -1572,11 +1572,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 
 			 	$event_start_date = gmdate( $event_start_date_custom_format, strtotime( $event_start_date ) );
 
-      	$event_end_date = gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) );
+      	$event_end_date = ! empty( $event_end_date ) ? gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) ) : '';
 
-				$organizer = sprintf('%1$s<p class="date-time">%2$s - %3$s<br />%4$s</p>',
+				$organizer = sprintf('%1$s<p class="date-time">%2$s%3$s<br />%4$s</p>',
 														( ! empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : ''),
-														$event_start_date, $event_end_date, $location);
+														$event_start_date, ( ! empty($event_end_date) ? sprintf(' - %1$s', $event_end_date) : '' ), $location);
 
       	$event_registration_type =  ( ! empty($event_registration_type)  ?
                                       sprintf('Registration Type: %1$s', $event_registration_type) : '');
