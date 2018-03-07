@@ -19,18 +19,27 @@
 .mobile-controls span {
     cursor: pointer;
 }
+/**
+* Page Title Style
+*/
 .page-title{
-  padding-bottom: 0;
+  padding: 30px 15px 0px;
+}
+.non_divi_builder .page-title{
+padding: 30px 0 !important;
+}
+
+@media(max-width: 768px){
+  .non_divi_builder .page-title{
+    padding-top:0px !important;
+    padding-bottom: 0px !important;
+  }
 }
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;
 }
 .non_divi_builder .main-primary{
  padding-bottom: 25px;
-}
-.page-title.with_date,
-.divi_builder .page-title{
-  margin-bottom: auto;
 }
 .single.non_divi_builder.sidebar_displayed .main-content .main-primary,
 .archive.sidebar_displayed .main-content .main-primary{
