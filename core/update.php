@@ -92,7 +92,7 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 					exit();
 				}
 			//alternative API for updating checking
-			public function caweb_check_update($update_transient) {
+		public function caweb_check_update($update_transient) {
 				if ( ! isset( $update_transient->checked ) ) {
 					return $update_transient;
 				}
@@ -112,7 +112,7 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 					$payload = json_decode( wp_remote_retrieve_body( $payload ) );			
 					
 					
-						if ( ! empty( $payload ) ) {
+						if ( ! empty( $payload ) && version_compare( $payload->tag_name,  $this->current_version, '>') ) {
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
 							
@@ -127,6 +127,8 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 
 							$last_update->checked  = $themes;
 							$last_update->response = $theme_response;
+					}else{
+						delete_site_transient($this->transient_name);
 					}
 				}			
 				
@@ -156,9 +158,9 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 			return $update_transient;
 		}
 
-			// Alternative upgrader_pre_download for the WordPress Updater
-			// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
-			public function caweb_upgrader_pre_download($reply, $package, $upgrader) {
+		// Alternative upgrader_pre_download for the WordPress Updater
+		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+		public function caweb_upgrader_pre_download($reply, $package, $upgrader) {
 	      if( ! class_exists('Theme_Upgrader') ){
 	        /** Theme_Upgrader class */
 	        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
