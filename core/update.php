@@ -179,6 +179,9 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 						rename(sprintf('%1$s/css/external/', CAWebAbsPath),
 							sprintf('%1$s/caweb_external_css/', wp_upload_dir()['basedir']));
 					}
+					
+					// Delete existing transient
+					delete_site_transient($this->transient_name);
 					return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
 				}
 				return $reply;
