@@ -27,6 +27,22 @@ function caweb_admin_init(){
 	require_once(CAWebAbsPath. '/core/update.php');	
 }
 
+/**
+ * Enable unfiltered_html capability for Administrators.
+ *
+ * @param  array  $caps    The user's capabilities.
+ * @param  string $cap     Capability name.
+ * @param  int    $user_id The user ID.
+ * @return array  $caps    The user's capabilities, with 'unfiltered_html' potentially added.
+ */
+function caweb_add_unfiltered_html_capability( $caps, $cap, $user_id ) {
+	if ( 'unfiltered_html' === $cap && user_can( $user_id, 'administrator' ) ) {
+		$caps = array( 'unfiltered_html' );
+	}
+	return $caps;
+}
+add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
+
 // CAWeb After Setup Theme
 add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
