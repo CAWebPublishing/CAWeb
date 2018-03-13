@@ -139,10 +139,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
       'exam_final_filing_date' => array('Until Filled','add_default_setting'),
 			'exam_final_filing_date_format' => array('off','add_default_setting'),
       'exam_final_filing_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
+			'course_start_date' => date('D, n/j/Y'),
 			'course_start_date_format' => array('off','add_default_setting'),
       'course_start_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
 			'course_end_date_format' => array('off','add_default_setting'),
       'course_end_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
+			'event_start_date' => date('D, n/j/Y'),
 			'event_start_date_format' => array('off','add_default_setting'),
       'event_start_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
 			'event_end_date_format' => array('off','add_default_setting'),
@@ -1530,9 +1532,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 
       	$course_start_date = gmdate( $course_start_date_custom_format, strtotime( $course_start_date ) );
 
-      	$course_end_date = gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) );
+      	$course_end_date =  !empty($course_end_date) ? gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) ) : '';
 
-				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s - %2$s<br />%3$s</p>', $course_start_date, $course_end_date, $location);
+				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s%2$s<br />%3$s</p>', $course_start_date, ! empty($course_end_date) ? sprintf(' - %1$s', $course_end_date) : '', $location);
 
 				$course_registration_type =  ( ! empty($course_registration_type)  ?
                                       sprintf('Registration Type: %1$s', $course_registration_type) : '');
