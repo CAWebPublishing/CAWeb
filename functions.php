@@ -183,7 +183,7 @@ function caweb_wp_enqueue_scripts() {
 	wp_register_script('cagov-modernizr-extra-script', CAWebUri . '/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version, false );
 
  	wp_register_script('cagov-core-script', CAWebUri. '/js/cagov.core.js', array('jquery'), $theme_version, true );
-	wp_register_script('cagov-navigation-script', CAWebUri. '/js/libs/navigation.js', array(), $theme_version, true );
+	wp_register_script('cagov-navigation-script', CAWebUri. '/js/libs/navigation.js', array('jquery'), $theme_version, true );
 	wp_register_script('cagov-google-script', CAWebUri. '/js/libs/google.js', array(), $theme_version, true );
 	wp_register_script('cagov-ga-autotracker-script', CAWebUri. '/js/libs/AutoTracker.js', array(), $theme_version, true );
 
