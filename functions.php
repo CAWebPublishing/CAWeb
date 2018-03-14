@@ -170,7 +170,7 @@ function caweb_wp_enqueue_scripts() {
 		foreach( $ext_css as $index => $name ){
 			$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 
-			printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s%3$s">', $index + 1, $location, $theme_version );
+			printf('<link rel="stylesheet" id="caweb-external-custom-%1$d-styles" href="%2$s?ver=%3$s">', $index + 1, $location, $theme_version );
 		}
 	}
 
