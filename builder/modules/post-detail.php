@@ -139,12 +139,10 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
       'exam_final_filing_date' => array('Until Filled','add_default_setting'),
 			'exam_final_filing_date_format' => array('off','add_default_setting'),
       'exam_final_filing_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
-			'course_start_date' => date('D, n/j/Y'),
 			'course_start_date_format' => array('off','add_default_setting'),
       'course_start_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
 			'course_end_date_format' => array('off','add_default_setting'),
       'course_end_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
-			'event_start_date' => date('D, n/j/Y'),
 			'event_start_date_format' => array('off','add_default_setting'),
       'event_start_date_custom_format' => array('D, n/j/Y g:i a','add_default_setting'),
 			'event_end_date_format' => array('off','add_default_setting'),
@@ -1530,7 +1528,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 						sprintf('<span class="ca-gov-icon-road-pin"></span>
 									<a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $course_addr) : '');
 
-      	$course_start_date = gmdate( $course_start_date_custom_format, strtotime( $course_start_date ) );
+      	$course_start_date = ! empty( $course_start_date ) ? gmdate( $course_start_date_custom_format, strtotime( $course_start_date ) ) : '';
 
       	$course_end_date =  !empty($course_end_date) ? gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) ) : '';
 
@@ -1572,7 +1570,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 
 				$location = ( "on" == $show_event_address ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr) : '');
 
-			 	$event_start_date = gmdate( $event_start_date_custom_format, strtotime( $event_start_date ) );
+			 	$event_start_date = ! empty( $event_start_date ) ? gmdate( $event_start_date_custom_format, strtotime( $event_start_date ) ) : '';
 
       	$event_end_date = ! empty( $event_end_date ) ? gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) ) : '';
 
