@@ -42,16 +42,12 @@ border: 0;
 * Page Title Style
 */
 .page-title{
-  padding: 30px 15px 0px;
-}
-.non_divi_builder .page-title{
-padding: 30px 0 !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 @media(max-width: 768px){
   .non_divi_builder .page-title{
-    padding-top:0px !important;
-    padding-bottom: 0px !important;
   }
 }
 .non_divi_builder.title_not_displayed .main-primary{
