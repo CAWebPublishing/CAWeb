@@ -1614,8 +1614,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 				$pub_date = ( ! empty($exam_published_date) ? sprintf('Published Date: %1$s<br />', $pub_date ) : '');
 
         if("on" == $exam_final_filing_date_chooser){
-          $exam_final_filing_date_picker = gmdate($exam_final_filing_date_custom_format, strtotime( $exam_final_filing_date_picker ) );
-          $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date_picker);
+					$exam_final_filing_date = ! empty($exam_final_filing_date_picker) ?  sprintf('Final Filing Date: %1$s<br />', gmdate($exam_final_filing_date_custom_format, strtotime( $exam_final_filing_date_picker ) ) ) : '';
 
         }else{
           $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date);
@@ -1640,16 +1639,18 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 					sprintf('<div class="entity"><strong>%1$s</strong> %2$s</div>', $job_agency_name,
                   ( ! empty($agency_addr) ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://google.com/maps/place/%1$s">%1$s</a>', $agency_addr) : '')) : '' );
 
-				$job_posted_date = gmdate( $job_posted_date_custom_format, strtotime( $job_posted_date ) );
+				if( ! empty($job_posted_date) ){
+					$job_posted_date = gmdate( $job_posted_date_custom_format, strtotime( $job_posted_date ) );
 
-        $d1 = date_create( gmdate( 'm/d/Y', strtotime($job_posted_date) ) );
-	      $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y') );
-      	$tmp = $d1->diff($d2)->format('%a');
-      	$days_passed = (0 !== (int) $tmp ? sprintf('&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp) :'');
-
-      	$job_posted_date = ( ! empty($job_posted_date) ?
-                          sprintf('<div class="published">Published: <time>%1$s</time>%2$s</div>',
-                                  $job_posted_date, $days_passed )  : '' );
+	        $d1 = date_create( gmdate( 'm/d/Y', strtotime($job_posted_date) ) );
+		      $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y') );
+	      	$tmp = $d1->diff($d2)->format('%a');
+	      	$days_passed = (0 !== (int) $tmp ? sprintf('&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp) :'');
+					
+					$job_posted_date = sprintf('<div class="published">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed );
+				}else{					
+					$job_posted_date = '';
+				}
 
 				$job_hours    = ( ! empty( $job_hours ) ? sprintf('%1$s<br />', $job_hours) : '' );
 
@@ -1671,8 +1672,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 				$job_ds_url    = ( ! empty($job_ds_url) ? sprintf('Duty Statement (<a href="%1$s">PDF</a>)<br />', $job_ds_url) : '');
 
 			 if("on" == $job_final_filing_date_chooser){
-         	$job_final_filing_date_picker = gmdate( $job_final_filing_date_custom_format, strtotime( $job_final_filing_date_picker ) );
-          $job_final_filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
+          $job_final_filing_date = ! empty( $job_final_filing_date_picker ) ? sprintf('Final Filing Date:<time>%1$s</time><br />', gmdate( $job_final_filing_date_custom_format, strtotime( $job_final_filing_date_picker ) )) : '';
 
         }else{
           $job_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $job_final_filing_date);
@@ -1728,9 +1728,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 					break;
 			// News
 			case 'news':
-			$news_publish_date = gmdate(  $news_publish_date_custom_format, strtotime( $news_publish_date ) );
-
-			$news_publish_date = ( ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', $news_publish_date) : '');
+			$news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />',  gmdate(  $news_publish_date_custom_format, strtotime( $news_publish_date ) ) ) : '';
 
 			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
 													( ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author)  : ''), $news_publish_date,

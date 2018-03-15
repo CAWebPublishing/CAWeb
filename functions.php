@@ -138,6 +138,11 @@ function caweb_init() {
 
 }
 
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
+function caweb_wp_enqueue_parent_scripts(){
+	// Required in order to inherit parent theme style.css
+	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array());
+}
 // CAWeb Enqueue Scripts and Styles at the bottom
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
 function caweb_wp_enqueue_scripts() {
@@ -149,10 +154,7 @@ function caweb_wp_enqueue_scripts() {
 	$color = get_option('ca_site_color_scheme', 'oceanside');	
 	$schemes = caweb_color_schemes( caweb_get_version( get_the_ID() ), 'filename');
 	$colorscheme = isset( $schemes[$color] ) ? $schemes[$color] : 'oceanside';
-		
-	// Required in order to inherit parent theme style.css
-	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array());
-
+	
 	// If on the activation page
 	if('wp-activate.php' == $pagenow   ){
 		wp_enqueue_style( 'caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), $theme_version );

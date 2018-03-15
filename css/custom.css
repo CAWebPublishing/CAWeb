@@ -38,18 +38,6 @@ border: 0;
 .mobile-controls span {
     cursor: pointer;
 }
-/**
-* Page Title Style
-*/
-.page-title{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-@media(max-width: 768px){
-  .non_divi_builder .page-title{
-  }
-}
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;
 }

@@ -4,6 +4,13 @@ body{
 #main-content > .section{
 	padding-top: 0;
 }
+/**
+* Page Title Style
+*/
+.page-title{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
 .page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content > .et_pb_section > .et_pb_row{
@@ -291,21 +298,8 @@ footer .container .group{
 .branding {
     display: none;
 }
-.et_pb_row.main-navigation{
-      width: 100%;
-    }
-
 }
 /* End of Mobile Control Styles */
-@media (min-width: 768px){
-  .et_pb_row.main-navigation{
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 0;
-    width: 80% !important;
-  }
-}
-
 
 /* Section Carousel Version 5 */
 .et_pb_ca_section_carousel .container{
