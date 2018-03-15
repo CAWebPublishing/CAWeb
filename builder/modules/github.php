@@ -308,7 +308,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			$repos =  wp_remote_get($url );
 			$code = wp_remote_retrieve_response_code($repos);
 
-			if(404 !== $code){
+			if(200 == $code){
 
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) );
         $repo_list = '';
