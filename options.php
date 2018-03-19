@@ -19,7 +19,10 @@ function caweb_admin_menu() {
 		unset($submenu['themes.php'][5], $submenu['themes.php'][20], $submenu['themes.php'][21]); // Themes link
 		 // Background link
 		 // Background link
-
+		
+		// Remove WP-Forms Addons Menus
+		remove_submenu_page('wpforms-overview', 'wpforms-addons');
+		
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php', 'tools.php');
 		remove_submenu_page('tools.php', 'import.php');
@@ -37,9 +40,6 @@ function caweb_admin_menu() {
     	add_submenu_page( 'ca_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
     	add_submenu_page( 'ca_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
   }
-	
-	// Remove WP-Forms Addons Menus
-	remove_submenu_page('wpforms', 'wpforms-overview');
 
 }
 add_action( 'admin_menu', 'caweb_admin_menu', 15 );
