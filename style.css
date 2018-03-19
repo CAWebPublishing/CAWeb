@@ -5,7 +5,7 @@
  Author:       Jesus D Guzman
  Author URI:   ""
  Template: 	   Divi
- Version:      1.4.0b
+ Version:      1.4.1
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  Tags:         light, dark, responsive-layout, accessibility-ready, california, ca
@@ -19,3 +19,9 @@
 header {
   z-index: 15 !important;
 }
+.et_pb_row{
+	padding-top: 0 !important;
+}
+.divi_builder.title_not_displayed .entry-content > .et_pb_section:first-child .et_pb_row:first-child{
+	padding: 27px 0 !important;
+} 
