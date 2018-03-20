@@ -135,9 +135,7 @@ function caweb_theme_page_templates($templates) {
 add_filter('script_loader_tag', 'caweb_script_loader_tag', 10, 3);
 function caweb_script_loader_tag($tag, $handle, $src) {
 	// Defer some scripts
-	$js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script',
-						'cagov-navigation-script', 'cagov-ga-autotracker-script',
-						'cagov-google-script');
+	$js_scripts = array('cagov-modernizr-script', 'cagov-modernizr-extra-script', 'cagov-navigation-script', 'cagov-ga-autotracker-script', 'cagov-google-script', 'thickbox');
 	  // deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
 	  if( in_array($handle, $js_scripts) )
 		  return str_replace('src', 'defer src', $tag);
