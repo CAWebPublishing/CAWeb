@@ -19,9 +19,6 @@
 header {
   z-index: 15 !important;
 }
-.et_pb_row{
-	padding-top: 0 !important;
-}
 .divi_builder.title_not_displayed .entry-content > .et_pb_section:first-child .et_pb_row:first-child{
 	padding: 27px 0 !important;
 } 
