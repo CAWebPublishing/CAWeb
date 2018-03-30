@@ -19,8 +19,9 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
 			'max_width_tablet',
 			'max_width_phone',
 			'max_width_last_edited',
-			'module_class',
 			'module_id',
+			'rand_id',
+			'module_class',
 			'admin_label',
 			'thickbox_layout',
 			'iframe_width',
@@ -32,7 +33,8 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
 		);
 
         $this->fields_defaults = array(
-					'panel_layout' => array('inline'),
+					'thickbox_layout' => array('inline'),
+					'rand_id' => rand(1, 99),
 				);
 
         $this->main_css_element = '%%order_class%%';
@@ -55,6 +57,9 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
 		    ),
 		  ),
 		);
+
+        // Custom handler: Output JS for Thickbox Window Size.
+        add_action('wp_footer', array($this, 'caweb_thickbox_window_size_correction'));
     }
     function get_fields() {
         $fields = array(
@@ -106,7 +111,7 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
 				'label'           => esc_html__('External Link', 'et_builder'),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__('Enter the URL for the thickbox. (http:// must be included)', 'et_builder'),
+				'description'     => esc_html__('Enter the URL for the thickbox.', 'et_builder'),
 				'toggle_slug'			=> 'header',
 				'depends_show_if' => 'external',
 			),
@@ -173,14 +178,6 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
 			  'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
 				'toggle_slug' => 'admin_label',
 			),
-			'module_id' => array(
-			  'label'           => esc_html__('CSS ID', 'et_builder'),
-			  'type'            => 'text',
-			  'option_category' => 'configuration',
-			  'tab_slug'        => 'custom_css',
-				'toggle_slug'     => 'classes',
-			  'option_class'    => 'et_pb_custom_css_regular',
-			),
 			'module_class' => array(
 			  'label'           => esc_html__('CSS Class', 'et_builder'),
 			  'type'            => 'text',
@@ -194,7 +191,7 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
         return $fields;
     }
     function shortcode_callback($atts, $content = null, $function_name) {
-        $module_id             	= $this->shortcode_atts['module_id'];
+        $module_id          	= $this->shortcode_atts['module_id'];
         $module_class          	= $this->shortcode_atts['module_class'];
         $max_width             	= $this->shortcode_atts['max_width'];
         $max_width_tablet      	= $this->shortcode_atts['max_width_tablet'];
@@ -212,6 +209,9 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
         $module_class = ET_Builder_Element::add_module_order_class($module_class, $function_name);
         $this->shortcode_content = et_builder_replace_code_content_entities($this->shortcode_content);
 
+        $thickbox_id = ! empty($module_id) ? esc_attr($module_id) : 'thickbox_'.rand(1, 99);
+        $this->shortcode_atts['module_id'] = $thickbox_id;
+
         if ('' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width) {
             $max_width_responsive_active = et_pb_get_responsive_status($max_width_last_edited);
 
@@ -224,34 +224,59 @@ class ET_Builder_Module_Thickbox extends ET_Builder_CAWeb_Module {
             et_pb_generate_responsive_css($max_width_values, '%%order_class%%', 'max-width', $function_name);
         }
 
-        $thickbox_id = '' !== $module_id ? esc_attr($module_id) : 'thickbox_'.rand(1, 99);
-
         $class = sprintf(' class="%1$s%2$s"', esc_attr($class), '' !== $module_class ? sprintf(' %1$s', esc_attr($module_class)) : '');
 
-        $iframe_width = ! empty($iframe_width) ? $iframe_width : '600px';
-        $iframe_height = ! empty($iframe_height) ? $iframe_height : '500px';
+        $iframe_width = ! empty($iframe_width) ? str_replace('px', '', $iframe_width) : '600';
+        $iframe_height = ! empty($iframe_height) ? str_replace('px', '', $iframe_height) : '550';
 
         switch ($thickbox_layout) {
 					case "inline":
-						$link = sprintf('<a class="thickbox" href="#TB_inline?width=%1$d&height=%2$d&inlineId=%3$s">%4$s</a>', $iframe_width, $iframe_height, $thickbox_id, $link_text);
+						$link = sprintf('<a class="thickbox" href="TB_inline?width=%1$s&height=%2$s&inlineId=%3$s">%4$s</a>', $iframe_width, $iframe_height, $thickbox_id, $link_text);
 
 						$output = sprintf('<div id="%1$s" style="display:none">%2$s</div>%3$s', $thickbox_id, $this->shortcode_content, $link);
 
 						break;
 
 					case "external":
-						$output = sprintf('<a class="thickbox" href="%1$s?TB_iframe=true&width=%2$d&height=%3$d">%4$s</a>', $external_link, $iframe_width, $iframe_height, $link_text);
+						$output = sprintf('<a id="%1$s" class="thickbox" href="%2$s?TB_iframe=true&width=%3$s&height=%4$s">%5$s</a>', $thickbox_id, $external_link, $iframe_width, $iframe_height, $link_text);
 
 						break;
 					case "media_image":
-						$output = sprintf('<a class="thickbox" href="%1$s?TB_iframe=true&width=%2$d&height=%3$d">%4$s</a>', $image, $iframe_width, $iframe_height, $link_text);
+						$output = sprintf('<a id="%1$s" class="thickbox" href="%2$s?TB_iframe=true&width=%3$d&height=%4$d">%5$s</a>', $thickbox_id, $image, $iframe_width, $iframe_height, $link_text);
 
 					break;
 				}
 
-        add_thickbox();
+        return sprintf('<div%1$s>%2$s</div>%3$s', $class, $output, $thickbox_id);
+    }
 
-        return sprintf('<div%1$s>%2$s</div>%3$stest', $class, $output, $image);
+    function caweb_thickbox_window_size_correction() {
+        $type = array('external', 'media_image');
+        $module_id = $this->shortcode_atts['module_id'];
+        $layout = $this->shortcode_atts['thickbox_layout'];
+        $iframe_width = ! empty($this->shortcode_atts['iframe_width']) ? str_replace('px', '', $this->shortcode_atts['iframe_width']) : '600';
+        $iframe_height = ! empty($this->shortcode_atts['iframe_height']) ? str_replace('px', '', $this->shortcode_atts['iframe_height']) : '550';
+
+        if (in_array($layout, $type)) :
+				?>
+			<script>
+			jQuery('#<?= $module_id ?>').click(function() {
+					var TB_WIDTH = <?= $iframe_width ?>,
+							TB_HEIGHT = <?= $iframe_height ?>; 
+							setTimeout(function() {
+					jQuery("#TB_window").animate({
+							marginLeft: '-' + parseInt((TB_WIDTH / 2), 10) + 'px',
+							width: TB_WIDTH + 'px',
+							height: TB_HEIGHT + 'px',
+							marginTop: '-' + parseInt((TB_HEIGHT / 2), 10) + 'px',
+							padding: '15px'
+					});
+					jQuery("#TB_window img#TB_Image").css('margin', '0');
+				});
+			});
+			</script>
+			<?php
+			endif;
     }
 }
 new ET_Builder_Module_Thickbox;
