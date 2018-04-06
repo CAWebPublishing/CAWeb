@@ -4420,9 +4420,9 @@ html {
 ----------------------------------------- */
 @font-face {
   font-family: 'CaGov';
-  src: url('../fonts/CaGov.eot');
+  src: url('../../fonts/CaGov.eot');
   /* IE9 Compat Modes */
-  src: url('../fonts/CaGov.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/CaGov.woff') format('woff'), /* Modern Browsers */ url('../fonts/CaGov.ttf') format('truetype'), /* Safari, Android, iOS */ url('../fonts/CaGov.svg') format('svg');
+  src: url('../../fonts/CaGov.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../../fonts/CaGov.woff') format('woff'), /* Modern Browsers */ url('../../fonts/CaGov.ttf') format('truetype'), /* Safari, Android, iOS */ url('../../fonts/CaGov.svg') format('svg');
   /* Legacy iOS */
 }
 [class^="ca-gov-icon-"],
@@ -7713,7 +7713,7 @@ a.second-level-link [class^="ca-gov-icon-"] {
 }
 /* -----------------------------------------
    SPACING
-   Converted from Scss 
+   Converted from Scss
    http://v4-alpha.getbootstrap.com/components/utilities/
    /source/less/cagov/spacing.less
 ----------------------------------------- */
@@ -8088,7 +8088,7 @@ body {
 ----------------------------------------- */
 /*
  *  Core Owl Carousel CSS File
- 
+
  */
 .carousel {
   display: none;
@@ -8371,7 +8371,7 @@ body {
 .fancybox-close,
 .fancybox-prev span,
 .fancybox-next span {
-  background-image: url('../images/fancybox/fancybox_sprite.png');
+  background-image: url('../../images/fancybox/fancybox_sprite.png');
 }
 #fancybox-loading {
   position: fixed;
@@ -8387,7 +8387,7 @@ body {
 #fancybox-loading div {
   width: 44px;
   height: 44px;
-  background: url('../images/fancybox/fancybox_loading.gif') center center no-repeat;
+  background: url('../../images/fancybox/fancybox_loading.gif') center center no-repeat;
 }
 .fancybox-close {
   position: absolute;
@@ -8405,7 +8405,7 @@ body {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  background: transparent url('../images/fancybox/blank.gif');
+  background: transparent url('../../images/fancybox/blank.gif');
   /* helps IE */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: 8040;
@@ -8466,7 +8466,7 @@ body {
   overflow: hidden;
   display: none;
   z-index: 8010;
-  background: url('../images/fancybox/fancybox_overlay.png');
+  background: url('../../images/fancybox/fancybox_overlay.png');
 }
 .fancybox-overlay-fixed {
   position: fixed;
@@ -10080,7 +10080,7 @@ figcaption {
   margin-bottom: 22px;
 }
 .event-item .title {
-  background: url("../images/template2014/bullet-blue-disc.png") no-repeat 0 3px transparent;
+  background: url("../../images/template2014/bullet-blue-disc.png") no-repeat 0 3px transparent;
   margin-left: -20px;
   padding-left: 20px;
 }
@@ -11851,13 +11851,13 @@ ul.list-overstated a {
 }
 .list-overstated li,
 .list-understated li {
-  background: url("../images/template2014/bullet-blue-disc.png") no-repeat 0 4px transparent;
+  background: url("../../images/template2014/bullet-blue-disc.png") no-repeat 0 4px transparent;
   padding: 0 0 14px 18px;
   /* Rotates disc arrow down when used with accordion */
 }
 .list-overstated li.open,
 .list-understated li.open {
-  background: url("../images/template2014/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
+  background: url("../../images/template2014/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
 }
 .list-standout {
   padding: 0;
@@ -11993,7 +11993,7 @@ blockquote {
    BUTTONS
    /source/less/cagov/button.less
 ----------------------------------------- */
-/* 
+/*
     NOTE: This might make more sence later to be moved to the color schemes
 */
 /* .btn-primary {
@@ -12001,7 +12001,7 @@ blockquote {
     background:none;
     color:#fff;
     transition:all 0.5s;
-    
+
     &:hover, &:focus {
         .rgba (#fff, .2);
         background-color: @rgba;
