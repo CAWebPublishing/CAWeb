@@ -10080,7 +10080,7 @@ figcaption {
   margin-bottom: 22px;
 }
 .event-item .title {
-  background: url("../../images/template2014/bullet-blue-disc.png") no-repeat 0 3px transparent;
+  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
   margin-left: -20px;
   padding-left: 20px;
 }
@@ -11851,13 +11851,13 @@ ul.list-overstated a {
 }
 .list-overstated li,
 .list-understated li {
-  background: url("../../images/template2014/bullet-blue-disc.png") no-repeat 0 4px transparent;
+  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 4px transparent;
   padding: 0 0 14px 18px;
   /* Rotates disc arrow down when used with accordion */
 }
 .list-overstated li.open,
 .list-understated li.open {
-  background: url("../../images/template2014/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
+  background: url("../../images/system/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
 }
 .list-standout {
   padding: 0;
