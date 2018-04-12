@@ -65,11 +65,11 @@ function caweb_setup_theme() {
     // Password Reset
     require_once("{$inc_dir}/wp-login.php");
 
+    // Filters
+    require_once(CAWebAbsPath."/includes/filters.php");
+
     // Options Page
     require_once(CAWebAbsPath.'/options.php');
-
-    // Filters
-    require_once("{$inc_dir}/filters.php");
 
     // Set Up Predefined Category Content Types
     $ca_cats = array(
@@ -176,10 +176,6 @@ function caweb_wp_enqueue_scripts() {
         }
     }
 
-    // Load editor styling
-    wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver));
-
     // Register Scripts
     wp_register_script('cagov-modernizr-script', CAWebUri.'/js/libs/modernizr-2.0.6.min.js', array('jquery'), $theme_version, false);
     wp_register_script('cagov-modernizr-extra-script', CAWebUri.'/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version, false);
@@ -273,6 +269,10 @@ function caweb_admin_enqueue_scripts($hook) {
     }
 
     wp_enqueue_style('caweb-font-styles', CAWebUri.'/css/cagov.font-only.css', array(), $theme_version);
+
+    // Load editor styling
+    wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_version(get_the_ID())));
 }
 
 // CAWeb Admin Head
