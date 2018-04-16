@@ -199,3 +199,7 @@ p{
   margin-bottom: 30px;
 
 }
+.list-standout, .list-understated, .list-overstated, .accordion-list{
+	list-style-type: none !important;
+	padding: 0 !important;
+}
