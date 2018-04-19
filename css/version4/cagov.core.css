@@ -4103,7 +4103,19 @@ h4, .h4 {
 /* -----------------------------------------
    SITE SEARCH - /source/less/cagov/search.less
 ----------------------------------------- */
-
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus{
+	border-color: transparent !important;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	padding: 6px 10px !important;
+}
+.gsc-search-button-v2 svg{
+	height: 20px;
+	width: 20px;
+}
+.gsc-search-button-v2:hover svg{
+	fill: #fbad23;
+}
 .search-container {
     position: relative;
     padding: 5px;
