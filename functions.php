@@ -227,7 +227,7 @@ function caweb_wp_head() {
 
 <?php
 
-	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
+	printf('<link alt="Fav Icon" rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
     printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
 
     if ("" !== get_option('ca_custom_css', '')) {
@@ -279,7 +279,7 @@ function caweb_admin_enqueue_scripts($hook) {
 add_action('admin_head', 'caweb_admin_head');
 function caweb_admin_head() {
     $icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id());
-    printf('<link rel="icon" href="%1$s">', $icon);
+    printf('<link alt="Fav Icon" rel="icon" href="%1$s">', $icon);
 
     // This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open
     print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
