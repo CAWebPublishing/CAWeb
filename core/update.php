@@ -17,7 +17,7 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 				protected $theme_name;
 				protected $current_version;
 				protected $changelog;
-				
+
 				private static $_this;
 
 				/**
@@ -32,12 +32,12 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 				}
 
 				self::$_this = $this;
-					
+
 				// Set the class public variables
 	      			$this->user = get_site_option('caweb_username', '');
 				$this->theme_name = $theme->Name;
 				$this->current_version = $theme->Version;
-				
+
 				$this->args = array(
 						'headers' => array(
 							'Authorization' => 'Basic ' . base64_encode( ':' . get_site_option('caweb_password', '') ),
@@ -64,31 +64,31 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 					add_filter('upgrader_post_install', array($this, 'caweb_upgrader_post_install'), 10, 3 );
 
 					add_action( 'after_setup_theme', array( $this, 'remove_theme_update_actions' ), 11 );
-					
+
 					add_action('admin_post_caweb_get_changelog', array( $this, 'caweb_get_theme_changelog' ) );
-				
+
 				}
 
 				function remove_theme_update_actions() {
 					remove_filter( 'pre_set_site_transient_update_themes', 'caweb_check_update' );
 					remove_filter( 'site_transient_update_themes', 'caweb_add_themes_to_update_notification' );
 				}
-				
-				
+
+
 				function caweb_get_theme_changelog() {
 					$caweb_update_themes = get_site_transient( $this->transient_name );
-					
+
 					if( !empty($caweb_update_themes) && isset($caweb_update_themes->response[$this->theme_name ]['changelog']) ){
 							$content = wp_remote_get( $caweb_update_themes->response[$this->theme_name ]['changelog'], $this->args );
-							
+
 							if( ! is_wp_error($content) && 200 == wp_remote_retrieve_response_code($content) ){
 								echo '<pre>' . wp_remote_retrieve_body( $content ) . '</pre>';
 							}else{
 								echo '<pre>No Changelog Available</pre>';
 							}
-						
+
 					}
-					
+
 					exit();
 				}
 			//alternative API for updating checking
@@ -96,33 +96,33 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 				if ( ! isset( $update_transient->checked ) ) {
 					return $update_transient;
 				}
-				
+
 				$themes = $update_transient->checked;
 
 				$last_update = new stdClass();
 
 				$payload = wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args);
-				
+
 				if ( is_wp_error( $payload ) ) {
 					//$options['body']['failed_request'] = 'true';
 					//$theme_request = wp_remote_post( 'https://cdn.elegantthemes.com/api/api.php', $options );
 				}
-				
+
 				if( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) == 200 ){
-					$payload = json_decode( wp_remote_retrieve_body( $payload ) );			
-					
-					
-						if ( ! empty( $payload ) && version_compare( $payload->tag_name,  $this->current_version, '>') ) {
+					$payload = json_decode( wp_remote_retrieve_body( $payload ) );
+
+					//version_compare( $payload->tag_name,  $this->current_version, '>')
+						if ( ! empty( $payload ) &&  ( $payload->tag_name >  $this->current_version ) ) {
 							$obj = array();
 							$obj['new_version'] = $payload->tag_name;
-							
+
 							$changelog_url = admin_url('admin-post.php?action=caweb_get_changelog') ;
-							
-							$obj['url'] = $changelog_url; 
+
+							$obj['url'] = $changelog_url;
 							$obj['package'] = $payload->zipball_url;
-							
+
 							$theme_response = array($this->theme_name => $obj);
-							
+
 							$update_transient->response = array_merge( ! empty( $update_transient->response ) ? $update_transient->response : array(), $theme_response );
 
 							$last_update->checked  = $themes;
@@ -130,12 +130,12 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 					}else{
 						delete_site_transient($this->transient_name);
 					}
-				}			
-				
+				}
+
 
 				$last_update->last_checked = time();
 				set_site_transient( $this->transient_name, $last_update );
-						
+
 				return $update_transient;
 
 		}
@@ -179,7 +179,7 @@ if( ! class_exists( 'CAWeb_Theme_Update' ) ){
 						rename(sprintf('%1$s/css/external/', CAWebAbsPath),
 							sprintf('%1$s/caweb_external_css/', wp_upload_dir()['basedir']));
 					}
-					
+
 					// Delete existing transient
 					delete_site_transient($this->transient_name);
 					return sprintf('%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name);
