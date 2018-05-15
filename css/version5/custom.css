@@ -47,7 +47,7 @@ body{
 @media (max-width: 767px){
 .page-title,
 .non_divi_builder .main-content,
-#main-content .entry-content >  .et_pb_section > .et_pb_row{  
+#main-content .entry-content >  .et_pb_section > .et_pb_row{
       width: 100% !important;
       margin: 0 auto;
 }
@@ -55,7 +55,7 @@ body{
 #main-content .entry-content >  .et_pb_section > .et_pb_row{
     padding: 0 15px;
   }
-  
+
   .divi_builder .page-title{
     padding-bottom: 30px !important;
   }
@@ -67,7 +67,7 @@ body{
 /* Utility Header */
 .utility-header .container{
      max-width: 1280px;
-} 
+}
 .utility-header .container .group{
      display: flex;
 }
@@ -76,7 +76,7 @@ body{
      flex-grow: 10;
      padding-left: 15px;
      width: auto;
-} 
+}
 .utility-header ul li {
     cursor: pointer;
 }
@@ -86,10 +86,10 @@ ul.utility-links.social-media-links{
 .utility-geo-locator .located-city-name{
   margin-left: 0;
 }
-@media (max-width: 767px){ 
+@media (max-width: 767px){
 .utility-header .container{
       width: 100%;
-}   
+}
 .utility-header .utility-links li[class*="utility-custom-"]{
     display: none;
 }
@@ -118,9 +118,6 @@ ul.utility-links.social-media-links{
 #nav_list{
     width: auto;
 	 float: right;
-   clear: both;
-    margin-right: -8px;
-  	padding-left: 25%;
 }
 .sub-nav{
 	left:  0;
@@ -190,6 +187,9 @@ ul.utility-links.social-media-links{
   .top-level-nav .nav-item {
     padding: 0 8px;
   }
+}
+.branding{
+  padding: 0;
 }
 .branding .header-organization-banner img{
      width: auto;
