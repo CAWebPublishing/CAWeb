@@ -20,7 +20,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
 		      'style'  => esc_html__( 'Style', 'et_builder'),
@@ -335,7 +335,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
 					'style'  => esc_html__( 'Style', 'et_builder'),
@@ -498,7 +498,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 		$this->fields_defaults = array('slide_amount' => array(4, 'add_default_setting'));
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
 					'style'  => esc_html__( 'Style', 'et_builder'),
@@ -805,7 +805,7 @@ $this->fullwidth = true;
 	$this->settings_text = esc_html__( 'Carousel Slide Settings', 'et_builder' );
 	$this->main_css_element = '%%order_class%%';
 
-	$this->options_toggles = array(
+	$this->settings_modal_toggles = array(
 		'general' => array(
 			'toggles' => array(
 				'style'  => esc_html__( 'Style', 'et_builder'),

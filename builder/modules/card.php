@@ -18,7 +18,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
 		      'style'  		=> esc_html__( 'Style', 'et_builder'),

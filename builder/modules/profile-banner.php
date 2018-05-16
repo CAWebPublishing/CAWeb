@@ -17,7 +17,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
         $this->main_css_element = '%%order_class%%.et_pb_profile_banner';
 
-        $this->options_toggles = array(
+        $this->settings_modal_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
 		      'style'  => esc_html__('Style', 'et_builder'),

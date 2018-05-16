@@ -18,7 +18,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 
 		$this->main_css_element = '%%order_class%%.et_pb_ca_section_footer';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
 		      'header' => esc_html__( 'Header', 'et_builder'),
@@ -184,7 +184,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
 					'style'  => esc_html__( 'Style', 'et_builder'),
@@ -418,7 +418,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
 				),
@@ -572,7 +572,7 @@ function init() {
 	$this->settings_text = esc_html__( 'Footer Group Settings', 'et_builder' );
 	$this->main_css_element = '%%order_class%%';
 
-	$this->options_toggles = array(
+	$this->settings_modal_toggles = array(
 		'general' => array(
 			'toggles' => array(
 				'style'  => esc_html__( 'Style', 'et_builder'),

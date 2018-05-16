@@ -22,7 +22,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
     );
         $this->main_css_element = '%%order_class%%.et_pb_slider';
 
-        $this->options_toggles = array(
+        $this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
 					'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
@@ -227,7 +227,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         $this->settings_text = esc_html__('Slide Settings', 'et_builder');
         $this->main_css_element = '%%order_class%%';
 
-        $this->options_toggles = array(
+        $this->settings_modal_toggles = array(
 		'general' => array(
 			'toggles' => array(
 				'content'  => esc_html__('Content', 'et_builder'),

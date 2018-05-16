@@ -19,7 +19,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 
 		$this->main_css_element = '%%order_class%%';
 
-		$this->options_toggles = array(
+		$this->settings_modal_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
 		      'style'  => esc_html__( 'Style', 'et_builder'),
@@ -280,7 +280,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 
 			$this->main_css_element = '%%order_class%%';
 
-			$this->options_toggles = array(
+			$this->settings_modal_toggles = array(
 				'general' => array(
 					'toggles' => array(
 						'style'  => esc_html__( 'Style', 'et_builder'),
