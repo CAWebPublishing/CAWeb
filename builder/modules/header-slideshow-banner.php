@@ -1,7 +1,6 @@
 <?php
 /*
 Divi Icon Field Names
-When using the et_pb_get_font_icon_list to render the icon picker,
 make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
@@ -77,7 +76,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 				'type'            => 'text',
 				 'option_category'     => 'configuration',
 				'class'               => array('et-pb-font-icon'),
-				'renderer'            => 'et_pb_get_font_icon_list',
+				'renderer'            => 'select_icon',
 				'renderer_with_field' => true,
 				'description'     => esc_html__('Here you can select a Heading Icon', 'et_builder'),
 				'toggle_slug'     => 'scroll_bar',
