@@ -81,7 +81,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
-				'affects' => array('#et_pb_all_categories_button', '#et_pb_faq_style', '#et_pb_view_featured_image'),
 				'toggle_slug'			=> 'style',
 			),
 			'faq_style' => array(
@@ -93,7 +92,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'toggle'  => esc_html__( 'Toggle', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
-				'depends_show_if' => 'faqs-list',
+				'show_if' => array('style' => 'faqs-list'),
 				'toggle_slug'			=> 'style',
 			),
 			'posts_number' => array(
@@ -111,7 +110,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'depends_show_if_not' => 'faqs-list',
+				'show_if_not' => array('style' => 'faqs-list'),
 				'toggle_slug'			=> 'style',
 			),
 			'all_categories_button' => array(
@@ -122,10 +121,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'affects' => array(
-							'#et_pb_include_categories',
-				),
-				'depends_show_if' => 'general-list',
+				'show_if' => array('style' => 'general-list'),
 				'toggle_slug'			=> 'style',
 			),
 			'include_categories' => array(
@@ -136,7 +132,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'use_terms' => false,
 				),
 				'description'      => esc_html__( 'Choose which categories you would like to include in the list.', 'et_builder' ),
-				'depends_show_if' => 'off',
+				'show_if' => array('all_categories_button' => 'off'),
 				'toggle_slug'			=> 'style',
 			),
 			'all_tags_button' => array(
@@ -147,8 +143,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 					),
-				'affects' => array('#et_pb_include_tags',
-				),
 				'toggle_slug'			=> 'style',
 			),
 			'include_tags' => array(
@@ -159,7 +153,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'use_terms' => false,
 				),
 				'description'      => esc_html__( 'Choose which tags you would like to include in the list.', 'et_builder' ),
-				'depends_show_if' => 'off',
+				'show_if' => array('all_tags_button' => 'off'),
 				'toggle_slug'			=> 'style',
 			),
 			'orderby' => array(

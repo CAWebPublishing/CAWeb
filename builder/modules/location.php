@@ -57,7 +57,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 					'banner'  => esc_html__( 'Banner', 'et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style in which to display the location', 'et_builder' ),
-				'affects' => array('featured_image','show_button','desc', 'show_icon', 'show_contact'),
 				'toggle_slug' => 'style',
 			),
 			'featured_image' => array(
@@ -68,7 +67,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'choose_text' => esc_attr__( 'Choose a Background Image', 'et_builder' ),
 				'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
 				'description' => esc_html__( 'If defined, this image will be used as the background for this location. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
-				'depends_show_if' => 'banner',
+				'show_if' => array('location_layout' => 'banner'),
 				'toggle_slug' => 'style',
 			),
 			'name' => array(
@@ -83,7 +82,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a description of the location.', 'et_builder' ),
-				'depends_show_if' => 'banner',
+				'show_if' => array('location_layout' => 'banner'),
 				'toggle_slug' 		=> 'body',
 				),
 			'addr' => array(
@@ -122,8 +121,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'depends_show_if' => 'contact',
-				'affects' => array('phone', 'fax',),
+				'show_if' => array('location_layout' => 'contact'),
 				'toggle_slug' 		=> 'body',
 			),
 			'phone' => array(
@@ -131,7 +129,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a phone number.', 'et_builder' ),
-				'depends_show_if' => "on",
+				'show_if' => array('show_contact' => 'on'),
 				'toggle_slug' 		=> 'body',
 			),
 			'fax' => array(
@@ -139,7 +137,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a fax number.', 'et_builder' ),
-				'depends_show_if' => "on",
+				'show_if' => array('show_contact' => 'on'),
 				'toggle_slug' 		=> 'body',
 			),
 			'show_icon' => array(
@@ -150,8 +148,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('font_icon',),
-				'depends_show_if_not' => 'banner',
+				'show_if_not' => array('location_layout' => 'banner'),
 				'toggle_slug' 		=> 'style',
 				'tab_slug'		=> 'advanced',
 			),
@@ -163,7 +160,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'renderer'            => 'select_icon',
 				'renderer_with_field' => true,
 				'description'     => esc_html__( 'Select an icon.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('show_icon' => 'on'),
 				'toggle_slug' 		=> 'style',
 				'tab_slug'		=> 'advanced',
 			),
@@ -175,8 +172,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'depends_show_if_not' => 'mini',
-				'affects' => array('location_link',),
+				'show_if_not' => array('location_layout' => 'mini'),
 				'toggle_slug' 		=> 'body',
 			),
 			'location_link' => array(
@@ -184,7 +180,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the URL for the location. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('show_button' => 'on'),
 				'toggle_slug' 		=> 'body',
 			),
 			'max_width' => array(

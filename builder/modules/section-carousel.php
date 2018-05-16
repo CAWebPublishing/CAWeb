@@ -62,7 +62,6 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 					'image_fit'  => esc_html__( 'Image Fit', 'et_builder' ),
 					'media'  => esc_html__( 'Media', 'et_builder' ),
 				),
-				'affects' => array('in_panel', 'slide_amount'),
 				'toggle_slug'			=> 'style',
 			),
        'slide_amount' => array(
@@ -70,7 +69,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the amount of slides to display at one time.', 'et_builder' ),
-				'depends_show_if'   	=> 'media',
+				'show_if'   	=> array('carousel_style' => 'media'),
 				'toggle_slug'			=> 'style',
 			),
       'in_panel' => array(
@@ -81,8 +80,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'depends_show_if'   	=> 'media',
-				'affects' => array('panel_layout', 'panel_title', 'panel_show_button', 'panel_button_text', 'panel_button_link'),
+				'show_if'   	=> array('carousel_style' => 'media'),
 				'description' => 'Choose whether to display this carousel inside of a panel',
 				'toggle_slug' => 'style',
 			),
@@ -91,7 +89,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a Heading Title.', 'et_builder' ),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
       'panel_layout' => array(
@@ -106,7 +104,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 					'understated'  => esc_html__( 'Understated', 'et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on') ,
 				'toggle_slug' => 'panel',
 			),
       'panel_show_button' => array(
@@ -117,8 +115,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('panel_button_text', 'panel_button_link',),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on') ,
 				'description'     => esc_html__( 'Here you can select to display a button.', 'et_builder' ),
 				'toggle_slug'			=> 'panel',
 			),
@@ -127,7 +124,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the Text for the button.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('panel_show_button' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
 			'panel_button_link' => array(
@@ -135,7 +132,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('panel_show_button' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
 			'section_background_color' => array(
@@ -389,7 +386,6 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('#et_pb_slide_url',),
 				'toggle_slug'	=> 'body',
 			),
 			'slide_url' => array(
@@ -397,7 +393,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 				'type'=> 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the URL for the link. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('slide_show_more_button' => 'on'),
 				'toggle_slug'	=> 'body',
 			),
 			'slide_desc' => array(
@@ -539,7 +535,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 					'image_fit' 			=> esc_html__( 'Image Fit', 'et_builder' ),
 					'media'  => esc_html__( 'Media', 'et_builder' ),
 				),
-				'affects' => array('in_panel', 'slide_amount'),
 				'toggle_slug' => 'style',
 			),
        'slide_amount' => array(
@@ -547,7 +542,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the amount of slides to display at one time.', 'et_builder' ),
-				'depends_show_if'   	=> 'media',
+				'show_if'   	=> array('carousel_style' => 'media'),
 				'toggle_slug'			=> 'style',
 			),
       'in_panel' => array(
@@ -558,8 +553,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'depends_show_if'   	=> 'media',
-				'affects' => array('panel_layout', 'panel_title', 'panel_show_button', 'panel_button_text', 'panel_button_link'),
+				'show_if'   	=> array('carousel_style' => 'media'),
 				'description' => 'Choose whether to display this carousel inside of a panel',
 				'toggle_slug' => 'style',
 			),
@@ -568,7 +562,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter a Heading Title.', 'et_builder' ),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
       'panel_layout' => array(
@@ -583,7 +577,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 					'understated'  => esc_html__( 'Understated', 'et_builder'),
 				),
 				'description'       => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on'),
 				'toggle_slug' => 'panel',
 			),
       'panel_show_button' => array(
@@ -594,8 +588,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('panel_button_text', 'panel_button_link',),
-				'depends_show_if'   	=> 'on',
+				'show_if'   	=> array('in_panel' => 'on'),
 				'description'     => esc_html__( 'Here you can select to display a button.', 'et_builder' ),
 				'toggle_slug'			=> 'panel',
 			),
@@ -604,7 +597,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the Text for the button.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('panel_show_button' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
 			'panel_button_link' => array(
@@ -612,7 +605,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the URL for the button. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('panel_show_button' => 'on'),
 				'toggle_slug'			=> 'panel',
 			),
 			'section_background_color' => array(
@@ -846,9 +839,6 @@ function get_fields() {
 				'off' => esc_html__( 'No', 'et_builder' ),
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
 			),
-			'affects' => array(
-				'#et_pb_slide_url',
-			),
 			'toggle_slug'	=> 'body',
 		),
 		'slide_url' => array(
@@ -856,7 +846,7 @@ function get_fields() {
 			'type'=> 'text',
 			'option_category' => 'basic_option',
 			'description' => esc_html__( 'Define the URL for the link. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
+			'show_if' => array('slide_show_more_button' => 'on'),
 			'toggle_slug'	=> 'body',
 		),
 		'slide_desc' => array(

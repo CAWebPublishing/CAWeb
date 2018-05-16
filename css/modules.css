@@ -170,75 +170,21 @@ ol{
 }
 
 /* Cards */
-/* Remove extra padding bottom of Card modules */
-.et_pb_ca_card  .card-block * {
-    padding-bottom: 0px;
+.et_pb_ca_card.et_pb_module .card-header {
+	padding: 11px 15px;
 }
-.card-title{
+.et_pb_ca_card.et_pb_module .card-title{
 	margin-bottom: 0px ;
 	padding-bottom: 0px;
-	 margin-top: 0;
-	/* Remove dotted line under card-title h4*/
+	/* Remove dotted line under card-title h4 ( this was in Version 4)*/
 	border-bottom: 0 !important;
 }
-.card {
-  position: relative;
-  display: block;
-  margin-bottom: 11px;
-  background-color: #fff;
-  border-radius: 0;
-}
-.card .btn-block {
-  margin-top: 5px;
-}
-.card .toggle-more {
-  display: inline-block;
-  color: #777777;
-  font-family: 'CaGov';
-  font-size: 22px;
-  margin-left: -11px;
-  /* Change icon to minus */
-}
-.card .toggle-more:before {
-  content: "\e050";
-}
-.card .toggle-more.active:before {
-  content: "\e04f";
-}
-.card-block {
-  padding: 15px;
+.et_pb_ca_card.et_pb_module .card-block {
+	padding: 15px; 
 	color: initial;
 }
-.card-subtitle {
-  margin-top: -5.5px;
-  margin-bottom: 0;
-}
-.card-text:last-child {
-  margin-bottom: 0;
-}
-.card-link:hover {
-  text-decoration: none;
-}
-.card-link + .card-link {
-  margin-left: 15px;
-}
-.card-header {
+.et_pb_ca_card.et_pb_module .card-footer {
   padding: 11px 15px;
-}
-.card-header:first-child {
-  border-radius: -1px -1px 0 0;
-}
-.card-footer {
-  padding: 11px 15px;
-}
-.card-footer:last-child {
-  border-radius: 0 0 -1px -1px;
-}
-.card-img-top {
-  border-radius: -1px -1px 0 0;
-}
-.card-img-bottom {
-  border-radius: 0 0 -1px -1px;
 }
 
 /* GitHub Module */

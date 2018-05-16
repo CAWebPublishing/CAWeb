@@ -244,9 +244,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects'     => array(
-					'#et_pb_font_icon',
-				),
 				'toggle_slug'				=> 'style',
 				'tab_slug'				=> 'advanced',
 			),
@@ -258,7 +255,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'renderer'            => 'select_icon',
 				'renderer_with_field' => true,
 				'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('group_icon_button' => 'on'),
 				'toggle_slug'				=> 'style',
 				'tab_slug'				=> 'advanced',
 			),
@@ -270,7 +267,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('#et_pb_group_url',),
 				'toggle_slug'				=> 'body',
 			),
 			'group_url' => array(
@@ -278,7 +274,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the url for the Read More Button. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('group_show_more_button' => 'on'),
 				'toggle_slug'				=> 'body',
 			),
 			'display_link_as_button' => array(
@@ -294,7 +290,11 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		);
 
     for($i = 1; $i <= 10; $i++){
-      $groups[sprintf('group_link%1$s_show', $i)] = array(
+			$show = sprintf('group_link%1$s_show', $i);
+			$text = sprintf('group_link_text%1$s', $i);
+			$url = sprintf('group_link_url%1$s', $i);
+			
+      $groups[$show] = array(
 				'label'           => esc_html__( sprintf('Link %1$s', $i), 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
@@ -302,26 +302,23 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array(
-					sprintf('group_link_text%1$s', $i),sprintf('group_link_url%1$s', $i),
-				),
-				'toggle_slug'				=> 'body',
+				'toggle_slug'	=> 'body',
 			);
 
-			 $groups[sprintf('group_link_text%1$s', $i)] = array(
+			 $groups[$text] = array(
 				'label' => esc_html__( sprintf('Link %1$s Text', $i), 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array($show => 'on'),
 				'toggle_slug'				=> 'body',
 			);
-       $groups[sprintf('group_link_url%1$s', $i)] = array(
+       $groups[$url] = array(
 				'label' => esc_html__( sprintf('Link %1$s URL', $i), 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array($show => 'on'),
 				'toggle_slug'				=> 'body',
 			  );
     }
@@ -626,9 +623,6 @@ function get_fields() {
 				'off' => esc_html__( 'No', 'et_builder' ),
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
 			),
-			'affects'     => array(
-				'#et_pb_font_icon',
-			),
 			'toggle_slug'			=> 'body',
 			'tab_slug'				=> 'advanced',
 		),
@@ -640,7 +634,7 @@ function get_fields() {
 				'renderer'            => 'select_icon',
 			'renderer_with_field' => true,
 			'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
-			'depends_show_if' => 'on',
+			'show_if' => array('group_icon_button' => 'on'),
 			'toggle_slug'		=> 'body',
 			'tab_slug'				=> 'advanced',
 		),
@@ -652,7 +646,6 @@ function get_fields() {
 				'off' => esc_html__( 'No', 'et_builder' ),
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
 			),
-			'affects' => array('#et_pb_group_url',),
 			'toggle_slug' => 'body',
 		),
 		'group_url' => array(
@@ -660,7 +653,7 @@ function get_fields() {
 			'type' => 'text',
 			'option_category' => 'basic_option',
 			'description' => esc_html__( 'Define the url for the Read More Button. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
+			'show_if' => array('group_show_more_button' => 'on'),
 			'toggle_slug' => 'body',
 		),
 		'display_link_as_button' => array(
@@ -675,7 +668,11 @@ function get_fields() {
 		),);
 
   for($i = 1; $i <= 10; $i++){
-      $groups[sprintf('group_link%1$s_show', $i)] = array(
+		$show = sprintf('group_link%1$s_show', $i);
+		$text = sprintf('group_link_text%1$s', $i);
+		$url = sprintf('group_link_url%1$s', $i);
+		
+      $groups[$show] = array(
 				'label'           => esc_html__( sprintf('Link %1$s', $i), 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
@@ -683,26 +680,23 @@ function get_fields() {
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array(
-					sprintf('group_link_text%1$s', $i),sprintf('group_link_url%1$s', $i),
-				),
 				'toggle_slug'				=> 'body',
 			);
 
-			 $groups[sprintf('group_link_text%1$s', $i)] = array(
+			 $groups[$text] = array(
 				'label' => esc_html__( sprintf('Link %1$s Text', $i), 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array($show => 'on'),
 				'toggle_slug'				=> 'body',
 			);
-       $groups[sprintf('group_link_url%1$s', $i)] = array(
+       $groups[$url] = array(
 				'label' => esc_html__( sprintf('Link %1$s URL', $i), 'et_builder' ),
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array($show => 'on'),
 				'toggle_slug'				=> 'body',
 			  );
     }

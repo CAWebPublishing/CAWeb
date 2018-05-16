@@ -81,7 +81,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 					'center'  => esc_html__( 'Center', 'et_builder' ),
 					'right'  => esc_html__( 'Right', 'et_builder' ),
 				),
-				'depends_show_if' => 'off',
+				'show_if' => array('featured_image_button' => 'off'),
 				'toggle_slug'			=> 'header',
 				'tab_slug'				=> 'advanced',
 			),
@@ -92,11 +92,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 				'options'         => array(
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'affects'     => array(
-					'left_right_button','section_image','slide_image_button',
-					'heading_align',
-				),
+					),
 				'toggle_slug'			=> 'body',
 			),
 			'left_right_button' => array(
@@ -107,7 +103,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'Left', 'et_builder' ),
 					'on'  => esc_html__( 'Right', 'et_builder' ),
 				),
-				'depends_show_if' => 'on',
+				'show_if' => array('featured_image_button' => 'on'),
 				'toggle_slug'			=> 'body',
 			),
 			'section_image' => array(
@@ -119,7 +115,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 				'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
 				'description' => esc_html__( 'If defined, this image will be used as the background for this module. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
 				'toggle_slug'			=> 'body',
-				'depends_show_if' => 'on',
+				'show_if' => array('featured_image_button' => 'on'),
 			),
 			'slide_image_button' => array(
 				'label'           => esc_html__( 'Fade Image from Left', 'et_builder' ),
@@ -130,7 +126,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'toggle_slug'			=> 'body',
-				'depends_show_if' => 'on',
+				'show_if' => array('featured_image_button' => 'on'),
 			),
 			'show_more_button' => array(
 				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
@@ -140,9 +136,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects'     => array(
-					'section_link',
-				),
 				'toggle_slug'			=> 'body',
 			),
 			'section_link' => array(
@@ -150,7 +143,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'URL destination for the button. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('show_more_button' => 'on'),
 				'toggle_slug'			=> 'body',
 			),
 			'content' => array(
@@ -411,7 +404,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 					'center'  => esc_html__( 'Center', 'et_builder' ),
 					'right'  => esc_html__( 'Right', 'et_builder' ),
 				),
-				'depends_show_if' => 'off',
+				'show_if' => array('featured_image_button' => 'off'), 
 				'toggle_slug'			=> 'header',
 				'tab_slug'				=> 'advanced',
 			),
@@ -422,10 +415,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 				'options'         => array(
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'affects'     => array(
-					'#et_pb_left_right_button','#et_pb_section_image','#et_pb_slide_image_button',
-					'#et_pb_heading_align',
 				),
 				'toggle_slug'	=> 'body',
 				),
@@ -438,6 +427,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 					'on'  => esc_html__( 'Right', 'et_builder' ),
 				),
 				'toggle_slug' 		=> 'body',
+				'show_if' => array('featured_image_button' => 'on'),
 			),
 			'section_image' => array(
 				'label' => esc_html__( 'Image', 'et_builder' ),
@@ -448,6 +438,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 				'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
 				'description' => esc_html__( 'If defined, this image will be used as the background for this module. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
 				'toggle_slug' 		=> 'body',
+				'show_if' => array('featured_image_button' => 'on'),
 			),
 			'slide_image_button' => array(
 				'label'           => esc_html__( 'Fade Image from Left', 'et_builder' ),
@@ -458,6 +449,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
 				'toggle_slug' 		=> 'body',
+				'show_if' => array('featured_image_button' => 'on'),
 			),
 			'show_more_button' => array(
 				'label'           => esc_html__( 'More Information Button', 'et_builder' ),
@@ -467,9 +459,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects'     => array(
-					'#et_pb_section_link',
-				),
 				'toggle_slug' 		=> 'body',
 			),
 			'section_link' => array(
@@ -477,7 +466,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'URL destination for the button. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('show_more_button' => 'on'),
 				'toggle_slug' 		=> 'body',
 			),
 			'content' => array(

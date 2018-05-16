@@ -69,21 +69,20 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				),
 				'description' => 'Choose repository type you wish to display.',
 				'toggle_slug' => 'style',
-				'affects' => array('access_token', 'request_email', 'subject_line','email_body')
 			),
       'access_token' => array(
 			  'label'       => esc_html__( 'Personal Access Token', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This is required for Private Repositories to display.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
-				'depends_show_if_not'	=> 'public',
+				'show_if_not'	=> array('repo_type' => 'public'),
 			),
       'request_email' => array(
 			  'label'       => esc_html__( 'Code Request Email', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This is the administrators email that will receive all emails requesting access to private repositories.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
-				'depends_show_if_not'	=> 'public',
+				'show_if_not'	=> array('repo_type' => 'public'),
 			),
 			'title' => array(
 			  'label'       => esc_html__( 'Title', 'et_builder' ),
@@ -105,7 +104,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'affects' => array('client_id, client_secret',),
 				'description' => et_get_safe_localization(
 						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour.
 										<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ),
@@ -117,14 +115,14 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
 				'toggle_slug'	=> 'body',
-				'depends_show_if'	=> 'on',
+				'show_if'	=> array('increase_rate_limit' => 'on'),
 			),
 			'client_secret' => array(
 			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
 				'toggle_slug'	=> 'body',
-				'depends_show_if'	=> 'on',
+				'show_if'	=> array('increase_rate_limit' => 'on'),
 			),
 			'definitions' => array(
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
@@ -151,7 +149,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
         esc_html__( ' ', 'et_builder' ),
 				'toggle_slug'	=> 'email',
 				'tab_slug'        => 'advanced',
-				'depends_show_if_not'	=> 'public',
+				'show_if_not'	=> array('repo_type' => 'public'),
 			),
 			'disabled_on' => array(
 			  'label'           => esc_html__( 'Disable on', 'et_builder' ),

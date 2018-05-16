@@ -70,22 +70,18 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array(
-					'#et_pb_view_more_url',
-					'#et_pb_view_more_text',
-				),
 				'toggle_slug'			=> 'body',
 			),
 			'view_more_url' => array(
 				'label'             => esc_html__( 'Link Url', 'et_builder'),
 				'type'              => 'text',
-				'depends_show_if'   => 'on',
+				'show_if'   => array('view_more_on_off' => 'on'),
 				'toggle_slug'				=> 'body',
 			),
 			'view_more_text' => array(
 				'label'             => esc_html__( 'Link Text', 'et_builder'),
 				'type'              => 'text',
-				'depends_show_if'   => 'on',
+				'show_if'   => array('view_more_on_off' => 'on'),
 			),
 			'max_width' => array(
 				'label'           => esc_html__( 'Max Width', 'et_builder' ),
@@ -278,7 +274,6 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
-				'affects' => array('#et_pb_content_new', '#et_pb_tile_url'),
 				'toggle_slug'	=> 'body',
 			),
 			'tile_url' => array(
@@ -286,14 +281,14 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 				'type'=> 'text',
 				'option_category' => 'basic_option',
 				'description' => esc_html__( 'Define the url for the tile. (http:// must be included)', 'et_builder' ),
-				'depends_show_if' => 'on',
+				'show_if' => array('tile_link' => 'on'),
 				'toggle_slug'	=> 'body',
 			),
 			'content' => array(
 				'label' => esc_html__( 'Tile Content', 'et_builder' ),
 				'type'=> 'tiny_mce',
 				'description' => esc_html__( 'Define the text for the tile content', 'et_builder' ),
-				'depends_show_if' => 'off',
+				'show_if' =>  array('tile_link' => 'off'),
 				'toggle_slug'	=> 'body',
 			),
 			'module_id' => array(
