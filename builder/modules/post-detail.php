@@ -17,7 +17,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 			'post_type_layout',
 			'show_tags_button',
 			'show_categories_button',
-			'content_new',
+			'content',
 			'max_width',
 			'max_width_tablet',
 			'max_width_phone',
@@ -1163,7 +1163,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 		);
 
         $ending_fields = array(
-			'content_new' => array(
+			'content' => array(
 				'label'           => esc_html__('Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
@@ -1255,234 +1255,130 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         return array_merge($fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $course_fields, $ending_fields);
     }
 
-    function shortcode_callback($atts, $content = null, $function_name) {
+    function render( $unprocessed_props, $content = null, $render_slug ) {
         global $post;
 
-        $post_type_layout    = $this->shortcode_atts['post_type_layout'];
+        $post_type_layout    = $this->props['post_type_layout'];
 
         // Course Attributes
-        $show_course_presenter = $this->shortcode_atts['show_course_presenter'];
-
-        $course_presenter_name = $this->shortcode_atts['course_presenter_name'];
-
-        $course_presenter_image = $this->shortcode_atts['course_presenter_image'];
-
-        $course_presenter_bio = $this->shortcode_atts['course_presenter_bio'];
-
-        $course_start_date = $this->shortcode_atts['course_start_date'];
-
-        $course_start_date_format = $this->shortcode_atts['course_start_date_format'];
-
-        $course_start_date_custom_format = $this->shortcode_atts['course_start_date_custom_format'];
-
-        $course_end_date = $this->shortcode_atts['course_end_date'];
-
-        $course_end_date_format = $this->shortcode_atts['course_end_date_format'];
-
-        $course_end_date_custom_format = $this->shortcode_atts['course_end_date_custom_format'];
-
-        $show_course_address = $this->shortcode_atts['show_course_address'];
-
-        $course_address = $this->shortcode_atts['course_address'];
-
-        $course_city = $this->shortcode_atts['course_city'];
-
-        $course_state = $this->shortcode_atts['course_state'];
-
-        $course_zip = $this->shortcode_atts['course_zip'];
-
-        $course_registration_type = $this->shortcode_atts['course_registration_type'];
-
-        $course_cost = $this->shortcode_atts['course_cost'];
-
-        $show_course_map = $this->shortcode_atts['show_course_map'];
+        $show_course_presenter = $this->props['show_course_presenter'];
+        $course_presenter_name = $this->props['course_presenter_name'];
+        $course_presenter_image = $this->props['course_presenter_image'];
+        $course_presenter_bio = $this->props['course_presenter_bio'];
+        $course_start_date = $this->props['course_start_date'];
+        $course_start_date_format = $this->props['course_start_date_format'];
+        $course_start_date_custom_format = $this->props['course_start_date_custom_format'];
+        $course_end_date = $this->props['course_end_date'];
+        $course_end_date_format = $this->props['course_end_date_format'];
+        $course_end_date_custom_format = $this->props['course_end_date_custom_format'];
+        $show_course_address = $this->props['show_course_address'];
+        $course_address = $this->props['course_address'];
+        $course_city = $this->props['course_city'];
+        $course_state = $this->props['course_state'];
+        $course_zip = $this->props['course_zip'];
+        $course_registration_type = $this->props['course_registration_type'];
+        $course_cost = $this->props['course_cost'];
+        $show_course_map = $this->props['show_course_map'];
 
         // Event Attributes
-        $event_organizer = $this->shortcode_atts['event_organizer'];
-
-        $show_event_presenter = $this->shortcode_atts['show_event_presenter'];
-
-        $event_presenter_name = $this->shortcode_atts['event_presenter_name'];
-
-        $event_presenter_image = $this->shortcode_atts['event_presenter_image'];
-
-        $event_presenter_bio = $this->shortcode_atts['event_presenter_bio'];
-
-        $event_start_date = $this->shortcode_atts['event_start_date'];
-
-        $event_start_date_format = $this->shortcode_atts['event_start_date_format'];
-
-        $event_start_date_custom_format = $this->shortcode_atts['event_start_date_custom_format'];
-
-        $event_end_date = $this->shortcode_atts['event_end_date'];
-
-        $event_end_date_format = $this->shortcode_atts['event_end_date_format'];
-
-        $event_end_date_custom_format = $this->shortcode_atts['event_end_date_custom_format'];
-
-        $show_event_address = $this->shortcode_atts['show_event_address'];
-
-        $event_address = $this->shortcode_atts['event_address'];
-
-        $event_city = $this->shortcode_atts['event_city'];
-
-        $event_state = $this->shortcode_atts['event_state'];
-
-        $event_zip = $this->shortcode_atts['event_zip'];
-
-        $event_registration_type = $this->shortcode_atts['event_registration_type'];
-
-        $event_cost = $this->shortcode_atts['event_cost'];
+        $event_organizer = $this->props['event_organizer'];
+        $show_event_presenter = $this->props['show_event_presenter'];
+        $event_presenter_name = $this->props['event_presenter_name'];
+        $event_presenter_image = $this->props['event_presenter_image'];
+        $event_presenter_bio = $this->props['event_presenter_bio'];
+        $event_start_date = $this->props['event_start_date'];
+        $event_start_date_format = $this->props['event_start_date_format'];
+        $event_start_date_custom_format = $this->props['event_start_date_custom_format'];
+        $event_end_date = $this->props['event_end_date'];
+        $event_end_date_format = $this->props['event_end_date_format'];
+        $event_end_date_custom_format = $this->props['event_end_date_custom_format'];
+        $show_event_address = $this->props['show_event_address'];
+        $event_address = $this->props['event_address'];
+        $event_city = $this->props['event_city'];
+        $event_state = $this->props['event_state'];
+        $event_zip = $this->props['event_zip'];
+        $event_registration_type = $this->props['event_registration_type'];
+        $event_cost = $this->props['event_cost'];
 
         // Exam Attributes
-        $exam_id = $this->shortcode_atts['exam_id'];
-
-        $exam_class = $this->shortcode_atts['exam_class'];
-
-        $exam_status = $this->shortcode_atts['exam_status'];
-
-        $exam_published_date = $this->shortcode_atts['exam_published_date'];
-
-        $exam_published_date_format = $this->shortcode_atts['exam_published_date_format'];
-
-        $exam_published_date_custom_format = $this->shortcode_atts['exam_published_date_custom_format'];
-
-        $exam_final_filing_date_chooser = $this->shortcode_atts['exam_final_filing_date_chooser'];
-
-        $exam_final_filing_date = $this->shortcode_atts['exam_final_filing_date'];
-
-        $exam_final_filing_date_picker = $this->shortcode_atts['exam_final_filing_date_picker'];
-
-        $exam_final_filing_date_format = $this->shortcode_atts['exam_final_filing_date_format'];
-
-        $exam_final_filing_date_custom_format = $this->shortcode_atts['exam_final_filing_date_custom_format'];
-
-        $exam_type = $this->shortcode_atts['exam_type'];
-
-        $exam_url = $this->shortcode_atts['exam_url'];
-
-        $exam_address = $this->shortcode_atts['exam_address'];
-
-        $exam_city = $this->shortcode_atts['exam_city'];
-
-        $exam_state = $this->shortcode_atts['exam_state'];
-
-        $exam_zip = $this->shortcode_atts['exam_zip'];
+        $exam_id = $this->props['exam_id'];
+        $exam_class = $this->props['exam_class'];
+        $exam_status = $this->props['exam_status'];
+        $exam_published_date = $this->props['exam_published_date'];
+        $exam_published_date_format = $this->props['exam_published_date_format'];
+        $exam_published_date_custom_format = $this->props['exam_published_date_custom_format'];
+        $exam_final_filing_date_chooser = $this->props['exam_final_filing_date_chooser'];
+        $exam_final_filing_date = $this->props['exam_final_filing_date'];
+        $exam_final_filing_date_picker = $this->props['exam_final_filing_date_picker'];
+        $exam_final_filing_date_format = $this->props['exam_final_filing_date_format'];
+        $exam_final_filing_date_custom_format = $this->props['exam_final_filing_date_custom_format'];
+        $exam_type = $this->props['exam_type'];
+        $exam_url = $this->props['exam_url'];
+        $exam_address = $this->props['exam_address'];
+        $exam_city = $this->props['exam_city'];
+        $exam_state = $this->props['exam_state'];
+        $exam_zip = $this->props['exam_zip'];
 
         // Job Attributes
-
-        $show_about_agency    = $this->shortcode_atts['show_about_agency'];
-
-        $job_agency_name    = $this->shortcode_atts['job_agency_name'];
-
-        $job_agency_address    = $this->shortcode_atts['job_agency_address'];
-
-        $job_agency_city    = $this->shortcode_atts['job_agency_city'];
-
-        $job_agency_state    = $this->shortcode_atts['job_agency_state'];
-
-        $job_agency_zip    = $this->shortcode_atts['job_agency_zip'];
-
-        $job_agency_about    = $this->shortcode_atts['job_agency_about'];
-
-        $job_posted_date    = $this->shortcode_atts['job_posted_date'];
-
-        $job_posted_date_format = $this->shortcode_atts['job_posted_date_format'];
-
-        $job_posted_date_custom_format = $this->shortcode_atts['job_posted_date_custom_format'];
-
-        $job_hours    = $this->shortcode_atts['job_hours'];
-
-        $show_job_salary    = $this->shortcode_atts['show_job_salary'];
-
-        $job_salary_min    = $this->shortcode_atts['job_salary_min'];
-
-        $job_salary_max    = $this->shortcode_atts['job_salary_max'];
-
-        $job_position_number    = $this->shortcode_atts['job_position_number'];
-
-        $job_rpa_number    = $this->shortcode_atts['job_rpa_number'];
-
-        $job_ds_url    = $this->shortcode_atts['job_ds_url'];
-
-        $job_final_filing_date_chooser = $this->shortcode_atts['job_final_filing_date_chooser'];
-
-        $job_final_filing_date    = $this->shortcode_atts['job_final_filing_date'];
-
-        $job_final_filing_date_picker = $this->shortcode_atts['job_final_filing_date_picker'];
-
-        $job_final_filing_date_format = $this->shortcode_atts['job_final_filing_date_format'];
-
-        $job_final_filing_date_custom_format = $this->shortcode_atts['job_final_filing_date_custom_format'];
-
-        $show_job_apply_to = $this->shortcode_atts['show_job_apply_to'];
-
-        $job_apply_to_dept = $this->shortcode_atts['job_apply_to_dept'];
-
-        $job_apply_to_name = $this->shortcode_atts['job_apply_to_name'];
-
-        $job_apply_to_address = $this->shortcode_atts['job_apply_to_address'];
-
-        $job_apply_to_city = $this->shortcode_atts['job_apply_to_city'];
-
-        $job_apply_to_state = $this->shortcode_atts['job_apply_to_state'];
-
-        $job_apply_to_zip = $this->shortcode_atts['job_apply_to_zip'];
-
-        $show_job_questions = $this->shortcode_atts['show_job_questions'];
-
-        $job_questions_name = $this->shortcode_atts['job_questions_name'];
-
-        $job_questions_phone = $this->shortcode_atts['job_questions_phone'];
-
-        $job_questions_email = $this->shortcode_atts['job_questions_email'];
+        $show_about_agency    = $this->props['show_about_agency'];
+        $job_agency_name    = $this->props['job_agency_name'];
+        $job_agency_address    = $this->props['job_agency_address'];
+        $job_agency_city    = $this->props['job_agency_city'];
+        $job_agency_state    = $this->props['job_agency_state'];
+        $job_agency_zip    = $this->props['job_agency_zip'];
+        $job_agency_about    = $this->props['job_agency_about'];
+        $job_posted_date    = $this->props['job_posted_date'];
+        $job_posted_date_format = $this->props['job_posted_date_format'];
+        $job_posted_date_custom_format = $this->props['job_posted_date_custom_format'];
+        $job_hours    = $this->props['job_hours'];
+        $show_job_salary    = $this->props['show_job_salary'];
+        $job_salary_min    = $this->props['job_salary_min'];
+        $job_salary_max    = $this->props['job_salary_max'];
+        $job_position_number    = $this->props['job_position_number'];
+        $job_rpa_number    = $this->props['job_rpa_number'];
+        $job_ds_url    = $this->props['job_ds_url'];
+        $job_final_filing_date_chooser = $this->props['job_final_filing_date_chooser'];
+        $job_final_filing_date    = $this->props['job_final_filing_date'];
+        $job_final_filing_date_picker = $this->props['job_final_filing_date_picker'];
+        $job_final_filing_date_format = $this->props['job_final_filing_date_format'];
+        $job_final_filing_date_custom_format = $this->props['job_final_filing_date_custom_format'];
+        $show_job_apply_to = $this->props['show_job_apply_to'];
+        $job_apply_to_dept = $this->props['job_apply_to_dept'];
+        $job_apply_to_name = $this->props['job_apply_to_name'];
+        $job_apply_to_address = $this->props['job_apply_to_address'];
+        $job_apply_to_city = $this->props['job_apply_to_city'];
+        $job_apply_to_state = $this->props['job_apply_to_state'];
+        $job_apply_to_zip = $this->props['job_apply_to_zip'];
+        $show_job_questions = $this->props['show_job_questions'];
+        $job_questions_name = $this->props['job_questions_name'];
+        $job_questions_phone = $this->props['job_questions_phone'];
+        $job_questions_email = $this->props['job_questions_email'];
 
         // News Attributes
-        $news_author               = $this->shortcode_atts['news_author'];
-
-        $news_publish_date               = $this->shortcode_atts['news_publish_date'];
-
-        $news_publish_date_format               = $this->shortcode_atts['news_publish_date_format'];
-
-        $news_publish_date_custom_format               = $this->shortcode_atts['news_publish_date_custom_format'];
-
-        $news_city    = $this->shortcode_atts['news_city'];
+        $news_author               = $this->props['news_author'];
+        $news_publish_date               = $this->props['news_publish_date'];
+        $news_publish_date_format               = $this->props['news_publish_date_format'];
+        $news_publish_date_custom_format               = $this->props['news_publish_date_custom_format'];
+        $news_city    = $this->props['news_city'];
 
         // Profile Attributes
-
-        $profile_name_prefix               = $this->shortcode_atts['profile_name_prefix'];
-
-        $profile_name               = $this->shortcode_atts['profile_name'];
-
-        $profile_career_title    = $this->shortcode_atts['profile_career_title'];
-
-        $profile_image_align    = $this->shortcode_atts['profile_image_align'];
+        $profile_name_prefix               = $this->props['profile_name_prefix'];
+        $profile_name               = $this->props['profile_name'];
+        $profile_career_title    = $this->props['profile_career_title'];
+        $profile_image_align    = $this->props['profile_image_align'];
 
         // General Attributes
-        $max_width            = $this->shortcode_atts['max_width'];
-        $max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-        $max_width_phone      = $this->shortcode_atts['max_width_phone'];
-        $max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-        $show_tags_button    = $this->shortcode_atts['show_tags_button'];
-        $show_categories_button    = $this->shortcode_atts['show_categories_button'];
-        $module_id            = $this->shortcode_atts['module_id'];
-        $module_class         = $this->shortcode_atts['module_class'];
+        $max_width            = $this->props['max_width'];
+        $max_width_tablet     = $this->props['max_width_tablet'];
+        $max_width_phone      = $this->props['max_width_phone'];
+        $max_width_last_edited = $this->props['max_width_last_edited'];
+        $show_tags_button    = $this->props['show_tags_button'];
+        $show_categories_button    = $this->props['show_categories_button'];
+        $module_id            = $this->props['module_id'];
+        $module_class         = $this->props['module_class'];
 
-        $module_class = ET_Builder_Element::add_module_order_class($module_class, $function_name);
         $class = "et_pb_ca_post_handler et_pb_module";
         $this->shortcode_content = et_builder_replace_code_content_entities($this->shortcode_content);
-
-        if ('' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width) {
-            $max_width_responsive_active = et_pb_get_responsive_status($max_width_last_edited);
-
-            $max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-            et_pb_generate_responsive_css($max_width_values, '%%order_class%%', 'max-width', $function_name);
-        }
 
         setlocale(LC_MONETARY, get_locale());
 

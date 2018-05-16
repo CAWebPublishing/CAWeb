@@ -11,7 +11,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $this->name = esc_html__('Profile Banner', 'et_builder');
 
         $this->slug = 'et_pb_profile_banner';
-        $this->fb_support = true;
 
         $this->whitelisted_fields = array(
 			'name',
@@ -62,9 +61,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		    ),
 		  ),
 		);
-
-        // Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array($this, 'js_frontend_preview') );
     }
     function get_fields() {
         $fields = array(
@@ -182,34 +178,21 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
         return $fields;
     }
-    function shortcode_callback($atts, $content = null, $function_name) {
-        $module_id            = $this->shortcode_atts['module_id'];
-        $module_class         = $this->shortcode_atts['module_class'];
-        $name                 = $this->shortcode_atts['name'];
-        $job_title              = $this->shortcode_atts['job_title'];
-        $profile_link              = $this->shortcode_atts['profile_link'];
-        $portrait_url           = $this->shortcode_atts['portrait_url'];
-        $round                = $this->shortcode_atts['round_image'];
-        $url                    = $this->shortcode_atts['url'];
-        $max_width            = $this->shortcode_atts['max_width'];
-        $max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-        $max_width_phone      = $this->shortcode_atts['max_width_phone'];
-        $max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
+    function render( $unprocessed_props, $content = null, $render_slug ) {
+        $module_id            = $this->props['module_id'];
+        $module_class         = $this->props['module_class'];
+        $name                 = $this->props['name'];
+        $job_title              = $this->props['job_title'];
+        $profile_link              = $this->props['profile_link'];
+        $portrait_url           = $this->props['portrait_url'];
+        $round                = $this->props['round_image'];
+        $url                    = $this->props['url'];
+        $max_width            = $this->props['max_width'];
+        $max_width_tablet     = $this->props['max_width_tablet'];
+        $max_width_phone      = $this->props['max_width_phone'];
+        $max_width_last_edited = $this->props['max_width_last_edited'];
 
         $class = "et_pb_profile_banner et_pb_module";
-        $module_class = ET_Builder_Element::add_module_order_class($module_class, $function_name);
-
-        if ('' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width) {
-            $max_width_responsive_active = et_pb_get_responsive_status($max_width_last_edited);
-
-            $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-            et_pb_generate_responsive_css($max_width_values, '%%order_class%%', 'max-width', $function_name);
-        }
 
         $image = ('on' !== $round ?
 						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :
@@ -229,29 +212,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
     	    ('' !== $module_class ? sprintf(' %1$s', esc_attr($module_class)) : ''));
 
         return $output;
-    }
-
-    // This is a non-standard function. It outputs JS code to render the
-    // module preview in the new Divi 3 frontend editor.
-    // Return value of the JS function must be full HTML code to display.
-    function js_frontend_preview() {
-        ?>
-			<script>
-			window.<?php print $this->slug; ?>_preview = function(args) {
-				var output = '';
-
-				var image = ('on' !== args.round_image ?
-						'<img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/>'  :
-						'<div class="profile-banner-img-wrapper"><img src="' + args.portrait_url + '" style="width: 90px; min-height: 90px;float: right;"/></div>' );
-
-				output = '<div id="profile-banner-wrapper"><a href="' + args.url + '"><div class="profile-banner' + ('on' !== args.round_image ? '' : ' round-image') + '">' + image +
-								'<div class="banner-subtitle">' + args.job_title+ '</div><div class="banner-title">' + args.name + '</div><div class="banner-link"><p>' + args.profile_link + '</p></div></div></a></div>';
-
-				return output;
-
-			}
-			</script>
-			<?php
     }
 }
 new ET_Builder_Module_Profile_Banner;

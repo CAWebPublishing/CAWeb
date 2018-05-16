@@ -230,41 +230,29 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 	function pre_shortcode_content() {
 		global $et_pb_ca_section_carousel_style;
 
-		$et_pb_ca_section_carousel_style = $this->shortcode_atts['carousel_style'];
+		$et_pb_ca_section_carousel_style = $this->props['carousel_style'];
 	}
 
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$carousel_style           	= $this->shortcode_atts['carousel_style'];
-		$slide_amount           	= $this->shortcode_atts['slide_amount'];
-		$in_panel           	= $this->shortcode_atts['in_panel'];
-		$panel_layout           	= $this->shortcode_atts['panel_layout'];
-		$panel_title           	= $this->shortcode_atts['panel_title'];
-		$panel_show_button           	= $this->shortcode_atts['panel_show_button'];
-		$panel_button_text           	= $this->shortcode_atts['panel_button_text'];
-		$panel_button_link           	= $this->shortcode_atts['panel_button_link'];
-		$module_id            			= $this->shortcode_atts['module_id'];
-		$module_class         			= $this->shortcode_atts['module_class'];
-		$max_width            			= $this->shortcode_atts['max_width'];
-		$max_width_tablet     			= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      			= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited 			= $this->shortcode_atts['max_width_last_edited'];
-		$section_background_color 	= $this->shortcode_atts['section_background_color'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$carousel_style           	= $this->props['carousel_style'];
+		$slide_amount           	= $this->props['slide_amount'];
+		$in_panel           	= $this->props['in_panel'];
+		$panel_layout           	= $this->props['panel_layout'];
+		$panel_title           	= $this->props['panel_title'];
+		$panel_show_button           	= $this->props['panel_show_button'];
+		$panel_button_text           	= $this->props['panel_button_text'];
+		$panel_button_link           	= $this->props['panel_button_link'];
+		$module_id            			= $this->props['module_id'];
+		$module_class         			= $this->props['module_class'];
+		$max_width            			= $this->props['max_width'];
+		$max_width_tablet     			= $this->props['max_width_tablet'];
+		$max_width_phone      			= $this->props['max_width_phone'];
+		$max_width_last_edited 			= $this->props['max_width_last_edited'];
+		$section_background_color 	= $this->props['section_background_color'];
 
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 		$class = "et_pb_ca_section_carousel et_pb_module  " . $carousel_style;
 
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 		$section_background_color = ("" != $section_background_color ?
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
 
@@ -461,21 +449,20 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            = $this->shortcode_atts['module_id'];
-		$module_class         = $this->shortcode_atts['module_class'];
-		$slide_image = $this->shortcode_atts['slide_image'];
-		$slide_title = $this->shortcode_atts['slide_title'];
-		$slide_desc = $this->shortcode_atts['slide_desc'];
-		$slide_url = $this->shortcode_atts['slide_url'];
-		$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$slide_image = $this->props['slide_image'];
+		$slide_title = $this->props['slide_title'];
+		$slide_desc = $this->props['slide_desc'];
+		$slide_url = $this->props['slide_url'];
+		$slide_show_more_button = $this->props['slide_show_more_button'];
 
 		global $et_pb_slider_item_num;
 		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_slider_item_num++;
 
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$class = $et_pb_ca_section_carousel_style . ' et_pb_module';
 
 		if("media" == $et_pb_ca_section_carousel_style){
@@ -736,42 +723,29 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 	function pre_shortcode_content() {
 		global $et_pb_ca_fullwidth_section_carousel_style;
 
-		$et_pb_ca_fullwidth_section_carousel_style = $this->shortcode_atts['carousel_style'];
+		$et_pb_ca_fullwidth_section_carousel_style = $this->props['carousel_style'];
 
 	}
 
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$carousel_style       = $this->shortcode_atts['carousel_style'];
-		$slide_amount           	= $this->shortcode_atts['slide_amount'];
-		$in_panel           	= $this->shortcode_atts['in_panel'];
-		$panel_layout           	= $this->shortcode_atts['panel_layout'];
-		$panel_title           	= $this->shortcode_atts['panel_title'];
-		$panel_show_button           	= $this->shortcode_atts['panel_show_button'];
-		$panel_button_text           	= $this->shortcode_atts['panel_button_text'];
-		$panel_button_link           	= $this->shortcode_atts['panel_button_link'];
-		$module_id            = $this->shortcode_atts['module_id'];
-		$module_class         = $this->shortcode_atts['module_class'];
-		$max_width            = $this->shortcode_atts['max_width'];
-		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-		$section_background_color = $this->shortcode_atts['section_background_color'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$carousel_style       = $this->props['carousel_style'];
+		$slide_amount           	= $this->props['slide_amount'];
+		$in_panel           	= $this->props['in_panel'];
+		$panel_layout           	= $this->props['panel_layout'];
+		$panel_title           	= $this->props['panel_title'];
+		$panel_show_button           	= $this->props['panel_show_button'];
+		$panel_button_text           	= $this->props['panel_button_text'];
+		$panel_button_link           	= $this->props['panel_button_link'];
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$max_width            = $this->props['max_width'];
+		$max_width_tablet     = $this->props['max_width_tablet'];
+		$max_width_phone      = $this->props['max_width_phone'];
+		$max_width_last_edited = $this->props['max_width_last_edited'];
+		$section_background_color = $this->props['section_background_color'];
 
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 		$class = "et_pb_ca_fullwidth_section_carousel et_pb_module " . $carousel_style;
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-			$max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$section_background_color = ("" != $section_background_color ?
 		sprintf(' style="background: %1$s;" ', $section_background_color) : '');
@@ -948,27 +922,20 @@ function get_fields() {
 	);
 	return $fields;
 }
-function shortcode_callback($atts, $content = null, $function_name) {
-	$module_id            = $this->shortcode_atts['module_id'];
-
-	$module_class         = $this->shortcode_atts['module_class'];
-
-	$slide_image = $this->shortcode_atts['slide_image'];
-
-	$slide_title = $this->shortcode_atts['slide_title'];
-
-	$slide_desc = $this->shortcode_atts['slide_desc'];
-
-	$slide_url = $this->shortcode_atts['slide_url'];
-
-	$slide_show_more_button = $this->shortcode_atts['slide_show_more_button'];
+function render( $unprocessed_props, $content = null, $render_slug ) {
+	$module_id            = $this->props['module_id'];
+	$module_class         = $this->props['module_class'];
+	$slide_image = $this->props['slide_image'];
+	$slide_title = $this->props['slide_title'];
+	$slide_desc = $this->props['slide_desc'];
+	$slide_url = $this->props['slide_url'];
+	$slide_show_more_button = $this->props['slide_show_more_button'];
 
 	global $et_pb_slider_item_num;
 	global $et_pb_ca_fullwidth_section_carousel_style;
 
 	$et_pb_slider_item_num++;
 
-	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 	$class = $et_pb_ca_fullwidth_section_carousel_style . " et_pb_module";
 
   if("media" == $et_pb_ca_fullwidth_section_carousel_style){
