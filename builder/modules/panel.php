@@ -30,7 +30,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 			'button_link',
 			'title',
 			'heading_text_color',
-			'content_new',
+			'content',
 		);
 
 		$this->fields_defaults = array(
@@ -66,10 +66,6 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		    ),
 		  ),
 		);
-
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
-
 	}
 	function get_fields() {
 		$fields = array(
@@ -163,7 +159,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 				'depends_show_if' => "on",
 				'toggle_slug'			=> 'header',
 			),
-			'content_new' => array(
+			'content' => array(
 				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
@@ -235,39 +231,26 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id             	= $this->shortcode_atts['module_id'];
-		$module_class          	= $this->shortcode_atts['module_class'];
-		$max_width             	= $this->shortcode_atts['max_width'];
-		$max_width_tablet      	= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone       	= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited 	= $this->shortcode_atts['max_width_last_edited'];
-		$panel_layout        		= $this->shortcode_atts['panel_layout'];
-		$use_icon               = $this->shortcode_atts['use_icon'];
-		$icon               		= $this->shortcode_atts['font_icon'];
-		$title    							= $this->shortcode_atts['title'];
-		$heading_align    			= $this->shortcode_atts['heading_align'];
-		$heading_text_color    	= $this->shortcode_atts['heading_text_color'];
-		$show_button    				= $this->shortcode_atts['show_button'];
-		$button_link    				= $this->shortcode_atts['button_link'];
-		$content_new    				= $this->shortcode_atts['content_new'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id             	= $this->props['module_id'];
+		$module_class          	= $this->props['module_class'];
+		$max_width             	= $this->props['max_width'];
+		$max_width_tablet      	= $this->props['max_width_tablet'];
+		$max_width_phone       	= $this->props['max_width_phone'];
+		$max_width_last_edited 	= $this->props['max_width_last_edited'];
+		$panel_layout        		= $this->props['panel_layout'];
+		$use_icon               = $this->props['use_icon'];
+		$icon               		= $this->props['font_icon'];
+		$title    							= $this->props['title'];
+		$heading_align    			= $this->props['heading_align'];
+		$heading_text_color    	= $this->props['heading_text_color'];
+		$show_button    				= $this->props['show_button'];
+		$button_link    				= $this->props['button_link'];
 
 		$class = "et_pb_ca_panel et_pb_module";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$headingSize = ("none" == $panel_layout ? 'h1' : 'h2');
 
@@ -356,7 +339,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 			'button_link',
 			'title',
 			'heading_text_color',
-			'content_new',
+			'content',
 			);
 
 			$this->fields_defaults = array(
@@ -489,7 +472,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 				'depends_show_if' => "on",
 				'toggle_slug'       => 'header',
 			),
-			'content_new' => array(
+			'content' => array(
 				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
@@ -559,38 +542,27 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 			);
 		return $fields;
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            = $this->shortcode_atts['module_id'];
-		$module_class         = $this->shortcode_atts['module_class'];
-		$max_width            = $this->shortcode_atts['max_width'];
-		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-		$panel_layout    = $this->shortcode_atts['panel_layout'];
-		$use_icon               = $this->shortcode_atts['use_icon'];
-		$icon               = $this->shortcode_atts['font_icon'];
-		$title    = $this->shortcode_atts['title'];
-		$heading_align    = $this->shortcode_atts['heading_align'];
-		$heading_text_color    = $this->shortcode_atts['heading_text_color'];
-		$show_button    = $this->shortcode_atts['show_button'];
-		$button_link    = $this->shortcode_atts['button_link'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$max_width            = $this->props['max_width'];
+		$max_width_tablet     = $this->props['max_width_tablet'];
+		$max_width_phone      = $this->props['max_width_phone'];
+		$max_width_last_edited = $this->props['max_width_last_edited'];
+		$panel_layout    = $this->props['panel_layout'];
+		$use_icon               = $this->props['use_icon'];
+		$icon               = $this->props['font_icon'];
+		$title    = $this->props['title'];
+		$heading_align    = $this->props['heading_align'];
+		$heading_text_color    = $this->props['heading_text_color'];
+		$show_button    = $this->props['show_button'];
+		$button_link    = $this->props['button_link'];
 
 		$class = "et_pb_ca_fullwidth_panel et_pb_module";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) : '');
 
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-			$max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$headingSize = ("none" == $panel_layout ? 'h1' : 'h2');
 		$heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?

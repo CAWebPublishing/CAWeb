@@ -1163,7 +1163,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 		);
 
         $ending_fields = array(
-			'content_new' => array(
+			'content' => array(
 				'label'           => esc_html__('Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
@@ -1255,7 +1255,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         return array_merge($fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $course_fields, $ending_fields);
     }
 
-    function shortcode_callback($atts, $content = null, $function_name) {
+    function render( $unprocessed_props, $content = null, $render_slug ) {
         global $post;
 
         $post_type_layout    = $this->shortcode_atts['post_type_layout'];

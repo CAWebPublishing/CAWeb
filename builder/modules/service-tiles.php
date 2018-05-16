@@ -162,7 +162,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		);
 		return $fields;
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$view_more_on_off     = $this->shortcode_atts['view_more_on_off'];
@@ -318,7 +318,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 				'depends_show_if' => 'on',
 				'toggle_slug'	=> 'body',
 			),
-			'content_new' => array(
+			'content' => array(
 				'label' => esc_html__( 'Tile Content', 'et_builder' ),
 				'type'=> 'tiny_mce',
 				'description' => esc_html__( 'Define the text for the tile content', 'et_builder' ),
@@ -344,7 +344,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 		);
 		return $fields;
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		global $titles;
 		global $tile_images;
 		global $tile_sizes;

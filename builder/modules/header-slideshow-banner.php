@@ -147,7 +147,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
         return $fields;
     }
-    function shortcode_callback($atts, $content = null, $function_name) {
+    function render( $unprocessed_props, $content = null, $render_slug ) {
         $module_class         = $this->shortcode_atts['module_class'];
 
         $max_width            = $this->shortcode_atts['max_width'];
@@ -358,7 +358,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 
         return $fields;
     }
-    function shortcode_callback($atts, $content = null, $function_name) {
+    function render( $unprocessed_props, $content = null, $render_slug ) {
         $module_id            = $this->shortcode_atts['module_id'];
 
         $module_class         = $this->shortcode_atts['module_class'];

@@ -240,7 +240,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$title            = $this->shortcode_atts['title'];
 
 		$username            = $this->shortcode_atts['username'];

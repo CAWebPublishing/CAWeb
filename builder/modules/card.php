@@ -265,7 +265,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id           		= $this->shortcode_atts['module_id'];
 		$module_class        		= $this->shortcode_atts['module_class'];
 		$max_width            	= $this->shortcode_atts['max_width'];

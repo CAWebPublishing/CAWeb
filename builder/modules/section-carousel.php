@@ -233,7 +233,7 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 		$et_pb_ca_section_carousel_style = $this->shortcode_atts['carousel_style'];
 	}
 
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$carousel_style           	= $this->shortcode_atts['carousel_style'];
 		$slide_amount           	= $this->shortcode_atts['slide_amount'];
 		$in_panel           	= $this->shortcode_atts['in_panel'];
@@ -461,7 +461,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$slide_image = $this->shortcode_atts['slide_image'];
@@ -740,7 +740,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 
 	}
 
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$carousel_style       = $this->shortcode_atts['carousel_style'];
 		$slide_amount           	= $this->shortcode_atts['slide_amount'];
 		$in_panel           	= $this->shortcode_atts['in_panel'];
@@ -948,7 +948,7 @@ function get_fields() {
 	);
 	return $fields;
 }
-function shortcode_callback($atts, $content = null, $function_name) {
+function render( $unprocessed_props, $content = null, $render_slug ) {
 	$module_id            = $this->shortcode_atts['module_id'];
 
 	$module_class         = $this->shortcode_atts['module_class'];

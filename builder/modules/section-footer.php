@@ -134,7 +134,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            		= $this->shortcode_atts['module_id'];
 		$module_class         		= $this->shortcode_atts['module_class'];
 		$max_width            		= $this->shortcode_atts['max_width'];
@@ -414,7 +414,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		return array_merge($fields, $groups, $ending_fields);
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
@@ -619,7 +619,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		);
 		return $fields;
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
+	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$max_width            = $this->shortcode_atts['max_width'];
@@ -860,7 +860,7 @@ function get_fields() {
 
 	return array_merge($fields, $groups, $ending_fields);
 }
-function shortcode_callback($atts, $content = null, $function_name) {
+function render( $unprocessed_props, $content = null, $render_slug ) {
 	$module_id            = $this->shortcode_atts['module_id'];
 
 	$module_class         = $this->shortcode_atts['module_class'];
