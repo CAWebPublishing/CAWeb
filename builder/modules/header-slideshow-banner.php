@@ -148,39 +148,20 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         return $fields;
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
-        $module_class         = $this->shortcode_atts['module_class'];
-
-        $max_width            = $this->shortcode_atts['max_width'];
-
-        $max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-
-        $max_width_phone      = $this->shortcode_atts['max_width_phone'];
-
-        $max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-
-        $scroll_bar_text = $this->shortcode_atts['scroll_bar_text'];
-
-        $scroll_bar_icon = $this->shortcode_atts['font_icon'];
+        $module_class         = $this->props['module_class'];
+        $max_width            = $this->props['max_width'];
+        $max_width_tablet     = $this->props['max_width_tablet'];
+        $max_width_phone      = $this->props['max_width_phone'];
+        $max_width_last_edited = $this->props['max_width_last_edited'];
+        $scroll_bar_text = $this->props['scroll_bar_text'];
+        $scroll_bar_icon = $this->props['font_icon'];
 
         $class = "et_pb_ca_fullwidth_banner et_pb_module";
 
-        $module_class = ET_Builder_Element::add_module_order_class($module_class, $function_name);
 
         $class .= ('' !== $module_class ? sprintf(' %1$s', esc_attr($module_class)) : '');
 
         $this->shortcode_content = et_builder_replace_code_content_entities($this->shortcode_content);
-
-        if ('' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width) {
-            $max_width_responsive_active = et_pb_get_responsive_status($max_width_last_edited);
-
-            $max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-            et_pb_generate_responsive_css($max_width_values, '%%order_class%%', 'max-width', $function_name);
-        }
 
         $output = sprintf(
 			'<div id="et_pb_ca_fullwidth_banner" class="%1$s header-slideshow-banner ">
@@ -359,29 +340,20 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         return $fields;
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
-        $module_id            = $this->shortcode_atts['module_id'];
-
-        $module_class         = $this->shortcode_atts['module_class'];
-
-        $display_banner_info = $this->shortcode_atts['display_banner_info'];
-
-        $heading = $this->shortcode_atts['heading'];
-
-        $display_heading = $this->shortcode_atts['display_heading'];
-
-        $button_text = $this->shortcode_atts['button_text'];
-
-        $button_link = $this->shortcode_atts['button_link'];
-
-        $background_image = $this->shortcode_atts['background_image'];
+        $module_id            = $this->props['module_id'];
+        $module_class         = $this->props['module_class'];
+        $display_banner_info = $this->props['display_banner_info'];
+        $heading = $this->props['heading'];
+        $display_heading = $this->props['display_heading'];
+        $button_text = $this->props['button_text'];
+        $button_link = $this->props['button_link'];
+        $background_image = $this->props['background_image'];
 
         global $et_pb_slider_item_num;
 
         $et_pb_slider_item_num++;
 
         $class = "et_pb_ca_fullwidth_banner_item et_pb_module";
-
-        $module_class = ET_Builder_Element::add_module_order_class($module_class, $function_name);
 
         $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="window">
 <p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>',

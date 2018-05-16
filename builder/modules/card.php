@@ -70,8 +70,6 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		    ),
 		  ),
 		);
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -266,41 +264,27 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id           		= $this->shortcode_atts['module_id'];
-		$module_class        		= $this->shortcode_atts['module_class'];
-		$max_width            	= $this->shortcode_atts['max_width'];
-		$max_width_tablet     	= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone     		= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited	= $this->shortcode_atts['max_width_last_edited'];
-		$card_layout 						= $this->shortcode_atts['card_layout'];
-		$card_color 						= $this->shortcode_atts['card_color'];
-		$text_color 						= $this->shortcode_atts['text_color'];
-		$show_image             = $this->shortcode_atts['show_image'];
-		$featured_image         = $this->shortcode_atts['featured_image'];
-		$title               		= $this->shortcode_atts['title'];
-		$content               	= $this->shortcode_atts['content'];
-		$show_button            = $this->shortcode_atts['show_button'];
-		$button_text            = $this->shortcode_atts['button_text'];
-		$button_link    				= $this->shortcode_atts['button_link'];
-		$include_header         = $this->shortcode_atts['include_header'];
-		$include_footer         = $this->shortcode_atts['include_footer'];
-		$footer_text    				= $this->shortcode_atts['footer_text'];
+		$module_id           		= $this->props['module_id'];
+		$module_class        		= $this->props['module_class'];
+		$max_width            	= $this->props['max_width'];
+		$max_width_tablet     	= $this->props['max_width_tablet'];
+		$max_width_phone     		= $this->props['max_width_phone'];
+		$max_width_last_edited	= $this->props['max_width_last_edited'];
+		$card_layout 						= $this->props['card_layout'];
+		$card_color 						= $this->props['card_color'];
+		$text_color 						= $this->props['text_color'];
+		$show_image             = $this->props['show_image'];
+		$featured_image         = $this->props['featured_image'];
+		$title               		= $this->props['title'];
+		$show_button            = $this->props['show_button'];
+		$button_text            = $this->props['button_text'];
+		$button_link    				= $this->props['button_link'];
+		$include_header         = $this->props['include_header'];
+		$include_footer         = $this->props['include_footer'];
+		$footer_text    				= $this->props['footer_text'];
 
 		$class = " et_pb_ca_card et_pb_module ";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$card_layout = ("custom" == $card_layout ? 'default'  : $card_layout);
 		$card_color = ("" != $card_color ? sprintf('background-color: %1$s; ', $card_color) : "" );
@@ -330,40 +314,6 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		return $output;
 
 	}
-
-	// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend_preview() {
-			?>
-			<script>
-			window.<?php echo $this->slug; ?>_preview = function(args) {
-				var card_layout = "custom" == args.card_layout ? 'default'  : args.card_layout ;
-				var card_color =  undefined !== args.card_color ? 'background-color: ' + args.card_color + '; ' : "" ;
-				var text_color =  undefined !== args.text_color ? 'color: ' + args.text_color + '; ' : "" ;
-				var card_style =  "" !== card_color || "" !== text_color ? ' style="' + card_color + text_color +'"' : "";
-
-				var display_image = "on" == args.show_image ?
-						'<img class="card-img-top img-responsive" src="' + args.featured_image +'" alt="Card image cap">' : '' ;
-
-				var display_header = "on" == args.include_header ?
-						'<div class="card-header"><h4 class="card-title">' + args.title + '</h4></div>' : '' 	;
-
-				var display_button = "on" == args.show_button ?
-						'<a href="' + args.button_link + '" class="btn btn-default">' + args.button_text + '</a>' : '';
-
-				var display_footer = "on" == args.include_footer ?
-						'<div class="card-footer">' + args.footer_text + '</div>' : ''  ;
-
-				var output = '<div class="card card-' + card_layout + '" ' + card_style + '>' + display_image + display_header +
-						'<div class="card-block"><p>' + this.props.content + '</p>' + display_button +'</div>' + display_footer + '</div>';
-
-				return output;
-
-			}
-			</script>
-			<?php
-		}
 }
 new ET_Builder_CA_Card;
 

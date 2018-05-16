@@ -237,29 +237,17 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_id            = $this->shortcode_atts['module_id'];
-
 		$module_class         = $this->shortcode_atts['module_class'];
-
 		$list_title            = $this->shortcode_atts['title'];
-
 		$title_size    = $this->shortcode_atts['title_size'];
-
 		$style            = $this->shortcode_atts['style'];
-
 		$faq_style            = $this->shortcode_atts['faq_style'];
-
 		$posts_number            = $this->shortcode_atts['posts_number'];
-
 		$view_featured_image            = $this->shortcode_atts['view_featured_image'];
-
 		$all_categories_button            = $this->shortcode_atts['all_categories_button'];
-
 		$include_categories      = $this->shortcode_atts['include_categories'];
-
 		$all_tags_button            = $this->shortcode_atts['all_tags_button'];
-
 		$include_tags      = $this->shortcode_atts['include_tags'];
-
 		$orderby                 = $this->shortcode_atts['orderby'];
 
 		$order = '';
@@ -267,8 +255,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 		$cat_array = array();
 
 		$tag_array = array();
-
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
 		switch( $orderby ) {
 			case 'date_desc':
@@ -338,7 +324,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 			$faqs = '';
 			$output = '';
 			global $faq_accordion_count;
-		//global $faq_count;
 
 			foreach ($all_posts as $a=>$p){
 				if( $posts_number !== -1 && 0 == $posts_number )

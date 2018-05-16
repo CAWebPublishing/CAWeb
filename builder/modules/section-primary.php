@@ -12,12 +12,11 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		$this->name = esc_html__( 'Section - Primary', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_section_primary';
-		$this->fb_support = true;
 
 		$this->whitelisted_fields = array(
 			'section_image',
 			'section_heading',
-			'section_content',
+			'content',
 			'section_link',
 			'show_more_button',
 			'featured_image_button',
@@ -69,9 +68,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		    ),
 		  ),
 		);
-
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -252,39 +248,25 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            		= $this->shortcode_atts['module_id'];
-		$module_class         		= $this->shortcode_atts['module_class'];
-		$max_width            		= $this->shortcode_atts['max_width'];
-		$max_width_tablet     		= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      		= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited 		= $this->shortcode_atts['max_width_last_edited'];
-		$featured_image_button 		= $this->shortcode_atts['featured_image_button'];
-		$heading_align 						= $this->shortcode_atts['heading_align'];
-		$image_pos 								= $this->shortcode_atts['left_right_button'];
-		$section_image 						= $this->shortcode_atts['section_image'];
-		$section_heading 					= $this->shortcode_atts['section_heading'];
-		$section_content 					= $this->shortcode_atts['section_content'];
-		$show_more_button 				= $this->shortcode_atts['show_more_button'];
-		$slide_image_button 			= $this->shortcode_atts['slide_image_button'];
-		$section_link 						= $this->shortcode_atts['section_link'];
-		$section_background_color = $this->shortcode_atts['section_background_color'];
-		$heading_text_color 			= $this->shortcode_atts['heading_text_color'];
+		$module_id            		= $this->props['module_id'];
+		$module_class         		= $this->props['module_class'];
+		$max_width            		= $this->props['max_width'];
+		$max_width_tablet     		= $this->props['max_width_tablet'];
+		$max_width_phone      		= $this->props['max_width_phone'];
+		$max_width_last_edited 		= $this->props['max_width_last_edited'];
+		$featured_image_button 		= $this->props['featured_image_button'];
+		$heading_align 						= $this->props['heading_align'];
+		$image_pos 								= $this->props['left_right_button'];
+		$section_image 						= $this->props['section_image'];
+		$section_heading 					= $this->props['section_heading'];
+		$show_more_button 				= $this->props['show_more_button'];
+		$slide_image_button 			= $this->props['slide_image_button'];
+		$section_link 						= $this->props['section_link'];
+		$section_background_color = $this->props['section_background_color'];
+		$heading_text_color 			= $this->props['heading_text_color'];
 
 		$class = "et_pb_ca_section_primary et_pb_module";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
@@ -385,7 +367,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 		$this->whitelisted_fields = array(
 										'section_image',
 										'section_heading',
-										'section_content',
+										'content',
 										'section_link',
 										'show_more_button' ,
 										'featured_image_button',
@@ -610,57 +592,26 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 		return $fields;
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            = $this->shortcode_atts['module_id'];
-
-		$module_class         = $this->shortcode_atts['module_class'];
-
-		$max_width            = $this->shortcode_atts['max_width'];
-
-		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-
-		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
-
-		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-
-		$featured_image_button = $this->shortcode_atts['featured_image_button'];
-
-		$heading_align = $this->shortcode_atts['heading_align'];
-
-		$image_pos = $this->shortcode_atts['left_right_button'];
-
-		$section_image = $this->shortcode_atts['section_image'];
-
-		$section_heading = $this->shortcode_atts['section_heading'];
-
-		$section_content = $this->shortcode_atts['section_content'];
-
-		$show_more_button = $this->shortcode_atts['show_more_button'];
-
-		$slide_image_button = $this->shortcode_atts['slide_image_button'];
-
-		$section_link = $this->shortcode_atts['section_link'];
-
-		$section_background_color = $this->shortcode_atts['section_background_color'];
-
-		$heading_text_color = $this->shortcode_atts['heading_text_color'];
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$max_width            = $this->props['max_width'];
+		$max_width_tablet     = $this->props['max_width_tablet'];
+		$max_width_phone      = $this->props['max_width_phone'];
+		$max_width_last_edited = $this->props['max_width_last_edited'];
+		$featured_image_button = $this->props['featured_image_button'];
+		$heading_align = $this->props['heading_align'];
+		$image_pos = $this->props['left_right_button'];
+		$section_image = $this->props['section_image'];
+		$section_heading = $this->props['section_heading'];
+		$show_more_button = $this->props['show_more_button'];
+		$slide_image_button = $this->props['slide_image_button'];
+		$section_link = $this->props['section_link'];
+		$section_background_color = $this->props['section_background_color'];
+		$heading_text_color = $this->props['heading_text_color'];
 
 		$class = "et_pb_ca_fullwidth_section_primary et_pb_module";
 
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
-
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-			$max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$section_bg_color = ("" !=  $section_background_color ?
 		sprintf(' style="background: %1$s;"', $section_background_color ) : '');

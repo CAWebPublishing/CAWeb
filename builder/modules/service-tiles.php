@@ -163,30 +163,17 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		return $fields;
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            = $this->shortcode_atts['module_id'];
-		$module_class         = $this->shortcode_atts['module_class'];
-		$view_more_on_off     = $this->shortcode_atts['view_more_on_off'];
-		$view_more_text       = $this->shortcode_atts['view_more_text'];
-		$view_more_url        = $this->shortcode_atts['view_more_url'];
-		$max_width            = $this->shortcode_atts['max_width'];
-		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$view_more_on_off     = $this->props['view_more_on_off'];
+		$view_more_text       = $this->props['view_more_text'];
+		$view_more_url        = $this->props['view_more_url'];
+		$max_width            = $this->props['max_width'];
+		$max_width_tablet     = $this->props['max_width_tablet'];
+		$max_width_phone      = $this->props['max_width_phone'];
+		$max_width_last_edited = $this->props['max_width_last_edited'];
 
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$class = 'et_pb_module et_pb_ca_fullwidth_service_tiles ';
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-			$max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		global $titles;
 		global $tile_images;
@@ -230,7 +217,6 @@ style="background-image:url(%3$s); background-size: cover;"><div class="teaser">
 											esc_attr($class), ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )  );
 
 		return $output;
-		//print_r( $tile_links );
 	}
 }
 new ET_Builder_Module_Fullwidth_CA_Service_Tiles;
@@ -353,15 +339,13 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 
 		global $items_count;
 
-		$module_class         = $this->shortcode_atts['module_class'];
-		$module_id            = $this->shortcode_atts['module_id'];
-		$title                = $this->shortcode_atts['item_title'];
-		$tile_image           = $this->shortcode_atts['item_image'];
-		$tile_size           = $this->shortcode_atts['tile_size'];
-		$tile_url           = $this->shortcode_atts['tile_url'];
-		$tile_link           = $this->shortcode_atts['tile_link'];
-
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+		$module_class         = $this->props['module_class'];
+		$module_id            = $this->props['module_id'];
+		$title                = $this->props['item_title'];
+		$tile_image           = $this->props['item_image'];
+		$tile_size           = $this->props['tile_size'];
+		$tile_url           = $this->props['tile_url'];
+		$tile_link           = $this->props['tile_link'];
 
 		$class = 'et_pb_module et_pb_ca_fullwidth_service_tiles_item ';
 
