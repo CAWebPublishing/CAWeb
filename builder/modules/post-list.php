@@ -130,7 +130,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 			),
 			'include_categories' => array(
 				'label'            => esc_html__( 'Select Categories', 'et_builder' ),
-				'renderer'         => 'et_builder_include_categories_option',
+				'renderer'         => 'categories',
 				'option_category'  => 'basic_option',
 				'renderer_options' => array(
 					'use_terms' => false,
