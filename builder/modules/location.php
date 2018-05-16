@@ -11,7 +11,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		$this->name = esc_html__( 'Location', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_location_widget';
-		$this->fb_support = true;
 
 		$this->whitelisted_fields = array(
 			'location_layout',
@@ -71,9 +70,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		    ),
 		  ),
 		);
-
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -282,44 +278,32 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            	= $this->shortcode_atts['module_id'];
-		$module_class         	= $this->shortcode_atts['module_class'];
-		$max_width            	= $this->shortcode_atts['max_width'];
-		$max_width_tablet     	= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      	= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited 	= $this->shortcode_atts['max_width_last_edited'];
-		$location_layout 				= $this->shortcode_atts['location_layout'];
-		$featured_image       	= $this->shortcode_atts['featured_image'];
-		$name               		= $this->shortcode_atts['name'];
-		$desc               		= $this->shortcode_atts['desc'];
-		$addr               		= $this->shortcode_atts['addr'];
-		$city              			= $this->shortcode_atts['city'];
-		$state              		= $this->shortcode_atts['state'];
-		$zip    								= $this->shortcode_atts['zip'];
-		$show_contact    				= $this->shortcode_atts['show_contact'];
-		$phone    							= $this->shortcode_atts['phone'];
-		$fax    								= $this->shortcode_atts['fax'];
-		$show_icon    					= $this->shortcode_atts['show_icon'];
-		$icon    								= $this->shortcode_atts['font_icon'];
-		$show_button    				= $this->shortcode_atts['show_button'];
-		$location_link    			= $this->shortcode_atts['location_link'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            	= $this->props['module_id'];
+		$module_class         	= $this->props['module_class'];
+		$max_width            	= $this->props['max_width'];
+		$max_width_tablet     	= $this->props['max_width_tablet'];
+		$max_width_phone      	= $this->props['max_width_phone'];
+		$max_width_last_edited 	= $this->props['max_width_last_edited'];
+		$location_layout 				= $this->props['location_layout'];
+		$featured_image       	= $this->props['featured_image'];
+		$name               		= $this->props['name'];
+		$desc               		= $this->props['desc'];
+		$addr               		= $this->props['addr'];
+		$city              			= $this->props['city'];
+		$state              		= $this->props['state'];
+		$zip    								= $this->props['zip'];
+		$show_contact    				= $this->props['show_contact'];
+		$phone    							= $this->props['phone'];
+		$fax    								= $this->props['fax'];
+		$show_icon    					= $this->props['show_icon'];
+		$icon    								= $this->props['font_icon'];
+		$show_button    				= $this->props['show_button'];
+		$location_link    			= $this->props['location_link'];
 
 		$class = "et_pb_ca_location_widget et_pb_module location";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 		$display_icon = ("on" == $show_icon ? caweb_get_icon_span($icon) : '');
 
 		$address = array($addr, $city, $state, $zip);
@@ -363,63 +347,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		return $output;
 
 	}
-		// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend_preview() {
-			?>
-			<script>
-			window.<?php echo $this->slug; ?>_preview = function(args) {
-				var output = '';
-				var address = [args.addr , args.city , args.state , args.zip];
-				address = address.filter(function(n){  if(n !== undefined) return n.trim(); });
-				address = address.filter(function(n){  return n !== ""  });
-				address = address.join(', ');
-
-				var icon_list = <?= json_encode( caweb_get_icon_list(-1, '', true) ) ?>;
-				var display_icon = "on" == args.show_icon ? '<span class="ca-gov-icon-' + icon_list[args.icon.replace(/%%/g, "")] + '"></span> ' : '';
-
-				var display_button = "on" == args.show_button && "" !== args.location_link ?
-								'<a href="' + args.location_link + '" class="btn">View Contact</a>' : '' ;
-
-				if ("contact" == args.location_layout ) {
-						var display_other = '';
-						if( "on" == args.show_contact ){
-								display_other += "" !== args.phone ? 'General Information: ' + args.phone + '<br />' : '';
-								display_other += "" !== args.fax ?  'FAX: ' + args.fax  : ''	;
-
-								display_other = '<p class="other">' + display_other + '</p>';
-						}
-
-
-						var display_button = "on" == args.show_button && "" !== args.location_link ?
-								'<a href="' + args.location_link + '" class="btn">View Contact</a>' : '' ;
-
-						var address = "" !== args.name ? args.name + '<br />' + address : address;
-
-
-						var output = '<div class="location contact">' + display_icon + '<div class="contact"><p class="address">' + address + '</p>' +
-									display_other + display_button + '</div></div>';
-
-				} else if("mini" == args.location_layout) {
-					var output = '<div class="location mini">' + display_icon + '<div class="contact"' + ("" == display_icon ? ' style="margin-left: 0px;"' : '') + '><div class="title">' +
-        '<a href="' + args.location_link + '">' + args.name + '</a></div><div class="address">' + address + '</div></div></div>';
-
-				}else{
-					var display_image = args.featured_image ? '<div class="thumbnail"><img src="' + args.featured_image + '" /></div>' : '';
-
-					var desc = "" !== args.desc ? '<div class="title">Description</div><div class="description">' + args.desc + '</div>' : '';
-
-					var output = '<div class="location banner">' + display_image + '<div class="contact"><div class="title">' + args.name +
-							'</div><div class="address"><span class="ca-gov-icon-road-pin"></span><a href="' + args.location_link+'">' +
-							address + '</a></div></div><div class="summary">' + desc + display_button +'</div></div>';
-				}
-				return output;
-
-			}
-			</script>
-			<?php
-		}
 }
 new ET_Builder_CA_Location;
 

@@ -12,7 +12,6 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		$this->name = esc_html__( 'Section - Footer', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_section_footer';
-		$this->fb_support = true;
 
 		$this->child_slug      = 'et_pb_ca_section_footer_group';
 
@@ -56,8 +55,6 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		    ),
 		  ),
 		);
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -134,30 +131,17 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            		= $this->shortcode_atts['module_id'];
-		$module_class         		= $this->shortcode_atts['module_class'];
-		$max_width            		= $this->shortcode_atts['max_width'];
-		$max_width_tablet     		= $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      		= $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited 		= $this->shortcode_atts['max_width_last_edited'];
-		$section_background_color = $this->shortcode_atts['section_background_color'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            		= $this->props['module_id'];
+		$module_class         		= $this->props['module_class'];
+		$max_width            		= $this->props['max_width'];
+		$max_width_tablet     		= $this->props['max_width_tablet'];
+		$max_width_phone      		= $this->props['max_width_phone'];
+		$max_width_last_edited 		= $this->props['max_width_last_edited'];
+		$section_background_color = $this->props['section_background_color'];
 
 		$class = "et_pb_ca_section_footer section";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-		  $max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-		  $max_width_values = array(
-		    'desktop' => $max_width,
-		    'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-		    'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-		  );
-
-		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$section_bg_color = ("" != $section_background_color ?
 					sprintf(' style="background: %1$s" ', $section_background_color): '');
@@ -176,25 +160,6 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 		return $output;
 
 	}
-
-		// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend_preview() {
-			?>
-			<script>
-			window.<?php echo $this->slug; ?>_preview = function(args) {
-				 var section_bg_color = "" !== args.section_background_color && undefined !== args.section_background_color ?
-					' style="background: ' + args.section_background_color + '" ': '';
-
-				var output = '<div class="section" ' + section_bg_color + '><div class="row group">' + this.props.content + '</div></div>';
-
-				return output;
-
-			}
-			</script>
-			<?php
-		}
 }
 new ET_Builder_Module_Section_Footer;
 
@@ -203,7 +168,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$this->name = esc_html__( 'Footer Group', 'et_builder' );
 
 		$this->slug = 'et_pb_ca_section_footer_group';
-		$this->fb_support = true;
 
 		$this->type = 'child';
 
@@ -274,9 +238,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 				),
 			),
 		);
-
-		// Custom handler: Output JS for editor preview in page footer.
-		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
@@ -414,37 +375,26 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		return array_merge($fields, $groups, $ending_fields);
 
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            = $this->shortcode_atts['module_id'];
-
-		$module_class         = $this->shortcode_atts['module_class'];
-
-		$heading_color = $this->shortcode_atts['heading_color'];
-
-		$text_color= $this->shortcode_atts['text_color'];
-
-		$group_icon = $this->shortcode_atts['font_icon'];
-
-		$group_title = $this->shortcode_atts['group_title'];
-
-		$group_url = $this->shortcode_atts['group_url'];
-
-		$group_icon_button = $this->shortcode_atts['group_icon_button'];
-
-		$group_show_more_button = $this->shortcode_atts['group_show_more_button'];
-
-		$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$heading_color = $this->props['heading_color'];
+		$text_color= $this->props['text_color'];
+		$group_icon = $this->props['font_icon'];
+		$group_title = $this->props['group_title'];
+		$group_url = $this->props['group_url'];
+		$group_icon_button = $this->props['group_icon_button'];
+		$group_show_more_button = $this->props['group_show_more_button'];
+		$display_link_as_button= $this->props['display_link_as_button'];
 
     // Declare variable variables for the 10 groups
     for($i = 1; $i <= 10; $i++){
-      $group_link_show[$i] = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
-      $group_link_text[$i] = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
-      $group_link_url[$i] = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
+      $group_link_show[$i] = $this->props[sprintf('group_link%1$s_show', $i)];
+      $group_link_text[$i] = $this->props[sprintf('group_link_text%1$s', $i)];
+      $group_link_url[$i] = $this->props[sprintf('group_link_url%1$s', $i)];
     }
 
 		$class = "quarter";
-
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
 		//$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
@@ -482,22 +432,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		return $output;
 
 	}
-		// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend_preview() {
-			?>
-			<script>
-			window.<?php echo $this->slug; ?>_preview = function(args) {
-				var output = '<div class="quarter"><h4 ' + args.heading_color + '>' + args.group_title + '</h4>' +
-						'<ul class="list-unstyled" style="list-style-type: none;"></ul></div>';
-
-				return output;
-
-			}
-			</script>
-			<?php
-		}
 }
 new ET_Builder_Module_Footer_Group;
 
@@ -619,30 +553,17 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		);
 		return $fields;
 	}
-	function shortcode_callback($atts, $content = null, $function_name) {
-		$module_id            = $this->shortcode_atts['module_id'];
-		$module_class         = $this->shortcode_atts['module_class'];
-		$max_width            = $this->shortcode_atts['max_width'];
-		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
-		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
-		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
-		$section_background_color = $this->shortcode_atts['section_background_color'];
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$module_id            = $this->props['module_id'];
+		$module_class         = $this->props['module_class'];
+		$max_width            = $this->props['max_width'];
+		$max_width_tablet     = $this->props['max_width_tablet'];
+		$max_width_phone      = $this->props['max_width_phone'];
+		$max_width_last_edited = $this->props['max_width_last_edited'];
+		$section_background_color = $this->props['section_background_color'];
 
 		$class = "et_pb_ca_fullwidth_section_footer section";
-		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
-		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
-			$max_width_responsive_active = et_pb_get_responsive_status( $max_width_last_edited );
-
-			$max_width_values = array(
-				'desktop' => $max_width,
-				'tablet'  => $max_width_responsive_active ? $max_width_tablet : '',
-				'phone'   => $max_width_responsive_active ? $max_width_phone : '',
-			);
-
-			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
-		}
 
 		$section_bg_color = ("" != $section_background_color ?
 					sprintf(' style="background: %1$s" ', $section_background_color): '');
@@ -860,36 +781,25 @@ function get_fields() {
 
 	return array_merge($fields, $groups, $ending_fields);
 }
-function shortcode_callback($atts, $content = null, $function_name) {
-	$module_id            = $this->shortcode_atts['module_id'];
-
-	$module_class         = $this->shortcode_atts['module_class'];
-
-	$heading_color = $this->shortcode_atts['heading_color'];
-
-	$text_color= $this->shortcode_atts['text_color'];
-
-	$group_icon = $this->shortcode_atts['font_icon'];
-
-		$group_title = $this->shortcode_atts['group_title'];
-
-		$group_url = $this->shortcode_atts['group_url'];
-
-		$group_icon_button = $this->shortcode_atts['group_icon_button'];
-
-		$group_show_more_button = $this->shortcode_atts['group_show_more_button'];
-
-		$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
+function render( $unprocessed_props, $content = null, $render_slug ) {
+	$module_id            = $this->props['module_id'];
+	$module_class         = $this->props['module_class'];
+	$heading_color = $this->props['heading_color'];
+	$text_color= $this->props['text_color'];
+	$group_icon = $this->props['font_icon'];
+	$group_title = $this->props['group_title'];
+	$group_url = $this->props['group_url'];
+	$group_icon_button = $this->props['group_icon_button'];
+	$group_show_more_button = $this->props['group_show_more_button'];
+	$display_link_as_button= $this->props['display_link_as_button'];
 
   	for($i = 1; $i <= 10; $i++){
-      $group_link_show[$i] = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
-      $group_link_text[$i] = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
-      $group_link_url[$i] = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
+      $group_link_show[$i] = $this->props[sprintf('group_link%1$s_show', $i)];
+      $group_link_text[$i] = $this->props[sprintf('group_link_text%1$s', $i)];
+      $group_link_url[$i] = $this->props[sprintf('group_link_url%1$s', $i)];
     }
 
 	$class = "quarter";
-
-	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
 	$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
