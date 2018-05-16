@@ -12,27 +12,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 
 		$this->slug = 'et_pb_ca_section_primary';
 
-		$this->whitelisted_fields = array(
-			'section_image',
-			'section_heading',
-			'content',
-			'section_link',
-			'show_more_button',
-			'featured_image_button',
-			'left_right_button',
-			'slide_image_button',
-			'section_background_color',
-			'heading_align',
-			'heading_text_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
 		$this->fields_defaults = array(
 			'section_link' => array('http://','add_default_setting'),
 			'show_more_button' => array('no'),
@@ -363,26 +342,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 		$this->name = esc_html__( 'FullWidth Section - Primary', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_section_primary';
 		$this->fullwidth = true;
-		$this->whitelisted_fields = array(
-										'section_image',
-										'section_heading',
-										'content',
-										'section_link',
-										'show_more_button' ,
-										'featured_image_button',
-										'left_right_button',
-										'slide_image_button',
-										'section_background_color',
-										'heading_align',
-										'heading_text_color',
-										'max_width',
-										'max_width_tablet',
-										'max_width_phone',
-										'max_width_last_edited',
-										'module_class',
-										'module_id',
-										'admin_label',
-		);
+		
 		$this->fields_defaults = array(
 			'section_link' => array('http://','add_default_setting'),
 			'show_more_button' => array('no'),

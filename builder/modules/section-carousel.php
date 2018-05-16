@@ -16,20 +16,6 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
-		$this->whitelisted_fields = array(
-			'carousel_style', 'in_panel', 'panel_layout',
-			'panel_title', 'panel_show_button', 'panel_button_text',
-      'panel_button_link', 'slide_amount',
-			'section_background_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
 		$this->fields_defaults = array('slide_amount' => array(4, 'add_default_setting'));
 
 		$this->main_css_element = '%%order_class%%';
@@ -339,12 +325,6 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 
 		$this->child_title_fallback_var = 'slide_title';
 
-		$this->whitelisted_fields = array(
-			'slide_image', 'slide_title', 'display_title',
-			 'slide_desc',	'slide_url',
-			'slide_show_more_button','module_class', 'module_id',
-			);
-
 		$this->fields_defaults = array(
 			'slide_url' => array('http://','add_default_setting'),
 			);
@@ -514,19 +494,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 		$this->slug = 'et_pb_ca_fullwidth_section_carousel';
 		$this->child_slug      = 'et_pb_ca_fullwidth_section_carousel_slide';
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
-		$this->whitelisted_fields = array(
-			'carousel_style','in_panel', 'panel_layout',
-			'panel_title', 'panel_show_button', 'panel_button_text',
-      'panel_button_link', 'slide_amount',
-			'section_background_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
+		
 		$this->fields_defaults = array('slide_amount' => array(4, 'add_default_setting'));
 		$this->main_css_element = '%%order_class%%';
 
@@ -829,11 +797,7 @@ $this->fullwidth = true;
 	$this->type = 'child';
 	$this->child_title_var = 'slide_title';
 	$this->child_title_fallback_var = 'slide_title';
-	$this->whitelisted_fields = array(
-		'slide_image', 'slide_title',
-		 'slide_desc',	'slide_url',
-		'slide_show_more_button','module_class', 'module_id',
-		);
+
 	$this->fields_defaults = array(
 		'slide_url' => array('http://','add_default_setting'),
 		);

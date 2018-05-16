@@ -11,24 +11,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 		$this->slug = 'et_pb_ca_github';
 
-		$this->whitelisted_fields = array(
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-			'title',
-			'username',
-			'client_id',
-			'client_secret',
-      'access_token', 'increase_rate_limit',
-			'definitions', 'request_email',
-			'per_page', 'repo_type',
-			'disabled_on','email_body'
-		);
-
 		$this->fields_defaults = array(
 					'per_page' => array(100,'add_default_setting'),
 					'repo_type' => array('all' ,'add_default_setting'),

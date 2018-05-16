@@ -13,18 +13,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		$this->slug = 'et_pb_ca_fullwidth_service_tiles';
 		$this->child_slug      = 'et_pb_ca_fullwidth_service_tiles_item';
 		$this->child_item_text = esc_html__( 'Tile', 'et_builder' );
-		$this->whitelisted_fields = array(
-			'view_more_on_off',
-			'view_more_text',
-			'view_more_url',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
+		
 		$this->fields_defaults = array();
 		$this->main_css_element = '%%order_class%%';
 		$this->options_toggles = array(
@@ -228,10 +217,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 		$this->type = 'child';
 		$this->child_title_var = 'item_title';
 		$this->child_title_fallback_var = 'item_title';
-		$this->whitelisted_fields = array(
-			'module_class', 'module_id', 'item_title',
-			'content_new', 'item_image', 'tile_size', 'tile_link', 'tile_url'
-			);
+		
 		$this->fields_defaults = array(
 			'tile_link' => array('off','add_default_setting'),
 			);

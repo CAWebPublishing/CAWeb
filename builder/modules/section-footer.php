@@ -16,17 +16,6 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 
 		$this->child_item_text = esc_html__( 'Group', 'et_builder' );
 
-		$this->whitelisted_fields = array(
-			'section_background_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
 		$this->main_css_element = '%%order_class%%.et_pb_ca_section_footer';
 
 		$this->options_toggles = array(
@@ -173,22 +162,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 		$this->child_title_var = 'group_title';
 
 		$this->child_title_fallback_var = 'group_title';
-
-		$this->whitelisted_fields = array('heading_color', 'text_color',
-			'font_icon', 'group_icon_button', 'group_title',
-			'group_url', 'group_show_more_button', 'display_link_as_button',
-			'group_link1_show',
-			'group_link2_show', 'group_link3_show', 'group_link4_show',
-			'group_link5_show', 'group_link6_show', 'group_link7_show',
-			'group_link8_show', 'group_link9_show', 'group_link10_show',
-		 'group_link_text1', 'group_link_url1','group_link_text2',
-		 'group_link_url2', 'group_link_text3', 'group_link_url3',
-		 'group_link_text4', 'group_link_url4', 'group_link_text5',
-		 'group_link_url5', 'group_link_text6', 'group_link_url6',
-		 'group_link_text7', 'group_link_url7', 'group_link_text8',
-		 'group_link_url8', 'group_link_text9', 'group_link_url9',
-		 'group_link_text10', 'group_link_url10','module_class', 'module_id',
-			);
 
 		$this->fields_defaults = array(
 			'font_icon' => array('%-1%','add_default_setting'),
@@ -442,17 +415,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		$this->fullwidth = true;
 		$this->child_slug      = 'et_pb_ca_section_fullwidth_footer_group';
 		$this->child_item_text = esc_html__( 'Group', 'et_builder' );
-		$this->whitelisted_fields = array(
-			'section_background_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
+		
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
@@ -590,22 +553,6 @@ function init() {
 	$this->fullwidth = true;
 	$this->child_title_var = 'group_title';
 	$this->child_title_fallback_var = 'group_title';
-
-	$this->whitelisted_fields = array('heading_color', 'text_color',
-	'font_icon', 'group_icon_button', 'group_title',
-	'group_url', 'group_show_more_button', 'display_link_as_button',
-	'group_link1_show',
-	'group_link2_show', 'group_link3_show', 'group_link4_show',
-	'group_link5_show', 'group_link6_show', 'group_link7_show',
-	'group_link8_show', 'group_link9_show', 'group_link10_show',
- 'group_link_text1', 'group_link_url1','group_link_text2',
- 'group_link_url2', 'group_link_text3', 'group_link_url3',
- 'group_link_text4', 'group_link_url4', 'group_link_text5',
- 'group_link_url5', 'group_link_text6', 'group_link_url6',
- 'group_link_text7', 'group_link_url7', 'group_link_text8',
- 'group_link_url8', 'group_link_text9', 'group_link_url9',
- 'group_link_text10', 'group_link_url10','module_class', 'module_id', 'admin_label',
-		);
 
 	$this->fields_defaults = array(
 		'font_icon' => array('%-1%','add_default_setting'),

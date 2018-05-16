@@ -15,17 +15,6 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         $this->child_slug      = 'et_pb_ca_fullwidth_banner_item';
         $this->child_item_text = esc_html__('Slide', 'et_builder');
 
-        $this->whitelisted_fields = array(
-			'font_icon',
-			'scroll_bar_text',
- 		 	'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
- 		 	'module_class',
-			'admin_label',
-			'module_id',
-		);
         $this->fields_defaults = array(
 			'font_icon' => array('%%114%%', 'add_default_setting'),
     	'scroll_bar_text' => array('Explore', 'add_default_setting'),
@@ -229,11 +218,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         $this->child_title_var = 'heading';
         $this->fullwidth = true;
         $this->child_title_fallback_var = 'heading';
-        $this->whitelisted_fields = array(
-		 		'display_banner_info', 'display_heading',
-				'heading', 'module_class', 'module_id',
-				'button_text', 'button_link', 'background_image',
-		);
+      
         $this->fields_defaults = array(
 	'button_link' => array('#', 'add_default_setting'),
 	'display_heading' => array('on', 'add_default_setting'),

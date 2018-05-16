@@ -11,31 +11,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 
 		$this->slug = 'et_pb_ca_location_widget';
 
-		$this->whitelisted_fields = array(
-			'location_layout',
-			'show_button',
-			'featured_image',
-		  'addr',
-			'city',
-			'zip',
-			'show_icon',
-			'state',
-			'location_link',
-			'font_icon',
-			'show_contact',
-			'name',
-			'desc',
-			'phone',
-			'fax',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
 		$this->fields_defaults = array(
 			'font_icon' => array('%-1%','add_default_setting'),
 			'button_link' => array('http://','add_default_setting'),

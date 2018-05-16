@@ -11,23 +11,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
         $this->slug = 'et_pb_profile_banner';
 
-        $this->whitelisted_fields = array(
-			'name',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'job_title',
-			'admin_label',
-			'url',
-			'disabled_on',
-			'module_class',
-			'module_id',
-			'portrait_url',
-			'profile_link',
-			'round_image',
-		);
-
         $this->fields_defaults = array(
 			'url'       => array('#', 'add_default_setting'),
 		);

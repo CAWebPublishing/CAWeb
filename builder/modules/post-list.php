@@ -11,23 +11,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 		$this->slug = 'et_pb_ca_post_list';
 
-		$this->whitelisted_fields = array(
-			'style',
-			'title',
-			'all_categories_button',
-			'include_categories',
-			'faq_style',
-			'all_tags_button',
-			'include_tags',
-			'view_featured_image',
-			'posts_number',
-			'module_class',
-			'module_id',
-			'orderby',
-			'admin_label',
-			'title_size',
-		);
-
 		$this->fields_defaults = array(
 			'orderby'  => array('date_desc'),
 		);

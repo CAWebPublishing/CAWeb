@@ -12,29 +12,6 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$this->slug = 'et_pb_ca_card';
 		$this->fb_support = true;
 
-		$this->whitelisted_fields = array(
-			'card_color',
-			'show_image',
-			'featured_image',
-		 	'title',
-			'content',
-			'show_button',
-			'button_text',
-		  'button_link',
-			'include_header',
-			'card_layout',
-			'include_footer',
-			'footer_text',
-			'text_color',
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-		);
-
 		$this->fields_defaults = array(
 			'button_link' => array('http://','add_default_setting'),
 		);

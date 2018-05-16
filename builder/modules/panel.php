@@ -12,25 +12,6 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 
 		$this->slug = 'et_pb_ca_panel';
 
-		$this->whitelisted_fields = array(
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-			'panel_layout',
-			'show_button',
-			'use_icon',
-			'font_icon',
-			'heading_align',
-			'button_link',
-			'title',
-			'heading_text_color',
-			'content',
-		);
-
 		$this->fields_defaults = array(
 			'panel_layout' => array('default'),
 			'button_link' => array('http://','add_default_setting'),
@@ -291,25 +272,6 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$this->slug = 'et_pb_ca_fullwidth_panel';
 
 		$this->fullwidth       = true;
-
-		$this->whitelisted_fields = array(
-			'max_width',
-			'max_width_tablet',
-			'max_width_phone',
-			'max_width_last_edited',
-			'module_class',
-			'module_id',
-			'admin_label',
-			'panel_layout',
-			'show_button',
-			'use_icon',
-			'font_icon',
-			'heading_align',
-			'button_link',
-			'title',
-			'heading_text_color',
-			'content',
-			);
 
 			$this->fields_defaults = array(
 				'panel_layout' => array('default'),
