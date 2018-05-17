@@ -37,22 +37,17 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 			),
 		);
 	}
-	function pre_shortcode_content() {
-		global $titles;
-		global $tile_images;
-		global $tile_sizes;
-		global $tile_links;
-		global $tile_urls;
-
+	function before_render() {
+		global $tile_count, $tiles;
+		
+		$tiles = array();
 		$titles = array();
 		$tile_images = array();
 		$tile_sizes= array();
 		$tile_links= array();
 		$tile_urls= array();
 
-		global $items_count;
-
-		$items_count = 0;
+		$tile_count = 0;
 
 	}
 	function get_fields() {
@@ -139,37 +134,33 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 		$class = sprintf(' class="et_pb_ca_fullwidth_service_tiles et_pb_module section-understated collapsed%1$s"', $module_class);
-
-
-		global $titles;
-		global $tile_images;
-		global $tile_sizes;
-		global $tile_links;
-		global $tile_urls;
-
-		global $items_count;
+		
+		global $tile_count, $tiles;
 
 		$view_more = "on" == $view_more_on_off ? sprintf('<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url($view_more_url), $view_more_text) : '';
 
 		$output = '';
 
-		for($i = 0; $i < $items_count; $i++){
-			if("on" == $tile_links[$i]){
-				$output .= sprintf('<div tabindex="%1$s" class="service-tile service-tile-empty %2$s" data-url="%3$s" data-link-target="new" >
-					%4$s<div class="teaser"><h4 class="title">%5$s</h4></div></div>',
-													$i + 1, $tile_sizes[$i], esc_url($tile_urls[$i] ) ,
-													( ! empty($tile_images[$i]) ? sprintf('<img src="%1$s" style="background-size: cover; width: 100%%; height: 320px;"/>', $tile_images[$i]) : ''),
-													$titles[$i]  );
+		for($i = 0; $i < $tile_count; $i++){
+			$title = $tiles[$i]['item_title'];
+			$tile_size = $tiles[$i]['tile_size'];
+			$item_image = $tiles[$i]['item_image'];
+			
+			if("on" == $tiles[$i]['tile_link']){
+				$output .= sprintf('<div tabindex="%1$s" class="service-tile service-tile-empty %2$s" data-url="%3$s" data-link-target="new" >%4$s<div class="teaser"><h4 class="title">%5$s</h4></div></div>', $i + 1, $tile_size, $tiles[$i]['tile_url'] , ! empty($item_image) ? sprintf('<img src="%1$s" style="background-size: cover; width: 100%%; height: 320px;"/>', $item_image) : '', $title  );
 			}else{
-
-		$output .= sprintf('<div tabindex="%1$s" class="service-tile %2$s" data-tile-id="panel-%1$s"
-style="background-image:url(%3$s); background-size: cover;"><div class="teaser"><h4 class="title">%4$s</h4></div></div>',
-												$i + 1, $tile_sizes[$i], $tile_images[$i], $titles[$i]  );
+				$output .= sprintf('<div tabindex="%1$s" class="service-tile %2$s" data-tile-id="panel-%1$s" style="background-image:url(%3$s); background-size: cover;"><div class="teaser"><h4 class="title">%4$s</h4></div></div>', $i + 1, $tile_size, $item_image, $title);
+			}
+		}
+		for($i = 0; $i < $tile_count; $i++){
+			if("off" == $tiles[$i]['tile_link']){
+				$output .= sprintf('<div %1$s data-tile-id="panel-%2$s"><div class="section section-default" style="padding-top: 25px; padding-bottom: 25px;"><div class="container" style="padding-top: 0px;"><div class="card card-block"><button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><div class="group" style="padding-left:15px; padding-right: 15px;">%3$s</div></div></div></div></div>', $tiles[$i]['module_class'], $i + 1, $tiles[$i]['content'] );
 			}
 		}
 
-		$output .= do_shortcode($content);
-		$output = sprintf('<div%1$s><div class="service-group clearfix" id="service-group-123">%2$s</div>%3$s</div>', $class, $output, $view_more);
+		$output .= $this->content;
+		
+		$output = sprintf('<div%1$s><div class="service-group clearfix">%2$s</div>%3$s</div>', $class, $output, $view_more);
 
 		return $output;
 	}
@@ -271,7 +262,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 				'label' => esc_html__( 'Tile Content', 'et_builder' ),
 				'type'=> 'tiny_mce',
 				'description' => esc_html__( 'Define the text for the tile content', 'et_builder' ),
-				'show_if_not' =>  array('tile_link' => 'on'),
+				'depends_show_if' =>  'off',
 				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'body',
 			),
@@ -302,40 +293,22 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_class         = $this->props['module_class'];
-		$module_id            = $this->props['module_id'];
-		$title                = $this->props['item_title'];
-		$tile_image           = $this->props['item_image'];
-		$tile_size           = $this->props['tile_size'];
-		$tile_url           = $this->props['tile_url'];
-		$tile_link           = $this->props['tile_link'];
+		global $tile_count, $tiles;
 
-		global $titles;
-		global $tile_images;
-		global $tile_sizes;
-		global $tile_links;
-		global $tile_urls;
+		$this->add_classname( 'service-tile-panel' );
 
-		global $items_count;
+		$tiles[] = array(
+			'item_title' => $this->props['item_title'],
+			'item_image' => $this->props['item_image'],
+			'tile_size' => $this->props['tile_size'],
+			'tile_url' => ! empty($this->props['tile_url']) ? esc_url($this->props['tile_url']) : '',
+			'tile_link' => $this->props['tile_link'],
+			'module_id' => $this->module_id(),
+			'module_class' => sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) ),
+			'content' => $this->content, 
+		);
 
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_fullwidth_service_tiles_item et_pb_module service-tile-panel%1$s"', $module_class);
-
-		$titles[] = $title;
-		$tile_images[] = $tile_image;
-		$tile_sizes[] = $tile_size;
-		$tile_links[] = $tile_link;
-		$tile_urls[] = $tile_url;
-
-		$items_count++;
-
-		$output = '';
-
-		if("off" == $tile_link)
-			$output = sprintf('<div%1$s data-tile-id="panel-%2$s"><div class="section section-default" style="padding-top: 25px; padding-bottom: 25px;"><div class="container" style="padding-top: 0px;"><div class="card card-block"><button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><div class="group" style="padding-left:15px; padding-right: 15px;">%3$s</div></div></div></div></div>', $class, $items_count , 	do_shortcode($content));
-
-		return $output;
+		$tile_count++;
 
 	}
 }
