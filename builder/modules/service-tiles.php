@@ -125,16 +125,14 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            = $this->props['module_id'];
-		$module_class         = $this->props['module_class'];
 		$view_more_on_off     = $this->props['view_more_on_off'];
 		$view_more_text       = $this->props['view_more_text'];
 		$view_more_url        = $this->props['view_more_url'];
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_fullwidth_service_tiles et_pb_module section-understated collapsed%1$s"', $module_class);
 		
+		$this->add_classname( 'section-understated' );
+		$this->add_classname( 'collapsed' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+				
 		global $tile_count, $tiles;
 
 		$view_more = "on" == $view_more_on_off ? sprintf('<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url($view_more_url), $view_more_text) : '';
@@ -160,7 +158,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 
 		$output .= $this->content;
 		
-		$output = sprintf('<div%1$s><div class="service-group clearfix">%2$s</div>%3$s</div>', $class, $output, $view_more);
+		$output = sprintf('<div%1$s%2$s><div class="service-group clearfix">%3$s</div>%4$s</div>',$this->module_id(), $class, $output, $view_more);
 
 		return $output;
 	}

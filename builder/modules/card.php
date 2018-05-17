@@ -235,8 +235,6 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id = $this->props['module_id'];
-		$module_class = $this->props['module_class'];
 		$card_layout = $this->props['card_layout'];
 		$card_color = $this->props['card_color'];
 		$text_color = $this->props['text_color'];
@@ -251,11 +249,13 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$include_footer = $this->props['include_footer'];
 		$footer_text = $this->props['footer_text'];
 
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-
-		$class = sprintf(' class="et_pb_ca_card et_pb_module card card-%1$s%2$s"', "custom" == $card_layout ? 'default'  : $card_layout, $module_class);
-
+		$content = $this->content;
+		
+		$this->add_classname( 'card' );
+		$this->add_classname( sprintf('card-%1$s', "custom" == $card_layout ? 'default'  : $card_layout) );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
+		
 		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
 		$card_color = ( ! empty( $card_color ) && "custom" == $card_layout ? sprintf(' style="background-color: %1$s;"', $card_color) : "" );
@@ -275,7 +275,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$display_footer = ("on" == $include_footer ?
 		sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '' );
 
-		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $module_id, $class, $display_image, $display_header,$card_color,do_shortcode($content), $display_button, $display_footer );
+		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header,$card_color,$content, $display_button, $display_footer );
 
 		return $output;
 

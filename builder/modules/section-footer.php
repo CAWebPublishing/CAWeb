@@ -95,17 +95,16 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            		= $this->props['module_id'];
-		$module_class         		= $this->props['module_class'];
 		$section_background_color = $this->props['section_background_color'];
 
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_section_footer et_pb_module section%1$s"', $module_class);
+		$content = $this->content;
+		
+		$this->add_classname( 'section' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$section_bg_color = ("" != $section_background_color ? sprintf(' style="background: %1$s" ', $section_background_color): '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>',$module_id , $class ,	$section_bg_color, do_shortcode($content));
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>',$this->module_id() , $class ,	$section_bg_color, $content);
 
 		return $output;
 
@@ -298,8 +297,6 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            = $this->props['module_id'];
-		$module_class         = $this->props['module_class'];
 		$heading_color = $this->props['heading_color'];
 		$text_color= $this->props['text_color'];
 		$group_icon = $this->props['font_icon'];
@@ -315,10 +312,9 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
       $group_link_text[$i] = $this->props[sprintf('group_link_text%1$s', $i)];
       $group_link_url[$i] = $this->props[sprintf('group_link_url%1$s', $i)];
     }
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_section_footer_group et_pb_module quarter%1$s"', $module_class);
+		
+		$this->add_classname( 'quarter' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$heading_color = ( ! empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
 
@@ -343,7 +339,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module{
         esc_url($group_link_url[$i]), $link_as_button, $text_color, $icon, $group_link_text[$i] ) : '');
     }
 
-		$output = sprintf('<div%1$s%2$s><h4%3$s>%4$s</h4><ul class="list-unstyled" style="list-style-type: none; %5$s">%6$s</ul>%7$s</div>' , $module_id , $class , $heading_color, $group_title, $no_pad, $group_links, $display_more_button);
+		$output = sprintf('<div%1$s%2$s><h4%3$s>%4$s</h4><ul class="list-unstyled" style="list-style-type: none; %5$s">%6$s</ul>%7$s</div>' , $this->module_id() , $class , $heading_color, $group_title, $no_pad, $group_links, $display_more_button);
 
 		return $output;
 
@@ -441,17 +437,16 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		return array_merge( $general_fields, $design_fields, $advanced_fields);
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            		= $this->props['module_id'];
-		$module_class         		= $this->props['module_class'];
 		$section_background_color = $this->props['section_background_color'];
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_fullwidth_section_footer et_pb_module section%1$s"', $module_class);
-
+		
+		$content = $this->content;
+		
+		$this->add_classname( 'section' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
 		$section_bg_color = ("" != $section_background_color ? sprintf(' style="background: %1$s" ', $section_background_color): '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>',$module_id , $class ,	$section_bg_color, do_shortcode($content));
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>',$this->module_id() , $class ,	$section_bg_color, $content);
 
 		return $output;
 	}
@@ -640,8 +635,6 @@ function get_fields() {
 	return array_merge( $general_fields, $design_fields, $advanced_fields);
 }
 function render( $unprocessed_props, $content = null, $render_slug ) {
-	$module_id            = $this->props['module_id'];
-	$module_class         = $this->props['module_class'];
 	$heading_color = $this->props['heading_color'];
 	$text_color= $this->props['text_color'];
 	$group_icon = $this->props['font_icon'];
@@ -657,10 +650,9 @@ function render( $unprocessed_props, $content = null, $render_slug ) {
 		$group_link_text[$i] = $this->props[sprintf('group_link_text%1$s', $i)];
 		$group_link_url[$i] = $this->props[sprintf('group_link_url%1$s', $i)];
 	}
-
-	$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-	$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-	$class = sprintf(' class="et_pb_ca_section_fullwidth_footer_group et_pb_module quarter%1$s"', $module_class);
+	
+	$this->add_classname( 'quarter' );
+	$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 	$heading_color = ( ! empty($heading_color) ? sprintf(' style="color: %1$s" ', $heading_color) : '');
 
@@ -685,7 +677,7 @@ function render( $unprocessed_props, $content = null, $render_slug ) {
 			esc_url($group_link_url[$i]), $link_as_button, $text_color, $icon, $group_link_text[$i] ) : '');
 	}
 
-	$output = sprintf('<div%1$s%2$s><h4%3$s>%4$s</h4><ul class="list-unstyled" style="list-style-type: none; %5$s">%6$s</ul>%7$s</div>' , $module_id , $class , $heading_color, $group_title, $no_pad, $group_links, $display_more_button);
+	$output = sprintf('<div%1$s%2$s><h4%3$s>%4$s</h4><ul class="list-unstyled" style="list-style-type: none; %5$s">%6$s</ul>%7$s</div>' , $this->module_id(), $class , $heading_color, $group_title, $no_pad, $group_links, $display_more_button);
 
 	return $output;
 }

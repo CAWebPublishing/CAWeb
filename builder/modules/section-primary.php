@@ -201,8 +201,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            		= $this->props['module_id'];
-		$module_class         		= $this->props['module_class'];
 		$featured_image_button 		= $this->props['featured_image_button'];
 		$heading_align 						= $this->props['heading_align'];
 		$image_pos 								= $this->props['left_right_button'];
@@ -213,11 +211,12 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		$section_link 						= $this->props['section_link'];
 		$section_background_color = $this->props['section_background_color'];
 		$heading_text_color 			= $this->props['heading_text_color'];
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_section_primary et_pb_module section%1$s"',  $module_class);
-
+				
+		$content = $this->content;
+		
+		$this->add_classname( 'section' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
@@ -237,7 +236,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 			$section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, do_shortcode($content), $display_button);
+					$heading_style, $section_heading, $content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
 
@@ -246,10 +245,10 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 										sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 					$body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-					$heading_style, $heading_align, $section_heading, do_shortcode($content), $display_button);
+					$heading_style, $heading_align, $section_heading, $content, $display_button);
 
 		}
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $module_id ,	 $class ,	$section_bg_color, $body);
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $this->module_id() ,	 $class ,	$section_bg_color, $body);
 
 		return $output;
 
@@ -453,8 +452,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 		return array_merge( $general_fields, $design_fields, $advanced_fields);
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            		= $this->props['module_id'];
-		$module_class         		= $this->props['module_class'];
 		$featured_image_button 		= $this->props['featured_image_button'];
 		$heading_align 						= $this->props['heading_align'];
 		$image_pos 								= $this->props['left_right_button'];
@@ -465,11 +462,12 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 		$section_link 						= $this->props['section_link'];
 		$section_background_color = $this->props['section_background_color'];
 		$heading_text_color 			= $this->props['heading_text_color'];
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_fullwidth_section_primary et_pb_module section%1$s"',  $module_class);
-
+		
+		$content = $this->content;
+		
+		$this->add_classname( 'section' );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
@@ -489,7 +487,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 			$section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, do_shortcode($content), $display_button);
+					$heading_style, $section_heading, $content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
 
@@ -498,10 +496,10 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 										sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 					$body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-					$heading_style, $heading_align, $section_heading, do_shortcode($content), $display_button);
+					$heading_style, $heading_align, $section_heading, $content, $display_button);
 
 		}
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $module_id ,	 $class ,	$section_bg_color, $body);
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $this->module_id() ,	 $class ,	$section_bg_color, $body);
 
 		return $output;
 	}

@@ -131,19 +131,16 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
-        $module_class         = $this->props['module_class'];
         $name                 = $this->props['name'];
         $job_title              = $this->props['job_title'];
         $profile_link              = $this->props['profile_link'];
         $portrait_url           = $this->props['portrait_url'];
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
-
-        $module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-
+				
+        $class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+				
         $url = ! empty($url) ? esc_url( $url ) : '';
-
-        $class = sprintf(' class="et_pb_profile_banner et_pb_module%1$s"', $module_class);
 
         $image = ('on' !== $round ?
 						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :

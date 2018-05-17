@@ -114,17 +114,15 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
-      $module_class         = $this->props['module_class'];
       $scroll_bar_text = $this->props['scroll_bar_text'];
       $scroll_bar_icon = $this->props['font_icon'];
-
-      $module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-
-      $class = sprintf(' class="et_pb_ca_fullwidth_banner et_pb_module header-single-banner%1$s"',  $module_class);
-
-      $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div><div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%3$s</span>%4$s</a>
-        </div></div></div> <!-- .et_pb_ca_banner -->', $class, do_shortcode($content), $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
-         );
+			
+			$this->add_classname( 'header-single-banner' );
+      $class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+			
+			$content = $this->content;
+			
+      $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div><div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%3$s</span>%4$s</a></div></div></div> <!-- .et_pb_ca_banner -->', $class, $content, $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon) );
 
       return $output;
     }
@@ -292,8 +290,6 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
-        $module_id            = $this->props['module_id'];
-        $module_class         = $this->props['module_class'];
         $display_banner_info = $this->props['display_banner_info'];
         $heading = $this->props['heading'];
         $display_heading = $this->props['display_heading'];
@@ -304,17 +300,15 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         global $et_pb_slider_item_num;
 
         $et_pb_slider_item_num++;
-
-				$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-				$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-
-				$class = sprintf(' class="et_pb_ca_fullwidth_banner_item et_pb_module slide%1$s"',  $module_class);
-
+				
+				$this->add_classname( 'slide' );
+				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+				
         $button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
         $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="_blank"><p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>', $button_link, $heading, $button_text, ("off" == $display_heading ? 'style="display:none;"' : ''))	: '');
 
-        $output = sprintf('<div%1$s%2$s style="background-image:url(%3$s);">%4$s</div>', $module_id, $class, $background_image, $link	);
+        $output = sprintf('<div%1$s%2$s style="background-image:url(%3$s);">%4$s</div>', $this->module_id(), $class, $background_image, $link	);
 
         return $output;
     }

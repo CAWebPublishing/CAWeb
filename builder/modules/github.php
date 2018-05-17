@@ -8,7 +8,6 @@ make sure the field name is one of the following:
 class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'GitHub', 'et_builder' );
-
 		$this->slug = 'et_pb_ca_github';
 
 		$this->fields_defaults = array(
@@ -28,17 +27,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			),
 			'advanced' => array(
 				'toggles' => array(
-          'email' => array(
-						'title'    => esc_html__( 'Request Access Email', 'et_builder' ),
-						'priority' => 49,
-					),
+          'email' => esc_html__( 'Request Access Email', 'et_builder' ),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
-					),
-					'width' => array(
-						'title'    => esc_html__( 'Sizing', 'et_builder' ),
-						'priority' => 65,
 					),
 				),
 			),
@@ -50,14 +42,16 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 
 	}
 	function get_fields() {
-		$fields = array(
+		$general_fields = array(
 			'per_page' => array(
 			  'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
+				'default' => 100,
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'style',
 			),
-      'repo_type' => array(
+			'repo_type' => array(
 				'label'           => esc_html__( 'Repository Type', 'et_builder' ),
 				'type'            => 'select',
 				'option_category' => 'configuration',
@@ -67,20 +61,24 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					'private' => esc_html__( 'Private', 'et_builder' ),
 					'forks' => esc_html__( 'Forks', 'et_builder' ),
 				),
+				'default' => 'all',
 				'description' => 'Choose repository type you wish to display.',
+				'tab_slug'	=> 'general',
 				'toggle_slug' => 'style',
 			),
-      'access_token' => array(
+			'access_token' => array(
 			  'label'       => esc_html__( 'Personal Access Token', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This is required for Private Repositories to display.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'style',
 				'show_if_not'	=> array('repo_type' => 'public'),
 			),
-      'request_email' => array(
+			'request_email' => array(
 			  'label'       => esc_html__( 'Code Request Email', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This is the administrators email that will receive all emails requesting access to private repositories.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'style',
 				'show_if_not'	=> array('repo_type' => 'public'),
 			),
@@ -88,15 +86,17 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  'label'       => esc_html__( 'Title', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'header',
 			),
 			'username' => array(
 			  'label'       => esc_html__( 'Username', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'body',
 			),
-      'increase_rate_limit' => array(
+			'increase_rate_limit' => array(
 				'label'           => esc_html__( 'Increase Rate Limit', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
@@ -104,16 +104,15 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'description' => et_get_safe_localization(
-						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour.
-										<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ),
-																						esc_url( 'https://developer.github.com/v3/#rate-limiting' ) ) ),
+				'description' => et_get_safe_localization(sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour.<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ), esc_url( 'https://developer.github.com/v3/#rate-limiting' ) ) ),
+				'tab_slug'	=> 'general',
 				'toggle_slug' => 'body',
 			),
 			'client_id' => array(
 			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'body',
 				'show_if'	=> array('increase_rate_limit' => 'on'),
 			),
@@ -121,6 +120,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'body',
 				'show_if'	=> array('increase_rate_limit' => 'on'),
 			),
@@ -136,41 +136,31 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			    'updated_at' => esc_html__( 'Updated Date', 'et_builder' ),
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'body',
-			),
-      'email_body' => array(
-				'label'           => esc_html__( 'Body', 'et_builder'),
-				'type'            => 'textarea',
-				'option_category' => 'basic_option',
-				'description'     => et_get_safe_localization(
-						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] )
-										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
-																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
-        esc_html__( ' ', 'et_builder' ),
-				'toggle_slug'	=> 'email',
-				'tab_slug'        => 'advanced',
-				'show_if_not'	=> array('repo_type' => 'public'),
-			),
-			'disabled_on' => array(
-			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
-			  'type'            => 'multiple_checkboxes',
-			  'options'         => array(
-			    'phone'   => esc_html__( 'Phone', 'et_builder' ),
-			    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
-			    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
-			  ),
-			  'additional_att'  => 'disable_on',
-			  'option_category' => 'configuration',
-			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
-				'tab_slug'        => 'custom_css',
-				'toggle_slug'     => 'visibility',
 			),
 			'admin_label' => array(
 			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+				'tab_slug'	=> 'general',
 				'toggle_slug'	=> 'admin_label',
 			),
+		);
+		
+		$design_fields = array(
+			'email_body' => array(
+				'label'           => esc_html__( 'Body', 'et_builder'),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'description'     => et_get_safe_localization(sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] )<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ), esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ), esc_html__( ' ', 'et_builder' ),
+				'tab_slug'        => 'advanced',
+				'toggle_slug'	=> 'email',
+				'show_if_not'	=> array('repo_type' => 'public'),
+			),
+		);
+		
+		$advanced_fields = array(
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
@@ -187,33 +177,23 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
-			'max_width' => array(
-				'label'           => esc_html__( 'Max Width', 'et_builder' ),
-				'type'            => 'skip',
-				'option_category' => 'layout',
-				'mobile_options'  => true,
-				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'width',
-				'validate_unit'   => true,
-			),
-			'max_width_tablet' => array(
-				'type'        => 'skip',
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'width',
-			),
-			'max_width_phone' => array(
-				'type'        => 'skip',
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'width',
-			),
-			'max_width_last_edited' => array(
-				'type'        => 'skip',
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'width',
+			'disabled_on' => array(
+			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
+			  'type'            => 'multiple_checkboxes',
+			  'options'         => array(
+			    'phone'   => esc_html__( 'Phone', 'et_builder' ),
+			    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+			    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+			  ),
+			  'additional_att'  => 'disable_on',
+			  'option_category' => 'configuration',
+			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+				'tab_slug'        => 'custom_css',
+				'toggle_slug'     => 'visibility',
 			),
 		);
-
-		return $fields;
+		
+		return array_merge($general_fields, $design_fields, $advanced_fields);
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
@@ -228,19 +208,13 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 		$email_body            = $this->props['email_body'];
 		$per_page            = $this->props['per_page'];
 		$repo_type            = $this->props['repo_type'];
-		$module_id            = $this->props['module_id'];
-		$module_class         = $this->props['module_class'];
-		$max_width            = $this->props['max_width'];
-		$max_width_tablet     = $this->props['max_width_tablet'];
-		$max_width_phone      = $this->props['max_width_phone'];
-		$max_width_last_edited = $this->props['max_width_last_edited'];
 
 		$definitions = explode("|", $definitions);
-
-		$class = "et_pb_ca_github et_pb_module ";
-
-		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
-
+		
+		$class = sprintf(' class="%1$s"', $this->module_classname( $render_slug ) );
+		
+		$content = $this->content;
+		
 		$output = '';
 
     if( ! empty($username)  ){
@@ -301,83 +275,11 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 			}
 		}
 
-			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
-										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
-										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-                    ( ! empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output );
+			$output = sprintf('<div%1$s%2$s>%3$s%4$s</div>',$this->module_id(),	$class , ( ! empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output );
 
 		return $output;
 
 	}
-
-	// This is a non-standard function. It outputs JS code to render the
-		// module preview in the new Divi 3 frontend editor.
-		// Return value of the JS function must be full HTML code to display.
-		function js_frontend_preview() {
-			?>
-			<script>
-				var newCall = '';
-				var amount = 0;
-				var repos = {};
-
-				window.<?php echo $this->slug; ?>_preview = function(args) {
-					var output =  '';
-
-					if( "" !== args.username  && "" !== args.client_id && "" !== args.client_secret ){
-						if("" == newCall || amount !== args.per_page){
-							newCall = args.definitions;
-							amount = args.per_page
-
-							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page +
-												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;
-
-							jQuery.get(url, function(response){
-										repos = response;
-							});
-
-						}
-
-						var definitions =  undefined !== args.definitions && !Array.isArray(args.definitions) ? args.definitions.split("|") : args.definitions;
-
-						for (var i = 0; i < repos.length; i++){
-										if("on" == definitions[0] && "on" !== definitions[1]){
-											var name = '<strong>Project Title: </strong>' + repos[i].name + '<br />';
-										}else if("on" == definitions[0] && "on" == definitions[1]){
-											var name = '<strong>Project Title: </strong><a href="' + repos[i].html_url + '" target="blank">' +  repos[i].name + '</a><br />';
-										}else{
-											var name = '';
-										}
-
-										var desc = "on" == definitions[2] && null !== repos[i].description ?
-															'<strong>Project Description: </strong>' + repos[i].description + '<br />' : '';
-
-										var fork = "on" == definitions[3] ?
-												'<strong>Project governed by another organization: </strong>' + ( "" == repos[i].fork ? 'false' : 'true') + '<br />' :	'';
-
-										var created_at = "on" == definitions[4] ?
-																	'<strong>Created on: </strong>' + repos[i].created_at + '<br />' : '';
-
-										var updated_at = "on" == definitions[5] ?
-																	'<strong>Updated on: </strong>' + repos[i].updated_at + '<br />' : '';
-
-										var language = "on" == definitions[6] && null !== repos[i].language?
-																'<strong>Language: </strong>' + repos[i].language   + '<br />' : '';
-
-										output += '<ul style="padding-bottom: 0px;"><li>' +
-																	name + desc + fork + created_at + updated_at + language + '</li><hr></ul>';
-
-							}
-
-						output = '<div>' + (undefined == args.title ? "<h2>No Title Set</h2>" : "<h2>" + args.title + "</h2>") + output + '</div>';
-
-						return  output;
-
-					}
-
-				}
-			</script>
-			<?php
-		}
 }
 new ET_Builder_Module_GitHub;
 

@@ -237,8 +237,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            	= $this->props['module_id'];
-		$module_class         	= $this->props['module_class'];
 		$location_layout 				= $this->props['location_layout'];
 		$featured_image       	= $this->props['featured_image'];
 		$name               		= $this->props['name'];
@@ -255,12 +253,11 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 		$show_button    				= $this->props['show_button'];
 		$location_link    			= $this->props['location_link'];
 
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-
-		$class = sprintf(' class="et_pb_ca_location_widget et_pb_module location%1$s%2$s"', $location_layout, $module_class );
-
+		$this->add_classname( 'location' );
+		$this->add_classname( $location_layout );
+		
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
 		$display_icon = ("on" == $show_icon ? caweb_get_icon_span($icon) : '');
 
 		$address = array($addr, $city, $state, $zip);
@@ -280,18 +277,18 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
       $address = ( ! empty($name) ? sprintf('%1$s<br />%2$s', $name, caweb_get_google_map_place_link( $address ) ) :
                   caweb_get_google_map_place_link( $address ) );
 
-			$output =sprintf('<div%1$s%2$s>%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', $module_id , $class, $display_icon, $address, $display_other, $display_button );
+			$output =sprintf('<div%1$s%2$s>%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', $this->module_id() , $class, $display_icon, $address, $display_other, $display_button );
 
 		}elseif("mini" == 	$location_layout ){
 			$output = sprintf('<div%1$s%2$s>%3$s<div class="contact"%7$s><div class="title"><a href="%4$s" target="_blank">%5$s</a></div>%6$s</div></div>',
-			$module_id,	 $class,	("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name,
+			$this->module_id(),	 $class,	("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon ) : ''), $location_link, $name,
        ( ! empty($address) ? sprintf('<div class="address">%1$s</div>', caweb_get_google_map_place_link( $address ) ): ''), ( empty($display_icon) ? ' style="margin-left: 0px;"' : '' ) );
 
 		}else{
 			$display_button = ("on" == $show_button && ! empty( $location_link )  ? sprintf('<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link) : '' );
 
 			$output = sprintf('<div%1$s%2$s><div class="thumbnail"><img src="%3$s"></div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
-			 $module_id ,	 $class,  $featured_image, $name , ( ! empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link( $address ) ) : ''),
+			 $this->module_id() ,	 $class,  $featured_image, $name , ( ! empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link( $address ) ) : ''),
       ( ! empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : ''), $display_button);
 
 		}

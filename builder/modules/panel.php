@@ -187,8 +187,6 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id             	= $this->props['module_id'];
-		$module_class          	= $this->props['module_class'];
 		$panel_layout        		= $this->props['panel_layout'];
 		$use_icon               = $this->props['use_icon'];
 		$icon               		= $this->props['font_icon'];
@@ -197,11 +195,13 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$heading_text_color    	= $this->props['heading_text_color'];
 		$show_button    				= $this->props['show_button'];
 		$button_link    				= $this->props['button_link'];
+		
+		$this->add_classname( 'panel' );
+		$this->add_classname( sprintf('panel-%1$s', $panel_layout ) );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_panel et_pb_module panel panel-%1$s%2$s"', $panel_layout, $module_class);
-
+		$content = $this->content;
+		
 		$button_link = ! empty($button_link) ? esc_url( $button_link) : '';
 
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
@@ -225,7 +225,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, do_shortcode($content) );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $this->module_id(), $class, $remove_overflow, $display_title, $content );
 
 		return $output;
 
@@ -416,8 +416,6 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		return array_merge( $general_fields, $design_fields, $advanced_fields);
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id             	= $this->props['module_id'];
-		$module_class          	= $this->props['module_class'];
 		$panel_layout        		= $this->props['panel_layout'];
 		$use_icon               = $this->props['use_icon'];
 		$icon               		= $this->props['font_icon'];
@@ -426,11 +424,13 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$heading_text_color    	= $this->props['heading_text_color'];
 		$show_button    				= $this->props['show_button'];
 		$button_link    				= $this->props['button_link'];
-
-		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		$class = sprintf(' class="et_pb_ca_fullwidth_panel et_pb_module panel panel-%1$s%2$s"', $panel_layout, $module_class);
-
+		
+		$content = $this->content;
+		
+		$this->add_classname( 'panel' );
+		$this->add_classname( sprintf('panel-%1$s', $panel_layout ) );
+		$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
+		
 		$button_link = ! empty($button_link) ? esc_url( $button_link) : '';
 
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
@@ -454,7 +454,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, do_shortcode($content) );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div>', $this->module_id(), $class, $remove_overflow, $display_title, $content );
 
 		return $output;
 	}
