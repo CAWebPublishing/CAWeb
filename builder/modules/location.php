@@ -129,8 +129,8 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Enter a phone number.', 'et_builder' ),
-				'tab_slug' => 'general',
 				'show_if' => array('show_contact' => 'on'),
+				'tab_slug' => 'general',
 				'toggle_slug' 		=> 'body',
 			),
 			'fax' => array(
@@ -192,7 +192,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module{
 				'class'               => array('et-pb-font-icon'),
 				'renderer'            => 'select_icon',
 				'renderer_with_field' => true,
-				'default' => '%%-1%%',
+				'default' => '%-1%',
 				'description'     => esc_html__( 'Select an icon.', 'et_builder' ),
 				'show_if' => array('show_icon' => 'on'),
 				'tab_slug'		=> 'advanced',

@@ -42,6 +42,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				'type'            => 'text',
   				'option_category' => 'basic_option',
   				'description'     => esc_html__('Input the name of the profile.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'			=> 'header',
   			),
   			'job_title' => array(
@@ -49,6 +50,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				'type'            => 'text',
   				'option_category' => 'basic_option',
   				'description'     => esc_html__('Input the job title.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'			=> 'header',
   			),
   			'profile_link' => array(
@@ -56,6 +58,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				'type'            => 'text',
   				'option_category' => 'basic_option',
   				'description'     => esc_html__('Input the text for the profile link.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'			=> 'body',
   			),
   			'url' => array(
@@ -64,6 +67,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				'option_category' => 'basic_option',
           'default' => '#',
   				'description'     => esc_html__('Input the website of the profile.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'			=> 'body',
   			),
   			'portrait_url' => array(
@@ -74,12 +78,14 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
   				'update_text'        => esc_attr__('Set As Image', 'et_builder'),
   				'description'        => esc_html__('Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'			=> 'body',
   			),
         'admin_label' => array(
   			  'label'       => esc_html__('Admin Label', 'et_builder'),
   			  'type'        => 'text',
   			  'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
+  				'tab_slug' => 'general',
   				'toggle_slug'	=> 'admin_label',
   			),
       );
@@ -93,8 +99,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
   				  'on'  => esc_html__('Yes', 'et_builder'),
   				),
   			  'description' => esc_html__('Switch to yes if you want round images in the profile banner.'),
+          'tab_slug'			=> 'advanced',
   				'toggle_slug'			=> 'body',
-  				'tab_slug'			=> 'advanced',
   			),
       );
       $advanced_fields = array(
