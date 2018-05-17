@@ -275,7 +275,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$display_footer = ("on" == $include_footer ?
 		sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '' );
 
-		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $module_id, $class, $display_image, $display_header,$card_color,$content, $display_button, $display_footer );
+		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $module_id, $class, $display_image, $display_header,$card_color,do_shortcode($content), $display_button, $display_footer );
 
 		return $output;
 

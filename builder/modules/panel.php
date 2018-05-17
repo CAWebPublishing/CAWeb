@@ -224,7 +224,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, do_shortcode($content) );
 
 		return $output;
 
@@ -452,7 +452,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, do_shortcode($content) );
 
 		return $output;
 	}
