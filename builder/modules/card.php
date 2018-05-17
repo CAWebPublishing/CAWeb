@@ -27,6 +27,10 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'style'  		=> esc_html__( 'Style', 'et_builder'),
 		      'header' 		=> esc_html__( 'Header', 'et_builder'),
 					'footer'   	=> esc_html__( 'Footer', 'et_builder'),
+					'text' => array(
+						'title'    => esc_html__('Text', 'et_builder'),
+						'priority' => 49,
+					),
 		    ),
 		  ),
 		  'custom_css' => array(
