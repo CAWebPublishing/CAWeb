@@ -256,6 +256,8 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 
 		$class = sprintf('et_pb_ca_card et_pb_module card card-%1$s%2$s', "custom" == $card_layout ? 'default'  : $card_layout, $module_class);
 
+		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
+
 		$card_color = ( ! empty( $card_color ) && "custom" == $card_layout ? sprintf(' style="background-color: %1$s;"', $card_color) : "" );
 		$text_color = ( ! empty( $text_color ) ? sprintf(' style="color: %1$s;"', $text_color) : "" );
 
@@ -268,7 +270,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'' 	);
 
 		$display_button = ("on" == $show_button ?
-		sprintf('<a href="%1$s" class="btn btn-default">%2$s</a>', $button_link, $button_text) : '');
+		sprintf('<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text) : '');
 
 		$display_footer = ("on" == $include_footer ?
 		sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '' );

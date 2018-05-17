@@ -324,8 +324,9 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 
 				$class = sprintf('et_pb_ca_fullwidth_banner_item et_pb_module%1$s',  $module_class);
 
+        $button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
-        $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="window"><p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>', $button_link, $heading, $button_text, ("off" == $display_heading ? 'style="display:none;"' : ''))	: '');
+        $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="_blank"><p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>', $button_link, $heading, $button_text, ("off" == $display_heading ? 'style="display:none;"' : ''))	: '');
 
         $output = sprintf('<div%3$s class="%4$s%5$s slide" style="background-image:url(%1$s);">%2$s</div>',$background_image, $link, ('' !== $module_id ? sprintf(' id="%1$s"', esc_attr($module_id)) : ''), esc_attr($class),	('' !== $module_class ? sprintf(' %1$s', esc_attr($module_class)) : '')
 			);
