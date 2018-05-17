@@ -132,12 +132,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $portrait_url           = $this->props['portrait_url'];
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
-        $max_width            = $this->props['max_width'];
-        $max_width_tablet     = $this->props['max_width_tablet'];
-        $max_width_phone      = $this->props['max_width_phone'];
-        $max_width_last_edited = $this->props['max_width_last_edited'];
 
-        $module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
         $module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
         $url = ! empty($url) ? esc_url( $url ) : '';
