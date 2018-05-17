@@ -71,7 +71,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'label'           => esc_html__('Profile URL', 'et_builder'),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__('Input the website of the profile (http:// must be included).', 'et_builder'),
+				'description'     => esc_html__('Input the website of the profile.', 'et_builder'),
 				'toggle_slug'			=> 'body',
 			),
 			'portrait_url' => array(
@@ -81,7 +81,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
 				'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
 				'update_text'        => esc_attr__('Set As Image', 'et_builder'),
-				'description'        => esc_html__('Upload your desired image, or type in the URL to the image you would like to display. (http:// must be included)', 'et_builder'),
+				'description'        => esc_html__('Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder'),
 				'toggle_slug'			=> 'body',
 			),
 			'round_image' => array(

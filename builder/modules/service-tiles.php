@@ -280,7 +280,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb
 				'label' => esc_html__( 'URL', 'et_builder' ),
 				'type'=> 'text',
 				'option_category' => 'basic_option',
-				'description' => esc_html__( 'Define the url for the tile. (http:// must be included)', 'et_builder' ),
+				'description' => esc_html__( 'Define the url for the tile.', 'et_builder' ),
 				'show_if' => array('tile_link' => 'on'),
 				'toggle_slug'	=> 'body',
 			),

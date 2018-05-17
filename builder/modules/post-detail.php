@@ -314,7 +314,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				'label'           => esc_html__('URL', 'et_builder'),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__('Enter the URL for this exam item. (http:// must be included)', 'et_builder'),
+				'description'     => esc_html__('Enter the URL for this exam item.', 'et_builder'),
 				'toggle_slug'			=> 'body',
 			),
 			'exam_address' => array(
@@ -765,7 +765,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				'label'           => esc_html__('Duty Statement (URL)', 'et_builder'),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__('Enter the duty statement\'s url link for this job item. (http:// must be included)', 'et_builder'),
+				'description'     => esc_html__('Enter the duty statement\'s url link for this job item.', 'et_builder'),
 				'toggle_slug'			=> 'body',
 			),
       'job_final_filing_date_chooser' => array(
