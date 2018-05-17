@@ -199,9 +199,9 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 
 		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
+		$class = sprintf(' class="et_pb_ca_panel et_pb_module panel panel-%1$s%2$s"', $panel_layout, $module_class);
 
 		$button_link = ! empty($button_link) ? esc_url( $button_link) : '';
-		$class = sprintf('et_pb_ca_panel et_pb_module panel panel-%1$s', $panel_layout);
 
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
 
@@ -224,7 +224,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s class="%2$s"%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
 
 		return $output;
 
@@ -265,7 +265,6 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 				),
 			);
 	}
-
 	function get_fields() {
 		$general_fields = array(
 			'panel_layout' => array(
@@ -428,9 +427,9 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 
 		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
+		$class = sprintf(' class="et_pb_ca_fullwidth_panel et_pb_module panel panel-%1$s%2$s"', $panel_layout, $module_class);
 
 		$button_link = ! empty($button_link) ? esc_url( $button_link) : '';
-		$class = sprintf('et_pb_ca_fullwidth_panel et_pb_module panel panel-%1$s', $panel_layout);
 
 		$display_icon = ("on" == $use_icon ? caweb_get_icon_span( $icon ) : '');
 
@@ -453,7 +452,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 		$display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
-		$output = sprintf('<div%1$s class="%2$s"%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
+		$output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $module_id, $class, $remove_overflow, $display_title, $content );
 
 		return $output;
 	}

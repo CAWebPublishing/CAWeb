@@ -42,7 +42,6 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
       add_action('wp_footer', array($this, 'slideshow_banner_removal'));
 
     }
-
     function get_fields() {
       $general_fields = array(
         'scroll_bar_text' => array(
@@ -114,31 +113,18 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
           return array_merge($general_fields, $design_fields, $advanced_fields);
 
     }
-
     function render( $unprocessed_props, $content = null, $render_slug ) {
       $module_class         = $this->props['module_class'];
       $scroll_bar_text = $this->props['scroll_bar_text'];
       $scroll_bar_icon = $this->props['font_icon'];
 
-
       $module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
-      $class = sprintf('et_pb_ca_fullwidth_banner et_pb_module header-single-banner%1$s',  $module_class);
+      $class = sprintf(' class="et_pb_ca_fullwidth_banner et_pb_module header-single-banner%1$s"',  $module_class);
 
-      $output = sprintf(
-        '<div id="et_pb_ca_fullwidth_banner" class="%1$s">
-        <div id="primary-carousel" class="carousel carousel-banner">
-        %2$s
-        </div>
-        <div class="explore-invite">
-        <div class="text-center">
-        <a href="">
-        <span class="explore-title">%3$s</span>%4$s</a>
-        </div>
-        </div>
-        </div> <!-- .et_pb_ca_banner -->',
-        $class, do_shortcode($content), $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
-      );
+      $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div><div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%3$s</span>%4$s</a>
+        </div></div></div> <!-- .et_pb_ca_banner -->', $class, do_shortcode($content), $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
+         );
 
       return $output;
     }
@@ -322,13 +308,13 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 				$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 				$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
-				$class = sprintf('et_pb_ca_fullwidth_banner_item et_pb_module%1$s',  $module_class);
+				$class = sprintf(' class="et_pb_ca_fullwidth_banner_item et_pb_module slide%1$s"',  $module_class);
 
         $button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
         $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="_blank"><p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>', $button_link, $heading, $button_text, ("off" == $display_heading ? 'style="display:none;"' : ''))	: '');
 
-        $output = sprintf('<div%3$s class="%4$s%5$s slide" style="background-image:url(%1$s);">%2$s</div>',$background_image, $link, ('' !== $module_id ? sprintf(' id="%1$s"', esc_attr($module_id)) : ''), esc_attr($class),	('' !== $module_class ? sprintf(' %1$s', esc_attr($module_class)) : '')
+        $output = sprintf('<div%1$s%2$s style="background-image:url(%3$s);">%4$s</div>', $module_id, $class, $background_image, $link)
 			);
 
         return $output;

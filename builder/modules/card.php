@@ -254,7 +254,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
-		$class = sprintf('et_pb_ca_card et_pb_module card card-%1$s%2$s', "custom" == $card_layout ? 'default'  : $card_layout, $module_class);
+		$class = sprintf(' class="et_pb_ca_card et_pb_module card card-%1$s%2$s"', "custom" == $card_layout ? 'default'  : $card_layout, $module_class);
 
 		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
@@ -275,7 +275,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$display_footer = ("on" == $include_footer ?
 		sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '' );
 
-		$output = sprintf('<div%1$s class="%2$s">%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $module_id, $class, $display_image, $display_header,$card_color,$content, $display_button, $display_footer );
+		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $module_id, $class, $display_image, $display_header,$card_color,$content, $display_button, $display_footer );
 
 		return $output;
 
