@@ -8,141 +8,139 @@ make sure the field name is one of the following:
 // Fullwidth Version
 class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module {
     function init() {
-        $this->name = esc_html__('FullWidth Header Slideshow Banner', 'et_builder');
-        $this->slug = 'et_pb_ca_fullwidth_banner';
-        $this->fullwidth       = true;
+      $this->name = esc_html__('FullWidth Header Slideshow Banner', 'et_builder');
+      $this->slug = 'et_pb_ca_fullwidth_banner';
+      $this->fullwidth       = true;
 
-        $this->child_slug      = 'et_pb_ca_fullwidth_banner_item';
-        $this->child_item_text = esc_html__('Slide', 'et_builder');
+      $this->child_slug      = 'et_pb_ca_fullwidth_banner_item';
+      $this->child_item_text = esc_html__('Slide', 'et_builder');
 
-        $this->fields_defaults = array(
-			'font_icon' => array('%%114%%', 'add_default_setting'),
-    	'scroll_bar_text' => array('Explore', 'add_default_setting'),
+      $this->main_css_element = '%%order_class%%.et_pb_slider';
 
-    );
-        $this->main_css_element = '%%order_class%%.et_pb_slider';
+      $this->settings_modal_toggles = array(
+        'general' => array(
+          'toggles' => array(
+            'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
+          ),
+        ),
+        'advanced' => array(
+          'toggles' => array(
+            'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
+            'text' => array(
+              'title'    => esc_html__('Text', 'et_builder'),
+              'priority' => 49,
+            ),
+          ),
+        ),
+        'custom_css' => array(
+          'toggles' => array(
+          ),
+        ),
+      );
 
-        $this->settings_modal_toggles = array(
-			'general' => array(
-				'toggles' => array(
-					'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
-				),
-			),
-			'advanced' => array(
-				'toggles' => array(
-					'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
-					'text' => array(
-						'title'    => esc_html__('Text', 'et_builder'),
-						'priority' => 49,
-					),
-				),
-			),
-			'custom_css' => array(
-				'toggles' => array(
-				),
-			),
-		);
+      // Custom handler: Output JS for editor preview in page footer.
+      add_action('wp_footer', array($this, 'slideshow_banner_removal'));
 
-        // Custom handler: Output JS for editor preview in page footer.
-        add_action('wp_footer', array($this, 'slideshow_banner_removal'));
     }
+
     function get_fields() {
-			$general_fields = array(
-				'scroll_bar_text' => array(
-					'label'           => esc_html__('Scroll Bar Text', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Here you can enter the text for the scroll bar.', 'et_builder'),
-					'default'     => 'Explore',
-					'tab_slug'     => 'general',
-					'toggle_slug'     => 'scroll_bar',
-					),
-					'admin_label' => array(
-					  'label'       => esc_html__('Admin Label', 'et_builder'),
-					  'type'        => 'text',
-					  'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-						'tab_slug'     => 'general',
-						'toggle_slug' => 'admin_label',
-					),
-			);
-			
-			$design_fields = array(
-				'font_icon' => array(
-					'label'           => esc_html__('Scroll Bar Icon', 'et_builder'),
-					'type'            => 'text',
-					 'option_category'     => 'configuration',
-					'class'               => array('et-pb-font-icon'),
-				 'default'               => '%%114%%',
-					'renderer'            => 'select_icon',
-					'renderer_with_field' => true,
-					'description'     => esc_html__('Here you can select a Heading Icon', 'et_builder'),
-					'tab_slug'     => 'advanced',
-					'toggle_slug'     => 'scroll_bar',
-				),
-			);
-			
-			$advanced_fields = array(				
-				'module_id' => array(
-					'label'           => esc_html__('CSS ID', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'configuration',
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'     => 'classes',
-					'option_class'    => 'et_pb_custom_css_regular',
-				),
-				'module_class' => array(
-					'label'           => esc_html__('CSS Class', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'configuration',
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'     => 'classes',
-					'option_class'    => 'et_pb_custom_css_regular',
-				),
-				'disabled_on' => array(
-				  'label'           => esc_html__('Disable on', 'et_builder'),
-				  'type'            => 'multiple_checkboxes',
-				  'options'         => array(
-				    'phone'   => esc_html__('Phone', 'et_builder'),
-				    'tablet'  => esc_html__('Tablet', 'et_builder'),
-				    'desktop' => esc_html__('Desktop', 'et_builder'),
-				  ),
-				  'additional_att'  => 'disable_on',
-				  'option_category' => 'configuration',
-				  'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'     => 'visibility',
-				)
-			);
-			
-			return array_merge($general_fields, $design_fields, $advanced_fields);
-			
+      $general_fields = array(
+        'scroll_bar_text' => array(
+          'label'           => esc_html__('Scroll Bar Text', 'et_builder'),
+          'type'            => 'text',
+          'option_category' => 'basic_option',
+          'description'     => esc_html__('Here you can enter the text for the scroll bar.', 'et_builder'),
+          'default'     => 'Explore',
+          'tab_slug'     => 'general',
+          'toggle_slug'     => 'scroll_bar',
+        ),
+        'admin_label' => array(
+          'label'       => esc_html__('Admin Label', 'et_builder'),
+          'type'        => 'text',
+          'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
+          'tab_slug'     => 'general',
+          'toggle_slug' => 'admin_label',
+        ),
+      );
+
+      $design_fields = array(
+        'font_icon' => array(
+          'label'           => esc_html__('Scroll Bar Icon', 'et_builder'),
+          'type'            => 'text',
+          'option_category'     => 'configuration',
+          'class'               => array('et-pb-font-icon'),
+          'default'               => '%%114%%',
+          'renderer'            => 'select_icon',
+          'renderer_with_field' => true,
+          'description'     => esc_html__('Here you can select a Heading Icon', 'et_builder'),
+          'tab_slug'     => 'advanced',
+          'toggle_slug'     => 'scroll_bar',
+        ),
+      );
+
+      $advanced_fields = array(
+        'module_id' => array(
+          'label'           => esc_html__('CSS ID', 'et_builder'),
+          'type'            => 'text',
+          'option_category' => 'configuration',
+          'tab_slug'        => 'custom_css',
+          'toggle_slug'     => 'classes',
+          'option_class'    => 'et_pb_custom_css_regular',
+        ),
+        'module_class' => array(
+          'label'           => esc_html__('CSS Class', 'et_builder'),
+          'type'            => 'text',
+          'option_category' => 'configuration',
+          'tab_slug'        => 'custom_css',
+          'toggle_slug'     => 'classes',
+          'option_class'    => 'et_pb_custom_css_regular',
+          ),
+          'disabled_on' => array(
+          'label'           => esc_html__('Disable on', 'et_builder'),
+          'type'            => 'multiple_checkboxes',
+          'options'         => array(
+          'phone'   => esc_html__('Phone', 'et_builder'),
+          'tablet'  => esc_html__('Tablet', 'et_builder'),
+          'desktop' => esc_html__('Desktop', 'et_builder'),
+          ),
+          'additional_att'  => 'disable_on',
+          'option_category' => 'configuration',
+          'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
+          'tab_slug'        => 'custom_css',
+          'toggle_slug'     => 'visibility',
+          )
+          );
+
+          return array_merge($general_fields, $design_fields, $advanced_fields);
+
     }
+
     function render( $unprocessed_props, $content = null, $render_slug ) {
-        $module_class         = $this->props['module_class'];
-        $scroll_bar_text = $this->props['scroll_bar_text'];
-        $scroll_bar_icon = $this->props['font_icon'];
+      $module_class         = $this->props['module_class'];
+      $scroll_bar_text = $this->props['scroll_bar_text'];
+      $scroll_bar_icon = $this->props['font_icon'];
 
-				$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
-				$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
-				$class = sprintf('et_pb_ca_fullwidth_banner et_pb_module%1$s',  $module_class);
+      $module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
 
-        $output = sprintf(
-			'<div id="et_pb_ca_fullwidth_banner" class="%1$s header-slideshow-banner">
-				<div id="primary-carousel" class="carousel carousel-banner">
-					%2$s
-				</div>
-				<div class="explore-invite">
-					<div class="text-center">
-						<a href="">
-						<span class="explore-title">%3$s</span>%4$s</a>
-					</div>
-				</div>
-			</div> <!-- .et_pb_ca_banner -->',
-      $class, $content, $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
-		);
+      $class = sprintf('et_pb_ca_fullwidth_banner et_pb_module header-single-banner%1$s',  $module_class);
 
-        return $output;
+      $output = sprintf(
+        '<div id="et_pb_ca_fullwidth_banner" class="%1$s">
+        <div id="primary-carousel" class="carousel carousel-banner">
+        %2$s
+        </div>
+        <div class="explore-invite">
+        <div class="text-center">
+        <a href="">
+        <span class="explore-title">%3$s</span>%4$s</a>
+        </div>
+        </div>
+        </div> <!-- .et_pb_ca_banner -->',
+        $class, do_shortcode($content), $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)
+      );
+
+      return $output;
     }
 
     // This is a non-standard function.
@@ -191,29 +189,29 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         $this->name = esc_html__('FullWidth Banner Slide', 'et_builder');
         $this->slug = 'et_pb_ca_fullwidth_banner_item';
         $this->type = 'child';
+        $this->fullwidth       = true;
         $this->child_title_var = 'heading';
-        $this->fullwidth = true;
         $this->child_title_fallback_var = 'heading';
-      
+
         $this->advanced_setting_title_text = esc_html__('New Slide', 'et_builder');
         $this->settings_text = esc_html__('Slide Settings', 'et_builder');
         $this->main_css_element = '%%order_class%%';
 
         $this->settings_modal_toggles = array(
-					'general' => array(
-						'toggles' => array(
-							'content'  => esc_html__('Content', 'et_builder'),
-							'image'    => esc_html__('Image', 'et_builder'),
-						),
-					),
-					'advanced' => array(
-						'toggles' => array(
-						),
-					),					
-					'custom_css' => array(
-						'toggles' => array(
-						),
-					),
+          'general' => array(
+            'toggles' => array(
+              'content'  => esc_html__('Content', 'et_builder'),
+              'image'    => esc_html__('Image', 'et_builder'),
+            ),
+          ),
+          'advanced' => array(
+            'toggles' => array(
+            ),
+          ),
+          'custom_css' => array(
+            'toggles' => array(
+            ),
+          ),
 				);
     }
     function get_fields() {
@@ -226,6 +224,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 						'on'  => esc_html__('Yes', 'et_builder'),
 						'off' => esc_html__('No', 'et_builder'),
 					),
+          'affects' => array('heading', 'display_heading', 'button_text', 'button_link'),
 					'tab_slug' => 'general',
 					'toggle_slug' => 'content',
 				),
@@ -234,7 +233,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 					'type' => 'text',
 					'option_category' => 'basic_option',
 					'description'     => esc_html__('Define the title text for your slide.', 'et_builder'),
-					'show_if_not' => array('display_banner_info' => 'off',),
+					'show_if' => array('display_banner_info' => 'on'),
 					'tab_slug' => 'general',
 					'toggle_slug' => 'content',
 				),
@@ -247,6 +246,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 					),
 					'option_category' => 'configuration',
 					'description'       => esc_html__('This will toggle the heading on/off in the banner slide', 'et_builder'),
+					'show_if' => array('display_banner_info' => 'on'),
 					'tab_slug' => 'general',
 					'toggle_slug'       => 'content',
 					),
@@ -255,6 +255,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 					'type'=> 'textarea',
 					'option_category' => 'basic_option',
 					'description' => esc_html__('Define the text for the slide button', 'et_builder'),
+					'show_if' => array('display_banner_info' => 'on'),
 					'tab_slug' => 'general',
 					'toggle_slug'     => 'content',
 				),
@@ -264,6 +265,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 					'option_category' => 'basic_option',
 					'description' => esc_html__('Input a destination URL for the slide button.', 'et_builder'),
 					'default' => '#',
+					'show_if' => array('display_banner_info' => 'on'),
 					'tab_slug' => 'general',
 					'toggle_slug'    => 'content',
 				),
@@ -279,9 +281,9 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 					'toggle_slug' => 'image'
 				),
 			);
-			
+
 			$design_fields = array();
-			
+
 			$advanced_fields = array(
 				'module_id' => array(
 				  'label'           => esc_html__('CSS ID', 'et_builder'),
@@ -300,7 +302,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 				  'option_class'    => 'et_pb_custom_css_regular',
 				),
 			);
-			
+
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render( $unprocessed_props, $content = null, $render_slug ) {
@@ -319,7 +321,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 
 				$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 				$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-				
+
 				$class = sprintf('et_pb_ca_fullwidth_banner_item et_pb_module%1$s',  $module_class);
 
 

@@ -63,6 +63,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
+				'affects' => array('featured_image'),
 				'tab_slug' => 'general',
 				'toggle_slug'		=> 'style',
 			),
@@ -86,6 +87,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
+				'affects' => array('title', 'text_color'),
 				'tab_slug' => 'general',
 				'toggle_slug'		=> 'header',
 			),
@@ -114,6 +116,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
+				'affects' => array('button_text', 'button_link'),
 				'tab_slug' => 'general',
 				'toggle_slug' => 'body',
 			),
@@ -143,6 +146,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 					'off' => esc_html__( 'No', 'et_builder' ),
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 				),
+				'affects' => array('footer_text', 'footer_color'),
 				'tab_slug' => 'general',
 				'toggle_slug' => 'footer',
 			),
@@ -163,7 +167,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug' => 'admin_label',
 			),
 		);
-		
+
 		$design_fields = array(
 			'card_color' => array(
 				'label'             => esc_html__( 'Set Card Color', 'et_builder' ),
@@ -193,7 +197,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug'		=> 'footer',
 			),
 		);
-		
+
 		$advanced_fields = array(
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
@@ -226,7 +230,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug'     => 'visibility',
 			),
 		);
-		
+
 		return array_merge($general_fields, $design_fields, $advanced_fields);
 
 	}
@@ -249,14 +253,14 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 
 		$module_id = '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '';
 		$module_class = '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '';
-		
+
 		$class = sprintf('et_pb_ca_card et_pb_module card card-%1$s%2$s', "custom" == $card_layout ? 'default'  : $card_layout, $module_class);
 
 		$card_color = ( ! empty( $card_color ) && "custom" == $card_layout ? sprintf(' style="background-color: %1$s;"', $card_color) : "" );
 		$text_color = ( ! empty( $text_color ) ? sprintf(' style="color: %1$s;"', $text_color) : "" );
-		
+
 		$footer_color = ( ! empty( $footer_color ) ? sprintf(' style="color: %1$s;"', $footer_color) : "" );
-		
+
 		$display_image = ("on" == $show_image ? sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '');
 
 		$display_header = ("on" == $include_header ?

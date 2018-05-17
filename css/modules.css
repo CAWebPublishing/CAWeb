@@ -1,3 +1,8 @@
+/* Fullwidth Header Slideshow Banner */
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text{
+  max-width: 50%;
+  padding-bottom: 15px !important;
+}
 
 /* Section Primary  */
 .section{
@@ -180,7 +185,7 @@ ol{
 	border-bottom: 0 !important;
 }
 .et_pb_ca_card.et_pb_module .card-block {
-	padding: 15px; 
+	padding: 15px;
 	color: initial;
 }
 .et_pb_ca_card.et_pb_module .card-footer {
