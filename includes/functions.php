@@ -430,4 +430,39 @@ if( ! function_exists('caweb_get_excerpt') ){
 
 	}
 }
+
+function caweb_get_the_post_thumbnail( $post = null, $size = 'thumbnail', $attr = '', $pixel_size = array() ){
+		if( is_array($size) ){	
+			if( empty($pixel_size) && 2 == count($size))
+				$pixel_size = $size;
+			$size = 'thumbnail';
+		}
+		$thumbnail = get_the_post_thumbnail($post, $size, $attr);
+	
+		// if there is no thumbnail return
+		if( empty($thumbnail) )
+			return;
+		// theres is a thumbnail, and the pixel sizes is empty or has more than 2 elements
+		// return the thumbnail untouched
+		if( empty($pixel_size) || 2 !== count($pixel_size) ) 
+			return $thumbnail;
+			
+		// remove the current width and height size attributes and
+		// srcset attribute
+		$thumbnail = preg_replace( array('/(width|height)=\"\d*\"\s/', '/(width|height):[\s\d\w]*;?/', '/(srcset)=\".*\"/'), "", $thumbnail );
+		
+		$style = '';
+		// remove style attribute
+		if( preg_match('/style=\"([\w\d\s]*)\"/', $thumbnail, $matches ) ){
+				$style = $matches[1];
+				$thumbnail = preg_replace( array('/style=\"([\w\d\s]*)\"/'), "", $thumbnail );
+		}
+				
+		$new_img .= sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ',  $pixel_size[0], $pixel_size[1], $style);
+			
+		$thumbnail = preg_replace('/<img /', $new_img, $thumbnail);
+		
+		return $thumbnail;
+		
+}
 ?>

@@ -1371,7 +1371,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
                                       sprintf('Registration Cost: %1$s', $event_cost) : '');
       	$reg = array_filter(array($event_registration_type, $event_cost));
       	$reg = ( ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '');
-				$output = sprintf('<article%1$s%2$s>%3$s<div class="description">%4$s</div>%5$s%6$s%7$s%8$s</article>', $this->module_id(),	$class, has_post_thumbnail() ? get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left', 'style'=>'padding-right:15px;')) : '', $content, $presenter, $organizer, $reg,	sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list)  );
+				$output = sprintf('<article%1$s%2$s>%3$s<div class="description">%4$s</div>%5$s%6$s%7$s%8$s</article>', $this->module_id(),	$class,  caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left', 'style'=>'padding-right:15px;')), $content, $presenter, $organizer, $reg,	sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list)  );
 					break;
 			// Exams
 			case 'exam':
@@ -1399,7 +1399,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         }
 				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s', $exam_course), $pub_date, $exam_final_filing_date, $exam_location);
 				
-				$output = sprintf('<div%1$s%2$s><div class="header">%3$s%4$s</div>%5$s%6$s</div>', $this->module_id(), $class, has_post_thumbnail() ? get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')) : '', $exam_info, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+				$output = sprintf('<div%1$s%2$s><div class="header">%3$s%4$s</div>%5$s%6$s</div>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')) , $exam_info, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
 				break;
 			// Jobs
 			case 'jobs':
@@ -1475,7 +1475,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
 													( ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : ''), $news_publish_date,
 													( ! empty($news_city) ? sprintf('%1$s', $news_city) : ''));
-			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', has_post_thumbnail() ? get_the_post_thumbnail(null, array(75, 75), array('class' => 'img-left')) : '', $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', caweb_get_the_post_thumbnail(null, array(150,100), array('class' => 'img-left')), $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
 				break;
 			// Profile
 			case 'profile':
@@ -1486,10 +1486,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$title = sprintf('%1$s%2$s%3$s', ( ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '') , $profile_name,
 				( ! empty($profile_career_title) ? ', '.$profile_career_title : ''));
 				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
-				$image = (has_post_thumbnail() ?
-								get_the_post_thumbnail(null, null,
-										array('class' => $img_align, 'alt' =>  $profile_name,
-													'style' => 'width: 150px; height: 200px; padding-right: 15px;')) : '');
+				$image = caweb_get_the_post_thumbnail(null, array(150,100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;'));
 				$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(),	$class, ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '',$image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
 				break;
 			case 'faqs':
