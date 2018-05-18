@@ -337,33 +337,5 @@ function caweb_et_pagebuilder_module_init() {
             require_once($module_file);
         }
     }
-    if (class_exists('ET_Builder_Module_Settings_Migration')) {
-        //include(CAWebAbsPath."/builder/modules/settings/Migration.php");
-        //ET_Builder_CAWeb_Module_Settings_Migration::init();
-    }
 }
-
-// CAWeb Front Visual Builder
-function caweb_custom_frontend_builder_js() {
-    // FrontEnd Visual Builder
-    // This code assumes you save the file bundle.js in the child-theme root
-    // e.g. /themes/custom-divi/bundle.js
-    $app = trailingslashit(CAWebUri.'/builder/frontend-builder');
-    $ver = ET_BUILDER_VERSION;
-    /**
-     * This code is directly copied from the original Divi theme.
-     * You can find it in Divi/includes/builder/frontend-builder/assets.php
-     * somewhere around line 107
-     */
-    $fb_bundle_dependencies = apply_filters('et_fb_bundle_dependencies',
-																array('jquery',	'jquery-ui-core',	'jquery-ui-draggable', 'jquery-ui-resizable', 'underscore',
-                                      'jquery-ui-sortable',	'jquery-effects-core', 'iris', 'wp-color-picker',	'wp-color-picker-alpha',
-                                      'react-tiny-mce',	'easypiechart',	'et_pb_admin_date_addon_js', 'salvattore',	'hashchange',
-                                      'wp-shortcode'));
-    // Dequeue official bundle.js
-    wp_dequeue_script('et-frontend-builder');
-    // Enqueue modified bundle.js
-    wp_enqueue_script('et-frontend-builder', "{$app}/bundle.js", $fb_bundle_dependencies, $ver, true);
-}
-
 ?>
