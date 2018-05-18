@@ -96,12 +96,6 @@ ul, ol{
   	white-space: normal;
 }
 
-/* Header Slideshow Banner */
-.slide-text{
-	max-width: 50%;
-	padding-bottom: 15px !important;
-}
-
 /* WordPress Specific Overrides */
 #wpadminbar {
        position: fixed;

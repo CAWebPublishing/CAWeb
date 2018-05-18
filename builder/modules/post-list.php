@@ -8,12 +8,7 @@ make sure the field name is one of the following:
 class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Post List', 'et_builder' );
-
 		$this->slug = 'et_pb_ca_post_list';
-
-		$this->fields_defaults = array(
-			'orderby'  => array('date_desc'),
-		);
 
 		$this->main_css_element = '%%order_class%%';
 
@@ -22,7 +17,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggles' => array(
 					'header' => esc_html__( 'Header', 'et_builder'),
 					'style'  => esc_html__( 'Style', 'et_builder'),
-					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
@@ -31,10 +25,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
-					),
-					'width' => array(
-						'title'    => esc_html__( 'Sizing', 'et_builder' ),
-						'priority' => 65,
 					),
 				),
 			),
@@ -46,25 +36,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 	}
 	function get_fields() {
-		$fields = array(
+		$general_fields = array(
 			'title' => array(
 				'label'       => esc_html__( 'Title', 'et_builder' ),
 				'type'        => 'text',
 				'description' => esc_html__( 'Enter a title for the Post List.', 'et_builder' ),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'header',
-			),
-			'title_size' => array(
-				'label'       => esc_html__( 'Title Size', 'et_builder' ),
-				'type'        => 'select',
-				'option_category'   => 'configuration',
-				'options'           => array(
-					'h-1' => esc_html__('H1 - Large', 'et_builder' ),
-					'h-2' => esc_html__('H2 - Medium', 'et_builder' ),
-					'h-3' => esc_html__('H3 - Small', 'et_builder' ),
-				),
-				'description' => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
-				'toggle_slug'			=> 'header',
-				'tab_slug'			=> 'advanced',
 			),
 			'style' => array(
 				'label'             => esc_html__( 'Content Type', 'et_builder' ),
@@ -81,7 +59,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
-				'affects' => array('#et_pb_all_categories_button', '#et_pb_faq_style', '#et_pb_view_featured_image'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'faq_style' => array(
@@ -93,7 +71,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'toggle'  => esc_html__( 'Toggle', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
-				'depends_show_if' => 'faqs-list',
+				'show_if' => array('style' => 'faqs-list'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'posts_number' => array(
@@ -101,6 +80,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'type'              => 'text',
 				'option_category'   => 'configuration',
 				'description'       => esc_html__( 'Choose how many posts you would like to display in the list. Default is all.', 'et_builder' ),
+				'tab_slug'			=> 'general',
 				'toggle_slug'				=> 'style',
 			),
 			'view_featured_image' => array(
@@ -111,7 +91,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'depends_show_if_not' => 'faqs-list',
+				'show_if_not' => array('style' => 'faqs-list'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'all_categories_button' => array(
@@ -122,10 +103,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'affects' => array(
-							'#et_pb_include_categories',
-				),
-				'depends_show_if' => 'general-list',
+				'show_if' => array('style' => 'general-list'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'include_categories' => array(
@@ -136,7 +115,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'use_terms' => false,
 				),
 				'description'      => esc_html__( 'Choose which categories you would like to include in the list.', 'et_builder' ),
-				'depends_show_if' => 'off',
+				'show_if' => array('all_categories_button' => 'off'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'all_tags_button' => array(
@@ -147,8 +127,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 					),
-				'affects' => array('#et_pb_include_tags',
-				),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'include_tags' => array(
@@ -159,7 +138,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'use_terms' => false,
 				),
 				'description'      => esc_html__( 'Choose which tags you would like to include in the list.', 'et_builder' ),
-				'depends_show_if' => 'off',
+				'show_if' => array('all_tags_button' => 'off'),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
 			'orderby' => array(
@@ -173,9 +153,37 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					'title_desc' => esc_html__( 'Title: z-a', 'et_builder' ),
 					'rand'       => esc_html__( 'Random', 'et_builder' ),
 				),
+				'default' => 'date_desc',
 				'description'       => esc_html__( 'Here you can adjust the order in which posts are displayed.', 'et_builder' ),
+				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
+			'admin_label' => array(
+			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+				'tab_slug'			=> 'general',
+				'toggle_slug'	=> 'admin_label',
+			),
+		);
+		
+		$design_fields = array(
+			'title_size' => array(
+				'label'       => esc_html__( 'Title Size', 'et_builder' ),
+				'type'        => 'select',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'h-1' => esc_html__('H1 - Large', 'et_builder' ),
+					'h-2' => esc_html__('H2 - Medium', 'et_builder' ),
+					'h-3' => esc_html__('H3 - Small', 'et_builder' ),
+				),
+				'description' => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
+				'tab_slug'			=> 'advanced',
+				'toggle_slug'			=> 'header',
+			),
+		);
+		
+		$advanced_fields = array(
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 			  'type'            => 'text',
@@ -192,12 +200,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'classes',
 			  'option_class'    => 'et_pb_custom_css_regular',
 			),
-			'admin_label' => array(
-			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
-				'toggle_slug'	=> 'admin_label',
-			),
 			'disabled_on' => array(
 				'label'           => esc_html__( 'Disable on', 'et_builder' ),
 				'type'            => 'multiple_checkboxes',
@@ -213,12 +215,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggle_slug'     => 'visibility',
 			),
 		);
-
-		return $fields;
-
+		
+		return array_merge($general_fields, $design_fields, $advanced_fields);
+		
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
-		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$list_title            = $this->shortcode_atts['title'];
 		$title_size    = $this->shortcode_atts['title_size'];
@@ -576,8 +577,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 			}
 
 		global $faq_list_count;
-
-			$class = sprintf('et_pb_module et_pb_ca_post_list panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', ( ! empty($faq_list_count) ? $faq_list_count : 0), ( ! empty($style) ? $style : ''));
+		
+		$class = sprintf(' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
+		
+		/*$class = sprintf(' panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', ( ! empty($faq_list_count) ? $faq_list_count : 0), ( ! empty($style) ? $style : ''));
 
 		$class = esc_attr( $class );
 		$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
@@ -592,8 +595,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					$faq_list_count++;
 				}
 			}
-
-			$output = sprintf('<div class="%1$s">%2$s%3$s</div> <!-- .et_pb_ca_post_list -->', $class, ( ! empty($list_title) ? $list_title : '' ), $output );
+*/
+			$output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty($list_title) ? $list_title : '' ), $output );
 
 			$faq_accordion_count = 0;
 			return $output;
