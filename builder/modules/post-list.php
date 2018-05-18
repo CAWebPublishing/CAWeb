@@ -330,8 +330,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								if ( "news" == $post_content_handler->post_type_layout ){
 									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
 
-                  $image= ( "on" == $view_featured_image ?
-                  				sprintf('<div class="thumbnail" style="">%1$s</div>', get_the_post_thumbnail($post_id, null, array('style'=>'width: 150px; height: 100px;') ))  : '' );
+                  $image= "on" == $view_featured_image ?
+                  				sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100) ))  : '';
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 30);
 									$excerpt = ( ! empty($excerpt) ?
@@ -358,8 +358,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 						case "profile-list":
 						// if post contains a CAWeb Profile Post Handler
 							if ( "profile" == $post_content_handler->post_type_layout ){
-                $image= (  "on" == $view_featured_image ?
-                         sprintf('<div class="thumbnail" >%1$s</div>', get_the_post_thumbnail($post_id, null, array('style'=>'width: 70px; height: 93px;') )) : '' );
+                $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(75,75) )) : '';
                 $no_img = ( empty($image) ? ' style="margin-left: 0px;" ': '');
 
 								$t = sprintf('%1$s%2$s%3$s',
@@ -468,8 +467,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								if ( "course" == $post_content_handler->post_type_layout ){
 									$course_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
 
-									$image= ( "on" == $view_featured_image ?
-													sprintf('<div class="thumbnail" >%1$s</div>', get_the_post_thumbnail($post_id, array(70, 70))) : '' );
+									$image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(70, 70))) : '';
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 20);
 									$excerpt = ( ! empty($excerpt) ?
@@ -554,9 +552,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								$list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs');
 								if ( in_array( $post_content_handler->post_type_layout, $list_types )){
 
-									$image= ( "on" == $view_featured_image ?
-													sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>',
-																	get_the_post_thumbnail($post_id, null, array('style'=>'width: 150px; height: 100px;') ))  : '' );
+									$image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150,100) ))  : '';
 
 									$general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
 																		<a href="%2$s" class="title" style="color: #428bca; background: url();">%3$s</a></h5>',
