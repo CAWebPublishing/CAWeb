@@ -33,7 +33,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				),
 			),
 		);
-
+		
 	}
 	function get_fields() {
 		$general_fields = array(
@@ -328,10 +328,15 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 						case "news-list":
 								// if post contains a CAWeb News Post Handler
 								if ( "news" == $post_content_handler->post_type_layout ){
-									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
+									
 
-                  $image= "on" == $view_featured_image ?
-                  				sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100) ))  : '';
+									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
+									if( ! has_post_thumbnail($post_id) ){
+										$image = '';
+									}else{
+										$this->add_classname('indent');
+										$image= "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100) ))  : '';
+									}
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 30);
 									$excerpt = ( ! empty($excerpt) ?
@@ -347,8 +352,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 									$element = ( ! empty($author) || ! empty($date) ?
 															sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter( array($author, $date) ) ) ) : '');
 
-									$output .=	sprintf('<article class="news-item">%1$s<div class="info" %5$s>%2$s%3$s%4$s</div></article>',
-														$image, $news_title, $excerpt, $element, ( "on" == $view_featured_image ? 'style="padding-left: 175px;"' : '') );
+									$output .=	sprintf('<article class="news-item">%1$s<div class="info">%2$s%3$s%4$s</div></article>', $image, $news_title, $excerpt, $element);
 
 									$posts_number--;
 								}
@@ -572,14 +576,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				} // end of if is_object check
 			}
 
-		global $faq_list_count;
+			global $faq_list_count;
 		
-		$class = sprintf(' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
+			$class = sprintf(' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
 		
-		/*$class = sprintf(' panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', ( ! empty($faq_list_count) ? $faq_list_count : 0), ( ! empty($style) ? $style : ''));
-
-		$class = esc_attr( $class );
-		$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
+			/* 
+			$class = esc_attr( $class );
+			$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
 
 			if ( "faqs-list" == $style){
 
@@ -591,12 +594,36 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 					$faq_list_count++;
 				}
 			}
-*/
+			 */
 			$output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty($list_title) ? $list_title : '' ), $output );
 
 			$faq_accordion_count = 0;
 			return $output;
 
+	}
+
+	function post_list_justification(){
+		?>
+		<script>
+		
+			$ = jQuery.noConflict();
+
+		 var news_lists = $('.et_pb_module.et_pb_ca_post_list.news-list .news-item');
+		 var remove_padding = true;
+		 
+		 $.each( news_lists, function(key, value){
+			 if ("" !== value.getElementsByClassName('thumbnail')[0].innerHTML){
+				 remove_padding = false;
+				 return false;
+				}
+		 });
+		 
+		 if( remove_padding )
+			 $('.et_pb_module.et_pb_ca_post_list.news-list').addClass('indent');
+		 
+
+		</script>
+		<?
 	}
 }
 new ET_Builder_Module_CA_Post_List;

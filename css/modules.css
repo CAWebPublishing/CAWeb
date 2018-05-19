@@ -148,6 +148,9 @@ ol{
 .et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
     width: auto;
 }
+.et_pb_module.et_pb_ca_post_list.indent.news-list .info{
+	padding-left: 175px;
+}	
 /* Remove the Divi Padding around the et_pb_toggle */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{
