@@ -148,6 +148,14 @@ ol{
 .et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
     width: auto;
 }
+.et_pb_module.et_pb_ca_post_list.indent.news-list .info{
+	padding-left: 175px;
+}
+/* Post List (Profile) */
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header,
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body{
+  margin-left: 0;
+}
 /* Remove the Divi Padding around the et_pb_toggle */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{
