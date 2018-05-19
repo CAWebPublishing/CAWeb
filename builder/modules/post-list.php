@@ -33,7 +33,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				),
 			),
 		);
-		
+
 	}
 	function get_fields() {
 		$general_fields = array(
@@ -166,7 +166,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggle_slug'	=> 'admin_label',
 			),
 		);
-		
+
 		$design_fields = array(
 			'title_size' => array(
 				'label'       => esc_html__( 'Title Size', 'et_builder' ),
@@ -182,7 +182,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'header',
 			),
 		);
-		
+
 		$advanced_fields = array(
 			'module_id' => array(
 			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
@@ -215,9 +215,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 				'toggle_slug'     => 'visibility',
 			),
 		);
-		
+
 		return array_merge($general_fields, $design_fields, $advanced_fields);
-		
+
 	}
 	function render( $unprocessed_props, $content = null, $render_slug ) {
 		$module_class         = $this->shortcode_atts['module_class'];
@@ -328,10 +328,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 						case "news-list":
 								// if post contains a CAWeb News Post Handler
 								if ( "news" == $post_content_handler->post_type_layout ){
-									
+
 
 									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
-									if( ! has_post_thumbnail($post_id) ){
+									if( ! has_post_thumbnail($post_id) ||  "off" == $view_featured_image ){
 										$image = '';
 									}else{
 										$this->add_classname('indent');
@@ -362,16 +362,18 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 						case "profile-list":
 						// if post contains a CAWeb Profile Post Handler
 							if ( "profile" == $post_content_handler->post_type_layout ){
-                $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(75,75) )) : '';
-                $no_img = ( empty($image) ? ' style="margin-left: 0px;" ': '');
+
+								if( ! has_post_thumbnail($post_id) || "off" == $view_featured_image )
+									$this->add_classname('no-thumbnail');
+
+								$thumbnail = "on" == $view_featured_image && has_post_thumbnail($post_id) ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(75,75) )) : '';
 
 								$t = sprintf('%1$s%2$s%3$s',
                              ( ! empty($post_content_handler->profile_name_prefix) ? sprintf('%1$s ', $post_content_handler->profile_name_prefix) : ''),
                              ( ! empty($post_content_handler->profile_name) ? $post_content_handler->profile_name : ''),
                              ( ! empty($post_content_handler->profile_career_title) ? sprintf(', %1$s', $post_content_handler->profile_career_title) : '') );
 
-								$profile_title = sprintf('<div class="header" %3$s><div class="title" %4$s><a href="%1$s">%2$s</a></div></div>',
-                                         $url, $t, $no_img, ( ! empty($image) ? ' style="min-height: 20px;" ': '')  );
+								$profile_title = sprintf('<div class="header"><div class="title"><a href="%1$s">%2$s</a></div></div>', $url, $t  );
 
 								$position = ( ! empty($post_content_handler->profile_career_position) ?
 												sprintf('%1$s', $post_content_handler->profile_career_position  )  : '' );
@@ -384,9 +386,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 								$fields = array_filter(array($position, $line1, $line2, $line3));
 
-								$output .=	sprintf('<article class="profile-item">%1$s%2$s<div class="body" %5$s><p>%3$s</p></div>
-																		<div class="footer"><a href="%4$s" class="btn btn-default">View More Details</a></div></article>',
-																		$image, $profile_title, ( ! empty($fields) ? implode( '<br />', $fields ) : '<br />'), $url, $no_img);
+								$output .=	sprintf('<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div><div class="footer"><a href="%5$s" class="btn btn-default">View More Details</a></div></article>',empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode( '<br />', $fields ) : '<br />'), $url);
 
 								$posts_number--;
 							}
@@ -451,16 +451,20 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 						case "events-list":
 							// if post contains a CAWeb Event Post Handler
 								if ( "event" == $post_content_handler->post_type_layout ){
-									$event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;">%2$s</a></h5>', $url, $title);
+
+									$thumbnail = "on" == $view_featured_image  ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100) ))  : '';
+
+									$event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;" target="_blank">%2$s</a></h5>', $url, $title);
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 15);
 									$excerpt = ( ! empty($excerpt) ?
 															sprintf('<div class="description">%1$s</div>', $excerpt ) : '' );
 
-                   $date = ( ! empty($post_content_handler->event_start_date) ?
-                          sprintf('<div class="start-date"><time>%1$s</time></div>', gmdate( 'D, n/j/Y g:i a', strtotime($post_content_handler->event_start_date ) ) ) : '');
+									$date = ( ! empty($post_content_handler->event_start_date) ? sprintf('<div class="start-date"><time>%1$s</time></div>', gmdate( 'D, n/j/Y g:i a', strtotime($post_content_handler->event_start_date ) ) ) : '');
 
-									$output .= sprintf('<article class="event-item">%1$s%2$s%3$s</article>', $event_title, $excerpt, $date );
+									$info = sprintf('<div class="info">%1$s%2$s%3$s</div>', $event_title, $excerpt, $date);
+
+									$output .= sprintf('<article class="event-item">%1$s%2$s</article>', $thumbnail, $info);
 
 									$posts_number--;
 								}
@@ -471,7 +475,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 								if ( "course" == $post_content_handler->post_type_layout ){
 									$course_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
 
-									$image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(70, 70))) : '';
+									$image= "on" == $view_featured_image && has_post_thumbnail($post_id) ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(70, 70))) : '';
 
 									$excerpt = caweb_get_excerpt($post_content_handler->content, 20);
 									$excerpt = ( ! empty($excerpt) ?
@@ -577,10 +581,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 			}
 
 			global $faq_list_count;
-		
+
 			$class = sprintf(' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
-		
-			/* 
+
+			/*
 			$class = esc_attr( $class );
 			$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
 
@@ -605,22 +609,22 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 	function post_list_justification(){
 		?>
 		<script>
-		
+
 			$ = jQuery.noConflict();
 
 		 var news_lists = $('.et_pb_module.et_pb_ca_post_list.news-list .news-item');
 		 var remove_padding = true;
-		 
+
 		 $.each( news_lists, function(key, value){
 			 if ("" !== value.getElementsByClassName('thumbnail')[0].innerHTML){
 				 remove_padding = false;
 				 return false;
 				}
 		 });
-		 
+
 		 if( remove_padding )
 			 $('.et_pb_module.et_pb_ca_post_list.news-list').addClass('indent');
-		 
+
 
 		</script>
 		<?
