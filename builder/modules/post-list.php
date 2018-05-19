@@ -606,29 +606,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module{
 
 	}
 
-	function post_list_justification(){
-		?>
-		<script>
-
-			$ = jQuery.noConflict();
-
-		 var news_lists = $('.et_pb_module.et_pb_ca_post_list.news-list .news-item');
-		 var remove_padding = true;
-
-		 $.each( news_lists, function(key, value){
-			 if ("" !== value.getElementsByClassName('thumbnail')[0].innerHTML){
-				 remove_padding = false;
-				 return false;
-				}
-		 });
-
-		 if( remove_padding )
-			 $('.et_pb_module.et_pb_ca_post_list.news-list').addClass('indent');
-
-
-		</script>
-		<?
-	}
 }
 new ET_Builder_Module_CA_Post_List;
 
