@@ -44,7 +44,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
   function caweb_nav_menu($nav_menu, $args) {
 		global $post;
 		$post_id = (is_object($post) ? $post->ID : $post['ID']);
-
+		
     // Header Menu Construction
 		if('header-menu' == $args->theme_location && ! empty($args->menu) ){
       $nav_menu = $this->createNavMenu($args);
@@ -60,7 +60,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $nav_menu, $searchLink );
 
 			// Footer Menu Construction
-		}elseif('footer-menu' == $args->theme_location && ! empty($args->menu)){
+		}elseif('footer-menu' == $args->theme_location && ! empty($args->menu) ){
       $nav_menu = $this->createFooterMenu($args);
       $socialLinks = $this->createFooterSocialMenu($args);
 
@@ -70,8 +70,6 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 										<div class="container" %3$s> Copyright &copy;
 										<script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
 									 $nav_menu, $socialLinks, ( 4 >= $args->version ? 'style="text-align:center;" ' : '' ) );
-    }else{
-      $nav_menu = '';
     }
 
       return $nav_menu;

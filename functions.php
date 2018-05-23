@@ -16,6 +16,8 @@
 
 define('CAWebAbsPath', get_stylesheet_directory());
 define('CAWebUri', get_stylesheet_directory_uri());
+define('CAWebVersion', wp_get_theme('CAWeb')->get('Version'));
+define('CAWebDiviVersion', wp_get_theme('Divi')->get('Version'));
 
 define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 // Actions Ran During any Request
