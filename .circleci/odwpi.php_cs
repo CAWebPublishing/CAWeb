@@ -52,4 +52,5 @@ return PhpCsFixer\Config::create()->setRules([
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
         'whitespace_after_comma_in_array' => true,
+        'array_indentation' => true,
     ])->setFinder($finder)->setUsingCache(false);
