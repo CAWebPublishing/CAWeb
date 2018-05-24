@@ -16,6 +16,8 @@
 
 define('CAWebAbsPath', get_stylesheet_directory());
 define('CAWebUri', get_stylesheet_directory_uri());
+define('CAWebVersion', wp_get_theme('CAWeb')->get('Version'));
+define('CAWebDiviVersion', wp_get_theme('Divi')->get('Version'));
 
 define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 // Actions Ran During any Request
@@ -73,23 +75,23 @@ function caweb_setup_theme() {
 
     // Set Up Predefined Category Content Types
     $ca_cats = array(
-		'Courses', 'Events', 'Exams', 'FAQs', 'Jobs',
-		 'News', 'Profiles', 'Publications');
+        'Courses', 'Events', 'Exams', 'FAQs', 'Jobs',
+        'News', 'Profiles', 'Publications');
 
     // Insert Parent Content Type Category
     wp_insert_term('Content Types', 'category');
 
     // Rename Default Category to All
     wp_update_term(get_option('default_category'), 'category', array(
-			'name' => 'All',
-			'slug' => 'all'));
+        'name' => 'All',
+        'slug' => 'all'));
 
     /* Loop thru Predefined Categories and create
     Content Categories under Content Types Category */
     foreach ($ca_cats as $c) {
         wp_insert_term($c, 'category', array(
-					'parent' => get_cat_ID('Content Types'),
-					));
+            'parent' => get_cat_ID('Content Types'),
+        ));
     }
 
     // Enable Post Thumbnails
@@ -180,19 +182,17 @@ function caweb_wp_enqueue_scripts() {
     wp_register_script('cagov-modernizr-script', CAWebUri.'/js/libs/modernizr-2.0.6.min.js', array('jquery'), $theme_version, false);
     wp_register_script('cagov-modernizr-extra-script', CAWebUri.'/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version, false);
 
-    wp_register_script('cagov-core-script', CAWebUri.'/js/cagov.core.js', array('jquery', 'thickbox'), $theme_version, true);
     wp_register_script('cagov-google-script', CAWebUri.'/js/libs/google.js', array(), $theme_version, true);
     wp_register_script('cagov-ga-autotracker-script', CAWebUri.'/js/libs/AutoTracker.js', array(), $theme_version, true);
 
     // Localize the search script with the correct site url
     wp_localize_script('cagov-google-script', 'args', array('ca_google_analytic_id' => get_option('ca_google_analytic_id'),
-                                                  'ca_site_version' => $ver,
-                                                  'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
-                                                   'ca_google_search_id' => get_option('ca_google_search_id'),
-                                                   'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
-                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled')));
+        'ca_site_version' => $ver,
+        'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
+        'ca_google_search_id' => get_option('ca_google_search_id'),
+        'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
+        'ca_google_trans_enabled' => get_option('ca_google_trans_enabled')));
     // Enqueue Scripts
-    wp_enqueue_script('cagov-core-script');
     wp_enqueue_script('cagov-navigation-script');
     wp_enqueue_script('cagov-google-script');
     wp_enqueue_script('cagov-ga-autotracker-script');
@@ -240,6 +240,15 @@ function caweb_wp_footer() {
     // This removes Divi Builder Google Font CSS
     wp_deregister_style('et-builder-googlefonts');
 }
+
+function caweb_late_wp_footer() {
+    $caweb_wp_js_lib = CAWebUri.'/js/wplibs';
+    $core_js = sprintf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
+
+    print $core_js;
+}
+add_action('wp_footer', 'caweb_late_wp_footer', 115);
+
 // Actions Ran During an Admin Page Request
 // CAWeb Admin Enqueue Scripts and Styles
 add_action('admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15);
@@ -296,29 +305,29 @@ function caweb_admin_bar_menu($wp_admin_bar) {
     if (current_user_can('manage_options')) {
         // Add CAWeb WP Admin Bar Nodes
         $wp_admin_bar->add_node(array(
-										'id'     => 'caweb-options',
-										'title'  => 'CAWeb Options',
-									'href' =>  get_admin_url().'admin.php?page=ca_options',
-									'parent' => 'site-name',
-									)
+            'id'     => 'caweb-options',
+            'title'  => 'CAWeb Options',
+            'href' =>  get_admin_url().'admin.php?page=ca_options',
+            'parent' => 'site-name',
+        )
 								);
         // Add (Menu) Navigation Node
         $wp_admin_bar->add_node(array(
-										'id'     => 'caweb-navigation',
-										'title'  => 'Navigation',
-									'href' => get_admin_url().'nav-menus.php',
-									'parent' => 'site-name',
-									)
+            'id'     => 'caweb-navigation',
+            'title'  => 'Navigation',
+            'href' => get_admin_url().'nav-menus.php',
+            'parent' => 'site-name',
+        )
 								);
     }
 
     if ( ! is_multisite() || current_user_can('manage_network_options')) {
         $wp_admin_bar->add_node(array(
-										'id'     => 'caweb-api',
-										'title'  => 'GitHub API Key',
-									'href' => get_admin_url().'admin.php?page=caweb_api',
-									'parent' => 'site-name',
-									)
+            'id'     => 'caweb-api',
+            'title'  => 'GitHub API Key',
+            'href' => get_admin_url().'admin.php?page=caweb_api',
+            'parent' => 'site-name',
+        )
 								);
     }
 }

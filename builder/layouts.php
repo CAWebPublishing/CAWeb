@@ -1,75 +1,79 @@
 <?php
 
 function ca_save_post_list_meta($post_id, $post) {
+    $cats = wp_get_post_categories($post_id);
 
-	$cats = wp_get_post_categories($post_id);
+    $content = $post->post_content;
 
-	$content = $post->post_content;
+    $layout = caweb_get_shortcode_from_content($content, 'et_pb_ca_post_handler');
 
-	$layout = caweb_get_shortcode_from_content($content, 'et_pb_ca_post_handler');
+    $layout = (isset($layout->post_type_layout) ? $layout->post_type_layout : '');
 
-	$layout = ( isset( $layout->post_type_layout) ? $layout->post_type_layout : '' );
-
-	switch( $layout  ){
+    switch ($layout) {
 
 		case "course":
 			array_push($cats, get_cat_ID('Courses'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "event":
 			array_push($cats, get_cat_ID('Events'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "exam":
 			array_push($cats, get_cat_ID('Exams'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "faqs":
 			array_push($cats, get_cat_ID('FAQs'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "jobs":
 			array_push($cats, get_cat_ID('Jobs'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "news":
 			array_push($cats, get_cat_ID('News'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 
 		case "profile":
 			array_push($cats, get_cat_ID('Profiles'));
 			array_push($cats, get_cat_ID('Content Types'));
+
 			break;
 	}
 
-	wp_set_object_terms( $post_id, $cats, 'category');
-
+    wp_set_object_terms($post_id, $cats, 'category');
 }
 
-add_action( 'save_post', 'ca_save_post_list_meta', 10, 2 );
+add_action('save_post', 'ca_save_post_list_meta', 10, 2);
 
 function caweb_predefined_layouts() {
 
  	// delete default layouts
 
-	// delete all default layouts w/o new built_for meta
+    // delete all default layouts w/o new built_for meta
 
-	et_pb_delete_predefined_layouts();
+    et_pb_delete_predefined_layouts();
 
-	// delete all default layouts w/ new built_for meta
+    // delete all default layouts w/ new built_for meta
 
-	et_pb_delete_predefined_layouts('post');
+    et_pb_delete_predefined_layouts('post');
 
-	et_pb_delete_predefined_layouts('page');
+    et_pb_delete_predefined_layouts('page');
 
-	caweb_get_layouts();
-
+    caweb_get_layouts();
 }
 
 //add_action('admin_init', 'caweb_predefined_layouts', 15);
@@ -91,30 +95,24 @@ EOT
 
 );
 
-*/
+ */
 
 function caweb_get_layouts() {
+    $ca_layouts = array();
 
-$ca_layouts = array();
+    $meta = array(
 
-	$meta = array(
+        '_et_pb_predefined_layout'   => 'on',
 
-		'_et_pb_predefined_layout'   => 'on',
+        '_et_pb_built_for_post_type' => 'post',
 
-		'_et_pb_built_for_post_type' => 'post',
+    );
 
-	);
-
-if ( isset( $ca_layouts ) && is_array( $ca_layouts ) ) {
-
-		foreach ( $ca_layouts as $ca_layout ) {
-
-			et_pb_create_layout( $ca_layout ['name'], $ca_layout ['content'], $meta );
-
-		}
-
-	}
-
+    if (isset($ca_layouts) && is_array($ca_layouts)) {
+        foreach ($ca_layouts as $ca_layout) {
+            et_pb_create_layout($ca_layout ['name'], $ca_layout ['content'], $meta);
+        }
+    }
 }
 
 ?>

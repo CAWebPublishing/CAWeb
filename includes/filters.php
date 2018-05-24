@@ -7,41 +7,41 @@ function caweb_tiny_mce_before_init($init_array) {
     // Define the style_formats array
     // Each array child is a format with it's own settings
     $style_formats = array(
-		array(
-			'title' => 'Featured Narrative',
-			'block' => 'aside',
-			'classes' => 'featured-narrative',
-			'wrapper' => true,
-		),
-		array(
-			'title' => 'Overstated List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-overstated',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'),
-		),
-		array(
-			'title' => 'Standout List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-standout',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'),
-		),
-		array(
-			'title' => 'Understated List',
-			'selector' => 'ul',
-			'inline' => 'ul',
-			'classes' => 'list-understated',
-			'wrapper' => true,
-			'styles' => array(
-        			'list-style-type' => 'none'
-			),
-		),
-	);
+        array(
+            'title' => 'Featured Narrative',
+            'block' => 'aside',
+            'classes' => 'featured-narrative',
+            'wrapper' => true,
+        ),
+        array(
+            'title' => 'Overstated List',
+            'selector' => 'ul',
+            'inline' => 'ul',
+            'classes' => 'list-overstated',
+            'wrapper' => true,
+            'styles' => array(
+                'list-style-type' => 'none'),
+        ),
+        array(
+            'title' => 'Standout List',
+            'selector' => 'ul',
+            'inline' => 'ul',
+            'classes' => 'list-standout',
+            'wrapper' => true,
+            'styles' => array(
+                'list-style-type' => 'none'),
+        ),
+        array(
+            'title' => 'Understated List',
+            'selector' => 'ul',
+            'inline' => 'ul',
+            'classes' => 'list-understated',
+            'wrapper' => true,
+            'styles' => array(
+                'list-style-type' => 'none'
+            ),
+        ),
+    );
 
     // Insert the array, JSON ENCODED, into 'style_formats'
     $init_array['style_formats'] = json_encode($style_formats);
@@ -73,7 +73,7 @@ function caweb_mce_buttons_2($buttons) {
 	 **/
 
     $tmp = array('styleselect', 'strikethrough', 'hr', 'fontselect', 'fontsizeselect',
-               'forecolor', 'backcolor', 'pastetext', 'copy', 'subscript', 'superscript');
+        'forecolor', 'backcolor', 'pastetext', 'copy', 'subscript', 'superscript');
     array_splice($buttons, 0, 5, $tmp);
 
     return $buttons;
@@ -86,7 +86,7 @@ function caweb_body_class($wp_classes, $extra_classes) {
 
     // List of the classes that need to be removed
     $blacklist= array('et_secondary_nav_dropdown_animation_fade',
-				'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
+        'et_primary_nav_dropdown_animation_fade', 'et_fixed_nav', 'et_show_nav', 'et_right_sidebar');
 
     // List of extra classes that need to be added to the body
     if (isset($post->ID)) {
@@ -95,9 +95,9 @@ function caweb_body_class($wp_classes, $extra_classes) {
         $special_templates = is_tag() || is_archive() || is_category() || is_author();
 
         $whitelist = array(($divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder'),
-                     ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed'),
-                      sprintf('v%1$s', caweb_get_version($post->ID)),
-                       (is_active_sidebar('sidebar-1') && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed'));
+            ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed'),
+            sprintf('v%1$s', caweb_get_version($post->ID)),
+            (is_active_sidebar('sidebar-1') && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed'));
     }
     $whitelist[] = (get_option('ca_sticky_navigation') ? 'sticky_nav' : '');
 

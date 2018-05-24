@@ -3,7 +3,19 @@
   max-width: 50%;
   padding-bottom: 15px !important;
 }
-
+/* Fullwidth Menu */
+.et_pb_module.et_pb_fullwidth_menu .nav > li{
+	display: inline-block;
+}
+.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children>a:first-child{
+	padding: 0 20px 29px 0;
+}
+.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children .sub-menu li a{
+	padding: 6px 20px;
+}
+.et_pb_module.et_pb_fullwidth_menu .fullwidth-menu-nav>ul ul{
+	padding-bottom: 20px;
+}
 /* Section Primary  */
 .section{
 overflow: hidden;

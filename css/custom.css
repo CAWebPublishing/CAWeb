@@ -85,7 +85,7 @@ ol.breadcrumb{
 
 /* Remove extra padding when ul is nested inside another ul */
 ul ul{
-	padding-bottom: 0px !important;
+	padding-bottom: 0px;
 }
 
 ul, ol{
