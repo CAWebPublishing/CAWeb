@@ -501,7 +501,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 								break;
 						// Exam List
-						case "exams-list" :
+						case "exams-list":
 							// if post contains a CAWeb Course Post Handler
 								if ("exam" == $post_content_handler->post_type_layout) {
 								    $exam_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
