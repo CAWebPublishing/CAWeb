@@ -9,1179 +9,1178 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         $this->name = esc_html__('Post Detail', 'et_builder');
         $this->slug = 'et_pb_ca_post_handler';
         $this->post_types = array('post');
-				
+
         $this->main_css_element = '%%order_class%%';
         $this->settings_modal_toggles = array(
-					'general' => array(
-						'toggles' => array(
-							'style'  => esc_html__('Style', 'et_builder'),
-							'header'   => esc_html__('Header', 'et_builder'),
-							'course'   => esc_html__('Course', 'et_builder'),
-							'event'   => esc_html__('Event', 'et_builder'),
-							'exam'   => esc_html__('Exam', 'et_builder'),
-							'job'   => esc_html__('Job', 'et_builder'),
-							'news'   => esc_html__('News', 'et_builder'),
-							'profile'   => esc_html__('Profile', 'et_builder'),
-							'body'   => esc_html__('Body', 'et_builder'),
-						),
-					),
-					'advanced' => array(
-						'toggles' => array(
-							'text' => array(
-								'title'    => esc_html__('Text', 'et_builder'),
-								'priority' => 49,
-							),
-						),
-					),
-					'custom_css' => array(
-						'toggles' => array(
-						),
-					),
-				);
+            'general' => array(
+                'toggles' => array(
+                    'style'  => esc_html__('Style', 'et_builder'),
+                    'header'   => esc_html__('Header', 'et_builder'),
+                    'course'   => esc_html__('Course', 'et_builder'),
+                    'event'   => esc_html__('Event', 'et_builder'),
+                    'exam'   => esc_html__('Exam', 'et_builder'),
+                    'job'   => esc_html__('Job', 'et_builder'),
+                    'news'   => esc_html__('News', 'et_builder'),
+                    'profile'   => esc_html__('Profile', 'et_builder'),
+                    'body'   => esc_html__('Body', 'et_builder'),
+                ),
+            ),
+            'advanced' => array(
+                'toggles' => array(
+                    'text' => array(
+                        'title'    => esc_html__('Text', 'et_builder'),
+                        'priority' => 49,
+                    ),
+                ),
+            ),
+            'custom_css' => array(
+                'toggles' => array(
+                ),
+            ),
+        );
         // Custom handler: Output JS for editor preview in page footer.
         add_action('wp_footer', array($this, 'remove_general_detail'));
     }
     function get_fields() {
-			$general_fields = array(
-				'post_type_layout' => array(
-					'label'             => esc_html__('Content Type', 'et_builder'),
-					'type'              => 'select',
-					'option_category'   => 'configuration',
-					'class'               => array('caweb_post_handler_style_selector'),
-					'options'           => array(
-						'general' => esc_html__('General', 'et_builder'),
-						'course'  => esc_html__('Courses', 'et_builder'),
-						'event'  => esc_html__('Events', 'et_builder'),
-						'exam'  => esc_html__('Exams', 'et_builder'),
-						'faqs'  => esc_html__('FAQs', 'et_builder'),
-						'jobs'  => esc_html__('Jobs', 'et_builder'),
-						'news' => esc_html__('News', 'et_builder'),
-						'profile'  => esc_html__('Profile', 'et_builder'),
-					),
-					'description'       => esc_html__('This is the layout style', 'et_builder'),
-					 'tab_slug'  => 'general',
- 					 'toggle_slug'  => 'style',
-				),
-				'content' => array(
-					'label'           => esc_html__('Content', 'et_builder'),
-					'type'            => 'tiny_mce',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter additional content for this item.', 'et_builder'),
-					'show_if_not' => array('post_type_layout' => 'general'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'body',
-				),
-				'show_tags_button' => array(
-					'label'           => esc_html__('Tags', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options'         => array(
-						'off' => esc_html__('No', 'et_builder'),
-						'on'  => esc_html__('Yes', 'et_builder'),
-					),
-					'show_if_not' => array('post_type_layout' => 'general'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'body',
-				),
-				'show_categories_button' => array(
-					'label'           => esc_html__('Categories', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options'         => array(
-						'off' => esc_html__('No', 'et_builder'),
-						'on'  => esc_html__('Yes', 'et_builder'),
-					),
-					'show_if_not' => array('post_type_layout' => 'general'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'body',
-				),
-				'admin_label' => array(
-					'label'       => esc_html__('Admin Label', 'et_builder'),
-					'type'        => 'text',
-					'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-					 'tab_slug'  => 'general',
-					'toggle_slug'			=> 'admin_label',
-				),
-			);
-			
-			$design_fields = array();
-			
-			$advanced_fields = array(
-				'module_id' => array(
-					'label'           => esc_html__('CSS ID', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'configuration',
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'			=> 'classes',
-					'option_class'    => 'et_pb_custom_css_regular',
-				),
-				'module_class' => array(
-					'label'           => esc_html__('CSS Class', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'configuration',
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'			=> 'classes',
-					'option_class'    => 'et_pb_custom_css_regular',
-				),
-				'disabled_on' => array(
-					'label'           => esc_html__('Disable on', 'et_builder'),
-					'type'            => 'multiple_checkboxes',
-					'options'         => array(
-					'phone'   => esc_html__('Phone', 'et_builder'),
-					'tablet'  => esc_html__('Tablet', 'et_builder'),
-					'desktop' => esc_html__('Desktop', 'et_builder'),
-					),
-					'additional_att'  => 'disable_on',
-					'option_category' => 'configuration',
-					'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
-					'tab_slug'        => 'custom_css',
-					'toggle_slug'     => 'visibility',
-				),
-			);
-			
-			$news_fields = array(
-					'news_author' => array(
-						'label'           => esc_html__('Author', 'et_builder'),
-						'type'            => 'text',
-						'option_category' => 'basic_option',
-						'description'     => esc_html__('Enter an Author for this news item.', 'et_builder'),
-						'show_if' => array('post_type_layout' => 'news'),
-						'tab_slug'			=> 'general',
-						'toggle_slug'			=> 'news',
-					),
-					'news_publish_date' => array(
-						'label'           => esc_html__('Publish Date', 'et_builder'),
-						'type'            => 'date_picker',
-						'option_category' => 'basic_option',
-						'description'     => esc_html__('Enter a Publish Date for this news item.', 'et_builder'),
-						'show_if' => array('post_type_layout' => 'news'),
-						'tab_slug'			=> 'general',
-						'toggle_slug'			=> 'news',
-					),
-					'news_publish_date_format' => array(
-						'label'           => esc_html__('Custom Date Format', 'et_builder'),
-						'type'            => 'yes_no_button',
-						'option_category' => 'configuration',
-						'options' => array(
-							'on'  => esc_html__('Yes', 'et_builder'),
-							'off' => esc_html__('No', 'et_builder'),
-						),
-						'default' => 'off',
-						'show_if' => array('post_type_layout' => 'news'),
-						'tab_slug'			=> 'general',
-						'toggle_slug'			=> 'news',
-					),
-					'news_publish_date_custom_format' => array(
-						'label'           => esc_html__('Pattern', 'et_builder'),
-						'type'            => 'text',
-						'option_category' => 'basic_option',
-						'description'     => et_get_safe_localization(
-							sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-							esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-							'default' => 'M d, Y',
-							'show_if' => array('post_type_layout' => 'news', 'news_publish_date_format' => 'on'),
-							'tab_slug'			=> 'general',
-							'toggle_slug'			=> 'news',
-					),
-					'news_city' => array(
-							'label'           => esc_html__('News Location', 'et_builder'),
-							'type'            => 'text',
-							'option_category' => 'basic_option',
-							'description'     => esc_html__('Enter a Location for this news item.', 'et_builder'),
-							'show_if' => array('post_type_layout' => 'news'),
-							'tab_slug'			=> 'general',
-							'toggle_slug'			=> 'news',
-						),
-			);
+        $general_fields = array(
+            'post_type_layout' => array(
+                'label'             => esc_html__('Content Type', 'et_builder'),
+                'type'              => 'select',
+                'option_category'   => 'configuration',
+                'class'               => array('caweb_post_handler_style_selector'),
+                'options'           => array(
+                    'general' => esc_html__('General', 'et_builder'),
+                    'course'  => esc_html__('Courses', 'et_builder'),
+                    'event'  => esc_html__('Events', 'et_builder'),
+                    'exam'  => esc_html__('Exams', 'et_builder'),
+                    'faqs'  => esc_html__('FAQs', 'et_builder'),
+                    'jobs'  => esc_html__('Jobs', 'et_builder'),
+                    'news' => esc_html__('News', 'et_builder'),
+                    'profile'  => esc_html__('Profile', 'et_builder'),
+                ),
+                'description'       => esc_html__('This is the layout style', 'et_builder'),
+                'tab_slug'  => 'general',
+                'toggle_slug'  => 'style',
+            ),
+            'content' => array(
+                'label'           => esc_html__('Content', 'et_builder'),
+                'type'            => 'tiny_mce',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter additional content for this item.', 'et_builder'),
+                'show_if_not' => array('post_type_layout' => 'general'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'body',
+            ),
+            'show_tags_button' => array(
+                'label'           => esc_html__('Tags', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options'         => array(
+                    'off' => esc_html__('No', 'et_builder'),
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                ),
+                'show_if_not' => array('post_type_layout' => 'general'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'body',
+            ),
+            'show_categories_button' => array(
+                'label'           => esc_html__('Categories', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options'         => array(
+                    'off' => esc_html__('No', 'et_builder'),
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                ),
+                'show_if_not' => array('post_type_layout' => 'general'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'body',
+            ),
+            'admin_label' => array(
+                'label'       => esc_html__('Admin Label', 'et_builder'),
+                'type'        => 'text',
+                'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
+                'tab_slug'  => 'general',
+                'toggle_slug'			=> 'admin_label',
+            ),
+        );
 
-			$profile_fields = array(
-				'profile_image_align' => array(
-					'label'             => esc_html__('Image Alignment', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Left", 'et_builder'),
-						'on'  => esc_html__('Right', 'et_builder'),
-					),
-					'description' => 'Alignment for the featured profile image',
-					'show_if' => array('post_type_layout' => 'profile'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'style',
-				),
-				'profile_name_prefix' => array(
-					'label'           => esc_html__('Name Prefix', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter a prefix for this profile item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'profile'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_name' => array(
-					'label'           => esc_html__('Profile Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter a profile name for this profile item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'profile'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career' => array(
-					'label'             => esc_html__('Career', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'description' => 'Job related fields',
-					'show_if' => array('post_type_layout' => 'profile'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career_title' => array(
-					'label'           => esc_html__('Title', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'profile', 'profile_career' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career_position' => array(
-					'label'           => esc_html__('Position', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'profile', 'profile_career' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_additional_fields' => array(
-					'label'             => esc_html__('Additional List Fields', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'description' => 'Additional information for the Post List.',
-					'show_if' => array('post_type_layout' => 'profile'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career_line_1' => array(
-					'label'           => esc_html__('Line 1', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career_line_2' => array(
-					'label'           => esc_html__('Line 2', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-				'profile_career_line_3' => array(
-					'label'           => esc_html__('Line 3', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'profile',
-				),
-			);
-				
-			$exam_fields = array(
-				'exam_id' => array(
-					'label'           => esc_html__('Exam Code', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter an Exam Code for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_class' => array(
-					'label'           => esc_html__('Class Code', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter an Class Code for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_status' => array(
-					'label'             => esc_html__('Status', 'et_builder'),
-					'type'              => 'select',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'open' => esc_html__('Open', 'et_builder'),
-						'closed'  => esc_html__('Closed', 'et_builder'),
-					),
-					'description'       => esc_html__('Select the status for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_published_date' => array(
-					'label'           => esc_html__('Publish Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the Publish Date for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_published_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_published_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-						sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-						esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-						'default' => 'D, n/j/Y g:i a',
-						'show_if' => array('post_type_layout' => 'exam', 'exam_published_date_format' => 'on'),
-						'tab_slug'			=> 'general',
-						'toggle_slug'			=> 'exam',
-				),
-				'exam_final_filing_date_chooser' => array(
-						'label'           => esc_html__('Use Date Picker for Final Filing Date', 'et_builder'),
-						'type'            => 'yes_no_button',
-						'option_category' => 'configuration',
-						'options' => array(
-							'on'  => esc_html__('Yes', 'et_builder'),
-							'off' => esc_html__('No', 'et_builder'),
-						),
-						'default' => 'on',
-						'show_if' => array('post_type_layout' => 'exam'),
-						'tab_slug'			=> 'general',
-						'toggle_slug'			=> 'exam',
-				),
-				'exam_final_filing_date' => array(
-					'label'           => esc_html__('Final Filing Date', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the Final Filing Date for this exam item.', 'et_builder'),
-					'default' => 'Until Filled',
-					'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_chooser' => 'off'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_final_filing_date_picker' => array(
-					'label'           => esc_html__('Final Filing Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the Final Filing Date for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_chooser' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_final_filing_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_final_filing_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a',
-					'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_type' => array(
-					'label'             => esc_html__('Exam Type', 'et_builder'),
-					'type'              => 'select',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'web' => esc_html__('Web', 'et_builder'),
-						'location'  => esc_html__('Classroom', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'exam'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_url' => array(
-					'label'           => esc_html__('URL', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the URL for this exam item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'web'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_address' => array(
-					'label'           => esc_html__('Address', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter address for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_city' => array(
-					'label'           => esc_html__('City', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter city for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_state' => array(
-					'label'           => esc_html__('State', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter state for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-				'exam_zip' => array(
-					'label'           => esc_html__('Zip', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter zip code for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'exam',
-				),
-			);
+        $design_fields = array();
 
-			$course_fields = array(
-				'show_course_presenter' => array(
-					'label'             => esc_html__('Presenter', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_presenter_name' => array(
-					'label'           => esc_html__('Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_presenter_image' => array(
-					'label'              => esc_html__('Image', 'et_builder'),
-					'type'               => 'upload',
-					'option_category'    => 'basic_option',
-					'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
-					'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
-					'update_text'        => esc_attr__('Set As Image', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_presenter_bio' => array(
-					'label'           => esc_html__('Short Bio', 'et_builder'),
-					'type'            => 'textarea',
-					'option_category' => 'basic_option',
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_start_date' => array(
-					'label'           => esc_html__('Start Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter start date for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_start_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_start_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a',
-					'show_if'			=> array('post_type_layout' => 'course', 'course_start_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_end_date' => array(
-					'label'           => esc_html__('End Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter end date for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_end_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_end_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a',
-					'show_if'			=> array('post_type_layout' => 'course', 'course_end_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'show_course_address' => array(
-					'label'             => esc_html__('Course Location', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_address' => array(
-					'label'           => esc_html__('Address', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Course address for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_city' => array(
-					'label'           => esc_html__('City', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Course city for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_state' => array(
-					'label'           => esc_html__('State', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Course state for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_zip' => array(
-					'label'           => esc_html__('Zip', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Course zip code for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_registration_type' => array(
-					'label'             => esc_html__('Registration Type', 'et_builder'),
-					'type'              => 'text',
-					'option_category'   => 'basic_option',
-					'description'       => esc_html__('Enter a registration type for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'course_cost' => array(
-					'label'           => esc_html__('Cost', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Course Cost for this course item.', 'et_builder'),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-				'show_course_map' => array(
-					'label'             => esc_html__('Course Map', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if'			=> array('post_type_layout' => 'course'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'course',
-				),
-			);
+        $advanced_fields = array(
+            'module_id' => array(
+                'label'           => esc_html__('CSS ID', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'			=> 'classes',
+                'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'module_class' => array(
+                'label'           => esc_html__('CSS Class', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'			=> 'classes',
+                'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'disabled_on' => array(
+                'label'           => esc_html__('Disable on', 'et_builder'),
+                'type'            => 'multiple_checkboxes',
+                'options'         => array(
+                    'phone'   => esc_html__('Phone', 'et_builder'),
+                    'tablet'  => esc_html__('Tablet', 'et_builder'),
+                    'desktop' => esc_html__('Desktop', 'et_builder'),
+                ),
+                'additional_att'  => 'disable_on',
+                'option_category' => 'configuration',
+                'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'visibility',
+            ),
+        );
 
-			$event_fields = array(
-				'event_organizer' => array(
-					'label'           => esc_html__('Organizer', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the name of the organizer.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'show_event_presenter' => array(
-					'label'             => esc_html__('Presenter', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_presenter_name' => array(
-					'label'           => esc_html__('Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_presenter_image' => array(
-					'label'              => esc_html__('Image', 'et_builder'),
-					'type'               => 'upload',
-					'option_category'    => 'basic_option',
-					'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
-					'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
-					'update_text'        => esc_attr__('Set As Image', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_presenter_bio' => array(
-					'label'           => esc_html__('Short Bio', 'et_builder'),
-					'type'            => 'textarea',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_start_date' => array(
-					'label'           => esc_html__('Start Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter start date for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_start_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off', 
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_start_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a',
-					'show_if' => array('post_type_layout' => 'event', 'event_start_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_end_date' => array(
-					'label'           => esc_html__('End Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter end date for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_end_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_end_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a',
-					'show_if' => array('post_type_layout' => 'event', 'event_end_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'show_event_address' => array(
-					'label'             => esc_html__('Event Location', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_address' => array(
-					'label'           => esc_html__('Address', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Event address for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_city' => array(
-					'label'           => esc_html__('City', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Event city for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_state' => array(
-					'label'           => esc_html__('State', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Event state for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_zip' => array(
-					'label'           => esc_html__('Zip', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Event zip code for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_registration_type' => array(
-					'label'             => esc_html__('Registration Type', 'et_builder'),
-					'type'              => 'text',
-					'option_category'   => 'basic_option',
-					'description'       => esc_html__('Enter a registration type for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-				'event_cost' => array(
-					'label'           => esc_html__('Cost', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Event Cost for this event item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'event'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'event',
-				),
-			);
+        $news_fields = array(
+            'news_author' => array(
+                'label'           => esc_html__('Author', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter an Author for this news item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'news'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'news',
+            ),
+            'news_publish_date' => array(
+                'label'           => esc_html__('Publish Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a Publish Date for this news item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'news'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'news',
+            ),
+            'news_publish_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'news'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'news',
+            ),
+            'news_publish_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                	sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                	esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'M d, Y',
+                'show_if' => array('post_type_layout' => 'news', 'news_publish_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'news',
+            ),
+            'news_city' => array(
+                'label'           => esc_html__('News Location', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a Location for this news item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'news'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'news',
+            ),
+        );
 
-			$job_fields = array(
-				'show_about_agency' => array(
-					'label'             => esc_html__('Agency', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_name' => array(
-					'label'           => esc_html__('Agency Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter an Agency Name for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_address' => array(
-					'label'           => esc_html__('Agency Address', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Agency address for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_city' => array(
-					'label'           => esc_html__('Agency City', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Agency city for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_state' => array(
-					'label'           => esc_html__('Agency State', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Agency state for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_zip' => array(
-					'label'           => esc_html__('Agency Zip', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Agency zip code for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_agency_about' => array(
-					'label'           => esc_html__('About Agency', 'et_builder'),
-					'type'            => 'textarea',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter information about the Agency for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_hours' => array(
-					'label'           => esc_html__('Job Hours', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter job hours for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'show_job_salary' => array(
-					'label'             => esc_html__('Salary', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_salary_min' => array(
-					'label'           => esc_html__('Minimum Salary', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_salary' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_salary_max' => array(
-					'label'           => esc_html__('Maximum Salary', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_salary' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_posted_date' => array(
-					'label'           => esc_html__('Date Posted', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter posted date for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_posted_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_posted_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'M d, Y',
-					'show_if' => array('post_type_layout' => 'jobs', 'job_posted_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_position_number' => array(
-					'label'           => esc_html__('Position Number', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter a position number for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_rpa_number' => array(
-					'label'           => esc_html__('RPA Number', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter a rpa number for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_ds_url' => array(
-					'label'           => esc_html__('Duty Statement (URL)', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the duty statement\'s url link for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_final_filing_date_chooser' => array(
-					'label'           => esc_html__('Use Date Picker for Final Filing Date', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_final_filing_date' => array(
-					'label'           => esc_html__('Final Filing Date', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the final filing date for this job item.', 'et_builder'),
-					'default' => 'Until Filled',
-					'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_chooser' => 'off'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_final_filing_date_picker' => array(
-					'label'           => esc_html__('Final Filing Date', 'et_builder'),
-					'type'            => 'date_picker',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter the Final Filing Date for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_chooser' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_final_filing_date_format' => array(
-					'label'           => esc_html__('Custom Date Format', 'et_builder'),
-					'type'            => 'yes_no_button',
-					'option_category' => 'configuration',
-					'options' => array(
-						'on'  => esc_html__('Yes', 'et_builder'),
-						'off' => esc_html__('No', 'et_builder'),
-					),
-					'default' => 'off',
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_final_filing_date_custom_format' => array(
-					'label'           => esc_html__('Pattern', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'depends_show_if' => 'on',
-					'description'     => et_get_safe_localization(
-					sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
-					esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
-					'default' => 'D, n/j/Y g:i a', 
-					'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_format' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'show_job_apply_to' => array(
-					'label'             => esc_html__('Apply to', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_dept' => array(
-					'label'           => esc_html__('Department', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Department Name for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_name' => array(
-					'label'           => esc_html__('Contact Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact Name for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_address' => array(
-					'label'           => esc_html__('Address', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact address for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_city' => array(
-					'label'           => esc_html__('City', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact city for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_state' => array(
-					'label'           => esc_html__('State', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact state for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_apply_to_zip' => array(
-					'label'           => esc_html__('Zip', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact zip code for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'show_job_questions' => array(
-					'label'             => esc_html__('Questions', 'et_builder'),
-					'type'              => 'yes_no_button',
-					'option_category'   => 'configuration',
-					'options'           => array(
-						'off' => esc_html__("Hide", 'et_builder'),
-						'on'  => esc_html__('Show', 'et_builder'),
-					),
-					'show_if' => array('post_type_layout' => 'jobs'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_questions_name' => array(
-					'label'           => esc_html__('Name', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact Name for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_questions_phone' => array(
-					'label'           => esc_html__('Phone Number', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact Phone Number for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-				),
-				'job_questions_email' => array(
-					'label'           => esc_html__('Email', 'et_builder'),
-					'type'            => 'text',
-					'option_category' => 'basic_option',
-					'description'     => esc_html__('Enter Contact Email for this job item.', 'et_builder'),
-					'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
-					'tab_slug'			=> 'general',
-					'toggle_slug'			=> 'job',
-					),
-			);
-			
-			return array_merge($general_fields, $course_fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $design_fields, $advanced_fields);
-			
+        $profile_fields = array(
+            'profile_image_align' => array(
+                'label'             => esc_html__('Image Alignment', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Left", 'et_builder'),
+                    'on'  => esc_html__('Right', 'et_builder'),
+                ),
+                'description' => 'Alignment for the featured profile image',
+                'show_if' => array('post_type_layout' => 'profile'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'style',
+            ),
+            'profile_name_prefix' => array(
+                'label'           => esc_html__('Name Prefix', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a prefix for this profile item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'profile'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_name' => array(
+                'label'           => esc_html__('Profile Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a profile name for this profile item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'profile'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career' => array(
+                'label'             => esc_html__('Career', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'description' => 'Job related fields',
+                'show_if' => array('post_type_layout' => 'profile'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career_title' => array(
+                'label'           => esc_html__('Title', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'profile', 'profile_career' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career_position' => array(
+                'label'           => esc_html__('Position', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'profile', 'profile_career' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_additional_fields' => array(
+                'label'             => esc_html__('Additional List Fields', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'description' => 'Additional information for the Post List.',
+                'show_if' => array('post_type_layout' => 'profile'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career_line_1' => array(
+                'label'           => esc_html__('Line 1', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career_line_2' => array(
+                'label'           => esc_html__('Line 2', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+            'profile_career_line_3' => array(
+                'label'           => esc_html__('Line 3', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'profile', 'profile_additional_fields' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'profile',
+            ),
+        );
+
+        $exam_fields = array(
+            'exam_id' => array(
+                'label'           => esc_html__('Exam Code', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter an Exam Code for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_class' => array(
+                'label'           => esc_html__('Class Code', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter an Class Code for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_status' => array(
+                'label'             => esc_html__('Status', 'et_builder'),
+                'type'              => 'select',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'open' => esc_html__('Open', 'et_builder'),
+                    'closed'  => esc_html__('Closed', 'et_builder'),
+                ),
+                'description'       => esc_html__('Select the status for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_published_date' => array(
+                'label'           => esc_html__('Publish Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the Publish Date for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_published_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_published_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                	sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                	esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if' => array('post_type_layout' => 'exam', 'exam_published_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_final_filing_date_chooser' => array(
+                'label'           => esc_html__('Use Date Picker for Final Filing Date', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'on',
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_final_filing_date' => array(
+                'label'           => esc_html__('Final Filing Date', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the Final Filing Date for this exam item.', 'et_builder'),
+                'default' => 'Until Filled',
+                'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_chooser' => 'off'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_final_filing_date_picker' => array(
+                'label'           => esc_html__('Final Filing Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the Final Filing Date for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_chooser' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_final_filing_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_final_filing_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if' => array('post_type_layout' => 'exam', 'exam_final_filing_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_type' => array(
+                'label'             => esc_html__('Exam Type', 'et_builder'),
+                'type'              => 'select',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'web' => esc_html__('Web', 'et_builder'),
+                    'location'  => esc_html__('Classroom', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'exam'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_url' => array(
+                'label'           => esc_html__('URL', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the URL for this exam item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'web'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_address' => array(
+                'label'           => esc_html__('Address', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter address for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_city' => array(
+                'label'           => esc_html__('City', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter city for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_state' => array(
+                'label'           => esc_html__('State', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter state for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+            'exam_zip' => array(
+                'label'           => esc_html__('Zip', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter zip code for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'exam', 'exam_type' => 'location'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'exam',
+            ),
+        );
+
+        $course_fields = array(
+            'show_course_presenter' => array(
+                'label'             => esc_html__('Presenter', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_presenter_name' => array(
+                'label'           => esc_html__('Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_presenter_image' => array(
+                'label'              => esc_html__('Image', 'et_builder'),
+                'type'               => 'upload',
+                'option_category'    => 'basic_option',
+                'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
+                'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
+                'update_text'        => esc_attr__('Set As Image', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_presenter_bio' => array(
+                'label'           => esc_html__('Short Bio', 'et_builder'),
+                'type'            => 'textarea',
+                'option_category' => 'basic_option',
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_start_date' => array(
+                'label'           => esc_html__('Start Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter start date for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_start_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_start_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if'			=> array('post_type_layout' => 'course', 'course_start_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_end_date' => array(
+                'label'           => esc_html__('End Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter end date for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_end_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_end_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if'			=> array('post_type_layout' => 'course', 'course_end_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'show_course_address' => array(
+                'label'             => esc_html__('Course Location', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_address' => array(
+                'label'           => esc_html__('Address', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Course address for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_city' => array(
+                'label'           => esc_html__('City', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Course city for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_state' => array(
+                'label'           => esc_html__('State', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Course state for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_zip' => array(
+                'label'           => esc_html__('Zip', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Course zip code for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course', 'show_course_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_registration_type' => array(
+                'label'             => esc_html__('Registration Type', 'et_builder'),
+                'type'              => 'text',
+                'option_category'   => 'basic_option',
+                'description'       => esc_html__('Enter a registration type for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'course_cost' => array(
+                'label'           => esc_html__('Cost', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Course Cost for this course item.', 'et_builder'),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+            'show_course_map' => array(
+                'label'             => esc_html__('Course Map', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if'			=> array('post_type_layout' => 'course'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'course',
+            ),
+        );
+
+        $event_fields = array(
+            'event_organizer' => array(
+                'label'           => esc_html__('Organizer', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the name of the organizer.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'show_event_presenter' => array(
+                'label'             => esc_html__('Presenter', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_presenter_name' => array(
+                'label'           => esc_html__('Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_presenter_image' => array(
+                'label'              => esc_html__('Image', 'et_builder'),
+                'type'               => 'upload',
+                'option_category'    => 'basic_option',
+                'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
+                'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
+                'update_text'        => esc_attr__('Set As Image', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_presenter_bio' => array(
+                'label'           => esc_html__('Short Bio', 'et_builder'),
+                'type'            => 'textarea',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'event', 'show_event_presenter' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_start_date' => array(
+                'label'           => esc_html__('Start Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter start date for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_start_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_start_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if' => array('post_type_layout' => 'event', 'event_start_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_end_date' => array(
+                'label'           => esc_html__('End Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter end date for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_end_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_end_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if' => array('post_type_layout' => 'event', 'event_end_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'show_event_address' => array(
+                'label'             => esc_html__('Event Location', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_address' => array(
+                'label'           => esc_html__('Address', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Event address for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_city' => array(
+                'label'           => esc_html__('City', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Event city for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_state' => array(
+                'label'           => esc_html__('State', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Event state for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_zip' => array(
+                'label'           => esc_html__('Zip', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Event zip code for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event', 'show_event_address' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_registration_type' => array(
+                'label'             => esc_html__('Registration Type', 'et_builder'),
+                'type'              => 'text',
+                'option_category'   => 'basic_option',
+                'description'       => esc_html__('Enter a registration type for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+            'event_cost' => array(
+                'label'           => esc_html__('Cost', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Event Cost for this event item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'event'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'event',
+            ),
+        );
+
+        $job_fields = array(
+            'show_about_agency' => array(
+                'label'             => esc_html__('Agency', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_name' => array(
+                'label'           => esc_html__('Agency Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter an Agency Name for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_address' => array(
+                'label'           => esc_html__('Agency Address', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Agency address for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_city' => array(
+                'label'           => esc_html__('Agency City', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Agency city for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_state' => array(
+                'label'           => esc_html__('Agency State', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Agency state for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_zip' => array(
+                'label'           => esc_html__('Agency Zip', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Agency zip code for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_agency_about' => array(
+                'label'           => esc_html__('About Agency', 'et_builder'),
+                'type'            => 'textarea',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter information about the Agency for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_about_agency' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_hours' => array(
+                'label'           => esc_html__('Job Hours', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter job hours for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'show_job_salary' => array(
+                'label'             => esc_html__('Salary', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_salary_min' => array(
+                'label'           => esc_html__('Minimum Salary', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_salary' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_salary_max' => array(
+                'label'           => esc_html__('Maximum Salary', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_salary' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_posted_date' => array(
+                'label'           => esc_html__('Date Posted', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter posted date for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_posted_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_posted_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'M d, Y',
+                'show_if' => array('post_type_layout' => 'jobs', 'job_posted_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_position_number' => array(
+                'label'           => esc_html__('Position Number', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a position number for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_rpa_number' => array(
+                'label'           => esc_html__('RPA Number', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter a rpa number for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_ds_url' => array(
+                'label'           => esc_html__('Duty Statement (URL)', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the duty statement\'s url link for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_final_filing_date_chooser' => array(
+                'label'           => esc_html__('Use Date Picker for Final Filing Date', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_final_filing_date' => array(
+                'label'           => esc_html__('Final Filing Date', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the final filing date for this job item.', 'et_builder'),
+                'default' => 'Until Filled',
+                'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_chooser' => 'off'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_final_filing_date_picker' => array(
+                'label'           => esc_html__('Final Filing Date', 'et_builder'),
+                'type'            => 'date_picker',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter the Final Filing Date for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_chooser' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_final_filing_date_format' => array(
+                'label'           => esc_html__('Custom Date Format', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options' => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'off',
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_final_filing_date_custom_format' => array(
+                'label'           => esc_html__('Pattern', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'depends_show_if' => 'on',
+                'description'     => et_get_safe_localization(
+                sprintf(__('For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>', 'et_builder'),
+                esc_url('https://codex.wordpress.org/Formatting_Date_and_Time'))),
+                'default' => 'D, n/j/Y g:i a',
+                'show_if' => array('post_type_layout' => 'jobs', 'job_final_filing_date_format' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'show_job_apply_to' => array(
+                'label'             => esc_html__('Apply to', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_dept' => array(
+                'label'           => esc_html__('Department', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Department Name for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_name' => array(
+                'label'           => esc_html__('Contact Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact Name for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_address' => array(
+                'label'           => esc_html__('Address', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact address for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_city' => array(
+                'label'           => esc_html__('City', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact city for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_state' => array(
+                'label'           => esc_html__('State', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact state for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_apply_to_zip' => array(
+                'label'           => esc_html__('Zip', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact zip code for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_apply_to' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'show_job_questions' => array(
+                'label'             => esc_html__('Questions', 'et_builder'),
+                'type'              => 'yes_no_button',
+                'option_category'   => 'configuration',
+                'options'           => array(
+                    'off' => esc_html__("Hide", 'et_builder'),
+                    'on'  => esc_html__('Show', 'et_builder'),
+                ),
+                'show_if' => array('post_type_layout' => 'jobs'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_questions_name' => array(
+                'label'           => esc_html__('Name', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact Name for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_questions_phone' => array(
+                'label'           => esc_html__('Phone Number', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact Phone Number for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+            'job_questions_email' => array(
+                'label'           => esc_html__('Email', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Enter Contact Email for this job item.', 'et_builder'),
+                'show_if' => array('post_type_layout' => 'jobs', 'show_job_questions' => 'on'),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'job',
+            ),
+        );
+
+        return array_merge($general_fields, $course_fields, $event_fields, $exam_fields, $job_fields, $news_fields, $profile_fields, $design_fields, $advanced_fields);
     }
-    function render( $unprocessed_props, $content = null, $render_slug ) {
+    function render($unprocessed_props, $content = null, $render_slug) {
         global $post;
         $post_type_layout    = $this->props['post_type_layout'];
         // Course Attributes
@@ -1288,9 +1287,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         // General Attributes
         $show_tags_button    = $this->props['show_tags_button'];
         $show_categories_button    = $this->props['show_categories_button'];
-				
-				$content = $this->content;
-				
+
+        $content = $this->content;
+
         setlocale(LC_MONETARY, get_locale());
         //return posts tags
         $tag_names = wp_get_post_tags($post->ID, array('fields' => 'names'));
@@ -1317,12 +1316,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         switch ($post_type_layout) {
 			// Course
 			case 'course':
-			
-				$this->add_classname( 'course-detail' );
-				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-							
+
+				$this->add_classname('course-detail');
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
       	$presenter_image = ( ! empty($course_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image) : '');
-      
+
 				$presenter = ("on" == $show_course_presenter ?
 											sprintf('<div class="presenter" style="display: inline-block;margin-bottom: 5px;"><p>
 												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
@@ -1346,13 +1345,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				} else {
 				    $course_map = '';
 				}
-      	$output = sprintf('<article%1$s%2$s><div class="description">%3$s</div>%4$s<div class="group"><div class="two-thirds">%5$s%6$s</div>%7$s</div>%8$s</article>', $this->module_id(),	$class, $content, $presenter, $organizer, $reg, $course_map, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+      	$output = sprintf('<article%1$s%2$s><div class="description">%3$s</div>%4$s<div class="group"><div class="two-thirds">%5$s%6$s</div>%7$s</div>%8$s</article>', $this->module_id(), $class, $content, $presenter, $organizer, $reg, $course_map, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 				break;
 			// Event
 			case 'event':
-				$this->add_classname( 'event-detail' );
-				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-					
+				$this->add_classname('event-detail');
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
 				$presenter_image = ( ! empty($event_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image) : '');
 				$presenter = ("on" == $show_event_presenter ?
 				sprintf('<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>',
@@ -1371,14 +1371,15 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
                                       sprintf('Registration Cost: %1$s', $event_cost) : '');
       	$reg = array_filter(array($event_registration_type, $event_cost));
       	$reg = ( ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '');
-				$output = sprintf('<article%1$s%2$s>%3$s<div class="description">%4$s</div>%5$s%6$s%7$s%8$s</article>', $this->module_id(),	$class,  caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left', 'style'=>'padding-right:15px;')), $content, $presenter, $organizer, $reg,	sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list)  );
+				$output = sprintf('<article%1$s%2$s>%3$s<div class="description">%4$s</div>%5$s%6$s%7$s%8$s</article>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left', 'style'=>'padding-right:15px;')), $content, $presenter, $organizer, $reg, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 					break;
 			// Exams
 			case 'exam':
-			
-				$this->add_classname( 'exam-detail' );
-				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-				
+
+				$this->add_classname('exam-detail');
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
 				if ("web" == $exam_type) {
 				    $exam_location = sprintf('Exam Url: <a href="%1$s">%1$s</a><br />', $exam_url);
 				} else {
@@ -1398,15 +1399,16 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
             $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date);
         }
 				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s', $exam_course), $pub_date, $exam_final_filing_date, $exam_location);
-				
-				$output = sprintf('<div%1$s%2$s><div class="header">%3$s%4$s</div>%5$s%6$s</div>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')) , $exam_info, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+
+				$output = sprintf('<div%1$s%2$s><div class="header">%3$s%4$s</div>%5$s%6$s</div>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')), $exam_info, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 				break;
 			// Jobs
 			case 'jobs':
-			
-				$this->add_classname( 'job-detail' );
-				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-				
+
+				$this->add_classname('job-detail');
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
 				$agency_addr = array_filter(array($job_agency_address, $job_agency_city, $job_agency_state, $job_agency_zip));
 				$agency_addr = ( ! empty($agency_addr) ? implode(", ", $agency_addr) : '');
 				$agency_info = ("on" == $show_about_agency ?
@@ -1463,42 +1465,48 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 													sprintf('<div class="half"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
 																	( ! empty($job_apply_to_info) ? sprintf('<p>%1$s</p>', $job_apply_to_info) : ''), ( ! empty($job_questions_info) ? sprintf('<p>%1$s</p>', $job_questions_info) : '')) : '');
 				$job_agency_about = "on" == $show_about_agency && ! empty($job_agency_about) ? sprintf('<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about) : '';
-				
-				$output = sprintf('<article%1$s%2$s><div class="sub-header">%3$s%4$s</div><div class="group">%5$s%6$s</div>%7$s%8$s%9$s</article>',$this->module_id(),	$class, ! empty($agency_info) ? $agency_info : '', $job_posted_date, $job_info, $job_apply_info, $job_agency_about,  $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+
+				$output = sprintf('<article%1$s%2$s><div class="sub-header">%3$s%4$s</div><div class="group">%5$s%6$s</div>%7$s%8$s%9$s</article>', $this->module_id(), $class, ! empty($agency_info) ? $agency_info : '', $job_posted_date, $job_info, $job_apply_info, $job_agency_about, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 					break;
 			// News
 			case 'news':
-			$this->add_classname( 'news-detail' );
-			$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-			
+			$this->add_classname('news-detail');
+			$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
 			$news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
 			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
 													( ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : ''), $news_publish_date,
 													( ! empty($news_city) ? sprintf('%1$s', $news_city) : ''));
-			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', caweb_get_the_post_thumbnail(null, array(150,100), array('class' => 'img-left')), $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')), $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 				break;
 			// Profile
 			case 'profile':
-			
-			$this->add_classname( 'profile-detail' );
-			$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-			
+
+			$this->add_classname('profile-detail');
+			$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
 				$title = sprintf('%1$s%2$s%3$s', ( ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '') , $profile_name,
 				( ! empty($profile_career_title) ? ', '.$profile_career_title : ''));
 				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
-				$image = caweb_get_the_post_thumbnail(null, array(150,100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;'));
-				$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(),	$class, ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '',$image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+				$image = caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;'));
+				$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 				break;
 			case 'faqs':
-			
-				$class = sprintf(' class="%1$s" ', $this->module_classname( $render_slug ) );
-			
-				$output = sprintf('<article%1$s%2$s>%3$s%4$s</article>', $this->module_id(),	$class, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list) );
+
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
+				$output = sprintf('<article%1$s%2$s>%3$s%4$s</article>', $this->module_id(), $class, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+
 				break;
 			case 'general':
 				$output = '<article id="general_post_detail"></article>';
+
 				break;
 		}
+
         return $output;
     }
     // This is a non-standard function. It outputs JS code to render the

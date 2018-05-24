@@ -1,14 +1,14 @@
 <!-- Global Footer -->
 <?php
 wp_nav_menu(array(
-						'theme_location'=> 'footer-menu',
-						'version' => caweb_get_version( get_the_ID() )
-						)
+    'theme_location'=> 'footer-menu',
+    'version' => caweb_get_version(get_the_ID())
+)
 					);
 
 wp_footer();
 
-if( ! is_404() ) :
+if ( ! is_404()) :
 ?>
 
 <script> 
@@ -27,7 +27,7 @@ window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
 
 <?php endif; ?>
 
-<?php if( is_tag() || is_archive() || is_category() || is_author() ) : ?>
+<?php if (is_tag() || is_archive() || is_category() || is_author()) : ?>
   <script>
     
  jQuery(document).ready(function() {   
