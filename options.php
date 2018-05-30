@@ -171,12 +171,15 @@ function caweb_api_menu_option_setup() {
 <div class="wrap">
   <h1>GitHub API Key</h1>
   <table class="form-table">
+		<tr><td>
+        <div class="tooltip">Is Private?<span class="tooltiptext">Is this theme hosted as a private repo?</span></div></td>
+      		<td><input type="checkbox" name="caweb_private_theme_enabled" size="50" <?= get_site_option('caweb_private_theme_enabled', false) ? ' checked="checked"' : '' ?> /></td></tr>
     <tr><td>
         <div class="tooltip">Username<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
-      		<td><input type="text" name="caweb_username" size="50" value="<?php print get_site_option('caweb_username', ''); ?>" /></td></tr>
+      		<td><input type="text" name="caweb_username" size="50" value="<?php print get_site_option('caweb_username', 'CAWebPublishing'); ?>" placeholder="Default: CAWebPublishing" /></td></tr>
       <tr><td>
         <div class="tooltip">Token<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
-  				<td><input type="password" name="caweb_password" size="50" value="<?php print base64_encode(get_site_option('caweb_password', '')); ?>" /></td></tr>
+  		<td><input type="password" name="caweb_password" size="50" value="<?php print base64_encode(get_site_option('caweb_password', '')); ?>" /></td></tr>
   </table>
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
@@ -186,7 +189,8 @@ function caweb_api_menu_option_setup() {
 }
 // Save API Values
 function caweb_save_api_options($values = array()) {
-    update_site_option('caweb_username', $values['caweb_username']);
+    update_site_option('caweb_private_theme_enabled', isset($values['caweb_private_theme_enabled']) ? true : false);
+    update_site_option('caweb_username', ! empty($values['caweb_username']) ? $values['caweb_username'] : 'CAWebPublishing');
     update_site_option('caweb_password', $values['caweb_password']);
 
     print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
