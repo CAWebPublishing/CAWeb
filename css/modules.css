@@ -70,7 +70,7 @@ overflow: hidden;
 
 }
 .profile-banner{
-	background: url('../images/banner/banner-blank.png') no-repeat;
+	background: url('../../images/banner/banner-blank.png') no-repeat;
    background-size: 100% 100%;
    overflow: hidden;
    height: 90px;
