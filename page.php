@@ -20,6 +20,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 	<!--div class="ca_wp_container"-->
 
 
+
 <?php endif; ?>
 
 <main class="main-primary">
@@ -51,7 +52,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 	}
 ?>
 
-
 					</div> <!-- .entry-content -->
 
 				<?php
@@ -72,7 +72,8 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 <?php if ( ! ca_version_check(4) ) : ?>
-  <!--/div-->
+
+  <!--</div>-->
 
 <?php endif; ?>
 

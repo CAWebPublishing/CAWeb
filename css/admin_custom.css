@@ -1,8 +1,12 @@
 /* CAWeb Options Page Styles */
 /* Indent fields under each categoryy */
 .form-table th{
-    padding: 20px 10px 20px 50px;
+    padding: 10px 10px 10px 0px;
+    text-align: end;
   }
+.form-table td{
+  padding: 5px 10px;
+}
 #custom-css textarea{
 	width: 100%;
 	min-height: 700px;
@@ -18,6 +22,7 @@
 
 .option{
 	text-decoration: underline;
+  font-size: 1.2rem;
 }
   option.show{
     display:block;
@@ -44,8 +49,12 @@ h2.nav-tab-wrapper{
 
 }
 /* Remove Auto-add Pages from Navigation menu */
-dl.auto-add-pages {
+fieldset.menu-settings-group.auto-add-pages{
     display: none;
+}
+/* Remove Move options from Navigation menu items */
+p.field-move {
+    display: none !important;
 }
 /* Icon List */
   ul.menu-icon-list{
@@ -103,4 +112,10 @@ ul.menu-icon-list li:hover{
 .tooltip:hover .tooltiptext {
     visibility: visible;
 
+}
+
+.header_ca_branding_option, .ca_fav_ico_option, .header_ca_background_option{
+  height: 150px;
+  padding-left: 2px;
+  padding-top: 5px;
 }

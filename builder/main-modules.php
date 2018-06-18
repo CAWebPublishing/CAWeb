@@ -2000,7 +2000,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$this->whitelisted_fields = array('style', 'title',
 			'all_categories_button','include_categories',
-			'all_tags_button','include_tags',
+			'all_tags_button','include_tags', 'view_featured_image',
 			'posts_number', 'module_class', 'module_id',
 			'orderby', 'admin_label',
 		);
@@ -2026,11 +2026,14 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'options'           => array(
 					'course-list' => esc_html__( 'Course List', 'et_builder'),
 					'events-list'  => esc_html__( 'Event List', 'et_builder' ),
+					'exams-list'  => esc_html__( 'Exam List', 'et_builder' ),
+					'general-list'  => esc_html__( 'General List', 'et_builder' ),
 					'jobs-list'  => esc_html__( 'Jobs List', 'et_builder' ),
 					'news-list'  => esc_html__( 'News List', 'et_builder' ),
 					'profile-list'  => esc_html__( 'Profile List', 'et_builder' ),
 				),
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
+				'affects' => array('#et_pb_all_categories_button'),
 			),
 			'posts_number' => array(
 				'label'             => esc_html__( 'Posts Number', 'et_builder' ),
@@ -2038,7 +2041,16 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'option_category'   => 'configuration',
 				'description'       => esc_html__( 'Choose how many posts you would like to display in the list. Default is all.', 'et_builder' ),
 			),
-			'all_categories_button' => array(
+			'view_featured_image' => array(
+				'label'           => esc_html__( 'Display Featured Image', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+			),
+				'all_categories_button' => array(
 				'label'           => esc_html__( 'Include All Categories', 'et_builder' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
@@ -2049,6 +2061,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 				'affects' => array(
 							'#et_pb_include_categories',
 				),
+				'depends_show_if' => 'general-list',
 			),
 			'include_categories' => array(
 				'label'            => esc_html__( 'Select Categories', 'et_builder' ),
@@ -2129,6 +2142,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$posts_number            = $this->shortcode_atts['posts_number'];
 
+		$view_featured_image            = $this->shortcode_atts['view_featured_image'];
+
 		$all_categories_button            = $this->shortcode_atts['all_categories_button'];
 
 		$include_categories      = $this->shortcode_atts['include_categories'];
@@ -2147,142 +2162,311 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-		if ( 'date_desc' !== $orderby ) {
-			switch( $orderby ) {
-				case 'date_asc' :
+		switch( $orderby ) {
+			case 'date_desc':
+					$orderby = 'date';
+					$order = 'DESC';
+					break;
+			case 'date_asc' :
 					$orderby = 'date';
 
 					$order = 'ASC';
 
 					break;
 
-				case 'title_asc' :
+			case 'title_asc' :
 					$orderby = 'title';
 
 					$order = 'ASC';
 
 					break;
 
-				case 'title_desc' :
+			case 'title_desc' :
 					$orderby = 'title';
 
 					$order = 'DESC';
 
 					break;
 
-				case 'rand' :
+			case 'rand' :
 					$orderby = 'rand';
 
 					break;
 
-			}
 		}
+		
+		
 			if("on" == $all_categories_button ){
-					$cat_array = get_terms( 'category', array('orderby' => $orderby, 'hide_empty' => 0, 'fields' => 'ids'));
+				$cat_array = get_terms( 'category', array('orderby' => $orderby, 'hide_empty' => 0, 'fields' => 'ids'));
 
 			}elseif ( "" !== $include_categories) {
-					$cat_array = explode(" ", $include_categories);
+				$cat_array = $include_categories;
 			}
-
-			if("on" !== $all_tags_button){
-				$tag_array = get_tags( array( 'fields' => 'names' ) );
+		
+			if("on" == $all_tags_button){
+				$tag_array = array();
+				//$tag_array = get_tags( array( 'fields' => 'names' ) );
 			}elseif("" !== $include_tags){
-				$tag_array =	explode(" ", $include_tags);
+				$tag_array =	$include_tags;
 			}
-
-
+		
+										
 			$posts_number = ( !empty($posts_number) ? $posts_number : -1);
 
-			$counter = 1;
-
-			$all_posts = return_posts($cat_array ,$tag_array, $posts_number );
-
+			$all_posts = return_posts($cat_array ,$tag_array, -1, $orderby, $order );
+			
+			setlocale(LC_MONETARY, 'en_US.UTF-8');
+		
+		
 			$output = sprintf('<div class="et_pb_ca_post_list">%1$s', ( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '' ));
-
-			foreach ($all_posts as $a=>$p) {
-				switch($style){
-					case "course-list":
-					$date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_date'][0]: '' );
-					$desc= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_excerpt'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_excerpt'][0]: '' );
-					$location= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_location'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_location'][0]: '' );
-					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_course_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_course_image'][0]: '' );
-
-
-					$output .= sprintf('<article class="course-item">
-												<div class="thumbnail" ><img src="%1$s" style="width: 70px; height: 70px;" /></div>
-												<div class="header"> <div class="title"><a href="%2$s">%3$s</a></div>
-												<div class="datetime" >%4$s</div></div><div class="body">
-        								<div class="description">%5$s</div><div class="location">%6$s</div></div>
-												<div class="footer"><a href="%2$s" class="btn btn-default">View More Details</a></div></article>',
-												$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $date, $desc, $location );
-
-
-     			break;
-
-					case "events-list":
-					$desc= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_event_desc'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_event_desc'][0]: '' );
-
-					$date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_event_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_event_date'][0]: '' );
-
-
-							$output .= sprintf('<article class="event-item"><h5><a href="%1$s" class="title">%2$s</a></h5>
-																	<div class="description">%3$s</div>
-																	<div class="start-date"><time>%4$s</time></div></article>',
-										get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $desc, $date );
-
+			foreach ($all_posts as $a=>$p){
+				if( $posts_number !== -1 && 0 == $posts_number )
+				  break;			
+				
+				// Get the CAWeb Post Handler
+				$post_id = $all_posts[$a]->ID;
+				$title = $all_posts[$a]->post_title;
+				$url = get_permalink($all_posts[$a]->ID);
+				$content = $all_posts[$a]->post_content;
+				
+				$post_content_handler = caweb_get_shortcode_from_content($content, 'et_pb_ca_post_handler');
+				
+				// if the hanlder is an object, construct the appropriate list item
+				if ( is_object($post_content_handler) ){
+					// List Style 
+					switch($style){
+						// News List
+						case "news-list":
+								// if post contains a CAWeb News Post Handler
+								if ( "news" == $post_content_handler->post_type_layout ){
+									$news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
+									
+									$image= ( has_post_thumbnail($post_id) && "on" == $view_featured_image ? 
+													sprintf('<div class="thumbnail" style="">%1$s</div>', get_the_post_thumbnail($post_id,null,array( 'style'=>'width: 150px; height: 100px;') ))  : '' );
+									
+									$excerpt = caweb_get_excerpt($post_content_handler->content, 30);									
+									$excerpt = ( !empty($excerpt) ? 
+															sprintf('<div class="description"><p>%1$s</p></div>', $excerpt ) : '' );
+									
+									$author = (!empty($post_content_handler->news_author) ? 
+															sprintf('Author:%1$s', $post_content_handler->news_author) : '');
+								
+								
+									$date =( !empty($post_content_handler->news_publish_date) ? sprintf('Published: <time>%1$s</time>',is_valid_date($post_content_handler->news_publish_date, 'Invalid Date')) : '');
+																									
+									
+									$element = (!empty($author) || !empty($date) ? sprintf('<div class="published">%1$s<br />%2$s</div>', $author, $date) : '');
+																				
+									$output .=	sprintf('<article class="news-item">%1$s<div class="info" %5$s>%2$s%3$s%4$s</div></article>',
+														$image, $news_title , $excerpt, $element , ( "on" == $view_featured_image ? 'style="padding-left: 175px;"' : '') );
+								
+									$posts_number--;
+								}
+								break;
+				
+						// Profile List
+						case "profile-list":						
+						// if post contains a CAWeb Profile Post Handler
+							if ( "profile" == $post_content_handler->post_type_layout ){
+								
+								$profile_title = sprintf('<div class="header"><div class="title"><a href="%1$s">%2$s%3$s%4$s</a></div></div>', 
+												$url, ( !empty($post_content_handler->profile_name_prefix) ? $post_content_handler->profile_name_prefix . ' ' : '') , 
+												$post_content_handler->profile_name, ( !empty($post_content_handler->profile_career_title) ? ', ' . $post_content_handler->profile_career_title : '') );
+									
+								$image= ( has_post_thumbnail($post_id)  && "on" == $view_featured_image ?
+												sprintf('<div class="thumbnail" >%1$s</div>', get_the_post_thumbnail($post_id, null, 
+																										array('style'=>'width: 70px; height: 93px;') )) : '' );
+									
+								$position = ( !empty($post_content_handler->profile_career_position) ? 
+												sprintf('%1$s',$post_content_handler->profile_career_position  )  : '' );	
+								$line1 = ( !empty($post_content_handler->profile_career_line_1) ? 
+												sprintf('%1$s', $post_content_handler->profile_career_line_1 )  : '' );	
+								$line2 = ( !empty($post_content_handler->profile_career_line_2) ? 
+												sprintf('%1$s',$post_content_handler->profile_career_line_2  )  : '' );	
+								$line3 = ( !empty($post_content_handler->profile_career_line_3) ? 
+												sprintf('%1$s', $post_content_handler->profile_career_line_3 )  : '' );	
+								
+								$fields = array_filter(array($position, $line1, $line2, $line3 )); 
+																
+								
+								$output .=	sprintf('<article class="profile-item">%1$s%2$s<div class="body"><p>%3$s</p></div>
+																		<div class="footer"><a href="%4$s" class="btn btn-default">View More Details</a></div></article>',
+																		$image, $profile_title,  (!empty($fields) ? implode( '<br />', $fields ) : '<br />'), $url);
+								
+								$posts_number--;
+							}
+													
 							break;
+						// Job List
+						case "jobs-list":								
+								// if post contains a CAWeb Job Post Handler
+								if ( "jobs" == $post_content_handler->post_type_layout ){
+									$job_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
+									
+									$addr = ( !empty($post_content_handler->job_agency_address) ? : '');
+									$city = ( !empty($post_content_handler->job_agency_city) ? $post_content_handler->job_agency_city : '');
+									$state = ( !empty($post_content_handler->job_agency_state) ? $post_content_handler->job_agency_state : '');
+									$zip = ( !empty($post_content_handler->job_agency_zip) ? $post_content_handler->job_agency_zip : '');
+									
+									$location = array_filter( array($post_content_handler->job_agency_address, $post_content_handler->job_agency_city, 
+																									$post_content_handler->job_agency_state, $post_content_handler->job_agency_zip) );
+									
+									$location = ( !empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location) ) : '' );		
+										
+									$fdate = ( !empty($post_content_handler->job_final_filing_date) && "Until Filled" == $post_content_handler->job_final_filing_date ? 
+														$post_content_handler->job_final_filing_date : 
+														(!empty($post_content_handler->job_final_filing_date) ? is_valid_date($post_content_handler->job_final_filing_date, 'Invalid Date') : 'Invalid Date')
+													);
+				
+									$filing_date= sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', $fdate)  ;
+																
 
-					case "jobs-list":
-					$location= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_location'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_location'][0]: '' );
-					$filing_date= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_filing_date'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_filing_date'][0]: '' );
-					$position_type= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_job_position_type'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_job_position_type'][0]: '' );
+									$job_hours =   ( !empty( $post_content_handler->job_hours ) ? sprintf('<div class="schedule">%1$s</div>', $post_content_handler->job_hours) : '' );
+									
+											
+									
+									$job_salary_min    = (!empty($post_content_handler->job_salary_min) ? is_money($post_content_handler->job_salary_min,"$0.00") : "$0.00" );
+									
+									$job_salary_max    = (!empty($post_content_handler->job_salary_max) ? is_money($post_content_handler->job_salary_max,"$0.00") : "$0.00" );
+									
+									$job_salary    = ( "on" == $post_content_handler->show_job_salary ? 
+									sprintf('<div class="salary-range">Salary Range: %1$s%2$s</div>', $job_salary_min, 
+									( !empty($post_content_handler->job_salary_max) ? sprintf('  &mdash; %1$s', $job_salary_max ) : '')  ) : '' );
+												
+									if( !empty( $post_content_handler->job_position_number ) && !empty( $post_content_handler->job_rpa_number )){
+										$job_position    = sprintf('Position Number: %1$s, RPA #%2$s', $post_content_handler->job_position_number, $post_content_handler->job_rpa_number) ;
+									}elseif( !empty( $post_content_handler->job_position_number ) ){
+										$job_position    = sprintf('Position Number: %1$s', $post_content_handler->job_position_number) ;			
+									}elseif( !empty( $post_content_handler->job_rpa_number ) ){
+										$job_position    = sprintf('RPA #%1$s', $post_content_handler->job_rpa_number) ;	
+									}
+									
+									$position_type= ( !empty($job_position) ? sprintf('<div class="position-number">%1$s</div>', $job_position) : '' );
+				
+									$output .= sprintf('<article class="job-item">
+															<div class="header">%1$s%2$s</div>
+															<div class="body">%3$s%4$s%5$s%6$s</div>
+															<div class="footer"><a href="%7$s" class="btn btn-default">View More Details</a></div></article>',
+																		$job_title, $filing_date , $position_type, $job_hours, $job_salary, $location, $url );
+									$posts_number--;
+								}
+								break;
+						// Event List
+						case "events-list":
+							// if post contains a CAWeb Event Post Handler
+								if ( "event" == $post_content_handler->post_type_layout ){
+									$event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;">%2$s</a></h5>', $url, $title);
+									
+									$excerpt = caweb_get_excerpt($post_content_handler->content, 15);									
+									$excerpt = ( !empty($excerpt) ? 
+															sprintf('<div class="description">%1$s</div>', $excerpt ) : '' );
+											
+									$date = '';
+									if(!empty($post_content_handler->event_start_date)){
+										$date = is_valid_date($post_content_handler->event_start_date, '', 'D, ');
+										$date = sprintf('<div class="start-date"><time>%1$s%2$s</time></div>', $date, is_valid_date($post_content_handler->event_start_date,'Invalid Date'));
+										
+									}								
+				
+				
+									$output .= sprintf('<article class="event-item">%1$s%2$s%3$s</article>', $event_title, $excerpt, $date );
+									
+									$posts_number--;
+								}
+								break;
+						// Course List
+						case "course-list":
+							// if post contains a CAWeb Course Post Handler
+								if ( "course" == $post_content_handler->post_type_layout ){
+									$course_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
+									
+									$image= ( has_post_thumbnail($post_id)  && "on" == $view_featured_image ? 
+													sprintf('<div class="thumbnail" >%1$s</div>', get_the_post_thumbnail($post_id, array(70, 70))) : '' );
+								
+									$excerpt = caweb_get_excerpt($post_content_handler->content, 20);									
+									$excerpt = ( !empty($excerpt) ? 
+															sprintf('<div class="description">%1$s</div>', $excerpt ) : '' );
+									
+									$tmp = array((!empty($post_content_handler->course_address) ? $post_content_handler->course_address: ''),
+															(!empty($post_content_handler->course_city) ? $post_content_handler->course_city: ''),
+															(!empty($post_content_handler->course_state) ? $post_content_handler->course_state: ''),
+															(!empty($post_content_handler->course_zip) ? $post_content_handler->course_zip: ''));
+									
+										$location = array_filter($tmp );
+									
+									$location = ( !empty($location) ? 
+											sprintf('<div class="location">Location: <a href="https://www.google.com/maps/place/%1$s">%1$s</a></div>', implode(", ", $location) ) : '' );		
+									
+									$endtime    = trim(sprintf('%1$s%2$s', 
+									(!empty($post_content_handler->course_end_date) ? is_valid_date($post_content_handler->course_end_date, "Invalid Date") : ''), 
+									(!empty($post_content_handler->course_end_time) ? ' ' . is_valid_date($post_content_handler->course_end_time, "Invalid Time") : '') ) ) ;
+									
+									
+									$course_date = sprintf('<div class="datetime">%1$s%2$s%3$s</div>', 
+																				(!empty($post_content_handler->course_start_date) ? is_valid_date($post_content_handler->course_start_date, 'Invalid Date') : ''), 
+																				(!empty($post_content_handler->course_start_time) ? ' ' . is_valid_date( $post_content_handler->course_start_time, 'Invalid Time') : ''),
+																				( !empty($endtime) ? sprintf(' - %1$s', $endtime ):''));
+									
+									$output .= sprintf('<article class="course-item">
+															%1$s<div class="header">%2$s%3$s</div>
+															<div class="body">%4$s%5$s</div>
+															<div class="footer"><a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
+																		$image, $course_title, $course_date, $excerpt, $location, $url );
+									
+									$posts_number--;
+								}
+								break;
+						// Exam List
+						case "exams-list":
+							// if post contains a CAWeb Course Post Handler
+								if ( "exam" == $post_content_handler->post_type_layout ){
+									$exam_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
+									
+									$fdate = ( empty($post_content_handler->exam_final_filing_date) ? "Until Filled" : is_valid_date($post_content_handler->exam_final_filing_date, "Invalid Date") );
+									$filing_date= sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', $fdate) ;
+							
+									$id = (!empty($post_content_handler->exam_id) ? sprintf('<div class="id">ID: %1$s</div>', $post_content_handler->exam_id) : '');
+									$base = (!empty($post_content_handler->exam_status) ?  sprintf('<div class="base">Base: %1$s</div>', $post_content_handler->exam_status) : '');
+									$pub = (!empty($post_content_handler->exam_published_date) ? sprintf('<div class="published">Published: <time>%1$s</time></div>',  is_valid_date($post_content_handler->exam_published_date, "Invalid Date")) : '');
 
-					$output .= sprintf('<article class="job-item"><div class="header"><div class="title"><a href="%1$s">%2$s</a></div>
-											<div class="filing-date"><time>%3$s</time></div></div>
-		 									<div class="body"><div>%4$s</div><div>%5$s</div></div>
-											<div class="footer"><a href="%1$s" class="btn btn-default">View More Details</a></div></article>',
-														get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $filing_date, $position_type, $location );
-
-					break;
-					case "news-list":
-					$excerpt= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_news_excerpt'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_news_excerpt'][0]: '' );
-
-					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_news_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_news_image'][0]: '' );
-
-
-							$output .=	sprintf('<article class="news-item" itemscope itemtype="http://schema.org/NewsArticle">
-			        <div class="thumbnail"  style="width: 150px !important; height: 100px !important;"><img itemprop="thumbnailUrl" src="%1$s" alt=""></div>
-			        <div class="info">
-			            <div class="headline"  itemprop="headline"><a href="%2$s" itemprop="url">%3$s</a></div>
- 									<div class="description" itemprop="articleBody" style="margin-left: 133px !important;"><p>%4$s</p></div>
-			            <div class="published" style="margin-left: 133px !important;">Published: <time itemprop="datePublished" datetime="%5$s">%6$s</time></div>
-			        </div>
-			    		</article>',
-							$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $excerpt,
-							format_date($all_posts[$a]->post_date, "c"),format_date($all_posts[$a]->post_date, "M d, Y")   );
-
-							break;
-
-					case "profile-list":
-					$profile_title= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_profile_job_title'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_profile_job_title'][0]: '' );
-
-					$image= ( isset(get_post_custom( $all_posts[$a]->ID)['ca_profile_image'][0]) ? get_post_custom( $all_posts[$a]->ID)['ca_profile_image'][0]: '' );
-
-
-							$output .=	sprintf('<article class="profile-item"><div class="thumbnail"><img src="%1$s"></div>
-																	<div class="header"><div class="title"><a href="%2$s">%3$s</a></div></div>
-																	<div class="body"><div class="job">%4$s</div>
-																	<div class="footer"><a href="%2$s" class="btn btn-default">View More Details</a></div></article>',
-																	$image, get_permalink($all_posts[$a]->ID), $all_posts[$a]->post_title, $profile_title);
-
-							break;
-
-					}
+									$output .= sprintf('<article class="exam-item">
+															<div class="header">%1$s%2$s</div>
+															<div class="body">%3$s%4$s</div>
+															<div class="footer">%5$s<a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
+																		$exam_title, $filing_date , $id, $base, $pub, $url );
+									$posts_number--;
+								}
+								break;
+						// General List
+						case "general-list":
+								// if post contains a CAWeb News Post Handler
+								if ( "general" == $post_content_handler->post_type_layout ){
+										
+									$image= ( "on" == $view_featured_image ? 
+													sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px;">%1$s</div>', 
+																	get_the_post_thumbnail($post_id,null,array( 'style'=>'width: 150px; height: 100px;') ))  : '' );
+														
+									$general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
+																		<a href="%2$s" class="title" style="color: #428bca; background: url();">%3$s</a></h5>',
+																			( "on" == $view_featured_image ? '' : '') ,	$url, $title);
+																	
+									$excerpt = caweb_get_excerpt($post_content_handler->content, 45);									
+									$excerpt = sprintf('<div class="description" %2$s>%1$s</div>', $excerpt, 
+																			( "on" == $view_featured_image ? '' : '')  );
+									
+				
+									$output .= sprintf('<article class="event-item">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt );
+									
+									$posts_number--;
+								}
+								break;
+								
+					} // end of list type switch statement
+				} // end of if is_object check
 			}
 
-
-		$output .= '</div> <!-- .et_pb_ca_post_list -->';
-
+			$output .= '</div> <!-- .et_pb_ca_post_list -->';
+		
 			return $output;
 
 	}

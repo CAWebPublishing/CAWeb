@@ -12,7 +12,9 @@ ul{
 .et_pb_pagebuilder_layout.single.et_full_width_page #page-container .et_pb_row{
   width: 100%;
 }
-
+.et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
+	width: 90%;
+}
 /* Monarch Plugin Styles */
 .et_monarch .et_social_inline_top{
   margin: -27px 0 !important;
@@ -258,14 +260,14 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 @media (min-width: 481px){
   .header-organization-banner img {
     max-width: 475px;
+    max-height: 90px;
   }
 }
 
 @media (min-width: 768px){
   .header-organization-banner img {
       height: auto;
-      max-height: 90px;
-      vertical-align: middle
+      vertical-align: middle;
   }
 }
 
@@ -658,6 +660,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
 .et_pb_row{
   width: 90%;
   max-width: 1170px;

@@ -7,7 +7,7 @@
 	<a href="#general-settings" name="general" class="nav-tab nav-tab-active" onclick="toggleOptionView(this)">General Settings</a>
 
 	<a href="#social-share-settings" name="social-share" class="nav-tab" onclick="toggleOptionView(this)">Social Media Links</a>
-	
+
 	  <a href="#custom-css-settings" name="custom-css" class="nav-tab" onclick="toggleOptionView(this)">Custom CSS</a>
 
 </h2>
@@ -20,21 +20,25 @@
 <div id="ca-options-container">
 
 <!-- General Settings -->
-<div id="general" class="show">	
-	
+<div id="general" class="show">
+
   <h1 class="option">General Settings</h1>
 
 <table class="form-table">
 <tr><th scope="row"><div class="tooltip">Fav Icon
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
-	<input type="text" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico'); ?>" >
+    <!-- preg_split('/', get_option('ca_fav_ico'))[sizeof(preg_split('/', get_option('ca_fav_ico')))-1] -->
+	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" 
+    value="<?php print get_option('ca_fav_ico'); ?>" >
+	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico'); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon" data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
+		<!--img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php //echo get_option('ca_fav_ico'); ?>"/-->
 	</td></tr>
 
   <tr>
 		<th scope="row"><div class="tooltip">State Template Version
-		<span class="tooltiptext">Select one of the California State Template Versions.</span></div></th>
+		<span class="tooltiptext">Select one of the California state template versions.</span></div></th>
 		<td>
 			<select id="ca_site_version" name="ca_site_version" onchange="toggleOptions(this)">
 				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0 - beta</option>
@@ -45,7 +49,7 @@
 	</tr>
 	<tr >
 		<th scope="row"><div class="tooltip">Header Menu Type
-			<span class="tooltiptext">Set a Navigation Menu Style for all pages.</span></div></th>
+			<span class="tooltiptext">Set a navigation menu style for all pages.</span></div></th>
 		<td>
 			<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
 				<option value="megadropdown"
@@ -58,11 +62,11 @@
 			</select>
 		</td>
 	</tr>
-	
+
 <?php if( current_user_can('manage_network_options') ): ?>
 		<tr>
 		<th scope="row"><div class="tooltip">Show Menu Type Selector
-			<span class="tooltiptext">Displays a Header Menu Type Selector on the Page Editor Level.</span></div></th>
+			<span class="tooltiptext">Displays a header menu type selector on the page editor level.</span></div></th>
     <td><input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"
 			<?= ( get_option('ca_menu_selector_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
@@ -95,14 +99,14 @@
 	<?php if ( !is_caweb_intranet_site() ) : ?>
   <tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
-			<span class="tooltiptext">Display a visible search box on the Front Page.</span></div></th>
+			<span class="tooltiptext">Display a visible search box on the front page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
 <?php endif; ?>
   	<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
-		<span class="tooltiptext">This will allow the Navigation Menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
+		<span class="tooltiptext">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
 		</th>
   <td><input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" <?= ( get_option('ca_sticky_navigation') == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
@@ -119,7 +123,7 @@
 
 	<tr>
 		<th scope="row"><div class="tooltip">Contact Us Page
-			<span class="tooltiptext">Select a Page as the "Contact Us" Page to be used in the Utility Header.</span></div></th>
+			<span class="tooltiptext">Select a page as the "Contact Us" page to be used in the utility header.</span></div></th>
 		<td>
 			<select id="ca_contact_us_link" name="ca_contact_us_link">
 				<?php
@@ -140,15 +144,77 @@
 	</tr>
 <tr>
 		<th scope="row"><div class="tooltip">Enable Geo Locator
-			<span class="tooltiptext">Displays a Geo Locator feature at the top right of each page.</span></div></th>
+			<span class="tooltiptext">Displays a geo locator feature at the top right of each page.</span></div></th>
 		<td><input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?= ( get_option('ca_geo_locator_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
-        
+
         <tr>
 		<th scope="row"><div class="tooltip">Home Link
-		<span class="tooltiptext">Adds a Home link to the utility header.</span></div>
+		<span class="tooltiptext">Adds a home link to the utility header.</span></div>
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
+	<?php if(5.0 <= get_option('ca_site_version') ): ?>
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 1 URL
+			<span class="tooltiptext">Adds a custom link to the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1')?>" />
+	</td>
+</tr>
+<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 1 Label
+			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" size="50" value="<?php echo get_option('ca_utility_link_1_name')?>"/>
+	</td>
+</tr>
+<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 2 URL
+			<span class="tooltiptext">Adds a custom link to the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_2" id="ca_utility_link_2" size="75" value="<?php echo get_option('ca_utility_link_2')?>" />
+	</td>
+</tr>
+<tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 2 Label
+			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" size="50" value="<?php echo get_option('ca_utility_link_2_name')?>"/>
+	</td>
+</tr>
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 3 URL
+			<span class="tooltiptext">Adds a custom link to the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_3" id="ca_utility_link_3" size="75" value="<?php echo get_option('ca_utility_link_3')?>" />
+	</td>
+</tr>
+<tr  class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
+	<th scope="row">
+		<div class="tooltip">Custom Link 3 Label
+			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
+		</div>
+	</th>
+	<td>
+		<input type="text" name="ca_utility_link_3_name" id="ca_utility_link_3_name" size="50" value="<?php echo get_option('ca_utility_link_3_name')?>"/>
+	</td>
+</tr>
+<?php endif; ?>
 </table>
   </div>
 
@@ -157,16 +223,21 @@
 
 	<tr>
 		<th scope="row"><div class="tooltip">Organization Logo-Brand
-			<span class="tooltiptext">Select an image to use as the Agency Logo.</span></div></th>
+			<span class="tooltiptext">Select an image to use as the agency logo.</span></div></th>
 		<td>
-			<input type="text" name="header_ca_branding" id="header_ca_branding" size="75" value="<?php echo get_option('header_ca_branding'); ?>" >
+			<input type="text" name="header_ca_branding" id="header_ca_branding_filename" size="75" value="<?php echo get_option('header_ca_branding') ?>" >
+			<input type="hidden" name="header_ca_branding" id="header_ca_branding" size="75" value="<?php echo get_option('header_ca_branding'); ?>" >
 			<input type="button" value="Browse" class="library-link" name="header_ca_branding" data-choose="Choose an Organization Logo-Brand" data-update="Set as Default Logo"/>
+			<br/>
+			<?php if("" != get_option('header_ca_branding')): ?>
+			<img class="header_ca_branding_option" id="header_ca_branding_img" src="<?php echo get_option('header_ca_branding'); ?>"/>
+			<?php endif; ?>
 		</td>
 	</tr>
 
 	<tr class="base <?= (4.0 == get_option('ca_site_version') ? 'show' : '' ); ?>">
 <th scope="row"><div class="tooltip ">Organization Logo Alignment
-<span class="tooltiptext">Select the position for the Agency Logo.</span></div></th>
+<span class="tooltiptext">Select the position for the agency logo.</span></div></th>
 <td>
 			<select id="header_ca_branding_alignment" name="header_ca_branding_alignment">
 				<option value="left"
@@ -182,8 +253,13 @@
 	<tr class="base <?= (4.0 == get_option('ca_site_version') ? 'show' : '' ); ?>"><th scope="row"><div class="tooltip">Header Background Image
 		<span class="tooltiptext">Select the image to use as the background in the header of every page.</span></div></th>
 	<td>
-	<input type="text" name="header_ca_background" id="header_ca_background" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
+		<input type="text" name="header_ca_background" id="header_ca_background_filename" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
+	<input type="hidden" name="header_ca_background" id="header_ca_background" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
 	<input type="button" value="Browse" class="library-link" name="header_ca_background" data-choose="Choose a Header Background" data-update="Set as Header Background">
+	<br/>
+		<?php if("" != get_option('header_ca_background')): ?>
+	<img class="header_ca_background_option" id="header_ca_background_img" src="<?php echo get_option('header_ca_background'); ?>"/>
+		<?php endif; ?>
 	</td></tr>
 </table>
 	<?php if( !is_caweb_intranet_site() ) : ?>
@@ -192,24 +268,24 @@
 
 	<tr>
 		<th scope="row"><div class="tooltip">Search Engine ID
-<span class="tooltiptext">Enter your unique Google Search Engine ID, if you don't have one see an Administrator.</span></div></th>
+<span class="tooltiptext">Enter your unique Google search engine ID, if you don't have one see an administrator.</span></div></th>
 		<td>
 			<input type="text" name="ca_google_search_id" id="ca_google_search_id" size="60" value="<?php echo get_option('ca_google_search_id'); ?>" >
 		</td>
 	</tr>
 	<tr><th scope="row"><div class="tooltip">Analytics ID
-<span class="tooltiptext">Enter your unique Google Analytics ID, if you don't have one see an Administrator.</span></div></th>
+<span class="tooltiptext">Enter your unique Google analytics ID, if you don't have one see an administrator.</span></div></th>
 	<td>
 	<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" size="60" value="<?php echo get_option('ca_google_analytic_id'); ?>" >
 	</td></tr>
 		<tr><th scope="row"><div class="tooltip">Meta ID
-<span class="tooltiptext">Enter your unique Google Meta ID, if you don't have one see an Administrator.</span></div></th>
+<span class="tooltiptext">Enter your unique Google meta ID, if you don't have one see an administrator.</span></div></th>
 	<td>
 	<input type="text" name="ca_google_meta_id" id="ca_google_meta_id" size="60" value="<?php echo get_option('ca_google_meta_id'); ?>" >
 	</td></tr>
 <tr>
 		<th scope="row"><div class="tooltip">Enable Google Translate
-			<span class="tooltiptext">Displays the Google Translate feature at the top right of each page.</span></div></th>
+			<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
 		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
 
 </table>
@@ -307,7 +383,7 @@
 	</tr>
 </table>
 </div>
-	
+
 	<div id="custom-css">
   <h1 class="option">Custom CSS</h1>
 		<table class="form-table">
@@ -315,26 +391,11 @@
 		<tr>
 			<th><div class="tooltip">Stylesheet<span class="tooltiptext">Any styles added will override any pre-existing styles. </span></div></th>
 			<td><textarea id="ca_custom_css" name="ca_custom_css" ><?php echo get_option('ca_custom_css'); ?> </textarea></td>
-		</tr>	
+		</tr>
 		</table>
 
 	</div>
-	
+
 </div>
 <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
