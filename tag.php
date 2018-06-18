@@ -16,22 +16,24 @@
 
       global $wp_query;
 
-			if ( have_posts() ) :
-				while ( have_posts() ) : the_post();
+			if (have_posts()) :
+				while (have_posts()) : the_post();
 					$post_format = et_pb_post_format(); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
+					<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
 						<a href="<?php the_permalink(); ?>" >
-               <?php  if( has_post_thumbnail() ) { the_post_thumbnail( 'medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;'); } ?>
+               <?php  if (has_post_thumbnail()) {
+					    the_post_thumbnail('medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;');
+					} ?>
 						 </a>
 				<?php
 					et_divi_post_format_content();
 				?>
             <div class="tag-info">
-					    <a class="title" href="<?php the_permalink(); ?>"><h2><?php ( ! empty(the_title('', '', false) ) ? the_title()  : print 'No Title'); ?></h2></a>
+					    <a class="title" href="<?php the_permalink(); ?>"><h2><?php ( ! empty(the_title('', '', false)) ? the_title() : print 'No Title'); ?></h2></a>
            <?php et_divi_post_meta(); ?>
             </div>
-            <p> <?php truncate_post( 270 ); ?></p>              
+            <p> <?php truncate_post(270); ?></p>              
           	<a class="tag-link" href="<?php the_permalink(); ?>" >Read More</a>
 					</article> <!-- .et_pb_post -->
 			<?php
@@ -43,16 +45,16 @@
       </div>
 			<?php
 				else :
-					get_template_part( 'includes/no-results', 'index' );
+					get_template_part('includes/no-results', 'index');
 				endif;
 			?>
   </main>
   <?php
-if( is_active_sidebar('sidebar-1') ){
-   echo '<aside id="non_divi_sidebar" class="col-lg-3">';
-		echo get_sidebar('sidebar-1');
-    echo '</aside>';
-}
+if (is_active_sidebar('sidebar-1')) {
+			    print '<aside id="non_divi_sidebar" class="col-lg-3">';
+			    print get_sidebar('sidebar-1');
+			    print '</aside>';
+			}
  ?>
 </div> <!-- #main-content -->
 </div>

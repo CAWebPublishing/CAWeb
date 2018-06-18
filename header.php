@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
 		<!-- Google Meta-->
-		<meta name="google-site-verification" content="<?php echo get_option('ca_google_meta_id'); ?>" />
+		<meta name="google-site-verification" content="<?php print get_option('ca_google_meta_id'); ?>" />
 
     <!-- Google Fonts -->
   	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
@@ -62,7 +62,7 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 
 <!--[if (lt IE 9) & (!IEMobile)]>
 
-<script src="<?php printf( '%1$s/js/libs/selectivizr-min.js', CAWebUri); ?>"></script>
+<script src="<?php printf('%1$s/js/libs/selectivizr-min.js', CAWebUri); ?>"></script>
 
 <![endif]-->
 
@@ -80,9 +80,9 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 8]>
 
-  <script src="<?php printf( '%1$s/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
+  <script src="<?php printf('%1$s/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
 
-  <script src="<?php printf( '%1$s/js/libs/respond.min.js', CAWebUri); ?>"></script>
+  <script src="<?php printf('%1$s/js/libs/respond.min.js', CAWebUri); ?>"></script>
 
 <![endif]-->
 

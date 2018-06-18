@@ -9,7 +9,7 @@
 <div class="section">
 <main class="main-primary">
   
-				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
+				<article id="post-0" <?php post_class('et_pb_post not_found'); ?>>
 					<div class="entry-content">
     <!-- Page Title-->
 					<h1>Page Not Found</h1>
@@ -18,7 +18,7 @@
         <div class="agency-form">
           <h1>Search Site For:</h1>
        <?php
-	printf('<gcse:searchbox-only resultsUrl="%1$s"></gcse:searchbox-only> ', site_url('serp') )
+	printf('<gcse:searchbox-only resultsUrl="%1$s"></gcse:searchbox-only> ', site_url('serp'))
       ?>
     </div>
  </div>
@@ -37,7 +37,7 @@
 
 <?php get_footer(); ?>
 
-<?php if (  caweb_version_check(4) ) : ?>
+<?php if (caweb_version_check(4)) : ?>
 <style>div#head-search {display: none;}div#google_translate_element { top: 10px;}</style>
 <?php endif; ?>
 </body>

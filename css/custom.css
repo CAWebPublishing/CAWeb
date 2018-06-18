@@ -85,7 +85,7 @@ ol.breadcrumb{
 
 /* Remove extra padding when ul is nested inside another ul */
 ul ul{
-	padding-bottom: 0px !important;
+	padding-bottom: 0px;
 }
 
 ul, ol{
@@ -94,12 +94,6 @@ ul, ol{
 /* Allows for the Navigation Top Level Links to wrap */
 .first-level-link{
   	white-space: normal;
-}
-
-/* Header Slideshow Banner */
-.slide-text{
-	max-width: 50%;
-	padding-bottom: 15px !important;
 }
 
 /* WordPress Specific Overrides */
