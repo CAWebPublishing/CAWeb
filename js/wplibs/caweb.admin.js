@@ -163,6 +163,12 @@ $('#addCSS').click(function(e){
 	
 });
 
+$('#addCSS').click(function(e){
+	
+
+changeMade = true; 
+
+});
  /* End of CAWeb Option Page */
 });
 
