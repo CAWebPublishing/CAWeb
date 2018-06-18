@@ -9,6 +9,11 @@ _gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not re
 _gaq.push(['b._setDomainName', '.ca.gov']);
 _gaq.push(['b._trackPageview']);
 
+if("" !== args.caweb_multi_ga){
+  _gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
+  _gaq.push(['b._setDomainName', '.ca.gov']);
+  _gaq.push(['b._trackPageview']);
+}
 (function() {
   var ga = document.createElement('script');
   ga.type = 'text/javascript';
@@ -34,8 +39,10 @@ _gaq.push(['b._trackPageview']);
 			var $body = $("body");
 
       if( 4 == args.ca_site_version )
-				$searchText.attr("placeholder", "Search");
+			$searchText.attr("placeholder", "Search");
 			
+			// search icon is added before search button (search button is set to opacity 0 in css)
+			$("input.gsc-search-button").before("<span class='ca-gov-icon-search search-icon' aria-hidden='true'></span>");
       
 			 $searchText.on("click", function() {
 					addSearchResults();
@@ -49,8 +56,6 @@ _gaq.push(['b._trackPageview']);
 
 				// Close search when close icon is clicked
 				$('div.gsc-clear-button').on('click', function() {	removeSearchResults();   });
-
-      //	$('.gsc-search-button').innerHTML
             
 			$('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents('.nav-item').on('click', function(e) {
 					$searchText.focus().trigger('focus')
