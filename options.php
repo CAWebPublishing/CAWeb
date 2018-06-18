@@ -36,11 +36,12 @@ add_action( 'admin_menu', 'menu_setup' );
 // If direct access to certain menus is accessed
 // redirect to admin page
 function redirect_themes_page() {
-	if( ! current_user_can('manage_options')){
+	if( ! current_user_can('manage_network_options')){
 		wp_redirect(get_admin_url());
 		exit;
 	}
 }
+add_action( 'load-customize.php', 'redirect_themes_page' );
 add_action( 'load-themes.php', 'redirect_themes_page' );
 add_action( 'load-tools.php', 'redirect_themes_page' );
 
@@ -159,7 +160,7 @@ function caweb_option_notices(){
 add_action('admin_notices', 'caweb_option_notices');
 /*
 	Check the Binary Signature of a file
-	currently only checking for icon 
+	currently only checking for icon
 
 	Living Standard on Mime Sniffing
 	https://mimesniff.spec.whatwg.org/#image-type-pattern-matching-algorithm
@@ -169,15 +170,15 @@ add_action('admin_notices', 'caweb_option_notices');
 */
 function caweb_fav_icon_checker(){
 	$url = $_POST['icon_url'];
-	
-	$handle = rawurlencode( file_get_contents( $url ) ) ; 
+
+	$handle = rawurlencode( file_get_contents( $url ) ) ;
 	$handle = array_splice( array_filter( explode('%',  $handle) ), 0, 4);
 	$handle = implode("", $handle);
-	
+
 	if("00000100" == $handle)
 		print true;
-	
-	print false ;	
+
+	print false ;
 	wp_die(); // this is required to terminate immediately and return a proper response
 }
 add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
