@@ -125,20 +125,8 @@
 		<th scope="row"><div class="tooltip">Contact Us Page
 			<span class="tooltiptext">Select a page as the "Contact Us" page to be used in the utility header.</span></div></th>
 		<td>
-			<select id="ca_contact_us_link" name="ca_contact_us_link">
-				<?php
-					$all_pages = get_pages(array(
-							'post_type' => 'page',
-							'sort_column' => 'post_title',
-							'sort_order' => 'asc'));
+	<input type="text" name="ca_contact_us_link" id="ca_contact_us_link" size="75" value="<?php echo get_option('ca_contact_us_link')?>" />
 
-					foreach($all_pages as $p => $pg){
-				print sprintf('<option value="%1$s" %3$s>%2$s</option>',
-						get_permalink($pg->ID),$pg->post_title,
-			( get_option('ca_contact_us_link') == get_permalink($pg->ID) ? 'selected="selected"' : '' ));
-					}
-				?>
-			</select>
 
 		</td>
 	</tr>
