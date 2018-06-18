@@ -297,8 +297,8 @@ if( isset($_POST['caweb_options_submit']) ){
 								<tr><td></td><td><label class="extra alignleft%4$s">Show in header: <input type="checkbox" name="%2$s_header" id="%2$s_header"%5$s /></label>
 													<label class="extra alignleft">Show in footer: <input type="checkbox" name="%2$s_footer" id="%2$s_footer"%6$s /></label></td></tr>',
                		$social, $option, get_option($option), (5.0 <= get_option('ca_site_version') ? '' : ' hidden'),
-               	( get_option(sprintf('%1$s_header', $option) ) == true ? ' checked="checked"' : '' ),
-              		( get_option(sprintf('%1$s_footer', $option) ) == true ? ' checked="checked"' : '' ));
+               	get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '' ,
+              	get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '' ) ;
 
       }
 ?>
