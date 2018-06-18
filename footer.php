@@ -1,11 +1,8 @@
 <!-- Global Footer -->
 <?php
-global $post;
-$post_id = (is_object($post) ? $post->ID : $post['ID']);
-
 wp_nav_menu(array(
 						'theme_location'=> 'footer-menu',
-						'version' => ca_get_version($post_id),
+						'version' => ca_get_version( get_the_ID() ),
 						'ca_custom_css' => get_option('ca_custom_css', '')
 						)	
 					);

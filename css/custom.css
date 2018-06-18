@@ -5,7 +5,7 @@
 
 /* ID Anchors do not jump to the correct location when the sticky navigation is compacted */
 header.fixed.compact + #page-container{
-	padding-top: 136px;
+	transition: padding-top 500ms;
 }
 .mobile-controls{
 	cursor: auto;

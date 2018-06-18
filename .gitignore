@@ -1,1 +1,4 @@
-_notes/**/_notes/**/Thumbs.db
+_notes/*
+*/_notes/*
+*/Thumbs.db
+/.vscode/

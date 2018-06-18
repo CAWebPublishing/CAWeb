@@ -58,8 +58,8 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					),
 				),
 			);
-		
-		
+
+
 		// Custom handler: Output JS for editor preview in page footer.
 		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
@@ -286,7 +286,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 
 		return $output;
 	}
-	
+
 		// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
@@ -301,7 +301,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 			</script>
 			<?php
 		}
-	
+
 }
 new ET_Builder_Module_Fullwidth_Panel;
 
@@ -326,8 +326,8 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 			'module_id',
 		);
 		$this->fields_defaults = array(
-			'scroll_bar_icon' => array( 'arrow-down' ),
-    	'scroll_bar_text' => array( 'Explore' ),
+			'scroll_bar_icon' => array( '%%114%%', 'add_default_setting' ),
+    	'scroll_bar_text' => array( 'Explore', 'add_default_setting' ),
 
     );
 		$this->main_css_element = '%%order_class%%.et_pb_slider';
@@ -353,7 +353,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 			),
 			'custom_css' => array(
 				'toggles' => array(
-         
+
 				),
 			),
 		);
@@ -501,15 +501,10 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 		// module preview in the new Divi 3 frontend editor.
 		// Return value of the JS function must be full HTML code to display.
 		function slideshow_banner_removal() {
-			global $post;
-
-			$remove = (is_object($post) ? ca_version_check(4, $post->ID) : ca_version_check(4, $post['ID'])  );
-
-			if( !$remove )
+			if( ! ca_version_check(4, get_the_ID() )  )
 				return;
 
-			$con = (is_object($post) ? $post->post_content : $post['post_content'] );
-			$module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
+			$module = caweb_get_shortcode_from_content( get_the_content(), 'et_pb_ca_fullwidth_banner');
 
 
 			if( empty($module)  ){
@@ -606,7 +601,7 @@ function get_fields() {
 			'toggle_slug' => 'content',
 		),
 		'display_heading' => array(
-			'label'           => esc_html__( 'Heading', 'et_builder' ),
+			'label'           => esc_html__( 'Display Heading', 'et_builder' ),
 			'type'            => 'yes_no_button',
 			'options'         => array(
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
@@ -1002,7 +997,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%; "></div>' , 
+					<img src="%3$s" class="img-responsive" style="width: 100%%; "></div>' ,
             $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'),$section_image );
 
 				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
@@ -1254,7 +1249,7 @@ function init() {
 		),
 	);
 }
-  
+
 function get_fields() {
 	$fields = array(
 		'heading_color' => array(
