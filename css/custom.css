@@ -14,7 +14,7 @@
 
 /* Makes TablePress Tables Responsive */
 .dataTables_wrapper {
-    overflow-x: auto ;
+    overflow-x: auto;
 }
 
 #main-content {
@@ -67,7 +67,11 @@ ul, ol{
   	margin: 0;
 }*/
 
-
+/* Location Banner Thumbnail Image Fix*/
+.location.banner .thumbnail img {
+    width: 100%;
+    height: 75px;
+ }
 /* Media Styles */
 @media (min-width: 768px){
   .main-navigation.dropdown .nav-item:hover .sub-nav,
@@ -107,4 +111,12 @@ ul, ol{
 .et_pb_ca_panel .panel-body ul, .et_pb_ca_panel .panel-body ol{
   padding-bottom: 0px;
   margin-bottom: 0px;
+}
+
+p{
+  padding-bottom: 0;
+}
+.search-results .et_pb_post{
+  margin-bottom: 30px;
+
 }

@@ -118,11 +118,17 @@ nav.megadropdown .second-level-nav li{
     float: left;
 		width: 33%;
 		min-height: 20px;
-		max-height: 70px;
     word-wrap: break-word;
     overflow: hidden;
 }
 
+li.unit1{
+  height: 50px;
+}
+
+li.unit2{
+  height: 100px;
+}
 
 /* Remove underline from top level nav links */
 .top-level-nav>li .first-level-link {
@@ -259,7 +265,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
 }
 @media (min-width: 481px){
   .header-organization-banner img {
-    max-width: 475px;    
+    max-width: 475px;
     max-width: 100%;
     max-height: 90px;
   }
@@ -666,3 +672,4 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
   width: 90%;
   max-width: 1170px;
 }
+

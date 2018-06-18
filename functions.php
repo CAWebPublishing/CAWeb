@@ -29,7 +29,7 @@ define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
 
 // This is a temporary fix
 function caweb_login_logo() {
-	print '<style>#login h1 a, .login h1 a { background-size: 329px 110px; height: 110px; width: 329px; }</style>';
+	print '<style>#login h1 a, .login h1 a { background-size: 329px 110px; height: 110px; width: 329px; background-image: url('. CAWebUri .'/images/CAWEB.png); }</style>';
 }
 add_action( 'login_enqueue_scripts', 'caweb_login_logo' );
 
@@ -149,7 +149,7 @@ function ca_theme_enqueue_style() {
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css' );
 
-		if('wp-activate.php' == $pagenow   ){
+	if('wp-activate.php' == $pagenow   ){
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri) );
 		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri) );
 	}else{
@@ -179,7 +179,7 @@ function ca_theme_enqueue_style() {
 
 	// Localize the search script with the correct site url
 	wp_localize_script( 'cagov-search-script', 'site', array('site_url' => site_url()) );
-	
+
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
   wp_enqueue_script( 'cagov-search-script' );
@@ -214,16 +214,9 @@ function ca_admin_enqueue_scripts($hook){
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
 
-	wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
+		wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
 	}
 
-
-	print '<style>/* CAWeb Top Level Menu Icon */
-					li#toplevel_page_ca_options a div.wp-menu-image::before{
-						content: "\e600";
-						font-family: "CaGov";
-					}
-					</style>';
 
 	// Enqueue Styles
 	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
@@ -248,7 +241,9 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
     'parent' => 'site-name',
 	);
 
-	$wp_admin_bar->add_node( $caweb_args );
+	if ( current_user_can('manage_options') ){
+		$wp_admin_bar->add_node( $caweb_args );
+	}
 
   /* Add (Menu) Navigation Node */
   $menu_args = array(
@@ -258,7 +253,9 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
     'parent' => 'site-name',
 	);
 
-	$wp_admin_bar->add_node( $menu_args );
+	if ( current_user_can('manage_options') ){
+		$wp_admin_bar->add_node( $menu_args );
+	}
 }
 
 add_action( 'admin_bar_menu', 'ca_admin_bar_menu', 1000 );
@@ -450,6 +447,7 @@ function caweb_initialize_divi_modules() {
 		include(CAWebAbsPath. '/builder/main-fullwidth-modules.php');
 		include(CAWebAbsPath. '/builder/special-modules.php');
 		include(CAWebAbsPath . "/builder/layouts.php");
+		//include(CAWebAbsPath . "/Dev/Dev-Modules.php");
 
 }
 
@@ -545,6 +543,12 @@ title.innerHTML = "Navigation";
 	}
 	.et-pb-option-container .description {
 			color: black !important;
+	}
+
+	/* Use the CAWeb Logo for all Custom Modules. */
+	li[class^="et_pb_ca"]::before, li[class^="et_pb_profile_banner"]::before {
+		font-family: cagov;
+		content: '\e90b';
 	}
 </style>
 <?php
