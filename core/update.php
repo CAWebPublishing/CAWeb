@@ -141,8 +141,7 @@ final class caweb_auto_update{
           // if current version is less than new version and is not a pre-release create update transient,
           // if current release is a pre-release only create update transient for regression theme
           // regression theme name contains -Reg suffix
-          if( version_compare( $this->current_version, $payload->tag_name, '<' ) &&
-             (!$payload->prerelease || ( $payload->prerelease && strpos( $this->theme_name, '-Reg' ) !== false  ) ) ){
+          if( $this->current_version < $payload->tag_name ){
 							$last_update = new stdClass();
 
 							$obj = array();
@@ -168,7 +167,7 @@ final class caweb_auto_update{
 					}
 
 				}elseif(  isset($caweb_update_themes->response) &&  isset($caweb_update_themes->response[$this->theme_name]) &&
-								version_compare( $this->current_version, $caweb_update_themes->response[$this->theme_name]['new_version'], '>=' ) ) {
+								$this->current_version >=  $caweb_update_themes->response[$this->theme_name]['new_version'] ) {
 
 						unset($caweb_update_themes->response[$this->theme_name]);
 						set_site_transient($this->transient_name, $caweb_update_themes);
