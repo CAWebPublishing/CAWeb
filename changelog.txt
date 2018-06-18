@@ -1,17 +1,5 @@
-CAWeb v1.4.0
-March 1, 2018
-- New Sacramento colorscheme added
-- New Custom CSS Upload feature
-- Prefixed function names
-- Corrected logo sizing 
-- Settings link is now accessible via keyboard
-- Google logos have been added to search
-- Reset password resets according to the site where the reset was requested
-- Added missing html tags
-- Fixed issue with Google Translate on Mobile Mode
-
 CAWeb v1.3.4
-January 30, 2018
+January 22, 2018
 - CAWeb Options are now escaped when saved
 - Navigation Menu is now left justified in Mobile View
 - Fixed issue with pre_get_posts filter applying on backend
@@ -19,7 +7,7 @@ January 30, 2018
 - Read More button has been added to each post on an Archive, Date, Author, Category and Tag Template Page
 
 CAWeb v1.3.3
-December 19, 2017
+December 19, 
 - WordPress Archive, Date, Author, Category and Tag Template have been created and styled
 - Fixed CAWeb Share Email Feature
 - Fixed issue with logo not adhering to margins- 

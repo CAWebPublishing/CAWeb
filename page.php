@@ -19,7 +19,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 <?php
 if ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) )
-		print the_title('<!-- Page Title--><h1 class="page-title">', '</h1>');
+		print the_title(sprintf('<!-- Page Title--><h1 class="page-title %1$s">', ( $is_page_builder_used ? 'et_pb_row' : '' )), '</h1>');
 
   	echo '<div class="entry-content">';
 

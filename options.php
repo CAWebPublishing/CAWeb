@@ -19,10 +19,7 @@ function caweb_admin_menu() {
 		unset($submenu['themes.php'][5], $submenu['themes.php'][20], $submenu['themes.php'][21]); // Themes link
 		 // Background link
 		 // Background link
-		
-		// Remove WP-Forms Addons Menus
-		remove_submenu_page('wpforms-overview', 'wpforms-addons');
-		
+
 		// Removal of Tools Submenu Pages
 		remove_submenu_page('tools.php', 'tools.php');
 		remove_submenu_page('tools.php', 'import.php');

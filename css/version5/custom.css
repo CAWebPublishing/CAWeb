@@ -4,60 +4,40 @@ body{
 #main-content > .section{
 	padding-top: 0;
 }
-/**
-* Page Title Style
-*/
-.page-title{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.page-title,
-.non_divi_builder .main-content,
+.single.non_divi_builder .main-content,
+#main-content .entry-content > .et_pb_section > .et_pb_row{
+        max-width: 1280px;
+        margin: 0 auto;
+} 
 #main-content .entry-content > .et_pb_section > .et_pb_row{
      width: 100%;
-     max-width: 1280px;
-     margin: 0 auto;
-}
-.divi_builder .page-title, .non_divi_builder .main-content,
-#main-content .entry-content > .et_pb_section > .et_pb_row{
-  padding-left: 15px;
-  padding-right: 15px;
+     padding-left: 15px;
+     padding-right: 15px;
 }
 @media (min-width: 768px){
-.page-title,
-.non_divi_builder .main-content,
+.single.non_divi_builder .main-content,
 #main-content .entry-content >  .et_pb_section > .et_pb_row {
-    max-width: 750px !important;
+    max-width: 750px;
 }
 }
 @media (min-width: 992px){
-.page-title,
-.non_divi_builder .main-content,
+.single.non_divi_builder .main-content,
 #main-content .entry-content >  .et_pb_section > .et_pb_row {
-    max-width: 970px !important;
+    max-width: 970px;
 }
 }
 @media (min-width: 1280px){
-.page-title,
-.non_divi_builder .main-content,
+.single.non_divi_builder .main-content,
 #main-content .entry-content > .et_pb_section > .et_pb_row {
-    max-width: 1280px !important;
+    max-width: 1280px;
 }
 }
 @media (max-width: 767px){
-.page-title,
-.non_divi_builder .main-content,
-#main-content .entry-content >  .et_pb_section > .et_pb_row{  
-      width: 100% !important;
-      margin: 0 auto;
-}
-.non_divi_builder .main-content,
+.single.non_divi_builder .main-content,
 #main-content .entry-content >  .et_pb_section > .et_pb_row{
+    width: 100% !important;
+    margin: 0 auto;
     padding: 0 15px;
-  }
-  
-  .divi_builder .page-title{
-    padding-bottom: 30px !important;
   }
 }
 /* Temporary remove the sub nav arrow until the function in the core script is working */
@@ -298,8 +278,21 @@ footer .container .group{
 .branding {
     display: none;
 }
+.et_pb_row.main-navigation{
+      width: 100%;
+    }
+
 }
 /* End of Mobile Control Styles */
+@media (min-width: 768px){
+  .et_pb_row.main-navigation{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    width: 80% !important;
+  }
+}
+
 
 /* Section Carousel Version 5 */
 .et_pb_ca_section_carousel .container{

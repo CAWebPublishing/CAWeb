@@ -1,4 +1,3 @@
-
 /* Section Primary  */
 .section{
 overflow: hidden;
@@ -139,10 +138,6 @@ ol{
 	width:100%;
 }
 
-/* Post Detail */
-.et_pb_module .et_pb_ca_post_list .news-list .news-item .thumbnail {
-    width: auto;
-}
 /* Post List */
 /* Remove the Divi Padding around the et_pb_toggle */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
