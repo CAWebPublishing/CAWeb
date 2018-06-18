@@ -1,23 +1,16 @@
-<?php 
-get_header(); 
-get_template_part('partials/content', 'header') 
+<?php
+		get_header();
 ?>
+<body <?php body_class('primary') ?>  >
+<?php get_template_part('partials/content', 'header') ?>
 
 
-<div id="main-content" class="main-content">
-  <?php if ( ! ca_version_check(4) ) : ?>
-
-	<div class="ca_wp_container">
-
-
-<?php endif; ?>
-    
-    
+<div id="main-content" class="main-content">    
+<div class="section">
 <main class="main-primary">
   
 				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
 					<div class="entry-content">
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
     <!-- Page Title-->
 					<h1>Page Not Found</h1>
 <div class="description">The page you requested was not found.</div>
@@ -34,14 +27,7 @@ get_template_part('partials/content', 'header')
 				</article> <!-- .et_pb_post -->
         
 </main>
-      
-       <?php if ( ! ca_version_check(4) ) : ?>
-
-    </div>
-
-
-<?php endif; ?>
-    
+</div>
 </div> <!-- #main-content -->
 
 <style>
@@ -51,25 +37,8 @@ get_template_part('partials/content', 'header')
 
 <?php get_footer(); ?>
 
-<?php if (  ca_version_check(4) ) : ?>
-<style>
-.section-default .ca_wp_container {
-    margin: 0;
-}
-.textfield-container {
-    float: left;
-    padding-right: 15px;
-    width: calc(97% - 15px);
-}
-input#search_local_textfield {
-    width: 100%;
-}
-div#head-search {
-    display: none;
-}
-div#google_translate_element {
-    top: 10px;
-}
-</style>
-
+<?php if (  caweb_version_check(4) ) : ?>
+<style>div#head-search {display: none;}div#google_translate_element { top: 10px;}</style>
 <?php endif; ?>
+</body>
+</html>

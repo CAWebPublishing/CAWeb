@@ -115,10 +115,11 @@ if("" !== args.caweb_multi_ga){
 
   })();
   /* Google Translate */
-if( args.ca_google_trans_enabled){
+if( args.ca_google_trans_enabled ){
   function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    }
+      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
+        layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
+  }
   var gtrans = document.createElement('script');
 	gtrans.type = 'text/javascript';
   gtrans.async = true;

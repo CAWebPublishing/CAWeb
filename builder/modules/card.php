@@ -37,7 +37,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-			'button_link' => array( 'http://','add_default_setting'),
+			'button_link' => array('http://','add_default_setting'),
 		);
 
 		$this->main_css_element = '%%order_class%%';
@@ -45,9 +45,9 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$this->options_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
-		      'style'  		=> esc_html__( 'Style' , 'et_builder'),
+		      'style'  		=> esc_html__( 'Style', 'et_builder'),
 		      'header' 		=> esc_html__( 'Header', 'et_builder'),
-		      'body'   		=> esc_html__( 'Body'  , 'et_builder'),
+		      'body'   		=> esc_html__( 'Body', 'et_builder'),
 					'footer'   	=> esc_html__( 'Footer', 'et_builder'),
 		    ),
 		  ),
@@ -76,15 +76,15 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 	function get_fields() {
 		$fields = array(
 			'card_layout' => array(
-				'label'             => esc_html__( 'Style','et_builder' ),
+				'label'             => esc_html__( 'Style', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'default' => esc_html__( 'Default','et_builder'),
-					'standout'  => esc_html__( 'Standout','et_builder'),
-					'overstated'  => esc_html__( 'Overstated','et_builder'),
-					'understated'  => esc_html__( 'Understated','et_builder'),
-					'custom' => esc_html__( 'Custom','et_builder'),
+					'default' => esc_html__( 'Default', 'et_builder'),
+					'standout'  => esc_html__( 'Standout', 'et_builder'),
+					'overstated'  => esc_html__( 'Overstated', 'et_builder'),
+					'understated'  => esc_html__( 'Understated', 'et_builder'),
+					'custom' => esc_html__( 'Custom', 'et_builder'),
 				),
 					'affects' => array('card_color',),
 					'toggle_slug'		=> 'style',
@@ -132,10 +132,10 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug'		=> 'header',
 			),
 			'title' => array(
-				'label'           => esc_html__( 'Title','et_builder' ),
+				'label'           => esc_html__( 'Title', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter a title for the card.','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter a title for the card.', 'et_builder' ),
 				'depends_show_if'			 => 'on',
 				'toggle_slug'		=> 'header',
 			),
@@ -149,10 +149,10 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'tab_slug'		=> 'advanced',
 			),
 			'content' => array(
-				'label'           => esc_html__( 'Content','et_builder'),
+				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can create the content that will be used within the card.','et_builder' ),
+				'description'     => esc_html__( 'Here you can create the content that will be used within the card.', 'et_builder' ),
 				'toggle_slug'		=> 'body',
 			),
 			'show_button' => array(
@@ -167,18 +167,18 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug'		=> 'body',
 			),
 			'button_text' => array(
-				'label'           => esc_html__( 'Button Text','et_builder' ),
+				'label'           => esc_html__( 'Button Text', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter text for the button.','et_builder' ),
+				'description'     => esc_html__( 'Enter text for the button.', 'et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug'		=> 'body',
 			),
 			'button_link' => array(
-				'label'           => esc_html__( 'Card URL','et_builder' ),
+				'label'           => esc_html__( 'Card URL', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the location. (http:// must be included)','et_builder' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the location. (http:// must be included)', 'et_builder' ),
 				'toggle_slug'		=> 'body',
 			),
 			'include_footer' => array(
@@ -193,10 +193,10 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 				'toggle_slug' => 'footer',
 			),
 			'footer_text' => array(
-				'label'           => esc_html__( 'Footer Text','et_builder' ),
+				'label'           => esc_html__( 'Footer Text', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter text for the footer.','et_builder' ),
+				'description'     => esc_html__( 'Enter text for the footer.', 'et_builder' ),
 				'depends_show_if' => 'on',
 				'toggle_slug' => 'footer',
 			),
@@ -265,7 +265,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id           		= $this->shortcode_atts['module_id'];
 		$module_class        		= $this->shortcode_atts['module_class'];
 		$max_width            	= $this->shortcode_atts['max_width'];
@@ -307,24 +307,24 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module{
 		$text_color = ("" != $text_color ? sprintf('color: %1$s; ', $text_color) : "" );
 		$card_style = sprintf('style="%1$s%2$s" ', $card_color, $text_color);
 		$display_image = ("on" == $show_image ?
-					sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '') ;
+					sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '');
 
 		$display_header = ("on" == $include_header ?
-					sprintf('<div class="card-header"><h4 class="card-title">%1$s</h4></div>',$title) :
+					sprintf('<div class="card-header"><h4 class="card-title">%1$s</h4></div>', $title) :
 					'' 	);
 
 		$display_button = ("on" == $show_button ?
 		sprintf('<a href="%1$s" class="btn btn-default">%2$s</a>', $button_link, $button_text) : '');
 
 		$display_footer = ("on" == $include_footer ?
-		sprintf('<div class="card-footer">%1$s</div>', $footer_text) : '' ) ;
+		sprintf('<div class="card-footer">%1$s</div>', $footer_text) : '' );
 
 		$output = sprintf('<div%1$s class="card card-%2$s%9$s" %3$s>
 									%4$s%5$s<div class="card-block">
 									%6$s%7$s</div>%8$s</div>',
 				( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-					$card_layout . $class, $card_style, $display_image, $display_header,$this->shortcode_content,
-				$display_button, $display_footer,( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+					$card_layout . $class, $card_style, $display_image, $display_header, $this->shortcode_content,
+				$display_button, $display_footer, ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
  		);
 
 		return $output;

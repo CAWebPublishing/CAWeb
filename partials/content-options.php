@@ -1,4 +1,4 @@
-<?php // This is the CAWeb Options Page ?>
+<?php // This is the CAWeb Options Page?>
 
 <div class="wrap option-titles" >
 
@@ -6,29 +6,28 @@
 
 <h2 class="nav-tab-wrapper wp-clearfix">
 
-	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php echo (!isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">General Settings</a>
+	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php echo( ! isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">General Settings</a>
 
-	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Social Media Links</a>
+	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php echo(isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Social Media Links</a>
 
-	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php echo (isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Custom CSS</a>
+	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php echo(isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ); ?>">Custom CSS</a>
 </h2>
 </div>
-<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
+<form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
 	if( isset($_POST['caweb_options_submit']) )
-	  save_caweb_options($_POST);
-
+	  caweb_save_options($_POST, $_FILES);
 
 	$ver = get_option('ca_site_version', 5);
 	$version5only = 5 <= $ver  ? '' : 'hidden';
 	$version4only = 4 == $ver ? '' : 'hidden';
 ?>
 
- <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
+ <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo(isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
 <div id="ca-options-container">
 
 <!-- General Settings -->
-<div id="general" class="<?php echo (!isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? '' : 'hidden'); ?>">
+<div id="general" class="<?php echo( ! isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? '' : 'hidden'); ?>">
 
   <h1 class="option">General Settings</h1>
 
@@ -37,13 +36,13 @@
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
 	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" readonly="true" style="background-color: #fff;"
-    value="<?php print caweb_favicon_name(); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
+    value="<?php echo caweb_favicon_name(); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
 	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', caweb_default_favicon_url()); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 		<input type="button" value="Reset" id="resetIcon"><br />
-		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico',caweb_default_favicon_url()); ?>"/>
+		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico', caweb_default_favicon_url()); ?>"/>
 	</td></tr>
 
   <tr>
@@ -72,7 +71,7 @@
 		</td>
 	</tr>
 
-<?php if( !is_multisite() || current_user_can('manage_network_options') ): ?>
+<?php if( ! is_multisite() || current_user_can('manage_network_options') ): ?>
 		<tr>
 		<th scope="row"><div class="tooltip">Menu Type Selector
 			<span class="tooltiptext">Displays a header menu type selector on the page editor level.</span></div></th>
@@ -88,15 +87,16 @@
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
         <?php 
-					$original = caweb_color_schemes( true ); 
-        	$schemes = caweb_color_schemes( ); 
-        	
-          foreach( $schemes as $key => $value ){
-            printf('<option value="%1$s"%2$s%3$s>%4$s</option>', 
-                   $key, ( !in_array($value, $original) ? sprintf(' class="extra %1$s" ', $version5only ) : ' ' ), 
-                   ( get_option('ca_site_color_scheme') == $key ? 'selected="selected"' : '' ), $value  );
+					$v4schemes = caweb_color_schemes( 4 );
+        	$schemes = caweb_color_schemes( 0, 'displayname' );
+
+          foreach( $schemes as $key => $data ){
+
+            printf('<option value="%1$s"%2$s%3$s>%4$s</option>',
+                   $key, ( ! array_key_exists($key, $v4schemes) ? sprintf(' class="extra %1$s" ', $version5only ) : ' ' ),
+                   ( get_option('ca_site_color_scheme') == $key ? 'selected="selected"' : '' ), $data  );
           }
-					
+
         ?>
       </select>
 		</td>
@@ -157,8 +157,6 @@
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
   <?php
-		$options = get_ca_site_options();
-		
 		for( $link = 1; $link < 4; $link++ ){
 			$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
 			$label = get_option( sprintf('ca_utility_link_%1$s_name', $link ) );
@@ -191,7 +189,7 @@
 	</td>
 </tr>
 	<?php
-		} 
+		}
 	?>
 </table>
   </div>
@@ -259,31 +257,32 @@
 	<input type="text" name="ca_google_meta_id" id="ca_google_meta_id" size="60" value="<?php echo get_option('ca_google_meta_id'); ?>" >
 	</td></tr>
 <tr>
-		<th scope="row"><div class="tooltip">Enable Google Translate
-			<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
-		<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td></tr>
+	<th scope="row"><div class="tooltip">Enable Google Translate
+		<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
+	<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= ( get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '' ) ?>> </td>
+	</tr>
 
 </table>
 </div>
 
 
 <!-- Social Media Links -->
-<div id="social-share" class="<?php echo (!isset($_POST['tab_selected']) || 'social-share' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
+<div id="social-share" class="<?php echo( ! isset($_POST['tab_selected']) || 'social-share' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
 <h1 class="option">Social Media Links</h1>
 
 <p>Enter the URL for each of your social media profiles.</p>
 <table class="form-table">
 <?php
-			$social_options = get_ca_social_options();
+			$social_options = caweb_get_site_options('social');
 
 			foreach($social_options as $social => $option ){
 				$share_email = 'ca_social_email' === $option ? true : false;
         $social = $share_email ? "Share via " . $social : $social;
-        $input_box = !$share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option) ) : '';
+        $input_box = ! $share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option) ) : '';
         $header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
         $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
-        $new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '' ;
-          
+        $new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '';
+
        printf('<tr><th>%1$s</th>%2$s
 						<td>
 							<label class="extra %3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s /></label>
@@ -291,15 +290,51 @@
 							%7$s
 						</td>
 					</tr>',
-              $social, $input_box , $version5only, $option, $header_checked, $footer_checked, 
-              ( !$share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked ) : '' ) ) ;
-        
+              $social, $input_box , $version5only, $option, $header_checked, $footer_checked,
+              ( ! $share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked ) : '' ) );
+
       }
 ?>
 </table>
 </div>
-	<div id="custom-css" class="<?= (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
-  <h1 class="option">Custom CSS</h1>
+	<div id="custom-css" class="<?= ( ! isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
+		<h1 class="option">Upload CSS</h1>
+		<table class="form-table">
+		<tr>
+			<?php
+				$ext_css = get_option('caweb_external_css', array() );
+			?>
+			<th><div class="tooltip">Stylesheets
+					<span class="tooltiptext">Any styles added will override any pre-existing styles.
+					Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order,
+					click and drag the name of the file in the order you would like.
+					</span></div></th>
+			<td>
+				<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style"></a>
+			</td>
+			<?php if( ! empty( $ext_css ) ): ?>
+			<tr><td></td>
+			<td>
+				<p class="option">Uploaded Styles</p>
+				
+				<ol id="uploadedCSS">	
+				<?php	
+					foreach($ext_css as $name){
+						$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+
+						printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a>
+						<a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a>
+						<a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p>
+						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name );
+					}
+				?>
+			</ol>		
+			</tr>
+			<?php endif; ?>
+		</tr>
+		</table>
+		<input type="submit" name="caweb_options_submit" id="#submit" class="button button-primary" value="Save Changes">
+		<h1 class="option">Custom CSS</h1>
 		<table class="form-table">
 
 		<tr>

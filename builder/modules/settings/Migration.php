@@ -6,18 +6,17 @@ abstract class ET_Builder_CAWeb_Module_Settings_Migration extends ET_Builder_Mod
 
 	public static $max_version = '1.3.0';
 
-  public static $migrations  = array(	);
+  public static $migrations  = array();
   public static $migrations_by_version = array();
 
   public static function init() {
     $class = 'ET_Builder_CAWeb_Module_Settings_Migration';
 
-		add_filter( 'et_pb_module_processed_fields', array( $class, 'maybe_override_processed_fields' ), 10, 2 );
-		add_filter( 'et_pb_module_shortcode_attributes', array( $class, 'maybe_override_shortcode_attributes' ), 10, 4 );
+		add_filter( 'et_pb_module_processed_fields', array($class, 'maybe_override_processed_fields'), 10, 2 );
+		add_filter( 'et_pb_module_shortcode_attributes', array($class, 'maybe_override_shortcode_attributes'), 10, 4 );
 	}
 
-
-	public static function maybe_override_processed_fields( $fields, $module_slug ) {
+	public static function maybe_override_processed_fields($fields, $module_slug) {
   if ( ! $fields ) {
 			return $fields;
 		}
@@ -33,8 +32,7 @@ abstract class ET_Builder_CAWeb_Module_Settings_Migration extends ET_Builder_Mod
 		return $fields;
 	}
 
-
-	public static function get_migrations( $module_version ) {
+	public static function get_migrations($module_version) {
    	self::$migrations_by_version[ $module_version ] = array();
 
 		if ( 'all' !== $module_version && version_compare( $module_version, self::$max_version, '>=' ) ) {
@@ -56,7 +54,7 @@ abstract class ET_Builder_CAWeb_Module_Settings_Migration extends ET_Builder_Mod
     return self::$migrations_by_version[ $module_version ];
   }
 
-  public static function maybe_override_shortcode_attributes( $attrs, $unprocessed_attrs, $module_slug, $module_address ) {
+  public static function maybe_override_shortcode_attributes($attrs, $unprocessed_attrs, $module_slug, $module_address) {
     if ( ! self::_should_handle_shortcode_callback( $module_slug ) ) {
 			return $attrs;
 		}
@@ -67,7 +65,6 @@ abstract class ET_Builder_CAWeb_Module_Settings_Migration extends ET_Builder_Mod
     $migrations = self::get_migrations( 'all');
 		$migration_count = count( $migrations );
 		$migration_index = 0;
-
 
 		foreach ( $migrations as $migration ) {
 			$migration_index++;
@@ -110,6 +107,5 @@ abstract class ET_Builder_CAWeb_Module_Settings_Migration extends ET_Builder_Mod
 		return $attrs;
   }
 }
-
 
 ?>

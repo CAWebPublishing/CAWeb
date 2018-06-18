@@ -1,6 +1,6 @@
 <?php
 
-function et_pb_get_text_sizes(){
+function et_pb_get_text_sizes() {
 	$text_size = array(
 			'p' => 'Paragraph',
 			'h1' => 'H1',
@@ -16,13 +16,13 @@ function et_pb_get_text_sizes(){
 	}
 
 	$output = sprintf('<select>%1$s</select>', $output);
-	return $text_size ;
+	return $text_size;
 }
 
 // Creates a list of checkboxes of all tags
-function et_builder_include_tags_option( $args = array() ) {
+function et_builder_include_tags_option($args = array()) {
 
-	$defaults = apply_filters( 'et_builder_include_tags_defaults', array (
+	$defaults = apply_filters( 'et_builder_include_tags_defaults', array(
 
 		'use_terms' => true,
 
@@ -30,15 +30,9 @@ function et_builder_include_tags_option( $args = array() ) {
 
 	) );
 
-
-
 	$args = wp_parse_args( $args, $defaults );
 
-
-
 	$output = "\t" . "<% var et_pb_include_tags_temp = typeof et_pb_include_tags !== 'undefined' ? et_pb_include_tags.split( ',' ) : []; %>" . "\n";
-
-
 
 	if ( $args['use_terms'] ) {
 
@@ -50,15 +44,11 @@ function et_builder_include_tags_option( $args = array() ) {
 
 	}
 
-
-
 	if ( empty( $tags_array ) ) {
 
 		$output = '<p>' . esc_html__( "You currently don't have any projects assigned to a tag.", 'et_builder' ) . '</p>';
 
 	}
-
-
 
 	foreach ( $tags_array as $tags ) {
 
@@ -69,8 +59,6 @@ function et_builder_include_tags_option( $args = array() ) {
 			esc_html( $tags->term_id )
 
 		);
-
-
 
 		$output .= sprintf(
 
@@ -88,15 +76,10 @@ function et_builder_include_tags_option( $args = array() ) {
 
 	}
 
-
-
 	$output = '<div id="et_pb_include_tags">' . $output . '</div>';
-
-
 
 	return apply_filters( 'et_builder_include_tags_option_html', $output );
 
 }
-
 
 ?>

@@ -9,7 +9,8 @@
 
 <div id="page-container">
 <div id="et-main-area">
-<div id="main-content" class="main-content <?= ( ! $is_page_builder_used ? 'ca_wp_container' : '' ) ?>">
+<div id="main-content" class="main-content">
+<div class="section">
   <main class="main-primary" >
 	<?php
 		global $wp_query;
@@ -33,7 +34,7 @@
 
 					et_divi_post_format_content();
 
-					if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) {
+					if ( ! in_array( $post_format, array('link', 'audio', 'quote') ) ) {
 						if ( 'video' === $post_format && false !== ( $first_video = et_get_first_video() ) ) :
 							printf(
 								'<div class="et_main_video_container">
@@ -41,7 +42,7 @@
 								</div>',
 								$first_video
 							);
-						elseif ( ! in_array( $post_format, array( 'gallery' ) ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb ) : ?>
+						elseif ( ! in_array( $post_format, array('gallery') ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb ) : ?>
 							<a href="<?php the_permalink(); ?>">
 								<?php print_thumbnail( $thumb, $thumbnail["use_timthumb"], $titletext, $width, $height ); ?>
 							</a>
@@ -51,8 +52,8 @@
 						endif;
 					} ?>
 
-				<?php if ( ! in_array( $post_format, array( 'link', 'audio', 'quote' ) ) ) : ?>
-					<?php if ( ! in_array( $post_format, array( 'link', 'audio' ) ) ) : ?>
+				<?php if ( ! in_array( $post_format, array('link', 'audio', 'quote') ) ) : ?>
+					<?php if ( ! in_array( $post_format, array('link', 'audio') ) ) : ?>
 						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 					<?php endif; ?>
 
@@ -83,6 +84,7 @@
 </div> <!-- #main-content -->
 </div>
 </div>
+</div>
 <style>
 #searchform{
 	float: right;
@@ -103,7 +105,7 @@
 	float: left;
 }
 </style>
-<?php if (ca_version_check(5)) : ?>
+<?php if (caweb_version_check(5)) : ?>
 <style>
 .divider{
 	display: block !important;

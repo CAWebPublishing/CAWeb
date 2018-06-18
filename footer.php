@@ -2,13 +2,13 @@
 <?php
 wp_nav_menu(array(
 						'theme_location'=> 'footer-menu',
-						'version' => ca_get_version( get_the_ID() )
-						)	
+						'version' => caweb_get_version( get_the_ID() )
+						)
 					);
 
 wp_footer();
- 
-if( !is_404() ) :
+
+if( ! is_404() ) :
 ?>
 
 <script> 

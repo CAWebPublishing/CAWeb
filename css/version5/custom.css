@@ -1,53 +1,124 @@
 body{
  background-color: #fff;
 }
-.et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
-	width: 80%;
+#main-content > .section{
+	padding-top: 0;
+}
+/**
+* Page Title Style
+*/
+.page-title{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.page-title,
+.non_divi_builder .main-content,
+#main-content .entry-content > .et_pb_section > .et_pb_row{
+     width: 100%;
+     max-width: 1280px;
+     margin: 0 auto;
+}
+.divi_builder .page-title, .non_divi_builder .main-content,
+#main-content .entry-content > .et_pb_section > .et_pb_row{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px){
+.page-title,
+.non_divi_builder .main-content,
+#main-content .entry-content >  .et_pb_section > .et_pb_row {
+    max-width: 750px !important;
+}
+}
+@media (min-width: 992px){
+.page-title,
+.non_divi_builder .main-content,
+#main-content .entry-content >  .et_pb_section > .et_pb_row {
+    max-width: 970px !important;
+}
+}
+@media (min-width: 1280px){
+.page-title,
+.non_divi_builder .main-content,
+#main-content .entry-content > .et_pb_section > .et_pb_row {
+    max-width: 1280px !important;
+}
+}
+@media (max-width: 767px){
+.page-title,
+.non_divi_builder .main-content,
+#main-content .entry-content >  .et_pb_section > .et_pb_row{  
+      width: 100% !important;
+      margin: 0 auto;
+}
+.non_divi_builder .main-content,
+#main-content .entry-content >  .et_pb_section > .et_pb_row{
+    padding: 0 15px;
+  }
+  
+  .divi_builder .page-title{
+    padding-bottom: 30px !important;
+  }
 }
 /* Temporary remove the sub nav arrow until the function in the core script is working */
 .nav-arrow-down{
   	visibility: hidden;
 }
-input.gsc-input {
-    background-image: unset !important;
-}
-
 /* Utility Header */
-.utility-header .half{
- padding-left: 15px !important;
+.utility-header .container{
+     max-width: 1280px;
+} 
+.utility-header .container .group{
+     display: flex;
 }
-ul.utility-links.social-media-links{
- max-height: unset !important;
-}
+.utility-header .container .group .social-links,
+.utility-header .container .group .settings-links{
+     flex-grow: 10;
+     padding-left: 15px;
+     width: auto;
+} 
 .utility-header ul li {
     cursor: pointer;
 }
-.utility-header ul li {
-    padding: 3px 8px;
-}
-.utility-geo-locator .ca-gov-icon-compass{
- margin-right: 5px;
+ul.utility-links.social-media-links{
+ margin-left: 45px;
 }
 .utility-geo-locator .located-city-name{
   margin-left: 0;
 }
-@media (min-width: 768px){
-  .utility-links{
-    margin-right: -8px;
-  }
+@media (max-width: 767px){ 
+.utility-header .container{
+      width: 100%;
+}   
+.utility-header .utility-links li[class*="utility-custom-"]{
+    display: none;
 }
-@media (max-width: 767px){
-  .utility-header .container.ca_wp_container{
-    width: 100%;
-    padding-bottom: 2px;
-  }
 }
 
 /* End of Utility Header */
 
+/* Google Translate */
+#google_translate_element{
+  width: auto;
+  flex-grow: 1;
+  padding-left: 0;
+  text-align: right;
+}
+#google_translate_element .skiptranslate.goog-te-gadget div {
+    color: initial;
+}
+#google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
+    color: white;
+}
+.skiptranslate.goog-te-gadget a:hover{
+  color:#fee09c;
+}
+/* End of Google Translate */
+
 #nav_list{
     width: auto;
 	 float: right;
+   clear: both;
     margin-right: -8px;
   	padding-left: 25%;
 }
@@ -120,34 +191,10 @@ ul.utility-links.social-media-links{
     padding: 0 8px;
   }
 }
-@media (min-width: 768px){
-  .fixed.compact .header-cagov-logo {
-    height: 55px;
-    line-height: 55px;
+.branding .header-organization-banner img{
+     width: auto;
 }
-.fixed.compact .header-cagov-logo img {
-    height: 45px;
-}
-}
-.branding .header-cagov-logo{
-  max-width: 25%;
-  height: 88px;
-  line-height: 88px;
-}
-.branding .header-cagov-logo a{
-    z-index: 26;
-    position: relative;
-	
-}
-.branding .header-cagov-logo img{
-  max-height: 80px;
-  height: auto;
-  position: static;
-  width: 100%;
-}
-.header-organization-banner{
-  display: none;
-}
+
 /* End of Branding & Navigation */
 
 /* Header Slideshow Banner */
@@ -161,45 +208,34 @@ ul.utility-links.social-media-links{
 
 
 /* Footer */
+footer .container{
+     max-width: 1280px;
+}
+footer .container .group{
+     display: flex;
+}
 .global-footer ul > li{
 	padding-left: 0;
 
 }
-#footer .ca_wp_container div{
-  padding: 0;
-  overflow: hidden;
-}
-#footer .ca_wp_container .three-quarters{
-
+#footer .quarter {
+    flex-grow: 2;
+    width: auto;
 }
 
-#footer .socialsharer-container {
-    height: 22px;
-}
-
-/* End of Footer */
-
-/* Makes social media icons wrap below footer links */
-@media (min-width: 992px){
 #footer .three-quarters {
-	float: left;
-	min-width: 75%;
-	width: unset;
-  }
-}
-@media (min-width: 992px){
-  #footer .quarter {
-      float: left;
-      max-width: 25%;
-      width: unset;
-  }
+    flex-grow: 8;
+    width: auto;
 }
 
-@media (max-width: 992px){
-#footer .socialsharer-container {
-    float: left;
+@media (max-width: 767px){
+  footer .container{
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
-}
+/* End of Footer */
 
 @media (max-width: 991px) and (min-width: 768px){
 .sub-nav .three-quarters {
@@ -262,21 +298,8 @@ ul.utility-links.social-media-links{
 .branding {
     display: none;
 }
-.et_pb_row.main-navigation{
-      width: 100%;
-    }
-
 }
 /* End of Mobile Control Styles */
-@media (min-width: 768px){
-  .et_pb_row.main-navigation{
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 0;
-    width: 80% !important;
-  }
-}
-
 
 /* Section Carousel Version 5 */
 .et_pb_ca_section_carousel .container{
@@ -287,32 +310,4 @@ ul.utility-links.social-media-links{
 /* Fullwidth Section Carousel Version 5 */
 .et_pb_ca_fullwidth_section_carousel .container{
   padding-top: 10px !important;
-}
-.ca_wp_container{
-  max-width: 1080px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-@media (max-width: 980px){
-.ca_wp_container{
-  padding: 0;
-}
-}
-
-@media (min-width: 981px){
-.ca_wp_container{
-  padding: 0;
-}
-}
-@media (max-width: 767px){
-  .ca_wp_container.main-navigation{
-    width: 100%;
-  }
-  .et_pb_row{
-    width: 90% !important;
-
-  }
 }

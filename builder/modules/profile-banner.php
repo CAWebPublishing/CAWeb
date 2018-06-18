@@ -31,7 +31,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-			'url'       => array( '#','add_default_setting' ),
+			'url'       => array('#','add_default_setting'),
 		);
 
 		$this->main_css_element = '%%order_class%%.et_pb_profile_banner';
@@ -39,14 +39,14 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module{
 		$this->options_toggles = array(
 		  'general' => array(
 		    'toggles' => array(
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
+		      'style'  => esc_html__( 'Style', 'et_builder'),
 		      'header' => esc_html__( 'Header', 'et_builder'),
-		      'body'   => esc_html__( 'Body'  , 'et_builder'),
+		      'body'   => esc_html__( 'Body', 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
-		      'body'   => esc_html__( 'Body'  , 'et_builder'),
+		      'body'   => esc_html__( 'Body', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -64,7 +64,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module{
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+		add_action( 'wp_footer', array($this, 'js_frontend_preview') );
 	}
 	function get_fields() {
 		$fields = array(
@@ -183,7 +183,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 		$module_class         = $this->shortcode_atts['module_class'];
 		$name                 = $this->shortcode_atts['name'];
