@@ -231,213 +231,212 @@
    * ======================================================================== */
 
 
-  
 
-    // COLLAPSE PUBLIC CLASS DEFINITION
-    // ================================
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
 
-    var Collapse = function(element, options) {
-      this.$element = $(element)
-      this.options = $.extend({}, Collapse.DEFAULTS, options)
-      this.$trigger = $('[data-toggle="collapse"][href="#' + element.id +
-        '"],' +
-        '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-      this.transitioning = null
+  var Collapse = function(element, options) {
+    this.$element = $(element)
+    this.options = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger = $('[data-toggle="collapse"][href="#' + element.id +
+      '"],' +
+      '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
 
-      if (this.options.parent) {
-        this.$parent = this.getParent()
-      } else {
-        this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-      }
-
-      if (this.options.toggle) this.toggle()
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
     }
 
-    Collapse.VERSION = '3.3.5'
+    if (this.options.toggle) this.toggle()
+  }
 
-    Collapse.TRANSITION_DURATION = 350
+  Collapse.VERSION = '3.3.5'
 
-    Collapse.DEFAULTS = {
-      toggle: true
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function() {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function() {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children(
+      '.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
     }
 
-    Collapse.prototype.dimension = function() {
-      var hasWidth = this.$element.hasClass('width')
-      return hasWidth ? 'width' : 'height'
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
     }
 
-    Collapse.prototype.show = function() {
-      if (this.transitioning || this.$element.hasClass('in')) return
+    var dimension = this.dimension()
 
-      var activesData
-      var actives = this.$parent && this.$parent.children('.panel').children(
-        '.in, .collapsing')
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
 
-      if (actives && actives.length) {
-        activesData = actives.data('bs.collapse')
-        if (activesData && activesData.transitioning) return
-      }
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
 
-      var startEvent = $.Event('show.bs.collapse')
-      this.$element.trigger(startEvent)
-      if (startEvent.isDefaultPrevented()) return
+    this.transitioning = 1
 
-      if (actives && actives.length) {
-        Plugin.call(actives, 'hide')
-        activesData || actives.data('bs.collapse', null)
-      }
-
-      var dimension = this.dimension()
-
+    var complete = function() {
       this.$element
-        .removeClass('collapse')
-        .addClass('collapsing')[dimension](0)
-        .attr('aria-expanded', true)
-
-      this.$trigger
-        .removeClass('collapsed')
-        .attr('aria-expanded', true)
-
-      this.transitioning = 1
-
-      var complete = function() {
-        this.$element
-          .removeClass('collapsing')
-          .addClass('collapse in')[dimension]('')
-        this.transitioning = 0
-        this.$element
-          .trigger('shown.bs.collapse')
-      }
-
-      if (!$.support.transition) return complete.call(this)
-
-      var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
       this.$element
-        .one('bsTransitionEnd', $.proxy(complete, this))
-        .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this
-          .$element[0][scrollSize])
+        .trigger('shown.bs.collapse')
     }
 
-    Collapse.prototype.hide = function() {
-      if (this.transitioning || !this.$element.hasClass('in')) return
+    if (!$.support.transition) return complete.call(this)
 
-      var startEvent = $.Event('hide.bs.collapse')
-      this.$element.trigger(startEvent)
-      if (startEvent.isDefaultPrevented()) return
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
 
-      var dimension = this.dimension()
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this
+        .$element[0][scrollSize])
+  }
 
-      this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+  Collapse.prototype.hide = function() {
+    if (this.transitioning || !this.$element.hasClass('in')) return
 
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function() {
+      this.transitioning = 0
       this.$element
-        .addClass('collapsing')
-        .removeClass('collapse in')
-        .attr('aria-expanded', false)
-
-      this.$trigger
-        .addClass('collapsed')
-        .attr('aria-expanded', false)
-
-      this.transitioning = 1
-
-      var complete = function() {
-        this.transitioning = 0
-        this.$element
-          .removeClass('collapsing')
-          .addClass('collapse')
-          .trigger('hidden.bs.collapse')
-      }
-
-      if (!$.support.transition) return complete.call(this)
-
-      this.$element[dimension](0)
-        .one('bsTransitionEnd', $.proxy(complete, this))
-        .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
     }
 
-    Collapse.prototype.toggle = function() {
-      this[this.$element.hasClass('in') ? 'hide' : 'show']()
-    }
+    if (!$.support.transition) return complete.call(this)
 
-    Collapse.prototype.getParent = function() {
-      return $(this.options.parent)
-        .find('[data-toggle="collapse"][data-parent="' + this.options.parent +
-          '"]')
-        .each($.proxy(function(i, element) {
-          var $element = $(element)
-          this.addAriaAndCollapsedClass(getTargetFromTrigger($element),
-            $element)
-        }, this))
-        .end()
-    }
+    this.$element[dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
 
-    Collapse.prototype.addAriaAndCollapsedClass = function($element, $trigger) {
-      var isOpen = $element.hasClass('in')
+  Collapse.prototype.toggle = function() {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
 
-      $element.attr('aria-expanded', isOpen)
-      $trigger
-        .toggleClass('collapsed', !isOpen)
-        .attr('aria-expanded', isOpen)
-    }
+  Collapse.prototype.getParent = function() {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent +
+        '"]')
+      .each($.proxy(function(i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element),
+          $element)
+      }, this))
+      .end()
+  }
 
-    function getTargetFromTrigger($trigger) {
-      var href
-      var target = $trigger.attr('data-target') || (href = $trigger.attr(
-          'href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+  Collapse.prototype.addAriaAndCollapsedClass = function($element, $trigger) {
+    var isOpen = $element.hasClass('in')
 
-      return $(target)
-    }
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
 
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target') || (href = $trigger.attr(
+        'href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
 
-    // COLLAPSE PLUGIN DEFINITION
-    // ==========================
-
-    function Plugin(option) {
-      return this.each(function() {
-        var $this = $(this)
-        var data = $this.data('bs.collapse')
-        var options = $.extend({}, Collapse.DEFAULTS, $this.data(),
-          typeof option == 'object' && option)
-
-        if (!data && options.toggle && /show|hide/.test(option)) options.toggle =
-          false
-        if (!data) $this.data('bs.collapse', (data = new Collapse(this,
-          options)))
-        if (typeof option == 'string') data[option]()
-      })
-    }
-
-    var old = $.fn.collapse
-
-    $.fn.collapse = Plugin
-    $.fn.collapse.Constructor = Collapse
+    return $(target)
+  }
 
 
-    // COLLAPSE NO CONFLICT
-    // ====================
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
 
-    $.fn.collapse.noConflict = function() {
-      $.fn.collapse = old
-      return this
-    }
+  function Plugin(option) {
+    return this.each(function() {
+      var $this = $(this)
+      var data = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(),
+        typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle =
+        false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this,
+        options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse = Plugin
+  $.fn.collapse.Constructor = Collapse
 
 
-    // COLLAPSE DATA-API
-    // =================
+  // COLLAPSE NO CONFLICT
+  // ====================
 
-    $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]',
-      function(e) {
-        var $this = $(this)
+  $.fn.collapse.noConflict = function() {
+    $.fn.collapse = old
+    return this
+  }
 
-        if (!$this.attr('data-target')) e.preventDefault()
 
-        var $target = getTargetFromTrigger($this)
-        var data = $target.data('bs.collapse')
-        var option = data ? 'toggle' : $this.data()
+  // COLLAPSE DATA-API
+  // =================
 
-        Plugin.call($target, option)
-      })
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]',
+    function(e) {
+      var $this = $(this)
+
+      if (!$this.attr('data-target')) e.preventDefault()
+
+      var $target = getTargetFromTrigger($this)
+      var data = $target.data('bs.collapse')
+      var option = data ? 'toggle' : $this.data()
+
+      Plugin.call($target, option)
+    })
 
 
   /* ========================================================================
@@ -1813,146 +1812,148 @@
 
   + function($) {
     'use strict';
-    
-  var $colltabs = $('[data-toggle="collapse"]')
-  $colltabs.attr({
-    'role': 'tab',
-    'aria-selected': 'false',
-    'aria-expanded': 'false'
-  })
-  $colltabs.each(function(index) {
-    var colltab = $(this),
-      collpanel = (colltab.attr('data-target')) ? $(colltab.attr(
-        'data-target')) : $(colltab.attr('href')),
-      parent = colltab.attr('data-parent'),
-      collparent = parent && $(parent),
-      collid = colltab.attr('id') || uniqueId('ui-collapse')
 
-    $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role',
-      'presentation')
+    var $colltabs = $('[data-toggle="collapse"]')
+    $colltabs.attr({
+      'role': 'tab',
+      'aria-selected': 'false',
+      'aria-expanded': 'false'
+    })
+    $colltabs.each(function(index) {
+      var colltab = $(this),
+        collpanel = (colltab.attr('data-target')) ? $(colltab.attr(
+          'data-target')) : $(colltab.attr('href')),
+        parent = colltab.attr('data-parent'),
+        collparent = parent && $(parent),
+        collid = colltab.attr('id') || uniqueId('ui-collapse')
 
-    colltab.attr('id', collid)
-    if (collparent) {
-      collparent.attr({
-        'role': 'tablist',
-        'aria-multiselectable': 'true'
-      })
-      if (collpanel.hasClass('in')) {
-        colltab.attr({
-          'aria-controls': colltab.attr('href').substr(1),
-          'aria-selected': 'true',
-          'aria-expanded': 'true',
-          'tabindex': '0'
+      $(collparent).find('div:not(.collapse,.panel-body), h4').attr(
+        'role',
+        'presentation')
+
+      colltab.attr('id', collid)
+      if (collparent) {
+        collparent.attr({
+          'role': 'tablist',
+          'aria-multiselectable': 'true'
         })
-        collpanel.attr({
-          'role': 'tabpanel',
-          'tabindex': '0',
-          'aria-labelledby': collid,
-          'aria-hidden': 'false'
-        })
-      } else {
-        colltab.attr({
-          'aria-controls': colltab.attr('href').substr(1),
-          'tabindex': '-1'
-        })
-        collpanel.attr({
-          'role': 'tabpanel',
-          'tabindex': '-1',
-          'aria-labelledby': collid,
-          'aria-hidden': 'true'
-        })
-      }
-    }
-  })
-
-  var collToggle = $.fn.collapse.Constructor.prototype.toggle
-  $.fn.collapse.Constructor.prototype.toggle = function() {
-    var prevTab = this.$parent && this.$parent.find(
-        '[aria-expanded="true"]'),
-      href
-
-    if (prevTab) {
-      var prevPanel = prevTab.attr('data-target') || (href = prevTab.attr(
-          'href')) && href.replace(/.*(?=#[^\s]+$)/, ''),
-        $prevPanel = $(prevPanel),
-        $curPanel = this.$element,
-        par = this.$parent,
-        curTab
-
-      if (this.$parent) curTab = this.$parent.find(
-        '[data-toggle=collapse][href="#' + this.$element.attr('id') +
-        '"]')
-
-      collToggle.apply(this, arguments)
-
-      if ($.support.transition) {
-        this.$element.one($.support.transition.end, function() {
-
-          prevTab.attr({
-            'aria-selected': 'false',
-            'aria-expanded': 'false',
-            'tabIndex': '-1'
-          })
-          $prevPanel.attr({
-            'aria-hidden': 'true',
-            'tabIndex': '-1'
-          })
-
-          curTab.attr({
+        if (collpanel.hasClass('in')) {
+          colltab.attr({
+            'aria-controls': colltab.attr('href').substr(1),
             'aria-selected': 'true',
             'aria-expanded': 'true',
-            'tabIndex': '0'
+            'tabindex': '0'
           })
+          collpanel.attr({
+            'role': 'tabpanel',
+            'tabindex': '0',
+            'aria-labelledby': collid,
+            'aria-hidden': 'false'
+          })
+        } else {
+          colltab.attr({
+            'aria-controls': colltab.attr('href').substr(1),
+            'tabindex': '-1'
+          })
+          collpanel.attr({
+            'role': 'tabpanel',
+            'tabindex': '-1',
+            'aria-labelledby': collid,
+            'aria-hidden': 'true'
+          })
+        }
+      }
+    })
 
-          if ($curPanel.hasClass('in')) {
-            $curPanel.attr({
-              'aria-hidden': 'false',
-              'tabIndex': '0'
-            })
-          } else {
-            curTab.attr({
+    var collToggle = $.fn.collapse.Constructor.prototype.toggle
+    $.fn.collapse.Constructor.prototype.toggle = function() {
+      var prevTab = this.$parent && this.$parent.find(
+          '[aria-expanded="true"]'),
+        href
+
+      if (prevTab) {
+        var prevPanel = prevTab.attr('data-target') || (href = prevTab.attr(
+            'href')) && href.replace(/.*(?=#[^\s]+$)/, ''),
+          $prevPanel = $(prevPanel),
+          $curPanel = this.$element,
+          par = this.$parent,
+          curTab
+
+        if (this.$parent) curTab = this.$parent.find(
+          '[data-toggle=collapse][href="#' + this.$element.attr('id') +
+          '"]')
+
+        collToggle.apply(this, arguments)
+
+        if ($.support.transition) {
+          this.$element.one($.support.transition.end, function() {
+
+            prevTab.attr({
               'aria-selected': 'false',
-              'aria-expanded': 'false'
+              'aria-expanded': 'false',
+              'tabIndex': '-1'
             })
-            $curPanel.attr({
+            $prevPanel.attr({
               'aria-hidden': 'true',
               'tabIndex': '-1'
             })
-          }
-        })
+
+            curTab.attr({
+              'aria-selected': 'true',
+              'aria-expanded': 'true',
+              'tabIndex': '0'
+            })
+
+            if ($curPanel.hasClass('in')) {
+              $curPanel.attr({
+                'aria-hidden': 'false',
+                'tabIndex': '0'
+              })
+            } else {
+              curTab.attr({
+                'aria-selected': 'false',
+                'aria-expanded': 'false'
+              })
+              $curPanel.attr({
+                'aria-hidden': 'true',
+                'tabIndex': '-1'
+              })
+            }
+          })
+        }
+      } else {
+        collToggle.apply(this, arguments)
       }
-    } else {
-      collToggle.apply(this, arguments)
     }
-  }
 
-  $.fn.collapse.Constructor.prototype.keydown = function(e) {
-    var $this = $(this),
-      $items, $tablist = $this.closest('div[role=tablist] '),
-      index, k = e.which || e.keyCode
+    $.fn.collapse.Constructor.prototype.keydown = function(e) {
+      var $this = $(this),
+        $items, $tablist = $this.closest('div[role=tablist] '),
+        index, k = e.which || e.keyCode
 
-    $this = $(this)
-    if (!/(32|37|38|39|40)/.test(k)) return
-    if (k == 32) $this.click()
+      $this = $(this)
+      if (!/(32|37|38|39|40)/.test(k)) return
+      if (k == 32) $this.click()
 
-    $items = $tablist.find('[role=tab]')
-    index = $items.index($items.filter(':focus'))
+      $items = $tablist.find('[role=tab]')
+      index = $items.index($items.filter(':focus'))
 
-    if (k == 38 || k == 37) index-- // up & left
-      if (k == 39 || k == 40) index++ // down & right
-        if (index < 0) index = $items.length - 1
-    if (index == $items.length) index = 0
+      if (k == 38 || k == 37) index-- // up & left
+        if (k == 39 || k == 40) index++ // down & right
+          if (index < 0) index = $items.length - 1
+      if (index == $items.length) index = 0
 
-    $items.eq(index).focus()
+      $items.eq(index).focus()
 
-    e.preventDefault()
-    e.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
 
-  }
+    }
 
-  $(document).on('keydown.collapse.data-api', '[data-toggle="collapse"]', $.fn
-    .collapse.Constructor.prototype.keydown)
-}(jQuery);
+    $(document).on('keydown.collapse.data-api', '[data-toggle="collapse"]', $
+      .fn
+      .collapse.Constructor.prototype.keydown)
+  }(jQuery);
   // DROPDOWN Extension
   // ===============================
 
@@ -11400,397 +11401,6 @@
   }
 
   // End gatag.js
-  /* -----------------------------------------
-     NAVIGATION MENU - /source/js/cagov/navigation.js
-  ----------------------------------------- */
-
-  $(document).ready(function() {
-    // detect partial flexbox support in IE>9
-    if ($('.top-level-nav').css('display') == 'table') {
-      $('body').addClass('no-flex')
-    }
-
-    // menu variables
-    var $navigation = $('#navigation.main-navigation'),
-      $navItems = $navigation.find('.nav-item'), // first level link containers'
-      $navItemsWithSubs = $navItems.has('.sub-nav'),
-      $subNavs = $navigation.find('.sub-nav'),
-      megamenu = $navigation.hasClass('megadropdown'),
-      dropdown = $navigation.hasClass('dropdown'),
-      singleLevel = $navigation.hasClass('singleLevel'),
-      offCanvas = $navigation.hasClass('off-canvas'),
-      mobileWidth = 767,
-      setActiveLinkByFolder = $navigation.hasClass('auto-highlight'); // Use new folder matching method to highlight the current navigation tab
-
-    var mouseOverDelay = 300,
-      setTimeoutConst;
-
-    // touch detection
-    var isTouch = Modernizr.touch,
-      msTouch = (('ontouchstart' in window) || (navigator.MaxTouchPoints >
-        0) || (navigator.msMaxTouchPoints > 0));
-
-    var touchMode = false;
-    $(window).on('mousemove', function() {
-      if (touchMode) touchmode = false;
-    });
-
-    // HIGHLIGHT APPROPRIATE NAV ITEM
-    var reMainNav = "",
-      arrCurrentURL = location.href.split("/");
-    if (typeof defaultActiveLink != "undefined") {
-      reMainNav = new RegExp("^" + defaultActiveLink + "$", "i"); // Regex for finding the index of the default main list item
-    }
-    $navItems.each(function() { // loop through top level links
-      var $this = $(this),
-        $a = $this.find('.first-level-link');
-
-      if (reMainNav) {
-        if ($a.text().match(reMainNav)) {
-          $this.addClass('active');
-        }
-      } else if (setActiveLinkByFolder && $a.attr('href')) {
-        var arrNavLink = $a[0].href.split("/");
-        if ((arrNavLink.length > 4) && (arrCurrentURL[3] ==
-            arrNavLink[3])) { // folder of current URL matches this nav link
-          $this.addClass('active');
-        }
-      }
-    });
-
-    $navItemsWithSubs.each(function() {
-      var itemCount = $(this).find('.second-level-nav > li').length;
-      if (itemCount <= 2) {
-        $(this).find('.sub-nav').addClass('with-few-items');
-      }
-    });
-
-    // setup megamenu
-    if (megamenu) {
-      // add indicator arrows to sub navs
-      var navArrow = $(
-        '<div class="nav-arrow-container"><div class="nav-arrow-down"></div></div>'
-      );
-      $subNavs.append(navArrow);
-    }
-
-    if ((megamenu ) && (isTouch || !msTouch)) { // setup standard megamenu or dropdown menu and touch supporting 'ontouchstart'
-      // show and hide sub nav with fade effect
-      $navItemsWithSubs.on("mouseenter.ca.navshow", function() {
-        if (mobileView()) return; // hover effects disabled on mobile view;
-        if (touchMode) return;
-        var $this = $(this);
-        setTimeoutConst = setTimeout(function() {
-
-          var $sub = $this.find('.sub-nav').css('display', 'none');
-          $sub.css({
-              opacity: 0,
-              display: 'block'
-            }).stop(true, true)
-            .delay(300).animate({
-              opacity: 1
-            }, 300)
-
-
-          positionNavArrow($this);
-        }, mouseOverDelay);
-
-
-      });
-      $navItemsWithSubs.on("mouseleave.ca.navclose", function() {
-        if (mobileView()) return; // hover effects disabled on mobile view;
-        if (touchMode) return;
-        clearTimeout(setTimeoutConst);
-        var $sub = $(this).find('.sub-nav');
-        $sub.animate({
-          opacity: 0
-        }, 300, function() {
-          $(this).removeAttr('style'); // remove inline styles for mobile view
-        });
-      });
-
-      if (isTouch) {
-        // hide submenus when touch occurs outside of menu
-        $(document).on('touchstart.ca.catchNav', function(e) {
-          touchMode = false;
-          hideSubNavs();
-        }, false);
-
-        $navItemsWithSubs.each(function() {
-          var $this = $(this),
-            $a = $this.find('.first-level-link'),
-            node = $a[0],
-            $sub = $this.find('.sub-nav'),
-            $subLinks = $sub.find('a');
-          $a.data('link', $a.attr('href')).removeAttr; // store url
-
-          $this.on('touchstart.ca.propagation', function(e) {
-            // keeps tabpanel from closing when clicking inside of it
-            e.stopPropagation();
-          });
-
-          $this.on('touchstart.ca.navclose', function(e) {
-            touchMode = true;
-            if ($sub.is(':visible') || mobileView()) {
-              // if sub is visible, or in mobile view keep default behavior
-            } else {
-              // keeps tabpanel from closing when clicking inside of it
-              e.preventDefault();
-              e.stopPropagation();
-
-              // position arrow, hide other sub-nav panels, fade in current panel
-              positionNavArrow($this);
-              hideSubNavs();
-              $sub.fadeIn(300);
-            }
-          }, false);
-        });
-      }
-
-    } else if ((megamenu ) && msTouch) { // setup standard megamenu or dropdown menu and touch supporting 'pointerevents'
-      // hide submenus when touch/click occurs outside of menu
-      $(document).on('click.ca.catchNav', function(e) {
-        if (!$navigation.is(e.target) && $navigation.has(e.target).length ===
-          0) {
-          hideSubNavs();
-        }
-      });
-
-      $navItemsWithSubs.each(function() {
-        var $this = $(this),
-          $a = $this.find('.first-level-link'),
-          node = $a[0],
-          $sub = $this.find('.sub-nav'),
-          $subLinks = $sub.find('a');
-        $a.data('link', $a.attr('href')); // store url
-
-        $this.on('click.ca.propagation', function(e) {
-          // keeps tabpanel from closing when clicking inside of it
-          e.stopPropagation();
-        });
-
-        $a.on('click.ca.navclose', function(e) {
-          if ($sub.is(':visible') || mobileView()) {
-            // if sub is visible, or in mobile view keep default behavior
-          } else {
-            // keeps tabpanel from closing when clicking inside of it
-            e.preventDefault();
-            e.stopPropagation();
-
-            // position arrow, hide other sub-nav panels, fade in current panel
-            positionNavArrow($this);
-            hideSubNavs();
-            $sub.fadeIn(300);
-          }
-        });
-      });
-    }
-
-    // MENU FUNCTIONS
-    function hideSubNavs() {
-      $subNavs.fadeOut(300);
-    };
-
-    function mobileView() {
-      return ($('.global-header .mobile-controls').css('display') !==
-        "none"); // mobile view uses arrow to show subnav instead of first touch
-    }
-
-    // position nav-arrow-down below the corresponding link (parent position - parent width/2)
-    function positionNavArrow(o) {
-      if (megamenu) {
-       var positionLeft = (o.offset().left - $navigation.offset().left +
-          o.width() / 2);
-        
-        o.find('.nav-arrow-down').css({
-          left: positionLeft
-        });
-      }
-    }
-
-    // SETUP MOBILE MENU
-    // add sub nav toggles to mobile menu $navItemsWithSubs
-    if (!singleLevel) {
-      $navItemsWithSubs.each(function() {
-
-        $(this).find('.first-level-link').addClass('has-sub');
-
-        // create toggle object
-        var $toggleSubNav = $(
-          '<span class="mobile-control toggle-sub-nav closed"><span class="ca-gov-icon-menu-toggle-closed" aria-hidden="true"></span><span class="ca-gov-icon-menu-toggle-open" aria-hidden="true"></span><span class="sr-only">Sub Menu Toggle</span></span>'
-        );
-        // add toggle object to DOM
-        $(this).find('.sub-nav').before($toggleSubNav);
-
-        // setup mobile toggle
-        $toggleSubNav.click(function() {
-          var secondaryLinks = $(this).parent().find('.sub-nav');
-          if (secondaryLinks.is(':visible')) {
-            //close panel
-            $(this).removeClass('open').addClass('closed');
-            secondaryLinks.slideUp('fast', function() {
-              // remove style attribute after animation and switch to class for styling
-              $(this).removeAttr('style').removeClass(
-                'secondary-open');
-            });
-          } else {
-            // open panel
-            $(this).removeClass('closed').addClass('open');
-            secondaryLinks.slideDown('fast', function() {
-              // remove style attribute after animation and switch to class for styling
-              $(this).removeAttr('style').addClass(
-                'secondary-open');
-            });
-          }
-        });
-      });
-    }
-
-    // SETUP OFF CANVAS MOBILE MENU
-    if (offCanvas) {
-
-      // add enabled class for off-canvas element styles
-      $('body').addClass('off-canvas-enabled');
-
-      // wrap menu and content in elements to allow off canvas positioning
-      if (!$('body > .oc-outer')[0]) {
-        $('body').wrapInner(
-          '<div class="oc-outer"><div class="oc-inner"></div></div>');
-      }
-
-      // off canvas menu variables
-      var scrollMenuOnly = true, // stop scrolling on main content and only allow scrolling on menu when off-canvas menu is open
-        $offCanvasWrapper = $('.oc-outer'),
-        $offCanvasElement = $('.global-header .navigation-search').addClass(
-          'oc-menu'), // off canvas menu element
-        $mobileControls = $('.mobile-controls'), // cache .mobile-contols div
-        $offCanvasToggle = $('.toggle-menu'), // off canvas toggle button
-        $offCanvasShield = $('.header-decoration'); //blocks main content
-
-      function matchMenuToHeight($el) {
-        if (mobileView()) {
-          // get window or body height minus .mobile-controls height and apply to menu
-          var menuHeight = $el.height() - $mobileControls.height();
-
-          $offCanvasElement.height(menuHeight);
-          $offCanvasShield.height($(window).height());
-        } else {
-          $offCanvasElement.removeAttr('style');
-          $offCanvasShield.removeAttr('style');
-        }
-      }
-
-      // prevent scrolling when off-canvas menu is open
-      if (scrollMenuOnly) {
-        $offCanvasWrapper.addClass('scroll-menu-only');
-      }
-
-      // size menu based on scroll option
-      var $el = (scrollMenuOnly) ? $(window) : $('body');
-      $(window).resize(function() {
-        matchMenuToHeight($el);
-      });
-      matchMenuToHeight($el);
-
-
-
-      $('nav a').last().blur(function() {
-        setTimeout(function() {
-          if (!$(document.activeElement).closest(
-              'nav.main-navigation').length) closeOffCanvas();
-        }, 1);
-      })
-
-      // Initiate menu button event handlers
-      $offCanvasToggle.click(function() {
-        toggleOffCanvasMenu();
-      }).attr('tabindex', 0).focus(function() {
-        openOffCanvas();
-      });
-
-      $offCanvasShield.click(function() {
-        closeOffCanvas();
-      });
-
-      function toggleOffCanvasMenu() {
-        if ($offCanvasElement.hasClass('oc-menu-open')) {
-          closeOffCanvas();
-        } else {
-          openOffCanvas();
-        }
-      }
-
-      function openOffCanvas() {
-        $offCanvasWrapper.addClass('oc-menu-open');
-      };
-
-      function closeOffCanvas() {
-        $offCanvasWrapper.removeClass('oc-menu-open');
-        $('.toggle-sub-nav').removeClass('open').addClass('closed');
-        $('.sub-nav').removeClass('secondary-open');
-      };
-    } else {
-      // Setup non-off-canvas menu
-      $('#navigation').addClass('mobile-closed');
-
-      $('.toggle-menu').click(function() {
-        $('#navigation').toggleClass('mobile-closed');
-        $('.search-container').removeClass('active');
-      });
-
-      $('.toggle-search').on('click', function() {
-        $('.search-container').toggleClass('active');
-        if (!$('#navigation').hasClass('active')) {
-          $('#navigation').addClass('mobile-closed');
-        }
-      });
-    }
-
-
-    // allow dropdown on focus
-    var menuHoverClass = 'focus',
-      clickedFocus = 'clickedFocus';
-
-    $('.top-level-nav > li > a').hover(function() {
-      $(this).closest('ul').find('.' + menuHoverClass).removeClass(
-        menuHoverClass);
-    }, function() {
-      $('.' + clickedFocus).removeClass(clickedFocus)
-    });
-    $('.top-level-nav > li > a').focus(function(e) {
-      $(this).closest('ul').find('.' + menuHoverClass).removeClass(
-        menuHoverClass);
-      if (!$(this).parent().find('.toggle-sub-nav').hasClass('open')) {
-        $(this).parent().addClass(menuHoverClass);
-      }
-    }).on('mousedown', function() {
-      // prevent subnav from showing when link is clicked
-      if (!$(this).parent().find('.toggle-sub-nav').hasClass('open')) {
-        $(this).parent().addClass(clickedFocus);
-      }
-    });
-
-    // Hide menu if click occurs outside of navigation
-    // Hide menu if click or focus occurs outside of navigation
-    $('.top-level-nav a').last().keydown(function(e) {
-      if (e.keyCode == 9) {
-        // If the user tabs out of the navigation hide all menus
-        $('.top-level-nav .' + menuHoverClass).removeClass(
-          menuHoverClass);
-      }
-    });
-    $(document).click(function() {
-      $('.top-level-nav .' + menuHoverClass).removeClass(
-        menuHoverClass);
-    });
-
-    $('.top-level-nav').click(function(e) {
-      e.stopPropagation();
-    });
-    //*/
-
-
-  });
 
   /* -----------------------------------------
      ACCORDION LIST - /source/js/cagov/accordion.js
@@ -11839,111 +11449,7 @@
       "<span class='triangle'></span>");
   });
 
-  /* -----------------------------------------
-     SEARCH - /source/js/cagov/search.js
-  ----------------------------------------- */
 
-  $(document).ready(function() {
-    var $searchContainer = $("#head-search");
-    var $searchText = $searchContainer.find(".search-textfield");
-    var $resultsContainer = $('.search-results-container');
-
-    var $body = $("body");
-    var $specialIcon =
-      // setup the tabs
-      $('.search-tabs button').click(function(e) {
-        $(this).siblings().removeClass('active');
-        $(this).tab('show').addClass('active');
-        e.preventDefault()
-      });
-
-    // Unfreeze search width when blured.
-    // Unfreeze search width when blured.
-    $searchText.on('blur focus', function(e) {
-      $(this).parents("#head-search").removeClass("focus");
-      $(this).parents(".search-container").addClass("focus");
-    });
-
-    $searchText.on("change keyup paste", function() {
-      if ($(this).val()) {
-        addSearchResults();
-      }
-    });
-
-    // have the close button remove search results and the applied classes
-    $resultsContainer.find('.close').on('click', removeSearchResults);
-    $searchContainer.find('.close').on('click', removeSearchResults);
-
-    // Our special nav icon which we need to hook into for starting the search
-    // $('#nav-item-search')
-
-    // Sitecore link data types currently do not have a way to set id's per nav,
-    // so instead we are binding to what I'm assuming will aslways be the search
-    $('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents(
-      '.nav-item').on('click', function(e) {
-      $searchText.focus().trigger('focus')
-        // // already opened search, nothing else needs to be done
-        // if ($searchContainer.hasClass('active')) {
-        //     return;
-        // }
-
-      // let the user know the input box is where they should search
-      $(".primary #head-search").addClass('play-animation').one(
-        'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-        function() {
-          $(this).removeClass('play-animation');
-
-        });
-
-
-      // When compact has been applied to the header, it will take 400ms
-      // unitll the window has scrolled, and it will keep removing the ".active" class. After that we can apply the active
-      // class.
-      window.setTimeout(function() {
-        $('body:not(.primary) .search-container').addClass(
-          'active');
-      }, 401);
-    });
-
-
-
-    // SEE navitgation.js for mobile click handlers
-
-    // Close search when close icon is clicked
-    $('.close-search').on('click', removeSearchResults);
-
-    // Helpers
-    function addSearchResults() {
-      $body.addClass("active-search");
-      $searchContainer.addClass('active');
-      $resultsContainer.addClass('visible');
-      // close the the menu when we are search
-      $('#navigation').addClass('mobile-closed');
-      // hide the ask group as well
-      $('.ask-group').addClass('fade-out');
-
-      // fire a scroll event to help update headers if need be
-      $(window).scroll();
-
-      $.event.trigger('cagov.searchresults.show');
-    }
-
-    function removeSearchResults() {
-      $body.removeClass("active-search");
-      $searchText.val('');
-      $searchContainer.removeClass('active');
-      $resultsContainer.removeClass('visible');
-      $('.ask-group').removeClass('fade-out');
-
-      // fire a scroll event to help update headers if need be
-      $(window).scroll();
-
-      $.event.trigger('cagov.searchresults.hide');
-    }
-
-
-
-  });
 
   /* -----------------------------------------
      INIT THIRD PARTY PLUGINS - /source/js/cagov/plugins.js
@@ -12053,27 +11559,41 @@
             touchDrag: false,
             pullDrag: false,
             pagination: true,
-            dotsClass: 'banner-pager', dotClass: 'banner-control',
+            dotsClass: 'banner-pager',
+            dotClass: 'banner-control',
             dotsContainer: false
           });
 
           // Add pause and play buttons
-          var owlBannerControl = $('<div class="banner-play-pause"><div class="banner-control"><span class="play ca-gov-icon-carousel-play" aria-hidden="true"></span><span class="pause ca-gov-icon-carousel-pause" aria-hidden="true"></span></div></div>');
-          $this.append(owlBannerControl); var playControl =
-          owlBannerControl.find('.play').hide(); var pauseControl =
-          owlBannerControl.find('.pause'); playControl.on('click', function() {
-          $(this).hide();   $(this).parent().removeClass('active');
-          pauseControl.show();   $this.trigger('play.owl.autoplay', [settings.delay]);
-          $this.owlCarousel('next'); // Manually play next since autoplay waits for
-          delay });
+          var owlBannerControl = $(
+            '<div class="banner-play-pause"><div class="banner-control"><span class="play ca-gov-icon-carousel-play" aria-hidden="true"></span><span class="pause ca-gov-icon-carousel-pause" aria-hidden="true"></span></div></div>'
+          );
+          $this.append(owlBannerControl);
+          var playControl =
+            owlBannerControl.find('.play').hide();
+          var pauseControl =
+            owlBannerControl.find('.pause');
+          playControl.on('click', function() {
+            $(this).hide();
+            $(this).parent().removeClass('active');
+            pauseControl.show();
+            $this.trigger('play.owl.autoplay', [settings.delay]);
+            $this.owlCarousel('next'); // Manually play next since autoplay waits for
+            delay
+          });
 
-          pauseControl.on('click', function() {   $(this).hide();
-          $(this).parent().addClass('active');   playControl.show();
-          $this.trigger('stop.owl.autoplay'); });
+          pauseControl.on('click', function() {
+            $(this).hide();
+            $(this).parent().addClass('active');
+            playControl.show();
+            $this.trigger('stop.owl.autoplay');
+          });
 
           // Number the items in .banner-pager
-          var dots = $('.banner-pager .banner-control'); dots.each(function(){
-            $(this).find('span').append($(this).index() + 1); });
+          var dots = $('.banner-pager .banner-control');
+          dots.each(function() {
+            $(this).find('span').append($(this).index() + 1);
+          });
         });
       }
     }(jQuery));
@@ -12381,30 +11901,30 @@
 
     // TODO: flickr, linkedin, instagram, pinterest, vimeo, youtube
 
-   /* $(".ca-gov-icon-facebook").on('click', function(e) {
-      PopupCentered('https://www.facebook.com/sharer/sharer.php?u=' +
-        docURL + '&display=popup', 'socialsharer', '658', '450')
-    });
+    /* $(".ca-gov-icon-facebook").on('click', function(e) {
+       PopupCentered('https://www.facebook.com/sharer/sharer.php?u=' +
+         docURL + '&display=popup', 'socialsharer', '658', '450')
+     });
 
-    $(".ca-gov-icon-twitter").on('click', function(e) {
-      PopupCentered('https://twitter.com/intent/tweet?text=' +
-        docTitle + '&url=' + docURL, 'socialsharer', '568', '531')
-    });
+     $(".ca-gov-icon-twitter").on('click', function(e) {
+       PopupCentered('https://twitter.com/intent/tweet?text=' +
+         docTitle + '&url=' + docURL, 'socialsharer', '568', '531')
+     });
 
-    $(".ca-gov-icon-google-plus").on('click', function(e) {
-      PopupCentered('https://plus.google.com/share?url=' + docURL,
-        'socialsharer', '550', '552')
-    });
+     $(".ca-gov-icon-google-plus").on('click', function(e) {
+       PopupCentered('https://plus.google.com/share?url=' + docURL,
+         'socialsharer', '550', '552')
+     });
 
-    $(".ca-gov-icon-email").attr('href', "mailto:?subject=" +
-      docTitle + "&body=%0a" + docURL + "%0a%0a");
+     $(".ca-gov-icon-email").attr('href', "mailto:?subject=" +
+       docTitle + "&body=%0a" + docURL + "%0a%0a");
 
-    function sanitize(sText) {
-      // Remove html tags from a string
-      var re = /<\S[^>]*>/g;
-      sText = sText.replace(re, " ");
-      return sText;
-    }*/
+     function sanitize(sText) {
+       // Remove html tags from a string
+       var re = /<\S[^>]*>/g;
+       sText = sText.replace(re, " ");
+       return sText;
+     }*/
 
 
     // Display a popup window centered over the parent window. Works in all browsers
@@ -13928,7 +13448,7 @@
       var extraHeight = $('header.fixed').height();
       $viewport.animate({
         scrollTop: $(".main-primary").offset().top + $(
-          "#et_pb_ca_fullwidth_banner").height() - extraHeight 
+          "#et_pb_ca_fullwidth_banner").height() - extraHeight
       }, 2000);
 
       // Stop the animation if the user scrolls
@@ -14163,7 +13683,7 @@
     })
   });
 
-  
+
 
   /* -----------------------------------------
      ASK GROUP

@@ -34,23 +34,27 @@ function ca_page_identifier_metabox_callback( $post ) {
 <form action="#" method="post">
 
 <input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"
-<?php echo( get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); ?> >Display Title on Page <br /> <br />
-You may display a different Navigation Menu on this page.
- <br />
-	<?php $page_menu = get_ca_nav_menu_theme_location($post->ID); ?>
+<?php echo( get_post_meta($post->ID, 'ca_custom_post_title_display',true) == true ? 'checked="checked"' : '' ); ?> >
+Display Title on Page </input>
+
+<p>You may display a different Navigation Menu on this page.</p>
+
 <select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
 <?php
-  	$locations = get_registered_ca_nav_menus();
+			$page_menu = get_ca_nav_menu_theme_location($post->ID);
+	  	$locations = get_registered_ca_nav_menus();
+			unset($locations['footer-menu']);
 
-  	foreach($locations as $i => $loc){
-    print sprintf('<option value="%1$s" %2$s>%3$s</option>',
-			$i, ($page_menu == $loc ?'selected="selected"' : ''),
-			get_ca_nav_menu_theme_location_name(-1, $i) );
-  	}
+	  	foreach($locations as $i => $loc){
+	    print sprintf('<option value="%1$s" %2$s>%3$s</option>',
+				$i, ($page_menu == $loc ?'selected="selected"' : ''),
+				get_ca_nav_menu_theme_location_name(-1, $i) );
+	  	}
 
 ?>
 
 </select>
+
 </form>
 
 
@@ -67,21 +71,13 @@ function ca_save_post_meta($post_id, $post){
         return $post_id;
   }
 
-
-	/* Check if the current user has permission to edit the post. */
- 	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) ){
-    //return $post_id;
-	}
-
 	//skip auto save
   	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-
       		return $post_id;
-
   	}
 
 
-	$option_title_display = $_POST['ca_custom_post_title_display'];
+	$option_title_display = (isset($_POST['ca_custom_post_title_display']) ? $_POST['ca_custom_post_title_display'] : '');
 		$default_nav = $_POST['ca_default_navigation_menu'];
 		//$default_nav = (isset($_POST['ca_default_navigation_menu']) ? $_POST['ca_default_navigation_menu'] : '');
 		update_post_meta($post->ID, 'ca_default_navigation_menu', $default_nav);

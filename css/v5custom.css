@@ -111,9 +111,7 @@ and the nav links float to the right */
 }
 
 /* Header Slideshow Banner */
-.slide-text{
-	height: 150px;  
-}
+
 /* position the owl dots */
 .header-slideshow-banner .banner-pager, .header-slideshow-banner .banner-play-pause{
   top: inherit;

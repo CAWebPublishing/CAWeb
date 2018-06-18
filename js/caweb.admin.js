@@ -1,4 +1,6 @@
- /* Functions used on Admin Pages */
+ $ = jQuery.noConflict();
+
+/* Functions used on Admin Pages */
 /* CAWeb Option Page */  
 function toggleOptions(ele){
     var version = ele.options[ele.selectedIndex].value;    
@@ -58,27 +60,54 @@ function toggleOptions(ele){
 		opt.className += " nav-tab-active";
 	}
 /* End of CAWeb Option Page */
-/* Navigation Page */
 
+$(document).ready(function(){
+	/* Navigation Page */
+	// Starting menu count
+	var menu_count = $('#menu-to-edit').children().length;
+	
+	$('.item-edit').click(menu_selection);
 
-  // Enable/Disable Menu Item Fields
-function menu_selection(ele){
+	$('ul.menu-icon-list li').click(icon_select);
 
-  			var menu_li = ele.parentNode.parentNode.parentNode.parentNode;
-  			var classes = menu_li.className;
-  			var settings = menu_li.getElementsByClassName("menu-item-settings")[0];
+	$('.unit-size-selector').change(unit_change);
+	
+	$('#menu-to-edit').on('DOMSubtreeModified', function(event) {
+		if(menu_count < $('#menu-to-edit').children().length){
+			 menu_count = $('#menu-to-edit').children().length;
+			
+			 // Grab array of all pending menu items
+  		var list_items = this.getElementsByClassName("pending");
 
-  			var unit_selector = settings.getElementsByClassName("unit_selector")[0];
-  			var selector = unit_selector.getElementsByClassName("selector")[0];
-  			var media_image = settings.getElementsByClassName("media_image")[0];
-  			var desc = settings.getElementsByClassName("field-description")[0];
-  			var menu_images = settings.getElementsByClassName("mega_menu_images")[0];
+  		// Remove 'is_selected' class from all icons
+  		for(var i = 0; i < list_items.length; i++){
+				var menu_id = list_items.item(i).id.substring(list_items.item(i).id.lastIndexOf('-') + 1)  ;
+				document.getElementById('edit-' + menu_id).addEventListener('click', menu_selection);
+				document.getElementById('menu-icon-list-' + menu_id).addEventListener('click', icon_select);
+				document.getElementById('unit-size-selector-' + menu_id).addEventListener('change', unit_change);
+				
+			}
+			
+		}
+	});
+	
+	  // Enable/Disable Menu Item Fields when li menu-item is active
+function menu_selection(){
+	var menu_id = this.id.substring(this.id.lastIndexOf('-') + 1)  ;
+	
+	var menu_li = document.getElementById('menu-item-' + menu_id);
+	var classes = menu_li.className;
+	var settings = document.getElementById('menu-item-settings-' + menu_id);
 
-		  	var icon_selector = settings.getElementsByClassName("icon_selector")[0];
+	var unit_selector = settings.getElementsByClassName("unit-size-selector")[0];
+  var unit_size = unit_selector.options[unit_selector.selectedIndex].value;
+	
+	var media_image = settings.getElementsByClassName("media_image")[0];
+  var desc = settings.getElementsByClassName("field-description")[0];
+  var menu_images = settings.getElementsByClassName("mega_menu_images")[0];
+	var icon_selector = settings.getElementsByClassName("icon_selector")[0];
 
-  			var unit_size = selector.options[selector.selectedIndex].value;
-
-  // if the menu item is a top level menu item
+	 // if the menu item is a top level menu item
   			if(-1 != classes.indexOf("menu-item-depth-0") ){
           // show Mega Menu Options
       	menu_images.classList.add("show");
@@ -92,12 +121,11 @@ function menu_selection(ele){
 
   // if the menu item is not top level menu item
 		}else{
-
       // hide Mega Menu Options
       menu_images.classList.remove("show");
 
       // show Unit Size Selector
-      unit_selector.classList.add("show");
+      unit_selector.parentNode.classList.add("show");
 
       // if the unit_size is not unit1 enable Description
       if("unit1" != unit_size ){
@@ -119,14 +147,17 @@ function menu_selection(ele){
 		}
 
  }
-
+	
+	
   // Icon Selection
-function icon_select(ele, menu_item_id){
-  // Display selected icon in Icon Text box
-	document.getElementById(menu_item_id + "_icon").value = ele.attributes["name"].value;
+function icon_select(){
+	var menu_id = this.parentNode.id.substring(this.parentNode.id.lastIndexOf('-') + 1)  ;
+
+	// Display selected icon in Icon Text box
+	document.getElementById(menu_id + "_icon").value = this.attributes["name"].value;
 
   // Grab array of all Icons
-  var list_items = document.getElementsByClassName("icon-option");
+  var list_items = this.parentNode.getElementsByClassName("icon-option");
 
   // Remove 'is_selected' class from all icons
   for(var i = 0; i < list_items.length; i++){
@@ -134,21 +165,21 @@ function icon_select(ele, menu_item_id){
   }
 
   // Add 'is_selected' class to selected icon
-	ele.classList.toggle("is_selected");
+	this.classList.toggle("is_selected"); 
 }
 
-
-  // Unit Size Selection
-  function unit_change(ele){
-    var unit_size = ele.value;
-    var settings = ele.parentNode.parentNode.parentNode.getElementsByClassName("menu-item-settings")[0];
+	// Unit Size Selection
+  function unit_change(){
+    var menu_id = this.id.substring(this.id.lastIndexOf('-') + 1)  ;
+				
+		var unit_size = this.value;
+    var settings = document.getElementById('menu-item-settings-' + menu_id);
 
     var media_image = settings.getElementsByClassName("media_image")[0];
     var desc = settings.getElementsByClassName("field-description")[0];
   	var icon_selector = settings.getElementsByClassName("icon_selector")[0];
-
-
-    // if the unit_size is not unit1 enable Description
+	
+		// if the unit_size is not unit1 enable Description
       if("unit1" != unit_size ){
         // show Description
     		desc.classList.remove('hidden-field');
@@ -171,3 +202,6 @@ function icon_select(ele, menu_item_id){
   		}
   }
 /* End of Navigation  Page */
+	
+	
+});

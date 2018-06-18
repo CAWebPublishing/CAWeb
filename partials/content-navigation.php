@@ -1,6 +1,7 @@
 <?php
-
-	$post_id = $post->ID;
+	global $post;
+	
+$post_id = (is_object($post) ? $post->ID : $post['ID']);
 
 	$menu_option = (  has_nav_menu(get_post_meta($post_id, 'ca_default_navigation_menu',true)) ?
 			get_post_meta($post_id, 'ca_default_navigation_menu',true) :
@@ -73,7 +74,7 @@ function createNavMenu($menu_option , $menuitems, $ver){
 			$childCount = count($childLinks);
 
 			// Get icon if present
-			$icon = ("" != $nav_image_items[$item->ID .'_icon'] ? get_ca_icon_span($nav_image_items[$item->ID .'_icon']) : get_blank_icon_span());
+			$icon = (!empty($nav_image_items[$item->ID .'_icon']) ? get_ca_icon_span($nav_image_items[$item->ID .'_icon']) : get_blank_icon_span());
 
 			// Create Link
 			$nav_item .= sprintf('<li class="nav-item"><a href="%1$s" class="first-level-link">%2$s%3$s</a>',
@@ -91,10 +92,12 @@ function createNavMenu($menu_option , $menuitems, $ver){
 					// if sub-nav has an image
 					$sub_img_class = '';
 					$sub_img_div = '';
-					if("" != $nav_image_items[$item->ID . '_image']){
-						$nav_img = $nav_image_items[$item->ID . '_image'];
-						$nav_img_side = $nav_image_items[$item->ID . '_image_side'];
-						$nav_img_size = $nav_image_items[$item->ID . '_image_size'];
+					
+					
+					if(!empty($nav_image_items[$item->ID . '_image']) && "megadropdown" == $menu_option){
+						$nav_img = (!empty($nav_image_items[$item->ID . '_image']) ? $nav_image_items[$item->ID . '_image'] : '');
+						$nav_img_side = (!empty($nav_image_items[$item->ID . '_image_side']) ? $nav_image_items[$item->ID . '_image_side'] : '');
+						$nav_img_size = (!empty($nav_image_items[$item->ID . '_image_size']) ? $nav_image_items[$item->ID . '_image_size'] : '');
 
 						$sub_img_class = sprintf('%1$s %2$s',
                       ("quarter" == $nav_img_size ? 'three-quarters' : 'half') , ("left" == $nav_img_side ? 'offset-' . $nav_img_size : '') );
@@ -118,11 +121,12 @@ $sub_img_class, createSubNavMenu($childLinks, $ver ), $sub_img_div);
 						</div>
 					</div>', createSubNavMenu($childLinks , $ver )  );
 					}
+				
 				}elseif(4 == $ver){ // If v4 or v4.5 create 1 sub nav list
 					// if sub-nav has an image
 					$sub_img_class = '';
 					$sub_img_div = '';
-					if("" != $nav_image_items[$item->ID . '_image']){
+					if(!empty($nav_image_items[$item->ID . '_image'])){
 						$nav_img = $nav_image_items[$item->ID . '_image'];
 						$nav_img_side = $nav_image_items[$item->ID . '_image_side'];
 						$nav_img_size = $nav_image_items[$item->ID . '_image_size'];
@@ -163,13 +167,13 @@ function createSubNavMenu($childLinks, $ver){
 		// Iterate thru $childLinks create Sub Level (second-level-links)
 		foreach($childLinks as $i => $item){
 			// Get icon if present
-	$icon = ("" != $nav_image_items[$item->ID .'_icon'] ? get_ca_icon_span($nav_image_items[$item->ID .'_icon']) : '');
+	$icon = (!empty($nav_image_items[$item->ID .'_icon']) ? get_ca_icon_span($nav_image_items[$item->ID .'_icon']) : '');
 
 			// Get desc if present
       $desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');
 
 
-	$li_unit = $nav_image_items[$item->ID .'_unit_size'];
+			$li_unit = (!empty($nav_image_items[$item->ID .'_unit_size']) ? $nav_image_items[$item->ID .'_unit_size'] : '');
 
 
       // if version 5
@@ -181,7 +185,7 @@ function createSubNavMenu($childLinks, $ver){
 
 					}else{
             // Get nav media if present
-      			$nav_media= $nav_image_items[$item->ID .'_media_image'];
+						$nav_media= (!empty($nav_image_items[$item->ID .'_media_image']) ? $nav_image_items[$item->ID .'_media_image'] : '');
 
             $sub_nav .= sprintf('<li class="unit3"><div class="nav-media">
 								<div class="media">
@@ -194,8 +198,8 @@ function createSubNavMenu($childLinks, $ver){
 
         // version 4
       }else{
-        $sub_nav .= sprintf('<li><a href="%1$s" class="second-level-link">%2$s%3$s </a>%4$s</li>',
-                      $item->url, $icon,  $item->title,( "unit1" != $li_unit  ? $desc : '' ));
+        $sub_nav .= sprintf('<li class="%1$s"><a href="%2$s" class="second-level-link">%3$s%4$s </a>%5$s</li>',
+                      $li_unit,$item->url, $icon,  $item->title,( "unit1" != $li_unit  ? $desc : '' ));
       }
     }
 	// Closing ul.second-level-nav

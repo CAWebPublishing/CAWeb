@@ -442,12 +442,11 @@ function init() {
 	$this->name = esc_html__( 'FullWidth Banner Slide', 'et_builder' );
 	$this->slug = 'et_pb_ca_fullwidth_banner_item';
 	$this->type = 'child';
-	$this->child_title_var = 'admin_label';
+	$this->child_title_var = 'heading';
 	$this->fullwidth = true;
 	$this->child_title_fallback_var = 'heading';
-
 	$this->whitelisted_fields = array(
-		'admin_label', 'display_banner_info',
+		 		'display_banner_info',
 				'heading','module_class', 'module_id',
 				'button_text','button_link','background_image',
 		);
@@ -468,7 +467,7 @@ function get_fields() {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				affects => array('#et_pb_heading','#et_pb_heading',
+				'affects' => array('#et_pb_heading','#et_pb_heading',
 						'#et_pb_button_text','#et_pb_button_link'),
 		),
 		'heading' => array(
@@ -500,11 +499,6 @@ function get_fields() {
 				'choose_text' => esc_attr__( 'Choose a Background Image', 'et_builder' ),
 				'update_text' => esc_attr__( 'Set As Background', 'et_builder' ),
 				'description' => esc_html__( 'If defined, this image will be used as the background for this module. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
-				),
-				'admin_label' => array(
-				  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-				  'type'        => 'text',
-				  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
 				),
 				'module_id' => array(
 				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
@@ -546,12 +540,9 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-	if("on" == $display_banner_info){
-		$link = sprintf('<a href="%1$s" target="window">
-					<p class="slide-text"><span class="title">%2$s</span><br>%3$s</p></a> ',
-					$button_link,$heading, $button_text);
-
-		}
+	$link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="window">
+<p class="slide-text">%2$s%3$s</p></a> ',$button_link, ("" != $heading ? sprintf('<span class="title">%1$s</span><br />', $heading) : '' ), $button_text) 	: '' );
+	
 	$output = sprintf('<div%3$s class="%4$s%5$s slide" style="background-image: url(%1$s);">%2$s</div> ',
 			$background_image, $link,
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), esc_attr( $class ),
@@ -593,7 +584,7 @@ $this->fullwidth       = true;
 					'label' => esc_html__( 'Title', 'et_builder' ),
 					'type' => 'text',
 					'option_category' => 'basic_option',
-					'description' => esc_html__( 'Define the title for the gallery section.', 'et_builder' ),
+					'description' => esc_html__( 'Define the title for the section.', 'et_builder' ),
 						),
 						'heading_text_color' => array(
 							'label'             => esc_html__( 'Set Heading Text Color', 'et_builder' ),
@@ -736,7 +727,7 @@ $this->fullwidth       = true;
 
 		$section_heading = $this->shortcode_atts['section_heading'];
 
-		$section_content = $this->shortcode_atts['section_content '];
+		$section_content = $this->shortcode_atts['section_content'];
 
 		$show_more_button = $this->shortcode_atts['show_more_button'];
 
@@ -769,7 +760,7 @@ $this->fullwidth       = true;
 		if("on" == $featured_image_button){
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
       $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
-      $img_style = ("on" == $image_pos ? 'style="padding-left:15px;"' : '');
+			$img_style = ("on" == $image_pos ? 'style="padding-left:15px; padding-right: 0;"' : 'style="padding-left: 0;"');
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" %3$s>
 					<img src="%2$s" class="img-responsive"></div>' , $img_class, $section_image, $img_style);
@@ -796,7 +787,7 @@ $this->fullwidth       = true;
 		esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 		$section_bg_color, $body);
 
-		return $output ;
+		return $output;
 	}
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Primary;
@@ -905,15 +896,17 @@ $this->fullwidth = true;
 	}
 }
 new ET_Builder_Module_FullWidth_Section_Footer;
+
 class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_Module {
 function init() {
 	$this->name = esc_html__( 'FullWidth Footer Group', 'et_builder' );
 	$this->slug = 'et_pb_ca_section_fullwidth_footer_group';
 	$this->type = 'child';
 	$this->fullwidth = true;
-	$this->child_title_var = 'admin_title';
+	$this->child_title_var = 'heading';
 	$this->child_title_fallback_var = 'heading';
-	$this->whitelisted_fields = array('heading_color', 'text_color','admin_label',
+
+	$this->whitelisted_fields = array('heading_color', 'text_color',
 	'group_icon', 'group_icon_button', 'group_title',
 	'group_url', 'group_show_more_button', 'display_link_as_button',
 	'group_link1_show',
@@ -1272,12 +1265,7 @@ function get_fields() {
 		'description' => esc_html__( 'Define the URL for the destination.', 'et_builder' ),
 		'depends_show_if' => 'on',
 			),
-			'admin_label' => array(
-				'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-				'type'        => 'text',
-				'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
-			),
-			'module_id' => array(
+				'module_id' => array(
 				'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'configuration',
@@ -1563,12 +1551,12 @@ function init() {
 	$this->slug = 'et_pb_ca_fullwidth_section_carousel_slide';
 $this->fullwidth = true;
 	$this->type = 'child';
-	$this->child_title_var = 'admin_title';
-	$this->child_title_fallback_var = 'heading';
+	$this->child_title_var = 'slide_title';
+	$this->child_title_fallback_var = 'slide_title';
 	$this->whitelisted_fields = array(
 		'slide_image', 'slide_title',
 		 'slide_desc',	'slide_url',
-		'slide_show_more_button','module_class', 'module_id', 'admin_label',
+		'slide_show_more_button','module_class', 'module_id',
 		);
 	$this->fields_defaults = array(
 		'slide_url' => array( 'http://','add_default_setting'),
@@ -1619,11 +1607,6 @@ function get_fields(){
 			'option_category' => 'basic_option',
 			'description' => esc_html__( 'Define the title for the slide', 'et_builder' ),
 			),
-			'admin_label' => array(
-				'label'       => esc_html__( 'Admin Label', 'et_builder' ),
-				'type'        => 'text',
-				'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
-			),
 			'module_id' => array(
 				'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 				'type'            => 'text',
@@ -1672,13 +1655,13 @@ $display_button = ("on" == $slide_show_more_button ?
 sprintf('<button class="btn btn-primary">
 			<a href="%1$s">More Information</a></button>', $slide_url) : '');
 
-$output = sprintf('<div%1$s class="$2$s%3$s item backdrop" %4$s>
+$output = sprintf('<div%1$s class="%2$s%3$s item backdrop" %4$s>
 <div class="content-container">
 			<div class="content">
-<h2>%5$s</h2>%6$s%7$s</div></div></div>',
+%5$s%6$s%7$s</div></div></div>',
 ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 esc_attr( $class ),( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-$slide_image,$slide_title, $slide_desc, $display_button );
+		$slide_image,("" != $slide_title ? sprintf('<h2>%1$s</h2>', $slide_title) : ''), $slide_desc, $display_button );
 
    return $body;
 }

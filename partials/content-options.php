@@ -83,11 +83,11 @@
 			</select>
 		</td>
 	</tr>
-  	<tr>
+  	<!--tr>
 		<th scope="row"><div class="tooltip">Show Breadcrumbs
 			<span class="tooltiptext">Display a secondary navigation scheme, from the current page back to the Front Page.</span></div></th>
     <td><input type="checkbox" name="ca_breadcrumbs_enabled" id="ca_breadcrumbs_enabled" <?= ( get_option('ca_breadcrumbs_enabled') == true ? 'checked="checked"' : '' ) ?> />
-    </td></tr>
+    </td></tr-->
 
   <tr class="extra <?= (5.0 <= get_option('ca_site_version') ? 'show' : ''); ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
@@ -184,6 +184,11 @@
 <span class="tooltiptext">Enter your unique Google Analytics ID, if you don't have one see an Administrator.</span></div></th>
 	<td>
 	<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" size="60" value="<?php echo get_option('ca_google_analytic_id'); ?>" >
+	</td></tr>
+		<tr><th scope="row"><div class="tooltip">Meta ID
+<span class="tooltiptext">Enter your unique Google Meta ID, if you don't have one see an Administrator.</span></div></th>
+	<td>
+	<input type="text" name="ca_google_meta_id" id="ca_google_meta_id" size="60" value="<?php echo get_option('ca_google_meta_id'); ?>" >
 	</td></tr>
 <tr>
 		<th scope="row"><div class="tooltip">Enable Google Translate

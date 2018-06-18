@@ -21,9 +21,11 @@ background-color: lightblue;
 
 ul.et_font_icon {
 	background-color: white !important;
+	max-height: 300px;
 }
 .et_font_icon li {
-    background: transparent;
+    background: transparent !important;
+		font-size: 30px;
 }
 .et-pb-option-container .description {
     color: black !important;
@@ -43,27 +45,27 @@ ul.et_font_icon {
  #general.show, #social-share.show, #google_translate_options.show, div.show   {
     display: inline;
 }
-  
+
 .option{
 	text-decoration: underline;
 }
   option.show{
     display:block;
   }
-  
+
   tr.show{
     display:table-row;
   }
- 
+
 /* CAWeb Navigation Page Styles */
  .mega_menu_images, .media_image, .unit_selector, .icon_selector{
-    display:none;   
+    display:none;
   }
-  
+
    .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
-    display:block;   
+    display:block;
   }
- 
+
 .menu-item-edit-inactive .menu-item-settings {
     display: none !important;
 }
@@ -85,12 +87,12 @@ h2.nav-tab-wrapper{
   	float: left;
     font-size: 30px;
     padding: 8px;
-  } 
+  }
 ul.menu-icon-list li:hover{
 	background-color: cornflowerblue;
 	cursor: pointer;
 }
-  
+
  ul.menu-icon-list li.is_selected{
     background-color: cornflowerblue;
 }

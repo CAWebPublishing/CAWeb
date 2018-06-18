@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Template Name: Search Results Page
 */
@@ -8,20 +8,29 @@ get_header(); ?>
 <?php get_template_part('partials/content', 'header') ?>
 
 <div id="main-content" class="main-content">
+  <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 
-<ol class=""></ol>
+      <div class="section section-default collapsed p-t-lg">
+    <div class="ca_wp_container">
+        <div class="agency-form">
+        <h1>Search Results</h1>
+       <?php
+require_once (get_stylesheet_directory() ."/ssi/search.html");
+      ?>
+      </div>
+    </div>
+ </div>
+
+  <?php if ( ! ca_version_check(4) ) : ?>
 
 	<div class="ca_wp_container">
 
-	
+
+<?php endif; ?>
 
 				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
 
 					<div class="entry-content">
-
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
-
-<h1>Search Results</h1>
 
 <div id='cse' style='width: 100%;'>Loading</div>
 <!-- <script src='//www.google.com/jsapi' type='text/javascript'></script> -->
@@ -33,7 +42,7 @@ google.setOnLoadCallback(function() {
 		customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
 		customSearchControl.setLinkTarget(google.search.Search.LINK_TARGET_SELF); // use same tab instead of opening a new tab when clicking a link
 		var options = new google.search.DrawOptions();
-		options.enableSearchResultsOnly();
+  	options.enableSearchResultsOnly();
 		options.setAutoComplete(true);
 		customSearchControl.draw('cse', options);
 		function parseParamsFromUrl() {
@@ -64,11 +73,23 @@ google.setOnLoadCallback(function() {
 
 				</article> <!-- .et_pb_post -->
 
-		
-	</div> <!-- .container -->
+
+<?php if ( ! ca_version_check(4) ) : ?>
+
+  </div>
+
+
+<?php endif; ?>
 
 </div> <!-- #main-content -->
 
-
+<style>
+  button.close.close-search {
+    visibility: hidden;
+}
+  .gssb_c {
+    top: 340px !important;
+}
+</style>
 
 <?php get_footer(); ?>
