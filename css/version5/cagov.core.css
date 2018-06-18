@@ -6423,6 +6423,7 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
 }
 .gsc-control-searchbox-only table.gsc-search-box td.gsc-input {
   padding-right: 0;
+	width: 100%;
 }
 .gsc-control-searchbox-only input.gsc-input {
   background-color: rgba(255, 255, 255, 0.8);
@@ -6431,19 +6432,33 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
   transition: border 0.4s;
   outline: none;
   font-size: 1.1rem;
-  height: 55px;
-  padding: 14px;
+  height: 55px !important;
+	padding: 14px !important; 
   opacity: 0.8 !important;
   width: 100%;
 }
-.gsc-control-searchbox-only input.gsc-search-button {
-  opacity: 0;
-  width: 55px;
-  height: 51px;
+.gsc-control-searchbox-only input.gsc-search-button,
+.gsc-control-searchbox-only button.gsc-search-button {
+  padding: 5px 5px 0 0;
+	background-image: none;
+	background-color: transparent;
+	border: 0;
   position: absolute;
   right: 2px;
   top: 2px;
   z-index: 55;
+}
+.search-container.active .gsc-control-searchbox-only input.gsc-search-button, .search-container.active .gsc-control-searchbox-only button.gsc-search-button{
+	padding-top: 15px;
+}
+.cse .gsc-search-button-v2:focus, .gsc-search-button-v2:focus{
+	box-shadow: none !important;
+}
+.gsc-control-searchbox-only button.gsc-search-button.gsc-search-button-v2 svg{
+	fill: #666;
+	height: 40px;
+	width: 40px;
+	
 }
 .gsc-control-searchbox-only td.gsc-clear-button {
   width: 1px !important;
@@ -6452,6 +6467,7 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
   padding-right: 0 !important;
   padding-left: 0 !important;
   position: relative;
+	display: block;
 }
 .gsc-control-searchbox-only td.gsc-search-button {
   width: 0px !important;
