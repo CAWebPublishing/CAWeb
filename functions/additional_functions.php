@@ -217,19 +217,19 @@ if( !function_exists('caweb_get_shortcode_from_content') ){
           preg_match(sprintf('/"\][\s\S]*\[\/%1$s/', $tag), $tmp[0], $obj['content']);
           $hold = substr($tmp[0], 1, strpos($tmp[0], $obj['content'][0]) );
            // Get Attributes from Shortcode
-            preg_match_all('/\w*="[\w\s\d$:(),@?=+%\/\.\[\]\{\}-]*/', $hold, $attr);
+            preg_match_all('/\w*="[\w\s\d$:(),@?\'=+%!#\/\.\[\]\{\}-]*/', $hold, $attr);
             foreach($attr[0] as $a){
                 preg_match('/\w*/', $a, $key);
-              $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
+              $obj[$key[0]] = urldecode( substr($a, strlen($key[0]) + 2 ) );
             }
 
           $obj['content'] = strip_tags( substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($tag) - 4 ) );
         }else{
            // Get Attributes from Shortcode
-            preg_match_all('/\w*="[\w\s\d$:(),@?=%\/\.\[\]\{\}-]*/', $tmp[0], $attr);
+            preg_match_all('/\w*="[\w\s\d$:(),@?\'=+%!#\/\.\[\]\{\}-]*/', $tmp[0], $attr);
             foreach($attr[0] as $a){
                 preg_match('/\w*/', $a, $key);
-              $obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
+              $obj[$key[0]] = urldecode(substr($a, strlen($key[0]) + 2 ) );
             }
 
           	$obj['content'] = '';
@@ -274,6 +274,61 @@ function get_ca_icon_list(){
 	return $icons;
 }
 
+
+/* Merger of Divi and CAWeb Icon Font Library */
+if ( ! function_exists( 'et_pb_get_font_icon_symbols' ) ) :
+function et_pb_get_font_icon_symbols($values = true) {
+
+	if($values)
+		return array_values( et_pb_get_ca_font_icon_symbols() );
+
+	return et_pb_get_ca_font_icon_symbols();
+}
+endif;
+
+function et_pb_get_ca_font_icon_symbols(){
+	$f = CAWebAbsPath . '/fonts/CaGov.svg';
+
+	$t = simplexml_load_file ($f);
+	$f = (array) $t->defs->font;
+	$f = $f['glyph'];
+	$tmp = array();
+
+	foreach($f as $i=>$icon){
+		if( isset($icon['glyph-name']) )
+			$tmp[ (string) $icon['glyph-name']] = (string) $icon['unicode'];
+	}
+
+	return $tmp;
+}
+
+if ( ! function_exists( 'et_pb_process_font_icon' ) ) :
+function et_pb_process_font_icon( $font_icon, $symbols_function = 'default', $key = false ) {
+	// the exact font icon value is saved
+	if ( 1 !== preg_match( "/^%%/", trim( $font_icon ) ) ) {
+		return $font_icon;
+	}
+	// the font icon value is saved in the following format: %%index_number%%
+	$icon_index   = (int) str_replace( '%', '', $font_icon );
+	$icon_symbols = 'default' === $symbols_function ? et_pb_get_font_icon_symbols() : call_user_func( $symbols_function );
+	$font_icon    = isset( $icon_symbols[ $icon_index ] ) ? $icon_symbols[ $icon_index ] : '';
+
+	if ( !$key )
+		return $font_icon;
+
+	return array_keys(et_pb_get_font_icon_symbols(false) )[$icon_index];
+}
+
+endif;
+
+function get_icon_span($font, $style = array()){
+	if( empty($font) )
+		return get_blank_icon_span();
+
+
+	return sprintf('<span class="ca-gov-icon-%1$s"></span>',
+													esc_attr( et_pb_process_font_icon( $font, 'default', true ) ) );
+}
 
 function get_blank_icon_span(){
   return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';

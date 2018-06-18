@@ -185,6 +185,8 @@ function ca_theme_enqueue_style() {
 
 	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' );
 
+	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
+
 	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri ) );
 	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) );
 

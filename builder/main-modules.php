@@ -80,7 +80,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 				'type'            => 'text',
 				 'option_category'     => 'configuration',
 				'class'               => array( 'et-pb-font-icon' ),
-  			'renderer'            => 'et_pb_get_ca_font_icon_list',
+  			'renderer'            => 'et_pb_get_font_icon_list',
 			'renderer_with_field' => true,
 				'depends_show_if' => 'on',
 				'description'     => esc_html__( 'Here you can select a Heading Icon','et_builder' ),
@@ -180,7 +180,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 
 		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
 
-		$display_icon = ("on" == $use_icon ? get_ca_icon_span($icon) : '');
+		$display_icon = ("on" == $use_icon ? get_icon_span( $icon ) : '');
 
 		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
 			$max_width_values = array(
@@ -211,7 +211,7 @@ class ET_Builder_Module_Panel extends ET_Builder_Module {
 		$display_options = ($show_button == "on" ? sprintf('<div class="options" %2$s>
 		<a href="%1$s" class="btn btn-default">Read More</a></div>',$button_link,  $option_padding ) : '') ;
 
-		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
+		$display_title = ("" != $title ? sprintf('<div class="panel-heading" ><%1$s%2$s>%3$s %4$s%5$s</%1$s></div>',
 				$headingSize, ("" != $heading_style ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
 		$output = sprintf('<div%5$s class="%6$s%7$s panel panel-%1$s" %2$s>
@@ -637,7 +637,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category'     => 'configuration',
 				'class'               => array( 'et-pb-font-icon' ),
-				'renderer'            => 'et_pb_get_ca_font_icon_list',
+				'renderer'            => 'et_pb_get_font_icon_list',
 			'renderer_with_field' => true,
 				'description'     => esc_html__( 'Select an icon.','et_builder' ),
 				'depends_show_if' => 'on',
@@ -754,7 +754,7 @@ class ET_Builder_CA_Location extends ET_Builder_Module {
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 
 		}
-		$display_icon = ("on" == $show_icon ? get_ca_icon_span($icon) : '');
+		$display_icon = ("on" == $show_icon ? get_icon_span($icon) : '');
 
 		$address = sprintf('%1$s, %2$s, %3$s, %4$s', $addr, $city, $state, $zip);
 
@@ -1251,7 +1251,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 			'type' => 'text',
   		'option_category'     => 'configuration',
 			'class'    => array( 'et-pb-font-icon' ),
-				'renderer'            => 'et_pb_get_ca_font_icon_list',
+				'renderer'            => 'et_pb_get_font_icon_list',
 			'renderer_with_field' => true,
 			'description' => esc_html__( 'Define the icon for the group section.', 'et_builder' ),
 			'depends_show_if' => 'on',
@@ -1654,7 +1654,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_Module {
 		$text_color = ("" != $text_color ?
 		sprintf(' style="color: %1$s" ', $text_color) : '');
 
-		$icon = ("on" == $group_icon_button ? get_ca_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
+		$icon = ("on" == $group_icon_button ? get_icon_span($group_icon, sprintf('color: %1$s;' , $text_color)) : '');
 
 		$link_as_button = ("on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '');
 
@@ -2197,7 +2197,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
-		
+
 		switch( $orderby ) {
 			case 'date_desc':
 					$orderby = 'date';
@@ -2269,7 +2269,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 			$output = '';
 			global $faq_accordion_count;
 		//global $faq_count;
-			
+
 			foreach ($all_posts as $a=>$p){
 				if( $posts_number !== -1 && 0 == $posts_number )
 				  break;
@@ -2495,14 +2495,14 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 
 						// FAQs List
 						case "faqs-list":
-							
+
 							if ( "faqs" == $post_content_handler->post_type_layout ){
 									if("toggle" == $faq_style)
 											$faqs .= sprintf('<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $title, $post_content_handler->content );
 
 									if("accordion" == $faq_style){
 										$open_faq = empty($faq_accordion_count) || 0 === $faq_accordion_count;
-										
+
 										$faqs .= sprintf('<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s">
 																	<div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
 																					$posts_number, $title, (!empty($faq_accordion_count) ? $faq_accordion_count : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
@@ -2513,7 +2513,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 										//$faq_count++;
 									}
 
-								
+
 								$posts_number--;
 							}
 							break;
@@ -2548,12 +2548,12 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 			}
 
 		global $faq_list_count;
-		
+
 			$class = sprintf('et_pb_module et_pb_ca_post_list panel-group et_pb_accordion et_pb_accordion_%1$s %2$s', (!empty($faq_list_count) ? $faq_list_count : 0), (!empty($style) ? $style : ''));
-		
+
 		$class = esc_attr( $class );
 		$class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
-		
+
 			if ( "faqs-list" == $style){
 
 				if("toggle" == $faq_style)
@@ -2564,8 +2564,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_Module {
 					$faq_list_count++;
 				}
 			}
-		
-	
+
+
 			$output = sprintf('<div class="%1$s">%2$s%3$s</div> <!-- .et_pb_ca_post_list -->', $class,( !empty($list_title) ? $list_title : '' ), $output );
 
 			$faq_accordion_count = 0;
@@ -2582,10 +2582,10 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 		$this->slug = 'et_pb_profile_banner';
 
 		$this->whitelisted_fields = array(
-			'name',
+			'name', 'max_width', 'max_width_tablet', 'max_width_phone',
 			'job_title', 'admin_label',
-			'url', 'module_class', 'module_id',
-			'portrait_url', 'profile_link',
+			'url', 'disabled_on', 'module_class', 'module_id',
+			'portrait_url', 'profile_link', 'round_image',
 		);
 
 		$this->fields_defaults = array(
@@ -2630,6 +2630,28 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
 				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display. (http:// must be included)', 'et_builder' ),
 			),
+			'round_image' => array(
+				'label'              => esc_html__( 'Round Image', 'et_builder' ),
+				'type'               => 'yes_no_button',
+				'option_category'    => 'configuration',
+				'options'        => array(
+				  'off' => esc_html__( 'No', 'et_builder' ),
+				  'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+			  'description' => esc_html__('Switch to yes if you want round images in the profile banner.'),
+			),
+			'disabled_on' => array(
+			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
+			  'type'            => 'multiple_checkboxes',
+			  'options'         => array(
+			    'phone'   => esc_html__( 'Phone', 'et_builder' ),
+			    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+			    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+			  ),
+			  'additional_att'  => 'disable_on',
+			  'option_category' => 'configuration',
+			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+			),
 				'module_id' => array(
 				  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
 				  'type'            => 'text',
@@ -2667,19 +2689,49 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 
 		$portrait_url           = $this->shortcode_atts['portrait_url'];
 
+		$round                = $this->shortcode_atts['round_image'];
+
 		$url                    = $this->shortcode_atts['url'];
+
+		$max_width            = $this->shortcode_atts['max_width'];
+
+		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
+
+		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
+
+		$class = "et_pb_profile_banner et_pb_module";
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
+		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
+			$max_width_values = array(
+				'desktop' => $max_width,
+				'tablet'  => $max_width_tablet,
+				'phone'   => $max_width_phone,
+			);
+
+			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
+
+		}
+
 		$banner_style = 'style="background:url('.get_stylesheet_directory_uri().'/images/banner/banner-blank.png' . ') no-repeat; background-size: 100% 100%;"';
 
-		$output = sprintf('<div id="profile-banner-wrapper"><a href="%5$s"><div class="profile-banner" %1$s>
-					<img src="%2$s" style="width: 90px; min-height: 90px;float: right;"/>
-					<div class="banner-subtitle">%3$s</div>
-					<div class="banner-title">%4$s</div>
-					<div class="banner-link"><a href="%5$s">%6$s</a></div>
-					</div></a></div>',
-					$banner_style, $portrait_url, $job_title, $name, $url, $profile_link );
+		$image = ('on' !== $round ? 
+						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :
+						sprintf('<div class="profile-banner-img-wrapper">
+							<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>
+						</div>', $portrait_url)
+				  );
+
+		$output = sprintf('<div id="profile-banner-wrapper" class="%8$s%9$s"><a href="%5$s"><div class="profile-banner%7$s" %1$s>
+											%2$s
+											<div class="banner-subtitle">%3$s</div>
+											<div class="banner-title">%4$s</div>
+											<div class="banner-link"><a href="%5$s">%6$s</a>
+						          </div></div></a></div>',
+					($round == 'off' ? $banner_style : ''),  $image, $job_title, $name, $url, 
+					$profile_link, ('on' !== $round ? '' : ' round-image'),  esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 
 		return $output;
 

@@ -18,7 +18,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 			'job_apply_to_zip', 'job_questions_email', 'show_job_questions', 'job_questions_name', 'job_questions_phone', 'job_qualifications',
 			'job_skills', 'show_event_presenter', 'event_presenter_image', 'event_presenter_name', 'event_presenter_bio',
 			'event_start_date', 'event_start_date_format', 'event_start_date_custom_format', 'event_end_date', 'event_end_date_format', 'event_end_date_custom_format',
-      'show_event_address', 'event_address', 'event_city',
+      'show_event_address', 'event_address', 'event_city', 'event_organizer', 
 			'event_state', 'event_zip', 'event_cost', 'event_registration_type',  'exam_id', 'exam_class', 'exam_status',
 			'exam_published_date', 'exam_published_date_format', 'exam_published_date_custom_format', 'exam_final_filing_date_chooser','exam_final_filing_date','exam_final_filing_date_picker',
       'exam_final_filing_date_format', 'exam_final_filing_date_custom_format', 'exam_type', 'exam_url','exam_address', 'exam_city',  'exam_state', 'exam_zip',
@@ -77,7 +77,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 				'description'       => esc_html__( 'This is the layout style','et_builder' ),
 				'affects'           => array('news_author', 'news_publish_date','news_publish_date_format', 'news_city', 'profile_name_prefix', 'profile_name',
 											'profile_title', 'profile_image_align',	'profile_career','profile_additional_fields',
-											'show_about_agency','job_title', 'job_hours',
+											'show_about_agency','job_title', 'job_hours', 'event_organizer',
 											'show_job_salary', 'job_posted_date','job_posted_date_format', 'job_position_number', 'job_rpa_number', 'job_ds_url',
 											'job_final_filing_date_chooser', 'show_job_apply_to','show_job_questions',
 											 'show_event_presenter', 'event_start_date', 'event_end_date', 'event_start_date_format', 'event_end_date_format',
@@ -518,6 +518,13 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		);
 
 		$event_fields = array(
+			'event_organizer' => array(
+				'label'           => esc_html__( 'Organizer','et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'event',
+				'description'     => esc_html__( 'Enter the name of the organizer.','et_builder' ),
+			),
 			'show_event_presenter' => array(
 				'label'             => esc_html__( 'Presenter', 'et_builder' ),
 				'type'              => 'yes_no_button',
@@ -1018,6 +1025,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 		$show_course_map = $this->shortcode_atts['show_course_map'];
 
 		// Event Attributes
+		$event_organizer = $this->shortcode_atts['event_organizer'];
+		
 		$show_event_presenter = $this->shortcode_atts['show_event_presenter'];
 
 		$event_presenter_name = $this->shortcode_atts['event_presenter_name'];
@@ -1280,7 +1289,9 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
       	$event_end_date = gmdate(  $event_end_date_custom_format, strtotime( $event_end_date ) );
 
-				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s - %2$s<br />%3$s</p>', $event_start_date,  $event_end_date,  $location);
+				$organizer = sprintf('%1$s<p class="date-time">%2$s - %3$s<br />%4$s</p>', 
+														(!empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : ''), 
+														$event_start_date,  $event_end_date,  $location);
 
       	$event_registration_type =  (!empty($event_registration_type)  ?
                                       sprintf('Registration Type: %1$s', $event_registration_type) : '');
@@ -1516,4 +1527,211 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 }
 new ET_Builder_Module_CAWeb_Post_Handler;
+
+
+
+class ET_Builder_Module_GitHub extends ET_Builder_Module {
+	function init() {
+		$this->name = esc_html__( 'GitHub', 'et_builder' );
+
+		$this->slug = 'et_pb_ca_github';
+		$this->fb_support = true;
+
+		$this->whitelisted_fields = array(
+				'max_width', 'max_width_tablet', 'max_width_phone',
+				'module_class', 'module_id', 'admin_label', 'title',
+			'username', 'client_id', 'client_secret', 'definitions',
+			'per_page', 'disabled_on'
+		);
+
+		$this->fields_defaults = array(
+					'per_page' => array( 100,'add_default_setting' ),
+		);
+
+		$this->main_css_element = '%%order_class%%';
+
+		// Custom handler: Output JS for editor preview in page footer.
+		//add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
+	}
+	function get_fields() {
+		$fields = array(
+			'title' => array(
+			  'label'       => esc_html__( 'Title', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
+			),
+			'username' => array(
+			  'label'       => esc_html__( 'Username', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
+			),
+			'client_id' => array(
+			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
+			),
+			'client_secret' => array(
+			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
+			),
+			'per_page' => array(
+			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
+			),
+			'definitions' => array(
+			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
+			  'type'            => 'multiple_checkboxes',
+			  'options'         => array(
+			    'name'   => esc_html__( 'Name', 'et_builder' ),
+			    'url'  => esc_html__( 'URL', 'et_builder' ),
+			    'desc' => esc_html__( 'Description', 'et_builder' ),
+			    'fork' => esc_html__( 'Fork', 'et_builder' ),
+			    'created_at'  => esc_html__( 'Creation Date', 'et_builder' ),
+			    'updated_at' => esc_html__( 'Updated Date', 'et_builder' ),
+			    'language' => esc_html__( 'Language', 'et_builder' ),
+			  ),
+			),
+			'disabled_on' => array(
+			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
+			  'type'            => 'multiple_checkboxes',
+			  'options'         => array(
+			    'phone'   => esc_html__( 'Phone', 'et_builder' ),
+			    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+			    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+			  ),
+			  'additional_att'  => 'disable_on',
+			  'option_category' => 'configuration',
+			  'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+			),
+			'admin_label' => array(
+			  'label'       => esc_html__( 'Admin Label', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This will change the label of the module in the builder for easy identification.', 'et_builder' ),
+			),
+			'module_id' => array(
+			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+			'module_class' => array(
+			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			),
+		);
+
+		return $fields;
+
+	}
+	function shortcode_callback( $atts, $content = null, $function_name ) {
+		$title            = $this->shortcode_atts['title'];
+
+		$username            = $this->shortcode_atts['username'];
+
+		$client_id         = $this->shortcode_atts['client_id'];
+
+		$client_secret            = $this->shortcode_atts['client_secret'];
+
+		$definitions            = $this->shortcode_atts['definitions'];
+
+		$per_page            = $this->shortcode_atts['per_page'];
+
+		$module_id            = $this->shortcode_atts['module_id'];
+
+		$module_class         = $this->shortcode_atts['module_class'];
+
+		$max_width            = $this->shortcode_atts['max_width'];
+
+		$max_width_tablet     = $this->shortcode_atts['max_width_tablet'];
+
+		$max_width_phone      = $this->shortcode_atts['max_width_phone'];
+
+		$definitions = explode("|", $definitions);
+
+		if ( '' !== $max_width_tablet || '' !== $max_width_phone || '' !== $max_width ) {
+			$max_width_values = array(
+				'desktop' => $max_width,
+				'tablet'  => $max_width_tablet,
+				'phone'   => $max_width_phone,
+			);
+
+			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
+
+		}
+		
+		$class = "et_pb_ca_github et_pb_module ";
+
+		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
+
+		$this->shortcode_content = et_builder_replace_code_content_entities( $this->shortcode_content );
+
+		$output = '';
+
+		if( !empty($username)  && !empty($client_id) && !empty($client_secret) ){
+
+			$url = sprintf('https://api.github.com/users/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s',
+										$username, $per_page, $client_id ,$client_secret );
+
+			$repos = json_decode( wp_remote_retrieve_body( wp_remote_get($url ) ) ) ;
+
+
+				foreach($repos as $r => $repo){
+					if("on" == $definitions[0] && "on" !== $definitions[1])
+					 	$name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
+
+					if("on" == $definitions[0] && "on" == $definitions[1])
+					 	$name = sprintf('<strong>Project Title: </strong><a href="%1$s">%2$s</a><br />',$repo->html_url, $repo->name);
+
+					if("on" == $definitions[2] )
+						$desc = sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description);
+
+					if("on" == $definitions[3] )
+						$fork = sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') );
+
+					if("on" == $definitions[4] )
+						$created_at = sprintf('<strong>Created on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->created_at) ) );
+
+					if("on" == $definitions[5] )
+						$updated_at = sprintf('<strong>Updated on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->updated_at ) )  );
+
+					if("on" == $definitions[6] )
+						$language = sprintf('<strong>Language: </strong>%1$s<br />', (!empty( $repo->language ) ? $repo->language : 'English' ) );
+ 
+					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
+														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
+														(!empty($fork) ? $fork : '') , (!empty($created_at) ? $created_at : ''),
+														(!empty($updated_at) ? $updated_at : ''), (!empty($language) ? $language : ''));
+
+				}
+
+			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
+										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output	);
+		}
+
+
+		return $output;
+
+	}
+
+	// This is a non-standard function. It outputs JS code to render the
+		// module preview in the new Divi 3 frontend editor.
+		// Return value of the JS function must be full HTML code to display.
+		function js_frontend_preview() {
+			?>
+			<script>
+						
+			</script>
+			<?php
+		}
+}
+new ET_Builder_Module_GitHub;
+
 ?>

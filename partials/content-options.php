@@ -81,19 +81,19 @@ settings_fields('ca_site_options');
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
 				<option value="oceanside"
-	<?= ( get_option('ca_site_color_scheme') == 'oceanside' ? 'selected="selected"' : '' ) ?>>Oceanside</option>
+				<?= ( get_option('ca_site_color_scheme') == 'oceanside' ? 'selected="selected"' : '' ) ?>>Oceanside</option>
 
-			<option value="orangecounty" class="base <?= (5.0 > get_option('ca_site_version') ? 'show' : ''); ?>"
-	<?= ( get_option('ca_site_color_scheme') == 'orangecounty' ? 'selected="selected"' : '' ) ?>>Orange County</option>
+			<option value="orangecounty" 
+			<?= ( get_option('ca_site_color_scheme') == 'orangecounty' ? 'selected="selected"' : '' ) ?>>Orange County</option>
 
-<option value="pasorobles" class="base <?= (5.0 > get_option('ca_site_version') ? 'show' : ''); ?>"
-	<?= ( get_option('ca_site_color_scheme') == 'pasorobles' ? 'selected="selected"' : '' ) ?>>Paso Robles</option>
-
-<option value="santabarbara" class="base <?= (5.0 > get_option('ca_site_version') ? 'show' : ''); ?>"
-	<?= ( get_option('ca_site_color_scheme') == 'santabarbara' ? 'selected="selected"' : '' ) ?>>Santa Barbara</option>
-
-<option value="sierra" class="base <?= (5.0 > get_option('ca_site_version') ? 'show' : ''); ?>"
-	<?= ( get_option('ca_site_color_scheme') == 'sierra' ? 'selected="selected"' : '' ) ?>>Sierra</option>
+		<option value="pasorobles" 
+			<?= ( get_option('ca_site_color_scheme') == 'pasorobles' ? 'selected="selected"' : '' ) ?>>Paso Robles</option>
+		
+		<option value="santabarbara" 
+			<?= ( get_option('ca_site_color_scheme') == 'santabarbara' ? 'selected="selected"' : '' ) ?>>Santa Barbara</option>
+		
+		<option value="sierra"
+			<?= ( get_option('ca_site_color_scheme') == 'sierra' ? 'selected="selected"' : '' ) ?>>Sierra</option>
 
 			</select>
 		</td>

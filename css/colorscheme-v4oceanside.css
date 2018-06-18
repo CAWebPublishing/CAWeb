@@ -680,3 +680,98 @@ figure {
     background: #036;
     color: #fff
 }
+/* -----------------------------------------
+   CARDS New Content Module added in Version 5
+   /source/less/colorscheme/cs-cards.less
+----------------------------------------- */
+.card{
+	background-color: #effaf6;
+}
+.card-default {
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
+  color: #000000;
+}
+.card-default .card-header {
+  border-bottom: 1px solid #d6d6d6;
+  background-color: #f2f2f2;
+}
+.card-default .card-footer {
+  border-top: 1px solid #d6d6d6;
+  background-color: #f2f2f2;
+}
+.card-understated {
+  background-color: #fff;
+  border: 1px solid #cde9f2;
+  color: #000000;
+}
+.card-understated .card-header {
+	background-color: #cde9f2;
+  border-color: #cde9f2;
+  border-bottom: 1px solid #cde9f2;
+}
+.card-understated .card-footer {
+  border-top: 1px solid #cde9f2;
+  background-color: #cde9f2;
+  border-color: #ccc;
+}
+.card-overstated {
+  background-color: #fff;
+	border: 1px solid #029ebf;
+  color: #000000;
+}
+.card-overstated a:not(.btn) {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.card-overstated a:not(.btn):hover,
+.card-overstated a:not(.btn):focus {
+  color: #FDB81E;
+  text-decoration: underline;
+}
+.card-overstated a:not(.btn):focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.card-overstated .card-header {
+  border-bottom: 1px solid #029ebf;
+  background-color: #02aace;
+}
+.card-overstated .card-footer {
+  border-top: 1px solid #029ebf;
+  background-color: #02aace;
+}
+.card-standout {
+  background-color: #fff;
+  border: 1px solid #21262d;
+  color: initial;
+}
+.card-standout .card-title,
+.card-standout .card-footer{
+	color: #fff;
+}
+.card-standout a:not(.btn) {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.card-standout a:not(.btn):hover,
+.card-standout a:not(.btn):focus {
+  color: #FDB81E;
+  text-decoration: underline;
+}
+.card-standout a:not(.btn):focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.card-standout .card-header {
+  border-bottom: 1px solid #21262d;
+  background-color: #272e36;
+}
+.card-standout .card-footer {
+  border-top: 1px solid #21262d;
+  background-color: #272e36;
+}

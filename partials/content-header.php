@@ -20,19 +20,19 @@ $module = caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner');
 if(  4 == $ver  && !empty($module) ){
 			$slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
 			$carousel = '';
-	 
+
       foreach($slides as $i => $slide){
 				$heading = '';
 				$info = '';
 				if("on" == $slide->display_banner_info){
 					$link = (!empty( $slide->button_link ) ?  $slide->button_link : '#');
-					
+
 					if(!isset($slide->display_heading) || "on" == $slide->display_heading )
 						$heading = sprintf('<span class="title">%1$s<br /></span>', $slide->heading);
-					
-					
+
+
 					$info = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, $slide->button_text);
-					
+
 				}
 				$carousel .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ',
 													$slide->background_image, $info);
@@ -83,30 +83,35 @@ printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
 <?php
 $search = ( ca_version_check(5.0, $post_id) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': '');
 
-printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</div>', 
+printf('<div id="head-search" class="search-container %1$s hidden-print">%2$s</div>',
 			$search, ("page-templates/searchpage.php" != get_page_template_slug( $post_id) ?
 								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp') ) : '') );
 
 ?>
-					
-          <!-- Include Navigation -->
 
-	          <?php get_template_part('partials/content', 'navigation');?>
+          <!-- Include Navigation -->
+					<?php
+							wp_nav_menu( array('theme_location' => 'header-menu',
+																'style' => (true == get_option('ca_menu_selector_enabled') ?
+																						get_post_meta($post_id, 'ca_default_navigation_menu',true) :
+																						get_option('ca_default_navigation_menu') ),
+																'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
+																'version' => $ver,
+																'search_link' => !is_caweb_intranet_site(),
+																'intranet' => is_caweb_intranet_site() && !current_user_can('edit_pages')  && is_user_logged_in(),
+																)
+												);
+
+					?>
 
         </div>
 
 <?php  if("on" == get_option('ca_google_trans_enabled') &&  (ca_version_check(4, $post_id) || ca_version_check(4.5, $post_id)  ) ): ?>
 
-<div id="google_translate_element" class="hidden-print">
-     <div class="skiptranslate goog-te-gadget" dir="ltr">
-         <div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;">
-
-                     </div>
-                          </div>
-                              </div>
+<div id="google_translate_element" class="hidden-print"></div>
 
  <script>  function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false, includedLanguages: 'en,ar,es,fr,ru,zh-CN,de,ja,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
 
 </script>
