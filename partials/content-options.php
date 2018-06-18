@@ -15,10 +15,13 @@
 </div>
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST">
 <?php
-if( isset($_POST['caweb_options_submit']) ){
-  save_caweb_options($_POST);
-}
+	if( isset($_POST['caweb_options_submit']) )
+	  save_caweb_options($_POST);
 
+
+	$ver = get_option('ca_site_version', 5);
+	$version5only = 5 <= $ver  ? '' : 'hidden';
+	$version4only = 4 == $ver ? '' : 'hidden';
 ?>
 
  <input type="hidden" id="tab_selected" name="tab_selected" value="<?php echo (isset($_POST['tab_selected']) ? $_POST['tab_selected']: '' ); ?>" />
@@ -34,13 +37,13 @@ if( isset($_POST['caweb_options_submit']) ){
 			<span class="tooltiptext">Select an icon to display as the page icon.</span></div></th>
 	<td>
 	<input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" size="75" readonly="true" style="background-color: #fff;"
-    value="<?php print substr(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), strrpos(get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'), '/')+1); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
+    value="<?php print caweb_favicon_name(); ?>"  class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
-	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>" >
+	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php echo get_option('ca_fav_ico', caweb_default_favicon_url()); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
 		<input type="button" value="Reset" id="resetIcon"><br />
-		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico', CAWebUri . '/images/system/favicon.ico'); ?>"/>
+		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php echo get_option('ca_fav_ico',caweb_default_favicon_url()); ?>"/>
 	</td></tr>
 
   <tr>
@@ -48,8 +51,8 @@ if( isset($_POST['caweb_options_submit']) ){
 		<span class="tooltiptext">Select one of the California state template versions.</span></div></th>
 		<td>
 			<select id="ca_site_version" name="ca_site_version">
-				<option value="5" <?= ( get_option('ca_site_version') == '5' ? 'selected="selected"' : '' ) ?>>Version 5.0</option>
-				<option value="4" <?= ( get_option('ca_site_version') == '4' ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
+				<option value="5" <?= ( 5 == $ver ? 'selected="selected"' : '' ) ?>>Version 5.0</option>
+				<option value="4" <?= ( 4 == $ver ? 'selected="selected"' : '' ) ?>>Version 4.0</option>
 			</select>
 		</td>
 	</tr>
@@ -90,7 +93,7 @@ if( isset($_POST['caweb_options_submit']) ){
         	
           foreach( $schemes as $key => $value ){
             printf('<option value="%1$s"%2$s%3$s>%4$s</option>', 
-                   $key, ( !in_array($value, $original) ? sprintf(' class="extra%1$s" ', ( 4 >= get_option('ca_site_version') ? ' hidden' : '' ) ) : ' ' ), 
+                   $key, ( !in_array($value, $original) ? sprintf(' class="extra %1$s" ', $version5only ) : ' ' ), 
                    ( get_option('ca_site_color_scheme') == $key ? 'selected="selected"' : '' ), $value  );
           }
 					
@@ -98,13 +101,13 @@ if( isset($_POST['caweb_options_submit']) ){
       </select>
 		</td>
 	</tr>
-  <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+  <tr class="extra <?= $version5only ?>">
 		<th scope="row"><div class="tooltip">Show Search on Front Page
 			<span class="tooltiptext">Display a visible search box on the front page.</span></div></th>
     <td><input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?= ( get_option('ca_frontpage_search_enabled') == true ? 'checked="checked"' : '' ) ?> />
     </td>
 	</tr>
-  	<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?> ">
+  	<tr class="extra <?= $version5only ?> ">
 		<th scope="row"><div class="tooltip">Sticky Navigation
 		<span class="tooltiptext">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</span></div>
 		</th>
@@ -129,7 +132,7 @@ if( isset($_POST['caweb_options_submit']) ){
   <td><input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" <?= ( get_option('ca_default_post_date_display', false) ? 'checked="checked"' : '' ) ?> />
   </td></tr>
 </table>
-<div class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+<div class="extra <?= $version5only ?>">
   <h1 class="option">Utility Header</h1>
 <table class="form-table">
 
@@ -153,66 +156,43 @@ if( isset($_POST['caweb_options_submit']) ){
 		</th>
   <td><input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" <?= ( get_option('ca_utility_home_icon', true) == true ? 'checked="checked"' : '' ) ?> />
   </td></tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+  <?php
+		$options = get_ca_site_options();
+		
+		for( $link = 1; $link < 4; $link++ ){
+			$url = get_option( sprintf('ca_utility_link_%1$s', $link ) );
+			$label = get_option( sprintf('ca_utility_link_%1$s_name', $link ) );
+			$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $link ) );
+	?>
+<tr class="extra <?= $version5only ?>">
 	<th scope="row">
-		<div class="tooltip">Custom Link 1 URL
-			<span class="tooltiptext">Adds a custom link to the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_1" id="ca_utility_link_1" size="75" value="<?php echo get_option('ca_utility_link_1')?>" />
-	</td>
-</tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 1 Label
+		<div class="tooltip">Custom Link <?= $link ?> Label
 			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
 		</div>
 	</th>
 	<td>
-		<input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" size="50" value="<?php echo get_option('ca_utility_link_1_name')?>"/>
+		<input type="text" name="ca_utility_link_<?= $link ?>_name" id="ca_utility_link_<?= $link ?>_name" size="50" value="<?= $label ?>"/>
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
+<tr  class="extra <?= $version5only ?>">
 	<th scope="row">
-		<div class="tooltip">Custom Link 2 URL
+		<div class="tooltip">Custom Link <?= $link ?> URL
 			<span class="tooltiptext">Adds a custom link to the utility header.</span>
 		</div>
 	</th>
 	<td>
-		<input type="text" name="ca_utility_link_2" id="ca_utility_link_2" size="75" value="<?php echo get_option('ca_utility_link_2')?>" />
+		<input type="text" name="ca_utility_link_<?= $link ?>" id="ca_utility_link_<?= $link ?>" size="75" value="<?= $url ?>" />
 	</td>
 </tr>
-<tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 2 Label
-			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
-		</div>
-	</th>
+<tr class="extra <?= $version5only ?>">
+	<th></th>
 	<td>
-		<input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" size="50" value="<?php echo get_option('ca_utility_link_2_name')?>"/>
+		<label>Open in New Tab: <input type="checkbox" name="ca_utility_link_<?= $link ?>_new_window" id="ca_utility_link_<?= $link ?>_new_window" <?= $target ? 'checked="checked"' : '' ?> /></label>
 	</td>
 </tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 3 URL
-			<span class="tooltiptext">Adds a custom link to the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_3" id="ca_utility_link_3" size="75" value="<?php echo get_option('ca_utility_link_3')?>" />
-	</td>
-</tr>
-<tr  class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
-	<th scope="row">
-		<div class="tooltip">Custom Link 3 Label
-			<span class="tooltiptext">This is the text you want to display for this custom link in the utility header.</span>
-		</div>
-	</th>
-	<td>
-		<input type="text" name="ca_utility_link_3_name" id="ca_utility_link_3_name" size="50" value="<?php echo get_option('ca_utility_link_3_name')?>"/>
-	</td>
-</tr>
+	<?php
+		} 
+	?>
 </table>
   </div>
 
@@ -231,7 +211,7 @@ if( isset($_POST['caweb_options_submit']) ){
 		</td>
 	</tr>
 
-	<tr class="base <?= (4.0 == get_option('ca_site_version') ? '' : 'hidden' ); ?>">
+	<tr class="base <?= $version4only ?>">
 <th scope="row"><div class="tooltip ">Organization Logo Alignment
 <span class="tooltiptext">Select the position for the agency logo.</span></div></th>
 <td>
@@ -246,8 +226,10 @@ if( isset($_POST['caweb_options_submit']) ){
 			</select>
 		</td>
 	</tr>
-	<tr class="base <?= (4.0 == get_option('ca_site_version') ? '' : 'hidden' ); ?>"><th scope="row"><div class="tooltip">Header Background Image
-		<span class="tooltiptext">Select the image to use as the background in the header of every page.</span></div></th>
+		<tr class="base <?= $version4only ?>">
+		<th scope="row"><div class="tooltip">Header Background Image
+		<span class="tooltiptext">Select the image to use as the background in the header of every page.</span></div>
+		</th>
 	<td>
 		<input type="text" name="header_ca_background" id="header_ca_background_filename" size="75" value="<?php echo substr(get_option('header_ca_background'), strrpos(get_option('header_ca_background'), '/')+1); ?>" >
 	<input type="hidden" name="header_ca_background" id="header_ca_background" size="75" value="<?php echo get_option('header_ca_background'); ?>" >
@@ -298,27 +280,24 @@ if( isset($_POST['caweb_options_submit']) ){
 				$share_email = 'ca_social_email' === $option ? true : false;
         $social = $share_email ? "Share via " . $social : $social;
         $input_box = !$share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option) ) : '';
-				$hide = 5 <= get_option('ca_site_version') ? '' : ' hidden';
         $header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
         $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
         $new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '' ;
           
        printf('<tr><th>%1$s</th>%2$s
 						<td>
-							<label class="extra%3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s /></label>
+							<label class="extra %3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s /></label>
 							<label>Show in footer: <input type="checkbox" name="%4$s_footer" id="%4$s_footer"%6$s /></label>
 							%7$s
 						</td>
 					</tr>',
-              $social, $input_box , $hide, $option, $header_checked, $footer_checked, 
+              $social, $input_box , $version5only, $option, $header_checked, $footer_checked, 
               ( !$share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked ) : '' ) ) ;
         
       }
 ?>
-
 </table>
 </div>
-
 	<div id="custom-css" class="<?= (!isset($_POST['tab_selected']) || 'custom-css' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
   <h1 class="option">Custom CSS</h1>
 		<table class="form-table">

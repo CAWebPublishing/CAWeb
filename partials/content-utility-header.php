@@ -12,7 +12,7 @@
                 
                   foreach($social_share as $opt){
                     	$share_email = 'ca_social_email' === $opt ? true : false;
-                    	$mailto = $share_email ? sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) : '';
+                    	$mailto = $share_email ? esc_attr( sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) ) : '';
                     
                       if( get_option($opt .'_header') && ( $share_email || "" !== get_option($opt) ) ){
                             $share = substr($opt, 10);
@@ -29,17 +29,20 @@
             <div class="half settings-links hidden-print">
                 <ul class="utility-links ">
                   
-<?php 
-  for($i = 1; $i < 4; $i++){
-		$url = get_option(sprintf('ca_utility_link_%1$s', $i));
-		$text = get_option(sprintf('ca_utility_link_%1$s_name', $i));
-    if ( !empty($url)  &&  !empty($text)  ){
-				printf('<li class="utility-custom-%1$s"><a href="%2$s">%3$s</a></li>', $i, $url, $text);
-    }
-  }
-?>
+					<?php 
+					  for($i = 1; $i < 4; $i++){
+							$url = get_option(sprintf('ca_utility_link_%1$s', $i));
+							$p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
+							$text =  get_option( sprintf('ca_utility_link_%1$s_name', $i));
+							$target = get_option( sprintf('ca_utility_link_%1$s_new_window', $i)) ? ' target="_blank"' : '';
+
+						if ( !empty($url)  &&  !empty($text)  ){
+									printf('<li class="utility-custom-%1$s"><a href="%2$s"%3$s>%4$s</a></li>', $i, $url, $target, $text);
+						}
+					  }
+					?>
                   <?php if( "" !== get_option('ca_contact_us_link') ): ?>
-                    <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link'); ?>">Contact Us</a></li>
+                    <li class="utility-contact-us"><a href="<?php echo get_option('ca_contact_us_link') ; ?>">Contact Us</a></li>
                   <?php endif; ?> 
                   
                   <li class="utility-settings"><a role="button" data-toggle="collapse" data-target="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>

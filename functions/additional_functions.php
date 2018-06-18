@@ -9,7 +9,6 @@
 
 */
 
-
 function ca_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version', 5) ? true : false);
 

@@ -3,6 +3,16 @@
   display: none !important;
 }
 
+.archive.author article .auth-link,
+.archive.category article .cat-link,
+.archive.date article .date-link,
+.archive.tag article .tag-link{
+		border-radius: 5px;
+    padding: 5px;
+    border: #2ea3f2 2px solid;
+    display: inline-block
+}
+
 .mobile-controls{
 	cursor: auto;
 }
