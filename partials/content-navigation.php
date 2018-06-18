@@ -21,8 +21,8 @@ if(get_option('ca_menu_selector_enabled') == true){
 
 <?php
 
-// If not currently on the Front Page, create the Home Nav Link
-print ( ! is_front_page() ?'<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
+// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
+print ( ! is_front_page() && get_option('ca_home_nav_link', true) ?'<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
 
 // if there is a header menu
 if( has_nav_menu('header-menu') ){
