@@ -8,7 +8,7 @@
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<div class="utility-header">
+<div class="utility-header ">
     <div class="container ca_wp_container">
             <div class="half">
                 <ul class="utility-links social-media-links">
@@ -26,13 +26,13 @@ if(get_option($opt .'_header') && "" != get_option($opt) ){
   $share =  str_replace("_", "-", $share);
 
 
-printf('<li><a href="%1$s" class="ca-gov-icon-%2$s" title="Share via %3$s"></a></li>', get_option($opt) ,  $share, ucwords($share));
+printf('<li><a href="%1$s" class="ca-gov-icon-%2$s hidden-print" title="Share via %3$s"></a></li>', get_option($opt) ,  $share, ucwords($share));
 }
 }
 ?>
                 </ul>
             </div>
-            <div class="half settings-links">
+            <div class="half settings-links hidden-print">
                 <ul class="utility-links ">
                     <li><a href="<?php echo get_option('ca_contact_us_link'); ?>">Contact Us</a></li>
                     <li><a role="button" data-toggle="collapse" data-target="#siteSettings"  aria-expanded="false" aria-controls="siteSettings" >Settings</a></li>

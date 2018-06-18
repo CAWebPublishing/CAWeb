@@ -3,9 +3,8 @@ global $post;
 $post_id = (is_object($post) ? $post->ID : $post['ID']);
 $c = "";
 $h = "";
-$ver = get_version($post_id);
-$con = get_post($post_id)->post_content;
-
+$ver = ca_get_version($post_id);
+$con = ( !empty($post_id) ? get_post($post_id)->post_content : '');
 
 
 /* Filter the Header Slideshow Banner */
@@ -23,30 +22,31 @@ $con = get_post($post_id)->post_content;
       foreach($banner as $i => $slide){
         $img = retrieve_layout_attr($slide,'background_image');
         $displaying_link = retrieve_layout_attr($slide,'display_banner_info');
+        $display_heading = retrieve_layout_attr($slide,'display_heading');
         $link_heading = retrieve_layout_attr($slide,'heading');
         $link_text = retrieve_layout_attr($slide,'button_text');
         $link_url = retrieve_layout_attr($slide,'button_link');
 				$desc = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>',
-                        ( !empty($link_url) ? $link_url : '#'), ("" != $link_heading ? sprintf('<span class="title">%1$s</span><br />', $link_heading) : '' ), $link_text);
+												( !empty($link_url) ? $link_url : '#'), ("" != $link_heading ? sprintf('<span class="title" %2$s>%1$s<br /></span>', $link_heading, ("off" == $display_heading ? 'style="display: none"' :'') ) : '' ), $link_text);
 
-        $c .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ', 
+        $c .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ',
                                   $img, ("on" == $displaying_link ? $desc : ''));
        }
 
 			$c .= '</div></div>';
-    
+
 
 }elseif(4 == $ver){
-  $h = ( "" != get_option('header_ca_background') ? 
+  $h = ( "" != get_option('header_ca_background') ?
         get_option('header_ca_background') :
        sprintf('%1$s/images/system/%2$s/header-background.jpg', get_stylesheet_directory_uri(), get_option('ca_site_color_scheme'))
 );
 }
 
 printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
-		( ca_version_check(5.0, $post_id) && get_option('ca_sticky_navigation') ? 'fixed': '') , 
+		( ca_version_check(5.0, $post_id) && get_option('ca_sticky_navigation') ? 'fixed': '') ,
     ( !empty($h) ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $h) : ''));
-		
+
 		// Version 5.0 Specific
 		if(ca_version_check(5.0, $post_id) ){
 
@@ -77,7 +77,7 @@ printf('<header role="banner" id="header" class="global-header %1$s" %2$s>',
 <!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
 <?php
 
-printf('<div id="head-search" class="search-container %1$s">',
+printf('<div id="head-search" class="search-container %1$s hidden-print">',
 ( ca_version_check(5.0, $post_id) && is_front_page() && "on" == get_option('ca_frontpage_search_enabled') ? 'featured-search fade': ''));
 
 if("page-templates/searchpage.php" != get_page_template_slug( $post_id) ){
@@ -95,7 +95,7 @@ print '</div>';
 
 <?php  if("on" == get_option('ca_google_trans_enabled') &&  (ca_version_check(4, $post_id) || ca_version_check(4.5, $post_id)  ) ): ?>
 
-<div id="google_translate_element">
+<div id="google_translate_element" class="hidden-print">
      <div class="skiptranslate goog-te-gadget" dir="ltr">
          <div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;">
 
@@ -116,6 +116,6 @@ print '</div>';
 
 <?php ( !empty($c) ? print $c : print '') ?>
 
-        <div class="header-decoration"></div>
+        <div class="header-decoration hidden-print"></div>
 
 </header>

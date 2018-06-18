@@ -7,13 +7,6 @@
 	Author: Jesus D. Guzman
 
 
-
-	Notes:
-
-	- Please ensure that actions remain in their appropriate order in accordance with WordPress Codex Theme Development, Hooks and Actions
-
-
-
 	Sources:
 
 	- PHP (http://php.net/)
@@ -29,15 +22,42 @@
 */
 
 
+	define('CAWebAbsPath', get_stylesheet_directory()) ;
+	define('CAWebUri', get_stylesheet_directory_uri()) ;
+
+// This is a temporary fix
+function caweb_login_logo() {
+	print '<style>#login h1 a, .login h1 a { background-size: 329px 110px; height: 110px; width: 329px; }</style>';
+}
+add_action( 'login_enqueue_scripts', 'caweb_login_logo' );
+
 // After Setup Theme
 function ca_setup_theme(){
 	global $ca_navigation_images;
 
 
-	define('CAWebAbsPath', get_stylesheet_directory()) ;
-	define('CAWebUri', get_stylesheet_directory_uri()) ;
 
   $ca_navigation_images = get_option('ca_navigation_images');
+
+	if (!empty($ca_navigation_images) ) {
+		$tmp = array();
+		foreach( $ca_navigation_images as $k => $val){
+			array_push($tmp, substr($k ,0, strpos($k, '_') ) ) ;
+		}
+
+		$menu_ids = array_unique($tmp);
+		foreach( $menu_ids as $k ){
+			update_post_meta( $k, '_caweb_menu_icon', $ca_navigation_images[$k . '_icon'] );
+			update_post_meta( $k, '_caweb_menu_unit_size', $ca_navigation_images[$k . '_unit_size'] );
+			update_post_meta( $k, '_caweb_menu_media_image', $ca_navigation_images[$k . '_media_image'] );
+			update_post_meta( $k, '_caweb_menu_image', $ca_navigation_images[$k . '_image'] );
+			update_post_meta( $k, '_caweb_menu_image_side', $ca_navigation_images[$k . '_image_side'] );
+			update_post_meta( $k, '_caweb_menu_image_size', $ca_navigation_images[$k . '_image_size'] );
+		}
+
+
+		delete_option('ca_navigation_images');
+	}
 
 // Include additional functions
 require_once(CAWebAbsPath. '/functions/additional_functions.php');
@@ -89,24 +109,14 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 
 add_action('after_setup_theme', 'ca_setup_theme');
 
-
-
-/*
-
-	Ran during Typical Requests
-
-*/
-
-
-
-// Initialization
-
-
+/* Remove Divi Blank Page Template */
+function tfc_remove_page_templates( $templates ) {
+    unset( $templates['page-template-blank.php'] );
+    return $templates;
+}
+add_filter( 'theme_page_templates', 'tfc_remove_page_templates' );
 
 function ca_init(){
-
-	// Unregister Divi Project Type
-	unregister_post_type( 'project' );
 
 	// Unregister Divi Project Type
 	unregister_post_type( 'project' );
@@ -122,11 +132,12 @@ function ca_init(){
 
 add_action('init', 'ca_init');
 
-// Enqueue Scripts  and Styles
+
+/* Enqueue Scripts and Styles at the bottom */
 function ca_theme_enqueue_style() {
 	global $post;
 	global $pagenow;
-	
+
 	$post_id = (is_object($post) ? $post->ID : $post['ID']);
 
 	$ver = ( ca_version_check(4, $post_id) ?  'v4' : '');
@@ -136,20 +147,23 @@ function ca_theme_enqueue_style() {
 
 		if('wp-activate.php' == $pagenow   ){
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri) );
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri) );	
+		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri) );
 	}else{
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) );
 		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme')) );
 	}
-	
+
 	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' );
 
 	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri ) );
-	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, get_version($post_id) ) );
+	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) );
 
 	// Load editor styling
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(CAWebUri. '/css/cagov.core.css' );
+
+	wp_enqueue_style( 'ca-media-styles', CAWebUri . '/css/media_styles.css' );
+
 
 	// Enqueue Scripts
 	wp_register_script('cagov-modernizr-script', CAWebUri . '/js/libs/modernizr-2.0.6.min.js', array('jquery'), '1.0', false );
@@ -159,12 +173,6 @@ function ca_theme_enqueue_style() {
 	wp_register_script('cagov-navigation-script',	CAWebUri. '/js/libs/navigation.js', '', '1.0', true );
 	wp_register_script('cagov-search-script',CAWebUri. '/js/search.js', array('jquery'), '1.0', true );
 
-  /* Version 5 specific scripts */
-  if(ca_version_check(5,$post_id) && "on" == get_option('ca_geo_locator_enabled')){
-	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), '1.0', true );
-
-    wp_enqueue_script( 'cagov-geolocator-script' );
-	}
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
@@ -172,53 +180,50 @@ function ca_theme_enqueue_style() {
 	wp_enqueue_script( 'cagov-modernizr-script' );
 	wp_enqueue_script( 'cagov-modernizr-extra-script' );
 
-}
-add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style' );
+	  /* Version 5 specific scripts */
+  if(ca_version_check(5,$post_id) && "on" == get_option('ca_geo_locator_enabled')){
+	 wp_register_script('cagov-geolocator-script',CAWebUri. '/js/libs/geolocator.js', array('jquery'), '1.0', true );
 
+    wp_enqueue_script( 'cagov-geolocator-script' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ca_theme_enqueue_style',15 );
 
 // Admin Enqueue Scripts and Styles
 
-function ca_admin_enqueue_scripts(){
-	global $pagenow;
-	// Enqueue Scripts
+function ca_admin_enqueue_scripts($hook){
+	$pages = array( 'toplevel_page_ca_options',  'nav-menus.php');
 
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_media();
+	if( in_array($hook , $pages) ){
+		// Enqueue Scripts
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_media();
+
+		wp_enqueue_script( 'custom-header' );
+
+		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),true);
+		wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'),true);
+
+		wp_enqueue_script( 'caweb-admin-scripts' );
+		wp_enqueue_script( 'browse-caweb-library' );
 
 
-	wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),true);
-	wp_register_script('browse-caweb-library',	CAWebUri. '/js/libs/browse-library.js', array('jquery'),true);
+	wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
+	}
 
 
-	wp_enqueue_script( 'custom-header' );
-	wp_enqueue_script( 'caweb-admin-scripts' );
-	wp_enqueue_script( 'browse-caweb-library' );
-
+	print '<style>/* CAWeb Top Level Menu Icon */
+					li#toplevel_page_ca_options a div.wp-menu-image::before{
+						content: "\e600";
+						font-family: "CaGov";
+					}
+					</style>';
+	
 	// Enqueue Styles
 	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css' );
-	wp_enqueue_style( 'caweb-admin-styles', CAWebUri . '/css/admin_custom.css' );
 }
 
 add_action( 'admin_enqueue_scripts', 'ca_admin_enqueue_scripts' );
-
-
-function caweb_wpmu_activate_stylesheet() {
-  //wp_dequeue_style( 'ca-core-styles');
-	//wp_dequeue_style( 'ca-color-styles');
-
-  wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri) );
-	wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s.css',CAWebUri, get_option('ca_site_color_scheme')) );
-
-
-}
-add_action( 'wpmu_activate_stylesheet', 'caweb_wpmu_activate_stylesheet' );
-
-/* Enqueue Scripts and Styles on Footer */
-function caweb_wp_footer(){
- 	wp_enqueue_style( 'ca-media-styles', CAWebUri . '/css/media_styles.css' );
-
-}
-add_action( 'wp_footer', 'caweb_wp_footer' );
 
 /* Adjust WP Admin Bar */
 function ca_admin_bar_menu( $wp_admin_bar ) {
@@ -251,119 +256,6 @@ function ca_admin_bar_menu( $wp_admin_bar ) {
 }
 
 add_action( 'admin_bar_menu', 'ca_admin_bar_menu', 1000 );
-
-function caweb_the_content_filter($content) {
-  global $post;
-
-  $header_banner = '';
-  
-  /* Filter the Header Slideshow Banner */
-  if(  ca_version_check(4, $post->ID)  && strpos($content, 'et_pb_ca_fullwidth_banner') > 0 ){
-
-      $startPos = strpos($content , '[et_pb_ca_fullwidth_banner_item');
-      $endPos = strpos($content , '[/et_pb_ca_fullwidth_banner]');
-		$banner = substr($content , $startPos, $endPos - $startPos);
-		 $banner = explode('[/et_pb_ca_fullwidth_banner_item]', $banner);
-		unset($banner[count($banner) - 1]);
-
-        $header_banner = '<div class="header-slideshow-banner">
-        <div id="primary-carousel" class="carousel carousel-banner">';
-
-      foreach($banner as $i => $slide){
-        $img = retrieve_layout_attr($slide,'background_image');
-        $displaying_link = retrieve_layout_attr($slide,'display_banner_info');
-        $link_heading = retrieve_layout_attr($slide,'heading');
-        $link_text = retrieve_layout_attr($slide,'button_text');
-        $link_url = retrieve_layout_attr($slide,'button_link');
-				$desc = sprintf('<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>',
-                $link_url, ("" != $link_heading ? sprintf('<span class="title">%1$s</span><br />', $link_heading) : '' ), $link_text);
-
-        $header_banner .= sprintf('<div class="slide" style="background-image: url(%1$s);">%2$s</div> ', 
-                                  $img, ("on" == $displaying_link ? $desc : ''));
-       }
-
-			$header_banner .= '</div></div>';
-    
-
-}
-  
-    update_option('slideshow_banner', $header_banner);
-  /* End of Filter the Header Slideshow Banner */
-
-  //  returns the database content
-  return $content;
-}
-
-//add_filter( 'the_content', 'caweb_the_content_filter',9 );
-
-/*
-
-	WP Update Nav Menu
-
-	If the Navigation Menu has no Menu Theme Location selected,
-
-	assign the default navigation menu
-
-*/
-
-function ca_update_nav_menu($menu_id){
-
-global $pagenow;
-
-
-
-if('nav-menus.php' == $pagenow && isset( $_GET['menu']) &&  get_theme_mod('nav_menu_locations')['megadropdown'] == $_GET['menu']){
-
-
-
-}else{
-
-}
-
-}
-
-add_action( 'wp_update_nav_menu', 'ca_update_nav_menu' );
-
-/*
-
- Set newly created menus to default (Mega Dropdown),
-
- only if a Mega Drop Menu is not already registered.
-
- If Mega Drop is register, set to Dropdown, otherwise
-
- set to Single Level, if all menus have been registered
-
- do not set the Theme Location.
-
-*/
-
-function ca_create_nav_menu($menu_id){
-
-	$reg_menus = get_registered_ca_nav_menus() ;
-
-
-
-	if( ! in_array('megadropdown',$reg_menus)){
-
-		//set_theme_mod('nav_menu_locations', array('megadropdown' => $menu_id));
-
-	}elseif( ! in_array('dropdown',$reg_menus)){
-
-		//set_theme_mod('nav_menu_locations', array('dropdown' => $menu_id));
-
-	}elseif( ! in_array('singlelevel',$reg_menus)){
-
-		//set_theme_mod('nav_menu_locations', array('singlelevel' => $menu_id));
-
-	}
-
-}
-
-add_action('wp_create_nav_menu','ca_create_nav_menu');
-
-
-
 
 
 /*
@@ -504,14 +396,6 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 
 	);
 
-
-
-
-
-
-
-
-
 	// Insert the array, JSON ENCODED, into 'style_formats'
 
 	$init_array['style_formats'] = json_encode( $style_formats );
@@ -573,7 +457,7 @@ function CA_Custom_Modules(){
 		include(CAWebAbsPath . "/builder/functions.php");
 		include(CAWebAbsPath . "/builder/main-modules.php");
 		include(CAWebAbsPath. '/builder/main-fullwidth-modules.php');
-		include(CAWebAbsPath. '/builder/microdata-module.php');
+		//include(CAWebAbsPath. '/builder/special-modules.php');
 		include(CAWebAbsPath . "/builder/layouts.php");
  	}
 
@@ -685,6 +569,28 @@ title.innerHTML = "Navigation";
 	background-color: <?php echo get_ca_user_color(1); ?> ;
     color: white;
 }
+	#et_pb_fb_cta{
+		display: none !important;
+	}
+	/* This is the background color for the Divi Panel that pops open
+		when inserting modules or sections */
+	.et-pb-main-settings{
+	
+	background-color: lightblue;
+	
+	}
+	
+	ul.et_font_icon {
+		background-color: white !important;
+		max-height: 300px;
+	}
+	.et_font_icon li {
+			background: transparent !important;
+			font-size: 30px;
+	}
+	.et-pb-option-container .description {
+			color: black !important;
+	}
 </style>
 <?php
 }

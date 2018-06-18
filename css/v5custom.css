@@ -7,11 +7,11 @@
 /* Utility Header */
 .utility-header .half{
 	overflow:	hidden;
-	
+
 }
 
 .utility-header ul{
-	margin-left: 0;  
+	margin-left: 0;
 }
 
 .utility-header ul li{
@@ -19,14 +19,14 @@
 }
 .utility-header, .utility-header .half {
   	padding: 2px 0;
-  
+
 }
  .utility-header .half:first-child{
       width: 25%;
   }
 .utility-header .settings-links {
   width: 75%;
-  
+
 }
 ul.utility-links.social-media-links {
     max-height: 32px;
@@ -37,7 +37,7 @@ ul.utility-links.social-media-links {
 }
 /* End of Utility Header */
 
-/* Navigation and the List are set to auto width 
+/* Navigation and the List are set to auto width
 and the nav links float to the right */
 #navigation{
   		width: 100%;
@@ -56,8 +56,8 @@ and the nav links float to the right */
 .second-level-nav {
     display: initial;
 }
-.second-level-nav li{  
-     float: left; 
+.second-level-nav li{
+     float: left;
 }
 /* Full Sub-Nav */
 .unit1 .second-level-link{
@@ -69,6 +69,8 @@ and the nav links float to the right */
 }
 
 /* MegaDropdown Navigation Styles */
+.empty.sub-nav .second-level-nav .unit2,
+.empty.sub-nav .second-level-nav .unit3,
 .full .second-level-nav .unit1 {
     width: 25%;
 }
@@ -92,7 +94,7 @@ and the nav links float to the right */
 .main-navigation.dropdown .sub-nav {
             max-width:250px;
             left: initial;
-    right: initial;                       
+    right: initial;
 }
 .main-navigation.dropdown .sub-nav ul li{
 	width: 100%;
@@ -104,7 +106,7 @@ and the nav links float to the right */
 /* End of Branding & Navigation */
 /* Search */
 .featured-search.active .close-search {
-    display: block; 
+    display: block;
 }
 .gssb_c{
 	top: 157px !important;
@@ -122,15 +124,15 @@ and the nav links float to the right */
 
 /* Footer */
 .global-footer ul > li{
-	padding-left: 0;  
-  
+	padding-left: 0;
+
 }
 #footer .ca_wp_container div{
   padding: 0;
   overflow: hidden;
 }
-#footer .ca_wp_container .three-quarters{  	
- 	
+#footer .ca_wp_container .three-quarters{
+
 }
 
 #footer .socialsharer-container {
@@ -140,6 +142,24 @@ and the nav links float to the right */
 /* End of Footer */
 
 /* Media Query Styles */
+@media (max-width: 767px) {
+	.et_pb_fullwidth_section{
+		margin: 0 ;
+	}
+
+	.et_pb_ca_fullwidth_section_primary.et_pb_module .pull-right {
+		padding-left: 0 !important;
+	}
+
+}
+@media (min-width: 768px) {
+	.et_pb_fullwidth_section{
+		margin: 0 -6%;
+	}
+
+}
+
+
 @media (min-width: 768px){
 /* Branding & Navigation */
  .branding .header-cagov-logo img{
@@ -147,7 +167,7 @@ and the nav links float to the right */
 }
 
 #nav_list{
-  	
+
     padding-left: calc(170px + 15%);
 }
   .top-level-nav .nav-item {
@@ -155,30 +175,27 @@ and the nav links float to the right */
   }
 /* End of Branding & Navigation */
 
-  /* Page Styles */
-.et_pb_fullwidth_section  {
-  margin: 0 -6%;
 }
 
-  
-}
 
 
 @media (min-width: 992px){
 
 /* Branding & Navigation */
- 
-  
   .top-level-nav .nav-item {
     padding: 0 8px;
   }
 /* End of Branding & Navigation */
 
-  .et_pb_fullwidth_section  {
-  margin: 0 -12.5%;
-}
+
 }
 
+@media (min-width: 1080px){
+
+.et_pb_fullwidth_section{
+		margin: 0 -12.5%;
+	}
+}
 
 @media (min-width: 1280px){
 
@@ -191,9 +208,10 @@ and the nav links float to the right */
 
 }
 /* End of Branding & Navigation */
- .et_pb_fullwidth_section  {
-  margin: 0 -21.3% ;
-}
+
+	.et_pb_fullwidth_section{
+		margin: 0 -21.5%;
+	}
 }
 
 @media (max-width: 992px){
@@ -240,7 +258,7 @@ and the nav links float to the right */
     height: auto;
     clip: auto;
   }
-  
+
   .cagov-logo {
     position: initial;
     padding-left: 65px;
@@ -249,11 +267,11 @@ and the nav links float to the right */
     width: 84%;
 }
   .cagov-logo img{
-  		max-width : 100% ; 
+  		max-width : 100% ;
      height: 90px;
 		margin-bottom: 8px;
   }
-  
+
 ul.utility-links.social-media-links {
     max-height: 35px;
     clip: rect(0 65px 40px 0);
@@ -263,7 +281,7 @@ ul.utility-links.social-media-links {
 	.utility-header .half:first-child{
       overflow: visible;
   }
-	
+
   .utility-header .settings-links {
 		float: right;
 		text-align: right;
@@ -274,8 +292,18 @@ ul.utility-links.social-media-links {
     display: none;
 }
 
-.et_pb_fullwidth_section  {
-  margin: 0 ;
-}
 }
 /* End of Mobile Control Styles */
+
+
+/* Section Carousel Version 5 */
+.et_pb_ca_section_carousel .container{
+  padding-top: 10px !important;
+}
+
+
+/* Fullwidth Section Carousel Version 5 */
+.et_pb_ca_fullwidth_section_carousel .container{
+  padding-top: 10px !important;
+}
+

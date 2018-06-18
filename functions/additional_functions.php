@@ -12,13 +12,13 @@ function ca_version_check($version, $post_id = -1){
 	$result = ($version == get_option('ca_site_version') ? true : false);
 
 	if(-1 < $post_id  ){
-		$result = ($version == get_version($post_id) ? true : false);
+		$result = ($version == ca_get_version($post_id) ? true : false);
 	}
 
 	return $result;
 }
 
-function get_version($post_id){
+function ca_get_version($post_id){
 	switch(get_page_template_slug($post_id)){
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -33,95 +33,22 @@ function get_version($post_id){
 	}
 	return $result;
 }
+
 // Returns array of Menu Theme Locations
 function get_ca_nav_menu_theme_locations(){
 	return array(
-		'megadropdown' => 'Mega Drop Navigation (Default)',
-		'dropdown' => 'Dropdown Navigation',
-		'singlelevel' => 'Single Level Navigation',
+		'header-menu' => 'Header Navigation',
 		'footer-menu' => 'Footer Menu',
 				);
 }
 
-// Returns array of Currently Set Menus
-function get_registered_ca_nav_menus(){
-// Get all currently set menus
-$locations = get_nav_menu_locations();
-
-$tmp = array();
-// Loop thru  arranging the menu by order of precedence
-foreach($locations as $loc=> $l){
-
-		switch($loc){
-			case "megadropdown":
-				$tmp[0] = "megadropdown";
-				break;
-			case "dropdown":
-				$tmp[1] = "dropdown";
-				break;
-			case "singlelevel":
-				$tmp[2] = "singlelevel";
-				break;
-			case "footer-menu":
-				$tmp[3] = "footer-menu";
-				break;
-		}
-
-}
-
-// Flip the array so that the values become the keys in the array
-$tmp = array_flip($tmp);
-
-// Intersect the keys against all the registered nav menus
-// this will return an array of where the element is the location
-// of the menu and the value is the name of the menu
-$tmp = array_intersect_key(get_registered_nav_menus(),$tmp);
-return $tmp;
-
-}
-
-/*
- Returns the location of the the Menu,
- if a Post ID is passed in then the Post 'ca_default_navigation_menu' metakey menu location is returned
- if Post ID is -1 and a menu_name is passed in then the location of that menu gets returned
-*/
-function get_ca_nav_menu_theme_location($postID = -1, $menu_name = ''){
-
-	if(-1 != $postID ){
-		$post_menu =  get_post_meta($postID, 'ca_default_navigation_menu',true) ;
-
-				$post_menu = ("" != get_post_meta($postID, 'ca_default_navigation_menu',true) ?
-							get_registered_ca_nav_menus()[$post_menu ] : "No Default Menu");
-	}elseif("" != $menu_name ){
-		$tmp = array_flip(get_registered_ca_nav_menus());
-		$post_menu = $tmp[$menu_name];
-	}
-
-	return $post_menu;
-
-}
-
-/*
- Returns the name of the the Menu,
- if a Post ID is passed in then the Menu Name of the Post 'ca_default_navigation_menu' metakey value is returned
- if Post ID is -1 and a menu_location is passed in then the name of that menu gets returned
-*/
-function get_ca_nav_menu_theme_location_name($postID = -1, $menu_location = ''){
-	$post_menu = '';
-	if(-1 != $postID){
-		$post_menu = get_post_meta($postID, 'ca_default_navigation_menu',true);
-		$post_menu = get_registered_ca_nav_menus()[$post_menu];
-
-	}elseif("" != $menu_location){
-		 $post_menu = get_registered_ca_nav_menus()[$menu_location];
-	}
-
-	return $post_menu;
-}
-
 function format_date($pub_date, $pattern){
-	$date =date_create($pub_date);
-	return date_format($date,$pattern);
+	if($pub_date instanceof DateTime){
+		$date =date_create($pub_date);
+		return date_format($date,$pattern);
+	}else{
+		return 'invalid date';
+	}
 }
 
 
@@ -158,81 +85,51 @@ function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true 
 
 function return_posts($cats = array(), $tags = array(), $post_amount = -1,$orderby='post_date',$order = 'DESC'){
 
-$posts_array = array();
+	$posts_array = array();
 
-$req_array = array();
+	$req_array = array();
 
 
 
-$args = array(
-
-	'posts_per_page' => $post_amount ,
-
+	$args = array(
+				'posts_per_page' => $post_amount ,
         'orderby'           => $orderby,
-
         'order'             => $order,
-
         'post_type'         => 'post',
-
         'post_status'       => 'publish',
-
         'suppress_filters'  => true
+    		);
 
+	if(! empty($cats)){
 
-
-    );
-
-
-
-if(! empty($cats)){
-
-	$args['cat'] = $cats;
-
-}
-
-
-
-$posts_array = get_posts( $args );
-
-
-
-if(! empty($tags)){
-
-	foreach($posts_array as $p=> $i){
-
-		//return posts tags
-
-		$tag_ids = wp_get_post_tags( $i ->ID, array( 'fields' => 'ids' ) );
-
-		// iterate through the tags
-
-		foreach($tag_ids as $k){
-
-			if(in_array($k, $tags)){
-
-			array_push($req_array , $i);
-
-			break;
-
-			}
-
-
-
-		}
-
-
-
+		$args['category'] = ( is_array($cats) ? implode(',', $cats) : $cats);
 	}
 
-	$posts_array = $req_array;
-
-}
+	$posts_array = get_posts( $args );
 
 
+	if(! empty($tags)){
+			foreach($posts_array as $p=> $i){
+				//return posts tags
+				$tag_ids = wp_get_post_tags( $i ->ID, array( 'fields' => 'names' ) );
 
-
+				if( empty($tag_ids) ){
+						unset($posts_array[$p]);
+				}else{
+					// iterate through the tags
+					foreach($tag_ids as $k){
+						if( !in_array($k, $tags)){
+							unset($posts_array[$p]);
+							//array_push($req_array , $i);
+							//break;
+						}
+					}
+				}
+			}
+	}
 
 	return $posts_array ;
+	//return $args ;
 
 }
 
@@ -250,14 +147,56 @@ function get_ca_user_color($element){
 }
 
 function get_tag_ID($tag_name) {
-$tag = get_term_by('name', $tag_name, 'post_tag');
-if ($tag) {
-return $tag->term_id;
-} else {
-return 0;
-}
+	$tag = get_term_by('name', $tag_name, 'post_tag');
+	if ($tag) {
+		return $tag->term_id;
+	} else {
+		return 0;
+	}
 }
 
+if( !function_exists('is_caweb_intranet_site') ){
+	function is_caweb_intranet_site($id = -1){
+		$id = -1 == $id ? get_current_blog_id() : $id;
+		$hold= get_site_option( 'caweb_intranet_enabled_sites');
+
+		return ( !empty($hold) ? in_array($id, $hold ) : false ) ;
+
+	}
+}
+
+if( !function_exists('caweb_get_shortcode_from_content') ){
+	function caweb_get_shortcode_from_content($con = "", $tag = ""){
+
+		if( empty($con) || empty($tag) )
+			return array();
+		$content = array();
+		$obj = array();
+		$attr = array();
+		$tmp = array();
+
+		// Get Shortcode from content
+		preg_match(sprintf('/\[(%1$s)[\d\s\w\S]*\[\/\1\]/', $tag), $con, $content );
+
+		if( !empty($content) ){
+			preg_match(sprintf('/\[(%1$s)[\d\s\w\S].*/', $tag), $content[0], $tmp) ;
+		}else{
+			return array() ;
+		}
+
+		// Get Attributes from Shortcode
+		preg_match_all('/\w*="[\w\s\d:\/\.\-]*/', $tmp[0], $attr);
+		foreach($attr[0] as $a){
+				preg_match('/\w*/', $a, $key);
+			$obj[$key[0]] = substr($a, strlen($key[0]) + 2 );
+		}
+
+		preg_match('/\][\s\S]*\[/', $content[0], $obj['content']);
+		$obj['content'] = strip_tags( substr($obj['content'][0], 1, strlen($obj['content'][0]) - 2) );
+
+		return ( (object) $obj );
+	}
+}
 
 /* CA.gov Icon Library List */
 function get_ca_icon_list(){

@@ -1,14 +1,16 @@
 <!-- mobile navigation controls -->
-<div class="mobile-controls">
+<div class="mobile-controls ">
+  <?php if(  ca_version_check(5,(is_object($post) ? $post->ID : $post['ID']))) : ?>	
     <span class="mobile-control cagov-logo"><a href="/"><img src="<?php echo get_option('header_ca_branding'); ?>" alt="Organization Title" class="mobile-branding"/></a><span class="sr-only"></span></span>
-  <?php if( ! ca_version_check(5,$post->ID)) : ?>  
-  <span class="mobile-control cagov-logo"><a href="http://www.ca.gov/" class="ca-gov-icon-logo"><span class="sr-only"></a></span>
-   <?php endif; ?>
-    <span class="mobile-control toggle-menu"><span class="ca-gov-icon-menu" aria-hidden="true"></span><span class="sr-only">Menu</span></span>
+	 <?php endif; ?>
+    <span class="mobile-control toggle-menu hidden-print">
+			<span class="ca-gov-icon-menu" aria-hidden="true"></span>
+			<span class="sr-only">Menu</span>
+		</span>
 
-    <span class="mobile-control toggle-search"><span class="ca-gov-icon-search" aria-hidden="true"></span><span class="sr-only">Search</span></span>
-    <span class="mobile-control-group mobile-menu-icons">
-    	<!-- Add more mobile controls here. These will be on the top right section of the expanded mobile menu -->
-    </span>
-    
+		<span class="mobile-control toggle-search hidden-print">
+			<span class="ca-gov-icon-search" aria-hidden="true"></span>
+			<span class="sr-only">Search</span>
+		</span>	
+
 </div>

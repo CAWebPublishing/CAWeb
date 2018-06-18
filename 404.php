@@ -12,7 +12,6 @@ get_template_part('partials/content', 'header')
 
 <?php endif; ?>
     
-<ol class="breadcrumb dynamic"></ol>
     
 <main class="main-primary">
   

@@ -2,11 +2,22 @@
 .section{
 overflow: hidden;
 }
- 
 
-.et_pb_ca_section_primary, 
-.et_pb_ca_fullwidth_section_primary {
+
+.et_pb_ca_section_primary,
+.et_pb_ca_fullwidth_section_primary,
+.et_pb_ca_fullwidth_section_footer,
+.et_pb_ca_section_footer{
     padding: 50px 25px;
+}
+
+/* Section - Footer */
+.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child ,
+.et_pb_ca_section_footer .row .quarter h4:first-child {
+    border-bottom-style: none;
+}
+.et_pb_ca_fullwidth_section_footer ul{
+  padding: 0 !important;
 }
 
 /* Section - Carousel */
@@ -18,9 +29,54 @@ overflow: hidden;
 .panel-heading > h1 {
     margin: 0;
 }
+.panel-heading h2{
+	width: 100%;
+}
 
+/* Profile Banner */
+.profile-banner .banner-subtitle{
+  color: #333333;
+
+}
+.profile-banner{
+   overflow: hidden;
+   height: 90px;
+}
+
+#profile-banner-wrapper a:hover{
+  text-decoration: none;
+}
 
 /* Divi Accordion Style */
 .et-learn-more h3.heading-more {
     color: black;
+}
+
+ul, ol{
+  list-style-position: outside;
+}
+
+/* Fullwidth Section Footer */
+.et_pb_ca_fullwidth_section_footer li{
+  margin-left: 1em;
+  text-indent: -1em;
+}
+
+
+/* Fullwidth Section Carousel */
+.et_pb_ca_fullwidth_section_carousel button {
+  margin-top: 1em;
+}
+
+.et_pb_ca_fullwidth_section_carousel button a, .et_pb_ca_fullwidth_section_carousel h2{
+  color: white;
+}
+
+/* Section Carousel */
+.et_pb_ca_section_carousel button {
+  margin-top: 1em;
+}
+
+.et_pb_ca_section_carousel button a, .et_pb_ca_section_carousel h2{
+  color: white;
 }
