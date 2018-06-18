@@ -1,0 +1,203 @@
+
+.global-footer ul>li{
+  display: inline-flex !important;
+}
+
+ul{
+  line-height: 1.42857143 !important;
+}
+
+[class^="list-"]{
+  padding: 0;
+}
+
+/* Post Page Styles */
+.et_pb_pagebuilder_layout.single.et_full_width_page #page-container .et_pb_row{
+  width: 100%;
+}
+
+/* Monarch Plugin Styles */
+.et_monarch .et_social_inline_top{
+  margin: -27px 0 !important;
+}
+
+
+
+/* Module Styles */
+/* Panels */
+.panel, .panel-heading{
+  border-radius: 0;
+}
+
+/* Section */
+.section{
+   padding-top: 50px;
+ padding-bottom: 50px;
+background: #fff;
+ position: relative;
+overflow: hidden;
+}
+
+/* Carousel */
+.section .carousel-content .item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.section .owl-item .content-container .content{
+  height: 325px;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.section .carousel .owl-stage-outer{
+    height: 325px;
+}
+/* Search Styles */
+	/* Hide the 'X' button that appears in Version 4 search box */
+	form#local_form > button.close.close-search {
+    display: none;
+	}
+
+
+/* Google Translate Style,
+Search box increased by 18px to match the width of Google Translate */
+div#google_translate_element {
+    right: 13px;
+    position: absolute;
+    top: 55px;
+  	z-index: 10;
+}
+
+.goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited,
+.goog-logo-link:hover, .goog-logo-link:active {
+    color: #fff;
+  }
+  .goog-te-combo{
+    color:#666
+  }
+
+  .goog-te-gadget{
+      color: #fff;
+  }
+
+/* Organizational Banner */
+/* Left */
+.header-organization-banner.pull-left {
+    left: 128px;
+}
+/* Right */
+.header-organization-banner.pull-right {
+    padding-right: 200px;
+}
+
+/* Header Slideshow Banner*/
+/* Makes the SlideShow Banner stay in the div */
+	.header-slideshow-banner{
+		height: 100% !important;
+	}
+.slide-text{
+	height: 145px;  
+}
+
+	/* Navigation */
+.second-level-nav{
+	-moz-column-count: 1 !important;
+	column-count: 1 !important;
+}
+
+nav.megadropdown .second-level-nav li{  
+    
+	  float: left; 
+		width: 33%;
+		height: 100px;
+		margin-bottom: 14px !important;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+/* Remove underline from top level nav links */
+.top-level-nav>li .first-level-link {
+    text-decoration: none;
+}
+.main-navigation.dropdown .sub-nav{
+  	width: 100%;
+}
+
+/* Remove arrow down from page titles */
+div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
+	display:none;
+}
+
+/* Remove the padding from 80px to 0px to make
+  main page-container begin below the header */
+#page-container {
+    padding-top: 0px !important;
+}
+/* Media Query Styles */
+
+@media (min-width: 768px){
+ /* Search Styles */
+  .search-container {
+    		width: 168px;
+	}
+  /* End of Search Styles */
+}
+
+
+/* End of Media Query Styles */
+
+
+/* Mobile Control */
+@media (max-width: 767px) {
+  /* Header Styles */
+  .mobile-controls{
+		padding-top: 25px;
+
+	}
+  .mobile-controls .toggle-search{
+    position: relative;
+    top: 6px;
+  }
+  .mobile-controls .toggle-menu{
+    z-index:2;
+  }
+
+.branding {
+    margin: 0 59px;
+    display: inline-block;
+}
+
+  .header-cagov-logo{
+    position: relative;
+    display: block;
+    margin-left: -51px;
+    top: 5px;
+  }
+
+  .header-cagov-logo img{
+    max-height: 32px !important;
+  }
+  .header-organization-banner{
+    height: auto;
+    padding: 0 !important;
+		float: none !important;
+    z-index: 1 ;		
+    	left: 0 !important;
+  }
+  #head-search.search-container.in {
+    display: none;
+}
+
+#head-search.search-container.in.active {
+    display: block;
+}
+  div#google_translate_element {
+    top: 6px;
+}
+/* End of Header Styles */
+
+}
+/* End of Mobile Control Styles */

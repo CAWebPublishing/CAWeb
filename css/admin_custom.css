@@ -1,0 +1,136 @@
+/* HIDE THE 'Enable Visual Builder' Button*/
+#et_pb_fb_cta{
+  display: none !important;
+}
+
+/* CAWeb Top Level Menu Icon */
+li#toplevel_page_ca_options a div.wp-menu-image::before{
+	content: "\e600";
+	font-family: 'CaGov';
+}
+
+
+/* Backend Page Bulder Styles */
+/* This is the background color for the Divi Panel that pops open
+	when inserting modules or sections */
+.et-pb-main-settings{
+
+background-color: lightblue;
+
+}
+
+ul.et_font_icon {
+	background-color: white !important;
+}
+.et_font_icon li {
+    background: transparent;
+}
+.et-pb-option-container .description {
+    color: black !important;
+}
+/* End of Backend Page Bulder Styles */
+
+/* CAWeb Options Page Styles */
+/* Indent fields under each categoryy */
+.form-table th{
+    padding: 20px 10px 20px 50px;
+  }
+
+#general, #social-share, #google_translate_options, .extra , .base {
+    display: none;
+}
+
+ #general.show, #social-share.show, #google_translate_options.show, div.show   {
+    display: inline;
+}
+  
+.option{
+	text-decoration: underline;
+}
+  option.show{
+    display:block;
+  }
+  
+  tr.show{
+    display:table-row;
+  }
+ 
+/* CAWeb Navigation Page Styles */
+ .mega_menu_images, .media_image, .unit_selector, .icon_selector{
+    display:none;   
+  }
+  
+   .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
+    display:block;   
+  }
+ 
+.menu-item-edit-inactive .menu-item-settings {
+    display: none !important;
+}
+  .menu-item-edit-active .menu-item-settings {
+    display: inline-block !important;
+}
+
+h2.nav-tab-wrapper{
+  border-bottom: none !important;
+
+}
+/* Icon List */
+  ul.menu-icon-list{
+    width: 400px;
+    height: 300px;
+    overflow-y: scroll;
+  }
+  ul.menu-icon-list li{
+  	float: left;
+    font-size: 30px;
+    padding: 8px;
+  } 
+ul.menu-icon-list li:hover{
+	background-color: cornflowerblue;
+	cursor: pointer;
+}
+  
+ ul.menu-icon-list li.is_selected{
+    background-color: cornflowerblue;
+}
+
+
+
+/* Tooltip Styles */
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltip:hover{
+		cursor: help;
+}
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+		width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+
+    position: absolute;
+    z-index: 1;
+
+		/* Positioning Styles*/
+		/* Left */
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+
+}
