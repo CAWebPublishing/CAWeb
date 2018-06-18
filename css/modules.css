@@ -24,6 +24,15 @@ overflow: hidden;
 	width: 100%;
 }
 
+/* Remove extra padding bottom of Card modules */
+.et_pb_ca_card  .card-block * {
+    padding-bottom: 0px;
+}
+.card-title{
+	margin-bottom: 0px ;
+	padding-bottom: 0px;
+}
+
 /* Panel Style */
 .panel-heading > h1 {
     margin: 0;
