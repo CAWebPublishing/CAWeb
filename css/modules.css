@@ -92,3 +92,37 @@ ul, ol{
 ol{
   margin-left: 16px;
 }
+
+/* Service Tiles */
+.et_pb_ca_fullwidth_service_tiles .service-tile.half{
+	width:50%;
+}
+.et_pb_ca_fullwidth_service_tiles .service-tile.full{
+	width:100%;
+}
+
+/* Post List */
+/* Remove the Divi Padding around the et_pb_toggle */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{
+	padding: 0px;
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
+		color: black !important;
+    padding-bottom: 0px;
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
+       border-bottom: inherit;
+}
+/* Apply the Arrows */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after {
+    content: "\43";
+    font-family: cagov;
+}
+
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close  .panel-heading .panel-title a:after {
+    content: "\45";
+    font-family: cagov;
+}

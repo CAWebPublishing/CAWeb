@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
   var frame;
   var el_name;
 
@@ -25,8 +25,9 @@
       var types = $el.data('option');
       var uploader = false == $el.data('uploader') ? false : true;
       var classes = uploader ? '' : 'hidden-upload';
+			var icon_check = false == $el.data('icon-check') ? false : true;
 
-      if (!!types && types.includes(','))
+      if (!!types && types.indexOf(',') > 0 )
         types = types.split(',');
 
       // If the media frame already exists, reopen it.
@@ -65,36 +66,53 @@
         var attachment = frame.state().get('selection').first(),
           link = $el.data('updateLink');
 
-        var input_box = document.getElementById(el_name);
-        input_box.value = attachment.attributes.url;
 
-        var preview_field = document.getElementById(el_name+"_img");
-        preview_field.src = attachment.attributes.url;
-
-        var filename_box = document.getElementById(el_name + "_filename");
         var filename = attachment.attributes.url.split("/");
-        filename_box.value = filename[filename.length-1];
+				filename = filename[filename.length - 1];
+        var input_box = document.getElementById(el_name);
+        var preview_field = document.getElementById(el_name + "_img");
+        var filename_box = document.getElementById(el_name +  "_filename");
+				 var data = {
+          'action': 'caweb_fav_icon_check',
+          'icon_url': attachment.attributes.url,
+        };
+
+				if( !icon_check){
+					input_box.value = attachment.attributes.url;
+
+					preview_field.src = attachment.attributes.url;
+
+					filename_box.value = filename;
+				}else{
+					jQuery.post(ajaxurl, data, function(response) {
+						if(1 == response){
+
+							preview_field.src = attachment.attributes.url;
+  						input_box.value = attachment.attributes.url;
+							filename_box.value = filename;
+
+						}else{
+							alert("Invalid Icon Mime Type: " + filename);
+						}
+					});
+				}
       });
 
       frame.on('open', function() {
         if (!uploader) {
-          var frame_count = document.getElementsByClassName('media-frame-router').length - 1;
-          var current_frame = document.getElementsByClassName('media-frame-router')[frame_count].getElementsByClassName('media-router')[0];
-				if(document.getElementsByClassName('media-menu-item')[1])
-            current_frame.getElementsByClassName('media-menu-item')[1].click();
-        if(document.getElementsByClassName('media-menu-item')[0])
-            current_frame.getElementsByClassName('media-menu-item')[0].remove();
+          var tabs = frame.el.getElementsByClassName(
+            'media-frame-router')[0].getElementsByClassName(
+            'media-router')[0].getElementsByClassName(
+            'media-menu-item');
+
+          tabs[1].click();
+          tabs[0].parentNode.removeChild(tabs[0]);
 
         }
       });
 
       frame.open();
-      if (!uploader) {
-        if(document.getElementsByClassName('media-menu-item')[2])
-          document.getElementsByClassName('media-menu-item')[2].click();
-        if(document.getElementsByClassName('media-menu-item')[1])
-        document.getElementsByClassName('media-menu-item')[1].style.display = "none";
-      }
+
     });
 
   });

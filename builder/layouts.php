@@ -28,6 +28,11 @@ function ca_save_post_list_meta($post_id, $post){
 			array_push($cats , get_cat_ID('Content Types'));
 			break;
 
+		case "faqs":
+			array_push($cats , get_cat_ID('FAQs'));
+			array_push($cats , get_cat_ID('Content Types'));
+			break;
+		
 		case "jobs":
 			array_push($cats , get_cat_ID('Jobs'));
 			array_push($cats , get_cat_ID('Content Types'));
