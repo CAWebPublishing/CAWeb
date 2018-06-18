@@ -3,24 +3,27 @@
             <div class="half">
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 32px;" src="<?php echo get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
-					<?php if( get_option('ca_utility_home_icon', true) ): ?>
-                  <li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>
-					<?php endif; ?>
-                    <?php
+					<?php 
 
-  $social_share = get_ca_social_options();
+							if( get_option('ca_utility_home_icon', true) )
+                  print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
 
-  foreach($social_share as $opt){
-if(get_option($opt .'_header') && "" !== get_option($opt) ){
-      $share = substr($opt, 10);
-      $share =  str_replace("_", "-", $share);
-    
-
-printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>', 
-$share, get_option($opt),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
-    }
-  }
-?>
+                  $social_share = get_ca_social_options();
+                
+                  foreach($social_share as $opt){
+                    	$share_email = 'ca_social_email' === $opt ? true : false;
+                    	$mailto = $share_email ? sprintf('mailto:?subject=%1$s | %2$s&body=%3$s',  get_the_title(), get_bloginfo('name') , get_permalink() ) : '';
+                    
+                      if( get_option($opt .'_header') && ( $share_email || "" !== get_option($opt) ) ){
+                            $share = substr($opt, 10);
+                            $share =  str_replace("_", "-", $share);
+                          
+                      			
+                      		printf('<li class="utility-social-%1$s"><a href="%2$s" title="Share via %3$s" %4$s ><span class="ca-gov-icon-%1$s hidden-print"></span><span class="sr-only">%3$s</span></a></li>', 
+                             $share, ( $share_email ? $mailto : get_option($opt) ),  ucwords($share), ( get_option($opt . '_new_window') ? 'target="_blank"' : '') );
+          						}
+            	}
+            ?>
                 </ul>
             </div>
             <div class="half settings-links hidden-print">

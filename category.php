@@ -1,41 +1,59 @@
 <?php
-get_header();
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
+		get_header();
 ?>
-<body <?php body_class('primary'); ?>>
+<body <?php body_class('primary') ?>  >
 <?php get_template_part('partials/content', 'header') ?>
+
+
 <div id="page-container">
 <div id="et-main-area">
-<div id="main">
-<?php if ( ! $is_page_builder_used ) : ?>
-	<div class="container">
-		<div id="content-area" class="clearfix">
-			<div id="left-area">
-<?php endif; ?>
-<main class="main-primary">
-			<?php while ( have_posts() ) : the_post(); ?>
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content">
-<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
-					<?php
-						the_content();
-						if ( ! $is_page_builder_used )
-							wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
-					?>
-					</div> <!-- .entry-content -->
+<div id="main-content" class="main-content ca_wp_container">
+	<main class="main-primary" >
+
+			<?php
+
+      global $wp_query;
+
+			if ( have_posts() ) :
+				while ( have_posts() ) : the_post();
+					$post_format = et_pb_post_format(); ?>
+
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
+						<a href="<?php the_permalink(); ?>" >
+               <?php  if( has_post_thumbnail() ) { the_post_thumbnail( 'medium','style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;'); } ?>
+						 </a>
 				<?php
-					if ( ! $is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) comments_template( '', true );
+				
+					et_divi_post_format_content();
 				?>
-				</article> <!-- .et_pb_post -->
-			<?php endwhile; ?>
-					<span class="return-top"></span>
-</main>
-<?php if ( ! $is_page_builder_used ) : ?>
-			</div> <!-- #left-area -->
-			<?php get_sidebar(); ?>
-		</div><!-- #content-area -->
-	</div> <!-- .container -->
-<?php endif; ?>
+            <div class="cat-info">
+					     <h2 class="page-title"><a href="<?php the_permalink(); ?>"><?php ( !empty(the_title('','',false) ) ? the_title()  : print 'No Title'); ?></a></h2>
+           <?php et_divi_post_meta(); ?>
+            </div>
+           <?php
+							truncate_post( 270 );
+          ?>
+					</article> <!-- .et_pb_post -->
+			<?php
+					endwhile;
+			?>
+      <div class="pagination clearfix">
+        <div class="alignleft"><?php next_posts_link(esc_html__('&laquo; Older Entries','Divi')); ?></div>
+        <div class="alignright"><?php previous_posts_link(esc_html__('Next Entries &raquo;', 'Divi')); ?></div>
+      </div>
+			<?php
+				else :
+					get_template_part( 'includes/no-results', 'index' );
+				endif;
+			?>
+  </main>
+  <?php
+if( is_active_sidebar('sidebar-1') ){
+   print '<aside id="non_divi_sidebar" class="col-lg-3">';
+		print get_sidebar('sidebar-1') ;
+    print '</aside>';
+}
+ ?>
 </div> <!-- #main-content -->
 </div>
 </div>
