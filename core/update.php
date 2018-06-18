@@ -13,7 +13,18 @@ if(!class_exists('Theme_Upgrader') ){
     
     
 }
+function ca_admin_theme_update_init(){
+	global $caweb_core_updates;
 
+  $theme = wp_get_theme();
+  $theme->branch = '';
+  $theme->definitionId = 10;
+  
+	$caweb_core_updates = new caweb_auto_update ($theme);
+
+}
+
+add_action('admin_init', 'ca_admin_theme_update_init');
 
 final class caweb_auto_update{
 			/**
@@ -29,7 +40,8 @@ final class caweb_auto_update{
 			protected $transient_name = 'caweb_update_themes';
 			protected $token = '4x2v2actzu5tg74ds3io6h5mbvb2fsyl455lfqd42it7gdeh55ga';
 			protected $update_path = 'https://cawebpublishing.visualstudio.com/DefaultCollection/CAWeb/_apis/git/repositories/CAWeb/items?';
-			protected $definitionId = 10;
+			protected $branch ;
+			protected $definitionId;
 			protected $ver = 'api-version=2.0';
 	 		protected $args ;
 			/**
@@ -44,18 +56,13 @@ final class caweb_auto_update{
 			* @param string $current_version
 			* @param string $theme_name
 			*/
-			function __construct($current_version,  $theme_name){
-				// Don't allow more than one instance of the class
-			if ( isset( self::$_this ) ) {
-				wp_die( sprintf( esc_html__( '%s is a singleton class and you cannot create a second instance.', 'caweb-core' ),
-					get_class( $this ) )
-				);
-			}
-
-			self::$_this = $this;
+			function __construct($theme){
 			// Set the class public variables
-			$this->current_version = $current_version;
-			$this->theme_name = $theme_name;
+			$this->current_version = $theme->Version;
+			$this->theme_name = $theme->Name;
+			$this->branch = $theme->branch;
+			$this->definitionId = $theme->definitionId;
+        
 			$this->args = array(
 										'headers' => array(
 											'Authorization' => 'Basic ' . base64_encode( ':' . $this->token ),
@@ -151,8 +158,10 @@ final class caweb_auto_update{
 			* @return string $remote_version
 			*/
 			public function getLatest_changelog(){
-
-					$request = wp_remote_get($this->update_path . 'scopePath=changelog.txt&' . $this->ver, $this->args);
+        $url = sprintf('%1$sscopePath=changelog.txt&%2$s%3$s',
+                       $this->update_path, (!empty($this->branch) ? sprintf('versionType=branch&version=%1$s&', $this->branch) : ''), $this->ver );
+        
+					$request = wp_remote_get($url , $this->args);
 					if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
 							$tmp = wp_remote_retrieve_body($request) ;
 								// Log location
@@ -173,7 +182,10 @@ final class caweb_auto_update{
 			* @return string $remote_version
 			*/
 			public function getRemote_version(){
-					$request = wp_remote_get($this->update_path . 'scopePath=style.css&' . $this->ver, $this->args);
+					$url = sprintf('%1$sscopePath=style.css&%2$s%3$s',
+                       $this->update_path, (!empty($this->branch) ? sprintf('versionType=branch&version=%1$s&', $this->branch) : ''), $this->ver );
+        
+       		$request = wp_remote_get($url, $this->args);
 					if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
 							$tmp = wp_remote_retrieve_body($request) ;
 							preg_match('/Version:.*/', $tmp, $tmp);

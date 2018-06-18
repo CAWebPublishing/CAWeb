@@ -2716,7 +2716,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 
 		$banner_style = 'style="background:url('.get_stylesheet_directory_uri().'/images/banner/banner-blank.png' . ') no-repeat; background-size: 100% 100%;"';
 
-		$image = ('on' !== $round ? 
+		$image = ('on' !== $round ?
 						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :
 						sprintf('<div class="profile-banner-img-wrapper">
 							<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>
@@ -2727,9 +2727,9 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_Module {
 											%2$s
 											<div class="banner-subtitle">%3$s</div>
 											<div class="banner-title">%4$s</div>
-											<div class="banner-link"><a href="%5$s">%6$s</a>
+											<div class="banner-link"><p>%6$s</p>
 						          </div></div></a></div>',
-					($round == 'off' ? $banner_style : ''),  $image, $job_title, $name, $url, 
+					($round == 'off' ? $banner_style : ''),  $image, $job_title, $name, $url,
 					$profile_link, ('on' !== $round ? '' : ' round-image'),  esc_attr( $class ),
     	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 

@@ -1682,26 +1682,29 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 
 				foreach($repos as $r => $repo){
-					if("on" == $definitions[0] && "on" !== $definitions[1])
+					if("on" == $definitions[0] && "on" !== $definitions[1]){
 					 	$name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
+					}elseif("on" == $definitions[0] && "on" == $definitions[1]){
+					 	$name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',$repo->html_url, $repo->name);
+					}else{
+						$name = '';
+					}
+						
+					$desc = ("on" == $definitions[2] && !empty($repo->description) ? 
+										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
+						
+					$fork = ("on" == $definitions[3] ?
+							sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') ) :
+									'');
 
-					if("on" == $definitions[0] && "on" == $definitions[1])
-					 	$name = sprintf('<strong>Project Title: </strong><a href="%1$s">%2$s</a><br />',$repo->html_url, $repo->name);
+					$created_at = ("on" == $definitions[4] ?
+												sprintf('<strong>Created on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->created_at) ) ) : '');
 
-					if("on" == $definitions[2] )
-						$desc = sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description);
+					$updated_at = ("on" == $definitions[5] ?
+												sprintf('<strong>Updated on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->updated_at ) )  ) : '');
 
-					if("on" == $definitions[3] )
-						$fork = sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') );
-
-					if("on" == $definitions[4] )
-						$created_at = sprintf('<strong>Created on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->created_at) ) );
-
-					if("on" == $definitions[5] )
-						$updated_at = sprintf('<strong>Updated on: </strong>%1$s<br />', date('m/d/Y', strtotime($repo->updated_at ) )  );
-
-					if("on" == $definitions[6] )
-						$language = sprintf('<strong>Language: </strong>%1$s<br />', (!empty( $repo->language ) ? $repo->language : 'English' ) );
+					$language =("on" == $definitions[6] ?
+											sprintf('<strong>Language: </strong>%1$s<br />', (!empty( $repo->language ) ? $repo->language : 'English' ) ) : '');
  
 					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
 														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
