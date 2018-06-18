@@ -1,5 +1,5 @@
 <?php
-class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
+class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Post Detail', 'et_builder' );
 
@@ -1547,11 +1547,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					$course_map = '';
 				}
 
-      	$output = sprintf('<article class="course-detail">%7$s<div class="description">%1$s</div>%2$s<div class="group">
+      	$output = sprintf('<article%7$s class="course-detail %8$s%9$s"><div class="description">%1$s</div>%2$s<div class="group">
 								<div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s</article>',
 								 $this->shortcode_content, $presenter, $organizer, $reg, $course_map,
 								sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
-                   (has_post_thumbnail() ? '' : '') );
+                   ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 				break;
 			// Event
 			case 'event':
@@ -1582,9 +1583,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
       	$reg = array_filter(array($event_registration_type , $event_cost));
       	$reg = (!empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg  ) ) : '');
 
-				$output = sprintf('<article class="event-detail">%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s</article>',
+				$output = sprintf('<article%7$s class="event-detail %8$s%9$s">%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s</article>',
 													(has_post_thumbnail() ? get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left','style'=>'padding-right:15px;') ) : ''), $this->shortcode_content, $presenter, $organizer, $reg,
-						sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+						sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                     ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )    );
 
 					break;
 
@@ -1619,9 +1622,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 
 				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s',$exam_course), $pub_date, $exam_final_filing_date, $exam_location);
 
-				$output = sprintf('<div class="exam-detail"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
+				$output = sprintf('<div%5$s class="exam-detail %6$s%7$s"><div class="header">%1$s%2$s</div>%3$s%4$s</div>',
 				(has_post_thumbnail() ? get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')): ''),
-							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ));
+							$exam_info, $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 				break;
 			// Jobs
@@ -1716,11 +1721,12 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 					</div> ', $job_agency_about) : '');
 
 
-				$output = sprintf('<article class="job-detail">
+				$output = sprintf('<article%8$s class="job-detail %9$s%10$s">
 								<div class="sub-header">%1$s%2$s</div><div class="group">%3$s%4$s</div>%5$s%6$s%7$s
 								</article>',
 								(!empty($agency_info) ? $agency_info : ''), $job_posted_date, $job_info, $job_apply_info,
-								$job_agency_about,  $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+								$job_agency_about,  $this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ), ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ) );
 
 					break;
 			// News
@@ -1733,11 +1739,13 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 													(!empty($news_author) ? sprintf('Author: %1$s<br />', $news_author)  : ''), $news_publish_date,
 													(!empty($news_city)  ? sprintf('%1$s', $news_city) : '') );
 
-     		$output = sprintf('<article class="news-detail">
+     		$output = sprintf('<article%5$s class="news-detail %6$s%7$s">
 					%1$s%2$s%3$s%4$s</article>',
 				( !empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '') ,
 				( has_post_thumbnail() ? get_the_post_thumbnail(null, array(75,75), array('class' => 'img-left' ) ) : ''),
-				$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+				$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+            ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 
 
@@ -1754,15 +1762,19 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_Module {
 										array('class' => $img_align , 'alt' =>  $profile_name,
 													'style' => 'width: 150px; height: 200px; padding-right: 15px;' ) ) : '');
 
-				$output = sprintf('<article class="profile-detail">%1$s%2$s%3$s%4$s</article>',
+				$output = sprintf('<article%5$s class="profile-detail %6$s%7$s">%1$s%2$s%3$s%4$s</article>',
 							( !empty($title) ? sprintf('<h1>%1$s</h1>', $title) : ''),$image,
-						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+						$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 
 				break;
 
 			case 'faqs':
-				$output = sprintf('<article id="faq_post_detail">%1$s%2$s</article>',
-													$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
+				$output = sprintf('<article%3$s class="%4$s%5$s">%1$s%2$s</article>',
+													$this->shortcode_content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ),
+                         ( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
+    	    ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ));
 				break;
 
 			case 'general':
@@ -1812,7 +1824,7 @@ new ET_Builder_Module_CAWeb_Post_Handler;
 
 
 
-class ET_Builder_Module_GitHub extends ET_Builder_Module {
+class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'GitHub', 'et_builder' );
 
@@ -1830,17 +1842,20 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			'title',
 			'username',
 			'client_id',
-			'client_secret',
-			'definitions',
+			'client_secret', 
+      'access_token', 'increase_rate_limit',
+			'definitions', 'request_email',
 			'per_page', 'repo_type',
-			'disabled_on'
+			'disabled_on', 'subject_line','email_body'
 		);
 
 		$this->fields_defaults = array(
 					'per_page' => array( 100,'add_default_setting' ),
 					'repo_type' => array( 'all' ,'add_default_setting' ),
+					'subject_line' => array( 'Repository Access Request' ,'add_default_setting' ),
 		);
-
+    
+    
 		$this->main_css_element = '%%order_class%%';
 
 		$this->options_toggles = array(
@@ -1853,6 +1868,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			),
 			'advanced' => array(
 				'toggles' => array(
+          'email' => array(
+						'title'    => esc_html__( 'Request Access Email', 'et_builder' ),
+						'priority' => 49,
+					),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -1870,36 +1889,12 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 		);
 
 		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );		
+		add_action( 'wp_footer', array( $this, 'js_frontend_preview' ) );
 	}
 	function get_fields() {
 		$fields = array(
-			'title' => array(
-			  'label'       => esc_html__( 'Title', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
-				'toggle_slug'	=> 'header',
-			),
-			'username' => array(
-			  'label'       => esc_html__( 'Username', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
-			'client_id' => array(
-			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
-			'client_secret' => array(
-			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
-			  'type'        => 'text',
-			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
-				'toggle_slug'	=> 'body',
-			),
 			'per_page' => array(
-			  'label'       => esc_html__( 'Per Page', 'et_builder' ),
+			  'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 			  'type'        => 'text',
 			  'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
 				'toggle_slug'	=> 'style',
@@ -1912,16 +1907,73 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					'all'  => esc_html__( 'All', 'et_builder' ),
 					'public'  => esc_html__( 'Public', 'et_builder' ),
 					'private' => esc_html__( 'Private', 'et_builder' ),
+					'forks' => esc_html__( 'Forks', 'et_builder' ),
 				),
 				'description' => 'Choose repository type you wish to display.',
-				'toggle_slug' => 'style'
+				'toggle_slug' => 'style',
+				'affects' => array('access_token', 'request_email', 'subject_line','email_body')
+			),
+      'access_token' => array(
+			  'label'       => esc_html__( 'Personal Access Token', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This is required for Private Repositories to display.', 'et_builder' ),
+				'toggle_slug'	=> 'style',
+				'depends_show_if_not'	=> 'public',
+			),
+      'request_email' => array(
+			  'label'       => esc_html__( 'Code Request Email', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'This is the administrators email that will receive all emails requesting access to private repositories.', 'et_builder' ),
+				'toggle_slug'	=> 'style',
+				'depends_show_if_not'	=> 'public',
+			),
+			'title' => array(
+			  'label'       => esc_html__( 'Title', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter a title for the list.', 'et_builder' ),
+				'toggle_slug'	=> 'header',
+			),
+			'username' => array(
+			  'label'       => esc_html__( 'Username', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Username.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+			),
+      'increase_rate_limit' => array(
+				'label'           => esc_html__( 'Increase Rate Limit', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'affects' => array('client_id, client_secret',),
+				'description' => et_get_safe_localization(
+						sprintf( __( 'Increase the maximum number of requests users are permitted to make per hour.
+										<a href="%1$s" target="_blank" title="Rate Limiting">Rate Limiting</a>', 'et_builder' ),
+																						esc_url( 'https://developer.github.com/v3/#rate-limiting' ) ) ),
+				'toggle_slug' => 'body',
+			),
+			'client_id' => array(
+			  'label'       => esc_html__( 'Client ID', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client ID.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+				'depends_show_if'	=> 'on',
+			),
+			'client_secret' => array(
+			  'label'       => esc_html__( 'Client Secret', 'et_builder' ),
+			  'type'        => 'text',
+			  'description' => esc_html__( 'Enter GitHub Client Secret.', 'et_builder' ),
+				'toggle_slug'	=> 'body',
+				'depends_show_if'	=> 'on',
 			),
 			'definitions' => array(
 			  'label'           => esc_html__( 'Definitions', 'et_builder' ),
 			  'type'            => 'multiple_checkboxes',
 			  'options'         => array(
-			    'name'   => esc_html__( 'Name', 'et_builder' ),
-			    'url'  => esc_html__( 'URL', 'et_builder' ),
+			    'name'  => esc_html__( 'Project Title', 'et_builder' ),
+          'url'  => esc_html__( 'Add Link to repositories (Public Repositories Only)', 'et_builder' ),
 			    'desc' => esc_html__( 'Description', 'et_builder' ),
 			    'fork' => esc_html__( 'Fork', 'et_builder' ),
 			    'created_at'  => esc_html__( 'Creation Date', 'et_builder' ),
@@ -1929,6 +1981,27 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 			    'language' => esc_html__( 'Language', 'et_builder' ),
 			  ),
 				'toggle_slug'	=> 'body',
+			),
+      'subject_line' => array(
+			  'label'       => esc_html__( 'Subject', 'et_builder' ),
+			  'type'        => 'text',
+        'description' => esc_html__( 'Enter Subject Line for the Request Access Email.', 'et_builder' ),
+				'toggle_slug'	=> 'email',
+				'tab_slug'        => 'advanced',
+				'depends_show_if_not'	=> 'public',
+			),
+      'email_body' => array(
+				'label'           => esc_html__( 'Body','et_builder'),
+				'type'            => 'textarea',
+				'option_category' => 'basic_option',
+				'description'     => et_get_safe_localization(
+						sprintf( __( 'Here you can create the content that will be used within the body. Content must use proper URL Encoding (e.g. %%0A = line feed, %%91 = [, %%93 = ] ) 
+										<a href="%1$s" target="_blank" title="URL Encoding Reference">URL Encoding Reference</a>', 'et_builder' ),
+																						esc_url( 'https://www.w3schools.com/tags/ref_urlencode.asp' ) ) ),
+        esc_html__( ' ','et_builder' ),
+				'toggle_slug'	=> 'email',
+				'tab_slug'        => 'advanced',
+				'depends_show_if_not'	=> 'public',
 			),
 			'disabled_on' => array(
 			  'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -2004,10 +2077,20 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 		$client_secret            = $this->shortcode_atts['client_secret'];
 
+		$access_token            = $this->shortcode_atts['access_token'];
+
 		$definitions            = $this->shortcode_atts['definitions'];
 
-		$per_page            = $this->shortcode_atts['per_page'];
+		$increase_rate_limit            = $this->shortcode_atts['increase_rate_limit'];
+
+		$request_email            = $this->shortcode_atts['request_email'];
     
+		$subject_line            = $this->shortcode_atts['subject_line'];
+    
+		$email_body            = $this->shortcode_atts['email_body'];
+    
+		$per_page            = $this->shortcode_atts['per_page'];
+
 		$repo_type            = $this->shortcode_atts['repo_type'];
 
 		$module_id            = $this->shortcode_atts['module_id'];
@@ -2044,33 +2127,40 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 
 		$output = '';
 
-    if( !empty($username) && !empty($client_id) && !empty($client_secret)  ){
+    if( !empty($username)  ){
+			
+			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
+										$username, $per_page,
+                    ("on" == $increase_rate_limit && !empty($client_id) && !empty($client_secret) ?
+                     sprintf('&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret) : ''), $repo_type,
+                    ( !empty($access_token) ? sprintf('&access_token=%1$s', $access_token) : '') );
 
-			$url = sprintf('https://api.github.com/orgs/%1$s/repos?per_page=%2$s&client_id=%3$s&client_secret=%4$s&type=%5$s',
-										$username, $per_page, $client_id ,$client_secret, $repo_type );
-
-				
 			$repos =  wp_remote_get($url ) ;
 			$code = wp_remote_retrieve_response_code($repos);
 
 			if(404 !== $code){
 
 				$repos = json_decode( wp_remote_retrieve_body( $repos ) ) ;
-
+				$private_exists = false;
 				foreach($repos as $r => $repo){
-					if("on" == $definitions[0] && "on" !== $definitions[1]){
-					 	$name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
-					}elseif("on" == $definitions[0] && "on" == $definitions[1]){
-					 	$name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',$repo->html_url, $repo->name);
-					}else{
-						$name = '';
-					}
+          $private = ( $repo->private ? '<strong>* This is a Private Repository</strong>' : '');
+          $private_exists = (!$private_exists ? $repo->private : true );
+          
+          if("on" == $definitions[0]){
+            if("on" !== $definitions[1] || $repo->private ){
+              $name = sprintf('<strong>Project Title: </strong>%1$s<br />', $repo->name);
+            }elseif("on" == $definitions[1]){
+                $name = sprintf('<strong>Project Title: </strong><a href="%1$s" target="blank">%2$s</a><br />',
+                                  $repo->html_url, $repo->name);
+            }
+          }
+
 
 					$desc = ("on" == $definitions[2] && !empty($repo->description) ?
 										sprintf('<strong>Project Description: </strong>%1$s<br />', $repo->description) : '');
 
 					$fork = ("on" == $definitions[3] ?
-							sprintf('<strong>Project governed by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'false' : 'true') ) :
+							sprintf('<strong>Project forked by another organization: </strong>%1$s<br />',  ( empty($repo->fork) ? 'False' : 'True') ) :
 									'');
 
 					$created_at = ("on" == $definitions[4] ?
@@ -2082,26 +2172,32 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 					$language =("on" == $definitions[6] && !empty( $repo->language ) ?
 											sprintf('<strong>Language: </strong>%1$s<br />', $repo->language  ) : '');
 
-					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s</li><hr></ul>',
-														(!empty($name) ? $name : ''), (!empty($desc) ? $desc : '') ,
-														(!empty($fork) ? $fork : '') , (!empty($created_at) ? $created_at : ''),
-														(!empty($updated_at) ? $updated_at : ''), (!empty($language) ? $language : ''));
+					$output .= sprintf( '<ul style="padding-bottom: 0px;"><li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s</li><hr></ul>',
+											(!empty($name) ? $name : ''), $desc , $fork, $created_at,
+                       $updated_at, $language, $private, (!empty($request_link) ? $request_link : '') );
 				}
 			}else{
-					$output = '<strong>No GitHub Repository Found</strong>';	
+					$output = '<strong>No GitHub Repository Found</strong>';
 
 			}
 		}
-			$output = sprintf('<div%1$s class="%2$s%3$s">%6$s%4$s%5$s</div>',
+    
+         
+     $request_link = (!empty($request_email) && $private_exists ?
+              sprintf('%1$s<a class="btn btn-default" href="mailto:%2$s?subject=%3$s&body=%4$s" 
+												style="padding:2px;margin:15px 15px 0 0">Request Access to Private Repositories</a>', 
+                      (!empty($title) ? '<br />': ''), $request_email, $subject_line, $email_body) : '');
+
+			$output = sprintf('<div%1$s class="%2$s%3$s">%4$s%5$s</div>',
 										( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),	esc_attr( $class ),
 										( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-										(!empty($title) ? sprintf('<h2>%1$s</h2>', $title) : ''), $output, '' );
-		
+                    (!empty($title) || !empty($request_link) ? sprintf('<h2>%1$s%2$s</h2>', $title, $request_link) : ''), $output );
+
 
 		return $output;
 
 	}
-	
+
 
 	// This is a non-standard function. It outputs JS code to render the
 		// module preview in the new Divi 3 frontend editor.
@@ -2112,27 +2208,27 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 				var newCall = '';
 				var amount = 0;
 				var repos = {};
-									
+
 				window.<?php echo $this->slug; ?>_preview = function(args) {
 					var output =  '';
-					
+
 					if( "" !== args.username  && "" !== args.client_id && "" !== args.client_secret ){
 						if("" == newCall || amount !== args.per_page){
 							newCall = args.definitions;
 							amount = args.per_page
-								
-							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page + 
-												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;	
-							
+
+							var url = 'https://api.github.com/users/' + args.username + '/repos?per_page=' + args.per_page +
+												'&client_id=' + args.client_id + '&client_secret=' + args.client_secret;
+
 							jQuery.get(url, function(response){
 										repos = response;
-							});						
-							
+							});
+
 						}
-						
+
 						var definitions =  undefined !== args.definitions && !Array.isArray(args.definitions) ? args.definitions.split("|") : args.definitions;
-							
-						for (var i = 0; i < repos.length; i++){		
+
+						for (var i = 0; i < repos.length; i++){
 										if("on" == definitions[0] && "on" !== definitions[1]){
 											var name = '<strong>Project Title: </strong>' + repos[i].name + '<br />';
 										}else if("on" == definitions[0] && "on" == definitions[1]){
@@ -2140,31 +2236,31 @@ class ET_Builder_Module_GitHub extends ET_Builder_Module {
 										}else{
 											var name = '';
 										}
-					
+
 										var desc = "on" == definitions[2] && null !== repos[i].description ?
 															'<strong>Project Description: </strong>' + repos[i].description + '<br />' : '';
-					
+
 										var fork = "on" == definitions[3] ?
 												'<strong>Project governed by another organization: </strong>' + ( "" == repos[i].fork ? 'false' : 'true') + '<br />' :	'';
-					
+
 										var created_at = "on" == definitions[4] ?
 																	'<strong>Created on: </strong>' + repos[i].created_at + '<br />' : '';
-					
+
 										var updated_at = "on" == definitions[5] ?
 																	'<strong>Updated on: </strong>' + repos[i].updated_at + '<br />' : '';
-					
+
 										var language = "on" == definitions[6] && null !== repos[i].language?
 																'<strong>Language: </strong>' + repos[i].language   + '<br />' : '';
 
-										output += '<ul style="padding-bottom: 0px;"><li>' + 
+										output += '<ul style="padding-bottom: 0px;"><li>' +
 																	name + desc + fork + created_at + updated_at + language + '</li><hr></ul>';
-																				
+
 							}
-						
+
 						output = '<div>' + (undefined == args.title ? "<h2>No Title Set</h2>" : "<h2>" + args.title + "</h2>") + output + '</div>';
-				
+
 						return  output;
-						
+
 					}
 
 				}

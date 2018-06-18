@@ -1,5 +1,12 @@
 <?php
-class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
+/*
+Divi Icon Field Names
+When using the et_pb_get_font_icon_list to render the icon picker,
+make sure the field name is one of the following:
+'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
+*/
+
+class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module{
 	function init(){
 		$this->name = esc_html__( 'FullWidth Panel', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_panel';
@@ -17,7 +24,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 			'panel_layout',
 			'show_button',
 			'use_icon',
-			'icon',
+			'font_icon',
 			'heading_align',
 			'button_link',
 			'title',
@@ -119,12 +126,12 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'affects' => array('icon',),
+				'affects' => array('font_icon',),
 				'description' => 'Choose whether to display an icon before the Heading',
 				'toggle_slug'       => 'header',
 				'tab_slug'       => 'advanced',
 			),
-			'icon' => array(
+			'font_icon' => array(
 				'label'           => esc_html__( 'Heading Icon','et_builder' ),
 				'type'            => 'text',
 			 	'option_category'     => 'configuration',
@@ -235,7 +242,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 		$max_width_last_edited = $this->shortcode_atts['max_width_last_edited'];
 		$panel_layout    = $this->shortcode_atts['panel_layout'];
 		$use_icon               = $this->shortcode_atts['use_icon'];
-		$icon               = $this->shortcode_atts['icon'];
+		$icon               = $this->shortcode_atts['font_icon'];
 		$title    = $this->shortcode_atts['title'];
 		$heading_align    = $this->shortcode_atts['heading_align'];
 		$heading_text_color    = $this->shortcode_atts['heading_text_color'];
@@ -305,7 +312,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_Panel;
 
-class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Header Slideshow Banner', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_banner';
@@ -315,7 +322,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
 		$this->whitelisted_fields = array(
-			'scroll_bar_icon',
+			'font_icon',
 			'scroll_bar_text',
  		 	'max_width',
 			'max_width_tablet',
@@ -326,7 +333,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 			'module_id',
 		);
 		$this->fields_defaults = array(
-			'scroll_bar_icon' => array( '%%114%%', 'add_default_setting' ),
+			'font_icon' => array( '%%114%%', 'add_default_setting' ),
     	'scroll_bar_text' => array( 'Explore', 'add_default_setting' ),
 
     );
@@ -371,7 +378,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 				'description'     => esc_html__( 'Here you can enter the text for the scroll bar.','et_builder' ),
 				'toggle_slug'     => 'scroll_bar',
 				),
-			'scroll_bar_icon' => array(
+			'font_icon' => array(
 				'label'           => esc_html__( 'Scroll Bar Icon','et_builder' ),
 				'type'            => 'text',
 				 'option_category'     => 'configuration',
@@ -458,7 +465,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 
 		$scroll_bar_text = $this->shortcode_atts['scroll_bar_text'];
 
-		$scroll_bar_icon = $this->shortcode_atts['scroll_bar_icon'];
+		$scroll_bar_icon = $this->shortcode_atts['font_icon'];
 
 		$class = "et_pb_ca_fullwidth_banner et_pb_module";
 
@@ -540,7 +547,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;
 
-class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Banner Slide', 'et_builder' );
 	$this->slug = 'et_pb_ca_fullwidth_banner_item';
@@ -696,7 +703,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 new ET_Builder_Module_Fullwidth_Banner_Item_Slide;
 
 
-class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Primary', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_section_primary';
@@ -1025,7 +1032,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_Module {
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Primary;
 
-class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
+class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Footer', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_section_footer';
@@ -1185,17 +1192,17 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_Module {
 }
 new ET_Builder_Module_FullWidth_Section_Footer;
 
-class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_Module {
+class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Footer Group', 'et_builder' );
 	$this->slug = 'et_pb_ca_section_fullwidth_footer_group';
 	$this->type = 'child';
 	$this->fullwidth = true;
-	$this->child_title_var = 'heading';
-	$this->child_title_fallback_var = 'heading';
+	$this->child_title_var = 'group_title';
+	$this->child_title_fallback_var = 'group_title';
 
 	$this->whitelisted_fields = array('heading_color', 'text_color',
-	'group_icon', 'group_icon_button', 'group_title',
+	'font_icon', 'group_icon_button', 'group_title',
 	'group_url', 'group_show_more_button', 'display_link_as_button',
 	'group_link1_show',
 	'group_link2_show', 'group_link3_show', 'group_link4_show',
@@ -1209,8 +1216,9 @@ function init() {
  'group_link_url8', 'group_link_text9', 'group_link_url9',
  'group_link_text10', 'group_link_url10','module_class', 'module_id', 'admin_label',
 		);
+
 	$this->fields_defaults = array(
-		'group_icon' => array('%-1%','add_default_setting'),
+		'font_icon' => array('%-1%','add_default_setting'),
 		'group_url' => array( 'http://','add_default_setting'),
 		'group_link_url1' => array( 'http://','add_default_setting'),
 				'group_link_url2' => array( 'http://','add_default_setting'),
@@ -1282,12 +1290,12 @@ function get_fields() {
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
 			),
 			'affects'     => array(
-				'#et_pb_group_icon',
+				'#et_pb_font_icon',
 			),
 			'toggle_slug'			=> 'body',
 			'tab_slug'				=> 'advanced',
 		),
-		'group_icon' => array(
+		'font_icon' => array(
 			'label' => esc_html__( 'Group Icon', 'et_builder' ),
 			'type' => 'text',
 			'option_category'     => 'configuration',
@@ -1327,316 +1335,60 @@ function get_fields() {
 				'on'  => esc_html__( 'Yes', 'et_builder' ),
 			),
 			'toggle_slug' => 'body',
-		),
-		'group_link1_show' => array(
-			'label'           => esc_html__( 'Link 1', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text1',
-				'#et_pb_group_link_url1',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text1' => array(
-			'label' => esc_html__( 'Link 1 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url1' => array(
-			'label' => esc_html__( 'Link 1 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link2_show' => array(
-			'label'           => esc_html__( 'Link 2', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text2','#et_pb_group_link_url2',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text2' => array(
-			'label' => esc_html__( 'Link 2 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url2' => array(
-			'label' => esc_html__( 'Link 2 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link3_show' => array(
-			'label'           => esc_html__( 'Link 3', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text3','#et_pb_group_link_url3',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text3' => array(
-			'label' => esc_html__( 'Link 3 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url3' => array(
-			'label' => esc_html__( 'Link 3 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link4_show' => array(
-			'label'           => esc_html__( 'Link 4', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text4','#et_pb_group_link_url4',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text4' => array(
-			'label' => esc_html__( 'Link 4 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url4' => array(
-			'label' => esc_html__( 'Link 4 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link5_show' => array(
-			'label'           => esc_html__( 'Link 5', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text5','#et_pb_group_link_url5',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text5' => array(
-			'label' => esc_html__( 'Link 5 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url5' => array(
-			'label' => esc_html__( 'Link 5 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link6_show' => array(
-			'label'           => esc_html__( 'Link 6', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text6','#et_pb_group_link_url6',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text6' => array(
-			'label' => esc_html__( 'Link 6 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url6' => array(
-			'label' => esc_html__( 'Link 6 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link7_show' => array(
-			'label'           => esc_html__( 'Link 7', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text7','#et_pb_group_link_url7',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text7' => array(
-			'label' => esc_html__( 'Link 7 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url7' => array(
-			'label' => esc_html__( 'Link 7 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link8_show' => array(
-			'label'           => esc_html__( 'Link 8', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text8','#et_pb_group_link_url8',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text8' => array(
-			'label' => esc_html__( 'Link 8 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url8' => array(
-			'label' => esc_html__( 'Link 8 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link9_show' => array(
-			'label'           => esc_html__( 'Link 9', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text9','#et_pb_group_link_url9',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text9' => array(
-			'label' => esc_html__( 'Link 9 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url9' => array(
-			'label' => esc_html__( 'Link 9 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link10_show' => array(
-			'label'           => esc_html__( 'Link 10', 'et_builder' ),
-			'type'            => 'yes_no_button',
-			'option_category' => 'configuration',
-			'options'         => array(
-				'off' => esc_html__( 'No', 'et_builder' ),
-				'on'  => esc_html__( 'Yes', 'et_builder' ),
-			),
-			'affects' => array(
-				'#et_pb_group_link_text10','#et_pb_group_link_url10',
-			),
-			'toggle_slug' => 'body',
-		),
-		'group_link_text10' => array(
-			'label' => esc_html__( 'Link 10 Text', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'group_link_url10' => array(
-			'label' => esc_html__( 'Link 10 URL', 'et_builder' ),
-			'type' => 'text',
-			'option_category' => 'basic_option',
-			'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
-			'depends_show_if' => 'on',
-			'toggle_slug' => 'body',
-		),
-		'module_id' => array(
-			'label'           => esc_html__( 'CSS ID', 'et_builder' ),
-			'type'            => 'text',
-			'option_category' => 'configuration',
-			'tab_slug'        => 'custom_css',
-			'toggle_slug' 		=> 'classes',
-			'option_class'    => 'et_pb_custom_css_regular',
-		),
-		'module_class' => array(
-			'label'           => esc_html__( 'CSS Class', 'et_builder' ),
-			'type'            => 'text',
-			'option_category' => 'configuration',
-			'tab_slug'        => 'custom_css',
-			'toggle_slug' 		=> 'classes',
-			'option_class'    => 'et_pb_custom_css_regular',
-		),
-	);
-	return $fields;
+		),);
+
+  for($i = 1; $i <= 10; $i++){
+      $groups[sprintf('group_link%1$s_show', $i)] = array(
+				'label'           => esc_html__( sprintf('Link %1$s', $i), 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects' => array(
+					sprintf('group_link_text%1$s', $i),sprintf('group_link_url%1$s', $i),
+				),
+				'toggle_slug'				=> 'body',
+			);
+
+			 $groups[sprintf('group_link_text%1$s', $i)] = array(
+				'label' => esc_html__( sprintf('Link %1$s Text', $i), 'et_builder' ),
+				'type' => 'text',
+				'option_category' => 'basic_option',
+				'description' => esc_html__( 'Define the text for the link.', 'et_builder' ),
+				'depends_show_if' => 'on',
+				'toggle_slug'				=> 'body',
+			);
+       $groups[sprintf('group_link_url%1$s', $i)] = array(
+				'label' => esc_html__( sprintf('Link %1$s URL', $i), 'et_builder' ),
+				'type' => 'text',
+				'option_category' => 'basic_option',
+				'description' => esc_html__( 'Define the URL for the destination. (http:// must be included)', 'et_builder' ),
+				'depends_show_if' => 'on',
+				'toggle_slug'				=> 'body',
+			  );
+    }
+
+  $ending_fields['module_id'] = array(
+			  'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
+			  'option_class'    => 'et_pb_custom_css_regular',
+			);
+
+			$ending_fields['module_class'] = array(
+			  'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+			  'type'            => 'text',
+			  'option_category' => 'configuration',
+			  'tab_slug'        => 'custom_css',
+				'toggle_slug'			=> 'classes',
+			  'option_class'    => 'et_pb_custom_css_regular',
+		);
+
+	return array_merge($fields, $groups, $ending_fields);
 }
 function shortcode_callback( $atts, $content = null, $function_name ) {
 	$module_id            = $this->shortcode_atts['module_id'];
@@ -1647,7 +1399,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 	$text_color= $this->shortcode_atts['text_color'];
 
-	$group_icon = $this->shortcode_atts['group_icon'];
+	$group_icon = $this->shortcode_atts['font_icon'];
 
 		$group_title = $this->shortcode_atts['group_title'];
 
@@ -1657,67 +1409,13 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 
 		$group_show_more_button = $this->shortcode_atts['group_show_more_button'];
 
-$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
+		$display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 
-		$group_link1_show = $this->shortcode_atts['group_link1_show'];
-
-		$group_link_text1 = $this->shortcode_atts['group_link_text1'];
-
-		$group_link_url1 = $this->shortcode_atts['group_link_url1'];
-
-		$group_link2_show = $this->shortcode_atts['group_link2_show'];
-
-		$group_link_text2 = $this->shortcode_atts['group_link_text2'];
-
-		$group_link_url2 = $this->shortcode_atts['group_link_url2'];
-
-		$group_link3_show = $this->shortcode_atts['group_link3_show'];
-
-		$group_link_text3 = $this->shortcode_atts['group_link_text3'];
-
-		$group_link_url3 = $this->shortcode_atts['group_link_url3'];
-
-		$group_link4_show = $this->shortcode_atts['group_link4_show'];
-
-		$group_link_text4 = $this->shortcode_atts['group_link_text4'];
-
-		$group_link_url4 = $this->shortcode_atts['group_link_url4'];
-
-		$group_link5_show = $this->shortcode_atts['group_link5_show'];
-
-		$group_link_text5 = $this->shortcode_atts['group_link_text5'];
-
-		$group_link_url5 = $this->shortcode_atts['group_link_url5'];
-
-		$group_link6_show = $this->shortcode_atts['group_link6_show'];
-
-		$group_link_text6 = $this->shortcode_atts['group_link_text6'];
-
-		$group_link_url6 = $this->shortcode_atts['group_link_url6'];
-
-		$group_link7_show = $this->shortcode_atts['group_link7_show'];
-
-		$group_link_text7 = $this->shortcode_atts['group_link_text7'];
-
-		$group_link_url7 = $this->shortcode_atts['group_link_url7'];
-
-		$group_link8_show = $this->shortcode_atts['group_link8_show'];
-
-		$group_link_text8 = $this->shortcode_atts['group_link_text8'];
-
-		$group_link_url8 = $this->shortcode_atts['group_link_url8'];
-
-		$group_link9_show = $this->shortcode_atts['group_link9_show'];
-
-		$group_link_text9 = $this->shortcode_atts['group_link_text9'];
-
-		$group_link_url9 = $this->shortcode_atts['group_link_url9'];
-
-		$group_link10_show = $this->shortcode_atts['group_link10_show'];
-
-		$group_link_text10 = $this->shortcode_atts['group_link_text10'];
-
-		$group_link_url10 = $this->shortcode_atts['group_link_url10'];
+  	for($i = 1; $i <= 10; $i++){
+      $group_link_show{$i} = $this->shortcode_atts[sprintf('group_link%1$s_show', $i)];
+      $group_link_text{$i} = $this->shortcode_atts[sprintf('group_link_text%1$s', $i)];
+      $group_link_url{$i} = $this->shortcode_atts[sprintf('group_link_url%1$s', $i)];
+    }
 
 	$class = "quarter";
 
@@ -1742,45 +1440,12 @@ $display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 
 	$group_links = '';
 
-	$group_links .= ("on" == $group_link1_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url1, $link_as_button, $text_color, $icon, $group_link_text1 ) : '');
+  for($i = 1; $i <= 10; $i++){
+    $group_links .= ("on" == $group_link_show{$i} ?
+            sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
+            $group_link_url{$i}, $link_as_button, $text_color, $icon, $group_link_text{$i} ) : '');
 
-	$group_links .= ("on" == $group_link2_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url2, $link_as_button, $text_color, $icon, $group_link_text2 ) : '');
-
-	$group_links .= ("on" == $group_link3_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url3, $link_as_button, $text_color, $icon, $group_link_text3 ) : '');
-
-	$group_links .= ("on" == $group_link4_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url4, $link_as_button, $text_color, $icon, $group_link_text4 ) : '');
-
-	$group_links .= ("on" == $group_link5_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url5, $link_as_button, $text_color, $icon, $group_link_text5 ) : '');
-
-	$group_links .= ("on" == $group_link6_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url6, $link_as_button, $text_color, $icon, $group_link_text6 ) : '');
-
-	$group_links .= ("on" == $group_link7_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url7, $link_as_button, $text_color, $icon, $group_link_text7 ) : '');
-
-	$group_links .= ("on" == $group_link8_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url8, $link_as_button, $text_color, $icon, $group_link_text8 ) : '');
-
-	$group_links .= ("on" == $group_link9_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url9, $link_as_button, $text_color, $icon, $group_link_text9 ) : '');
-
-	$group_links .= ("on" == $group_link10_show ?
-	sprintf('<li><a href="%1$s"%2$s%3$s>%4$s%5$s</a></li>' ,
-	$group_link_url10, $link_as_button, $text_color, $icon, $group_link_text10 ) : '');
+   }
 
 	$output = sprintf('<div%1$s class="%2$s%3$s">
 			<h4 %4$s>%5$s</h4>
@@ -1795,7 +1460,7 @@ $display_link_as_button= $this->shortcode_atts['display_link_as_button'];
 }
 new ET_Builder_Module_FullWidth_Footer_Group;
 
-class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Carousel', 'et_builder' );
 		$this->fullwidth = true;
@@ -2120,7 +1785,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_Module 
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
 
-class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_Module {
+class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Module{
 function init() {
 	$this->name = esc_html__( 'FullWidth Carousel Slide', 'et_builder' );
 	$this->slug = 'et_pb_ca_fullwidth_section_carousel_slide';
@@ -2287,7 +1952,7 @@ function shortcode_callback( $atts, $content = null, $function_name ) {
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide;
 
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_Module{
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tiles', 'et_builder' );
 		$this->fullwidth = true;
@@ -2515,7 +2180,7 @@ style="background-image:url(%3$s); background-size: cover;"><div class="teaser">
 }
 new ET_Builder_Module_Fullwidth_CA_Service_Tiles;
 
-class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_Module{
+class ET_Builder_Module_Fullwidth_CA_Service_Tiles_Item extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Service Tile Item', 'et_builder' );
 		$this->slug = 'et_pb_ca_fullwidth_service_tiles_item';

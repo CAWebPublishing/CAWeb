@@ -342,11 +342,15 @@ function get_icon_span($font, $style = array()){
 	if( empty($font) )
 		return '';
 
+  // "%22" are saved as double quotes in shortcode attributes. Encode them back into %22
+  $font = str_replace('"','%22', $font );
+ 
 	$tmp = get_ca_icon_list();
 
 	if( isset( $tmp[$font] ) )
 		return sprintf('<span class="ca-gov-icon-%1$s"></span>', $font);
 
+  
 	if(  preg_match( "/^%%/", trim( $font ) ) ){
 			$font_index = preg_replace('/%%/','',$font);
 
