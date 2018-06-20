@@ -143,6 +143,27 @@ function caweb_save_options($values = array(), $files = array()) {
         }
     }
 
+    // Alert Banners
+    update_site_option('dev', $values);
+    $alerts = array();
+
+    for ($i = 0; $i < $values['caweb_alert_count']; $i++) {
+        $count = $i++;
+        $data = array();
+
+        $data['header'] = $values['alert-header-' + $count];
+        $data['message'] = $values['alert-message-' + $count];
+        $data['page_display'] = $values['alert-display-' + $count];
+        $data['color'] = $values['alert-banner-color-' + $count];
+        $data['button'] = $values['alert-read-more-' + $count];
+        $data['url'] = $values['alert-read-more-url-' + $count];
+        $data['target'] = $values['alert-read-more-target-' + $count];
+        $data['icon'] = $values['alert-icon-' + $count];
+
+        $alerts[] = $data;
+    }
+    $values['caweb_alerts'] = $alerts;
+
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
@@ -337,6 +358,8 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 
     $caweb_special_options = array('caweb_username', 'caweb_password', 'caweb_multi_ga');
 
+    $caweb_alert_options = array('caweb_alerts');
+
     switch ($group) {
 		case 'general':
 			$output = $caweb_general_options;
@@ -378,9 +401,12 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 			$output = $caweb_sanitized_options;
 
 			break;
+    case 'alerts':
+      $output = $caweb_alert_options;
+
 		default:
 			$output = array_merge($caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
-							$caweb_google_options, $caweb_social_options, $caweb_social_extra_options, $caweb_misc_options);
+							$caweb_google_options, $caweb_social_options, $caweb_social_extra_options, $caweb_misc_options, $caweb_alert_options);
 
 			break;
 	}

@@ -9,7 +9,7 @@
 	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?= ! isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">General Settings</a>
 
 	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">Social Media Links</a>
-	
+
 	<a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">Custom CSS</a>
 
 	<a href="#alert-banners" name="alert-banners" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'alert-banners' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">Alert Banners</a>
@@ -89,7 +89,7 @@
 			<span class="tooltiptext">Apply a site wide color scheme.</span></div></th>
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
-        <?php 
+        <?php
 					$v4schemes = caweb_color_schemes(4);
         	$schemes = caweb_color_schemes(0, 'displayname');
 
@@ -316,9 +316,9 @@
 			<tr><td></td>
 			<td>
 				<p class="option">Uploaded Styles</p>
-				
-				<ol id="uploadedCSS">	
-				<?php	
+
+				<ol id="uploadedCSS">
+				<?php
 					foreach ($ext_css as $name) {
 					    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 
@@ -328,7 +328,7 @@
 						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
 					}
 				?>
-			</ol>		
+			</ol>
 			</tr>
 			<?php endif; ?>
 		</tr>
@@ -344,50 +344,18 @@
 		</table>
 
 	</div>
-	
+
 	<div id="alert-banners" class="<?= ( ! isset($_POST['tab_selected']) || 'alert-banners' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
 		<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
 		<table class="form-table">
-			<tr>
-				<td colspan="2">
-					<div>
-						<p>Header</p>
-						<input type="text" class="alertHeader" name="" />
-						<p>Message</p>
-						<textarea form="ca-options-form" class="alertMessage" name=""></textarea>
-					</div>
-				</td>
-			</tr>
-		
-			<tr>
-					<th>Options</th>
-					<td>
-						<p>Display on</p>
-						<label><input type="radio" name="display" value="home"> Home Page Only</label>
-						<label><input type="radio" name="display" value="all"> All Pages</label>
-					
-						<p>Banner Color</p>
-						<input type="color" name="favcolor" value="">
-						
-						<p><label>Read More button <input type="checkbox" name="read_more" value=""></label></p>
-						<input type="text" name="read_more_url" value="">
-						<p>Open link in</p>
-						<label><input type="radio" name="read_more" value="">New Tab</label>
-						<label><input type="radio" name="read_more" value="">Current Tab</label>
-						
-						<p>Add Icon</p>
-						<ul class="caweb-icon-menu">
-							<?php
+			<?php
+				$alerts = get_option('caweb_alerts', array());
 
-								foreach (caweb_get_icon_list() as $name=>$code) {
-								    printf('<li data-icon="%1$s" class="icon-option %3$s"  name="%2$s"></li>',
-						             esc_attr($code), $name, ( ! empty($tmp['_caweb_menu_icon'][0]) && $name == $tmp['_caweb_menu_icon'][0] ? 'is_selected' : ''));
-								} ?>
-						</ul>
-					
-					</td>
-				</td>
-			<tr>
+				foreach ($alerts as $a => $data) {
+				    printf('<tr><td></td></tr>');
+				}
+			?>
+			<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">
 		</table>
 
 	</div>

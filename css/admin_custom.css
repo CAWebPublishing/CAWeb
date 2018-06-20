@@ -39,8 +39,7 @@ select#ca_google_trans_display {
 }
 .caweb-icon-menu{
 	background-color: white ;
-	height: 150px;
-	width: 50%;
+	height: 205px;
 	overflow-y: scroll;
 }
 .caweb-icon-menu li{
@@ -48,17 +47,49 @@ select#ca_google_trans_display {
 	float: left;
 	padding: 8px;
 }
+.caweb-icon-menu li:hover{
+	background-color: #008BDB;
+	cursor: pointer;
+}
 .caweb-icon-menu li:before{
 	font-family: 'CaGov', 'ETModules';
 	content: attr(data-icon);
 }
-.alertHeader{
-	width: 25%;
+[class*="caweb-alert-"] p{
+	font-weight: bold;
+	margin-bottom: 0;
 }
-.alertMessage{
+[class*="caweb-alert-"] label + label{
+	padding-left: 15px;
+}
+[class*="caweb-alert-"] div input[type="text"] {
+    width: 100%;
+}
+[class*="caweb-alert-"] div.hidden + p + ul{
+	height: 295px;
+}
+[class*="caweb-alert-"] div.hidden + p + ul{
+	height: 295px;
+}
+.caweb-alert{
 	width: 50%;
-	height: 150px;
+}
+.caweb-alert p a{
+	float: right;
+}
+
+.caweb-alert input[type="text"]{
+	width: 50%;
+}
+.caweb-alert textarea{
+	width: 100%;
+	height: 175px;
 	resize: none;
+}
+.removeAlert,
+.removeAlert:hover{
+	color: red;
+	cursor: pointer
 }
 #addAlertBanner{
 	text-decoration: none;

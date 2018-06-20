@@ -4,11 +4,11 @@
  jQuery(document).ready(function() {
 	 $ = jQuery.noConflict();
 	var changeMade = false;
-   
+
   $(window).on('beforeunload', function(){
     	if( changeMade && "nav-menus.php" !== args.changeCheck)
     			return 'Are you sure you want to leave?';
-    
+
 	});
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
@@ -18,17 +18,17 @@ $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 $('.caweb-nav-tab').click(function() {
 	var tabs = document.getElementsByClassName('caweb-nav-tab');
 	var selected_tab = this.getAttribute("name");
-      
+
 	for (i = 0; i < tabs.length; i++) {
 		if( selected_tab !== tabs[i].getAttribute("name") ){
 			tabs[i].classList.remove("nav-tab-active");
       		document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
-		}else{             
+		}else{
 			tabs[i].classList.add("nav-tab-active");
             document.getElementById(selected_tab).classList.remove('hidden');
         }
     }
-      
+
 	document.getElementById('tab_selected').value = selected_tab;
  });
 
@@ -40,37 +40,37 @@ $('#ca_site_version').change(function() {
 	var color_scheme_picker = $('#ca_site_color_scheme')[0];
 	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
 	var resetColor = false
-	  
-	for (var i = 0; i < extra_options.length; i++) {   
+
+	for (var i = 0; i < extra_options.length; i++) {
 		if (version >= 5.0) {
            extra_options[i].classList.remove("hidden");
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.add("hidden");
            }
-		   
-           // if theres no Google Search ID 
+
+           // if theres no Google Search ID
            if( !$('#ca_google_search_id').val().trim() ){
              front_search_option.addClass('hidden');
            }else{
-             front_search_option.removeClass('hidden');             
+             front_search_option.removeClass('hidden');
            }
-		   
+
          } else {
-			
+
            extra_options[i].classList.add("hidden");
-		   
+
 		   if( extra_options[i].value == color && extra_options[i].classList.contains('extra'))
 				resetColor = true;
-				
+
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.remove("hidden");
            }
          }
-    
+
        }
-	   
+
 	   if(resetColor){
-		   for (var i = 0; i < color_scheme_picker.options.length; i++) {  
+		   for (var i = 0; i < color_scheme_picker.options.length; i++) {
 				if(  !color_scheme_picker.options[i].classList.contains('extra')  ){
 					color_scheme_picker.selectedIndex = i;
 					break;
@@ -85,31 +85,31 @@ $('#ca_site_version').change(function() {
         document.getElementById('ca_fav_ico_img').src = ico;
         document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
     });
-   
-$('#ca_google_search_id').on('input',function(e){ 
+
+$('#ca_google_search_id').on('input',function(e){
   var front_search_option = $('#general table:first tr:nth-child(6)');
   var site_version = $('#ca_site_version option:selected').val();
-  // if theres no Google Search ID 
+  // if theres no Google Search ID
   if( !this.value.trim() ){
     front_search_option.addClass('hidden');
   }else if(5 <= site_version){
     front_search_option.removeClass('hidden');
   }
-});  
+});
 
 $('.removeStyle').click(function(e){
   e.preventDefault();
 	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
-	
+
 	if (r == true) {
-		changeMade = true; 
+		changeMade = true;
 		this.parentNode.remove();
 	}
 });
 
 $( "#uploadedCSS" ).sortable();
 $( "#uploadedCSS" ).disableSelection();
-	
+
 $('#addCSS').click(function(e){
 	var ext_css_table = $('#custom-css table:first');
 	var rowCount = ext_css_table.children().children().length;
@@ -118,55 +118,226 @@ $('#addCSS').click(function(e){
 	var rem = document.createElement('A');
 	var col2 = document.createElement('TD');
 	var fileUpload = document.createElement('Input');
-	
+
   row.classList = "pending-stylesheet";
   rem.classList = "dashicons dashicons-dismiss removeStyle";
-  
+
 	fileUpload.type = "file";
 	fileUpload.name = rowCount + "_upload";
 	fileUpload.id = rowCount + "_upload";
 	fileUpload.accept = ".css";
-  
+
   rem.addEventListener('click', function (e) {
     e.preventDefault();
     var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
-   
+
    if (r == true) {
-  		changeMade = true; 
+  		changeMade = true;
   		this.parentNode.parentNode.remove();
   	}
   });
-  
+
   fileUpload.addEventListener('change', function () {
     var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
-    var ext = name.lastIndexOf(".") > 0 ? 
+    var ext = name.lastIndexOf(".") > 0 ?
                       name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
-                      
+
     if( "" === ext || "css" !== ext){
       alert(name + " isn't a valid CSS extension and was not uploaded.");
       this.parentNode.remove();
-    }else{      
-      rem.title = "remove " + name; 
-    }               
-    
+    }else{
+      rem.title = "remove " + name;
+    }
+
   });
-  
+
 	col2.append(rem);
 	col2.append(fileUpload);
-	
+
 	row.append(col1);
 	row.append(col2);
-	
-	ext_css_table.append(row);	
 
-	changeMade = true; 
-	
+	ext_css_table.append(row);
+
+	changeMade = true;
+
 });
 
-$('#addCSS').click(function(e){
-	
+$('#addAlertBanner').click(function(e){
+  $('#caweb_alert_count').val( function(i, oldval) { return ++oldval; } );
 
-changeMade = true; 
+  var alertTable = $('#alert-banners table:first');
+	var rowCount = alertTable.children().children().length + 1;
+	var row = document.createElement('TR');
+	var col = document.createElement('TD');
+
+  var alert_container = document.createElement('DIV');
+  var alert_header = document.createElement('P');
+  var menu = document.createElement('A');
+  var rem = document.createElement('A');
+
+  var alert_header_input = document.createElement('INPUT');
+  var alert_msg = document.createElement('P');
+  var alert_msg_textarea = document.createElement('TEXTAREA');
+
+  var alert_settings_wrapper = document.createElement('DIV');
+  var alert_settings = document.createElement('DIV');
+  var alert_display = document.createElement('P');
+  var label1 = document.createElement('LABEL');
+  var alert_display_home = document.createElement('INPUT');
+  var label2 = document.createElement('LABEL');
+  var alert_display_all = document.createElement('INPUT');
+  var alert_banner_color = document.createElement('P');
+  var alert_banner_color_input = document.createElement('INPUT');
+  var alert_read_more = document.createElement('P');
+  var label3 = document.createElement('LABEL');
+  var alert_read_more_input = document.createElement('INPUT');
+
+  var container = document.createElement('DIV');
+  var alert_read_more_target_url = document.createElement('P');
+  var alert_read_more_target_url_input = document.createElement('INPUT');
+  var alert_open_link = document.createElement('LABEL');
+  var alert_read_more_new_target = document.createElement('INPUT');
+  var alert_read_more_current_target = document.createElement('INPUT');
+
+  var alert_icon = document.createElement('P');
+  var alert_icon_list = document.createElement('UL');
+  var alert_icon_input = document.createElement('INPUT');
+
+  alert_settings_wrapper.id = "caweb-alert-" + rowCount;
+  alert_settings_wrapper.style.display = "none";
+
+  alert_settings.classList = "caweb-alert-" + rowCount;
+
+  alert_display.innerHTML = "Display on";
+
+  alert_display_home.type = "radio";
+  alert_display_home.name = "alert-display-" + rowCount;
+  alert_display_home.value = "home";
+  alert_display_home.checked = true;
+
+  label1.appendChild(alert_display_home);
+  label1.appendChild(document.createTextNode("Home Page Only"));
+
+  alert_display_all.type = "radio";
+  alert_display_all.name = "alert-display-" + rowCount;
+  alert_display_all.value = "all";
+
+  label2.appendChild(alert_display_all);
+  label2.appendChild(document.createTextNode("All Pages"));
+
+  alert_banner_color.innerHTML = "Banner Color";
+
+  alert_banner_color_input.type = "color";
+  alert_banner_color_input.name = "alert-banner-color-" + rowCount;
+
+  label3.innerHTML = "Add Read More Button ";
+  alert_read_more_input.type = "checkbox";
+  alert_read_more_input.name = "alert-read-more-" + rowCount;
+
+  alert_read_more_input.addEventListener('click', function (e) {
+    this.parentNode.parentNode.nextSibling.classList.toggle("hidden");
+  });
+
+  label3.appendChild(alert_read_more_input);
+  alert_read_more.appendChild(label3);
+
+  alert_read_more_target_url.innerHTML = "Read More Button URL";
+
+  alert_read_more_target_url_input.type = "text";
+  alert_read_more_target_url_input.name = "alert-read-more-url-" + rowCount;
+
+  alert_open_link.innerHTML = "Open link in ";
+  alert_read_more_new_target.type = "radio";
+  alert_read_more_new_target.name = "alert-read-more-target-" + rowCount;
+  alert_read_more_new_target.checked = true;
+  alert_read_more_new_target.value = "_blank";
+
+  alert_read_more_current_target.type = "radio";
+  alert_read_more_current_target.name = "alert-read-more-target-" + rowCount;
+  alert_read_more_current_target.value = "";
+
+  alert_open_link.appendChild(alert_read_more_new_target);
+  alert_open_link.appendChild(document.createTextNode("New Tab "));
+  alert_open_link.appendChild(alert_read_more_current_target);
+  alert_open_link.appendChild(document.createTextNode("Current Tab"));
+
+  container.classList = "hidden";
+  container.appendChild(alert_read_more_target_url);
+  container.appendChild(alert_read_more_target_url_input);
+  container.appendChild(alert_open_link);
+
+  alert_icon.innerHTML = "Add Icon ";
+
+  alert_icon_list.classList = "caweb-icon-menu";
+  for (i = 0; i < args.caweb_icons.length; i++) {
+    var icon = document.createElement('LI');
+    icon.classList = "icon-option ca-gov-icon-" + args.caweb_icons[i];
+    icon.title = args.caweb_icons[i];
+
+    icon.addEventListener('click', function (e) {
+      this.parentNode.nextSibling.value = this.title;
+    });
+    alert_icon_list.appendChild(icon);
+  }
+
+  alert_icon_input.name = "alert-icon-" + rowCount;
+  alert_icon_input.type = "hidden";
+
+  // Alert Container
+  alert_container.classList = "caweb-alert";
+
+  menu.name = "Alert Settings";
+  menu.classList = "thickbox dashicons dashicons-menu";
+  menu.href = "#TB_inline?width=600&height=550&inlineId=caweb-alert-" + rowCount;
+
+  rem.classList = "dashicons dashicons-dismiss removeAlert";
+  rem.addEventListener('click', function (e) {
+    $('#caweb_alert_count').val( function(i, oldval) { return --oldval; } );
+    this.parentNode.parentNode.parentNode.parentNode.remove();
+  });
+
+  alert_header.innerHTML = "Header ";
+  alert_header.appendChild(rem);
+  alert_header.appendChild(menu);
+
+  alert_header_input.name = "alert-header-" + rowCount;
+  alert_header_input.type = "text";
+
+  alert_msg.innerHTML = "Message";
+
+  alert_msg_textarea.form = "ca-options-form";
+  alert_msg_textarea.name = "alert-message-" + rowCount;
+
+  row.classList = "pending-alert";
+
+  alert_settings.appendChild(alert_display);
+  alert_settings.appendChild(label1);
+  alert_settings.appendChild(label2);
+  alert_settings.appendChild(alert_banner_color);
+  alert_settings.appendChild(alert_banner_color_input);
+  alert_settings.appendChild(alert_read_more);
+  alert_settings.appendChild(container);
+  alert_settings.appendChild(alert_icon);
+  alert_settings.appendChild(alert_icon_list);
+  alert_settings.appendChild(alert_icon_input);
+
+
+  alert_container.appendChild(alert_header);
+  alert_container.appendChild(alert_header_input);
+  alert_container.appendChild(alert_msg);
+  alert_container.appendChild(alert_msg_textarea);
+
+  alert_settings_wrapper.appendChild(alert_settings);
+
+  col.appendChild(alert_settings_wrapper);
+  col.appendChild(alert_container);
+
+	row.append(col);
+
+	alertTable.append(row);
+
+  changeMade = true;
 
 });
  /* End of CAWeb Option Page */
