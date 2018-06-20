@@ -352,11 +352,17 @@
 				$alerts = get_option('caweb_alerts', array());
 
 				foreach ($alerts as $a => $data) {
-				    $alert = sprintf('<div class="caweb-alert"><p>Header <a class="dashicons dashicons-dismiss removeAlert"></a><a name="Alert Settings" class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&inlineId=caweb-alert-%1$s"></a></p><input name="alert-header-%1$s" type="text" value="%2$s"><p>Message</p><textarea name="alert-message-%1$s">%3$s</textarea></div>', $a + 1, $data['header'], $data['message']);
+				    $alert = sprintf('<div class="caweb-alert"><pre><p>%1$s</p><a class="dashicons dashicons-dismiss removeAlert"></a><a name="Alert Settings" class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&inlineId=caweb-alert-%2$s"></a><a class="dashicons dashicons-arrow-down" title="%1$s"></a></pre><div class="hidden"><input name="alert-header-%2$s" type="text" value="%1$s"><p>Message</p><textarea name="alert-message-%2$s">%3$s</textarea></div></div>', $data['header'], $a + 1, $data['message']);
+						
+						$icons = caweb_get_icon_list(-1, '', true);
+						$iconList = '';
+						foreach($icons as $i){
+							$iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s" title="%1$s"></li>', $i);
+						}
+						
+				    $settings = sprintf('<div id="caweb-alert-%1$s" style="display:none;"><div class="caweb-alert-%1$s"><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div class="hidden"><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%6$s"><label>Open link in <input type="radio" name="alert-read-more-target-%1$s" value="_blank"%7$s>New Tab <input type="radio" name="alert-read-more-target-%1$s"%8$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul class="caweb-icon-menu">%9$s</ul><input name="alert-icon-%1$s" type="hidden" value="%10$s"></div></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true"' : '', "all" == $data['page_display'] ? ' checked="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon'] );
 
-				    $settings = sprintf('<div id="caweb-alert-%1$s"><div class="caweb-alert-%1$s"><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home">Home Page Only</label></div></div>', $a + 1,);
-
-				    printf('<tr><td>%1$s</td></tr>', $alert);
+				    printf('<tr><td>%1$s%2$s</td></tr>', $alert, $settings);
 				}
 			?>
 			<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">

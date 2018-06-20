@@ -1,6 +1,6 @@
  /* Functions used on Admin Pages */
  /* CAWeb Option Page */
-
+ 
  jQuery(document).ready(function() {
 	 $ = jQuery.noConflict();
 	var changeMade = false;
@@ -167,14 +167,16 @@ $('#addAlertBanner').click(function(e){
   $('#caweb_alert_count').val( function(i, oldval) { return ++oldval; } );
 
   var alertTable = $('#alert-banners table:first');
-	var rowCount = alertTable.children().children().length + 1;
+	var rowCount = alertTable[0].getElementsByTagName('TR').length + 1;
 	var row = document.createElement('TR');
 	var col = document.createElement('TD');
 
   var alert_container = document.createElement('DIV');
+	var alert_header_wrapper = document.createElement('PRE');
   var alert_header = document.createElement('P');
   var menu = document.createElement('A');
-  var rem = document.createElement('A');
+	var rem = document.createElement('A');
+  var toggle = document.createElement('A');
 
   var alert_header_input = document.createElement('INPUT');
   var alert_msg = document.createElement('P');
@@ -234,11 +236,10 @@ $('#addAlertBanner').click(function(e){
 
   label3.innerHTML = "Add Read More Button ";
   alert_read_more_input.type = "checkbox";
+	alert_read_more_input.classList = "alert-read-more";
   alert_read_more_input.name = "alert-read-more-" + rowCount;
 
-  alert_read_more_input.addEventListener('click', function (e) {
-    this.parentNode.parentNode.nextSibling.classList.toggle("hidden");
-  });
+  alert_read_more_input.addEventListener('click',  function(e){ displayReadMoreOptions(this)});
 
   label3.appendChild(alert_read_more_input);
   alert_read_more.appendChild(label3);
@@ -270,15 +271,7 @@ $('#addAlertBanner').click(function(e){
 
   alert_icon.innerHTML = "Add Icon ";
 	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
-	alert_icon_reset.addEventListener('click', function (e) {
-		this.parentNode.nextSibling.nextSibling.value = "";
-    var icon_list = this.parentNode.nextSibling.getElementsByTagName('LI');
-
-    for(o = 0; o < icon_list.length - 1; o++){
-      icon_list[o].classList.remove('selected');
-    }
-
-	});
+	alert_icon_reset.addEventListener('click', function (e) { resetAlertIcon(this); });
 
 	alert_icon.appendChild(alert_icon_reset);
 
@@ -288,15 +281,7 @@ $('#addAlertBanner').click(function(e){
     icon.classList = "icon-option ca-gov-icon-" + args.caweb_icons[i];
     icon.title = args.caweb_icons[i];
 
-    icon.addEventListener('click', function (e) {
-			var icon_list = this.parentNode.getElementsByTagName('LI');
-
-			for(o = 0; o < icon_list.length - 1; o++){
-				icon_list[o].classList.remove('selected');
-			}
-			this.classList.add('selected');
-      this.parentNode.nextSibling.value = this.title;
-    });
+    icon.addEventListener('click', function (e) { alertIconSelected(this); });
     alert_icon_list.appendChild(icon);
   }
 
@@ -311,14 +296,16 @@ $('#addAlertBanner').click(function(e){
   menu.href = "#TB_inline?width=600&height=550&inlineId=caweb-alert-" + rowCount;
 
   rem.classList = "dashicons dashicons-dismiss removeAlert";
-  rem.addEventListener('click', function (e) {
-    $('#caweb_alert_count').val( function(i, oldval) { return --oldval; } );
-    this.parentNode.parentNode.parentNode.parentNode.remove();
-  });
+  rem.addEventListener('click', function (e) { removeAlert(this); });
 
+	toggle.classList = "dashicons dashicons-arrow-up";
+	
   alert_header.innerHTML = "Header";
-  alert_header.appendChild(rem);
-  alert_header.appendChild(menu);
+	
+	alert_header_wrapper.appendChild(alert_header);
+  alert_header_wrapper.appendChild(rem);
+	alert_header_wrapper.appendChild(menu);
+	alert_header_wrapper.appendChild(toggle);
 
   alert_header_input.name = "alert-header-" + rowCount;
   alert_header_input.type = "text";
@@ -342,7 +329,7 @@ $('#addAlertBanner').click(function(e){
   alert_settings.appendChild(alert_icon_input);
 
 
-  alert_container.appendChild(alert_header);
+  alert_container.appendChild(alert_header_wrapper);
   alert_container.appendChild(alert_header_input);
   alert_container.appendChild(alert_msg);
   alert_container.appendChild(alert_msg_textarea);
@@ -359,6 +346,67 @@ $('#addAlertBanner').click(function(e){
   changeMade = true;
 
 });
+$('.caweb-alert pre a:last-child').click(function(e){ displayAlertOptions(this); });
+$('.removeAlert').click(function(e){ removeAlert(this); });
+$('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
+$('.resetAlertIcon').click(function(e){	resetAlertIcon(this); });
+$('.caweb-icon-menu li').click(function(e){ alertIconSelected(this); });
+
+function displayAlertOptions(e){
+	e.parentNode.nextSibling.classList.toggle('hidden');
+	
+	if( e.parentNode.nextSibling.classList.contains('hidden') ){
+		e.parentNode.firstChild.innerHTML = e.title;
+	}else{
+		e.parentNode.firstChild.innerHTML = "Header";
+	}
+}
+function removeAlert(e){
+	var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
+
+	if (r == true) {
+		changeMade = true;
+		$('#caweb_alert_count').val( function(i, oldval) { return --oldval; } );
+		e.parentNode.parentNode.parentNode.parentNode.remove();
+	}
+	
+}
+function displayReadMoreOptions(e) {
+	e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
+ }
+function resetAlertIcon(e){
+	e.parentNode.nextSibling.nextSibling.value = "";
+	var icon_list = e.parentNode.nextSibling.getElementsByTagName('LI');
+
+	for(o = 0; o < icon_list.length - 1; o++){
+		icon_list[o].classList.remove('selected');
+	}
+}
+function alertIconSelected(e){
+	var icon_list = e.parentNode.getElementsByTagName('LI');
+
+	for(o = 0; o < icon_list.length - 1; o++){
+		icon_list[o].classList.remove('selected');
+	}
+	e.classList.add('selected');
+	e.parentNode.nextSibling.value = e.title;
+}
+$('.caweb-nav-tab').click(function() {
+	var tabs = document.getElementsByClassName('caweb-nav-tab');
+	var selected_tab = this.getAttribute("name");
+
+	for (i = 0; i < tabs.length; i++) {
+		if( selected_tab !== tabs[i].getAttribute("name") ){
+			tabs[i].classList.remove("nav-tab-active");
+      		document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
+		}else{
+			tabs[i].classList.add("nav-tab-active");
+            document.getElementById(selected_tab).classList.remove('hidden');
+        }
+    }
+
+	document.getElementById('tab_selected').value = selected_tab;
+ });
  /* End of CAWeb Option Page */
 });
 

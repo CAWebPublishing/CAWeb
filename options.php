@@ -144,7 +144,6 @@ function caweb_save_options($values = array(), $files = array()) {
     }
 
     // Alert Banners
-    update_site_option('dev', $values);
     $alerts = array();
 
     for ($i = 0; $i < $values['caweb_alert_count']; $i++) {
@@ -155,9 +154,9 @@ function caweb_save_options($values = array(), $files = array()) {
         $data['message'] = $values['alert-message-'.$count];
         $data['page_display'] = $values['alert-display-'.$count];
         $data['color'] = $values['alert-banner-color-'.$count];
-        $data['button'] = $values['alert-read-more-'.$count];
+        $data['button'] = isset($values['alert-read-more-'.$count]) ? $values['alert-read-more-'.$count] : '';
         $data['url'] = $values['alert-read-more-url-'.$count];
-        $data['target'] = $values['alert-read-more-target-'.$count];
+        $data['target'] = isset($values['alert-read-more-target-'.$count]) ? $values['alert-read-more-target-'.$count] : '';
         $data['icon'] = $values['alert-icon-'.$count];
 
         $alerts[] = $data;

@@ -77,8 +77,16 @@ select#ca_google_trans_display {
 .caweb-alert{
 	width: 50%;
 }
-.caweb-alert p a{
+.caweb-alert pre{
+	font-family: inherit;
+	margin-bottom: 0;
+}
+.caweb-alert pre p{
+	display: inline;
+}
+.caweb-alert pre a{
 	float: right;
+	cursor: pointer;
 }
 
 .caweb-alert input[type="text"]{
@@ -92,7 +100,6 @@ select#ca_google_trans_display {
 .removeAlert,
 .removeAlert:hover{
 	color: red;
-	cursor: pointer
 }
 #addAlertBanner{
 	text-decoration: none;
