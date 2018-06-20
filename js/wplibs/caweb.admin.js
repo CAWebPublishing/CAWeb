@@ -200,7 +200,8 @@ $('#addAlertBanner').click(function(e){
   var alert_read_more_new_target = document.createElement('INPUT');
   var alert_read_more_current_target = document.createElement('INPUT');
 
-  var alert_icon = document.createElement('P');
+	var alert_icon = document.createElement('P');
+  var alert_icon_reset = document.createElement('SPAN');
   var alert_icon_list = document.createElement('UL');
   var alert_icon_input = document.createElement('INPUT');
 
@@ -268,14 +269,26 @@ $('#addAlertBanner').click(function(e){
   container.appendChild(alert_open_link);
 
   alert_icon.innerHTML = "Add Icon ";
-
+	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
+	alert_icon_reset.addEventListener('click', function (e) {
+		this.parentNode.nextSibling.nextSibling.value = "";
+	});
+	
+	alert_icon.appendChild(alert_icon_reset);
+	
   alert_icon_list.classList = "caweb-icon-menu";
   for (i = 0; i < args.caweb_icons.length; i++) {
     var icon = document.createElement('LI');
     icon.classList = "icon-option ca-gov-icon-" + args.caweb_icons[i];
     icon.title = args.caweb_icons[i];
-
+		
     icon.addEventListener('click', function (e) {
+			var icon_list = this.parentNode.getElementsByTagName('LI');
+			
+			//for(o = 0; 0 < icon_list.length; o++){
+				//icon_list[0].classList.remove('selected');
+			//}
+			this.classList.add('selected');
       this.parentNode.nextSibling.value = this.title;
     });
     alert_icon_list.appendChild(icon);
