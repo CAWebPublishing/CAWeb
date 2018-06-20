@@ -148,17 +148,17 @@ function caweb_save_options($values = array(), $files = array()) {
     $alerts = array();
 
     for ($i = 0; $i < $values['caweb_alert_count']; $i++) {
-        $count = $i++;
+        $count = $i + 1;
         $data = array();
 
-        $data['header'] = $values['alert-header-' + $count];
-        $data['message'] = $values['alert-message-' + $count];
-        $data['page_display'] = $values['alert-display-' + $count];
-        $data['color'] = $values['alert-banner-color-' + $count];
-        $data['button'] = $values['alert-read-more-' + $count];
-        $data['url'] = $values['alert-read-more-url-' + $count];
-        $data['target'] = $values['alert-read-more-target-' + $count];
-        $data['icon'] = $values['alert-icon-' + $count];
+        $data['header'] = $values['alert-header-'.$count];
+        $data['message'] = $values['alert-message-'.$count];
+        $data['page_display'] = $values['alert-display-'.$count];
+        $data['color'] = $values['alert-banner-color-'.$count];
+        $data['button'] = $values['alert-read-more-'.$count];
+        $data['url'] = $values['alert-read-more-url-'.$count];
+        $data['target'] = $values['alert-read-more-target-'.$count];
+        $data['icon'] = $values['alert-icon-'.$count];
 
         $alerts[] = $data;
     }

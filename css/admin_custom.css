@@ -65,11 +65,14 @@ select#ca_google_trans_display {
 [class*="caweb-alert-"] div input[type="text"] {
     width: 100%;
 }
-[class*="caweb-alert-"] div.hidden + p + ul{
+[class*="caweb-alert-"] div.hidden + p + ul.caweb-icon-menu{
 	height: 295px;
 }
-[class*="caweb-alert-"] div.hidden + p + ul{
+[class*="caweb-alert-"] div.hidden + p + ul.caweb-icon-menu{
 	height: 295px;
+}
+[class*="caweb-alert-"] ul.caweb-icon-menu li.selected{
+	background-color: #008BDB;
 }
 .caweb-alert{
 	width: 50%;
@@ -94,7 +97,7 @@ select#ca_google_trans_display {
 #addAlertBanner{
 	text-decoration: none;
 }
-#addCSS:hover, #addAlertBanner:hover {
+#addCSS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
     cursor: pointer;
 }
 ol#uploadedCSS li p {

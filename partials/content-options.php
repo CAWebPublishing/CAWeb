@@ -352,7 +352,11 @@
 				$alerts = get_option('caweb_alerts', array());
 
 				foreach ($alerts as $a => $data) {
-				    printf('<tr><td></td></tr>');
+				    $alert = sprintf('<div class="caweb-alert"><p>Header <a class="dashicons dashicons-dismiss removeAlert"></a><a name="Alert Settings" class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&inlineId=caweb-alert-%1$s"></a></p><input name="alert-header-%1$s" type="text" value="%2$s"><p>Message</p><textarea name="alert-message-%1$s">%3$s</textarea></div>', $a + 1, $data['header'], $data['message']);
+
+				    $settings = sprintf('<div id="caweb-alert-%1$s"><div class="caweb-alert-%1$s"><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home">Home Page Only</label></div></div>', $a + 1,);
+
+				    printf('<tr><td>%1$s</td></tr>', $alert);
 				}
 			?>
 			<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">
