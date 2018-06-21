@@ -61,7 +61,63 @@ select#ca_google_trans_display {
 	font-family: 'CaGov', 'ETModules';
 	content: attr(data-icon);
 }
-#addCSS:hover {
+#cawebAlerts{
+	width: 50%
+}
+#cawebAlerts li{
+	border-bottom: 1px solid black;
+	cursor: -webkit-grabbing;
+  padding: 1px 10px 10px 10px;
+}
+#cawebAlerts .pending-alert {
+    background-color: #d8fad7;
+}
+[class*="caweb-alert-"] p{
+	font-weight: bold;
+	margin-bottom: 0;
+}
+[class*="caweb-alert-"] label + label{
+	padding-left: 15px;
+}
+[class*="caweb-alert-"] div input[type="text"] {
+    width: 100%;
+}
+[class*="caweb-alert-"] div.hidden + p + ul.caweb-icon-menu{
+	height: 295px;
+}
+[class*="caweb-alert-"] div.hidden + p + ul.caweb-icon-menu{
+	height: 295px;
+}
+[class*="caweb-alert-"] ul.caweb-icon-menu li.selected{
+	background-color: #008BDB;
+}
+.caweb-alert pre{
+	font-family: inherit;
+	margin-bottom: 0;
+}
+.caweb-alert pre p{
+	display: inline;
+}
+.caweb-alert pre a{
+	float: right;
+	cursor: pointer;
+}
+.caweb-alert input[type="text"]{
+	width: 50%;
+}
+.caweb-alert textarea{
+	width: 100%;
+	height: 175px;
+	resize: none;
+}
+.removeAlert,
+.removeAlert:hover{
+	color: red;
+}
+#addAlertBanner{
+	text-decoration: none;
+}
+#addCSS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
     cursor: pointer;
 }
 ol#uploadedCSS li p {
