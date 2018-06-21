@@ -53,10 +53,10 @@ function caweb_setup_theme() {
 
     // additional functions
     require_once("{$inc_dir}/functions.php");
-	
-		// Shortcodes
+
+    // Shortcodes
     require_once("{$inc_dir}/shortcodes.php");
-		
+
     // customizer functions
     require_once("{$inc_dir}/customizer.php");
 
@@ -194,7 +194,7 @@ function caweb_wp_enqueue_scripts() {
         'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
         'ca_google_search_id' => get_option('ca_google_search_id'),
         'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
-        'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false ) );
+        'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false));
     // Enqueue Scripts
     wp_enqueue_script('cagov-navigation-script');
     wp_enqueue_script('cagov-google-script');

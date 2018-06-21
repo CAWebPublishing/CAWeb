@@ -56,12 +56,12 @@
                   <?php if (get_option('ca_geo_locator_enabled')): ?>
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
-										<?php if ('custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '') ): ?>
+										<?php if ('custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '')): ?>
 				              <a target="_blank" href="<?= esc_url(get_option('ca_google_trans_page')) ?>"><?= "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '' ?>Translate</a>
 				            <?php endif; ?> 
               </ul>              
             </div> 
-            <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ): ?>
+            <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
               <div class="quarter" id="google_translate_element"></div>
             <?php endif; ?>						  
         </div>          

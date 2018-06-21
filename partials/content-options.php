@@ -274,7 +274,7 @@
 				$icons = caweb_get_icon_list(-1, '', true);
 				$iconList = '';
 				foreach ($icons as $i) {
-					printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, get_option('ca_google_trans_icon', 'globe') == $i ? ' selected' : '');
+				    printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, get_option('ca_google_trans_icon', 'globe') == $i ? ' selected' : '');
 				}
 			?>
 			<input type="hidden" name="ca_google_trans_icon" value="<?= get_option('ca_google_trans_icon', 'globe') ?>" >
