@@ -6,11 +6,13 @@
 
 <h2 class="nav-tab-wrapper wp-clearfix">
 
-	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php print( ! isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : ''); ?>">General Settings</a>
+	<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?= ! isset($_POST['tab_selected']) || empty($_POST['tab_selected']) || 'general' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">General Settings</a>
 
-	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php print(isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : ''); ?>">Social Media Links</a>
+	<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'social-share' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">Social Media Links</a>
 
-	  <a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php print(isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : ''); ?>">Custom CSS</a>
+	<a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'custom-css' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?>">Custom CSS</a>
+
+	<a href="#alert-banners" name="alert-banners" class="caweb-nav-tab nav-tab <?= isset($_POST['tab_selected']) && 'alert-banners' == $_POST['tab_selected'] ? 'nav-tab-active' : '' ?> extra">Alert Banners</a>
 </h2>
 </div>
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
@@ -87,7 +89,7 @@
 			<span class="tooltiptext">Apply a site wide color scheme.</span></div></th>
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
-        <?php 
+        <?php
 					$v4schemes = caweb_color_schemes(4);
         	$schemes = caweb_color_schemes(0, 'displayname');
 
@@ -258,9 +260,32 @@
 <tr>
 	<th scope="row"><div class="tooltip">Enable Google Translate
 		<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
-	<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= (get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '') ?>> </td>
+	<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?= "" == get_option('ca_google_trans_enabled') || 'none' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?= true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?= 'custom' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Custom</label></td>
 	</tr>
-
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
+		<th scope="row">Translate Page</th>
+		<td><input type="text" name="ca_google_trans_page" size="60" value="<?= get_option('ca_google_trans_page', '') ?>"></td>
+	</tr>
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
+		<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>
+		<td>
+			<ul id="caweb-icon-menu">
+			<?php 
+				$icons = caweb_get_icon_list(-1, '', true);
+				$iconList = '';
+				foreach ($icons as $i) {
+				    printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, get_option('ca_google_trans_icon', 'globe') == $i ? ' selected' : '');
+				}
+			?>
+			<input type="hidden" name="ca_google_trans_icon" value="<?= get_option('ca_google_trans_icon', 'globe') ?>" >
+		</ul>
+		</td>
+	</tr>
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
+		<th>Google Translate Shortcode</th>
+		<td><input id="caweb-google-trans-shorcode" type="text" readonly size="60" value="[caweb_google_translate /]">
+		</td>
+	</tr>
 </table>
 </div>
 
@@ -314,9 +339,9 @@
 			<tr><td></td>
 			<td>
 				<p class="option">Uploaded Styles</p>
-				
-				<ol id="uploadedCSS">	
-				<?php	
+
+				<ol id="uploadedCSS">
+				<?php
 					foreach ($ext_css as $name) {
 					    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 
@@ -326,7 +351,7 @@
 						<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
 					}
 				?>
-			</ol>		
+			</ol>
 			</tr>
 			<?php endif; ?>
 		</tr>
@@ -340,6 +365,31 @@
 			<td><textarea id="ca_custom_css" name="ca_custom_css" ><?= get_option('ca_custom_css', ''); ?> </textarea></td>
 		</tr>
 		</table>
+
+	</div>
+
+	<div id="alert-banners" class="<?= ( ! isset($_POST['tab_selected']) || 'alert-banners' !== $_POST['tab_selected'] ? 'hidden' : ''); ?>">
+		<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
+		<ul id="cawebAlerts">
+			<?php
+				$alerts = get_option('caweb_alerts', array());
+
+				foreach ($alerts as $a => $data) {
+				    $alert = sprintf('<div class="caweb-alert"><pre><p>%1$s</p><a class="dashicons dashicons-dismiss removeAlert"></a><a name="Alert Settings" class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&inlineId=caweb-alert-%2$s"></a><a class="dashicons dashicons-arrow-down" title="%1$s"></a></pre><div class="hidden"><input name="alert-header-%2$s" type="text" value="%1$s"><p>Message</p><textarea name="alert-message-%2$s">%3$s</textarea></div></div>', $data['header'], $a + 1, $data['message']);
+
+				    $icons = caweb_get_icon_list(-1, '', true);
+				    $iconList = '';
+				    foreach ($icons as $i) {
+				        $iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s" title="%1$s"></li>', $i);
+				    }
+
+				    $settings = sprintf('<div id="caweb-alert-%1$s" style="display:none;"><div class="caweb-alert-%1$s"><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in <input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab <input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul></div></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true"' : '', "all" == $data['page_display'] ? ' checked="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', "on" !== $data['button'] ? ' class="hidden"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon']);
+
+				    printf('<li>%1$s%2$s</li>', $alert, $settings);
+				}
+			?>
+			<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">
+		</ul>
 
 	</div>
 </div> <!-- End of CA Options Container -->

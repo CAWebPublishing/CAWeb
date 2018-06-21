@@ -34,20 +34,16 @@ if ( ! class_exists('CAWeb_Theme_Update')) {
             self::$_this = $this;
 
             // Set the class public variables
-            $this->user = get_site_option('caweb_username', 'CAWebPublishing');
+            $this->user = get_site_option('caweb_username', '');
             $this->theme_name = $theme->Name;
             $this->current_version = $theme->Version;
 
             $this->args = array(
                 'headers' => array(
-                    'User-Agent' => 'WP-'.$this->theme_name,
+                    'Authorization' => 'Basic '.base64_encode(':'.get_site_option('caweb_password', '')),
                     'Accept:' =>  'application/vnd.github.v3+json', 'application/vnd.github.VERSION.raw', 'application/octet-stream'
                 )
             );
-
-            if (true == get_site_option('caweb_private_theme_enabled', false)) {
-                $this->args['headers']['Authorization'] = 'Basic '.base64_encode(':'.get_site_option('caweb_password', ''));
-            }
 
             add_action('admin_post_nopriv_caweb_update_available', array($this, 'caweb_update_available'));
             add_action('admin_post_caweb_update_available', array($this, 'caweb_update_available'));
@@ -102,7 +98,7 @@ if ( ! class_exists('CAWeb_Theme_Update')) {
 
             $last_update = new stdClass();
 
-            $payload = wp_remote_get(sprintf('https://api.github.com/repos/%1$s/%2$s/releases/latest', $this->user, $this->theme_name), $this->args);
+            $payload = wp_remote_get(sprintf('https://api.github.com/repos/%1$s/CAWeb/releases/latest', $this->user), $this->args);
 
             if (is_wp_error($payload)) {
                 //$options['body']['failed_request'] = 'true';

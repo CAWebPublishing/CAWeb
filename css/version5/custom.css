@@ -71,6 +71,7 @@ body{
   	visibility: hidden;
 }
 /* Utility Header */
+.alert-banner .container,
 .utility-header .container{
      max-width: 1280px;
 }
@@ -115,6 +116,9 @@ ul.utility-links.social-media-links{
 }
 #google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
     color: white;
+}
+#google_translate_element.custom-translate .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
+    color: inherit;
 }
 .skiptranslate.goog-te-gadget a:hover{
   color:#fee09c;
