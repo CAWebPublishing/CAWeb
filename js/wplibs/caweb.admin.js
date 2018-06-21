@@ -277,22 +277,24 @@ $('#addAlertBanner').click(function(e){
 
   alert_icon.innerHTML = "Add Icon ";
 	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
-	alert_icon_reset.addEventListener('click', function (e) { resetAlertIcon(this); });
+	alert_icon_reset.addEventListener('click', function (e) { resetIconSelect(this.parentNode.nextElementSibling); });
 
 	alert_icon.appendChild(alert_icon_reset);
 
-  alert_icon_list.classList = "caweb-icon-menu";
+  alert_icon_list.id = "caweb-icon-menu";
   for (i = 0; i < args.caweb_icons.length; i++) {
     var icon = document.createElement('LI');
     icon.classList = "icon-option ca-gov-icon-" + args.caweb_icons[i];
     icon.title = args.caweb_icons[i];
 
-    icon.addEventListener('click', function (e) { alertIconSelected(this); });
+    icon.addEventListener('click', function (e) { cawebIconSelected(this); });
     alert_icon_list.appendChild(icon);
   }
-
+	
   alert_icon_input.name = "alert-icon-" + alertLICount;
   alert_icon_input.type = "hidden";
+
+	alert_icon_list.appendChild(alert_icon_input);
 
   // Alert Container
   alert_container.classList = "caweb-alert";
@@ -336,9 +338,8 @@ $('#addAlertBanner').click(function(e){
   alert_settings.appendChild(alert_read_more);
   alert_settings.appendChild(container);
   alert_settings.appendChild(alert_icon);
-  alert_settings.appendChild(alert_icon_list);
-  alert_settings.appendChild(alert_icon_input);
-
+	alert_settings.appendChild(alert_icon_list);
+	
   alert_container.appendChild(alert_header_wrapper);
   alert_container.appendChild(alert_info);
 
@@ -355,8 +356,7 @@ $('#addAlertBanner').click(function(e){
 $('.caweb-alert pre a:last-child').click(function(e){ displayAlertOptions(this); });
 $('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
-$('.resetAlertIcon').click(function(e){	resetAlertIcon(this); });
-$('.caweb-icon-menu li').click(function(e){ alertIconSelected(this); });
+$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
 
 function displayAlertOptions(e){
 	e.parentNode.nextSibling.classList.toggle('hidden');
@@ -384,22 +384,6 @@ function removeAlert(e){
 function displayReadMoreOptions(e) {
 	e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
  }
-function resetAlertIcon(e){
-	e.parentNode.nextSibling.nextSibling.value = "";
-	var icon_list = e.parentNode.nextSibling.getElementsByTagName('LI');
-	
-	for(o = 0; o < icon_list.length - 1; o++){
-		icon_list[o].classList.remove('selected');
-	}
-}
-function alertIconSelected(e){
-	var icon_list = e.parentNode.getElementsByTagName('LI');
-	for(o = 0; o < icon_list.length - 1; o++){
-		icon_list[o].classList.remove('selected');
-	}
-	e.classList.add('selected');
-	e.parentNode.nextSibling.value = e.title;
-}
 
 $('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
 $('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
