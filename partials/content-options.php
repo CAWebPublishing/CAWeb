@@ -264,7 +264,7 @@
 		<th scope="row">Translate Page</th>
 		<td><input type="text" name="ca_google_trans_page" size="60" value="<?= get_option('ca_google_trans_page', '') ?>"></td>
 	</tr>
-	<tr>
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
 		<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>
 		<td>
 			<ul id="caweb-icon-menu">
@@ -279,9 +279,9 @@
 		</ul>
 		</td>
 	</tr>
-	<tr>
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
 		<th>Google Translate Shortcode</th>
-		<td><input id="caweb-google-trans-shorcode" type="text" readonly size="60" value="">
+		<td><input id="caweb-google-trans-shorcode" type="text" readonly size="60" value="[caweb_google_translate /]">
 		</td>
 	</tr>
 </table>

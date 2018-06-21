@@ -164,6 +164,17 @@ $('#addCSS').click(function(e){
 });
 $('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
 $('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
+$('[name="ca_google_trans_enabled"]').click(function(e){
+	if("custom" !== this.value){
+		this.parentNode.parentNode.parentNode.nextElementSibling.classList.add('hidden');
+		this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.classList.add('hidden');
+		this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.classList.add('hidden');
+	}else if("custom" == this.value){
+		this.parentNode.parentNode.parentNode.nextElementSibling.classList.remove('hidden');
+		this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.classList.remove('hidden');
+		this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove('hidden');
+	}
+});
 
 function cawebIconSelected(iconLi){
 	var icon_list = iconLi.parentNode.getElementsByTagName('LI');

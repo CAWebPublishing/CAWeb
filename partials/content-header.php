@@ -63,22 +63,20 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 $search = (caweb_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade' : '');
 
-printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s</div>',
+$custom_translate = caweb_version_check(4, get_the_ID()) && 'custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '') ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url(get_option('ca_google_trans_page')), "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '') : '';
+
+printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
        $search, ("" == get_option('ca_google_search_id') ? 'hidden' : ''),
        ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ?
-								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''));
+								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''), $custom_translate);
 
 ?>
 
         </div>
 
-<?php  if ('none' !== get_option('ca_google_trans_display') &&  (caweb_version_check(4, get_the_ID()))): ?>
-
+<?php  if (( true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ) &&  (caweb_version_check(4, get_the_ID()))): ?>
 <div id="google_translate_element" class="hidden-print"></div>
-
-
 <?php endif; ?>
-
 
 <?php ( ! empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
 
