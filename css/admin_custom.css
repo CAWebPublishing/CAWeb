@@ -37,6 +37,30 @@ select#ca_google_trans_display {
 	text-decoration: underline;
   font-size: 1.2rem;
 }
+.resetIcon{
+	cursor: pointer;
+}
+#caweb-icon-menu{
+	background-color: white ;
+	height: 205px;
+	overflow-y: scroll;
+}
+#caweb-icon-menu li{
+	font-size: 24px;
+	float: left;
+	padding: 8px;
+}
+#caweb-icon-menu li.selected{
+	background-color: #008BDB;
+}
+#caweb-icon-menu li:hover{
+	background-color: #008BDB;
+	cursor: pointer;
+}
+#caweb-icon-menu li:before{
+	font-family: 'CaGov', 'ETModules';
+	content: attr(data-icon);
+}
 #addCSS:hover {
     cursor: pointer;
 }

@@ -258,9 +258,32 @@
 <tr>
 	<th scope="row"><div class="tooltip">Enable Google Translate
 		<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
-	<td><input type="checkbox" name="ca_google_trans_enabled" id="ca_google_trans_enabled" <?= (get_option('ca_google_trans_enabled') == true ? 'checked="checked"' : '') ?>> </td>
+	<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?= "" == get_option('ca_google_trans_enabled') || 'none' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?= true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?= 'custom' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Custom</label></td>
 	</tr>
-
+	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
+		<th scope="row">Translate Page</th>
+		<td><input type="text" name="ca_google_trans_page" size="60" value="<?= get_option('ca_google_trans_page', '') ?>"></td>
+	</tr>
+	<tr>
+		<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>
+		<td>
+			<ul id="caweb-icon-menu">
+			<?php 
+				$icons = caweb_get_icon_list(-1, '', true);
+				$iconList = '';
+				foreach ($icons as $i) {
+					printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, get_option('ca_google_trans_icon', 'globe') == $i ? ' selected' : '');
+				}
+			?>
+			<input type="hidden" name="ca_google_trans_icon" value="<?= get_option('ca_google_trans_icon', 'globe') ?>" >
+		</ul>
+		</td>
+	</tr>
+	<tr>
+		<th>Google Translate Shortcode</th>
+		<td><input id="caweb-google-trans-shorcode" type="text" readonly size="60" value="">
+		</td>
+	</tr>
 </table>
 </div>
 

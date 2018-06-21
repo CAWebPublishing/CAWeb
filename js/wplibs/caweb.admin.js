@@ -162,6 +162,26 @@ $('#addCSS').click(function(e){
 	changeMade = true; 
 	
 });
+$('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
+$('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
+
+function cawebIconSelected(iconLi){
+	var icon_list = iconLi.parentNode.getElementsByTagName('LI');
+
+	for(o = 0; o < icon_list.length - 1; o++){
+		icon_list[o].classList.remove('selected');
+	}
+	iconLi.classList.add('selected');
+	iconLi.parentNode.lastElementChild.value = iconLi.title;
+}
+function resetIconSelect(iconList){
+	iconList.lastElementChild.value = "";
+	var icon_list = iconList.getElementsByTagName('LI');
+
+	for(o = 0; o < icon_list.length - 1; o++){
+		icon_list[o].classList.remove('selected');
+	}
+}
 
  /* End of CAWeb Option Page */
 });
