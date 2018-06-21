@@ -267,7 +267,7 @@ function caweb_admin_enqueue_scripts($hook) {
         wp_enqueue_script('browse-caweb-library');
 
         wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery'), $theme_version);
-        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true)));
+        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors()));
         wp_enqueue_script('caweb-admin-scripts');
 
         // Enqueue Styles

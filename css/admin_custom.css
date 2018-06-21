@@ -55,6 +55,17 @@ select#ca_google_trans_display {
 	font-family: 'CaGov', 'ETModules';
 	content: attr(data-icon);
 }
+#cawebAlerts{
+	width: 50%
+}
+#cawebAlerts li{
+	border-bottom: 1px solid black;
+	cursor: -webkit-grabbing;
+  padding: 1px 10px 10px 10px;
+}
+#cawebAlerts .pending-alert {
+    background-color: #d8fad7;
+}
 [class*="caweb-alert-"] p{
 	font-weight: bold;
 	margin-bottom: 0;
@@ -74,9 +85,6 @@ select#ca_google_trans_display {
 [class*="caweb-alert-"] ul.caweb-icon-menu li.selected{
 	background-color: #008BDB;
 }
-.caweb-alert{
-	width: 50%;
-}
 .caweb-alert pre{
 	font-family: inherit;
 	margin-bottom: 0;
@@ -88,7 +96,6 @@ select#ca_google_trans_display {
 	float: right;
 	cursor: pointer;
 }
-
 .caweb-alert input[type="text"]{
 	width: 50%;
 }
