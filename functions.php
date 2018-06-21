@@ -182,8 +182,7 @@ function caweb_wp_enqueue_scripts() {
     }
 
     // Register Scripts
-    wp_register_script('cagov-modernizr-script', CAWebUri.'/js/libs/modernizr-2.0.6.min.js', array('jquery'), $theme_version, false);
-    wp_register_script('cagov-modernizr-extra-script', CAWebUri.'/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version, false);
+    wp_register_script('cagov-modernizr-script', CAWebUri.'/js/libs/modernizr-3.6.0.min.js', array('jquery'), $theme_version, false);
 
     wp_register_script('cagov-google-script', CAWebUri.'/js/libs/google.js', array(), $theme_version, true);
     wp_register_script('cagov-ga-autotracker-script', CAWebUri.'/js/libs/AutoTracker.js', array(), $theme_version, true);
@@ -200,7 +199,6 @@ function caweb_wp_enqueue_scripts() {
     wp_enqueue_script('cagov-google-script');
     wp_enqueue_script('cagov-ga-autotracker-script');
     wp_enqueue_script('cagov-modernizr-script');
-    wp_enqueue_script('cagov-modernizr-extra-script');
 
     // Version 5 specific scripts
     if (5 >= $ver && ("on" == get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled'))) {
