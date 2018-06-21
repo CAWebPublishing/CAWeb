@@ -260,7 +260,7 @@
 <tr>
 	<th scope="row"><div class="tooltip">Enable Google Translate
 		<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div></th>
-	<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?= "" == get_option('ca_google_trans_enabled') || 'none' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?= true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?= 'custom' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Custom</label></td>
+	<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?= false === get_option('ca_google_trans_enabled') || 'none' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?= get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?= 'custom' == get_option('ca_google_trans_enabled') ? 'checked="checked"' : '' ?>>Custom</label></td>
 	</tr>
 	<tr <?= 'custom' !== get_option('ca_google_trans_enabled') ? ' class="hidden"' : '' ?>>
 		<th scope="row">Translate Page</th>

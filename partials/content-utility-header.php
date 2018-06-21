@@ -6,7 +6,7 @@
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php 
-              $gtranslator = true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
+              $gtranslator = get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
 
 							if (get_option('ca_utility_home_icon', true)) {
 							    print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
@@ -61,7 +61,7 @@
 				            <?php endif; ?> 
               </ul>              
             </div> 
-            <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
+            <?php if ( $gtranslator || 'standard' == get_option('ca_google_trans_enabled')): ?>
               <div class="quarter" id="google_translate_element"></div>
             <?php endif; ?>						  
         </div>          
