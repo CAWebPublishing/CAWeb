@@ -18,12 +18,20 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 ?>
 
-<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >  
+<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
 		// Version 5.0 Specific
 		if (caweb_version_check(5.0, get_the_ID())) {
+		    // Alerts
+		    $alerts = get_option('caweb_alerts', array());
+		    foreach ($alerts as $a => $data) {
+		        if ((is_front_page() && "home" == $data['page_display']) || "all" == $data['page_display']) {
+		            printf('<div role="alert" class="alert alert-dismissible alert-banner" style="background-color:%1$s;"><div class="container"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-level"><span class="ca-gov-icon-%2$s" aria-hidden="true"></span>%3$s</span><span class="alert-text">%4$s</span>%5$s</div></div>', $data['color'], $data['icon'], $data['header'], $data['message'], ! empty($data['button']) && ! empty($data['url']) ? sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '') : '');
+		        }
+		    }
+
 		    print '<!-- Location Bar -->';
 		    // Location Bar
 		    require_once(CAWebAbsPath."/ssi/location-bar.html");
@@ -42,7 +50,7 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
     get_template_part('partials/content', 'branding');
 
          ?>
-         
+
          <!-- Include Mobile Controls -->
          <?php require_once(CAWebAbsPath."/ssi/mobile-controls.html");?>
 
