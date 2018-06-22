@@ -88,6 +88,10 @@ select#ca_google_trans_display {
 [class*="caweb-alert-"] div.hidden + p + ul#caweb-icon-menu{
 	height: 295px;
 }
+[class*="caweb-alert-"] .button.button-primary{
+	float: right;
+	margin-left: 15px;
+}
 .caweb-alert pre{
 	font-family: inherit;
 	margin-bottom: 0;

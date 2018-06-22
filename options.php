@@ -178,17 +178,31 @@ function caweb_save_options($values = array(), $files = array()) {
 
     print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
+
+function caweb_save_alert_setting(){
+	$data =  explode('&', $_POST['data']);
+	foreach($data as $d => $val){
+		$data[substr($val, 0, strpos($val, '='))] = substr($val, strpos($val, '=') + 1);
+		unset($data[$d]);
+	}
+	$data['alertID'] = $_POST['alertID'];
+	
+	print_r( wp_send_json($data) );
+	wp_die();
+}
+add_action('wp_ajax_caweb_save_alert_setting', 'caweb_save_alert_setting');
+
 // Setup CAWeb API Menu
 function caweb_api_menu_option_setup() {
     ?>
 <style>table tr td:first-of-type {width: 15px;}</style>
 
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
-  <?php
-  if (isset($_POST['caweb_api_options_submit'])) {
-      caweb_save_api_options($_POST);
-  } ?>
-<div class="wrap">
+	<?php
+	if (isset($_POST['caweb_api_options_submit'])) {
+			caweb_save_api_options($_POST);
+		} ?>
+	<div class="wrap">
   <h1>GitHub API Key</h1>
   <table class="form-table">
     <tr><td>
@@ -200,7 +214,7 @@ function caweb_api_menu_option_setup() {
   </table>
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
- </form>
+</form>
 
 <?php
 }
