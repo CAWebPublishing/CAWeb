@@ -177,8 +177,6 @@ $('#addAlertBanner').click(function(e){
 	var alertSettings = $('#caweb-alert-settings');
 	var alert_settings_wrapper = document.createElement('DIV');
 
-	alertLI.classList = "pending-alert";
-
 	// Create and Add New Alert
 	alert_container.classList = "caweb-alert";
 	addAlert(alert_container, alertLICount);
@@ -198,11 +196,11 @@ $('#addAlertBanner').click(function(e){
   changeMade = true;
 
 });
-$('.caweb-alert pre a:last-child').click(function(e){ displayAlertOptions(this); });
+$('.caweb-alert pre a.alert-toggle').click(function(e){ displayAlertOptions(this); });
 $('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
 $('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
-
+$('.caweb-alert pre a.activateAlert').click(function(e){ activateAlert(this);});
 var alertSettings = [];
 $('[class*="caweb-alert-"] .button-primary.ok').click(function(e){
     saveAlertSettings(this);
@@ -212,12 +210,23 @@ $('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){
 	cancelAlertSettings(this);
 });
 
+function activateAlert(activateButton){
+  activateButton.classList.toggle('inactive');
+
+  if(activateButton.className.includes('inactive')){
+    activateButton.firstElementChild.value = 'inactive';
+  }else{
+    activateButton.firstElementChild.value = '';
+  }
+}
 function addAlert(container, alertCount){
 	var alert_header_wrapper = document.createElement('PRE');
 	var alert_header = document.createElement('P');
 	var menu = document.createElement('A');
 	var rem = document.createElement('A');
-	var toggle = document.createElement('A');
+  var toggle = document.createElement('A');
+	var status = document.createElement('A');
+  var alert_status_input = document.createElement('INPUT');
 
 	var alert_info = document.createElement('DIV');
 	var alert_header_input = document.createElement('INPUT');
@@ -232,8 +241,16 @@ function addAlert(container, alertCount){
 	rem.classList = "dashicons dashicons-dismiss removeAlert";
 	rem.addEventListener('click', function (e) { removeAlert(this); });
 
-	toggle.classList = "dashicons dashicons-arrow-up";
+	toggle.classList = "dashicons dashicons-arrow-up alert-toggle";
 	toggle.addEventListener('click', function (e) { displayAlertOptions(this); });
+
+  status.classList = "dashicons activateAlert";
+  status.addEventListener('click', function (e) { activateAlert(this); });
+
+  alert_status_input.name = "alert-status-" + alertCount;
+  alert_status_input.type = "hidden";
+
+  status.appendChild(alert_status_input);
 
 	alert_info.appendChild(alert_header_input);
 	alert_info.appendChild(alert_msg);
@@ -242,7 +259,7 @@ function addAlert(container, alertCount){
 	alert_header_input.name = "alert-header-" + alertCount;
 	alert_header_input.type = "text";
   alert_header_input.placeholder = "Header";
-  
+
 	alert_msg.innerHTML = "Message";
 
 	alert_msg_textarea.form = "ca-options-form";
@@ -251,7 +268,8 @@ function addAlert(container, alertCount){
 	alert_header_wrapper.appendChild(alert_header);
 	alert_header_wrapper.appendChild(rem);
 	alert_header_wrapper.appendChild(menu);
-	alert_header_wrapper.appendChild(toggle);
+  alert_header_wrapper.appendChild(toggle);
+	alert_header_wrapper.appendChild(status);
 
 	container.appendChild(alert_header_wrapper);
 	container.appendChild(alert_info);

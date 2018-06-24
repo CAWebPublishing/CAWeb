@@ -24,19 +24,17 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 		// Version 5.0 Specific
 		if (caweb_version_check(5.0, get_the_ID())) {
-			
+
 				// Alerts
-				$alerts = get_option('caweb_alerts', array());
-			
-				foreach ($alerts as $a => $data) {
-		        if ((is_front_page() && "home" == $data['page_display']) || "all" == $data['page_display']) {
-						
-							if( ! isset($_SESSION['display_alert_' . $a]) || 1 == $_SESSION['display_alert_' . $a] ){
-								$_SESSION['display_alert_' . $a] = true;
-								
-								printf('<div role="alert" class="alert alert-dismissible alert-banner" style="background-color:%1$s;"><div class="container"><button type="button" class="close caweb-alert-close" data-url="%2$s" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-level"><span class="ca-gov-icon-%3$s" aria-hidden="true"></span>%4$s</span><span class="alert-text">%5$s</span>%6$s</div></div>', $data['color'], admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id=' . $a), $data['icon'], $data['header'], $data['message'], ! empty($data['button']) && ! empty($data['url']) ? sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '') : '');
-							}
-							 
+		    $alerts = get_option('caweb_alerts', array());
+
+		    foreach ($alerts as $a => $data) {
+		        if (('inactive' !== $data['status']) && (is_front_page() && "home" == $data['page_display']) || "all" == $data['page_display']) {
+		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
+		                $_SESSION['display_alert_'.$a] = true;
+
+		                printf('<div role="alert" class="alert alert-dismissible alert-banner" style="background-color:%1$s;"><div class="container"><button type="button" class="close caweb-alert-close" data-url="%2$s" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-level"><span class="ca-gov-icon-%3$s" aria-hidden="true"></span>%4$s</span><span class="alert-text">%5$s</span>%6$s</div></div>', $data['color'], admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a), $data['icon'], $data['header'], $data['message'], ! empty($data['button']) && ! empty($data['url']) ? sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '') : '');
+		            }
 		        }
 		    }
 

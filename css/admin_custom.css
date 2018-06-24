@@ -69,9 +69,6 @@ select#ca_google_trans_display {
 	cursor: -webkit-grabbing;
   padding: 1px 10px 10px 10px;
 }
-#cawebAlerts .pending-alert {
-    background-color: #d8fad7;
-}
 [class*="caweb-alert-"] h3 {
     display: inline;
     text-decoration: underline;
@@ -106,6 +103,17 @@ select#ca_google_trans_display {
 .caweb-alert pre a{
 	float: right;
 	cursor: pointer;
+}
+.caweb-alert .activateAlert{
+	border-radius: 10px;
+}
+.caweb-alert .activateAlert{
+	background-color: #d8fad7;
+	border: 1px solid #055103;
+}
+.caweb-alert .activateAlert.inactive{
+	background-color: #fad7d7;
+  border: 1px solid #510303;
 }
 .caweb-alert input[type="text"]{
 	width: 50%;

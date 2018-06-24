@@ -17,7 +17,6 @@
 </div>
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
-	update_site_option('dev', $_POST);
 	if (isset($_POST['caweb_submit'])) {
 	    caweb_save_options($_POST, $_FILES);
 	}
@@ -373,10 +372,11 @@
 		<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
 		<ul id="cawebAlerts">
 			<?php
+
 			$alerts = get_option('caweb_alerts', array());
 
 			foreach ($alerts as $a => $data) {
-			    $alert = sprintf('<div class="caweb-alert"><pre><p>%1$s</p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-%3$s"></a><a class="dashicons dashicons-arrow-down" title="%2$s"></a></pre><div class="hidden"><input placeholder="Header" name="alert-header-%3$s" type="text" value="%2$s"><p>Message</p><textarea name="alert-message-%3$s">%4$s</textarea></div></div>', ! empty($data['header']) ? $data['header'] : "Header", $data['header'], $a + 1, $data['message']);
+			    $alert = sprintf('<div class="caweb-alert"><pre><p>%1$s</p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-%3$s"></a><a class="dashicons dashicons-arrow-down alert-toggle" title="%2$s"></a><a class="dashicons activateAlert %4$s"><input name="alert-status-%3$s" value="%4$s" class="hidden"></a></pre><div class="hidden"><input placeholder="Header" name="alert-header-%3$s" type="text" value="%2$s"><p>Message</p><textarea name="alert-message-%3$s">%5$s</textarea></div></div>', ! empty($data['header']) ? $data['header'] : "Header", $data['header'], $a + 1, $data['status'], $data['message']);
 
 			    printf('<li>%1$s</li>', $alert);
 			}

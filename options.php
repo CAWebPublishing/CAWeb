@@ -150,6 +150,7 @@ function caweb_save_options($values = array(), $files = array()) {
         $count = $i + 1;
         $data = array();
 
+        $data['status'] = $values['alert-status-'.$count];
         $data['header'] = $values['alert-header-'.$count];
         $data['message'] = $values['alert-message-'.$count];
         $data['page_display'] = $values['alert-display-'.$count];
