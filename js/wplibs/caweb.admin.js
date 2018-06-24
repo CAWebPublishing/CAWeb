@@ -176,22 +176,22 @@ $('#addAlertBanner').click(function(e){
 
 	var alertSettings = $('#caweb-alert-settings');
 	var alert_settings_wrapper = document.createElement('DIV');
-	
+
 	alertLI.classList = "pending-alert";
-	
-	// Create and Add New Alert 
+
+	// Create and Add New Alert
 	alert_container.classList = "caweb-alert";
 	addAlert(alert_container, alertLICount);
-	
+
 	// Create and Add New Alert Settings
 	alert_settings_wrapper.id = "caweb-alert-" + alertLICount;
-	alert_settings_wrapper.style.display = "none";	
+	alert_settings_wrapper.style.display = "none";
 	addAlertSettings(alert_settings_wrapper, alertLICount);
-	
+
 	// Add new Alert
 	alertLI.appendChild(alert_container);
 	alertUL.append(alertLI);
-	
+
 	// Add corresponding Alert Setting
   alertSettings.append(alert_settings_wrapper);
 
@@ -205,17 +205,11 @@ $('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElem
 
 var alertSettings = [];
 $('[class*="caweb-alert-"] .button-primary.ok').click(function(e){
-	jQuery.post(ajaxurl, {'action' : 'caweb_save_alert_setting', 'data' : $(this.parentNode).serialize(), 'alertID' : this.parentNode.className.substring(this.parentNode.className.lastIndexOf('-') + 1)}, function(response){
-		alertSettings[response.alertID] = response;
-	});
-  tb_remove();
+    saveAlertSettings(this);
 });
+
 $('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){
-	var alertID = this.parentNode.className.substring(this.parentNode.className.lastIndexOf('-') + 1);
-	var inputs = this.parentNode.getElementsByTagName('INPUT');
-	//console.log(alertSettings[alertID]);
-	console.log(inputs);
-	tb_remove();
+	cancelAlertSettings(this);
 });
 
 function addAlert(container, alertCount){
@@ -224,46 +218,48 @@ function addAlert(container, alertCount){
 	var menu = document.createElement('A');
 	var rem = document.createElement('A');
 	var toggle = document.createElement('A');
-	
+
 	var alert_info = document.createElement('DIV');
 	var alert_header_input = document.createElement('INPUT');
 	var alert_msg = document.createElement('P');
 	var alert_msg_textarea = document.createElement('TEXTAREA');
-	
+
 	alert_header.innerHTML = "Header";
-	
+
 	menu.classList = "thickbox dashicons dashicons-menu";
 	menu.href = "#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-" + alertCount;
-	
+
 	rem.classList = "dashicons dashicons-dismiss removeAlert";
 	rem.addEventListener('click', function (e) { removeAlert(this); });
-	
+
 	toggle.classList = "dashicons dashicons-arrow-up";
 	toggle.addEventListener('click', function (e) { displayAlertOptions(this); });
-	
+
 	alert_info.appendChild(alert_header_input);
 	alert_info.appendChild(alert_msg);
 	alert_info.appendChild(alert_msg_textarea);
-	
+
 	alert_header_input.name = "alert-header-" + alertCount;
 	alert_header_input.type = "text";
-		
+  alert_header_input.placeholder = "Header";
+  
 	alert_msg.innerHTML = "Message";
-		
+
 	alert_msg_textarea.form = "ca-options-form";
 	alert_msg_textarea.name = "alert-message-" + alertCount;
-	
+
 	alert_header_wrapper.appendChild(alert_header);
 	alert_header_wrapper.appendChild(rem);
 	alert_header_wrapper.appendChild(menu);
 	alert_header_wrapper.appendChild(toggle);
-	
+
 	container.appendChild(alert_header_wrapper);
 	container.appendChild(alert_info);
-	
+
 }
 function addAlertSettings(container, alertCount){
 	var alert_settings = document.createElement('FORM');
+  var alert_heading = document.createElement('H3');
 	var alert_display = document.createElement('P');
 	var label1 = document.createElement('LABEL');
 	var alert_display_home = document.createElement('INPUT');
@@ -276,22 +272,30 @@ function addAlertSettings(container, alertCount){
 	var alert_read_more = document.createElement('P');
 	var label3 = document.createElement('LABEL');
 	var alert_read_more_input = document.createElement('INPUT');
-	
+
 	// Hidden Options for Read More Button
   var hidden_container = document.createElement('DIV');
   var alert_read_more_target_url = document.createElement('P');
   var alert_read_more_target_url_input = document.createElement('INPUT');
   var alert_open_link = document.createElement('LABEL');
+  var label4 = document.createElement('LABEL');
+  var label5 = document.createElement('LABEL');
   var alert_read_more_new_target = document.createElement('INPUT');
   var alert_read_more_current_target = document.createElement('INPUT');
-	
+
 	// Alert Icon options
 	var alert_icon = document.createElement('P');
   var alert_icon_reset = document.createElement('SPAN');
   var alert_icon_list = document.createElement('UL');
   var alert_icon_input = document.createElement('INPUT');
-	
+
+  // Alert Setting Confirmation
+  var alert_setting_ok = document.createElement('A');
+  var alert_setting_cancel = document.createElement('A');
+
 	alert_settings.classList = "caweb-alert-" + alertCount;
+
+  alert_heading.innerHTML = "Alert Settings";
 
   alert_display.innerHTML = "Display on";
 
@@ -311,11 +315,11 @@ function addAlertSettings(container, alertCount){
   label2.appendChild(document.createTextNode("All Pages"));
 
   alert_banner_color.innerHTML = "Banner Color";
-  
+
   alert_banner_color_input.type = "color";
   alert_banner_color_input.name = "alert-banner-color-" + alertCount;
   alert_banner_color_input.value = args.caweb_colors[color]['highlight'];
-  
+
   label3.innerHTML = "Add Read More Button ";
   alert_read_more_input.type = "checkbox";
 	alert_read_more_input.classList = "alert-read-more";
@@ -331,7 +335,8 @@ function addAlertSettings(container, alertCount){
   alert_read_more_target_url_input.type = "text";
   alert_read_more_target_url_input.name = "alert-read-more-url-" + alertCount;
 
-  alert_open_link.innerHTML = "Open link in ";
+  alert_open_link.innerHTML = "Open link in";
+
   alert_read_more_new_target.type = "radio";
   alert_read_more_new_target.name = "alert-read-more-target-" + alertCount;
   alert_read_more_new_target.checked = true;
@@ -341,15 +346,18 @@ function addAlertSettings(container, alertCount){
   alert_read_more_current_target.name = "alert-read-more-target-" + alertCount;
   alert_read_more_current_target.value = "";
 
-  alert_open_link.appendChild(alert_read_more_new_target);
-  alert_open_link.appendChild(document.createTextNode("New Tab "));
-  alert_open_link.appendChild(alert_read_more_current_target);
-  alert_open_link.appendChild(document.createTextNode("Current Tab"));
+  label4.appendChild(alert_read_more_new_target);
+  label4.appendChild(document.createTextNode("New Tab "));
+
+  label5.appendChild(alert_read_more_current_target);
+  label5.appendChild(document.createTextNode("Current Tab"));
 
   hidden_container.classList = "hidden";
   hidden_container.appendChild(alert_read_more_target_url);
   hidden_container.appendChild(alert_read_more_target_url_input);
   hidden_container.appendChild(alert_open_link);
+  hidden_container.appendChild(label4);
+  hidden_container.appendChild(label5);
 
   alert_icon.innerHTML = "Add Icon ";
 	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
@@ -366,12 +374,21 @@ function addAlertSettings(container, alertCount){
     icon.addEventListener('click', function (e) { cawebIconSelected(this); });
     alert_icon_list.appendChild(icon);
   }
-	
+
   alert_icon_input.name = "alert-icon-" + alertCount;
   alert_icon_input.type = "hidden";
 
 	alert_icon_list.appendChild(alert_icon_input);
-	
+
+  alert_setting_ok.className = "button button-primary ok";
+  alert_setting_ok.innerHTML = "Ok";
+  alert_setting_ok.addEventListener('click', function(e){ saveAlertSettings(this);});
+
+  alert_setting_cancel.className = "button button-primary cancel";
+  alert_setting_cancel.innerHTML = "Cancel";
+  alert_setting_cancel.addEventListener('click', function(e){ cancelAlertSettings(this);});
+
+  alert_settings.appendChild(alert_heading);
   alert_settings.appendChild(alert_display);
   alert_settings.appendChild(label1);
   alert_settings.appendChild(label2);
@@ -380,11 +397,13 @@ function addAlertSettings(container, alertCount){
   alert_settings.appendChild(alert_read_more);
   alert_settings.appendChild(hidden_container);
   alert_settings.appendChild(alert_icon);
-	alert_settings.appendChild(alert_icon_list);
-	
+  alert_settings.appendChild(alert_icon_list);
+  alert_settings.appendChild(alert_setting_ok);
+  alert_settings.appendChild(alert_setting_cancel);
+
 	container.appendChild(alert_settings);
-	
-	
+
+
 }
 function displayAlertOptions(e){
 	e.parentNode.nextSibling.classList.toggle('hidden');
@@ -412,6 +431,94 @@ function removeAlert(e){
 function displayReadMoreOptions(e) {
 	e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
  }
+function saveAlertSettings(saveButton){
+  var alertID = saveButton.parentNode.className.substring(saveButton.parentNode.className.lastIndexOf('-') + 1);
+  var inputs = saveButton.parentNode.getElementsByTagName('INPUT');
+  var tmp = {};
+
+  for(var i = 0; i < inputs.length; i++){
+    var input = inputs[i];
+
+    if( (input.name.includes('alert-display-') && input.checked) ||
+        (input.name.includes('alert-read-more-target-') && input.checked) ){
+      tmp[input.name] = input.value;
+    }else if( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') ){
+      if( input.name.includes('alert-icon-') ){
+        var selectedIcon = input.parentNode.getElementsByClassName('selected');
+        if( 0 < selectedIcon.length){
+          cawebIconSelected($(selectedIcon[0])[0]);
+          input.value = input.parentNode.getElementsByClassName('selected')[0].title;
+        }else{
+          input.value = '';
+        }
+      }
+      tmp[input.name] = input.name.includes('alert-read-more-') && ! input.name.includes('alert-read-more-url-') ? input.checked : input.value;
+    }
+  }
+
+  alertSettings[alertID] = tmp;
+  tb_remove();
+}
+function cancelAlertSettings(cancelButton){
+  var alertID = cancelButton.parentNode.className.substring(cancelButton.parentNode.className.lastIndexOf('-') + 1);
+	var inputs = cancelButton.parentNode.getElementsByTagName('INPUT');
+
+  if(undefined !==  alertSettings[alertID] ){
+    Object.keys( alertSettings[alertID] ).forEach(function(prop){
+      var propValue = alertSettings[alertID][prop];
+      var input = $('[name="' + prop + '"]')[0];
+
+      if(prop.includes('alert-display-')){
+        $('[name="' + prop + '"][value="' + propValue + '"]')[0].checked = true;
+      }else if(prop.includes('alert-read-more-target-')){
+        $('[name="' + prop + '"]')[0].checked = propValue;
+      }else{
+        if( prop.includes('alert-icon-') ){
+          var iconList = input.parentNode;
+          resetIconSelect(iconList);
+          if( "" !== propValue){
+            $(iconList).find('[title="' + propValue+ '"]')[0].classList.add('selected');
+          }
+        }
+        if(prop.includes('alert-read-more-') && ! prop.includes('alert-read-more-url-') ){
+          if(propValue){
+            input.checked = true;
+            input.parentNode.parentNode.nextElementSibling.classList.remove('hidden');
+          }else{
+            input.checked = false;
+            input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
+          }
+        }else{
+          input.value = propValue;
+        }
+      }
+
+    });
+  }else{
+    for(var i = 0; i < inputs.length; i++){
+      var input = inputs[i];
+
+      if((input.name.includes('alert-display-') && "home" == input.value) || (input.name.includes('alert-read-more-target-') && "_blank" == input.value)){
+        input.checked = true;
+      }else if(input.name.includes('alert-read-more-') && "checkbox" == input.type){
+        input.checked = false;
+        input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
+      }else if(input.name.includes('alert-banner-color-')){
+        var color_scheme_picker = $('#ca_site_color_scheme')[0];
+      	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+        input.value = args.caweb_colors[color]['highlight'];
+      }else{
+        if(input.name.includes('alert-icon-')){
+          var iconList = input.parentNode;
+          resetIconSelect(iconList);
+        }
+        input.value = "";
+      }
+    }
+  }
+
+	tb_remove();
+}
 
 $('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
 $('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
@@ -434,7 +541,7 @@ function cawebIconSelected(iconLi, autoUpdate = false){
 		icon_list[o].classList.remove('selected');
 	}
 	iconLi.classList.add('selected');
-	
+
 	if( autoUpdate ){
 		iconLi.parentNode.lastElementChild.value = iconLi.title;
 	}
@@ -447,6 +554,27 @@ function resetIconSelect(iconList){
 		icon_list[o].classList.remove('selected');
 	}
 }
+
+$('[name="caweb_options_submit"]').click( function(e){
+  e.preventDefault();
+  var settingInputs = $('#caweb-alert-settings').find('INPUT');
+  var hiddenInputs = document.createElement('DIV');
+
+  this.nextElementSibling.value = "on";
+
+  hiddenInputs.className = "hidden";
+
+  for(var i = 0; i < settingInputs.length; i++){
+    var input = settingInputs[i];
+
+    if( ((input.name.includes('alert-display-') || input.name.includes('alert-read-more-target-') ) && input.checked ) ||
+          ( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') )){
+      hiddenInputs.append(settingInputs[i]);
+    }
+  }
+  $('#ca-options-form').append(hiddenInputs);
+  $('#ca-options-form').submit();
+});
 
  /* End of CAWeb Option Page */
 });
