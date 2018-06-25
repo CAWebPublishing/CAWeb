@@ -171,7 +171,7 @@ $('#addAlertBanner').click(function(e){
 
   var alertUL = $('#cawebAlerts');
   var alertLI = document.createElement('LI');
-	var alertLICount = alertUL[0].childElementCount;
+	var alertLICount = $('#caweb_alert_count').val();
 	var alert_container = document.createElement('DIV');
 
 	var alertSettings = $('#caweb-alert-settings');
@@ -193,6 +193,9 @@ $('#addAlertBanner').click(function(e){
 	// Add corresponding Alert Setting
   alertSettings.append(alert_settings_wrapper);
 
+  console.log(tinymce);
+  tinymce.execCommand( 'mceAddEditor', true, 'alert-message-' + alertLICount );
+
   changeMade = true;
 
 });
@@ -201,14 +204,11 @@ $('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
 $('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
 $('.caweb-alert pre a.activateAlert').click(function(e){ activateAlert(this);});
-var alertSettings = [];
-$('[class*="caweb-alert-"] .button-primary.ok').click(function(e){
-    saveAlertSettings(this);
-});
 
-$('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){
-	cancelAlertSettings(this);
-});
+var alertSettings = [];
+$('[class*="caweb-alert-"] .button-primary.ok').click(function(e){ saveAlertSettings(this); });
+
+$('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){ cancelAlertSettings(this); });
 
 function activateAlert(activateButton){
   activateButton.classList.toggle('inactive');
@@ -216,7 +216,7 @@ function activateAlert(activateButton){
   if(activateButton.className.includes('inactive')){
     activateButton.firstElementChild.value = 'inactive';
   }else{
-    activateButton.firstElementChild.value = '';
+    activateButton.firstElementChild.value = 'active';
   }
 }
 function addAlert(container, alertCount){
@@ -264,6 +264,7 @@ function addAlert(container, alertCount){
 
 	alert_msg_textarea.form = "ca-options-form";
 	alert_msg_textarea.name = "alert-message-" + alertCount;
+  alert_msg_textarea.id = "alert-message-" + alertCount;
 
 	alert_header_wrapper.appendChild(alert_header);
 	alert_header_wrapper.appendChild(rem);
@@ -424,14 +425,15 @@ function addAlertSettings(container, alertCount){
 
 }
 function displayAlertOptions(e){
-	e.parentNode.nextSibling.classList.toggle('hidden');
+  e.parentNode.nextElementSibling.classList.toggle('hidden');
+  e.parentNode.parentNode.nextElementSibling.classList.toggle('hidden');
 
-	if( e.parentNode.nextSibling.classList.contains('hidden') ){
-		e.parentNode.firstChild.innerHTML = "" !== e.parentNode.nextSibling.firstChild.value.trim() ? e.parentNode.nextSibling.firstChild.value : "Header";
+	if( e.parentNode.nextElementSibling.classList.contains('hidden') ){
+		e.parentNode.firstElementChild.innerHTML = "" !== e.parentNode.nextElementSibling.firstElementChild.value.trim() ? e.parentNode.nextElementSibling.firstElementChild.value : "Header";
     e.classList.remove('dashicons-arrow-up');
     e.classList.add('dashicons-arrow-down');
 	}else{
-		e.parentNode.firstChild.innerHTML = "Header";
+		e.parentNode.firstElementChild.innerHTML = "Header";
     e.classList.remove('dashicons-arrow-down');
     e.classList.add('dashicons-arrow-up');
 	}
@@ -441,7 +443,6 @@ function removeAlert(e){
 
 	if (r == true) {
 		changeMade = true;
-		$('#caweb_alert_count').val( function(i, oldval) { return --oldval; } );
 		e.parentNode.parentNode.parentNode.remove();
 	}
 

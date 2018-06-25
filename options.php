@@ -150,6 +150,9 @@ function caweb_save_options($values = array(), $files = array()) {
         $count = $i + 1;
         $data = array();
 
+        if ( ! isset($values['alert-status-'.$count])) {
+            continue;
+        }
         $data['status'] = $values['alert-status-'.$count];
         $data['header'] = $values['alert-header-'.$count];
         $data['message'] = $values['alert-message-'.$count];
@@ -179,7 +182,6 @@ function caweb_save_options($values = array(), $files = array()) {
 
     print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
-
 // Setup CAWeb API Menu
 function caweb_api_menu_option_setup() {
     ?>
