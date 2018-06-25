@@ -62,7 +62,7 @@
               </ul>              
             </div> 
             <?php if ( true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
-              <div class="quarter" id="google_translate_element"></div>
+              <div class="quarter standard-translate" id="google_translate_element"></div>
             <?php endif; ?>						  
         </div>          
     </div>
