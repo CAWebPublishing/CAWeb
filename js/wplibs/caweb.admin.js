@@ -233,7 +233,7 @@ function addAlert(container, alertCount){
 	var alert_msg = document.createElement('P');
 	var alert_msg_textarea = document.createElement('TEXTAREA');
 
-	alert_header.innerHTML = "Header";
+	alert_header.innerHTML = "Label";
 
 	menu.classList = "thickbox dashicons dashicons-menu";
 	menu.href = "#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-" + alertCount;
@@ -258,7 +258,7 @@ function addAlert(container, alertCount){
 
 	alert_header_input.name = "alert-header-" + alertCount;
 	alert_header_input.type = "text";
-  alert_header_input.placeholder = "Header";
+  alert_header_input.placeholder = "Label";
 
 	alert_msg.innerHTML = "Message";
 

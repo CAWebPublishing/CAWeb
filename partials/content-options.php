@@ -378,7 +378,7 @@
 			$tinymce_settings = array('media_buttons' => false, 'quicktags' => false);
 			foreach ($alerts as $a => $data) {
 			    $header = $data['header'];
-			    $default_header = ! empty($header) ? $header : "Header";
+			    $default_header = ! empty($header) ? $header : "Label";
 			    $count = $a + 1;
 			    $status = $data['status'];
 
@@ -388,7 +388,7 @@
 						<div class="caweb-alert">
 							<pre><p><?= $default_header ?></p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-<?= $count ?>"></a><a class="dashicons dashicons-arrow-down alert-toggle" title="<?= $default_header ?>"></a><a class="dashicons activateAlert <?= $status ?>"><input name="alert-status-<?= $count ?>" value="<?= $status ?>" type="hidden"></a></pre>
 							<div class="hidden">
-								<input placeholder="Header" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
+								<input placeholder="Label" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
 								<p>Message</p>
 							</div>
 						</div>
