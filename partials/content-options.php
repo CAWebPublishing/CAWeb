@@ -17,7 +17,7 @@
 </div>
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=ca_options'); ?>" method="POST" enctype="multipart/form-data">
 <?php
-	if (isset($_POST['caweb_options_submit'])) {
+	if (isset($_POST['caweb_submit'])) {
 	    caweb_save_options($_POST, $_FILES);
 	}
 
@@ -270,7 +270,7 @@
 		<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>
 		<td>
 			<ul id="caweb-icon-menu">
-			<?php 
+			<?php
 				$icons = caweb_get_icon_list(-1, '', true);
 				$iconList = '';
 				foreach ($icons as $i) {
@@ -372,27 +372,57 @@
 		<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
 		<ul id="cawebAlerts">
 			<?php
-				$alerts = get_option('caweb_alerts', array());
 
-				foreach ($alerts as $a => $data) {
-				    $alert = sprintf('<div class="caweb-alert"><pre><p>%1$s</p><a class="dashicons dashicons-dismiss removeAlert"></a><a name="Alert Settings" class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&inlineId=caweb-alert-%2$s"></a><a class="dashicons dashicons-arrow-down" title="%1$s"></a></pre><div class="hidden"><input name="alert-header-%2$s" type="text" value="%1$s"><p>Message</p><textarea name="alert-message-%2$s">%3$s</textarea></div></div>', $data['header'], $a + 1, $data['message']);
+			$alerts = get_option('caweb_alerts', array());
 
-				    $icons = caweb_get_icon_list(-1, '', true);
-				    $iconList = '';
-				    foreach ($icons as $i) {
-				        $iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s" title="%1$s"></li>', $i);
-				    }
+			$tinymce_settings = array('media_buttons' => false, 'quicktags' => false);
+			foreach ($alerts as $a => $data) {
+			    $header = $data['header'];
+			    $default_header = ! empty($header) ? $header : "Header";
+			    $count = $a + 1;
+			    $status = $data['status'];
 
-				    $settings = sprintf('<div id="caweb-alert-%1$s" style="display:none;"><div class="caweb-alert-%1$s"><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in <input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab <input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul></div></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true"' : '', "all" == $data['page_display'] ? ' checked="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', "on" !== $data['button'] ? ' class="hidden"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon']);
+			    $alert = sprintf('', $default_header, $header, $count, $status); ?>
 
-				    printf('<li>%1$s%2$s</li>', $alert, $settings);
-				}
+					<li>
+						<div class="caweb-alert">
+							<pre><p><?= $default_header ?></p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-<?= $count ?>"></a><a class="dashicons dashicons-arrow-down alert-toggle" title="<?= $default_header ?>"></a><a class="dashicons activateAlert <?= $status ?>"><input name="alert-status-<?= $count ?>" value="<?= $status ?>" type="hidden"></a></pre>
+							<div class="hidden">
+								<input placeholder="Header" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
+								<p>Message</p>
+							</div>
+						</div>
+						<div class="hidden"><?= wp_editor($data['message'], sprintf('alert-message-%1$s', $a + 1), $tinymce_settings) ?></div>
+				  </li>
+
+
+					<?php
+			}
 			?>
 			<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">
 		</ul>
-
+		<?php if (empty($alerts)): ?>
+		<div class="hidden"><?= wp_editor('', 'caweb-fake-tinymce', array_merge($tinymce_settings, array('textarea_name' => ''))); ?></div>
+	<?php endif; ?>
 	</div>
 </div> <!-- End of CA Options Container -->
 
-<input type="submit" name="caweb_options_submit" id="#submit" class="button button-primary" value="<?php _e('Save Changes') ?>"/>
+<input type="submit" name="caweb_options_submit" class="button button-primary" value="<?php _e('Save Changes') ?>">
+<input type="hidden" name="caweb_submit" >
 </form>
+<div id="caweb-alert-settings">
+<?php
+// Alert Settings
+foreach ($alerts as $a => $data) {
+    $icons = caweb_get_icon_list(-1, '', true);
+    $iconList = '';
+    foreach ($icons as $i) {
+        $iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s" title="%1$s"></li>', $i);
+    }
+
+    $settings = sprintf('<div id="caweb-alert-%1$s" style="display:none;"><form id="ca-options-form" class="caweb-alert-%1$s"><h3>Alert Settings</h3><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in</label><label><input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab</label><label><input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul><a class="button button-primary ok">Ok</a><a class="button button-primary cancel">Cancel</a></form></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true" data-display="true"' : '', "all" == $data['page_display'] ? ' checked="true" data-display="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', "on" !== $data['button'] ? ' class="hidden"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon']);
+
+    print $settings;
+}
+?>
+</div>

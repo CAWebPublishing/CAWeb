@@ -171,54 +171,155 @@ $('#addAlertBanner').click(function(e){
 
   var alertUL = $('#cawebAlerts');
   var alertLI = document.createElement('LI');
-	var alertLICount = alertUL[0].childElementCount;
+	var alertLICount = $('#caweb_alert_count').val();
+	var alert_container = document.createElement('DIV');
 
-  var alert_container = document.createElement('DIV');
+	var alertSettings = $('#caweb-alert-settings');
+	var alert_settings_wrapper = document.createElement('DIV');
+
+	// Create and Add New Alert
+	alert_container.classList = "caweb-alert";
+	addAlert(alert_container, alertLICount);
+
+	// Create and Add New Alert Settings
+	alert_settings_wrapper.id = "caweb-alert-" + alertLICount;
+	alert_settings_wrapper.style.display = "none";
+	addAlertSettings(alert_settings_wrapper, alertLICount);
+
+	// Add new Alert
+	alertLI.appendChild(alert_container);
+	alertUL.append(alertLI);
+
+	// Add corresponding Alert Setting
+  alertSettings.append(alert_settings_wrapper);
+
+  console.log(tinymce);
+  tinymce.execCommand( 'mceAddEditor', true, 'alert-message-' + alertLICount );
+
+  changeMade = true;
+
+});
+$('.caweb-alert pre a.alert-toggle').click(function(e){ displayAlertOptions(this); });
+$('.removeAlert').click(function(e){ removeAlert(this); });
+$('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
+$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
+$('.caweb-alert pre a.activateAlert').click(function(e){ activateAlert(this);});
+
+var alertSettings = [];
+$('[class*="caweb-alert-"] .button-primary.ok').click(function(e){ saveAlertSettings(this); });
+
+$('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){ cancelAlertSettings(this); });
+
+function activateAlert(activateButton){
+  activateButton.classList.toggle('inactive');
+
+  if(activateButton.className.includes('inactive')){
+    activateButton.firstElementChild.value = 'inactive';
+  }else{
+    activateButton.firstElementChild.value = 'active';
+  }
+}
+function addAlert(container, alertCount){
 	var alert_header_wrapper = document.createElement('PRE');
-  var alert_header = document.createElement('P');
-  var menu = document.createElement('A');
+	var alert_header = document.createElement('P');
+	var menu = document.createElement('A');
 	var rem = document.createElement('A');
   var toggle = document.createElement('A');
+	var status = document.createElement('A');
+  var alert_status_input = document.createElement('INPUT');
 
-  var alert_info = document.createElement('DIV');
-  var alert_header_input = document.createElement('INPUT');
-  var alert_msg = document.createElement('P');
-  var alert_msg_textarea = document.createElement('TEXTAREA');
+	var alert_info = document.createElement('DIV');
+	var alert_header_input = document.createElement('INPUT');
+	var alert_msg = document.createElement('P');
+	var alert_msg_textarea = document.createElement('TEXTAREA');
 
-  var alert_settings_wrapper = document.createElement('DIV');
-  var alert_settings = document.createElement('DIV');
-  var alert_display = document.createElement('P');
-  var label1 = document.createElement('LABEL');
-  var alert_display_home = document.createElement('INPUT');
-  var label2 = document.createElement('LABEL');
-  var alert_display_all = document.createElement('INPUT');
-  var alert_banner_color = document.createElement('P');
-  var alert_banner_color_input = document.createElement('INPUT');
-  var alert_read_more = document.createElement('P');
-  var label3 = document.createElement('LABEL');
-  var alert_read_more_input = document.createElement('INPUT');
+	alert_header.innerHTML = "Header";
 
-  var container = document.createElement('DIV');
+	menu.classList = "thickbox dashicons dashicons-menu";
+	menu.href = "#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-" + alertCount;
+
+	rem.classList = "dashicons dashicons-dismiss removeAlert";
+	rem.addEventListener('click', function (e) { removeAlert(this); });
+
+	toggle.classList = "dashicons dashicons-arrow-up alert-toggle";
+	toggle.addEventListener('click', function (e) { displayAlertOptions(this); });
+
+  status.classList = "dashicons activateAlert";
+  status.addEventListener('click', function (e) { activateAlert(this); });
+
+  alert_status_input.name = "alert-status-" + alertCount;
+  alert_status_input.type = "hidden";
+
+  status.appendChild(alert_status_input);
+
+	alert_info.appendChild(alert_header_input);
+	alert_info.appendChild(alert_msg);
+	alert_info.appendChild(alert_msg_textarea);
+
+	alert_header_input.name = "alert-header-" + alertCount;
+	alert_header_input.type = "text";
+  alert_header_input.placeholder = "Header";
+
+	alert_msg.innerHTML = "Message";
+
+	alert_msg_textarea.form = "ca-options-form";
+	alert_msg_textarea.name = "alert-message-" + alertCount;
+  alert_msg_textarea.id = "alert-message-" + alertCount;
+
+	alert_header_wrapper.appendChild(alert_header);
+	alert_header_wrapper.appendChild(rem);
+	alert_header_wrapper.appendChild(menu);
+  alert_header_wrapper.appendChild(toggle);
+	alert_header_wrapper.appendChild(status);
+
+	container.appendChild(alert_header_wrapper);
+	container.appendChild(alert_info);
+
+}
+function addAlertSettings(container, alertCount){
+	var alert_settings = document.createElement('FORM');
+  var alert_heading = document.createElement('H3');
+	var alert_display = document.createElement('P');
+	var label1 = document.createElement('LABEL');
+	var alert_display_home = document.createElement('INPUT');
+	var label2 = document.createElement('LABEL');
+	var alert_display_all = document.createElement('INPUT');
+	var alert_banner_color = document.createElement('P');
+	var color_scheme_picker = $('#ca_site_color_scheme')[0];
+	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+	var alert_banner_color_input = document.createElement('INPUT');
+	var alert_read_more = document.createElement('P');
+	var label3 = document.createElement('LABEL');
+	var alert_read_more_input = document.createElement('INPUT');
+
+	// Hidden Options for Read More Button
+  var hidden_container = document.createElement('DIV');
   var alert_read_more_target_url = document.createElement('P');
   var alert_read_more_target_url_input = document.createElement('INPUT');
   var alert_open_link = document.createElement('LABEL');
+  var label4 = document.createElement('LABEL');
+  var label5 = document.createElement('LABEL');
   var alert_read_more_new_target = document.createElement('INPUT');
   var alert_read_more_current_target = document.createElement('INPUT');
 
+	// Alert Icon options
 	var alert_icon = document.createElement('P');
   var alert_icon_reset = document.createElement('SPAN');
   var alert_icon_list = document.createElement('UL');
   var alert_icon_input = document.createElement('INPUT');
 
-  alert_settings_wrapper.id = "caweb-alert-" + alertLICount;
-  alert_settings_wrapper.style.display = "none";
+  // Alert Setting Confirmation
+  var alert_setting_ok = document.createElement('A');
+  var alert_setting_cancel = document.createElement('A');
 
-  alert_settings.classList = "caweb-alert-" + alertLICount;
+	alert_settings.classList = "caweb-alert-" + alertCount;
+
+  alert_heading.innerHTML = "Alert Settings";
 
   alert_display.innerHTML = "Display on";
 
   alert_display_home.type = "radio";
-  alert_display_home.name = "alert-display-" + alertLICount;
+  alert_display_home.name = "alert-display-" + alertCount;
   alert_display_home.value = "home";
   alert_display_home.checked = true;
 
@@ -226,24 +327,22 @@ $('#addAlertBanner').click(function(e){
   label1.appendChild(document.createTextNode("Home Page Only"));
 
   alert_display_all.type = "radio";
-  alert_display_all.name = "alert-display-" + alertLICount;
+  alert_display_all.name = "alert-display-" + alertCount;
   alert_display_all.value = "all";
 
   label2.appendChild(alert_display_all);
   label2.appendChild(document.createTextNode("All Pages"));
 
   alert_banner_color.innerHTML = "Banner Color";
-  var color_scheme_picker = $('#ca_site_color_scheme')[0];
-	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
 
   alert_banner_color_input.type = "color";
-  alert_banner_color_input.name = "alert-banner-color-" + alertLICount;
+  alert_banner_color_input.name = "alert-banner-color-" + alertCount;
   alert_banner_color_input.value = args.caweb_colors[color]['highlight'];
-  
+
   label3.innerHTML = "Add Read More Button ";
   alert_read_more_input.type = "checkbox";
 	alert_read_more_input.classList = "alert-read-more";
-  alert_read_more_input.name = "alert-read-more-" + alertLICount;
+  alert_read_more_input.name = "alert-read-more-" + alertCount;
 
   alert_read_more_input.addEventListener('click',  function(e){ displayReadMoreOptions(this)});
 
@@ -253,27 +352,31 @@ $('#addAlertBanner').click(function(e){
   alert_read_more_target_url.innerHTML = "Read More Button URL";
 
   alert_read_more_target_url_input.type = "text";
-  alert_read_more_target_url_input.name = "alert-read-more-url-" + alertLICount;
+  alert_read_more_target_url_input.name = "alert-read-more-url-" + alertCount;
 
-  alert_open_link.innerHTML = "Open link in ";
+  alert_open_link.innerHTML = "Open link in";
+
   alert_read_more_new_target.type = "radio";
-  alert_read_more_new_target.name = "alert-read-more-target-" + alertLICount;
+  alert_read_more_new_target.name = "alert-read-more-target-" + alertCount;
   alert_read_more_new_target.checked = true;
   alert_read_more_new_target.value = "_blank";
 
   alert_read_more_current_target.type = "radio";
-  alert_read_more_current_target.name = "alert-read-more-target-" + alertLICount;
+  alert_read_more_current_target.name = "alert-read-more-target-" + alertCount;
   alert_read_more_current_target.value = "";
 
-  alert_open_link.appendChild(alert_read_more_new_target);
-  alert_open_link.appendChild(document.createTextNode("New Tab "));
-  alert_open_link.appendChild(alert_read_more_current_target);
-  alert_open_link.appendChild(document.createTextNode("Current Tab"));
+  label4.appendChild(alert_read_more_new_target);
+  label4.appendChild(document.createTextNode("New Tab "));
 
-  container.classList = "hidden";
-  container.appendChild(alert_read_more_target_url);
-  container.appendChild(alert_read_more_target_url_input);
-  container.appendChild(alert_open_link);
+  label5.appendChild(alert_read_more_current_target);
+  label5.appendChild(document.createTextNode("Current Tab"));
+
+  hidden_container.classList = "hidden";
+  hidden_container.appendChild(alert_read_more_target_url);
+  hidden_container.appendChild(alert_read_more_target_url_input);
+  hidden_container.appendChild(alert_open_link);
+  hidden_container.appendChild(label4);
+  hidden_container.appendChild(label5);
 
   alert_icon.innerHTML = "Add Icon ";
 	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
@@ -290,83 +393,47 @@ $('#addAlertBanner').click(function(e){
     icon.addEventListener('click', function (e) { cawebIconSelected(this); });
     alert_icon_list.appendChild(icon);
   }
-	
-  alert_icon_input.name = "alert-icon-" + alertLICount;
+
+  alert_icon_input.name = "alert-icon-" + alertCount;
   alert_icon_input.type = "hidden";
 
 	alert_icon_list.appendChild(alert_icon_input);
 
-  // Alert Container
-  alert_container.classList = "caweb-alert";
+  alert_setting_ok.className = "button button-primary ok";
+  alert_setting_ok.innerHTML = "Ok";
+  alert_setting_ok.addEventListener('click', function(e){ saveAlertSettings(this);});
 
-  menu.name = "Alert Settings";
-  menu.classList = "thickbox dashicons dashicons-menu";
-  menu.href = "#TB_inline?width=600&height=550&inlineId=caweb-alert-" + alertLICount;
+  alert_setting_cancel.className = "button button-primary cancel";
+  alert_setting_cancel.innerHTML = "Cancel";
+  alert_setting_cancel.addEventListener('click', function(e){ cancelAlertSettings(this);});
 
-  rem.classList = "dashicons dashicons-dismiss removeAlert";
-  rem.addEventListener('click', function (e) { removeAlert(this); });
-
-	toggle.classList = "dashicons dashicons-arrow-up";
-  toggle.addEventListener('click', function (e) { displayAlertOptions(this); });
-
-  alert_header.innerHTML = "Header";
-
-	alert_header_wrapper.appendChild(alert_header);
-  alert_header_wrapper.appendChild(rem);
-	alert_header_wrapper.appendChild(menu);
-	alert_header_wrapper.appendChild(toggle);
-
-  alert_info.appendChild(alert_header_input);
-  alert_info.appendChild(alert_msg);
-  alert_info.appendChild(alert_msg_textarea);
-
-  alert_header_input.name = "alert-header-" + alertLICount;
-  alert_header_input.type = "text";
-
-  alert_msg.innerHTML = "Message";
-
-  alert_msg_textarea.form = "ca-options-form";
-  alert_msg_textarea.name = "alert-message-" + alertLICount;
-
-  alertLI.classList = "pending-alert";
-
+  alert_settings.appendChild(alert_heading);
   alert_settings.appendChild(alert_display);
   alert_settings.appendChild(label1);
   alert_settings.appendChild(label2);
   alert_settings.appendChild(alert_banner_color);
   alert_settings.appendChild(alert_banner_color_input);
   alert_settings.appendChild(alert_read_more);
-  alert_settings.appendChild(container);
+  alert_settings.appendChild(hidden_container);
   alert_settings.appendChild(alert_icon);
-	alert_settings.appendChild(alert_icon_list);
-	
-  alert_container.appendChild(alert_header_wrapper);
-  alert_container.appendChild(alert_info);
+  alert_settings.appendChild(alert_icon_list);
+  alert_settings.appendChild(alert_setting_ok);
+  alert_settings.appendChild(alert_setting_cancel);
 
-  alert_settings_wrapper.appendChild(alert_settings);
+	container.appendChild(alert_settings);
 
-  alertLI.appendChild(alert_settings_wrapper);
-  alertLI.appendChild(alert_container);
 
-	alertUL.append(alertLI);
-
-  changeMade = true;
-
-});
-$('.caweb-alert pre a:last-child').click(function(e){ displayAlertOptions(this); });
-$('.removeAlert').click(function(e){ removeAlert(this); });
-$('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
-$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
-
+}
 function displayAlertOptions(e){
-	e.parentNode.nextSibling.classList.toggle('hidden');
+  e.parentNode.nextElementSibling.classList.toggle('hidden');
+  e.parentNode.parentNode.nextElementSibling.classList.toggle('hidden');
 
-	if( e.parentNode.nextSibling.classList.contains('hidden') ){
-		e.parentNode.firstChild.innerHTML = "" !== e.parentNode.nextSibling.firstChild.value.trim() ? e.parentNode.nextSibling.firstChild.value : "Header";
+	if( e.parentNode.nextElementSibling.classList.contains('hidden') ){
+		e.parentNode.firstElementChild.innerHTML = "" !== e.parentNode.nextElementSibling.firstElementChild.value.trim() ? e.parentNode.nextElementSibling.firstElementChild.value : "Header";
     e.classList.remove('dashicons-arrow-up');
     e.classList.add('dashicons-arrow-down');
 	}else{
-		e.parentNode.firstChild.innerHTML = "Header";
+		e.parentNode.firstElementChild.innerHTML = "Header";
     e.classList.remove('dashicons-arrow-down');
     e.classList.add('dashicons-arrow-up');
 	}
@@ -376,7 +443,6 @@ function removeAlert(e){
 
 	if (r == true) {
 		changeMade = true;
-		$('#caweb_alert_count').val( function(i, oldval) { return --oldval; } );
 		e.parentNode.parentNode.parentNode.remove();
 	}
 
@@ -384,6 +450,94 @@ function removeAlert(e){
 function displayReadMoreOptions(e) {
 	e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
  }
+function saveAlertSettings(saveButton){
+  var alertID = saveButton.parentNode.className.substring(saveButton.parentNode.className.lastIndexOf('-') + 1);
+  var inputs = saveButton.parentNode.getElementsByTagName('INPUT');
+  var tmp = {};
+
+  for(var i = 0; i < inputs.length; i++){
+    var input = inputs[i];
+
+    if( (input.name.includes('alert-display-') && input.checked) ||
+        (input.name.includes('alert-read-more-target-') && input.checked) ){
+      tmp[input.name] = input.value;
+    }else if( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') ){
+      if( input.name.includes('alert-icon-') ){
+        var selectedIcon = input.parentNode.getElementsByClassName('selected');
+        if( 0 < selectedIcon.length){
+          cawebIconSelected($(selectedIcon[0])[0]);
+          input.value = input.parentNode.getElementsByClassName('selected')[0].title;
+        }else{
+          input.value = '';
+        }
+      }
+      tmp[input.name] = input.name.includes('alert-read-more-') && ! input.name.includes('alert-read-more-url-') ? input.checked : input.value;
+    }
+  }
+
+  alertSettings[alertID] = tmp;
+  tb_remove();
+}
+function cancelAlertSettings(cancelButton){
+  var alertID = cancelButton.parentNode.className.substring(cancelButton.parentNode.className.lastIndexOf('-') + 1);
+	var inputs = cancelButton.parentNode.getElementsByTagName('INPUT');
+
+  if(undefined !==  alertSettings[alertID] ){
+    Object.keys( alertSettings[alertID] ).forEach(function(prop){
+      var propValue = alertSettings[alertID][prop];
+      var input = $('[name="' + prop + '"]')[0];
+
+      if(prop.includes('alert-display-')){
+        $('[name="' + prop + '"][value="' + propValue + '"]')[0].checked = true;
+      }else if(prop.includes('alert-read-more-target-')){
+        $('[name="' + prop + '"]')[0].checked = propValue;
+      }else{
+        if( prop.includes('alert-icon-') ){
+          var iconList = input.parentNode;
+          resetIconSelect(iconList);
+          if( "" !== propValue){
+            $(iconList).find('[title="' + propValue+ '"]')[0].classList.add('selected');
+          }
+        }
+        if(prop.includes('alert-read-more-') && ! prop.includes('alert-read-more-url-') ){
+          if(propValue){
+            input.checked = true;
+            input.parentNode.parentNode.nextElementSibling.classList.remove('hidden');
+          }else{
+            input.checked = false;
+            input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
+          }
+        }else{
+          input.value = propValue;
+        }
+      }
+
+    });
+  }else{
+    for(var i = 0; i < inputs.length; i++){
+      var input = inputs[i];
+
+      if((input.name.includes('alert-display-') && "home" == input.value) || (input.name.includes('alert-read-more-target-') && "_blank" == input.value)){
+        input.checked = true;
+      }else if(input.name.includes('alert-read-more-') && "checkbox" == input.type){
+        input.checked = false;
+        input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
+      }else if(input.name.includes('alert-banner-color-')){
+        var color_scheme_picker = $('#ca_site_color_scheme')[0];
+      	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+        input.value = args.caweb_colors[color]['highlight'];
+      }else{
+        if(input.name.includes('alert-icon-')){
+          var iconList = input.parentNode;
+          resetIconSelect(iconList);
+        }
+        input.value = "";
+      }
+    }
+  }
+
+	tb_remove();
+}
 
 $('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
 $('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
@@ -399,14 +553,17 @@ $('[name="ca_google_trans_enabled"]').click(function(e){
 	}
 });
 
-function cawebIconSelected(iconLi){
+function cawebIconSelected(iconLi, autoUpdate = false){
 	var icon_list = iconLi.parentNode.getElementsByTagName('LI');
 
 	for(o = 0; o < icon_list.length - 1; o++){
 		icon_list[o].classList.remove('selected');
 	}
 	iconLi.classList.add('selected');
-	iconLi.parentNode.lastElementChild.value = iconLi.title;
+
+	if( autoUpdate ){
+		iconLi.parentNode.lastElementChild.value = iconLi.title;
+	}
 }
 function resetIconSelect(iconList){
 	iconList.lastElementChild.value = "";
@@ -416,6 +573,27 @@ function resetIconSelect(iconList){
 		icon_list[o].classList.remove('selected');
 	}
 }
+
+$('[name="caweb_options_submit"]').click( function(e){
+  e.preventDefault();
+  var settingInputs = $('#caweb-alert-settings').find('INPUT');
+  var hiddenInputs = document.createElement('DIV');
+
+  this.nextElementSibling.value = "on";
+
+  hiddenInputs.className = "hidden";
+
+  for(var i = 0; i < settingInputs.length; i++){
+    var input = settingInputs[i];
+
+    if( ((input.name.includes('alert-display-') || input.name.includes('alert-read-more-target-') ) && input.checked ) ||
+          ( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') )){
+      hiddenInputs.append(settingInputs[i]);
+    }
+  }
+  $('#ca-options-form').append(hiddenInputs);
+  $('#ca-options-form').submit();
+});
 
  /* End of CAWeb Option Page */
 });
