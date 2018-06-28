@@ -146,8 +146,8 @@ function caweb_init() {
         session_start();
     }
 
-		add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
-		add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
+    add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
+    add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
 }
 function caweb_clear_alert_session() {
     $id = $_GET['alert-id'];
