@@ -142,7 +142,6 @@ ul.utility-links.social-media-links{
 }
 .first-level-link{
   	display: table;
-    height: 100%;
 }
 .first-level-link>span[class^="ca-gov-icon"]{
   display: table-row;
