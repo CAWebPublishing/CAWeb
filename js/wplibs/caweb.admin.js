@@ -553,7 +553,7 @@ $('[name="ca_google_trans_enabled"]').click(function(e){
 	}
 });
 
-function cawebIconSelected(iconLi, autoUpdate = false){
+function cawebIconSelected(iconLi, autoUpdate){
 	var icon_list = iconLi.parentNode.getElementsByTagName('LI');
 
 	for(o = 0; o < icon_list.length - 1; o++){
