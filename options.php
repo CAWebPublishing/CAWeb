@@ -213,7 +213,8 @@ function caweb_api_menu_option_setup() {
 }
 // Save API Values
 function caweb_save_api_options($values = array()) {
-    update_site_option('caweb_username', $values['caweb_username']);
+    update_site_option('caweb_private_theme_enabled', isset($values['caweb_private_theme_enabled']) ? true : false);
+    update_site_option('caweb_username', ! empty($values['caweb_username']) ? $values['caweb_username'] : 'CAWebPublishing');
     update_site_option('caweb_password', $values['caweb_password']);
 
     print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
