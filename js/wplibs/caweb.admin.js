@@ -202,7 +202,7 @@ $('#addAlertBanner').click(function(e){
 $('.caweb-alert pre a.alert-toggle').click(function(e){ displayAlertOptions(this); });
 $('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
-$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling); });
+$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling, false); });
 $('.caweb-alert pre a.activateAlert').click(function(e){ activateAlert(this);});
 
 var alertSettings = [];
@@ -380,7 +380,7 @@ function addAlertSettings(container, alertCount){
 
   alert_icon.innerHTML = "Add Icon ";
 	alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
-	alert_icon_reset.addEventListener('click', function (e) { resetIconSelect(this.parentNode.nextElementSibling); });
+	alert_icon_reset.addEventListener('click', function (e) { resetIconSelect(this.parentNode.nextElementSibling, false); });
 
 	alert_icon.appendChild(alert_icon_reset);
 
@@ -465,8 +465,7 @@ function saveAlertSettings(saveButton){
       if( input.name.includes('alert-icon-') ){
         var selectedIcon = input.parentNode.getElementsByClassName('selected');
         if( 0 < selectedIcon.length){
-          cawebIconSelected($(selectedIcon[0])[0]);
-          input.value = input.parentNode.getElementsByClassName('selected')[0].title;
+          cawebIconSelected($(selectedIcon[0])[0], true);
         }else{
           input.value = '';
         }
@@ -494,7 +493,7 @@ function cancelAlertSettings(cancelButton){
       }else{
         if( prop.includes('alert-icon-') ){
           var iconList = input.parentNode;
-          resetIconSelect(iconList);
+          resetIconSelect(iconList,false);
           if( "" !== propValue){
             $(iconList).find('[title="' + propValue+ '"]')[0].classList.add('selected');
           }
@@ -529,7 +528,10 @@ function cancelAlertSettings(cancelButton){
       }else{
         if(input.name.includes('alert-icon-')){
           var iconList = input.parentNode;
-          resetIconSelect(iconList);
+          resetIconSelect(iconList, false);
+					if( "" !== input.value){
+					 $(iconList).find('[title="' + input.value+ '"]')[0].classList.add('selected');
+				 }
         }
         input.value = "";
       }
@@ -539,8 +541,9 @@ function cancelAlertSettings(cancelButton){
 	tb_remove();
 }
 
-$('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild);});
-$('#caweb-icon-menu li').click(function(e){cawebIconSelected(this);});
+$('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild, true);});
+$('#caweb-icon-menu.google li').click(function(e){cawebIconSelected(this, true);});
+$('#caweb-icon-menu.alerts li').click(function(e){cawebIconSelected(this, false);});
 $('[name="ca_google_trans_enabled"]').click(function(e){
 	if("custom" !== this.value){
 		this.parentNode.parentNode.parentNode.nextElementSibling.classList.add('hidden');
@@ -565,12 +568,14 @@ function cawebIconSelected(iconLi, autoUpdate){
 		iconLi.parentNode.lastElementChild.value = iconLi.title;
 	}
 }
-function resetIconSelect(iconList){
-	iconList.lastElementChild.value = "";
+function resetIconSelect(iconList, autoUpdate){
 	var icon_list = iconList.getElementsByTagName('LI');
 
 	for(o = 0; o < icon_list.length - 1; o++){
 		icon_list[o].classList.remove('selected');
+	}
+	if(autoUpdate){
+		iconList.lastElementChild.value = "";
 	}
 }
 
