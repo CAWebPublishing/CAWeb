@@ -213,7 +213,7 @@ $('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){ cancelAle
 function activateAlert(activateButton){
   activateButton.classList.toggle('inactive');
 
-  if(activateButton.className.includes('inactive')){
+  if(-1 < activateButton.className.indexOf('inactive')){
     activateButton.firstElementChild.value = 'inactive';
   }else{
     activateButton.firstElementChild.value = 'active';
@@ -458,11 +458,11 @@ function saveAlertSettings(saveButton){
   for(var i = 0; i < inputs.length; i++){
     var input = inputs[i];
 
-    if( (input.name.includes('alert-display-') && input.checked) ||
-        (input.name.includes('alert-read-more-target-') && input.checked) ){
+    if( (-1 < input.name.indexOf('alert-display-') && input.checked) ||
+        (-1 < input.name.indexOf('alert-read-more-target-') && input.checked) ){
       tmp[input.name] = input.value;
-    }else if( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') ){
-      if( input.name.includes('alert-icon-') ){
+    }else if( -1 == input.name.indexOf('alert-display-') && -1 == input.name.indexOf('alert-read-more-target-') ){
+      if( -1 < input.name.indexOf('alert-icon-') ){
         var selectedIcon = input.parentNode.getElementsByClassName('selected');
         if( 0 < selectedIcon.length){
           cawebIconSelected($(selectedIcon[0])[0], true);
@@ -470,7 +470,7 @@ function saveAlertSettings(saveButton){
           input.value = '';
         }
       }
-      tmp[input.name] = input.name.includes('alert-read-more-') && ! input.name.includes('alert-read-more-url-') ? input.checked : input.value;
+      tmp[input.name] = -1 < input.name.indexOf('alert-read-more-') && -1 == input.name.indexOf('alert-read-more-url-') ? input.checked : input.value;
     }
   }
 
@@ -486,19 +486,19 @@ function cancelAlertSettings(cancelButton){
       var propValue = alertSettings[alertID][prop];
       var input = $('[name="' + prop + '"]')[0];
 
-      if(prop.includes('alert-display-')){
+      if(-1 < prop.indexOf('alert-display-')){
         $('[name="' + prop + '"][value="' + propValue + '"]')[0].checked = true;
-      }else if(prop.includes('alert-read-more-target-')){
+      }else if(prop.indexOf('alert-read-more-target-')){
         $('[name="' + prop + '"]')[0].checked = propValue;
       }else{
-        if( prop.includes('alert-icon-') ){
+        if(-1 <  prop.indexOf('alert-icon-') ){
           var iconList = input.parentNode;
           resetIconSelect(iconList,false);
           if( "" !== propValue){
             $(iconList).find('[title="' + propValue+ '"]')[0].classList.add('selected');
           }
         }
-        if(prop.includes('alert-read-more-') && ! prop.includes('alert-read-more-url-') ){
+        if(-1 < prop.indexOf('alert-read-more-') && -1 == prop.indexOf('alert-read-more-url-') ){
           if(propValue){
             input.checked = true;
             input.parentNode.parentNode.nextElementSibling.classList.remove('hidden');
@@ -516,17 +516,17 @@ function cancelAlertSettings(cancelButton){
     for(var i = 0; i < inputs.length; i++){
       var input = inputs[i];
 
-      if((input.name.includes('alert-display-') && "home" == input.value) || (input.name.includes('alert-read-more-target-') && "_blank" == input.value)){
+      if((-1 < input.name.indexOf('alert-display-') && "home" == input.value) || (-1 < input.name.indexOf('alert-read-more-target-') && "_blank" == input.value)){
         input.checked = true;
-      }else if(input.name.includes('alert-read-more-') && "checkbox" == input.type){
+      }else if(-1 < input.name.indexOf('alert-read-more-') && "checkbox" == input.type){
         input.checked = false;
         input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
-      }else if(input.name.includes('alert-banner-color-')){
+      }else if(-1 < input.name.indexOf('alert-banner-color-')){
         var color_scheme_picker = $('#ca_site_color_scheme')[0];
       	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
         input.value = args.caweb_colors[color]['highlight'];
       }else{
-        if(input.name.includes('alert-icon-')){
+        if(-1 < input.name.indexOf('alert-icon-')){
           var iconList = input.parentNode;
           resetIconSelect(iconList, false);
 					if( "" !== input.value){
@@ -591,9 +591,9 @@ $('[name="caweb_options_submit"]').click( function(e){
   for(var i = 0; i < settingInputs.length; i++){
     var input = settingInputs[i];
 
-    if( ((input.name.includes('alert-display-') || input.name.includes('alert-read-more-target-') ) && input.checked ) ||
-          ( ! input.name.includes('alert-display-') && ! input.name.includes('alert-read-more-target-') )){
-      hiddenInputs.append(settingInputs[i]);
+    if( ((-1 < input.name.indexOf('alert-display-') || -1 < input.name.indexOf('alert-read-more-target-') ) && input.checked ) ||
+          ( -1 ==  input.name.indexOf('alert-display-') && -1 ==  input.name.indexOf('alert-read-more-target-') )){
+      hiddenInputs.appendChild(settingInputs[i]);
     }
   }
   $('#ca-options-form').append(hiddenInputs);
