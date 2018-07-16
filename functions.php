@@ -148,6 +148,14 @@ function caweb_init() {
 
     add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
     add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
+		
+		add_action('caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1);
+}
+
+function caweb_post_list_module_clear_cache(){
+	if( function_exists('clear_nginx_post_publish_cache')){
+		clear_nginx_post_publish_cache();
+	}
 }
 function caweb_clear_alert_session() {
     $id = $_GET['alert-id'];
