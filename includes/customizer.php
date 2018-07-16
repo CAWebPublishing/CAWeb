@@ -3,19 +3,26 @@
 // CAWeb Customizer Preview Init
 add_action('customize_preview_init', 'caweb_customize_preview_init');
 function caweb_customize_preview_init() {
-    wp_register_script('caweb-customizer-script', CAWebUri.'/js/wplibs/theme-customizer.js', array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
-
-    wp_enqueue_script('caweb-customizer-script');
-
-    // Remove other Customizer Scripts
-    // Divi Customizer
-    wp_dequeue_script('divi-customizer');
+	//wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
+	
+		
+	wp_register_script('caweb-customizer-script', CAWebUri.'/js/wplibs/theme-customizer.js', array('jquery', 'customize-preview', 'caweb-icon-script'), wp_get_theme('CAWeb')->get('Version'), true);
+	
+	wp_enqueue_script('caweb-customizer-script');
+	
+	// Remove other Customizer Scripts
+	// Divi Customizer
+	wp_dequeue_script('divi-customizer');
 }
 
 // CAWeb Customizer Enqueue Scripts
 add_action('customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts');
 function caweb_customize_controls_enqueue_scripts() {
-    wp_register_script('caweb-customize-controls-script', CAWebUri.'/js/wplibs/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
+	
+		wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
+		
+    wp_register_script('caweb-customize-controls-script', CAWebUri.'/js/wplibs/theme-customizer-controls.js', array('caweb-icon-script'), wp_get_theme('CAWeb')->get('Version'), true);
+		
     wp_localize_script('caweb-customize-controls-script', 'colorschemes', array('original' => caweb_color_schemes(4, 'displayname'), 'all' => caweb_color_schemes(0, 'displayname')));
 
     wp_enqueue_script('caweb-customize-controls-script');
@@ -44,13 +51,14 @@ function caweb_sanitize_option_ca_custom_css($value, $option) {
 // CAWeb Customizer Styles
 add_action('customize_controls_print_styles', 'caweb_customize_controls_print_styles');
 function caweb_customize_controls_print_styles() {
-    print '<style>#customize-control-ca_site_version #_customize-input-ca_site_version option:checked:first-child + 
-#customize-control-ca_site_color_scheme #_customize-input-ca_site_color_scheme option:first-child { color: blue; }</style>';
+  
+	
 }
 // CAWeb Register Customizer
 add_action('customize_register', 'caweb_customize_register');
 function caweb_customize_register($wp_customize) {
-
+	$wp_customize->register_control_type( 'CAWeb_Customize_Icon_Control' );
+	
   // Remove Divi Customization Panels and Sections
     $divi_panels = array('et_divi_general_settings', 'et_divi_header_panel', 'et_divi_footer_panel', 'et_divi_blog_settings',
         'et_divi_buttons_settings', 'et_divi_mobile');
@@ -332,16 +340,53 @@ function caweb_customize_register($wp_customize) {
 
     $wp_customize->add_setting('ca_google_trans_enabled', array(
         'type' => 'option',
-        'default' => get_option('ca_google_trans_enabled'),
-        'sanitize_callback' => 'caweb_sanitize_customizer_checkbox'));
+        'default' => get_option('ca_google_trans_enabled')
+			)
+		);
 
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'ca_google_trans_enabled', array(
         'label'      => 'Enable Google Translate',
-        'type' => 'checkbox',
+        'type' => 'radio',
+				'choices' => array('none' => 'None', 'standard' => 'Standard', 'custom' => 'Custom'),
         'section'    => 'caweb_google',
         'settings'   => 'ca_google_trans_enabled'
     )));
 
+		$wp_customize->add_setting('ca_google_trans_page', array(
+        'type' => 'option',
+        'default' => get_option('ca_google_trans_page', ''),
+        'transport' => 'postMessage'));
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'ca_google_trans_page', array(
+        'label'      => 'Translate Page',
+        'type' => 'text',
+        'section'    => 'caweb_google',
+        'settings'   => 'ca_google_trans_page'
+    )));
+		
+		$wp_customize->add_setting('ca_google_trans_icon', array(
+        'type' => 'option',
+        'default' => get_option('ca_google_trans_icon', 'globe'),
+        'transport' => 'postMessage'));
+		
+		$wp_customize->add_control(new CAWeb_Customize_Icon_Control($wp_customize, 'ca_google_trans_icon', array(
+			'section'    => 'caweb_google',
+			'settings'   => 'ca_google_trans_icon'
+		)));
+		
+				
+		$wp_customize->add_setting('ca_google_shortcode', array(
+        'type' => 'option',
+        'default' => '[caweb_google_translate /]',
+        'transport' => 'postMessage'));
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'ca_google_shortcode', array(
+        'label'      => 'Google Translate Shortcode',
+        'type' => 'text',
+        'section'    => 'caweb_google',
+        'settings'   => 'ca_google_shortcode'
+    )));
+		
     // Social Media Links
     $wp_customize->add_section('caweb_social_media', array(
         'title' => 'Social Media Links',
@@ -420,6 +465,36 @@ function caweb_customize_register($wp_customize) {
     )));
 
     add_filter('sanitize_option_ca_custom_css', 'caweb_sanitize_option_ca_custom_css', 10, 2);
+}
+
+if (class_exists('WP_Customize_Control')){
+	class CAWeb_Customize_Icon_Control extends WP_Customize_Control {
+		public $label = 'Icon';
+		public $type = 'caweb_icon_menu';
+		
+		public function render_content(){
+			
+		}
+		public function content_template() {
+			?>
+			<label>
+        <span class="customize-control-title "><?php echo esc_html( $this->label ); ?> <span class="dashicons dashicons-image-rotate caweb-icon-menu resetIcon"></span></span>
+				<ul id="caweb-icon-menu">
+					<?php
+					$icons = caweb_get_icon_list(-1, '', true);
+					$iconList = '';
+					foreach ($icons as $i) {
+						printf('<li class="icon-option ca-gov-icon-%1$s%2$s customizer" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '');
+					}
+					?>
+					<input id="<?php echo esc_attr( $input_id ); ?>" type="text" name="ca_google_trans_icon" value="<?= $this->value() ?>" >
+				</ul>
+			</label>		
+			<?php
+	
+		}
+		
+	}	
 }
 
 ?>

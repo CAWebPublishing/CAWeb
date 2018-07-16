@@ -45,7 +45,6 @@ wp.customize( 'ca_frontpage_search_enabled', function( value ) {
 	} );
 } );
 
-
 // Sticky Navigation
 var current_padding = 0;
 wp.customize( 'ca_sticky_navigation', function( value ) {
@@ -377,5 +376,14 @@ wp.customize( 'ca_contact_us_link', function( value ) {
    
 	} );
 } );
-  
+
+
+// Search on Front Page
+wp.customize( 'ca_google_trans_icon', function( value ) {
+	value.bind( function( newval ) {
+		console.log(newval);
+    
+	} );
+} );
+
 } )( jQuery );

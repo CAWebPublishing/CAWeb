@@ -28,5 +28,17 @@
                
     }
 	
+		$('customize-control-ca_google_trans_icon').on("input", updateTranslateIcon('') );
+		
+		function updateTranslateIcon(newVal){
+			var google_trans_icon = $('#caweb-gtrans-custom');
+			if( "" == newVal ){
+				google_trans_icon.attr('class', '');
+				google_trans_icon.css({'display' : 'none'});
+			}else{
+				google_trans_icon.attr('class', 'ca-gov-icon-' + newVal);
+				google_trans_icon.css({'display' : 'inherit'});
+			}	
+		}
 });
 })( jQuery );

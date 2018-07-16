@@ -79,7 +79,7 @@ $('#ca_site_version').change(function() {
 		}
     });
 
-   $('#resetIcon').click(function() {
+   $('#resetFavIcon').click(function() {
       var ico = args.defaultFavIcon;
       	document.getElementById('ca_fav_ico').value = ico;
         document.getElementById('ca_fav_ico_img').src = ico;
@@ -193,7 +193,6 @@ $('#addAlertBanner').click(function(e){
 	// Add corresponding Alert Setting
   alertSettings.append(alert_settings_wrapper);
 
-  console.log(tinymce);
   tinymce.execCommand( 'mceAddEditor', true, 'alert-message-' + alertLICount );
 
   changeMade = true;
@@ -555,29 +554,6 @@ $('[name="ca_google_trans_enabled"]').click(function(e){
 		this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove('hidden');
 	}
 });
-
-function cawebIconSelected(iconLi, autoUpdate){
-	var icon_list = iconLi.parentNode.getElementsByTagName('LI');
-
-	for(o = 0; o < icon_list.length - 1; o++){
-		icon_list[o].classList.remove('selected');
-	}
-	iconLi.classList.add('selected');
-
-	if( autoUpdate ){
-		iconLi.parentNode.lastElementChild.value = iconLi.title;
-	}
-}
-function resetIconSelect(iconList, autoUpdate){
-	var icon_list = iconList.getElementsByTagName('LI');
-
-	for(o = 0; o < icon_list.length - 1; o++){
-		icon_list[o].classList.remove('selected');
-	}
-	if(autoUpdate){
-		iconList.lastElementChild.value = "";
-	}
-}
 
 $('[name="caweb_options_submit"]').click( function(e){
   e.preventDefault();
