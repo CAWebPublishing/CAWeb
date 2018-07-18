@@ -128,7 +128,7 @@ function caweb_init() {
     global $pagenow;
 
     // Unregister Divi Project Type
-    unregister_post_type('project');
+    //unregister_post_type('project');
 
     // Unregister Menu Navigation Settings
     unregister_nav_menu('primary-menu');
@@ -148,14 +148,14 @@ function caweb_init() {
 
     add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
     add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
-		
-		add_action('caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1);
+
+    add_action('caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1);
 }
 
-function caweb_post_list_module_clear_cache(){
-	if( function_exists('clear_nginx_post_publish_cache')){
-		clear_nginx_post_publish_cache();
-	}
+function caweb_post_list_module_clear_cache() {
+    if (function_exists('clear_nginx_post_publish_cache')) {
+        clear_nginx_post_publish_cache();
+    }
 }
 function caweb_clear_alert_session() {
     $id = $_GET['alert-id'];
@@ -257,6 +257,15 @@ function caweb_wp_head() {
 
     if ("" !== get_option('ca_custom_css', '')) {
         printf('<style id="ca_custom_css">%1$s</style>', get_option('ca_custom_css'));
+    }
+}
+
+add_action('get_header', 'caweb_et_project_get_header');
+function caweb_et_project_get_header($name = null) {
+    // Add template header if using Divi Custom Type 'Project'
+    if ('project' == get_post_type(get_the_ID())) {
+        locate_template(array('header.php'), true);
+        get_template_part('partials/content', 'header');
     }
 }
 
