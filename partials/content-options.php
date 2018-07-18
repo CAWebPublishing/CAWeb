@@ -44,7 +44,7 @@
 	<input type="hidden" name="ca_fav_ico" id="ca_fav_ico" size="75" value="<?php print get_option('ca_fav_ico', caweb_default_favicon_url()); ?>" >
 		<input type="button" value="Browse" class="library-link" name="ca_fav_ico" data-choose="Choose a Fav Icon"
 		data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
-		<input type="button" value="Reset" id="resetIcon"><br />
+		<input type="button" value="Reset" id="resetFavIcon"><br />
 		<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php print get_option('ca_fav_ico', caweb_default_favicon_url()); ?>"/>
 	</td></tr>
 
