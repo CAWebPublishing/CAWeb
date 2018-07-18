@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
 
 		if( autoUpdate ){
 			iconLi.parentNode.lastElementChild.value = iconLi.title;
+			$(iconLi.parentNode.lastElementChild).change();
 		}
 	}
 	function resetIconSelect(iconList, autoUpdate){
@@ -24,6 +25,7 @@ jQuery(document).ready(function() {
 		}
 		if(autoUpdate){
 			iconList.lastElementChild.value = "";
+			$(iconList.lastElementChild).change();
 		}
 	}
 	

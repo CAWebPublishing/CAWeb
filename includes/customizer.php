@@ -3,10 +3,7 @@
 // CAWeb Customizer Preview Init
 add_action('customize_preview_init', 'caweb_customize_preview_init');
 function caweb_customize_preview_init() {
-	//wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
-	
-		
-	wp_register_script('caweb-customizer-script', CAWebUri.'/js/wplibs/theme-customizer.js', array('jquery', 'customize-preview', 'caweb-icon-script'), wp_get_theme('CAWeb')->get('Version'), true);
+	wp_register_script('caweb-customizer-script', CAWebUri.'/js/wplibs/theme-customizer.js', array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
 	
 	wp_enqueue_script('caweb-customizer-script');
 	
@@ -39,6 +36,11 @@ function caweb_customizer_v5_option($customizer) {
 
     return 5 ==  $manager->get_control('ca_site_version')->value() ? true : false;
 }
+function caweb_customizer_google_trans_custom_option($customizer) {
+    $manager = $customizer->manager;
+
+    return 'custom' ==  $manager->get_control('ca_google_trans_enabled')->value() ? true : false;
+}
 
 // CAWeb Sanitize Callbacks
 function caweb_sanitize_customizer_checkbox($checked) {
@@ -57,7 +59,7 @@ function caweb_customize_controls_print_styles() {
 // CAWeb Register Customizer
 add_action('customize_register', 'caweb_customize_register');
 function caweb_customize_register($wp_customize) {
-	$wp_customize->register_control_type( 'CAWeb_Customize_Icon_Control' );
+	//$wp_customize->register_control_type( 'CAWeb_Customize_Icon_Control' );
 	
   // Remove Divi Customization Panels and Sections
     $divi_panels = array('et_divi_general_settings', 'et_divi_header_panel', 'et_divi_footer_panel', 'et_divi_blog_settings',
@@ -361,7 +363,8 @@ function caweb_customize_register($wp_customize) {
         'label'      => 'Translate Page',
         'type' => 'text',
         'section'    => 'caweb_google',
-        'settings'   => 'ca_google_trans_page'
+        'settings'   => 'ca_google_trans_page',
+				'active_callback' => 'caweb_customizer_google_trans_custom_option'
     )));
 		
 		$wp_customize->add_setting('ca_google_trans_icon', array(
@@ -371,20 +374,21 @@ function caweb_customize_register($wp_customize) {
 		
 		$wp_customize->add_control(new CAWeb_Customize_Icon_Control($wp_customize, 'ca_google_trans_icon', array(
 			'section'    => 'caweb_google',
-			'settings'   => 'ca_google_trans_icon'
+			'settings' => 'ca_google_trans_icon',
+			'active_callback' => 'caweb_customizer_google_trans_custom_option'
 		)));
-		
 				
 		$wp_customize->add_setting('ca_google_shortcode', array(
         'type' => 'option',
-        'default' => '[caweb_google_translate /]',
-        'transport' => 'postMessage'));
+        'default' => '[caweb_google_translate /]'));
 
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'ca_google_shortcode', array(
         'label'      => 'Google Translate Shortcode',
         'type' => 'text',
         'section'    => 'caweb_google',
-        'settings'   => 'ca_google_shortcode'
+        'settings'   => 'ca_google_shortcode',
+				'input_attrs' => array('readonly' => true),
+				'active_callback' => 'caweb_customizer_google_trans_custom_option'
     )));
 		
     // Social Media Links
@@ -470,12 +474,9 @@ function caweb_customize_register($wp_customize) {
 if (class_exists('WP_Customize_Control')){
 	class CAWeb_Customize_Icon_Control extends WP_Customize_Control {
 		public $label = 'Icon';
-		public $type = 'caweb_icon_menu';
+		public $type = 'caweb-icon-menu';
 		
-		public function render_content(){
-			
-		}
-		public function content_template() {
+		public function render_content(){		
 			?>
 			<label>
         <span class="customize-control-title "><?php echo esc_html( $this->label ); ?> <span class="dashicons dashicons-image-rotate caweb-icon-menu resetIcon"></span></span>
@@ -484,14 +485,14 @@ if (class_exists('WP_Customize_Control')){
 					$icons = caweb_get_icon_list(-1, '', true);
 					$iconList = '';
 					foreach ($icons as $i) {
-						printf('<li class="icon-option ca-gov-icon-%1$s%2$s customizer" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '');
+						printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '');
 					}
 					?>
-					<input id="<?php echo esc_attr( $input_id ); ?>" type="text" name="ca_google_trans_icon" value="<?= $this->value() ?>" >
+					
+					<input id="_customize-input-<?= $this->id ?>" type="hidden" name="ca_google_trans_icon" value="<?= $this->value() ?>" <?php $this->link(); ?> >
 				</ul>
 			</label>		
 			<?php
-	
 		}
 		
 	}	

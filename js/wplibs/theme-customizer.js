@@ -377,11 +377,30 @@ wp.customize( 'ca_contact_us_link', function( value ) {
 	} );
 } );
 
+// Bind to Google Translate Custom Translate Page 
+wp.customize( 'ca_google_trans_page', function( value ) {
+	value.bind( function( newval ) {
+		
+		if( newval.trim()  ){ 
+			$('#caweb-gtrans-custom').css({'display' : 'inline-block'});
+			$('#caweb-gtrans-custom').attr('href', newval);
+		}else{
+			$('#caweb-gtrans-custom').css({'display' : 'none'});
+		}
+   
+	} );
+} );
 
-// Search on Front Page
+// Bind to Google Translate Custom CAWeb_Customize_Icon_Control 
 wp.customize( 'ca_google_trans_icon', function( value ) {
 	value.bind( function( newval ) {
-		console.log(newval);
+		var icon = $('#caweb-gtrans-custom span');
+		if( "" == newval){
+			icon.css({'display' : 'none'});	
+		}else{
+			icon.css({'display' : 'inline-block'});	
+			icon.attr( "class",  "ca-gov-icon-" + newval);
+		}
     
 	} );
 } );
