@@ -4,6 +4,12 @@ body{
 #main-content > .section{
 	padding-top: 0;
 }
+/*
+  Divi Project Styles
+ */
+article.type-project .entry-content{
+  padding-top: 0;
+}
 /**
 * Page Title Style
 */
