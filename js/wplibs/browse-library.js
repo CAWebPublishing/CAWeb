@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
   var frame;
   var el_name;
 
@@ -17,7 +17,7 @@
     });
 
     // Build the choose from library frame.
-    $('.library-link').click(function(event) {
+    $(document).on('click', 'div .library-link', function(event) {
       var $el = $(this);
       el_name = this.name;
       event.preventDefault();
