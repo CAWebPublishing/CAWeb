@@ -297,12 +297,11 @@ function caweb_admin_enqueue_scripts($hook) {
 
         wp_enqueue_script('custom-header');
 
-        wp_register_script('browse-caweb-library', CAWebUri.'/js/libs/browse-library.js', array('jquery'), CAWebVersion);
-        wp_enqueue_script('browse-caweb-library');
+        wp_register_script('browse-caweb-library', CAWebUri.'/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
 				
 				wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
 				
-				wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script'), CAWebVersion, true);
+				wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script', 'browse-caweb-library'), CAWebVersion, true);
 				
         wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors()));
 
