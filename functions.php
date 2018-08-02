@@ -288,7 +288,7 @@ add_action('wp_footer', 'caweb_late_wp_footer', 115);
 // CAWeb Admin Enqueue Scripts and Styles
 add_action('admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15);
 function caweb_admin_enqueue_scripts($hook) {
-    $pages = array('toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
+    $pages = array('toplevel_page_caweb_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
 
     if (in_array($hook, $pages)) {
         // Enqueue Scripts
@@ -343,7 +343,7 @@ function caweb_admin_bar_menu($wp_admin_bar) {
         $wp_admin_bar->add_node(array(
             'id'     => 'caweb-options',
             'title'  => 'CAWeb Options',
-            'href' =>  get_admin_url().'admin.php?page=ca_options',
+            'href' =>  get_admin_url().'admin.php?page=caweb_options',
             'parent' => 'site-name',
         )
 								);

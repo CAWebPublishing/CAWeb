@@ -12,7 +12,7 @@
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
 $('input[type="button"]').click(function(e){changeMade = true; });
-$('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
+$('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
 $('.caweb-nav-tab').click(function() {
 	var tabs = document.getElementsByClassName('caweb-nav-tab');
@@ -260,7 +260,7 @@ function addAlert(container, alertCount){
 
 	alert_msg.innerHTML = "Message";
 
-	//alert_msg_textarea.form = "ca-options-form";
+	//alert_msg_textarea.form = "caweb-options-form";
 	alert_msg_textarea.name = "alert-message-" + alertCount;
   alert_msg_textarea.id = "alert-message-" + alertCount;
 
@@ -570,8 +570,8 @@ $('[name="caweb_options_submit"]').click( function(e){
       hiddenInputs.appendChild(settingInputs[i]);
     }
   }
-  $('#ca-options-form').append(hiddenInputs);
-  $('#ca-options-form').submit();
+  $('#caweb-options-form').append(hiddenInputs);
+  $('#caweb-options-form').submit();
 });
 
  /* End of CAWeb Option Page */
