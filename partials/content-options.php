@@ -44,7 +44,6 @@ $google_translate_icon = get_option('ca_google_trans_icon', 'globe');
 $ext_css = get_option('caweb_external_css', array());
 $custom_css = get_option('ca_custom_css', '');
 $alerts = get_option('caweb_alerts', array());
-$tinymce_settings = array('media_buttons' => false, 'quicktags' => false);
 
 $icons = caweb_get_icon_list(-1, '', true);
 
@@ -394,13 +393,14 @@ $icons = caweb_get_icon_list(-1, '', true);
 																												<ul id="cawebAlerts">
 																													<?php
 																													
-																													foreach ($alerts as $a => $data) {
+																													foreach ($alerts as $a => $data) :
 																														$header = $data['header'];
 																														$default_header = ! empty($header) ? $header : "Label";
 																														$count = $a + 1;
 																														$status = $data['status'];
 																														
-																														$alert = sprintf('', $default_header, $header, $count, $status); ?>
+																														$alert = sprintf('', $default_header, $header, $count, $status); 
+																														?>
 																														
 																														<li>
 																															<div class="caweb-alert">
@@ -408,20 +408,13 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																<div class="hidden">
 																																	<input placeholder="Label" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
 																																	<p>Message</p>
+																																	<textarea name="alert-message-<?= $count ?>"><?= $data['message'] ?></textarea>
 																																</div>
 																															</div>
-																															<div class="hidden"><?= wp_editor($data['message'], sprintf('alert-message-%1$s', $a + 1), $tinymce_settings) ?></div>
 																														</li>
-																														
-																														
-																														<?php
-																													}
-																													?>
+																													<?php  endforeach; ?>
 																													<input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?= count($alerts) ?>">
 																												</ul>
-																												<?php if (empty($alerts)): ?>
-																													<div class="hidden"><?= wp_editor('', 'caweb-fake-tinymce', array_merge($tinymce_settings, array('textarea_name' => ''))); ?></div>
-																												<?php endif; ?>
 																											</div>
 																										</div> <!-- End of CA Options Container -->
 																										
