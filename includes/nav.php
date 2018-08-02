@@ -330,9 +330,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
         }
 
         function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
-            $tmp = get_post_meta($item->ID); 
-						$icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : '';
-						?>
+            $tmp = get_post_meta($item->ID);
+            $icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : ''; ?>
 
 
 <div class="icon_selector <?= ( ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide">
@@ -343,11 +342,10 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <ul id="menu-icon-list-<?= $item_id; ?>"  class="caweb-icon-menu noUpdate">
 <?php
 	$icons = caweb_get_icon_list(-1, '', true);
-	$iconList = '';
-	foreach ($icons as $i) {
-			printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $icon == $i ? ' selected' : '');
-	}
-?>
+            $iconList = '';
+            foreach ($icons as $i) {
+                printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $icon == $i ? ' selected' : '');
+            } ?>
 <input type="hidden" name="ca_google_trans_icon" value="<?= get_option('ca_google_trans_icon', 'globe') ?>" >
 </ul>
 </div>

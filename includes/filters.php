@@ -126,10 +126,10 @@ function caweb_theme_page_templates($templates) {
     // Remove Divi Blank Page Template
     unset($templates['page-template-blank.php']);
 
-	 	if( 5 <= get_option('ca_site_version', 5) ){
-			unset($templates['page-templates/page-template-v4.php']);
-		}
-		
+    if (5 <= get_option('ca_site_version', 5)) {
+        unset($templates['page-templates/page-template-v4.php']);
+    }
+
     return $templates;
 }
 
