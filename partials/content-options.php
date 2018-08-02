@@ -5,7 +5,7 @@ $selected_tab = isset($_POST['tab_selected']) || ! empty($_POST['tab_selected'])
 
 // if saving
 if (isset($_POST['caweb_submit'])) {
-	caweb_save_options($_POST, $_FILES);
+    caweb_save_options($_POST, $_FILES);
 }
 
 // Site Version variables
@@ -94,7 +94,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 							<td>
 								<select id="ca_site_version" name="ca_site_version">
 									<option value="5" <?= 5 == $ver ? 'selected="selected"' : '' ?>>Version 5.0</option>
-									<?php if( 4 == $ver ) : ?>
+									<?php if (4 == $ver) : ?>
 									<option value="4" <?= 4 == $ver ? 'selected="selected"' : '' ?>>Version 4.0</option>
 								<?php endif; ?>
 								</select>
@@ -132,13 +132,13 @@ $icons = caweb_get_icon_list(-1, '', true);
 										<td>
 											<select id="ca_site_color_scheme" name="ca_site_color_scheme">
 												<?php
-												
+
 												foreach ($schemes as $key => $data) {
-													printf('<option value="%1$s"%2$s%3$s>%4$s</option>',
+												    printf('<option value="%1$s"%2$s%3$s>%4$s</option>',
 													$key, ! array_key_exists($key, $legacySchemes) ? sprintf(' class="extra %1$s" ', $modern) : '',
 													$key == $color_scheme ? ' selected="selected"' : '', $data);
 												}
-												
+
 												?>
 											</select>
 										</td>
@@ -310,7 +310,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																												$icons = caweb_get_icon_list(-1, '', true);
 																												$iconList = '';
 																												foreach ($icons as $i) {
-																													printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $google_translate_icon == $i ? ' selected' : '');
+																												    printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $google_translate_icon == $i ? ' selected' : '');
 																												}
 																												?>
 																												<input type="hidden" name="ca_google_trans_icon" value="<?= $google_translate_icon ?>" >
@@ -332,17 +332,17 @@ $icons = caweb_get_icon_list(-1, '', true);
 																								<table class="form-table">
 																									<?php
 																									$social_options = caweb_get_site_options('social');
-																									
+
 																									foreach ($social_options as $social => $option) {
-																										$share_email = 'ca_social_email' === $option ? true : false;
-																										$social = $share_email ? "Share via ".$social : $social;
-																										$input_box = ! $share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option)) : '';
-																											$header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
-																											$footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
-																											$new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '';
-																											
-																											printf('<tr><th>%1$s</th>%2$s<td><label class="extra %3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s></label><label>Show in footer: <input type="checkbox" name="%4$s_footer" id="%4$s_footer"%6$s></label>%7$s</td></tr>', $social, $input_box , $modern, $option, $header_checked, $footer_checked,( ! $share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked) : ''));
-																										}
+																									    $share_email = 'ca_social_email' === $option ? true : false;
+																									    $social = $share_email ? "Share via ".$social : $social;
+																									    $input_box = ! $share_email ? sprintf('<td><input type="text" name="%1$s" id="%1$s" size="60" value="%2$s" /></td></tr><tr><td></td>', $option, get_option($option)) : '';
+																									    $header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
+																									    $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
+																									    $new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '';
+
+																									    printf('<tr><th>%1$s</th>%2$s<td><label class="extra %3$s">Show in header: <input type="checkbox" name="%4$s_header" id="%4$s_header"%5$s></label><label>Show in footer: <input type="checkbox" name="%4$s_footer" id="%4$s_footer"%6$s></label>%7$s</td></tr>', $social, $input_box, $modern, $option, $header_checked, $footer_checked, ( ! $share_email ? sprintf('<label>Open in New Tab: <input type="checkbox" name="%1$s_new_window" id="%1$s_new_window"%2$s /></label>', $option, $new_window_checked) : ''));
+																									}
 																										?>
 																									</table>
 																								</div>
@@ -366,10 +366,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																															<ol id="uploadedCSS">
 																																<?php
 																																foreach ($ext_css as $name) {
-																																	$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-																																	
-																																	printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p><input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
-																																	}
+																																    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+
+																																    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p><input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
+																																}
 																																	?>
 																																</ol>
 																															</tr>
@@ -392,14 +392,14 @@ $icons = caweb_get_icon_list(-1, '', true);
 																												<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
 																												<ul id="cawebAlerts">
 																													<?php
-																													
+
 																													foreach ($alerts as $a => $data) :
 																														$header = $data['header'];
 																														$default_header = ! empty($header) ? $header : "Label";
 																														$count = $a + 1;
 																														$status = $data['status'];
-																														
-																														$alert = sprintf('', $default_header, $header, $count, $status); 
+
+																														$alert = sprintf('', $default_header, $header, $count, $status);
 																														?>
 																														
 																														<li>
@@ -425,13 +425,12 @@ $icons = caweb_get_icon_list(-1, '', true);
 																										<?php
 																										// Alert Settings
 																										foreach ($alerts as $a => $data) {
-																											$iconList = '';
-																											foreach ($icons as $i) {
-																												$iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $i == $data['icon'] ? ' selected' : '');
-																											}
-																											
-																											printf('<div id="caweb-alert-%1$s" style="display:none;"><form id="caweb-options-form" class="caweb-alert-%1$s"><h3>Alert Settings</h3><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in</label><label><input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab</label><label><input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu" class="noUpdate">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul><a class="button button-primary ok">Ok</a><a class="button button-primary cancel">Cancel</a></form></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true" data-display="true"' : '', "all" == $data['page_display'] ? ' checked="true" data-display="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', "on" !== $data['button'] ? ' class="hidden"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon']);
-																											
+																										    $iconList = '';
+																										    foreach ($icons as $i) {
+																										        $iconList .= sprintf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $i == $data['icon'] ? ' selected' : '');
+																										    }
+
+																										    printf('<div id="caweb-alert-%1$s" style="display:none;"><form id="caweb-options-form" class="caweb-alert-%1$s"><h3>Alert Settings</h3><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in</label><label><input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab</label><label><input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu" class="noUpdate">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul><a class="button button-primary ok">Ok</a><a class="button button-primary cancel">Cancel</a></form></div>', $a + 1, "home" == $data['page_display'] ? ' checked="true" data-display="true"' : '', "all" == $data['page_display'] ? ' checked="true" data-display="true"' : '', $data['color'], "on" == $data['button'] ? ' checked="true"' : '', "on" !== $data['button'] ? ' class="hidden"' : '', $data['url'], "_blank" == $data['target'] ? ' checked="true"' : '', empty($data['target']) ? ' checked="true"' : '', $iconList, $data['icon']);
 																										}
 																										?>
 																									</div>
