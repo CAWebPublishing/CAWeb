@@ -121,11 +121,15 @@ function caweb_post_class($classes) {
 }
 
 // CAWeb Theme Page Templates
-add_filter('theme_page_templates', 'caweb_theme_page_templates');
+add_filter('theme_page_templates', 'caweb_theme_page_templates', 15);
 function caweb_theme_page_templates($templates) {
     // Remove Divi Blank Page Template
     unset($templates['page-template-blank.php']);
 
+	 	if( 5 <= get_option('ca_site_version', 5) ){
+			unset($templates['page-templates/page-template-v4.php']);
+		}
+		
     return $templates;
 }
 

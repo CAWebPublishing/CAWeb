@@ -192,8 +192,6 @@ $('#addAlertBanner').click(function(e){
 	// Add corresponding Alert Setting
   alertSettings.append(alert_settings_wrapper);
 
-  tinymce.execCommand( 'mceAddEditor', true, 'alert-message-' + alertLICount );
-
   changeMade = true;
 
 });
