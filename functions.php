@@ -128,7 +128,7 @@ function caweb_init() {
     global $pagenow;
 
     // Unregister Divi Project Type
-    unregister_post_type('project');
+    //unregister_post_type('project');
 
     // Unregister Menu Navigation Settings
     unregister_nav_menu('primary-menu');
@@ -148,6 +148,14 @@ function caweb_init() {
 
     add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
     add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
+
+    add_action('caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1);
+}
+
+function caweb_post_list_module_clear_cache() {
+    if (function_exists('clear_nginx_post_publish_cache')) {
+        clear_nginx_post_publish_cache();
+    }
 }
 function caweb_clear_alert_session() {
     $id = $_GET['alert-id'];
@@ -252,6 +260,15 @@ function caweb_wp_head() {
     }
 }
 
+add_action('get_header', 'caweb_et_project_get_header');
+function caweb_et_project_get_header($name = null) {
+    // Add template header if using Divi Custom Type 'Project'
+    if ('project' == get_post_type(get_the_ID())) {
+        locate_template(array('header.php'), true);
+        get_template_part('partials/content', 'header');
+    }
+}
+
 // CAWeb Footer
 add_action('wp_footer', 'caweb_wp_footer', 11);
 function caweb_wp_footer() {
@@ -271,7 +288,7 @@ add_action('wp_footer', 'caweb_late_wp_footer', 115);
 // CAWeb Admin Enqueue Scripts and Styles
 add_action('admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15);
 function caweb_admin_enqueue_scripts($hook) {
-    $pages = array('toplevel_page_ca_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
+    $pages = array('toplevel_page_caweb_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
 
     if (in_array($hook, $pages)) {
         // Enqueue Scripts
@@ -280,10 +297,12 @@ function caweb_admin_enqueue_scripts($hook) {
 
         wp_enqueue_script('custom-header');
 
-        wp_register_script('browse-caweb-library', CAWebUri.'/js/libs/browse-library.js', array('jquery'), CAWebVersion);
-        wp_enqueue_script('browse-caweb-library');
-
-        wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox'), CAWebVersion, true);
+        wp_register_script('browse-caweb-library', CAWebUri.'/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
+				
+				wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
+				
+				wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script', 'browse-caweb-library'), CAWebVersion, true);
+				
         wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors()));
 
         wp_enqueue_script('caweb-admin-scripts');
@@ -324,7 +343,7 @@ function caweb_admin_bar_menu($wp_admin_bar) {
         $wp_admin_bar->add_node(array(
             'id'     => 'caweb-options',
             'title'  => 'CAWeb Options',
-            'href' =>  get_admin_url().'admin.php?page=ca_options',
+            'href' =>  get_admin_url().'admin.php?page=caweb_options',
             'parent' => 'site-name',
         )
 								);

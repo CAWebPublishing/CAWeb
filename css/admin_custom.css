@@ -9,7 +9,7 @@
 	}
 
 /* CAWeb Options Page Styles */
-#ca-options-container {
+#caweb-options-container {
     margin-bottom: 5px;
 }
 /* Indent fields under each category */
@@ -40,24 +40,29 @@ select#ca_google_trans_display {
 .resetIcon{
 	cursor: pointer;
 }
-#caweb-icon-menu{
+#caweb-icon-menu,
+.caweb-icon-menu{
 	background-color: white ;
 	height: 205px;
 	overflow-y: scroll;
 }
-#caweb-icon-menu li{
+#caweb-icon-menu li,
+.caweb-icon-menu li{
 	font-size: 24px;
 	float: left;
 	padding: 8px;
 }
-#caweb-icon-menu li.selected{
+#caweb-icon-menu li.selected,
+.caweb-icon-menu li.selected{
 	background-color: #008BDB;
 }
-#caweb-icon-menu li:hover{
+#caweb-icon-menu li:hover,
+.caweb-icon-menu li:hover{
 	background-color: #008BDB;
 	cursor: pointer;
 }
-#caweb-icon-menu li:before{
+#caweb-icon-menu li:before,
+.caweb-icon-menu li:before{
 	font-family: 'CaGov', 'ETModules';
 	content: attr(data-icon);
 }

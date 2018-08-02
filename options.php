@@ -5,13 +5,13 @@ function caweb_admin_menu() {
     global $submenu;
 
     // Add CAWeb Options
-    add_menu_page('CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
+    add_menu_page('CAWeb Options', 'CAWeb Options', 'manage_options', 'caweb_options',
 								'caweb_option_page', sprintf('%1$s/images/system/caweb_logo.png', CAWebUri), 6);
-    add_submenu_page('ca_options', 'CAWeb Options', 'Settings', 'manage_options', 'ca_options', 'caweb_option_page');
+    add_submenu_page('caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page');
 
     // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
     remove_submenu_page('themes.php', 'nav-menus.php');
-    add_submenu_page('ca_options', 'Navigation', 'Navigation', 'manage_options', 'nav-menus.php', '');
+    add_submenu_page('caweb_options', 'Navigation', 'Navigation', 'manage_options', 'nav-menus.php', '');
 
     // If user is not a Network Admin
     if (is_multisite() &&  ! current_user_can('manage_network_options')) {
@@ -37,8 +37,8 @@ function caweb_admin_menu() {
     }
 
     if (( ! is_multisite() || current_user_can('manage_network_options')) && 1 == get_current_blog_id()) {
-        add_submenu_page('ca_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup');
-        add_submenu_page('ca_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup');
+        add_submenu_page('caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup');
+        add_submenu_page('caweb_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup');
     }
 }
 add_action('admin_menu', 'caweb_admin_menu', 15);
@@ -187,7 +187,7 @@ function caweb_api_menu_option_setup() {
     ?>
 <style>table tr td:first-of-type {width: 15px;}</style>
 
-<form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
+<form id="caweb-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
 	<?php
 	if (isset($_POST['caweb_api_options_submit'])) {
 	    caweb_save_api_options($_POST);
@@ -236,7 +236,7 @@ function caweb_multi_ga_menu_option_setup() {
     ?>
 <style>table tr td:first-of-type {width: 100px;}</style>
 
-<form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_multi_ga'); ?>" method="POST">
+<form id="caweb-options-form" action="<?= admin_url('admin.php?page=caweb_multi_ga'); ?>" method="POST">
   <?php
   if (isset($_POST['caweb_multi_ga_options_submit'])) {
       caweb_save_multi_ga_options($_POST);
