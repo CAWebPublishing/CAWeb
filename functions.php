@@ -177,9 +177,9 @@ function caweb_wp_enqueue_scripts() {
     global $pagenow;
 
     $post_id = get_the_ID();
-    $ver = caweb_get_version($post_id);
+    $ver = caweb_get_page_version($post_id);
     $color = get_option('ca_site_color_scheme', 'oceanside');
-    $schemes = caweb_color_schemes(caweb_get_version(get_the_ID()), 'filename');
+    $schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
     $colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
     // If on the activation page
@@ -316,7 +316,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
     // Load editor styling
     wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_version(get_the_ID())));
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
 }
 
 // CAWeb Admin Head

@@ -115,7 +115,9 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         $scroll_bar_text = $this->props['scroll_bar_text'];
         $scroll_bar_icon = $this->props['font_icon'];
 
-        $this->add_classname('header-single-banner');
+			//	$this->add_classname('header-single-banner');
+        $this->add_classname('header-slideshow-banner');
+				
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $content = $this->content;
@@ -127,41 +129,39 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
-        if ( ! caweb_version_check(4, get_the_ID())) {
-            return;
-        }
-
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
-        if (empty($module)) {
-            ?>
+         if (empty($module)) : ?>
 					<script>
 						document.body.classList.remove('primary');
 					</script>
-				<?php
-        } else {
-            ?>
-           <script>
-				var banner = document.getElementById('et_pb_ca_fullwidth_banner');
-				var column = banner.parentNode;
-
-					if(1 == column.childElementCount){
-						var row = column.parentNode;
-						row.removeChild(column);
-						if(0 == row.childElementCount){
-							if(1 == row.parentNode.childElementCount ){
-								row.parentNode.remove();
-							}else{
-								row.parentNode.removeChild(row);
+				<?php else : ?>
+						<?php switch (caweb_get_page_version(get_the_ID())) :
+							case 4:
+							?>
+							<script>
+							var banner = document.getElementById('et_pb_ca_fullwidth_banner');
+							var column = banner.parentNode;
+							
+							if(1 == column.childElementCount){
+								var row = column.parentNode;
+								row.removeChild(column);
+								if(0 == row.childElementCount){
+									if(1 == row.parentNode.childElementCount ){
+										row.parentNode.remove();
+									}else{
+										row.parentNode.removeChild(row);
+									}
+								}
 							}
-						}
-					}else{
-						detail.removeChild(banner);
-					}
-
-			</script>
-            <?php
-        }
+							</script>								
+							
+							<?php case 5: ?>
+							<script>
+								document.getElementById('et_pb_ca_fullwidth_banner').remove('#et_pb_ca_fullwidth_banner');
+							</script>
+						<?php endswitch; 
+        endif;
     }
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;

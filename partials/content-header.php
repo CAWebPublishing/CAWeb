@@ -1,10 +1,10 @@
 <?php
 global $post;
 $post_content = isset($post) ? (is_object($post) ? $post->post_content : $post['content']) : '';
-$ver = caweb_get_version(get_the_ID());
+$ver = caweb_get_page_version(get_the_ID());
 $fixed_header = (5 == $ver && get_option('ca_sticky_navigation') ? ' fixed' : '');
 $color = get_option('ca_site_color_scheme', 'oceanside');
-$schemes = caweb_color_schemes(caweb_get_version(get_the_ID()), 'filename');
+$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
 $colorscheme = isset($schemes[$color]) ? $color : 'oceanside';
 
 $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg',
@@ -71,7 +71,7 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
                     get_post_meta(get_the_ID(), 'ca_default_navigation_menu', true) :
                     get_option('ca_default_navigation_menu')),
         'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
-        'version' => caweb_get_version(get_the_ID()),
+        'version' => caweb_get_page_version(get_the_ID()),
     )
               );
 
@@ -92,8 +92,9 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 <div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
 
-<?php ( ! empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
+<?php ( ! empty($slideshow_banner) && 4 == $ver ? print $slideshow_banner : print '') ?>
 
         <div class="header-decoration hidden-print"></div>
 
 </header>
+<?php ( ! empty($slideshow_banner) && 5 == $ver ? print $slideshow_banner : print '') ?>

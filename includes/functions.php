@@ -6,11 +6,11 @@
 	$version = Specific Page Template Version  returns true/false
 
  */
-function caweb_version_check($version, $post_id = -1) {
+function caweb_version_check($version = 5, $post_id = -1) {
     $result = ($version == get_option('ca_site_version', 5) ? true : false);
 
     if (-1 < $post_id) {
-        $result = ($version == caweb_get_version($post_id) ? true : false);
+        $result = ($version == caweb_get_page_version($post_id) ? true : false);
     }
 
     return $result;
@@ -20,7 +20,7 @@ function caweb_version_check($version, $post_id = -1) {
 	if post_id is passed will return version
 	used by the page template
  */
-function caweb_get_version($post_id = -1) {
+function caweb_get_page_version($post_id = -1) {
     switch (get_page_template_slug($post_id)) {
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -335,7 +335,7 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
 }
 
 function caweb_banner_content_filter($content, $ver = 5) {
-    $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array());
+    $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
 
     // Filter the Header Slideshow Banner
     if ( ! empty($module)) {

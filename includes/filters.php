@@ -96,7 +96,7 @@ function caweb_body_class($wp_classes, $extra_classes) {
 
         $whitelist = array(($divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder'),
             ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed'),
-            sprintf('v%1$s', caweb_get_version($post->ID)),
+            sprintf('v%1$s', caweb_get_page_version($post->ID)),
             (is_active_sidebar('sidebar-1') && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed'));
     }
     $whitelist[] = (get_option('ca_sticky_navigation') ? 'sticky_nav' : '');
