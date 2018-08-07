@@ -337,6 +337,9 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
 function caweb_banner_content_filter($content, $ver = 5) {
     $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
 
+		if( 4 !== $ver){
+			return;
+		}
     // Filter the Header Slideshow Banner
     if ( ! empty($module)) {
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);

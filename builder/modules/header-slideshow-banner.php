@@ -129,6 +129,11 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
+				$version = caweb_get_page_version(get_the_ID());
+				
+				if( 4 !== $version){
+					//return;
+				}
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
          if (empty($module)) : ?>
@@ -136,7 +141,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 						document.body.classList.remove('primary');
 					</script>
 				<?php else : ?>
-						<?php switch (caweb_get_page_version(get_the_ID())) :
+						<?php switch ($version) :
 							case 4:
 							?>
 							<script>
@@ -154,11 +159,23 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 									}
 								}
 							}
-							</script>								
+							</script>
 							
 							<?php case 5: ?>
 							<script>
-								document.getElementById('et_pb_ca_fullwidth_banner').remove('#et_pb_ca_fullwidth_banner');
+							
+							
+						  (function( $ ) {
+						       "use strict";
+									 $(document).ready(function () {
+										 var section = $('#et_pb_ca_fullwidth_banner').parent();
+										 var banner = section.find('#et_pb_ca_fullwidth_banner');
+										 $('#header').after(banner);
+										$(section).remove();
+										 //.parent().remove('#et_pb_ca_fullwidth_banner');
+		 							});
+								
+							 })(jQuery);
 							</script>
 						<?php endswitch; 
         endif;

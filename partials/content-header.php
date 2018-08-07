@@ -97,4 +97,3 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
         <div class="header-decoration hidden-print"></div>
 
 </header>
-<?php ( ! empty($slideshow_banner) && 5 == $ver ? print $slideshow_banner : print '') ?>
