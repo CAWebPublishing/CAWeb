@@ -2,6 +2,7 @@
 .et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text{
   max-width: 50%;
   padding-bottom: 15px !important;
+	bottom: 50%;
 }
 /* Fullwidth Menu */
 .et_pb_module.et_pb_fullwidth_menu .nav > li{

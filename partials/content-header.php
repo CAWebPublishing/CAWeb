@@ -14,8 +14,6 @@ $header_background_img = (4 == $ver && "" !== get_option('header_ca_background')
                           get_option('header_ca_background') : $default_background_img);
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '');
 
-$slideshow_banner = caweb_banner_content_filter($post_content, $ver);
-
 ?>
 
 <header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
@@ -92,9 +90,6 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 <div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
 
-<?php ( ! empty($slideshow_banner) && 4 == $ver ? print $slideshow_banner : print '') ?>
-
         <div class="header-decoration hidden-print"></div>
 
 </header>
-<?php ( ! empty($slideshow_banner) && 5 == $ver ? print $slideshow_banner : print '') ?>
