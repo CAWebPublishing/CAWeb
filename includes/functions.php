@@ -537,7 +537,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
         $thumbnail = preg_replace(array('/style=\"([\w\d\s]*)\"/'), "", $thumbnail);
     }
 
-    $new_img .= sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
+    $new_img = sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
 
     $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);
 
