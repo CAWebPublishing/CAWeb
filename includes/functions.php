@@ -160,6 +160,17 @@ function caweb_template_colors() {
 
     return $color;
 }
+
+function caweb_tiny_mce_settings(){
+		$settings = array(
+			'media_buttons' => false, 
+			'quicktags' => false,
+			'tinymce' => true,
+		);
+		
+		return $settings;
+}
+
 // Validates if the $checkmoney parameter is a valid monetary value
 if ( ! function_exists('caweb_is_money')) {
     function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n') {

@@ -191,9 +191,14 @@ $('#addAlertBanner').click(function(e){
 
 	// Add corresponding Alert Setting
   alertSetting.append(alert_settings_wrapper);
-
+	wp.editor.initialize("alertmessage" + alertLICount, args.tinymce_settings);
+	
   changeMade = true;
 
+});
+
+$(document).on('tinymce-editor-setup', function( event, editor ) {
+	console.log(editor);
 });
 $('.caweb-alert div a.alert-toggle').click(function(e){ displayAlertOptions(this); });
 $('.removeAlert').click(function(e){ removeAlert(this); });
@@ -259,7 +264,7 @@ function addAlert(container, alertCount){
 
 	//alert_msg_textarea.form = "caweb-options-form";
 	alert_msg_textarea.name = "alert-message-" + alertCount;
-  alert_msg_textarea.id = "alert-message-" + alertCount;
+  alert_msg_textarea.id = "alertmessage" + alertCount;
 
 	alert_header_wrapper.appendChild(alert_header);
 	alert_header_wrapper.appendChild(rem);
@@ -422,7 +427,7 @@ function addAlertSettings(container, alertCount){
 }
 function displayAlertOptions(e){
   e.parentNode.nextElementSibling.classList.toggle('hidden');
-  e.parentNode.parentNode.nextElementSibling.classList.toggle('hidden');
+  //e.parentNode.parentNode.nextElementSibling.classList.toggle('hidden');
 
 	if( e.parentNode.nextElementSibling.classList.contains('hidden') ){
 		e.parentNode.firstElementChild.innerHTML = "" !== e.parentNode.nextElementSibling.firstElementChild.value.trim() ? e.parentNode.nextElementSibling.firstElementChild.value : "Header";

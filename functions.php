@@ -294,7 +294,8 @@ function caweb_admin_enqueue_scripts($hook) {
         // Enqueue Scripts
         wp_enqueue_script('jquery');
         wp_enqueue_media();
-
+				wp_enqueue_editor();
+				
         wp_enqueue_script('custom-header');
 
         wp_register_script('browse-caweb-library', CAWebUri.'/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
@@ -303,7 +304,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
         wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script', 'browse-caweb-library'), CAWebVersion, true);
 
-        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors()));
+        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
 
         wp_enqueue_script('caweb-admin-scripts');
         // Enqueue Styles
