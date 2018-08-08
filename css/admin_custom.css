@@ -264,6 +264,16 @@ ul.menu-icon-list li:hover{
 #accordion-panel-nav_menus{display:none !important;}
 
 /* Thickbox Styling for the CAWeb Options Page */
+body.toplevel_page_caweb_options #TB_window{
+	top: 10% !important;
+	max-height: 80% ;
+	margin-top: 0 !important;
+	overflow: scroll;
+}	
+body.toplevel_page_caweb_options #TB_window #TB_ajaxContent{
+	overflow: scroll;
+	height: 100%;
+}
 @media (max-width: 768px){
 	body.toplevel_page_caweb_options #TB_window{
 		left: 10% !important;
