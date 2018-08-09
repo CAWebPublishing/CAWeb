@@ -188,18 +188,15 @@ $('#addAlertBanner').click(function(e){
 	// Add new Alert
 	alertLI.appendChild(alert_container);
 	alertUL.append(alertLI);
-
 	// Add corresponding Alert Setting
   alertSetting.append(alert_settings_wrapper);
+	console.log(args.tinymce_settings);
+	console.log(wp.editor.getDefaultSettings());
 	wp.editor.initialize("alertmessage" + alertLICount, args.tinymce_settings);
-	
   changeMade = true;
 
 });
 
-$(document).on('tinymce-editor-setup', function( event, editor ) {
-	console.log(editor);
-});
 $('.caweb-alert div a.alert-toggle').click(function(e){ displayAlertOptions(this); });
 $('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });

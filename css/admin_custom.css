@@ -7,7 +7,11 @@
 	.et-pb-main-settings{
 		background-color: lightblue;
 	}
-
+/* TinyMCE Content Editor */
+body#tinymce.mce-content-body{
+	background-color: transparent;
+	padding: 10px;
+}
 /* CAWeb Options Page Styles */
 #caweb-options-container {
     margin-bottom: 5px;

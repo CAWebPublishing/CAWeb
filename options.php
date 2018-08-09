@@ -155,7 +155,7 @@ function caweb_save_options($values = array(), $files = array()) {
         }
         $data['status'] = $values['alert-status-'.$count];
         $data['header'] = $values['alert-header-'.$count];
-        $data['message'] = $values['alert-message-'.$count];
+        $data['message'] = htmlentities ($values['alert-message-'.$count], ENT_QUOTES);
         $data['page_display'] = $values['alert-display-'.$count];
         $data['color'] = $values['alert-banner-color-'.$count];
         $data['button'] = isset($values['alert-read-more-'.$count]) ? $values['alert-read-more-'.$count] : '';
