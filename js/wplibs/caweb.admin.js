@@ -190,8 +190,6 @@ $('#addAlertBanner').click(function(e){
 	alertUL.append(alertLI);
 	// Add corresponding Alert Setting
   alertSetting.append(alert_settings_wrapper);
-	console.log(args.tinymce_settings);
-	console.log(wp.editor.getDefaultSettings());
 	wp.editor.initialize("alertmessage" + alertLICount, args.tinymce_settings);
   changeMade = true;
 

@@ -45,7 +45,7 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 												</button>
 												<span class="alert-level">
 													<span class="ca-gov-icon-<?= $data['icon'] ?>" aria-hidden="true"></span><?= $data['header'] ?></span>
-												<span class="alert-text"><?= htmlentities( $data['message'], ENT_QUOTES ) ?></span><?=  $readmore ?>
+												<span class="alert-text"><?= stripslashes( $data['message'] ) ?></span><?=  $readmore ?>
 											</div>
 										</div>
 										<?php
