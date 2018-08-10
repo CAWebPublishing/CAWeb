@@ -161,39 +161,39 @@ function caweb_template_colors() {
     return $color;
 }
 
-function caweb_tiny_mce_settings($settings = array() ){
-	$styles = array();
-	$caweb_tiny_mce_init = apply_filters('tiny_mce_before_init', array(), array() );
-	$caweb_tiny_mce_init['style_formats'] = json_decode($caweb_tiny_mce_init['style_formats']);
-	
-	foreach($caweb_tiny_mce_init['style_formats'] as $i => $style){
-		$styles[ str_replace(' ', '', strtolower( $style->name ) ) ] = $style;
-	}
+function caweb_tiny_mce_settings($settings = array()) {
+    $styles = array();
+    $caweb_tiny_mce_init = apply_filters('tiny_mce_before_init', array(), array());
+    $caweb_tiny_mce_init['style_formats'] = json_decode($caweb_tiny_mce_init['style_formats']);
 
-	$css = array(
-		includes_url('/css/dashicons.min.css'),
-		includes_url('/js/tinymce/skins/wordpress/wp-content.css'),
-		sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())),
-		sprintf('%1$s/css/admin_custom.css', CAWebUri)
-	);
-	
-	$defaults_settings = array(
-		'media_buttons' => false, 
-		'quicktags' => false,
-		'tinymce' => array(
-			'content_css' => implode(',', $css),
-			'skin' => 'lightgray',
-			'elementpath' => true,
-			'entity_encoding' => 'raw',
-			'entities' => '38, amp, 60, lt, 62, gt, 34, quot, 39, apos',
-			'plugins' => "charmap,colorpicker,hr,lists,paste,tabfocus,textcolor,wordpress,wpautoresize,wpemoji,wpgallery,wplink,wptextpattern",
-			'toolbar1' => 'formatselect,bold,italic,underline,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,wp_more,wp_adv',
-			'toolbar2' => 'styleselect,strikethrough,hr,fontselect,fontsizeselect,forecolor,backcolor,pastetext,copy,subscript,superscript,charmap,outdent,indent,undo,redo,wp_help', 
-			'style_formats' =>  $styles
-		),
-	);
-	
-	return is_array($settings) ? array_merge($defaults_settings, $settings) : $defaults_settings;
+    foreach ($caweb_tiny_mce_init['style_formats'] as $i => $style) {
+        $styles[ str_replace(' ', '', strtolower($style->name)) ] = $style;
+    }
+
+    $css = array(
+        includes_url('/css/dashicons.min.css'),
+        includes_url('/js/tinymce/skins/wordpress/wp-content.css'),
+        sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())),
+        sprintf('%1$s/css/admin_custom.css', CAWebUri)
+    );
+
+    $defaults_settings = array(
+        'media_buttons' => false,
+        'quicktags' => false,
+        'tinymce' => array(
+            'content_css' => implode(',', $css),
+            'skin' => 'lightgray',
+            'elementpath' => true,
+            'entity_encoding' => 'raw',
+            'entities' => '38, amp, 60, lt, 62, gt, 34, quot, 39, apos',
+            'plugins' => "charmap,colorpicker,hr,lists,paste,tabfocus,textcolor,wordpress,wpautoresize,wpemoji,wpgallery,wplink,wptextpattern",
+            'toolbar1' => 'formatselect,bold,italic,underline,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,wp_more,wp_adv',
+            'toolbar2' => 'styleselect,strikethrough,hr,fontselect,fontsizeselect,forecolor,backcolor,pastetext,copy,subscript,superscript,charmap,outdent,indent,undo,redo,wp_help',
+            'style_formats' =>  $styles
+        ),
+    );
+
+    return is_array($settings) ? array_merge($defaults_settings, $settings) : $defaults_settings;
 }
 
 // Validates if the $checkmoney parameter is a valid monetary value
@@ -373,9 +373,9 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
 function caweb_banner_content_filter($content, $ver = 5) {
     $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
 
-		if( 4 !== $ver){
-			return;
-		}
+    if (4 !== $ver) {
+        return;
+    }
     // Filter the Header Slideshow Banner
     if ( ! empty($module)) {
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);

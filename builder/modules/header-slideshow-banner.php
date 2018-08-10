@@ -115,9 +115,9 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         $scroll_bar_text = $this->props['scroll_bar_text'];
         $scroll_bar_icon = $this->props['font_icon'];
 
-			//	$this->add_classname('header-single-banner');
+        //	$this->add_classname('header-single-banner');
         $this->add_classname('header-slideshow-banner');
-				
+
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $content = $this->content;
@@ -129,11 +129,11 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
-				$version = caweb_get_page_version(get_the_ID());
-				
+        $version = caweb_get_page_version(get_the_ID());
+
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
-         if (empty($module)) : ?>
+        if (empty($module)) : ?>
 					<script>
 						document.body.classList.remove('primary');
 					</script>
@@ -148,7 +148,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 							 $(document).ready(function () {
 								 $(section).remove();
 								 
-								 <?php if(4 == $version) : ?>
+								 <?php if (4 == $version) : ?>
 								 $('#header').append(banner);
 								 <?php else : ?>
 								 $('#header').after(banner);
@@ -170,8 +170,8 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
 					 })(jQuery);
 					</script>
-				<?php endif; 
-			}
+				<?php endif;
+    }
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;
 

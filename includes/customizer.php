@@ -56,8 +56,8 @@ function caweb_customize_controls_print_styles() {
 // CAWeb Register Customizer
 add_action('customize_register', 'caweb_customize_register');
 function caweb_customize_register($wp_customize) {
-		$site_version = get_option('ca_site_version', 5);
-		
+    $site_version = get_option('ca_site_version', 5);
+
     // Remove Divi Customization Panels and Sections
     $divi_panels = array('et_divi_general_settings', 'et_divi_header_panel', 'et_divi_footer_panel', 'et_divi_blog_settings',
         'et_divi_buttons_settings', 'et_divi_mobile');
@@ -82,21 +82,20 @@ function caweb_customize_register($wp_customize) {
         'priority'   => 30,
         'panel' => 'caweb_options'));
 
-
     $wp_customize->add_setting('ca_site_version', array(
         'type' => 'option',
         'default' => $site_version));
 
-		$versions = array('5'=> 'Version 5');
-		
-		if(4 == $site_version ){
-			$versions['4'] = 'Version 4';
-		}
-		
+    $versions = array('5'=> 'Version 5');
+
+    if (4 == $site_version) {
+        $versions['4'] = 'Version 4';
+    }
+
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'ca_site_version', array(
         'label'      => 'State Template Version',
         'type' => 'select',
-        'choices' => $versions ,
+        'choices' => $versions,
         'section'    => 'caweb_settings',
         'settings'   => 'ca_site_version',
     )));

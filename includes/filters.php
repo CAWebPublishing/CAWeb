@@ -8,7 +8,7 @@ function caweb_tiny_mce_before_init($init_array) {
     // Each array child is a format with it's own settings
     $style_formats = array(
         array(
-						'name' => 'Featured Narrative',
+            'name' => 'Featured Narrative',
             'title' => 'Featured Narrative',
             'block' => 'aside',
             'classes' => 'featured-narrative',
@@ -16,7 +16,7 @@ function caweb_tiny_mce_before_init($init_array) {
         ),
         array(
             'name' => 'Overstated List',
-						'title' => 'Overstated List',
+            'title' => 'Overstated List',
             'selector' => 'ul',
             'inline' => 'ul',
             'classes' => 'list-overstated',
@@ -26,7 +26,7 @@ function caweb_tiny_mce_before_init($init_array) {
         ),
         array(
             'name' => 'Standout List',
-						'title' => 'Standout List',
+            'title' => 'Standout List',
             'selector' => 'ul',
             'inline' => 'ul',
             'classes' => 'list-standout',
@@ -36,7 +36,7 @@ function caweb_tiny_mce_before_init($init_array) {
         ),
         array(
             'name' => 'Understated List',
-						'title' => 'Understated List',
+            'title' => 'Understated List',
             'selector' => 'ul',
             'inline' => 'ul',
             'classes' => 'list-understated',

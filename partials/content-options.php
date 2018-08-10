@@ -408,7 +408,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																<div class="hidden">
 																																	<input placeholder="Label" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
 																																	<p>Message</p>
-																																	<?= wp_editor( stripslashes($data['message']), "alert-message-$count", caweb_tiny_mce_settings()); ?>
+																																	<?= wp_editor(stripslashes($data['message']), "alert-message-$count", caweb_tiny_mce_settings()); ?>
 																																</div>
 																															</div>
 																														</li>

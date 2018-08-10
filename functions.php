@@ -294,8 +294,8 @@ function caweb_admin_enqueue_scripts($hook) {
         // Enqueue Scripts
         wp_enqueue_script('jquery');
         wp_enqueue_media();
-				wp_enqueue_editor();
-				
+        wp_enqueue_editor();
+
         wp_enqueue_script('custom-header');
 
         wp_register_script('browse-caweb-library', CAWebUri.'/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
