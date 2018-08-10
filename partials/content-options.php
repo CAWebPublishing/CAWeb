@@ -404,11 +404,11 @@ $icons = caweb_get_icon_list(-1, '', true);
 																														
 																														<li>
 																															<div class="caweb-alert">
-																																<pre><p><?= $default_header ?></p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-<?= $count ?>"></a><a class="dashicons dashicons-arrow-down alert-toggle" title="<?= $default_header ?>"></a><a class="dashicons activateAlert <?= $status ?>"><input name="alert-status-<?= $count ?>" value="<?= $status ?>" type="hidden"></a></pre>
+																																<div><p><?= $default_header ?></p><a class="dashicons dashicons-dismiss removeAlert"></a><a class="thickbox dashicons dashicons-menu" href="#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-<?= $count ?>"></a><a class="dashicons dashicons-arrow-down alert-toggle" title="<?= $default_header ?>"></a><a class="dashicons activateAlert <?= $status ?>"><input name="alert-status-<?= $count ?>" value="<?= $status ?>" type="hidden"></a></div>
 																																<div class="hidden">
 																																	<input placeholder="Label" name="alert-header-<?= $count ?>" type="text" value="<?= $header ?>">
 																																	<p>Message</p>
-																																	<textarea name="alert-message-<?= $count ?>"><?= $data['message'] ?></textarea>
+																																	<?= wp_editor(stripslashes($data['message']), "alert-message-$count", caweb_tiny_mce_settings()); ?>
 																																</div>
 																															</div>
 																														</li>

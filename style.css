@@ -17,3 +17,6 @@
 header {
   z-index: 15 !important;
 }
+#tiny-mce.mce-content-body{
+	background-color: transparent;
+}

@@ -146,12 +146,6 @@ ul.utility-links.social-media-links{
 .second-level-nav li{
      float: left;
 }
-.first-level-link{
-  	display: table;
-}
-.first-level-link>span[class^="ca-gov-icon"]{
-  display: table-row;
-}
 /* Full Sub-Nav */
 .main-navigation.megadropdown .unit1 .second-level-link{
   height: 65px;

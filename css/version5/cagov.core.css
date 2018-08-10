@@ -1,4 +1,4 @@
-/* cagov-template-v5 - v0.0.1 - Nov-22-2017 */
+/* cagov-template-v5 - v0.0.1 - Aug-09-2018 */
 /* STYLES COMPILED FROM SOURCE (LESS) DO NOT MODIFY */
 /* -----------------------------------------
    NORMALIZE - /source/less/bootstrap/normalize.less
@@ -207,7 +207,7 @@ body {
   font-size: 1em;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #efefef;
+  background-color: #fff;
 }
 input,
 button,
@@ -4420,9 +4420,9 @@ html {
 ----------------------------------------- */
 @font-face {
   font-family: 'CaGov';
-  src: url('../../fonts/CaGov.eot');
+  src: url('../fonts/CaGov.eot');
   /* IE9 Compat Modes */
-  src: url('../../fonts/CaGov.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../../fonts/CaGov.woff') format('woff'), /* Modern Browsers */ url('../../fonts/CaGov.ttf') format('truetype'), /* Safari, Android, iOS */ url('../../fonts/CaGov.svg') format('svg');
+  src: url('../fonts/CaGov.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/CaGov.woff') format('woff'), /* Modern Browsers */ url('../fonts/CaGov.ttf') format('truetype'), /* Safari, Android, iOS */ url('../fonts/CaGov.svg') format('svg');
   /* Legacy iOS */
 }
 [class^="ca-gov-icon-"],
@@ -5193,6 +5193,12 @@ h6,
   font-size: 56px;
   font-size: 3.5rem;
 }
+.serif {
+  font-family: "Merriweather", serif !important;
+}
+.monospace {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
 /* -----------------------------------------
    SOCIAL SHARE WIDGET
    /source/less/cagov/socialsharer.less
@@ -5441,6 +5447,15 @@ h6,
   transform: translateY(-50%);
   -webkit-backface-visibility: hidden;
 }
+@media print {
+  .print-p-t {
+    padding-top: 136px !important;
+  }
+  .global-header.fixed {
+    position: absolute !important;
+    top: 0 !important;
+  }
+}
 /* -----------------------------------------
    GRID -  /source/less/cagov/grid.less
 ----------------------------------------- */
@@ -5637,7 +5652,7 @@ h6,
   }
 }
 .header-cagov-logo img {
-  top: 1px;
+  top: 4px;
   height: 32px;
   position: absolute;
   left: 27px;
@@ -5847,6 +5862,9 @@ h6,
 /* -----------------------------------------
    FOOTER - /source/less/cagov/global-footer.less
 ----------------------------------------- */
+#main-content {
+  min-height: calc(10vh);
+}
 .global-footer {
   padding-top: 22px 0;
 }
@@ -6137,10 +6155,10 @@ h6,
     display: block;
     position: absolute;
     top: 240px;
-    padding: 10px;
+    padding: 0;
     max-height: 100%;
     border-radius: 0;
-    min-height: 75px;
+    min-height: 55px;
     width: 60%;
     left: 20%;
     -webkit-transition: all 0.4s;
@@ -6412,7 +6430,7 @@ h6,
   }
 }
 /* -----------------------------------------
-GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
+GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES
 /source/less/cagov/search.less
 ----------------------------------------- */
 .gsc-control-searchbox-only form.gsc-search-box {
@@ -6422,8 +6440,13 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
   margin-bottom: 0;
 }
 .gsc-control-searchbox-only table.gsc-search-box td.gsc-input {
-  padding-right: 0;
-	width: 100%;
+  padding-right: 0 !important;
+  width: 100% !important;
+}
+.gsc-control-searchbox-only .gsc-input-box {
+  border: none !important;
+  background: transparent !important;
+  height: 100%;
 }
 .gsc-control-searchbox-only input.gsc-input {
   background-color: rgba(255, 255, 255, 0.8);
@@ -6433,32 +6456,20 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
   outline: none;
   font-size: 1.1rem;
   height: 55px !important;
-	padding: 14px !important; 
+  padding: 14px !important;
   opacity: 0.8 !important;
   width: 100%;
+  background-position-x: 7px !important;
 }
 .gsc-control-searchbox-only input.gsc-search-button,
 .gsc-control-searchbox-only button.gsc-search-button {
-  padding: 5px 5px 0 0;
-	background-image: none;
-	background-color: transparent;
-	border: 0;
+  opacity: 0;
+  width: 55px;
+  height: 51px;
   position: absolute;
   right: 2px;
   top: 2px;
   z-index: 55;
-}
-.search-container.active .gsc-control-searchbox-only input.gsc-search-button, .search-container.active .gsc-control-searchbox-only button.gsc-search-button{
-	padding-top: 15px;
-}
-.cse .gsc-search-button-v2:focus, .gsc-search-button-v2:focus{
-	box-shadow: none !important;
-}
-.gsc-control-searchbox-only button.gsc-search-button.gsc-search-button-v2 svg{
-	fill: #666;
-	height: 40px;
-	width: 40px;
-	
 }
 .gsc-control-searchbox-only td.gsc-clear-button {
   width: 1px !important;
@@ -6467,7 +6478,6 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
   padding-right: 0 !important;
   padding-left: 0 !important;
   position: relative;
-	display: block;
 }
 .gsc-control-searchbox-only td.gsc-search-button {
   width: 0px !important;
@@ -6479,11 +6489,11 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
 }
 .gsc-control-searchbox-only div.gsc-clear-button {
   padding-left: 0 !important;
-  display: block !important;
   background-image: none !important;
   margin-left: 0;
   margin-right: 0;
   width: 40px;
+  display: block !important;
 }
 .gsc-control-searchbox-only div.gsc-clear-button:before {
   content: '\4d';
@@ -6528,6 +6538,27 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
 }
 .search-results-header .gsc-control-searchbox-only td.gsc-clear-button {
   display: none;
+}
+table.gsc-search-box table td div {
+  padding: 0 !important;
+}
+.gsc-input-box-focus,
+.gsc-input-box-hover {
+  box-shadow: none !important;
+  border: none !important;
+}
+table.gsc-search-box td {
+  padding: 0 !important;
+}
+.gsc-search-box-tools .gsc-clear-button {
+  display: block !important;
+}
+.search-container.active div.gsc-clear-button {
+  width: 40px;
+}
+.gsc-input-box table td:nth-child(2),
+.gsib_b {
+  display: none !important;
 }
 /* -----------------------------------------
    SITE SEARCH RESULTS - /source/less/cagov/search-results.less
@@ -6668,6 +6699,9 @@ GOOGLE CUSTOM SEARCH CUSTOMIZATION OVERRIDES beta 5.0 addition
 @media (max-width: 768px) {
   .second-level-nav > li {
     border-right: 0px;
+  }
+  #navigation {
+    clear: both;
   }
 }
 .first-level-link {
@@ -7351,7 +7385,7 @@ a.second-level-link [class^="ca-gov-icon-"] {
   top: 0;
   width: 100%;
   height: 100%;
-  padding-right: 70px;
+  padding-right: 0;
 }
 .mobile-controls .ca-gov-icon-menu-toggle-open,
 .mobile-controls .ca-gov-icon-menu-toggle-closed {
@@ -7360,13 +7394,21 @@ a.second-level-link [class^="ca-gov-icon-"] {
   line-height: 44px;
 }
 .mobile-controls .toggle-menu {
-  position: absolute;
-  left: auto;
-  right: 10px;
+  padding: 0;
+  width: 52px;
+}
+.mobile-controls .toggle-search {
+  padding: 0;
+  width: 52px;
+  border: none;
+  background: none;
+}
+.mobile-controls .toggle-search:focus {
+  outline: dotted 1px #000;
 }
 .main-navigation .mobile-controls {
   text-align: left;
-  background-color: #efefef;
+  background-color: #fff;
 }
 .mobile-control.toggle-sub-nav {
   position: absolute;
@@ -7375,9 +7417,17 @@ a.second-level-link [class^="ca-gov-icon-"] {
   font-size: 24px;
   font-size: 1.5rem;
   line-height: 55px;
-  width: 60px;
+  width: 80px;
   text-align: center;
   cursor: pointer;
+  padding-left: 7px;
+  border-left: 1px solid #E1F2F7;
+}
+.main-nav-icons {
+  width: 130px;
+  height: 70px;
+  position: relative;
+  z-index: 1;
 }
 /* -----------------------------------------
    TOP NAVIGATION
@@ -7407,6 +7457,16 @@ a.second-level-link [class^="ca-gov-icon-"] {
 @media (max-width: 767px) {
   .utility-header .half {
     padding-top: 2px;
+    float: left;
+  }
+  .utility-header .half:first-child {
+    padding-left: 70px;
+    padding-right: 0 !important;
+    width: 60%;
+  }
+  .utility-header .half:nth-child(2) {
+    padding-left: 0 !important;
+    width: 40%;
   }
 }
 .utility-header a {
@@ -7440,6 +7500,15 @@ a.second-level-link [class^="ca-gov-icon-"] {
 .utility-header ul li {
   padding: 0 8px;
 }
+.utility-header ul li button {
+  font-size: 100%;
+  outline: none !important;
+  position: relative;
+  top: -1px;
+}
+.utility-header ul li button span {
+  font-size: 100% !important;
+}
 .utility-header .settings-links {
   font-size: 87%;
   text-align: right;
@@ -7456,15 +7525,15 @@ a.second-level-link [class^="ca-gov-icon-"] {
   vertical-align: -2px;
 }
 @media (max-width: 767px) {
-  .utility-header .social-media-links {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  .utility-header .social-media-links li {
+    padding: 0 1px;
+  }
+  .utility-header [class^="ca-gov-icon-"] {
+    font-size: 12.8px;
+    font-size: 0.8rem;
+  }
+  .utility-header .header-cagov-logo img {
+    left: 10px;
   }
 }
 .utility-header .located-city-name {
@@ -7729,7 +7798,7 @@ a.second-level-link [class^="ca-gov-icon-"] {
 }
 /* -----------------------------------------
    SPACING
-   Converted from Scss
+   Converted from Scss 
    http://v4-alpha.getbootstrap.com/components/utilities/
    /source/less/cagov/spacing.less
 ----------------------------------------- */
@@ -8104,7 +8173,7 @@ body {
 ----------------------------------------- */
 /*
  *  Core Owl Carousel CSS File
-
+ 
  */
 .carousel {
   display: none;
@@ -8387,7 +8456,7 @@ body {
 .fancybox-close,
 .fancybox-prev span,
 .fancybox-next span {
-  background-image: url('../../images/fancybox/fancybox_sprite.png');
+  background-image: url('../images/fancybox/fancybox_sprite.png');
 }
 #fancybox-loading {
   position: fixed;
@@ -8403,7 +8472,7 @@ body {
 #fancybox-loading div {
   width: 44px;
   height: 44px;
-  background: url('../../images/fancybox/fancybox_loading.gif') center center no-repeat;
+  background: url('../images/fancybox/fancybox_loading.gif') center center no-repeat;
 }
 .fancybox-close {
   position: absolute;
@@ -8421,7 +8490,7 @@ body {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  background: transparent url('../../images/fancybox/blank.gif');
+  background: transparent url('../images/fancybox/blank.gif');
   /* helps IE */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: 8040;
@@ -8482,7 +8551,7 @@ body {
   overflow: hidden;
   display: none;
   z-index: 8010;
-  background: url('../../images/fancybox/fancybox_overlay.png');
+  background: url('../images/fancybox/fancybox_overlay.png');
 }
 .fancybox-overlay-fixed {
   position: fixed;
@@ -9281,6 +9350,11 @@ body {
 }
 .alert-severe .close {
   color: #000;
+  position: relative;
+  top: 0;
+  right: -5px;
+  padding: 0 10px;
+  text-shadow: none;
 }
 .alert-severe .alert-level {
   color: #000;
@@ -10096,7 +10170,7 @@ figcaption {
   margin-bottom: 22px;
 }
 .event-item .title {
-  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
+  background: url("../images/template2014/bullet-blue-disc.png") no-repeat 0 3px transparent;
   margin-left: -20px;
   padding-left: 20px;
 }
@@ -11867,13 +11941,13 @@ ul.list-overstated a {
 }
 .list-overstated li,
 .list-understated li {
-  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 4px transparent;
+  background: url("../images/template2014/bullet-blue-disc.png") no-repeat 0 4px transparent;
   padding: 0 0 14px 18px;
   /* Rotates disc arrow down when used with accordion */
 }
 .list-overstated li.open,
 .list-understated li.open {
-  background: url("../../images/system/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
+  background: url("../images/template2014/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
 }
 .list-standout {
   padding: 0;
@@ -12009,7 +12083,7 @@ blockquote {
    BUTTONS
    /source/less/cagov/button.less
 ----------------------------------------- */
-/*
+/* 
     NOTE: This might make more sence later to be moved to the color schemes
 */
 /* .btn-primary {
@@ -12017,7 +12091,7 @@ blockquote {
     background:none;
     color:#fff;
     transition:all 0.5s;
-
+    
     &:hover, &:focus {
         .rgba (#fff, .2);
         background-color: @rgba;
