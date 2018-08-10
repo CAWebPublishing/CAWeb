@@ -177,9 +177,9 @@ function caweb_wp_enqueue_scripts() {
     global $pagenow;
 
     $post_id = get_the_ID();
-    $ver = caweb_get_version($post_id);
+    $ver = caweb_get_page_version($post_id);
     $color = get_option('ca_site_color_scheme', 'oceanside');
-    $schemes = caweb_color_schemes(caweb_get_version(get_the_ID()), 'filename');
+    $schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
     $colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
     // If on the activation page
@@ -294,6 +294,7 @@ function caweb_admin_enqueue_scripts($hook) {
         // Enqueue Scripts
         wp_enqueue_script('jquery');
         wp_enqueue_media();
+        wp_enqueue_editor();
 
         wp_enqueue_script('custom-header');
 
@@ -303,7 +304,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
         wp_register_script('caweb-admin-scripts', CAWebUri.'/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script', 'browse-caweb-library'), CAWebVersion, true);
 
-        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors()));
+        wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
 
         wp_enqueue_script('caweb-admin-scripts');
         // Enqueue Styles
@@ -316,7 +317,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
     // Load editor styling
     wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_version(get_the_ID())));
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
 }
 
 // CAWeb Admin Head

@@ -1,10 +1,10 @@
 <?php
 global $post;
 $post_content = isset($post) ? (is_object($post) ? $post->post_content : $post['content']) : '';
-$ver = caweb_get_version(get_the_ID());
+$ver = caweb_get_page_version(get_the_ID());
 $fixed_header = (5 == $ver && get_option('ca_sticky_navigation') ? ' fixed' : '');
 $color = get_option('ca_site_color_scheme', 'oceanside');
-$schemes = caweb_color_schemes(caweb_get_version(get_the_ID()), 'filename');
+$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
 $colorscheme = isset($schemes[$color]) ? $color : 'oceanside';
 
 $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg',
@@ -13,8 +13,6 @@ $default_background_img = sprintf('%1$s/images/system/%2$s/header-background.jpg
 $header_background_img = (4 == $ver && "" !== get_option('header_ca_background') ?
                           get_option('header_ca_background') : $default_background_img);
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '');
-
-$slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 ?>
 
@@ -33,7 +31,23 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
 		                $_SESSION['display_alert_'.$a] = true;
 
-		                printf('<div role="alert" class="alert alert-dismissible alert-banner" style="background-color:%1$s;"><div class="container"><button type="button" class="close caweb-alert-close" data-url="%2$s" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-level"><span class="ca-gov-icon-%3$s" aria-hidden="true"></span>%4$s</span><span class="alert-text">%5$s</span>%6$s</div></div>', $data['color'], admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a), $data['icon'], $data['header'], $data['message'], ! empty($data['button']) && ! empty($data['url']) ? sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '') : '');
+		                $readmore = '';
+
+		                if ( ! empty($data['button']) && ! empty($data['url'])) {
+		                    $target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
+		                    $readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), $target);
+		                } ?>
+		                <div role="alert" class="alert alert-dismissible alert-banner" style="background-color:<?= $data['color'] ?>;">
+											<div class="container">
+												<button type="button" class="close caweb-alert-close" data-url="<?= admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a) ?>" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<span class="alert-level">
+													<span class="ca-gov-icon-<?= $data['icon'] ?>" aria-hidden="true"></span><?= $data['header'] ?></span>
+												<span class="alert-text"><?= stripslashes($data['message']) ?></span><?=  $readmore ?>
+											</div>
+										</div>
+										<?php
 		            }
 		        }
 		    }
@@ -71,7 +85,7 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
                     get_post_meta(get_the_ID(), 'ca_default_navigation_menu', true) :
                     get_option('ca_default_navigation_menu')),
         'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
-        'version' => caweb_get_version(get_the_ID()),
+        'version' => caweb_get_page_version(get_the_ID()),
     )
               );
 
@@ -91,8 +105,6 @@ printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3
 <?php  if ((true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')) &&  (caweb_version_check(4, get_the_ID()))): ?>
 <div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
-
-<?php ( ! empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
 
         <div class="header-decoration hidden-print"></div>
 
