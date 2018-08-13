@@ -399,7 +399,6 @@ $icons = caweb_get_icon_list(-1, '', true);
 																														$count = $a + 1;
 																														$status = $data['status'];
 
-																														$alert = sprintf('', $default_header, $header, $count, $status);
 																														?>
 																														
 																														<li>
