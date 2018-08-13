@@ -27,7 +27,7 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 		    $alerts = get_option('caweb_alerts', array());
 
 		    foreach ($alerts as $a => $data) {
-		        if ("inactive" !== $data['status'] && ((is_front_page() && "home" == $data['page_display']) || ("all" == $data['page_display']) ) ) {
+		        if ("inactive" !== $data['status'] && ((is_front_page() && "home" == $data['page_display']) || ("all" == $data['page_display']))) {
 		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
 		                $_SESSION['display_alert_'.$a] = true;
 
