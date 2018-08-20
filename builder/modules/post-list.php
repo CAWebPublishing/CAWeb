@@ -220,18 +220,18 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render($unprocessed_props, $content = null, $render_slug) {
-        $module_class         = $this->shortcode_atts['module_class'];
-        $list_title            = $this->shortcode_atts['title'];
-        $title_size    = $this->shortcode_atts['title_size'];
-        $style            = $this->shortcode_atts['style'];
-        $faq_style            = $this->shortcode_atts['faq_style'];
-        $posts_number            = $this->shortcode_atts['posts_number'];
-        $view_featured_image            = $this->shortcode_atts['view_featured_image'];
-        $all_categories_button            = $this->shortcode_atts['all_categories_button'];
-        $include_categories      = $this->shortcode_atts['include_categories'];
-        $all_tags_button            = $this->shortcode_atts['all_tags_button'];
-        $include_tags      = $this->shortcode_atts['include_tags'];
-        $orderby                 = $this->shortcode_atts['orderby'];
+        $module_class         = $this->props['module_class'];
+        $list_title            = $this->props['title'];
+        $title_size    = $this->props['title_size'];
+        $style            = $this->props['style'];
+        $faq_style            = $this->props['faq_style'];
+        $posts_number            = $this->props['posts_number'];
+        $view_featured_image            = $this->props['view_featured_image'];
+        $all_categories_button            = $this->props['all_categories_button'];
+        $include_categories      = $this->props['include_categories'];
+        $all_tags_button            = $this->props['all_tags_button'];
+        $include_tags      = $this->props['include_tags'];
+        $orderby                 = $this->props['orderby'];
 
         $order = '';
 
