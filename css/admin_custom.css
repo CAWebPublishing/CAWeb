@@ -32,6 +32,7 @@ body#tinymce.mce-content-body{
 select#ca_google_trans_display {
     margin-bottom: 10px;
 }
+#custom-js textarea,
 #custom-css textarea{
 	width: 100%;
 	min-height: 700px;
@@ -146,17 +147,21 @@ ol#uploadedCSS li p {
     display: inline;
     cursor: -webkit-grab;
 }
+ol#uploadedCSS li .previewScript,
 ol#uploadedCSS li .previewStyle {
     margin-left: -105px;
 	color: green;
 }
 ol#uploadedCSS li .removeStyle,
-tr.pending-stylesheet td .removeStyle {
+ol#uploadedJS li .removeScript,
+tr.pending-stylesheet td .removeStyle,
+tr.pending-script td .removeScript {
     margin-right: 45px;
 	color: red;
 	cursor: pointer
 }
-tr.pending-stylesheet td .removeStyle {
+tr.pending-stylesheet td .removeStyle,
+tr.pending-script td .removeScript {
   margin-left: -28px;
   margin-right: 22px;
 }
