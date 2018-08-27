@@ -143,13 +143,12 @@ ul.caweb-icon-menu li:before{
 #addCSS:hover, #addJS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
     cursor: pointer;
 }
-ol#uploadedCSS li p
-ol#uploadedJS li p {
-    display: inline;
+ol#uploadedCSS li,
+ol#uploadedJS li {
     cursor: -webkit-grab;
 }
-ol#uploadedJS li .previewScript,
-ol#uploadedCSS li .previewStyle {
+ol#uploadedJS li .preview-js,
+ol#uploadedCSS li .preview-css {
     margin-left: -105px;
 	color: green;
 }

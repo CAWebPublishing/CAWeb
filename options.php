@@ -105,9 +105,9 @@ function caweb_save_options($values = array(), $files = array()) {
 		$jsfiles =  $cssfiles = array();
 		foreach($files as $key => $data){
 			if( preg_match('/js_upload/', $key)){
-				$jsfiles[$key] = $data;
+				$jsfiles[$data['name']] = $data;
 			}elseif(preg_match('/css_upload/', $key)){
-				$cssfiles[$key] = $data;
+				$cssfiles[$data['name']] = $data;
 			}
 		}
 		
@@ -144,9 +144,9 @@ function caweb_save_options($values = array(), $files = array()) {
         if ("on" == $val) {
             $val = true;
         }else if ('caweb_external_css' == $opt) {
-            $val = array_merge($val, array_diff($cssfiles, $val));
+            $val = array_merge($val, array_diff(array_keys($cssfiles), $val));
         }if ('caweb_external_js' == $opt) {
-            $val = array_merge($val, array_diff($jsfiles, $val));
+            $val = array_merge($val, array_diff(array_keys($jsfiles), $val));
         }
 
         update_option($opt, $val);
@@ -281,10 +281,11 @@ function caweb_save_multi_ga_options($values = array()) {
     print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
 
-function caweb_pre_update_option_ca_custom_css($value, $old_value, $option) {
+function caweb_pre_update_option_strip_custom($value, $old_value, $option) {
     return stripcslashes($value);
 }
-add_action('pre_update_option_ca_custom_css', 'caweb_pre_update_option_ca_custom_css', 10, 3);
+//add_action('pre_update_option_ca_custom_css', 'caweb_pre_update_option_strip_custom', 10, 3);
+//add_action('pre_update_option_ca_custom_js', 'caweb_pre_update_option_strip_custom', 10, 3);
 
 $social =  caweb_get_site_options('social');
 $sanitized = caweb_get_site_options('sanitized');
