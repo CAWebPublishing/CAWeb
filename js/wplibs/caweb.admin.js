@@ -96,7 +96,10 @@ $('#ca_google_search_id').on('input',function(e){
   }
 });
 
-$('.removeStyle').click(function(e){
+$( "#uploadedCSS, #uploadedJS" ).sortable();
+$( "#uploadedCSS, #uploadedJS" ).disableSelection();
+
+$('.remove-css, .remove-js').click(function(e){
   e.preventDefault();
 	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
 
@@ -106,25 +109,28 @@ $('.removeStyle').click(function(e){
 	}
 });
 
-$( "#uploadedCSS" ).sortable();
-$( "#uploadedCSS" ).disableSelection();
+$('#addCSS, #addJS').click(function(e){
+	
+	addExternal($(this).closest('table'), $(this).attr('name'));	
+	changeMade = true;
 
-$('#addCSS').click(function(e){
-	var ext_css_table = $('#custom-css table:first');
-	var rowCount = ext_css_table.children().children().length;
+});
+
+function addExternal(ext_table, ext){
+	var rowCount = ext_table.children().children().length;
 	var row = document.createElement('TR');
 	var col1 = document.createElement('TD');
 	var rem = document.createElement('A');
 	var col2 = document.createElement('TD');
 	var fileUpload = document.createElement('Input');
 
-  row.classList = "pending-stylesheet";
-  rem.classList = "dashicons dashicons-dismiss removeStyle";
+  row.classList = "pending-" + ext;
+  rem.classList = "dashicons dashicons-dismiss remove-" + ext;
 
 	fileUpload.type = "file";
-	fileUpload.name = rowCount + "_upload";
-	fileUpload.id = rowCount + "_upload";
-	fileUpload.accept = ".css";
+	fileUpload.name = rowCount + ext + "_upload";
+	fileUpload.id = rowCount + ext + "_upload";
+	fileUpload.accept = "." + ext;
 
   rem.addEventListener('click', function (e) {
     e.preventDefault();
@@ -138,11 +144,11 @@ $('#addCSS').click(function(e){
 
   fileUpload.addEventListener('change', function () {
     var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
-    var ext = name.lastIndexOf(".") > 0 ?
+    var extension = name.lastIndexOf(".") > 0 ?
                       name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
 
-    if( "" === ext || "css" !== ext){
-      alert(name + " isn't a valid CSS extension and was not uploaded.");
+    if( "" === extension || ext !== extension){
+      alert(name + " isn't a valid " + ext + " extension and was not uploaded.");
       this.parentNode.remove();
     }else{
       rem.title = "remove " + name;
@@ -156,11 +162,8 @@ $('#addCSS').click(function(e){
 	row.append(col1);
 	row.append(col2);
 
-	ext_css_table.append(row);
-
-	changeMade = true;
-
-});
+	ext_table.append(row);
+}
 
 $( "#cawebAlerts" ).sortable();
 $( "#cawebAlerts" ).disableSelection();

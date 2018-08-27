@@ -45,7 +45,6 @@
 
 <?php
 
-
 printf('<link rel="apple-touch-icon" sizes="144x144" href="%1$s/images/system/apple-touch-icon-144x144.png">', CAWebUri);
 printf('<link rel="apple-touch-icon" sizes="114x114" href="%1$s/images/system/apple-touch-icon-114x114.png">', CAWebUri);
 printf('<link rel="apple-touch-icon" sizes="72x72" href="%1$s/images/system/apple-touch-icon-72x72.png">', CAWebUri);

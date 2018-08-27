@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $post;
 
 $post_id = isset($post) ? (is_object($post) ? $post->ID : $post['ID']) : -1;

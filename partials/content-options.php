@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This is the CAWeb Options Page
 
 $selected_tab = isset($_POST['tab_selected']) || ! empty($_POST['tab_selected']) ? $_POST['tab_selected'] : 'general';
@@ -44,9 +44,8 @@ $google_translate_icon = get_option('ca_google_trans_icon', 'globe');
 $ext_css = get_option('caweb_external_css', array());
 $custom_css = get_option('ca_custom_css', '');
 $ext_js = get_option('caweb_external_js', array());
-$custom_js = get_option('caweb_custom_js', '');
+$custom_js = get_option('ca_custom_js', '');
 $alerts = get_option('caweb_alerts', array());
-
 $icons = caweb_get_icon_list(-1, '', true);
 
 ?>
@@ -360,7 +359,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																													click and drag the name of the file in the order you would like.
 																												</span></div></th>
 																												<td>
-																													<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style"></a>
+																													<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style" name="css"></a>
 																												</td>
 																												<?php if ( ! empty($ext_css)): ?>
 																													<tr><td></td>
@@ -369,10 +368,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																															
 																															<ol id="uploadedCSS">
 																																<?php
-																																foreach ($ext_css as $name) {
+																																foreach ($ext_css as  $name) {
 																																    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 
-																																    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p><input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
+																																    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility preview-css"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download download-css"></a><a title="remove %2$s" class="dashicons dashicons-dismiss remove-css"></a>%2$s<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
 																																}
 																																	?>
 																																</ol>
@@ -386,7 +385,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																													
 																													<tr>
 																														<th><div class="tooltip">Stylesheet<span class="tooltiptext">Any styles added will override any pre-existing styles. </span></div></th>
-																														<td><textarea id="ca_custom_css" name="ca_custom_css" ><?= $custom_css ?></textarea></td>
+																														<td><textarea id="ca_custom_css" name="ca_custom_css" ><?= wp_unslash($custom_css) ?></textarea></td>
 																													</tr>
 																												</table>
 																												
@@ -399,11 +398,11 @@ $icons = caweb_get_icon_list(-1, '', true);
 																													<tr>
 																														<th><div class="tooltip">Javascripts
 																															<span class="tooltiptext">Any scripts added will override any pre-existing scripts.
-																																Uploaded scripts load at the bottom of the head in the order listed. To adjust the order,
+																																Uploaded scripts load at the bottom of the footer in the order listed. To adjust the order,
 																																click and drag the name of the file in the order you would like.
 																															</span></div></th>
 																															<td>
-																																<a class="dashicons dashicons-plus-alt" id="addJS" title="Add Script"></a>
+																																<a class="dashicons dashicons-plus-alt" id="addJS" title="Add Script" name="js"></a>
 																															</td>
 																															<?php if ( ! empty($ext_js)): ?>
 																																<tr><td></td>
@@ -412,10 +411,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																		
 																																		<ol id="uploadedJS">
 																																			<?php
-																																			foreach ($ext_js as $name) {
+																																			foreach ($ext_js as  $name) {
 																																			    $location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
 
-																																			    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewScript"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadScript"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeScript"></a><p>%2$s</p><input type="hidden" name="caweb_external_js[]" value="%2$s"></li>', $location, $name);
+																																			    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility preview-js"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download download-js"></a><a title="remove %2$s" class="dashicons dashicons-dismiss remove-js"></a>%2$s<input type="hidden" name="caweb_external_js[]" value="%2$s"></li>', $location, $name);
 																																			}
 																																				?>
 																																			</ol>
@@ -429,7 +428,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																
 																																<tr>
 																																	<th><div class="tooltip">Javascript<span class="tooltiptext">Any scripts added will override any pre-existing scripts. </span></div></th>
-																																	<td><textarea id="ca_custom_js" name="ca_custom_js" ><?= $custom_js ?></textarea></td>
+																																	<td><textarea id="ca_custom_js" name="ca_custom_js" ><?= wp_unslash($custom_js) ?></textarea></td>
 																																</tr>
 																															</table>
 																															
