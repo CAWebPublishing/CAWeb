@@ -46,7 +46,7 @@ $custom_css = get_option('ca_custom_css', '');
 $ext_js = get_option('caweb_external_js', array());
 $custom_js = get_option('caweb_custom_js', '');
 $alerts = get_option('caweb_alerts', array());
-
+update_site_option('dev', $ext_css);
 $icons = caweb_get_icon_list(-1, '', true);
 
 ?>
@@ -360,7 +360,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																													click and drag the name of the file in the order you would like.
 																												</span></div></th>
 																												<td>
-																													<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style"></a>
+																													<a class="dashicons dashicons-plus-alt" id="addCSS" title="Add Style" name="css"></a>
 																												</td>
 																												<?php if ( ! empty($ext_css)): ?>
 																													<tr><td></td>
@@ -369,10 +369,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																															
 																															<ol id="uploadedCSS">
 																																<?php
-																																foreach ($ext_css as $name) {
-																																    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+																																foreach ($ext_css as $i => $data) {
+																																    $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $data['name']);
 
-																																    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeStyle"></a><p>%2$s</p><input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name);
+																																    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewStyle"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadStyle"></a><a title="remove %2$s" class="dashicons dashicons-dismiss remove-css"></a><p>%2$s</p><input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $data['name']);
 																																}
 																																	?>
 																																</ol>
@@ -403,7 +403,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																click and drag the name of the file in the order you would like.
 																															</span></div></th>
 																															<td>
-																																<a class="dashicons dashicons-plus-alt" id="addJS" title="Add Script"></a>
+																																<a class="dashicons dashicons-plus-alt" id="addJS" title="Add Script" name="js"></a>
 																															</td>
 																															<?php if ( ! empty($ext_js)): ?>
 																																<tr><td></td>
@@ -412,10 +412,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																																		
 																																		<ol id="uploadedJS">
 																																			<?php
-																																			foreach ($ext_js as $name) {
-																																			    $location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+																																			foreach ($ext_js as $i => $data) {
+																																			    $location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $data['name']);
 
-																																			    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewScript"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadScript"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeScript"></a><p>%2$s</p><input type="hidden" name="caweb_external_js[]" value="%2$s"></li>', $location, $name);
+																																			    printf('<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility previewScript"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download downloadScript"></a><a title="remove %2$s" class="dashicons dashicons-dismiss removeScript"></a><p>%2$s</p><input type="hidden" name="caweb_external_js[]" value="%2$s"></li>', $location, $data['name']);
 																																			}
 																																				?>
 																																			</ol>
