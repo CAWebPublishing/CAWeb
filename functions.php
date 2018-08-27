@@ -193,15 +193,14 @@ function caweb_wp_enqueue_scripts() {
         wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
         wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
         wp_enqueue_style('caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), CAWebVersion);
-				
-				// External CSS Styles
+
+        // External CSS Styles
         $ext_css = array_values(array_filter(get_option('caweb_external_css', array())));
 
         foreach ($ext_css as $index => $name) {
             $location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
             wp_enqueue_style(sprintf('caweb-external-custom-%1$d-styles', $index + 1), $location, array(), CAWebVersion);
         }
-				
     }
 
     // Register Scripts
@@ -232,7 +231,7 @@ function caweb_wp_enqueue_scripts() {
         wp_register_script('cagov-geolocator-script', CAWebUri.'/js/libs/geolocator.js', array('jquery'), CAWebVersion, true);
         wp_enqueue_script('cagov-geolocator-script');
     }
-		
+
     // This removes Divi Google Font CSS
     wp_deregister_style('divi-fonts');
 }
@@ -279,22 +278,22 @@ function caweb_wp_footer() {
 }
 
 function caweb_late_wp_footer() {
-		// Load Core JS at the very end along with any external/custom javascript/jquery
+    // Load Core JS at the very end along with any external/custom javascript/jquery
     $core_js = sprintf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
-		
-		print $core_js;
-		
-		// External JS
-		$ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
 
-		foreach ($ext_js as $index => $name) {
-			$location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-			printf('<script type="text/javascript" src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWebVersion, $index + 1);
-		}
-		
-		if ("" !== get_option('ca_custom_js', '')) {
-				printf('<script id="ca_custom_js">%1$s</script>', wp_unslash( get_option('ca_custom_js')));
-		}
+    print $core_js;
+
+    // External JS
+    $ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
+
+    foreach ($ext_js as $index => $name) {
+        $location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
+        printf('<script type="text/javascript" src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWebVersion, $index + 1);
+    }
+
+    if ("" !== get_option('ca_custom_js', '')) {
+        printf('<script id="ca_custom_js">%1$s</script>', wp_unslash(get_option('ca_custom_js')));
+    }
 }
 add_action('wp_footer', 'caweb_late_wp_footer', 115);
 

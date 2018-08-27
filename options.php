@@ -85,7 +85,6 @@ function caweb_save_options($values = array(), $files = array()) {
     $site_id = get_current_blog_id();
     $ext_css_dir = sprintf('%1$s/css/external', CAWebAbsPath);
     $ext_js_dir = sprintf('%1$s/js/external', CAWebAbsPath);
-		
 
     // Remove unneeded values
     unset($values['tab_selected'], $values['caweb_options_submit']);
@@ -96,25 +95,25 @@ function caweb_save_options($values = array(), $files = array()) {
             $values[$opt] = '';
         }
 
-        if (empty($values[$opt]) && 
-					('caweb_external_css' == $opt || 'caweb_external_js' == $opt ) ) {
+        if (empty($values[$opt]) &&
+					('caweb_external_css' == $opt || 'caweb_external_js' == $opt)) {
             $values[$opt] = array();
         }
     }
-		
-		$jsfiles =  $cssfiles = array();
-		foreach($files as $key => $data){
-			if( preg_match('/js_upload/', $key)){
-				$jsfiles[$data['name']] = $data;
-			}elseif(preg_match('/css_upload/', $key)){
-				$cssfiles[$data['name']] = $data;
-			}
-		}
-		
-		caweb_upload_external_files($ext_css_dir, $site_id, get_option('caweb_external_css', array()), $values['caweb_external_css'], $cssfiles );
-		
-		caweb_upload_external_files($ext_js_dir, $site_id, get_option('caweb_external_js', array()), $values['caweb_external_js'], $jsfiles );
-		
+
+    $jsfiles =  $cssfiles = array();
+    foreach ($files as $key => $data) {
+        if (preg_match('/js_upload/', $key)) {
+            $jsfiles[$data['name']] = $data;
+        } elseif (preg_match('/css_upload/', $key)) {
+            $cssfiles[$data['name']] = $data;
+        }
+    }
+
+    caweb_upload_external_files($ext_css_dir, $site_id, get_option('caweb_external_css', array()), $values['caweb_external_css'], $cssfiles);
+
+    caweb_upload_external_files($ext_js_dir, $site_id, get_option('caweb_external_js', array()), $values['caweb_external_js'], $jsfiles);
+
     // Alert Banners
     $alerts = array();
 
@@ -143,9 +142,10 @@ function caweb_save_options($values = array(), $files = array()) {
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
             $val = true;
-        }else if ('caweb_external_css' == $opt) {
+        } elseif ('caweb_external_css' == $opt) {
             $val = array_merge($val, array_diff(array_keys($cssfiles), $val));
-        }if ('caweb_external_js' == $opt) {
+        }
+        if ('caweb_external_js' == $opt) {
             $val = array_merge($val, array_diff(array_keys($jsfiles), $val));
         }
 
@@ -155,52 +155,52 @@ function caweb_save_options($values = array(), $files = array()) {
     print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
 
- function caweb_upload_external_files($uploadPath, $site_id, $prevFiles = array(), $existingFiles = array(), $uploadedFiles = array() ){
-	$site_path = "$uploadPath/$site_id/";
-	
-	// External Upload
-	$file_upload =  array();
-	
-	// If no files and all previously uploades files have been removed
-	// delete the entire directory path
-	if (empty($existingFiles) && empty($uploadedFiles) ) {
-			caweb_rrmdir($site_path);
-			if (file_exists($site_path)) {
-					rmdir($site_path);
-			}
+ function caweb_upload_external_files($uploadPath, $site_id, $prevFiles = array(), $existingFiles = array(), $uploadedFiles = array()) {
+     $site_path = "$uploadPath/$site_id/";
 
-			// files are being uploaded
-	}elseif ( ! empty($uploadedFiles)) {
-			// create the external directory if its never been created
-			if ( ! file_exists($uploadPath)) {
-					mkdir($uploadPath);
-			}
-			// create the external site directory if its never been created
-			if ( ! file_exists($site_path)) {
-					mkdir($site_path);
-			}
+     // External Upload
+     $file_upload =  array();
 
-			foreach ($uploadedFiles as $key => $data) {
-					if ( ! empty($data["name"]) && ! empty($data["tmp_name"])) {
-							$target_file = $site_path.basename($data["name"]);
+     // If no files and all previously uploades files have been removed
+     // delete the entire directory path
+     if (empty($existingFiles) && empty($uploadedFiles)) {
+         caweb_rrmdir($site_path);
+         if (file_exists($site_path)) {
+             rmdir($site_path);
+         }
 
-							move_uploaded_file($data["tmp_name"], $target_file);
-							$file_upload[] = $data["name"];
-					}
-			}
-	}
-	
-	// Previous Uploaded Check
-	foreach ($prevFiles as $filename) {
-			// if the file exists, and the file is no longer in the upload list and
-			// a file with the same hasn't overwritten it then remove it
-			if (file_exists($site_path.$filename) &&
+         // files are being uploaded
+     } elseif ( ! empty($uploadedFiles)) {
+         // create the external directory if its never been created
+         if ( ! file_exists($uploadPath)) {
+             mkdir($uploadPath);
+         }
+         // create the external site directory if its never been created
+         if ( ! file_exists($site_path)) {
+             mkdir($site_path);
+         }
+
+         foreach ($uploadedFiles as $key => $data) {
+             if ( ! empty($data["name"]) && ! empty($data["tmp_name"])) {
+                 $target_file = $site_path.basename($data["name"]);
+
+                 move_uploaded_file($data["tmp_name"], $target_file);
+                 $file_upload[] = $data["name"];
+             }
+         }
+     }
+
+     // Previous Uploaded Check
+     foreach ($prevFiles as $filename) {
+         // if the file exists, and the file is no longer in the upload list and
+         // a file with the same hasn't overwritten it then remove it
+         if (file_exists($site_path.$filename) &&
 		! in_array($filename, $existingFiles) &&
 		! in_array($filename, $file_upload)) {
-					unlink($site_path.$filename);
-			}
-	}
-}
+             unlink($site_path.$filename);
+         }
+     }
+ }
 
 // Setup CAWeb API Menu
 function caweb_api_menu_option_setup() {
@@ -280,12 +280,6 @@ function caweb_save_multi_ga_options($values = array()) {
 
     print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
-
-function caweb_pre_update_option_strip_custom($value, $old_value, $option) {
-    return stripcslashes($value);
-}
-//add_action('pre_update_option_ca_custom_css', 'caweb_pre_update_option_strip_custom', 10, 3);
-//add_action('pre_update_option_ca_custom_js', 'caweb_pre_update_option_strip_custom', 10, 3);
 
 $social =  caweb_get_site_options('social');
 $sanitized = caweb_get_site_options('sanitized');
