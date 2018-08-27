@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This is the CAWeb Options Page
 
 $selected_tab = isset($_POST['tab_selected']) || ! empty($_POST['tab_selected']) ? $_POST['tab_selected'] : 'general';

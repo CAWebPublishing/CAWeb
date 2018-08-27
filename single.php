@@ -19,7 +19,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 <!-- Page Title-->
-<?php 
+<?php
 if ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true)) {
     print the_title(sprintf('<h1 class="page-title" %1$s>',
       get_option('ca_default_post_date_display') ? 'style="padding-bottom:0;"' : ''), '</h1>');
