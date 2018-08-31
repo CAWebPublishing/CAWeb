@@ -260,9 +260,9 @@ function caweb_wp_head() {
         printf('<style id="ca_custom_css">%1$s</style>', wp_unslash(get_option('ca_custom_css')));
     }
 }
-add_filter( 'get_site_icon_url', 'caweb_site_icon_url', 10, 3 );
-function caweb_site_icon_url($url, $size, $blog_id){
-	return ''; 
+add_filter('get_site_icon_url', 'caweb_site_icon_url', 10, 3);
+function caweb_site_icon_url($url, $size, $blog_id) {
+    return '';
 }
 
 add_action('get_header', 'caweb_et_project_get_header');

@@ -319,47 +319,46 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
             return array();
         }
         $results = array();
-				$objects = array();
-				
-				$tag = is_array($tag) ? implode('|', $tag) : $tag;
-				
+        $objects = array();
+
+        $tag = is_array($tag) ? implode('|', $tag) : $tag;
+
         // Get Shortcode Tags from Con and save it to $results
         $pattern = sprintf('/\[(%1$s)[\d\s\w\S]+?\[\/\1\]|\[(%1$s)[\d\s\w\S]+? \/\]/', $tag);
         preg_match_all($pattern, $con, $results);
-				// if there are no matches return an empty array
+        // if there are no matches return an empty array
         if (empty($results)) {
             return array();
-        }else{
-					// if there are results save only the matches
-					$matches = $results[0];
-				}
+        }
+        // if there are results save only the matches
+        $matches = $results[0];
 
-				// iterate thru each match
+        // iterate thru each match
         foreach ($matches as $m => $match) {
             $obj = array();
             $attr = array();
-						$matching_tag =  $results[$m + 1][$m];
-						
-						// If the shortcode is a self closing tag, then it contains content in between its Shortcode Tags
-						// Get content from shortcode
-						preg_match(sprintf('/"\][\s\S]*\[\/(%1$s)/', $matching_tag), $match, $obj['content']);
-						
-						if( ! empty( $obj['content'] ) ){
-							// substring the attributes, removing the content from the match 
-							$match = substr($match, 1, strpos($match, $obj['content'][0]));
-							$obj['content'] = substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($matching_tag) - 4);
-						// If the shortcode is not a self closing tag, then it only contains one Shortcode Tag
-						}else{
-							$obj['content'] = '';
-						}
-							
-						// Get Attributes from Shortcode
-						preg_match_all('/\w*="[\w\s\d$:(),@?\'=+%!#\/\.\[\]\{\}-]*/', $match, $attr);
-						foreach ($attr[0] as $a) {
-								preg_match('/\w*/', $a, $key);
-								$obj[$key[0]] = urldecode(substr($a, strlen($key[0]) + 2));
-						}
-						
+            $matching_tag =  $results[$m + 1][$m];
+
+            // If the shortcode is a self closing tag, then it contains content in between its Shortcode Tags
+            // Get content from shortcode
+            preg_match(sprintf('/"\][\s\S]*\[\/(%1$s)/', $matching_tag), $match, $obj['content']);
+
+            if ( ! empty($obj['content'])) {
+                // substring the attributes, removing the content from the match
+                $match = substr($match, 1, strpos($match, $obj['content'][0]));
+                $obj['content'] = substr($obj['content'][0], 2, strlen($obj['content'][0]) - strlen($matching_tag) - 4);
+            // If the shortcode is not a self closing tag, then it only contains one Shortcode Tag
+            } else {
+                $obj['content'] = '';
+            }
+
+            // Get Attributes from Shortcode
+            preg_match_all('/\w*="[\w\s\d$:(),@?\'=+%!#\/\.\[\]\{\}-]*/', $match, $attr);
+            foreach ($attr[0] as $a) {
+                preg_match('/\w*/', $a, $key);
+                $obj[$key[0]] = urldecode(substr($a, strlen($key[0]) + 2));
+            }
+
             $objects[] =  (object) $obj;
         }
 
