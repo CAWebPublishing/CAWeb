@@ -56,8 +56,9 @@ function ca_save_post_list_meta($post_id, $post) {
 
     wp_set_object_terms($post_id, $cats, 'category');
 
-    // Search for Post List Module if it exists, add the 'nginx_cache_purge' custom meta field
-    $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_post_list');
+    // Search for Post List, Post Slider, PostNavigation, Blog Module if they exists, add the 'nginx_cache_purge' custom meta field
+    $cache_modules = array('et_pb_ca_post_list', 'et_pb_post_slider', 'et_pb_blog','et_pb_post_nav');
+    $module = caweb_get_shortcode_from_content($content, $cache_modules, true);
 
     if ( ! empty($module)) {
         update_post_meta($post_id, 'nginx_cache_purge', 'yes');
