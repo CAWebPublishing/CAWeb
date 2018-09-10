@@ -26,8 +26,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
         }
         public function caweb_widget_nav_menu_args($nav_menu_args, $nav_menu, $args, $instance) {
             if (isset($nav_menu_args['menu'])) {
-							$args['echo'] = false;
-							print $this->createWidgetNavMenu($nav_menu_args['menu']);
+                $args['echo'] = false;
+                print $this->createWidgetNavMenu($nav_menu_args['menu']);
             }
 
             return $args;
@@ -45,7 +45,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             global $post;
             $post_id = (is_object($post) ? $post->ID : $post['ID']);
 
-						$theme_location = $args->theme_location;
+            $theme_location = $args->theme_location;
             // Header Menu Construction
             if ('header-menu' == $theme_location && ! empty($args->menu)) {
                 $nav_menu = $this->createNavMenu($args);
@@ -71,9 +71,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 										<div class="container" %3$s> Copyright &copy;
 										<script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
 									 $nav_menu, $socialLinks, (4 >= $args->version ? 'style="text-align:center;" ' : ''));
-					}
+            }
 
-					return $nav_menu;
+            return $nav_menu;
         }
 
         public function caweb_menu_fail($args) {
