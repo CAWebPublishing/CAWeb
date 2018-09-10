@@ -26,6 +26,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
         }
         public function caweb_widget_nav_menu_args($nav_menu_args, $nav_menu, $args, $instance) {
             if (isset($nav_menu_args['menu'])) {
+                $args['echo'] = false;
                 print $this->createWidgetNavMenu($nav_menu_args['menu']);
             }
 
@@ -44,8 +45,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             global $post;
             $post_id = (is_object($post) ? $post->ID : $post['ID']);
 
+            $theme_location = $args->theme_location;
             // Header Menu Construction
-            if ('header-menu' == $args->theme_location && ! empty($args->menu)) {
+            if ('header-menu' == $theme_location && ! empty($args->menu)) {
                 $nav_menu = $this->createNavMenu($args);
 
                 // If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
@@ -59,7 +61,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 												(isset($args->style) ? $args->style : 'megadropdown'), $homeLink, $nav_menu, $searchLink);
 
             // Footer Menu Construction
-            } elseif ('footer-menu' == $args->theme_location && ! empty($args->menu)) {
+            } elseif ('footer-menu' == $theme_location && ! empty($args->menu)) {
                 $nav_menu = $this->createFooterMenu($args);
                 $socialLinks = $this->createFooterSocialMenu($args);
 
