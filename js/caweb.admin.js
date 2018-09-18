@@ -11,6 +11,10 @@
     
 	});
 
+$('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
+$('input[type="button"]').click(function(e){changeMade = true; });
+$('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
+
     $('.caweb-nav-tab').click(function() {
       	var tabs = document.getElementsByClassName('caweb-nav-tab');
       	var selected_tab = this.getAttribute("name");
@@ -55,16 +59,13 @@
          }
     
        }
-      
-      changeMade = true;
     });
 
    $('#resetIcon').click(function() {
-      var ico = document.location.origin + '/wp-content/themes/CAWeb/images/system/favicon.ico';
+      var ico = args.defaultFavIcon;
       	document.getElementById('ca_fav_ico').value = ico;
         document.getElementById('ca_fav_ico_img').src = ico;
         document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
-      changeMade = true;
     });
    
 $('#ca_google_search_id').on('input',function(e){ 
@@ -77,10 +78,6 @@ $('#ca_google_search_id').on('input',function(e){
     front_search_option.removeClass('hidden');
   }
 });  
-$('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
-$('input[type="button"]').click(function(e){changeMade = true; });
-
-	$('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
  /* End of CAWeb Option Page */
 });
 

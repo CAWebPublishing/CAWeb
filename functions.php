@@ -39,35 +39,26 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
 	require_once(CAWebAbsPath. '/functions/metaboxes.php');
 
 	// Set Predefined Category Content Types
-
 	$ca_cats = array(
 		'Courses', 'Events', 'Exams','FAQs', 'Jobs',
 		 'News', 'Profiles','Publications' );
 
 	// Insert Parent Content Type Category
-
 	wp_insert_term('Content Types', 'category');
 
 	// Rename Default Category to All
-
 	wp_update_term(get_option('default_category'), 'category', array(
-
 			'name' => 'All',
-
 			'slug' => 'all'));
 
 
 
 	/* Loop thru Predefined Categories and create
-
 	Content Categories under Content Types Category */
-
 	foreach($ca_cats as $c){
-
 		wp_insert_term($c, 'category', array(
-
-					'parent' => get_cat_ID('Content Types'),));
-
+					'parent' => get_cat_ID('Content Types'),
+					));
 	}
 
 	// Enable Post Thumbnails
@@ -85,9 +76,27 @@ require_once(CAWebAbsPath. '/functions/ca_custom_nav.php');
        update_option($option, true);
    }
 
-}
 
+}
 add_action('after_setup_theme', 'ca_setup_theme');
+
+function caweb_limit_posts($query){
+	global $wp_query;
+	$vars = array('year', 'monthnum', 'author_name', 'category_name', 'tag', 'paged');
+	$query_vars = $wp_query->query;
+	
+	foreach( $vars as $var){
+		if( isset( $query_vars[$var] ) )
+			unset($query_vars[$var]);
+	}
+	
+	if( empty($query_vars) && (is_archive() || is_category() || is_author() || is_tag() ) )
+		$query->set('posts_per_page', 5);
+	
+	return $query;
+}
+add_action('pre_get_posts', 'caweb_limit_posts', 11);
+
 
 /* Remove Divi Blank Page Template */
 function caweb_remove_page_templates( $templates ) {
@@ -112,14 +121,8 @@ function ca_init(){
 }
 add_action('init', 'ca_init');
 
-function get_caweb_icon_url($url = '', $size = 512,  $blog_id){
-	return sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri);
-}
-add_filter('get_site_icon_url', 'get_caweb_icon_url', 10, 3);
-
 function caweb_admin_head(){
 	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id() );
-
 	printf('<link rel="icon" href="%1$s">', $icon);
 
   /* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
@@ -152,21 +155,12 @@ function ca_theme_enqueue_style() {
 	// Required in order to inherit parent theme style.css
 	wp_enqueue_style(  'parent-style', get_template_directory_uri() . '/style.css', array(), $theme_version );
 
+  // If on the activation page
 	if('wp-activate.php' == $pagenow   ){
 		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.core.css',CAWebUri), array(), $theme_version );
 		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-oceanside.css',CAWebUri), array(), $theme_version );
-	}else{
-		wp_enqueue_style( 'ca-core-styles', sprintf('%1$s/css/cagov.%2$score.css',CAWebUri, $ver) , array(), $theme_version);
-		wp_enqueue_style( 'ca-color-styles', sprintf('%1$s/css/colorscheme-%2$s%3$s.css',CAWebUri, $ver, get_option('ca_site_color_scheme', 'oceanside')) , array(), $theme_version);
 	}
-
-	wp_enqueue_style( 'ca-module-styles', CAWebUri . '/css/modules.css' , array(), $theme_version);
-
-	wp_enqueue_style( 'caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), $theme_version );
-
-	wp_enqueue_style( 'ca-custom-styles', sprintf('%1$s/css/custom.css', CAWebUri, array(), $theme_version ) );
-	wp_enqueue_style( 'ca-version-custom-styles', sprintf('%1$s/css/v%2$dcustom.css', CAWebUri, ca_get_version($post_id) ) , array(), $theme_version);
-
+  
 	// Load editor styling
 	wp_dequeue_style( get_template_directory_uri(). 'css/editor-style.css' );
 	add_editor_style(CAWebUri. '/css/cagov.core.css' );
@@ -224,8 +218,8 @@ function ca_admin_enqueue_scripts($hook){
 		wp_register_script('caweb-admin-scripts',	CAWebUri . '/js/caweb.admin.js', array('jquery'),$theme_version);
 
 		wp_enqueue_script( 'browse-caweb-library' );
-    // Localize the search script with the correct site url
-		wp_localize_script( 'caweb-admin-scripts', 'args', array('changeCheck' => $hook) );
+    // Localize the search script with the site domain, and current page hook
+		wp_localize_script( 'caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook) );
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
@@ -360,79 +354,42 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 
 
 	// Define the style_formats array
-
+	// Each array child is a format with it's own settings
 	$style_formats = array(
-
-		// Each array child is a format with it's own settings
-
 		array(
-
 			'title' => 'Featured Narrative',
-
 			'block' => 'aside',
-
 			'classes' => 'featured-narrative',
-
 			'wrapper' => true,
-
 		),
-
 		array(
-
 			'title' => 'Overstated List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-overstated',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
         			'list-style-type' => 'none'),
-
 		),
-
 		array(
-
 			'title' => 'Standout List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-standout',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
         			'list-style-type' => 'none'),
-
 		),
-
 		array(
-
 			'title' => 'Understated List',
-
 			'selector' => 'ul',
-
 			'inline' => 'ul',
-
 			'classes' => 'list-understated',
-
 			'wrapper' => true,
-
 			'styles' => array(
-
-        			'list-style-type' => 'none'),
-
-
-
+        			'list-style-type' => 'none'
+			),
 		),
-
 	);
 
 	// Insert the array, JSON ENCODED, into 'style_formats'
@@ -463,8 +420,24 @@ function caweb_turn_off_divi_related_videos(){
 </script>
 
 <?php
+
+printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url() )  );
+
+$ver = ca_get_version(get_the_ID());
+$version = 4 == $ver ? 'v4' : '' ;
+printf('<link rel="stylesheet" id="ca-core-styles" href="%1$s/css/cagov.%2$score.css">',  CAWebUri, $version );  
+printf('<link rel="stylesheet" id="ca-color-styles" href="%1$s/css/colorscheme-%2$s%3$s.css">',  CAWebUri, $version , get_option('ca_site_color_scheme', 'oceanside') );
+printf('<link rel="stylesheet" id="ca-module-styles" href="%1$s/css/modules.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="caweb-font-styles" href="%1$s/css/cagov.font-only.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="ca-custom-styles" href="%1$s/css/custom.css">',  CAWebUri );
+printf('<link rel="stylesheet" id="ca-version-custom-styles" href="%1$s/css/v%2$dcustom.css">',  CAWebUri,  $ver );
+    
+if("" !== get_option('ca_custom_css', '') )
+  printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') );
+
 }
-add_action('wp_head','caweb_turn_off_divi_related_videos');
+add_action('wp_head','caweb_turn_off_divi_related_videos', 105);
 
 function wp_ca_body_class( $wp_classes, $extra_classes ) {
   global $post;
@@ -505,13 +478,6 @@ function wp_ca_post_class( $classes ) {
 }
 add_filter( 'post_class', 'wp_ca_post_class', 15 );
 
-add_filter('pre_get_posts', 'caweb_limit_posts', 15);
-function caweb_limit_posts($query){
-    if ($query->is_archive || $query->is_category || $query->is_author || $query->is_tag) {
-        $query->set('posts_per_page', 5);
-    }
-    return $query;
-}
 
 /*	CAWeb Custom Modules */
 add_action( 'et_pagebuilder_module_init', 'caweb_initialize_divi_modules' );
