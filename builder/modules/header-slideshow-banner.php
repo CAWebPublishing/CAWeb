@@ -131,10 +131,6 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
     function slideshow_banner_removal() {
         $version = caweb_get_page_version(get_the_ID());
 
-        if (4 !== $version) {
-            return;
-        }
-
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
         if (empty($module)) : ?>

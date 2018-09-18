@@ -32,6 +32,7 @@ body#tinymce.mce-content-body{
 select#ca_google_trans_display {
     margin-bottom: 10px;
 }
+#custom-js textarea,
 #custom-css textarea{
 	width: 100%;
 	min-height: 700px;
@@ -139,24 +140,28 @@ ul.caweb-icon-menu li:before{
 #addAlertBanner{
 	text-decoration: none;
 }
-#addCSS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
+#addCSS:hover, #addJS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
     cursor: pointer;
 }
-ol#uploadedCSS li p {
-    display: inline;
+ol#uploadedCSS li,
+ol#uploadedJS li {
     cursor: -webkit-grab;
 }
-ol#uploadedCSS li .previewStyle {
+ol#uploadedJS li .preview-js,
+ol#uploadedCSS li .preview-css {
     margin-left: -105px;
 	color: green;
 }
-ol#uploadedCSS li .removeStyle,
-tr.pending-stylesheet td .removeStyle {
+ol#uploadedCSS li .remove-css,
+ol#uploadedJS li .remove-js,
+tr.pending-css td .remove-css,
+tr.pending-js td .remove-js {
     margin-right: 45px;
 	color: red;
 	cursor: pointer
 }
-tr.pending-stylesheet td .removeStyle {
+tr.pending-css td .remove-css,
+tr.pending-js td .remove-js {
   margin-left: -28px;
   margin-right: 22px;
 }

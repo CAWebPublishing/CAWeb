@@ -5,7 +5,7 @@
             <div class="quarter social-links">
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
-					<?php 
+					<?php
               $gtranslator = get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
 
 							if (get_option('ca_utility_home_icon', true)) {
@@ -32,7 +32,7 @@
             <div class="<?= $gtranslator ? 'half' : 'three-quarters' ?> settings-links hidden-print">
                 <ul class="utility-links ">
                   
-					<?php 
+					<?php
 					  for ($i = 1; $i < 4; $i++) {
 					      $url = get_option(sprintf('ca_utility_link_%1$s', $i));
 					      $p = "/<script>[\S\s]*<\/script>|<style>[\S\s]*<\/style>/";
