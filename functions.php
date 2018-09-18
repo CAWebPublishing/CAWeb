@@ -262,7 +262,11 @@ function caweb_wp_head() {
 }
 add_filter('get_site_icon_url', 'caweb_site_icon_url', 10, 3);
 function caweb_site_icon_url($url, $size, $blog_id) {
-    return '';
+    if ( ! is_admin()) {
+        return '';
+    }
+
+    return $url;
 }
 
 add_action('get_header', 'caweb_et_project_get_header');
