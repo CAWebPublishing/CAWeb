@@ -18,12 +18,26 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 ?>
 
-<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >  
+<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
 		// Version 5.0 Specific
 		if (caweb_version_check(5.0, get_the_ID())) {
+
+				// Alerts
+		    $alerts = get_option('caweb_alerts', array());
+
+		    foreach ($alerts as $a => $data) {
+		        if (('inactive' !== $data['status']) && (is_front_page() && "home" == $data['page_display']) || "all" == $data['page_display']) {
+		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
+		                $_SESSION['display_alert_'.$a] = true;
+
+		                printf('<div role="alert" class="alert alert-dismissible alert-banner" style="background-color:%1$s;"><div class="container"><button type="button" class="close caweb-alert-close" data-url="%2$s" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-level"><span class="ca-gov-icon-%3$s" aria-hidden="true"></span>%4$s</span><span class="alert-text">%5$s</span>%6$s</div></div>', $data['color'], admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a), $data['icon'], $data['header'], $data['message'], ! empty($data['button']) && ! empty($data['url']) ? sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '') : '');
+		            }
+		        }
+		    }
+
 		    print '<!-- Location Bar -->';
 		    // Location Bar
 		    require_once(CAWebAbsPath."/ssi/location-bar.html");
@@ -42,7 +56,7 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
     get_template_part('partials/content', 'branding');
 
          ?>
-         
+
          <!-- Include Mobile Controls -->
          <?php require_once(CAWebAbsPath."/ssi/mobile-controls.html");?>
 
@@ -63,22 +77,20 @@ $slideshow_banner = caweb_banner_content_filter($post_content, $ver);
 
 $search = (caweb_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade' : '');
 
-printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s</div>',
+$custom_translate = caweb_version_check(4, get_the_ID()) && 'custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '') ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url(get_option('ca_google_trans_page')), "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '') : '';
+
+printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
        $search, ("" == get_option('ca_google_search_id') ? 'hidden' : ''),
        ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ?
-								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''));
+								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''), $custom_translate);
 
 ?>
 
         </div>
 
-<?php  if ('none' !== get_option('ca_google_trans_display') &&  (caweb_version_check(4, get_the_ID()))): ?>
-
-<div id="google_translate_element" class="hidden-print"></div>
-
-
+<?php  if ((true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')) &&  (caweb_version_check(4, get_the_ID()))): ?>
+<div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
-
 
 <?php ( ! empty($slideshow_banner) ? print $slideshow_banner : print '') ?>
 

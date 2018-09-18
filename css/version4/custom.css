@@ -43,11 +43,14 @@ form#local_form > button.close.close-search {
 
 /* Google Translate Style,
 Search box increased by 18px to match the width of Google Translate */
-div#google_translate_element {
+div#google_translate_element.standard-translate {
     right: 13px;
     position: absolute;
     top: 55px;
   	z-index: 10;
+}
+.caweb-custom-translate{
+		color: white;
 }
 td.gsc-search-button span{
 	display : none;

@@ -6,7 +6,7 @@
               <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php 
-              $gtranslator = get_option('ca_google_trans_enabled');
+              $gtranslator = get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
 
 							if (get_option('ca_utility_home_icon', true)) {
 							    print '<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>';
@@ -56,11 +56,14 @@
                   <?php if (get_option('ca_geo_locator_enabled')): ?>
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
+										<?php if ('custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '')): ?>
+				              <a target="_blank" href="<?= esc_url(get_option('ca_google_trans_page')) ?>"><?= "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '' ?>Translate</a>
+				            <?php endif; ?> 
               </ul>              
             </div> 
-            <?php if (get_option('ca_google_trans_enabled')): ?>
-              <div class="quarter" id="google_translate_element"></div>
-            <?php endif; ?>   
+            <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
+              <div class="quarter standard-translate" id="google_translate_element"></div>
+            <?php endif; ?>						  
         </div>          
     </div>
 </div>
