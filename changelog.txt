@@ -1,3 +1,14 @@
+CAWeb v1.4.1
+March 26, 2018
+- WordPress Thickbox function enabled 
+- Fixed issue with theme checking for updats on every page
+- Fixed issue with empty search results whenever Divi Search Module is used
+- Optimized the order of CSS and JS files
+- Core JavaScript deprecated jQuery functions have been removed
+- Remove default date from Post Detail module
+- Fixed issue with page title not being left aligned
+- Fixed issue with warnings display with GitHub Module when no repos are found
+
 CAWeb v1.4.0
 March 1, 2018
 - New Sacramento colorscheme added
