@@ -181,7 +181,6 @@ function caweb_wp_enqueue_scripts() {
     wp_register_script('cagov-modernizr-extra-script', CAWebUri.'/js/libs/modernizr-extra.min.js', array('jquery'), $theme_version, false);
 
     wp_register_script('cagov-core-script', CAWebUri.'/js/cagov.core.js', array('jquery', 'thickbox'), $theme_version, true);
-    wp_register_script('cagov-navigation-script', CAWebUri.'/js/libs/navigation.js', array('jquery'), $theme_version, true);
     wp_register_script('cagov-google-script', CAWebUri.'/js/libs/google.js', array(), $theme_version, true);
     wp_register_script('cagov-ga-autotracker-script', CAWebUri.'/js/libs/AutoTracker.js', array(), $theme_version, true);
 
@@ -227,7 +226,7 @@ function caweb_wp_head() {
 
 <?php
 
-	printf('<link rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
+	printf('<link alt="Fav Icon" rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
     printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
 
     if ("" !== get_option('ca_custom_css', '')) {
@@ -279,7 +278,7 @@ function caweb_admin_enqueue_scripts($hook) {
 add_action('admin_head', 'caweb_admin_head');
 function caweb_admin_head() {
     $icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id());
-    printf('<link rel="icon" href="%1$s">', $icon);
+    printf('<link alt="Fav Icon" rel="icon" href="%1$s">', $icon);
 
     // This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open
     print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
@@ -339,8 +338,8 @@ function caweb_et_pagebuilder_module_init() {
         }
     }
     if (class_exists('ET_Builder_Module_Settings_Migration')) {
-        include(CAWebAbsPath."/builder/modules/settings/Migration.php");
-        ET_Builder_CAWeb_Module_Settings_Migration::init();
+        //include(CAWebAbsPath."/builder/modules/settings/Migration.php");
+        //ET_Builder_CAWeb_Module_Settings_Migration::init();
     }
 }
 
