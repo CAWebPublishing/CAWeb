@@ -1,3 +1,8 @@
+.sub-nav.open{
+	display: block;
+	max-height: 700px;
+	left: 0;
+}
 /* Search Styles 
  Search using Google API 2.0 */
 input.gsc-input:hover, input.gsc-input:focus {
