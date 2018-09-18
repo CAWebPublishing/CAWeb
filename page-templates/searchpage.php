@@ -47,7 +47,7 @@ get_header(); ?>
 }
   .gssb_c {
 		/*	table-layout: fixed;*/
-		top: 340px !important;
+    top: 340px !important;
 }
 </style>
 

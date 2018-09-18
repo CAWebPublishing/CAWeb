@@ -237,3 +237,8 @@ ol{
 .card-img-bottom {
   border-radius: 0 0 -1px -1px;
 }
+
+/* GitHub Module */
+.et_pb_ca_github.et_pb_module ul li {
+    list-style-type: none;
+}

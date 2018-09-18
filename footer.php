@@ -9,8 +9,12 @@ wp_nav_menu(array(
 wp_footer();
 
 if("" !== get_option('ca_custom_css', '') ? printf('<style id="ca_custom_css">%1$s</style>',  get_option('ca_custom_css') ) : '')
+  
+if( !is_404() ) :
 ?>
 
-<script>
-$(document).ready(function(){var n=$("header"),o=$("#main-content");$(window).on("scroll",function(){n.hasClass("compact")?o.css({"margin-top":o.css("padding-top")}):o.css({"margin-top":0})})});
+<script> 
+$=jQuery.noConflict();$(document).ready(function(){var n=$("header"),o=$("#main-content");$(window).on("scroll",function(){n.hasClass("compact")?o.css({"margin-top":o.css("padding-top")}):o.css({"margin-top":0})})});
 </script>
+
+<?php endif; ?>

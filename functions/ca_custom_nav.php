@@ -57,10 +57,10 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
       $nav_menu = $this->createNavMenu($args);
 
 			// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
-			$homeLink = ( isset($args->home_link) && $args->home_link ? '<li class="nav-item"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
+			$homeLink = ( isset($args->home_link) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
 
-			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) ?
-									'<li class="nav-item"><a href="#" class="first-level-link"><span id="nav-item-search" class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
+			$searchLink = ( isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) && "" !== get_option('ca_google_search_id') ?
+									'<li class="nav-item nav-item-search"><a href="#" class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '' );
 
 			$nav_menu = sprintf('<nav id="navigation" class=" ca_wp_container main-navigation %1$s hidden-print">
 								<ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s</ul></nav>',
@@ -138,22 +138,30 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
               $sub_nav_items .= sprintf('<li class="%1$s%2$s"%3$s%4$s><a href="%5$s"%6$s>%7$s</a></li>',
                                 implode(" ", $subitem->classes),(in_array('current-menu-item', $subitem->classes) ? ' active ' : ''),
                                 (!empty($subitem->attr_title) ? sprintf(' title="%1$s" ', $subitem->attr_title) : ''),
-																(!empty($subitem->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->url,
+                                        (!empty($subitem->xfn) ? sprintf(' rel="%1$s" ', $subitem->xfn) : ''), $subitem->url,
                                 (!empty($subitem->target) ? sprintf(' target="%1$s" ', $subitem->target) : ''),$subitem->title);
             }
 
           $sub_nav = sprintf('<ul class="description">%1$s</ul>', $sub_nav_items) ;
         } // End of sub-nav
+	
+        $item_nav_image = '';
+        if( !empty($item_meta['_caweb_menu_icon'][0]) ){
+          $item_nav_image =  get_icon_span($item_meta['_caweb_menu_icon'][0], array(), array('widget_nav_menu_icon') )  ;
+        }else if( !empty($item_meta['_caweb_menu_image'][0]) ){
+          $item_nav_image = sprintf('<img class="widget_nav_menu_img" src="%1$s"/>', $item_meta['_caweb_menu_image'][0]);
+        }
 
-        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a href="%5$s"%6$s%7$s>%8$s</a>%9$s</li>',
+        $widget_nav_menu .= sprintf('<li class="nav-item %1$s%2$s"%3$s%4$s><a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
 										(!empty($item->xfn) ? sprintf(' rel="%1$s" ', $item->xfn) : ''),
-										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''),
+										(!empty($item->attr_title) ? sprintf(' title="%1$s" ', $item->attr_title) : ''), 
+                     (!empty($item_nav_image) ? 'class="widget_nav_menu_a"' : ''),
                     $item->url, (!empty($item->target) ? sprintf(' target="%1$s" ', $item->target) : ''),
-                                    (0 < $childCount ? ' class="toggle" ' : '') , $item->title, $sub_nav);
+                    (0 < $childCount ? ' class="toggle" ' : ''), $item_nav_image , 
+                      sprintf('<p class="widget_nav_menu_title">%1$s</p>',$item->title) );
       }
     }
-
 
     return sprintf('<ul class="accordion-list">%1$s</ul>', $widget_nav_menu);
   }
@@ -180,7 +188,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? sprintf('%1$s ', get_icon_span($icon) ) : get_blank_icon_span() );
+				$icon = (!empty($icon) ? get_icon_span($icon) : get_blank_icon_span() );
 				// Create Link
 				$nav_item .= sprintf('<li class="nav-item %1$s%2$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s%8$s</a>',
 										implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
@@ -251,7 +259,7 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
 
 				// Get icon if present
 				$icon = $item_meta['_caweb_menu_icon'][0];
-				$icon = (!empty($icon) ? sprintf('%1$s ', get_icon_span($icon)) : '' );
+				$icon = (!empty($icon) ? get_icon_span($icon) : '' );
 
 				// Get desc if present
 				$desc= ("" != $item->description  ? sprintf('<div class="link-description">%1$s</div>',$item->description)  : '&nbsp;');

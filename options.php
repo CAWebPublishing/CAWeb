@@ -3,9 +3,6 @@
 // Administration Menu Setup
 function menu_setup(){
   global $submenu;
-  // Not Supported
-  unset($submenu['themes.php'][6]); // Customize link
-  unset($submenu['themes.php'][20]); // Background link
 
   // Add CAWeb Options
 	add_menu_page( 'CAWeb Options', 'CAWeb Options', 'manage_options', 'ca_options',
@@ -15,7 +12,7 @@ function menu_setup(){
   // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
 	remove_submenu_page( 'themes.php', 'nav-menus.php');
   add_submenu_page( 'ca_options','Navigation', 'Navigation','manage_options', 'nav-menus.php', '' );
-
+  
   // If user is not a Network Admin
 	if( is_multisite() &&  ! current_user_can('manage_network_options')){
     // Remove Themes, Customize and Background option under Appearance menu
@@ -34,46 +31,40 @@ function menu_setup(){
 		remove_submenu_page('et_divi_options','et_divi_role_editor');
 	}
 
+    
+
   if(!is_multisite() || current_user_can('manage_network_options') ){
     	add_submenu_page( 'ca_options','CAWeb Options', 'GitHub API Key','manage_options', 'caweb_api', 'api_menu_option_setup' );
   }
 
 }
-add_action( 'admin_menu', 'menu_setup' );
-
+add_action( 'admin_menu', 'menu_setup', 15 );
+  
 // If direct access to certain menus is accessed
 // redirect to admin page
 function redirect_themes_page() {
 	global $pagenow;
 
-	if( ( is_multisite() && ! current_user_can('manage_network_options') ) || 'customize.php' == $pagenow ){
+	if( ( is_multisite() && ! current_user_can('manage_network_options') ) ){
 		wp_redirect(get_admin_url());
 		exit;
 	}
 }
-add_action( 'load-customize.php', 'redirect_themes_page' );
 add_action( 'load-themes.php', 'redirect_themes_page' );
 add_action( 'load-tools.php', 'redirect_themes_page' );
 
 
-// Administration Initialization
-function admin_ca_init(){
-
-
-
-}
-add_action( 'admin_init', 'admin_ca_init' );
-
 // Setup CAWeb Options Menu
 function menu_option_setup(){
+  
 	// The actual menu file
 	get_template_part('partials/content','options');
 
 }
 
+
 function save_caweb_options($values = array()){
-  $site_options = get_ca_site_options();
- 	$social_options = get_ca_social_extra_options();
+  $site_options =  get_all_ca_site_options() ;
 
   foreach($site_options as $opt){
    	if( !array_key_exists($opt, $values) )
@@ -86,6 +77,8 @@ function save_caweb_options($values = array()){
   unset($values['caweb_password']);
 
   foreach($values as $opt => $val){
+    	if("on" == $val)
+        $val = true;
     	update_option($opt, $val);
   }
 
@@ -101,6 +94,7 @@ function api_menu_option_setup(){
 <form id="ca-options-form" action="<?= admin_url('admin.php?page=caweb_api'); ?>" method="POST">
   <?php
   if( isset($_POST['caweb_api_options_submit']) ){
+    update_site_option('dev', $_POST);
   	save_caweb_api_options($_POST);
   }
   ?>
@@ -117,9 +111,6 @@ function api_menu_option_setup(){
   </div>
   <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
  </form>
-  
-  
-  
 
 <?php
 }
@@ -192,7 +183,6 @@ function get_ca_social_extra_options(){
 		$tmp[] = $social . '_footer';
 	}
 	return $tmp;
-
 }
 
 /*
