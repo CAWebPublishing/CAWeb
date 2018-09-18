@@ -115,7 +115,9 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         $scroll_bar_text = $this->props['scroll_bar_text'];
         $scroll_bar_icon = $this->props['font_icon'];
 
-        $this->add_classname('header-single-banner');
+        //	$this->add_classname('header-single-banner');
+        $this->add_classname('header-slideshow-banner');
+
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $content = $this->content;
@@ -127,41 +129,52 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
-        if ( ! caweb_version_check(4, get_the_ID())) {
+        $version = caweb_get_page_version(get_the_ID());
+
+        if (4 !== $version) {
             return;
         }
 
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
-        if (empty($module)) {
-            ?>
+        if (empty($module)) : ?>
 					<script>
 						document.body.classList.remove('primary');
 					</script>
-				<?php
-        } else {
-            ?>
-           <script>
-				var banner = document.getElementById('et_pb_ca_fullwidth_banner');
-				var column = banner.parentNode;
+				<?php else : ?>
+					<script>
+					(function( $ ) {
+							 "use strict";
+							 
+							 var section = $('#et_pb_ca_fullwidth_banner').parent();
+							 var banner = section.find('#et_pb_ca_fullwidth_banner');
+							 
+							 $(document).ready(function () {
+								 $(section).remove();
+								 
+								 <?php if (4 == $version) : ?>
+								 $('#header').append(banner);
+								 <?php else : ?>
+								 $('#header').after(banner);
+								 <?php endif; ?>
+								 
+								 // calculate top of screen on next repaint
+								 window.setTimeout(function () {
+									 var MAXHEIGHT = <?= 4 == $version ? 450 : 1080 ?>;
+									 var headerTop = banner.offset().top;
+									 var windowHeight = $(window).height();
+									 var height = windowHeight - headerTop;
+									 height = (height > MAXHEIGHT)
+									 ? MAXHEIGHT
+									 : height;
+									 // fill up the remaining heaight of this device
+									 banner.css({'height': height});
+								 }, 250)
+							});
 
-					if(1 == column.childElementCount){
-						var row = column.parentNode;
-						row.removeChild(column);
-						if(0 == row.childElementCount){
-							if(1 == row.parentNode.childElementCount ){
-								row.parentNode.remove();
-							}else{
-								row.parentNode.removeChild(row);
-							}
-						}
-					}else{
-						detail.removeChild(banner);
-					}
-
-			</script>
-            <?php
-        }
+					 })(jQuery);
+					</script>
+				<?php endif;
     }
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;

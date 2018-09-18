@@ -6,11 +6,11 @@
 	$version = Specific Page Template Version  returns true/false
 
  */
-function caweb_version_check($version, $post_id = -1) {
+function caweb_version_check($version = 5, $post_id = -1) {
     $result = ($version == get_option('ca_site_version', 5) ? true : false);
 
     if (-1 < $post_id) {
-        $result = ($version == caweb_get_version($post_id) ? true : false);
+        $result = ($version == caweb_get_page_version($post_id) ? true : false);
     }
 
     return $result;
@@ -20,7 +20,7 @@ function caweb_version_check($version, $post_id = -1) {
 	if post_id is passed will return version
 	used by the page template
  */
-function caweb_get_version($post_id = -1) {
+function caweb_get_page_version($post_id = -1) {
     switch (get_page_template_slug($post_id)) {
 	case "page-templates/page-template-v4.php":
 		$result = 4;
@@ -160,6 +160,42 @@ function caweb_template_colors() {
 
     return $color;
 }
+
+function caweb_tiny_mce_settings($settings = array()) {
+    $styles = array();
+    $caweb_tiny_mce_init = apply_filters('tiny_mce_before_init', array(), array());
+    $caweb_tiny_mce_init['style_formats'] = json_decode($caweb_tiny_mce_init['style_formats']);
+
+    foreach ($caweb_tiny_mce_init['style_formats'] as $i => $style) {
+        $styles[ str_replace(' ', '', strtolower($style->name)) ] = $style;
+    }
+
+    $css = array(
+        includes_url('/css/dashicons.min.css'),
+        includes_url('/js/tinymce/skins/wordpress/wp-content.css'),
+        sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())),
+        sprintf('%1$s/css/admin_custom.css', CAWebUri)
+    );
+
+    $defaults_settings = array(
+        'media_buttons' => false,
+        'quicktags' => false,
+        'tinymce' => array(
+            'content_css' => implode(',', $css),
+            'skin' => 'lightgray',
+            'elementpath' => true,
+            'entity_encoding' => 'raw',
+            'entities' => '38, amp, 60, lt, 62, gt, 34, quot, 39, apos',
+            'plugins' => "charmap,colorpicker,hr,lists,paste,tabfocus,textcolor,wordpress,wpautoresize,wpemoji,wpgallery,wplink,wptextpattern",
+            'toolbar1' => 'formatselect,bold,italic,underline,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,wp_more,wp_adv',
+            'toolbar2' => 'styleselect,strikethrough,hr,fontselect,fontsizeselect,forecolor,backcolor,pastetext,copy,subscript,superscript,charmap,outdent,indent,undo,redo,wp_help',
+            'style_formats' =>  $styles
+        ),
+    );
+
+    return is_array($settings) ? array_merge($defaults_settings, $settings) : $defaults_settings;
+}
+
 // Validates if the $checkmoney parameter is a valid monetary value
 if ( ! function_exists('caweb_is_money')) {
     function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n') {
@@ -335,8 +371,11 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
 }
 
 function caweb_banner_content_filter($content, $ver = 5) {
-    $module = (4 == $ver ? caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner') : array());
+    $module = caweb_get_shortcode_from_content($content, 'et_pb_ca_fullwidth_banner');
 
+    if (4 !== $ver) {
+        return;
+    }
     // Filter the Header Slideshow Banner
     if ( ! empty($module)) {
         $slides = caweb_get_shortcode_from_content($module->content, 'et_pb_ca_fullwidth_banner_item', true);
@@ -534,7 +573,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
         $thumbnail = preg_replace(array('/style=\"([\w\d\s]*)\"/'), "", $thumbnail);
     }
 
-    $new_img .= sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
+    $new_img = sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
 
     $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);
 
