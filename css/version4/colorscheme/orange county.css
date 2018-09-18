@@ -1,37 +1,37 @@
 body {
-    background: #5d5d5d url("../images/system/pasorobles/body-background.png") repeat-y 50% 0;
-    background: -moz-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
-    background: -webkit-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
-    background: -o-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
-    background: -ms-linear-gradient(left, #5d5d5d 0, #ccc 50%, #5d5d5d 100%);
-    background: linear-gradient(to right, #5d5d5d 0, #ccc 50%, #5d5d5d 100%)
+    background: #484439 url("../../../images/system/orangecounty/body-background.png") repeat-y 50% 0;
+    background: -moz-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
+    background: -webkit-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
+    background: -o-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
+    background: -ms-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
+    background: linear-gradient(to right, #484439 0, #f7d7a6 50%, #484439 100%)
 }
 @media (max-width: 767px) {
     body {
-        background: #5d5d5d
+        background: #484439
     }
 }
 .main-content,
 .global-header,
 .global-footer {
-    border-left: 7px solid #5d5d5d;
-    border-right: 7px solid #5d5d5d
+    border-left: 7px solid #484439;
+    border-right: 7px solid #484439
 }
 .primary .header-decoration {
-    background: url("../images/system/pasorobles/ribbon-home.png") no-repeat 66.6667% 0
+    background: url("../../../images/system/orangecounty/ribbon-home.png") no-repeat 66.6667% 0
 }
 .primary.two-column .header-decoration {
-    background: url("../images/system/pasorobles/ribbon-two-col.png") no-repeat 66.6667% 0
+    background: url("../../../images/system/orangecounty/ribbon-two-col.png") no-repeat 66.6667% 0
 }
 .primary.two-column .main-content {
-    background: url("../images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%, url("../images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0;
+    background: url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%, url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0;
     background-color: #fff
 }
 .primary .main-content {
-    background: #fff url("../images/system/pasorobles/footer-bg.png") no-repeat 66.6667% 100%
+    background: #fff url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%
 }
 .two-column .main-content {
-    background: #fff url("../images/system/pasorobles/2column-bg.png") repeat-y 66.6667% 0
+    background: #fff url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0
 }
 @media (max-width: 991px) {
     .two-column .main-content,
@@ -54,21 +54,21 @@ body {
 
 @media (max-width: 767px) {
     .global-header {
-        background: #5a5a5a;
-        background: rgba(90, 90, 90, 0.85)
+        background: #483723;
+        background: rgba(72, 55, 35, 0.85)
     }
 }
 .mobile-controls {
-    background: #525252
+    background: #3e2f1e
 }
 .mobile-control {
     color: #fff
 }
 .top-level-nav>li {
-    background: #525252
+    background: #3e2f1e
 }
 .top-level-nav>li .sub-nav .second-level-nav>li {
-    background: #4d4d4d
+    background: #372a1b
 }
 .top-level-nav>li .sub-nav .second-level-nav>li .second-level-link {
     color: #fff
@@ -80,8 +80,8 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation.dropdown .sub-nav {
-        background: #5a5a5a;
-        background: rgba(90, 90, 90, 0.75);
+        background: #483723;
+        background: rgba(72, 55, 35, 0.75);
         border-color: #fbad23
     }
     .main-navigation.dropdown .sub-nav ul>li {
@@ -90,7 +90,7 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation.megadropdown .top-level-nav .sub-nav ul {
-        background: #f5f5f5
+        background: #f1ede4
     }
     .main-navigation.megadropdown .top-level-nav .sub-nav ul:before,
     .main-navigation.megadropdown .top-level-nav .sub-nav ul:after {
@@ -110,12 +110,12 @@ body {
         display: block
     }
     .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-        background-image: url("../images/system/pasorobles/ribbon.png")
+        background-image: url("../../../images/system/orangecounty/ribbon.png")
     }
 }
 @media (max-width: 767px) {
     .global-header .navigation-search.oc-menu {
-        background: #5a5a5a
+        background: #483723
     }
     .navigation-search.oc-menu {
         background: #fff
@@ -124,12 +124,12 @@ body {
         display: none
     }
     .top-level-nav .toggle-sub-nav {
-        box-shadow: -5px 0 3px #4d4d4d
+        box-shadow: -5px 0 3px #372a1b
     }
 }
 .main-navigation {
-    background: #5a5a5a;
-    background: rgba(90, 90, 90, 0.85);
+    background: #483723;
+    background: rgba(72, 55, 35, 0.85);
     border-bottom: 3px solid #fbad23
 }
 .main-navigation>ul>li a.first-level-link {
@@ -165,7 +165,7 @@ body {
 }
 @media (min-width: 768px) {
     .main-navigation .sub-nav {
-        background: transparent url("../images/system/pasorobles/megadropdown-ribbon.png") no-repeat 70.3125% 100%
+        background: transparent url("../../../images/system/orangecounty/megadropdown-ribbon.png") no-repeat 70.3125% 100%
     }
 }
 @media (max-width: 991px) {
@@ -174,8 +174,8 @@ body {
     }
 }
 .search-container {
-    background: #5a5a5a;
-    background: rgba(90, 90, 90, 0.85)
+    background: #483723;
+    background: rgba(72, 55, 35, 0.85)
 }
 .search-container .search-textfield {
     background-color: rgba(255, 255, 255, 0.8)
@@ -191,7 +191,7 @@ body {
     text-shadow: 0 0 .2em #fbad23, 0 0 .2em #fbad23
 }
 .global-footer {
-    background: #5a5a5a;
+    background: #483723;
     color: #fff
 }
 .global-footer ul li a {
@@ -199,36 +199,36 @@ body {
     color: #fff
 }
 h1 span[class^="ca-gov-icon-"]:first-child {
-    color: #9a0000
+    color: #c6720f
 }
 .panel-default {
-    border-color: #670000
+    border-color: #97570b
 }
 .panel-default>.panel-heading {
     color: inherit;
-    background-color: #f5b889;
-    border-color: #670000
+    background-color: #f7d7a6;
+    border-color: #97570b
 }
 .panel-default>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #670000
+    border-top-color: #97570b
 }
 .panel-default>.panel-heading .badge {
-    color: #f5b889;
+    color: #f7d7a6;
     background-color: inherit
 }
 .panel-default>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #670000
+    border-bottom-color: #97570b
 }
 .panel-default .panel-heading h2 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h3 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h4 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h5 span[class^="ca-gov-icon-"] {
-    color: #5a5a5a
+    color: #483723
 }
 .panel-default .panel-heading .options .btn-default {
     color: #000;
-    background-color: #fceadc;
-    border-color: #670000
+    background-color: #fdf3e4;
+    border-color: #97570b
 }
 .panel-default .panel-heading .options .btn-default:hover,
 .panel-default .panel-heading .options .btn-default:focus,
@@ -236,8 +236,8 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 .panel-default .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-default .panel-heading .options .btn-default {
     color: #000;
-    background-color: #f8cdad;
-    border-color: #2a0000
+    background-color: #f8deb6;
+    border-color: #5e3607
 }
 .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.active,
@@ -259,11 +259,11 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.disabled.active,
 .panel-default .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
-    background-color: #fceadc;
-    border-color: #670000
+    background-color: #fdf3e4;
+    border-color: #97570b
 }
 .panel-default .panel-heading .options .btn-default .badge {
-    color: #fceadc;
+    color: #fdf3e4;
     background-color: #000
 }
 .panel-default .panel-heading .options .btn-default:hover,
@@ -272,8 +272,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 .panel-default .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-default .panel-heading .options .btn-default {
     color: #000;
-    background-color: #f8cdad;
-    border-color: #2a0000
+    background-color: #f8deb6;
+    border-color: #5e3607
 }
 .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.active,
@@ -295,29 +295,29 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.disabled.active,
 .panel-default .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
-    background-color: #fceadc;
-    border-color: #670000
+    background-color: #fdf3e4;
+    border-color: #97570b
 }
 .panel-default .panel-body {
-    background: #f5f5f5
+    background: #f1ede4
 }
 .panel-overstated {
-    border-color: #670000
+    border-color: #97570b
 }
 .panel-overstated>.panel-heading {
     color: #fff;
-    background-color: #9a0000;
-    border-color: #670000
+    background-color: #c6720f;
+    border-color: #97570b
 }
 .panel-overstated>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #670000
+    border-top-color: #97570b
 }
 .panel-overstated>.panel-heading .badge {
-    color: #9a0000;
+    color: #c6720f;
     background-color: #fff
 }
 .panel-overstated>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #670000
+    border-bottom-color: #97570b
 }
 .panel-overstated .panel-heading {
     border-bottom-width: 5px;
@@ -331,8 +331,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 }
 .panel-overstated .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #b84d4d;
-    border-color: #670000
+    background-color: #d79c57;
+    border-color: #97570b
 }
 .panel-overstated .panel-heading .options .btn-default:hover,
 .panel-overstated .panel-heading .options .btn-default:focus,
@@ -340,8 +340,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 .panel-overstated .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-overstated .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #963c3c;
-    border-color: #2a0000
+    background-color: #cb8430;
+    border-color: #5e3607
 }
 .panel-overstated .panel-heading .options .btn-default:active,
 .panel-overstated .panel-heading .options .btn-default.active,
@@ -363,11 +363,11 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default:active
 .panel-overstated .panel-heading .options .btn-default.disabled.active,
 .panel-overstated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active {
-    background-color: #b84d4d;
-    border-color: #670000
+    background-color: #d79c57;
+    border-color: #97570b
 }
 .panel-overstated .panel-heading .options .btn-default .badge {
-    color: #b84d4d;
+    color: #d79c57;
     background-color: #fff
 }
 .panel-overstated .panel-heading .options .btn-default:hover,
@@ -376,8 +376,8 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-overstated .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-overstated .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #963c3c;
-    border-color: #2a0000
+    background-color: #cb8430;
+    border-color: #5e3607
 }
 .panel-overstated .panel-heading .options .btn-default:active,
 .panel-overstated .panel-heading .options .btn-default.active,
@@ -399,25 +399,25 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default:active
 .panel-overstated .panel-heading .options .btn-default.disabled.active,
 .panel-overstated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active {
-    background-color: #b84d4d;
-    border-color: #670000
+    background-color: #d79c57;
+    border-color: #97570b
 }
 .panel-overstated .panel-body {
-    background: #f5f5f5
+    background: #f1ede4
 }
 .panel-understated {
     border-color: #ccc
 }
 .panel-understated>.panel-heading {
     color: inherit;
-    background-color: #f5f5f5;
+    background-color: #f1ede4;
     border-color: #ccc
 }
 .panel-understated>.panel-heading+.panel-collapse>.panel-body {
     border-top-color: #ccc
 }
 .panel-understated>.panel-heading .badge {
-    color: #f5f5f5;
+    color: #f1ede4;
     background-color: inherit
 }
 .panel-understated>.panel-footer+.panel-collapse>.panel-body {
@@ -431,11 +431,11 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-understated .panel-heading h3 span[class^="ca-gov-icon-"],
 .panel-understated .panel-heading h4 span[class^="ca-gov-icon-"],
 .panel-understated .panel-heading h5 span[class^="ca-gov-icon-"] {
-    color: #5a5a5a
+    color: #483723
 }
 .panel-understated .panel-heading .options .btn-default {
     color: #000;
-    background-color: #fcfcfc;
+    background-color: #fbfaf7;
     border-color: #ccc
 }
 .panel-understated .panel-heading .options .btn-default:hover,
@@ -444,7 +444,7 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-understated .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-understated .panel-heading .options .btn-default {
     color: #000;
-    background-color: #e3e3e3;
+    background-color: #e9e3d5;
     border-color: #adadad
 }
 .panel-understated .panel-heading .options .btn-default:active,
@@ -467,11 +467,11 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default:activ
 .panel-understated .panel-heading .options .btn-default.disabled.active,
 .panel-understated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-understated .panel-heading .options .btn-default.active {
-    background-color: #fcfcfc;
+    background-color: #fbfaf7;
     border-color: #ccc
 }
 .panel-understated .panel-heading .options .btn-default .badge {
-    color: #fcfcfc;
+    color: #fbfaf7;
     background-color: #000
 }
 .panel-understated .panel-heading .options .btn-default:hover,
@@ -480,7 +480,7 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 .panel-understated .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-understated .panel-heading .options .btn-default {
     color: #000;
-    background-color: #e3e3e3;
+    background-color: #e9e3d5;
     border-color: #adadad
 }
 .panel-understated .panel-heading .options .btn-default:active,
@@ -503,25 +503,25 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default:activ
 .panel-understated .panel-heading .options .btn-default.disabled.active,
 .panel-understated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-understated .panel-heading .options .btn-default.active {
-    background-color: #fcfcfc;
+    background-color: #fbfaf7;
     border-color: #ccc
 }
 .panel-understated .panel-body {
-    background: #f5f5f5
+    background: #f1ede4
 }
 .panel-standout {
     border-color: #ccc
 }
 .panel-standout>.panel-heading {
     color: #fff;
-    background-color: #5a5a5a;
+    background-color: #483723;
     border-color: #fbad23
 }
 .panel-standout>.panel-heading+.panel-collapse>.panel-body {
     border-top-color: #ccc
 }
 .panel-standout>.panel-heading .badge {
-    color: #5a5a5a;
+    color: #483723;
     background-color: #fff
 }
 .panel-standout>.panel-footer+.panel-collapse>.panel-body {
@@ -539,8 +539,8 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 }
 .panel-standout .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #8c8c8c;
-    border-color: #4d4d4d
+    background-color: #7f7365;
+    border-color: #372a1b
 }
 .panel-standout .panel-heading .options .btn-default:hover,
 .panel-standout .panel-heading .options .btn-default:focus,
@@ -548,8 +548,8 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 .panel-standout .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-standout .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #727272;
-    border-color: #2f2f2f
+    background-color: #63594e;
+    border-color: #0e0a07
 }
 .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.active,
@@ -571,11 +571,11 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.disabled.active,
 .panel-standout .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
-    background-color: #8c8c8c;
-    border-color: #4d4d4d
+    background-color: #7f7365;
+    border-color: #372a1b
 }
 .panel-standout .panel-heading .options .btn-default .badge {
-    color: #8c8c8c;
+    color: #7f7365;
     background-color: #fff
 }
 .panel-standout .panel-heading .options .btn-default:hover,
@@ -584,8 +584,8 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
 .panel-standout .panel-heading .options .btn-default.active,
 .open>.dropdown-toggle.panel-standout .panel-heading .options .btn-default {
     color: #fff;
-    background-color: #727272;
-    border-color: #2f2f2f
+    background-color: #63594e;
+    border-color: #0e0a07
 }
 .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.active,
@@ -607,22 +607,22 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.disabled.active,
 .panel-standout .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
-    background-color: #8c8c8c;
-    border-color: #4d4d4d
+    background-color: #7f7365;
+    border-color: #372a1b
 }
 .panel-standout .panel-body {
-    background: #f5f5f5
+    background: #f1ede4
 }
 .panel-standout.highlight .panel-heading .triangle {
-    background: url("../images/system/pasorobles/panel-standout-triangle.png") no-repeat
+    background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat
 }
 .main-secondary .panel-default {
-    border-color: #670000
+    border-color: #97570b
 }
 .main-secondary .panel-default .panel-heading {
-    background: #ccc;
-    border-top: 2px solid #5a5a5a;
-    border-bottom: 2px solid #5a5a5a;
+    background: #f6e7cc;
+    border-top: 2px solid #483723;
+    border-bottom: 2px solid #483723;
     color: inherit
 }
 .main-secondary .panel-default .panel-heading h2,
@@ -635,31 +635,31 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
 .main-secondary .panel-default .panel-heading h3 span[class^="ca-gov-icon-"],
 .main-secondary .panel-default .panel-heading h4 span[class^="ca-gov-icon-"],
 .main-secondary .panel-default .panel-heading h5 span[class^="ca-gov-icon-"] {
-    color: #5a5a5a
+    color: #483723
 }
 .panel.first .panel-body {
-    background: -moz-linear-gradient(top, rgba(204, 204, 204, 0.9) 0, rgba(204, 204, 204, 0) 100%);
-    background: -webkit-linear-gradient(top, rgba(204, 204, 204, 0.9) 0, rgba(204, 204, 204, 0) 100%);
-    background: -o-linear-gradient(top, rgba(204, 204, 204, 0.9) 0, rgba(204, 204, 204, 0) 100%);
-    background: -ms-linear-gradient(top, rgba(204, 204, 204, 0.9) 0, rgba(204, 204, 204, 0) 100%);
-    background: linear-gradient(to bottom, rgba(204, 204, 204, 0.9) 0, rgba(204, 204, 204, 0) 100%)
+    background: -moz-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
+    background: -webkit-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
+    background: -o-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
+    background: -ms-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
+    background: linear-gradient(to bottom, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%)
 }
 .published {
     color: #777
 }
 figure {
-    background-color: #f5f5f5;
-    border-color: #ccc
+    background-color: #f1ede4;
+    border-color: #f6e7cc
 }
 .main-secondary .nav-tabs {
-    background: #5a5a5a;
+    background: #483723;
     border-bottom-color: #fbad23
 }
 .main-secondary .nav-tabs>li>a {
     color: #fff
 }
 .main-secondary .nav-tabs>li>a:hover {
-    color: #ccc
+    color: #f6e7cc
 }
 .main-secondary .nav-tabs>li.active>a,
 .main-secondary .nav-tabs>li.active>a:visited,
@@ -674,10 +674,10 @@ figure {
 .main-secondary .nav-tabs>li.active>a:after,
 .main-secondary .nav-tabs>li.active>a:visited:after,
 .main-secondary .nav-tabs>li.active>a:focus:after {
-    background: url("../images/system/pasorobles/panel-standout-triangle.png") no-repeat
+    background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat
 }
 .location.mini [class^="ca-gov-icon"] {
-    background: #5a5a5a;
+    background: #483723;
     color: #fff
 }
 /* -----------------------------------------
@@ -706,18 +706,18 @@ figure {
   color: #000000;
 }
 .card-understated .card-header {
-	background-color: #f5f5f5;
+	background-color: #f1ede4;
   border-color: #ccc;
   border-bottom: 1px solid #ccc;
 }
 .card-understated .card-footer {
   border-top: 1px solid #ccc;
-  background-color: #f5f5f5;
+  background-color: #f1ede4;
   border-color: #ccc;
 }
 .card-overstated {
   background-color: #fff;
-  border: 1px solid #670000;
+  border: 1px solid #97570b;
   color: #000000;
 }
 .card-overstated a:not(.btn) {
@@ -736,18 +736,16 @@ figure {
   outline-offset: -2px;
 }
 .card-overstated .card-header {
-  border-bottom: 1px solid #670000;
-  background-color: #9a0000;
-	color: #fff;
+  border-bottom: 1px solid #97570b;
+  background-color: #97570b;
 }
 .card-overstated .card-footer {
-  border-top: 1px solid #670000;
-  background-color: #9a0000;
-  color: #fff;
+  border-top: 1px solid #97570b;
+  background-color: #97570b;
 }
 .card-standout {
-  background-color: #5a5a5a;
-  border: 1px solid #ccc;
+  background-color: #fff;
+  border: 1px solid #483723;
   color: initial;
 }
 .card-standout .card-title,
@@ -770,10 +768,10 @@ figure {
   outline-offset: -2px;
 }
 .card-standout .card-header {
-  border-bottom: 1px solid #ccc;
-  background-color: #5a5a5a;
+  border-bottom: 1px solid #483723;
+  background-color: #483723;
 }
 .card-standout .card-footer {
-  border-top: 1px solid #ccc;
-  background-color: #5a5a5a;
+  border-top: 1px solid #483723;
+  background-color: #483723;
 }

@@ -15,50 +15,68 @@ $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type
 $('input[type="button"]').click(function(e){changeMade = true; });
 $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 
-    $('.caweb-nav-tab').click(function() {
-      	var tabs = document.getElementsByClassName('caweb-nav-tab');
-      	var selected_tab = this.getAttribute("name");
+$('.caweb-nav-tab').click(function() {
+	var tabs = document.getElementsByClassName('caweb-nav-tab');
+	var selected_tab = this.getAttribute("name");
       
-        for (i = 0; i < tabs.length; i++) {
-           if( selected_tab !== tabs[i].getAttribute("name") ){
-              tabs[i].classList.remove("nav-tab-active");
-      				document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
-           }else{             
-              tabs[i].classList.add("nav-tab-active");
-             	document.getElementById(selected_tab).classList.remove('hidden');
-           }
-         }
+	for (i = 0; i < tabs.length; i++) {
+		if( selected_tab !== tabs[i].getAttribute("name") ){
+			tabs[i].classList.remove("nav-tab-active");
+      		document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
+		}else{             
+			tabs[i].classList.add("nav-tab-active");
+            document.getElementById(selected_tab).classList.remove('hidden');
+        }
+    }
       
-			 document.getElementById('tab_selected').value = selected_tab;
-    });
+	document.getElementById('tab_selected').value = selected_tab;
+ });
 
-    $('#ca_site_version').change(function() {
-      var version = this.options[this.selectedIndex].value;
-       var extra_options = document.getElementsByClassName("extra");
-       var base_options = document.getElementsByClassName("base");
-       var base = '';
-    		var front_search_option = $('#general table:first tr:nth-child(6)');
-      
-       for (var i = 0; i < extra_options.length; i++) {   
-         if (version >= 5.0) {
+$('#ca_site_version').change(function() {
+	var version = this.options[this.selectedIndex].value;
+	var extra_options = document.getElementsByClassName("extra");
+	var base_options = document.getElementsByClassName("base");
+	var front_search_option = $('#general table:first tr:nth-child(6)');
+	var color_scheme_picker = $('#ca_site_color_scheme')[0];
+	var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+	var resetColor = false
+	  
+	for (var i = 0; i < extra_options.length; i++) {   
+		if (version >= 5.0) {
            extra_options[i].classList.remove("hidden");
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.add("hidden");
            }
-           
+		   
+           // if theres no Google Search ID 
            if( !$('#ca_google_search_id').val().trim() ){
              front_search_option.addClass('hidden');
            }else{
              front_search_option.removeClass('hidden');             
            }
+		   
          } else {
+			
            extra_options[i].classList.add("hidden");
+		   
+		   if( extra_options[i].value == color && extra_options[i].classList.contains('extra'))
+				resetColor = true;
+				
            for (var j = 0; j < base_options.length; j++) {
              base_options[j].classList.remove("hidden");
            }
          }
     
        }
+	   
+	   if(resetColor){
+		   for (var i = 0; i < color_scheme_picker.options.length; i++) {  
+				if(  !color_scheme_picker.options[i].classList.contains('extra')  ){
+					color_scheme_picker.selectedIndex = i;
+					break;
+				}
+		   }
+		}
     });
 
    $('#resetIcon').click(function() {
@@ -71,13 +89,80 @@ $('#ca-options-form').submit(function(){ changeMade = false; this.submit(); });
 $('#ca_google_search_id').on('input',function(e){ 
   var front_search_option = $('#general table:first tr:nth-child(6)');
   var site_version = $('#ca_site_version option:selected').val();
-  
+  // if theres no Google Search ID 
   if( !this.value.trim() ){
     front_search_option.addClass('hidden');
   }else if(5 <= site_version){
     front_search_option.removeClass('hidden');
   }
 });  
+
+$('.removeStyle').click(function(e){
+  e.preventDefault();
+	var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
+	
+	if (r == true) {
+		changeMade = true; 
+		this.parentNode.remove();
+	}
+});
+
+$( "#uploadedCSS" ).sortable();
+$( "#uploadedCSS" ).disableSelection();
+	
+$('#addCSS').click(function(e){
+	var ext_css_table = $('#custom-css table:first');
+	var rowCount = ext_css_table.children().children().length;
+	var row = document.createElement('TR');
+	var col1 = document.createElement('TD');
+	var rem = document.createElement('A');
+	var col2 = document.createElement('TD');
+	var fileUpload = document.createElement('Input');
+	
+  row.classList = "pending-stylesheet";
+  rem.classList = "dashicons dashicons-dismiss removeStyle";
+  
+	fileUpload.type = "file";
+	fileUpload.name = rowCount + "_upload";
+	fileUpload.id = rowCount + "_upload";
+	fileUpload.accept = ".css";
+  
+  rem.addEventListener('click', function (e) {
+    e.preventDefault();
+    var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
+   
+   if (r == true) {
+  		changeMade = true; 
+  		this.parentNode.parentNode.remove();
+  	}
+  });
+  
+  fileUpload.addEventListener('change', function () {
+    var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
+    var ext = name.lastIndexOf(".") > 0 ? 
+                      name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
+                      
+    if( "" === ext || "css" !== ext){
+      alert(name + " isn't a valid CSS extension and was not uploaded.");
+      this.parentNode.remove();
+    }else{      
+      rem.title = "remove " + name; 
+    }               
+    
+  });
+  
+	col2.append(rem);
+	col2.append(fileUpload);
+	
+	row.append(col1);
+	row.append(col2);
+	
+	ext_css_table.append(row);	
+
+	changeMade = true; 
+	
+});
+
  /* End of CAWeb Option Page */
 });
 

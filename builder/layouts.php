@@ -1,6 +1,6 @@
 <?php
 
-function ca_save_post_list_meta($post_id, $post){
+function ca_save_post_list_meta($post_id, $post) {
 
 	$cats = wp_get_post_categories($post_id);
 
@@ -10,46 +10,45 @@ function ca_save_post_list_meta($post_id, $post){
 
 	$layout = ( isset( $layout->post_type_layout) ? $layout->post_type_layout : '' );
 
-
 	switch( $layout  ){
 
 		case "course":
-			array_push($cats , get_cat_ID('Courses'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('Courses'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 
 		case "event":
-			array_push($cats , get_cat_ID('Events'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('Events'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 
 		case "exam":
-			array_push($cats , get_cat_ID('Exams'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('Exams'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 
 		case "faqs":
-			array_push($cats , get_cat_ID('FAQs'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('FAQs'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
-		
+
 		case "jobs":
-			array_push($cats , get_cat_ID('Jobs'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('Jobs'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 
 		case "news":
-			array_push($cats , get_cat_ID('News'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('News'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 
 		case "profile":
-			array_push($cats , get_cat_ID('Profiles'));
-			array_push($cats , get_cat_ID('Content Types'));
+			array_push($cats, get_cat_ID('Profiles'));
+			array_push($cats, get_cat_ID('Content Types'));
 			break;
 	}
 
-	wp_set_object_terms( $post_id, $cats , 'category');
+	wp_set_object_terms( $post_id, $cats, 'category');
 
 }
 
@@ -94,9 +93,8 @@ EOT
 
 */
 
-function caweb_get_layouts(){
+function caweb_get_layouts() {
 
-	
 $ca_layouts = array();
 
 	$meta = array(

@@ -6,9 +6,7 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
 */
 
-/*********************
-	Standard Version 
-**********************/
+// Standard Version
 class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'Section - Primary', 'et_builder' );
@@ -38,7 +36,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		);
 
 		$this->fields_defaults = array(
-			'section_link' => array( 'http://','add_default_setting'),
+			'section_link' => array('http://','add_default_setting'),
 			'show_more_button' => array('no'),
 			'featured_image_button' => array('true'),
 		);
@@ -49,13 +47,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		  'general' => array(
 		    'toggles' => array(
 		      'header' => esc_html__( 'Header', 'et_builder'),
-		      'body'   => esc_html__( 'Body'  , 'et_builder'),
+		      'body'   => esc_html__( 'Body', 'et_builder'),
 		    ),
 		  ),
 		  'advanced' => array(
 		    'toggles' => array(
 		      'header' => esc_html__( 'Header', 'et_builder'),
-		      'style'  => esc_html__( 'Style' , 'et_builder'),
+		      'style'  => esc_html__( 'Style', 'et_builder'),
 		      'text' => array(
 		        'title'    => esc_html__( 'Text', 'et_builder' ),
 		        'priority' => 49,
@@ -182,10 +180,10 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 				'toggle_slug'			=> 'body',
 			),
 			'section_content' => array(
-				'label'           => esc_html__( 'Content','et_builder'),
+				'label'           => esc_html__( 'Content', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can create the content that will be used within the module.','et_builder' ),
+				'description'     => esc_html__( 'Here you can create the content that will be used within the module.', 'et_builder' ),
 				'toggle_slug'			=> 'body',
 			),
 			'max_width' => array(
@@ -253,7 +251,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		return $fields;
 
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            		= $this->shortcode_atts['module_id'];
 		$module_class         		= $this->shortcode_atts['module_class'];
 		$max_width            		= $this->shortcode_atts['max_width'];
@@ -288,7 +286,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 		  et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
 
-
 		$section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
@@ -299,27 +296,25 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 
 		if("on" == $featured_image_button){
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
-      $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
+      $img_class .= ("on" == $image_pos ? 'pull-right' : '');
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>' ,
+					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>',
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
-				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
+				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 			$section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
+					$heading_style, $section_heading, $this->shortcode_content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
 
-
-
 		}else{
-			$heading_style = ( !empty($heading_text_color) ?
+			$heading_style = ( ! empty($heading_text_color) ?
 										sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 					$body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-					$heading_style, $heading_align, $section_heading, 	$this->shortcode_content, $display_button);
+					$heading_style, $heading_align, $section_heading, $this->shortcode_content, $display_button);
 
 		}
 		$output = sprintf('<div%1$s class="%2$s%3$s section" %4$s>%5$s</div>',
@@ -381,9 +376,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 }
 new ET_Builder_Module_CA_Section_Primary;
 
-/*********************
-	Fullwidth Version 
-**********************/
+// Fullwidth Version
 class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Module{
 	function init() {
 		$this->name = esc_html__( 'FullWidth Section - Primary', 'et_builder' );
@@ -410,7 +403,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 										'admin_label',
 		);
 		$this->fields_defaults = array(
-			'section_link' => array( 'http://','add_default_setting'),
+			'section_link' => array('http://','add_default_setting'),
 			'show_more_button' => array('no'),
 			'featured_image_button' => array('true'),
 		);
@@ -420,13 +413,13 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 			'general' => array(
 				'toggles' => array(
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'body'   => esc_html__( 'Body'  , 'et_builder'),
+					'body'   => esc_html__( 'Body', 'et_builder'),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
 					'header' => esc_html__( 'Header', 'et_builder'),
-					'style'  => esc_html__( 'Style' , 'et_builder'),
+					'style'  => esc_html__( 'Style', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -547,10 +540,10 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 				'toggle_slug' 		=> 'body',
 			),
 			'section_content' => array(
-				'label'           => esc_html__( 'Section Information','et_builder'),
+				'label'           => esc_html__( 'Section Information', 'et_builder'),
 				'type'            => 'tiny_mce',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can create the content that will be used within the module.','et_builder' ),
+				'description'     => esc_html__( 'Here you can create the content that will be used within the module.', 'et_builder' ),
 				'toggle_slug' 		=> 'body',
 			),
 			'max_width' => array(
@@ -616,7 +609,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 			);
 		return $fields;
 	}
-	function shortcode_callback( $atts, $content = null, $function_name ) {
+	function shortcode_callback($atts, $content = null, $function_name) {
 		$module_id            = $this->shortcode_atts['module_id'];
 
 		$module_class         = $this->shortcode_atts['module_class'];
@@ -669,7 +662,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 			et_pb_generate_responsive_css( $max_width_values, '%%order_class%%', 'max-width', $function_name );
 		}
 
-
 		$section_bg_color = ("" !=  $section_background_color ?
 		sprintf(' style="background: %1$s;"', $section_background_color ) : '');
 
@@ -680,27 +672,25 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 
 		if("on" == $featured_image_button){
       $img_class = ("on"== $slide_image_button  ? ' animate-fadeInLeft ' : '');
-      $img_class .= ("on" == $image_pos ? 'pull-right' : '') ;
+      $img_class .= ("on" == $image_pos ? 'pull-right' : '');
 
 			$display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%; "></div>' ,
-            $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'),$section_image );
+					<img src="%3$s" class="img-responsive" style="width: 100%%; "></div>',
+            $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image );
 
-				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ',  $heading_text_color) : '');
+				$heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 				$section = sprintf('<div class="col-md-15"><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, 	$this->shortcode_content, $display_button);
+					$heading_style, $section_heading, $this->shortcode_content, $display_button);
 
 					$body= sprintf('%1$s%2$s', $display_image, $section );
 
-
-
 		}else{
-			$heading_style = ( !empty($heading_text_color) ?
+			$heading_style = ( ! empty($heading_text_color) ?
 								sprintf(' style="%1$s" ', $heading_text_color) : '');
 
 			$body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-			$heading_style, $heading_align, $section_heading, 	$this->shortcode_content, $display_button);
+			$heading_style, $heading_align, $section_heading, $this->shortcode_content, $display_button);
 
 		}
 		$output = sprintf('<div%1$s class="%2$s%3$s section" %4$s>%5$s</div>',

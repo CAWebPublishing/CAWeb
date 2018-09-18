@@ -58,7 +58,6 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 
 	wp_head();
 
-
 ?>
 
 <!--[if (lt IE 9) & (!IEMobile)]>
@@ -83,7 +82,7 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-5
 
   <script src="<?php printf( '%1$s/js/libs/html5shiv.min.js', CAWebUri); ?>"></script>
 
-  <script src="<?php printf( '%1$s/js/libs/respond.min.js', CAWebUri) ; ?>"></script>
+  <script src="<?php printf( '%1$s/js/libs/respond.min.js', CAWebUri); ?>"></script>
 
 <![endif]-->
 
