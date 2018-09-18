@@ -22,22 +22,31 @@
 .divi_builder .page-title{
   margin-bottom: auto;
 }
-.single.non_divi_builder.sidebar_displayed .main-content .main-primary{
+.single.non_divi_builder.sidebar_displayed .main-content .main-primary,
+.archive.sidebar_displayed .main-content .main-primary{
   	width: 75%;
   	float: left;
 }
 .single .post {
     padding-bottom: 0;
 }
+.archive .main-content article{
+ display: inline-block; 
+  width: 100%;
+  margin-bottom: 30px;
+}
 @media(max-width: 768px){
-  .single.non_divi_builder .main-content .main-primary{
+  .single.non_divi_builder .main-content .main-primary,
+  .archive .main-content .main-primary{
     width: 100% !important;
   }
   #non_divi_sidebar{
    width: 75% !important;
   }
 }
-
+.pagination{
+  display: block;
+}
 /* Makes TablePress Tables Responsive */
 .dataTables_wrapper {
     overflow-x: auto;

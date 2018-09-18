@@ -28,3 +28,30 @@ window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
 </script>
 
 <?php endif; ?>
+
+<?php if( is_tag() || is_archive() || is_category() || is_author() ) : ?>
+  <script>
+    
+ jQuery(document).ready(function() {   
+   		var articles = document.getElementsByTagName('main')[0].getElementsByTagName('article');
+   		var makeSpace = false;
+   
+       for(var i = 0, len = articles.length; i < len; i++){
+         if( articles[i].classList.contains('has-post-thumbnail')){
+           makeSpace = true;
+	       }
+       }
+   
+   if(makeSpace){
+     for(var i = 0, len = articles.length; i < len; i++){
+       if( ! articles[i].classList.contains('has-post-thumbnail'))
+         articles[i].getElementsByTagName('a')[0].setAttribute("style", "width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;");
+       
+       }
+   }
+   
+ });
+    	
+  </script>
+
+<?php endif; ?>

@@ -27,8 +27,8 @@ $slideshow_banner = caweb_banner_content_filter( (is_object($post) ? $post->post
         	// Settings Bar
          	require_once (CAWebAbsPath ."/ssi/settings-bar.html");
 
-          	// Include Utility Header
-           	require_once (CAWebAbsPath ."/ssi/utility-header.html");
+          // Include Utility Header
+     			get_template_part('partials/content', 'utility-header');
 		}
          ?>
 
