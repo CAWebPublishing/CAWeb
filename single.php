@@ -42,8 +42,8 @@ if ( ! $is_page_builder_used )
 
 
 				<?php
-
-					if ( ! $is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) comments_template( '', true );
+					// This defaults to the Divi Comments.php template file
+					if ( ! $is_page_builder_used && comments_open() ) comments_template( '', true );
 
 				?>
 
@@ -53,9 +53,9 @@ if ( ! $is_page_builder_used )
 
 </main>
    <?php
-if( ! $is_page_builder_used ){
+if( ! $is_page_builder_used && is_active_sidebar('sidebar-1') ){
    print '<aside id="non_divi_sidebar" class="col-lg-3">';
-		print get_sidebar() ;
+		print get_sidebar('sidebar-1') ;
     print '</aside>';
 }
  ?>

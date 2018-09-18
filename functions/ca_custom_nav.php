@@ -97,11 +97,9 @@ class CAWeb_Nav_Menu extends Walker_Nav_Menu{
                             <!-- Copyright Statement -->
                       <div class="copyright">
                       <div class="container container ca_wp_container" %4$s> Copyright &copy;
-                      <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>%5$s',
+                      <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
                     ( 4 < $args['version'] ? 'ca_wp_container' : '' ), $nav_menu, $socialLinks,
-                    ( 4 >= $args['version'] ? 'style="text-align:center;" ' : '' ),
-                    (isset($args['ca_custom_css']) && !empty($args['ca_custom_css']) ?
-                    sprintf('<style id="ca_custom_css">%1$s</style>', $args['ca_custom_css']) : '') );
+                    ( 4 >= $args['version'] ? 'style="text-align:center;" ' : '' ) );
     }
 
     echo $nav_menu;

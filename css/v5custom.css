@@ -1,3 +1,6 @@
+body{
+ background-color: #fff; 
+}
 .et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
 	width: 80%;
 }
@@ -5,8 +8,14 @@
 .nav-arrow-down{
   	visibility: hidden;
 }
+input.gsc-input {
+    background-image: unset !important;
+}
 
 /* Utility Header */
+.utility-header .half{
+ padding-left: 15px !important; 
+}
 ul.utility-links.social-media-links{
  max-height: unset !important; 
 }
@@ -101,52 +110,6 @@ ul.utility-links.social-media-links{
 }
 
 /* End of Branding & Navigation */
-/* Search using Google API 2.0 */
-.search-container.featured-search {
-	min-height: inherit !important;
-}
-.gsc-input {
-    font-size: 17.6px !important;
-    font-size: 1.1rem !important;
-    height: 40px;
-    width: 100% !important;
-    border: 3px solid transparent !important;
-    padding: 0 0 !important;
-}
-.gsc-search-button{
-height: 41px !important;
-}
-.search-container td.gsc-clear-button {
-    display: none;
-}
-.search-container.active td.gsc-clear-button {
-    display: block;
-}
-.featured-search.active .close-search{
-    display: block;
-}
-td.gsc-clear-button {
-    width: 100% !important;
-}
-td.gsc-clear-button:hover, td.gsc-clear-button:focus {
-    outline: dotted 1px #000;
-}
-div.gsc-clear-button {
-		padding-left: 0px !important;
-		display: block !important;
-    background-image: unset !important;
-}
-
-div.gsc-clear-button:before {
-    content: '\4d';
-    font-family: cagov;
-    font-size: 2rem;
-    width: 100%;
-}
-input.gsc-input {
-    background-image: unset !important;
-
-}
 
 /* Header Slideshow Banner */
 
@@ -177,20 +140,34 @@ input.gsc-input {
 
 /* End of Footer */
 
-@media (min-width: 768px) {
-	/*.et_pb_fullwidth_section{
-		margin: 0 -6%;
-	}*/
-
+/* Branding & Navigation */
+@media (min-width: 768px){
+  .fixed.compact .header-cagov-logo {
+    height: 55px;
+    line-height: 55px;
+}
+.fixed.compact .header-cagov-logo img {
+    height: 45px;
+}
 }
 
-/* Branding & Navigation */
+.header-organization-banner{
+  display: none;
+}
 .branding .header-cagov-logo{
   max-width: 25%;
+  line-height: 88px;
+}
+.branding div a{
+	display: inline-block;
+    z-index: 26;
+    position: relative;
 }
 .branding .header-cagov-logo img{
   max-height: 80px;
   width: 100%;
+  position: unset;
+  height: unset;
 }
 @media (min-width: 768px){
   .top-level-nav .nav-item {
@@ -292,24 +269,6 @@ input.gsc-input {
     max-height: 90px;
 		margin-bottom: 8px;
   }
-/*
-
-ul.utility-links.social-media-links {
-    max-height: 35px;
-    clip: rect(0 65px 40px 0);
-    height: auto;
-    width: auto;
-    position: initial;
-}
-	.utility-header .half:first-child{
-      overflow: visible;
-  }
-
-  .utility-header .settings-links {
-		float: right;
-		text-align: right;
-		max-width: 85%;
-}*/
 .branding {
     display: none;
 }

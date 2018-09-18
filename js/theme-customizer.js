@@ -1,5 +1,5 @@
 ( function( $ ) {  
-  
+   
   function class_check(haystack, needle){
    	var found = false;
     haystack.each(function( obj ) {  
@@ -9,6 +9,7 @@
     
     return found;
   }
+  
 // Organization Logo Brand
 wp.customize( 'header_ca_branding', function( value ) {
 	value.bind( function( newval ) {
@@ -343,6 +344,5 @@ wp.customize( 'ca_contact_us_link', function( value ) {
    
 	} );
 } );
-  
   
 } )( jQuery );

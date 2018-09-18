@@ -185,7 +185,8 @@ function ca_theme_enqueue_style() {
                                                   'ca_site_version' => ca_get_version(),
                                                   'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
                                                    'ca_google_search_id' => get_option('ca_google_search_id'),
-                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled')) );
+                                                   'ca_google_trans_enabled' => get_option('ca_google_trans_enabled'),
+                                                   'caweb_multi_ga' => get_site_option('caweb_multi_ga') ) );
 
 	wp_enqueue_script( 'cagov-core-script' );
   wp_enqueue_script( 'cagov-navigation-script' );
@@ -323,40 +324,36 @@ add_action( 'admin_bar_menu', 'ca_admin_bar_menu', 1000 );
 
 
 /*
-
 	TinyMCE Editor
-
 */
-
 // Add hidden MCE Buttons
+// The primary toolbar (always visible)
+function ca_mce_buttons( $buttons ) {
+	/**
+		Add in a core button that's disabled by default
+	**/
+  $tmp = array('formatselect', 'bold', 'italic', 'underline');
+  array_splice($buttons, 0, 3, $tmp);
+  
+	return $buttons;
+
+}
+add_filter( 'mce_buttons', 'ca_mce_buttons' );
 
 function ca_mce_buttons_2( $buttons ) {
 
 	/**
-
 		Add in a core button that's disabled by default
-
-	 */
-
-	array_unshift( $buttons, 'styleselect' );
-
-	//$buttons[] = 'cut';
-
-	//$buttons[] = 'copy';
-
-	//$buttons[] = 'superscript';
-
-	//$buttons[] = 'subscript';
-
+	**/
+  
+	$tmp = array('styleselect', 'strikethrough', 'hr', 'fontselect', 'fontsizeselect',
+               'forecolor', 'backcolor', 'pastetext', 'copy','subscript', 'superscript');
+  array_splice($buttons, 0, 5, $tmp);
+  
 	return $buttons;
 
 }
-
 add_filter( 'mce_buttons_2', 'ca_mce_buttons_2' );
-
-
-
-
 
 function ca_mce_before_init_insert_formats( $init_array ) {
 
@@ -367,28 +364,6 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 	$style_formats = array(
 
 		// Each array child is a format with it's own settings
-
-		array(
-
-			'title' => 'Block Quote',
-
-			'block' => 'blockquote',
-
-			'wrapper' => true,
-
-		),
-
-		array(
-
-			'title' => 'Block Quote Cite',
-
-			'block' => 'footer',
-
-			'wrapper' => true,
-
-			'exact' => false,
-
-		),
 
 		array(
 
@@ -461,16 +436,13 @@ function ca_mce_before_init_insert_formats( $init_array ) {
 	);
 
 	// Insert the array, JSON ENCODED, into 'style_formats'
-
-	$init_array['style_formats'] = json_encode( $style_formats );
+  $init_array['style_formats'] = json_encode( $style_formats );
   
   // TinyMCE Toolbar Start off unhidden
 	$init_array['wordpress_adv_hidden'] = false;
-
-	return $init_array;
-
-
-
+	
+  return $init_array;
+ 
 }
 
 // Attach callback to 'tiny_mce_before_init'
@@ -505,7 +477,8 @@ function wp_ca_body_class( $wp_classes, $extra_classes ) {
   if( isset($post->ID) ){
   	$whitelist = array( (  ! et_pb_is_pagebuilder_used( $post->ID ) ? 'non_divi_builder' : 'divi_builder'),
                      ( "on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true) ? 'title_displayed' : 'title_not_displayed' ),
-                      sprintf('v%1$s', ca_get_version($post->ID) ) );
+                      sprintf('v%1$s', ca_get_version($post->ID) ),
+                       (! et_pb_is_pagebuilder_used( $post->ID ) && is_active_sidebar('sidebar-1') && is_single() ? 'sidebar_displayed' : 'sidebar_not_displayed'  ) );
   }
   $whitelist[] = ("on" == get_option('ca_sticky_navigation') ?  'sticky_nav' : '');
    

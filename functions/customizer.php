@@ -1,40 +1,50 @@
 <?php
+
 function caweb_customize_preview_init(){
-  wp_register_script('caweb-customizer-script',	CAWebUri . '/js/customizer.js', array('jquery','customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
+  wp_register_script('caweb-customizer-script',	CAWebUri . '/js/theme-customizer.js', array('jquery','customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
   
 	wp_enqueue_script( 'caweb-customizer-script' );
   
   // Remove other Customizer Scripts
   // Divi Customizer
   wp_dequeue_script( 'divi-customizer' );
-  // The Events Calendar Plugin
-  wp_dequeue_script( 'divi-customizer' );
   
 }
 add_action( 'customize_preview_init', 'caweb_customize_preview_init');
 
+function caweb_customize_controls_enqueue_scripts(){
+   wp_register_script('caweb-customize-controls-script',	CAWebUri . '/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
+  wp_localize_script( 'caweb-customize-controls-script', 'colorschemes', array('default' => caweb_color_schemes( true ), 'all' => caweb_color_schemes() ) );
+
+	wp_enqueue_script( 'caweb-customize-controls-script' );
+}
+add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
+
 function caweb_customizer_v4_option( $customizer ){
   $manager = $customizer->manager; 
+    
   return 4 ==  $manager->get_control('ca_site_version')->value() ? true : false;
 }
 function caweb_customizer_v5_option( $customizer ){
-  $manager = $customizer->manager; 
+  $manager = $customizer->manager;  
   return 5 ==  $manager->get_control('ca_site_version')->value() ? true : false;
 }
-function caweb_sanitize_customizer_checkbox( $checked){
+function caweb_sanitize_customizer_checkbox( $checked ){
    return ( ( isset( $checked ) && true == $checked ) ? "1" : "0" );
 }
-  
 function caweb_customize_register( $wp_customize ) {
+  
   // Remove Divi Customization Panels and Sections  
   $divi_panels = array('et_divi_general_settings', 'et_divi_header_panel', 'et_divi_footer_panel', 'et_divi_blog_settings', 
                        'et_divi_buttons_settings', 'et_divi_mobile');
+  
   
   foreach($divi_panels as $p)
     $wp_customize->remove_panel($p);
 
   $wp_customize->remove_section('et_color_schemes');
   $wp_customize->remove_section('themes');
+  $wp_customize->remove_panel('themes');
   $wp_customize->remove_section('custom_css');
  
    //All our sections, settings, and controls will be added here
@@ -72,17 +82,18 @@ function caweb_customize_register( $wp_customize ) {
 	'settings'   => 'ca_default_navigation_menu',
 		) ) );
   
-  $wp_customize->add_setting('ca_site_color_scheme', array(
+  
+  /* Site Color Scheme */
+   $wp_customize->add_setting('ca_site_color_scheme', array(
     														'type' => 'option',
-  															'default' => get_option('ca_site_color_scheme', 'oceanside')) );
+  															'default' => get_option('ca_site_color_scheme', 'oceanside') ) );
   
    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ca_site_color_scheme', array(
 	'label'      => 'Color Scheme',
   'type' => 'select',
-   'choices' => array('oceanside'=> 'Oceanside', 'orangecounty'=> 'Orange County', 'pasorobles' => 'Paso Robles',
-                     	'santabarbara'=> 'Santa Barbara', 'sierra' => 'Sierra'),
+   'choices' => caweb_color_schemes(),
 	'section'    => 'caweb_settings',
-	'settings'   => 'ca_site_color_scheme',
+	'settings'   => 'ca_site_color_scheme'
 		) ) );
   
   $wp_customize->add_setting('ca_frontpage_search_enabled', array(
@@ -429,9 +440,15 @@ function caweb_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'caweb_customize_register' );
 
-function caweb_sanitize_option_ca_custom_css($value, $option){
-  
+function caweb_sanitize_option_ca_custom_css($value, $option){  
   return addslashes($value);
 }
+
+function caweb_customize_controls_print_styles(){
+  print '<style>#customize-control-ca_site_version #_customize-input-ca_site_version option:checked:first-child + 
+#customize-control-ca_site_color_scheme #_customize-input-ca_site_color_scheme option:first-child { color: blue; }</style>';
+
+}
+add_action('customize_controls_print_styles', 'caweb_customize_controls_print_styles');
 
 ?>

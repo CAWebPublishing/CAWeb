@@ -84,22 +84,18 @@ if( isset($_POST['caweb_options_submit']) ){
 			<span class="tooltiptext">Apply a site wide color scheme.</span></div></th>
 		<td>
 			<select id="ca_site_color_scheme" name="ca_site_color_scheme">
-				<option value="oceanside"
-				<?= ( get_option('ca_site_color_scheme') == 'oceanside' ? 'selected="selected"' : '' ) ?>>Oceanside</option>
-
-			<option value="orangecounty"
-			<?= ( get_option('ca_site_color_scheme') == 'orangecounty' ? 'selected="selected"' : '' ) ?>>Orange County</option>
-
-		<option value="pasorobles"
-			<?= ( get_option('ca_site_color_scheme') == 'pasorobles' ? 'selected="selected"' : '' ) ?>>Paso Robles</option>
-
-		<option value="santabarbara"
-			<?= ( get_option('ca_site_color_scheme') == 'santabarbara' ? 'selected="selected"' : '' ) ?>>Santa Barbara</option>
-
-		<option value="sierra"
-			<?= ( get_option('ca_site_color_scheme') == 'sierra' ? 'selected="selected"' : '' ) ?>>Sierra</option>
-
-			</select>
+        <?php 
+					$original = caweb_color_schemes( true ); 
+        	$schemes = caweb_color_schemes( ); 
+        	
+          foreach( $schemes as $key => $value ){
+            printf('<option value="%1$s"%2$s%3$s>%4$s</option>', 
+                   $key, ( !in_array($value, $original) ? sprintf(' class="extra%1$s" ', ( 4 >= get_option('ca_site_version') ? ' hidden' : '' ) ) : ' ' ), 
+                   ( get_option('ca_site_color_scheme') == $key ? 'selected="selected"' : '' ), $value  );
+          }
+					
+        ?>
+      </select>
 		</td>
 	</tr>
   <tr class="extra <?= (5.0 <= get_option('ca_site_version', 5) ? '' : 'hidden'); ?>">
