@@ -390,19 +390,25 @@ function caweb_admin_bar_menu($wp_admin_bar) {
     }
 }
 
-// CAWeb Custom Modules
-add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
-function caweb_et_pagebuilder_module_init() {
-    include(CAWebAbsPath."/builder/functions.php");
-    include(CAWebAbsPath."/builder/layouts.php");
+// If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
+if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
+    // CAWeb Custom Modules
+    add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
+    function caweb_et_pagebuilder_module_init() {
+        $divi_builder = CAWebAbsPath."/divi/builder";
+        include("$divi_builder/functions.php");
+        include("$divi_builder/layouts.php");
 
-    if (class_exists('ET_Builder_Module')) {
-        include(CAWebAbsPath."/builder/class-caweb-builder-element.php");
+        if (class_exists('ET_Builder_Module')) {
+            include("$divi_builder/class-caweb-builder-element.php");
 
-        $modules = glob(CAWebAbsPath.'/builder/modules/*.php');
-        foreach ($modules as $module_file) {
-            require_once($module_file);
+            $modules = glob("$divi_builder/modules/*.php");
+            foreach ($modules as $module_file) {
+                require_once($module_file);
+            }
         }
     }
+} else {
+    include(CAWebAbsPath."/divi/functions.php");
 }
 ?>
