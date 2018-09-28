@@ -143,10 +143,10 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $url = ! empty($url) ? esc_url($url) : '';
 
         $image = ('on' !== $round ?
-						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>', $portrait_url) :
+						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/>', $portrait_url, $name) :
 						sprintf('<div class="profile-banner-img-wrapper">
-							<img src="%1$s" style="width: 90px; min-height: 90px;float: right;"/>
-						</div>', $portrait_url)
+							<img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/>
+						</div>', $portrait_url, $name)
 				  );
 
         $output = sprintf('<div id="profile-banner-wrapper" %1$s><a href="%2$s"><div class="profile-banner%3$s">%4$s<div class="banner-subtitle">%5$s</div><div class="banner-title">%6$s</div><div class="banner-link"><p>%7$s</p></div></div></a></div>', $class, $url, 'on' !== $round ? '' : ' round-image', $image, $job_title, $name, $profile_link);
