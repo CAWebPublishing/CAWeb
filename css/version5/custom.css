@@ -205,12 +205,6 @@ ul.utility-links.social-media-links{
     padding: 0 8px;
   }
 }
-.branding{
-  padding: 0;
-}
-.branding .header-organization-banner img{
-     width: auto;
-}
 
 /* End of Branding & Navigation */
 
@@ -273,18 +267,6 @@ footer .container .group{
 /* End of Media Query Styles */
 /* Mobile Control */
 @media (max-width: 767px) {
-  .mobile-controls{
-    	background: #fff;
-      padding-right: 70px;
-      display: inline-block;
-  }
-  .mobile-controls .toggle-menu, .mobile-controls .toggle-search{
-    color: #046B99;
-  }
-  .mobile-controls .toggle-menu{
-    right: 10px;
-    left: auto;
-  }
   #nav_list{
     width: 100%;
 	padding-left: 0;
@@ -312,9 +294,6 @@ footer .container .group{
     max-height: 90px;
 		margin-bottom: 8px;
   }
-.branding {
-    display: none;
-}
 }
 /* End of Mobile Control Styles */
 
