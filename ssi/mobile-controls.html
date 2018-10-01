@@ -1,16 +1,11 @@
 <!-- mobile navigation controls -->
-<div class="mobile-controls ">
-  <?php if(  caweb_version_check(5,(is_object($post) ? $post->ID : $post['ID'])) && "" !== get_option('header_ca_branding')) : ?>	
-    <span class="mobile-control cagov-logo"><a href="/"><img src="<?php echo get_option('header_ca_branding'); ?>" alt="Organization Title" class="mobile-branding"/></a><span class="sr-only"></span></span>
-	 <?php endif; ?>
-    <span class="mobile-control toggle-menu hidden-print">
-			<span class="ca-gov-icon-menu" aria-hidden="true"></span>
-			<span class="sr-only">Menu</span>
-		</span>
-
-		<span class="mobile-control toggle-search hidden-print">
-			<span class="ca-gov-icon-search" aria-hidden="true"></span>
-			<span class="sr-only">Search</span>
-		</span>	
-
+<div class="mobile-controls">
+		<div class="mobile-control-group main-nav-icons pull-right">
+			<button class="mobile-control toggle-menu pull-right" aria-expanded="false" aria-controls="navigation">
+				<span class="ca-gov-icon-menu hidden-print" aria-hidden="true"></span><span class="sr-only">Menu</span>
+			</button>
+			<button class="mobile-control toggle-search">
+				<span class="ca-gov-icon-search hidden-print" aria-hidden="true"></span><span class="sr-only">Search</span>
+			</button>
+		</div>
 </div>
