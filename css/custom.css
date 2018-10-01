@@ -31,13 +31,6 @@ border: 0;
         border: #2ea3f2 2px solid;
         display: inline-block
 }
-
-.mobile-controls{
-	cursor: auto;
-}
-.mobile-controls span {
-    cursor: pointer;
-}
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;
 }
