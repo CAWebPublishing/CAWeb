@@ -277,7 +277,7 @@ function caweb_return_posts($cats = array(), $tags = array(), $post_amount = -1,
             }
         }
     }
-		
+
     return $posts_array;
 }
 
@@ -337,10 +337,10 @@ if ( ! function_exists('caweb_get_shortcode_from_content')) {
         foreach ($matches as $m => $match) {
             $obj = array();
             $attr = array();
-						// matching tag can either be self-closing or not
-						// non self-closing matching tags are results[1]
-						// self-closing matching tags are results[2]
-						// if non self-closing tag is empty assume self-closing
+            // matching tag can either be self-closing or not
+            // non self-closing matching tags are results[1]
+            // self-closing matching tags are results[2]
+            // if non self-closing tag is empty assume self-closing
             $matching_tag =  ! empty($results[1][$m]) ? $results[1][$m] : $results[2][$m];
 
             // If the shortcode is a self closing tag, then it contains content in between its Shortcode Tags
