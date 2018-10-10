@@ -65,14 +65,6 @@ function ca_save_post_list_meta($post_id, $post) {
     } else {
         delete_post_meta($post_id, 'nginx_cache_purge');
     }
-    // Search for TablePress and WPForms shortcode if they exists, add the 'nginx_cache_purge' custom meta field
-    $table = caweb_get_shortcode_from_content($content, array('table', 'wpforms'));
-
-    if ( ! empty($table)) {
-        update_post_meta($post_id, 'nginx_cache_purge_tablepress', 'true');
-    } else {
-        delete_post_meta($post_id, 'nginx_cache_purge_tablepress');
-    }
 }
 
 add_action('save_post', 'ca_save_post_list_meta', 10, 2);
