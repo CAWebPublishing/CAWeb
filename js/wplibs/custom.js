@@ -1,5 +1,1 @@
- jQuery(document).ready(function() {
-	 $('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
-	 
-	 
- });
+jQuery(document).ready(function(){$(".caweb-alert-close").click(function(a){jQuery.post(this.dataset.url)})});
