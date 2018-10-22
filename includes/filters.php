@@ -49,6 +49,9 @@ function caweb_tiny_mce_before_init($init_array) {
 
     // Insert the array, JSON ENCODED, into 'style_formats'
     $init_array['style_formats'] = json_encode($style_formats);
+		
+		// TinyMCE default is 11pt but it doesnt appear in the font size box
+    $init_array['fontsize_formats'] = "8pt 10pt 11pt 12pt 14pt 18pt 24pt 36pt";
 
     // TinyMCE Toolbar Start off unhidden
     $init_array['wordpress_adv_hidden'] = false;
