@@ -54,11 +54,11 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 
 		    print '<!-- Location Bar -->';
 		    // Location Bar
-		    require_once(CAWebAbsPath."/ssi/location-bar.html");
+		    require_once(CAWebAbsPath."/ssi/location-bar.php");
 
 		    print '<!-- Settings Bar -->';
 		    // Settings Bar
-		    require_once(CAWebAbsPath."/ssi/settings-bar.html");
+		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
 
 		    print '<!-- Utility Header -->';
 		    // Include Utility Header
@@ -72,7 +72,7 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
          ?>
 
          <!-- Include Mobile Controls -->
-         <?php require_once(CAWebAbsPath."/ssi/mobile-controls.html");?>
+         <?php require_once(CAWebAbsPath."/ssi/mobile-controls.php");?>
 
         <div class="navigation-search">
 
