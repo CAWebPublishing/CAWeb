@@ -491,7 +491,7 @@ if (class_exists('WP_Customize_Control')) {
                 printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '');
             } ?>
 					
-					<input id="_customize-input-<?= $this->id ?>" type="hidden" name="ca_google_trans_icon" value="<?= $this->value() ?>" <?php $this->link(); ?> >
+					<input id="_customize-input-<?php print $this->id ?>" type="hidden" name="ca_google_trans_icon" value="<?php print $this->value() ?>" <?php $this->link(); ?> >
 				</ul>
 			</label>		
 			<?php
