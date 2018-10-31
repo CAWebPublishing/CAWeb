@@ -12,11 +12,11 @@ $align = "center" !== get_option('header_ca_branding_alignment') ? 'pull-'.get_o
 <div class="branding">
   
 <?php   if (caweb_version_check(5, $post_id)  && ! empty($logo)) : ?>
-     <div class="header-organization-banner"><a href="/"><img src="<?= $logo ?>" alt="Organization Title" /></a></div>
+     <div class="header-organization-banner"><a href="/"><img src="<?php print $logo ?>" alt="Organization Title" /></a></div>
 <?php else : ?>
-     <div class="header-cagov-logo"><a href="http://www.ca.gov/" title="CA.gov" ><img src="<?= $ca_logo ?>" alt="Image of the CA.gov Logo"/></a></div>
+     <div class="header-cagov-logo"><a href="http://www.ca.gov/" title="CA.gov" ><img src="<?php print $ca_logo ?>" alt="Image of the CA.gov Logo"/></a></div>
      <?php if ( ! empty($logo)) : ?>
-     <div class="header-organization-banner <?= $align ?>"><a href="/"><img src="<?= $logo ?>" alt="Organization Title" /></a></div>
+     <div class="header-organization-banner <?php print $align ?>"><a href="/"><img src="<?php print $logo ?>" alt="Organization Title" /></a></div>
      <?php endif; ?>
 <?php endif; ?>
 

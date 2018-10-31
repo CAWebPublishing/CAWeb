@@ -336,55 +336,55 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             $icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : ''; ?>
 
 
-<div class="icon_selector <?= ( ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide">
+<div class="icon_selector <?php print ( ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide">
 <p>Select an Icon
-	<input  name="<?= $item_id; ?>_icon" id="<?= $item_id; ?>_icon"
-	value="<?= $icon ?>" type="text" /></p>
+	<input  name="<?php print $item_id; ?>_icon" id="<?php print $item_id; ?>_icon"
+	value="<?php print $icon ?>" type="text" /></p>
 
-<ul id="menu-icon-list-<?= $item_id; ?>"  class="caweb-icon-menu noUpdate">
+<ul id="menu-icon-list-<?php print $item_id; ?>"  class="caweb-icon-menu noUpdate">
 <?php
 	$icons = caweb_get_icon_list(-1, '', true);
             $iconList = '';
             foreach ($icons as $i) {
                 printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $icon == $i ? ' selected' : '');
             } ?>
-<input type="hidden" name="ca_google_trans_icon" value="<?= get_option('ca_google_trans_icon', 'globe') ?>" >
+<input type="hidden" name="ca_google_trans_icon" value="<?php print get_option('ca_google_trans_icon', 'globe') ?>" >
 </ul>
 </div>
-<div class="unit_selector <?= (0 != $depth ? 'show' : ''); ?> description description-wide"  >
+<div class="unit_selector <?php print (0 != $depth ? 'show' : ''); ?> description description-wide"  >
 <p><strong>Select a height for the navigation item</strong></p>
-<select name="<?= $item_id; ?>_unit_size" class="unit-size-selector" id="unit-size-selector-<?= $item_id; ?>" >
-<option value="unit1" <?= ('unit1' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 1 - 50px height</option>
-  <option value="unit2" <?= ('unit2' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 2 - 100px height</option>
+<select name="<?php print $item_id; ?>_unit_size" class="unit-size-selector" id="unit-size-selector-<?php print $item_id; ?>" >
+<option value="unit1" <?php print ('unit1' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 1 - 50px height</option>
+  <option value="unit2" <?php print ('unit2' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 2 - 100px height</option>
   <?php if (5.0 <= get_option('ca_site_version')) : ?>
-  <option value="unit3" <?= ('unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 3 - 100px height w/ Image</option>
+  <option value="unit3" <?php print ('unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 3 - 100px height w/ Image</option>
   <?php endif; ?>
 </select>
 </div>
 
-<div class="media_image <?= (0 != $depth &&  ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide" >
+<div class="media_image <?php print (0 != $depth &&  ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide" >
 <p><strong>Navigation Media Image</strong><p>
 <p>Select an Image</p>
-<input  name="<?= $item_id; ?>_media_image" id="<?= $item_id; ?>_media_image" type="text" class="link-text" style="width: 97%;"
-	value="<?= ! empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : ''; ?>"/>
-<input type="button" class="library-link" value="Browse" id="library-link-<?= $item_id; ?>"   name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
+<input  name="<?php print $item_id; ?>_media_image" id="<?php print $item_id; ?>_media_image" type="text" class="link-text" style="width: 97%;"
+	value="<?php print ! empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : ''; ?>"/>
+<input type="button" class="library-link" value="Browse" id="library-link-<?php print $item_id; ?>"   name="<?php print $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
 </div>
-<div class="mega_menu_images <?= (0 == $depth ? 'show' : ''); ?> description description-wide " >
+<div class="mega_menu_images <?php print (0 == $depth ? 'show' : ''); ?> description description-wide " >
 <p><strong>Mega Menu Image Option</strong><p>
 <p>Select an Image</p>
-<input  name="<?= $item_id; ?>_image" id="<?= $item_id; ?>_image"  type="text" class="link-text" style="width: 97%;"
-	value="<?= ! empty($tmp['_caweb_menu_image'][0]) ? $tmp['_caweb_menu_image'][0] : ''; ?>"/>
-<input type="button" value="Browse" id="library-link-<?= $item_id; ?>" class="library-link"  name="<?= $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
+<input  name="<?php print $item_id; ?>_image" id="<?php print $item_id; ?>_image"  type="text" class="link-text" style="width: 97%;"
+	value="<?php print ! empty($tmp['_caweb_menu_image'][0]) ? $tmp['_caweb_menu_image'][0] : ''; ?>"/>
+<input type="button" value="Browse" id="library-link-<?php print $item_id; ?>" class="library-link"  name="<?php print $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
 
 <p>Select a Side / Select a Size</p>
-<select name="<?= $item_id; ?>_image_side" >
-<option value="left" <?= ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Left</option>
-<option value="right" <?= ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'right' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Right</option>
+<select name="<?php print $item_id; ?>_image_side" >
+<option value="left" <?php print ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Left</option>
+<option value="right" <?php print ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'right' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Right</option>
 </select>
  /
-<select name="<?= $item_id; ?>_image_size">
-<option value="quarter" <?= ( ! empty($tmp['_caweb_menu_image_size'][0]) && 'quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Quarter</option>
-<option value="half" <?= ( ! empty($tmp['_caweb_menu_image_size'][0]) &&  'half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Half</option>
+<select name="<?php print $item_id; ?>_image_size">
+<option value="quarter" <?php print ( ! empty($tmp['_caweb_menu_image_size'][0]) && 'quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Quarter</option>
+<option value="half" <?php print ( ! empty($tmp['_caweb_menu_image_size'][0]) &&  'half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Half</option>
 </select>
 </div>
 
