@@ -81,7 +81,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
                 'tab_slug' => 'general',
                 'toggle_slug'			=> 'body',
             ),
-						'portrait_alt' => array(
+            'portrait_alt' => array(
                 'label'           => esc_html__('Portrait Image Alt Text', 'et_builder'),
                 'type'            => 'text',
                 'option_category' => 'basic_option',
@@ -142,7 +142,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $name                 = $this->props['name'];
         $job_title              = $this->props['job_title'];
         $profile_link              = $this->props['profile_link'];
-				$portrait_url           = $this->props['portrait_url'];
+        $portrait_url           = $this->props['portrait_url'];
         $portrait_alt           = $this->props['portrait_alt'];
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
@@ -150,13 +150,13 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $url = ! empty($url) ? esc_url($url) : '';
-				
-				if( empty($portrait_alt) && ! empty($portrait_url) ){
-					$portrait_id = attachment_url_to_postid( $portrait_url );
-					$portrait_alt = get_post_meta($portrait_id, '_wp_attachment_image_alt', true);
-					//$portrait_alt = ! empty($portrait_alt) ? $portrait_alt : $name;
-				}
-				
+
+        if (empty($portrait_alt) && ! empty($portrait_url)) {
+            $portrait_id = attachment_url_to_postid($portrait_url);
+            $portrait_alt = get_post_meta($portrait_id, '_wp_attachment_image_alt', true);
+            //$portrait_alt = ! empty($portrait_alt) ? $portrait_alt : $name;
+        }
+
         $image = ('on' !== $round ?
 						sprintf('<img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/>', $portrait_url, $portrait_alt) :
 						sprintf('<div class="profile-banner-img-wrapper">

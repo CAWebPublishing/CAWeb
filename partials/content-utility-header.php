@@ -29,7 +29,7 @@
             ?>
                 </ul>
             </div>
-            <div class="<?= $gtranslator ? 'half' : 'three-quarters' ?> settings-links hidden-print">
+            <div class="<?php print $gtranslator ? 'half' : 'three-quarters' ?> settings-links hidden-print">
                 <ul class="utility-links ">
                   
 					<?php
@@ -57,7 +57,7 @@
                   <li class="utility-geo-locator"><a role="button" aria-expanded="false" aria-controls="locationSettings" class="geo-lookup"><span class="ca-gov-icon-compass" aria-hidden="true"></span > <span class="located-city-name"></span></a></li>
                     <?php endif; ?>
 										<?php if ('custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '')): ?>
-				              <a id="caweb-gtrans-custom" target="_blank" href="<?= esc_url(get_option('ca_google_trans_page')) ?>"><?= "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '' ?>Translate</a>
+				              <a id="caweb-gtrans-custom" target="_blank" href="<?php print esc_url(get_option('ca_google_trans_page')) ?>"><?php print "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '' ?>Translate</a>
 				            <?php endif; ?> 
               </ul>              
             </div> 

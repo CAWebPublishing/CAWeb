@@ -156,7 +156,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 								 
 								 // calculate top of screen on next repaint
 								 window.setTimeout(function () {
-									 var MAXHEIGHT = <?= 4 == $version ? 450 : 1080 ?>;
+									 var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?>;
 									 var headerTop = banner.offset().top;
 									 var windowHeight = $(window).height();
 									 var height = windowHeight - headerTop;

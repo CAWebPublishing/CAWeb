@@ -51,11 +51,11 @@ Display Title on Page
 
 <select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
 	<option value="megadropdown"
-			<?= (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'megadropdown' ? 'selected="selected"' : '') ?>>Mega Drop</option>
+			<?php print (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'megadropdown' ? 'selected="selected"' : '') ?>>Mega Drop</option>
 			  <option value="dropdown"
-			<?= (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'dropdown' ? 'selected="selected"' : '') ?>>Drop Down</option>
+			<?php print (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'dropdown' ? 'selected="selected"' : '') ?>>Drop Down</option>
 			  <option value="singlelevel"
-			<?= (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'singlelevel' ? 'selected="selected"' : '') ?>>Single Level</option>
+			<?php print (get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'singlelevel' ? 'selected="selected"' : '') ?>>Single Level</option>
 
 
 </select>

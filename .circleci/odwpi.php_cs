@@ -28,6 +28,7 @@ return PhpCsFixer\Config::create()->setRules([
         'no_extra_blank_lines' => ['tokens' => ['extra']],
         'no_mixed_echo_print' => ['use' => 'print'],
         'no_multiline_whitespace_around_double_arrow' => true,
+        'no_short_echo_tag' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_spaces_after_function_name' => true,
         'no_spaces_inside_parenthesis' => true,
