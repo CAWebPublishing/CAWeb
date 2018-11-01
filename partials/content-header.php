@@ -16,7 +16,7 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 
 ?>
 
-<header role="banner" id="header" class="global-header<?= $fixed_header; ?>" <?= $header_style; ?> >
+<header role="banner" id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
@@ -37,14 +37,14 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 		                    $target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
 		                    $readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), $target);
 		                } ?>
-		                <div role="alert" class="alert alert-dismissible alert-banner" style="background-color:<?= $data['color'] ?>;">
+		                <div role="alert" class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color'] ?>;">
 											<div class="container">
-												<button type="button" class="close caweb-alert-close" data-url="<?= admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a) ?>" data-dismiss="alert" aria-label="Close">
+												<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a) ?>" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">×</span>
 												</button>
 												<span class="alert-level">
-													<span class="ca-gov-icon-<?= $data['icon'] ?>" aria-hidden="true"></span><?= $data['header'] ?></span>
-												<span class="alert-text"><?= stripslashes($data['message']) ?></span><?=  $readmore ?>
+													<span class="ca-gov-icon-<?php print $data['icon'] ?>" aria-hidden="true"></span><?php print $data['header'] ?></span>
+												<span class="alert-text"><?php print stripslashes($data['message']) ?></span><?php print  $readmore ?>
 											</div>
 										</div>
 										<?php
@@ -54,11 +54,11 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 
 		    print '<!-- Location Bar -->';
 		    // Location Bar
-		    require_once(CAWebAbsPath."/ssi/location-bar.html");
+		    require_once(CAWebAbsPath."/ssi/location-bar.php");
 
 		    print '<!-- Settings Bar -->';
 		    // Settings Bar
-		    require_once(CAWebAbsPath."/ssi/settings-bar.html");
+		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
 
 		    print '<!-- Utility Header -->';
 		    // Include Utility Header
@@ -72,7 +72,7 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
          ?>
 
          <!-- Include Mobile Controls -->
-         <?php require_once(CAWebAbsPath."/ssi/mobile-controls.html");?>
+         <?php require_once(CAWebAbsPath."/ssi/mobile-controls.php");?>
 
         <div class="navigation-search">
 
