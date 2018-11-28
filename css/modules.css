@@ -4,6 +4,12 @@
   padding-bottom: 15px !important;
 	bottom: 50%;
 }
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.center{
+	left: 25%;
+}
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.right{
+	left: 50%;
+}
 /* Fullwidth Menu */
 .et_pb_module.et_pb_fullwidth_menu .nav > li{
 	display: inline-block;
