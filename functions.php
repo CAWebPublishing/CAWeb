@@ -411,4 +411,20 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 } else {
     include(CAWebAbsPath."/divi/functions.php");
 }
+
+// Register Widgets
+function custom_sidebar() {
+  $args = array(
+  'id' => 'custom-widget',
+  'name' => __( 'Widget custom', 'text_domain' ),
+  'description' => __( 'Widget that can be inserted before closing body tag.', 'text_domain' ),
+  'before_title' => '<h3 class="widget-title">',
+  'after_title' => '</h3>',
+  'before_widget' => '<section id="%1$s" class="widget %2$s">',
+  'after_widget' => '</section>',
+  );
+  register_sidebar( $args );
+}
+add_action( 'widgets_init', 'custom_sidebar' );
+
 ?>

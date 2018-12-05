@@ -52,4 +52,6 @@ window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
     	
   </script>
 
+  <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Widget custom") ) : ?>
+
 <?php endif; ?>
