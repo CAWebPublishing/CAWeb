@@ -52,7 +52,7 @@ function caweb_tiny_mce_before_init($init_array) {
 
     // TinyMCE default is 11pt but it doesnt appear in the font size box
     $font_sizes = array("8pt", "9pt", "10pt", "11pt", "12pt", "13pt", "14pt", "15pt", "16pt", "17pt", "18pt", "19pt", "20pt", "21pt", "22pt", "23pt", "24pt", "25pt", "26pt", "27pt", "28pt", "29pt", "30pt", "31pt", "32pt", "33pt", "34pt", "35pt", "36pt");
-    $init_array['fontsize_formats'] = implode(" ", $font_sizes) ;
+    $init_array['fontsize_formats'] = implode(" ", $font_sizes);
 
     // TinyMCE Toolbar Start off unhidden
     $init_array['wordpress_adv_hidden'] = false;
