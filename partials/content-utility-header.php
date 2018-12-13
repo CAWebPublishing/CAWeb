@@ -3,7 +3,7 @@
     <div class="container">
       <div class="group">
             <div class="quarter social-links">
-              <a href="http://www.ca.gov/"  title="CA.gov"style="float: left;"><img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
+              <a href="http://www.ca.gov/"  title="CA.gov" style="float: left;"><img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" alt="Image of the CA.gov Logo"/></a>
                 <ul class="utility-links social-media-links">
 					<?php
               $gtranslator = get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
