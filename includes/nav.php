@@ -53,7 +53,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 // If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
                 $homeLink = (isset($args->home_link) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '');
 
-                $searchLink = (isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) && "" !== get_option('ca_google_search_id') ?
+                $searchLink = (isset($args->version) && 5 <= $args->version && "page-templates/searchpage.php" !== get_page_template_slug($post_id) && "" !== get_option('ca_google_search_id', "") ?
                                     '<li class="nav-item nav-item-search"><a href="#" class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</a></li>' : '');
 
                 $nav_menu = sprintf('<nav id="navigation" class="main-navigation %1$s hidden-print">
@@ -174,11 +174,11 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                     $childCount = count($childLinks);
 
                     // Get icon if present
-                    $icon = $item_meta['_caweb_menu_icon'][0];
+                    $icon = isset($item_meta['_caweb_menu_icon']) ? $item_meta['_caweb_menu_icon'][0] : "";
                     $icon = ( ! empty($icon) ? caweb_get_icon_span($icon) : caweb_get_blank_icon_span());
 
                     // Get column count
-                    $nav_column_count = $item_meta['_caweb_menu_column_count'][0];
+                    $nav_column_count = isset($item_meta['_caweb_menu_column_count']) ? $item_meta['_caweb_menu_column_count'][0] : 0;
                     // Create Link
                     $nav_item .= sprintf('<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
                                         implode(" ", $item->classes),(in_array('current-menu-item', $item->classes) ? ' active ' : ''),
