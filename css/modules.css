@@ -122,7 +122,7 @@ overflow: hidden;
   overflow: hidden;
 }
 
-#profile-banner-wrapper a:hover{
+.profile-banner-wrapper a:hover{
   text-decoration: none;
 }
 

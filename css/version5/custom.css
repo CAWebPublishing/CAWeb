@@ -206,6 +206,27 @@ ul.utility-links.social-media-links{
   }
 }
 
+/*Mega Nav Columns*/
+
+.nav-item.two-columns .full .second-level-nav .unit1,
+.nav-item.two-columns .full .second-level-nav .unit2,
+.nav-item.two-columns .full .second-level-nav .unit3 {
+    width: 50%
+}
+
+.nav-item.three-columns .full .second-level-nav .unit1,
+.nav-item.three-columns .full .second-level-nav .unit2,
+.nav-item.three-columns .full .second-level-nav .unit3 {
+    width: 33.33%;
+    width: calc(100% /3)
+}
+
+.nav-item.four-columns .full .second-level-nav .unit1,
+.nav-item.four-columns .full .second-level-nav .unit2,
+.nav-item.four-columns .full .second-level-nav .unit3 {
+    width: 25%
+}
+
 /* End of Branding & Navigation */
 
 /* Header Slideshow Banner */
