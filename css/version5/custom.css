@@ -207,16 +207,31 @@ ul.utility-links.social-media-links{
 }
 
 /*Mega Nav Columns*/
-
+.nav-item.two-columns .three-quarters .second-level-nav .unit1, 
+.nav-item.two-columns .three-quarters .second-level-nav .unit2,
+.nav-item.two-columns .three-quarters .second-level-nav .unit3,
+.nav-item.two-columns .half .second-level-nav .unit1, 
+.nav-item.two-columns .half .second-level-nav .unit2,
+.nav-item.two-columns .half .second-level-nav .unit3 {
+  width: 100%;
+}
 .nav-item.two-columns .full .second-level-nav .unit1,
 .nav-item.two-columns .full .second-level-nav .unit2,
-.nav-item.two-columns .full .second-level-nav .unit3 {
+.nav-item.two-columns .full .second-level-nav .unit3,
+.nav-item.three-columns .half .second-level-nav .unit1, 
+.nav-item.three-columns .half .second-level-nav .unit2, 
+.nav-item.three-columns .half .second-level-nav .unit3 {
     width: 50%
 }
 
 .nav-item.three-columns .full .second-level-nav .unit1,
 .nav-item.three-columns .full .second-level-nav .unit2,
-.nav-item.three-columns .full .second-level-nav .unit3 {
+.nav-item.three-columns .full .second-level-nav .unit3,
+.nav-item.four-columns .three-quarters .second-level-nav .unit2,
+.nav-item.four-columns .three-quarters .second-level-nav .unit3,
+.nav-item.four-columns .half .second-level-nav .unit1, 
+.nav-item.four-columns .half .second-level-nav .unit2, 
+.nav-item.four-columns .half .second-level-nav .unit3 {
     width: 33.33%;
     width: calc(100% /3)
 }
