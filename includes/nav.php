@@ -375,6 +375,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
     value="<?= ! empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : ''; ?>"/>
 <input type="button" class="library-link" value="Browse" id="library-link-<?= $item_id; ?>"   name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
 </div>
+<?php if("megadropdown" == get_option('ca_default_navigation_menu', 'megadropdown') ): ?>
 <div class="mega_menu_images <?= (0 == $depth ? 'show' : ''); ?> description description-wide " >
 <p><strong>Mega Menu Image Option</strong><p>
 <p>Select an Image</p>
@@ -392,7 +393,6 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <option value="quarter" <?= ( ! empty($tmp['_caweb_menu_image_size'][0]) && 'quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Quarter</option>
 <option value="half" <?= ( ! empty($tmp['_caweb_menu_image_size'][0]) &&  'half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : ''); ?> >Half</option>
 </select>
-
 <p>Select a column layout</p>
 <select name="<?= $item_id; ?>_column_count">
     <option value="" <?= ( ! empty($tmp['_caweb_menu_column_count'][0]) && '' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : ''); ?> >Select layout...</option>
@@ -400,9 +400,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
     <option value="three-columns" <?= ( ! empty($tmp['_caweb_menu_column_count'][0]) && 'three-columns' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : ''); ?> >3 Columns</option>
     <option value="four-columns" <?= ( ! empty($tmp['_caweb_menu_column_count'][0]) && 'four-columns' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : ''); ?> >4 Columns</option>
 </select>
-
-
 </div>
+     <?php endif; ?>
 
 <?php
         }
