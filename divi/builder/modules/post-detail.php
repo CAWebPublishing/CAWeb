@@ -62,6 +62,19 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
                 'tab_slug'  => 'general',
                 'toggle_slug'  => 'style',
             ),
+            'show_featured_image' => array(
+                'label'           => esc_html__('Display Featured Image', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options'         => array(
+                    'off' => esc_html__('No', 'et_builder'),
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                ),
+                'default' => 'on',
+                'show_if' => array('post_type_layout' => array('news', 'profile')),
+                'tab_slug'			=> 'general',
+                'toggle_slug'			=> 'style',
+            ),
             'content' => array(
                 'label'           => esc_html__('Content', 'et_builder'),
                 'type'            => 'tiny_mce',
@@ -1183,6 +1196,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
     function render($unprocessed_props, $content = null, $render_slug) {
         global $post;
         $post_type_layout    = $this->props['post_type_layout'];
+        $show_featured_image = $this->props['show_featured_image'];
+
         // Course Attributes
         $show_course_presenter = $this->props['show_course_presenter'];
         $course_presenter_name = $this->props['course_presenter_name'];
@@ -1472,13 +1487,14 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 			// News
 			case 'news':
 			$this->add_classname('news-detail');
-			$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-
+            $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+            
+            $image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')) : '';
 			$news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
 			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
 													( ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : ''), $news_publish_date,
 													( ! empty($news_city) ? sprintf('%1$s', $news_city) : ''));
-			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')), $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
 
 				break;
 			// Profile
@@ -1487,10 +1503,10 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 			$this->add_classname('profile-detail');
 			$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-				$title = sprintf('%1$s%2$s%3$s', ( ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '') , $profile_name,
+                $title = sprintf('%1$s%2$s%3$s', ( ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '') , $profile_name,
 				( ! empty($profile_career_title) ? ', '.$profile_career_title : ''));
 				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
-				$image = caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;'));
+				$image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;')) : '';
 				$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
 
 				break;

@@ -529,13 +529,15 @@ function caweb_get_blank_icon_span() {
 }
 
 if ( ! function_exists('caweb_get_excerpt')) {
-    function caweb_get_excerpt($con, $excerpt_length) {
+    function caweb_get_excerpt($con, $excerpt_length, $p = -1) {
         if (empty($con)) {
             return $con;
         }
-
+        
         $con_array = explode(" ", $con);
-
+        if( $p == 562742 ){
+            update_site_option('dev',  $con_array);
+        }
         if (count($con_array) > $excerpt_length) {
             $excerpt = array_splice($con_array, 0, $excerpt_length);
             $excerpt = implode(" ", $excerpt).'...';
@@ -555,7 +557,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
         $size = 'thumbnail';
     }
     $thumbnail = get_the_post_thumbnail($post, $size, $attr);
-
+    
     // if there is no thumbnail return
     if (empty($thumbnail)) {
         return;
@@ -579,8 +581,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
 
     $new_img = sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
 
-    $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);
-
+    $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);    
     return $thumbnail;
 }
 ?>
