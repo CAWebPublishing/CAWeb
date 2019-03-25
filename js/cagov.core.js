@@ -9941,7 +9941,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
  * @author Bartosz Wojciechowski
  * @author Artus Kolanowski
  * @author David Deutsch
- * @author Tom De Caluwé
+ * @author Tom De Caluwï¿½
  * @license The MIT License (MIT)
  */
 ; (function ($, window, document, undefined) {
@@ -14442,27 +14442,27 @@ $(document).ready(function () {
 
 // take into account the fixed header -----------------------------------------------------v5 FIX---------------------------------
 
-        //else {
-        //    // no header image, which means our main content needs to
+        else {
+        // no header image, which means our main content needs to
 
-        //    $mainContent.css({
-        //        'padding-top': Math.max(headerHeight, 119)
-        //    })
-
-
-        //} if ($(".ask-group").length > 0) {
-        //    $mainContent.addClass('print-p-t'); // Media print .main-content fix	
-        //    $mainContent.css({
-        //        'padding-top': 0
-        //    })
-
-        //    $('.header-slideshow-banner, .header-primary-banner').css({
-        //        'margin-top': 119
-
-        //    });
+            $mainContent.css({
+                'padding-top': Math.max(headerHeight, 119)
+            })
 
 
-        //}
+        } if ($(".ask-group").length > 0) {
+            $mainContent.addClass('print-p-t'); // Media print .main-content fix	
+            $mainContent.css({
+                'padding-top': 0
+            })
+
+            $('.header-slideshow-banner, .header-primary-banner').css({
+                'margin-top': 119
+
+            });
+
+
+        }
     }
     // take into account the fixed header -----------------------------------------------------v5 FIX---------------------------------
 
@@ -14623,16 +14623,16 @@ function trackExternalLinks (evnt) {
 ----------------------------------------- */
 
 /*
-Copyright © 2013 Adobe Systems Incorporated.
+Copyright ï¿½ 2013 Adobe Systems Incorporated.
 
-Licensed under the Apache License, Version 2.0 (the “License”);
+Licensed under the Apache License, Version 2.0 (the ï¿½Licenseï¿½);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an “AS IS” BASIS,
+distributed under the License is distributed on an ï¿½AS ISï¿½ BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -14658,8 +14658,8 @@ limitations under the License.
 /**
  * @fileOverview accessibleMegaMenu plugin
  *
- *<p>Licensed under the Apache License, Version 2.0 (the “License”)
- *<br />Copyright © 2013 Adobe Systems Incorporated.
+ *<p>Licensed under the Apache License, Version 2.0 (the ï¿½Licenseï¿½)
+ *<br />Copyright ï¿½ 2013 Adobe Systems Incorporated.
  *<br />Project page <a href="https://github.com/adobe-accessibility/Accessible-Mega-Menu">https://github.com/adobe-accessibility/Accessible-Mega-Menu</a>
  * @version 0.1
  * @author Michael Jordan
