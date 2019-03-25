@@ -11,12 +11,13 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             add_filter('wp_edit_nav_menu_walker', array($this, 'caweb_edit_nav_menu_walker'), 9999);
             add_action('wp_nav_menu_item_custom_fields', array($this, 'caweb_nav_menu_item_custom_fields'), 9, 4);
             add_action('wp_update_nav_menu_item', array($this, 'caweb_update_nav_menu_item'), 10, 3);
-
+            
             // Hooked onto the WordPress Navigation
             add_filter('wp_nav_menu_args', array($this, 'caweb_nav_menu_args'));
             // https://core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/widgets/class-wp-nav-menu-widget.php#L17
             add_filter('widget_nav_menu_args', array($this, 'caweb_widget_nav_menu_args'), 10, 4);
             add_filter('wp_nav_menu', array($this, 'caweb_nav_menu'), 10, 2);
+            
         } // end constructor
 
         public function caweb_nav_menu_args($args) {
@@ -249,7 +250,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 // Get desc if present
                 $desc= ("" != $item->description ? sprintf('<div class="link-description">%1$s</div>', $item->description) : '&nbsp;');
 
-                $li_unit = $item_meta['_caweb_menu_unit_size'][0];
+                $li_unit = "megadropdown" == get_option('ca_default_navigation_menu', 'megadropdown') ? $item_meta['_caweb_menu_unit_size'][0] : "unit1";
 
                 // if version 5
                 if (5.0 <= $args->version) {
@@ -262,11 +263,12 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                             $icon, $item->title, ("unit1" != $li_unit ? $desc : ''));
                     } else {
                         // Get nav media if present
-                        $nav_media_image= $item_meta['_caweb_menu_media_image'][0];
-
+                        $nav_media_image = $item_meta['_caweb_menu_media_image'][0];
+                        $nav_media_alt_text = $item_meta['_caweb_nav_media_image_alt_text'][0];
+                        
                         $nav_media = ("megadropdown" == $args->style ?
-                                                        sprintf('<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" /></a></div>',
-                                                                $item->url, $nav_media_image) : '');
+                                                        sprintf('<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
+                                                                $item->url, $nav_media_image, $nav_media_alt_text) : '');
 
                         $sub_nav .= sprintf('<li %1$s title="%2$s" %3$s><div class="nav-media">
                                                                     <div class="media">%4$s<div class="media-body"><div class="title"><a href="%5$s"%6$s>%7$s</a></div>
@@ -339,7 +341,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 
         function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
             $tmp = get_post_meta($item->ID);
-            $icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : ''; ?>
+            $icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : ''; 
+            $nav_media_image_alt_text = ! empty($tmp['_caweb_nav_media_image_alt_text'][0]) ? $tmp['_caweb_nav_media_image_alt_text'][0] : '';
+            ?>
 
 
 <div class="icon_selector <?= ( ! empty($tmp['_caweb_menu_unit_size'][0]) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : ''); ?> description description-wide">
@@ -360,11 +364,13 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <div class="unit_selector <?= (0 != $depth ? 'show' : ''); ?> description description-wide"  >
 <p><strong>Select a height for the navigation item</strong></p>
 <select name="<?= $item_id; ?>_unit_size" class="unit-size-selector" id="unit-size-selector-<?= $item_id; ?>" >
-<option value="unit1" <?= ('unit1' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 1 - 50px height</option>
-  <option value="unit2" <?= ('unit2' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 2 - 100px height</option>
+<option value="unit1" <?= (isset($tmp['_caweb_menu_unit_size'][0]) && 'unit1' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 1 - 50px height</option>
+<?php if ("megadropdown" == get_option('ca_default_navigation_menu', 'megadropdown')) : ?>
+  <option value="unit2" <?= (isset($tmp['_caweb_menu_unit_size'][0]) && 'unit2' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 2 - 100px height</option>
   <?php if (5.0 <= get_option('ca_site_version')) : ?>
-  <option value="unit3" <?= ('unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 3 - 100px height w/ Image</option>
+  <option value="unit3" <?= (isset($tmp['_caweb_menu_unit_size'][0]) && 'unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : ''); ?> >Unit 3 - 100px height w/ Image</option>
   <?php endif; ?>
+<?php endif; ?>
 </select>
 </div>
 
@@ -374,6 +380,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <input  name="<?= $item_id; ?>_media_image" id="<?= $item_id; ?>_media_image" type="text" class="link-text" style="width: 97%;"
     value="<?= ! empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : ''; ?>"/>
 <input type="button" class="library-link" value="Browse" id="library-link-<?= $item_id; ?>"   name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
+<p>Navigation Media Image Alt Text
+    <input  name="<?= $item_id; ?>_caweb_nav_media_image_alt_text" id="<?= $item_id; ?>_caweb_nav_media_image_alt_text"
+    value="<?= $nav_media_image_alt_text ?>" type="text" /></p>
 </div>
 <?php if("megadropdown" == get_option('ca_default_navigation_menu', 'megadropdown') ): ?>
 <div class="mega_menu_images <?= (0 == $depth ? 'show' : ''); ?> description description-wide " >
@@ -382,7 +391,6 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <input  name="<?= $item_id; ?>_image" id="<?= $item_id; ?>_image"  type="text" class="link-text" style="width: 97%;"
     value="<?= ! empty($tmp['_caweb_menu_image'][0]) ? $tmp['_caweb_menu_image'][0] : ''; ?>"/>
 <input type="button" value="Browse" id="library-link-<?= $item_id; ?>" class="library-link"  name="<?= $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
-
 <p>Select a Side / Select a Size</p>
 <select name="<?= $item_id; ?>_image_side" >
 <option value="left" <?= ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Left</option>
@@ -417,6 +425,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 $args['caweb-menu-item-image-side'] = $_POST[$menu_item_db_id.'_image_side'];
                 $args['caweb-menu-item-image-size'] = $_POST[$menu_item_db_id.'_image_size'];
                 $args['caweb-menu-column-count'] = $_POST[$menu_item_db_id.'_column_count'];
+                $args['caweb-nav-media-image-alt-text'] = $_POST[$menu_item_db_id.'_caweb_nav_media_image_alt_text'];
+                
                 update_post_meta($menu_item_db_id, '_caweb_menu_icon', $args['caweb-menu-item-icon']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_unit_size', $args['caweb-menu-item-unit-size']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_media_image', $args['caweb-menu-item-media-image']);
@@ -424,8 +434,10 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 update_post_meta($menu_item_db_id, '_caweb_menu_image_side', $args['caweb-menu-item-image-side']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_image_size', $args['caweb-menu-item-image-size']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_column_count', $args['caweb-menu-column-count']);
+                update_post_meta($menu_item_db_id, '_caweb_nav_media_image_alt_text', $args['caweb-nav-media-image-alt-text']);
+            
             }
-
+            
             return $menu_item_db_id;
         }
     }

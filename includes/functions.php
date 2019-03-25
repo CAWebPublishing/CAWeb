@@ -529,18 +529,28 @@ function caweb_get_blank_icon_span() {
 }
 
 if ( ! function_exists('caweb_get_excerpt')) {
-    function caweb_get_excerpt($con, $excerpt_length) {
+    function caweb_get_excerpt($con, $excerpt_length, $p = -1) {
         if (empty($con)) {
             return $con;
         }
-
-        $con_array = explode(" ", $con);
-
+        $con_array = explode( " ", htmlentities(strip_tags( $con, '<a>' ) ) );
+        
         if (count($con_array) > $excerpt_length) {
             $excerpt = array_splice($con_array, 0, $excerpt_length);
-            $excerpt = implode(" ", $excerpt).'...';
+            $closed = true;
 
-            return $excerpt;
+            foreach($excerpt as $i => $word){
+                if( preg_match('/<a/', html_entity_decode( $word ) ) ){
+                    $closed = false;
+                }
+                if(preg_match('/<\/a>/', html_entity_decode( $word ) ) ){
+                    $closed = true;
+                }
+            }
+
+            $excerpt = ! $closed ? implode(" ", $excerpt) . '...</a>' : implode(" ", $excerpt) . '...';
+            
+            return html_entity_decode ($excerpt);
         }
 
         return $con;
@@ -555,7 +565,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
         $size = 'thumbnail';
     }
     $thumbnail = get_the_post_thumbnail($post, $size, $attr);
-
+    
     // if there is no thumbnail return
     if (empty($thumbnail)) {
         return;
@@ -579,8 +589,7 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
 
     $new_img = sprintf('<img style="width:%1$spx;height:%2$spx;%3$s" ', $pixel_size[0], $pixel_size[1], $style);
 
-    $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);
-
+    $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);    
     return $thumbnail;
 }
 ?>

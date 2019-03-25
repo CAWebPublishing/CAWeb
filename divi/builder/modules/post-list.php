@@ -331,11 +331,13 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 								    if ( ! has_post_thumbnail($post_id) ||  "off" == $view_featured_image) {
 								        $image = '';
 								    } else {
-								        $this->add_classname('indent');
-								        $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100))) : '';
+                                        $this->add_classname('indent');
+                                        $thumbnail = caweb_get_the_post_thumbnail($post_id, array(150, 100));
+								        $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', $thumbnail) : '';
+                                        
 								    }
 
-								    $excerpt = caweb_get_excerpt($post_content_handler->content, 30);
+                                    $excerpt = caweb_get_excerpt($post_content_handler->content, 30, $post_id);
 								    $excerpt = ( ! empty($excerpt) ?
 															sprintf('<div class="description"><p>%1$s</p></div>', $excerpt) : '');
 

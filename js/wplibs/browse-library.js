@@ -25,7 +25,8 @@
       var types = $el.data('option');
        var uploader =  $el.data('uploader') ;
       var classes = uploader ? '' : 'hidden-upload';
-			var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
+      var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
+      
 
       if (!!types && types.indexOf(',') > 0 )
         types = types.split(',');
@@ -72,18 +73,23 @@
         var input_box = document.getElementById(el_name);
         var preview_field = document.getElementById(el_name + "_img");
         var filename_box = document.getElementById(el_name +  "_filename");
+
 				 var data = {
           'action': 'caweb_fav_icon_check',
           'icon_url': attachment.attributes.url,
         };
+				if( /\d+_media_image/.test(el_name) ){
+          var nav_img_alt_box = document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
+          input_box.value = attachment.attributes.url;
+          nav_img_alt_box.value = attachment.attributes.alt;
 
-				if( !icon_check){
-					input_box.value = attachment.attributes.url;
+        }else if( !icon_check ){
+          input_box.value = attachment.attributes.url;
 						if( null !== preview_field )
             	preview_field.src = attachment.attributes.url;
 						if( null !== filename_box )
               filename_box.value = filename;
-				}else{
+        }else{
 					jQuery.post(ajaxurl, data, function(response) {
 						if(1 == response){
 
