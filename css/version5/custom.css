@@ -253,7 +253,12 @@ ul.utility-links.social-media-links{
   z-index: 6;
 }
 
-
+/* Header Organization Banner */
+@media (min-width: 768px){
+  .fixed.compact .header-organization-banner a img {
+      max-height: 50px;
+  }
+}
 /* Footer */
 footer .container{
      max-width: 1280px;
@@ -345,3 +350,22 @@ footer .container .group{
 .list-standout{
 	padding-left: 1.5em !important;
 }
+
+/* Version 5.0.2 - 5.5.2 fixes */
+/* Header Styles */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: inherit;
+}
+.location .contact [class^="ca-gov-icon"] {
+  position: relative;
+}
+/* Media Query Fixes */
+@media (min-width: 1280px){
+  .branding, .main-navigation, .container{
+      width: 1280px;
+  }
+}
+/* End of Version 5.0.2 - 5.5.2  */
