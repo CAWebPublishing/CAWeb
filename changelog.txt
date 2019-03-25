@@ -1,0 +1,362 @@
+CAWeb v1.4.1
+March 26, 2018
+- WordPress Thickbox function enabled 
+- Fixed issue with theme checking for updats on every page
+- Fixed issue with empty search results whenever Divi Search Module is used
+- Optimized the order of CSS and JS files
+- Core JavaScript deprecated jQuery functions have been removed
+- Remove default date from Post Detail module
+- Fixed issue with page title not being left aligned
+- Fixed issue with warnings display with GitHub Module when no repos are found
+
+CAWeb v1.4.0
+March 1, 2018
+- New Sacramento colorscheme added
+- New Custom CSS Upload feature
+- Prefixed function names
+- Corrected logo sizing 
+- Settings link is now accessible via keyboard
+- Google logos have been added to search
+- Reset password resets according to the site where the reset was requested
+- Added missing html tags
+- Fixed issue with Google Translate on Mobile Mode
+
+CAWeb v1.3.4
+January 30, 2018
+- CAWeb Options are now escaped when saved
+- Navigation Menu is now left justified in Mobile View
+- Fixed issue with pre_get_posts filter applying on backend
+- Background Appearance Menu has been removed
+- Read More button has been added to each post on an Archive, Date, Author, Category and Tag Template Page
+
+CAWeb v1.3.3
+December 19, 2017
+- WordPress Archive, Date, Author, Category and Tag Template have been created and styled
+- Fixed CAWeb Share Email Feature
+- Fixed issue with logo not adhering to margins- 
+
+CAWeb v1.3.2
+December 11, 2017
+- Template V5 updates have been merged
+- Introduced 3 New Color Schemes Eureka, Mono and Trinity
+- Added Multisite Google Analytics Option
+- Suppressed sidebar when empty on default WP Template Pages
+- Comments properly adhere to margins on Non-Divi Post Pages
+- Fixed issue with button icons not rendering correctly when left aligned
+- Fixed CSS for Post Detail Mobile View
+
+CAWeb v1.3.1
+November 14, 2017
+- TinyMCE toolbar default is expaned
+- New checkboxes for Social Media Links to open in new tab
+- Non-Divi Posts will now display the date
+- Non-Divi Posts will now display the Sidebar
+
+CAWeb v1.3.0
+October 30, 2017
+- Added spacing after icons in Section and Fullwidth Section Footers
+- Added search box to 404 Page Not Found
+- WordPress Customizer Feature has been enabled
+- Removed strong bolding tags from GitHub Module
+- Widget Custom Menu now displays icons/images
+- Private Repositories Request button has been added for each private repo when using GitHub Module
+
+CAWeb v1.2.3
+October 3, 2017
+- Icon field names have been changed in 6 modules to 'font_icon' matching Divi icon field names
+- Shortened Section/Fullwidth Section Footer Group link construction
+- Removed unneeded functions in ET_Builder_CAWeb_Module
+- Divi Builder javascript has been slightly modified at et_pb_icon_font_init() This line was added: current_symbol_val = current_symbol_val.search('"') !== -1 ? current_symbol_val.replace('"', '%22') : current_symbol_val;
+- Related videos have been removed when using Divi Video Module
+- Navigation Screen Options now apply to Header Sub Nav, Footer and Widget Menus
+
+CAWeb v1.2.2
+August 28, 2017
+- Google Fonts have all been removed except the CA State Google Font
+- Fixed js/libs javascripts from being linked incorrectly
+- Fixed issue with Custom CSS stripping single and double quotes out
+- Corrected issue with Header Banner Slideshow Module throwing PHP errors
+- GitHub Password fields was changed to Token Field
+- Deferred render blocking template scripts
+- Fixed Section Primary issue when no image is selected
+- Added less padding to Section Primary horizontal/vertical spacing
+- CSS and JS are now minified
+
+CAWeb v1.2.1a
+August 18, 2017
+- New Carousel Media style added to Section Carousel and Fullwidth Section Carousel Modules
+- Anchors have been corrected and now land at the appropriate ID
+- Logo and Nav_list styles have been updated
+
+CAWeb v1.2.1
+August 4, 2017
+- Moved Google Scripts to the footer
+- CAWeb styles and scripts now include proper version number
+- Theme Description has been changed
+- Utility Header Contact Us is now optional under CAWeb Options
+- CA.gov logo now includes Alt Text
+- Corrected issue with CAWeb Page Setting Metabox icon and color styles
+- Widget Support has been re-enabled
+- Utility Header links are now vertically aligned
+- GitHub API Key menu added to allow for updates via GitHub
+
+CAWeb v1.2.0a
+July 26, 2017
+- Change IE Compatibility from Edge to IE11 which caused some sites to crash when using IE
+
+CAWeb v1.2.0
+July 20, 2017
+- Added full support of all Navigation Menu Screen Options
+- All modules fields and labels have been mapped to match new Divi Labeling System
+- Google Analytics now tracks document downloads
+- Corrected styling and blank entries in Location Module
+
+CAWeb v1.1.4c
+July 20, 2017
+- Removed Manage Live Preview Button from Navigation Menu
+
+CAWeb v1.1.4b
+June 28, 2017
+- Added full icon class name for modules
+
+CAWeb v1.1.4a
+June 28, 2017
+- Fixed navigation icons
+
+CAWeb v1.1.4
+June 19, 2017
+- GitHub module links open in separate table
+- Corrected Font Icon mismatching between various browsers
+- New Default Display Title Setting under CAWeb Options
+- Resolved various IE console errors
+
+CAWeb v1.1.3a
+June 5, 2017
+- The home icon now displays on secondary pages/posts on the Header menu.
+
+CAWeb v1.1.3
+May 31, 2017
+- Profile Banner module now allows for disabling on various format types
+- Profile Banner Module is now expandable
+- Added the State Icons to the current Divi Icons.
+- Allow entry for the Event Organizer in Event Post Detail Content Type
+- Added Sierra, Paso Robles, Orange County and Santa Barbara Version 5 color schemes
+- Navigation Icons stay highlighted when on active page
+- Created new GitHub Integration Module
+- Removed/Deactivated the Search Menu item from the Search Results Page
+- Fixed quotation marks for Version 4 Fullwidth Slideshow Banner
+
+CAWeb v1.1.2
+May 5, 2017
+- Search box layering is not correct.
+- Display the icon next to the URL
+- Use the CAWeb Publishing favicon for the backend
+- When doing a save on CAWeb Admin the user is not notified of the status
+- Fix page spacing
+- Ensure the icon is visible once selected
+- Validate that the file specified is an icon file
+- If the web master removes the FavIcon add the default back in.
+- Upgrade Google search to API 2.0
+- Create a new Service Tile Module
+- Default the ReadSpeak with Text Visibility
+- Create an Intranet Plugin
+- Set labels according to attached file
+- Create a New FAQ list based on the Post Detail and Post List Modules
+- Format the Footer Menu
+- Create solution to mimic Word Press updates
+
+CAWeb v1.1.1
+Apr 21, 2017
+- Mega drop-down not displaying 4 and 7 page links properly in IE and Firefox
+- Invalid spacing of the Mega Dropdown
+- Enable a post heading to be H1, H2 or H3
+- Set right and left page boarder at 10px
+- Revmove Gradient
+- Right justify the labels
+- Move the entry fields 1 space to the right of the labels
+- Reduce the Font of the Field heading
+- Make title tips all lower cases
+- Fields that have a file name should not have the entire URL
+- Add image preview box
+- Move Browse button
+- Remove excess padding between each field
+- Format the results page to look like icentral results
+- Make the Full Width Carousel Full Width
+- spacing in the menu is not correct
+- Editor should not see the CAWeb Options or Navigation links
+- Change all CAWeb Custom modules icons
+- Version 5 logo is too big
+- Modify Version 5.0 Beta selection
+- Remove version 4.5 Template
+- Clear background color
+- Turning off the button does not work
+- Set fixed height and width of the image for location module
+- Add State wide Search account
+- Remove the Divi paragraph spacing
+- Remove the Post Detail module as a page option
+- Modify the CAWeb Options icon to be color CAWeb icon
+- Enable Media Replace
+- The banner pictures for version 4 homepage are not showing up.
+
+CAWeb v1.1.0b
+Apr 14, 2017
+- Allow the web master to enter a URL for the contact page.
+
+CAWeb v1.1.0a
+Apr 5, 2017
+- Accordion table is exceeding the page width
+- Enable location module
+- Missing excerpt
+- Excerpt formating is incorrect
+- Remove extra header and body line spacing
+
+CAWeb v1.1.0
+Mar 31, 2017
+- Enable an events list module and events detail module
+- Enable a jobs list module and jobs detail module
+- Enable an course list module, course panel and course detail module
+- Enable an exam list module and exam detail module
+- Enable a news list module and news detail module
+- Enable a Public Profile list module and Public profile detail module
+- Drop down menu under template 5 is not working
+- Browse does not work when building an new navigation menu item.
+- Add the ability to have 3 text links in the Utility bar
+- General Post Detail and List
+- Center the logo vertically while in mobile mode
+- Search for sub directory sites
+
+CAWeb v1.0.3c
+Mar 24, 2017
+- Increase max width of agency logo for the v4 template from 355px to 475px.
+- Incorrect spacing in tablet and mobile
+- Mobile menu needs to be moved
+- Enable the conversion of a standard section to a full width section
+- Mobile view margins are not correct
+
+CAWeb v1.0.3b
+Feb 17, 2017
+- Add to the ability in CA Web Options to turn on or off a home Icon
+- Add the ability to add a home icon to the utility bar
+
+CAWeb v1.0.3a
+Feb 14, 2017
+- Unable to update logo File
+
+CAWeb v1.0.3
+Feb 10, 2017
+- Ability to set and remove Favicon
+- Full width section carousel not displaying
+- Numbered list is left justified.
+- Fullwidth section primary not fully responsive
+- The menu and Search icons should be removed from printing
+- Full width banner text box/button should have dynamic height
+- Allow the user to enter the text for the profile link that shows up on the front end
+- The Panel Header label should be able to be centered or left justified
+- Remove title row from page when title is turned off.
+- Add a new text field for the Google Meta Tag field in CAWeb Options.
+- Rework the header menu options
+- Search Title is too low
+- The link to the profile disappears in certain screen sizes.
+- Enable search for Intranet sites
+- Breadcrumbs remain on Page not Found error page
+- Remove the following features from Administrators
+- Save does not confirm the changes for the user
+- Add the ability to turn the header description on and off
+- Header Icons Disappear after Saving a Footer
+- User switching between websites forces login
+- Cannot Select Menu icon after adding a page to a menu
+- Remove trailing spaces
+
+CAWeb v1.0.2
+Dec 30, 2016
+- Add image capability to megadropdown
+- Logo is not responsive vertically
+- Alignment of the CA.gov and the Logo should be the same for all pages
+- Text on the Activation page not visible
+- Contact widget of Panel has errors
+- Missing search Term on search page
+- Admin label missing from Full Width Banner Slide Setting
+- Left or Right justify logos when in mobile mode
+- Footer menu items/buttons are shifted to the left.
+- Title is too high on the page
+- State template not site template
+- If title of photo description is blank then shift all the text upwards to the top of the box
+- Remove background color
+- Incorrect Spacing
+- Spacing for Mega Menu
+- Incorrect spacing of bullets in a text module
+- Select Language needs to be moved under the Search Box
+- Remove Breadcrumbs
+
+CAWeb v1.0.1
+Nov 30, 2016
+- Create space for Department Logo
+- Define the max length of each item and define how they will be displayed
+- Site and CA.Gov Icon placement
+- javascript code needs to be debugged
+- Shifted to the right like on ca.gov (may be dependency on branding & logo)
+- Resolve the overlaying of the User name and site name.
+- Remove mobile gallery from Utility Header
+- Develop the Mega Drop Down solution
+- Optional breadcrumbs
+- Enable the Settings feature icon
+- Activate the "Contact Us" link
+- Activate the Shared icons
+- fix the set location
+- utility header, menu items need to be right justified
+- Ensure the bullets color matches the text.
+- Enable changes to the footer
+- Social Media Icon/links
+- Enable the Agency logo on the site
+- Drop down (second level) nav links inconsistent in display
+- Correct State Logo & Organization Logo Functionality
+- Footer Links are not Centered
+- Secondary Links are not Formatting Correctly
+- Navigation shows an extraneous "Search" link
+- CSS padding needed on megadropdown 2nd level links
+- Remove link description text
+- Link should be left justified and add padding all around
+- Need an option to change the color scheme
+- Ability per page or post to not show article title
+- Add social icons to footer
+- Swoosh is showing above the navigation bar
+- Links wrap on the utility header in mobile view
+- Need site logo and retain desktop color for menu background
+- Sub level navigation links need padding on the left
+- Allow for the selection of Google Translate
+- Implement Google Translate
+- Navigation items disappear
+- Extra padding generated
+- Mega Drop Down Menu Incorrectly Functioning
+- Need check box for showing/not showing the post title
+- Links return to content within the 4.5 theme, even though the site is 4.0
+- Need check box for showing/not showing the post title
+- The Search item is labeled "Search Service"
+- Search box does not expand width
+- Page title and tables overlap with right column
+- Remove Google Translate
+- Center Footer Bar
+- Center Copyright
+- Google Translate feature should match the 4.5 version
+- Set Google Search Engine ID
+- Add Google Analytics ID
+- Create a standard 404 error page
+- The breadcrumbs extend beyond the page.
+- Drop down display is double rendering.
+- Ensure that the second line of a bullet is aligned with the first line.
+- Turning off the title using the Check Box does not work
+- Google Translate overlays the logo in mobile mode
+- Create hover text for CA Options
+- Allow the Web Master to use half width menu items
+- Read more button not responsive
+- Social media boxes selected and no URL
+- Rename Navigation images to Mega Menu Images
+- Improve the look and use of Navigation Images
+- Incorrect spacing for a title on a post
+- Remove Breadcrumb for Serp Page
+- Title is shifted to the right.
+- Add footer to website
+- Website Logo
+- Hide all access to Divi's Visual Builder
+- Web master select single navigation
+- Google Analytics codes are not populating to the front end.
