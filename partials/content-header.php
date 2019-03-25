@@ -96,9 +96,8 @@ $custom_translate = caweb_version_check(4, get_the_ID()) && 'custom' == get_opti
 printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
        $search, ("" == get_option('ca_google_search_id') ? 'hidden' : ''),
        ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ?
-							//	sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''), $custom_translate);
 
-								sprintf('<form id="Search" class="pos-rel"><input type="hidden" id="q" name="q" /><span class="sr-only" id="SearchInput">Custom Google Search</span><input type="text" id="qviz" name="qviz" aria-labelledby="SearchInput" placeholder="Search Services, Agencies, and More..." class="w-100 height-50 border-0 p-x-sm" /><button type="submit" class="pos-abs gsc-search-button right-0 top-0 width-50 height-50 border-0"><span class="ca-gov-icon-search font-size-30" aria-hidden="true"></span><span class="sr-only">Submit</span></button></form> ', site_url('serp')) : ''), $custom_translate);
+		sprintf('<form id="Search" class="pos-rel"><input type="hidden" id="q" name="q" /><span class="sr-only" id="SearchInput">Custom Google Search</span><input type="text" id="qviz" name="qviz" aria-labelledby="SearchInput" placeholder="Search Services, Agencies, and More..." class="w-100 height-50 border-0 p-x-sm" /><button type="submit" class="pos-abs gsc-search-button right-0 top-0 width-50 height-50 border-0"><span class="ca-gov-icon-search font-size-30" aria-hidden="true"></span><span class="sr-only">Submit</span></button></form> ', site_url('serp')) : ''), $custom_translate);
 
 
 ?>

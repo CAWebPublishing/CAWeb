@@ -44,16 +44,11 @@
 
 
 <?php
-printf('<link rel="apple-touch-icon-precomposed" sizes="100x100" href="%1$s/images/system/apple-touch-icon-precomposed.png">', CAWebUri);
-printf('<link rel="icon" sizes="192x192" href="%1$s/images/system/apple-touch-icon-192x192.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="180x180" href="%1$s/images/system/apple-touch-icon-180x180.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="152x152" href="%1$s/images/system/apple-touch-icon-152x152.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="144x144" href="%1$s/images/system/apple-touch-icon-144x144.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="120x120" href="%1$s/images/system/apple-touch-icon-120x120.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="114x114" href="%1$s/images/system/apple-touch-icon-114x114.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" sizes="72x72" href="%1$s/images/system/apple-touch-icon-72x72.png">', CAWebUri);
-printf('<link rel="apple-touch-icon-precomposed" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
-printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon.png">', CAWebUri);
+
+printf('<link rel="apple-touch-icon" sizes="144x144" href="%1$s/images/system/apple-touch-icon-144x144.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" sizes="114x114" href="%1$s/images/system/apple-touch-icon-114x114.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" sizes="72x72" href="%1$s/images/system/apple-touch-icon-72x72.png">', CAWebUri);
+printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
 
 // Nokia
 //printf('<link rel="shortcut icon" href="%1$s/images/system/apple-touch-icon-57x57.png">', CAWebUri);
@@ -89,5 +84,4 @@ printf('<link rel="apple-touch-icon" href="%1$s/images/system/apple-touch-icon.p
   <script src="<?php printf('%1$s/js/libs/respond.min.js', CAWebUri); ?>"></script>
 
 <![endif]-->
-<script> var userIpAddress = '<?php $remote_ip = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); echo $remote_ip; ?>';</script>
 </head>

@@ -48,7 +48,6 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
                 'type'            => 'text',
                 'option_category' => 'basic_option',
                 'description'     => esc_html__('Here you can enter the text for the scroll bar.', 'et_builder'),
-                'default'     => 'Explore',
                 'tab_slug'     => 'general',
                 'toggle_slug'     => 'scroll_bar',
             ),
@@ -117,12 +116,18 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
         //	$this->add_classname('header-single-banner');
         $this->add_classname('header-slideshow-banner');
+				
+				global $et_pb_slider_item_num;
+				
+				$solo = 1 >= $et_pb_slider_item_num ? ' solo' : '';
+				
+        $class = sprintf(' class="%1$s%2$s%3$s" ', $this->module_classname($render_slug), $solo, empty($scroll_bar_text) ? ' no-explore' : '');
 
-        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-
+				$scrollbar = ! empty($scroll_bar_text) ? sprintf('<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div></div>', $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)) : '';
+				
         $content = $this->content;
 
-        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div><div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%3$s</span>%4$s</a></div></div></div> <!-- .et_pb_ca_banner -->', $class, $content, $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon));
+        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div>%3$s <!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
 
         return $output;
     }
@@ -197,6 +202,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
             ),
             'advanced' => array(
                 'toggles' => array(
+                    'banner'  => esc_html__('Banner', 'et_builder'),
                 ),
             ),
             'custom_css' => array(
@@ -215,7 +221,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
                     'on'  => esc_html__('Yes', 'et_builder'),
                     'off' => esc_html__('No', 'et_builder'),
                 ),
-                'affects' => array('heading', 'display_heading', 'button_text', 'button_link'),
+                'affects' => array('heading', 'display_heading', 'button_text', 'button_link', 'banner_align'),
                 'tab_slug' => 'general',
                 'toggle_slug' => 'content',
             ),
@@ -273,7 +279,22 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
             ),
         );
 
-        $design_fields = array();
+        $design_fields = array(
+            'banner_align' => array(
+                'label'           => esc_html__('Banner Alignment', 'et_builder'),
+                'type'            => 'select',
+                'options'         => array(
+                    'left'  => 'Left',
+                    'center'  => 'Center',
+                    'right'  => 'Right',
+                ),
+                'option_category' => 'configuration',
+                'show_if' => array('display_banner_info' => 'on'),
+                'description'       => esc_html__('Here you can choose the alignment for the banner information', 'et_builder'),
+                'tab_slug' => 'advanced',
+                'toggle_slug'       => 'banner',
+            ),
+        );
 
         $advanced_fields = array(
             'module_id' => array(
@@ -303,6 +324,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         $button_text = $this->props['button_text'];
         $button_link = $this->props['button_link'];
         $background_image = $this->props['background_image'];
+        $banner_align = $this->props['banner_align'];
 
         global $et_pb_slider_item_num;
 
@@ -313,7 +335,7 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
 
         $button_link = ! empty($button_link) ? esc_url($button_link) : '';
 
-        $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="_blank"><p class="slide-text"><span class="title" %4$s>%2$s<br /></span>%3$s</p></a>', $button_link, $heading, $button_text, ("off" == $display_heading ? 'style="display:none;"' : '')) : '');
+        $link = ("on" == $display_banner_info ? sprintf('<a href="%1$s" target="_blank"><p class="slide-text %2$s"><span class="title" %3$s>%4$s<br /></span>%5$s</p></a>', $button_link, $banner_align, ("off" == $display_heading ? 'style="display:none;"' : ''), $heading, $button_text) : '');
 
         $output = sprintf('<div%1$s%2$s style="background-image:url(%3$s);">%4$s</div>', $this->module_id(), $class, $background_image, $link);
 

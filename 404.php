@@ -12,17 +12,11 @@
 				<article id="post-0" <?php post_class('et_pb_post not_found'); ?>>
 					<div class="entry-content">
     <!-- Page Title-->
-					<h1 class="text-center">Page Not Found</h1>
-
-					<div class="text-center" style="width:400px; margin:0 auto">
-					<img src="/wp-content/themes/CAWeb/images/404.png" alt="Page not Found" />
-					
-					<h2>Opps... we no longer have that.</h2>
-					</div>
-<div class="description text-center">The page you requested was not found.</div>
+					<h1>Page Not Found</h1>
+<div class="description">The page you requested was not found.</div>
 <div class="section section-none">
-        <div class="agency-form text-center">
-          <h3>Search Site For:</h3>
+        <div class="agency-form">
+          <h1>Search Site For:</h1>
        <?php
 	printf('<gcse:searchbox-only resultsUrl="%1$s"></gcse:searchbox-only> ', site_url('serp'))
       ?>

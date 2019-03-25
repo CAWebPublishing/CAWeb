@@ -1,1 +1,233 @@
-.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text{max-width:50%;padding-bottom:15px!important;bottom:50%}.et_pb_module.et_pb_fullwidth_menu .nav>li{display:inline-block}.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children>a:first-child{padding:0 20px 29px 0}.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children .sub-menu li a{padding:6px 20px}.et_pb_module.et_pb_fullwidth_menu .fullwidth-menu-nav>ul ul{padding-bottom:20px}.section{overflow:hidden}@media(max-width:991px){.et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive,.et_pb_ca_section_primary .col-md-4 img.img-responsive{padding-bottom:10px}.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4,.et_pb_ca_section_primary.et_pb_module .col-md-4{float:none!important;padding-left:0;padding-right:0}}.et_pb_ca_section_primary,.et_pb_ca_fullwidth_section_primary,.et_pb_ca_fullwidth_section_footer{margin-bottom:0!important;padding:10px 15px}.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child,.et_pb_ca_section_footer .row .quarter h4:first-child{border-bottom-style:none}.et_pb_ca_fullwidth_section_footer ul{padding:0!important}.et_pb_ca_section_carousel .container{width:100%}.et_pb_ca_section_carousel .carousel-media .media.item .preview-image,.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item .preview-image{height:150px}.et_pb_ca_section_carousel .carousel-media .media.item img,.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item img{height:100%}.et_pb_ca_section_carousel .carousel-media .media.item .details,.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item .details{margin-top:1em}.panel-heading>h1{margin:0}.panel-heading h2{width:100%}.location.banner .thumbnail img{width:100%}.et_pb_ca_location_widget.location.banner .description{padding-bottom:10px}.profile-banner .banner-subtitle{color:#333}.profile-banner{background:url('../images/banner/banner-blank.png') no-repeat;background-size:100% 100%;overflow:hidden;height:90px}.profile-banner.round-image{background:unset;height:auto;border:0}.profile-banner-img-wrapper{height:90px;float:right;border-radius:50px;overflow:hidden}#profile-banner-wrapper a:hover{text-decoration:none}.et-learn-more h3.heading-more{color:black}ul,ol{list-style-position:outside}.et_pb_ca_fullwidth_section_footer li{margin-left:1em;text-indent:-1em}.et_pb_ca_fullwidth_section_carousel button{margin-top:1em}.et_pb_ca_fullwidth_section_carousel button a,.et_pb_ca_fullwidth_section_carousel h2{color:white}.et_pb_ca_section_carousel button{margin-top:1em}.et_pb_ca_section_carousel button a,.et_pb_ca_section_carousel h2{color:white}ol{margin-left:16px}.et_pb_ca_fullwidth_service_tiles .service-tile.half{width:50%}.et_pb_ca_fullwidth_service_tiles .service-tile.full{width:100%}.et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail{width:auto}.et_pb_module.et_pb_ca_post_list.indent.news-list .info{padding-left:175px}.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header,.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body{margin-left:0}.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{padding:0}.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title,.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title{color:black!important;padding-bottom:0}.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading,.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading{border-bottom:inherit}.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after{content:"\43";font-family:cagov}.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title a:after{content:"\45";font-family:cagov}.et_pb_ca_card.et_pb_module .card-header{padding:11px 15px}.et_pb_ca_card.et_pb_module .card-title{margin-bottom:0;padding-bottom:0;border-bottom:0!important}.et_pb_ca_card.et_pb_module .card-block{padding:15px;color:initial}.et_pb_ca_card.et_pb_module .card-footer{padding:11px 15px}.et_pb_ca_github.et_pb_module ul li{list-style-type:none}
+/* Fullwidth Header Slideshow Banner */
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text{
+  max-width: 50%;
+  padding-bottom: 15px !important;
+	bottom: 50%;
+}
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.center{
+	left: 25%;
+}
+.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.right{
+	left: 50%;
+}
+/* Fullwidth Menu */
+.et_pb_module.et_pb_fullwidth_menu .nav > li{
+	display: inline-block;
+}
+.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children>a:first-child{
+	padding: 0 20px 29px 0;
+}
+.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children .sub-menu li a{
+	padding: 6px 20px;
+}
+.et_pb_module.et_pb_fullwidth_menu .fullwidth-menu-nav>ul ul{
+	padding-bottom: 20px;
+}
+.et_pb_module.et_pb_ca_fullwidth_banner.solo #primary-carousel div[class*="banner-"] {
+    display: none;
+}
+.et_pb_module.et_pb_ca_fullwidth_banner.no-explore #primary-carousel div[class*="banner-"] {
+	bottom: 0;
+}
+.explore-invite {
+  z-index: 1;
+}
+/* Section Primary  */
+.section{
+overflow: hidden;
+}
+/* Adds padding under featured image when in tablet mode */
+@media (max-width: 991px){
+  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive,
+  .et_pb_ca_section_primary .col-md-4 img.img-responsive{
+      padding-bottom: 10px;
+  }
+  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4,
+  .et_pb_ca_section_primary.et_pb_module .col-md-4{
+      float: none !important;
+    	padding-left: 0;
+    	padding-right: 0;
+  }
+}
+
+.et_pb_ca_section_primary,
+.et_pb_ca_fullwidth_section_primary,
+.et_pb_ca_fullwidth_section_footer{
+    margin-bottom: 0 !important;
+    padding: 10px 15px;
+}
+
+/* Section - Footer */
+.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child ,
+.et_pb_ca_section_footer .row .quarter h4:first-child {
+    border-bottom-style: none;
+}
+.et_pb_ca_fullwidth_section_footer ul{
+  padding: 0 !important;
+}
+
+/* Section - Carousel */
+.et_pb_ca_section_carousel .container{
+	width: 100%;
+}
+
+.et_pb_ca_section_carousel .carousel-media .media.item .preview-image,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item .preview-image{
+ 	height: 150px;
+}
+.et_pb_ca_section_carousel .carousel-media .media.item img,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .media.item img{
+ 	height: 100%;
+}
+.et_pb_ca_section_carousel .carousel-media .media.item .details,
+.et_pb_ca_fullwidth_section_carousel  .carousel-media .media.item .details{
+ 	margin-top: 1em;
+}
+/* Panel Style */
+.panel-heading > h1 {
+    margin: 0;
+}
+.panel-heading h2{
+	width: 100%;
+}
+/* Location Banner Thumbnail Image Fix*/
+.location.banner .thumbnail img {
+    width: 100%;
+ }
+.et_pb_ca_location_widget.location.banner .description {
+    padding-bottom: 10px;
+}
+/* Profile Banner */
+.profile-banner .banner-subtitle{
+  color: #333333;
+
+}
+.profile-banner{
+	background: url('../images/banner/banner-blank.png') no-repeat;
+   background-size: 100% 100%;
+   overflow: hidden;
+   height: 90px;
+}
+
+.profile-banner.round-image{
+	background: unset;
+  height: auto;
+  border: none;
+}
+
+.profile-banner-img-wrapper{
+  height: 90px;
+  float: right;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.profile-banner-wrapper a:hover{
+  text-decoration: none;
+}
+
+/* Divi Accordion Style */
+.et-learn-more h3.heading-more {
+    color: black;
+}
+
+ul, ol{
+  list-style-position: outside;
+}
+
+/* Fullwidth Section Footer */
+.et_pb_ca_fullwidth_section_footer li{
+  margin-left: 1em;
+  text-indent: -1em;
+}
+
+
+/* Fullwidth Section Carousel */
+.et_pb_ca_fullwidth_section_carousel button {
+  margin-top: 1em;
+}
+
+.et_pb_ca_fullwidth_section_carousel button a, .et_pb_ca_fullwidth_section_carousel h2{
+  color: white;
+}
+
+/* Section Carousel */
+.et_pb_ca_section_carousel button {
+  margin-top: 1em;
+}
+
+.et_pb_ca_section_carousel button a, .et_pb_ca_section_carousel h2{
+  color: white;
+}
+
+ol{
+  margin-left: 16px;
+}
+
+/* Service Tiles */
+.et_pb_ca_fullwidth_service_tiles .service-tile.half{
+	width:50%;
+}
+.et_pb_ca_fullwidth_service_tiles .service-tile.full{
+	width:100%;
+}
+
+/* Post List (News) */
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
+    width: auto;
+}
+.et_pb_module.et_pb_ca_post_list.indent.news-list .info{
+	padding-left: 175px;
+}
+/* Post List (Profile) */
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header,
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body{
+  margin-left: 0;
+}
+/* Remove the Divi Padding around the et_pb_toggle */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{
+	padding: 0px;
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
+		color: black !important;
+    padding-bottom: 0px;
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
+       border-bottom: inherit;
+}
+/* Apply the Arrows */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after {
+    content: "\43";
+    font-family: cagov;
+}
+
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close  .panel-heading .panel-title a:after {
+    content: "\45";
+    font-family: cagov;
+}
+
+/* Cards */
+.et_pb_ca_card.et_pb_module .card-header {
+	padding: 11px 15px;
+}
+.et_pb_ca_card.et_pb_module .card-title{
+	margin-bottom: 0px ;
+	padding-bottom: 0px;
+	/* Remove dotted line under card-title h4 ( this was in Version 4)*/
+	border-bottom: 0 !important;
+}
+.et_pb_ca_card.et_pb_module .card-block {
+	padding: 15px;
+	color: initial;
+}
+.et_pb_ca_card.et_pb_module .card-footer {
+  padding: 11px 15px;
+}
+
+/* GitHub Module */
+.et_pb_ca_github.et_pb_module ul li {
+    list-style-type: none;
+}

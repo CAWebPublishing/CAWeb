@@ -142,7 +142,7 @@ function caweb_init() {
     if ('wp-login.php' !== $pagenow) {
         add_thickbox();
     }
-    if ( ! session_id() && ! headers_sent() ) {
+    if ( ! session_id() && ! headers_sent()) {
         session_start();
     }
 
@@ -184,13 +184,15 @@ function caweb_wp_enqueue_scripts() {
 
     // If on the activation page
     if ('wp-activate.php' == $pagenow) {
-        wp_enqueue_style('caweb-core-styles', sprintf('https://california.azureedge.net/cdt/statetemplate/5.5.2/css/cagov.core.min.css', CAWebUri, $ver), array(), CAWebVersion);
-        wp_enqueue_style('caweb-color-styles', sprintf('https://california.azureedge.net/cdt/statetemplate/5.5.2/css/colorscheme-%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
+        wp_enqueue_style('caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
+        wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
     } else {
-        wp_enqueue_style('caweb-core-style', sprintf('https://california.azureedge.net/cdt/statetemplate/5.5.2/css/cagov.core.min.css', CAWebUri, $ver), array(), CAWebVersion);
-        wp_enqueue_style('caweb-color-style', sprintf('https://california.azureedge.net/cdt/statetemplate/5.5.2/css/colorscheme-%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
+        wp_enqueue_style('caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
+        wp_enqueue_style('caweb-color-style', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
         wp_enqueue_style('caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), CAWebVersion);
+        wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
         wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
+        wp_enqueue_style('caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), CAWebVersion);
 
         // External CSS Styles
         $ext_css = array_values(array_filter(get_option('caweb_external_css', array())));
@@ -202,6 +204,7 @@ function caweb_wp_enqueue_scripts() {
     }
 
     // Register Scripts
+    wp_register_script('cagov-modernizr-script', CAWebUri.'/js/libs/modernizr-3.6.0.min.js', array('jquery'), CAWebVersion, false);
 
     wp_register_script('cagov-google-script', CAWebUri.'/js/libs/google.js', array(), CAWebVersion, true);
     wp_register_script('cagov-ga-autotracker-script', CAWebUri.'/js/libs/AutoTracker.js', array(), CAWebVersion, true);
@@ -284,7 +287,7 @@ function caweb_wp_footer() {
 
 function caweb_late_wp_footer() {
     // Load Core JS at the very end along with any external/custom javascript/jquery
-    $core_js = sprintf('<script type="text/javascript" src="https://california.azureedge.net/cdt/statetemplate/5.5.2/js/cagov.core.min.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
+    $core_js = sprintf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
 
     print $core_js;
 
@@ -331,10 +334,11 @@ function caweb_admin_enqueue_scripts($hook) {
         wp_enqueue_style('caweb-admin-styles', CAWebUri.'/css/admin_custom.css', array(), CAWebVersion);
     }
 
+    wp_enqueue_style('caweb-font-styles', CAWebUri.'/css/cagov.font-only.css', array(), CAWebVersion);
 
     // Load editor styling
     wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('https://california.azureedge.net/cdt/statetemplate/5.5.2/css/cagov.core.min.css', CAWebUri, caweb_get_page_version(get_the_ID())));
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
 }
 
 // CAWeb Admin Head
@@ -407,20 +411,4 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 } else {
     include(CAWebAbsPath."/divi/functions.php");
 }
-
-// Register Widgets
-function custom_sidebar() {
-  $args = array(
-  'id' => 'custom-widget',
-  'name' => __( 'Widget custom', 'text_domain' ),
-  'description' => __( 'Widget that can be inserted before closing body tag.', 'text_domain' ),
-  'before_title' => '<h3 class="widget-title">',
-  'after_title' => '</h3>',
-  'before_widget' => '<section id="%1$s" class="widget %2$s">',
-  'after_widget' => '</section>',
-  );
-  register_sidebar( $args );
-}
-add_action( 'widgets_init', 'custom_sidebar' );
-
 ?>
