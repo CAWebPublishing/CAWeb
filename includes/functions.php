@@ -533,16 +533,24 @@ if ( ! function_exists('caweb_get_excerpt')) {
         if (empty($con)) {
             return $con;
         }
+        $con_array = explode( " ", htmlentities(strip_tags( $con, '<a>' ) ) );
         
-        $con_array = explode(" ", $con);
-        if( $p == 562742 ){
-            update_site_option('dev',  $con_array);
-        }
         if (count($con_array) > $excerpt_length) {
             $excerpt = array_splice($con_array, 0, $excerpt_length);
-            $excerpt = implode(" ", $excerpt).'...';
+            $closed = true;
 
-            return $excerpt;
+            foreach($excerpt as $i => $word){
+                if( preg_match('/<a/', html_entity_decode( $word ) ) ){
+                    $closed = false;
+                }
+                if(preg_match('/<\/a>/', html_entity_decode( $word ) ) ){
+                    $closed = true;
+                }
+            }
+
+            $excerpt = ! $closed ? implode(" ", $excerpt) . '...</a>' : implode(" ", $excerpt) . '...';
+            
+            return html_entity_decode ($excerpt);
         }
 
         return $con;

@@ -552,20 +552,16 @@ $('[name="caweb_options_submit"]').click( function(e){
  
  $(function(){
 	$(document).on('click', 'input[name="save_menu"]', function(e){
-		//alert( "No Alt Text Present for 259586_image");
-		var alt_texts = $('div.mega_menu_images.show input[name$="_caweb_menu_image_alt_text"]');
-		var cancelUpdate = false;
+		var nav_menu_alt_texts = $('div.media_image.show input[name$="_caweb_nav_media_image_alt_text"]');
 
-		alt_texts.each(function(element) {
-			if( "" == alt_texts[element].value ){
-				var title = document.getElementById("edit-menu-item-title-" + alt_texts[element].id.substring(0, alt_texts[element].id.indexOf("_")));
-				alert(title.value + " Mega Menu Image Alt Text can not be blank.")
-				cancelUpdate = true;
+		nav_menu_alt_texts.each(function(element) {
+			if( "" == nav_menu_alt_texts[element].value ){
+				var title = document.getElementById("edit-menu-item-title-" + nav_menu_alt_texts[element].id.substring(0, nav_menu_alt_texts[element].id.indexOf("_")));
+				alert(title.value + " Navigation Media Image Alt Text can not be blank.")
+				e.preventDefault();
 			}
 		});
-		if( cancelUpdate ){
-			e.preventDefault();
-		}
+
 	});
 
 	 $(document).on('change', 'div .unit-size-selector', function(){

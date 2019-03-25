@@ -78,12 +78,12 @@
           'action': 'caweb_fav_icon_check',
           'icon_url': attachment.attributes.url,
         };
-				if( /\d+_image/.test(el_name) ){
-          var mega_menu_alt_box = document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_menu_image_alt_text");
+				if( /\d+_media_image/.test(el_name) ){
+          var nav_img_alt_box = document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
           input_box.value = attachment.attributes.url;
-          mega_menu_alt_box.value = attachment.attributes.alt
-          
-				}else if( !icon_check ){
+          nav_img_alt_box.value = attachment.attributes.alt;
+
+        }else if( !icon_check ){
           input_box.value = attachment.attributes.url;
 						if( null !== preview_field )
             	preview_field.src = attachment.attributes.url;

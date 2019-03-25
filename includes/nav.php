@@ -263,11 +263,12 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                             $icon, $item->title, ("unit1" != $li_unit ? $desc : ''));
                     } else {
                         // Get nav media if present
-                        $nav_media_image= $item_meta['_caweb_menu_media_image'][0];
-
+                        $nav_media_image = $item_meta['_caweb_menu_media_image'][0];
+                        $nav_media_alt_text = $item_meta['_caweb_nav_media_image_alt_text'][0];
+                        
                         $nav_media = ("megadropdown" == $args->style ?
-                                                        sprintf('<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" /></a></div>',
-                                                                $item->url, $nav_media_image) : '');
+                                                        sprintf('<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
+                                                                $item->url, $nav_media_image, $nav_media_alt_text) : '');
 
                         $sub_nav .= sprintf('<li %1$s title="%2$s" %3$s><div class="nav-media">
                                                                     <div class="media">%4$s<div class="media-body"><div class="title"><a href="%5$s"%6$s>%7$s</a></div>
@@ -341,7 +342,7 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
         function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
             $tmp = get_post_meta($item->ID);
             $icon = ! empty($tmp['_caweb_menu_icon'][0]) ? $tmp['_caweb_menu_icon'][0] : ''; 
-            $menu_image_alt_text = ! empty($tmp['_caweb_menu_image_alt_text'][0]) ? $tmp['_caweb_menu_image_alt_text'][0] : ''
+            $nav_media_image_alt_text = ! empty($tmp['_caweb_nav_media_image_alt_text'][0]) ? $tmp['_caweb_nav_media_image_alt_text'][0] : '';
             ?>
 
 
@@ -379,6 +380,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <input  name="<?= $item_id; ?>_media_image" id="<?= $item_id; ?>_media_image" type="text" class="link-text" style="width: 97%;"
     value="<?= ! empty($tmp['_caweb_menu_media_image'][0]) ? $tmp['_caweb_menu_media_image'][0] : ''; ?>"/>
 <input type="button" class="library-link" value="Browse" id="library-link-<?= $item_id; ?>"   name="<?= $item_id; ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
+<p>Navigation Media Image Alt Text
+    <input  name="<?= $item_id; ?>_caweb_nav_media_image_alt_text" id="<?= $item_id; ?>_caweb_nav_media_image_alt_text"
+    value="<?= $nav_media_image_alt_text ?>" type="text" /></p>
 </div>
 <?php if("megadropdown" == get_option('ca_default_navigation_menu', 'megadropdown') ): ?>
 <div class="mega_menu_images <?= (0 == $depth ? 'show' : ''); ?> description description-wide " >
@@ -387,9 +391,6 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
 <input  name="<?= $item_id; ?>_image" id="<?= $item_id; ?>_image"  type="text" class="link-text" style="width: 97%;"
     value="<?= ! empty($tmp['_caweb_menu_image'][0]) ? $tmp['_caweb_menu_image'][0] : ''; ?>"/>
 <input type="button" value="Browse" id="library-link-<?= $item_id; ?>" class="library-link"  name="<?= $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
-<p>Mega Menu Image Alt Text
-    <input  name="<?= $item_id; ?>_caweb_menu_image_alt_text" id="<?= $item_id; ?>_caweb_menu_image_alt_text"
-    value="<?= $menu_image_alt_text ?>" type="text" /></p>
 <p>Select a Side / Select a Size</p>
 <select name="<?= $item_id; ?>_image_side" >
 <option value="left" <?= ( ! empty($tmp['_caweb_menu_image_side'][0]) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : ''); ?> >Left</option>
@@ -424,6 +425,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 $args['caweb-menu-item-image-side'] = $_POST[$menu_item_db_id.'_image_side'];
                 $args['caweb-menu-item-image-size'] = $_POST[$menu_item_db_id.'_image_size'];
                 $args['caweb-menu-column-count'] = $_POST[$menu_item_db_id.'_column_count'];
+                $args['caweb-nav-media-image-alt-text'] = $_POST[$menu_item_db_id.'_caweb_nav_media_image_alt_text'];
+                
                 update_post_meta($menu_item_db_id, '_caweb_menu_icon', $args['caweb-menu-item-icon']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_unit_size', $args['caweb-menu-item-unit-size']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_media_image', $args['caweb-menu-item-media-image']);
@@ -431,6 +434,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 update_post_meta($menu_item_db_id, '_caweb_menu_image_side', $args['caweb-menu-item-image-side']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_image_size', $args['caweb-menu-item-image-size']);
                 update_post_meta($menu_item_db_id, '_caweb_menu_column_count', $args['caweb-menu-column-count']);
+                update_post_meta($menu_item_db_id, '_caweb_nav_media_image_alt_text', $args['caweb-nav-media-image-alt-text']);
+            
             }
             
             return $menu_item_db_id;
