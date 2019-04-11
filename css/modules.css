@@ -231,3 +231,7 @@ ol{
 .et_pb_ca_github.et_pb_module ul li {
     list-style-type: none;
 }
+/* Remove the State Template background image from Divi Button Modules */
+.et_pb_button_module_wrapper.et_pb_module .et_pb_button {
+  background-image: none;
+}
