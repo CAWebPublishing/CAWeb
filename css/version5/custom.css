@@ -345,3 +345,9 @@ footer .container .group{
 .list-standout{
 	padding-left: 1.5em !important;
 }
+
+h1, h2, h3, h4, h5, h6{
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+}
