@@ -2,9 +2,7 @@
 // Template Name: Search Results Page
 
 get_header();
-$parts = parse_url($_SERVER['REQUEST_URI']);
-parse_str($parts['query'], $query);
-$keyword = $query['q'];
+$keyword = $_GET['q'];
 ?>
 <body <?php body_class('primary') ?>  >
 <?php get_template_part('partials/content', 'header') ?>
