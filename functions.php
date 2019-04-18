@@ -406,7 +406,38 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             foreach ($modules as $module_file) {
                 require_once($module_file);
             }
+               // Custom handler: Output JS for editor preview in page footer.
+            add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
+    }
+
+    function caweb_accessibility_blog_read_more_fix(){
+        $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
+        
+        ?>
+        
+        <script>
+        $ = jQuery.noConflict();
+
+        var blogs = <?php print_r($blogs); ?>;
+
+        blogs.forEach(function(element, index) {
+           blog =  $('.et_pb_blog_' + index).find('article');
+           blog.each(function(i) {
+            b =  $(blog[i]); 
+            title = b.children('.entry-title').text();
+            
+            read_more = b.children('.post-content').children('.more-link:last-child');
+
+            if(read_more.length){
+                read_more.append('<span class="sr-only">' + title + '</span>');
+            }
+            });
+        });
+
+
+        </script>
+        <?php
     }
 } else {
     include(CAWebAbsPath."/divi/functions.php");
