@@ -4,6 +4,10 @@ body{
 #main-content > .section{
 	padding-top: 0;
 }
+/* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+body:not(.sticky_nav) #main-content.main-content {
+	width: 100%;
+}
 /*
   Divi Project Styles
  */
