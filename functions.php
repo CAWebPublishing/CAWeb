@@ -407,7 +407,7 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
                 require_once($module_file);
             }
                // Custom handler: Output JS for editor preview in page footer.
-            add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
+            //add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
     }
 
