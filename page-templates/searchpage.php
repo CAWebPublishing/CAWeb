@@ -49,7 +49,6 @@ $keyword = $_GET['q'];
             <div class="container">
 				<h1>Search Results for: <?php echo esc_attr($keyword);?></h1>
                 <gcse:searchresults-only></gcse:searchresults-only>
-                <!-- <script src='//www.google.com/jsapi' type='text/javascript'></script> -->
             </div>
         </div>
     </main>
@@ -58,14 +57,6 @@ $keyword = $_GET['q'];
 </div>
 </div>
 <?php get_footer(); ?>
-<?php if (caweb_version_check(5)) : ?>
-<!-- <style>.main-content{min-height: 1px}main .container{max-width: 1280px;}#post-0{margin-bottom: 0;}table.gsc-search-box td.gsc-clear-button {display: none;}td.gsc-search-button{position: relative;}input.gsc-search-button{position: relative;}
-span.search-icon{right: 63px;}input.gsc-search-button{position: absolute;top: 2px;height: 51px;width: 48px;min-width: 35px ;right: 30px;opacity: 0;}
-input.gsc-input {padding: 14px;height: 55px;border: 3px solid transparent;font-size: 1.1rem !important;}input.gsc-input:focus {border-color: transparent;}
-.section.section-default{padding-top: 0 !important;}</style>
-<?php else: ?>	
-<style>.main-content{min-height: 1px}#post-0{margin-bottom: 0;}.main-content .container{padding: 0 !important;}</style>
- --><?php endif; ?>
 
 </body>
 </html>
