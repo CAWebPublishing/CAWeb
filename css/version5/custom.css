@@ -150,6 +150,11 @@ ul.utility-links.social-media-links{
 .second-level-nav li{
      float: left;
 }
+/* Main Navigation fix, increases height when links main links wrap */
+.main-navigation{
+  display: flex;
+  flex-direction: row-reverse;
+}
 /* Full Sub-Nav */
 .main-navigation.megadropdown .unit1 .second-level-link{
   height: 65px;
