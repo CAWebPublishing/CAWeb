@@ -29,6 +29,7 @@ function caweb_admin_init() {
     require_once(CAWebAbsPath.'/core/update.php');
 }
 
+
 /**
  * Enable unfiltered_html capability for Administrators.
  *
