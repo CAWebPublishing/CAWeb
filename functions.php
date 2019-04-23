@@ -411,8 +411,31 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             // Custom handler: Output JS for editor preview in page footer.
             add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
-    }
 
+        
+    }
+    add_action('admin_print_footer_scripts', 'caweb_et_fb_bundle_modal_removal', 1000);
+
+    function caweb_et_fb_bundle_modal_removal(){
+        global $pagenow;
+        if( 'post.php' == $pagenow || 'post-new.php' == $pagenow ){
+            ?>
+            <script>
+                $ = jQuery.noConflict();
+               
+                $(window).on('load', function() {
+                   
+                var bundle = $('body link:last');
+                if( undefined !== bundle[0].href && /frontend-builder\/build\/bundle\.modals\.[\w\d]+\.css/.test(bundle[0].href)){
+                    bundle.remove();
+                }
+                });
+            </script>
+            <?php
+    
+        }
+    }
+    
     function caweb_accessibility_blog_read_more_fix(){
         $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
         
