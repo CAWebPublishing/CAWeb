@@ -187,12 +187,12 @@ article.type-project .entry-content{
     max-height: 150px !important;
   }
   .top-level-nav .nav-item {
-    padding: 0 6px;
+    padding: 0 6px 5px;
   }
 }
 @media (min-width: 992px){
   .top-level-nav .nav-item {
-    padding: 0 8px;
+    padding: 0 8px 5px;
   }
 }
 
