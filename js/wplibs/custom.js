@@ -20,12 +20,12 @@
 
 	// If mobile controls are visible
     if ( 1 === utility_container.children().length && "none" !== $(".global-header .mobile-controls").css("display") ){
-		row.append(translate);
+		$(row).append(translate);
 		utility_container.append(row);
 	// If mobile controls are not visible
     }else if(2 === utility_container.children().length && "none" === $(".global-header .mobile-controls").css("display") ) {
-		utility_container.children()[0].append(translate);
-		utility_container.children()[1].remove();
+		$(utility_container.children()[0]).append(translate);
+		$(utility_container.children()[1]).remove();
 
 	}
 }
