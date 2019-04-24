@@ -25,6 +25,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.et_font_icon li:before, .et_pb_inline_icon:before,
+.et_pb_custom_button_icon:after, body #page-container a.et_pb_custom_button_icon:before,
+.et-pb-icon,  ul.et-fb-font-icon-list li:after{
+    font-family: 'CaGov', 'ETModules' !important;
+		content: attr(data-icon);
+  	speak: none;
+}
+/* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+li[class^="et_pb_ca"]::before, 
+li[class^="et_pb_profile_banner"]::before,
+li[class^="et_fb_ca"]::before,
+li[class^="et_fb_profile_banner"]::before{
+		font-family: 'CaGov' !important;
+		content: '\e90b' !important;
+}
+
 .ca-gov-icon-beaker1:before {
   content: "\c901" !important;
 }
