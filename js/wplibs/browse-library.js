@@ -67,9 +67,6 @@
         var attachment = frame.state().get('selection').first(),
           link = $el.data('updateLink');
 
-
-        var filename = attachment.attributes.url.split("/");
-				filename = filename[filename.length - 1];
         var input_box = document.getElementById(el_name);
         var preview_field = document.getElementById(el_name + "_img");
         var filename_box = document.getElementById(el_name +  "_filename");
@@ -83,22 +80,22 @@
           input_box.value = attachment.attributes.url;
           nav_img_alt_box.value = attachment.attributes.alt;
 
-        }else if( !icon_check ){
-          input_box.value = attachment.attributes.url;
+        }else if( "true" !== icon_check ){
+            input_box.value = attachment.attributes.url;
 						if( null !== preview_field )
             	preview_field.src = attachment.attributes.url;
 						if( null !== filename_box )
-              filename_box.value = filename;
+              filename_box.value = attachment.attributes.filename;
         }else{
 					jQuery.post(ajaxurl, data, function(response) {
 						if(1 == response){
 
 							preview_field.src = attachment.attributes.url;
   						input_box.value = attachment.attributes.url;
-							filename_box.value = filename;
+							filename_box.value = attachment.attributes.filename;
 
 						}else{
-							alert("Invalid Icon Mime Type: " + filename);
+							alert("Invalid Icon Mime Type: " + attachment.attributes.filename);
 						}
 					});
 				}
