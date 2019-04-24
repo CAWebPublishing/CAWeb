@@ -339,7 +339,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
     // Load editor styling
     wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));    
 }
 
 // CAWeb Admin Head
@@ -411,8 +411,10 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             // Custom handler: Output JS for editor preview in page footer.
             add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
-    }
 
+        
+    }
+        
     function caweb_accessibility_blog_read_more_fix(){
         $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
         
