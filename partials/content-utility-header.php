@@ -4,7 +4,7 @@
       <div class="group flex-row">
         <div class="social-media-links">
           <div class="header-cagov-logo">
-            <a href="https://www.ca.gov/" title="CA.gov"style="float: left;">
+            <a href="https://www.ca.gov/" title="CA.gov" style="float: left;">
               <span class="sr-only">CA.gov</span>
               <img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" class="pos-rel" alt="Image of the CA.gov Logo" aria-hidden="true" />
             </a>
@@ -14,7 +14,7 @@
               $gtranslator = get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled') || 'custom' == get_option('ca_google_trans_enabled') ? true : false;
 
 							if (get_option('ca_utility_home_icon', true)) {
-							    print '<a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a></li>';
+							    print '<a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>';
 							}
 
                   $social_share = caweb_get_site_options('social');
