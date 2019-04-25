@@ -113,8 +113,7 @@ article.type-project .entry-content{
 /* End of Google Translate */
 
 #nav_list{
-    width: auto;
-	 float: right;
+  width: auto;
 }
 .sub-nav{
 	left:  0;
@@ -131,6 +130,7 @@ article.type-project .entry-content{
 .main-navigation{
   display: flex;
   flex-direction: row-reverse;
+  padding-left: 320px;
 }
 /* Full Sub-Nav */
 .main-navigation.megadropdown .unit1 .second-level-link{
@@ -181,18 +181,17 @@ article.type-project .entry-content{
 .main-navigation.dropdown .sub-nav ul li img{
 	display: none;
 }
+.first-level-link{
+  height: 96%;
+}
 @media (min-width: 768px){
-  .main-navigation {
-    height: auto;
-    max-height: 150px !important;
-  }
   .top-level-nav .nav-item {
-    padding: 0 6px 5px;
+    padding: 0 6px;
   }
 }
 @media (min-width: 992px){
   .top-level-nav .nav-item {
-    padding: 0 8px 5px;
+    padding: 0 8px;
   }
 }
 
