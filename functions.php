@@ -288,9 +288,7 @@ function caweb_wp_footer() {
 
 function caweb_late_wp_footer() {
     // Load Core JS at the very end along with any external/custom javascript/jquery
-    $core_js = sprintf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
-
-    print $core_js;
+    printf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
 
     // External JS
     $ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
@@ -300,8 +298,14 @@ function caweb_late_wp_footer() {
         printf('<script type="text/javascript" src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWebVersion, $index + 1);
     }
 
+    // Custom JS
     if ("" !== get_option('ca_custom_js', '')) {
         printf('<script id="ca_custom_js">%1$s</script>', wp_unslash(get_option('ca_custom_js')));
+    }
+
+    // If CAWeb is a child theme of Divi, include Accessibility Javascript
+    if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
+        printf('<script type="text/javascript" src="%1$s/divi/js/accessibility.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
     }
 }
 add_action('wp_footer', 'caweb_late_wp_footer', 115);
@@ -407,42 +411,9 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             foreach ($modules as $module_file) {
                 require_once($module_file);
             }
-            
-            // Custom handler: Output JS for editor preview in page footer.
-            add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
-
-        
     }
         
-    function caweb_accessibility_blog_read_more_fix(){
-        $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
-        
-        ?>
-        
-        <script>
-        $ = jQuery.noConflict();
-
-        var blogs = <?php print_r($blogs); ?>;
-
-        blogs.forEach(function(element, index) {
-           blog =  $('.et_pb_blog_' + index).find('article');
-           blog.each(function(i) {
-            b =  $(blog[i]); 
-            title = b.children('.entry-title').text();
-            
-            read_more = b.children('.post-content').children('.more-link:last-child');
-
-            if(read_more.length){
-                read_more.append('<span class="sr-only">' + title + '</span>');
-            }
-            });
-        });
-
-
-        </script>
-        <?php
-    }
 } else {
     include(CAWebAbsPath."/divi/functions.php");
 }
