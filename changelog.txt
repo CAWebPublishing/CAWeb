@@ -9,7 +9,7 @@ March 26, 2018
 - Fixed issue with page title not being left aligned
 - Fixed issue with warnings display with GitHub Module when no repos are found
 
-CAWeb v1.4.0
+CAWeb v1.4.0aadfa
 March 1, 2018
 - New Sacramento colorscheme added
 - New Custom CSS Upload feature
