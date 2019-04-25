@@ -126,12 +126,6 @@ article.type-project .entry-content{
 .second-level-nav li{
      float: left;
 }
-/* Main Navigation fix, increases height when links main links wrap */
-.main-navigation{
-  display: flex;
-  flex-direction: row-reverse;
-  padding-left: 320px;
-}
 /* Full Sub-Nav */
 .main-navigation.megadropdown .unit1 .second-level-link{
   height: 65px;
@@ -163,6 +157,14 @@ article.type-project .entry-content{
 }
 /* Dropdown Navigation Styles */
 @media (min-width: 768px){
+  /* Main Navigation fix, increases height when links main links wrap */
+  .main-navigation{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-left: 320px;
+    height: 100%;
+    max-height: 150px !important;
+  }
   .main-navigation.dropdown .sub-nav {
     max-width:250px;
     left: auto; /* IE does not recognize initial */
