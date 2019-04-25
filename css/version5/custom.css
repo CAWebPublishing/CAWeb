@@ -162,8 +162,7 @@ article.type-project .entry-content{
     display: flex;
     flex-direction: row-reverse;
     padding-left: 320px;
-    height: 100%;
-    max-height: 150px !important;
+    max-height: 300px !important;
   }
   .main-navigation.dropdown .sub-nav {
     max-width:250px;
@@ -184,7 +183,7 @@ article.type-project .entry-content{
 	display: none;
 }
 .first-level-link{
-  height: 96%;
+  height: calc(100% - 5px);
 }
 @media (min-width: 768px){
   .top-level-nav .nav-item {
