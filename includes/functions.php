@@ -543,4 +543,29 @@ function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr =
     $thumbnail = preg_replace('/<img /', $new_img, $thumbnail);    
     return $thumbnail;
 }
+
+function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ){
+    if( empty($image_url) )
+        return 0;
+
+    $query = array(
+        'post_type'  => 'attachment',
+        'fields'     => 'ids',
+        'meta_query' => array(
+            array(
+                'key'     => '_wp_attached_file',
+                'value'   => basename($image_url),
+                'compare' => 'LIKE',
+            ),
+        )
+    );
+
+
+    $ids = get_posts( $query );
+
+    if( empty($ids) )
+        return 0;
+
+    return get_post_meta($ids[0], $meta_key, true);
+}
 ?>
