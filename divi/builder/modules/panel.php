@@ -219,7 +219,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
 
         $remove_overflow = ("none" == $panel_layout ? ' style="overflow: visible;"' : '');
 
-        $display_options = $show_button == "on" ? sprintf('<div class="options"%2$s><a href="%1$s" class="btn btn-default" target="_blank">Read More</a></div>', $button_link, $option_padding) : '';
+        $display_options = $show_button == "on" ? sprintf('<div class="options"%1$s><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', $option_padding, $button_link, $title ) : '';
 
         $display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
@@ -447,7 +447,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 
         $remove_overflow = ("none" == $panel_layout ? ' style="overflow: visible;"' : '');
 
-        $display_options = $show_button == "on" ? sprintf('<div class="options"%2$s><a href="%1$s" class="btn btn-default" target="_blank">Read More</a></div>', $button_link, $option_padding) : '';
+        $display_options = $show_button == "on" ? sprintf('<div class="options"%1$s><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', $option_padding, $button_link, $title) : '';
 
         $display_title = ("" != $title ? sprintf('<div class="panel-heading"><%1$s%2$s>%3$s%4$s%5$s</%1$s></div>',
 				$headingSize, ( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
