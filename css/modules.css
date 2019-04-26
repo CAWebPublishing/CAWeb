@@ -91,11 +91,15 @@ overflow: hidden;
 	width: 100%;
 }
 /* Location Banner Thumbnail Image Fix*/
-.location.banner .thumbnail img {
+.et_pb_ca_location_widget.location.banner .thumbnail img {
     width: 100%;
  }
 .et_pb_ca_location_widget.location.banner .description {
     padding-bottom: 10px;
+}
+.et_pb_ca_location_widget.location.banner .address a {
+  margin-left: 30px;
+  display: inline-block;
 }
 /* Profile Banner */
 .profile-banner .banner-subtitle{
