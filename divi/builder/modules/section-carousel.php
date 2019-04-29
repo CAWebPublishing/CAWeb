@@ -37,9 +37,6 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
                 ),
             ),
         );
-
-        // Custom handler: Output JS for editor preview in page footer.
-        add_action('wp_footer', array($this, 'carousel_fix'), 20);
     }
 
     function get_fields() {
@@ -224,56 +221,20 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
 
             $display_title = sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>', $panel_title, $display_button);
 
-            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
+            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel owl-carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
         } else {
             $this->add_classname('section');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
+            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel owl-carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
         }
 
         return $output;
+
+
     }
 
-    // This is a non-standard function. It outputs JS code to change items amount for carousel-media.
-    function carousel_fix() {
-        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); ?>
-			<script>
-        $ = jQuery.noConflict();
 
-       var media_carousels = <?php print_r($carousels); ?>;
-
-        media_carousels.forEach(function(element, index) {
-          $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
-          		responsive : true,
-							responsive: {
-				          0: {
-				            items: 1,
-							nav: true
-				          },
-				          400: {
-				            items: 1,
-							nav: true
-				          },
-				          768: {
-				            items: undefined == element.slide_amount ? 4 : element.slide_amount,
-				            nav: true
-				          },
-				        },
-          		margin : 10,
-          		nav : true,
-          		dots : false,
-          navText: [
-          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
-          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
-        ],
-        })
-        });
-
-
-			</script>
-			<?php
-    }
 }
 new ET_Builder_Module_CA_Section_Carousel;
 
@@ -468,9 +429,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
                 ),
             ),
         );
-
-        // Custom handler: Output JS for editor preview in page footer.
-        add_action('wp_footer', array($this, 'carousel_fix'), 20);
+    
     }
     function get_fields() {
         $general_fields = array(
@@ -653,56 +612,17 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 
             $display_title = sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>', $panel_title, $display_button);
 
-            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
+            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel owl-carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
         } else {
             $this->add_classname('section');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
+            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel owl-carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
         }
 
         return $output;
     }
 
-    // This is a non-standard function. It outputs JS code to change items amount for carousel-media.
-    function carousel_fix() {
-        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); ?>
-			<script>
-        $ = jQuery.noConflict();
-
-       var media_carousels = <?php print_r($carousels); ?>;
-
-        media_carousels.forEach(function(element, index) {
-          $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
-          		responsive : true,
-			responsive: {
-			  0: {
-			    items: 1,
-					nav: true
-			  },
-			  400: {
-			    items: 1,
-					nav: true
-			  },
-			  768: {
-			    items: undefined == element.slide_amount ? 4 : element.slide_amount,
-			    nav: true
-			  },
-			},
-          		margin : 10,
-          		nav : true,
-          		dots : false,
-          navText: [
-          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
-          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
-        ],
-        })
-        });
-
-
-			</script>
-			<?php
-    }
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
 
@@ -826,14 +746,14 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
         $slide_show_more_button = $this->props['slide_show_more_button'];
 
         global $et_pb_slider_item_num;
-        global $et_pb_ca_section_carousel_style;
+        global $et_pb_ca_fullwidth_section_carousel_style;
 
         $et_pb_slider_item_num++;
 
-        $this->add_classname($et_pb_ca_section_carousel_style);
+        $this->add_classname($et_pb_ca_fullwidth_section_carousel_style);
         $this->add_classname('item');
 
-        if ("media" == $et_pb_ca_section_carousel_style) {
+        if ("media" == $et_pb_ca_fullwidth_section_carousel_style) {
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
             $button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<a href="%1$s" target="_blank">%2$s</a>', esc_url($slide_url), $slide_title) : '';
@@ -852,10 +772,10 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
             $display_button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information</strong></a>', esc_url($slide_url)) : '';
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
+            
+            $content_fit = "content_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
 
-            $content_fit = "content_fit" == $et_pb_ca_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
-
-            $image_fit = "image_fit" == $et_pb_ca_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
+            $image_fit = "image_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
 
             $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="content-container"><div class="content">%5$s%6$s%7$s</div></div></div>', $this->module_id(), $class, $content_fit, $image_fit, $slide_title, $slide_desc, $display_button);
         }
