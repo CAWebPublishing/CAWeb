@@ -38,7 +38,14 @@
             // Grab each tab control
             tab_list =  $(element).find('ul.et_pb_tabs_controls');
 
-            tab_list.role = tab_list.role.toLowerCase(); 
+            tab_list.each(function(i) {
+                t =  $(tab_list[i]); 
+
+                // Lowercase the Tab Control Role
+                t.attr('role', t.attr('role').toLowerCase() );
+
+            });
+
         });      
     }   
 });
