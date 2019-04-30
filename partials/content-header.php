@@ -92,11 +92,19 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 $search = (caweb_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade' : '');
 
 $custom_translate = caweb_version_check(4, get_the_ID()) && 'custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '') ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url(get_option('ca_google_trans_page')), "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '') : '';
-
-printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
+	
+	printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
        $search, ("" == get_option('ca_google_search_id') ? 'hidden' : ''),
-       ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ?
-								sprintf('<gcse:searchbox-only resultsUrl="%1$s" enableAutoComplete="true"></gcse:searchbox-only> ', site_url('serp')) : ''), $custom_translate);
+       ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ? sprintf('
+       	<div class="container">
+		    <form id="Search" class="pos-rel" action="%1$s">
+		        <span class="sr-only" id="SearchInput">Custom Google Search</span>
+		        <input type="text" id="q" name="q" aria-labelledby="SearchInput" placeholder="Custom Search" class="height-50 border-0 p-x-sm w-100" />
+		        <button type="submit" class="pos-abs gsc-search-button top-0 width-50 height-50 border-0 bg-transparent"><span class="ca-gov-icon-search font-size-30 color-gray" aria-hidden="true"></span><span class="sr-only">Submit</span></button>
+		        <div class="width-50 height-50 close-search-btn"><button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset"><span class="sr-only">Close Search</span><span class="ca-gov-icon-close-mark" aria-hidden="true"></span></button></div>
+		    </form>
+		</div>
+		', site_url('serp')) : ''), $custom_translate);
 
 ?>
 
