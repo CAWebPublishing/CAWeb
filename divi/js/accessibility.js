@@ -60,7 +60,7 @@
 
         image_modules.each(function(index, element) {
             // Grab each img control
-            var img =  $(element).find('span.et_pb_image_wrap img');
+            var img =  $(element).find('img');
 
             if( !img.attr('alt') ){
                 imgs[index] = img.attr('src');
@@ -74,6 +74,12 @@
         
         jQuery.post(accessibleargs.ajaxurl, data, function(response) {
             var alts = jQuery.parseJSON(response);
+
+            imgs.forEach( function(element, index){
+                // Grab each img control
+                var img =  $(image_modules[index]).find('img');
+                img.attr('alt', alts[index]);
+            });
 
         });
        
