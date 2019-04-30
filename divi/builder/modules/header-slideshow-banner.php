@@ -127,7 +127,7 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 				
         $content = $this->content;
 
-        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner">%2$s</div>%3$s <!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
+        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s <!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
 
         return $output;
     }
