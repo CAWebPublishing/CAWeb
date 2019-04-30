@@ -237,6 +237,19 @@ function caweb_wp_enqueue_scripts() {
     wp_deregister_style('divi-fonts');
 }
 
+add_action('wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115);
+function caweb_late_wp_enqueue_scripts(){
+    // If CAWeb is a child theme of Divi, include Accessibility Javascript
+    if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
+        wp_register_script('caweb-accessibility-scripts', CAWebUri.'/divi/js/accessibility.js', array('jquery'), CAWebVersion, true);
+
+        wp_localize_script( 'caweb-accessibility-scripts', 'accessibleargs',
+                array( 'ajaxurl' => admin_url( 'admin-post.php' ) ) );
+    
+        wp_enqueue_script('caweb-accessibility-scripts');
+    }
+}
+
 // CAWeb WP Head
 add_action('wp_head', 'caweb_wp_head');
 function caweb_wp_head() {
@@ -303,10 +316,6 @@ function caweb_late_wp_footer() {
         printf('<script id="ca_custom_js">%1$s</script>', wp_unslash(get_option('ca_custom_js')));
     }
 
-    // If CAWeb is a child theme of Divi, include Accessibility Javascript
-    if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
-        printf('<script type="text/javascript" src="%1$s/divi/js/accessibility.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
-    }
 }
 add_action('wp_footer', 'caweb_late_wp_footer', 115);
 
