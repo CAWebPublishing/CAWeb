@@ -29,6 +29,7 @@ function caweb_admin_init() {
     require_once(CAWebAbsPath.'/core/update.php');
 }
 
+
 /**
  * Enable unfiltered_html capability for Administrators.
  *
@@ -338,7 +339,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
     // Load editor styling
     wp_dequeue_style(get_template_directory_uri().'css/editor-style.css');
-    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
+    add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));    
 }
 
 // CAWeb Admin Head
@@ -406,7 +407,41 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             foreach ($modules as $module_file) {
                 require_once($module_file);
             }
+            
+            // Custom handler: Output JS for editor preview in page footer.
+            add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
+
+        
+    }
+        
+    function caweb_accessibility_blog_read_more_fix(){
+        $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
+        
+        ?>
+        
+        <script>
+        $ = jQuery.noConflict();
+
+        var blogs = <?php print_r($blogs); ?>;
+
+        blogs.forEach(function(element, index) {
+           blog =  $('.et_pb_blog_' + index).find('article');
+           blog.each(function(i) {
+            b =  $(blog[i]); 
+            title = b.children('.entry-title').text();
+            
+            read_more = b.children('.post-content').children('.more-link:last-child');
+
+            if(read_more.length){
+                read_more.append('<span class="sr-only">' + title + '</span>');
+            }
+            });
+        });
+
+
+        </script>
+        <?php
     }
 } else {
     include(CAWebAbsPath."/divi/functions.php");
