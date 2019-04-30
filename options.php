@@ -137,7 +137,6 @@ function caweb_save_options($values = array(), $files = array()) {
         $alerts[] = $data;
     }
     $values['caweb_alerts'] = $alerts;
-
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
@@ -148,7 +147,6 @@ function caweb_save_options($values = array(), $files = array()) {
         if ('caweb_external_js' == $opt) {
             $val = array_merge($val, array_diff(array_keys($jsfiles), $val));
         }
-
         update_option($opt, $val);
     }
 
@@ -451,14 +449,26 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 	http://asecuritysite.com/forensics/ico
  */
 function caweb_fav_icon_checker() {
+    $url = preg_replace( "/https?:\/\//", "", $_POST['icon_url'] );
     $url = $_POST['icon_url'];
+        
+    $arrContextOptions= stream_context_create( array(
+        "ssl"=>array(
+            "verify_peer"=>false,
+            "verify_peer_name"=>false,
+        ),
+    ) ); 
 
-    $handle = rawurlencode(file_get_contents($url));
-    $handle = array_splice(array_filter(explode('%', $handle)), 0, 4);
+    $handle = file_get_contents($url, false, $arrContextOptions);
+    $handle = rawurlencode($handle);
+    $handle = explode('%', $handle);
+    $handle = array_filter($handle);
+    $handle = array_splice($handle, 0, 4);
     $handle = implode("", $handle);
-
+    
     if ("00000100" == $handle) {
         print true;
+        wp_die(); // this is required to terminate immediately and return a proper response
     }
 
     print false;
