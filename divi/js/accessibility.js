@@ -48,4 +48,37 @@
 
         });      
     }   
+
+    
+    /* Divi Image Module (Standard & Fullwidth) Accessibility */
+    // Retrieve all Divi Image Modules
+    var image_modules = $('div').filter(function(){ return this.className.match(/et_pb_image_\d|et_pb_fullwidth_image_\d/); });
+
+    // Run only if there is a Image Module on the current page
+    if( image_modules.length ){        
+        var imgs = [];
+
+        image_modules.each(function(index, element) {
+            // Grab each img control
+            var img =  $(element).find('span.et_pb_image_wrap img');
+
+            if( !img.attr('alt') ){
+                imgs[index] = img.attr('src');
+            }
+
+        });      
+        var data = {
+            'action': 'caweb_attachment_post_meta',
+            'imgs' : imgs
+        };
+        
+        jQuery.post(accessibleargs.ajaxurl, data, function(response) {
+            var alts = jQuery.parseJSON(response);
+
+        });
+       
+    }   
+
+    
+
 });
