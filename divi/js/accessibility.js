@@ -4,7 +4,19 @@
     
     /* Divi Blog Module Accessibility */
     // Retrieve all Divi Blog Modules
-    var blog_modules = $('div').filter(function(){ return this.className.match(/et_pb_blog_\d/); });
+    var blog_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_blog_\d\b/); });
+
+    /* Divi Tab Module Accessibility */
+    // Retrieve all Divi Tab Modules
+    var tab_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_tabs_\d\b/); });
+
+     /* Divi Image Module (Standard & Fullwidth) Accessibility */
+    // Retrieve all Divi Image Modules
+    var image_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_image_\d\b|\bet_pb_fullwidth_image_\d\b/); });
+
+     /* Divi Slider Module (Standard & Fullwidth) Accessibility */
+    // Retrieve all Divi Image Modules
+    var button_modules = $('a').filter(function(){ return this.className.match(/\bet_pb_button_\d\b/); });
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -28,10 +40,6 @@
          });      
     }   
 
-    /* Divi Tab Module Accessibility */
-    // Retrieve all Divi Tab Modules
-    var tab_modules = $('div').filter(function(){ return this.className.match(/et_pb_tabs_\d/); });
-
     // Run only if there is a Tab Module on the current page
     if( tab_modules.length ){        
         tab_modules.each(function(index, element) {
@@ -48,11 +56,6 @@
 
         });      
     }   
-
-    
-    /* Divi Image Module (Standard & Fullwidth) Accessibility */
-    // Retrieve all Divi Image Modules
-    var image_modules = $('div').filter(function(){ return this.className.match(/et_pb_image_\d|et_pb_fullwidth_image_\d/); });
 
     // Run only if there is a Image Module on the current page
     if( image_modules.length ){        
@@ -85,6 +88,12 @@
        
     }   
 
-    
+    // Run only if there is a Button Module on the current page
+    if( button_modules.length ){
+        button_modules.each(function(index, element) {
+            // Add no-underline to each button module
+            $(element).addClass('no-underline');
+         });      
+    } 
 
 });

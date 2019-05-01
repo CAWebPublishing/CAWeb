@@ -22,22 +22,17 @@ border: 0;
     word-wrap: normal!important;
 }
 
-.archive.author article .auth-link-read-more,
-.archive.category article .cat-link-read-more,
-.archive.date article .date-link-read-more,
-.archive.tag article .tag-link-read-more{
-  background-image: none;
+.archive.author article .auth-link,
+.archive.category article .cat-link,
+.archive.date article .date-link,
+.archive.tag article .tag-link{
+  width: 200px;
+  height: 150px;
+  padding-right: 20px;
+  padding-bottom:15px;
+  float:left;
 }
 
-.archive.author article .auth-link-read-more,
-.archive.category article .cat-link-read-more,
-.archive.date article .date-link-read-more,
-.archive.tag article .tag-link-read-more{
-        border-radius: 5px;
-        padding: 5px;
-        border: #2ea3f2 2px solid;
-        display: inline-block;
-}
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;
 }

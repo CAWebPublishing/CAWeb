@@ -25,7 +25,7 @@
 								 $thumbId = get_post_thumbnail_id( get_the_ID() );
 								 $thumb_alt = get_post_meta($thumbId, 'wp_attachment_image_alt', true);
 
-					    the_post_thumbnail('medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;', array('alt' => $thumb_alt));
+					    the_post_thumbnail('medium', '', array('alt' => $thumb_alt));
 					} ?>
 						 </a>
 				<?php
@@ -37,7 +37,7 @@
            <?php et_divi_post_meta(); ?>
             </div>
             <p> <?php truncate_post(270); ?></p>              
-          	<a class="cat-link-read-more" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
+          	<a class="btn btn-default" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;
