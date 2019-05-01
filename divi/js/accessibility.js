@@ -2,34 +2,51 @@
 
    jQuery(document).ready(function() {
     
-    /* Divi Blog Module Accessibility */
-    // Retrieve all Divi Blog Modules
+    /* 
+    Divi Blog Module Accessibility 
+    Retrieve all Divi Blog Modules
+    */
     var blog_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_blog_\d\b/); });
 
-    /* Divi Tab Module Accessibility */
-    // Retrieve all Divi Tab Modules
+    /* 
+    Divi Tab Module Accessibility 
+    Retrieve all Divi Tab Modules
+    */
     var tab_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_tabs_\d\b/); });
 
-    /* Divi Image Module (Standard & Fullwidth) Accessibility */
-    // Retrieve all Divi Image Modules
+    /* 
+    Divi Image Module (Standard & Fullwidth) Accessibility 
+    Retrieve all Divi Image Modules
+    */
     var image_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_image_\d\b|\bet_pb_fullwidth_image_\d\b/); });
 
-    /* Divi Button Module Accessibility */
-    // Retrieve all Divi Button Modules
+    /* 
+    Divi Button Module Accessibility 
+    Retrieve all Divi Button Modules
+    */
     var button_modules = $('a').filter(function(){ return this.className.match(/\bet_pb_button_\d\b/); });
 
-    /* Divi Slides (Standard & Fullwidth) Accessibility 
-        Slide Module is a child module used in the following modules:
-        Slider (Standard & Fullwidth)
-        Post Slider (Standard & Fullwidth)
-       Retrieve all Divi Slide Modules
+    /* 
+    Divi Slides (Standard & Fullwidth) Accessibility 
+    Slide Module is a child module used in the following modules:
+    Slider (Standard & Fullwidth)
+    Post Slider (Standard & Fullwidth)
+    Retrieve all Divi Slide Modules
     */
     var slide_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_slide\b/); });
     
-    /* Divi Slider Arrows Accessibility 
-       Retrieve all Divi Slider Arrows
+    /* 
+    Divi Slider Arrows Accessibility 
+    Retrieve all Divi Slider Arrows
     */
-   var slider_arrows = $('div').filter(function(){ return this.className.match(/\bet-pb-slider-arrows\b/); });
+    var slider_arrows = $('div').filter(function(){ return this.className.match(/\bet-pb-slider-arrows\b/); });
+
+    /* 
+    Divi Post Slider (Standard & Fullwidth) Accessibility 
+    Retrieve all Divi Post Slider Modules
+    */
+   var post_slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_post_slider_\d\b|\bet_pb_fullwidth_post_slider_\d\b/); });
+
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -132,4 +149,28 @@
             
         });      
     } 
+
+    // Run only if there is a Post Slider Module on the current page
+    if( post_slider_modules.length ){
+        post_slider_modules.each(function(index, element) {
+            // Grab all slides
+            slides =  $(element).find('div.et_pb_slide');
+            slides.each(function(i) {
+             s =  $(slides[i]); 
+
+             // Grab the slide title
+             title = s.find('.et_pb_slide_title').text();
+
+             // Grab the More Button from Slide
+             more_button = s.find('.et_pb_more_button');
+      
+             // If there is a More Button append SR Tag with Title
+             if(more_button.length){
+                more_button.append('<span class="sr-only">' + title + '</span>');
+             }
+            });
+         });      
+    }   
+
+
 });
