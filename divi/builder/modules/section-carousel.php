@@ -421,7 +421,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
             $this->add_classname('backdrop');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $display_button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information</strong></a>', esc_url($slide_url)) : '';
+            $display_button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information<span class="sr-only">More information about %2$s</span></strong></a>', esc_url($slide_url), $slide_title) : '';
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
 
@@ -851,7 +851,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
             $this->add_classname('backdrop');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $display_button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information</strong></a>', esc_url($slide_url)) : '';
+            $display_button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information<span class="sr-only">More information about %2$s</span></strong></a>', esc_url($slide_url), $slide_title) : '';
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
 
