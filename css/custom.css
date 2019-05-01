@@ -29,7 +29,8 @@ border: 0;
         border-radius: 5px;
         padding: 5px;
         border: #2ea3f2 2px solid;
-        display: inline-block
+        display: inline-block;
+        background-image: none;
 }
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;

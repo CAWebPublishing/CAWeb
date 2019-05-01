@@ -21,7 +21,7 @@
 					$post_format = et_pb_post_format(); ?>
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
-						<a href="<?php the_permalink(); ?>" >
+						<a class="tag-link" href="<?php the_permalink(); ?>" >
                <?php  if (has_post_thumbnail()) {
 								 $thumbId = get_post_thumbnail_id( the_ID() );
 								 $thumb_alt = get_post_meta($thumbId, 'wp_attachment_image_alt', true);
@@ -37,7 +37,7 @@
            <?php et_divi_post_meta(); ?>
             </div>
             <p> <?php truncate_post(270); ?></p>              
-          	<a class="tag-link" href="<?php the_permalink(); ?>" >Read More</a>
+          	<a class="tag-link" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;
