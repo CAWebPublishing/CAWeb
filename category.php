@@ -22,7 +22,10 @@
 					<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
 						<a href="<?php the_permalink(); ?>" >
                <?php  if (has_post_thumbnail()) {
-					    the_post_thumbnail('medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;');
+								 $thumbId = get_post_thumbnail_id( the_ID() );
+								 $thumb_alt = get_post_meta($thumbId, 'wp_attachment_image_alt', true);
+								 
+					    the_post_thumbnail('medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;', array('alt' => $thumb_alt));
 					} ?>
 						 </a>
 				<?php
