@@ -828,14 +828,14 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
         $slide_show_more_button = $this->props['slide_show_more_button'];
 
         global $et_pb_slider_item_num;
-        global $et_pb_ca_section_carousel_style;
+        global $et_pb_ca_fullwidth_section_carousel_style;
 
         $et_pb_slider_item_num++;
 
-        $this->add_classname($et_pb_ca_section_carousel_style);
+        $this->add_classname($et_pb_ca_fullwidth_section_carousel_style);
         $this->add_classname('item');
 
-        if ("media" == $et_pb_ca_section_carousel_style) {
+        if ("media" == $et_pb_ca_fullwidth_section_carousel_style) {
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
             $button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<a href="%1$s" target="_blank">%2$s</a>', esc_url($slide_url), $slide_title) : '';
