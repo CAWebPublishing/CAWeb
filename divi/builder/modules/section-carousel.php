@@ -224,12 +224,12 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
 
             $display_title = sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>', $panel_title, $display_button);
 
-            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
+            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media owl-carousel">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
         } else {
             $this->add_classname('section');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
+            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s owl-carousel">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
         }
 
         return $output;
@@ -237,7 +237,9 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
 
     // This is a non-standard function. It outputs JS code to change items amount for carousel-media.
     function carousel_fix() {
-        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); ?>
+        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); 
+        
+        ?>
 			<script>
         $ = jQuery.noConflict();
 
@@ -653,12 +655,12 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 
             $display_title = sprintf('<div class="panel-heading"><h4>%1$s</h4>%2$s</div>', $panel_title, $display_button);
 
-            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
+            $output  = sprintf('<div%1$s%2$s>%3$s<div class="panel-body"%4$s><div class="carousel carousel-media owl-carousel">%5$s</div></div></div>', $this->module_id(), $class, $display_title, $section_background_color, $content);
         } else {
             $this->add_classname('section');
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
+            $output = sprintf('<div%1$s%2$s%3$s><div class="carousel carousel-%4$s owl-carousel">%5$s</div></div>', $this->module_id(), $class, $section_background_color, "media" == $carousel_style ? $carousel_style : 'content', $content);
         }
 
         return $output;
