@@ -405,16 +405,17 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
         $this->add_classname($et_pb_ca_section_carousel_style);
         $this->add_classname('item');
 
+        $slide_image_alt =  sprintf( ' alt="%1$s" ', caweb_get_attachment_post_meta($slide_image, '_wp_attachment_image_alt') );
+
         if ("media" == $et_pb_ca_section_carousel_style) {
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
             $button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<a href="%1$s" target="_blank">%2$s</a>', esc_url($slide_url), $slide_title) : '';
             $button = ! empty($button) ? sprintf('<div class="details text-center">%1$s</div>', $button) : '';
 
-            $title = ! empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : '';
             $desc = ! empty($slide_desc) ? sprintf('<div class="details">%1$s</div>', $slide_desc) : '';
 
-            $slide = ! empty($slide_image) ? sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>%3$s', $slide_image, $title, $desc) : '';
+            $slide = ! empty($slide_image) ? sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>%3$s', $slide_image, $slide_image_alt, $desc) : '';
 
             $output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, $slide, $button);
         } else {
@@ -427,7 +428,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 
             $content_fit = "content_fit" == $et_pb_ca_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
 
-            $image_fit = "image_fit" == $et_pb_ca_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
+            $image_fit = "image_fit" == $et_pb_ca_section_carousel_style ? sprintf('<img src="%1$s"%2$s/>', $slide_image, $slide_image_alt ) : '';
 
             $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="content-container"><div class="content">%5$s%6$s%7$s</div></div></div>', $this->module_id(), $class, $content_fit, $image_fit, $slide_title, $slide_desc, $display_button);
         }
@@ -835,16 +836,17 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
         $this->add_classname($et_pb_ca_fullwidth_section_carousel_style);
         $this->add_classname('item');
 
+        $slide_image_alt =  sprintf( ' alt="%1$s" ', caweb_get_attachment_post_meta($slide_image, '_wp_attachment_image_alt') );
+
         if ("media" == $et_pb_ca_fullwidth_section_carousel_style) {
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
             $button = "on" == $slide_show_more_button && ! empty($slide_url) ? sprintf('<a href="%1$s" target="_blank">%2$s</a>', esc_url($slide_url), $slide_title) : '';
             $button = ! empty($button) ? sprintf('<div class="details text-center">%1$s</div>', $button) : '';
-
-            $title = ! empty($slide_title) ? sprintf(' alt="%1$s"', $slide_title) : '';
+            
             $desc = ! empty($slide_desc) ? sprintf('<div class="details">%1$s</div>', $slide_desc) : '';
 
-            $slide = ! empty($slide_image) ? sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>%3$s', $slide_image, $title, $desc) : '';
+            $slide = ! empty($slide_image) ? sprintf('<div class="preview-image"><img src="%1$s"%2$s/></div>%3$s', $slide_image, $slide_image_alt, $desc) : '';
 
             $output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, $slide, $button);
         } else {
@@ -857,7 +859,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
 
             $content_fit = "content_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
 
-            $image_fit = "image_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
+            $image_fit = "image_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf('<img src="%1$s"%2$s/>', $slide_image, $slide_image_alt) : '';
 
             $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="content-container"><div class="content">%5$s%6$s%7$s</div></div></div>', $this->module_id(), $class, $content_fit, $image_fit, $slide_title, $slide_desc, $display_button);
         }
