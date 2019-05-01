@@ -36,7 +36,7 @@
            <?php et_divi_post_meta(); ?>
             </div>
             <p> <?php truncate_post(270); ?></p>              
-          	<a class="auth-link" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
+          	<a class="auth-link-read-more" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;
