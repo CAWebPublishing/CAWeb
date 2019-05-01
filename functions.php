@@ -350,6 +350,13 @@ function caweb_admin_head() {
 
     // This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open
     print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
+
+    // This is a fix for CAWeb icons in the new divi builder
+    echo '<style>
+            body.et-db #et-boc .et-fb-font-icon-list li:after {
+              font-family: "CaGov", "ETModules" !important;
+            } 
+          </style>';
 }
 
 // CAWeb Admin Bar Menu
