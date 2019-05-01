@@ -27,6 +27,7 @@
 
 					    the_post_thumbnail('medium', '', array('alt' => $thumb_alt));
 					} ?>
+					<span class="sr-only">Read more about <?php the_title(); ?></span>
 						 </a>
 				<?php
 					et_divi_post_format_content();
