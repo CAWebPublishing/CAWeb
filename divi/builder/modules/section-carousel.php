@@ -855,9 +855,9 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
 
-            $content_fit = "content_fit" == $et_pb_ca_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
+            $content_fit = "content_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf(' style="background-image: url(%1$s);"', $slide_image) : '';
 
-            $image_fit = "image_fit" == $et_pb_ca_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
+            $image_fit = "image_fit" == $et_pb_ca_fullwidth_section_carousel_style ? sprintf('<img src="%1$s" />', $slide_image) : '';
 
             $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="content-container"><div class="content">%5$s%6$s%7$s</div></div></div>', $this->module_id(), $class, $content_fit, $image_fit, $slide_title, $slide_desc, $display_button);
         }
