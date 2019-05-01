@@ -47,6 +47,12 @@
     */
    var post_slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_post_slider_\d\b|\bet_pb_fullwidth_post_slider_\d\b/); });
 
+   /* 
+    Divi Fullwidth Header Module Accessibility 
+    Retrieve all Divi Fullwidth Header Modules
+    */
+   var fullwidth_header_modules = $('section').filter(function(){ return this.className.match(/\bet_pb_fullwidth_header_\d\b/); });
+
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -156,21 +162,37 @@
             // Grab all slides
             slides =  $(element).find('div.et_pb_slide');
             slides.each(function(i) {
-             s =  $(slides[i]); 
+            s =  $(slides[i]); 
 
-             // Grab the slide title
-             title = s.find('.et_pb_slide_title').text();
+            // Grab the slide title
+            title = s.find('.et_pb_slide_title');
+            title_link = title.find('a');
+            title_link.addClass('no-underline');
 
              // Grab the More Button from Slide
              more_button = s.find('.et_pb_more_button');
       
              // If there is a More Button append SR Tag with Title
              if(more_button.length){
-                more_button.append('<span class="sr-only">' + title + '</span>');
+                more_button.append('<span class="sr-only">' + title.text() + '</span>');
              }
             });
          });      
     }   
 
+    
+    // Run only if there is a Fullwidth Header Module on the current page
+    if( fullwidth_header_modules.length ){
+        fullwidth_header_modules.each(function(index, element) {
+            // Grab all More Buttons
+            more_buttons =  $(element).find('.et_pb_more_button');
+            more_buttons.each(function(i) {
+             m =  $(more_buttons[i]); 
+
+             m.addClass('no-underline');
+            });
+         });      
+    }   
+    
 
 });
