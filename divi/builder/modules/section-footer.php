@@ -325,7 +325,7 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module {
         $no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
 
         $display_more_button = ("on" == $group_show_more_button ?
-		sprintf('<a href="%1$s" class="btn btn-primary" target="_blank">Read More</a>', esc_url($group_url)) : '');
+		sprintf('<a href="%1$s" class="btn btn-primary" target="_blank">Read More<span class="sr-only">Read More about %2$s</span></a>', esc_url($group_url), $group_title) : '');
 
         $group_links = '';
 
@@ -662,7 +662,7 @@ class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
         $no_pad = ("on" != $group_icon_button ? 'padding-left: 0 !important;' : '');
 
         $display_more_button = ("on" == $group_show_more_button ?
-	sprintf('<a href="%1$s" class="btn btn-primary" target="_blank">Read More</a>', esc_url($group_url)) : '');
+	sprintf('<a href="%1$s" class="btn btn-primary" target="_blank">Read More<span class="sr-only">Read More about %2$s</span></a>', esc_url($group_url), $group_title) : '');
 
         $group_links = '';
 

@@ -529,6 +529,7 @@ $('[name="caweb_options_submit"]').click( function(e){
   e.preventDefault();
   var settingInputs = $('#caweb-alert-settings').find('INPUT');
   var hiddenInputs = document.createElement('DIV');
+	var org_logo_alt_text = document.getElementById('header_ca_branding_alt_text');
 
   this.nextElementSibling.value = "on";
 
@@ -541,9 +542,15 @@ $('[name="caweb_options_submit"]').click( function(e){
           ( -1 ==  input.name.indexOf('alert-display-') && -1 ==  input.name.indexOf('alert-read-more-target-') )){
       hiddenInputs.appendChild(settingInputs[i]);
     }
-  }
-  $('#caweb-options-form').append(hiddenInputs);
-  $('#caweb-options-form').submit();
+	}
+	
+	if( !org_logo_alt_text.value ){
+		alert('Organization Logo-Brand Alt Text can not be blank.');
+	}else{
+		$('#caweb-options-form').append(hiddenInputs);
+		$('#caweb-options-form').submit();
+	}
+  
 });
 
  /* End of CAWeb Option Page */

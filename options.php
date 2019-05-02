@@ -353,7 +353,7 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
         'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window',
     );
 
-    $caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alignment', 'header_ca_background');
+    $caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background');
 
     $caweb_google_options = array('ca_google_search_id', 'ca_google_analytic_id',
         'ca_google_meta_id', 'ca_google_trans_enabled', 'ca_google_trans_page', 'ca_google_trans_icon');

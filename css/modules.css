@@ -84,18 +84,25 @@ overflow: hidden;
  	margin-top: 1em;
 }
 /* Panel Style */
-.panel-heading > h1 {
+.et_pb_ca_panel.panel-none{
+  border: none;
+}
+.et_pb_ca_panel .panel-heading > h1 {
     margin: 0;
 }
-.panel-heading h2{
+.et_pb_ca_panel .panel-heading h2{
 	width: 100%;
 }
 /* Location Banner Thumbnail Image Fix*/
-.location.banner .thumbnail img {
+.et_pb_ca_location_widget.location.banner .thumbnail img {
     width: 100%;
  }
 .et_pb_ca_location_widget.location.banner .description {
     padding-bottom: 10px;
+}
+.et_pb_ca_location_widget.location.banner .address a {
+  margin-left: 30px;
+  display: inline-block;
 }
 /* Profile Banner */
 .profile-banner .banner-subtitle{
@@ -221,7 +228,6 @@ ol{
 }
 .et_pb_ca_card.et_pb_module .card-block {
 	padding: 15px;
-	color: initial;
 }
 .et_pb_ca_card.et_pb_module .card-footer {
   padding: 11px 15px;

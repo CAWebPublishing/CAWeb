@@ -76,7 +76,7 @@
           'icon_url': attachment.attributes.url,
         };
 				if( /\d+_media_image/.test(el_name) ){
-          var nav_img_alt_box = document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
+          var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
           input_box.value = attachment.attributes.url;
           nav_img_alt_box.value = attachment.attributes.alt;
 
@@ -86,6 +86,11 @@
             	preview_field.src = attachment.attributes.url;
 						if( null !== filename_box )
               filename_box.value = attachment.attributes.filename;
+              
+            if(  /header_ca_branding/.test(el_name)  ){
+              var org_logo_alt_textbox = document.getElementById("header_ca_branding_alt_text");
+              org_logo_alt_textbox.value = attachment.attributes.alt;
+            }
         }else{
 					jQuery.post(ajaxurl, data, function(response) {
 						if(1 == response){

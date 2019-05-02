@@ -26,11 +26,13 @@ border: 0;
 .archive.category article .cat-link,
 .archive.date article .date-link,
 .archive.tag article .tag-link{
-        border-radius: 5px;
-        padding: 5px;
-        border: #2ea3f2 2px solid;
-        display: inline-block
+  width: 200px;
+  height: 150px;
+  padding-right: 20px;
+  padding-bottom:15px;
+  float:left;
 }
+
 .non_divi_builder.title_not_displayed .main-primary{
  padding-top: 25px;
 }
