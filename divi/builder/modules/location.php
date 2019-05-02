@@ -284,7 +284,12 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
         } else {
             $display_button = ("on" == $show_button && ! empty($location_link) ? sprintf('<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link) : '');
 
-            $output = sprintf('<div%1$s%2$s><div class="thumbnail"><img src="%3$s"></div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
+            if( ! empty( $featured_image ) ){
+                $alt_text = caweb_get_attachment_post_meta($featured_image, '_wp_attachment_image_alt');
+                $featured_image = sprintf('<img src="%1$s" alt="%2$s" />', $featured_image, ! empty($alt_text) ? $alt_text : ' ' );
+            }
+
+            $output = sprintf('<div%1$s%2$s><div class="thumbnail">%3$s</div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
 			 $this->module_id() ,	 $class,  $featured_image, $name , ( ! empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link($address)) : ''),
       ( ! empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : ''), $display_button);
         }
