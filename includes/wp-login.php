@@ -104,7 +104,10 @@ function caweb_login_form_rp() {
      } elseif (isset($_GET['action']) && 'resetpass' == $_GET['action']) {
          if (( ! $errors->get_error_code()) && isset($_POST['pass1']) && ! empty($_POST['pass1'])) {
              reset_password($user, $_POST['pass1']);
-             setcookie($rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true);
+
+             list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
+             
+             setcookie('caweb-resetpass-' . md5(site_url()), ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true);
              wp_redirect(site_url('/wp-login.php?caweb=resetpass'));
              exit;
          }
