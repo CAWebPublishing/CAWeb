@@ -222,7 +222,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
         $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
 
         $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information</a></div>', esc_url($section_link)) : '');
+			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
 
         if ("on" == $featured_image_button) {
             $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
@@ -472,7 +472,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
         $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
 
         $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information</a></div>', esc_url($section_link)) : '');
+			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
 
         if ("on" == $featured_image_button) {
             $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
