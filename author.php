@@ -20,10 +20,14 @@
 					$post_format = et_pb_post_format(); ?>
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
-					<a href="<?php the_permalink(); ?>" >
+					<a class="auth-link no-underline" href="<?php the_permalink(); ?>" >
                <?php  if (has_post_thumbnail()) {
-					    the_post_thumbnail('medium', 'style=width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left;');
+								 $thumbId = get_post_thumbnail_id( get_the_ID() );
+								 $thumb_alt = get_post_meta($thumbId, 'wp_attachment_image_alt', true);
+
+					    the_post_thumbnail('medium', '', array('alt' => $thumb_alt));
 					} ?>
+					<span class="sr-only">Read more about <?php the_title(); ?></span>
 						 </a>
 				<?php
 					et_divi_post_format_content();
@@ -33,7 +37,7 @@
            <?php et_divi_post_meta(); ?>
             </div>
             <p> <?php truncate_post(270); ?></p>              
-          	<a class="auth-link" href="<?php the_permalink(); ?>" >Read More</a>
+          	<a class="btn btn-default" href="<?php the_permalink(); ?>" >Read More<span class="sr-only">Read more about <?php the_title(); ?></span></a>
 					</article> <!-- .et_pb_post -->
 			<?php
 					endwhile;

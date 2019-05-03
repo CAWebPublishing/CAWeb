@@ -222,14 +222,16 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
         $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
 
         $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information</a></div>', esc_url($section_link)) : '');
+			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
 
         if ("on" == $featured_image_button) {
             $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
             $img_class .= ("on" == $image_pos ? 'pull-right' : '');
 
-            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>',
+            $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
+            $section_image = sprintf('<img src="%1$s" class="img-responsive" style="width: 100%%;" alt="%2$s" />', $section_image, $alt_text);
+
+            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
             $heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
@@ -470,14 +472,16 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
         $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
 
         $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information</a></div>', esc_url($section_link)) : '');
+			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
 
         if ("on" == $featured_image_button) {
             $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
             $img_class .= ("on" == $image_pos ? 'pull-right' : '');
 
-            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">
-					<img src="%3$s" class="img-responsive" style="width: 100%%;"></div>',
+            $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
+            $section_image = sprintf('<img src="%1$s" class="img-responsive" style="width: 100%%;" alt="%2$s" />', $section_image, $alt_text);
+
+            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
             $heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');

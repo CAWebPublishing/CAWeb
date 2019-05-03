@@ -237,6 +237,19 @@ function caweb_wp_enqueue_scripts() {
     wp_deregister_style('divi-fonts');
 }
 
+add_action('wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115);
+function caweb_late_wp_enqueue_scripts(){
+    // If CAWeb is a child theme of Divi, include Accessibility Javascript
+    if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
+        wp_register_script('caweb-accessibility-scripts', CAWebUri.'/divi/js/accessibility.js', array('jquery'), CAWebVersion, true);
+
+        wp_localize_script( 'caweb-accessibility-scripts', 'accessibleargs',
+                array( 'ajaxurl' => admin_url( 'admin-post.php' ) ) );
+    
+        wp_enqueue_script('caweb-accessibility-scripts');
+    }
+}
+
 // CAWeb WP Head
 add_action('wp_head', 'caweb_wp_head');
 function caweb_wp_head() {
@@ -288,9 +301,7 @@ function caweb_wp_footer() {
 
 function caweb_late_wp_footer() {
     // Load Core JS at the very end along with any external/custom javascript/jquery
-    $core_js = sprintf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
-
-    print $core_js;
+    printf('<script type="text/javascript" src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
 
     // External JS
     $ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
@@ -300,9 +311,11 @@ function caweb_late_wp_footer() {
         printf('<script type="text/javascript" src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWebVersion, $index + 1);
     }
 
+    // Custom JS
     if ("" !== get_option('ca_custom_js', '')) {
         printf('<script id="ca_custom_js">%1$s</script>', wp_unslash(get_option('ca_custom_js')));
     }
+
 }
 add_action('wp_footer', 'caweb_late_wp_footer', 115);
 
@@ -350,6 +363,13 @@ function caweb_admin_head() {
 
     // This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open
     print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
+
+    // This is a fix for CAWeb icons in the new divi builder
+    echo '<style>
+            body.et-db #et-boc .et-fb-font-icon-list li:after {
+              font-family: "CaGov", "ETModules" !important;
+            } 
+          </style>';
 }
 
 // CAWeb Admin Bar Menu
@@ -407,42 +427,9 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
             foreach ($modules as $module_file) {
                 require_once($module_file);
             }
-            
-            // Custom handler: Output JS for editor preview in page footer.
-            add_action('wp_footer', 'caweb_accessibility_blog_read_more_fix', 20);
         }
-
-        
     }
         
-    function caweb_accessibility_blog_read_more_fix(){
-        $blogs = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), 'et_pb_blog', true)) : array()); 
-        
-        ?>
-        
-        <script>
-        $ = jQuery.noConflict();
-
-        var blogs = <?php print_r($blogs); ?>;
-
-        blogs.forEach(function(element, index) {
-           blog =  $('.et_pb_blog_' + index).find('article');
-           blog.each(function(i) {
-            b =  $(blog[i]); 
-            title = b.children('.entry-title').text();
-            
-            read_more = b.children('.post-content').children('.more-link:last-child');
-
-            if(read_more.length){
-                read_more.append('<span class="sr-only">' + title + '</span>');
-            }
-            });
-        });
-
-
-        </script>
-        <?php
-    }
 } else {
     include(CAWebAbsPath."/divi/functions.php");
 }
