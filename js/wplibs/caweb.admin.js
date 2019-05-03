@@ -530,23 +530,24 @@ $('[name="caweb_options_submit"]').click( function(e){
   var settingInputs = $('#caweb-alert-settings').find('INPUT');
   var hiddenInputs = document.createElement('DIV');
 	var org_logo_alt_text = document.getElementById('header_ca_branding_alt_text');
-
-  this.nextElementSibling.value = "on";
-
-  hiddenInputs.className = "hidden";
-
-  for(var i = 0; i < settingInputs.length; i++){
-    var input = settingInputs[i];
-
-    if( ((-1 < input.name.indexOf('alert-display-') || -1 < input.name.indexOf('alert-read-more-target-') ) && input.checked ) ||
-          ( -1 ==  input.name.indexOf('alert-display-') && -1 ==  input.name.indexOf('alert-read-more-target-') )){
-      hiddenInputs.appendChild(settingInputs[i]);
-    }
-	}
 	
 	if( !org_logo_alt_text.value ){
 		alert('Organization Logo-Brand Alt Text can not be blank.');
 	}else{
+		
+		this.nextElementSibling.value = "on";
+
+		hiddenInputs.className = "hidden";
+	
+		for(var i = 0; i < settingInputs.length; i++){
+			var input = settingInputs[i];
+	
+			if( ((-1 < input.name.indexOf('alert-display-') || -1 < input.name.indexOf('alert-read-more-target-') ) && input.checked ) ||
+						( -1 ==  input.name.indexOf('alert-display-') && -1 ==  input.name.indexOf('alert-read-more-target-') )){
+				hiddenInputs.appendChild(settingInputs[i]);
+			}
+		}
+		
 		$('#caweb-options-form').append(hiddenInputs);
 		$('#caweb-options-form').submit();
 	}
