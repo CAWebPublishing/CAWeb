@@ -50,7 +50,8 @@ add_filter('wp_login_errors', 'caweb_wp_login_errors', 10, 2);
 function caweb_wp_login_errors($errors, $redirect_to) {
     global $interim_login;
 
-    print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
+    if( headers_sent() )
+        print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
 
     if ( ! $interim_login && isset($_GET['caweb']) && 'resetpass' == $_GET['caweb']) {
         $errors->add('updated', '<p class="caweb-resetpass">You have successfully reset your password.</p>');
