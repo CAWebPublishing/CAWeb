@@ -124,20 +124,21 @@ function caweb_save_options($values = array(), $files = array()) {
         if ( ! isset($values['alert-status-'.$count])) {
             continue;
         }
-        $data['status'] = $values['alert-status-'.$count];
-        $data['header'] = $values['alert-header-'.$count];
-        $data['message'] = $values['alert-message-'.$count];
+        $data['status'] = isset($values['alert-status-'.$count]) ? $values['alert-status-'.$count] : 'active';
+        $data['header'] = isset($values['alert-header-'.$count]) ? $values['alert-header-'.$count] : '';
+        $data['message'] = isset($values['alert-message-'.$count]) ? $values['alert-message-'.$count] : '';
         $data['page_display'] = isset($values['alert-display-'.$count]) ? $values['alert-display-'.$count] : 'home';
-        $data['color'] = $values['alert-banner-color-'.$count];
+        $data['color'] = isset($values['alert-banner-color-'.$count]) ? $values['alert-banner-color-'.$count] : '#FDB81E';
         $data['button'] = isset($values['alert-read-more-'.$count]) ? $values['alert-read-more-'.$count] : '';
-        $data['url'] = $values['alert-read-more-url-'.$count];
+        $data['url'] = isset($values['alert-read-more-url-'.$count]) ? $values['alert-read-more-url-'.$count] : '';
         $data['target'] = isset($values['alert-read-more-target-'.$count]) ? $values['alert-read-more-target-'.$count] : '';
-        $data['icon'] = $values['alert-icon-'.$count];
+        $data['icon'] = isset($values['alert-icon-'.$count]) ? $values['alert-icon-'.$count] : '';
 
         $alerts[] = $data;
     }
 
     $values['caweb_alerts'] = $alerts;
+    update_site_option('dev', $values);
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
