@@ -127,7 +127,7 @@ function caweb_save_options($values = array(), $files = array()) {
         $data['status'] = $values['alert-status-'.$count];
         $data['header'] = $values['alert-header-'.$count];
         $data['message'] = $values['alert-message-'.$count];
-        $data['page_display'] = $values['alert-display-'.$count];
+        $data['page_display'] = isset($values['alert-display-'.$count]) ? $values['alert-display-'.$count] : 'home';
         $data['color'] = $values['alert-banner-color-'.$count];
         $data['button'] = isset($values['alert-read-more-'.$count]) ? $values['alert-read-more-'.$count] : '';
         $data['url'] = $values['alert-read-more-url-'.$count];
@@ -136,6 +136,7 @@ function caweb_save_options($values = array(), $files = array()) {
 
         $alerts[] = $data;
     }
+
     $values['caweb_alerts'] = $alerts;
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
