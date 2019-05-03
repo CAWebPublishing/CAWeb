@@ -50,7 +50,8 @@ add_filter('wp_login_errors', 'caweb_wp_login_errors', 10, 2);
 function caweb_wp_login_errors($errors, $redirect_to) {
     global $interim_login;
 
-    print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
+    if( headers_sent() )
+        print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
 
     if ( ! $interim_login && isset($_GET['caweb']) && 'resetpass' == $_GET['caweb']) {
         $errors->add('updated', '<p class="caweb-resetpass">You have successfully reset your password.</p>');
@@ -103,7 +104,10 @@ function caweb_login_form_rp() {
      } elseif (isset($_GET['action']) && 'resetpass' == $_GET['action']) {
          if (( ! $errors->get_error_code()) && isset($_POST['pass1']) && ! empty($_POST['pass1'])) {
              reset_password($user, $_POST['pass1']);
-             setcookie($rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true);
+
+             list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
+             
+             setcookie('caweb-resetpass-' . md5(site_url()), ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true);
              wp_redirect(site_url('/wp-login.php?caweb=resetpass'));
              exit;
          }
