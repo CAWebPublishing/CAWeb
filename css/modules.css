@@ -84,13 +84,12 @@ overflow: hidden;
  	margin-top: 1em;
 }
 /* Panel Style */
-.et_pb_ca_panel.panel-none{
+.et_pb_ca_panel.panel-none,
+.et_pb_ca_fullwidth_panel.panel-none{
   border: none;
 }
-.et_pb_ca_panel .panel-heading > h1 {
-    margin: 0;
-}
-.et_pb_ca_panel .panel-heading h2{
+.et_pb_ca_panel .panel-heading h2,
+.et_pb_ca_fullwidth_panel .panel-heading h2{
 	width: 100%;
 }
 /* Location Banner Thumbnail Image Fix*/
