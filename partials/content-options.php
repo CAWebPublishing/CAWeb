@@ -251,7 +251,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																				</td>
 																			</tr>
 																			<tr>
-																			<th scope="row"><div class="tooltip">Organization Logo-Brand Alt Text
+																			<th scope="row"><div class="tooltip">Organization Logo-Alt Text
 																				<span class="tooltiptext">Enter alternative text for the agency logo image.</span></div></th>
 																				<td>
 																					<input type="text" name="header_ca_branding_alt_text" id="header_ca_branding_alt_text" size="75" value="<?php print $org_logo_alt_text ?>" >
