@@ -124,19 +124,21 @@ function caweb_save_options($values = array(), $files = array()) {
         if ( ! isset($values['alert-status-'.$count])) {
             continue;
         }
-        $data['status'] = $values['alert-status-'.$count];
-        $data['header'] = $values['alert-header-'.$count];
-        $data['message'] = $values['alert-message-'.$count];
-        $data['page_display'] = $values['alert-display-'.$count];
-        $data['color'] = $values['alert-banner-color-'.$count];
+        $data['status'] = isset($values['alert-status-'.$count]) ? $values['alert-status-'.$count] : 'active';
+        $data['header'] = isset($values['alert-header-'.$count]) ? $values['alert-header-'.$count] : '';
+        $data['message'] = isset($values['alert-message-'.$count]) ? $values['alert-message-'.$count] : '';
+        $data['page_display'] = isset($values['alert-display-'.$count]) ? $values['alert-display-'.$count] : 'home';
+        $data['color'] = isset($values['alert-banner-color-'.$count]) ? $values['alert-banner-color-'.$count] : '#FDB81E';
         $data['button'] = isset($values['alert-read-more-'.$count]) ? $values['alert-read-more-'.$count] : '';
-        $data['url'] = $values['alert-read-more-url-'.$count];
+        $data['url'] = isset($values['alert-read-more-url-'.$count]) ? $values['alert-read-more-url-'.$count] : '';
         $data['target'] = isset($values['alert-read-more-target-'.$count]) ? $values['alert-read-more-target-'.$count] : '';
-        $data['icon'] = $values['alert-icon-'.$count];
+        $data['icon'] = isset($values['alert-icon-'.$count]) ? $values['alert-icon-'.$count] : '';
 
         $alerts[] = $data;
     }
+
     $values['caweb_alerts'] = $alerts;
+    update_site_option('dev', $values);
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
@@ -353,7 +355,7 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
         'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window',
     );
 
-    $caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alignment', 'header_ca_background');
+    $caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background');
 
     $caweb_google_options = array('ca_google_search_id', 'ca_google_analytic_id',
         'ca_google_meta_id', 'ca_google_trans_enabled', 'ca_google_trans_page', 'ca_google_trans_icon');

@@ -31,6 +31,8 @@ $geo_locator_enabled = get_option('ca_geo_locator_enabled', false) ? ' checked="
 $utility_header_home_icon = get_option('ca_utility_home_icon', true) ? 'checked="checked"' : '';
 $org_logo = get_option('header_ca_branding', '');
 $org_logo_filename = ! empty($org_logo) ? substr($org_logo, strrpos($org_logo, '/')+1) : '';
+$org_logo_alt_text = ! empty( get_option('header_ca_branding_alt_text', '') ) ? get_option('header_ca_branding_alt_text') :  caweb_get_attachment_post_meta($org_logo, '_wp_attachment_image_alt');
+
 $header_branding_alignment = get_option('header_ca_branding_alignment', 'left');
 $header_branding_background = get_option('header_ca_background', '');
 $header_branding_background_filename = ! empty($header_branding_background) ? substr($header_branding_background, strrpos($header_branding_background, '/')+1) : '';
@@ -248,7 +250,13 @@ $icons = caweb_get_icon_list(-1, '', true);
 																					<img class="header_ca_branding_option" id="header_ca_branding_img" src="<?php print $org_logo ?>"/>
 																				</td>
 																			</tr>
-																			
+																			<tr>
+																			<th scope="row"><div class="tooltip">Organization Logo-Alt Text
+																				<span class="tooltiptext">Enter alternative text for the agency logo image.</span></div></th>
+																				<td>
+																					<input type="text" name="header_ca_branding_alt_text" id="header_ca_branding_alt_text" size="75" value="<?php print $org_logo_alt_text ?>" >
+																				</td>
+																			</tr>
 																			<tr class="base <?php print $legacy ?>">
 																				<th scope="row"><div class="tooltip ">Organization Logo Alignment
 																					<span class="tooltiptext">Select the position for the agency logo.</span></div></th>
