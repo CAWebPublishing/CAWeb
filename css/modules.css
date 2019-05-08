@@ -190,10 +190,20 @@ ol{
 .et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body{
   margin-left: 0;
 }
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item{
+  min-height: 105px;
+}
+/* Post List (FAQs) */
 /* Remove the Divi Padding around the et_pb_toggle */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close{
 	padding: 0px;
+}
+/* Add outline */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open:focus,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close:focus{
+	outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
 }
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title ,
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
@@ -203,6 +213,13 @@ ol{
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading ,
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
        border-bottom: inherit;
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_title:before {
+       content: "";
+}
+/* Post List (General) */
+.et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before{
+  content: "";
 }
 /* Apply the Arrows */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after {

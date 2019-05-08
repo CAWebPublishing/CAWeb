@@ -306,6 +306,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
         $output = '';
         global $faq_accordion_count;
 
+        $class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
+
         foreach ($all_posts as $a=>$p) {
             if ($posts_number !== -1 && 0 == $posts_number) {
                 break;
@@ -386,7 +388,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 							    $fields = array_filter(array($position, $line1, $line2, $line3));
 
-							    $output .=	sprintf('<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div><div class="footer"><a href="%5$s" class="btn btn-default">View More Details</a></div></article>', empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode('<br />', $fields) : '<br />'), $url);
+							    $output .=	sprintf('<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div></article>', empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode('<br />', $fields) : '<br />') );
 
 							    $posts_number--;
 							}
@@ -407,9 +409,12 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 								    $location = ( ! empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location)) : '');
 
-								    if ( ! empty($post_content_handler->job_final_filing_date_chooser) && "on" == $post_content_handler->job_final_filing_date_chooser) {
-								        $job_final_filing_date_picker = gmdate('n/j/Y', strtotime($post_content_handler->job_final_filing_date_picker));
-								        $filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
+                                    $filing_date = '';
+                                    if ( ! empty($post_content_handler->job_final_filing_date_chooser) && "on" == $post_content_handler->job_final_filing_date_chooser  ) {
+                                        if( isset($post_content_handler->job_final_filing_date_picker) && ! empty($post_content_handler->job_final_filing_date_picker) ){
+                                            $job_final_filing_date_picker = gmdate('n/j/Y', strtotime($post_content_handler->job_final_filing_date_picker));
+                                            $filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
+                                        }
 								    } else {
 								        $filing_date = sprintf('Final Filing Date: %1$s<br />',
                                      ( ! empty($post_content_handler->job_final_filing_date) ? $post_content_handler->job_final_filing_date : 'Until Filled'));
@@ -439,9 +444,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 								    $output .= sprintf('<article class="job-item">
 															<div class="header">%1$s%2$s</div>
-															<div class="body">%3$s%4$s%5$s%6$s</div>
-															<div class="footer"><a href="%7$s" class="btn btn-default">View More Details</a></div></article>',
-																		$job_title, $filing_date, $position_type, $job_hours, $job_salary, $location, $url);
+                                                            <div class="body">%3$s%4$s%5$s%6$s</div>
+                                                        </article>',
+																		$job_title, $filing_date, $position_type, $job_hours, $job_salary, $location );
 								    $posts_number--;
 								}
 
@@ -496,9 +501,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 								    $output .= sprintf('<article class="course-item">
 															%1$s<div class="header">%2$s%3$s</div>
-															<div class="body">%4$s%5$s</div>
-															<div class="footer"><a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
-																		$image, $course_title, $course_date, $excerpt, $location, $url);
+                                                            <div class="body">%4$s%5$s</div>
+                                                        </article>',
+																		$image, $course_title, $course_date, $excerpt, $location );
 
 								    $posts_number--;
 								}
@@ -524,8 +529,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 								    $output .= sprintf('<article class="exam-item">
 															<div class="header">%1$s%2$s</div>
 															<div class="body">%3$s%4$s</div>
-															<div class="footer">%5$s<a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
-																		$exam_title, $filing_date, $id, $status, $pub, $url);
+															<div class="footer">%5$s</div></article>',
+																		$exam_title, $filing_date, $id, $status, $pub );
 								    $posts_number--;
 								}
 
@@ -535,6 +540,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 						case "faqs-list":
 
 							if ("faqs" == $post_content_handler->post_type_layout) {
+                                
 							    if ("toggle" == $faq_style) {
 							        $faqs .= sprintf('<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $title, $post_content_handler->content);
 							    }
@@ -565,7 +571,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 								    $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100))) : '';
 
 								    $general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
-																		<a href="%2$s" class="title" style="color: #428bca; background: url();">%3$s</a></h5>',
+																		<a href="%2$s" class="title" style="color: #428bca; background: none;">%3$s</a></h5>',
 																			("on" == $view_featured_image ? '' : ''), $url, $title);
 
 								    $excerpt = caweb_get_excerpt($post_content_handler->content, 45);
@@ -583,25 +589,14 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             } // end of if is_object check
         }
 
-        global $faq_list_count;
-
-        $class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
-
-        /*
-        $class = esc_attr( $class );
-        $class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
-
-        if ( "faqs-list" == $style){
-
-        	if("toggle" == $faq_style)
-        		$output .= sprintf('<ul class="list-overstated accordion-list" style="list-style-type:none;">%1$s</ul>', $faqs);
-
-        	if("accordion" == $faq_style){
-        		$output .=  $faqs;
-        		$faq_list_count++;
-        	}
+        if (! empty($faqs)) {
+            if ("toggle" == $faq_style) {
+                $output = sprintf('<ul class="accordion-list list-overstated" role="tablist" >%1$s</ul>', $faqs );
+            } else {
+                $output = $faqs;
+            }
         }
-         */
+
         $output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty($list_title) ? $list_title : ''), $output);
 
         $faq_accordion_count = 0;
