@@ -457,7 +457,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 								if ("event" == $post_content_handler->post_type_layout) {
 								    $thumbnail = "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100))) : '';
 
-								    $event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;" target="_blank">%2$s</a></h5>', $url, $title);
+								    $event_title = sprintf('<h5><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $url, $title);
 
 								    $excerpt = caweb_get_excerpt($post_content_handler->content, 15);
 								    $excerpt = ( ! empty($excerpt) ?

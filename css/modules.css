@@ -178,6 +178,13 @@ ol{
 	width:100%;
 }
 
+/* Post List (Events) */
+.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 {
+  padding-bottom: 0px;
+}
+.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 a{
+  color: #347AB7;
+}
 /* Post List (News) */
 .et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
     width: auto;
