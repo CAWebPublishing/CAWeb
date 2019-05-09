@@ -56,13 +56,14 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 		    // Location Bar
 		    require_once(CAWebAbsPath."/ssi/location-bar.php");
 
+		    print '<!-- Utility Header -->';
+		    // Include Utility Header
+			get_template_part('partials/content', 'utility-header');
+						
 		    print '<!-- Settings Bar -->';
 		    // Settings Bar
 		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
 
-		    print '<!-- Utility Header -->';
-		    // Include Utility Header
-		    get_template_part('partials/content', 'utility-header');
 		}
 
     print '<!-- Branding -->';
