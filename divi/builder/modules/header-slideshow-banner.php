@@ -117,17 +117,18 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         //	$this->add_classname('header-single-banner');
         $this->add_classname('header-slideshow-banner');
 				
-				global $et_pb_slider_item_num;
+		global $et_pb_slider_item_num;
 				
-				$solo = 1 >= $et_pb_slider_item_num ? ' solo' : '';
+		$solo = 1 >= $et_pb_slider_item_num ? ' solo' : '';
 				
         $class = sprintf(' class="%1$s%2$s%3$s" ', $this->module_classname($render_slug), $solo, empty($scroll_bar_text) ? ' no-explore' : '');
 
-				$scrollbar = ! empty($scroll_bar_text) ? sprintf('<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div></div>', $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)) : '';
+        $scrollbar = ! empty($scroll_bar_text) ? 
+            sprintf('<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)) : '';
 				
         $content = $this->content;
 
-        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s <!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
+        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div><!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
 
         return $output;
     }
@@ -138,44 +139,47 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
         $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
 
-        if (empty($module)) : ?>
-					<script>
-						document.body.classList.remove('primary');
-					</script>
-				<?php else : ?>
-					<script>
-					(function( $ ) {
-							 "use strict";
+        if (empty($module)) : 
+        ?>
+			<script>
+				document.body.classList.remove('primary');
+            </script>
+		<?php else : ?>
+			<script>
+                (function( $ ) {
+		    		 "use strict";
 							 
-							 var section = $('#et_pb_ca_fullwidth_banner').parent();
-							 var banner = section.find('#et_pb_ca_fullwidth_banner');
+					 var section = $('#et_pb_ca_fullwidth_banner').parent();
+					 var banner = section.find('#et_pb_ca_fullwidth_banner');
 							 
-							 $(document).ready(function () {
-								 $(section).remove();
-								 
-								 <?php if (4 == $version) : ?>
-								 $('#header').append(banner);
-								 <?php else : ?>
-								 $('#header').after(banner);
-								 <?php endif; ?>
-								 
-								 // calculate top of screen on next repaint
-								 window.setTimeout(function () {
-									 var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?>;
-									 var headerTop = banner.offset().top;
-									 var windowHeight = $(window).height();
-									 var height = windowHeight - headerTop;
-									 height = (height > MAXHEIGHT)
-									 ? MAXHEIGHT
-									 : height;
-									 // fill up the remaining heaight of this device
-									 banner.css({'height': height});
-								 }, 250)
-							});
+					 $(document).ready(function () {
+                         
+						<?php if (4 == $version) : ?>
+			    			$('#header').append(banner);
+						<?php else : ?>
+						    $('#header').after(banner);
+						<?php endif; ?>
+                                 
+                        if( ! section.children().length )
+                            $(section).remove();
+							 
+						// calculate top of screen on next repaint
+						window.setTimeout(function () {
+							 var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?>;
+							 var headerTop = banner.offset().top;
+							 var windowHeight = $(window).height();
+							 var height = windowHeight - headerTop;
+							 height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
+                                     
+                             // fill up the remaining heaight of this device
+							 banner.css({'height': height});
+						}, 250)
+					});
 
-					 })(jQuery);
-					</script>
-				<?php endif;
+				})(jQuery);				
+			</script>
+        <?php 
+        endif;
     }
 }
 new ET_Builder_Module_Fullwidth_Header_Banner;
