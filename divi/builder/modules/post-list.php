@@ -306,6 +306,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
         $output = '';
         global $faq_accordion_count;
 
+        $class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
+
         foreach ($all_posts as $a=>$p) {
             if ($posts_number !== -1 && 0 == $posts_number) {
                 break;
@@ -321,292 +323,327 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
             // if the hanlder is an object, construct the appropriate list item
             if (is_object($post_content_handler)) {
-                // List Style
-                switch ($style) {
-						// News List
-						case "news-list":
-								// if post contains a CAWeb News Post Handler
-								if ("news" == $post_content_handler->post_type_layout) {
-								    $news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $url, $title);
-								    if ( ! has_post_thumbnail($post_id) ||  "off" == $view_featured_image) {
-								        $image = '';
-								    } else {
-                                        $this->add_classname('indent');
-                                        $thumbnail = caweb_get_the_post_thumbnail($post_id, array(150, 100));
-								        $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', $thumbnail) : '';
-                                        
-								    }
+                if("faqs-list" == $style){
+                    $faqs .= $this->createListView($style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count);
+                    
+                    if ("accordion" == $faq_style) 
+                        $faq_accordion_count++;
+
+                }else{
+                    $output .= $this->createListView($style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count);
+                }
 
-                                    $excerpt = caweb_get_excerpt($post_content_handler->content, 30, $post_id);
-								    $excerpt = ( ! empty($excerpt) ?
-															sprintf('<div class="description"><p>%1$s</p></div>', $excerpt) : '');
-
-								    $author = ( ! empty($post_content_handler->news_author) ?
-															sprintf('Author: %1$s', $post_content_handler->news_author) : '');
-
-								    $date =( ! empty($post_content_handler->news_publish_date) ? gmdate('M j, Y', strtotime($post_content_handler->news_publish_date)) : '');
-
-								    $date = ( ! empty($date) ? sprintf('Published: <time>%1$s</time>', $date) : '');
-
-								    $element = ( ! empty($author) || ! empty($date) ?
-															sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter(array($author, $date)))) : '');
-
-								    $output .=	sprintf('<article class="news-item">%1$s<div class="info">%2$s%3$s%4$s</div></article>', $image, $news_title, $excerpt, $element);
-
-								    $posts_number--;
-								}
-
-								break;
-
-						// Profile List
-						case "profile-list":
-						// if post contains a CAWeb Profile Post Handler
-							if ("profile" == $post_content_handler->post_type_layout) {
-							    if ( ! has_post_thumbnail($post_id) || "off" == $view_featured_image) {
-							        $this->add_classname('no-thumbnail');
-							    }
-
-							    $thumbnail = "on" == $view_featured_image && has_post_thumbnail($post_id) ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(75, 75))) : '';
-
-							    $t = sprintf('%1$s%2$s%3$s',
-                             ( ! empty($post_content_handler->profile_name_prefix) ? sprintf('%1$s ', $post_content_handler->profile_name_prefix) : ''),
-                             ( ! empty($post_content_handler->profile_name) ? $post_content_handler->profile_name : ''),
-                             ( ! empty($post_content_handler->profile_career_title) ? sprintf(', %1$s', $post_content_handler->profile_career_title) : ''));
-
-							    $profile_title = sprintf('<div class="header"><div class="title"><a href="%1$s">%2$s</a></div></div>', $url, $t);
-
-							    $position = ( ! empty($post_content_handler->profile_career_position) ?
-												sprintf('%1$s', $post_content_handler->profile_career_position) : '');
-							    $line1 = ( ! empty($post_content_handler->profile_career_line_1) ?
-												sprintf('%1$s', $post_content_handler->profile_career_line_1) : '');
-							    $line2 = ( ! empty($post_content_handler->profile_career_line_2) ?
-												sprintf('%1$s', $post_content_handler->profile_career_line_2) : '');
-							    $line3 = ( ! empty($post_content_handler->profile_career_line_3) ?
-												sprintf('%1$s', $post_content_handler->profile_career_line_3) : '');
-
-							    $fields = array_filter(array($position, $line1, $line2, $line3));
-
-							    $output .=	sprintf('<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div><div class="footer"><a href="%5$s" class="btn btn-default">View More Details</a></div></article>', empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode('<br />', $fields) : '<br />'), $url);
-
-							    $posts_number--;
-							}
-
-							break;
-						// Job List
-						case "jobs-list":
-								// if post contains a CAWeb Job Post Handler
-								if ("jobs" == $post_content_handler->post_type_layout) {
-								    $job_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
-
-								    $addr = ( ! empty($post_content_handler->job_agency_address) ? $post_content_handler->job_agency_address : '');
-								    $city = ( ! empty($post_content_handler->job_agency_city) ? $post_content_handler->job_agency_city : '');
-								    $state = ( ! empty($post_content_handler->job_agency_state) ? $post_content_handler->job_agency_state : '');
-								    $zip = ( ! empty($post_content_handler->job_agency_zip) ? $post_content_handler->job_agency_zip : '');
-
-								    $location = array_filter(array($addr, $city, $state, $zip));
-
-								    $location = ( ! empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location)) : '');
-
-								    if ( ! empty($post_content_handler->job_final_filing_date_chooser) && "on" == $post_content_handler->job_final_filing_date_chooser) {
-								        $job_final_filing_date_picker = gmdate('n/j/Y', strtotime($post_content_handler->job_final_filing_date_picker));
-								        $filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
-								    } else {
-								        $filing_date = sprintf('Final Filing Date: %1$s<br />',
-                                     ( ! empty($post_content_handler->job_final_filing_date) ? $post_content_handler->job_final_filing_date : 'Until Filled'));
-								    }
-
-								    $job_hours =   ( ! empty($post_content_handler->job_hours) ? sprintf('<div class="schedule">%1$s</div>', $post_content_handler->job_hours) : '');
-
-								    $job_salary_min    = ( ! empty($post_content_handler->job_salary_min) ? caweb_is_money($post_content_handler->job_salary_min, "$0.00") : "$0.00");
-								    $job_salary_max    = ( ! empty($post_content_handler->job_salary_max) ? caweb_is_money($post_content_handler->job_salary_max, "$0.00") : "$0.00");
-
-								    $job_salary_max = sprintf('  &mdash; %1$s', $job_salary_max);
-
-								    $job_salary = '';
-								    $job_salary    = ("on" == $post_content_handler->show_job_salary ?
-									sprintf('<div class="salary-range">Salary Range: %1$s%2$s</div>', $job_salary_min, $job_salary_max) : '');
-
-								    $job_position = '';
-								    if ( ! empty($post_content_handler->job_position_number) && ! empty($post_content_handler->job_rpa_number)) {
-								        $job_position    = sprintf('Position Number: %1$s, RPA #%2$s', $post_content_handler->job_position_number, $post_content_handler->job_rpa_number);
-								    } elseif ( ! empty($post_content_handler->job_position_number)) {
-								        $job_position    = sprintf('Position Number: %1$s', $post_content_handler->job_position_number);
-								    } elseif ( ! empty($post_content_handler->job_rpa_number)) {
-								        $job_position    = sprintf('RPA #%1$s', $post_content_handler->job_rpa_number);
-								    }
-
-								    $position_type= ( ! empty($job_position) ? sprintf('<div class="position-number">%1$s</div>', $job_position) : '');
-
-								    $output .= sprintf('<article class="job-item">
-															<div class="header">%1$s%2$s</div>
-															<div class="body">%3$s%4$s%5$s%6$s</div>
-															<div class="footer"><a href="%7$s" class="btn btn-default">View More Details</a></div></article>',
-																		$job_title, $filing_date, $position_type, $job_hours, $job_salary, $location, $url);
-								    $posts_number--;
-								}
-
-								break;
-						// Event List
-						case "events-list":
-							// if post contains a CAWeb Event Post Handler
-								if ("event" == $post_content_handler->post_type_layout) {
-								    $thumbnail = "on" == $view_featured_image ? sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100))) : '';
-
-								    $event_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca;" target="_blank">%2$s</a></h5>', $url, $title);
-
-								    $excerpt = caweb_get_excerpt($post_content_handler->content, 15);
-								    $excerpt = ( ! empty($excerpt) ?
-															sprintf('<div class="description">%1$s</div>', $excerpt) : '');
-
-								    $date = ( ! empty($post_content_handler->event_start_date) ? sprintf('<div class="start-date"><time>%1$s</time></div>', gmdate('D, n/j/Y g:i a', strtotime($post_content_handler->event_start_date))) : '');
-
-								    $info = sprintf('<div class="info">%1$s%2$s%3$s</div>', $event_title, $excerpt, $date);
-
-								    $output .= sprintf('<article class="event-item">%1$s%2$s</article>', $thumbnail, $info);
-
-								    $posts_number--;
-								}
-
-								break;
-						// Course List
-						case "course-list":
-							// if post contains a CAWeb Course Post Handler
-								if ("course" == $post_content_handler->post_type_layout) {
-								    $course_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
-
-								    $image= "on" == $view_featured_image && has_post_thumbnail($post_id) ? sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(70, 70))) : '';
-
-								    $excerpt = caweb_get_excerpt($post_content_handler->content, 20);
-								    $excerpt = ( ! empty($excerpt) ?
-															sprintf('<div class="description">%1$s</div>', $excerpt) : '');
-
-								    $tmp = array(( ! empty($post_content_handler->course_address) ? $post_content_handler->course_address : ''),
-								        ( ! empty($post_content_handler->course_city) ? $post_content_handler->course_city : ''),
-								        ( ! empty($post_content_handler->course_state) ? $post_content_handler->course_state : ''),
-								        ( ! empty($post_content_handler->course_zip) ? $post_content_handler->course_zip : ''));
-
-								    $location = array_filter($tmp);
-
-								    $location = ( ! empty($location) ?
-											sprintf('<div class="location">Location: <a href="https://www.google.com/maps/place/%1$s">%1$s</a></div>', implode(", ", $location)) : '');
-
-								    $course_date = sprintf('<div class="datetime">%1$s - %2$s</div>',
-																				( ! empty($post_content_handler->course_start_date) ? gmdate('M j, Y g:i a', strtotime($post_content_handler->course_start_date)) : ''),
-																				( ! empty($post_content_handler->course_end_date) ? gmdate('M j, Y g:i a', strtotime($post_content_handler->course_end_date)) : ''));
-
-								    $output .= sprintf('<article class="course-item">
-															%1$s<div class="header">%2$s%3$s</div>
-															<div class="body">%4$s%5$s</div>
-															<div class="footer"><a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
-																		$image, $course_title, $course_date, $excerpt, $location, $url);
-
-								    $posts_number--;
-								}
-
-								break;
-						// Exam List
-						case "exams-list":
-							// if post contains a CAWeb Course Post Handler
-								if ("exam" == $post_content_handler->post_type_layout) {
-								    $exam_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $url, $title);
-
-								    $pub = ( ! empty($post_content_handler->exam_published_date) ?
-                          sprintf('<div class="published">Published: <time>%1$s</time></div>', gmdate('M j, Y', strtotime($post_content_handler->exam_published_date))) : '');
-
-								    $filing_date = ( ! empty($post_content_handler->exam_final_filing_date_chooser) && "on" == $post_content_handler->exam_final_filing_date_chooser ?
-                            sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate('n/j/Y', strtotime($post_content_handler->exam_final_filing_date_picker))) :
-                                  sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>',
-                                          ( ! empty($post_content_handler->exam_final_filing_date) ? $post_content_handler->exam_final_filing_date : 'Until Filled')));
-
-								    $id = ( ! empty($post_content_handler->exam_id) ? sprintf('<div class="id">ID: %1$s</div>', $post_content_handler->exam_id) : '');
-								    $status = ( ! empty($post_content_handler->exam_status) ? sprintf('<div class="base">Status: %1$s</div>', $post_content_handler->exam_status) : '');
-
-								    $output .= sprintf('<article class="exam-item">
-															<div class="header">%1$s%2$s</div>
-															<div class="body">%3$s%4$s</div>
-															<div class="footer">%5$s<a href="%6$s" class="btn btn-default">View More Details</a></div></article>',
-																		$exam_title, $filing_date, $id, $status, $pub, $url);
-								    $posts_number--;
-								}
-
-								break;
-
-						// FAQs List
-						case "faqs-list":
-
-							if ("faqs" == $post_content_handler->post_type_layout) {
-							    if ("toggle" == $faq_style) {
-							        $faqs .= sprintf('<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $title, $post_content_handler->content);
-							    }
-
-							    if ("accordion" == $faq_style) {
-							        $open_faq = empty($faq_accordion_count) || 0 === $faq_accordion_count;
-
-							        $faqs .= sprintf('<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s">
-																	<div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
-																					$posts_number, $title, ( ! empty($faq_accordion_count) ? $faq_accordion_count : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
-
-							        $faqs .= sprintf('<div class="et_pb_toggle_content clearfix panel-body">
-											%1$s</div></div>', $post_content_handler->content);
-							        $faq_accordion_count++;
-							        //$faq_count++;
-							    }
-
-							    $posts_number--;
-							}
-
-							break;
-
-						// General List
-						case "general-list":
-								// if post contains a CAWeb News Post Handler
-								$list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs');
-								if (in_array($post_content_handler->post_type_layout, $list_types)) {
-								    $image= "on" == $view_featured_image ? sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail($post_id, array(150, 100))) : '';
-
-								    $general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
-																		<a href="%2$s" class="title" style="color: #428bca; background: url();">%3$s</a></h5>',
-																			("on" == $view_featured_image ? '' : ''), $url, $title);
-
-								    $excerpt = caweb_get_excerpt($post_content_handler->content, 45);
-								    $excerpt = sprintf('<div class="description" %2$s>%1$s</div>', $excerpt,
-																			("on" == $view_featured_image ? '' : ''));
-
-								    $output .= sprintf('<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt);
-
-								    $posts_number--;
-								}
-
-								break;
-
-					} // end of list type switch statement
             } // end of if is_object check
+
+            $posts_number--;
         }
 
-        global $faq_list_count;
-
-        $class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
-
-        /*
-        $class = esc_attr( $class );
-        $class .= ( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' );
-
-        if ( "faqs-list" == $style){
-
-        	if("toggle" == $faq_style)
-        		$output .= sprintf('<ul class="list-overstated accordion-list" style="list-style-type:none;">%1$s</ul>', $faqs);
-
-        	if("accordion" == $faq_style){
-        		$output .=  $faqs;
-        		$faq_list_count++;
-        	}
+        if (! empty($faqs)) {
+            if ("toggle" == $faq_style) {
+                $output = sprintf('<ul class="accordion-list list-overstated" role="tablist" >%1$s</ul>', $faqs );
+            } else {
+                $output = $faqs;
+            }
         }
-         */
+
         $output = sprintf('<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty($list_title) ? $list_title : ''), $output);
 
         $faq_accordion_count = 0;
 
         return $output;
+    }
+
+    function createListView($listStyle, $postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = "off", $faqStyle = "", $faqCount = 0){
+        $layout = $pHandler->post_type_layout;
+
+        // List Style
+        switch ($listStyle) {
+            // News List
+            case "news-list":
+                    // if post contains a CAWeb News Post Handler
+                    if ("news" == $layout) {
+                        return $this->createNews($pHandler, $pID, $pURL, $pTitle, $featured_image);
+                    }
+
+                    break;
+
+            // Profile List
+            case "profile-list":
+            // if post contains a CAWeb Profile Post Handler
+                if ("profile" == $layout) {
+                    return	$this->createProfile($pHandler, $pID, $pURL, $featured_image);
+                }
+
+                break;
+            // Job List
+            case "jobs-list":
+                    // if post contains a CAWeb Job Post Handler
+                    if ("jobs" == $layout) {
+                        return $this->createJob($pHandler, $pURL, $pTitle);
+                    }
+
+                    break;
+            // Event List
+            case "events-list":
+                // if post contains a CAWeb Event Post Handler
+                    if ("event" == $layout) {
+                        return $this->createEvent($pHandler, $pID, $pURL, $pTitle, $featured_image);
+                    }
+
+                    break;
+            // Course List
+            case "course-list":
+                // if post contains a CAWeb Course Post Handler
+                    if ("course" == $layout) {
+                        return $this->createCourse($pHandler, $pID, $pURL, $pTitle, $featured_image);
+                    }
+
+                    break;
+            // Exam List
+            case "exams-list":
+                // if post contains a CAWeb Course Post Handler
+                    if ("exam" == $layout) {
+                        return $this->createExam($pHandler, $pURL, $pTitle);
+                    }
+
+                    break;
+
+            // FAQs List
+            case "faqs-list":
+                // if post contains a CAWeb FAQ Post Handler
+                if ("faqs" == $layout) {
+                    return $this->createFAQ($pHandler, $faqStyle, $postCount, $pTitle, $faqCount);
+                }
+
+                break;
+
+            // General List
+            case "general-list":
+                    // if post contains a CAWeb News Post Handler
+                    $list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs');
+                    if (in_array($layout, $list_types)) {
+                        
+                        return $this->createGeneral($pHandler, $pID, $pURL, $pTitle, $featured_image);
+                    }
+
+                    break;
+
+        } // end of list type switch statement
+    }
+
+    function createCourse($cHandler, $pID, $pURL, $pTitle, $featured_image){
+        $course_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle);
+        $hasThumbnail = has_post_thumbnail($pID);
+
+        $image= "on" == $featured_image && $hasThumbnail ? 
+            sprintf('<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail($pID, array(70, 70))) : '';
+
+        $excerpt = caweb_get_excerpt($cHandler->content, 20);
+        $excerpt = ( ! empty($excerpt) ?
+                                sprintf('<div class="description">%1$s</div>', $excerpt) : '');
+
+        $tmp = array(( ! empty($cHandler->course_address) ? $cHandler->course_address : ''),
+            ( ! empty($cHandler->course_city) ? $cHandler->course_city : ''),
+            ( ! empty($cHandler->course_state) ? $cHandler->course_state : ''),
+            ( ! empty($cHandler->course_zip) ? $cHandler->course_zip : ''));
+
+        $location = array_filter($tmp);
+
+        $location = ( ! empty($location) ?
+                sprintf('<div class="location">Location: <a href="https://www.google.com/maps/place/%1$s">%1$s</a></div>', implode(", ", $location)) : '');
+
+        $course_date = sprintf('<div class="datetime">%1$s - %2$s</div>',
+        ( ! empty($cHandler->course_start_date) ? gmdate('M j, Y g:i a', strtotime($cHandler->course_start_date)) : ''),
+        ( ! empty($cHandler->course_end_date) ? gmdate('M j, Y g:i a', strtotime($cHandler->course_end_date)) : ''));
+
+        return sprintf('<article class="course-item">%1$s<div class="header">%2$s%3$s</div><div class="body">%4$s%5$s</div></article>',
+                    $image, $course_title, $course_date, $excerpt, $location );
+
+    }
+
+    function createEvent($cHandler, $pID, $pURL, $pTitle, $featured_image){
+        $hasThumbnail = has_post_thumbnail($pID);
+
+        $thumbnail = "on" == $featured_image ? 
+            sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($pID, array(150, 100))) : '';
+
+        $event_title = sprintf('<h5><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $pURL, $pTitle);
+
+        $excerpt = caweb_get_excerpt($cHandler->content, 15);
+        $excerpt = ( ! empty($excerpt) ?
+                                sprintf('<div class="description">%1$s</div>', $excerpt) : '');
+
+        $date = ( ! empty($cHandler->event_start_date) ? sprintf('<div class="start-date"><time>%1$s</time></div>', gmdate('D, n/j/Y g:i a', strtotime($cHandler->event_start_date))) : '');
+
+        $info = sprintf('<div class="info">%1$s%2$s%3$s</div>', $event_title, $excerpt, $date);
+
+        return sprintf('<article class="event-item">%1$s%2$s</article>', $thumbnail, $info);
+
+    }
+    
+    function createExam($cHandler,$pURL, $pTitle){
+        $exam_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle);
+
+		$pub = ( ! empty($cHandler->exam_published_date) ?
+                sprintf('<div class="published">Published: <time>%1$s</time></div>', gmdate('M j, Y', strtotime($cHandler->exam_published_date))) : '');
+
+		$filing_date = ( ! empty($cHandler->exam_final_filing_date_chooser) && "on" == $cHandler->exam_final_filing_date_chooser ?
+                        sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate('n/j/Y', strtotime($cHandler->exam_final_filing_date_picker))) :
+                        sprintf('<div class="filing-date">Final Filing Date: <time>%1$s</time></div>',
+                            ( ! empty($cHandler->exam_final_filing_date) ? $cHandler->exam_final_filing_date : 'Until Filled')));
+
+		$id = ( ! empty($cHandler->exam_id) ? sprintf('<div class="id">ID: %1$s</div>', $cHandler->exam_id) : '');
+		$status = ( ! empty($cHandler->exam_status) ? sprintf('<div class="base">Status: %1$s</div>', $cHandler->exam_status) : '');
+
+        return sprintf('<article class="exam-item"><div class="header">%1$s%2$s</div><div class="body">%3$s%4$s</div><div class="footer">%5$s</div></article>',
+        $exam_title, $filing_date, $id, $status, $pub);
+
+    }
+
+    function createFAQ($cHandler, $style, $postCount, $pTitle, $faqCount){
+        if ("toggle" == $style) {
+            return sprintf('<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $pTitle, $cHandler->content);
+        }
+
+        if ("accordion" == $style) {
+            $open_faq = empty($faqCount) || 0 === $faqCount;
+
+            $faqs = sprintf('<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s"><div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
+                                $postCount, $pTitle, ( ! empty($faqCount) ? $faqCount : 0), ($open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close'));
+
+            $faqs .= sprintf('<div class="et_pb_toggle_content clearfix panel-body">%1$s</div></div>', $cHandler->content);
+
+            return $faqs;
+        }
+    }
+
+    function createGeneral($cHandler, $pID, $pURL, $pTitle, $featured_image){
+        $image= "on" == $featured_image ? sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail($pID, array(150, 100))) : '';
+
+        $general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
+                                            <a href="%2$s" class="title" style="color: #428bca; background: none;">%3$s</a></h5>',
+                                                ("on" == $featured_image ? '' : ''), $pURL, $pTitle);
+
+        $excerpt = caweb_get_excerpt($cHandler->content, 45);
+        $excerpt = sprintf('<div class="description" %2$s>%1$s</div>', $excerpt,
+                                                ("on" == $featured_image ? '' : ''));
+
+        return sprintf('<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt);
+
+    }
+
+    function createJob($cHandler, $pURL, $pTitle){
+        $job_title = sprintf('<div class="title"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle);
+
+        $addr = ( ! empty($cHandler->job_agency_address) ? $cHandler->job_agency_address : '');
+        $city = ( ! empty($cHandler->job_agency_city) ? $cHandler->job_agency_city : '');
+        $state = ( ! empty($cHandler->job_agency_state) ? $cHandler->job_agency_state : '');
+        $zip = ( ! empty($cHandler->job_agency_zip) ? $cHandler->job_agency_zip : '');
+
+        $location = array_filter(array($addr, $city, $state, $zip));
+
+        $location = ( ! empty($location) ? sprintf('<div class="location">Location: %1$s</div>', implode(", ", $location)) : '');
+
+        $filing_date = '';
+        if ( ! empty($cHandler->job_final_filing_date_chooser) && "on" == $cHandler->job_final_filing_date_chooser  ) {
+            if( isset($cHandler->job_final_filing_date_picker) && ! empty($cHandler->job_final_filing_date_picker) ){
+                $job_final_filing_date_picker = gmdate('n/j/Y', strtotime($cHandler->job_final_filing_date_picker));
+                $filing_date = sprintf('Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker);
+            }
+        } else {
+            $filing_date = sprintf('Final Filing Date: %1$s<br />',
+         ( ! empty($cHandler->job_final_filing_date) ? $cHandler->job_final_filing_date : 'Until Filled'));
+        }
+
+        $job_hours =   ( ! empty($cHandler->job_hours) ? sprintf('<div class="schedule">%1$s</div>', $cHandler->job_hours) : '');
+
+        $job_salary_min    = ( ! empty($cHandler->job_salary_min) ? caweb_is_money($cHandler->job_salary_min, "$0.00") : "$0.00");
+        $job_salary_max    = ( ! empty($cHandler->job_salary_max) ? caweb_is_money($cHandler->job_salary_max, "$0.00") : "$0.00");
+
+        $job_salary_max = sprintf('  &mdash; %1$s', $job_salary_max);
+
+        $job_salary = '';
+        $job_salary    = ("on" == $cHandler->show_job_salary ?
+        sprintf('<div class="salary-range">Salary Range: %1$s%2$s</div>', $job_salary_min, $job_salary_max) : '');
+
+        $job_position = '';
+        if ( ! empty($cHandler->job_position_number) && ! empty($cHandler->job_rpa_number)) {
+            $job_position    = sprintf('Position Number: %1$s, RPA #%2$s', $cHandler->job_position_number, $cHandler->job_rpa_number);
+        } elseif ( ! empty($cHandler->job_position_number)) {
+            $job_position    = sprintf('Position Number: %1$s', $cHandler->job_position_number);
+        } elseif ( ! empty($cHandler->job_rpa_number)) {
+            $job_position    = sprintf('RPA #%1$s', $cHandler->job_rpa_number);
+        }
+
+        $position_type= ( ! empty($job_position) ? sprintf('<div class="position-number">%1$s</div>', $job_position) : '');
+
+        return sprintf('<article class="job-item"><div class="header">%1$s%2$s</div><div class="body">%3$s%4$s%5$s%6$s</div></article>',
+                    $job_title, $filing_date, $position_type, $job_hours, $job_salary, $location );
+    }
+
+    function createNews($cHandler, $pID, $pURL, $pTitle, $featured_image){
+        $hasThumbnail = has_post_thumbnail($pID);
+
+        $news_title = sprintf('<div class="headline"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle);
+        if ( ! $hasThumbnail ||  "off" == $featured_image) {
+            $image = '';
+        } else {
+            $this->add_classname('indent');
+            $thumbnail = caweb_get_the_post_thumbnail($pID, array(150, 100));
+            $image= "on" == $featured_image ? sprintf('<div class="thumbnail">%1$s</div>', $thumbnail) : '';
+            
+        }
+
+        $excerpt = caweb_get_excerpt($cHandler->content, 30, $pID);
+        $excerpt = ( ! empty($excerpt) ?
+                        sprintf('<div class="description"><p>%1$s</p></div>', $excerpt) : '');
+
+        $author = ( ! empty($cHandler->news_author) ?
+                        sprintf('Author: %1$s', $cHandler->news_author) : '');
+
+        $date =( ! empty($cHandler->news_publish_date) ? gmdate('M j, Y', strtotime($cHandler->news_publish_date)) : '');
+
+        $date = ( ! empty($date) ? sprintf('Published: <time>%1$s</time>', $date) : '');
+
+        $element = ( ! empty($author) || ! empty($date) ?
+                    sprintf('<div class="published">%1$s</div>', implode('<br />', array_filter(array($author, $date)))) : '');
+
+        return sprintf('<article class="news-item">%1$s<div class="info">%2$s%3$s%4$s</div></article>', $image, $news_title, $excerpt, $element);
+
+    }
+
+    function createProfile($cHandler, $pID, $pURL, $featured_image){
+        $hasThumbnail = has_post_thumbnail($pID);
+
+        if ( ! $hasThumbnail || "off" == $featured_image) {
+            $this->add_classname('no-thumbnail');
+        }
+
+        $thumbnail = "on" == $featured_image && $hasThumbnail ? 
+            sprintf('<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail($pID, array(75, 75))) : '';
+
+        $t = sprintf('%1$s%2$s%3$s',
+     ( ! empty($cHandler->profile_name_prefix) ? sprintf('%1$s ', $cHandler->profile_name_prefix) : ''),
+     ( ! empty($cHandler->profile_name) ? $cHandler->profile_name : ''),
+     ( ! empty($cHandler->profile_career_title) ? sprintf(', %1$s', $cHandler->profile_career_title) : ''));
+
+        $profile_title = sprintf('<div class="header"><div class="title"><a href="%1$s">%2$s</a></div></div>', $pURL, $t);
+
+        $position = ( ! empty($cHandler->profile_career_position) ?
+                        sprintf('%1$s', $cHandler->profile_career_position) : '');
+        $line1 = ( ! empty($cHandler->profile_career_line_1) ?
+                        sprintf('%1$s', $cHandler->profile_career_line_1) : '');
+        $line2 = ( ! empty($cHandler->profile_career_line_2) ?
+                        sprintf('%1$s', $cHandler->profile_career_line_2) : '');
+        $line3 = ( ! empty($cHandler->profile_career_line_3) ?
+                        sprintf('%1$s', $cHandler->profile_career_line_3) : '');
+
+        $fields = array_filter(array($position, $line1, $line2, $line3));
+
+        return sprintf('<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div></article>', 
+            empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode('<br />', $fields) : '<br />') );
+
+
     }
 }
 new ET_Builder_Module_CA_Post_List;
