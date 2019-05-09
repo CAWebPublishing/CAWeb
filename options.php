@@ -17,7 +17,7 @@ function caweb_admin_menu() {
     if (is_multisite() &&  ! current_user_can('manage_network_options')) {
         // Remove Themes and Background option under Appearance menu
         foreach( $submenu['themes.php'] as $m => $menu_data){
-            if( preg_match('/\bthemes.php\b|\bcustomize.php\b|\bcustom-background\b/', $menu_data[2]) ){
+            if( "Background" == $menu_data[0] || preg_match('/\bthemes.php\b|\bcustom-background\b/', $menu_data[2]) ){
                 unset($submenu['themes.php'][$m]);
             }
         }
