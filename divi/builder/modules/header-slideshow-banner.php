@@ -117,11 +117,14 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
         //	$this->add_classname('header-single-banner');
         $this->add_classname('header-slideshow-banner');
 				
-		global $et_pb_slider_item_num;
+		global $et_pb_fullwidth_header_slider_item_num;
 				
-		$solo = 1 >= $et_pb_slider_item_num ? ' solo' : '';
-				
-        $class = sprintf(' class="%1$s%2$s%3$s" ', $this->module_classname($render_slug), $solo, empty($scroll_bar_text) ? ' no-explore' : '');
+		$solo = 1 >= $et_pb_fullwidth_header_slider_item_num ? ' solo' : '';
+                
+        $this->add_classname($solo);
+        $this->add_classname( empty($scroll_bar_text) ? ' no-explore' : '' );
+        
+        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $scrollbar = ! empty($scroll_bar_text) ? 
             sprintf('<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)) : '';
@@ -330,9 +333,9 @@ class ET_Builder_Module_Fullwidth_Banner_Item_Slide extends ET_Builder_CAWeb_Mod
         $background_image = $this->props['background_image'];
         $banner_align = $this->props['banner_align'];
 
-        global $et_pb_slider_item_num;
+        global $et_pb_fullwidth_header_slider_item_num;
 
-        $et_pb_slider_item_num++;
+        $et_pb_fullwidth_header_slider_item_num++;
 
         $this->add_classname('slide');
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
