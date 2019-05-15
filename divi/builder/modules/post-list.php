@@ -289,7 +289,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
         $posts_number = ( ! empty($posts_number) ? $posts_number : -1);
 
         $all_posts = caweb_return_posts($cat_array, $tag_array, -1, $orderby, $order);
-
+        
         setlocale(LC_MONETARY, 'en_US.UTF-8');
 
         if ( ! empty($list_title)) {
@@ -314,10 +314,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             }
 
             // Get the CAWeb Post Handler
-            $post_id = $all_posts[$a]->ID;
-            $title = $all_posts[$a]->post_title;
-            $url = get_permalink($all_posts[$a]->ID);
-            $content = $all_posts[$a]->post_content;
+            $post_id = $p->ID;
+            $title = $p->post_title;
+            $url = get_permalink($p->ID);
+            $content = $p->post_content;
 
             $post_content_handler = caweb_get_shortcode_from_content($content, 'et_pb_ca_post_handler');
 
@@ -333,9 +333,9 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
                     $output .= $this->createListView($style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count);
                 }
 
-            } // end of if is_object check
+                $posts_number--;
 
-            $posts_number--;
+            } // end of if is_object check
         }
 
         if (! empty($faqs)) {
