@@ -2,7 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()->in(__DIR__);
 
-return PhpCsFixer\Config::create()->setRules([
+return PhpCsFixer\Config::create()->setRules(array(
         'align_multiline_comment' => ['comment_type' => 'all_multiline'],
         'blank_line_after_namespace' => true,
         'blank_line_after_opening_tag' => true,
@@ -11,7 +11,7 @@ return PhpCsFixer\Config::create()->setRules([
         'cast_spaces' => ['space' => 'single'],
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
-        'concat_space' => ['spacing' => 'none'],
+        'concat_space' => ['spacing' => 'one'],
         'declare_equal_normalize' => ['space' => 'none'],
         'elseif' => true,
         'full_opening_tag' => true,
@@ -54,4 +54,7 @@ return PhpCsFixer\Config::create()->setRules([
         'unary_operator_spaces' => true,
         'whitespace_after_comma_in_array' => true,
         'array_indentation' => true,
-    ])->setFinder($finder)->setUsingCache(false);
+    ))
+    ->setIndent("\t")
+    ->setFinder($finder)
+    ->setUsingCache(false);

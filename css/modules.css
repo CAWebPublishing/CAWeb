@@ -178,6 +178,11 @@ ol{
 	width:100%;
 }
 
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"],
+.et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
+  white-space: pre-line;
+}
+
 /* Post List (Events) */
 .et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 {
   padding-bottom: 0px;
