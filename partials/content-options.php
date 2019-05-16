@@ -42,6 +42,7 @@ $google_meta_id = get_option('ca_google_meta_id', '');
 $google_translate_mode = get_option('ca_google_trans_enabled', 'none');
 $google_translate_enabled = 'custom' !== $google_translate_mode ? ' class="hidden"' : '';
 $google_translate_page = get_option('ca_google_trans_page', '');
+$google_translate_new_window = get_option('ca_google_trans_page_new_window', true) ? ' checked="checked"' : '';
 $google_translate_icon = get_option('ca_google_trans_icon', 'globe');
 $ext_css = get_option('caweb_external_css', array());
 $custom_css = get_option('ca_custom_css', '');
@@ -312,6 +313,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																									<tr <?php print $google_translate_enabled ?>>
 																										<th scope="row">Translate Page</th>
 																										<td><input type="text" name="ca_google_trans_page" size="60" value="<?php print $google_translate_page ?>"></td>
+																									</tr>
+																									<tr <?php print $google_translate_enabled ?>>
+																										<th scope="row">Open in New Tab</th>
+																										<td><input type="checkbox" name="ca_google_trans_page_new_window" <?php print $google_translate_new_window ?>></td>
 																									</tr>
 																									<tr <?php print $google_translate_enabled ?>>
 																										<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>
