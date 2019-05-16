@@ -5,8 +5,8 @@
         </button>
 
         <div class="form-group form-inline">
-            <label for="locationZipCode">Saving your location allows us to provide you with more relevant information.</label>
-            <input type="input" class="form-control" id="locationZipCode" placeholder="Zip Code">
+            <label for="locationZipCode">Saving your location allows us to provide you with more relevant information. Please enter your zip code</label>
+            <input type="number" class="form-control" id="locationZipCode" placeholder="Zip Code">
             <button type="button" class="btn btn-primary">Set Location</button>
         </div>
     </div>

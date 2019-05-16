@@ -52,14 +52,14 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 		        }
 		    }
 
-		    print '<!-- Location Bar -->';
-		    // Location Bar
-		    require_once(CAWebAbsPath."/ssi/location-bar.php");
-
 		    print '<!-- Utility Header -->';
 		    // Include Utility Header
 			get_template_part('partials/content', 'utility-header');
-						
+
+			print '<!-- Location Bar -->';
+		    // Location Bar
+			require_once(CAWebAbsPath."/ssi/location-bar.php");
+			
 		    print '<!-- Settings Bar -->';
 		    // Settings Bar
 		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
