@@ -12,13 +12,15 @@ function caweb_admin_menu() {
     // Remove Menus and re-add it under the newly created CAWeb Options as Navigation
     remove_submenu_page('themes.php', 'nav-menus.php');
     add_submenu_page('caweb_options', 'Navigation', 'Navigation', 'manage_options', 'nav-menus.php', '');
-
+        
     // If user is not a Network Admin
     if (is_multisite() &&  ! current_user_can('manage_network_options')) {
         // Remove Themes and Background option under Appearance menu
-		unset($submenu['themes.php'][5], $submenu['themes.php'][20], $submenu['themes.php'][21]); // Themes link
-		 // Background link
-		 // Background link
+        foreach( $submenu['themes.php'] as $m => $menu_data){
+            if( "Background" == $menu_data[0] || preg_match('/\bthemes.php\b|\bcustom-background\b/', $menu_data[2]) ){
+                unset($submenu['themes.php'][$m]);
+            }
+        }
 
 		// Remove WP-Forms Addons Menus
         remove_submenu_page('wpforms-overview', 'wpforms-addons');
@@ -138,7 +140,7 @@ function caweb_save_options($values = array(), $files = array()) {
     }
 
     $values['caweb_alerts'] = $alerts;
-    update_site_option('dev', $values);
+
     // Save CAWeb Options
     foreach ($values as $opt => $val) {
         if ("on" == $val) {
