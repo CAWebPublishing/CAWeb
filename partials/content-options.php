@@ -186,7 +186,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 															<span class="tooltiptext">This fixes an accessibility issue.</span></div>
 														</th>
 														<td><input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print $ua_compatibiliy ?>>
-															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'Accessibility Issue' : '' ?></span>
+															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'Checking this box may create accessibility errors on your site' : '' ?></span>
 														</td>
 													</tr>
 													</table>
