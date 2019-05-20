@@ -24,7 +24,7 @@
     <meta name="Keywords" content="California, government" />
 
     <!-- Use highest compatibility mode -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=<?php print get_option('ca_x_ua_compatibility', false) ? '11' : 'edge'; ?>">
 
     <!-- http://t.co/dKP3o1e -->
     <meta name="HandheldFriendly" content="True">

@@ -26,6 +26,7 @@ $sticky_nav_enabled = get_option('ca_sticky_navigation', false) ? ' checked="che
 $home_nav_link_enabled = get_option('ca_home_nav_link', true) ? ' checked="checked"' : '';
 $display_post_title = get_option('ca_default_post_title_display', false) ? ' checked="checked"' : '';
 $display_post_date = get_option('ca_default_post_date_display', false) ? ' checked="checked"' : '';
+$ua_compatibiliy = get_option('ca_x_ua_compatibility', false) ? ' checked="checked"' : '';
 $contact_us_link = get_option('ca_contact_us_link', '');
 $geo_locator_enabled = get_option('ca_geo_locator_enabled', false) ? ' checked="checked"' : '';
 $utility_header_home_icon = get_option('ca_utility_home_icon', true) ? 'checked="checked"' : '';
@@ -175,10 +176,19 @@ $icons = caweb_get_icon_list(-1, '', true);
 													</td></tr>
 													<tr >
 														<th scope="row"><div class="tooltip">Display Date for Non-Divi Posts
-															<span class="tooltiptext"> If checked all non-Divi Posts will display the Posts Published Date.</span></div>
+															<span class="tooltiptext">If checked all non-Divi Posts will display the Posts Published Date.</span></div>
 														</th>
 														<td><input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" <?php print $display_post_date ?>>
-														</td></tr>
+														</td>
+													</tr>
+													<tr >
+														<th scope="row"><div class="tooltip">X-UA-Compatibility
+															<span class="tooltiptext">This fixes an accessibility issue.</span></div>
+														</th>
+														<td><input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print $ua_compatibiliy ?>>
+															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'Accessibility Issue' : '' ?></span>
+														</td>
+													</tr>
 													</table>
 													<div class="extra <?php print $modern ?>">
 														<h1 class="option">Utility Header</h1>
