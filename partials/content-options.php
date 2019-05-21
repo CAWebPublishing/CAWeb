@@ -186,7 +186,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 															<span class="tooltiptext">Checking this box creates accessibility errors on your site.</span></div>
 														</th>
 														<td><input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print $ua_compatibiliy ?>>
-															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled.' : '' ?></span>
+															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors.' : '' ?></span>
 														</td>
 													</tr>
 													</table>

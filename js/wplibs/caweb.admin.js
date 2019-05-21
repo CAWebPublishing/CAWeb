@@ -101,7 +101,7 @@ $('#ca_x_ua_compatibility').on('input',function(e){
 	var respSpan = $(this).next();
 
 	if(isChecked){
-		respSpan.html('IE 11 browser compatibility enabled.')
+		respSpan.html('IE 11 browser compatibility enabled. Warning: creates accessibility errors.')
 	}else{
 		respSpan.html('');
 	}	
