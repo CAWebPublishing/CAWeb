@@ -10,6 +10,20 @@ jQuery(document).ready(function() {
 
   navigator.geolocation.getCurrentPosition(successFunc);
 
+  
+  $('.geo-lookup').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+
+    if(keycode == '13'){
+
+      if( ! $(this).hasClass('collapsed') ){
+        $(this).focus();
+      }else{
+        $('#locationSettings #locationZipCode').focus();
+      }
+    }
+  });
+
   $('.geo-lookup').on('click', function(e) {
 
     e.preventDefault();
