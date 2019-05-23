@@ -16,7 +16,6 @@ if("" !== args.caweb_multi_ga){
 }
 (function() {
   var ga = document.createElement('script');
-  ga.type = 'text/javascript';
   ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
     'http://www') + '.google-analytics.com/ga.js';
@@ -106,7 +105,6 @@ if("" !== args.caweb_multi_ga){
       if("" !== args.ca_google_search_id){
         var cx = args.ca_google_search_id;
         var gcse = document.createElement('script');
-        gcse.type = 'text/javascript';
         gcse.async = true;
         gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
         var s = document.getElementsByTagName('script');
@@ -121,7 +119,6 @@ if( args.ca_google_trans_enabled ){
         layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
   }
   var gtrans = document.createElement('script');
-	gtrans.type = 'text/javascript';
   gtrans.async = true;
   gtrans.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   var s = document.getElementsByTagName('script');

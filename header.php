@@ -23,8 +23,14 @@
 
     <meta name="Keywords" content="California, government" />
 
+    <?php
+      global $is_IE, $is_edge;
+      $ca_x_ua_compatibility = get_option('ca_x_ua_compatibility', false) ? '11' : 'edge';
+      if( $is_IE || $is_edge):
+    ?>
     <!-- Use highest compatibility mode -->
-    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta http-equiv="X-UA-Compatible" content="IE=<?php print $ca_x_ua_compatibility ?>">
+    <?php endif; ?>
 
     <!-- http://t.co/dKP3o1e -->
     <meta name="HandheldFriendly" content="True">
@@ -39,7 +45,7 @@
 		<meta name="google-site-verification" content="<?php print get_option('ca_google_meta_id'); ?>" />
 
     <!-- Google Fonts -->
-  	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+  	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
     <!-- selectivizr.com, emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8 -->
 
 

@@ -154,4 +154,18 @@ function caweb_script_loader_tag($tag, $handle, $src) {
     return $tag;
 }
 
+/**
+ * Change WPForms capability requirement.
+ *
+ * @param string $cap
+ * @return string
+ */
+function wpforms_custom_capability( $cap ) {
+
+	// unfiltered_html by default means Editors and up.
+	// See more about WordPress roles and capabilities
+	// https://codex.wordpress.org/Roles_and_Capabilities
+	return is_multisite() ? 'edit_posts' : 'unfiltered_html';
+}
+add_filter( 'wpforms_manage_cap', 'wpforms_custom_capability' );
 ?>

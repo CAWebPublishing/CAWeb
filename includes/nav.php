@@ -64,14 +64,9 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             // Footer Menu Construction
             } elseif ('footer-menu' == $theme_location && ! empty($args->menu)) {
                 $nav_menu = $this->createFooterMenu($args);
-                $socialLinks = $this->createFooterSocialMenu($args);
 
-                $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s%2$s</div></div>
-                                                    <!-- Copyright Statement -->
-                                        <div class="copyright">
-                                        <div class="container" %3$s> Copyright &copy;
-                                        <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
-                                     $nav_menu, $socialLinks, (4 >= $args->version ? 'style="text-align:center;" ' : ''));
+                $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s> Copyright &copy; %3$s State of California </div></div></footer>',
+                                     $nav_menu, (4 >= $args->version ? 'style="text-align:center;" ' : ''), date("Y") );
             }
 
             return $nav_menu;
@@ -310,9 +305,18 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                                      $item->title);
                 }
             }
-            $navLinks = sprintf('<div class="%1$s"><ul class="footer-links" %2$s><li><a href="#skip-to-content">Back to Top</a></li>%3$s</ul></div>',
-                                            (4 >= $args->version ? 'full' : 'three-quarters'), (4 >= $args->version ? ' style="text-align:center;" ' : ''), $navLinks
-                                            );
+
+            $socialLinks = $this->createFooterSocialMenu($args);
+
+            if( 4 >= $args->version ){
+                $class = 'full';
+                $style = ' style="text-align:center;" ';
+            }else{
+                $class = ! empty( $socialLinks ) ? 'three-quarters' : 'full-width';
+                $style = '';
+            }
+
+            $navLinks = sprintf('<div class="%1$s"><ul class="footer-links" %2$s><li><a href="#skip-to-content">Back to Top</a></li>%3$s</ul></div>%4$s', $class, $style, $navLinks, $socialLinks );
 
             return $navLinks;
         }
@@ -328,15 +332,17 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
                 if (get_option($opt.'_footer') && ($share_email || "" !== get_option($opt))) {
                     $share = substr($opt, 10);
                     $share =  str_replace("_", "-", $share);
+                    $social_url = $share_email ? $mailto : esc_url( get_option($opt) );
+                    $social_target = sprintf( ' target="%1$s"', get_option($opt.'_new_window', true) ? '_blank' : '_self');
 
-                    $socialLinks .= sprintf('<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>',
-                                        ($share_email ? $mailto : esc_url(get_option($opt))), (get_option($opt.'_new_window') ? 'target="_blank"' : ''), caweb_get_icon_span($share), $share);
+                    $socialLinks .= sprintf('<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>', $social_url, $social_target, caweb_get_icon_span($share), $share);
                 }
             }
-            $socialLinks = sprintf('<div class="%1$s"><ul class="socialsharer-container" %2$s>%3$s</ul></div>',
-                                            (4 >= $args->version ? 'full' : 'quarter'), (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : ''), $socialLinks);
 
-            return $socialLinks;
+            $socialLinks = ! empty($socialLinks) ? sprintf('<ul class="socialsharer-container" %1$s>%2$s</ul>', 
+                (4 >= $args->version ? ' style="text-align:center;  float:none;" ' : ''), $socialLinks) : '';
+
+            return ! empty($socialLinks) ? sprintf('<div class="%1$s">%2$s</div>', (4 >= $args->version ? 'full' : 'quarter'), $socialLinks) : $socialLinks;
         }
 
         function caweb_nav_menu_item_custom_fields($item_id, $item, $depth, $args) {
