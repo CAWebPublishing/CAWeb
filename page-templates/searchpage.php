@@ -29,7 +29,7 @@ $keyword = $_GET['q'];
 <div id="page-container">
 <div id="et-main-area">
 
-
+<div id="main-content" class="main-content">
 	<main class="main-primary">
         <!--Search result section-->
         <div class="section section-default section-search">
@@ -52,7 +52,7 @@ $keyword = $_GET['q'];
             </div>
         </div>
     </main>
-
+    </div>
 
 </div>
 </div>
