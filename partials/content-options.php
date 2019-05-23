@@ -26,6 +26,7 @@ $sticky_nav_enabled = get_option('ca_sticky_navigation', false) ? ' checked="che
 $home_nav_link_enabled = get_option('ca_home_nav_link', true) ? ' checked="checked"' : '';
 $display_post_title = get_option('ca_default_post_title_display', false) ? ' checked="checked"' : '';
 $display_post_date = get_option('ca_default_post_date_display', false) ? ' checked="checked"' : '';
+$ua_compatibiliy = get_option('ca_x_ua_compatibility', false) ? ' checked="checked"' : '';
 $contact_us_link = get_option('ca_contact_us_link', '');
 $geo_locator_enabled = get_option('ca_geo_locator_enabled', false) ? ' checked="checked"' : '';
 $utility_header_home_icon = get_option('ca_utility_home_icon', true) ? 'checked="checked"' : '';
@@ -42,6 +43,7 @@ $google_meta_id = get_option('ca_google_meta_id', '');
 $google_translate_mode = get_option('ca_google_trans_enabled', 'none');
 $google_translate_enabled = 'custom' !== $google_translate_mode ? ' class="hidden"' : '';
 $google_translate_page = get_option('ca_google_trans_page', '');
+$google_translate_new_window = get_option('ca_google_trans_page_new_window', true) ? ' checked="checked"' : '';
 $google_translate_icon = get_option('ca_google_trans_icon', 'globe');
 $ext_css = get_option('caweb_external_css', array());
 $custom_css = get_option('ca_custom_css', '');
@@ -174,10 +176,19 @@ $icons = caweb_get_icon_list(-1, '', true);
 													</td></tr>
 													<tr >
 														<th scope="row"><div class="tooltip">Display Date for Non-Divi Posts
-															<span class="tooltiptext"> If checked all non-Divi Posts will display the Posts Published Date.</span></div>
+															<span class="tooltiptext">If checked all non-Divi Posts will display the Posts Published Date.</span></div>
 														</th>
 														<td><input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" <?php print $display_post_date ?>>
-														</td></tr>
+														</td>
+													</tr>
+													<tr >
+														<th scope="row"><div class="tooltip">Legacy Browser Support
+															<span class="tooltiptext">Checking this box creates accessibility errors for your site when using the IE Browser.</span></div>
+														</th>
+														<td><input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print $ua_compatibiliy ?>>
+															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : '' ?></span>
+														</td>
+													</tr>
 													</table>
 													<div class="extra <?php print $modern ?>">
 														<h1 class="option">Utility Header</h1>
@@ -312,6 +323,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 																									<tr <?php print $google_translate_enabled ?>>
 																										<th scope="row">Translate Page</th>
 																										<td><input type="text" name="ca_google_trans_page" size="60" value="<?php print $google_translate_page ?>"></td>
+																									</tr>
+																									<tr <?php print $google_translate_enabled ?>>
+																										<th scope="row">Open in New Tab</th>
+																										<td><input type="checkbox" name="ca_google_trans_page_new_window" <?php print $google_translate_new_window ?>></td>
 																									</tr>
 																									<tr <?php print $google_translate_enabled ?>>
 																										<th scope="row"><span class="dashicons dashicons-image-rotate resetIcon resetGoogleIcon"></span> Icon</th>

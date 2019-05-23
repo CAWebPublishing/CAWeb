@@ -96,6 +96,19 @@ $('#ca_google_search_id').on('input',function(e){
   }
 });
 
+$('#ca_x_ua_compatibility').on('input',function(e){
+	var isChecked = this.checked;
+	var respSpan = $(this).next();
+
+	if(isChecked){
+		respSpan.html('IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.')
+	}else{
+		respSpan.html('');
+	}	
+});
+
+
+
 $( "#uploadedCSS, #uploadedJS" ).sortable();
 $( "#uploadedCSS, #uploadedJS" ).disableSelection();
 
