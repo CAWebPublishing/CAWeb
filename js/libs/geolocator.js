@@ -15,14 +15,23 @@ jQuery(document).ready(function() {
     var keycode = (event.keyCode ? event.keyCode : event.which);
 
     if(keycode == '13'){
-
       if( ! $(this).hasClass('collapsed') ){
-        $(this).focus();
+        //$(this).focus();
       }else{
-        $('#locationSettings #locationZipCode').focus();
+        //$('#locationSettings #locationZipCode').focus();
       }
     }
   });
+
+  $('#locationSettings .close').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+
+    if(keycode == '13'){
+      //$('.geo-lookup').focus();
+    }
+  });
+
+
 
   $('.geo-lookup').on('click', function(e) {
 
@@ -48,7 +57,7 @@ jQuery(document).ready(function() {
 
     newLoc = pos.coords.latitude + "," + pos.coords.longitude;
 
-    //displayCities.html('Geo Locating...');
+    displayCities.html('Geo Locating...');
 
     var ajax = $.get(google_map_url + "latlng=" + newLoc +
 
@@ -75,15 +84,22 @@ jQuery(document).ready(function() {
     }
 
     // Show a zipcode input
-
-    $("#locationSettings").collapse("show")
-
+    $('#locationSettings').collapse('show');
+    
     var $input = $("#locationSettings").find('input');
 
     var $btn = $("#locationSettings").find('button');
 
+    var $close_btn = $("#locationSettings").find('button.close');
+
     // and we prepare our input for user events
 
+    if( ! $('#locationSettings').hasClass('show') ){
+      $input.focus();
+    }else{
+      $('.geo-lookup').focus();
+    }
+    
     $input.keypress(function(e) {
 
       if (e.which == 13) {
@@ -102,8 +118,12 @@ jQuery(document).ready(function() {
 
       lookByZIP.call($input, e);
 
-    })
+    });
 
+    $close_btn.on('click', function(e) {
+      $('.geo-lookup').focus();
+    });
+    
   }
 
   function lookByZIP(e) {
@@ -154,65 +174,7 @@ jQuery(document).ready(function() {
 
     }
 
-    $("#locationSettings").collapse("hide");
-
     displayCities.html(city + ", " + state);
-
-    /*$(".header-single-banner").each(function() {
-
-       var imageAjax = $.get(window.__getImageByLocation);
-
-       imageAjax.done(function(image) {
-
-         var newBg = 'url("' + image + '")';
-
-         var oldBg = $(".header-single-banner").css(
-
-           'background-image');
-
-         if (newBg !== oldBg) {
-
-           if ($(window).width() <= 767) {
-
-             $(" .ask-group").fadeOut('3000', function() {
-
-               $(this).css('background-image', 'url(' +
-
-                 image + ')').fadeIn('3000');
-
-             });
-
-             $(".header-single-banner").css('background-image',
-
-               'url(' + image + ')')
-
-           } else {
-
-             $(".header-single-banner").fadeOut('3000', function() {
-
-               var bgImg = $(this).css('background-image',
-
-                 'url(' + image + ')').fadeIn('3000',
-
-                 function() {
-
-                   $(this).css("display", '');
-
-                 })
-
-             });
-
-             $(" .ask-group").css('background-image', 'url(' +
-
-               image + ')')
-
-           }
-
-         }
-
-       });
-
-     });*/
 
   }
 
