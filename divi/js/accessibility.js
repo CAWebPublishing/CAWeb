@@ -61,6 +61,12 @@
    var fullwidth_header_modules = $('section').filter(function(){ return this.className.match(/\bet_pb_fullwidth_header_\d\b/); });
 
 
+   /*
+    Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
+    Retrieve all a[href="#main-content"]
+   */
+    var main_content_anchors = $('a[href="#main-content"]')
+
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
         blog_modules.each(function(index, element) {
@@ -234,5 +240,15 @@
          });      
     }   
     
+    // Run only if there is more than 1 a[href="#main-content"] on the current page
+    if( 1 < main_content_anchors.length  ){
+        main_content_anchors.each(function(index, element) {
+            // Remove all anchors not in the header
+            if( ! $($(element).parent().parent()).is('header') )
+                $(element).remove();
+            
+        });      
+    }
+
 
 });
