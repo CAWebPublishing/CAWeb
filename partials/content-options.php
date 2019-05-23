@@ -183,10 +183,10 @@ $icons = caweb_get_icon_list(-1, '', true);
 													</tr>
 													<tr >
 														<th scope="row"><div class="tooltip">Legacy Browser Support
-															<span class="tooltiptext">Checking this box creates accessibility errors on your site.</span></div>
+															<span class="tooltiptext">Checking this box creates accessibility errors for your site when using the IE Browser.</span></div>
 														</th>
 														<td><input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print $ua_compatibiliy ?>>
-															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors.' : '' ?></span>
+															<span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : '' ?></span>
 														</td>
 													</tr>
 													</table>
