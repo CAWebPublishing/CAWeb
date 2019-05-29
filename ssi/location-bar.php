@@ -1,3 +1,8 @@
+<?php
+if( ! get_option('ca_geo_locator_enabled', false) )
+    return;
+?>
+<!-- Location Bar -->
 <div class="location-settings section section-standout collapse collapsed " id="locationSettings">
     <div class="container p-y">
         <div class="form-group form-inline">
