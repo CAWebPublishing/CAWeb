@@ -26,7 +26,7 @@
     <?php
       global $is_IE, $is_edge;
       $ca_x_ua_compatibility = get_option('ca_x_ua_compatibility', false) ? '11' : 'edge';
-      if( $is_IE || $is_edge):
+      if( $is_IE && ! $is_edge):
     ?>
     <!-- Use highest compatibility mode -->
     <meta http-equiv="X-UA-Compatible" content="IE=<?php print $ca_x_ua_compatibility ?>">
