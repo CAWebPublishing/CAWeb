@@ -481,31 +481,67 @@ function caweb_get_blank_icon_span() {
 
 if ( ! function_exists('caweb_get_excerpt')) {
     function caweb_get_excerpt($con, $excerpt_length, $p = -1) {
-        if (empty($con)) {
+    	if (empty($con)) {
             return $con;
         }
-        $con_array = explode( " ", htmlentities(strip_tags( $con, '<a>' ) ) );
-        
-        if (count($con_array) > $excerpt_length) {
-            $excerpt = array_splice($con_array, 0, $excerpt_length);
-            $closed = true;
 
-            foreach($excerpt as $i => $word){
-                if( preg_match('/<a/', html_entity_decode( $word ) ) ){
-                    $closed = false;
-                }
-                if(preg_match('/<\/a>/', html_entity_decode( $word ) ) ){
-                    $closed = true;
-                }
+        // Regex pattern to find the end of strong, p, span, a and br tags
+        $pattern = "/&lt;\/strong&gt;|&lt;\/p&gt;|&lt;\/span&gt;|&lt;\/a&gt;|&lt;br[\s]+\/&gt;/";
+
+        // Split content by regex pattern
+        $con_array = preg_split($pattern, htmlentities( strip_tags( $con, "<strong><p><span><a><br>" ) ), -1);
+        // Store regex matches
+        preg_match_all($pattern, htmlentities( strip_tags( $con, "<strong><p><span><a><br>" ) ), $match_array, PREG_OFFSET_CAPTURE);
+
+        $excerpt = array();
+        $wordCount = 0;
+
+
+        // Iterate thru content splits
+        foreach ($con_array as $i => $line) {
+            // strip all tags in the line and return every word
+            $cleaned = explode(" ", strip_tags(html_entity_decode($line)));
+
+            // if there was a match for the line save it and append
+            $matching_end = '';
+            $matching_end = isset($match_array[0][$i][0]) && ! empty($match_array[0][$i][0]) ? $match_array[0][$i][0] : '<br>';
+            $excerpt[$i] = $line . $matching_end;
+
+            if ( ! empty($line)) {
+                $wordCount += count($cleaned);
             }
 
-            $excerpt = ! $closed ? implode(" ", $excerpt) . '...</a>' : implode(" ", $excerpt) . '...';
-            
-            return html_entity_decode ($excerpt);
-        }
+            if ($excerpt_length < $wordCount) {
+                do {
 
-        return $con;
+                    $wordCount--;
+
+                    $lastWord = $cleaned[count($cleaned) - 1];
+
+                    $line = substr($line, 0, strrpos($line, " "));
+
+                    $cleaned = array_filter(explode(" ", strip_tags(html_entity_decode($line))));
+
+
+                    if( $excerpt_length >= $wordCount )
+                        $line .= "...";
+                    
+                    $excerpt[$i] = $line . $matching_end;                    
+
+                    
+                } while ($excerpt_length < $wordCount);
+
+                break;
+            }
+        }
+        
+        $x = new DOMDocument;
+        $x->loadHTML( sprintf('<div id="post-%1$s-excerpt">%2$s</div>', $p, trim( implode("", $excerpt) ) ) );
+        $element = $x->getElementById("post-$p-excerpt"); 
+        
+        return html_entity_decode( $x->saveHTML( $element ) );
     }
+        
 }
 
 function caweb_get_the_post_thumbnail($post = null, $size = 'thumbnail', $attr = '', $pixel_size = array()) {
