@@ -146,12 +146,17 @@ jQuery(document).ready(function() {
 
   function dataSuccess(data) {
 
-    var address_components = data.results[0].address_components;
+    var address_components = data.results[0];
 
     var city;
 
     var state;
 
+    if( undefined !== address_components ){
+      address_components = address_components.address_components;
+    }else{
+      console.log('Geolocator error: ' + data.error_message);
+    }
     for (var i = 0; i < address_components.length; i++) {
 
       var types = address_components[i].types;
