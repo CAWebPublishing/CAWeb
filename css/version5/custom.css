@@ -81,6 +81,10 @@ article.type-project .entry-content{
   	visibility: hidden;
 }
 /* Utility Header */
+/* Quick fix to prevent the setting link buttons from floating into the alert banners */
+.utility-header .flex-row .settings-links button{
+  margin: 0 4px;
+}
 @media (max-width: 767px){
   .utility-header .container{
         width: 100%;
