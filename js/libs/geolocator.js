@@ -156,6 +156,7 @@ jQuery(document).ready(function() {
       address_components = address_components.address_components;
     }else{
       console.log('Geolocator error: ' + data.error_message);
+      return;
     }
     for (var i = 0; i < address_components.length; i++) {
 
