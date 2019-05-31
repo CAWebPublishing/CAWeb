@@ -32,9 +32,6 @@ function caweb_admin_menu() {
         remove_submenu_page('tools.php', 'domainmapping');
 
         // Removal of Divi Submenu Pages
-        remove_submenu_page('et_divi_options', 'et_divi_options');
-        remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=theme');
-        remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=module');
         remove_submenu_page('et_divi_options', 'et_divi_role_editor');
     }
 
@@ -349,7 +346,7 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 
     $caweb_general_options = array('ca_fav_ico', 'ca_site_version', 'ca_default_navigation_menu', 'ca_menu_selector_enabled',
         'ca_site_color_scheme',	'ca_frontpage_search_enabled', 'ca_sticky_navigation',
-        'ca_home_nav_link',	'ca_default_post_title_display', 'ca_default_post_date_display');
+        'ca_home_nav_link',	'ca_default_post_title_display', 'ca_default_post_date_display', 'ca_x_ua_compatibility');
 
     $caweb_utility_header_options = array('ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_utility_home_icon',
         'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window',
@@ -360,7 +357,7 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
     $caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background');
 
     $caweb_google_options = array('ca_google_search_id', 'ca_google_analytic_id',
-        'ca_google_meta_id', 'ca_google_trans_enabled', 'ca_google_trans_page', 'ca_google_trans_icon');
+        'ca_google_meta_id', 'ca_google_trans_enabled', 'ca_google_trans_page', 'ca_google_trans_icon', 'ca_google_trans_page_new_window');
 
     $caweb_social_options = array('Facebook' => 'ca_social_facebook', 'Twitter' => 'ca_social_twitter',
         'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email',

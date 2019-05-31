@@ -520,13 +520,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
     function createGeneral($cHandler, $pID, $pURL, $pTitle, $featured_image){
         $image= "on" == $featured_image ? sprintf('<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail($pID, array(150, 100))) : '';
 
-        $general_title = sprintf('<h5 style="padding-bottom: 0!important; %1$s">
-                                            <a href="%2$s" class="title" style="color: #428bca; background: none;">%3$s</a></h5>',
-                                                ("on" == $featured_image ? '' : ''), $pURL, $pTitle);
+        $general_title = sprintf('<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca; background: none;">%2$s</a></h5>', $pURL, $pTitle);
 
-        $excerpt = caweb_get_excerpt($cHandler->content, 45);
-        $excerpt = sprintf('<div class="description" %2$s>%1$s</div>', $excerpt,
-                                                ("on" == $featured_image ? '' : ''));
+        $excerpt = caweb_get_excerpt($cHandler->content, 45, $pID);
+        $excerpt = sprintf('<div class="description" %1$s>%2$s</div>', ("on" == $featured_image ? 'style="margin-left: 165px;"' : ''), $excerpt );
 
         return sprintf('<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt);
 

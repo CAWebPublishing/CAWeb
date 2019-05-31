@@ -1490,10 +1490,18 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
             $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
             
             $image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')) : '';
-			$news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
-			$date_city =sprintf('<p>%1$s%2$s%3$s</p>',
-													( ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : ''), $news_publish_date,
-													( ! empty($news_city) ? sprintf('%1$s', $news_city) : ''));
+            $date_city  = "";
+            
+            if( ! empty($news_publish_date) || ! empty($news_author) || ! empty($news_city) ){
+                $news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
+                $news_author = ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : '';
+                $news_city = ! empty($news_city) ? sprintf('%1$s', $news_city) : '';
+
+                $date_city =sprintf('<p>%1$s%2$s%3$s</p>', $news_author, $news_publish_date, $news_city);
+
+            }
+           
+            
 			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
 
 				break;

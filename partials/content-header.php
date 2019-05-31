@@ -26,6 +26,9 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 				// Alerts
 		    $alerts = get_option('caweb_alerts', array());
 
+			if( ! empty( $alerts ) )
+				print '<!-- Alert Banners -->';
+
 		    foreach ($alerts as $a => $data) {
 		        if ("inactive" !== $data['status'] && ((is_front_page() && "home" == $data['page_display']) || ("all" == $data['page_display']))) {
 		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
@@ -52,14 +55,13 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 		        }
 		    }
 
-		    print '<!-- Location Bar -->';
-		    // Location Bar
-		    require_once(CAWebAbsPath."/ssi/location-bar.php");
-
 		    print '<!-- Utility Header -->';
 		    // Include Utility Header
 			get_template_part('partials/content', 'utility-header');
-						
+
+		    // Location Bar
+			require_once(CAWebAbsPath."/ssi/location-bar.php");
+			
 		    print '<!-- Settings Bar -->';
 		    // Settings Bar
 		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
