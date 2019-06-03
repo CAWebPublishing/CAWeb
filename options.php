@@ -32,6 +32,9 @@ function caweb_admin_menu() {
         remove_submenu_page('tools.php', 'domainmapping');
 
         // Removal of Divi Submenu Pages
+        remove_submenu_page('et_divi_options', 'et_divi_options');
+        remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=theme');
+        remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=module');
         remove_submenu_page('et_divi_options', 'et_divi_role_editor');
     }
 
