@@ -31,7 +31,7 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 <?php
 
 		// Version 5.0 Specific
-		if (caweb_version_check(5.0, get_the_ID())) {
+		if ( 5 == caweb_get_page_version(get_the_ID()) ) {
 
 				// Alerts
 			$alerts = get_option('caweb_alerts', array());
