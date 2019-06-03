@@ -147,7 +147,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
 
-        $class = sprintf(' class="profile-banner-wrapper %1$s" ', $this->module_classname($render_slug));
+        $this->add_classname('profile-banner-wrapper');
+        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $url = ! empty($url) ? esc_url($url) : '';
 
@@ -164,7 +165,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 						</div>', $portrait_url, $portrait_alt)
 				  );
 
-        $output = sprintf('<div %1$s><a href="%2$s"><div class="profile-banner%3$s">%4$s<div class="banner-subtitle">%5$s</div><div class="banner-title">%6$s</div><div class="banner-link"><p>%7$s</p></div></div></a></div>', $class, $url, 'on' !== $round ? '' : ' round-image', $image, $job_title, $name, $profile_link);
+        $output = sprintf('<div%1$s%2$s><a href="%3$s"><div class="profile-banner%4$s">%5$s<div class="banner-subtitle">%6$s</div><div class="banner-title">%7$s</div><div class="banner-link"><p>%8$s</p></div></div></a></div>', $this->module_id(), $class, $url, 'on' !== $round ? '' : ' round-image', $image, $job_title, $name, $profile_link);
 
         return $output;
     }
