@@ -11,6 +11,7 @@ $logo_alt_text = ! empty( get_option('header_ca_branding_alt_text', '') ) ? get_
 $align = "center" !== get_option('header_ca_branding_alignment') ? 'pull-'.get_option('header_ca_branding_alignment') : '';
 
 ?>
+<!-- Branding -->
 <div class="branding">
   
 <?php   if (caweb_version_check(5, $post_id)  && ! empty($logo)) : ?>

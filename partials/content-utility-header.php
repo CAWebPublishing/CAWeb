@@ -1,4 +1,5 @@
 <?php      $gtranslator = get_option('ca_google_trans_enabled'); ?>    
+<!-- Utility Header -->
 <div class="utility-header hidden-print">
     <div class="container">
       <div class="group flex-row">
