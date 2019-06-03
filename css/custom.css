@@ -3,6 +3,13 @@
   display: none !important;
 }
 
+/* Allow anchor links in global footers to maintain the normal blue color */
+footer span a{
+  color: #046B99 !important;
+}
+footer span a:hover{
+  color: #02374e !important;   
+}
 /* Thickbox Styles */
 #TB_closeWindow #TB_closeWindowButton .tb-close-icon{
         display: none;
