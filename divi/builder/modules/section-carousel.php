@@ -426,7 +426,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
 
-            $hide = empty($slide_title) || empty($slide_desc) || empty($display_button) ? ' hidden' : '';
+            $hide = empty($slide_title) && empty($slide_desc) && empty($display_button) ? ' hidden' : '';
 
             $content = sprintf('<div class="content%1$s">%2$s%3$s%4$s</div>', "content_fit" == $et_pb_ca_section_carousel_style ? $hide : '', $slide_title, $slide_desc, $display_button);
 
@@ -865,7 +865,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
 
             $slide_title = ! empty($slide_title) ? sprintf('<h2>%1$s</h2>', $slide_title) : '';
 
-            $hide = empty($slide_title) || empty($slide_desc) || empty($display_button) ? ' hidden' : '';
+            $hide = empty($slide_title) && empty($slide_desc) && empty($display_button) ? ' hidden' : '';
 
             $content = sprintf('<div class="content%1$s">%2$s%3$s%4$s</div>', "content_fit" == $et_pb_ca_fullwidth_section_carousel_style ? $hide : '', $slide_title, $slide_desc, $display_button);
 
