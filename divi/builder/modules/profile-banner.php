@@ -112,14 +112,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
             ),
         );
         $advanced_fields = array(
-            'module_class' => array(
-                'label'           => esc_html__('CSS Class', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'configuration',
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'			=> 'classes',
-                'option_class'    => 'et_pb_custom_css_regular',
-            ),
             'disabled_on' => array(
                 'label'           => esc_html__('Disable on', 'et_builder'),
                 'type'            => 'multiple_checkboxes',

@@ -501,6 +501,10 @@ if ( ! function_exists('caweb_get_excerpt')) {
 
                     $wordCount--;
 
+                    if( ! isset($cleaned[count($cleaned) - 1] )){
+                        break;
+                    }
+
                     $lastWord = $cleaned[count($cleaned) - 1];
 
                     $line = substr($line, 0, strrpos($line, " "));
