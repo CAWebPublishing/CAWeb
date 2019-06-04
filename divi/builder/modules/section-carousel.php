@@ -283,7 +283,6 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
             ),
             'custom_css' => array(
                 'toggles' => array(
-                    'image'   => esc_html__('Image', 'et_builder'),
                 ),
             ),
         );
@@ -365,7 +364,7 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
                 'option_category' => 'basic_option',
                 'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
                 'tab_slug'	=> 'custom_css',
-                'toggle_slug'	=> 'image',
+                'toggle_slug'	=> 'attributes',
             ),
             'disabled_on' => array(
                 'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -720,7 +719,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
             ),
             'custom_css' => array(
                 'toggles' => array(
-                    'image'   => esc_html__('Image', 'et_builder'),
                 ),
             ),
         );
@@ -801,7 +799,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
                 'option_category' => 'basic_option',
                 'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
                 'tab_slug'	=> 'custom_css',
-                'toggle_slug'	=> 'image',
+                'toggle_slug'	=> 'attributes',
             ),
             'disabled_on' => array(
                 'label'           => esc_html__( 'Disable on', 'et_builder' ),
