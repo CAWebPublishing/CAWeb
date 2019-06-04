@@ -243,6 +243,35 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module {
         );
 
         $advanced_fields = array(
+            'module_id' => array(
+                'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'classes',
+            ),
+            'module_class' => array(
+                'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'classes',
+                'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'disabled_on' => array(
+                'label'           => esc_html__( 'Disable on', 'et_builder' ),
+                'type'            => 'multiple_checkboxes',
+                'options'         => array(
+                    'phone'   => esc_html__( 'Phone', 'et_builder' ),
+                    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+                    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+                ),
+                'additional_att'  => 'disable_on',
+                'option_category' => 'configuration',
+                'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'visibility',
+            ),
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
@@ -534,6 +563,35 @@ class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
         );
 
         $advanced_fields = array(
+            'module_id' => array(
+                'label'           => esc_html__( 'CSS ID', 'et_builder' ),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'classes',
+            ),
+            'module_class' => array(
+                'label'           => esc_html__( 'CSS Class', 'et_builder' ),
+                'type'            => 'text',
+                'option_category' => 'configuration',
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'classes',
+                'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'disabled_on' => array(
+                'label'           => esc_html__( 'Disable on', 'et_builder' ),
+                'type'            => 'multiple_checkboxes',
+                'options'         => array(
+                    'phone'   => esc_html__( 'Phone', 'et_builder' ),
+                    'tablet'  => esc_html__( 'Tablet', 'et_builder' ),
+                    'desktop' => esc_html__( 'Desktop', 'et_builder' ),
+                ),
+                'additional_att'  => 'disable_on',
+                'option_category' => 'configuration',
+                'description'     => esc_html__( 'This will disable the module on selected devices', 'et_builder' ),
+                'tab_slug'        => 'custom_css',
+                'toggle_slug'     => 'visibility',
+            ),
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
