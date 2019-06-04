@@ -344,14 +344,6 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
         $design_fields = array();
 
         $advanced_fields = array(
-            'slide_alt_text' => array(
-                'label' => esc_html__('Image Alt Text', 'et_builder'),
-                'type'=> 'text',
-                'option_category' => 'basic_option',
-                'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
-                'tab_slug'	=> 'custom_css',
-                'toggle_slug'	=> 'image',
-            ),
             'module_id' => array(
                 'label'           => esc_html__( 'CSS ID', 'et_builder' ),
                 'type'            => 'text',
@@ -366,6 +358,14 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
                 'tab_slug'        => 'custom_css',
                 'toggle_slug'     => 'classes',
                 'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'slide_alt_text' => array(
+                'label' => esc_html__('Image Alt Text', 'et_builder'),
+                'type'=> 'text',
+                'option_category' => 'basic_option',
+                'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
+                'tab_slug'	=> 'custom_css',
+                'toggle_slug'	=> 'image',
             ),
             'disabled_on' => array(
                 'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -780,14 +780,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
         $design_fields = array();
 
         $advanced_fields = array(
-            'slide_alt_text' => array(
-                'label' => esc_html__('Image Alt Text', 'et_builder'),
-                'type'=> 'text',
-                'option_category' => 'basic_option',
-                'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
-                'tab_slug'	=> 'custom_css',
-                'toggle_slug'	=> 'image',
-            ),
             'module_id' => array(
                 'label'           => esc_html__( 'CSS ID', 'et_builder' ),
                 'type'            => 'text',
@@ -802,6 +794,14 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
                 'tab_slug'        => 'custom_css',
                 'toggle_slug'     => 'classes',
                 'option_class'    => 'et_pb_custom_css_regular',
+            ),
+            'slide_alt_text' => array(
+                'label' => esc_html__('Image Alt Text', 'et_builder'),
+                'type'=> 'text',
+                'option_category' => 'basic_option',
+                'description' => esc_html__('Override the existing alternate text for the slide image.', 'et_builder'),
+                'tab_slug'	=> 'custom_css',
+                'toggle_slug'	=> 'image',
             ),
             'disabled_on' => array(
                 'label'           => esc_html__( 'Disable on', 'et_builder' ),
