@@ -112,20 +112,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
             ),
         );
         $advanced_fields = array(
-            'disabled_on' => array(
-                'label'           => esc_html__('Disable on', 'et_builder'),
-                'type'            => 'multiple_checkboxes',
-                'options'         => array(
-                    'phone'   => esc_html__('Phone', 'et_builder'),
-                    'tablet'  => esc_html__('Tablet', 'et_builder'),
-                    'desktop' => esc_html__('Desktop', 'et_builder'),
-                ),
-                'additional_att'  => 'disable_on',
-                'option_category' => 'configuration',
-                'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'     => 'visibility',
-            ),
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
