@@ -1,3 +1,4 @@
+<!-- Settings Bar -->
 <div class="site-settings section section-standout collapse collapsed" role="alert" id="siteSettings">
     <div class="container  p-y">
         <button type="button" class="close" data-toggle="collapse" data-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
