@@ -283,6 +283,10 @@ class ET_Builder_Module_CA_Section_Carousel_Slide extends ET_Builder_CAWeb_Modul
             ),
             'custom_css' => array(
                 'toggles' => array(
+                    'attributes' => array(
+						'title'    => esc_html__( 'Attributes', 'et_builder' ),
+						'priority' => 95,
+					),
                 ),
             ),
         );
@@ -719,6 +723,10 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel_Slide extends ET_Builder_C
             ),
             'custom_css' => array(
                 'toggles' => array(
+                    'attributes' => array(
+						'title'    => esc_html__( 'Attributes', 'et_builder' ),
+						'priority' => 95,
+					),
                 ),
             ),
         );
