@@ -98,7 +98,14 @@ ol.breadcrumb{
  text-transform: capitalize;
   margin-bottom: 0;
 }
-
+/* Add focus to TablePress Headers */
+table[id^="tablepress-"] thead tr th:focus {
+  outline: 1px dotted;
+}
+/* Add focus to TablePress Search Input Filter */
+div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
+  outline: 1px dotted;
+}
 /* Remove extra padding when ul is nested inside another ul */
 ul ul{
 	padding-bottom: 0px;
@@ -203,4 +210,15 @@ p{
 .list-standout, .list-understated, .list-overstated, .accordion-list{
 	list-style-type: none !important;
 	padding: 0 !important;
+}
+.et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* WPForms correct required label color contrast ADA */
+.wpforms-required-label{
+  color: #D24532 !important;
+}
+div.wpforms-container-full .wpforms-form button[type=submit]:focus {
+  outline: 1px dotted !important;
 }
