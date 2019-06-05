@@ -100,11 +100,11 @@ ol.breadcrumb{
 }
 /* Add focus to TablePress Headers */
 table[id^="tablepress-"] thead tr th:focus {
-  outline: 1px dotted;
+  outline: #2ea3f2 solid 2px !important;
 }
 /* Add focus to TablePress Search Input Filter */
 div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
-  outline: 1px dotted;
+  outline: #2ea3f2 solid 2px !important;
 }
 /* Remove extra padding when ul is nested inside another ul */
 ul ul{
@@ -220,5 +220,10 @@ p{
   color: #D24532 !important;
 }
 div.wpforms-container-full .wpforms-form button[type=submit]:focus {
-  outline: 1px dotted !important;
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* MailPoet correct focus on inputs */
+div[id^="mailpoet_form_"] input:focus {
+  outline: #2ea3f2 solid 2px !important;
 }
