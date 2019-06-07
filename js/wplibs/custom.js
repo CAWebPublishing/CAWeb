@@ -6,6 +6,10 @@
 
 	// run test on resize of the window
 	$(window).resize(checkSize);
+
+	$('form#Search input,form#Search button').on('focusin', function(){
+		$('#head-search').addClass('active') 
+	})
  });
 
  function checkSize(){
