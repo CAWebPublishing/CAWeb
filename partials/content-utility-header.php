@@ -50,19 +50,19 @@
                   <?php if ("" !== get_option('ca_contact_us_link')): ?>
                     <a class="utility-contact-us" href="<?php print get_option('ca_contact_us_link'); ?>">Contact Us</a>
                   <?php endif; ?> 
-                  
-                  <button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" href="#siteSettings" aria-expanded="false" aria-controls="siteSettings"><span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 
                   <?php if (get_option('ca_geo_locator_enabled')): ?>
                   <button class="btn btn-xs btn-primary collapsed geo-lookup" data-toggle="collapse" href="#locationSettings" aria-expanded="false" aria-controls="locationSettings"><span class="ca-gov-icon-compass" aria-hidden="true"></span><span class="located-city-name"></span></button>
                   <?php endif; ?>
 									<?php if ('custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '')): ?>
 				            <a id="caweb-gtrans-custom" target="<?php print get_option('ca_google_trans_page_new_window', true) ? '_blank' : '_self'  ?>" href="<?php print esc_url(get_option('ca_google_trans_page')) ?>"><?php print "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '' ?>Translate</a>
-				          <?php endif; ?> 
-            </div> 
-            <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
-              <div class="quarter standard-translate" id="google_translate_element"></div>
-            <?php endif; ?>						  
+                  <?php endif; ?> 
+                  <?php if (true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')): ?>
+                    <div class="quarter standard-translate" id="google_translate_element"></div>
+                  <?php endif; ?>	
+                  <button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" href="#siteSettings" aria-expanded="false" aria-controls="siteSettings"><span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
+                  
+            </div> 					  
         </div>          
     </div>
 </div>
