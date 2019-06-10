@@ -5,7 +5,7 @@
       <div class="group flex-row">
         <div class="social-media-links">
           <div class="header-cagov-logo">
-            <a href="https://www.ca.gov/" title="CA.gov" style="float: left;">
+            <a href="https://www.ca.gov/" title="CA.gov website" style="float: left;">
               <span class="sr-only">CA.gov</span>
               <img style="height: 31px;" src="<?php print get_stylesheet_directory_uri();?>/images/system/logo.svg" class="pos-rel" alt="Image of the CA.gov Logo" aria-hidden="true" />
             </a>
