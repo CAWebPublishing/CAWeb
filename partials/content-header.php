@@ -14,6 +14,16 @@ $header_background_img = (4 == $ver && "" !== get_option('header_ca_background')
                           get_option('header_ca_background') : $default_background_img);
 $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img) : '');
 
+// Search
+$ca_frontpage_search_enabled = get_option('ca_frontpage_search_enabled');
+
+// Google Translate
+$ca_google_search_id = get_option('ca_google_search_id', '');
+$ca_google_trans_enabled = get_option('ca_google_trans_enabled');
+$ca_google_trans_page = get_option('ca_google_trans_page', '');
+$ca_google_trans_icon = get_option('ca_google_trans_icon', '');
+$ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca_google_trans_icon) : '';
+
 ?>
 
 <header role="banner" id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
@@ -21,25 +31,29 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 <?php
 
 		// Version 5.0 Specific
-		if (caweb_version_check(5.0, get_the_ID())) {
+		if ( 5 == caweb_get_page_version(get_the_ID()) ) {
 
 				// Alerts
-		    $alerts = get_option('caweb_alerts', array());
+			$alerts = get_option('caweb_alerts', array());
 
-		    foreach ($alerts as $a => $data) {
-		        if ("inactive" !== $data['status'] && ((is_front_page() && "home" == $data['page_display']) || ("all" == $data['page_display']))) {
-		            if ( ! isset($_SESSION['display_alert_'.$a]) || 1 == $_SESSION['display_alert_'.$a]) {
-		                $_SESSION['display_alert_'.$a] = true;
+			if ( ! empty($alerts)) {
+				print '<!-- Alert Banners -->';
+			}
 
-		                $readmore = '';
+			foreach ($alerts as $a => $data) {
+				if ("inactive" !== $data['status'] && ((is_front_page() && "home" == $data['page_display']) || ("all" == $data['page_display']))) {
+					if ( ! isset($_SESSION['display_alert_' . $a]) || 1 == $_SESSION['display_alert_' . $a]) {
+						$_SESSION['display_alert_' . $a] = true;
 
-		                if ( ! empty($data['button']) && ! empty($data['url'])) {
-		                    $target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
-		                    $readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), $target);
-		                } ?>
+						$readmore = '';
+
+						if ( ! empty($data['button']) && ! empty($data['url'])) {
+							$target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
+							$readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), $target);
+						} ?>
 		                <div role="alert" class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color'] ?>;">
 											<div class="container">
-												<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id='.$a) ?>" data-dismiss="alert" aria-label="Close">
+												<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id=' . $a) ?>" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">×</span>
 												</button>
 												<span class="alert-level">
@@ -48,32 +62,27 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 											</div>
 										</div>
 										<?php
-		            }
-		        }
-		    }
+					}
+				}
+			}
 
-		    print '<!-- Utility Header -->';
-		    // Include Utility Header
+			// Include Utility Header
 			get_template_part('partials/content', 'utility-header');
 
-			print '<!-- Location Bar -->';
-		    // Location Bar
-			require_once(CAWebAbsPath."/ssi/location-bar.php");
-			
-		    print '<!-- Settings Bar -->';
-		    // Settings Bar
-		    require_once(CAWebAbsPath."/ssi/settings-bar.php");
+			// Location Bar
+			require_once(CAWebAbsPath . "/ssi/location-bar.php");
 
+			// Settings Bar
+			require_once(CAWebAbsPath . "/ssi/settings-bar.php");
 		}
 
-    print '<!-- Branding -->';
     // Include Utility Header
     get_template_part('partials/content', 'branding');
 
          ?>
 
          <!-- Include Mobile Controls -->
-         <?php require_once(CAWebAbsPath."/ssi/mobile-controls.php");?>
+         <?php require_once(CAWebAbsPath . "/ssi/mobile-controls.php");?>
 
         <div class="navigation-search">
 
@@ -82,39 +91,35 @@ $header_style = (4 == $ver ? sprintf('style="background: #fff url(%1$s) no-repea
 <!-- Include Navigation -->
 <?php
     wp_nav_menu(array('theme_location' => 'header-menu',
-        'style' => (get_option('ca_menu_selector_enabled') ?
-                    get_post_meta(get_the_ID(), 'ca_default_navigation_menu', true) :
-                    get_option('ca_default_navigation_menu')),
-        'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
-        'version' => caweb_get_page_version(get_the_ID()),
+    	'style' => (get_option('ca_menu_selector_enabled') ?
+    	            get_post_meta(get_the_ID(), 'ca_default_navigation_menu', true) :
+    	            get_option('ca_default_navigation_menu')),
+    	'home_link' => ( ! is_front_page() && get_option('ca_home_nav_link', true) ? true : false),
+    	'version' => caweb_get_page_version(get_the_ID()),
     )
               );
 
-$search = (caweb_version_check(5, get_the_ID()) && is_front_page() &&  get_option('ca_frontpage_search_enabled') ? 'featured-search fade' : '');
+			  $search = 5 == $ver && is_front_page() &&  $ca_frontpage_search_enabled ? ' featured-search fade' : '';
+			  $search .= empty($ca_google_search_id) ? ' hidden' : '';
 
-$custom_translate = caweb_version_check(4, get_the_ID()) && 'custom' == get_option('ca_google_trans_enabled') && "" !== get_option('ca_google_trans_page', '') ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url(get_option('ca_google_trans_page')), "" !== get_option('ca_google_trans_icon') ? caweb_get_icon_span(get_option('ca_google_trans_icon')) : '') : '';
-	
-	printf('<div id="head-search" class="search-container %1$s %2$s hidden-print">%3$s%4$s</div>',
-       $search, ("" == get_option('ca_google_search_id') ? 'hidden' : ''),
-       ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID()) ? sprintf('
-       	<div class="container">
-		    <form id="Search" class="pos-rel" action="%1$s">
-		        <span class="sr-only" id="SearchInput">Custom Google Search</span>
-		        <input type="text" id="q" name="q" aria-labelledby="SearchInput" placeholder="Custom Search" class="height-50 border-0 p-x-sm w-100" />
-		        <button type="submit" class="pos-abs gsc-search-button top-0 width-50 height-50 border-0 bg-transparent"><span class="ca-gov-icon-search font-size-30 color-gray" aria-hidden="true"></span><span class="sr-only">Submit</span></button>
-		        <div class="width-50 height-50 close-search-btn"><button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset"><span class="sr-only">Close Search</span><span class="ca-gov-icon-close-mark" aria-hidden="true"></span></button></div>
-		    </form>
-		</div>
-		', site_url('serp')) : ''), $custom_translate);
+			  // This is the Custom Google Translate Location for the old State Template Version 4
+			  $custom_translate = 4 == $ver && 'custom' == $ca_google_trans_enabled && ! empty($ca_google_trans_page) ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url($ca_google_trans_page), $ca_google_trans_icon) : '';
 
 ?>
-
+			<div id="head-search" class="search-container<?php print $search ?> hidden-print">
+			<?php
+				if ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID())) {
+					require(CAWebAbsPath . "/ssi/searchForm.php");
+				}
+				print $custom_translate;
+			?>
+			</div>
         </div>
 
-<?php  if ((true === get_option('ca_google_trans_enabled') || 'standard' == get_option('ca_google_trans_enabled')) &&  (caweb_version_check(4, get_the_ID()))): ?>
+<?php
+// This is the Standard Google Translate Location for the old State Template Version 4
+if ((true === $ca_google_trans_enabled || 'standard' == $ca_google_trans_enabled) &&  4 == $ver):
+?>
 <div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
-
-        <div class="header-decoration hidden-print"></div>
-
 </header>

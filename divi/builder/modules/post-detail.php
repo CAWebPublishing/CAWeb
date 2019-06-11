@@ -120,36 +120,6 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         $design_fields = array();
 
         $advanced_fields = array(
-            'module_id' => array(
-                'label'           => esc_html__('CSS ID', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'configuration',
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'			=> 'classes',
-                'option_class'    => 'et_pb_custom_css_regular',
-            ),
-            'module_class' => array(
-                'label'           => esc_html__('CSS Class', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'configuration',
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'			=> 'classes',
-                'option_class'    => 'et_pb_custom_css_regular',
-            ),
-            'disabled_on' => array(
-                'label'           => esc_html__('Disable on', 'et_builder'),
-                'type'            => 'multiple_checkboxes',
-                'options'         => array(
-                    'phone'   => esc_html__('Phone', 'et_builder'),
-                    'tablet'  => esc_html__('Tablet', 'et_builder'),
-                    'desktop' => esc_html__('Desktop', 'et_builder'),
-                ),
-                'additional_att'  => 'disable_on',
-                'option_category' => 'configuration',
-                'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'     => 'visibility',
-            ),
         );
 
         $news_fields = array(
