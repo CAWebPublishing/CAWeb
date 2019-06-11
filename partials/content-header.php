@@ -122,7 +122,4 @@ if ((true === $ca_google_trans_enabled || 'standard' == $ca_google_trans_enabled
 ?>
 <div id="google_translate_element" class="hidden-print standard-translate"></div>
 <?php endif; ?>
-
-	<div class="header-decoration hidden-print"></div>
-
 </header>
