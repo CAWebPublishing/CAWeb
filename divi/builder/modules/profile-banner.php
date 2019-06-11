@@ -112,28 +112,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
             ),
         );
         $advanced_fields = array(
-            'module_class' => array(
-                'label'           => esc_html__('CSS Class', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'configuration',
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'			=> 'classes',
-                'option_class'    => 'et_pb_custom_css_regular',
-            ),
-            'disabled_on' => array(
-                'label'           => esc_html__('Disable on', 'et_builder'),
-                'type'            => 'multiple_checkboxes',
-                'options'         => array(
-                    'phone'   => esc_html__('Phone', 'et_builder'),
-                    'tablet'  => esc_html__('Tablet', 'et_builder'),
-                    'desktop' => esc_html__('Desktop', 'et_builder'),
-                ),
-                'additional_att'  => 'disable_on',
-                'option_category' => 'configuration',
-                'description'     => esc_html__('This will disable the module on selected devices', 'et_builder'),
-                'tab_slug'        => 'custom_css',
-                'toggle_slug'     => 'visibility',
-            ),
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
@@ -147,7 +125,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
 
-        $class = sprintf(' class="profile-banner-wrapper %1$s" ', $this->module_classname($render_slug));
+        $this->add_classname('profile-banner-wrapper');
+        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $url = ! empty($url) ? esc_url($url) : '';
 
@@ -164,7 +143,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 						</div>', $portrait_url, $portrait_alt)
 				  );
 
-        $output = sprintf('<div %1$s><a href="%2$s"><div class="profile-banner%3$s">%4$s<div class="banner-subtitle">%5$s</div><div class="banner-title">%6$s</div><div class="banner-link"><p>%7$s</p></div></div></a></div>', $class, $url, 'on' !== $round ? '' : ' round-image', $image, $job_title, $name, $profile_link);
+        $output = sprintf('<div%1$s%2$s><a href="%3$s"><div class="profile-banner%4$s">%5$s<div class="banner-subtitle">%6$s</div><div class="banner-title">%7$s</div><div class="banner-link"><p>%8$s</p></div></div></a></div>', $this->module_id(), $class, $url, 'on' !== $round ? '' : ' round-image', $image, $job_title, $name, $profile_link);
 
         return $output;
     }
