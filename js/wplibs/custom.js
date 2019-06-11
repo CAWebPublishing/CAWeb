@@ -35,10 +35,10 @@
     }else if(1 < utility_container.children().length && "none" === $(".global-header .mobile-controls").css("display") ) {
 			$(settings).css('margin-left', 'auto');
 
+			if( undefined !== translate ){
+				$(translate).insertBefore($(settings).find('button:last-child'))
+			}
 			$(utility_container.children()[0]).append(settings);
-
-			if( undefined !== translate )
-				$(utility_container.children()[0]).append(translate);
 
 		$(utility_container.children()[1]).remove();
 		$(utility_container.children()[2]).remove();
