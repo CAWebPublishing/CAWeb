@@ -65,8 +65,8 @@ if ( ! class_exists('CAWeb_Nav_Menu')) {
             } elseif ('footer-menu' == $theme_location && ! empty($args->menu)) {
                 $nav_menu = $this->createFooterMenu($args);
 
-                $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s> Copyright &copy; %3$s State of California </div></div></footer>',
-                                     $nav_menu, (4 >= $args->version ? 'style="text-align:center;" ' : ''), date("Y") );
+                $nav_menu = sprintf('<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s><p class="d-inline">Copyright &copy; %3$s State of California</p><span class="pull-right">Powered by: <a href="%4$s" target="_blank">CAWeb Publishing Service</a></span></div></div></footer>',
+                                     $nav_menu, (4 >= $args->version ? 'style="text-align:center;" ' : ''), date("Y"), wp_get_theme()->get('ThemeURI')  );
             }
 
             return $nav_menu;

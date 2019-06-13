@@ -37,7 +37,7 @@
 
 <?php get_footer(); ?>
 
-<?php if (caweb_version_check(4)) : ?>
+<?php if ( 4 == caweb_get_page_version(get_the_ID()) ) : ?>
 <style>div#head-search {display: none;}div#google_translate_element { top: 10px;}</style>
 <?php endif; ?>
 </body>

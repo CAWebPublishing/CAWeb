@@ -9,6 +9,12 @@
     var blog_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_blog_\d\b/); });
 
     /* 
+    Divi Blurb Module Accessibility 
+    Retrieve all Divi Blurb Modules
+    */
+    var blurb_modules = $('div.et_pb_blurb').filter(function(){ if( ! $(this).find('a').length ){ return true ; } }); 
+
+    /* 
     Divi Tab Module Accessibility 
     Retrieve all Divi Tab Modules
     */
@@ -87,6 +93,22 @@
              }
             });
          });      
+    }   
+
+    
+    // Run only if there is a Blog Module on the current page
+    if( blurb_modules.length ){
+        blurb_modules.each(function(index, element) {
+            $(element).prepend('<a href="#"></a>');
+         });      
+
+         $('.et_pb_blurb').children('a').on('focusin', function(){ 
+            $(this).parent().css('outline', "#2ea3f2 solid 2px");
+         });
+         
+         $('.et_pb_blurb').children('a').on('focusout', function(){ 
+            $(this).parent().css('outline', '0');
+         });
     }   
 
     // Run only if there is a Tab Module on the current page

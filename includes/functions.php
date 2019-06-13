@@ -1,20 +1,5 @@
 <?php
-/*
-	Checks the Site Wide Version and Page Slug Template Version
-	If a $post_id is included will check if $version also matches the
-	Page Template Version
-	$version = Specific Page Template Version  returns true/false
 
- */
-function caweb_version_check($version = 5, $post_id = -1) {
-    $result = ($version == get_option('ca_site_version', 5) ? true : false);
-
-    if (-1 < $post_id) {
-        $result = ($version == caweb_get_page_version($post_id) ? true : false);
-    }
-
-    return $result;
-}
 /*
 	Returns the Site Wide Version Setting
 	if post_id is passed will return version
@@ -515,6 +500,10 @@ if ( ! function_exists('caweb_get_excerpt')) {
                 do {
 
                     $wordCount--;
+
+                    if( ! isset($cleaned[count($cleaned) - 1] )){
+                        break;
+                    }
 
                     $lastWord = $cleaned[count($cleaned) - 1];
 
