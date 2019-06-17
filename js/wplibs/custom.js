@@ -31,7 +31,57 @@
 			$(element).attr('role', 'group');
 			$(element).attr('aria-label', 'WPForms Checkbox Group');
 		});      
-    }  
+	}	
+
+	// Do this after the page has loaded
+	$(window).on('load', function(){
+		/*
+			Constant Contact Forms by MailMunch Accessibility 
+			IFrame html is used to format content
+		*/
+		var mailmunch_iframe = $('iframe.mailmunch-embedded-iframe'); 
+				
+		if( mailmunch_iframe.length ){
+			mailmunch_iframe.each(function(index, element) {
+				$(element).attr('title', 'Constant Contact by MailMunch IFrame');
+				$(element).removeAttr('frameborder', '');
+				$(element).removeAttr('scrolling', '');
+				$(element).removeAttr('allowtransparency', '');
+			});   
+			
+			setTimeout(function(){ 
+				var mailmunch_img = $('img[src^="//analytics.mailmunch.co/event"'); 
+				$(mailmunch_img).attr('alt', '');
+			}, 1000);
+		} 
+		
+		/*
+			Twitter Feed Accessibility 
+			IFrame html is used to format content
+		*/
+		var twitter_iframe = $('iframe[id^="twitter-widget-"], iframe[src^="https://platform.twitter.com"]'); 
+				
+		if( twitter_iframe.length ){
+			twitter_iframe.each(function(index, element) {
+				$(element).removeAttr('frameborder', '');
+				$(element).removeAttr('scrolling', '');
+				$(element).removeAttr('allowtransparency', '');
+				$(element).removeAttr('allowfullscreen', '');
+			});    
+			
+			setTimeout(function(){
+				var rufous_iframe = $('iframe[id="rufous-sandbox"]'); 
+				$(rufous_iframe).removeAttr('frameborder', '');
+				$(rufous_iframe).removeAttr('scrolling', '');
+				$(rufous_iframe).removeAttr('allowtransparency', '');
+				$(rufous_iframe).removeAttr('allowfullscreen', '');
+			}, 1000);
+			
+		}
+		 
+	}); // End of window load
+
+
  });
 
  function checkSize(){

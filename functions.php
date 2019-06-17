@@ -128,8 +128,12 @@ add_action('init', 'caweb_init');
 function caweb_init() {
     global $pagenow;
 
-    // Unregister Divi Project Type
-    //unregister_post_type('project');
+	/* 
+		This is a Divi action and is not needed, 
+		it requires setting the Site Icon from the Theme Customizer
+		if not set it will display with an unknown source. 
+	*/
+	remove_action('wp_head', 'add_favicon');
 
     // Unregister Menu Navigation Settings
     unregister_nav_menu('primary-menu');
