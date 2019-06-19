@@ -265,9 +265,27 @@ ol{
 .et_pb_ca_github.et_pb_module ul li {
     list-style-type: none;
 }
-/* Remove the State Template background image from Divi Button, Email Optin and Person Modules */
+/* Remove the State Template background image from Divi Button, Email Optin, Blurb Images and Person Modules */
 .et_pb_button_module_wrapper.et_pb_module .et_pb_button,
 .et_pb_newsletter_button_wrap .et_pb_newsletter_button.et_pb_button,
+.et_pb_main_blurb_image a,
 .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
-  background-image: none;
+  background-image: none !important;
+}
+
+/* Divi Slider & Post Sliders, arrows are not ADA compliant */
+.et-pb-arrow-next::before, .et-pb-arrow-prev::before{
+  content: none;
+}
+a[class^="et-pb-arrow-"] span[class^="ca-gov-icon-"]{
+  display:block; 
+  font-size: 20px;
+}
+a[class^="et-pb-arrow-prev"]:focus{
+  left:22px; 
+  opacity: 1;
+}
+a[class^="et-pb-arrow-next"]:focus{
+  right:22px; 
+  opacity: 1;
 }
