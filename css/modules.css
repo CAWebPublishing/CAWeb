@@ -274,11 +274,13 @@ ol{
 }
 
 /* Divi Slider & Post Sliders, arrows are not ADA compliant */
+.et-pb-slider-arrows a[class^="et-pb-arrow-"] span{
+  display: block;
+}
 .et-pb-arrow-next::before, .et-pb-arrow-prev::before{
   content: none;
 }
 a[class^="et-pb-arrow-"] span[class^="ca-gov-icon-"]{
-  display:block; 
   font-size: 20px;
 }
 a[class^="et-pb-arrow-prev"]:focus{
