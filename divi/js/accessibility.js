@@ -12,7 +12,7 @@
     Divi Blurb Module Accessibility 
     Retrieve all Divi Blurb Modules
     */
-    var blurb_modules = $('div.et_pb_blurb').filter(function(){ if( ! $(this).find('a').length ){ return true ; } }); 
+    var blurb_modules = $('div.et_pb_blurb'); 
 
     /* 
     Divi Tab Module Accessibility 
@@ -99,16 +99,28 @@
     // Run only if there is a Blog Module on the current page
     if( blurb_modules.length ){
         blurb_modules.each(function(index, element) {
-            $(element).prepend('<a href="#"></a>');
-         });      
+			var header = $(element).find('.et_pb_module_header');
+            var header_title = header.length ?
+                     ( $(header).children('a').length ? $(header).children('a')[0].innerText : header[0].innerText ) : '';
 
-         $('.et_pb_blurb').children('a').on('focusin', function(){ 
-            $(this).parent().css('outline', "#2ea3f2 solid 2px");
-         });
-         
-         $('.et_pb_blurb').children('a').on('focusout', function(){ 
-            $(this).parent().css('outline', '0');
-         });
+            if( ! $(element).find('a').length && $(element).hasClass('et_clickable')){ 
+                $(element).prepend('<a href="#"><span class="sr-only">' + header_title + '</span></a>');
+            }else if( $(element).find('.et_pb_main_blurb_image').children('a').length ){
+                var blurb_img = $(element).find('.et_pb_main_blurb_image');
+
+                $(blurb_img).removeAttr('aria-hidden');
+                
+                $($(blurb_img).children('a')[0]).prepend('<span class="sr-only">' + header_title + '</span>');
+            }
+
+            $(element).children('a').on('focusin', function(){ 
+                $(this).parent().css('outline', "#2ea3f2 solid 2px");
+             });
+             
+             $(element).children('a').on('focusout', function(){ 
+                $(this).parent().css('outline', '0');
+             });
+         });      
     }   
 
     // Run only if there is a Tab Module on the current page
@@ -201,7 +213,12 @@
             var next_button =  $(element).find('a.et-pb-arrow-next');
 
             prev_button.addClass('no-underline');
+            prev_button.find('span').addClass('sr-only');
+            prev_button.prepend('<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>');
+
             next_button.addClass('no-underline');
+            next_button.find('span').addClass('sr-only');
+            next_button.prepend('<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>');
             
         });      
     } 
