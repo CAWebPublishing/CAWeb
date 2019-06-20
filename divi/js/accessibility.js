@@ -104,8 +104,15 @@
                      ( $(header).children('a').length ? $(header).children('a')[0].innerText : header[0].innerText ) : '';
 
             if( ! $(element).find('a').length && $(element).hasClass('et_clickable')){ 
-                $(element).prepend('<a href="#" aria-hidden="true"><span class="sr-only">' + header_title + '</span></a>');
-            }      
+                $(element).prepend('<a href="#"><span class="sr-only">' + header_title + '</span></a>');
+            }else if( $(element).find('.et_pb_main_blurb_image').children('a').length ){
+                var blurb_img = $(element).find('.et_pb_main_blurb_image');
+
+                $(blurb_img).removeAttr('aria-hidden');
+                
+                $($(blurb_img).children('a')[0]).prepend('<span class="sr-only">' + header_title + '</span>');
+            }
+
             $(element).children('a').on('focusin', function(){ 
                 $(this).parent().css('outline', "#2ea3f2 solid 2px");
              });
