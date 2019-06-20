@@ -234,3 +234,12 @@ div.wpforms-container-full .flag-container .selected-flag:focus {
 div[id^="mailpoet_form_"] input:focus {
   outline: #2ea3f2 solid 2px !important;
 }
+
+/* MailChimp ADA Fixes */
+#mc-embedded-subscribe-form
+span.asterisk, .mce_inline_error{
+  color:#D24532 !important;
+}
+#mc-embedded-subscribe-form input.required.mce_inline_error{
+  border: 2px solid #D24532 !important;
+}
