@@ -34,10 +34,9 @@ jQuery(document).ready(function() {
                 }
             });
 
-            /*$(element).find('input').each(function(i, e){
+            $(element).find('input').each(function(i, e){
                 $(e).removeAttr('aria-invalid');
-                $(e).removeAttr('aria-required');
-            });*/
+            });
         });      
     }  
 
