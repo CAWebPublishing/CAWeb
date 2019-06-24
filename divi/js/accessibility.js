@@ -30,7 +30,7 @@
     Divi Button Module Accessibility 
     Retrieve all Divi Button Modules
     */
-    var button_modules = $('a').filter(function(){ return this.className.match(/\bet_pb_button_\d\b/); });
+    var button_modules = $('a.et_pb_button');
 
     /* 
     Divi Slides (Standard & Fullwidth) Accessibility 
@@ -39,13 +39,13 @@
     Post Slider (Standard & Fullwidth)
     Retrieve all Divi Slide Modules
     */
-    var slide_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_slide\b/); });
+    var slide_modules = $('div.et_pb_slide');
     
     /* 
     Divi Slider Arrows Accessibility 
     Retrieve all Divi Slider Arrows
     */
-    var slider_arrows = $('div').filter(function(){ return this.className.match(/\bet-pb-slider-arrows\b/); });
+    var slider_arrows = $('div.et-pb-slider-arrows');
     
     /* 
     Divi Post Slider (Standard & Fullwidth) Accessibility 
@@ -71,7 +71,13 @@
     Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
     Retrieve all a[href="#main-content"]
    */
-    var main_content_anchors = $('a[href="#main-content"]')
+    var main_content_anchors = $('a[href="#main-content"]');
+
+    /*
+    Divi Video Module Accessibility
+    Retrieve all Divi Video Modules
+   */
+    var video_modules = $('div.et_pb_video');
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -289,5 +295,12 @@
         });      
     }
 
-
+    // Run only if there is a Video Module on the current page
+    if( video_modules.length  ){
+        video_modules.each(function(index, element) {
+            var frame = $(element).find('iframe');
+            frame.attr('title', 'Divi Video Module IFrame');
+            $(frame).removeAttr('frameborder');
+        });      
+    }
 });
