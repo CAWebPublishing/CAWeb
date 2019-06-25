@@ -128,8 +128,12 @@ add_action('init', 'caweb_init');
 function caweb_init() {
     global $pagenow;
 
-    // Unregister Divi Project Type
-    //unregister_post_type('project');
+	/* 
+		This is a Divi action and is not needed, 
+		it requires setting the Site Icon from the Theme Customizer
+		if not set it will display with an unknown source. 
+	*/
+	remove_action('wp_head', 'add_favicon');
 
     // Unregister Menu Navigation Settings
     unregister_nav_menu('primary-menu');
@@ -219,6 +223,7 @@ function caweb_wp_enqueue_scripts() {
         'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false));
 
     wp_register_script('cagov-custom-script', CAWebUri.'/js/wplibs/custom.js', array(), CAWebVersion, true);
+    wp_register_script('cagov-accessibility-script', CAWebUri.'/js/wplibs/accessibility.js', array(), CAWebVersion, true);
 
     // Enqueue Scripts
     wp_enqueue_script('cagov-navigation-script');
@@ -226,6 +231,7 @@ function caweb_wp_enqueue_scripts() {
     wp_enqueue_script('cagov-ga-autotracker-script');
     wp_enqueue_script('cagov-modernizr-script');
     wp_enqueue_script('cagov-custom-script');
+    wp_enqueue_script('cagov-accessibility-script');
 
     // Version 5 specific scripts
     if (5 >= $ver && ("on" == get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled'))) {
