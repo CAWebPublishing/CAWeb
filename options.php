@@ -483,7 +483,7 @@ function caweb_fav_icon_checker() {
 add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
 
 function caweb_default_favicon_url() {
-	return  esc_url("https://raw.githubusercontent.com/CAWebPublishing/CAWeb/master/images/system/favicon.ico?token=AXMXyfCXumpiUhi-6nEG4zAj65rhy_aGks5aVQ2TwA==");
+	return  site_url("wp-content/themes/CAWeb/images/system/favicon.ico");
 }
 
 function caweb_favicon_name() {
