@@ -43,10 +43,10 @@ border: 0;
     word-wrap: normal!important;
 }
 
-.archive.author article .auth-link,
-.archive.category article .cat-link,
-.archive.date article .date-link,
-.archive.tag article .tag-link{
+.archive.author article.has-post-thumbnail .auth-link,
+.archive.category article.has-post-thumbnail .cat-link,
+.archive.date article.has-post-thumbnail .date-link,
+.archive.tag article.has-post-thumbnail .tag-link{
   width: 200px;
   height: 150px;
   padding-right: 20px;
