@@ -114,7 +114,9 @@ overflow: hidden;
    overflow: hidden;
    height: 90px;
 }
-
+.profile-banner .inner{
+  background-size: contain !important;
+}
 .profile-banner.round-image{
 	background: unset;
   height: auto;
