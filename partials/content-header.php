@@ -31,7 +31,7 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 <?php
 
 		// Version 5.0 Specific
-		if ( 5 == caweb_get_page_version(get_the_ID()) ) {
+		if (5 == caweb_get_page_version(get_the_ID())) {
 
 				// Alerts
 			$alerts = get_option('caweb_alerts', array());
@@ -46,22 +46,24 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 						$_SESSION['display_alert_' . $a] = true;
 
 						$readmore = '';
-
+						$alert_icon = ! empty($data['icon']) ? caweb_get_icon_span($data['icon'], array('aria-hidden' => "true")) : '';
 						if ( ! empty($data['button']) && ! empty($data['url'])) {
 							$target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
-							$readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>Read More</a>', esc_url($data['url']), $target);
+							$readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>More Information</a>', esc_url($data['url']), $target);
 						} ?>
-		                <div role="alert" class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color'] ?>;">
-											<div class="container">
-												<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id=' . $a) ?>" data-dismiss="alert" aria-label="Close">
-													<span aria-hidden="true">×</span>
-												</button>
-												<span class="alert-level">
-													<span class="ca-gov-icon-<?php print $data['icon'] ?>" aria-hidden="true"></span><?php print $data['header'] ?></span>
-												<span class="alert-text"><?php print stripslashes($data['message']) ?></span><?php print  $readmore ?>
-											</div>
-										</div>
-										<?php
+		                <div class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color'] ?>;">
+							<div class="container">
+								<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url('admin-post.php?action=caweb_clear_alert_session&alert-id=' . $a) ?>" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<span class="alert-level">
+									<?php print $alert_icon . $data['header'] ?>
+								</span>
+								<span class="alert-text"><?php print stripslashes($data['message']) ?></span>
+								<?php print  $readmore ?>
+							</div>
+						</div>
+						<?php
 					}
 				}
 			}

@@ -112,8 +112,9 @@ if ( ! class_exists('CAWeb_Theme_Update')) {
             if ( ! is_wp_error($payload) && wp_remote_retrieve_response_code($payload) == 200) {
                 $payload = json_decode(wp_remote_retrieve_body($payload));
 
-                //  ($payload->tag_name >  $this->current_version)
-                if ( ! empty($payload) && version_compare($payload->tag_name, $this->current_version, '>')) {
+                // version compare doesn't compare correctly 1.0.0a is less than 1.0.0 and that is incorrect 
+                // version_compare($payload->tag_name, $this->current_version, '>')
+                if ( ! empty($payload) && $payload->tag_name >  $this->current_version ) {
                     $obj = array();
                     $obj['new_version'] = $payload->tag_name;
 
