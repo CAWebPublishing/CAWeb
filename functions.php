@@ -193,7 +193,7 @@ function caweb_wp_enqueue_scripts() {
 	} else {
 		wp_enqueue_style('caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
 		wp_enqueue_style('caweb-color-style', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
-		wp_enqueue_style('caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), CAWebVersion);
 		wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
 		wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
 		wp_enqueue_style('caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), CAWebVersion);
@@ -435,6 +435,24 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 			}
 		}
 	}
+
+	add_action('admin_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
+	add_action('wp_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
+	function caweb_builder_enqueue_scripts(){
+		$divi_builder = CAWebAbsPath . "/divi/builder";
+
+		wp_register_script('caweb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
+		wp_register_script('caweb-fb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
+
+
+		wp_enqueue_script('caweb-builder-scripts');
+		wp_enqueue_script('caweb-fb-builder-scripts');
+
+		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
+		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
+
+	}
+	
 } else {
 	include(CAWebAbsPath . "/divi/functions.php");
 }
