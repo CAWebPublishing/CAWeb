@@ -7,7 +7,7 @@ get_header();
 <?php get_template_part('partials/content', 'header') ?>
 <style>
     #main-content .container{ padding-top: 0}
-    .search-container{ top: 0}
+    .search-container{ top: 0 !important;}
     .mobile-controls .toggle-search,
     form#Search .close-search{ display: none !important}
 </style>
@@ -25,7 +25,7 @@ get_header();
         </div>
         <div class="section">
             <div class="container">
-				<h1>Search Results for: <?php echo esc_attr($keyword);?></h1>
+				<h1>Search Results for: <?php print esc_attr($keyword);?></h1>
                 <gcse:searchresults-only></gcse:searchresults-only>
             </div>
         </div>
