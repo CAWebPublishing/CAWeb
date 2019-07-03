@@ -1,23 +1,23 @@
 <?php
 
-function et_pb_get_text_sizes() {
-    $text_size = array(
+function caweb_get_text_sizes( $exclude = array() ) {
+    $default_text_size = array(
         'p' => 'Paragraph',
         'h1' => 'H1',
         'h2' => 'H2',
         'h3' => 'H3',
-        'h4' => 'H4'
+        'h4' => 'H4',
+        'h5' => 'H5',
+        'h6' => 'H6',
     );
 
-    $output = '';
-
-    foreach ($text_size as $key => $opt) {
-        $output .= sprintf('<option value="%1$s">%2$s</option>', $key, $opt);
+    foreach( $exclude as $i => $size ){
+        if( isset($default_text_size[$size])){
+            unset($default_text_size[$size]);
+        }
     }
-
-    $output = sprintf('<select>%1$s</select>', $output);
-
-    return $text_size;
+    
+    return $default_text_size;
 }
 
 // Creates a list of checkboxes of all tags
