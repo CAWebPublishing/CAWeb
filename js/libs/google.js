@@ -56,25 +56,6 @@ if("" !== args.caweb_multi_ga){
 				// Close search when close icon is clicked
 				$('div.gsc-clear-button').on('click', function() {	removeSearchResults();   });
             
-			$('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents('.nav-item').on('click', function(e) {
-					$searchText.focus().trigger('focus')
-            if( true == args.ca_frontpage_search_enabled ){
-            // let the user know the input box is where they should search
-						$(".primary #head-search").addClass('play-animation').one(
-						'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-						function() {
-							$(this).removeClass('play-animation');
-
-						});           
-             }else{
-                  addSearchResults();
-            }
-					
-
-
-				});
-
-
 				// Helpers
 				function addSearchResults() {
 					$body.addClass("active-search");
