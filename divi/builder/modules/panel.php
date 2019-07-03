@@ -12,6 +12,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
         $this->slug = 'et_pb_ca_panel';
 
         $this->main_css_element = '%%order_class%%';
+        $this->vb_support = 'on';
 
         $this->settings_modal_toggles = array(
             'general' => array(
@@ -206,7 +207,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         $this->slug = 'et_pb_ca_fullwidth_panel';
 
         $this->fullwidth       = true;
-
+        $this->vb_support = 'on';
         $this->main_css_element = '%%order_class%%';
 
         $this->settings_modal_toggles = array(
