@@ -458,7 +458,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 																														</div>
 																											
 																											<div id="alert-banners" class="<?php print 'alert-banners' == $selected_tab ? '' : 'hidden' ?>">
-																												<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner"></a></h1>
+																												<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner (Note: This feature has a known WordPress issue when using the Chrome Browser.)"></a></h1>
 																												<ul id="cawebAlerts">
 																													<?php
 

@@ -154,6 +154,16 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
                 'tab_slug'				=> 'advanced',
                 'toggle_slug'			=> 'header',
             ),
+            'heading_size' => array(
+                'label'             => esc_html__('Header Size', 'et_builder'),
+                'type'              => 'select',
+                'option_category'   => 'configuration',
+                'options' => caweb_get_text_sizes(  array('p', 'h6') ),
+                'default' => 'h2',
+                'description'       => esc_html__('Here you can choose the size for the panel header', 'et_builder'),
+                'tab_slug' => 'advanced',
+                'toggle_slug'				=> 'header',
+            ),
             'section_background_color' => array(
                 'label'             => esc_html__('Background Color', 'et_builder'),
                 'type'              => 'color-alpha',
@@ -172,6 +182,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
     function render($unprocessed_props, $content = null, $render_slug) {
         $featured_image_button 		= $this->props['featured_image_button'];
         $heading_align 						= $this->props['heading_align'];
+        $heading_size 						= $this->props['heading_size'];
         $image_pos 								= $this->props['left_right_button'];
         $section_image 						= $this->props['section_image'];
         $section_heading 					= $this->props['section_heading'];
@@ -186,10 +197,12 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
         $this->add_classname('section');
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-        $section_bg_color = ("" !=  $section_background_color ?
-			sprintf(' style="background: %1$s;"', $section_background_color) : '');
+        $section_bg_color = ! empty( $section_background_color ) ?
+			sprintf(' style="background: %1$s;"', $section_background_color) : '';
 
-        $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
+        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
+        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
+        $header = "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
 
         $display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
@@ -204,18 +217,12 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
             $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
-            $heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
 
-            $section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, $content, $display_button);
+            $section = sprintf('<div class="col-md-15">%1$s%2$s%3$s</div>', $header, $content, $display_button);
 
             $body= sprintf('%1$s%2$s', $display_image, $section);
         } else {
-            $heading_style = ( ! empty($heading_text_color) ?
-										sprintf(' style="%1$s" ', $heading_text_color) : '');
-
-            $body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-					$heading_style, $heading_align, $section_heading, $content, $display_button);
+            $body = sprintf('<div>%1$s%2$s%3$s</div>', $header, $content, $display_button);
         }
         $output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $body);
 
@@ -374,6 +381,16 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
                 'tab_slug'				=> 'advanced',
                 'toggle_slug'			=> 'header',
             ),
+            'heading_size' => array(
+                'label'             => esc_html__('Header Size', 'et_builder'),
+                'type'              => 'select',
+                'option_category'   => 'configuration',
+                'options' => caweb_get_text_sizes(  array('p', 'h6') ),
+                'default' => 'h2',
+                'description'       => esc_html__('Here you can choose the size for the panel header', 'et_builder'),
+                'tab_slug' => 'advanced',
+                'toggle_slug'				=> 'header',
+            ),
             'section_background_color' => array(
                 'label'             => esc_html__('Background Color', 'et_builder'),
                 'type'              => 'color-alpha',
@@ -392,6 +409,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
     function render($unprocessed_props, $content = null, $render_slug) {
         $featured_image_button 		= $this->props['featured_image_button'];
         $heading_align 						= $this->props['heading_align'];
+        $heading_size 						= $this->props['heading_size'];
         $image_pos 								= $this->props['left_right_button'];
         $section_image 						= $this->props['section_image'];
         $section_heading 					= $this->props['section_heading'];
@@ -409,8 +427,10 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
         $section_bg_color = ("" !=  $section_background_color ?
 			sprintf(' style="background: %1$s;"', $section_background_color) : '');
 
-        $heading_text_color = ("" != $heading_text_color ? sprintf(' color: %1$s; ', $heading_text_color) : '');
-
+        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
+        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
+        $header = "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
+    
         $display_button = ($show_more_button == "on" && $section_link != "" ?
 			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
 
@@ -424,18 +444,11 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
             $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
                 $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
 
-            $heading_style =("" != $heading_text_color ? sprintf(' style="%1$s" ', $heading_text_color) : '');
-
-            $section = sprintf('<div class="col-md-15" ><h2%1$s>%2$s</h2>%3$s%4$s</div>',
-					$heading_style, $section_heading, $content, $display_button);
+            $section = sprintf('<div class="col-md-15">%1$s%2$s%3$s</div>', $header, $content, $display_button);
 
             $body= sprintf('%1$s%2$s', $display_image, $section);
         } else {
-            $heading_style = ( ! empty($heading_text_color) ?
-										sprintf(' style="%1$s" ', $heading_text_color) : '');
-
-            $body = sprintf('<div><h2%1$s class="text-%2$s">%3$s</h2>%4$s%5$s</div>',
-					$heading_style, $heading_align, $section_heading, $content, $display_button);
+            $body = sprintf('<div>%1$s%2$s%3$s</div>', $header, $content, $display_button);
         }
         $output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $body);
 
