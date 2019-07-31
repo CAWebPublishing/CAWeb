@@ -1,5 +1,5 @@
 /**
- * CA State Template v5 -  @version v5.0.8 -  7/8/2019 
+ * CA State Template v5 -  @version v5.0.10 -  7/30/2019 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
 /*! modernizr (Custom Build) | MIT *
  * https://modernizr.com/download/?-flexbox-setclasses !*/
@@ -14946,9 +14946,9 @@ $(document).ready(function () {
         $navItemsWithSubs.each(function () {
 
             $(this).find('.first-level-link').addClass('has-sub');
-
+            var linktext = $(this).find('.first-level-link').text();
             // create toggle object
-            var $toggleSubNav = $('<button class="mobile-control toggle-sub-nav closed"><div class="ca-gov-icon-arrow-next rotate" aria-hidden="true"></div><span class="sr-only">Sub Menu Toggle</span></button>');
+            var $toggleSubNav = $('<button class="mobile-control toggle-sub-nav closed"><div class="ca-gov-icon-arrow-next rotate" aria-hidden="true"></div><span class="sr-only">' + linktext + ' sub menu toggle</span></button>');
             // add toggle object to DOM
             $(this).find('.sub-nav').before($toggleSubNav);
 
@@ -15017,6 +15017,8 @@ $(document).ready(function () {
         $(this).toggleClass("down");
     });
     
+    
+
 
 
     // allow dropdown on focus
@@ -15054,6 +15056,20 @@ $(document).ready(function () {
         e.stopPropagation();
     });
     //*/
+    // Hide navigation from screen reader in mobile
+    if (mobileView()) {
+        $navigation.attr("aria-hidden", "true");
+
+        // Prevent focusing/tabbing thru links in mobile if nav is closed
+        if ($navigation.hasClass("mobile-closed")) {
+            $("#nav_list a").attr("tabindex", "-1");
+            $("#nav_list button").attr("tabindex", "-1");
+        }
+        else {
+            $("#nav_list a").removeAttr("tabindex");
+            $("#nav_list button").removeAttr("tabindex");
+        }
+    }
 
 
 });
@@ -15063,9 +15079,10 @@ $(document).ready(function () {
             $.fn.slideUpTransition = function () {
                 return this.each(function () {
                     var $el = $(this);
-                    $el.css("max-height", "0");
-                    $el.addClass("mobile-closed");
-
+                    $el.css("max-height", "0").addClass("mobile-closed").attr("aria-hidden", "true");
+                    $(".first-level-link").attr("tabindex", "-1");
+                    $(".top-level-nav li button").attr("tabindex", "-1");
+                   
                 });
             };
 
@@ -15073,7 +15090,9 @@ $(document).ready(function () {
                 return this.each(function () {
                     var $el = $(this);
                     $el.removeClass("mobile-closed");
-
+                    $el.removeAttr("aria-hidden");
+                    $(".first-level-link").removeAttr("tabindex");
+                    $(".top-level-nav li button").removeAttr("tabindex");
                     // temporarily make visible to get the size
                     $el.css("max-height", "none");
                     var height = $el.outerHeight();
@@ -15103,7 +15122,8 @@ $(document).ready(function () {
                     $subel.addClass("subnav-closed");
                     $subel.attr('aria-expanded', 'false');
                     $subel.attr('aria-hidden', 'true');
-                    $("#navigation").css({ "max-height": sumheight })
+                    $subel.find("a").attr("tabindex", "-1");
+                    $("#navigation").css({ "max-height": sumheight });
                 });
             };
 
@@ -15111,7 +15131,7 @@ $(document).ready(function () {
                 return this.each(function () {
                     var $subel = $(this);
                     $subel.removeClass("subnav-closed");
-
+                    $subel.find("a").removeAttr("tabindex");
                     // temporarily make visible to get the size
                     $subel.css("max-height", "none");
                     var subheight = $subel.outerHeight();
@@ -15126,7 +15146,7 @@ $(document).ready(function () {
                         });
                         $subel.attr('aria-expanded', 'true');
                         $subel.attr('aria-hidden', 'false');
-                        $("#navigation").css({ "max-height": sumheight })
+                        $("#navigation").css({ "max-height": sumheight });
                     }, 1);
                 });
             };
@@ -16012,6 +16032,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     // Navigation Reset function
     function NavReset() {
         $(".sub-nav").removeClass("open");
@@ -16023,15 +16045,19 @@ $(document).ready(function () {
         $(".first-level-link").attr("aria-expanded", false);
         $("#navigation").addClass("mobile-closed");
         if ($(window).width() < 768) {
-            $("#navigation").css("max-height", "0");
+            $("#navigation").css("max-height", "0").attr("aria-hidden", "true");
             $('.sub-nav').slideUpTransitionSub();
             $('#navigation').slideUpTransition();
             // 
             $(".rotate").removeClass('down');
+            $("#nav_list a").attr("tabindex", "-1");
+            $("#nav_list button").attr("tabindex", "-1");
         }
         else {
-            $("#navigation").removeAttr("style");
+            $("#navigation").removeAttr("style aria-hidden");
             $(".sub-nav").removeAttr("style");
+            $("#nav_list a").removeAttr("tabindex");
+            $("#nav_list button").removeAttr("tabindex");
         }
 
         $(".toggle-sub-nav").removeClass("open");
@@ -16888,22 +16914,15 @@ $(document).ready(function () {
     var searchReset = $("#head-search #Search .gsc-clear-button");
     var featuredsearch = $("#head-search").hasClass("featured-search");
     var searchactive = $("#head-search").hasClass("active");
+    var searchlabel = $("#SearchInput");
     var $globalHeader = $('.global-header');
     var searchbox = $(".search-container:not(.featured-search)");
-    var searchlabel = $("#SearchInput");
-
     var headerHeight = $globalHeader.innerHeight();
     var utility = $(".utility-header");
     var utilityHeight = utility.innerHeight();
- 
     var alertBanner = $(".alert-banner");
+    var alertClose = $(".alert-banner .close");
     var alertbannerHeight = 0;
-
-    $.each(alertBanner, function () {
-        alertbannerHeight += $(this).innerHeight();
-    });
-    
-    var searchtop = headerHeight - utilityHeight - alertbannerHeight;
 
     var $body = $("body");
     var $specialIcon =
@@ -16913,8 +16932,7 @@ $(document).ready(function () {
             $(this).tab('show').addClass('active');
             e.preventDefault()
         });
-
-    // Unfreeze search width when blured.
+    
     // Unfreeze search width when blured.
     $searchText.on('blur focus', function (e) {
         $(this).parents("#head-search").removeClass("focus");
@@ -16926,6 +16944,23 @@ $(document).ready(function () {
             addSearchResults();
         }
     });
+
+
+
+    //  search box top position
+    if (!mobileView()) {
+        // taking into account multiple alert banners
+        $.each(alertBanner, function () {
+            alertbannerHeight += $(this).innerHeight() + 2;
+        });
+        // calulation search box top position
+        var searchtop = headerHeight - utilityHeight - alertbannerHeight + 5;
+        if (!mobileView()) {
+            searchbox.css({
+                'top': Math.max(searchtop, 87)
+            });
+        }
+    } 
 
     // have the close button remove search results and the applied classes
     $resultsContainer.find('.close').on('click', removeSearchResults);
@@ -16958,6 +16993,7 @@ $(document).ready(function () {
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
             searchlabel.removeAttr('aria-hidden');
+            $searchContainer.removeAttr('aria-hidden');
 
         }
         else {
@@ -16976,6 +17012,7 @@ $(document).ready(function () {
             searchlabel.attr({
                 "aria-hidden": 'true'
             });
+            $searchContainer.attr("aria-hidden", "true");
         }
 
         if (featuredsearch) {
@@ -16983,6 +17020,7 @@ $(document).ready(function () {
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
             searchlabel.removeAttr('aria-hidden');
+            $searchContainer.removeAttr('aria-hidden');
         }
 
         if (mobileView() && featuredsearch) { $('.search-container').toggleClass('active'); }
@@ -16997,7 +17035,34 @@ $(document).ready(function () {
 
     });
 
-    // SEE navitgation.js for mobile click handlers
+    // Make Search form tabable if it's featured	
+    if ($('#head-search').hasClass('featured-search')) {
+        searchInput.removeAttr('tabindex aria-hidden');
+        searchSubmit.removeAttr('tabindex aria-hidden');
+        searchReset.removeAttr('tabindex aria-hidden');
+        searchlabel.removeAttr('aria-hidden');
+        $searchContainer.removeAttr('aria-hidden');
+    } else {
+        searchInput.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchSubmit.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchReset.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchlabel.attr({
+            "aria-hidden": 'true'
+        });
+        $searchContainer.attr("aria-hidden", "true");
+
+    }
+
+
 
     // Close search when close icon is clicked
     $('.close-search').on('click', removeSearchResults);
@@ -17021,7 +17086,7 @@ $(document).ready(function () {
     function removeSearchResults() {
         $body.removeClass("active-search");
         $searchText.val('');
-        $searchContainer.removeClass('active');
+        $searchContainer.removeClass('active').attr("aria-hidden", "true");
         $resultsContainer.removeClass('visible');
         $('.ask-group').removeClass('fade-out');
 
@@ -17054,43 +17119,12 @@ $(document).ready(function () {
 
 
 
-    // Make Search form tabable if it's featured
-    if ($('#head-search').hasClass('featured-search')) {
-        searchInput.removeAttr('tabindex aria-hidden');
-        searchSubmit.removeAttr('tabindex aria-hidden');
-        searchReset.removeAttr('tabindex aria-hidden');
-        searchlabel.removeAttr('aria-hidden');
-    } else {
-        searchInput.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-            });
-        searchSubmit.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-            });
-        searchReset.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-        });
-        searchlabel.attr({
-            "aria-hidden": 'true'
-        });
-    }
-
-    //  search box top position
-    if (!mobileView()) {
-        searchbox.css({
-            'top': Math.max(searchtop, 87)
-        });
-    }
-
-
 
     $('.toggle-search').on('click', function () {
         $('.search-container').toggleClass('active');
         var searchactive = $("#head-search").hasClass("active");
         if (searchactive) {
+            $searchContainer.removeAttr('aria-hidden');
             searchInput.removeAttr('tabindex aria-hidden');
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
@@ -17117,6 +17151,7 @@ $(document).ready(function () {
             searchlabel.attr({
                 "aria-hidden": 'true'
             });
+            $searchContainer.attr("aria-hidden", "true");
         }
         if (!$('#navigation').hasClass('active')) {
             $('#navigation').addClass('mobile-closed');
@@ -17124,36 +17159,45 @@ $(document).ready(function () {
     });
 
 
+    // on alert close event
+    $.each(alertClose, function () {
+        $(this).on("click", function () {
+            searchTop();
+        });
 
+    });
 
 });
 
+
 //  search box top position if browser window is resized
 $(window).on('resize', function () {
+    searchTop();
+});
+
+
+function searchTop() {
+    var searchlabel = $("#SearchInput");
     var $globalHeader = $('.global-header');
     var searchbox = $(".search-container:not(.featured-search)");
     var headerHeight = $globalHeader.innerHeight();
     var utility = $(".utility-header");
     var utilityHeight = utility.innerHeight();
-
     var alertBanner = $(".alert-banner");
-
+    var alertClose = $(".alert-banner .close");
+    var alertbannerHeight = 0;
+    // taking into account multiple alert banners
     $.each(alertBanner, function () {
-        alertbannerHeight += $(this).innerHeight();
+        alertbannerHeight += $(this).innerHeight() + 2;
     });
-
-    var searchtop = headerHeight - utilityHeight - alertbannerHeight;
-
-
-   
+    // calulation search box top position
+    var searchtop = headerHeight - utilityHeight - alertbannerHeight + 5;
     if (!mobileView()) {
         searchbox.css({
             'top': Math.max(searchtop, 87)
         });
-        
     }
-});
-
+}
 
 function mobileView() {
     return $('.global-header .mobile-controls').css('display') !== "none"; // mobile view uses arrow to show subnav instead of first touch
