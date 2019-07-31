@@ -111,6 +111,16 @@ jQuery(document).ready(function() {
            
        }
         
-   }); // End of window load
+
+       /*
+        Remove type attribute from styles and scripts
+       */
+        $('style').each(function(index, element) {
+            $(element).removeAttr('type', '');
+        });  
+        $('script').each(function(index, element) {
+            $(element).removeAttr('type', '');
+        });   
+    }); // End of window load
 
 });
