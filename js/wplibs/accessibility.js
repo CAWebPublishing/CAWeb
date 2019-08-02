@@ -111,7 +111,48 @@ jQuery(document).ready(function() {
            
        }
         
+        /*
+        Google Recaptcha Accessibility 
+        Retrieve recaptcha textareas
+        */
+        var g_recaptcha_response_textarea = $('#g-recaptcha-response')
+            
+        if( g_recaptcha_response_textarea.length ){
+            g_recaptcha_response_textarea.each(function(index, element) {
+                $(element).attr('aria-label', 'Google Recaptcha Response')
+            });      
+        }	
 
+        var g_recaptcha_iframe = $('.grecaptcha-logo iframe'); 
+               
+       if( g_recaptcha_iframe.length ){
+            g_recaptcha_iframe.each(function(index, element) {
+               $(element).removeAttr('frameborder', '');
+               $(element).removeAttr('scrolling', '');
+               $(element).attr('title', 'Google Recaptcha');
+               
+           });    
+       }
+
+       var g_recaptcha_challenge_iframe = $('iframe[title="recaptcha challenge"]');
+       if( g_recaptcha_challenge_iframe.length ){
+            g_recaptcha_challenge_iframe.each(function(index, element) {
+                $(element).removeAttr('frameborder', '');
+                $(element).removeAttr('scrolling', '');
+            });    
+        }
+
+         /* 
+        Tabby Response Accessibility 
+        Retrieve tablist 
+        */
+        var tabby_response_tabs = $('ul.responsive-tabs__list li')
+            
+        if( tabby_response_tabs.length ){
+            tabby_response_tabs.each(function(index, element) {
+                $(element).attr('aria-label', $(element).html());
+            });      
+        }
        /*
         Remove type attribute from styles and scripts
        */
