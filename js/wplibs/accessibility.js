@@ -1,3 +1,4 @@
+// Last update 8/5/2019 @ 3:20pm
 jQuery(document).ready(function() {
     /* -----------------------------------------
    Utility Header
@@ -151,7 +152,30 @@ jQuery(document).ready(function() {
         if( tabby_response_tabs.length ){
             tabby_response_tabs.each(function(index, element) {
                 $(element).attr('aria-label', $(element).html());
+
+                $(element).on( "keyup", function(e){
+                    if( e.keyCode == 13 ){ // enter
+                        resetTabbyFocus(element);
+                    }
+                });
+                
+                $(element).on( "click", function(){
+                    resetTabbyFocus(element);
+                });
             });      
+
+            function resetTabbyFocus(element){
+                var panel = $(element).attr('aria-controls');
+                var firstFocusable = $("#" + panel).find(":focusable")[0]
+                $(firstFocusable).focus();
+
+                $(firstFocusable).on( "keydown", function(e){
+                    if( e.shiftKey && e.keyCode == 9 ){ // shift+tab
+                        $(element).next().focus();
+                    }
+                });
+
+            }
         }
        /*
         Remove type attribute from styles and scripts
