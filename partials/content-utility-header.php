@@ -21,8 +21,10 @@
                   $social_share = caweb_get_site_options('social');
 
                   foreach ($social_share as $opt) {
-                  	$share_email = 'ca_social_email' === $opt ? true : false;
-                  	$mailto = $share_email ? esc_attr(sprintf('mailto:?subject=%1$s | %2$s&body=%3$s', get_the_title(), get_bloginfo('name'), get_permalink())) : '';
+                    $share_email = 'ca_social_email' === $opt ? true : false;
+                    $sub = rawurlencode( sprintf('%1$s | %2$s', get_the_title(), get_bloginfo('name') ) );
+                    $body = rawurlencode( get_permalink() );
+                  	$mailto = $share_email ? sprintf('mailto:?subject=%1$s&body=%2$s', $sub, $body ) : '';
 
                   	if (get_option($opt . '_header') && ($share_email || "" !== get_option($opt))) {
                   		$share = substr($opt, 10);
