@@ -1,4 +1,4 @@
-// Last update 8/5/2019 @ 3:20pm
+// Last update 8/15/2019 @ 8:50am
 jQuery(document).ready(function() {
     /* -----------------------------------------
    Utility Header
@@ -147,10 +147,11 @@ jQuery(document).ready(function() {
         Tabby Response Accessibility 
         Retrieve tablist 
         */
-        var tabby_response_tabs = $('ul.responsive-tabs__list li')
+        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs')
             
         if( tabby_response_tabs.length ){
-            tabby_response_tabs.each(function(index, element) {
+
+            $(tabby_response_tabs).find('ul.responsive-tabs__list li').each(function(index, element) {
                 $(element).attr('aria-label', $(element).html());
 
                 $(element).on( "keyup", function(e){
@@ -162,11 +163,15 @@ jQuery(document).ready(function() {
                 $(element).on( "click", function(){
                     resetTabbyFocus(element);
                 });
+
+                var panel = $(element).attr('aria-controls');
+                $("#" + panel).attr('tabindex', '0');
             });      
 
             function resetTabbyFocus(element){
                 var panel = $(element).attr('aria-controls');
-                var firstFocusable = $("#" + panel).find(":focusable")[0]
+                var firstFocusable = $("#" + panel); 
+
                 $(firstFocusable).focus();
 
                 $(firstFocusable).on( "keydown", function(e){
