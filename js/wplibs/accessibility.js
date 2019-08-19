@@ -1,3 +1,4 @@
+// Last update 8/15/2019 @ 8:50am
 jQuery(document).ready(function() {
     /* -----------------------------------------
    Utility Header
@@ -111,6 +112,85 @@ jQuery(document).ready(function() {
            
        }
         
-   }); // End of window load
+        /*
+        Google Recaptcha Accessibility 
+        Retrieve recaptcha textareas
+        */
+        var g_recaptcha_response_textarea = $('#g-recaptcha-response')
+            
+        if( g_recaptcha_response_textarea.length ){
+            g_recaptcha_response_textarea.each(function(index, element) {
+                $(element).attr('aria-label', 'Google Recaptcha Response')
+            });      
+        }	
+
+        var g_recaptcha_iframe = $('.grecaptcha-logo iframe'); 
+               
+       if( g_recaptcha_iframe.length ){
+            g_recaptcha_iframe.each(function(index, element) {
+               $(element).removeAttr('frameborder', '');
+               $(element).removeAttr('scrolling', '');
+               $(element).attr('title', 'Google Recaptcha');
+               
+           });    
+       }
+
+       var g_recaptcha_challenge_iframe = $('iframe[title="recaptcha challenge"]');
+       if( g_recaptcha_challenge_iframe.length ){
+            g_recaptcha_challenge_iframe.each(function(index, element) {
+                $(element).removeAttr('frameborder', '');
+                $(element).removeAttr('scrolling', '');
+            });    
+        }
+
+         /* 
+        Tabby Response Accessibility 
+        Retrieve tablist 
+        */
+        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs')
+            
+        if( tabby_response_tabs.length ){
+
+            $(tabby_response_tabs).find('ul.responsive-tabs__list li').each(function(index, element) {
+                $(element).attr('aria-label', $(element).html());
+
+                $(element).on( "keyup", function(e){
+                    if( e.keyCode == 13 ){ // enter
+                        resetTabbyFocus(element);
+                    }
+                });
+                
+                $(element).on( "click", function(){
+                    resetTabbyFocus(element);
+                });
+
+                var panel = $(element).attr('aria-controls');
+                $("#" + panel).attr('tabindex', '0');
+            });      
+
+            function resetTabbyFocus(element){
+                var panel = $(element).attr('aria-controls');
+                var firstFocusable = $("#" + panel); 
+
+                $(firstFocusable).focus();
+
+                $(firstFocusable).on( "keydown", function(e){
+                    if( e.shiftKey && e.keyCode == 9 ){ // shift+tab
+                        $(element).next().focus();
+                    }
+                });
+
+            }
+        }
+       /*
+        Remove type attribute from styles and scripts
+       */
+        $('style').each(function(index, element) {
+            $(element).removeAttr('type', '');
+        });  
+        $('script').each(function(index, element) {
+            $(element).removeAttr('type', '');
+        });   
+    }); // End of window load
 
 });
