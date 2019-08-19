@@ -26,7 +26,7 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 
 ?>
 
-<header role="banner" id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
+<header id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
