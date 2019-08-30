@@ -183,13 +183,13 @@ jQuery(document).ready(function() {
             }
         }
        /*
-        Remove type attribute from styles and scripts
+        Removing type attribute from styles and scripts cause issue with IE/Edge
        */
         $('style').each(function(index, element) {
-            $(element).removeAttr('type', '');
+            //$(element).removeAttr('type', '');
         });  
         $('script').each(function(index, element) {
-            $(element).removeAttr('type', '');
+            //$(element).removeAttr('type', '');
         });   
     }); // End of window load
 
