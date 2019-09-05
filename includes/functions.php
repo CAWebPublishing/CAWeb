@@ -543,7 +543,7 @@ if ( ! function_exists('caweb_get_excerpt')) {
 		}
 
 		$x = new DOMDocument;
-		$x->loadHTML(sprintf('<div id="post-%1$s-excerpt">%2$s</div>', $p, trim(implode("", $excerpt))));
+		$x->loadHTML(sprintf('<div class="post-%1$s-excerpt">%2$s</div>', $p, trim(implode("", $excerpt))));
 		$element = $x->getElementById("post-$p-excerpt");
 
 		return html_entity_decode($x->saveHTML($element));
