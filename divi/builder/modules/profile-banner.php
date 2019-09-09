@@ -23,6 +23,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'profilename' => esc_html__('Profile Name', 'et_builder'),
+					'jobtitle' => esc_html__('Job Title', 'et_builder'),
+					'profilelink' => esc_html__('Profile Link', 'et_builder'),
 					'body'   => esc_html__('Body', 'et_builder'),
 					'text' => array(
 						'title'    => esc_html__('Text', 'et_builder'),
@@ -112,15 +114,81 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'description'       => esc_html__('Here you can define a custom color for the profile name.', 'et_builder'),
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'profilename',
-            ),
-            'profile_heading_size' => array(
-				'label'           => esc_html__( 'Font Size', 'et_builder' ),
-				'description'     => esc_html__( 'Here you can choose the font size for the profile name.', 'et_builder' ),
+			),
+			'profile_heading_size' => array(
+				'label'           => esc_html__('Font Size', 'et_builder'),
+				'description'     => esc_html__('Here you can choose the font size for the profile name.', 'et_builder'),
 				'type'            => 'range',
 				'option_category' => 'layout',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'profilename',
-				'allowed_units'   => array( 'pt', 'rem', 'px' ),
+				'allowed_units'   => array('pt', 'rem', 'px'),
+				'default'         => '0.9rem',
+				'default_unit'    => 'rem',
+				'default_on_front'=> '',
+				'allow_empty'     => true,
+				'range_settings'  => array(
+					'min'  => '0',
+					'max'  => '100',
+					'step' => '1',
+				),
+				'responsive'      => true,
+			),
+			'job_heading_font' => array(
+				'label'             => esc_html__('Font', 'et_builder'),
+				'type'              => 'font',
+				'description'       => esc_html__('Here you can choose the font for the job title.', 'et_builder'),
+				'tab_slug' => 'advanced',
+				'toggle_slug'				=> 'jobtitle',
+			),
+			'job_name_color' => array(
+				'label'             => esc_html__('Font Color', 'et_builder'),
+				'type'              => 'color-alpha',
+				'description'       => esc_html__('Here you can define a custom color for the job title.', 'et_builder'),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'jobtitle',
+			),
+			'job_heading_size' => array(
+				'label'           => esc_html__('Font Size', 'et_builder'),
+				'description'     => esc_html__('Here you can choose the font size for the job title.', 'et_builder'),
+				'type'            => 'range',
+				'option_category' => 'layout',
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'jobtitle',
+				'allowed_units'   => array('pt', 'rem', 'px'),
+				'default'         => '0.9rem',
+				'default_unit'    => 'rem',
+				'default_on_front'=> '',
+				'allow_empty'     => true,
+				'range_settings'  => array(
+					'min'  => '0',
+					'max'  => '100',
+					'step' => '1',
+				),
+				'responsive'      => true,
+			),
+			'profile_link_heading_font' => array(
+				'label'             => esc_html__('Font', 'et_builder'),
+				'type'              => 'font',
+				'description'       => esc_html__('Here you can choose the font for the profile link.', 'et_builder'),
+				'tab_slug' => 'advanced',
+				'toggle_slug'				=> 'profilelink',
+			),
+			'profile_link_name_color' => array(
+				'label'             => esc_html__('Font Color', 'et_builder'),
+				'type'              => 'color-alpha',
+				'description'       => esc_html__('Here you can define a custom color for the profile link.', 'et_builder'),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'profilelink',
+			),
+			'profile_link_heading_size' => array(
+				'label'           => esc_html__('Font Size', 'et_builder'),
+				'description'     => esc_html__('Here you can choose the font size for the profile link.', 'et_builder'),
+				'type'            => 'range',
+				'option_category' => 'layout',
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'profilelink',
+				'allowed_units'   => array('pt', 'rem', 'px'),
 				'default'         => '0.9rem',
 				'default_unit'    => 'rem',
 				'default_on_front'=> '',
@@ -161,6 +229,12 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		$profile_heading_font           = $this->props['profile_heading_font'];
 		$profile_name_color                = $this->props['profile_name_color'];
 		$profile_heading_size                    = $this->props['profile_heading_size'];
+		$job_heading_font           = $this->props['job_heading_font'];
+		$job_name_color                = $this->props['job_name_color'];
+		$job_heading_size                    = $this->props['job_heading_size'];
+		$profile_link_heading_font           = $this->props['profile_link_heading_font'];
+		$profile_link_name_color                = $this->props['profile_link_name_color'];
+		$profile_link_heading_size                    = $this->props['profile_link_heading_size'];
 
 		$this->add_classname('profile-banner-wrapper');
 		$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
@@ -182,23 +256,35 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			$image = sprintf('<div class="profile-banner-img-wrapper"><img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/></div>', $portrait_url, $portrait_alt);
 		}
 
-        $profile_name_styles = ! empty( $profile_name_color ) ? "color: $profile_name_color;" : '';
-        $profile_name_styles .= ! empty( $profile_heading_size ) ? "font-size: $profile_heading_size;" : '';
-        
-        if( !empty( $profile_heading_font ) ){
+		$profile_name_styles = ! empty($profile_name_color) ? "color: $profile_name_color;" : '';
+		$profile_name_styles .= ! empty($profile_heading_size) ? "font-size: $profile_heading_size;" : '';
+		$profile_name_styles .= ! empty($profile_heading_font) ? $this->create_inline_font_styles($profile_heading_font) : '';
+		
+		$job_title_styles = ! empty($job_name_color) ? "color: $job_name_color;" : '';
+		$job_title_styles .= ! empty($job_heading_size) ? "font-size: $job_heading_size;" : '';
+		$job_title_styles .= ! empty($job_heading_font) ? $this->create_inline_font_styles($job_heading_font) : '';
+		
+		$profile_link_styles = ! empty($profile_link_name_color) ? "color: $profile_link_name_color;" : '';
+		$profile_link_styles .= ! empty($profile_link_heading_size) ? "font-size: $profile_link_heading_size;" : '';
+		$profile_link_styles .= ! empty($profile_link_heading_font) ? $this->create_inline_font_styles($profile_link_heading_font) : '';
+		
+		$job_title = sprintf('<div class="banner-subtitle"%1$s>%2$s</div>',
+            ! empty($job_title_styles) ? sprintf(' style="%1$s"', $job_title_styles) : '', $job_title);
+	
+		$name = sprintf('<div class="banner-title"%1$s>%2$s</div>',
+            ! empty($profile_name_styles) ? sprintf(' style="%1$s"', $profile_name_styles) : '', $name);
+	
+		$banner_link = sprintf('<div class="banner-link"><a%1$s href="%2$s">%3$s</a></div>',
+		! empty($profile_link_styles) ? sprintf(' style="%1$s"', $profile_link_styles) : '', $url, $profile_link);
 
-        }
-        
-        $job_title = sprintf('<div class="banner-subtitle"%1$s>%2$s</div>', 
-            !empty($profile_name_styles) ? sprintf(' style="%1$s"', $profile_name_styles ) : '', $job_title);
-        
-        $name = sprintf('<div class="banner-title">%1$s</div>', $name);
-
-		$output = sprintf('<div%1$s%2$s><div class="profile-banner%3$s"><div class="inner"%4$s>%5$s%6$s%7$s<div class="banner-link"><a href="%8$s">%9$s</a></div></div></div></div>', $this->module_id(), $class, $round_class, $inline_image, $image,  $job_title, $name, $url, $profile_link);
+		$output = sprintf('<div%1$s%2$s><div class="profile-banner%3$s"><div class="inner"%4$s>%5$s%6$s%7$s%8$s</div></div></div>', $this->module_id(), $class, $round_class, $inline_image, $image, $job_title, $name, $banner_link);
 
 		return $output;
 	}
+
+	 
 }
+
 new ET_Builder_Module_Profile_Banner;
 
 ?>
