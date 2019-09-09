@@ -146,6 +146,48 @@ function caweb_template_colors() {
 	return $color;
 }
 
+function caweb_font_sizes($exclude = array(), $values = false) {
+	$sizes = array(
+		8 => "8pt",
+		9 => "9pt",
+		10 => "10pt",
+		11 => "11pt",
+		12 => "12pt",
+		13 => "13pt",
+		14 => "14pt",
+		15 => "15pt",
+		16 => "16pt",
+		17 => "17pt",
+		18 => "18pt",
+		19 => "19pt",
+		20 => "20pt",
+		21 => "21pt",
+		22 => "22pt",
+		23 => "23pt",
+		24 => "24pt",
+		25 => "25pt",
+		26 => "26pt",
+		27 => "27pt",
+		28 => "28pt",
+		29 => "29pt",
+		30 => "30pt",
+		31 => "31pt",
+		32 => "32pt",
+		33 => "33pt",
+		34 => "34pt",
+		35 => "35pt",
+		36 => "36pt"
+	);
+
+	foreach ($exclude as $i => $size) {
+		if (isset($sizes[$size])) {
+			unset($sizes[$size]);
+		}
+	}
+
+	return $values ? array_values($sizes) : $sizes;
+}
+
 function caweb_tiny_mce_settings($settings = array()) {
 	$styles = array();
 	$caweb_tiny_mce_init = apply_filters('tiny_mce_before_init', array(), array());
@@ -543,7 +585,7 @@ if ( ! function_exists('caweb_get_excerpt')) {
 		}
 
 		$x = new DOMDocument;
-		$x->loadHTML(sprintf('<div id="post-%1$s-excerpt">%2$s</div>', $p, trim(implode("", $excerpt))));
+		$x->loadHTML(sprintf('<div class="post-%1$s-excerpt">%2$s</div>', $p, trim(implode("", $excerpt))));
 		$element = $x->getElementById("post-$p-excerpt");
 
 		return html_entity_decode($x->saveHTML($element));

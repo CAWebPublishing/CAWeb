@@ -308,6 +308,7 @@ $ = jQuery.noConflict();
             var frame = $(element).find('iframe');
             frame.attr('title', 'Divi Video Module IFrame');
             $(frame).removeAttr('frameborder');
+            $(frame).attr('id', 'fitvid' + index);
         });      
     }
 
