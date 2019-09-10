@@ -368,7 +368,7 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 		'Google Plus' =>  'ca_social_google_plus', 'Email' => 'ca_social_email',
 		'Flickr' => 'ca_social_flickr', 'Pinterest' => 'ca_social_pinterest',
 		'YouTube' => 'ca_social_youtube', 'Instagram' => 'ca_social_instagram',
-		'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss');
+		'LinkedIn' => 'ca_social_linkedin', 'RSS' => 'ca_social_rss', 'Snapchat' => 'ca_social_snapchat');
 
 	$caweb_social_extra_options = array();
 
