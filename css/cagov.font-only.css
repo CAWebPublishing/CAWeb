@@ -1,12 +1,13 @@
 @font-face {
   font-family: 'CaGov';
-  src:  url('../fonts/CaGov.eot?mg22vn');
-  src:  url('../fonts/CaGov.eot?mg22vn#iefix') format('embedded-opentype'),
-    url('../fonts/CaGov.ttf?mg22vn') format('truetype'),
-    url('../fonts/CaGov.woff?mg22vn') format('woff'),
-    url('../fonts/CaGov.svg?mg22vn#CaGov') format('svg');
+  src:  url('../fonts/CaGov.eot?ooji9f');
+  src:  url('../fonts/CaGov.eot?ooji9f#iefix') format('embedded-opentype'),
+    url('../fonts/CaGov.ttf?ooji9f') format('truetype'),
+    url('../fonts/CaGov.woff?ooji9f') format('woff'),
+    url('../fonts/CaGov.svg?ooji9f#CaGov') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 .et_font_icon li[class^="ca-gov-icon-"]:before,
 .et_font_icon li[class*=" ca-gov-icon-"]:before,
@@ -18,6 +19,7 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
+  line-height: 1;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
@@ -40,15 +42,6 @@ li[class^="et_fb_profile_banner"]::before{
 		content: '\e90b' !important;
 }
 
-.ca-gov-icon-beaker1:before {
-  content: "\c901" !important;
-}
-.ca-gov-icon-beaker2:before {
-  content: "\c902" !important;
-}
-.ca-gov-icon-beaker3:before {
-  content: "\c903" !important;
-}
 .ca-gov-icon-arrow_up:before {
   content: "\21" !important;
 }
@@ -366,6 +359,15 @@ li[class^="et_fb_profile_banner"]::before{
 }
 .ca-gov-icon-header:before {
   content: "\2122" !important;
+}
+.ca-gov-icon-beaker1:before {
+  content: "\c901" !important;
+}
+.ca-gov-icon-beaker2:before {
+  content: "\c902" !important;
+}
+.ca-gov-icon-beaker3:before {
+  content: "\c903" !important;
 }
 .ca-gov-icon-candle-alt:before {
   content: "\c910" !important;
@@ -1680,4 +1682,196 @@ li[class^="et_fb_profile_banner"]::before{
 }
 .ca-gov-icon-video:before {
   content: "\e954" !important;
+}
+.ca-gov-icon-cal-bear:before {
+  content: "\e0f0" !important;
+}
+.ca-gov-icon-biohazard:before {
+  content: "\e918" !important;
+}
+.ca-gov-icon-malware:before {
+  content: "\e919" !important;
+}
+.ca-gov-icon-radiation:before {
+  content: "\e955" !important;
+}
+.ca-gov-icon-chemical-hazard:before {
+  content: "\e956" !important;
+}
+.ca-gov-icon-danger:before {
+  content: "\e957" !important;
+}
+.ca-gov-icon-do-not-sign:before {
+  content: "\e958" !important;
+}
+.ca-gov-icon-earthquake:before {
+  content: "\e959" !important;
+}
+.ca-gov-icon-quake-house:before {
+  content: "\e95a" !important;
+}
+.ca-gov-icon-quake-hazard:before {
+  content: "\e95b" !important;
+}
+.ca-gov-icon-electricity-hazard:before {
+  content: "\e95c" !important;
+}
+.ca-gov-icon-flood:before {
+  content: "\e95d" !important;
+}
+.ca-gov-icon-hazard:before {
+  content: "\e95e" !important;
+}
+.ca-gov-icon-hurricane:before {
+  content: "\e95f" !important;
+}
+.ca-gov-icon-sea-level-rise:before {
+  content: "\e960" !important;
+}
+.ca-gov-icon-severe-weather:before {
+  content: "\e961" !important;
+}
+.ca-gov-icon-stop-fire:before {
+  content: "\e962" !important;
+}
+.ca-gov-icon-stop-hand:before {
+  content: "\e963" !important;
+}
+.ca-gov-icon-tornado:before {
+  content: "\e964" !important;
+}
+.ca-gov-icon-tsunami:before {
+  content: "\e965" !important;
+}
+.ca-gov-icon-volcano:before {
+  content: "\e966" !important;
+}
+.ca-gov-icon-warning-circle:before {
+  content: "\e967" !important;
+}
+.ca-gov-icon-warning-square:before {
+  content: "\e968" !important;
+}
+.ca-gov-icon-tent:before {
+  content: "\e969" !important;
+}
+.ca-gov-icon-campfire:before {
+  content: "\e96a" !important;
+}
+.ca-gov-icon-dam:before {
+  content: "\e96b" !important;
+}
+.ca-gov-icon-download-cloud:before {
+  content: "\e96c" !important;
+}
+.ca-gov-icon-upload-cloud:before {
+  content: "\e96d" !important;
+}
+.ca-gov-icon-sea-level-rise-alt:before {
+  content: "\e96e" !important;
+}
+.ca-gov-icon-tsunami-alt:before {
+  content: "\e96f" !important;
+}
+.ca-gov-icon-collapse-all:before {
+  content: "\e970" !important;
+}
+.ca-gov-icon-sign-language:before {
+  content: "\e971" !important;
+}
+.ca-gov-icon-drag:before {
+  content: "\e972" !important;
+}
+.ca-gov-icon-agriculture:before {
+  content: "\e973" !important;
+}
+.ca-gov-icon-cannabis:before {
+  content: "\e974" !important;
+}
+.ca-gov-icon-angry:before {
+  content: "\e975" !important;
+}
+.ca-gov-icon-happy:before {
+  content: "\e976" !important;
+}
+.ca-gov-icon-visa:before {
+  content: "\e977" !important;
+}
+.ca-gov-icon-mastercard:before {
+  content: "\e978" !important;
+}
+.ca-gov-icon-amexcard:before {
+  content: "\e979" !important;
+}
+.ca-gov-icon-apple-pay:before {
+  content: "\e97a" !important;
+}
+.ca-gov-icon-discovercard:before {
+  content: "\e97b" !important;
+}
+.ca-gov-icon-paypal:before {
+  content: "\e97c" !important;
+}
+.ca-gov-icon-chrome:before {
+  content: "\e97d" !important;
+}
+.ca-gov-icon-firefox:before {
+  content: "\e97e" !important;
+}
+.ca-gov-icon-ie:before {
+  content: "\e97f" !important;
+}
+.ca-gov-icon-opera:before {
+  content: "\e980" !important;
+}
+.ca-gov-icon-safari:before {
+  content: "\e981" !important;
+}
+.ca-gov-icon-bell:before {
+  content: "\e982" !important;
+}
+.ca-gov-icon-bookmark:before {
+  content: "\e983" !important;
+}
+.ca-gov-icon-books:before {
+  content: "\e984" !important;
+}
+.ca-gov-icon-reader:before {
+  content: "\e985" !important;
+}
+.ca-gov-icon-palette:before {
+  content: "\e986" !important;
+}
+.ca-gov-icon-glass:before {
+  content: "\e987" !important;
+}
+.ca-gov-icon-heart:before {
+  content: "\e988" !important;
+}
+.ca-gov-icon-digging:before {
+  content: "\e989" !important;
+}
+.ca-gov-icon-gas-pump:before {
+  content: "\e98a" !important;
+}
+.ca-gov-icon-idea-alt:before {
+  content: "\e98b" !important;
+}
+.ca-gov-icon-medal:before {
+  content: "\e98c" !important;
+}
+.ca-gov-icon-smoking:before {
+  content: "\e98d" !important;
+}
+.ca-gov-icon-no-smoking:before {
+  content: "\e98e" !important;
+}
+.ca-gov-icon-share-snapchat:before {
+  content: "\e98f" !important;
+}
+.ca-gov-icon-snapchat:before {
+  content: "\e990" !important;
+}
+.ca-gov-icon-expand-all:before {
+  content: "\e991" !important;
 }
