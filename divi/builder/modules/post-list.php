@@ -282,7 +282,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			if ($posts_number !== -1 && 0 == $posts_number) {
 				break;
 			}
-
 			// Get the CAWeb Post Handler
 			$post_id = $p->ID;
 			$title = $p->post_title;
@@ -303,7 +302,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 					$output .= $this->createListView($style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count);
 				}
 
-				$posts_number--;
+				//$posts_number--;
 			} // end of if is_object check
 		}
 
@@ -322,7 +321,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		return $output;
 	}
 
-	function createListView($listStyle, $postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = "off", $faqStyle = "", $faqCount = 0) {
+	function createListView($listStyle, &$postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = "off", $faqStyle = "", $faqCount = 0) {
 		$layout = $pHandler->post_type_layout;
 
 		// List Style
@@ -331,6 +330,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "news-list":
                     // if post contains a CAWeb News Post Handler
                     if ("news" == $layout) {
+						$postCount--;
                     	return $this->createNews($pHandler, $pID, $pURL, $pTitle, $featured_image);
                     }
 
@@ -340,6 +340,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "profile-list":
             // if post contains a CAWeb Profile Post Handler
                 if ("profile" == $layout) {
+					$postCount--;
                 	return	$this->createProfile($pHandler, $pID, $pURL, $featured_image);
                 }
 
@@ -348,14 +349,17 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "jobs-list":
                     // if post contains a CAWeb Job Post Handler
                     if ("jobs" == $layout) {
+						$postCount--;
                     	return $this->createJob($pHandler, $pURL, $pTitle);
                     }
 
                     break;
             // Event List
             case "events-list":
-                // if post contains a CAWeb Event Post Handler
+				// if post contains a CAWeb Event Post Handler
+				
                     if ("event" == $layout) {
+						$postCount--;
                     	return $this->createEvent($pHandler, $pID, $pURL, $pTitle, $featured_image);
                     }
 
@@ -364,6 +368,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "course-list":
                 // if post contains a CAWeb Course Post Handler
                     if ("course" == $layout) {
+						$postCount--;
                     	return $this->createCourse($pHandler, $pID, $pURL, $pTitle, $featured_image);
                     }
 
@@ -372,6 +377,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "exams-list":
                 // if post contains a CAWeb Course Post Handler
                     if ("exam" == $layout) {
+						$postCount--;
                     	return $this->createExam($pHandler, $pURL, $pTitle);
                     }
 
@@ -381,6 +387,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             case "faqs-list":
                 // if post contains a CAWeb FAQ Post Handler
                 if ("faqs" == $layout) {
+					$postCount--;
                 	return $this->createFAQ($pHandler, $faqStyle, $postCount, $pTitle, $faqCount);
                 }
 
@@ -391,6 +398,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
                     // if post contains a CAWeb News Post Handler
                     $list_types = array('news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs');
                     if (in_array($layout, $list_types)) {
+						$postCount--;
                     	return $this->createGeneral($pHandler, $pID, $pURL, $pTitle, $featured_image);
                     }
 
