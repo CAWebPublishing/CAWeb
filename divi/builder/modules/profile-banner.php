@@ -118,21 +118,12 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'profile_heading_size' => array(
 				'label'           => esc_html__('Font Size', 'et_builder'),
 				'description'     => esc_html__('Here you can choose the font size for the profile name.', 'et_builder'),
-				'type'            => 'range',
-				'option_category' => 'layout',
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options' => caweb_font_sizes() + array('default' => 'Default'),
+				'default'	=>	'default',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'profilename',
-				'allowed_units'   => array('pt', 'rem', 'px'),
-				'default'         => '0.9rem',
-				'default_unit'    => 'rem',
-				'default_on_front'=> '',
-				'allow_empty'     => true,
-				'range_settings'  => array(
-					'min'  => '0',
-					'max'  => '100',
-					'step' => '1',
-				),
-				'responsive'      => true,
 			),
 			'job_heading_font' => array(
 				'label'             => esc_html__('Font', 'et_builder'),
@@ -151,21 +142,12 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'job_heading_size' => array(
 				'label'           => esc_html__('Font Size', 'et_builder'),
 				'description'     => esc_html__('Here you can choose the font size for the job title.', 'et_builder'),
-				'type'            => 'range',
-				'option_category' => 'layout',
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options' => caweb_font_sizes() + array('default' => 'Default'),
+				'default'	=>	'default',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'jobtitle',
-				'allowed_units'   => array('pt', 'rem', 'px'),
-				'default'         => '0.9rem',
-				'default_unit'    => 'rem',
-				'default_on_front'=> '',
-				'allow_empty'     => true,
-				'range_settings'  => array(
-					'min'  => '0',
-					'max'  => '100',
-					'step' => '1',
-				),
-				'responsive'      => true,
 			),
 			'profile_link_heading_font' => array(
 				'label'             => esc_html__('Font', 'et_builder'),
@@ -184,21 +166,12 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'profile_link_heading_size' => array(
 				'label'           => esc_html__('Font Size', 'et_builder'),
 				'description'     => esc_html__('Here you can choose the font size for the profile link.', 'et_builder'),
-				'type'            => 'range',
-				'option_category' => 'layout',
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options' => caweb_font_sizes() + array('default' => 'Default'),
+				'default'	=>	'default',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'profilelink',
-				'allowed_units'   => array('pt', 'rem', 'px'),
-				'default'         => '0.9rem',
-				'default_unit'    => 'rem',
-				'default_on_front'=> '',
-				'allow_empty'     => true,
-				'range_settings'  => array(
-					'min'  => '0',
-					'max'  => '100',
-					'step' => '1',
-				),
-				'responsive'      => true,
 			),
 			'round_image' => array(
 				'label'              => esc_html__('Round Image', 'et_builder'),
@@ -257,15 +230,15 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		}
 
 		$profile_name_styles = ! empty($profile_name_color) ? "color: $profile_name_color;" : '';
-		$profile_name_styles .= ! empty($profile_heading_size) ? "font-size: $profile_heading_size;" : '';
+		$profile_name_styles .= 'default' !== $profile_heading_size ? sprintf('font-size: %1$spt;', $profile_heading_size) : '';
 		$profile_name_styles .= ! empty($profile_heading_font) ? $this->create_inline_font_styles($profile_heading_font) : '';
 		
 		$job_title_styles = ! empty($job_name_color) ? "color: $job_name_color;" : '';
-		$job_title_styles .= ! empty($job_heading_size) ? "font-size: $job_heading_size;" : '';
+		$job_title_styles .= 'default' !== $job_heading_size ? sprintf('font-size: %1$spt;', $job_heading_size) : '';
 		$job_title_styles .= ! empty($job_heading_font) ? $this->create_inline_font_styles($job_heading_font) : '';
-		
+
 		$profile_link_styles = ! empty($profile_link_name_color) ? "color: $profile_link_name_color;" : '';
-		$profile_link_styles .= ! empty($profile_link_heading_size) ? "font-size: $profile_link_heading_size;" : '';
+		$profile_link_styles .= 'default' !== $profile_link_heading_size ? sprintf('font-size: %1$spt;', $profile_link_heading_size) : '';
 		$profile_link_styles .= ! empty($profile_link_heading_font) ? $this->create_inline_font_styles($profile_link_heading_font) : '';
 		
 		$job_title = sprintf('<div class="banner-subtitle"%1$s>%2$s</div>',
