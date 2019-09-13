@@ -276,8 +276,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$output = '';
 		global $faq_accordion_count;
 
-		$class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
-
 		foreach ($all_posts as $a=>$p) {
 			if ($posts_number !== -1 && 0 == $posts_number) {
 				break;
@@ -305,6 +303,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 				//$posts_number--;
 			} // end of if is_object check
 		}
+
+		$class = sprintf(' class="%1$s %2$s" ', $this->module_classname($render_slug), $style);
 
 		if ( ! empty($faqs)) {
 			if ("toggle" == $faq_style) {
