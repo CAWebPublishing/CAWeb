@@ -1,8 +1,8 @@
 <!-- Global Footer -->
 <?php
 wp_nav_menu(array(
-    'theme_location'=> 'footer-menu',
-    'version' => caweb_get_page_version(get_the_ID())
+	'theme_location'=> 'footer-menu',
+	'version' => caweb_get_page_version(get_the_ID())
 )
 					);
 
@@ -18,8 +18,8 @@ window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
                 $("#wpadminbar").length&&$window_width>600&&($menu_offset+=$("#wpadminbar").outerHeight()),
                 $scroll_position=$top_section?0:$target.offset().top-$menu_offset,
                 void 0===easing&&(easing="swing");
-                if($scroll_position<220){ // scrollDistanceToMakeCompactHeader from cagov.core.js
-                                $scroll_position-=36; // Height difference between normal and compact header
+                if($scroll_position>220){ // scrollDistanceToMakeCompactHeader from cagov.core.js
+                                $scroll_position=0; // Height difference between normal and compact header
                 }
                 $("html, body").animate({scrollTop:$scroll_position},speed,easing);
 }
