@@ -86,6 +86,12 @@ $ = jQuery.noConflict();
    */
     var toggle_modules = $('div.et_pb_toggle');
 
+    /*
+    Divi Search Module Accessibility
+    Retrieve all Divi Search Modules
+   */
+    var search_modules = $('form.et_pb_searchform');
+
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
         blog_modules.each(function(index, element) {
@@ -341,4 +347,18 @@ $ = jQuery.noConflict();
         }
     }
 
+    // Run only if there is a Video Module on the current page
+    if( search_modules.length  ){
+        search_modules.each(function(index, element) {
+            var searchInput = $(element).find('input[name="s"]');
+            var searchLabel = $(element).find('label');
+            
+            $(element).attr('aria-label', "Divi Search Form " + index);
+            $(searchInput).attr('id', 'divi-search-module-form-input-' + index);
+            $(searchLabel).attr('for', 'divi-search-module-form-input-' + index);
+
+        });      
+
+    }
+    
 });
