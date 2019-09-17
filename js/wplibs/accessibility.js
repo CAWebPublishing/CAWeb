@@ -182,15 +182,18 @@ jQuery(document).ready(function() {
 
             }
         }
-       /*
-        Removing type attribute from styles and scripts cause issue with IE/Edge
-       */
-        $('style').each(function(index, element) {
-            //$(element).removeAttr('type', '');
-        });  
-        $('script').each(function(index, element) {
-            //$(element).removeAttr('type', '');
-        });   
+         /* 
+        Tabby Response Accessibility 
+        Retrieve tablist 
+        */
+       var button_elements = $('button')
+            
+       if( button_elements.length ){
+            button_elements.each(function(index, element) {
+                $(element).removeAttr('role');
+            });
+       }
+       
     }); // End of window load
 
 });
