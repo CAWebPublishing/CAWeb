@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
         Google Recaptcha Accessibility 
         Retrieve recaptcha textareas
         */
-        var g_recaptcha_response_textarea = $('#g-recaptcha-response')
+        var g_recaptcha_response_textarea = $('#g-recaptcha-response');
             
         if( g_recaptcha_response_textarea.length ){
             g_recaptcha_response_textarea.each(function(index, element) {
@@ -137,7 +137,7 @@ jQuery(document).ready(function() {
         Tabby Response Accessibility 
         Retrieve tablist 
         */
-        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs')
+        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs');
             
         if( tabby_response_tabs.length ){
 
@@ -175,7 +175,7 @@ jQuery(document).ready(function() {
          /* 
         Button Element Accessibility 
         */
-       var button_elements = $('button')
+       var button_elements = $('button');
             
        if( button_elements.length ){
             button_elements.each(function(index, element) {
@@ -184,14 +184,25 @@ jQuery(document).ready(function() {
        }
        
         /* 
-        The Events Calendar Accessibility 
+        Google Calendar Accessibility 
         */
-       var google_calendar_elements = $('iframe[src^="https://calendar.google.com/calendar/embed"]')
+       var google_calendar_elements = $('iframe[src^="https://calendar.google.com/calendar/embed"]');
             
        if( google_calendar_elements.length ){
             google_calendar_elements.each(function(index, element) {
                 stripeIframeAttributes(element);
                 $(element).attr('title', 'Google Calendar Embed');
+            });
+       }
+
+       /* 
+        The Events Calendar Accessibility 
+        */
+       var event_calendar_element = $('#tribe-bar-form span[role="none"], #tribe-bar-form li[role="option"]');
+            
+       if( event_calendar_element.length ){
+            event_calendar_element.each(function(index, element) {
+                $(element).removeAttr('role', '');
             });
        }
 
