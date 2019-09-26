@@ -208,6 +208,7 @@ jQuery(document).ready(function() {
 
        var event_calendar_element = $('.tribe-events-calendar');
        var event_map_element = $('.tribe-events-venue-map').find('iframe');
+       var event_notices = $('.tribe-events-notices');
 
        if( event_calendar_element.length ){
             event_calendar_element.each(function(index, element) {
@@ -237,8 +238,13 @@ jQuery(document).ready(function() {
        
        if( event_map_element.length ){
         event_map_element.each(function(index, element){
-            $(element).attr('title', 'The Events Calendar Event Map')
+            $(element).attr('title', 'The Events Calendar Event Map');
             stripeIframeAttributes(element);
+        });
+       }
+       if( event_notices.length ){
+        event_notices.each(function(index, element){
+            $(element).css('color', '#307185');
         });
        }
     }); // End of window load
