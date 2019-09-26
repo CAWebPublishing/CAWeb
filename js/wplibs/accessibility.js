@@ -247,6 +247,15 @@ jQuery(document).ready(function() {
             $(element).css('color', '#307185');
         });
        }
+
+       var addtoany_iframe = $('#a2apage_sm_ifr');
+
+       if( addtoany_iframe.length ){
+            addtoany_iframe.each(function(index,element){
+                stripeIframeAttributes(element);
+           });
+       }
+
     }); // End of window load
 
     function rgb2hex(rgb){
