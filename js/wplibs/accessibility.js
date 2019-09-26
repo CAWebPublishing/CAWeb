@@ -207,7 +207,8 @@ jQuery(document).ready(function() {
        }
 
        var event_calendar_element = $('.tribe-events-calendar');
-            
+       var event_map_element = $('.tribe-events-venue-map').find('iframe');
+
        if( event_calendar_element.length ){
             event_calendar_element.each(function(index, element) {
                 var th = $(element).find('thead tr th');
@@ -234,6 +235,12 @@ jQuery(document).ready(function() {
             });
        }
        
+       if( event_map_element.length ){
+        event_map_element.each(function(index, element){
+            $(element).attr('title', 'The Events Calendar Event Map')
+            stripeIframeAttributes(element);
+        });
+       }
     }); // End of window load
 
     function rgb2hex(rgb){
