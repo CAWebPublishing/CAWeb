@@ -1,4 +1,4 @@
-// Last update 8/15/2019 @ 8:50am
+// Last update 10/1/2019 @ 1:45pm
 jQuery(document).ready(function() {
     /* -----------------------------------------
    Utility Header
