@@ -209,6 +209,7 @@ jQuery(document).ready(function() {
        var event_calendar_element = $('.tribe-events-calendar');
        var event_map_element = $('.tribe-events-venue-map').find('iframe');
        var event_notices = $('.tribe-events-notices');
+       var event_pastmonth = $('.tribe-events-othermonth.tribe-events-past div');
 
        if( event_calendar_element.length ){
             event_calendar_element.each(function(index, element) {
@@ -245,6 +246,12 @@ jQuery(document).ready(function() {
        if( event_notices.length ){
         event_notices.each(function(index, element){
             $(element).css('color', '#307185');
+        });
+       }
+
+       if ( event_pastmonth.length ){
+        event_pastmonth.each(function(index, element){
+            $(element).css('color', '#707070');
         });
        }
 
