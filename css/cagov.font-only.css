@@ -19,12 +19,20 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.et_font_icon li:before, .et_pb_inline_icon:before,
+.et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+.et-pb-icon,  ul.et-fb-font-icon-list li:after{
+    font-family: 'CaGov', 'ETModules' !important;
+		content: attr(data-icon);
+  	speak: none;
+}
+
 /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
 li[class^="et_pb_ca"]::before, 
 li[class^="et_pb_profile_banner"]::before,
