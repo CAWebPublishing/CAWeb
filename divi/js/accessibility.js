@@ -90,7 +90,13 @@ $ = jQuery.noConflict();
     Divi Search Module Accessibility
     Retrieve all Divi Search Modules
    */
-    var search_modules = $('form.et_pb_searchform');
+  var search_modules = $('form.et_pb_searchform');
+
+    /*
+    Divi Search Module Accessibility
+    Retrieve all Divi Search Modules
+   */
+    var et_bocs = $('#et-boc.et-boc');
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -281,7 +287,8 @@ $ = jQuery.noConflict();
             controller.each(function(c){
                 controller[c].text = 'Slide ' + controller[c].text;
             })
-         });      
+         });    
+
     }   
 
     
@@ -361,4 +368,13 @@ $ = jQuery.noConflict();
 
     }
     
+    // Run only if there is more than 1 #et-boc.et-boc element
+    if( et_bocs.length  ){
+        et_bocs.each(function(index, element) {
+            if( index ){
+                $(element).attr('id', $(element).attr('id') + '-' + index );
+            }
+        });      
+
+    }
 });

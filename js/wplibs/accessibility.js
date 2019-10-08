@@ -1,4 +1,4 @@
-// Last update 8/15/2019 @ 8:50am
+// Last update 10/3/2019 @ 10:40am
 jQuery(document).ready(function() {
     /* -----------------------------------------
    Utility Header
@@ -77,9 +77,7 @@ jQuery(document).ready(function() {
        if( mailmunch_iframe.length ){
            mailmunch_iframe.each(function(index, element) {
                $(element).attr('title', 'Constant Contact by MailMunch IFrame');
-               $(element).removeAttr('frameborder', '');
-               $(element).removeAttr('scrolling', '');
-               $(element).removeAttr('allowtransparency', '');
+               stripeIframeAttributes(element);
            });   
            
            setTimeout(function(){ 
@@ -96,18 +94,12 @@ jQuery(document).ready(function() {
                
        if( twitter_iframe.length ){
            twitter_iframe.each(function(index, element) {
-               $(element).removeAttr('frameborder', '');
-               $(element).removeAttr('scrolling', '');
-               $(element).removeAttr('allowtransparency', '');
-               $(element).removeAttr('allowfullscreen', '');
+               stripeIframeAttributes(element);
            });    
            
            setTimeout(function(){
                var rufous_iframe = $('iframe[id="rufous-sandbox"]'); 
-               $(rufous_iframe).removeAttr('frameborder', '');
-               $(rufous_iframe).removeAttr('scrolling', '');
-               $(rufous_iframe).removeAttr('allowtransparency', '');
-               $(rufous_iframe).removeAttr('allowfullscreen', '');
+               stripeIframeAttributes(element);
            }, 1000);
            
        }
@@ -116,7 +108,7 @@ jQuery(document).ready(function() {
         Google Recaptcha Accessibility 
         Retrieve recaptcha textareas
         */
-        var g_recaptcha_response_textarea = $('#g-recaptcha-response')
+        var g_recaptcha_response_textarea = $('#g-recaptcha-response');
             
         if( g_recaptcha_response_textarea.length ){
             g_recaptcha_response_textarea.each(function(index, element) {
@@ -128,9 +120,8 @@ jQuery(document).ready(function() {
                
        if( g_recaptcha_iframe.length ){
             g_recaptcha_iframe.each(function(index, element) {
-               $(element).removeAttr('frameborder', '');
-               $(element).removeAttr('scrolling', '');
                $(element).attr('title', 'Google Recaptcha');
+               stripeIframeAttributes(element);
                
            });    
        }
@@ -138,8 +129,7 @@ jQuery(document).ready(function() {
        var g_recaptcha_challenge_iframe = $('iframe[title="recaptcha challenge"]');
        if( g_recaptcha_challenge_iframe.length ){
             g_recaptcha_challenge_iframe.each(function(index, element) {
-                $(element).removeAttr('frameborder', '');
-                $(element).removeAttr('scrolling', '');
+                stripeIframeAttributes(element);
             });    
         }
 
@@ -147,7 +137,7 @@ jQuery(document).ready(function() {
         Tabby Response Accessibility 
         Retrieve tablist 
         */
-        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs')
+        var tabby_response_tabs = $('.responsive-tabs-wrapper .responsive-tabs');
             
         if( tabby_response_tabs.length ){
 
@@ -183,10 +173,9 @@ jQuery(document).ready(function() {
             }
         }
          /* 
-        Tabby Response Accessibility 
-        Retrieve tablist 
+        Button Element Accessibility 
         */
-       var button_elements = $('button')
+       var button_elements = $('button');
             
        if( button_elements.length ){
             button_elements.each(function(index, element) {
@@ -194,6 +183,115 @@ jQuery(document).ready(function() {
             });
        }
        
+        /* 
+        Google Calendar Accessibility 
+        */
+       var google_calendar_elements = $('iframe[src^="https://calendar.google.com/calendar/embed"]');
+            
+       if( google_calendar_elements.length ){
+            google_calendar_elements.each(function(index, element) {
+                stripeIframeAttributes(element);
+                $(element).attr('title', 'Google Calendar Embed');
+            });
+       }
+
+       /* 
+        The Events Calendar Accessibility 
+        */
+       var event_calendar_form_element = $('#tribe-bar-form span[role="none"], #tribe-bar-form li[role="option"]');
+            
+       if( event_calendar_form_element.length ){
+        event_calendar_form_element.each(function(index, element) {
+                $(element).removeAttr('role', '');
+            });
+       }
+
+       var event_calendar_element = $('.tribe-events-calendar');
+       var event_map_element = $('.tribe-events-venue-map').find('iframe');
+       var event_notices = $('.tribe-events-notices');
+       var event_pastmonth = $('.tribe-events-othermonth.tribe-events-past div');
+
+       if( event_calendar_element.length ){
+            event_calendar_element.each(function(index, element) {
+                var th = $(element).find('thead tr th');
+                var future_dates = $(element).find('tbody tr td.tribe-events-thismonth.tribe-events-future div');
+                var past_dates = $(element).find('tbody tr td.tribe-events-thismonth.tribe-events-past div');
+                
+                // Tribe Event Display Contrast Fixes
+                if( "#666666" == rgb2hex( $(th[0]).css( "background-color" ) ) ){
+                    th.each(function(i, e){
+                        $(e).css( "background-color", "#dddddd" );
+                    });
+
+                    future_dates.each(function(i,e){
+                        $(e).css( "background-color", "#f7f7f7" );
+                        $(e).css("color", "#707070");
+                    });
+                
+                // Full Style Display Contrast Fixes
+                }else if( "#dddddd" == rgb2hex( $(th[0]).css( "background-color" )) ){
+                    past_dates.each(function(i,e){
+                        $(e).css("color", "#333333");
+                    });
+                }
+            });
+       }
+       
+       if( event_map_element.length ){
+        event_map_element.each(function(index, element){
+            $(element).attr('title', 'The Events Calendar Event Map');
+            stripeIframeAttributes(element);
+        });
+       }
+       if( event_notices.length ){
+        event_notices.each(function(index, element){
+            $(element).css('color', '#307185');
+        });
+       }
+
+       if ( event_pastmonth.length ){
+        event_pastmonth.each(function(index, element){
+            $(element).css('color', '#707070');
+        });
+       }
+
+       var addtoany_iframe = $('#a2apage_sm_ifr');
+
+       if( addtoany_iframe.length ){
+            addtoany_iframe.each(function(index,element){
+                stripeIframeAttributes(element);
+           });
+       }
+
+        /* 
+        TablePress Accessibility 
+        Add aria labels to datatables search field 
+        */
+        var dataTables_filter = $('.dataTables_filter')
+            
+        if( dataTables_filter.length ){
+            dataTables_filter.each(function(index, element) {
+                var l = $(element).find('label');
+                var i = $(element).find('input');
+
+                $(l).attr('for', $(i).attr('aria-controls') + '-search');
+                $(i).attr('id', $(i).attr('aria-controls') + '-search');
+            });      
+        }
     }); // End of window load
 
+    function rgb2hex(rgb){
+        rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        return "#" +
+         ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+         ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+         ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+       }
+
+    function stripeIframeAttributes(frame){
+        $(frame).removeAttr('frameborder', '');
+        $(frame).removeAttr('scrolling', '');
+        $(frame).removeAttr('allowtransparency', '');
+        $(frame).removeAttr('allowfullscreen', '');
+    }
 });
