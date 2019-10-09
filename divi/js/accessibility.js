@@ -1,4 +1,5 @@
-   $ = jQuery.noConflict();
+// Last update 8/5/2019 @ 3:20pm
+$ = jQuery.noConflict();
 
    jQuery(document).ready(function() {
     
@@ -78,6 +79,24 @@
     Retrieve all Divi Video Modules
    */
     var video_modules = $('div.et_pb_video');
+
+    /*
+    Divi Toggle Module Accessibility
+    Retrieve all Divi Toggle Modules
+   */
+    var toggle_modules = $('div.et_pb_toggle');
+
+    /*
+    Divi Search Module Accessibility
+    Retrieve all Divi Search Modules
+   */
+  var search_modules = $('form.et_pb_searchform');
+
+    /*
+    Divi Search Module Accessibility
+    Retrieve all Divi Search Modules
+   */
+    var et_bocs = $('#et-boc.et-boc');
 
     // Run only if there is a Blog Module on the current page
     if( blog_modules.length ){
@@ -268,7 +287,8 @@
             controller.each(function(c){
                 controller[c].text = 'Slide ' + controller[c].text;
             })
-         });      
+         });    
+
     }   
 
     
@@ -301,6 +321,60 @@
             var frame = $(element).find('iframe');
             frame.attr('title', 'Divi Video Module IFrame');
             $(frame).removeAttr('frameborder');
+            $(frame).attr('id', 'fitvid' + index);
         });      
+    }
+
+    // Run only if there is a Video Module on the current page
+    if( toggle_modules.length  ){
+        toggle_modules.each(function(index, element) {
+            
+            $(element).off( "keydown", function(e){
+                console.log("Key Down " + e.keyCode);
+            });
+
+            $(element).off( "keypress", function(e){
+                console.log("Key Press " + e.keyCode);
+            });
+
+            $(element).off( "keyup", function(e){
+                    console.log("Key Up " + e.keyCode);
+            });
+
+            $(element).on('focusin', function(){
+                toggleExpansion(this);
+            })
+
+        });      
+
+        function toggleExpansion(ele){
+            var expanded = $(ele).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+              
+            $(ele).attr('aria-expanded', expanded);
+        }
+    }
+
+    // Run only if there is a Video Module on the current page
+    if( search_modules.length  ){
+        search_modules.each(function(index, element) {
+            var searchInput = $(element).find('input[name="s"]');
+            var searchLabel = $(element).find('label');
+            
+            $(element).attr('aria-label', "Divi Search Form " + index);
+            $(searchInput).attr('id', 'divi-search-module-form-input-' + index);
+            $(searchLabel).attr('for', 'divi-search-module-form-input-' + index);
+
+        });      
+
+    }
+    
+    // Run only if there is more than 1 #et-boc.et-boc element
+    if( et_bocs.length  ){
+        et_bocs.each(function(index, element) {
+            if( index ){
+                $(element).attr('id', $(element).attr('id') + '-' + index );
+            }
+        });      
+
     }
 });

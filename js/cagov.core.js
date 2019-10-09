@@ -1,5 +1,5 @@
 /**
- * CA State Template v5 -  @version v5.0.8 -  7/2/2019 
+ * CA State Template v5 -  @version v5.0.11 -  9/24/2019 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
 /*! modernizr (Custom Build) | MIT *
  * https://modernizr.com/download/?-flexbox-setclasses !*/
@@ -14381,15 +14381,15 @@ $(document).ready(function () {
             }
 
             if (currentScrollTop >= scrollDistanceToMakeCompactHeader) {
-                return
+                return;
             }
 
             var searchBox = $headSearch.get(0).getBoundingClientRect();
             var newAskTop = searchBox.top + searchBox.height + askBarPadding;
 
-            $askGroupBar.css('top', newAskTop)
-            $askGroupBar.trigger('cagov.askgroup.update')
-        }, 0)
+            $askGroupBar.css('top', newAskTop);
+            $askGroupBar.trigger('cagov.askgroup.update');
+        }, 0);
 
     }
 
@@ -14414,12 +14414,12 @@ $(document).ready(function () {
                     $('html,body').animate({
                         scrollTop: 0
                     }, 400, function () {
-                        $(window).scroll()
+                        $(window).scroll();
                     });
                     return;
-                })
+                });
             });
-        }
+        };
     }(jQuery));
 
     // Set any buttons or links which must scroll back to the top
@@ -14452,7 +14452,7 @@ $(document).ready(function () {
     // proactively update our fixed header
     function setResizeHandler() {
         if (!$header.hasClass('fixed')) {
-            return
+            return;
         }
 
         $(window).on('resize', function () {
@@ -14484,7 +14484,7 @@ $(document).ready(function () {
                 // we dont have any fixed updates if we switch or start in mobile
                 // even if the user has requested to be fixed.
                 if (windowWidth < headerVars.MOBILEWIDTH) {
-                    return
+                    return;
                 }
 
                 checkForCompactUpdate();
@@ -14495,7 +14495,7 @@ $(document).ready(function () {
             updateFunc = function () {
                 checkForReturnTopUpdate();
 
-            }
+            };
         }
 
         // set up our event listener to update the continously
@@ -14518,7 +14518,7 @@ $(document).ready(function () {
         // we dont fade out if we have search results being shown
         if ($headSearch.hasClass('active')) {
             $askGroup.addClass('fixed-hide');
-            $header.addClass('compact, .fixed');
+          //  $header.addClass('compact fixed');
 
             return;
         }
@@ -14546,8 +14546,8 @@ $(document).ready(function () {
             $askGroup.addClass('fixed-hide');
             $headSearch.addClass('fixed-hide');
         } else {
-            $askGroup.removeClass('fixed-hide')
-            $headSearch.removeClass('fixed-hide')
+            $askGroup.removeClass('fixed-hide');
+            $headSearch.removeClass('fixed-hide');
         }
         if (currentScrollTop >= scrollDistanceToMakeCompactHeader) {
             $header.addClass('compact');
@@ -14563,9 +14563,9 @@ $(document).ready(function () {
     // justify showing the return icon
     function checkForReturnTopUpdate() {
         if (currentScrollTop >= scrollDistanceToMakeCompactHeader) {
-            $returnTop.addClass('is-visible')
+            $returnTop.addClass('is-visible');
         } else {
-            $returnTop.removeClass('is-visible')
+            $returnTop.removeClass('is-visible');
         }
     }
 
@@ -14602,7 +14602,7 @@ $(document).ready(function () {
      */
     function addFixed() {
         var leeway = 10;
-        $header.addClass('fixed')
+        $header.addClass('fixed');
         headerVars.setHeaderImageHeight();
 
         // we have a header image, we need to adjust it
@@ -14620,18 +14620,18 @@ $(document).ready(function () {
             // no header image, which means our main content needs to
 
             $mainContent.css({
-                'padding-top': Math.max(headerHeight, 136)
-            })
+                'padding-top': Math.max(headerHeight, 129)
+            });
 
 
         } if ($(".ask-group").length > 0) {
             $mainContent.addClass('print-p-t'); // Media print .main-content fix	
             $mainContent.css({
                 'padding-top': 0
-            })
+            });
 
             $('.header-slideshow-banner, .header-primary-banner').css({
-                'margin-top': 136
+                'margin-top': 129
 
             });
 
@@ -14646,7 +14646,7 @@ $(document).ready(function () {
         $header.removeClass('fixed');
         $headerImage.css({ 'top': '', 'margin-bottom': '' });
         $mainContent.css({ 'padding-top': '' });
-        $askGroupBar.css('top', '')
+        $askGroupBar.css('top', '');
     }
 
 });
@@ -14946,9 +14946,9 @@ $(document).ready(function () {
         $navItemsWithSubs.each(function () {
 
             $(this).find('.first-level-link').addClass('has-sub');
-
+            var linktext = $(this).find('.first-level-link').text();
             // create toggle object
-            var $toggleSubNav = $('<button class="mobile-control toggle-sub-nav closed"><div class="ca-gov-icon-arrow-next rotate" aria-hidden="true"></div><span class="sr-only">Sub Menu Toggle</span></button>');
+            var $toggleSubNav = $('<button class="mobile-control toggle-sub-nav closed"><div class="ca-gov-icon-arrow-next rotate" aria-hidden="true"></div><span class="sr-only">' + linktext + ' sub menu toggle</span></button>');
             // add toggle object to DOM
             $(this).find('.sub-nav').before($toggleSubNav);
 
@@ -15017,6 +15017,8 @@ $(document).ready(function () {
         $(this).toggleClass("down");
     });
     
+    
+
 
 
     // allow dropdown on focus
@@ -15054,6 +15056,20 @@ $(document).ready(function () {
         e.stopPropagation();
     });
     //*/
+    // Hide navigation from screen reader in mobile
+    if (mobileView()) {
+        $navigation.attr("aria-hidden", "true");
+
+        // Prevent focusing/tabbing thru links in mobile if nav is closed
+        if ($navigation.hasClass("mobile-closed")) {
+            $("#nav_list a").attr("tabindex", "-1");
+            $("#nav_list button").attr("tabindex", "-1");
+        }
+        else {
+            $("#nav_list a").removeAttr("tabindex");
+            $("#nav_list button").removeAttr("tabindex");
+        }
+    }
 
 
 });
@@ -15063,9 +15079,10 @@ $(document).ready(function () {
             $.fn.slideUpTransition = function () {
                 return this.each(function () {
                     var $el = $(this);
-                    $el.css("max-height", "0");
-                    $el.addClass("mobile-closed");
-
+                    $el.css("max-height", "0").addClass("mobile-closed").attr("aria-hidden", "true");
+                    $(".first-level-link").attr("tabindex", "-1");
+                    $(".top-level-nav li button").attr("tabindex", "-1");
+                   
                 });
             };
 
@@ -15073,7 +15090,9 @@ $(document).ready(function () {
                 return this.each(function () {
                     var $el = $(this);
                     $el.removeClass("mobile-closed");
-
+                    $el.removeAttr("aria-hidden");
+                    $(".first-level-link").removeAttr("tabindex");
+                    $(".top-level-nav li button").removeAttr("tabindex");
                     // temporarily make visible to get the size
                     $el.css("max-height", "none");
                     var height = $el.outerHeight();
@@ -15103,7 +15122,8 @@ $(document).ready(function () {
                     $subel.addClass("subnav-closed");
                     $subel.attr('aria-expanded', 'false');
                     $subel.attr('aria-hidden', 'true');
-                    $("#navigation").css({ "max-height": sumheight })
+                    $subel.find("a").attr("tabindex", "-1");
+                    $("#navigation").css({ "max-height": sumheight });
                 });
             };
 
@@ -15111,7 +15131,7 @@ $(document).ready(function () {
                 return this.each(function () {
                     var $subel = $(this);
                     $subel.removeClass("subnav-closed");
-
+                    $subel.find("a").removeAttr("tabindex");
                     // temporarily make visible to get the size
                     $subel.css("max-height", "none");
                     var subheight = $subel.outerHeight();
@@ -15126,7 +15146,7 @@ $(document).ready(function () {
                         });
                         $subel.attr('aria-expanded', 'true');
                         $subel.attr('aria-hidden', 'false');
-                        $("#navigation").css({ "max-height": sumheight })
+                        $("#navigation").css({ "max-height": sumheight });
                     }, 1);
                 });
             };
@@ -15824,7 +15844,7 @@ $(document).ready(function () {
                 this.menu = menu;
                 this.topnavitems = topnavitems;
 
-                nav.attr("role", "navigation");
+               // nav.attr("role", "navigation"); //it is already inside of <nav> no need for role.
                 menu.addClass(settings.menuClass);
                 topnavitems.each(function (i, topnavitem) {
                     var topnavitemlink, topnavitempanel;
@@ -16012,6 +16032,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     // Navigation Reset function
     function NavReset() {
         $(".sub-nav").removeClass("open");
@@ -16023,15 +16045,19 @@ $(document).ready(function () {
         $(".first-level-link").attr("aria-expanded", false);
         $("#navigation").addClass("mobile-closed");
         if ($(window).width() < 768) {
-            $("#navigation").css("max-height", "0");
+            $("#navigation").css("max-height", "0").attr("aria-hidden", "true");
             $('.sub-nav').slideUpTransitionSub();
             $('#navigation').slideUpTransition();
             // 
             $(".rotate").removeClass('down');
+            $("#nav_list a").attr("tabindex", "-1");
+            $("#nav_list button").attr("tabindex", "-1");
         }
         else {
-            $("#navigation").removeAttr("style");
+            $("#navigation").removeAttr("style aria-hidden");
             $(".sub-nav").removeAttr("style");
+            $("#nav_list a").removeAttr("tabindex");
+            $("#nav_list button").removeAttr("tabindex");
         }
 
         $(".toggle-sub-nav").removeClass("open");
@@ -16888,18 +16914,15 @@ $(document).ready(function () {
     var searchReset = $("#head-search #Search .gsc-clear-button");
     var featuredsearch = $("#head-search").hasClass("featured-search");
     var searchactive = $("#head-search").hasClass("active");
+    var searchlabel = $("#SearchInput");
     var $globalHeader = $('.global-header');
     var searchbox = $(".search-container:not(.featured-search)");
-    var searchlabel = $("#SearchInput");
-
     var headerHeight = $globalHeader.innerHeight();
     var utility = $(".utility-header");
     var utilityHeight = utility.innerHeight();
- 
     var alertBanner = $(".alert-banner");
-    var alertbannerHeight = alertBanner.innerHeight();
-
-    var searchtop = headerHeight - utilityHeight - alertbannerHeight;
+    var alertClose = $(".alert-banner .close");
+    var alertbannerHeight = 0;
 
     var $body = $("body");
     var $specialIcon =
@@ -16909,8 +16932,7 @@ $(document).ready(function () {
             $(this).tab('show').addClass('active');
             e.preventDefault()
         });
-
-    // Unfreeze search width when blured.
+    
     // Unfreeze search width when blured.
     $searchText.on('blur focus', function (e) {
         $(this).parents("#head-search").removeClass("focus");
@@ -16923,6 +16945,23 @@ $(document).ready(function () {
         }
     });
 
+
+
+    //  search box top position
+    if (!mobileView()) {
+        // taking into account multiple alert banners
+        $.each(alertBanner, function () {
+            alertbannerHeight += $(this).innerHeight() + 2;
+        });
+        // calulation search box top position
+        var searchtop = headerHeight - utilityHeight - alertbannerHeight + 5;
+        if (!mobileView()) {
+            searchbox.css({
+                'top': Math.max(searchtop, 87)
+            });
+        }
+    } 
+
     // have the close button remove search results and the applied classes
     $resultsContainer.find('.close').on('click', removeSearchResults);
     $searchContainer.find('.close').on('click', removeSearchResults);
@@ -16933,6 +16972,7 @@ $(document).ready(function () {
     // Sitecore link data types currently do not have a way to set id's per nav,
     // so instead we are binding to what I'm assuming will aslways be the search
     $('.top-level-nav .nav-item .ca-gov-icon-search, #nav-item-search').parents('.nav-item').on('click', function (e) {
+        e.preventDefault();
         $searchText.trigger("focus").trigger('focus');
 
         // mobile
@@ -16954,6 +16994,7 @@ $(document).ready(function () {
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
             searchlabel.removeAttr('aria-hidden');
+            $searchContainer.removeAttr('aria-hidden');
 
         }
         else {
@@ -16972,6 +17013,7 @@ $(document).ready(function () {
             searchlabel.attr({
                 "aria-hidden": 'true'
             });
+            $searchContainer.attr("aria-hidden", "true");
         }
 
         if (featuredsearch) {
@@ -16979,6 +17021,7 @@ $(document).ready(function () {
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
             searchlabel.removeAttr('aria-hidden');
+            $searchContainer.removeAttr('aria-hidden');
         }
 
         if (mobileView() && featuredsearch) { $('.search-container').toggleClass('active'); }
@@ -16993,7 +17036,34 @@ $(document).ready(function () {
 
     });
 
-    // SEE navitgation.js for mobile click handlers
+    // Make Search form tabable if it's featured	
+    if ($('#head-search').hasClass('featured-search')) {
+        searchInput.removeAttr('tabindex aria-hidden');
+        searchSubmit.removeAttr('tabindex aria-hidden');
+        searchReset.removeAttr('tabindex aria-hidden');
+        searchlabel.removeAttr('aria-hidden');
+        $searchContainer.removeAttr('aria-hidden');
+    } else {
+        searchInput.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchSubmit.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchReset.attr({
+            "tabindex": '-1',
+            "aria-hidden": 'true'
+        });
+        searchlabel.attr({
+            "aria-hidden": 'true'
+        });
+        $searchContainer.attr("aria-hidden", "true");
+
+    }
+
+
 
     // Close search when close icon is clicked
     $('.close-search').on('click', removeSearchResults);
@@ -17017,7 +17087,7 @@ $(document).ready(function () {
     function removeSearchResults() {
         $body.removeClass("active-search");
         $searchText.val('');
-        $searchContainer.removeClass('active');
+        $searchContainer.removeClass('active').attr("aria-hidden", "true");
         $resultsContainer.removeClass('visible');
         $('.ask-group').removeClass('fade-out');
 
@@ -17050,48 +17120,20 @@ $(document).ready(function () {
 
 
 
-    // Make Search form tabable if it's featured
-    if ($('#head-search').hasClass('featured-search')) {
-        searchInput.removeAttr('tabindex aria-hidden');
-        searchSubmit.removeAttr('tabindex aria-hidden');
-        searchReset.removeAttr('tabindex aria-hidden');
-        searchlabel.removeAttr('aria-hidden');
-    } else {
-        searchInput.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-            });
-        searchSubmit.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-            });
-        searchReset.attr({
-            "tabindex": '-1',
-            "aria-hidden": 'true'
-        });
-        searchlabel.attr({
-            "aria-hidden": 'true'
-        });
-    }
-
-    //  search box top position
-    if (!mobileView()) {
-        searchbox.css({
-            'top': Math.max(searchtop, 87)
-        });
-    }
-
-
 
     $('.toggle-search').on('click', function () {
         $('.search-container').toggleClass('active');
         var searchactive = $("#head-search").hasClass("active");
         if (searchactive) {
+            $searchContainer.removeAttr('aria-hidden');
             searchInput.removeAttr('tabindex aria-hidden');
             searchSubmit.removeAttr('tabindex aria-hidden');
             searchReset.removeAttr('tabindex aria-hidden');
             searchlabel.removeAttr('aria-hidden');
             $searchText.trigger("focus").trigger('focus');
+            $('html, body').animate({
+                scrollTop: $("#head-search").offset().top
+            }, 500);
 
         }
         else {
@@ -17110,6 +17152,7 @@ $(document).ready(function () {
             searchlabel.attr({
                 "aria-hidden": 'true'
             });
+            $searchContainer.attr("aria-hidden", "true");
         }
         if (!$('#navigation').hasClass('active')) {
             $('#navigation').addClass('mobile-closed');
@@ -17117,29 +17160,95 @@ $(document).ready(function () {
     });
 
 
+    // on alert close event
+    $.each(alertClose, function () {
+        $(this).on("click", function () {
+            searchTop();
+        });
 
+    });
 
 });
 
+
 //  search box top position if browser window is resized
 $(window).on('resize', function () {
+    searchTop();
+});
+
+
+
+
+
+
+
+
+function searchTop() {
+    var searchlabel = $("#SearchInput");
     var $globalHeader = $('.global-header');
     var searchbox = $(".search-container:not(.featured-search)");
     var headerHeight = $globalHeader.innerHeight();
     var utility = $(".utility-header");
     var utilityHeight = utility.innerHeight();
-
     var alertBanner = $(".alert-banner");
-    var alertbannerHeight = alertBanner.innerHeight();
-
-    var searchtop = headerHeight - utilityHeight - alertbannerHeight;
-   
+    var alertClose = $(".alert-banner .close");
+    var alertbannerHeight = 0;
+    // taking into account multiple alert banners
+    $.each(alertBanner, function () {
+        alertbannerHeight += $(this).innerHeight() + 2;
+    });
+    // calulation search box top position
+    var searchtop = headerHeight - utilityHeight - alertbannerHeight + 5;
     if (!mobileView()) {
         searchbox.css({
             'top': Math.max(searchtop, 87)
         });
     }
+}
+
+// Calculation search box top proprety on the scroll for the fixed nav
+$(window).on('scroll', function () {
+    var currentScrollTop = $(document).scrollTop();
+    var scrollDistanceToMakeCompactHeader = 220;
+   
+    if (currentScrollTop >= scrollDistanceToMakeCompactHeader) {
+        
+        if (!mobileView()) {
+            
+               // setting timeout before calulating the search box top proprty othervise it can take into account transitional values.
+            setTimeout(function () {
+                var searchlabel = $("#SearchInput");
+                var $globalHeader = $('.global-header');
+                var searchbox = $(".search-container:not(.featured-search)");
+                var headerHeight = $globalHeader.innerHeight();
+                var utility = $(".utility-header");
+                var utilityHeight = utility.innerHeight();
+                var alertBanner = $(".alert-banner");
+                var alertClose = $(".alert-banner .close");
+                var alertbannerHeight = 0;
+                // taking into account multiple alert banners
+                $.each(alertBanner, function () {
+                    alertbannerHeight += $(this).innerHeight() + 2;
+                });
+                // calulation search box top position
+                var searchtopscroll = headerHeight - utilityHeight - alertbannerHeight - 7;
+                searchbox.css({ 'top': Math.max(searchtopscroll, 60) });
+            }, 400);
+
+            
+
+        }
+    }
+    else if (currentScrollTop <= scrollDistanceToMakeCompactHeader) {
+        if (!mobileView()) {
+            setTimeout(function () {
+                searchTop();
+            }, 400);
+            
+        }
+    }
 });
+
 
 
 function mobileView() {
@@ -17223,8 +17332,8 @@ $(document).ready(function () {
                         ? MAXHEIGHT
                         : height;
                     // fill up the remaining heaight of this device
-                    headerSlider.css({'height': height});
-                }, 0)
+                    headerSlider.css({ 'height': height });
+                }, 0);
 
                 var $this = $(this);
 
@@ -17253,25 +17362,28 @@ $(document).ready(function () {
 
                 // Add pause and play buttons
                 var owlBannerControl = $('<div class="banner-play-pause"><div class="banner-control"><button class="play ca-gov-icon-carousel-play" aria-hidden="true"></button><button class="pause ca-gov-icon-carousel-pause" aria-hidden="true"></span></div></div>');
-                $this.append(owlBannerControl); 
-                var playControl = owlBannerControl.find('.play').hide(); 
-                var pauseControl = owlBannerControl.find('.pause'); 
-                playControl.on('click', function() {
-                $(this).hide();   $(this).parent().removeClass('active');
-                pauseControl.show();   $this.trigger('play.owl.autoplay', [settings.delay]);
-                $this.owlCarousel('next'); // Manually play next since autoplay waits for delay
+                $this.append(owlBannerControl);
+                var playControl = owlBannerControl.find('.play').hide();
+                var pauseControl = owlBannerControl.find('.pause');
+                playControl.on('click', function () {
+                    $(this).hide(); $(this).parent().removeClass('active');
+                    pauseControl.show(); $this.trigger('play.owl.autoplay', [settings.delay]);
+                    $this.owlCarousel('next'); // Manually play next since autoplay waits for delay
                 });
-                
-                pauseControl.on('click', function() {   $(this).hide();
-                $(this).parent().addClass('active');   playControl.show();
-                $this.trigger('stop.owl.autoplay'); });
-                
+
+                pauseControl.on('click', function () {
+                    $(this).hide();
+                    $(this).parent().addClass('active'); playControl.show();
+                    $this.trigger('stop.owl.autoplay');
+                });
+
                 // Number the items in .banner-pager 
                 var dots = $('.banner-pager .banner-control');
                 dots.each(function () {
-                $(this).find('span').append($(this).index() + 1); });
+                    $(this).find('span').append($(this).index() + 1);
+                });
             });
-        }
+        };
     }(jQuery));
 
     // Banner Carousel Init
@@ -17360,6 +17472,10 @@ $(document).ready(function () {
         });
 
     }
+
+    // Remove unnessesary role="button" from button
+    $("button.banner-control").removeAttr("role");
+
 });
 
 function initContent() {
@@ -17379,23 +17495,24 @@ function initContent() {
             onResized: function () {
                 window.setTimeout(function () {
                     $(window).trigger('resize');
-                }, 0)
+                }, 0);
             },
             onDragged: function () {
                 window.setTimeout(function () {
                     $(window).trigger('resize');
-                }, 0)
+                }, 0);
             },
             onTranslated: function () {
                 window.setTimeout(function () {
                     $(window).trigger('resize');
-                }, 0)
+                }, 0);
             }
         });
 
         // Add text to the dots 
         var dot = $('.owl-dots .owl-dot');
         dot.each(function () {
+            $(this).removeAttr("role");
             $(this).find('span').html("<span class='sr-only'>Change Slide</span>");
         });
 
@@ -17405,20 +17522,20 @@ function initContent() {
                 carousel.find('.owl-item.active .item video').each(function () {
 
                     $(this).get(0).play();
-                })
-            }, 10)
+                });
+            }, 10);
 
-        })
-    })
+        });
+    });
 }
 
 (function($) {
 
-    $.fn.initCAVideo = function(bool) {
+    $.fn.initCAVideo = function (bool) {
 
 
         // Iterate over each object in collection
-        return this.each( function() {
+        return this.each(function () {
 
             var carousel = $(this);
             var didSet = carousel.attr("data-loaded");
@@ -17427,53 +17544,53 @@ function initContent() {
                 return;
             }
             carousel.attr("data-loaded", "true");
-                // get first video
-                var vidHref = carousel.find('.item a').first().attr('href') || "";
-                var vidID = vidHref.split("?v=").pop();
+            // get first video
+            var vidHref = carousel.find('.item a').first().attr('href') || "";
+            var vidID = vidHref.split("?v=").pop();
 
-                var mainIndex = 0;
-
-
-                var length = carousel.find('.item').length;
-
-                // Video  Slider
-                carousel.owlCarousel({
-                    items: 1,
-                    loop: false,
-                    nav: true,
-                    lazyLoad: false,
-                    video: true,
-                    navText: [
-                        '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span></span><span class="sr-only">Previous</span>', '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span><span class="sr-only">Next</span>'
-                    ],
-                    dots: false
-                });
-
-                carousel.on('translated.owl.carousel', function(event) {
-
-                  // get current video id
-                  vidID = carousel.find('.owl-item.active')
-                            .attr('data-video').split(/\?v=|\/v\//).pop();
-                    setCurrentSubVideo();
-
-                  mainIndex = event.item.index;
-                    // show the item in view
-                    submenu.trigger('to.owl.carousel', [ mainIndex, 300, true ] )
-             });
+            var mainIndex = 0;
 
 
-                //  create the proper video play icon for each video image preview
-                carousel.find('.owl-video-play-icon').append($('<span class="ca-gov-icon-play" />'));
+            var length = carousel.find('.item').length;
 
-                // create the overlay for each video image preview
-                carousel.find('.owl-video-tn').after($('<div />').addClass('item-overlay'));
+            // Video  Slider
+            carousel.owlCarousel({
+                items: 1,
+                loop: false,
+                nav: true,
+                lazyLoad: false,
+                video: true,
+                navText: [
+                    '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span></span><span class="sr-only">Previous</span>', '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span><span class="sr-only">Next</span>'
+                ],
+                dots: false
+            });
 
-                // the submenu lives as a sibling to the carousel.
-                var submenu = $('<div></div>').insertAfter(carousel);
-                submenu.addClass('carousel owl-carousel carousel-video-submenu');
+            carousel.on('translated.owl.carousel', function (event) {
 
-                // create the sub menu for the videos
-                var items = carousel.find('a.owl-video');
+                // get current video id
+                vidID = carousel.find('.owl-item.active')
+                    .attr('data-video').split(/\?v=|\/v\//).pop();
+                setCurrentSubVideo();
+
+                mainIndex = event.item.index;
+                // show the item in view
+                submenu.trigger('to.owl.carousel', [mainIndex, 300, true])
+            });
+
+
+            //  create the proper video play icon for each video image preview
+            carousel.find('.owl-video-play-icon').append($('<span class="ca-gov-icon-play" />'));
+
+            // create the overlay for each video image preview
+            carousel.find('.owl-video-tn').after($('<div />').addClass('item-overlay'));
+
+            // the submenu lives as a sibling to the carousel.
+            var submenu = $('<div></div>').insertAfter(carousel);
+            submenu.addClass('carousel owl-carousel carousel-video-submenu');
+
+            // create the sub menu for the videos
+            var items = carousel.find('a.owl-video');
             items.each(function (index) {
                 // get this slide and its video url
                 var oldItem = $(this);
@@ -17503,50 +17620,50 @@ function initContent() {
                 // var youtubeThumb = 'http://img.youtube.com/vi/' + youtubeID + '/0.jpg ';
                 var thumbnail = $('<button />').css('background-image', youtubeThumb).addClass("videoThumb").append(theHTML); // Adding title span to the thumbnail
 
-                    // var thumbnail = $('<img />').attr('src', youtubeThumb);
+                // var thumbnail = $('<img />').attr('src', youtubeThumb);
 
-                    // overlay related
-                    var overlay = $('<div />').addClass('item-overlay');
-                    overlay.append($('<span class="ca-gov-icon-play" />'))
+                // overlay related
+                var overlay = $('<div />').addClass('item-overlay');
+                overlay.append($('<span class="ca-gov-icon-play" />'))
 
-                    // Append it into the DOM
-                    item.append(thumbnail).append(overlay);
-                    submenu.append(item);
-                });
+                // Append it into the DOM
+                item.append(thumbnail).append(overlay);
+                submenu.append(item);
+            });
 
-                submenu = carousel.next();
+            submenu = carousel.next();
 
-                  submenu.on('initialized.owl.carousel', function() {
-                    setCurrentSubVideo();
-                  });
+            submenu.on('initialized.owl.carousel', function () {
+                setCurrentSubVideo();
+            });
 
-                // have owlCarousel init this submenu
-                submenu.owlCarousel({
-                    items: 4,
-                    loop: false,
-                    nav: true,
-                    margin: 20,
-                    dots: false,
-                    navText: ['<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span><span class="sr-only">Previous</span>', '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span><span class="sr-only">Next</span>']
-                });
+            // have owlCarousel init this submenu
+            submenu.owlCarousel({
+                items: 4,
+                loop: false,
+                nav: true,
+                margin: 20,
+                dots: false,
+                navText: ['<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span><span class="sr-only">Previous</span>', '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span><span class="sr-only">Next</span>']
+            });
 
 
-              submenu.on('changed.owl.carousel', function() {
+            submenu.on('changed.owl.carousel', function () {
                 setTimeout(setCurrentSubVideo, 50);
-              });
+            });
 
-              function setCurrentSubVideo() {
+            function setCurrentSubVideo() {
                 // remove old watched item
                 submenu.find('.watching').removeClass('watching');
 
                 // submenu.find('img[src*="' + vidID + '"]').parents('.owl-item').addClass('watching');
-                  submenu.find('button[style*="' + vidID + '"]').parents('.owl-item').addClass('watching');
+                submenu.find('button[style*="' + vidID + '"]').parents('.owl-item').addClass('watching');
 
 
-              }
+            }
 
         });
-    }
+    };
 }(jQuery));
 
 // EQ Heights for Job Wells
@@ -19030,6 +19147,7 @@ $(document).ready(function () {
 ----------------------------------------- */
 $(document).ready(function () {
     // removing role attribute to fix aria validator errors
+    $(".site-settings").removeAttr("role");
     $(".settings-links button[data-target='#siteSettings']").removeAttr("role aria-selected");
     $(".site-settings button.close").removeAttr("role aria-selected");
 });

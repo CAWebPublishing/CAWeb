@@ -26,7 +26,7 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 
 ?>
 
-<header role="banner" id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
+<header id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?> >
 <div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 <?php
 
@@ -108,7 +108,7 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 			  $custom_translate = 4 == $ver && 'custom' == $ca_google_trans_enabled && ! empty($ca_google_trans_page) ? sprintf('<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url($ca_google_trans_page), $ca_google_trans_icon) : '';
 
 ?>
-			<div id="head-search" class="search-container<?php print $search ?> hidden-print">
+			<div id="head-search" class="search-container<?php print $search ?> hidden-print" role="region" aria-labelledby="search-expanded">
 			<?php
 				if ("page-templates/searchpage.php" !== get_page_template_slug(get_the_ID())) {
 					require(CAWebAbsPath . "/ssi/searchForm.php");
