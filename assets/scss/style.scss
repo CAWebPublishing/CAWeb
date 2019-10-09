@@ -1,0 +1,38 @@
+/*!
+Theme Name: CAWeb 2.0
+Theme URI: https://caweb.cdt.ca.gov/
+Author: CAWeb Publishing
+Author URI: https://caweb.cdt.ca.gov/
+Description: CA State standard theme
+Version: 0.0.5
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: caweb-standard
+
+GitHub Theme URI: https://github.com/timloden/CAWeb-Standard
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+CAWeb Standard is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+/* # State Template
+--------------------------------------------------------------*/
+@import "cagov/cagov.core";
+//@import "cagov/cagov.font-only";
+
+/* # Divi
+--------------------------------------------------------------*/
+@import "et-builder/divi-builder";
+//@import "et-builder/frontend-builder-plugin-style";
+@import "et-builder/divi-overwrites";
+@import "et-builder/custom";
+
+
+/* # Layouts
+--------------------------------------------------------------*/
+@import "layouts/utility-header";
+@import "layouts/menus";
+@import "layouts/courses";
