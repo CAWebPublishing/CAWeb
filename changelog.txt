@@ -1,3 +1,4 @@
+CAWeb v1.4.2
 CAWeb v1.4.1
 March 26, 2018
 - WordPress Thickbox function enabled 
