@@ -4339,10 +4339,10 @@ h4, .h4 {
     left: 0;
     right: 0;
     height: 12px;
-    background: transparent url("../../images/system/nav-shadow.png") repeat-x;
+    background: transparent url("../images/system/nav-shadow.png") repeat-x;
   }
   .main-navigation.megadropdown .nav-arrow-down {
-    background: transparent url("../../images/system/nav-down-arrow.png") no-repeat;
+    background: transparent url("../images/system/nav-down-arrow.png") no-repeat;
     width: 44px;
     height: 16px;
     position: absolute;
@@ -4906,7 +4906,7 @@ h4, .h4 {
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-  background-image: url("../../images/fancybox/fancybox_sprite.png");
+  background-image: url("../images/fancybox/fancybox_sprite.png");
 }
 
 #fancybox-loading {
@@ -4924,7 +4924,7 @@ h4, .h4 {
 #fancybox-loading div {
   width: 44px;
   height: 44px;
-  background: url("../../images/fancybox/fancybox_loading.gif") center center no-repeat;
+  background: url("../images/fancybox/fancybox_loading.gif") center center no-repeat;
 }
 
 .fancybox-close {
@@ -4944,7 +4944,7 @@ h4, .h4 {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  background: transparent url("../../images/fancybox/blank.gif");
+  background: transparent url("../images/fancybox/blank.gif");
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: 8040;
   outline: 0 !important;
@@ -5013,7 +5013,7 @@ h4, .h4 {
   overflow: hidden;
   display: none;
   z-index: 8010;
-  background: url("../../images/fancybox/fancybox_overlay.png");
+  background: url("../images/fancybox/fancybox_overlay.png");
 }
 
 .fancybox-overlay-fixed {
@@ -5173,7 +5173,7 @@ h4, .h4 {
   margin-left: -22px;
   height: 16px;
   width: 44px;
-  background: url("../../images/system/nav-down-arrow.png") no-repeat;
+  background: url("../images/system/nav-down-arrow.png") no-repeat;
 }
 
 .main-secondary .nav-tabs {
@@ -5728,7 +5728,7 @@ figcaption {
 }
 
 .event-item .title {
-  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
+  background: url("../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
   margin-left: -20px;
   padding-left: 20px;
 }
@@ -7055,12 +7055,12 @@ figcaption {
 }
 
 .list-overstated li, .list-understated li {
-  background: url("../../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
+  background: url("../images/system/bullet-blue-disc.png") no-repeat 0 3px transparent;
   padding: 0 0 14px 18px;
 }
 
 .list-overstated li.open, .list-understated li.open {
-  background: url("../../images/system/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
+  background: url("../images/system/bullet-blue-disc-open.png") no-repeat 0 3px transparent;
 }
 
 .list-overstated a {
@@ -7068,7 +7068,7 @@ figcaption {
 }
 
 .list-standout li {
-  background: url("../../images/system/bullet-gray-arrow.png") no-repeat 0 0 transparent;
+  background: url("../images/system/bullet-gray-arrow.png") no-repeat 0 0 transparent;
   padding: 0 0 14px 18px;
 }
 
@@ -7081,9 +7081,9 @@ figcaption {
 ----------------------------------------- */
 @font-face {
   font-family: 'CaGov';
-  src: url("../../fonts/CaGov.eot");
+  src: url("../fonts/CaGov.eot");
   /* IE9 Compat Modes */
-  src: url("../../fonts/CaGov.eot?#iefix") format("embedded-opentype"), url("../../fonts/CaGov.woff") format("woff"), url("../../fonts/CaGov.ttf") format("truetype"), url("../../fonts/CaGov.svg") format("svg");
+  src: url("../fonts/CaGov.eot?#iefix") format("embedded-opentype"), url("../fonts/CaGov.woff") format("woff"), url("../fonts/CaGov.ttf") format("truetype"), url("../fonts/CaGov.svg") format("svg");
   /* Legacy iOS */
 }
 
@@ -7991,46 +7991,46 @@ figcaption {
 }
 
 body {
-  background: #484439 url("../../../images/system/orangecounty/body-background.png") repeat-y 50% 0;
-  background: -moz-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
-  background: -webkit-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
-  background: -o-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
-  background: -ms-linear-gradient(left, #484439 0, #f7d7a6 50%, #484439 100%);
-  background: linear-gradient(to right, #484439 0, #f7d7a6 50%, #484439 100%);
+  background: #07537b url("../images/system/santabarbara/body-background.png") repeat-y 50% 0;
+  background: -moz-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
+  background: -webkit-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
+  background: -o-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
+  background: -ms-linear-gradient(left, #07537b 0, #d1edf0 50%, #07537b 100%);
+  background: linear-gradient(to right, #07537b 0, #d1edf0 50%, #07537b 100%);
 }
 
 @media (max-width: 767px) {
   body {
-    background: #484439;
+    background: #07537b;
   }
 }
 
 .main-content,
 .global-header,
 .global-footer {
-  border-left: 7px solid #484439;
-  border-right: 7px solid #484439;
+  border-left: 7px solid #07537b;
+  border-right: 7px solid #07537b;
 }
 
 .primary .header-decoration {
-  background: url("../../../images/system/orangecounty/ribbon-home.png") no-repeat 66.6667% 0;
+  background: url("../images/system/santabarbara/ribbon-home.png") no-repeat 66.6667% 0;
 }
 
 .primary.two-column .header-decoration {
-  background: url("../../../images/system/orangecounty/ribbon-two-col.png") no-repeat 66.6667% 0;
+  background: url("../images/system/santabarbara/ribbon-two-col.png") no-repeat 66.6667% 0;
 }
 
 .primary.two-column .main-content {
-  background: url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%, url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0;
+  background: url("../images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%, url("../images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0;
   background-color: #fff;
 }
 
 .primary .main-content {
-  background: #fff url("../../../images/system/orangecounty/footer-bg.png") no-repeat 66.6667% 100%;
+  background: #fff url("../images/system/santabarbara/footer-bg.png") no-repeat 66.6667% 100%;
 }
 
 .two-column .main-content {
-  background: #fff url("../../../images/system/orangecounty/2column-bg.png") repeat-y 66.6667% 0;
+  background: #fff url("../images/system/santabarbara/2column-bg.png") repeat-y 66.6667% 0;
 }
 
 @media (max-width: 991px) {
@@ -8056,13 +8056,13 @@ body {
 
 @media (max-width: 767px) {
   .global-header {
-    background: #483723;
-    background: rgba(72, 55, 35, 0.85);
+    background: #014e78;
+    background: rgba(1, 78, 120, 0.85);
   }
 }
 
 .mobile-controls {
-  background: #3e2f1e;
+  background: #014469;
 }
 
 .mobile-control {
@@ -8070,11 +8070,11 @@ body {
 }
 
 .top-level-nav > li {
-  background: #3e2f1e;
+  background: #014469;
 }
 
 .top-level-nav > li .sub-nav .second-level-nav > li {
-  background: #372a1b;
+  background: #013e5f;
 }
 
 .top-level-nav > li .sub-nav .second-level-nav > li .second-level-link {
@@ -8089,8 +8089,8 @@ body {
 
 @media (min-width: 768px) {
   .main-navigation.dropdown .sub-nav {
-    background: #483723;
-    background: rgba(72, 55, 35, 0.75);
+    background: #014e78;
+    background: rgba(1, 78, 120, 0.75);
     border-color: #fbad23;
   }
   .main-navigation.dropdown .sub-nav ul > li {
@@ -8100,7 +8100,7 @@ body {
 
 @media (min-width: 768px) {
   .main-navigation.megadropdown .top-level-nav .sub-nav ul {
-    background: #f1ede4;
+    background: #f3fbfd;
   }
   .main-navigation.megadropdown .top-level-nav .sub-nav ul:before,
   .main-navigation.megadropdown .top-level-nav .sub-nav ul:after {
@@ -8120,13 +8120,13 @@ body {
     display: block;
   }
   .main-navigation.megadropdown .top-level-nav .sub-nav[class*="with-image-"] .sub-nav-decoration:after {
-    background-image: url("../../../images/system/orangecounty/ribbon.png");
+    background-image: url("../images/system/santabarbara/ribbon.png");
   }
 }
 
 @media (max-width: 767px) {
   .global-header .navigation-search.oc-menu {
-    background: #483723;
+    background: #014e78;
   }
   .navigation-search.oc-menu {
     background: #fff;
@@ -8135,13 +8135,13 @@ body {
     display: none;
   }
   .top-level-nav .toggle-sub-nav {
-    box-shadow: -5px 0 3px #372a1b;
+    box-shadow: -5px 0 3px #013e5f;
   }
 }
 
 .main-navigation {
-  background: #483723;
-  background: rgba(72, 55, 35, 0.85);
+  background: #014e78;
+  background: rgba(1, 78, 120, 0.85);
   border-bottom: 3px solid #fbad23;
 }
 
@@ -8184,7 +8184,7 @@ body {
 
 @media (min-width: 768px) {
   .main-navigation .sub-nav {
-    background: transparent url("../../../images/system/orangecounty/megadropdown-ribbon.png") no-repeat 70.3125% 100%;
+    background: transparent url("../images/system/santabarbara/megadropdown-ribbon.png") no-repeat 70.3125% 100%;
   }
 }
 
@@ -8195,8 +8195,8 @@ body {
 }
 
 .search-container {
-  background: #483723;
-  background: rgba(72, 55, 35, 0.85);
+  background: #014e78;
+  background: rgba(1, 78, 120, 0.85);
 }
 
 .search-container .search-textfield {
@@ -8217,7 +8217,7 @@ body {
 }
 
 .global-footer {
-  background: #483723;
+  background: #014e78;
   color: #fff;
 }
 
@@ -8227,43 +8227,43 @@ body {
 }
 
 h1 span[class^="ca-gov-icon-"]:first-child {
-  color: #c6720f;
+  color: #b77b01;
 }
 
 .panel-default {
-  border-color: #97570b;
+  border-color: #845901;
 }
 
 .panel-default > .panel-heading {
   color: inherit;
-  background-color: #f7d7a6;
-  border-color: #97570b;
+  background-color: #f2bf64;
+  border-color: #845901;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #97570b;
+  border-top-color: #845901;
 }
 
 .panel-default > .panel-heading .badge {
-  color: #f7d7a6;
+  color: #f2bf64;
   background-color: inherit;
 }
 
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #97570b;
+  border-bottom-color: #845901;
 }
 
 .panel-default .panel-heading h2 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h3 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h4 span[class^="ca-gov-icon-"],
 .panel-default .panel-heading h5 span[class^="ca-gov-icon-"] {
-  color: #483723;
+  color: inherit;
 }
 
 .panel-default .panel-heading .options .btn-default {
   color: #000;
-  background-color: #fdf3e4;
-  border-color: #97570b;
+  background-color: #fbecd1;
+  border-color: #845901;
 }
 
 .panel-default .panel-heading .options .btn-default:hover,
@@ -8272,8 +8272,8 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 .panel-default .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-default .panel-heading .options .btn-default {
   color: #000;
-  background-color: #f8deb6;
-  border-color: #5e3607;
+  background-color: #f7d8a1;
+  border-color: #473000;
 }
 
 .panel-default .panel-heading .options .btn-default:active,
@@ -8297,12 +8297,12 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.disabled.active,
 .panel-default .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
-  background-color: #fdf3e4;
-  border-color: #97570b;
+  background-color: #fbecd1;
+  border-color: #845901;
 }
 
 .panel-default .panel-heading .options .btn-default .badge {
-  color: #fdf3e4;
+  color: #fbecd1;
   background-color: #000;
 }
 
@@ -8312,8 +8312,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 .panel-default .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-default .panel-heading .options .btn-default {
   color: #000;
-  background-color: #f8deb6;
-  border-color: #5e3607;
+  background-color: #f7d8a1;
+  border-color: #473000;
 }
 
 .panel-default .panel-heading .options .btn-default:active,
@@ -8337,35 +8337,35 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default:active,
 .panel-default .panel-heading .options .btn-default.disabled.active,
 .panel-default .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
-  background-color: #fdf3e4;
-  border-color: #97570b;
+  background-color: #fbecd1;
+  border-color: #845901;
 }
 
 .panel-default .panel-body {
-  background: #f1ede4;
+  background: #fcf8f0;
 }
 
 .panel-overstated {
-  border-color: #97570b;
+  border-color: #845901;
 }
 
 .panel-overstated > .panel-heading {
   color: #fff;
-  background-color: #c6720f;
-  border-color: #97570b;
+  background-color: #b77b01;
+  border-color: #845901;
 }
 
 .panel-overstated > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #97570b;
+  border-top-color: #845901;
 }
 
 .panel-overstated > .panel-heading .badge {
-  color: #c6720f;
+  color: #b77b01;
   background-color: #fff;
 }
 
 .panel-overstated > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #97570b;
+  border-bottom-color: #845901;
 }
 
 .panel-overstated .panel-heading {
@@ -8382,8 +8382,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 
 .panel-overstated .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #d79c57;
-  border-color: #97570b;
+  background-color: #cda34d;
+  border-color: #845901;
 }
 
 .panel-overstated .panel-heading .options .btn-default:hover,
@@ -8392,8 +8392,8 @@ fieldset[disabled] .panel-default .panel-heading .options .btn-default.active {
 .panel-overstated .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-overstated .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #cb8430;
-  border-color: #5e3607;
+  background-color: #b48933;
+  border-color: #473000;
 }
 
 .panel-overstated .panel-heading .options .btn-default:active,
@@ -8417,12 +8417,12 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default:active
 .panel-overstated .panel-heading .options .btn-default.disabled.active,
 .panel-overstated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active {
-  background-color: #d79c57;
-  border-color: #97570b;
+  background-color: #cda34d;
+  border-color: #845901;
 }
 
 .panel-overstated .panel-heading .options .btn-default .badge {
-  color: #d79c57;
+  color: #cda34d;
   background-color: #fff;
 }
 
@@ -8432,8 +8432,8 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-overstated .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-overstated .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #cb8430;
-  border-color: #5e3607;
+  background-color: #b48933;
+  border-color: #473000;
 }
 
 .panel-overstated .panel-heading .options .btn-default:active,
@@ -8457,12 +8457,12 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default:active
 .panel-overstated .panel-heading .options .btn-default.disabled.active,
 .panel-overstated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active {
-  background-color: #d79c57;
-  border-color: #97570b;
+  background-color: #cda34d;
+  border-color: #845901;
 }
 
 .panel-overstated .panel-body {
-  background: #f1ede4;
+  background: #fcf8f0;
 }
 
 .panel-understated {
@@ -8471,7 +8471,7 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 
 .panel-understated > .panel-heading {
   color: inherit;
-  background-color: #f1ede4;
+  background-color: #fcf8f0;
   border-color: #ccc;
 }
 
@@ -8480,7 +8480,7 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 }
 
 .panel-understated > .panel-heading .badge {
-  color: #f1ede4;
+  color: #fcf8f0;
   background-color: inherit;
 }
 
@@ -8497,12 +8497,12 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-understated .panel-heading h3 span[class^="ca-gov-icon-"],
 .panel-understated .panel-heading h4 span[class^="ca-gov-icon-"],
 .panel-understated .panel-heading h5 span[class^="ca-gov-icon-"] {
-  color: #483723;
+  color: #014e78;
 }
 
 .panel-understated .panel-heading .options .btn-default {
   color: #000;
-  background-color: #fbfaf7;
+  background-color: #fefdfb;
   border-color: #ccc;
 }
 
@@ -8512,7 +8512,7 @@ fieldset[disabled] .panel-overstated .panel-heading .options .btn-default.active
 .panel-understated .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-understated .panel-heading .options .btn-default {
   color: #000;
-  background-color: #e9e3d5;
+  background-color: #f6e9d0;
   border-color: #adadad;
 }
 
@@ -8537,12 +8537,12 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default:activ
 .panel-understated .panel-heading .options .btn-default.disabled.active,
 .panel-understated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-understated .panel-heading .options .btn-default.active {
-  background-color: #fbfaf7;
+  background-color: #fefdfb;
   border-color: #ccc;
 }
 
 .panel-understated .panel-heading .options .btn-default .badge {
-  color: #fbfaf7;
+  color: #fefdfb;
   background-color: #000;
 }
 
@@ -8552,7 +8552,7 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 .panel-understated .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-understated .panel-heading .options .btn-default {
   color: #000;
-  background-color: #e9e3d5;
+  background-color: #f6e9d0;
   border-color: #adadad;
 }
 
@@ -8577,12 +8577,12 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default:activ
 .panel-understated .panel-heading .options .btn-default.disabled.active,
 .panel-understated .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-understated .panel-heading .options .btn-default.active {
-  background-color: #fbfaf7;
+  background-color: #fefdfb;
   border-color: #ccc;
 }
 
 .panel-understated .panel-body {
-  background: #f1ede4;
+  background: #fcf8f0;
 }
 
 .panel-standout {
@@ -8591,7 +8591,7 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 
 .panel-standout > .panel-heading {
   color: #fff;
-  background-color: #483723;
+  background-color: #014e78;
   border-color: #fbad23;
 }
 
@@ -8600,7 +8600,7 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 }
 
 .panel-standout > .panel-heading .badge {
-  color: #483723;
+  color: #014e78;
   background-color: #fff;
 }
 
@@ -8622,8 +8622,8 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 
 .panel-standout .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #7f7365;
-  border-color: #372a1b;
+  background-color: #4d83a1;
+  border-color: #013e5f;
 }
 
 .panel-standout .panel-heading .options .btn-default:hover,
@@ -8632,8 +8632,8 @@ fieldset[disabled] .panel-understated .panel-heading .options .btn-default.activ
 .panel-standout .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-standout .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #63594e;
-  border-color: #0e0a07;
+  background-color: #3d677e;
+  border-color: #001622;
 }
 
 .panel-standout .panel-heading .options .btn-default:active,
@@ -8657,12 +8657,12 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.disabled.active,
 .panel-standout .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
-  background-color: #7f7365;
-  border-color: #372a1b;
+  background-color: #4d83a1;
+  border-color: #013e5f;
 }
 
 .panel-standout .panel-heading .options .btn-default .badge {
-  color: #7f7365;
+  color: #4d83a1;
   background-color: #fff;
 }
 
@@ -8672,8 +8672,8 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
 .panel-standout .panel-heading .options .btn-default.active,
 .open > .dropdown-toggle.panel-standout .panel-heading .options .btn-default {
   color: #fff;
-  background-color: #63594e;
-  border-color: #0e0a07;
+  background-color: #3d677e;
+  border-color: #001622;
 }
 
 .panel-standout .panel-heading .options .btn-default:active,
@@ -8697,26 +8697,26 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default:active,
 .panel-standout .panel-heading .options .btn-default.disabled.active,
 .panel-standout .panel-heading .options .btn-default[disabled].active,
 fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
-  background-color: #7f7365;
-  border-color: #372a1b;
+  background-color: #4d83a1;
+  border-color: #013e5f;
 }
 
 .panel-standout .panel-body {
-  background: #f1ede4;
+  background: #f3fbfd;
 }
 
 .panel-standout.highlight .panel-heading .triangle {
-  background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat;
+  background: url("../images/system/santabarbara/panel-standout-triangle.png") no-repeat;
 }
 
 .main-secondary .panel-default {
-  border-color: #97570b;
+  border-color: #845901;
 }
 
 .main-secondary .panel-default .panel-heading {
-  background: #f6e7cc;
-  border-top: 2px solid #483723;
-  border-bottom: 2px solid #483723;
+  background: #d1edf0;
+  border-top: 2px solid #014e78;
+  border-bottom: 2px solid #014e78;
   color: inherit;
 }
 
@@ -8731,15 +8731,15 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
 .main-secondary .panel-default .panel-heading h3 span[class^="ca-gov-icon-"],
 .main-secondary .panel-default .panel-heading h4 span[class^="ca-gov-icon-"],
 .main-secondary .panel-default .panel-heading h5 span[class^="ca-gov-icon-"] {
-  color: #483723;
+  color: #014e78;
 }
 
 .panel.first .panel-body {
-  background: -moz-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
-  background: -webkit-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
-  background: -o-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
-  background: -ms-linear-gradient(top, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
-  background: linear-gradient(to bottom, rgba(246, 231, 204, 0.9) 0, rgba(246, 231, 204, 0) 100%);
+  background: -moz-linear-gradient(top, rgba(209, 237, 240, 0.9) 0, rgba(209, 237, 240, 0) 100%);
+  background: -webkit-linear-gradient(top, rgba(209, 237, 240, 0.9) 0, rgba(209, 237, 240, 0) 100%);
+  background: -o-linear-gradient(top, rgba(209, 237, 240, 0.9) 0, rgba(209, 237, 240, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(209, 237, 240, 0.9) 0, rgba(209, 237, 240, 0) 100%);
+  background: linear-gradient(to bottom, rgba(209, 237, 240, 0.9) 0, rgba(209, 237, 240, 0) 100%);
 }
 
 .published {
@@ -8747,12 +8747,12 @@ fieldset[disabled] .panel-standout .panel-heading .options .btn-default.active {
 }
 
 figure {
-  background-color: #f1ede4;
-  border-color: #f6e7cc;
+  background-color: #f3fbfd;
+  border-color: #d1edf0;
 }
 
 .main-secondary .nav-tabs {
-  background: #483723;
+  background: #014e78;
   border-bottom-color: #fbad23;
 }
 
@@ -8761,7 +8761,7 @@ figure {
 }
 
 .main-secondary .nav-tabs > li > a:hover {
-  color: #f6e7cc;
+  color: #d1edf0;
 }
 
 .main-secondary .nav-tabs > li.active > a,
@@ -8779,11 +8779,11 @@ figure {
 .main-secondary .nav-tabs > li.active > a:after,
 .main-secondary .nav-tabs > li.active > a:visited:after,
 .main-secondary .nav-tabs > li.active > a:focus:after {
-  background: url("../../../images/system/orangecounty/panel-standout-triangle.png") no-repeat;
+  background: url("../images/system/santabarbara/panel-standout-triangle.png") no-repeat;
 }
 
 .location.mini [class^="ca-gov-icon"] {
-  background: #483723;
+  background: #014e78;
   color: #fff;
 }
 
@@ -8831,7 +8831,7 @@ figure {
 
 .card-overstated {
   background-color: #fff;
-  border: 1px solid #97570b;
+  border: 1px solid #b77b01;
   color: #000000;
 }
 
@@ -8855,17 +8855,17 @@ figure {
 
 .card-overstated .card-header {
   border-bottom: 1px solid #97570b;
-  background-color: #97570b;
+  background-color: #b77b01;
 }
 
 .card-overstated .card-footer {
   border-top: 1px solid #97570b;
-  background-color: #97570b;
+  background-color: #b77b01;
 }
 
 .card-standout {
   background-color: #fff;
-  border: 1px solid #483723;
+  border: 1px solid #ccc;
   color: initial;
 }
 
@@ -8893,19 +8893,19 @@ figure {
 }
 
 .card-standout .card-header {
-  border-bottom: 1px solid #483723;
-  background-color: #483723;
+  border-bottom: 1px solid #ccc;
+  background-color: #014e78;
 }
 
 .card-standout .card-footer {
-  border-top: 1px solid #483723;
-  background-color: #483723;
+  border-top: 1px solid #ccc;
+  background-color: #014e78;
 }
 
 @font-face {
   font-family: 'CaGov';
-  src: url("../../fonts/CaGov.eot?trqo0f");
-  src: url("../../fonts/CaGov.eot?trqo0f#iefix") format("embedded-opentype"), url("../../fonts/CaGov.ttf?trqo0f") format("truetype"), url("../../fonts/CaGov.woff?trqo0f") format("woff"), url("../../fonts/CaGov.svg?trqo0f#CaGov") format("svg");
+  src: url("../fonts/CaGov.eot?trqo0f");
+  src: url("../fonts/CaGov.eot?trqo0f#iefix") format("embedded-opentype"), url("../fonts/CaGov.ttf?trqo0f") format("truetype"), url("../fonts/CaGov.woff?trqo0f") format("woff"), url("../fonts/CaGov.svg?trqo0f#CaGov") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;

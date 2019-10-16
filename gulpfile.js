@@ -183,7 +183,7 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 		f = f.concat( config.commonFiles );
 		f = f.concat( versionDir + '/custom.css' );
 
-		var fileName = 'caweb-' + 
+		var fileName = 'cagov-v' + ver + '-' +
 			( minified ? e.replace('.css', '.min.css') : e);
 
 		return gulp.src(f)
@@ -195,7 +195,7 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 
 			.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 			.pipe(concat(fileName )) // compiled file
-			.pipe(gulp.dest('./css/version' + ver + '/'));
+			.pipe(gulp.dest('./css/'));
 	});
 }
 

@@ -177,8 +177,8 @@ function caweb_wp_enqueue_scripts() {
 	$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
 	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
-	$file = sprintf('%1$s/css/version%2$s/caweb-%3$s.css', CAWebUri, $ver, $colorscheme);
-	$file = file_exists( str_replace( '.css', '.min.css', $file) ) ? str_replace( '.css', '.min.css', $file) : $file;
+	$coreCSSfile = CAWebUri . "/css/cagov-v$ver-$colorscheme.css"; 
+	$coreCSSfile = file_exists( str_replace( '.css', '.min.css', $coreCSSfile) ) ? str_replace( '.css', '.min.css', $coreCSSfile) : $coreCSSfile;
 
 	// If on the activation page
 	if ('wp-activate.php' == $pagenow) {
@@ -186,7 +186,7 @@ function caweb_wp_enqueue_scripts() {
 		//wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
 	} else {
 		//wp_enqueue_style('caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
-		wp_enqueue_style('caweb-core-style', $file, array(), CAWebVersion);
+		wp_enqueue_style('caweb-core-style', $coreCSSfile, array(), CAWebVersion);
 		//wp_enqueue_style('caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), CAWebVersion);
 		//wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
 		//wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
@@ -328,6 +328,13 @@ function caweb_admin_enqueue_scripts($hook) {
 	$adminCSS = sprintf('%1$s/css/admin.css', CAWebUri);
 	$adminCSS = file_exists( str_replace( '.css', '.min.css', $adminCSS) ) ? str_replace( '.css', '.min.css', $adminCSS) : $adminCSS;
 
+	$color = get_option('ca_site_color_scheme', 'oceanside');
+	$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
+	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
+
+	$editorCSS = sprintf('%1$s/css/cagov-v%2$s-%3$s.css', CAWebUri, caweb_get_page_version(get_the_ID()), $colorscheme );
+	$editorCSS = file_exists( str_replace( '.css', '.min.css', $editorCSS) ) ? str_replace( '.css', '.min.css', $editorCSS) : $editorCSS;
+
 	if (in_array($hook, $pages)) {
 		// Enqueue Scripts
 		wp_enqueue_script('jquery');
@@ -355,7 +362,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
 	// Load editor styling
 	wp_dequeue_style(get_template_directory_uri() . 'css/editor-style.css');
-	add_editor_style(sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())));
+	add_editor_style( $editorCSS );
 }
 
 // CAWeb Admin Head
@@ -417,7 +424,7 @@ function caweb_admin_bar_menu($wp_admin_bar) {
 // If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
 if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 	// CAWeb Custom Modules
-	add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
+	//add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
 	function caweb_et_pagebuilder_module_init() {
 		$divi_builder = CAWebAbsPath . "/divi/builder";
 		include("$divi_builder/functions.php");
@@ -436,14 +443,14 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 	add_action('admin_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
 	add_action('wp_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
 	function caweb_builder_enqueue_scripts(){
-		$divi_builder = CAWebAbsPath . "/divi/builder";
+		$divi_builder = CAWebUri . "/divi";
 
 		wp_register_script('caweb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
 		wp_register_script('caweb-fb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
 
 
-		wp_enqueue_script('caweb-builder-scripts');
-		wp_enqueue_script('caweb-fb-builder-scripts');
+		//wp_enqueue_script('caweb-builder-scripts');
+		//wp_enqueue_script('caweb-fb-builder-scripts');
 
 		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
 		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
