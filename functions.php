@@ -131,7 +131,7 @@ function caweb_init() {
 	unregister_nav_menu('footer-menu');
 
 	// Register Menu Navigation Settings
-	register_nav_menus(cawen_nav_menu_theme_locations());
+	register_nav_menus(caweb_nav_menu_theme_locations());
 
 	// Enable Thickbox
 	if ('wp-login.php' !== $pagenow) {
