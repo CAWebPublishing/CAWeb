@@ -56,7 +56,7 @@ add_filter('map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3);
 add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
 
-    foreach ( glob(pathinfo(__FILE__)['dirname'] . '{$inc_dir}/*.php') as $file ) {
+    foreach ( glob(pathinfo(__FILE__)['dirname'] . '/inc/*.php') as $file ) {
         require_once($file);
 	}
 
