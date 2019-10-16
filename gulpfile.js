@@ -167,7 +167,7 @@ async function buildAdminStyles( min = false){
 			})
 		)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('admin' + minified + ' .css')) // compiled file
+		.pipe(concat('admin' + minified + '.css')) // compiled file
 		.pipe(gulp.dest('./css/'));
 }
 
