@@ -46,32 +46,19 @@ function caweb_add_unfiltered_html_capability($caps, $cap, $user_id) {
 }
 add_filter('map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3);
 
-// CAWeb After Setup Theme
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
 add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
-	$inc_dir = CAWebAbsPath . '/includes';
 
-	// additional functions
-	require_once("{$inc_dir}/functions.php");
-
-	// Shortcodes
-	require_once("{$inc_dir}/shortcodes.php");
-
-	// customizer functions
-	require_once("{$inc_dir}/customizer.php");
-
-	// Navigation Menu Customization to wp-admin/nav-menus.php page
-	require_once("{$inc_dir}/nav_walker.php");
-	require_once("{$inc_dir}/nav.php");
-
-	// Metaboxes
-	require_once("{$inc_dir}/metaboxes.php");
-
-	// Password Reset
-	require_once("{$inc_dir}/wp-login.php");
-
-	// Filters
-	require_once(CAWebAbsPath . "/includes/filters.php");
+    foreach ( glob(pathinfo(__FILE__)['dirname'] . '{$inc_dir}/*.php') as $file ) {
+        require_once($file);
+	}
 
 	// Options Page
 	require_once(CAWebAbsPath . '/options.php');
@@ -97,7 +84,11 @@ function caweb_setup_theme() {
 		));
 	}
 
-	// Enable Post Thumbnails
+	/*
+    * Enable support for Post Thumbnails on posts and pages.
+    *
+    * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+    */
 	add_theme_support('post-thumbnails');
 }
 
@@ -186,17 +177,20 @@ function caweb_wp_enqueue_scripts() {
 	$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
 	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
+	$file = sprintf('%1$s/css/version%2$s/caweb-%3$s.css', CAWebUri, $ver, $colorscheme);
+	$file = file_exists( str_replace( '.css', '.min.css', $file) ) ? str_replace( '.css', '.min.css', $file) : $file;
+
 	// If on the activation page
 	if ('wp-activate.php' == $pagenow) {
-		wp_enqueue_style('caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
-		wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
 	} else {
-		wp_enqueue_style('caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
-		wp_enqueue_style('caweb-color-style', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-core-style', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
+		wp_enqueue_style('caweb-core-style', $file, array(), CAWebVersion);
 		//wp_enqueue_style('caweb-module-style', sprintf('%1$s/css/modules.css', CAWebUri), array(), CAWebVersion);
-		wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
-		wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
-		wp_enqueue_style('caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-font-style', sprintf('%1$s/css/cagov.font-only.css', CAWebUri), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-custom-style', sprintf('%1$s/css/custom.css', CAWebUri), array(), CAWebVersion);
+		//wp_enqueue_style('caweb-custom-version-style', sprintf('%1$s/css/version%2$s/custom.css', CAWebUri, $ver), array(), CAWebVersion);
 
 		// External CSS Styles
 		$ext_css = array_values(array_filter(get_option('caweb_external_css', array())));
@@ -331,6 +325,9 @@ add_action('admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15);
 function caweb_admin_enqueue_scripts($hook) {
 	$pages = array('toplevel_page_caweb_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
 
+	$adminCSS = sprintf('%1$s/css/admin.css', CAWebUri);
+	$adminCSS = file_exists( str_replace( '.css', '.min.css', $adminCSS) ) ? str_replace( '.css', '.min.css', $adminCSS) : $adminCSS;
+
 	if (in_array($hook, $pages)) {
 		// Enqueue Scripts
 		wp_enqueue_script('jquery');
@@ -349,12 +346,12 @@ function caweb_admin_enqueue_scripts($hook) {
 
 		wp_enqueue_script('caweb-admin-scripts');
 		// Enqueue Styles
-		wp_enqueue_style('caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), CAWebVersion);
+		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
 	} elseif (in_array($hook, array('post.php', 'post-new.php', 'widgets.php'))) {
-		wp_enqueue_style('caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), CAWebVersion);
+		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
 	}
 
-	wp_enqueue_style('caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), CAWebVersion);
+	//wp_enqueue_style('caweb-font-styles', CAWebUri . '/css/cagov.font-only.css', array(), CAWebVersion);
 
 	// Load editor styling
 	wp_dequeue_style(get_template_directory_uri() . 'css/editor-style.css');
