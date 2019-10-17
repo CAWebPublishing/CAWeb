@@ -1,8 +1,4 @@
 /* CAWeb Custom CSS 8/2/2019 */
-/* HIDE THE 'Enable Visual Builder' Button*/
-#wp-admin-bar-et-use-visual-builder{
-  display: none !important;
-}
 
 /* Allow anchor links in global footers to maintain the normal blue color */
 @media(max-width: 768px){
