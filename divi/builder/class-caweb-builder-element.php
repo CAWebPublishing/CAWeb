@@ -1,6 +1,12 @@
 <?php
 
 class ET_Builder_CAWeb_Module extends ET_Builder_Module {
+	protected $module_credits = array(
+		'module_uri' => 'https://caweb.cdt.ca.gov/',
+		'author'     => 'CAWeb Publishing',
+		'author_uri' => '',
+	);
+	
 	function parse_divi_font_settings($settings) {
 		$fields = array("font", "weight", "italic", "uppercase", "underline", "titlecase", "strikethrough", "linecolor", "linestyle");
 		if ( ! is_array($settings)) {

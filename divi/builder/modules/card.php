@@ -1,80 +1,75 @@
 <?php
-/*
-Divi Icon Field Names
-make sure the field name is one of the following:
-'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
- */
+
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
 
 class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
-    function init() {
-        $this->name = esc_html__('Card', 'et_builder');
 
-        $this->slug = 'et_pb_ca_card';
+	public $slug       = 'et_pb_ca_card';
+	public $vb_support = 'on';
 
-        $this->main_css_element = '%%order_class%%';
-
+	public function init() {
+		$this->name = esc_html__( 'Card', 'divi-state-child-modules' );
         $this->settings_modal_toggles = array(
             'general' => array(
                 'toggles' => array(
-                    'style'  		=> esc_html__('Style', 'et_builder'),
-                    'header' 		=> esc_html__('Header', 'et_builder'),
-                    'body'   		=> esc_html__('Body', 'et_builder'),
-                    'footer'   	=> esc_html__('Footer', 'et_builder'),
+                    'style'  => esc_html__('Style', 'divi-state-child-modules'),
+                    'header' => esc_html__('Header', 'divi-state-child-modules'),
+                    'body'   => esc_html__('Body', 'divi-state-child-modules'),
+                    'footer'   => esc_html__('Footer', 'divi-state-child-modules'),
                 ),
-            ),
-            'advanced' => array(
-                'toggles' => array(
-                    'style'  		=> esc_html__('Style', 'et_builder'),
-                    'header' 		=> esc_html__('Header', 'et_builder'),
-                    'footer'   	=> esc_html__('Footer', 'et_builder'),
-                    'text' => array(
-                        'title'    => esc_html__('Text', 'et_builder'),
-                        'priority' => 49,
+                'advanced' => array(
+                    'toggles' => array(
+                        'style'  		=> esc_html__('Style', 'et_builder'),
+                        'header' 		=> esc_html__('Header', 'et_builder'),
+                        'footer'   	=> esc_html__('Footer', 'et_builder'),
+                        'text' => array(
+                            'title'    => esc_html__('Text', 'et_builder'),
+                            'priority' => 49,
+                        ),
                     ),
                 ),
             ),
-            'custom_css' => array(
-                'toggles' => array(
-                ),
-            ),
         );
-    }
-    function get_fields() {
+	}
+
+	public function get_fields() {
         $general_fields = array(
             'card_layout' => array(
-                'label'             => esc_html__('Style', 'et_builder'),
+                'label'             => esc_html__('Card Style', 'divi-state-child-modules'),
                 'type'              => 'select',
                 'option_category'   => 'configuration',
                 'options'           => array(
-                    'default' => esc_html__('Default', 'et_builder'),
-                    'standout'  => esc_html__('Standout', 'et_builder'),
-                    'overstated'  => esc_html__('Overstated', 'et_builder'),
-                    'understated'  => esc_html__('Understated', 'et_builder'),
+                    'default' => esc_html__('Default', 'divi-state-child-modules'),
+                    'standout'  => esc_html__('Standout', 'divi-state-child-modules'),
+                    'overstated'  => esc_html__('Overstated', 'divi-state-child-modules'),
+                    'understated'  => esc_html__('Understated', 'divi-state-child-modules'),
                     'custom' => esc_html__('Custom', 'et_builder'),
                 ),
                 'tab_slug' => 'general',
                 'toggle_slug'		=> 'style',
             ),
             'show_image' => array(
-                'label'           => esc_html__('Include Image', 'et_builder'),
+                'label'           => esc_html__('Include Image', 'divi-state-child-modules'),
                 'type'            => 'yes_no_button',
                 'option_category' => 'configuration',
                 'options'         => array(
-                    'off' => esc_html__('No', 'et_builder'),
-                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'divi-state-child-modules'),
+                    'on'  => esc_html__('Yes', 'divi-state-child-modules'),
                 ),
                 'affects' => array('featured_image'),
                 'tab_slug' => 'general',
                 'toggle_slug'		=> 'style',
             ),
             'featured_image' => array(
-                'label' => esc_html__('Featured Image', 'et_builder'),
+                'label' => esc_html__('Featured Image', 'divi-state-child-modules'),
                 'type' => 'upload',
                 'option_category' => 'basic_option',
-                'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
-                'choose_text' => esc_attr__('Choose a Background Image', 'et_builder'),
-                'update_text' => esc_attr__('Set As Background', 'et_builder'),
-                'description' => esc_html__('If defined, this image will be used as the background for this location. To remove a background image, simply delete the URL from the settings field.', 'et_builder'),
+                'upload_button_text' => esc_attr__('Upload an image', 'divi-state-child-modules'),
+                'choose_text' => esc_attr__('Choose a Background Image', 'divi-state-child-modules'),
+                'update_text' => esc_attr__('Set As Background', 'divi-state-child-modules'),
+                'description' => esc_html__('If defined, this image will be used as the background for this location. To remove a background image, simply delete the URL from the settings field.', 'divi-state-child-modules'),
                 'show_if' => array('show_image' => 'on'),
                 'tab_slug' => 'general',
                 'toggle_slug'		=> 'style',
@@ -92,10 +87,10 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
                 'toggle_slug'		=> 'header',
             ),
             'title' => array(
-                'label'           => esc_html__('Title', 'et_builder'),
+                'label'           => esc_html__('Header Title', 'et_builder'),
                 'type'            => 'text',
                 'option_category' => 'basic_option',
-                'description'     => esc_html__('Here you can enter a title for the card.', 'et_builder'),
+                'description'     => esc_html__('Here you can enter a header title for the card.', 'et_builder'),
                 'show_if'			 => array('include_header' => 'on'),
                 'tab_slug' => 'general',
                 'toggle_slug'		=> 'header',
@@ -167,7 +162,7 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
                 'toggle_slug' => 'admin_label',
             ),
         );
-
+        
         $design_fields = array(
             'card_color' => array(
                 'label'             => esc_html__('Set Card Color', 'et_builder'),
@@ -202,52 +197,51 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
-    }
-    function render($unprocessed_props, $content = null, $render_slug) {
+	}
+
+	public function render( $unprocessed_props, $content = null, $render_slug ) {
         $card_layout = $this->props['card_layout'];
         $card_color = $this->props['card_color'];
-        $text_color = $this->props['text_color'];
-        $footer_color = $this->props['footer_color'];
-        $show_image = $this->props['show_image'];
+        
+		$show_image = $this->props['show_image'];
         $featured_image = $this->props['featured_image'];
+
+        $include_header = $this->props['include_header'];
         $title = $this->props['title'];
+        $text_color = $this->props['text_color'];
+
+        $include_footer = $this->props['include_footer'];
+        $footer_text = $this->props['footer_text'];
+        $footer_color = $this->props['footer_color'];
+
         $show_button = $this->props['show_button'];
         $button_text = $this->props['button_text'];
         $button_link = $this->props['button_link'];
-        $include_header = $this->props['include_header'];
-        $include_footer = $this->props['include_footer'];
-        $footer_text = $this->props['footer_text'];
 
-        $content = $this->content;
-
+		$content = $this->content;
+		
         $this->add_classname('card');
         $this->add_classname(sprintf('card-%1$s', "custom" == $card_layout ? 'default' : $card_layout));
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
         $button_link = ! empty($button_link) ? esc_url($button_link) : '';
 
-        $card_color = ( ! empty($card_color) && "custom" == $card_layout ? sprintf(' style="background-color: %1$s;"', $card_color) : "");
-        $text_color = ( ! empty($text_color) ? sprintf(' style="color: %1$s;"', $text_color) : "");
+        $card_color = ! empty($card_color) && "custom" == $card_layout ? sprintf(' style="background-color: %1$s;"', $card_color) : "";
+        $text_color = ! empty($text_color) ? sprintf(' style="color: %1$s;"', $text_color) : "";
+        $footer_color = ! empty($footer_color) ? sprintf(' style="color: %1$s;"', $footer_color) : "";
 
-        $footer_color = ( ! empty($footer_color) ? sprintf(' style="color: %1$s;"', $footer_color) : "");
+		$display_image = "on" == $show_image ? sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '';
 
-        $display_image = ("on" == $show_image ? sprintf('<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image) : '');
+		$display_header = "on" == $include_header ? sprintf('<div class="card-header"><h4 class="card-title"%1$s>%2$s</h4></div>', $text_color, $title) : '';
 
-        $display_header = ("on" == $include_header ?
-					sprintf('<div class="card-header"><h4 class="card-title"%1$s>%2$s</h4></div>', $text_color, $title) :
-					'');
+		$display_button = "on" == $show_button ? sprintf('<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text) : '';
 
-        $display_button = ("on" == $show_button ?
-		sprintf('<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text) : '');
+        $display_footer = "on" == $include_footer ? sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '';
 
-        $display_footer = ("on" == $include_footer ?
-		sprintf('<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text) : '');
-
-        $output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header, $card_color, $content, $display_button, $display_footer);
+		$output = sprintf('<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header, $card_color, $content, $display_button, $display_footer);
 
         return $output;
-    }
+	}
 }
-new ET_Builder_CA_Card;
 
-?>
+new ET_Builder_CA_Card;
