@@ -452,8 +452,8 @@ if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
 		//wp_enqueue_script('caweb-builder-scripts');
 		//wp_enqueue_script('caweb-fb-builder-scripts');
 
-		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
-		wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
 
 	}
 	

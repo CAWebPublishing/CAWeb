@@ -93,17 +93,6 @@ overflow: hidden;
 .et_pb_ca_fullwidth_panel .panel-heading h2{
 	width: 100%;
 }
-/* Location Banner Thumbnail Image Fix*/
-.et_pb_ca_location_widget.location.banner .thumbnail img {
-    width: 100%;
- }
-.et_pb_ca_location_widget.location.banner .description {
-    padding-bottom: 10px;
-}
-.et_pb_ca_location_widget.location.banner .address a {
-  margin-left: 30px;
-  display: inline-block;
-}
 /* Profile Banner */
 .profile-banner .banner-subtitle{
   color: #333333;

@@ -5,14 +5,16 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
 
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
+
 class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
+    public $slug       = 'et_pb_ca_location_widget';
+    public $vb_support = 'on';
+    
     function init() {
         $this->name = esc_html__('Location', 'et_builder');
-
-        $this->slug = 'et_pb_ca_location_widget';
-
-        $this->main_css_element = '%%order_class%%';
-
         $this->settings_modal_toggles = array(
             'general' => array(
                 'toggles' => array(
@@ -28,10 +30,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
                         'title'    => esc_html__('Text', 'et_builder'),
                         'priority' => 49,
                     ),
-                ),
-            ),
-            'custom_css' => array(
-                'toggles' => array(
                 ),
             ),
         );
@@ -207,64 +205,126 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
     }
     function render($unprocessed_props, $content = null, $render_slug) {
         $location_layout 				= $this->props['location_layout'];
-        $featured_image       	= $this->props['featured_image'];
-        $name               		= $this->props['name'];
-        $desc               		= $this->props['desc'];
-        $addr               		= $this->props['addr'];
-        $city              			= $this->props['city'];
-        $state              		= $this->props['state'];
-        $zip    								= $this->props['zip'];
-        $show_contact    				= $this->props['show_contact'];
-        $phone    							= $this->props['phone'];
-        $fax    								= $this->props['fax'];
-        $show_icon    					= $this->props['show_icon'];
-        $icon    								= $this->props['font_icon'];
-        $show_button    				= $this->props['show_button'];
-        $location_link    			= $this->props['location_link'];
-
+        
         $this->add_classname('location');
         $this->add_classname($location_layout);
-
-        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-
-        $display_icon = ("on" == $show_icon ? caweb_get_icon_span($icon) : '');
-
-        $address = array($addr, $city, $state, $zip);
-        $address = array_filter($address);
-        $address = implode(", ", $address);
-
-        $location_link = ! empty($location_link) ? esc_url($location_link) : '';
+        
+        $address = '';
 
         if ("contact" == 	$location_layout) {
-            $display_other = ("on" == $show_contact ?
-				sprintf('<p class="other">%1$s%2$s</p>',
-				("" != $phone ? "General Information: {$phone}<br />" : ''),
-				("" != $fax ? "FAX: {$fax}" : '')) : '');
-
-            $display_button = ("on" == $show_button && ! empty($location_link) ? sprintf('<a href="%1$s" class="btn" target="_blank">More</a>', $location_link) : '');
-
-            $address = ( ! empty($name) ? sprintf('%1$s<br />%2$s', $name, caweb_get_google_map_place_link($address)) :
-                  caweb_get_google_map_place_link($address));
-
-            $output =sprintf('<div%1$s%2$s>%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', $this->module_id(), $class, $display_icon, $address, $display_other, $display_button);
+            $output = $this->contactLocation();
         } elseif ("mini" == 	$location_layout) {
-            $output = sprintf('<div%1$s%2$s>%3$s<div class="contact"%7$s><div class="title"><a href="%4$s" target="_blank">%5$s</a></div>%6$s</div></div>',
-			$this->module_id(),	 $class,	("on" == $show_icon ? sprintf('<div>%1$s</div>', $display_icon) : ''), $location_link, $name,
-       ( ! empty($address) ? sprintf('<div class="address">%1$s</div>', caweb_get_google_map_place_link($address)) : ''), (empty($display_icon) ? ' style="margin-left: 0px;"' : ''));
+            $output = $this->miniLocation();
         } else {
-            $display_button = ("on" == $show_button && ! empty($location_link) ? sprintf('<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link) : '');
-
-            if( ! empty( $featured_image ) ){
-                $alt_text = caweb_get_attachment_post_meta($featured_image, '_wp_attachment_image_alt');
-                $featured_image = sprintf('<img src="%1$s" alt="%2$s" />', $featured_image, ! empty($alt_text) ? $alt_text : ' ' );
-            }
-
-            $output = sprintf('<div%1$s%2$s><div class="thumbnail">%3$s</div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
-			 $this->module_id() ,	 $class,  $featured_image, $name , ( ! empty($address) ? sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', caweb_get_google_map_place_link($address)) : ''),
-      ( ! empty($desc) ? sprintf('<div class="title">Description</div><div class="description">%1$s</div>', $desc) : ''), $display_button);
+            $output = $this->bannerLocation();
         }
 
         return $output;
+    }
+
+    function contactLocation(){
+        $show_contact = $this->props['show_contact'];
+        $phone = $this->props['phone'];
+        $fax = $this->props['fax'];
+        $show_button = $this->props['show_button'];
+        $location_link = $this->props['location_link'];
+        $name = $this->props['name'];
+        $addr = $this->props['addr'];
+        $city = $this->props['city'];
+        $state = $this->props['state'];
+        $zip = $this->props['zip'];
+        $show_icon = $this->props['show_icon'];
+        $icon = $this->props['font_icon'];
+        
+        $display_other = '';
+        $display_button = '';
+        $display_icon = '';
+        $map_link = caweb_get_google_map_place_link(array($addr, $city, $state, $zip));
+        
+        if ( "on" == $show_contact ){
+            $phone = ! empty( $phone ) ? "General Information: {$phone}<br />" : '';
+            $fax = ! empty( $fax ) ? "FAX: {$fax}" : '';
+            $display_other = sprintf('<p class="other">%1$s%2$s</p>', $phone, $fax );
+        }
+        
+        if ( "on" == $show_button && ! empty($location_link) ){
+            $display_button = sprintf('<a href="%1$s" class="btn" target="_blank">More</a>', $location_link);
+        } 
+
+        if ( ! empty($name) ){
+            $map_link = "$name<br />$map_link";
+        }
+
+        if ("on" == $show_icon ){
+            $display_icon = caweb_get_icon_span($icon);
+        }
+
+        return sprintf('<div%1$s class="%2$s">%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', 
+        $this->module_id(), $this->module_classname($this->slug), $display_icon, $map_link, $display_other, $display_button);
+    }
+
+    function miniLocation(){
+        $name = $this->props['name'];
+        $location_link = $this->props['location_link'];
+        $addr = $this->props['addr'];
+        $city = $this->props['city'];
+        $state = $this->props['state'];
+        $zip = $this->props['zip'];
+        $show_icon = $this->props['show_icon'];
+        $icon = $this->props['font_icon'];
+        
+        $map_link = caweb_get_google_map_place_link(array($addr, $city, $state, $zip));
+        $location_link = ! empty($location_link) ? esc_url($location_link) : '';
+        $display_icon = '';
+        $contactClass = '';
+
+        if ("on" == $show_icon ){
+            $display_icon = sprintf('<div>%1$s</div>', caweb_get_icon_span($icon));
+        }else{
+            $contactClass = ' ml-0';
+        }
+
+        if( ! empty($map_link) ){
+            $map_link = sprintf('<div class="address">%1$s</div>', $map_link);
+        }
+        
+        return sprintf('<div%1$s class="%2$s">%3$s<div class="contact%4$s"><div class="title"><a href="%5$s" target="_blank">%6$s</a></div>%7$s</div></div>',
+        $this->module_id(),	$this->module_classname($this->slug), $display_icon, $contactClass, $location_link, $name, $map_link);
+    }
+
+    function bannerLocation(){
+        $name = $this->props['name'];
+        $show_button = $this->props['show_button'];
+        $location_link = $this->props['location_link'];
+        $featured_image = $this->props['featured_image'];
+        $desc = $this->props['desc'];
+        $addr = $this->props['addr'];
+        $city = $this->props['city'];
+        $state = $this->props['state'];
+        $zip = $this->props['zip'];
+        
+        $display_button = '';
+        $map_link = caweb_get_google_map_place_link(array($addr, $city, $state, $zip), '_blank', array('m-l-md', 'd-inline-block'));
+
+        if ("on" == $show_button && ! empty($location_link) ){
+            $display_button = sprintf('<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link);
+        } 
+
+        if( ! empty( $featured_image ) ){
+            $alt_text = caweb_get_attachment_post_meta($featured_image, '_wp_attachment_image_alt');
+            $featured_image = sprintf('<img src="%1$s" alt="%2$s" class="w-100"/>', $featured_image, ! empty($alt_text) ? $alt_text : ' ' );
+        }
+
+        if ( ! empty($desc) ){
+            $desc = sprintf('<div class="title">Description</div><div class="description pb-2">%1$s</div>', $desc);
+        }
+
+        if( ! empty($map_link) ){
+            $map_link = sprintf(' <span class="ca-gov-icon-road-pin"></span>%1$s', $map_link);
+        }
+        
+        return sprintf('<div%1$s class="%2$s"><div class="thumbnail">%3$s</div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
+         $this->module_id(), $this->module_classname($this->slug), $featured_image, $name , $map_link, $desc, $display_button);
     }
 }
 new ET_Builder_CA_Location;
