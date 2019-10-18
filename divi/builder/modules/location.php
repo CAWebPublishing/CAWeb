@@ -204,13 +204,11 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render($unprocessed_props, $content = null, $render_slug) {
-        $location_layout 				= $this->props['location_layout'];
+        $location_layout = $this->props['location_layout'];
         
         $this->add_classname('location');
         $this->add_classname($location_layout);
         
-        $address = '';
-
         if ("contact" == 	$location_layout) {
             $output = $this->contactLocation();
         } elseif ("mini" == 	$location_layout) {
