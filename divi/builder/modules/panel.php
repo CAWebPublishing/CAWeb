@@ -193,6 +193,21 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
             $display_icon = "on" == $use_icon ? caweb_get_icon_span($icon) : "";
             $button_link = ! empty($button_link) ? esc_url($button_link) : '';
             
+            switch($panel_layout){
+                case "none":
+                case "standout":
+                case "standout highlight":
+                    $hSize = 'h2';
+                    break;
+                case "overstated":
+                    $hSize = 'h3';
+                    break;
+                case "default":
+                case "understated":
+                        $hSize = 'h4';
+                        break;
+            }
+            
             if( "on" == $show_button ){
                 $option_padding = "right" == $heading_align ? ' pl-2' : '';
                 $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', 
@@ -202,8 +217,8 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><h2 class="w-100 pb-0 text-%1$s" %2$s>%3$s%4$s%5$s</h2></div>',
-                $heading_align, $heading_text_color, $display_icon, $title, $display_options);
+            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+                $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        
         $output = sprintf('<div%1$s%2$s>%3$s<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->', 
@@ -390,6 +405,21 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
             $display_icon = "on" == $use_icon ? aweb_get_icon_span($icon) : "";
             $display_options = "";
             
+            switch($panel_layout){
+                case "none":
+                case "standout":
+                case "standout highlight":
+                    $hSize = 'h2';
+                    break;
+                case "overstated":
+                    $hSize = 'h3';
+                    break;
+                case "default":
+                case "understated":
+                        $hSize = 'h4';
+                        break;
+            }
+
             if( "on" == $show_button ){
                 $option_padding = "right" == $heading_align ? ' pl-2' : '';
                 $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', $option_padding, $button_link, $title );
@@ -398,8 +428,8 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><h2 class="w-100 pb-0 text-%1$s" %2$s>%3$s%4$s%5$s</h2></div>',
-                $heading_align, $heading_text_color, $display_icon, $title, $display_options);
+            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+                $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        
         $output = sprintf('<div%1$s%2$s>%3$s<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->', 
