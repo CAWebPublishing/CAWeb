@@ -5,6 +5,10 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
 
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
+
 // Standard Version
 class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
 
