@@ -84,15 +84,7 @@ overflow: hidden;
 .et_pb_ca_fullwidth_section_carousel  .carousel-media .item .details{
  	margin-top: 1em;
 }
-/* Panel Style */
-.et_pb_ca_panel.panel-none,
-.et_pb_ca_fullwidth_panel.panel-none{
-  border: none;
-}
-.et_pb_ca_panel .panel-heading h2,
-.et_pb_ca_fullwidth_panel .panel-heading h2{
-	width: 100%;
-}
+
 /* Profile Banner */
 .profile-banner .banner-subtitle{
   color: #333333;

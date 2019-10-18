@@ -7,6 +7,10 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		'author_uri' => '',
 	);
 	
+	protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
+		return $output;
+	}
+	
 	function parse_divi_font_settings($settings) {
 		$fields = array("font", "weight", "italic", "uppercase", "underline", "titlecase", "strikethrough", "linecolor", "linestyle");
 		if ( ! is_array($settings)) {
