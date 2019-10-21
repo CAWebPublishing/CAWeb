@@ -11,12 +11,3 @@
  Tags:         light, dark, responsive-layout, accessibility-ready, california, ca
  Text Domain:  divi-state-child
 */
-#wpadminbar .ab-submenu {
-  padding: 6px 0 !important;
-}
-header {
-  z-index: 15 !important;
-}
-#tiny-mce.mce-content-body{
-	background-color: transparent;
-}
