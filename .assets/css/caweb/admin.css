@@ -1,8 +1,8 @@
-	/* This is the background color for the Divi Panel that pops open
-		when inserting modules or sections */
-	.et-pb-main-settings{
-		background-color: lightblue;
-	}
+/* This is the background color for the Divi Panel that pops open
+	when inserting modules or sections */
+.et-pb-main-settings{
+	background-color: lightblue;
+}
 /* TinyMCE Content Editor */
 body#tinymce.mce-content-body{
 	background-color: transparent;

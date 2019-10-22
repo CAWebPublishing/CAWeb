@@ -1,11 +1,11 @@
 {
   "name": "caweb-publishing",
-  "description": "A WPGulp based project.",
+  "description": "CA State Template WordPress, Divi Child Theme",
   "version": "1.0.0",
-  "author": "Author Name (https://twitter.com/MrAhmadAwais/)",
+  "author": "Danny Guzman (https://github.com/Danny-Guzman/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmadawais/WPGulp"
+    "url": "https://github.com/Danny-Guzman/CAWeb/"
   },
   "license": "MIT",
   "devDependencies": {

@@ -1,5 +1,7 @@
-/* CAWeb Custom CSS 8/2/2019 */
-
+/* CAWeb Custom CSS 10/21/2019 */
+header {
+  z-index: 15 !important;
+}
 /* Allow anchor links in global footers to maintain the normal blue color */
 @media(max-width: 768px){
   footer .copyright span{

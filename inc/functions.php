@@ -35,7 +35,7 @@ function caweb_nav_menu_theme_locations() {
 
 // Returns array of Theme Color Schemes
 function caweb_color_schemes($version = 0, $field = '') {
-	$cssDir = sprintf('%1$s/css', CAWebAbsPath);
+	$cssDir = sprintf('%1$s/.assets/css/cagov', CAWebAbsPath);
 	$pattern = '/.*\/([\w\s]*)\.css/';
 
 	$schemes = array();

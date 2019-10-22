@@ -1,10 +1,5 @@
-/* HIDE THE 'Enable Visual Builder' Button*/
-#et_pb_fb_cta, .et-bfb-optin-cta {
-  display: none !important;
-}
-
 /* This is the background color for the Divi Panel that pops open
-		when inserting modules or sections */
+	when inserting modules or sections */
 .et-pb-main-settings {
   background-color: lightblue;
 }
@@ -373,7 +368,7 @@ body.toplevel_page_caweb_options #TB_window #TB_ajaxContent {
 
 .et_font_icon li:before, .et_pb_inline_icon:before,
 .et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
-.et-pb-icon, ul.et-fb-font-icon-list li:after {
+.et-pb-icon, .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
   font-family: 'CaGov', 'ETModules' !important;
   content: attr(data-icon);
   speak: none;

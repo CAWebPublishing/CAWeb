@@ -8930,7 +8930,7 @@ figure {
 
 .et_font_icon li:before, .et_pb_inline_icon:before,
 .et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
-.et-pb-icon, ul.et-fb-font-icon-list li:after {
+.et-pb-icon, .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
   font-family: 'CaGov', 'ETModules' !important;
   content: attr(data-icon);
   speak: none;
@@ -11389,10 +11389,9 @@ li[class^="et_fb_profile_banner"]::before {
   content: "\e991" !important;
 }
 
-/* CAWeb Custom CSS 8/2/2019 */
-/* HIDE THE 'Enable Visual Builder' Button*/
-#wp-admin-bar-et-use-visual-builder {
-  display: none !important;
+/* CAWeb Custom CSS 10/21/2019 */
+header {
+  z-index: 15 !important;
 }
 
 /* Allow anchor links in global footers to maintain the normal blue color */
