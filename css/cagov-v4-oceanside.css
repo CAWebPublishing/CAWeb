@@ -11727,6 +11727,11 @@ li[class^="et_fb_profile_banner"]::before {
 }
 
 /* CAWeb Custom CSS 10/21/2019 */
+/* HIDE THE 'Enable Visual Builder' Button*/
+#wp-admin-bar-et-use-visual-builder {
+  display: none !important;
+}
+
 header {
   z-index: 15 !important;
 }
