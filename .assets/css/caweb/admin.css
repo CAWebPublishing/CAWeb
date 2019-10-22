@@ -1,8 +1,12 @@
-	/* This is the background color for the Divi Panel that pops open
+/* HIDE THE 'Enable Visual Builder' Button*/
+#et_pb_fb_cta, .et-bfb-optin-cta {
+	display: none !important;
+}
+/* This is the background color for the Divi Panel that pops open
 		when inserting modules or sections */
-	.et-pb-main-settings{
-		background-color: lightblue;
-	}
+.et-pb-main-settings{
+	background-color: lightblue;
+}
 /* TinyMCE Content Editor */
 body#tinymce.mce-content-body{
 	background-color: transparent;
