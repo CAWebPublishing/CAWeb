@@ -5,12 +5,19 @@ make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
 
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
+
 class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
+
+    public $slug       = 'et_pb_profile_banner';
+    public $vb_support = 'on';
+    
     function init() {
         $this->name = esc_html__('Profile Banner', 'et_builder');
-        $this->slug = 'et_pb_profile_banner';
 
-        $this->main_css_element = '%%order_class%%.et_pb_profile_banner';
+        $this->main_css_element = '%%order_class%%';
 
         $this->settings_modal_toggles = array(
             'general' => array(
@@ -27,10 +34,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
                         'title'    => esc_html__('Text', 'et_builder'),
                         'priority' => 49,
                     ),
-                ),
-            ),
-            'custom_css' => array(
-                'toggles' => array(
                 ),
             ),
         );
@@ -89,14 +92,8 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
                 'tab_slug' => 'general',
                 'toggle_slug'			=> 'body',
             ),
-            'admin_label' => array(
-                'label'       => esc_html__('Admin Label', 'et_builder'),
-                'type'        => 'text',
-                'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'	=> 'admin_label',
-            ),
         );
+
         $design_fields = array(
             'round_image' => array(
                 'label'              => esc_html__('Round Image', 'et_builder'),
@@ -111,6 +108,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
                 'toggle_slug'			=> 'body',
             ),
         );
+
         $advanced_fields = array(
         );
 
@@ -140,7 +138,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
             $inline_image = sprintf(' style="background:url(%1$s) no-repeat right bottom;"', $portrait_url);
             $image = '';
         }else{
-            $round_class = 'round-image';
+            $round_class = ' round-image';
             $inline_image = '';
             $image = sprintf('<div class="profile-banner-img-wrapper"><img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/></div>', $portrait_url, $portrait_alt);
         }
