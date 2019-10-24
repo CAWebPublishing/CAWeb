@@ -1,16 +1,17 @@
-<?php
-/*
-Divi Icon Field Names
-make sure the field name is one of the following:
-'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
- */
+<?php 
+
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
 
 // Standard Version
 class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
+
+    public $slug = 'et_pb_ca_section_primary';
+    public $vb_support = 'on';
+
     function init() {
         $this->name = esc_html__('Section - Primary', 'et_builder');
-        $this->slug = 'et_pb_ca_section_primary';
-
         $this->main_css_element = '%%order_class%%';
 
         $this->settings_modal_toggles = array(
@@ -28,10 +29,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
                         'title'    => esc_html__('Text', 'et_builder'),
                         'priority' => 49,
                     ),
-                ),
-            ),
-            'custom_css' => array(
-                'toggles' => array(
                 ),
             ),
         );
@@ -123,13 +120,6 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
                 'tab_slug' => 'general',
                 'toggle_slug'			=> 'body',
             ),
-            'admin_label' => array(
-                'label'       => esc_html__('Admin Label', 'et_builder'),
-                'type'        => 'text',
-                'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'	=> 'admin_label',
-            ),
         );
 
         $design_fields = array(
@@ -158,7 +148,7 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
                 'label'             => esc_html__('Header Size', 'et_builder'),
                 'type'              => 'select',
                 'option_category'   => 'configuration',
-                'options' => caweb_get_text_sizes(  array('p', 'h6') ),
+                'options' => $this->caweb_get_text_sizes(  array('p', 'h6') ),
                 'default' => 'h2',
                 'description'       => esc_html__('Here you can choose the size for the panel header', 'et_builder'),
                 'tab_slug' => 'advanced',
@@ -177,20 +167,13 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
         $advanced_fields = array(
         );
 
+
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render($unprocessed_props, $content = null, $render_slug) {
-        $featured_image_button 		= $this->props['featured_image_button'];
-        $heading_align 						= $this->props['heading_align'];
-        $heading_size 						= $this->props['heading_size'];
-        $image_pos 								= $this->props['left_right_button'];
-        $section_image 						= $this->props['section_image'];
-        $section_heading 					= $this->props['section_heading'];
-        $show_more_button 				= $this->props['show_more_button'];
-        $slide_image_button 			= $this->props['slide_image_button'];
-        $section_link 						= $this->props['section_link'];
+        $featured_image_button = $this->props['featured_image_button'];
+        $show_more_button = $this->props['show_more_button'];
         $section_background_color = $this->props['section_background_color'];
-        $heading_text_color 			= $this->props['heading_text_color'];
 
         $content = $this->content;
 
@@ -200,42 +183,72 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
         $section_bg_color = ! empty( $section_background_color ) ?
 			sprintf(' style="background: %1$s;"', $section_background_color) : '';
 
-        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
-        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
-        $header = "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
-
-        $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
-
+        $header = $this->renderHeader($featured_image_button);
+        $display_button = $show_more_button == "on" ? $this->renderMoreButton() : '';
+    
         if ("on" == $featured_image_button) {
-            $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
-            $img_class .= ("on" == $image_pos ? 'pull-right' : '');
-
-            $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
-            $section_image = sprintf('<img src="%1$s" class="img-responsive" style="width: 100%%;" alt="%2$s" />', $section_image, $alt_text);
-
-            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
-                $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
-
-
-            $section = sprintf('<div class="col-md-15">%1$s%2$s%3$s</div>', $header, $content, $display_button);
-
-            $body= sprintf('%1$s%2$s', $display_image, $section);
+            $body = sprintf('%1$s<div class="col-md-15">%2$s%3$s%4$s</div>', 
+                $this->renderFeaturedImage(), $header, $content, $display_button);
+    
         } else {
             $body = sprintf('<div>%1$s%2$s%3$s</div>', $header, $content, $display_button);
         }
+
         $output = sprintf('<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $body);
 
         return $output;
     }
+
+    function renderHeader($featured_image_button = 'on'){
+        $heading_size = $this->props['heading_size'];
+        $heading_text_color = $this->props['heading_text_color'];
+        $heading_align = $this->props['heading_align'];
+        $section_heading = $this->props['section_heading'];
+
+
+        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
+        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
+        return "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
+    }
+
+    function renderMoreButton(){
+        $section_link = $this->props['section_link'];
+        $section_heading = $this->props['section_heading'];
+
+        if( empty( $section_link) )
+            return;
+
+        return sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading);
+    }
+
+    function renderFeaturedImage(){
+        $slide_image_button = $this->props['slide_image_button'];
+        $image_pos = $this->props['left_right_button'];
+        $section_image = $this->props['section_image'];
+
+        $class = "on"== $slide_image_button ? ' animate-fadeInLeft' : '';
+        $class .= "on" == $image_pos ? ' pull-right pr-0' : ' pull-left pl-0';
+
+        $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
+        $section_image = sprintf('<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text);
+
+        return sprintf('<div class="col-md-4 col-md-offset-0%1$s">%2$s</div>', $class, $section_image);
+
+
+    }
+
 }
 new ET_Builder_Module_CA_Section_Primary;
 
+
 // Fullwidth Version
 class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Module {
+    
+    public $slug = 'et_pb_ca_fullwidth_section_primary';
+    public $vb_support = 'on';
+    
     function init() {
         $this->name = esc_html__('FullWidth Section - Primary', 'et_builder');
-        $this->slug = 'et_pb_ca_fullwidth_section_primary';
         $this->fullwidth = true;
 
         $this->main_css_element = '%%order_class%%';
@@ -257,10 +270,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
                     ),
                 ),
             ),
-            'custom_css' => array(
-                'toggles' => array(
-                ),
-            ),
         );
     }
     function get_fields() {
@@ -350,13 +359,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
                 'tab_slug' => 'general',
                 'toggle_slug'			=> 'body',
             ),
-            'admin_label' => array(
-                'label'       => esc_html__('Admin Label', 'et_builder'),
-                'type'        => 'text',
-                'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'	=> 'admin_label',
-            ),
         );
 
         $design_fields = array(
@@ -385,7 +387,7 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
                 'label'             => esc_html__('Header Size', 'et_builder'),
                 'type'              => 'select',
                 'option_category'   => 'configuration',
-                'options' => caweb_get_text_sizes(  array('p', 'h6') ),
+                'options' => $this->caweb_get_text_sizes(  array('p', 'h6') ),
                 'default' => 'h2',
                 'description'       => esc_html__('Here you can choose the size for the panel header', 'et_builder'),
                 'tab_slug' => 'advanced',
@@ -407,46 +409,25 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render($unprocessed_props, $content = null, $render_slug) {
-        $featured_image_button 		= $this->props['featured_image_button'];
-        $heading_align 						= $this->props['heading_align'];
-        $heading_size 						= $this->props['heading_size'];
-        $image_pos 								= $this->props['left_right_button'];
-        $section_image 						= $this->props['section_image'];
-        $section_heading 					= $this->props['section_heading'];
-        $show_more_button 				= $this->props['show_more_button'];
-        $slide_image_button 			= $this->props['slide_image_button'];
-        $section_link 						= $this->props['section_link'];
+        $featured_image_button = $this->props['featured_image_button'];
+        $show_more_button = $this->props['show_more_button'];
         $section_background_color = $this->props['section_background_color'];
-        $heading_text_color 			= $this->props['heading_text_color'];
 
         $content = $this->content;
 
         $this->add_classname('section');
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-        $section_bg_color = ("" !=  $section_background_color ?
-			sprintf(' style="background: %1$s;"', $section_background_color) : '');
+		$section_bg_color = ! empty( $section_background_color ) ?
+			sprintf(' style="background: %1$s;"', $section_background_color) : '';
 
-        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
-        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
-        $header = "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
-    
-        $display_button = ($show_more_button == "on" && $section_link != "" ?
-			sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading) : '');
-
+        $header = $this->renderHeader($featured_image_button);
+        $display_button = $show_more_button == "on" ? $this->renderMoreButton() : '';
+        
         if ("on" == $featured_image_button) {
-            $img_class = ("on"== $slide_image_button ? ' animate-fadeInLeft ' : '');
-            $img_class .= ("on" == $image_pos ? 'pull-right' : '');
-
-            $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
-            $section_image = sprintf('<img src="%1$s" class="img-responsive" style="width: 100%%;" alt="%2$s" />', $section_image, $alt_text);
-
-            $display_image = sprintf('<div class="col-md-4 col-md-offset-0 %1$s" style="%2$s">%3$s</div>',
-                $img_class, ("on" == $image_pos ? 'padding-right: 0;' : 'padding-left: 0;'), $section_image);
-
-            $section = sprintf('<div class="col-md-15">%1$s%2$s%3$s</div>', $header, $content, $display_button);
-
-            $body= sprintf('%1$s%2$s', $display_image, $section);
+            $body = sprintf('%1$s<div class="col-md-15">%2$s%3$s%4$s</div>', 
+                $this->renderFeaturedImage(), $header, $content, $display_button);
+        
         } else {
             $body = sprintf('<div>%1$s%2$s%3$s</div>', $header, $content, $display_button);
         }
@@ -454,7 +435,44 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 
         return $output;
     }
+
+    function renderHeader($featured_image_button = 'on'){
+        $heading_size = $this->props['heading_size'];
+        $heading_text_color = $this->props['heading_text_color'];
+        $heading_align = $this->props['heading_align'];
+        $section_heading = $this->props['section_heading'];
+
+
+        $heading_style = ! empty($heading_text_color) ? sprintf(' style="color: %1$s;" ', $heading_text_color) : '';
+        $heading_class = "off" == $featured_image_button ? sprintf(' class="text-%1$s"', $heading_align) : '';
+        return "<$heading_size$heading_style$heading_class>$section_heading</$heading_size>";
+    }
+
+    function renderMoreButton(){
+        $section_link = $this->props['section_link'];
+        $section_heading = $this->props['section_heading'];
+
+        if( empty( $section_link) )
+            return;
+
+        return sprintf('<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url($section_link), $section_heading);
+    }
+
+    function renderFeaturedImage(){
+        $slide_image_button = $this->props['slide_image_button'];
+        $image_pos = $this->props['left_right_button'];
+        $section_image = $this->props['section_image'];
+
+        $class = "on"== $slide_image_button ? ' animate-fadeInLeft' : '';
+        $class .= "on" == $image_pos ? ' pull-right pr-0' : ' pull-left pl-0';
+
+        $alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
+        $section_image = sprintf('<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text);
+
+        return sprintf('<div class="col-md-4 col-md-offset-0%1$s">%2$s</div>', $class, $section_image);
+
+
+    }
 }
 new ET_Builder_Module_Fullwidth_CA_Section_Primary;
-
 ?>

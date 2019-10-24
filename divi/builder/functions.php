@@ -1,25 +1,5 @@
 <?php
 
-function caweb_get_text_sizes( $exclude = array() ) {
-    $default_text_size = array(
-        'p' => 'Paragraph',
-        'h1' => 'H1',
-        'h2' => 'H2',
-        'h3' => 'H3',
-        'h4' => 'H4',
-        'h5' => 'H5',
-        'h6' => 'H6',
-    );
-
-    foreach( $exclude as $i => $size ){
-        if( isset($default_text_size[$size])){
-            unset($default_text_size[$size]);
-        }
-    }
-    
-    return $default_text_size;
-}
-
 // Creates a list of checkboxes of all tags
 function et_builder_include_tags_option($args = array()) {
     $defaults = apply_filters('et_builder_include_tags_defaults', array(
