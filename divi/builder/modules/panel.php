@@ -10,19 +10,13 @@ if( ! class_exists('ET_Builder_CAWeb_Module') ){
 }
 
 // Standard Version
-class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 
     public $slug       = 'et_pb_ca_panel';
     public $vb_support = 'on';
     
     function init() {
         $this->name = esc_html__('Panel', 'et_builder');
-
-        // %%order_class%% is unique class that is used to target this module's styling. Its output
-		// is based on slug + module order which in this module's case will be translated into
-		// `.et_demo_module_0`. If for some reason (mostly CSS quirks) you need stronger base selector
-		// (for example `.et_demo_module_0.dark-background`) you can define it on this class prototype
-		// You can exclude this property if you want.
         $this->main_css_element = '%%order_class%%';
         
         $this->settings_modal_toggles = array(
@@ -227,10 +221,10 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
         return $output;
     }
 }
-new ET_Builder_Module_Panel;
+new CAWeb_Module_Panel;
 
 // Fullwidth Version
-class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 
     public $slug       = 'et_pb_ca_fullwidth_panel';
     public $vb_support = 'on';
@@ -438,5 +432,5 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         return $output;
     }
 }
-new ET_Builder_Module_Fullwidth_Panel;
+new CAWeb_Module_Fullwidth_Panel;
 ?>

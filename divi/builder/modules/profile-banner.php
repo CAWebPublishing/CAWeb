@@ -9,7 +9,7 @@ if( ! class_exists('ET_Builder_CAWeb_Module') ){
     require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
 }
 
-class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
     public $slug       = 'et_pb_profile_banner';
     public $vb_support = 'on';
@@ -112,6 +112,7 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $advanced_fields = array(
         );
 
+
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
     function render($unprocessed_props, $content = null, $render_slug) {
@@ -148,6 +149,6 @@ class ET_Builder_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         return $output;
     }
 }
-new ET_Builder_Module_Profile_Banner;
+new CAWeb_Module_Profile_Banner;
 
 ?>

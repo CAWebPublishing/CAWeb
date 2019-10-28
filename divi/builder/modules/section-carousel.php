@@ -11,7 +11,7 @@ make sure the field name is one of the following:
  */
 
 // Standard Version
-class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Section_Carousel extends ET_Builder_CAWeb_Module {
     public $slug = 'et_pb_ca_section_carousel';
     public $vb_support = 'on';
 
@@ -263,10 +263,10 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
 	<?php
     }
 }
-new ET_Builder_Module_CA_Section_Carousel;
+new CAWeb_Module_Section_Carousel;
 
 // Fullwidth Version
-class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
     public $slug = 'et_pb_ca_fullwidth_section_carousel';
     public $vb_support = 'on';
 
@@ -518,6 +518,6 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 	<?php
     }
 }
-new ET_Builder_Module_Fullwidth_CA_Section_Carousel;
+new CAWeb_Module_Fullwidth_Section_Carousel;
 
 ?>

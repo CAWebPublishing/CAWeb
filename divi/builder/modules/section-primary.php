@@ -5,7 +5,7 @@ if( ! class_exists('ET_Builder_CAWeb_Module') ){
 }
 
 // Standard Version
-class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Section_Primary extends ET_Builder_CAWeb_Module {
 
     public $slug = 'et_pb_ca_section_primary';
     public $vb_support = 'on';
@@ -238,11 +238,11 @@ class ET_Builder_Module_CA_Section_Primary extends ET_Builder_CAWeb_Module {
     }
 
 }
-new ET_Builder_Module_CA_Section_Primary;
+new CAWeb_Module_Section_Primary;
 
 
 // Fullwidth Version
-class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
     
     public $slug = 'et_pb_ca_fullwidth_section_primary';
     public $vb_support = 'on';
@@ -474,5 +474,5 @@ class ET_Builder_Module_Fullwidth_CA_Section_Primary extends ET_Builder_CAWeb_Mo
 
     }
 }
-new ET_Builder_Module_Fullwidth_CA_Section_Primary;
+new CAWeb_Module_Fullwidth_Section_Primary;
 ?>

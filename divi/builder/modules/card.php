@@ -4,13 +4,15 @@ if( ! class_exists('ET_Builder_CAWeb_Module') ){
     require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
 }
 
-class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 
 	public $slug       = 'et_pb_ca_card';
 	public $vb_support = 'on';
 
 	public function init() {
-		$this->name = esc_html__( 'Card', 'divi-state-child-modules' );
+        $this->name = esc_html__( 'Card', 'divi-state-child-modules' );
+        $this->main_css_element = '%%order_class%%';
+        
         $this->settings_modal_toggles = array(
             'general' => array(
                 'toggles' => array(
@@ -244,4 +246,4 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
 	}
 }
 
-new ET_Builder_CA_Card;
+new CAWeb_Module_Card;

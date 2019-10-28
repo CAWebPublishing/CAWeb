@@ -9,12 +9,14 @@ if( ! class_exists('ET_Builder_CAWeb_Module') ){
     require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
 }
 
-class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
     public $slug       = 'et_pb_ca_location_widget';
     public $vb_support = 'on';
     
     function init() {
         $this->name = esc_html__('Location', 'divi-state-child-modules');
+        $this->main_css_element = '%%order_class%%';
+        
         $this->settings_modal_toggles = array(
             'general' => array(
                 'toggles' => array(
@@ -325,6 +327,6 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
          $this->module_id(), $this->module_classname($this->slug), $featured_image, $name , $map_link, $desc, $display_button);
     }
 }
-new ET_Builder_CA_Location;
+new CAWeb_Module_Location;
 
 ?>
