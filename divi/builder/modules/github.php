@@ -4,12 +4,17 @@ Divi Icon Field Names
 make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
 
-class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
+    public $slug = 'et_pb_ca_github';
+    public $vb_support = 'on';
+
     function init() {
         $this->name = esc_html__('GitHub', 'et_builder');
-        $this->slug = 'et_pb_ca_github';
-
+        
         $this->fields_defaults = array(
             'per_page' => array(100, 'add_default_setting'),
             'repo_type' => array('all', 'add_default_setting'),
@@ -32,10 +37,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
                         'title'    => esc_html__('Text', 'et_builder'),
                         'priority' => 49,
                     ),
-                ),
-            ),
-            'custom_css' => array(
-                'toggles' => array(
                 ),
             ),
         );
@@ -138,13 +139,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
                 'tab_slug'	=> 'general',
                 'toggle_slug'	=> 'body',
             ),
-            'admin_label' => array(
-                'label'       => esc_html__('Admin Label', 'et_builder'),
-                'type'        => 'text',
-                'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-                'tab_slug'	=> 'general',
-                'toggle_slug'	=> 'admin_label',
-            ),
         );
 
         $design_fields = array(
@@ -244,6 +238,6 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
         return $output;
     }
 }
-new ET_Builder_Module_GitHub;
+new CAWeb_Module_GitHub;
 
 ?>
