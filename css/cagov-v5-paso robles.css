@@ -27185,10 +27185,6 @@ article.type-project .entry-content {
 }
 
 /* Footer */
-footer .container {
-  max-width: 1200px;
-}
-
 footer .container .group {
   display: flex;
 }
