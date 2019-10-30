@@ -200,6 +200,10 @@ function caweb_wp_enqueue_scripts() {
 	wp_deregister_style('divi-fonts');
 
 	if( $vb_enabled ){
+		wp_register_script('cagov-vb-script', CAWebUri . '/divi/js/frontend-custom.js', array('jquery'), CAWebVersion, true);
+
+		// Enqueue Scripts
+		wp_enqueue_script('cagov-vb-script');
 		return;
 	}
 	// Register Scripts
@@ -302,10 +306,12 @@ function caweb_wp_footer() {
 function caweb_late_wp_footer() {
 	$vb_enabled = isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ? true : false;
 
-	// Load Core JS at the very end along with any external/custom javascript/jquery
-	if ( ! $vb_enabled ){
-		printf('<script src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
+	if( $vb_enabled ){
+		return;
 	}
+
+	// Load Core JS at the very end along with any external/custom javascript/jquery
+	printf('<script src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
 
 	// External JS
 	$ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
