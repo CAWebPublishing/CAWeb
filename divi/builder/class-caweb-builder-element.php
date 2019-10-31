@@ -1,6 +1,8 @@
 <?php
 
 class ET_Builder_CAWeb_Module extends ET_Builder_Module {
+	protected $CAWebGoogleMapsEmbedAPIKey = 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE';
+
 	protected $module_credits = array(
 		'module_uri' => 'https://caweb.cdt.ca.gov/',
 		'author'     => 'CAWeb Publishing',
@@ -43,14 +45,20 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 
 		return $addr;
 	}
-	function caweb_get_google_map_place_link($addr, $target = '_blank', $class = '') {
+	function caweb_get_google_map_place_link($addr, $embed = false, $target = '_blank', $class = '') {
 		
 		$addr = $this->caweb_get_address($addr);
 
 		$class = is_array($class) ? implode(' ', $class ) : $class;
 		$class = sprintf(' class="%1$s"', $class); 
 
-		return sprintf('<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class);
+		if( $embed ){
+            $map_url = sprintf('https://www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=%2$s', $addr, $this->CAWebGoogleMapsEmbedAPIKey);
+			
+			return sprintf('<iframe src="%1$s"></iframe>', $map_url);
+		}else{
+			return sprintf('<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class);
+		}
 	}
 
 	function parse_divi_font_settings($settings) {

@@ -4,10 +4,17 @@ Divi Icon Field Names
 make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
-class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
+
+ if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
+
+class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
+    public $slug = 'et_pb_ca_post_handler';
+    public $vb_support = 'on';
+
     function init() {
         $this->name = esc_html__('Post Detail', 'et_builder');
-        $this->slug = 'et_pb_ca_post_handler';
         $this->post_types = array('post');
 
         $this->main_css_element = '%%order_class%%';
@@ -31,10 +38,6 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
                         'title'    => esc_html__('Text', 'et_builder'),
                         'priority' => 49,
                     ),
-                ),
-            ),
-            'custom_css' => array(
-                'toggles' => array(
                 ),
             ),
         );
@@ -1168,225 +1171,35 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
         $post_type_layout    = $this->props['post_type_layout'];
         $show_featured_image = $this->props['show_featured_image'];
 
-        // Course Attributes
-        $show_course_presenter = $this->props['show_course_presenter'];
-        $course_presenter_name = $this->props['course_presenter_name'];
-        $course_presenter_image = $this->props['course_presenter_image'];
-        $course_presenter_bio = $this->props['course_presenter_bio'];
-        $course_start_date = $this->props['course_start_date'];
-        $course_start_date_format = $this->props['course_start_date_format'];
-        $course_start_date_custom_format = $this->props['course_start_date_custom_format'];
-        $course_end_date = $this->props['course_end_date'];
-        $course_end_date_format = $this->props['course_end_date_format'];
-        $course_end_date_custom_format = $this->props['course_end_date_custom_format'];
-        $show_course_address = $this->props['show_course_address'];
-        $course_address = $this->props['course_address'];
-        $course_city = $this->props['course_city'];
-        $course_state = $this->props['course_state'];
-        $course_zip = $this->props['course_zip'];
-        $course_registration_type = $this->props['course_registration_type'];
-        $course_cost = $this->props['course_cost'];
-        $show_course_map = $this->props['show_course_map'];
-        // Event Attributes
-        $event_organizer = $this->props['event_organizer'];
-        $show_event_presenter = $this->props['show_event_presenter'];
-        $event_presenter_name = $this->props['event_presenter_name'];
-        $event_presenter_image = $this->props['event_presenter_image'];
-        $event_presenter_bio = $this->props['event_presenter_bio'];
-        $event_start_date = $this->props['event_start_date'];
-        $event_start_date_format = $this->props['event_start_date_format'];
-        $event_start_date_custom_format = $this->props['event_start_date_custom_format'];
-        $event_end_date = $this->props['event_end_date'];
-        $event_end_date_format = $this->props['event_end_date_format'];
-        $event_end_date_custom_format = $this->props['event_end_date_custom_format'];
-        $show_event_address = $this->props['show_event_address'];
-        $event_address = $this->props['event_address'];
-        $event_city = $this->props['event_city'];
-        $event_state = $this->props['event_state'];
-        $event_zip = $this->props['event_zip'];
-        $event_registration_type = $this->props['event_registration_type'];
-        $event_cost = $this->props['event_cost'];
-        // Exam Attributes
-        $exam_id = $this->props['exam_id'];
-        $exam_class = $this->props['exam_class'];
-        $exam_status = $this->props['exam_status'];
-        $exam_published_date = $this->props['exam_published_date'];
-        $exam_published_date_format = $this->props['exam_published_date_format'];
-        $exam_published_date_custom_format = $this->props['exam_published_date_custom_format'];
-        $exam_final_filing_date_chooser = $this->props['exam_final_filing_date_chooser'];
-        $exam_final_filing_date = $this->props['exam_final_filing_date'];
-        $exam_final_filing_date_picker = $this->props['exam_final_filing_date_picker'];
-        $exam_final_filing_date_format = $this->props['exam_final_filing_date_format'];
-        $exam_final_filing_date_custom_format = $this->props['exam_final_filing_date_custom_format'];
-        $exam_type = $this->props['exam_type'];
-        $exam_url = $this->props['exam_url'];
-        $exam_address = $this->props['exam_address'];
-        $exam_city = $this->props['exam_city'];
-        $exam_state = $this->props['exam_state'];
-        $exam_zip = $this->props['exam_zip'];
-        // Job Attributes
-        $show_about_agency    = $this->props['show_about_agency'];
-        $job_agency_name    = $this->props['job_agency_name'];
-        $job_agency_address    = $this->props['job_agency_address'];
-        $job_agency_city    = $this->props['job_agency_city'];
-        $job_agency_state    = $this->props['job_agency_state'];
-        $job_agency_zip    = $this->props['job_agency_zip'];
-        $job_agency_about    = $this->props['job_agency_about'];
-        $job_posted_date    = $this->props['job_posted_date'];
-        $job_posted_date_format = $this->props['job_posted_date_format'];
-        $job_posted_date_custom_format = $this->props['job_posted_date_custom_format'];
-        $job_hours    = $this->props['job_hours'];
-        $show_job_salary    = $this->props['show_job_salary'];
-        $job_salary_min    = $this->props['job_salary_min'];
-        $job_salary_max    = $this->props['job_salary_max'];
-        $job_position_number    = $this->props['job_position_number'];
-        $job_rpa_number    = $this->props['job_rpa_number'];
-        $job_ds_url    = $this->props['job_ds_url'];
-        $job_final_filing_date_chooser = $this->props['job_final_filing_date_chooser'];
-        $job_final_filing_date    = $this->props['job_final_filing_date'];
-        $job_final_filing_date_picker = $this->props['job_final_filing_date_picker'];
-        $job_final_filing_date_format = $this->props['job_final_filing_date_format'];
-        $job_final_filing_date_custom_format = $this->props['job_final_filing_date_custom_format'];
-        $show_job_apply_to = $this->props['show_job_apply_to'];
-        $job_apply_to_dept = $this->props['job_apply_to_dept'];
-        $job_apply_to_name = $this->props['job_apply_to_name'];
-        $job_apply_to_address = $this->props['job_apply_to_address'];
-        $job_apply_to_city = $this->props['job_apply_to_city'];
-        $job_apply_to_state = $this->props['job_apply_to_state'];
-        $job_apply_to_zip = $this->props['job_apply_to_zip'];
-        $show_job_questions = $this->props['show_job_questions'];
-        $job_questions_name = $this->props['job_questions_name'];
-        $job_questions_phone = $this->props['job_questions_phone'];
-        $job_questions_email = $this->props['job_questions_email'];
-        // News Attributes
-        $news_author               = $this->props['news_author'];
-        $news_publish_date               = $this->props['news_publish_date'];
-        $news_publish_date_format               = $this->props['news_publish_date_format'];
-        $news_publish_date_custom_format               = $this->props['news_publish_date_custom_format'];
-        $news_city    = $this->props['news_city'];
-        // Profile Attributes
-        $profile_name_prefix               = $this->props['profile_name_prefix'];
-        $profile_name               = $this->props['profile_name'];
-        $profile_career_title    = $this->props['profile_career_title'];
-        $profile_image_align    = $this->props['profile_image_align'];
-        // General Attributes
-        $show_tags_button    = $this->props['show_tags_button'];
-        $show_categories_button    = $this->props['show_categories_button'];
 
         $content = $this->content;
 
         setlocale(LC_MONETARY, get_locale());
-        //return posts tags
-        $tag_names = wp_get_post_tags($post->ID, array('fields' => 'names'));
-        $tag_list = '';
-        if ( ! empty($tag_names) && "on" ==  $show_tags_button) {
-            $tag_list = '<div style="float:left; margin-right: 25px;">Tags or Keywords<ul>';
-            foreach ($tag_names as $n) {
-                $tag_list .= sprintf('<li>%1$s</li>', $n);
-            }
-            $tag_list .= '</ul></div>';
-        }
-        // return posts categories
-        $cat_obj = get_the_category($post->ID);
-        $cat_list = '';
-        if ( ! empty($cat_obj) && "on" ==  $show_categories_button) {
-            $cat_list = 'Categories<ul>';
-            foreach ($cat_obj as $n) {
-                $cat_list .= sprintf('<li>%1$s</li>', $n->name);
-            }
-            $cat_list .= '</ul>';
-        }
+        
         $output = '';
         // List Style Type
         switch ($post_type_layout) {
 			// Course
 			case 'course':
-
 				$this->add_classname('course-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-      	$presenter_image = ( ! empty($course_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image) : '');
-
-				$presenter = ("on" == $show_course_presenter ?
-											sprintf('<div class="presenter" style="display: inline-block;margin-bottom: 5px;"><p>
-												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
-                              $course_presenter_name, $presenter_image, $course_presenter_bio) : '');
-				$course_addr = implode(', ', array_filter(array($course_address, $course_city, $course_state, $course_zip)));
-				$location = ("on" == $show_course_address ?
-						sprintf('<span class="ca-gov-icon-road-pin"></span>
-									<a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $course_addr) : '');
-      	$course_start_date = ! empty($course_start_date) ? gmdate($course_start_date_custom_format, strtotime($course_start_date)) : '';
-      	$course_end_date =  ! empty($course_end_date) ? gmdate($course_end_date_custom_format, strtotime($course_end_date)) : '';
-				$organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s%2$s<br />%3$s</p>', $course_start_date, ! empty($course_end_date) ? sprintf(' - %1$s', $course_end_date) : '', $location);
-				$course_registration_type =  ( ! empty($course_registration_type) ?
-                                      sprintf('Registration Type: %1$s', $course_registration_type) : '');
-      	$course_cost = ( ! empty($course_cost) ?
-                                      sprintf('Registration Cost: %1$s', $course_cost) : '');
-      	$reg = array_filter(array($course_registration_type, $course_cost));
-      	$reg = ( ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '');
-				if ("on" == $show_course_map) {
-				    $map_url = sprintf('https:////www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE', $course_addr);
-				    $course_map = sprintf('<div class="third"><iframe src="%1$s"></iframe></div>', $map_url);
-				} else {
-				    $course_map = '';
-				}
-      	$output = sprintf('<article%1$s%2$s><div class="description">%3$s</div>%4$s<div class="group"><div class="two-thirds">%5$s%6$s</div>%7$s</div>%8$s</article>', $this->module_id(), $class, $content, $presenter, $organizer, $reg, $course_map, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
-
+                $output = sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderCourseDetail($post->ID) );
 				break;
 			// Event
 			case 'event':
 				$this->add_classname('event-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-				$presenter_image = ( ! empty($event_presenter_image) ? sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image) : '');
-				$presenter = ("on" == $show_event_presenter ?
-				sprintf('<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>',
-					$event_presenter_name, $presenter_image, $event_presenter_bio) : '');
-				$event_addr = array_filter(array($event_address, $event_city, $event_state, $event_zip));
-				$event_addr = sprintf('%1$s', implode(', ', $event_addr));
-				$location = ("on" == $show_event_address ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr) : '');
-			 	$event_start_date = ! empty($event_start_date) ? gmdate($event_start_date_custom_format, strtotime($event_start_date)) : '';
-      	$event_end_date = ! empty($event_end_date) ? gmdate($event_end_date_custom_format, strtotime($event_end_date)) : '';
-				$organizer = sprintf('%1$s<p class="date-time">%2$s%3$s<br />%4$s</p>',
-														( ! empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : ''),
-														$event_start_date, ( ! empty($event_end_date) ? sprintf(' - %1$s', $event_end_date) : ''), $location);
-      	$event_registration_type =  ( ! empty($event_registration_type) ?
-                                      sprintf('Registration Type: %1$s', $event_registration_type) : '');
-      	$event_cost = ( ! empty($event_cost) ?
-                                      sprintf('Registration Cost: %1$s', $event_cost) : '');
-      	$reg = array_filter(array($event_registration_type, $event_cost));
-      	$reg = ( ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '');
-				$output = sprintf('<article%1$s%2$s>%3$s<div class="description">%4$s</div>%5$s%6$s%7$s%8$s</article>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left', 'style'=>'padding-right:15px;')), $content, $presenter, $organizer, $reg, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
-
-					break;
+                $output = sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderEventDetail($post->ID) );
+				break;
 			// Exams
 			case 'exam':
-
 				$this->add_classname('exam-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-				if ("web" == $exam_type) {
-				    $exam_location = sprintf('Exam Url: <a href="%1$s">%1$s</a><br />', $exam_url);
-				} else {
-				    $exam_addr = array_filter(array($exam_address, $exam_city, $exam_state, $exam_zip));
-				    $exam_location = ( ! empty($exam_addr) ? implode(', ', $exam_addr) : '');
-				    $exam_location = sprintf('Exam Address: <a href="https://google.com/maps/place/%1$s">%1$s</a><br />', $exam_location);
-				}
-				$exam_class = ( ! empty($exam_class) ? sprintf('Class Code: %1$s', $exam_class) : '');
-				$exam_id = ( ! empty($exam_id) ? sprintf('Exam Code: %1$s', $exam_id) : '');
-				$exam_course = array_filter(array($exam_class, $exam_id));
-				$exam_course = ( ! empty($exam_course) ? implode(' - ', $exam_course).'<br />' : '');
-				$pub_date = gmdate($exam_published_date_custom_format, strtotime($exam_published_date));
-				$pub_date = ( ! empty($exam_published_date) ? sprintf('Published Date: %1$s<br />', $pub_date) : '');
-        if ("on" == $exam_final_filing_date_chooser) {
-            $exam_final_filing_date = ! empty($exam_final_filing_date_picker) ? sprintf('Final Filing Date: %1$s<br />', gmdate($exam_final_filing_date_custom_format, strtotime($exam_final_filing_date_picker))) : '';
-        } else {
-            $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date);
-        }
-				$exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', sprintf('%1$s', $exam_course), $pub_date, $exam_final_filing_date, $exam_location);
-
-				$output = sprintf('<div%1$s%2$s><div class="header">%3$s%4$s</div>%5$s%6$s</div>', $this->module_id(), $class, caweb_get_the_post_thumbnail(null, 'medium', array('style'=>'display: block;margin-bottom: 25px;')), $exam_info, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
-
+                $output = sprintf('<div%1$s%2$s>%3$s</div>', $this->module_id(), $class, $this->renderExamDetail($post->ID));
+			
 				break;
 			// Jobs
 			case 'jobs':
@@ -1394,105 +1207,34 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$this->add_classname('job-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-				$agency_addr = array_filter(array($job_agency_address, $job_agency_city, $job_agency_state, $job_agency_zip));
-				$agency_addr = ( ! empty($agency_addr) ? implode(", ", $agency_addr) : '');
-				$agency_info = ("on" == $show_about_agency ?
-					sprintf('<div class="entity"><strong>%1$s</strong> %2$s</div>', $job_agency_name,
-                  ( ! empty($agency_addr) ? sprintf('<span class="ca-gov-icon-road-pin"></span><a href="https://google.com/maps/place/%1$s">%1$s</a>', $agency_addr) : '')) : '');
-				if ( ! empty($job_posted_date)) {
-				    $job_posted_date = gmdate($job_posted_date_custom_format, strtotime($job_posted_date));
-				    $d1 = date_create(gmdate('m/d/Y', strtotime($job_posted_date)));
-				    $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y'));
-				    $tmp = $d1->diff($d2)->format('%a');
-				    $days_passed = (0 !== (int) $tmp ? sprintf('&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp) : '');
-				    $job_posted_date = sprintf('<div class="published">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed);
-				} else {
-				    $job_posted_date = '';
-				}
-				$job_hours    = ( ! empty($job_hours) ? sprintf('%1$s<br />', $job_hours) : '');
-				$job_salary_min    = caweb_is_money($job_salary_min, '$0.00');
-				$job_salary_max    = caweb_is_money($job_salary_max, '$0.00');
-      	$job_salary    = ("on" == $show_job_salary ? sprintf('Salary Range: %1$s - %2$s<br />', $job_salary_min, $job_salary_max) : '');
-				$job_position	= '';
-				if ( ! empty($job_position_number) && ! empty($job_rpa_number)) {
-				    $job_position    = sprintf('Position Number: %1$s, RPA #%2$s<br />', $job_position_number, $job_rpa_number);
-				} elseif ( ! empty($job_position_number)) {
-				    $job_position    = sprintf('Position Number: %1$s<br />', $job_position_number);
-				} elseif ( ! empty($job_rpa_number)) {
-				    $job_position    = sprintf('RPA #%1$s<br />', $job_rpa_number);
-				}
-				$job_ds_url    = ( ! empty($job_ds_url) ? sprintf('Duty Statement (<a href="%1$s">PDF</a>)<br />', $job_ds_url) : '');
-			 if ("on" == $job_final_filing_date_chooser) {
-			     $job_final_filing_date = ! empty($job_final_filing_date_picker) ? sprintf('Final Filing Date:<time>%1$s</time><br />', gmdate($job_final_filing_date_custom_format, strtotime($job_final_filing_date_picker))) : '';
-			 } else {
-			     $job_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $job_final_filing_date);
-			 }
-				$job_info = sprintf('<div class="half">
-										<div class="well">
-										<div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p>
-										</div></div></div>',
-										$job_hours, $job_salary, $job_position, $job_ds_url, $job_final_filing_date);
-				if ("on" == $show_job_apply_to) {
-				    $location = array_filter(array($job_apply_to_address, $job_apply_to_city, $job_apply_to_state, $job_apply_to_zip));
-				    $location = ( ! empty($location) ? implode(", ", $location) : '');
-				    $job_apply_to_info = sprintf('<strong>Apply To:</strong><br />%1$s%2$s%3$s',
-                                ( ! empty($job_apply_to_dept) ? sprintf('%1$s<br />', $job_apply_to_dept) : ''),
-                                       ( ! empty($job_apply_to_name) ? sprintf(' Attn: %1$s<br />', $job_apply_to_name) : ''), $location);
-				}
-				if ("on" == $show_job_questions) {
-				    $jInfo =  ( ! empty($job_questions_phone)  && ! empty($job_questions_email) ?
-                     sprintf('%1$s, or <a href="mailto:%2$s">%2$s</a>', $job_questions_phone, $job_questions_email) : '');
-				    $jInfo =  (empty($jInfo) && ! empty($job_questions_phone) ? $job_questions_phone : $jInfo);
-				    $jInfo =  (empty($jInfo) && ! empty($job_questions_email) ? sprintf('<a href="mailto:%1$s">%1$s</a>', $job_questions_email) : $jInfo);
-				    $job_questions_info = sprintf('<strong>Questions</strong><br />%1$s%2$s', ( ! empty($job_questions_name) ? sprintf('%1$s at ', $job_questions_name) : 'Contact '), $jInfo);
-				}
-				$job_apply_info = ( ! empty($job_apply_to_info) || ! empty($job_questions_info) ?
-													sprintf('<div class="half"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
-																	( ! empty($job_apply_to_info) ? sprintf('<p>%1$s</p>', $job_apply_to_info) : ''), ( ! empty($job_questions_info) ? sprintf('<p>%1$s</p>', $job_questions_info) : '')) : '');
-				$job_agency_about = "on" == $show_about_agency && ! empty($job_agency_about) ? sprintf('<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about) : '';
-
-				$output = sprintf('<article%1$s%2$s><div class="sub-header">%3$s%4$s</div><div class="group">%5$s%6$s</div>%7$s%8$s%9$s</article>', $this->module_id(), $class, ! empty($agency_info) ? $agency_info : '', $job_posted_date, $job_info, $job_apply_info, $job_agency_about, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
-
-					break;
+                $output = sprintf('<article%1$s%2$s>%3$s</article>', 
+                    $this->module_id(), $class, $this->renderJobDetail($post->ID));
+				
+				break;
 			// News
 			case 'news':
-			$this->add_classname('news-detail');
-            $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-            
-            $image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')) : '';
-            $date_city  = "";
-            
-            if( ! empty($news_publish_date) || ! empty($news_author) || ! empty($news_city) ){
-                $news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
-                $news_author = ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : '';
-                $news_city = ! empty($news_city) ? sprintf('%1$s', $news_city) : '';
-
-                $date_city =sprintf('<p>%1$s%2$s%3$s</p>', $news_author, $news_publish_date, $news_city);
-
-            }
-           
-            
-			$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+                $this->add_classname('news-detail');
+                $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+                
+                $output = sprintf('<article%1$s%2$s>%3$s</article>', 
+                    $this->module_id(), $class, $this->renderNewsDetail($post->ID));
 
 				break;
 			// Profile
 			case 'profile':
+                $this->add_classname('profile-detail');
+                $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-			$this->add_classname('profile-detail');
-			$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-
-                $title = sprintf('%1$s%2$s%3$s', ( ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '') , $profile_name,
-				( ! empty($profile_career_title) ? ', '.$profile_career_title : ''));
-				$img_align = ("on" ==  $profile_image_align ? "img-right" : "img-left");
-				$image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => $img_align, 'alt' =>  $profile_name, 'style' => 'padding-right: 15px;')) : '';
-				$output = sprintf('<article%1$s%2$s>%3$s%4$s%5$s%6$s</article>', $this->module_id(), $class, ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '', $image, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
-
+                $output = sprintf('<article%1$s%2$s>%3$s</article>',
+                    $this->module_id(), $class, $this->renderProfileDetail($post->ID));
+                
 				break;
 			case 'faqs':
 
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-				$output = sprintf('<article%1$s%2$s>%3$s%4$s</article>', $this->module_id(), $class, $content, sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list));
+                $output = sprintf('<article%1$s%2$s>%3$s%4$s</article>', 
+                    $this->module_id(), $class, $this->content, $this->renderFooter($post->ID));
 
 				break;
 			case 'general':
@@ -1507,6 +1249,11 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
     // module preview in the new Divi 3 frontend editor.
     // Return value of the JS function must be full HTML code to display.
     function remove_general_detail() {
+        
+        if( isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ){
+            return;
+        }
+
         global $post;
         $con = (is_object($post) ? $post->post_content : $post['post_content']);
         $module = caweb_get_shortcode_from_content($con, 'et_pb_ca_post_handler');
@@ -1531,6 +1278,366 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 			</script>
             <?php
     }
+
+    // Renders Course Detail Page
+    function renderCourseDetail($postID){
+        // Course Attributes
+        $show_course_presenter = $this->props['show_course_presenter'];
+        $course_presenter_name = $this->props['course_presenter_name'];
+        $course_presenter_image = $this->props['course_presenter_image'];
+        $course_presenter_bio = $this->props['course_presenter_bio'];
+        $course_start_date = $this->props['course_start_date'];
+        $course_start_date_format = $this->props['course_start_date_format'];
+        $course_start_date_custom_format = $this->props['course_start_date_custom_format'];
+        $course_end_date = $this->props['course_end_date'];
+        $course_end_date_format = $this->props['course_end_date_format'];
+        $course_end_date_custom_format = $this->props['course_end_date_custom_format'];
+        $show_course_address = $this->props['show_course_address'];
+        $course_address = $this->props['course_address'];
+        $course_city = $this->props['course_city'];
+        $course_state = $this->props['course_state'];
+        $course_zip = $this->props['course_zip'];
+        $course_registration_type = $this->props['course_registration_type'];
+        $course_cost = $this->props['course_cost'];
+        $show_course_map = $this->props['show_course_map'];
+
+
+        // Course Presenter Image
+        if (! empty($course_presenter_image)) {
+            $course_presenter_image = sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image);
+        }
+
+        // Display Course Presenter Information
+        $presenter = "";
+        
+        if ("on" == $show_course_presenter ){
+            $presenter = sprintf('<div class="presenter mb-1 d-inline-block"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
+                $course_presenter_name, $course_presenter_image, $course_presenter_bio);
+        }
+        
+        $course_addr = array($course_address, $course_city, $course_state, $course_zip);
+        
+        $location = "on" == $show_course_address ? sprintf('<span class="ca-gov-icon-road-pin"></span>%1$s', $this->caweb_get_google_map_place_link($course_addr) ) : '';
+
+        $course_start_date = ! empty($course_start_date) ? gmdate($course_start_date_custom_format, strtotime($course_start_date)) : '';
+        $course_end_date =  ! empty($course_end_date) ? gmdate($course_end_date_custom_format, strtotime($course_end_date)) : '';
+        $organizer = sprintf('<strong>Organizer</strong><br /><p class="date-time">%1$s%2$s<br />%3$s</p>', 
+            $course_start_date, ! empty($course_end_date) ? sprintf(' - %1$s', $course_end_date) : '', $location);
+
+        $course_registration_type = ! empty($course_registration_type) ? sprintf('Registration Type: %1$s', $course_registration_type) : '';
+        $course_cost = ! empty($course_cost) ? sprintf('Registration Cost: %1$s', $course_cost) : '';
+  
+        $reg = array_filter(array($course_registration_type, $course_cost));
+        $reg = ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '';
+        
+        if ("on" == $show_course_map) {
+            $map_embed = $this->caweb_get_google_map_place_link($course_addr, true);
+            $course_map = sprintf('<div class="third">%1$s</div>', $map_embed);
+        } else {
+            $course_map = '';
+        }
+
+        return sprintf('<div class="description">%1$s</div>%2$s<div class="group"><div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s', 
+            $this->content, $presenter, $organizer, $reg, $course_map, $this->renderFooter($postID));
+
+
+    }
+
+    // Renders Events Detail Page
+    function renderEventDetail($postID){
+        // Event Attributes
+        $event_organizer = $this->props['event_organizer'];
+        $show_event_presenter = $this->props['show_event_presenter'];
+        $event_presenter_name = $this->props['event_presenter_name'];
+        $event_presenter_image = $this->props['event_presenter_image'];
+        $event_presenter_bio = $this->props['event_presenter_bio'];
+        $event_start_date = $this->props['event_start_date'];
+        $event_start_date_format = $this->props['event_start_date_format'];
+        $event_start_date_custom_format = $this->props['event_start_date_custom_format'];
+        $event_end_date = $this->props['event_end_date'];
+        $event_end_date_format = $this->props['event_end_date_format'];
+        $event_end_date_custom_format = $this->props['event_end_date_custom_format'];
+        $show_event_address = $this->props['show_event_address'];
+        $event_address = $this->props['event_address'];
+        $event_city = $this->props['event_city'];
+        $event_state = $this->props['event_state'];
+        $event_zip = $this->props['event_zip'];
+        $event_registration_type = $this->props['event_registration_type'];
+        $event_cost = $this->props['event_cost'];
+
+        // Event Presenter Image
+        if( ! empty($event_presenter_image) ){
+            $event_presenter_image = sprintf('<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image);
+        }
+
+        // Display Event Presenter Information
+        $presenter = "";
+
+        if( "on" == $show_event_presenter ){
+            $presenter = sprintf('<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>', $event_presenter_name, $event_presenter_image, $event_presenter_bio);
+        }
+
+        $event_addr = array($event_address, $event_city, $event_state, $event_zip);
+        
+        $location = "on" == $show_event_address ? sprintf('<span class="ca-gov-icon-road-pin"></span>%1$s', $this->caweb_get_google_map_place_link( $event_addr ) ) : '';
+
+        $event_start_date = ! empty($event_start_date) ? gmdate($event_start_date_custom_format, strtotime($event_start_date)) : '';
+        $event_end_date = ! empty($event_end_date) ? gmdate($event_end_date_custom_format, strtotime($event_end_date)) : '';
+        
+        $organizer = sprintf('%1$s<p class="date-time">%2$s%3$s<br />%4$s</p>',
+                ! empty($event_organizer) ? sprintf('<strong>%1$s</strong><br />', $event_organizer) : '',
+                $event_start_date, ! empty($event_end_date) ? sprintf(' - %1$s', $event_end_date) : '', $location);
+
+        $event_registration_type =  ! empty($event_registration_type) ? sprintf('Registration Type: %1$s', $event_registration_type) : '';
+    
+        $event_cost = ! empty($event_cost) ? sprintf('Registration Cost: %1$s', $event_cost) : '';
+
+        $reg = array_filter(array($event_registration_type, $event_cost));
+        $reg = ! empty($reg) ? sprintf('<p>%1$s</p>', implode('<br />', $reg)) : '';
+
+        return sprintf('%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s', 
+            caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left pr-3')), $this->content, $presenter, $organizer, $reg, $this->renderFooter($postID));
+
+    }
+
+    // Renders Exams Detail Page
+    function renderExamDetail($postID){
+        // Exam Attributes
+        $exam_id = $this->props['exam_id'];
+        $exam_class = $this->props['exam_class'];
+        $exam_status = $this->props['exam_status'];
+        $exam_published_date = $this->props['exam_published_date'];
+        $exam_published_date_format = $this->props['exam_published_date_format'];
+        $exam_published_date_custom_format = $this->props['exam_published_date_custom_format'];
+        $exam_final_filing_date_chooser = $this->props['exam_final_filing_date_chooser'];
+        $exam_final_filing_date = $this->props['exam_final_filing_date'];
+        $exam_final_filing_date_picker = $this->props['exam_final_filing_date_picker'];
+        $exam_final_filing_date_format = $this->props['exam_final_filing_date_format'];
+        $exam_final_filing_date_custom_format = $this->props['exam_final_filing_date_custom_format'];
+        $exam_type = $this->props['exam_type'];
+        $exam_url = $this->props['exam_url'];
+        $exam_address = $this->props['exam_address'];
+        $exam_city = $this->props['exam_city'];
+        $exam_state = $this->props['exam_state'];
+        $exam_zip = $this->props['exam_zip'];
+
+        if ("web" == $exam_type) {
+            $exam_location = sprintf('Exam Url: <a href="%1$s">%1$s</a><br />', $exam_url);
+        } else {
+            $exam_addr = $this->caweb_get_google_map_place_link(array($exam_address, $exam_city, $exam_state, $exam_zip));
+            $exam_location = sprintf('Exam Address: %1$s<br />', $exam_addr);
+        }
+
+        $exam_class = ! empty($exam_class) ? sprintf('Class Code: %1$s', $exam_class) : '';
+        $exam_id = ! empty($exam_id) ? sprintf('Exam Code: %1$s', $exam_id) : '';
+        $exam_course = array_filter(array($exam_class, $exam_id));
+        $exam_course = ! empty($exam_course) ? implode(' - ', $exam_course).'<br />' : '';
+        $pub_date = gmdate($exam_published_date_custom_format, strtotime($exam_published_date));
+        $pub_date = ( ! empty($exam_published_date) ? sprintf('Published Date: %1$s<br />', $pub_date) : '');
+
+        if ("on" == $exam_final_filing_date_chooser) {
+            $exam_final_filing_date = ! empty($exam_final_filing_date_picker) ? sprintf('Final Filing Date: %1$s<br />', gmdate($exam_final_filing_date_custom_format, strtotime($exam_final_filing_date_picker))) : '';
+        } else {
+            $exam_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $exam_final_filing_date);
+        }
+
+        $exam_info = sprintf('<p>%1$s%2$s%3$s%4$s</p>', 
+            sprintf('%1$s', $exam_course), $pub_date, $exam_final_filing_date, $exam_location);
+
+        return sprintf('<div class="header">%1$s%2$s</div>%3$s%4$s', 
+            caweb_get_the_post_thumbnail(null, 'medium', array('class' => 'd-block mb-3')), $exam_info, $this->content, $this->renderFooter($postID));
+
+    }
+
+    // Render Jobs Detail Page
+    function renderJobDetail($postID){
+		// Job Attributes
+		$show_about_agency    = $this->props['show_about_agency'];
+		$job_agency_name    = $this->props['job_agency_name'];
+		$job_agency_address    = $this->props['job_agency_address'];
+		$job_agency_city    = $this->props['job_agency_city'];
+		$job_agency_state    = $this->props['job_agency_state'];
+		$job_agency_zip    = $this->props['job_agency_zip'];
+		$job_agency_about    = $this->props['job_agency_about'];
+		$job_posted_date    = $this->props['job_posted_date'];
+		$job_posted_date_format = $this->props['job_posted_date_format'];
+		$job_posted_date_custom_format = $this->props['job_posted_date_custom_format'];
+		$job_hours    = $this->props['job_hours'];
+		$show_job_salary    = $this->props['show_job_salary'];
+		$job_salary_min    = $this->props['job_salary_min'];
+		$job_salary_max    = $this->props['job_salary_max'];
+		$job_position_number    = $this->props['job_position_number'];
+		$job_rpa_number    = $this->props['job_rpa_number'];
+		$job_ds_url    = $this->props['job_ds_url'];
+		$job_final_filing_date_chooser = $this->props['job_final_filing_date_chooser'];
+		$job_final_filing_date    = $this->props['job_final_filing_date'];
+		$job_final_filing_date_picker = $this->props['job_final_filing_date_picker'];
+		$job_final_filing_date_format = $this->props['job_final_filing_date_format'];
+		$job_final_filing_date_custom_format = $this->props['job_final_filing_date_custom_format'];
+		$show_job_apply_to = $this->props['show_job_apply_to'];
+		$job_apply_to_dept = $this->props['job_apply_to_dept'];
+		$job_apply_to_name = $this->props['job_apply_to_name'];
+		$job_apply_to_address = $this->props['job_apply_to_address'];
+		$job_apply_to_city = $this->props['job_apply_to_city'];
+		$job_apply_to_state = $this->props['job_apply_to_state'];
+		$job_apply_to_zip = $this->props['job_apply_to_zip'];
+		$show_job_questions = $this->props['show_job_questions'];
+		$job_questions_name = $this->props['job_questions_name'];
+		$job_questions_phone = $this->props['job_questions_phone'];
+		$job_questions_email = $this->props['job_questions_email'];
+        
+        $agency_addr = $this->caweb_get_google_map_place_link(array($job_agency_address, $job_agency_city, $job_agency_state, $job_agency_zip));
+        $agency_addr = ! empty($agency_addr) ? sprintf('<span class="ca-gov-icon-road-pin"></span>%1$s', $agency_addr) : '';
+
+        $agency_info = "on" == $show_about_agency ? sprintf('<div class="entity"><strong>%1$s</strong>%2$s</div>', $job_agency_name, $agency_addr ) : '';
+
+        if ( ! empty($job_posted_date)) {
+            $job_posted_date = gmdate($job_posted_date_custom_format, strtotime($job_posted_date));
+            $d1 = date_create(gmdate('m/d/Y', strtotime($job_posted_date)));
+            $d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y'));
+            $tmp = $d1->diff($d2)->format('%a');
+            $days_passed = 0 !== (int) $tmp ? sprintf('&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp) : '';
+            $job_posted_date = sprintf('<div class="published">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed);
+        } else {
+            $job_posted_date = '';
+        }
+        $job_hours    = ! empty($job_hours) ? sprintf('%1$s<br />', $job_hours) : '';
+        $job_salary_min    = caweb_is_money($job_salary_min, '$0.00');
+        $job_salary_max    = caweb_is_money($job_salary_max, '$0.00');
+        $job_salary    = "on" == $show_job_salary ? sprintf('Salary Range: %1$s - %2$s<br />', $job_salary_min, $job_salary_max) : '';
+
+        $job_position	= '';
+        if ( ! empty($job_position_number) && ! empty($job_rpa_number)) {
+            $job_position    = sprintf('Position Number: %1$s, RPA #%2$s<br />', $job_position_number, $job_rpa_number);
+        } elseif ( ! empty($job_position_number)) {
+            $job_position    = sprintf('Position Number: %1$s<br />', $job_position_number);
+        } elseif ( ! empty($job_rpa_number)) {
+            $job_position    = sprintf('RPA #%1$s<br />', $job_rpa_number);
+        }
+
+        $job_ds_url    = ! empty($job_ds_url) ? sprintf('Duty Statement (<a href="%1$s">PDF</a>)<br />', $job_ds_url) : '';
+
+        if ("on" == $job_final_filing_date_chooser) {
+            $job_final_filing_date = ! empty($job_final_filing_date_picker) ? sprintf('Final Filing Date:<time>%1$s</time><br />', gmdate($job_final_filing_date_custom_format, strtotime($job_final_filing_date_picker))) : '';
+        } else {
+            $job_final_filing_date = sprintf('Final Filing Date: %1$s<br />', $job_final_filing_date);
+        }
+
+        $job_info = sprintf('<div class="half"><div class="well"><div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p></div></div></div>',
+                        $job_hours, $job_salary, $job_position, $job_ds_url, $job_final_filing_date);
+
+        if ("on" == $show_job_apply_to) {
+            $location = $this->caweb_get_address(array($job_apply_to_address, $job_apply_to_city, $job_apply_to_state, $job_apply_to_zip));
+
+            $job_apply_to_info = sprintf('<strong>Apply To:</strong><br />%1$s%2$s%3$s',
+                    ! empty($job_apply_to_dept) ? sprintf('%1$s<br />', $job_apply_to_dept) : '',
+                    ! empty($job_apply_to_name) ? sprintf(' Attn: %1$s<br />', $job_apply_to_name) : '', 
+                    $location
+                );
+        }
+
+        if ("on" == $show_job_questions) {
+            $jInfo =  ! empty($job_questions_phone)  && ! empty($job_questions_email) ?
+             sprintf('%1$s, or <a href="mailto:%2$s">%2$s</a>', $job_questions_phone, $job_questions_email) : '';
+            $jInfo =  empty($jInfo) && ! empty($job_questions_phone) ? $job_questions_phone : $jInfo;
+            $jInfo =  empty($jInfo) && ! empty($job_questions_email) ? sprintf('<a href="mailto:%1$s">%1$s</a>', $job_questions_email) : $jInfo;
+            $job_questions_info = sprintf('<strong>Questions</strong><br />%1$s%2$s', 
+                ! empty($job_questions_name) ? sprintf('%1$s at ', $job_questions_name) : 'Contact ', $jInfo);
+        }
+
+        $job_apply_info = ! empty($job_apply_to_info) || ! empty($job_questions_info) ?
+                    sprintf('<div class="half"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
+                        ! empty($job_apply_to_info) ? sprintf('<p>%1$s</p>', $job_apply_to_info) : '', 
+                        ! empty($job_questions_info) ? sprintf('<p>%1$s</p>', $job_questions_info) : '') : '';
+
+
+        $job_agency_about = "on" == $show_about_agency && ! empty($job_agency_about) ? 
+            sprintf('<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about) : '';
+
+        return sprintf('<div class="sub-header">%1$s%2$s</div><div class="group">%3$s%4$s</div>%5$s%6$s%7$s', 
+            ! empty($agency_info) ? $agency_info : '', $job_posted_date, $job_info, $job_apply_info, $job_agency_about, $this->content, $this->renderFooter($postID));
+
+    }
+
+    // Render News Detail Page
+    function renderNewsDetail($postID){
+        // News Attributes
+        $news_author = $this->props['news_author'];
+        $news_publish_date = $this->props['news_publish_date'];
+        $news_publish_date_format = $this->props['news_publish_date_format'];
+        $news_publish_date_custom_format = $this->props['news_publish_date_custom_format'];
+        $news_city = $this->props['news_city'];
+        $show_featured_image = $this->props['show_featured_image'];
+
+        $image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => 'img-left')) : '';
+
+        $date_city  = "";
+        
+        if( ! empty($news_publish_date) || ! empty($news_author) || ! empty($news_city) ){
+            $news_publish_date = ! empty($news_publish_date) ? sprintf('Published: %1$s<br />', gmdate($news_publish_date_custom_format, strtotime($news_publish_date))) : '';
+            $news_author = ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : '';
+            $news_city = ! empty($news_city) ? sprintf('%1$s', $news_city) : '';
+
+            $date_city =sprintf('<p>%1$s%2$s%3$s</p>', $news_author, $news_publish_date, $news_city);
+
+        }
+       
+        return sprintf('%1$s%2$s%3$s%4$s', 
+            ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', $image, $this->content, $this->renderFooter($postID));
+
+    }
+
+    // Render Profile Detail Page
+    function renderProfileDetail($postID){
+        // Profile Attributes
+        $profile_name_prefix = $this->props['profile_name_prefix'];
+        $profile_name = $this->props['profile_name'];
+        $profile_career_title = $this->props['profile_career_title'];
+        $profile_image_align = $this->props['profile_image_align'];
+        $show_featured_image = $this->props['show_featured_image'];
+
+        $title = sprintf('%1$s%2$s%3$s', 
+            ! empty($profile_name_prefix) ? $profile_name_prefix.' ' : '', 
+            $profile_name,
+            ! empty($profile_career_title) ? ', '.$profile_career_title : '');
+
+        $img_align = "on" ==  $profile_image_align ? "img-right" : "img-left";
+
+        $image = "on" == $show_featured_image ? caweb_get_the_post_thumbnail(null, array(150, 100), array('class' => $img_align, 'alt' =>  $profile_name)) : '';
+
+        return sprintf('%1$s%2$s%3$s%4$s', ! empty($title) ? sprintf('<h1>%1$s</h1>', $title) : '', $image, $this->content, $this->renderFooter($postID));
+
+    }
+
+    // Render Footer Category/Tag Keywords 
+    function renderFooter($postID){
+        // General Attributes
+        $show_tags_button = $this->props['show_tags_button'];
+        $show_categories_button = $this->props['show_categories_button'];
+
+        //return posts tags
+        $tag_names = wp_get_post_tags($postID, array('fields' => 'names'));
+        $tag_list = '';
+        if ( ! empty($tag_names) && "on" ==  $show_tags_button) {
+            $tag_list = '<div style="float:left; margin-right: 25px;">Tags or Keywords<ul>';
+            foreach ($tag_names as $n) {
+                $tag_list .= sprintf('<li>%1$s</li>', $n);
+            }
+            $tag_list .= '</ul></div>';
+        }
+        // return posts categories
+        $cat_obj = get_the_category($postID);
+        $cat_list = '';
+        if ( ! empty($cat_obj) && "on" ==  $show_categories_button) {
+            $cat_list = 'Categories<ul>';
+            foreach ($cat_obj as $n) {
+                $cat_list .= sprintf('<li>%1$s</li>', $n->name);
+            }
+            $cat_list .= '</ul>';
+        }
+
+        return sprintf('<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list);
+    }
 }
-new ET_Builder_Module_CAWeb_Post_Handler;
+new CAWeb_Module_Post_Handler;
 ?>

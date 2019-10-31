@@ -304,7 +304,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
         $zip = $this->props['zip'];
         
         $display_button = '';
-        $map_link = $this->caweb_get_google_map_place_link(array($addr, $city, $state, $zip), '_blank', array('m-l-md', 'd-inline-block'));
+        $map_link = $this->caweb_get_google_map_place_link(array($addr, $city, $state, $zip), false, '_blank', array('m-l-md', 'd-inline-block'));
 
         if ("on" == $show_button && ! empty($location_link) ){
             $display_button = sprintf('<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link);
