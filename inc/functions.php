@@ -318,22 +318,6 @@ function caweb_get_user_color($element) {
 	return $colors[$element];
 }
 
-function caweb_get_google_map_place_link($addr, $target = '_blank', $class = '') {
-	if (empty($addr)) {
-		return;
-	} elseif (is_string($addr)) {
-		$addr = preg_split('/,/', $addr);
-	}
-
-	$addr = array_filter($addr);
-	$addr = implode(", ", $addr);
-
-	$class = is_array($class) ? implode(' ', $class ) : $class;
-	$class = sprintf(' class="%1$s"', $class); 
-
-	return sprintf('<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class);
-}
-
 function caweb_get_tag_ID($tag_name) {
 	$tag = get_term_by('name', $tag_name, 'post_tag');
 	if ($tag) {

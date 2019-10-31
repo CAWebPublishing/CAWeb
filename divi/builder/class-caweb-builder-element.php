@@ -11,6 +11,48 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		return $output;
 	}
 	
+	function caweb_get_text_sizes( $exclude = array() ) {
+		$default_text_size = array(
+			'p' => 'Paragraph',
+			'h1' => 'H1',
+			'h2' => 'H2',
+			'h3' => 'H3',
+			'h4' => 'H4',
+			'h5' => 'H5',
+			'h6' => 'H6',
+		);
+	
+		foreach( $exclude as $i => $size ){
+			if( isset($default_text_size[$size])){
+				unset($default_text_size[$size]);
+			}
+		}
+		
+		return $default_text_size;
+	}
+	
+	function caweb_get_address($addr){
+		if (empty($addr)) {
+			return;
+		} elseif (is_string($addr)) {
+			$addr = preg_split('/,/', $addr);
+		}
+
+		$addr = array_filter($addr);
+		$addr = implode(", ", $addr);
+
+		return $addr;
+	}
+	function caweb_get_google_map_place_link($addr, $target = '_blank', $class = '') {
+		
+		$addr = $this->caweb_get_address($addr);
+
+		$class = is_array($class) ? implode(' ', $class ) : $class;
+		$class = sprintf(' class="%1$s"', $class); 
+
+		return sprintf('<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class);
+	}
+
 	function parse_divi_font_settings($settings) {
 		$fields = array("font", "weight", "italic", "uppercase", "underline", "titlecase", "strikethrough", "linecolor", "linestyle");
 		if ( ! is_array($settings)) {
