@@ -526,8 +526,8 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 		$job_hours =   ( ! empty($cHandler->job_hours) ? sprintf('<div class="schedule">%1$s</div>', $cHandler->job_hours) : '');
 
-		$job_salary_min    = ( ! empty($cHandler->job_salary_min) ? caweb_is_money($cHandler->job_salary_min, "$0.00") : "$0.00");
-		$job_salary_max    = ( ! empty($cHandler->job_salary_max) ? caweb_is_money($cHandler->job_salary_max, "$0.00") : "$0.00");
+		$job_salary_min    = ( ! empty($cHandler->job_salary_min) ? $this->caweb_is_money($cHandler->job_salary_min, "$0.00") : "$0.00");
+		$job_salary_max    = ( ! empty($cHandler->job_salary_max) ? $this->caweb_is_money($cHandler->job_salary_max, "$0.00") : "$0.00");
 
 		$job_salary_max = sprintf('  &mdash; %1$s', $job_salary_max);
 

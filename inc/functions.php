@@ -223,23 +223,6 @@ function caweb_tiny_mce_settings($settings = array()) {
 	return is_array($settings) ? array_merge($defaults_settings, $settings) : $defaults_settings;
 }
 
-// Validates if the $checkmoney parameter is a valid monetary value
-if ( ! function_exists('caweb_is_money')) {
-	function caweb_is_money($checkmoney, $default = false, $pattern = '%.2n') {
-		if ( ! empty($checkmoney)) {
-			$checkmoney    = (is_string($checkmoney) ? str_replace(',', '', $checkmoney) : $checkmoney);
-			$checkmoney    = (is_string($checkmoney) ? str_replace('$', '', $checkmoney) : $checkmoney);
-
-			setlocale(LC_MONETARY, get_locale());
-			if (is_numeric($checkmoney)) {
-				return money_format($pattern, $checkmoney);
-			}
-		}
-
-		return $default;
-	}
-}
-
 /**
  *
  * Returns all child nav_menu_items under a specific parent

@@ -1169,14 +1169,9 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
     function render($unprocessed_props, $content = null, $render_slug) {
         global $post;
         $post_type_layout    = $this->props['post_type_layout'];
-        $show_featured_image = $this->props['show_featured_image'];
-
-
-        $content = $this->content;
 
         setlocale(LC_MONETARY, get_locale());
         
-        $output = '';
         // List Style Type
         switch ($post_type_layout) {
 			// Course
@@ -1184,30 +1179,41 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				$this->add_classname('course-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-                $output = sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderCourseDetail($post->ID) );
+                return sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderCourseDetail($post->ID) );
 				break;
 			// Event
 			case 'event':
 				$this->add_classname('event-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-                $output = sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderEventDetail($post->ID) );
+                return sprintf( '<article%1$s%2$s>%3$s</article>', $this->module_id(), $class, $this->renderEventDetail($post->ID) );
 				break;
 			// Exams
 			case 'exam':
 				$this->add_classname('exam-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-                $output = sprintf('<div%1$s%2$s>%3$s</div>', $this->module_id(), $class, $this->renderExamDetail($post->ID));
+                return sprintf('<div%1$s%2$s>%3$s</div>', $this->module_id(), $class, $this->renderExamDetail($post->ID));
 			
-				break;
+                break;
+                
+            // FAQs
+            case 'faqs':
+
+				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+
+                return sprintf('<article%1$s%2$s>%3$s%4$s</article>', 
+                    $this->module_id(), $class, $this->content, $this->renderFooter($post->ID));
+
+                break;
+                
 			// Jobs
 			case 'jobs':
 
 				$this->add_classname('job-detail');
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-                $output = sprintf('<article%1$s%2$s>%3$s</article>', 
+                return sprintf('<article%1$s%2$s>%3$s</article>', 
                     $this->module_id(), $class, $this->renderJobDetail($post->ID));
 				
 				break;
@@ -1216,7 +1222,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
                 $this->add_classname('news-detail');
                 $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
                 
-                $output = sprintf('<article%1$s%2$s>%3$s</article>', 
+                return sprintf('<article%1$s%2$s>%3$s</article>', 
                     $this->module_id(), $class, $this->renderNewsDetail($post->ID));
 
 				break;
@@ -1225,25 +1231,20 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
                 $this->add_classname('profile-detail');
                 $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-                $output = sprintf('<article%1$s%2$s>%3$s</article>',
+                return sprintf('<article%1$s%2$s>%3$s</article>',
                     $this->module_id(), $class, $this->renderProfileDetail($post->ID));
                 
 				break;
-			case 'faqs':
-
+            
+            // General
+            case 'general':
 				$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
-
-                $output = sprintf('<article%1$s%2$s>%3$s%4$s</article>', 
-                    $this->module_id(), $class, $this->content, $this->renderFooter($post->ID));
-
-				break;
-			case 'general':
-				$output = '<article id="general_post_detail"></article>';
+            
+				return sprintf('<article id="general_post_detail"%1$s></article>', $class);
 
 				break;
 		}
 
-        return $output;
     }
     // This is a non-standard function. It outputs JS code to render the
     // module preview in the new Divi 3 frontend editor.
@@ -1374,7 +1375,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
         $presenter = "";
 
         if( "on" == $show_event_presenter ){
-            $presenter = sprintf('<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>', $event_presenter_name, $event_presenter_image, $event_presenter_bio);
+            $presenter = sprintf('<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>', $event_presenter_name, $event_presenter_image, $event_presenter_bio);
         }
 
         $event_addr = array($event_address, $event_city, $event_state, $event_zip);
@@ -1502,8 +1503,8 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
             $job_posted_date = '';
         }
         $job_hours    = ! empty($job_hours) ? sprintf('%1$s<br />', $job_hours) : '';
-        $job_salary_min    = caweb_is_money($job_salary_min, '$0.00');
-        $job_salary_max    = caweb_is_money($job_salary_max, '$0.00');
+        $job_salary_min    = $this->caweb_is_money($job_salary_min, '$0.00');
+        $job_salary_max    = $this->caweb_is_money($job_salary_max, '$0.00');
         $job_salary    = "on" == $show_job_salary ? sprintf('Salary Range: %1$s - %2$s<br />', $job_salary_min, $job_salary_max) : '';
 
         $job_position	= '';
@@ -1619,7 +1620,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
         $tag_names = wp_get_post_tags($postID, array('fields' => 'names'));
         $tag_list = '';
         if ( ! empty($tag_names) && "on" ==  $show_tags_button) {
-            $tag_list = '<div style="float:left; margin-right: 25px;">Tags or Keywords<ul>';
+            $tag_list = '<div class="pull-left mr-4">Tags or Keywords<ul>';
             foreach ($tag_names as $n) {
                 $tag_list .= sprintf('<li>%1$s</li>', $n);
             }
