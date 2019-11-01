@@ -35,7 +35,7 @@ function cawen_nav_menu_theme_locations() {
 
 // Returns array of Theme Color Schemes
 function caweb_color_schemes($version = 0, $field = '') {
-	$cssDir = sprintf('%1$s/.assets/css/cagov', CAWebAbsPath);
+	$cssDir = sprintf('%1$s/assets/css/cagov', CAWebAbsPath);
 	$pattern = '/.*\/([\w\s]*)\.css/';
 
 	$schemes = array();
@@ -197,11 +197,23 @@ function caweb_tiny_mce_settings($settings = array()) {
 		$styles[ str_replace(' ', '', strtolower($style->name)) ] = $style;
 	}
 
+	$version = caweb_get_page_version(get_the_ID());
+	$color = get_option('ca_site_color_scheme', 'oceanside');
+	$schemes = caweb_color_schemes($version, 'filename');
+	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
+
+	$adminCSS = '/css/admin.css';
+	$adminCSS = file_exists(CAWebAbsPath .  str_replace( '.css', '.min.css', $adminCSS) ) ? str_replace( '.css', '.min.css', $adminCSS) : $adminCSS;
+	$adminCSS = CAWebUri . $adminCSS;
+	
+	$editorCSS = "/css/cagov-v$version-$colorscheme.css";
+	$editorCSS = file_exists( CAWebAbsPath . str_replace( '.css', '.min.css', $editorCSS) ) ? str_replace( '.css', '.min.css', $editorCSS) : $editorCSS;
+	$editorCSS = CAWebUri . $editorCSS;
+
 	$css = array(
 		includes_url('/css/dashicons.min.css'),
 		includes_url('/js/tinymce/skins/wordpress/wp-content.css'),
-		sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, caweb_get_page_version(get_the_ID())),
-		sprintf('%1$s/css/admin_custom.css', CAWebUri)
+		$editorCSS, $adminCSS
 	);
 
 	$defaults_settings = array(
