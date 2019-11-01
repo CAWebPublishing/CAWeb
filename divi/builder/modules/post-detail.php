@@ -1579,12 +1579,11 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
             $news_author = ! empty($news_author) ? sprintf('Author: %1$s<br />', $news_author) : '';
             $news_city = ! empty($news_city) ? sprintf('%1$s', $news_city) : '';
 
-            $date_city =sprintf('<p>%1$s%2$s%3$s</p>', $news_author, $news_publish_date, $news_city);
+            $date_city =sprintf('<header><div class="published"><p>%1$s%2$s%3$s</p></div></header>', $news_author, $news_publish_date, $news_city);
 
         }
        
-        return sprintf('%1$s%2$s%3$s%4$s', 
-            ! empty($date_city) ? sprintf('<header><div class="published">%1$s</div></header>', $date_city) : '', $image, $this->content, $this->renderFooter($postID));
+        return sprintf('%1$s%2$s%3$s%4$s', $date_city, $image, $this->content, $this->renderFooter($postID));
 
     }
 
