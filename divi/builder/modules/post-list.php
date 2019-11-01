@@ -4,11 +4,15 @@ Divi Icon Field Names
 make sure the field name is one of the following:
 'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
  */
+if( ! class_exists('ET_Builder_CAWeb_Module') ){
+    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+}
+class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
+	public $slug = 'et_pb_ca_post_list';
+	public $vb_support = 'on';
 
-class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 	function init() {
 		$this->name = esc_html__('Post List', 'et_builder');
-		$this->slug = 'et_pb_ca_post_list';
 
 		$this->main_css_element = '%%order_class%%';
 
@@ -26,10 +30,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 						'title'    => esc_html__('Text', 'et_builder'),
 						'priority' => 49,
 					),
-				),
-			),
-			'custom_css' => array(
-				'toggles' => array(
 				),
 			),
 		);
@@ -159,13 +159,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 				'tab_slug'			=> 'general',
 				'toggle_slug'			=> 'style',
 			),
-			'admin_label' => array(
-				'label'       => esc_html__('Admin Label', 'et_builder'),
-				'type'        => 'text',
-				'description' => esc_html__('This will change the label of the module in the builder for easy identification.', 'et_builder'),
-				'tab_slug'			=> 'general',
-				'toggle_slug'	=> 'admin_label',
-			),
 		);
 
 		$design_fields = array(
@@ -190,18 +183,18 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		return array_merge($general_fields, $design_fields, $advanced_fields);
 	}
 	function render($unprocessed_props, $content = null, $render_slug) {
-		$module_class         = $this->props['module_class'];
-		$list_title            = $this->props['title'];
-		$title_size    = $this->props['title_size'];
-		$style            = $this->props['style'];
-		$faq_style            = $this->props['faq_style'];
-		$posts_number            = $this->props['posts_number'];
-		$view_featured_image            = $this->props['view_featured_image'];
-		$all_categories_button            = $this->props['all_categories_button'];
-		$include_categories      = $this->props['include_categories'];
-		$all_tags_button            = $this->props['all_tags_button'];
-		$include_tags      = $this->props['include_tags'];
-		$orderby                 = $this->props['orderby'];
+		$module_class = $this->props['module_class'];
+		$list_title = $this->props['title'];
+		$title_size = $this->props['title_size'];
+		$style = $this->props['style'];
+		$faq_style = $this->props['faq_style'];
+		$posts_number = $this->props['posts_number'];
+		$view_featured_image = $this->props['view_featured_image'];
+		$all_categories_button = $this->props['all_categories_button'];
+		$include_categories = $this->props['include_categories'];
+		$all_tags_button = $this->props['all_tags_button'];
+		$include_tags = $this->props['include_tags'];
+		$orderby = $this->props['orderby'];
 
 		$order = '';
 
@@ -253,7 +246,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			$tag_array = array();
 		//$tag_array = get_tags( array( 'fields' => 'names' ) );
 		} elseif ("" !== $include_tags) {
-			$tag_array =	$include_tags;
+			$tag_array = $include_tags;
 		}
 
 		$posts_number = ( ! empty($posts_number) ? $posts_number : -1);
@@ -611,6 +604,6 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
             empty($thumbnail) ? ' no-thumbnail' : '', $thumbnail, $profile_title, ( ! empty($fields) ? implode('<br />', $fields) : '<br />'));
 	}
 }
-new ET_Builder_Module_CA_Post_List;
+new CAWeb_Module_Post_List;
 
 ?>
