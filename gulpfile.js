@@ -156,8 +156,9 @@ async function buildAdminStyles( min = false){
 	var minified = min ? '.min' : '';
 
 	var f = [
-		config.themeAssetDir + 'admin.css', 
-		config.templateAssetDir + 'cagov.font-only.css'
+		config.themeCSSAssetDir + 'admin.css', 
+		config.SCSSAssetDir + 'admin.scss', 
+		config.templateCSSAssetDir + 'cagov.font-only.css'
 	];
 
 	return gulp.src(f)
@@ -174,7 +175,7 @@ async function buildAdminStyles( min = false){
 async function buildVersionStyles( min = false, ver = config.templateVer){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
-	var versionDir = config.templateAssetDir + 'version' + ver;
+	var versionDir = config.templateCSSAssetDir + 'version' + ver;
 	var versionColorschemesDir = versionDir + '/colorscheme/';
 	var colors = fs.readdirSync(versionColorschemesDir);
 

@@ -67,7 +67,7 @@ add_action('load-tools.php', 'caweb_load_themes_tools');
 function caweb_option_page() {
 
 	// The actual menu file
-	get_template_part('partials/content', 'options');
+	require_once( 'partials/options.php');
 }
 
 function caweb_rrmdir($path) {

@@ -1,0 +1,127 @@
+<!-- General Section -->
+<a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#general-settings" role="button" aria-expanded="false" aria-controls="general-settings">
+    <h2 class="d-inline border-bottom">General</h2>
+    <span class="text-secondary"></span>
+</a>
+<div class="collapse border p-3" id="general-settings" data-parent="#caweb-settings">
+        <!-- State Template Version Row -->
+        <div class="form-row">
+            <label for="ca_site_version" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Select one of the California state template versions."><strong class="tooltip">State Template Version</strong></label>
+            <div class="form-group col-md-5">
+                <select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
+                    <option value="5" <?php print 5 == $ver ? 'selected="selected"' : '' ?>>Version 5.0</option>
+                    <?php if (4 == $ver) : ?>
+                    <option value="4" <?php print 4 == $ver ? 'selected="selected"' : '' ?>>Version 4.0</option>
+                    <?php endif; ?>
+                </select>
+            </div>
+        </div>
+
+        <!-- Fav Icon Row -->
+        <div class="form-row">
+            <label for="ca_fav_ico" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Select an icon to display as the page icon."><strong class="tooltip">Fav Icon</strong></label>
+            <div class="form-group col-md-5">
+                <!-- Fav Icon Input Field -->
+                <input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" readonly="true" 
+                    value="<?php print $fav_icon_name ?>" class="library-link form-control-file form-control-sm" data-choose="Choose a Fav Icon"  
+                    data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
+                        
+                <!-- Fav Icon -->
+                <input type="hidden" name="ca_fav_ico" id="ca_fav_ico" value="<?php print $fav_icon ?>" >
+                
+                 <!-- Fav Icon Preview -->
+                <img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php print $fav_icon ?>"/>
+            </div>
+
+            <div class="form-group col-md-6">
+                    <!-- Fav Icon Browse icons -->
+                    <input type="button" value="Browse" class="library-link btn btn-outline-primary btn-sm" name="ca_fav_ico" data-choose="Choose a Fav Icon"
+                    data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
+                    <!-- Fav Icon Reset icon-->
+                    <input type="button" value="Reset" id="resetFavIcon" class="btn btn-outline-primary btn-sm">
+            </div>
+        </div>
+
+        <!-- Header Menu Type Row -->
+        <div class="form-row">
+            <label for="ca_default_navigation_menu" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Set a navigation menu style for all pages."><strong class="tooltip">Header Menu Type</strong></label>
+            <div class="form-group col-md-5">
+                <select id="ca_default_navigation_menu" name="ca_default_navigation_menu" class="w-50 form-control">
+                    <option value="megadropdown"
+                    <?php print  'megadropdown' == $navigation_menu ? 'selected="selected"' : '' ?>>Mega Drop</option>
+                    <option value="dropdown"
+                    <?php print 'dropdown' == $navigation_menu ? 'selected="selected"' : '' ?>>Drop Down</option>
+                    <option value="singlelevel"
+                    <?php print 'singlelevel' == $navigation_menu ? 'selected="selected"' : '' ?>>Single Level</option>
+                </select>
+            </div>
+        </div>
+
+        <?php if ( ! is_multisite() || current_user_can('manage_network_options')): ?>
+        <!-- Menu Type Selector Row (only for Network Admins) -->
+        <div class="form-row">
+            <label for="ca_menu_selector_enabled" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Displays a header menu type selector on the page editor level."><strong class="tooltip">Menu Type Selector</strong></label>
+            <div class="form-group col-md-5">
+               <input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"
+                <?php print $navigation_menu_selector ? 'checked="checked"' : '' ?> data-toggle="toggle" data-size="xs">
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <!-- Colorscheme Row -->
+        <div class="form-row">
+            <label for="ca_site_color_scheme" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Apply a site wide color scheme."><strong class="tooltip">Color Scheme</strong></label>
+            <div class="form-group col-md-5">
+                <select id="ca_site_color_scheme" name="ca_site_color_scheme" class="w-50 form-control">
+                <?php
+
+                    foreach ($schemes as $key => $data) {
+                        printf('<option value="%1$s"%2$s%3$s>%4$s</option>',
+                        $key, ! array_key_exists($key, $legacySchemes) ? sprintf(' class="extra %1$s" ', $modern) : '',
+                        $key == $color_scheme ? ' selected="selected"' : '', $data);
+                    }
+
+                ?>
+                </select>
+            </div>
+        </div>
+
+        <!-- Search on FrontPage, Sticky Navigation & Menu Home Link Row -->
+        <div class="form-row">
+            <!-- Search on FrontPage -->
+            <div class="form-group col">
+                <label for="ca_frontpage_search_enabled" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Display a visible search box on the front page."><strong class="tooltip">Show Search on Front Page</strong></label>
+                <input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" data-toggle="toggle" data-size="xs" <?php print $frontpage_search_enabled ?> >
+            </div>
+            <!-- Sticky Navigation -->
+            <div class="form-group col">
+                <label for="ca_sticky_navigation" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content."><strong class="tooltip">Sticky Navigation</strong></label>
+                <input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-size="xs" <?php print $sticky_nav_enabled ?>>
+            </div>
+            <!-- Menu Home Link -->
+            <div class="form-group col">
+                <label for="ca_home_nav_link" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a Home link to the header menu."><strong class="tooltip">Menu Home Link</strong></label>
+                <input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-size="xs" <?php print $home_nav_link_enabled ?>>
+            </div>
+        </div>
+
+        <!-- Title Display Default Off, Display Date for Non-Divi Posts & Legacy Browser Support Row -->
+        <div class="form-row">
+            <!-- Title Display Default Off -->
+            <div class="form-group col">
+                <label for="ca_default_post_title_display" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Checking this box defaults all new pages/posts to suppress the title."><strong class="tooltip">Title Display Default Off</strong></label>
+                <input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-size="xs"  <?php print $display_post_title ?>>
+            </div>
+            <!-- Display Date for Non-Divi Posts -->
+            <div class="form-group col">
+                <label for="ca_default_post_date_display" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="If checked all non-Divi Posts will display the Posts Published Date."><strong class="tooltip">Display Date for Non-Divi Posts</strong></label>
+                <input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" data-toggle="toggle" data-size="xs" <?php print $display_post_date ?>>
+            </div>
+            <!-- Legacy Browser Support -->
+            <div class="form-group col">
+                <label for="ca_x_ua_compatibility" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Checking this box creates accessibility errors for your site when using the IE Browser."><strong class="tooltip">Legacy Browser Support</strong></label>
+                <input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" data-toggle="toggle" data-size="xs" <?php print $ua_compatibiliy ?>>
+                <span style="color: red;"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : '' ?></span>
+            </div>
+        </div>
+    </div>
