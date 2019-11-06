@@ -37,6 +37,9 @@ const parameterized = require('gulp-parameterized');
 // CSS related plugins.
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
 
+// JS related plugins.
+const uglify = require('gulp-uglify'); // Minifies JS files.
+
 // Image related plugins.
 const imagemin = require( 'gulp-imagemin' ); // Minify PNG, JPEG, GIF and SVG images with imagemin.
 
@@ -49,7 +52,7 @@ const fs = require('fs'); // File System
 /* 
 	CAWeb Admin Styles 
 */
-gulp.task('caweb-admin-styles', parameterized( async function (_) {
+gulp.task('admin-styles', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 	
 	if ( _.params.prod ) {
@@ -68,7 +71,7 @@ gulp.task('caweb-admin-styles', parameterized( async function (_) {
 /*
 	CAWeb Styles (State Template v5)
 */
-gulp.task('caweb-v5-styles', parameterized( async function (_) {
+gulp.task('v5-styles', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 
 	if ( _.params.prod ) {
@@ -89,7 +92,7 @@ gulp.task('caweb-v5-styles', parameterized( async function (_) {
 /*
 	CAWeb Styles (State Template v4 Legacy Version)
 */
-gulp.task('caweb-v4-styles', parameterized( async function (_) {
+gulp.task('v4-styles', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 	
 	if ( _.params.prod ) {
@@ -103,6 +106,25 @@ gulp.task('caweb-v4-styles', parameterized( async function (_) {
 	if( noFlags ){
 		buildVersionStyles(false, '4');
 		buildVersionStyles(true, '4');
+	}
+}));
+
+/*
+	CAWeb Admin Java Script
+*/
+gulp.task('admin-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+	
+	if ( _.params.prod ) {
+		buildAdminJS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildAdminJS(false);
+	}	
+
+	if( noFlags ){
+		buildAdminJS(false);
 	}
 }));
 
@@ -199,10 +221,23 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 	});
 }
 
+async function buildAdminJS( min = false){
+	var minified = min ? '.min' : '';
+
+	let js = gulp.src(config.themeAdminJS)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('admin' + minified + '.js')); // compiled file
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	return js.pipe(gulp.dest('./js/'));
+}
 //
 // DEV (Development Output)
 //
-gulp.task('dev', parameterized.series('caweb-v5-styles --dev', 'caweb-v4-styles --dev', 'caweb-admin-styles --dev') );
+gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev') );
 
 // PROD (Minified Output)
-gulp.task('prod', parameterized.series('caweb-v5-styles --prod', 'caweb-v4-styles --prod', 'caweb-admin-styles --prod') );
+gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod') );

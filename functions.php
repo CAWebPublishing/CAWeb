@@ -350,6 +350,9 @@ function caweb_admin_enqueue_scripts($hook) {
 
 
 	if (in_array($hook, $pages)) {
+		$adminJS = '/js/admin.js';
+		$adminJS = file_exists(CAWebAbsPath .  str_replace( '.js', '.min.js', $adminCSS) ) ? str_replace( '.js', '.min.js', $adminCSS) : $adminCSS;
+
 		// Enqueue Scripts
 		wp_enqueue_script('jquery');
 		wp_enqueue_media();
@@ -357,11 +360,11 @@ function caweb_admin_enqueue_scripts($hook) {
 
 		wp_enqueue_script('custom-header');
 
-		wp_register_script('browse-caweb-library', CAWebUri . '/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
+		//wp_register_script('browse-caweb-library', CAWebUri . '/js/wplibs/browse-library.js', array('jquery'), CAWebVersion);
 
-		wp_register_script('caweb-icon-script', CAWebUri . '/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
+		//wp_register_script('caweb-icon-script', CAWebUri . '/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
 
-		wp_register_script('caweb-admin-scripts', CAWebUri . '/js/wplibs/caweb.admin.js', array('jquery', 'thickbox', 'caweb-icon-script', 'browse-caweb-library'), CAWebVersion, true);
+		wp_register_script('caweb-admin-scripts', CAWebUri . $adminJS, array('jquery', 'thickbox'), CAWebVersion, true);
 
 		wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
 
