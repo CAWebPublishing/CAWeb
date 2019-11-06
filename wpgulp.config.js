@@ -13,12 +13,12 @@ module.exports = {
 	templateVer: '5', // Default CA State Template Version
 
 	// Asset Directories
-	themeAssetDir: '.assets/css/caweb/', // CAWeb CSS 
-	templateAssetDir: '.assets/css/cagov/', // State Template CSS 
+	themeAssetDir: 'assets/css/caweb/', // CAWeb CSS 
+	templateAssetDir: 'assets/css/cagov/', // State Template CSS 
 	commonFiles: [ 
-		'.assets/css/caweb/modules.css', 
-		'.assets/css/cagov/cagov.font-only.css', 
-		'.assets/css/caweb/custom.css'
+		'assets/css/caweb/modules.css', 
+		'assets/css/cagov/cagov.font-only.css', 
+		'assets/css/caweb/custom.css'
 	], // Common CSS Files 
 
 	// Project options.
