@@ -110,7 +110,7 @@ gulp.task('v4-styles', parameterized( async function (_) {
 }));
 
 /*
-	CAWeb Admin Java Script
+	CAWeb Admin JavaScript
 */
 gulp.task('admin-js', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
@@ -128,36 +128,73 @@ gulp.task('admin-js', parameterized( async function (_) {
 	}
 }));
 
+/*
+	CAWeb FrontEnd JavaScript
+*/
+gulp.task('frontend-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+	
+	if ( _.params.prod ) {
+		buildFrontEndJS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildFrontEndJS(false);
+	}	
+
+	if( noFlags ){
+		buildFrontEndJS(false);
+	}
+}));
+
 gulp.task('build', parameterized(async function(_){
 	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined !== _.params.all;
 	var versionNum = undefined !== _.params.ver ? _.params.ver : false; 
 	
 	if ( _.params.prod ) {
+		// Build Admin Styles
 		buildAdminStyles(true);
 
+		// Build Version Styles
 		if( versionNum ){
 			buildVersionStyles(true, versionNum);
 		}else{
 			buildVersionStyles(true, '4');
 			buildVersionStyles(true, '5');
 		}
+
+		// Build Admin JS
+		buildAdminJS(true);
+
+		// Build Frontend JS
+		buildFrontEndJS(true);
 	}
 
 	if ( _.params.dev ) {
+		// Build Admin Styles
 		buildAdminStyles(false);
 		
+		// Build Version Styles
 		if( versionNum ){
 			buildVersionStyles(false, versionNum);
 		}else{
 			buildVersionStyles(false, '4');
 			buildVersionStyles(false, '5');
 		}
+
+		// Build Admin JS
+		buildAdminJS(false);
+
+		// Build Frontend JS
+		buildFrontEndJS(false);
 	}	
 
 	if( noFlags ){
+		// Build Admin Styles
 		buildAdminStyles(true);
 		buildAdminStyles(false);
 
+		// Build Version Styles
 		if( versionNum ){
 			buildVersionStyles(true, versionNum);
 			buildVersionStyles(false, versionNum);
@@ -168,6 +205,14 @@ gulp.task('build', parameterized(async function(_){
 			buildVersionStyles(true, '4');
 			buildVersionStyles(false, '4');
 		}
+
+		// Build Admin JS
+		buildAdminJS(true);
+		buildAdminJS(false);
+
+		// Build Frontend JS
+		buildFrontEndJS(true);
+		buildFrontEndJS(false);
 	}
 
 }));
@@ -202,7 +247,7 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 
 	colors.forEach(function(e){
 		var f = [versionDir + '/cagov.core.css', versionColorschemesDir + e];
-		f = f.concat( config.commonFiles );
+		f = f.concat( config.commonCSSFiles );
 		f = f.concat( versionDir + '/custom.css' );
 
 		var fileName = 'cagov-v' + ver + '-' +
@@ -234,10 +279,25 @@ async function buildAdminJS( min = false){
 
 	return js.pipe(gulp.dest('./js/'));
 }
+
+async function buildFrontEndJS( min = false){
+	var minified = min ? '.min' : '';
+
+	let js = gulp.src(config.CommonJSFiles)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('frontend' + minified + '.js')); // compiled file
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	return js.pipe(gulp.dest('./js/'));
+}
+
 //
 // DEV (Development Output)
 //
-gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev') );
+gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev', 'admin-js --dev', 'frontend-js --dev') );
 
 // PROD (Minified Output)
-gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod') );
+gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod', 'admin-js --prod', 'frontend-js --prod') );
