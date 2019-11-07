@@ -13,13 +13,19 @@ module.exports = {
 	templateVer: '5', // Default CA State Template Version
 
 	// Asset Directories
-	themeAssetDir: 'assets/css/caweb/', // CAWeb CSS 
-	templateAssetDir: 'assets/css/cagov/', // State Template CSS 
-	commonCSSFiles: [ // Common CSS  
+	SCSSAssetDir: 'assets/scss/', // CAWeb CSS 
+	themeCSSAssetDir: 'assets/css/caweb/', // CAWeb CSS 
+	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
+	commonCSSFiles: [ 
 		'assets/css/caweb/modules.css', 
 		'assets/css/cagov/cagov.font-only.css', 
 		'assets/css/caweb/custom.css'
 	], 
+	themeAdminCSS:[ // WP Backend Admin CSS
+		'assets/css/caweb/admin.css',
+		'assets/scss/admin.scss',
+		'assets/css/cagov/cagov.font-only.css'
+	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/icon.js',

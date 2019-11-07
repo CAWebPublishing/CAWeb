@@ -125,6 +125,7 @@ gulp.task('admin-js', parameterized( async function (_) {
 	}	
 
 	if( noFlags ){
+		buildAdminJS(true);
 		buildAdminJS(false);
 	}
 }));
@@ -144,6 +145,7 @@ gulp.task('frontend-js', parameterized( async function (_) {
 	}	
 
 	if( noFlags ){
+		buildFrontEndJS(true);
 		buildFrontEndJS(false);
 	}
 }));
@@ -163,6 +165,7 @@ gulp.task('customizer-js', parameterized( async function (_) {
 	}	
 
 	if( noFlags ){
+		buildThemeCustomizerJS(true);
 		buildThemeCustomizerJS(false);
 	}
 	
@@ -257,12 +260,7 @@ async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 	
-	var f = [
-		config.themeAssetDir + 'admin.css', 
-		config.templateAssetDir + 'cagov.font-only.css'
-	];
-
-	return gulp.src(f)
+	return gulp.src(config.themeAdminCSS)
 		.pipe(
 			sass({
 				outputStyle: buildOutputStyle,
@@ -277,7 +275,7 @@ async function buildAdminStyles( min = false){
 async function buildVersionStyles( min = false, ver = config.templateVer){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
-	var versionDir = config.templateAssetDir + 'version' + ver;
+	var versionDir = config.templateCSSAssetDir + 'version' + ver;
 	var versionColorschemesDir = versionDir + '/colorscheme/';
 	var colors = fs.readdirSync(versionColorschemesDir);
 
