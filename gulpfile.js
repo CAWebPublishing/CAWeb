@@ -46,6 +46,7 @@ const imagemin = require( 'gulp-imagemin' ); // Minify PNG, JPEG, GIF and SVG im
 // Utility related plugins.
 const concat = require( 'gulp-concat' ); // Concatenates files.
 const lineec = require( 'gulp-line-ending-corrector' ); // Consistent Line Endings for non UNIX systems. Gulp Plugin for Line Ending Corrector (A utility that makes sure your files have consistent line endings).
+const notify = require( 'gulp-notify' ); // Sends message notification to you.
 
 const fs = require('fs'); // File System
 
@@ -147,6 +148,26 @@ gulp.task('frontend-js', parameterized( async function (_) {
 	}
 }));
 
+/*
+	CAWeb Theme Customizer JavaScript
+*/
+gulp.task('customizer-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+	
+	if ( _.params.prod ) {
+		buildThemeCustomizerJS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildThemeCustomizerJS(false);
+	}	
+
+	if( noFlags ){
+		buildThemeCustomizerJS(false);
+	}
+	
+}));
+
 gulp.task('build', parameterized(async function(_){
 	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined !== _.params.all;
 	var versionNum = undefined !== _.params.ver ? _.params.ver : false; 
@@ -168,6 +189,10 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Frontend JS
 		buildFrontEndJS(true);
+
+		// Build Theme Customizer JS
+		buildThemeCustomizerJS(true);
+
 	}
 
 	if ( _.params.dev ) {
@@ -187,6 +212,10 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Frontend JS
 		buildFrontEndJS(false);
+		
+		// Build Theme Customizer JS
+		buildThemeCustomizerJS(false);
+
 	}	
 
 	if( noFlags ){
@@ -213,15 +242,21 @@ gulp.task('build', parameterized(async function(_){
 		// Build Frontend JS
 		buildFrontEndJS(true);
 		buildFrontEndJS(false);
+	
+		// Build Theme Customizer JS
+		buildThemeCustomizerJS(true);
+		buildThemeCustomizerJS(false);
+
 	}
 
 }));
+
 
 // Gulp Task Functions
 async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
-
+	
 	var f = [
 		config.themeAssetDir + 'admin.css', 
 		config.templateAssetDir + 'cagov.font-only.css'
@@ -235,6 +270,7 @@ async function buildAdminStyles( min = false){
 		)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.css')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Admin Styles', message: '<%= file.relative %> was created successfully.', onLast: true }) )
 		.pipe(gulp.dest('./css/'));
 }
 
@@ -271,7 +307,9 @@ async function buildAdminJS( min = false){
 
 	let js = gulp.src(config.themeAdminJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('admin' + minified + '.js')); // compiled file
+		.pipe(concat('admin' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Admin JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		
 
 	if( min ){
 		js = js.pipe(uglify());
@@ -283,9 +321,10 @@ async function buildAdminJS( min = false){
 async function buildFrontEndJS( min = false){
 	var minified = min ? '.min' : '';
 
-	let js = gulp.src(config.CommonJSFiles)
+	let js = gulp.src(config.commonJSFiles)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('frontend' + minified + '.js')); // compiled file
+		.pipe(concat('frontend' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Front End JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
 
 	if( min ){
 		js = js.pipe(uglify());
@@ -294,10 +333,41 @@ async function buildFrontEndJS( min = false){
 	return js.pipe(gulp.dest('./js/'));
 }
 
+async function buildThemeCustomizerJS( min = false){
+	var minified = min ? '.min' : '';
+
+	// Theme Customizer
+	let js = gulp.src(config.themeCustomizer)
+		.pipe( lineec() )
+		.pipe(concat('theme-customizer' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Theme Customizer JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		 // Consistent Line Endings for non UNIX systems.
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	js = js.pipe(gulp.dest('./js/'));
+
+	// Theme Customizer Controls
+	js = gulp.src(config.themeCustomizerControl)
+		.pipe( lineec() )
+		.pipe(concat('theme-customizer-controls' + minified + '.js'));
+		
+	if( min ){
+		js = js.pipe(uglify());
+	}	
+
+	js = js.pipe(gulp.dest('./js/'));
+
+}
+
 //
 // DEV (Development Output)
 //
-gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev', 'admin-js --dev', 'frontend-js --dev') );
+gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev', 'admin-js --dev', 'frontend-js --dev', 'customizer-js --dev') );
 
 // PROD (Minified Output)
-gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod', 'admin-js --prod', 'frontend-js --prod') );
+gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod', 'admin-js --prod', 'frontend-js --prod', 'customizer-js --prod') );
+
+//gulp.task('build', parameterized.series('dev', 'prod') );
