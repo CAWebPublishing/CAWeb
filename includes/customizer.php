@@ -3,7 +3,7 @@
 // CAWeb Customizer Preview Init
 add_action('customize_preview_init', 'caweb_customize_preview_init');
 function caweb_customize_preview_init() {
-    wp_register_script('caweb-customizer-script', CAWebUri.'/js/theme-customizer.js', array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
+    wp_register_script('caweb-customizer-script', getMinFile('/js/theme-customizer.js', 'js'), array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
 
     wp_enqueue_script('caweb-customizer-script');
 
@@ -16,7 +16,7 @@ function caweb_customize_preview_init() {
 add_action('customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts');
 function caweb_customize_controls_enqueue_scripts() {
 
-    wp_register_script('caweb-customize-controls-script', CAWebUri.'/js/theme-customizer-controls.js', array(), wp_get_theme('CAWeb')->get('Version'), true);
+    wp_register_script('caweb-customize-controls-script', getMinFile('/js/theme-customizer-controls.js', 'js'), array(), wp_get_theme('CAWeb')->get('Version'), true);
 
     wp_localize_script('caweb-customize-controls-script', 'colorschemes', array('original' => caweb_color_schemes(4, 'displayname'), 'all' => caweb_color_schemes(0, 'displayname')));
 
