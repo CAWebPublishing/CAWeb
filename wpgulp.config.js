@@ -21,6 +21,11 @@ module.exports = {
 		'assets/css/cagov/cagov.font-only.css', 
 		'assets/css/caweb/custom.css'
 	], 
+	themeAdminCSS:[ // WP Backend Admin CSS
+		'assets/css/caweb/admin.css',
+		'assets/scss/admin.scss',
+		'assets/css/cagov/cagov.font-only.css'
+	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/icon.js',
