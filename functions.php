@@ -341,7 +341,7 @@ function caweb_admin_enqueue_scripts($hook) {
 
 		// bootstrap 4
 		// https://getbootstrap.com/docs/4.3/getting-started/introduction/
-		wp_enqueue_script( 'caweb-boot1','https://code.jquery.com/jquery-3.3.1.slim.min.js', array( 'jquery' ),'',true );
+		//wp_enqueue_script( 'caweb-boot1','https://code.jquery.com/jquery-3.3.1.slim.min.js', array( 'jquery' ),'',true );
 		wp_enqueue_script( 'caweb-boot2','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ),'',true );
 		wp_enqueue_script( 'caweb-boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
 		
