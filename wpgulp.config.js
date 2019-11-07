@@ -27,7 +27,7 @@ module.exports = {
 		//'assets/css/caweb/admin.css'
 	],
 	themeAdminJS: [ // WP Backend Admin JS
-		//'assets/js/wp/browse-library.js',
+		'assets/js/wp/browse-library.js',
 		//'assets/js/caweb/icon.js',
 		'assets/js/caweb/admin.js',
 	], 

@@ -1,8 +1,9 @@
 <!-- Utility Header Section -->
-<a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
-    <h2 class="d-inline border-bottom">Utility Header</h2>
-    <span class="text-secondary"></span>
-</a>
+<div>
+    <a class="d-inline-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
+        <h2 class="border-bottom mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
+    </a>
+</div>
 <div class="collapse border p-3" id="utility-header-settings" data-parent="#general-settings">
         <!-- Contact Us Page Row -->
         <div class="form-row">

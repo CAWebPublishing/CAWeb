@@ -64,6 +64,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 
 ?>
 <div class="container-fluid mt-4">
+	<form id="caweb-options-form" action="<?php print admin_url('admin.php?page=caweb_options'); ?>" method="POST" enctype="multipart/form-data">
 	<div class="row">
 		<ul class="list-group list-group-horizontal">
 			<li class="list-group-item"><a href="#general" class="text-reset" aria-expanded="true" data-toggle="collapse">General Settings</a></li>
@@ -75,7 +76,6 @@ $icons = caweb_get_icon_list(-1, '', true);
 	</div>
 	<div class="row">
 		<div class="col-12 bg-white border pt-2" id="caweb-settings">
-			<form id="caweb-options-form" action="<?php print admin_url('admin.php?page=caweb_options'); ?>" method="POST" enctype="multipart/form-data">
 				<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print $selected_tab ?>">
 					<?php include_once 'options/general.php'; ?>
 					<?php include_once 'options/social-media.php'; ?>
@@ -84,7 +84,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 					<?php include_once 'options/alert-banners.php'; ?>
 				<input type="submit" name="caweb_options_submit" class="button button-primary" value="<?php _e('Save Changes') ?>">
 				<input type="hidden" name="caweb_submit" >
-			</form>
 		</div>
 	</div>
+	</form>
 </div>

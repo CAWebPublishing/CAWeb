@@ -1,10 +1,8 @@
 /* Toggle Arrows when collapsed */
-a.caweb-option span:after{
-	font-family: $font-family;
+a[data-toggle="collapse"] h2 > span:after{
 	content: '\43'
 }
-a.caweb-option.collapsed span:after{
-	font-family: $font-family;
+a[data-toggle="collapse"].collapsed h2 > span:after{
 	content: '\45'
 }
 

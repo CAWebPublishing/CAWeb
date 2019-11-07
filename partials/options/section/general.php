@@ -1,8 +1,9 @@
 <!-- General Section -->
-<a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#general-setting" role="button" aria-expanded="false" aria-controls="general-settings">
-    <h2 class="d-inline border-bottom">General</h2>
-    <span class="text-secondary"></span>
-</a>
+<div>
+    <a class="d-inline-block text-decoration-none" data-toggle="collapse" href="#general-setting" role="button" aria-expanded="false" aria-controls="general-settings">
+        <h2 class="border-bottom mb-0">General <span class="text-secondary ca-gov-icon-"></span></h2>
+    </a>
+</div>
 <div class="collapse border p-3" id="general-setting" data-parent="#general-settings">
         <!-- State Template Version Row -->
         <div class="form-row">
@@ -21,24 +22,38 @@
         <div class="form-row">
             <label for="ca_fav_ico" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Select an icon to display as the page icon."><strong>Fav Icon</strong></label>
             <div class="form-group col-md-5">
-                <!-- Fav Icon Input Field -->
-                <input type="text" name="ca_fav_ico" id="ca_fav_ico_filename" readonly="true" 
-                    value="<?php print $fav_icon_name ?>" class="library-link form-control-file form-control-sm" data-choose="Choose a Fav Icon"  
-                    data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false" data-icon-check="true">
+                <div class="input-group">
+                    <!-- Fav Icon Input Field -->
+                    <input 
+                        type="text" 
+                        name="ca_fav_ico" 
+                        value="<?php print $fav_icon_name ?>" 
+                        class="form-control library-link" 
+                        placeholder="Fav Icon" 
+                        data-choose="Choose a Fav Icon"
+                        data-update="Set as Fav Icon"
+                        data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon"
+                        data-uploader="false" 
+                        data-icon-check="true"
+                        readonly>
+                    <div class="input-group-append">
+                        <button 
+                            class="btn btn-outline-secondary library-link" 
+                            type="button"
+                            data-choose="Choose a Fav Icon"
+                            data-update="Set as Fav Icon"
+                            data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon"
+                            data-uploader="false" 
+                            data-icon-check="true">Browse</button>
+                        <button class="btn btn-outline-secondary" type="button">Reset</button>
+                    </div>
+                </div>
                         
                 <!-- Fav Icon -->
                 <input type="hidden" name="ca_fav_ico" id="ca_fav_ico" value="<?php print $fav_icon ?>" >
                 
                  <!-- Fav Icon Preview -->
                 <img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php print $fav_icon ?>"/>
-            </div>
-
-            <div class="form-group col-md-6">
-                    <!-- Fav Icon Browse icons -->
-                    <input type="button" value="Browse" class="library-link btn btn-outline-primary btn-sm" name="ca_fav_ico" data-choose="Choose a Fav Icon"
-                    data-update="Set as Fav Icon" data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon" data-uploader="false">
-                    <!-- Fav Icon Reset icon-->
-                    <input type="button" value="Reset" id="resetFavIcon" class="btn btn-outline-primary btn-sm">
             </div>
         </div>
 

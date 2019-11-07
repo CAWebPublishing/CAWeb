@@ -1,8 +1,9 @@
 <!-- Google Section -->
-<a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#google-settings" role="button" aria-expanded="false" aria-controls="google-settings">
-    <h2 class="d-inline border-bottom">Google</h2>
-    <span class="text-secondary"></span>
-</a>
+<div>
+    <a class="d-inline-block text-decoration-none" data-toggle="collapse" href="#google-settings" role="button" aria-expanded="false" aria-controls="google-settings">
+        <h2 class="border-bottom mb-0">Google <span class="text-secondary ca-gov-icon-"></span></h2>
+    </a>
+</div>
 <div class="collapse border p-3" id="google-settings" data-parent="#general-settings">
         <!-- Search Engine ID Row -->
         <div class="form-row">

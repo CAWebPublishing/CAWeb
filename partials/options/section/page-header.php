@@ -1,8 +1,9 @@
 <!-- Page Header Section -->
-<a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
-    <h2 class="d-inline border-bottom">Page Header</h2>
-    <span class="text-secondary"></span>
-</a>
+<div>
+    <a class="d-inline-block text-decoration-none" data-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
+        <h2 class="border-bottom mb-0">Page Header <span class="text-secondary ca-gov-icon-"></span></h2>
+    </a>
+</div>
 <div class="collapse border p-3" id="page-header-settings" data-parent="#general-settings">
         <!-- Organization Logo-Brand Row -->
         <div class="form-row">
