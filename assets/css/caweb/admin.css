@@ -12,6 +12,252 @@ body#tinymce.mce-content-body{
 	background-color: transparent;
 	padding: 10px;
 }
+/* CAWeb Options Page Styles */
+#caweb-options-container {
+    margin-bottom: 5px;
+}
+/* Indent fields under each category */
+@media (max-width: 782px){
+  .form-table th {
+    text-align: start !important;
+  }
+}
+.form-table th{
+    padding: 10px 10px 10px 0px;
+    text-align: end;
+  }
+.form-table td{
+  padding: 5px 10px;
+}
+select#ca_google_trans_display {
+    margin-bottom: 10px;
+}
+#custom-js textarea,
+#custom-css textarea{
+	width: 100%;
+	min-height: 700px;
+}
+
+.option{
+	text-decoration: underline;
+  font-size: 1.2rem;
+}
+.resetIcon{
+	cursor: pointer;
+}
+ul#caweb-icon-menu,
+ul.caweb-icon-menu{
+	background-color: white ;
+	height: 205px;
+	overflow-y: scroll;
+}
+ul#caweb-icon-menu li,
+ul.caweb-icon-menu li{
+	font-size: 24px;
+	float: left;
+	padding: 8px;
+}
+ul#caweb-icon-menu li.selected,
+ul.caweb-icon-menu li.selected{
+	background-color: #008BDB;
+}
+ul#caweb-icon-menu li:hover,
+ul.caweb-icon-menu li:hover{
+	background-color: #008BDB;
+	cursor: pointer;
+}
+ul#caweb-icon-menu li:before,
+ul.caweb-icon-menu li:before{
+	font-family: 'CaGov', 'ETModules';
+	content: attr(data-icon);
+}
+#cawebAlerts{
+	width: 50%
+}
+#cawebAlerts li{
+	border-bottom: 1px solid black;
+	cursor: -webkit-grabbing;
+  padding: 1px 10px 10px 10px;
+}
+[class*="caweb-alert-"] h3 {
+    display: inline;
+    text-decoration: underline;
+}
+[class*="caweb-alert-"] p{
+	font-weight: bold;
+	margin-bottom: 0;
+}
+[class*="caweb-alert-"] label{
+	padding-right: 15px;
+}
+[class*="caweb-alert-"] div input[type="text"] {
+    width: 100%;
+}
+[class*="caweb-alert-"] div.hidden + p + ulul#caweb-icon-menu{
+	height: 248px;
+}
+[class*="caweb-alert-"] div + p + ulul#caweb-icon-menu{
+	height: 160px;
+}
+[class*="caweb-alert-"] .button.button-primary{
+	float: right;
+	margin-left: 15px;
+}
+.caweb-alert div:first-child{
+	font-family: inherit;
+	margin-bottom: 0;
+}
+.caweb-alert div:first-child p{
+	display: inline;
+}
+.caweb-alert div:first-child a{
+	float: right;
+	cursor: pointer;
+}
+.caweb-alert .activateAlert{
+	border-radius: 10px;
+}
+.caweb-alert .activateAlert{
+	background-color: #d8fad7;
+	border: 1px solid #055103;
+}
+.caweb-alert .activateAlert.inactive{
+	background-color: #fad7d7;
+  border: 1px solid #510303;
+}
+.caweb-alert input[type="text"]{
+	width: 50%;
+}
+.caweb-alert textarea{
+	width: 100%;
+	height: 175px;
+	resize: none;
+}
+.removeAlert,
+.removeAlert:hover{
+	color: red;
+}
+#addAlertBanner{
+	text-decoration: none;
+}
+#addCSS:hover, #addJS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
+    cursor: pointer;
+}
+ol#uploadedCSS li,
+ol#uploadedJS li {
+    cursor: -webkit-grab;
+}
+ol#uploadedJS li .preview-js,
+ol#uploadedCSS li .preview-css {
+    margin-left: -105px;
+	color: green;
+}
+ol#uploadedCSS li .remove-css,
+ol#uploadedJS li .remove-js,
+tr.pending-css td .remove-css,
+tr.pending-js td .remove-js {
+    margin-right: 45px;
+	color: red;
+	cursor: pointer
+}
+tr.pending-css td .remove-css,
+tr.pending-js td .remove-js {
+  margin-left: -28px;
+  margin-right: 22px;
+}
+
+/* CAWeb Navigation Page Styles */
+.page-title-action{
+  display:none;
+}
+ .mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show{
+    display:block;
+  }
+
+.mega_menu_images, .media_image, .unit_selector, .icon_selector {
+    display: none ;
+}
+  .menu-item-edit-active .menu-item-settings {
+    display: inline-block !important;
+}
+
+h2.nav-tab-wrapper{
+  border-bottom: none !important;
+
+}
+/* Remove Auto-add Pages from Navigation menu */
+fieldset.menu-settings-group.auto-add-pages{
+    display: none;
+}
+/* Remove Move options from Navigation menu items */
+p.field-move {
+    display: none !important;
+}
+/* Icon List */
+  ul.menu-icon-list{
+    height: 300px;
+    overflow-y: scroll;
+  }
+ul.menu-icon-list li:hover{
+	background-color: #008BDB;
+	cursor: pointer;
+}
+
+ ul.menu-icon-list li.is_selected{
+    background-color: #008BDB;
+}
+
+	ul.et_font_icon {
+		background-color: white !important;
+		max-height: 300px;
+	}
+	.et_font_icon li {
+		font-size: 30px;
+    float: left;
+    padding: 8px;
+	}
+	.et-pb-option-container .description {
+			color: black !important;
+	}
+/* Tooltip Styles */
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+	opacity: 1;
+	font-weight: 600;
+}
+
+.tooltip:hover{
+		cursor: help;
+}
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+		width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+
+    position: absolute;
+    z-index: 1;
+
+		/* Positioning Styles*/
+		/* Left */
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+
+}
 
 .ca_fav_ico_option{
 	height: 32px;
