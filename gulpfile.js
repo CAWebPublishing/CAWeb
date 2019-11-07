@@ -65,6 +65,7 @@ gulp.task('admin-styles', parameterized( async function (_) {
 	}	
 
 	if( noFlags ){
+		buildAdminStyles(true);
 		buildAdminStyles(false);
 	}
 }));
