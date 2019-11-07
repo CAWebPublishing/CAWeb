@@ -6,10 +6,6 @@
 header {
   z-index: 15 !important;
 }
-#skip-to-content,
-#skip-to-content a{
-  width: 100%;
-}
 /* Allow anchor links in global footers to maintain the normal blue color */
 @media(max-width: 768px){
   footer .copyright span{
