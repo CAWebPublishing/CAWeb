@@ -1,5 +1,5 @@
 <!-- Alert Banners -->
-<div class="p-2" id="alert-banners">
+<div class="p-2 collapse" id="alert-banners" data-parent="#caweb-settings">
     <div class="form-row">
         <div class="form-group">
             <h2 class="d-inline">Create an Alert Banner <a class="dashicons dashicons-plus-alt tooltip" data-toggle="tooltip" title="Add Alert Banner (Note: This feature has a known WordPress issue when using the Chrome Browser.)"></a></h2>
@@ -32,7 +32,7 @@
                 </a>
                 <!-- Alert Options -->
                 <div class="form-group col-sm text-right">
-                    <input type="checkbox"<?php print $status; ?> class="form-control" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger" data-size="sm">
+                    <input type="checkbox"<?php print $status; ?> class="form-control" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger">
                     <a class="text-danger dashicons dashicons-dismiss align-middle"></a>
                 </div>
             <!-- Alert Banner Fields -->

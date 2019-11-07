@@ -1,5 +1,5 @@
 <!-- Custom JS Section -->
-<div class="p-2 hidden" id="custom-js">
+<div class="p-2 collapse" id="custom-js" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded JS -->
     <div class="form-row">

@@ -15,17 +15,6 @@ body#tinymce.mce-content-body {
   padding: 10px;
 }
 
-/* CAWeb Options Page Styles */
-a.caweb-option span:after {
-  font-family: 'CaGov';
-  content: '\43';
-}
-
-a.caweb-option.collapsed span:after {
-  font-family: 'CaGov';
-  content: '\45';
-}
-
 .ca_fav_ico_option {
   height: 32px;
 }
@@ -52,6 +41,25 @@ textarea#ca_custom_css {
 /*---------------
  # CAWeb
 ---------------*/
+/* Toggle Arrows when collapsed */
+a.caweb-option span:after {
+  font-family: "CaGov";
+  content: '\43';
+}
+
+a.caweb-option.collapsed span:after {
+  font-family: "CaGov";
+  content: '\45';
+}
+
+/*
+ Bootstrap Overrides, these are added only because the 
+ WordPress load-styles.php loads before our CSS.
+*/
+select.form-control {
+  height: calc(1.5em + .75rem + 2px) !important;
+}
+
 /*---------------
  # Bootstrap
 ---------------*/

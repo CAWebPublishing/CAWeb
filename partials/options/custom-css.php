@@ -1,5 +1,5 @@
 <!-- Custom CSS Section -->
-<div class="p-2 hidden" id="custom-css">
+<div class="p-2 collapse" id="custom-css" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded CSS -->
     <div class="form-row">

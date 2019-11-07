@@ -12,15 +12,6 @@ body#tinymce.mce-content-body{
 	background-color: transparent;
 	padding: 10px;
 }
-/* CAWeb Options Page Styles */
-a.caweb-option span:after{
-	font-family: 'CaGov';
-	content: '\43'
-}
-a.caweb-option.collapsed span:after{
-	font-family: 'CaGov';
-	content: '\45'
-}
 
 .ca_fav_ico_option{
 	height: 32px;

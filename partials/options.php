@@ -65,16 +65,16 @@ $icons = caweb_get_icon_list(-1, '', true);
 ?>
 <div class="container-fluid mt-4">
 	<div class="row">
-		<div class="col-3 bg-white border">
-			<ul>
-				<li><a href="#general" class="caweb-nav-tab">General Settings</a></li>
-				<li><a href="#social-share" class="caweb-nav-tab">Social Media Links</a></li>
-				<li><a href="#custom-css" name="custom-css" class="caweb-nav-tab <?php print 'custom-css' == $selected_tab ? 'nav-tab-active' : '' ?>">Custom CSS</a></li>
-				<li><a href="#custom-js" name="custom-js" class="caweb-nav-tab <?php print 'custom-js' == $selected_tab ? 'nav-tab-active' : '' ?>">Custom JS</a></li>
-				<li><a href="#alert-banners" name="alert-banners" class="caweb-nav-tab <?php print 'alert-banners' == $selected_tab ? 'nav-tab-active' : '' ?> extra">Alert Banners</a></li>
-			</ul>
-		</div>
-		<div class="col-8 bg-white border pt-2" id="caweb-settings">
+		<ul class="list-group list-group-horizontal">
+			<li class="list-group-item"><a href="#general" class="text-reset" aria-expanded="true" data-toggle="collapse">General Settings</a></li>
+			<li class="list-group-item"><a href="#social-share" class="text-reset" data-toggle="collapse">Social Media Links</a></li>
+			<li class="list-group-item"><a href="#custom-css" class="text-reset" data-toggle="collapse">Custom CSS</a></li>
+			<li class="list-group-item"><a href="#custom-js" class="text-reset" data-toggle="collapse">Custom JS</a></li>
+			<li class="list-group-item"><a href="#alert-banners" class="text-reset" data-toggle="collapse">Alert Banners</a></li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-12 bg-white border pt-2" id="caweb-settings">
 			<form id="caweb-options-form" action="<?php print admin_url('admin.php?page=caweb_options'); ?>" method="POST" enctype="multipart/form-data">
 				<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print $selected_tab ?>">
 					<?php include_once 'options/general.php'; ?>

@@ -3,10 +3,10 @@
     <h2 class="d-inline border-bottom">Google</h2>
     <span class="text-secondary"></span>
 </a>
-<div class="collapse border p-3" id="google-settings">
+<div class="collapse border p-3" id="google-settings" data-parent="#general-settings">
         <!-- Search Engine ID Row -->
         <div class="form-row">
-            <label for="ca_google_search_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google search engine ID, if you don't have one see an administrator."><strong class="tooltip">Search Engine ID</strong></label>
+            <label for="ca_google_search_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google search engine ID, if you don't have one see an administrator."><strong>Search Engine ID</strong></label>
             <div class="form-group col-md-5">
                 <!-- Search Engine ID Field -->
                 <input type="text" name="ca_google_search_id" id="ca_google_search_id" class="form-control" value="<?php print $google_search_id ?>" >
@@ -16,7 +16,7 @@
         
         <!-- Analytics ID Row -->
         <div class="form-row">
-            <label for="ca_google_analytic_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google analytics ID, if you don't have one see an administrator."><strong class="tooltip">Analytics ID</strong></label>
+            <label for="ca_google_analytic_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google analytics ID, if you don't have one see an administrator."><strong>Analytics ID</strong></label>
             <div class="form-group col-md-5">
                 <!-- Analytics ID Field -->
                 <input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control" value="<?php print $google_analytic_id ?>" >
@@ -26,7 +26,7 @@
 
         <!-- Meta ID Row -->
         <div class="form-row">
-            <label for="ca_google_meta_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google meta ID, if you don't have one see an administrator."><strong class="tooltip">Meta ID</strong></label>
+            <label for="ca_google_meta_id" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Enter your unique Google meta ID, if you don't have one see an administrator."><strong>Meta ID</strong></label>
             <div class="form-group col-md-5">
                 <!-- Meta ID Field -->
                 <input type="text" name="ca_google_meta_id" id="ca_google_meta_id" class="form-control" value="<?php print $google_search_id ?>" >
@@ -36,7 +36,7 @@
 
         <!-- Google Translate Row -->
         <div class="form-row">
-            <label for="ca_google_trans_enabled" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Displays the Google translate feature at the top right of each page."><strong class="tooltip">Enable Google Translate</strong></label>
+            <label for="ca_google_trans_enabled" class="w-100 mb-2" data-toggle="tooltip" data-placement="top" title="Displays the Google translate feature at the top right of each page."><strong>Enable Google Translate</strong></label>
 
             <div class="form-group">
                 <!-- Google Translate None -->
