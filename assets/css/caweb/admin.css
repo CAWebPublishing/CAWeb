@@ -259,21 +259,37 @@ ul.menu-icon-list li:hover{
 
 }
 
-.ca_fav_ico_option{
-	height: 32px;
-}
-.header_ca_branding_option, 
-.ca_fav_ico_option, 
-.header_ca_background_option{
-	min-height: 1px;
-	max-height: 150px;
-  	padding-left: 2px;
-  	padding-top: 5px;
-}
 textarea#ca_custom_css{
 	min-height: 500px;
 }
 /* Tooltip Styles */
 .tooltip {
     border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+
+/* Customizer Styling */
+#customize-control-caweb_custom_css label textarea{height: 500px; resize: none; overflow-y: scroll;}
+#accordion-panel-nav_menus{display:none !important;}
+
+/* Thickbox Styling for the CAWeb Options Page */
+body.toplevel_page_caweb_options #TB_window{
+	top: 10% !important;
+    height: auto !important;
+    width: auto !important;
+}	
+body.toplevel_page_caweb_options #TB_window #TB_ajaxContent{
+	height: 100% !important;
+}
+@media (max-width: 768px){
+	body.toplevel_page_caweb_options #TB_window{
+		left: 10% !important;
+    width: 100% !important;
+    max-width: 80% !important;
+		margin-left: 0 !important;
+	}	
+	body.toplevel_page_caweb_options #TB_window #TB_ajaxContent{
+		width: 95% !important;
+	}
+	
 }

@@ -7,3 +7,11 @@ a[data-toggle="collapse"].collapsed h2 > span:after{
 }
 
 
+/* Image Preview Min/Max Height */
+.header_ca_branding_option, 
+.header_ca_background_option{
+	min-height: 1px;
+	max-height: 150px;
+}
+
+

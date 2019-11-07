@@ -10,6 +10,13 @@ a[data-toggle="collapse"].collapsed h2 > span:after {
   content: '\45';
 }
 
+/* Image Preview Min/Max Height */
+.header_ca_branding_option,
+.header_ca_background_option {
+  min-height: 1px;
+  max-height: 150px;
+}
+
 /*
  Bootstrap Overrides, these are added only because the 
  WordPress load-styles.php loads before our CSS.

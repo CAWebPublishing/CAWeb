@@ -1,6 +1,6 @@
 <!-- Page Header Section -->
 <div>
-    <a class="d-inline-block text-decoration-none" data-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
+    <a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
         <h2 class="border-bottom mb-0">Page Header <span class="text-secondary ca-gov-icon-"></span></h2>
     </a>
 </div>
