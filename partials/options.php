@@ -8,37 +8,76 @@ if (isset($_POST['caweb_submit'])) {
     caweb_save_options($_POST, $_FILES);
 }
 
-// Site Version variables
+// State Template Version variables
 $ver = get_option('ca_site_version', 5);
 $legacy = 4 == $ver ? '' : 'hidden';
 $modern = 5 <= $ver ? '' : 'hidden';
 $legacySchemes = caweb_color_schemes(4);
 $schemes = caweb_color_schemes(0, 'displayname');
 
-// Site Option variables
+/*
+ General Settings
+*/
+// Fav Icon
 $fav_icon = get_option('ca_fav_ico', caweb_default_favicon_url());
 $fav_icon_name = caweb_favicon_name();
+
+// Header Menu
 $navigation_menu = get_option('ca_default_navigation_menu', 'megadropdown');
+
+// Menu Type Selector 
 $navigation_menu_selector = get_option('ca_menu_selector_enabled', false);
+
+// Color Scheme
 $color_scheme = get_option('ca_site_color_scheme', 'oceanside');
+
+// Show Search on FrontPage
 $frontpage_search_enabled = get_option('ca_frontpage_search_enabled', false) ? ' checked="checked"' : '';
+
+// Sticky Nav
 $sticky_nav_enabled = get_option('ca_sticky_navigation', false) ? ' checked="checked"' : '';
+
+// Menu Home Link
 $home_nav_link_enabled = get_option('ca_home_nav_link', true) ? ' checked="checked"' : '';
+
+// Title Display
 $display_post_title = get_option('ca_default_post_title_display', false) ? ' checked="checked"' : '';
+
+// Display Date for Non Divi Posts
 $display_post_date = get_option('ca_default_post_date_display', false) ? ' checked="checked"' : '';
+
+// Legacy Browser Support
 $ua_compatibiliy = get_option('ca_x_ua_compatibility', false) ? ' checked="checked"' : '';
+
+/*
+ Utility Header
+*/
+// Contact Us Page
 $contact_us_link = get_option('ca_contact_us_link', '');
+
+// Geo Locator
 $geo_locator_enabled = get_option('ca_geo_locator_enabled', false) ? ' checked="checked"' : '';
+
+// Utility Header Home Icon
 $utility_header_home_icon = get_option('ca_utility_home_icon', true) ? 'checked="checked"' : '';
+
+// Custom Link 1
 $ca_utility_link_1_name = get_option('ca_utility_link_1_name', '');
 $ca_utility_link_1_url = get_option('ca_utility_link_1', '');
 $ca_utility_link_1_target = get_option('ca_utility_link_1_new_window', true) ? 'checked="checked"' : '';
+$ca_utility_link_1_enable = get_option('ca_utility_link_1_enable', true) ? 'checked="checked"' : '';
+
+// Custom Link 2
 $ca_utility_link_2_name = get_option('ca_utility_link_2_name', '');
 $ca_utility_link_2_url = get_option('ca_utility_link_2', '');
 $ca_utility_link_2_target = get_option('ca_utility_link_2_new_window', true) ? 'checked="checked"' : '';
+$ca_utility_link_2_enable = get_option('ca_utility_link_2_enable', false) ? 'checked="checked"' : '';
+
+// Custom Link 3
 $ca_utility_link_3_name = get_option('ca_utility_link_3_name', '');
 $ca_utility_link_3_url = get_option('ca_utility_link_3', '');
 $ca_utility_link_3_target = get_option('ca_utility_link_3_new_window', true) ? 'checked="checked"' : '';
+$ca_utility_link_3_enable = get_option('ca_utility_link_3_enable', false) ? 'checked="checked"' : '';
 
 $org_logo = get_option('header_ca_branding', '');
 $org_logo_filename = ! empty($org_logo) ? substr($org_logo, strrpos($org_logo, '/')+1) : '';
@@ -74,7 +113,7 @@ $icons = caweb_get_icon_list(-1, '', true);
 			<li class="list-group-item"><a href="#alert-banners" class="text-reset" data-toggle="collapse">Alert Banners</a></li>
 		</ul>
 	</div>
-	<div class="row">
+	<div class="row pr-3">
 		<div class="col-12 bg-white border pt-2" id="caweb-settings">
 				<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print $selected_tab ?>">
 					<?php include_once 'options/general.php'; ?>

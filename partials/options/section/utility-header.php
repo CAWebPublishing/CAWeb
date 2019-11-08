@@ -31,13 +31,13 @@
         <div class="form-row">
             <!-- Custom Link 1 -->
             <div class="form-group col-6">
-                <label for="ca_enable_custom_link_1" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 1?</strong></label>
+                <label for="ca_utility_link_1_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 1?</strong></label>
                 <a data-toggle="collapse" href="#custom_link_1" aria-expanded="false" aria-controls="custom_link_1" class="shadow-none">
-                    <input type="checkbox" name="ca_enable_custom_link_1" data-toggle="toggle" >
+                    <input type="checkbox" name="ca_utility_link_1_enable" data-toggle="toggle" >
                 </a> 
                 <div id="custom_link_1">
                     <!-- Link Label -->
-                    <label for="ca_enable_custom_link_1" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 1 Label</strong></label>
+                    <label for="ca_utility_link_1_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 1 Label</strong></label>
                     <input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" class="form-control w-75" value="<?php print $ca_utility_link_1_name ?>"/>
 
                     <!-- Link Url -->
@@ -51,13 +51,13 @@
             </div>
             <!-- Custom Link 2 -->
             <div class="form-group col-6">
-                <label for="ca_enable_custom_link_2" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 2?</strong></label>
+                <label for="ca_utility_link_2_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 2?</strong></label>
                 <a data-toggle="collapse" href="#custom_link_2" aria-expanded="false" aria-controls="custom_link_2" class="shadow-none">
-                    <input type="checkbox" name="ca_enable_custom_link_2" data-toggle="toggle" >
+                    <input type="checkbox" name="ca_utility_link_2_enable" data-toggle="toggle" >
                 </a> 
                 <div id="custom_link_2">
                     <!-- Link Label -->
-                    <label for="ca_enable_custom_link_2" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 2 Label</strong></label>
+                    <label for="ca_utility_link_2_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 2 Label</strong></label>
                     <input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" class="form-control w-75" value="<?php print $ca_utility_link_2_name ?>"/>
 
                      <!-- Link Url -->
@@ -71,9 +71,9 @@
             </div>
             <!-- Custom Link 3 -->
             <div class="form-group col-6">
-                <label for="ca_enable_custom_link_3" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 3?</strong></label>
+                <label for="ca_utility_link_2_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 3?</strong></label>
                 <a data-toggle="collapse" href="#custom_link_3" aria-expanded="false" aria-controls="custom_link_3" class="shadow-none">
-                    <input type="checkbox" name="ca_enable_custom_link_3" data-toggle="toggle" >
+                    <input type="checkbox" name="ca_utility_link_3_enable" data-toggle="toggle" >
                 </a> 
                 <div id="custom_link_3">
                     <!-- Link Label -->

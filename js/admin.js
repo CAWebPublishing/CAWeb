@@ -130,6 +130,14 @@
 
  /* CAWeb Option Page */
 jQuery(document).ready(function() {
+  "use strict";
+  var changeMade = false;
+
+  $(window).on('beforeunload', function(){
+	  if( changeMade && "nav-menus.php" !== args.changeCheck)
+			  return 'Are you sure you want to leave?';
+
+  });
 
   $('#resetFavIcon').click(function() {
     var ico = args.defaultFavIcon;
@@ -138,4 +146,6 @@ jQuery(document).ready(function() {
     $('input[name="ca_fav_ico"]').val(icoName);
     $('#ca_fav_ico_img').attr('src', ico);
   });
+
+  $('#resetFavIcon').click(function(){ changeMade = true; });
 });

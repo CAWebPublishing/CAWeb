@@ -355,9 +355,9 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 		'ca_home_nav_link',	'ca_default_post_title_display', 'ca_default_post_date_display', 'ca_x_ua_compatibility');
 
 	$caweb_utility_header_options = array('ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_utility_home_icon',
-		'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window',
-		'ca_utility_link_2', 'ca_utility_link_2_name', 'ca_utility_link_2_new_window',
-		'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window',
+		'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window', 'ca_utility_link_1_enable',
+		'ca_utility_link_2', 'ca_utility_link_2_name', 'ca_utility_link_2_new_window', 'ca_utility_link_2_enable',
+		'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window', 'ca_utility_link_3_enable',
 	);
 
 	$caweb_page_header_options = array('header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background');

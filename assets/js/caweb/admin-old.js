@@ -1,13 +1,6 @@
  /* Functions used on Admin Pages */
  (function( $ ) {
-	"use strict";
-  var changeMade = false;
-
-$(window).on('beforeunload', function(){
-	  if( changeMade && "nav-menus.php" !== args.changeCheck)
-			  return 'Are you sure you want to leave?';
-
-  });
+	
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
 $('input[type="button"]').click(function(e){changeMade = true; });
