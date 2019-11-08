@@ -61,23 +61,7 @@ $geo_locator_enabled = get_option('ca_geo_locator_enabled', false) ? ' checked="
 // Utility Header Home Icon
 $utility_header_home_icon = get_option('ca_utility_home_icon', true) ? 'checked="checked"' : '';
 
-// Custom Link 1
-$ca_utility_link_1_name = get_option('ca_utility_link_1_name', '');
-$ca_utility_link_1_url = get_option('ca_utility_link_1', '');
-$ca_utility_link_1_target = get_option('ca_utility_link_1_new_window', true) ? 'checked="checked"' : '';
-$ca_utility_link_1_enable = get_option('ca_utility_link_1_enable', true) ? 'checked="checked"' : '';
-
-// Custom Link 2
-$ca_utility_link_2_name = get_option('ca_utility_link_2_name', '');
-$ca_utility_link_2_url = get_option('ca_utility_link_2', '');
-$ca_utility_link_2_target = get_option('ca_utility_link_2_new_window', true) ? 'checked="checked"' : '';
-$ca_utility_link_2_enable = get_option('ca_utility_link_2_enable', false) ? 'checked="checked"' : '';
-
-// Custom Link 3
-$ca_utility_link_3_name = get_option('ca_utility_link_3_name', '');
-$ca_utility_link_3_url = get_option('ca_utility_link_3', '');
-$ca_utility_link_3_target = get_option('ca_utility_link_3_new_window', true) ? 'checked="checked"' : '';
-$ca_utility_link_3_enable = get_option('ca_utility_link_3_enable', false) ? 'checked="checked"' : '';
+// Custom Link Declarations are located at options/sections/utility-header.php
 
 $org_logo = get_option('header_ca_branding', '');
 $org_logo_filename = ! empty($org_logo) ? substr($org_logo, strrpos($org_logo, '/')+1) : '';

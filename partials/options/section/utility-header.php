@@ -16,12 +16,12 @@
         <!-- Enable Geo Locator & Menu Home Link Row -->
         <div class="form-row">
             <!-- Enable Geo Locator -->
-            <div class="form-group col-3">
+            <div class="form-group col-4">
                 <label for="ca_geo_locator_enabled" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Displays a geo locator feature at the top right of each page."><strong>Enable Geo Locator</strong></label>
                 <input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" data-toggle="toggle" <?php print $geo_locator_enabled ?>> 
             </div>
             <!-- Home Link -->
-            <div class="form-group col-3">
+            <div class="form-group col-4">
                 <label for="ca_utility_home_icon" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a home link to the utility header."><strong>Home Link</strong></label>
                 <input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" data-toggle="toggle"  <?php print $utility_header_home_icon ?>>
             </div>
@@ -29,66 +29,42 @@
 
         <!-- Custom Link Row -->
         <div class="form-row">
-            <!-- Custom Link 1 -->
-            <div class="form-group col-6">
-                <label for="ca_utility_link_1_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 1?</strong></label>
-                <a data-toggle="collapse" href="#custom_link_1" aria-expanded="false" aria-controls="custom_link_1" class="shadow-none">
-                    <input type="checkbox" name="ca_utility_link_1_enable" data-toggle="toggle" >
+            <?php 
+            for( $i = 1; $i <= 3; $i++):
+                $p = "ca_utility_link_$i";
+                $name = get_option("{$p}_name", '');
+                $url = get_option("$p", '');
+                $target = get_option("{$p}_new_window", true) ? ' checked' : '';
+                $enable = get_option("{$p}_enable", 'init');
+                if( ('init' == $enable && ! empty($url)  &&  ! empty($name) ) ||
+                    true === $enable ){
+                    $enable = ' checked';
+                } else{
+                    $enable = '';
+                }
+            ?>
+            <!-- Custom Link <?php print $i ?> -->
+            <div class="form-group col">
+                <label for="<?php print $p ?>_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link <?php print $i ?>?</strong></label>
+                <a data-toggle="collapse" href="#custom_link_<?php print $i ?>" aria-expanded="<?php print ! empty($enable) ? 'true' : 'false'  ?>" aria-controls="custom_link_<?php print $i ?>" class="shadow-none">
+                    <input type="checkbox" name="<?php print $p ?>_enable" data-toggle="toggle"<?php print $enable ?>>
                 </a> 
-                <div id="custom_link_1">
+                <div id="custom_link_<?php print $i ?>" class="collapse<?php print ! empty($enable) ? ' show' : ''  ?>">
                     <!-- Link Label -->
-                    <label for="ca_utility_link_1_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 1 Label</strong></label>
-                    <input type="text" name="ca_utility_link_1_name" id="ca_utility_link_1_name" class="form-control w-75" value="<?php print $ca_utility_link_1_name ?>"/>
+                    <label for="<?php print $p ?>_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link <?php print $i ?> Label</strong></label>
+                    <input type="text" name="<?php print $p ?>_name" id="<?php print $p ?>_name" class="form-control w-75" value="<?php print $name ?>"/>
 
                     <!-- Link Url -->
-                     <label for="ca_utility_link_1" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a custom link to the utility header."><strong>Custom Link 1 URL</strong></label>
-                    <input type="text" name="ca_utility_link_1" id="ca_utility_link_1" class="form-control w-75" value="<?php print $ca_utility_link_1_url ?>"/>
+                     <label for="<?php print $p ?>" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a custom link to the utility header."><strong>Custom Link <?php print $i ?> URL</strong></label>
+                    <input type="text" name="<?php print $p ?>" id="<?php print $p ?>" class="form-control w-75" value="<?php print $url ?>"/>
 
                      <!-- Link Target -->
-                     <label for="ca_utility_link_1_new_window" class="w-100 mb-2 d-inline-block">Open in New Tab: <input type="checkbox" name="ca_utility_link_1_new_window" id="ca_utility_link_1_new_window" <?php print $ca_utility_link_1_target ?> /></label>
+                     <label for="<?php print $p ?>_new_window" class="w-100 mb-2 d-inline-block"><strong>Open in New Tab</strong></label>
+                     <input type="checkbox" name="<?php print $p ?>_new_window" id="<?php print $p ?>_new_window" data-toggle="toggle"<?php print $target ?> />
                 
                 </div>
             </div>
-            <!-- Custom Link 2 -->
-            <div class="form-group col-6">
-                <label for="ca_utility_link_2_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 2?</strong></label>
-                <a data-toggle="collapse" href="#custom_link_2" aria-expanded="false" aria-controls="custom_link_2" class="shadow-none">
-                    <input type="checkbox" name="ca_utility_link_2_enable" data-toggle="toggle" >
-                </a> 
-                <div id="custom_link_2">
-                    <!-- Link Label -->
-                    <label for="ca_utility_link_2_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 2 Label</strong></label>
-                    <input type="text" name="ca_utility_link_2_name" id="ca_utility_link_2_name" class="form-control w-75" value="<?php print $ca_utility_link_2_name ?>"/>
-
-                     <!-- Link Url -->
-                     <label for="ca_utility_link_2" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a custom link to the utility header."><strong>Custom Link 2 URL</strong></label>
-                    <input type="text" name="ca_utility_link_2" id="ca_utility_link_2" class="form-control w-75" value="<?php print $ca_utility_link_2_url ?>"/>
-
-                     <!-- Link Target -->
-                     <label for="ca_utility_link_2_new_window" class="w-100 mb-2 d-inline-block">Open in New Tab: <input type="checkbox" name="ca_utility_link_2_new_window" id="ca_utility_link_2_new_window" <?php print $ca_utility_link_2_target ?> /></label>
-                
-                </div>
-            </div>
-            <!-- Custom Link 3 -->
-            <div class="form-group col-6">
-                <label for="ca_utility_link_2_enable" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link 3?</strong></label>
-                <a data-toggle="collapse" href="#custom_link_3" aria-expanded="false" aria-controls="custom_link_3" class="shadow-none">
-                    <input type="checkbox" name="ca_utility_link_3_enable" data-toggle="toggle" >
-                </a> 
-                <div id="custom_link_3">
-                    <!-- Link Label -->
-                    <label for="ca_utility_link_3_name" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="This is the text you want to display for this custom link in the utility header."><strong>Custom Link 3 Label</strong></label>
-                    <input type="text" name="ca_utility_link_3_name" id="ca_utility_link_3_name" class="form-control w-75" value="<?php print $ca_utility_link_3_name ?>"/>
-                    
-                    <!-- Link Url -->
-                    <label for="ca_utility_link_3" class="w-100 mb-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="Adds a custom link to the utility header."><strong>Custom Link 3 URL</strong></label>
-                    <input type="text" name="ca_utility_link_3" id="ca_utility_link_3" class="form-control w-75" value="<?php print $ca_utility_link_3_url ?>"/>
-                
-                    <!-- Link Target -->
-                    <label for="ca_utility_link_3_new_window" class="w-100 mb-2 d-inline-block">Open in New Tab: <input type="checkbox" name="ca_utility_link_3_new_window" id="ca_utility_link_3_new_window" <?php print $ca_utility_link_3_target ?> /></label>
-                
-                </div>
-            </div>
+            <?php endfor; ?>
         </div>
 
     </div>
