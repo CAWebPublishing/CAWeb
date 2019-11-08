@@ -53,7 +53,7 @@ const fs = require('fs'); // File System
 /* 
 	CAWeb Admin Styles 
 */
-gulp.task('admin-styles', parameterized( async function (_) {
+gulp.task('admin-css', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 	
 	if ( _.params.prod ) {
@@ -73,7 +73,7 @@ gulp.task('admin-styles', parameterized( async function (_) {
 /*
 	CAWeb Styles (State Template v5)
 */
-gulp.task('v5-styles', parameterized( async function (_) {
+gulp.task('v5-css', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 
 	if ( _.params.prod ) {
@@ -94,7 +94,7 @@ gulp.task('v5-styles', parameterized( async function (_) {
 /*
 	CAWeb Styles (State Template v4 Legacy Version)
 */
-gulp.task('v4-styles', parameterized( async function (_) {
+gulp.task('v4-css', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
 	
 	if ( _.params.prod ) {
@@ -364,9 +364,9 @@ async function buildThemeCustomizerJS( min = false){
 //
 // DEV (Development Output)
 //
-gulp.task('dev', parameterized.series('v5-styles --dev', 'v4-styles --dev', 'admin-styles --dev', 'admin-js --dev', 'frontend-js --dev', 'customizer-js --dev') );
+gulp.task('dev', parameterized.series('v5-css --dev', 'v4-css --dev', 'admin-css --dev', 'admin-js --dev', 'frontend-js --dev', 'customizer-js --dev') );
 
 // PROD (Minified Output)
-gulp.task('prod', parameterized.series('v5-styles --prod', 'v4-styles --prod', 'admin-styles --prod', 'admin-js --prod', 'frontend-js --prod', 'customizer-js --prod') );
+gulp.task('prod', parameterized.series('v5-css --prod', 'v4-css --prod', 'admin-css --prod', 'admin-js --prod', 'frontend-js --prod', 'customizer-js --prod') );
 
 //gulp.task('build', parameterized.series('dev', 'prod') );
