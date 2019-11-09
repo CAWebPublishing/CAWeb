@@ -33,6 +33,7 @@
                     <input 
                         type="text" 
                         name="ca_fav_ico" 
+                        id="ca_fav_ico_filename" 
                         value="<?php print $fav_icon_name ?>" 
                         class="form-control library-link" 
                         placeholder="Fav Icon" 
@@ -46,7 +47,6 @@
                         <button 
                             name="ca_fav_ico"
                             class="btn btn-outline-primary library-link" 
-                            type="button"
                             data-choose="Choose a Fav Icon"
                             data-update="Set as Fav Icon"
                             data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon"
@@ -54,6 +54,9 @@
                             data-icon-check="true">Browse</button>
                         <button id="resetFavIcon" class="btn btn-outline-primary" type="button">Reset</button>
                     </div>
+                    <!-- Organization Logo-Brand  -->
+                    <input type="hidden" name="ca_fav_ico" value="<?php print $fav_icon ?>" >
+                
                 </div>
             </div>
         </div>
