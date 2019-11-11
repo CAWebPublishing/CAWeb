@@ -10,14 +10,14 @@
         foreach ($social_options as $social => $option) {
             $share_email = 'ca_social_email' === $option ? true : false;
             $social = $share_email ? "Share via $social" : $social;
-			$header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked="checked"' : '';
-		    $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked="checked"' : '';
-			$new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked="checked"' : '';
+			$header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked' : '';
+		    $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked' : '';
+			$new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked' : '';
     ?>
     <div class="form-row">
         <a class="caweb-option d-block text-decoration-none" data-toggle="collapse" href="#<?php print $option ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print $option ?>-settings">
-            <h2 class="d-inline border-bottom"><?php print $social; ?></h2>
-            <span class="text-secondary"></span>
+            <h2 class="d-inline border-bottom"><?php print $social; ?> <span class="text-secondary ca-gov-icon-"></span></h2>
+            
         </a>
     </div>
     <div class="form-row collapse border p-2" id="<?php print $option ?>-settings">
@@ -41,7 +41,7 @@
         <!-- Open in New Tab -->
         <div class="form-group col-sm-2">
             <label for="<?php print $option; ?>_new_window" class="w-100 mb-2 d-inline-block">Open in New Tab:</label>
-            <input type="checkbox" name="<?php print $option; ?>_new_window" data-toggle="toggle"<?php print $new_window_checked?>>
+            <input type="checkbox" name="<?php print $option; ?>_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $new_window_checked?>>
         </div>
         <?php endif; ?>
     </div>

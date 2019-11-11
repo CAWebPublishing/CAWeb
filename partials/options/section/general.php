@@ -81,8 +81,7 @@
         <div class="form-row">
             <label for="ca_menu_selector_enabled" class="w-100" data-toggle="tooltip" data-placement="top" title="Displays a header menu type selector on the page editor level."><strong>Menu Type Selector</strong></label>
             <div class="form-group col-sm-5">
-               <input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"
-                <?php print $navigation_menu_selector ? 'checked="checked"' : '' ?> data-toggle="toggle">
+               <input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"<?php print $navigation_menu_selector ? ' checked' : '' ?> data-toggle="toggle">
             </div>
         </div>
         <?php endif; ?>

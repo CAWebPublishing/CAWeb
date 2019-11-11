@@ -42,19 +42,19 @@
             <div class="form-group">
                 <!-- Google Translate None -->
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print false === $google_translate_mode || 'none' == $google_translate_mode ? ' checked="checked"' : '' ?>>
+                    <input class="form-check-input" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print false === $google_translate_mode || 'none' == $google_translate_mode ? ' checked' : '' ?>>
                     <label class="form-check-label" for="ca_google_trans_enabled_none">None</label>
                 </div>
         
                 <!-- Google Translate Standard -->
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="standard" name="ca_google_trans_enabled" id="ca_google_trans_enabled_standard" <?php print true === $google_translate_mode || 'standard' == $google_translate_mode ? ' checked="checked"' : '' ?>>
+                    <input class="form-check-input" type="radio" value="standard" name="ca_google_trans_enabled" id="ca_google_trans_enabled_standard" <?php print true === $google_translate_mode || 'standard' == $google_translate_mode ? ' checked' : '' ?>>
                     <label class="form-check-label" for="ca_google_trans_enabled_standard">Standard</label>
                 </div>
         
                 <!-- Google Translate Custom -->
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="ca_google_trans_enabled_custom" value="custom" name="ca_google_trans_enabled" <?php print 'custom' == $google_translate_mode ? ' checked="checked"' : '' ?>>
+                    <input class="form-check-input" type="radio" id="ca_google_trans_enabled_custom" value="custom" name="ca_google_trans_enabled" <?php print 'custom' == $google_translate_mode ? ' checked' : '' ?>>
                     <label class="form-check-label" for="ca_google_trans_enabled_custom">Custom</label>
                 </div>
             </div>
