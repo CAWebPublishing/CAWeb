@@ -16,6 +16,22 @@ function caweb_google_translate_func() {
     return '<div id="google_translate_element" class="custom-translate"></div>';
 }
 add_shortcode('caweb_google_translate', 'caweb_google_translate_func');
+
+function caweb_icon_menu($selected = '', $input = '', $_header = true){
+    $icons = caweb_get_icon_list(-1, '', true);
+    $iconList = '';
+    $header = $_header ? '<div id="caweb-icon-menu-header" class="mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span> <strong>Icon</strong></div>' : '';
+    $input = ! empty($input) ? sprintf('<input type="hidden" name="%1$s" value="%2$s" >', $input, $selected) : '';
+
+    foreach ($icons as $i) {
+        $iconList .= sprintf('<li class="list-group-item float-left ca-gov-icon-%1$s%2$s" title="%1$s"></li>', 
+        $i, $selected == $i ? ' selected' : '');
+    }   
+
+    return sprintf('%1$s<ul id="caweb-icon-menu">%2$s%3$s</ul>', $header, $iconList, $input);
+    
+}
+add_shortcode('caweb_icon_menu', 'caweb_icon_menu');
 /*
 Panel Attributes
 $atts['layout'] = various panel designs
