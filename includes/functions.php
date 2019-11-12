@@ -197,19 +197,15 @@ function caweb_tiny_mce_settings($settings = array()) {
 		$styles[ str_replace(' ', '', strtolower($style->name)) ] = $style;
 	}
 
+	$adminCSS = getMinFile( '/css/admin.css' );
+	
 	$version = caweb_get_page_version(get_the_ID());
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	$schemes = caweb_color_schemes($version, 'filename');
 	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
-	$adminCSS = '/css/admin.css';
-	$adminCSS = file_exists(CAWebAbsPath .  str_replace( '.css', '.min.css', $adminCSS) ) ? str_replace( '.css', '.min.css', $adminCSS) : $adminCSS;
-	$adminCSS = CAWebUri . $adminCSS;
+	$editorCSS = getMinFile( "/css/cagov-v$version-$colorscheme.css" );
 	
-	$editorCSS = "/css/cagov-v$version-$colorscheme.css";
-	$editorCSS = file_exists( CAWebAbsPath . str_replace( '.css', '.min.css', $editorCSS) ) ? str_replace( '.css', '.min.css', $editorCSS) : $editorCSS;
-	$editorCSS = CAWebUri . $editorCSS;
-
 	$css = array(
 		includes_url('/css/dashicons.min.css'),
 		includes_url('/js/tinymce/skins/wordpress/wp-content.css'),

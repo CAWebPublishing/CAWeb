@@ -116,9 +116,10 @@ $ext_js = get_option('caweb_external_js', array());
 // Custom JS
 $custom_js = get_option('ca_custom_js', '');
 
-
+/*
+ Alert Banners
+*/
 $alerts = get_option('caweb_alerts', array());
-$icons = caweb_get_icon_list(-1, '', true);
 
 // Version 4 Options (slated for removal)
 $header_branding_alignment = get_option('header_ca_branding_alignment', 'left');
