@@ -4,22 +4,21 @@
     <!-- Custom Uploaded JS -->
     <div class="form-row">
         <div class="form-group">
-            <h2 class="d-inline">Uploaded JS</h2>
-            <a class="dashicons dashicons-plus-alt" id="addJS"></a>
+            <strong class="d-inline">Uploaded JS</strong>
+            <a class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-js"></a>
             <small class="form-text text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
         ?>
         <div class="form-group col-lg-12">
-            <ul class="list-group" id="uploadedJS">
+            <ul class="list-group" id="uploaded-js">
                 <?php
-                    $ext_js_dir = sprintf('%1$s/js/external/%2$s', CAWebUri, get_current_blog_id() );
                     foreach ($ext_js as $name) :
                 ?>
                     <li class="list-group-item">
-                        <a href="<?php print "$ext_js_dir/$name" ?>?TB_iframe=true&width=600&height=550" title="<?php print $name ?>" class="thickbox dashicons dashicons-visibility preview-js text-success"></a>
-                        <a href="<?php print "$ext_js_dir/$name" ?>" download="<?php print $name ?>" title="download" class="dashicons dashicons-download download-js"></a>
-                        <a title="remove <?php print $name ?>" class="dashicons dashicons-dismiss remove-js text-danger"></a>
+                        <a href="<?php print "$ext_js_dir/$name" ?>?TB_iframe=true&width=600&height=550" title="<?php print $name ?>" class="text-decoration-none thickbox dashicons dashicons-visibility preview-js text-success align-middle"></a>
+                        <a href="<?php print "$ext_js_dir/$name" ?>" download="<?php print $name ?>" title="download" class="text-decoration-none dashicons dashicons-download download-js align-middle"></a>
+                        <a title="<?php print $name ?>" class="dashicons dashicons-dismiss remove-js text-danger align-middle"></a>
                         <input type="hidden" name="caweb_external_js[]" value="<?php print $name ?>"><?php print $name ?>
                     </li>
                 <?php endforeach; ?>

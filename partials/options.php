@@ -105,9 +105,18 @@ $ext_css =  get_option('caweb_external_css', array());
 // Custom CSS
 $custom_css = get_option('ca_custom_css', '');
 
+/*
+ Custom JS
+*/
+$ext_js_dir = sprintf('%1$s/js/external/%2$s', CAWebUri, get_current_blog_id() );
 
+// Uploaded JS
 $ext_js = get_option('caweb_external_js', array());
+
+// Custom JS
 $custom_js = get_option('ca_custom_js', '');
+
+
 $alerts = get_option('caweb_alerts', array());
 $icons = caweb_get_icon_list(-1, '', true);
 
