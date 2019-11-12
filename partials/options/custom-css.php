@@ -4,22 +4,21 @@
     <!-- Custom Uploaded CSS -->
     <div class="form-row">
         <div class="form-group">
-            <h2 class="d-inline">Uploaded CSS</h2>
-            <a class="dashicons dashicons-plus-alt" id="addCSS"></a>
+            <strong class="d-inline">Uploaded CSS</strong>
+            <span class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-css"></span>
             <small class="form-text text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
         ?>
         <div class="form-group col-lg-12">
-            <ul class="list-group" id="uploadedCSS">
+            <ul class="list-group" id="uploaded-css">
                 <?php
-                    $ext_css_dir = sprintf('%1$s/css/external/%2$s', CAWebUri, get_current_blog_id() );
                     foreach ($ext_css as $name) :
                 ?>
                     <li class="list-group-item">
-                        <a href="<?php print "$ext_css_dir/$name" ?>?TB_iframe=true&width=600&height=550" title="<?php print $name ?>" class="thickbox dashicons dashicons-visibility preview-css text-success"></a>
-                        <a href="<?php print "$ext_css_dir/$name" ?>" download="<?php print $name ?>" title="download" class="dashicons dashicons-download download-css"></a>
-                        <a title="remove <?php print $name ?>" class="dashicons dashicons-dismiss remove-css text-danger"></a>
+                        <a href="<?php print "$ext_css_dir/$name" ?>?TB_iframe=true&width=600&height=550" title="<?php print $name ?>" class="text-decoration-none thickbox dashicons dashicons-visibility preview-css text-success align-middle"></a>
+                        <a href="<?php print "$ext_css_dir/$name" ?>" download="<?php print $name ?>" title="<?php print $name ?>" class="text-decoration-none dashicons dashicons-download download-css align-middle"></a>
+                        <a title="<?php print $name ?>" class="dashicons dashicons-dismiss remove-css text-danger align-middle"></a>
                         <input type="hidden" name="caweb_external_css[]" value="<?php print $name ?>"><?php print $name ?>
                     </li>
                 <?php endforeach; ?>

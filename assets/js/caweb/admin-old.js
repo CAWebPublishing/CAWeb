@@ -6,22 +6,6 @@ $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type
 $('input[type="button"]').click(function(e){changeMade = true; });
 $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
-$('.caweb-nav-tab').click(function() {
-  var tabs = document.getElementsByClassName('caweb-nav-tab');
-  var selected_tab = this.getAttribute("name");
-
-  for (var i = 0; i < tabs.length; i++) {
-	  if( selected_tab !== tabs[i].getAttribute("name") ){
-		  tabs[i].classList.remove("nav-tab-active");
-			document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
-	  }else{
-		  tabs[i].classList.add("nav-tab-active");
-		  document.getElementById(selected_tab).classList.remove('hidden');
-	  }
-  }
-
-  document.getElementById('tab_selected').value = selected_tab;
-});
 
 $('#ca_site_version').change(function() {
   var version = this.options[this.selectedIndex].value;
@@ -96,74 +80,6 @@ $('#ca_x_ua_compatibility').on('input',function(e){
 
 
 
-$( "#uploadedCSS, #uploadedJS" ).sortable();
-$( "#uploadedCSS, #uploadedJS" ).disableSelection();
-
-$('.remove-css, .remove-js').click(function(e){
-e.preventDefault();
-  var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
-
-  if (r == true) {
-	  changeMade = true;
-	  this.parentNode.remove();
-  }
-});
-
-$('#addCSS, #addJS').click(function(e){
-  
-  addExternal($(this).closest('table'), $(this).attr('name'));	
-  changeMade = true;
-
-});
-
-function addExternal(ext_table, ext){
-  var rowCount = ext_table.children().children().length;
-  var row = document.createElement('TR');
-  var col1 = document.createElement('TD');
-  var rem = document.createElement('A');
-  var col2 = document.createElement('TD');
-  var fileUpload = document.createElement('Input');
-
-row.classList = "pending-" + ext;
-rem.classList = "dashicons dashicons-dismiss remove-" + ext;
-
-  fileUpload.type = "file";
-  fileUpload.name = rowCount + ext + "_upload";
-  fileUpload.id = rowCount + ext + "_upload";
-  fileUpload.accept = "." + ext;
-
-rem.addEventListener('click', function (e) {
-  e.preventDefault();
-  var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
-
- if (r == true) {
-		changeMade = true;
-		this.parentNode.parentNode.remove();
-	}
-});
-
-fileUpload.addEventListener('change', function () {
-  var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
-  var extension = name.lastIndexOf(".") > 0 ?
-					name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
-
-  if( "" === extension || ext !== extension){
-	alert(name + " isn't a valid " + ext + " extension and was not uploaded.");
-	this.parentNode.remove();
-  }else{
-	rem.title = "remove " + name;
-  }
-
-});
-
-  col2.append(rem);
-  col2.append(fileUpload);
-
-  row.append(col1);
-  row.append(col2);
-
-  ext_table.append(row);
-}
 
 $( "#cawebAlerts" ).sortable();
 $( "#cawebAlerts" ).disableSelection();

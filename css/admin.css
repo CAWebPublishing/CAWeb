@@ -17,6 +17,16 @@ a[data-toggle="collapse"].collapsed h2 > span:after {
   max-height: 150px;
 }
 
+/* Custom CSS */
+#uploaded-css li a,
+#add-css {
+  cursor: pointer;
+}
+
+#ca_custom_css {
+  min-height: 300px;
+}
+
 #caweb-icon-menu {
   height: 306px;
   overflow: auto;

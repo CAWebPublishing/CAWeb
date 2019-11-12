@@ -49,19 +49,4 @@
             </div>
         </div>
 
-        <!-- Organization Logo Alignment Row -->
-        <div class="form-row">
-            <label for="header_ca_branding_alignment" class="w-100" data-toggle="tooltip" data-placement="top" title="Select the position for the agency logo."><strong>Organization Logo Alignment</strong></label>
-            <div class="form-group col-sm-5">
-                <select id="header_ca_branding_alignment" name="header_ca_branding_alignment" class="w-50 form-control">
-                <option value="left"
-                    <?php print 'left' == $header_branding_alignment ? ' selected="selected"' : '' ?>>Left</option>
-                    <option value="center"
-                    <?php print 'center' == $header_branding_alignment ? ' selected="selected"' : '' ?>>Center</option>
-                    <option value="right"
-                    <?php print 'right' == $header_branding_alignment ? ' selected="selected"' : '' ?>>Right</option>
-                </select>
-            </div>
-        </div>
-
 </div>
