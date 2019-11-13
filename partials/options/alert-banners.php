@@ -58,7 +58,7 @@
 
                 <!-- Alert Banner Settings -->
                 <div class="form-group col-sm-12">
-                    <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-<?php print $count; ?>-settings" aria-expanded="false" aria-controls="alert-<?php print $count; ?>-settings">
+                    <a class="collapsed text-decoration-none text-reset" aria-label="CAWeb Alert Banner Settings" data-toggle="collapse" href="#alert-<?php print $count; ?>-settings" aria-expanded="false" aria-controls="alert-<?php print $count; ?>-settings">
                         <label class="border-bottom">Settings <span class="text-secondary ca-gov-icon-"></span></label>
                     </a>
                     <div id="alert-<?php print $count; ?>-settings" class="collapse">
