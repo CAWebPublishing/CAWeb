@@ -6,7 +6,7 @@
         <div class="form-group">
             <h2 class="d-inline">Uploaded JS</h2>
             <a class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-js"></a>
-            <small class="form-text text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
+            <small class="form-text mb-2 text-muted">Any scripts added will override any pre-existing scripts. Uploaded scripts load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
         ?>
@@ -35,7 +35,7 @@
                 </div>
                 <textarea id="ca_custom_js" name="ca_custom_js" class="form-control" aria-label="Custom JS"><?php print wp_unslash($custom_js) ?></textarea>
             </div>
-            <small class="form-text text-muted">Any styles added will override any pre-existing styles.</small>
+            <small class="form-text mb-2 text-muted">Any scripts added will override any pre-existing scripts.</small>
         </div>
     </div>
 

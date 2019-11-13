@@ -8,7 +8,8 @@
     <!-- Organization Logo-Brand Row -->
     <div class="form-row">
         <div class="form-group col-sm-5">
-            <label for="header_ca_branding_filename" class="d-block" data-toggle="tooltip" data-placement="top" title="Select an image to use as the agency logo. Recommended size is 300pixels wide by 80pixels tall."><strong>Organization Logo-Brand</strong></label>
+            <label for="header_ca_branding_filename" class="d-block mb-0"><strong>Organization Logo-Brand</strong></label>
+            <small class="mb-2 text-muted d-block">Select an image to use as the agency logo. Recommended size is 300pixels wide by 80pixels tall.</small>
             <div class="input-group">
                 <!-- Organization Logo-Brand Field -->
                 <input 
@@ -44,7 +45,8 @@
 
     <div class="form-row">
         <div class="form-group col-sm-5">
-            <label for="header_ca_branding_alt_text" class="d-block" data-toggle="tooltip" data-placement="top" title="Enter alternative text for the agency logo image."><strong>Organization Logo-Alt Text</strong></label>
+            <label for="header_ca_branding_alt_text" class="d-block mb-0"><strong>Organization Logo-Alt Text</strong></label>
+            <small class="mb-2 text-muted d-block">Enter alternative text for the agency logo image.</small>
             <!-- Organization Logo-Brand image alt text -->
             <input type="text" name="header_ca_branding_alt_text" id="header_ca_branding_alt_text" value="<?php print $org_logo_alt_text ?>" class="form-control">
         </div>

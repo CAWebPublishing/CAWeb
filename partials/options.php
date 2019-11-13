@@ -71,7 +71,10 @@ $org_logo = get_option('header_ca_branding', '');
 $org_logo_filename = ! empty($org_logo) ? substr($org_logo, strrpos($org_logo, '/')+1) : '';
 
 // Organization Logo Alt Text
-$org_logo_alt_text = ! empty( get_option('header_ca_branding_alt_text', '') ) ? get_option('header_ca_branding_alt_text') :  caweb_get_attachment_post_meta($org_logo, '_wp_attachment_image_alt');
+$org_logo_alt_text = '';
+if( ! empty( $org_logo ) ){
+	$org_logo_alt_text = ! empty( get_option('header_ca_branding_alt_text', '') ) ? get_option('header_ca_branding_alt_text') :  caweb_get_attachment_post_meta($org_logo, '_wp_attachment_image_alt');
+}
 
 /*
  Google

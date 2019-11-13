@@ -6,7 +6,7 @@
         <div class="form-group">
             <h2 class="d-inline">Uploaded CSS</h2>
             <span class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-css"></span>
-            <small class="form-text text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
+            <small class="form-text mb-2 text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
         ?>
@@ -35,7 +35,7 @@
                 </div>
                 <textarea id="ca_custom_css" name="ca_custom_css" class="form-control" aria-label="Custom CSS"><?php print wp_unslash($custom_css) ?></textarea>
             </div>
-            <small class="form-text text-muted">Any styles added will override any pre-existing styles.</small>
+            <small class="form-text mb-2 text-muted">Any styles added will override any pre-existing styles.</small>
         </div>
     </div>
 

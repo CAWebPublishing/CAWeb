@@ -3,7 +3,8 @@
     <div class="form-row">
         <div class="form-group">
             <h2 class="d-inline">Create an Alert Banner </h2>
-            <span class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-alert" data-toggle="tooltip" title="Add Alert Banner (Note: This feature has a known WordPress issue when using the Chrome Browser.)"></span>
+            <span class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-alert"></span>
+            <small class="mb-2 text-muted d-block">Add Alert Banner (Note: This feature has a known WordPress issue when using the Chrome Browser.)</small>
         </div>
     </div>
         
@@ -42,7 +43,8 @@
                 <div id="alert-banner-<?php print $count; ?>" class="form-row col-sm-12 border p-2 collapse">
                 <!-- Alert Banner Header -->
                 <div class="form-group col-sm-7">
-                    <label for="alert-header-<?php print $count ?>">Header</label>
+                    <label for="alert-header-<?php print $count ?>" class="mb-0">Header</label>
+                    <small class="text-muted d-block mb-2">Enter header text for the alert.</small>
                     <input placeholder="Label" class="form-control" id="alert-header-<?php print $count ?>" name="alert-header-<?php print $count ?>" type="text" value="<?php print $header ?>">
                 </div>
 
@@ -50,6 +52,7 @@
                 <div class="form-group col-sm-12">
                     <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-message-<?php print $count; ?>_iframe" aria-expanded="false" aria-controls="alert-message-<?php print $count; ?>_iframe">
                         <label class="border-bottom" for="alert-message-<?php print $count ?>">Message <span class="text-secondary ca-gov-icon-"></span></label>
+                        <small class="text-muted d-block mb-2">Enter message for the alert</small>
                     </a>
                     <div id="alert-message-<?php print $count; ?>_iframe" class="collapse">
                         <?php print wp_editor(stripslashes($data['message']), "alert-message-$count", caweb_tiny_mce_settings()); ?>
@@ -64,7 +67,8 @@
                     <div id="alert-<?php print $count; ?>-settings" class="collapse">
                         <!-- Display On -->
                         <div class="form-group col-sm pl-0" role="radiogroup" aria-label="Alert Display On Options">
-                            <label class="d-block"><strong>Display on</strong></label>
+                            <label class="d-block mb-0"><strong>Display on</strong></label>
+                            <small class="text-muted d-block mb-2">Select whether alert should display on home page or on all pages.</small>
                             <div class="form-check form-check-inline">
                                 <input 
                                     id="alert-display-home-<?php print $count; ?>" 
@@ -90,6 +94,7 @@
                         <!-- Banner Color -->
                         <div class="form-group col-sm pl-0">
                             <label for="alert-banner-color-<?php print $count; ?>"><strong>Banner Color</strong></label>
+                            <small class="text-muted d-block mb-2">Select a color for the alert banner.</small>
                             <input type="color" id="alert-banner-color-<?php print $count; ?>" name="alert-banner-color-<?php print $count; ?>" value="<?php print $banner_color ?>" class="form-control-sm">
                         </div>
 
