@@ -78,8 +78,7 @@
 
             <!-- Google Translate Icon -->
             <div class="form-group col-sm-12">
-                <?php //print caweb_icon_menu($google_translate_icon, 'ca_google_trans_icon'); ?>
-                <?php print do_shortcode("[caweb_icon_menu select='$google_translate_icon' name='ca_google_trans_icon' ]"); ?>
+                <?php print caweb_icon_menu($google_translate_icon, 'ca_google_trans_icon'); ?>
             </div>
 
             <div class="form-group col-sm-6">

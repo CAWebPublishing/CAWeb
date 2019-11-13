@@ -117,7 +117,7 @@
 
                         <!-- Banner Icon -->
                         <div class="form-group col-sm-12 d-inline-block pl-0">
-                            <?php print caweb_icon_menu($alert_icon, "alert-icon-$count") ?>
+                            <?php print caweb_icon_menu($alert_icon, "alert-icon-$count"); ?>
                         </div>
                     </div>
                 </div>

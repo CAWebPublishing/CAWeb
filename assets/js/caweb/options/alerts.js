@@ -237,8 +237,8 @@ jQuery(document).ready(function() {
 		$(alertIconGroup).addClass('form-group col-sm-12 d-inline-block pl-0');
 		var data = {
             'action': 'caweb_icon_menu',
-			'inputName': 'alert-icon-' + alertCount,
-			'selected': 'important'
+			'name': 'alert-icon-' + alertCount,
+			'select': 'important'
           };
 
 		$.post(ajaxurl, data, function(response) {

@@ -484,8 +484,8 @@ function caweb_fav_icon_checker() {
 add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
 
 function caweb_icon_menu_func(){
-	$input = isset($_POST['inputName']) ? $_POST['inputName'] : '';
-	$sel = isset($_POST['selected']) ? $_POST['selected'] : '';
+	$input = isset($_POST['name']) ? $_POST['name'] : '';
+	$sel = isset($_POST['select']) ? $_POST['select'] : '';
 
 	print caweb_icon_menu($sel, $input);
 	wp_die(); // this is required to terminate immediately and return a proper response
