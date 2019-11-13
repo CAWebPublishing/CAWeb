@@ -115,10 +115,8 @@ changeMade = true;
 });
 
 $('.caweb-alert div a.alert-toggle').click(function(e){ displayAlertOptions(this); });
-$('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
 $('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling, false); });
-$('.caweb-alert div a.activateAlert').click(function(e){ activateAlert(this);});
 
 $('[class*="caweb-alert-"] .button-primary.ok').click(function(e){ saveAlertSettings(this); });
 
@@ -353,15 +351,7 @@ e.parentNode.nextElementSibling.classList.toggle('hidden');
   e.classList.add('dashicons-arrow-up');
   }
 }
-function removeAlert(e){
-  var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
 
-  if (r == true) {
-	  changeMade = true;
-	  e.parentNode.parentNode.parentNode.remove();
-  }
-
-}
 function displayReadMoreOptions(e) {
   e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
 }

@@ -483,6 +483,17 @@ function caweb_fav_icon_checker() {
 }
 add_action('wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker');
 
+function caweb_icon_menu_func(){
+	$input = isset($_POST['inputName']) ? $_POST['inputName'] : '';
+	$sel = isset($_POST['selected']) ? $_POST['selected'] : '';
+
+	print caweb_icon_menu($sel, $input);
+	wp_die(); // this is required to terminate immediately and return a proper response
+
+}
+add_action('wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func');
+add_action('wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func');
+
 function caweb_default_favicon_url() {
 	return  site_url("wp-content/themes/CAWeb/images/system/favicon.ico");
 }

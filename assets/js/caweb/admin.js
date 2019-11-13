@@ -20,4 +20,8 @@ jQuery(document).ready(function() {
     changeMade = true;
   });
 
+  $('#ca_google_trans_enabled_custom, label[for="ca_google_trans_enabled_custom"]').click(function(){
+    $('#ca_google_trans_enabled_custom_extras').collapse('toggle');
+  });
+
 });

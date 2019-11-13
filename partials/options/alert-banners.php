@@ -7,7 +7,7 @@
         </div>
     </div>
         
-    <ul class="list-group">
+    <ul id="alertBanners">
         <?php
             foreach ($alerts as $a => $data) :
                 $header = $data['header'];
@@ -29,7 +29,7 @@
             <!-- Alert Banner Row -->
             <div class="form-row">
                 <span class="text-danger dashicons dashicons-dismiss remove-alert mr-2"></span>
-                <a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#alert-banner-<?php print $count; ?>" role="button" aria-expanded="false" aria-controls="alert-banner-<?php print $count; ?>">
+                <a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#alert-banner-<?php print $count; ?>" aria-expanded="false" aria-controls="alert-banner-<?php print $count; ?>">
                     <h2 class="d-inline border-bottom"><?php print $default_header; ?> <span class="text-secondary ca-gov-icon-"></span></h2>
                 </a>
                 <!-- Alert Options -->
@@ -48,7 +48,7 @@
 
                 <!-- Alert Banner Message -->
                 <div class="form-group col-sm-12">
-                    <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-message-<?php print $count; ?>_iframe" role="button" aria-expanded="false" aria-controls="alert-message-<?php print $count; ?>_iframe">
+                    <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-message-<?php print $count; ?>_iframe" aria-expanded="false" aria-controls="alert-message-<?php print $count; ?>_iframe">
                         <label class="border-bottom" for="alert-message-<?php print $count ?>">Message <span class="text-secondary ca-gov-icon-"></span></label>
                     </a>
                     <div id="alert-message-<?php print $count; ?>_iframe" class="collapse">
@@ -58,11 +58,10 @@
 
                 <!-- Alert Banner Settings -->
                 <div class="form-group col-sm-12">
-                    <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-message-<?php print $count; ?>-settings" role="button" aria-expanded="false" aria-controls="alert-message-<?php print $count; ?>-settings">
+                    <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-<?php print $count; ?>-settings" aria-expanded="false" aria-controls="alert-<?php print $count; ?>-settings">
                         <label class="border-bottom">Settings <span class="text-secondary ca-gov-icon-"></span></label>
-                        
                     </a>
-                    <div id="alert-message-<?php print $count; ?>-settings" class="collapse">
+                    <div id="alert-<?php print $count; ?>-settings" class="collapse">
                         <!-- Display On -->
                         <div class="form-group col-sm pl-0">
                             <label class="d-block"><strong>Display on</strong></label>
