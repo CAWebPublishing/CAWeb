@@ -37,11 +37,11 @@
 
         <!-- Google Translate Row -->
         <div class="form-row">
-            <div class="form-group">
+            <div class="form-group" role="radiogroup" aria-label="Google Translate Modes">
                 <label for="ca_google_trans_enabled" class="d-block" data-toggle="tooltip" data-placement="top" title="Displays the Google translate feature at the top right of each page."><strong>Enable Google Translate</strong></label>
                 <!-- Google Translate None -->
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print false === $google_translate_mode || 'none' == $google_translate_mode ? ' checked' : '' ?>>
+                    <input class="form-check-input" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print empty($google_translate_mode) || false === $google_translate_mode || 'none' == $google_translate_mode ? ' checked' : '' ?>>
                     <label class="form-check-label" for="ca_google_trans_enabled_none">None</label>
                 </div>
         

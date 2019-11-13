@@ -63,7 +63,7 @@
                     </a>
                     <div id="alert-<?php print $count; ?>-settings" class="collapse">
                         <!-- Display On -->
-                        <div class="form-group col-sm pl-0">
+                        <div class="form-group col-sm pl-0" role="radiogroup" aria-label="Alert Display On Options">
                             <label class="d-block"><strong>Display on</strong></label>
                             <div class="form-check form-check-inline">
                                 <input 
