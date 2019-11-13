@@ -6,20 +6,16 @@
 	used by the page template
  */
 function caweb_get_page_version($post_id = -1) {
+	$result = get_option('ca_site_version', 5);
+
 	switch (get_page_template_slug($post_id)) {
-	case "page-templates/page-template-v4.php":
-		$result = 4;
-
-		break;
-  case "page-templates/page-template-v5.php":
-		$result = 5;
-
-		break;
-	default:
-		$result = get_option('ca_site_version', 5);
-
-		break;
-
+		case "page-templates/page-template-v4.php":
+			$result = 4;
+			break;
+		case "page-templates/page-template-v5.php":
+		default:
+			$result = 5;
+			break;
 	}
 
 	return $result;
@@ -200,6 +196,7 @@ function caweb_tiny_mce_settings($settings = array()) {
 	$adminCSS = getMinFile( '/css/admin.css' );
 	
 	$version = caweb_get_page_version(get_the_ID());
+
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	$schemes = caweb_color_schemes($version, 'filename');
 	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
@@ -501,11 +498,6 @@ function caweb_get_icon_span($font, $attr = array()) {
 
 	if (empty($icon)) {
 		return;
-	}
-
-	$t = get_site_option('dev', array());
-	if (empty($t)) {
-		update_site_option('dev', array($font, $icon));
 	}
 
 	$icon = "ca-gov-icon-$icon";

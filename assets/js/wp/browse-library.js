@@ -69,9 +69,9 @@
         var attachmentFileName = attachment.attributes.filename;
         //var attachmentFileName = attachment.attributes.filename;
         
-        var input_box = $('input[type="text"][name="' + el_name + '"]');
+        var input_box = $('input[type="hidden"][name="' + el_name + '"]');
         var preview_field = $('#' + el_name + '_img');
-        var filename_box = $('input[type="hidden"][name="' + el_name + '_filename"]');
+        var filename_box = $('input[type="text"][id="' + el_name + '_filename"]');
 
 				if( /\d+_media_image/.test(el_name) ){
           var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
@@ -79,13 +79,14 @@
           nav_img_alt_box.value = attachmentAlt;
 
         }else if( "true" !== icon_check ){
-            input_box.val(attachmentFileName);
+            if( null !== input_box )
+              input_box.val(attachmentURL);
             
 						if( null !== preview_field )
               preview_field.attr('src', attachmentURL);
               
 						if( null !== filename_box )
-              filename_box.val(attachmentURL);
+              filename_box.val(attachmentFileName);
               
             if(  /header_ca_branding/.test(el_name)  )
               $('#header_ca_branding_alt_text').val(attachmentAlt);
@@ -99,9 +100,14 @@
 					jQuery.post(ajaxurl, data, function(response) {
 						if(1 == response){
 
-							preview_field.attr('src', attachmentURL);
-  						input_box.val(attachmentFileName);
-							filename_box.val(attachmentURL);
+              if( null !== input_box )
+                input_box.val(attachmentURL);
+              
+              if( null !== preview_field )
+                preview_field.attr('src', attachmentURL);
+                
+              if( null !== filename_box )
+                filename_box.val(attachmentFileName);
 
 						}else{
 							alert("Invalid Icon Mime Type: " + attachmentFileName);

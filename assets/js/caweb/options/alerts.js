@@ -1,7 +1,7 @@
 /* CAWeb Option Page */
 jQuery(document).ready(function() {
 	
-	$('.remove-alert').click(function(e){ removeAlert(this);});
+	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
 	$('.alert-status').click(function(e){ alertStatusFunc(this);});
 	$('#add-alert').click( function(e){ addAlert();});
 
@@ -205,8 +205,8 @@ jQuery(document).ready(function() {
 
 		$(readMoreInput).attr('type', 'checkbox');
 		$(readMoreInput).attr('checked', 'true');
-		$(readMoreInput).attr('name', '#alert-banner-read-more-' + alertCount);
-		$(readMoreInput).attr('id', '#alert-banner-read-more-' + alertCount);
+		$(readMoreInput).attr('name', 'alert-banner-read-more-' + alertCount);
+		$(readMoreInput).attr('id', 'alert-banner-read-more-' + alertCount);
 		$(readMoreInput).addClass('form-control');
 		
 		$(readMoreSettings).attr('id', 'alert-banner-read-more-' + alertCount )
@@ -218,8 +218,8 @@ jQuery(document).ready(function() {
 		$(readMoreURLLabel).html('<strong>Read More Button Url</strong>');
 
 		$(readMoreURLInput).attr('type', 'text');
-		$(readMoreURLInput).attr('name', '#alert-read-more-url-' + alertCount);
-		$(readMoreURLInput).attr('id', '#alert-read-more-url-' + alertCount);
+		$(readMoreURLInput).attr('name', 'alert-read-more-url-' + alertCount);
+		$(readMoreURLInput).attr('id', 'alert-read-more-url-' + alertCount);
 		$(readMoreURLInput).addClass('form-control');
 		
 		$(readMoreTargetGroup).addClass('form-group col-sm-4 pl-0 d-inline-block align-top');
@@ -230,8 +230,8 @@ jQuery(document).ready(function() {
 		$(readMoreTargetInput).attr('type', 'checkbox');
 		$(readMoreTargetInput).attr('checked', 'true');
 		$(readMoreTargetInput).attr('data-toggle', 'toggle');
-		$(readMoreTargetInput).attr('name', '#alert-read-more-target-' + alertCount);
-		$(readMoreTargetInput).attr('id', '#alert-read-more-target-' + alertCount);
+		$(readMoreTargetInput).attr('name', 'alert-read-more-target-' + alertCount);
+		$(readMoreTargetInput).attr('id', 'alert-read-more-target-' + alertCount);
 		$(readMoreTargetInput).addClass('form-control');
 
 		$(alertIconGroup).addClass('form-group col-sm-12 d-inline-block pl-0');
@@ -318,6 +318,7 @@ jQuery(document).ready(function() {
 
 		// Initialize 3rd Party Plugins after DOMs have been added
 		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
+		console.log(args.tinymce_settings)
 		$(readMoreInput).bootstrapToggle();
 		$(readMoreTargetInput).bootstrapToggle({
 			on: 'Yes',

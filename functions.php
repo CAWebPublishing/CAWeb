@@ -337,7 +337,15 @@ function caweb_admin_enqueue_scripts($hook) {
 
 		wp_register_script('caweb-admin-scripts', $adminJS, array('jquery', 'thickbox'), CAWebVersion, true);
 
-		wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
+		$localizeArgs = array(
+			'defaultFavIcon' => caweb_default_favicon_url(), 
+			'changeCheck' => $hook, 
+			'caweb_icons' => caweb_get_icon_list(-1, '', true), 
+			'caweb_colors' => caweb_template_colors(), 
+			'tinymce_settings' => caweb_tiny_mce_settings() 
+		);
+		
+		wp_localize_script('caweb-admin-scripts', 'args', $localizeArgs);
 
 		// bootstrap 4
 		// https://getbootstrap.com/docs/4.3/getting-started/introduction/

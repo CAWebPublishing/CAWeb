@@ -9,8 +9,9 @@
         
     <ul id="alertBanners">
         <?php
-            foreach ($alerts as $a => $data) :
-                $header = $data['header'];
+            if (! empty($alerts)) {
+                foreach ($alerts as $a => $data) :
+                    $header = $data['header'];
                 $default_header = ! empty($header) ? $header : "Label";
                 $count = $a + 1;
                 $status = 'active' == $data['status'] ? ' checked' : '';
@@ -23,8 +24,7 @@
                 $readmore_url = $data['url'];
                 $readmore_target = "_blank" == $data['target'] ? ' checked' : '';
 
-                $alert_icon = $data['icon'];
-        ?>
+                $alert_icon = $data['icon']; ?>
         <li>
             <!-- Alert Banner Row -->
             <div class="form-row">
@@ -101,7 +101,7 @@
                             </a>
                         </div>
                         
-                        <div id="alert-banner-read-more-<?php print $count ?>" class="collapse">
+                        <div id="alert-banner-read-more-<?php print $count ?>" class="collapse<?php print ! empty($readmore) ? ' show' : ''; ?>">
                             <!-- Read More Button URL -->
                             <div class="form-group col-sm-6 pl-0 d-inline-block">
                                 <label class="d-block"><strong>Read More Button URL</strong></label>
@@ -117,14 +117,17 @@
 
                         <!-- Banner Icon -->
                         <div class="form-group col-sm-12 d-inline-block pl-0">
-                            <?php print caweb_icon_menu($alert_icon, "alert-icon-$count"); ?>
+                            <?php print caweb_icon_menu(array('select' => $alert_icon, 'name' => "alert-icon-$count")); ?>
                         </div>
                     </div>
                 </div>
             </div>
             
         </li>
-        <?php endforeach; ?>
-        <input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?php print count($alerts) ?>">
+        <?php 
+                endforeach;
+            }
+        ?>
+        <input id="caweb_alert_count" type="hidden" name="caweb_alert_count" value="<?php print ! empty($alerts) ? count($alerts) : 0; ?>">
     </ul>
 </div>
