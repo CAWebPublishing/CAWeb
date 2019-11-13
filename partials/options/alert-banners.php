@@ -67,6 +67,7 @@
                             <label class="d-block"><strong>Display on</strong></label>
                             <div class="form-check form-check-inline">
                                 <input 
+                                    id="alert-display-<?php print $count; ?>" 
                                     name="alert-display-<?php print $count; ?>" 
                                     class="form-check-input" 
                                     type="radio" 
@@ -76,6 +77,7 @@
                             </div>
                             <div class="form-check form-check-inline">
                                 <input 
+                                    id="alert-display-<?php print $count; ?>" 
                                     name="alert-display-<?php print $count; ?>" 
                                     class="form-check-input" 
                                     type="radio" 
