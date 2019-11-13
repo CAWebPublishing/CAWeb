@@ -469,8 +469,8 @@ jQuery(document).ready(function() {
 
 /* CAWeb Option Page */
 jQuery(document).ready(function() {
-	$(document).on('click', '#caweb-icon-menu li', function(e){cawebIconSelected(this);});
-	$(document).on('click', '#caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
+	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
+	$(document).on('click', '.caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
 
 	function cawebIconSelected(iconLi){
 		resetIconSelect($(iconLi).parent());

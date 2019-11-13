@@ -23,7 +23,7 @@ function caweb_icon_menu($atts){
     $input = isset($atts['name']) ? $atts['name'] : '';
     $_header = isset($atts['header']) ? (bool)$atts['header'] : true;
 
-    $header = $_header ? '<div id="caweb-icon-menu-header" class="mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span> <strong>Icon</strong></div>' : '';
+    $header = $_header ? '<div class="caweb-icon-menu-header mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span> <strong>Icon</strong></div>' : '';
     $input = ! empty($input) ? sprintf('<input type="hidden" name="%1$s" value="%2$s" >', $input, $selected) : '';
 
     $icons = caweb_get_icon_list(-1, '', true);
@@ -33,7 +33,7 @@ function caweb_icon_menu($atts){
         $i, $selected == $i ? ' active' : '');
     }   
 
-    return sprintf('%1$s<ul id="caweb-icon-menu">%2$s%3$s</ul>', $header, $iconList, $input);
+    return sprintf('%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul>', $header, $iconList, $input);
     
 }
 add_shortcode('caweb_icon_menu', 'caweb_icon_menu');
