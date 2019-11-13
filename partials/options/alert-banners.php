@@ -67,23 +67,23 @@
                             <label class="d-block"><strong>Display on</strong></label>
                             <div class="form-check form-check-inline">
                                 <input 
-                                    id="alert-display-<?php print $count; ?>" 
+                                    id="alert-display-home-<?php print $count; ?>" 
                                     name="alert-display-<?php print $count; ?>" 
                                     class="form-check-input" 
                                     type="radio" 
                                     value="home"
                                     <?php print $alert_home ?>>
-                                <label class="form-check-label" for="alert-display-<?php print $count; ?>">Home Page Only</label>
+                                <label class="form-check-label" for="alert-display-home-<?php print $count; ?>">Home Page Only</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input 
-                                    id="alert-display-<?php print $count; ?>" 
+                                    id="alert-display-all-<?php print $count; ?>" 
                                     name="alert-display-<?php print $count; ?>" 
                                     class="form-check-input" 
                                     type="radio" 
                                     value="all"
                                     <?php print $alert_all ?>>
-                                <label class="form-check-label" for="alert-display-<?php print $count; ?>">All Pages</label>
+                                <label class="form-check-label" for="alert-display-all-<?php print $count; ?>">All Pages</label>
                             </div>
                         </div>
 
