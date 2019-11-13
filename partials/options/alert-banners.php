@@ -43,7 +43,7 @@
                 <!-- Alert Banner Header -->
                 <div class="form-group col-sm-7">
                     <label for="alert-header-<?php print $count ?>">Header</label>
-                    <input placeholder="Label" class="form-control" name="alert-header-<?php print $count ?>" type="text" value="<?php print $header ?>">
+                    <input placeholder="Label" class="form-control" id="alert-header-<?php print $count ?>" name="alert-header-<?php print $count ?>" type="text" value="<?php print $header ?>">
                 </div>
 
                 <!-- Alert Banner Message -->
@@ -90,28 +90,28 @@
                         <!-- Banner Color -->
                         <div class="form-group col-sm pl-0">
                             <label for="alert-banner-color-<?php print $count; ?>"><strong>Banner Color</strong></label>
-                            <input type="color" name="alert-banner-color-<?php print $count; ?>" value="<?php print $banner_color ?>" class="form-control-sm">
+                            <input type="color" id="alert-banner-color-<?php print $count; ?>" name="alert-banner-color-<?php print $count; ?>" value="<?php print $banner_color ?>" class="form-control-sm">
                         </div>
 
                         <!-- Read More Button -->
                         <div class="form-group pl-0">
-                            <label class="d-block"><strong>Read More Button</strong></label>
+                            <label for="alert-read-more-<?php print $count; ?>" class="d-block"><strong>Read More Button</strong></label>
                             <a data-toggle="collapse" href="#alert-banner-read-more-<?php print $count ?>" class="shadow-none"> 
-                                <input type="checkbox" name="alert-read-more-<?php print $count; ?>" <?php print $readmore ?> data-toggle="toggle" class="form-control">
+                                <input type="checkbox" id="alert-read-more-<?php print $count; ?>" name="alert-read-more-<?php print $count; ?>" <?php print $readmore ?> data-toggle="toggle" class="form-control">
                             </a>
                         </div>
                         
                         <div id="alert-banner-read-more-<?php print $count ?>" class="collapse<?php print ! empty($readmore) ? ' show' : ''; ?>">
                             <!-- Read More Button URL -->
                             <div class="form-group col-sm-6 pl-0 d-inline-block">
-                                <label class="d-block"><strong>Read More Button URL</strong></label>
-                                <input type="text" name="alert-read-more-url-<?php print $count; ?>" class="form-control" value="<?php print $readmore_url ?>">
+                                <label for="alert-read-more-url-<?php print $count; ?>" class="d-block"><strong>Read More Button URL</strong></label>
+                                <input type="text" id="alert-read-more-url-<?php print $count; ?>" name="alert-read-more-url-<?php print $count; ?>" class="form-control" value="<?php print $readmore_url ?>">
                             </div>
 
                             <!-- Read More Button Target -->
                             <div class="form-group col-sm-4 pl-0 d-inline-block align-top">
-                                <label class="d-block"><strong>Open link in New Tab</strong></label>
-                                <input type="checkbox" name="alert-read-more-target-<?php print $count; ?>" <?php print $readmore_target ?> data-on="Yes" data-off="No" data-toggle="toggle" class="form-control">
+                                <label for="alert-read-more-target-<?php print $count; ?>"class="d-block"><strong>Open link in New Tab</strong></label>
+                                <input type="checkbox" id="alert-read-more-target-<?php print $count; ?>" name="alert-read-more-target-<?php print $count; ?>" <?php print $readmore_target ?> data-on="Yes" data-off="No" data-toggle="toggle" class="form-control">
                             </div>
                         </div>
 

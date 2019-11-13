@@ -8,7 +8,7 @@
     <!-- Organization Logo-Brand Row -->
     <div class="form-row">
         <div class="form-group col-sm-5">
-            <label for="header_ca_branding" class="d-block" data-toggle="tooltip" data-placement="top" title="Select an image to use as the agency logo. Recommended size is 300pixels wide by 80pixels tall."><strong>Organization Logo-Brand</strong></label>
+            <label for="header_ca_branding_filename" class="d-block" data-toggle="tooltip" data-placement="top" title="Select an image to use as the agency logo. Recommended size is 300pixels wide by 80pixels tall."><strong>Organization Logo-Brand</strong></label>
             <div class="input-group">
                 <!-- Organization Logo-Brand Field -->
                 <input 

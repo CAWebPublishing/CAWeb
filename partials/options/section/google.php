@@ -73,7 +73,7 @@
             <div class="form-group col-sm-2">
                 <!-- Open Translate in New Page -->
                 <label for="ca_google_trans_page_new_window" class="d-block"><strong>Open in New Tab</strong></label>
-                <input type="checkbox" name="ca_google_trans_page_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $google_translate_new_window ?> />
+                <input type="checkbox" id="ca_google_trans_page_new_window" name="ca_google_trans_page_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $google_translate_new_window ?> />
             </div>
 
             <!-- Google Translate Icon -->
@@ -82,6 +82,7 @@
             </div>
 
             <div class="form-group col-sm-6">
+                <label for="caweb-google-trans-shorcode" class="d-block"><strong>Google Translate Shortcode</strong></label>
                 <input id="caweb-google-trans-shorcode" type="text" class="form-control" readonly value="[caweb_google_translate /]">
             </div>
         </div>

@@ -47,7 +47,7 @@
             <div class="form-group col">
                 <label for="<?php print $p ?>_enable" class="d-block" data-toggle="tooltip" data-placement="top" title="Enable a custom link for the header."><strong>Custom Link <?php print $i ?>?</strong></label>
                 <a data-toggle="collapse" href="#custom_link_<?php print $i ?>" aria-expanded="<?php print ! empty($enable) ? 'true' : 'false'  ?>" aria-controls="custom_link_<?php print $i ?>" class="shadow-none">
-                    <input type="checkbox" name="<?php print $p ?>_enable" data-toggle="toggle"<?php print $enable ?>>
+                    <input type="checkbox" id="<?php print $p ?>_enable" name="<?php print $p ?>_enable" data-toggle="toggle"<?php print $enable ?>>
                 </a> 
                 <div id="custom_link_<?php print $i ?>" class="collapse<?php print ! empty($enable) ? ' show' : ''  ?>">
                     <!-- Link Label -->

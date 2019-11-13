@@ -21,7 +21,7 @@
         <!-- Fav Icon Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">
-                <label for="ca_fav_ico" class="d-block" data-toggle="tooltip" data-placement="top" title="Select an icon to display as the page icon."><strong>Fav Icon</strong></label>
+                <label for="ca_fav_ico_filename" class="d-block" data-toggle="tooltip" data-placement="top" title="Select an icon to display as the page icon."><strong>Fav Icon</strong></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">

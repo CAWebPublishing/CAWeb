@@ -24,24 +24,24 @@
         <?php if( ! $share_email ): ?>
         <!-- Option URL -->
         <div class="form-group col-md-12">
-            <input type="text" class="form-control w-50" name="<?php print $option; ?>" id="<?php print $option; ?>"value="<?php print get_option($option) ?>" />
+            <input type="text" class="form-control w-50" name="<?php print $option; ?>" aria-label="<?php print $social?>" value="<?php print get_option($option) ?>" />
         </div>
         <?php endif; ?>
         <!-- Show in header -->
         <div class="form-group col-sm-2">
             <label for="<?php print $option; ?>_header" class="mb-2 d-block">Show in header:</label>
-            <input type="checkbox" name="<?php print $option; ?>_header" data-toggle="toggle"<?php print $header_checked ?>>
+            <input type="checkbox" id="<?php print $option; ?>_header" name="<?php print $option; ?>_header" data-toggle="toggle"<?php print $header_checked ?>>
         </div>
         <!-- Show in footer -->
         <div class="form-group col-sm-2">
             <label for="<?php print $option; ?>_footer" class="mb-2 d-block">Show in footer:</label>
-            <input type="checkbox" name="<?php print $option; ?>_footer" data-toggle="toggle"<?php print $footer_checked ?>>
+            <input type="checkbox" id="<?php print $option; ?>_footer" name="<?php print $option; ?>_footer" data-toggle="toggle"<?php print $footer_checked ?>>
         </div>
         <?php if( ! $share_email ): ?>
         <!-- Open in New Tab -->
         <div class="form-group col-sm-2">
             <label for="<?php print $option; ?>_new_window" class="mb-2 d-block">Open in New Tab:</label>
-            <input type="checkbox" name="<?php print $option; ?>_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $new_window_checked?>>
+            <input type="checkbox" id="<?php print $option; ?>_new_window" name="<?php print $option; ?>_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $new_window_checked?>>
         </div>
         <?php endif; ?>
     </div>
