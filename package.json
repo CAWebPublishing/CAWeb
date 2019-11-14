@@ -48,6 +48,7 @@
     "translate": "gulp translate"
   },
   "dependencies": {
+    "gulp-cli": "^2.2.0",
     "gulp-csso": "^3.0.1",
     "gulp-header": "^2.0.9",
     "gulp-parameterized": "^0.1.1"

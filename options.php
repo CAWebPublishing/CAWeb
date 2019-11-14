@@ -135,6 +135,7 @@ function caweb_save_options($values = array(), $files = array()) {
 		$data['page_display'] = isset($values['alert-display-' . $count]) ? $values['alert-display-' . $count] : 'home';
 		$data['color'] = isset($values['alert-banner-color-' . $count]) ? $values['alert-banner-color-' . $count] : '#FDB81E';
 		$data['button'] = isset($values['alert-read-more-' . $count]) ? $values['alert-read-more-' . $count] : '';
+		$data['text'] = isset($values['alert-read-more-text-' . $count]) ? substr($values['alert-read-more-text-' . $count], 0, 16) : 'More Information';
 		$data['url'] = isset($values['alert-read-more-url-' . $count]) ? $values['alert-read-more-url-' . $count] : '';
 		$data['target'] = isset($values['alert-read-more-target-' . $count]) ? $values['alert-read-more-target-' . $count] : '';
 		$data['icon'] = isset($values['alert-icon-' . $count]) ? $values['alert-icon-' . $count] : '';
