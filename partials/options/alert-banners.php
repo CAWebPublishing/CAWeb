@@ -22,6 +22,7 @@
                 $banner_color = $data['color'];
 
                 $readmore =  "on" == $data['button'] ? ' checked' : '';
+                $readmore_text = isset($data['text']) && ! empty($data['text']) ? substr($data['text'], 0, 16) : 'More Information';
                 $readmore_url = $data['url'];
                 $readmore_target = "_blank" == $data['target'] ? ' checked' : '';
 
@@ -52,8 +53,8 @@
                 <div class="form-group col-sm-12">
                     <a class="collapsed text-decoration-none text-reset" data-toggle="collapse" href="#alert-message-<?php print $count; ?>_iframe" aria-expanded="false" aria-controls="alert-message-<?php print $count; ?>_iframe">
                         <label class="border-bottom" for="alert-message-<?php print $count ?>">Message <span class="text-secondary ca-gov-icon-"></span></label>
-                        <small class="text-muted d-block mb-2">Enter message for the alert</small>
                     </a>
+                    <small class="text-muted d-block mb-2">Enter message for the alert</small>
                     <div id="alert-message-<?php print $count; ?>_iframe" class="collapse">
                         <?php print wp_editor(stripslashes($data['message']), "alert-message-$count", caweb_tiny_mce_settings()); ?>
                     </div>
@@ -64,6 +65,7 @@
                     <a class="collapsed text-decoration-none text-reset" aria-label="CAWeb Alert Banner Settings" data-toggle="collapse" href="#alert-<?php print $count; ?>-settings" aria-expanded="false" aria-controls="alert-<?php print $count; ?>-settings">
                         <label class="border-bottom">Settings <span class="text-secondary ca-gov-icon-"></span></label>
                     </a>
+                    <small class="text-muted d-block mb-2">Additional options for this alert.</small>
                     <div id="alert-<?php print $count; ?>-settings" class="collapse">
                         <!-- Display On -->
                         <div class="form-group col-sm pl-0" role="radiogroup" aria-label="Alert Display On Options">
@@ -107,6 +109,12 @@
                         </div>
                         
                         <div id="alert-banner-read-more-<?php print $count ?>" class="collapse<?php print ! empty($readmore) ? ' show' : ''; ?>">
+                            <!-- Read More Button Text -->
+                            <div class="form-group col-sm-6 pl-0 d-inline-block">
+                                <label for="alert-read-more-text-<?php print $count; ?>" class="d-block"><strong>Read More Button Text</strong></label>
+                                <input type="text" id="alert-read-more-text-<?php print $count; ?>" name="alert-read-more-text-<?php print $count; ?>" class="form-control" value="<?php print $readmore_text ?>">
+                            </div>
+
                             <!-- Read More Button URL -->
                             <div class="form-group col-sm-6 pl-0 d-inline-block">
                                 <label for="alert-read-more-url-<?php print $count; ?>" class="d-block"><strong>Read More Button URL</strong></label>
