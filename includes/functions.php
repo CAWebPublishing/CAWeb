@@ -218,7 +218,7 @@ function caweb_tiny_mce_settings($settings = array()) {
 
 	$defaults_settings = array(
 		'media_buttons' => false,
-		'quicktags' => false,
+		'quicktags' => true,
 		'tinymce' => array(
 			'content_css' => implode(',', $css),
 			'skin' => 'lightgray',
