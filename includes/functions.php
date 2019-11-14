@@ -702,4 +702,13 @@ function caweb_get_attachment_post_meta($image_url, $meta_key = '') {
 
 	return 0;
 }
+
+function getMinFile( $f , $ext = 'css'){
+	// if a minified version exists
+	if( file_exists(CAWebAbsPath .  str_replace( ".$ext", ".min.$ext", $f) ) ){
+		return CAWebUri . str_replace( ".$ext", ".min.$ext", $f);
+	}else{
+		return CAWebUri . $f;
+	}
+}
 ?>
