@@ -17,9 +17,7 @@
 define('CAWebAbsPath', get_stylesheet_directory());
 define('CAWebUri', get_stylesheet_directory_uri());
 define('CAWebVersion', wp_get_theme('CAWeb')->get('Version'));
-
 define('CAWebDiviVersion', wp_get_theme('Divi')->get('Version'));
-define('CAWebModuleExtension', 'caweb-module-extension');
 
 // Actions Ran During any Request
 // CAWeb Admin Init
@@ -414,13 +412,42 @@ function caweb_admin_bar_menu($wp_admin_bar) {
 	}
 }
 
-/*
-	If CAWeb is a child theme of Divi autoload caweb-module-extension plugin
- */
-if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template') && file_exists(sprintf('divi/%1$s/%1%s.php', CAWebModuleExtension)) ) {
-	require_once(sprintf('divi/%1$s/%1%s.php', CAWebModuleExtension));
+// If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
+if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
+	// CAWeb Custom Modules
+	//add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
+	function caweb_et_pagebuilder_module_init() {
+		$divi_builder = CAWebAbsPath . "/divi/builder";
+		include("$divi_builder/functions.php");
+		include("$divi_builder/layouts.php");
+
+		if (class_exists('ET_Builder_Module')) {
+			include("$divi_builder/class-caweb-builder-element.php");
+
+			$modules = glob("$divi_builder/modules/*.php");
+			foreach ($modules as $module_file) {
+				require_once($module_file);
+			}
+		}
+	}
+
+	add_action('admin_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
+	add_action('wp_enqueue_scripts', 'caweb_builder_enqueue_scripts', 16);
+	function caweb_builder_enqueue_scripts(){
+		$divi_builder = CAWebUri . "/divi";
+
+		//wp_register_script('caweb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
+		//wp_register_script('caweb-fb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
+
+
+		//wp_enqueue_script('caweb-builder-scripts');
+		//wp_enqueue_script('caweb-fb-builder-scripts');
+
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
+
+	}
 	
-	// otherwise load missing functions
 } else {
 	include(CAWebAbsPath . "/divi/functions.php");
 }
