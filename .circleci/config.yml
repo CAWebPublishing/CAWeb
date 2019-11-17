@@ -17,4 +17,4 @@ jobs:
     
     steps:
       - checkout
-      - run: npm install gulp-cli -g
+      - run: npm install 
