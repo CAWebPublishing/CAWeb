@@ -17,5 +17,5 @@ jobs:
     
     steps:
       - checkout
-      - run: npm install
+      - run: sudo npm install -g
       - run: gulp build 
