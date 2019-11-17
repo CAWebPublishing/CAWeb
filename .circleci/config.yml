@@ -8,15 +8,21 @@ workflows:
     jobs:
       - gulp
 
+working_directory: ~/repo
+
 jobs:
   gulp:
     docker:
-      - image: circleci/node
-    
-    working_directory: ~/repo
-    
+      - image: circleci/node    
     steps:
       - checkout
       - run: sudo npm install gulp-cli -g
       - run: npm install 
       - run: gulp build 
+  standard:
+    docker:
+      - image: circleci/php:7.1
+    steps:
+      - checkout
+      - run: composer i
+
