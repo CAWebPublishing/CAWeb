@@ -1,0 +1,14 @@
+{
+    "name": "CAWeb Publishing Composer",
+    "description": "PHP_CodeSniffer rules to enforce WordPress coding conventions",
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.2.0",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility "
+        ]
+        
+    }
+}
