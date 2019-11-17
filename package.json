@@ -45,7 +45,8 @@
     "customJS": "gulp customJS",
     "images": "gulp images",
     "clearCache": "gulp clearCache",
-    "translate": "gulp translate"
+    "translate": "gulp translate",
+    "postinstall": "npm config set gulp-cli --global"
   },
   "dependencies": {
     "gulp-cli": "^2.2.0",
