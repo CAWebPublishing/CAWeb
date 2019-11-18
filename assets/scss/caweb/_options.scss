@@ -1,0 +1,11 @@
+/* Toggle Arrows when collapsed */
+a.caweb-option span:after{
+	font-family: $font-family;
+	content: '\43'
+}
+a.caweb-option.collapsed span:after{
+	font-family: $font-family;
+	content: '\45'
+}
+
+

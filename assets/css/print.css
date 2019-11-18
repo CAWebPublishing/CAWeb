@@ -1,0 +1,26 @@
+@media print{
+	body {
+    background: white !important;
+	}
+  header{
+		position: relative !important;
+	}
+	#main-content.main-content{
+			padding-top: 0px !important;
+	}
+  .utility-header{
+    height: 45px;
+  }
+  .mobile-control.cagov-logo{
+    padding-left: 0px;
+  }
+	.header-organization-banner{
+		margin-left: -59px;
+	}
+  .navigation-search{
+    border: none;
+  }
+  .main-content{
+			background: transparent !important;
+	}
+}

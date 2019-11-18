@@ -1,0 +1,997 @@
+.sub-nav.open{
+	display: block;
+	max-height: 700px;
+	left: 0;
+}
+/* Search Styles 
+ Search using Google API 2.0 */
+input.gsc-input:hover, input.gsc-input:focus {
+    border-color: #fbad23;
+}
+table.gsc-search-box td.gsc-input {
+     padding-right: 0px !important;
+}
+input.gsc-input {
+	border-radius: 4px;
+    border: 2px solid transparent;
+}
+td.gsc-clear-button {
+    display: none !important;
+}
+#head-search {
+    padding-bottom: 2px;
+	min-width: 185px;
+	max-width: 375px;
+}
+#head-search.search-container.search-freeze-width{
+	width: 100%;
+}
+/* Media Query Styles */
+@media (max-width: 768px){
+ /* Search Styles */
+  .search-container {
+    		width: 175px;
+	}
+  /* End of Search Styles */
+}
+/* End of Media Query Styles */
+
+/* Hide the 'X' button that appears in Version 4 search box */
+form#local_form > button.close.close-search {
+    display: none;
+}
+
+/* Google Translate Style,
+Search box increased by 18px to match the width of Google Translate */
+div#google_translate_element.standard-translate {
+    right: 13px;
+    position: absolute;
+    top: 55px;
+  	z-index: 10;
+}
+.caweb-custom-translate{
+		color: white;
+}
+td.gsc-search-button span{
+	display : none;
+}
+.goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited,
+.goog-logo-link:hover, .goog-logo-link:active {
+    color: #fff;
+  }
+  .goog-te-combo{
+    color:#666
+  }
+
+  .goog-te-gadget{
+      color: #fff;
+  }
+/* End of Search */
+
+ul{
+  line-height: 1.42857143 !important;
+}
+
+[class^="list-"]{
+  padding: 0;
+}
+
+/* Post Page Styles */
+.et_pb_pagebuilder_layout.single.et_full_width_page #page-container .et_pb_row{
+  width: 100%;
+}
+.et_pb_pagebuilder_layout.single-post #page-container .et_pb_row{
+	width: 90%;
+}
+/* Monarch Plugin Styles */
+.et_monarch .et_social_inline_top{
+  margin: -27px 0 !important;
+}
+
+
+
+/* Module Styles */
+/* Panels */
+.panel, .panel-heading{
+  border-radius: 0;
+}
+/* Section - Carousel */
+.et_pb_ca_section_carousel .carousel-content .item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.carousel-content .content-container{
+  pointer-events: none;
+  color: white;
+  text-align: center;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.carousel-content .item.backdrop .content-container:first-child .content{
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.et_pb_ca_section_carousel .content-container .content{
+		padding: 20px 20px 50px 20px;
+}
+.et_pb_ca_section_carousel .content-container .content h2{
+		color: white;
+}
+
+/* Content Fit Carousel */
+.et_pb_ca_section_carousel.content_fit .et_pb_ca_panel .content-container {
+    margin: 0;
+}
+
+/* Organizational Banner */
+/* Left */
+.header-organization-banner.pull-left {
+    left: 128px;
+}
+/* Right */
+.header-organization-banner.pull-right {
+    padding-right: 200px;
+}
+
+/* Header Slideshow Banner*/
+/* Makes the SlideShow Banner stay in the div */
+	.header-slideshow-banner{
+		height: 100% !important;
+	}
+
+	/* Navigation */
+.second-level-nav{
+	-moz-column-count: 1 !important;
+	column-count: 1 !important;
+}
+
+nav.megadropdown .second-level-nav li{
+    float: left;
+		width: 33%;
+		min-height: 20px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+@media (max-width: 768px){
+  nav.megadropdown .second-level-nav li {
+    width: 100%;
+  }
+}
+li.unit1{
+  min-height: 50px;
+}
+
+li.unit2{
+  min-height: 100px;
+}
+
+/* Remove underline from top level nav links */
+.top-level-nav>li .first-level-link {
+    text-decoration: none;
+}
+.main-navigation.dropdown .sub-nav{
+  	width: 100%;
+}
+
+/* Remove arrow down from page titles */
+div.entry-content > h1.container > span.ca-gov-icon-arrow-down{
+	display:none;
+}
+
+/* Remove the padding from 80px to 0px to make
+  main page-container begin below the header */
+#page-container {
+    padding-top: 0px !important;
+}
+
+
+/* Footer Styles */
+.global-footer ul>li{
+  display: inline-flex ;
+	margin-bottom: 5px;
+}
+/* Mobile Control */
+@media (max-width: 767px) {
+  /* Header Styles */
+  .mobile-controls{
+		padding-top: 25px;
+
+	}
+  .mobile-controls .toggle-search{
+    position: relative;
+    top: 6px;
+  }
+  .mobile-controls .toggle-menu{
+    z-index:2;
+  }
+
+.branding {
+    margin: 0 59px;
+    display: inline-block;
+}
+
+  .header-cagov-logo{
+    position: relative;
+    display: block;
+    margin-left: -51px;
+    top: 5px;
+  }
+
+  .header-cagov-logo img{
+    max-height: 32px !important;
+  }
+  .header-organization-banner{
+    height: auto;
+    padding: 0 !important;
+		float: none !important;
+    z-index: 1 ;
+    	left: 0 !important;
+  }
+    .header-organization-banner img{
+   		width: auto;
+  }
+
+ 
+  div#google_translate_element {
+    top: 6px;
+}
+/* End of Header Styles */
+
+/* Footer Styles */
+.global-footer ul>li{
+  display: inline-block ;
+}
+}
+/* End of Mobile Control Styles */
+
+@media (min-width: 768px){
+  .carousel-content .item.backdrop .content-container:first-child{
+    padding: 10%;
+  }
+}
+
+
+/* Section Carousel Version 4 */
+
+.et_pb_ca_section_carousel .image-fit .content-container{
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.et_pb_ca_section_carousel .image-fit .content{
+  padding: 20px;
+}
+
+/* This make the agency logo responsive - this is commented out in cagov.v4core.css at line 3993 */
+@media (max-width: 480px){
+  .header-organization-banner img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+@media (min-width: 481px){
+  .header-organization-banner img {
+    max-width: 475px;
+    max-width: 100%;
+    max-height: 90px;
+  }
+}
+
+@media (min-width: 768px){
+  .header-organization-banner img {
+      height: auto;
+      vertical-align: middle;
+  }
+}
+
+
+/* Carousel Styling */
+.carousel .owl-nav {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.carousel .owl-nav [class*='owl-'] {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 20px;
+  height: 35px;
+  width: 35px;
+  border-radius: 35px;
+  display: inline-block;
+  cursor: pointer;
+}
+/*.carousel .owl-nav [class*='owl-'] > span {
+  line-height: 35px;
+}*/
+.carousel .owl-nav [class*='owl-']:hover {
+  text-decoration: none;
+}
+.carousel .owl-nav .disabled {
+  opacity: .5;
+  cursor: default;
+}
+.carousel .owl-nav.disabled + .owl-dots {
+  margin-top: 10px;
+}
+.carousel .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.carousel .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.carousel .owl-dots .owl-dot span {
+  width: 10px;
+  height: 10px;
+  margin: 5px 7px;
+  background: #d6d6d6;
+  display: block;
+  -webkit-backface-visibility: visible;
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+  border-radius: 30px;
+}
+.carousel .owl-dots .owl-dot.active span,
+.carousel .owl-dots .owl-dot:hover span {
+  background: #869791;
+}
+/* end theme */
+/* owl-inline-nav class positions previous and next buttons inline with the carousel */
+.carousel-media,
+.carousel-link,
+.carousel-slider,
+.carousel-gallery {
+  padding: 0 3em;
+  position: relative;
+}
+.carousel-media .owl-nav,
+.carousel-link .owl-nav,
+.carousel-slider .owl-nav,
+.carousel-gallery .owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+}
+.carousel-media .owl-prev,
+.carousel-link .owl-prev,
+.carousel-slider .owl-prev,
+.carousel-gallery .owl-prev {
+  position: absolute;
+  left: 0;
+}
+.carousel-media .owl-next,
+.carousel-link .owl-next,
+.carousel-slider .owl-next,
+.carousel-gallery .owl-next {
+  position: absolute;
+  right: 0;
+}
+.carousel-media .owl-nav .owl-prev,
+.carousel-link .owl-nav .owl-prev,
+.carousel-slider .owl-nav .owl-prev,
+.carousel-gallery .owl-nav .owl-prev,
+.carousel-media .owl-nav .owl-next,
+.carousel-link .owl-nav .owl-next,
+.carousel-slider .owl-nav .owl-next,
+.carousel-gallery .owl-nav .owl-next {
+  margin: -1em 0 0;
+}
+.carousel-video,
+.carousel-video-submenu,
+.carousel-content {
+  overflow: hidden;
+}
+.carousel-video:hover .owl-prev,
+.carousel-video-submenu:hover .owl-prev,
+.carousel-content:hover .owl-prev {
+  color: white;
+  position: absolute;
+  left: 15px;
+}
+@media (max-width: 767px) {
+  .carousel-video:hover .owl-prev,
+  .carousel-video-submenu:hover .owl-prev,
+  .carousel-content:hover .owl-prev {
+    left: 0.1em;
+  }
+}
+.carousel-video:hover .owl-next,
+.carousel-video-submenu:hover .owl-next,
+.carousel-content:hover .owl-next {
+  color: white;
+  position: absolute;
+  right: 15px;
+}
+@media (max-width: 767px) {
+  .carousel-video:hover .owl-next,
+  .carousel-video-submenu:hover .owl-next,
+  .carousel-content:hover .owl-next {
+    right: 0.1em;
+  }
+}
+.carousel-video .owl-nav,
+.carousel-video-submenu .owl-nav,
+.carousel-content .owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+}
+.carousel-video .owl-prev,
+.carousel-video-submenu .owl-prev,
+.carousel-content .owl-prev {
+  position: absolute;
+  left: -2em;
+}
+.carousel-video .owl-next,
+.carousel-video-submenu .owl-next,
+.carousel-content .owl-next {
+  position: absolute;
+  right: -2em;
+}
+.carousel-video .owl-nav .owl-prev,
+.carousel-video-submenu .owl-nav .owl-prev,
+.carousel-content .owl-nav .owl-prev,
+.carousel-video .owl-nav .owl-next,
+.carousel-video-submenu .owl-nav .owl-next,
+.carousel-content .owl-nav .owl-next {
+  -webkit-transition: left 400ms ease, right 400ms ease;
+          transition: left 400ms ease, right 400ms ease;
+  margin: -1em 0 0;
+}
+.carousel-video .owl-nav .owl-prev:hover,
+.carousel-video-submenu .owl-nav .owl-prev:hover,
+.carousel-content .owl-nav .owl-prev:hover,
+.carousel-video .owl-nav .owl-next:hover,
+.carousel-video-submenu .owl-nav .owl-next:hover,
+.carousel-content .owl-nav .owl-next:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+@media (max-width: 767px) {
+  .carousel-content .owl-nav .owl-prev {
+    color: white;
+    position: absolute;
+    left: 0.1em;
+  }
+  .carousel-content .owl-nav .owl-next {
+    color: white;
+    position: absolute;
+    right: 0.1em;
+  }
+}
+.carousel-content .owl-dots {
+  z-index: 10;
+  position: relative;
+  height: 15px;
+  top: -40px;
+}
+.carousel-content .item {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.carousel-content .content-container {
+  pointer-events: none;
+  color: white;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.carousel-content .content-container .content {
+  pointer-events: all;
+  padding: 20px 20px 50px 20px;
+}
+.carousel-content img + .content-container,
+.carousel-content video + .content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 10%;
+  margin-bottom: 50px;
+  padding: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+.carousel-content img + .content-container .content,
+.carousel-content video + .content-container .content {
+  padding: 20px;
+}
+.carousel-content .item.backdrop img + .content-container,
+.carousel-content .item.backdrop video + .content-container {
+  background: rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 768px) {
+  .carousel-content .item.backdrop .content-container:first-child {
+    padding: 10%;
+  }
+}
+.carousel-content .item.backdrop .content-container:first-child .content {
+  background: rgba(0, 0, 0, 0.65);
+}
+.owl-item {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+}
+.carousel-video .owl-video-play-icon span {
+  font-size: 80px;
+  line-height: 80px;
+  color: white;
+  opacity: 0;
+}
+.carousel-video .item-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  -webkit-transition: opacity .25s ease;
+          transition: opacity .25s ease;
+  color: rgba(255, 255, 255, 0.8);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.carousel-video .item-overlay span {
+  opacity: 0;
+}
+.carousel-video .owl-item:not(.owl-video-playing):hover .item-overlay {
+  opacity: 1;
+}
+.carousel-video .owl-item:not(.owl-video-playing):hover .owl-video-play-icon span {
+  opacity: 1;
+}
+.carousel-video .item {
+  position: relative;
+  width: 100%;
+}
+.carousel-video .item .owl-video-wrapper,
+.carousel-video .item .owl-video-tn {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+.carousel-video .item .video {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+.carousel-video .item .video video {
+  width: 100%;
+}
+.carousel-video-submenu {
+  margin-top: 20px;
+}
+.carousel-video-submenu .owl-item.watching img {
+  border-width: 5px;
+  border-style: solid;
+}
+.carousel-video-submenu .item-thumbnail {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.carousel-video-submenu .item-thumbnail:hover .item-overlay {
+  opacity: 1;
+}
+.carousel-video-submenu .item-thumbnail .item-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  -webkit-transition: opacity .25s ease;
+          transition: opacity .25s ease;
+  color: rgba(255, 255, 255, 0.8);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.ie9 .carousel-video-submenu .item-thumbnail .item-overlay {
+  display: table;
+}
+.ie9 .carousel-video-submenu .item-thumbnail .item-overlay span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.carousel-video-submenu .item-thumbnail .item-overlay span {
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 50px;
+}
+@media (max-width: 992px) {
+  .carousel-video-submenu .item-thumbnail .item-overlay span {
+    font-size: 30px;
+  }
+}
+.owl-prev {
+  position: absolute;
+  left: 0;
+}
+.owl-next {
+  position: absolute;
+  right: 0;
+}
+.owl-nav .owl-prev,
+.owl-nav .owl-next {
+  margin: -1em 0 0;
+}
+.et_pb_ca_fullwidth_section_carousel .image-fit .content-container{
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.et_pb_ca_fullwidth_section_carousel .image-fit .content{
+  padding: 20px;
+}
+
+.et_pb_ca_fullwidth_section_carousel .container, .et_pb_ca_section_carousel .container{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.main-content{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.et_pb_row{
+  max-width: unset;
+  width: 100%;
+  margin: 0;
+  padding-bottom:0 !important;
+}
+
+/*  Services Tiles */
+.more-button {
+  position: relative;
+  overflow: hidden;
+}
+.more-button .more-content {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.more-button .btn-more {
+  position: relative;
+}
+.service-tile-panel {
+  /*Selectivly show when requested by user*/
+  visibility: collapse;
+  position: absolute;
+}
+.service-tile-panel .btn.close {
+  font-size: 56px;
+  font-size: 3.5rem;
+}
+
+.service-tile-full {
+  clear: both;
+  width: 100%;
+  background: #f5f5f5;
+  height: auto;
+}
+.service-tile-full.is-open .service-tile-panel {
+  visibility: visible;
+  position: relative;
+}
+
+.service-tile {
+  float: left;
+  width: 100%;
+  /* Need to keep the two column longer than bootstrap has .make-*-column for */
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  min-height: 240px;
+  color: #E1F2F7;
+  background: #046B99;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (min-width: 450px) {
+  .service-tile {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .service-tile {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 768px) {
+  .service-tile {
+    min-height: 280px;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile {
+    min-height: 240px;
+  }
+}
+@media (min-width: 1280px) {
+  .service-tile {
+    min-height: 320px;
+  }
+}
+.service-tile .icon-fallback {
+  min-width: 100%;
+  line-height: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  vertical-align: middle;
+  display: inline-block;
+  height: 100%;
+  -webkit-transition: opacity .3s;
+          transition: opacity .3s;
+}
+.service-tile .teaser {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000', endColorstr='#000000', GradientType=0);
+  color: #fff;
+  padding: 10px 0;
+}
+.service-tile .teaser .title {
+  margin: 5px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  -webkit-transition: all .3s;
+          transition: all .3s;
+	border-bottom: none;
+}
+.service-tile .teaser .title:hover {
+  color: #FDB81E;
+}
+.title:after {
+  margin-top: 8px !important;
+  font-family: 'CaGov';
+  display: block;
+  font-weight: normal;
+}
+[data-state="closed"].service-tile .title:after,
+[data-state="info"].service-tile .title:after {
+  content: "\50";
+}
+[data-state="open"].service-tile .title:after {
+  content: "\4f";
+}
+[data-state="open"].service-tile:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #000;
+  position: absolute;
+  left: 50%;
+  margin-left: -15px;
+  bottom: -15px;
+  z-index: 5;
+}
+.service-tile-empty {
+  background: #046B99;
+  color: #9FDBF1;
+  overflow: hidden;
+  width: 100%;
+}
+.service-tile-empty span {
+  font-size: 17em;
+  line-height: 1;
+}
+.service-tile-empty .title:after {
+  content: "\e65d" !important;
+}
+.service-tile-empty.half,
+.service-tile-empty.quarter,
+.service-tile-empty.third {
+  width: 100%;
+}
+@media (min-width: 450px) {
+  .service-tile-empty.full {
+    width: 100%;
+  }
+  .service-tile-empty.third {
+    width: 50%;
+  }
+  .service-tile-empty.half {
+    width: 100%;
+  }
+  .service-tile-empty.quarter {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .service-tile-empty.full {
+    width: 100%;
+  }
+  .service-tile-empty.third {
+    width: 75%;
+  }
+  .service-tile-empty.half {
+    width: 50%;
+  }
+  .service-tile-empty.quarter {
+    width: 25%;
+  }
+}
+
+/* service tile  and close open hover styles */
+.close {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+
+/* service tile global more button styles */
+.btn-more {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+.btn-more:focus,
+.btn-more:active:focus,
+.btn-more.active:focus,
+.btn-more.focus,
+.btn-more:active.focus,
+.btn-more.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn-more:hover,
+.btn-more:focus,
+.btn-more.focus {
+  color: #014e77;
+  text-decoration: none;
+}
+.btn-more:active,
+.btn-more.active {
+  outline: 0;
+  background-image: none;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-more.disabled,
+.btn-more[disabled],
+fieldset[disabled] .btn-more {
+  cursor: not-allowed;
+  opacity: 0.35;
+  filter: alpha(opacity=35);
+  box-shadow: none;
+}
+a.btn-more.disabled,
+fieldset[disabled] a.btn-more {
+  pointer-events: none;
+}
+.btn-more:focus {
+  outline: dotted 2px #000;
+}
+.btn-more .more-title {
+  display: block;
+}
+.btn-more .more-icon {
+  font-size: 24px;
+  font-size: 1.5rem;
+}
+.btn-more.inverse {
+  background-color: #000;
+  color: #fff;
+}
+.btn-more.inverse:hover,
+.btn-more.inverse:focus {
+  color: #FDB81E;
+}
+/* End of Service Tiles */
+
+/* END from cagov.core.css */

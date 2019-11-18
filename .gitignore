@@ -2,3 +2,5 @@ _notes/*
 */_notes/*
 */Thumbs.db
 /.vscode/
+/node_modules/*
+/vendor/*
