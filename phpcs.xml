@@ -20,7 +20,6 @@
 		 p flag: Show progress of the run.
 		 s flag: Show sniff codes in all reports.
 	-->
-	<arg value="ps"/>
 
     <!-- Use colors in output -->
 	<arg name="colors"/>
