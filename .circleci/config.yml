@@ -3,16 +3,26 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
+workflows:
+  build_and_test:
+    jobs:
+      - gulp
+      - standard
 
 working_directory: ~/repo
 
 jobs:
-  build:
+  gulp:
     docker:
       - image: circleci/node    
     steps:
       - checkout
       - run: sudo npm install gulp-cli -g
       - run: npm install 
-      - run: composer i
       - run: gulp build 
+  standard:
+    docker:
+      - image: circleci/php:7.1
+    steps:
+      - checkout
+      - run: composer i
