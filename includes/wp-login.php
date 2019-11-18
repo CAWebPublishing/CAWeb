@@ -17,7 +17,7 @@ add_filter('retrieve_password_title', 'caweb_retrieve_password_title', 11, 3);
 function caweb_retrieve_password_title($title, $user_login, $user_data) {
     $pattern = '/\[.*\]/';
     $siteid = isset($_POST['siteid']) ? $_POST['siteid'] : 1;
-    $blogname =  wp_specialchars_decode(get_blog_details($siteid)->blogname, ENT_QUOTES);
+    $blogname =  wp_specialchars_decode(get_bloginfo(), ENT_QUOTES);
 
     return  preg_replace($pattern, sprintf('[%1$s]', $blogname), $title);
 }
@@ -27,7 +27,7 @@ add_filter('retrieve_password_message', 'caweb_retrieve_password_message', 10, 4
 function caweb_retrieve_password_message($message, $key, $user_login, $user_data) {
     $pattern = array('/Site Name: .*/', '/<.*(\/wp-login.php)/');
     $siteid = isset($_POST['siteid']) ? $_POST['siteid'] : 1;
-    $blogname =  wp_specialchars_decode(get_blog_details($siteid)->blogname, ENT_QUOTES);
+    $blogname =  wp_specialchars_decode(get_bloginfo(), ENT_QUOTES);
     $blogurl = get_site_url($siteid);
     $replacements = array(sprintf('Site Name: %1$s', $blogname), sprintf('%1$s$1', $blogurl));
 
