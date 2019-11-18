@@ -16,11 +16,6 @@
 	#############################################################################
 	-->
 
-	<!-- Pass some flags to PHPCS:
-		 p flag: Show progress of the run.
-		 s flag: Show sniff codes in all reports.
-	-->
-
     <!-- Use colors in output -->
 	<arg name="colors"/>
 
