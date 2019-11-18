@@ -35,6 +35,7 @@ function caweb_admin_menu() {
 
 		// Removal of Divi Submenu Pages
 		remove_submenu_page('et_divi_options', 'et_divi_options');
+		remove_submenu_page('et_divi_options', 'et_theme_builder');
 		remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=theme');
 		remove_submenu_page('et_divi_options', 'customize.php?et_customizer_option_set=module');
 		remove_submenu_page('et_divi_options', 'et_divi_role_editor');
@@ -134,6 +135,7 @@ function caweb_save_options($values = array(), $files = array()) {
 		$data['page_display'] = isset($values['alert-display-' . $count]) ? $values['alert-display-' . $count] : 'home';
 		$data['color'] = isset($values['alert-banner-color-' . $count]) ? $values['alert-banner-color-' . $count] : '#FDB81E';
 		$data['button'] = isset($values['alert-read-more-' . $count]) ? $values['alert-read-more-' . $count] : '';
+		$data['text'] = isset($values['alert-read-more-text-' . $count]) ? substr($values['alert-read-more-text-' . $count], 0, 16) : 'More Information';
 		$data['url'] = isset($values['alert-read-more-url-' . $count]) ? $values['alert-read-more-url-' . $count] : '';
 		$data['target'] = isset($values['alert-read-more-target-' . $count]) ? $values['alert-read-more-target-' . $count] : '';
 		$data['icon'] = isset($values['alert-icon-' . $count]) ? $values['alert-icon-' . $count] : '';
@@ -427,9 +429,9 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 			$output = $caweb_sanitized_options;
 
 			break;
-    case 'alerts':
-      $output = $caweb_alert_options;
-
+    	case 'alerts':
+      		$output = $caweb_alert_options;
+			break;
 		default:
 			$output = array_merge($caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
 							$caweb_google_options, $caweb_social_options, $caweb_social_extra_options, $caweb_misc_options, $caweb_alert_options);
