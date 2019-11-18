@@ -429,9 +429,9 @@ function caweb_get_site_options($group = '', $special = false, $with_values = fa
 			$output = $caweb_sanitized_options;
 
 			break;
-    case 'alerts':
-      $output = $caweb_alert_options;
-
+    	case 'alerts':
+      		$output = $caweb_alert_options;
+			break;
 		default:
 			$output = array_merge($caweb_general_options, $caweb_utility_header_options, $caweb_page_header_options,
 							$caweb_google_options, $caweb_social_options, $caweb_social_extra_options, $caweb_misc_options, $caweb_alert_options);

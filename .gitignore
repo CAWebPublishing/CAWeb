@@ -3,3 +3,4 @@ _notes/*
 */Thumbs.db
 /.vscode/
 /node_modules/*
+/vendor/*
