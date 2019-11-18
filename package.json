@@ -48,6 +48,7 @@
     "postinstall": "npm config set gulp-cli --global"
   },
   "dependencies": {
+    "gulp": "^4.0.2",
     "gulp-csso": "^3.0.1",
     "gulp-header": "^2.0.9",
     "gulp-parameterized": "^0.1.1",
