@@ -2,16 +2,19 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
+version: 2.1
+workflows:
+  verify_standards:
+    jobs:
+      - standard
+
+working_directory: ~/repo
+
 jobs:
-  build:
+  standard:
     docker:
-      # specify the version you desire here
-      - image: circleci/php:7.1-browsers
-
-    working_directory: ~/repo
-
+      - image: circleci/php:7.1
     steps:
       - checkout
-      - run: composer require --dev friendsofphp/php-cs-fixer
-      - run: vendor/bin/php-cs-fixer fix . --config=./.circleci/odwpi.php_cs -v --dry-run --using-cache=no
+      - run: composer i
+      - run: ./vendor/bin/phpcs .
