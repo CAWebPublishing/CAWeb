@@ -109,7 +109,8 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
                     'left' => esc_html__('Left', 'et_builder'),
                     'center' => esc_html__('Center', 'et_builder'),
                     'right'  => esc_html__('Right', 'et_builder'),
-                ),
+				),
+                'default' => 'left',
                 'description'       => esc_html__('Here you can choose the alignment for the panel heading', 'et_builder'),
                 'tab_slug' => 'advanced',
                 'toggle_slug'				=> 'header',
@@ -173,14 +174,14 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
 
         $button_link = ! empty($button_link) ? esc_url($button_link) : '';
 
-        $display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) : '');
+        $display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) . ' ' : '');
 
         $heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?
 						sprintf(' style="color: %1$s;"', $heading_text_color) : '');
 
         $option_padding = ("right" == $heading_align ? ' style="padding-left: 10px;"' : '');
 
-        $heading_align = ("left" != $heading_align ? sprintf('text-align: %1$s; width: 100%;', $heading_align) : '');
+        $heading_align = ("left" != $heading_align ? sprintf('text-align: %1$s; width: 100%%;', $heading_align) : '');
 
         $heading_style = ("" != $heading_text_color || "" != $heading_align ?
 						sprintf(' style="%1$s%2$s"', $heading_text_color, $heading_align) : '');
@@ -189,7 +190,7 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
 
         $display_options = $show_button == "on" ? sprintf('<div class="options"%1$s><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', $option_padding, $button_link, $title ) : '';
 
-        $display_title = ("" != $title ? sprintf('<div class="panel-heading"><h2%1$s>%2$s%3$s%4$s</h2></div>',
+        $display_title = ("" != $title ? sprintf('<div class="panel-heading"><h2 class="pb-0"%1$s>%2$s%3$s%4$s</h2></div>',
 				( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
         $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div> <!-- .et_pb_panel -->', $this->module_id(), $class, $remove_overflow, $display_title, $content);
@@ -305,7 +306,8 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
                     'left' => esc_html__('Left', 'et_builder'),
                     'center' => esc_html__('Center', 'et_builder'),
                     'right'  => esc_html__('Right', 'et_builder'),
-                ),
+				),
+                'default' => 'left',
                 'description'       => esc_html__('Here you can choose the alignment for the panel heading', 'et_builder'),
                 'tab_slug' => 'advanced',
                 'toggle_slug'				=> 'header',
@@ -369,14 +371,14 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 
         $button_link = ! empty($button_link) ? esc_url($button_link) : '';
 
-        $display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) : '');
+        $display_icon = ("on" == $use_icon ? caweb_get_icon_span($icon) . ' ' : '');
 
         $heading_text_color = ("none" == $panel_layout && "" != $heading_text_color ?
 						sprintf(' style="color: %1$s;"', $heading_text_color) : '');
 
         $option_padding = ("right" == $heading_align ? ' style="padding-left: 10px;"' : '');
 
-        $heading_align = ("left" != $heading_align ? sprintf('text-align: %1$s; width: 100%;', $heading_align) : '');
+        $heading_align = ("left" != $heading_align ? sprintf('text-align: %1$s; width: 100%%;', $heading_align) : '');
 
         $heading_style = ("" != $heading_text_color || "" != $heading_align ?
 						sprintf(' style="%1$s%2$s"', $heading_text_color, $heading_align) : '');
@@ -385,7 +387,7 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 
         $display_options = $show_button == "on" ? sprintf('<div class="options"%1$s><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', $option_padding, $button_link, $title) : '';
 
-        $display_title = ("" != $title ? sprintf('<div class="panel-heading"><h2%1$s>%2$s%3$s%4$s</h2></div>',
+        $display_title = ("" != $title ? sprintf('<div class="panel-heading"><h2 class="pb-0"%1$s>%2$s%3$s%4$s</h2></div>',
 				( ! empty($heading_style) ? $heading_style : ''), $display_icon, $title, $display_options) : '');
 
         $output = sprintf('<div%1$s%2$s%3$s>%4$s<div class="panel-body">%5$s</div></div>', $this->module_id(), $class, $remove_overflow, $display_title, $content);
