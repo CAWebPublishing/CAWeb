@@ -57,6 +57,14 @@ else
 	# install packages
 	composer i
 
+	# Run PHP Code Beautifier and Fixer
+	echo "Running PHP Code Beautifer and Fixer. This may take a minute..."
+	./vendor/bin/phpcbf .
+
+	# Run PHP CS Fixer
+	echo "Running PHP CS Fixer. This may take a minute..."
+	./vendor/bin/php-cs-fixer . --config ./circleci/caweb.php_cs
+	
 	# run PHP_CodeSniffer
 	echo "Running PHP CodeSniffer. This may take a minute..."
 	output=$(./vendor/bin/phpcs .)
