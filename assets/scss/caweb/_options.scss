@@ -1,39 +1,11 @@
-/* TinyMCE Content Editor */
-body#tinymce.mce-content-body{
-	background-color: transparent;
-	padding: 10px;
-}
-
 /* Toggle Arrows when collapsed */
-a[data-toggle="collapse"] h2 > span:after,
-a[data-toggle="collapse"] label > span:after{
+a.caweb-option span:after{
+	font-family: $font-family;
 	content: '\43'
 }
-a[data-toggle="collapse"].collapsed h2 > span:after,
-a[data-toggle="collapse"].collapsed label > span:after{
+a.caweb-option.collapsed span:after{
+	font-family: $font-family;
 	content: '\45'
 }
 
-/* Image Preview Min/Max Height */
-.header_ca_branding_option, 
-.header_ca_background_option{
-	min-height: 1px;
-	max-height: 150px;
-}
 
-/* Custom CSS */
-#uploaded-css li a,
-#uploaded-js li a,
-#add-css, #add-js, #add-alert{
-	cursor: pointer;
-}
-#ca_custom_css,
-#ca_custom_js{
-	min-height: 300px;
-}
-
-/* Alert Banners */
-.dashicons.alert-status,
-.remove-alert{
-	cursor: pointer;
-}

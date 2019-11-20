@@ -22,13 +22,13 @@ module.exports = {
 		'assets/css/caweb/custom.css'
 	], 
 	themeAdminCSS:[ // WP Backend Admin CSS
-		'assets/scss/admin.scss',
+		//'assets/scss/admin.scss',
 		'assets/css/cagov/cagov.font-only.css',
-		//'assets/css/caweb/admin.css'
+		'assets/css/caweb/admin.css'
 	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
-		'assets/js/caweb/options/*.js',
+		'assets/js/caweb/icon.js',
 		'assets/js/caweb/admin.js',
 	], 
 	commonJSFiles: [ // Common JS 
@@ -42,7 +42,7 @@ module.exports = {
 		'assets/js/wp/theme-customizer.js'
 	],
 	themeCustomizerControl: [ // Theme Customizer Control JS 
-		'assets/js/caweb/options/icon.js',
+		'assets/js/caweb/icon.js',
 		'assets/js/wp/theme-customizer-controls.js'
 	],
 };
