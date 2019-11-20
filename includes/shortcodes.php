@@ -16,6 +16,27 @@ function caweb_google_translate_func() {
     return '<div id="google_translate_element" class="custom-translate"></div>';
 }
 add_shortcode('caweb_google_translate', 'caweb_google_translate_func');
+
+function caweb_icon_menu($atts){ 
+    // Available Props
+    $selected = isset($atts['select']) ? $atts['select'] : '';
+    $input = isset($atts['name']) ? $atts['name'] : '';
+    $_header = isset($atts['header']) ? (bool)$atts['header'] : true;
+
+    $header = $_header ? '<div class="caweb-icon-menu-header mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span> <strong>Icon</strong></div>' : '';
+    $input = ! empty($input) ? sprintf('<input type="hidden" name="%1$s" value="%2$s" >', $input, $selected) : '';
+
+    $icons = caweb_get_icon_list(-1, '', true);
+    $iconList = '';
+    foreach ($icons as $i) {
+        $iconList .= sprintf('<li class="list-group-item float-left ca-gov-icon-%1$s%2$s" title="%1$s"></li>', 
+        $i, $selected == $i ? ' active' : '');
+    }   
+
+    return sprintf('%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul>', $header, $iconList, $input);
+    
+}
+add_shortcode('caweb_icon_menu', 'caweb_icon_menu');
 /*
 Panel Attributes
 $atts['layout'] = various panel designs
