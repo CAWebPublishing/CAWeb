@@ -6,20 +6,16 @@
 	used by the page template
  */
 function caweb_get_page_version($post_id = -1) {
+	$result = get_option('ca_site_version', 5);
+
 	switch (get_page_template_slug($post_id)) {
-	case "page-templates/page-template-v4.php":
-		$result = 4;
-
-		break;
-  case "page-templates/page-template-v5.php":
-		$result = 5;
-
-		break;
-	default:
-		$result = get_option('ca_site_version', 5);
-
-		break;
-
+		case "page-templates/page-template-v4.php":
+			$result = 4;
+			break;
+		case "page-templates/page-template-v5.php":
+		default:
+			$result = 5;
+			break;
 	}
 
 	return $result;
@@ -197,19 +193,16 @@ function caweb_tiny_mce_settings($settings = array()) {
 		$styles[ str_replace(' ', '', strtolower($style->name)) ] = $style;
 	}
 
+	$adminCSS = getMinFile( '/css/admin.css' );
+	
 	$version = caweb_get_page_version(get_the_ID());
+
 	$color = get_option('ca_site_color_scheme', 'oceanside');
 	$schemes = caweb_color_schemes($version, 'filename');
 	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
 
-	$adminCSS = '/css/admin.css';
-	$adminCSS = file_exists(CAWebAbsPath .  str_replace( '.css', '.min.css', $adminCSS) ) ? str_replace( '.css', '.min.css', $adminCSS) : $adminCSS;
-	$adminCSS = CAWebUri . $adminCSS;
+	$editorCSS = getMinFile( "/css/cagov-v$version-$colorscheme.css" );
 	
-	$editorCSS = "/css/cagov-v$version-$colorscheme.css";
-	$editorCSS = file_exists( CAWebAbsPath . str_replace( '.css', '.min.css', $editorCSS) ) ? str_replace( '.css', '.min.css', $editorCSS) : $editorCSS;
-	$editorCSS = CAWebUri . $editorCSS;
-
 	$css = array(
 		includes_url('/css/dashicons.min.css'),
 		includes_url('/js/tinymce/skins/wordpress/wp-content.css'),
@@ -507,11 +500,6 @@ function caweb_get_icon_span($font, $attr = array()) {
 		return;
 	}
 
-	$t = get_site_option('dev', array());
-	if (empty($t)) {
-		update_site_option('dev', array($font, $icon));
-	}
-
 	$icon = "ca-gov-icon-$icon";
 	$style = '';
 	$class = '';
@@ -705,7 +693,7 @@ function caweb_get_attachment_post_meta($image_url, $meta_key = '') {
 
 function getMinFile( $f , $ext = 'css'){
 	// if a minified version exists
-	if( file_exists(CAWebAbsPath .  str_replace( ".$ext", ".min.$ext", $f) ) ){
+	if( false && file_exists(CAWebAbsPath .  str_replace( ".$ext", ".min.$ext", $f) ) ){
 		return CAWebUri . str_replace( ".$ext", ".min.$ext", $f);
 	}else{
 		return CAWebUri . $f;
