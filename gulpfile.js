@@ -176,12 +176,20 @@ gulp.task('customizer-js', parameterized( async function (_) {
 }));
 
 
-gulp.task('beautify', async function() {
+gulp.task('beautify', parameterized(async function(_) {
 	var options = {indentSize: 2};
-	gulp.src(['./*.php', './*.html'], {base: './'})
+	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined === _.params.file;
+	var src = ['*.php', '.html'];
+
+	if( ! noFlags ){
+		src = _.params.file;
+	}
+	
+	gulp.src(src, {base: './'})
 	  .pipe(htmlbeautify(options))
-	  .pipe(gulp.dest('./'))
-  });
+	  .pipe(gulp.dest('./'));
+	
+}));
 
 /*
 	CAWeb Build All CSS/JS and Beautify
