@@ -470,6 +470,9 @@ var alert_heading = document.createElement('H3');
 
   // Hidden Options for Read More Button
 var hidden_container = document.createElement('DIV');
+var alert_read_more_target_text = document.createElement('P');
+var alert_read_more_target_text_input = document.createElement('INPUT');
+var alert_read_more_target_text_tip = document.createElement('I');
 var alert_read_more_target_url = document.createElement('P');
 var alert_read_more_target_url_input = document.createElement('INPUT');
 var alert_open_link = document.createElement('LABEL');
@@ -525,10 +528,17 @@ alert_read_more_input.addEventListener('click',  function(e){ displayReadMoreOpt
 label3.appendChild(alert_read_more_input);
 alert_read_more.appendChild(label3);
 
+alert_read_more_target_text.innerHTML = "Read More Button Text";
+
+alert_read_more_target_text_input.type = "text";
+alert_read_more_target_text_input.name = "alert-read-more-text-" + alertCount;
+
 alert_read_more_target_url.innerHTML = "Read More Button URL";
 
 alert_read_more_target_url_input.type = "text";
 alert_read_more_target_url_input.name = "alert-read-more-url-" + alertCount;
+
+alert_read_more_target_text_tip.innerHTML = "(Max Characters: 16)";
 
 alert_open_link.innerHTML = "Open link in";
 
@@ -548,6 +558,9 @@ label5.appendChild(alert_read_more_current_target);
 label5.appendChild(document.createTextNode("Current Tab"));
 
 hidden_container.classList = "hidden";
+hidden_container.appendChild(alert_read_more_target_text);
+hidden_container.appendChild(alert_read_more_target_text_input);
+hidden_container.appendChild(alert_read_more_target_text_tip);
 hidden_container.appendChild(alert_read_more_target_url);
 hidden_container.appendChild(alert_read_more_target_url_input);
 hidden_container.appendChild(alert_open_link);
