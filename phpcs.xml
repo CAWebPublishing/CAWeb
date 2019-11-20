@@ -28,6 +28,7 @@
 	<!-- Only check the PHP, CSS and SCSS files. JS files are checked separately with JSCS and JSHint. -->
 	<arg name="extensions" value="php,css,scss/css"/>
 
+	<!-- php.ini Settings -->
     <ini name="memory_limit" value="1024M" />
 
 	<!-- Check all files in this directory and the directories below it. -->
@@ -88,7 +89,7 @@
 		 Multiple valid prefixes can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="_s" />
+			<property name="prefixes" type="array" value="_caweb" />
 		</properties>
 	</rule>
 
