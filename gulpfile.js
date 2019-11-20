@@ -40,6 +40,9 @@ const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
 // JS related plugins.
 const uglify = require('gulp-uglify'); // Minifies JS files.
 
+// HTML related plugins
+const htmlbeautify = require('gulp-html-beautify'); // Beautify HTML/PHP files
+
 // Image related plugins.
 const imagemin = require( 'gulp-imagemin' ); // Minify PNG, JPEG, GIF and SVG images with imagemin.
 
@@ -50,19 +53,19 @@ const notify = require( 'gulp-notify' ); // Sends message notification to you.
 
 const fs = require('fs'); // File System
 
-/* 
-	CAWeb Admin Styles 
+/*
+	CAWeb Admin Styles
 */
 gulp.task('admin-css', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
-	
+
 	if ( _.params.prod ) {
 		buildAdminStyles(true);
 	}
 
 	if ( _.params.dev ) {
 		buildAdminStyles(false);
-	}	
+	}
 
 	if( noFlags ){
 		buildAdminStyles(true);
@@ -82,13 +85,13 @@ gulp.task('v5-css', parameterized( async function (_) {
 
 	if ( _.params.dev ) {
 		buildVersionStyles(false, '5');
-	}	
+	}
 
 	if( noFlags ){
 		buildVersionStyles(false, '5');
 		buildVersionStyles(true, '5');
 	}
-	
+
 }));
 
 /*
@@ -96,14 +99,14 @@ gulp.task('v5-css', parameterized( async function (_) {
 */
 gulp.task('v4-css', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
-	
+
 	if ( _.params.prod ) {
 		buildVersionStyles(true, '4');
 	}
 
 	if ( _.params.dev ) {
 		buildVersionStyles(false, '4');
-	}	
+	}
 
 	if( noFlags ){
 		buildVersionStyles(false, '4');
@@ -116,14 +119,14 @@ gulp.task('v4-css', parameterized( async function (_) {
 */
 gulp.task('admin-js', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
-	
+
 	if ( _.params.prod ) {
 		buildAdminJS(true);
 	}
 
 	if ( _.params.dev ) {
 		buildAdminJS(false);
-	}	
+	}
 
 	if( noFlags ){
 		buildAdminJS(true);
@@ -136,14 +139,14 @@ gulp.task('admin-js', parameterized( async function (_) {
 */
 gulp.task('frontend-js', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
-	
+
 	if ( _.params.prod ) {
 		buildFrontEndJS(true);
 	}
 
 	if ( _.params.dev ) {
 		buildFrontEndJS(false);
-	}	
+	}
 
 	if( noFlags ){
 		buildFrontEndJS(true);
@@ -156,26 +159,45 @@ gulp.task('frontend-js', parameterized( async function (_) {
 */
 gulp.task('customizer-js', parameterized( async function (_) {
 	var noFlags = undefined === _.params.length || _.params.all;
-	
+
 	if ( _.params.prod ) {
 		buildThemeCustomizerJS(true);
 	}
 
 	if ( _.params.dev ) {
 		buildThemeCustomizerJS(false);
-	}	
+	}
 
 	if( noFlags ){
 		buildThemeCustomizerJS(true);
 		buildThemeCustomizerJS(false);
 	}
+
+}));
+
+
+gulp.task('beautify', parameterized(async function(_) {
+	var options = {indentSize: 2};
+	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined === _.params.file;
+	var src = ['*.php', '*.html'];
+
+	if( ! noFlags ){
+		src = _.params.file;
+	}
+	
+	gulp.src(src, {base: './'})
+	  .pipe(htmlbeautify(options))
+	  .pipe(gulp.dest('./'));
 	
 }));
 
+/*
+	CAWeb Build All CSS/JS and Beautify
+*/
 gulp.task('build', parameterized(async function(_){
 	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined !== _.params.all;
-	var versionNum = undefined !== _.params.ver ? _.params.ver : false; 
-	
+	var versionNum = undefined !== _.params.ver ? _.params.ver : false;
+
 	if ( _.params.prod ) {
 		// Build Admin Styles
 		buildAdminStyles(true);
@@ -202,7 +224,7 @@ gulp.task('build', parameterized(async function(_){
 	if ( _.params.dev ) {
 		// Build Admin Styles
 		buildAdminStyles(false);
-		
+
 		// Build Version Styles
 		if( versionNum ){
 			buildVersionStyles(false, versionNum);
@@ -216,11 +238,11 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Frontend JS
 		buildFrontEndJS(false);
-		
+
 		// Build Theme Customizer JS
 		buildThemeCustomizerJS(false);
 
-	}	
+	}
 
 	if( noFlags ){
 		// Build Admin Styles
@@ -246,7 +268,7 @@ gulp.task('build', parameterized(async function(_){
 		// Build Frontend JS
 		buildFrontEndJS(true);
 		buildFrontEndJS(false);
-	
+
 		// Build Theme Customizer JS
 		buildThemeCustomizerJS(true);
 		buildThemeCustomizerJS(false);
@@ -260,7 +282,7 @@ gulp.task('build', parameterized(async function(_){
 async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
-	
+
 	return gulp.src(config.themeAdminCSS)
 		.pipe(
 			sass({
@@ -308,7 +330,7 @@ async function buildAdminJS( min = false){
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.js')) // compiled file
 		.pipe( notify({ title: '✅  CAWeb Admin JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) )
-		
+
 
 	if( min ){
 		js = js.pipe(uglify());
@@ -352,10 +374,10 @@ async function buildThemeCustomizerJS( min = false){
 	js = gulp.src(config.themeCustomizerControl)
 		.pipe( lineec() )
 		.pipe(concat('theme-customizer-controls' + minified + '.js'));
-		
+
 	if( min ){
 		js = js.pipe(uglify());
-	}	
+	}
 
 	js = js.pipe(gulp.dest('./js/'));
 
