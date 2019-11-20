@@ -67,7 +67,6 @@ else
 	
 	# run PHP_CodeSniffer
 	echo "Running PHP CodeSniffer. This may take up to several minutes..."
-  
 	output=$(./vendor/bin/phpcs .)
 
 	if [ "$output"  ]; then

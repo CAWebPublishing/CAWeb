@@ -337,31 +337,12 @@ function caweb_admin_enqueue_scripts($hook) {
 
 		wp_register_script('caweb-admin-scripts', $adminJS, array('jquery', 'thickbox'), CAWebVersion, true);
 
-		$localizeArgs = array(
-			'defaultFavIcon' => caweb_default_favicon_url(), 
-			'changeCheck' => $hook, 
-			'caweb_icons' => caweb_get_icon_list(-1, '', true), 
-			'caweb_colors' => caweb_template_colors(), 
-			'tinymce_settings' => caweb_tiny_mce_settings() 
-		);
-		
-		wp_localize_script('caweb-admin-scripts', 'args', $localizeArgs);
+		wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
 
-		// bootstrap 4
-		// https://getbootstrap.com/docs/4.3/getting-started/introduction/
-		//wp_enqueue_script( 'caweb-boot1','https://code.jquery.com/jquery-3.3.1.slim.min.js', array( 'jquery' ),'',true );
-		wp_enqueue_script( 'caweb-boot2','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ),'',true );
-		wp_enqueue_script( 'caweb-boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-		
-		//https://gitbrent.github.io/bootstrap4-toggle/
-		wp_enqueue_script( 'caweb-boot4','https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ),'',true );
-		
 		wp_enqueue_script('caweb-admin-scripts');
 		
 		// Enqueue Styles
-		wp_enqueue_style('caweb-boot4-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWebVersion);
 		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
-		//wp_enqueue_style('caweb-admin-styles', CAWebUri . '/css/admin_custom.css', array(), CAWebVersion);
 	} elseif (in_array($hook, array('post.php', 'post-new.php', 'widgets.php'))) {
 		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
 	}
