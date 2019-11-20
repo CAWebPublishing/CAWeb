@@ -204,6 +204,10 @@ jQuery(document).ready(function() {
 		var readMoreInput = document.createElement('INPUT');
 		var readMoreLabel = document.createElement('LABEL');
 		var readMoreSettings = document.createElement('DIV');
+		var readMoreTextGroup = document.createElement('DIV');
+		var readMoreTextInput = document.createElement('INPUT');
+		var readMoreTextLabel = document.createElement('LABEL');
+		var readMoreTextSmall = document.createElement('SMALL');
 		var readMoreURLGroup = document.createElement('DIV');
 		var readMoreURLInput = document.createElement('INPUT');
 		var readMoreURLLabel = document.createElement('LABEL');
@@ -309,7 +313,6 @@ jQuery(document).ready(function() {
 		$(displayOnAllGroupInput).attr('name', 'alert-display-' + alertCount);
 		$(displayOnAllGroupInput).attr('type', 'radio');
 		$(displayOnAllGroupInput).val('all');
-		//$(displayOnAllGroupInput).attr('checked', 'false');
 		$(displayOnAllGroupInput).addClass('form-check-input');
 
 		$(displayOnAllGroupLabel).addClass('form-check-label');
@@ -348,6 +351,19 @@ jQuery(document).ready(function() {
 		
 		$(readMoreSettings).attr('id', 'alert-banner-read-more-' + alertCount )
 		$(readMoreSettings).addClass('collapse show');
+
+		$(readMoreTextGroup).addClass('form-group col-sm-6 pl-0');
+		
+		$(readMoreTextLabel).addClass('d-block');
+		$(readMoreTextLabel).html('<strong>Read More Button Text</strong>');
+
+		$(readMoreTextInput).attr('type', 'text');
+		$(readMoreTextInput).attr('name', 'alert-read-more-text-' + alertCount);
+		$(readMoreTextInput).attr('id', 'alert-read-more-text-' + alertCount);
+		$(readMoreTextInput).addClass('form-control');
+
+		$(readMoreTextSmall).addClass('text-muted');
+		$(readMoreTextSmall).html('(Max Characters: 16)');
 
 		$(readMoreURLGroup).addClass('form-group col-sm-6 pl-0 d-inline-block');
 
@@ -423,12 +439,18 @@ jQuery(document).ready(function() {
 		$(readMoreGroup).append(readMoreLabel);
 		$(readMoreGroup).append(readMoreAnchor);
 
+		$(readMoreTextGroup).append(readMoreTextLabel);
+		$(readMoreTextGroup).append(readMoreTextInput);
+		$(readMoreTextGroup).append(readMoreURLLabel);
+		$(readMoreTextGroup).append(readMoreTextSmall);
+
 		$(readMoreURLGroup).append(readMoreURLLabel);
 		$(readMoreURLGroup).append(readMoreURLInput);
 
 		$(readMoreTargetGroup).append(readMoreTargetLabel);
 		$(readMoreTargetGroup).append(readMoreTargetInput);
 		
+		$(readMoreSettings).append(readMoreTextGroup);
 		$(readMoreSettings).append(readMoreURLGroup);
 		$(readMoreSettings).append(readMoreTargetGroup);
 

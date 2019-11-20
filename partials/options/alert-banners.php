@@ -110,9 +110,10 @@
                         
                         <div id="alert-banner-read-more-<?php print $count ?>" class="collapse<?php print ! empty($readmore) ? ' show' : ''; ?>">
                             <!-- Read More Button Text -->
-                            <div class="form-group col-sm-6 pl-0 d-inline-block">
+                            <div class="form-group col-sm-6 pl-0">
                                 <label for="alert-read-more-text-<?php print $count; ?>" class="d-block"><strong>Read More Button Text</strong></label>
-                                <input type="text" id="alert-read-more-text-<?php print $count; ?>" name="alert-read-more-text-<?php print $count; ?>" class="form-control" value="<?php print $readmore_text ?>">
+                                <input type="text" id="alert-read-more-text-<?php print $count; ?>" name="alert-read-more-text-<?php print $count; ?>" maxlength="16" class="form-control" value="<?php print $readmore_text ?>">
+								<small class="text-muted">(Max Characters: 16)</small>
                             </div>
 
                             <!-- Read More Button URL -->
