@@ -68,7 +68,7 @@ class ET_Builder_Module_Section_Footer extends ET_Builder_CAWeb_Module {
 		$this->add_classname( 'section' );
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$section_bg_color = ( '' != $section_background_color ? sprintf( ' style="background: %1$s" ', $section_background_color ) : '' );
+		$section_bg_color = ( '' !== $section_background_color ? sprintf( ' style="background: %1$s" ', $section_background_color ) : '' );
 
 		$output = sprintf( '<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $content );
 
@@ -297,20 +297,20 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 		$icon_color['style'] = ( ! empty( $text_color ) ? sprintf( ' color: %1$s;', $text_color ) : '' );
 		$text_color          = ( ! empty( $text_color ) ? sprintf( ' style="color: %1$s" ', $text_color ) : '' );
 
-		$icon = ( 'on' == $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
+		$icon = ( 'on' === $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
 
-		$link_as_button = ( 'on' == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
+		$link_as_button = ( 'on' === $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
 
-		$no_pad = ( 'on' != $group_icon_button ? 'padding-left: 0 !important;' : '' );
+		$no_pad = ( 'on' !== $group_icon_button ? 'padding-left: 0 !important;' : '' );
 
-		$display_more_button = ( 'on' == $group_show_more_button ?
+		$display_more_button = ( 'on' === $group_show_more_button ?
 		sprintf( '<a href="%1$s" class="btn btn-primary" target="_blank">Read More<span class="sr-only">Read More about %2$s</span></a>', esc_url( $group_url ), $group_title ) : '' );
 
 		$group_links = '';
 
 		for ( $i = 1; $i <= 10; $i++ ) {
 			$tmp[]        = $icon;
-			$group_links .= ( 'on' == $group_link_show[ $i ] ?
+			$group_links .= ( 'on' === $group_link_show[ $i ] ?
 			sprintf(
 				'<li><a href="%1$s"%2$s%3$s target="_blank">%4$s%5$s</a></li>',
 				esc_url( $group_link_url[ $i ] ),
@@ -392,7 +392,7 @@ class ET_Builder_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module
 		$this->add_classname( 'section' );
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$section_bg_color = ( '' != $section_background_color ? sprintf( ' style="background: %1$s" ', $section_background_color ) : '' );
+		$section_bg_color = ( '' !== $section_background_color ? sprintf( ' style="background: %1$s" ', $section_background_color ) : '' );
 
 		$output = sprintf( '<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $content );
 
@@ -619,20 +619,20 @@ class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 		$icon_color['style'] = ( ! empty( $text_color ) ? sprintf( ' color: %1$s;', $text_color ) : '' );
 		$text_color          = ( ! empty( $text_color ) ? sprintf( ' style="color: %1$s" ', $text_color ) : '' );
 
-		$icon = ( 'on' == $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
+		$icon = ( 'on' === $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
 
-		$link_as_button = ( 'on' == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
+		$link_as_button = ( 'on' === $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
 
-		$no_pad = ( 'on' != $group_icon_button ? 'padding-left: 0 !important;' : '' );
+		$no_pad = ( 'on' !== $group_icon_button ? 'padding-left: 0 !important;' : '' );
 
-		$display_more_button = ( 'on' == $group_show_more_button ?
+		$display_more_button = ( 'on' === $group_show_more_button ?
 		sprintf( '<a href="%1$s" class="btn btn-primary" target="_blank">Read More<span class="sr-only">Read More about %2$s</span></a>', esc_url( $group_url ), $group_title ) : '' );
 
 		$group_links = '';
 
 		for ( $i = 1; $i <= 10; $i++ ) {
 			$tmp[]        = $icon;
-			$group_links .= ( 'on' == $group_link_show[ $i ] ?
+			$group_links .= ( 'on' === $group_link_show[ $i ] ?
 			sprintf(
 				'<li><a href="%1$s"%2$s%3$s target="_blank">%4$s%5$s</a></li>',
 				esc_url( $group_link_url[ $i ] ),

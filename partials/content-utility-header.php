@@ -12,7 +12,7 @@
 				</div>
 
 				<?php
-				$gtranslator = get_option( 'ca_google_trans_enabled' ) || 'standard' == get_option( 'ca_google_trans_enabled' ) || 'custom' == get_option( 'ca_google_trans_enabled' ) ? true : false;
+				$gtranslator = get_option( 'ca_google_trans_enabled' ) || 'standard' === get_option( 'ca_google_trans_enabled' ) || 'custom' === get_option( 'ca_google_trans_enabled' ) ? true : false;
 
 				if ( get_option( 'ca_utility_home_icon', true ) ) {
 					print '<a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>';
@@ -61,10 +61,10 @@
 				<?php if ( get_option( 'ca_geo_locator_enabled' ) ) : ?>
 				<button class="btn btn-xs btn-primary collapsed geo-lookup" data-toggle="collapse" data-target="#locationSettings" aria-controls="locationSettings"><span class="ca-gov-icon-compass" aria-hidden="true"></span><span class="located-city-name"></span></button>
 				<?php endif; ?>
-				<?php if ( 'custom' == get_option( 'ca_google_trans_enabled' ) && '' !== get_option( 'ca_google_trans_page', '' ) ) : ?>
+				<?php if ( 'custom' === get_option( 'ca_google_trans_enabled' ) && '' !== get_option( 'ca_google_trans_page', '' ) ) : ?>
 				<a id="caweb-gtrans-custom" target="<?php print get_option( 'ca_google_trans_page_new_window', true ) ? '_blank' : '_self'; ?>" href="<?php print esc_url( get_option( 'ca_google_trans_page' ) ); ?>"><?php print '' !== get_option( 'ca_google_trans_icon' ) ? caweb_get_icon_span( get_option( 'ca_google_trans_icon' ) ) : ''; ?>Translate</a>
 				<?php endif; ?>
-				<?php if ( true === get_option( 'ca_google_trans_enabled' ) || 'standard' == get_option( 'ca_google_trans_enabled' ) ) : ?>
+				<?php if ( true === get_option( 'ca_google_trans_enabled' ) || 'standard' === get_option( 'ca_google_trans_enabled' ) ) : ?>
 				<div class="quarter standard-translate" id="google_translate_element"></div>
 				<?php endif; ?>
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">

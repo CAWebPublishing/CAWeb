@@ -225,7 +225,7 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$display_icon = ( 'on' == $show_icon ? caweb_get_icon_span( $icon ) : '' );
+		$display_icon = ( 'on' === $show_icon ? caweb_get_icon_span( $icon ) : '' );
 
 		$address = array( $addr, $city, $state, $zip );
 		$address = array_filter( $address );
@@ -233,33 +233,33 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
 
 		$location_link = ! empty( $location_link ) ? esc_url( $location_link ) : '';
 
-		if ( 'contact' == $location_layout ) {
-			$display_other = ( 'on' == $show_contact ?
+		if ( 'contact' === $location_layout ) {
+			$display_other = ( 'on' === $show_contact ?
 				sprintf(
 					'<p class="other">%1$s%2$s</p>',
-					( '' != $phone ? "General Information: {$phone}<br />" : '' ),
-					( '' != $fax ? "FAX: {$fax}" : '' )
+					( '' !== $phone ? "General Information: {$phone}<br />" : '' ),
+					( '' !== $fax ? "FAX: {$fax}" : '' )
 				) : '' );
 
-			$display_button = ( 'on' == $show_button && ! empty( $location_link ) ? sprintf( '<a href="%1$s" class="btn" target="_blank">More</a>', $location_link ) : '' );
+			$display_button = ( 'on' === $show_button && ! empty( $location_link ) ? sprintf( '<a href="%1$s" class="btn" target="_blank">More</a>', $location_link ) : '' );
 
 			$address = ( ! empty( $name ) ? sprintf( '%1$s<br />%2$s', $name, caweb_get_google_map_place_link( $address ) ) :
 				  caweb_get_google_map_place_link( $address ) );
 
 			$output = sprintf( '<div%1$s%2$s>%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', $this->module_id(), $class, $display_icon, $address, $display_other, $display_button );
-		} elseif ( 'mini' == $location_layout ) {
+		} elseif ( 'mini' === $location_layout ) {
 			$output = sprintf(
 				'<div%1$s%2$s>%3$s<div class="contact"%7$s><div class="title"><a href="%4$s" target="_blank">%5$s</a></div>%6$s</div></div>',
 				$this->module_id(),
 				$class,
-				( 'on' == $show_icon ? sprintf( '<div>%1$s</div>', $display_icon ) : '' ),
+				( 'on' === $show_icon ? sprintf( '<div>%1$s</div>', $display_icon ) : '' ),
 				$location_link,
 				$name,
 				( ! empty( $address ) ? sprintf( '<div class="address">%1$s</div>', caweb_get_google_map_place_link( $address ) ) : '' ),
 				( empty( $display_icon ) ? ' style="margin-left: 0px;"' : '' )
 			);
 		} else {
-			$display_button = ( 'on' == $show_button && ! empty( $location_link ) ? sprintf( '<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link ) : '' );
+			$display_button = ( 'on' === $show_button && ! empty( $location_link ) ? sprintf( '<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link ) : '' );
 
 			if ( ! empty( $featured_image ) ) {
 				$alt_text       = caweb_get_attachment_post_meta( $featured_image, '_wp_attachment_image_alt' );

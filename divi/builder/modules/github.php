@@ -189,7 +189,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
 				'https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
 				$username,
 				$per_page,
-				( 'on' == $increase_rate_limit && ! empty( $client_id ) && ! empty( $client_secret ) ?
+				( 'on' === $increase_rate_limit && ! empty( $client_id ) && ! empty( $client_secret ) ?
 					 sprintf( '&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret ) : '' ),
 				$repo_type,
 				( ! empty( $access_token ) ? sprintf( '&access_token=%1$s', $access_token ) : '' )
@@ -198,7 +198,7 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
 			$repos = wp_remote_get( $url );
 			$code  = wp_remote_retrieve_response_code( $repos );
 
-			if ( 200 == $code ) {
+			if ( 200 === $code ) {
 				$repos     = json_decode( wp_remote_retrieve_body( $repos ) );
 				$repo_list = '';
 
@@ -211,10 +211,10 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
 						$email_body
 					) : '' );
 
-					if ( 'on' == $definitions[0] ) {
+					if ( 'on' === $definitions[0] ) {
 						if ( 'on' !== $definitions[1] || $repo->private ) {
 							$name = sprintf( '<h3>%1$s</h3>', $repo->name );
-						} elseif ( 'on' == $definitions[1] ) {
+						} elseif ( 'on' === $definitions[1] ) {
 							$name = sprintf(
 								'<h3><a href="%1$s" target="blank">%2$s</a></h3>',
 								$repo->html_url,
@@ -223,20 +223,20 @@ class ET_Builder_Module_GitHub extends ET_Builder_CAWeb_Module {
 						}
 					}
 
-					$desc = ( 'on' == $definitions[2] && ! empty( $repo->description ) ?
+					$desc = ( 'on' === $definitions[2] && ! empty( $repo->description ) ?
 										sprintf( '<p>Project Description: %1$s</p>', $repo->description ) : '' );
 
-					$fork = ( 'on' == $definitions[3] ?
+					$fork = ( 'on' === $definitions[3] ?
 							sprintf( '<p>Project forked by another organization: %1$s</p>', ( empty( $repo->fork ) ? 'False' : 'True' ) ) :
 									'' );
 
-					$created_at = ( 'on' == $definitions[4] ?
+					$created_at = ( 'on' === $definitions[4] ?
 												sprintf( '<p>Created on: %1$s</p>', date( 'm/d/Y', strtotime( $repo->created_at ) ) ) : '' );
 
-					$updated_at = ( 'on' == $definitions[5] ?
+					$updated_at = ( 'on' === $definitions[5] ?
 												sprintf( '<p>Updated on: %1$s</p>', date( 'm/d/Y', strtotime( $repo->updated_at ) ) ) : '' );
 
-					$language = ( 'on' == $definitions[6] && ! empty( $repo->language ) ?
+					$language = ( 'on' === $definitions[6] && ! empty( $repo->language ) ?
 											sprintf( '<p>Language: %1$s</p>', $repo->language ) : '' );
 
 					$repo_list .= sprintf(

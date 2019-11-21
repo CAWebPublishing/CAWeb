@@ -55,7 +55,7 @@ function caweb_wp_login_errors( $errors, $redirect_to ) {
 		print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
 	}
 
-	if ( ! $interim_login && isset( $_GET['caweb'] ) && 'resetpass' == $_GET['caweb'] ) {
+	if ( ! $interim_login && isset( $_GET['caweb'] ) && 'resetpass' === $_GET['caweb'] ) {
 		$errors->add( 'updated', '<p class="caweb-resetpass">You have successfully reset your password.</p>' );
 	}
 
@@ -70,7 +70,7 @@ function caweb_lostpassword_form() {
 add_action( 'login_form_lostpassword', 'caweb_login_form_lostpassword' );
 function caweb_login_form_lostpassword() {
 	// Check if have submitted
-	$http_post = ( 'POST' == $_SERVER['REQUEST_METHOD'] );
+	$http_post = ( 'POST' === $_SERVER['REQUEST_METHOD'] );
 
 	if ( $http_post ) {
 		$errors = retrieve_password();
@@ -92,7 +92,7 @@ function caweb_login_form_rp() {
 // Password Reset Strength Validation
  add_action( 'validate_password_reset', 'caweb_validate_password_reset', 10, 2 );
 function caweb_validate_password_reset( $errors, $user ) {
-	if ( isset( $_GET['action'] ) && 'rp' == $_GET['action'] ) {
+	if ( isset( $_GET['action'] ) && 'rp' === $_GET['action'] ) {
 		if ( ! isset( $_POST['pass1'] ) ) {
 			return;
 		}
@@ -103,7 +103,7 @@ function caweb_validate_password_reset( $errors, $user ) {
 		if ( strlen( $pass ) < 12 || ! preg_match( $exp, $pass ) ) {
 			$errors->add( 'error', 'Password must be alphanumeric and contain minimum 12 characters.', '' );
 		}
-	} elseif ( isset( $_GET['action'] ) && 'resetpass' == $_GET['action'] ) {
+	} elseif ( isset( $_GET['action'] ) && 'resetpass' === $_GET['action'] ) {
 		if ( ( ! $errors->get_error_code() ) && isset( $_POST['pass1'] ) && ! empty( $_POST['pass1'] ) ) {
 			reset_password( $user, $_POST['pass1'] );
 

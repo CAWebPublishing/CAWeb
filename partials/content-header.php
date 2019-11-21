@@ -2,7 +2,7 @@
 global $post;
 $post_content = isset( $post ) ? ( is_object( $post ) ? $post->post_content : $post['content'] ) : '';
 $ver          = caweb_get_page_version( get_the_ID() );
-$fixed_header = ( 5 == $ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
+$fixed_header = ( 5 === $ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
 $color        = get_option( 'ca_site_color_scheme', 'oceanside' );
 $schemes      = caweb_color_schemes( caweb_get_page_version( get_the_ID() ), 'filename' );
 $colorscheme  = isset( $schemes[ $color ] ) ? $color : 'oceanside';
@@ -13,9 +13,9 @@ $default_background_img = sprintf(
 	$colorscheme
 );
 
-$header_background_img = ( 4 == $ver && '' !== get_option( 'header_ca_background' ) ?
+$header_background_img = ( 4 === $ver && '' !== get_option( 'header_ca_background' ) ?
 						  get_option( 'header_ca_background' ) : $default_background_img );
-$header_style          = ( 4 == $ver ? sprintf( 'style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img ) : '' );
+$header_style          = ( 4 === $ver ? sprintf( 'style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img ) : '' );
 
 // Search
 $ca_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled' );
@@ -34,7 +34,7 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 	<?php
 
 		// Version 5.0 Specific
-	if ( 5 == caweb_get_page_version( get_the_ID() ) ) {
+	if ( 5 === caweb_get_page_version( get_the_ID() ) ) {
 
 			// Alerts
 		$alerts = get_option( 'caweb_alerts', array() );
@@ -44,8 +44,8 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 		}
 
 		foreach ( $alerts as $a => $data ) {
-			if ( 'inactive' !== $data['status'] && ( ( is_front_page() && 'home' == $data['page_display'] ) || ( 'all' == $data['page_display'] ) ) ) {
-				if ( ! isset( $_SESSION[ 'display_alert_' . $a ] ) || 1 == $_SESSION[ 'display_alert_' . $a ] ) {
+			if ( 'inactive' !== $data['status'] && ( ( is_front_page() && 'home' === $data['page_display'] ) || ( 'all' === $data['page_display'] ) ) ) {
+				if ( ! isset( $_SESSION[ 'display_alert_' . $a ] ) || 1 === $_SESSION[ 'display_alert_' . $a ] ) {
 					$_SESSION[ 'display_alert_' . $a ] = true;
 
 					$readmore   = '';
@@ -108,11 +108,11 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 			)
 		);
 
-			  $search  = 5 == $ver && is_front_page() && $ca_frontpage_search_enabled ? ' featured-search fade' : '';
+			  $search  = 5 === $ver && is_front_page() && $ca_frontpage_search_enabled ? ' featured-search fade' : '';
 			  $search .= empty( $ca_google_search_id ) ? ' hidden' : '';
 
 			  // This is the Custom Google Translate Location for the old State Template Version 4
-			  $custom_translate = 4 == $ver && 'custom' == $ca_google_trans_enabled && ! empty( $ca_google_trans_page ) ? sprintf( '<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url( $ca_google_trans_page ), $ca_google_trans_icon ) : '';
+			  $custom_translate = 4 === $ver && 'custom' === $ca_google_trans_enabled && ! empty( $ca_google_trans_page ) ? sprintf( '<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url( $ca_google_trans_page ), $ca_google_trans_icon ) : '';
 
 		?>
 		<div id="head-search" class="search-container<?php print $search; ?> hidden-print" role="region" aria-labelledby="search-expanded">
@@ -127,7 +127,7 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 
 	<?php
 	// This is the Standard Google Translate Location for the old State Template Version 4
-	if ( ( true === $ca_google_trans_enabled || 'standard' == $ca_google_trans_enabled ) && 4 == $ver ) :
+	if ( ( true === $ca_google_trans_enabled || 'standard' === $ca_google_trans_enabled ) && 4 === $ver ) :
 		?>
 	<div id="google_translate_element" class="hidden-print standard-translate"></div>
 	<?php endif; ?>

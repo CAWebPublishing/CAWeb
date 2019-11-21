@@ -241,7 +241,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 		}
 
-		if ( 'on' == $all_categories_button ) {
+		if ( 'on' === $all_categories_button ) {
 			$cat_array = get_terms(
 				'category',
 				array(
@@ -254,7 +254,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			$cat_array = $include_categories;
 		}
 
-		if ( 'on' == $all_tags_button ) {
+		if ( 'on' === $all_tags_button ) {
 			$tag_array = array();
 			// $tag_array = get_tags( array( 'fields' => 'names' ) );
 		} elseif ( '' !== $include_tags ) {
@@ -268,11 +268,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		setlocale( LC_MONETARY, 'en_US.UTF-8' );
 
 		if ( ! empty( $list_title ) ) {
-			if ( 'h-1' == $title_size ) {
+			if ( 'h-1' === $title_size ) {
 				$list_title = sprintf( '<h1>%1$s</h1>', $list_title );
-			} elseif ( 'h-2' == $title_size ) {
+			} elseif ( 'h-2' === $title_size ) {
 				$list_title = sprintf( '<h2>%1$s</h2>', $list_title );
-			} elseif ( 'h-3' == $title_size ) {
+			} elseif ( 'h-3' === $title_size ) {
 				$list_title = sprintf( '<h3>%1$s</h3>', $list_title );
 			}
 		}
@@ -282,7 +282,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		global $faq_accordion_count;
 
 		foreach ( $all_posts as $a => $p ) {
-			if ( $posts_number !== -1 && 0 == $posts_number ) {
+			if ( $posts_number !== -1 && 0 === $posts_number ) {
 				break;
 			}
 			// Get the CAWeb Post Handler
@@ -295,10 +295,10 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 
 			// if the hanlder is an object, construct the appropriate list item
 			if ( is_object( $post_content_handler ) ) {
-				if ( 'faqs-list' == $style ) {
+				if ( 'faqs-list' === $style ) {
 					$faqs .= $this->createListView( $style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count );
 
-					if ( 'accordion' == $faq_style ) {
+					if ( 'accordion' === $faq_style ) {
 						$faq_accordion_count++;
 					}
 				} else {
@@ -312,7 +312,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$class = sprintf( ' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
 
 		if ( ! empty( $faqs ) ) {
-			if ( 'toggle' == $faq_style ) {
+			if ( 'toggle' === $faq_style ) {
 				$output = sprintf( '<ul class="accordion-list list-overstated" role="tablist" >%1$s</ul>', $faqs );
 			} else {
 				$output = $faqs;
@@ -334,7 +334,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// News List
 			case 'news-list':
 					// if post contains a CAWeb News Post Handler
-				if ( 'news' == $layout ) {
+				if ( 'news' === $layout ) {
 					$postCount--;
 					return $this->createNews( $pHandler, $pID, $pURL, $pTitle, $featured_image );
 				}
@@ -344,7 +344,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// Profile List
 			case 'profile-list':
 				// if post contains a CAWeb Profile Post Handler
-				if ( 'profile' == $layout ) {
+				if ( 'profile' === $layout ) {
 					$postCount--;
 					return $this->createProfile( $pHandler, $pID, $pURL, $featured_image );
 				}
@@ -353,7 +353,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// Job List
 			case 'jobs-list':
 					// if post contains a CAWeb Job Post Handler
-				if ( 'jobs' == $layout ) {
+				if ( 'jobs' === $layout ) {
 					$postCount--;
 					return $this->createJob( $pHandler, $pURL, $pTitle );
 				}
@@ -363,7 +363,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			case 'events-list':
 				// if post contains a CAWeb Event Post Handler
 
-				if ( 'event' == $layout ) {
+				if ( 'event' === $layout ) {
 					$postCount--;
 					return $this->createEvent( $pHandler, $pID, $pURL, $pTitle, $featured_image );
 				}
@@ -372,7 +372,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// Course List
 			case 'course-list':
 				// if post contains a CAWeb Course Post Handler
-				if ( 'course' == $layout ) {
+				if ( 'course' === $layout ) {
 					$postCount--;
 					return $this->createCourse( $pHandler, $pID, $pURL, $pTitle, $featured_image );
 				}
@@ -381,7 +381,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// Exam List
 			case 'exams-list':
 				// if post contains a CAWeb Course Post Handler
-				if ( 'exam' == $layout ) {
+				if ( 'exam' === $layout ) {
 					$postCount--;
 					return $this->createExam( $pHandler, $pURL, $pTitle );
 				}
@@ -391,7 +391,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			// FAQs List
 			case 'faqs-list':
 				// if post contains a CAWeb FAQ Post Handler
-				if ( 'faqs' == $layout ) {
+				if ( 'faqs' === $layout ) {
 					$postCount--;
 					return $this->createFAQ( $pHandler, $faqStyle, $postCount, $pTitle, $faqCount );
 				}
@@ -416,7 +416,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$course_title = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle );
 		$hasThumbnail = has_post_thumbnail( $pID );
 
-		$image = 'on' == $featured_image && $hasThumbnail ?
+		$image = 'on' === $featured_image && $hasThumbnail ?
 			sprintf( '<div class="thumbnail" >%1$s</div>', caweb_get_the_post_thumbnail( $pID, array( 70, 70 ) ) ) : '';
 
 		$excerpt = caweb_get_excerpt( $cHandler->content, 20, $pID );
@@ -454,7 +454,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 	function createEvent( $cHandler, $pID, $pURL, $pTitle, $featured_image ) {
 		$hasThumbnail = has_post_thumbnail( $pID );
 
-		$thumbnail = 'on' == $featured_image ?
+		$thumbnail = 'on' === $featured_image ?
 			sprintf( '<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail( $pID, array( 150, 100 ) ) ) : '';
 
 		$event_title = sprintf( '<h5><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $pURL, $pTitle );
@@ -476,7 +476,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$pub = ( ! empty( $cHandler->exam_published_date ) ?
 				sprintf( '<div class="published">Published: <time>%1$s</time></div>', gmdate( 'M j, Y', strtotime( $cHandler->exam_published_date ) ) ) : '' );
 
-		$filing_date = ( ! empty( $cHandler->exam_final_filing_date_chooser ) && 'on' == $cHandler->exam_final_filing_date_chooser ?
+		$filing_date = ( ! empty( $cHandler->exam_final_filing_date_chooser ) && 'on' === $cHandler->exam_final_filing_date_chooser ?
 						sprintf( '<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate( 'n/j/Y', strtotime( $cHandler->exam_final_filing_date_picker ) ) ) :
 						sprintf(
 							'<div class="filing-date">Final Filing Date: <time>%1$s</time></div>',
@@ -497,11 +497,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 	}
 
 	function createFAQ( $cHandler, $style, $postCount, $pTitle, $faqCount ) {
-		if ( 'toggle' == $style ) {
+		if ( 'toggle' === $style ) {
 			return sprintf( '<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $pTitle, $cHandler->content );
 		}
 
-		if ( 'accordion' == $style ) {
+		if ( 'accordion' === $style ) {
 			$open_faq = empty( $faqCount ) || 0 === $faqCount;
 
 			$faqs = sprintf(
@@ -519,12 +519,12 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 	}
 
 	function createGeneral( $cHandler, $pID, $pURL, $pTitle, $featured_image ) {
-		$image = 'on' == $featured_image ? sprintf( '<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail( $pID, array( 150, 100 ) ) ) : '';
+		$image = 'on' === $featured_image ? sprintf( '<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', caweb_get_the_post_thumbnail( $pID, array( 150, 100 ) ) ) : '';
 
 		$general_title = sprintf( '<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca; background: none;">%2$s</a></h5>', $pURL, $pTitle );
 
 		$excerpt = caweb_get_excerpt( $cHandler->content, 45, $pID );
-		$excerpt = sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' == $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt );
+		$excerpt = sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' === $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt );
 
 		return sprintf( '<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt );
 	}
@@ -542,7 +542,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$location = ( ! empty( $location ) ? sprintf( '<div class="location">Location: %1$s</div>', implode( ', ', $location ) ) : '' );
 
 		$filing_date = '';
-		if ( ! empty( $cHandler->job_final_filing_date_chooser ) && 'on' == $cHandler->job_final_filing_date_chooser ) {
+		if ( ! empty( $cHandler->job_final_filing_date_chooser ) && 'on' === $cHandler->job_final_filing_date_chooser ) {
 			if ( isset( $cHandler->job_final_filing_date_picker ) && ! empty( $cHandler->job_final_filing_date_picker ) ) {
 				$job_final_filing_date_picker = gmdate( 'n/j/Y', strtotime( $cHandler->job_final_filing_date_picker ) );
 				$filing_date                  = sprintf( 'Final Filing Date:<time>%1$s</time><br />', $job_final_filing_date_picker );
@@ -562,7 +562,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$job_salary_max = sprintf( '  &mdash; %1$s', $job_salary_max );
 
 		$job_salary = '';
-		$job_salary = ( 'on' == $cHandler->show_job_salary ?
+		$job_salary = ( 'on' === $cHandler->show_job_salary ?
 		sprintf( '<div class="salary-range">Salary Range: %1$s%2$s</div>', $job_salary_min, $job_salary_max ) : '' );
 
 		$job_position = '';
@@ -591,12 +591,12 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 		$hasThumbnail = has_post_thumbnail( $pID );
 
 		$news_title = sprintf( '<div class="headline"><a href="%1$s">%2$s</a></div>', $pURL, $pTitle );
-		if ( ! $hasThumbnail || 'off' == $featured_image ) {
+		if ( ! $hasThumbnail || 'off' === $featured_image ) {
 			$image = '';
 		} else {
 			$this->add_classname( 'indent' );
 			$thumbnail = caweb_get_the_post_thumbnail( $pID, array( 150, 100 ) );
-			$image     = 'on' == $featured_image ? sprintf( '<div class="thumbnail">%1$s</div>', $thumbnail ) : '';
+			$image     = 'on' === $featured_image ? sprintf( '<div class="thumbnail">%1$s</div>', $thumbnail ) : '';
 		}
 
 		$excerpt = caweb_get_excerpt( $cHandler->content, 30, $pID );
@@ -619,11 +619,11 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 	function createProfile( $cHandler, $pID, $pURL, $featured_image ) {
 		$hasThumbnail = has_post_thumbnail( $pID );
 
-		if ( ! $hasThumbnail || 'off' == $featured_image ) {
+		if ( ! $hasThumbnail || 'off' === $featured_image ) {
 			$this->add_classname( 'no-thumbnail' );
 		}
 
-		$thumbnail = 'on' == $featured_image && $hasThumbnail ?
+		$thumbnail = 'on' === $featured_image && $hasThumbnail ?
 			sprintf( '<div class="thumbnail">%1$s</div>', caweb_get_the_post_thumbnail( $pID, array( 75, 75 ) ) ) : '';
 
 		$t = sprintf(

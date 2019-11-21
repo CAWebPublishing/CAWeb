@@ -108,13 +108,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 
 			$original_title = '';
 
-			if ( 'taxonomy' == $item->type ) {
+			if ( 'taxonomy' === $item->type ) {
 				$original_title = get_term_field( 'name', $item->object_id, $item->object, 'raw' );
 
 				if ( is_wp_error( $original_title ) ) {
 					$original_title = false;
 				}
-			} elseif ( 'post_type' == $item->type ) {
+			} elseif ( 'post_type' === $item->type ) {
 				$original_object = get_post( $item->object_id );
 
 				$original_title = get_the_title( $original_object->ID );
@@ -126,7 +126,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 
 				'menu-item-' . esc_attr( $item->object ),
 
-				'menu-item-edit-' . ( ( isset( $_GET['edit-menu-item'] ) && $item_id == $_GET['edit-menu-item'] ) ? 'active' : 'inactive' ),
+				'menu-item-edit-' . ( ( isset( $_GET['edit-menu-item'] ) && $item_id === $_GET['edit-menu-item'] ) ? 'active' : 'inactive' ),
 
 			);
 
@@ -138,7 +138,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 				// translators: %s: title of menu item which is invalid
 
 				$title = sprintf( __( '%s (Invalid)' ), $item->title );
-			} elseif ( isset( $item->post_status ) && 'draft' == $item->post_status ) {
+			} elseif ( isset( $item->post_status ) && 'draft' === $item->post_status ) {
 				$classes[] = 'pending';
 
 				// translators: %s: title of menu item in draft status
@@ -146,11 +146,11 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 				$title = sprintf( __( '%s (Pending)' ), $item->title );
 			}
 
-			$title = ( ! isset( $item->label ) || '' == $item->label ) ? $title : $item->label;
+			$title = ( ! isset( $item->label ) || '' === $item->label ) ? $title : $item->label;
 
 			$submenu_text = '';
 
-			if ( 0 == $depth ) {
+			if ( 0 === $depth ) {
 				$submenu_text = 'style="display: none;"';
 			} ?>
 
@@ -213,7 +213,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 				<a class="item-edit" id="edit-<?php print $item_id; ?>" title="<?php esc_attr_e( 'Edit Menu Item' ); ?>" href="
 														  <?php
 
-															print ( isset( $_GET['edit-menu-item'] ) && $item_id == $_GET['edit-menu-item'] ) ? admin_url( 'nav-menus.php' ) : add_query_arg( 'edit-menu-item', $item_id, remove_query_arg( $removed_args, admin_url( 'nav-menus.php#menu-item-settings-' . $item_id ) ) );
+															print ( isset( $_GET['edit-menu-item'] ) && $item_id === $_GET['edit-menu-item'] ) ? admin_url( 'nav-menus.php' ) : add_query_arg( 'edit-menu-item', $item_id, remove_query_arg( $removed_args, admin_url( 'nav-menus.php#menu-item-settings-' . $item_id ) ) );
 															?>
 							"><?php _e( 'Edit Menu Item' ); ?></a>
 
@@ -225,7 +225,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 
 	<div class="menu-item-settings" id="menu-item-settings-<?php print $item_id; ?>">
 
-			<?php if ( 'custom' == $item->type ) : ?>
+			<?php if ( 'custom' === $item->type ) : ?>
 
 		<p class="field-url description description-wide">
 
@@ -342,7 +342,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 
 		<div class="menu-item-actions description-wide submitbox">
 
-			<?php if ( 'custom' != $item->type && $original_title !== false ) : ?>
+			<?php if ( 'custom' !== $item->type && $original_title !== false ) : ?>
 
 			<p class="link-to-original">
 

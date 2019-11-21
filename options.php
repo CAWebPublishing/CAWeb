@@ -25,7 +25,7 @@ function caweb_admin_menu() {
 		// Remove Themes and Background option under Appearance menu
 		if ( isset( $submenu['themes.php'] ) ) {
 			foreach ( $submenu['themes.php'] as $m => $menu_data ) {
-				if ( 'Background' == $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
+				if ( 'Background' === $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
 					unset( $submenu['themes.php'][ $m ] );
 				}
 			}
@@ -48,7 +48,7 @@ function caweb_admin_menu() {
 		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
 	}
 
-	if ( ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) && 1 == get_current_blog_id() ) {
+	if ( ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) && 1 === get_current_blog_id() ) {
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
 	}
@@ -108,7 +108,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 		}
 
 		if ( empty( $values[ $opt ] ) &&
-					( 'caweb_external_css' == $opt || 'caweb_external_js' == $opt ) ) {
+					( 'caweb_external_css' === $opt || 'caweb_external_js' === $opt ) ) {
 			$values[ $opt ] = array();
 		}
 	}
@@ -154,12 +154,12 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 	// Save CAWeb Options
 	foreach ( $values as $opt => $val ) {
-		if ( 'on' == $val ) {
+		if ( 'on' === $val ) {
 			$val = true;
-		} elseif ( 'caweb_external_css' == $opt ) {
+		} elseif ( 'caweb_external_css' === $opt ) {
 			$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
 		}
-		if ( 'caweb_external_js' == $opt ) {
+		if ( 'caweb_external_js' === $opt ) {
 			$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
 		}
 		update_option( $opt, $val );
@@ -270,7 +270,7 @@ function caweb_save_api_options( $values = array() ) {
 function caweb_pre_update_site_option_caweb_password( $value, $old_value, $option ) {
 	$pwd = $value;
 
-	if ( base64_decode( $value ) == $old_value ) {
+	if ( base64_decode( $value ) === $old_value ) {
 		$pwd = $old_value;
 	}
 
@@ -553,7 +553,7 @@ function caweb_fav_icon_checker() {
 	$handle = array_splice( $handle, 0, 4 );
 	$handle = implode( '', $handle );
 
-	if ( '00000100' == $handle ) {
+	if ( '00000100' === $handle ) {
 		print true;
 		wp_die(); // this is required to terminate immediately and return a proper response
 	}

@@ -10,7 +10,7 @@ if ( isset( $_POST['caweb_submit'] ) ) {
 
 // Site Version variables
 $ver           = get_option( 'ca_site_version', 5 );
-$legacy        = 4 == $ver ? '' : 'hidden';
+$legacy        = 4 === $ver ? '' : 'hidden';
 $modern        = 5 <= $ver ? '' : 'hidden';
 $legacySchemes = caweb_color_schemes( 4 );
 $schemes       = caweb_color_schemes( 0, 'displayname' );
@@ -60,15 +60,15 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 
 	<h2 class="nav-tab-wrapper wp-clearfix">
 
-		<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php print 'general' == $selected_tab ? 'nav-tab-active' : ''; ?>">General Settings</a>
+		<a href="#general-settings" name="general" class="caweb-nav-tab nav-tab <?php print 'general' === $selected_tab ? 'nav-tab-active' : ''; ?>">General Settings</a>
 
-		<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php print 'social-share' == $selected_tab ? 'nav-tab-active' : ''; ?>">Social Media Links</a>
+		<a href="#social-share-settings" name="social-share" class="caweb-nav-tab nav-tab <?php print 'social-share' === $selected_tab ? 'nav-tab-active' : ''; ?>">Social Media Links</a>
 
-		<a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php print 'custom-css' == $selected_tab ? 'nav-tab-active' : ''; ?>">Custom CSS</a>
+		<a href="#custom-css-settings" name="custom-css" class="caweb-nav-tab nav-tab <?php print 'custom-css' === $selected_tab ? 'nav-tab-active' : ''; ?>">Custom CSS</a>
 
-		<a href="#custom-js-settings" name="custom-js" class="caweb-nav-tab nav-tab <?php print 'custom-js' == $selected_tab ? 'nav-tab-active' : ''; ?>">Custom JS</a>
+		<a href="#custom-js-settings" name="custom-js" class="caweb-nav-tab nav-tab <?php print 'custom-js' === $selected_tab ? 'nav-tab-active' : ''; ?>">Custom JS</a>
 
-		<a href="#alert-banners" name="alert-banners" class="caweb-nav-tab nav-tab <?php print 'alert-banners' == $selected_tab ? 'nav-tab-active' : ''; ?> extra">Alert Banners</a>
+		<a href="#alert-banners" name="alert-banners" class="caweb-nav-tab nav-tab <?php print 'alert-banners' === $selected_tab ? 'nav-tab-active' : ''; ?> extra">Alert Banners</a>
 	</h2>
 </div>
 <form id="caweb-options-form" action="<?php print admin_url( 'admin.php?page=caweb_options' ); ?>" method="POST" enctype="multipart/form-data">
@@ -77,7 +77,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 
 	<div id="caweb-options-container">
 		<!-- General Settings -->
-		<div id="general" class="<?php print 'general' == $selected_tab ? '' : 'hidden'; ?>">
+		<div id="general" class="<?php print 'general' === $selected_tab ? '' : 'hidden'; ?>">
 
 			<h1 class="option">General Settings</h1>
 
@@ -103,9 +103,9 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 					</th>
 					<td>
 						<select id="ca_site_version" name="ca_site_version">
-							<option value="5" <?php print 5 == $ver ? 'selected="selected"' : ''; ?>>Version 5.0</option>
-							<?php if ( 4 == $ver ) : ?>
-							<option value="4" <?php print 4 == $ver ? 'selected="selected"' : ''; ?>>Version 4.0</option>
+							<option value="5" <?php print 5 === $ver ? 'selected="selected"' : ''; ?>>Version 5.0</option>
+							<?php if ( 4 === $ver ) : ?>
+							<option value="4" <?php print 4 === $ver ? 'selected="selected"' : ''; ?>>Version 4.0</option>
 							<?php endif; ?>
 						</select>
 					</td>
@@ -117,9 +117,9 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 					</th>
 					<td>
 						<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-							<option value="megadropdown" <?php print 'megadropdown' == $navigation_menu ? 'selected="selected"' : ''; ?>>Mega Drop</option>
-							<option value="dropdown" <?php print 'dropdown' == $navigation_menu ? 'selected="selected"' : ''; ?>>Drop Down</option>
-							<option value="singlelevel" <?php print 'singlelevel' == $navigation_menu ? 'selected="selected"' : ''; ?>>Single Level</option>
+							<option value="megadropdown" <?php print 'megadropdown' === $navigation_menu ? 'selected="selected"' : ''; ?>>Mega Drop</option>
+							<option value="dropdown" <?php print 'dropdown' === $navigation_menu ? 'selected="selected"' : ''; ?>>Drop Down</option>
+							<option value="singlelevel" <?php print 'singlelevel' === $navigation_menu ? 'selected="selected"' : ''; ?>>Single Level</option>
 
 						</select>
 					</td>
@@ -150,7 +150,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 									'<option value="%1$s"%2$s%3$s>%4$s</option>',
 									$key,
 									! array_key_exists( $key, $legacySchemes ) ? sprintf( ' class="extra %1$s" ', $modern ) : '',
-									$key == $color_scheme ? ' selected="selected"' : '',
+									$key === $color_scheme ? ' selected="selected"' : '',
 									$data
 								);
 							}
@@ -305,9 +305,9 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 					</th>
 					<td>
 						<select id="header_ca_branding_alignment" name="header_ca_branding_alignment">
-							<option value="left" <?php print 'left' == $header_branding_alignment ? ' selected="selected"' : ''; ?>>Left</option>
-							<option value="center" <?php print 'center' == $header_branding_alignment ? ' selected="selected"' : ''; ?>>Center</option>
-							<option value="right" <?php print 'right' == $header_branding_alignment ? ' selected="selected"' : ''; ?>>Right</option>
+							<option value="left" <?php print 'left' === $header_branding_alignment ? ' selected="selected"' : ''; ?>>Left</option>
+							<option value="center" <?php print 'center' === $header_branding_alignment ? ' selected="selected"' : ''; ?>>Center</option>
+							<option value="right" <?php print 'right' === $header_branding_alignment ? ' selected="selected"' : ''; ?>>Right</option>
 
 						</select>
 					</td>
@@ -361,7 +361,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 						<div class="tooltip">Enable Google Translate
 							<span class="tooltiptext">Displays the Google translate feature at the top right of each page.</span></div>
 					</th>
-					<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?php print false === $google_translate_mode || 'none' == $google_translate_mode ? ' checked="checked"' : ''; ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?php print true === $google_translate_mode || 'standard' == $google_translate_mode ? ' checked="checked"' : ''; ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?php print 'custom' == $google_translate_mode ? ' checked="checked"' : ''; ?>>Custom</label></td>
+					<td><label><input type="radio" value="none" name="ca_google_trans_enabled" <?php print false === $google_translate_mode || 'none' === $google_translate_mode ? ' checked="checked"' : ''; ?>>None </label><label><input type="radio" value="standard" name="ca_google_trans_enabled" <?php print true === $google_translate_mode || 'standard' === $google_translate_mode ? ' checked="checked"' : ''; ?>>Standard </label><label><input type="radio" value="custom" name="ca_google_trans_enabled" <?php print 'custom' === $google_translate_mode ? ' checked="checked"' : ''; ?>>Custom</label></td>
 				</tr>
 				<tr <?php print $google_translate_enabled; ?>>
 					<th scope="row">Translate Page</th>
@@ -379,7 +379,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 																												$icons    = caweb_get_icon_list( -1, '', true );
 																												$iconList = '';
 							foreach ( $icons as $i ) {
-								printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $google_translate_icon == $i ? ' selected' : '' );
+								printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $google_translate_icon === $i ? ' selected' : '' );
 							}
 							?>
 							<input type="hidden" name="ca_google_trans_icon" value="<?php print $google_translate_icon; ?>">
@@ -394,7 +394,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 			</table>
 		</div>
 		<!-- Social Media Links -->
-		<div id="social-share" class="<?php print 'social-share' == $selected_tab ? '' : 'hidden'; ?>">
+		<div id="social-share" class="<?php print 'social-share' === $selected_tab ? '' : 'hidden'; ?>">
 			<h1 class="option">Social Media Links</h1>
 
 			<p>Enter the URL for each of your social media profiles.</p>
@@ -415,7 +415,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 				?>
 			</table>
 		</div>
-		<div id="custom-css" class="<?php print 'custom-css' == $selected_tab ? '' : 'hidden'; ?>">
+		<div id="custom-css" class="<?php print 'custom-css' === $selected_tab ? '' : 'hidden'; ?>">
 			<h1 class="option">Upload CSS</h1>
 			<table class="form-table">
 				<tr>
@@ -463,7 +463,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 		</div>
 
 		<!-- Custom JS -->
-		<div id="custom-js" class="<?php print 'custom-js' == $selected_tab ? '' : 'hidden'; ?>">
+		<div id="custom-js" class="<?php print 'custom-js' === $selected_tab ? '' : 'hidden'; ?>">
 			<h1 class="option">Upload JS</h1>
 			<table class="form-table">
 				<tr>
@@ -510,7 +510,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 
 		</div>
 
-		<div id="alert-banners" class="<?php print 'alert-banners' == $selected_tab ? '' : 'hidden'; ?>">
+		<div id="alert-banners" class="<?php print 'alert-banners' === $selected_tab ? '' : 'hidden'; ?>">
 			<h1 class="option">Create Alert Banner <a class="dashicons dashicons-plus-alt" id="addAlertBanner" title="Add Alert Banner (Note: This feature has a known WordPress issue when using the Chrome Browser.)"></a></h1>
 			<ul id="cawebAlerts">
 				<?php
@@ -550,19 +550,19 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 	foreach ( $alerts as $a => $data ) {
 		$iconList = '';
 		foreach ( $icons as $i ) {
-			$iconList .= sprintf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $i == $data['icon'] ? ' selected' : '' );
+			$iconList .= sprintf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $i === $data['icon'] ? ' selected' : '' );
 		}
 
 		printf(
 			'<div id="caweb-alert-%1$s" style="display:none;"><form id="caweb-options-form" class="caweb-alert-%1$s"><h3>Alert Settings</h3><p>Display on</p><label><input type="radio" name="alert-display-%1$s" value="home"%2$s>Home Page Only</label><label><input type="radio" name="alert-display-%1$s" value="all"%3$s>All Pages</label><p>Banner Color</p><input type="color" name="alert-banner-color-%1$s" value="%4$s"><p><label>Add Read More Button <input type="checkbox" name="alert-read-more-%1$s"%5$s class="alert-read-more"></label></p><div%6$s><p>Read More Button Text</p><input type="text" name="alert-read-more-text-%1$s" value="%12$s"><i>(Max Characters: 16)</i><p>Read More Button URL</p><input type="text" name="alert-read-more-url-%1$s" value="%7$s"><label>Open link in</label><label><input type="radio" name="alert-read-more-target-%1$s" value="_blank"%8$s>New Tab</label><label><input type="radio" name="alert-read-more-target-%1$s"%9$s>Current Tab</label></div><p>Add Icon <span class="dashicons dashicons-image-rotate resetAlertIcon"></span></p><ul id="caweb-icon-menu" class="noUpdate">%10$s<input name="alert-icon-%1$s" type="hidden" value="%11$s"></ul><a class="button button-primary ok">Ok</a><a class="button button-primary cancel">Cancel</a></form></div>',
 			$a + 1,
-			'home' == $data['page_display'] ? ' checked="true" data-display="true"' : '',
-			'all' == $data['page_display'] ? ' checked="true" data-display="true"' : '',
+			'home' === $data['page_display'] ? ' checked="true" data-display="true"' : '',
+			'all' === $data['page_display'] ? ' checked="true" data-display="true"' : '',
 			$data['color'],
-			'on' == $data['button'] ? ' checked="true"' : '',
+			'on' === $data['button'] ? ' checked="true"' : '',
 			'on' !== $data['button'] ? ' class="hidden"' : '',
 			$data['url'],
-			'_blank' == $data['target'] ? ' checked="true"' : '',
+			'_blank' === $data['target'] ? ' checked="true"' : '',
 			empty( $data['target'] ) ? ' checked="true"' : '',
 			$iconList,
 			$data['icon'],

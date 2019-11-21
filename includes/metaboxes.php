@@ -31,7 +31,7 @@ function caweb_admin_head_nav_menus() {
  * @param WP_Post $post Current post object.
  */
 function caweb_page_identifier_metabox_callback( $post ) {
-	if ( '' == get_post_meta( $post->ID, 'ca_custom_initial_state', true ) ) {
+	if ( '' === get_post_meta( $post->ID, 'ca_custom_initial_state', true ) ) {
 		update_post_meta( $post->ID, 'ca_custom_initial_state', true );
 		update_post_meta( $post->ID, 'ca_default_navigation_menu', get_option( 'ca_default_navigation_menu' ) );
 	}
@@ -48,19 +48,19 @@ function caweb_page_identifier_metabox_callback( $post ) {
 		print( ! get_option( 'ca_default_post_title_display', false ) ? 'checked="checked"' : '' );
 		// if the post does have a ca_custom_post_title_display meta field let the user selected option override
 	} else {
-		print( get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) == true ? 'checked="checked"' : '' );
+		print( get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) === true ? 'checked="checked"' : '' );
 	}
 	?>
   >
 	Display Title on Page
 
-	<?php if ( get_option( 'ca_menu_selector_enabled' ) == true ) : ?>
+	<?php if ( get_option( 'ca_menu_selector_enabled' ) === true ) : ?>
 	<p>You may display a different Navigation Menu on this page.</p>
 
 	<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-		<option value="megadropdown" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) == 'megadropdown' ? 'selected="selected"' : '' ); ?>>Mega Drop</option>
-		<option value="dropdown" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) == 'dropdown' ? 'selected="selected"' : '' ); ?>>Drop Down</option>
-		<option value="singlelevel" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) == 'singlelevel' ? 'selected="selected"' : '' ); ?>>Single Level</option>
+		<option value="megadropdown" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) === 'megadropdown' ? 'selected="selected"' : '' ); ?>>Mega Drop</option>
+		<option value="dropdown" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) === 'dropdown' ? 'selected="selected"' : '' ); ?>>Drop Down</option>
+		<option value="singlelevel" <?php print( get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) === 'singlelevel' ? 'selected="selected"' : '' ); ?>>Single Level</option>
 
 
 	</select>
@@ -87,7 +87,7 @@ function caweb_save_post( $post_id, $post ) {
 	$option_title_display = ( isset( $_POST['ca_custom_post_title_display'] ) ? $_POST['ca_custom_post_title_display'] : '' );
 	update_post_meta( $post->ID, 'ca_custom_post_title_display', $option_title_display );
 
-	if ( get_option( 'ca_menu_selector_enabled' ) == true ) {
+	if ( get_option( 'ca_menu_selector_enabled' ) === true ) {
 		update_post_meta( $post->ID, 'ca_default_navigation_menu', $_POST['ca_default_navigation_menu'] );
 	}
 }

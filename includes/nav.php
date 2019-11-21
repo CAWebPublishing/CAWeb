@@ -48,7 +48,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			$theme_location = $args->theme_location;
 			// Header Menu Construction
-			if ( 'header-menu' == $theme_location && ! empty( $args->menu ) ) {
+			if ( 'header-menu' === $theme_location && ! empty( $args->menu ) ) {
 				$nav_menu = $this->createNavMenu( $args );
 
 				// If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link
@@ -67,7 +67,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				);
 
 				// Footer Menu Construction
-			} elseif ( 'footer-menu' == $theme_location && ! empty( $args->menu ) ) {
+			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
 				$nav_menu  = $this->createFooterMenu( $args );
 				$poweredBy = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? sprintf( '<span class="pull-right">Powered by: <a href="%1$s" target="_blank">CAWeb Publishing Service</a></span>', wp_get_theme()->get( 'ThemeURI' ) ) : '';
 
@@ -85,10 +85,10 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 		public function caweb_menu_fail( $args ) {
 			$nav_menu = '';
-			if ( 'header-menu' == $args['theme_location'] ) {
+			if ( 'header-menu' === $args['theme_location'] ) {
 				$nav_menu = '<nav id="navigation" class="main-navigation hidden-print"><ul id="nav_list" class="top-level-nav">
                         <li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span><strong>There Is No Navigation Menu Set</strong></a></li></ul></nav>';
-			} elseif ( 'footer-menu' == $args['theme_location'] ) {
+			} elseif ( 'footer-menu' === $args['theme_location'] ) {
 				$nav_menu    = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>';
 				$socialLinks = '';
 				$nav_menu    = sprintf(
@@ -117,7 +117,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				// If a top level nav item,
 				// menu_item_parent= 0
-				if ( 0 == $item->menu_item_parent ) {
+				if ( 0 === $item->menu_item_parent ) {
 					$sub_nav   = '';
 					$item_meta = get_post_meta( $item->ID );
 
@@ -186,7 +186,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			foreach ( $menuitems as $i => $item ) {
 				// If a top level nav item,
 				// menu_item_parent= 0
-				if ( 0 == $item->menu_item_parent ) {
+				if ( 0 === $item->menu_item_parent ) {
 					$item_meta = get_post_meta( $item->ID );
 					// Get array of Sub Nav Items (second-level-links)
 					$childLinks = caweb_get_nav_menu_item_children( $item->ID, $menuitems );
@@ -215,8 +215,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					);
 
 					// If there are child links create the sub-nav
-					if ( 0 < $childCount && 'singlelevel' != $args->style ) {
-						if ( 'megadropdown' == $args->style ) {
+					if ( 0 < $childCount && 'singlelevel' !== $args->style ) {
+						if ( 'megadropdown' === $args->style ) {
 							// Sub nav image variables
 							$nav_img      = $item_meta['_caweb_menu_image'][0];
 							$nav_img_side = $item_meta['_caweb_menu_image_side'][0];
@@ -225,8 +225,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							if ( 4.5 <= $args->version ) {
 								$sub_img_class = sprintf(
 									'%1$s %2$s',
-									( 'quarter' == $nav_img_size ? 'three-quarters' : 'half' ),
-									( 'left' == $nav_img_side ? 'offset-' . $nav_img_size : '' )
+									( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
+									( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
 								);
 
 								$sub_img_div = sprintf(
@@ -246,7 +246,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							} else {
 								$sub_img_class = sprintf(
 									'with-image-%1$s-%2$s',
-									( 'quarter' == $nav_img_size ? 'sm' : 'md' ),
+									( 'quarter' === $nav_img_size ? 'sm' : 'md' ),
 									$nav_img_side
 								);
 
@@ -291,13 +291,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$icon = ( ! empty( $icon ) ? caweb_get_icon_span( $icon ) : '' );
 
 				// Get desc if present
-				$desc = ( '' != $item->description ? sprintf( '<div class="link-description">%1$s</div>', $item->description ) : '&nbsp;' );
+				$desc = ( '' !== $item->description ? sprintf( '<div class="link-description">%1$s</div>', $item->description ) : '&nbsp;' );
 
-				$li_unit = 'megadropdown' == get_option( 'ca_default_navigation_menu', 'megadropdown' ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
+				$li_unit = 'megadropdown' === get_option( 'ca_default_navigation_menu', 'megadropdown' ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
 
 				// if version 5
 				if ( 5.0 <= $args->version ) {
-					if ( 'unit3' != $li_unit ) {
+					if ( 'unit3' !== $li_unit ) {
 						// Create Link
 						$sub_nav .= sprintf(
 							'<li %1$s title="%2$s" %3$s><a href="%4$s" class="second-level-link"%5$s>%6$s%7$s%8$s</a></li>',
@@ -308,14 +308,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
 							$icon,
 							$item->title,
-							( 'unit1' != $li_unit ? $desc : '' )
+							( 'unit1' !== $li_unit ? $desc : '' )
 						);
 					} else {
 						// Get nav media if present
 						$nav_media_image    = $item_meta['_caweb_menu_media_image'][0];
 						$nav_media_alt_text = $item_meta['_caweb_nav_media_image_alt_text'][0];
 
-						$nav_media = ( 'megadropdown' == $args->style ?
+						$nav_media = ( 'megadropdown' === $args->style ?
 														sprintf(
 															'<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
 															$item->url,
@@ -349,7 +349,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
 						$icon,
 						$item->title,
-						( 'unit1' != $li_unit ? $desc : '' )
+						( 'unit1' !== $li_unit ? $desc : '' )
 					);
 				}
 			}
@@ -367,7 +367,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
 			foreach ( $menuitems as $item ) {
-				if ( $item->menu_item_parent == 0 ) {
+				if ( $item->menu_item_parent === 0 ) {
 					$navLinks .= sprintf(
 						'<li%1$stitle="%2$s"%3$s><a href="%4$s"%5$s>%6$s</a></li>',
 						( ! empty( $item->classes ) ? sprintf( ' class="%1$s" ', implode( ' ', $item->classes ) ) : '' ),
@@ -430,7 +430,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$nav_media_image_alt_text = ! empty( $tmp['_caweb_nav_media_image_alt_text'][0] ) ? $tmp['_caweb_nav_media_image_alt_text'][0] : ''; ?>
 
 
-<div class="icon_selector <?php print( ! empty( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' != $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ); ?> description description-wide">
+<div class="icon_selector <?php print( ! empty( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' !== $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ); ?> description description-wide">
 	<p>Select an Icon
 		<input name="<?php print $item_id; ?>_icon" id="<?php print $item_id; ?>_icon" value="<?php print $icon; ?>" type="text" /></p>
 
@@ -439,26 +439,26 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$icons    = caweb_get_icon_list( -1, '', true );
 			$iconList = '';
 			foreach ( $icons as $i ) {
-				printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $icon == $i ? ' selected' : '' );
+				printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $icon === $i ? ' selected' : '' );
 			}
 			?>
 		<input type="hidden" name="ca_google_trans_icon" value="<?php print get_option( 'ca_google_trans_icon', 'globe' ); ?>">
 	</ul>
 </div>
-<div class="unit_selector <?php print( 0 != $depth ? 'show' : '' ); ?> description description-wide">
+<div class="unit_selector <?php print( 0 !== $depth ? 'show' : '' ); ?> description description-wide">
 	<p><strong>Select a height for the navigation item</strong></p>
 	<select name="<?php print $item_id; ?>_unit_size" class="unit-size-selector" id="unit-size-selector-<?php print $item_id; ?>">
-		<option value="unit1" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit1' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 1 - 50px height</option>
-			<?php if ( 'megadropdown' == get_option( 'ca_default_navigation_menu', 'megadropdown' ) ) : ?>
-		<option value="unit2" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit2' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 2 - 100px height</option>
+		<option value="unit1" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit1' === $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 1 - 50px height</option>
+			<?php if ( 'megadropdown' === get_option( 'ca_default_navigation_menu', 'megadropdown' ) ) : ?>
+		<option value="unit2" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit2' === $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 2 - 100px height</option>
 				<?php if ( 5.0 <= get_option( 'ca_site_version' ) ) : ?>
-		<option value="unit3" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 3 - 100px height w/ Image</option>
+		<option value="unit3" <?php print( isset( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' === $tmp['_caweb_menu_unit_size'][0] ? 'selected="selected"' : '' ); ?>>Unit 3 - 100px height w/ Image</option>
 		<?php endif; ?>
 		<?php endif; ?>
 	</select>
 </div>
 
-<div class="media_image <?php print( 0 != $depth && ! empty( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' == $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ); ?> description description-wide">
+<div class="media_image <?php print( 0 !== $depth && ! empty( $tmp['_caweb_menu_unit_size'][0] ) && 'unit3' === $tmp['_caweb_menu_unit_size'][0] ? 'show' : '' ); ?> description description-wide">
 	<p><strong>Navigation Media Image</strong>
 		<p>
 			<p>Select an Image</p>
@@ -467,8 +467,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			<p>Navigation Media Image Alt Text
 				<input name="<?php print $item_id; ?>_caweb_nav_media_image_alt_text" id="<?php print $item_id; ?>_caweb_nav_media_image_alt_text" value="<?php print $nav_media_image_alt_text; ?>" type="text" /></p>
 </div>
-			<?php if ( 'megadropdown' == get_option( 'ca_default_navigation_menu', 'megadropdown' ) ) : ?>
-<div class="mega_menu_images <?php print( 0 == $depth ? 'show' : '' ); ?> description description-wide ">
+			<?php if ( 'megadropdown' === get_option( 'ca_default_navigation_menu', 'megadropdown' ) ) : ?>
+<div class="mega_menu_images <?php print( 0 === $depth ? 'show' : '' ); ?> description description-wide ">
 	<p><strong>Mega Menu Image Option</strong>
 		<p>
 			<p>Select an Image</p>
@@ -476,20 +476,20 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			<input type="button" value="Browse" id="library-link-<?php print $item_id; ?>" class="library-link" name="<?php print $item_id; ?>_image" data-choose="Choose a Default Image" data-update="Set as Sub Navigation Image" />
 			<p>Select a Side / Select a Size</p>
 			<select name="<?php print $item_id; ?>_image_side">
-				<option value="left" <?php print( ! empty( $tmp['_caweb_menu_image_side'][0] ) && 'left' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ); ?>>Left</option>
-				<option value="right" <?php print( ! empty( $tmp['_caweb_menu_image_side'][0] ) && 'right' == $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ); ?>>Right</option>
+				<option value="left" <?php print( ! empty( $tmp['_caweb_menu_image_side'][0] ) && 'left' === $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ); ?>>Left</option>
+				<option value="right" <?php print( ! empty( $tmp['_caweb_menu_image_side'][0] ) && 'right' === $tmp['_caweb_menu_image_side'][0] ? 'selected="selected"' : '' ); ?>>Right</option>
 			</select>
 			/
 			<select name="<?php print $item_id; ?>_image_size">
-				<option value="quarter" <?php print( ! empty( $tmp['_caweb_menu_image_size'][0] ) && 'quarter' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ); ?>>Quarter</option>
-				<option value="half" <?php print( ! empty( $tmp['_caweb_menu_image_size'][0] ) && 'half' == $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ); ?>>Half</option>
+				<option value="quarter" <?php print( ! empty( $tmp['_caweb_menu_image_size'][0] ) && 'quarter' === $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ); ?>>Quarter</option>
+				<option value="half" <?php print( ! empty( $tmp['_caweb_menu_image_size'][0] ) && 'half' === $tmp['_caweb_menu_image_size'][0] ? 'selected="selected"' : '' ); ?>>Half</option>
 			</select>
 			<p>Select a column layout</p>
 			<select name="<?php print $item_id; ?>_column_count">
-				<option value="" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && '' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>Select layout...</option>
-				<option value="two-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'two-columns' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>2 Columns</option>
-				<option value="three-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'three-columns' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>3 Columns</option>
-				<option value="four-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'four-columns' == $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>4 Columns</option>
+				<option value="" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && '' === $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>Select layout...</option>
+				<option value="two-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'two-columns' === $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>2 Columns</option>
+				<option value="three-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'three-columns' === $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>3 Columns</option>
+				<option value="four-columns" <?php print( ! empty( $tmp['_caweb_menu_column_count'][0] ) && 'four-columns' === $tmp['_caweb_menu_column_count'][0] ? 'selected="selected"' : '' ); ?>>4 Columns</option>
 			</select>
 </div>
 			<?php endif; ?>

@@ -270,7 +270,7 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 	$nav_menu_item_list = array();
 
 	foreach ( (array) $nav_menu_items as $nav_menu_item ) {
-		if ( $nav_menu_item->menu_item_parent == $parent_id ) {
+		if ( $nav_menu_item->menu_item_parent === $parent_id ) {
 			$nav_menu_item_list[] = $nav_menu_item;
 			if ( $depth ) {
 				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
@@ -430,10 +430,10 @@ function caweb_banner_content_filter( $content, $ver = 5 ) {
 		foreach ( $slides as $i => $slide ) {
 			$heading = '';
 			$info    = '';
-			if ( 'on' == $slide->display_banner_info ) {
+			if ( 'on' === $slide->display_banner_info ) {
 				$link = ( ! empty( $slide->button_link ) ? $slide->button_link : '#' );
 
-				if ( ! isset( $slide->display_heading ) || 'on' == $slide->display_heading ) {
+				if ( ! isset( $slide->display_heading ) || 'on' === $slide->display_heading ) {
 					$heading = sprintf( '<span class="title">%1$s<br /></span>', ( isset( $slide->heading ) ? $slide->heading : '' ) );
 				}
 
@@ -617,7 +617,7 @@ if ( ! function_exists( 'caweb_get_excerpt' ) ) {
 
 function caweb_get_the_post_thumbnail( $post = null, $size = 'thumbnail', $attr = '', $pixel_size = array() ) {
 	if ( is_array( $size ) ) {
-		if ( empty( $pixel_size ) && 2 == count( $size ) ) {
+		if ( empty( $pixel_size ) && 2 === count( $size ) ) {
 			$pixel_size = $size;
 		}
 		$size = 'thumbnail';

@@ -44,7 +44,7 @@
 
 	<?php get_footer(); ?>
 
-	<?php if ( 4 == caweb_get_page_version( get_the_ID() ) ) : ?>
+	<?php if ( 4 === caweb_get_page_version( get_the_ID() ) ) : ?>
 	<style>
 		div#head-search {
 			display: none;

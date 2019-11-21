@@ -207,7 +207,7 @@ function caweb_wp_enqueue_scripts() {
 	$frontendJSfile = getMinFile( '/js/frontend.js', 'js' );
 
 	// If on the activation page
-	if ( 'wp-activate.php' == $pagenow ) {
+	if ( 'wp-activate.php' === $pagenow ) {
 		// wp_enqueue_style('caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
 		// wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
 	} else {
@@ -252,7 +252,7 @@ function caweb_wp_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
 function caweb_late_wp_enqueue_scripts() {
 	// If CAWeb is a child theme of Divi, include Accessibility Javascript
-	if ( is_child_theme() && 'Divi' == wp_get_theme()->get( 'Template' ) ) {
+	if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 		wp_register_script( 'caweb-accessibility-scripts', CAWebUri . '/divi/js/accessibility.js', array( 'jquery' ), CAWebVersion, true );
 
 		wp_localize_script(
@@ -303,7 +303,7 @@ function caweb_site_icon_url( $url, $size, $blog_id ) {
 add_action( 'get_header', 'caweb_et_project_get_header' );
 function caweb_et_project_get_header( $name = null ) {
 	// Add template header if using Divi Custom Type 'Project'
-	if ( 'project' == get_post_type( get_the_ID() ) ) {
+	if ( 'project' === get_post_type( get_the_ID() ) ) {
 		locate_template( array( 'header.php' ), true );
 		get_template_part( 'partials/content', 'header' );
 	}
@@ -447,7 +447,7 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 }
 
 // If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
-if ( is_child_theme() && 'Divi' == wp_get_theme()->get( 'Template' ) ) {
+if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	// CAWeb Custom Modules
 	add_action( 'et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init' );
 	function caweb_et_pagebuilder_module_init() {

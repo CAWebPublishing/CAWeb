@@ -7,7 +7,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 			$settings = explode( '|', $settings );
 		}
 
-		return count( $fields ) == count( $settings ) ? array_combine( $fields, $settings ) : $settings;
+		return count( $fields ) === count( $settings ) ? array_combine( $fields, $settings ) : $settings;
 	}
 
 	function create_inline_font_styles( $font_settings ) {

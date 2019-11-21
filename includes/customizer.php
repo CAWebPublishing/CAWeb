@@ -37,22 +37,22 @@ function caweb_customize_controls_enqueue_scripts() {
 function caweb_customizer_v4_option( $customizer ) {
 	$manager = $customizer->manager;
 
-	return 4 == $manager->get_control( 'ca_site_version' )->value() ? true : false;
+	return 4 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
 }
 function caweb_customizer_v5_option( $customizer ) {
 	$manager = $customizer->manager;
 
-	return 5 == $manager->get_control( 'ca_site_version' )->value() ? true : false;
+	return 5 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
 }
 function caweb_customizer_google_trans_custom_option( $customizer ) {
 	$manager = $customizer->manager;
 
-	return 'custom' == $manager->get_control( 'ca_google_trans_enabled' )->value() ? true : false;
+	return 'custom' === $manager->get_control( 'ca_google_trans_enabled' )->value() ? true : false;
 }
 
 // CAWeb Sanitize Callbacks
 function caweb_sanitize_customizer_checkbox( $checked ) {
-	return ( isset( $checked ) && true == $checked ) ? '1' : '0';
+	return ( isset( $checked ) && true === $checked ) ? '1' : '0';
 }
 function caweb_sanitize_option_ca_custom_css( $value, $option ) {
 	return addslashes( $value );
@@ -115,7 +115,7 @@ function caweb_customize_register( $wp_customize ) {
 
 	$versions = array( '5' => 'Version 5' );
 
-	if ( 4 == $site_version ) {
+	if ( 4 === $site_version ) {
 		$versions['4'] = 'Version 4';
 	}
 
@@ -821,7 +821,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					$icons = caweb_get_icon_list( -1, '', true );
 			$iconList      = '';
 			foreach ( $icons as $i ) {
-				printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '' );
+				printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() === $i ? ' selected' : '' );
 			}
 			?>
 

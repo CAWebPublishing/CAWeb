@@ -48,7 +48,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				),
 			);
 
-			if ( true == get_site_option( 'caweb_private_theme_enabled', false ) ) {
+			if ( true === get_site_option( 'caweb_private_theme_enabled', false ) ) {
 				$this->args['headers']['Authorization'] = 'Basic ' . base64_encode( ':' . get_site_option( 'caweb_password', '' ) );
 			}
 
@@ -86,7 +86,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			if ( ! empty( $caweb_update_themes ) && isset( $caweb_update_themes->response[ $this->theme_name ]['changelog'] ) ) {
 				$content = wp_remote_get( $caweb_update_themes->response[ $this->theme_name ]['changelog'], $this->args );
 
-				if ( ! is_wp_error( $content ) && 200 == wp_remote_retrieve_response_code( $content ) ) {
+				if ( ! is_wp_error( $content ) && 200 === wp_remote_retrieve_response_code( $content ) ) {
 					print '<pre>' . wp_remote_retrieve_body( $content ) . '</pre>';
 				} else {
 					print '<pre>No Changelog Available</pre>';
@@ -112,7 +112,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 					// $theme_request = wp_remote_post( 'https://cdn.elegantthemes.com/api/api.php', $options );
 			}
 
-			if ( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) == 200 ) {
+			if ( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) === 200 ) {
 				$payload = json_decode( wp_remote_retrieve_body( $payload ) );
 
 				// version compare doesn't compare correctly 1.0.0a is less than 1.0.0 and that is incorrect
@@ -171,7 +171,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
 			}
 
-			if ( isset( $upgrader->skin->theme_info ) && $upgrader->skin->theme_info->get( 'Name' ) == $this->theme_name ) {
+			if ( isset( $upgrader->skin->theme_info ) && $upgrader->skin->theme_info->get( 'Name' ) === $this->theme_name ) {
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package, array_merge( $this->args, array( 'timeout' => 60 ) ) ) );
 
 				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );

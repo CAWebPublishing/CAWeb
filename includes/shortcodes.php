@@ -54,7 +54,7 @@ function caweb_panel_func( $atts, $content = '' ) {
 		$button      = sprintf( '<div class="options"><a href="%1$s" class="btn btn-default">%2$s</a></div>', esc_url( $atts['button_url'] ), $button_text );
 	}
 
-	$headingSize = ! isset( $atts['layout'] ) || 'none' == $atts['layout'] ? 'h1' : 'h2';
+	$headingSize = ! isset( $atts['layout'] ) || 'none' === $atts['layout'] ? 'h1' : 'h2';
 	$headingIcon = isset( $atts['heading_icon'] ) ? caweb_get_icon_span( $atts['heading_icon'] ) : '';
 	$heading     = isset( $atts['heading'] ) ?
 		sprintf( '<div class="panel-heading"><%1$s>%2$s%3$s</%1$s>%4$s</div>', $headingSize, $headingIcon, $atts['heading'], $button ) : '';

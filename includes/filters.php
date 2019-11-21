@@ -122,7 +122,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 		$whitelist = array(
 			( $divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder' ),
-			( 'on' == get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
+			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
 			sprintf( 'v%1$s', caweb_get_page_version( $post->ID ) ),
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
@@ -141,7 +141,7 @@ add_filter( 'post_class', 'caweb_post_class', 15 );
 function caweb_post_class( $classes ) {
 	global $post;
 
-	if ( has_post_thumbnail( $post->ID ) && '' == get_the_post_thumbnail_url( $post->ID ) ) {
+	if ( has_post_thumbnail( $post->ID ) && '' === get_the_post_thumbnail_url( $post->ID ) ) {
 		unset( $classes[ array_search( 'has-post-thumbnail', $classes ) ] );
 	}
 

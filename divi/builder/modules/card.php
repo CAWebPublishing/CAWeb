@@ -219,26 +219,26 @@ class ET_Builder_CA_Card extends ET_Builder_CAWeb_Module {
 		$content = $this->content;
 
 		$this->add_classname( 'card' );
-		$this->add_classname( sprintf( 'card-%1$s', 'custom' == $card_layout ? 'default' : $card_layout ) );
+		$this->add_classname( sprintf( 'card-%1$s', 'custom' === $card_layout ? 'default' : $card_layout ) );
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
-		$card_color = ( ! empty( $card_color ) && 'custom' == $card_layout ? sprintf( ' style="background-color: %1$s;"', $card_color ) : '' );
+		$card_color = ( ! empty( $card_color ) && 'custom' === $card_layout ? sprintf( ' style="background-color: %1$s;"', $card_color ) : '' );
 		$text_color = ( ! empty( $text_color ) ? sprintf( ' style="color: %1$s;"', $text_color ) : '' );
 
 		$footer_color = ( ! empty( $footer_color ) ? sprintf( ' style="color: %1$s;"', $footer_color ) : '' );
 
-		$display_image = ( 'on' == $show_image ? sprintf( '<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image ) : '' );
+		$display_image = ( 'on' === $show_image ? sprintf( '<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image ) : '' );
 
-		$display_header = ( 'on' == $include_header ?
+		$display_header = ( 'on' === $include_header ?
 					sprintf( '<div class="card-header"><h4 class="card-title"%1$s>%2$s</h4></div>', $text_color, $title ) :
 					'' );
 
-		$display_button = ( 'on' == $show_button ?
+		$display_button = ( 'on' === $show_button ?
 		sprintf( '<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text ) : '' );
 
-		$display_footer = ( 'on' == $include_footer ?
+		$display_footer = ( 'on' === $include_footer ?
 		sprintf( '<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text ) : '' );
 
 		$output = sprintf( '<div%1$s%2$s>%3$s%4$s<div class="card-block"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header, $card_color, $content, $display_button, $display_footer );

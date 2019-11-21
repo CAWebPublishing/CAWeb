@@ -101,7 +101,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 
 		global $tile_count, $tiles;
 
-		$view_more = 'on' == $view_more_on_off ? sprintf( '<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url( $view_more_url ), $view_more_text ) : '';
+		$view_more = 'on' === $view_more_on_off ? sprintf( '<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url( $view_more_url ), $view_more_text ) : '';
 
 		$output = '';
 
@@ -110,7 +110,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 			$tile_size  = $tiles[ $i ]['tile_size'];
 			$item_image = $tiles[ $i ]['item_image'];
 
-			if ( 'on' == $tiles[ $i ]['tile_link'] ) {
+			if ( 'on' === $tiles[ $i ]['tile_link'] ) {
 				if ( ! empty( $item_image ) ) {
 					$alt_text   = caweb_get_attachment_post_meta( $item_image, '_wp_attachment_image_alt' );
 					$item_image = sprintf( '<img src="%1$s" alt="%2$s" style="background-size: cover; width: 100%%; height: 320px;" />', $item_image, ! empty( $alt_text ) ? $alt_text : ' ' );
@@ -122,7 +122,7 @@ class ET_Builder_Module_Fullwidth_CA_Service_Tiles extends ET_Builder_CAWeb_Modu
 			}
 		}
 		for ( $i = 0; $i < $tile_count; $i++ ) {
-			if ( 'off' == $tiles[ $i ]['tile_link'] ) {
+			if ( 'off' === $tiles[ $i ]['tile_link'] ) {
 				$output .= sprintf( '<div %1$s data-tile-id="panel-%2$s"><div class="section section-default" style="padding-top: 25px; padding-bottom: 25px;"><div class="container" style="padding-top: 0px;"><div class="card card-block"><button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><div class="group" style="padding-left:15px; padding-right: 15px;">%3$s</div></div></div></div></div>', $tiles[ $i ]['module_class'], $i + 1, $tiles[ $i ]['content'] );
 			}
 		}

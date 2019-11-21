@@ -1466,7 +1466,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 		// return posts tags
 		$tag_names = wp_get_post_tags( $post->ID, array( 'fields' => 'names' ) );
 		$tag_list  = '';
-		if ( ! empty( $tag_names ) && 'on' == $show_tags_button ) {
+		if ( ! empty( $tag_names ) && 'on' === $show_tags_button ) {
 			$tag_list = '<div style="float:left; margin-right: 25px;">Tags or Keywords<ul>';
 			foreach ( $tag_names as $n ) {
 				$tag_list .= sprintf( '<li>%1$s</li>', $n );
@@ -1476,7 +1476,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 		// return posts categories
 		$cat_obj  = get_the_category( $post->ID );
 		$cat_list = '';
-		if ( ! empty( $cat_obj ) && 'on' == $show_categories_button ) {
+		if ( ! empty( $cat_obj ) && 'on' === $show_categories_button ) {
 			$cat_list = 'Categories<ul>';
 			foreach ( $cat_obj as $n ) {
 				$cat_list .= sprintf( '<li>%1$s</li>', $n->name );
@@ -1493,7 +1493,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 
 				$presenter_image = ( ! empty( $course_presenter_image ) ? sprintf( '<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image ) : '' );
 
-				$presenter                = ( 'on' == $show_course_presenter ?
+				$presenter                = ( 'on' === $show_course_presenter ?
 											sprintf(
 												'<div class="presenter" style="display: inline-block;margin-bottom: 5px;"><p>
 												<strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
@@ -1502,7 +1502,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 												$course_presenter_bio
 											) : '' );
 				$course_addr              = implode( ', ', array_filter( array( $course_address, $course_city, $course_state, $course_zip ) ) );
-				$location                 = ( 'on' == $show_course_address ?
+				$location                 = ( 'on' === $show_course_address ?
 						sprintf(
 							'<span class="ca-gov-icon-road-pin"></span>
 									<a href="https://www.google.com/maps/place/%1$s">%1$s</a>',
@@ -1517,7 +1517,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 									  sprintf( 'Registration Cost: %1$s', $course_cost ) : '' );
 				$reg                      = array_filter( array( $course_registration_type, $course_cost ) );
 				$reg                      = ( ! empty( $reg ) ? sprintf( '<p>%1$s</p>', implode( '<br />', $reg ) ) : '' );
-				if ( 'on' == $show_course_map ) {
+				if ( 'on' === $show_course_map ) {
 					$map_url    = sprintf( 'https:////www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE', $course_addr );
 					$course_map = sprintf( '<div class="third"><iframe src="%1$s"></iframe></div>', $map_url );
 				} else {
@@ -1532,7 +1532,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 				$presenter_image         = ( ! empty( $event_presenter_image ) ? sprintf( '<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image ) : '' );
-				$presenter               = ( 'on' == $show_event_presenter ?
+				$presenter               = ( 'on' === $show_event_presenter ?
 				sprintf(
 					'<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p>%2$s<p>%3$s</p></div>',
 					$event_presenter_name,
@@ -1541,7 +1541,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				) : '' );
 				$event_addr              = array_filter( array( $event_address, $event_city, $event_state, $event_zip ) );
 				$event_addr              = sprintf( '%1$s', implode( ', ', $event_addr ) );
-				$location                = ( 'on' == $show_event_address ? sprintf( '<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr ) : '' );
+				$location                = ( 'on' === $show_event_address ? sprintf( '<span class="ca-gov-icon-road-pin"></span><a href="https://www.google.com/maps/place/%1$s">%1$s</a>', $event_addr ) : '' );
 				$event_start_date        = ! empty( $event_start_date ) ? gmdate( $event_start_date_custom_format, strtotime( $event_start_date ) ) : '';
 				$event_end_date          = ! empty( $event_end_date ) ? gmdate( $event_end_date_custom_format, strtotime( $event_end_date ) ) : '';
 				$organizer               = sprintf(
@@ -1582,7 +1582,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$this->add_classname( 'exam-detail' );
 				$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-				if ( 'web' == $exam_type ) {
+				if ( 'web' === $exam_type ) {
 					$exam_location = sprintf( 'Exam Url: <a href="%1$s">%1$s</a><br />', $exam_url );
 				} else {
 					$exam_addr     = array_filter( array( $exam_address, $exam_city, $exam_state, $exam_zip ) );
@@ -1595,7 +1595,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$exam_course = ( ! empty( $exam_course ) ? implode( ' - ', $exam_course ) . '<br />' : '' );
 				$pub_date    = gmdate( $exam_published_date_custom_format, strtotime( $exam_published_date ) );
 				$pub_date    = ( ! empty( $exam_published_date ) ? sprintf( 'Published Date: %1$s<br />', $pub_date ) : '' );
-				if ( 'on' == $exam_final_filing_date_chooser ) {
+				if ( 'on' === $exam_final_filing_date_chooser ) {
 					$exam_final_filing_date = ! empty( $exam_final_filing_date_picker ) ? sprintf( 'Final Filing Date: %1$s<br />', gmdate( $exam_final_filing_date_custom_format, strtotime( $exam_final_filing_date_picker ) ) ) : '';
 				} else {
 					$exam_final_filing_date = sprintf( 'Final Filing Date: %1$s<br />', $exam_final_filing_date );
@@ -1612,7 +1612,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 
 				$agency_addr = array_filter( array( $job_agency_address, $job_agency_city, $job_agency_state, $job_agency_zip ) );
 				$agency_addr = ( ! empty( $agency_addr ) ? implode( ', ', $agency_addr ) : '' );
-				$agency_info = ( 'on' == $show_about_agency ?
+				$agency_info = ( 'on' === $show_about_agency ?
 					sprintf(
 						'<div class="entity"><strong>%1$s</strong> %2$s</div>',
 						$job_agency_name,
@@ -1631,7 +1631,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$job_hours      = ( ! empty( $job_hours ) ? sprintf( '%1$s<br />', $job_hours ) : '' );
 				$job_salary_min = caweb_is_money( $job_salary_min, '$0.00' );
 				$job_salary_max = caweb_is_money( $job_salary_max, '$0.00' );
-				$job_salary     = ( 'on' == $show_job_salary ? sprintf( 'Salary Range: %1$s - %2$s<br />', $job_salary_min, $job_salary_max ) : '' );
+				$job_salary     = ( 'on' === $show_job_salary ? sprintf( 'Salary Range: %1$s - %2$s<br />', $job_salary_min, $job_salary_max ) : '' );
 				$job_position   = '';
 				if ( ! empty( $job_position_number ) && ! empty( $job_rpa_number ) ) {
 					$job_position = sprintf( 'Position Number: %1$s, RPA #%2$s<br />', $job_position_number, $job_rpa_number );
@@ -1641,7 +1641,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 					$job_position = sprintf( 'RPA #%1$s<br />', $job_rpa_number );
 				}
 				$job_ds_url = ( ! empty( $job_ds_url ) ? sprintf( 'Duty Statement (<a href="%1$s">PDF</a>)<br />', $job_ds_url ) : '' );
-				if ( 'on' == $job_final_filing_date_chooser ) {
+				if ( 'on' === $job_final_filing_date_chooser ) {
 					$job_final_filing_date = ! empty( $job_final_filing_date_picker ) ? sprintf( 'Final Filing Date:<time>%1$s</time><br />', gmdate( $job_final_filing_date_custom_format, strtotime( $job_final_filing_date_picker ) ) ) : '';
 				} else {
 					$job_final_filing_date = sprintf( 'Final Filing Date: %1$s<br />', $job_final_filing_date );
@@ -1657,7 +1657,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 					$job_ds_url,
 					$job_final_filing_date
 				);
-				if ( 'on' == $show_job_apply_to ) {
+				if ( 'on' === $show_job_apply_to ) {
 					$location          = array_filter( array( $job_apply_to_address, $job_apply_to_city, $job_apply_to_state, $job_apply_to_zip ) );
 					$location          = ( ! empty( $location ) ? implode( ', ', $location ) : '' );
 					$job_apply_to_info = sprintf(
@@ -1667,7 +1667,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 						$location
 					);
 				}
-				if ( 'on' == $show_job_questions ) {
+				if ( 'on' === $show_job_questions ) {
 					$jInfo              = ( ! empty( $job_questions_phone ) && ! empty( $job_questions_email ) ?
 					 sprintf( '%1$s, or <a href="mailto:%2$s">%2$s</a>', $job_questions_phone, $job_questions_email ) : '' );
 					$jInfo              = ( empty( $jInfo ) && ! empty( $job_questions_phone ) ? $job_questions_phone : $jInfo );
@@ -1680,7 +1680,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 														( ! empty( $job_apply_to_info ) ? sprintf( '<p>%1$s</p>', $job_apply_to_info ) : '' ),
 														( ! empty( $job_questions_info ) ? sprintf( '<p>%1$s</p>', $job_questions_info ) : '' )
 													) : '' );
-				$job_agency_about = 'on' == $show_about_agency && ! empty( $job_agency_about ) ? sprintf( '<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about ) : '';
+				$job_agency_about = 'on' === $show_about_agency && ! empty( $job_agency_about ) ? sprintf( '<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about ) : '';
 
 				$output = sprintf( '<article%1$s%2$s><div class="sub-header">%3$s%4$s</div><div class="group">%5$s%6$s</div>%7$s%8$s%9$s</article>', $this->module_id(), $class, ! empty( $agency_info ) ? $agency_info : '', $job_posted_date, $job_info, $job_apply_info, $job_agency_about, $content, sprintf( '<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list ) );
 
@@ -1690,7 +1690,7 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 				$this->add_classname( 'news-detail' );
 				$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-				$image     = 'on' == $show_featured_image ? caweb_get_the_post_thumbnail( null, array( 150, 100 ), array( 'class' => 'img-left' ) ) : '';
+				$image     = 'on' === $show_featured_image ? caweb_get_the_post_thumbnail( null, array( 150, 100 ), array( 'class' => 'img-left' ) ) : '';
 				$date_city = '';
 
 				if ( ! empty( $news_publish_date ) || ! empty( $news_author ) || ! empty( $news_city ) ) {
@@ -1716,8 +1716,8 @@ class ET_Builder_Module_CAWeb_Post_Handler extends ET_Builder_CAWeb_Module {
 					$profile_name,
 					( ! empty( $profile_career_title ) ? ', ' . $profile_career_title : '' )
 				);
-				$img_align = ( 'on' == $profile_image_align ? 'img-right' : 'img-left' );
-				$image     = 'on' == $show_featured_image ? caweb_get_the_post_thumbnail(
+				$img_align = ( 'on' === $profile_image_align ? 'img-right' : 'img-left' );
+				$image     = 'on' === $show_featured_image ? caweb_get_the_post_thumbnail(
 					null,
 					array( 150, 100 ),
 					array(
