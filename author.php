@@ -2,7 +2,7 @@
 /**
  * The template for displaying author pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#author-display
  *
  * @package CAWeb
  */

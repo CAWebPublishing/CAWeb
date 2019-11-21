@@ -2,7 +2,7 @@
 /**
  * The template for displaying category pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.wordpress.org/themes/template-files-section/taxonomy-templates/#category
  *
  * @package CAWeb
  */

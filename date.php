@@ -2,7 +2,7 @@
 /**
  * The template for displaying date pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#date
  *
  * @package CAWeb
  */

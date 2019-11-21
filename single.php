@@ -1,7 +1,14 @@
 <?php
+/**
+ * This is a generic template for Posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package CAWeb
+ */
 
 get_header();
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
+$caweb_is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
 
@@ -25,16 +32,12 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 						<!-- Page Title-->
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							print the_title(
-								sprintf(
-									'<h1 class="page-title" %1$s>',
-									get_option( 'ca_default_post_date_display' ) ? 'style="padding-bottom:0;"' : ''
-								),
-								'</h1>'
-							);
+							$caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
+
+							esc_html( the_title( sprintf( '<h1 class="page-title%1$s">', $caweb_padding ), '</h1>' ) );
 						}
 
-						if ( get_option( 'ca_default_post_date_display' ) && ! $is_page_builder_used ) {
+						if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {
 							printf( '<p class="page-date published">Published: <time datetime="%1$s">%1$s</time></p>', get_the_date( 'M d, Y' ) );
 						}
 
@@ -42,7 +45,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						the_content();
 
-						if ( ! $is_page_builder_used ) {
+						if ( ! $caweb_is_page_builder_used ) {
 							wp_link_pages(
 								array(
 									'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ),
@@ -57,8 +60,8 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 						<?php
-						// This defaults to the Divi Comments.php template file
-						if ( ! $is_page_builder_used && comments_open() ) {
+						/* This defaults to the Divi Comments.php template file */
+						if ( ! $caweb_is_page_builder_used && comments_open() ) {
 							comments_template( '', true );
 						}
 
@@ -70,11 +73,15 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 				</main>
 				<?php
-				if ( ! $is_page_builder_used && is_active_sidebar( 'sidebar-1' ) ) {
-					print '<aside id="non_divi_sidebar" class="col-lg-3">';
-					print get_sidebar( 'sidebar-1' );
-					print '</aside>';
-				}
+				if ( is_active_sidebar( 'sidebar-1' ) ) :
+					?>
+					<aside id="non_divi_sidebar" class="col-lg-3">
+					<?php
+					print esc_html( get_sidebar( 'sidebar-1' ) );
+					?>
+					</aside>
+					<?php
+					endif;
 				?>
 			</div> <!-- #main-content -->
 		</div>

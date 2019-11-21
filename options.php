@@ -354,7 +354,6 @@ foreach ( $caweb_options as $caweb_name ) {
  * @param  mixed  $value New value of the network option.
  * @param  mixed  $old_value Old value of the network option.
  * @param  string $option Option name.
- * @param  int    $network_id ID of the network.
  * @return string
  */
 function caweb_sanitize_various_options( $value, $old_value, $option ) {
@@ -573,19 +572,13 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
  * @return void
  */
 function caweb_fav_icon_checker() {
-	$url = preg_replace( '/https?:\/\//', '', $_POST['icon_url'] );
-	$url = $_POST['icon_url'];
+	$url = isset( $_POST['icon_url'] ) ? sanitize_text_field( wp_unslash( $_POST['icon_url'] ) ) : '';
 
-	$arr_context_options = stream_context_create(
-		array(
-			'ssl' => array(
-				'verify_peer'       => false,
-				'verify_peer_name'  => false,
-			),
-		)
+	$arr_context_options = array(
+		'sslverify' => false,
 	);
 
-	$handle = file_get_contents( $url, false, $arr_context_options );
+	$handle = wp_remote_get( $url, $arr_context_options );
 	$handle = rawurlencode( $handle );
 	$handle = explode( '%', $handle );
 	$handle = array_filter( $handle );

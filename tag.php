@@ -1,6 +1,14 @@
 <?php
-		get_header();
+/**
+ * This is a generic template for Posts
+ *
+ * @link https://developer.wordpress.org/themes/template-files-section/taxonomy-templates/#tag
+ *
+ * @package CAWeb
+ */
 
+get_header();
+		
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
