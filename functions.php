@@ -217,7 +217,10 @@ function caweb_wp_enqueue_scripts() {
 		'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
 		'ca_google_search_id' => get_option('ca_google_search_id'),
 		'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
-		'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false));
+		'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false,
+		'ca_geo_locator_enabled' => 5 >= $ver && "on" === get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled')
+		)
+	);
 
 	// Enqueue Scripts
 	wp_enqueue_script('cagov-modernizr-script');
