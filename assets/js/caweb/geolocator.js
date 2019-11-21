@@ -1,6 +1,7 @@
 jQuery(document).ready(function() {
 
-  if( ! args.ca_google_trans_enabled ){
+	console.log(args);
+  if( args.ca_google_trans_enabled ){
 	var google_map_api_key = "&key=AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE";
 
 	var google_map_url = "https://maps.googleapis.com/maps/api/geocode/json?";
