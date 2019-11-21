@@ -1,5 +1,13 @@
 <?php
-		get_header();
+/**
+ * The template for displaying 404 pages (not found)
+ *
+ * @link https://codex.wordpress.org/Creating_an_Error_404_Page
+ *
+ * @package CAWeb
+ */
+
+	get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
@@ -18,9 +26,7 @@
 						<div class="section section-none">
 							<div class="agency-form">
 								<h1>Search Site For:</h1>
-								<?php
-								printf( '<gcse:searchbox-only resultsUrl="%1$s"></gcse:searchbox-only> ', site_url( 'serp' ) )
-								?>
+								<gcse:searchbox-only resultsUrl="<?php print esc_url( site_url( 'serp' ) ); ?>"></gcse:searchbox-only>
 							</div>
 						</div>
 
