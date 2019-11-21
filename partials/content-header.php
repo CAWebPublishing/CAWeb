@@ -1,70 +1,71 @@
 <?php
+/**
+ * Loads CAWeb <header> tag.
+ *
+ * @package CAWeb
+ */
+
 global $post;
-$post_content = isset( $post ) ? ( is_object( $post ) ? $post->post_content : $post['content'] ) : '';
-$ver          = caweb_get_page_version( get_the_ID() );
-$fixed_header = ( 5 === $ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
-$color        = get_option( 'ca_site_color_scheme', 'oceanside' );
-$schemes      = caweb_color_schemes( caweb_get_page_version( get_the_ID() ), 'filename' );
-$colorscheme  = isset( $schemes[ $color ] ) ? $color : 'oceanside';
+$caweb_ver          = caweb_get_page_version( get_the_ID() );
+$caweb_fixed_header = ( 5 === $caweb_ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
+$caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
+$caweb_schemes      = caweb_color_schemes( caweb_get_page_version( get_the_ID() ), 'filename' );
+$caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
 
-$default_background_img = sprintf(
-	'%1$s/images/system/%2$s/header-background.jpg',
-	CAWEB_URI,
-	$colorscheme
-);
+$caweb_default_background_img = sprintf( '%1$s/images/system/%2$s/header-background.jpg', CAWEB_URI, $caweb_colorscheme );
 
-$header_background_img = ( 4 === $ver && '' !== get_option( 'header_ca_background' ) ?
-						  get_option( 'header_ca_background' ) : $default_background_img );
-$header_style          = ( 4 === $ver ? sprintf( 'style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $header_background_img ) : '' );
+$caweb_header_background_img = 4 === $caweb_ver && '' !== get_option( 'header_ca_background' ) ?
+					get_option( 'header_ca_background' ) : $caweb_default_background_img;
+$caweb_header_style          = 4 === $caweb_ver ? sprintf( 'style="background: #fff url(%1$s) no-repeat 100% 100%; background-size: cover;"', $caweb_header_background_img ) : '';
 
-// Search
-$ca_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled' );
+/* Search */
+$caweb_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled' );
 
-// Google Translate
-$ca_google_search_id     = get_option( 'ca_google_search_id', '' );
-$ca_google_trans_enabled = get_option( 'ca_google_trans_enabled' );
-$ca_google_trans_page    = get_option( 'ca_google_trans_page', '' );
-$ca_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
-$ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_span( $ca_google_trans_icon ) : '';
+/* Google Translate */
+$caweb_google_search_id     = get_option( 'ca_google_search_id', '' );
+$caweb_google_trans_enabled = get_option( 'ca_google_trans_enabled' );
+$caweb_google_trans_page    = get_option( 'ca_google_trans_page', '' );
+$caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
+$caweb_google_trans_icon    = ! empty( $caweb_google_trans_icon ) ? caweb_get_icon_span( $caweb_google_trans_icon ) : '';
 
 ?>
 
-<header id="header" class="global-header<?php print $fixed_header; ?>" <?php print $header_style; ?>>
+<header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>" <?php print esc_attr( $caweb_header_style ); ?>>
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 	<?php
 
-		// Version 5.0 Specific
+		/* Version 5.0 Specific */
 	if ( 5 === caweb_get_page_version( get_the_ID() ) ) {
 
-			// Alerts
-		$alerts = get_option( 'caweb_alerts', array() );
+			/* Alerts */
+		$caweb_alerts = get_option( 'caweb_alerts', array() );
 
-		if ( ! empty( $alerts ) ) {
+		if ( ! empty( $caweb_alerts ) ) {
 			print '<!-- Alert Banners -->';
 		}
 
-		foreach ( $alerts as $a => $data ) {
-			if ( 'inactive' !== $data['status'] && ( ( is_front_page() && 'home' === $data['page_display'] ) || ( 'all' === $data['page_display'] ) ) ) {
-				if ( ! isset( $_SESSION[ 'display_alert_' . $a ] ) || 1 === $_SESSION[ 'display_alert_' . $a ] ) {
-					$_SESSION[ 'display_alert_' . $a ] = true;
+		foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
+			if ( 'inactive' !== $caweb_data['status'] && ( ( is_front_page() && 'home' === $caweb_data['page_display'] ) || ( 'all' === $caweb_data['page_display'] ) ) ) {
+				if ( ! isset( $_SESSION[ "display_alert_$caweb_a" ] ) || 1 === $_SESSION[ "display_alert_$caweb_a" ] ) {
+					$_SESSION[ "display_alert_$caweb_a" ] = true;
 
 					$readmore   = '';
-					$alert_icon = ! empty( $data['icon'] ) ? caweb_get_icon_span( $data['icon'], array( 'aria-hidden' => 'true' ) ) : '';
-					if ( ! empty( $data['button'] ) && ! empty( $data['url'] ) ) {
-						$target   = ! empty( $data['target'] ) ? sprintf( ' target="%1$s"', $data['target'] ) : '';
-						$text     = ! empty( $data['text'] ) ? $data['text'] : '';
-						$readmore = sprintf( '<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>%3$s</a>', esc_url( $data['url'] ), $target, $text );
+					$alert_icon = ! empty( $caweb_data['icon'] ) ? caweb_get_icon_span( $caweb_data['icon'], array( 'aria-hidden' => 'true' ) ) : '';
+					if ( ! empty( $caweb_data['button'] ) && ! empty( $caweb_data['url'] ) ) {
+						$target   = ! empty( $caweb_data['target'] ) ? sprintf( ' target="%1$s"', $caweb_data['target'] ) : '';
+						$text     = ! empty( $caweb_data['text'] ) ? $caweb_data['text'] : '';
+						$readmore = sprintf( '<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>%3$s</a>', esc_url( $caweb_data['url'] ), $target, $text );
 					}
 					?>
-	<div class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color']; ?>;">
+	<div class="alert alert-dismissible alert-banner" style="background-color:<?php print $caweb_data['color']; ?>;">
 		<div class="container">
-			<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url( 'admin-post.php?action=caweb_clear_alert_session&alert-id=' . $a ); ?>" data-dismiss="alert" aria-label="Close">
+			<button type="button" class="close caweb-alert-close" data-url="<?php print admin_url( "admin-post.php?action=caweb_clear_alert_session&alert-id=$caweb_a" ); ?>" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<span class="alert-level">
-					<?php print $alert_icon . $data['header']; ?>
+					<?php print $alert_icon . $caweb_data['header']; ?>
 			</span>
-			<span class="alert-text"><?php print stripslashes( $data['message'] ); ?></span>
+			<span class="alert-text"><?php print stripslashes( $caweb_data['message'] ); ?></span>
 					<?php print $readmore; ?>
 		</div>
 	</div>
@@ -73,17 +74,17 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 			}
 		}
 
-		// Include Utility Header
+		/* Include Utility Header */
 		get_template_part( 'partials/content', 'utility-header' );
 
-		// Location Bar
+		/* Location Bar */
 		require_once CAWEB_ABSPATH . '/ssi/location-bar.php';
 
-		// Settings Bar
+		/* Settings Bar */
 		require_once CAWEB_ABSPATH . '/ssi/settings-bar.php';
 	}
 
-	// Include Utility Header
+	/* Include Utility Header */
 	get_template_part( 'partials/content', 'branding' );
 
 	?>
@@ -108,11 +109,11 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 			)
 		);
 
-			  $search  = 5 === $ver && is_front_page() && $ca_frontpage_search_enabled ? ' featured-search fade' : '';
-			  $search .= empty( $ca_google_search_id ) ? ' hidden' : '';
+			  $search  = 5 === $caweb_ver && is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade' : '';
+			  $search .= empty( $caweb_google_search_id ) ? ' hidden' : '';
 
-			  // This is the Custom Google Translate Location for the old State Template Version 4
-			  $custom_translate = 4 === $ver && 'custom' === $ca_google_trans_enabled && ! empty( $ca_google_trans_page ) ? sprintf( '<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url( $ca_google_trans_page ), $ca_google_trans_icon ) : '';
+			  /* This is the Custom Google Translate Location for the old State Template Version 4 */
+			  $custom_translate = 4 === $caweb_ver && 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ? sprintf( '<a target="_blank" href="%1$s" class="caweb-custom-translate">%2$sTranslate</a>', esc_url( $caweb_google_trans_page ), $caweb_google_trans_icon ) : '';
 
 		?>
 		<div id="head-search" class="search-container<?php print $search; ?> hidden-print" role="region" aria-labelledby="search-expanded">
@@ -126,8 +127,8 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 	</div>
 
 	<?php
-	// This is the Standard Google Translate Location for the old State Template Version 4
-	if ( ( true === $ca_google_trans_enabled || 'standard' === $ca_google_trans_enabled ) && 4 === $ver ) :
+	/* This is the Standard Google Translate Location for the old State Template Version 4 */
+	if ( ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) && 4 === $caweb_ver ) :
 		?>
 	<div id="google_translate_element" class="hidden-print standard-translate"></div>
 	<?php endif; ?>
