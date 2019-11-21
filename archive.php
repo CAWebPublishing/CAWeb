@@ -27,7 +27,6 @@
 						if ( have_posts() ) :
 							while ( have_posts() ) :
 								the_post();
-								$caweb_post_format = et_pb_post_format();
 								?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 							<a class="date-link no-underline" href="<?php the_permalink(); ?>">

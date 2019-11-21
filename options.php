@@ -11,7 +11,7 @@ function caweb_admin_menu() {
 		'manage_options',
 		'caweb_options',
 		'caweb_option_page',
-		sprintf( '%1$s/images/system/caweb_logo.png', CAWebUri ),
+		sprintf( '%1$s/images/system/caweb_logo.png', CAWEB_URI ),
 		6
 	);
 	add_submenu_page( 'caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page' );
@@ -95,8 +95,8 @@ function caweb_rrmdir( $path ) {
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
 	$site_id      = get_current_blog_id();
-	$ext_css_dir  = sprintf( '%1$s/css/external', CAWebAbsPath );
-	$ext_js_dir   = sprintf( '%1$s/js/external', CAWebAbsPath );
+	$ext_css_dir  = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
+	$ext_js_dir   = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
 
 	// Remove unneeded values
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );

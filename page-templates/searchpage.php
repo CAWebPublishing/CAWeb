@@ -29,7 +29,7 @@ get_header();
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require CAWebAbsPath . '/ssi/searchForm.php';
+						require CAWEB_ABSPATH . '/ssi/searchForm.php';
 						?>
 					</div>
 					<div class="section">

@@ -1,5 +1,12 @@
-<!-- Global Footer -->
 <?php
+/**
+ * The template for displaying author pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package CAWeb
+ */
+
 wp_nav_menu(
 	array(
 		'theme_location' => 'footer-menu',

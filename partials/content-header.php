@@ -9,7 +9,7 @@ $colorscheme  = isset( $schemes[ $color ] ) ? $color : 'oceanside';
 
 $default_background_img = sprintf(
 	'%1$s/images/system/%2$s/header-background.jpg',
-	CAWebUri,
+	CAWEB_URI,
 	$colorscheme
 );
 
@@ -77,10 +77,10 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 		get_template_part( 'partials/content', 'utility-header' );
 
 		// Location Bar
-		require_once CAWebAbsPath . '/ssi/location-bar.php';
+		require_once CAWEB_ABSPATH . '/ssi/location-bar.php';
 
 		// Settings Bar
-		require_once CAWebAbsPath . '/ssi/settings-bar.php';
+		require_once CAWEB_ABSPATH . '/ssi/settings-bar.php';
 	}
 
 	// Include Utility Header
@@ -89,7 +89,7 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 	?>
 
 	<!-- Include Mobile Controls -->
-	<?php require_once CAWebAbsPath . '/ssi/mobile-controls.php'; ?>
+	<?php require_once CAWEB_ABSPATH . '/ssi/mobile-controls.php'; ?>
 
 	<div class="navigation-search">
 
@@ -118,7 +118,7 @@ $ca_google_trans_icon    = ! empty( $ca_google_trans_icon ) ? caweb_get_icon_spa
 		<div id="head-search" class="search-container<?php print $search; ?> hidden-print" role="region" aria-labelledby="search-expanded">
 			<?php
 			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
-				require CAWebAbsPath . '/ssi/searchForm.php';
+				require CAWEB_ABSPATH . '/ssi/searchForm.php';
 			}
 				print $custom_translate;
 			?>

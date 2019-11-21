@@ -438,7 +438,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 						<ol id="uploadedCSS">
 							<?php
 							foreach ( $ext_css as  $name ) {
-								$location = sprintf( '%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name );
+								$location = sprintf( '%1$s/css/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
 
 								printf( '<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility preview-css"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download download-css"></a><a title="remove %2$s" class="dashicons dashicons-dismiss remove-css"></a>%2$s<input type="hidden" name="caweb_external_css[]" value="%2$s"></li>', $location, $name );
 							}
@@ -486,7 +486,7 @@ $icons                               = caweb_get_icon_list( -1, '', true );
 						<ol id="uploadedJS">
 							<?php
 							foreach ( $ext_js as  $name ) {
-								$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name );
+								$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
 
 								printf( '<li><a href="%1$s?TB_iframe=true&width=600&height=550" title="%2$s" class="thickbox dashicons dashicons-visibility preview-js"></a><a href="%1$s" download="%2$s" title="download" class="dashicons dashicons-download download-js"></a><a title="remove %2$s" class="dashicons dashicons-dismiss remove-js"></a>%2$s<input type="hidden" name="caweb_external_js[]" value="%2$s"></li>', $location, $name );
 							}

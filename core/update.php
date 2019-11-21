@@ -177,16 +177,16 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
 
 				// move any external site css if external css directory exists
-				if ( file_exists( sprintf( '%1$s/css/external/', CAWebAbsPath ) ) ) {
+				if ( file_exists( sprintf( '%1$s/css/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
-						sprintf( '%1$s/css/external/', CAWebAbsPath ),
+						sprintf( '%1$s/css/external/', CAWEB_ABSPATH ),
 						sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] )
 					);
 				}
 				// move any external site js if external js directory exists
-				if ( file_exists( sprintf( '%1$s/js/external/', CAWebAbsPath ) ) ) {
+				if ( file_exists( sprintf( '%1$s/js/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
-						sprintf( '%1$s/js/external/', CAWebAbsPath ),
+						sprintf( '%1$s/js/external/', CAWEB_ABSPATH ),
 						sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] )
 					);
 				}
@@ -223,14 +223,14 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			if ( file_exists( sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ) ) ) {
 				rename(
 					sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ),
-					sprintf( '%1$s/css/external/', CAWebAbsPath )
+					sprintf( '%1$s/css/external/', CAWEB_ABSPATH )
 				);
 			}
 			// move any external site js existed move it back
 			if ( file_exists( sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ) ) ) {
 				rename(
 					sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ),
-					sprintf( '%1$s/js/external/', CAWebAbsPath )
+					sprintf( '%1$s/js/external/', CAWEB_ABSPATH )
 				);
 			}
 		}

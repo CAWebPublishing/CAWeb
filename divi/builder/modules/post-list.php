@@ -33,6 +33,7 @@ class ET_Builder_Module_CA_Post_List extends ET_Builder_CAWeb_Module {
 			),
 		);
 
+		/* to be removed soon */
 		do_action( 'caweb_post_list_module_clear_cache' );
 	}
 	function get_fields() {

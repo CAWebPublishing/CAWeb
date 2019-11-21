@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying archive pages
+ * The template for displaying author pages
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -27,7 +27,6 @@
 						if ( have_posts() ) :
 							while ( have_posts() ) :
 								the_post();
-								$caweb_post_format = et_pb_post_format();
 								?>
 
 						<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
