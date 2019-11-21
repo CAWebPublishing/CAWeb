@@ -325,6 +325,32 @@ function caweb_late_wp_enqueue_scripts() {
 
 		wp_enqueue_script( 'caweb-accessibility-scripts' );
 	}
+
+	/* Load Core JS at the very end along with any external/custom javascript/jquery */
+	wp_register_script( 'caweb-core-script', CAWEB_URI . '/js/cagov.core.js', array( 'jquery' ), CAWEB_VERSION, true );
+	wp_enqueue_script( 'caweb-core-script' );
+
+	/* External JS */
+	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );
+
+	foreach ( $ext_js as $index => $name ) {
+		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
+		$i        = $index + 1;
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), CAWEB_VERSION, true );
+		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
+	}
+
+	/* Custom JS */
+	if ( '' !== get_option( 'ca_custom_js', '' ) ) {
+		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
+		wp_register_script( 'caweb-custom-js', $location, array( 'jquery' ), CAWEB_VERSION, true );
+
+		/*
+		Need to create file for custom js
+		wp_enqueue_script( 'caweb-custom-js' );
+		print esc_html( sprintf( '<script id="ca_custom_js">%1$s</script>', wp_unslash( get_option( 'ca_custom_js' ) ) ) );
+		*/
+	}
 }
 
 add_action( 'wp_head', 'caweb_wp_head' );
@@ -408,28 +434,6 @@ function caweb_wp_footer() {
 	wp_deregister_style( 'et-builder-googlefonts' );
 }
 
-/**
- * Print CAWeb scripts before the closing body tag on the front end with priority of 115.
- *
- * @return void
- */
-function caweb_late_wp_footer() {
-	/* Load Core JS at the very end along with any external/custom javascript/jquery */
-	print esc_html( sprintf( '<script src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWEB_URI, CAWEB_VERSION ) );
-
-	/* External JS */
-	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );
-
-	foreach ( $ext_js as $index => $name ) {
-		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
-		print esc_html( sprintf( '<script src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWEB_VERSION, $index + 1 ) );
-	}
-
-	/* Custom JS */
-	if ( '' !== get_option( 'ca_custom_js', '' ) ) {
-		print esc_html( sprintf( '<script id="ca_custom_js">%1$s</script>', wp_unslash( get_option( 'ca_custom_js' ) ) ) );
-	}
-}
 add_action( 'wp_footer', 'caweb_late_wp_footer', 115 );
 
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
@@ -499,8 +503,8 @@ add_action( 'admin_head', 'caweb_admin_head' );
  * @return void
  */
 function caweb_admin_head() {
-	$icon = apply_filters( 'get_site_icon_url', sprintf( '%1$s/images/system/caweb_logo.ico', CAWEB_URI ), 512, get_current_blog_id() );
-	print esc_html( sprintf( '<link title="Fav Icon" rel="icon" href="%1$s">', $icon ) );
+	$icon = apply_filters( 'caweb_site_icon_url', sprintf( '%1$s/images/system/caweb_logo.ico', CAWEB_URI ), 512, get_current_blog_id() );
+	printf( '<link title="Fav Icon" rel="icon" href="%1$s">', esc_url( $icon ) );
 
 	/* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
 	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';

@@ -341,7 +341,7 @@ $caweb_sanitized = caweb_get_site_options( 'sanitized' );
 $caweb_options = array_merge( $caweb_social, $caweb_sanitized );
 
 foreach ( $caweb_options as $caweb_name ) {
-	add_action( 'pre_update_option_' . $caweb_name, 'caweb_sanitize_various_options', 10, 4 );
+	add_action( 'pre_update_option_' . $caweb_name, 'caweb_sanitize_various_options', 10, 3 );
 
 	if ( in_array( $caweb_name, $caweb_sanitized, true ) ) {
 		add_action( 'option_' . $caweb_name, 'caweb_retrieve_various_sanitized_options', 10, 3 );
@@ -357,7 +357,7 @@ foreach ( $caweb_options as $caweb_name ) {
  * @param  int    $network_id ID of the network.
  * @return string
  */
-function caweb_sanitize_various_options( $value, $old_value, $option, $network_id ) {
+function caweb_sanitize_various_options( $value, $old_value, $option ) {
 	$caweb_social    = caweb_get_site_options( 'social' );
 	$caweb_sanitized = caweb_get_site_options( 'sanitized' );
 

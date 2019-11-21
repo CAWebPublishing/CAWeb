@@ -22,7 +22,7 @@ function caweb_get_page_version( $post_id = -1 ) {
 
 	}
 
-	return $result;
+	return (int)$result;
 }
 
 // Returns array of Menu Theme Locations

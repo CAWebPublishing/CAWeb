@@ -22,8 +22,8 @@ $align = 'center' !== get_option( 'header_ca_branding_alignment' ) ? 'pull-' . g
 	<?php else : ?>
 	<div class="header-cagov-logo"><a href="http://www.ca.gov/" title="CA.gov"><img src="<?php print $ca_logo; ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
 		<?php if ( ! empty( $logo ) ) : ?>
-	<div class="header-organization-banner <?php print $align; ?>"><a href="/"><img src="<?php print $logo; ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
-	<?php endif; ?>
+		<div class="header-organization-banner <?php print $align; ?>"><a href="/"><img src="<?php print $logo; ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
+		<?php endif; ?>
 	<?php endif; ?>
 
 </div>
