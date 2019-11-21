@@ -367,6 +367,7 @@ alert_read_more_target_text.innerHTML = "Read More Button Text";
 
 alert_read_more_target_text_input.type = "text";
 alert_read_more_target_text_input.name = "alert-read-more-text-" + alertCount;
+alert_read_more_target_text_input.maxLength = 16;
 
 alert_read_more_target_url.innerHTML = "Read More Button URL";
 
