@@ -211,28 +211,41 @@ function caweb_save_options($values = array(), $files = array()) {
 // Setup CAWeb API Menu
 function caweb_api_menu_option_setup() {
 	?>
-<style>table tr td:first-of-type {width: 15px;}</style>
+<style>
+    table tr td:first-of-type {
+        width: 15px;
+    }
+</style>
 
 <form id="caweb-options-form" action="<?php print admin_url('admin.php?page=caweb_api'); ?>" method="POST">
-	<?php
+    <?php
 	if (isset($_POST['caweb_api_options_submit'])) {
 		caweb_save_api_options($_POST);
 	} ?>
-	<div class="wrap">
-  <h1>GitHub API Key</h1>
-  <table class="form-table">
-		<tr><td>
-				<div class="tooltip">Is Private?<span class="tooltiptext">Is this theme hosted as a private repo?</span></div></td>
-					<td><input type="checkbox" name="caweb_private_theme_enabled" size="50" <?php print get_site_option('caweb_private_theme_enabled', false) ? ' checked="checked"' : '' ?> /></td></tr>
-		<tr><td>
-				<div class="tooltip">Username<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
-					<td><input type="text" name="caweb_username" size="50" value="<?php print get_site_option('caweb_username', 'CAWebPublishing'); ?>" placeholder="Default: CAWebPublishing" /></td></tr>
-			<tr><td>
-				<div class="tooltip">Token<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div></td>
-			<td><input type="password" name="caweb_password" size="50" value="<?php print base64_encode(get_site_option('caweb_password', '')); ?>" /></td></tr>
-  </table>
-  </div>
-  <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+    <div class="wrap">
+        <h1>GitHub API Key</h1>
+        <table class="form-table">
+            <tr>
+                <td>
+                    <div class="tooltip">Is Private?<span class="tooltiptext">Is this theme hosted as a private repo?</span></div>
+                </td>
+                <td><input type="checkbox" name="caweb_private_theme_enabled" size="50" <?php print get_site_option('caweb_private_theme_enabled', false) ? ' checked="checked"' : '' ?> /></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="tooltip">Username<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div>
+                </td>
+                <td><input type="text" name="caweb_username" size="50" value="<?php print get_site_option('caweb_username', 'CAWebPublishing'); ?>" placeholder="Default: CAWebPublishing" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="tooltip">Token<span class="tooltiptext">Setting this feature enables us to update the theme through GitHub</span></div>
+                </td>
+                <td><input type="password" name="caweb_password" size="50" value="<?php print base64_encode(get_site_option('caweb_password', '')); ?>" /></td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
 </form>
 
 <?php
@@ -260,23 +273,30 @@ add_action('pre_update_site_option_caweb_password', 'caweb_pre_update_site_optio
 // Setup Multisite Google Analytics Menu
 function caweb_multi_ga_menu_option_setup() {
 	?>
-<style>table tr td:first-of-type {width: 100px;}</style>
+<style>
+    table tr td:first-of-type {
+        width: 100px;
+    }
+</style>
 
 <form id="caweb-options-form" action="<?php print admin_url('admin.php?page=caweb_multi_ga'); ?>" method="POST">
-  <?php
+    <?php
   if (isset($_POST['caweb_multi_ga_options_submit'])) {
   	caweb_save_multi_ga_options($_POST);
   } ?>
-<div class="wrap">
-  <h1>Multisite Google Analytics</h1>
-  <table class="form-table">
-    <tr><td>
-        <div class="tooltip">Analytics ID<span class="tooltiptext"></span></div></td>
-      		<td><input type="text" name="caweb_multi_ga" size="50" value="<?php print get_site_option('caweb_multi_ga', ''); ?>" /></td></tr>
-  </table>
-  </div>
-  <input type="submit" name="caweb_multi_ga_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
- </form>
+    <div class="wrap">
+        <h1>Multisite Google Analytics</h1>
+        <table class="form-table">
+            <tr>
+                <td>
+                    <div class="tooltip">Analytics ID<span class="tooltiptext"></span></div>
+                </td>
+                <td><input type="text" name="caweb_multi_ga" size="50" value="<?php print get_site_option('caweb_multi_ga', ''); ?>" /></td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" name="caweb_multi_ga_options_submit" id="submit" class="button button-primary" value="<?php _e('Save Changes') ?>" />
+</form>
 
 <?php
 }

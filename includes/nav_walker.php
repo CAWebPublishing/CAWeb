@@ -165,21 +165,21 @@ if ( ! class_exists('CAWeb_Nav_Menu_Walker')) {
                 $submenu_text = 'style="display: none;"';
             } ?>
 
-		<li id="menu-item-<?php print $item_id; ?>" class="<?php print implode(' ', $classes); ?>">
+<li id="menu-item-<?php print $item_id; ?>" class="<?php print implode(' ', $classes); ?>">
 
-			<div class="menu-item-bar">
+    <div class="menu-item-bar">
 
-				<div class="menu-item-handle">
+        <div class="menu-item-handle">
 
-					<span class="item-title"><span class="menu-item-title"><?php print esc_html($title); ?></span> <span class="is-submenu" <?php print $submenu_text; ?>><?php _e('sub item'); ?></span><?php do_action('wp_nav_menu_item_title_user_restriction_type', $item_id, $item, $depth, $args); ?></span>
+            <span class="item-title"><span class="menu-item-title"><?php print esc_html($title); ?></span> <span class="is-submenu" <?php print $submenu_text; ?>><?php _e('sub item'); ?></span><?php do_action('wp_nav_menu_item_title_user_restriction_type', $item_id, $item, $depth, $args); ?></span>
 
-					<span class="item-controls">
+            <span class="item-controls">
 
-						<span class="item-type"><?php print esc_html($item->type_label); ?></span>
+                <span class="item-type"><?php print esc_html($item->type_label); ?></span>
 
-						<span class="item-order hide-if-js">
+                <span class="item-order hide-if-js">
 
-							<a href="<?php
+                    <a href="<?php
 
 								print wp_nonce_url(
 
@@ -201,9 +201,9 @@ if ( ! class_exists('CAWeb_Nav_Menu_Walker')) {
 
 								); ?>" class="item-move-up"><abbr title="<?php esc_attr_e('Move up'); ?>">&#8593;</abbr></a>
 
-							|
+                    |
 
-							<a href="<?php
+                    <a href="<?php
 
 								print wp_nonce_url(
 
@@ -225,147 +225,147 @@ if ( ! class_exists('CAWeb_Nav_Menu_Walker')) {
 
 								); ?>" class="item-move-down"><abbr title="<?php esc_attr_e('Move down'); ?>">&#8595;</abbr></a>
 
-						</span>
+                </span>
 
-						<a class="item-edit" id="edit-<?php print $item_id; ?>" title="<?php esc_attr_e('Edit Menu Item'); ?>" href="<?php
+                <a class="item-edit" id="edit-<?php print $item_id; ?>" title="<?php esc_attr_e('Edit Menu Item'); ?>" href="<?php
 
 							print (isset($_GET['edit-menu-item']) && $item_id == $_GET['edit-menu-item']) ? admin_url('nav-menus.php') : add_query_arg('edit-menu-item', $item_id, remove_query_arg($removed_args, admin_url('nav-menus.php#menu-item-settings-'.$item_id))); ?>"><?php _e('Edit Menu Item'); ?></a>
 
-					</span>
+            </span>
 
-				</div>
+        </div>
 
-			</div>
+    </div>
 
-			<div class="menu-item-settings" id="menu-item-settings-<?php print $item_id; ?>">
+    <div class="menu-item-settings" id="menu-item-settings-<?php print $item_id; ?>">
 
-				<?php if ('custom' == $item->type) : ?>
+        <?php if ('custom' == $item->type) : ?>
 
-					<p class="field-url description description-wide">
+        <p class="field-url description description-wide">
 
-						<label for="edit-menu-item-url-<?php print $item_id; ?>">
+            <label for="edit-menu-item-url-<?php print $item_id; ?>">
 
-							<?php _e('URL'); ?><br />
+                <?php _e('URL'); ?><br />
 
-							<input type="text" id="edit-menu-item-url-<?php print $item_id; ?>" class="widefat code edit-menu-item-url" name="menu-item-url[<?php print $item_id; ?>]" value="<?php print esc_attr($item->url); ?>" />
+                <input type="text" id="edit-menu-item-url-<?php print $item_id; ?>" class="widefat code edit-menu-item-url" name="menu-item-url[<?php print $item_id; ?>]" value="<?php print esc_attr($item->url); ?>" />
 
-						</label>
+            </label>
 
-					</p>
+        </p>
 
-				<?php endif; ?>
+        <?php endif; ?>
 
-				<p class="description description-wide">
+        <p class="description description-wide">
 
-					<label for="edit-menu-item-title-<?php print $item_id; ?>">
+            <label for="edit-menu-item-title-<?php print $item_id; ?>">
 
-						<?php _e('Navigation Label'); ?><br />
+                <?php _e('Navigation Label'); ?><br />
 
-						<input type="text" id="edit-menu-item-title-<?php print $item_id; ?>" class="widefat edit-menu-item-title" name="menu-item-title[<?php print $item_id; ?>]" value="<?php print esc_attr($item->title); ?>" />
+                <input type="text" id="edit-menu-item-title-<?php print $item_id; ?>" class="widefat edit-menu-item-title" name="menu-item-title[<?php print $item_id; ?>]" value="<?php print esc_attr($item->title); ?>" />
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<p class="field-title-attribute description description-wide">
+        <p class="field-title-attribute description description-wide">
 
-					<label for="edit-menu-item-attr-title-<?php print $item_id; ?>">
+            <label for="edit-menu-item-attr-title-<?php print $item_id; ?>">
 
-						<?php _e('Title Attribute'); ?><br />
+                <?php _e('Title Attribute'); ?><br />
 
-						<input type="text" id="edit-menu-item-attr-title-<?php print $item_id; ?>" class="widefat edit-menu-item-attr-title" name="menu-item-attr-title[<?php print $item_id; ?>]" value="<?php print esc_attr($item->post_excerpt); ?>" />
+                <input type="text" id="edit-menu-item-attr-title-<?php print $item_id; ?>" class="widefat edit-menu-item-attr-title" name="menu-item-attr-title[<?php print $item_id; ?>]" value="<?php print esc_attr($item->post_excerpt); ?>" />
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<p class="field-link-target description">
+        <p class="field-link-target description">
 
-					<label for="edit-menu-item-target-<?php print $item_id; ?>">
+            <label for="edit-menu-item-target-<?php print $item_id; ?>">
 
-						<input type="checkbox" id="edit-menu-item-target-<?php print $item_id; ?>" value="_blank" name="menu-item-target[<?php print $item_id; ?>]"<?php checked($item->target, '_blank'); ?> />
+                <input type="checkbox" id="edit-menu-item-target-<?php print $item_id; ?>" value="_blank" name="menu-item-target[<?php print $item_id; ?>]" <?php checked($item->target, '_blank'); ?> />
 
-						<?php _e('Open link in a new window/tab'); ?>
+                <?php _e('Open link in a new window/tab'); ?>
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<p class="field-css-classes description description-thin">
+        <p class="field-css-classes description description-thin">
 
-					<label for="edit-menu-item-classes-<?php print $item_id; ?>">
+            <label for="edit-menu-item-classes-<?php print $item_id; ?>">
 
-						<?php _e('CSS Classes (optional)'); ?><br />
+                <?php _e('CSS Classes (optional)'); ?><br />
 
-						<input type="text" id="edit-menu-item-classes-<?php print $item_id; ?>" class="widefat code edit-menu-item-classes" name="menu-item-classes[<?php print $item_id; ?>]" value="<?php print esc_attr(implode(' ', $item->classes)); ?>" />
+                <input type="text" id="edit-menu-item-classes-<?php print $item_id; ?>" class="widefat code edit-menu-item-classes" name="menu-item-classes[<?php print $item_id; ?>]" value="<?php print esc_attr(implode(' ', $item->classes)); ?>" />
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<p class="field-xfn description description-thin">
+        <p class="field-xfn description description-thin">
 
-					<label for="edit-menu-item-xfn-<?php print $item_id; ?>">
+            <label for="edit-menu-item-xfn-<?php print $item_id; ?>">
 
-						<?php _e('Link Relationship (XFN)'); ?><br />
+                <?php _e('Link Relationship (XFN)'); ?><br />
 
-						<input type="text" id="edit-menu-item-xfn-<?php print $item_id; ?>" class="widefat code edit-menu-item-xfn" name="menu-item-xfn[<?php print $item_id; ?>]" value="<?php print esc_attr($item->xfn); ?>" />
+                <input type="text" id="edit-menu-item-xfn-<?php print $item_id; ?>" class="widefat code edit-menu-item-xfn" name="menu-item-xfn[<?php print $item_id; ?>]" value="<?php print esc_attr($item->xfn); ?>" />
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<p class="field-description description description-wide">
+        <p class="field-description description description-wide">
 
-					<label for="edit-menu-item-description-<?php print $item_id; ?>">
+            <label for="edit-menu-item-description-<?php print $item_id; ?>">
 
-						<?php _e('Description'); ?><br />
+                <?php _e('Description'); ?><br />
 
-						<textarea id="edit-menu-item-description-<?php print $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php print $item_id; ?>]"><?php print esc_html($item->description); // textarea_escaped?></textarea>
+                <textarea id="edit-menu-item-description-<?php print $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php print $item_id; ?>]"><?php print esc_html($item->description); // textarea_escaped?></textarea>
 
-						<span class="description"><?php _e('The description will be displayed in the menu if the current theme supports it.'); ?></span>
+                <span class="description"><?php _e('The description will be displayed in the menu if the current theme supports it.'); ?></span>
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-                                <?php
+        <?php
 
                                 do_action('wp_nav_menu_item_custom_fields', $item_id, $item, $depth, $args); ?>
 
-				<p class="field-move hide-if-no-js description description-wide">
+        <p class="field-move hide-if-no-js description description-wide">
 
-					<label>
+            <label>
 
-						<span><?php _e('Move'); ?></span>
+                <span><?php _e('Move'); ?></span>
 
-						<a href="#" class="menus-move menus-move-up" data-dir="up"><?php _e('Up one'); ?></a>
+                <a href="#" class="menus-move menus-move-up" data-dir="up"><?php _e('Up one'); ?></a>
 
-						<a href="#" class="menus-move menus-move-down" data-dir="down"><?php _e('Down one'); ?></a>
+                <a href="#" class="menus-move menus-move-down" data-dir="down"><?php _e('Down one'); ?></a>
 
-						<a href="#" class="menus-move menus-move-left" data-dir="left"></a>
+                <a href="#" class="menus-move menus-move-left" data-dir="left"></a>
 
-						<a href="#" class="menus-move menus-move-right" data-dir="right"></a>
+                <a href="#" class="menus-move menus-move-right" data-dir="right"></a>
 
-						<a href="#" class="menus-move menus-move-top" data-dir="top"><?php _e('To the top'); ?></a>
+                <a href="#" class="menus-move menus-move-top" data-dir="top"><?php _e('To the top'); ?></a>
 
-					</label>
+            </label>
 
-				</p>
+        </p>
 
-				<div class="menu-item-actions description-wide submitbox">
+        <div class="menu-item-actions description-wide submitbox">
 
-					<?php if ('custom' != $item->type && $original_title !== false) : ?>
+            <?php if ('custom' != $item->type && $original_title !== false) : ?>
 
-						<p class="link-to-original">
+            <p class="link-to-original">
 
-							<?php printf(__('Original: %s'), '<a href="'.esc_attr($item->url).'">'.esc_html($original_title).'</a>'); ?>
+                <?php printf(__('Original: %s'), '<a href="'.esc_attr($item->url).'">'.esc_html($original_title).'</a>'); ?>
 
-						</p>
+            </p>
 
-					<?php endif; ?>
+            <?php endif; ?>
 
-					<a class="item-delete submitdelete deletion" id="delete-<?php print $item_id; ?>" href="<?php
+            <a class="item-delete submitdelete deletion" id="delete-<?php print $item_id; ?>" href="<?php
 
 					print wp_nonce_url(
 
@@ -387,25 +387,25 @@ if ( ! class_exists('CAWeb_Nav_Menu_Walker')) {
 
 					); ?>"><?php _e('Remove'); ?></a> <span class="meta-sep hide-if-no-js"> | </span> <a class="item-cancel submitcancel hide-if-no-js" id="cancel-<?php print $item_id; ?>" href="<?php print esc_url(add_query_arg(array('edit-menu-item' => $item_id, 'cancel' => time()), admin_url('nav-menus.php'))); ?>#menu-item-settings-<?php print $item_id; ?>"><?php _e('Cancel'); ?></a>
 
-				</div>
+        </div>
 
-				<input class="menu-item-data-db-id" type="hidden" name="menu-item-db-id[<?php print $item_id; ?>]" value="<?php print $item_id; ?>" />
+        <input class="menu-item-data-db-id" type="hidden" name="menu-item-db-id[<?php print $item_id; ?>]" value="<?php print $item_id; ?>" />
 
-				<input class="menu-item-data-object-id" type="hidden" name="menu-item-object-id[<?php print $item_id; ?>]" value="<?php print esc_attr($item->object_id); ?>" />
+        <input class="menu-item-data-object-id" type="hidden" name="menu-item-object-id[<?php print $item_id; ?>]" value="<?php print esc_attr($item->object_id); ?>" />
 
-				<input class="menu-item-data-object" type="hidden" name="menu-item-object[<?php print $item_id; ?>]" value="<?php print esc_attr($item->object); ?>" />
+        <input class="menu-item-data-object" type="hidden" name="menu-item-object[<?php print $item_id; ?>]" value="<?php print esc_attr($item->object); ?>" />
 
-				<input class="menu-item-data-parent-id" type="hidden" name="menu-item-parent-id[<?php print $item_id; ?>]" value="<?php print esc_attr($item->menu_item_parent); ?>" />
+        <input class="menu-item-data-parent-id" type="hidden" name="menu-item-parent-id[<?php print $item_id; ?>]" value="<?php print esc_attr($item->menu_item_parent); ?>" />
 
-				<input class="menu-item-data-position" type="hidden" name="menu-item-position[<?php print $item_id; ?>]" value="<?php print esc_attr($item->menu_order); ?>" />
+        <input class="menu-item-data-position" type="hidden" name="menu-item-position[<?php print $item_id; ?>]" value="<?php print esc_attr($item->menu_order); ?>" />
 
-				<input class="menu-item-data-type" type="hidden" name="menu-item-type[<?php print $item_id; ?>]" value="<?php print esc_attr($item->type); ?>" />
+        <input class="menu-item-data-type" type="hidden" name="menu-item-type[<?php print $item_id; ?>]" value="<?php print esc_attr($item->type); ?>" />
 
-			</div><!-- .menu-item-settings-->
+    </div><!-- .menu-item-settings-->
 
-			<ul class="menu-item-transport"></ul>
+    <ul class="menu-item-transport"></ul>
 
-		<?php
+    <?php
 
 		$output .= ob_get_clean();
         }

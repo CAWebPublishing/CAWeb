@@ -13,14 +13,14 @@ $align = "center" !== get_option('header_ca_branding_alignment') ? 'pull-'.get_o
 ?>
 <!-- Branding -->
 <div class="branding">
-  
-<?php   if ( 5 == caweb_get_page_version(get_the_ID())  && ! empty($logo)) : ?>
-     <div class="header-organization-banner"><a href="/"><img src="<?php print $logo ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
-<?php else : ?>
-     <div class="header-cagov-logo"><a href="http://www.ca.gov/" title="CA.gov" ><img src="<?php print $ca_logo ?>" alt="<?php print $logo_alt_text; ?>"/></a></div>
-     <?php if ( ! empty($logo)) : ?>
-     <div class="header-organization-banner <?php print $align ?>"><a href="/"><img src="<?php print $logo ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
-     <?php endif; ?>
-<?php endif; ?>
+
+    <?php   if ( 5 == caweb_get_page_version(get_the_ID())  && ! empty($logo)) : ?>
+    <div class="header-organization-banner"><a href="/"><img src="<?php print $logo ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
+    <?php else : ?>
+    <div class="header-cagov-logo"><a href="http://www.ca.gov/" title="CA.gov"><img src="<?php print $ca_logo ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
+    <?php if ( ! empty($logo)) : ?>
+    <div class="header-organization-banner <?php print $align ?>"><a href="/"><img src="<?php print $logo ?>" alt="<?php print $logo_alt_text; ?>" /></a></div>
+    <?php endif; ?>
+    <?php endif; ?>
 
 </div>

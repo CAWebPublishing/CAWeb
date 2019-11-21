@@ -480,20 +480,20 @@ if (class_exists('WP_Customize_Control')) {
 
         public function render_content() {
             ?>
-			<label>
-        <span class="customize-control-title "><?php print esc_html($this->label); ?> <span class="dashicons dashicons-image-rotate resetGoogleIcon"></span></span>
-				<ul id="caweb-icon-menu" class="autoUpdate">
-					<?php
+<label>
+    <span class="customize-control-title "><?php print esc_html($this->label); ?> <span class="dashicons dashicons-image-rotate resetGoogleIcon"></span></span>
+    <ul id="caweb-icon-menu" class="autoUpdate">
+        <?php
 					$icons = caweb_get_icon_list(-1, '', true);
             $iconList = '';
             foreach ($icons as $i) {
                 printf('<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() == $i ? ' selected' : '');
             } ?>
-					
-					<input id="_customize-input-<?php print $this->id ?>" type="hidden" name="ca_google_trans_icon" value="<?php print $this->value() ?>" <?php $this->link(); ?> >
-				</ul>
-			</label>		
-			<?php
+
+        <input id="_customize-input-<?php print $this->id ?>" type="hidden" name="ca_google_trans_icon" value="<?php print $this->value() ?>" <?php $this->link(); ?>>
+    </ul>
+</label>
+<?php
         }
     }
 }

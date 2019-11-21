@@ -4,20 +4,21 @@ get_header();
 $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
 ?>
-<body <?php body_class('primary') ?>  >
-<?php get_template_part('partials/content', 'header') ?>
 
-<div id="page-container">
-<div id="et-main-area">
+<body <?php body_class('primary') ?>>
+    <?php get_template_part('partials/content', 'header') ?>
 
-<div id="main-content" class="main-content">
-<main class="main-primary">
+    <div id="page-container">
+        <div id="et-main-area">
 
-			<?php while (have_posts()) : the_post(); ?>
+            <div id="main-content" class="main-content">
+                <main class="main-primary">
 
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    <?php while (have_posts()) : the_post(); ?>
 
-<?php
+                    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+                        <?php
 if ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true)) {
     print the_title('<!-- Page Title--><h1 class="page-title">', '</h1>');
 }
@@ -38,16 +39,17 @@ if ("on" == get_post_meta($post->ID, 'ca_custom_post_title_display', true)) {
 
 		?>
 
-				</article> <!-- .et_pb_post -->
+                    </article> <!-- .et_pb_post -->
 
-			<?php endwhile; ?>
-					<span class="return-top hidden-print"></span>
-</main>
-</div> <!-- #main-content -->
-</div>
-</div>
-<?php get_footer(); ?>
+                    <?php endwhile; ?>
+                    <span class="return-top hidden-print"></span>
+                </main>
+            </div> <!-- #main-content -->
+        </div>
+    </div>
+    <?php get_footer(); ?>
 
 
 </body>
+
 </html>

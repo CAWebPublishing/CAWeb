@@ -114,44 +114,49 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
         if (empty($module)) : 
         ?>
-			<script>
-				document.body.classList.remove('primary');
-            </script>
-		<?php else : ?>
-			<script>
-                (function( $ ) {
-		    		 "use strict";
-							 
-					 var section = $('#et_pb_ca_fullwidth_banner').parent();
-					 var banner = section.find('#et_pb_ca_fullwidth_banner');
-							 
-					 $(document).ready(function () {
-                         
-						<?php if (4 == $version) : ?>
-			    			$('#header').append(banner);
-						<?php else : ?>
-						    $('#header').after(banner);
-						<?php endif; ?>
-                                 
-                        if( ! section.children().length )
-                            $(section).remove();
-							 
-						// calculate top of screen on next repaint
-						window.setTimeout(function () {
-							 var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?>;
-							 var headerTop = banner.offset().top;
-							 var windowHeight = $(window).height();
-							 var height = windowHeight - headerTop;
-							 height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
-                                     
-                             // fill up the remaining heaight of this device
-							 banner.css({'height': height});
-						}, 250)
-					});
+<script>
+    document.body.classList.remove('primary');
+</script>
+<?php else : ?>
+<script>
+    (function($) {
+        "use strict";
 
-				})(jQuery);				
-			</script>
-        <?php 
+        var section = $('#et_pb_ca_fullwidth_banner').parent();
+        var banner = section.find('#et_pb_ca_fullwidth_banner');
+
+        $(document).ready(function() {
+
+            <
+            ? php
+            if (4 == $version): ? >
+                $('#header').append(banner); <
+            ? php
+            else : ? >
+                $('#header').after(banner); <
+            ? php endif; ? >
+
+            if (!section.children().length)
+                $(section).remove();
+
+            // calculate top of screen on next repaint
+            window.setTimeout(function() {
+                var MAXHEIGHT = < ? php print 4 == $version ? 450 : 1080 ? > ;
+                var headerTop = banner.offset().top;
+                var windowHeight = $(window).height();
+                var height = windowHeight - headerTop;
+                height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
+
+                // fill up the remaining heaight of this device
+                banner.css({
+                    'height': height
+                });
+            }, 250)
+        });
+
+    })(jQuery);
+</script>
+<?php 
         endif;
     }
 }

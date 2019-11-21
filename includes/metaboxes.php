@@ -34,8 +34,7 @@ function caweb_page_identifier_metabox_callback($post) {
 
 <form action="#" method="post">
 
-<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"
-  <?php
+    <input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display" <?php
   // if the post doesnt't have a ca_custom_post_title_display meta field or a page/post ID assumed new page
   // if new page, then ca_default_post_title_display option determines initial title setting
   if ( ! isset($post->ID) || ! in_array('ca_custom_post_title_display', get_post_custom_keys($post->ID))) {
@@ -44,22 +43,19 @@ function caweb_page_identifier_metabox_callback($post) {
   } else {
       print(get_post_meta($post->ID, 'ca_custom_post_title_display', true) == true ? 'checked="checked"' : '');
   } ?>>
-Display Title on Page
+    Display Title on Page
 
-	<?php if (get_option('ca_menu_selector_enabled') == true): ?>
-<p>You may display a different Navigation Menu on this page.</p>
+    <?php if (get_option('ca_menu_selector_enabled') == true): ?>
+    <p>You may display a different Navigation Menu on this page.</p>
 
-<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-	<option value="megadropdown"
-			<?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'megadropdown' ? 'selected="selected"' : '') ?>>Mega Drop</option>
-			  <option value="dropdown"
-			<?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'dropdown' ? 'selected="selected"' : '') ?>>Drop Down</option>
-			  <option value="singlelevel"
-			<?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'singlelevel' ? 'selected="selected"' : '') ?>>Single Level</option>
+    <select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
+        <option value="megadropdown" <?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'megadropdown' ? 'selected="selected"' : '') ?>>Mega Drop</option>
+        <option value="dropdown" <?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'dropdown' ? 'selected="selected"' : '') ?>>Drop Down</option>
+        <option value="singlelevel" <?php print(get_post_meta($post->ID, 'ca_default_navigation_menu', true) == 'singlelevel' ? 'selected="selected"' : '') ?>>Single Level</option>
 
 
-</select>
-<?php endif; ?>
+    </select>
+    <?php endif; ?>
 </form>
 
 

@@ -211,41 +211,39 @@ class ET_Builder_Module_CA_Section_Carousel extends ET_Builder_CAWeb_Module {
 
 		if ( ! empty($carousels)):
         ?>
-			<script>
-        $ = jQuery.noConflict();
+<script>
+    $ = jQuery.noConflict();
 
-       var media_carousels = <?php print_r($carousels); ?>;
+    var media_carousels = < ? php print_r($carousels); ? > ;
 
-        media_carousels.forEach(function(element, index) {
-          $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
-          		responsive : true,
-							responsive: {
-				          0: {
-				            items: 1,
-							nav: true
-				          },
-				          400: {
-				            items: 1,
-							nav: true
-				          },
-				          768: {
-				            items: undefined == element.slide_amount ? 4 : element.slide_amount,
-				            nav: true
-				          },
-				        },
-          		margin : 10,
-          		nav : true,
-          		dots : false,
-          navText: [
-          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
-          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
-        ],
+    media_carousels.forEach(function(element, index) {
+        $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
+            responsive: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                400: {
+                    items: 1,
+                    nav: true
+                },
+                768: {
+                    items: undefined == element.slide_amount ? 4 : element.slide_amount,
+                    nav: true
+                },
+            },
+            margin: 10,
+            nav: true,
+            dots: false,
+            navText: [
+                '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
+                '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
+            ],
         })
-        });
-
-
-			</script>
-            <?php
+    });
+</script>
+<?php
             endif;
 	}
 }
@@ -632,42 +630,40 @@ class ET_Builder_Module_Fullwidth_CA_Section_Carousel extends ET_Builder_CAWeb_M
 
 		if ( ! empty($carousels)):
         ?>
-        
-        <script>
-        $ = jQuery.noConflict();
 
-       var media_carousels = <?php print_r($carousels); ?>;
+<script>
+    $ = jQuery.noConflict();
 
-        media_carousels.forEach(function(element, index) {
-          $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
-          		responsive : true,
-			responsive: {
-			  0: {
-			    items: 1,
-					nav: true
-			  },
-			  400: {
-			    items: 1,
-					nav: true
-			  },
-			  768: {
-			    items: undefined == element.slide_amount ? 4 : element.slide_amount,
-			    nav: true
-			  },
-			},
-          		margin : 10,
-          		nav : true,
-          		dots : false,
-          navText: [
-          '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
-          '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
-        ],
+    var media_carousels = < ? php print_r($carousels); ? > ;
+
+    media_carousels.forEach(function(element, index) {
+        $('.<?php print $this->slug; ?>_' + index + ' .carousel-media').owlCarousel({
+            responsive: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                400: {
+                    items: 1,
+                    nav: true
+                },
+                768: {
+                    items: undefined == element.slide_amount ? 4 : element.slide_amount,
+                    nav: true
+                },
+            },
+            margin: 10,
+            nav: true,
+            dots: false,
+            navText: [
+                '<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
+                '<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
+            ],
         })
-        });
-
-
-			</script>
-            <?php
+    });
+</script>
+<?php
             endif;
 	}
 }

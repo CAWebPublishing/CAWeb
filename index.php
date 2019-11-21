@@ -3,25 +3,26 @@
 
 		$is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 ?>
-<body <?php body_class('primary') ?>  >
-<?php get_template_part('partials/content', 'header') ?>
+
+<body <?php body_class('primary') ?>>
+    <?php get_template_part('partials/content', 'header') ?>
 
 
-<div id="page-container">
-<div id="et-main-area">
-<div id="main-content" class="main-content">
-<div class="section">
-  <main class="main-primary" >
-	<?php
+    <div id="page-container">
+        <div id="et-main-area">
+            <div id="main-content" class="main-content">
+                <div class="section">
+                    <main class="main-primary">
+                        <?php
 		global $wp_query;
 
 			if (have_posts()) :
 				while (have_posts()) : the_post();
 					$post_format = et_pb_post_format(); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
 
-				<?php
+                            <?php
 					$thumb = '';
 
 					$width = (int) apply_filters('et_pb_index_blog_image_width', 1080);
@@ -42,21 +43,21 @@
 								</div>',
 								$first_video
 							); elseif ( ! in_array($post_format, array('gallery')) && 'on' === et_get_option('divi_thumbnails_index', 'on') && '' !== $thumb) : ?>
-							<a href="<?php the_permalink(); ?>">
-								<?php print_thumbnail($thumb, $thumbnail["use_timthumb"], $titletext, $width, $height); ?>
-							</a>
-					<?php
+                            <a href="<?php the_permalink(); ?>">
+                                <?php print_thumbnail($thumb, $thumbnail["use_timthumb"], $titletext, $width, $height); ?>
+                            </a>
+                            <?php
 						elseif ('gallery' === $post_format) :
 							et_pb_gallery_images();
 					    endif;
 					} ?>
 
-				<?php if ( ! in_array($post_format, array('link', 'audio', 'quote'))) : ?>
-					<?php if ( ! in_array($post_format, array('link', 'audio'))) : ?>
-						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-					<?php endif; ?>
+                            <?php if ( ! in_array($post_format, array('link', 'audio', 'quote'))) : ?>
+                            <?php if ( ! in_array($post_format, array('link', 'audio'))) : ?>
+                            <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                            <?php endif; ?>
 
-					<?php
+                            <?php
 						et_divi_post_meta();
 
 						if ('on' !== et_get_option('divi_blog_style', 'false') || (is_search() && ('on' === get_post_meta(get_the_ID(), '_et_pb_use_builder', true)))) {
@@ -65,10 +66,10 @@
 						    the_content();
 						}
 					?>
-				<?php endif; ?>
+                            <?php endif; ?>
 
-					</article> <!-- .et_pb_post -->
-			<?php
+                        </article> <!-- .et_pb_post -->
+                        <?php
 					endwhile;
 
 					if (function_exists('wp_pagenavi')) {
@@ -79,43 +80,48 @@
 					get_template_part('includes/no-results', 'index');
 				endif;
 			?>
-  </main>
-</div> <!-- #main-content -->
-</div>
-</div>
-</div>
-<style>
-#searchform{
-	float: right;
-}
-.entry-title a{
-	color: #428bca;
-}
-.sform{
-	border-bottom: none;
-}
-.searched-for{
-	margin-top: 5px;
-}
-.query{
-	float: right;
-}
-.count{
-	float: left;
-}
-</style>
-<?php if ( 5 == caweb_get_page_version(get_the_ID()) ) : ?>
-<style>
-.divider{
-	display: block !important;
-	width: 100%;
-	height: 2px;
-	color: #e09900;
-	border-color: #e09900;
-	background-color: #e09900;
-	margin: 0;
-}
-</style>
-<?php endif; ?>
-<?php get_footer(); ?>
+                    </main>
+                </div> <!-- #main-content -->
+            </div>
+        </div>
+    </div>
+    <style>
+        #searchform {
+            float: right;
+        }
+
+        .entry-title a {
+            color: #428bca;
+        }
+
+        .sform {
+            border-bottom: none;
+        }
+
+        .searched-for {
+            margin-top: 5px;
+        }
+
+        .query {
+            float: right;
+        }
+
+        .count {
+            float: left;
+        }
+    </style>
+    <?php if ( 5 == caweb_get_page_version(get_the_ID()) ) : ?>
+    <style>
+        .divider {
+            display: block !important;
+            width: 100%;
+            height: 2px;
+            color: #e09900;
+            border-color: #e09900;
+            background-color: #e09900;
+            margin: 0;
+        }
+    </style>
+    <?php endif; ?>
+    <?php get_footer(); ?>
 </body>
