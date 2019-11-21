@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package CAWeb_Standard
+ * @package CAWeb
  */
 
 	get_header();

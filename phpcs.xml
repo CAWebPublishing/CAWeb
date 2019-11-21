@@ -93,11 +93,6 @@
 		</properties>
 	</rule>
 
-	<rule ref="WordPress.WP.DeprecatedFunctions" />
-	<rule ref="WordPress.WP.DeprecatedClasses" />
-	<rule ref="WordPress.WP.DeprecatedParameters" />
-	<rule ref="WordPress.WP.DeprecatedParameterValues" />
-
 	<!--
 	#############################################################################
 	USE THE PHPCompatibility RULESET
