@@ -1,5 +1,13 @@
 <?php
-// Template Name: Search Results Page
+/**
+ * Template Name: Search Results Page
+ *
+ * This is the template for Search Results Page
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
+ *
+ * @package CAWeb
+ */
 
 get_header();
 ?>

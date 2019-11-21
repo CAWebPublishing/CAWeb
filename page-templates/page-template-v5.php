@@ -1,7 +1,16 @@
 <?php
-// Template Name: State v5
+/**
+ * Template Name: State v5
+ *
+ * This is the template for Search Results Page
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
+ *
+ * @package CAWeb
+ */
+
 get_header();
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
+$caweb_is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
 
@@ -23,14 +32,14 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							print the_title( sprintf( '<!-- Page Title--><h1 class="page-title %1$s">', ( $is_page_builder_used ? 'et_pb_row' : '' ) ), '</h1>' );
+							print esc_html( the_title( '<!-- Page Title--><h1 class="page-title">', '</h1>' ) );
 						}
 
 						print '<div class="entry-content">';
 
 						the_content();
 
-						if ( ! $is_page_builder_used ) {
+						if ( ! $caweb_is_page_builder_used ) {
 							wp_link_pages(
 								array(
 									'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ),
@@ -41,7 +50,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						print '</div>';
 
-						if ( ! $is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) {
+						if ( ! $caweb_is_page_builder_used && comments_open() && 'on' === et_get_option( 'divi_show_pagescomments', 'false' ) ) {
 							comments_template( '', true );
 						}
 
