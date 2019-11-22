@@ -292,7 +292,7 @@ function caweb_wp_enqueue_scripts() {
 			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
 			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
-			'ca_geo_locator_enabled' => 5 >= $ver && "on" === get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled')
+			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
 		)
 	);
 
@@ -379,8 +379,8 @@ function caweb_wp_head() {
 
 	if ( ! empty( get_option( 'ca_fav_ico', caweb_default_favicon_url() ) ) ) {
 		$caweb_fav_ico = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
-		print esc_html( sprintf( '<link title="Fav Icon" rel="icon" href="%1$s">', $caweb_fav_ico ) );
-		print esc_html( sprintf( '<link rel="shortcut icon" href="%1$s">', $caweb_fav_ico ) );
+		printf( '<link title="Fav Icon" rel="icon" href="%1$s">', esc_url( $caweb_fav_ico ) );
+		printf( '<link rel="shortcut icon" href="%1$s">', esc_url( $caweb_fav_ico ) );
 	}
 
 	if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
