@@ -46,5 +46,19 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 
 		return $styles;
 	}
+
+	function process_icon( $icon ){
+		if ( empty( $icon ) ){
+			return;
+		}
+
+		$icon = preg_replace( '/%%/', '', $icon );
+
+		// get appropriate icon
+		$tmp  = caweb_get_icon_list(-1, '', true);
+
+		$icon = isset( $tmp[ $icon ] ) ? 'ca-gov-icon-' . $tmp[$icon] : '';
+		return  $icon;
+	}
 }
 

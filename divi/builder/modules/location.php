@@ -225,7 +225,8 @@ class ET_Builder_CA_Location extends ET_Builder_CAWeb_Module {
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$display_icon = ( 'on' === $show_icon ? caweb_get_icon_span( $icon ) : '' );
+		$icon = $this->process_icon( $icon );
+		$display_icon = 'on' === $show_icon ? "<span class=\"$icon\"></span>" : '' ;
 
 		$address = array( $addr, $city, $state, $zip );
 		$address = array_filter( $address );

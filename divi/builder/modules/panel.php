@@ -172,7 +172,8 @@ class ET_Builder_Module_Panel extends ET_Builder_CAWeb_Module {
 
 		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
-		$display_icon = ( 'on' === $use_icon ? caweb_get_icon_span( $icon ) . ' ' : '' );
+		$icon = $this->process_icon($icon);
+		$display_icon = 'on' === $use_icon ? "<span class=\"$icon\"></span>" : '';
 
 		$heading_text_color = ( 'none' === $panel_layout && '' !== $heading_text_color ?
 						sprintf( ' style="color: %1$s;"', $heading_text_color ) : '' );
@@ -372,7 +373,8 @@ class ET_Builder_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 
 		$button_link = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 
-		$display_icon = ( 'on' === $use_icon ? caweb_get_icon_span( $icon ) . ' ' : '' );
+		$icon = $this->process_icon($icon);
+		$display_icon = 'on' === $use_icon ? "<span class=\"$icon\"></span>" : '';
 
 		$heading_text_color = ( 'none' === $panel_layout && '' !== $heading_text_color ?
 						sprintf( ' style="color: %1$s;"', $heading_text_color ) : '' );

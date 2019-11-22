@@ -293,11 +293,10 @@ class ET_Builder_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$heading_color = ( ! empty( $heading_color ) ? sprintf( ' style="color: %1$s" ', $heading_color ) : '' );
-
-		$icon_color['style'] = ( ! empty( $text_color ) ? sprintf( ' color: %1$s;', $text_color ) : '' );
 		$text_color          = ( ! empty( $text_color ) ? sprintf( ' style="color: %1$s" ', $text_color ) : '' );
 
-		$icon = ( 'on' === $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
+		$icon = $this->process_icon( $group_icon );
+		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
 
 		$link_as_button = ( 'on' === $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
 
@@ -615,12 +614,11 @@ class ET_Builder_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$heading_color = ( ! empty( $heading_color ) ? sprintf( ' style="color: %1$s" ', $heading_color ) : '' );
-
-		$icon_color['style'] = ( ! empty( $text_color ) ? sprintf( ' color: %1$s;', $text_color ) : '' );
 		$text_color          = ( ! empty( $text_color ) ? sprintf( ' style="color: %1$s" ', $text_color ) : '' );
 
-		$icon = ( 'on' === $group_icon_button ? caweb_get_icon_span( $group_icon, $icon_color ) : '' );
-
+		$icon = $this->process_icon( $group_icon );
+		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
+		
 		$link_as_button = ( 'on' === $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '' );
 
 		$no_pad = ( 'on' !== $group_icon_button ? 'padding-left: 0 !important;' : '' );

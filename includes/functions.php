@@ -499,58 +499,6 @@ function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ) {
 	return $symbols;
 }
 
-function caweb_get_icon_span( $font, $attr = array() ) {
-	if ( empty( $font ) ) {
-		return '';
-	}
-
-	// "%22" are saved as double quotes in shortcode attributes. Encode them back into %22
-	$font = str_replace( '"', '%22', $font );
-
-	// get appropriate icon
-	$tmp  = caweb_get_icon_list();
-	$icon = isset( $tmp[ $font ] ) ? $font :
-			( preg_match( '/^%%/', trim( $font ) ) ? caweb_get_icon_list( -1, '', true )[ preg_replace( '/%%/', '', $font ) ] : '' );
-
-	if ( empty( $icon ) ) {
-		return;
-	}
-
-	$t = get_site_option( 'dev', array() );
-	if ( empty( $t ) ) {
-		update_site_option( 'dev', array( $font, $icon ) );
-	}
-
-	$icon  = "ca-gov-icon-$icon";
-	$style = '';
-	$class = '';
-
-	// if style attribute was passed in
-	if ( isset( $attr['style'] ) ) {
-		$style = is_string( $attr['style'] ) ? explode( ';', $attr['style'] ) : $attr['style'];
-		$style = ! empty( $style ) ? sprintf( ' style="%1$s"', implode( $style, ';' ) ) : '';
-		unset( $attr['style'] );
-	}
-
-	// if class attribute was passed in
-	if ( isset( $attr['class'] ) ) {
-		$class = is_string( $attr['class'] ) ? explode( ' ', $attr['class'] ) : $attr['class'];
-		$class = ! empty( $class ) ? sprintf( ' %1$s', implode( $class, ' ' ) ) : '';
-		unset( $attr['class'] );
-	}
-
-	$span = sprintf( '<span class="%1$s%2$s"%3$s', $icon, $class, $style );
-	foreach ( $attr as $attribute => $value ) {
-		$span .= sprintf( ' %1$s="%2$s"', $attribute, $value );
-	}
-
-	return "$span></span>";
-}
-
-function caweb_get_blank_icon_span() {
-	return '<span style="visibility:hidden;" class="ca-gov-icon-logo"></span>';
-}
-
 if ( ! function_exists( 'caweb_get_excerpt' ) ) {
 	function caweb_get_excerpt( $con, $excerpt_length, $p = -1 ) {
 		if ( empty( $con ) ) {

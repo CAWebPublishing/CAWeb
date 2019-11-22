@@ -94,8 +94,12 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
+		$icon = $this->process_icon($scroll_bar_icon);
+		$scroll_bar_icon = "<span class=\"$icon\"></span>" ;
+
 		$scrollbar = ! empty( $scroll_bar_text ) ?
-			sprintf( '<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, caweb_get_icon_span( $scroll_bar_icon ) ) : '';
+			sprintf( '<div class="explore-invite"><div class="text-center"><a><span class="explore-title">%1$s</span>%2$s</a></div></div>', 
+			$scroll_bar_text, $scroll_bar_icon ) : '';
 
 		$content = $this->content;
 
@@ -125,21 +129,22 @@ class ET_Builder_Module_Fullwidth_Header_Banner extends ET_Builder_CAWeb_Module 
 
 		$(document).ready(function() {
 
-			<
-			? php
-			if (4 == $version): ? >
-				$('#header').append(banner); <
-			? php
-			else : ? >
-				$('#header').after(banner); <
-			? php endif; ? >
+			<?php
+			if (4 == $version): 
+			?>
+				$('#header').append(banner); 
+			<?php
+			else :
+			?>
+				$('#header').after(banner); 
+			<?php endif; ?>
 
 			if (!section.children().length)
 				$(section).remove();
 
 			// calculate top of screen on next repaint
 			window.setTimeout(function() {
-				var MAXHEIGHT = < ? php print 4 == $version ? 450 : 1080 ? > ;
+				var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?> ;
 				var headerTop = banner.offset().top;
 				var windowHeight = $(window).height();
 				var height = windowHeight - headerTop;
