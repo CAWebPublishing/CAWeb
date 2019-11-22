@@ -435,8 +435,6 @@ function caweb_wp_footer() {
 	wp_deregister_style( 'et-builder-googlefonts' );
 }
 
-add_action( 'wp_footer', 'caweb_late_wp_footer', 115 );
-
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 /**
  * CAWeb Admin Enqueue Scripts and Styles
