@@ -504,10 +504,10 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		
 		// Enqueue Styles
 		wp_enqueue_style('caweb-boot4-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION);
-		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWEB_VERSION);
+		wp_enqueue_style('caweb-admin-styles', $admin_css, array(), CAWEB_VERSION);
 		//wp_enqueue_style('caweb-admin-styles', CAWEB_URI . '/css/admin_custom.css', array(), CAWEB_VERSION);
 	} elseif (in_array($hook, array('post.php', 'post-new.php', 'widgets.php'))) {
-		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWEB_VERSION);
+		wp_enqueue_style('caweb-admin-styles', $admin_css, array(), CAWEB_VERSION);
 	}
 
 	/* Load editor styling */
