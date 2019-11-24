@@ -98,6 +98,7 @@
           };
 
 					jQuery.post(ajaxurl, data, function(response) {
+						
 						if(1 == response){
 
               if( null !== input_box )
