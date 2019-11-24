@@ -100,7 +100,7 @@ $google_translate_icon = get_option('ca_google_trans_icon', 'globe');
 /*
  Custom CSS
 */
-$ext_css_dir = sprintf('%1$s/css/external/%2$s', CAWebUri, get_current_blog_id() );
+$ext_css_dir = sprintf('%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 // Upladed CSS
 $ext_css =  get_option('caweb_external_css', array());
@@ -111,7 +111,7 @@ $custom_css = get_option('ca_custom_css', '');
 /*
  Custom JS
 */
-$ext_js_dir = sprintf('%1$s/js/external/%2$s', CAWebUri, get_current_blog_id() );
+$ext_js_dir = sprintf('%1$s/js/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 // Uploaded JS
 $ext_js = get_option('caweb_external_js', array());
