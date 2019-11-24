@@ -13,7 +13,7 @@ $caweb_is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/content', 'header' ); ?>
+	<?php get_template_part( 'partials/header' ); ?>
 
 	<div id="page-container">
 		<div id="et-main-area">

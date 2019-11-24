@@ -12,7 +12,7 @@ get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/content', 'header' ); ?>
+	<?php get_template_part( 'partials/header' ); ?>
 
 
 	<div id="page-container">

@@ -420,7 +420,7 @@ add_action( 'get_header', 'caweb_et_project_get_header' );
 function caweb_et_project_get_header( $name = null ) {
 	if ( 'project' === get_post_type( get_the_ID() ) ) {
 		locate_template( array( 'header.php' ), true );
-		get_template_part( 'partials/content', 'header' );
+		get_template_part( 'partials/header' );
 	}
 }
 
