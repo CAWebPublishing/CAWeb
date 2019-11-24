@@ -71,10 +71,6 @@
         var preview_field = document.getElementById(el_name + "_img");
         var filename_box = document.getElementById(el_name +  "_filename");
 
-				 var data = {
-          'action': 'caweb_fav_icon_check',
-          'icon_url': attachment.attributes.url,
-        };
 				if( /\d+_media_image/.test(el_name) ){
           var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
           input_box.value = attachment.attributes.url;
@@ -92,7 +88,12 @@
               org_logo_alt_textbox.value = attachment.attributes.alt;
             }
         }else{
+			var data = {
+				'action': 'caweb_fav_icon_check',
+				'icon_url': attachment.attributes.url,
+			  };
 					jQuery.post(ajaxurl, data, function(response) {
+						
 						if(1 == response){
 
 							preview_field.src = attachment.attributes.url;
