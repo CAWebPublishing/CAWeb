@@ -266,16 +266,16 @@ function caweb_wp_enqueue_scripts() {
 	wp_deregister_style('divi-fonts');
 
 	if( $vb_enabled ){
-		wp_register_script('cagov-vb-script', CAWebUri . '/divi/js/frontend-custom.js', array('jquery'), CAWebVersion, true);
+		wp_register_script('cagov-vb-script', CAWebUri . '/divi/js/frontend-custom.js', array('jquery'), CAWEB_VERSION, true);
 
 		// Enqueue Scripts
 		wp_enqueue_script('cagov-vb-script');
 		return;
 	}
 	// Register Scripts
-	wp_register_script('cagov-modernizr-script', getMinFile('/js/libs/modernizr-3.6.0.js', 'js'), array('jquery'), CAWebVersion, false);
+	wp_register_script('cagov-modernizr-script', getMinFile('/js/libs/modernizr-3.6.0.js', 'js'), array('jquery'), CAWEB_VERSION, false);
 
-	wp_register_script('cagov-frontend-script', $frontendJSfile, array(), CAWebVersion, true);
+	wp_register_script('cagov-frontend-script', $frontend_js_file, array(), CAWEB_VERSION, true);
 	
 	// Localize the search script with the correct site url
 	wp_localize_script('cagov-frontend-script', 'args', array('ca_google_analytic_id' => get_option('ca_google_analytic_id'),
@@ -584,15 +584,15 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	function caweb_builder_enqueue_scripts(){
 		$divi_builder = CAWebUri . "/divi";
 
-		//wp_register_script('caweb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
-		//wp_register_script('caweb-fb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWebVersion, true);
+		//wp_register_script('caweb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWEB_VERSION, true);
+		//wp_register_script('caweb-fb-builder-scripts', "$divi_builder/js/builder-bundle.min.js", array('jquery'), CAWEB_VERSION, true);
 
 
 		//wp_enqueue_script('caweb-builder-scripts');
 		//wp_enqueue_script('caweb-fb-builder-scripts');
 
-		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWebVersion);
-		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWebVersion);
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module.min.css", array(), CAWEB_VERSION);
+		//wp_enqueue_style('caweb-module-style', "$divi_builder/css/module-dbp.min.css", array(), CAWEB_VERSION);
 
 	}
 	
