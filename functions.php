@@ -20,6 +20,7 @@
 define( 'CAWEB_ABSPATH', get_stylesheet_directory() );
 define( 'CAWEB_URI', get_stylesheet_directory_uri() );
 define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
+define( 'CAWEB_EXTENSION', 'caweb-module-extension');
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 
 
@@ -250,7 +251,7 @@ add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
  */
 function caweb_wp_enqueue_scripts() {
 	global $pagenow;
-
+	$vb_enabled = isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ? true : false;
 	$post_id     = get_the_ID();
 	$ver         = caweb_get_page_version( $post_id );
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
@@ -276,32 +277,35 @@ function caweb_wp_enqueue_scripts() {
 		}
 	}
 
-	/* Register Scripts */
-	wp_register_script( 'cagov-modernizr-script', getMinFile( '/js/libs/modernizr-3.6.0.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, false );
-
-	wp_register_script( 'cagov-frontend-script', $frontend_js_file, array(), CAWEB_VERSION, true );
-
-	/* Localize the search script with the correct site url */
-	wp_localize_script(
-		'cagov-frontend-script',
-		'args',
-		array(
-			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
-			'ca_site_version'             => $ver,
-			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
-			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
-			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
-			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
-			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
-		)
-	);
-
-	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-modernizr-script' );
-	wp_enqueue_script( 'cagov-frontend-script' );
-
 	/* This removes Divi Google Font CSS */
 	wp_deregister_style( 'divi-fonts' );
+
+	if( ! $vb_enabled ){
+		/* Register Scripts */
+		wp_register_script( 'cagov-modernizr-script', getMinFile( '/js/libs/modernizr-3.6.0.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, false );
+
+		wp_register_script( 'cagov-frontend-script', $frontend_js_file, array(), CAWEB_VERSION, true );
+
+		/* Localize the search script with the correct site url */
+		wp_localize_script(
+			'cagov-frontend-script',
+			'args',
+			array(
+				'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
+				'ca_site_version'             => $ver,
+				'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
+				'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
+				'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
+				'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
+				'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
+			)
+		);
+
+		/* Enqueue Scripts */
+		wp_enqueue_script( 'cagov-modernizr-script' );
+		wp_enqueue_script( 'cagov-frontend-script' );
+	}
+
 }
 
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
@@ -314,6 +318,12 @@ add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
  * @return void
  */
 function caweb_late_wp_enqueue_scripts() {
+	$vb_enabled = isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ? true : false;
+	
+	if( $vb_enabled ){
+		return;
+	}
+	
 	/* If CAWeb is a child theme of Divi, include Accessibility Javascript */
 	if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 		wp_register_script( 'caweb-accessibility-scripts', CAWEB_URI . '/divi/js/accessibility.js', array( 'jquery' ), CAWEB_VERSION, true );
@@ -343,8 +353,8 @@ function caweb_late_wp_enqueue_scripts() {
 
 	/* Custom JS */
 	if ( '' !== get_option( 'ca_custom_js', '' ) ) {
-		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
-		wp_register_script( 'caweb-custom-js', $location, array( 'jquery' ), CAWEB_VERSION, true );
+		//$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
+		//wp_register_script( 'caweb-custom-js', $location, array( 'jquery' ), CAWEB_VERSION, true );
 
 		/*
 		Need to create file for custom js
@@ -589,26 +599,10 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
 */
 if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
-	add_action( 'et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init' );
-	/**
-	 * CAWeb Custom Modules
-	 *
-	 * @return void
-	 */
-	function caweb_et_pagebuilder_module_init() {
-		$divi_builder = CAWEB_ABSPATH . '/divi/builder';
-		include "$divi_builder/functions.php";
-		include "$divi_builder/layouts.php";
-
-		if ( class_exists( 'ET_Builder_Module' ) ) {
-			include "$divi_builder/class-caweb-builder-element.php";
-
-			$modules = glob( "$divi_builder/modules/*.php" );
-			foreach ( $modules as $module_file ) {
-				require_once $module_file;
-			}
-		}
-	}
+	if (! empty(CAWEB_EXTENSION) && file_exists(sprintf('%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION))) {
+		include  sprintf('%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH,  CAWEB_EXTENSION);
+    	include  sprintf('%1$s/divi/layouts.php', CAWEB_ABSPATH,  CAWEB_EXTENSION);
+    }
 } else {
 	include CAWEB_ABSPATH . '/divi/functions.php';
 }
