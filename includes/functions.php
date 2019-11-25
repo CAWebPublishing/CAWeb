@@ -26,7 +26,7 @@ function caweb_get_page_version( $post_id = -1 ) {
 }
 
 // Returns array of Menu Theme Locations
-function cawen_nav_menu_theme_locations() {
+function caweb_nav_menu_theme_locations() {
 	return array(
 		'header-menu' => 'Header Menu',
 		'footer-menu' => 'Footer Menu',
