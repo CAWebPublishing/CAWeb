@@ -82,7 +82,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
         $this->add_classname('header-slideshow-banner');
 				
 		global $et_pb_fullwidth_header_slider_item_num;
-				
+
 		$solo = 1 >= $et_pb_fullwidth_header_slider_item_num ? ' solo' : '';
                 
         $this->add_classname($solo);
@@ -90,8 +90,11 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
         
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-        $scrollbar = ! empty($scroll_bar_text) ? 
-            sprintf('<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, caweb_get_icon_span($scroll_bar_icon)) : '';
+		$icon = $this->process_icon($scroll_bar_icon);
+		$scroll_bar_icon = "<span class=\"$icon\"></span>" ;
+
+		$scrollbar = ! empty($scroll_bar_text) ? 
+            sprintf('<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon) : '';
 				
         $content = $this->content;
 

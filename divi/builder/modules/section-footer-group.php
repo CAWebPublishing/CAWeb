@@ -197,11 +197,9 @@ class CAWeb_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 
 		// List Color Styles
 		$text_color = ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '';
-		
-		$opts['style'] = ! empty($text_color) ? sprintf('color: %1$s', $text_color) : '';
-		$opts['style'] .= 'padding-right: 5px';
 
-		$icon = "on" == $group_icon_button ? caweb_get_icon_span($group_icon, $opts) : '';
+		$icon = $this->process_icon( $group_icon );
+		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
 
 		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '';
 
@@ -419,11 +417,9 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 
 		// List Color Styles
 		$text_color = ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '';
-		
-		$opts['style'] = ! empty($text_color) ? sprintf('color: %1$s', $text_color) : '';
-		$opts['style'] .= 'padding-right: 5px';
-
-		$icon = "on" == $group_icon_button ? caweb_get_icon_span($group_icon, $opts) : '';
+				
+		$icon = $this->process_icon( $group_icon );
+		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
 
 		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '';
 

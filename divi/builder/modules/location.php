@@ -200,8 +200,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
             ),
         );
 
-        $advanced_fields = array(
-        );
+		$advanced_fields = array();
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
     }
@@ -256,7 +255,8 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
         }
 
         if ("on" == $show_icon ){
-            $display_icon = caweb_get_icon_span($icon);
+			$icon = $this->process_icon( $icon );
+			$display_icon = "<span class=\"$icon\"></span>"; 
         }
 
         return sprintf('<div%1$s class="%2$s">%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', 
@@ -279,7 +279,8 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
         $contactClass = '';
 
         if ("on" == $show_icon ){
-            $display_icon = sprintf('<div>%1$s</div>', caweb_get_icon_span($icon));
+			$icon = $this->process_icon( $icon );
+			$display_icon = "<span class=\"$icon\"></span>"; 
         }else{
             $contactClass = ' ml-0';
         }

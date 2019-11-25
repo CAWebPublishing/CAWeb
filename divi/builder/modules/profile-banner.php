@@ -124,31 +124,30 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
         $round                = $this->props['round_image'];
         $url                    = $this->props['url'];
 
-        $this->add_classname('profile-banner-wrapper');
-        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+		$this->add_classname( 'profile-banner-wrapper' );
+		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-        $url = ! empty($url) ? esc_url($url) : '';
+		$url = ! empty( $url ) ? esc_url( $url ) : '';
 
-        if (empty($portrait_alt) && ! empty($portrait_url)) {
-            $portrait_id = attachment_url_to_postid($portrait_url);
-            $portrait_alt = get_post_meta($portrait_id, '_wp_attachment_image_alt', true);
-        }
+		if ( empty( $portrait_alt ) && ! empty( $portrait_url ) ) {
+			$portrait_id  = attachment_url_to_postid( $portrait_url );
+			$portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
+		}
 
-        if( 'on' !== $round ){
-            $round_class = '';
-            $inline_image = sprintf(' style="background:url(%1$s) no-repeat right bottom;"', $portrait_url);
-            $image = '';
-        }else{
-            $round_class = ' round-image';
-            $inline_image = '';
-            $image = sprintf('<div class="profile-banner-img-wrapper"><img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/></div>', $portrait_url, $portrait_alt);
-        }
+		if ( 'on' !== $round ) {
+			$round_class  = '';
+			$inline_image = sprintf( ' style="background:url(%1$s) no-repeat right bottom;"', $portrait_url );
+			$image        = '';
+		} else {
+			$round_class  = 'round-image';
+			$inline_image = '';
+			$image        = sprintf( '<div class="profile-banner-img-wrapper"><img src="%1$s" style="width: 90px; min-height: 90px;float: right;" alt="%2$s"/></div>', $portrait_url, $portrait_alt );
+		}
 
-        $output = sprintf('<div%1$s%2$s><div class="profile-banner%3$s"><div class="inner"%4$s>%5$s<div class="banner-subtitle">%6$s</div><div class="banner-title">%7$s</div><div class="banner-link"><a href="%8$s">%9$s</a></div></div></div></div>', $this->module_id(), $class, $round_class, $inline_image, $image, $job_title, $name, $url, $profile_link);
+		$output = sprintf( '<div%1$s%2$s><div class="profile-banner%3$s"><div class="inner"%4$s>%5$s<div class="banner-subtitle">%6$s</div><div class="banner-title">%7$s</div><div class="banner-link"><a href="%8$s">%9$s</a></div></div></div></div>', $this->module_id(), $class, $round_class, $inline_image, $image, $job_title, $name, $url, $profile_link );
 
-        return $output;
-    }
+		return $output;
+	}
 }
 new CAWeb_Module_Profile_Banner;
 
-?>

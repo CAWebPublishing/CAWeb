@@ -184,10 +184,11 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-            $display_options = "";
-            $display_icon = "on" == $use_icon ? caweb_get_icon_span($icon) . ' ' : "";
             $button_link = ! empty($button_link) ? esc_url($button_link) : '';
-            
+			$icon = $this->process_icon($icon);
+			$display_options = "";
+			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
+
             switch($panel_layout){
                 case "none":
                 case "standout":

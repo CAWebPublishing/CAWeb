@@ -179,7 +179,7 @@ gulp.task('customizer-js', parameterized( async function (_) {
 gulp.task('beautify', parameterized(async function(_) {
 	var options = {indentSize: 2};
 	var noFlags = ! Object.getOwnPropertyNames(_.params).length || undefined === _.params.file;
-	var src = ['*.php', '*.html'];
+	var src = ['**/*.php'];
 
 	if( ! noFlags ){
 		src = _.params.file;

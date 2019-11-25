@@ -18,10 +18,10 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
         $this->name = esc_html__('FullWidth Service Tiles', 'et_builder');
         $this->fullwidth = true;
 
-        $this->child_slug      = 'et_pb_ca_fullwidth_service_tiles_item';
-        $this->child_item_text = esc_html__('Tile', 'et_builder');
+		$this->child_slug      = 'et_pb_ca_fullwidth_service_tiles_item';
+		$this->child_item_text = esc_html__( 'Tile', 'et_builder' );
 
-        $this->main_css_element = '%%order_class%%';
+		$this->main_css_element = '%%order_class%%';
 
         $this->settings_modal_toggles = array(
             'general' => array(
@@ -42,12 +42,12 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
     function before_render() {
         global $tile_count, $tiles;
 
-        $tiles = array();
-        $titles = array();
-        $tile_images = array();
-        $tile_sizes= array();
-        $tile_links= array();
-        $tile_urls= array();
+		$tiles       = array();
+		$titles      = array();
+		$tile_images = array();
+		$tile_sizes  = array();
+		$tile_links  = array();
+		$tile_urls   = array();
 
         $tile_count = 0;
     }
@@ -80,27 +80,26 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
             ),
         );
 
-        $design_fields = array();
+		$design_fields = array();
 
-        $advanced_fields = array(
-        );
+		$advanced_fields = array();
 
-        return array_merge($general_fields, $design_fields, $advanced_fields);
-    }
-    function render($unprocessed_props, $content = null, $render_slug) {
-        $view_more_on_off     = $this->props['view_more_on_off'];
-        $view_more_text       = $this->props['view_more_text'];
-        $view_more_url        = $this->props['view_more_url'];
+		return array_merge( $general_fields, $design_fields, $advanced_fields );
+	}
+	function render( $unprocessed_props, $content = null, $render_slug ) {
+		$view_more_on_off = $this->props['view_more_on_off'];
+		$view_more_text   = $this->props['view_more_text'];
+		$view_more_url    = $this->props['view_more_url'];
 
-        $this->add_classname('section-understated');
-        $this->add_classname('collapsed');
-        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
+		$this->add_classname( 'section-understated' );
+		$this->add_classname( 'collapsed' );
+		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-        global $tile_count, $tiles;
+		global $tile_count, $tiles;
 
-        $view_more = "on" == $view_more_on_off ? sprintf('<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url($view_more_url), $view_more_text) : '';
+		$view_more = 'on' === $view_more_on_off ? sprintf( '<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url( $view_more_url ), $view_more_text ) : '';
 
-        $output = '';
+		$output = '';
 
         for ($i = 0; $i < $tile_count; $i++) {
             $title = sprintf( '<div class="teaser"><h4 class="title">%1$s</h4></div>', $tiles[$i]['item_title']);
@@ -126,9 +125,9 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
             }
         }
 
-        $output .= $this->content;
+		$output .= $this->content;
 
-        $output = sprintf('<div%1$s%2$s><div class="service-group clearfix">%3$s</div>%4$s</div>', $this->module_id(), $class, $output, $view_more);
+		$output = sprintf( '<div%1$s%2$s><div class="service-group clearfix">%3$s</div>%4$s</div>', $this->module_id(), $class, $output, $view_more );
 
         return $output;
     }
