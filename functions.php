@@ -62,7 +62,6 @@ add_action( 'after_setup_theme', 'caweb_setup_theme' );
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
 
     foreach (glob(pathinfo(__FILE__)['dirname'] . '/includes/*.php') as $file) {
