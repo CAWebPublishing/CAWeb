@@ -63,30 +63,11 @@ add_action( 'after_setup_theme', 'caweb_setup_theme' );
  * as indicating support for post thumbnails.
  * */
 function caweb_setup_theme() {
-	$inc_dir = CAWEB_ABSPATH . '/includes';
 
-	/* additional functions */
-	require_once "{$inc_dir}/functions.php";
-
-	/* Shortcodes */
-	require_once "{$inc_dir}/shortcodes.php";
-
-	/* customizer functions */
-	require_once "{$inc_dir}/customizer.php";
-
-	/* Navigation Menu Customization to wp-admin/nav-menus.php page */
-	require_once "{$inc_dir}/nav_walker.php";
-	require_once "{$inc_dir}/nav.php";
-
-	/* Metaboxes */
-	require_once "{$inc_dir}/metaboxes.php";
-
-	/* Password Reset */
-	require_once "{$inc_dir}/wp-login.php";
-
-	/* Filters */
-	require_once CAWEB_ABSPATH . '/includes/filters.php';
-
+    foreach (glob(pathinfo(__FILE__)['dirname'] . '/includes/*.php') as $file) {
+		require_once($file);
+	}
+	
 	/* Options Page */
 	require_once CAWEB_ABSPATH . '/options.php';
 
