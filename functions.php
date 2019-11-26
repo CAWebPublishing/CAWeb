@@ -65,10 +65,10 @@ add_action( 'after_setup_theme', 'caweb_setup_theme' );
 add_action('after_setup_theme', 'caweb_setup_theme');
 function caweb_setup_theme() {
 
-    foreach ( glob(pathinfo(__FILE__)['dirname'] . '/inc/*.php') as $file ) {
-        require_once($file);
+    foreach (glob(pathinfo(__FILE__)['dirname'] . '/includes/*.php') as $file) {
+		require_once($file);
 	}
-
+	
 	/* Options Page */
 	require_once CAWEB_ABSPATH . '/options.php';
 
