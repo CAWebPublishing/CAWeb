@@ -64,7 +64,7 @@ add_action( 'after_setup_theme', 'caweb_setup_theme' );
  */
 function caweb_setup_theme() {
 
-    foreach (glob(pathinfo(__FILE__)['dirname'] . '/includes/*.php') as $file) {
+	foreach (glob(__DIR__ . '/inc/*.php') as $file) {
 		require_once($file);
 	}
 	
