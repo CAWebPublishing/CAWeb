@@ -92,8 +92,8 @@ add_action( 'load-tools.php', 'caweb_load_themes_tools' );
  */
 function caweb_option_page() {
 
-	/* The actual menu file */
-	get_template_part( 'partials/content', 'options' );
+	// The actual menu file
+	get_template_part( 'partials/content/', 'options' );
 }
 
 /**
@@ -164,25 +164,23 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Alert Banners */
 	$alerts = array();
 
-	for ( $i = 0; $i < $values['caweb_alert_count']; $i++ ) {
-		$count = $i + 1;
-		$data  = array();
-
-		if ( ! isset( $values[ 'alert-status-' . $count ] ) ) {
-			continue;
-		}
-		$data['status']       = isset( $values[ 'alert-status-' . $count ] ) ? $values[ 'alert-status-' . $count ] : 'active';
-		$data['header']       = isset( $values[ 'alert-header-' . $count ] ) ? $values[ 'alert-header-' . $count ] : '';
-		$data['message']      = isset( $values[ 'alert-message-' . $count ] ) ? $values[ 'alert-message-' . $count ] : '';
-		$data['page_display'] = isset( $values[ 'alert-display-' . $count ] ) ? $values[ 'alert-display-' . $count ] : 'home';
-		$data['color']        = isset( $values[ 'alert-banner-color-' . $count ] ) ? $values[ 'alert-banner-color-' . $count ] : '#FDB81E';
-		$data['button']       = isset( $values[ 'alert-read-more-' . $count ] ) ? $values[ 'alert-read-more-' . $count ] : '';
-		$data['text']         = isset( $values[ 'alert-read-more-text-' . $count ] ) ? substr( $values[ 'alert-read-more-text-' . $count ], 0, 16 ) : 'More Information';
-		$data['url']          = isset( $values[ 'alert-read-more-url-' . $count ] ) ? $values[ 'alert-read-more-url-' . $count ] : '';
-		$data['target']       = isset( $values[ 'alert-read-more-target-' . $count ] ) ? $values[ 'alert-read-more-target-' . $count ] : '';
-		$data['icon']         = isset( $values[ 'alert-icon-' . $count ] ) ? $values[ 'alert-icon-' . $count ] : '';
-
+	foreach(preg_grep("/alert-header-/", array_keys( $values ) ) as $k){
+		$i = substr($k, strrpos($k,'-') + 1);
+		$data = array(
+			'status' => isset($values["alert-status-$i"]) ? $values["alert-status-$i"] : 'active',
+			'header' => isset($values["alert-header-$i"]) ? $values["alert-header-$i"] : '',
+			'message' => isset($values["alert-message-$i"]) ? $values["alert-message-$i"] : '',
+			'page_display' => isset($values["alert-display-$i"]) ? $values["alert-display-$i"] : 'home',
+			'color' => isset($values["alert-banner-color-$i"]) ? $values["alert-banner-color-$i"] : '#FDB81E',
+			'button' => isset($values["alert-read-more-$i"]) ? $values["alert-read-more-$i"] : '',
+			'url' => isset($values["alert-read-more-url-$i"]) ? $values["alert-read-more-url-$i"] : '',
+			'target' => isset($values["alert-read-more-target-$i"]) ? $values["alert-read-more-target-$i"] : '',
+			'icon' => isset($values["alert-icon-$i"]) ? $values["alert-icon-$i"] : '',
+		);		
+		
+		
 		$alerts[] = $data;
+
 	}
 
 	$values['caweb_alerts'] = $alerts;
@@ -440,19 +438,10 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_x_ua_compatibility',
 	);
 
-	$caweb_utility_header_options = array(
-		'ca_contact_us_link',
-		'ca_geo_locator_enabled',
-		'ca_utility_home_icon',
-		'ca_utility_link_1',
-		'ca_utility_link_1_name',
-		'ca_utility_link_1_new_window',
-		'ca_utility_link_2',
-		'ca_utility_link_2_name',
-		'ca_utility_link_2_new_window',
-		'ca_utility_link_3',
-		'ca_utility_link_3_name',
-		'ca_utility_link_3_new_window',
+	$caweb_utility_header_options = array('ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_utility_home_icon',
+		'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window', 'ca_utility_link_1_enable',
+		'ca_utility_link_2', 'ca_utility_link_2_name', 'ca_utility_link_2_new_window', 'ca_utility_link_2_enable',
+		'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window', 'ca_utility_link_3_enable',
 	);
 
 	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background' );
@@ -594,6 +583,17 @@ function caweb_fav_icon_checker() {
 	wp_die(); /* this is required to terminate immediately and return a proper response */
 }
 add_action( 'wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker' );
+
+function caweb_icon_menu_func(){
+	$input = isset($_POST['name']) ? $_POST['name'] : '';
+	$sel = isset($_POST['select']) ? $_POST['select'] : '';
+
+	print caweb_icon_menu(array( 'select' => $sel, 'name' => $input));
+	wp_die(); // this is required to terminate immediately and return a proper response
+
+}
+add_action('wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func');
+add_action('wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func');
 
 /**
  * Default CAWeb fav ico URL

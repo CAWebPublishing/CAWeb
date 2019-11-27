@@ -1,0 +1,18 @@
+.caweb-icon-menu{
+    height: 306px;
+    overflow: auto;
+}
+.caweb-icon-menu li,
+.caweb-icon-menu-header span.resetIcon{
+    cursor: pointer;
+}
+.caweb-icon-menu li:hover{
+    background-color: #007bff;
+}
+
+.caweb-icon-menu li.ca-gov-icon-caweb{
+    padding-right: 22px;
+}
+.caweb-icon-menu li.ca-gov-icon-social_googleplus{
+    padding-right: 12px;
+}

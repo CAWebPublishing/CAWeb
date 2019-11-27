@@ -28,8 +28,8 @@ module.exports = {
 	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
-		'assets/js/caweb/icon.js',
-		'assets/js/caweb/admin.js',
+		'assets/js/caweb/options/*.js',
+		'assets/js/caweb/admin-old.js',
 	], 
 	commonJSFiles: [ // Common JS 
 		'assets/js/caweb/google.js',
@@ -42,7 +42,7 @@ module.exports = {
 		'assets/js/wp/theme-customizer.js'
 	],
 	themeCustomizerControl: [ // Theme Customizer Control JS 
-		'assets/js/caweb/icon.js',
+		'assets/js/caweb/options/icon.js',
 		'assets/js/wp/theme-customizer-controls.js'
 	],
 };
