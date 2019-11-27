@@ -94,6 +94,7 @@ function caweb_option_page() {
 
 	// The actual menu file
 	get_template_part( 'partials/content-options' );
+	//get_template_part( 'partials/options' );
 }
 
 /**

@@ -223,6 +223,7 @@ jQuery(document).ready(function() {
 		$(readMoreTextInput).attr('type', 'text');
 		$(readMoreTextInput).attr('name', 'alert-read-more-text-' + alertCount);
 		$(readMoreTextInput).attr('id', 'alert-read-more-text-' + alertCount);
+		$(readMoreTextInput).attr('maxlength', 16);
 		$(readMoreTextInput).addClass('form-control');
 
 		$(readMoreTextSmall).addClass('text-muted');
