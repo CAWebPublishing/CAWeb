@@ -624,7 +624,7 @@ function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ) {
 
 function getMinFile( $f, $ext = 'css' ) {
 	// if a minified version exists
-	if( file_exists(CAWEB_ABSPATH .  str_replace( ".$ext", ".min.$ext", $f) ) ){
+	if( false && file_exists(CAWEB_ABSPATH .  str_replace( ".$ext", ".min.$ext", $f) ) ){
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f);
 	}else{
 		return CAWEB_URI . $f;

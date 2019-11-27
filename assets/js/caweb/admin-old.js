@@ -1,11 +1,35 @@
- /* Functions used on Admin Pages */
+/* Functions used on Admin Pages */
+ /* CAWeb Option Page */
  (function( $ ) {
-	
+	"use strict";
+  var changeMade = false;
+
+$(window).on('beforeunload', function(){
+	  if( changeMade && "nav-menus.php" !== args.changeCheck)
+			  return 'Are you sure you want to leave?';
+
+  });
 
 $('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
 $('input[type="button"]').click(function(e){changeMade = true; });
 $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
+$('.caweb-nav-tab').click(function() {
+  var tabs = document.getElementsByClassName('caweb-nav-tab');
+  var selected_tab = this.getAttribute("name");
+
+  for (var i = 0; i < tabs.length; i++) {
+	  if( selected_tab !== tabs[i].getAttribute("name") ){
+		  tabs[i].classList.remove("nav-tab-active");
+			document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
+	  }else{
+		  tabs[i].classList.add("nav-tab-active");
+		  document.getElementById(selected_tab).classList.remove('hidden');
+	  }
+  }
+
+  document.getElementById('tab_selected').value = selected_tab;
+});
 
 $('#ca_site_version').change(function() {
   var version = this.options[this.selectedIndex].value;
@@ -54,7 +78,12 @@ $('#ca_site_version').change(function() {
 	  }
   });
 
- 
+ $('#resetFavIcon').click(function() {
+	var ico = args.defaultFavIcon;
+		document.getElementById('ca_fav_ico').value = ico;
+	  document.getElementById('ca_fav_ico_img').src = ico;
+	  document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
+  });
 
 $('#ca_google_search_id').on('input',function(e){
 var front_search_option = $('#general table:first tr:nth-child(6)');
@@ -80,6 +109,74 @@ $('#ca_x_ua_compatibility').on('input',function(e){
 
 
 
+$( "#uploadedCSS, #uploadedJS" ).sortable();
+$( "#uploadedCSS, #uploadedJS" ).disableSelection();
+
+$('.remove-css, .remove-js').click(function(e){
+e.preventDefault();
+  var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
+
+  if (r == true) {
+	  changeMade = true;
+	  this.parentNode.remove();
+  }
+});
+
+$('#addCSS, #addJS').click(function(e){
+  
+  addExternal($(this).closest('table'), $(this).attr('name'));	
+  changeMade = true;
+
+});
+
+function addExternal(ext_table, ext){
+  var rowCount = ext_table.children().children().length;
+  var row = document.createElement('TR');
+  var col1 = document.createElement('TD');
+  var rem = document.createElement('A');
+  var col2 = document.createElement('TD');
+  var fileUpload = document.createElement('Input');
+
+row.classList = "pending-" + ext;
+rem.classList = "dashicons dashicons-dismiss remove-" + ext;
+
+  fileUpload.type = "file";
+  fileUpload.name = rowCount + ext + "_upload";
+  fileUpload.id = rowCount + ext + "_upload";
+  fileUpload.accept = "." + ext;
+
+rem.addEventListener('click', function (e) {
+  e.preventDefault();
+  var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
+
+ if (r == true) {
+		changeMade = true;
+		this.parentNode.parentNode.remove();
+	}
+});
+
+fileUpload.addEventListener('change', function () {
+  var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
+  var extension = name.lastIndexOf(".") > 0 ?
+					name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
+
+  if( "" === extension || ext !== extension){
+	alert(name + " isn't a valid " + ext + " extension and was not uploaded.");
+	this.parentNode.remove();
+  }else{
+	rem.title = "remove " + name;
+  }
+
+});
+
+  col2.append(rem);
+  col2.append(fileUpload);
+
+  row.append(col1);
+  row.append(col2);
+
+  ext_table.append(row);
+}
 
 $( "#cawebAlerts" ).sortable();
 $( "#cawebAlerts" ).disableSelection();
@@ -115,8 +212,10 @@ changeMade = true;
 });
 
 $('.caweb-alert div a.alert-toggle').click(function(e){ displayAlertOptions(this); });
+$('.removeAlert').click(function(e){ removeAlert(this); });
 $('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
 $('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling, false); });
+$('.caweb-alert div a.activateAlert').click(function(e){ activateAlert(this);});
 
 $('[class*="caweb-alert-"] .button-primary.ok').click(function(e){ saveAlertSettings(this); });
 
@@ -206,6 +305,9 @@ var alert_heading = document.createElement('H3');
 
   // Hidden Options for Read More Button
 var hidden_container = document.createElement('DIV');
+var alert_read_more_target_text = document.createElement('P');
+var alert_read_more_target_text_input = document.createElement('INPUT');
+var alert_read_more_target_text_tip = document.createElement('I');
 var alert_read_more_target_url = document.createElement('P');
 var alert_read_more_target_url_input = document.createElement('INPUT');
 var alert_open_link = document.createElement('LABEL');
@@ -261,10 +363,18 @@ alert_read_more_input.addEventListener('click',  function(e){ displayReadMoreOpt
 label3.appendChild(alert_read_more_input);
 alert_read_more.appendChild(label3);
 
+alert_read_more_target_text.innerHTML = "Read More Button Text";
+
+alert_read_more_target_text_input.type = "text";
+alert_read_more_target_text_input.name = "alert-read-more-text-" + alertCount;
+alert_read_more_target_text_input.maxLength = 16;
+
 alert_read_more_target_url.innerHTML = "Read More Button URL";
 
 alert_read_more_target_url_input.type = "text";
 alert_read_more_target_url_input.name = "alert-read-more-url-" + alertCount;
+
+alert_read_more_target_text_tip.innerHTML = "(Max Characters: 16)";
 
 alert_open_link.innerHTML = "Open link in";
 
@@ -284,6 +394,9 @@ label5.appendChild(alert_read_more_current_target);
 label5.appendChild(document.createTextNode("Current Tab"));
 
 hidden_container.classList = "hidden";
+hidden_container.appendChild(alert_read_more_target_text);
+hidden_container.appendChild(alert_read_more_target_text_input);
+hidden_container.appendChild(alert_read_more_target_text_tip);
 hidden_container.appendChild(alert_read_more_target_url);
 hidden_container.appendChild(alert_read_more_target_url_input);
 hidden_container.appendChild(alert_open_link);
@@ -351,7 +464,15 @@ e.parentNode.nextElementSibling.classList.toggle('hidden');
   e.classList.add('dashicons-arrow-up');
   }
 }
+function removeAlert(e){
+  var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
 
+  if (r == true) {
+	  changeMade = true;
+	  e.parentNode.parentNode.parentNode.remove();
+  }
+
+}
 function displayReadMoreOptions(e) {
   e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
 }
