@@ -351,7 +351,6 @@ function caweb_wp_head() {  ?>
 	<?php
 
 	$caweb_fav_ico = ! empty(get_option( 'ca_fav_ico', '' )) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
-	update_site_option( "dev", $caweb_fav_ico );
 		printf( '<link title="Fav Icon" rel="icon" href="%1$s">', esc_url( $caweb_fav_ico ) );
 		printf( '<link rel="shortcut icon" href="%1$s">', esc_url( $caweb_fav_ico ) );
 
