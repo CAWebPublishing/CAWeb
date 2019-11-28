@@ -12,40 +12,18 @@
 global $is_IE, $is_edge;
 $caweb_x_ua_compatibility = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
 $caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
+$caweb_fav_ico            = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-
-<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
-
-<!--[if (gt IE 9)]><!-->
-
 <html class="no-js" lang="en">
-<!--<![endif]-->
 
 <head>
 
 	<meta charset="utf-8">
-
-
 	<meta name="Author" content="State of California" />
-
-
 	<meta name="Description" content="State of California" />
-
 	<meta name="Keywords" content="California, government" />
-
-	<?php
-	if ( $is_IE && ! $is_edge && $caweb_x_ua_compatibility ) :
-		?>
-	<!-- Use highest compatibility mode -->
-	<meta http-equiv="X-UA-Compatible" content="IE=<?php print esc_attr( $caweb_x_ua_compatibility ); ?>">
-	<?php endif; ?>
 
 	<!-- http://t.co/dKP3o1e -->
 	<meta name="HandheldFriendly" content="True">
@@ -59,9 +37,24 @@ $caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
 	<!-- Google Meta-->
 	<meta name="google-site-verification" content="<?php print esc_attr( $caweb_google_meta_id ); ?>" />
 
+	<?php if ( $is_IE  ) : ?>
+	<!-- Activate ClearType for Mobile IE -->
+	<meta http-equiv="cleartype" content="on">
+	<?php if ( ! $is_edge && $caweb_x_ua_compatibility ) : ?>
+	<!-- Use highest compatibility mode -->
+	<meta http-equiv="X-UA-Compatible" content="IE=<?php print esc_attr( $caweb_x_ua_compatibility ); ?>">
+	<?php endif; ?>
+	<?php endif; ?>
+
+	<?php
+	if ( $is_IE && ! $is_edge && $caweb_x_ua_compatibility ) :
+		?>
+	<!-- Use highest compatibility mode -->
+	<meta http-equiv="X-UA-Compatible" content="IE=<?php print esc_attr( $caweb_x_ua_compatibility ); ?>">
+	<?php endif; ?>
+
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
-	<!-- selectivizr.com, emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8 -->
 
 
 	<?php
@@ -77,29 +70,5 @@ $caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
 
 	?>
 
-	<!--[if (lt IE 9) & (!IEMobile)]>
-
-<script src="<?php printf( '%1$s/js/libs/selectivizr-min.js', esc_url( CAWEB_URI ) ); ?>"></script>
-
-<![endif]-->
-
-
-	<!-- Activate ClearType for Mobile IE -->
-
-	<!--[if IE]>
-
-<meta http-equiv="cleartype" content="on">
-
-<![endif]-->
-
-
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 8]>
-	<script src="<?php printf( '%1$s/js/libs/html5shiv.min.js', esc_url( CAWEB_URI ) ); ?>"></script>
-
-	<script src="<?php printf( '%1$s/js/libs/respond.min.js', esc_url( CAWEB_URI ) ); ?>"></script>
-
-<![endif]-->
 
 </head>

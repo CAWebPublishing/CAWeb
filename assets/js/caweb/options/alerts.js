@@ -341,7 +341,7 @@ jQuery(document).ready(function() {
 
 		// Initialize 3rd Party Plugins after DOMs have been added
 		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
-		console.log(args.tinymce_settings)
+
 		$(readMoreInput).bootstrapToggle();
 		$(readMoreTargetInput).bootstrapToggle({
 			on: 'Yes',
