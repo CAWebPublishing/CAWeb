@@ -1,43 +1,72 @@
 <?php
-/*
-	Sources
-	https://github.com/WordPress/WordPress/blob/master/wp-admin/update.php
-	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-theme-upgrader.php
-	https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+/**
+ * CAWeb Theme Upgrader
+ *
+ * @link https://github.com/WordPress/WordPress/blob/master/wp-admin/update.php
+ * @link https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+ * @package CAWeb
  */
+
 if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
+	/**
+	 * CAWeb Theme Upgrader
+	 *
+	 * @link https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-theme-upgrader.php
+	 */
 	final class CAWeb_Theme_Update {
+
+		/**
+		 * Member Variable
+		 *
+		 * @var string $transient_name Name of update transient.
+		 */
 		protected $transient_name = 'caweb_update_themes';
+
+		/**
+		 * Member Variable
+		 *
+		 * @var string $user GitHub User/Organization Name.
+		 */
 		protected $user;
 
 		/**
-		 * Theme Name
+		 * Member Variable
+		 *
+		 * @var string $theme_name Name of Theme.
 		 */
-
 		protected $theme_name;
-		protected $current_version;
-		protected $changelog;
 
-		private static $_this;
+		/**
+		 * Member Variable
+		 *
+		 * @var string $current_version Theme Version.
+		 */
+		protected $current_version;
+
+		/**
+		 * Member Variable
+		 *
+		 * @var CAWeb_Theme_Update $caweb_this Self instance.
+		 */
+		private static $caweb_this;
 
 		/**
 		 * Initialize a new instance of the WordPress Auto-Update class
 		 *
-		 * @param string $current_version
-		 * @param string $theme_name
+		 * @param WP_Theme $theme Current Theme data.
 		 */
-		function __construct( $theme ) {
-			// Don't allow more than one instance of the class
-			if ( isset( self::$_this ) ) {
+		public function __construct( $theme ) {
+			/* Don't allow more than one instance of the class */
+			if ( isset( self::$caweb_this ) ) {
 				wp_die( sprintf( esc_html__( '%s: You cannot create a second instance of this class.', 'et-core' ), get_class( $this ) ) );
 			}
 
-			self::$_this = $this;
+			self::$caweb_this = $this;
 
-			// Set the class public variables
-			$this->user            = get_site_option( 'caweb_username', 'CAWebPublishing' );
-			$this->theme_name      = $theme->Name;
-			$this->current_version = $theme->Version;
+			/* Set the class public variables */
+			$this->user            = get_site_option( 'caweb_username', 'CA-CODE-Works' );
+			$this->theme_name      = $theme->name;
+			$this->current_version = $theme->version;
 
 			$this->args = array(
 				'headers' => array(
@@ -55,32 +84,42 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			add_action( 'admin_post_nopriv_caweb_update_available', array( $this, 'caweb_update_available' ) );
 			add_action( 'admin_post_caweb_update_available', array( $this, 'caweb_update_available' ) );
 
-			// define the alternative API for updating checking
+			/* define the alternative API for updating checking */
 			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'caweb_check_update' ) );
 
-			// Define the alternative response for information checking
+			/* Define the alternative response for information checking */
 			add_filter( 'site_transient_update_themes', array( $this, 'caweb_add_themes_to_update_notification' ) );
 
-			// Define the alternative response for download_package which gets called during theme upgrade
+			/* Define the alternative response for download_package which gets called during theme upgrade */
 			add_filter( 'upgrader_pre_download', array( $this, 'caweb_upgrader_pre_download' ), 10, 3 );
 
-			// Define the alternative response for upgrader_pre_install
+			/* Define the alternative response for upgrader_pre_install */
 			add_filter( 'upgrader_source_selection', array( $this, 'caweb_upgrader_source_selection' ), 10, 4 );
 
-			// Define the alternative response for upgrader_pre_install
+			/* Define the alternative response for upgrader_pre_install */
 			add_filter( 'upgrader_post_install', array( $this, 'caweb_upgrader_post_install' ), 10, 3 );
 
-			add_action( 'after_setup_theme', array( $this, 'remove_theme_update_actions' ), 11 );
+			add_action( 'after_setup_theme', array( $this, 'remove_theme_update_actions' ), 12 );
 
 			add_action( 'admin_post_caweb_get_changelog', array( $this, 'caweb_get_theme_changelog' ) );
 		}
 
-		function remove_theme_update_actions() {
+		/**
+		 * Remove theme actions after theme setup
+		 *
+		 * @return void
+		 */
+		public function remove_theme_update_actions() {
 			remove_filter( 'pre_set_site_transient_update_themes', 'caweb_check_update' );
 			remove_filter( 'site_transient_update_themes', 'caweb_add_themes_to_update_notification' );
 		}
 
-		function caweb_get_theme_changelog() {
+		/**
+		 * Return Theme Changelog
+		 *
+		 * @return void
+		 */
+		public function caweb_get_theme_changelog() {
 			$caweb_update_themes = get_site_transient( $this->transient_name );
 
 			if ( ! empty( $caweb_update_themes ) && isset( $caweb_update_themes->response[ $this->theme_name ]['changelog'] ) ) {
@@ -95,7 +134,14 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 			exit();
 		}
-		// alternative API for updating checking
+
+		/**
+		 * Alternative API for updating checking
+		 *
+		 * @param  array $update_transient Available updates.
+		 *
+		 * @return array
+		 */
 		public function caweb_check_update( $update_transient ) {
 			if ( ! isset( $update_transient->checked ) ) {
 				return $update_transient;
@@ -107,16 +153,10 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 			$payload = wp_remote_get( sprintf( 'https://api.github.com/repos/%1$s/%2$s/releases/latest', $this->user, $this->theme_name ), $this->args );
 
-			if ( is_wp_error( $payload ) ) {
-				// $options['body']['failed_request'] = 'true';
-					// $theme_request = wp_remote_post( 'https://cdn.elegantthemes.com/api/api.php', $options );
-			}
-
 			if ( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) === 200 ) {
 				$payload = json_decode( wp_remote_retrieve_body( $payload ) );
 
-				// version compare doesn't compare correctly 1.0.0a is less than 1.0.0 and that is incorrect
-				// version_compare($payload->tag_name, $this->current_version, '>')
+				/* Version compare doesn't compare correctly 1.0.0a is less than 1.0.0 and that is incorrect */
 				if ( ! empty( $payload ) && $payload->tag_name > $this->current_version ) {
 					$obj                = array();
 					$obj['new_version'] = $payload->tag_name;
@@ -143,7 +183,14 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			return $update_transient;
 		}
 
-		// Add the CAWeb Update to List of Available Updated
+		/**
+		 * Add the CAWeb Update to List of Available Updated
+		 *
+		 * @link http://hookr.io/filters/site_transient_update_themes/
+		 * @param  array $update_transient Array of updates.
+		 *
+		 * @return array
+		 */
 		public function caweb_add_themes_to_update_notification( $update_transient ) {
 			$caweb_update_themes = get_site_transient( $this->transient_name );
 
@@ -151,7 +198,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				return $update_transient;
 			}
 
-			// Fix for warning messages on Dashboard / Updates page
+			/* Fix for warning messages on Dashboard / Updates page */
 			if ( ! is_object( $update_transient ) ) {
 				$update_transient = new stdClass();
 			}
@@ -161,8 +208,17 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			return $update_transient;
 		}
 
-		// Alternative upgrader_pre_download for the WordPress Updater
-		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+		/**
+		 * Alternative upgrader_pre_download for the WordPress Updater
+		 * Filters whether to return the package.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/upgrader_pre_download/
+		 * @param  bool        $reply Whether to bail without returning the package. Default false.
+		 * @param  string      $package The package file name.
+		 * @param  WP_Upgrader $upgrader The WP_Upgrader instance.
+		 *
+		 * @return bool
+		 */
 		public function caweb_upgrader_pre_download( $reply, $package, $upgrader ) {
 			if ( ! class_exists( 'Theme_Upgrader' ) ) {
 				/** Theme_Upgrader class */
@@ -176,14 +232,14 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
 
-				// move any external site css if external css directory exists
+				/* move any external site css if external css directory exists */
 				if ( file_exists( sprintf( '%1$s/css/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
 						sprintf( '%1$s/css/external/', CAWEB_ABSPATH ),
 						sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] )
 					);
 				}
-				// move any external site js if external js directory exists
+				/* move any external site js if external js directory exists */
 				if ( file_exists( sprintf( '%1$s/js/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
 						sprintf( '%1$s/js/external/', CAWEB_ABSPATH ),
@@ -191,7 +247,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 					);
 				}
 
-				// Delete existing transient
+				/* Delete existing transient */
 				delete_site_transient( $this->transient_name );
 
 				return sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name );
@@ -200,9 +256,20 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			return $reply;
 		}
 
-		// Alternative upgrader_source_selection for the WordPress Updater
-		// https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
-		function caweb_upgrader_source_selection( $src, $rm_src, $upgr, $options ) {
+		/**
+		 * Alternative upgrader_source_selection for the WordPress Updater
+		 * Filters the source file location for the upgrade package.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/upgrader_source_selection/
+		 * @link https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-wp-upgrader.php
+		 * @param  string      $src File source location.
+		 * @param  string      $rm_src Remote file source location.
+		 * @param  WP_Upgrader $upgr  WP_Upgrader instance.
+		 * @param  array       $options Extra arguments passed to hooked filters.
+		 *
+		 * @return string
+		 */
+		public function caweb_upgrader_source_selection( $src, $rm_src, $upgr, $options ) {
 			if ( ! isset( $options['theme'] ) || $options['theme'] !== $this->theme_name ) {
 				return $src;
 			}
@@ -218,15 +285,25 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			return $tmp;
 		}
 
-		function caweb_upgrader_post_install( $response, $hook_extra, $result ) {
-			// move any external site css existed move it back
+		/**
+		 * Filters the installation response after the installation has finished.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/upgrader_post_install/
+		 * @param  bool  $response Installation response.
+		 * @param  array $hook_extra Extra arguments passed to hooked filters.
+		 * @param  array $result Installation result data.
+		 *
+		 * @return void
+		 */
+		public function caweb_upgrader_post_install( $response, $hook_extra, $result ) {
+			/* move any external site css existed move it back */
 			if ( file_exists( sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ) ) ) {
 				rename(
 					sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ),
 					sprintf( '%1$s/css/external/', CAWEB_ABSPATH )
 				);
 			}
-			// move any external site js existed move it back
+			/* move any external site js existed move it back */
 			if ( file_exists( sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ) ) ) {
 				rename(
 					sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ),
@@ -234,7 +311,13 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				);
 			}
 		}
-		function caweb_update_available() {
+		/**
+		 * This is hooked to admin_post_caweb_update_available
+		 * Used to hook to GitHub Webhooks Releases a payload is sent
+		 *
+		 * @return void
+		 */
+		public function caweb_update_available() {
 			if ( isset( $_POST['payload'] ) ) {
 				$this->check_update( null );
 			}

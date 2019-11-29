@@ -50,9 +50,8 @@ get_header();
 										et_divi_post_format_content();
 
 										if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) {
-											if ( 'video' === $caweb_post_format && false !== ( $caweb_first_video === et_get_first_video() ) ) :
-												print esc_html( sprintf( '<div class="et_main_video_container">%1$s</div>', $caweb_first_video ) );
-												elseif ( ! in_array( $caweb_post_format, array( 'gallery' ), true ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $caweb_thumb ) :
+											if ( 'video' === $caweb_post_format && false !== ( et_get_first_video() === $caweb_first_video ) ) :
+												print esc_html( sprintf( '<div class="et_main_video_container">%1$s</div>', $caweb_first_video ) ); elseif ( ! in_array( $caweb_post_format, array( 'gallery' ), true ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $caweb_thumb ) :
 													?>
 							<a href="<?php the_permalink(); ?>">
 													<?php print_thumbnail( $caweb_thumb, $caweb_thumbnail['use_timthumb'], $caweb_titletext, $caweb_width, $caweb_height ); ?>
@@ -60,7 +59,7 @@ get_header();
 													<?php
 										elseif ( 'gallery' === $caweb_post_format ) :
 											et_pb_gallery_images();
-										endif;
+											endif;
 										}
 										?>
 
