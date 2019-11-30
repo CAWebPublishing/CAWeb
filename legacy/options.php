@@ -6,67 +6,6 @@
  */
 
 /**
- * CAWeb Administration Menu Setup
- * Fires before the administration menu loads in the admin.
- *
- * @link https://developer.wordpress.org/reference/hooks/admin_menu/
- * @return void
- */
-function caweb_admin_menu() {
-	global $submenu;
-
-	/* Add CAWeb Options */
-	add_menu_page(
-		'CAWeb Options',
-		'CAWeb Options',
-		'manage_options',
-		'caweb_options',
-		'caweb_option_page',
-		sprintf( '%1$s/images/system/caweb_logo.png', CAWEB_URI ),
-		6
-	);
-	add_submenu_page( 'caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page' );
-
-	/* Remove Menus and re-add it under the newly created CAWeb Options as Navigation */
-	remove_submenu_page( 'themes.php', 'nav-menus.php' );
-	add_submenu_page( 'caweb_options', 'Navigation', 'Navigation', 'manage_options', 'nav-menus.php', '' );
-
-	/* If user is not a Network Admin */
-	if ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) {
-		/* Remove Themes and Background option under Appearance menu */
-		if ( isset( $submenu['themes.php'] ) ) {
-			foreach ( $submenu['themes.php'] as $m => $menu_data ) {
-				if ( 'Background' === $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
-					unset( $submenu['themes.php'][ $m ] );
-				}
-			}
-		}
-
-		/* Remove WP-Forms Addons Menus */
-		remove_submenu_page( 'wpforms-overview', 'wpforms-addons' );
-
-		/* Removal of Tools Submenu Pages */
-		remove_submenu_page( 'tools.php', 'tools.php' );
-		remove_submenu_page( 'tools.php', 'import.php' );
-		remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
-		remove_submenu_page( 'tools.php', 'domainmapping' );
-
-		/* Removal of Divi Submenu Pages */
-		remove_submenu_page( 'et_divi_options', 'et_divi_options' );
-		remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
-		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
-		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
-		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
-	}
-
-	if ( ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) && 1 === get_current_blog_id() ) {
-		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
-		add_submenu_page( 'caweb_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
-	}
-}
-add_action( 'admin_menu', 'caweb_admin_menu', 15 );
-
-/**
  * If direct access to certain menus is accessed
  * redirect to admin page
  *
@@ -85,17 +24,6 @@ function caweb_load_themes_tools() {
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 
-/**
- * Setup CAWeb Options Menu
- *
- * @return void
- */
-function caweb_option_page() {
-
-	// The actual menu file
-	get_template_part( 'partials/content-options' );
-	//get_template_part( 'partials/options' );
-}
 
 /**
  * Recursively remove a directory (all files and folders in it)
@@ -596,16 +524,4 @@ function caweb_icon_menu_func(){
 add_action('wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func');
 add_action('wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func');
 
-
-
-/**
- * Retrieve CAWeb fav icon filename
- *
- * @return string
- */
-function caweb_favicon_name() {
-	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
-
-	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
-}
 
