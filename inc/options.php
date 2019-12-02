@@ -1,6 +1,6 @@
 <?php
 /**
- * Main options file
+ * Main CAWeb Options File
  *
  * @package CAWeb
  */
@@ -24,7 +24,7 @@ function caweb_admin_menu() {
 		'manage_options',
 		'caweb_options',
 		'caweb_option_page',
-		sprintf( '%1$s/assets/imgs/system/caweb_logo.png', CAWEB_URI ),
+		sprintf( '%1$s/images/system/caweb_logo.png', CAWEB_URI ),
 		6
 	);
 	add_submenu_page( 'caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page' );
@@ -127,10 +127,22 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_x_ua_compatibility',
 	);
 
-	$caweb_utility_header_options = array('ca_contact_us_link', 'ca_geo_locator_enabled', 'ca_utility_home_icon',
-		'ca_utility_link_1', 'ca_utility_link_1_name', 'ca_utility_link_1_new_window', 'ca_utility_link_1_enable',
-		'ca_utility_link_2', 'ca_utility_link_2_name', 'ca_utility_link_2_new_window', 'ca_utility_link_2_enable',
-		'ca_utility_link_3',   'ca_utility_link_3_name', 'ca_utility_link_3_new_window', 'ca_utility_link_3_enable',
+	$caweb_utility_header_options = array(
+		'ca_contact_us_link',
+		'ca_geo_locator_enabled',
+		'ca_utility_home_icon',
+		'ca_utility_link_1',
+		'ca_utility_link_1_name',
+		'ca_utility_link_1_new_window',
+		'ca_utility_link_1_enable',
+		'ca_utility_link_2',
+		'ca_utility_link_2_name',
+		'ca_utility_link_2_new_window',
+		'ca_utility_link_2_enable',
+		'ca_utility_link_3',
+		'ca_utility_link_3_name',
+		'ca_utility_link_3_new_window',
+		'ca_utility_link_3_enable',
 	);
 
 	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background' );
@@ -247,7 +259,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
  * @return URI
  */
 function caweb_default_favicon_url() {
-	return site_url( 'wp-content/themes/CAWeb/assets/imgs/system/favicon.ico' );
+	return site_url( 'wp-content/themes/CAWeb/images/system/favicon.ico' );
 }
 
 

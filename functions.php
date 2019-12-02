@@ -40,13 +40,20 @@ add_action( 'wp_footer', 'caweb_wp_footer', 11 );
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 add_action( 'admin_head', 'caweb_admin_head' );
+add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 
-/****************************
+/*
+----------------------------
 	End of Action References
- *****************************/
-/*************************************
+----------------------------
+*/
+
+/*
+-------------------------------------
 	Typical Action Reference Functions
- **************************************/
+-------------------------------------
+*/
+
 /**
  * CAWeb After Setup Theme
  *
@@ -57,6 +64,7 @@ add_action( 'admin_head', 'caweb_admin_head' );
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  *
+ * @todo Remove nginx action
  * @return void
  */
 function caweb_setup_theme() {
@@ -137,7 +145,7 @@ function caweb_setup_theme() {
 	add_action( 'admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session' );
 	add_action( 'admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session' );
 
-	/* To be removed soon
+	/*
 	add_action( 'caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1 );
 	*/
 }
@@ -381,12 +389,18 @@ function caweb_wp_footer() {
 	wp_deregister_style( 'et-builder-googlefonts' );
 }
 
-/**********************************************
+/*
+-----------------------------------------------
 	End of Typical Action Reference Functions
- **********************************************/
-/*************************************
+-----------------------------------------------
+*/
+
+/*
+-------------------------------------
 	Admin Action Reference Functions
- *************************************/
+-------------------------------------
+*/
+
 /**
  * CAWeb Admin Init
  * Triggered before any other hook when a user accesses the admin area.
@@ -490,7 +504,86 @@ function caweb_admin_head() {
           </style>';
 }
 
+/**
+ * Set CAWeb Category based on Post Detail Module used.
+ * Fires once a post has been saved.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/save_post/
+ *
+ * @param  int     $post_id Post ID.
+ * @param  WP_POST $post Post object.
+ *
+ * @return void
+ */
+function caweb_save_post_list_meta( $post_id, $post ) {
+	$cats = wp_get_post_categories( $post_id );
 
-/********************************************
+	$content = $post->post_content;
+	/* Search for Post Detail Module if it exists, add the appropriate Category */
+	$layout = caweb_get_shortcode_from_content( $content, 'et_pb_ca_post_handler' );
+
+	$layout = ( isset( $layout->post_type_layout ) ? $layout->post_type_layout : '' );
+
+	switch ( $layout ) {
+
+		case 'course':
+			array_push( $cats, get_cat_ID( 'Courses' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'event':
+			array_push( $cats, get_cat_ID( 'Events' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'exam':
+			array_push( $cats, get_cat_ID( 'Exams' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'faqs':
+			array_push( $cats, get_cat_ID( 'FAQs' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'jobs':
+			array_push( $cats, get_cat_ID( 'Jobs' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'news':
+			array_push( $cats, get_cat_ID( 'News' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'profile':
+			array_push( $cats, get_cat_ID( 'Profiles' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+	}
+
+	wp_set_object_terms( $post_id, $cats, 'category' );
+
+	/* Search for Post List, Post Slider, PostNavigation, Blog Module if they exists, add the 'nginx_cache_purge' custom meta field */
+	$cache_modules = array( 'et_pb_ca_post_list', 'et_pb_post_slider', 'et_pb_blog', 'et_pb_post_nav' );
+	$module        = caweb_get_shortcode_from_content( $content, $cache_modules, true );
+
+	if ( ! empty( $module ) ) {
+		update_post_meta( $post_id, 'nginx_cache_purge', 'yes' );
+	} else {
+		delete_post_meta( $post_id, 'nginx_cache_purge' );
+	}
+}
+
+/*
+--------------------------------------------
 	End of Admin Action Reference Functions
+--------------------------------------------
 */

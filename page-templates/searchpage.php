@@ -37,7 +37,7 @@ get_header();
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require CAWEB_ABSPATH . '/ssi/searchForm.php';
+						get_template_part( 'partials/content/search-form' );
 						?>
 					</div>
 					<div class="section">

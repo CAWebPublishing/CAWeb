@@ -90,66 +90,7 @@ function caweb_get_tag_ID($tag_name) {
 	return 0;
 }
 
-if ( ! function_exists( 'caweb_get_shortcode_from_content' ) ) {
-	function caweb_get_shortcode_from_content( $con = '', $tag = '', $all_matches = false ) {
-		if ( empty( $con ) || empty( $tag ) ) {
-			return array();
-		}
-		$results = array();
-		$objects = array();
 
-		$tag = is_array( $tag ) ? implode( '|', $tag ) : $tag;
-
-		// Get Shortcode Tags from Con and save it to $results
-		$pattern = sprintf( '/\[(%1$s)[\d\s\w\S]+?\[\/\1\]|\[(%1$s)[\d\s\w\S]+? \/\]/', $tag );
-		preg_match_all( $pattern, $con, $results );
-		// if there are no matches return an empty array
-		if ( empty( $results ) ) {
-			return array();
-		}
-		// if there are results save only the matches
-		$matches = $results[0];
-
-		// iterate thru each match
-		foreach ( $matches as $m => $match ) {
-			$obj  = array();
-			$attr = array();
-			// matching tag can either be self-closing or not
-			// non self-closing matching tags are results[1]
-			// self-closing matching tags are results[2]
-			// if non self-closing tag is empty assume self-closing
-			$matching_tag = ! empty( $results[1][ $m ] ) ? $results[1][ $m ] : $results[2][ $m ];
-
-			// If the shortcode is a self closing tag, then it contains content in between its Shortcode Tags
-			// Get content from shortcode
-			preg_match( sprintf( '/"\][\s\S]*\[\/(%1$s)/', $matching_tag ), $match, $obj['content'] );
-
-			if ( ! empty( $obj['content'] ) ) {
-				// substring the attributes, removing the content from the match
-				$match          = substr( $match, 1, strpos( $match, $obj['content'][0] ) );
-				$obj['content'] = substr( $obj['content'][0], 2, strlen( $obj['content'][0] ) - strlen( $matching_tag ) - 4 );
-				// If the shortcode is not a self closing tag, then it only contains one Shortcode Tag
-			} else {
-				$obj['content'] = '';
-			}
-
-			// Get Attributes from Shortcode
-			preg_match_all( '/\w*="[\w\s\d$:(),@?\'=+%!#\/\.\[\]\{\}-]*/', $match, $attr );
-			foreach ( $attr[0] as $a ) {
-				preg_match( '/\w*/', $a, $key );
-				$obj[ $key[0] ] = urldecode( substr( $a, strlen( $key[0] ) + 2 ) );
-			}
-
-			$objects[] = (object) $obj;
-		}
-
-		if ( $all_matches ) {
-			return $objects;
-		}
-
-		return ! empty( $objects ) ? $objects[0] : array();
-	}
-}
 
 function caweb_banner_content_filter( $content, $ver = 5 ) {
 	$module = caweb_get_shortcode_from_content( $content, 'et_pb_ca_fullwidth_banner' );
@@ -316,52 +257,7 @@ function caweb_retrieve_attachment_post_meta() {
 	exit();
 }
 
-function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ) {
-	if ( empty( $image_url ) ) {
-		return 0;
-	}
 
-	$query = array(
-		'post_type'  => 'attachment',
-		'fields'     => 'ids',
-	);
-
-	if ( is_string( $image_url ) ) {
-		$query['meta_query'] = array(
-			array(
-				'key'     => '_wp_attached_file',
-				'value'   => basename( $image_url ),
-				'compare' => 'LIKE',
-			),
-		);
-
-		$ids = get_posts( $query );
-
-		return ! empty( $ids ) ? get_post_meta( $ids[0], $meta_key, true ) : 0;
-	} elseif ( is_array( $image_url ) ) {
-		$imgs = array();
-
-		foreach ( $image_url as $i => $img ) {
-			$query['meta_query'] = array(
-				array(
-					'key'     => '_wp_attached_file',
-					'value'   => basename( $img ),
-					'compare' => 'LIKE',
-				),
-			);
-
-			$ids = get_posts( $query );
-
-			if ( ! empty( $ids ) ) {
-				$imgs[] = get_post_meta( $ids[0], $meta_key, true );
-			}
-		}
-
-		return ! empty( $imgs ) ? $imgs : 0;
-	}
-
-	return 0;
-}
 
 
 
