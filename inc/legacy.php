@@ -2,35 +2,6 @@
 
 
 
-
-
-/**
- *
- * Returns all child nav_menu_items under a specific parent
- * Source http://wpsmith.net/2011/how-to-get-all-the-children-of-a-specific-nav-menu-item/
- *
- * @parent_id int the parent nav_menu_item ID
- * @nav_menu_items array nav_menu_items
- * @depth bool gives all children or direct children only
- * @nav_menu_item_list array returns filtered array of nav_menu_items
- */
-function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
-	$nav_menu_item_list = array();
-
-	foreach ( (array) $nav_menu_items as $nav_menu_item ) {
-		if ( $nav_menu_item->menu_item_parent === $parent_id ) {
-			$nav_menu_item_list[] = $nav_menu_item;
-			if ( $depth ) {
-				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
-					$nav_menu_item_list = array_merge( $nav_menu_item_list, $children );
-				}
-			}
-		}
-	}
-
-	return $nav_menu_item_list;
-}
-
 function caweb_return_posts( $cats = array(), $tags = array(), $post_amount = -1, $orderby = 'post_date', $order = 'DESC' ) {
 	$posts_array = array();
 
@@ -244,20 +215,17 @@ function caweb_get_the_post_thumbnail( $post = null, $size = 'thumbnail', $attr 
 	return $thumbnail;
 }
 
-add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
-add_action( 'admin_post_no_priv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
-function caweb_retrieve_attachment_post_meta() {
-	if ( ! isset( $_POST['imgs'] ) || empty( $_POST['imgs'] ) || ! is_array( $_POST['imgs'] ) ) {
-		return 0;
+
+add_action( 'caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1 );
+
+/**
+ * Clear NGinx Server Cache
+ * To be removed soon
+ *
+ * @return void
+ */
+function caweb_post_list_module_clear_cache() {
+	if ( function_exists( 'clear_nginx_post_publish_cache' ) ) {
+		clear_nginx_post_publish_cache();
 	}
-
-	$alts = caweb_get_attachment_post_meta( $_POST['imgs'], '_wp_attachment_image_alt' );
-
-	print json_encode( $alts );
-	exit();
 }
-
-
-
-
-

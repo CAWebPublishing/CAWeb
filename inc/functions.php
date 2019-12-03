@@ -367,3 +367,30 @@ if ( ! function_exists( 'caweb_get_shortcode_from_content' ) ) {
 		return ! empty( $objects ) ? $objects[0] : array();
 	}
 }
+
+/**
+ * Returns all child nav_menu_items under a specific parent
+ *
+ * @source https://wpsmith.net/2011/how-to-get-all-the-children-of-a-specific-nav-menu-item/
+ * @param  int   $parent_id The parent nav_menu_item ID.
+ * @param  array $nav_menu_items Array of Nav Menu Objects.
+ * @param  bool  $depth Gives all children or direct children only.
+ *
+ * @return array
+ */
+function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
+	$nav_menu_item_list = array();
+
+	foreach ( (array) $nav_menu_items as $nav_menu_item ) {
+		if ( $nav_menu_item->menu_item_parent === $parent_id ) {
+			$nav_menu_item_list[] = $nav_menu_item;
+			if ( $depth ) {
+				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
+					$nav_menu_item_list = array_merge( $nav_menu_item_list, $children );
+				}
+			}
+		}
+	}
+
+	return $nav_menu_item_list;
+}

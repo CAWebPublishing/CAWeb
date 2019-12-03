@@ -33,11 +33,31 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			add_filter( 'wp_nav_menu', array( $this, 'caweb_nav_menu' ), 10, 2 );
 		}
 
+		/**
+		 * Filters the arguments used to display a navigation menu.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/wp_nav_menu_args/
+		 * @param  array $args Array of wp_nav_menu() arguments.
+		 *               $args['fallback_cb'] = array( $this, 'caweb_menu_fail' ).
+		 * @return array
+		 */
 		public function caweb_nav_menu_args( $args ) {
 			$args['fallback_cb'] = array( $this, 'caweb_menu_fail' );
 
 			return $args;
 		}
+
+		/**
+		 * Filters the arguments for the Navigation Menu widget.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/widget_nav_menu_args/
+		 * @param  array   $nav_menu_args An array of arguments passed to wp_nav_menu() to retrieve a navigation menu.
+		 * @param  WP_Term $nav_menu Nav menu object for the current menu.
+		 * @param  array   $args Display arguments for the current widget.
+		 * @param  array   $instance Array of settings for the current widget.
+		 *
+		 * @return array
+		 */
 		public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
 			if ( isset( $nav_menu_args['menu'] ) ) {
 				$args['echo'] = false;
@@ -47,6 +67,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return $args;
 		}
 
+		/**
+		 * Filters the Walker class used when adding nav menu items.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/wp_edit_nav_menu_walker/
+		 * @param  string $current The walker class to use. Default 'Walker_Nav_Menu_Edit'.
+		 *
+		 * @return string
+		 */
 		public function caweb_edit_nav_menu_walker( $current = 'Walker_Nav_Menu_Edit' ) {
 			if ( $current !== 'Walker_Nav_Menu_Edit' ) {
 				return $current;
@@ -55,6 +83,15 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return 'CAWeb_Nav_Menu_Walker';
 		}
 
+		/**
+		 * Filters the HTML content for navigation menus.
+		 *
+		 * @link https://developer.wordpress.org/reference/hooks/wp_nav_menu/
+		 * @param  string   $nav_menu The HTML content for the navigation menu.
+		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 *
+		 * @return string
+		 */
 		public function caweb_nav_menu( $nav_menu, $args ) {
 			global $post;
 			$post_id = ( is_object( $post ) ? $post->ID : $post['ID'] );
@@ -96,6 +133,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return $nav_menu;
 		}
 
+		/**
+		 * If the menu doesn't exists, this callback function will fire. Default is 'wp_page_menu'.
+		 *
+		 * @param  array $args Array of nav menu arguments.
+		 *
+		 * @return void
+		 */
 		public function caweb_menu_fail( $args ) {
 			$nav_menu = '';
 			if ( 'header-menu' === $args['theme_location'] ) {
@@ -118,7 +162,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			print $nav_menu;
 		}
-		/* Begin Creation of the Widget Navigation Menu */
+
+		/**
+		 * Begin Creation of the Widget Navigation Menu
+		 *
+		 * @param  WP_Term $nav_menu Nav menu object for the current menu.
+		 *
+		 * @return string
+		 */
 		public function createWidgetNavMenu( $nav_menu ) {
 			$widget_nav_menu = '';
 
@@ -127,7 +178,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			/* Iterate thru menuitems create Top Level (first-level-link) */
 			foreach ( $menuitems as $i => $item ) {
-
 				/*
 				If a top level nav item,
 				menu_item_parent= 0
@@ -191,7 +241,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return sprintf( '<ul class="accordion-list">%1$s</ul>', $widget_nav_menu );
 		}
 
-		/* Begin Creation of the Navigation Menu (first-level-links) */
+		/**
+		 * HTML for the Navigation Menu (first-level-links)
+		 *
+		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 *
+		 * @return string
+		 */
 		public function createNavMenu( $args ) {
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
@@ -298,7 +354,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return $nav_item;
 		}
 
-		/* Begin Creation of the Sub Navigation Menu from the Top Level Nav Item (second-level-links) */
+		/**
+		 * HTML for Sub Navigation Menu from the Top Level Nav Item (second-level-links)
+		 *
+		 * @param  mixed    $child_links Array of Sub Nav Items (second-level-links)
+		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 *
+		 * @return string
+		 */
 		public function createSubNavMenu( $child_links, $args ) {
 			/* Opening ul.second-level-nav */
 			$sub_nav = '<ul class="second-level-nav">';
@@ -383,6 +446,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return $sub_nav;
 		}
 
+		/**
+		 * HTML for the Footer Menu
+		 *
+		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 *
+		 * @return string
+		 */
 		public function createFooterMenu( $args ) {
 			$nav_links = '';
 
@@ -418,6 +488,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return $nav_links;
 		}
 
+		/**
+		 * HTML for the Footer Social Menu
+		 *
+		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 *
+		 * @return string
+		 */
 		public function createFooterSocialMenu( $args ) {
 			$social_share = caweb_get_site_options( 'social' );
 			$social_links = '';
@@ -447,6 +524,18 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			return ! empty( $social_links ) ? sprintf( '<div class="%1$s">%2$s</div>', ( 4 >= $args->version ? 'full' : 'quarter' ), $social_links ) : $social_links;
 		}
 
+		/**
+		 * CAWeb wp nav menu item custom fields hook. Hooked from the CAWeb_Nav_Menu_Walker.
+		 *
+		 * @see class-caweb-nav-menu.php Line 217
+		 *
+		 * @param  mixed $item_id Not used.
+		 * @param  mixed $item Menu item data object.
+		 * @param  mixed $depth Depth of menu item. Used for padding.
+		 * @param  mixed $args Not used.
+		 *
+		 * @return void
+		 */
 		public function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 			$tmp                      = get_post_meta( $item->ID );
 			$icon                     = ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
@@ -519,7 +608,16 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			<?php
 		}
 
-		/* save menu custom fields that are added on to ca_custom_nav_walker */
+		/**
+		 * Fires after a navigation menu item has been updated.
+		 * Save menu custom fields that are added on to ca_custom_nav_walker.
+		 *
+		 * @param  int   $menu_id ID of the updated menu.
+		 * @param  int   $menu_item_db_id ID of the updated menu item.
+		 * @param  array $args An array of arguments used to update a menu item.
+		 *
+		 * @return void
+		 */
 		public function caweb_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
 			/* Check if element is properly sent */
 			if ( isset( $_POST['menu-item-db-id'] ) ) {

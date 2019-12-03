@@ -10,6 +10,7 @@ add_filter( 'body_class', 'caweb_body_class', 20, 2 );
 add_filter( 'post_class', 'caweb_post_class', 15 );
 add_filter( 'theme_page_templates', 'caweb_theme_page_templates', 15 );
 add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
+add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 
 /* Plugin Filters */
 add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
@@ -114,6 +115,22 @@ function caweb_script_loader_tag( $tag, $handle, $src ) {
 	}
 
 	return $tag;
+}
+
+/**
+ * Enable unfiltered_html capability for Administrators.
+ *
+ * @param  array  $caps    The user's capabilities.
+ * @param  string $cap     Capability name.
+ * @param  int    $user_id The user ID.
+ * @return array  $caps    The user's capabilities, with 'unfiltered_html' potentially added.
+ */
+function caweb_add_unfiltered_html_capability( $caps, $cap, $user_id ) {
+	if ( 'unfiltered_html' === $cap && user_can( $user_id, 'administrator' ) ) {
+		$caps = array( 'unfiltered_html' );
+	}
+
+	return $caps;
 }
 
 /**

@@ -6,6 +6,21 @@
  */
 
 add_action( 'admin_menu', 'caweb_admin_menu', 15 );
+add_action( 'load-themes.php', 'caweb_load_themes_tools' );
+add_action( 'load-tools.php', 'caweb_load_themes_tools' );
+add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
+$caweb_social    = caweb_get_site_options( 'social' );
+$caweb_sanitized = caweb_get_site_options( 'sanitized' );
+
+$caweb_options = array_merge( $caweb_social, $caweb_sanitized );
+
+foreach ( $caweb_options as $caweb_name ) {
+	add_action( 'pre_update_option_' . $caweb_name, 'caweb_sanitize_various_options', 10, 3 );
+
+	if ( in_array( $caweb_name, $caweb_sanitized, true ) ) {
+		add_action( 'option_' . $caweb_name, 'caweb_retrieve_various_sanitized_options', 10, 3 );
+	}
+}
 
 /**
  * CAWeb Administration Menu Setup
@@ -82,6 +97,102 @@ function caweb_admin_menu() {
 }
 
 /**
+ * If direct access to certain menus is accessed
+ * redirect to admin page
+ *
+ * @return void
+ */
+function caweb_load_themes_tools() {
+	$plugin_menus = array( '404pagesettings' );
+
+	$allowed = isset( $_GET['page'] ) && in_array( $_GET['page'], $plugin_menus, true );
+
+	if ( $allowed || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+		wp_safe_redirect( get_admin_url() );
+		exit;
+	}
+}
+
+/**
+ * Filters the GitHub API caweb_password option before its value is updated.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/pre_update_site_option_option/
+ *
+ * @param  mixed $value New value of the network option.
+ * @param  mixed $old_value Old value of the network option.
+ * @param  mixed $option Option name.
+ *
+ * @return string
+ */
+function caweb_pre_update_site_option_caweb_password( $value, $old_value, $option ) {
+	$pwd = $value;
+
+	if ( base64_decode( $value ) === $old_value ) {
+		$pwd = $old_value;
+	}
+
+	return $pwd;
+}
+
+/**
+ * Sanitize certain CAWeb Options that need to be uniquely sanitized
+ *
+ * @param  mixed  $value New value of the network option.
+ * @param  mixed  $old_value Old value of the network option.
+ * @param  string $option Option name.
+ * @return string
+ */
+function caweb_sanitize_various_options( $value, $old_value, $option ) {
+	$caweb_social    = caweb_get_site_options( 'social' );
+	$caweb_sanitized = caweb_get_site_options( 'sanitized' );
+
+	$caweb_options = array_merge( $caweb_social, $caweb_sanitized );
+
+	/* if fields contain a script or style remove it */
+	if ( in_array( $option, $caweb_options, true ) ) {
+		$value = wp_strip_all_tags( $value );
+	}
+
+	/*
+	If field is a url escape the url
+	$pattern = regex of fields to exclude
+	*/
+	$pattern = '/ca_utility_link_\d_name/';
+	if ( in_array( $option, $caweb_options, true ) &&
+		empty( preg_match( $pattern, $option ) ) ) {
+		$value = esc_url( $value );
+	}
+
+	/*
+		If field is a label replace all escape characters with something else to prevent WordPress escaping
+		single quote = caweb_apostrophe
+		backslash = caweb_backslash
+	 */
+	if ( in_array( $option, $caweb_sanitized, true ) ) {
+		$value = preg_replace( '/\\\\\'/', 'caweb_apostrophe', $value );
+		$value = preg_replace( '/\\"/', 'caweb_double_quote', $value );
+		$value = preg_replace( '/\\\/', 'caweb_backslash', $value );
+	}
+
+	return $value;
+}
+
+/**
+ * Retrieves certain CAWeb Options that have been uniquely sanitized
+ *
+ * @param  string $value Option Value.
+ *
+ * @return string
+ */
+function caweb_retrieve_various_sanitized_options( $value ) {
+	$value = preg_replace( '/caweb_apostrophe/', '&#39;', $value );
+	$value = preg_replace( '/caweb_backslashcaweb_double_quote/', '&#34;', $value );
+	$value = preg_replace( '/caweb_backslashcaweb_backslash/', '&#92;', $value );
+
+	return $value;
+}
+
+/**
  * Setup CAWeb Options Menu
  *
  * @return void
@@ -91,6 +202,137 @@ function caweb_option_page() {
 	/* The actual menu file */
 	get_template_part( 'partials/content-options' );
 	/* get_template_part( 'partials/options' ); */
+}
+
+/**
+ * Setup CAWeb API Menu
+ *
+ * @return void
+ */
+function caweb_api_menu_option_setup() {
+	/* The actual menu file */
+	get_template_part( 'partials/options/', 'api' );
+}
+
+/**
+ * Setup Multisite Google Analytics Menu
+ *
+ * @return void
+ */
+function caweb_multi_ga_menu_option_setup() {
+	/* The actual menu file */
+	get_template_part( 'partials/options/multi', 'ga' );
+}
+
+/**
+ * Save CAWeb Options
+ *
+ * @param  array $values CAWeb option values.
+ * @param  array $files CAWeb files being uploaded.
+ *
+ * @return void
+ */
+function caweb_save_options( $values = array(), $files = array() ) {
+	$site_options = caweb_get_site_options();
+	$site_id      = get_current_blog_id();
+	$ext_css_dir  = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
+	$ext_js_dir   = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+
+	/* Remove unneeded values */
+	unset( $values['tab_selected'], $values['caweb_options_submit'] );
+
+	/* if site option isn't set, set it to empty string */
+	foreach ( $site_options as $opt ) {
+		if ( ! array_key_exists( $opt, $values ) ) {
+			$values[ $opt ] = '';
+		}
+
+		if ( empty( $values[ $opt ] ) &&
+					( 'caweb_external_css' === $opt || 'caweb_external_js' === $opt ) ) {
+			$values[ $opt ] = array();
+		}
+	}
+
+	$jsfiles  = array();
+	$cssfiles = array();
+	foreach ( $files as $key => $data ) {
+		if ( preg_match( '/js_upload/', $key ) ) {
+			$jsfiles[ $data['name'] ] = $data;
+		} elseif ( preg_match( '/css_upload/', $key ) ) {
+			$cssfiles[ $data['name'] ] = $data;
+		}
+	}
+
+	caweb_upload_external_files( $ext_css_dir, $site_id, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
+
+	caweb_upload_external_files( $ext_js_dir, $site_id, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
+
+	/* Alert Banners */
+	$alerts = array();
+
+	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
+		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
+		$data = array(
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : 'active',
+			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
+			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
+			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
+			'color'        => isset( $values[ "alert-banner-color-$i" ] ) ? $values[ "alert-banner-color-$i" ] : '#FDB81E',
+			'button'       => isset( $values[ "alert-read-more-$i" ] ) ? $values[ "alert-read-more-$i" ] : '',
+			'url'          => isset( $values[ "alert-read-more-url-$i" ] ) ? $values[ "alert-read-more-url-$i" ] : '',
+			'target'       => isset( $values[ "alert-read-more-target-$i" ] ) ? $values[ "alert-read-more-target-$i" ] : '',
+			'icon'         => isset( $values[ "alert-icon-$i" ] ) ? $values[ "alert-icon-$i" ] : '',
+		);
+
+		$alerts[] = $data;
+
+	}
+
+	$values['caweb_alerts'] = $alerts;
+
+	/* Save CAWeb Options */
+	foreach ( $values as $opt => $val ) {
+		if ( 'on' === $val ) {
+			$val = true;
+		} elseif ( 'caweb_external_css' === $opt ) {
+			$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
+		}
+		if ( 'caweb_external_js' === $opt ) {
+			$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
+		}
+		update_option( $opt, $val );
+	}
+
+	print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+}
+
+/**
+ * Save API Values
+ *
+ * @param  mixed $values CAWeb API Values.
+ *
+ * @return void
+ */
+function caweb_save_api_options( $values = array() ) {
+	update_site_option( 'caweb_private_theme_enabled', isset( $values['caweb_private_theme_enabled'] ) ? true : false );
+	update_site_option( 'caweb_username', ! empty( $values['caweb_username'] ) ? $values['caweb_username'] : 'CAWebPublishing' );
+	update_site_option( 'caweb_password', $values['caweb_password'] );
+
+	print '<div class="updated notice is-dismissible"><p><strong>API Key</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+}
+
+
+/**
+ * Save Multisite GA Values
+ *
+ * @param  mixed $values CAWeb Multisite GA Values.
+ *
+ * @return void
+ */
+function caweb_save_multi_ga_options( $values = array() ) {
+	update_site_option( 'caweb_multi_ga', $values['caweb_multi_ga'] );
+
+	print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
 
 /**
@@ -254,6 +496,90 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 }
 
 /**
+ * Recursively remove a directory (all files and folders in it)
+ *
+ * @param  string $path Path to directory.
+ *
+ * @return void
+ */
+function caweb_rrmdir( $path ) {
+	if ( file_exists( $path ) ) {
+
+		$i = new DirectoryIterator( $path );
+		foreach ( $i as $f ) {
+			if ( $f->isFile() ) {
+				unlink( $f->getRealPath() );
+			} elseif ( ! $f->isDot() && $f->isDir() ) {
+				rrmdir( $f->getRealPath() );
+				rmdir( $f->getRealPath() );
+			}
+		}
+	}
+}
+
+/**
+ * CAWeb upload CSS/JS files to the sites respective external directory
+ *
+ * @param  string $upload_path Path to upload directory.
+ * @param  int    $site_id Site ID.
+ * @param  array  $prev_files Sites previously saved uploaded files.
+ * @param  array  $existing_files Sites currently uploaded files, case files have been deleted.
+ * @param  array  $uploaded_files Sites files waiting to be uploaded.
+ *
+ * @return void
+ */
+function caweb_upload_external_files( $upload_path, $site_id, $prev_files = array(), $existing_files = array(), $uploaded_files = array() ) {
+	$site_path = "$upload_path/$site_id/";
+
+	/* External Upload */
+	$file_upload = array();
+
+	/*
+	If no files and all previously uploades files have been removed
+	delete the entire directory path
+	*/
+	if ( empty( $existing_files ) && empty( $uploaded_files ) ) {
+		caweb_rrmdir( $site_path );
+		if ( file_exists( $site_path ) ) {
+			rmdir( $site_path );
+		}
+
+		/* files are being uploaded */
+	} elseif ( ! empty( $uploaded_files ) ) {
+		/* create the external directory if its never been created */
+		if ( ! file_exists( $upload_path ) ) {
+			mkdir( $upload_path );
+		}
+		/* create the external site directory if its never been created */
+		if ( ! file_exists( $site_path ) ) {
+			mkdir( $site_path );
+		}
+
+		foreach ( $uploaded_files as $key => $data ) {
+			if ( ! empty( $data['name'] ) && ! empty( $data['tmp_name'] ) ) {
+				$target_file = $site_path . basename( $data['name'] );
+
+				move_uploaded_file( $data['tmp_name'], $target_file );
+				$file_upload[] = $data['name'];
+			}
+		}
+	}
+
+	/* Previous Uploaded Check */
+	foreach ( $prev_files as $filename ) {
+		/*
+		If the file exists, and the file is no longer in the upload list and
+		a file with the same hasn't overwritten it then remove it
+		*/
+		if ( file_exists( "$site_path$filename" ) &&
+		! in_array( $filename, $existing_files, true ) &&
+		! in_array( $filename, $file_upload, true ) ) {
+			unlink( "$site_path$filename" );
+		}
+	}
+}
+
+/**
  * Default CAWeb fav ico URL
  *
  * @return URI
@@ -261,7 +587,6 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 function caweb_default_favicon_url() {
 	return site_url( 'wp-content/themes/CAWeb/images/system/favicon.ico' );
 }
-
 
 /**
  * Retrieve CAWeb fav icon filename

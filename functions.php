@@ -49,6 +49,18 @@ add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 */
 
 /*
+If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
+*/
+if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
+	if ( ! empty( CAWEB_EXTENSION ) && file_exists( sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION ) ) ) {
+		include sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
+		include sprintf( '%1$s/divi/layouts.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
+	}
+} else {
+	include CAWEB_ABSPATH . '/divi/functions.php';
+}
+
+/*
 -------------------------------------
 	Typical Action Reference Functions
 -------------------------------------
@@ -140,14 +152,6 @@ function caweb_setup_theme() {
 	if ( ! session_id() && ! headers_sent() ) {
 		session_start();
 	}
-
-	/*
-	add_action( 'admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session' );
-	add_action( 'admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session' );
-
-	/*
-	add_action( 'caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1 );
-	*/
 }
 
 
