@@ -76,7 +76,6 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  *
- * @todo Remove nginx action
  * @return void
  */
 function caweb_setup_theme() {

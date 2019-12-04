@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Module functions
+ * 
+ * @todo Move to plugin extension 
+ * @package CAWeb
+ */
 
 
 function caweb_return_posts( $cats = array(), $tags = array(), $post_amount = -1, $orderby = 'post_date', $order = 'DESC' ) {
@@ -40,78 +45,6 @@ function caweb_return_posts( $cats = array(), $tags = array(), $post_amount = -1
 	}
 
 	return $posts_array;
-}
-
-// Get User Profile Color
-function caweb_get_user_color( $element ) {
-	global $_wp_admin_css_colors;
-
-	$admin_color = get_user_option( 'admin_color' );
-	$colors      = $_wp_admin_css_colors[ $admin_color ]->colors;
-
-	return $colors[ $element ];
-}
-
-function caweb_get_tag_ID($tag_name) {
-	$tag = get_term_by('name', $tag_name, 'post_tag');
-	if ($tag) {
-		return $tag->term_id;
-	}
-
-	return 0;
-}
-
-
-
-function caweb_banner_content_filter( $content, $ver = 5 ) {
-	$module = caweb_get_shortcode_from_content( $content, 'et_pb_ca_fullwidth_banner' );
-
-	if ( 4 !== $ver ) {
-		return;
-	}
-	// Filter the Header Slideshow Banner
-	if ( ! empty( $module ) ) {
-		$slides   = caweb_get_shortcode_from_content( $module->content, 'et_pb_ca_fullwidth_banner_item', true );
-		$carousel = '';
-
-		foreach ( $slides as $i => $slide ) {
-			$heading = '';
-			$info    = '';
-			if ( 'on' === $slide->display_banner_info ) {
-				$link = ( ! empty( $slide->button_link ) ? $slide->button_link : '#' );
-
-				if ( ! isset( $slide->display_heading ) || 'on' === $slide->display_heading ) {
-					$heading = sprintf( '<span class="title">%1$s<br /></span>', ( isset( $slide->heading ) ? $slide->heading : '' ) );
-				}
-
-				$info = sprintf( '<a href="%1$s"><p class="slide-text">%2$s%3$s</p></a>', $link, $heading, ( isset( $slide->button_text ) ? $slide->button_text : '' ) );
-			}
-			$carousel .= sprintf(
-				'<div class="slide" %1$s>%2$s</div> ',
-				( isset( $slide->background_image ) ?
-							   sprintf( 'style="background-image: url(%1$s);"', $slide->background_image ) : '' ),
-				$info
-			);
-		}
-
-		$banner = sprintf(
-			'<div class="header-slideshow-banner">
-          <div id="primary-carousel" class="carousel carousel-banner">
-            %1$s</div></div>',
-			$carousel
-		);
-
-		return $banner;
-	}
-}
-
-
-// Merger of Divi and CAWeb Icon Font Library
-add_filter( 'et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols' );
-function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ) {
-	$symbols = array_values( caweb_get_icon_list() );
-
-	return $symbols;
 }
 
 if ( ! function_exists( 'caweb_get_excerpt' ) ) {
@@ -216,16 +149,3 @@ function caweb_get_the_post_thumbnail( $post = null, $size = 'thumbnail', $attr 
 }
 
 
-add_action( 'caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1 );
-
-/**
- * Clear NGinx Server Cache
- * To be removed soon
- *
- * @return void
- */
-function caweb_post_list_module_clear_cache() {
-	if ( function_exists( 'clear_nginx_post_publish_cache' ) ) {
-		clear_nginx_post_publish_cache();
-	}
-}

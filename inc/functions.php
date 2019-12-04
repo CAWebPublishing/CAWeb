@@ -394,3 +394,16 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 
 	return $nav_menu_item_list;
 }
+
+/**
+ * Get User Profile Color
+ *
+ * @return void
+ */
+function caweb_get_user_color( ) {
+	global $_wp_admin_css_colors;
+
+	$admin_color = get_user_option( 'admin_color' );
+
+	return $_wp_admin_css_colors[ $admin_color ];
+}
