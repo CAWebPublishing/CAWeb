@@ -1,14 +1,14 @@
 <?php
 /**
- * CAWeb WP Ajax 
- * 
+ * CAWeb WP Ajax
+ *
  * @see https://codex.wordpress.org/AJAX_in_Plugins
  * @package CAWeb
  */
 
 add_action( 'wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker' );
-add_action('wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func');
-add_action('wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func');
+add_action( 'wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func' );
+add_action( 'wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func' );
 
 /**
  * Check the Binary Signature of a file, currently only icons
@@ -41,11 +41,16 @@ function caweb_fav_icon_checker() {
 	wp_die(); /* this is required to terminate immediately and return a proper response */
 }
 
-function caweb_icon_menu_func(){
-	$input = isset($_POST['name']) ? $_POST['name'] : '';
-	$sel = isset($_POST['select']) ? $_POST['select'] : '';
+function caweb_icon_menu_func() {
+	$input = isset( $_POST['name'] ) ? $_POST['name'] : '';
+	$sel   = isset( $_POST['select'] ) ? $_POST['select'] : '';
 
-	print caweb_icon_menu(array( 'select' => $sel, 'name' => $input));
+	print caweb_icon_menu(
+		array(
+			'select' => $sel,
+			'name'   => $input,
+		)
+	);
 	wp_die(); // this is required to terminate immediately and return a proper response
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * CAWeb Admin Post
- * 
+ *
  * @see https://developer.wordpress.org/reference/hooks/admin_post_action/
  * @package CAWeb
  */
@@ -14,7 +14,7 @@ add_action( 'admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_se
 
 
 /**
- * caweb_retrieve_attachment_post_meta
+ * Retrieve attachment post meta alt text
  *
  * @return void
  */
