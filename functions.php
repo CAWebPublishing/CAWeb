@@ -80,7 +80,6 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
  * @return void
  */
 function caweb_setup_theme() {
-
 	/* Include CAWeb Functionality */
 	foreach ( glob( __DIR__ . '/inc/*.php' ) as $file ) {
 		require_once $file;
@@ -255,26 +254,26 @@ function caweb_wp_enqueue_scripts() {
 
 	/* If on the activation page */
 	if ( 'wp-activate.php' !== $pagenow ) {
-		
+
 		/* External CSS Styles */
-		$ext_css = array_values( array_filter( get_option( 'caweb_external_css', array() ) ) );
+		$ext_css     = array_values( array_filter( get_option( 'caweb_external_css', array() ) ) );
 		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
 			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d-styles', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
-		}	
-		
+		}
+
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
 			$custom_css = sprintf( '%1$s/css/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
 
-			if( ! file_exists( "$custom_css/caweb-custom.css") ){
-				mkdir( $custom_css, 0777, true);
-				file_put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ) );
+			if ( ! file_exists( "$custom_css/caweb-custom.css" ) ) {
+				global $wp_filesystem;
+				mkdir( $custom_css, 0777, true );
+				$wp_filesystem->put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ), FS_CHMOD_FILE );
 			}
 
-			wp_enqueue_style('caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), CAWEB_VERSION );
+			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), CAWEB_VERSION );
 		}
-
 	}
 
 	/* This removes Divi Google Font CSS */
@@ -348,15 +347,18 @@ function caweb_late_wp_enqueue_scripts() {
 	}
 
 	/* Custom JS */
-	if ( '' !== get_option( 'ca_custom_js', '' ) ) {
-		// $location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
-		// wp_register_script( 'caweb-custom-js', $location, array( 'jquery' ), CAWEB_VERSION, true );
+	if ( ! empty( get_option( 'ca_custom_js', '' ) ) ) {
+		$custom_js = sprintf( '%1$s/js/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
 
-		/*
-		Need to create file for custom js
+		if ( ! file_exists( "$custom_js/caweb-custom.css" ) ) {
+			global $wp_filesystem;
+			mkdir( $custom_js, 0777, true );
+			$wp_filesystem->put_contents( "$custom_js/caweb-custom.js", wp_unslash( get_option( 'ca_custom_js' ) ), FS_CHMOD_FILE );
+		}
+
+		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/external/%2$s/caweb-custom.js', CAWEB_URI, get_current_blog_id() ), array( 'jquery' ), CAWEB_VERSION, true );
 		wp_enqueue_script( 'caweb-custom-js' );
-		print esc_html( sprintf( '<script id="ca_custom_js">%1$s</script>', wp_unslash( get_option( 'ca_custom_js' ) ) ) );
-		*/
+
 	}
 }
 
@@ -414,6 +416,7 @@ function caweb_wp_footer() {
 
 /**
  * CAWeb Admin Init
+ *
  * Triggered before any other hook when a user accesses the admin area.
  * Note, this does not just run on user-facing admin screens.
  * It runs on admin-ajax.php and admin-post.php as well.
@@ -424,6 +427,15 @@ function caweb_wp_footer() {
 function caweb_admin_init() {
 	/* Core Updater */
 	require_once CAWEB_ABSPATH . '/core/class-caweb-theme-update.php';
+
+	/**
+	 * Initialize the WP Filesystem Class
+	 *
+	 * @link https://codex.wordpress.org/Filesystem_API
+	 */
+	$creds = request_filesystem_credentials( '', '', false, false, null );
+	WP_Filesystem( $creds );
+
 }
 
 /**
