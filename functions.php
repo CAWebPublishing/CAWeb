@@ -247,6 +247,7 @@ function caweb_wp_enqueue_scripts() {
 	$core_css_file    = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
 	$frontend_js_file = caweb_get_min_file( '/js/frontend.js', 'js' );
 
+	/* CAWeb Core CSS */
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
 	/* Google Fonts */
@@ -254,21 +255,27 @@ function caweb_wp_enqueue_scripts() {
 
 	/* If on the activation page */
 	if ( 'wp-activate.php' !== $pagenow ) {
-		wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
-
+		
 		/* External CSS Styles */
 		$ext_css = array_values( array_filter( get_option( 'caweb_external_css', array() ) ) );
+		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
-			$location = sprintf( '%1$s/css/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d-styles', $index + 1 ), $location, array(), CAWEB_VERSION );
-		}
-	}
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d-styles', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
+		}	
+		
+		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
+			$custom_css = sprintf( '%1$s/css/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
 
-	/*
-	if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
-		print esc_html( sprintf( '<style id="ca_custom_css">%1$s</style>', wp_unslash( get_option( 'ca_custom_css' ) ) ) );
-	}*/
+			if( ! file_exists( "$custom_css/caweb-custom.css") ){
+				mkdir( $custom_css, 0777, true);
+				file_put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ) );
+			}
+
+			wp_enqueue_style('caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), CAWEB_VERSION );
+		}
+
+	}
 
 	/* This removes Divi Google Font CSS */
 	wp_deregister_style( 'divi-fonts' );
