@@ -33,7 +33,7 @@ module.exports = {
 	], 
 	commonJSFiles: [ // Common JS 
 		'assets/js/caweb/google.js',
-		'assets/js/caweb/geolocator.js',
+		//'assets/js/caweb/geolocator.js', Geolocator not functioning
 		'assets/js/caweb/AutoTracker.js',
 		'assets/js/caweb/custom.js',
 		'assets/js/a11y/*.js',
