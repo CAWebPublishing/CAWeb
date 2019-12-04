@@ -72,8 +72,8 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 			// Include Utility Header
 			get_template_part('partials/content', 'utility-header');
 
-			// Location Bar
-			require_once(CAWebAbsPath . "/ssi/location-bar.php");
+			// Location Bar ( not functioning )
+			//require_once(CAWebAbsPath . "/ssi/location-bar.php");
 
 			// Settings Bar
 			require_once(CAWebAbsPath . "/ssi/settings-bar.php");
