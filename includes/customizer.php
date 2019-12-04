@@ -180,7 +180,7 @@ function caweb_customize_register($wp_customize) {
         'settings'   => 'ca_contact_us_link',
         'active_callback' => 'caweb_customizer_v5_option'
     )));
-
+	/*
     $wp_customize->add_setting('ca_geo_locator_enabled', array(
         'type' => 'option',
         'default' => get_option('ca_geo_locator_enabled'),
@@ -194,7 +194,7 @@ function caweb_customize_register($wp_customize) {
         'settings'   => 'ca_geo_locator_enabled',
         'active_callback' => 'caweb_customizer_v5_option'
     )));
-
+	*/
     $wp_customize->add_setting('ca_utility_home_icon', array(
         'type' => 'option',
         'default' => get_option('ca_utility_home_icon', true),
