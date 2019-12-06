@@ -119,28 +119,25 @@ function caweb_save_options($values = array(), $files = array()) {
 
 	caweb_upload_external_files($ext_js_dir, $site_id, get_option('caweb_external_js', array()), $values['caweb_external_js'], $jsfiles);
 
-	// Alert Banners
+	/* Alert Banners */
 	$alerts = array();
 
-	for ($i = 0; $i < $values['caweb_alert_count']; $i++) {
-		$count = $i + 1;
-		$data = array();
-
-		if ( ! isset($values['alert-status-' . $count])) {
-			continue;
-		}
-		$data['status'] = isset($values['alert-status-' . $count]) ? $values['alert-status-' . $count] : 'active';
-		$data['header'] = isset($values['alert-header-' . $count]) ? $values['alert-header-' . $count] : '';
-		$data['message'] = isset($values['alert-message-' . $count]) ? $values['alert-message-' . $count] : '';
-		$data['page_display'] = isset($values['alert-display-' . $count]) ? $values['alert-display-' . $count] : 'home';
-		$data['color'] = isset($values['alert-banner-color-' . $count]) ? $values['alert-banner-color-' . $count] : '#FDB81E';
-		$data['button'] = isset($values['alert-read-more-' . $count]) ? $values['alert-read-more-' . $count] : '';
-		$data['text'] = isset($values['alert-read-more-text-' . $count]) ? substr($values['alert-read-more-text-' . $count], 0, 16) : 'More Information';
-		$data['url'] = isset($values['alert-read-more-url-' . $count]) ? $values['alert-read-more-url-' . $count] : '';
-		$data['target'] = isset($values['alert-read-more-target-' . $count]) ? $values['alert-read-more-target-' . $count] : '';
-		$data['icon'] = isset($values['alert-icon-' . $count]) ? $values['alert-icon-' . $count] : '';
+	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
+		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
+		$data = array(
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : 'active',
+			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
+			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
+			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
+			'color'        => isset( $values[ "alert-banner-color-$i" ] ) ? $values[ "alert-banner-color-$i" ] : '#FDB81E',
+			'button'       => isset( $values[ "alert-read-more-$i" ] ) ? $values[ "alert-read-more-$i" ] : '',
+			'url'          => isset( $values[ "alert-read-more-url-$i" ] ) ? $values[ "alert-read-more-url-$i" ] : '',
+			'target'       => isset( $values[ "alert-read-more-target-$i" ] ) ? $values[ "alert-read-more-target-$i" ] : '',
+			'icon'         => isset( $values[ "alert-icon-$i" ] ) ? $values[ "alert-icon-$i" ] : '',
+		);
 
 		$alerts[] = $data;
+
 	}
 
 	$values['caweb_alerts'] = $alerts;
