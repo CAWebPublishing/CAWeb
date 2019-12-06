@@ -507,10 +507,6 @@ function caweb_get_icon_span($font, $attr = array()) {
 		return;
 	}
 
-	$t = get_site_option('dev', array());
-	if (empty($t)) {
-		update_site_option('dev', array($font, $icon));
-	}
 
 	$icon = "ca-gov-icon-$icon";
 	$style = '';

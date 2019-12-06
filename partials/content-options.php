@@ -201,11 +201,11 @@ $icons = caweb_get_icon_list(-1, '', true);
 																		<input type="text" name="ca_contact_us_link" id="ca_contact_us_link" size="75" value="<?php print $contact_us_link ?>">
 																	</td>
 																</tr>
-																<tr>
+																<!--tr>
 																	<th scope="row"><div class="tooltip">Enable Geo Locator
 																		<span class="tooltiptext">Displays a geo locator feature at the top right of each page.</span></div></th>
-																		<td><input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?php print $geo_locator_enabled ?>> </td>
-																	</tr>
+																		<td><input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled"  print $geo_locator_enabled ?>> </td>
+																	</tr-->
 																		<tr>
 																			<th scope="row"><div class="tooltip">Home Link
 																				<span class="tooltiptext">Adds a home link to the utility header.</span></div>
