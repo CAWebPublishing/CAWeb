@@ -3,7 +3,7 @@
 // CAWeb Customizer Preview Init
 add_action('customize_preview_init', 'caweb_customize_preview_init');
 function caweb_customize_preview_init() {
-    wp_register_script('caweb-customizer-script', CAWebUri.'/js/wplibs/theme-customizer.js', array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
+    wp_register_script('caweb-customizer-script', getMinFile('/js/theme-customizer.js', 'js'), array('jquery', 'customize-preview'), wp_get_theme('CAWeb')->get('Version'), true);
 
     wp_enqueue_script('caweb-customizer-script');
 
@@ -15,9 +15,8 @@ function caweb_customize_preview_init() {
 // CAWeb Customizer Enqueue Scripts
 add_action('customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts');
 function caweb_customize_controls_enqueue_scripts() {
-    wp_register_script('caweb-icon-script', CAWebUri.'/js/wplibs/icon.js', array('jquery'), CAWebVersion, true);
 
-    wp_register_script('caweb-customize-controls-script', CAWebUri.'/js/wplibs/theme-customizer-controls.js', array('caweb-icon-script'), wp_get_theme('CAWeb')->get('Version'), true);
+    wp_register_script('caweb-customize-controls-script', getMinFile('/js/theme-customizer-controls.js', 'js'), array(), wp_get_theme('CAWeb')->get('Version'), true);
 
     wp_localize_script('caweb-customize-controls-script', 'colorschemes', array('original' => caweb_color_schemes(4, 'displayname'), 'all' => caweb_color_schemes(0, 'displayname')));
 
@@ -181,7 +180,7 @@ function caweb_customize_register($wp_customize) {
         'settings'   => 'ca_contact_us_link',
         'active_callback' => 'caweb_customizer_v5_option'
     )));
-
+	/*
     $wp_customize->add_setting('ca_geo_locator_enabled', array(
         'type' => 'option',
         'default' => get_option('ca_geo_locator_enabled'),
@@ -195,7 +194,7 @@ function caweb_customize_register($wp_customize) {
         'settings'   => 'ca_geo_locator_enabled',
         'active_callback' => 'caweb_customizer_v5_option'
     )));
-
+	*/
     $wp_customize->add_setting('ca_utility_home_icon', array(
         'type' => 'option',
         'default' => get_option('ca_utility_home_icon', true),

@@ -49,7 +49,8 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 						$alert_icon = ! empty($data['icon']) ? caweb_get_icon_span($data['icon'], array('aria-hidden' => "true")) : "";
 						if ( ! empty($data['button']) && ! empty($data['url'])) {
 							$target =  ! empty($data['target']) ? sprintf(' target="%1$s"', $data['target']) : '';
-							$readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>More Information</a>', esc_url($data['url']), $target);
+							$text =  ! empty($data['text']) ? $data['text'] : '';
+							$readmore = sprintf('<a href="%1$s" class="alert-link btn btn-default btn-xs"%2$s>%3$s</a>', esc_url($data['url']), $target, $text);
 						} ?>
 		                <div class="alert alert-dismissible alert-banner" style="background-color:<?php print $data['color'] ?>;">
 							<div class="container">
@@ -71,8 +72,8 @@ $ca_google_trans_icon = ! empty($ca_google_trans_icon) ? caweb_get_icon_span($ca
 			// Include Utility Header
 			get_template_part('partials/content', 'utility-header');
 
-			// Location Bar
-			require_once(CAWebAbsPath . "/ssi/location-bar.php");
+			// Location Bar ( not functioning )
+			//require_once(CAWebAbsPath . "/ssi/location-bar.php");
 
 			// Settings Bar
 			require_once(CAWebAbsPath . "/ssi/settings-bar.php");
