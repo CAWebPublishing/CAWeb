@@ -165,21 +165,20 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Alert Banners */
 	$alerts = array();
 
-	foreach(preg_grep("/alert-header-/", array_keys( $values ) ) as $k){
-		$i = substr($k, strrpos($k,'-') + 1);
+	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
+		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
 		$data = array(
-			'status' => isset($values["alert-status-$i"]) ? $values["alert-status-$i"] : 'active',
-			'header' => isset($values["alert-header-$i"]) ? $values["alert-header-$i"] : '',
-			'message' => isset($values["alert-message-$i"]) ? $values["alert-message-$i"] : '',
-			'page_display' => isset($values["alert-display-$i"]) ? $values["alert-display-$i"] : 'home',
-			'color' => isset($values["alert-banner-color-$i"]) ? $values["alert-banner-color-$i"] : '#FDB81E',
-			'button' => isset($values["alert-read-more-$i"]) ? $values["alert-read-more-$i"] : '',
-			'url' => isset($values["alert-read-more-url-$i"]) ? $values["alert-read-more-url-$i"] : '',
-			'target' => isset($values["alert-read-more-target-$i"]) ? $values["alert-read-more-target-$i"] : '',
-			'icon' => isset($values["alert-icon-$i"]) ? $values["alert-icon-$i"] : '',
-		);		
-		
-		
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : 'active',
+			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
+			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
+			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
+			'color'        => isset( $values[ "alert-banner-color-$i" ] ) ? $values[ "alert-banner-color-$i" ] : '#FDB81E',
+			'button'       => isset( $values[ "alert-read-more-$i" ] ) ? $values[ "alert-read-more-$i" ] : '',
+			'url'          => isset( $values[ "alert-read-more-url-$i" ] ) ? $values[ "alert-read-more-url-$i" ] : '',
+			'target'       => isset( $values[ "alert-read-more-target-$i" ] ) ? $values[ "alert-read-more-target-$i" ] : '',
+			'icon'         => isset( $values[ "alert-icon-$i" ] ) ? $values[ "alert-icon-$i" ] : '',
+		);
+
 		$alerts[] = $data;
 
 	}
