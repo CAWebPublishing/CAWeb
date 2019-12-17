@@ -25,7 +25,7 @@ function caweb_fav_icon_checker() {
 		'sslverify' => false,
 	);
 
-	$handle = wp_remote_get( $url, $arr_context_options );
+	$handle = wp_remote_retrieve_body( wp_remote_get( $url, $arr_context_options ) );
 	$handle = rawurlencode( $handle );
 	$handle = explode( '%', $handle );
 	$handle = array_filter( $handle );

@@ -14,6 +14,11 @@ a[data-toggle="collapse"].collapsed label > span:after{
 	content: '\45'
 }
 
+/* Fav Icon Preview Height */
+.ca_fav_ico_option{
+	max-height: 30px;
+}
+
 /* Image Preview Min/Max Height */
 .header_ca_branding_option, 
 .header_ca_background_option{

@@ -22,14 +22,15 @@ module.exports = {
 		'assets/css/caweb/custom.css'
 	], 
 	themeAdminCSS:[ // WP Backend Admin CSS
-		//'assets/scss/admin.scss',
+		'assets/scss/admin.scss',
 		'assets/css/cagov/cagov.font-only.css',
-		'assets/css/caweb/admin.css'
+		//'assets/css/caweb/admin.css'
 	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
-		//'assets/js/caweb/options/*.js', 
-		'assets/js/caweb/admin-old.js',
+		'assets/js/caweb/options/*.js', 
+		'assets/js/bootstrap/bootstrap.bundle.js',
+		'assets/js/caweb/admin.js',
 	], 
 	commonJSFiles: [ // Common JS 
 		'assets/js/caweb/google.js',

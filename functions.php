@@ -479,23 +479,16 @@ function caweb_admin_enqueue_scripts( $hook ) {
 
 		wp_localize_script( 'caweb-admin-scripts', 'args', $caweb_localize_args );
 
-		/*
-		Bootstrap 4.3.1
-		https://getbootstrap.com/docs/4.3/getting-started/introduction/
-		*/
-		wp_enqueue_script( 'caweb-boot2', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ), '1.14.7', true );
-		wp_enqueue_script( 'caweb-boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ), '4.3.1', true );
+		wp_enqueue_script( 'caweb-admin-scripts' );
 
 		/*
 		Bootstrap 4 Toggle
 		https://gitbrent.github.io/bootstrap4-toggle/
 		*/
-		wp_enqueue_script( 'caweb-boot4', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
-
-		wp_enqueue_script( 'caweb-admin-scripts' );
+		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
 
 		/* Enqueue Styles */
-		wp_enqueue_style( 'caweb-boot4-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
+		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 	} elseif ( in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ) {
 		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
@@ -534,7 +527,8 @@ function caweb_admin_head() {
  *
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
- *
+ * @todo Remove nginx cache references.
+ * 
  * @return void
  */
 function caweb_save_post_list_meta( $post_id, $post ) {
