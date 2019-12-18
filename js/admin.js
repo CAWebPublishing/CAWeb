@@ -685,10 +685,7 @@ var alertID = cancelButton.parentNode.className.substring(cancelButton.parentNod
 		  input.checked = false;
 		  input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
 	  }else if(-1 < input.name.indexOf('alert-banner-color-')){
-		  var color_scheme_picker = $('#ca_site_color_scheme')[0];
-		  var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
       input.value = input.defaultValue;
-      //args.caweb_colors[color]['highlight'];
 	  }else{
 		  if(-1 < input.name.indexOf('alert-icon-')){
 			  var iconList = input.parentNode;
