@@ -349,9 +349,13 @@ function caweb_late_wp_enqueue_scripts() {
 	if ( ! empty( get_option( 'ca_custom_js', '' ) ) ) {
 		$custom_js = sprintf( '%1$s/js/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
 
-		if ( ! file_exists( "$custom_js/caweb-custom.css" ) ) {
+		if ( ! file_exists( "$custom_js/caweb-custom.js" ) ) {
 			global $wp_filesystem;
-			mkdir( $custom_js, 0777, true );
+			
+			if( ! file_exists( $custom_js ) ){
+				mkdir( $custom_js, 0777, true );
+			}
+
 			$wp_filesystem->put_contents( "$custom_js/caweb-custom.js", wp_unslash( get_option( 'ca_custom_js' ) ), FS_CHMOD_FILE );
 		}
 

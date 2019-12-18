@@ -56,7 +56,7 @@
                             data-icon-check="true">Browse</button>
                         <button id="resetFavIcon" class="btn btn-outline-primary" type="button">Reset</button>
                     </div>
-                    <!-- Organization Logo-Brand  -->
+                    <!-- Fav Icon Hidden  -->
                     <input type="hidden" id="ca_fav_ico" name="ca_fav_ico" value="<?php print $fav_icon ?>" >
                 
                 </div>

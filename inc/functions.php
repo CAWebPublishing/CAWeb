@@ -51,7 +51,7 @@ function caweb_nav_menu_theme_locations() {
  */
 function caweb_get_min_file( $f, $ext = 'css' ) {
 	/* if a minified version exists load it */
-	if ( false && file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+	if ( file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f );
 	} else {
 		return CAWEB_URI . $f;
@@ -406,4 +406,45 @@ function caweb_get_user_color( ) {
 	$admin_color = get_user_option( 'admin_color' );
 
 	return $_wp_admin_css_colors[ $admin_color ];
+}
+
+
+/**
+ * CAWeb Allowed HTML for wp_kses
+ *
+ * @link https://codex.wordpress.org/Function_Reference/wp_kses
+ * 
+ * @return void
+ */
+function caweb_allowed_html(){
+	$attr = array(
+		'id' => array(), 
+		'class' => array()
+	);
+
+	$anchors = array(
+		'href' => array(), 
+		'title' => array(), 
+		'target' => array()
+	);
+
+	$imgs = array(
+		'src' => array(),
+		'alt' => array(),
+	);
+
+	$tags = array(
+		'span' => $attr,
+		'a' => array_merge( $attr, $anchors ),
+		'img' => array_merge( $attr, $imgs ),
+		'strong' => $attr, 
+		'bold' => $attr, 
+		'i' => $attr, 
+		'h1' => $attr, 
+		'h2' => $attr, 
+		'h3' => $attr, 
+		'h4' => $attr, 
+		'h5' => $attr, 
+		'h6' => $attr, 
+	);
 }

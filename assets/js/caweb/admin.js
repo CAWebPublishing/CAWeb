@@ -8,12 +8,15 @@ jQuery(document).ready(function() {
 
   });
 
+  $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
+
   // Reset Fav Icon
   $('#resetFavIcon').click(function() {
     var ico = args.defaultFavIcon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
-    $('input[name="ca_fav_ico"]').val(icoName);
+    $('input[type="text"][name="ca_fav_ico"]').val(icoName);
+    $('input[type="hidden"][name="ca_fav_ico"]').val(ico);
     $('#ca_fav_ico_img').attr('src', ico);
 
     changeMade = true;
