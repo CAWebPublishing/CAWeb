@@ -17,9 +17,9 @@ module.exports = {
 	themeCSSAssetDir: 'assets/css/caweb/', // CAWeb CSS 
 	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
 	commonCSSFiles: [ 
-		//'assets/css/caweb/modules.css', 
+		//'assets/css/caweb/modules.css', Module CSS built using extension
 		'assets/css/cagov/cagov.font-only.css', 
-		'assets/css/caweb/custom.css'
+		'assets/scss/frontend.scss',
 	], 
 	themeAdminCSS:[ // WP Backend Admin CSS
 		'assets/scss/admin.scss',

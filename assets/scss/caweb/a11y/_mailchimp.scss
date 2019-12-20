@@ -1,0 +1,8 @@
+/* MailChimp ADA Fixes */
+#mc-embedded-subscribe-form
+span.asterisk, .mce_inline_error{
+  color:#D24532 !important;
+}
+#mc-embedded-subscribe-form input.required.mce_inline_error{
+  border: 2px solid #D24532 !important;
+}
