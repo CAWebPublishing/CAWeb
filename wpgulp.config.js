@@ -17,7 +17,7 @@ module.exports = {
 	themeCSSAssetDir: 'assets/css/caweb/', // CAWeb CSS 
 	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
 	commonCSSFiles: [ 
-		'assets/css/caweb/modules.css', 
+		//'assets/css/caweb/modules.css', 
 		'assets/css/cagov/cagov.font-only.css', 
 		'assets/css/caweb/custom.css'
 	], 
