@@ -54,7 +54,6 @@ If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
 if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	if ( ! empty( CAWEB_EXTENSION ) && file_exists( sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION ) ) ) {
 		include sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
-		include sprintf( '%1$s/divi/layouts.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
 	}
 } else {
 	include CAWEB_ABSPATH . '/divi/functions.php';
@@ -267,7 +266,9 @@ function caweb_wp_enqueue_scripts() {
 
 			if ( ! file_exists( "$custom_css/caweb-custom.css" ) ) {
 				global $wp_filesystem;
-				mkdir( $custom_css, 0777, true );
+				if( ! file_exists( $custom_css ) ){
+					mkdir( $custom_css, 0777, true );
+				}
 				$wp_filesystem->put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ), FS_CHMOD_FILE );
 			}
 
