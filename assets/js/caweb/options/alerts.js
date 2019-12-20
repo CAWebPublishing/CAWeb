@@ -1,6 +1,10 @@
 /* CAWeb Option Page */
 jQuery(document).ready(function() {
 	
+	/*
+	$( "#cawebAlerts" ).sortable();
+	$( "#cawebAlerts" ).disableSelection()
+	*/
 	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
 	$('.alert-status').click(function(e){ alertStatusFunc(this);});
 	$('#add-alert').click( function(e){ addAlert();});
@@ -12,6 +16,8 @@ jQuery(document).ready(function() {
 		var a = $(indicator).hasClass('bg-success') ? 'active' : '';
 
 		$(indicator).next().val(a);
+
+		changeMade = true;
 	}
 
 	var removeAlertFunc = function (s){
@@ -348,6 +354,7 @@ jQuery(document).ready(function() {
 			off: 'No'
 		  });
 
+		  changeMade = true;
 	}
 	
 });
