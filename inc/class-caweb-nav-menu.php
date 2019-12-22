@@ -119,7 +119,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				/* Footer Menu Construction */
 			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
 				$nav_menu   = $this->createFooterMenu( $args );
-				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? sprintf( '<span class="pull-right">Powered by: <a href="%1$s" target="_blank">CAWeb Publishing Service</a></span>', wp_get_theme()->get( 'ThemeURI' ) ) : '';
+				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? sprintf( '<span class="pull-right">Powered by: <a href="%1$s" target="_blank" aria-label="CAWeb Publishing Service Support">CAWeb Publishing Service</a></span>', wp_get_theme()->get( 'ThemeURI' ) ) : '';
 
 				$nav_menu = sprintf(
 					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s><p class="d-inline">Copyright &copy; %3$s State of California</p>%4$s</div></div></footer>',
