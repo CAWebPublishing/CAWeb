@@ -44,11 +44,13 @@ function caweb_fav_icon_checker() {
 function caweb_icon_menu_func() {
 	$input = isset( $_POST['name'] ) ? $_POST['name'] : '';
 	$sel   = isset( $_POST['select'] ) ? $_POST['select'] : '';
+	$header   = isset( $_POST['header'] ) ? $_POST['header'] : false;
 
 	print caweb_icon_menu(
 		array(
 			'select' => $sel,
 			'name'   => $input,
+			'header' => $header
 		)
 	);
 	wp_die(); // this is required to terminate immediately and return a proper response

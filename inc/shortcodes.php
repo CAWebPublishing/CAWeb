@@ -37,9 +37,9 @@ function caweb_icon_menu( $atts ) {
 	/* Available Props */
 	$selected = isset( $atts['select'] ) ? $atts['select'] : '';
 	$input    = isset( $atts['name'] ) ? $atts['name'] : '';
-	$_header  = isset( $atts['header'] ) ? (bool) $atts['header'] : true;
-
-	$header = $_header ? '<div class="caweb-icon-menu-header mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span> <strong>Icon</strong></div>' : '';
+	$label = isset( $atts['header'] ) && $atts['header'] ? sprintf(' <label%1$s>%2$s</label>', ! empty($input) ? " for=\"$input\"" : '', $atts['header']) : '';
+	
+	$header = sprintf('<div class="caweb-icon-menu-header mb-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span>%1$s</div>', $label );
 	$input  = ! empty( $input ) ? sprintf( '<input type="hidden" name="%1$s" value="%2$s" >', $input, $selected ) : '';
 
 	$icons     = caweb_get_icon_list( -1, '', true );

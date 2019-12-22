@@ -1,3 +1,4 @@
+/* CAWeb Options Javascript */
 jQuery(document).ready(function() {
   "use strict";
   var changeMade = false;
@@ -8,9 +9,9 @@ jQuery(document).ready(function() {
 
   });
 
-  $('select, input').on( 'change', function(){  changeMade = true;  });
-  $('input').on('input', function(){  changeMade = true;  });
-  $('input[type="button"], button').on('click', function(){  changeMade = true;  });
+  $('#caweb-options-form select,#caweb-options-form input').on( 'change', function(){  changeMade = true;  });
+  $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
+  $('#caweb-options-form input[type="button"],#caweb-options-form button').on('click', function(){  changeMade = true;  });
 
   $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 

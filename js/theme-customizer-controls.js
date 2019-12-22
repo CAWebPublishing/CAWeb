@@ -1,4 +1,4 @@
-/* CAWeb Option Page */
+/* CAWeb Icon Menu Javascript */
 jQuery(document).ready(function() {
 	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
 	$(document).on('click', '.caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
@@ -32,7 +32,8 @@ jQuery(document).ready(function() {
   
 
 /**
- * Scripts within the customizer controls window.
+ * CAWeb Theme Customizer Control Scripts 
+ * These scripts run within the customizer controls window.
  */
 
 (function() {

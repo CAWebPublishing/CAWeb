@@ -83,7 +83,7 @@
 
             <!-- Google Translate Icon -->
             <div class="form-group col-sm-12">
-                <?php print caweb_icon_menu(array('select' => $google_translate_icon, 'name' => 'ca_google_trans_icon')); ?>
+                <?php print caweb_icon_menu(array('select' => $google_translate_icon, 'name' => 'ca_google_trans_icon', 'header' => 'Icon')); ?>
                 <small class="mb-2 text-muted d-block">Select an icon to display in front of the Google Translate Page link.</small>
             </div>
 

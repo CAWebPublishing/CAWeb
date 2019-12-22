@@ -1,3 +1,4 @@
+/* Browse Library */
 (function ($) {
   var frame;
   var el_name;
@@ -75,9 +76,8 @@
 
 				if( /\d+_media_image/.test(el_name) ){
           var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
-          input_box.value = attachmentURL;
-          nav_img_alt_box.value = attachmentAlt;
-
+          $(nav_img_alt_box).val(attachmentAlt);
+          $('input[id="' + el_name + '"]').val(attachmentURL);
         }else if( "true" !== icon_check ){
             if( null !== input_box )
               input_box.val(attachmentURL);

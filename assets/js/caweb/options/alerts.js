@@ -1,4 +1,4 @@
-/* CAWeb Option Page */
+/* CAWeb Alert Option Javascript */
 jQuery(document).ready(function() {
 	
 	/*
@@ -261,7 +261,8 @@ jQuery(document).ready(function() {
 		var data = {
             'action': 'caweb_icon_menu',
 			'name': 'alert-icon-' + alertCount,
-			'select': 'important'
+			'select': 'important',
+			'header': 'Icon'
           };
 
 		$.post(ajaxurl, data, function(response) {

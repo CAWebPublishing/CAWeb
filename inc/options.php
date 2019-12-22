@@ -211,7 +211,7 @@ function caweb_option_page() {
  */
 function caweb_api_menu_option_setup() {
 	/* The actual menu file */
-	get_template_part( 'partials/options/', 'api' );
+	get_template_part( 'partials/options/api' );
 }
 
 /**

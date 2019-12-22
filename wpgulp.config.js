@@ -24,12 +24,18 @@ module.exports = {
 		'assets/scss/admin.scss',
 		'assets/css/cagov/cagov.font-only.css',
 	],
+	themeAdminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
+		'assets/scss/bootstrap.scss'
+	],
 	themeAdminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/options/*.js', 
-		'assets/js/bootstrap/bootstrap.bundle.js',
+		'assets/js/caweb/nav-menu.js',
 		'assets/js/caweb/admin.js',
 	], 
+	themeAdminBootStrapJS: [ // WP Backend Admin Bootstrap JS
+		'assets/js/bootstrap/bootstrap.bundle.js',
+	],
 	commonJSFiles: [ // Common JS 
 		'assets/js/caweb/google.js',
 		//'assets/js/caweb/geolocator.js', Geolocator not functioning
