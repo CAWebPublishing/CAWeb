@@ -1,6 +1,21 @@
 /* nav-menus.php Javascript  */
 jQuery(document).ready(function() {
   "use strict";
+  /* Alt Text Check */
+  $(document).on('click', 'input[name="save_menu"]', function(e){
+	  var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
+
+
+    nav_menu_alt_texts.each(function(i,ele) {
+		  if( "" === $(ele).val().trim() ){
+        var menu_id = $(ele).attr('id').substring(0, $(ele).attr('id').indexOf("_") );
+			  var title = $("#edit-menu-item-title-" + menu_id).val();
+			  alert(title + " Navigation Media Image Alt Text can not be blank.")
+			  e.preventDefault();
+		  }
+	  });
+
+  });
 
   /* Unit Size Selector */
   $(document).on('change', 'div .unit-size-selector', function(){
