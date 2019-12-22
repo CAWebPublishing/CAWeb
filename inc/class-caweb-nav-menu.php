@@ -182,7 +182,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				If a top level nav item,
 				menu_item_parent= 0
 				*/
-				if ( 0 === $item->menu_item_parent ) {
+				if ( ! $item->menu_item_parent ) {
 					$sub_nav   = '';
 					$item_meta = get_post_meta( $item->ID );
 
@@ -260,7 +260,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				If a top level nav item,
 				menu_item_parent= 0
 				*/
-				if ( 0 === $item->menu_item_parent ) {
+				if ( ! $item->menu_item_parent ) {
 					$item_meta = get_post_meta( $item->ID );
 					/* Get array of Sub Nav Items (second-level-links) */
 					$child_links = caweb_get_nav_menu_item_children( $item->ID, $menuitems );
@@ -460,7 +460,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
 			foreach ( $menuitems as $item ) {
-				if ( $item->menu_item_parent === 0 ) {
+				if ( ! $item->menu_item_parent  ) {
 					$nav_links .= sprintf(
 						'<li%1$stitle="%2$s"%3$s><a href="%4$s"%5$s>%6$s</a></li>',
 						( ! empty( $item->classes ) ? sprintf( ' class="%1$s" ', implode( ' ', $item->classes ) ) : '' ),
