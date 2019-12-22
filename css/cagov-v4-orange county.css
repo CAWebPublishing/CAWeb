@@ -11692,26 +11692,60 @@ body.v4.logged-in .gssb_c {
   body {
     background: white !important;
   }
-  header {
-    position: relative !important;
-  }
-  #main-content.main-content {
-    padding-top: 0px !important;
-  }
-  .utility-header {
-    height: 45px;
-  }
-  .mobile-control.cagov-logo {
-    padding-left: 0px;
-  }
-  .header-organization-banner {
-    margin-left: -59px;
-  }
-  .navigation-search {
-    border: none;
+  /* Main Content */
+  #main-content {
+    padding-top: 0 !important;
+    outline: transparent;
   }
   .main-content {
     background: transparent !important;
+  }
+  /* Header Organization Banner */
+  .header-organization-banner {
+    margin-left: -59px;
+  }
+  /* Navigation Search */
+  .navigation-search {
+    border: none;
+  }
+  /* Width */
+  .single.non_divi_builder.sidebar_displayed .main-content .main-primary,
+  .archive.sidebar_displayed .main-content .main-primary {
+    width: 100%;
+  }
+  /* Max-Width */
+  #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
+  .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  .non_divi_builder .main-content,
+  .page-title,
+  .et_pb_gutters3 .et_pb_column_2_3,
+  .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
+    max-width: 100% !important;
+  }
+  /* Padding */
+  .et_pb_post_title, .et_pb_section, .et_pb_column_2_3 .et_pb_row_inner {
+    padding: 1em !important;
+  }
+  /* Padding-left */
+  .mobile-control.cagov-logo {
+    padding-left: 0px;
+  }
+  /* Utility Header */
+  .utility-header {
+    height: 45px;
+  }
+  /* Hide the following elements */
+  header,
+  footer,
+  .return-top.is-visible,
+  .addtoany_share_save_container,
+  #ae_app,
+  .et_pb_fullwidth_section,
+  .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
+  .et_pb_column.et_pb_column_1_4,
+  aside#non_divi_sidebar {
+    display: none !important;
+    visibility: hidden;
   }
 }
 
