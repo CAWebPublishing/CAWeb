@@ -11,6 +11,7 @@ jQuery(document).ready(function() {
 			$(element).attr('aria-label', 'WPForms Radio Group');
 		});
 	}
+	
 	/*
 	WPForms Accessibility 
 	Retrieve checkbox containers
@@ -23,4 +24,17 @@ jQuery(document).ready(function() {
 			$(element).attr('aria-label', 'WPForms Checkbox Group');
 		});
 	}
+
+	/*
+	WPForms Accessibility 
+	Retrieve Submit button
+	*/
+	var wpforms_submit = $('.wpforms-submit[aria-live="assertive"]');
+
+	if( wpforms_submit.length ){
+		wpforms_submit.each(function(index, element) {
+			$(element).attr('aria-atomic', 'true');
+		});
+	}
+	 
 });
