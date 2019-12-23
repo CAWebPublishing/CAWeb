@@ -80,8 +80,10 @@ footer span a:hover{
 ul ul{
 	padding-bottom: 0px;
 }
-
-ul, ol{
+ol{
+	margin-left: 16px;
+}
+ol{
   list-style-position: outside !important;
 }
 body.page-template-searchpage.logged-in .gssb_c,

@@ -11639,7 +11639,11 @@ ul ul {
   padding-bottom: 0px;
 }
 
-ul, ol {
+ol {
+  margin-left: 16px;
+}
+
+ol {
   list-style-position: outside !important;
 }
 
