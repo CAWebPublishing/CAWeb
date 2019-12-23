@@ -380,9 +380,10 @@ if ( ! function_exists( 'caweb_get_shortcode_from_content' ) ) {
  */
 function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true ) {
 	$nav_menu_item_list = array();
+	update_site_option('dev', array($parent_id, $nav_menu_items));
 
 	foreach ( (array) $nav_menu_items as $nav_menu_item ) {
-		if ( $nav_menu_item->menu_item_parent === $parent_id ) {
+		if ( (int)$nav_menu_item->menu_item_parent === (int)$parent_id ) {
 			$nav_menu_item_list[] = $nav_menu_item;
 			if ( $depth ) {
 				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
