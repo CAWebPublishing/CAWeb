@@ -215,7 +215,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					} /* End of sub-nav */
 
 					$item_nav_image = '';
-					if ( ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+					if ( 
+						! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
 						$item_nav_image_class = 'widget_nav_menu_icon ca-gov-icon-' . $item_meta['_caweb_menu_icon'][0];
 						$item_nav_image       = "<span class=\"$item_nav_image_class\"></span>";
 					} elseif ( ! empty( $item_meta['_caweb_menu_image'][0] ) ) {

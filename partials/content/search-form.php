@@ -4,13 +4,13 @@
 		<span class="sr-only" id="SearchInput">Custom Google Search</span>
 		<input type="text" id="q" name="q" value="<?php print $keyword; ?>" aria-labelledby="SearchInput" placeholder="Search this website" class="search-textfield height-50 border-0 p-x-sm w-100" />
 		<button type="submit" class="pos-abs gsc-search-button top-0 width-50 height-50 border-0 bg-transparent">
-			<span class="ca-gov-icon-search font-size-30 color-gray" aria-hidden="true"></span>
+			<span class="ca-gov-icon-search font-size-30 color-gray"></span>
 			<span class="sr-only">Submit</span>
 		</button>
 		<div class="width-50 height-50 close-search-btn">
 			<button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset">
 				<span class="sr-only">Close Search</span>
-				<span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
+				<span class="ca-gov-icon-close-mark"></span>
 			</button>
 		</div>
 	</form>
