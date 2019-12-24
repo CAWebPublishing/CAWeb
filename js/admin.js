@@ -799,4 +799,14 @@ jQuery(document).ready(function() {
     }
   });
 
+  $('button.doc-sitemap').click(function(e){
+    e.preventDefault();
+    var data = {
+      'action': 'create_doc_sitemap',
+    };
+
+    $.post(ajaxurl, data, function(response) {
+      $('.doc-sitemap-update').html(response);
+    });
+  });
 });

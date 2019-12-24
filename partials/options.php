@@ -143,6 +143,7 @@ $header_branding_background_filename = ! empty( $header_branding_background ) ? 
 			<li class="list-group-item"><a href="#custom-css" class="text-reset" data-toggle="collapse">Custom CSS</a></li>
 			<li class="list-group-item"><a href="#custom-js" class="text-reset" data-toggle="collapse">Custom JS</a></li>
 			<li class="list-group-item"><a href="#alert-banners" class="text-reset" data-toggle="collapse">Alert Banners</a></li>
+			<li class="list-group-item"><a href="#document-sitemap" class="text-reset" data-toggle="collapse">Features</a></li>
 		</ul>
 	</div>
 	<div class="row pr-3">
@@ -153,6 +154,7 @@ $header_branding_background_filename = ! empty( $header_branding_background ) ? 
 					<?php require_once 'options/custom-css.php'; ?>
 					<?php require_once 'options/custom-js.php'; ?>
 					<?php require_once 'options/alert-banners.php'; ?>
+					<?php require_once 'options/sitemap.php'; ?>
 				<input type="submit" name="caweb_options_submit" class="button button-primary" value="<?php _e( 'Save Changes' ); ?>">
 				<input type="hidden" name="caweb_submit" >
 		</div>
