@@ -10,6 +10,7 @@ $caweb_alerts = get_option( 'caweb_alerts', array() );
 if ( empty( $caweb_alerts ) ) {
 	return;
 }
+update_site_option('dev', $caweb_alerts);
 ?>
 <!-- Alert Banners -->
 <?php

@@ -19,7 +19,7 @@ add_action( 'customize_register', 'caweb_customize_register' );
  * @return void
  */
 function caweb_customize_preview_init() {
-	wp_register_script( 'caweb-customizer-script', getMinFile( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
+	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
 
 	wp_enqueue_script( 'caweb-customizer-script' );
 
@@ -36,7 +36,7 @@ function caweb_customize_preview_init() {
  */
 function caweb_customize_controls_enqueue_scripts() {
 
-	wp_register_script( 'caweb-customize-controls-script', getMinFile( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
+	wp_register_script( 'caweb-customize-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
 
 	wp_localize_script(
 		'caweb-customize-controls-script',
