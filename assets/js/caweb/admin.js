@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 
   $('#caweb-options-form select,#caweb-options-form input').on( 'change', function(){  changeMade = true;  });
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
-  $('#caweb-options-form input[type="button"],#caweb-options-form button').on('click', function(){  changeMade = true;  });
+  $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
   $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
