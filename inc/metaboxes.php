@@ -63,8 +63,6 @@ function caweb_page_identifier_metabox_callback( $post ) {
 		$custom_title = get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? ' checked' : '';
 	}
 
-	$menu_selector_enabled = get_option( 'ca_menu_selector_enabled', false );
-
 	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); ?>
 
 <form action="#" method="post">
@@ -72,17 +70,6 @@ function caweb_page_identifier_metabox_callback( $post ) {
 	<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"<?php print $custom_title; ?>>
 	Display Title on Page
 
-	<?php if ( $menu_selector_enabled ) : 
-		$default_menu = get_post_meta( $post->ID, 'ca_default_navigation_menu', true );
-	?>
-	<p>You may display a different Navigation Menu on this page.</p>
-
-	<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-		<option value="megadropdown"<?php print( 'megadropdown' === $default_menu ? ' selected' : '' ); ?>>Mega Drop</option>
-		<option value="dropdown"<?php print( 'dropdown' === $default_menu ? ' selected' : '' ); ?>>Drop Down</option>
-		<option value="singlelevel"<?php print( 'singlelevel' === $default_menu ? ' selected' : '' ); ?>>Single Level</option>
-	</select>
-	<?php endif; ?>
 </form>
 
 	<?php
@@ -114,8 +101,5 @@ function caweb_save_post( $post_id, $post ) {
 	$option_title_display = ( isset( $_POST['ca_custom_post_title_display'] ) ? $_POST['ca_custom_post_title_display'] : '' );
 	update_post_meta( $post->ID, 'ca_custom_post_title_display', $option_title_display );
 
-	if ( true === get_option( 'ca_menu_selector_enabled' ) ) {
-		update_post_meta( $post->ID, 'ca_default_navigation_menu', $_POST['ca_default_navigation_menu'] );
-	}
 }
 ?>

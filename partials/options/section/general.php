@@ -79,17 +79,6 @@
             </div>
         </div>
 
-        <?php if ( ! is_multisite() || current_user_can('manage_network_options')): ?>
-        <!-- Menu Type Selector Row (only for Network Admins) -->
-        <div class="form-row">
-            <div class="form-group col-sm-5">
-               <label for="ca_menu_selector_enabled" class="d-block mb-0"><strong>Menu Type Selector</strong></label>
-               <small class="mb-2 text-muted d-block">Displays a header menu type selector on the page editor level.</small>
-               <input type="checkbox" name="ca_menu_selector_enabled" id="ca_menu_selector_enabled"<?php print $navigation_menu_selector ? ' checked' : '' ?> data-toggle="toggle">
-            </div>
-        </div>
-        <?php endif; ?>
-
         <!-- Colorscheme Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">

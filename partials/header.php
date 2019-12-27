@@ -67,9 +67,7 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		wp_nav_menu(
 			array(
 				'theme_location'               => 'header-menu',
-				'style'                        => ( get_option( 'ca_menu_selector_enabled' ) ?
-							get_post_meta( get_the_ID(), 'ca_default_navigation_menu', true ) :
-							get_option( 'ca_default_navigation_menu' ) ),
+				'style'                        => get_option( 'ca_default_navigation_menu' ),
 				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
 				'version'                      => caweb_get_page_version( get_the_ID() ),
 			)
