@@ -11721,12 +11721,16 @@ body.v4.logged-in .gssb_c {
     width: 100% !important;
   }
   /* Page Margins */
-  .et_pb_row {
+  .et_pb_row,
+  .non_divi_builder #main-content {
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+  .et_pb_row {
     display: inline !important;
   }
   /* Max-Width */
+  .non_divi_builder #main-content,
   .et_pb_row,
   .et_pb_row,
   .non_divi_builder .main-content,
