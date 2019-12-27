@@ -1,5 +1,6 @@
 /**
- * Scripts within the customizer controls window.
+ * CAWeb Theme Customizer Control Scripts 
+ * These scripts run within the customizer controls window.
  */
 
 (function() {

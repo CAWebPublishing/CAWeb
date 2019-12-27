@@ -1,0 +1,9 @@
+/* Tabby Response ADA Fixes */
+li.responsive-tabs__list__item.keyboard-outline,
+li.responsive-tabs__list__item.responsive-tabs__list__item--active:focus
+{
+    outline: #2ea3f2 solid 2px !important;
+}
+li.responsive-tabs__list__item{
+  color: #757575 !important;
+}
