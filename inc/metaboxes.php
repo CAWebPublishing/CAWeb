@@ -52,39 +52,38 @@ function caweb_page_identifier_metabox_callback( $post ) {
 		update_post_meta( $post->ID, 'ca_default_navigation_menu', get_option( 'ca_default_navigation_menu' ) );
 	}
 
-	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); ?>
-
-<form action="#" method="post">
-
-	<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display" 
-	<?php
 	/*
 	If the post doesnt't have a ca_custom_post_title_display meta field or a page/post ID assumed new page
 	if new page, then ca_default_post_title_display option determines initial title setting
 	*/
 	if ( ! isset( $post->ID ) || ! in_array( 'ca_custom_post_title_display', get_post_custom_keys( $post->ID ), true ) ) {
-		print( ! get_option( 'ca_default_post_title_display', false ) ? 'checked="checked"' : '' );
+		$custom_title = ! get_option( 'ca_default_post_title_display', false ) ? ' checked' : '';
 		/* if the post does have a ca_custom_post_title_display meta field let the user selected option override */
 	} else {
-		print( true === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'checked="checked"' : '' );
+		$custom_title = get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? ' checked' : '';
 	}
-	?>
-	>
+
+	$menu_selector_enabled = get_option( 'ca_menu_selector_enabled', false );
+
+	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); ?>
+
+<form action="#" method="post">
+
+	<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"<?php print $custom_title; ?>>
 	Display Title on Page
 
-	<?php if ( true === get_option( 'ca_menu_selector_enabled', false ) ) : ?>
+	<?php if ( $menu_selector_enabled ) : 
+		$default_menu = get_post_meta( $post->ID, 'ca_default_navigation_menu', true );
+	?>
 	<p>You may display a different Navigation Menu on this page.</p>
 
 	<select id="ca_default_navigation_menu" name="ca_default_navigation_menu">
-		<option value="megadropdown" <?php print( 'megadropdown' === get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) ? 'selected="selected"' : '' ); ?>>Mega Drop</option>
-		<option value="dropdown" <?php print( 'dropdown' === get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) ? 'selected="selected"' : '' ); ?>>Drop Down</option>
-		<option value="singlelevel" <?php print( 'singlelevel' === get_post_meta( $post->ID, 'ca_default_navigation_menu', true ) ? 'selected="selected"' : '' ); ?>>Single Level</option>
-
-
+		<option value="megadropdown"<?php print( 'megadropdown' === $default_menu ? ' selected' : '' ); ?>>Mega Drop</option>
+		<option value="dropdown"<?php print( 'dropdown' === $default_menu ? ' selected' : '' ); ?>>Drop Down</option>
+		<option value="singlelevel"<?php print( 'singlelevel' === $default_menu ? ' selected' : '' ); ?>>Single Level</option>
 	</select>
 	<?php endif; ?>
 </form>
-
 
 	<?php
 }
