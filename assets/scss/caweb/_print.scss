@@ -1,3 +1,4 @@
+/* Print Formatting */
 @media print{
 	body {
 		background: white !important;
@@ -28,9 +29,16 @@
 		width: 100% !important;
 	}
 
+	/* Page Margins */
+	.et_pb_row{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		display: inline !important;
+	}
+
 	/* Max-Width */
-	#main-content .entry-content .et_builder_inner_content>.et_pb_section>.et_pb_row,
-	.et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+	.et_pb_row,
+	.et_pb_row,
 	.non_divi_builder .main-content, 
 	.page-title,
 	.et_pb_gutters3 .et_pb_column_2_3, 
