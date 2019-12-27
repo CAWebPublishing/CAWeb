@@ -33,7 +33,13 @@ function caweb_fav_icon_checker() {
 	$handle = array_splice( $handle, 0, 4 );
 	$handle = implode( '', $handle );
 
-	if ( '00000100' === $handle ) {
+	/*
+	ico = '00000100'
+	png = '89PNG0D0A1A'
+	*/
+	$mime_patterns = array( '00000100', '89PNG0D0A1A' );
+
+	if ( in_array( $handle, $mime_patterns, true) ) {
 		print true;
 		wp_die(); /* this is required to terminate immediately and return a proper response */
 	}
