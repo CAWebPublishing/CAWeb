@@ -6,7 +6,7 @@
 	/* Main Content */
 	#main-content {
 		padding-top: 0 !important;
-		outline: transparent;
+		outline: transparent !important;
 	}
 	.main-content{
 		background: transparent !important;
@@ -14,18 +14,18 @@
 
 	/* Header Organization Banner */
 	.header-organization-banner{
-		margin-left: -59px;
+		margin-left: -59px !important;
 	}
 	
 	/* Navigation Search */
 	.navigation-search{
-    	border: none;
+    	border: none !important;
   	}
 
 	/* Width */
 	.single.non_divi_builder.sidebar_displayed .main-content .main-primary, 
 	.archive.sidebar_displayed .main-content .main-primary{
-		width: 100%;
+		width: 100% !important;
 	}
 
 	/* Max-Width */
@@ -36,6 +36,7 @@
 	.et_pb_gutters3 .et_pb_column_2_3, 
 	.et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
 		max-width: 100% !important;
+		width: 100% !important;
 	}
 
 	/* Padding */
@@ -45,12 +46,12 @@
 
 	/* Padding-left */
 	.mobile-control.cagov-logo{
-    	padding-left: 0px;
+    	padding-left: 0px !important;
   	}
 
 	/* Utility Header */
 	.utility-header{
-		height: 45px;
+		height: 45px !important;
 	}
 
 	/* Hide the following elements */
@@ -62,8 +63,9 @@
 	.et_pb_fullwidth_section, 
 	.et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
 	.et_pb_column.et_pb_column_1_4,
-	aside#non_divi_sidebar {
+	aside#non_divi_sidebar,
+	.si-toggle-container {
 		display: none !important;
-		visibility: hidden;
+		visibility: hidden !important;
 	}
 }
