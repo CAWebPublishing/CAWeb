@@ -1,4 +1,4 @@
-/* CAWeb Option Page */
+/* CAWeb Uploads Option */
 jQuery(document).ready(function() {
 	
   /*

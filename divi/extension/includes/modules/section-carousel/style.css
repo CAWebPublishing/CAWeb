@@ -1,0 +1,18 @@
+/* Section - Carousel 
+.et_pb_ca_section_carousel .container{
+	width: 100%;
+}
+
+.et_pb_ca_section_carousel .carousel-media .item .preview-image,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .item .preview-image{
+ 	height: 150px;
+}
+.et_pb_ca_section_carousel .carousel-media .item img,
+.et_pb_ca_fullwidth_section_carousel .carousel-media .item img{
+ 	height: 100%;
+}
+.et_pb_ca_section_carousel .carousel-media .item .details,
+.et_pb_ca_fullwidth_section_carousel  .carousel-media .item .details{
+ 	margin-top: 1em;
+}
+*/

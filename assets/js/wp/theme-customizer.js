@@ -1,3 +1,4 @@
+/* CAWeb Theme Customizer Option Scripts */
 ( function( $ ) {  
    
   function class_check(haystack, needle){

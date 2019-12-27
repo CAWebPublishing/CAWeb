@@ -1,3 +1,8 @@
+/* HIDE THE 'Enable Visual Builder' Button*/
+#et_pb_fb_cta, .et-bfb-optin-cta {
+	display: none !important;
+}
+
 /* TinyMCE Content Editor */
 body#tinymce.mce-content-body{
 	background-color: transparent;
@@ -12,6 +17,11 @@ a[data-toggle="collapse"] label > span:after{
 a[data-toggle="collapse"].collapsed h2 > span:after,
 a[data-toggle="collapse"].collapsed label > span:after{
 	content: '\45'
+}
+
+/* Fav Icon Preview Height */
+.ca_fav_ico_option{
+	max-height: 30px;
 }
 
 /* Image Preview Min/Max Height */

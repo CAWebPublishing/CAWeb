@@ -1,6 +1,10 @@
-/* CAWeb Option Page */
+/* CAWeb Alert Option Javascript */
 jQuery(document).ready(function() {
 	
+	/*
+	$( "#cawebAlerts" ).sortable();
+	$( "#cawebAlerts" ).disableSelection()
+	*/
 	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
 	$('.alert-status').click(function(e){ alertStatusFunc(this);});
 	$('#add-alert').click( function(e){ addAlert();});
@@ -12,6 +16,8 @@ jQuery(document).ready(function() {
 		var a = $(indicator).hasClass('bg-success') ? 'active' : '';
 
 		$(indicator).next().val(a);
+
+		changeMade = true;
 	}
 
 	var removeAlertFunc = function (s){
@@ -255,7 +261,8 @@ jQuery(document).ready(function() {
 		var data = {
             'action': 'caweb_icon_menu',
 			'name': 'alert-icon-' + alertCount,
-			'select': 'important'
+			'select': 'important',
+			'header': 'Icon'
           };
 
 		$.post(ajaxurl, data, function(response) {
@@ -341,13 +348,14 @@ jQuery(document).ready(function() {
 
 		// Initialize 3rd Party Plugins after DOMs have been added
 		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
-		console.log(args.tinymce_settings)
+
 		$(readMoreInput).bootstrapToggle();
 		$(readMoreTargetInput).bootstrapToggle({
 			on: 'Yes',
 			off: 'No'
 		  });
 
+		  changeMade = true;
 	}
 	
 });

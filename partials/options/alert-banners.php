@@ -15,7 +15,7 @@
                     $header = $data['header'];
                 $default_header = ! empty($header) ? $header : "Label";
                 $count = $a + 1;
-                $status = 'active' == $data['status'] ? ' checked' : '';
+                $status = $data['status'];
                 $alert_home = 'home' == $data['page_display'] ? ' checked' : '';
                 $alert_all = 'all' == $data['page_display'] ? ' checked' : '';
 
@@ -36,8 +36,8 @@
                 </a>
                 <!-- Alert Options -->
                 <div>
-                    <div class="dashicons align-middle bg-success rounded-circle alert-status mb-0"></div>
-                    <input type="hidden" name="alert-status-<?php print $count ?>">
+                    <div class="dashicons align-middle rounded-circle alert-status mb-0 <?php print ! empty($status) ? 'bg-success' : 'bg-danger'; ?>"></div>
+                    <input type="hidden" name="alert-status-<?php print $count ?>" value="<?php print $status; ?>">
                 </div>
 
                 <!-- Alert Banner Fields -->
@@ -131,7 +131,7 @@
 
                         <!-- Banner Icon -->
                         <div class="form-group col-sm-12 d-inline-block pl-0">
-                            <?php print caweb_icon_menu(array('select' => $alert_icon, 'name' => "alert-icon-$count")); ?>
+                            <?php print caweb_icon_menu(array('select' => $alert_icon, 'name' => "alert-icon-$count", 'header' => 'Icon')); ?>
                         </div>
                     </div>
                 </div>

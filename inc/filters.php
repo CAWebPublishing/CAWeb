@@ -1,111 +1,33 @@
 <?php
+/**
+ * CAWeb Theme Filters
+ *
+ * @package CAWeb
+ */
 
-// TinyMCE Editor
-// Attach callback to 'tiny_mce_before_init'
-add_filter( 'tiny_mce_before_init', 'caweb_tiny_mce_before_init', 15 );
-function caweb_tiny_mce_before_init( $init_array ) {
-	// Define the style_formats array
-	// Each array child is a format with it's own settings
-	$style_formats = array(
-		array(
-			'name'    => 'Featured Narrative',
-			'title'   => 'Featured Narrative',
-			'block'   => 'aside',
-			'classes' => 'featured-narrative',
-			'wrapper' => true,
-		),
-		array(
-			'name'     => 'Overstated List',
-			'title'    => 'Overstated List',
-			'selector' => 'ul',
-			'inline'   => 'ul',
-			'classes'  => 'list-overstated',
-			'wrapper'  => true,
-			'styles'   => array(
-				'list-style-type' => 'none',
-			),
-		),
-		array(
-			'name'     => 'Standout List',
-			'title'    => 'Standout List',
-			'selector' => 'ul',
-			'inline'   => 'ul',
-			'classes'  => 'list-standout',
-			'wrapper'  => true,
-			'styles'   => array(
-				'list-style-type' => 'none',
-			),
-		),
-		array(
-			'name'     => 'Understated List',
-			'title'    => 'Understated List',
-			'selector' => 'ul',
-			'inline'   => 'ul',
-			'classes'  => 'list-understated',
-			'wrapper'  => true,
-			'styles'   => array(
-				'list-style-type' => 'none',
-			),
-		),
-	);
-
-	// Insert the array, JSON ENCODED, into 'style_formats'
-	$init_array['style_formats'] = json_encode( $style_formats );
-
-	// TinyMCE default is 11pt but it doesnt appear in the font size box
-	$font_sizes                     = caweb_font_sizes( array(), true );
-	$init_array['fontsize_formats'] = implode( ' ', $font_sizes );
-
-	// TinyMCE Toolbar Start off unhidden
-	$init_array['wordpress_adv_hidden'] = false;
-
-	return $init_array;
-}
-
-// Add hidden MCE Buttons
-// The primary toolbar (always visible)
-add_filter( 'mce_buttons', 'caweb_mce_buttons', 15 );
-function caweb_mce_buttons( $buttons ) {
-	/**
-	 * Add in a core button that's disabled by default
-	 */
-	$tmp = array( 'formatselect', 'bold', 'italic', 'underline' );
-	array_splice( $buttons, 0, 3, $tmp );
-
-	return $buttons;
-}
-
-add_filter( 'mce_buttons_2', 'caweb_mce_buttons_2', 15 );
-function caweb_mce_buttons_2( $buttons ) {
-
-	/**
-	 * Add in a core button that's disabled by default
-	 */
-
-	$tmp = array(
-		'styleselect',
-		'strikethrough',
-		'hr',
-		'fontselect',
-		'fontsizeselect',
-		'forecolor',
-		'backcolor',
-		'pastetext',
-		'copy',
-		'subscript',
-		'superscript',
-	);
-	array_splice( $buttons, 0, 5, $tmp );
-
-	return $buttons;
-}
-
-// CAWeb Page Body Class
+/* WP Filters */
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
+add_filter( 'post_class', 'caweb_post_class', 15 );
+add_filter( 'theme_page_templates', 'caweb_theme_page_templates', 15 );
+add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
+add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
+
+/* Plugin Filters */
+add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
+
+/**
+ * CAWeb Page Body Class
+ *
+ * @link https://developer.wordpress.org/reference/hooks/body_class/
+ * @param  array $wp_classes An array of body class names.
+ * @param  array $extra_classes An array of additional class names added to the body.
+ *
+ * @return array
+ */
 function caweb_body_class( $wp_classes, $extra_classes ) {
 	global $post;
 
-	// List of the classes that need to be removed
+	/* List of the classes that need to be removed */
 	$blacklist = array(
 		'et_secondary_nav_dropdown_animation_fade',
 		'et_primary_nav_dropdown_animation_fade',
@@ -114,7 +36,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		'et_right_sidebar',
 	);
 
-	// List of extra classes that need to be added to the body
+	/* List of extra classes that need to be added to the body */
 	if ( isset( $post->ID ) ) {
 		$divi              = et_pb_is_pagebuilder_used( $post->ID );
 		$sidebar_enabled   = ! is_page();
@@ -129,29 +51,42 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 	}
 	$whitelist[] = ( get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '' );
 
-	// Remove any classes in the blacklist from the wp_classes
+	/* Remove any classes in the blacklist from the wp_classes */
 	$wp_classes = array_diff( $wp_classes, $blacklist );
 
-	// Return filtered wp class
+	/* Return filtered wp class */
 	return array_merge( $wp_classes, (array) $whitelist );
 }
 
-// CAWeb Post Body Class
-add_filter( 'post_class', 'caweb_post_class', 15 );
+/**
+ * CAWeb Post Body Class
+ *
+ * @link https://developer.wordpress.org/reference/hooks/post_class/
+ * @param  array $classes An array of post class names.
+ *
+ * @return array
+ */
 function caweb_post_class( $classes ) {
 	global $post;
 
 	if ( has_post_thumbnail( $post->ID ) && '' === get_the_post_thumbnail_url( $post->ID ) ) {
-		unset( $classes[ array_search( 'has-post-thumbnail', $classes ) ] );
+		unset( $classes[ array_search( 'has-post-thumbnail', $classes, true ) ] );
 	}
 
 	return $classes;
 }
 
-// CAWeb Theme Page Templates
-add_filter( 'theme_page_templates', 'caweb_theme_page_templates', 15 );
+/**
+ * CAWeb Theme Page Templates
+ * Filters list of page templates for a theme.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/theme_page_templates/
+ * @param  array $templates Array of page templates. Keys are filenames, values are translated names.
+ *
+ * @return array
+ */
 function caweb_theme_page_templates( $templates ) {
-	// Remove Divi Blank Page Template
+	/* Remove Divi Blank Page Template */
 	unset( $templates['page-template-blank.php'] );
 
 	if ( 5 <= get_option( 'ca_site_version', 5 ) ) {
@@ -161,31 +96,55 @@ function caweb_theme_page_templates( $templates ) {
 	return $templates;
 }
 
-// CAWeb Script Loader Tags
-add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
+/**
+ * CAWeb Script Loader Tags
+ * Filters the HTML script tag of an enqueued script.
+ *
+ * @param  string $tag The <script> tag for the enqueued script.
+ * @param  string $handle The script's registered handle.
+ * @param  string $src The script's source URL.
+ *
+ * @return string
+ */
 function caweb_script_loader_tag( $tag, $handle, $src ) {
-	// Defer some scripts
-	$js_scripts = array( 'cagov-modernizr-script', 'cagov-modernizr-extra-script', 'cagov-navigation-script', 'cagov-ga-autotracker-script', 'cagov-google-script', 'thickbox' );
-	// deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag)
-	if ( in_array( $handle, $js_scripts ) ) {
-		return str_replace( 'src', 'defer src', $tag );
+	/* Defer some scripts */
+	$js_scripts = array( 'cagov-modernizr-script', 'cagov-frontend-script', 'thickbox' );
+	/* deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag) */
+	if ( in_array( $handle, $js_scripts, true ) ) {
+		$tag = str_replace( 'src', 'defer src', $tag );
 	}
 
 	return $tag;
 }
 
 /**
+ * Enable unfiltered_html capability for Administrators.
+ *
+ * @param  array  $caps    The user's capabilities.
+ * @param  string $cap     Capability name.
+ * @param  int    $user_id The user ID.
+ * @return array  $caps    The user's capabilities, with 'unfiltered_html' potentially added.
+ */
+function caweb_add_unfiltered_html_capability( $caps, $cap, $user_id ) {
+	if ( 'unfiltered_html' === $cap && user_can( $user_id, 'administrator' ) ) {
+		$caps = array( 'unfiltered_html' );
+	}
+
+	return $caps;
+}
+
+/**
  * Change WPForms capability requirement.
  *
- * @param string $cap
+ * @link https://wpforms.com/developers/wpforms_manage_cap/
+ * @see https://codex.wordpress.org/Roles_and_Capabilities
+ * @param string $cap Capability required for user role to access WPForms.
+ *
  * @return string
  */
-function wpforms_custom_capability( $cap ) {
+function caweb_wpforms_custom_capability( $cap ) {
 
 	// unfiltered_html by default means Editors and up.
-	// See more about WordPress roles and capabilities
-	// https://codex.wordpress.org/Roles_and_Capabilities
 	return is_multisite() ? 'edit_posts' : 'unfiltered_html';
 }
-add_filter( 'wpforms_manage_cap', 'wpforms_custom_capability' );
 

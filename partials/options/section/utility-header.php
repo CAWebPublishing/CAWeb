@@ -17,11 +17,11 @@
         <!-- Enable Geo Locator & Menu Home Link Row -->
         <div class="form-row">
             <!-- Enable Geo Locator -->
-            <div class="form-group col-4">
+            <!--div class="form-group col-4">
                 <label for="ca_geo_locator_enabled" class="d-block mb-0"><strong>Enable Geo Locator</strong></label>
                 <small class="mb-2 text-muted d-block">Displays a geo locator feature at the top right of each page.</small>
                 <input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" data-toggle="toggle" <?php print $geo_locator_enabled ?>> 
-            </div>
+            </div-->
             <!-- Home Link -->
             <div class="form-group col-4">
                 <label for="ca_utility_home_icon" class="d-block mb-0"><strong>Home Link</strong></label>
@@ -48,7 +48,7 @@
             ?>
             <!-- Custom Link <?php print $i ?> -->
             <div class="form-group col">
-                <label for="<?php print $p ?>_enable" class="d-block mb-0"><strong>Custom Link <?php print $i ?>?</strong></label>
+                <label for="<?php print $p ?>_enable" class="d-block mb-0"><strong>Custom Link <?php print $i ?></strong></label>
                 <small class="mb-2 text-muted d-block">Enable a custom link for the header.</small>
                 <a data-toggle="collapse" href="#custom_link_<?php print $i ?>" aria-expanded="<?php print ! empty($enable) ? 'true' : 'false'  ?>" aria-controls="custom_link_<?php print $i ?>" class="shadow-none">
                     <input type="checkbox" id="<?php print $p ?>_enable" name="<?php print $p ?>_enable" data-toggle="toggle"<?php print $enable ?>>

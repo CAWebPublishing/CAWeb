@@ -4,6 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
+ * @todo Move script
  * @package CAWeb
  */
 

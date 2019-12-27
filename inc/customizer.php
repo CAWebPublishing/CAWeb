@@ -1,22 +1,42 @@
 <?php
+/**
+ * CAWeb Customizer
+ *
+ * @link https://codex.wordpress.org/Theme_Customization_API
+ * @package CAWeb
+ */
 
-// CAWeb Customizer Preview Init
 add_action( 'customize_preview_init', 'caweb_customize_preview_init' );
+add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
+add_action( 'customize_controls_print_styles', 'caweb_customize_controls_print_styles' );
+add_action( 'customize_register', 'caweb_customize_register' );
+
+/**
+ * CAWeb Customizer Preview Init
+ * Fires once the Customizer preview has initialized and JavaScript settings have been printed.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/customize_preview_init/
+ * @return void
+ */
 function caweb_customize_preview_init() {
-	wp_register_script( 'caweb-customizer-script', getMinFile( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
+	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
 
 	wp_enqueue_script( 'caweb-customizer-script' );
 
-	// Remove other Customizer Scripts
-	// Divi Customizer
+	/* Remove Divi Customizer Customizer Scripts */
 	wp_dequeue_script( 'divi-customizer' );
 }
 
-// CAWeb Customizer Enqueue Scripts
-add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
+/**
+ * CAWeb Customizer Enqueue Scripts
+ * Enqueues Customizer control scripts.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/customize_controls_enqueue_scripts/
+ * @return void
+ */
 function caweb_customize_controls_enqueue_scripts() {
 
-	wp_register_script( 'caweb-customize-controls-script', getMinFile( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
+	wp_register_script( 'caweb-customize-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
 
 	wp_localize_script(
 		'caweb-customize-controls-script',
@@ -33,41 +53,28 @@ function caweb_customize_controls_enqueue_scripts() {
 	wp_enqueue_script( 'caweb-customize-controls-script' );
 }
 
-// CAWeb Active Callbacks
-function caweb_customizer_v4_option( $customizer ) {
-	$manager = $customizer->manager;
-
-	return 4 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
-}
-function caweb_customizer_v5_option( $customizer ) {
-	$manager = $customizer->manager;
-
-	return 5 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
-}
-function caweb_customizer_google_trans_custom_option( $customizer ) {
-	$manager = $customizer->manager;
-
-	return 'custom' === $manager->get_control( 'ca_google_trans_enabled' )->value() ? true : false;
-}
-
-// CAWeb Sanitize Callbacks
-function caweb_sanitize_customizer_checkbox( $checked ) {
-	return ( isset( $checked ) && true === $checked ) ? '1' : '0';
-}
-function caweb_sanitize_option_ca_custom_css( $value, $option ) {
-	return addslashes( $value );
-}
-
-// CAWeb Customizer Styles
-add_action( 'customize_controls_print_styles', 'caweb_customize_controls_print_styles' );
+/**
+ * CAWeb Customizer Styles
+ * Fires when Customizer control styles are printed.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/customize_controls_print_styles/
+ * @return void
+ */
 function caweb_customize_controls_print_styles() {
 }
-// CAWeb Register Customizer
-add_action( 'customize_register', 'caweb_customize_register' );
+
+/**
+ * CAWeb Register Customizer
+ *
+ * @link https://developer.wordpress.org/reference/hooks/customize_register/
+ * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
+ *
+ * @return void
+ */
 function caweb_customize_register( $wp_customize ) {
 	$site_version = get_option( 'ca_site_version', 5 );
 
-	// Remove Divi Customization Panels and Sections
+	/* Remove Divi Customization Panels and Sections */
 	$divi_panels = array(
 		'et_divi_general_settings',
 		'et_divi_header_panel',
@@ -86,8 +93,10 @@ function caweb_customize_register( $wp_customize ) {
 	$wp_customize->remove_panel( 'themes' );
 	$wp_customize->remove_section( 'custom_css' );
 
-	// All our sections, settings, and controls will be added here
-	// CAWeb Options
+	/*
+	All our sections, settings, and controls will be added here
+	*/
+	/* CAWeb Options */
 	$wp_customize->add_panel(
 		'caweb_options',
 		array(
@@ -95,7 +104,7 @@ function caweb_customize_register( $wp_customize ) {
 			'priority' => 30,
 		)
 	);
-	// General Settings
+	/* General Settings */
 	$wp_customize->add_section(
 		'caweb_settings',
 		array(
@@ -162,7 +171,7 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Site Color Scheme
+	/* Site Color Scheme */
 	$wp_customize->add_setting(
 		'ca_site_color_scheme',
 		array(
@@ -256,7 +265,7 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Utility Header
+	/* Utility Header */
 	$wp_customize->add_section(
 		'caweb_utility_header',
 		array(
@@ -335,13 +344,13 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Custom Utility Links
+	/* Custom Utility Links */
 	for ( $link = 1; $link < 4; $link++ ) {
 		$url    = get_option( sprintf( 'ca_utility_link_%1$s', $link ) );
 		$label  = htmlentities( get_option( sprintf( 'ca_utility_link_%1$s_name', $link ) ) );
 		$target = get_option( sprintf( 'ca_utility_link_%1$s_new_window', $link ) );
 
-		// Label
+		/* Label */
 		$wp_customize->add_setting(
 			sprintf( 'ca_utility_link_%1$s_name', $link ),
 			array(
@@ -365,7 +374,7 @@ function caweb_customize_register( $wp_customize ) {
 			)
 		);
 
-		// URL
+		/* URL */
 		$wp_customize->add_setting(
 			sprintf( 'ca_utility_link_%1$s', $link ),
 			array(
@@ -389,7 +398,7 @@ function caweb_customize_register( $wp_customize ) {
 			)
 		);
 
-		// Target
+		/* Target */
 		$wp_customize->add_setting(
 			sprintf( 'ca_utility_link_%1$s_new_window', $link ),
 			array(
@@ -415,7 +424,7 @@ function caweb_customize_register( $wp_customize ) {
 		);
 	}
 
-	// Page Header
+	/* Page Header */
 	$wp_customize->add_section(
 		'caweb_page_header',
 		array(
@@ -497,7 +506,7 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Google
+	/* Google */
 	$wp_customize->add_section(
 		'caweb_google',
 		array(
@@ -666,7 +675,7 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Social Media Links
+	/* Social Media Links */
 	$wp_customize->add_section(
 		'caweb_social_media',
 		array(
@@ -773,7 +782,7 @@ function caweb_customize_register( $wp_customize ) {
 		}
 	}
 
-	// Custom CSS
+	/* Custom CSS */
 	$wp_customize->add_section(
 		'caweb_custom_css',
 		array(
@@ -807,30 +816,74 @@ function caweb_customize_register( $wp_customize ) {
 	add_filter( 'sanitize_option_ca_custom_css', 'caweb_sanitize_option_ca_custom_css', 10, 2 );
 }
 
-if ( class_exists( 'WP_Customize_Control' ) ) {
-	class CAWeb_Customize_Icon_Control extends WP_Customize_Control {
-		public $label = 'Icon';
-		public $type  = 'caweb-icon-menu';
+/**
+ * CAWeb V4 Option Check
+ * Default callback used when invoking WP_Customize_Control::active().
+ *
+ * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
+ * @param   WP_Customize_Control $customizer  WP_Customize_Control instance.
+ *
+ * @return bool
+ */
+function caweb_customizer_v4_option( $customizer ) {
+	$manager = $customizer->manager;
 
-		public function render_content() {
-			?>
-<label>
-	<span class="customize-control-title "><?php print esc_html( $this->label ); ?> <span class="dashicons dashicons-image-rotate resetGoogleIcon"></span></span>
-	<ul id="caweb-icon-menu" class="autoUpdate">
-			<?php
-					$icons = caweb_get_icon_list( -1, '', true );
-			$iconList      = '';
-			foreach ( $icons as $i ) {
-				printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() === $i ? ' selected' : '' );
-			}
-			?>
-
-		<input id="_customize-input-<?php print $this->id; ?>" type="hidden" name="ca_google_trans_icon" value="<?php print $this->value(); ?>" <?php $this->link(); ?>>
-	</ul>
-</label>
-			<?php
-		}
-	}
+	return 4 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
 }
 
-?>
+/**
+ * CAWeb V5 Option Check
+ * Default callback used when invoking WP_Customize_Control::active().
+ *
+ * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
+ * @param   WP_Customize_Control $customizer  WP_Customize_Control instance.
+ *
+ * @return bool
+ */
+function caweb_customizer_v5_option( $customizer ) {
+	$manager = $customizer->manager;
+
+	return 5 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
+}
+
+/**
+ * CAWeb Google Translate Option Check
+ * Default callback used when invoking WP_Customize_Control::active().
+ *
+ * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
+ * @param   WP_Customize_Control $customizer  WP_Customize_Control instance.
+ *
+ * @return bool
+ */
+function caweb_customizer_google_trans_custom_option( $customizer ) {
+	$manager = $customizer->manager;
+
+	return 'custom' === $manager->get_control( 'ca_google_trans_enabled' )->value() ? true : false;
+}
+
+/**
+ * CAWeb Sanitize Callback for Checkbox Options
+ * Default sanitize callback used when invoking WP_Customize_Control::active().
+ *
+ * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
+ * @param   bool $checked  Checkbox checked state.
+ *
+ * @return bool
+ */
+function caweb_sanitize_customizer_checkbox( $checked ) {
+	return ( isset( $checked ) && true === $checked ) ? '1' : '0';
+}
+
+/**
+ * CAWeb Sanitize Callback for Custom CSS Option
+ * Default sanitize callback used when invoking WP_Customize_Control::active().
+ *
+ * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
+ * @param   string $value CAWeb Custom CSS.
+ * @param   string $option CAWeb Option Name.
+ *
+ * @return bool
+ */
+function caweb_sanitize_option_ca_custom_css( $value, $option ) {
+	return addslashes( $value );
+}

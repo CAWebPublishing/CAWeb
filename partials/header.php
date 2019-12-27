@@ -43,19 +43,20 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		get_template_part( 'partials/content/utility-header' );
 
 		/* Location Bar */
-		require_once CAWEB_ABSPATH . '/ssi/location-bar.php';
+		get_template_part( 'partials/content/bar', 'location' );
 
 		/* Settings Bar */
-		require_once CAWEB_ABSPATH . '/ssi/settings-bar.php';
+		get_template_part( 'partials/content/bar', 'settings' );
 	}
 
 	/* Include Branding */
 	get_template_part( 'partials/content/branding' );
 
+	/* Include Mobile Controls */
+	get_template_part( 'partials/content/mobile-controls' );
+
 	?>
 
-	<!-- Include Mobile Controls -->
-	<?php require_once CAWEB_ABSPATH . '/ssi/mobile-controls.php'; ?>
 
 	<div class="navigation-search">
 
@@ -66,9 +67,7 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		wp_nav_menu(
 			array(
 				'theme_location'               => 'header-menu',
-				'style'                        => ( get_option( 'ca_menu_selector_enabled' ) ?
-							get_post_meta( get_the_ID(), 'ca_default_navigation_menu', true ) :
-							get_option( 'ca_default_navigation_menu' ) ),
+				'style'                        => get_option( 'ca_default_navigation_menu' ),
 				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
 				'version'                      => caweb_get_page_version( get_the_ID() ),
 			)
@@ -81,9 +80,10 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		<div id="head-search" class="search-container<?php print esc_attr( $caweb_search ); ?> hidden-print" role="region" aria-labelledby="search-expanded">
 			<?php
 			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
-				require CAWEB_ABSPATH . '/ssi/searchForm.php';
+				get_template_part( 'partials/content/search-form' );
 			}
-				/* This is the Custom Google Translate Location for the old State Template Version 4 */
+
+			/* This is the Custom Google Translate Location for the old State Template Version 4 */
 			if ( 4 === $caweb_ver && 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) :
 				?>
 				<a target="_blank" href="<?php print esc_url( $caweb_google_trans_page ); ?>" class="caweb-custom-translate">
