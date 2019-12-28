@@ -38,8 +38,7 @@ function addExternal(ext_list, ext){
 
   // File Upload
   fileUpload.type = "file";
-  //fileUpload.name = rowCount + ext + "_upload";
-  //fileUpload.id = rowCount + ext + "_upload";
+  fileUpload.name = "caweb_external_" + ext + "[]";
   fileUpload.accept = "." + ext;
   fileUpload.classList = "form-control-file border-bottom border-warning pl-2 d-inline-block w-75";
   fileUpload.addEventListener('change', function () {

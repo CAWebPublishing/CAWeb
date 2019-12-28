@@ -252,14 +252,35 @@ function caweb_save_options( $values = array(), $files = array() ) {
 			$values[ $opt ] = array();
 		}
 	}
-
-	$jsfiles  = array();
+	/* External CSS */
 	$cssfiles = array();
-	foreach ( $files as $key => $data ) {
-		if ( preg_match( '/js_upload/', $key ) ) {
-			$jsfiles[ $data['name'] ] = $data;
-		} elseif ( preg_match( '/css_upload/', $key ) ) {
-			$cssfiles[ $data['name'] ] = $data;
+	if( isset($files['caweb_external_css']) ){
+		$css = $files['caweb_external_css'];
+		$css_count = count($files['caweb_external_css']['name']);
+		for( $c = 0; $c < $css_count; $c++){
+			$data['name'] = $css['name'][$c];
+			$data['type'] = $css['type'][$c];
+			$data['tmp_name'] = $css['tmp_name'][$c];
+			$data['error'] = $css['error'][$c];
+			$data['size'] = $css['size'][$c];
+
+			$cssfiles[ $css['name'][$c] ] = $data;
+		}
+	}
+
+	/* External JS */
+	$jsfiles = array();
+	if( isset($files['caweb_external_js']) ){
+		$js = $files['caweb_external_js'];
+		$js_count = count($files['caweb_external_js']['name']);
+		for( $j = 0; $j < $js_count; $j++){
+			$data['name'] = $js['name'][$j];
+			$data['type'] = $js['type'][$j];
+			$data['tmp_name'] = $js['tmp_name'][$j];
+			$data['error'] = $js['error'][$j];
+			$data['size'] = $js['size'][$j];
+
+			$jsfiles[ $js['name'][$j] ] = $data;
 		}
 	}
 

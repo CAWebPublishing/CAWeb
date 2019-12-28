@@ -258,7 +258,7 @@ function caweb_wp_enqueue_scripts() {
 		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d-styles', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
 		}
 
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
