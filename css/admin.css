@@ -106,6 +106,37 @@ fieldset.field-move, .menu-settings-group.auto-add-pages {
   display: none !important;
 }
 
+body.login {
+  font-size: initial;
+}
+
+body.login #login h1 a {
+  background-image: url("../images/system/caweb-logo.png");
+  background-size: contain;
+  height: 100px;
+  width: 370px;
+}
+
+body.login #login #backtoblog {
+  display: none;
+}
+
+body.login #loginform label {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  body.login {
+    background: aliceblue;
+  }
+  body.login #login {
+    width: 1280px;
+  }
+  body.login #login #login_error {
+    margin-left: 51%;
+  }
+}
+
 /*
  Bootstrap Overrides, these are added only because the 
  WordPress load-styles.php loads before our CSS.
