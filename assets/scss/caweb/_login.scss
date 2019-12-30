@@ -16,6 +16,15 @@ body.login #loginform label{
 	display: block;
 }
 
+body.login #login{
+	width: 95%;
+}
+
+body.login .message{
+	float: none !important;
+	width: 100% !important;
+}
+
 @media (min-width: 900px){
 	body.login{
 		background: aliceblue;
