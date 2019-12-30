@@ -8,12 +8,14 @@
     // once the images have loaded.
     var $headers = $('.available-headers');
 
-    $headers.imagesLoaded(function() {
-      $headers.masonry({
-        itemSelector: '.default-header',
-        isRTL: !!('undefined' != typeof isRtl && isRtl)
+    if( $headers.length ){
+      $headers.imagesLoaded(function() {
+        $headers.masonry({
+          itemSelector: '.default-header',
+          isRTL: !!('undefined' != typeof isRtl && isRtl)
+        });
       });
-    });
+    }
 
     // Build the choose from library frame.
     $(document).on('click', 'div .library-link', function(event) {

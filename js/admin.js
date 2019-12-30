@@ -8,12 +8,14 @@
     // once the images have loaded.
     var $headers = $('.available-headers');
 
-    $headers.imagesLoaded(function() {
-      $headers.masonry({
-        itemSelector: '.default-header',
-        isRTL: !!('undefined' != typeof isRtl && isRtl)
+    if( $headers.length ){
+      $headers.imagesLoaded(function() {
+        $headers.masonry({
+          itemSelector: '.default-header',
+          isRTL: !!('undefined' != typeof isRtl && isRtl)
+        });
       });
-    });
+    }
 
     // Build the choose from library frame.
     $(document).on('click', 'div .library-link', function(event) {
@@ -807,5 +809,14 @@ jQuery(document).ready(function() {
     $.post(ajaxurl, data, function(response) {
       $('.doc-sitemap-update').html(response);
     });
+  });
+
+  /* Login Page Disclaimer */ 
+  $('body.login button.accept-disclaimer').click(function(e){
+    e.preventDefault();
+    $('#loginform').css('display', 'block');
+    $('#nav').css('display', 'block');
+    $('.message').css('display', 'none');
+    
   });
 });

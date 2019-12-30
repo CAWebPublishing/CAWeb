@@ -117,6 +117,8 @@ body.login #login h1 a {
   width: 370px;
 }
 
+body.login #loginform,
+body.login #nav,
 body.login #login #backtoblog {
   display: none;
 }
@@ -129,12 +131,7 @@ body.login #login {
   width: 95%;
 }
 
-body.login .message {
-  float: none !important;
-  width: 100% !important;
-}
-
-@media (min-width: 1200px) {
+@media (min-width: 900px) {
   body.login {
     background: aliceblue;
   }
