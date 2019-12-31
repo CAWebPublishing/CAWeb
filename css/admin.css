@@ -106,15 +106,22 @@ fieldset.field-move, .menu-settings-group.auto-add-pages {
   display: none !important;
 }
 
-body.login {
-  font-size: initial;
-}
-
 body.login #login h1 a {
   background-image: url("../images/system/caweb-logo.png");
   background-size: contain;
   height: 100px;
   width: 370px;
+}
+
+body.login #login {
+  width: auto;
+}
+
+body.login #loginform,
+body.login #nav {
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.login #loginform,
@@ -127,13 +134,18 @@ body.login #loginform label {
   display: block;
 }
 
-body.login {
-  background: aliceblue;
-}
-
 @media (min-width: 900px) {
   body.login #login h1 a {
     width: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.login #login .message {
+    width: 95% !important;
+  }
+  body.login #login .message {
+    font-size: 8pt;
   }
 }
 
