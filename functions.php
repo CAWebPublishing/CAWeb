@@ -321,17 +321,6 @@ function caweb_late_wp_enqueue_scripts() {
 		return;
 	}
 
-	/* If CAWeb is a child theme of Divi, include Accessibility Javascript */
-	if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
-		wp_register_script( 'caweb-accessibility-scripts', caweb_get_min_file( '/js/divi-accessibility.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, true );
-
-		$localize_args = array( 'ajaxurl' => admin_url( 'admin-post.php' ) );
-
-		wp_localize_script( 'caweb-accessibility-scripts', 'accessibleargs', $localize_args );
-
-		wp_enqueue_script( 'caweb-accessibility-scripts' );
-	}
-
 	/* Load Core JS at the very end along with any external/custom javascript/jquery */
 	wp_register_script( 'caweb-core-script', CAWEB_URI . '/assets/js/cagov/cagov.core.js', array( 'jquery' ), CAWEB_VERSION, true );
 	wp_enqueue_script( 'caweb-core-script' );

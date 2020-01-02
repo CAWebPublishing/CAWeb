@@ -40,6 +40,8 @@ module.exports = {
 		'assets/js/caweb/google.js',
 		//'assets/js/caweb/geolocator.js', Geolocator not functioning
 		'assets/js/caweb/AutoTracker.js',
+		'assets/js/a11y/plugins/*.js',
+		'assets/js/a11y/divi/*.js',
 		'assets/js/a11y/*.js',
 		'assets/js/caweb/custom.js',
 	],  
