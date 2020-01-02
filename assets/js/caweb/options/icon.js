@@ -1,5 +1,5 @@
 /* CAWeb Icon Menu Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
 	$(document).on('click', '.caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
 

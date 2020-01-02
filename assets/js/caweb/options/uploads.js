@@ -1,5 +1,5 @@
 /* CAWeb Uploads Option */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
   /*
     Custom CSS/JS

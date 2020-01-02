@@ -137,7 +137,7 @@
 }(jQuery));
 
 /* CAWeb Alert Option Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
 	/*
 	$( "#cawebAlerts" ).sortable();
@@ -500,7 +500,7 @@ jQuery(document).ready(function() {
   
 
 /* CAWeb Icon Menu Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
 	$(document).on('click', '.caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
 
@@ -533,7 +533,7 @@ jQuery(document).ready(function() {
   
 
 /* CAWeb Uploads Option */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
   /*
     Custom CSS/JS
@@ -737,7 +737,7 @@ jQuery(document).ready(function() {
 });
 
 /* CAWeb Options Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
   "use strict";
   var changeMade = false;
 

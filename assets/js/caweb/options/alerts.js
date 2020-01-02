@@ -1,5 +1,5 @@
 /* CAWeb Alert Option Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
 	/*
 	$( "#cawebAlerts" ).sortable();

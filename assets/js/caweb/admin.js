@@ -1,5 +1,5 @@
 /* CAWeb Options Javascript */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
   "use strict";
   var changeMade = false;
 
