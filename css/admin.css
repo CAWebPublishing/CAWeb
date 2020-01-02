@@ -117,6 +117,10 @@ body.login #login {
   width: auto;
 }
 
+body.login #login .btn-danger {
+  color: white !important;
+}
+
 body.login #loginform,
 body.login #nav {
   width: 320px;
@@ -134,13 +138,14 @@ body.login #loginform label {
   display: block;
 }
 
-@media (min-width: 900px) {
-  body.login #login h1 a {
-    width: 300px;
-  }
+body.login #login .message {
+  font-size: 9pt;
 }
 
 @media (max-width: 767px) {
+  body.login #login h1 a {
+    width: 300px;
+  }
   body.login #login .message {
     width: 95% !important;
   }

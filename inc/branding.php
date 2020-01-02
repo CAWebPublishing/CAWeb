@@ -42,10 +42,6 @@ function caweb_login_enqueue_scripts(){
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_media();
-	wp_enqueue_editor();
-
-	wp_enqueue_script( 'custom-header' );
 
 	wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
@@ -63,7 +59,7 @@ function caweb_login_enqueue_scripts(){
 function caweb_disclaimer_message() {
 	$title = '<p class="text-center font-weight-bold mb-3">California Technology Agency<br />Computer Resource Usage Notice and Disclaimer</p>';
 	$disclaimer = '<p>UNAUTHORIZED ACCESS TO ANY STATE OF CALIFORNIA COMPUTING SYSTEM CONTAINING US GOVERNMENT OR STATE OF CALIFORNIA INFORMATION IS A CRIMINAL VIOLATION OF PENAL CODE SECTION 502 AND/OR APPLICABLE FEDERAL LAW AND IS SUBJECT TO CIVIL AND CRIMINAL SANCTIONS. Whoever knowingly or intentionally accesses a computing system without authorization or exceeding authorized access, and by means of such conduct obtains, alters, damages, destroys or discloses information, or prevents authorized use of any data or computing resource owned by or operated for the State of California shall be subject to disciplinary action, prosecution or both. Use in a manner other than as intended by the State of California may result in the forfeiture of access privileges.  All computing system activities may be recorded and monitored.  Individuals using these systems expressly consent to such monitoring and shall have no expectation of privacy in their use. Evidence of possible misconduct or abuse may be provided to appropriate officials and/or law enforcement. No warranty is made for the computing resources that are subject to this policy.  Additionally, the State of California takes no responsibility of damages for the intentional misuse of these resources by any party.</p>';
-	$controls = '<div class="d-inline-block w-50 text-right mr-3"><button class="btn btn-success accept-disclaimer">Accept</button></div><div class="d-inline-block"><a href="https://caweb.cdt.ca.gov" role="button" class="btn btn-danger" target="_blank">Decline</a></div>';
+	$controls = sprintf('<div class="d-inline-block w-50 text-right mr-3 mt-3"><button class="btn btn-success accept-disclaimer">Accept</button></div><div class="d-inline-block"><a href="%1$s" role="button" class="btn btn-danger" target="_blank">Decline</a></div>', home_url() );
 
 	return sprintf('<div class="message w-50 mx-auto">%1$s%2$s%3$s</div>', $title, $disclaimer, $controls);
 }
