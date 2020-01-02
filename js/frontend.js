@@ -20271,7 +20271,7 @@ jQuery(document).ready(function() {
             'imgs' : imgs
         };
         
-        jQuery.post(accessibleargs.ajaxurl, data, function(response) {
+        jQuery.post(args.ajaxurl, data, function(response) {
             var alts = jQuery.parseJSON(response);
 
             imgs.forEach( function(element, index){
