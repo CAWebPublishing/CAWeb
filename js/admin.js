@@ -613,7 +613,7 @@ function addExternal(ext_list, ext){
   
 
 /* nav-menus.php Javascript  */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
   "use strict";
   /* Alt Text Check */
   $(document).on('click', 'input[name="save_menu"]', function(e){
