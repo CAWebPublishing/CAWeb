@@ -293,6 +293,7 @@ function caweb_wp_enqueue_scripts() {
 			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
+			'ajaxurl' => admin_url('admin-post.php')
 		);
 
 		wp_localize_script( 'cagov-frontend-script', 'args', $localize_args );

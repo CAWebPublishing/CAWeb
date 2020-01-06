@@ -811,12 +811,4 @@ jQuery(document).ready(function($) {
     });
   });
 
-  /* Login Page Disclaimer */ 
-  $('body.login button.accept-disclaimer').click(function(e){
-    e.preventDefault();
-    $('#loginform').css('display', 'block');
-    $('#nav').css('display', 'block');
-    $('.message').css('display', 'none');
-    
-  });
 });
