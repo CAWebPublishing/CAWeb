@@ -414,7 +414,7 @@ function caweb_get_user_color( ) {
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
  * 
- * @return void
+ * @return array
  */
 function caweb_allowed_html(){
 	$attr = array(
@@ -450,4 +450,6 @@ function caweb_allowed_html(){
 		'h5' => $attr, 
 		'h6' => $attr, 
 	);
+	
+	return $tags;
 }
