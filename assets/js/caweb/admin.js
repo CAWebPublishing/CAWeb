@@ -70,4 +70,5 @@ jQuery(document).ready(function($) {
       $('.doc-sitemap-update').html(response);
     });
   });
+
 });

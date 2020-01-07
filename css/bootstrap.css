@@ -4117,6 +4117,14 @@ button.bg-dark:focus {
   width: auto !important;
 }
 
+.w-33 {
+  width: 33% !important;
+}
+
+.w-66 {
+  width: 66% !important;
+}
+
 .h-25 {
   height: 25% !important;
 }
@@ -4135,6 +4143,14 @@ button.bg-dark:focus {
 
 .h-auto {
   height: auto !important;
+}
+
+.h-33 {
+  height: 33% !important;
+}
+
+.h-66 {
+  height: 66% !important;
 }
 
 .mw-100 {
