@@ -21,12 +21,12 @@ jQuery(document).ready(function($) {
 
   // Add New CSS
 $('#add-css, #add-js').click(function(e){
-  var ext =  $(this).attr('id').replace('add-', '');
-  var ulID = '#uploaded-' + ext;
+	e.preventDefault();
+	var ext =  $(this).attr('id').replace('add-', '');
+	var ulID = '#uploaded-' + ext;
 
-  addExternal($(ulID), ext);	
-  changeMade = true;
-
+	addExternal($(ulID), ext);
+	changeMade = true;
 });
 
 function addExternal(ext_list, ext){

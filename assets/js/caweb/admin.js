@@ -15,6 +15,15 @@ jQuery(document).ready(function($) {
 
   $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
+  $('.menu-list li a').on('click', function(e){
+	$(this).parent().parent().find('li').each(function(i, ele){
+		$(ele).removeClass('selected');
+	})
+
+	$(this).parent().addClass('selected');
+	$('input[name="tab_selected"]').val($(this).attr('href').replace('#', ''));
+  });
+
   // Reset Fav Icon
   $('#resetFavIcon').click(function() {
     var ico = args.defaultFavIcon;
@@ -60,6 +69,7 @@ jQuery(document).ready(function($) {
     }
   });
 
+  // Generate Document Sitemap
   $('button.doc-sitemap').click(function(e){
     e.preventDefault();
     var data = {

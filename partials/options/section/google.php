@@ -1,10 +1,10 @@
 <!-- Google Section -->
 <div>
     <a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#google-settings" role="button" aria-expanded="false" aria-controls="google-settings">
-        <h2 class="border-bottom mb-0">Google <span class="text-secondary ca-gov-icon-"></span></h2>
+        <h2 class="mb-0">Google <span class="text-secondary ca-gov-icon-"></span></h2>
     </a>
 </div>
-<div class="collapse border p-3" id="google-settings" data-parent="#general-settings">
+<div class="collapse" id="google-settings" data-parent="#general-settings">
         <!-- Search Engine ID Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">
@@ -78,7 +78,7 @@
                 <!-- Open Translate in New Page -->
                 <label for="ca_google_trans_page_new_window" class="d-block mb-0"><strong>Open in New Tab</strong></label>
                 <small class="mb-2 text-muted d-block">Open link in new tab.</small>
-                <input type="checkbox" id="ca_google_trans_page_new_window" name="ca_google_trans_page_new_window" data-on="Yes" data-off="No" data-toggle="toggle"<?php print $google_translate_new_window ?> />
+                <input type="checkbox" id="ca_google_trans_page_new_window" name="ca_google_trans_page_new_window" data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success"<?php print $google_translate_new_window ?> />
             </div>
 
             <!-- Google Translate Icon -->

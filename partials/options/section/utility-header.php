@@ -1,15 +1,15 @@
 <!-- Utility Header Section -->
 <div>
     <a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
-        <h2 class="border-bottom mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
+        <h2 class="mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
     </a>
 </div>
-<div class="collapse border p-3" id="utility-header-settings" data-parent="#general-settings">
+<div class="collapse" id="utility-header-settings" data-parent="#general-settings">
         <!-- Contact Us Page Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">
                 <label for="ca_contact_us_link" class="d-block mb-0"><strong>Contact Us Page</strong></label>
-                <small class="mb-2 text-muted d-block">Select a page as the &quot;Contact Us&quot; page to be used in the utility header.</small>
+                <small class="mb-2 text-muted d-block">Enter the URL for the &quot;Contact Us&quot; page to be used in the utility header.</small>
                 <input type="text" name="ca_contact_us_link" id="ca_contact_us_link" class="form-control" value="<?php print $contact_us_link ?>">
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="form-group col-4">
                 <label for="ca_utility_home_icon" class="d-block mb-0"><strong>Home Link</strong></label>
                 <small class="mb-2 text-muted d-block">Adds a home link to the utility header.</small>
-                <input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" data-toggle="toggle"  <?php print $utility_header_home_icon ?>>
+                <input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" data-toggle="toggle" data-onstyle="success" <?php print $utility_header_home_icon ?>>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                 <label for="<?php print $p ?>_enable" class="d-block mb-0"><strong>Custom Link <?php print $i ?></strong></label>
                 <small class="mb-2 text-muted d-block">Enable a custom link for the header.</small>
                 <a data-toggle="collapse" href="#custom_link_<?php print $i ?>" aria-expanded="<?php print ! empty($enable) ? 'true' : 'false'  ?>" aria-controls="custom_link_<?php print $i ?>" class="shadow-none">
-                    <input type="checkbox" id="<?php print $p ?>_enable" name="<?php print $p ?>_enable" data-toggle="toggle"<?php print $enable ?>>
+                    <input type="checkbox" id="<?php print $p ?>_enable" name="<?php print $p ?>_enable" data-toggle="toggle" data-onstyle="success"<?php print $enable ?>>
                 </a> 
                 <div id="custom_link_<?php print $i ?>" class="collapse<?php print ! empty($enable) ? ' show' : ''  ?>">
                     <!-- Link Label -->
@@ -67,7 +67,7 @@
                      <!-- Link Target -->
                      <label for="<?php print $p ?>_new_window" class="d-block mb-0"><strong>Open in New Tab</strong></label>
                      <small class="mb-2 text-muted d-block">Open link in new tab.</small>
-                     <input type="checkbox" name="<?php print $p ?>_new_window" id="<?php print $p ?>_new_window" data-toggle="toggle"<?php print $target ?> />
+                     <input type="checkbox" name="<?php print $p ?>_new_window" id="<?php print $p ?>_new_window" data-toggle="toggle" data-onstyle="success"<?php print $target ?> />
                 
                 </div>
             </div>

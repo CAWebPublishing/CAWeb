@@ -9,6 +9,14 @@ body#tinymce.mce-content-body{
 	padding: 10px;
 }
 
+/* Menu List */
+.menu-list li.list-group-item:not(.selected){
+	background-color: #fff !important;
+}
+.menu-list li.list-group-item:not(.selected):hover a {
+	color: #fff !important;
+}
+
 /* Toggle Arrows when collapsed */
 a[data-toggle="collapse"] h2 > span:after,
 a[data-toggle="collapse"] label > span:after{
