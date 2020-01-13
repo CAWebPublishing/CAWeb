@@ -61,8 +61,9 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 					$caweb_url    = get_option( "ca_utility_link_$caweb_i" );
 					$caweb_text   = get_option( "ca_utility_link_${caweb_i}_name" );
 					$caweb_target = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? ' target="_blank"' : '';
+					$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable" );
 
-					if ( ! empty( $caweb_url ) && ! empty( $caweb_text ) ) {
+					if ( $caweb_enabled ) {
 						printf(
 							'<a class="utility-custom-%1$s" href="%2$s"%3$s>%4$s</a>',
 							esc_attr( $caweb_i ),

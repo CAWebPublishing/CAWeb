@@ -9,7 +9,7 @@
         <div class="form-row">
             <div class="form-group col-sm-5">
                 <label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
-                <small class="mb-2 text-muted d-block">Select one of the California state template versions.</small>
+                <small class="mb-2 text-muted d-block">Select a California State Template version.</small>
                 <select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
                     <option value="5" <?php print 5 == $ver ? 'selected="selected"' : '' ?>>Version 5.0</option>
                     <?php if (4 == $ver) : ?>
@@ -23,7 +23,7 @@
         <div class="form-row">
             <div class="form-group col-sm-5">
                 <label for="ca_fav_ico_filename" class="d-block mb-0"><strong>Fav Icon</strong></label>
-                <small class="mb-2 text-muted d-block">Select an icon to display as the page icon.</small>
+                <small class="mb-2 text-muted d-block">Select a site fav icon (displays in browser tab).</small>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -67,7 +67,7 @@
         <div class="form-row">
             <div class="form-group col-sm-5">
                 <label for="ca_default_navigation_menu" class="d-block mb-0"><strong>Header Menu Type</strong></label>
-                <small class="mb-2 text-muted d-block">Set a navigation menu style for all pages.</small>
+                <small class="mb-2 text-muted d-block">Set a menu style for all pages.</small>
                 <select id="ca_default_navigation_menu" name="ca_default_navigation_menu" class="w-50 form-control">
                     <option value="megadropdown"
                     <?php print  'megadropdown' == $navigation_menu ? 'selected="selected"' : '' ?>>Mega Drop</option>
@@ -83,7 +83,7 @@
         <div class="form-row">
             <div class="form-group col-sm-5">
                 <label for="ca_site_color_scheme" class="d-block mb-0"><strong>Color Scheme</strong></label>
-                <small class="mb-2 text-muted d-block">Apply a site wide color scheme.</small>
+                <small class="mb-2 text-muted d-block">Apply a site-wide color scheme.</small>
                 <select id="ca_site_color_scheme" name="ca_site_color_scheme" class="w-50 form-control">
                 <?php
 
@@ -103,19 +103,19 @@
             <!-- Title Display Default Off -->
             <div class="form-group col">
                 <label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default Off</strong></label>
-                <small class="mb-2 text-muted d-block">Checking this box defaults all new pages/posts to suppress the title.</small>
+                <small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
                 <input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print $display_post_title ?>>
             </div>
             <!-- Sticky Navigation -->
             <div class="form-group col">
                 <label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
-                <small class="mb-2 text-muted d-block">This will allow the navigation menu to either stay fixed at the top of the page or scroll with the page content.</small>
+                <small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
                 <input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print $sticky_nav_enabled ?>>
             </div>
             <!-- Menu Home Link -->
             <div class="form-group col">
                 <label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
-                <small class="mb-2 text-muted d-block">Adds a Home link to the header menu.</small>
+                <small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
                 <input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print $home_nav_link_enabled ?>>
             </div>
         </div>
@@ -125,20 +125,20 @@
             <!-- Display Date for Non-Divi Posts -->
             <div class="form-group col">
                 <label for="ca_default_post_date_display" class="d-block mb-0"><strong>Display Date for Non-Divi Posts</strong></label>
-                <small class="mb-2 text-muted d-block">If checked all non-Divi Posts will display the Posts Published Date.</small>
+                <small class="mb-2 text-muted d-block">Display the post published date for non-Divi posts.</small>
                 <input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" data-toggle="toggle" data-onstyle="success" <?php print $display_post_date ?>>
             </div>
             <!-- Legacy Browser Support -->
             <div class="form-group col">
                 <label for="ca_x_ua_compatibility" class="d-block mb-0"><strong>Legacy Browser Support</strong></label>
-                <small class="mb-2 text-muted d-block">Checking this box creates accessibility errors for your site when using the IE Browser.</small>
+                <small class="mb-2 text-muted d-block">Creates tradeoff: IE works better but forces accessibility errors.</small>
                 <input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" data-toggle="toggle" data-onstyle="success" <?php print $ua_compatibiliy ?> >
                 <small class="text-danger d-block"><?php print ! empty($ua_compatibiliy) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : '' ?></small>
             </div>
             <!-- Search on FrontPage -->
             <div class="form-group col">
                 <label for="ca_frontpage_search_enabled" class="d-block mb-0"><strong>Show Search on Front Page</strong></label>
-                <small class="mb-2 text-muted d-block">Display a visible search box on the front page.</small>
+                <small class="mb-2 text-muted d-block">Enable Feature Search box on home page.</small>
                 <input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" data-toggle="toggle" data-onstyle="success" <?php print $frontpage_search_enabled ?> >
             </div>
         </div>
