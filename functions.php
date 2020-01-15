@@ -258,7 +258,7 @@ function caweb_wp_enqueue_scripts() {
 		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d-styles', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
 		}
 
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
@@ -293,6 +293,7 @@ function caweb_wp_enqueue_scripts() {
 			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
+			'ajaxurl' => admin_url('admin-post.php')
 		);
 
 		wp_localize_script( 'cagov-frontend-script', 'args', $localize_args );
@@ -320,21 +321,6 @@ function caweb_late_wp_enqueue_scripts() {
 	if ( $vb_enabled ) {
 		return;
 	}
-
-	/* If CAWeb is a child theme of Divi, include Accessibility Javascript */
-	if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
-		wp_register_script( 'caweb-accessibility-scripts', caweb_get_min_file( '/js/divi-accessibility.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, true );
-
-		$localize_args = array( 'ajaxurl' => admin_url( 'admin-post.php' ) );
-
-		wp_localize_script( 'caweb-accessibility-scripts', 'accessibleargs', $localize_args );
-
-		wp_enqueue_script( 'caweb-accessibility-scripts' );
-	}
-
-	/* Load Core JS at the very end along with any external/custom javascript/jquery */
-	wp_register_script( 'caweb-core-script', CAWEB_URI . '/assets/js/cagov/cagov.core.js', array( 'jquery' ), CAWEB_VERSION, true );
-	wp_enqueue_script( 'caweb-core-script' );
 
 	/* External JS */
 	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );

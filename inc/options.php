@@ -252,14 +252,35 @@ function caweb_save_options( $values = array(), $files = array() ) {
 			$values[ $opt ] = array();
 		}
 	}
-
-	$jsfiles  = array();
+	/* External CSS */
 	$cssfiles = array();
-	foreach ( $files as $key => $data ) {
-		if ( preg_match( '/js_upload/', $key ) ) {
-			$jsfiles[ $data['name'] ] = $data;
-		} elseif ( preg_match( '/css_upload/', $key ) ) {
-			$cssfiles[ $data['name'] ] = $data;
+	if( isset($files['caweb_external_css']) ){
+		$css = $files['caweb_external_css'];
+		$css_count = count($files['caweb_external_css']['name']);
+		for( $c = 0; $c < $css_count; $c++){
+			$data['name'] = $css['name'][$c];
+			$data['type'] = $css['type'][$c];
+			$data['tmp_name'] = $css['tmp_name'][$c];
+			$data['error'] = $css['error'][$c];
+			$data['size'] = $css['size'][$c];
+
+			$cssfiles[ $css['name'][$c] ] = $data;
+		}
+	}
+
+	/* External JS */
+	$jsfiles = array();
+	if( isset($files['caweb_external_js']) ){
+		$js = $files['caweb_external_js'];
+		$js_count = count($files['caweb_external_js']['name']);
+		for( $j = 0; $j < $js_count; $j++){
+			$data['name'] = $js['name'][$j];
+			$data['type'] = $js['type'][$j];
+			$data['tmp_name'] = $js['tmp_name'][$j];
+			$data['error'] = $js['error'][$j];
+			$data['size'] = $js['size'][$j];
+
+			$jsfiles[ $js['name'][$j] ] = $data;
 		}
 	}
 
@@ -273,7 +294,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
 		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
 		$data = array(
-			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : 'active',
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : '',
 			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
 			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
 			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
