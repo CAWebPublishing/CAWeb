@@ -61,7 +61,12 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 					$caweb_url    = get_option( "ca_utility_link_$caweb_i" );
 					$caweb_text   = get_option( "ca_utility_link_${caweb_i}_name" );
 					$caweb_target = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? ' target="_blank"' : '';
-					$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable" );
+					$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", 'init' );
+					if( ('init' === $caweb_enabled && ! empty($url)  &&  ! empty($name) ) || $caweb_enabled ){
+						$caweb_enabled = ' checked';
+					} else{
+						$caweb_enabled = '';
+					}
 
 					if ( $caweb_enabled ) {
 						printf(

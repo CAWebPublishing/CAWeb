@@ -50,8 +50,19 @@ a[data-toggle="collapse"].collapsed label > span:after{
 	min-height: 300px;
 }
 
+#uploaded-css li,
+#uploaded-js li{
+	cursor: grab;
+}
+
 /* Alert Banners */
 .dashicons.alert-status,
 .remove-alert{
 	cursor: pointer;
+}
+
+#caweb-alert-banners li,
+#uploaded-css li,
+#uploaded-js li{
+	cursor: grab;
 }

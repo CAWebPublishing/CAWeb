@@ -400,7 +400,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					} else {
 						/* Get nav media if present */
 						$nav_media_image    = $item_meta['_caweb_menu_media_image'][0];
-						$nav_media_alt_text = $item_meta['_caweb_nav_media_image_alt_text'][0];
+						$nav_media_alt_text = isset($item_meta['_caweb_nav_media_image_alt_text'][0]) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
 
 						$nav_media = ( 'megadropdown' === $args->style ?
 														sprintf(

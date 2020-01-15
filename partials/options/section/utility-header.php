@@ -39,8 +39,8 @@
                 $url = get_option("$p", '');
                 $target = get_option("{$p}_new_window", true) ? ' checked' : '';
                 $enable = get_option("{$p}_enable", 'init');
-                if( ('init' == $enable && ! empty($url)  &&  ! empty($name) ) ||
-                    true === $enable ){
+                
+                if( ('init' === $enable && ! empty($url)  &&  ! empty($name) ) || $enable ){
                     $enable = ' checked';
                 } else{
                     $enable = '';
@@ -65,10 +65,12 @@
                      <input type="text" name="<?php print $p ?>" id="<?php print $p ?>" class="form-control w-75" value="<?php print $url ?>"/>
 
                      <!-- Link Target -->
-                     <label for="<?php print $p ?>_new_window" class="d-block mb-0"><strong>Open in New Tab</strong></label>
+                     <label for="<?php print $p ?>_new_window" class="d-block mb-0">
+                        <input type="checkbox" name="<?php print $p ?>_new_window" id="<?php print $p ?>_new_window"<?php print $target ?>/>
+                        <strong>Open in New Tab</strong>
+                    </label>
                      <small class="mb-2 text-muted d-block">Open the link in new tab.</small>
-                     <input type="checkbox" name="<?php print $p ?>_new_window" id="<?php print $p ?>_new_window" data-toggle="toggle" data-onstyle="success"<?php print $target ?> />
-                
+                     
                 </div>
             </div>
             <?php endfor; ?>

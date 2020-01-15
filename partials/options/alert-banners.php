@@ -8,7 +8,7 @@
         </div>
     </div>
         
-    <ol id="alertBanners" class="ml-3">
+    <ol id="caweb-alert-banners" class="ml-3">
         <?php
             if (! empty($alerts)) {
                 foreach ($alerts as $a => $data) :

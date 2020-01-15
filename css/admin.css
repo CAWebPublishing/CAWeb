@@ -56,10 +56,21 @@ a[data-toggle="collapse"].collapsed label > span:after {
   min-height: 300px;
 }
 
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
+}
+
 /* Alert Banners */
 .dashicons.alert-status,
 .remove-alert {
   cursor: pointer;
+}
+
+#caweb-alert-banners li,
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
 }
 
 .caweb-icon-menu {
@@ -136,7 +147,7 @@ body.login .caweb-disclaimer {
 
 @media (max-width: 767px) {
   body.login .caweb-disclaimer {
-    width: 66% !important;
+    width: 320px !important;
   }
   body.login .caweb-disclaimer {
     font-size: 8pt;

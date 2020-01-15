@@ -11,6 +11,7 @@ add_action( 'login_footer', 'caweb_disclaimer_message' );
 add_filter( 'login_headerurl', 'caweb_login_url' );
 add_filter( 'login_headertext', 'caweb_login_headertext' );
 add_filter( 'gettext', 'caweb_change_lost_your_password' );
+add_filter( 'admin_footer_text', 'caweb_admin_footer_text', 1000 );
 
 /**
  * CAWeb Publishing Branding Admin Head
@@ -20,7 +21,7 @@ add_filter( 'gettext', 'caweb_change_lost_your_password' );
  */
 function caweb_branding_admin_head() {
 	?>
-		<link title="Fav Icon" rel="icon" href="<?php print esc_url( caweb_default_favicon_url() ); ?>">
+		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/images/system/caweb_logo.ico' ); ?>">
 	<?php
 }
 
@@ -101,8 +102,19 @@ function caweb_login_headertext() {
 function caweb_change_lost_your_password( $text ) {
 
 	if ( 'Lost your password?' === $text ) {
-		$text = 'Password Reset?';
-
+		$text = 'Reset Password?';
 	}
 	return $text;
+}
+
+/**
+ * CAWeb Admin Footer Text
+ *
+ * @param  mixed $text Admin Footer text.
+ *
+ * @return string
+ */
+function caweb_admin_footer_text( $text ){
+
+	return 'Powered by CAWeb Publishing | ' . $text;
 }
