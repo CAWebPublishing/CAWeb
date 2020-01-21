@@ -1,0 +1,4 @@
+<?php
+/**
+ * CAWeb Dashboard Widgets
+ */
