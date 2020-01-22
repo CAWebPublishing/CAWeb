@@ -497,26 +497,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
 }
 
 /**
- * CAWeb Admin Head
- * Fires in head section for all admin pages.
- *
- * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_head
- * @todo Move Styles to admin css
- * @return void
- */
-function caweb_admin_head() {
-	/* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
-	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
-
-	/* This is a fix for CAWeb icons in the new divi builder */
-	print '<style>
-            body.et-db #et-boc .et-fb-font-icon-list li:after {
-              font-family: "CaGov", "ETModules" !important;
-            } 
-          </style>';
-}
-
-/**
  * Set CAWeb Category based on Post Detail Module used.
  * Fires once a post has been saved.
  *
