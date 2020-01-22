@@ -114,7 +114,7 @@ function caweb_change_lost_your_password( $text ) {
  *
  * @return string
  */
-function caweb_admin_footer_text( $text ){
+function caweb_admin_footer_text( $text ) {
 
 	return 'Powered by CAWeb Publishing | ' . $text;
 }

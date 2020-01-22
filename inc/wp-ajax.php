@@ -39,7 +39,7 @@ function caweb_fav_icon_checker() {
 	*/
 	$mime_patterns = array( '00000100', '89PNG0D0A1A' );
 
-	if ( in_array( $handle, $mime_patterns, true) ) {
+	if ( in_array( $handle, $mime_patterns, true ) ) {
 		print true;
 		wp_die(); /* this is required to terminate immediately and return a proper response */
 	}
@@ -54,15 +54,15 @@ function caweb_fav_icon_checker() {
  * @return string
  */
 function caweb_icon_menu_func() {
-	$input = isset( $_POST['name'] ) ? $_POST['name'] : '';
-	$sel   = isset( $_POST['select'] ) ? $_POST['select'] : '';
-	$header   = isset( $_POST['header'] ) ? $_POST['header'] : false;
+	$input  = isset( $_POST['name'] ) ? $_POST['name'] : '';
+	$sel    = isset( $_POST['select'] ) ? $_POST['select'] : '';
+	$header = isset( $_POST['header'] ) ? $_POST['header'] : false;
 
 	print caweb_icon_menu(
 		array(
 			'select' => $sel,
 			'name'   => $input,
-			'header' => $header
+			'header' => $header,
 		)
 	);
 	wp_die(); // this is required to terminate immediately and return a proper response
@@ -75,42 +75,42 @@ function caweb_icon_menu_func() {
  * @return void
  */
 function caweb_doc_create_xml() {
-	$site_id = get_current_blog_id();
+	$site_id   = get_current_blog_id();
 	$directory = wp_upload_dir();
 
-	if ($site_id === 1) {
-    	$wp_posts_table = 'wp_posts';
-    } else {
+	if ( $site_id === 1 ) {
+		$wp_posts_table = 'wp_posts';
+	} else {
 		$wp_posts_table = 'wp_' . $site_id . '_posts';
-    }
+	}
 
 	global $wpdb;
 
 	$count = 0;
-	
+
 	$results = $wpdb->get_results( "SELECT `guid` FROM {$wp_posts_table} WHERE `post_mime_type` IN ('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')", OBJECT );
 
-	$dom = new DOMDocument('1.0','UTF-8');
- 	$dom->formatOutput = true;
+	$dom               = new DOMDocument( '1.0', 'UTF-8' );
+	$dom->formatOutput = true;
 
- 	$urlset = $dom->createElement('urlset');
-	$urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-	$urlset->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-	$urlset->setAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
+	$urlset = $dom->createElement( 'urlset' );
+	$urlset->setAttribute( 'xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9' );
+	$urlset->setAttribute( 'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance' );
+	$urlset->setAttribute( 'xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd' );
 
 	foreach ( $results as $result ) {
-		$url = $dom->createElement('url');
-		$urlset->appendChild($url);
-    	$url->appendChild( $dom->createElement('loc', $result->guid) );
-    	$count++;
+		$url = $dom->createElement( 'url' );
+		$urlset->appendChild( $url );
+		$url->appendChild( $dom->createElement( 'loc', $result->guid ) );
+		$count++;
 	}
-	$dom->appendChild($urlset);
+	$dom->appendChild( $urlset );
 
 	$output = $dom->saveXML();
 
 	$file = $directory['basedir'] . '/pdf-word-sitemap.xml';
 
-	$dom->save($file);
+	$dom->save( $file );
 
 	$href = $directory['baseurl'] . '/pdf-word-sitemap.xml';
 

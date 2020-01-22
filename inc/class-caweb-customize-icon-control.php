@@ -26,21 +26,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return void
 		 */
 		public function render_content() {
-			?>
-			<label>
-				<span class="customize-control-title "><?php print esc_html( $this->label ); ?> <span class="dashicons dashicons-image-rotate resetGoogleIcon"></span></span>
-				<ul id="caweb-icon-menu" class="autoUpdate">
-				<?php
-				$icons = caweb_get_icon_list( -1, '', true );
-				foreach ( $icons as $i ) {
-					printf( '<li class="icon-option ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $this->value() === $i ? ' selected' : '' );
-				}
-				?>
-
-					<input id="_customize-input-<?php print $this->id; ?>" type="hidden" name="ca_google_trans_icon" value="<?php print $this->value(); ?>" <?php $this->link(); ?>>
-				</ul>
-			</label>
-			<?php
+			print wp_kses(
+				caweb_icon_menu(
+					array(
+						'select' => $this->value(),
+						'name'   => 'ca_google_trans_icon',
+						'header' => 'Icon',
+					)
+				),
+				caweb_allowed_html()
+			);
 		}
 	}
 }

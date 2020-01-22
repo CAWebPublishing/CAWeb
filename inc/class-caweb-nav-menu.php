@@ -215,8 +215,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					} /* End of sub-nav */
 
 					$item_nav_image = '';
-					if ( 
-						! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+					if ( ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
 						$item_nav_image_class = 'widget_nav_menu_icon ca-gov-icon-' . $item_meta['_caweb_menu_icon'][0];
 						$item_nav_image       = "<span class=\"$item_nav_image_class\"></span>";
 					} elseif ( ! empty( $item_meta['_caweb_menu_image'][0] ) ) {
@@ -400,7 +399,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					} else {
 						/* Get nav media if present */
 						$nav_media_image    = $item_meta['_caweb_menu_media_image'][0];
-						$nav_media_alt_text = isset($item_meta['_caweb_nav_media_image_alt_text'][0]) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
+						$nav_media_alt_text = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
 
 						$nav_media = ( 'megadropdown' === $args->style ?
 														sprintf(
@@ -461,7 +460,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
 			foreach ( $menuitems as $item ) {
-				if ( ! $item->menu_item_parent  ) {
+				if ( ! $item->menu_item_parent ) {
 					$nav_links .= sprintf(
 						'<li%1$stitle="%2$s"%3$s><a href="%4$s"%5$s>%6$s</a></li>',
 						( ! empty( $item->classes ) ? sprintf( ' class="%1$s" ', implode( ' ', $item->classes ) ) : '' ),
@@ -540,18 +539,26 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 			$tmp                      = get_post_meta( $item->ID );
 			$icon                     = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
-			$nav_media_image_alt_text = isset( $tmp['_caweb_nav_media_image_alt_text'][0] ) && ! empty( $tmp['_caweb_nav_media_image_alt_text'][0] ) ? $tmp['_caweb_nav_media_image_alt_text'][0] : ''; 
-			$unit_size = isset( $tmp['_caweb_menu_unit_size'][0] ) && ! empty( $tmp['_caweb_menu_unit_size'][0] ) ? $tmp['_caweb_menu_unit_size'][0] : 'unit1';
-			$mega_menu_img = isset( $tmp['_caweb_menu_image'][0] ) && ! empty( $tmp['_caweb_menu_image'][0] ) ? $tmp['_caweb_menu_image'][0] : '';
-			$mega_menu_side = isset( $tmp['_caweb_menu_image_side'][0] ) ? $tmp['_caweb_menu_image_side'][0] : 'left';
-			$mega_menu_size = isset( $tmp['_caweb_menu_image_size'][0] ) ? $tmp['_caweb_menu_image_size'][0] : 'quarter';
-			$menu_column_count = isset( $tmp['_caweb_menu_column_count'][0] ) ? $tmp['_caweb_menu_column_count'][0] : '';
+			$nav_media_image_alt_text = isset( $tmp['_caweb_nav_media_image_alt_text'][0] ) && ! empty( $tmp['_caweb_nav_media_image_alt_text'][0] ) ? $tmp['_caweb_nav_media_image_alt_text'][0] : '';
+			$unit_size                = isset( $tmp['_caweb_menu_unit_size'][0] ) && ! empty( $tmp['_caweb_menu_unit_size'][0] ) ? $tmp['_caweb_menu_unit_size'][0] : 'unit1';
+			$mega_menu_img            = isset( $tmp['_caweb_menu_image'][0] ) && ! empty( $tmp['_caweb_menu_image'][0] ) ? $tmp['_caweb_menu_image'][0] : '';
+			$mega_menu_side           = isset( $tmp['_caweb_menu_image_side'][0] ) ? $tmp['_caweb_menu_image_side'][0] : 'left';
+			$mega_menu_size           = isset( $tmp['_caweb_menu_image_size'][0] ) ? $tmp['_caweb_menu_image_size'][0] : 'quarter';
+			$menu_column_count        = isset( $tmp['_caweb_menu_column_count'][0] ) ? $tmp['_caweb_menu_column_count'][0] : '';
 
-			$site_version = get_option( 'ca_site_version', 5 );
+			$site_version   = get_option( 'ca_site_version', 5 );
 			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
-				<?php print	caweb_icon_menu(array('select' => $icon, 'name' => $item_id . "_icon", 'header' => 'Select an Icon')); ?>
+				<?php
+				print caweb_icon_menu(
+					array(
+						'select' => $icon,
+						'name'   => $item_id . '_icon',
+						'header' => 'Select an Icon',
+					)
+				);
+				?>
 			</div>
 			<div class="unit-selector<?php print ! $depth ? ' hidden' : ''; ?> description description-wide">
 				<p><strong>Select a height for the navigation item</strong></p>
@@ -591,13 +598,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				</select>
 				<p>Select a column layout</p>
 				<select name="<?php print $item_id; ?>_column_count">
-					<option value=""<?php print empty( $menu_column_count ) ? ' selected' : '' ; ?>>Select layout...</option>
+					<option value=""<?php print empty( $menu_column_count ) ? ' selected' : ''; ?>>Select layout...</option>
 					<option value="two-columns"<?php print ! empty( $menu_column_count ) && 'two-columns' === $menu_column_count ? ' selected' : ''; ?>>2 Columns</option>
 					<option value="three-columns"<?php print ! empty( $menu_column_count ) && 'three-columns' === $menu_column_count ? ' selected' : ''; ?>>3 Columns</option>
 					<option value="four-columns"<?php print ! empty( $menu_column_count ) && 'four-columns' === $menu_column_count ? ' selected' : ''; ?>>4 Columns</option>
 				</select>
 			</div>
-			<?php endif; 
+				<?php
+			endif;
 		}
 
 		/**
