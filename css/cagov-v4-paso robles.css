@@ -11464,6 +11464,11 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
 }
 
 /* Widget Menu Style */
+.et_pb_widget ul li {
+  float: left;
+  clear: both;
+}
+
 .widget_nav_menu li {
   border-top: 1px solid #d7d7d7;
   margin-bottom: 0 !important;

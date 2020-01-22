@@ -61,7 +61,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
 			if ( isset( $nav_menu_args['menu'] ) ) {
 				$args['echo'] = false;
-				print $this->createWidgetNavMenu( $nav_menu_args['menu'] );
+				print wp_kses( $this->createWidgetNavMenu( $nav_menu_args['menu'] ), caweb_allowed_html() );
 			}
 
 			return $args;
@@ -76,7 +76,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 * @return string
 		 */
 		public function caweb_edit_nav_menu_walker( $current = 'Walker_Nav_Menu_Edit' ) {
-			if ( $current !== 'Walker_Nav_Menu_Edit' ) {
+			if ( 'Walker_Nav_Menu_Edit' !== $current ) {
 				return $current;
 			}
 
@@ -202,7 +202,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							$sub_nav_items .= sprintf(
 								'<li class="%1$s%2$s"%3$s%4$s><a href="%5$s"%6$s>%7$s</a></li>',
 								implode( ' ', $subitem->classes ),
-								( in_array( 'current-menu-item', $subitem->classes ) ? ' active ' : '' ),
+								( in_array( 'current-menu-item', $subitem->classes, true ) ? ' active ' : '' ),
 								( ! empty( $subitem->attr_title ) ? sprintf( ' title="%1$s" ', $subitem->attr_title ) : '' ),
 								( ! empty( $subitem->xfn ) ? sprintf( ' rel="%1$s" ', $subitem->xfn ) : '' ),
 								$subitem->url,
@@ -225,7 +225,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$widget_nav_menu .= sprintf(
 						'<li class="nav-item %1$s%2$s"%3$s%4$s><a %5$s href="%6$s"%7$s%8$s>%9$s%10$s</a></li>',
 						implode( ' ', $item->classes ),
-						( in_array( 'current-menu-item', $item->classes ) ? ' active ' : '' ),
+						( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
 						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
 						( ! empty( $item->attr_title ) ? sprintf( ' title="%1$s" ', $item->attr_title ) : '' ),
 						( ! empty( $item_nav_image ) ? 'class="widget_nav_menu_a"' : '' ),
@@ -281,7 +281,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$nav_item .= sprintf(
 						'<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
 						implode( ' ', $item->classes ),
-						( in_array( 'current-menu-item', $item->classes ) ? ' active ' : '' ),
+						( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
 						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
 						$item->attr_title,
 						$item->url,
