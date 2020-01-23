@@ -39,7 +39,6 @@ add_action( 'wp_footer', 'caweb_wp_footer', 11 );
  */
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
-add_action( 'admin_head', 'caweb_admin_head' );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 
 /*
