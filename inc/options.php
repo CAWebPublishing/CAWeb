@@ -199,9 +199,10 @@ function caweb_retrieve_various_sanitized_options( $value ) {
  */
 function caweb_option_page() {
 
-	/* The actual menu file */
-	//get_template_part( 'partials/content-options' );
-	get_template_part( 'partials/options' ); 
+	/*
+	 The actual menu file */
+	// get_template_part( 'partials/content-options' );
+	get_template_part( 'partials/options' );
 }
 
 /**
@@ -254,33 +255,33 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	}
 	/* External CSS */
 	$cssfiles = array();
-	if( isset($files['caweb_external_css']) ){
-		$css = $files['caweb_external_css'];
-		$css_count = count($files['caweb_external_css']['name']);
-		for( $c = 0; $c < $css_count; $c++){
-			$data['name'] = $css['name'][$c];
-			$data['type'] = $css['type'][$c];
-			$data['tmp_name'] = $css['tmp_name'][$c];
-			$data['error'] = $css['error'][$c];
-			$data['size'] = $css['size'][$c];
+	if ( isset( $files['caweb_external_css'] ) ) {
+		$css       = $files['caweb_external_css'];
+		$css_count = count( $files['caweb_external_css']['name'] );
+		for ( $c = 0; $c < $css_count; $c++ ) {
+			$data['name']     = $css['name'][ $c ];
+			$data['type']     = $css['type'][ $c ];
+			$data['tmp_name'] = $css['tmp_name'][ $c ];
+			$data['error']    = $css['error'][ $c ];
+			$data['size']     = $css['size'][ $c ];
 
-			$cssfiles[ $css['name'][$c] ] = $data;
+			$cssfiles[ $css['name'][ $c ] ] = $data;
 		}
 	}
 
 	/* External JS */
 	$jsfiles = array();
-	if( isset($files['caweb_external_js']) ){
-		$js = $files['caweb_external_js'];
-		$js_count = count($files['caweb_external_js']['name']);
-		for( $j = 0; $j < $js_count; $j++){
-			$data['name'] = $js['name'][$j];
-			$data['type'] = $js['type'][$j];
-			$data['tmp_name'] = $js['tmp_name'][$j];
-			$data['error'] = $js['error'][$j];
-			$data['size'] = $js['size'][$j];
+	if ( isset( $files['caweb_external_js'] ) ) {
+		$js       = $files['caweb_external_js'];
+		$js_count = count( $files['caweb_external_js']['name'] );
+		for ( $j = 0; $j < $js_count; $j++ ) {
+			$data['name']     = $js['name'][ $j ];
+			$data['type']     = $js['type'][ $j ];
+			$data['tmp_name'] = $js['tmp_name'][ $j ];
+			$data['error']    = $js['error'][ $j ];
+			$data['size']     = $js['size'][ $j ];
 
-			$jsfiles[ $js['name'][$j] ] = $data;
+			$jsfiles[ $js['name'][ $j ] ] = $data;
 		}
 	}
 

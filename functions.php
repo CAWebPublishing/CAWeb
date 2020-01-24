@@ -39,7 +39,6 @@ add_action( 'wp_footer', 'caweb_wp_footer', 11 );
  */
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
-add_action( 'admin_head', 'caweb_admin_head' );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 
 /*
@@ -494,26 +493,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	/* Load editor styling */
 	wp_dequeue_style( get_template_directory_uri() . 'css/editor-style.css' );
 	add_editor_style( $editor_css );
-}
-
-/**
- * CAWeb Admin Head
- * Fires in head section for all admin pages.
- *
- * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_head
- * @todo Move Styles to admin css
- * @return void
- */
-function caweb_admin_head() {
-	/* This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open */
-	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
-
-	/* This is a fix for CAWeb icons in the new divi builder */
-	print '<style>
-            body.et-db #et-boc .et-fb-font-icon-list li:after {
-              font-family: "CaGov", "ETModules" !important;
-            } 
-          </style>';
 }
 
 /**

@@ -163,7 +163,7 @@ $user_color = caweb_get_user_color()->colors[2];
 			<li class="list-group-item<?php print 'custom-css' === $tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-css' === $tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
 			<li class="list-group-item<?php print 'custom-js' === $tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-js' === $tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
 			<li class="list-group-item<?php print 'alert-banners' === $tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'alert-banners' === $tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
-			<li class="list-group-item<?php print 'document-sitemap' === $tab ? ' selected' : ''; ?>"><a href="#document-sitemap" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'document-sitemap' === $tab ? ' aria-expanded="true"' : ''; ?>>SiteMap</a></li>
+			<li class="list-group-item<?php print 'document-sitemap' === $tab ? ' selected' : ''; ?>"><a href="#document-sitemap" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'document-sitemap' === $tab ? ' aria-expanded="true"' : ''; ?>>Document Map</a></li>
 		</ul>
 	</div>
 	<div class="row pr-3">

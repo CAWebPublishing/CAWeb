@@ -449,6 +449,10 @@ function caweb_allowed_html() {
 		'h4'     => $attr,
 		'h5'     => $attr,
 		'h6'     => $attr,
+		'ol'     => $attr,
+		'ul'     => $attr,
+		'li'     => $attr,
+
 	);
 
 	return $tags;

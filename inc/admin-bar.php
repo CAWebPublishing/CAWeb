@@ -7,7 +7,6 @@
  */
 
 add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
-//add_filter( 'admin_bar_menu', 'replace_wordpress_howdy', 25 );
 
 /**
  * Load all necessary CAWeb Admin Bar items.
@@ -77,12 +76,14 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 	/*
 		Replace default WP Greeting
 	*/
-	$my_account = $wp_admin_bar->get_node('my-account');
-	$newtext = str_replace( 'Howdy,', 'Logged in as:', $my_account->title );
+	$my_account = $wp_admin_bar->get_node( 'my-account' );
+	$newtext    = str_replace( 'Howdy,', 'Logged in as:', $my_account->title );
 
-	$wp_admin_bar->add_node( array(
-		'id' => 'my-account',
-		'title' => $newtext,
-	) );
+	$wp_admin_bar->add_node(
+		array(
+			'id'    => 'my-account',
+			'title' => $newtext,
+		)
+	);
 
 }
