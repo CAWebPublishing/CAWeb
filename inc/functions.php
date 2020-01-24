@@ -382,7 +382,7 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 	$nav_menu_item_list = array();
 
 	foreach ( (array) $nav_menu_items as $nav_menu_item ) {
-		if ( (int)$nav_menu_item->menu_item_parent === (int)$parent_id ) {
+		if ( (int) $nav_menu_item->menu_item_parent === (int) $parent_id ) {
 			$nav_menu_item_list[] = $nav_menu_item;
 			if ( $depth ) {
 				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
@@ -400,7 +400,7 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
  *
  * @return void
  */
-function caweb_get_user_color( ) {
+function caweb_get_user_color() {
 	global $_wp_admin_css_colors;
 
 	$admin_color = get_user_option( 'admin_color' );
@@ -413,20 +413,20 @@ function caweb_get_user_color( ) {
  * CAWeb Allowed HTML for wp_kses
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
- * 
- * @return void
+ *
+ * @return array
  */
-function caweb_allowed_html(){
+function caweb_allowed_html() {
 	$attr = array(
-		'id' => array(), 
+		'id'    => array(),
 		'class' => array(),
-		'style' => array()
+		'style' => array(),
 	);
 
 	$anchors = array(
-		'href' => array(), 
-		'title' => array(), 
-		'target' => array()
+		'href'   => array(),
+		'title'  => array(),
+		'target' => array(),
 	);
 
 	$imgs = array(
@@ -435,19 +435,25 @@ function caweb_allowed_html(){
 	);
 
 	$tags = array(
-		'div' => $attr,
-		'p' => $attr,
-		'span' => $attr,
-		'a' => array_merge( $attr, $anchors ),
-		'img' => array_merge( $attr, $imgs ),
-		'strong' => $attr, 
-		'bold' => $attr, 
-		'i' => $attr, 
-		'h1' => $attr, 
-		'h2' => $attr, 
-		'h3' => $attr, 
-		'h4' => $attr, 
-		'h5' => $attr, 
-		'h6' => $attr, 
+		'div'    => $attr,
+		'p'      => $attr,
+		'span'   => $attr,
+		'a'      => array_merge( $attr, $anchors ),
+		'img'    => array_merge( $attr, $imgs ),
+		'strong' => $attr,
+		'bold'   => $attr,
+		'i'      => $attr,
+		'h1'     => $attr,
+		'h2'     => $attr,
+		'h3'     => $attr,
+		'h4'     => $attr,
+		'h5'     => $attr,
+		'h6'     => $attr,
+		'ol'     => $attr,
+		'ul'     => $attr,
+		'li'     => $attr,
+
 	);
+
+	return $tags;
 }

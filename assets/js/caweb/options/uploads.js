@@ -1,12 +1,12 @@
 /* CAWeb Uploads Option */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
   /*
     Custom CSS/JS
   */
  
-  //$( "#uploadedCSS, #uploadedJS" ).sortable();
-  //$( "#uploadedCSS, #uploadedJS" ).disableSelection();
+  $( "#uploaded-css, #uploaded-js" ).sortable();
+  $( "#uploaded-css, #uploaded-js" ).disableSelection();
 
   // Remove Uploaded CSS/JS
   $('.remove-css, .remove-js').click(function(e){
@@ -21,12 +21,12 @@ jQuery(document).ready(function() {
 
   // Add New CSS
 $('#add-css, #add-js').click(function(e){
-  var ext =  $(this).attr('id').replace('add-', '');
-  var ulID = '#uploaded-' + ext;
+	e.preventDefault();
+	var ext =  $(this).attr('id').replace('add-', '');
+	var ulID = '#uploaded-' + ext;
 
-  addExternal($(ulID), ext);	
-  changeMade = true;
-
+	addExternal($(ulID), ext);
+	changeMade = true;
 });
 
 function addExternal(ext_list, ext){
@@ -38,8 +38,7 @@ function addExternal(ext_list, ext){
 
   // File Upload
   fileUpload.type = "file";
-  //fileUpload.name = rowCount + ext + "_upload";
-  //fileUpload.id = rowCount + ext + "_upload";
+  fileUpload.name = "caweb_external_" + ext + "[]";
   fileUpload.accept = "." + ext;
   fileUpload.classList = "form-control-file border-bottom border-warning pl-2 d-inline-block w-75";
   fileUpload.addEventListener('change', function () {

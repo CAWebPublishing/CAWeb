@@ -1,11 +1,11 @@
 <!-- Custom CSS Section -->
-<div class="p-2 collapse" id="custom-css" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'custom-css' === $tab ? ' show' : ''; ?>" id="custom-css" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded CSS -->
     <div class="form-row">
         <div class="form-group">
-            <h2 class="d-inline">Uploaded CSS</h2>
-            <span class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-css"></span>
+            <h2 class="d-inline">Import CSS</h2>
+            <button class="btn btn-primary" id="add-css">New File</button>
             <small class="form-text mb-2 text-muted">Any styles added will override any pre-existing styles. Uploaded stylesheets load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
@@ -29,13 +29,9 @@
     <!-- Custom CSS -->
     <div class="form-row">
         <div class="form-group col-lg-12">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text d-inline">Custom CSS</span>
-                </div>
-                <textarea id="ca_custom_css" name="ca_custom_css" class="form-control" aria-label="Custom CSS"><?php print wp_unslash($custom_css) ?></textarea>
-            </div>
+            <h2 class="d-inline">Manual CSS</h2>
             <small class="form-text mb-2 text-muted">Any styles added will override any pre-existing styles.</small>
+            <textarea id="ca_custom_css" name="ca_custom_css" class="form-control" aria-label="Custom CSS"><?php print wp_unslash($custom_css) ?></textarea>
         </div>
     </div>
 

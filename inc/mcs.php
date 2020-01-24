@@ -2,7 +2,7 @@
 /**
  * CAWeb Hosting (MCS)
  * These are required when hosted at CDT
- * 
+ *
  * @todo Remove entire file after migration
  * @package CAWeb
  */

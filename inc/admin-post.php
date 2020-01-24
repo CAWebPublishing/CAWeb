@@ -11,8 +11,6 @@ add_action( 'admin_post_no_priv_caweb_attachment_post_meta', 'caweb_retrieve_att
 add_action( 'admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session' );
 add_action( 'admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session' );
 
-
-
 /**
  * Retrieve attachment post meta alt text
  *
@@ -20,7 +18,7 @@ add_action( 'admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_se
  */
 function caweb_retrieve_attachment_post_meta() {
 	if ( ! isset( $_POST['imgs'] ) || empty( $_POST['imgs'] ) || ! is_array( $_POST['imgs'] ) ) {
-		return 0;
+		exit();
 	}
 
 	$alts = caweb_get_attachment_post_meta( $_POST['imgs'], '_wp_attachment_image_alt' );

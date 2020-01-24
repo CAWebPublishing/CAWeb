@@ -72,4 +72,18 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 			)
 		);
 	}
+
+	/*
+		Replace default WP Greeting
+	*/
+	$my_account = $wp_admin_bar->get_node( 'my-account' );
+	$newtext    = str_replace( 'Howdy,', 'Logged in as:', $my_account->title );
+
+	$wp_admin_bar->add_node(
+		array(
+			'id'    => 'my-account',
+			'title' => $newtext,
+		)
+	);
+
 }

@@ -36,6 +36,9 @@ function caweb_customize_preview_init() {
  */
 function caweb_customize_controls_enqueue_scripts() {
 
+	$bootstrap_css = caweb_get_min_file( '/css/bootstrap.css' );
+	wp_enqueue_style( 'caweb-bootstrap-styles', $bootstrap_css, array(), CAWEB_VERSION );
+
 	wp_register_script( 'caweb-customize-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
 
 	wp_localize_script(
