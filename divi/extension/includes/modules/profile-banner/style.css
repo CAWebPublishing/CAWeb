@@ -1,0 +1,25 @@
+/* Profile Banner */
+.profile-banner{
+  background: url('/wp-content/themes/CAWeb/images/banner/banner-blank.png') no-repeat !important;
+  background-size: 100% 100% !important;
+}
+.profile-banner .inner{
+  background-size: contain !important;
+}
+.profile-banner.round-image{
+	background: unset !important;
+  height: auto;
+  border: none;
+}
+.profile-banner .banner-subtitle{
+  color: #333333;
+}
+.profile-banner-img-wrapper{
+  height: 90px;
+  float: right;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.profile-banner-wrapper a:hover{
+  text-decoration: none;
+}

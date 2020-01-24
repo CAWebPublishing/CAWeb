@@ -8904,345 +8904,6 @@ figure {
   background-color: #5a5a5a;
 }
 
-/* Last Modified 9/11/2019 */
-/* Fullwidth Header Slideshow Banner */
-.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text {
-  max-width: 50%;
-  padding-bottom: 15px !important;
-  bottom: 50%;
-}
-
-.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.center {
-  left: 25%;
-}
-
-.et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text.right {
-  left: 50%;
-}
-
-/* Fullwidth Menu */
-.et_pb_module.et_pb_fullwidth_menu .nav > li {
-  display: inline-block;
-}
-
-.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children > a:first-child {
-  padding: 0 20px 29px 0;
-}
-
-.et_pb_module.et_pb_fullwidth_menu li.menu-item-has-children .sub-menu li a {
-  padding: 6px 20px;
-}
-
-.et_pb_module.et_pb_fullwidth_menu .fullwidth-menu-nav > ul ul {
-  padding-bottom: 20px;
-}
-
-.et_pb_module.et_pb_ca_fullwidth_banner.solo #primary-carousel div[class*="banner-"] {
-  display: none;
-}
-
-.et_pb_module.et_pb_ca_fullwidth_banner.no-explore #primary-carousel div[class*="banner-"] {
-  bottom: 0;
-}
-
-.explore-invite {
-  z-index: 1;
-}
-
-/* Section Primary  */
-.section {
-  overflow: hidden;
-}
-
-/* Adds padding under featured image when in tablet mode */
-@media (max-width: 991px) {
-  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive,
-  .et_pb_ca_section_primary .col-md-4 img.img-responsive {
-    padding-bottom: 10px;
-  }
-  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4,
-  .et_pb_ca_section_primary.et_pb_module .col-md-4 {
-    float: none !important;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.et_pb_ca_section_primary,
-.et_pb_ca_fullwidth_section_primary,
-.et_pb_ca_fullwidth_section_footer {
-  margin-bottom: 0 !important;
-  padding: 10px 15px;
-}
-
-/* Section - Footer */
-.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child,
-.et_pb_ca_section_footer .row .quarter h4:first-child {
-  border-bottom-style: none;
-}
-
-.et_pb_ca_fullwidth_section_footer ul {
-  padding: 0 !important;
-}
-
-/* Section - Carousel */
-.et_pb_ca_section_carousel .container {
-  width: 100%;
-}
-
-.et_pb_ca_section_carousel .carousel-media .item .preview-image,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item .preview-image {
-  height: 150px;
-}
-
-.et_pb_ca_section_carousel .carousel-media .item img,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item img {
-  height: 100%;
-}
-
-.et_pb_ca_section_carousel .carousel-media .item .details,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item .details {
-  margin-top: 1em;
-}
-
-/* Panel Style */
-.et_pb_ca_panel.panel-none,
-.et_pb_ca_fullwidth_panel.panel-none {
-  border: none;
-}
-
-.et_pb_ca_panel .panel-heading h2,
-.et_pb_ca_fullwidth_panel .panel-heading h2 {
-  width: 100%;
-}
-
-/* Location Banner Thumbnail Image Fix*/
-.et_pb_ca_location_widget.location.banner .thumbnail img {
-  width: 100%;
-}
-
-.et_pb_ca_location_widget.location.banner .description {
-  padding-bottom: 10px;
-}
-
-.et_pb_ca_location_widget.location.banner .address a {
-  margin-left: 30px;
-  display: inline-block;
-}
-
-/* Profile Banner */
-.profile-banner .banner-subtitle {
-  color: #333333;
-}
-
-.profile-banner {
-  background: url("../images/banner/banner-blank.png") no-repeat;
-  background-size: 100% 100%;
-  /*overflow: hidden;
-   height: 90px;*/
-}
-
-.profile-banner .inner {
-  background-size: contain !important;
-}
-
-.profile-banner.round-image {
-  background: unset;
-  height: auto;
-  border: none;
-}
-
-.profile-banner-img-wrapper {
-  height: 90px;
-  float: right;
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.profile-banner-wrapper a:hover {
-  text-decoration: none;
-}
-
-/* Divi Accordion Style */
-.et-learn-more h3.heading-more {
-  color: black;
-}
-
-ul, ol {
-  list-style-position: outside;
-}
-
-/* Fullwidth Section Footer */
-.et_pb_ca_fullwidth_section_footer li {
-  margin-left: 1em;
-  text-indent: -1em;
-}
-
-/* Fullwidth Section Carousel */
-.et_pb_ca_fullwidth_section_carousel button {
-  margin-top: 1em;
-}
-
-.et_pb_ca_fullwidth_section_carousel button a, .et_pb_ca_fullwidth_section_carousel h2 {
-  color: white;
-}
-
-/* Section Carousel */
-.et_pb_ca_section_carousel button {
-  margin-top: 1em;
-}
-
-.et_pb_ca_section_carousel button a, .et_pb_ca_section_carousel h2 {
-  color: white;
-}
-
-ol {
-  margin-left: 16px;
-}
-
-/* Service Tiles */
-.et_pb_ca_fullwidth_service_tiles .service-tile.half {
-  width: 50%;
-}
-
-.et_pb_ca_fullwidth_service_tiles .service-tile.full {
-  width: 100%;
-}
-
-.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"],
-.et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
-  white-space: pre-line;
-}
-
-/* Post List (Events) */
-.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 {
-  padding-bottom: 0px;
-}
-
-.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 a {
-  color: #347AB7;
-}
-
-/* Post List (News) */
-.et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
-  width: auto;
-}
-
-.et_pb_module.et_pb_ca_post_list.indent.news-list .info {
-  padding-left: 175px;
-}
-
-/* Post List (Profile) */
-.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header,
-.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body {
-  margin-left: 0;
-}
-
-.et_pb_module.et_pb_ca_post_list.profile-list .profile-item {
-  min-height: 105px;
-}
-
-/* Post List (FAQs) */
-/* Remove the Divi Padding around the et_pb_toggle */
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close {
-  padding: 0px;
-}
-
-/* Add outline */
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open:focus,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
-  color: black !important;
-  padding-bottom: 0px;
-}
-
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
-  border-bottom: inherit;
-}
-
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_title:before {
-  content: "";
-}
-
-/* Post List (General) */
-.et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before {
-  content: "";
-}
-
-/* Apply the Arrows */
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after {
-  content: "\43";
-  font-family: cagov;
-}
-
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title a:after {
-  content: "\45";
-  font-family: cagov;
-}
-
-/* Cards */
-.et_pb_ca_card.et_pb_module .card-header {
-  padding: 11px 15px;
-}
-
-.et_pb_ca_card.et_pb_module .card-title {
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-  /* Remove dotted line under card-title h4 ( this was in Version 4)*/
-  border-bottom: 0 !important;
-}
-
-.et_pb_ca_card.et_pb_module .card-block {
-  padding: 15px;
-}
-
-.et_pb_ca_card.et_pb_module .card-footer {
-  padding: 11px 15px;
-}
-
-/* GitHub Module */
-.et_pb_ca_github.et_pb_module ul li {
-  list-style-type: none;
-}
-
-/* Remove the State Template background image from Divi Button, Email Optin, Blurb Images and Person Modules */
-.et_pb_button_module_wrapper.et_pb_module .et_pb_button,
-.et_pb_newsletter_button_wrap .et_pb_newsletter_button.et_pb_button,
-.et_pb_main_blurb_image a,
-.et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
-  background-image: none !important;
-}
-
-/* Divi Slider & Post Sliders, arrows are not ADA compliant */
-.et-pb-slider-arrows a[class^="et-pb-arrow-"] span {
-  display: block;
-}
-
-.et-pb-arrow-next::before, .et-pb-arrow-prev::before {
-  content: none;
-}
-
-a[class^="et-pb-arrow-"] span[class^="ca-gov-icon-"] {
-  font-size: 20px;
-}
-
-a[class^="et-pb-arrow-prev"]:focus {
-  left: 22px;
-  opacity: 1;
-}
-
-a[class^="et-pb-arrow-next"]:focus {
-  right: 22px;
-  opacity: 1;
-}
-
 @font-face {
   font-family: 'CaGov';
   src: url("../fonts/CaGov.eot?trqo0f");
@@ -11728,7 +11389,166 @@ li[class^="et_fb_profile_banner"]::before {
   content: "\e991" !important;
 }
 
-/* CAWeb Custom CSS 10/21/2019 */
+/*---------------
+ # CAWeb
+---------------*/
+/*------------------------
+ # CAWeb Accessibility
+------------------------*/
+/* WPForms correct required label color contrast ADA */
+.wpforms-required-label {
+  color: #D24532 !important;
+}
+
+div.wpforms-container-full input:focus,
+div.wpforms-container-full textarea:focus,
+div.wpforms-container-full button[type="submit"]:focus,
+div.wpforms-container-full select:focus,
+div.wpforms-container-full .flag-container .selected-flag:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* MailPoet correct focus on inputs */
+div[id^="mailpoet_form_"] input:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* MailChimp ADA Fixes */
+#mc-embedded-subscribe-form
+span.asterisk, .mce_inline_error {
+  color: #D24532 !important;
+}
+
+#mc-embedded-subscribe-form input.required.mce_inline_error {
+  border: 2px solid #D24532 !important;
+}
+
+/* Tabby Response ADA Fixes */
+li.responsive-tabs__list__item.keyboard-outline,
+li.responsive-tabs__list__item.responsive-tabs__list__item--active:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+li.responsive-tabs__list__item {
+  color: #757575 !important;
+}
+
+/* Add focus to TablePress Headers */
+table[id^="tablepress-"] thead tr th:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* Add focus to TablePress Search Input Filter */
+div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* Thickbox Styles */
+#TB_closeWindow #TB_closeWindowButton .tb-close-icon {
+  display: none;
+}
+
+#TB_closeWindow #TB_closeWindowButton .screen-reader-text,
+#TB_title #TB_closeWindowButton .screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+/* Widget Menu Style */
+.et_pb_widget ul li {
+  float: left;
+  clear: both;
+}
+
+.widget_nav_menu li {
+  border-top: 1px solid #d7d7d7;
+  margin-bottom: 0 !important;
+}
+
+.widget_nav_menu li:first-child {
+  border-top: none;
+}
+
+.widget_nav_menu li a {
+  display: block;
+  padding: 0.85rem 1rem 0.85rem 1.8rem;
+}
+
+.widget_nav_menu .current-menu-item.active a {
+  color: #046B99;
+  font-weight: 700;
+}
+
+.widget_nav_menu .current-menu-item.active {
+  border-left: 4px solid #0071bc;
+}
+
+.widget_nav_menu ul li p {
+  margin-bottom: 0px !important;
+}
+
+.widget_nav_menu_a .widget_nav_menu_title {
+  padding-left: 45px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+  margin-bottom: 0px;
+}
+
+.widget_nav_menu .widget_nav_menu_icon,
+.widget_nav_menu .widget_nav_menu_img {
+  position: absolute;
+}
+
+.widget_nav_menu .widget_nav_menu_icon {
+  font-size: 35px;
+}
+
+.widget_nav_menu .widget_nav_menu_img {
+  width: 50px;
+  height: 35px;
+}
+
+/* Divi Specific Overrides */
+.et_pb_main_blurb_image a.keyboard-outline {
+  display: -webkit-box;
+  display: inline-block;
+}
+
+.et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+#page-container {
+  padding-top: 0px;
+}
+
+.et_section_regular {
+  padding: 0 !important;
+}
+
+.et_pb_ca_panel .panel-body ul, .et_pb_ca_panel .panel-body ol {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  padding-bottom: 0;
+}
+
+.search-results .et_pb_post {
+  margin-bottom: 30px;
+}
+
 /* HIDE THE 'Enable Visual Builder' Button*/
 #wp-admin-bar-et-use-visual-builder {
   display: none !important;
@@ -11736,6 +11556,16 @@ li[class^="et_fb_profile_banner"]::before {
 
 header {
   z-index: 15 !important;
+}
+
+#main-content {
+  background-color: #fff !important;
+  overflow: hidden;
+}
+
+ol.breadcrumb {
+  text-transform: capitalize;
+  margin-bottom: 0;
 }
 
 /* Allow anchor links in global footers to maintain the normal blue color */
@@ -11760,26 +11590,6 @@ footer span a {
 
 footer span a:hover {
   color: #02374e !important;
-}
-
-/* Thickbox Styles */
-#TB_closeWindow #TB_closeWindowButton .tb-close-icon {
-  display: none;
-}
-
-#TB_closeWindow #TB_closeWindowButton .screen-reader-text,
-#TB_title #TB_closeWindowButton .screen-reader-text {
-  border: 0;
-  clip: rect(1px, 1px, 1px, 1px);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  word-wrap: normal !important;
 }
 
 .archive.author article.has-post-thumbnail .auth-link,
@@ -11831,38 +11641,32 @@ footer span a:hover {
   display: block;
 }
 
-/* Makes TablePress Tables Responsive */
-.dataTables_wrapper {
-  overflow-x: auto;
-}
-
-#main-content {
-  background-color: #fff !important;
-  overflow: hidden;
-}
-
-ol.breadcrumb {
-  text-transform: capitalize;
-  margin-bottom: 0;
-}
-
-/* Add focus to TablePress Headers */
-table[id^="tablepress-"] thead tr th:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
-/* Add focus to TablePress Search Input Filter */
-div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
 /* Remove extra padding when ul is nested inside another ul */
 ul ul {
   padding-bottom: 0px;
 }
 
-ul, ol {
+ol {
+  margin-left: 16px;
+}
+
+ol {
   list-style-position: outside !important;
+}
+
+body.page-template-searchpage.logged-in .gssb_c,
+body.v4.logged-in .gssb_c {
+  margin-top: 35px;
+}
+
+.list-standout, .list-understated, .list-overstated, .accordion-list {
+  list-style-type: none !important;
+  padding: 0 !important;
+}
+
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+  overflow-x: auto;
 }
 
 /* Allows for the Navigation Top Level Links to wrap */
@@ -11886,56 +11690,6 @@ ul, ol {
   width: 100%;
 }
 
-/* Widget Menu Style */
-.widget_nav_menu li {
-  border-top: 1px solid #d7d7d7;
-  margin-bottom: 0 !important;
-}
-
-.widget_nav_menu li:first-child {
-  border-top: none;
-}
-
-.widget_nav_menu li a {
-  display: block;
-  padding: 0.85rem 1rem 0.85rem 1.8rem;
-}
-
-.widget_nav_menu .current-menu-item.active a {
-  color: #046B99;
-  font-weight: 700;
-}
-
-.widget_nav_menu .current-menu-item.active {
-  border-left: 4px solid #0071bc;
-}
-
-.widget_nav_menu ul li p {
-  margin-bottom: 0px !important;
-}
-
-.widget_nav_menu_a .widget_nav_menu_title {
-  padding-left: 45px;
-  display: table-cell;
-  vertical-align: middle;
-  height: 50px;
-  margin-bottom: 0px;
-}
-
-.widget_nav_menu .widget_nav_menu_icon,
-.widget_nav_menu .widget_nav_menu_img {
-  position: absolute;
-}
-
-.widget_nav_menu .widget_nav_menu_icon {
-  font-size: 35px;
-}
-
-.widget_nav_menu .widget_nav_menu_img {
-  width: 50px;
-  height: 35px;
-}
-
 #comment-wrap .comment-body {
   border: 1px dotted transparent;
 }
@@ -11945,83 +11699,78 @@ ul, ol {
   height: unset;
 }
 
-/* Divi Specific Overrides */
-#page-container {
-  padding-top: 0px;
-}
-
-.et_section_regular {
-  padding: 0 !important;
-}
-
-.et_pb_ca_panel .panel-body ul, .et_pb_ca_panel .panel-body ol {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-p {
-  padding-bottom: 0;
-}
-
-body.page-template-searchpage.logged-in .gssb_c,
-body.v4.logged-in .gssb_c {
-  margin-top: 35px;
-}
-
-.search-results .et_pb_post {
-  margin-bottom: 30px;
-}
-
-.list-standout, .list-understated, .list-overstated, .accordion-list {
-  list-style-type: none !important;
-  padding: 0 !important;
-}
-
-.et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
-.et_pb_main_blurb_image a.keyboard-outline {
-  display: -webkit-box;
-  display: inline-block;
-}
-
-/* WPForms correct required label color contrast ADA */
-.wpforms-required-label {
-  color: #D24532 !important;
-}
-
-div.wpforms-container-full input:focus,
-div.wpforms-container-full textarea:focus,
-div.wpforms-container-full button[type="submit"]:focus,
-div.wpforms-container-full select:focus,
-div.wpforms-container-full .flag-container .selected-flag:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
-/* MailPoet correct focus on inputs */
-div[id^="mailpoet_form_"] input:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
-/* MailChimp ADA Fixes */
-#mc-embedded-subscribe-form
-span.asterisk, .mce_inline_error {
-  color: #D24532 !important;
-}
-
-#mc-embedded-subscribe-form input.required.mce_inline_error {
-  border: 2px solid #D24532 !important;
-}
-
-/* Tabby Response ADA Fixes */
-li.responsive-tabs__list__item.keyboard-outline,
-li.responsive-tabs__list__item.responsive-tabs__list__item--active:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
-
-li.responsive-tabs__list__item {
-  color: #757575 !important;
+/* Print Formatting */
+@media print {
+  body {
+    background: white !important;
+  }
+  /* Main Content */
+  #main-content {
+    padding-top: 0 !important;
+    outline: transparent !important;
+  }
+  .main-content {
+    background: transparent !important;
+  }
+  /* Header Organization Banner */
+  .header-organization-banner {
+    margin-left: -59px !important;
+  }
+  /* Navigation Search */
+  .navigation-search {
+    border: none !important;
+  }
+  /* Width */
+  .single.non_divi_builder.sidebar_displayed .main-content .main-primary,
+  .archive.sidebar_displayed .main-content .main-primary {
+    width: 100% !important;
+  }
+  /* Page Margins */
+  .et_pb_row,
+  .non_divi_builder #main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .et_pb_row {
+    display: inline !important;
+  }
+  /* Max-Width */
+  .non_divi_builder #main-content,
+  .et_pb_row,
+  .et_pb_row,
+  .non_divi_builder .main-content,
+  .page-title,
+  .et_pb_gutters3 .et_pb_column_2_3,
+  .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  /* Padding */
+  .et_pb_post_title, .et_pb_section, .et_pb_column_2_3 .et_pb_row_inner {
+    padding: 1em !important;
+  }
+  /* Padding-left */
+  .mobile-control.cagov-logo {
+    padding-left: 0px !important;
+  }
+  /* Utility Header */
+  .utility-header {
+    height: 45px !important;
+  }
+  /* Hide the following elements */
+  header,
+  footer,
+  .return-top.is-visible,
+  .addtoany_share_save_container,
+  #ae_app,
+  .et_pb_fullwidth_section,
+  .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
+  .et_pb_column.et_pb_column_1_4,
+  aside#non_divi_sidebar,
+  .si-toggle-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
 }
 
 .sub-nav.open {
