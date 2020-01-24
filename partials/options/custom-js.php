@@ -1,11 +1,11 @@
 <!-- Custom JS Section -->
-<div class="p-2 collapse" id="custom-js" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'custom-js' === $tab ? ' show' : ''; ?>" id="custom-js" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded JS -->
     <div class="form-row">
         <div class="form-group">
-            <h2 class="d-inline">Uploaded JS</h2>
-            <a class="dashicons dashicons-plus-alt align-middle mb-1 text-info" id="add-js"></a>
+            <h2 class="d-inline">Import JS</h2>
+            <button class="btn btn-primary" id="add-js">New File</button>
             <small class="form-text mb-2 text-muted">Any scripts added will override any pre-existing scripts. Uploaded scripts load at the bottom of the head in the order listed. To adjust the order, click and drag the name of the file in the order you would like.</small>
         </div>
         <?php
@@ -29,15 +29,9 @@
     <!-- Custom JS -->
     <div class="form-row">
         <div class="form-group col-lg-12">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text d-inline">Custom JS</span>
-                </div>
-                <textarea id="ca_custom_js" name="ca_custom_js" class="form-control" aria-label="Custom JS"><?php print wp_unslash($custom_js) ?></textarea>
-            </div>
-            <small class="form-text mb-2 text-muted">Any scripts added will override any pre-existing scripts.</small>
+			<h2 class="d-inline">Manual JS</h2>
+			<small class="form-text mb-2 text-muted">Any scripts added will override any pre-existing scripts.</small>
+			<textarea id="ca_custom_js" name="ca_custom_js" class="form-control" aria-label="Custom JS"><?php print wp_unslash($custom_js) ?></textarea>
         </div>
     </div>
-
-    
 </div>

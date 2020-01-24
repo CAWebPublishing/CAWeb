@@ -10,7 +10,7 @@ $caweb_alerts = get_option( 'caweb_alerts', array() );
 if ( empty( $caweb_alerts ) ) {
 	return;
 }
-update_site_option('dev', $caweb_alerts);
+
 ?>
 <!-- Alert Banners -->
 <?php
@@ -19,7 +19,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 	$caweb_display = $caweb_data['page_display'];
 
 	/* If alert is active and should be displayed */
-	$caweb_active_alert = 'active' === $caweb_status &&
+	$caweb_active_alert = in_array( $caweb_status, array('active', 'on'), true) &&
 		( ( is_front_page() && 'home' === $caweb_display ) || ( 'all' === $caweb_display ) );
 
 	if ( $caweb_active_alert ) {
