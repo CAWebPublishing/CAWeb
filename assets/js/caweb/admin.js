@@ -13,7 +13,28 @@ jQuery(document).ready(function($) {
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
   $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-  $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
+  $('#caweb-options-form').submit(function(e){ 
+	  e.preventDefault();
+		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
+		var empty_file = false;
+
+		$(upload_files).each(function(i){
+			if( "" === $(this).val() && ! empty_file ){
+				empty_file = true;
+				var section_id = '#' + $(this).attr('data-section');
+
+				$('li a[href="' + section_id +'"]').click();
+
+				alert( "Uploaded " + $(this).attr('data-section').replace('-', ' ') + " has no file chosen." );
+			}
+		});
+		
+		if( ! empty_file ){
+			changeMade = false; 
+			this.submit(); 
+		}
+	
+	});
 
   $('.menu-list li a').on('click', function(e){
 	$(this).parent().parent().find('li').each(function(i, ele){
