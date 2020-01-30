@@ -37,10 +37,12 @@ function addExternal(ext_list, ext){
   li.classList = "list-group-item";
 
   // File Upload
-  fileUpload.type = "file";
-  fileUpload.name = "caweb_external_" + ext + "[]";
-  fileUpload.accept = "." + ext;
-  fileUpload.classList = "form-control-file border-bottom border-warning pl-2 d-inline-block w-75";
+  $(fileUpload).attr('type', "file");
+  $(fileUpload).attr('name', "caweb_external_" + ext + "[]");
+  $(fileUpload).attr('accept', "." + ext);
+  $(fileUpload).attr('data-section', "custom-" + ext);
+  $(fileUpload).addClass("form-control-file border-bottom border-warning pl-2 d-inline-block w-75");
+
   fileUpload.addEventListener('change', function () {
     var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
     var extension = name.lastIndexOf(".") > 0 ?
