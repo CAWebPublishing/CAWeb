@@ -621,10 +621,12 @@ function addExternal(ext_list, ext){
   li.classList = "list-group-item";
 
   // File Upload
-  fileUpload.type = "file";
-  fileUpload.name = "caweb_external_" + ext + "[]";
-  fileUpload.accept = "." + ext;
-  fileUpload.classList = "form-control-file border-bottom border-warning pl-2 d-inline-block w-75";
+  $(fileUpload).attr('type', "file");
+  $(fileUpload).attr('name', "caweb_external_" + ext + "[]");
+  $(fileUpload).attr('accept', "." + ext);
+  $(fileUpload).attr('data-section', "custom-" + ext);
+  $(fileUpload).addClass("form-control-file border-bottom border-warning pl-2 d-inline-block w-75");
+
   fileUpload.addEventListener('change', function () {
     var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
     var extension = name.lastIndexOf(".") > 0 ?
@@ -801,7 +803,28 @@ jQuery(document).ready(function($) {
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
   $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-  $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
+  $('#caweb-options-form').submit(function(e){ 
+	  e.preventDefault();
+		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
+		var empty_file = false;
+
+		$(upload_files).each(function(i){
+			if( "" === $(this).val() && ! empty_file ){
+				empty_file = true;
+				var section_id = '#' + $(this).attr('data-section');
+
+				$('li a[href="' + section_id +'"]').click();
+
+				alert( "Uploaded " + $(this).attr('data-section').replace('-', ' ') + " has no file chosen." );
+			}
+		});
+		
+		if( ! empty_file ){
+			changeMade = false; 
+			this.submit(); 
+		}
+	
+	});
 
   $('.menu-list li a').on('click', function(e){
 	$(this).parent().parent().find('li').each(function(i, ele){
