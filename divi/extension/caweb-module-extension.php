@@ -26,7 +26,7 @@ along with CAWeb Divi Module Extension. If not, see https://www.gnu.org/licenses
 */
 
 define('CAWEB_EXT_DIR', __DIR__ . '/includes/' );
-define('CAWEB_EXT_URL', site_url( str_replace("/var/www/html", "", __DIR__ . '/' ) ) );
+define('CAWEB_EXT_URL', site_url( preg_replace('/(.*)\/wp-content/', '/wp-content', __DIR__ . '/' ) ) );
 
 if ( ! function_exists( 'caweb_initialize_extension' ) ):
 /**
