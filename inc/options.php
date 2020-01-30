@@ -199,9 +199,7 @@ function caweb_retrieve_various_sanitized_options( $value ) {
  */
 function caweb_option_page() {
 
-	/*
-	 The actual menu file */
-	// get_template_part( 'partials/content-options' );
+	/* The actual menu file */
 	get_template_part( 'partials/options' );
 }
 
