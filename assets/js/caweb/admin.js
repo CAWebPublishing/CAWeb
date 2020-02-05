@@ -13,7 +13,37 @@ jQuery(document).ready(function($) {
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
   $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-  $('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
+  $('#caweb-options-form').submit(function(e){ 
+	  e.preventDefault();
+		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
+		var empty_file = false;
+
+		$(upload_files).each(function(i){
+			if( "" === $(this).val() && ! empty_file ){
+				empty_file = true;
+				var section_id = '#' + $(this).attr('data-section');
+
+				$(section_id).collapse('show');
+
+				alert( "Uploaded " + $(this).attr('data-section').replace('-', ' ') + " has no file chosen." );
+			}
+		});
+		
+		if( ! empty_file ){
+			changeMade = false; 
+			this.submit(); 
+		}
+	
+	});
+
+  $('.menu-list li a').on('click', function(e){
+	$(this).parent().parent().find('li').each(function(i, ele){
+		$(ele).removeClass('selected');
+	})
+
+	$(this).parent().addClass('selected');
+	$('input[name="tab_selected"]').val($(this).attr('href').replace('#', ''));
+  });
 
   // Reset Fav Icon
   $('#resetFavIcon').click(function() {
@@ -60,6 +90,7 @@ jQuery(document).ready(function($) {
     }
   });
 
+  // Generate Document Sitemap
   $('button.doc-sitemap').click(function(e){
     e.preventDefault();
     var data = {
@@ -70,4 +101,5 @@ jQuery(document).ready(function($) {
       $('.doc-sitemap-update').html(response);
     });
   });
+
 });

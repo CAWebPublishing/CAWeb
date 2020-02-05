@@ -200,8 +200,7 @@ function caweb_retrieve_various_sanitized_options( $value ) {
 function caweb_option_page() {
 
 	/* The actual menu file */
-	//get_template_part( 'partials/content-options' );
-	get_template_part( 'partials/options' ); 
+	get_template_part( 'partials/options' );
 }
 
 /**
@@ -254,33 +253,33 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	}
 	/* External CSS */
 	$cssfiles = array();
-	if( isset($files['caweb_external_css']) ){
-		$css = $files['caweb_external_css'];
-		$css_count = count($files['caweb_external_css']['name']);
-		for( $c = 0; $c < $css_count; $c++){
-			$data['name'] = $css['name'][$c];
-			$data['type'] = $css['type'][$c];
-			$data['tmp_name'] = $css['tmp_name'][$c];
-			$data['error'] = $css['error'][$c];
-			$data['size'] = $css['size'][$c];
+	if ( isset( $files['caweb_external_css'] ) ) {
+		$css       = $files['caweb_external_css'];
+		$css_count = count( $files['caweb_external_css']['name'] );
+		for ( $c = 0; $c < $css_count; $c++ ) {
+			$data['name']     = $css['name'][ $c ];
+			$data['type']     = $css['type'][ $c ];
+			$data['tmp_name'] = $css['tmp_name'][ $c ];
+			$data['error']    = $css['error'][ $c ];
+			$data['size']     = $css['size'][ $c ];
 
-			$cssfiles[ $css['name'][$c] ] = $data;
+			$cssfiles[ $css['name'][ $c ] ] = $data;
 		}
 	}
 
 	/* External JS */
 	$jsfiles = array();
-	if( isset($files['caweb_external_js']) ){
-		$js = $files['caweb_external_js'];
-		$js_count = count($files['caweb_external_js']['name']);
-		for( $j = 0; $j < $js_count; $j++){
-			$data['name'] = $js['name'][$j];
-			$data['type'] = $js['type'][$j];
-			$data['tmp_name'] = $js['tmp_name'][$j];
-			$data['error'] = $js['error'][$j];
-			$data['size'] = $js['size'][$j];
+	if ( isset( $files['caweb_external_js'] ) ) {
+		$js       = $files['caweb_external_js'];
+		$js_count = count( $files['caweb_external_js']['name'] );
+		for ( $j = 0; $j < $js_count; $j++ ) {
+			$data['name']     = $js['name'][ $j ];
+			$data['type']     = $js['type'][ $j ];
+			$data['tmp_name'] = $js['tmp_name'][ $j ];
+			$data['error']    = $js['error'][ $j ];
+			$data['size']     = $js['size'][ $j ];
 
-			$jsfiles[ $js['name'][$j] ] = $data;
+			$jsfiles[ $js['name'][ $j ] ] = $data;
 		}
 	}
 
@@ -294,7 +293,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
 		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
 		$data = array(
-			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : 'active',
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : '',
 			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
 			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
 			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
@@ -312,15 +311,34 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	$values['caweb_alerts'] = $alerts;
 
 	/* Save CAWeb Options */
+	global $wp_filesystem;
+
 	foreach ( $values as $opt => $val ) {
-		if ( 'on' === $val ) {
-			$val = true;
-		} elseif ( 'caweb_external_css' === $opt ) {
-			$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
+		switch( $opt ){
+			case 'caweb_external_css':
+				$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
+				break;
+			case 'caweb_external_js':
+				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
+				break;
+			case 'ca_custom_css':
+				if( ! file_exists( "$ext_css_dir/$site_id" ) ){
+					mkdir( "$ext_css_dir/$site_id", 0777, true );
+				}
+				$wp_filesystem->put_contents( "$ext_css_dir/$site_id/caweb-custom.css", wp_unslash( $val ), FS_CHMOD_FILE );
+				break;
+			case 'ca_custom_js':
+				if( ! file_exists( "$ext_js_dir/$site_id" ) ){
+					mkdir( "$ext_js_dir/$site_id", 0777, true );
+				}
+				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
+				break;
+			default:
+				if ( 'on' === $val ) {
+					$val = true;
+				}
 		}
-		if ( 'caweb_external_js' === $opt ) {
-			$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
-		}
+		 
 		update_option( $opt, $val );
 	}
 

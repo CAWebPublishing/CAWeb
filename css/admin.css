@@ -12,6 +12,15 @@ body#tinymce.mce-content-body {
   padding: 10px;
 }
 
+/* Menu List */
+.menu-list li.list-group-item:not(.selected) {
+  background-color: #fff !important;
+}
+
+.menu-list li.list-group-item:not(.selected):hover a {
+  color: #fff !important;
+}
+
 /* Toggle Arrows when collapsed */
 a[data-toggle="collapse"] h2 > span:after,
 a[data-toggle="collapse"] label > span:after {
@@ -47,10 +56,21 @@ a[data-toggle="collapse"].collapsed label > span:after {
   min-height: 300px;
 }
 
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
+}
+
 /* Alert Banners */
 .dashicons.alert-status,
 .remove-alert {
   cursor: pointer;
+}
+
+#caweb-alert-banners li,
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
 }
 
 .caweb-icon-menu {
@@ -104,6 +124,34 @@ a[data-toggle="collapse"].collapsed label > span:after {
 /* Remove Auto-add Pages from Navigation menu */
 fieldset.field-move, .menu-settings-group.auto-add-pages {
   display: none !important;
+}
+
+body.login #login h1 a {
+  background-image: url("../images/system/caweb-logo.png");
+  background-size: contain;
+  height: 100px;
+  width: 320px;
+}
+
+body.login #login .btn-danger {
+  color: white !important;
+}
+
+body.login #login #backtoblog {
+  display: none;
+}
+
+body.login .caweb-disclaimer {
+  font-size: 9pt;
+}
+
+@media (max-width: 767px) {
+  body.login .caweb-disclaimer {
+    width: 320px !important;
+  }
+  body.login .caweb-disclaimer {
+    font-size: 8pt;
+  }
 }
 
 /*
