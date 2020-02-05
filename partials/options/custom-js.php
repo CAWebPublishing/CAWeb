@@ -19,7 +19,7 @@
                         <a href="<?php print "$ext_js_dir/$name" ?>?TB_iframe=true&width=600&height=550" title="<?php print $name ?>" class="text-decoration-none thickbox dashicons dashicons-visibility preview-js text-success align-middle"></a>
                         <a href="<?php print "$ext_js_dir/$name" ?>" download="<?php print $name ?>" title="download" class="text-decoration-none dashicons dashicons-download download-js align-middle"></a>
                         <a title="<?php print $name ?>" class="dashicons dashicons-dismiss remove-js text-danger align-middle"></a>
-                        <input type="hidden" name="caweb_external_js[]" value="<?php print $name ?>"><?php print $name ?>
+                        <input type="hidden" name="caweb_external_js[]" data-section="custom-js" value="<?php print $name ?>"><?php print $name ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
