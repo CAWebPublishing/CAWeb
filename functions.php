@@ -24,7 +24,7 @@ define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
-add_action( 'get_header', 'caweb_et_project_get_header' );
+add_action( 'get_header', 'caweb_get_header' );
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
@@ -204,8 +204,10 @@ function caweb_pre_get_posts( $query ) {
  *
  * @return void
  */
-function caweb_et_project_get_header( $name = null ) {
-	if ( 'project' === get_post_type( get_the_ID() ) ) {
+function caweb_get_header( $name = null ) {
+	$post_type = get_post_type( get_the_ID() );
+	
+	if ( 'project' === $post_type || empty( $post_type ) ) {
 		locate_template( array( 'header.php' ), true );
 		get_template_part( 'partials/header' );
 	}

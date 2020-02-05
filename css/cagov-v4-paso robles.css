@@ -11549,6 +11549,36 @@ p {
   margin-bottom: 30px;
 }
 
+#signup-content {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  #signup-content {
+    max-width: 750px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  #signup-content {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #signup-content {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  #signup-content {
+    max-width: 1280px !important;
+  }
+}
+
 /* HIDE THE 'Enable Visual Builder' Button*/
 #wp-admin-bar-et-use-visual-builder {
   display: none !important;
