@@ -813,7 +813,7 @@ jQuery(document).ready(function($) {
 				empty_file = true;
 				var section_id = '#' + $(this).attr('data-section');
 
-				$('li a[href="' + section_id +'"]').click();
+				$(section_id).collapse('show');
 
 				alert( "Uploaded " + $(this).attr('data-section').replace('-', ' ') + " has no file chosen." );
 			}
