@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: State v4
- *
- * This is the template for Search Results Page
+ * Template Name: Spanish
+ * 
+ * This is a generic template for Spanish Pages
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
  *

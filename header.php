@@ -2,7 +2,7 @@
 /**
  * The header for our theme
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
+ * This is the template that displays all of the <head> section
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
@@ -14,8 +14,6 @@ $caweb_x_ua_compatibility = get_option( 'ca_x_ua_compatibility', false ) ? '11' 
 $caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
 $caweb_apple_icon         = CAWEB_URI . '/images/system/apple-touch-icon-';
 ?>
-<!DOCTYPE html>
-<html class="no-js" lang="en">
 
 <head>
 
