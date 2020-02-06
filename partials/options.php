@@ -111,7 +111,7 @@ $ext_css = get_option( 'caweb_external_css', array() );
 
 // Custom CSS
 $custom_css = get_option( 'ca_custom_css', '' );
-update_site_option( 'dev', $ext_css );
+
 /*
  Custom JS
 */
