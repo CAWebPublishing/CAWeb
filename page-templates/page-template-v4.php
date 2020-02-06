@@ -20,6 +20,6 @@ $caweb_is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once('partials/page.php') ?>
+	<?php require_once( dirname(__DIR__) . 'partials/page.php') ?>
 </body>
 </html>

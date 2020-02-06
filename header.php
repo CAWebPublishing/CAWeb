@@ -16,7 +16,6 @@ $caweb_apple_icon         = CAWEB_URI . '/images/system/apple-touch-icon-';
 ?>
 
 <head>
-
 	<meta charset="utf-8">
 	<meta name="Author" content="State of California" />
 	<meta name="Description" content="State of California" />

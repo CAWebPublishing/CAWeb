@@ -1,4 +1,4 @@
-<?php get_template_part( 'partials/header' ); ?>
+<?php require_once( 'header.php' ); ?>
 
 	<div id="page-container">
 		<div id="et-main-area">

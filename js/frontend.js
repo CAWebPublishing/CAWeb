@@ -95,7 +95,7 @@ if("" !== args.caweb_multi_ga){
 
 })
 /* CAWeb Google Translate */
-if( args.ca_google_trans_enabled ){
+if( args.ca_google_trans_enabled || args.spanish ){
 	function googleTranslateElementInit() {
 		new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
 		  layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
