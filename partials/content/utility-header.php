@@ -42,11 +42,11 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 						$caweb_share  = substr( $caweb_opt, 10 );
 						$caweb_share  = str_replace( '_', '-', $caweb_share );
 						$caweb_class  = "utility-social-$caweb_share ca-gov-icon-$caweb_share";
-						$caweb_title  = ucwords( $caweb_share );
+						$caweb_title  = get_option( "${caweb_opt}_hover_text", 'Share via ' . ucwords( $caweb_share ) ) ;
 						$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_opt );
 						$caweb_target = get_option( "${caweb_opt}_new_window" ) ? 'target="_blank"' : ''
 						?>
-						<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="Share via <?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
+						<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
 							<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
 						</a>
 						<?php
