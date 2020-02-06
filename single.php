@@ -73,7 +73,7 @@ $caweb_is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 				</main>
 				<?php
-				if ( is_active_sidebar( 'sidebar-1' ) ) :
+				if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) ) :
 					?>
 					<aside id="non_divi_sidebar" class="col-lg-3">
 					<?php
