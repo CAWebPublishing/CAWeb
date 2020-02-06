@@ -508,10 +508,11 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				if ( get_option( $opt . '_footer' ) && ( $share_email || '' !== get_option( $opt ) ) ) {
 					$share         = substr( $opt, 10 );
 					$share         = str_replace( '_', '-', $share );
+					$title  = get_option( "${opt}_hover_text", 'Share via ' . ucwords( $share ) ) ;
 					$social_url    = $share_email ? $mailto : esc_url( get_option( $opt ) );
 					$social_target = sprintf( ' target="%1$s"', get_option( $opt . '_new_window', true ) ? '_blank' : '_self' );
 					$social_icon   = ! empty( $share ) ? "<span class=\"ca-gov-icon-$share\"></span>" : '';
-					$social_links .= sprintf( '<li><a href="%1$s" %2$s>%3$s<span class="sr-only">%4$s</span></a></li>', $social_url, $social_target, $social_icon, $share );
+					$social_links .= sprintf( '<li><a href="%1$s" title="%2$s"%3$s>%4$s<span class="sr-only">%5$s</span></a></li>', $social_url, $title, $social_target, $social_icon, $share );
 				}
 			}
 
