@@ -251,7 +251,7 @@ function caweb_wp_enqueue_scripts() {
 	/* Google Fonts */
 	wp_enqueue_style( 'cagov-google-font-style', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
 
-	/* If on the activation page */
+	/* If not on the activation page */
 	if ( 'wp-activate.php' !== $pagenow ) {
 
 		/* External CSS Styles */
@@ -279,7 +279,6 @@ function caweb_wp_enqueue_scripts() {
 
 	/* This removes Divi Google Font CSS */
 	wp_deregister_style( 'divi-fonts' );
-
 	if ( ! $vb_enabled ) {
 		/* Register Scripts */
 		wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );

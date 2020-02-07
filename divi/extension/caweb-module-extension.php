@@ -25,8 +25,8 @@ You should have received a copy of the GNU General Public License
 along with CAWeb Divi Module Extension. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
-define('CAWEB_EXT_DIR', __DIR__ . '/includes/' );
-define('CAWEB_EXT_URL', site_url( preg_replace('/(.*)\/wp-content/', '/wp-content', __DIR__ . '/' ) ) );
+define('CAWEB_EXT_DIR', __DIR__ . '/' );
+define('CAWEB_EXT_URL', site_url( preg_replace('/(.*)\/wp-content/', '/wp-content', CAWEB_EXT_DIR ) ) );
 
 if ( ! function_exists( 'caweb_initialize_extension' ) ):
 /**
