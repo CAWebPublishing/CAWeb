@@ -13,12 +13,13 @@ class CAWeb_Module_Fullwidth_Panel extends CAWEeb_Component {
 			var heading_text_color = "none" === this.props.panel_layout && "" !== this.props.heading_text_color ? this.props.heading_text_color : 'inherit';
 			var standout_arrow = 'standout highlight'=== this.props.panel_layout ? <span class="triangle"></span>: '';
 
-			if( "on" === this.props.show_button ){
+			if( "on" === this.props.show_button && ( undefined !== this.props.button_link && "" !== this.props.button_link)){
 				var option_padding = "right" === this.props.heading_align ? ' pl-2' : '';
 				var button_text = undefined !== this.props.button_text && "" !== this.props.button_text ? this.props.button_text : 'Read More';
+				var button_target = 'on' === this.props.button_target ? '_blank' : '_self';
 
 				display_options = <div className={"options" + option_padding}>
-				<a href={this.props.button_link} class="btn btn-default" target="_blank">{button_text}<span class="sr-only">{button_text} about {this.props.title}</span></a></div>;
+				<a href={this.props.button_link} class="btn btn-default" target={button_target}>{button_text}<span class="sr-only">{button_text} about {this.props.title}</span></a></div>;
 			}
 			
 			switch(this.props.panel_layout){
