@@ -453,18 +453,10 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-<<<<<<< HEAD
 			$icon = $this->process_icon($icon);
             $display_options = "";
 			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
             
-=======
-            $button_link = ! empty($button_link) ? esc_url($button_link) : '';
-            $icon = $this->process_icon($icon);
-            $display_options = "";
-			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
-
->>>>>>> 18aa935d99d2439584ea16782e2f5e6ef2d98fb3
             switch($panel_layout){
                 case "none":
                 case "standout":
