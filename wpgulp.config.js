@@ -37,7 +37,7 @@ module.exports = {
 		'assets/js/bootstrap/bootstrap.bundle.js',
 	],
 	frontendJS: [ // Common JS 
-		'assets/js/caweb/google.js',
+		'assets/js/caweb/google/*.js',
 		//'assets/js/caweb/geolocator.js', Geolocator not functioning
 		'assets/js/caweb/AutoTracker.js',
 		'assets/js/cagov/cagov.core.js',
