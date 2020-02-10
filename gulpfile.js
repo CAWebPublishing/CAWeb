@@ -343,7 +343,10 @@ async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 
-	return gulp.src(config.themeAdminCSS)
+	if( ! config.adminCSS.length )
+		return;
+
+	return gulp.src(config.adminCSS)
 		.pipe(
 			sass({
 				outputStyle: buildOutputStyle,
@@ -359,7 +362,10 @@ async function buildBootStrapStyles( min = false ){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 
-	return gulp.src(config.themeAdminBootStrapCSS)
+	if( ! config.adminBootStrapCSS.length )
+		return;
+
+	return gulp.src(config.adminBootStrapCSS)
 		.pipe(
 			sass({
 				outputStyle: buildOutputStyle,
@@ -380,8 +386,11 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 
 	colors.forEach(function(e){
 		var f = [versionDir + '/cagov.core.css', versionColorschemesDir + e];
-		f = f.concat( config.commonCSSFiles );
+		f = f.concat( config.frontendCSS );
 		f = f.concat( versionDir + '/custom.css' );
+
+		if( ! f.length )
+			return;
 
 		var fileName = 'cagov-v' + ver + '-' +
 			( minified ? e.replace('.css', '.min.css') : e);
@@ -402,7 +411,10 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 async function buildAdminJS( min = false){
 	var minified = min ? '.min' : '';
 
-	let js = gulp.src(config.themeAdminJS)
+	if( ! config.adminJS.length )
+		return;
+
+	let js = gulp.src(config.adminJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.js')) // compiled file
 		.pipe( notify({ title: '✅  CAWeb Admin JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) )
@@ -418,7 +430,10 @@ async function buildAdminJS( min = false){
 async function buildBootStrapJS( min = false ){
 	var minified = min ? '.min' : '';
 
-	let js = gulp.src(config.themeAdminBootStrapJS)
+	if( ! config.adminBootStrapJS.length )
+		return;
+
+	let js = gulp.src(config.adminBootStrapJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('bootstrap' + minified + '.js')) // compiled file
 		.pipe( notify({ title: '✅  CAWeb Admin Bootstrap JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) )
@@ -434,7 +449,10 @@ async function buildBootStrapJS( min = false ){
 async function buildFrontEndJS( min = false){
 	var minified = min ? '.min' : '';
 
-	let js = gulp.src(config.commonJSFiles)
+	if( ! config.frontendJS.length )
+		return;
+
+	let js = gulp.src(config.frontendJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('frontend' + minified + '.js')) // compiled file
 		.pipe( notify({ title: '✅  CAWeb Front End JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
@@ -448,6 +466,9 @@ async function buildFrontEndJS( min = false){
 
 async function buildThemeCustomizerJS( min = false){
 	var minified = min ? '.min' : '';
+
+	if( ! config.themeCustomizer.length )
+		return;
 
 	// Theme Customizer
 	let js = gulp.src(config.themeCustomizer)
