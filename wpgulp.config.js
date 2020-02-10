@@ -16,27 +16,27 @@ module.exports = {
 	SCSSAssetDir: 'assets/scss/', // CAWeb CSS 
 	themeCSSAssetDir: 'assets/css/caweb/', // CAWeb CSS 
 	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
-	commonCSSFiles: [ 
+	frontendCSS: [ // Frontend CSS
 		'assets/css/cagov/cagov.font-only.css', 
 		'assets/scss/frontend.scss',
 	], 
-	themeAdminCSS:[ // WP Backend Admin CSS
+	adminCSS:[ // WP Backend Admin CSS
 		'assets/scss/admin.scss',
 		'assets/css/cagov/cagov.font-only.css',
 	],
-	themeAdminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
+	adminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
 		'assets/scss/bootstrap.scss'
 	],
-	themeAdminJS: [ // WP Backend Admin JS
+	adminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/options/*.js', 
 		'assets/js/caweb/nav-menu.js',
 		'assets/js/caweb/admin.js',
 	], 
-	themeAdminBootStrapJS: [ // WP Backend Admin Bootstrap JS
+	adminBootStrapJS: [ // WP Backend Admin Bootstrap JS
 		'assets/js/bootstrap/bootstrap.bundle.js',
 	],
-	commonJSFiles: [ // Common JS 
+	frontendJS: [ // Common JS 
 		'assets/js/caweb/google.js',
 		//'assets/js/caweb/geolocator.js', Geolocator not functioning
 		'assets/js/caweb/AutoTracker.js',
