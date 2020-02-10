@@ -241,7 +241,7 @@ function caweb_wp_enqueue_scripts() {
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
 	$core_css_file    = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
-	$frontend_js_file = caweb_get_min_file( '/js/frontend.js', 'js' );
+	$frontend_js_file = caweb_get_min_file( "/js/frontend-v$ver.js", 'js' );
 
 	/* CAWeb Core CSS */
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
