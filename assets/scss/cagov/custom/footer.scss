@@ -1,0 +1,25 @@
+/* Footer */
+footer .container .group{
+	display: flex;
+}
+.global-footer ul > li{
+   padding-left: 0;
+
+}
+#footer .quarter {
+   flex-grow: 2;
+   width: auto;
+}
+
+#footer .three-quarters {
+   flex-grow: 8;
+   width: auto;
+}
+
+@media (max-width: 767px){
+ footer .container{
+   width: 100% !important;
+   margin-left: 0;
+   margin-right: 0;
+ }
+}
