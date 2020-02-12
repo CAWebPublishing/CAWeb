@@ -17,11 +17,6 @@ article.type-project .entry-content{
 /**
 * Page, Builder & Title Styles
 */
-.page-title{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -30,7 +25,7 @@ article.type-project .entry-content{
      max-width: 1280px;
      margin: 0 auto;
 }
-.divi_builder .page-title, .non_divi_builder .main-content,
+.non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
 .et_pb_module.et_pb_fullwidth_menu .et_pb_row{
@@ -38,7 +33,6 @@ article.type-project .entry-content{
   padding-right: 15px;
 }
 @media (min-width: 768px){
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content >  .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -47,7 +41,6 @@ article.type-project .entry-content{
 }
 }
 @media (min-width: 992px){
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content >  .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -56,7 +49,6 @@ article.type-project .entry-content{
 }
 }
 @media (min-width: 1200px){
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content  .et_builder_inner_content > .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -65,7 +57,6 @@ article.type-project .entry-content{
 }
 }
 @media (min-width: 1280px){
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content>.et_pb_section>.et_pb_row, 
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -74,7 +65,6 @@ article.type-project .entry-content{
   }
 }
 @media (max-width: 767px){
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content  .et_builder_inner_content >  .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -86,10 +76,6 @@ article.type-project .entry-content{
 #main-content .entry-content  .et_builder_inner_content >  .et_pb_section > .et_pb_row
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row{
     padding: 0 15px;
-  }
-
-  .divi_builder .page-title{
-    padding-bottom: 30px !important;
   }
 }
 /* Temporary remove the sub nav arrow until the function in the core script is working */

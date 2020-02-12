@@ -387,7 +387,7 @@ async function buildVersionStyles( min = false, ver = config.templateVer){
 	colors.forEach(function(e){
 		var f = [versionDir + '/cagov.core.css', versionColorschemesDir + e];
 		f = f.concat( config.frontendCSS );
-		f = f.concat( versionDir + '/custom.css' );
+		f = f.concat( config.SCSSAssetDir + 'cagov/version' + ver + '/custom.scss' );
 
 		if( ! f.length )
 			return;
