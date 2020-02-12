@@ -279,29 +279,18 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$nav_column_count = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : 0;
 					
 					/* Create Link */
-					if( 5 <= $args->version ){
-						$nav_item .= sprintf(
-							'<li class="nav-item %1$s%2$s %3$s"%4$s title="%5$s">',
-							implode( ' ', $item->classes ),
-							( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
-							$nav_column_count,
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$item->attr_title
-						);	
-					}else{
-						$nav_item .= sprintf(
-							'<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
-							implode( ' ', $item->classes ),
-							( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$item->attr_title,
-							$item->url,
-							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
-							$icon,
-							$item->title,
-							$nav_column_count
-						);	
-					}
+					$nav_item .= sprintf(
+						'<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
+						implode( ' ', $item->classes ),
+						( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
+						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
+						$item->attr_title,
+						$item->url,
+						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+						$icon,
+						$item->title,
+						$nav_column_count
+					);
 
 					/* If there are child links create the sub-nav */
 					if ( 0 < $child_count && 'singlelevel' !== $args->style ) {
@@ -312,13 +301,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							$nav_img_size = $item_meta['_caweb_menu_image_size'][0];
 							switch( $args->version ){
 								case 5.5:
-									$nav_item .= sprintf(
-										'<div class="has-sub-btn">
-											<button class="first-level-btn nav-header has-sub" role="tab" aria-expanded="false">
-											%1$s
-											%2$s
-											</button>
-										</div>', $icon, $item->title);
 								case 5:
 									$sub_img_class = sprintf(
 										'%1$s %2$s',
