@@ -27557,6 +27557,11 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   outline: #2ea3f2 solid 2px !important;
 }
 
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+  overflow-x: auto;
+}
+
 /* Thickbox Styles */
 #TB_closeWindow #TB_closeWindowButton .tb-close-icon {
   display: none;
@@ -27642,17 +27647,17 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   outline: #2ea3f2 solid 2px !important;
 }
 
+/* HIDE THE 'Enable Visual Builder' Button*/
+#wp-admin-bar-et-use-visual-builder {
+  display: none !important;
+}
+
 #page-container {
   padding-top: 0px;
 }
 
 .et_section_regular {
   padding: 0 !important;
-}
-
-.et_pb_ca_panel .panel-body ul, .et_pb_ca_panel .panel-body ol {
-  padding-bottom: 0px;
-  margin-bottom: 0px;
 }
 
 p {
@@ -27663,47 +27668,52 @@ p {
   margin-bottom: 30px;
 }
 
-/* HIDE THE 'Enable Visual Builder' Button*/
-#wp-admin-bar-et-use-visual-builder {
-  display: none !important;
+/* WordPress Specific Overrides */
+#wpadminbar {
+  position: fixed;
 }
 
-header {
-  z-index: 15 !important;
+.non_divi_builder.title_not_displayed .main-primary {
+  padding-top: 25px;
 }
 
-#main-content {
-  background-color: #fff !important;
-  overflow: hidden;
+.non_divi_builder .main-primary {
+  padding-bottom: 25px;
 }
 
-ol.breadcrumb {
-  text-transform: capitalize;
-  margin-bottom: 0;
+#comment-wrap .comment-body {
+  border: 1px dotted transparent;
 }
 
-/* Allow anchor links in global footers to maintain the normal blue color */
-@media (max-width: 768px) {
-  footer .copyright span {
-    float: none !important;
-  }
-  footer .copyright p {
-    display: block !important;
-  }
+#comment-wrap .comment-body:before {
+  margin: unset;
+  height: unset;
 }
 
-footer span a {
-  color: #046B99 !important;
-  background-image: linear-gradient(to right, #046B99 50%, transparent 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 1px;
-  background-position: center bottom 4%;
-  background-origin: padding-box;
-  text-decoration: none !important;
+.single .post {
+  padding-bottom: 0;
 }
 
-footer span a:hover {
-  color: #02374e !important;
+.single.non_divi_builder.sidebar_displayed .main-content .main-primary,
+.archive.sidebar_displayed .main-content .main-primary {
+  width: 75%;
+  float: left;
+}
+
+#non_divi_sidebar {
+  float: left;
+  width: 25%;
+}
+
+#non_divi_sidebar #sidebar {
+  padding: 28px 0px;
+  width: 100%;
+}
+
+.archive .main-content article {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .archive.author article.has-post-thumbnail .auth-link,
@@ -27717,30 +27727,6 @@ footer span a:hover {
   float: left;
 }
 
-.non_divi_builder.title_not_displayed .main-primary {
-  padding-top: 25px;
-}
-
-.non_divi_builder .main-primary {
-  padding-bottom: 25px;
-}
-
-.single.non_divi_builder.sidebar_displayed .main-content .main-primary,
-.archive.sidebar_displayed .main-content .main-primary {
-  width: 75%;
-  float: left;
-}
-
-.single .post {
-  padding-bottom: 0;
-}
-
-.archive .main-content article {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 30px;
-}
-
 @media (max-width: 768px) {
   .single.non_divi_builder .main-content .main-primary,
   .archive .main-content .main-primary {
@@ -27749,68 +27735,6 @@ footer span a:hover {
   #non_divi_sidebar {
     width: 75% !important;
   }
-}
-
-.pagination {
-  display: block;
-}
-
-/* Remove extra padding when ul is nested inside another ul */
-ul ul {
-  padding-bottom: 0px;
-}
-
-ol {
-  margin-left: 16px;
-}
-
-ol {
-  list-style-position: outside !important;
-}
-
-body.page-template-searchpage.logged-in .gssb_c,
-body.v4.logged-in .gssb_c {
-  margin-top: 35px;
-}
-
-.list-standout, .list-understated, .list-overstated, .accordion-list {
-  list-style-type: none !important;
-  padding: 0 !important;
-}
-
-/* Makes TablePress Tables Responsive */
-.dataTables_wrapper {
-  overflow-x: auto;
-}
-
-/* Allows for the Navigation Top Level Links to wrap */
-.first-level-link {
-  white-space: normal;
-}
-
-/* WordPress Specific Overrides */
-#wpadminbar {
-  position: fixed;
-}
-
-/* Non Divi Widget Style */
-#non_divi_sidebar {
-  float: left;
-  width: 25%;
-}
-
-#non_divi_sidebar #sidebar {
-  padding: 28px 0px;
-  width: 100%;
-}
-
-#comment-wrap .comment-body {
-  border: 1px dotted transparent;
-}
-
-#comment-wrap .comment-body:before {
-  margin: unset;
-  height: unset;
 }
 
 /* Print Formatting */
@@ -27891,8 +27815,66 @@ body {
   background-color: #fff;
 }
 
-#main-content > .section {
-  padding-top: 0;
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.list-standout,
+.list-understated,
+.list-overstated,
+.accordion-list {
+  list-style-type: none !important;
+  padding: 0 !important;
+}
+
+.list-standout {
+  padding-left: 1.5em !important;
+}
+
+.pagination {
+  display: block;
+}
+
+body.page-template-searchpage.logged-in .gssb_c,
+body.v4.logged-in .gssb_c {
+  margin-top: 35px;
+}
+
+/* Remove extra padding when ul is nested inside another ul */
+ul ul {
+  padding-bottom: 0px;
+}
+
+ol {
+  margin-left: 16px;
+}
+
+ol {
+  list-style-position: outside !important;
+}
+
+header {
+  z-index: 15 !important;
+}
+
+ol.breadcrumb {
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+
+/**
+* Page & Builder Width Styles
+* 
+* Non Divi Built Pages ( WP Vanilla Pages )
+* Divi Built Standard Section Rows
+* Divi Built Standard Section Rows when using Visual Builder
+* Divi Fullwidth Menu Module Rows
+*/
+#main-content {
+  background-color: #fff !important;
+  overflow: hidden;
 }
 
 /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
@@ -27900,22 +27882,10 @@ body:not(.sticky_nav) #main-content.main-content {
   width: 100%;
 }
 
-/*
-	 Divi Project Styles
-	*/
-article.type-project .entry-content {
+#main-content > .section {
   padding-top: 0;
 }
 
-/**
-   * Page, Builder & Title Styles
-   */
-.page-title {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-.page-title,
 .non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27925,7 +27895,7 @@ article.type-project .entry-content {
   margin: 0 auto;
 }
 
-.divi_builder .page-title, .non_divi_builder .main-content,
+.non_divi_builder .main-content,
 #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
 .et_pb_module.et_pb_fullwidth_menu .et_pb_row {
@@ -27933,8 +27903,15 @@ article.type-project .entry-content {
   padding-right: 15px;
 }
 
+/**
+* Page & Builder Breakpoint Styles
+* 
+* Non Divi Built Pages ( WP Vanilla Pages )
+* Divi Built Standard Section Rows
+* Divi Built Standard Section Rows when using Visual Builder
+* Divi Fullwidth Menu Module Rows
+*/
 @media (min-width: 768px) {
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27944,7 +27921,6 @@ article.type-project .entry-content {
 }
 
 @media (min-width: 992px) {
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27954,7 +27930,6 @@ article.type-project .entry-content {
 }
 
 @media (min-width: 1200px) {
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27964,7 +27939,6 @@ article.type-project .entry-content {
 }
 
 @media (min-width: 1280px) {
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27974,7 +27948,6 @@ article.type-project .entry-content {
 }
 
 @media (max-width: 767px) {
-  .page-title,
   .non_divi_builder .main-content,
   #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
   #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
@@ -27987,14 +27960,54 @@ article.type-project .entry-content {
 #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row {
     padding: 0 15px;
   }
-  .divi_builder .page-title {
-    padding-bottom: 30px !important;
+}
+
+/* Page Title */
+.page-title {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.divi_builder .page-title {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    max-width: 750px !important;
   }
 }
 
-/* Temporary remove the sub nav arrow until the function in the core script is working */
-.nav-arrow-down {
-  visibility: hidden;
+@media (min-width: 992px) {
+  .page-title {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-title {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-title {
+    max-width: 1280px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-title {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .divi_builder .page-title {
+    padding-bottom: 30px !important;
+  }
 }
 
 /* Utility Header */
@@ -28009,7 +28022,25 @@ article.type-project .entry-content {
   }
 }
 
-/* End of Utility Header */
+/* Location Bar Style */
+.location-settings #locationZipCode::-webkit-inner-spin-button,
+.location-settings #locationZipCode::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.location-settings button.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  opacity: 0.8;
+  font-size: 2.5em;
+}
+
+.location-settings button.close:focus {
+  color: #FDB81E !important;
+}
+
 /* Google Translate */
 #google_translate_element.standard-translate {
   width: auto;
@@ -28033,7 +28064,12 @@ article.type-project .entry-content {
   color: #fee09c;
 }
 
-/* End of Google Translate */
+.first-level-link {
+  height: calc(100% - 5px);
+  /* Allows for the Navigation Top Level Links to wrap */
+  white-space: normal;
+}
+
 #nav_list {
   width: auto;
 }
@@ -28051,18 +28087,69 @@ article.type-project .entry-content {
   float: left;
 }
 
-/* Full Sub-Nav */
-.main-navigation.megadropdown .unit1 .second-level-link {
-  height: 65px;
-}
-
 .unit2, .unit3, .unit3 .nav-media .media {
   height: 130px;
 }
 
+@media (max-width: 767px) {
+  #nav_list {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Main Navigation fix, increases height when links main links wrap */
+  .main-navigation {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-left: 320px;
+    max-height: 300px !important;
+  }
+  .top-level-nav .nav-item {
+    padding: 0 6px;
+  }
+}
+
+@media (min-width: 992px) {
+  .top-level-nav .nav-item {
+    padding: 0 8px;
+  }
+}
+
+/* Dropdown Navigation Styles */
+.main-navigation.dropdown .sub-nav ul li {
+  width: 100%;
+  height: auto;
+}
+
+.main-navigation.dropdown .sub-nav ul li img {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .main-navigation.dropdown .sub-nav {
+    max-width: 250px;
+    left: auto;
+    /* IE does not recognize initial */
+    left: initial;
+    right: auto;
+    /* IE does not recognize initial */
+    right: initial;
+  }
+}
+
 /* MegaDropdown Navigation Styles */
+.main-navigation.megadropdown .unit1 .second-level-link {
+  height: 65px;
+}
+
 .full .second-level-nav .unit1 {
   width: 25%;
+}
+
+.half .second-level-nav .unit3 .nav-media .media .unit2 {
+  width: 100%;
 }
 
 .full .second-level-nav .unit2,
@@ -28078,57 +28165,7 @@ article.type-project .entry-content {
   width: 33.3%;
 }
 
-.half .second-level-nav .unit3 .nav-media .media .unit2 {
-  width: 100%;
-}
-
-/* Dropdown Navigation Styles */
-@media (min-width: 768px) {
-  /* Main Navigation fix, increases height when links main links wrap */
-  .main-navigation {
-    display: flex;
-    flex-direction: row-reverse;
-    padding-left: 320px;
-    max-height: 300px !important;
-  }
-  .main-navigation.dropdown .sub-nav {
-    max-width: 250px;
-    left: auto;
-    /* IE does not recognize initial */
-    left: initial;
-    right: auto;
-    /* IE does not recognize initial */
-    right: initial;
-  }
-}
-
-/* Branding & Navigation */
-.main-navigation.dropdown .sub-nav ul li {
-  width: 100%;
-  height: auto;
-}
-
-.main-navigation.dropdown .sub-nav ul li img {
-  display: none;
-}
-
-.first-level-link {
-  height: calc(100% - 5px);
-}
-
-@media (min-width: 768px) {
-  .top-level-nav .nav-item {
-    padding: 0 6px;
-  }
-}
-
-@media (min-width: 992px) {
-  .top-level-nav .nav-item {
-    padding: 0 8px;
-  }
-}
-
-/*Mega Nav Columns*/
+/* MegaDropdown Columns*/
 .nav-item.two-columns .three-quarters .second-level-nav .unit1,
 .nav-item.two-columns .three-quarters .second-level-nav .unit2,
 .nav-item.two-columns .three-quarters .second-level-nav .unit3,
@@ -28165,16 +28202,64 @@ article.type-project .entry-content {
   width: 25%;
 }
 
-/* End of Branding & Navigation */
-/* Header Slideshow Banner */
+@media (max-width: 767px) {
+  .second-level-nav li {
+    float: none;
+    width: 100% !important;
+  }
+  .second-level-nav .unit2 .link-description,
+  .second-level-nav .unit3 .link-description {
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .sub-nav .three-quarters {
+    left: 0;
+    width: 50%;
+  }
+  .three-quarters .second-level-nav li.unit1 {
+    width: 100%;
+  }
+  .three-quarters .second-level-nav li.unit2,
+  .three-quarters .second-level-nav li.unit3 {
+    width: 100%;
+  }
+}
+
 /* position the owl dots */
-.header-slideshow-banner .banner-pager, .header-slideshow-banner .banner-play-pause {
+.header-slideshow-banner .banner-pager,
+.header-slideshow-banner .banner-play-pause {
   top: inherit;
   bottom: 140px;
   z-index: 6;
 }
 
+.et_pb_ca_section_carousel .container {
+  padding-top: 10px !important;
+}
+
+.et_pb_ca_fullwidth_section_carousel .container {
+  padding-top: 10px !important;
+}
+
 /* Footer */
+footer span a {
+  color: #046B99 !important;
+  background-image: linear-gradient(to right, #046B99 50%, transparent 50%);
+  background-repeat: repeat-x;
+  background-size: 2px 1px;
+  background-position: center bottom 4%;
+  background-origin: padding-box;
+  text-decoration: none !important;
+}
+
+footer span a:hover {
+  color: #02374e !important;
+}
+
 footer .container .group {
   display: flex;
 }
@@ -28193,96 +28278,17 @@ footer .container .group {
   width: auto;
 }
 
-@media (max-width: 767px) {
+/* Allow anchor links in global footers to maintain the normal blue color */
+@media (max-width: 768px) {
   footer .container {
     width: 100% !important;
     margin-left: 0;
     margin-right: 0;
   }
-}
-
-/* End of Footer */
-@media (max-width: 991px) and (min-width: 768px) {
-  .sub-nav .three-quarters {
-    left: 0;
-    width: 50%;
+  footer .copyright span {
+    float: none !important;
   }
-  .three-quarters .second-level-nav li.unit1 {
-    width: 100%;
+  footer .copyright p {
+    display: block !important;
   }
-  .three-quarters .second-level-nav li.unit2,
-  .three-quarters .second-level-nav li.unit3 {
-    width: 100%;
-  }
-}
-
-/* End of Media Query Styles */
-/* Mobile Control */
-@media (max-width: 767px) {
-  #nav_list {
-    width: 100%;
-    padding-left: 0;
-  }
-  .second-level-nav li {
-    float: none;
-    width: 100% !important;
-  }
-  .second-level-nav .unit2 .link-description,
-  .second-level-nav .unit3 .link-description {
-    width: auto;
-    height: auto;
-    clip: auto;
-  }
-  .cagov-logo {
-    position: static;
-    position: initial;
-    float: left;
-    text-align: left;
-    width: 80%;
-  }
-  .cagov-logo img {
-    max-width: 100%;
-    max-height: 90px;
-    margin-bottom: 8px;
-  }
-}
-
-/* End of Mobile Control Styles */
-/* Section Carousel Version 5 */
-.et_pb_ca_section_carousel .container {
-  padding-top: 10px !important;
-}
-
-/* Fullwidth Section Carousel Version 5 */
-.et_pb_ca_fullwidth_section_carousel .container {
-  padding-top: 10px !important;
-}
-
-.list-standout {
-  padding-left: 1.5em !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: inherit;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* Location Bar Style */
-.location-settings #locationZipCode::-webkit-inner-spin-button,
-.location-settings #locationZipCode::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.location-settings button.close {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  opacity: 0.8;
-  font-size: 2.5em;
-}
-
-.location-settings button.close:focus {
-  color: #FDB81E !important;
 }
