@@ -3,19 +3,18 @@
 @import "divi/blurb";
 @import "divi/toggle";
 
+/* HIDE THE 'Enable Visual Builder' Button*/
+#wp-admin-bar-et-use-visual-builder{
+	display: none !important;
+}
 #page-container{
 	padding-top: 0px;
 }
-  
+
 .et_section_regular{
 	padding: 0 !important;
 }
-  
-.et_pb_ca_panel .panel-body ul, .et_pb_ca_panel .panel-body ol{
-	padding-bottom: 0px;
-	margin-bottom: 0px;
-}
-  
+
 p{
 	padding-bottom: 0;
 }
@@ -23,4 +22,3 @@ p{
 .search-results .et_pb_post{
 	margin-bottom: 30px;
 }
-  
