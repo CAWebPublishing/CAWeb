@@ -8,21 +8,25 @@ h1, h2, h3, h4, h5, h6{
 	margin-bottom: 0;
 }
 
+.list-standout, 
+.list-understated, 
+.list-overstated, 
+.accordion-list{
+	list-style-type: none !important;
+	padding: 0 !important;
+}
+
 .list-standout{
 	padding-left: 1.5em !important;
 }
 
-@media (max-width: 767px) {
-	.cagov-logo {
-		position:static;
-		position: initial;
-		float: left;
-		text-align: left;
-		width: 80%;
-	}
-	.cagov-logo img{
-		max-width : 100% ;
-		max-height: 90px;
-		margin-bottom: 8px;
-	}
+/* Remove extra padding when ul is nested inside another ul */
+ul ul{
+	padding-bottom: 0px;
+}
+ol{
+	margin-left: 16px;
+}
+ol{
+  list-style-position: outside !important;
 }

@@ -13,27 +13,7 @@ ol.breadcrumb{
     text-transform: capitalize;
     margin-bottom: 0;
 }
-/* Allow anchor links in global footers to maintain the normal blue color */
-@media(max-width: 768px){
-    footer .copyright span{
-        float: none !important;
-    }
-    footer .copyright p{
-        display: block !important;
-    }
-}
-footer span a{
-    color: #046B99 !important;
-    background-image: linear-gradient(to right, #046B99 50%, transparent 50%);
-    background-repeat: repeat-x;
-    background-size: 2px 1px;
-    background-position: center bottom 4%;
-    background-origin: padding-box;
-    text-decoration: none !important;
-}
-footer span a:hover{
-    color: #02374e !important;
-}
+
 .archive.author article.has-post-thumbnail .auth-link,
 .archive.category article.has-post-thumbnail .cat-link,
 .archive.date article.has-post-thumbnail .date-link,
@@ -76,34 +56,12 @@ footer span a:hover{
 .pagination{
     display: block;
 }
-/* Remove extra padding when ul is nested inside another ul */
-ul ul{
-	padding-bottom: 0px;
-}
-ol{
-	margin-left: 16px;
-}
-ol{
-  list-style-position: outside !important;
-}
+
 body.page-template-searchpage.logged-in .gssb_c,
 body.v4.logged-in .gssb_c{
 	margin-top: 35px;
 }
-.list-standout, .list-understated, .list-overstated, .accordion-list{
-	list-style-type: none !important;
-	padding: 0 !important;
-}
 
-/* Makes TablePress Tables Responsive */
-.dataTables_wrapper {
-    overflow-x: auto;
-}
-
-/* Allows for the Navigation Top Level Links to wrap */
-.first-level-link{
-  	white-space: normal;
-}
 
 /* WordPress Specific Overrides */
 #wpadminbar {
