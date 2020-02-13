@@ -20,6 +20,15 @@ h1, h2, h3, h4, h5, h6{
 	padding-left: 1.5em !important;
 }
 
+.pagination{
+	display: block;
+}
+
+body.page-template-searchpage.logged-in .gssb_c,
+body.v4.logged-in .gssb_c{
+	margin-top: 35px;
+}
+
 /* Remove extra padding when ul is nested inside another ul */
 ul ul{
 	padding-bottom: 0px;
@@ -29,4 +38,13 @@ ol{
 }
 ol{
   list-style-position: outside !important;
+}
+
+header {
+    z-index: 15 !important;
+}
+
+ol.breadcrumb{
+    text-transform: capitalize;
+    margin-bottom: 0;
 }
