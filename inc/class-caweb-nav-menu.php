@@ -274,6 +274,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 					/* Get column count */
 					$nav_column_count = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : 0;
+					
 					/* Create Link */
 					$nav_item .= sprintf(
 						'<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
@@ -295,49 +296,51 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							$nav_img      = $item_meta['_caweb_menu_image'][0];
 							$nav_img_side = $item_meta['_caweb_menu_image_side'][0];
 							$nav_img_size = $item_meta['_caweb_menu_image_size'][0];
-
-							if ( 4.5 <= $args->version ) {
-								$sub_img_class = sprintf(
-									'%1$s %2$s',
-									( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
-									( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
-								);
-
-								$sub_img_div = sprintf(
-									'<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
-									$nav_img,
-									$nav_img_size,
-									$nav_img_side
-								);
-
-								$nav_item .= sprintf(
-									'<div class="sub-nav">
-                                <div class="%1$s">%2$s</div>%3$s</div></li>',
-									( ! empty( $nav_img ) ? $sub_img_class : 'full' ),
-									$this->createSubNavMenu( $child_links, $args ),
-									( ! empty( $nav_img ) ? $sub_img_div : '' )
-								);
-							} else {
-								$sub_img_class = sprintf(
-									'with-image-%1$s-%2$s',
-									( 'quarter' === $nav_img_size ? 'sm' : 'md' ),
-									$nav_img_side
-								);
-
-								$sub_img_div = sprintf( '<div class="sub-nav-decoration" style="background: url(%1$s); "></div>', $nav_img );
-
-								$nav_item .=
-								sprintf(
-									'<div class="sub-nav %2$s">%1$s%3$s</div></li>',
-									$this->createSubNavMenu( $child_links, $args ),
-									( ! empty( $nav_img ) ? $sub_img_class : 'empty' ),
-									( ! empty( $nav_img ) ? $sub_img_div : '' )
-								);
+							switch( $args->version ){
+								case 5.5:
+								case 5:
+									$sub_img_class = sprintf(
+										'%1$s %2$s',
+										( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
+										( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
+									);
+	
+									$sub_img_div = sprintf(
+										'<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
+										$nav_img,
+										$nav_img_size,
+										$nav_img_side
+									);
+	
+									$nav_item .= sprintf(
+										'<div class="sub-nav">
+									<div class="%1$s">%2$s</div>%3$s</div></li>',
+										( ! empty( $nav_img ) ? $sub_img_class : 'full' ),
+										$this->createSubNavMenu( $child_links, $args ),
+										( ! empty( $nav_img ) ? $sub_img_div : '' )
+									);
+									break;
+								case 4:
+									$sub_img_class = sprintf(
+										'with-image-%1$s-%2$s',
+										( 'quarter' === $nav_img_size ? 'sm' : 'md' ),
+										$nav_img_side
+									);
+	
+									$sub_img_div = sprintf( '<div class="sub-nav-decoration" style="background: url(%1$s); "></div>', $nav_img );
+	
+									$nav_item .=
+									sprintf(
+										'<div class="sub-nav %2$s">%1$s%3$s</div></li>',
+										$this->createSubNavMenu( $child_links, $args ),
+										( ! empty( $nav_img ) ? $sub_img_class : 'empty' ),
+										( ! empty( $nav_img ) ? $sub_img_div : '' )
+									);
+									break;
 							}
 						} else {
 							$nav_item .= sprintf(
-								'<div class="empty sub-nav">
-                                                    <div>%1$s</div></li>',
+								'<div class="empty sub-nav"><div>%1$s</div></li>',
 								$this->createSubNavMenu( $child_links, $args )
 							);
 						}
@@ -379,7 +382,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$li_unit = 'megadropdown' === get_option( 'ca_default_navigation_menu', 'megadropdown' ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
 
 				/* if version 5 */
-				if ( 5.0 <= $args->version ) {
+				if ( 5 <= $args->version ) {
 					if ( 'unit3' !== $li_unit ) {
 						/* Create Link */
 						$sub_nav .= sprintf(

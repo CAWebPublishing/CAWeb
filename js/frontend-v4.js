@@ -1,111 +1,3 @@
-// Google Analytics
-   var _gaq = _gaq || [];
-_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
-_gaq.push(['_gat._anonymizeIp']);
-_gaq.push(['_setDomainName', '.ca.gov']);
-_gaq.push(['_trackPageview']);
-
-_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
-_gaq.push(['b._setDomainName', '.ca.gov']);
-_gaq.push(['b._trackPageview']);
-
-if("" !== args.caweb_multi_ga){
-  _gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
-  _gaq.push(['b._setDomainName', '.ca.gov']);
-  _gaq.push(['b._trackPageview']);
-}
-(function() {
-  var ga = document.createElement('script');
-  ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
-    'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(ga, s);
-})();
-
-// Google Custom Search 
-
-	(function() {
-
-		window.__gcse = {
-      callback: myCallback
-    };
-
-    function myCallback() {
-			var $searchContainer = $("#head-search");
-			var $searchText = $searchContainer.find(".gsc-input");
-			var $resultsContainer = $('.search-results-container');
-			var $body = $("body");
-
-      if( 4 == args.ca_site_version )
-			$searchText.attr("placeholder", "Search");
-			
-			// search icon is added before search button (search button is set to opacity 0 in css)
-			$("input.gsc-search-button").before("<span class='ca-gov-icon-search search-icon' aria-hidden='true'></span>");
-      
-			 $searchText.on("click", function() {
-					addSearchResults();
-					$searchContainer.addClass("search-freeze-width");
-			});
-
-			 $searchText.blur(function() {
-					$searchContainer.removeClass("search-freeze-width");
-
-				});
-
-				// Close search when close icon is clicked
-				$('div.gsc-clear-button').on('click', function() {	removeSearchResults();   });
-            
-				// Helpers
-				function addSearchResults() {
-					$body.addClass("active-search");
-					$searchContainer.addClass('active');
-					$resultsContainer.addClass('visible');
-					// close the the menu when we are search
-					$('#navigation').addClass('mobile-closed');
-					// fire a scroll event to help update headers if need be
-					$(window).scroll();
-
-					$.event.trigger('cagov.searchresults.show');
-				}
-
-				function removeSearchResults() {
-							$body.removeClass("active-search");
-							$searchContainer.removeClass('active');
-							$resultsContainer.removeClass('visible');
-
-
-							// fire a scroll event to help update headers if need be
-							$(window).scroll();
-
-							$.event.trigger('cagov.searchresults.hide');
-				}
-
-    }
-
-      if("" !== args.ca_google_search_id){
-        var cx = args.ca_google_search_id;
-        var gcse = document.createElement('script');
-        gcse.async = true;
-        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script');
-        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
-      }
-
-  })();
-  /* Google Translate */
-if( args.ca_google_trans_enabled ){
-  function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
-        layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
-  }
-  var gtrans = document.createElement('script');
-  gtrans.async = true;
-  gtrans.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-  var s = document.getElementsByTagName('script');
-  s[s.length - 1].parentNode.insertBefore(gtrans, s[s.length - 1]);
-}
-
 /*
 				    .ooooo.          ooo. .oo.     .ooooo.    oooo d8b
 				   d88" `88b         `888P"Y88b   d88" `88b   `888""8P
@@ -19817,6 +19709,92 @@ $(document).ready(function () {
     $(".settings-links button[data-target='#siteSettings']").removeAttr("role aria-selected");
     $(".site-settings button.close").removeAttr("role aria-selected");
 });
+ jQuery(document).ready(function() {
+	$('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
+	
+	/* Fixed padding for wp-activate.php page when Navigation is fixed */
+	if( $('header.fixed + #signup-content').length ){
+		$('header.fixed + #signup-content').css('padding-top', $('header.fixed').outerHeight() );
+	}
+
+	// run test on initial page load
+	checkSize();
+
+	// run test on resize of the window
+	$(window).resize(checkSize);
+
+	// This fixes anchor position when smooth scrolling
+	window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
+		var $window_width=$(window).width();
+		$("header").hasClass("fixed")&&$window_width>768?$menu_offset=$("#header").outerHeight()-1:$menu_offset=-1,
+		$("#wpadminbar").length&&$window_width>600&&($menu_offset+=$("#wpadminbar").outerHeight()),
+		$scroll_position=$top_section?0:$target.offset().top-$menu_offset,
+		void 0===easing&&(easing="swing");
+		var $skip_to_content="skip-to-content"===$($target).attr('id'); 
+		if($scroll_position<220&&!$skip_to_content){ // scrollDistanceToMakeCompactHeader from cagov.core.js
+						$scroll_position-=36; // Height difference between normal and compact header
+		}else if($skip_to_content){
+			$scroll_position=0;
+		}
+		$("html, body").animate({scrollTop:$scroll_position},speed,easing);
+	}
+
+	
+ });
+
+function rgb2hex(rgb){
+	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+	return "#" +
+	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+}
+
+function stripeIframeAttributes(frame){
+	$(frame).removeAttr('frameborder');
+	$(frame).removeAttr('scrolling');
+	$(frame).removeAttr('allowtransparency');
+	$(frame).removeAttr('allowfullscreen');
+}
+
+
+ function checkSize(){
+	var utility_container = $('.global-header .utility-header .container');
+	var translate = utility_container.find('#google_translate_element')[0];
+	var settings = utility_container.find('.settings-links')[0];
+
+	var settings_row = document.createElement('DIV');
+	var translate_row = document.createElement('DIV');
+
+	settings_row.className = "group flex-row";
+	translate_row.className = "group flex-row";
+
+	// If mobile controls are visible
+    if ( 1 === utility_container.children().length && "none" !== $(".global-header .mobile-controls").css("display") ){
+			if( undefined !== translate )
+				$(translate_row).append(translate);
+
+			if( undefined !== settings ){
+				$(settings).css('margin-left', '0');
+				$(settings_row).append(settings);
+			}
+
+			utility_container.append(settings_row);
+			utility_container.append(translate_row);
+	// If mobile controls are not visible
+    }else if(1 < utility_container.children().length && "none" === $(".global-header .mobile-controls").css("display") ) {
+			$(settings).css('margin-left', 'auto');
+
+			if( undefined !== translate ){
+				$(translate).insertBefore($(settings).find('button:last-child'))
+			}
+			$(utility_container.children()[0]).append(settings);
+
+		$(utility_container.children()[1]).remove();
+		$(utility_container.children()[2]).remove();
+
+	}
+}
 jQuery(document).ready(function() {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
@@ -20537,7 +20515,7 @@ jQuery(document).ready(function() {
 	Button Element Accessibility 
 	*/
 	
-	var button_elements = $('button');
+	var button_elements = $('button:not(.first-level-btn)');
 
 	if( button_elements.length ){
 		button_elements.each(function(index, element) {
@@ -20573,84 +20551,3 @@ jQuery(document).ready(function() {
 	// removing role attribute to fix accessibilty error
 	$(".settings-links button[data-target='#locationSettings']").removeAttr("role");
 });
- jQuery(document).ready(function() {
-	 $('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
-	 
-	// run test on initial page load
-	checkSize();
-
-	// run test on resize of the window
-	$(window).resize(checkSize);
-
-	// This fixes anchor position when smooth scrolling
-	window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){
-		var $window_width=$(window).width();
-		$("header").hasClass("fixed")&&$window_width>768?$menu_offset=$("#header").outerHeight()-1:$menu_offset=-1,
-		$("#wpadminbar").length&&$window_width>600&&($menu_offset+=$("#wpadminbar").outerHeight()),
-		$scroll_position=$top_section?0:$target.offset().top-$menu_offset,
-		void 0===easing&&(easing="swing");
-		var $skip_to_content="skip-to-content"===$($target).attr('id'); 
-		if($scroll_position<220&&!$skip_to_content){ // scrollDistanceToMakeCompactHeader from cagov.core.js
-						$scroll_position-=36; // Height difference between normal and compact header
-		}else if($skip_to_content){
-			$scroll_position=0;
-		}
-		$("html, body").animate({scrollTop:$scroll_position},speed,easing);
-	}
-
-	
- });
-
-function rgb2hex(rgb){
-	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-	return "#" +
-	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
-}
-
-function stripeIframeAttributes(frame){
-	$(frame).removeAttr('frameborder');
-	$(frame).removeAttr('scrolling');
-	$(frame).removeAttr('allowtransparency');
-	$(frame).removeAttr('allowfullscreen');
-}
-
-
- function checkSize(){
-	var utility_container = $('.global-header .utility-header .container');
-	var translate = utility_container.find('#google_translate_element')[0];
-	var settings = utility_container.find('.settings-links')[0];
-
-	var settings_row = document.createElement('DIV');
-	var translate_row = document.createElement('DIV');
-
-	settings_row.className = "group flex-row";
-	translate_row.className = "group flex-row";
-
-	// If mobile controls are visible
-    if ( 1 === utility_container.children().length && "none" !== $(".global-header .mobile-controls").css("display") ){
-			if( undefined !== translate )
-				$(translate_row).append(translate);
-
-			if( undefined !== settings ){
-				$(settings).css('margin-left', '0');
-				$(settings_row).append(settings);
-			}
-
-			utility_container.append(settings_row);
-			utility_container.append(translate_row);
-	// If mobile controls are not visible
-    }else if(1 < utility_container.children().length && "none" === $(".global-header .mobile-controls").css("display") ) {
-			$(settings).css('margin-left', 'auto');
-
-			if( undefined !== translate ){
-				$(translate).insertBefore($(settings).find('button:last-child'))
-			}
-			$(utility_container.children()[0]).append(settings);
-
-		$(utility_container.children()[1]).remove();
-		$(utility_container.children()[2]).remove();
-
-	}
-}

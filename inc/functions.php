@@ -21,12 +21,13 @@ function caweb_get_page_version( $post_id = -1 ) {
 			$result = 4;
 			break;
 		case 'page-templates/page-template-v5.php':
-		default:
 			$result = 5;
+			break;
+		default:
 			break;
 	}
 
-	return (int) $result;
+	return $result;
 }
 
 /**
