@@ -269,11 +269,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$child_count = count( $child_links );
 
 					/* Get icon if present */
-					if ( isset( $item_meta['_caweb_menu_icon'] ) ) {
-						$icon = '<span class="ca-gov-icon-' . $item_meta['_caweb_menu_icon'][0] . '"></span>';
-					} else {
-						$icon = '<span class="invisible ca-gov-icon-logo"></span>';
-					}
+					$icon = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+					$icon = '<span class="ca-gov-icon-' . $icon . '"></span>';
 
 					/* Get column count */
 					$nav_column_count = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : 0;
@@ -372,7 +369,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				/* Get icon if present */
 				$icon = '';
-				if ( isset( $item_meta['_caweb_menu_icon'] ) ) {
+				if ( isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
 					$icon = '<span class="ca-gov-icon-' . $item_meta['_caweb_menu_icon'][0] . '"></span>';
 				}
 
