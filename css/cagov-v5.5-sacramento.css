@@ -28065,13 +28065,13 @@ body:not(.sticky_nav) #main-content.main-content {
 }
 
 .first-level-link {
-  height: calc(100% - 5px);
+  height: auto;
   /* Allows for the Navigation Top Level Links to wrap */
   white-space: normal;
 }
 
 #nav_list {
-  width: auto;
+  width: 100%;
 }
 
 .sub-nav {

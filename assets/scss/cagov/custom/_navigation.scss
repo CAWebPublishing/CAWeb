@@ -1,11 +1,11 @@
 .first-level-link{
-	height: calc(100% - 5px);
+	height: $first-level-link-height;
 	/* Allows for the Navigation Top Level Links to wrap */
 	white-space: normal;
 }
 
 #nav_list{
-	width: auto;
+	width: $nav-list-width;
 }
 
 .sub-nav{
