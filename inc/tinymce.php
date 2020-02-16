@@ -27,19 +27,25 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 	}
 
 	$admin_css = caweb_get_min_file( '/css/admin.css' );
-
-	$version     = caweb_get_page_version( get_the_ID() );
+	$cdn_enabled           = caweb_cdn_enabled();
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
-	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
-
-	$editor_css = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
-
 	$css = array(
 		includes_url( '/css/dashicons.min.css' ),
 		includes_url( '/js/tinymce/skins/wordpress/wp-content.css' ),
-		$editor_css,
-		$admin_css,
 	);
+
+	if( $cdn_enabled ){
+		$css[] = CAWEB_CA_STATE_CDN_URL . '/css/cagov.core.min.css';
+		$css[] = sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_CDN_URL, $color);
+	}else{
+		$version     = caweb_get_page_version( get_the_ID() );
+		$colorscheme = caweb_color_schemes( $version, 'filename', $color );
+	
+		$css[] = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
+	}
+
+
+	$css[] = $admin_css;
 
 	$defaults_settings = array(
 		'media_buttons' => false,

@@ -163,6 +163,30 @@ gulp.task('admin-js', parameterized( async function (_) {
 }));
 
 /*
+	CAWeb JavaScript
+*/
+gulp.task('caweb-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
+	
+	version.forEach(function(v){
+		if ( _.params.prod ) {
+			buildCAWebJS(true, v);
+		}
+	
+		if ( _.params.dev ) {
+			buildCAWebJS(false, v);
+		}
+	
+		if( noFlags ){
+			buildCAWebJS(true, v);
+			buildCAWebJS(false, v);
+		}
+	});
+	
+}));
+
+/*
 	CAWeb FrontEnd JavaScript
 */
 gulp.task('frontend-js', parameterized( async function (_) {
@@ -281,13 +305,16 @@ gulp.task('build', parameterized(async function(_){
 		version.forEach(function(v){
 			// Build Frontend Styles
 			buildFrontEndStyles(true, v);
-					
-			// Build Frontend JS
-			buildFrontEndJS(true, v);
+
+			// Build CDN Related Asset Styles
+			buildCDNStyles(true, v);
+			
+			// Build CAWeb JS
+			buildCAWebJS(true, v);
 		});
 
-		// Build CDN Related Asset Styles
-		buildCDNStyles(true);
+		// Build FrontEnd JS
+		buildFrontEndJS(true);
 
 		// Build Bootstrap Styles
 		buildBootStrapStyles(true);
@@ -313,13 +340,16 @@ gulp.task('build', parameterized(async function(_){
 		version.forEach(function(v){
 			// Build Frontend Styles
 			buildFrontEndStyles(false, v);
-					
-			// Build Frontend JS
-			buildFrontEndJS(false, v);
+
+			// Build CDN Related Asset Styles
+			buildCDNStyles(false, v);
+			
+			// Build CAWeb JS
+			buildCAWebJS(false, v);
 		});
 
-		// Build CDN Related Asset Styles
-		buildCDNStyles(false);
+		// Build FrontEnd JS
+		buildFrontEndJS(false);
 
 		// Build Bootstrap Styles
 		buildBootStrapStyles(false);
@@ -332,6 +362,7 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Theme Customizer JS
 		buildThemeCustomizerJS(false);
+
 
 	}
 
@@ -348,15 +379,19 @@ gulp.task('build', parameterized(async function(_){
 			// Build Frontend Styles
 			buildFrontEndStyles(true, v);
 			buildFrontEndStyles(false, v);
-					
-			// Build Frontend JS
-			buildFrontEndJS(true, v);
-			buildFrontEndJS(false, v);
+
+			// Build CDN Related Asset Styles
+			buildCDNStyles(true, v);
+			buildCDNStyles(false, v);
+			
+			// Build CAWeb JS
+			buildCAWebJS(true, v);
+			buildCAWebJS(false, v);
 		});
 
-		// Build CDN Related Asset Styles
-		buildCDNStyles(true);
-		buildCDNStyles(false);
+		// Build FrontEnd JS
+		buildFrontEndJS(true);
+		buildFrontEndJS(false);
 
 		// Build Bootstrap Styles
 		buildBootStrapStyles(true);
@@ -371,7 +406,9 @@ gulp.task('build', parameterized(async function(_){
 		buildA11yJS(false);
 
 		// Build Theme Customizer JS
+		buildThemeCustomizerJS(true);
 		buildThemeCustomizerJS(false);
+
 	}
 
 }));
@@ -524,7 +561,7 @@ async function buildBootStrapJS( min = false ){
 	return js.pipe(gulp.dest('./js/'));
 }
 
-async function buildFrontEndJS( min = false, ver = config.templateVer){
+async function buildCAWebJS( min = false, ver = config.templateVer){
 	var minified = min ? '.min' : '';
 	var versionDir = config.JSAssetDir + 'cagov/version' + ver;
 	var f = config.frontendJS.concat( 
@@ -537,8 +574,26 @@ async function buildFrontEndJS( min = false, ver = config.templateVer){
 
 	let js = gulp.src(f)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('frontend-v' + ver + minified + '.js')) // compiled file
-		.pipe( notify({ title: '✅  CAWeb Front End JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
+		.pipe(concat('caweb-v' + ver + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	return js.pipe(gulp.dest('./js/'));
+}
+
+async function buildFrontEndJS( min = false ){
+	var minified = min ? '.min' : '';
+	
+	if( ! config.frontendJS.length )
+		return;
+
+	let js = gulp.src(config.frontendJS)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('frontend' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb FrontEnd JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
 
 	if( min ){
 		js = js.pipe(uglify());
