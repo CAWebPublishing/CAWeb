@@ -37,23 +37,23 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 	if ( 5 <= caweb_get_page_version( get_the_ID() ) ) {
 
 		/* Alerts */
-		get_template_part( 'partials/content/alerts' );
+		require_once( 'content/alerts.php' );
 
 		/* Include Utility Header */
-		get_template_part( 'partials/content/utility-header' );
+		require_once( 'content/utility-header.php' );
 
 		/* Location Bar */
-		get_template_part( 'partials/content/bar', 'location' );
+		require_once( 'content/bar-location.php' );
 
 		/* Settings Bar */
-		get_template_part( 'partials/content/bar', 'settings' );
+		require_once( 'content/bar-settings.php' );
 	}
 
 	/* Include Branding */
-	get_template_part( 'partials/content/branding' );
+	require_once( 'content/branding.php' );
 
 	/* Include Mobile Controls */
-	get_template_part( 'partials/content/mobile-controls' );
+	require_once( 'content/mobile-controls.php' );
 
 	?>
 

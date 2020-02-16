@@ -417,7 +417,7 @@ function caweb_get_user_color() {
  *
  * @return array
  */
-function caweb_allowed_html() {
+function caweb_allowed_html( $exclude = array() ) {
 	$attr = array(
 		'id'    => array(),
 		'class' => array(),
@@ -453,8 +453,8 @@ function caweb_allowed_html() {
 		'ol'     => $attr,
 		'ul'     => $attr,
 		'li'     => $attr,
-
+		'style'  => array(),
 	);
 
-	return $tags;
+	return array_diff_key( $tags, array_flip( $exclude ) );
 }

@@ -1,6 +1,11 @@
  jQuery(document).ready(function() {
-	 $('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
-	 
+	$('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
+	
+	/* Fixed padding for wp-activate.php page when Navigation is fixed */
+	if( $('header.fixed + #signup-content').length ){
+		$('header.fixed + #signup-content').css('padding-top', $('header.fixed').outerHeight() );
+	}
+
 	// run test on initial page load
 	checkSize();
 

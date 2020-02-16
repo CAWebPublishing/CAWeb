@@ -2,7 +2,7 @@
 /**
  * The header for our theme
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
+ * This is the template that displays all of the <head> section
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
@@ -21,11 +21,7 @@ if( $caweb_cdn_enabled ){
 }
 ?>
 
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-
 <head>
-
 	<meta charset="utf-8">
 	<meta name="Author" content="State of California" />
 	<meta name="Description" content="State of California" />

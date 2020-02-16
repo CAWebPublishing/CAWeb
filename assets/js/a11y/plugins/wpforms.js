@@ -36,5 +36,16 @@ jQuery(document).ready(function() {
 			$(element).attr('aria-atomic', 'true');
 		});
 	}
-	 
+	
+	/*
+	WPForms Accessibility 
+	Retrieve Time Picker inputs
+	*/
+	var wpforms_time_pickers = $('input.wpforms-field-date-time-time');
+	if( wpforms_time_pickers.length ){
+		wpforms_time_pickers.each(function(index, element) {
+			var label = $(element).parent().find('label');
+			$(label).attr('for', $(element).attr('id') );
+		});
+	}
 });

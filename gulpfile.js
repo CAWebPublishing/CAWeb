@@ -163,26 +163,6 @@ gulp.task('admin-js', parameterized( async function (_) {
 }));
 
 /*
-	CAWeb BootStrap Admin Styles
-*/
-gulp.task('bootstrap-js', parameterized( async function (_) {
-	var noFlags = undefined === _.params.length || _.params.all;
-
-	if ( _.params.prod ) {
-		buildBootStrapJS(true);
-	}
-
-	if ( _.params.dev ) {
-		buildBootStrapJS(false);
-	}
-
-	if( noFlags ){
-		buildBootStrapJS(true);
-		buildBootStrapJS(false);
-	}
-}));
-
-/*
 	CAWeb FrontEnd JavaScript
 */
 gulp.task('frontend-js', parameterized( async function (_) {
@@ -204,6 +184,47 @@ gulp.task('frontend-js', parameterized( async function (_) {
 		}
 	});
 	
+}));
+
+
+/*
+	CAWeb A11y JavaScript
+*/
+gulp.task('a11y-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+
+	if ( _.params.prod ) {
+		buildA11yJS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildA11yJS(false);
+	}
+
+	if( noFlags ){
+		buildA11yJS(true);
+		buildA11yJS(false);
+	}
+}));
+
+/*
+	CAWeb BootStrap Admin Styles
+*/
+gulp.task('bootstrap-js', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+
+	if ( _.params.prod ) {
+		buildBootStrapJS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildBootStrapJS(false);
+	}
+
+	if( noFlags ){
+		buildBootStrapJS(true);
+		buildBootStrapJS(false);
+	}
 }));
 
 /*
@@ -253,9 +274,9 @@ gulp.task('build', parameterized(async function(_){
 	if ( _.params.prod ) {
 		// Build Admin Styles
 		buildAdminStyles(true);
-
-		// Build Admin Bootstrap Styles
-		buildBootStrapStyles(true);
+		
+		// Build Admin JS
+		buildAdminJS(true);
 
 		version.forEach(function(v){
 			// Build Frontend Styles
@@ -265,11 +286,17 @@ gulp.task('build', parameterized(async function(_){
 			buildFrontEndJS(true, v);
 		});
 
-		// Build Admin JS
-		buildAdminJS(true);
+		// Build CDN Related Asset Styles
+		buildCDNStyles(true);
+
+		// Build Bootstrap Styles
+		buildBootStrapStyles(true);
 
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(true);
+
+		// Build A11y JS
+		buildA11yJS(true);
 
 		// Build Theme Customizer JS
 		buildThemeCustomizerJS(true);
@@ -279,23 +306,29 @@ gulp.task('build', parameterized(async function(_){
 	if ( _.params.dev ) {
 		// Build Admin Styles
 		buildAdminStyles(false);
-
-		// Build Admin Bootstrap Styles
-		buildBootStrapStyles(false);
 		
+		// Build Admin JS
+		buildAdminJS(false);
+
 		version.forEach(function(v){
 			// Build Frontend Styles
 			buildFrontEndStyles(false, v);
-
+					
 			// Build Frontend JS
 			buildFrontEndJS(false, v);
 		});
 
-		// Build Admin JS
-		buildAdminJS(false);
+		// Build CDN Related Asset Styles
+		buildCDNStyles(false);
+
+		// Build Bootstrap Styles
+		buildBootStrapStyles(false);
 
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(false);
+
+		// Build A11y JS
+		buildA11yJS(false);
 
 		// Build Theme Customizer JS
 		buildThemeCustomizerJS(false);
@@ -306,34 +339,39 @@ gulp.task('build', parameterized(async function(_){
 		// Build Admin Styles
 		buildAdminStyles(true);
 		buildAdminStyles(false);
-
-		// Build Admin Bootstrap Styles
-		buildBootStrapStyles(true);
-		buildBootStrapStyles(false);
+		
+		// Build Admin JS
+		buildAdminJS(true);
+		buildAdminJS(false);
 
 		version.forEach(function(v){
 			// Build Frontend Styles
 			buildFrontEndStyles(true, v);
 			buildFrontEndStyles(false, v);
-
+					
 			// Build Frontend JS
 			buildFrontEndJS(true, v);
 			buildFrontEndJS(false, v);
 		});
-		
 
-		// Build Admin JS
-		buildAdminJS(true);
-		buildAdminJS(false);
+		// Build CDN Related Asset Styles
+		buildCDNStyles(true);
+		buildCDNStyles(false);
+
+		// Build Bootstrap Styles
+		buildBootStrapStyles(true);
+		buildBootStrapStyles(false);
 
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(true);
 		buildBootStrapJS(false);
 
-		// Build Theme Customizer JS
-		buildThemeCustomizerJS(true);
-		buildThemeCustomizerJS(false);
+		// Build A11y JS
+		buildA11yJS(true);
+		buildA11yJS(false);
 
+		// Build Theme Customizer JS
+		buildThemeCustomizerJS(false);
 	}
 
 }));
@@ -356,25 +394,6 @@ async function buildAdminStyles( min = false){
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.css')) // compiled file
 		.pipe( notify({ title: '✅  CAWeb Admin Styles', message: '<%= file.relative %> was created successfully.', onLast: true }) )
-		.pipe(gulp.dest('./css/'));
-}
-
-async function buildBootStrapStyles( min = false ){
-	var buildOutputStyle = min ? 'compressed' : 'expanded';
-	var minified = min ? '.min' : '';
-
-	if( ! config.adminBootStrapCSS.length )
-		return;
-
-	return gulp.src(config.adminBootStrapCSS)
-		.pipe(
-			sass({
-				outputStyle: buildOutputStyle,
-			})
-		)
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('bootstrap' + minified + '.css')) // compiled file
-		.pipe( notify({ title: '✅  CAWeb Admin Bootstrap Styles', message: '<%= file.relative %> was created successfully.', onLast: true }) )
 		.pipe(gulp.dest('./css/'));
 }
 
@@ -431,6 +450,40 @@ async function buildCDNStyles( min = false, ver = config.templateVer ){
 		.pipe(concat('cdn-v' + ver + minified + '.css')) // compiled file
 		.pipe(gulp.dest('./css/'));
 
+}
+
+async function buildA11yJS( min = false){
+	var minified = min ? '.min' : '';
+	
+	let js = gulp.src(config.a11yJS)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('a11y' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb A11y JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	return js.pipe(gulp.dest('./js/'));
+}
+
+async function buildBootStrapStyles( min = false ){
+	var buildOutputStyle = min ? 'compressed' : 'expanded';
+	var minified = min ? '.min' : '';
+
+	if( ! config.adminBootStrapCSS.length )
+		return;
+
+	return gulp.src(config.adminBootStrapCSS)
+		.pipe(
+			sass({
+				outputStyle: buildOutputStyle,
+			})
+		)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('bootstrap' + minified + '.css')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Admin Bootstrap Styles', message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		.pipe(gulp.dest('./css/'));
 }
 
 async function buildAdminJS( min = false){
@@ -494,25 +547,10 @@ async function buildFrontEndJS( min = false, ver = config.templateVer){
 	return js.pipe(gulp.dest('./js/'));
 }
 
-async function buildA11yJS( min = false, ver = config.templateVer){
-	var minified = min ? '.min' : '';
-	
-	let js = gulp.src(config.a11yJS)
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('a11y' + minified + '.js')) // compiled file
-		.pipe( notify({ title: '✅  CAWeb A11y JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
-
-	if( min ){
-		js = js.pipe(uglify());
-	}
-
-	return js.pipe(gulp.dest('./js/'));
-}
-
 async function buildThemeCustomizerJS( min = false){
 	var minified = min ? '.min' : '';
 
-	if( ! config.the0meCustomizer.length )
+	if( ! config.themeCustomizer.length )
 		return;
 
 	// Theme Customizer
@@ -541,12 +579,32 @@ async function buildThemeCustomizerJS( min = false){
 
 }
 
-//
 // DEV (Development Output)
-//
-gulp.task('dev', parameterized.series('frontend-css --dev', 'admin-css --dev', 'admin-js --dev', 'frontend-js --dev', 'customizer-js --dev', 'bootstrap-css --dev', 'bootstrap-js --dev' ) );
+gulp.task('dev', parameterized.series(
+	'admin-css --dev', 
+	'frontend-css --dev', 
+	'cdn-css --dev', 
+	'bootstrap-css --dev', 
+	'admin-js --dev', 
+	'frontend-js --dev', 
+	'a11y-js --dev', 
+	'bootstrap-js --dev', 
+	'customizer-js --dev'
+	) 
+);
 
 // PROD (Minified Output)
-gulp.task('prod', parameterized.series('frontend-css --prod', 'admin-css --prod', 'admin-js --prod', 'frontend-js --prod', 'customizer-js --prod', 'bootstrap-css --prod', 'bootstrap-js --prod') );
+gulp.task('prod', parameterized.series(
+	'admin-css --prod', 
+	'frontend-css --prod', 
+	'cdn-css --prod', 
+	'bootstrap-css --prod', 
+	'admin-js --prod', 
+	'frontend-js --prod', 
+	'a11y-js --prod', 
+	'bootstrap-js --prod',
+	'customizer-js --prod',
+	) 
+);
 
 //gulp.task('build', parameterized.series('dev', 'prod') );

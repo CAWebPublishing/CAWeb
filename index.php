@@ -17,7 +17,7 @@ get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/header' ); ?>
+	<?php require_once( 'partials/header.php' ); ?>
 
 
 	<div id="page-container">

@@ -1,3 +1,111 @@
+/* CAWeb Google Analytics */
+var _gaq = _gaq || [];
+
+if("" !== args.ca_google_analytic_id){
+	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', '.ca.gov']);
+	_gaq.push(['_trackPageview']);
+}
+	
+_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
+_gaq.push(['b._setDomainName', '.ca.gov']);
+_gaq.push(['b._trackPageview']);
+
+if("" !== args.caweb_multi_ga){
+	_gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
+	_gaq.push(['b._setDomainName', '.ca.gov']);
+	_gaq.push(['b._trackPageview']);
+}
+
+(function() {
+	var ga = document.createElement('script');
+	ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+		'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ga, s);
+})();
+/* CAWeb Google Custom Search */
+(function() {
+	window.__gcse = {
+	callback: myCallback
+	};
+
+	function myCallback() {
+		var $searchContainer = $("#head-search");
+		var $searchText = $searchContainer.find(".gsc-input");
+		var $resultsContainer = $('.search-results-container');
+		var $body = $("body");
+
+		if( 4 == args.ca_site_version )
+			$searchText.attr("placeholder", "Search");
+			
+			// search icon is added before search button (search button is set to opacity 0 in css)
+			$("input.gsc-search-button").before("<span class='ca-gov-icon-search search-icon' aria-hidden='true'></span>");
+
+			$searchText.on("click", function() {
+					addSearchResults();
+					$searchContainer.addClass("search-freeze-width");
+			});
+
+			$searchText.blur(function() {
+					$searchContainer.removeClass("search-freeze-width");
+
+				});
+
+				// Close search when close icon is clicked
+				$('div.gsc-clear-button').on('click', function() {	removeSearchResults();   });
+
+				// Helpers
+				function addSearchResults() {
+					$body.addClass("active-search");
+					$searchContainer.addClass('active');
+					$resultsContainer.addClass('visible');
+					// close the the menu when we are search
+					$('#navigation').addClass('mobile-closed');
+					// fire a scroll event to help update headers if need be
+					$(window).scroll();
+
+					$.event.trigger('cagov.searchresults.show');
+				}
+
+				function removeSearchResults() {
+							$body.removeClass("active-search");
+							$searchContainer.removeClass('active');
+							$resultsContainer.removeClass('visible');
+
+
+							// fire a scroll event to help update headers if need be
+							$(window).scroll();
+
+							$.event.trigger('cagov.searchresults.hide');
+				}
+
+	}
+
+	if("" !== args.ca_google_search_id){
+		var cx = args.ca_google_search_id;
+		var gcse = document.createElement('script');
+		gcse.async = true;
+		gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script');
+		s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
+	}
+
+})
+/* CAWeb Google Translate */
+if( args.ca_google_trans_enabled || args.spanish ){
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
+		  layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
+	}
+	var gtrans = document.createElement('script');
+	gtrans.async = true;
+	gtrans.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+	var s = document.getElementsByTagName('script');
+	s[s.length - 1].parentNode.insertBefore(gtrans, s[s.length - 1]);
+}
 /*
 				    .ooooo.          ooo. .oo.     .ooooo.    oooo d8b
 				   d88" `88b         `888P"Y88b   d88" `88b   `888""8P
@@ -19157,7 +19265,18 @@ jQuery(document).ready(function() {
 			$(element).attr('aria-atomic', 'true');
 		});
 	}
-	 
+	
+	/*
+	WPForms Accessibility 
+	Retrieve Time Picker inputs
+	*/
+	var wpforms_time_pickers = $('input.wpforms-field-date-time-time');
+	if( wpforms_time_pickers.length ){
+		wpforms_time_pickers.each(function(index, element) {
+			var label = $(element).parent().find('label');
+			$(label).attr('for', $(element).attr('id') );
+		});
+	}
 });
 jQuery(document).ready(function() {
 	/*
