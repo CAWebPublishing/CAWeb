@@ -496,19 +496,11 @@ async function buildFrontEndJS( min = false, ver = config.templateVer){
 
 async function buildA11yJS( min = false, ver = config.templateVer){
 	var minified = min ? '.min' : '';
-	var versionDir = config.JSAssetDir + 'cagov/version' + ver;
-	var f = config.frontendJS.concat( 
-		[versionDir + '/cagov.core.js', 
-		versionDir + '/custom.js'], 
-		config.a11yJS);
-
-	if( ! f.length )
-		return;
-
-	let js = gulp.src(f)
+	
+	let js = gulp.src(config.a11yJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('frontend-v' + ver + minified + '.js')) // compiled file
-		.pipe( notify({ title: '✅  CAWeb Front End JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
+		.pipe(concat('a11y' + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb A11y JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
 
 	if( min ){
 		js = js.pipe(uglify());
