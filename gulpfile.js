@@ -99,6 +99,30 @@ gulp.task('frontend-css', parameterized( async function (_) {
 }));
 
 /*
+	CAWeb CDN Styles 
+*/
+gulp.task('cdn-css', parameterized( async function (_) {
+	var noFlags = undefined === _.params.length || _.params.all;
+	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
+	
+	version.forEach(function(v){
+		if ( _.params.prod ) {
+			buildCDNStyles(true, v);
+		}
+	
+		if ( _.params.dev ) {
+			buildCDNStyles(false, v);
+		}
+	
+		if( noFlags ){
+			buildCDNStyles(false, v);
+			buildCDNStyles(true, v);
+		}
+	});
+
+}));
+
+/*
 	CAWeb BootStrap Admin Styles
 */
 gulp.task('bootstrap-css', parameterized( async function (_) {
@@ -362,7 +386,9 @@ async function buildFrontEndStyles( min = false, ver = config.templateVer){
 	var colors = fs.readdirSync(versionColorschemesDir);
 
 	colors.forEach(function(e){
-		var f = [versionDir + '/cagov.core.css', versionColorschemesDir + e];
+		var f = [versionDir + '/cagov.core.css', 
+				versionColorschemesDir + e, 
+				config.templateCSSAssetDir + 'cagov.font-only.css'];
 		f = f.concat( config.frontendCSS );
 		f = f.concat( config.SCSSAssetDir + 'cagov/version' + ver + '/custom.scss' );
 
@@ -383,6 +409,28 @@ async function buildFrontEndStyles( min = false, ver = config.templateVer){
 			.pipe(concat(fileName )) // compiled file
 			.pipe(gulp.dest('./css/'));
 	});
+}
+
+async function buildCDNStyles( min = false, ver = config.templateVer ){
+	var buildOutputStyle = min ? 'compressed' : 'expanded';
+	var minified = min ? '.min' : '';
+	var versionDir = config.SCSSAssetDir + 'cagov/version' + ver;
+	
+	var f = config.frontendCSS.concat( versionDir + '/custom.scss' );
+
+	if( ! f.length )
+		return;
+
+	return gulp.src(f)
+		.pipe(
+			sass({
+				outputStyle: buildOutputStyle,
+			})
+		)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('cdn-v' + ver + minified + '.css')) // compiled file
+		.pipe(gulp.dest('./css/'));
+
 }
 
 async function buildAdminJS( min = false){
@@ -426,7 +474,33 @@ async function buildBootStrapJS( min = false ){
 async function buildFrontEndJS( min = false, ver = config.templateVer){
 	var minified = min ? '.min' : '';
 	var versionDir = config.JSAssetDir + 'cagov/version' + ver;
-	var f = config.frontendJS.concat( [versionDir + '/cagov.core.js', versionDir + '/custom.js'], config.a11yJS);
+	var f = config.frontendJS.concat( 
+		[versionDir + '/cagov.core.js', 
+		versionDir + '/custom.js'], 
+		config.a11yJS);
+
+	if( ! f.length )
+		return;
+
+	let js = gulp.src(f)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('frontend-v' + ver + minified + '.js')) // compiled file
+		.pipe( notify({ title: '✅  CAWeb Front End JavaScript', message: '<%= file.relative %> was created successfully.', onLast: true }) );
+
+	if( min ){
+		js = js.pipe(uglify());
+	}
+
+	return js.pipe(gulp.dest('./js/'));
+}
+
+async function buildA11yJS( min = false, ver = config.templateVer){
+	var minified = min ? '.min' : '';
+	var versionDir = config.JSAssetDir + 'cagov/version' + ver;
+	var f = config.frontendJS.concat( 
+		[versionDir + '/cagov.core.js', 
+		versionDir + '/custom.js'], 
+		config.a11yJS);
 
 	if( ! f.length )
 		return;
@@ -446,7 +520,7 @@ async function buildFrontEndJS( min = false, ver = config.templateVer){
 async function buildThemeCustomizerJS( min = false){
 	var minified = min ? '.min' : '';
 
-	if( ! config.themeCustomizer.length )
+	if( ! config.the0meCustomizer.length )
 		return;
 
 	// Theme Customizer

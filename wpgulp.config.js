@@ -19,7 +19,6 @@ module.exports = {
 	themeCSSAssetDir: 'assets/css/caweb/', // CAWeb CSS 
 	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
 	frontendCSS: [ // Frontend CSS
-		'assets/css/cagov/cagov.font-only.css', 
 		'assets/scss/frontend.scss',
 	], 
 	adminCSS:[ // WP Backend Admin CSS
