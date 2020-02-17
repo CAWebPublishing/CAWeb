@@ -3,7 +3,7 @@
 	<div id="page-container">
 		<div id="et-main-area">
 
-			<div id="main-content" class="main-content">
+			<div id="main-content" class="main-content" tabindex="-1">
 
 				<main class="main-primary">
 

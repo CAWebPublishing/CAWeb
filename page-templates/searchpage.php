@@ -32,7 +32,7 @@ get_header();
 	<div id="page-container">
 		<div id="et-main-area">
 
-			<div id="main-content" class="main-content">
+			<div id="main-content" class="main-content" tabindex="-1">
 				<main class="main-primary">
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
