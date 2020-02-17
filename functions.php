@@ -13,7 +13,8 @@ define( 'CAWEB_URI', get_stylesheet_directory_uri() );
 define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
-define( 'CAWEB_CA_STATE_CDN_URL', 'https://california.azureedge.net/cdt/statetemplate/5.5.9');
+define( 'CAWEB_CA_STATE_TEMPLATE_CDN_URL', 'https://california.azureedge.net/cdt/statetemplate/5.5.9');
+define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal');
 
 /**
  * Plugin API/Action Reference
@@ -249,8 +250,8 @@ function caweb_wp_enqueue_scripts() {
 		wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 	}else{
 		$cdn_css_file    = caweb_get_min_file( "/css/cdn-v$ver.css" );
-		wp_enqueue_style( 'caweb-core-style', CAWEB_CA_STATE_CDN_URL . '/css/cagov.core.min.css', array(), CAWEB_VERSION );
-		wp_enqueue_style( 'caweb-color-style', sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_CDN_URL, $color), array(), CAWEB_VERSION );
+		wp_enqueue_style( 'caweb-core-style', CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/css/cagov.core.min.css', array(), CAWEB_VERSION );
+		wp_enqueue_style( 'caweb-color-style', sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_TEMPLATE_CDN_URL, $color), array(), CAWEB_VERSION );
 		wp_enqueue_style( 'caweb-frontend-style', $cdn_css_file, array(), CAWEB_VERSION );
 	}
 
@@ -300,7 +301,6 @@ function caweb_wp_enqueue_scripts() {
 			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
 			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
-			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
 			'ajaxurl' => admin_url('admin-post.php'),
 			'spanish' => $spanish
 		);
@@ -311,7 +311,7 @@ function caweb_wp_enqueue_scripts() {
 
 		if( $cdn_enabled ){
 			$frontend_js_file = caweb_get_min_file( "/js/frontend.js", 'js' );
-			$cagov_js_file = CAWEB_CA_STATE_CDN_URL . '/js/cagov.core.min.js';
+			$cagov_js_file = CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/js/cagov.core.min.js';
 			$cagov_custom_js_file = caweb_get_min_file( "/assets/js/cagov/version$ver/custom.js", 'js' );
 			$caweb_a11y_js_file = caweb_get_min_file( "/js/a11y.js", 'js' );
 
@@ -343,6 +343,15 @@ function caweb_wp_enqueue_scripts() {
 			wp_enqueue_script( 'cagov-caweb-script' );
 		}
 
+		/* Geo Locator */
+		$ca_geo_locator_enabled = 	'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
+	
+		if( 5 <= $ver && $ca_geo_locator_enabled ){
+			$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
+			wp_enqueue_script( "cagov-jsv4geo-script", $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
+		}
+	
+
 	}
 
 }
@@ -358,11 +367,12 @@ function caweb_wp_enqueue_scripts() {
  */
 function caweb_late_wp_enqueue_scripts() {
 	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
-	$ver        = caweb_get_page_version( get_the_ID() );
 
 	if ( $vb_enabled ) {
 		return;
 	}
+
+	$ver        = caweb_get_page_version( get_the_ID() );
 
 	/* External JS */
 	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );

@@ -39,7 +39,6 @@ module.exports = {
 	],
 	frontendJS: [ // Common JS 
 		'assets/js/caweb/google/*.js',
-		//'assets/js/caweb/geolocator.js', Geolocator not functioning
 		'assets/js/caweb/AutoTracker.js',
 	],  
 	a11yJS:[ // Accessibility JS

@@ -15,7 +15,7 @@ $caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
 $caweb_cdn_enabled = get_option( 'ca_cdn_enabled', false );
 
 if( $caweb_cdn_enabled ){
-	$caweb_apple_icon = CAWEB_CA_STATE_CDN_URL . '/images/apple-touch-icon-';
+	$caweb_apple_icon = CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/images/apple-touch-icon-';
 }else{
 	$caweb_apple_icon = CAWEB_URI . '/images/system/apple-touch-icon-';
 }

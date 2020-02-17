@@ -35,8 +35,8 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 	);
 
 	if( $cdn_enabled ){
-		$css[] = CAWEB_CA_STATE_CDN_URL . '/css/cagov.core.min.css';
-		$css[] = sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_CDN_URL, $color);
+		$css[] = CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/css/cagov.core.min.css';
+		$css[] = sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_TEMPLATE_CDN_URL, $color);
 	}else{
 		$version     = caweb_get_page_version( get_the_ID() );
 		$colorscheme = caweb_color_schemes( $version, 'filename', $color );

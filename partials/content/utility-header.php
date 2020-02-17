@@ -8,7 +8,7 @@
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );
-$caweb_geo_locator_enabled          = false; //get_option( 'ca_geo_locator_enabled', false );
+$caweb_geo_locator_enabled          = get_option( 'ca_geo_locator_enabled', false );
 $caweb_google_trans_page            = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_enabled         = get_option( 'ca_google_trans_enabled', false );
 $caweb_google_trans_page_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? '_blank' : '_self';
