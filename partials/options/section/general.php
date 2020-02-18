@@ -21,7 +21,7 @@
         </div>
         <!-- State CDN Enabled -->
         <div class="form-row">
-            <div class="form-group col-sm-5">
+            <div class="form-group col-sm-5<?php print ! $cdn_enabled_option ? ' d-none' : ''; ?>">
                 <label for="ca_cdn_enabled" class="d-block mb-0">
                     <strong>Enable State CDN</strong>
                     <input type="checkbox" name="ca_cdn_enabled" id="ca_cdn_enabled" <?php print $cdn_enabled ?>>

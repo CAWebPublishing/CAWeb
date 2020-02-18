@@ -24,6 +24,7 @@ $schemes       = caweb_color_schemes( 0, 'displayname' );
 */
 // CA State CDN Enabled
 $cdn_enabled           = get_option( 'ca_cdn_enabled', false ) ? ' checked' : '';
+$cdn_enabled_option = caweb_cdn_enabled();
 
 // Fav Icon
 $fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
