@@ -12,7 +12,17 @@ module.exports = {
 	// CA State Template Options
 	templateVer: '5', // Minimum CA State Template Version
 	availableVers: ['4', '5', '5.5'], // Available CA State Template Versions
-
+	availableColors: {
+		'eureka.css' : 'Eureka',
+		'mono.css' : 'Mono',
+		'oceanside.css' : 'Oceanside',
+		'orange county.css' : 'Orange County',
+		'paso robles.css' : 'Paso Robles',
+		'sacramento.css' : 'Sacramento',
+		'santa barbara.css' : 'Santa Barbara',
+		'sierra.css' : 'Sierra',
+		'trinity.css' : 'Trinity',
+	},
 	// Asset Directories
 	SCSSAssetDir: 'assets/scss/', // Main SCSS 
 	JSAssetDir: 'assets/js/', // Main JS 
