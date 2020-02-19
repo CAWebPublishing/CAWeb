@@ -78,7 +78,7 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 			$caweb_search .= empty( $caweb_google_search_id ) ? ' hidden ' : '';
 
 		?>
-		<div id="head-search" class="search-container<?php print esc_attr( $caweb_search ) . implode( ', ', array( $caweb_ver, 5 <= $caweb_ver,is_string($caweb_ver),is_numeric($caweb_ver))); ?> hidden-print" role="region" aria-labelledby="search-expanded">
+		<div id="head-search" class="search-container<?php print esc_attr( $caweb_search ); ?> hidden-print" role="region" aria-labelledby="search-expanded">
 			<?php
 			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
 				require_once( 'content/search-form.php' );
