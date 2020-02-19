@@ -21,12 +21,13 @@ function caweb_get_page_version( $post_id = -1 ) {
 			$result = 4;
 			break;
 		case 'page-templates/page-template-v5.php':
-		default:
 			$result = 5;
+			break;
+		default:
 			break;
 	}
 
-	return (int) $result;
+	return $result;
 }
 
 /**
@@ -416,7 +417,7 @@ function caweb_get_user_color() {
  *
  * @return array
  */
-function caweb_allowed_html() {
+function caweb_allowed_html( $exclude = array() ) {
 	$attr = array(
 		'id'    => array(),
 		'class' => array(),
@@ -452,8 +453,15 @@ function caweb_allowed_html() {
 		'ol'     => $attr,
 		'ul'     => $attr,
 		'li'     => $attr,
-
+		'style'  => array(),
 	);
 
-	return $tags;
+	return array_diff_key( $tags, array_flip( $exclude ) );
+}
+
+function caweb_cdn_enabled(){
+	$cdn_enabled = get_option( 'ca_cdn_enabled', false );
+	$ver         = caweb_get_page_version( get_the_ID() );
+
+	return $cdn_enabled && 5 < $ver;
 }

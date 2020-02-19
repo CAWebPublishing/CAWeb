@@ -6,3 +6,7 @@ table[id^="tablepress-"] thead tr th:focus {
 div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   outline: #2ea3f2 solid 2px !important;
 }
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+  overflow-x: auto;
+}

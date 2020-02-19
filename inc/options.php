@@ -397,6 +397,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 	$caweb_general_options = array(
 		'ca_fav_ico',
 		'ca_site_version',
+		'ca_cdn_enabled',
 		'ca_default_navigation_menu',
 		'ca_menu_selector_enabled',
 		'ca_site_color_scheme',
@@ -459,6 +460,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		$caweb_social_extra_options[] = $social . '_footer';
 		if ( 'ca_social_email' !== $social ) {
 			$caweb_social_extra_options[] = $social . '_new_window';
+			$caweb_social_extra_options[] = $social . '_hover_text';
 		}
 	}
 

@@ -13,6 +13,7 @@
 			$header_checked = get_option(sprintf('%1$s_header', $option)) ? ' checked' : '';
 		    $footer_checked = get_option(sprintf('%1$s_footer', $option)) ? ' checked' : '';
 			$new_window_checked = get_option(sprintf('%1$s_new_window', $option)) ? ' checked' : '';
+			$hover_text = get_option(sprintf('%1$s_hover_text', $option), "Share via $social" );
     ?>
     <div class="form-row">
         <a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#<?php print $option ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print $option ?>-settings">
@@ -45,6 +46,12 @@
             <label for="<?php print $option; ?>_new_window" class="d-block"><strong>Open in New Tab:</strong></label>
             <small class="text-muted d-block">Open link in new tab.</small>
             <input type="checkbox" id="<?php print $option; ?>_new_window" name="<?php print $option; ?>_new_window" data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success"<?php print $new_window_checked?>>
+		</div>
+		 <!-- Hover Text -->
+		 <div class="form-group col-sm-3">
+            <label for="<?php print $option; ?>_hover_text" class="d-block"><strong>Hover Text:</strong></label>
+            <small class="text-muted d-block">Text displayed on mouse hover.</small>
+            <input type="text" id="<?php print $option; ?>_hover_text" name="<?php print $option; ?>_hover_text" value="<?php print $hover_text; ?>">
         </div>
         <?php endif; ?>
     </div>

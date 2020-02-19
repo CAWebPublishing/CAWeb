@@ -27,7 +27,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 			$_SESSION[ "display_alert_$caweb_a" ] = true;
 
 			?>
-			<div class="alert alert-dismissible alert-banner" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
+			<div class="alert alert-dismissible alert-banner border-top border-dark" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
 				<div class="container">
 					<button type="button" class="close caweb-alert-close" data-url="<?php print esc_url( admin_url( "admin-post.php?action=caweb_clear_alert_session&alert-id=$caweb_a" ) ); ?>" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -41,7 +41,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 						print esc_html( $caweb_data['header'] );
 						?>
 					</span>
-					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html() ); ?></span>
+					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html( array('p') ) ); ?></span>
 						<?php
 						if ( ! empty( $caweb_data['button'] ) && ! empty( $caweb_data['url'] ) ) :
 							$caweb_url    = $caweb_data['url'];

@@ -2,7 +2,8 @@ _notes/*
 */_notes/*
 */Thumbs.db
 /.vscode/
-/node_modules/
+node_modules/*
+*/node_modules/*
 /vendor/
 composer.lock
 package-lock.json

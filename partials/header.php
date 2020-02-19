@@ -7,7 +7,7 @@
 
 global $post;
 $caweb_ver          = caweb_get_page_version( get_the_ID() );
-$caweb_fixed_header = ( 5 === $caweb_ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
+$caweb_fixed_header = ( 5 <= $caweb_ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
 $caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
 $caweb_schemes      = caweb_color_schemes( caweb_get_page_version( get_the_ID() ), 'filename' );
 $caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
@@ -34,26 +34,21 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 	<?php
 
 		/* Version 5.0 Specific */
-	if ( 5 === caweb_get_page_version( get_the_ID() ) ) {
+	if ( 5 <= caweb_get_page_version( get_the_ID() ) ) {
 
 		/* Alerts */
-		get_template_part( 'partials/content/alerts' );
+		require_once( 'content/alerts.php' );
 
 		/* Include Utility Header */
-		get_template_part( 'partials/content/utility-header' );
+		require_once( 'content/utility-header.php' );
 
-		/* Location Bar */
-		get_template_part( 'partials/content/bar', 'location' );
-
-		/* Settings Bar */
-		get_template_part( 'partials/content/bar', 'settings' );
 	}
 
 	/* Include Branding */
-	get_template_part( 'partials/content/branding' );
+	require_once( 'content/branding.php' );
 
 	/* Include Mobile Controls */
-	get_template_part( 'partials/content/mobile-controls' );
+	require_once( 'content/mobile-controls.php' );
 
 	?>
 
