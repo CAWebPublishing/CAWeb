@@ -7,7 +7,7 @@
 
 global $post;
 $caweb_ver          = caweb_get_page_version( get_the_ID() );
-$caweb_fixed_header = ( 5 <= $caweb_ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '' );
+$caweb_fixed_header = 5 <= $caweb_ver && get_option( 'ca_sticky_navigation' ) ? ' fixed' : '';
 $caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
 $caweb_schemes      = caweb_color_schemes( caweb_get_page_version( get_the_ID() ), 'filename' );
 $caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
@@ -43,7 +43,7 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		require_once( 'content/utility-header.php' );
 
 		/* Include Location Bar */
-		require_once( 'content/bar-location.php' );
+		//require_once( 'content/bar-location.php' );
 
 		/* Include Settings Bar */
 		require_once( 'content/bar-settings.php' );
@@ -74,14 +74,14 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 			)
 		);
 
-			$caweb_search  = 5 === $caweb_ver && is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade' : '';
-			$caweb_search .= empty( $caweb_google_search_id ) ? ' hidden' : '';
+			$caweb_search  = 5 <= $caweb_ver && is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade ' : '';
+			$caweb_search .= empty( $caweb_google_search_id ) ? ' hidden ' : '';
 
 		?>
 		<div id="head-search" class="search-container<?php print esc_attr( $caweb_search ); ?> hidden-print" role="region" aria-labelledby="search-expanded">
 			<?php
 			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
-				get_template_part( 'partials/content/search-form' );
+				require_once( 'content/search-form.php' );
 			}
 
 			/* This is the Custom Google Translate Location for the old State Template Version 4 */
