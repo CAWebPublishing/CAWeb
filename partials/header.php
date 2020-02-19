@@ -42,6 +42,12 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 		/* Include Utility Header */
 		require_once( 'content/utility-header.php' );
 
+		/* Include Location Bar */
+		require_once( 'content/bar-location.php' );
+
+		/* Include Settings Bar */
+		require_once( 'content/bar-settings.php' );
+
 	}
 
 	/* Include Branding */
