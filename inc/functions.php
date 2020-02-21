@@ -458,10 +458,3 @@ function caweb_allowed_html( $exclude = array() ) {
 
 	return array_diff_key( $tags, array_flip( $exclude ) );
 }
-
-function caweb_cdn_enabled(){
-	$cdn_enabled = get_option( 'ca_cdn_enabled', false );
-	$ver         = caweb_get_page_version( get_the_ID() );
-
-	return $cdn_enabled && 5 < $ver;
-}

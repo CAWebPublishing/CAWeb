@@ -19,16 +19,6 @@
                 </select>
             </div>
         </div>
-        <!-- State CDN Enabled -->
-        <div class="form-row">
-            <div class="form-group col-sm-5<?php print 5 >= $ver ? ' d-none' : ''; ?>">
-                <label for="ca_cdn_enabled" class="d-block mb-0">
-                    <strong>Enable State CDN</strong>
-                    <input type="checkbox" name="ca_cdn_enabled" id="ca_cdn_enabled" <?php print $cdn_enabled ?>>
-                </label>
-                <small class="mb-2 text-muted d-block">Site will use CDN asset files wherever possible.</small>
-            </div>
-        </div>
         <!-- Fav Icon Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">
