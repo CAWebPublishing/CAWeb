@@ -59,14 +59,7 @@ jQuery(document).ready(function($) {
 
   // Display warning if Legacy Browser Support Enabled
   $('#ca_site_version').on('change',function(e){
-    var enabled = '5.5' === $(this).val();
-    var cdn = $('label[for="ca_cdn_enabled"]').parent();
-
-    if(enabled){
-      $(cdn).removeClass('d-none');
-    }else{
-      $(cdn).addClass('d-none');
-    }	
+    
   });
 
   // If no Search Engine ID hide Search on Front Page Option
