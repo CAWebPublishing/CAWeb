@@ -13,3 +13,10 @@ $nav-list-width: 100%;
 @import '../custom/module/header-slideshow';
 @import '../custom/module/section-carousel';
 @import '../custom/footer';
+
+// Corrects Logo when navigation is compacted
+@media (min-width: 768px){
+	.fixed.compact .header-organization-banner a img{
+		max-height: 50px;
+	}
+}
