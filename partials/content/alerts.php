@@ -32,6 +32,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 					<button type="button" class="close caweb-alert-close" data-url="<?php print esc_url( admin_url( "admin-post.php?action=caweb_clear_alert_session&alert-id=$caweb_a" ) ); ?>" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+					<?php if ( ! empty( $caweb_data['header'] ) ): ?>
 					<span class="alert-level">
 
 						<?php if ( ! empty( $caweb_data['icon'] ) ) : ?>
@@ -41,6 +42,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 						print esc_html( $caweb_data['header'] );
 						?>
 					</span>
+					<?php endif; ?>
 					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html( array('p') ) ); ?></span>
 						<?php
 						if ( ! empty( $caweb_data['button'] ) && ! empty( $caweb_data['url'] ) ) :
