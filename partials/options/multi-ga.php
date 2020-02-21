@@ -9,7 +9,7 @@ if ( isset( $_POST['caweb_multi_ga_options_submit'] ) ) {
 
 $mulit_ga = get_site_option( 'caweb_multi_ga', '' );
 ?>
-<form id="caweb-options-form" action="<?php print admin_url( 'admin.php?page=caweb_multi_ga' ); ?>" method="POST">
+<form id="caweb-multi-ga-options-form" action="<?php print admin_url( 'admin.php?page=caweb_multi_ga' ); ?>" method="POST">
 	<h2>Multisite Google Analytics</h2>
 	<div class="form-row">
 		<div class="form-group col-sm-5">
