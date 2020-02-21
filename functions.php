@@ -13,7 +13,6 @@ define( 'CAWEB_URI', get_stylesheet_directory_uri() );
 define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
-define( 'CAWEB_CA_STATE_TEMPLATE_CDN_URL', 'https://california.azureedge.net/cdt/statetemplate/5.5.9');
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal');
 
 /**
@@ -239,21 +238,13 @@ function caweb_wp_enqueue_parent_scripts() {
 function caweb_wp_enqueue_scripts() {
 	global $pagenow;
 	$vb_enabled  = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
-	$cdn_enabled           = caweb_cdn_enabled();
 	$ver         = caweb_get_page_version( get_the_ID() );
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
 	/* CAWeb Core CSS */
-	if( ! $cdn_enabled ){
-		$core_css_file    = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
-		wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
-	}else{
-		$cdn_css_file    = caweb_get_min_file( "/css/cdn-v$ver.css" );
-		wp_enqueue_style( 'caweb-core-style', CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/css/cagov.core.min.css', array(), CAWEB_VERSION );
-		wp_enqueue_style( 'caweb-color-style', sprintf('%1$s/css/colorscheme-%2$s.css', CAWEB_CA_STATE_TEMPLATE_CDN_URL, $color), array(), CAWEB_VERSION );
-		wp_enqueue_style( 'caweb-frontend-style', $cdn_css_file, array(), CAWEB_VERSION );
-	}
+	$core_css_file    = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
+	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
 	/* Google Fonts */
 	if( 5.5 >= $ver ){
@@ -309,39 +300,17 @@ function caweb_wp_enqueue_scripts() {
 			setcookie('googtrans', '/en/es');
 		}
 
-		if( $cdn_enabled ){
-			$frontend_js_file = caweb_get_min_file( "/js/frontend.js", 'js' );
-			$cagov_js_file = CAWEB_CA_STATE_TEMPLATE_CDN_URL . '/js/cagov.core.min.js';
-			$cagov_custom_js_file = caweb_get_min_file( "/assets/js/cagov/version$ver/custom.js", 'js' );
-			$caweb_a11y_js_file = caweb_get_min_file( "/js/a11y.js", 'js' );
+		$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
 
-			wp_register_script( 'caweb-frontent-script', $frontend_js_file, array( 'jquery' ), CAWEB_VERSION, false );
-			wp_register_script( 'cagov-core-script', $cagov_js_file, array( 'jquery' ), CAWEB_VERSION, false );
-			wp_register_script( 'cagov-custom-script', $cagov_custom_js_file, array( 'jquery' ), CAWEB_VERSION, false );
-			wp_register_script( 'caweb-a11y-script', $caweb_a11y_js_file, array( 'jquery' ), CAWEB_VERSION, false );
-
-			wp_localize_script( 'caweb-frontent-script', 'args', $localize_args );
-			wp_localize_script( 'caweb-a11y-script', 'args', $localize_args );
-
-			wp_enqueue_script( 'caweb-frontent-script' );
-			wp_enqueue_script( 'cagov-core-script' );
-			wp_enqueue_script( 'cagov-custom-script' );
-			wp_enqueue_script( 'caweb-a11y-script' );
-			
-
-		}else{
-			$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
-
-			/* Register Scripts */
-			wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
+		/* Register Scripts */
+		wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
 	
-			wp_register_script( 'cagov-caweb-script', $frontend_js_file, array('cagov-modernizr-script'), CAWEB_VERSION, true );
+		wp_register_script( 'cagov-caweb-script', $frontend_js_file, array('cagov-modernizr-script'), CAWEB_VERSION, true );
 			
-			wp_localize_script( 'cagov-caweb-script', 'args', $localize_args );
+		wp_localize_script( 'cagov-caweb-script', 'args', $localize_args );
 	
-			/* Enqueue Scripts */
-			wp_enqueue_script( 'cagov-caweb-script' );
-		}
+		/* Enqueue Scripts */
+		wp_enqueue_script( 'cagov-caweb-script' );
 
 		/* Geo Locator */
 		$ca_geo_locator_enabled = 	'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
