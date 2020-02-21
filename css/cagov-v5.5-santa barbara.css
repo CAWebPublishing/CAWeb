@@ -28292,3 +28292,9 @@ footer .container .group {
     display: block !important;
   }
 }
+
+@media (min-width: 768px) {
+  .fixed.compact .header-organization-banner a img {
+    max-height: 50px;
+  }
+}
