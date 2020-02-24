@@ -1,5 +1,8 @@
  jQuery(document).ready(function() {
-	$('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
+	$('.caweb-alert-close').click( function(e){ 
+		var alert_id = this.dataset.id; 
+		document.cookie = 'caweb-alert-id-' + alert_id + '=';
+	});
 	
 	/* Fixed padding for wp-activate.php page when Navigation is fixed */
 	if( $('header.fixed + #signup-content').length ){
