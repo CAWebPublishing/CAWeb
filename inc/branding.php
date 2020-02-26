@@ -58,10 +58,14 @@ function caweb_login_enqueue_scripts() {
  * Login Page Disclaimer Message
  *
  * @link https://developer.wordpress.org/reference/hooks/login_message/
- * @return string
+ *
+ * @return void
  */
 function caweb_disclaimer_message() {
-	if ( isset( $_REQUEST['action'] ) ) {
+	$verified = isset( $_REQUEST['caweb_disclaimer_nonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['caweb_disclaimer_nonce'] ), 'caweb_disclaimer' );
+	$action   = isset( $_REQUEST['action'] );
+
+	if ( $action || ! $verified ) {
 		return;
 	}
 
@@ -79,7 +83,6 @@ function caweb_disclaimer_message() {
 function caweb_login_url() {
 	return 'https://caweb.cdt.ca.gov';
 }
-
 
 /**
  * Changing the text on the logo to show your site name
