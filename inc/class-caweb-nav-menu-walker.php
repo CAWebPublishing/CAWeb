@@ -75,11 +75,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 						$original_title = $original_object->labels->archives;
 				}
 			}
+			$verified = isset( $_REQUEST['menu-settings-column-nonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['menu-settings-column-nonce'] ), 'add-menu_item' );
+			$active   = isset( $_GET['edit-menu-item'] ) && $item_id === $_GET['edit-menu-item'];
 
 			$classes = array(
 				'menu-item menu-item-depth-' . $depth,
 				'menu-item-' . esc_attr( $item->object ),
-				'menu-item-edit-' . ( ( isset( $_GET['edit-menu-item'] ) && $item_id === $_GET['edit-menu-item'] ) ? 'active' : 'inactive' ),
+				'menu-item-edit-' . ( $active ? 'active' : 'inactive' ),
 			);
 
 			$title = $item->title;
@@ -112,15 +114,17 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 													<?php
 													printf(
 														'<a href="%s" class="item-move-up" aria-label="%s">&#8593;</a>',
-														wp_nonce_url(
-															add_query_arg(
-																array(
-																	'action'    => 'move-up-menu-item',
-																	'menu-item' => $item_id,
+														esc_url_raw(
+															wp_nonce_url(
+																add_query_arg(
+																	array(
+																		'action'    => 'move-up-menu-item',
+																		'menu-item' => $item_id,
+																	),
+																	remove_query_arg( $removed_args, admin_url( 'nav-menus.php' ) )
 																),
-																remove_query_arg( $removed_args, admin_url( 'nav-menus.php' ) )
-															),
-															'move-menu_item'
+																'move-menu_item'
+															)
 														),
 														esc_attr( 'Move up' )
 													);
@@ -129,15 +133,17 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 													<?php
 													printf(
 														'<a href="%s" class="item-move-down" aria-label="%s">&#8595;</a>',
-														wp_nonce_url(
-															add_query_arg(
-																array(
-																	'action'    => 'move-down-menu-item',
-																	'menu-item' => $item_id,
+														esc_url_raw(
+															wp_nonce_url(
+																add_query_arg(
+																	array(
+																		'action'    => 'move-down-menu-item',
+																		'menu-item' => $item_id,
+																	),
+																	remove_query_arg( $removed_args, admin_url( 'nav-menus.php' ) )
 																),
-																remove_query_arg( $removed_args, admin_url( 'nav-menus.php' ) )
-															),
-															'move-menu_item'
+																'move-menu_item'
+															)
 														),
 														esc_attr( 'Move down' )
 													);
@@ -238,15 +244,17 @@ if ( ! class_exists( 'CAWeb_Nav_Menu_Walker' ) ) {
 									printf(
 										'<a class="item-delete submitdelete deletion" id="delete-%s" href="%s">%s</a>',
 										esc_attr( $item_id ),
-										wp_nonce_url(
-											add_query_arg(
-												array(
-													'action'    => 'delete-menu-item',
-													'menu-item' => $item_id,
+										esc_url_raw(
+											wp_nonce_url(
+												add_query_arg(
+													array(
+														'action'    => 'delete-menu-item',
+														'menu-item' => $item_id,
+													),
+													admin_url( 'nav-menus.php' )
 												),
-												admin_url( 'nav-menus.php' )
-											),
-											'delete-menu_item_' . $item_id
+												'delete-menu_item_' . $item_id
+											)
 										),
 										'Remove'
 									);
