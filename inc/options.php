@@ -314,7 +314,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	global $wp_filesystem;
 
 	foreach ( $values as $opt => $val ) {
-		switch( $opt ){
+		switch ( $opt ) {
 			case 'caweb_external_css':
 				$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
 				break;
@@ -322,13 +322,13 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
 				break;
 			case 'ca_custom_css':
-				if( ! file_exists( "$ext_css_dir/$site_id" ) ){
+				if ( ! file_exists( "$ext_css_dir/$site_id" ) ) {
 					mkdir( "$ext_css_dir/$site_id", 0777, true );
 				}
 				$wp_filesystem->put_contents( "$ext_css_dir/$site_id/caweb-custom.css", wp_unslash( $val ), FS_CHMOD_FILE );
 				break;
 			case 'ca_custom_js':
-				if( ! file_exists( "$ext_js_dir/$site_id" ) ){
+				if ( ! file_exists( "$ext_js_dir/$site_id" ) ) {
 					mkdir( "$ext_js_dir/$site_id", 0777, true );
 				}
 				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
@@ -338,7 +338,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 					$val = true;
 				}
 		}
-		 
+
 		update_option( $opt, $val );
 	}
 

@@ -7,7 +7,7 @@
  */
 
 add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
-add_action( 'admin_post_no_priv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
+add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
 
 /**
  * Retrieve attachment post meta alt text
