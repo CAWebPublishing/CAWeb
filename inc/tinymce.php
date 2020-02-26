@@ -27,15 +27,15 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 	}
 
 	$admin_css = caweb_get_min_file( '/css/admin.css' );
-	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
-	$css = array(
+	$color     = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$css       = array(
 		includes_url( '/css/dashicons.min.css' ),
 		includes_url( '/js/tinymce/skins/wordpress/wp-content.css' ),
 	);
 
 	$version     = caweb_get_page_version( get_the_ID() );
 	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
-	$css[] = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
+	$css[]       = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
 
 	$css[] = $admin_css;
 

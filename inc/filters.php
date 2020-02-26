@@ -13,7 +13,7 @@ add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
 add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 
 /* Suppress email validation */
-add_filter('admin_email_check_interval', '__return_false');
+add_filter( 'admin_email_check_interval', '__return_false' );
 
 /* Plugin Filters */
 add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
