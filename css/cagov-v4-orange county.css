@@ -8902,8 +8902,6 @@ figure {
   background-color: #483723;
 }
 
-/* Last Modified 9/11/2019 */
-/* Fullwidth Header Slideshow Banner */
 .et_pb_ca_fullwidth_banner_item.et_pb_module.slide .slide-text {
   max-width: 50%;
   padding-bottom: 15px !important;
@@ -8918,7 +8916,6 @@ figure {
   left: 50%;
 }
 
-/* Fullwidth Menu */
 .et_pb_module.et_pb_fullwidth_menu .nav > li {
   display: inline-block;
 }
@@ -8947,35 +8944,27 @@ figure {
   z-index: 1;
 }
 
-/* Section Primary  */
 .section {
   overflow: hidden;
 }
 
-/* Adds padding under featured image when in tablet mode */
 @media (max-width: 991px) {
-  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive,
-  .et_pb_ca_section_primary .col-md-4 img.img-responsive {
+  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive, .et_pb_ca_section_primary .col-md-4 img.img-responsive {
     padding-bottom: 10px;
   }
-  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4,
-  .et_pb_ca_section_primary.et_pb_module .col-md-4 {
+  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4, .et_pb_ca_section_primary.et_pb_module .col-md-4 {
     float: none !important;
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.et_pb_ca_section_primary,
-.et_pb_ca_fullwidth_section_primary,
-.et_pb_ca_fullwidth_section_footer {
+.et_pb_ca_section_primary, .et_pb_ca_fullwidth_section_primary, .et_pb_ca_fullwidth_section_footer {
   margin-bottom: 0 !important;
   padding: 10px 15px;
 }
 
-/* Section - Footer */
-.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child,
-.et_pb_ca_section_footer .row .quarter h4:first-child {
+.et_pb_ca_fullwidth_section_footer .row .quarter h4:first-child, .et_pb_ca_section_footer .row .quarter h4:first-child {
   border-bottom-style: none;
 }
 
@@ -8983,38 +8972,30 @@ figure {
   padding: 0 !important;
 }
 
-/* Section - Carousel */
 .et_pb_ca_section_carousel .container {
   width: 100%;
 }
 
-.et_pb_ca_section_carousel .carousel-media .item .preview-image,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item .preview-image {
+.et_pb_ca_section_carousel .carousel-media .item .preview-image, .et_pb_ca_fullwidth_section_carousel .carousel-media .item .preview-image {
   height: 150px;
 }
 
-.et_pb_ca_section_carousel .carousel-media .item img,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item img {
+.et_pb_ca_section_carousel .carousel-media .item img, .et_pb_ca_fullwidth_section_carousel .carousel-media .item img {
   height: 100%;
 }
 
-.et_pb_ca_section_carousel .carousel-media .item .details,
-.et_pb_ca_fullwidth_section_carousel .carousel-media .item .details {
+.et_pb_ca_section_carousel .carousel-media .item .details, .et_pb_ca_fullwidth_section_carousel .carousel-media .item .details {
   margin-top: 1em;
 }
 
-/* Panel Style */
-.et_pb_ca_panel.panel-none,
-.et_pb_ca_fullwidth_panel.panel-none {
-  border: none;
+.et_pb_ca_panel.panel-none, .et_pb_ca_fullwidth_panel.panel-none {
+  border: 0;
 }
 
-.et_pb_ca_panel .panel-heading h2,
-.et_pb_ca_fullwidth_panel .panel-heading h2 {
+.et_pb_ca_panel .panel-heading h2, .et_pb_ca_fullwidth_panel .panel-heading h2 {
   width: 100%;
 }
 
-/* Location Banner Thumbnail Image Fix*/
 .et_pb_ca_location_widget.location.banner .thumbnail img {
   width: 100%;
 }
@@ -9028,16 +9009,13 @@ figure {
   display: inline-block;
 }
 
-/* Profile Banner */
 .profile-banner .banner-subtitle {
-  color: #333333;
+  color: #333;
 }
 
 .profile-banner {
   background: url("../images/banner/banner-blank.png") no-repeat;
   background-size: 100% 100%;
-  /*overflow: hidden;
-   height: 90px;*/
 }
 
 .profile-banner .inner {
@@ -9047,7 +9025,7 @@ figure {
 .profile-banner.round-image {
   background: unset;
   height: auto;
-  border: none;
+  border: 0;
 }
 
 .profile-banner-img-wrapper {
@@ -9061,7 +9039,6 @@ figure {
   text-decoration: none;
 }
 
-/* Divi Accordion Style */
 .et-learn-more h3.heading-more {
   color: black;
 }
@@ -9070,13 +9047,11 @@ ul, ol {
   list-style-position: outside;
 }
 
-/* Fullwidth Section Footer */
 .et_pb_ca_fullwidth_section_footer li {
   margin-left: 1em;
   text-indent: -1em;
 }
 
-/* Fullwidth Section Carousel */
 .et_pb_ca_fullwidth_section_carousel button {
   margin-top: 1em;
 }
@@ -9085,7 +9060,6 @@ ul, ol {
   color: white;
 }
 
-/* Section Carousel */
 .et_pb_ca_section_carousel button {
   margin-top: 1em;
 }
@@ -9098,7 +9072,6 @@ ol {
   margin-left: 16px;
 }
 
-/* Service Tiles */
 .et_pb_ca_fullwidth_service_tiles .service-tile.half {
   width: 50%;
 }
@@ -9107,21 +9080,18 @@ ol {
   width: 100%;
 }
 
-.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"],
-.et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"], .et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
   white-space: pre-line;
 }
 
-/* Post List (Events) */
 .et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 {
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 a {
-  color: #347AB7;
+  color: #347ab7;
 }
 
-/* Post List (News) */
 .et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
   width: auto;
 }
@@ -9130,9 +9100,7 @@ ol {
   padding-left: 175px;
 }
 
-/* Post List (Profile) */
-.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header,
-.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body {
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .header, .et_pb_module.et_pb_ca_post_list.profile-list .profile-item.no-thumbnail .body {
   margin-left: 0;
 }
 
@@ -9140,28 +9108,21 @@ ol {
   min-height: 105px;
 }
 
-/* Post List (FAQs) */
-/* Remove the Divi Padding around the et_pb_toggle */
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close {
-  padding: 0px;
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open, .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close {
+  padding: 0;
 }
 
-/* Add outline */
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open:focus,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close:focus {
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open:focus, .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
 }
 
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title, .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading .panel-title {
   color: black !important;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading,
-.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading, .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
   border-bottom: inherit;
 }
 
@@ -9169,12 +9130,10 @@ ol {
   content: "";
 }
 
-/* Post List (General) */
 .et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before {
   content: "";
 }
 
-/* Apply the Arrows */
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading .panel-title a:after {
   content: "\43";
   font-family: cagov;
@@ -9185,15 +9144,13 @@ ol {
   font-family: cagov;
 }
 
-/* Cards */
 .et_pb_ca_card.et_pb_module .card-header {
   padding: 11px 15px;
 }
 
 .et_pb_ca_card.et_pb_module .card-title {
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-  /* Remove dotted line under card-title h4 ( this was in Version 4)*/
+  margin-bottom: 0;
+  padding-bottom: 0;
   border-bottom: 0 !important;
 }
 
@@ -9205,20 +9162,14 @@ ol {
   padding: 11px 15px;
 }
 
-/* GitHub Module */
 .et_pb_ca_github.et_pb_module ul li {
   list-style-type: none;
 }
 
-/* Remove the State Template background image from Divi Button, Email Optin, Blurb Images and Person Modules */
-.et_pb_button_module_wrapper.et_pb_module .et_pb_button,
-.et_pb_newsletter_button_wrap .et_pb_newsletter_button.et_pb_button,
-.et_pb_main_blurb_image a,
-.et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
+.et_pb_button_module_wrapper.et_pb_module .et_pb_button, .et_pb_newsletter_button_wrap .et_pb_newsletter_button.et_pb_button, .et_pb_main_blurb_image a, .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
   background-image: none !important;
 }
 
-/* Divi Slider & Post Sliders, arrows are not ADA compliant */
 .et-pb-slider-arrows a[class^="et-pb-arrow-"] span {
   display: block;
 }
@@ -12022,20 +11973,19 @@ li.responsive-tabs__list__item {
   color: #757575 !important;
 }
 
+@charset "UTF-8";
 .sub-nav.open {
   display: block;
   max-height: 700px;
   left: 0;
 }
 
-/* Search Styles 
- Search using Google API 2.0 */
 input.gsc-input:hover, input.gsc-input:focus {
   border-color: #fbad23;
 }
 
 table.gsc-search-box td.gsc-input {
-  padding-right: 0px !important;
+  padding-right: 0 !important;
 }
 
 input.gsc-input {
@@ -12057,23 +12007,16 @@ td.gsc-clear-button {
   width: 100%;
 }
 
-/* Media Query Styles */
 @media (max-width: 768px) {
-  /* Search Styles */
   .search-container {
     width: 175px;
   }
-  /* End of Search Styles */
 }
 
-/* End of Media Query Styles */
-/* Hide the 'X' button that appears in Version 4 search box */
 form#local_form > button.close.close-search {
   display: none;
 }
 
-/* Google Translate Style,
-Search box increased by 18px to match the width of Google Translate */
 div#google_translate_element.standard-translate {
   right: 13px;
   position: absolute;
@@ -12089,8 +12032,7 @@ td.gsc-search-button span {
   display: none;
 }
 
-.goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited,
-.goog-logo-link:hover, .goog-logo-link:active {
+.goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited, .goog-logo-link:hover, .goog-logo-link:active {
   color: #fff;
 }
 
@@ -12102,16 +12044,14 @@ td.gsc-search-button span {
   color: #fff;
 }
 
-/* End of Search */
 ul {
-  line-height: 1.42857143 !important;
+  line-height: 1.42857 !important;
 }
 
 [class^="list-"] {
   padding: 0;
 }
 
-/* Post Page Styles */
 .et_pb_pagebuilder_layout.single.et_full_width_page #page-container .et_pb_row {
   width: 100%;
 }
@@ -12120,18 +12060,14 @@ ul {
   width: 90%;
 }
 
-/* Monarch Plugin Styles */
 .et_monarch .et_social_inline_top {
   margin: -27px 0 !important;
 }
 
-/* Module Styles */
-/* Panels */
 .panel, .panel-heading {
   border-radius: 0;
 }
 
-/* Section - Carousel */
 .et_pb_ca_section_carousel .carousel-content .item {
   position: relative;
   background-size: cover;
@@ -12163,29 +12099,22 @@ ul {
   color: white;
 }
 
-/* Content Fit Carousel */
 .et_pb_ca_section_carousel.content_fit .et_pb_ca_panel .content-container {
   margin: 0;
 }
 
-/* Organizational Banner */
-/* Left */
 .header-organization-banner.pull-left {
   left: 128px;
 }
 
-/* Right */
 .header-organization-banner.pull-right {
   padding-right: 200px;
 }
 
-/* Header Slideshow Banner*/
-/* Makes the SlideShow Banner stay in the div */
 .header-slideshow-banner {
   height: 100% !important;
 }
 
-/* Navigation */
 .second-level-nav {
   -moz-column-count: 1 !important;
   column-count: 1 !important;
@@ -12213,7 +12142,6 @@ li.unit2 {
   min-height: 100px;
 }
 
-/* Remove underline from top level nav links */
 .top-level-nav > li .first-level-link {
   text-decoration: none;
 }
@@ -12222,26 +12150,20 @@ li.unit2 {
   width: 100%;
 }
 
-/* Remove arrow down from page titles */
 div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   display: none;
 }
 
-/* Remove the padding from 80px to 0px to make
-  main page-container begin below the header */
 #page-container {
-  padding-top: 0px !important;
+  padding-top: 0 !important;
 }
 
-/* Footer Styles */
 .global-footer ul > li {
   display: inline-flex;
   margin-bottom: 5px;
 }
 
-/* Mobile Control */
 @media (max-width: 767px) {
-  /* Header Styles */
   .mobile-controls {
     padding-top: 25px;
   }
@@ -12278,21 +12200,17 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   div#google_translate_element {
     top: 6px;
   }
-  /* End of Header Styles */
-  /* Footer Styles */
   .global-footer ul > li {
     display: inline-block;
   }
 }
 
-/* End of Mobile Control Styles */
 @media (min-width: 768px) {
   .carousel-content .item.backdrop .content-container:first-child {
     padding: 10%;
   }
 }
 
-/* Section Carousel Version 4 */
 .et_pb_ca_section_carousel .image-fit .content-container {
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);
@@ -12303,7 +12221,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   padding: 20px;
 }
 
-/* This make the agency logo responsive - this is commented out in cagov.v4core.css at line 3993 */
 @media (max-width: 480px) {
   .header-organization-banner img {
     max-width: 100%;
@@ -12326,7 +12243,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   }
 }
 
-/* Carousel Styling */
 .carousel .owl-nav {
   margin-top: 10px;
   text-align: center;
@@ -12344,9 +12260,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   cursor: pointer;
 }
 
-/*.carousel .owl-nav [class*='owl-'] > span {
-  line-height: 35px;
-}*/
 .carousel .owl-nav [class*='owl-']:hover {
   text-decoration: none;
 }
@@ -12383,25 +12296,16 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   border-radius: 30px;
 }
 
-.carousel .owl-dots .owl-dot.active span,
-.carousel .owl-dots .owl-dot:hover span {
+.carousel .owl-dots .owl-dot.active span, .carousel .owl-dots .owl-dot:hover span {
   background: #869791;
 }
 
-/* end theme */
-/* owl-inline-nav class positions previous and next buttons inline with the carousel */
-.carousel-media,
-.carousel-link,
-.carousel-slider,
-.carousel-gallery {
+.carousel-media, .carousel-link, .carousel-slider, .carousel-gallery {
   padding: 0 3em;
   position: relative;
 }
 
-.carousel-media .owl-nav,
-.carousel-link .owl-nav,
-.carousel-slider .owl-nav,
-.carousel-gallery .owl-nav {
+.carousel-media .owl-nav, .carousel-link .owl-nav, .carousel-slider .owl-nav, .carousel-gallery .owl-nav {
   position: absolute;
   top: 50%;
   left: 0;
@@ -12409,74 +12313,49 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   margin-top: 0;
 }
 
-.carousel-media .owl-prev,
-.carousel-link .owl-prev,
-.carousel-slider .owl-prev,
-.carousel-gallery .owl-prev {
+.carousel-media .owl-prev, .carousel-link .owl-prev, .carousel-slider .owl-prev, .carousel-gallery .owl-prev {
   position: absolute;
   left: 0;
 }
 
-.carousel-media .owl-next,
-.carousel-link .owl-next,
-.carousel-slider .owl-next,
-.carousel-gallery .owl-next {
+.carousel-media .owl-next, .carousel-link .owl-next, .carousel-slider .owl-next, .carousel-gallery .owl-next {
   position: absolute;
   right: 0;
 }
 
-.carousel-media .owl-nav .owl-prev,
-.carousel-link .owl-nav .owl-prev,
-.carousel-slider .owl-nav .owl-prev,
-.carousel-gallery .owl-nav .owl-prev,
-.carousel-media .owl-nav .owl-next,
-.carousel-link .owl-nav .owl-next,
-.carousel-slider .owl-nav .owl-next,
-.carousel-gallery .owl-nav .owl-next {
+.carousel-media .owl-nav .owl-prev, .carousel-link .owl-nav .owl-prev, .carousel-slider .owl-nav .owl-prev, .carousel-gallery .owl-nav .owl-prev, .carousel-media .owl-nav .owl-next, .carousel-link .owl-nav .owl-next, .carousel-slider .owl-nav .owl-next, .carousel-gallery .owl-nav .owl-next {
   margin: -1em 0 0;
 }
 
-.carousel-video,
-.carousel-video-submenu,
-.carousel-content {
+.carousel-video, .carousel-video-submenu, .carousel-content {
   overflow: hidden;
 }
 
-.carousel-video:hover .owl-prev,
-.carousel-video-submenu:hover .owl-prev,
-.carousel-content:hover .owl-prev {
+.carousel-video:hover .owl-prev, .carousel-video-submenu:hover .owl-prev, .carousel-content:hover .owl-prev {
   color: white;
   position: absolute;
   left: 15px;
 }
 
 @media (max-width: 767px) {
-  .carousel-video:hover .owl-prev,
-  .carousel-video-submenu:hover .owl-prev,
-  .carousel-content:hover .owl-prev {
-    left: 0.1em;
+  .carousel-video:hover .owl-prev, .carousel-video-submenu:hover .owl-prev, .carousel-content:hover .owl-prev {
+    left: .1em;
   }
 }
 
-.carousel-video:hover .owl-next,
-.carousel-video-submenu:hover .owl-next,
-.carousel-content:hover .owl-next {
+.carousel-video:hover .owl-next, .carousel-video-submenu:hover .owl-next, .carousel-content:hover .owl-next {
   color: white;
   position: absolute;
   right: 15px;
 }
 
 @media (max-width: 767px) {
-  .carousel-video:hover .owl-next,
-  .carousel-video-submenu:hover .owl-next,
-  .carousel-content:hover .owl-next {
-    right: 0.1em;
+  .carousel-video:hover .owl-next, .carousel-video-submenu:hover .owl-next, .carousel-content:hover .owl-next {
+    right: .1em;
   }
 }
 
-.carousel-video .owl-nav,
-.carousel-video-submenu .owl-nav,
-.carousel-content .owl-nav {
+.carousel-video .owl-nav, .carousel-video-submenu .owl-nav, .carousel-content .owl-nav {
   position: absolute;
   top: 50%;
   left: 0;
@@ -12484,37 +12363,23 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   margin-top: 0;
 }
 
-.carousel-video .owl-prev,
-.carousel-video-submenu .owl-prev,
-.carousel-content .owl-prev {
+.carousel-video .owl-prev, .carousel-video-submenu .owl-prev, .carousel-content .owl-prev {
   position: absolute;
   left: -2em;
 }
 
-.carousel-video .owl-next,
-.carousel-video-submenu .owl-next,
-.carousel-content .owl-next {
+.carousel-video .owl-next, .carousel-video-submenu .owl-next, .carousel-content .owl-next {
   position: absolute;
   right: -2em;
 }
 
-.carousel-video .owl-nav .owl-prev,
-.carousel-video-submenu .owl-nav .owl-prev,
-.carousel-content .owl-nav .owl-prev,
-.carousel-video .owl-nav .owl-next,
-.carousel-video-submenu .owl-nav .owl-next,
-.carousel-content .owl-nav .owl-next {
-  -webkit-transition: left 400ms ease, right 400ms ease;
-  transition: left 400ms ease, right 400ms ease;
+.carousel-video .owl-nav .owl-prev, .carousel-video-submenu .owl-nav .owl-prev, .carousel-content .owl-nav .owl-prev, .carousel-video .owl-nav .owl-next, .carousel-video-submenu .owl-nav .owl-next, .carousel-content .owl-nav .owl-next {
+  -webkit-transition: left 400ms ease,right 400ms ease;
+  transition: left 400ms ease,right 400ms ease;
   margin: -1em 0 0;
 }
 
-.carousel-video .owl-nav .owl-prev:hover,
-.carousel-video-submenu .owl-nav .owl-prev:hover,
-.carousel-content .owl-nav .owl-prev:hover,
-.carousel-video .owl-nav .owl-next:hover,
-.carousel-video-submenu .owl-nav .owl-next:hover,
-.carousel-content .owl-nav .owl-next:hover {
+.carousel-video .owl-nav .owl-prev:hover, .carousel-video-submenu .owl-nav .owl-prev:hover, .carousel-content .owl-nav .owl-prev:hover, .carousel-video .owl-nav .owl-next:hover, .carousel-video-submenu .owl-nav .owl-next:hover, .carousel-content .owl-nav .owl-next:hover {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
@@ -12522,12 +12387,12 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   .carousel-content .owl-nav .owl-prev {
     color: white;
     position: absolute;
-    left: 0.1em;
+    left: .1em;
   }
   .carousel-content .owl-nav .owl-next {
     color: white;
     position: absolute;
-    right: 0.1em;
+    right: .1em;
   }
 }
 
@@ -12566,8 +12431,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   padding: 20px 20px 50px 20px;
 }
 
-.carousel-content img + .content-container,
-.carousel-content video + .content-container {
+.carousel-content img + .content-container, .carousel-content video + .content-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -12580,13 +12444,11 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   overflow: hidden;
 }
 
-.carousel-content img + .content-container .content,
-.carousel-content video + .content-container .content {
+.carousel-content img + .content-container .content, .carousel-content video + .content-container .content {
   padding: 20px;
 }
 
-.carousel-content .item.backdrop img + .content-container,
-.carousel-content .item.backdrop video + .content-container {
+.carousel-content .item.backdrop img + .content-container, .carousel-content .item.backdrop video + .content-container {
   background: rgba(0, 0, 0, 0.3);
 }
 
@@ -12650,8 +12512,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   width: 100%;
 }
 
-.carousel-video .item .owl-video-wrapper,
-.carousel-video .item .owl-video-tn {
+.carousel-video .item .owl-video-wrapper, .carousel-video .item .owl-video-tn {
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
@@ -12742,8 +12603,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   right: 0;
 }
 
-.owl-nav .owl-prev,
-.owl-nav .owl-next {
+.owl-nav .owl-prev, .owl-nav .owl-next {
   margin: -1em 0 0;
 }
 
@@ -12774,7 +12634,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   padding-bottom: 0 !important;
 }
 
-/*  Services Tiles */
 .more-button {
   position: relative;
   overflow: hidden;
@@ -12791,7 +12650,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
 }
 
 .service-tile-panel {
-  /*Selectivly show when requested by user*/
   visibility: collapse;
   position: absolute;
 }
@@ -12816,7 +12674,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
 .service-tile {
   float: left;
   width: 100%;
-  /* Need to keep the two column longer than bootstrap has .make-*-column for */
   min-height: 1px;
   padding-left: 0;
   padding-right: 0;
@@ -12825,10 +12682,10 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   margin: 0;
   cursor: pointer;
   text-align: center;
-  outline: none;
+  outline: 0;
   min-height: 240px;
-  color: #E1F2F7;
-  background: #046B99;
+  color: #e1f2f7;
+  background: #046b99;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12891,9 +12748,9 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   left: 0;
   width: 100%;
   background: #000;
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 30%, #000000 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000', endColorstr='#000000', GradientType=0);
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 30%, #000 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.6) 30%, #000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000',endColorstr='#000000',GradientType=0);
   color: #fff;
   padding: 10px 0;
 }
@@ -12906,11 +12763,11 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   max-width: 100%;
   -webkit-transition: all .3s;
   transition: all .3s;
-  border-bottom: none;
+  border-bottom: 0;
 }
 
 .service-tile .teaser .title:hover {
-  color: #FDB81E;
+  color: #fdb81e;
 }
 
 .title:after {
@@ -12920,8 +12777,7 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   font-weight: normal;
 }
 
-[data-state="closed"].service-tile .title:after,
-[data-state="info"].service-tile .title:after {
+[data-state="closed"].service-tile .title:after, [data-state="info"].service-tile .title:after {
   content: "\50";
 }
 
@@ -12945,8 +12801,8 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
 }
 
 .service-tile-empty {
-  background: #046B99;
-  color: #9FDBF1;
+  background: #046b99;
+  color: #9fdbf1;
   overflow: hidden;
   width: 100%;
 }
@@ -12957,12 +12813,10 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
 }
 
 .service-tile-empty .title:after {
-  content: "\e65d" !important;
+  content: "" !important;
 }
 
-.service-tile-empty.half,
-.service-tile-empty.quarter,
-.service-tile-empty.third {
+.service-tile-empty.half, .service-tile-empty.quarter, .service-tile-empty.third {
   width: 100%;
 }
 
@@ -12996,7 +12850,6 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   }
 }
 
-/* service tile  and close open hover styles */
 .close {
   float: right;
   font-size: 24px;
@@ -13004,16 +12857,15 @@ div.entry-content > h1.container > span.ca-gov-icon-arrow-down {
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  opacity: 0.2;
+  opacity: .2;
   filter: alpha(opacity=20);
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: .5;
   filter: alpha(opacity=50);
 }
 
@@ -13025,7 +12877,6 @@ button.close {
   -webkit-appearance: none;
 }
 
-/* service tile global more button styles */
 .btn-more {
   display: inline-block;
   margin-bottom: 0;
@@ -13054,42 +12905,31 @@ button.close {
   font-size: 1.25rem;
 }
 
-.btn-more:focus,
-.btn-more:active:focus,
-.btn-more.active:focus,
-.btn-more.focus,
-.btn-more:active.focus,
-.btn-more.active.focus {
+.btn-more:focus, .btn-more:active:focus, .btn-more.active:focus, .btn-more.focus, .btn-more:active.focus, .btn-more.active.focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 
-.btn-more:hover,
-.btn-more:focus,
-.btn-more.focus {
+.btn-more:hover, .btn-more:focus, .btn-more.focus {
   color: #014e77;
   text-decoration: none;
 }
 
-.btn-more:active,
-.btn-more.active {
+.btn-more:active, .btn-more.active {
   outline: 0;
   background-image: none;
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
-.btn-more.disabled,
-.btn-more[disabled],
-fieldset[disabled] .btn-more {
+.btn-more.disabled, .btn-more[disabled], fieldset[disabled] .btn-more {
   cursor: not-allowed;
-  opacity: 0.35;
+  opacity: .35;
   filter: alpha(opacity=35);
   box-shadow: none;
 }
 
-a.btn-more.disabled,
-fieldset[disabled] a.btn-more {
+a.btn-more.disabled, fieldset[disabled] a.btn-more {
   pointer-events: none;
 }
 
@@ -13111,10 +12951,6 @@ fieldset[disabled] a.btn-more {
   color: #fff;
 }
 
-.btn-more.inverse:hover,
-.btn-more.inverse:focus {
-  color: #FDB81E;
+.btn-more.inverse:hover, .btn-more.inverse:focus {
+  color: #fdb81e;
 }
-
-/* End of Service Tiles */
-/* END from cagov.core.css */
