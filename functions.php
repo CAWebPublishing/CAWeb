@@ -1,253 +1,368 @@
 <?php
-
-/*
-
-	CAWeb Child Theme Functions
-	Author: Jesus D. Guzman
-
-	Sources:
-	- PHP (http://php.net/)
-	- Theme Development (https://codex.wordpress.org/Theme_Development)
-	- Developer Resources (https://developer.wordpress.org/?s=)
-	- Code Reference (https://developer.wordpress.org/reference/)
-	- Plugin Action Reference (https://codex.wordpress.org/Plugin_API/Action_Reference)
-
+/**
+ * CAWeb Theme Functions
+ *
+ * @author Jesus D. Guzman
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package CAWeb
  */
 
-define('CAWebAbsPath', get_stylesheet_directory());
-define('CAWebUri', get_stylesheet_directory_uri());
-define('CAWebVersion', wp_get_theme('CAWeb')->get('Version'));
-define('CAWebDiviVersion', wp_get_theme('Divi')->get('Version'));
+define( 'CAWEB_ABSPATH', get_stylesheet_directory() );
+define( 'CAWEB_URI', get_stylesheet_directory_uri() );
+define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
+define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
+define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 
-define('CAWebGoogleMapsEmbedAPIKey', 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE');
-// Actions Ran During any Request
-// CAWeb Admin Init
-add_action('admin_init', 'caweb_admin_init');
-function caweb_admin_init() {
 
-	// Core Updater
-	require_once(CAWebAbsPath . '/core/update.php');
+/**
+ * Plugin API/Action Reference
+ * Actions Run During a Typical Request
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference#Actions_Run_During_a_Typical_Request
+ */
+add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
+add_action( 'init', 'caweb_init' );
+add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
+add_action( 'get_header', 'caweb_et_project_get_header' );
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
+add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
+add_action( 'wp_head', 'caweb_wp_head' );
+add_action( 'wp_footer', 'caweb_wp_footer', 11 );
+
+/**
+ * Plugin API/Action Reference
+ * Actions Run During an Admin Page Request.
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference#Actions_Run_During_an_Admin_Page_Request
+ */
+add_action( 'admin_init', 'caweb_admin_init' );
+add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
+add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
+
+/*
+----------------------------
+	End of Action References
+----------------------------
+*/
+
+/*
+If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
+*/
+if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
+	if ( ! empty( CAWEB_EXTENSION ) && file_exists( sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION ) ) ) {
+		include sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
+	}
+} else {
+	include CAWEB_ABSPATH . '/divi/functions.php';
+}
+
+/*
+-------------------------------------
+	Typical Action Reference Functions
+-------------------------------------
+*/
+
+/**
+ * CAWeb After Setup Theme
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference/after_setup_theme
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ *
+ * @return void
+ */
+function caweb_setup_theme() {
+	/* Include CAWeb Functionality */
+	foreach ( glob( __DIR__ . '/inc/*.php' ) as $file ) {
+		require_once $file;
+	}
+
+	/* Insert Parent Content Type Category */
+	wp_insert_term( 'Content Types', 'category' );
+
+	/* Rename Default Category to All */
+	wp_update_term(
+		get_option( 'default_category' ),
+		'category',
+		array(
+			'name' => 'All',
+			'slug' => 'all',
+		)
+	);
+
+	/* Set Up Predefined Category Content Types */
+	$caweb_categories = array(
+		'Courses',
+		'Events',
+		'Exams',
+		'FAQs',
+		'Jobs',
+		'News',
+		'Profiles',
+		'Publications',
+	);
+
+	/*
+	Loop thru Predefined Categories and create
+	Content Categories under Content Types Category
+	*/
+	foreach ( $caweb_categories as $cat ) {
+		wp_insert_term(
+			$cat,
+			'category',
+			array(
+				'parent' => get_cat_ID( 'Content Types' ),
+			)
+		);
+	}
+
+	/**
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
+
+	/**
+	 * Unregister Menu Navigation Settings
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/unregister_nav_menu/
+	 */
+	unregister_nav_menu( 'primary-menu' );
+	unregister_nav_menu( 'secondary-menu' );
+	unregister_nav_menu( 'footer-menu' );
+
+	/**
+	 * Register CAWeb navigation menu locations
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
+	 */
+	register_nav_menus( caweb_nav_menu_theme_locations() );
+
+	/* If no session ID exists and headers havent been sent, start session*/
+	if ( ! session_id() && ! headers_sent() ) {
+		session_start();
+	}
+}
+
+
+/**
+ * CAWeb Init
+ * Triggered before any other hook when a user accesses the admin area.
+ * Note, this does not just run on user-facing admin screens.
+ * It runs on admin-ajax.php and admin-post.php as well.
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_init
+ * @return void
+ */
+function caweb_init() {
+	global $pagenow;
+
+	/**
+	 * Enqueues the default ThickBox js and css. (if not on the login page)
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/add_thickbox/
+	 */
+	if ( 'wp-login.php' !== $pagenow ) {
+		add_thickbox();
+	}
+
 }
 
 /**
- * Enable unfiltered_html capability for Administrators.
+ * CAWeb Pre Get Posts
  *
- * @param  array  $caps    The user's capabilities.
- * @param  string $cap     Capability name.
- * @param  int    $user_id The user ID.
- * @return array  $caps    The user's capabilities, with 'unfiltered_html' potentially added.
+ *  @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
+ *
+ * Fires after the query variable object is created, but before the actual query is run.
+ *
+ * @param WP_Query $query The WP Query Instance.
+ * @return WP_Query
  */
-function caweb_add_unfiltered_html_capability($caps, $cap, $user_id) {
-	if ('unfiltered_html' === $cap && user_can($user_id, 'administrator')) {
-		$caps = array('unfiltered_html');
-	}
-
-	return $caps;
-}
-add_filter('map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3);
-
-// CAWeb After Setup Theme
-add_action('after_setup_theme', 'caweb_setup_theme');
-function caweb_setup_theme() {
-	$inc_dir = CAWebAbsPath . '/includes';
-
-	// additional functions
-	require_once("{$inc_dir}/functions.php");
-
-	// Shortcodes
-	require_once("{$inc_dir}/shortcodes.php");
-
-	// customizer functions
-	require_once("{$inc_dir}/customizer.php");
-
-	// Navigation Menu Customization to wp-admin/nav-menus.php page
-	require_once("{$inc_dir}/nav_walker.php");
-	require_once("{$inc_dir}/nav.php");
-
-	// Metaboxes
-	require_once("{$inc_dir}/metaboxes.php");
-
-	// Password Reset
-	require_once("{$inc_dir}/wp-login.php");
-
-	// Filters
-	require_once(CAWebAbsPath . "/includes/filters.php");
-
-	// Options Page
-	require_once(CAWebAbsPath . '/options.php');
-
-	// Set Up Predefined Category Content Types
-	$ca_cats = array(
-		'Courses', 'Events', 'Exams', 'FAQs', 'Jobs',
-		'News', 'Profiles', 'Publications');
-
-	// Insert Parent Content Type Category
-	wp_insert_term('Content Types', 'category');
-
-	// Rename Default Category to All
-	wp_update_term(get_option('default_category'), 'category', array(
-		'name' => 'All',
-		'slug' => 'all'));
-
-	/* Loop thru Predefined Categories and create
-	Content Categories under Content Types Category */
-	foreach ($ca_cats as $c) {
-		wp_insert_term($c, 'category', array(
-			'parent' => get_cat_ID('Content Types'),
-		));
-	}
-
-	// Enable Post Thumbnails
-	add_theme_support('post-thumbnails');
-}
-
-// CAWeb Pre Get Posts
-add_action('pre_get_posts', 'caweb_pre_get_posts', 11);
-function caweb_pre_get_posts($query) {
+function caweb_pre_get_posts( $query ) {
 	global $wp_query;
-	$vars = array('year', 'monthnum', 'author_name', 'category_name', 'tag', 'paged');
-	$query_vars = $wp_query->query;
+	$vars       = array( 'year', 'monthnum', 'author_name', 'category_name', 'tag', 'paged' );
+	$query_vars = ! empty( $wp_query->query ) ? array_diff_key( $wp_query->query, array_flip( $vars ) ) : array();
 
-	foreach ($vars as $var) {
-		if (isset($query_vars[$var])) {
-			unset($query_vars[$var]);
-		}
-	}
-
-	if (empty($query_vars) && (is_archive() || is_category() || is_author() || is_tag())) {
-		$query->set('posts_per_page', 5);
+	if ( empty( $query_vars ) && ( is_archive() || is_category() || is_author() || is_tag() ) ) {
+		$query->set( 'posts_per_page', 5 );
 	}
 
 	return $query;
 }
 
-// Actions Ran During a Typical Request
-// CAWeb Init
-add_action('init', 'caweb_init');
-function caweb_init() {
-	global $pagenow;
-
-	/*
-		This is a Divi action and is not needed,
-		it requires setting the Site Icon from the Theme Customizer
-		if not set it will display with an unknown source.
-	 */
-	remove_action('wp_head', 'add_favicon');
-
-	// Unregister Menu Navigation Settings
-	unregister_nav_menu('primary-menu');
-	unregister_nav_menu('secondary-menu');
-	unregister_nav_menu('footer-menu');
-
-	// Register Menu Navigation Settings
-	register_nav_menus(caweb_nav_menu_theme_locations());
-
-	// Enable Thickbox
-	if ('wp-login.php' !== $pagenow) {
-		add_thickbox();
-	}
-	if ( ! session_id() && ! headers_sent()) {
-		session_start();
-	}
-
-	add_action('admin_post_caweb_clear_alert_session', 'caweb_clear_alert_session');
-	add_action('admin_post_nopriv_caweb_clear_alert_session', 'caweb_clear_alert_session');
-
-	add_action('caweb_post_list_module_clear_cache', 'caweb_post_list_module_clear_cache', 10, 1);
-}
-
-function caweb_post_list_module_clear_cache() {
-	if (function_exists('clear_nginx_post_publish_cache')) {
-		clear_nginx_post_publish_cache();
+/**
+ * Add template header if using Divi Custom Type 'Project
+ *
+ * @link https://developer.wordpress.org/reference/hooks/get_header/
+ * @param  string $name Name of the specific header file to use. null for the default header.
+ *
+ * @return void
+ */
+function caweb_et_project_get_header( $name = null ) {
+	if ( 'project' === get_post_type( get_the_ID() ) ) {
+		locate_template( array( 'header.php' ), true );
+		get_template_part( 'partials/header' );
 	}
 }
-function caweb_clear_alert_session() {
-	$id = $_GET['alert-id'];
 
-	if (isset($_SESSION['display_alert_' . $id])) {
-		$_SESSION['display_alert_' . $id] = false;
-	}
-
-	die();
-}
-add_action('wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts');
+/**
+ * Register Parent Theme styles.css
+ *
+ * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+ *
+ * Fires when scripts and styles are enqueued.
+ * @return void
+ */
 function caweb_wp_enqueue_parent_scripts() {
-	// Required in order to inherit parent theme style.css
-	wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', array());
+	/* Required in order to inherit parent theme style.css */
+	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), CAWEB_DIVI_VERSION );
 }
-// CAWeb Enqueue Scripts and Styles at the bottom
-add_action('wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15);
+
+/**
+ * Register CAWeb Theme scripts/styles with priority of 15
+ *
+ * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+ *
+ * Fires when scripts and styles are enqueued.
+ * @todo Create file for Custom CSS
+ * @return void
+ */
 function caweb_wp_enqueue_scripts() {
 	global $pagenow;
+	$vb_enabled  = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
+	$ver         = caweb_get_page_version( get_the_ID() );
+	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
-	$post_id = get_the_ID();
-	$ver = caweb_get_page_version($post_id);
-	$color = get_option('ca_site_color_scheme', 'oceanside');
-	$schemes = caweb_color_schemes(caweb_get_page_version(get_the_ID()), 'filename');
-	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
+	$core_css_file    = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
+	$frontend_js_file = caweb_get_min_file( '/js/frontend.js', 'js' );
 
-	$coreCSSfile = getMinFile( "/css/cagov-v$ver-$colorscheme.css" ); 
+	/* CAWeb Core CSS */
+	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
-	$frontendJSfile = getMinFile( '/js/frontend.js', 'js' );
+	/* Google Fonts */
+	wp_enqueue_style( 'cagov-google-font-style', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
 
-	// If on the activation page
-	if ('wp-activate.php' == $pagenow) {
-		//wp_enqueue_style('caweb-core-styles', sprintf('%1$s/css/version%2$s/cagov.core.css', CAWebUri, $ver), array(), CAWebVersion);
-		//wp_enqueue_style('caweb-color-styles', sprintf('%1$s/css/version%2$s/colorscheme/%3$s.css', CAWebUri, $ver, $colorscheme), array(), CAWebVersion);
-	} else {
-		wp_enqueue_style('caweb-core-style', $coreCSSfile, array(), CAWebVersion);
+	/* If on the activation page */
+	if ( 'wp-activate.php' !== $pagenow ) {
 
-		// External CSS Styles
-		$ext_css = array_values(array_filter(get_option('caweb_external_css', array())));
+		/* External CSS Styles */
+		$ext_css     = array_values( array_filter( get_option( 'caweb_external_css', array() ) ) );
+		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
-		foreach ($ext_css as $index => $name) {
-			$location = sprintf('%1$s/css/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-			wp_enqueue_style(sprintf('caweb-external-custom-%1$d-styles', $index + 1), $location, array(), CAWebVersion);
+		foreach ( $ext_css as $index => $name ) {
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
+		}
+
+		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
+			$custom_css = sprintf( '%1$s/css/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
+
+			if ( ! file_exists( "$custom_css/caweb-custom.css" ) ) {
+				global $wp_filesystem;
+				if( ! file_exists( $custom_css ) ){
+					mkdir( $custom_css, 0777, true );
+				}
+				$wp_filesystem->put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ), FS_CHMOD_FILE );
+			}
+
+			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), CAWEB_VERSION );
 		}
 	}
 
-	// Register Scripts
-	wp_register_script('cagov-modernizr-script', getMinFile('/js/libs/modernizr-3.6.0.js', 'js'), array('jquery'), CAWebVersion, false);
+	/* This removes Divi Google Font CSS */
+	wp_deregister_style( 'divi-fonts' );
 
-	wp_register_script('cagov-frontend-script', $frontendJSfile, array(), CAWebVersion, true);
-	
-	// Localize the search script with the correct site url
-	wp_localize_script('cagov-frontend-script', 'args', array('ca_google_analytic_id' => get_option('ca_google_analytic_id'),
-		'ca_site_version' => $ver,
-		'ca_frontpage_search_enabled' => get_option('ca_frontpage_search_enabled') && is_front_page(),
-		'ca_google_search_id' => get_option('ca_google_search_id'),
-		'caweb_multi_ga' => get_site_option('caweb_multi_ga'),
-		'ca_google_trans_enabled' => 'none' !== get_option('ca_google_trans_enabled') ? true : false,
-		'ca_geo_locator_enabled' => 5 >= $ver && "on" === get_option('ca_geo_locator_enabled') || get_option('ca_geo_locator_enabled')
-		)
-	);
+	if ( ! $vb_enabled ) {
+		/* Register Scripts */
+		wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
 
-	// Enqueue Scripts
-	wp_enqueue_script('cagov-modernizr-script');
-	wp_enqueue_script('cagov-frontend-script');
+		wp_register_script( 'cagov-frontend-script', $frontend_js_file, array(), CAWEB_VERSION, true );
 
-	// This removes Divi Google Font CSS
-	wp_deregister_style('divi-fonts');
+		$localize_args = array(
+			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
+			'ca_site_version'             => $ver,
+			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
+			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
+			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
+			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
+			'ca_geo_locator_enabled'      => 5 >= $ver && 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' ),
+			'ajaxurl' => admin_url('admin-post.php')
+		);
+
+		wp_localize_script( 'cagov-frontend-script', 'args', $localize_args );
+
+		/* Enqueue Scripts */
+		wp_enqueue_script( 'cagov-modernizr-script' );
+		wp_enqueue_script( 'cagov-frontend-script' );
+	}
+
 }
 
-add_action('wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115);
+/**
+ * Register CAWeb Theme scripts/styles with priority of 115
+ *
+ * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+ *
+ * Fires when scripts and styles are enqueued.
+ * @todo Create file for Custom JS
+ * @return void
+ */
 function caweb_late_wp_enqueue_scripts() {
-	// If CAWeb is a child theme of Divi, include Accessibility Javascript
-	if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
-		wp_register_script('caweb-accessibility-scripts', CAWebUri . '/divi/js/accessibility.js', array('jquery'), CAWebVersion, true);
+	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
+	$ver        = caweb_get_page_version( get_the_ID() );
 
-		wp_localize_script('caweb-accessibility-scripts', 'accessibleargs',
-                array('ajaxurl' => admin_url('admin-post.php')));
+	if ( $vb_enabled ) {
+		return;
+	}
 
-		wp_enqueue_script('caweb-accessibility-scripts');
+	/* External JS */
+	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );
+
+	foreach ( $ext_js as $index => $name ) {
+		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
+		$i        = $index + 1;
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), CAWEB_VERSION, true );
+		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
+	}
+
+	/* Custom JS */
+	if ( ! empty( get_option( 'ca_custom_js', '' ) ) ) {
+		$custom_js = sprintf( '%1$s/js/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
+
+		if ( ! file_exists( "$custom_js/caweb-custom.js" ) ) {
+			global $wp_filesystem;
+			
+			if( ! file_exists( $custom_js ) ){
+				mkdir( $custom_js, 0777, true );
+			}
+
+			$wp_filesystem->put_contents( "$custom_js/caweb-custom.js", wp_unslash( get_option( 'ca_custom_js' ) ), FS_CHMOD_FILE );
+		}
+
+		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/external/%2$s/caweb-custom.js', CAWEB_URI, get_current_blog_id() ), array( 'jquery' ), CAWEB_VERSION, true );
+		wp_enqueue_script( 'caweb-custom-js' );
+
 	}
 }
 
-// CAWeb WP Head
-add_action('wp_head', 'caweb_wp_head');
+/**
+ * WP Head
+ * Prints scripts or data in the head tag on the front end.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/wp_head/
+ * @todo Move script to Divi Accessibility Script and remove function
+ * @return void
+ */
 function caweb_wp_head() {
+	$caweb_fav_ico = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 	?>
-	<script>
+<script>
 	(function($) {
 		$(window).bind("load", function() {
 			$('.fluid-width-video-wrapper').each(function() {
@@ -256,180 +371,211 @@ function caweb_wp_head() {
 			});
 		});
 	})(jQuery)
-	</script>
+</script>
 
-<?php
+<link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
+<link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
 
-    if ( ! empty(get_option('ca_fav_ico', caweb_default_favicon_url()))) {
-    	printf('<link title="Fav Icon" rel="icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
-    	printf('<link rel="shortcut icon" href="%1$s">', get_option('ca_fav_ico', caweb_default_favicon_url()));
-    }
+	<?php
 
-	if ( ! empty(get_option('ca_custom_css', ''))) {
-		printf('<style id="ca_custom_css">%1$s</style>', wp_unslash(get_option('ca_custom_css')));
-	}
-}
-add_filter('get_site_icon_url', 'caweb_site_icon_url', 10, 3);
-function caweb_site_icon_url($url, $size, $blog_id) {
-	if ( ! is_admin()) {
-		return '';
-	}
-
-	return $url;
 }
 
-add_action('get_header', 'caweb_et_project_get_header');
-function caweb_et_project_get_header($name = null) {
-	// Add template header if using Divi Custom Type 'Project'
-	if ('project' == get_post_type(get_the_ID())) {
-		locate_template(array('header.php'), true);
-		get_template_part('partials/content', 'header');
-	}
-}
-
-// CAWeb Footer
-add_action('wp_footer', 'caweb_wp_footer', 11);
+/**
+ * CAWeb Footer
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference/wp_footer
+ * @return void
+ */
 function caweb_wp_footer() {
-	// This removes Divi Builder Google Font CSS
-	wp_deregister_style('et-builder-googlefonts');
+	/* This removes Divi Builder Google Font CSS */
+	wp_deregister_style( 'et-builder-googlefonts' );
 }
 
-function caweb_late_wp_footer() {
-	// Load Core JS at the very end along with any external/custom javascript/jquery
-	printf('<script src="%1$s/js/cagov.core.js?ver=%2$s"></script>', CAWebUri, CAWebVersion);
+/*
+-----------------------------------------------
+	End of Typical Action Reference Functions
+-----------------------------------------------
+*/
 
-	// External JS
-	$ext_js = array_values(array_filter(get_option('caweb_external_js', array())));
+/*
+-------------------------------------
+	Admin Action Reference Functions
+-------------------------------------
+*/
 
-	foreach ($ext_js as $index => $name) {
-		$location = sprintf('%1$s/js/external/%2$s/%3$s', CAWebUri, get_current_blog_id(), $name);
-		printf('<script src="%1$s?ver=%2$s" id="caweb-external-custom-%3$d-scripts"></script>', $location, CAWebVersion, $index + 1);
-	}
+/**
+ * CAWeb Admin Init
+ *
+ * Triggered before any other hook when a user accesses the admin area.
+ * Note, this does not just run on user-facing admin screens.
+ * It runs on admin-ajax.php and admin-post.php as well.
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_init
+ * @return void
+ */
+function caweb_admin_init() {
+	/* Core Updater */
+	require_once CAWEB_ABSPATH . '/core/class-caweb-theme-update.php';
 
-	// Custom JS
-	if ("" !== get_option('ca_custom_js', '')) {
-		printf('<script id="ca_custom_js">%1$s</script>', wp_unslash(get_option('ca_custom_js')));
-	}
+	/**
+	 * Initialize the WP Filesystem Class
+	 *
+	 * @link https://codex.wordpress.org/Filesystem_API
+	 */
+	$creds = request_filesystem_credentials( '', '', false, false, null );
+	WP_Filesystem( $creds );
+
 }
-add_action('wp_footer', 'caweb_late_wp_footer', 115);
 
-// Actions Ran During an Admin Page Request
-// CAWeb Admin Enqueue Scripts and Styles
-add_action('admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15);
-function caweb_admin_enqueue_scripts($hook) {
-	$pages = array('toplevel_page_caweb_options',  'caweb-options_page_caweb_api', 'nav-menus.php');
-	
-	$adminCSS = getMinFile( '/css/admin.css' );
-	
-	$version = caweb_get_page_version(get_the_ID());
-	$color = get_option('ca_site_color_scheme', 'oceanside');
-	$schemes = caweb_color_schemes($version, 'filename');
-	$colorscheme = isset($schemes[$color]) ? $schemes[$color] : 'oceanside';
+/**
+ * CAWeb Admin Enqueue Scripts and Styles
+ *
+ * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
+ *
+ * @param  string $hook The current admin page.
+ *
+ * @return void
+ */
+function caweb_admin_enqueue_scripts( $hook ) {
+	$pages = array( 'toplevel_page_caweb_options', 'caweb-options_page_caweb_multi_ga','caweb-options_page_caweb_api', 'nav-menus.php' );
 
-	$editorCSS = getMinFile( "/css/cagov-v$version-$colorscheme.css" );
+	$admin_css = caweb_get_min_file( '/css/admin.css' );
+	$bootstrap_css = caweb_get_min_file( '/css/bootstrap.css' );
 
-	if (in_array($hook, $pages)) {
-		$adminJS = getMinFile( '/js/admin.js', 'js' );
+	$version     = caweb_get_page_version( get_the_ID() );
+	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
 
-		// Enqueue Scripts
-		wp_enqueue_script('jquery');
+	$editor_css = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
+
+	if ( in_array( $hook, $pages, true ) ) {
+		$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
+		$bootstrap_js = caweb_get_min_file( '/js/bootstrap.js', 'js' );
+
+		/* Enqueue Scripts */
+		wp_enqueue_script( 'jquery' );
 		wp_enqueue_media();
 		wp_enqueue_editor();
 
-		wp_enqueue_script('custom-header');
+		wp_enqueue_script( 'custom-header' );
 
-		wp_register_script('caweb-admin-scripts', $adminJS, array('jquery', 'thickbox'), CAWebVersion, true);
+		wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
+		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
-		wp_localize_script('caweb-admin-scripts', 'args', array('defaultFavIcon' => caweb_default_favicon_url(), 'changeCheck' => $hook, 'caweb_icons' => caweb_get_icon_list(-1, '', true), 'caweb_colors' => caweb_template_colors(), 'tinymce_settings' => caweb_tiny_mce_settings()));
+		$caweb_localize_args = array(
+			'defaultFavIcon'   => caweb_default_favicon_url(),
+			'changeCheck'      => $hook,
+			'caweb_icons'      => caweb_get_icon_list( -1, '', true ),
+			'caweb_colors'     => caweb_template_colors(),
+			'tinymce_settings' => caweb_tiny_mce_settings(),
+		);
 
-		wp_enqueue_script('caweb-admin-scripts');
-		
-		// Enqueue Styles
-		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
-	} elseif (in_array($hook, array('post.php', 'post-new.php', 'widgets.php'))) {
-		wp_enqueue_style('caweb-admin-styles', $adminCSS, array(), CAWebVersion);
-	}
+		wp_localize_script( 'caweb-admin-scripts', 'args', $caweb_localize_args );
 
-	// Load editor styling
-	wp_dequeue_style(get_template_directory_uri() . 'css/editor-style.css');
-	add_editor_style( $editorCSS );
-}
+		wp_enqueue_script( 'caweb-admin-scripts' );
 
-// CAWeb Admin Head
-add_action('admin_head', 'caweb_admin_head');
-function caweb_admin_head() {
-	$icon = apply_filters('get_site_icon_url', sprintf('%1$s/images/system/caweb_logo.ico', CAWebUri), 512, get_current_blog_id());
-	printf('<link title="Fav Icon" rel="icon" href="%1$s">', $icon);
+		/*
+		Bootstrap 4 Toggle
+		https://gitbrent.github.io/bootstrap4-toggle/
+		*/
+		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
 
-	// This will hide all WPMUDev Dashboard Feeds from Screen Options and keep their Meta Boxes open
-	print '<style>label[for^="wpmudev_dashboard_item_df"]{display: none;}div[id^="wpmudev_dashboard_item_df"] .inside{display:block !important;}</style>';
-
-	// This is a fix for CAWeb icons in the new divi builder
-	print '<style>
-            body.et-db #et-boc .et-fb-font-icon-list li:after {
-              font-family: "CaGov", "ETModules" !important;
-            } 
-          </style>';
-}
-
-// CAWeb Admin Bar Menu
-add_action('admin_bar_menu', 'caweb_admin_bar_menu', 1000);
-function caweb_admin_bar_menu($wp_admin_bar) {
-	// Remove WP Admin Bar Nodes
-	$wp_admin_bar->remove_node('themes');
-	$wp_admin_bar->remove_node('menus');
-	$wp_admin_bar->remove_node('customize-divi-theme');
-	$wp_admin_bar->remove_node('customize-divi-module');
-
-	if (current_user_can('manage_options')) {
-		// Add CAWeb WP Admin Bar Nodes
-		$wp_admin_bar->add_node(array(
-			'id'     => 'caweb-options',
-			'title'  => 'CAWeb Options',
-			'href' =>  get_admin_url() . 'admin.php?page=caweb_options',
-			'parent' => 'site-name',
-		)
-								);
-		// Add (Menu) Navigation Node
-		$wp_admin_bar->add_node(array(
-			'id'     => 'caweb-navigation',
-			'title'  => 'Navigation',
-			'href' => get_admin_url() . 'nav-menus.php',
-			'parent' => 'site-name',
-		)
-								);
-	}
-
-	if ( ! is_multisite() || current_user_can('manage_network_options')) {
-		$wp_admin_bar->add_node(array(
-			'id'     => 'caweb-api',
-			'title'  => 'GitHub API Key',
-			'href' => get_admin_url() . 'admin.php?page=caweb_api',
-			'parent' => 'site-name',
-		)
-								);
-	}
-}
-
-// If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
-if (is_child_theme() && 'Divi' == wp_get_theme()->get('Template')) {
-	// CAWeb Custom Modules
-	add_action('et_pagebuilder_module_init', 'caweb_et_pagebuilder_module_init');
-	function caweb_et_pagebuilder_module_init() {
-		$divi_builder = CAWebAbsPath . "/divi/builder";
-		include("$divi_builder/functions.php");
-		include("$divi_builder/layouts.php");
-
-		if (class_exists('ET_Builder_Module')) {
-			include("$divi_builder/class-caweb-builder-element.php");
-
-			$modules = glob("$divi_builder/modules/*.php");
-			foreach ($modules as $module_file) {
-				require_once($module_file);
-			}
+		/* Enqueue Styles */
+		if( 'nav-menus.php' !==  $hook ){
+			wp_enqueue_style( 'caweb-bootstrap-styles', $bootstrap_css, array(), CAWEB_VERSION );
 		}
+		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
+		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
+	} elseif ( in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ) {
+		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 	}
-} else {
-	include(CAWebAbsPath . "/divi/functions.php");
+
+	/* Load editor styling */
+	wp_dequeue_style( get_template_directory_uri() . 'css/editor-style.css' );
+	add_editor_style( $editor_css );
 }
-?>
+
+/**
+ * Set CAWeb Category based on Post Detail Module used.
+ * Fires once a post has been saved.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/save_post/
+ *
+ * @param  int     $post_id Post ID.
+ * @param  WP_POST $post Post object.
+ * @todo Remove nginx cache references.
+ * 
+ * @return void
+ */
+function caweb_save_post_list_meta( $post_id, $post ) {
+	$cats = wp_get_post_categories( $post_id );
+
+	$content = $post->post_content;
+	/* Search for Post Detail Module if it exists, add the appropriate Category */
+	$layout = caweb_get_shortcode_from_content( $content, 'et_pb_ca_post_handler' );
+
+	$layout = ( isset( $layout->post_type_layout ) ? $layout->post_type_layout : '' );
+
+	switch ( $layout ) {
+
+		case 'course':
+			array_push( $cats, get_cat_ID( 'Courses' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'event':
+			array_push( $cats, get_cat_ID( 'Events' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'exam':
+			array_push( $cats, get_cat_ID( 'Exams' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'faqs':
+			array_push( $cats, get_cat_ID( 'FAQs' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'jobs':
+			array_push( $cats, get_cat_ID( 'Jobs' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'news':
+			array_push( $cats, get_cat_ID( 'News' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+
+		case 'profile':
+			array_push( $cats, get_cat_ID( 'Profiles' ) );
+			array_push( $cats, get_cat_ID( 'Content Types' ) );
+
+			break;
+	}
+
+	wp_set_object_terms( $post_id, $cats, 'category' );
+
+	/* Search for Post List, Post Slider, PostNavigation, Blog Module if they exists, add the 'nginx_cache_purge' custom meta field */
+	$cache_modules = array( 'et_pb_ca_post_list', 'et_pb_post_slider', 'et_pb_blog', 'et_pb_post_nav' );
+	$module        = caweb_get_shortcode_from_content( $content, $cache_modules, true );
+
+	if ( ! empty( $module ) ) {
+		update_post_meta( $post_id, 'nginx_cache_purge', 'yes' );
+	} else {
+		delete_post_meta( $post_id, 'nginx_cache_purge' );
+	}
+}
+
+/*
+--------------------------------------------
+	End of Admin Action Reference Functions
+--------------------------------------------
+*/

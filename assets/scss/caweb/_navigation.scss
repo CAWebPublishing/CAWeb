@@ -1,0 +1,9 @@
+/* CAWeb Navigation Page Styles */
+/* Remove Manage with Live Preview */
+.page-title-action{
+	display:none;
+}
+/* Remove Auto-add Pages from Navigation menu */
+fieldset.field-move,.menu-settings-group.auto-add-pages{
+    display: none !important;
+}

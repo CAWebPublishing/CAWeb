@@ -1,1 +1,139 @@
-(function(b){var c;var a;b(function(){var d=b(".available-headers");d.imagesLoaded(function(){d.masonry({itemSelector:".default-header",isRTL:!!("undefined"!=typeof isRtl&&isRtl)})});b(document).on("click","div .library-link",function(h){var g=b(this);a=this.name;h.preventDefault();var f=g.data("option");var j=g.data("uploader");var e=j?"":"hidden-upload";var i=g.data("icon-check")&&g.attr("data-icon-check");if(!!f&&f.indexOf(",")>0){f=f.split(",")}if(c){}c=wp.media.frames.customHeader=wp.media({title:g.data("choose"),library:{type:f},uploader:j,button:{text:g.data("update"),close:true}});c.on("select",function(){var p=c.state().get("selection").first(),n=g.data("updateLink");var r=document.getElementById(a);var m=document.getElementById(a+"_img");var q=document.getElementById(a+"_filename");var o={action:"caweb_fav_icon_check",icon_url:p.attributes.url,};if(/\d+_media_image/.test(a)){var k=document.getElementById(a.substring(0,a.indexOf("_"))+"_caweb_nav_media_image_alt_text");r.value=p.attributes.url;k.value=p.attributes.alt}else{if("true"!==i){r.value=p.attributes.url;if(null!==m){m.src=p.attributes.url}if(null!==q){q.value=p.attributes.filename}if(/header_ca_branding/.test(a)){var l=document.getElementById("header_ca_branding_alt_text");l.value=p.attributes.alt}}else{jQuery.post(ajaxurl,o,function(s){if(1==s){m.src=p.attributes.url;r.value=p.attributes.url;q.value=p.attributes.filename}else{alert("Invalid Icon Mime Type: "+p.attributes.filename)}})}}});c.on("open",function(){if(!j){var k=c.el.getElementsByClassName("media-frame-router")[0].getElementsByClassName("media-router")[0].getElementsByClassName("media-menu-item");k[1].click();k[0].parentNode.removeChild(k[0])}});c.open()})})}(jQuery));
+/* Browse Library */
+(function ($) {
+  var frame;
+  var el_name;
+
+  $(function() {
+    // Fetch available headers and apply jQuery.masonry
+    // once the images have loaded.
+    var $headers = $('.available-headers');
+
+    if( $headers.length ){
+      $headers.imagesLoaded(function() {
+        $headers.masonry({
+          itemSelector: '.default-header',
+          isRTL: !!('undefined' != typeof isRtl && isRtl)
+        });
+      });
+    }
+
+    // Build the choose from library frame.
+    $(document).on('click', 'div .library-link', function(event) {
+      var $el = $(this);
+      el_name = this.name;
+      event.preventDefault();
+
+      var types = $el.data('option');
+      var uploader =  $el.data('uploader') ;
+      var classes = uploader ? '' : 'hidden-upload';
+      var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
+      
+
+      if (!!types && types.indexOf(',') > 0 )
+        types = types.split(',');
+
+      // If the media frame already exists, reopen it.
+      if (frame) {
+        //frame.open();
+        //return;
+      }
+
+
+
+      // Create the media frame.
+      frame = wp.media.frames.customHeader = wp.media({
+        // Set the title of the modal.
+        title: $el.data('choose'),
+
+        // Tell the modal to show only images.
+        library: {
+          type: types
+        },
+
+        uploader: uploader,
+        // Customize the submit button.
+        button: {
+          // Set the text of the button.
+          text: $el.data('update'),
+          //text: $el.dataset.update,
+          // Tell the button not to close the modal, since we're
+          // going to refresh the page when the image is selected.
+          close: true
+        }
+      });
+
+      // When an image is selected, run a callback.
+      frame.on('select', function() {
+        // Grab the selected attachment.
+        var attachment = frame.state().get('selection').first();
+        //  link = $el.data('updateLink');
+        var attachmentURL = attachment.attributes.url;
+        var attachmentAlt = attachment.attributes.alt;
+        var attachmentFileName = attachment.attributes.filename;
+        //var attachmentFileName = attachment.attributes.filename;
+        
+        var input_box = $('input[type="hidden"][name="' + el_name + '"]');
+        var preview_field = $('#' + el_name + '_img');
+        var filename_box = $('input[type="text"][id="' + el_name + '_filename"]');
+
+				if( /\d+_media_image/.test(el_name) ){
+          var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
+          $(nav_img_alt_box).val(attachmentAlt);
+          $('input[id="' + el_name + '"]').val(attachmentURL);
+        }else if( "true" !== icon_check ){
+            if( null !== input_box )
+              input_box.val(attachmentURL);
+            
+						if( null !== preview_field )
+              preview_field.attr('src', attachmentURL);
+              
+						if( null !== filename_box )
+              filename_box.val(attachmentFileName);
+              
+            if(  /header_ca_branding/.test(el_name)  )
+              $('#header_ca_branding_alt_text').val(attachmentAlt);
+
+        }else{
+          var data = {
+            'action': 'caweb_fav_icon_check',
+            'icon_url': attachmentURL,
+          };
+
+					jQuery.post(ajaxurl, data, function(response) {
+						
+						if(1 == response){
+
+              if( null !== input_box )
+                input_box.val(attachmentURL);
+              
+              if( null !== preview_field )
+                preview_field.attr('src', attachmentURL);
+                
+              if( null !== filename_box )
+                filename_box.val(attachmentFileName);
+
+						}else{
+							alert("Invalid Icon Mime Type: " + attachmentFileName);
+						}
+					});
+				}
+      });
+
+      frame.on('open', function() {
+        if (!uploader) {
+         var tabs = frame.el.getElementsByClassName('media-frame-router')[0].getElementsByClassName('media-router')[0].getElementsByClassName('media-menu-item');
+
+					tabs[1].click();
+          tabs[0].parentNode.removeChild(tabs[0]);
+
+        }
+      });
+
+      frame.open();
+
+    });
+
+  });
+
+
+}(jQuery));

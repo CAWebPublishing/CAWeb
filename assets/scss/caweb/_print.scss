@@ -1,0 +1,83 @@
+/* Print Formatting */
+@media print{
+	body {
+		background: white !important;
+	}
+
+	/* Main Content */
+	#main-content {
+		padding-top: 0 !important;
+		outline: transparent !important;
+	}
+	.main-content{
+		background: transparent !important;
+	}
+
+	/* Header Organization Banner */
+	.header-organization-banner{
+		margin-left: -59px !important;
+	}
+	
+	/* Navigation Search */
+	.navigation-search{
+    	border: none !important;
+  	}
+
+	/* Width */
+	.single.non_divi_builder.sidebar_displayed .main-content .main-primary, 
+	.archive.sidebar_displayed .main-content .main-primary{
+		width: 100% !important;
+	}
+
+	/* Page Margins */
+	.et_pb_row,
+	.non_divi_builder #main-content{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	.et_pb_row{
+		display: inline !important;
+	}
+	
+	/* Max-Width */
+	.non_divi_builder #main-content,
+	.et_pb_row,
+	.et_pb_row,
+	.non_divi_builder .main-content, 
+	.page-title,
+	.et_pb_gutters3 .et_pb_column_2_3, 
+	.et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
+		max-width: 100% !important;
+		width: 100% !important;
+	}
+
+	/* Padding */
+	.et_pb_post_title, .et_pb_section, .et_pb_column_2_3 .et_pb_row_inner {
+		padding: 1em !important;
+	}
+
+	/* Padding-left */
+	.mobile-control.cagov-logo{
+    	padding-left: 0px !important;
+  	}
+
+	/* Utility Header */
+	.utility-header{
+		height: 45px !important;
+	}
+
+	/* Hide the following elements */
+	header, 
+	footer, 
+	.return-top.is-visible, 
+	.addtoany_share_save_container, 
+	#ae_app, 
+	.et_pb_fullwidth_section, 
+	.et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
+	.et_pb_column.et_pb_column_1_4,
+	aside#non_divi_sidebar,
+	.si-toggle-container {
+		display: none !important;
+		visibility: hidden !important;
+	}
+}

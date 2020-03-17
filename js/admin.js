@@ -1,712 +1,895 @@
-(function(b){var c;var a;b(function(){var d=b(".available-headers");d.imagesLoaded(function(){d.masonry({itemSelector:".default-header",isRTL:!!("undefined"!=typeof isRtl&&isRtl)})});b(document).on("click","div .library-link",function(h){var g=b(this);a=this.name;h.preventDefault();var f=g.data("option");var j=g.data("uploader");var e=j?"":"hidden-upload";var i=g.data("icon-check")&&g.attr("data-icon-check");if(!!f&&f.indexOf(",")>0){f=f.split(",")}if(c){}c=wp.media.frames.customHeader=wp.media({title:g.data("choose"),library:{type:f},uploader:j,button:{text:g.data("update"),close:true}});c.on("select",function(){var p=c.state().get("selection").first(),n=g.data("updateLink");var r=document.getElementById(a);var m=document.getElementById(a+"_img");var q=document.getElementById(a+"_filename");var o={action:"caweb_fav_icon_check",icon_url:p.attributes.url,};if(/\d+_media_image/.test(a)){var k=document.getElementById(a.substring(0,a.indexOf("_"))+"_caweb_nav_media_image_alt_text");r.value=p.attributes.url;k.value=p.attributes.alt}else{if("true"!==i){r.value=p.attributes.url;if(null!==m){m.src=p.attributes.url}if(null!==q){q.value=p.attributes.filename}if(/header_ca_branding/.test(a)){var l=document.getElementById("header_ca_branding_alt_text");l.value=p.attributes.alt}}else{jQuery.post(ajaxurl,o,function(s){if(1==s){m.src=p.attributes.url;r.value=p.attributes.url;q.value=p.attributes.filename}else{alert("Invalid Icon Mime Type: "+p.attributes.filename)}})}}});c.on("open",function(){if(!j){var k=c.el.getElementsByClassName("media-frame-router")[0].getElementsByClassName("media-router")[0].getElementsByClassName("media-menu-item");k[1].click();k[0].parentNode.removeChild(k[0])}});c.open()})})}(jQuery));
-(function(a){a(function(){a(document).on("click","#caweb-icon-menu.autoUpdate li,.caweb-icon-menu.autoUpdate li",function(b){cawebIconSelected(this,true)});a(document).on("click","#caweb-icon-menu.noUpdate li,.caweb-icon-menu.noUpdate li",function(b){cawebIconSelected(this,false)})})})(jQuery);function cawebIconSelected(c,a){var b=c.parentNode.getElementsByTagName("LI");for(o=0;o<b.length-1;o++){b[o].classList.remove("selected")}c.classList.add("selected");if(a){c.parentNode.lastElementChild.value=c.title;$(c.parentNode.lastElementChild).change()}}function resetIconSelect(c,a){var b=c.getElementsByTagName("LI");for(o=0;o<b.length-1;o++){b[o].classList.remove("selected")}if(a){c.lastElementChild.value="";$(c.lastElementChild).change()}};
- /* Functions used on Admin Pages */
- /* CAWeb Option Page */
- (function( $ ) {
-	"use strict";
-  var changeMade = false;
+/* Browse Library */
+(function ($) {
+  var frame;
+  var el_name;
 
-$(window).on('beforeunload', function(){
-	  if( changeMade && "nav-menus.php" !== args.changeCheck)
-			  return 'Are you sure you want to leave?';
+  $(function() {
+    // Fetch available headers and apply jQuery.masonry
+    // once the images have loaded.
+    var $headers = $('.available-headers');
+
+    if( $headers.length ){
+      $headers.imagesLoaded(function() {
+        $headers.masonry({
+          itemSelector: '.default-header',
+          isRTL: !!('undefined' != typeof isRtl && isRtl)
+        });
+      });
+    }
+
+    // Build the choose from library frame.
+    $(document).on('click', 'div .library-link', function(event) {
+      var $el = $(this);
+      el_name = this.name;
+      event.preventDefault();
+
+      var types = $el.data('option');
+      var uploader =  $el.data('uploader') ;
+      var classes = uploader ? '' : 'hidden-upload';
+      var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
+      
+
+      if (!!types && types.indexOf(',') > 0 )
+        types = types.split(',');
+
+      // If the media frame already exists, reopen it.
+      if (frame) {
+        //frame.open();
+        //return;
+      }
+
+
+
+      // Create the media frame.
+      frame = wp.media.frames.customHeader = wp.media({
+        // Set the title of the modal.
+        title: $el.data('choose'),
+
+        // Tell the modal to show only images.
+        library: {
+          type: types
+        },
+
+        uploader: uploader,
+        // Customize the submit button.
+        button: {
+          // Set the text of the button.
+          text: $el.data('update'),
+          //text: $el.dataset.update,
+          // Tell the button not to close the modal, since we're
+          // going to refresh the page when the image is selected.
+          close: true
+        }
+      });
+
+      // When an image is selected, run a callback.
+      frame.on('select', function() {
+        // Grab the selected attachment.
+        var attachment = frame.state().get('selection').first();
+        //  link = $el.data('updateLink');
+        var attachmentURL = attachment.attributes.url;
+        var attachmentAlt = attachment.attributes.alt;
+        var attachmentFileName = attachment.attributes.filename;
+        //var attachmentFileName = attachment.attributes.filename;
+        
+        var input_box = $('input[type="hidden"][name="' + el_name + '"]');
+        var preview_field = $('#' + el_name + '_img');
+        var filename_box = $('input[type="text"][id="' + el_name + '_filename"]');
+
+				if( /\d+_media_image/.test(el_name) ){
+          var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
+          $(nav_img_alt_box).val(attachmentAlt);
+          $('input[id="' + el_name + '"]').val(attachmentURL);
+        }else if( "true" !== icon_check ){
+            if( null !== input_box )
+              input_box.val(attachmentURL);
+            
+						if( null !== preview_field )
+              preview_field.attr('src', attachmentURL);
+              
+						if( null !== filename_box )
+              filename_box.val(attachmentFileName);
+              
+            if(  /header_ca_branding/.test(el_name)  )
+              $('#header_ca_branding_alt_text').val(attachmentAlt);
+
+        }else{
+          var data = {
+            'action': 'caweb_fav_icon_check',
+            'icon_url': attachmentURL,
+          };
+
+					jQuery.post(ajaxurl, data, function(response) {
+						
+						if(1 == response){
+
+              if( null !== input_box )
+                input_box.val(attachmentURL);
+              
+              if( null !== preview_field )
+                preview_field.attr('src', attachmentURL);
+                
+              if( null !== filename_box )
+                filename_box.val(attachmentFileName);
+
+						}else{
+							alert("Invalid Icon Mime Type: " + attachmentFileName);
+						}
+					});
+				}
+      });
+
+      frame.on('open', function() {
+        if (!uploader) {
+         var tabs = frame.el.getElementsByClassName('media-frame-router')[0].getElementsByClassName('media-router')[0].getElementsByClassName('media-menu-item');
+
+					tabs[1].click();
+          tabs[0].parentNode.removeChild(tabs[0]);
+
+        }
+      });
+
+      frame.open();
+
+    });
 
   });
 
-$('textarea, #ca_default_navigation_menu, select, input[type="text"], input[type="checkbox"], input[type="password"] ').change(function(e){changeMade = true; });
-$('input[type="button"]').click(function(e){changeMade = true; });
-$('#caweb-options-form').submit(function(){ changeMade = false; this.submit(); });
 
-$('.caweb-nav-tab').click(function() {
-  var tabs = document.getElementsByClassName('caweb-nav-tab');
-  var selected_tab = this.getAttribute("name");
+}(jQuery));
 
-  for (var i = 0; i < tabs.length; i++) {
-	  if( selected_tab !== tabs[i].getAttribute("name") ){
-		  tabs[i].classList.remove("nav-tab-active");
-			document.getElementById(tabs[i].getAttribute("name")).classList.add('hidden');
-	  }else{
-		  tabs[i].classList.add("nav-tab-active");
-		  document.getElementById(selected_tab).classList.remove('hidden');
-	  }
-  }
+/* CAWeb Alert Option Javascript */
+jQuery(document).ready(function($) {
+	
+	$( "#caweb-alert-banners" ).sortable();
+	$( "#caweb-alert-banners" ).disableSelection()
 
-  document.getElementById('tab_selected').value = selected_tab;
-});
+	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
+	$('#add-alert').click( function(e){ e.preventDefault(); addAlert();});
 
-$('#ca_site_version').change(function() {
-  var version = this.options[this.selectedIndex].value;
-  var extra_options = document.getElementsByClassName("extra");
-  var base_options = document.getElementsByClassName("base");
-  var front_search_option = $('#general table:first tr:nth-child(6)');
-  var color_scheme_picker = $('#ca_site_color_scheme')[0];
-  var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
-  var resetColor = false
+	var removeAlertFunc = function (s){
+		var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
+	  
+		if (r == true) {
+			changeMade = true;
+			$(s).parent().parent().parent().remove();
+		}
+	  
+	}
 
-  for (var i = 0; i < extra_options.length; i++) {
-	  if (version >= 5.0) {
-		 extra_options[i].classList.remove("hidden");
-		 for (var j = 0; j < base_options.length; j++) {
-		   base_options[j].classList.add("hidden");
-		 }
+	function addAlert(){
+		var list = $('#caweb-alert-banners');
+		var alertCount = $(list).children('li').length + 1;
+		var li = document.createElement('LI');
+		var row = document.createElement('DIV');
 
-		 // if theres no Google Search ID
-		 if( !$('#ca_google_search_id').val().trim() ){
-		   front_search_option.addClass('hidden');
-		 }else{
-		   front_search_option.removeClass('hidden');
-		 }
+		// Attributes
+		$(li).addClass('pl-2');
+		$(row).addClass('form-row');
 
-	   } else {
+		// Append 
+		$(row).append(addAlertAnchor(alertCount));
+		$(row).append('<!-- Alert Options -->');
+		$(row).append(addAlertControls(alertCount));
+		$(row).append('<!-- Alert Banner Fields -->');
+		$(row).append(addAlertFields(alertCount));
 
-		 extra_options[i].classList.add("hidden");
+		$(li).append('<!-- Alert Banner Row -->');
+		$(li).append(row);
+		$(list).append(li);
 
-		 if( extra_options[i].value == color && extra_options[i].classList.contains('extra'))
-			  resetColor = true;
+		// Initialize 3rd Party Plugins after DOMs have been added
+		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
+		
 
-		 for (var j = 0; j < base_options.length; j++) {
-		   base_options[j].classList.remove("hidden");
-		 }
-	   }
-
-	 }
-
-	 if(resetColor){
-		 for (var i = 0; i < color_scheme_picker.options.length; i++) {
-			  if(  !color_scheme_picker.options[i].classList.contains('extra')  ){
-				  color_scheme_picker.selectedIndex = i;
-				  break;
-			  }
-		 }
-	  }
-  });
-
- $('#resetFavIcon').click(function() {
-	var ico = args.defaultFavIcon;
-		document.getElementById('ca_fav_ico').value = ico;
-	  document.getElementById('ca_fav_ico_img').src = ico;
-	  document.getElementById('ca_fav_ico_filename').value = 'favicon.ico';
-  });
-
-$('#ca_google_search_id').on('input',function(e){
-var front_search_option = $('#general table:first tr:nth-child(6)');
-var site_version = $('#ca_site_version option:selected').val();
-// if theres no Google Search ID
-if( !this.value.trim() ){
-  front_search_option.addClass('hidden');
-}else if(5 <= site_version){
-  front_search_option.removeClass('hidden');
-}
-});
-
-$('#ca_x_ua_compatibility').on('input',function(e){
-  var isChecked = this.checked;
-  var respSpan = $(this).next();
-
-  if(isChecked){
-	  respSpan.html('IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.')
-  }else{
-	  respSpan.html('');
-  }	
-});
-
-
-
-$( "#uploadedCSS, #uploadedJS" ).sortable();
-$( "#uploadedCSS, #uploadedJS" ).disableSelection();
-
-$('.remove-css, .remove-js').click(function(e){
-e.preventDefault();
-  var r = confirm("Are you sure you want to " + this.title + "? This can not be undone.");
-
-  if (r == true) {
-	  changeMade = true;
-	  this.parentNode.remove();
-  }
-});
-
-$('#addCSS, #addJS').click(function(e){
-  
-  addExternal($(this).closest('table'), $(this).attr('name'));	
-  changeMade = true;
-
-});
-
-function addExternal(ext_table, ext){
-  var rowCount = ext_table.children().children().length;
-  var row = document.createElement('TR');
-  var col1 = document.createElement('TD');
-  var rem = document.createElement('A');
-  var col2 = document.createElement('TD');
-  var fileUpload = document.createElement('Input');
-
-row.classList = "pending-" + ext;
-rem.classList = "dashicons dashicons-dismiss remove-" + ext;
-
-  fileUpload.type = "file";
-  fileUpload.name = rowCount + ext + "_upload";
-  fileUpload.id = rowCount + ext + "_upload";
-  fileUpload.accept = "." + ext;
-
-rem.addEventListener('click', function (e) {
-  e.preventDefault();
-  var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
-
- if (r == true) {
 		changeMade = true;
-		this.parentNode.parentNode.remove();
+	}
+	
+	function addAlertAnchor( c ){
+		var headerAnchor = document.createElement('A');
+		var header = document.createElement('H2');
+		var headerToggle = document.createElement('SPAN');
+
+		$(headerAnchor).addClass('d-block text-decoration-none');
+		$(headerAnchor).attr('href', '#alert-banner-' + c);
+		$(headerAnchor).attr('aria-expanded', 'true');
+		$(headerAnchor).attr('aria-controls', 'alert-banner-' + c);
+		$(headerAnchor).attr('data-toggle', 'collapse');
+
+		$(header).addClass('d-inline');
+		$(header).html('Label');
+		
+		$(headerToggle).addClass('text-secondary ca-gov-icon-');
+
+		$(header).append(headerToggle);
+		
+		$(headerAnchor).append(header);
+
+		return headerAnchor;
+	}
+
+	function addAlertControls( c ){
+		var alertOptions = document.createElement('DIV');
+		var alertStatus = document.createElement('INPUT');
+		var removeAlert = document.createElement('BUTTON');
+				
+		$(alertStatus).attr('type', 'checkbox');
+		$(alertStatus).attr('checked', 'true');
+		$(alertStatus).attr('data-toggle', 'toggle');
+		$(alertStatus).attr('name', 'alert-status-' + c);
+		$(alertStatus).attr('id', 'alert-status-' + c);
+		$(alertStatus).addClass('form-control');
+
+
+		$(removeAlert).addClass('btn btn-danger remove-alert ml-1');
+		$(removeAlert).html('Remove');
+		removeAlert.addEventListener('click', function(e){ removeAlertFunc(this) } )
+		
+		$(alertOptions).append(alertStatus);
+		$(alertOptions).append(removeAlert);
+
+		$(alertStatus).bootstrapToggle({
+			onstyle: 'success',
+		  });
+
+		return alertOptions;
+	}
+
+	function addAlertFields( c ){
+		var alertFields = document.createElement('DIV');
+
+		$(alertFields).attr('id', 'alert-banner-' + c);
+		$(alertFields).addClass('form-row col-sm-12 p-2 collapse show');
+
+		$(alertFields).append('<!-- Alert Banner Title -->');
+		$(alertFields).append(alertTitleField(c));
+		$(alertFields).append('<!-- Alert Banner Message -->');
+		$(alertFields).append(alertMessageField(c));
+		$(alertFields).append('<!-- Alert Banner Settings -->');
+		$(alertFields).append(alertSettings(c));
+
+		return alertFields;
+	}
+
+	function alertTitleField( c ){
+		var alertTitle = document.createElement('DIV');
+		var alertTitleLabel = document.createElement('LABEL');
+		var alertTitleSmall = document.createElement('SMALL');
+		var alertTitleInput = document.createElement('INPUT');
+		
+		$(alertTitle).addClass('form-group col-sm-7');
+		
+		$(alertTitleLabel).attr('for', 'alert-header-' + c);
+		$(alertTitleLabel).addClass('mb-0');
+		$(alertTitleLabel).html('<strong>Title</strong>');
+
+		$(alertTitleSmall).html('Enter header text for the alert.');
+		$(alertTitleSmall).addClass('text-muted d-block mb-2');
+
+		$(alertTitleInput).addClass('form-control');
+		$(alertTitleInput).attr('type', 'text');
+		$(alertTitleInput).val('Label');
+		$(alertTitleInput).attr('placeholder', 'Label');
+		$(alertTitleInput).attr('id', 'alert-header-' + c);
+		$(alertTitleInput).attr('name', 'alert-header-' + c);
+
+		$(alertTitle).append(alertTitleLabel);
+		$(alertTitle).append(alertTitleSmall);
+		$(alertTitle).append(alertTitleInput);
+
+		return alertTitle;
+	}
+
+	function alertMessageField( c ){
+		var alertMsg = document.createElement('DIV');
+		var alertMsgLabel = document.createElement('LABEL');
+		var alertMsgSmall = document.createElement('SMALL');
+		var alertMsgTextarea = document.createElement('TEXTAREA');
+
+		$(alertMsg).addClass('form-group col-sm-12');
+
+		$(alertMsgLabel).attr('for', 'alert-message-' + c);
+		$(alertMsgLabel).html('<strong>Message</strong>');
+		
+		$(alertMsgSmall).addClass('text-muted d-block mb-2');
+		$(alertMsgSmall).html('Enter message for the alert');
+
+		$(alertMsgTextarea).attr('name', 'alert-message-' + c);
+		$(alertMsgTextarea).attr('id', 'alertmessage-' + c);
+		$(alertMsgTextarea).html('Enter Alert text here...');
+
+		$(alertMsg).append(alertMsgLabel);
+		$(alertMsg).append(alertMsgSmall);
+		$(alertMsg).append(alertMsgTextarea);
+
+		return alertMsg;
+	}
+
+	function alertSettings( c ){
+		var alertSettingsDiv = document.createElement('DIV');
+		
+		$(alertSettingsDiv).addClass('form-group col-sm-12');
+
+
+		$(alertSettingsDiv).append('<!-- Display On -->');
+		$(alertSettingsDiv).append(addDisplayOnField(c));
+		$(alertSettingsDiv).append('<!-- Banner Color -->');
+		$(alertSettingsDiv).append(addBannerColorField(c));
+		$(alertSettingsDiv).append('<!-- Read More -->');
+		$(alertSettingsDiv).append(addReadMoreFields(c));
+		$(alertSettingsDiv).append(addReadMoreSettings(c));
+		$(alertSettingsDiv).append('<!-- Banner Icon -->');
+		$(alertSettingsDiv).append(addIconField(c));
+		
+		return alertSettingsDiv;
+	}
+
+	function addDisplayOnField( c ){
+		var displayOnGroup = document.createElement('DIV');
+		var displayOnLabel = document.createElement('LABEL');
+		var displayOnSmall = document.createElement('SMALL');
+		var displayOnHomeGroup = document.createElement('DIV');
+		var displayOnHomeGroupInput = document.createElement('INPUT');
+		var displayOnHomeGroupLabel = document.createElement('LABEL');
+		var displayOnAllGroup = document.createElement('DIV');
+		var displayOnAllGroupInput = document.createElement('INPUT');
+		var displayOnAllGroupLabel = document.createElement('LABEL');
+
+		$(displayOnGroup).addClass('form-group col-sm pl-0');
+		$(displayOnGroup).attr('role', 'radiogroup');
+		$(displayOnGroup).attr('aria-label', 'Alert Display On Options');
+
+		$(displayOnLabel).addClass('d-block mb-0');
+		$(displayOnLabel).html('<strong>Display on</strong>');
+
+		$(displayOnSmall).addClass('text-muted d-block mb-2');
+		$(displayOnSmall).html('Select whether alert should display on home page or on all pages.');
+
+		$(displayOnHomeGroup).addClass('form-check form-check-inline');
+
+		$(displayOnHomeGroupInput).attr('id', 'alert-display-home-' + c);
+		$(displayOnHomeGroupInput).attr('name', 'alert-display-' + c);
+		$(displayOnHomeGroupInput).attr('type', 'radio');
+		$(displayOnHomeGroupInput).val('home');
+		$(displayOnHomeGroupInput).attr('checked', 'true');
+		$(displayOnHomeGroupInput).addClass('form-check-input');
+
+		$(displayOnHomeGroupLabel).addClass('form-check-label');
+		$(displayOnHomeGroupLabel).attr('for', 'alert-display-home-' + c);
+		$(displayOnHomeGroupLabel).html('Home Page Only');
+
+		$(displayOnAllGroup).addClass('form-check form-check-inline');
+		
+		$(displayOnAllGroupInput).attr('id', 'alert-display-all-' + c);
+		$(displayOnAllGroupInput).attr('name', 'alert-display-' + c);
+		$(displayOnAllGroupInput).attr('type', 'radio');
+		$(displayOnAllGroupInput).val('all');
+		$(displayOnAllGroupInput).addClass('form-check-input');
+
+		$(displayOnAllGroupLabel).addClass('form-check-label');
+		$(displayOnAllGroupLabel).attr('for', 'alert-display-all-' + c);
+		$(displayOnAllGroupLabel).html('All Pages');
+
+		$(displayOnHomeGroup).append(displayOnHomeGroupInput);
+		$(displayOnHomeGroup).append(displayOnHomeGroupLabel);
+
+		$(displayOnAllGroup).append(displayOnAllGroupInput);
+		$(displayOnAllGroup).append(displayOnAllGroupLabel);
+
+		$(displayOnGroup).append(displayOnLabel);
+		$(displayOnGroup).append(displayOnSmall);
+		$(displayOnGroup).append(displayOnHomeGroup);
+		$(displayOnGroup).append(displayOnAllGroup);
+
+		return displayOnGroup;
+	}
+
+	function addBannerColorField( c ){
+		var bannerColorGroup = document.createElement('DIV');
+		var bannerColorLabel = document.createElement('LABEL');
+		var bannerColorSmall = document.createElement('SMALL');
+		var bannerColorInput = document.createElement('INPUT');
+
+		
+		$(bannerColorGroup).addClass('form-group col-sm pl-0');
+
+		$(bannerColorLabel).attr('for', 'alert-banner-color-' + c);
+		$(bannerColorLabel).addClass('d-block mb-0');
+		$(bannerColorLabel).html('<strong>Banner Color</strong>');
+
+		$(bannerColorSmall).addClass('text-muted d-block mb-2');
+		$(bannerColorSmall).html('Select a color for the alert banner.');
+
+		$(bannerColorInput).attr('id', 'alert-banner-color-' + c);
+		$(bannerColorInput).attr('name', 'alert-banner-color-' + c);
+		$(bannerColorInput).attr('type', 'color');
+		$(bannerColorInput).addClass('form-control-sm');
+
+		var color_scheme_picker = $('#ca_site_color_scheme')[0];
+		var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+
+		$(bannerColorInput).val(args.caweb_colors[color]['highlight']);
+
+		$(bannerColorGroup).append(bannerColorLabel);
+		$(bannerColorGroup).append(bannerColorSmall);
+		$(bannerColorGroup).append(bannerColorInput);
+
+		return bannerColorGroup;
+	}
+
+	function addReadMoreFields( c ){
+		var readMoreGroup = document.createElement('DIV');
+		var readMoreLabel = document.createElement('LABEL');
+
+		var readMoreAnchor = document.createElement('A');
+		
+		var readMoreInput = document.createElement('INPUT');
+		
+		$(readMoreGroup).addClass('form-group pl-0');
+		
+		$(readMoreLabel).addClass('d-block mb-0');
+		$(readMoreLabel).html('<strong>Read More Button</strong>');
+
+		$(readMoreAnchor).attr('data-toggle', 'collapse');
+		$(readMoreAnchor).attr('href', '#alert-banner-read-more-' + c);
+		$(readMoreAnchor).attr('aria-expanded', 'true');
+		$(readMoreAnchor).addClass('shadow-none');
+
+		$(readMoreInput).attr('type', 'checkbox');
+		$(readMoreInput).attr('checked', 'true');
+		$(readMoreInput).attr('name', 'alert-banner-read-more-' + c);
+		$(readMoreInput).attr('id', 'alert-banner-read-more-' + c);
+		$(readMoreInput).addClass('form-control');
+
+		$(readMoreAnchor).append(readMoreInput);
+
+		$(readMoreGroup).append(readMoreLabel);
+		$(readMoreGroup).append(readMoreAnchor);
+
+		$(readMoreInput).bootstrapToggle();
+
+		return readMoreGroup;
+	}
+
+	function addReadMoreSettings( c ){
+		var readMoreSettings = document.createElement('DIV');
+		var readMoreTextGroup = document.createElement('DIV');
+		var readMoreTextLabel = document.createElement('LABEL');
+		var readMoreTextInput = document.createElement('INPUT');
+		var readMoreTextSmall = document.createElement('SMALL');
+		var readMoreURLGroup = document.createElement('DIV');
+		var readMoreURLInput = document.createElement('INPUT');
+		var readMoreURLLabel = document.createElement('LABEL');
+		var readMoreTargetGroup = document.createElement('DIV');
+		var readMoreTargetInput = document.createElement('INPUT');
+		var readMoreTargetLabel = document.createElement('LABEL');
+
+
+		$(readMoreSettings).attr('id', 'alert-banner-read-more-' + c )
+		$(readMoreSettings).addClass('collapse show');
+
+		// Read More Text Group
+		$(readMoreTextGroup).addClass('form-group col-sm-6 pl-0');
+
+		$(readMoreTextLabel).addClass('d-block mb-0');
+		$(readMoreTextLabel).html('<strong>Read More Button Text</strong>');
+
+		$(readMoreTextInput).attr('type', 'text');
+		$(readMoreTextInput).attr('name', 'alert-read-more-text-' + c);
+		$(readMoreTextInput).attr('id', 'alert-read-more-text-' + c);
+		$(readMoreTextInput).attr('maxlength', 16);
+		$(readMoreTextInput).addClass('form-control');
+
+		$(readMoreTextSmall).addClass('text-muted');
+		$(readMoreTextSmall).html('(Max Characters: 16)');
+
+		// Read More URL Group
+		$(readMoreURLGroup).addClass('form-group col-sm-6 pl-0 d-inline-block');
+
+		$(readMoreURLLabel).addClass('d-block mb-0');
+		$(readMoreURLLabel).html('<strong>Read More Button Url</strong>');
+
+		$(readMoreURLInput).attr('type', 'text');
+		$(readMoreURLInput).attr('name', 'alert-read-more-url-' + c);
+		$(readMoreURLInput).attr('id', 'alert-read-more-url-' + c);
+		$(readMoreURLInput).addClass('form-control');
+		
+		// Read More Target Group
+		$(readMoreTargetGroup).addClass('form-group col-sm-4 pl-0 d-inline-block align-top');
+
+		$(readMoreTargetLabel).addClass('d-block mb-0');
+		$(readMoreTargetLabel).html('<strong>Open link in New Tab</strong>')
+
+		$(readMoreTargetInput).attr('type', 'checkbox');
+		$(readMoreTargetInput).attr('checked', 'true');
+		$(readMoreTargetInput).attr('data-toggle', 'toggle');
+		$(readMoreTargetInput).attr('name', 'alert-read-more-target-' + c);
+		$(readMoreTargetInput).attr('id', 'alert-read-more-target-' + c);
+		$(readMoreTargetInput).addClass('form-control');
+
+		$(readMoreTextGroup).append(readMoreTextLabel);
+		$(readMoreTextGroup).append(readMoreTextInput);
+		$(readMoreTextGroup).append(readMoreTextSmall);
+
+		$(readMoreURLGroup).append(readMoreURLLabel);
+		$(readMoreURLGroup).append(readMoreURLInput);
+		
+		$(readMoreTargetGroup).append(readMoreTargetLabel);
+		$(readMoreTargetGroup).append(readMoreTargetInput);
+
+		$(readMoreSettings).append(readMoreTextGroup);
+		$(readMoreSettings).append(readMoreURLGroup);
+		$(readMoreSettings).append(readMoreTargetGroup);
+		
+		$(readMoreTargetInput).bootstrapToggle({
+			on: 'Yes',
+			off: 'No'
+		});
+
+		return readMoreSettings;
+	}
+
+	function addIconField( c ){
+		var alertIconGroup = document.createElement('DIV');
+
+		$(alertIconGroup).addClass('form-group col-sm-12 d-inline-block pl-0');
+
+		var data = {
+			'action': 'caweb_icon_menu',
+			'name': 'alert-icon-' + c,
+			'select': 'important',
+			'header': 'Icon'
+		};
+
+		$.post(ajaxurl, data, function(response) {
+			$(alertIconGroup).html(response);
+		});
+
+		return alertIconGroup;
 	}
 });
 
-fileUpload.addEventListener('change', function () {
-  var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
-  var extension = name.lastIndexOf(".") > 0 ?
-					name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
-
-  if( "" === extension || ext !== extension){
-	alert(name + " isn't a valid " + ext + " extension and was not uploaded.");
-	this.parentNode.remove();
-  }else{
-	rem.title = "remove " + name;
-  }
-
-});
-
-  col2.append(rem);
-  col2.append(fileUpload);
-
-  row.append(col1);
-  row.append(col2);
-
-  ext_table.append(row);
-}
-
-$( "#cawebAlerts" ).sortable();
-$( "#cawebAlerts" ).disableSelection();
-
-$('#addAlertBanner').click(function(e){
-$('#caweb_alert_count').val( function(i, oldval) { return ++oldval; } );
-
-var alertUL = $('#cawebAlerts');
-var alertLI = document.createElement('LI');
-  var alertLICount = $('#caweb_alert_count').val();
-  var alert_container = document.createElement('DIV');
-
-  var alertSetting = $('#caweb-alert-settings');
-  var alert_settings_wrapper = document.createElement('DIV');
-
-  // Create and Add New Alert
-  alert_container.classList = "caweb-alert";
-  addAlert(alert_container, alertLICount);
-
-  // Create and Add New Alert Settings
-  alert_settings_wrapper.id = "caweb-alert-" + alertLICount;
-  alert_settings_wrapper.style.display = "none";
-  addAlertSettings(alert_settings_wrapper, alertLICount);
-
-  // Add new Alert
-  alertLI.appendChild(alert_container);
-  alertUL.append(alertLI);
-  // Add corresponding Alert Setting
-alertSetting.append(alert_settings_wrapper);
-  wp.editor.initialize("alertmessage" + alertLICount, args.tinymce_settings);
-changeMade = true;
-
-});
-
-$('.caweb-alert div a.alert-toggle').click(function(e){ displayAlertOptions(this); });
-$('.removeAlert').click(function(e){ removeAlert(this); });
-$('.alert-read-more').click(function(e){ displayReadMoreOptions(this); });
-$('.resetAlertIcon').click(function(e){	resetIconSelect(this.parentNode.nextElementSibling, false); });
-$('.caweb-alert div a.activateAlert').click(function(e){ activateAlert(this);});
-
-$('[class*="caweb-alert-"] .button-primary.ok').click(function(e){ saveAlertSettings(this); });
-
-$('[class*="caweb-alert-"] .button-primary.cancel').click(function(e){ cancelAlertSettings(this); });
-
-function activateAlert(activateButton){
-activateButton.classList.toggle('inactive');
-
-if(-1 < activateButton.className.indexOf('inactive')){
-  activateButton.firstElementChild.value = 'inactive';
-}else{
-  activateButton.firstElementChild.value = 'active';
-}
-}
-function addAlert(container, alertCount){
-  var alert_header_wrapper = document.createElement('DIV');
-  var alert_header = document.createElement('P');
-  var menu = document.createElement('A');
-  var rem = document.createElement('A');
-var toggle = document.createElement('A');
-  var status = document.createElement('A');
-var alert_status_input = document.createElement('INPUT');
-
-  var alert_info = document.createElement('DIV');
-  var alert_header_input = document.createElement('INPUT');
-  var alert_msg = document.createElement('P');
-  var alert_msg_textarea = document.createElement('TEXTAREA');
-
-  alert_header.innerHTML = "Label";
-
-  menu.classList = "thickbox dashicons dashicons-menu";
-  menu.href = "#TB_inline?width=600&height=550&modal=true&inlineId=caweb-alert-" + alertCount;
-
-  rem.classList = "dashicons dashicons-dismiss removeAlert";
-  rem.addEventListener('click', function (e) { removeAlert(this); });
-
-  toggle.classList = "dashicons dashicons-arrow-up alert-toggle";
-  toggle.addEventListener('click', function (e) { displayAlertOptions(this); });
-
-status.classList = "dashicons activateAlert";
-status.addEventListener('click', function (e) { activateAlert(this); });
-
-alert_status_input.name = "alert-status-" + alertCount;
-alert_status_input.type = "hidden";
-
-status.appendChild(alert_status_input);
-
-  alert_info.appendChild(alert_header_input);
-  alert_info.appendChild(alert_msg);
-  alert_info.appendChild(alert_msg_textarea);
-
-  alert_header_input.name = "alert-header-" + alertCount;
-  alert_header_input.type = "text";
-alert_header_input.placeholder = "Label";
-
-  alert_msg.innerHTML = "Message";
-
-  //alert_msg_textarea.form = "caweb-options-form";
-  alert_msg_textarea.name = "alert-message-" + alertCount;
-alert_msg_textarea.id = "alertmessage" + alertCount;
-
-  alert_header_wrapper.appendChild(alert_header);
-  alert_header_wrapper.appendChild(rem);
-  alert_header_wrapper.appendChild(menu);
-alert_header_wrapper.appendChild(toggle);
-  alert_header_wrapper.appendChild(status);
-
-  container.appendChild(alert_header_wrapper);
-  container.appendChild(alert_info);
-
-}
-function addAlertSettings(container, alertCount){
-  var alert_settings = document.createElement('FORM');
-var alert_heading = document.createElement('H3');
-  var alert_display = document.createElement('P');
-  var label1 = document.createElement('LABEL');
-  var alert_display_home = document.createElement('INPUT');
-  var label2 = document.createElement('LABEL');
-  var alert_display_all = document.createElement('INPUT');
-  var alert_banner_color = document.createElement('P');
-  var color_scheme_picker = $('#ca_site_color_scheme')[0];
-  var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
-  var alert_banner_color_input = document.createElement('INPUT');
-  var alert_read_more = document.createElement('P');
-  var label3 = document.createElement('LABEL');
-  var alert_read_more_input = document.createElement('INPUT');
-
-  // Hidden Options for Read More Button
-var hidden_container = document.createElement('DIV');
-var alert_read_more_target_text = document.createElement('P');
-var alert_read_more_target_text_input = document.createElement('INPUT');
-var alert_read_more_target_text_tip = document.createElement('I');
-var alert_read_more_target_url = document.createElement('P');
-var alert_read_more_target_url_input = document.createElement('INPUT');
-var alert_open_link = document.createElement('LABEL');
-var label4 = document.createElement('LABEL');
-var label5 = document.createElement('LABEL');
-var alert_read_more_new_target = document.createElement('INPUT');
-var alert_read_more_current_target = document.createElement('INPUT');
-
-  // Alert Icon options
-  var alert_icon = document.createElement('P');
-var alert_icon_reset = document.createElement('SPAN');
-var alert_icon_list = document.createElement('UL');
-var alert_icon_input = document.createElement('INPUT');
-
-// Alert Setting Confirmation
-var alert_setting_ok = document.createElement('A');
-var alert_setting_cancel = document.createElement('A');
-
-  alert_settings.classList = "caweb-alert-" + alertCount;
-
-alert_heading.innerHTML = "Alert Settings";
-
-alert_display.innerHTML = "Display on";
-
-alert_display_home.type = "radio";
-alert_display_home.name = "alert-display-" + alertCount;
-alert_display_home.value = "home";
-alert_display_home.checked = true;
-
-label1.appendChild(alert_display_home);
-label1.appendChild(document.createTextNode("Home Page Only"));
-
-alert_display_all.type = "radio";
-alert_display_all.name = "alert-display-" + alertCount;
-alert_display_all.value = "all";
-
-label2.appendChild(alert_display_all);
-label2.appendChild(document.createTextNode("All Pages"));
-
-alert_banner_color.innerHTML = "Banner Color";
-
-alert_banner_color_input.type = "color";
-alert_banner_color_input.name = "alert-banner-color-" + alertCount;
-alert_banner_color_input.value = args.caweb_colors[color]['highlight'];
-
-label3.innerHTML = "Add Read More Button ";
-alert_read_more_input.type = "checkbox";
-  alert_read_more_input.classList = "alert-read-more";
-alert_read_more_input.name = "alert-read-more-" + alertCount;
-
-alert_read_more_input.addEventListener('click',  function(e){ displayReadMoreOptions(this)});
-
-label3.appendChild(alert_read_more_input);
-alert_read_more.appendChild(label3);
-
-alert_read_more_target_text.innerHTML = "Read More Button Text";
-
-alert_read_more_target_text_input.type = "text";
-alert_read_more_target_text_input.name = "alert-read-more-text-" + alertCount;
-alert_read_more_target_text_input.maxLength = 16;
-
-alert_read_more_target_url.innerHTML = "Read More Button URL";
-
-alert_read_more_target_url_input.type = "text";
-alert_read_more_target_url_input.name = "alert-read-more-url-" + alertCount;
-
-alert_read_more_target_text_tip.innerHTML = "(Max Characters: 16)";
-
-alert_open_link.innerHTML = "Open link in";
-
-alert_read_more_new_target.type = "radio";
-alert_read_more_new_target.name = "alert-read-more-target-" + alertCount;
-alert_read_more_new_target.checked = true;
-alert_read_more_new_target.value = "_blank";
-
-alert_read_more_current_target.type = "radio";
-alert_read_more_current_target.name = "alert-read-more-target-" + alertCount;
-alert_read_more_current_target.value = "";
-
-label4.appendChild(alert_read_more_new_target);
-label4.appendChild(document.createTextNode("New Tab "));
-
-label5.appendChild(alert_read_more_current_target);
-label5.appendChild(document.createTextNode("Current Tab"));
-
-hidden_container.classList = "hidden";
-hidden_container.appendChild(alert_read_more_target_text);
-hidden_container.appendChild(alert_read_more_target_text_input);
-hidden_container.appendChild(alert_read_more_target_text_tip);
-hidden_container.appendChild(alert_read_more_target_url);
-hidden_container.appendChild(alert_read_more_target_url_input);
-hidden_container.appendChild(alert_open_link);
-hidden_container.appendChild(label4);
-hidden_container.appendChild(label5);
-
-alert_icon.innerHTML = "Add Icon ";
-  alert_icon_reset.classList = "dashicons dashicons-image-rotate resetAlertIcon";
-  alert_icon_reset.addEventListener('click', function (e) { resetIconSelect(this.parentNode.nextElementSibling, false); });
-
-  alert_icon.appendChild(alert_icon_reset);
-
-alert_icon_list.id = "caweb-icon-menu";
-  alert_icon_list.className = "noUpdate";
-  
-for (var i = 0; i < args.caweb_icons.length; i++) {
-  var icon = document.createElement('LI');
-  icon.classList = "icon-option ca-gov-icon-" + args.caweb_icons[i];
-  icon.title = args.caweb_icons[i];
-
-  alert_icon_list.appendChild(icon);
-}
-
-alert_icon_input.name = "alert-icon-" + alertCount;
-alert_icon_input.type = "hidden";
-
-  alert_icon_list.appendChild(alert_icon_input);
-
-alert_setting_ok.className = "button button-primary ok";
-alert_setting_ok.innerHTML = "Ok";
-alert_setting_ok.addEventListener('click', function(e){ saveAlertSettings(this);});
-
-alert_setting_cancel.className = "button button-primary cancel";
-alert_setting_cancel.innerHTML = "Cancel";
-alert_setting_cancel.addEventListener('click', function(e){ cancelAlertSettings(this);});
-
-alert_settings.appendChild(alert_heading);
-alert_settings.appendChild(alert_display);
-alert_settings.appendChild(label1);
-alert_settings.appendChild(label2);
-alert_settings.appendChild(alert_banner_color);
-alert_settings.appendChild(alert_banner_color_input);
-alert_settings.appendChild(alert_read_more);
-alert_settings.appendChild(hidden_container);
-alert_settings.appendChild(alert_icon);
-alert_settings.appendChild(alert_icon_list);
-alert_settings.appendChild(alert_setting_ok);
-alert_settings.appendChild(alert_setting_cancel);
-
-  container.appendChild(alert_settings);
-
-
-}
-function displayAlertOptions(e){
-e.parentNode.nextElementSibling.classList.toggle('hidden');
-//e.parentNode.parentNode.nextElementSibling.classList.toggle('hidden');
-
-  if( e.parentNode.nextElementSibling.classList.contains('hidden') ){
-	  e.parentNode.firstElementChild.innerHTML = "" !== e.parentNode.nextElementSibling.firstElementChild.value.trim() ? e.parentNode.nextElementSibling.firstElementChild.value : "Header";
-  e.classList.remove('dashicons-arrow-up');
-  e.classList.add('dashicons-arrow-down');
-  }else{
-	  e.parentNode.firstElementChild.innerHTML = "Header";
-  e.classList.remove('dashicons-arrow-down');
-  e.classList.add('dashicons-arrow-up');
-  }
-}
-function removeAlert(e){
-  var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
-
-  if (r == true) {
-	  changeMade = true;
-	  e.parentNode.parentNode.parentNode.remove();
-  }
-
-}
-function displayReadMoreOptions(e) {
-  e.parentNode.parentNode.nextSibling.classList.toggle("hidden");
-}
-
-
-var alertSettings = $('#caweb-alert-settings');
-  
-function saveAlertSettings(saveButton){
-var alertID = saveButton.parentNode.className.substring(saveButton.parentNode.className.lastIndexOf('-') + 1);
-var inputs = saveButton.parentNode.getElementsByTagName('INPUT');
-var tmp = {};
-
-for(var i = 0; i < inputs.length; i++){
-  var input = inputs[i];
-
-  if( (-1 < input.name.indexOf('alert-display-') && input.checked) ||
-	  (-1 < input.name.indexOf('alert-read-more-target-') && input.checked) ){
-	tmp[input.name] = input.value;
-  }else if( -1 == input.name.indexOf('alert-display-') && -1 == input.name.indexOf('alert-read-more-target-') ){
-	if( -1 < input.name.indexOf('alert-icon-') ){
-	  var selectedIcon = input.parentNode.getElementsByClassName('selected');
-	  if( 0 < selectedIcon.length){
-		cawebIconSelected($(selectedIcon[0])[0], true);
-	  }else{
-		input.value = '';
-	  }
+/* CAWeb Icon Menu Javascript */
+jQuery(document).ready(function($) {
+	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
+	$(document).on('click', '.caweb-icon-menu-header .resetIcon', function(e){ resetIconSelect($(this).parent().next());});
+
+	function cawebIconSelected(iconLi){
+		resetIconSelect($(iconLi).parent());
+		$(iconLi).addClass('active');
+
+		var i = $(iconLi).parent().find('input');
+
+		if (i.length){
+			$(i).val($(iconLi).attr('title'));
+		}
 	}
-	tmp[input.name] = -1 < input.name.indexOf('alert-read-more-') && -1 == input.name.indexOf('alert-read-more-url-') ? input.checked : input.value;
-  }
-}
 
-alertSettings[alertID] = tmp;
-tb_remove();
-}
-function cancelAlertSettings(cancelButton){
-var alertID = cancelButton.parentNode.className.substring(cancelButton.parentNode.className.lastIndexOf('-') + 1);
-  var inputs = cancelButton.parentNode.getElementsByTagName('INPUT');
+	function resetIconSelect(iconList){
+		var icon_list = $(iconList).find('LI');
+		
+		for(o = 0; o < icon_list.length - 1; o++){
+			$(icon_list[o]).removeClass('active');
+		}
+
+		var i = $(iconList).find('input');
+
+		if (i.length){
+			$(i).val('');
+		}
+	}
+	
+});
   
-  for(var i = 0; i < inputs.length; i++){
-	  var input = inputs[i];
 
-	  if((-1 < input.name.indexOf('alert-display-') && "home" == input.value) || (-1 < input.name.indexOf('alert-read-more-target-') && "_blank" == input.value)){
-		  input.checked = true;
-	  }else if(-1 < input.name.indexOf('alert-read-more-') && "checkbox" == input.type){
-		  input.checked = false;
-		  input.parentNode.parentNode.nextElementSibling.classList.add('hidden');
-	  }else if(-1 < input.name.indexOf('alert-banner-color-')){
-      input.value = input.defaultValue;
-	  }else{
-		  if(-1 < input.name.indexOf('alert-icon-')){
-			  var iconList = input.parentNode;
-			  resetIconSelect(iconList, false);
-			  if( "" !== input.value){
-				  $(iconList).find('[title="' + input.value+ '"]')[0].classList.add('selected');
-			  }
-		  }
-	  }
-	  
-  }
+/* CAWeb Uploads Option */
+jQuery(document).ready(function($) {
+	
+  /*
+    Custom CSS/JS
+  */
+ 
+  $( "#uploaded-css, #uploaded-js" ).sortable();
+  $( "#uploaded-css, #uploaded-js" ).disableSelection();
 
-  tb_remove();
-}
+  // Remove Uploaded CSS/JS
+  $('.remove-css, .remove-js').click(function(e){
+    e.preventDefault();
+    var r = confirm("Are you sure you want to remove " + this.title + "? This can not be undone.");
+  
+    if (r == true) {
+      changeMade = true;
+      this.parentNode.remove();
+    }
+  });
 
-$('.resetGoogleIcon').click(function(e){resetIconSelect(this.parentNode.nextElementSibling.firstElementChild, true);});
-$('[name="ca_google_trans_enabled"]').click(function(e){
-  if("custom" !== this.value){
-	  this.parentNode.parentNode.parentNode.nextElementSibling.classList.add('hidden');
-	  this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.classList.add('hidden');
-	  this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.classList.add('hidden');
-  }else if("custom" == this.value){
-	  this.parentNode.parentNode.parentNode.nextElementSibling.classList.remove('hidden');
-	  this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.classList.remove('hidden');
-	  this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove('hidden');
-  }
+  // Add New CSS
+$('#add-css, #add-js').click(function(e){
+	e.preventDefault();
+	var ext =  $(this).attr('id').replace('add-', '');
+	var ulID = '#uploaded-' + ext;
+
+	addExternal($(ulID), ext);
+	changeMade = true;
 });
 
-$('[name="caweb_options_submit"]').click( function(e){
-e.preventDefault();
-var settingInputs = $('#caweb-alert-settings').find('INPUT');
-var hiddenInputs = document.createElement('DIV');
-  var org_logo_alt_text = document.getElementById('header_ca_branding_alt_text');
-  
-  if( !org_logo_alt_text.value ){
-	  alert('Organization Logo-Brand Alt Text can not be blank.');
-  }else{
-	  
-	  this.nextElementSibling.value = "on";
+function addExternal(ext_list, ext){
+  var li = document.createElement('LI');
+  var fileUpload = document.createElement('INPUT');
+  var rem = document.createElement('a');
 
-	  hiddenInputs.className = "hidden";
-  
-	  for(var i = 0; i < settingInputs.length; i++){
-		  var input = settingInputs[i];
-  
-		  if( ((-1 < input.name.indexOf('alert-display-') || -1 < input.name.indexOf('alert-read-more-target-') ) && input.checked ) ||
-					  ( -1 ==  input.name.indexOf('alert-display-') && -1 ==  input.name.indexOf('alert-read-more-target-') )){
-			  hiddenInputs.appendChild(settingInputs[i]);
-		  }
-	  }
-	  
-	  $('#caweb-options-form').append(hiddenInputs);
-	  $('#caweb-options-form').submit();
-  }
+  li.classList = "list-group-item";
 
+  // File Upload
+  $(fileUpload).attr('type', "file");
+  $(fileUpload).attr('name', "caweb_external_" + ext + "[]");
+  $(fileUpload).attr('accept', "." + ext);
+  $(fileUpload).attr('data-section', "custom-" + ext);
+  $(fileUpload).addClass("form-control-file border-bottom border-warning pl-2 d-inline-block w-75");
+
+  fileUpload.addEventListener('change', function () {
+    var name = this.value.substring(this.value.lastIndexOf("\\") + 1);
+    var extension = name.lastIndexOf(".") > 0 ?
+            name.substring(name.lastIndexOf(".") + 1).toLowerCase() : "";
+  
+    if( "" === extension || ext !== extension){
+      alert(name + " isn't a valid " + ext + " extension and was not uploaded.");
+      $(this).parent().remove();
+    }else{
+      rem.title = "remove " + name;
+    }
+  
+  });
+  
+  // Remove Newly Added Item
+  rem.classList = "dashicons dashicons-dismiss text-danger align-middle";
+  rem.addEventListener('click', function (e) {
+    e.preventDefault();
+    var r = "" !== this.title ? confirm("Are you sure you want to " + this.title + "? This can not be undone.") : true;
+  
+   if (r == true) {
+      changeMade = true;
+      $(this).parent().remove();
+    }
+  });
+
+  $(li).append(rem);
+  $(li).append(fileUpload);
+
+  $(ext_list).append(li);
+
+}
 });
+  
 
-/* End of CAWeb Option Page */
-
-/* Navigation Page */
-
-$(function(){
+/* nav-menus.php Javascript  */
+jQuery(document).ready(function($) {
+  "use strict";
+  /* Alt Text Check */
   $(document).on('click', 'input[name="save_menu"]', function(e){
-	  var nav_menu_alt_texts = $('div.media_image.show input[name$="_caweb_nav_media_image_alt_text"]');
+	  var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
 
-	  nav_menu_alt_texts.each(function(element) {
-		  if( "" == nav_menu_alt_texts[element].value ){
-			  var title = document.getElementById("edit-menu-item-title-" + nav_menu_alt_texts[element].id.substring(0, nav_menu_alt_texts[element].id.indexOf("_")));
-			  alert(title.value + " Navigation Media Image Alt Text can not be blank.")
+
+    nav_menu_alt_texts.each(function(i,ele) {
+		  if( "" === $(ele).val().trim() ){
+        var menu_id = $(ele).attr('id').substring(0, $(ele).attr('id').indexOf("_") );
+			  var title = $("#edit-menu-item-title-" + menu_id).val();
+			  alert(title + " Navigation Media Image Alt Text can not be blank.")
 			  e.preventDefault();
 		  }
 	  });
 
   });
 
-   $(document).on('change', 'div .unit-size-selector', function(){
-	   var menu_id = this.id.substring(this.id.lastIndexOf('-') + 1);
-	   
-	   var unit_size = this.value;
-	   var settings = document.getElementById('menu-item-settings-' + menu_id);
-	   
-	   var media_image = settings.getElementsByClassName("media_image")[0];
-	   var desc = settings.getElementsByClassName("field-description")[0];
-	   var icon_selector = settings.getElementsByClassName("icon_selector")[0];
-	   
-	   // if the unit_size is not unit1 enable Description
-	   if ("unit1" != unit_size) {
-		   // show Description
-		   desc.classList.remove('hidden-field');
-	   } else {
-		   desc.classList.add('hidden-field');
-	   }
-	   
-	   // if the unit_size is unit3 enable Nav Media Images
-	   if ("unit3" == unit_size) {
-		   // show Description
-		   media_image.classList.add('show');
-		   
-		   // Hide Icon Selector
-		   icon_selector.classList.remove('show');
-		   
-	   } else {
-		   media_image.classList.remove('show');
-		   
-		   icon_selector.classList.add('show');
-	   }
-   });
+  /* Unit Size Selector */
+  $(document).on('change', 'div .unit-size-selector', function(){
+    var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
+    var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
+    var unit_size = $(this).val();
 
-   $(document).on('click', '.icon_selector .caweb-icon-menu li', function(e){
-	   this.parentNode.parentNode.firstElementChild.lastElementChild.value = this.title;
-   });
+    if( 'unit1' === unit_size){
+        // Hide Description
+        $(desc).addClass('hidden-field');
+    }else{
+        // Display Description
+        $(desc).removeClass('hidden-field');
+    }
 
-   $(document).on('DOMSubtreeModified', '#menu-to-edit', function(event) {
-	   // Grab array of all pending menu items
-		  var list_items = this.getElementsByClassName("pending");
-		  
-		  // Remove 'is_selected' class from all icons
-		  for (var i = 0; i < list_items.length; i++) {
-			  var menu_id = list_items.item(i).id.substring(list_items.item(
-				  i).id.lastIndexOf('-') + 1);
-				  
-			  document.getElementById('edit-' + menu_id).addEventListener('click', menu_selection);
-		  }
-   });
-		
-   $('.item-edit').click(menu_selection);
+    if('unit3' === unit_size ){
+        // Display Navigation Media Image
+        $(media_image).removeClass('hidden');
+
+        // Hide Icon Selector
+        $(icon_selector).addClass('hidden');
+
+    }else{
+        // Hide Navigation Media Image
+        $(media_image).addClass('hidden');
+        
+        // Display Icon Selector
+        $(icon_selector).removeClass('hidden');
+    }
+    
+  });
+
+  /* Item Menu Editing */
+  $(document).on('DOMSubtreeModified', '#menu-to-edit', function() {
+    
+    // Grab array of all pending menu items
+     var list_items = $('.pending a.item-edit');
+     
+     list_items.each(function(i, e){
+      // Add menu selection to menu edit
+      $(e).on('click', menu_selection);
+     });
+  });
+
+  $('.item-edit').click(menu_selection);
+  
+  function menu_selection(){
+    var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
+    var menu_li = $('#menu-item-' + menu_id);
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
+    var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
+    var mega_menu_images = $('#menu-item-settings-' + menu_id + ' .mega-menu-images');
+    var unit_selector = $('#menu-item-settings-' + menu_id + ' .unit-size-selector');
+    var unit_size = $(unit_selector).val();
+
+    /*
+    if the menu item is a top level menu item
+    depth = 0
+    */
+    if( $(menu_li).hasClass('menu-item-depth-0') ){
+      // Show Mega Menu Options
+      $(mega_menu_images).removeClass('hidden');
+
+      // Show Icon Selector
+      $(icon_selector).removeClass('hidden');
+
+      // Hide Nav Media Images, Unit Size Selector, Description
+      $(media_image).addClass('hidden');
+      $(unit_selector).addClass('hidden');
+      $(desc).addClass('hidden-field');
+    }else{
+      // Hide Mega Menu Options
+      $(mega_menu_images).addClass('hidden');
+     
+      // Show Unit Selector
+      $(unit_selector).removeClass('hidden');
+
+      if( 'unit1' !== unit_size ){
+        // Hide Description
+        $(desc).addClass('hidden-field');
+      }else{
+        // Show Description
+        $(desc).removeClass('hidden-field');
+      }
+
+      
+      if( 'unit3' === unit_size ){
+        // Hide Icon Selector
+        $(icon_selector).addClass('hidden');
+
+        // Show Nav Media Images
+        $(media_image).removeClass('hidden');
+      }else{
+        // Show Icon Selector
+        $(icon_selector).removeClass('hidden');
+
+        // Hide Nav Media Images
+        $(media_image).addClass('hidden');
+      }
+
+      
+    }
+  }
 });
 
-/* End of Navigation Page */
+/* CAWeb Options Javascript */
+jQuery(document).ready(function($) {
+  "use strict";
+  var changeMade = false;
 
-function menu_selection(){
-   var menu_id = this.id.substring(this.id.lastIndexOf('-') + 1);
+  $(window).on('beforeunload', function(){
+	  if( changeMade && "nav-menus.php" !== args.changeCheck)
+			  return 'Are you sure you want to leave?';
 
-   var menu_li = document.getElementById('menu-item-' + menu_id);
-   var classes = menu_li.className;
-   var settings = document.getElementById('menu-item-settings-' + menu_id);
+  });
 
-   var unit_selector = settings.getElementsByClassName(
-	   "unit-size-selector")[0];
-   var unit_size = unit_selector.options[unit_selector.selectedIndex].value;
+  $('#caweb-options-form select,#caweb-options-form input').on( 'change', function(){  changeMade = true;  });
+  $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
+  $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-   var media_image = settings.getElementsByClassName("media_image")[0];
-   var desc = settings.getElementsByClassName("field-description")[0];
-   var menu_images = settings.getElementsByClassName("mega_menu_images")[
-	   0];
-   var icon_selector = settings.getElementsByClassName("icon_selector")[0];
+  $('#caweb-options-form').submit(function(e){ 
+	  e.preventDefault();
+		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
+		var empty_file = false;
 
-   // if the menu item is a top level menu item
-   if (-1 != classes.indexOf("menu-item-depth-0")) {
-	   // show Mega Menu Options
-	   if( undefined !== menu_images ) menu_images.classList.add("show");
+		$(upload_files).each(function(i){
+			if( "" === $(this).val() && ! empty_file ){
+				empty_file = true;
+				var section_id = '#' + $(this).attr('data-section');
 
-	   if( undefined !== icon_selector ) icon_selector.classList.add("show");
-	   // hide Nav Media Images, Unit Size Selector, Description
-	   if( undefined !== media_image ) media_image.classList.remove("show");
+				$(section_id).collapse('show');
 
-	   if( undefined !== desc ) desc.classList.add("hidden-field");
+				alert( "Uploaded " + $(this).attr('data-section').replace('-', ' ') + " has no file chosen." );
+			}
+		});
+		
+		if( ! empty_file ){
+			changeMade = false; 
+			this.submit(); 
+		}
+	
+	});
 
+  $('.menu-list li a').on('click', function(e){
+	$(this).parent().parent().find('li').each(function(i, ele){
+		$(ele).removeClass('selected');
+	})
 
-	   // if the menu item is not top level menu item
-   } else {
-	   // hide Mega Menu Options
-	   if( undefined !== menu_images ) menu_images.classList.remove("show");
+	$(this).parent().addClass('selected');
+	$('input[name="tab_selected"]').val($(this).attr('href').replace('#', ''));
+  });
 
-	   // show Unit Size Selector
-	   if( undefined !== unit_selector ) unit_selector.parentNode.classList.add("show");
+  // Reset Fav Icon
+  $('#resetFavIcon').click(function() {
+    var ico = args.defaultFavIcon;
+    var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
-	   // if the unit_size is not unit1 enable Description
-	   if ("unit1" != unit_size) {
-		   // show Description
-		   if( undefined !== desc ) desc.classList.remove('hidden-field');
-	   } else {
-		  if( undefined !== desc ) desc.classList.add('hidden-field');
-	   }
+    $('input[type="text"][name="ca_fav_ico"]').val(icoName);
+    $('input[type="hidden"][name="ca_fav_ico"]').val(ico);
+    $('#ca_fav_ico_img').attr('src', ico);
 
-	   // if the unit_size is unit3 enable Nav Media Images
-	   if ("unit3" == unit_size) {
-		   // show Description
-		   if( undefined !== media_image ) media_image.classList.add('show');
-	   } else {
-		   if( undefined !== media_image ) media_image.classList.remove('show');
-	   }
+    changeMade = true;
+  });
 
+  // If no Search Engine ID hide Search on Front Page Option
+  $('#ca_google_search_id').on('input',function(e){
+    var front_search_option = $('label[for="ca_frontpage_search_enabled"]').parent();
 
-   }
-}
-})(jQuery);
+    // if theres no Google Search ID
+    if( !this.value.trim() ){
+      front_search_option.addClass('invisible');
+    }else if(5 <= site_version){
+      front_search_option.removeClass('invisible');
+    }
+  });
+
+  // Display warning if Legacy Browser Support Enabled
+  $('#ca_x_ua_compatibility').on('change',function(e){
+    var isChecked = this.checked;
+    var respSpan = $(this).parent().next();
+  
+    if(isChecked){
+      respSpan.html('IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.')
+    }else{
+      respSpan.html('');
+    }	
+  });
+
+  // If Google Translate is set to Custom, show extra options
+  $('input[name^="ca_google_trans_enabled"]').click(function(){
+    if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){
+      $('#ca_google_trans_enabled_custom_extras').collapse('hide');
+    }else{
+      $('#ca_google_trans_enabled_custom_extras').collapse('show');
+    }
+  });
+
+  // Generate Document Sitemap
+  $('button.doc-sitemap').click(function(e){
+    e.preventDefault();
+    var data = {
+      'action': 'create_doc_sitemap',
+    };
+
+    $.post(ajaxurl, data, function(response) {
+      $('.doc-sitemap-update').html(response);
+    });
+  });
+
+});
