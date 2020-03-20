@@ -17,7 +17,7 @@ get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/header' ); ?>
+	<?php require_once( 'partials/header.php' ); ?>
 
 
 	<div id="page-container">
@@ -121,7 +121,7 @@ get_header();
 			float: left;
 		}
 	</style>
-	<?php if ( 5 === caweb_get_page_version( get_the_ID() ) ) : ?>
+	<?php if ( 5 <= caweb_get_page_version( get_the_ID() ) ) : ?>
 	<style>
 		.divider {
 			display: block !important;

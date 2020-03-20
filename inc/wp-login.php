@@ -9,6 +9,7 @@
  */
 
 /* Actions */
+add_action( 'login_init', 'caweb_login_form_init' );
 add_action( 'lostpassword_form', 'caweb_lostpassword_form' );
 add_action( 'login_form_lostpassword', 'caweb_login_form_lostpassword' );
 add_action( 'login_form_rp', 'caweb_login_form_rp' );
@@ -20,6 +21,16 @@ add_filter( 'lostpassword_redirect', 'caweb_lostpassword_redirect' );
 add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 11, 3 );
 add_filter( 'retrieve_password_message', 'caweb_retrieve_password_message', 10, 4 );
 add_filter( 'wp_login_errors', 'caweb_wp_login_errors', 10, 2 );
+
+/**
+ * CAWeb Login Form
+ * Adds a nonce to the login form $_REQUEST array.
+ *
+ * @return void
+ */
+function caweb_login_form_init() {
+	$_REQUEST['caweb_disclaimer_nonce'] = wp_create_nonce( 'caweb_disclaimer' );
+}
 
 /**
  * Add Site ID to lost password form
@@ -66,7 +77,6 @@ function caweb_login_form_rp() {
 
 	add_filter( 'network_site_url', 'caweb_network_site_url', 10, 3 );
 }
-
 
 /**
  * Password Reset Strength Validation
@@ -221,4 +231,3 @@ function caweb_network_site_url( $url, $path, $scheme ) {
 
 	return $url;
 }
-
