@@ -1,0 +1,53 @@
+.first-level-link{
+	height: $first-level-link-height;
+	/* Allows for the Navigation Top Level Links to wrap */
+	white-space: normal;
+}
+
+#nav_list{
+	width: $nav-list-width;
+}
+
+.sub-nav{
+	left: 0;
+	right: 0;
+}
+
+.second-level-nav {
+	display: initial;
+}
+
+.second-level-nav li{
+	float: left;
+}
+
+.unit2 , .unit3, .unit3 .nav-media .media{
+	height: 130px;
+}
+
+@media (max-width: 767px) {
+	#nav_list{
+	  width: 100%;
+	  padding-left: 0;
+	}
+}
+
+@media (min-width: 768px){
+	/* Main Navigation fix, increases height when links main links wrap */
+	.main-navigation{
+	  display: flex;
+	  flex-direction: row-reverse;
+	  padding-left: 320px;
+	  max-height: 300px !important;
+	}
+
+	.top-level-nav .nav-item {
+		padding: 0 6px;
+	}
+}
+
+@media (min-width: 992px){
+	.top-level-nav .nav-item {
+		padding: 0 8px;
+	}
+}

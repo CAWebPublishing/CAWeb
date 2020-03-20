@@ -12,7 +12,7 @@ $username = get_site_option( 'caweb_username', 'CA-CODE-Works' );
 $password = get_site_option( 'caweb_password', '' );
 
 ?>
-<form id="caweb-options-form" action="<?php print admin_url( 'admin.php?page=caweb_api' ); ?>" method="POST">
+<form id="caweb-api-options-form" action="<?php print admin_url( 'admin.php?page=caweb_api' ); ?>" method="POST">
 	<h2>GitHub API Key</h2>
 	<div class="form-row">
 		<div class="form-group col-sm-5">
@@ -32,7 +32,7 @@ $password = get_site_option( 'caweb_password', '' );
 		<div class="form-group col-sm-5">
 			<label for="caweb_password" class="d-block mb-0">Token</label>
 			<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
-			<input type="password" class="form-control" name="caweb_password" size="50" value="<?php print base64_encode( $password ); ?>" />
+			<input type="password" class="form-control" name="caweb_password" size="50" value="<?php print $password; ?>" />
 		</div>
 	</div>
 	<input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="<?php _e( 'Save Changes' ); ?>" />

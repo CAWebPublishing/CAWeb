@@ -8,7 +8,6 @@
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );
-$caweb_geo_locator_enabled          = false; //get_option( 'ca_geo_locator_enabled', false );
 $caweb_google_trans_page            = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_enabled         = get_option( 'ca_google_trans_enabled', false );
 $caweb_google_trans_page_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? '_blank' : '_self';
@@ -42,11 +41,11 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 						$caweb_share  = substr( $caweb_opt, 10 );
 						$caweb_share  = str_replace( '_', '-', $caweb_share );
 						$caweb_class  = "utility-social-$caweb_share ca-gov-icon-$caweb_share";
-						$caweb_title  = ucwords( $caweb_share );
+						$caweb_title  = get_option( "${caweb_opt}_hover_text", 'Share via ' . ucwords( $caweb_share ) ) ;
 						$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_opt );
 						$caweb_target = get_option( "${caweb_opt}_new_window" ) ? 'target="_blank"' : ''
 						?>
-						<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="Share via <?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
+						<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
 							<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
 						</a>
 						<?php
@@ -83,9 +82,6 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				<a class="utility-contact-us" href="<?php print esc_url( $caweb_contact_us_link ); ?>">Contact Us</a>
 				<?php endif; ?>
 
-				<?php if ( $caweb_geo_locator_enabled ) : ?>
-				<button class="btn btn-xs btn-primary collapsed geo-lookup" data-toggle="collapse" data-target="#locationSettings" aria-controls="locationSettings"><span class="ca-gov-icon-compass" aria-hidden="true"></span><span class="located-city-name"></span></button>
-				<?php endif; ?>
 				<?php if ( 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) : ?>
 				<a id="caweb-gtrans-custom" target="<?php print esc_attr( $caweb_google_trans_page_new_window ); ?>" href="<?php print esc_url( $caweb_google_trans_page ); ?>">
 				<?php if ( ! empty( $caweb_google_trans_icon ) ) : ?>
@@ -93,7 +89,7 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				<?php endif; ?>
 				Translate</a>
 				<?php endif; ?>
-				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
+				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled  ) : ?>
 				<div class="quarter standard-translate" id="google_translate_element"></div>
 				<?php endif; ?>
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
