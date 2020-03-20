@@ -94,6 +94,20 @@
 	</rule>
 
 	<!--
+		Exclude obfuscation group. 
+		functions affected:
+		'base64_decode', 'base64_encode', 'convert_uudecode',
+		'convert_uuencode', 'str_rot13'
+	-->
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
+		<properties>
+			<property name="exclude" type="array">
+				<element value="obfuscation"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!--
 	#############################################################################
 	USE THE PHPCompatibility RULESET
 	#############################################################################

@@ -16,7 +16,7 @@ $caweb_align = 'center' !== get_option( 'header_ca_branding_alignment' ) ? 'pull
 <!-- Branding -->
 <div class="branding">
 
-	<?php if ( 5 === caweb_get_page_version( get_the_ID() ) && ! empty( $caweb_logo ) ) : ?>
+	<?php if ( 5 <= caweb_get_page_version( get_the_ID() ) && ! empty( $caweb_logo ) ) : ?>
 	<div class="header-organization-banner">
 		<a href="/">
 			<img src="<?php print esc_url( $caweb_logo ); ?>" alt="<?php print esc_attr( $caweb_logo_alt_text ); ?>" />
