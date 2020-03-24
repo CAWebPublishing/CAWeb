@@ -41,7 +41,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 						?>
 					</span>
 					<?php endif; ?>
-					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html( array( 'p' ) ) ); ?></span>
+					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html( ) ); ?></span>
 						<?php
 						if ( ! empty( $caweb_data['button'] ) && ! empty( $caweb_data['url'] ) ) :
 							$caweb_url    = $caweb_data['url'];

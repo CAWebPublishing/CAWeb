@@ -296,6 +296,7 @@ jQuery(document).ready(function($) {
 
 		$(alertMsgTextarea).attr('name', 'alert-message-' + c);
 		$(alertMsgTextarea).attr('id', 'alertmessage-' + c);
+		$(alertMsgTextarea).addClass('wp-editor-area');
 		$(alertMsgTextarea).html('Enter Alert text here...');
 
 		$(alertMsg).append(alertMsgLabel);
