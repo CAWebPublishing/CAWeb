@@ -438,6 +438,7 @@ function caweb_allowed_html( $exclude = array() ) {
 	$tags = array(
 		'div'    => $attr,
 		'p'      => $attr,
+		'br'     => array(),
 		'span'   => $attr,
 		'a'      => array_merge( $attr, $anchors ),
 		'img'    => array_merge( $attr, $imgs ),

@@ -52,6 +52,9 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 			'toolbar1'        => 'formatselect,bold,italic,underline,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,wp_more,wp_adv',
 			'toolbar2'        => 'styleselect,strikethrough,hr,fontselect,fontsizeselect,forecolor,backcolor,pastetext,copy,subscript,superscript,charmap,outdent,indent,undo,redo,wp_help',
 			'style_formats'   => $styles,
+			'forced_root_block' => '',
+			'force_br_newlines' => true,
+			'force_p_newlines' => false,
 		),
 	);
 
