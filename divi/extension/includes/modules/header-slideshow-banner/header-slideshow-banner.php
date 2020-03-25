@@ -105,9 +105,10 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
+        global $post;
+        $con = is_object($post) ? $post->post_content : $post['post_content'];
         $version = caweb_get_page_version(get_the_ID());
-
-        $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
+        $module = ! is_404() && ! empty($con) ? caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner') : array();
 
         if( isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ){
             return;
