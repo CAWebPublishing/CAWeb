@@ -14,6 +14,8 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
+define( 'CAWEB_EXTERNAL_DIR', WP_CONTENT_DIR . '/caweb-ext' );
+define( 'CAWEB_EXTERNAL_URI', content_url( '/caweb-ext' ) );
 
 /**
  * Plugin API/Action Reference
@@ -149,7 +151,7 @@ function caweb_setup_theme() {
 	 * Add $_COOKIE variable for Alert Banners
 	 * Session variables used to be used but are no longer supported in WP since 4.9.
 	 *
-	 * @since 4.9
+	 * @since WordPress 4.9
 	 * @see https://wordpress.org/support/topic/the-loopback-request-to-your-site-failed-4/page/2/
 	 */
 	$caweb_alerts = get_option( 'caweb_alerts', array() );
@@ -161,6 +163,28 @@ function caweb_setup_theme() {
 				$_COOKIE[ "caweb-alert-id-$c" ] = true;
 			}
 		}
+	}
+
+	/**
+	 * External CSS/JS files have been moved outside of the theme
+	 *
+	 * @since 1.4.23
+	 */
+	$old_ext_css_dir = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
+	$old_ext_js_dir  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+
+	if ( file_exists( $old_ext_css_dir ) ) {
+		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/css/' ) ) {
+			mkdir( CAWEB_EXTERNAL_DIR . '/css/', 0777, true );
+		}
+		rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
+	}
+
+	if ( file_exists( $old_ext_js_dir ) ) {
+		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/js/' ) ) {
+			mkdir( CAWEB_EXTERNAL_DIR . '/js/', 0777, true );
+		}
+		rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
 	}
 }
 
@@ -269,17 +293,16 @@ function caweb_wp_enqueue_scripts() {
 
 	/* If not on the activation page */
 	if ( 'wp-activate.php' !== $pagenow ) {
-
 		/* External CSS Styles */
 		$ext_css     = array_values( array_filter( get_option( 'caweb_external_css', array() ) ) );
-		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
+		$ext_css_dir = sprintf( '%1$s/css/%2$s', CAWEB_EXTERNAL_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), uniqid( CAWEB_VERSION . "-", true ) );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), uniqid( CAWEB_VERSION . '-', true ) );
 		}
 
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
-			$custom_css = sprintf( '%1$s/css/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
+			$custom_css = sprintf( '%1$s/css/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
 
 			if ( ! file_exists( "$custom_css/caweb-custom.css" ) ) {
 				global $wp_filesystem;
@@ -289,7 +312,7 @@ function caweb_wp_enqueue_scripts() {
 				$wp_filesystem->put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ), FS_CHMOD_FILE );
 			}
 
-			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), uniqid( CAWEB_VERSION . "-", true ) );
+			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), uniqid( CAWEB_VERSION . '-', true ) );
 		}
 	}
 
@@ -359,15 +382,15 @@ function caweb_late_wp_enqueue_scripts() {
 	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );
 
 	foreach ( $ext_js as $index => $name ) {
-		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
+		$location = sprintf( '%1$s/js/%2$s/%3$s', CAWEB_EXTERNAL_URI, get_current_blog_id(), $name );
 		$i        = $index + 1;
-		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . "-", true ), true );
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . '-', true ), true );
 		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
 	}
 
 	/* Custom JS */
 	if ( ! empty( get_option( 'ca_custom_js', '' ) ) ) {
-		$custom_js = sprintf( '%1$s/js/external/%2$s', CAWEB_ABSPATH, get_current_blog_id() );
+		$custom_js = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
 
 		if ( ! file_exists( "$custom_js/caweb-custom.js" ) ) {
 			global $wp_filesystem;
@@ -379,7 +402,7 @@ function caweb_late_wp_enqueue_scripts() {
 			$wp_filesystem->put_contents( "$custom_js/caweb-custom.js", wp_unslash( get_option( 'ca_custom_js' ) ), FS_CHMOD_FILE );
 		}
 
-		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/external/%2$s/caweb-custom.js', CAWEB_URI, get_current_blog_id() ), array( 'jquery' ), uniqid( CAWEB_VERSION . "-", true ), true );
+		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/%2$s/caweb-custom.js', CAWEB_EXTERNAL_URI, get_current_blog_id() ), array( 'jquery' ), uniqid( CAWEB_VERSION . '-', true ), true );
 		wp_enqueue_script( 'caweb-custom-js' );
 
 	}

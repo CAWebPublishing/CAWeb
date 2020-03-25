@@ -1,7 +1,7 @@
 <?php
 /**
  * CAWeb Options Page
- * 
+ *
  * @package CAWeb
  */
 
@@ -105,7 +105,7 @@ $google_translate_icon       = get_option( 'ca_google_trans_icon', 'globe' );
 /*
  Custom CSS
 */
-$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
+$ext_css_dir = sprintf( '%1$s/css/%2$s', CAWEB_EXTERNAL_URI, get_current_blog_id() );
 
 // Upladed CSS
 $ext_css = get_option( 'caweb_external_css', array() );
@@ -116,7 +116,7 @@ $custom_css = get_option( 'ca_custom_css', '' );
 /*
  Custom JS
 */
-$ext_js_dir = sprintf( '%1$s/js/external/%2$s', CAWEB_URI, get_current_blog_id() );
+$ext_js_dir = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_URI, get_current_blog_id() );
 
 // Uploaded JS
 $ext_js = get_option( 'caweb_external_js', array() );
@@ -148,10 +148,10 @@ $user_color = caweb_get_user_color()->colors[2];
 <style>
 .menu-list li.list-group-item,
 .menu-list li.list-group-item:hover {
-	background-color: <?php print $user_color;?> !important;
+	background-color: <?php print $user_color; ?> !important;
 }
 .menu-list li.list-group-item:not(.selected) a {
-	color: <?php print $user_color;?> !important;
+	color: <?php print $user_color; ?> !important;
 }
 </style>
 <div class="container-fluid mt-4">
