@@ -48,7 +48,7 @@ module.exports = {
 		'assets/js/bootstrap/bootstrap.bundle.js',
 	],
 	frontendJS: [ // Common JS 
-		'assets/js/caweb/google/*.js',
+		'assets/js/caweb/google.js',
 		'assets/js/caweb/AutoTracker.js',
 	],  
 	a11yJS:[ // Accessibility JS
