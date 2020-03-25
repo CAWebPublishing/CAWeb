@@ -96,9 +96,6 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			/* Define the alternative response for upgrader_pre_install */
 			add_filter( 'upgrader_source_selection', array( $this, 'caweb_upgrader_source_selection' ), 10, 4 );
 
-			/* Define the alternative response for upgrader_pre_install */
-			add_filter( 'upgrader_post_install', array( $this, 'caweb_upgrader_post_install' ), 10, 3 );
-
 			add_action( 'after_setup_theme', array( $this, 'remove_theme_update_actions' ), 12 );
 
 			add_action( 'admin_post_caweb_get_changelog', array( $this, 'caweb_get_theme_changelog' ) );
@@ -232,21 +229,6 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
 
-				/* move any external site css if external css directory exists */
-				if ( file_exists( sprintf( '%1$s/css/external/', CAWEB_ABSPATH ) ) ) {
-					rename(
-						sprintf( '%1$s/css/external/', CAWEB_ABSPATH ),
-						sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] )
-					);
-				}
-				/* move any external site js if external js directory exists */
-				if ( file_exists( sprintf( '%1$s/js/external/', CAWEB_ABSPATH ) ) ) {
-					rename(
-						sprintf( '%1$s/js/external/', CAWEB_ABSPATH ),
-						sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] )
-					);
-				}
-
 				/* Delete existing transient */
 				delete_site_transient( $this->transient_name );
 
@@ -285,32 +267,6 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			return $tmp;
 		}
 
-		/**
-		 * Filters the installation response after the installation has finished.
-		 *
-		 * @link https://developer.wordpress.org/reference/hooks/upgrader_post_install/
-		 * @param  bool  $response Installation response.
-		 * @param  array $hook_extra Extra arguments passed to hooked filters.
-		 * @param  array $result Installation result data.
-		 *
-		 * @return void
-		 */
-		public function caweb_upgrader_post_install( $response, $hook_extra, $result ) {
-			/* move any external site css existed move it back */
-			if ( file_exists( sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ) ) ) {
-				rename(
-					sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] ),
-					sprintf( '%1$s/css/external/', CAWEB_ABSPATH )
-				);
-			}
-			/* move any external site js existed move it back */
-			if ( file_exists( sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ) ) ) {
-				rename(
-					sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] ),
-					sprintf( '%1$s/js/external/', CAWEB_ABSPATH )
-				);
-			}
-		}
 		/**
 		 * This is hooked to admin_post_caweb_update_available
 		 * Used to hook to GitHub Webhooks Releases a payload is sent
