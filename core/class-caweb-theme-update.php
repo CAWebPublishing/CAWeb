@@ -232,20 +232,28 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
 
+				/**
+				 * External CSS/JS files have been moved outside of the theme
+				 * @since 1.4.23
+				 */
+				$site_path = sprintf( '%1$s/caweb-cust/', dirname( wp_upload_dir()['basedir'] ) );
+				if ( ! file_exists( $site_path ) ) {
+					mkdir( $site_path );
+				}
 				/* move any external site css if external css directory exists */
-				if ( file_exists( sprintf( '%1$s/css/external/', CAWEB_ABSPATH ) ) ) {
+				/*if ( file_exists( sprintf( '%1$s/css/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
 						sprintf( '%1$s/css/external/', CAWEB_ABSPATH ),
 						sprintf( '%1$s/caweb_external_css/', wp_upload_dir()['basedir'] )
 					);
-				}
+				}*/
 				/* move any external site js if external js directory exists */
-				if ( file_exists( sprintf( '%1$s/js/external/', CAWEB_ABSPATH ) ) ) {
+				/*if ( file_exists( sprintf( '%1$s/js/external/', CAWEB_ABSPATH ) ) ) {
 					rename(
 						sprintf( '%1$s/js/external/', CAWEB_ABSPATH ),
 						sprintf( '%1$s/caweb_external_js/', wp_upload_dir()['basedir'] )
 					);
-				}
+				}*/
 
 				/* Delete existing transient */
 				delete_site_transient( $this->transient_name );

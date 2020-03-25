@@ -275,7 +275,7 @@ function caweb_wp_enqueue_scripts() {
 		$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), uniqid( CAWEB_VERSION . "-", true ) );
 		}
 
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
@@ -289,7 +289,7 @@ function caweb_wp_enqueue_scripts() {
 				$wp_filesystem->put_contents( "$custom_css/caweb-custom.css", wp_unslash( get_option( 'ca_custom_css' ) ), FS_CHMOD_FILE );
 			}
 
-			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), CAWEB_VERSION );
+			wp_enqueue_style( 'caweb-custom-css-styles', "$ext_css_dir/caweb-custom.css", array(), uniqid( CAWEB_VERSION . "-", true ) );
 		}
 	}
 
@@ -361,7 +361,7 @@ function caweb_late_wp_enqueue_scripts() {
 	foreach ( $ext_js as $index => $name ) {
 		$location = sprintf( '%1$s/js/external/%2$s/%3$s', CAWEB_URI, get_current_blog_id(), $name );
 		$i        = $index + 1;
-		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), CAWEB_VERSION, true );
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . "-", true ), true );
 		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
 	}
 
@@ -379,7 +379,7 @@ function caweb_late_wp_enqueue_scripts() {
 			$wp_filesystem->put_contents( "$custom_js/caweb-custom.js", wp_unslash( get_option( 'ca_custom_js' ) ), FS_CHMOD_FILE );
 		}
 
-		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/external/%2$s/caweb-custom.js', CAWEB_URI, get_current_blog_id() ), array( 'jquery' ), CAWEB_VERSION, true );
+		wp_register_script( 'caweb-custom-js', sprintf( '%1$s/js/external/%2$s/caweb-custom.js', CAWEB_URI, get_current_blog_id() ), array( 'jquery' ), uniqid( CAWEB_VERSION . "-", true ), true );
 		wp_enqueue_script( 'caweb-custom-js' );
 
 	}
