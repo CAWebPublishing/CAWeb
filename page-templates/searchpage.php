@@ -12,12 +12,12 @@
 get_header();
 ?>
 
-<body <?php body_class( 'primary' ); ?>>
+<body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
 	<?php require_once( dirname(__DIR__) . '/partials/header.php' ); ?>
 	<style>
 		#main-content .container {
 			padding-top: 0
-		}s
+		}
 
 		.search-container {
 			top: 0 !important;
