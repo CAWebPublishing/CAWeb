@@ -121,7 +121,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		return false;
 	}
 
-	function process_icon( $icon ){
+	private function process_icon( $icon ){
 		if ( empty( $icon ) ){
 			return;
 		}
@@ -133,6 +133,22 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 
 		$icon = isset( $tmp[ $icon ] ) ? 'ca-gov-icon-' . $tmp[$icon] : '';
 		return  $icon;
+	}
+
+	function caweb_get_icon_span( $icon, $classes = '', $styles = ''){
+		$icon = $this->process_icon($icon);
+
+		if ( empty( $icon ) ){
+			return;
+		}
+
+		$classes = is_array( $classes ) ? implode(' ', $classes) : $classes;
+		$classes = ! empty( $classes ) ? " $classes" : '';
+		
+		$styles = is_array( $styles ) ? implode(';', $styles) : $styles;
+		$styles = ! empty( $styles ) ? " style=\"$styles\"" : '';
+		
+		return sprintf('<span class="%1$s%2$s"%3$s></span>', $icon, $classes, $styles);
 	}
 
 	function caweb_return_posts( $cats = array(), $tags = array(), $post_amount = -1, $orderby = 'post_date', $order = 'DESC' ) {
