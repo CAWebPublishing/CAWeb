@@ -11,7 +11,7 @@ get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once( 'partials/header.php' ); ?>
+	<?php require_once 'partials/header.php'; ?>
 
 
 	<div id="main-content" class="main-content">
