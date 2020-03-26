@@ -97,29 +97,6 @@ gulp.task('frontend-css', parameterized( async function (_) {
 }));
 
 /*
-	CAWeb CDN Styles 
-*/
-gulp.task('cdn-css', parameterized( async function (_) {
-	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
-	
-	version.forEach(function(v){
-		if ( _.params.prod ) {
-			buildCDNStyles(true, v);
-		}
-	
-		if ( _.params.dev ) {
-			buildCDNStyles(false, v);
-		}
-	
-		if( buildAll(_.params) ){
-			buildCDNStyles(false, v);
-			buildCDNStyles(true, v);
-		}
-	});
-
-}));
-
-/*
 	CAWeb BootStrap Admin Styles
 */
 gulp.task('bootstrap-css', parameterized( async function (_) {
@@ -294,9 +271,6 @@ gulp.task('build', parameterized(async function(_){
 			// Build Frontend Styles
 			buildFrontEndStyles(true, v);
 
-			// Build CDN Related Asset Styles
-			buildCDNStyles(true, v);
-			
 			// Build CAWeb JS
 			buildCAWebJS(true, v);
 		});
@@ -329,9 +303,6 @@ gulp.task('build', parameterized(async function(_){
 			// Build Frontend Styles
 			buildFrontEndStyles(false, v);
 
-			// Build CDN Related Asset Styles
-			buildCDNStyles(false, v);
-			
 			// Build CAWeb JS
 			buildCAWebJS(false, v);
 		});
@@ -368,10 +339,6 @@ gulp.task('build', parameterized(async function(_){
 			buildFrontEndStyles(true, v);
 			buildFrontEndStyles(false, v);
 
-			// Build CDN Related Asset Styles
-			buildCDNStyles(true, v);
-			buildCDNStyles(false, v);
-			
 			// Build CAWeb JS
 			buildCAWebJS(true, v);
 			buildCAWebJS(false, v);
@@ -457,32 +424,6 @@ async function buildFrontEndStyles( min = false, ver = config.templateVer){
 			.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) );
 		;
 	});
-}
-
-async function buildCDNStyles( min = false, ver = config.templateVer ){
-	var buildOutputStyle = min ? 'compressed' : 'expanded';
-	var minified = min ? '.min' : '';
-	var versionDir = config.SCSSAssetDir + 'cagov/version' + ver;
-	
-	var f = config.frontendCSS.concat( versionDir + '/custom.scss' );
-	var t = minified ? ' Minified' : '';
-	t = '✅  CAWeb v' + ver + ' CDN Styles' + t;
-
-	if( ! f.length )
-		return;
-
-	return gulp.src(f)
-		.pipe(
-			sass({
-				outputStyle: buildOutputStyle,
-			})
-		)
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('cdn-v' + ver + minified + '.css')) // compiled file
-		.pipe(gulp.dest('./css/'))
-		.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) )
-		;
-
 }
 
 async function buildA11yJS( min = false){
@@ -655,7 +596,6 @@ function buildAll( params = {} ){
 gulp.task('dev', parameterized.series(
 	'admin-css --dev', 
 	'frontend-css --dev', 
-	'cdn-css --dev', 
 	'bootstrap-css --dev', 
 	'admin-js --dev', 
 	'frontend-js --dev', 
@@ -669,7 +609,6 @@ gulp.task('dev', parameterized.series(
 gulp.task('prod', parameterized.series(
 	'admin-css --prod', 
 	'frontend-css --prod', 
-	'cdn-css --prod', 
 	'bootstrap-css --prod', 
 	'admin-js --prod', 
 	'frontend-js --prod', 

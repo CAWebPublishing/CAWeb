@@ -210,9 +210,6 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-			$icon = $this->process_icon($icon);
-			$display_options = "";
-			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
 
             switch($panel_layout){
                 case "none":
@@ -228,7 +225,10 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
                         $hSize = 'h4';
                         break;
             }
-            
+
+            $display_options = "";
+			$display_icon = "on" == $use_icon ? $this->caweb_get_icon_span($icon, 'pr-1', 'vertical-align:sub;')  : "";
+
             if( "on" == $show_button && ! empty($button_link) ){
 				$button_text = empty( $button_text ) ? 'Read More' : $button_text;
                 $button_link =  esc_url($button_link);
@@ -243,7 +243,7 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+            $display_title = sprintf('<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
                 $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        
@@ -453,9 +453,6 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-			$icon = $this->process_icon($icon);
-            $display_options = "";
-			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
             
             switch($panel_layout){
                 case "none":
@@ -472,6 +469,9 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
                         break;
             }
 
+            $display_options = "";
+            $display_icon = "on" == $use_icon ? $this->caweb_get_icon_span($icon, 'pr-1', 'vertical-align:sub;')  : "";
+
             if( "on" == $show_button ){
                 $button_link = ! empty($button_link) ? esc_url($button_link) : '';
                 $button_text = empty( $button_text ) ? 'Read More' : $button_text;
@@ -486,7 +486,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+            $display_title = sprintf('<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
                 $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        
