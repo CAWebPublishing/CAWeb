@@ -229,15 +229,14 @@ class CAWeb_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 		$display_link_as_button= $this->props['display_link_as_button'];
 
 		// List Color Styles
-		$text_color = ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '';
+		$text_color = ! empty($text_color) ? "color: $text_color" : '';
+		$icon = 'on' === $group_icon_button ? $this->caweb_get_icon_span( $group_icon, 'mr-1', $text_color ) : '';
 
-		$icon = $this->process_icon( $group_icon );
-		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
-
-		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '';
+		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs"' : '';
 
 		$groupLinks = '';
 
+		$text_color = ! empty($text_color) ? " style=\"$text_color\"" : '';
 		for ($i = 1; $i <= 10; $i++) {
 			$group_link_show = $this->props[sprintf('group_link%1$s_show', $i)];
 			$group_link_text = $this->props[sprintf('group_link_text%1$s', $i)];
@@ -482,15 +481,14 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 		$display_link_as_button= $this->props['display_link_as_button'];
 
 		// List Color Styles
-		$text_color = ! empty($text_color) ? sprintf(' style="color: %1$s" ', $text_color) : '';
-				
-		$icon = $this->process_icon( $group_icon );
-		$icon = 'on' === $group_icon_button ? "<span class=\"$icon\"$text_color></span>" : '';
+		$text_color = ! empty($text_color) ? "color: $text_color" : '';				
+		$icon = 'on' === $group_icon_button ? $this->caweb_get_icon_span( $group_icon, 'mr-1', $text_color ) : '';
 
-		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs" ' : '';
+		$link_as_button = "on" == $display_link_as_button ? ' class="btn btn-default btn-xs"' : '';
 
 		$groupLinks = '';
 
+		$text_color = ! empty($text_color) ? " style=\"$text_color\"" : '';	
 		for ($i = 1; $i <= 10; $i++) {
 			$group_link_show = $this->props[sprintf('group_link%1$s_show', $i)];
 			$group_link_text = $this->props[sprintf('group_link_text%1$s', $i)];
