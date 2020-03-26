@@ -275,6 +275,8 @@ function caweb_wp_enqueue_parent_scripts() {
  */
 function caweb_wp_enqueue_scripts() {
 	global $pagenow;
+	$cwes        = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
+	$verified    = isset( $cwes ) && wp_verify_nonce( sanitize_key( $cwes ), 'caweb_wp_enqueue_scripts' );
 	$vb_enabled  = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 	$ver         = caweb_get_page_version( get_the_ID() );
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
@@ -370,6 +372,8 @@ function caweb_wp_enqueue_scripts() {
  * @return void
  */
 function caweb_late_wp_enqueue_scripts() {
+	$clwes      = wp_create_nonce( 'caweb_late_wp_enqueue_scripts' );
+	$verified   = isset( $clwes ) && wp_verify_nonce( sanitize_key( $clwes ), 'caweb_late_wp_enqueue_scripts' );
 	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 
 	if ( $vb_enabled ) {
