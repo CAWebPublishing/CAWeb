@@ -40,5 +40,5 @@ if ( is_tag() || is_archive() || is_category() || is_author() ) : ?>
 	});
 </script>
 <?php endif; ?>
-<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Site Wide Widget") ) : ?>
+<?php if ( ! function_exists( 'dynamic_sidebar' ) || ! dynamic_sidebar( 'Site Wide Widget' ) ) : ?>
 <?php endif; ?>
