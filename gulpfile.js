@@ -497,6 +497,7 @@ gulp.task('dev', parameterized.series(
 	'frontend-css --dev', 
 	'bootstrap-css --dev', 
 	'admin-js --dev', 
+	'caweb-js --dev', 
 	'bootstrap-js --dev', 
 	'customizer-js --dev'
 	) 
@@ -508,6 +509,7 @@ gulp.task('prod', parameterized.series(
 	'frontend-css --prod', 
 	'bootstrap-css --prod', 
 	'admin-js --prod', 
+	'caweb-js --prod', 
 	'bootstrap-js --prod',
 	'customizer-js --prod',
 	) 
