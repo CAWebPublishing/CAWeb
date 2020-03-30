@@ -176,15 +176,21 @@ function caweb_setup_theme() {
 	if ( file_exists( $old_ext_css_dir ) ) {
 		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/css/' ) ) {
 			mkdir( CAWEB_EXTERNAL_DIR . '/css/', 0777, true );
+			rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
+		}else{
+			caweb_rrmdir($old_ext_css_dir);
+			rmdir( $old_ext_css_dir);
 		}
-		rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
 	}
 
 	if ( file_exists( $old_ext_js_dir ) ) {
 		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/js/' ) ) {
 			mkdir( CAWEB_EXTERNAL_DIR . '/js/', 0777, true );
+			rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
+		}else{
+			caweb_rrmdir($old_ext_js_dir);
+			rmdir( $old_ext_js_dir);
 		}
-		rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
 	}
 }
 
