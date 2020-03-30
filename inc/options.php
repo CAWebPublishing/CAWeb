@@ -550,7 +550,7 @@ function caweb_rrmdir( $path ) {
 			if ( $f->isFile() ) {
 				unlink( $f->getRealPath() );
 			} elseif ( ! $f->isDot() && $f->isDir() ) {
-				rrmdir( $f->getRealPath() );
+				caweb_rrmdir( $f->getRealPath() );
 				rmdir( $f->getRealPath() );
 			}
 		}
