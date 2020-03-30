@@ -14,8 +14,8 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', WP_CONTENT_DIR . '/caweb-ext' );
-define( 'CAWEB_EXTERNAL_URI', content_url( '/caweb-ext' ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR,  strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
 
 /**
  * Plugin API/Action Reference
