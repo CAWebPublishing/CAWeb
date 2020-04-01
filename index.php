@@ -12,10 +12,15 @@
  * @package CAWeb
  */
 
+?>
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<?php
+
 get_header();
 
 ?>
-
 <body <?php body_class( 'primary' ); ?>>
 	<?php require_once 'partials/header.php'; ?>
 
