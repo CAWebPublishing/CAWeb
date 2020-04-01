@@ -9,9 +9,12 @@
  * @package CAWeb
  */
 
-get_header();
 ?>
-
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<?php
+	get_header();
+?>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
 	<?php require_once( dirname(__DIR__) . '/partials/header.php' ); ?>
 	<style>
