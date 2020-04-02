@@ -328,7 +328,6 @@ function caweb_wp_enqueue_scripts() {
 	wp_deregister_style( 'divi-fonts' );
 
 	if ( ! $vb_enabled ) {
-		$spanish = 'page-templates/page-template-spanish.php' === get_page_template_slug( get_the_ID() ) ? true : false;
 
 		$localize_args = array(
 			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
@@ -338,12 +337,7 @@ function caweb_wp_enqueue_scripts() {
 			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 			'ajaxurl'                     => admin_url( 'admin-post.php' ),
-			'spanish'                     => $spanish,
 		);
-
-		if ( $spanish ) {
-			setcookie( 'googtrans', '/en/es' );
-		}
 
 		$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
 
