@@ -64,7 +64,7 @@ $contact_us_link = get_option( 'ca_contact_us_link', '' );
 $geo_locator_enabled = get_option( 'ca_geo_locator_enabled', false ) ? ' checked' : '';
 
 // Utility Header Home Icon
-$utility_header_home_icon = get_option( 'ca_utility_home_icon', true ) ? 'checked' : '';
+$utility_header_home_icon = get_option( 'ca_utility_home_icon', true ) ? ' checked' : '';
 
 // Custom Link Declarations are located at options/sections/utility-header.php
 
