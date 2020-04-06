@@ -236,8 +236,8 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
                 $option_classes = "right" == $heading_align ? ' pl-2' : '';
                 $option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
 
-                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s<span class="sr-only">%4$s about %5$s</span></a></div>', 
-                    $option_classes, $button_link, $button_target, $button_text, $title );
+                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s</a></div>', 
+                    $option_classes, $button_link, $button_target, $button_text );
             }
 
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
@@ -479,8 +479,8 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
                 $option_classes = "right" == $heading_align ? ' pl-2' : '';
                 $option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
                 
-                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s<span class="sr-only">%4$s about %5$s</span></a></div>', 
-                    $option_classes, $button_link, $button_target, $button_text, $title );
+                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s</a></div>', 
+                    $option_classes, $button_link, $button_target, $button_text );
            }
 
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
