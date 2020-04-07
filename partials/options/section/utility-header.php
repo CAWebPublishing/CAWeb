@@ -20,7 +20,7 @@
             <div class="form-group col-4">
                 <label for="ca_geo_locator_enabled" class="d-block mb-0"><strong>Enable Geo Locator</strong></label>
                 <small class="mb-2 text-muted d-block">Displays a geo locator feature at the top right of each page.</small>
-                <input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" data-toggle="toggle" <?php print $geo_locator_enabled ?>> 
+                <input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" data-toggle="toggle" data-onstyle="success" <?php print $geo_locator_enabled ?>> 
             </div>
             <!-- Home Link -->
             <div class="form-group col-4">
