@@ -11397,7 +11397,7 @@ li[class^="et_fb_profile_banner"]::before {
 ------------------------*/
 /* WPForms correct required label color contrast ADA */
 .wpforms-required-label {
-  color: #D24532 !important;
+  color: #9B3022 !important;
 }
 
 div.wpforms-container-full input:focus,
