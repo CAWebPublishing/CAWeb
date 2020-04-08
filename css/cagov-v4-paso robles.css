@@ -11623,6 +11623,11 @@ p {
   }
 }
 
+/* Hide Activation Links on wp-activate.php */
+.wp-activate-container p.view {
+  display: none;
+}
+
 /* Print Formatting */
 @media print {
   body {
