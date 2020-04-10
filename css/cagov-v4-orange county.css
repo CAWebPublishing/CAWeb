@@ -11627,6 +11627,10 @@ p {
 }
 
 /* Sign up content breakpoints */
+div#signup-content {
+  margin: auto;
+}
+
 @media (min-width: 768px) {
   div#signup-content {
     max-width: 750px !important;
