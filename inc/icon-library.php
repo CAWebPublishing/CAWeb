@@ -13,7 +13,7 @@ add_filter( 'et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols' );
  *
  * @see Divi includes/builder/functions.php Line 405
  * @version 4.0.7
- * @param  array $divi_symbols Array of Divi Symbols
+ * @param  array $divi_symbols Array of Divi Symbols.
  *
  * @return array
  */
@@ -43,10 +43,11 @@ function caweb_icons() {
  * @return array
  */
 function caweb_get_icon_list( $index = -1, $name = '', $keys = false ) {
+	global $wp_filesystem;
 	$icons = array_flip( caweb_icons() );
 
 	$svg   = CAWEB_ABSPATH . '/fonts/CaGov.svg';
-	$con   = file_get_contents( $svg );
+	$con   = $wp_filesystem->get_contents( $svg );
 	$xml   = new SimpleXMLElement( $con );
 	$fonts = $xml->defs->font;
 	unset( $fonts->glyph[0] );

@@ -12,13 +12,13 @@
                 <small class="mb-2 text-muted d-block">Select a California State Template version.</small>
                 <select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
                     <option value="5" <?php print 5 == $ver ? 'selected="selected"' : '' ?>>Version 5.0</option>
+                    <option value="5.5" <?php print 5.5 == $ver ? 'selected="selected"' : '' ?>>Version 5.5</option>
                     <?php if (4 == $ver) : ?>
                     <option value="4" <?php print 4 == $ver ? 'selected="selected"' : '' ?>>Version 4.0</option>
                     <?php endif; ?>
                 </select>
             </div>
         </div>
-
         <!-- Fav Icon Row -->
         <div class="form-row">
             <div class="form-group col-sm-5">

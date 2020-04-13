@@ -1,7 +1,7 @@
 <?php
 /**
  * CAWeb Options Page
- * 
+ *
  * @package CAWeb
  */
 
@@ -22,6 +22,7 @@ $schemes       = caweb_color_schemes( 0, 'displayname' );
 /*
  General Settings
 */
+
 // Fav Icon
 $fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 $fav_icon_name = caweb_favicon_name();
@@ -36,22 +37,22 @@ $navigation_menu_selector = get_option( 'ca_menu_selector_enabled', false );
 $color_scheme = get_option( 'ca_site_color_scheme', 'oceanside' );
 
 // Show Search on FrontPage
-$frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false ) ? ' checked="checked"' : '';
+$frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false ) ? ' checked' : '';
 
 // Sticky Nav
-$sticky_nav_enabled = get_option( 'ca_sticky_navigation', false ) ? ' checked="checked"' : '';
+$sticky_nav_enabled = get_option( 'ca_sticky_navigation', false ) ? ' checked' : '';
 
 // Menu Home Link
-$home_nav_link_enabled = get_option( 'ca_home_nav_link', true ) ? ' checked="checked"' : '';
+$home_nav_link_enabled = get_option( 'ca_home_nav_link', true ) ? ' checked' : '';
 
 // Title Display
-$display_post_title = get_option( 'ca_default_post_title_display', false ) ? ' checked="checked"' : '';
+$display_post_title = get_option( 'ca_default_post_title_display', false ) ? ' checked' : '';
 
 // Display Date for Non Divi Posts
-$display_post_date = get_option( 'ca_default_post_date_display', false ) ? ' checked="checked"' : '';
+$display_post_date = get_option( 'ca_default_post_date_display', false ) ? ' checked' : '';
 
 // Legacy Browser Support
-$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked="checked"' : '';
+$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
 /*
  Utility Header
@@ -60,10 +61,10 @@ $ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked="che
 $contact_us_link = get_option( 'ca_contact_us_link', '' );
 
 // Geo Locator
-$geo_locator_enabled = get_option( 'ca_geo_locator_enabled', false ) ? ' checked="checked"' : '';
+$geo_locator_enabled = get_option( 'ca_geo_locator_enabled', false ) ? ' checked' : '';
 
 // Utility Header Home Icon
-$utility_header_home_icon = get_option( 'ca_utility_home_icon', true ) ? 'checked="checked"' : '';
+$utility_header_home_icon = get_option( 'ca_utility_home_icon', true ) ? ' checked' : '';
 
 // Custom Link Declarations are located at options/sections/utility-header.php
 
@@ -96,7 +97,7 @@ $google_meta_id = get_option( 'ca_google_meta_id', '' );
 $google_translate_mode       = get_option( 'ca_google_trans_enabled', 'none' );
 $google_translate_enabled    = 'custom' !== $google_translate_mode ? ' class="hidden"' : '';
 $google_translate_page       = get_option( 'ca_google_trans_page', '' );
-$google_translate_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? ' checked="checked"' : '';
+$google_translate_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? ' checked' : '';
 $google_translate_icon       = get_option( 'ca_google_trans_icon', 'globe' );
 
 // Social Media Declarations are located at options/social-media.php
@@ -104,7 +105,7 @@ $google_translate_icon       = get_option( 'ca_google_trans_icon', 'globe' );
 /*
  Custom CSS
 */
-$ext_css_dir = sprintf( '%1$s/css/external/%2$s', CAWEB_URI, get_current_blog_id() );
+$ext_css_dir = sprintf( '%1$s/css/%2$s', CAWEB_EXTERNAL_URI, get_current_blog_id() );
 
 // Upladed CSS
 $ext_css = get_option( 'caweb_external_css', array() );
@@ -115,7 +116,7 @@ $custom_css = get_option( 'ca_custom_css', '' );
 /*
  Custom JS
 */
-$ext_js_dir = sprintf( '%1$s/js/external/%2$s', CAWEB_URI, get_current_blog_id() );
+$ext_js_dir = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_URI, get_current_blog_id() );
 
 // Uploaded JS
 $ext_js = get_option( 'caweb_external_js', array() );
@@ -147,10 +148,10 @@ $user_color = caweb_get_user_color()->colors[2];
 <style>
 .menu-list li.list-group-item,
 .menu-list li.list-group-item:hover {
-	background-color: <?php print $user_color;?> !important;
+	background-color: <?php print $user_color; ?> !important;
 }
 .menu-list li.list-group-item:not(.selected) a {
-	color: <?php print $user_color;?> !important;
+	color: <?php print $user_color; ?> !important;
 }
 </style>
 <div class="container-fluid mt-4">

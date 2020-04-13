@@ -9,11 +9,14 @@
  * @package CAWeb
  */
 
-get_header();
 ?>
-
-<body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/header' ); ?>
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<?php
+	get_header();
+?>
+<body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
+	<?php require_once( dirname(__DIR__) . '/partials/header.php' ); ?>
 	<style>
 		#main-content .container {
 			padding-top: 0
@@ -32,12 +35,12 @@ get_header();
 	<div id="page-container">
 		<div id="et-main-area">
 
-			<div id="main-content" class="main-content">
+			<div id="main-content" class="main-content" tabindex="-1">
 				<main class="main-primary">
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						get_template_part( 'partials/content/search-form' );
+						require_once( dirname(__DIR__) . '/partials/content/search-form.php' );
 						?>
 					</div>
 					<div class="section">

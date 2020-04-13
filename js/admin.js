@@ -296,6 +296,7 @@ jQuery(document).ready(function($) {
 
 		$(alertMsgTextarea).attr('name', 'alert-message-' + c);
 		$(alertMsgTextarea).attr('id', 'alertmessage-' + c);
+		$(alertMsgTextarea).addClass('wp-editor-area');
 		$(alertMsgTextarea).html('Enter Alert text here...');
 
 		$(alertMsg).append(alertMsgLabel);
@@ -845,6 +846,11 @@ jQuery(document).ready(function($) {
     $('#ca_fav_ico_img').attr('src', ico);
 
     changeMade = true;
+  });
+
+  // Display warning if Legacy Browser Support Enabled
+  $('#ca_site_version').on('change',function(e){
+    
   });
 
   // If no Search Engine ID hide Search on Front Page Option

@@ -7,12 +7,16 @@
  * @package CAWeb
  */
 
-get_header();
-		
+?>
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<?php
+	get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php get_template_part( 'partials/header' ); ?>
+	<?php require_once 'partials/header.php'; ?>
 
 
 	<div id="page-container">
@@ -28,17 +32,16 @@ get_header();
 						if ( have_posts() ) :
 							while ( have_posts() ) :
 								the_post();
-								$post_format = et_pb_post_format();
 								?>
 
 						<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 							<a class="tag-link no-underline" href="<?php the_permalink(); ?>">
 											<?php
 											if ( has_post_thumbnail() ) {
-												$thumbId   = get_post_thumbnail_id( get_the_ID() );
-												$thumb_alt = get_post_meta( $thumbId, 'wp_attachment_image_alt', true );
+												$caweb_thumb_id  = get_post_thumbnail_id( get_the_ID() );
+												$caweb_thumb_alt = get_post_meta( $caweb_thumb_id, 'wp_attachment_image_alt', true );
 
-												the_post_thumbnail( 'medium', '', array( 'alt' => $thumb_alt ) );
+												the_post_thumbnail( 'medium', '', array( 'alt' => $caweb_thumb_alt ) );
 											}
 											?>
 								<span class="sr-only">Read more about <?php the_title(); ?></span>
@@ -70,11 +73,15 @@ get_header();
 				?>
 					</main>
 					<?php
-					if ( is_active_sidebar( 'sidebar-1' ) ) {
-									print '<aside id="non_divi_sidebar" class="col-lg-3">';
-									print get_sidebar( 'sidebar-1' );
-									print '</aside>';
-					}
+					if ( is_active_sidebar( 'sidebar-1' ) ) :
+						?>
+					<aside id="non_divi_sidebar" class="col-lg-3">
+						<?php
+						print esc_html( get_sidebar( 'sidebar-1' ) );
+						?>
+					</aside>
+						<?php
+					endif;
 					?>
 				</div> <!-- #main-content -->
 			</div>

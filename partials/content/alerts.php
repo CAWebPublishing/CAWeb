@@ -19,19 +19,18 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 	$caweb_display = $caweb_data['page_display'];
 
 	/* If alert is active and should be displayed */
-	$caweb_active_alert = in_array( $caweb_status, array('active', 'on'), true) &&
+	$caweb_active_alert = in_array( $caweb_status, array( 'active', 'on' ), true ) &&
 		( ( is_front_page() && 'home' === $caweb_display ) || ( 'all' === $caweb_display ) );
 
 	if ( $caweb_active_alert ) {
-		if ( ! isset( $_SESSION[ "display_alert_$caweb_a" ] ) || $_SESSION[ "display_alert_$caweb_a" ] ) {
-			$_SESSION[ "display_alert_$caweb_a" ] = true;
-
+		if ( isset( $_COOKIE[ "caweb-alert-id-$caweb_a" ] ) && sanitize_text_field( wp_unslash( $_COOKIE[ "caweb-alert-id-$caweb_a" ] ) ) ) {
 			?>
-			<div class="alert alert-dismissible alert-banner" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
+			<div class="alert alert-dismissible alert-banner border-top border-dark" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
 				<div class="container">
-					<button type="button" class="close caweb-alert-close" data-url="<?php print esc_url( admin_url( "admin-post.php?action=caweb_clear_alert_session&alert-id=$caweb_a" ) ); ?>" data-dismiss="alert" aria-label="Close">
+					<button type="button" class="close caweb-alert-close" data-id="<?php print esc_attr( $caweb_a ); ?>" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+					<?php if ( ! empty( $caweb_data['header'] ) ) : ?>
 					<span class="alert-level">
 
 						<?php if ( ! empty( $caweb_data['icon'] ) ) : ?>
@@ -41,7 +40,8 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 						print esc_html( $caweb_data['header'] );
 						?>
 					</span>
-					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html() ); ?></span>
+					<?php endif; ?>
+					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html( ) ); ?></span>
 						<?php
 						if ( ! empty( $caweb_data['button'] ) && ! empty( $caweb_data['url'] ) ) :
 							$caweb_url    = $caweb_data['url'];

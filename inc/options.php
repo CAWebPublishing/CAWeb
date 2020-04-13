@@ -234,8 +234,8 @@ function caweb_multi_ga_menu_option_setup() {
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
 	$site_id      = get_current_blog_id();
-	$ext_css_dir  = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
-	$ext_js_dir   = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+	$ext_css_dir  = CAWEB_EXTERNAL_DIR . '/css';
+	$ext_js_dir   = CAWEB_EXTERNAL_DIR . '/js';
 
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
@@ -314,7 +314,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	global $wp_filesystem;
 
 	foreach ( $values as $opt => $val ) {
-		switch( $opt ){
+		switch ( $opt ) {
 			case 'caweb_external_css':
 				$val = array_merge( $val, array_diff( array_keys( $cssfiles ), $val ) );
 				break;
@@ -322,13 +322,13 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
 				break;
 			case 'ca_custom_css':
-				if( ! file_exists( "$ext_css_dir/$site_id" ) ){
+				if ( ! file_exists( "$ext_css_dir/$site_id" ) ) {
 					mkdir( "$ext_css_dir/$site_id", 0777, true );
 				}
 				$wp_filesystem->put_contents( "$ext_css_dir/$site_id/caweb-custom.css", wp_unslash( $val ), FS_CHMOD_FILE );
 				break;
 			case 'ca_custom_js':
-				if( ! file_exists( "$ext_js_dir/$site_id" ) ){
+				if ( ! file_exists( "$ext_js_dir/$site_id" ) ) {
 					mkdir( "$ext_js_dir/$site_id", 0777, true );
 				}
 				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
@@ -338,7 +338,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 					$val = true;
 				}
 		}
-		 
+
 		update_option( $opt, $val );
 	}
 
@@ -459,6 +459,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		$caweb_social_extra_options[] = $social . '_footer';
 		if ( 'ca_social_email' !== $social ) {
 			$caweb_social_extra_options[] = $social . '_new_window';
+			$caweb_social_extra_options[] = $social . '_hover_text';
 		}
 	}
 
@@ -549,7 +550,7 @@ function caweb_rrmdir( $path ) {
 			if ( $f->isFile() ) {
 				unlink( $f->getRealPath() );
 			} elseif ( ! $f->isDot() && $f->isDir() ) {
-				rrmdir( $f->getRealPath() );
+				caweb_rrmdir( $f->getRealPath() );
 				rmdir( $f->getRealPath() );
 			}
 		}

@@ -86,6 +86,30 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
                 'tab_slug' => 'general',
                 'toggle_slug'			=> 'header',
             ),
+            'button_text' => array(
+                'label'           => esc_html__('Button Text', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Here you can enter the text for the button. (Max characters: 16)', 'et_builder'),
+                'show_if' => array('show_button' => 'on'),
+                'tab_slug' => 'general',
+				'toggle_slug'			=> 'header',
+				'attributes' => array('maxlength' => 16)
+            ),
+            'button_target' => array(
+                'label'           => esc_html__('Open in New Tab', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options'         => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'on',
+                'description'     => esc_html__('Open link in a new tab.', 'et_builder'),
+                'show_if' => array('show_button' => 'on'),
+                'tab_slug' => 'general',
+				'toggle_slug'			=> 'header',
+            ),
             'content' => array(
                 'label'           => esc_html__('Content', 'et_builder'),
                 'type'            => 'tiny_mce',
@@ -168,6 +192,8 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
         $heading_text_color = $this->props['heading_text_color'];
         $show_button = $this->props['show_button'];
         $button_link = $this->props['button_link'];
+        $button_text = $this->props['button_text'];
+        $button_target = $this->props['button_target'];
 
         $this->add_classname('panel');
         $this->add_classname(sprintf('panel-%1$s', $panel_layout));
@@ -184,10 +210,6 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-            $button_link = ! empty($button_link) ? esc_url($button_link) : '';
-			$icon = $this->process_icon($icon);
-			$display_options = "";
-			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
 
             switch($panel_layout){
                 case "none":
@@ -203,18 +225,25 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
                         $hSize = 'h4';
                         break;
             }
-            
-            if( "on" == $show_button ){
+
+            $display_options = "";
+			$display_icon = "on" == $use_icon ? $this->caweb_get_icon_span($icon, 'pr-1', 'vertical-align:sub;')  : "";
+
+            if( "on" == $show_button && ! empty($button_link) ){
+				$button_text = empty( $button_text ) ? 'Read More' : $button_text;
+                $button_link =  esc_url($button_link);
+                $button_target = 'on' === $button_target ? '_blank' : '_self';
                 $option_classes = "right" == $heading_align ? ' pl-2' : '';
                 $option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
-                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', 
-                    $option_classes, $button_link, $title );
+
+                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s</a></div>', 
+                    $option_classes, $button_link, $button_target, $button_text );
             }
 
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+            $display_title = sprintf('<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
                 $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        
@@ -302,6 +331,30 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
                 'show_if' => array('show_button' => 'on'),
                 'tab_slug' => 'general',
                 'toggle_slug' => 'header',
+			),
+            'button_text' => array(
+                'label'           => esc_html__('Button Text', 'et_builder'),
+                'type'            => 'text',
+                'option_category' => 'basic_option',
+                'description'     => esc_html__('Here you can enter the text for the button. (Max characters: 16)', 'et_builder'),
+                'show_if' => array('show_button' => 'on'),
+                'tab_slug' => 'general',
+				'toggle_slug'			=> 'header',
+				'attributes' => array('maxlength' => 16)
+            ),
+            'button_target' => array(
+                'label'           => esc_html__('Open in New Tab', 'et_builder'),
+                'type'            => 'yes_no_button',
+                'option_category' => 'configuration',
+                'options'         => array(
+                    'on'  => esc_html__('Yes', 'et_builder'),
+                    'off' => esc_html__('No', 'et_builder'),
+                ),
+                'default' => 'on',
+                'description'     => esc_html__('Open link in a new tab.', 'et_builder'),
+                'show_if' => array('show_button' => 'on'),
+                'tab_slug' => 'general',
+				'toggle_slug'			=> 'header',
             ),
             'content' => array(
                 'label' => esc_html__('Content', 'et_builder'),
@@ -382,6 +435,8 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         $heading_text_color = $this->props['heading_text_color'];
         $show_button = $this->props['show_button'];
         $button_link = $this->props['button_link'];
+		$button_text = $this->props['button_text'];
+        $button_target = $this->props['button_target'];
 
         $this->add_classname('panel');
         $this->add_classname(sprintf('panel-%1$s', $panel_layout));
@@ -398,11 +453,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
         $display_title = "";
 
         if( ! empty( $title ) ){
-            $button_link = ! empty($button_link) ? esc_url($button_link) : '';
-            $icon = $this->process_icon($icon);
-            $display_options = "";
-			$display_icon = "on" == $use_icon ? "<span class=\"$icon pr-1\"></span>"  : "";
-
+            
             switch($panel_layout){
                 case "none":
                 case "standout":
@@ -418,18 +469,24 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
                         break;
             }
 
+            $display_options = "";
+            $display_icon = "on" == $use_icon ? $this->caweb_get_icon_span($icon, 'pr-1', 'vertical-align:sub;')  : "";
+
             if( "on" == $show_button ){
+                $button_link = ! empty($button_link) ? esc_url($button_link) : '';
+                $button_text = empty( $button_text ) ? 'Read More' : $button_text;
+                $button_target = 'on' === $button_target ? '_blank' : '_self';
                 $option_classes = "right" == $heading_align ? ' pl-2' : '';
                 $option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
                 
-                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="_blank">Read More<span class="sr-only">Read more about %3$s</span></a></div>', 
-                    $option_classes, $button_link, $title );
-            }
+                $display_options = sprintf('<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s</a></div>', 
+                    $option_classes, $button_link, $button_target, $button_text );
+           }
 
             $heading_text_color = "none" == $panel_layout && ! empty( $heading_text_color ) ?
                 sprintf(' style="color: %1$s;"', $heading_text_color) : '';
             
-            $display_title = sprintf('<div class="panel-heading"><%1$s class="w-100 pb-0 text-%2$s" %3$s>%4$s%5$s%6$s</%1$s></div>',
+            $display_title = sprintf('<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
                 $hSize, $heading_align, $heading_text_color, $display_icon, $title, $display_options);
         }
        

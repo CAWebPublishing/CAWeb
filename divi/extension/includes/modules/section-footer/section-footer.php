@@ -26,7 +26,11 @@ class CAWeb_Module_Section_Footer extends ET_Builder_CAWeb_Module {
                         'priority' => 49,
                     ),
                 ),
-            ),
+			),
+			'custom_css' => array(
+				'toggles' => array(
+				),
+			),
         );
     }
     function get_fields() {
@@ -53,6 +57,7 @@ class CAWeb_Module_Section_Footer extends ET_Builder_CAWeb_Module {
 
 		$content = $this->content;
 
+		$this->add_classname('section');
 		$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
 		$section_bg_color = ! empty( $section_bg_color ) ? sprintf(' style="background: %1$s" ', $section_bg_color) : '';
@@ -91,6 +96,10 @@ class CAWeb_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module {
 					),
 				),
 			),
+			'custom_css' => array(
+				'toggles' => array(
+				),
+			),
 		);
 	}
 	function get_fields() {
@@ -117,6 +126,7 @@ class CAWeb_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module {
 
 		$content = $this->content;
 
+		$this->add_classname('section');
 		$class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
 		$section_bg_color = ! empty( $section_bg_color ) ? sprintf(' style="background: %1$s" ', $section_bg_color) : '';

@@ -39,5 +39,11 @@ if ( is_tag() || is_archive() || is_category() || is_author() ) : ?>
 
 	});
 </script>
+	<?php
 
-<?php endif; ?>
+endif;
+
+if ( is_active_sidebar( 'caweb-site-wide-widget' ) ) {
+	dynamic_sidebar( 'caweb-site-wide-widget' );
+}
+

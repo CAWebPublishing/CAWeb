@@ -1,0 +1,97 @@
+/* WordPress Specific Overrides */
+#wpadminbar {
+	position: fixed;
+}
+
+.non_divi_builder.title_not_displayed .main-primary{
+    padding-top: 25px;
+}
+
+.non_divi_builder .main-primary{
+    padding-bottom: 25px;
+}
+
+#comment-wrap .comment-body{
+	border: 1px dotted transparent;
+}
+
+#comment-wrap .comment-body:before{
+	margin: unset;
+	height: unset;
+}
+
+.single .post {
+    padding-bottom: 0;
+}
+
+.single.non_divi_builder.sidebar_displayed .main-content .main-primary,
+.archive.sidebar_displayed .main-content .main-primary{
+    width: 75%;
+    float: left;
+}
+
+#non_divi_sidebar{
+	float: left;
+  width: 25%;
+}
+
+#non_divi_sidebar #sidebar{
+padding: 28px 0px ;
+width: 100%;
+}
+
+.archive .main-content article{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.archive.author article.has-post-thumbnail .auth-link,
+.archive.category article.has-post-thumbnail .cat-link,
+.archive.date article.has-post-thumbnail .date-link,
+.archive.tag article.has-post-thumbnail .tag-link{
+    width: 200px;
+    height: 150px;
+    padding-right: 20px;
+    padding-bottom:15px;
+    float:left;
+}
+
+@media(max-width: 768px){
+    .single.non_divi_builder .main-content .main-primary,
+    .archive .main-content .main-primary{
+    width: 100% !important;
+    }
+    #non_divi_sidebar{
+    width: 75% !important;
+    }
+}
+
+/* Hide Activation Links on wp-activate.php */
+.wp-activate-container p.view{
+    display:none;
+}
+/* Sign up content breakpoints */
+div#signup-content{
+    margin: auto;
+}
+@media (min-width: 768px){
+	div#signup-content {
+		max-width: 750px !important;
+	}
+}
+@media (min-width: 992px){
+	div#signup-content {
+		max-width: 970px !important;
+	}
+}
+@media (min-width: 1200px){
+	div#signup-content {
+		max-width: 1200px !important;
+	}
+}
+@media (min-width: 1280px){
+	div#signup-content{
+		max-width: 1280px!important;
+	}
+}

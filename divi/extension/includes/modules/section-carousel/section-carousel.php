@@ -239,7 +239,9 @@ class CAWeb_Module_Section_Carousel extends ET_Builder_CAWeb_Module {
 
     // This is a non-standard function. It outputs JS code to change items amount for carousel-media.
     function carousel_fix() {
-        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); ?>
+		global $post;
+        $con = is_object($post) ? $post->post_content : $post['post_content']; 
+        $carousels = ! is_404() && ! empty($con) ? json_encode(caweb_get_shortcode_from_content($con, $this->slug, true)) : array(); ?>
 		
 		<script>
         $ = jQuery.noConflict();
@@ -510,7 +512,9 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 
     // This is a non-standard function. It outputs JS code to change items amount for carousel-media.
     function carousel_fix() {
-        $carousels = ( ! is_404() && ! empty(get_post()) ? json_encode(caweb_get_shortcode_from_content(get_the_content(), $this->slug, true)) : array()); ?>
+		global $post;
+        $con = is_object($post) ? $post->post_content : $post['post_content']; 
+        $carousels = ! is_404() && ! empty($con) ? json_encode(caweb_get_shortcode_from_content($con, $this->slug, true)) : array(); ?>
 		
 		<script>
         $ = jQuery.noConflict();
