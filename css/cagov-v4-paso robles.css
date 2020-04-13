@@ -11397,7 +11397,7 @@ li[class^="et_fb_profile_banner"]::before {
 ------------------------*/
 /* WPForms correct required label color contrast ADA */
 .wpforms-required-label {
-  color: #D24532 !important;
+  color: #9B3022 !important;
 }
 
 div.wpforms-container-full input:focus,
@@ -11620,6 +11620,40 @@ p {
   }
   #non_divi_sidebar {
     width: 75% !important;
+  }
+}
+
+/* Hide Activation Links on wp-activate.php */
+.wp-activate-container p.view {
+  display: none;
+}
+
+/* Sign up content breakpoints */
+div#signup-content {
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  div#signup-content {
+    max-width: 750px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  div#signup-content {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  div#signup-content {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  div#signup-content {
+    max-width: 1280px !important;
   }
 }
 
