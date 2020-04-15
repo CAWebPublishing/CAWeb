@@ -187,7 +187,8 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
     public $vb_support = 'on';
 
     function init() {
-        $this->name = esc_html__('Carousel Slide', 'et_builder');
+        $this->name = esc_html__('Fullwidth Carousel Slide', 'et_builder');
+		$this->fullwidth = true;
 
         $this->type = 'child';
         $this->child_title_var = 'slide_title';
