@@ -26880,6 +26880,10 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   display: inline-block;
 }
 
+.et_pb_text ol, .et_pb_text ul {
+  padding-bottom: 0;
+}
+
 .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
