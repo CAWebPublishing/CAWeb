@@ -30,8 +30,8 @@
 		<!-- Meta ID Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
-				<label for="ca_google_meta_id" class="d-block mb-0"><strong>Meta ID</strong></label>
-				<small class="mb-2 text-muted d-block">Enter your unique Google meta ID, if you don't have one see an administrator.</small>
+				<label for="ca_google_meta_id" class="d-block mb-0"><strong>Site Verification Meta ID</strong></label>
+				<small class="mb-2 text-muted d-block">Enter your unique Google Site Verification Meta ID, if you don't have one see an administrator.</small>
 				<!-- Meta ID Field -->
 				<input type="text" name="ca_google_meta_id" id="ca_google_meta_id" class="form-control" value="<?php print $google_search_id; ?>" >
 			</div>
