@@ -255,8 +255,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
         }
 
         if ("on" == $show_icon ){
-			$icon = $this->process_icon( $icon );
-			$display_icon = "<span class=\"$icon\"></span>"; 
+			$display_icon = $this->caweb_get_icon_span( $icon, 'mr-3' );
         }
 
         return sprintf('<div%1$s class="%2$s">%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>', 
@@ -279,8 +278,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
         $contactClass = '';
 
         if ("on" == $show_icon ){
-			$icon = $this->process_icon( $icon );
-			$display_icon = "<span class=\"$icon\"></span>"; 
+			$display_icon = $this->caweb_get_icon_span( $icon );
         }else{
             $contactClass = ' ml-0';
         }

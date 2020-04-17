@@ -234,8 +234,8 @@ function caweb_multi_ga_menu_option_setup() {
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
 	$site_id      = get_current_blog_id();
-	$ext_css_dir  = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
-	$ext_js_dir   = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+	$ext_css_dir  = CAWEB_EXTERNAL_DIR . '/css';
+	$ext_js_dir   = CAWEB_EXTERNAL_DIR . '/js';
 
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
@@ -550,7 +550,7 @@ function caweb_rrmdir( $path ) {
 			if ( $f->isFile() ) {
 				unlink( $f->getRealPath() );
 			} elseif ( ! $f->isDot() && $f->isDir() ) {
-				rrmdir( $f->getRealPath() );
+				caweb_rrmdir( $f->getRealPath() );
 				rmdir( $f->getRealPath() );
 			}
 		}

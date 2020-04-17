@@ -90,8 +90,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
         
         $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-		$icon = $this->process_icon($scroll_bar_icon);
-		$scroll_bar_icon = "<span class=\"$icon\"></span>" ;
+        $scroll_bar_icon = $this->caweb_get_icon_span($scroll_bar_icon);
 
 		$scrollbar = ! empty($scroll_bar_text) ? 
             sprintf('<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon) : '';
@@ -105,9 +104,10 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
     // This is a non-standard function.
     function slideshow_banner_removal() {
+        global $post;
+        $con = is_object($post) ? $post->post_content : $post['post_content'];
         $version = caweb_get_page_version(get_the_ID());
-
-        $module = ( ! is_404() && ! empty(get_post()) ? caweb_get_shortcode_from_content(get_the_content(), 'et_pb_ca_fullwidth_banner') : array());
+        $module = ! is_404() && ! empty($con) ? caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner') : array();
 
         if( isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ){
             return;

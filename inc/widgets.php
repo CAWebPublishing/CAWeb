@@ -73,10 +73,13 @@ function caweb_news_dashboard_widget_function() {
 		<ul>
 		<?php
 		foreach ( $caweb_news_feeds->channel->item as $item ) {
+			$item     = (array) $item;
 			$d        = new DateTime( $item['pubDate'] );
 			$pub_date = date_format( $d, 'F j, Y' );
+			$link     = $item['link'];
+			$title    = $item['title'];
 			?>
-		<li><a class="rsswidget" href="<?php print esc_url( $item->link ); ?>"><?php print esc_html( $item->title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
+		<li><a class="rsswidget" href="<?php print esc_url( $link ); ?>"><?php print esc_html( $title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
 			<?php
 			$count++;
 
@@ -107,10 +110,13 @@ function caweb_recent_updates_dashboard_widget_function() {
 		<ul>
 		<?php
 		foreach ( $caweb_news_feeds->channel->item as $item ) {
+			$item     = (array) $item;
 			$d        = new DateTime( $item['pubDate'] );
 			$pub_date = date_format( $d, 'F j, Y' );
+			$link     = $item['link'];
+			$title    = $item['title'];
 			?>
-		<li><a class="rsswidget" href="<?php print esc_url( $item->link ); ?>"><?php print esc_html( $item->title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
+		<li><a class="rsswidget" href="<?php print esc_url( $link ); ?>"><?php print esc_html( $title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
 			<?php
 			$count++;
 

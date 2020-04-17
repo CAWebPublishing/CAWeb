@@ -110,6 +110,21 @@ class CAWeb_Module_Fullwidth_Service_Tiles_Item extends ET_Builder_CAWeb_Module 
         $design_fields = array();
 
         $advanced_fields = array(
+            'module_id' => array(
+				'label'           => esc_html__('CSS ID', 'et_builder'),
+				'type'            => 'text',
+				'option_category' => 'configuration',
+				'tab_slug'        => 'custom_css',
+				'toggle_slug'     => 'classes',
+			),
+			'module_class' => array(
+				'label'           => esc_html__('CSS Class', 'et_builder'),
+				'type'            => 'text',
+				'option_category' => 'configuration',
+				'tab_slug'        => 'custom_css',
+				'toggle_slug'     => 'classes',
+				'option_class'    => 'et_pb_custom_css_regular',
+			),
         );
 
         return array_merge($general_fields, $design_fields, $advanced_fields);
