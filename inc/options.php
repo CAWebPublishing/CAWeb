@@ -5,10 +5,16 @@
  * @package CAWeb
  */
 
-add_action( 'admin_menu', 'caweb_admin_menu', 15 );
+add_action( 'admin_menu', 'caweb_admin_menu' );
+add_action( 'admin_menu', 'caweb_remove_admin_menus', 15 );
+add_action( 'admin_head', 'caweb_remove_wpforms_file_upload');
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
+
+add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
+add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
+
 $caweb_social    = caweb_get_site_options( 'social' );
 $caweb_sanitized = caweb_get_site_options( 'sanitized' );
 
@@ -20,6 +26,34 @@ foreach ( $caweb_options as $caweb_name ) {
 	if ( in_array( $caweb_name, $caweb_sanitized, true ) ) {
 		add_action( 'option_' . $caweb_name, 'caweb_retrieve_various_sanitized_options', 10, 3 );
 	}
+}
+
+/**
+ * caweb_wpse_custom_menu_order
+ *
+ * @param  mixed $menu_ord
+ * @return void
+ */
+function caweb_wpse_custom_menu_order( $menu_ord ) {
+    if ( !$menu_ord ) return true;
+
+    return array(
+		'index.php', // Dashboard
+		'caweb_options', // CAWeb Options
+        'separator1', // First separator
+        'edit.php', // Posts
+        'upload.php', // Media
+        'link-manager.php', // Links
+        'edit-comments.php', // Comments
+        'edit.php?post_type=page', // Pages
+        'separator2', // Second separator
+        'themes.php', // Appearance
+        'plugins.php', // Plugins
+        'users.php', // Users
+        'tools.php', // Tools
+        'options-general.php', // Settings
+        'separator-last', // Last separator
+    );
 }
 
 /**
@@ -48,52 +82,60 @@ function caweb_admin_menu() {
 	remove_submenu_page( 'themes.php', 'nav-menus.php' );
 	add_submenu_page( 'caweb_options', 'Navigation', 'Navigation', 'manage_options', 'nav-menus.php', '' );
 
-	/* If Multisite instance */
-	if ( is_multisite() ) {
-
-		/* If user is not a Network Admin */
-		if ( ! current_user_can( 'manage_network_options' ) ) {
-			/* Remove Themes and Background option under Appearance menu */
-			if ( isset( $submenu['themes.php'] ) ) {
-				foreach ( $submenu['themes.php'] as $m => $menu_data ) {
-					if ( 'Background' === $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
-						unset( $submenu['themes.php'][ $m ] );
-					}
-				}
-			}
-
-			/* Remove WP-Forms Addons Menus */
-			remove_submenu_page( 'wpforms-overview', 'wpforms-addons' );
-
-			/* Removal of Tools Submenu Pages */
-			remove_submenu_page( 'tools.php', 'tools.php' );
-			remove_submenu_page( 'tools.php', 'import.php' );
-			remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
-			remove_submenu_page( 'tools.php', 'domainmapping' );
-
-			/* Removal of Divi Submenu Pages */
-			remove_submenu_page( 'et_divi_options', 'et_divi_options' );
-			remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
-			remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
-			remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
-			remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
-
-			/* Else user is a Network Admin */
-		} else {
-			/* If on root site */
-			if ( 1 === get_current_blog_id() ) {
-				/* Multisite Google Analytics */
-				add_submenu_page( 'caweb_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
-				/* GitHub API Key */
-				add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
-			}
+	/* If Multisite instance & user is a Network Admin */
+	if ( is_multisite() && current_user_can( 'manage_network_options' ) ) {
+		/* If on root site */
+		if ( 1 === get_current_blog_id() ) {
+			/* Multisite Google Analytics */
+			add_submenu_page( 'caweb_options', 'CAWeb Options', 'Multisite GA', 'manage_options', 'caweb_multi_ga', 'caweb_multi_ga_menu_option_setup' );
+			/* GitHub API Key */
+			add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 		}
-		/* Else single site instance */
+		
+	/* Else single site instance */
 	} else {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 	}
+}
 
+/**
+ * CAWeb Administration Menu Setup
+ * Fires before the administration menu loads in the admin.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/admin_menu/
+ * @return void
+ */
+function caweb_remove_admin_menus(){
+	global $submenu;
+
+	/* If Multisite instance & user is not a Network Admin */
+	if ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) {
+		/* Remove Themes and Background option under Appearance menu */
+		if ( isset( $submenu['themes.php'] ) ) {
+			foreach ( $submenu['themes.php'] as $m => $menu_data ) {
+				if ( 'Background' === $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
+					unset( $submenu['themes.php'][ $m ] );
+				}
+			}
+		}
+
+		/* Remove WP-Forms Addons Menus */
+		remove_submenu_page( 'wpforms-overview', 'wpforms-addons' );
+
+		/* Removal of Tools Submenu Pages */
+		remove_submenu_page( 'tools.php', 'tools.php' );
+		remove_submenu_page( 'tools.php', 'import.php' );
+		remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
+		remove_submenu_page( 'tools.php', 'domainmapping' );
+
+			/* Removal of Divi Submenu Pages */
+		remove_submenu_page( 'et_divi_options', 'et_divi_options' );
+		remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
+		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
+		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
+		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
+	} 
 }
 
 /**
@@ -637,4 +679,18 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
+}
+
+/**
+ * Hide the WPForms File Upload Field
+ *
+ * @return void
+ */
+function caweb_remove_wpforms_file_upload(){
+	?>
+	<style>
+		#wpforms-add-fields-file-upload{display:none!important;}
+		#wpforms-panel-fields .wpforms-add-fields-button:nth-child(even) {margin-left:0;margin-right: 2%;}
+	</style>
+	<?php
 }

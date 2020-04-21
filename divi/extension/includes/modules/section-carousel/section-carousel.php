@@ -289,8 +289,9 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
     public $vb_support = 'on';
 
     function init() {
-        $this->name = esc_html__('Section - Carousel', 'et_builder');
-        
+        $this->name = esc_html__('Fullwidth Section - Carousel', 'et_builder');
+        $this->fullwidth = true;
+
         $this->child_slug      = 'et_pb_ca_fullwidth_section_carousel_slide';
         $this->child_item_text = esc_html__('Slide', 'et_builder');
         
