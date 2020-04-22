@@ -7,7 +7,6 @@
 
 add_action( 'admin_menu', 'caweb_admin_menu' );
 add_action( 'admin_menu', 'caweb_remove_admin_menus', 15 );
-add_action( 'admin_head', 'caweb_remove_wpforms_file_upload');
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
@@ -679,18 +678,4 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
-}
-
-/**
- * Hide the WPForms File Upload Field
- *
- * @return void
- */
-function caweb_remove_wpforms_file_upload(){
-	?>
-	<style>
-		#wpforms-add-fields-file-upload{display:none!important;}
-		#wpforms-panel-fields .wpforms-add-fields-button:nth-child(even) {margin-left:0;margin-right: 2%;}
-	</style>
-	<?php
 }
