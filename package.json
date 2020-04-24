@@ -19,6 +19,7 @@
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.0.2",
+    "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.5.2",
     "gulp-filter": "^5.1.0",
     "gulp-imagemin": "^6.2.0",
@@ -34,7 +35,8 @@
     "gulp-sourcemaps": "^2.6.2",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.6",
-    "gulp-wp-pot": "^2.0.7"
+    "gulp-wp-pot": "^2.0.7",
+    "node-sass": "^4.13.1"
   },
   "scripts": {
     "start": "gulp",
@@ -49,7 +51,6 @@
   },
   "dependencies": {
     "gulp": "^4.0.2",
-    "gulp-cli": "^2.2.0",
     "gulp-csso": "^3.0.1",
     "gulp-header": "^2.0.9",
     "gulp-html-beautify": "^1.0.1",
