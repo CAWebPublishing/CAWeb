@@ -386,7 +386,8 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 		if ( (int) $nav_menu_item->menu_item_parent === (int) $parent_id ) {
 			$nav_menu_item_list[] = $nav_menu_item;
 			if ( $depth ) {
-				if ( $children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items ) ) {
+				$children = caweb_get_nav_menu_item_children( $nav_menu_item->ID, $nav_menu_items );
+				if ( $children ) {
 					$nav_menu_item_list = array_merge( $nav_menu_item_list, $children );
 				}
 			}
@@ -399,7 +400,7 @@ function caweb_get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth =
 /**
  * Get User Profile Color
  *
- * @return void
+ * @return string
  */
 function caweb_get_user_color() {
 	global $_wp_admin_css_colors;
@@ -416,7 +417,7 @@ function caweb_get_user_color() {
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
 
  * @param  mixed $exclude HTML tags to exclude.
- * @param  mixed $form Whether or not to include form fields
+ * @param  mixed $form Whether or not to include form fields.
  * @return array
  */
 function caweb_allowed_html( $exclude = array(), $form = false ) {
@@ -459,12 +460,12 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'style'  => array(),
 	);
 
-	// Whether to include form fields or not
-	if ( $form ){
+	// Whether to include form fields or not.
+	if ( $form ) {
 		$input_attrs = array(
-			'for' => array(),
-			'type' => array(),
-			'name' => array(),
+			'for'   => array(),
+			'type'  => array(),
+			'name'  => array(),
 			'value' => array(),
 			'title' => array(),
 		);
@@ -472,12 +473,12 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		$form_tags = array(
 			'label'    => array_merge( $attr, $input_attrs ),
 			'input'    => array_merge( $attr, $input_attrs ),
-			'li'    => array_merge( $attr, $input_attrs ),
-			'select'    => array_merge( $attr, $input_attrs ),
-			'option'    => array_merge( $attr, $input_attrs ),
+			'li'       => array_merge( $attr, $input_attrs ),
+			'select'   => array_merge( $attr, $input_attrs ),
+			'option'   => array_merge( $attr, $input_attrs ),
 		);
 
-		$tags = array_merge( $tags, $form_tags);
+		$tags = array_merge( $tags, $form_tags );
 	}
 
 	return array_diff_key( $tags, array_flip( $exclude ) );
