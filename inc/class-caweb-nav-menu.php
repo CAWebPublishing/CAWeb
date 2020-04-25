@@ -556,12 +556,15 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
 				<?php
-				print caweb_icon_menu(
-					array(
-						'select' => $icon,
-						'name'   => $item_id . '_icon',
-						'header' => 'Select an Icon',
-					)
+				print wp_kses(
+					caweb_icon_menu(
+						array(
+							'select' => $icon,
+							'name'   => $item_id . '_icon',
+							'header' => 'Select an Icon',
+						)
+					),
+					caweb_allowed_html( array(), true )
 				);
 				?>
 			</div>
