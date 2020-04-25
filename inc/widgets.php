@@ -50,11 +50,10 @@ function caweb_refresh_news_feed() {
  * Retrieve Data from Feed
  *
  * @param  mixed $body String content to be loaded as XML Element.
- * @param  mixed $fields Item fields to return. Default empty returns all fields.
  * @param  mixed $max Max amount of elements to return.
  * @return array Array of feeds data.
  */
-function caweb_retrieve_feeds_data( $body, $fields = array(), $max = 5 ) {
+function caweb_retrieve_feeds_data( $body, $max = 5 ) {
 	$xml  = new SimpleXMLElement( $body );
 	$m    = $max > count( $xml->channel->item ) ? count( $xml->channel->item ) : $max;
 	$data = array();
