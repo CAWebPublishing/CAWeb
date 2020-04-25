@@ -357,7 +357,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		/**
 		 * HTML for Sub Navigation Menu from the Top Level Nav Item (second-level-links)
 		 *
-		 * @param  mixed    $child_links Array of Sub Nav Items (second-level-links)
+		 * @param  mixed    $child_links Array of Sub Nav Items (second-level-links).
 		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
 		 *
 		 * @return string
