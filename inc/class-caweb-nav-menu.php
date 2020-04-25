@@ -617,7 +617,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 * @param  int   $menu_item_db_id ID of the updated menu item.
 		 * @param  array $args An array of arguments used to update a menu item.
 		 *
-		 * @return void
+		 * @return int
 		 */
 		public function caweb_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
 			/* Check if element is properly sent */
