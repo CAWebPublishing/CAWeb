@@ -27571,6 +27571,10 @@ body:not(.sticky_nav) #main-content.main-content {
   height: 130px;
 }
 
+nav li {
+  line-height: 1.45 !important;
+}
+
 @media (max-width: 767px) {
   #nav_list {
     width: 100%;

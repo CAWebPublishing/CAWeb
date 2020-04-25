@@ -105,7 +105,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$home_link = ( isset( $args->home_link ) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
 
 				$search_link = ( isset( $args->version ) && 5 <= $args->version && 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
-									'<li class="nav-item nav-item-search"><button class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '' );
+									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '' );
 
 				$nav_menu = sprintf(
 					'<nav id="navigation" class="main-navigation %1$s hidden-print">
@@ -272,30 +272,34 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$icon = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
 					$icon = '<span class="ca-gov-icon-' . $icon . '"></span>';
 
+					/* if is current menut item add .active */
+					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '';
+
 					/* Get column count */
-					$nav_column_count = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : 0;
+					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
+
+					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
-						'<li class="nav-item %1$s%2$s %9$s"%3$s title="%4$s"><a href="%5$s" class="first-level-link"%6$s>%7$s<span class="link-title">%8$s</span></a>',
+						'<li class="nav-item %1$s"%2$s title="%3$s"><a href="%4$s" class="first-level-link"%5$s>%6$s<span class="link-title">%7$s%8$s</span></a>',
 						implode( ' ', $item->classes ),
-						( in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '' ),
-						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
+						! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '',
 						$item->attr_title,
 						$item->url,
-						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+						! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
 						$icon,
 						$item->title,
-						$nav_column_count
+						$sub_nav_indicator
 					);
 
 					/* If there are child links create the sub-nav */
 					if ( 0 < $child_count && 'singlelevel' !== $args->style ) {
 						if ( 'megadropdown' === $args->style ) {
 							/* Sub nav image variables */
-							$nav_img      = $item_meta['_caweb_menu_image'][0];
-							$nav_img_side = $item_meta['_caweb_menu_image_side'][0];
-							$nav_img_size = $item_meta['_caweb_menu_image_size'][0];
+							$nav_img      = isset( $item_meta['_caweb_menu_image'][0] ) ? $item_meta['_caweb_menu_image'][0] : '';
+							$nav_img_side = $item_meta['_caweb_menu_image_side'][0] ? $item_meta['_caweb_menu_image_side'][0] : 'left';
+							$nav_img_size = $item_meta['_caweb_menu_image_size'][0] ? $item_meta['_caweb_menu_image_size'][0] : 'quarter';
 							switch ( $args->version ) {
 								case 5.5:
 								case 5:
