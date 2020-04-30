@@ -25,20 +25,11 @@
 
       var types = $el.data('option');
       var uploader =  $el.data('uploader') ;
-      var classes = uploader ? '' : 'hidden-upload';
       var icon_check =  $el.data('icon-check') && $el.attr('data-icon-check') ;
       
 
       if (!!types && types.indexOf(',') > 0 )
         types = types.split(',');
-
-      // If the media frame already exists, reopen it.
-      if (frame) {
-        //frame.open();
-        //return;
-      }
-
-
 
       // Create the media frame.
       frame = wp.media.frames.customHeader = wp.media({
@@ -66,32 +57,27 @@
       frame.on('select', function() {
         // Grab the selected attachment.
         var attachment = frame.state().get('selection').first();
-        //  link = $el.data('updateLink');
         var attachmentURL = attachment.attributes.url;
         var attachmentAlt = attachment.attributes.alt;
         var attachmentFileName = attachment.attributes.filename;
-        //var attachmentFileName = attachment.attributes.filename;
         
-        var input_box = $('input[type="hidden"][name="' + el_name + '"]');
+        var input_box = $('input[name="' + el_name + '"]:not([type="button"])');
         var preview_field = $('#' + el_name + '_img');
         var filename_box = $('input[type="text"][id="' + el_name + '_filename"]');
+        var alt_text_box = $('input[type="text"][id="' + el_name + '_alt_text"]');
 
-				if( /\d+_media_image/.test(el_name) ){
-          var nav_img_alt_box =  document.getElementById(el_name.substring(0, el_name.indexOf("_")) +  "_caweb_nav_media_image_alt_text");
-          $(nav_img_alt_box).val(attachmentAlt);
-          $('input[id="' + el_name + '"]').val(attachmentURL);
-        }else if( "true" !== icon_check ){
-            if( null !== input_box )
+				if( "true" !== icon_check ){
+            if( input_box.length  )
               input_box.val(attachmentURL);
             
-						if( null !== preview_field )
+						if( preview_field.length )
               preview_field.attr('src', attachmentURL);
               
-						if( null !== filename_box )
+						if( filename_box.length  )
               filename_box.val(attachmentFileName);
               
-            if(  /header_ca_branding/.test(el_name)  )
-              $('#header_ca_branding_alt_text').val(attachmentAlt);
+            if(  alt_text_box.length  )
+              alt_text_box.val(attachmentAlt);
 
         }else{
           var data = {
@@ -102,16 +88,14 @@
 					jQuery.post(ajaxurl, data, function(response) {
 						
 						if(1 == response){
-
-              if( null !== input_box )
+              if( input_box.length  )
                 input_box.val(attachmentURL);
               
-              if( null !== preview_field )
+              if( preview_field.length )
                 preview_field.attr('src', attachmentURL);
                 
-              if( null !== filename_box )
+              if( filename_box.length  )
                 filename_box.val(attachmentFileName);
-
 						}else{
 							alert("Invalid Icon Mime Type: " + attachmentFileName);
 						}

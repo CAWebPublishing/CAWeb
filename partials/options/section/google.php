@@ -84,12 +84,15 @@
 			<!-- Google Translate Icon -->
 			<div class="form-group col-sm-12">
 				<?php
-				print caweb_icon_menu(
-					array(
-						'select' => $google_translate_icon,
-						'name'   => 'ca_google_trans_icon',
-						'header' => 'Icon',
-					)
+				print wp_kses(
+					caweb_icon_menu(
+						array(
+							'select' => $google_translate_icon,
+							'name'   => 'ca_google_trans_icon',
+							'header' => 'Icon',
+						)
+					),
+					caweb_allowed_html( array(), true )
 				);
 				?>
 				<small class="mb-2 text-muted d-block">Select an icon to display in front of the Google Translate Page link.</small>
