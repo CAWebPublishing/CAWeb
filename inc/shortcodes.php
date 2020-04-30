@@ -48,7 +48,7 @@ function caweb_icon_menu( $atts ) {
 		$icon_list .= sprintf( '<li class="list-group-item float-left ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $selected === $i ? ' active' : '' );
 	}
 
-	return sprintf( '%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul>', $header, $icon_list, $input );
+	return sprintf( '%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul>', $header, $input, $icon_list );
 
 }
 

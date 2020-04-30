@@ -34,7 +34,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						'header' => 'Icon',
 					)
 				),
-				caweb_allowed_html()
+				caweb_allowed_html( array(), true )
 			);
 		}
 	}

@@ -20,6 +20,61 @@ function caweb_add_dashboard_widgets() {
 }
 
 /**
+ * Refreshes the caweb_news_feed site transient if necessary
+ *
+ * @return array Array of CAWeb News Feeds.
+ */
+function caweb_refresh_news_feed() {
+	$caweb_news_feeds = get_site_transient( 'caweb_news_feed' );
+
+	if ( false === $caweb_news_feeds ) {
+		// CAWeb News.
+		$feed_url  = 'https://caweb.cdt.ca.gov/category/caweb-news/feed/';
+		$feed_body = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
+
+		$caweb_news_feeds['cnf'] = caweb_retrieve_feeds_data( $feed_body );
+
+		// Recent CAWeb Help Updates.
+		$feed_url  = 'https://caweb.cdt.ca.gov/category/all/feed/';
+		$feed_body = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
+
+		$caweb_news_feeds['crnf'] = caweb_retrieve_feeds_data( $feed_body );
+
+		set_site_transient( 'caweb_news_feed', $caweb_news_feeds, 86400 );
+	}
+
+	return $caweb_news_feeds;
+}
+
+/**
+ * Retrieve Data from Feed
+ *
+ * @param  mixed $body String content to be loaded as XML Element.
+ * @param  mixed $max Max amount of elements to return.
+ * @return array Array of feeds data.
+ */
+function caweb_retrieve_feeds_data( $body, $max = 5 ) {
+	$xml  = new SimpleXMLElement( $body );
+	$m    = $max > count( $xml->channel->item ) ? count( $xml->channel->item ) : $max;
+	$data = array();
+
+	// iterate thru xml data.
+	for ( $i = 0; $i < $m; $i++ ) {
+		$item = (array) $xml->channel->item[ $i ];
+		$d    = new DateTime( $item['pubDate'] );
+
+		$data[] = array(
+			'pub_date' => date_format( $d, 'F j, Y' ),
+			'link'     => $item['link'],
+			'title'    => $item['title'],
+		);
+	}
+
+	return $data;
+
+}
+
+/**
  * Styles for Dashboard Widgets
  *
  * @return void
@@ -62,31 +117,23 @@ function caweb_dashboard_styles() {
  * @return void
  */
 function caweb_news_dashboard_widget_function() {
-	$caweb_news_feed_url = 'https://caweb.cdt.ca.gov/category/caweb-news/feed/';
-	$caweb_news_feeds    = wp_remote_retrieve_body( wp_remote_get( $caweb_news_feed_url ) );
-	$caweb_news_feeds    = new SimpleXMLElement( $caweb_news_feeds );
-	$count               = 0;
+	// refreshes the site transient if necessary.
+	$cnf = caweb_refresh_news_feed();
+	$cnf = isset( $cnf['cnf'] ) ? $cnf['cnf'] : array();
 
 	?>
 	<?php caweb_dashboard_styles(); ?>
 	<div class="rss-widget">
 		<ul>
 		<?php
-		foreach ( $caweb_news_feeds->channel->item as $item ) {
-			$item     = (array) $item;
-			$d        = new DateTime( $item['pubDate'] );
-			$pub_date = date_format( $d, 'F j, Y' );
-			$link     = $item['link'];
-			$title    = $item['title'];
+		foreach ( $cnf as $item ) :
 			?>
-		<li><a class="rsswidget" href="<?php print esc_url( $link ); ?>"><?php print esc_html( $title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
+			<li>
+				<a class="rsswidget" href="<?php print esc_url( $item['link'] ); ?>"><?php print esc_html( $item['title'] ); ?></a>
+				<span class="rss-date"><?php print esc_html( $item['pub_date'] ); ?></span>
+			</li>
 			<?php
-			$count++;
-
-			if ( $count >= 5 ) {
-				break;
-			}
-		}
+		endforeach;
 		?>
 		</ul>
 	</div>
@@ -99,31 +146,23 @@ function caweb_news_dashboard_widget_function() {
  * @return void
  */
 function caweb_recent_updates_dashboard_widget_function() {
-	$caweb_news_feed_url = 'https://caweb.cdt.ca.gov/category/all/feed/';
-	$caweb_news_feeds    = wp_remote_retrieve_body( wp_remote_get( $caweb_news_feed_url ) );
-	$caweb_news_feeds    = new SimpleXMLElement( $caweb_news_feeds );
-	$count               = 0;
+	// refreshes the site transient if necessary.
+	$crnf = caweb_refresh_news_feed();
+	$crnf = isset( $crnf['crnf'] ) ? $crnf['crnf'] : array();
 
 	?>
 
 	<div class="rss-widget">
 		<ul>
 		<?php
-		foreach ( $caweb_news_feeds->channel->item as $item ) {
-			$item     = (array) $item;
-			$d        = new DateTime( $item['pubDate'] );
-			$pub_date = date_format( $d, 'F j, Y' );
-			$link     = $item['link'];
-			$title    = $item['title'];
+		foreach ( $crnf as $item ) :
 			?>
-		<li><a class="rsswidget" href="<?php print esc_url( $link ); ?>"><?php print esc_html( $title ); ?></a><span class="rss-date"><?php print esc_html( $pub_date ); ?></span></li>
+			<li>
+				<a class="rsswidget" href="<?php print esc_url( $item['link'] ); ?>"><?php print esc_html( $item['title'] ); ?></a>
+				<span class="rss-date"><?php print esc_html( $item['pub_date'] ); ?></span>
+			</li>
 			<?php
-			$count++;
-
-			if ( $count >= 5 ) {
-				break;
-			}
-		}
+			endforeach;
 		?>
 		</ul>
 	</div>
