@@ -105,7 +105,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$home_link = ( isset( $args->home_link ) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
 
 				$search_link = ( isset( $args->version ) && 5 <= $args->version && 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
-									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '' );
+									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '' );
 
 				$nav_menu = sprintf(
 					'<nav id="navigation" class="main-navigation %1$s hidden-print">
