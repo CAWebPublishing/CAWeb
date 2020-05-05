@@ -58,12 +58,15 @@ function caweb_icon_menu_func() {
 	$sel    = isset( $_POST['select'] ) ? $_POST['select'] : '';
 	$header = isset( $_POST['header'] ) ? $_POST['header'] : false;
 
-	print caweb_icon_menu(
-		array(
-			'select' => $sel,
-			'name'   => $input,
-			'header' => $header,
-		)
+	print wp_kses(
+		caweb_icon_menu(
+			array(
+				'select' => $sel,
+				'name'   => $input,
+				'header' => $header,
+			)
+		),
+		caweb_allowed_html( array(), true )
 	);
 	wp_die(); // this is required to terminate immediately and return a proper response
 
