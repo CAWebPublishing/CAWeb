@@ -8926,6 +8926,10 @@ figure {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.et_font_icon li {
+  font-size: 17px;
+}
+
 .et_font_icon li:before, .et_pb_inline_icon:before,
 .et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
 .et-pb-icon, .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
