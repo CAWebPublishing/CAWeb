@@ -416,8 +416,8 @@ function caweb_get_user_color() {
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
 
- * @param  mixed $exclude HTML tags to exclude.
- * @param  mixed $form Whether or not to include form fields.
+ * @param  array $exclude HTML tags to exclude.
+ * @param  array $form Whether or not to include form fields.
  * @return array
  */
 function caweb_allowed_html( $exclude = array(), $form = false ) {
@@ -507,7 +507,7 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		$tags = array_merge( $tags, $form_tags );
 	}
 
-	add_filter( 'safe_style_css', 'volunteer_match_safe_style_css' );
+	add_filter( 'safe_style_css', 'caweb_safe_style_css' );
 
 	return array_diff_key( $tags, array_flip( $exclude ) );
 }
@@ -517,10 +517,10 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
  *
  * @see https://developer.wordpress.org/reference/functions/safecss_filter_attr/
  *
- * @param  mixed $styles A string of CSS rules.
+ * @param  array $styles A string of CSS rules.
  * @return array
  */
-function volunteer_match_safe_style_css( $styles ) {
+function caweb_safe_style_css( $styles ) {
 	$styles[] = 'list-style-position';
 
 	return $styles;
