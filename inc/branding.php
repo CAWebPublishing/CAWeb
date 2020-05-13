@@ -20,7 +20,15 @@ add_filter( 'admin_footer_text', 'caweb_admin_footer_text', 1000 );
  * @return void
  */
 function caweb_branding_admin_head() {
-	?>
+	if ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) :
+		?>
+	<style>
+		/* HIDE THE 'Enable Visual Builder' Button*/
+		#et_pb_fb_cta, .et-bfb-optin-cta {
+			display: none !important;
+		}
+	</style>
+	<?php endif; ?>
 		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/images/system/caweb_logo.ico' ); ?>">
 	<?php
 }
