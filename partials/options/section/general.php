@@ -41,7 +41,7 @@
                         placeholder="Fav Icon" 
                         data-choose="Choose a Fav Icon"
                         data-update="Set as Fav Icon"
-                        data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon"
+                        data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon, image/vnd.microsoft.icon"
                         data-uploader="false" 
                         data-icon-check="true"
                         readonly>
@@ -51,7 +51,7 @@
                             class="btn btn-outline-primary library-link" 
                             data-choose="Choose a Fav Icon"
                             data-update="Set as Fav Icon"
-                            data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon"
+                            data-option="x-image/icon, image/x-icon, x-image/x-icon, image/icon, image/vnd.microsoft.icon"
                             data-uploader="false" 
                             data-icon-check="true">Browse</button>
                         <button id="resetFavIcon" class="btn btn-outline-primary" type="button">Reset</button>

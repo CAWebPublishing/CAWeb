@@ -11637,11 +11637,6 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   outline: #2ea3f2 solid 2px !important;
 }
 
-/* HIDE THE 'Enable Visual Builder' Button*/
-#wp-admin-bar-et-use-visual-builder {
-  display: none !important;
-}
-
 #page-container {
   padding-top: 0px;
 }
