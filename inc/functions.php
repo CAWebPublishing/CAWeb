@@ -416,8 +416,8 @@ function caweb_get_user_color() {
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
 
- * @param  mixed $exclude HTML tags to exclude.
- * @param  mixed $form Whether or not to include form fields.
+ * @param  array $exclude HTML tags to exclude.
+ * @param  array $form Whether or not to include form fields.
  * @return array
  */
 function caweb_allowed_html( $exclude = array(), $form = false ) {
@@ -425,6 +425,7 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'id'    => array(),
 		'class' => array(),
 		'style' => array(),
+		'role'  => array(),
 	);
 
 	$anchors = array(
@@ -438,12 +439,25 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'alt' => array(),
 	);
 
+	$aria = array(
+		'aria-label'      => array(),
+		'aria-labelledby' => array(),
+		'aria-expanded'   => array(),
+		'aria-haspopup'   => array(),
+	);
+
+	$data = array(
+		'data-toggle' => array(),
+		'data-target' => array(),
+	);
+
 	$tags = array(
-		'div'    => $attr,
+		'div'    => array_merge( $attr, $aria, $data ),
 		'p'      => $attr,
 		'br'     => array(),
 		'span'   => $attr,
-		'a'      => array_merge( $attr, $anchors ),
+		'a'      => array_merge( $attr, $anchors, $aria, $data ),
+		'button' => array_merge( $attr, $aria, $data ),
 		'img'    => array_merge( $attr, $imgs ),
 		'strong' => $attr,
 		'bold'   => $attr,
@@ -462,24 +476,53 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 
 	// Whether to include form fields or not.
 	if ( $form ) {
+		$form_attrs = array(
+			'action'     => array(),
+			'method'     => array(),
+			'enctype'    => array(),
+			'novalidate' => array(),
+		);
+
 		$input_attrs = array(
-			'for'   => array(),
-			'type'  => array(),
-			'name'  => array(),
-			'value' => array(),
-			'title' => array(),
+			'for'      => array(),
+			'type'     => array(),
+			'name'     => array(),
+			'value'    => array(),
+			'title'    => array(),
+			'checked'  => array(),
+			'selected' => array(),
+			'required' => array(),
+			'pattern'  => array(),
 		);
 
 		$form_tags = array(
-			'label'    => array_merge( $attr, $input_attrs ),
-			'input'    => array_merge( $attr, $input_attrs ),
-			'li'       => array_merge( $attr, $input_attrs ),
-			'select'   => array_merge( $attr, $input_attrs ),
-			'option'   => array_merge( $attr, $input_attrs ),
+			'form'     => array_merge( $attr, $form_attrs ),
+			'label'    => array_merge( $attr, $input_attrs, $aria, $data ),
+			'input'    => array_merge( $attr, $input_attrs, $aria, $data ),
+			'li'       => array_merge( $attr, $input_attrs, $aria, $data ),
+			'select'   => array_merge( $attr, $input_attrs, $aria, $data ),
+			'option'   => array_merge( $attr, $input_attrs, $aria, $data ),
 		);
 
 		$tags = array_merge( $tags, $form_tags );
 	}
 
+	add_filter( 'safe_style_css', 'caweb_safe_style_css' );
+
 	return array_diff_key( $tags, array_flip( $exclude ) );
 }
+
+/**
+ * Safe Style CSS
+ *
+ * @see https://developer.wordpress.org/reference/functions/safecss_filter_attr/
+ *
+ * @param  array $styles A string of CSS rules.
+ * @return array
+ */
+function caweb_safe_style_css( $styles ) {
+	$styles[] = 'list-style-position';
+
+	return $styles;
+}
+
