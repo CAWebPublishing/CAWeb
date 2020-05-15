@@ -42,3 +42,10 @@ ol.breadcrumb{
     text-transform: capitalize;
     margin-bottom: 0;
 }
+ol,ul{
+	padding: 30px 0px 30px 50px;
+	list-style-position: outside;
+}
+ol li, ul li{
+	margin-bottom: 10px;
+}
