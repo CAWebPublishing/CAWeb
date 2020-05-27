@@ -11878,10 +11878,6 @@ ol:not(.nav-menu), ul:not(.nav-menu) {
   list-style-position: outside !important;
 }
 
-ol:not(.nav-menu) li, ul:not(.nav-menu) li {
-  margin-bottom: 10px;
-}
-
 /**
 * Page & Builder Width Styles
 * 
