@@ -11873,13 +11873,9 @@ ol.breadcrumb {
   margin-bottom: 0;
 }
 
-ol, ul {
-  padding: 30px 0px 30px 50px !important;
+ol:not(.nav-menu), ul:not(.nav-menu) {
+  padding: 0px 0px 30px 50px !important;
   list-style-position: outside !important;
-}
-
-ol li, ul li {
-  margin-bottom: 10px;
 }
 
 /**
