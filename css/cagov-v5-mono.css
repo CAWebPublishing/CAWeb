@@ -27321,11 +27321,6 @@ body.v4.logged-in .gssb_c {
   margin-top: 35px;
 }
 
-/* Remove extra padding when ul is nested inside another ul */
-ul ul {
-  padding-bottom: 0px;
-}
-
 header {
   z-index: 15 !important;
 }
@@ -27338,6 +27333,15 @@ ol.breadcrumb {
 ol:not(.nav-menu), ul:not(.nav-menu) {
   padding: 0px 0px 30px 50px !important;
   list-style-position: outside !important;
+}
+
+/* Remove extra padding when ul is nested inside another ul */
+ol:not(.nav-menu) ol,
+ul:not(.nav-menu) ul,
+ol:not(.nav-menu) ul,
+ul:not(.nav-menu) ol {
+  padding-bottom: 0px !important;
+  margin-bottom: 0 !important;
 }
 
 /**
