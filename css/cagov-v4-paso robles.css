@@ -11872,17 +11872,8 @@ ol.breadcrumb {
 
 ol:not([class*="menu"]):not([class*="nav"]),
 ul:not([class*="menu"]):not([class*="nav"]) {
-  padding: 0px 0px 30px 50px !important;
+  padding-left: 50px !important;
   list-style-position: outside !important;
-}
-
-/* Remove extra padding when ul is nested inside another ul */
-ol:not([class*="menu"]) ol,
-ul:not([class*="menu"]) ul,
-ol:not([class*="menu"]) ul,
-ul:not([class*="menu"]) ol {
-  padding-bottom: 0px !important;
-  margin-bottom: 0 !important;
 }
 
 /**
