@@ -24388,6 +24388,10 @@ html.high-contrast input[type="radio"]:checked + * .color-white--checked {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.et_font_icon li {
+  font-size: 17px;
+}
+
 .et_font_icon li:before, .et_pb_inline_icon:before,
 .et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
 .et-pb-icon, .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
@@ -27093,11 +27097,6 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
   outline: #2ea3f2 solid 2px !important;
 }
 
-/* HIDE THE 'Enable Visual Builder' Button*/
-#wp-admin-bar-et-use-visual-builder {
-  display: none !important;
-}
-
 #page-container {
   padding-top: 0px;
 }
@@ -27322,11 +27321,6 @@ body.v4.logged-in .gssb_c {
   margin-top: 35px;
 }
 
-/* Remove extra padding when ul is nested inside another ul */
-ul ul {
-  padding-bottom: 0px;
-}
-
 header {
   z-index: 15 !important;
 }
@@ -27334,6 +27328,12 @@ header {
 ol.breadcrumb {
   text-transform: capitalize;
   margin-bottom: 0;
+}
+
+ol:not([class*="menu"]):not([class*="nav"]),
+ul:not([class*="menu"]):not([class*="nav"]) {
+  padding-left: 50px !important;
+  list-style-position: outside !important;
 }
 
 /**

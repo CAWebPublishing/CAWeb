@@ -38,7 +38,7 @@ const parameterized = require('gulp-parameterized');
 const sass = require( 'gulp-sass' ); // Gulp plugin for Sass compilation.
 
 // JS related plugins.
-const uglify = require('gulp-uglify'); // Minifies JS files.
+const uglify = require('gulp-uglify-es').default; // Minifies JS files.
 
 // HTML related plugins
 const htmlbeautify = require('gulp-html-beautify'); // Beautify HTML/PHP files

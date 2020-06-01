@@ -59,18 +59,24 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 	}
 
 	/*
-	If multisite instance and user can manage network options
+	If multisite instance
 	*/
-	if ( is_multisite() && current_user_can( 'manage_network_options' ) ) {
-		/* Add Multisite Google Analytics Menu */
-		$wp_admin_bar->add_node(
-			array(
-				'id'     => 'caweb-multi-ga',
-				'title'  => 'Multisite GA',
-				'href'   => get_admin_url() . 'admin.php?page=caweb_api',
-				'parent' => 'site-name',
-			)
-		);
+	if ( is_multisite() ) {
+		// user can manage network options.
+		if ( current_user_can( 'manage_network_options' ) ) {
+			/* Add Multisite Google Analytics Menu */
+			$wp_admin_bar->add_node(
+				array(
+					'id'     => 'caweb-multi-ga',
+					'title'  => 'Multisite GA',
+					'href'   => get_admin_url() . 'admin.php?page=caweb_api',
+					'parent' => 'site-name',
+				)
+			);
+		} else {
+			/* Remove Visual Builder */
+			$wp_admin_bar->remove_node( 'et-use-visual-builder' );
+		}
 	}
 
 	/*
