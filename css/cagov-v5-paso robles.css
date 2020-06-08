@@ -1,5 +1,5 @@
 /**
- * CA State Template v5 -  @version v5.0.17 -  4/21/2020 
+ * CA State Template v5 -  @version v5.0.17 -  6/4/2020 
   STYLES COMPILED FROM SOURCE (SCSS) DO NOT MODIFY */
 /* -----------------------------------------
    BOOTSTRAP v4.4.1 - /source/scss/bootstrap/ 
@@ -13405,6 +13405,26 @@ table.gsc-search-box td {
   border: 0;
 }
 
+/* Search button desktop styles */
+@media (min-width: 768px) {
+  #nav-item-search button.first-level-link {
+    position: relative;
+    min-width: 40px;
+  }
+  button.first-level-link > span.search-btn {
+    display: block;
+    position: absolute;
+    left: 50% !important;
+    transform: translateX(-50%);
+    top: 0;
+    padding-top: 12px;
+  }
+  .first-level-link > span.search-btn > span[class^="ca-gov-icon"] {
+    display: block;
+    font-size: 32px;
+  }
+}
+
 /* -----------------------------------------
    MEGA MENU
    /source/scss/cagov/nav-megamenu.scss
@@ -16377,10 +16397,7 @@ body {
 }
 
 .global-header.compact .alert-banner {
-  opacity: 0;
-  position: absolute;
-  width: 0;
-  height: 0;
+  display: none;
 }
 
 /* -----------------------------------------
@@ -21716,7 +21733,7 @@ a.label-dark:focus, a.label-dark.focus {
 }
 
 /**
- * CA State Template v5 -  @version v5.0.17 -  4/21/2020 
+ * CA State Template v5 -  @version v5.0.17 -  5/1/2020 
   STYLES COMPILED FROM SOURCE (SCSS) DO NOT MODIFY */
 /* -----------------------------------------
    PASOROBLES
@@ -21958,6 +21975,14 @@ h1 span[class^="ca-gov-icon-"]:first-child {
   .nav-item:hover::after, .nav-item:focus::after {
     background-color: #9a0000;
   }
+}
+
+button.first-level-link > span.search-btn > span[class^="ca-gov-icon"] {
+  color: #dc9999;
+}
+
+.nav-item:hover button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:focus button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:hover button.first-level-link, .nav-item:focus button.first-level-link {
+  color: #9a0000;
 }
 
 /* -----------------------------------------
