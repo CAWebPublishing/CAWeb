@@ -27358,7 +27358,7 @@ ol.breadcrumb {
 
 ol:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]),
 ul:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]) {
-  padding-left: 50px !important;
+  padding: 0 0 0 50px;
   list-style-position: outside !important;
 }
 

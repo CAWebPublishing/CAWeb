@@ -148,10 +148,6 @@
 	padding: 11px 15px;
   }
   
-  /* GitHub Module */
-  .et_pb_ca_github.et_pb_module ul li {
-	  list-style-type: none;
-  }
   /* Remove the State Template background image from Divi Button, Email Optin, Blurb Images and Person Modules */
   .et_pb_button_module_wrapper.et_pb_module .et_pb_button,
   .et_pb_newsletter_button_wrap .et_pb_newsletter_button.et_pb_button,
