@@ -1359,8 +1359,12 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
         $post_type_layout    = $this->props['post_type_layout'];
 
         setlocale(LC_MONETARY, get_locale());
-        
-        // List Style Type
+		
+		if( ! isset( $post->ID ) && 'general' !== $post_type_layout ){
+			return;
+		}
+
+		// List Style Type
         switch ($post_type_layout) {
 			// Course
 			case 'course':

@@ -168,7 +168,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		);
 	
 		$posts_array = get_posts( $args );
-	
+	update_site_option('dev', $args);
 		if ( ! empty( $tags ) ) {
 			foreach ( $posts_array as $p => $i ) {
 				// return posts tags
@@ -178,11 +178,15 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					unset( $posts_array[ $p ] );
 				} else {
 					// iterate through the tags
-					$tags = ( ! is_array( $tags ) ? preg_split( '/\D/', $tags ) : $tags );
+					$tags = ! is_array( $tags ) ? explode(',', $tags ) : $tags;
+					$has_tag = false;
 					foreach ( $tag_ids as $k ) {
-						if ( ! in_array( $k, $tags ) ) {
-							unset( $posts_array[ $p ] );
+						if ( in_array( $k, $tags ) ) {
+							$has_tag = true;
 						}
+					}
+					if( ! $has_tag ){
+						unset( $posts_array[ $p ] );
 					}
 				}
 			}

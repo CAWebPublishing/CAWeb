@@ -190,16 +190,13 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$faq_style = $this->props['faq_style'];
 		$posts_number = $this->props['posts_number'];
 		$view_featured_image = $this->props['view_featured_image'];
-		$all_categories_button = $this->props['all_categories_button'];
-		$include_categories = $this->props['include_categories'];
 		$all_tags_button = $this->props['all_tags_button'];
 		$include_tags = $this->props['include_tags'];
 		$orderby = $this->props['orderby'];
 
 		$order = '';
 
-		$cat_array = array();
-
+		$cat_array = $this->get_categories( $style );
 		$tag_array = array();
 
 		switch ( $orderby ) {
@@ -236,22 +233,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 
 		}
 
-		if ( 'on' === $all_categories_button ) {
-			$cat_array = get_terms(
-				'category',
-				array(
-					'orderby'    => $orderby,
-					'hide_empty' => 0,
-					'fields'     => 'ids',
-				)
-			);
-		} elseif ( '' !== $include_categories ) {
-			$cat_array = $include_categories;
-		}
-
 		if ( 'on' === $all_tags_button ) {
 			$tag_array = array();
-		//$tag_array = get_tags( array( 'fields' => 'names' ) );
 		} elseif ("" !== $include_tags) {
 			$tag_array = $include_tags;
 		}
@@ -302,6 +285,54 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$output = sprintf( '<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty( $list_title ) ? $list_title : '' ), $output );
 
 		return $output;
+	}
+	function get_categories( $listStyle ){
+		$include_categories = $this->props['include_categories'];
+		$all_categories_button = $this->props['all_categories_button'];
+
+		$cat_array = array();
+		$args = array(	
+			'hide_empty' => 0,
+			'fields'     => 'ids',
+		);
+		switch( $listStyle ){
+			// Course List
+			case 'course-list':
+				$args['name'] = 'Courses';
+				break;
+			// Event List
+			case 'events-list':
+				$args['name'] = 'Events';
+				break;
+			
+			// Exam List
+			case 'exams-list':
+				$args['name'] = 'Exams';
+				break;
+			// FAQs List
+			case 'faqs-list':
+				$args['name'] = 'FAQs';
+				break;
+			// General List
+			case 'general-list':
+				if ( 'off' === $all_categories_button && '' !== $include_categories ) {
+					return $include_categories;
+				}
+				break;
+			// Job List
+			case 'jobs-list':
+				$args['name'] = 'Jobs';
+				break;
+			// News List
+			case 'news-list':
+				$args['name'] = 'News';
+				break;
+			// Profile List
+			case 'profile-list':
+				$args['name'] = 'Profiles';
+				break;
+		}
+		return get_terms( 'category', $args );
 	}
 
 	function createListView( $listStyle, &$postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = 'off', $faqStyle = '') {
