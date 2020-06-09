@@ -128,10 +128,7 @@
   }
   
 
-  /* Post List (General) */
-  .et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before{
-	content: "";
-  }
+
 
   
   /* Cards */

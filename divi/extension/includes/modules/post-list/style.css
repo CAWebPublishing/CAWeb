@@ -32,3 +32,8 @@
 .et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
 	border-bottom: inherit;
 }
+
+/* Post List (General) */
+.et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before{
+	content: '';
+}

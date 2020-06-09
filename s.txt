@@ -1,0 +1,12 @@
+
+FILE: divi\extension\includes\modules\post-list\post-list.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 1 | ERROR | Class file names should be based on the class name with
+   |       | "class-" prepended. Expected
+   |       | class-caweb-module-post-list.php, but found
+   |       | post-list.php.
+----------------------------------------------------------------------
+
+
