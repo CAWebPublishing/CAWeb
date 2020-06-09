@@ -57,7 +57,7 @@
 		 Multiple valid text domains can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="CAWeb,Divi,et-core,et_builder"/>
+			<property name="text_domain" type="array" value="CAWeb,caweb-divi-modules,Divi,et-core,et_builder"/>
 		</properties>
 	</rule>
 

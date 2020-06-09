@@ -1,163 +1,198 @@
 <?php
-/*
-Divi Icon Field Names
-make sure the field name is one of the following:
-'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
+/**
+ * CAWeb Fullwidth Header Slideshow Banner Module
+ *
+ * @package CAWeb Module Extension
  */
 
-if( ! class_exists('ET_Builder_CAWeb_Module') ){
-    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
+	require_once dirname( __DIR__ ) . '/class-caweb-builder-element.php';
 }
 
-// Fullwidth Version
+/**
+ * CAWeb Fullwidth Header Slideshow Banner Module Class
+ */
 class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Module {
-    public $slug = 'et_pb_ca_fullwidth_banner';
-    public $vb_support = 'on';
+	/**
+	 * Module Slug Name
+	 *
+	 * @var string Module slug name.
+	 */
+	public $slug = 'et_pb_ca_fullwidth_banner';
+	/**
+	 * Visual Builder Support
+	 *
+	 * @var string Whether or not this module supports Divi's Visual Builder.
+	 */
+	public $vb_support = 'on';
 
-    function init() {
-        $this->name = esc_html__('FullWidth Header Slideshow Banner', 'et_builder');
-        $this->fullwidth       = true;
+	/**
+	 * Module Initialization
+	 *
+	 * @return void
+	 */
+	public function init() {
+		$this->name      = esc_html__( 'FullWidth Header Slideshow Banner', 'et_builder' );
+		$this->fullwidth = true;
 
-        $this->child_slug      = 'et_pb_ca_fullwidth_banner_item';
-        $this->child_item_text = esc_html__('Slide', 'et_builder');
+		$this->child_slug      = 'et_pb_ca_fullwidth_banner_item';
+		$this->child_item_text = esc_html__( 'Slide', 'et_builder' );
 
-        $this->main_css_element = '%%order_class%%.et_pb_slider';
+		$this->main_css_element = '%%order_class%%.et_pb_slider';
 
-        $this->settings_modal_toggles = array(
-            'general' => array(
-                'toggles' => array(
-                    'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
-                ),
-            ),
-            'advanced' => array(
-                'toggles' => array(
-                    'scroll_bar'  => esc_html__('Scroll Bar', 'et_builder'),
-                    'text' => array(
-                        'title'    => esc_html__('Text', 'et_builder'),
-                        'priority' => 49,
-                    ),
-                ),
-            ),
-        );
+		$this->settings_modal_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'scroll_bar'  => esc_html__( 'Scroll Bar', 'et_builder' ),
+				),
+			),
+			'advanced' => array(
+				'toggles' => array(
+					'scroll_bar' => esc_html__( 'Scroll Bar', 'et_builder' ),
+					'text'       => array(
+						'title'    => esc_html__( 'Text', 'et_builder' ),
+						'priority' => 49,
+					),
+				),
+			),
+		);
 
-        // Custom handler: Output JS for editor preview in page footer.
-        add_action('wp_footer', array($this, 'slideshow_banner_removal'));
-    }
-    function get_fields() {
-        $general_fields = array(
-            'scroll_bar_text' => array(
-                'label'           => esc_html__('Scroll Bar Text', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'description'     => esc_html__('Here you can enter the text for the scroll bar.', 'et_builder'),
-                'tab_slug'     => 'general',
-                'toggle_slug'     => 'scroll_bar',
-            ),
-        );
+		// Custom handler: Output JS for editor preview in page footer.
+		add_action( 'wp_footer', array( $this, 'slideshow_banner_removal' ) );
+	}
 
-        $design_fields = array(
-            'font_icon' => array(
-                'label'           => esc_html__('Scroll Bar Icon', 'et_builder'),
-                'type'            => 'text',
-                'option_category'     => 'configuration',
-                'class'               => array('et-pb-font-icon'),
-                'default'               => '%%114%%',
-                'renderer'            => 'select_icon',
-                'renderer_with_field' => true,
-                'description'     => esc_html__('Here you can select a Heading Icon', 'et_builder'),
-                'tab_slug'     => 'advanced',
-                'toggle_slug'     => 'scroll_bar',
-            ),
-        );
+	/**
+	 * Returns an array of all the Module Fields.
+	 *
+	 * @return array
+	 */
+	public function get_fields() {
+		$general_fields = array(
+			'scroll_bar_text' => array(
+				'label'           => esc_html__( 'Scroll Bar Text', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Here you can enter the text for the scroll bar.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'scroll_bar',
+			),
+		);
 
-        $advanced_fields = array(
-        );
+		$design_fields = array(
+			'font_icon' => array(
+				'label'               => esc_html__( 'Scroll Bar Icon', 'et_builder' ),
+				'type'                => 'text',
+				'option_category'     => 'configuration',
+				'class'               => array( 'et-pb-font-icon' ),
+				'default'             => '%%114%%',
+				'renderer'            => 'select_icon',
+				'renderer_with_field' => true,
+				'description'         => esc_html__( 'Here you can select a Heading Icon', 'et_builder' ),
+				'tab_slug'            => 'advanced',
+				'toggle_slug'         => 'scroll_bar',
+			),
+		);
 
-        return array_merge($general_fields, $design_fields, $advanced_fields);
-    }
-    function render($unprocessed_props, $content = null, $render_slug) {
-        $scroll_bar_text = $this->props['scroll_bar_text'];
-        $scroll_bar_icon = $this->props['font_icon'];
+		$advanced_fields = array();
 
-        $this->add_classname('header-slideshow-banner');
-				
+		return array_merge( $general_fields, $design_fields, $advanced_fields );
+	}
+
+	/**
+	 * Renders the Module on the frontend
+	 *
+	 * @param  mixed $unprocessed_props Module Props before processing.
+	 * @param  mixed $content Module Content.
+	 * @param  mixed $render_slug Module Slug Name.
+	 * @return string
+	 */
+	public function render( $unprocessed_props, $content = null, $render_slug ) {
+		$scroll_bar_text = $this->props['scroll_bar_text'];
+		$scroll_bar_icon = $this->props['font_icon'];
+
+		$this->add_classname( 'header-slideshow-banner' );
+
 		global $et_pb_fullwidth_header_slider_item_num;
 
 		$solo = 1 >= $et_pb_fullwidth_header_slider_item_num ? ' solo' : '';
-                
-        $this->add_classname($solo);
-        $this->add_classname( empty($scroll_bar_text) ? ' no-explore' : '' );
-        
-        $class = sprintf(' class="%1$s" ', $this->module_classname($render_slug));
 
-        $scroll_bar_icon = $this->caweb_get_icon_span($scroll_bar_icon);
+		$this->add_classname( $solo );
+		$this->add_classname( empty( $scroll_bar_text ) ? ' no-explore' : '' );
 
-		$scrollbar = ! empty($scroll_bar_text) ? 
-            sprintf('<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon) : '';
-				
-        $content = $this->content;
+		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-        $output = sprintf('<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div><!-- .et_pb_ca_banner -->', $class, $content, $scrollbar);
+		$scroll_bar_icon = $this->caweb_get_icon_span( $scroll_bar_icon );
 
-        return $output;
-    }
+		$scrollbar = ! empty( $scroll_bar_text ) ?
+			sprintf( '<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon ) : '';
 
-    // This is a non-standard function.
-    function slideshow_banner_removal() {
-        global $post;
-        $con = is_object($post) ? $post->post_content : $post['post_content'];
-        $version = caweb_get_page_version(get_the_ID());
-        $module = ! is_404() && ! empty($con) ? caweb_get_shortcode_from_content($con, 'et_pb_ca_fullwidth_banner') : array();
+		$content = $this->content;
 
-        if( isset($_GET['et_fb']) && '1' == $_GET['et_fb'] ){
-            return;
-        }
+		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div><!-- .et_pb_ca_banner -->', $class, $content, $scrollbar );
 
-        if (empty($module)) : 
-        ?>
+		return $output;
+	}
+
+	/**
+	 * This is a non-standard function, it outputs JS code that manipulates the module placement to match the State Template.
+	 *
+	 * @return void
+	 */
+	public function slideshow_banner_removal() {
+		global $post;
+		$nonce    = wp_create_nonce( 'caweb_slideshow_banner_removal' );
+		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_slideshow_banner_removal' );
+		$con      = is_object( $post ) ? $post->post_content : $post['post_content'];
+		$version  = caweb_get_page_version( get_the_ID() );
+		$module   = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
+
+		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
+			return;
+		}
+
+		if ( empty( $module ) ) :
+			?>
 			<script>
 				document.body.classList.remove('primary');
-            </script>
+			</script>
 		<?php else : ?>
 			<script>
-                (function( $ ) {
-		    		 "use strict";
-							 
-					 var section = $('#et_pb_ca_fullwidth_banner').parent();
-					 var banner = section.find('#et_pb_ca_fullwidth_banner');
-							 
-					 $(document).ready(function () {
-                         
-						<?php if (4 == $version) : ?>
-			    			$('#header').append(banner);
-						<?php else : ?>
-						    $('#header').after(banner);
-						<?php endif; ?>
-                                
-                        if( ! section.children().length )
-                            $(section).remove();
-                            
-                        $(banner).find('.explore-invite').css('zIndex', 5);
+				(function( $ ) {
+					"use strict";
 
-						// calculate top of screen on next repaint
+					var section = $('#et_pb_ca_fullwidth_banner').parent();
+					var banner = section.find('#et_pb_ca_fullwidth_banner');
+
+					$(document).ready(function () {
+						<?php if ( 4 === $version ) : ?>
+							$('#header').append(banner);
+						<?php else : ?>
+							$('#header').after(banner);
+						<?php endif; ?>
+
+						if( ! section.children().length )
+							$(section).remove();
+							$(banner).find('.explore-invite').css('zIndex', 5);
+
+						// calculate top of screen on next repaint.
 						window.setTimeout(function () {
-							 var MAXHEIGHT = <?php print 4 == $version ? 450 : 1080 ?>;
-							 var headerTop = banner.offset().top;
-							 var windowHeight = $(window).height();
-							 var height = windowHeight - headerTop;
-							 height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
-                                     
-                             // fill up the remaining height of this device
-							 $(banner).css({'height': height });
+							var MAXHEIGHT = <?php print 4 === $version ? 450 : 1080; ?>;
+							var headerTop = banner.offset().top;
+							var windowHeight = $(window).height();
+							var height = windowHeight - headerTop;
+							height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
+
+							// fill up the remaining height of this device.
+							$(banner).css({'height': height });
 						}, 250)
 					});
 
 				})(jQuery);				
 			</script>
-        <?php 
-        endif;
-    }
+			<?php
+		endif;
+	}
 }
-new CAWeb_Module_Fullwidth_Header_Slideshow_Banner;
+new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
 
 ?>
