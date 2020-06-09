@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Fullwidth Header Slideshow Banner Module
+ * CAWeb Fullwidth Header Slideshow Banner Module (Fullwidth)
  *
  * @package CAWeb Module Extension
  */
@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Fullwidth Header Slideshow Banner Module Class
+ * CAWeb Fullwidth Header Slideshow Banner Module Class (Fullwidth)
  */
 class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Module {
 	/**
@@ -172,7 +172,6 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 						if( ! section.children().length )
 							$(section).remove();
-							$(banner).find('.explore-invite').css('zIndex', 5);
 
 						// calculate top of screen on next repaint.
 						window.setTimeout(function () {

@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb GitHub Module
+ * CAWeb GitHub Module (Standard)
  *
  * @package CAWeb Module Extension
  */
@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb GitHub Module Class
+ * CAWeb GitHub Module Class (Standard)
  */
 class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 	/**

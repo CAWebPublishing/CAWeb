@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Fullwidth Header Slideshow Banner Item Module
+ * CAWeb Fullwidth Header Slideshow Banner Item Module (Fullwidth)
  *
  * @package CAWeb Module Extension
  */
@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Fullwidth Header Slideshow Banner Item Module Class
+ * CAWeb Fullwidth Header Slideshow Banner Item Module Class (Fullwidth)
  */
 class CAWeb_Module_Fullwidth_Header_Slideshow_Banner_Item extends ET_Builder_CAWeb_Module {
 	/**

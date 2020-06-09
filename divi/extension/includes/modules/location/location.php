@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Location Module Class
+ * CAWeb Location Module Class (Standard)
  *
  * @package CAWeb Module Extension
  */
@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Location Module Class
+ * CAWeb Location Module Class (Standard)
  */
 class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 	/**

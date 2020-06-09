@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Panel Module (Standard)
+ * CAWeb Panel Modules (Fullwidth)
  *
  * @package CAWeb Module Extension
  */
@@ -10,31 +10,30 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Panel Module Class (Standard)
+ * CAWeb Panel Module Class (Fullwidth)
  */
-class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 	/**
 	 * Module Slug Name
 	 *
 	 * @var string Module slug name.
 	 */
-	public $slug = 'et_pb_ca_panel';
+	public $slug = 'et_pb_ca_fullwidth_panel';
 	/**
 	 * Visual Builder Support
 	 *
 	 * @var string Whether or not this module supports Divi's Visual Builder.
 	 */
 	public $vb_support = 'on';
-
 	/**
 	 * Module Initialization
 	 *
 	 * @return void
 	 */
 	public function init() {
-		$this->name             = esc_html__( 'Panel', 'et_builder' );
-		$this->main_css_element = '%%order_class%%';
-
+		$this->name                   = esc_html__( 'FullWidth Panel', 'et_builder' );
+		$this->fullwidth              = true;
+		$this->main_css_element       = '%%order_class%%';
 		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
@@ -61,12 +60,12 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 	 * @return array
 	 */
 	public function get_fields() {
-		$general_fields = array(
+		$general_fields  = array(
 			'panel_layout' => array(
-				'label'             => esc_html__( 'Style', 'et_builder' ),
-				'type'              => 'select',
-				'option_category'   => 'configuration',
-				'options'           => array(
+				'label'           => esc_html__( 'Style', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options'         => array(
 					'none'               => esc_html__( 'None', 'et_builder' ),
 					'default'            => esc_html__( 'Default', 'et_builder' ),
 					'standout'           => esc_html__( 'Standout', 'et_builder' ),
@@ -74,10 +73,10 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 					'overstated'         => esc_html__( 'Overstated', 'et_builder' ),
 					'understated'        => esc_html__( 'Understated', 'et_builder' ),
 				),
-				'default'           => 'default',
-				'description'       => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
-				'tab_slug'          => 'general',
-				'toggle_slug'       => 'style',
+				'default'         => 'default',
+				'description'     => esc_html__( 'Here you can choose the style of panel to display', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'style',
 			),
 			'title' => array(
 				'label'           => esc_html__( 'Heading', 'et_builder' ),
@@ -148,30 +147,28 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 				'toggle_slug' => 'admin_label',
 			),
 		);
-
-		$design_fields = array(
+		$design_fields   = array(
 			'heading_align' => array(
-				'label'             => esc_html__( 'Heading Alignment', 'et_builder' ),
-				'type'              => 'select',
-				'option_category'   => 'configuration',
-				'options'           => array(
+				'label'           => esc_html__( 'Heading Alignment', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options'         => array(
 					'left'   => esc_html__( 'Left', 'et_builder' ),
 					'center' => esc_html__( 'Center', 'et_builder' ),
 					'right'  => esc_html__( 'Right', 'et_builder' ),
 				),
-				'default'           => 'left',
-				'description'       => esc_html__( 'Here you can choose the alignment for the panel heading', 'et_builder' ),
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'header',
+				'description'     => esc_html__( 'Here you can choose the alignment for the panel heading', 'et_builder' ),
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'header',
 			),
 			'heading_text_color' => array(
-				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'custom_color'      => true,
-				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
-				'show_if'           => array( 'panel_layout' => 'none' ),
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'header',
+				'label'        => esc_html__( 'Heading Text Color', 'et_builder' ),
+				'type'         => 'color-alpha',
+				'custom_color' => true,
+				'description'  => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
+				'show_if'      => array( 'panel_layout' => 'none' ),
+				'tab_slug'     => 'advanced',
+				'toggle_slug'  => 'header',
 			),
 			'use_icon' => array(
 				'label'           => esc_html__( 'Use Icon', 'et_builder' ),
@@ -200,7 +197,6 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 				'toggle_slug'         => 'header',
 			),
 		);
-
 		$advanced_fields = array();
 
 		return array_merge( $general_fields, $design_fields, $advanced_fields );
@@ -260,9 +256,9 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 			$display_options = '';
 			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1', 'vertical-align:sub;' ) : '';
 
-			if ( 'on' === $show_button && ! empty( $button_link ) ) {
+			if ( 'on' === $show_button ) {
+				$button_link     = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 				$button_text     = empty( $button_text ) ? 'Read More' : $button_text;
-				$button_link     = esc_url( $button_link );
 				$button_target   = 'on' === $button_target ? '_blank' : '_self';
 				$option_classes  = 'right' === $heading_align ? ' pl-2' : '';
 				$option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
@@ -301,4 +297,5 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 		return $output;
 	}
 }
-new CAWeb_Module_Panel();
+new CAWeb_Module_Fullwidth_Panel();
+

@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Post List Module
+ * CAWeb Post List Module (Standard)
  *
  * @todo Remove do_action('caweb_post_list_module_clear_cache') ref line 59.
  * @package CAWeb Module Extension
@@ -11,7 +11,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Post List Module Class
+ * CAWeb Post List Module Class (Standard)
  */
 class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	/**

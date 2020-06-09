@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Post Handler Module
+ * CAWeb Post Handler Module (Standard)
  *
  * @package CAWeb Module Extension
  */
@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Post Handler Module Class
+ * CAWeb Post Handler Module Class (Standard)
  */
 class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 	/**

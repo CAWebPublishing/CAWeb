@@ -13,15 +13,7 @@
   .et_pb_module.et_pb_fullwidth_menu .fullwidth-menu-nav>ul ul{
 	  padding-bottom: 20px;
   }
-  .et_pb_module.et_pb_ca_fullwidth_banner.solo #primary-carousel div[class*="banner-"] {
-	  display: none;
-  }
-  .et_pb_module.et_pb_ca_fullwidth_banner.no-explore #primary-carousel div[class*="banner-"] {
-	  bottom: 0;
-  }
-  .explore-invite {
-	z-index: 1;
-  }
+  
   /* Section Primary  */
   .section{
   overflow: hidden;
@@ -77,10 +69,6 @@
   /* Divi Accordion Style */
   .et-learn-more h3.heading-more {
 	  color: black;
-  }
-  
-  ul, ol{
-	list-style-position: outside;
   }
   
   /* Fullwidth Section Footer */
