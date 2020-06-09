@@ -272,9 +272,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			}
 		}
 
-		$faqs   = '';
+		$faqs   = 'faqs-list' === $style ? true : false;
 		$output = '';
-		global $faq_accordion_count;
 
 		foreach ( $all_posts as $a => $p ) {
 			if ( $posts_number !== -1 && 0 === $posts_number ) {
@@ -288,40 +287,24 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 
 			$post_content_handler = caweb_get_shortcode_from_content( $content, 'et_pb_ca_post_handler' );
 
-			// if the hanlder is an object, construct the appropriate list item
+			// if the handler is an object, construct the appropriate list item
 			if ( is_object( $post_content_handler ) ) {
-				if ( 'faqs-list' === $style ) {
-					$faqs .= $this->createListView( $style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count );
-
-					if ( 'accordion' === $faq_style ) {
-						$faq_accordion_count++;
-					}
-				} else {
-					$output .= $this->createListView( $style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style, $faq_accordion_count );
-				}
-
-				// $posts_number--;
+				$output .= $this->createListView( $style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style );
 			} // end of if is_object check
 		}
 
 		$class = sprintf( ' class="%1$s %2$s" ', $this->module_classname( $render_slug ), $style );
 
-		if ( ! empty( $faqs ) ) {
-			if ( 'toggle' === $faq_style ) {
-				$output = sprintf( '<ul class="accordion-list list-overstated" role="tablist" >%1$s</ul>', $faqs );
-			} else {
-				$output = $faqs;
-			}
+		if ( $faqs && 'toggle' === $faq_style ) {
+			$output = sprintf( '<ul class="accordion-list list-overstated" role="tablist" >%1$s</ul>', $output );
 		}
 
 		$output = sprintf( '<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty( $list_title ) ? $list_title : '' ), $output );
 
-		$faq_accordion_count = 0;
-
 		return $output;
 	}
 
-	function createListView( $listStyle, &$postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = 'off', $faqStyle = '', $faqCount = 0 ) {
+	function createListView( $listStyle, &$postCount, $pHandler, $pID, $pURL, $pTitle, $featured_image = 'off', $faqStyle = '') {
 		$layout = $pHandler->post_type_layout;
 
 		// List Style
@@ -388,7 +371,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb FAQ Post Handler
 				if ( 'faqs' === $layout ) {
 					$postCount--;
-					return $this->createFAQ( $pHandler, $faqStyle, $postCount, $pTitle, $faqCount );
+					return $this->createFAQ( $pHandler, $faqStyle, $postCount, $pTitle );
 				}
 
 				break;
@@ -452,7 +435,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$thumbnail = 'on' === $featured_image ?
 			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $pID, array( 150, 100 ) ) ) : '';
 
-		$event_title = sprintf( '<h5><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $pURL, $pTitle );
+		$event_title = sprintf( '<h5 class="pb-0"><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $pURL, $pTitle );
 
 		$excerpt = $this->caweb_get_excerpt( $cHandler->content, 15, $pID );
 		$excerpt = ( ! empty( $excerpt ) ?
@@ -491,20 +474,15 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		);
 	}
 
-	function createFAQ( $cHandler, $style, $postCount, $pTitle, $faqCount ) {
+	function createFAQ( $cHandler, $style, $postCount, $pTitle ) {
 		if ( 'toggle' === $style ) {
 			return sprintf( '<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $pTitle, $cHandler->content );
 		}
 
 		if ( 'accordion' === $style ) {
-			$open_faq = empty( $faqCount ) || 0 === $faqCount;
-
 			$faqs = sprintf(
-				'<div class="panel panel-default et_pb_toggle et_pb_accordion_item_%3$s %4$s"><div class="et_pb_toggle_title panel-heading"><h4 class="panel-title"><a>%2$s</a></h4></div>',
-				$postCount,
-				$pTitle,
-				( ! empty( $faqCount ) ? $faqCount : 0 ),
-				( $open_faq ? ' et_pb_toggle_open' : ' et_pb_toggle_close' )
+				'<div class="panel panel-default et_pb_toggle et_pb_toggle_item et_pb_toggle_close p-0"><div class="et_pb_toggle_title panel-heading p-2"><h4 class="panel-title pb-0"><a>%1$s</a></h4><span class="ca-gov-icon-triangle-right ca-gov-icon-triangle-down float-right"></span></div>',
+				$pTitle
 			);
 
 			$faqs .= sprintf( '<div class="et_pb_toggle_content clearfix panel-body">%1$s</div></div>', $cHandler->content );
@@ -612,13 +590,9 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	}
 
 	function createProfile( $cHandler, $pID, $pURL, $featured_image ) {
-		$hasThumbnail = has_post_thumbnail( $pID );
+		$no_thumbnail = ! has_post_thumbnail( $pID ) || 'off' === $featured_image ? true : false;
 
-		if ( ! $hasThumbnail || 'off' === $featured_image ) {
-			$this->add_classname( 'no-thumbnail' );
-		}
-
-		$thumbnail = 'on' === $featured_image && $hasThumbnail ?
+		$thumbnail = 'on' === $featured_image && ! $no_thumbnail ?
 			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $pID, array( 75, 75 ) ) ) : '';
 
 		$t = sprintf(
@@ -628,7 +602,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			( ! empty( $cHandler->profile_career_title ) ? sprintf( ', %1$s', $cHandler->profile_career_title ) : '' )
 		);
 
-		$profile_title = sprintf( '<div class="header"><div class="title"><a href="%1$s">%2$s</a></div></div>', $pURL, $t );
+		$profile_title = sprintf( '<div class="header%1$s"><div class="title"><a href="%2$s">%3$s</a></div></div>', $no_thumbnail ? ' ml-0' : '', $pURL, $t );
 
 		$position = ( ! empty( $cHandler->profile_career_position ) ?
 						sprintf( '%1$s', $cHandler->profile_career_position ) : '' );
@@ -642,11 +616,11 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$fields = array_filter( array( $position, $line1, $line2, $line3 ) );
 
 		return sprintf(
-			'<article class="profile-item%1$s">%2$s%3$s<div class="body"><p>%4$s</p></div></article>',
-			empty( $thumbnail ) ? ' no-thumbnail' : '',
+			'<article class="profile-item">%1$s%2$s<div class="body%3$s"><p>%4$s</p></div></article>',
 			$thumbnail,
 			$profile_title,
-			( ! empty( $fields ) ? implode( '<br />', $fields ) : '<br />' )
+			$no_thumbnail ? ' ml-0' : '',
+			! empty( $fields ) ? implode( '<br />', $fields ) : '<br />'
 		);
 	}
 }
