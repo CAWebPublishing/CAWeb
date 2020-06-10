@@ -11622,9 +11622,28 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
 }
 
 /* Divi Specific Overrides */
+/* Apply focus outline */
+.et_pb_toggle.et_pb_accordion_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
 .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
+}
+
+/* Remove the State Template background image from Divi Button */
+.et_pb_button {
+  background-image: none !important;
+}
+
+.et-learn-more h3.heading-more {
+  color: black;
+}
+
+/* Remove the State Template background image from Person Module Social Links */
+.et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
+  background-image: none !important;
 }
 
 .et_pb_text ol, .et_pb_text ul {

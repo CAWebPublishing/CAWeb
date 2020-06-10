@@ -1,0 +1,10 @@
+/* Customizer Styling */
+/* Manual CSS textarea size */
+#customize-control-ca_custom_css textarea{
+	height: 500px; 
+	resize: none;
+}
+/* Hide Navigation Menu */
+#accordion-panel-nav_menus{
+	display:none !important;
+}

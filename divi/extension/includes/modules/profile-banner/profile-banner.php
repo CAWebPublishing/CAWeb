@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Profile Banner Module (Standard)
+ * CAWeb Profile Banner Module Class (Standard)
  */
 class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	/**

@@ -9,7 +9,7 @@ class CAWeb_Module_Fullwidth_Section_Footer extends CAWEeb_Component {
   render() {
 	var moduleId = "" !== this.props.module_id ? this.props.module_id : ''
 	var classes = undefined !== this.props.module_class ? this.props.module_class : '';
-	var classList = "et_pb_ca_fullwidth_section_footer et_pb_module " + classes;
+	var classList = "et_pb_ca_fullwidth_section_footer et_pb_module section p-3 " + classes;
 
 	var section_bg_color = "" !== this.props.section_background_color ? {'background' : this.props.section_background_color} : {'background' : 'inherit'};
 
