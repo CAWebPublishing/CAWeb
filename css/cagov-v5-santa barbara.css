@@ -1,5 +1,5 @@
 /**
- * CA State Template v5 -  @version v5.0.17 -  4/21/2020 
+ * CA State Template v5 -  @version v5.0.17 -  6/4/2020 
   STYLES COMPILED FROM SOURCE (SCSS) DO NOT MODIFY */
 /* -----------------------------------------
    BOOTSTRAP v4.4.1 - /source/scss/bootstrap/ 
@@ -13405,6 +13405,26 @@ table.gsc-search-box td {
   border: 0;
 }
 
+/* Search button desktop styles */
+@media (min-width: 768px) {
+  #nav-item-search button.first-level-link {
+    position: relative;
+    min-width: 40px;
+  }
+  button.first-level-link > span.search-btn {
+    display: block;
+    position: absolute;
+    left: 50% !important;
+    transform: translateX(-50%);
+    top: 0;
+    padding-top: 12px;
+  }
+  .first-level-link > span.search-btn > span[class^="ca-gov-icon"] {
+    display: block;
+    font-size: 32px;
+  }
+}
+
 /* -----------------------------------------
    MEGA MENU
    /source/scss/cagov/nav-megamenu.scss
@@ -16377,10 +16397,7 @@ body {
 }
 
 .global-header.compact .alert-banner {
-  opacity: 0;
-  position: absolute;
-  width: 0;
-  height: 0;
+  display: none;
 }
 
 /* -----------------------------------------
@@ -21716,7 +21733,7 @@ a.label-dark:focus, a.label-dark.focus {
 }
 
 /**
- * CA State Template v5 -  @version v5.0.17 -  4/21/2020 
+ * CA State Template v5 -  @version v5.0.17 -  5/1/2020 
   STYLES COMPILED FROM SOURCE (SCSS) DO NOT MODIFY */
 /* -----------------------------------------
    SANTABARBARA
@@ -21958,6 +21975,14 @@ h1 span[class^="ca-gov-icon-"]:first-child {
   .nav-item:hover::after, .nav-item:focus::after {
     background-color: #60617d;
   }
+}
+
+button.first-level-link > span.search-btn > span[class^="ca-gov-icon"] {
+  color: gainsboro;
+}
+
+.nav-item:hover button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:focus button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:hover button.first-level-link, .nav-item:focus button.first-level-link {
+  color: #60617d;
 }
 
 /* -----------------------------------------
@@ -27084,16 +27109,36 @@ div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
 }
 
 /* Divi Specific Overrides */
+/* Apply focus outline */
+.et_pb_toggle.et_pb_accordion_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
 .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
+}
+
+/* Remove the State Template background image from Divi Button */
+.et_pb_button {
+  background-image: none !important;
+}
+
+.et-learn-more h3.heading-more {
+  color: black;
+}
+
+/* Remove the State Template background image from Person Module Social Links */
+.et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
+  background-image: none !important;
 }
 
 .et_pb_text ol, .et_pb_text ul {
   padding-bottom: 0;
 }
 
-.et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+/* Apply focus outline */
+.et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
 
@@ -27330,9 +27375,9 @@ ol.breadcrumb {
   margin-bottom: 0;
 }
 
-ol:not([class*="menu"]):not([class*="nav"]),
-ul:not([class*="menu"]):not([class*="nav"]) {
-  padding-left: 50px !important;
+ol:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]),
+ul:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]) {
+  padding: 0 0 0 50px;
   list-style-position: outside !important;
 }
 

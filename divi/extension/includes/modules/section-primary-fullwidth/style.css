@@ -1,0 +1,26 @@
+/* Section Primary Fullwidth */
+.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4 img.img-responsive {
+    width: 100%;
+}
+.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4.pull-left {
+    padding-left: 0;
+}
+.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4.pull-right {
+    padding-right: 0;
+}
+/* Adds padding under featured image when in tablet mode */
+@media (max-width: 991px){
+  .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive{
+      padding-bottom: 10px;
+  }
+  .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4{
+      float: none !important;
+    	padding-left: 0;
+    	padding-right: 0;
+  }
+}
+.et_pb_ca_fullwidth_section_primary{
+    margin-bottom: 0 !important;
+    padding: 10px 0;
+}
+/* End of Section Primary Fullwidth */

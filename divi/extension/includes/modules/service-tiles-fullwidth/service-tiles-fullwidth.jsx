@@ -45,6 +45,12 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends CAWEeb_Component {
             var tile_url = tileAttrs.tile_url;
             var tile_content = tiles[i]['props'].content;
 
+            if( 'half' === tile_size ){
+				tile_size = 'w-50';
+			}else if( 'full' === tile_size ){
+				tile_size = 'w-100';
+			}
+
             if ("on" === tile_link) {
                 if( "" !== item_image ){
                     var alt_text = "";

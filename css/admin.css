@@ -149,6 +149,18 @@ body.login .caweb-disclaimer {
   }
 }
 
+/* Customizer Styling */
+/* Manual CSS textarea size */
+#customize-control-ca_custom_css textarea {
+  height: 500px;
+  resize: none;
+}
+
+/* Hide Navigation Menu */
+#accordion-panel-nav_menus {
+  display: none !important;
+}
+
 /*
  Bootstrap Overrides, these are added only because the 
  WordPress load-styles.php loads before our CSS.

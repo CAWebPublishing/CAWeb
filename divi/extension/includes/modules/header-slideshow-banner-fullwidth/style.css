@@ -1,0 +1,10 @@
+/* Fullwidth Header Slideshow Banner */
+.et_pb_module.et_pb_ca_fullwidth_banner .explore-invite{
+	z-index: 5;
+}
+.et_pb_module.et_pb_ca_fullwidth_banner.no-explore #primary-carousel div[class*="banner-"] {
+	bottom: 0;
+}
+.et_pb_module.et_pb_ca_fullwidth_banner.solo #primary-carousel div[class*="banner-"] {
+	display: none;
+}
