@@ -152,7 +152,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="group">%1$s%2$s</div></div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
-                      <div class="container" %3$s> Copyright &copy;
+                      <div class="container p-0" %3$s> Copyright &copy;
                       <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
 					$nav_menu,
 					$social_links,
@@ -160,7 +160,11 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				);
 			}
 
-			return $nav_menu;
+			if ( isset( $args['echo'] ) && $args['echo'] ) {
+				print wp_kses( $nav_menu, caweb_allowed_html() );
+			} else {
+				return $nav_menu;
+			}
 		}
 
 		/**
