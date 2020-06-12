@@ -453,6 +453,9 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 
 	$tags = array(
 		'div'    => array_merge( $attr, $aria, $data ),
+		'nav'    => array_merge( $attr, $aria, $data ),
+		'header'    => array_merge( $attr, $aria, $data ),
+		'footer'    => array_merge( $attr, $aria, $data ),
 		'p'      => $attr,
 		'br'     => array(),
 		'span'   => $attr,
@@ -472,6 +475,7 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'ul'     => $attr,
 		'li'     => $attr,
 		'style'  => array(),
+		'script'  => array(),
 	);
 
 	// Whether to include form fields or not.
