@@ -272,7 +272,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					$tags    = ! is_array( $tags ) ? explode( ',', $tags ) : $tags;
 					$has_tag = false;
 					foreach ( $tag_ids as $k ) {
-						if ( in_array( $k, $tags, true ) ) {
+						if ( in_array( $k, $tags, false ) ) {
 							$has_tag = true;
 						}
 					}
@@ -282,7 +282,6 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 				}
 			}
 		}
-
 		return $posts_array;
 	}
 
