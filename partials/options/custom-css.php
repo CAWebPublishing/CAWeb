@@ -1,5 +1,5 @@
 <!-- Custom CSS Section -->
-<div class="p-2 collapse<?php print 'custom-css' === $tab ? ' show' : ''; ?>" id="custom-css" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'custom-css' === $caweb_selected_tab ? ' show' : ''; ?>" id="custom-css" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded CSS -->
     <div class="form-row">

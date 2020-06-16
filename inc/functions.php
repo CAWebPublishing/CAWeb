@@ -52,7 +52,7 @@ function caweb_nav_menu_theme_locations() {
  */
 function caweb_get_min_file( $f, $ext = 'css' ) {
 	/* if a minified version exists load it */
-	if ( file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+	if ( false && file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f );
 	} else {
 		return CAWEB_URI . $f;
@@ -147,16 +147,18 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 	switch ( $version ) {
 		case 4:
 			$tmp = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
-
 			break;
 		case 5:
 			$tmp = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
-
+			break;
+		case 5.5:
+			$tmp = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
 			break;
 		default:
 			$v4_schemes = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
 			$v5_schemes = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
-			$tmp        = array_merge( $v4_schemes, $v5_schemes );
+			$v5_5_schemes = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
+			$tmp        = array_merge( $v4_schemes, $v5_schemes, $v5_5_schemes );
 
 			break;
 	}
