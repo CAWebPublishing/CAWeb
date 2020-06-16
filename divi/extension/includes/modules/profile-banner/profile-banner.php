@@ -1,128 +1,158 @@
 <?php
-/*
-Divi Icon Field Names
-make sure the field name is one of the following:
-'font_icon', 'button_one_icon', 'button_two_icon',  'button_icon'
+/**
+ * CAWeb Profile Banner Module (Standard)
+ *
+ * @package CAWeb Module Extension
  */
 
-if( ! class_exists('ET_Builder_CAWeb_Module') ){
-    require_once( dirname(__DIR__) . '/class-caweb-builder-element.php');
+if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
+	require_once dirname( __DIR__ ) . '/class-caweb-builder-element.php';
 }
 
+/**
+ * CAWeb Profile Banner Module Class (Standard)
+ */
 class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
+	/**
+	 * Module Slug Name
+	 *
+	 * @var string Module slug name.
+	 */
+	public $slug = 'et_pb_profile_banner';
+	/**
+	 * Visual Builder Support
+	 *
+	 * @var string Whether or not this module supports Divi's Visual Builder.
+	 */
+	public $vb_support = 'on';
 
-    public $slug       = 'et_pb_profile_banner';
-    public $vb_support = 'on';
-    
-    function init() {
-        $this->name = esc_html__('Profile Banner', 'et_builder');
+	/**
+	 * Module Initialization
+	 *
+	 * @return void
+	 */
+	public function init() {
+		$this->name = esc_html__( 'Profile Banner', 'et_builder' );
 
-        $this->main_css_element = '%%order_class%%';
+		$this->main_css_element = '%%order_class%%';
 
-        $this->settings_modal_toggles = array(
-            'general' => array(
-                'toggles' => array(
-                    'style'  => esc_html__('Style', 'et_builder'),
-                    'header' => esc_html__('Header', 'et_builder'),
-                    'body'   => esc_html__('Body', 'et_builder'),
-                ),
-            ),
-            'advanced' => array(
-                'toggles' => array(
-                    'body'   => esc_html__('Body', 'et_builder'),
-                    'text' => array(
-                        'title'    => esc_html__('Text', 'et_builder'),
-                        'priority' => 49,
-                    ),
-                ),
-            ),
-        );
-    }
-    function get_fields() {
-        $general_fields = array(
-            'name' => array(
-                'label'           => esc_html__('Profile Name', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'description'     => esc_html__('Input the name of the profile.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'header',
-            ),
-            'job_title' => array(
-                'label'           => esc_html__('Job Title', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'description'     => esc_html__('Input the job title.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'header',
-            ),
-            'profile_link' => array(
-                'label'           => esc_html__('Profile Link', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'description'     => esc_html__('Input the text for the profile link.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'body',
-            ),
-            'url' => array(
-                'label'           => esc_html__('Profile URL', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'default' => '#',
-                'description'     => esc_html__('Input the website of the profile.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'body',
-            ),
-            'portrait_url' => array(
-                'label'              => esc_html__('Portrait Image URL', 'et_builder'),
-                'type'               => 'upload',
-                'option_category'    => 'basic_option',
-                'upload_button_text' => esc_attr__('Upload an image', 'et_builder'),
-                'choose_text'        => esc_attr__('Choose an Image', 'et_builder'),
-                'update_text'        => esc_attr__('Set As Image', 'et_builder'),
-                'description'        => esc_html__('Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'body',
-            ),
-            'portrait_alt' => array(
-                'label'           => esc_html__('Portrait Image Alt Text', 'et_builder'),
-                'type'            => 'text',
-                'option_category' => 'basic_option',
-                'description'     => esc_html__('Input the alt text for the portrait image.', 'et_builder'),
-                'tab_slug' => 'general',
-                'toggle_slug'			=> 'body',
-            ),
-        );
+		$this->settings_modal_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'style'  => esc_html__( 'Style', 'et_builder' ),
+					'header' => esc_html__( 'Header', 'et_builder' ),
+					'body'   => esc_html__( 'Body', 'et_builder' ),
+				),
+			),
+			'advanced' => array(
+				'toggles' => array(
+					'body' => esc_html__( 'Body', 'et_builder' ),
+					'text' => array(
+						'title'    => esc_html__( 'Text', 'et_builder' ),
+						'priority' => 49,
+					),
+				),
+			),
+		);
+	}
 
-        $design_fields = array(
-            'round_image' => array(
-                'label'              => esc_html__('Round Image', 'et_builder'),
-                'type'               => 'yes_no_button',
-                'option_category'    => 'configuration',
-                'options'        => array(
-                    'off' => esc_html__('No', 'et_builder'),
-                    'on'  => esc_html__('Yes', 'et_builder'),
-                ),
-                'description' => esc_html__('Switch to yes if you want round images in the profile banner.'),
-                'tab_slug'			=> 'advanced',
-                'toggle_slug'			=> 'body',
-            ),
-        );
+	/**
+	 * Returns an array of all the Module Fields.
+	 *
+	 * @return array
+	 */
+	public function get_fields() {
+		$general_fields = array(
+			'name' => array(
+				'label'           => esc_html__( 'Profile Name', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Input the name of the profile.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'header',
+			),
+			'job_title' => array(
+				'label'           => esc_html__( 'Job Title', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Input the job title.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'header',
+			),
+			'profile_link' => array(
+				'label'           => esc_html__( 'Profile Link', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Input the text for the profile link.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'body',
+			),
+			'url' => array(
+				'label'           => esc_html__( 'Profile URL', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'default'         => '#',
+				'description'     => esc_html__( 'Input the website of the profile.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'body',
+			),
+			'portrait_url' => array(
+				'label'              => esc_html__( 'Portrait Image URL', 'et_builder' ),
+				'type'               => 'upload',
+				'option_category'    => 'basic_option',
+				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
+				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
+				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
+				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder' ),
+				'tab_slug'           => 'general',
+				'toggle_slug'        => 'body',
+			),
+			'portrait_alt' => array(
+				'label'           => esc_html__( 'Portrait Image Alt Text', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Input the alt text for the portrait image.', 'et_builder' ),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'body',
+			),
+		);
 
-        $advanced_fields = array(
-        );
+		$design_fields = array(
+			'round_image' => array(
+				'label'              => esc_html__( 'Round Image', 'et_builder' ),
+				'type'               => 'yes_no_button',
+				'option_category'    => 'configuration',
+				'options'            => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'description'        => esc_html__( 'Switch to yes if you want round images in the profile banner.', 'et_builder' ),
+				'tab_slug'           => 'advanced',
+				'toggle_slug'        => 'body',
+			),
+		);
 
+		$advanced_fields = array();
 
-        return array_merge($general_fields, $design_fields, $advanced_fields);
-    }
-    function render($unprocessed_props, $content = null, $render_slug) {
-        $name                 = $this->props['name'];
-        $job_title              = $this->props['job_title'];
-        $profile_link              = $this->props['profile_link'];
-        $portrait_url           = $this->props['portrait_url'];
-        $portrait_alt           = $this->props['portrait_alt'];
-        $round                = $this->props['round_image'];
-        $url                    = $this->props['url'];
+		return array_merge( $general_fields, $design_fields, $advanced_fields );
+	}
+
+	/**
+	 * Renders the Module on the frontend
+	 *
+	 * @param  mixed $unprocessed_props Module Props before processing.
+	 * @param  mixed $content Module Content.
+	 * @param  mixed $render_slug Module Slug Name.
+	 * @return string
+	 */
+	public function render( $unprocessed_props, $content = null, $render_slug ) {
+		$name         = $this->props['name'];
+		$job_title    = $this->props['job_title'];
+		$profile_link = $this->props['profile_link'];
+		$portrait_url = $this->props['portrait_url'];
+		$portrait_alt = $this->props['portrait_alt'];
+		$round        = $this->props['round_image'];
+		$url          = $this->props['url'];
 
 		$this->add_classname( 'profile-banner-wrapper' );
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
@@ -149,5 +179,5 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		return $output;
 	}
 }
-new CAWeb_Module_Profile_Banner;
+new CAWeb_Module_Profile_Banner();
 

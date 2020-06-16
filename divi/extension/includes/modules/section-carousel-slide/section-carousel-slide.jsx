@@ -13,10 +13,10 @@ class CAWeb_Module_Section_Carousel_Slide extends CAWEeb_Component {
     var slide_alt_text = this.props.slide_alt_text;
 
     if( "on" === this.props.slide_show_more_button && "" !== slide_url ){
-      button = <div class="details text-center"><a href={slide_url} target="_blank">{this.props.slide_title}</a></div>;
+      button = <div class={"details text-center" + "" === this.props.slide_desc ? ' mt-3' : ''}><a href={slide_url} target="_blank">{this.props.slide_title}</a></div>;
     }
 
-    var desc = "" !== this.props.slide_desc ? <div class="details">{this.props.slide_desc}</div> : '';
+    var desc = "" !== this.props.slide_desc ? <div class="details mt-3">{this.props.slide_desc}</div> : '';
 
     if ("" !== this.props.slide_image ){
       if( "" === slide_alt_text ){
@@ -24,7 +24,7 @@ class CAWeb_Module_Section_Carousel_Slide extends CAWEeb_Component {
         //slide_alt_text = caweb_get_attachment_post_meta($slide_image, '_wp_attachment_image_alt');
       }
        
-      slide = <div class="preview-image"><img src={this.props.slide_image} alt={slide_alt_text} /></div>
+      slide = <div class="preview-image"><img class="h-100" src={this.props.slide_image} alt={slide_alt_text} /></div>
      }
 
     return(

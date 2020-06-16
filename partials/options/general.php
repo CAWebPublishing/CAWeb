@@ -1,5 +1,5 @@
 <!-- General Settings -->
-<div id="general" class="collapse<?php print 'general' === $tab ? ' show' : ''; ?>" data-parent="#caweb-settings">
+<div id="general" class="collapse<?php print 'general' === $caweb_selected_tab ? ' show' : ''; ?>" data-parent="#caweb-settings">
     <div id="general-settings">
     <?php
         include_once 'section/general.php';
