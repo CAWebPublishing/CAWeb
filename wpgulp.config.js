@@ -13,6 +13,7 @@ module.exports = {
 	templateVer: '5', // Minimum CA State Template Version
 	availableVers: ['4', '5', '5.5'], // Available CA State Template Versions
 	availableColors: {
+		'delta.css' : 'Delta',
 		'eureka.css' : 'Eureka',
 		'mono.css' : 'Mono',
 		'oceanside.css' : 'Oceanside',
@@ -20,6 +21,8 @@ module.exports = {
 		'paso robles.css' : 'Paso Robles',
 		'sacramento.css' : 'Sacramento',
 		'santa barbara.css' : 'Santa Barbara',
+		'santa cruz.css' : 'Santa Cruz',
+		'shasta.css' : 'Shasta',
 		'sierra.css' : 'Sierra',
 		'trinity.css' : 'Trinity',
 	},

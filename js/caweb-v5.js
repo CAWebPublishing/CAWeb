@@ -20692,21 +20692,6 @@ jQuery(document).ready(function() {
             $(element).on('click', function(e){
                 setTimeout( function(){ toggleExpansion(element); }, 1000 );
             });
-            $(element).on( "keydown", function(e){
-                // if enter is pressed
-                if( 13 === e.keyCode ){
-                    if( $(this).hasClass('et_pb_toggle_close') ){
-                        $(this).removeClass('et_pb_toggle_close');
-                        $(this).addClass('et_pb_toggle_open');
-                        $(this).find('.et_pb_toggle_content').css('display', 'block');
-                    }else{
-                        $(this).addClass('et_pb_toggle_close');
-                        $(this).removeClass('et_pb_toggle_open');
-                        $(this).find('.et_pb_toggle_content').css('display', 'none');
-                    }
-                    toggleExpansion(this);
-                }
-            });
         });      
 
         function toggleExpansion(ele){
