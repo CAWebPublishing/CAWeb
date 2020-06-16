@@ -832,10 +832,23 @@ jQuery(document).ready(function($) {
     changeMade = true;
   });
 
-  // Display warning if Legacy Browser Support Enabled
-  $('#ca_site_version').on('change',function(e){
-    
-  });
+  var site_version_selector = $('#ca_site_version');
+  // Toggle CSS Colorschemes
+  site_version_selector.on('change', toggle_colorschemes );
+  toggle_colorschemes();
+  function toggle_colorschemes(){
+    $('#ca_site_color_scheme option.extra').each(function(i, ele){
+      if( 5 == site_version_selector.val() ){
+        $(ele).addClass('hidden');
+      }else{
+        $(ele).removeClass('hidden');
+      }
+    });
+
+    if( $('#ca_site_color_scheme option:selected').hasClass('hidden') ){
+        $("#ca_site_color_scheme option:not('extra'):first-child").attr('selected', 'selected');
+    }
+  }
 
   // If no Search Engine ID hide Search on Front Page Option
   $('#ca_google_search_id').on('input',function(e){

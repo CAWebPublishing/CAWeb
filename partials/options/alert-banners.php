@@ -1,5 +1,5 @@
 <!-- Alert Banners -->
-<div class="p-2 collapse<?php print 'alert-banners' === $tab ? ' show' : ''; ?>" id="alert-banners" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'alert-banners' === $caweb_selected_tab ? ' show' : ''; ?>" id="alert-banners" data-parent="#caweb-settings">
     <div class="form-row">
         <div class="form-group">
             <h2 class="d-inline">Create an Alert Banner </h2>
