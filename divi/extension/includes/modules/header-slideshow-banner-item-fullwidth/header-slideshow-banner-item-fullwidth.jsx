@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import  CAWEeb_Component from '../component.jsx';
 

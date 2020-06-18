@@ -2,6 +2,8 @@
 // eslint-disable-next-line
 import React, {Component, Fragment} from 'react';
 import NumberFormat from 'react-number-format';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 class CAWeb_Component extends Component {
 	
@@ -115,6 +117,51 @@ class CAWeb_Component extends Component {
 			<span style={styles} className={"ca-gov-icon-" + icon_name + classes}></span>
 			</Fragment> 
 		);		
+	}
+
+	/**
+	 *  PHP formatting using https://wordpress.org/support/article/formatting-date-and-time/
+	 *  React formatting using https://momentjs.com/docs/#/parsing/string-format/
+	 * 
+	 */
+	caweb_format_date( d, pattern = ''){
+
+		/*
+		 Patterns are inputted in PHP format, 
+		 and must be replaced with their respective React format.
+		*/
+		if( ! moment(d).isValid() ){
+			return d;
+		}
+		// Day of Month.
+		// This replace is temporary so that it doesn't get overwritten by the weekday replacement
+		pattern = pattern.replace(/d/g, 'zz');
+		pattern = pattern.replace(/j/g, 'z');
+
+		// Weekday.
+		pattern = pattern.replace(/l/g, 'dddd');
+		pattern = pattern.replace(/D/g, 'ddd');
+
+		// This replaces the temporary month replacement to what it should be
+		pattern = pattern.replace(/zz/g, 'DD');
+		pattern = pattern.replace(/z/g, 'D');
+
+		// Month.
+		pattern = pattern.replace(/M/g, 'MMM');
+		pattern = pattern.replace(/F/g, 'MMMM');
+		pattern = pattern.replace(/m/g, 'MM');
+		pattern = pattern.replace(/n/g, 'M');
+
+		// Time.
+		pattern = pattern.replace(/g/g, 'h');
+		pattern = pattern.replace(/i/g, 'mm');
+		pattern = pattern.replace(/s/g, 'ss');
+
+		// Year.
+		pattern = pattern.replace(/Y/g, 'gggg');
+		pattern = pattern.replace(/y/g, 'gg');
+
+		return(<Moment format={pattern} >{d}</Moment>);
 	}
 	
 }

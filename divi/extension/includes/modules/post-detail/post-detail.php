@@ -187,7 +187,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'M d, Y',
@@ -385,7 +385,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -454,7 +454,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -617,7 +617,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -657,7 +657,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -847,7 +847,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -887,7 +887,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -1135,7 +1135,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'M d, Y',
@@ -1231,7 +1231,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 				'description'     => et_get_safe_localization(
 					sprintf(
 						'For formatting help visit <a href="%1$s" target="_blank" title="Formatting Date and Time">Formatting Date and Time</a>',
-						esc_url( 'https://codex.wordpress.org/Formatting_Date_and_Time' )
+						esc_url( 'https://wordpress.org/support/article/formatting-date-and-time/' )
 					)
 				),
 				'default'         => 'D, n/j/Y g:i a',
@@ -1564,7 +1564,6 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 			! empty( $course_end_date ) ? sprintf( ' - %1$s', $course_end_date ) : '',
 			$location
 		);
-
 		$course_registration_type = ! empty( $course_registration_type ) ? sprintf( 'Registration Type: %1$s', $course_registration_type ) : '';
 		$course_cost              = ! empty( $course_cost ) ? sprintf( 'Registration Cost: %1$s', $course_cost ) : '';
 
