@@ -294,6 +294,8 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 	public function carousel_fix() {
 		?>
 		<script>
+		$ = jQuery.noConflict();
+
 		var media_carousels = $('div[class*="<?php print esc_attr( $this->slug ); ?>_"]:not(".item")');
 
 		media_carousels.each(function(index, carousel) {

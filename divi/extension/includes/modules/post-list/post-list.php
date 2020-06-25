@@ -569,12 +569,9 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$pub = ( ! empty( $p_handler->exam_published_date ) ?
 				sprintf( '<div class="published">Published: <time>%1$s</time></div>', gmdate( 'M j, Y', strtotime( $p_handler->exam_published_date ) ) ) : '' );
 
-		$filing_date = ( ! empty( $p_handler->exam_final_filing_date_chooser ) && 'on' === $p_handler->exam_final_filing_date_chooser ?
-						sprintf( '<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate( 'n/j/Y', strtotime( $p_handler->exam_final_filing_date_picker ) ) ) :
-						sprintf(
-							'<div class="filing-date">Final Filing Date: <time>%1$s</time></div>',
-							( ! empty( $p_handler->exam_final_filing_date ) ? $p_handler->exam_final_filing_date : 'Until Filled' )
-						) );
+		$filing_date = isset( $p_handler->exam_final_filing_date_chooser ) && 'off' == $p_handler->exam_final_filing_date_chooser ?
+		sprintf( '<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', ! empty( $p_handler->exam_final_filing_date ) ? $p_handler->exam_final_filing_date : 'Until Filled' ) :
+		sprintf( '<div class="filing-date">Final Filing Date: <time>%1$s</time></div>', gmdate( 'n/j/Y', strtotime( $p_handler->exam_final_filing_date_picker ) ) );
 
 		$id     = ( ! empty( $p_handler->exam_id ) ? sprintf( '<div class="id">ID: %1$s</div>', $p_handler->exam_id ) : '' );
 		$status = ( ! empty( $p_handler->exam_status ) ? sprintf( '<div class="base">Status: %1$s</div>', $p_handler->exam_status ) : '' );

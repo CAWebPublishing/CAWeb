@@ -13,7 +13,8 @@ class CAWeb_Module_Section_Carousel_Slide extends CAWEeb_Component {
     var slide_alt_text = this.props.slide_alt_text;
 
     if( "on" === this.props.slide_show_more_button && "" !== slide_url ){
-      button = <div class={"details text-center" + "" === this.props.slide_desc ? ' mt-3' : ''}><a href={slide_url} target="_blank">{this.props.slide_title}</a></div>;
+      var button_class = "" === this.props.slide_desc ? " mt-3" : "";
+      button = <div className={"details text-center" + button_class}><a href={slide_url} target="_blank">{this.props.slide_title}</a></div>;
     }
 
     var desc = "" !== this.props.slide_desc ? <div class="details mt-3">{this.props.slide_desc}</div> : '';
