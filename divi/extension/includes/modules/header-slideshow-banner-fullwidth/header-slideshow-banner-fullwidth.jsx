@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { Fragment } from 'react';
+import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 
 import  CAWEeb_Component from '../component.jsx';
@@ -39,7 +39,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends CAWEeb_Component {
     if (undefined !== scroll_bar_text && "" !== scroll_bar_text.trim() ){
         scrollbar = <div class="explore-invite" style={ {'z-index' : '1'}}>
             <div class="text-center">
-                <a href=""><span class="explore-title">{scroll_bar_text}</span>{scroll_bar_icon}</a>
+                <a class="text-white"><span class="explore-title">{scroll_bar_text}</span>{scroll_bar_icon}</a>
             </div>
         </div>;
     }else{

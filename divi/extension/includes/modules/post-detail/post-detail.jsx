@@ -1,6 +1,7 @@
 // External Dependencies
 import React, { Fragment } from 'react';
 import  CAWEeb_Component from '../component.jsx';
+import moment from 'moment';
 
 class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 
@@ -41,8 +42,7 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 					<div id={moduleID} className={classList}>
 						{this.renderExamDetail(-1)}						
 					</div>	
-				);
-			
+				);			
 			// FAQs
 			case 'faqs':
 				return (
@@ -51,7 +51,6 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 						{this.renderFooter(-1)}
 					</article>	
 				);
-
 			// Jobs
 			case 'jobs':
 				classList += ' job-detail';
@@ -79,7 +78,6 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 						{this.renderProfileDetail(-1)}	
 					</article>	
 				);
-
 			case 'general':
 			default:
 				return (
@@ -88,7 +86,7 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 				);
 		}
 
-  }
+  	}
 	
     // Renders Course Detail Page
 	renderCourseDetail( postID ){
@@ -129,16 +127,29 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 		var course_addr = [course_address, course_city, course_state, course_zip];
 		
 		var location = "on" === show_course_address ? <Fragment><span class="ca-gov-icon-road-pin"></span>{this.caweb_get_google_map_place_link(course_addr)}</Fragment> : '';
-		
-		var course_start_date = undefined !== course_start_date ? course_start_date : '';
-		var course_end_date = undefined !== course_end_date ? ' - ' + course_end_date : '';
-			
-		var organizer = <Fragment><strong>Organizer</strong><br /><p class="date-time">{course_start_date}{course_end_date}<br />{location}</p></Fragment>;
-		
-		var course_registration_type = undefined !== course_registration_type && "" !== course_registration_type.trim() ? <Fragment>Registration Type: {course_registration_type}<br /></Fragment> : '';
-		
-		var course_cost =  undefined !== course_cost && "" !== course_cost.trim() ? `Registration Cost: ${course_cost}`  : '';
-		
+
+		if( "off" === course_start_date_format || 
+			( "on" === course_start_date_format && "" === course_start_date_custom_format.trim() ) ){
+				course_start_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		if( "off" === course_end_date_format || 
+			( "on" === course_end_date_format && "" === course_end_date_custom_format.trim() ) ){
+				course_end_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		course_start_date = undefined !== course_start_date ? this.caweb_format_date( course_start_date, course_start_date_custom_format ) : '';
+		course_end_date = undefined !== course_end_date ? this.caweb_format_date( course_end_date, course_end_date_custom_format ) : '';
+		var course_date = ! this.isEmpty(course_start_date) && ! this.isEmpty(course_end_date) ? 
+			<Fragment>{course_start_date} - {course_end_date}</Fragment> : 
+			<Fragment>{course_start_date}{course_end_date}</Fragment>;
+
+		var organizer = <Fragment><strong>Organizer</strong><br /><p class="date-time">{course_date}<br />{location}</p></Fragment>;
+
+		course_registration_type = undefined !== course_registration_type && "" !== course_registration_type.trim() ? <Fragment>Registration Type: {course_registration_type}<br /></Fragment> : '';
+
+		course_cost =  undefined !== course_cost && "" !== course_cost.trim() ? `Registration Cost: ${course_cost}`  : '';
+
 		var reg = '' !== course_registration_type || '' !== course_cost ? <p>{course_registration_type}{course_cost}</p> : '';
 
 		var course_map = "on" === show_course_map ? <div class="third">{this.caweb_get_google_map_place_link(course_addr, true)}</div> : '';
@@ -203,13 +214,26 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 
 		var location = "on" === show_event_address ? <Fragment><span class="ca-gov-icon-road-pin"></span>{this.caweb_get_google_map_place_link(event_addr)}</Fragment> : '';
 
-		event_start_date = undefined !== event_start_date ? event_start_date : '';
-		event_end_date = undefined !== event_end_date ? ' - ' + event_end_date : '';
+		if( "off" === event_start_date_format || 
+			( "on" === event_start_date_format && "" === event_start_date_custom_format.trim() ) ){
+				event_start_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		if( "off" === event_end_date_format || 
+			( "on" === event_end_date_format && "" === event_end_date_custom_format.trim() ) ){
+				event_end_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		event_start_date = undefined !== event_start_date ? this.caweb_format_date( event_start_date, event_start_date_custom_format ) : '';
+		event_end_date = undefined !== event_end_date ? this.caweb_format_date( event_end_date, event_end_date_custom_format ) : '';
+		var event_date = ! this.isEmpty(event_start_date) && ! this.isEmpty(event_end_date) ? 
+			<Fragment>{event_start_date} - {event_end_date}</Fragment> : 
+			<Fragment>{event_start_date}{event_end_date}</Fragment>;
 
 		event_organizer = undefined !== event_organizer && "" !== event_organizer ? <Fragment><strong>{event_organizer}</strong><br /></Fragment>: '';
 
-		var organizer = <Fragment>{event_organizer}<p class="date-time">{event_start_date}{event_end_date}<br />{location}</p></Fragment>;
-		
+		var organizer = <Fragment>{event_organizer}<p class="date-time">{event_date}<br />{location}</p></Fragment>;
+
 		event_registration_type =  undefined !== event_registration_type && "" !== event_registration_type ? `Registration Type: ${event_registration_type}` : '';
 
 		event_cost = undefined !== event_cost && "" !== event_cost ? `Registration Cost: ${event_cost}` : '';
@@ -237,7 +261,7 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 		// Exam Attributes
 		var exam_id = this.props.exam_id;
 		var exam_class = this.props.exam_class;
-		var exam_status = this.props.exam_status;
+		//var exam_status = this.props.exam_status;
 		var exam_published_date = this.props.exam_published_date;
 		var exam_published_date_format = this.props.exam_published_date_format;
 		var exam_published_date_custom_format = this.props.exam_published_date_custom_format;
@@ -268,18 +292,27 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 		exam_course = exam_course.length ? 
 			<Fragment>{exam_course.join(' - ', exam_course)}<br /></Fragment> : '';
 
-		//var pub_date = gmdate(exam_published_date_custom_format, strtotime($exam_published_date));
-		var pub_date = undefined !== exam_published_date && "" !== exam_published_date ? 
-			<Fragment>Published Date: {exam_published_date}<br /></Fragment> : '';
-
-		if ("on" === exam_final_filing_date_chooser) {
-			exam_final_filing_date = undefined !== exam_final_filing_date_picker && "" !== exam_final_filing_date_picker ? 
-				<Fragment>Final Filing Date: {exam_final_filing_date_picker}<br /></Fragment> : '';
-		} else {
-			exam_final_filing_date = <Fragment>Final Filing Date: {exam_final_filing_date}<br /></Fragment>;
+		if( "off" === exam_published_date_format || 
+			( "on" === exam_published_date_format && "" === exam_published_date_custom_format.trim() ) ){
+				exam_published_date_custom_format = 'D, n/j/Y g:i a';
 		}
 
-		var exam_info = <p>{exam_course}{pub_date}{exam_final_filing_date}{exam_location}</p>
+		exam_published_date = undefined !== exam_published_date  ? 
+			<Fragment>Published Date: {this.caweb_format_date( exam_published_date, exam_published_date_custom_format )}<br /></Fragment> : '';
+
+		if( "off" === exam_final_filing_date_format || 
+			( "on" === exam_final_filing_date_format && this.isEmpty(exam_final_filing_date_custom_format.trim()) ) ){
+				exam_final_filing_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		if ("on" === exam_final_filing_date_chooser ) {
+			exam_final_filing_date = undefined !== exam_final_filing_date_picker && ! this.isEmpty( exam_final_filing_date_picker ) ? 
+				<Fragment>Final Filing Date: {this.caweb_format_date(exam_final_filing_date_picker, exam_final_filing_date_custom_format)}<br /></Fragment> : '';
+		} else {
+			exam_final_filing_date = <Fragment>Final Filing Date: {this.caweb_format_date(exam_final_filing_date, exam_final_filing_date_custom_format)}<br /></Fragment>;
+		}
+
+		var exam_info = <p>{exam_course}{exam_published_date}{exam_final_filing_date}{exam_location}</p>
 
 		//$this->caweb_get_the_post_thumbnail(null, 'medium', array('class' => 'd-block mb-3'))
 		return(
@@ -336,14 +369,15 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 
 		var agency_info = "on" === show_about_agency ? <div class="entity"><strong>{job_agency_name}</strong>{agency_addr}</div> : '';
 
-		if ( ! this.isEmpty(job_posted_date) ) {
-			/*job_posted_date = gmdate(job_posted_date_custom_format, strtotime(job_posted_date));
-			d1 = date_create(gmdate('m/d/Y', strtotime(job_posted_date)));
-			d2 = date_create_from_format('m/d/Y', (new DateTime('NOW'))->format('m/d/Y'));
-			$tmp = $d1->diff($d2)->format('%a');*/
-			var days_passed = <Fragment>&mdash;<span class="fuzzy-date"> {-1} days ago</span></Fragment>;
-			job_posted_date = <div class="published">Published: <time>{job_posted_date}</time>{days_passed}</div>;
-		} 
+		if( "off" === job_posted_date_format || 
+			( "on" === job_posted_date_format && this.isEmpty(job_posted_date_custom_format.trim())  ) ){
+				job_posted_date_custom_format = 'M d, Y';
+		}
+
+		var days_passed = moment(job_posted_date).isValid() ? Math.abs( new Date() - new Date(job_posted_date)) : '';
+		days_passed = ! this.isEmpty(days_passed) ? parseInt(((days_passed/1000)/60)/1440) : '';
+		days_passed = ! this.isEmpty(days_passed) ? <Fragment>&mdash;<span class="fuzzy-date"> {days_passed} days ago</span></Fragment> : '';
+		job_posted_date = undefined !== job_posted_date ? <div class="published">Published: {this.caweb_format_date(job_posted_date, job_posted_date_custom_format )}{days_passed}</div> : '';
 
 		job_hours = ! this.isEmpty(job_hours) ? <Fragment>{job_hours}<br /></Fragment> : '';
 		job_salary_min = this.isMoney(job_salary_min, '$0.00');
@@ -362,10 +396,16 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 
 		job_ds_url = ! this.isEmpty(job_ds_url) ? <Fragment>Duty Statement (<a href={job_ds_url}>PDF</a>)<br /></Fragment> : '';
 
-		if ("on" === job_final_filing_date_chooser) {
-			job_final_filing_date = ! this.isEmpty(job_final_filing_date_picker) ? <Fragment>Final Filing Date:<time>{job_final_filing_date_picker}</time><br /></Fragment> : '';
+		if( "off" === job_final_filing_date_format || 
+		( "on" === job_final_filing_date_format && this.isEmpty(job_final_filing_date_custom_format.trim()) ) ){
+			job_final_filing_date_custom_format = 'D, n/j/Y g:i a';
+		}
+
+		if ("on" === job_final_filing_date_chooser ) {
+			job_final_filing_date = undefined !== job_final_filing_date_picker && ! this.isEmpty(job_final_filing_date_picker) ? 
+			<Fragment>Final Filing Date:<time>{this.caweb_format_date(job_final_filing_date_picker, job_final_filing_date_custom_format)}</time><br /></Fragment> : '';
 		} else {
-			job_final_filing_date = <Fragment>Final Filing Date:<time>{job_final_filing_date}</time><br /></Fragment>
+			job_final_filing_date = <Fragment>Final Filing Date:<time>{this.caweb_format_date( job_final_filing_date, job_final_filing_date_format )}</time><br /></Fragment>
 		}
 
 		var job_info = <div class="half">
@@ -445,8 +485,12 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
         var date_city  = "";
         
         if( ! this.isEmpty(news_publish_date) || ! this.isEmpty(news_author) || ! this.isEmpty(news_city) ){
-            //$news_publish_date = gmdate($news_publish_date_custom_format, strtotime($news_publish_date)));
-            news_publish_date = ! this.isEmpty(news_publish_date) ? <Fragment>Published: {news_publish_date}<br /></Fragment> : '';
+			if( "off" === news_publish_date_format || 
+			( "on" === news_publish_date_format && "" === news_publish_date_custom_format.trim() ) ){
+				news_publish_date_custom_format = 'D, n/j/Y g:i a';
+			}
+
+            news_publish_date = ! this.isEmpty(news_publish_date) ? <Fragment>Published: {this.caweb_format_date(news_publish_date, news_publish_date_custom_format)}<br /></Fragment> : '';
             news_author = ! this.isEmpty(news_author) ? <Fragment>Author: {news_author}<br /></Fragment> : '';
             news_city = ! this.isEmpty(news_city) ? news_city : '';
 
