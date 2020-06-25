@@ -124,7 +124,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 		$scroll_bar_icon = $this->caweb_get_icon_span( $scroll_bar_icon );
 
 		$scrollbar = ! empty( $scroll_bar_text ) ?
-			sprintf( '<div class="explore-invite"><div class="text-center"><a href=""><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon ) : '';
+			sprintf( '<div class="explore-invite"><div class="text-center"><a href="#"><span class="explore-title">%1$s</span>%2$s</a></div></div>', $scroll_bar_text, $scroll_bar_icon ) : '';
 
 		$content = $this->content;
 
