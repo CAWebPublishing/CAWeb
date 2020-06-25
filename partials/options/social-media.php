@@ -1,5 +1,5 @@
 <!-- Social Media Links -->
-<div class="p-2 collapse<?php print 'social-share' === $tab ? ' show' : ''; ?>" id="social-share" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'social-share' === $caweb_selected_tab ? ' show' : ''; ?>" id="social-share" data-parent="#caweb-settings">
     <div class="form-row">
         <div class="form-group">
             <h2 class="d-inline">Social Media Links</h2>

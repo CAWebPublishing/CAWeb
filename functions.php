@@ -14,7 +14,7 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR,  strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
 
 /**
@@ -156,7 +156,7 @@ function caweb_setup_theme() {
 	 */
 	$caweb_alerts = get_option( 'caweb_alerts', array() );
 
-	if ( ! empty( $caweb_alerts ) ) {
+	if ( ! empty( $caweb_alerts ) && ! headers_sent() ) {
 		foreach ( $caweb_alerts as $c => $data ) {
 			if ( ! isset( $_COOKIE[ "caweb-alert-id-$c" ] ) ) {
 				setcookie( "caweb-alert-id-$c", true );
@@ -177,9 +177,9 @@ function caweb_setup_theme() {
 		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/css/' ) ) {
 			mkdir( CAWEB_EXTERNAL_DIR . '/css/', 0777, true );
 			rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
-		}else{
-			caweb_rrmdir($old_ext_css_dir);
-			rmdir( $old_ext_css_dir);
+		} else {
+			caweb_rrmdir( $old_ext_css_dir );
+			rmdir( $old_ext_css_dir );
 		}
 	}
 
@@ -187,9 +187,9 @@ function caweb_setup_theme() {
 		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/js/' ) ) {
 			mkdir( CAWEB_EXTERNAL_DIR . '/js/', 0777, true );
 			rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
-		}else{
-			caweb_rrmdir($old_ext_js_dir);
-			rmdir( $old_ext_js_dir);
+		} else {
+			caweb_rrmdir( $old_ext_js_dir );
+			rmdir( $old_ext_js_dir );
 		}
 	}
 }

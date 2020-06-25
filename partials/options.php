@@ -5,7 +5,10 @@
  * @package CAWeb
  */
 
-$selected_tab = isset( $_POST['tab_selected'] ) || ! empty( $_POST['tab_selected'] ) ? $_POST['tab_selected'] : 'general';
+/*
+	Tab Selected
+*/
+$caweb_selected_tab = isset( $_POST['tab_selected'] ) && ! empty( $_POST['tab_selected'] ) ? $_POST['tab_selected'] : 'general';
 
 // if saving
 if ( isset( $_POST['caweb_submit'] ) ) {
@@ -14,9 +17,9 @@ if ( isset( $_POST['caweb_submit'] ) ) {
 
 // State Template Version variables
 $ver           = get_option( 'ca_site_version', 5 );
-$legacy        = 4 == $ver ? '' : 'hidden';
+$legacy        = 4 === $ver ? '' : 'hidden';
 $modern        = 5 <= $ver ? '' : 'hidden';
-$legacySchemes = caweb_color_schemes( 4 );
+$legacySchemes = caweb_color_schemes( 5 );
 $schemes       = caweb_color_schemes( 0, 'displayname' );
 
 /*
@@ -129,12 +132,7 @@ $custom_js = get_option( 'ca_custom_js', '' );
 */
 $alerts = get_option( 'caweb_alerts', array() );
 
-/*
-	Tab Selected
-*/
-$tab = isset( $_POST['tab_selected'] ) && ! empty( $_POST['tab_selected'] ) ? $_POST['tab_selected'] : 'general';
-
-// Version 4 Options (slated for removal)
+// Version 4 Options (slated for removal).
 $header_branding_alignment           = get_option( 'header_ca_branding_alignment', 'left' );
 $header_branding_background          = get_option( 'header_ca_background', '' );
 $header_branding_background_filename = ! empty( $header_branding_background ) ? substr( $header_branding_background, strrpos( $header_branding_background, '/' ) + 1 ) : '';
@@ -142,34 +140,34 @@ $header_branding_background_filename = ! empty( $header_branding_background ) ? 
 /*
 	Get User Profile Color
 */
-$user_color = caweb_get_user_color()->colors[2];
+$caweb_user_color = caweb_get_user_color()->colors[2];
 
 ?>
 <style>
 .menu-list li.list-group-item,
 .menu-list li.list-group-item:hover {
-	background-color: <?php print $user_color; ?> !important;
+	background-color: <?php print esc_attr( $caweb_user_color ); ?> !important;
 }
 .menu-list li.list-group-item:not(.selected) a {
-	color: <?php print $user_color; ?> !important;
+	color: <?php print esc_attr( $caweb_user_color ); ?> !important;
 }
 </style>
 <div class="container-fluid mt-4">
-	<form id="caweb-options-form" action="<?php print admin_url( 'admin.php?page=caweb_options' ); ?>" method="POST" enctype="multipart/form-data">
-	<input type="submit" name="caweb_options_submit" class="button button-primary mb-2" value="<?php _e( 'Save Changes' ); ?>">
+	<form id="caweb-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_options' ) ); ?>" method="POST" enctype="multipart/form-data">
+	<input type="submit" name="caweb_options_submit" class="button button-primary mb-2" value="Save Changes">
 	<div class="row">
 		<ul class="menu-list list-group list-group-horizontal">
-			<li class="list-group-item<?php print 'general' === $tab ? ' selected' : ''; ?>"><a href="#general" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'general' === $tab ? ' aria-expanded="true"' : ''; ?>>General Settings</a></li>
-			<li class="list-group-item<?php print 'social-share' === $tab ? ' selected' : ''; ?>"><a href="#social-share" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'social-share' === $tab ? ' aria-expanded="true"' : ''; ?>>Social Media Links</a></li>
-			<li class="list-group-item<?php print 'custom-css' === $tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-css' === $tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
-			<li class="list-group-item<?php print 'custom-js' === $tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-js' === $tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
-			<li class="list-group-item<?php print 'alert-banners' === $tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'alert-banners' === $tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
-			<li class="list-group-item<?php print 'document-sitemap' === $tab ? ' selected' : ''; ?>"><a href="#document-sitemap" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'document-sitemap' === $tab ? ' aria-expanded="true"' : ''; ?>>Document Map</a></li>
+			<li class="list-group-item<?php print 'general' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#general" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'general' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>General Settings</a></li>
+			<li class="list-group-item<?php print 'social-share' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#social-share" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'social-share' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Social Media Links</a></li>
+			<li class="list-group-item<?php print 'custom-css' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-css' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
+			<li class="list-group-item<?php print 'custom-js' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'custom-js' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
+			<li class="list-group-item<?php print 'alert-banners' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'alert-banners' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
+			<li class="list-group-item<?php print 'document-sitemap' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#document-sitemap" class="text-decoration-none text-white" data-toggle="collapse"<?php print 'document-sitemap' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Document Map</a></li>
 		</ul>
 	</div>
 	<div class="row pr-3">
 		<div class="col-12 bg-white border pt-2" id="caweb-settings">
-				<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print $selected_tab; ?>">
+				<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print esc_attr( $selected_tab ); ?>">
 					<?php require_once 'options/general.php'; ?>
 					<?php require_once 'options/social-media.php'; ?>
 					<?php require_once 'options/custom-css.php'; ?>
@@ -179,6 +177,6 @@ $user_color = caweb_get_user_color()->colors[2];
 				<input type="hidden" name="caweb_submit" >
 		</div>
 	</div>
-	<input type="submit" name="caweb_options_submit" class="button button-primary mt-2" value="<?php _e( 'Save Changes' ); ?>">
+	<input type="submit" name="caweb_options_submit" class="button button-primary mt-2" value="Save Changes">
 	</form>
 </div>

@@ -15,16 +15,16 @@ import CAWeb_Module_Section_Footer from './section-footer/section-footer';
 import CAWeb_Module_Section_Footer_Group from './section-footer-group/section-footer-group'; 
 
 // Fullwidth Modules
-import CAWeb_Module_Fullwidth_Header_Slideshow_Banner from './header-slideshow-banner/header-slideshow-banner-fullwidth'; 
-import CAWeb_Module_Fullwidth_Header_Slideshow_Banner_Item from './header-slideshow-banner-item/header-slideshow-banner-item-fullwidth'; 
-import CAWeb_Module_Fullwidth_Panel from './panel/panel-fullwidth';
-import CAWeb_Module_Fullwidth_Section_Primary from './section-primary/section-primary-fullwidth';
-import CAWeb_Module_Fullwidth_Section_Carousel from './section-carousel/section-carousel-fullwidth';
-import CAWeb_Module_Fullwidth_Section_Carousel_Slide from './section-carousel-slide/section-carousel-slide-fullwidth';
-import CAWeb_Module_Fullwidth_Section_Footer from './section-footer/section-footer-fullwidth';
-import CAWeb_Module_Fullwidth_Section_Footer_Group from './section-footer-group/section-footer-group-fullwidth'; 
-import CAWeb_Module_Fullwidth_Service_Tiles from './service-tiles/service-tiles-fullwidth'; 
-import CAWeb_Module_Fullwidth_Service_Tiles_Item from './service-tiles-item/service-tiles-item-fullwidth'; 
+import CAWeb_Module_Fullwidth_Header_Slideshow_Banner from './header-slideshow-banner-fullwidth/header-slideshow-banner-fullwidth'; 
+import CAWeb_Module_Fullwidth_Header_Slideshow_Banner_Item from './header-slideshow-banner-item-fullwidth/header-slideshow-banner-item-fullwidth'; 
+import CAWeb_Module_Fullwidth_Panel from './panel-fullwidth/panel-fullwidth';
+import CAWeb_Module_Fullwidth_Section_Primary from './section-primary-fullwidth/section-primary-fullwidth';
+import CAWeb_Module_Fullwidth_Section_Carousel from './section-carousel-fullwidth/section-carousel-fullwidth';
+import CAWeb_Module_Fullwidth_Section_Carousel_Slide from './section-carousel-slide-fullwidth/section-carousel-slide-fullwidth';
+import CAWeb_Module_Fullwidth_Section_Footer from './section-footer-fullwidth/section-footer-fullwidth';
+import CAWeb_Module_Fullwidth_Section_Footer_Group from './section-footer-group-fullwidth/section-footer-group-fullwidth'; 
+import CAWeb_Module_Fullwidth_Service_Tiles from './service-tiles-fullwidth/service-tiles-fullwidth'; 
+import CAWeb_Module_Fullwidth_Service_Tiles_Item from './service-tiles-item-fullwidth/service-tiles-item-fullwidth'; 
 
 export default [
   // Standard

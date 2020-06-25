@@ -1,5 +1,5 @@
 <!-- Custom JS Section -->
-<div class="p-2 collapse<?php print 'custom-js' === $tab ? ' show' : ''; ?>" id="custom-js" data-parent="#caweb-settings">
+<div class="p-2 collapse<?php print 'custom-js' === $caweb_selected_tab ? ' show' : ''; ?>" id="custom-js" data-parent="#caweb-settings">
     
     <!-- Custom Uploaded JS -->
     <div class="form-row">
