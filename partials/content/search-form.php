@@ -8,7 +8,8 @@
 			<span class="sr-only">Submit</span>
 		</button>
 		<div class="width-50 height-50 close-search-btn">
-			<button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset">
+			<!-- Some Google styles add an 'x' background image when button has 'gsc-clear-button' in the class -->
+			<button class="close-search width-50 height-50 border-0 bg-transparent pos-rel" type="reset">
 				<span class="sr-only">Close Search</span>
 				<span class="ca-gov-icon-close-mark"></span>
 			</button>
