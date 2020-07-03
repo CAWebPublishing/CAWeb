@@ -111,7 +111,7 @@ function caweb_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'caweb_settings',
 		array(
-			'title'    => 'Settings',
+			'title'    => 'General Settings',
 			'priority' => 30,
 			'panel'    => 'caweb_options',
 		)
