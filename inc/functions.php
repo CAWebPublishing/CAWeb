@@ -11,9 +11,36 @@
  * @return int
  */
 function caweb_template_version() {
-	$result = get_option( 'ca_site_version', 5 );
+	$result = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
 
 	return $result;
+}
+
+/**
+ * Returns all CAWeb State Template Versions
+ *
+ * @param boolean $include_beta Include beta versions.
+ * @return array
+ */
+function caweb_template_versions( $include_beta = true ){
+	$template_versions = CAWEB_SUPPORTED_TEMPLATE_VERSIONS;
+	
+	if( $include_beta ){
+		$template_versions = array_merge( $template_versions, CAWEB_BETA_TEMPLATE_VERSIONS );
+	}
+
+	sort( $template_versions );
+
+	return $template_versions;
+}
+
+/**
+ * Returns whether or not the Site Wide Template Version is a Beta
+ *
+ * @return boolean
+ */
+function caweb_is_beta_version(){
+	return in_array( caweb_template_version(), CAWEB_BETA_TEMPLATE_VERSIONS, true);
 }
 
 /**
@@ -38,7 +65,7 @@ function caweb_nav_menu_theme_locations() {
  */
 function caweb_get_min_file( $f, $ext = 'css' ) {
 	/* if a minified version exists load it */
-	if ( false && file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+	if ( file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f );
 	} else {
 		return CAWEB_URI . $f;
@@ -138,10 +165,7 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 			$tmp = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
 			break;
 		default:
-			$v5_schemes = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
-			$v5_5_schemes = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
-			$tmp        = array_merge( $v5_schemes, $v5_5_schemes );
-
+			$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
 			break;
 	}
 

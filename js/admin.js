@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 		$(list).append(li);
 
 		// Initialize 3rd Party Plugins after DOMs have been added
-		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
+		wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
 		
 
 		changeMade = true;
@@ -393,7 +393,7 @@ jQuery(document).ready(function($) {
 		var color_scheme_picker = $('#ca_site_color_scheme')[0];
 		var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
 
-		$(bannerColorInput).val(args.caweb_colors[color]['highlight']);
+		$(bannerColorInput).val(caweb_admin_args.caweb_colors[color]['highlight']);
 
 		$(bannerColorGroup).append(bannerColorLabel);
 		$(bannerColorGroup).append(bannerColorSmall);
@@ -779,7 +779,7 @@ jQuery(document).ready(function($) {
   var changeMade = false;
 
   $(window).on('beforeunload', function(){
-	  if( changeMade && "nav-menus.php" !== args.changeCheck)
+	  if( changeMade && "nav-menus.php" !== caweb_admin_args.changeCheck)
 			  return 'Are you sure you want to leave?';
 
   });
@@ -822,7 +822,7 @@ jQuery(document).ready(function($) {
 
   // Reset Fav Icon
   $('#resetFavIcon').click(function() {
-    var ico = args.defaultFavIcon;
+    var ico = caweb_admin_args.defaultFavIcon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
     $('input[type="text"][name="ca_fav_ico"]').val(icoName);
@@ -832,23 +832,28 @@ jQuery(document).ready(function($) {
     changeMade = true;
   });
 
-  var site_version_selector = $('#ca_site_version');
   // Toggle CSS Colorschemes
-  site_version_selector.on('change', toggle_colorschemes );
-  toggle_colorschemes();
-  function toggle_colorschemes(){
-    $('#ca_site_color_scheme option.extra').each(function(i, ele){
-      if( 5 == site_version_selector.val() ){
-        $(ele).addClass('hidden');
-      }else{
-        $(ele).removeClass('hidden');
-      }
-    });
+  $('#ca_site_version').on('change', function(e){
+    var color_scheme_picker = $('#ca_site_color_scheme');
+    var current_color = color_scheme_picker.val();
+    var new_colors = caweb_admin_args.caweb_colorschemes[$(this).val()];
 
-    if( $('#ca_site_color_scheme option:selected').hasClass('hidden') ){
-        $("#ca_site_color_scheme option:not('extra'):first-child").attr('selected', 'selected');
-    }
-  }
+    color_scheme_picker.empty();
+
+    $.each(new_colors, function(i, ele){
+      var o = document.createElement( 'OPTION' );
+    
+      $(o).val( i );
+      $(o).html( ele.displayname );
+
+      if( i === current_color ){
+        $(o).attr('selected', 'selected');
+      }
+
+      color_scheme_picker.append( o );
+    });
+  
+  });
 
   // If no Search Engine ID hide Search on Front Page Option
   $('#ca_google_search_id').on('input',function(e){

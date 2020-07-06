@@ -99,10 +99,7 @@ function caweb_display_general_settings( $is_active = false ) {
 function caweb_display_general_options() {
 	// State Template Version variables.
 	$ver            = caweb_template_version();
-	$legacy         = 4 === $ver ? '' : 'hidden';
-	$modern         = 5 <= $ver ? '' : 'hidden';
-	$legacy_schemes = caweb_color_schemes( 5 );
-	$schemes        = caweb_color_schemes( 0, 'displayname' );
+	$template_versions = caweb_template_versions();
 
 	// Fav Icon.
 	$fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
@@ -113,6 +110,7 @@ function caweb_display_general_options() {
 
 	// Color Scheme.
 	$color_scheme = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$available_schemes = caweb_color_schemes( $ver, 'displayname' );
 
 	// Show Search on FrontPage.
 	$frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false ) ? ' checked' : '';
@@ -146,8 +144,11 @@ function caweb_display_general_options() {
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
-					<option class="legacy" value="5" <?php print 5 === $ver ? 'selected="selected"' : ''; ?>>Version 5.0</option>
-					<option value="5.5" <?php print 5.5 === $ver ? 'selected="selected"' : ''; ?>>Version 5.5</option>
+				<?php
+					foreach( $template_versions as $version ) :
+				?>
+					<option value="<?php print $version; ?>"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>>Version <?php print $version; ?></option>
+				<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
@@ -217,13 +218,10 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Apply a site-wide color scheme.</small>
 				<select id="ca_site_color_scheme" name="ca_site_color_scheme" class="w-50 form-control">
 				<?php
-
-				foreach ( $schemes as $key => $data ) {
-					$class    = ! array_key_exists( $key, $legacy_schemes ) ? sprintf( ' class="extra %1$s" ', esc_attr( $modern ) ) : '';
+				foreach ( $available_schemes as $key => $data ) {
 					$selected = $key === $color_scheme ? ' selected="selected"' : '';
 					?>
 					<option value="<?php print esc_attr( $key ); ?>"
-						<?php print esc_attr( $class ); ?> 
 						<?php print esc_attr( $selected ); ?>>
 						<?php print esc_attr( $data ); ?>
 					</option>

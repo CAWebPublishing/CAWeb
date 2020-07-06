@@ -16,6 +16,9 @@ define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
 define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
+define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array(5) );
+define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array(5.5) );
 
 /**
  * Plugin API/Action Reference
@@ -521,15 +524,23 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
+		$template_versions = caweb_template_versions();
+		
+		$schemes = array();
+		foreach( $template_versions as $v ){
+			$schemes["$v"] = caweb_color_schemes( $v );
+		}
+
 		$caweb_localize_args = array(
 			'defaultFavIcon'   => caweb_default_favicon_url(),
 			'changeCheck'      => $hook,
 			'caweb_icons'      => caweb_get_icon_list( -1, '', true ),
 			'caweb_colors'     => caweb_template_colors(),
 			'tinymce_settings' => caweb_tiny_mce_settings(),
+			'caweb_colorschemes' => $schemes
 		);
 
-		wp_localize_script( 'caweb-admin-scripts', 'args', $caweb_localize_args );
+		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
