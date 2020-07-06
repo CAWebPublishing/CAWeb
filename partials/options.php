@@ -98,7 +98,7 @@ function caweb_display_general_settings( $is_active = false ) {
  */
 function caweb_display_general_options() {
 	// State Template Version variables.
-	$ver            = get_option( 'ca_site_version', 5 );
+	$ver            = caweb_template_version();
 	$legacy         = 4 === $ver ? '' : 'hidden';
 	$modern         = 5 <= $ver ? '' : 'hidden';
 	$legacy_schemes = caweb_color_schemes( 5 );
@@ -148,9 +148,6 @@ function caweb_display_general_options() {
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
 					<option class="legacy" value="5" <?php print 5 === $ver ? 'selected="selected"' : ''; ?>>Version 5.0</option>
 					<option value="5.5" <?php print 5.5 === $ver ? 'selected="selected"' : ''; ?>>Version 5.5</option>
-					<?php if ( 4 === $ver ) : ?>
-					<option class="legacy" value="4" <?php print 4 === $ver ? 'selected="selected"' : ''; ?>>Version 4.0</option>
-					<?php endif; ?>
 				</select>
 			</div>
 		</div>

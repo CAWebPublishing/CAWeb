@@ -75,7 +75,7 @@ function caweb_customize_controls_print_styles() {
  * @return void
  */
 function caweb_customize_register( $wp_customize ) {
-	$site_version = get_option( 'ca_site_version', 5 );
+	$site_version = caweb_template_version();
 
 	/* Remove Divi Customization Panels and Sections */
 	$divi_panels = array(
@@ -457,58 +457,6 @@ function caweb_customize_register( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting(
-		'header_ca_branding_alignment',
-		array(
-			'type'    => 'option',
-			'default' => get_option(
-				'header_ca_branding_alignment',
-				'left'
-			),
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'header_ca_branding_alignment',
-			array(
-				'label'               => 'Organization Logo Alignment',
-				'type'                => 'select',
-				'choices'             => array(
-					'left'   => 'Left',
-					'center' => 'Center',
-					'right'  => 'Right',
-				),
-				'section'             => 'caweb_page_header',
-				'settings'            => 'header_ca_branding_alignment',
-				'active_callback'     => 'caweb_customizer_v4_option',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'header_ca_background',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'header_ca_background', '' ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'header_ca_background',
-			array(
-				'label'           => 'Header Background Image',
-				'section'         => 'caweb_page_header',
-				'settings'        => 'header_ca_background',
-				'active_callback' => 'caweb_customizer_v4_option',
-			)
-		)
-	);
-
 	/* Google */
 	$wp_customize->add_section(
 		'caweb_google',
@@ -817,21 +765,6 @@ function caweb_customize_register( $wp_customize ) {
 	);
 
 	add_filter( 'sanitize_option_ca_custom_css', 'caweb_sanitize_option_ca_custom_css', 10, 2 );
-}
-
-/**
- * CAWeb V4 Option Check
- * Default callback used when invoking WP_Customize_Control::active().
- *
- * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
- * @param   WP_Customize_Control $customizer  WP_Customize_Control instance.
- *
- * @return bool
- */
-function caweb_customizer_v4_option( $customizer ) {
-	$manager = $customizer->manager;
-
-	return 4 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
 }
 
 /**

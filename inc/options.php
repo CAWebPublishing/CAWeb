@@ -529,7 +529,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_utility_link_3_enable',
 	);
 
-	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background' );
+	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text' );
 
 	$caweb_google_options = array(
 		'ca_google_search_id',

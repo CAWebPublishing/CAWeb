@@ -11,7 +11,7 @@
 module.exports = {
 	// CA State Template Options
 	templateVer: '5', // Minimum CA State Template Version
-	availableVers: ['4', '5', '5.5'], // Available CA State Template Versions
+	availableVers: ['5', '5.5'], // Available CA State Template Versions
 	availableColors: {
 		'delta.css' : 'Delta',
 		'eureka.css' : 'Eureka',

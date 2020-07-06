@@ -125,9 +125,6 @@ get_header();
 		.count {
 			float: left;
 		}
-	</style>
-	<?php if ( 5 <= caweb_get_page_version( get_the_ID() ) ) : ?>
-	<style>
 		.divider {
 			display: block !important;
 			width: 100%;
@@ -138,6 +135,5 @@ get_header();
 			margin: 0;
 		}
 	</style>
-	<?php endif; ?>
 	<?php get_footer(); ?>
 </body>

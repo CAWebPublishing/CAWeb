@@ -556,7 +556,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menu_column_count        = isset( $tmp['_caweb_menu_column_count'][0] ) ? $tmp['_caweb_menu_column_count'][0] : '';
 			$nav_media_img            = isset( $tmp['_caweb_menu_media_image'][0] ) ? $tmp['_caweb_menu_media_image'][0] : '';
 
-			$site_version   = get_option( 'ca_site_version', 5 );
+			$site_version   = caweb_template_version();
 			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">

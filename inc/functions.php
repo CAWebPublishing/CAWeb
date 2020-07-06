@@ -6,26 +6,12 @@
  */
 
 /**
- * Returns the Site Wide Version Setting
- * if post_id is passed will return version used by the page template.
- *
- * @param  int $post_id Post ID.
+ * Returns the Site Wide Template Version Setting
  *
  * @return int
  */
-function caweb_get_page_version( $post_id = -1 ) {
+function caweb_template_version() {
 	$result = get_option( 'ca_site_version', 5 );
-
-	switch ( get_page_template_slug( $post_id ) ) {
-		case 'page-templates/page-template-v4.php':
-			$result = 4;
-			break;
-		case 'page-templates/page-template-v5.php':
-			$result = 5;
-			break;
-		default:
-			break;
-	}
 
 	return $result;
 }
@@ -145,9 +131,6 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 	if no version provided return all colors from all versions
 	*/
 	switch ( $version ) {
-		case 4:
-			$tmp = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
-			break;
 		case 5:
 			$tmp = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
 			break;
@@ -155,10 +138,9 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 			$tmp = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
 			break;
 		default:
-			$v4_schemes = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
 			$v5_schemes = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
 			$v5_5_schemes = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
-			$tmp        = array_merge( $v4_schemes, $v5_schemes, $v5_5_schemes );
+			$tmp        = array_merge( $v5_schemes, $v5_5_schemes );
 
 			break;
 	}
