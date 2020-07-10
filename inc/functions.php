@@ -22,14 +22,19 @@ function caweb_template_version() {
  * @param boolean $include_beta Include beta versions.
  * @return array
  */
-function caweb_template_versions( $include_beta = true ){
-	$template_versions = CAWEB_SUPPORTED_TEMPLATE_VERSIONS;
-	
-	if( $include_beta ){
-		$template_versions = array_merge( $template_versions, CAWEB_BETA_TEMPLATE_VERSIONS );
+function caweb_template_versions( $include_beta = true ) {
+	$tmp = CAWEB_SUPPORTED_TEMPLATE_VERSIONS;
+	$template_versions = array();
+
+	if ( $include_beta ) {
+		$tmp = array_merge( $tmp, CAWEB_BETA_TEMPLATE_VERSIONS );
 	}
 
-	sort( $template_versions );
+	sort( $tmp );
+	
+	foreach( $tmp as $t ){
+		$template_versions["$t"] = "Version $t";
+	}
 
 	return $template_versions;
 }
@@ -39,8 +44,8 @@ function caweb_template_versions( $include_beta = true ){
  *
  * @return boolean
  */
-function caweb_is_beta_version(){
-	return in_array( caweb_template_version(), CAWEB_BETA_TEMPLATE_VERSIONS, true);
+function caweb_is_beta_version() {
+	return in_array( caweb_template_version(), CAWEB_BETA_TEMPLATE_VERSIONS, true );
 }
 
 /**
@@ -424,8 +429,8 @@ function caweb_get_user_color() {
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
 
- * @param  array $exclude HTML tags to exclude.
- * @param  array $form Whether or not to include form fields.
+ * @param  array   $exclude HTML tags to exclude.
+ * @param  boolean $form Whether or not to include form fields.
  * @return array
  */
 function caweb_allowed_html( $exclude = array(), $form = false ) {
@@ -462,8 +467,8 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 	$tags = array(
 		'div'    => array_merge( $attr, $aria, $data ),
 		'nav'    => array_merge( $attr, $aria, $data ),
-		'header'    => array_merge( $attr, $aria, $data ),
-		'footer'    => array_merge( $attr, $aria, $data ),
+		'header' => array_merge( $attr, $aria, $data ),
+		'footer' => array_merge( $attr, $aria, $data ),
 		'p'      => $attr,
 		'br'     => array(),
 		'span'   => $attr,
@@ -483,7 +488,7 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'ul'     => $attr,
 		'li'     => $attr,
 		'style'  => array(),
-		'script'  => array(),
+		'script' => array(),
 	);
 
 	// Whether to include form fields or not.

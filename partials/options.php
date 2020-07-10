@@ -145,9 +145,9 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
 				<?php
-					foreach( $template_versions as $version ) :
+					foreach( $template_versions as $version => $label ) :
 				?>
-					<option value="<?php print $version; ?>"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>>Version <?php print $version; ?></option>
+					<option value="<?php print $version; ?>"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>><?php print $label; ?></option>
 				<?php endforeach; ?>
 				</select>
 			</div>

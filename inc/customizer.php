@@ -97,9 +97,8 @@ function caweb_customize_register( $wp_customize ) {
 	$wp_customize->remove_section( 'custom_css' );
 
 	/*
-	All our sections, settings, and controls will be added here
+	All CAWeb Option sections, settings, and controls will be added here
 	*/
-	/* CAWeb Options */
 	$wp_customize->add_panel(
 		'caweb_options',
 		array(
@@ -107,166 +106,10 @@ function caweb_customize_register( $wp_customize ) {
 			'priority' => 30,
 		)
 	);
+
 	/* General Settings */
-	$wp_customize->add_section(
-		'caweb_settings',
-		array(
-			'title'    => 'General Settings',
-			'priority' => 30,
-			'panel'    => 'caweb_options',
-		)
-	);
+	caweb_customize_register_general_settings( $wp_customize );
 
-	$wp_customize->add_setting(
-		'ca_site_version',
-		array(
-			'type'    => 'option',
-			'default' => $site_version,
-		)
-	);
-
-	$versions = array( '5' => 'Version 5' );
-
-	if ( 4 === $site_version ) {
-		$versions['4'] = 'Version 4';
-	}
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_site_version',
-			array(
-				'label'      => 'State Template Version',
-				'type'       => 'select',
-				'choices'    => $versions,
-				'section'    => 'caweb_settings',
-				'settings'   => 'ca_site_version',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'ca_default_navigation_menu',
-		array(
-			'type'    => 'option',
-			'default' => get_option(
-				'ca_default_navigation_menu',
-				'megadropdown'
-			),
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_default_navigation_menu',
-			array(
-				'label'      => 'Header Menu Type',
-				'type'       => 'select',
-				'choices'    => array(
-					'megadropdown' => 'Mega Drop',
-					'dropdown'     => 'Drop Down',
-					'singlelevel'  => 'Single Level',
-				),
-				'section'    => 'caweb_settings',
-				'settings'   => 'ca_default_navigation_menu',
-			)
-		)
-	);
-
-	/* Site Color Scheme */
-	$wp_customize->add_setting(
-		'ca_site_color_scheme',
-		array(
-			'type'    => 'option',
-			'default' => get_option(
-				'ca_site_color_scheme',
-				'oceanside'
-			),
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_site_color_scheme',
-			array(
-				'label'      => 'Color Scheme',
-				'type'       => 'select',
-				'choices'    => caweb_color_schemes( 0, 'displayname' ),
-				'section'    => 'caweb_settings',
-				'settings'   => 'ca_site_color_scheme',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'ca_frontpage_search_enabled',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_frontpage_search_enabled', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_frontpage_search_enabled',
-			array(
-				'label'           => 'Show Search on Front Page',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_settings',
-				'settings'        => 'ca_frontpage_search_enabled',
-				'active_callback' => 'caweb_customizer_v5_option',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'ca_sticky_navigation',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_sticky_navigation', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_sticky_navigation',
-			array(
-				'label'           => 'Sticky Navigation',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_settings',
-				'settings'        => 'ca_sticky_navigation',
-				'active_callback' => 'caweb_customizer_v5_option',
-			)
-		)
-	);
-
-	$wp_customize->add_setting(
-		'ca_home_nav_link',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_home_nav_link', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_home_nav_link',
-			array(
-				'label'      => 'Menu Home Link',
-				'type'       => 'checkbox',
-				'section'    => 'caweb_settings',
-				'settings'   => 'ca_home_nav_link',
-			)
-		)
-	);
 
 	/* Utility Header */
 	$wp_customize->add_section(
@@ -296,7 +139,6 @@ function caweb_customize_register( $wp_customize ) {
 				'type'            => 'text',
 				'section'         => 'caweb_utility_header',
 				'settings'        => 'ca_contact_us_link',
-				'active_callback' => 'caweb_customizer_v5_option',
 			)
 		)
 	);
@@ -319,7 +161,6 @@ function caweb_customize_register( $wp_customize ) {
 				'type'            => 'checkbox',
 				'section'         => 'caweb_utility_header',
 				'settings'        => 'ca_geo_locator_enabled',
-				'active_callback' => 'caweb_customizer_v5_option',
 			)
 		)
 	);
@@ -342,7 +183,6 @@ function caweb_customize_register( $wp_customize ) {
 				'type'            => 'checkbox',
 				'section'         => 'caweb_utility_header',
 				'settings'        => 'ca_utility_home_icon',
-				'active_callback' => 'caweb_customizer_v5_option',
 			)
 		)
 	);
@@ -372,7 +212,6 @@ function caweb_customize_register( $wp_customize ) {
 					'type'            => 'text',
 					'section'         => 'caweb_utility_header',
 					'settings'        => sprintf( 'ca_utility_link_%1$s_name', $link ),
-					'active_callback' => 'caweb_customizer_v5_option',
 				)
 			)
 		);
@@ -396,7 +235,6 @@ function caweb_customize_register( $wp_customize ) {
 					'type'            => 'text',
 					'section'         => 'caweb_utility_header',
 					'settings'        => sprintf( 'ca_utility_link_%1$s', $link ),
-					'active_callback' => 'caweb_customizer_v5_option',
 				)
 			)
 		);
@@ -421,7 +259,6 @@ function caweb_customize_register( $wp_customize ) {
 					'type'            => 'checkbox',
 					'section'         => 'caweb_utility_header',
 					'settings'        => sprintf( 'ca_utility_link_%1$s_new_window', $link ),
-					'active_callback' => 'caweb_customizer_v5_option',
 				)
 			)
 		);
@@ -681,7 +518,6 @@ function caweb_customize_register( $wp_customize ) {
 					'type'            => 'checkbox',
 					'section'         => 'caweb_social_media',
 					'settings'        => sprintf( '%1$s_header', $option ),
-					'active_callback' => 'caweb_customizer_v5_option',
 				)
 			)
 		);
@@ -768,18 +604,171 @@ function caweb_customize_register( $wp_customize ) {
 }
 
 /**
- * CAWeb V5 Option Check
- * Default callback used when invoking WP_Customize_Control::active().
+ * CAWeb Register Customizer
+ * Registers CAWeb Options General Settings
+ * 
+ * @link https://developer.wordpress.org/reference/hooks/customize_register/
+ * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
  *
- * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
- * @param   WP_Customize_Control $customizer  WP_Customize_Control instance.
- *
- * @return bool
+ * @return void
  */
-function caweb_customizer_v5_option( $customizer ) {
-	$manager = $customizer->manager;
+function caweb_customize_register_general_settings( $wp_customize ){
+	$site_version = caweb_template_version();
 
-	return 5 === $manager->get_control( 'ca_site_version' )->value() ? true : false;
+	$wp_customize->add_section(
+		'caweb_settings',
+		array(
+			'title'    => 'General Settings',
+			'priority' => 30,
+			'panel'    => 'caweb_options',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'ca_site_version',
+		array(
+			'type'    => 'option',
+			'default' => $site_version,
+		)
+	);
+
+	$versions = caweb_template_versions(); 
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_site_version',
+			array(
+				'label'      => 'State Template Version',
+				'type'       => 'select',
+				'choices'    => $versions,
+				'section'    => 'caweb_settings',
+				'settings'   => 'ca_site_version',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'ca_default_navigation_menu',
+		array(
+			'type'    => 'option',
+			'default' => get_option(
+				'ca_default_navigation_menu',
+				'megadropdown'
+			),
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_default_navigation_menu',
+			array(
+				'label'      => 'Header Menu Type',
+				'type'       => 'select',
+				'choices'    => array(
+					'megadropdown' => 'Mega Drop',
+					'dropdown'     => 'Drop Down',
+					'singlelevel'  => 'Single Level',
+				),
+				'section'    => 'caweb_settings',
+				'settings'   => 'ca_default_navigation_menu',
+			)
+		)
+	);
+
+	/* Site Color Scheme */
+	$wp_customize->add_setting(
+		'ca_site_color_scheme',
+		array(
+			'type'    => 'option',
+			'default' => get_option(
+				'ca_site_color_scheme',
+				'oceanside'
+			),
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_site_color_scheme',
+			array(
+				'label'      => 'Color Scheme',
+				'type'       => 'select',
+				'choices'    => caweb_color_schemes( 0, 'displayname' ),
+				'section'    => 'caweb_settings',
+				'settings'   => 'ca_site_color_scheme',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'ca_frontpage_search_enabled',
+		array(
+			'type'      => 'option',
+			'default'   => get_option( 'ca_frontpage_search_enabled', true ),
+			'transport' => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_frontpage_search_enabled',
+			array(
+				'label'           => 'Show Search on Front Page',
+				'type'            => 'checkbox',
+				'section'         => 'caweb_settings',
+				'settings'        => 'ca_frontpage_search_enabled',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'ca_sticky_navigation',
+		array(
+			'type'      => 'option',
+			'default'   => get_option( 'ca_sticky_navigation', true ),
+			'transport' => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_sticky_navigation',
+			array(
+				'label'           => 'Sticky Navigation',
+				'type'            => 'checkbox',
+				'section'         => 'caweb_settings',
+				'settings'        => 'ca_sticky_navigation',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'ca_home_nav_link',
+		array(
+			'type'      => 'option',
+			'default'   => get_option( 'ca_home_nav_link', true ),
+			'transport' => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'ca_home_nav_link',
+			array(
+				'label'      => 'Menu Home Link',
+				'type'       => 'checkbox',
+				'section'    => 'caweb_settings',
+				'settings'   => 'ca_home_nav_link',
+			)
+		)
+	);
+
 }
 
 /**

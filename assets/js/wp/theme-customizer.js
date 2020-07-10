@@ -34,15 +34,14 @@ wp.customize( 'header_ca_branding', function( value ) {
 wp.customize( 'ca_frontpage_search_enabled', function( value ) {
 	value.bind( function( newval ) {
 		//Do stuff (newval variable contains your "new" setting data)
-    if(5 <= wp.customize._value.ca_site_version._value){
-      if( newval ){
-      	$('#head-search').addClass('featured-search'); 
-      	$('#head-search').removeClass('hidden');        
-      }else{        
-         $('#head-search').addClass('hidden'); 
-      }
+    if( newval ){
+      $('#head-search').css('top', '240px');
+      $('#head-search').addClass('featured-search'); 
+      $('#head-search').removeClass('active');
+    }else{        
+      $('#head-search').removeClass('featured-search'); 
+      $('#head-search').attr('style', ''); 
     }
-    
 	} );
 } );
 
