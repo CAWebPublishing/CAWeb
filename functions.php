@@ -524,10 +524,8 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
-		$template_versions = caweb_template_versions();
-		
 		$schemes = array();
-		foreach( $template_versions as $v ){
+		foreach( caweb_template_versions() as $v => $label ){
 			$schemes["$v"] = caweb_color_schemes( $v );
 		}
 

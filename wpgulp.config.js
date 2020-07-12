@@ -41,6 +41,9 @@ module.exports = {
 	adminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
 		'assets/scss/bootstrap.scss'
 	],
+	themeCustomizerCSS: [ // WP Theme Customizer CSS
+		'assets/scss/customizer.scss'
+	],
 	adminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/options/*.js', 
@@ -59,10 +62,10 @@ module.exports = {
 		'assets/js/a11y/divi/*.js',
 		'assets/js/a11y/*.js',
 	],
-	themeCustomizer: [ // Theme Customizer JS 
+	themeCustomizerJS: [ // Theme Customizer JS 
 		'assets/js/wp/theme-customizer.js'
 	],
-	themeCustomizerControl: [ // Theme Customizer Control JS 
+	themeCustomizerControlJS: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
 		'assets/js/wp/theme-customizer-controls.js'
 	],
