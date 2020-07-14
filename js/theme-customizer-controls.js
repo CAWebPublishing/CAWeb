@@ -31,41 +31,30 @@ jQuery(document).ready(function($) {
 });
   
 
-/**
- * CAWeb Theme Customizer Control Scripts 
- * These scripts run within the customizer controls window.
- */
+// Toggle CSS Colorscheme Options
+jQuery( document ).ready( function($) {
+	$('select[id$="ca_site_version"]').on("change", correct_colorscheme_visibility );
 
-(function() {
-  $( document ).ready( function() {
-    var api = wp.customize;
-    
-    correct_colorscheme_visibility();
-    
-    $('select[data-customize-setting-link="ca_site_version"]').on("change", correct_colorscheme_visibility );
-    
-		$('span.resetGoogleIcon').on('click', function(e){
-			var iconList = $(this).parent().parent().find('#caweb-icon-menu');
-			
-			resetIconSelect(iconList[0], true);
+	function correct_colorscheme_visibility(){
+		var color_scheme_picker = $('select[id$="ca_site_color_scheme"]');
+		var current_color = color_scheme_picker.val();
+		var new_colors = caweb_admin_args.caweb_colorschemes[$(this).val()];
+
+		color_scheme_picker.empty();
+
+		$.each(new_colors, function(i, ele){
+			var o = document.createElement( 'OPTION' );
+
+			$(o).val( i );
+			$(o).html( ele.displayname );
+
+			if( i === current_color ){
+				$(o).attr('selected', 'selected');
+			}
+
+			color_scheme_picker.append( o );
 		});
-		
-    function correct_colorscheme_visibility(){
-      var colors = 4 >= api._value.ca_site_version._value ? colorschemes.original : colorschemes.all;
-      
-      $('select[data-customize-setting-link="ca_site_color_scheme"]').find('option').remove();
-      
-       Object.keys( colors ).forEach(function(key){
-         $('select[data-customize-setting-link="ca_site_color_scheme"]').append($('<option>', {value:key, text:colors[key]}));
-       });
-       // if the selected color scheme is not a valid selectable colorscheme set to the default ('oceanside')
-       if( api._value.ca_site_color_scheme._value in colors ){
-          $('select[data-customize-setting-link="ca_site_color_scheme"] option[value="' + api._value.ca_site_color_scheme._value + '"]')[0].selected = true;
-       }else {
-         api._value.ca_site_color_scheme._value = 'oceanside';
-          $('select[data-customize-setting-link="ca_site_color_scheme"] option[value="oceanside"]')[0].selected = true;
-       }
-               
-    }
+
+	}
+
 });
-})( jQuery );

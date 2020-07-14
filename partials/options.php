@@ -98,7 +98,7 @@ function caweb_display_general_settings( $is_active = false ) {
  */
 function caweb_display_general_options() {
 	// State Template Version variables.
-	$ver            = caweb_template_version();
+	$ver = caweb_template_version();
 
 	// Fav Icon.
 	$fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
@@ -108,7 +108,7 @@ function caweb_display_general_options() {
 	$navigation_menu = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 
 	// Color Scheme.
-	$color_scheme = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$color_scheme      = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$available_schemes = caweb_color_schemes( $ver, 'displayname' );
 
 	// Show Search on FrontPage.
@@ -144,9 +144,9 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
 				<?php
-					foreach( caweb_template_versions() as $version => $label ) :
-				?>
-					<option value="<?php print $version; ?>"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>><?php print $label; ?></option>
+				foreach ( caweb_template_versions() as $version => $label ) :
+					?>
+					<option value="<?php print esc_attr( $version ); ?>"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>><?php print esc_attr( $label ); ?></option>
 				<?php endforeach; ?>
 				</select>
 			</div>
@@ -661,7 +661,9 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 	$ext_file_dir = sprintf( '%1$s/%2$s/%3$s', CAWEB_EXTERNAL_URI, $file_type, get_current_blog_id() );
 
 	// Uploaded File.
-	$ext_files = get_option( "caweb_external_$file_type", array() );
+	$ext_files             = get_option( "caweb_external_$file_type", array() );
+	$ext_file_input_name   = "caweb_external_${file_type}[]";
+	$ext_file_data_section = "custom-$file_type";
 
 	// Custom File.
 	$custom_file = get_option( "ca_custom_$file_type", '' );
@@ -687,7 +689,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 							<a href="<?php print esc_url( "$ext_file_dir/$name" ); ?>?TB_iframe=true&width=600&height=550" title="<?php print esc_attr( $name ); ?>" class="text-decoration-none thickbox dashicons dashicons-visibility preview-<?php print esc_attr( $file_type ); ?> text-success align-middle"></a>
 							<a href="<?php print esc_url( "$ext_file_dir/$name" ); ?>" download="<?php print esc_attr( $name ); ?>" title="<?php print esc_attr( $name ); ?>" class="text-decoration-none dashicons dashicons-download download-<?php print esc_attr( $file_type ); ?> align-middle"></a>
 							<a title="<?php print esc_attr( $name ); ?>" class="dashicons dashicons-dismiss remove-<?php print esc_attr( $file_type ); ?> text-danger align-middle"></a>
-							<input type="hidden" name="caweb_external_<?php print esc_attr( $file_type ); ?>[]" data-section="custom-<?php print esc_attr( $file_type ); ?>" value="<?php print esc_attr( $name ); ?>"><?php print esc_attr( $name ); ?>
+							<input type="hidden" name="<?php print esc_attr( $ext_file_input_name ); ?>" data-section="<?php print esc_attr( $ext_file_data_section ); ?>" value="<?php print esc_attr( $name ); ?>"><?php print esc_attr( $name ); ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>

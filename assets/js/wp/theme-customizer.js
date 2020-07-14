@@ -1,110 +1,6 @@
 /* CAWeb Theme Customizer Option Scripts */
-( function( $ ) {  
+jQuery( function( $ ) {  
    
-  function class_check(haystack, needle){
-   	var found = false;
-    haystack.each(function( obj ) {  
-      if(-1 < $( this ).attr("class").search(needle) ) 
-        found = true;   
-    });
-    
-    return found;
-  }
-  
-// Organization Logo Brand
-wp.customize( 'header_ca_branding', function( value ) {
-	value.bind( function( newval ) {
-		//Do stuff (newval variable contains your "new" setting data)
-    if(4 == wp.customize._value.ca_site_version._value){
-      var org_logo = document.getElementsByClassName('header-organization-banner')[0].getElementsByTagName('a')[0];
-    }else{
-      var org_logo = document.getElementsByClassName('header-cagov-logo')[0].getElementsByTagName('a')[0];
-    }
-    
-    var img = document.createElement('img');
-    img.src = newval;
-    
-    org_logo.innerHTML = '';
-    org_logo.appendChild(img);
-	} );
-} );
-  
-
-// Search on Front Page
-wp.customize( 'ca_frontpage_search_enabled', function( value ) {
-	value.bind( function( newval ) {
-		//Do stuff (newval variable contains your "new" setting data)
-    if( newval ){
-      $('#head-search').css('top', '240px');
-      $('#head-search').addClass('featured-search'); 
-      $('#head-search').removeClass('active');
-    }else{        
-      $('#head-search').removeClass('featured-search'); 
-      $('#head-search').attr('style', ''); 
-    }
-	} );
-} );
-
-// Sticky Navigation
-var current_padding = 0;
-wp.customize( 'ca_sticky_navigation', function( value ) {
-	value.bind( function( newval ) {
-    current_padding = 0 == current_padding ? $('#main-content').css('padding-top') : current_padding;
-		//Do stuff (newval variable contains your "new" setting data)
-    if(5 <= wp.customize._value.ca_site_version._value){
-      if( newval ){
-     		$('body').addClass('sticky_nav');
-      	$('#header').addClass('fixed');
-        $('#main-content').css('padding-top', current_padding);
-      }else{        
-      	$('body').removeClass('sticky_nav');
-      	$('#header').removeClass('fixed');
-        $('#main-content').css('padding-top', 0);
-      }
-    }
-    
-	} );
-} );
-  
-// Menu Home Link
-wp.customize( 'ca_home_nav_link', function( value ) {
-	value.bind( function( newval ) {
-    //Do stuff (newval variable contains your "new" setting data)
-    if( '/' == document.location.pathname ){
-      alert( "This feature is not visible on the Front Page." );
-    }else{
-      if(-1 == $('#nav_list li:first').attr("class").search('nav-item-home') )
-        $('#nav_list').prepend('<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>');
-      
-      if( newval ){
-          $('#nav_list li:first').removeClass('hidden');
-      }else{
-          $('#nav_list li:first').addClass('hidden');
-      }
-    }
-      
-      
-	} );
-} );  
-
-
-// Utility Header Home Link
-wp.customize( 'ca_utility_home_icon', function( value ) {
-	value.bind( function( newval ) {
-    var first_link = $('.utility-header:first .social-media-links li:first');
-    //Do stuff (newval variable contains your "new" setting data)
-    if(undefined !== first_link && 
-       (undefined == first_link.attr("class") || -1 == first_link.attr("class").search('utility-home-icon') ) )
-        $('.utility-header:first .social-media-links').prepend('<li class="utility-home-icon"><a href="/" title="Home" ><span class="ca-gov-icon-home"></span><span class="sr-only">Home</span></a></li>');
-    
-      if( newval ){
-          $('.utility-header:first .social-media-links li:first').removeClass('hidden');
-      }else{
-          $('.utility-header:first .social-media-links li:first').addClass('hidden');
-      }  
-      
-	} );
-} );
 
 
 // Utility Header Custom Link 1 Text
@@ -136,7 +32,6 @@ wp.customize( 'ca_utility_link_1_name', function( value ) {
 	} );
 } );
 
-  
 // Utility Header Custom Link 1 Url
 wp.customize( 'ca_utility_link_1', function( value ) {
 	value.bind( function( newval ) {
@@ -165,6 +60,7 @@ wp.customize( 'ca_utility_link_1', function( value ) {
     }
 	} );
 } );
+
 // Utility Header Custom Link 1 Target
 wp.customize( 'ca_utility_link_1_new_window', function( value ) {
 	value.bind( function( newval ) {
@@ -177,7 +73,7 @@ wp.customize( 'ca_utility_link_1_new_window', function( value ) {
 	 
 	 });
 } );
-  
+
 // Utility Header Custom Link 2 Text
 wp.customize( 'ca_utility_link_2_name', function( value ) {
 	value.bind( function( newval ) {
@@ -247,6 +143,7 @@ wp.customize( 'ca_utility_link_2', function( value ) {
     }
 	} );
 } );
+
 // Utility Header Custom Link 2 Target
 wp.customize( 'ca_utility_link_2_new_window', function( value ) {
 	value.bind( function( newval ) {
@@ -259,6 +156,7 @@ wp.customize( 'ca_utility_link_2_new_window', function( value ) {
 	 
 	 });
 } );
+
 // Utility Header Custom Link 3 Text
 wp.customize( 'ca_utility_link_3_name', function( value ) {
 	value.bind( function( newval ) {
@@ -348,61 +246,7 @@ wp.customize( 'ca_utility_link_3_new_window', function( value ) {
 	 
 	 });
 } );
-  
-// Utility Header Contact Us Link
-wp.customize( 'ca_contact_us_link', function( value ) {
-	value.bind( function( newval ) {
-    var contact_us_link = undefined;
-    // if there is not already a Contact Us Link
-    if( !class_check( $('.utility-header:first .utility-links:nth-child(1) li') , 'utility-contact-us' )){
-      // if the Contact Us Link Url is not blank add a LI to Utility Links
-      if( newval.trim()  ){ 
-        var new_link = '<li class="utility-contact-us"><a href="">Contact Us</a></li>';
-      	$( new_link ).insertBefore('.utility-header:first .utility-links:nth-child(1) .utility-settings');
-      	contact_us_link = $('.utility-header:first .utility-links:nth-child(1) .utility-contact-us a');
-      }
-    }else{
-      contact_us_link = $('.utility-header:first .utility-links:nth-child(1) .utility-contact-us a');
-    }
-    
-    if( undefined !== contact_us_link ){
-      if( newval.trim()  ){
-        contact_us_link.attr('href', newval);
-        contact_us_link.parent().removeClass('hidden');
-      }else{
-        contact_us_link.parent().addClass('hidden');
-      }  
-    }
-   
-	} );
-} );
 
-// Bind to Google Translate Custom Translate Page 
-wp.customize( 'ca_google_trans_page', function( value ) {
-	value.bind( function( newval ) {
-		
-		if( newval.trim()  ){ 
-			$('#caweb-gtrans-custom').css({'display' : 'inline-block'});
-			$('#caweb-gtrans-custom').attr('href', newval);
-		}else{
-			$('#caweb-gtrans-custom').css({'display' : 'none'});
-		}
-   
-	} );
-} );
 
-// Bind to Google Translate Custom CAWeb_Customize_Icon_Control 
-wp.customize( 'ca_google_trans_icon', function( value ) {
-	value.bind( function( newval ) {
-		var icon = $('#caweb-gtrans-custom span');
-		if( "" == newval){
-			icon.css({'display' : 'none'});	
-		}else{
-			icon.css({'display' : 'inline-block'});	
-			icon.attr( "class",  "ca-gov-icon-" + newval);
-		}
-    
-	} );
-} );
 
-} )( jQuery );
+} );

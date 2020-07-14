@@ -57,29 +57,6 @@ jQuery(document).ready(function($) {
     changeMade = true;
   });
 
-  // Toggle CSS Colorschemes
-  $('#ca_site_version').on('change', function(e){
-    var color_scheme_picker = $('#ca_site_color_scheme');
-    var current_color = color_scheme_picker.val();
-    var new_colors = caweb_admin_args.caweb_colorschemes[$(this).val()];
-
-    color_scheme_picker.empty();
-
-    $.each(new_colors, function(i, ele){
-      var o = document.createElement( 'OPTION' );
-    
-      $(o).val( i );
-      $(o).html( ele.displayname );
-
-      if( i === current_color ){
-        $(o).attr('selected', 'selected');
-      }
-
-      color_scheme_picker.append( o );
-    });
-  
-  });
-
   // If no Search Engine ID hide Search on Front Page Option
   $('#ca_google_search_id').on('input',function(e){
     var front_search_option = $('label[for="ca_frontpage_search_enabled"]').parent();

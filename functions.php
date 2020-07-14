@@ -292,6 +292,7 @@ function caweb_wp_enqueue_scripts() {
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
 	/* CAWeb Core CSS */
+	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
 	$core_css_file = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 

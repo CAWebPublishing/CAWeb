@@ -63,10 +63,10 @@ module.exports = {
 		'assets/js/a11y/*.js',
 	],
 	themeCustomizerJS: [ // Theme Customizer JS 
-		'assets/js/wp/theme-customizer.js'
+		'assets/js/wp/theme-customizer/bindings/*.js',
 	],
 	themeCustomizerControlJS: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
-		'assets/js/wp/theme-customizer-controls.js'
+		'assets/js/caweb/options/toggle-colorschemes.js',
 	],
 };
