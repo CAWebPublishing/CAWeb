@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
 		$(list).append(li);
 
 		// Initialize 3rd Party Plugins after DOMs have been added
-		wp.editor.initialize("alertmessage-" + alertCount, args.tinymce_settings);
+		wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
 		
 
 		changeMade = true;
@@ -269,7 +269,7 @@ jQuery(document).ready(function($) {
 		var color_scheme_picker = $('#ca_site_color_scheme')[0];
 		var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
 
-		$(bannerColorInput).val(args.caweb_colors[color]['highlight']);
+		$(bannerColorInput).val(caweb_admin_args.caweb_colors[color]['highlight']);
 
 		$(bannerColorGroup).append(bannerColorLabel);
 		$(bannerColorGroup).append(bannerColorSmall);

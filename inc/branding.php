@@ -126,6 +126,7 @@ function caweb_change_lost_your_password( $text ) {
  * @return string
  */
 function caweb_admin_footer_text( $text ) {
+	$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? 'Powered by: CAWeb Publishing Service | ' : '';
 
-	return 'Powered by CAWeb Publishing | ' . $text;
+	return "$powered_by$text";
 }

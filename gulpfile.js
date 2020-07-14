@@ -53,10 +53,15 @@ const notify = require( 'gulp-notify' ); // Sends message notification to you.
 
 const fs = require('fs'); // File System
 
+const del = require('del'); // Delete plugin
+
+
 /*
 	CAWeb Admin Styles
 */
 gulp.task('admin-css', parameterized( async function (_) {
+
+	del( ['css/admin*.css'] );
 
 	if ( _.params.prod ) {
 		buildAdminStyles(true);
@@ -79,6 +84,8 @@ gulp.task('admin-css', parameterized( async function (_) {
 gulp.task('frontend-css', parameterized( async function (_) {
 	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
 	
+	del( ['css/cagov-v*.css'] );
+
 	version.forEach(function(v){
 		if ( _.params.prod ) {
 			buildFrontEndStyles(true, v);
@@ -101,6 +108,8 @@ gulp.task('frontend-css', parameterized( async function (_) {
 */
 gulp.task('bootstrap-css', parameterized( async function (_) {
 
+	del( ['css/bootstrap*.css'] );
+
 	if ( _.params.prod ) {
 		buildBootStrapStyles(true);
 	}
@@ -116,9 +125,33 @@ gulp.task('bootstrap-css', parameterized( async function (_) {
 }));
 
 /*
+	CAWeb Theme Customizer Styles
+*/
+gulp.task('customizer-css', parameterized( async function (_) {
+
+	del( ['css/theme-customizer*.css'] );
+
+	if ( _.params.prod ) {
+		buildCustomizerCSS(true);
+	}
+
+	if ( _.params.dev ) {
+		buildCustomizerCSS(false);
+	}
+
+	if( buildAll(_.params) ){
+		buildCustomizerCSS(true);
+		buildCustomizerCSS(false);
+	}
+
+}));
+
+/*
 	CAWeb Admin JavaScript
 */
 gulp.task('admin-js', parameterized( async function (_) {
+
+	del( ['js/admin*.js'] );
 
 	if ( _.params.prod ) {
 		buildAdminJS(true);
@@ -140,6 +173,8 @@ gulp.task('admin-js', parameterized( async function (_) {
 gulp.task('caweb-js', parameterized( async function (_) {
 	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
 	
+	del( ['js/caweb-v*.js'] );
+
 	version.forEach(function(v){
 		if ( _.params.prod ) {
 			buildCAWebJS(true, v);
@@ -158,9 +193,11 @@ gulp.task('caweb-js', parameterized( async function (_) {
 }));
 
 /*
-	CAWeb BootStrap Admin Styles
+	CAWeb BootStrap Admin Javascript
 */
 gulp.task('bootstrap-js', parameterized( async function (_) {
+
+	del( ['js/bootstrap*.js'] );
 
 	if ( _.params.prod ) {
 		buildBootStrapJS(true);
@@ -180,6 +217,8 @@ gulp.task('bootstrap-js', parameterized( async function (_) {
 	CAWeb Theme Customizer JavaScript
 */
 gulp.task('customizer-js', parameterized( async function (_) {
+
+	del( ['js/theme-customizer*.js'] );
 
 	if ( _.params.prod ) {
 		buildCustomizerJS(true);
@@ -217,6 +256,8 @@ gulp.task('beautify', parameterized(async function(_) {
 gulp.task('build', parameterized(async function(_){
 	var version = undefined !== _.params.ver ? [ _.params.ver ] : config.availableVers;
 
+	del( ['js/*.js', 'css/*.css'] );
+	
 	if ( _.params.prod ) {
 		// Build Admin Styles
 		buildAdminStyles(true);
@@ -234,6 +275,9 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Bootstrap Styles
 		buildBootStrapStyles(true);
+
+		// Build Theme Customizer Styles
+		buildCustomizerCSS(true);
 
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(true);
@@ -260,6 +304,9 @@ gulp.task('build', parameterized(async function(_){
 
 		// Build Bootstrap Styles
 		buildBootStrapStyles(false);
+
+		// Build Theme Customizer Styles
+		buildCustomizerCSS(false);
 
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(false);
@@ -292,6 +339,10 @@ gulp.task('build', parameterized(async function(_){
 		buildBootStrapStyles(true);
 		buildBootStrapStyles(false);
 
+		// Build Theme Customizer Styles
+		buildCustomizerCSS(true);
+		buildCustomizerCSS(false);
+
 		// Build Admin Bootstrap JS
 		buildBootStrapJS(true);
 		buildBootStrapJS(false);
@@ -309,6 +360,8 @@ gulp.task('build', parameterized(async function(_){
 async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
+	var t = minified ? ' Minified' : '';
+	t = '✅  CAWeb Admin Styles' + t;
 
 	if( ! config.adminCSS.length )
 		return;
@@ -321,7 +374,7 @@ async function buildAdminStyles( min = false){
 		)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.css')) // compiled file
-		.pipe( notify({ title: '✅  CAWeb Admin Styles', message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) )
 		.pipe(gulp.dest('./css/'));
 }
 
@@ -379,6 +432,27 @@ async function buildBootStrapStyles( min = false ){
 		)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('bootstrap' + minified + '.css')) // compiled file
+		.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		.pipe(gulp.dest('./css/'));
+}
+
+async function buildCustomizerCSS( min = false ){
+	var buildOutputStyle = min ? 'compressed' : 'expanded';
+	var minified = min ? '.min' : '';
+	var t = minified ? ' Minified' : '';
+	t = '✅  CAWeb Theme Customizer Styles' + t;
+
+	if( ! config.themeCustomizerCSS.length )
+		return;
+
+	return gulp.src(config.themeCustomizerCSS)
+		.pipe(
+			sass({
+				outputStyle: buildOutputStyle,
+			})
+		)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('theme-customizer' + minified + '.css')) // compiled file
 		.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) )
 		.pipe(gulp.dest('./css/'));
 }
@@ -453,16 +527,17 @@ async function buildCAWebJS( min = false, ver = config.templateVer){
 async function buildCustomizerJS( min = false){
 	var minified = min ? '.min' : '';
 	var t = minified ? ' Minified' : '';
-	t = '✅  CAWeb Customizer JavaScript' + t;
+	var t1 = '✅  CAWeb Theme Customizer JavaScript' + t;
+	var t2 = '✅  CAWeb Theme Customizer Controls JavaScript' + t;
 
-	if( ! config.themeCustomizer.length )
+	if( ! config.themeCustomizerJS.length )
 		return;
 
 	// Theme Customizer
-	let js = gulp.src(config.themeCustomizer)
+	let js = gulp.src(config.themeCustomizerJS)
 		.pipe( lineec() )
 		.pipe(concat('theme-customizer' + minified + '.js')) // compiled file
-		.pipe( notify({ title: t, message: '<%= file.relative %> was created successfully.', onLast: true }) )
+		.pipe( notify({ title: t1, message: '<%= file.relative %> was created successfully.', onLast: true }) )
 		 // Consistent Line Endings for non UNIX systems.
 
 	if( min ){
@@ -472,9 +547,10 @@ async function buildCustomizerJS( min = false){
 	js = js.pipe(gulp.dest('./js/'));
 
 	// Theme Customizer Controls
-	js = gulp.src(config.themeCustomizerControl)
+	js = gulp.src(config.themeCustomizerControlJS)
 		.pipe( lineec() )
-		.pipe(concat('theme-customizer-controls' + minified + '.js'));
+		.pipe(concat('theme-customizer-controls' + minified + '.js'))
+		.pipe( notify({ title: t2, message: '<%= file.relative %> was created successfully.', onLast: true }) );
 
 	if( min ){
 		js = js.pipe(uglify());
@@ -496,6 +572,7 @@ gulp.task('dev', parameterized.series(
 	'admin-css --dev', 
 	'frontend-css --dev', 
 	'bootstrap-css --dev', 
+	'customizer-css --dev',
 	'admin-js --dev', 
 	'caweb-js --dev', 
 	'bootstrap-js --dev', 
@@ -508,6 +585,7 @@ gulp.task('prod', parameterized.series(
 	'admin-css --prod', 
 	'frontend-css --prod', 
 	'bootstrap-css --prod', 
+	'customizer-css --prod',
 	'admin-js --prod', 
 	'caweb-js --prod', 
 	'bootstrap-js --prod',

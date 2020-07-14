@@ -28,31 +28,35 @@ foreach ( $caweb_options as $caweb_name ) {
 }
 
 /**
- * caweb_wpse_custom_menu_order
+ * This filter is used to switch menu order.
  *
- * @param  mixed $menu_ord
- * @return void
+ * @see https://codex.wordpress.org/Plugin_API/Filter_Reference/custom_menu_order
+ * @see https://codex.wordpress.org/Plugin_API/Filter_Reference/menu_order
+ * @param  mixed $menu_ord Whether custom ordering is enabled. Default false.
+ * @return array|boolean
  */
 function caweb_wpse_custom_menu_order( $menu_ord ) {
-    if ( !$menu_ord ) return true;
+	if ( ! $menu_ord ) {
+		return true;
+	}
 
-    return array(
-		'index.php', // Dashboard
-		'caweb_options', // CAWeb Options
-        'separator1', // First separator
-        'edit.php', // Posts
-        'upload.php', // Media
-        'link-manager.php', // Links
-        'edit-comments.php', // Comments
-        'edit.php?post_type=page', // Pages
-        'separator2', // Second separator
-        'themes.php', // Appearance
-        'plugins.php', // Plugins
-        'users.php', // Users
-        'tools.php', // Tools
-        'options-general.php', // Settings
-        'separator-last', // Last separator
-    );
+	return array(
+		'index.php', // Dashboard.
+		'caweb_options', // CAWeb Options.
+		'separator1', // First separator.
+		'edit.php', // Posts.
+		'upload.php', // Media.
+		'link-manager.php', // Links.
+		'edit-comments.php', // Comments.
+		'edit.php?post_type=page', // Pages.
+		'separator2', // Second separator.
+		'themes.php', // Appearance.
+		'plugins.php', // Plugins.
+		'users.php', // Users.
+		'tools.php', // Tools.
+		'options-general.php', // Settings.
+		'separator-last', // Last separator.
+	);
 }
 
 /**
@@ -90,8 +94,8 @@ function caweb_admin_menu() {
 			/* GitHub API Key */
 			add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 		}
-		
-	/* Else single site instance */
+
+		/* Else single site instance */
 	} else {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
@@ -105,7 +109,7 @@ function caweb_admin_menu() {
  * @link https://developer.wordpress.org/reference/hooks/admin_menu/
  * @return void
  */
-function caweb_remove_admin_menus(){
+function caweb_remove_admin_menus() {
 	global $submenu;
 
 	/* If Multisite instance & user is not a Network Admin */
@@ -134,7 +138,7 @@ function caweb_remove_admin_menus(){
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
 		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
-	} 
+	}
 }
 
 /**
@@ -145,8 +149,8 @@ function caweb_remove_admin_menus(){
  */
 function caweb_load_themes_tools() {
 	$plugin_menus = array( '404pagesettings' );
-
-	$allowed = isset( $_GET['page'] ) && in_array( $_GET['page'], $plugin_menus, true );
+	$nonce        = wp_create_nonce( 'caweb_load_themes_tools' );
+	$allowed      = wp_verify_nonce( $nonce, 'caweb_load_themes_tools' ) && isset( $_GET['page'] ) && in_array( $_GET['page'], $plugin_menus, true );
 
 	if ( $allowed || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
 		wp_safe_redirect( get_admin_url() );
@@ -250,8 +254,45 @@ function caweb_option_page() {
  * @return void
  */
 function caweb_api_menu_option_setup() {
-	/* The actual menu file */
-	get_template_part( 'partials/options/api' );
+	// if saving.
+	if ( isset( $_POST['caweb_api_options_submit'], $_POST['caweb_theme_api_options_nonce'] ) &&
+	wp_verify_nonce( sanitize_key( $_POST['caweb_theme_api_options_nonce'] ), 'caweb_theme_api_options' ) ) {
+		caweb_save_multi_ga_options( $_POST, $_FILES );
+	}
+
+	// CAWeb API Nonce.
+	$caweb_nonce      = wp_create_nonce( 'caweb_theme_api_options' );
+	$privated_enabled = get_site_option( 'caweb_private_theme_enabled', false ) ? ' checked' : '';
+	$username         = get_site_option( 'caweb_username', 'CA-CODE-Works' );
+	$password         = get_site_option( 'caweb_password', '' );
+	?>
+	<form id="caweb-api-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_api' ) ); ?>" method="POST">
+		<input type="hidden" name="caweb_theme_api_options_nonce" value="<?php print esc_attr( $caweb_nonce ); ?>" />
+		<h2>GitHub API Key</h2>
+		<div class="form-row">
+			<div class="form-group col-sm-5">
+				<label for="caweb_private_theme_enabled">Is Private?</label>
+				<input type="checkbox" name="caweb_private_theme_enabled" class="form-control" size="50"<?php print esc_attr( $privated_enabled ); ?>/>
+				<small class="text-muted d-block">Is this theme hosted as a private repo?</small>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-sm-5">
+				<label for="caweb_username" class="d-block mb-0">Username</label>
+				<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
+				<input type="text" name="caweb_username" class="form-control" size="50" value="<?php print esc_attr( $username ); ?>" placeholder="Default: CA-CODE-Works" />
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-sm-5">
+				<label for="caweb_password" class="d-block mb-0">Token</label>
+				<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
+				<input type="password" class="form-control" name="caweb_password" size="50" value="<?php print esc_attr( $password ); ?>" />
+			</div>
+		</div>
+		<input type="submit" name="caweb_api_options_submit" id="submit" class="button button-primary" value="Save Changes" />
+	</form>
+	<?php
 }
 
 /**
@@ -260,8 +301,29 @@ function caweb_api_menu_option_setup() {
  * @return void
  */
 function caweb_multi_ga_menu_option_setup() {
-	/* The actual menu file */
-	get_template_part( 'partials/options/multi', 'ga' );
+	// if saving.
+	if ( isset( $_POST['caweb_multi_ga_options_submit'], $_POST['caweb_theme_multisite_ga_option_nonce'] ) &&
+	wp_verify_nonce( sanitize_key( $_POST['caweb_theme_multisite_ga_option_nonce'] ), 'caweb_theme_multisite_ga_option' ) ) {
+		caweb_save_multi_ga_options( $_POST, $_FILES );
+	}
+
+	// CAWeb Multisite Google Analytics Nonce.
+	$caweb_nonce = wp_create_nonce( 'caweb_theme_multisite_ga_option' );
+	$mulit_ga    = get_site_option( 'caweb_multi_ga', '' );
+
+	?>
+	<form id="caweb-multi-ga-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_multi_ga' ) ); ?>" method="POST">
+		<input type="hidden" name="caweb_theme_multisite_ga_option_nonce" value="<?php print esc_attr( $caweb_nonce ); ?>" />
+		<h2>Multisite Google Analytics</h2>
+		<div class="form-row">
+			<div class="form-group col-sm-5">
+				<label for="caweb_multi_ga" class="d-block mb-0">Analytics ID</label>
+				<input type="text" name="caweb_multi_ga" class="form-control" size="50" value="<?php print esc_attr( $mulit_ga ); ?>" />
+			</div>
+		</div>
+		<input type="submit" name="caweb_multi_ga_options_submit" id="submit" class="button button-primary" value="Save Changes" />
+	</form>
+	<?php
 }
 
 /**
@@ -467,7 +529,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_utility_link_3_enable',
 	);
 
-	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text', 'header_ca_branding_alignment', 'header_ca_background' );
+	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text' );
 
 	$caweb_google_options = array(
 		'ca_google_search_id',

@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
   var changeMade = false;
 
   $(window).on('beforeunload', function(){
-	  if( changeMade && "nav-menus.php" !== args.changeCheck)
+	  if( changeMade && "nav-menus.php" !== caweb_admin_args.changeCheck)
 			  return 'Are you sure you want to leave?';
 
   });
@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 
   // Reset Fav Icon
   $('#resetFavIcon').click(function() {
-    var ico = args.defaultFavIcon;
+    var ico = caweb_admin_args.defaultFavIcon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
     $('input[type="text"][name="ca_fav_ico"]').val(icoName);
@@ -56,24 +56,6 @@ jQuery(document).ready(function($) {
 
     changeMade = true;
   });
-
-  var site_version_selector = $('#ca_site_version');
-  // Toggle CSS Colorschemes
-  site_version_selector.on('change', toggle_colorschemes );
-  toggle_colorschemes();
-  function toggle_colorschemes(){
-    $('#ca_site_color_scheme option.extra').each(function(i, ele){
-      if( 5 == site_version_selector.val() ){
-        $(ele).addClass('hidden');
-      }else{
-        $(ele).removeClass('hidden');
-      }
-    });
-
-    if( $('#ca_site_color_scheme option:selected').hasClass('hidden') ){
-        $("#ca_site_color_scheme option:not('extra'):first-child").attr('selected', 'selected');
-    }
-  }
 
   // If no Search Engine ID hide Search on Front Page Option
   $('#ca_google_search_id').on('input',function(e){

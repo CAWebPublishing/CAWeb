@@ -11,7 +11,7 @@
 module.exports = {
 	// CA State Template Options
 	templateVer: '5', // Minimum CA State Template Version
-	availableVers: ['4', '5', '5.5'], // Available CA State Template Versions
+	availableVers: ['5', '5.5'], // Available CA State Template Versions
 	availableColors: {
 		'delta.css' : 'Delta',
 		'eureka.css' : 'Eureka',
@@ -41,6 +41,9 @@ module.exports = {
 	adminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
 		'assets/scss/bootstrap.scss'
 	],
+	themeCustomizerCSS: [ // WP Theme Customizer CSS
+		'assets/scss/customizer.scss'
+	],
 	adminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/options/*.js', 
@@ -59,11 +62,11 @@ module.exports = {
 		'assets/js/a11y/divi/*.js',
 		'assets/js/a11y/*.js',
 	],
-	themeCustomizer: [ // Theme Customizer JS 
-		'assets/js/wp/theme-customizer.js'
+	themeCustomizerJS: [ // Theme Customizer JS 
+		'assets/js/wp/theme-customizer/bindings/*.js',
 	],
-	themeCustomizerControl: [ // Theme Customizer Control JS 
+	themeCustomizerControlJS: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
-		'assets/js/wp/theme-customizer-controls.js'
+		'assets/js/caweb/options/toggle-colorschemes.js',
 	],
 };

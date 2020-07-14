@@ -11,7 +11,7 @@
 wp_nav_menu(
 	array(
 		'theme_location' => 'footer-menu',
-		'version'        => caweb_get_page_version( get_the_ID() ),
+		'version'        => caweb_template_version(),
 	)
 );
 

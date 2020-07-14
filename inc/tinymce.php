@@ -33,7 +33,7 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 		includes_url( '/js/tinymce/skins/wordpress/wp-content.css' ),
 	);
 
-	$version     = caweb_get_page_version( get_the_ID() );
+	$version     = caweb_template_version();
 	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
 	$css[]       = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
 
