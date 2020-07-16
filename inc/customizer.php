@@ -20,7 +20,15 @@ add_action( 'customize_register', 'caweb_customize_register' );
  * @return void
  */
 function caweb_customize_preview_init() {
-	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
+	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), CAWEB_VERSION, true );
+	
+	wp_localize_script(
+		'caweb-customizer-script',
+		'caweb_admin_args',
+		array(
+			'caweb_alert_count' => count( get_option( 'caweb_alerts', array() ) )
+		)
+	);
 
 	wp_enqueue_script( 'caweb-customizer-script' );
 
@@ -41,24 +49,33 @@ function caweb_customize_controls_enqueue_scripts() {
 	$customizer_css = caweb_get_min_file( '/css/theme-customizer.css' );
 
 	wp_enqueue_style( 'caweb-bootstrap-styles', $bootstrap_css, array(), CAWEB_VERSION );
+	wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 	wp_enqueue_style( 'caweb-customizer-styles', $customizer_css, array(), CAWEB_VERSION );
 
-	wp_register_script( 'caweb-customize-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), wp_get_theme( 'CAWeb' )->get( 'Version' ), true );
-
+	wp_register_script( 'caweb-customizer-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), CAWEB_VERSION, true );
+	
 	$schemes = array();
 	foreach( caweb_template_versions() as $v => $label ){
 		$schemes["$v"] = caweb_color_schemes( $v );
 	}
 
 	wp_localize_script(
-		'caweb-customize-controls-script',
+		'caweb-customizer-controls-script',
 		'caweb_admin_args',
 		array(
 			'caweb_colorschemes' => $schemes
 		)
 	);
 
-	wp_enqueue_script( 'caweb-customize-controls-script' );
+	wp_enqueue_script( 'caweb-customizer-bootstrap-scripts', caweb_get_min_file( '/js/bootstrap.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, true );
+	wp_enqueue_script( 'caweb-customizer-controls-script' );
+
+	/*
+	Bootstrap 4 Toggle
+	https://gitbrent.github.io/bootstrap4-toggle/
+	*/
+	wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
+
 }
 
 /**
@@ -128,11 +145,13 @@ function caweb_customize_register( $wp_customize ) {
 	caweb_customize_register_social_media_settings( $wp_customize );
 
 	// Custom CSS.
-	caweb_customize_register_custom_file_settings( $wp_customize );
+	//caweb_customize_register_custom_file_settings( $wp_customize );
 
 	// Custom JS.
-	caweb_customize_register_custom_file_settings( $wp_customize, 'js' );
+	//caweb_customize_register_custom_file_settings( $wp_customize, 'js' );
 
+	// Alert Banners
+	//caweb_customize_register_alert_banner_settings( $wp_customize );
 }
 
 /**
@@ -682,6 +701,7 @@ function caweb_customize_register_google_settings( $wp_customize ){
 			$wp_customize,
 			'ca_google_trans_icon',
 			array(
+				'label'           => 'Icon',
 				'section'         => 'caweb_google',
 				'active_callback' => 'caweb_customizer_google_trans_custom_option',
 			)
@@ -837,6 +857,7 @@ function caweb_customize_register_social_media_settings( $wp_customize ){
  * @todo Enable Upload of CSS/JS files.
  * @link https://developer.wordpress.org/reference/hooks/customize_register/
  * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
+ * @param  string $file_type File type to control..
  *
  * @return void
  */
@@ -897,7 +918,93 @@ function caweb_customize_register_custom_file_settings( $wp_customize, $file_typ
 		)
 	);
 
-	add_filter( "sanitize_option_ca_custom_$file_type", 'caweb_sanitize_ca_custom_files', 10, 2 );
+}
+
+/**
+ * CAWeb Register Customizer
+ * Registers CAWeb Options Alert Banner Settings
+ * 
+ * @link https://developer.wordpress.org/reference/hooks/customize_register/
+ * @param  WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
+ *
+ * @return void
+ */
+function caweb_customize_register_alert_banner_settings( $wp_customize ){
+
+	$wp_customize->add_section(
+		'caweb_alert_banners',
+		array(
+			'title'    => "Alert Banners",
+			'priority' => 30,
+			'panel'    => 'caweb_options',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'caweb_add_alert_banner',
+		array(
+			'type'    => 'option',
+			'default' => 'New Banner'
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'caweb_add_alert_banner',
+			array(
+				'type'       => 'button',
+				'section'    => 'caweb_alert_banners',
+				'input_attrs' => array(
+					'class' => 'button button-primary',
+				),
+			)
+		)
+	);
+
+	// This is the sample alert banner which all new banners are created from
+	$wp_customize->add_setting( 'caweb_alert_banner_sample' );
+
+	$wp_customize->add_control(
+		new CAWeb_Customize_Alert_Banner_Control(
+			$wp_customize,
+			'caweb_alert_banner_sample',
+			array(
+				'section'    => 'caweb_alert_banners',
+				'is_expanded' => true
+			)
+		)
+	);
+
+	// Add a setting per alert banner
+	$caweb_alerts = get_option( 'caweb_alerts', array() );
+
+	foreach( $caweb_alerts as $a => $alert ){
+		// Alert Setting
+		$wp_customize->add_setting( "caweb_alert_banner_$a", array( 'type' => 'option', 'transport' => 'postMessage' ) );
+
+		// Alert Control
+		$wp_customize->add_control(
+			new CAWeb_Customize_Alert_Banner_Control(
+				$wp_customize,
+				"caweb_alert_banner_$a",
+				array(
+					'section'    => 'caweb_alert_banners',
+					'header' => $alert['header'],
+					'message' => $alert['message'],
+					'display_on' => $alert['page_display'],
+					'banner_color' => $alert['color'],
+					'read_more' => $alert['button'],
+					'read_more_text' => $alert['text'],
+					'read_more_url' => $alert['url'],
+					'read_more_target' => $alert['target'],
+					'icon' => $alert['icon'],
+					'active' => $alert['status'],
+				)
+			)
+		);
+		
+	}
 
 }
 
@@ -943,18 +1050,4 @@ function caweb_customizer_google_trans_custom_option( $customizer ) {
  */
 function caweb_sanitize_customizer_checkbox( $checked ) {
 	return ( isset( $checked ) && true === $checked ) ? '1' : '0';
-}
-
-/**
- * CAWeb Sanitize Callback for Custom CSS Option
- * Default sanitize callback used when invoking WP_Customize_Control::active().
- *
- * @link https://developer.wordpress.org/reference/classes/wp_customize_control/active_callback/
- * @param   string $value CAWeb Custom CSS.
- * @param   string $option CAWeb Option Name.
- *
- * @return bool
- */
-function caweb_sanitize_ca_custom_files( $value, $option ) {
-	return addslashes( $value );
 }

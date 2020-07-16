@@ -70,7 +70,7 @@ function caweb_nav_menu_theme_locations() {
  */
 function caweb_get_min_file( $f, $ext = 'css' ) {
 	/* if a minified version exists load it */
-	if ( file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+	if ( false && file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f );
 	} else {
 		return CAWEB_URI . $f;
@@ -459,9 +459,19 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'aria-haspopup'   => array(),
 	);
 
+	// Some of these are used by Bootstrap 4 Toggle Plugin.
+	// https://gitbrent.github.io/bootstrap4-toggle/#api.
 	$data = array(
 		'data-toggle' => array(),
 		'data-target' => array(),
+		'data-on' => array(),
+		'data-off' => array(),
+		'data-onstyle' => array(),
+		'data-offstyle' => array(),
+		'data-size' => array(),
+		'data-style' => array(),
+		'data-width' => array(),
+		'data-height' => array(),
 	);
 
 	$tags = array(
