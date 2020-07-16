@@ -11,18 +11,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	 * CAWeb_Customize_Icon_Control
 	 */
 	class CAWeb_Customize_Icon_Control extends WP_Customize_Control {
-
-		/**
-		 * Label for the Icon Menu
-		 *
-		 * @var $label Icon Menu Label Text.
-		 */
-		public $label = 'Icon';
-
-		public function __construct( $manager, $id, $args = array() ) {
-			parent::__construct( $manager, $id, $args );
-		}
-
 		/**
 		 * Render the CAWeb Icon Menu.
 		 *
@@ -33,13 +21,13 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			print wp_kses(
 				caweb_icon_menu(
 					array(
-						'select' => $this->value(),
-						'name'   => $this->id,
-						'header' => $this->label,
-						'header_class' => array('customize-control-title', 'd-inline'),
+						'select'       => $this->value(),
+						'name'         => $this->id,
+						'header'       => $this->label,
+						'header_class' => array( 'customize-control-title', 'd-inline' ),
 					)
 				),
-				caweb_allowed_html( array(),true )
+				caweb_allowed_html( array(), true )
 			);
 		}
 	}
