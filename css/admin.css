@@ -161,6 +161,23 @@ body.login .caweb-disclaimer {
   display: none !important;
 }
 
+li[id="customize-control-caweb_alert_banner_sample"] {
+  display: none !important;
+}
+
+.caweb-toggle-alert {
+  cursor: pointer;
+}
+
+li[id^="customize-control-ca_utility_link_"][id$="new_window"] {
+  margin-bottom: 15px !important;
+}
+
+li[id^="customize-control-caweb_alert_banner_"] input[type="radio"],
+li[id^="customize-control-caweb_alert_banner_"] input[type="checkbox"] {
+  height: 1rem;
+}
+
 /*
  Bootstrap Overrides, these are added only because the 
  WordPress load-styles.php loads before our CSS.
