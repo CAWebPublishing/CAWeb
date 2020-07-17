@@ -30,14 +30,18 @@
     float: left;
 }
 
+.single.divi_builder #non_divi_sidebar{
+	display: none;
+}
+
 #non_divi_sidebar{
 	float: left;
-  width: 25%;
+	width: 25%;
 }
 
 #non_divi_sidebar #sidebar{
-padding: 28px 0px ;
-width: 100%;
+	padding: 28px 0px ;
+	width: 100%;
 }
 
 .archive .main-content article{
