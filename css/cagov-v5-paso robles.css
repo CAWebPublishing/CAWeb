@@ -27190,6 +27190,10 @@ p {
   float: left;
 }
 
+.single.divi_builder #non_divi_sidebar {
+  display: none;
+}
+
 #non_divi_sidebar {
   float: left;
   width: 25%;
