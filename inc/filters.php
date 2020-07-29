@@ -45,7 +45,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$whitelist = array(
 			( $divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder' ),
 			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
-			sprintf( 'v%1$s', caweb_get_page_version( $post->ID ) ),
+			sprintf( 'v%1$s', caweb_template_version() ),
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
 	}
@@ -88,10 +88,6 @@ function caweb_post_class( $classes ) {
 function caweb_theme_page_templates( $templates ) {
 	/* Remove Divi Blank Page Template */
 	unset( $templates['page-template-blank.php'] );
-
-	if ( 5 <= get_option( 'ca_site_version', 5 ) ) {
-		unset( $templates['page-templates/page-template-v4.php'] );
-	}
 
 	return $templates;
 }

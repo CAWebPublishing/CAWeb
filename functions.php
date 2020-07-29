@@ -16,6 +16,9 @@ define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
 define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
+define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array(5) );
+define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array(5.5) );
 
 /**
  * Plugin API/Action Reference
@@ -284,11 +287,12 @@ function caweb_wp_enqueue_scripts() {
 	$cwes        = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
 	$verified    = isset( $cwes ) && wp_verify_nonce( sanitize_key( $cwes ), 'caweb_wp_enqueue_scripts' );
 	$vb_enabled  = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
-	$ver         = caweb_get_page_version( get_the_ID() );
+	$ver         = caweb_template_version();
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
 	/* CAWeb Core CSS */
+	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
 	$core_css_file = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
@@ -354,7 +358,7 @@ function caweb_wp_enqueue_scripts() {
 		/* Geo Locator */
 		$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
 
-		if ( 5 <= $ver && $ca_geo_locator_enabled ) {
+		if ( $ca_geo_locator_enabled ) {
 			$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
 			wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
 		}
@@ -379,8 +383,6 @@ function caweb_late_wp_enqueue_scripts() {
 	if ( $vb_enabled ) {
 		return;
 	}
-
-	$ver = caweb_get_page_version( get_the_ID() );
 
 	/* External JS */
 	$ext_js = array_values( array_filter( get_option( 'caweb_external_js', array() ) ) );
@@ -503,7 +505,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$admin_css     = caweb_get_min_file( '/css/admin.css' );
 	$bootstrap_css = caweb_get_min_file( '/css/bootstrap.css' );
 
-	$version     = caweb_get_page_version( get_the_ID() );
+	$version     = caweb_template_version();
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
 
@@ -523,15 +525,21 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
+		$schemes = array();
+		foreach( caweb_template_versions() as $v => $label ){
+			$schemes["$v"] = caweb_color_schemes( $v );
+		}
+
 		$caweb_localize_args = array(
 			'defaultFavIcon'   => caweb_default_favicon_url(),
 			'changeCheck'      => $hook,
 			'caweb_icons'      => caweb_get_icon_list( -1, '', true ),
 			'caweb_colors'     => caweb_template_colors(),
 			'tinymce_settings' => caweb_tiny_mce_settings(),
+			'caweb_colorschemes' => $schemes
 		);
 
-		wp_localize_script( 'caweb-admin-scripts', 'args', $caweb_localize_args );
+		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
 

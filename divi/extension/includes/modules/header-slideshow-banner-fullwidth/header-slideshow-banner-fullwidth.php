@@ -143,7 +143,6 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 		$nonce    = wp_create_nonce( 'caweb_slideshow_banner_removal' );
 		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_slideshow_banner_removal' );
 		$con      = is_object( $post ) ? $post->post_content : $post['post_content'];
-		$version  = caweb_get_page_version( get_the_ID() );
 		$module   = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
 
 		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
@@ -164,18 +163,14 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 					var banner = section.find('#et_pb_ca_fullwidth_banner');
 
 					$(document).ready(function () {
-						<?php if ( 4 === $version ) : ?>
-							$('#header').append(banner);
-						<?php else : ?>
-							$('#header').after(banner);
-						<?php endif; ?>
-
+						$('#header').after(banner);
+						
 						if( ! section.children().length )
 							$(section).remove();
 
 						// calculate top of screen on next repaint.
 						window.setTimeout(function () {
-							var MAXHEIGHT = <?php print 4 === $version ? 450 : 1080; ?>;
+							var MAXHEIGHT = 1080;
 							var headerTop = banner.offset().top;
 							var windowHeight = $(window).height();
 							var height = windowHeight - headerTop;

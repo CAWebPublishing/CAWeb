@@ -11,14 +11,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	 * CAWeb_Customize_Icon_Control
 	 */
 	class CAWeb_Customize_Icon_Control extends WP_Customize_Control {
-
-		/**
-		 * Label for the Icon Menu
-		 *
-		 * @var $label Icon Menu Label Text.
-		 */
-		public $label = 'Icon';
-
 		/**
 		 * Render the CAWeb Icon Menu.
 		 *
@@ -29,9 +21,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			print wp_kses(
 				caweb_icon_menu(
 					array(
-						'select' => $this->value(),
-						'name'   => 'ca_google_trans_icon',
-						'header' => 'Icon',
+						'select'       => $this->value(),
+						'name'         => $this->id,
+						'header'       => $this->label,
+						'header_class' => array( 'customize-control-title', 'd-inline' ),
 					)
 				),
 				caweb_allowed_html( array(), true )

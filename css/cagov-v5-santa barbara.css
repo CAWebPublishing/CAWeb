@@ -27190,6 +27190,10 @@ p {
   float: left;
 }
 
+.single.divi_builder #non_divi_sidebar {
+  display: none;
+}
+
 #non_divi_sidebar {
   float: left;
   width: 25%;
@@ -27258,6 +27262,49 @@ div#signup-content {
 @media (min-width: 1280px) {
   div#signup-content {
     max-width: 1280px !important;
+  }
+}
+
+/* Comments on Posts */
+#comment-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+#comment-wrap {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  #comment-wrap {
+    max-width: 750px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  #comment-wrap {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #comment-wrap {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  #comment-wrap {
+    max-width: 1280px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #comment-wrap {
+    width: 100% !important;
+    margin: 0 auto;
   }
 }
 
@@ -27487,46 +27534,56 @@ body:not(.sticky_nav) #main-content.main-content {
   }
 }
 
-/* Page Title */
+/* Page Title & Date*/
 .page-title {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.page-title,
+.page-date {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 }
 
-.divi_builder .page-title {
+.divi_builder .page-title,
+.divi_builder .page-date {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 @media (min-width: 768px) {
-  .page-title {
+  .page-title,
+  .page-date {
     max-width: 750px !important;
   }
 }
 
 @media (min-width: 992px) {
-  .page-title {
+  .page-title,
+  .page-date {
     max-width: 970px !important;
   }
 }
 
 @media (min-width: 1200px) {
-  .page-title {
+  .page-title,
+  .page-date {
     max-width: 1200px !important;
   }
 }
 
 @media (min-width: 1280px) {
-  .page-title {
+  .page-title,
+  .page-date {
     max-width: 1280px !important;
   }
 }
 
 @media (max-width: 767px) {
-  .page-title {
+  .page-title,
+  .page-date {
     width: 100% !important;
     margin: 0 auto;
   }

@@ -6,28 +6,46 @@
  */
 
 /**
- * Returns the Site Wide Version Setting
- * if post_id is passed will return version used by the page template.
- *
- * @param  int $post_id Post ID.
+ * Returns the Site Wide Template Version Setting
  *
  * @return int
  */
-function caweb_get_page_version( $post_id = -1 ) {
-	$result = get_option( 'ca_site_version', 5 );
-
-	switch ( get_page_template_slug( $post_id ) ) {
-		case 'page-templates/page-template-v4.php':
-			$result = 4;
-			break;
-		case 'page-templates/page-template-v5.php':
-			$result = 5;
-			break;
-		default:
-			break;
-	}
+function caweb_template_version() {
+	$result = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
 
 	return $result;
+}
+
+/**
+ * Returns all CAWeb State Template Versions
+ *
+ * @param boolean $include_beta Include beta versions.
+ * @return array
+ */
+function caweb_template_versions( $include_beta = true ) {
+	$tmp = CAWEB_SUPPORTED_TEMPLATE_VERSIONS;
+	$template_versions = array();
+
+	if ( $include_beta ) {
+		$tmp = array_merge( $tmp, CAWEB_BETA_TEMPLATE_VERSIONS );
+	}
+
+	sort( $tmp );
+	
+	foreach( $tmp as $t ){
+		$template_versions["$t"] = "Version $t";
+	}
+
+	return $template_versions;
+}
+
+/**
+ * Returns whether or not the Site Wide Template Version is a Beta
+ *
+ * @return boolean
+ */
+function caweb_is_beta_version() {
+	return in_array( caweb_template_version(), CAWEB_BETA_TEMPLATE_VERSIONS, true );
 }
 
 /**
@@ -145,9 +163,6 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 	if no version provided return all colors from all versions
 	*/
 	switch ( $version ) {
-		case 4:
-			$tmp = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
-			break;
 		case 5:
 			$tmp = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
 			break;
@@ -155,11 +170,7 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 			$tmp = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
 			break;
 		default:
-			$v4_schemes = glob( sprintf( '%1$s/version4/colorscheme/*.css', $css_dir ) );
-			$v5_schemes = glob( sprintf( '%1$s/version5/colorscheme/*.css', $css_dir ) );
-			$v5_5_schemes = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
-			$tmp        = array_merge( $v4_schemes, $v5_schemes, $v5_5_schemes );
-
+			$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
 			break;
 	}
 
@@ -418,8 +429,8 @@ function caweb_get_user_color() {
  *
  * @link https://codex.wordpress.org/Function_Reference/wp_kses
 
- * @param  array $exclude HTML tags to exclude.
- * @param  array $form Whether or not to include form fields.
+ * @param  array   $exclude HTML tags to exclude.
+ * @param  boolean $form Whether or not to include form fields.
  * @return array
  */
 function caweb_allowed_html( $exclude = array(), $form = false ) {
@@ -448,16 +459,26 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'aria-haspopup'   => array(),
 	);
 
+	// Some of these are used by Bootstrap 4 Toggle Plugin.
+	// https://gitbrent.github.io/bootstrap4-toggle/#api.
 	$data = array(
 		'data-toggle' => array(),
 		'data-target' => array(),
+		'data-on' => array(),
+		'data-off' => array(),
+		'data-onstyle' => array(),
+		'data-offstyle' => array(),
+		'data-size' => array(),
+		'data-style' => array(),
+		'data-width' => array(),
+		'data-height' => array(),
 	);
 
 	$tags = array(
 		'div'    => array_merge( $attr, $aria, $data ),
 		'nav'    => array_merge( $attr, $aria, $data ),
-		'header'    => array_merge( $attr, $aria, $data ),
-		'footer'    => array_merge( $attr, $aria, $data ),
+		'header' => array_merge( $attr, $aria, $data ),
+		'footer' => array_merge( $attr, $aria, $data ),
 		'p'      => $attr,
 		'br'     => array(),
 		'span'   => $attr,
@@ -477,7 +498,7 @@ function caweb_allowed_html( $exclude = array(), $form = false ) {
 		'ul'     => $attr,
 		'li'     => $attr,
 		'style'  => array(),
-		'script'  => array(),
+		'script' => array(),
 	);
 
 	// Whether to include form fields or not.

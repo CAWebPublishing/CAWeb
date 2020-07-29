@@ -119,7 +119,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				/* Footer Menu Construction */
 			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
 				$nav_menu   = $this->createFooterMenu( $args );
-				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? sprintf( '<span class="pull-right">Powered by: CAWeb Publishing Service</span>', wp_get_theme()->get( 'ThemeURI' ) ) : '';
+				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<span class="pull-right">Powered by: CAWeb Publishing Service</span>' : '';
 
 				$nav_menu = sprintf(
 					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s><p class="d-inline">Copyright &copy; %3$s State of California</p>%4$s</div></div></footer>',
@@ -556,7 +556,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menu_column_count        = isset( $tmp['_caweb_menu_column_count'][0] ) ? $tmp['_caweb_menu_column_count'][0] : '';
 			$nav_media_img            = isset( $tmp['_caweb_menu_media_image'][0] ) ? $tmp['_caweb_menu_media_image'][0] : '';
 
-			$site_version   = get_option( 'ca_site_version', 5 );
+			$site_version   = caweb_template_version();
 			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
