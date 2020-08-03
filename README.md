@@ -15,4 +15,4 @@ If your organization is moving to WordPress CMS, but you are not subscribing to 
 7. Activate the CAWeb theme for your site.
 
 # Get Involved
-For information on how to get involved, visit our Wiki.
+For information on how to get involved, visit our [Wiki](https://github.com/Danny-Guzman/CAWeb/wiki).
