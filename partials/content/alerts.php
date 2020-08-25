@@ -25,7 +25,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 	if ( $caweb_active_alert ) {
 		if ( isset( $_COOKIE[ "caweb-alert-id-$caweb_a" ] ) && sanitize_text_field( wp_unslash( $_COOKIE[ "caweb-alert-id-$caweb_a" ] ) ) ) {
 			?>
-			<div class="alert alert-dismissible alert-banner border-top border-dark" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
+			<div class="alert alert-dismissible alert-banner border-top border-dark alert-<?php print $caweb_a; ?>" style="background-color:<?php print esc_attr( $caweb_data['color'] ); ?>;">
 				<div class="container">
 					<button type="button" class="close caweb-alert-close" data-id="<?php print esc_attr( $caweb_a ); ?>" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -48,7 +48,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 							$caweb_target = ! empty( $caweb_data['target'] ) ? sprintf( ' target="%1$s"', $caweb_data['target'] ) : '';
 							$caweb_text   = ! empty( $caweb_data['text'] ) ? $caweb_data['text'] : '';
 							?>
-						<a href="<?php print esc_url( $caweb_url ); ?>" class="alert-link btn btn-default btn-xs"<?php print esc_attr( $caweb_target ); ?>><?php print esc_html( $caweb_text ); ?></a>
+						<a href="<?php print esc_url( $caweb_url ); ?>" class="alert-link btn btn-default btn-xs"<?php print esc_attr( $caweb_target ); ?>><?php print esc_attr( $caweb_text ); ?></a>
 						<?php endif; ?>
 				</div>
 			</div>
