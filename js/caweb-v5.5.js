@@ -19443,10 +19443,10 @@ jQuery(document).ready(function() {
                             })
 
                             // open selected accordion content
+                            $(element).find('.et_pb_toggle_content').slideToggle();
                             $(element).addClass('et_pb_toggle_open');
                             $(element).removeClass('et_pb_toggle_close');
                             $(element).attr('aria-expanded', 'true');
-                            $(element).find('.et_pb_toggle_content').slideToggle();
                         }
                     // is a toggle item
                     }else{
