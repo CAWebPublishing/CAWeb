@@ -14,10 +14,7 @@ jQuery(document).ready(function() {
             $(element).attr('tabindex', 0);
             $(element).attr('role', 'button');
             $(element).attr('aria-expanded', expanded);
-
-            /*$(element).on('focusin', function(e){
-                toggleExpansion(this);
-            });*/
+            
             $(element).on('click', function(e){
                 // If is IE, apply fix
                 if (window.document.documentMode) {   
