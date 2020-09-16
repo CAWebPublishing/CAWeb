@@ -20683,25 +20683,65 @@ jQuery(document).ready(function() {
     // Run only if there is a Toggle Module on the current page
     if( toggle_modules.length  ){
         toggle_modules.each(function(index, element) {
+            var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+            
             $(element).attr('tabindex', 0);
             $(element).attr('role', 'button');
-
-            $(element).on('focusin', function(e){
-                toggleExpansion(this);
-            });
+            $(element).attr('aria-expanded', expanded);
+            
             $(element).on('click', function(e){
-                setTimeout( function(){ toggleExpansion(element); }, 1000 );
+                // If is IE, apply fix
+                if (window.document.documentMode) {   
+                    // if is an accordion item
+                    if( $(element).hasClass('et_pb_accordion_item') ){
+
+                        // if current accordion is not already opened
+                        if( ! $(element).hasClass('et_pb_toggle_open') ){
+                            // close all accordions
+                            toggle_modules.each(function(i,e){
+                                $(e).removeClass('et_pb_toggle_open');
+                                $(e).addClass('et_pb_toggle_close');
+                                $(e).attr('aria-expanded', 'false');
+                                $(e).find('.et_pb_toggle_content').slideUp();
+                            })
+
+                            // open selected accordion content
+                            $(element).addClass('et_pb_toggle_open');
+                            $(element).removeClass('et_pb_toggle_close');
+                            $(element).attr('aria-expanded', 'true');
+                            $(element).find('.et_pb_toggle_content').slideToggle();
+                        }
+                    // is a toggle item
+                    }else{
+                        $(element).find('.et_pb_toggle_content').slideToggle();
+                        $(element).toggleClass('et_pb_toggle_open');
+                        $(element).toggleClass('et_pb_toggle_close');
+
+                        if( $(element).hasClass('et_pb_toggle_open') ){
+                            $(element).attr('aria-expanded', 'true');
+                        }else{
+                            $(element).attr('aria-expanded', 'false');
+                        }
+                    }
+                }else{
+                    setTimeout( function(){ toggleExpansion(element); }, 1000 );
+                }
             });
         });      
 
         function toggleExpansion(ele){
             var expanded = $(ele).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-            var span_icon = $(ele).find('.et_pb_toggle_title span');
             $(ele).attr('aria-expanded', expanded);
+            /*var span_icon = $(ele).find('.et_pb_toggle_title span');
 
             if( span_icon.length ){
                 'true' === expanded ? span_icon.removeClass('ca-gov-icon-triangle-right') : span_icon.addClass('ca-gov-icon-triangle-right');
             }
+*/
+           
+            
+            
+
         }
     }
 
