@@ -20732,16 +20732,6 @@ jQuery(document).ready(function() {
         function toggleExpansion(ele){
             var expanded = $(ele).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
             $(ele).attr('aria-expanded', expanded);
-            /*var span_icon = $(ele).find('.et_pb_toggle_title span');
-
-            if( span_icon.length ){
-                'true' === expanded ? span_icon.removeClass('ca-gov-icon-triangle-right') : span_icon.addClass('ca-gov-icon-triangle-right');
-            }
-*/
-           
-            
-            
-
         }
     }
 
