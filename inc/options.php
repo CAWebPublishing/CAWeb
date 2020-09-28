@@ -257,7 +257,7 @@ function caweb_api_menu_option_setup() {
 	// if saving.
 	if ( isset( $_POST['caweb_api_options_submit'], $_POST['caweb_theme_api_options_nonce'] ) &&
 	wp_verify_nonce( sanitize_key( $_POST['caweb_theme_api_options_nonce'] ), 'caweb_theme_api_options' ) ) {
-		caweb_save_multi_ga_options( $_POST, $_FILES );
+		caweb_save_api_options( $_POST, $_FILES );
 	}
 
 	// CAWeb API Nonce.
