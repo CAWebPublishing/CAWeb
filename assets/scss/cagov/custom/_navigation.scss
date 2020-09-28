@@ -15,10 +15,20 @@
 
 .second-level-nav {
 	display: initial;
+	position: initial !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	width: auto !important;
+	padding: 0 !important;
 }
 
 .second-level-nav li{
 	float: left;
+}
+
+.second-level-nav .second-level-link{
+	font-size: 17.6px;
+	font-size: 1.1rem;
 }
 
 .unit2 , .unit3, .unit3 .nav-media .media{
