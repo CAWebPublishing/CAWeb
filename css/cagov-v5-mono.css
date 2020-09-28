@@ -27682,6 +27682,9 @@ nav li {
     width: 100%;
     padding-left: 0;
   }
+  span.carrot {
+    display: none !important;
+  }
 }
 
 @media (min-width: 768px) {
