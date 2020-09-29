@@ -11,13 +11,15 @@
     "react-number-format": "^4.3.1",
     "react-owl-carousel": "^2.3.1",
     "react-render-html": "^0.6.0",
-    "react-scripts": "^3.2.0"
+    "react-scripts": "^3.2.0",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "divi-scripts start",
     "build": "divi-scripts build",
     "zip": "divi-scripts build && divi-scripts zip",
-    "eject": "divi-scripts eject"
+    "eject": "divi-scripts eject",
+    "postinstall": "npm config set yarn --global"
   },
   "browserslist": {
     "development": [
