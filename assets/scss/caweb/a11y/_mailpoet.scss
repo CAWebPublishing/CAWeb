@@ -1,0 +1,4 @@
+/* MailPoet correct focus on inputs */
+div[id^="mailpoet_form_"] input:focus {
+  outline: #2ea3f2 solid 2px !important;
+}

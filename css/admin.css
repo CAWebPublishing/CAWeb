@@ -1,7 +1,195 @@
+/*---------------
+ # CAWeb
+---------------*/
+/* TinyMCE Content Editor */
+body#tinymce.mce-content-body {
+  background-color: transparent;
+  padding: 10px;
+}
+
+/* Menu List */
+.menu-list li.list-group-item:not(.selected) {
+  background-color: #fff !important;
+}
+
+.menu-list li.list-group-item:not(.selected):hover a {
+  color: #fff !important;
+}
+
+/* Toggle Arrows when collapsed */
+a[data-toggle="collapse"] h2 > span:after,
+a[data-toggle="collapse"] label > span:after {
+  content: '\43';
+}
+
+a[data-toggle="collapse"].collapsed h2 > span:after,
+a[data-toggle="collapse"].collapsed label > span:after {
+  content: '\45';
+}
+
+/* Fav Icon Preview Height */
+.ca_fav_ico_option {
+  max-height: 30px;
+}
+
+/* Image Preview Min/Max Height */
+.header_ca_branding_option,
+.header_ca_background_option {
+  min-height: 1px;
+  max-height: 150px;
+}
+
+/* Custom CSS */
+#uploaded-css li a,
+#uploaded-js li a,
+#add-css, #add-js, #add-alert {
+  cursor: pointer;
+}
+
+#ca_custom_css,
+#ca_custom_js {
+  min-height: 300px;
+}
+
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
+}
+
+/* Alert Banners */
+.dashicons.alert-status,
+.remove-alert {
+  cursor: pointer;
+}
+
+#caweb-alert-banners li,
+#uploaded-css li,
+#uploaded-js li {
+  cursor: grab;
+}
+
+.caweb-icon-menu {
+  height: 306px;
+  overflow: auto;
+}
+
+.caweb-icon-menu li,
+.caweb-icon-menu-header span.resetIcon {
+  cursor: pointer;
+}
+
+.caweb-icon-menu li:hover {
+  background-color: #007bff;
+}
+
+.caweb-icon-menu li.ca-gov-icon-caweb {
+  padding-right: 22px;
+}
+
+.caweb-icon-menu li.ca-gov-icon-social_googleplus {
+  padding-right: 12px;
+}
+
+/* Navigation Menu Icon Styles */
+.nav-menus-php .caweb-icon-menu {
+  height: 306px;
+  overflow: auto;
+}
+
+.nav-menus-php .caweb-icon-menu li {
+  float: left;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.nav-menus-php .caweb-icon-menu li.active {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* CAWeb Navigation Page Styles */
+/* Remove Manage with Live Preview */
+.page-title-action {
+  display: none;
+}
+
+/* Remove Auto-add Pages from Navigation menu */
+fieldset.field-move, .menu-settings-group.auto-add-pages {
+  display: none !important;
+}
+
+body.login #login h1 a {
+  background-image: url("../images/system/caweb-logo.png");
+  background-size: contain;
+  height: 100px;
+  width: 320px;
+}
+
+body.login #login .btn-danger {
+  color: white !important;
+}
+
+body.login #login #backtoblog {
+  display: none;
+}
+
+body.login .caweb-disclaimer {
+  font-size: 9pt;
+}
+
+@media (max-width: 767px) {
+  body.login .caweb-disclaimer {
+    width: 320px !important;
+  }
+  body.login .caweb-disclaimer {
+    font-size: 8pt;
+  }
+}
+
+/* Customizer Styling */
+/* Manual CSS textarea size */
+#customize-control-ca_custom_css textarea {
+  height: 500px;
+  resize: none;
+}
+
+/* Hide Navigation Menu */
+#accordion-panel-nav_menus {
+  display: none !important;
+}
+
+li[id="customize-control-caweb_alert_banner_sample"] {
+  display: none !important;
+}
+
+.caweb-toggle-alert {
+  cursor: pointer;
+}
+
+li[id^="customize-control-ca_utility_link_"][id$="new_window"] {
+  margin-bottom: 15px !important;
+}
+
+li[id^="customize-control-caweb_alert_banner_"] input[type="radio"],
+li[id^="customize-control-caweb_alert_banner_"] input[type="checkbox"] {
+  height: 1rem;
+}
+
+/*
+ Bootstrap Overrides, these are added only because the 
+ WordPress load-styles.php loads before our CSS.
+*/
+select.form-control {
+  height: calc(1.5em + .75rem + 2px) !important;
+}
+
 @font-face {
   font-family: 'CaGov';
-  src: url("../fonts/CaGov.eot?trqo0f");
-  src: url("../fonts/CaGov.eot?trqo0f#iefix") format("embedded-opentype"), url("../fonts/CaGov.ttf?trqo0f") format("truetype"), url("../fonts/CaGov.woff?trqo0f") format("woff"), url("../fonts/CaGov.svg?trqo0f#CaGov") format("svg");
+  src: url("../fonts/CaGov.eot?a8yc2v");
+  src: url("../fonts/CaGov.eot?a8yc2v#iefix") format("embedded-opentype"), url("../fonts/CaGov.ttf?a8yc2v") format("truetype"), url("../fonts/CaGov.woff?a8yc2v") format("woff"), url("../fonts/CaGov.svg?a8yc2v#CaGov") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -20,6 +208,10 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.et_font_icon li {
+  font-size: 17px;
 }
 
 .et_font_icon li:before, .et_pb_inline_icon:before,
@@ -473,6 +665,10 @@ li[class^="et_fb_profile_banner"]::before {
 
 .ca-gov-icon-beaker5:before {
   content: "\c903" !important;
+}
+
+.ca-gov-icon-caweb:before {
+  content: "\c90b" !important;
 }
 
 .ca-gov-icon-candle-alt:before {
@@ -1327,10 +1523,6 @@ li[class^="et_fb_profile_banner"]::before {
   content: "\e0ef" !important;
 }
 
-.ca-gov-icon-cal-bear:before {
-  content: "\e90b" !important;
-}
-
 .ca-gov-icon-icon_dislike_alt:before {
   content: "\e0f1" !important;
 }
@@ -1943,8 +2135,8 @@ li[class^="et_fb_profile_banner"]::before {
   content: "\e90a" !important;
 }
 
-.ca-gov-icon-caweb:before {
-  content: "\c90b" !important;
+.ca-gov-icon-cal-bear:before {
+  content: "\e90b" !important;
 }
 
 .ca-gov-icon-hours:before {
@@ -2483,353 +2675,98 @@ li[class^="et_fb_profile_banner"]::before {
   content: "\e991" !important;
 }
 
-/* HIDE THE 'Enable Visual Builder' Button*/
-#et_pb_fb_cta, .et-bfb-optin-cta {
-  display: none !important;
+.ca-gov-icon-accessibility:before {
+  content: "\e992" !important;
 }
 
-/* This is the background color for the Divi Panel that pops open
-		when inserting modules or sections */
-.et-pb-main-settings {
-  background-color: lightblue;
+.ca-gov-icon-features:before {
+  content: "\e993" !important;
 }
 
-/* TinyMCE Content Editor */
-body#tinymce.mce-content-body {
-  background-color: transparent;
-  padding: 10px;
+.ca-gov-icon-distance:before {
+  content: "\e995" !important;
 }
 
-/* CAWeb Options Page Styles */
-#caweb-options-container {
-  margin-bottom: 5px;
+.ca-gov-icon-coronavirus:before {
+  content: "\e996" !important;
 }
 
-/* Indent fields under each category */
-@media (max-width: 782px) {
-  .form-table th {
-    text-align: start !important;
-  }
+.ca-gov-icon-coughing:before {
+  content: "\e997" !important;
 }
 
-.form-table th {
-  padding: 10px 10px 10px 0px;
-  text-align: end;
+.ca-gov-icon-cover:before {
+  content: "\e998" !important;
 }
 
-.form-table td {
-  padding: 5px 10px;
+.ca-gov-icon-cubes:before {
+  content: "\e999" !important;
 }
 
-select#ca_google_trans_display {
-  margin-bottom: 10px;
+.ca-gov-icon-hand-heart:before {
+  content: "\e99a" !important;
 }
 
-#custom-js textarea,
-#custom-css textarea {
-  width: 100%;
-  min-height: 700px;
+.ca-gov-icon-hand-watter:before {
+  content: "\e99b" !important;
 }
 
-.option {
-  text-decoration: underline;
-  font-size: 1.2rem;
+.ca-gov-icon-lab-tests:before {
+  content: "\e99c" !important;
 }
 
-.resetIcon {
-  cursor: pointer;
+.ca-gov-icon-mask:before {
+  content: "\e99d" !important;
 }
 
-ul#caweb-icon-menu,
-ul.caweb-icon-menu {
-  background-color: white;
-  height: 205px;
-  overflow-y: scroll;
+.ca-gov-icon-no-coughing:before {
+  content: "\e99e" !important;
 }
 
-ul#caweb-icon-menu li,
-ul.caweb-icon-menu li {
-  font-size: 24px;
-  float: left;
-  padding: 8px;
+.ca-gov-icon-no-handshake:before {
+  content: "\e99f" !important;
 }
 
-ul#caweb-icon-menu li.selected,
-ul.caweb-icon-menu li.selected {
-  background-color: #008BDB;
+.ca-gov-icon-no-virus:before {
+  content: "\e9a0" !important;
 }
 
-ul#caweb-icon-menu li:hover,
-ul.caweb-icon-menu li:hover {
-  background-color: #008BDB;
-  cursor: pointer;
+.ca-gov-icon-procurement:before {
+  content: "\e9a1" !important;
 }
 
-ul#caweb-icon-menu li:before,
-ul.caweb-icon-menu li:before {
-  font-family: 'CaGov', 'ETModules';
-  content: attr(data-icon);
+.ca-gov-icon-project:before {
+  content: "\e9a2" !important;
 }
 
-#cawebAlerts {
-  width: 50%;
+.ca-gov-icon-soap:before {
+  content: "\e9a3" !important;
 }
 
-#cawebAlerts li {
-  border-bottom: 1px solid black;
-  cursor: -webkit-grabbing;
-  padding: 1px 10px 10px 10px;
+.ca-gov-icon-stay-home:before {
+  content: "\e9a4" !important;
 }
 
-[class*="caweb-alert-"] h3 {
-  display: inline;
-  text-decoration: underline;
+.ca-gov-icon-teleworking:before {
+  content: "\e9a5" !important;
 }
 
-[class*="caweb-alert-"] p {
-  font-weight: bold;
-  margin-bottom: 0;
+.ca-gov-icon-testing:before {
+  content: "\e9a6" !important;
 }
 
-[class*="caweb-alert-"] label {
-  padding-right: 15px;
+.ca-gov-icon-testing-alt:before {
+  content: "\e9a7" !important;
 }
 
-[class*="caweb-alert-"] div input[type="text"] {
-  width: 100%;
+.ca-gov-icon-virus:before {
+  content: "\e9a8" !important;
 }
 
-[class*="caweb-alert-"] div.hidden + p + ulul#caweb-icon-menu {
-  height: 248px;
+.ca-gov-icon-viruses:before {
+  content: "\e9a9" !important;
 }
 
-[class*="caweb-alert-"] div + p + ulul#caweb-icon-menu {
-  height: 160px;
-}
-
-[class*="caweb-alert-"] .button.button-primary {
-  float: right;
-  margin-left: 15px;
-}
-
-.caweb-alert div:first-child {
-  font-family: inherit;
-  margin-bottom: 0;
-}
-
-.caweb-alert div:first-child p {
-  display: inline;
-}
-
-.caweb-alert div:first-child a {
-  float: right;
-  cursor: pointer;
-}
-
-.caweb-alert .activateAlert {
-  border-radius: 10px;
-}
-
-.caweb-alert .activateAlert {
-  background-color: #d8fad7;
-  border: 1px solid #055103;
-}
-
-.caweb-alert .activateAlert.inactive {
-  background-color: #fad7d7;
-  border: 1px solid #510303;
-}
-
-.caweb-alert input[type="text"] {
-  width: 50%;
-}
-
-.caweb-alert textarea {
-  width: 100%;
-  height: 175px;
-  resize: none;
-}
-
-.removeAlert,
-.removeAlert:hover {
-  color: red;
-}
-
-#addAlertBanner {
-  text-decoration: none;
-}
-
-#addCSS:hover, #addJS:hover, #addAlertBanner:hover, .resetAlertIcon:hover {
-  cursor: pointer;
-}
-
-ol#uploadedCSS li,
-ol#uploadedJS li {
-  cursor: -webkit-grab;
-}
-
-ol#uploadedJS li .preview-js,
-ol#uploadedCSS li .preview-css {
-  margin-left: -105px;
-  color: green;
-}
-
-ol#uploadedCSS li .remove-css,
-ol#uploadedJS li .remove-js,
-tr.pending-css td .remove-css,
-tr.pending-js td .remove-js {
-  margin-right: 45px;
-  color: red;
-  cursor: pointer;
-}
-
-tr.pending-css td .remove-css,
-tr.pending-js td .remove-js {
-  margin-left: -28px;
-  margin-right: 22px;
-}
-
-/* CAWeb Navigation Page Styles */
-.page-title-action {
-  display: none;
-}
-
-.mega_menu_images.show, .media_image.show, .unit_selector.show, .icon_selector.show {
-  display: block;
-}
-
-.mega_menu_images, .media_image, .unit_selector, .icon_selector {
-  display: none;
-}
-
-.menu-item-edit-active .menu-item-settings {
-  display: inline-block !important;
-}
-
-h2.nav-tab-wrapper {
-  border-bottom: none !important;
-}
-
-/* Remove Auto-add Pages from Navigation menu */
-fieldset.menu-settings-group.auto-add-pages {
-  display: none;
-}
-
-/* Remove Move options from Navigation menu items */
-p.field-move {
-  display: none !important;
-}
-
-/* Icon List */
-ul.menu-icon-list {
-  height: 300px;
-  overflow-y: scroll;
-}
-
-ul.menu-icon-list li:hover {
-  background-color: #008BDB;
-  cursor: pointer;
-}
-
-ul.menu-icon-list li.is_selected {
-  background-color: #008BDB;
-}
-
-ul.et_font_icon {
-  background-color: white !important;
-  max-height: 300px;
-}
-
-.et_font_icon li {
-  font-size: 30px;
-  float: left;
-  padding: 8px;
-}
-
-.et-pb-option-container .description {
-  color: black !important;
-}
-
-/* Tooltip Styles */
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-  /* If you want dots under the hoverable text */
-  opacity: 1;
-  font-weight: 600;
-}
-
-.tooltip:hover {
-  cursor: help;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 300px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  /* Positioning Styles*/
-  /* Left */
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-  /* Use half of the width (120/2 = 60), to center the tooltip */
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.ca_fav_ico_option {
-  height: 32px;
-}
-
-.header_ca_branding_option, .ca_fav_ico_option, .header_ca_background_option {
-  min-height: 1px;
-  max-height: 150px;
-  padding-left: 2px;
-  padding-top: 5px;
-}
-
-/* Customizer Styling */
-#customize-control-caweb_custom_css label textarea {
-  height: 500px;
-  resize: none;
-  overflow-y: scroll;
-}
-
-#accordion-panel-nav_menus {
-  display: none !important;
-}
-
-/* Thickbox Styling for the CAWeb Options Page */
-body.toplevel_page_caweb_options #TB_window {
-  top: 10% !important;
-  height: auto !important;
-  width: auto !important;
-}
-
-body.toplevel_page_caweb_options #TB_window #TB_ajaxContent {
-  height: 100% !important;
-}
-
-@media (max-width: 768px) {
-  body.toplevel_page_caweb_options #TB_window {
-    left: 10% !important;
-    width: 100% !important;
-    max-width: 80% !important;
-    margin-left: 0 !important;
-  }
-  body.toplevel_page_caweb_options #TB_window #TB_ajaxContent {
-    width: 95% !important;
-  }
+.ca-gov-icon-wash:before {
+  content: "\e9aa" !important;
 }

@@ -1,5 +1,5 @@
 /**
- * CA State Template v5 -  @version v5.0.11 -  9/6/2019 
+ * CA State Template v5 -  @version v5.0.17 -  5/1/2020 
   STYLES COMPILED FROM SOURCE (SCSS) DO NOT MODIFY */
 /* -----------------------------------------
    SIERRA
@@ -243,6 +243,14 @@ h1 span[class^="ca-gov-icon-"]:first-child {
   }
 }
 
+button.first-level-link > span.search-btn > span[class^="ca-gov-icon"] {
+  color: #cbcbcb;
+}
+
+.nav-item:hover button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:focus button.first-level-link > span.search-btn > span[class^="ca-gov-icon"], .nav-item:hover button.first-level-link, .nav-item:focus button.first-level-link {
+  color: #447766;
+}
+
 /* -----------------------------------------
    SEARCH
    /source/scss/colorscheme.search.scss
@@ -340,6 +348,9 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 }
 
 .panel-default .panel-heading .options .btn-default:focus, .panel-default .panel-heading .options .btn-default.focus {
+  color: #212529;
+  background-color: #cae3ca;
+  border-color: #c4c4c4;
   box-shadow: 0 0 0 0.2rem rgba(193, 193, 194, 0.5);
 }
 
@@ -412,6 +423,9 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 }
 
 .panel-overstated .panel-heading .options .btn-default:focus, .panel-overstated .panel-heading .options .btn-default.focus {
+  color: #fff;
+  background-color: #27453b;
+  border-color: #1f362e;
   box-shadow: 0 0 0 0.2rem rgba(80, 112, 101, 0.5);
 }
 
@@ -516,6 +530,9 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 }
 
 .panel-understated .panel-heading .options .btn-default:focus, .panel-understated .panel-heading .options .btn-default.focus {
+  color: #212529;
+  background-color: #b3e7d4;
+  border-color: #c4c4c4;
   box-shadow: 0 0 0 0.2rem rgba(193, 193, 194, 0.5);
 }
 
@@ -588,6 +605,9 @@ h1 span[class^="ca-gov-icon-"]:first-child {
 }
 
 .panel-standout .panel-heading .options .btn-default:focus, .panel-standout .panel-heading .options .btn-default.focus {
+  color: #fff;
+  background-color: #050e0e;
+  border-color: #051010;
   box-shadow: 0 0 0 0.2rem rgba(54, 84, 84, 0.5);
 }
 

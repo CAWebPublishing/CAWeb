@@ -1,0 +1,4 @@
+/* Remove the State Template background image from Person Module Social Links */
+.et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a{
+	background-image: none !important;
+}

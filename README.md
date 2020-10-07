@@ -7,23 +7,12 @@ CAWeb Publishing is the only service to offer the latest California State Websit
 
 # Setup
 If your organization is moving to WordPress CMS, but you are not subscribing to the CAWeb Publishing Service, you'll need hosting and the State Template child theme. Here are the steps to get started:
-1. [Procure hosting](https://cdt.ca.gov/services/staas/) and install WordPress (takes about 5 minutes). We don't recommend on-premise hosting as it is generally more expensive (and time consuming) to procure and maintain. However, if you are determined to host on-prem, here's a good guide from [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-16-04).
-2. Purchase a Divi license from [Elegant Themes](https://www.elegantthemes.com/join/) and dowload the theme. Divi is the parent theme used with the CAWeb/WordPress State Template child theme. Divi is required.
-3. Upload the Divi theme to your new WordPress instance.
-4. Activate Divi by entering your license key under the "Updates" tab.
-5. Download the latest release of the [CAWeb theme](https://github.com/CA-CODE-Works/CAWeb). 
-6. Upload the CAWeb theme to your new WordPress instance.
-7. Activate the CAWeb theme for your site and refer to [caweb.cdt.ca.gov](https://caweb.cdt.ca.gov/) for more information.
+1. [Install WordPress](https://wordpress.org/support/article/how-to-install-wordpress/) (takes about 5 minutes).
+2. Purchase a Divi license from [ElegantThemes](https://www.elegantthemes.com/join/) and dowload the theme. Divi is the parent theme used with the CAWeb WordPress Child Theme and is required.
+3. Upload the Divi Theme to your WordPress instance.
+5. Download the latest release of the [CAWeb](https://github.com/CA-CODE-Works/CAWeb/releases) Theme. 
+6. Upload the CAWeb Theme to your WordPress instance.
+7. Activate the CAWeb theme for your site.
 
-# Build and Test
-1. Create a LAMP stack
-2. Install WordPress
-3. Install [Divi](https://www.elegantthemes.com/gallery/divi/) (you must purchase a license)
-4. Install the [CAWeb theme](https;//github.com/Office-of-Digital-Innovation/CAWeb/releases/)
-5. Perform related tests  
-
-# Contribute / Collaborate
-1. Fork this theme (You must be part the the Office of Digital Innovation Organization on Github)
-2. Create your changes
-3. Test your changes and ensure they improve the CAWeb theme
-4. Submit a pull request
+# Get Involved
+For information on how to get involved, visit our [Wiki](https://github.com/Danny-Guzman/CAWeb/wiki).

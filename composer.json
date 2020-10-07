@@ -4,11 +4,11 @@
     "require-dev": {
         "wp-coding-standards/wpcs": "^2.2.0",
         "friendsofphp/php-cs-fixer": "^2.16.0",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "roave/security-advisories": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
-            "export PATH='$PATH:$HOME/.composer/vendor/bin'",
             "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility "
         ]
         

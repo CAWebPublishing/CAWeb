@@ -1,6 +1,11 @@
  jQuery(document).ready(function() {
-	 $('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
-	 
+	$('.caweb-alert-close').click( function(e){ jQuery.post(this.dataset.url); });
+	
+	/* Fixed padding for wp-activate.php page when Navigation is fixed */
+	if( $('header.fixed + #signup-content').length ){
+		$('header.fixed + #signup-content').css('padding-top', $('header.fixed').outerHeight() );
+	}
+
 	// run test on initial page load
 	checkSize();
 
@@ -22,8 +27,24 @@
 		}
 		$("html, body").animate({scrollTop:$scroll_position},speed,easing);
 	}
+
+	
  });
 
+function rgb2hex(rgb){
+	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+	return "#" +
+	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+}
+
+function stripeIframeAttributes(frame){
+	$(frame).removeAttr('frameborder');
+	$(frame).removeAttr('scrolling');
+	$(frame).removeAttr('allowtransparency');
+	$(frame).removeAttr('allowfullscreen');
+}
 
 
  function checkSize(){

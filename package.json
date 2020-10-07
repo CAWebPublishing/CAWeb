@@ -9,20 +9,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/register": "^7.0.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
     "beepbeep": "^1.2.2",
     "browser-sync": "^2.11.1",
-    "eslint": "^5.5.0",
+    "del": "^5.1.0",
     "eslint-config-wordpress": "^2.0.0",
-    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.0.2",
+    "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.5.2",
     "gulp-filter": "^5.1.0",
-    "gulp-imagemin": "^6.1.1",
+    "gulp-imagemin": "^6.2.0",
     "gulp-line-ending-corrector": "^1.0.1",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-notify": "^3.0.0",
@@ -33,9 +33,10 @@
     "gulp-sass": "^4.0.1",
     "gulp-sort": "^2.0.0",
     "gulp-sourcemaps": "^2.6.2",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^2.0.0",
     "gulp-uglifycss": "^1.0.6",
-    "gulp-wp-pot": "^2.0.7"
+    "gulp-wp-pot": "^2.0.7",
+    "node-sass": "^4.14.1"
   },
   "scripts": {
     "start": "gulp",
@@ -45,12 +46,15 @@
     "customJS": "gulp customJS",
     "images": "gulp images",
     "clearCache": "gulp clearCache",
-    "translate": "gulp translate"
+    "translate": "gulp translate",
+    "postinstall": "npm config set gulp-cli --global"
   },
   "dependencies": {
-    "gulp-cli": "^2.2.0",
+    "gulp": "^4.0.2",
     "gulp-csso": "^3.0.1",
     "gulp-header": "^2.0.9",
-    "gulp-parameterized": "^0.1.1"
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-parameterized": "^0.1.1",
+    "notify-send": "^0.1.2"
   }
 }

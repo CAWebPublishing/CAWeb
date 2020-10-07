@@ -1,0 +1,12 @@
+/* Add focus to TablePress Headers */
+table[id^="tablepress-"] thead tr th:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+/* Add focus to TablePress Search Input Filter */
+div[id^="tablepress-"].dataTables_filter input[type="search"]:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+  overflow-x: auto;
+}

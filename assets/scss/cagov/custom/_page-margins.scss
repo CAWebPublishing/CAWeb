@@ -1,0 +1,56 @@
+/* Page Title & Date*/
+.page-title{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.page-title,
+.page-date{
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.divi_builder .page-title,
+.divi_builder .page-date{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px){
+	.page-title,
+	.page-date{
+		max-width: 750px !important;
+	}
+}
+
+@media (min-width: 992px){
+	.page-title,
+	.page-date{
+		max-width: 970px !important;
+	}
+}
+
+@media (min-width: 1200px){
+	.page-title,
+	.page-date{
+		max-width: 1200px !important;
+	}
+}
+
+@media (min-width: 1280px){
+  .page-title,
+  .page-date{
+      max-width: 1280px!important;
+  }
+}
+
+@media (max-width: 767px){
+	.page-title,
+	.page-date{
+		width: 100% !important;
+		margin: 0 auto;
+	}
+	.divi_builder .page-title{
+		padding-bottom: 30px !important;
+	}
+}
