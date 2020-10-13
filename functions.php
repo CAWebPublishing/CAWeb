@@ -335,6 +335,8 @@ function caweb_wp_enqueue_scripts() {
 
 		$localize_args = array(
 			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
+			'ca_google_tag_manager_id'       => get_option( 'ca_google_tag_manager_id' ),
+			'ca_google_tag_manager_approved' => get_option( 'ca_google_tag_manager_approved', false),
 			'ca_site_version'             => $ver,
 			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
 			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
