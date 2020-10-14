@@ -27692,9 +27692,6 @@ nav li {
     width: 100%;
     padding-left: 0;
   }
-  span.carrot {
-    display: none !important;
-  }
 }
 
 @media (min-width: 768px) {
@@ -27713,6 +27710,17 @@ nav li {
 @media (min-width: 992px) {
   .top-level-nav .nav-item {
     padding: 0 8px;
+  }
+}
+
+/* Carrots */
+body.v5 header nav .top-level-nav .nav-item .ca-gov-icon-caret-right {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  body.v5 header nav .top-level-nav .nav-item .carrot {
+    display: none;
   }
 }
 
