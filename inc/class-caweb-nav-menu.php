@@ -280,7 +280,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					/* Get column count */
 					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
 
-					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
+					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span><span class="ca-gov-icon-caret-right carrot rotate" aria-hidden="true"></span>' : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
@@ -325,7 +325,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							);
 						} else {
 							$nav_item .= sprintf(
-								'<div class="empty sub-nav"><div>%1$s</div></div></li>',
+								'<div class="sub-nav"><div>%1$s</div></div></li>',
 								$this->createSubNavMenu( $child_links, $args )
 							);
 						}
