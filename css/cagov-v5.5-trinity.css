@@ -29881,8 +29881,8 @@ body:not(.sticky_nav) #main-content.main-content {
 }
 
 .second-level-nav {
-  display: initial;
-  position: initial !important;
+  display: block;
+  position: relative !important;
   opacity: 1 !important;
   visibility: visible !important;
   width: auto !important;
