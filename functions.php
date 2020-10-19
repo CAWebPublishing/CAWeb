@@ -20,6 +20,7 @@ define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array(5) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array(5.5) );
 
+define( 'WP_TEMP_DIR', wp_get_upload_dir()['basedir'] . '/tmp' );
 /**
  * Plugin API/Action Reference
  * Actions Run During a Typical Request
