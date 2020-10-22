@@ -257,7 +257,7 @@ function caweb_api_menu_option_setup() {
 	// if saving.
 	if ( isset( $_POST['caweb_api_options_submit'], $_POST['caweb_theme_api_options_nonce'] ) &&
 	wp_verify_nonce( sanitize_key( $_POST['caweb_theme_api_options_nonce'] ), 'caweb_theme_api_options' ) ) {
-		caweb_save_multi_ga_options( $_POST, $_FILES );
+		caweb_save_api_options( $_POST, $_FILES );
 	}
 
 	// CAWeb API Nonce.
@@ -535,6 +535,8 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 	$caweb_google_options = array(
 		'ca_google_search_id',
 		'ca_google_analytic_id',
+		'ca_google_tag_manager_id',
+		'ca_google_tag_manager_approved',
 		'ca_google_meta_id',
 		'ca_google_trans_enabled',
 		'ca_google_trans_page',

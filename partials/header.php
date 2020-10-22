@@ -21,7 +21,19 @@ $caweb_google_trans_enabled = get_option( 'ca_google_trans_enabled' );
 $caweb_google_trans_page    = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 
+/* Google Tag Manager */
+$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
+
+if( ! empty($google_tag_manager_id) ):
+	$src = sprintf('https://www.googletagmanager.com/ns.html?id=%1$s', $google_tag_manager_id);
+
 ?>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+	<iframe src="<?php print $src; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+			
+<?php endif; ?>
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
@@ -59,7 +71,6 @@ $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 				'theme_location'               => 'header-menu',
 				'style'                        => get_option( 'ca_default_navigation_menu' ),
 				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
-				'version'                      => caweb_template_version(),
 			)
 		);
 

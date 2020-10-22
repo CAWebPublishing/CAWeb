@@ -20,6 +20,12 @@ define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array(5) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array(5.5) );
 
+define( 'WP_TEMP_DIR', WP_CONTENT_DIR  . '/tmp' );
+
+if( ! file_exists( WP_TEMP_DIR ) ){
+	mkdir( WP_TEMP_DIR );
+}
+
 /**
  * Plugin API/Action Reference
  * Actions Run During a Typical Request
@@ -335,6 +341,8 @@ function caweb_wp_enqueue_scripts() {
 
 		$localize_args = array(
 			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
+			'ca_google_tag_manager_id'       => get_option( 'ca_google_tag_manager_id' ),
+			'ca_google_tag_manager_approved' => get_option( 'ca_google_tag_manager_approved', false),
 			'ca_site_version'             => $ver,
 			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
 			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),

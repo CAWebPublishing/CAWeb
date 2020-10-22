@@ -104,8 +104,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				/* If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link */
 				$home_link = ( isset( $args->home_link ) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
 
-				$search_link = ( isset( $args->version ) && 5 <= $args->version && 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
-									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '' );
+				$search_link = 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
+									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
 
 				$nav_menu = sprintf(
 					'<nav id="navigation" class="main-navigation %1$s hidden-print">
@@ -122,9 +122,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<span class="pull-right">Powered by: CAWeb Publishing Service</span>' : '';
 
 				$nav_menu = sprintf(
-					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container" %2$s><p class="d-inline">Copyright &copy; %3$s State of California</p>%4$s</div></div></footer>',
+					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container"><p class="d-inline">Copyright &copy; %2$s State of California</p>%3$s</div></div></footer>',
 					$nav_menu,
-					( 4 >= $args->version ? 'style="text-align:center;" ' : '' ),
 					gmdate( 'Y' ),
 					$powered_by
 				);
@@ -152,11 +151,10 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="group">%1$s%2$s</div></div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
-                      <div class="container p-0" %3$s> Copyright &copy;
+                      <div class="container p-0"> Copyright &copy;
                       <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
 					$nav_menu,
-					$social_links,
-					( 4 >= $args['version'] ? 'style="text-align:center;" ' : '' )
+					$social_links
 				);
 			}
 
@@ -282,7 +280,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					/* Get column count */
 					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
 
-					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
+					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span><span class="ca-gov-icon-caret-right carrot rotate" aria-hidden="true"></span>' : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
@@ -304,51 +302,30 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							$nav_img      = isset( $item_meta['_caweb_menu_image'][0] ) ? $item_meta['_caweb_menu_image'][0] : '';
 							$nav_img_side = $item_meta['_caweb_menu_image_side'][0] ? $item_meta['_caweb_menu_image_side'][0] : 'left';
 							$nav_img_size = $item_meta['_caweb_menu_image_size'][0] ? $item_meta['_caweb_menu_image_size'][0] : 'quarter';
-							switch ( $args->version ) {
-								case 5.5:
-								case 5:
-									$sub_img_class = sprintf(
-										'%1$s %2$s',
-										( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
-										( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
-									);
+							
+							$sub_img_class = sprintf(
+								'%1$s %2$s',
+								( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
+								( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
+							);
 
-									$sub_img_div = sprintf(
-										'<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
-										$nav_img,
-										$nav_img_size,
-										$nav_img_side
-									);
+							$sub_img_div = sprintf(
+								'<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
+								$nav_img,
+								$nav_img_size,
+								$nav_img_side
+							);
 
-									$nav_item .= sprintf(
-										'<div class="sub-nav">
-									<div class="%1$s">%2$s</div>%3$s</div></li>',
-										( ! empty( $nav_img ) ? $sub_img_class : 'full' ),
-										$this->createSubNavMenu( $child_links, $args ),
-										( ! empty( $nav_img ) ? $sub_img_div : '' )
-									);
-									break;
-								case 4:
-									$sub_img_class = sprintf(
-										'with-image-%1$s-%2$s',
-										( 'quarter' === $nav_img_size ? 'sm' : 'md' ),
-										$nav_img_side
-									);
-
-									$sub_img_div = sprintf( '<div class="sub-nav-decoration" style="background: url(%1$s); "></div>', $nav_img );
-
-									$nav_item .=
-									sprintf(
-										'<div class="sub-nav %2$s">%1$s%3$s</div></li>',
-										$this->createSubNavMenu( $child_links, $args ),
-										( ! empty( $nav_img ) ? $sub_img_class : 'empty' ),
-										( ! empty( $nav_img ) ? $sub_img_div : '' )
-									);
-									break;
-							}
+							$nav_item .= sprintf(
+								'<div class="sub-nav">
+							<div class="%1$s">%2$s</div>%3$s</div></li>',
+								( ! empty( $nav_img ) ? $sub_img_class : 'full' ),
+								$this->createSubNavMenu( $child_links, $args ),
+								( ! empty( $nav_img ) ? $sub_img_div : '' )
+							);
 						} else {
 							$nav_item .= sprintf(
-								'<div class="empty sub-nav"><div>%1$s</div></li>',
+								'<div class="sub-nav"><div>%1$s</div></div></li>',
 								$this->createSubNavMenu( $child_links, $args )
 							);
 						}
@@ -389,61 +366,44 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				$li_unit = 'megadropdown' === get_option( 'ca_default_navigation_menu', 'megadropdown' ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
 
-				/* if version 5 */
-				if ( 5 <= $args->version ) {
-					if ( 'unit3' !== $li_unit ) {
-						/* Create Link */
-						$sub_nav .= sprintf(
-							'<li %1$s title="%2$s" %3$s><a href="%4$s" class="second-level-link"%5$s>%6$s%7$s%8$s</a></li>',
-							sprintf( ' class="%1$s %2$s" ', $li_unit, implode( ' ', $item->classes ) ),
-							$item->attr_title,
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$item->url,
-							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
-							$icon,
-							$item->title,
-							( 'unit1' !== $li_unit ? $desc : '' )
-						);
-					} else {
-						/* Get nav media if present */
-						$nav_media_image    = $item_meta['_caweb_menu_media_image'][0];
-						$nav_media_alt_text = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
-
-						$nav_media = ( 'megadropdown' === $args->style ?
-														sprintf(
-															'<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
-															$item->url,
-															$nav_media_image,
-															$nav_media_alt_text
-														) : '' );
-
-						$sub_nav .= sprintf(
-							'<li %1$s title="%2$s" %3$s><div class="nav-media">
-                                                                    <div class="media">%4$s<div class="media-body"><div class="title"><a href="%5$s"%6$s>%7$s</a></div>
-                                                                    <div class="teaser">%8$s</div></div></div></div></li>',
-							sprintf( ' class="%1$s %2$s" ', $li_unit, implode( ' ', $item->classes ) ),
-							$item->attr_title,
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$nav_media,
-							$item->url,
-							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
-							$item->title,
-							$desc
-						);
-					}
-
-					/* version 4 */
-				} else {
+				if ( 'unit3' !== $li_unit ) {
+					/* Create Link */
 					$sub_nav .= sprintf(
-						'<li %1$s title="%2$s" ><a href="%3$s" class="second-level-link"%4$s%5$s>%6$s%7$s</a>%8$s</li>',
+						'<li %1$s title="%2$s" %3$s><a href="%4$s" class="second-level-link"%5$s>%6$s%7$s%8$s</a></li>',
 						sprintf( ' class="%1$s %2$s" ', $li_unit, implode( ' ', $item->classes ) ),
 						$item->attr_title,
-						$item->url,
 						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
+						$item->url,
 						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
 						$icon,
 						$item->title,
 						( 'unit1' !== $li_unit ? $desc : '' )
+					);
+				} else {
+					/* Get nav media if present */
+					$nav_media_image    = $item_meta['_caweb_menu_media_image'][0];
+					$nav_media_alt_text = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
+
+					$nav_media = ( 'megadropdown' === $args->style ?
+													sprintf(
+														'<div class="media-left"><a href="%1$s"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
+														$item->url,
+														$nav_media_image,
+														$nav_media_alt_text
+													) : '' );
+
+					$sub_nav .= sprintf(
+						'<li %1$s title="%2$s" %3$s><div class="nav-media">
+																<div class="media">%4$s<div class="media-body"><div class="title"><a href="%5$s"%6$s>%7$s</a></div>
+																<div class="teaser">%8$s</div></div></div></div></li>',
+						sprintf( ' class="%1$s %2$s" ', $li_unit, implode( ' ', $item->classes ) ),
+						$item->attr_title,
+						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
+						$nav_media,
+						$item->url,
+						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+						$item->title,
+						$desc
 					);
 				}
 			}
@@ -483,13 +443,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			$social_links = $this->createFooterSocialMenu( $args );
 
-			if ( 4 >= $args->version ) {
-				$class = 'full';
-				$style = ' style="text-align:center;" ';
-			} else {
-				$class = ! empty( $social_links ) ? 'three-quarters' : 'full-width';
-				$style = '';
-			}
+			$class = ! empty( $social_links ) ? 'three-quarters' : 'full-width';
+			$style = '';
 
 			$nav_links = sprintf( '<div class="%1$s"><ul class="footer-links" %2$s><li><a href="#skip-to-content">Back to Top</a></li>%3$s</ul></div>%4$s', $class, $style, $nav_links, $social_links );
 
@@ -524,13 +479,9 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				}
 			}
 
-			$social_links = ! empty( $social_links ) ? sprintf(
-				'<ul class="socialsharer-container" %1$s>%2$s</ul>',
-				( 4 >= $args->version ? ' style="text-align:center;  float:none;" ' : '' ),
-				$social_links
-			) : '';
+			$social_links = ! empty( $social_links ) ? sprintf('<ul class="socialsharer-container">%1$s</ul>',	$social_links ) : '';
 
-			return ! empty( $social_links ) ? sprintf( '<div class="%1$s">%2$s</div>', ( 4 >= $args->version ? 'full' : 'quarter' ), $social_links ) : $social_links;
+			return ! empty( $social_links ) ? sprintf( '<div class="quarter">%1$s</div>', $social_links ) : $social_links;
 		}
 
 		/**
@@ -556,7 +507,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$menu_column_count        = isset( $tmp['_caweb_menu_column_count'][0] ) ? $tmp['_caweb_menu_column_count'][0] : '';
 			$nav_media_img            = isset( $tmp['_caweb_menu_media_image'][0] ) ? $tmp['_caweb_menu_media_image'][0] : '';
 
-			$site_version   = caweb_template_version();
 			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
@@ -579,9 +529,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					<option value="unit1"<?php print 'unit1' === $unit_size ? ' selected' : ''; ?>>Unit 1 - 50px height</option>
 					<?php if ( 'megadropdown' === $nav_menu_style ) : ?>
 						<option value="unit2"<?php print 'unit2' === $unit_size ? ' selected' : ''; ?>>Unit 2 - 100px height</option>
-						<?php if ( 5.0 <= $site_version ) : ?>
 						<option value="unit3"<?php print 'unit3' === $unit_size ? ' selected' : ''; ?>>Unit 3 - 100px height w/ Image</option>
-						<?php endif; ?>
 					<?php endif; ?>
 				</select>
 			</div>
