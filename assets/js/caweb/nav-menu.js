@@ -87,14 +87,14 @@ jQuery(document).ready(function($) {
 
       // Hide Nav Media Images, Unit Size Selector, Description
       $(media_image).addClass('hidden');
-      $(unit_selector).addClass('hidden');
+      $(unit_selector).parent().addClass('hidden');
       $(desc).addClass('hidden-field');
     }else{
       // Hide Mega Menu Options
       $(mega_menu_images).addClass('hidden');
      
       // Show Unit Selector
-      $(unit_selector).removeClass('hidden');
+      $(unit_selector).parent().removeClass('hidden');
 
       if( 'unit1' !== unit_size ){
         // Hide Description
