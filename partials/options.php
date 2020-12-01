@@ -498,7 +498,7 @@ function caweb_display_google_options() {
 				<label for="ca_google_analytic_id" class="d-block mb-0"><strong>Analytics ID</strong></label>
 				<small class="mb-2 text-muted d-block">Enter your unique Google Analytics ID, if you don't have one see an administrator.</small>
 				<!-- Analytics ID Field -->
-				<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control" value="<?php print esc_attr( $google_analytic_id ); ?>" >
+				<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control" value="<?php print esc_attr( $google_analytic_id ); ?>" <?php print get_option( 'ca_google_tag_manager_approved', false ) ? 'readonly' : ''; ?>>
 			</div>
 		</div>
 		<!-- Tag Manager ID Row -->

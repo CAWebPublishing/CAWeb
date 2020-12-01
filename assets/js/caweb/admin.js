@@ -37,12 +37,12 @@ jQuery(document).ready(function($) {
 	});
 
   $('.menu-list li a').on('click', function(e){
-	$(this).parent().parent().find('li').each(function(i, ele){
-		$(ele).removeClass('selected');
-	})
+    $(this).parent().parent().find('li').each(function(i, ele){
+      $(ele).removeClass('selected');
+    })
 
-	$(this).parent().addClass('selected');
-	$('input[name="tab_selected"]').val($(this).attr('href').replace('#', ''));
+    $(this).parent().addClass('selected');
+    $('input[name="tab_selected"]').val($(this).attr('href').replace('#', ''));
   });
 
   // Reset Fav Icon
@@ -79,6 +79,15 @@ jQuery(document).ready(function($) {
     }else{
       respSpan.html('');
     }	
+  });
+
+  // If Google Tag Manager Preview approved, disable Analytics iD
+  $('#ca_google_tag_manager_approved').on('change', function(e){
+      if( this.checked ){
+        $('#ca_google_analytic_id').attr('readonly', true);
+      }else{
+        $('#ca_google_analytic_id').attr('readonly', false);
+      }
   });
 
   // If Google Translate is set to Custom, show extra options
