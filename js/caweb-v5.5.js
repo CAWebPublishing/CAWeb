@@ -19356,6 +19356,7 @@ jQuery(document).ready(function() {
     // Run only if there is a Toggle Module on the current page
     if( toggle_modules.length  ){
         toggle_modules.each(function(index, element) {
+            var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
             
             $(element).attr('tabindex', 0);
             $(element).attr('role', 'button');
@@ -19363,7 +19364,7 @@ jQuery(document).ready(function() {
             
             $(element).on('click', function(e){
                 setTimeout( function(){ 
-                    var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+                    expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
                     $(element).attr('aria-expanded', expanded);
                 }, 1000 );
             });
