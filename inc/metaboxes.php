@@ -57,7 +57,7 @@ function caweb_page_identifier_metabox_callback( $post ) {
 	if new page, then ca_default_post_title_display option determines initial title setting
 	*/
 	if ( ! isset( $post->ID ) || ! in_array( 'ca_custom_post_title_display', get_post_custom_keys( $post->ID ), true ) ) {
-		$custom_title = ! get_option( 'ca_default_post_title_display', false ) ? ' checked' : '';
+		$custom_title = get_option( 'ca_default_post_title_display', false ) ? ' checked' : '';
 		/* if the post does have a ca_custom_post_title_display meta field let the user selected option override */
 	} else {
 		$custom_title = get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? ' checked' : '';
