@@ -866,7 +866,7 @@ jQuery(document).ready(function($) {
     // if theres no Google Search ID
     if( !this.value.trim() ){
       front_search_option.addClass('invisible');
-    }else if(5 <= site_version){
+    }else{
       front_search_option.removeClass('invisible');
     }
   });
@@ -891,7 +891,13 @@ jQuery(document).ready(function($) {
         $('#ca_google_analytic_id').attr('readonly', false);
       }
   });
-
+  // If no Tag Manager ID unapprove Preview
+  $('#ca_google_tag_manager_id').on('input',function(e){
+    // if theres no Tage Manager ID
+    if( !this.value.trim() ){
+		$('#ca_google_tag_manager_approved').bootstrapToggle('off');
+    }
+  });
   // If Google Translate is set to Custom, show extra options
   $('input[name^="ca_google_trans_enabled"]').click(function(){
     if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){
