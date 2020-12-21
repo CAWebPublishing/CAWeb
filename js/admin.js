@@ -125,8 +125,10 @@
 /* CAWeb Alert Option Javascript */
 jQuery(document).ready(function($) {
 	
-	$( "#caweb-alert-banners" ).sortable();
-	$( "#caweb-alert-banners" ).disableSelection()
+	if( $( "#caweb-alert-banners" ).length ){
+		$( "#caweb-alert-banners" ).sortable();
+		$( "#caweb-alert-banners" ).disableSelection()
+	}
 
 	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
 	$('#add-alert').click( function(e){ e.preventDefault(); addAlert();});
@@ -601,8 +603,10 @@ jQuery(document).ready(function($) {
     Custom CSS/JS
   */
  
-  $( "#uploaded-css, #uploaded-js" ).sortable();
-  $( "#uploaded-css, #uploaded-js" ).disableSelection();
+  if( $( "#uploaded-css, #uploaded-js" ).length ){
+	$( "#uploaded-css, #uploaded-js" ).sortable();
+	$( "#uploaded-css, #uploaded-js" ).disableSelection();
+  }
 
   // Remove Uploaded CSS/JS
   $('.remove-css, .remove-js').click(function(e){

@@ -61,6 +61,8 @@ if("" !== args.ca_google_tag_manager_id){
 }
 
 // Google Custom Search 
+if("" !== args.ca_google_search_id){
+
 (function() {
 
 	window.__gcse = {
@@ -116,16 +118,15 @@ if("" !== args.ca_google_tag_manager_id){
 
     }
 
-    if("" !== args.ca_google_search_id){
-        var cx = args.ca_google_search_id;
-        var gcse = document.createElement('script');
-        gcse.async = true;
-        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script');
-        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
-    }
-
+    var cx = args.ca_google_search_id;
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script');
+	s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
+		
   })();
+}
 
   /* Google Translate */
 if( args.ca_google_trans_enabled ){

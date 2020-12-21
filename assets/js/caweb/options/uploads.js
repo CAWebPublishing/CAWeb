@@ -5,8 +5,10 @@ jQuery(document).ready(function($) {
     Custom CSS/JS
   */
  
-  $( "#uploaded-css, #uploaded-js" ).sortable();
-  $( "#uploaded-css, #uploaded-js" ).disableSelection();
+  if( $( "#uploaded-css, #uploaded-js" ).length ){
+	$( "#uploaded-css, #uploaded-js" ).sortable();
+	$( "#uploaded-css, #uploaded-js" ).disableSelection();
+  }
 
   // Remove Uploaded CSS/JS
   $('.remove-css, .remove-js').click(function(e){
