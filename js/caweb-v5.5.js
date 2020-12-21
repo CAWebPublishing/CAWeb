@@ -31,22 +31,33 @@ if( ! args.ca_google_tag_manager_approved ){
 
 // Google Tag Manager
 if("" !== args.ca_google_tag_manager_id){
-	(function(w,d,s,l,i){
-		w[l]= w[l] || [];
-		w[l].push(
-			{
-				'gtm.start': new Date().getTime(),
-				event:'gtm.js'
-			}
-			);
-		var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),
-		dl=l!='dataLayer' ? '&l=' +l : '';
-		
-		j.async=true;
-		j.src='https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-		f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer',args.ca_google_tag_manager_id);
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag(){
+		dataLayer.push(arguments);
+	}
+
+	gtag('js', new Date());
+
+	gtag('config', args.ca_google_tag_manager_id );
+
+	var getOutboundLink = function(url) {
+		gtag('event', 'click', {
+			'event_category': 'navigation',
+			'event_label': 'outbound link: ' + url,
+			'transport_type': 'beacon',
+			'event_callback': function(){document.location = url;}
+		});
+	}
+
+		var trackDownload = function(filename) {
+		gtag('event', 'click', {
+			'event_category': 'download',
+			'event_label': 'file: ' + filename,
+			'transport_type': 'beacon',
+			'event_callback': function(){document.location = url;}
+		});
+	}
 }
 
 // Google Custom Search 
