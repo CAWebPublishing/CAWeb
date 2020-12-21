@@ -139,15 +139,19 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 	 * @return void
 	 */
 	public function slideshow_banner_removal() {
+		$nonce    = wp_create_nonce( 'caweb_remove_slideshow_banner' );
+		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_remove_slideshow_banner' );
+
 		global $post;
+
+		if ( null === $post || (isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
+			return;
+		}
+
 		$nonce    = wp_create_nonce( 'caweb_slideshow_banner_removal' );
 		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_slideshow_banner_removal' );
 		$con      = is_object( $post ) ? $post->post_content : $post['post_content'];
 		$module   = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
-
-		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
-			return;
-		}
 
 		if ( empty( $module ) ) :
 			?>

@@ -31,25 +31,38 @@ if( ! args.ca_google_tag_manager_approved ){
 
 // Google Tag Manager
 if("" !== args.ca_google_tag_manager_id){
-	(function(w,d,s,l,i){
-		w[l]= w[l] || [];
-		w[l].push(
-			{
-				'gtm.start': new Date().getTime(),
-				event:'gtm.js'
-			}
-			);
-		var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),
-		dl=l!='dataLayer' ? '&l=' +l : '';
-		
-		j.async=true;
-		j.src='https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-		f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer',args.ca_google_tag_manager_id);
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag(){
+		dataLayer.push(arguments);
+	}
+
+	gtag('js', new Date());
+
+	gtag('config', args.ca_google_tag_manager_id );
+
+	var getOutboundLink = function(url) {
+		gtag('event', 'click', {
+			'event_category': 'navigation',
+			'event_label': 'outbound link: ' + url,
+			'transport_type': 'beacon',
+			'event_callback': function(){document.location = url;}
+		});
+	}
+
+		var trackDownload = function(filename) {
+		gtag('event', 'click', {
+			'event_category': 'download',
+			'event_label': 'file: ' + filename,
+			'transport_type': 'beacon',
+			'event_callback': function(){document.location = url;}
+		});
+	}
 }
 
 // Google Custom Search 
+if("" !== args.ca_google_search_id){
+
 (function() {
 
 	window.__gcse = {
@@ -105,16 +118,15 @@ if("" !== args.ca_google_tag_manager_id){
 
     }
 
-    if("" !== args.ca_google_search_id){
-        var cx = args.ca_google_search_id;
-        var gcse = document.createElement('script');
-        gcse.async = true;
-        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script');
-        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
-    }
-
+    var cx = args.ca_google_search_id;
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script');
+	s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
+		
   })();
+}
 
   /* Google Translate */
 if( args.ca_google_trans_enabled ){
