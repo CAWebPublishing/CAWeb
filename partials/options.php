@@ -493,7 +493,7 @@ function caweb_display_google_options() {
 		</div>
 
 		<!-- Analytics ID Row -->
-		<div class="form-row">
+		<div class="form-row <?php ! empty( $google_tag_manager_approved ) ? ' hidden' : ''; ?>">
 			<div class="form-group col-sm-5">
 				<label for="ca_google_analytic_id" class="d-block mb-0"><strong>Analytics ID</strong></label>
 				<small class="mb-2 text-muted d-block">Enter your unique Google Analytics ID, if you don't have one see an administrator.</small>
