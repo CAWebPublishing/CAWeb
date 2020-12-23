@@ -891,8 +891,10 @@ jQuery(document).ready(function($) {
   $('#ca_google_tag_manager_approved').on('change', function(e){
       if( this.checked ){
         $('#ca_google_analytic_id').attr('readonly', true);
+        $('#ca_google_analytic_id').addClass('hidden');
       }else{
         $('#ca_google_analytic_id').attr('readonly', false);
+        $('#ca_google_analytic_id').removeClass('hidden');
       }
   });
   // If no Tag Manager ID unapprove Preview
