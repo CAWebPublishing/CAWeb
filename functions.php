@@ -340,7 +340,6 @@ function caweb_wp_enqueue_scripts() {
 	if ( ! $vb_enabled ) {
 
 		$localize_args = array(
-			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
 			'ca_google_tag_manager_id'       => get_option( 'ca_google_tag_manager_id' ),
 			'ca_google_tag_manager_approved' => get_option( 'ca_google_tag_manager_approved', false),
 			'ca_site_version'             => $ver,
@@ -350,6 +349,10 @@ function caweb_wp_enqueue_scripts() {
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 			'ajaxurl'                     => admin_url( 'admin-post.php' ),
 		);
+
+		if( get_option( 'ca_google_tag_manager_approved', false) ){
+			$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id' );
+		}
 
 		$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
 
