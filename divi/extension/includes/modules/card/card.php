@@ -266,7 +266,9 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 		$text_color   = ! empty( $text_color ) ? sprintf( ' style="color: %1$s;"', $text_color ) : '';
 		$footer_color = ! empty( $footer_color ) ? sprintf( ' style="color: %1$s;"', $footer_color ) : '';
 
-		$display_image = 'on' === $show_image ? sprintf( '<img class="card-img-top img-responsive" src="%1$s" alt="Card image cap">', $featured_image ) : '';
+		$alt_text      = caweb_get_attachment_post_meta( $featured_image, '_wp_attachment_image_alt' );
+
+		$display_image = 'on' === $show_image ? sprintf( '<img class="card-img-top img-responsive" src="%1$s" alt="%2$s">', $featured_image, $alt_text ) : '';
 
 		$display_header = 'on' === $include_header ? sprintf( '<div class="card-header"><h4 class="card-title pb-0 mb-0 border-bottom-0"%1$s>%2$s</h4></div>', $text_color, $title ) : '';
 

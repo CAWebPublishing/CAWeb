@@ -273,7 +273,7 @@ function caweb_font_sizes( $exclude = array(), $values = false ) {
 function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ) {
 
 	if ( empty( $image_url ) ) {
-		return 0;
+		return '';
 	} elseif ( is_string( $image_url ) || is_array( $image_url ) ) {
 		$query = array(
 			'post_type'  => 'attachment',
