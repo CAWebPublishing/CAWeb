@@ -350,7 +350,7 @@ function caweb_wp_enqueue_scripts() {
 			'ajaxurl'                     => admin_url( 'admin-post.php' ),
 		);
 
-		if( get_option( 'ca_google_tag_manager_approved', false) ){
+		if( ! get_option( 'ca_google_tag_manager_approved', false) ){
 			$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id' );
 		}
 
