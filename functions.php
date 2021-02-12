@@ -348,11 +348,11 @@ function caweb_wp_enqueue_scripts() {
 			'ajaxurl'                     => admin_url( 'admin-post.php' ),
 		);
 
-		if( ! get_option( 'ca_google_tag_manager_id', '' ) ){
+		if( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ){
 			$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
 		}
 
-		if( ! get_option( 'ca_google_analytic_id', '' ) ){
+		if( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ){
 			$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
 		}
 
