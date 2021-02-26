@@ -462,7 +462,6 @@ function caweb_display_google_options() {
 
 	// Tag Manager ID
 	$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '');
-	$google_tag_manager_approved = get_option( 'ca_google_tag_manager_approved', false ) ? ' checked' : '';
 
 	// Meta ID.
 	$google_meta_id = get_option( 'ca_google_meta_id', '' );
@@ -494,25 +493,21 @@ function caweb_display_google_options() {
 
 		<!-- Analytics ID Row -->
 		<div class="form-row">
-			<div class="form-group col-sm-5">
+			<div class="form-group col-sm-12<?php print ! empty( $google_tag_manager_approved ) ? ' hidden' : ''; ?>">
 				<label for="ca_google_analytic_id" class="d-block mb-0"><strong>Analytics ID</strong></label>
 				<small class="mb-2 text-muted d-block">Enter your unique Google Analytics ID, if you don't have one see an administrator.</small>
 				<!-- Analytics ID Field -->
-				<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control" value="<?php print esc_attr( $google_analytic_id ); ?>" >
+				<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control w-25" value="<?php print esc_attr( $google_analytic_id ); ?>">
 			</div>
 		</div>
 		<!-- Tag Manager ID Row -->
 		<div class="form-row">
-			<div class="form-group col-sm-5">
+			<div class="form-group col-sm-12">
 				<label for="ca_google_tag_manager_id" class="d-block mb-0"><strong>Tag Manager ID</strong></label>
 				<small class="mb-2 text-muted d-block">Enter your unique Google Tag Manager ID, if you don't have one see an administrator.</small>
+				<small class="mb-2 text-muted d-block">Note: If you fill out the Analytics field above with the same UA-xxxxxxxx code as you implement via Google Tag Manager, you will get duplicate reporting within Google Analytics.</small>
 				<!-- Tag Manager ID Field -->
-				<input type="text" name="ca_google_tag_manager_id" id="ca_google_tag_manager_id" class="form-control" value="<?php print esc_attr( $google_tag_manager_id ); ?>" >
-			</div>
-			<div class="form-group col-sm-5">
-				<label for="ca_google_tag_manager_approved" class="d-block mb-0"><strong>Preview Approved</strong></label>
-				<small class="mb-2 text-muted d-block">Has the Google Tag Manager Preview been accepeted.</small>
-				<input type="checkbox" id="ca_google_tag_manager_approved" name="ca_google_tag_manager_approved" data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $google_tag_manager_approved ); ?> />
+				<input type="text" name="ca_google_tag_manager_id" id="ca_google_tag_manager_id" class="form-control w-25" value="<?php print esc_attr( $google_tag_manager_id ); ?>" >
 			</div>
 		</div>
 		<!-- Meta ID Row -->

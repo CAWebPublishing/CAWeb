@@ -161,10 +161,14 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			),
 			'include_tags' => array(
 				'label'            => esc_html__( 'Tags', 'et_builder' ),
-				'renderer'         => 'et_builder_include_tags_option',
+				'type'         => 'categories',
 				'option_category'  => 'basic_option',
+				'post_type'            => 'post',
+				'taxonomy_name'        => 'post_tag',
 				'renderer_options' => array(
-					'use_terms' => false,
+					'use_terms' => true,
+					'term_name' => 'post_tag',
+					'field_name' => 'et_pb_include_tags',
 				),
 				'description'      => esc_html__( 'Choose which tags you would like to include in the list.', 'et_builder' ),
 				'show_if'          => array( 'all_tags_button' => 'off' ),
