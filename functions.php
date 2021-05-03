@@ -87,6 +87,17 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
  *
  * @return void
  */
+ 
+ 
+ /** 
+ * Enables the HTTP Strict Transport Security (HSTS) header in WordPress. 
+ */
+function tg_enable_strict_transport_security_hsts_header_wordpress() {
+    header( 'Strict-Transport-Security: max-age=10886400' );
+}
+add_action( 'send_headers', 'tg_enable_strict_transport_security_hsts_header_wordpress' );
+ 
+ 
 function caweb_setup_theme() {
 	/* Include CAWeb Functionality */
 	foreach ( glob( __DIR__ . '/inc/*.php' ) as $file ) {
