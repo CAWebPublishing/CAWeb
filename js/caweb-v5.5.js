@@ -450,7 +450,7 @@ function _tagLinks(evObj, evCat, evAct, evLbl, evVal, evNonInter, exisAttr)
 }
 
 /**
- * CA State Template v5.5 -  @version v5.5.20 -  3/4/2021 
+ * CA State Template v5.5 -  @version v5.5.21 -  4/21/2021 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
 /*! modernizr (Custom Build) | MIT *
  * https://modernizr.com/download/?-flexbox-setclasses !*/
@@ -16670,7 +16670,7 @@ $(document).ready(function () {
     var $resultsContainer = $('.search-results-container');
     var searchInput = $("#head-search #Search .search-textfield");
     var searchSubmit = $("#head-search #Search .gsc-search-button");
-    var searchReset = $("#head-search #Search .gsc-clear-button");
+    var searchReset = $("#head-search #Search .close-search");
     var featuredsearch = $("#head-search").hasClass("featured-search");
     var searchactive = $("#head-search").hasClass("active");
     var searchlabel = $("#SearchInput");
@@ -17320,8 +17320,8 @@ function initContent() {
         });
 
 
-        $(".owl-prev").attr("aria-label", "Previous slide");
-        $(".owl-next").attr("aria-label", "Next slide");
+        // $(".owl-prev").attr("aria-label", "Previous slide");
+        // $(".owl-next").attr("aria-label", "Next slide");
         // Add text to the dots 
         var dot = $('.owl-dots .owl-dot');
         dot.each(function () {
