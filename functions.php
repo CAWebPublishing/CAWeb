@@ -130,15 +130,8 @@ function caweb_setup_theme() {
 				'parent' => get_cat_ID( 'Content Types' ),
 			)
 		);
-	/** 
-	* Enables the HTTP Strict Transport Security (HSTS) header in WordPress. 
-	*/
-	function caweb_enable_hsts() {
-		header( 'Strict-Transport-Security: max-age=10886400; includeSubDomains');
-		}
-		add_action( 'send_headers', 'caweb_enable_hsts' );
-		
 	}
+	
 	
 
 	/**
@@ -210,6 +203,13 @@ function caweb_setup_theme() {
 			rmdir( $old_ext_js_dir );
 		}
 	}
+	/** 
+	* Enables the HTTP Strict Transport Security (HSTS) header in WordPress. 
+	*/
+	function caweb_enable_hsts() {
+		header( 'Strict-Transport-Security: max-age=10886400; includeSubDomains');
+		}
+		add_action( 'send_headers', 'caweb_enable_hsts' );	
 }
 
 
