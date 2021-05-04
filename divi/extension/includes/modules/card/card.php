@@ -193,6 +193,16 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 		);
 
 		$design_fields = array(
+			'heading_size' => array(
+				'label'             => esc_html__( 'Heading Size', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'default'           => 'h4',
+				'description'       => esc_html__( 'Here you can choose the heading size for the header title.', 'et_builder' ),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'header',
+			),
 			'card_color' => array(
 				'label'             => esc_html__( 'Set Card Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -209,7 +219,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 				'description'       => esc_html__( 'Here you can define a custom text color.', 'et_builder' ),
 				'show_if'           => array( 'include_header' => 'on' ),
 				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'header',
+				'toggle_slug'       => 'style',
 			),
 			'footer_color' => array(
 				'label'             => esc_html__( 'Footer Color', 'et_builder' ),
@@ -243,6 +253,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 		$featured_image = $this->props['featured_image'];
 
 		$include_header = $this->props['include_header'];
+		$heading_size = $this->props['heading_size'];
 		$title          = $this->props['title'];
 		$text_color     = $this->props['text_color'];
 
@@ -270,7 +281,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 
 		$display_image = 'on' === $show_image ? sprintf( '<img class="card-img-top img-responsive" src="%1$s" alt="%2$s">', $featured_image, $alt_text ) : '';
 
-		$display_header = 'on' === $include_header ? sprintf( '<div class="card-header"><h4 class="card-title pb-0 mb-0 border-bottom-0"%1$s>%2$s</h4></div>', $text_color, $title ) : '';
+		$display_header = 'on' === $include_header ? sprintf( '<div class="card-header"><%1$s class="card-title pb-0 mb-0 border-bottom-0"%2$s>%3$s</%1$s></div>', $heading_size, $text_color, $title ) : '';
 
 		$display_button = 'on' === $show_button ? sprintf( '<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text ) : '';
 
