@@ -45,11 +45,11 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$whitelist = array(
 			( $divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder' ),
 			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
-			sprintf( 'v%1$s', caweb_template_version() ),
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
 	}
-	$whitelist[] = ( get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '' );
+	$whitelist[] = sprintf( 'v%1$s', caweb_template_version() );
+	$whitelist[] = get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '';
 
 	/* Remove any classes in the blacklist from the wp_classes */
 	$wp_classes = array_diff( $wp_classes, $blacklist );

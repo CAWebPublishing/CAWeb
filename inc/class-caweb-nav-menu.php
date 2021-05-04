@@ -94,7 +94,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 */
 		public function caweb_nav_menu( $nav_menu, $args ) {
 			global $post;
-			$post_id = ( is_object( $post ) ? $post->ID : $post['ID'] );
+			$post_id = is_object( $post ) ? $post->ID : ( isset( $post['ID'] ) ? $post['ID'] : -1 );
 
 			$theme_location = $args->theme_location;
 			/* Header Menu Construction */
@@ -280,7 +280,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					/* Get column count */
 					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
 
-					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span><span class="ca-gov-icon-caret-right carrot rotate" aria-hidden="true"></span>' : '';
+					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
