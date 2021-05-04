@@ -62,8 +62,6 @@ if( ! empty($google_tag_manager_id) ):
 
 	<div class="navigation-search">
 
-		<!-- Version 4 top-right search box always displayed -->
-		<!-- Version 5.0 fade in/out search box displays on front page and if option is enabled -->
 		<!-- Include Navigation -->
 		<?php
 		wp_nav_menu(
