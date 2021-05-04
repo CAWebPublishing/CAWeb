@@ -131,6 +131,8 @@ function caweb_setup_theme() {
 			)
 		);
 	}
+	
+	
 
 	/**
 	 * Enable support for Post Thumbnails on posts and pages.
@@ -201,6 +203,13 @@ function caweb_setup_theme() {
 			rmdir( $old_ext_js_dir );
 		}
 	}
+	/** 
+	* Enables the HTTP Strict Transport Security (HSTS) header in WordPress. 
+	*/
+	function caweb_enable_hsts() {
+		header( 'Strict-Transport-Security: max-age=10886400; includeSubDomains');
+		}
+		add_action( 'send_headers', 'caweb_enable_hsts' );	
 }
 
 
