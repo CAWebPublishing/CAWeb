@@ -30189,7 +30189,7 @@ nav li {
 
 @media (min-width: 768px) {
   /* Main Navigation fix, increases height when links main links wrap */
-  .main-navigation {
+  body.v5 .main-navigation {
     display: flex;
     flex-direction: row-reverse;
     padding-left: 320px;
@@ -30215,6 +30215,11 @@ body.v5 header nav .top-level-nav .nav-item .ca-gov-icon-caret-right {
   body.v5 header nav .top-level-nav .nav-item .carrot {
     display: none;
   }
+}
+
+/* Override Divi Nav Opacity */
+.et_mobile_menu li a:hover, .nav ul li a:hover {
+  opacity: 1;
 }
 
 /* Dropdown Navigation Styles */
