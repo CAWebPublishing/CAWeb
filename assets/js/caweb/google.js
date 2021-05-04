@@ -1,6 +1,6 @@
 // Google Analytics
 var _gaq = _gaq || [];
-if("" !== args.ca_google_analytic_id){
+if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 	_gaq.push(['_gat._anonymizeIp']);
 	_gaq.push(['_setDomainName', '.ca.gov']);
@@ -27,7 +27,7 @@ if("" !== args.caweb_multi_ga){
 })();
 
 // Google Tag Manager
-if("" !== args.ca_google_tag_manager_id){
+if("" !== args.ca_google_tag_manager_id && undefined !== args.ca_google_tag_manager_id){
 	(function(w,d,s,l,i){
 		w[l] = w[l] || [];
 		w[l].push({'gtm.start' :new Date().getTime(), event:'gtm.js'});
@@ -43,7 +43,7 @@ if("" !== args.ca_google_tag_manager_id){
 }
 
 // Google Custom Search 
-if("" !== args.ca_google_search_id){
+if("" !== args.ca_google_search_id && undefined !== args.ca_google_search_id){
 
 (function() {
 
