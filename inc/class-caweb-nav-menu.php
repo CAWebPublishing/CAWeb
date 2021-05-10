@@ -487,7 +487,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		/**
 		 * CAWeb wp nav menu item custom fields hook. Hooked from the CAWeb_Nav_Menu_Walker.
 		 *
-		 * @see class-caweb-nav-menu.php Line 217
 		 *
 		 * @param  mixed $item_id Not used.
 		 * @param  mixed $item Menu item data object.
