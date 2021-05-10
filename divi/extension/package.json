@@ -1,9 +1,9 @@
 {
   "name": "caweb-divi-module-extension",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "divi-scripts": "1.0.1",
+    "divi-scripts": "1.0.2-rc.0",
     "moment": "^2.26.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -11,13 +11,15 @@
     "react-number-format": "^4.3.1",
     "react-owl-carousel": "^2.3.1",
     "react-render-html": "^0.6.0",
-    "react-scripts": "^3.2.0"
+    "react-scripts": "^3.2.0",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "divi-scripts start",
     "build": "divi-scripts build",
     "zip": "divi-scripts build && divi-scripts zip",
-    "eject": "divi-scripts eject"
+    "eject": "divi-scripts eject",
+    "postinstall": "npm config set yarn --global"
   },
   "browserslist": {
     "development": [

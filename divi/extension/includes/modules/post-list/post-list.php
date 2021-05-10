@@ -161,10 +161,14 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			),
 			'include_tags' => array(
 				'label'            => esc_html__( 'Tags', 'et_builder' ),
-				'renderer'         => 'et_builder_include_tags_option',
+				'type'         => 'categories',
 				'option_category'  => 'basic_option',
+				'post_type'            => 'post',
+				'taxonomy_name'        => 'post_tag',
 				'renderer_options' => array(
-					'use_terms' => false,
+					'use_terms' => true,
+					'term_name' => 'post_tag',
+					'field_name' => 'et_pb_include_tags',
 				),
 				'description'      => esc_html__( 'Choose which tags you would like to include in the list.', 'et_builder' ),
 				'show_if'          => array( 'all_tags_button' => 'off' ),
@@ -194,11 +198,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'label'             => esc_html__( 'Title Size', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
-				'options'           => array(
-					'h-1' => esc_html__( 'H1 - Large', 'et_builder' ),
-					'h-2' => esc_html__( 'H2 - Medium', 'et_builder' ),
-					'h-3' => esc_html__( 'H3 - Small', 'et_builder' ),
-				),
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
 				'description'       => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'header',
@@ -282,13 +282,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		setlocale( LC_MONETARY, 'en_US.UTF-8' );
 
 		if ( ! empty( $list_title ) ) {
-			if ( 'h-1' === $title_size ) {
-				$list_title = sprintf( '<h1>%1$s</h1>', $list_title );
-			} elseif ( 'h-2' === $title_size ) {
-				$list_title = sprintf( '<h2>%1$s</h2>', $list_title );
-			} elseif ( 'h-3' === $title_size ) {
-				$list_title = sprintf( '<h3>%1$s</h3>', $list_title );
-			}
+			$title_size = str_replace('-', '', $title_size );
+			$list_title = "<$title_size>$list_title</$title_size>"; 
 		}
 
 		$faqs   = 'faqs-list' === $style ? true : false;

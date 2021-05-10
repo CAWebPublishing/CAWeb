@@ -164,6 +164,16 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'header',
 			),
+			'heading_size' => array(
+				'label'             => esc_html__( 'Heading Size', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'default'           => 'h4',
+				'description'       => esc_html__( 'Here you can choose the heading size for the panel title.', 'et_builder' ),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'header',
+			),
 			'heading_text_color' => array(
 				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -241,22 +251,8 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 		$display_title = '';
 
 		if ( ! empty( $title ) ) {
-
-			switch ( $panel_layout ) {
-				case 'none':
-				case 'standout':
-				case 'standout highlight':
-					$h_size = 'h2';
-					break;
-				case 'overstated':
-					$h_size = 'h3';
-					break;
-				case 'default':
-				case 'understated':
-						$h_size = 'h4';
-					break;
-			}
-
+			$heading_size = $this->props['heading_size'];
+			
 			$display_options = '';
 			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1', 'vertical-align:sub;' ) : '';
 
@@ -281,7 +277,7 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 
 			$display_title = sprintf(
 				'<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
-				$h_size,
+				$heading_size,
 				$heading_align,
 				$heading_text_color,
 				$display_icon,

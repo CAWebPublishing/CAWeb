@@ -1479,11 +1479,12 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 		$nonce    = wp_create_nonce( 'caweb_remove_general_detail' );
 		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_remove_general_detail' );
 
-		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
+		global $post;
+
+		if ( null === $post || ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
 			return;
 		}
 
-		global $post;
 		$con    = ( is_object( $post ) ? $post->post_content : $post['post_content'] );
 		$module = caweb_get_shortcode_from_content( $con, 'et_pb_ca_post_handler' );
 		if ( empty( $module ) || 'general' !== $module->post_type_layout ) {

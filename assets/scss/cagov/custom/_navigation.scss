@@ -14,11 +14,21 @@
 }
 
 .second-level-nav {
-	display: initial;
+	display: block;
+	position: relative !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	width: auto !important;
+	padding: 0 !important;
 }
 
 .second-level-nav li{
 	float: left;
+}
+
+.second-level-nav .second-level-link{
+	font-size: 17.6px;
+	font-size: 1.1rem;
 }
 
 .unit2 , .unit3, .unit3 .nav-media .media{
@@ -38,7 +48,7 @@ nav li{
 
 @media (min-width: 768px){
 	/* Main Navigation fix, increases height when links main links wrap */
-	.main-navigation{
+	body.v5 .main-navigation{
 	  display: flex;
 	  flex-direction: row-reverse;
 	  padding-left: 320px;
@@ -54,4 +64,20 @@ nav li{
 	.top-level-nav .nav-item {
 		padding: 0 8px;
 	}
+}
+
+/* Carrots */
+body.v5 header nav .top-level-nav .nav-item .ca-gov-icon-caret-right{
+	display: none;
+}
+
+@media (max-width: 767px) {
+	body.v5 header nav .top-level-nav .nav-item .carrot{
+		display: none;
+	}
+}
+
+/* Override Divi Nav Opacity */
+.et_mobile_menu li a:hover, .nav ul li a:hover {
+    opacity: 1;
 }

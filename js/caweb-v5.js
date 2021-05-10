@@ -1,13 +1,12 @@
 // Google Analytics
 var _gaq = _gaq || [];
-   
-if("" !== args.ca_google_analytic_id){
+if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 	_gaq.push(['_gat._anonymizeIp']);
 	_gaq.push(['_setDomainName', '.ca.gov']);
 	_gaq.push(['_trackPageview']);
 }
-
+	
 _gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
 _gaq.push(['b._setDomainName', '.ca.gov']);
 _gaq.push(['b._trackPageview']);
@@ -17,31 +16,46 @@ if("" !== args.caweb_multi_ga){
   _gaq.push(['b._setDomainName', '.ca.gov']);
   _gaq.push(['b._trackPageview']);
 }
+
 (function() {
   var ga = document.createElement('script');
   ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
-    'http://www') + '.google-analytics.com/ga.js';
+	'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(ga, s);
 })();
 
+// Google Tag Manager
+if("" !== args.ca_google_tag_manager_id && undefined !== args.ca_google_tag_manager_id){
+	(function(w,d,s,l,i){
+		w[l] = w[l] || [];
+		w[l].push({'gtm.start' :new Date().getTime(), event:'gtm.js'});
+		var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s),
+			dl = l!='dataLayer' ? '&l=' + l : '';
+		
+		j.async = true;
+		j.src = 'https://www.googletagmanager.com/gtm.js?id='+ i + dl;
+	
+		f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer',args.ca_google_tag_manager_id);
+}
+
 // Google Custom Search 
+if("" !== args.ca_google_search_id && undefined !== args.ca_google_search_id){
 
-	(function() {
+(function() {
 
-		window.__gcse = {
-      callback: myCallback
-    };
+	window.__gcse = {
+    	callback: googleCSECallback
+	};
 
-    function myCallback() {
+    function googleCSECallback() {
 			var $searchContainer = $("#head-search");
 			var $searchText = $searchContainer.find(".gsc-input");
 			var $resultsContainer = $('.search-results-container');
 			var $body = $("body");
-
-      if( 4 == args.ca_site_version )
-			$searchText.attr("placeholder", "Search");
 			
 			// search icon is added before search button (search button is set to opacity 0 in css)
 			$("input.gsc-search-button").before("<span class='ca-gov-icon-search search-icon' aria-hidden='true'></span>");
@@ -86,16 +100,16 @@ if("" !== args.caweb_multi_ga){
 
     }
 
-      if("" !== args.ca_google_search_id){
-        var cx = args.ca_google_search_id;
-        var gcse = document.createElement('script');
-        gcse.async = true;
-        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-        var s = document.getElementsByTagName('script');
-        s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
-      }
-
+    var cx = args.ca_google_search_id;
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script');
+	s[s.length - 1].parentNode.insertBefore(gcse, s[s.length - 1]);
+		
   })();
+}
+
   /* Google Translate */
 if( args.ca_google_trans_enabled ){
   function googleTranslateElementInit() {
@@ -20673,39 +20687,60 @@ jQuery(document).ready(function() {
     }
 });
 jQuery(document).ready(function() {
-    /*
-    Divi Toggle Module Accessibility
-    Retrieve all Divi Toggle Modules
+	/*
+	Divi Toggle Module Accessibility
+	Retrieve all Divi Toggle Modules
    */
-  var toggle_modules = $('div.et_pb_toggle');
+	var toggle_modules = $('div.et_pb_toggle');
 
+	// Run only if there is a Toggle Module on the current page
+	if( toggle_modules.length  ){
+		toggle_modules.each(function(index, element) {
+			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
 
-    // Run only if there is a Toggle Module on the current page
-    if( toggle_modules.length  ){
-        toggle_modules.each(function(index, element) {
-            $(element).attr('tabindex', 0);
-            $(element).attr('role', 'button');
+			$(element).attr('tabindex', 0);
+			$(element).attr('role', 'button');
+			$(element).attr('aria-expanded', expanded);
 
-            $(element).on('focusin', function(e){
-                toggleExpansion(this);
-            });
-            $(element).on('click', function(e){
-                setTimeout( function(){ toggleExpansion(element); }, 1000 );
-            });
-        });      
+			// Events
+			$(element).on('click keydown', function(e){
+				// Shows or hides content in accordion when Enter or Space key is pressed
+				if (e.type === 'keydown') {
+					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
+					var toggleKeyPressed = toggleKeys.includes(e.which);
 
-        function toggleExpansion(ele){
-            var expanded = $(ele).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-            var span_icon = $(ele).find('.et_pb_toggle_title span');
-            $(ele).attr('aria-expanded', expanded);
+					if (toggleKeyPressed) {
+						setTimeout( function(){
+							$(element).toggleClass('et_pb_toggle_open');
+							$(element).toggleClass('et_pb_toggle_close');
 
-            if( span_icon.length ){
-                'true' === expanded ? span_icon.removeClass('ca-gov-icon-triangle-right') : span_icon.addClass('ca-gov-icon-triangle-right');
-            }
-        }
-    }
+							if ($(element).hasClass('et_pb_toggle_open')) {
+								$(element).find('.et_pb_toggle_content').css('display', 'block');
+							} else {
+								$(element).find('.et_pb_toggle_content').css('display', 'none')
+							}
+						}, 500);
+					}
 
+					// Prevents spacebar from scrolling page to the bottom
+					if (e.which === 32) {
+						e.preventDefault();
+					}
+				}
+
+				// Modifies value for aria-expanded attribute
+				// when toggle is clicked or Enter/Space key is pressed
+				if (e.type === 'click' || toggleKeyPressed) {
+					setTimeout( function(){
+						var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+						$(element).attr('aria-expanded', expanded);
+					}, 1000 );
+				}
+			});
+		});
+	}
 });
+
 jQuery(document).ready(function() {
 	/*
     Divi Video Module Accessibility

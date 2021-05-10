@@ -63,7 +63,7 @@ function caweb_icon_menu( $atts ) {
  *                     $atts['heading_icon'] = Panel Icon for the Heading, can be numerical index or name of icon from caweb_get_icon_list().
  *                     $atts['button_url'] = Adds a button url to the Panel Heading
  *                     $atts['button_text'] = 'Read More' button text unless set.
- * @param  string/html $content Content to render inside Panel body.
+ * @param  string|html $content Content to render inside Panel body.
  *
  * @return html
  */
@@ -112,7 +112,7 @@ function caweb_panel_func( $atts, $content = '' ) {
  *
  * @param  array       $atts Array of Settings for the Section.
  *                     $atts['layout'] = section variations none, default, standout, standout highlight, overstated, and understated.
- * @param  string/html $content Content to render inside Section body.
+ * @param  string|html $content Content to render inside Section body.
  *
  * @return html
  */
@@ -137,7 +137,7 @@ function caweb_section_func( $atts, $content = '' ) {
  * CAWeb Carousel
  *
  * @param  array       $atts Array of Settings for the Carousel.
- * @param  string/html $content Content to render inside Carousel body.
+ * @param  string|html $content Content to render inside Carousel body.
  *
  * @return html
  */
@@ -162,7 +162,7 @@ function caweb_carousel_func( $atts, $content = '' ) {
  * CAWeb Slide
  *
  * @param  array       $atts Array of Settings for the Slide.
- * @param  string/html $content Content to render inside Slide body.
+ * @param  string|html $content Content to render inside Slide body.
  *
  * @return html
  */
