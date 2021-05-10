@@ -292,7 +292,6 @@ function caweb_wp_enqueue_parent_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom CSS
  * @return void
  */
 function caweb_wp_enqueue_scripts() {
@@ -392,7 +391,6 @@ function caweb_wp_enqueue_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom JS
  * @return void
  */
 function caweb_late_wp_enqueue_scripts() {
@@ -592,7 +590,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
  *
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
- * @todo Remove nginx cache references.
  *
  * @return void
  */
