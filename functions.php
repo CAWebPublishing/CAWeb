@@ -292,7 +292,6 @@ function caweb_wp_enqueue_parent_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom CSS
  * @return void
  */
 function caweb_wp_enqueue_scripts() {
@@ -392,7 +391,6 @@ function caweb_wp_enqueue_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom JS
  * @return void
  */
 function caweb_late_wp_enqueue_scripts() {
@@ -592,7 +590,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
  *
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
- * @todo Remove nginx cache references.
  *
  * @return void
  */
@@ -652,15 +649,11 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 
 	wp_set_object_terms( $post_id, $cats, 'category' );
 
-	/* Search for Post List, Post Slider, PostNavigation, Blog Module if they exists, add the 'nginx_cache_purge' custom meta field */
-	$cache_modules = array( 'et_pb_ca_post_list', 'et_pb_post_slider', 'et_pb_blog', 'et_pb_post_nav' );
-	$module        = caweb_get_shortcode_from_content( $content, $cache_modules, true );
-
-	if ( ! empty( $module ) ) {
-		update_post_meta( $post_id, 'nginx_cache_purge', 'yes' );
-	} else {
-		delete_post_meta( $post_id, 'nginx_cache_purge' );
-	}
+	/* 
+		The 'nginx_cache_purge' custom meta field was used on the old MCS system, 
+		if the page/post has this field delete it.
+	*/
+	delete_post_meta( $post_id, 'nginx_cache_purge' );
 }
 
 /*
