@@ -90,7 +90,15 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 function caweb_setup_theme() {
 	/* Include CAWeb Functionality */
 	foreach ( glob( __DIR__ . '/inc/*.php' ) as $file ) {
-		require_once $file;
+		// if file is live-drafts functionality.
+		if( strpos($file,'live-drafts.php') ){
+			// check if CAWeb Live Drafts is enabled before including.
+			if( get_option( 'caweb_live_drafts', false ) ){
+				require_once $file;
+			}
+		}else{
+			require_once $file;
+		}
 	}
 
 	/* Insert Parent Content Type Category */

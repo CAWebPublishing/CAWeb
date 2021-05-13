@@ -569,11 +569,13 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		}
 	}
 
-	$caweb_misc_options = array( 'caweb_external_css', 'ca_custom_css', 'caweb_external_js', 'ca_custom_js' );
+	$caweb_custom_options = array( 'caweb_external_css', 'ca_custom_css', 'caweb_external_js', 'ca_custom_js' );
 
 	$caweb_special_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga' );
 
 	$caweb_alert_options = array( 'caweb_alerts' );
+
+	$caweb_addtl_options = array( 'caweb_live_drafts' );
 
 	switch ( $group ) {
 		case 'general':
@@ -604,8 +606,8 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			$output = array_merge( $caweb_social_options, $caweb_social_extra_options );
 
 			break;
-		case 'misc':
-			$output = $caweb_misc_options;
+		case 'custom':
+			$output = $caweb_custom_options;
 
 			break;
 		case 'special':
@@ -618,6 +620,10 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			break;
 		case 'alerts':
 			$output = $caweb_alert_options;
+
+			break;
+		case 'addtl':
+			$output = $caweb_addtl_options;
 			break;
 		default:
 			$output = array_merge(
@@ -627,8 +633,9 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 				$caweb_google_options,
 				$caweb_social_options,
 				$caweb_social_extra_options,
-				$caweb_misc_options,
-				$caweb_alert_options
+				$caweb_custom_options,
+				$caweb_alert_options,
+				$caweb_addtl_options
 			);
 
 			break;
