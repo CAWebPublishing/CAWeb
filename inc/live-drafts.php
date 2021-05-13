@@ -7,20 +7,26 @@
  * @package CAWeb
  */
 
-// Admin head.
-add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
+add_action( 'load-post.php', 'caweb_live_drafts_init' );
+add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
 
-// Pre-post update.
-add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
+function caweb_live_drafts_init(){
 
-// Save post action.
-add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
-add_action( 'publish_future_post', 'caweb_live_drafts_post_update', 10, 2 );
+	// Admin head.
+	add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
 
-// Admin footer.
-add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer', 10 );
+	// Pre-post update.
+	add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
 
-add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
+	// Save post action.
+	add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+	add_action( 'publish_future_post', 'caweb_live_drafts_post_update', 10, 2 );
+
+	// Admin footer.
+	add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer', 10 );
+
+	add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
+}
 
 function caweb_live_drafts_admin_head() {
 	global $post;
@@ -37,10 +43,10 @@ function caweb_live_drafts_admin_head() {
 				$('<input type="submit" class="button button-highlighted" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
 
 				$('input#save-post').on('click', function(){
-					if( undefined === arguments[0].originalEvent ){
+					if( undefined === arguments[0].originalEvent && 'saving' !== $('input[name="caweb_save_draft"]').val() ){
 						$('input[name="caweb_save_draft"]').val('divi');
 					}else{
-						$('input[name="caweb_save_draft"]').val('');
+						$('input[name="caweb_save_draft"]').val('saving');
 					}
 				});
 			});

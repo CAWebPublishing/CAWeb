@@ -1,4 +1,5 @@
 // Google Analytics
+var args = args || [];
 var _gaq = _gaq || [];
 if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
@@ -158,7 +159,8 @@ var eValues = {
 			};
 
 
-var mainDomain = document.location.hostname === "localhost" ? "localhost" : document.location.hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,4}))(\/.*)?$/)[1];
+var mainDomain = document.location.hostname === "localhost" ? "localhost" : document.location.hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,5}))(\/.*)?$/);
+mainDomain = null !== mainDomain ? mainDomain[1] : "";
 mainDomain = mainDomain.toLowerCase();
 
 if(isSubDomainTracker == true)
