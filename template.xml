@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+    <name>caweb</name>
+    <author>Danny Guzman</author>
+     <email>guzmanjd86@gmail.com</email>
+     <description>phpDocumentor Template for the CAWeb WordPress Theme</description>
+    <version>1.0.0</version>
+    <parameters>
+      <parameter key="twig-debug">true</parameter>
+    </parameters>
+    <transformations>
+      <transformation writer="FileIo" query="copy" source="css/cagov-v5.5-santa barbara.css" artifact="css/caweb.core.css"/>
+      <transformation writer="FileIo" query="copy" source="template/css/phpdoc.css" artifact="css/phpdoc.css"/>
+      <transformation writer="FileIo" query="copy" source="js/caweb-v5.5.js" artifact="js/caweb.core.js"/>
+      <transformation writer="FileIo" query="copy" source="js/libs/jquery.js" artifact="js/jquery.js"/>
+      <transformation writer="FileIo" query="copy" source="images/system/favicon.ico" artifact="favicon.ico"/>
+      <transformation writer="FileIo" query="copy" source="images/system/caweb-logo.png" artifact="imgs/branding.png"/>
+      <transformation writer="FileIo" query="copy" source="images/system/caweb_logo.png" artifact="imgs/caweb-logo.png"/>
+      <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/"/>
+      <transformation writer="twig" source="template/index.html.twig" artifact="index.html" />
+      <transformation writer="twig" query="indexes.classes" source="template/classes.html.twig" />
+      <!--transformation writer="twig" query="files" source="template/index.html.twig" artifact="{{node}}.html" /-->
+    </transformations>
+</template>

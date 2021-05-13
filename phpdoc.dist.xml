@@ -17,7 +17,6 @@
 		<ignore>
 	                <path>assets/**/*</path>
 	                <path>build/**/*</path>
-	                <path>core/**/*</path>
 	                <path>css/**/*</path>
 	                <path>divi/**/*</path>
 	                <path>fonts/**/*</path>
@@ -29,4 +28,5 @@
 		</ignore>
         </api>
     </version>
+	<template name="." location="."></template>
 </phpdocumentor>
