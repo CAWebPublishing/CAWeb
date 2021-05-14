@@ -22,6 +22,9 @@ function caweb_live_drafts_init(){
 	add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
 	add_action( 'publish_future_post', 'caweb_live_drafts_post_update', 10, 2 );
 
+	// Post Update
+	add_action( 'post_updated', 'caweb_live_drafts_post_updated', 10, 3);
+
 	// Admin footer.
 	add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer', 10 );
 
@@ -42,11 +45,17 @@ function caweb_live_drafts_admin_head() {
 
 				$('<input type="submit" class="button button-highlighted" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
 
-				$('input#save-post').on('click', function(){
-					if( undefined === arguments[0].originalEvent && 'saving' !== $('input[name="caweb_save_draft"]').val() ){
-						$('input[name="caweb_save_draft"]').val('divi');
+				$('input#save-post').on('click', function(e){
+					if( undefined !== arguments[0].originalEvent && arguments[0].originalEvent instanceof MouseEvent ){
+						if( ! $('#et_pb_toggle_builder').hasClass('et_pb_builder_is_used') || ! $('body').hasClass('et-bfb') ){
+							$('input[name="caweb_save_draft"]').val('saving');
+						}else{
+							$('input[name="caweb_save_draft"]').val('divi');
+						}
 					}else{
-						$('input[name="caweb_save_draft"]').val('saving');
+						if( 'divi' === $('input[name="caweb_save_draft"]').val() ){
+							$('input[name="caweb_save_draft"]').val('saving');
+						}
 					}
 				});
 			});
@@ -107,8 +116,7 @@ function caweb_live_drafts_admin_footer() {
 
 function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 
-	// If toggling Divi Page builder.
-	if ( isset( $_REQUEST['caweb_save_draft'] ) && 'divi' === $_REQUEST['caweb_save_draft'] ) {
+	if( isset( $_REQUEST['caweb_save_draft'] ) && 'saving' !== $_REQUEST['caweb_save_draft'] ){
 		return $post_id;
 	}
 
@@ -182,10 +190,6 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 
 		// Add a hidden meta data value to indicate the draft exist for a live page.
 		update_post_meta( $post_id, '_pc_draftId', $new_id );
-
-		// Send user to new edit page.
-		wp_redirect( admin_url( 'post.php?action=edit&post=' . $new_id ) );
-		exit();
 
 	}
 
@@ -261,4 +265,48 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 	}
 }
 
+function caweb_live_drafts_post_updated( $post_id, $post_after, $post_before ){
+	
+	if( isset( $_REQUEST['caweb_save_draft'] ) && 'saving' !== $_REQUEST['caweb_save_draft'] ){
+		return $post_id;
+	}
+
+	// Check if this is an auto save routine. If it is we dont want to do anything.
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	// Only continue if this request is for the post or page post type.
+	if ( isset( $_POST['post_type'] ) &&
+		! in_array( $_POST['post_type'], array( 'post', 'page' ), true ) ) {
+		return $post_id;
+	}
+
+	// Check permissions.
+	if ( isset( $_POST['post_type'] ) &&
+		! current_user_can( 'edit_' . ( 'posts' === $_POST['post_type'] ? 'posts' : 'page' ), $post_id ) ) {
+		  return $post_id;
+	}
+
+	// Catch only when a draft is saved of a live page.
+	if ( isset( $_REQUEST['save'] ) &&
+		isset( $_REQUEST['post_status'] ) &&
+		$_REQUEST['save'] == 'Save Draft' &&
+		$_REQUEST['post_status'] == 'publish'
+		) {
+
+		// Check for post meta that identifies this as a 'live draft'.
+		$_pc_draft_id = get_post_meta( $post_id, '_pc_draftId', true );
+
+		if ( empty( $_pc_draft_id ) ) {
+			return;
+		}
+
+		// Send user to new edit page.
+		wp_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
+		exit();
+
+	}
+
+}
 ?>
