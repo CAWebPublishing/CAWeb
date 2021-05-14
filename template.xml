@@ -19,6 +19,8 @@
       <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/"/>
       <transformation writer="twig" source="template/index.html.twig" artifact="index.html" />
       <transformation writer="twig" query="indexes.classes" source="template/classes.html.twig" />
+      <transformation writer="twig" query="files" source="template/files.html.twig" artifact="files.html" />
+      <transformation writer="twig" query="files" source="template/files.source.html.twig" />
       <!--transformation writer="twig" query="files" source="template/index.html.twig" artifact="{{node}}.html" /-->
     </transformations>
 </template>
