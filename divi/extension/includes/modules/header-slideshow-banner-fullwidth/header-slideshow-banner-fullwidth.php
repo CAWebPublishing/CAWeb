@@ -97,6 +97,13 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		return array_merge( $general_fields, $design_fields, $advanced_fields );
 	}
+	public function get_advanced_fields_config() {
+		return array(
+			'margin_padding' => false,
+		);
+	}
+
+
 
 	/**
 	 * Renders the Module on the frontend
@@ -114,7 +121,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		global $et_pb_fullwidth_header_slider_item_num;
 
-		$solo = 1 >= $et_pb_fullwidth_header_slider_item_num ? ' solo' : '';
+		$solo = 2 >= $et_pb_fullwidth_header_slider_item_num ? ' solo' : '';
 
 		$this->add_classname( $solo );
 		$this->add_classname( empty( $scroll_bar_text ) ? ' no-explore' : '' );
@@ -128,7 +135,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		$content = $this->content;
 
-		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div>', $class, $content, $scrollbar );
+		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s></div><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div>', $class, $content, $scrollbar );
 
 		return $output;
 	}
@@ -190,7 +197,14 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 			<?php
 		endif;
 	}
+
+	
+	
 }
+
+
+
+
 new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
 
 ?>
