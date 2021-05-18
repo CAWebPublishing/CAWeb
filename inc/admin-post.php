@@ -12,6 +12,10 @@ add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_atta
 /**
  * Retrieve attachment post meta alt text
  *
+ * @category {
+ * add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
+ * add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
+ * }
  * @return void
  */
 function caweb_retrieve_attachment_post_meta() {

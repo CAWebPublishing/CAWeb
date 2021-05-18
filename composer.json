@@ -2,12 +2,9 @@
     "name": "cawebpublishing/caweb",
     "description": "Packages to help enforce WordPress Coding Standards",
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16.0",
-        "phpcompatibility/phpcompatibility-wp": "*",
         "phpdocumentor/phpdocumentor": "^3.0",
-        "roave/security-advisories": "dev-master",
         "twig/extra-bundle": "^3.3",
-        "wp-coding-standards/wpcs": "^2.2.0"
+        "twig/html-extra": "^3.3"
     },
     "scripts": {
         "post-install-cmd": [
@@ -16,6 +13,10 @@
         
     },
     "require": {
-        "twig/html-extra": "^3.3"
+        "caweb/phpdoc": "dev-master",
+        "friendsofphp/php-cs-fixer": "^2.16.0",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "wp-coding-standards/wpcs": "^2.2.0",
+        "roave/security-advisories": "dev-master"
     }
 }
