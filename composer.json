@@ -13,7 +13,7 @@
         
     },
     "require": {
-        "caweb/phpdoc": "^1.0.0",
+        "caweb/phpdoc": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpcompatibility/phpcompatibility-wp": "*",
         "wp-coding-standards/wpcs": "^2.2.0",
