@@ -16,9 +16,9 @@ define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
 define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
-define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
-define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5 ) );
-define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array( 5.5 ) );
+define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5);
+define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
+define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
 define( 'WP_TEMP_DIR', WP_CONTENT_DIR . '/tmp' );
 
@@ -317,11 +317,7 @@ function caweb_wp_enqueue_scripts() {
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
 	/* Google Fonts */
-	if ( 5.5 >= $ver ) {
-		wp_enqueue_style( 'cagov-google-font-style', 'https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
-	} else {
-		wp_enqueue_style( 'cagov-google-font-style', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
-	}
+	wp_enqueue_style( 'cagov-google-font-style', 'https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
 
 	/* If not on the activation page */
 	if ( 'wp-activate.php' !== $pagenow ) {
