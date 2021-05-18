@@ -208,7 +208,7 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		if ( ! empty( $_pc_liveId ) ) {
 			$content = is_object( $post ) ? $post->post_content : $post['post_content'];
 
-			// Duplicate post and set as a draft.
+			// Duplicate post and replace live page.
 			$updatedPost = array(
 				'ID'             => $_pc_liveId,
 				'menu_order'     => $_REQUEST['menu_order'],
@@ -222,6 +222,7 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 				'post_password'  => $_REQUEST['post_password'],
 				'post_status'    => 'publish',
 				'post_title'     => $_REQUEST['post_title'],
+				'post_date'      => current_time( 'mysql' ),
 				'post_type'      => $_REQUEST['post_type'],
 				'tags_input'     => ( isset( $_REQUEST['tax_input']['post_tag'] ) ? $_REQUEST['tax_input']['post_tag'] : '' ),
 			);

@@ -7,6 +7,7 @@
     <version>1.0.0</version>
     <parameters>
       <parameter key="twig-debug">true</parameter>
+      <parameter key="wp-hook-ref">https://developer.wordpress.org/reference/hooks/</parameter>
     </parameters>
     <transformations>
       <transformation writer="FileIo" query="copy" source="css/cagov-v5.5-santa barbara.css" artifact="css/caweb.core.css"/>
@@ -21,6 +22,6 @@
       <transformation writer="twig" query="indexes.classes" source="vendor/caweb/phpdoc/classes.html.twig" />
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.html.twig" artifact="files.html" />
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.source.html.twig" />
-      <!--transformation writer="twig" query="files" source="template/index.html.twig" artifact="{{node}}.html" /-->
+      <transformation writer="twig" source="vendor/caweb/phpdoc/filters.html.twig" artifact="filters.html" />
     </transformations>
 </template>

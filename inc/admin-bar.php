@@ -11,8 +11,8 @@ add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
 /**
  * Load all necessary CAWeb Admin Bar items.
  *
+ * @category add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
  * @param  WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance, passed by reference.
- *
  * @return void
  */
 function caweb_admin_bar_menu( $wp_admin_bar ) {
