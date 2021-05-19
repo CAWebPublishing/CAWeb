@@ -1,0 +1,10 @@
+.caweb-class:before {
+    content: "C";
+    background-color: cornflowerblue;
+    padding: 3px 5px;
+    margin-top: 3px;
+    border-radius: 50%;
+    line-height: 0.75rem;
+    font-size: 0.75rem;
+    position: absolute;
+}
