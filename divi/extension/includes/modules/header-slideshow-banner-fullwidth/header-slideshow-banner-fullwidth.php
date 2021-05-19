@@ -97,12 +97,6 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		return array_merge( $general_fields, $design_fields, $advanced_fields );
 	}
-	public function get_advanced_fields_config() {
-		return array();
-	}
-
-
-
 	/**
 	 * Renders the Module on the frontend
 	 *
@@ -195,14 +189,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 			<?php
 		endif;
 	}
-
-	
-	
+		
 }
-
-
-
-
 new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
-
 ?>
