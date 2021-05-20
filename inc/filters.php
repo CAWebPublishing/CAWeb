@@ -18,10 +18,13 @@ add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
 /**
  * CAWeb Page Body Class
  *
+ * Filters the list of CSS body class names for the current post or page.
+ *
  * @link https://developer.wordpress.org/reference/hooks/body_class/
  * @param  array $wp_classes An array of body class names.
  * @param  array $extra_classes An array of additional class names added to the body.
  *
+ * @category add_filter( 'body_class','caweb_body_class' , 20 , 2 );
  * @return array
  */
 function caweb_body_class( $wp_classes, $extra_classes ) {
@@ -38,7 +41,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 	/* List of extra classes that need to be added to the body */
 	if ( isset( $post->ID ) ) {
-		$divi              = et_pb_is_pagebuilder_used( $post->ID ) || strpos($post->post_content, 'et_pb_section') || strpos($post->post_content, 'et_pb_fullwidth_section');
+		$divi              = et_pb_is_pagebuilder_used( $post->ID ) || strpos( $post->post_content, 'et_pb_section' ) || strpos( $post->post_content, 'et_pb_fullwidth_section' );
 		$sidebar_enabled   = ! is_page();
 		$special_templates = is_tag() || is_archive() || is_category() || is_author();
 
