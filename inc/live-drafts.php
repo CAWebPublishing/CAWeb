@@ -60,7 +60,7 @@ function caweb_live_drafts_admin_head() {
 			// Add save draft button to live pages.
 			jQuery(document).ready(function($) {
 
-				$('<input type="submit" class="button button-highlighted" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
+				$('<input type="submit" class="button button-highlighted" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft" value="saving"/>').prependTo('#save-action');
 
 				$('input#save-post').on('click', function(e){
 					/*
@@ -68,13 +68,12 @@ function caweb_live_drafts_admin_head() {
 					 once for WordPress then again for Divi
 					 set caweb_save_draft = divi until originalEvent is undefined, this is the Divi save.
 					 */
-					if( $('#et_pb_toggle_builder').hasClass('et_pb_builder_is_used') || 
-							$('body').hasClass('et-bfb') ){
-						$('input[name="caweb_save_draft"]').val('divi');
+					if( $('#et_pb_toggle_builder').hasClass('et_pb_builder_is_used') && 
+							$('body').hasClass('et-bfb') && undefined === arguments[0].originalEvent ){
 						// if the live draft process wasnt started by the Save Draft button
-						if( undefined === arguments[0].originalEvent ){
-							$('input[name="caweb_save_draft"]').val('divi-saving');
-						}
+							$('input[name="caweb_save_draft"]').val('saving');
+					}else{
+						$('input[name="caweb_save_draft"]').val('old-divi');
 					}
 
 				});
@@ -139,7 +138,7 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 	// check if the caweb save draft button was pressed
 	if( ! isset( $_REQUEST['caweb_save_draft'] ) ||
 		( isset( $_REQUEST['caweb_save_draft'] ) && 
-			! in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'divi-saving'), true ) 
+		! in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'old-divi' ), true)   
 		)
 	){
 		return $post_id;
@@ -232,9 +231,8 @@ function caweb_live_drafts_post_update( $post_id, $post ){
 		$_REQUEST['save'] == 'Save Draft' &&
 		$_REQUEST['post_status'] == 'publish' &&
 		! wp_is_post_revision( $_REQUEST['post_ID'] ) &&
-		in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'divi-saving'), true )
+		'saving' === $_REQUEST['caweb_save_draft']
 		) {
-				
 			// Divi saves the original even when a draft is created, revert to previous revision.
 			$revs = wp_get_post_revisions( $_REQUEST['post_ID'] );
 			
@@ -300,7 +298,7 @@ function caweb_live_drafts_post_updated( $post_id, $post_after, $post_before ){
 		$_REQUEST['save'] == 'Save Draft' &&
 		$_REQUEST['post_status'] == 'publish' &&
 		isset( $_REQUEST['caweb_save_draft'] ) && 
-		in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'divi-saving'), true )
+		in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'old-divi'), true)  
 		) {
 
 		// Check for post meta that identifies this as a 'live draft'.
@@ -310,6 +308,45 @@ function caweb_live_drafts_post_updated( $post_id, $post_after, $post_before ){
 			return;
 		}
 		
+		if( 'old-divi' === $_REQUEST['caweb_save_draft']){
+			// Divi saves the original even when a draft is created, revert to previous revision.
+			$revs = wp_get_post_revisions( $_REQUEST['post_ID'] );
+						
+			if( ! empty($revs) ){
+				array_shift( $revs );
+				/**
+				 * Avoiding infite loop
+				 * 
+				 * @link https://developer.wordpress.org/reference/hooks/save_post/#avoiding-infinite-loops
+				 */
+				// unhook actions
+				caweb_live_drafts_post_hooks(false);
+						
+				// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
+				$rollback_post = array(
+					'ID'             => $_REQUEST['post_ID'],
+					'menu_order'     => $_REQUEST['menu_order'],
+					'comment_status' => ( empty( $_REQUEST['comment_status'] ) || $_REQUEST['comment_status'] == 'open' ? 'open' : 'closed' ),
+					'ping_status'    => ( empty( $_REQUEST['ping_status'] ) || $_REQUEST['ping_status'] == 'open' ? 'open' : 'closed' ),
+					'post_author'    => $_REQUEST['post_author'],
+					'post_category'  => ( isset( $_REQUEST['post_category'] ) ? $_REQUEST['post_category'] : array() ),
+					'post_content'   => array_shift( $revs )->post_content,
+					'post_excerpt'   => $_REQUEST['excerpt'],
+					'post_parent'    => $_REQUEST['parent_id'],
+					'post_password'  => $_REQUEST['post_password'],
+					'post_status'    => $_REQUEST['post_status'],
+					'post_title'     => $_REQUEST['post_title'],
+					'post_type'      => $_REQUEST['post_type'],
+					'tags_input'     => ( isset( $_REQUEST['tax_input']['post_tag'] ) ? $_REQUEST['tax_input']['post_tag'] : '' ),
+				);
+
+				wp_update_post( $rollback_post );
+
+				// re-hook actions
+				caweb_live_drafts_post_hooks();
+			}
+		}
+
 		// Send user to new edit page.
 		wp_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
 		exit();
