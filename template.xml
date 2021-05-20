@@ -7,7 +7,6 @@
     <version>1.0.0</version>
     <parameters>
       <parameter key="twig-debug">true</parameter>
-      <parameter key="wp-hook-ref">https://developer.wordpress.org/reference/hooks/</parameter>
     </parameters>
     <transformations>
       <transformation writer="FileIo" query="copy" source="css/cagov-v5.5-santa barbara.css" artifact="css/caweb.core.css"/>
