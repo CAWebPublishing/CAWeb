@@ -1,8 +1,10 @@
 /* CAWeb Alert Option Javascript */
 jQuery(document).ready(function($) {
 	
-	$( "#caweb-alert-banners" ).sortable();
-	$( "#caweb-alert-banners" ).disableSelection()
+	if( $( "#caweb-alert-banners" ).length ){
+		$( "#caweb-alert-banners" ).sortable();
+		$( "#caweb-alert-banners" ).disableSelection()
+	}
 
 	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
 	$('#add-alert').click( function(e){ e.preventDefault(); addAlert();});

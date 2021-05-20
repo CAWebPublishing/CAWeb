@@ -128,7 +128,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		$content = $this->content;
 
-		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div><!-- .et_pb_ca_banner -->', $class, $content, $scrollbar );
+		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div>', $class, $content, $scrollbar );
 
 		return $output;
 	}
@@ -139,15 +139,19 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 	 * @return void
 	 */
 	public function slideshow_banner_removal() {
+		$nonce    = wp_create_nonce( 'caweb_remove_slideshow_banner' );
+		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_remove_slideshow_banner' );
+
 		global $post;
+
+		if ( null === $post || (isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
+			return;
+		}
+
 		$nonce    = wp_create_nonce( 'caweb_slideshow_banner_removal' );
 		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_slideshow_banner_removal' );
 		$con      = is_object( $post ) ? $post->post_content : $post['post_content'];
 		$module   = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
-
-		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
-			return;
-		}
 
 		if ( empty( $module ) ) :
 			?>
@@ -167,18 +171,18 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 						
 						if( ! section.children().length )
 							$(section).remove();
-
-						// calculate top of screen on next repaint.
+						
+						// calculate top of screen on next repaint
 						window.setTimeout(function () {
-							var MAXHEIGHT = 1080;
-							var headerTop = banner.offset().top;
-							var windowHeight = $(window).height();
-							var height = windowHeight - headerTop;
-							height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
-
-							// fill up the remaining height of this device.
-							$(banner).css({'height': height });
-						}, 250)
+							// fill up the remaining heaight of this device
+							if( 'auto' !== '<?php print_r( $this->props['height'] ) ?>' )
+								banner.css({ 'height': '<?php print_r( $this->props['height'] ) ?>' });
+							if( 'auto' !== '<?php print_r( $this->props['min_height'] ) ?>' )
+								banner.css({ 'min-height': '<?php print_r( $this->props['min_height'] ) ?>' });
+							if( 'none' !== '<?php print_r( $this->props['max_height'] ) ?>' )
+								banner.css({ 'max-height': '<?php print_r( $this->props['max_height'] ) ?>' });
+						}, 250);
+						
 					});
 
 				})(jQuery);				

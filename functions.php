@@ -17,12 +17,12 @@ define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/C
 define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5 );
-define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array(5) );
-define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array(5.5) );
+define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5 ) );
+define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array( 5.5 ) );
 
-define( 'WP_TEMP_DIR', WP_CONTENT_DIR  . '/tmp' );
+define( 'WP_TEMP_DIR', WP_CONTENT_DIR . '/tmp' );
 
-if( ! file_exists( WP_TEMP_DIR ) ){
+if ( ! file_exists( WP_TEMP_DIR ) ) {
 	mkdir( WP_TEMP_DIR );
 }
 
@@ -90,7 +90,15 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 function caweb_setup_theme() {
 	/* Include CAWeb Functionality */
 	foreach ( glob( __DIR__ . '/inc/*.php' ) as $file ) {
-		require_once $file;
+		// if file is live-drafts functionality.
+		if( strpos($file,'live-drafts.php') ){
+			// check if CAWeb Live Drafts is enabled before including.
+			if( get_option( 'caweb_live_drafts', false ) ){
+				require_once $file;
+			}
+		}else{
+			require_once $file;
+		}
 	}
 
 	/* Insert Parent Content Type Category */
@@ -203,6 +211,13 @@ function caweb_setup_theme() {
 	}
 }
 
+/**
+ * Enables the HTTP Strict Transport Security (HSTS) header in WordPress.
+ */
+function caweb_enable_hsts() {
+	header( 'Strict-Transport-Security: max-age=10886400; includeSubDomains' );
+}
+add_action( 'send_headers', 'caweb_enable_hsts' );
 
 /**
  * CAWeb Init
@@ -285,7 +300,6 @@ function caweb_wp_enqueue_parent_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom CSS
  * @return void
  */
 function caweb_wp_enqueue_scripts() {
@@ -298,7 +312,7 @@ function caweb_wp_enqueue_scripts() {
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
 
 	/* CAWeb Core CSS */
-	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
+	$colorscheme   = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
 	$core_css_file = caweb_get_min_file( "/css/cagov-v$ver-$colorscheme.css" );
 	wp_enqueue_style( 'caweb-core-style', $core_css_file, array(), CAWEB_VERSION );
 
@@ -340,9 +354,6 @@ function caweb_wp_enqueue_scripts() {
 	if ( ! $vb_enabled ) {
 
 		$localize_args = array(
-			'ca_google_analytic_id'       => get_option( 'ca_google_analytic_id' ),
-			'ca_google_tag_manager_id'       => get_option( 'ca_google_tag_manager_id' ),
-			'ca_google_tag_manager_approved' => get_option( 'ca_google_tag_manager_approved', false),
 			'ca_site_version'             => $ver,
 			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
 			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
@@ -350,6 +361,14 @@ function caweb_wp_enqueue_scripts() {
 			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 			'ajaxurl'                     => admin_url( 'admin-post.php' ),
 		);
+
+		if ( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ) {
+			$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
+		}
+
+		if ( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ) {
+			$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
+		}
 
 		$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
 
@@ -380,7 +399,6 @@ function caweb_wp_enqueue_scripts() {
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * Fires when scripts and styles are enqueued.
- * @todo Create file for Custom JS
  * @return void
  */
 function caweb_late_wp_enqueue_scripts() {
@@ -534,17 +552,17 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
 		$schemes = array();
-		foreach( caweb_template_versions() as $v => $label ){
-			$schemes["$v"] = caweb_color_schemes( $v );
+		foreach ( caweb_template_versions() as $v => $label ) {
+			$schemes[ "$v" ] = caweb_color_schemes( $v );
 		}
 
 		$caweb_localize_args = array(
-			'defaultFavIcon'   => caweb_default_favicon_url(),
-			'changeCheck'      => $hook,
-			'caweb_icons'      => caweb_get_icon_list( -1, '', true ),
-			'caweb_colors'     => caweb_template_colors(),
-			'tinymce_settings' => caweb_tiny_mce_settings(),
-			'caweb_colorschemes' => $schemes
+			'defaultFavIcon'     => caweb_default_favicon_url(),
+			'changeCheck'        => $hook,
+			'caweb_icons'        => caweb_get_icon_list( -1, '', true ),
+			'caweb_colors'       => caweb_template_colors(),
+			'tinymce_settings'   => caweb_tiny_mce_settings(),
+			'caweb_colorschemes' => $schemes,
 		);
 
 		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );
@@ -580,7 +598,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
  *
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
- * @todo Remove nginx cache references.
  *
  * @return void
  */
@@ -640,15 +657,11 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 
 	wp_set_object_terms( $post_id, $cats, 'category' );
 
-	/* Search for Post List, Post Slider, PostNavigation, Blog Module if they exists, add the 'nginx_cache_purge' custom meta field */
-	$cache_modules = array( 'et_pb_ca_post_list', 'et_pb_post_slider', 'et_pb_blog', 'et_pb_post_nav' );
-	$module        = caweb_get_shortcode_from_content( $content, $cache_modules, true );
-
-	if ( ! empty( $module ) ) {
-		update_post_meta( $post_id, 'nginx_cache_purge', 'yes' );
-	} else {
-		delete_post_meta( $post_id, 'nginx_cache_purge' );
-	}
+	/* 
+		The 'nginx_cache_purge' custom meta field was used on the old MCS system, 
+		if the page/post has this field delete it.
+	*/
+	delete_post_meta( $post_id, 'nginx_cache_purge' );
 }
 
 /*

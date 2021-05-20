@@ -25,6 +25,14 @@ You should have received a copy of the GNU General Public License
 along with CAWeb Divi Module Extension. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
+/**
+ * Documentation can be found:
+ * 
+ * @source https://github.com/elegantthemes/create-divi-extension
+ * @link https://www.elegantthemes.com/documentation/developers/create-divi-extension/
+ * @link https://www.elegantthemes.com/documentation/developers/how-to-create-a-divi-builder-module/
+ * @link https://www.elegantthemes.com/documentation/developers/how-to-create-a-custom-field-for-a-divi-builder-module/
+ */
 define('CAWEB_EXT_DIR', str_replace( '\\', '/',  __DIR__ . '/' ) );
 define('CAWEB_EXT_URL', site_url( preg_replace('/(.*)\/wp-content/', '/wp-content', CAWEB_EXT_DIR ) ) );
 

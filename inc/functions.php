@@ -265,15 +265,15 @@ function caweb_font_sizes( $exclude = array(), $values = false ) {
 /**
  * Return CAWeb Attachment Meta Field for given urls
  *
- * @param  string/array $image_url Attachment URL. Can be string or an array of URLS.
+ * @param  string|array $image_url Attachment URL. Can be string or an array of URLS.
  * @param  string       $meta_key Meta Field to return. If empty all fields are returned.
  *
- * @return string/array
+ * @return string|array
  */
 function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ) {
 
 	if ( empty( $image_url ) ) {
-		return 0;
+		return '';
 	} elseif ( is_string( $image_url ) || is_array( $image_url ) ) {
 		$query = array(
 			'post_type'  => 'attachment',
