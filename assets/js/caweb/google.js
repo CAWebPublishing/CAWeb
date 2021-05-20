@@ -1,4 +1,5 @@
 // Google Analytics
+var args = args || [];
 var _gaq = _gaq || [];
 if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
