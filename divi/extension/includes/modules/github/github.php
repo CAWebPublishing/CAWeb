@@ -167,6 +167,16 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 		);
 
 		$design_fields = array(
+			'title_size' => array(
+				'label'             => esc_html__( 'Title Size', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'default'           => 'h2',
+				'description'       => esc_html__( 'Here you can choose the heading size for the list title.', 'et_builder' ),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'style',
+			),
 			'email_body' => array(
 				'label'           => esc_html__( 'Body', 'et_builder' ),
 				'type'            => 'textarea',
@@ -193,6 +203,7 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 	 */
 	public function render( $unprocessed_props, $content = null, $render_slug ) {
 		$title               = $this->props['title'];
+		$title_size               = $this->props['title_size'];
 		$username            = $this->props['username'];
 		$client_id           = $this->props['client_id'];
 		$client_secret       = $this->props['client_secret'];
@@ -284,7 +295,12 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 			}
 		}
 
-		$output = sprintf( '<div%1$s%2$s>%3$s%4$s</div>', $this->module_id(), $class, ( ! empty( $title ) ? sprintf( '<h2>%1$s</h2>', $title ) : '' ), $output );
+		$output = sprintf( '<div%1$s%2$s>%3$s%4$s</div>', 
+			$this->module_id(), 
+			$class, 
+			! empty( $title ) ? sprintf( '<%1$s>%2$s</%1$s>', $title_size, $title ) : '', 
+			$output 
+		);
 
 		return $output;
 	}

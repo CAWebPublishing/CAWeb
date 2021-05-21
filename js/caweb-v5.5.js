@@ -1,6 +1,7 @@
 // Google Analytics
+var args = args || [];
 var _gaq = _gaq || [];
-if("" !== args.ca_google_analytic_id){
+if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 	_gaq.push(['_gat._anonymizeIp']);
 	_gaq.push(['_setDomainName', '.ca.gov']);
@@ -27,7 +28,7 @@ if("" !== args.caweb_multi_ga){
 })();
 
 // Google Tag Manager
-if("" !== args.ca_google_tag_manager_id){
+if("" !== args.ca_google_tag_manager_id && undefined !== args.ca_google_tag_manager_id){
 	(function(w,d,s,l,i){
 		w[l] = w[l] || [];
 		w[l].push({'gtm.start' :new Date().getTime(), event:'gtm.js'});
@@ -43,7 +44,7 @@ if("" !== args.ca_google_tag_manager_id){
 }
 
 // Google Custom Search 
-if("" !== args.ca_google_search_id){
+if("" !== args.ca_google_search_id && undefined !== args.ca_google_search_id){
 
 (function() {
 
@@ -158,7 +159,8 @@ var eValues = {
 			};
 
 
-var mainDomain = document.location.hostname === "localhost" ? "localhost" : document.location.hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,4}))(\/.*)?$/)[1];
+var mainDomain = document.location.hostname === "localhost" ? "localhost" : document.location.hostname.match(/(([^.\/]+\.[^.\/]{2,3}\.[^.\/]{2})|(([^.\/]+\.)[^.\/]{2,5}))(\/.*)?$/);
+mainDomain = null !== mainDomain ? mainDomain[1] : "";
 mainDomain = mainDomain.toLowerCase();
 
 if(isSubDomainTracker == true)
@@ -450,7 +452,7 @@ function _tagLinks(evObj, evCat, evAct, evLbl, evVal, evNonInter, exisAttr)
 }
 
 /**
- * CA State Template v5.5 -  @version v5.5.20 -  3/4/2021 
+ * CA State Template v5.5 -  @version v5.5.21 -  4/21/2021 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
 /*! modernizr (Custom Build) | MIT *
  * https://modernizr.com/download/?-flexbox-setclasses !*/
@@ -16670,7 +16672,7 @@ $(document).ready(function () {
     var $resultsContainer = $('.search-results-container');
     var searchInput = $("#head-search #Search .search-textfield");
     var searchSubmit = $("#head-search #Search .gsc-search-button");
-    var searchReset = $("#head-search #Search .gsc-clear-button");
+    var searchReset = $("#head-search #Search .close-search");
     var featuredsearch = $("#head-search").hasClass("featured-search");
     var searchactive = $("#head-search").hasClass("active");
     var searchlabel = $("#SearchInput");
@@ -17320,8 +17322,8 @@ function initContent() {
         });
 
 
-        $(".owl-prev").attr("aria-label", "Previous slide");
-        $(".owl-next").attr("aria-label", "Next slide");
+        // $(".owl-prev").attr("aria-label", "Previous slide");
+        // $(".owl-next").attr("aria-label", "Next slide");
         // Add text to the dots 
         var dot = $('.owl-dots .owl-dot');
         dot.each(function () {
@@ -19286,33 +19288,60 @@ jQuery(document).ready(function() {
     }
 });
 jQuery(document).ready(function() {
-    /*
-    Divi Toggle Module Accessibility
-    Retrieve all Divi Toggle Modules
+	/*
+	Divi Toggle Module Accessibility
+	Retrieve all Divi Toggle Modules
    */
-  var toggle_modules = $('div.et_pb_toggle');
+	var toggle_modules = $('div.et_pb_toggle');
 
+	// Run only if there is a Toggle Module on the current page
+	if( toggle_modules.length  ){
+		toggle_modules.each(function(index, element) {
+			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
 
-    // Run only if there is a Toggle Module on the current page
-    if( toggle_modules.length  ){
-        toggle_modules.each(function(index, element) {
-            var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-            
-            $(element).attr('tabindex', 0);
-            $(element).attr('role', 'button');
-            $(element).attr('aria-expanded', expanded);
-            
-            $(element).on('click', function(e){
-                setTimeout( function(){ 
-                    expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-                    $(element).attr('aria-expanded', expanded);
-                }, 1000 );
-            });
-        });      
+			$(element).attr('tabindex', 0);
+			$(element).attr('role', 'button');
+			$(element).attr('aria-expanded', expanded);
 
-    }
+			// Events
+			$(element).on('click keydown', function(e){
+				// Shows or hides content in accordion when Enter or Space key is pressed
+				if (e.type === 'keydown') {
+					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
+					var toggleKeyPressed = toggleKeys.includes(e.which);
 
+					if (toggleKeyPressed) {
+						setTimeout( function(){
+							$(element).toggleClass('et_pb_toggle_open');
+							$(element).toggleClass('et_pb_toggle_close');
+
+							if ($(element).hasClass('et_pb_toggle_open')) {
+								$(element).find('.et_pb_toggle_content').css('display', 'block');
+							} else {
+								$(element).find('.et_pb_toggle_content').css('display', 'none')
+							}
+						}, 500);
+					}
+
+					// Prevents spacebar from scrolling page to the bottom
+					if (e.which === 32) {
+						e.preventDefault();
+					}
+				}
+
+				// Modifies value for aria-expanded attribute
+				// when toggle is clicked or Enter/Space key is pressed
+				if (e.type === 'click' || toggleKeyPressed) {
+					setTimeout( function(){
+						var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+						$(element).attr('aria-expanded', expanded);
+					}, 1000 );
+				}
+			});
+		});
+	}
 });
+
 jQuery(document).ready(function() {
 	/*
     Divi Video Module Accessibility

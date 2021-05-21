@@ -45,7 +45,7 @@ function caweb_display_options_page() {
 					<li class="list-group-item<?php print 'custom-css' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'custom-css' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
 					<li class="list-group-item<?php print 'custom-js' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'custom-js' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
 					<li class="list-group-item<?php print 'alert-banners' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'alert-banners' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
-					<li class="list-group-item<?php print 'document-sitemap' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#document-sitemap" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'document-sitemap' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Document Map</a></li>
+					<li class="list-group-item<?php print 'additional-features' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#additional-features" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'additional-features' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Additional Features</a></li>
 				</ul>
 			</div>
 			<div class="row pr-3">
@@ -58,7 +58,7 @@ function caweb_display_options_page() {
 						caweb_display_custom_file_settings( 'custom-css' === $caweb_selected_tab, 'css' );
 						caweb_display_custom_file_settings( 'custom-js' === $caweb_selected_tab, 'js' );
 						caweb_display_alert_banner_settings( 'alert-banners' === $caweb_selected_tab );
-						caweb_display_sitemap_settings( 'document-sitemap' === $caweb_selected_tab );
+						caweb_display_additional_features_settings( 'additional-features' === $caweb_selected_tab );
 					?>
 					<input type="hidden" name="caweb_submit">
 				</div>
@@ -881,25 +881,36 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 }
 
 /**
- * Main Entry Point for CAWeb Options Sitemap
+ * Main Entry Point for CAWeb Options Additional Features
  *
  * @param  boolean $is_active If this is the active tab.
  * @return void
  */
-function caweb_display_sitemap_settings( $is_active = false ) {
+function caweb_display_additional_features_settings( $is_active = false ) {
 	$directory = wp_upload_dir();
 	$file      = $directory['basedir'] . '/pdf-word-sitemap.xml';
 	$file_url  = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
+	$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
+	$live_drafts_enabled = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 
 	?>
-	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="document-sitemap" data-parent="#caweb-settings">
-		<div class="form-row">
+	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-parent="#caweb-settings">
+	<div class="form-row">
 			<div class="form-group col-sm-12">
-				<h2 class="d-inline">Document Map</h2>
-				<button class="doc-sitemap btn btn-primary">Generate</button>
+				<strong>Document Map</strong>
+				<button class="doc-sitemap btn btn-primary btn-sm">Generate</button>
 				<small class="doc-sitemap-update text-muted"><?php print esc_url( $file_url ); ?></small>
 			</div>
 		</div>
+		<?php if( current_user_can( $cap ) ): ?>
+		<div class="form-row">
+			<div class="form-group col-sm-12">
+				<label for="caweb_live_drafts"><strong>Enable Live Drafts</strong></label>
+				<input type="checkbox" name="caweb_live_drafts" id="caweb_live_drafts" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $live_drafts_enabled ); ?>>
+				<small class="text-muted d-block">This will enable the live drafts functionality.</small>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 	<?php
 }

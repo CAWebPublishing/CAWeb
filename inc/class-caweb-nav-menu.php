@@ -94,7 +94,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 */
 		public function caweb_nav_menu( $nav_menu, $args ) {
 			global $post;
-			$post_id = ( is_object( $post ) ? $post->ID : $post['ID'] );
+			$post_id = is_object( $post ) ? $post->ID : ( isset( $post['ID'] ) ? $post['ID'] : -1 );
 
 			$theme_location = $args->theme_location;
 			/* Header Menu Construction */
@@ -108,7 +108,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
 
 				$nav_menu = sprintf(
-					'<nav id="navigation" class="main-navigation %1$s hidden-print">
+					'<nav id="navigation" class="main-navigation %1$s hidden-print nav">
                                 <ul id="nav_list" class="top-level-nav">%2$s%3$s%4$s</ul></nav>',
 					( isset( $args->style ) ? $args->style : 'megadropdown' ),
 					$home_link,
@@ -142,7 +142,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function caweb_menu_fail( $args ) {
 			$nav_menu = '';
 			if ( 'header-menu' === $args['theme_location'] ) {
-				$nav_menu = '<nav id="navigation" class="main-navigation hidden-print"><ul id="nav_list" class="top-level-nav">
+				$nav_menu = '<nav id="navigation" class="main-navigation hidden-print nav"><ul id="nav_list" class="top-level-nav">
                         <li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span><strong>There Is No Navigation Menu Set</strong></a></li></ul></nav>';
 			} elseif ( 'footer-menu' === $args['theme_location'] ) {
 				$nav_menu     = '<ul class="footer-links"><li><a>There Is No Navigation Menu Set</a></li></ul>';
@@ -280,7 +280,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					/* Get column count */
 					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
 
-					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span><span class="ca-gov-icon-caret-right carrot rotate" aria-hidden="true"></span>' : '';
+					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
@@ -487,7 +487,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		/**
 		 * CAWeb wp nav menu item custom fields hook. Hooked from the CAWeb_Nav_Menu_Walker.
 		 *
-		 * @see class-caweb-nav-menu.php Line 217
 		 *
 		 * @param  mixed $item_id Not used.
 		 * @param  mixed $item Menu item data object.
