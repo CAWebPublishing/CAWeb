@@ -1538,7 +1538,8 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 
 		// Course Presenter Image.
 		if ( ! empty( $course_presenter_image ) ) {
-			$course_presenter_image = sprintf( '<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image );
+			$alt_text       = caweb_get_attachment_post_meta( $course_presenter_image, '_wp_attachment_image_alt' );
+			$course_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image, $alt_text );
 		}
 
 		// Display Course Presenter Information.
@@ -1619,7 +1620,8 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 
 		// Event Presenter Image.
 		if ( ! empty( $event_presenter_image ) ) {
-			$event_presenter_image = sprintf( '<img src="%1$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image );
+			$alt_text = caweb_get_attachment_post_meta( $event_presenter_image, '_wp_attachment_image_alt' );
+			$event_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image, $alt_text );
 		}
 
 		// Display Event Presenter Information.

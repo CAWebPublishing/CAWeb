@@ -12,11 +12,6 @@
  * @package CAWeb
  */
 
-?>
-
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-<?php
 
 get_header();
 

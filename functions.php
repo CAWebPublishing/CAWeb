@@ -209,6 +209,9 @@ function caweb_setup_theme() {
 			rmdir( $old_ext_js_dir );
 		}
 	}
+
+	// Remove Divi viewport meta
+	remove_action( 'wp_head', 'et_add_viewport_meta' );
 }
 
 /**
@@ -447,16 +450,6 @@ function caweb_late_wp_enqueue_scripts() {
 function caweb_wp_head() {
 	$caweb_fav_ico = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 	?>
-<script>
-	(function($) {
-		$(window).bind("load", function() {
-			$('.fluid-width-video-wrapper').each(function() {
-				var src = $(this).find('iframe').attr('src');
-				$(this).find('iframe').attr('src', src + '&amp;rel=0');
-			});
-		});
-	})(jQuery)
-</script>
 
 <link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
 <link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
