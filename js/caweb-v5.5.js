@@ -19002,14 +19002,12 @@ jQuery(document).ready(function() {
 		var header_title = header.length ?
 				 ( $(header).children('a').length ? $(header).children('a')[0].innerText : header[0].innerText ) : '';
 
-		if( ! $(element).find('a').length && $(element).hasClass('et_clickable')){ 
-			$(element).prepend('<a href="#"><span class="sr-only">' + header_title + '</span></a>');
-		}else if( $(element).find('.et_pb_main_blurb_image').children('a').length ){
-			var blurb_img = $(element).find('.et_pb_main_blurb_image');
+		var blurb_img = $(element).find('.et_pb_main_blurb_image');
+		var img_link = $(blurb_img).find('a');
 
-			$(blurb_img).removeAttr('aria-hidden');
-			
-			$($(blurb_img).children('a')[0]).prepend('<span class="sr-only">' + header_title + '</span>');
+		if( blurb_img.length && img_link.length ){
+			$(img_link).attr('title', header_title);
+
 		}
 
 		$(element).children('a').on('focusin', function(){ 
@@ -19293,9 +19291,13 @@ jQuery(document).ready(function() {
     if( video_modules.length  ){
         video_modules.each(function(index, element) {
             var frame = $(element).find('iframe');
-            frame.attr('title', 'Divi Video Module IFrame');
+            frame.attr('title', 'Divi Video Module IFrame ' + (index + 1));
             $(frame).removeAttr('frameborder');
-            $(frame).attr('id', 'fitvid' + index);
+            $(frame).attr('id', 'fitvid' + (index + 1));
+
+            var src = $(frame).attr('src');
+            $(frame).attr('src', src + '&amp;rel=0');
+
         });      
     }
 

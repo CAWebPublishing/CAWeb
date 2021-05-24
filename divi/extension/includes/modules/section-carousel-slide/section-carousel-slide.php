@@ -76,7 +76,6 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 				'description'     => esc_html__( 'Define the title for the slide', 'et_builder' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'header',
-				'default'		  => $this->name
 			),
 			'slide_image' => array(
 				'label'              => esc_html__( 'Image', 'et_builder' ),
@@ -189,6 +188,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 
 		if ( 'media' === $et_pb_ca_section_carousel_style ) {
 			$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
+			$slide_title = ! empty( $slide_title ) ? $slide_title : $this->name;
 
 			$button = 'on' === $slide_show_more_button && ! empty( $slide_url ) ? sprintf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( $slide_url ), $slide_title ) : '';
 			$button = ! empty( $button ) ? sprintf( '<div class="details text-center%1$s">%2$s</div>', empty($slide_desc) ? ' mt-3' : '', $button ) : '';

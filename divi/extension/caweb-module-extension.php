@@ -95,8 +95,7 @@ function caweb_module_shortcode_output_fix($output, $render_slug, $module){
 			}
 
 			break;
-
-		}
+	}
 
 	return $output;
 }

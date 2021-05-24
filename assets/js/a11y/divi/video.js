@@ -15,9 +15,13 @@ jQuery(document).ready(function() {
     if( video_modules.length  ){
         video_modules.each(function(index, element) {
             var frame = $(element).find('iframe');
-            frame.attr('title', 'Divi Video Module IFrame');
+            frame.attr('title', 'Divi Video Module IFrame ' + (index + 1));
             $(frame).removeAttr('frameborder');
-            $(frame).attr('id', 'fitvid' + index);
+            $(frame).attr('id', 'fitvid' + (index + 1));
+
+            var src = $(frame).attr('src');
+            $(frame).attr('src', src + '&amp;rel=0');
+
         });      
     }
 
