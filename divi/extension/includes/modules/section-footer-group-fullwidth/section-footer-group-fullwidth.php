@@ -151,13 +151,23 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 		}
 
 		$design_fields = array(
+			'heading_size' => array(
+				'label'             => esc_html__( 'Heading Size', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'default'           => 'h4',
+				'description'       => esc_html__( 'Here you can choose the heading size for the group title.', 'et_builder' ),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'header',
+			),
 			'heading_color' => array(
 				'label'             => esc_html__( 'Heading Text Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'description'       => esc_html__( 'Here you can define a custom heading color for the title.', 'et_builder' ),
 				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'style',
+				'toggle_slug'       => 'header',
 			),
 			'text_color' => array(
 				'label'             => esc_html__( 'Text Color', 'et_builder' ),
@@ -238,6 +248,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function render( $unprocessed_props, $content = null, $render_slug ) {
+		$heading_size          = $this->props['heading_size'];
 		$heading_color          = $this->props['heading_color'];
 		$group_show_more_button = $this->props['group_show_more_button'];
 		$group_url              = $this->props['group_url'];
@@ -256,9 +267,10 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 		}
 
 		$output = sprintf(
-			'<div%1$s%2$s><h4%3$s>%4$s</h4>%5$s</ul>%6$s</div>',
+			'<div%1$s%2$s><%3$s%4$s>%5$s</%3$s>%6$s</ul>%7$s</div>',
 			$this->module_id(),
 			$class,
+			$heading_size,
 			$heading_color,
 			$group_title,
 			$this->renderGroupList(),
@@ -295,7 +307,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 
 			if ( 'on' === $group_link_show ) {
 				$group_links .= sprintf(
-					'<li class="mb-2"><a href="%1$s"%2$s%3$s target="_blank">%4$s%5$s</a></li>',
+					'<li class="mb-2"><a href="%1$s"%2$s%3$s target="_blank" title="Fullwidth Section Footer Group %5$s Link">%4$s%5$s</a></li>',
 					esc_url( $group_link_url ),
 					$link_as_button,
 					$text_color,

@@ -119,7 +119,18 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 			),
 		);
 
-		$design_fields = array();
+		$design_fields = array(
+			'slide_title_size' => array(
+				'label'             => esc_html__( 'Slide Title Size', 'et_builder' ),
+				'type'              => 'select',
+				'option_category'   => 'configuration',
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'default'           => 'h2',
+				'description'       => esc_html__( 'Here you can choose the heading size for the slide title.', 'et_builder' ),
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'header',
+			),
+		);
 
 		$advanced_fields = array(
 			'slide_alt_text' => array(
@@ -160,6 +171,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 	public function render( $unprocessed_props, $content = null, $render_slug ) {
 		$slide_image            = $this->props['slide_image'];
 		$slide_title            = $this->props['slide_title'];
+		$slide_title_size            = $this->props['slide_title_size'];
 		$slide_desc             = $this->props['slide_desc'];
 		$slide_url              = $this->props['slide_url'];
 		$slide_alt_text         = $this->props['slide_alt_text'];
@@ -176,6 +188,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 
 		if ( 'media' === $et_pb_ca_section_carousel_style ) {
 			$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
+			$slide_title = ! empty( $slide_title ) ? $slide_title : $this->name;
 
 			$button = 'on' === $slide_show_more_button && ! empty( $slide_url ) ? sprintf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( $slide_url ), $slide_title ) : '';
 			$button = ! empty( $button ) ? sprintf( '<div class="details text-center%1$s">%2$s</div>', empty($slide_desc) ? ' mt-3' : '', $button ) : '';
@@ -192,7 +205,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 
 			$display_button = 'on' === $slide_show_more_button && ! empty( $slide_url ) && ! empty( $slide_title ) ? sprintf( '<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information<span class="sr-only">More information about %2$s</span></strong></a>', esc_url( $slide_url ), $slide_title ) : '';
 
-			$slide_title = ! empty( $slide_title ) ? sprintf( '<h2>%1$s</h2>', $slide_title ) : '';
+			$slide_title = ! empty( $slide_title ) ? "<$slide_title_size>$slide_title</$slide_title_size>" : '';
 
 			$hide = empty( $slide_title ) && empty( $slide_desc ) && empty( $display_button ) ? ' hidden' : '';
 

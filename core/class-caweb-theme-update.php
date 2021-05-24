@@ -161,7 +161,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 					$changelog_url = admin_url( 'admin-post.php?action=caweb_get_changelog' );
 
 					$obj['url']     = $changelog_url;
-					$obj['package'] = $payload->zipball_url;
+					$obj['package'] = str_replace( 'zipball', 'zipball/refs/tags', $payload->zipball_url);
 
 					$theme_response = array( $this->theme_name => $obj );
 
@@ -214,6 +214,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		 * @param  string      $package The package file name.
 		 * @param  WP_Upgrader $upgrader The WP_Upgrader instance.
 		 *
+		 * @category {add_filter( 'upgrader_pre_download' ,array( $this, 'caweb_upgrader_pre_download' ),10, 3 );}
 		 * @return bool
 		 */
 		public function caweb_upgrader_pre_download( $reply, $package, $upgrader ) {

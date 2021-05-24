@@ -108,7 +108,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		if ( $embed ) {
 			$map_url = sprintf( 'https://www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=%2$s', $addr, $this->caweb_google_maps_embed_api_key );
 
-			return sprintf( '<iframe src="%1$s"></iframe>', $map_url );
+			return sprintf( '<iframe title="IFrame for Address %1$s" src="%2$s"></iframe>', $addr, $map_url );
 		} else {
 			return sprintf( '<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class );
 		}

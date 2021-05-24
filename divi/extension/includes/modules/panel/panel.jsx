@@ -10,7 +10,7 @@ class CAWeb_Module_Panel extends CAWEeb_Component {
 		if( "" !== this.props.title ){
 			var display_options = "";
 					var display_icon = "on" === this.props.use_icon ? this.caweb_get_icon_span(this.props.font_icon) : '';
-			var heading_text_color = "none" === this.props.panel_layout && "" !== this.props.heading_text_color ? this.props.heading_text_color : 'inherit';
+			var heading_size = "" !== this.props.heading_size ? this.props.heading_size : 'h4';
 			var heading_text_color = "none" === this.props.panel_layout && "" !== this.props.heading_text_color ? this.props.heading_text_color : 'inherit';
 			var standout_arrow = 'standout highlight'=== this.props.panel_layout ? <span class="triangle"></span>: '';
 

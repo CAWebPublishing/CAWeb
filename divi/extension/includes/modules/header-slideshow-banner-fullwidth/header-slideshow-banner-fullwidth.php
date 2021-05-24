@@ -97,7 +97,6 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		return array_merge( $general_fields, $design_fields, $advanced_fields );
 	}
-
 	/**
 	 * Renders the Module on the frontend
 	 *
@@ -128,7 +127,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		$content = $this->content;
 
-		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div><!-- .et_pb_ca_banner -->', $class, $content, $scrollbar );
+		$output = sprintf( '<div id="et_pb_ca_fullwidth_banner"%1$s><div id="primary-carousel" class="carousel carousel-banner owl-carousel">%2$s</div>%3$s</div>', $class, $content, $scrollbar );
 
 		return $output;
 	}
@@ -167,22 +166,22 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 					var banner = section.find('#et_pb_ca_fullwidth_banner');
 
 					$(document).ready(function () {
-						$('#header').after(banner);
+						$('#main-content').prepend(banner);
 						
 						if( ! section.children().length )
 							$(section).remove();
-
-						// calculate top of screen on next repaint.
+						
+						// calculate top of screen on next repaint
 						window.setTimeout(function () {
-							var MAXHEIGHT = 1080;
-							var headerTop = banner.offset().top;
-							var windowHeight = $(window).height();
-							var height = windowHeight - headerTop;
-							height = (height > MAXHEIGHT) ? MAXHEIGHT : height;
-
-							// fill up the remaining height of this device.
-							$(banner).css({'height': height });
-						}, 250)
+							// fill up the remaining heaight of this device
+							if( 'auto' !== '<?php print_r( $this->props['height'] ) ?>' )
+								banner.css({ 'height': '<?php print_r( $this->props['height'] ) ?>' });
+							if( 'auto' !== '<?php print_r( $this->props['min_height'] ) ?>' )
+								banner.css({ 'min-height': '<?php print_r( $this->props['min_height'] ) ?>' });
+							if( 'none' !== '<?php print_r( $this->props['max_height'] ) ?>' )
+								banner.css({ 'max-height': '<?php print_r( $this->props['max_height'] ) ?>' });
+						}, 250);
+						
 					});
 
 				})(jQuery);				
@@ -190,7 +189,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 			<?php
 		endif;
 	}
+		
 }
 new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
-
 ?>
