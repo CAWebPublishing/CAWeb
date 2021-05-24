@@ -151,7 +151,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="group">%1$s%2$s</div></div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
-                      <div class="container p-0"> Copyright &copy;
+                      <div class="container p-0"> &copy;
                       <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
 					$nav_menu,
 					$social_links
