@@ -19078,23 +19078,6 @@ jQuery(document).ready(function() {
 });
 jQuery(document).ready(function() {
 	/*
-    Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
-    Retrieve all a[href="#main-content"]
-	*/
-	var main_content_anchors = $('a[href="#main-content"]');
-
-    // Run only if there is more than 1 a[href="#main-content"] on the current page
-    if( 1 < main_content_anchors.length  ){
-        main_content_anchors.each(function(index, element) {
-            // Remove all anchors not in the header
-            if( ! $($(element).parent().parent()).is('header') )
-                $(element).remove();
-            
-        });
-    }
-});
-jQuery(document).ready(function() {
-	/*
 	Divi Person Module Accessibility 
 	Retrieve all Divi Person Modules
 	*/
@@ -19334,6 +19317,31 @@ jQuery(document).ready(function() {
 			$(element).removeAttr('role');
 		});
 	}
+});
+jQuery(document).ready(function() {
+	/*
+    Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
+    Retrieve all a[href="#main-content"]
+	*/
+	var main_content_anchors = $('a[href="#main-content"]');
+
+    // Run only if there is more than 1 a[href="#main-content"] on the current page
+    if( 1 < main_content_anchors.length  ){
+        main_content_anchors.each(function(index, element) {
+            // Remove all anchors not in the header
+            if( ! $($(element).parent().parent()).is('header') ){
+                $(element).remove();
+            }            
+        });
+    }
+
+    /**
+     * Fix Back to Top not giving focus
+     */
+     $('[href="#skip-to-content"]').on('click', function(){
+        $('header #skip-to-content a').focus();
+        $(document.activeElement).blur();
+     });
 });
 jQuery(document).ready(function() {
 	// Do this after the page has loaded

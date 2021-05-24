@@ -9,9 +9,10 @@ jQuery(document).ready(function() {
     if( 1 < main_content_anchors.length  ){
         main_content_anchors.each(function(index, element) {
             // Remove all anchors not in the header
-            if( ! $($(element).parent().parent()).is('header') )
+            if( ! $($(element).parent().parent()).is('header') ){
                 $(element).remove();
-            
+            }            
         });
     }
+
 });
