@@ -77,6 +77,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
 				'description'     => esc_html__( 'Define the title for the slide', 'et_builder' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'header',
+				'default'		  => $this->name
 			),
 			'slide_image' => array(
 				'label'              => esc_html__( 'Image', 'et_builder' ),

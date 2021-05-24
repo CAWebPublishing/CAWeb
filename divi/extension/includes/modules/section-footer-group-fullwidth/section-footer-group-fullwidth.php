@@ -307,7 +307,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 
 			if ( 'on' === $group_link_show ) {
 				$group_links .= sprintf(
-					'<li class="mb-2"><a href="%1$s"%2$s%3$s target="_blank">%4$s%5$s</a></li>',
+					'<li class="mb-2"><a href="%1$s"%2$s%3$s target="_blank" title="Fullwidth Section Footer Group %5$s Link">%4$s%5$s</a></li>',
 					esc_url( $group_link_url ),
 					$link_as_button,
 					$text_color,
