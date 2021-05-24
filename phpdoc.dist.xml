@@ -31,5 +31,6 @@
 	<setting name="github_ref" value="https://github.com/" />
 	<setting name="github_user" value="CA-CODE-Works" />
 	<setting name="github_branch" value="dev" />
+	<setting name="stable_version" value="1.5.3" />
 	<template name="." location="."></template>
 </phpdocumentor>
