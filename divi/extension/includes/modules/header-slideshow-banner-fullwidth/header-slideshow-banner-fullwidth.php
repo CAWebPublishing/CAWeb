@@ -97,7 +97,6 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		return array_merge( $general_fields, $design_fields, $advanced_fields );
 	}
-
 	/**
 	 * Renders the Module on the frontend
 	 *
@@ -167,7 +166,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 					var banner = section.find('#et_pb_ca_fullwidth_banner');
 
 					$(document).ready(function () {
-						$('#header').after(banner);
+						$('#main-content').prepend(banner);
 						
 						if( ! section.children().length )
 							$(section).remove();
@@ -190,7 +189,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 			<?php
 		endif;
 	}
+		
 }
 new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
-
 ?>

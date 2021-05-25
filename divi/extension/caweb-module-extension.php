@@ -46,4 +46,58 @@ function caweb_initialize_extension() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/CAWebExtension.php';
 }
 add_action( 'divi_extensions_init', 'caweb_initialize_extension' );
+
+
+function caweb_module_shortcode_output_fix($output, $render_slug, $module){
+	$module = (array)$module;
+
+	switch ($render_slug) {
+		// Fix Divi Image Output
+		case 'et_pb_image':
+		case 'et_pb_fullwidth_image':
+			$src = $module['props']['src'];
+			$alt = '';
+			$title = '';
+
+			// if no alt assigned get the alt text from the Media Library
+			if( preg_match('/alt=""/', $output) && ! empty( $src ) ){
+				$alt = caweb_get_attachment_post_meta($src, '_wp_attachment_image_alt');
+				$output = preg_replace('/alt=""/', sprintf('alt="%1$s"', $alt), $output);
+			}
+			
+			// if no title assigned get the title text from the Media Library
+			if( preg_match('/title=""/', $output) && ! empty( $src ) ){
+				$query = array(
+					'post_type'  => 'attachment',
+					'fields'     => 'ids',
+				   	'meta_query' => array(
+						array(
+							'key'     => '_wp_attached_file',
+							'value'   => basename( $src ),
+							'compare' => 'LIKE',
+						),
+					)
+				);
+		
+				$attachment = get_posts( $query );
+				$attachment_id = ! empty( $attachment ) ? $attachment[0] : '';
+
+				if( ! empty($attachment_id)){
+					$title = get_the_title( $attachment_id );
+					$output = preg_replace('/title=""/', sprintf('title="%1$s"', $title), $output);
+				}
+			}
+
+			// if there is an anchor tag present
+			if( preg_match('/<a href/', $output ) && ( ! empty( $alt ) || ! empty( $title ) ) ){
+				$anchor = ! empty( $alt ) ? $alt : $title;
+				$output = preg_replace('/<a href/', sprintf('<a title="%1$s" href', $anchor), $output);
+			}
+
+			break;
+	}
+
+	return $output;
+}
+add_filter('et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3);
 endif;
