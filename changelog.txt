@@ -1,3 +1,33 @@
+CAWeb v1.5.5
+-
+
+CAWeb v1.5.4
+June 3, 2021
+- Deprecated Template version 5.0
+
+CAWeb v1.5.3
+May 20, 2021
+- Upgraded & sync formatting between template and theme
+- Added the Strict-Transport-Security Header
+- Added Heading Field to Post List, Section Footer, Card, Github, Section Carousel, Panel and Section Primary Modules
+- Added new live drafts feature
+
+CAWeb v1.5.1
+February 25, 2021
+- Grey out Google Analytics ID option when Google Tag Manager is used
+- Resolved TablePress-toggle-accordion conflicts
+- Updated Google Analytics code
+- Fixed Post Tags missing
+
+CAWeb v1.5.0
+November 5, 2020
+- Suppress the down carrot navigation item
+- Added Panel Heading Field to Panel Module
+- Enable new Google Tag Manager option 
+- Sanitizing Search box input
+- Added WP_TEMP_DIR constant to Theme 
+- Added State Template 5.5
+
 CAWeb v1.4.1
 March 26, 2018
 - WordPress Thickbox function enabled 

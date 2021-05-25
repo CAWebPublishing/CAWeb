@@ -15,6 +15,12 @@ changed=$( git diff-index --name-only $against ./assets/* )
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+
+if [ -n "$( git diff-index --name-only $against ./changelog.txt )" ]; then
+	echo "${RED}Please update the changelog.txt${NC}"
+	exit 1
+fi
+
 if [ -n "$changed" ]; then
 	# if gulp is not installed 
 	if [ -z "$(gulp --version)" ]; then
@@ -40,4 +46,5 @@ if [ -n "$changed" ]; then
 		echo -e "${RED}CSS/JS have been compiled, you may commit your changes.${NC}"
 	fi
 fi
+
 exit 0
