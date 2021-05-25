@@ -753,6 +753,7 @@ jQuery(document).ready(function($) {
     var mega_menu_images = $('#menu-item-settings-' + menu_id + ' .mega-menu-images');
     var unit_selector = $('#menu-item-settings-' + menu_id + ' .unit-size-selector');
     var unit_size = $(unit_selector).val();
+    var flex_border = $('#menu-item-settings-' + menu_id + ' .flexmega-border');
 
     /*
     if the menu item is a top level menu item
@@ -765,10 +766,11 @@ jQuery(document).ready(function($) {
       // Show Icon Selector
       $(icon_selector).removeClass('hidden');
 
-      // Hide Nav Media Images, Unit Size Selector, Description
+      // Hide Nav Media Images, Unit Size Selector, Description, FlexBorder
       $(media_image).addClass('hidden');
       $(unit_selector).parent().addClass('hidden');
       $(desc).addClass('hidden-field');
+      $(flex_border).addClass('hidden');
     }else{
       // Hide Mega Menu Options
       $(mega_menu_images).addClass('hidden');
@@ -776,6 +778,8 @@ jQuery(document).ready(function($) {
       // Show Unit Selector
       $(unit_selector).parent().removeClass('hidden');
 
+      // Show FlexBorder
+      $(flex_border).removeClass('hidden');
       if( 'unit1' !== unit_size ){
         // Hide Description
         $(desc).addClass('hidden-field');
