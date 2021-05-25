@@ -1,5 +1,25 @@
 CAWeb v1.5.5
--
+- Added default to slide title field if using media in Section Carousel Slide(Standard/Fullwidth)
+- Added default to profile link field in Profile Banner
+- Added lang attribute to html element in Divi Projects 
+- Removed Divi viewport meta
+- Fixed Blurb Module hiding blurb image
+- Fixed Tab Module (Divi) changed tabList to tablist
+- Added missing title text to the following:
+        Section Footer Group (Standard/Fullwidth) links
+        Person Module (Divi) social links 
+        Slider Module (Divi) arrows 
+        Image Module (Divi) when used with link 
+- Added missing alt text to the following:
+        Organization Logo image 
+        Gallery Module (Divi) images
+        Course Post Detail Presenter image
+        Event Post Detail Presenter image
+        Image Module (Divi)  
+- Added missing title text to the following:
+        Course Post Detail map iframe
+        Event Post Detail map iframe 
+        Exam Post Detail map iframe
 
 CAWeb v1.5.4
 June 3, 2021
