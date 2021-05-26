@@ -55,6 +55,7 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				?>
 			</div>
 			<div class="settings-links">
+				
 				<?php
 				for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) {
 					$caweb_url    = get_option( "ca_utility_link_$caweb_i" );
@@ -87,7 +88,7 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				<?php if ( ! empty( $caweb_google_trans_icon ) ) : ?>
 				<span class="ca-gov-icon-<?php print esc_attr( $caweb_google_trans_icon ); ?>"></span>
 				<?php endif; ?>
-				Translate</a>
+				</a>
 				<?php endif; ?>
 				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled  ) : ?>
 				<div class="quarter standard-translate" id="google_translate_element"></div>
