@@ -1,5 +1,4 @@
 CAWeb v1.5.5
-- Fixed navigation
 - Added new Flex MegaMenu
 - Added default to slide title field if using media in Section Carousel Slide(Standard/Fullwidth)
 - Added default to profile link field in Profile Banner
@@ -26,6 +25,7 @@ CAWeb v1.5.5
 CAWeb v1.5.4
 June 3, 2021
 - Deprecated Template version 5.0
+- Fixed navigation issue with description not rendering
 
 CAWeb v1.5.3
 May 20, 2021
