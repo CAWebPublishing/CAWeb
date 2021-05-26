@@ -70,7 +70,7 @@
 					</a>
 				</div>
 
-                <a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -132,10 +132,41 @@
 
 	<div class="navigation-search">
 
-				<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
@@ -153,43 +184,89 @@
 
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                                                                        
-                                                                                <h2>Packages</h2>
-CAWeb
-Default
-
-
-                                                                                            <h2>Interfaces, Classes and Traits</h2>
-                                    <div class="caweb-class">
-                <a href="classes/CAWeb-Customize-Alert-Banner-Control.html" class="ml-4">CAWeb_Customize_Alert_Banner_Control</a>
-                <i class="d-block ml-4">CAWeb_Customize_Alert_Banner_Control</i>
-            </div>
-                        <div class="caweb-class">
-                <a href="classes/CAWeb-Customize-Icon-Control.html" class="ml-4">CAWeb_Customize_Icon_Control</a>
-                <i class="d-block ml-4">CAWeb_Customize_Icon_Control</i>
-            </div>
-                        <div class="caweb-class">
-                <a href="classes/CAWeb-Nav-Menu.html" class="ml-4">CAWeb_Nav_Menu</a>
-                <i class="d-block ml-4">CAWeb_Nav_Menu</i>
-            </div>
-                        <div class="caweb-class">
-                <a href="classes/CAWeb-Nav-Menu-Walker.html" class="ml-4">CAWeb_Nav_Menu_Walker</a>
-                <i class="d-block ml-4">CAWeb_Nav_Menu_Walker</i>
-            </div>
-                        <div class="caweb-class">
-                <a href="classes/CAWeb-Theme-Update.html" class="ml-4">CAWeb_Theme_Update</a>
-                <i class="d-block ml-4">CAWeb_Theme_Update</i>
-            </div>
-                        
-                            
-                        
+                                                <div class="section">
+                            <div class="three-quarters">
+                                <p>The CAWeb Theme is an open source WordPress Theme offered by the California Department of Technology to state agencies and departments within the State of California and fully integrates the <a href="https://template.webtools.ca.gov/" target="_blank">California State Template</a>.</p>
+                                <p>CAWeb leverages <a href="https://github.com" target="_blank">GitHub</a> to provide for better collaboration and and encourages participation.</p>
+                                <strong>Tools</strong>
+                                <ul>
+                                    <li><a href="https://www.npmjs.com/" target="_blank">NPM</a>
+                                        <ul>
+                                            <li><a href="https://gulpjs.com/" target="_blank">GULP</a> - used to compile all CSS & JS files for the theme.</li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="https://getcomposer.org/" target="_blank">Composer</a>
+                                        <ul>
+                                            <li><a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> - used to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.</li>
+                                            <li><a href="https://www.phpdoc.org/" target="_blank">phpDocumentor</a> - used to document the theme.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="quarter">
+                                <div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><span class="ca-gov-icon-download"></span>Available Versions</h2>
+    </div>
+    <div class="panel-body">
+        <p><a href="https://github.com/CA-CODE-Works/CAWeb/releases/latest" target="_blank">CAWeb v1.5.3</a> - Latest Release</p>
+        <p><a href="https://github.com/CA-CODE-Works/CAWeb/tree/master" target="_blank">CAWeb v1.5.3</a> - Source</p>
+        <p><a href="https://github.com/CA-CODE-Works/CAWeb/tree/dev" target="_blank">CAWeb</a> - Beta</p>
+        <p><a href="https://github.com/CA-CODE-Works/CAWeb/tree/core" target="_blank">CAWeb</a> - Core</p>
+    </div>
+</div>
+                            </div>
+                        </div>
                                                 
+                                                
+                                                <div class="section">
+                            <strong>WordPress Code Enforcement</strong>
+                            <p>CAWeb utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>. 
+                                Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below. 
+                                For information on how to enforce the standards, see <a href="how-to/enforce-wpcs.html">here</a>.
+                            </p>
+                            <div class="multi-terminal-commands">
+                                <pre>composer --version</pre>
+                                <pre>composer install --no-dev</pre>
+                                <pre>.\vendor\bin\phpcs --version</pre>
+                                <pre>.\vendor\bin\php-cs-fixer --version</pre>
+                                <pre>.\vendor\bin\phpcbf --version</pre>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <strong>Compiling CSS/JS</strong>
+                            <p>CAWeb utilizes GULP to compile all CSS & JS files for the theme. 
+                                Make sure npm is installed along with necessary packages, from a terminal in the projects root directory run the commands below. 
+                                For more CAWeb Theme gulp tasks, see <a href="how-to/gulp.html">here</a>.
+                            </p>
+                            <div class="multi-terminal-commands">
+                                <pre>npm -v</pre>
+                                <pre>npm install</pre>
+                                <pre>gulp -v</pre>
+                            </div>
+                        </div>
+                        
                     </main>
                 </div>
             </div>
         </div>
 
         <footer>
+            <footer id="footer" class="global-footer hidden-print">
+    <div class="container footer-menu">
+        <div class="group">
+            <div class="full-width">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#skip-to-content">Back to Top</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright"></div>
+</footer>
             <!-- Load template core -->
             <script src="js/caweb.core.js"></script>
         </footer>

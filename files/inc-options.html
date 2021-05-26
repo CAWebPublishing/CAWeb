@@ -69,7 +69,7 @@
 					</a>
 				</div>
 
-                <a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -131,10 +131,41 @@
 
 	<div class="navigation-search">
 
-				<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="../files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="../files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
@@ -252,7 +283,7 @@ Fires before the administration menu loads in the admin.</i>
     <h2>Functions</h2>
         <div id="function_caweb_admin_menu" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L69">inc/options.php</a>:69
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L69">inc/options.php</a>:69
 </div>
             <strong class="d-block">caweb_admin_menu()</strong>
             <i class="small text-muted">CAWeb Administration Menu Setup
@@ -270,7 +301,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_api_menu_option_setup" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L256">inc/options.php</a>:256
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L256">inc/options.php</a>:256
 </div>
             <strong class="d-block">caweb_api_menu_option_setup()</strong>
             <i class="small text-muted">Setup CAWeb API Menu</i>
@@ -287,7 +318,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_default_favicon_url" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L740">inc/options.php</a>:740
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L740">inc/options.php</a>:740
 </div>
             <strong class="d-block">caweb_default_favicon_url()</strong>
             <i class="small text-muted">Default CAWeb fav ico URL</i>
@@ -304,7 +335,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_favicon_name" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L749">inc/options.php</a>:749
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L749">inc/options.php</a>:749
 </div>
             <strong class="d-block">caweb_favicon_name()</strong>
             <i class="small text-muted">Retrieve CAWeb fav icon filename</i>
@@ -321,7 +352,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_get_site_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L490">inc/options.php</a>:490
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L490">inc/options.php</a>:490
 </div>
             <strong class="d-block">caweb_get_site_options()</strong>
             <i class="small text-muted">Returns and array of just the CA Site Options</i>
@@ -351,7 +382,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_load_themes_tools" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L150">inc/options.php</a>:150
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L150">inc/options.php</a>:150
 </div>
             <strong class="d-block">caweb_load_themes_tools()</strong>
             <i class="small text-muted">If direct access to certain menus is accessed
@@ -369,7 +400,7 @@ redirect to admin page</i>
     </div>
         <div id="function_caweb_multi_ga_menu_option_setup" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L303">inc/options.php</a>:303
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L303">inc/options.php</a>:303
 </div>
             <strong class="d-block">caweb_multi_ga_menu_option_setup()</strong>
             <i class="small text-muted">Setup Multisite Google Analytics Menu</i>
@@ -386,7 +417,7 @@ redirect to admin page</i>
     </div>
         <div id="function_caweb_option_page" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L245">inc/options.php</a>:245
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L245">inc/options.php</a>:245
 </div>
             <strong class="d-block">caweb_option_page()</strong>
             <i class="small text-muted">Setup CAWeb Options Menu</i>
@@ -403,7 +434,7 @@ redirect to admin page</i>
     </div>
         <div id="function_caweb_pre_update_site_option_caweb_password" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L172">inc/options.php</a>:172
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L172">inc/options.php</a>:172
 </div>
             <strong class="d-block">caweb_pre_update_site_option_caweb_password()</strong>
             <i class="small text-muted">Filters the GitHub API caweb_password option before its value is updated.</i>
@@ -433,7 +464,7 @@ redirect to admin page</i>
     </div>
         <div id="function_caweb_remove_admin_menus" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L112">inc/options.php</a>:112
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L112">inc/options.php</a>:112
 </div>
             <strong class="d-block">caweb_remove_admin_menus()</strong>
             <i class="small text-muted">CAWeb Administration Menu Setup
@@ -451,7 +482,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_retrieve_various_sanitized_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L232">inc/options.php</a>:232
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L232">inc/options.php</a>:232
 </div>
             <strong class="d-block">caweb_retrieve_various_sanitized_options()</strong>
             <i class="small text-muted">Retrieves certain CAWeb Options that have been uniquely sanitized</i>
@@ -473,7 +504,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_rrmdir" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L658">inc/options.php</a>:658
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L658">inc/options.php</a>:658
 </div>
             <strong class="d-block">caweb_rrmdir()</strong>
             <i class="small text-muted">Recursively remove a directory (all files and folders in it)</i>
@@ -495,7 +526,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_sanitize_various_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L190">inc/options.php</a>:190
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L190">inc/options.php</a>:190
 </div>
             <strong class="d-block">caweb_sanitize_various_options()</strong>
             <i class="small text-muted">Sanitize certain CAWeb Options that need to be uniquely sanitized</i>
@@ -525,7 +556,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_save_api_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L459">inc/options.php</a>:459
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L459">inc/options.php</a>:459
 </div>
             <strong class="d-block">caweb_save_api_options()</strong>
             <i class="small text-muted">Save API Values</i>
@@ -547,7 +578,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_save_multi_ga_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L475">inc/options.php</a>:475
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L475">inc/options.php</a>:475
 </div>
             <strong class="d-block">caweb_save_multi_ga_options()</strong>
             <i class="small text-muted">Save Multisite GA Values</i>
@@ -569,7 +600,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_save_options" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L337">inc/options.php</a>:337
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L337">inc/options.php</a>:337
 </div>
             <strong class="d-block">caweb_save_options()</strong>
             <i class="small text-muted">Save CAWeb Options</i>
@@ -595,7 +626,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_upload_external_files" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L684">inc/options.php</a>:684
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L684">inc/options.php</a>:684
 </div>
             <strong class="d-block">caweb_upload_external_files()</strong>
             <i class="small text-muted">CAWeb upload CSS/JS files to the sites respective external directory</i>
@@ -633,7 +664,7 @@ Fires before the administration menu loads in the admin.</i>
     </div>
         <div id="function_caweb_wpse_custom_menu_order" class="mb-3">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/options.php#L38">inc/options.php</a>:38
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/options.php#L38">inc/options.php</a>:38
 </div>
             <strong class="d-block">caweb_wpse_custom_menu_order()</strong>
             <i class="small text-muted">This filter is used to switch menu order.</i>
@@ -664,6 +695,20 @@ Fires before the administration menu loads in the admin.</i>
         </div>
 
         <footer>
+            <footer id="footer" class="global-footer hidden-print">
+    <div class="container footer-menu">
+        <div class="group">
+            <div class="full-width">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#skip-to-content">Back to Top</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright"></div>
+</footer>
             <!-- Load template core -->
             <script src="../js/caweb.core.js"></script>
         </footer>

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-            <title>CAWeb Files</title>
-        
+                <title>Enforce WPCS</title>
+
+                
         <!-- Core CSS -->
-<link rel="stylesheet" href="css/caweb.core.css">
+<link rel="stylesheet" href="../css/caweb.core.css">
 
 <!-- phpDoc CSS -->
-<link rel="stylesheet" href="css/phpdoc.css">
+<link rel="stylesheet" href="../css/phpdoc.css">
 
 <!-- Core JS -->
-<script src="js/jquery.js"></script>
+<script src="../js/jquery.js"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="../favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,11 +66,11 @@
 				<div class="header-cagov-logo">
 					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
 						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
+						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
 					</a>
 				</div>
 
-                <a href="" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -102,7 +103,7 @@
 	    <!-- Branding -->
 <div class="branding">
 	<div class="header-organization-banner">
-		<a href="index.html">
+		<a href="../index.html">
 			<img src="https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2017/12/CAWEB_PUB_Logo-257x90.jpg" alt="CAWeb Publishing" />
 		</a>
 	</div>
@@ -140,10 +141,10 @@
                 <div>
                     <ul class="second-level-nav">
                         <li class="unit1">
-                            <a href="how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
                         </li>
                         <li class="unit1">
-                            <a href="how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
                         </li>
                     </ul>
                 </div>
@@ -155,10 +156,10 @@
                 <div>
                     <ul class="second-level-nav">
                         <li class="unit1" title="Actions and Filters">
-                            <a href="filters.html" class="second-level-link">Actions/Filters</a>
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
                         </li>
                         <li class="unit1" title="All Files">
-                            <a href="files.html" class="second-level-link">All Files</a>
+                            <a href="../files.html" class="second-level-link">All Files</a>
                         </li>
                     </ul>
                 </div>
@@ -183,95 +184,78 @@
 
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
+                                                <div class="section">
+                           <p>CAWeb utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>. 
+                            Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
+                            </p>
+                            <div class="multi-terminal-commands">
+                                <pre>composer --version</pre>
+                                <pre>composer install --no-dev</pre>
+                                <pre>.\vendor\bin\phpcs --version</pre>
+                                <pre>.\vendor\bin\php-cs-fixer --version</pre>
+                                <pre>.\vendor\bin\phpcbf --version</pre>
+                            </div>
+                        </div>
+                                                
+                                                
+                                                <strong>To run the PHP_CodeSniffer for WordPress Coding Violations</strong>
+                        <div class="mb-4">
+                            <p><span class="label label-info">Note:</span><span class="align-middle"> The following flag can be added when running the PHP_CodeSniffer.</span></p>
+                            <div class="mb-4">
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--report-file=&lt;file location&gt;</pre>
+                                <span class="align-top"> - Outputs the results to a file.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs &lt;file_name&gt;</pre>
+                                <span class="align-top"> - Checks a specific file.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs *.php</pre>
+                                <span class="align-top"> - Checks all PHP files.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs &lt;directory_name&gt;</pre>
+                                <span class="align-top"> - Checks all files in a given directory.</span>
+                            </div>
+                        </div>
                         
-<h1>Files</h1>
-
+                        <strong>To run the PHP Code Beautifier and Fixer</strong>
+                        <div class="mb-4">
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcbf &lt;file_name&gt;</pre>
+                                <span class="align-top"> - Checks a specific file.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcbf &lt;directory_name&gt;</pre>
+                                <span class="align-top"> - Checks all files in a given directory.</span>
+                            </div>
+                        </div>
+                       
+                        <strong>To run the PHP CS Fixer</strong>
+                        <div class="mb-4">
+                            <p><span class="label label-info">Note:</span><span class="align-middle"> When using this tool please load the config file found in .circleci/caweb.php_cs</span></p>
+                            <div class="mb-4">
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--config=.circleci/caweb.php_cs</pre>
+                                <span class="align-top"> Load CAWeb Theme PHP CS Fixer config file.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\php-cs-fixer &lt;file_name&gt;</pre>
+                                <span class="align-top"> - Checks a specific file.</span>
+                            </div>
+                            <div>
+                                <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\php-cs-fixer &lt;directory_name&gt;</pre>
+                                <span class="align-top"> - Checks all files in a given directory.</span>
+                            </div>
+                        </div>
                         
-                                        <strong id="Numbers">#</strong>
-    <p><a href="files/404.html">404.php</a></p>
-                <strong id="A">A</strong>
-    <p><a href="files/inc-admin-bar.html">admin-bar.php</a></p>
-        <p><a href="files/inc-admin-post.html">admin-post.php</a></p>
-        <p><a href="files/partials-content-alerts.html">alerts.php</a></p>
-        <p><a href="files/archive.html">archive.php</a></p>
-        <p><a href="files/author.html">author.php</a></p>
-                <strong id="B">B</strong>
-    <p><a href="files/partials-content-bar-location.html">bar-location.php</a></p>
-        <p><a href="files/partials-content-bar-settings.html">bar-settings.php</a></p>
-        <p><a href="files/partials-content-branding.html">branding.php</a></p>
-        <p><a href="files/inc-branding.html">branding.php</a></p>
-                <strong id="C">C</strong>
-    <p><a href="files/category.html">category.php</a></p>
-        <p><a href="files/inc-class-caweb-customize-alert-banner-control.html">class-caweb-customize-alert-banner-control.php</a></p>
-        <p><a href="files/inc-class-caweb-customize-icon-control.html">class-caweb-customize-icon-control.php</a></p>
-        <p><a href="files/inc-class-caweb-nav-menu-walker.html">class-caweb-nav-menu-walker.php</a></p>
-        <p><a href="files/inc-class-caweb-nav-menu.html">class-caweb-nav-menu.php</a></p>
-        <p><a href="files/core-class-caweb-theme-update.html">class-caweb-theme-update.php</a></p>
-        <p><a href="files/inc-customizer.html">customizer.php</a></p>
-                <strong id="D">D</strong>
-    <p><a href="files/date.html">date.php</a></p>
-                <strong id="F">F</strong>
-    <p><a href="files/inc-filters.html">filters.php</a></p>
-        <p><a href="files/footer.html">footer.php</a></p>
-        <p><a href="files/inc-functions.html">functions.php</a></p>
-        <p><a href="files/functions.html">functions.php</a></p>
-                <strong id="H">H</strong>
-    <p><a href="files/partials-header.html">header.php</a></p>
-        <p><a href="files/header.html">header.php</a></p>
-                <strong id="I">I</strong>
-    <p><a href="files/inc-icon-library.html">icon-library.php</a></p>
-        <p><a href="files/index.html">index.php</a></p>
-                <strong id="L">L</strong>
-    <p><a href="files/inc-live-drafts.html">live-drafts.php</a></p>
-                <strong id="M">M</strong>
-    <p><a href="files/inc-metaboxes.html">metaboxes.php</a></p>
-        <p><a href="files/partials-content-mobile-controls.html">mobile-controls.php</a></p>
-                <strong id="O">O</strong>
-    <p><a href="files/inc-options.html">options.php</a></p>
-        <p><a href="files/partials-options.html">options.php</a></p>
-                <strong id="P">P</strong>
-    <p><a href="files/page.html">page.php</a></p>
-        <p><a href="files/partials-page.html">page.php</a></p>
-                <strong id="S">S</strong>
-    <p><a href="files/partials-content-search-form.html">search-form.php</a></p>
-        <p><a href="files/inc-shortcodes.html">shortcodes.php</a></p>
-        <p><a href="files/partials-single.html">single.php</a></p>
-        <p><a href="files/single.html">single.php</a></p>
-                <strong id="T">T</strong>
-    <p><a href="files/tag.html">tag.php</a></p>
-        <p><a href="files/inc-tinymce.html">tinymce.php</a></p>
-                <strong id="U">U</strong>
-    <p><a href="files/partials-content-utility-header.html">utility-header.php</a></p>
-                <strong id="W">W</strong>
-    <p><a href="files/inc-widgets.html">widgets.php</a></p>
-        <p><a href="files/inc-wp-ajax.html">wp-ajax.php</a></p>
-        <p><a href="files/inc-wp-login.html">wp-login.php</a></p>
-
-
-                        
-
                     </main>
                 </div>
             </div>
         </div>
 
         <footer>
-            <footer id="footer" class="global-footer hidden-print">
-    <div class="container footer-menu">
-        <div class="group">
-            <div class="full-width">
-                <ul class="footer-links">
-                    <li>
-                        <a href="#skip-to-content">Back to Top</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="copyright"></div>
-</footer>
             <!-- Load template core -->
-            <script src="js/caweb.core.js"></script>
+            <script src="../js/caweb.core.js"></script>
         </footer>
     </body>
 </html>

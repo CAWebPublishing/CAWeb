@@ -69,7 +69,7 @@
 					</a>
 				</div>
 
-                <a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -131,10 +131,41 @@
 
 	<div class="navigation-search">
 
-				<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="../files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="../files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
@@ -239,7 +270,7 @@ Filters the login page errors.</i>
     <h2>Functions</h2>
         <div id="function_caweb_login_form_init" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L31">inc/wp-login.php</a>:31
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L31">inc/wp-login.php</a>:31
 </div>
             <strong class="d-block">caweb_login_form_init()</strong>
             <i class="small text-muted">CAWeb Login Form
@@ -264,7 +295,7 @@ Adds a nonce to the login form $_REQUEST array.</i>
     </div>
         <div id="function_caweb_login_form_lostpassword" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L53">inc/wp-login.php</a>:53
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L53">inc/wp-login.php</a>:53
 </div>
             <strong class="d-block">caweb_login_form_lostpassword()</strong>
             <i class="small text-muted">Login form for Lost Password
@@ -289,7 +320,7 @@ Fires before a specified login form action.</i>
     </div>
         <div id="function_caweb_login_form_rp" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L75">inc/wp-login.php</a>:75
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L75">inc/wp-login.php</a>:75
 </div>
             <strong class="d-block">caweb_login_form_rp()</strong>
             <i class="small text-muted">Hide the Confirm Weak Password on Reset Password
@@ -314,7 +345,7 @@ Fires before a specified login form action.</i>
     </div>
         <div id="function_caweb_lostpassword_form" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L42">inc/wp-login.php</a>:42
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L42">inc/wp-login.php</a>:42
 </div>
             <strong class="d-block">caweb_lostpassword_form()</strong>
             <i class="small text-muted">Add Site ID to lost password form
@@ -339,7 +370,7 @@ Fires inside the lostpassword form tags, before the hidden fields.</i>
     </div>
         <div id="function_caweb_lostpassword_redirect" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L140">inc/wp-login.php</a>:140
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L140">inc/wp-login.php</a>:140
 </div>
             <strong class="d-block">caweb_lostpassword_redirect()</strong>
             <i class="small text-muted">Redirect for after Lost your password has been generated
@@ -369,7 +400,7 @@ Filters the URL redirected to after submitting the lostpassword/retrievepassword
     </div>
         <div id="function_caweb_lostpassword_url" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L127">inc/wp-login.php</a>:127
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L127">inc/wp-login.php</a>:127
 </div>
             <strong class="d-block">caweb_lostpassword_url()</strong>
             <i class="small text-muted">Lost your password? URL
@@ -403,7 +434,7 @@ Filters the Lost Password URL.</i>
     </div>
         <div id="function_caweb_network_site_url" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L225">inc/wp-login.php</a>:225
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L225">inc/wp-login.php</a>:225
 </div>
             <strong class="d-block">caweb_network_site_url()</strong>
             <i class="small text-muted">Change the Reset Password URL to use the site url instead of the network url
@@ -441,7 +472,7 @@ Filters the network site URL.</i>
     </div>
         <div id="function_caweb_retrieve_password_message" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L177">inc/wp-login.php</a>:177
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L177">inc/wp-login.php</a>:177
 </div>
             <strong class="d-block">caweb_retrieve_password_message()</strong>
             <i class="small text-muted">Changes Blog Name in message to the correct site Blog Nameb_retrieve_password_message
@@ -483,7 +514,7 @@ Filters the message body of the password reset mail.</i>
     </div>
         <div id="function_caweb_retrieve_password_title" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L156">inc/wp-login.php</a>:156
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L156">inc/wp-login.php</a>:156
 </div>
             <strong class="d-block">caweb_retrieve_password_title()</strong>
             <i class="small text-muted">Changes Blog Name in title to the correct site Blog Name
@@ -521,7 +552,7 @@ Filters the subject of the password reset email.</i>
     </div>
         <div id="function_caweb_validate_password_reset" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L92">inc/wp-login.php</a>:92
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L92">inc/wp-login.php</a>:92
 </div>
             <strong class="d-block">caweb_validate_password_reset()</strong>
             <i class="small text-muted">Password Reset Strength Validation
@@ -555,7 +586,7 @@ Fires before the password reset procedure is validated.</i>
     </div>
         <div id="function_caweb_wp_login_errors" class="mb-3">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L199">inc/wp-login.php</a>:199
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/wp-login.php#L199">inc/wp-login.php</a>:199
 </div>
             <strong class="d-block">caweb_wp_login_errors()</strong>
             <i class="small text-muted">Add Reset Password Confirmation
@@ -598,6 +629,20 @@ Filters the login page errors.</i>
         </div>
 
         <footer>
+            <footer id="footer" class="global-footer hidden-print">
+    <div class="container footer-menu">
+        <div class="group">
+            <div class="full-width">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#skip-to-content">Back to Top</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright"></div>
+</footer>
             <!-- Load template core -->
             <script src="../js/caweb.core.js"></script>
         </footer>

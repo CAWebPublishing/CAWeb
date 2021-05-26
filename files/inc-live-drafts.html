@@ -69,7 +69,7 @@
 					</a>
 				</div>
 
-                <a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -131,10 +131,41 @@
 
 	<div class="navigation-search">
 
-				<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="../files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="../files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
@@ -179,7 +210,19 @@
         <i class="small text-muted"></i>
     </div>
     <div class="mb-2">
+        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_duplicate_post">caweb_live_drafts_duplicate_post()</a> : mixed</p>
+        <i class="small text-muted"></i>
+    </div>
+    <div class="mb-2">
         <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_init">caweb_live_drafts_init()</a> : mixed</p>
+        <i class="small text-muted"></i>
+    </div>
+    <div class="mb-2">
+        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_migrate_post_meta">caweb_live_drafts_migrate_post_meta()</a> : mixed</p>
+        <i class="small text-muted"></i>
+    </div>
+    <div class="mb-2">
+        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_post_hooks">caweb_live_drafts_post_hooks()</a> : mixed</p>
         <i class="small text-muted"></i>
     </div>
     <div class="mb-2">
@@ -187,11 +230,11 @@
         <i class="small text-muted"></i>
     </div>
     <div class="mb-2">
-        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_post_updated">caweb_live_drafts_post_updated()</a> : mixed</p>
+        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_pre_post_update">caweb_live_drafts_pre_post_update()</a> : mixed</p>
         <i class="small text-muted"></i>
     </div>
     <div class="mb-2">
-        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_pre_post_update">caweb_live_drafts_pre_post_update()</a> : mixed</p>
+        <p class="mb-0"><a href="namespaces/default.html#function_caweb_live_drafts_publish_future_post">caweb_live_drafts_publish_future_post()</a> : mixed</p>
         <i class="small text-muted"></i>
     </div>
  
@@ -205,7 +248,7 @@
     <h2>Functions</h2>
         <div id="function_caweb_live_drafts_admin_footer" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L102">inc/live-drafts.php</a>:102
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L166">inc/live-drafts.php</a>:166
 </div>
             <strong class="d-block">caweb_live_drafts_admin_footer()</strong>
             <i class="small text-muted"></i>
@@ -222,7 +265,7 @@
     </div>
         <div id="function_caweb_live_drafts_admin_head" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L34">inc/live-drafts.php</a>:34
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L96">inc/live-drafts.php</a>:96
 </div>
             <strong class="d-block">caweb_live_drafts_admin_head()</strong>
             <i class="small text-muted"></i>
@@ -239,7 +282,7 @@
     </div>
         <div id="function_caweb_live_drafts_admin_notice" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L68">inc/live-drafts.php</a>:68
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L132">inc/live-drafts.php</a>:132
 </div>
             <strong class="d-block">caweb_live_drafts_admin_notice()</strong>
             <i class="small text-muted"></i>
@@ -254,9 +297,39 @@
         <strong>Return values</strong>
         <p class="small">mixed</p>
     </div>
+        <div id="function_caweb_live_drafts_duplicate_post" class="mb-3 border-bottom border-info">
+        <div>
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L181">inc/live-drafts.php</a>:181
+</div>
+            <strong class="d-block">caweb_live_drafts_duplicate_post()</strong>
+            <i class="small text-muted"></i>
+        </div>
+        
+        <pre> caweb_live_drafts_duplicate_post(mixed $post_data, mixed $default = array(&#039;post_status&#039; =&gt; &#039;draft&#039;), mixed $use_post_id = true) : mixed</pre>
+        
+                <strong>Parameters</strong>
+                <div>
+            <p class="small mb-0">$post_data : mixed </p>
+            <p class="small"></p>
+        </div>
+                <div>
+            <p class="small mb-0">$default : mixed </p>
+            <p class="small"></p>
+        </div>
+                <div>
+            <p class="small mb-0">$use_post_id : mixed </p>
+            <p class="small"></p>
+        </div>
+                
+                
+
+
+        <strong>Return values</strong>
+        <p class="small">mixed</p>
+    </div>
         <div id="function_caweb_live_drafts_init" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L13">inc/live-drafts.php</a>:13
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L15">inc/live-drafts.php</a>:15
 </div>
             <strong class="d-block">caweb_live_drafts_init()</strong>
             <i class="small text-muted"></i>
@@ -271,9 +344,61 @@
         <strong>Return values</strong>
         <p class="small">mixed</p>
     </div>
+        <div id="function_caweb_live_drafts_migrate_post_meta" class="mb-3 border-bottom border-info">
+        <div>
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L204">inc/live-drafts.php</a>:204
+</div>
+            <strong class="d-block">caweb_live_drafts_migrate_post_meta()</strong>
+            <i class="small text-muted"></i>
+        </div>
+        
+        <pre> caweb_live_drafts_migrate_post_meta(mixed $from, mixed $to, mixed $exclude = array()) : mixed</pre>
+        
+                <strong>Parameters</strong>
+                <div>
+            <p class="small mb-0">$from : mixed </p>
+            <p class="small"></p>
+        </div>
+                <div>
+            <p class="small mb-0">$to : mixed </p>
+            <p class="small"></p>
+        </div>
+                <div>
+            <p class="small mb-0">$exclude : mixed </p>
+            <p class="small"></p>
+        </div>
+                
+                
+
+
+        <strong>Return values</strong>
+        <p class="small">mixed</p>
+    </div>
+        <div id="function_caweb_live_drafts_post_hooks" class="mb-3 border-bottom border-info">
+        <div>
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L28">inc/live-drafts.php</a>:28
+</div>
+            <strong class="d-block">caweb_live_drafts_post_hooks()</strong>
+            <i class="small text-muted"></i>
+        </div>
+        
+        <pre> caweb_live_drafts_post_hooks(mixed $add = true) : mixed</pre>
+        
+                <strong>Parameters</strong>
+                <div>
+            <p class="small mb-0">$add : mixed </p>
+            <p class="small"></p>
+        </div>
+                
+                
+
+
+        <strong>Return values</strong>
+        <p class="small">mixed</p>
+    </div>
         <div id="function_caweb_live_drafts_post_update" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L198">inc/live-drafts.php</a>:198
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L295">inc/live-drafts.php</a>:295
 </div>
             <strong class="d-block">caweb_live_drafts_post_update()</strong>
             <i class="small text-muted"></i>
@@ -297,39 +422,9 @@
         <strong>Return values</strong>
         <p class="small">mixed</p>
     </div>
-        <div id="function_caweb_live_drafts_post_updated" class="mb-3 border-bottom border-info">
+        <div id="function_caweb_live_drafts_pre_post_update" class="mb-3 border-bottom border-info">
         <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L269">inc/live-drafts.php</a>:269
-</div>
-            <strong class="d-block">caweb_live_drafts_post_updated()</strong>
-            <i class="small text-muted"></i>
-        </div>
-        
-        <pre> caweb_live_drafts_post_updated(mixed $post_id, mixed $post_after, mixed $post_before) : mixed</pre>
-        
-                <strong>Parameters</strong>
-                <div>
-            <p class="small mb-0">$post_id : mixed </p>
-            <p class="small"></p>
-        </div>
-                <div>
-            <p class="small mb-0">$post_after : mixed </p>
-            <p class="small"></p>
-        </div>
-                <div>
-            <p class="small mb-0">$post_before : mixed </p>
-            <p class="small"></p>
-        </div>
-                
-                
-
-
-        <strong>Return values</strong>
-        <p class="small">mixed</p>
-    </div>
-        <div id="function_caweb_live_drafts_pre_post_update" class="mb-3">
-        <div>
-            <div class="pull-right"><a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L117">inc/live-drafts.php</a>:117
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L223">inc/live-drafts.php</a>:223
 </div>
             <strong class="d-block">caweb_live_drafts_pre_post_update()</strong>
             <i class="small text-muted"></i>
@@ -353,6 +448,28 @@
         <strong>Return values</strong>
         <p class="small">mixed</p>
     </div>
+        <div id="function_caweb_live_drafts_publish_future_post" class="mb-3">
+        <div>
+            <div class="pull-right"><a target="_blank" href="/CAWeb/blob//inc/live-drafts.php#L48">inc/live-drafts.php</a>:48
+</div>
+            <strong class="d-block">caweb_live_drafts_publish_future_post()</strong>
+            <i class="small text-muted"></i>
+        </div>
+        
+        <pre> caweb_live_drafts_publish_future_post(mixed $post_id) : mixed</pre>
+        
+                <strong>Parameters</strong>
+                <div>
+            <p class="small mb-0">$post_id : mixed </p>
+            <p class="small"></p>
+        </div>
+                
+                
+
+
+        <strong>Return values</strong>
+        <p class="small">mixed</p>
+    </div>
     </div>
 
 
@@ -364,6 +481,20 @@
         </div>
 
         <footer>
+            <footer id="footer" class="global-footer hidden-print">
+    <div class="container footer-menu">
+        <div class="group">
+            <div class="full-width">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#skip-to-content">Back to Top</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright"></div>
+</footer>
             <!-- Load template core -->
             <script src="../js/caweb.core.js"></script>
         </footer>

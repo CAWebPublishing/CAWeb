@@ -70,7 +70,7 @@
 					</a>
 				</div>
 
-                <a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+                <a href="" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
 				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
@@ -132,10 +132,41 @@
 
 	<div class="navigation-search">
 
-				<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
@@ -157,7 +188,6 @@
 
                         
                         <h2>Actions</h2>
-
     
         
                             
@@ -175,7 +205,7 @@
                                                                         
                                                                         
                         <div class="border-bottom border-info mb-3">
-                            <p>WordPress Hook: <a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_bar_menu">admin_bar_menu</a>
+                            <p>WordPress Hook: <a target="_blank" href="admin_bar_menu">admin_bar_menu</a>
 </p>
 
                                                         
@@ -184,7 +214,7 @@
                             <p>Priority:  1000 </p>
                             
                                                         
-                            <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-bar.php#L18">inc/admin-bar.php</a>:18
+                            <p>Source: <a target="_blank" href="/CAWeb/blob//inc/admin-bar.php#L18">inc/admin-bar.php</a>:18
 </p>
                         </div>
 
@@ -204,7 +234,7 @@
                                                                         
                                                                         
                         <div class="border-bottom border-info mb-3">
-                            <p>WordPress Hook: <a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_post_action">admin_post_{$action}</a>
+                            <p>WordPress Hook: <a target="_blank" href="admin_post_action">admin_post_{$action}</a>
 </p>
 
                                                         
@@ -213,7 +243,7 @@
                             <p>Priority: 10</p>
                             
                                                         
-                            <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-post.php#L21">inc/admin-post.php</a>:21
+                            <p>Source: <a target="_blank" href="/CAWeb/blob//inc/admin-post.php#L21">inc/admin-post.php</a>:21
 </p>
                         </div>
 
@@ -224,7 +254,7 @@
                                                                         
                                                                         
                         <div class="border-bottom border-info mb-3">
-                            <p>WordPress Hook: <a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_post_nopriv_action">admin_post_nopriv_{$action}</a>
+                            <p>WordPress Hook: <a target="_blank" href="admin_post_nopriv_action">admin_post_nopriv_{$action}</a>
 </p>
 
                                                         
@@ -233,7 +263,7 @@
                             <p>Priority: 10</p>
                             
                                                         
-                            <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-post.php#L21">inc/admin-post.php</a>:21
+                            <p>Source: <a target="_blank" href="/CAWeb/blob//inc/admin-post.php#L21">inc/admin-post.php</a>:21
 </p>
                         </div>
 
@@ -561,9 +591,15 @@
                 
     
     
-                                                                                                                                                    
+                                                                                                                                                                                                                
                             
                                         
+                
+                                    
+                
+                                    
+                
+                                    
                 
                                     
                 
@@ -806,7 +842,6 @@
 
 
 <h2>Filters</h2>
-
     
         
                             
@@ -987,7 +1022,7 @@
                                                                         
                                                                         
                         <div class="border-bottom border-info mb-3">
-                            <p>WordPress Hook: <a target="_blank" href="https://developer.wordpress.org/reference/hooks/upgrader_pre_download">upgrader_pre_download</a>
+                            <p>WordPress Hook: <a target="_blank" href="upgrader_pre_download">upgrader_pre_download</a>
 </p>
 
                                                         
@@ -996,7 +1031,7 @@
                             <p>Priority: 10</p>
                             
                                                         
-                            <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/core/class-caweb-theme-update.php#L220">core/class-caweb-theme-update.php</a>:220
+                            <p>Source: <a target="_blank" href="/CAWeb/blob//core/class-caweb-theme-update.php#L220">core/class-caweb-theme-update.php</a>:220
 </p>
                         </div>
 
@@ -1062,7 +1097,7 @@
                                                                         
                                                                         
                         <div class="border-bottom border-info mb-3">
-                            <p>WordPress Hook: <a target="_blank" href="https://developer.wordpress.org/reference/hooks/body_class">body_class</a>
+                            <p>WordPress Hook: <a target="_blank" href="body_class">body_class</a>
 </p>
 
                                                         <p>Description: Filters the list of CSS body class names for the current post or page.</p>
@@ -1073,7 +1108,7 @@
                             
                                                         <p>Arguments:  2 </p>
                                                         
-                            <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L30">inc/filters.php</a>:30
+                            <p>Source: <a target="_blank" href="/CAWeb/blob//inc/filters.php#L30">inc/filters.php</a>:30
 </p>
                         </div>
 
@@ -1193,9 +1228,15 @@
                 
     
     
-                                                                                                                                                    
+                                                                                                                                                                                                                
                             
                                         
+                
+                                    
+                
+                                    
+                
+                                    
                 
                                     
                 
@@ -1445,6 +1486,20 @@
         </div>
 
         <footer>
+            <footer id="footer" class="global-footer hidden-print">
+    <div class="container footer-menu">
+        <div class="group">
+            <div class="full-width">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#skip-to-content">Back to Top</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright"></div>
+</footer>
             <!-- Load template core -->
             <script src="js/caweb.core.js"></script>
         </footer>

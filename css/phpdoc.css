@@ -8,3 +8,18 @@
     font-size: 0.75rem;
     position: absolute;
 }
+
+.section + .section {
+    padding-top: 0px;
+}
+
+.multi-terminal-commands {
+    background: whitesmoke;
+    border: 1px solid #d6d6d6;
+    padding: 0px 15px;
+    width: max-content;
+}
+
+.multi-terminal-commands pre{
+    display: table-row;
+}
