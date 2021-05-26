@@ -24,12 +24,7 @@ get_header();
 						<!-- Page Title-->
 						<h1>Page Not Found</h1>
 						<div class="description">The page you requested was not found.</div>
-						<div class="section section-none">
-							<div class="agency-form">
-								<h1>Search Site For:</h1>
-								<gcse:searchbox-only resultsUrl="<?php print esc_url( site_url( 'serp' ) ); ?>"></gcse:searchbox-only>
-							</div>
-						</div>
+						
 
 					</div>
 				</article> <!-- .et_pb_post -->
@@ -37,17 +32,6 @@ get_header();
 			</main>
 		</div>
 	</div> <!-- #main-content -->
-
-	<style>
-		.entry-content tr td {
-			padding: 0px !important;
-			border: unset !important;
-		}
-
-		.gsc-input {
-			border: 1px solid #DDD !important;
-		}
-	</style>
 
 	<?php get_footer(); ?>
 </body>

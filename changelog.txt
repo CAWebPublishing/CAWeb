@@ -1,4 +1,7 @@
 CAWeb v1.5.5
+- Updated placeholder text to show "Search" instead of Search Homepage
+- Removed "Translate" wording from Google Translate 
+- Removed 404 search
 - Added new Flex MegaMenu
 - Added default to slide title field if using media in Section Carousel Slide(Standard/Fullwidth)
 - Added default to profile link field in Profile Banner
