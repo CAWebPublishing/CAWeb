@@ -1,4 +1,5 @@
 CAWeb v1.5.5
+- Regenerated Font Sheet to fix share-Instagram icon to share-instagram
 - Added new Flex MegaMenu
 - Added default to slide title field if using media in Section Carousel Slide(Standard/Fullwidth)
 - Added default to profile link field in Profile Banner
