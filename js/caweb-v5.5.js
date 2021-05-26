@@ -19335,13 +19335,6 @@ jQuery(document).ready(function() {
         });
     }
 
-    /**
-     * Fix Back to Top not giving focus
-     */
-     $('[href="#skip-to-content"]').on('click', function(){
-        $('header #skip-to-content a').focus();
-        $(document.activeElement).blur();
-     });
 });
 jQuery(document).ready(function() {
 	// Do this after the page has loaded
