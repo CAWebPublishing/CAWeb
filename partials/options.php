@@ -200,6 +200,8 @@ function caweb_display_general_options() {
 				<label for="ca_default_navigation_menu" class="d-block mb-0"><strong>Header Menu Type</strong></label>
 				<small class="mb-2 text-muted d-block">Set a menu style for all pages.</small>
 				<select id="ca_default_navigation_menu" name="ca_default_navigation_menu" class="w-50 form-control">
+					<option value="flexmega"
+					<?php print 'flexmega' === $navigation_menu ? 'selected="selected"' : ''; ?>>Flex Mega Menu</option>
 					<option value="megadropdown"
 					<?php print 'megadropdown' === $navigation_menu ? 'selected="selected"' : ''; ?>>Mega Drop</option>
 					<option value="dropdown"
