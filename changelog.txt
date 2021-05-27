@@ -1,4 +1,6 @@
 CAWeb v1.5.5
+- Disabled XML-RPF
+- Fixed Copyright double reading
 - Fixed issue with live drafts running whenever Divi triggered a Save Post
 - Regenerated Font Sheet to fix share-Instagram icon to share-instagram
 - Updated placeholder text to show "Search" instead of Search Homepage
