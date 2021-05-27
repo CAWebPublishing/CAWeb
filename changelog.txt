@@ -1,4 +1,5 @@
 CAWeb v1.5.5
+- Disabled XML-RPC 
 - Updated placeholder text to show "Search" instead of Search Homepage
 - Removed "Translate" wording from Google Translate 
 - Removed 404 search
