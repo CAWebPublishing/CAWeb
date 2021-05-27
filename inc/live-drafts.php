@@ -12,6 +12,17 @@ add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
 
 add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
 
+/**
+ * CAWeb Live Drafts Initialization
+ *
+ * Fires before the post and post new pages are loaded.
+ *
+ * @category {
+ * add_action( 'load-post.php', 'caweb_live_drafts_init' );
+ * add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
+ * }
+ * @return void
+ */
 function caweb_live_drafts_init() {
 
 	// Admin head.
@@ -25,6 +36,15 @@ function caweb_live_drafts_init() {
 	add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
 }
 
+/**
+ * CAWeb Live Drafts Post Hooks
+ *
+ * To avoid infinite loop these hooks are added and removed during insert/update of a post.
+ *
+ * @see https://developer.wordpress.org/reference/hooks/save_post/#avoiding-infinite-loops
+ * @param  bool $add Whether to remove or add the hooks.
+ * @return void
+ */
 function caweb_live_drafts_post_hooks( $add = true ) {
 
 	if ( $add ) {
@@ -45,6 +65,15 @@ function caweb_live_drafts_post_hooks( $add = true ) {
 
 }
 
+/**
+ * CAWeb Publish Future Post
+ *
+ * Invoked by cron ‘publish_future_post’ event.
+ *
+ * @category add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
+ * @param  int|WP_Post $post_id Post ID or post object.
+ * @return void
+ */
 function caweb_live_drafts_publish_future_post( $post_id ) {
 	// Check for post meta that identifies this as a 'draft of a live page'.
 	$_pc_live_id = get_post_meta( $post_id, '_pc_liveId', true );
@@ -65,11 +94,6 @@ function caweb_live_drafts_publish_future_post( $post_id ) {
 		)
 	);
 
-	/**
-	* Avoiding infinite loop
-	*
-	* @link https://developer.wordpress.org/reference/hooks/save_post/#avoiding-infinite-loops
-	*/
 	// unhook actions.
 	caweb_live_drafts_post_hooks( false );
 
@@ -93,6 +117,14 @@ function caweb_live_drafts_publish_future_post( $post_id ) {
 
 }
 
+/**
+ * CAWeb Live Drafts Admin Head
+ *
+ * Fires in head section for post and post new pages.
+ *
+ * @category add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
+ * @return void
+ */
 function caweb_live_drafts_admin_head() {
 	global $post;
 
@@ -105,23 +137,14 @@ function caweb_live_drafts_admin_head() {
 			// Add save draft button to live pages.
 			jQuery(document).ready(function($) {
 
-				$('<input type="submit" class="button button-highlighted" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft" value="saving"/>').prependTo('#save-action');
+				$('<input type="submit" class="button button-highlighted caweb-save-draft" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
 
-				$('input#save-post').on('click', function(e){
-					/*
-					if using the new Divi Builder Experience the save draft process fires twice
-					once for WordPress then again for Divi
-					set caweb_save_draft = divi until originalEvent is undefined, this is the Divi save.
-					 */
-					if( $('#et_pb_toggle_builder').hasClass('et_pb_builder_is_used') && 
-							$('body').hasClass('et-bfb') && undefined === arguments[0].originalEvent ){
-						// if the live draft process wasnt started by the Save Draft button
-							$('input[name="caweb_save_draft"]').val('saving');
-					}else{
-						$('input[name="caweb_save_draft"]').val('old-divi');
+				$('#save-action .caweb-save-draft').on('click', function(e){
+					if( undefined !== e.originalEvent && e.originalEvent instanceof MouseEvent ){
+						$('#save-action input[name="caweb_save_draft"]').val('saving');
 					}
+				})
 
-				});
 			});
 
 		</script>
@@ -129,6 +152,14 @@ function caweb_live_drafts_admin_head() {
 	}
 }
 
+/**
+ * CAWeb Live Drafts Admin Notices
+ *
+ * Prints admin screen notices.
+ *
+ * @category add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
+ * @return void
+ */
 function caweb_live_drafts_admin_notice() {
 	global $post;
 
@@ -158,11 +189,19 @@ function caweb_live_drafts_admin_notice() {
 			'<div class="%1$s"><p>%2$s<a href="%3$s">View here.</a></p></div>',
 			esc_attr( $class ),
 			esc_html( $message ),
-			$draft_link
+			esc_url( $draft_link )
 		);
 	}
 }
 
+/**
+ * CAWeb Live Drafts Admin Footer
+ *
+ * Fires in footer section for post and post new pages.
+ *
+ * @category add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer' );
+ * @return void
+ */
 function caweb_live_drafts_admin_footer() {
 	global $post;
 
@@ -178,6 +217,14 @@ function caweb_live_drafts_admin_footer() {
 	}
 }
 
+/**
+ * CAWeb Live Drafts Duplicate Post
+ *
+ * @param  array $post_data Post data to duplicate from.
+ * @param  array $default Default post data. post_status = draft.
+ * @param  bool  $use_post_id Whether to use the $post_data Post ID or leave blank.
+ * @return array
+ */
 function caweb_live_drafts_duplicate_post( $post_data, $default = array( 'post_status' => 'draft' ), $use_post_id = true ) {
 	$dup_post = array(
 		'menu_order'     => $post_data['menu_order'],
@@ -201,6 +248,14 @@ function caweb_live_drafts_duplicate_post( $post_data, $default = array( 'post_s
 	return array_merge( $dup_post, $default );
 }
 
+/**
+ * CAWeb Live Drafts Migrate Post Meta
+ *
+ * @param  int   $from Post ID of the post we are getting the meta from.
+ * @param  int   $to Post ID of the post we are adding the meta to.
+ * @param  array $exclude Array of meta to exclude from adding.
+ * @return void
+ */
 function caweb_live_drafts_migrate_post_meta( $from, $to, $exclude = array() ) {
 	$exclusions = is_string( $exclude ) ? explode( $exclude, ',' ) : $exclude;
 	$excluded   = array_merge( array( '_edit_lock', '_edit_last' ), $exclusions );
@@ -220,38 +275,49 @@ function caweb_live_drafts_migrate_post_meta( $from, $to, $exclude = array() ) {
 	}
 }
 
+/**
+ * CAWeb Live Drafts Pre Post Update
+ *
+ * Fires immediately before an existing post is updated in the database.
+ *
+ * @category add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
+ * @param  int   $post_id Post ID.
+ * @param  array $post Array of unslashed post data.
+ * @return int
+ */
 function caweb_live_drafts_pre_post_update( $post_id, $post ) {
+	$caweb_draft = isset( $_REQUEST['caweb_save_draft'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['caweb_save_draft'] ) ) : '';
 
 	// check if the caweb save draft button was pressed.
-	if ( ! isset( $_REQUEST['caweb_save_draft'] ) ||
-		( isset( $_REQUEST['caweb_save_draft'] ) &&
-		! in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'old-divi' ), true )
-		)
-	) {
+	if ( 'saving' !== $caweb_draft ) {
 		return $post_id;
 	}
+
+	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
 
 	// Check if this is an auto save routine. If it is we dont want to do anything.
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id;
 	}
 
+	$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
+
 	// Only continue if this request is for the post or page post type.
-	if ( isset( $_POST['post_type'] ) &&
-		! in_array( $_POST['post_type'], array( 'post', 'page' ), true ) ) {
+	if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
 		return $post_id;
 	}
 
 	// Check permissions.
-	if ( isset( $_POST['post_type'] ) &&
-		! current_user_can( 'edit_' . ( 'posts' === $_POST['post_type'] ? 'posts' : 'page' ), $post_id ) ) {
+	if ( ! current_user_can( 'edit_' . ( 'posts' === $post_type ? 'posts' : 'page' ), $post_id ) ) {
 		return $post_id;
 	}
 
+	$save        = isset( $_REQUEST['save'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['save'] ) ) : '';
+	$post_status = isset( $_REQUEST['post_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_status'] ) ) : '';
+
 	// Catch only when a draft is saved of a live page.
-	if ( isset( $_REQUEST['save'], $_REQUEST['post_status'] ) &&
-		'Save Draft' === $_REQUEST['save'] &&
-		'publish' === $_REQUEST['post_status']
+	if ( 'Save Draft' === $save &&
+		'publish' === $post_status
 		) {
 		// Check for post meta that identifies this as a 'live draft'.
 		$_pc_draft_id = get_post_meta( $post_id, '_pc_draftId', true );
@@ -292,6 +358,16 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 
 }
 
+/**
+ * CAWeb Live Drafts Post Update
+ *
+ * Fires once a post has been saved.
+ *
+ * @category add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+ * @param  int     $post_id Post ID.
+ * @param  WP_POST $post Post object.
+ * @return int
+ */
 function caweb_live_drafts_post_update( $post_id, $post ) {
 
 	// Check if this is an auto save routine. If it is we dont want to do anything.
@@ -299,43 +375,45 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		return $post_id;
 	}
 
+	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
+
+	$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
+
 	// Only continue if this request is for the post or page post type.
-	if ( isset( $_POST['post_type'] ) &&
-		! in_array( $_POST['post_type'], array( 'post', 'page' ), true ) ) {
+	if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
 		return $post_id;
 	}
 
 	// Check permissions.
-	if ( isset( $_POST['post_type'] ) &&
-		! current_user_can( 'edit_' . ( 'posts' === $_POST['post_type'] ? 'posts' : 'page' ), $post_id ) ) {
+	if ( ! current_user_can( 'edit_' . ( 'posts' === $post_type ? 'posts' : 'page' ), $post_id ) ) {
 		return $post_id;
 	}
 
+	$request_post_id = isset( $_REQUEST['post_ID'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_ID'] ) ) : '';
+	$save            = isset( $_REQUEST['save'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['save'] ) ) : '';
+	$post_status     = isset( $_REQUEST['post_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_status'] ) ) : '';
+	$caweb_draft     = isset( $_REQUEST['caweb_save_draft'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['caweb_save_draft'] ) ) : '';
+
 	// Catch when a draft is saved of a live page.
-	if ( isset( $_REQUEST['post_ID'], $_REQUEST['save'], $_REQUEST['post_status'], $_REQUEST['caweb_save_draft'] ) &&
-			'Save Draft' === $_REQUEST['save'] &&
-			'publish' === $_REQUEST['post_status'] &&
-			in_array( $_REQUEST['caweb_save_draft'], array( 'saving', 'old-divi' ), true ) &&
-			! wp_is_post_revision( $_REQUEST['post_ID'] )
+	if ( 'Save Draft' === $save &&
+			'publish' === $post_status &&
+			'saving' === $caweb_draft &&
+			! wp_is_post_revision( $request_post_id )
 		) {
 
-			// Check for post meta that identifies this as a 'live draft'.
-			$_pc_draft_id = get_post_meta( $_REQUEST['post_ID'], '_pc_draftId', true );
+		// Check for post meta that identifies this as a 'live draft'.
+		$_pc_draft_id = get_post_meta( $request_post_id, '_pc_draftId', true );
 
 		if ( empty( $_pc_draft_id ) ) {
 			return;
 		}
 
-				// Divi saves the original even when a draft is created, revert to previous revision.
-				$revs = wp_get_post_revisions( $_REQUEST['post_ID'] );
+		// Divi saves the original even when a draft is created, revert to previous revision.
+		$revs = wp_get_post_revisions( $request_post_id );
 
 		if ( ! empty( $revs ) ) {
 			array_shift( $revs );
-			/**
-			 * Avoiding infite loop
-			 *
-			 * @link https://developer.wordpress.org/reference/hooks/save_post/#avoiding-infinite-loops
-			 */
+
 			// unhook actions.
 			caweb_live_drafts_post_hooks( false );
 
@@ -355,13 +433,16 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		}
 
 			// Send user to new edit page.
-			wp_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
+			wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
 			exit();
 
 	}
 
+	$publish = isset( $_REQUEST['publish'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['publish'] ) ) : '';
+	$content = isset( $_REQUEST['content'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['content'] ) ) : $post->post_content;
+
 	// Catch when a draft is published.
-	if ( isset( $_REQUEST['publish'] ) && 'Schedule' !== $_REQUEST['publish'] ) {
+	if ( 'Schedule' !== $publish ) {
 		// Check for post meta that identifies this as a 'draft of a live page'.
 		$_pc_live_id = get_post_meta( $post_id, '_pc_liveId', true );
 
@@ -375,16 +456,11 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 			array(
 				'ID'             => $_pc_live_id,
 				'post_status'    => 'publish',
-				'post_content'   => isset( $_REQUEST['content'] ) ? $_REQUEST['content'] : $post->post_content,
+				'post_content'   => $content,
 				'post_date'      => current_time( 'mysql' ),
 			)
 		);
 
-		/**
-		* Avoiding infinite loop
-		*
-		* @link https://developer.wordpress.org/reference/hooks/save_post/#avoiding-infinite-loops
-		*/
 		// unhook actions.
 		caweb_live_drafts_post_hooks( false );
 
@@ -408,11 +484,9 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 
 		unset( $_SESSION[ "post_$_pc_live_id" ] );
 
-		if ( isset( $_REQUEST['publish'] ) && 'Schedule' !== $_REQUEST['publish'] ) {
-			// Send user to new edit page.
-			wp_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_live_id ) );
-			exit();
-		}
+		// Send user to new edit page.
+		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_live_id ) );
+		exit();
 	}
 
 }

@@ -555,7 +555,3 @@ function caweb_safe_style_css( $styles ) {
 
 	return $styles;
 }
-
-/*disable XML-RPC*/
-add_filter('xmlrpc_enabled','_return_false');
-
