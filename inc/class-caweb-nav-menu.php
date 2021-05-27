@@ -124,7 +124,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<span class="pull-right">Powered by: CAWeb Publishing Service</span>' : '';
 
 				$nav_menu = sprintf(
-					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container"><p class="d-inline"> &copy; %2$s State of California</p>%3$s</div></div></footer>',
+					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container"><p class="d-inline">Copyright &copy; %2$s State of California</p>%3$s</div></div></footer>',
 					$nav_menu,
 					gmdate( 'Y' ),
 					$powered_by
