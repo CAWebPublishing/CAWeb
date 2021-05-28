@@ -19,7 +19,7 @@ jobs:
       - run: composer i --no-dev
       - run: 
           command: |
-            clean=$(./vendor/bin/phpcs ./functions.php )
+            clean=$(./vendor/bin/phpcs --version )
             if [ -z "$clean" ]; then
               print "$clean"
               exit 1
