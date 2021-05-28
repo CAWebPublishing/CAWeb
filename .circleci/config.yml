@@ -19,7 +19,5 @@ jobs:
       - run: composer i --no-dev
       - run: 
           command: |
-            clean=$( ./vendor/bin/phpcs ./inc/functions.php )
-            if [ -n "$clean" ]; then
-              echo "$clean"
-            fi
+            setenv file $( ./vendor/bin/phpcs ./inc/functions.php )
+              echo "$file"
