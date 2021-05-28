@@ -17,6 +17,9 @@ jobs:
     steps:
       - checkout
       - run: composer i --no-dev
+      - run: clean=$( ./vendor/bin/phpcs ./functions.php )
       - run: 
           command: |
-            echo "hello woeld"
+            if [ -n "$clean" ]; then
+              echo "$clean"
+            fi
