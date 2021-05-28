@@ -17,4 +17,11 @@ jobs:
     steps:
       - checkout
       - run: composer update
-      - run: ./vendor/bin/phpcs functions.php
+      - run: 
+          command: |
+            clean=$(./vendor/bin/phpcs functions.php)
+            if [ -n "$clean" ]; then
+              echo "Clean"
+            else
+              echo "$clean"
+            fi
