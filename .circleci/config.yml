@@ -20,7 +20,7 @@ jobs:
       - run: 
           command: |
             clean=$(./vendor/bin/phpcs --version )
-            if [ -z "$clean" ]; then
+            if [ -n "$clean" ]; then
               print "$clean"
               exit 1
             fi
