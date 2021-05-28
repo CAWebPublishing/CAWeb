@@ -19,7 +19,7 @@ jobs:
       - run: composer update
       - run: 
           command: |
-            clean=$(./vendor/bin/phpcs functions.php)
+            clean=$(./vendor/bin/phpcs ./functions.php)
             if [ -z "$clean" ]; then
               print 'functions.php failed WordPress Coding Standards'
               exit 1
