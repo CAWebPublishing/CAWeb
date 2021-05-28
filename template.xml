@@ -25,6 +25,6 @@
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.html.twig" artifact="files.html" />
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.source.html.twig" />
       <transformation writer="twig" source="vendor/caweb/phpdoc/filters.html.twig" artifact="filters.html" />
-      <transformation writer="twig" source="vendor/caweb/phpdoc/icons.html.twig" artifact="icons.html" />
+      <transformation writer="twig" source="vendor/caweb/phpdoc/icons.html.twig" artifact="icon-library.html" />
     </transformations>
 </template>
