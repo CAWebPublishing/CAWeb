@@ -16,7 +16,8 @@ jobs:
       - image: circleci/php:7.4
     steps:
       - checkout
-      - run: composer update
+      - run: composer i --no-dev
+      - run: ls -al
       - run: 
           command: |
             clean=$(./vendor/bin/phpcs ./functions.php)
