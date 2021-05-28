@@ -18,7 +18,6 @@ jobs:
       - checkout
       - run: composer i --no-dev
       - run: |
-            if [ "" == $( ./vendor/bin/phpcs ~/inc/functions.php ) ]; then
-              echo "functions.php failed WordPress Coding Standards"
-              exit 1
-            fi
+            clean=$( ./vendor/bin/phpcs ~/inc/functions.php )
+            echo "$clean"
+            exit 1
