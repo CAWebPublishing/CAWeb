@@ -555,4 +555,3 @@ function caweb_safe_style_css( $styles ) {
 
 	return $styles;
 }
-

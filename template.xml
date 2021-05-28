@@ -2,11 +2,11 @@
 <template>
     <name>caweb</name>
     <author>Danny Guzman</author>
-     <email>guzmanjd86@gmail.com</email>
-     <description>phpDocumentor Template Config File for the CAWeb WordPress Theme</description>
+    <email>guzmanjd86@gmail.com</email>
+    <description>phpDocumentor Template Config File for the CAWeb WordPress Theme</description>
     <version>1.0.0</version>
     <parameters>
-      <parameter key="twig-debug">true</parameter>
+      <!--parameter key="twig-debug">true</parameter-->
     </parameters>
     <transformations>
       <transformation writer="FileIo" query="copy" source="css/cagov-v5.5-santa barbara.css" artifact="css/caweb.core.css"/>
@@ -25,5 +25,6 @@
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.html.twig" artifact="files.html" />
       <transformation writer="twig" query="files" source="vendor/caweb/phpdoc/files.source.html.twig" />
       <transformation writer="twig" source="vendor/caweb/phpdoc/filters.html.twig" artifact="filters.html" />
+      <transformation writer="twig" source="vendor/caweb/phpdoc/icons.html.twig" artifact="icons.html" />
     </transformations>
 </template>
