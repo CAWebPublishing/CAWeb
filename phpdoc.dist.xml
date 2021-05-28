@@ -15,14 +15,17 @@
 	        </source>
 		<ignore>
 	                <path>assets/**/*</path>
-	                <path>documentation/**/*</path>
+	                <path>core/**/*</path>
 	                <path>css/**/*</path>
 	                <path>divi/**/*</path>
+	                <path>docs/**/*</path>
 	                <path>fonts/**/*</path>
 	                <path>images/**/*</path>
+	                <path>inc/**/*</path>
 	                <path>js/**/*</path>
 	                <path>node-modules/**/*</path>
 	                <path>page-templates/**/*</path>
+	                <path>partials/**/*</path>
 	                <path>vendor/**/*</path>
 		</ignore>
         </api>
@@ -31,6 +34,7 @@
 	<setting name="wp_function_ref" value="https://developer.wordpress.org/reference/functions/" />
 	<setting name="github_ref" value="https://github.com/" />
 	<setting name="github_user" value="CA-CODE-Works" />
+	<setting name="github_repo" value="CAWeb" />
 	<setting name="github_branch" value="dev" />
 	<setting name="stable_version" value="1.5.3" />
 	<template name="." location="."></template>
