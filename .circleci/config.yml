@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2.0
+version: 2.1
 workflows:
   verify_standards:
     jobs:
@@ -16,5 +16,5 @@ jobs:
       - image: circleci/php:7.1
     steps:
       - checkout
-      - run: composer i
-      - run: ./vendor/bin/phpcs .
+      - run: composer update
+      - run: ./vendor/bin/phpcs functions.php
