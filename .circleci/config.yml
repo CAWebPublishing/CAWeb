@@ -21,7 +21,7 @@ jobs:
           command: |
             clean=$(./vendor/bin/phpcs functions.php)
             if [ -n "$clean" ]; then
-              echo "Clean"
+              exit 0
             else
-              echo "$clean"
+              exit 1
             fi
