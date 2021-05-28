@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run: composer i --no-dev
       - run: |
-            clean=$( ./vendor/bin/phpcs ./functions.php )
+            clean=$( ./vendor/bin/phpcs --version )
             echo "$clean"
             if [ -n "$clean" ]; then
               echo "$clean"
