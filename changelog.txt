@@ -1,4 +1,7 @@
 CAWeb v1.5.5
+- Added new transformation to phpDoc template
+- Added additional comments to files
+- Added setting to phpdoc.dist.xml
 - Disabled XML-RPF
 - Fixed Copyright double reading
 - Fixed issue with live drafts running whenever Divi triggered a Save Post

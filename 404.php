@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying 404 pages (not found)
+ * The template for displaying 404 pages (Page Not Found)
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
