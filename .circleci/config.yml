@@ -13,7 +13,7 @@ working_directory: ~/repo
 jobs:
   standard:
     docker:
-      - image: circleci/php:7.1
+      - image: circleci/php:7.4
     steps:
       - checkout
       - run: composer update
