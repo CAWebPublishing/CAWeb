@@ -20,6 +20,6 @@ jobs:
       - run: 
           command: |
             clean=$( ./vendor/bin/phpcs ./inc/functions.php )
-            if [ -z "$clean" ]; then
+            if [ -n "$clean" ]; then
               echo "$clean"
             fi
