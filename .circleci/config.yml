@@ -20,5 +20,5 @@ jobs:
       - run: 
           command: |
             if [ -n "$( ./vendor/bin/phpcs ./inc/functions.php )" ]; then 
-              echo "fail"
+              echo "$( ./vendor/bin/phpcs ./inc/functions.php )"
             fi
