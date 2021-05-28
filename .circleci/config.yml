@@ -19,6 +19,11 @@ jobs:
       - run: composer i --no-dev
       - run: 
           command: |
-            if [ -n "$( ./vendor/bin/phpcs ./inc/functions.php )" ]; then 
-              echo "$( ./vendor/bin/phpcs ./inc/functions.php )"
-            fi
+            declare -a files=( 'functions.php' 'archive.php' )
+            for f in ${files[@]}; do
+                result=
+                if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
+                  echo "$( ./vendor/bin/phpcs $f )"
+                  exit 1
+                fi
+            done
