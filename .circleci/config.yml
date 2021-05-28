@@ -19,4 +19,7 @@ jobs:
       - run: composer i --no-dev
       - run: 
           command: |
-            ls -al
+            clean=$( ./vendor/bin/phpcs ./inc/functions.php )
+            if [ -z "$clean" ]; then
+              echo "$clean"
+            fi
