@@ -22,8 +22,39 @@ jobs:
     docker:
       - image: circleci/php:7.4
     steps:
-      - run: ls -al
+      - checkout
+      - run: wget https://phpdoc.org/phpDocumentor.phar
+      - run: chmod +x phpDocumentor.phar
       - run: ./phpDocumentor.phar . --force
+      - run: 
+          command: |
+              declare -a files=( 
+                'assets/' 
+                'core/' 
+                'css/' 
+                'divi/' 
+                'fonts/' 
+                'images/' 
+                'inc/'
+                'js/'
+                'page-templates/'
+                'partials/'
+                '404.php' 
+                'archive.php' 
+                'author.php' 
+                'category.php' 
+                'date.php' 
+                'footer.php' 
+                'functions.php' 
+                'header.php'
+                'index.php'
+                'page.php'
+                'single.php'
+                'tag.php'
+                )
+              for f in ${files[@]}; do
+                  rm -rf $f
+              done
       - run: ls -al
 
   standard:
@@ -69,7 +100,5 @@ jobs:
                     exit 1
                   fi
               done
-        - run: wget https://phpdoc.org/phpDocumentor.phar
-        - run: chmod +x phpDocumentor.phar
 
               
