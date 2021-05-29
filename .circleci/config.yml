@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run: wget https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDocumentor.phar
-      - run: ./phpDocumentor.phar . --force
+      - run: php ./phpDocumentor.phar . --force
       - run: 
           command: |
               declare -a files=( 
