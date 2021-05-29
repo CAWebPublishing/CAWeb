@@ -69,8 +69,5 @@ jobs:
                     exit 1
                   fi
               done
-        - setup_remote_docker:
-            docker_layer_caching: true
-        - run: docker build . 
 
               
