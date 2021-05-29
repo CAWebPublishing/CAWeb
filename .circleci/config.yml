@@ -70,6 +70,6 @@ jobs:
                   exit 1
                 fi
             done
-      - run: docker build -t caweb/tmp
+      - run: docker ps
 
               
