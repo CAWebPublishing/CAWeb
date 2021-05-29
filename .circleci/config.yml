@@ -21,9 +21,9 @@ jobs:
           command: |
             declare -a files=( 'functions.php' '404.php' 'archive.php' )
             for f in ${files[@]}; do
-                result=
-                if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
-                  echo "$( ./vendor/bin/phpcs $f )"
+                result="$( ./vendor/bin/phpcs $f )"
+                if [ -n "$result" ]; then
+                  echo "$result"
                   exit 1
                 fi
             done
