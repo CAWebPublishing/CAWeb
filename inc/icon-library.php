@@ -53,13 +53,13 @@ function caweb_get_icon_list( $index = -1, $name = '', $keys = false ) {
 	unset( $fonts->glyph[0] );
 
 	foreach ( $fonts->glyph as $g => $glyph ) {
-        $glyph_name =  (string)$glyph['glyph-name']; 
-		$code = (string)$glyph['unicode'];
+		$glyph_name = (string) $glyph['glyph-name'];
+		$code       = (string) $glyph['unicode'];
 
-		if( isset( $icons[  $glyph_name ] ) ){
-			$icons[  $glyph_name ] = htmlspecialchars( $code );
+		if ( isset( $icons[ $glyph_name ] ) ) {
+			$icons[ $glyph_name ] = htmlspecialchars( $code );
 		}
- }
+	}
 
 	if ( 0 < $index ) {
 		return isset( array_values( $icons )[ $index ] ) ? array_values( $icons )[ $index ] : $index;
