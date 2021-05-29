@@ -7,7 +7,6 @@
  * @package CAWeb
  */
 
-
 get_header();
 ?>
 
@@ -24,8 +23,6 @@ get_header();
 						<!-- Page Title-->
 						<h1>Page Not Found</h1>
 						<div class="description">The page you requested was not found.</div>
-						
-
 					</div>
 				</article> <!-- .et_pb_post -->
 
