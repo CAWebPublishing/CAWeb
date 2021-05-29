@@ -7,10 +7,28 @@ workflows:
   verify_standards:
     jobs:
       - standard
-
+  build_documentation:
+    triggers:
+      - schedule:
+          filters:
+            branches:
+              only:
+                - test
+    jobs:
+      - autodoc
+      
 working_directory: ~/repo
 
 jobs:
+  autodoc:
+    docker:
+      - image: circle/php:7.4
+    steps:
+      - checkout 
+      - run: wget https://phpdoc.org/phpDocumentor.phar
+      - run: chmod +x phpDocumentor.phar
+      - run: ./phpDocumentor.phar . --force
+
   standard:
     docker:
       - image: circleci/php:7.4
