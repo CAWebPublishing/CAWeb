@@ -10,6 +10,7 @@ workflows:
   build_documentation:
     triggers:
       - schedule:
+          cron: '* * * * *' 
           filters:
             branches:
               only:
