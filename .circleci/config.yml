@@ -23,7 +23,7 @@ jobs:
               'inc/admin-bar.php'
               'inc/admin-post.php'
               'inc/branding.php'
-              'inc/class-caweb-customize-icon-control.php.php'
+              'inc/class-caweb-customize-icon-control.php'
               'inc/class-caweb-nav-menu.php'
               'inc/class-caweb-nav-menu-walker.php'
               'inc/customizer.php'
