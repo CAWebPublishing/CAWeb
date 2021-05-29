@@ -8,6 +8,13 @@ workflows:
     jobs:
       - standard
   build_documentation:
+    triggers:
+      - schedule:
+          cron: '* * * * *'
+          filters:
+            branches:
+              only:
+                - test
     jobs: 
       - autodoc
  
