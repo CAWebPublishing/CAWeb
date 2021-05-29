@@ -23,9 +23,9 @@ jobs:
       - image: circleci/php:7.4
     steps:
       - checkout
-      - run: wget https://github.com/phpDocumentor/phpDocumentor/releases/download/v3.0.0-rc/phpDocumentor.phar
-      - run: chmod +x phpDocumentor.phar
-      - run: ./phpDocumentor.phar --version
+      - run: wget -O phpDoc.phar https://github.com/phpDocumentor/phpDocumentor/suites/2798836492/artifacts/62205457
+      - run: chmod +x phpDoc.phar
+      - run: ./phpDoc.phar . --force
       - run: 
           command: |
               declare -a files=( 
