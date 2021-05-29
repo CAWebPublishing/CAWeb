@@ -19,7 +19,20 @@ jobs:
       - run: composer i --no-dev
       - run: 
           command: |
-            declare -a files=( 'functions.php' '404.php' 'archive.php' 'author.php' 'category.php' 'date.php' 'footer.php' )
+            declare -a files=( 
+              '404.php' 
+              'archive.php' 
+              'author.php' 
+              'category.php' 
+              'date.php' 
+              'footer.php' 
+              'functions.php' 
+              'header.php'
+              'index.php'
+              'page.php'
+              'single.php'
+              'tag.php'
+              )
             for f in ${files[@]}; do
                 if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
                   echo "$( ./vendor/bin/phpcs $f )"
