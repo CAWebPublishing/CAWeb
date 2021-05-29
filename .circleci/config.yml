@@ -20,7 +20,7 @@ working_directory: ~/repo
 jobs:
   autodoc:
     docker:
-      - image: caweb/standard
+      - image: circleci/php:7.4
     steps:
       - run: wget https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDocumentor.phar
@@ -69,6 +69,8 @@ jobs:
                     exit 1
                   fi
               done
-        - run: docker build . -t caweb/standard
+        - setup_remote_docker:
+            docker_layer_caching: true
+        - run: docker build . 
 
               
