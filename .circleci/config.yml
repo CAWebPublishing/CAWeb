@@ -22,9 +22,9 @@ jobs:
     docker:
       - image: circleci/php:7.4
     steps:
-      - run: wget https://phpdoc.org/phpDocumentor.phar
-      - run: chmod +x phpDocumentor.phar
+      - run: ls -al
       - run: ./phpDocumentor.phar . --force
+      - run: ls -al
 
   standard:
       docker:
@@ -69,5 +69,7 @@ jobs:
                     exit 1
                   fi
               done
+        - run: wget https://phpdoc.org/phpDocumentor.phar
+        - run: chmod +x phpDocumentor.phar
 
               
