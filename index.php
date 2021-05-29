@@ -12,7 +12,6 @@
  * @package CAWeb
  */
 
-
 get_header();
 
 ?>
