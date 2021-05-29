@@ -20,6 +20,9 @@ jobs:
       - run: 
           command: |
             declare -a files=( 
+              'inc/admin-bar.php'
+              'inc/admin-post.php'
+              'inc/branding.php'
               '404.php' 
               'archive.php' 
               'author.php' 
