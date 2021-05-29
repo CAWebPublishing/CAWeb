@@ -4,17 +4,17 @@
 #
 version: 2.1
 workflows:
-  build_documentation:
-    triggers:
-      - schedule:
-          cron: '* * * * *'
+  verify_standards:
+    jobs:
+      - standard
+      - autodoc:
           filters:
             branches:
               only:
-                - test
-    jobs: 
-      - autodoc
- 
+                - test 
+          requires:
+            - standard
+
 working_directory: ~/repo
 
 jobs:
@@ -26,3 +26,47 @@ jobs:
       - run: wget https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDocumentor.phar
       - run: ./phpDocumentor.phar . --force
+
+  standard:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - checkout
+      - run: composer i --no-dev
+      - run: 
+          command: |
+            declare -a files=( 
+              'inc/admin-bar.php'
+              'inc/admin-post.php'
+              'inc/branding.php'
+              'inc/class-caweb-customize-icon-control.php'
+              'inc/class-caweb-nav-menu.php'
+              'inc/class-caweb-nav-menu-walker.php'
+              'inc/customizer.php'
+              'inc/filters.php'
+              'inc/functions.php'
+              'inc/icon-library.php'
+              'inc/live-drafts.php'
+              'inc/options.php'
+              'inc/shortcodes.php'
+              'inc/tinymce.php'
+              'inc/widgets.php'
+              '404.php' 
+              'archive.php' 
+              'author.php' 
+              'category.php' 
+              'date.php' 
+              'footer.php' 
+              'functions.php' 
+              'header.php'
+              'index.php'
+              'page.php'
+              'single.php'
+              'tag.php'
+              )
+            for f in ${files[@]}; do
+                if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
+                  echo "$( ./vendor/bin/phpcs $f )"
+                  exit 1
+                fi
+            done
