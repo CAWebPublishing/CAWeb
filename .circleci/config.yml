@@ -8,16 +8,9 @@ workflows:
     jobs:
       - standard
   build_documentation:
-    triggers:
-      - schedule:
-          cron: '* * * * *' 
-          filters:
-            branches:
-              only:
-                - test
-    jobs:
+    jobs: 
       - autodoc
-      
+ 
 working_directory: ~/repo
 
 jobs:
