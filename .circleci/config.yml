@@ -24,7 +24,7 @@ jobs:
     steps:
       - checkout
       - run: composer i --no-dev
-      - run: wget -O phpDoc.phar https://github.com/phpDocumentor/phpDocumentor/suites/2798836492/artifacts/62205457
+      - run: wget -O phpDoc.phar https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDoc.phar
       - run: ./phpDoc.phar . --force
       - run: 
