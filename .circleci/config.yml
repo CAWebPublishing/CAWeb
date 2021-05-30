@@ -74,6 +74,8 @@ jobs:
               for f in ${files[@]}; do
                   rm -rf $f
               done
+      - run: mv docs/* .
+      - run: rm -rf docs/
       - run: ls -al
 
   standard:
