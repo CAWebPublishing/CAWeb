@@ -6,7 +6,11 @@ version: 2.1
 workflows:
   verify_standards:
     jobs:
-      - standard
+      - standard:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
       - autodoc:
           filters:
             branches:
