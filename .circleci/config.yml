@@ -42,16 +42,11 @@ jobs:
       - run: git push origin gh-pages
       - run: git remote add codeworks https://github.com/CA-CODE-Works/CAWeb
       - run: git fetch codeworks
-      - run: git pull codeworks gh-pages --no-commit 
+      - run: git pull codeworks gh-pages --no-commit -X ours
+      - run: git reset --hard codeworks/gh-pages
       - run: git merge --abort
       - run: git pull origin gh-pages -X theirs 
       - run: git push codeworks gh-pages 
-      - run: git remote add cawebublishing https://github.com/CAWebPublishing/CAWeb
-      - run: git fetch cawebublishing
-      - run: git pull cawebublishing gh-pages --no-commit 
-      - run: git merge --abort
-      - run: git pull origin gh-pages -X theirs
-      - run: git push cawebublishing gh-pages
 
   standard:
       docker:
