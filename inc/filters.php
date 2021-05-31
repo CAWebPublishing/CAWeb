@@ -44,7 +44,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 	/* List of extra classes that need to be added to the body */
 	if ( isset( $post->ID ) ) {
-		$divi              = et_pb_is_pagebuilder_used( $post->ID ) || strpos( $post->post_content, 'et_pb_section' ) || strpos( $post->post_content, 'et_pb_fullwidth_section' );
+		$divi              = function_exists('et_pb_is_pagebuilder_used') && et_pb_is_pagebuilder_used( $post->ID ) || strpos( $post->post_content, 'et_pb_section' ) || strpos( $post->post_content, 'et_pb_fullwidth_section' );
 		$sidebar_enabled   = ! is_page();
 		$special_templates = is_tag() || is_archive() || is_category() || is_author();
 
