@@ -6,7 +6,7 @@
         xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
     <paths>
-        <output>docs</output>
+        <output>.docs</output>
     </paths>
     <version number="3.0.0">
         <api>
@@ -15,7 +15,6 @@
 	        </source>
 		<ignore>
 	                <path>assets/**/*</path>
-	                <path>core/**/*</path>
 	                <path>css/**/*</path>
 	                <path>divi/**/*</path>
 	                <path>docs/**/*</path>
@@ -27,15 +26,17 @@
 	                <path>page-templates/**/*</path>
 	                <path>partials/**/*</path>
 	                <path>vendor/**/*</path>
+	                <path>.phpdoc/**/*</path>
 		</ignore>
         </api>
     </version>
-	<setting name="wp_hook_ref" value="https://developer.wordpress.org/reference/hooks/" />
-	<setting name="wp_function_ref" value="https://developer.wordpress.org/reference/functions/" />
+	<!-- Settings Option not working properly in phpDocumentor v3.0.0
+	<setting name="wp_ref" value="https://developer.wordpress.org/reference/" />
 	<setting name="github_ref" value="https://github.com/" />
 	<setting name="github_user" value="CA-CODE-Works" />
 	<setting name="github_repo" value="CAWeb" />
 	<setting name="github_branch" value="dev" />
-	<setting name="stable_version" value="1.5.3" />
+	<setting name="stable_version" value="1.5.3" /.
+	-->
 	<template name="." location="."></template>
 </phpdocumentor>
