@@ -44,7 +44,7 @@ jobs:
       - run: git fetch codeworks
       - run: git pull codeworks gh-pages --no-commit -X ours
       - run: git reset --hard codeworks/gh-pages
-      - run: git pull origin gh-pages -X theirs 
+      - run: git pull origin gh-pages --no-commit -X theirs 
       - run: git push codeworks gh-pages 
 
   standard:
