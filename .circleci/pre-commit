@@ -1,0 +1,50 @@
+#!/bin/sh
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
+
+# Redirect output to stderr.
+exec 1>&2
+
+changed=$( git diff-index --name-only $against ./assets/* )
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+
+if [ -n "$( git diff-index --name-only $against ./changelog.txt )" ]; then
+	echo "${RED}Please update the changelog.txt${NC}"
+	exit 1
+fi
+
+if [ -n "$changed" ]; then
+	# if gulp is not installed 
+	if [ -z "$(gulp --version)" ]; then
+
+		# if npm is not installed
+		if [ -z "$(npm --version)" ]; then
+			echo "npm is required to install packages." \
+				"To install npm visit https://www.npmjs.com/get-npm"
+		fi
+
+		echo "gulp is required to build all CAweb Theme css/js files." \
+			"To install all packages run npm i"
+
+		exit 1
+
+	# gulp is installed
+	else
+		echo -e "${RED}Changes to the /assets/ directory need to be compiled${NC}"
+		gulp build 
+		sleep 5
+		git add .
+		sleep 5
+		echo -e "${RED}CSS/JS have been compiled, you may commit your changes.${NC}"
+	fi
+fi
+
+exit 0
