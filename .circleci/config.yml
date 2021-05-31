@@ -31,6 +31,7 @@ jobs:
       - run: wget -O phpDoc.phar https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDoc.phar
       - run: ./phpDoc.phar . --force
+      - run: git checkout gh-pages
       - run: 
           command: |
               declare -a files=( 
