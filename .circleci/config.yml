@@ -33,7 +33,8 @@ jobs:
       - run: ./phpDoc.phar . --force
       - run: git checkout gh-pages
       - run: rm -rf *
-      - run: ls -al
+      - run: mv .docs/* .
+      - run: rm -rf .docs/
   standard:
       docker:
         - image: circleci/php:7.4
