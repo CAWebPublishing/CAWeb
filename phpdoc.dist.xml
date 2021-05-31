@@ -15,7 +15,6 @@
 	        </source>
 		<ignore>
 	                <path>assets/**/*</path>
-	                <path>core/**/*</path>
 	                <path>css/**/*</path>
 	                <path>divi/**/*</path>
 	                <path>docs/**/*</path>
