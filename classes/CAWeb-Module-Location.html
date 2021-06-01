@@ -1,0 +1,408 @@
+
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+            <title>CAWeb Classes Documentation</title>
+        
+                <!-- Core CSS -->
+        <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                
+        
+<!-- phpDoc CSS -->
+<link rel="stylesheet" href="../css/phpdoc.css">
+
+<!-- Core JS -->
+<script src="../js/jquery.js"></script>
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../favicon.ico">
+
+<!-- Use highest compatibility mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<!-- for Blackberry, AvantGo -->
+<meta name="MobileOptimized" content="320">
+
+<meta property="og:image:height" content="1024">
+
+<!-- for Windows mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
+
+        
+    </head>
+    <body class="primary non_divi_builder">
+        
+<header id="header" class="global-header fixed">
+	
+	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
+
+	    <!-- Alert #1 -->
+<div class="alert alert-dismissible alert-banner alert-warning border-top border-dark alert-1">
+    <div class="container">
+        <!-- Alert Close Button -->
+        <button type="button" class="close caweb-alert-close" data-id="alert-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Alert Read More Button -->
+        <a href="#" class="alert-link btn btn-default btn-xs" target="_blank">Learn More</a>
+        <!-- Alert Header -->
+        <span class="alert-level">
+            <span class="ca-gov-icon-info" aria-hidden="true"></span>
+            Important
+        </span>
+        <!-- Alert Text -->
+        <span class="alert-text">This page is still in construction</span>
+    </div>
+</div>
+
+	    <!-- Utility Header -->
+<div class="utility-header hidden-print">
+	<div class="container">
+		<div class="group flex-row">
+			<div class="social-media-links">
+				<div class="header-cagov-logo">
+					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
+						<span class="sr-only">CAWeb Publishing</span>
+						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
+					</a>
+				</div>
+
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+			</div>
+			<div class="settings-links">
+				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+
+				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
+					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	    <div class="site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">
+	<div class="container  p-y">
+		<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
+			<div class="btn-group"><button type="button" class="btn btn-standout disableHighContrastMode">Default</button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout enableHighContrastMode">High Contrast</button></div>
+		</div>
+
+		<div class="btn-group" role="group" aria-label="textSizeMode">
+			<div class="btn-group"><button type="button" class="btn btn-standout resetTextSize">Reset</button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout increaseTextSize"><span class="hidden-xs">Increase Font Size</span><span class="visible-xs">Font <span class="sr-only">Increase</span><span class="ca-gov-icon-plus-line font-size-sm" aria-hidden="true"></span></span></button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout decreaseTextSize"><span class="hidden-xs">Decrease Font Size</span><span class="visible-xs">Font <span class="sr-only">Decrease</span><span class="ca-gov-icon-minus-line font-size-sm" aria-hidden="true"></span></span></button></div>
+		</div>
+		<button type="button" class="close" data-toggle="collapse" data-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+</div>
+
+
+	    <!-- Branding -->
+<div class="branding">
+	<div class="header-organization-banner">
+		<a href="../index.html">
+			<img src="https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2017/12/CAWEB_PUB_Logo-257x90.jpg" alt="CAWeb Publishing" />
+		</a>
+	</div>
+</div>
+
+
+	    <!-- mobile navigation controls -->
+<div class="mobile-controls">
+    <span class="mobile-control-group mobile-header-icons">
+        <!-- Add more mobile controls here. These will be on the right side of the mobile page header section -->
+    </span>
+    <div class="mobile-control-group main-nav-icons">
+        <button class="mobile-control toggle-search">
+            <span class="ca-gov-icon-search hidden-print" aria-hidden="true"></span><span class="sr-only">Search</span>
+        </button>
+        <button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation" data-toggle="collapse" data-target="#navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="sr-only">Menu</span>
+        </button>
+
+    </div>
+</div>
+
+	<div class="navigation-search">
+
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+    <ul id="nav_list" class="top-level-nav">
+        <li class="nav-item" title="Examples">
+            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../examples/index.html" class="second-level-link">Examples</a>
+                        </li>
+                        <li class="unit1" title="Icon Font Library">
+                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="../files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+        </li>
+    </ul>
+</nav>
+		
+		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
+			
+		</div>
+	</div>
+	
+	</header>
+
+
+        <div id="page-container">
+            <div id="et-main-area">
+                <div id="main-content" class="main-content" tabindex="-1">
+                    <main class="main-primary">
+                        <div id="class-intro" class="border-bottom border-info">
+
+<h1>CAWeb_Module_Location</h1>
+
+    <p class="text-muted mb-0">extends ET_Builder_CAWeb_Module</p>
+
+
+    <p class="text-muted mb-0">in package CAWebModuleExtension</p>
+
+<i class="d-block">CAWeb Location Module Class (Standard)</i>
+
+    
+</div>
+                        
+                        
+<div id="class-toc" class="mt-3 border-bottom border-info">
+    <h2>Table of Contents</h2>
+                        <div class="mb-2">
+            <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#property_slug">$slug</a> : string</p>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+                <div class="mb-2">
+            <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#property_vb_support">$vb_support</a> : string</p>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+                
+            <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_bannerLocation">bannerLocation()</a> : string</p>
+        <i class="small text-muted">Renders Location (banner)</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_contactLocation">contactLocation()</a> : string</p>
+        <i class="small text-muted">Renders Location (contact)</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_get_fields">get_fields()</a> : array</p>
+        <i class="small text-muted">Returns an array of all the Module Fields.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_init">init()</a> : void</p>
+        <i class="small text-muted">Module Initialization</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_miniLocation">miniLocation()</a> : string</p>
+        <i class="small text-muted">Renders Location (mini)</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Location.html#method_render">render()</a> : string</p>
+        <i class="small text-muted">Renders the Module on the frontend</i>
+    </div>
+    </div>
+
+                        <div class="mt-3">
+    <h2>Properties</h2>
+        <div id="property_slug" class="border-bottom border-info">
+        <div>
+            <div class="pull-right">
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L21">$slug</a> : 21
+            </div>
+            <strong class="d-block">$slug</strong>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        <pre>public string $slug = &#039;et_pb_ca_location_widget&#039;;</pre>
+    </div>
+        <div id="property_vb_support" class="border-bottom border-info">
+        <div>
+            <div class="pull-right">
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L27">$vb_support</a> : 27
+            </div>
+            <strong class="d-block">$vb_support</strong>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        <pre>public string $vb_support = &#039;on&#039;;</pre>
+    </div>
+    </div>
+
+<div>
+            <h2 id="functions">Methods</h2>
+        <div id="_bannerLocation" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L357">divi/extension/includes/modules/location/location.php</a> : 357
+        </div>
+        <strong class="d-block">bannerLocation()</strong>
+        <i class="small text-muted">Renders Location (banner)</i>
+    </div>
+
+    <pre>public bannerLocation() : string</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_contactLocation" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L262">divi/extension/includes/modules/location/location.php</a> : 262
+        </div>
+        <strong class="d-block">contactLocation()</strong>
+        <i class="small text-muted">Renders Location (contact)</i>
+    </div>
+
+    <pre>public contactLocation() : string</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_get_fields" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L63">divi/extension/includes/modules/location/location.php</a> : 63
+        </div>
+        <strong class="d-block">get_fields()</strong>
+        <i class="small text-muted">Returns an array of all the Module Fields.</i>
+    </div>
+
+    <pre>public get_fields() : array</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="_init" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L34">divi/extension/includes/modules/location/location.php</a> : 34
+        </div>
+        <strong class="d-block">init()</strong>
+        <i class="small text-muted">Module Initialization</i>
+    </div>
+
+    <pre>public init() : void</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">void</p>
+    </div>
+<div id="_miniLocation" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L315">divi/extension/includes/modules/location/location.php</a> : 315
+        </div>
+        <strong class="d-block">miniLocation()</strong>
+        <i class="small text-muted">Renders Location (mini)</i>
+    </div>
+
+    <pre>public miniLocation() : string</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_render" class="mb-3">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/location/location.php#L240">divi/extension/includes/modules/location/location.php</a> : 240
+        </div>
+        <strong class="d-block">render()</strong>
+        <i class="small text-muted">Renders the Module on the frontend</i>
+    </div>
+
+    <pre>public render(mixed $unprocessed_props, mixed $content = null, mixed $render_slug) : string</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+
+</div>
+
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer" class="global-footer hidden-print">
+            <div class="container footer-menu">
+    <div class="group">
+        <div class="full-width">
+            <ul class="footer-links">
+                <li>
+                    <a href="#skip-to-content">Back to Top</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="copyright">
+    <div class="container">
+        <i class="text-muted">Generated on 06/01/2021 @ 12:37am</i>
+    </div> 
+</div>
+            <!-- Load template core -->
+            <script src="../js/caweb.core.js"></script>
+        </footer>
+    </body>
+</html>

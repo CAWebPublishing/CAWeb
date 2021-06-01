@@ -1,0 +1,587 @@
+
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+            <title>CAWeb Classes Documentation</title>
+        
+                <!-- Core CSS -->
+        <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                
+        
+<!-- phpDoc CSS -->
+<link rel="stylesheet" href="../css/phpdoc.css">
+
+<!-- Core JS -->
+<script src="../js/jquery.js"></script>
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../favicon.ico">
+
+<!-- Use highest compatibility mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<!-- for Blackberry, AvantGo -->
+<meta name="MobileOptimized" content="320">
+
+<meta property="og:image:height" content="1024">
+
+<!-- for Windows mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
+
+        
+    </head>
+    <body class="primary non_divi_builder">
+        
+<header id="header" class="global-header fixed">
+	
+	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
+
+	    <!-- Alert #1 -->
+<div class="alert alert-dismissible alert-banner alert-warning border-top border-dark alert-1">
+    <div class="container">
+        <!-- Alert Close Button -->
+        <button type="button" class="close caweb-alert-close" data-id="alert-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Alert Read More Button -->
+        <a href="#" class="alert-link btn btn-default btn-xs" target="_blank">Learn More</a>
+        <!-- Alert Header -->
+        <span class="alert-level">
+            <span class="ca-gov-icon-info" aria-hidden="true"></span>
+            Important
+        </span>
+        <!-- Alert Text -->
+        <span class="alert-text">This page is still in construction</span>
+    </div>
+</div>
+
+	    <!-- Utility Header -->
+<div class="utility-header hidden-print">
+	<div class="container">
+		<div class="group flex-row">
+			<div class="social-media-links">
+				<div class="header-cagov-logo">
+					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
+						<span class="sr-only">CAWeb Publishing</span>
+						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
+					</a>
+				</div>
+
+                <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+			</div>
+			<div class="settings-links">
+				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+
+				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
+					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	    <div class="site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">
+	<div class="container  p-y">
+		<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
+			<div class="btn-group"><button type="button" class="btn btn-standout disableHighContrastMode">Default</button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout enableHighContrastMode">High Contrast</button></div>
+		</div>
+
+		<div class="btn-group" role="group" aria-label="textSizeMode">
+			<div class="btn-group"><button type="button" class="btn btn-standout resetTextSize">Reset</button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout increaseTextSize"><span class="hidden-xs">Increase Font Size</span><span class="visible-xs">Font <span class="sr-only">Increase</span><span class="ca-gov-icon-plus-line font-size-sm" aria-hidden="true"></span></span></button></div>
+			<div class="btn-group"><button type="button" class="btn btn-standout decreaseTextSize"><span class="hidden-xs">Decrease Font Size</span><span class="visible-xs">Font <span class="sr-only">Decrease</span><span class="ca-gov-icon-minus-line font-size-sm" aria-hidden="true"></span></span></button></div>
+		</div>
+		<button type="button" class="close" data-toggle="collapse" data-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+</div>
+
+
+	    <!-- Branding -->
+<div class="branding">
+	<div class="header-organization-banner">
+		<a href="../index.html">
+			<img src="https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2017/12/CAWEB_PUB_Logo-257x90.jpg" alt="CAWeb Publishing" />
+		</a>
+	</div>
+</div>
+
+
+	    <!-- mobile navigation controls -->
+<div class="mobile-controls">
+    <span class="mobile-control-group mobile-header-icons">
+        <!-- Add more mobile controls here. These will be on the right side of the mobile page header section -->
+    </span>
+    <div class="mobile-control-group main-nav-icons">
+        <button class="mobile-control toggle-search">
+            <span class="ca-gov-icon-search hidden-print" aria-hidden="true"></span><span class="sr-only">Search</span>
+        </button>
+        <button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation" data-toggle="collapse" data-target="#navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="sr-only">Menu</span>
+        </button>
+
+    </div>
+</div>
+
+	<div class="navigation-search">
+
+				
+<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+    <ul id="nav_list" class="top-level-nav">
+        <li class="nav-item" title="Examples">
+            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../examples/index.html" class="second-level-link">Examples</a>
+                        </li>
+                        <li class="unit1" title="Icon Font Library">
+                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="../files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+        </li>
+    </ul>
+</nav>
+		
+		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
+			
+		</div>
+	</div>
+	
+	</header>
+
+
+        <div id="page-container">
+            <div id="et-main-area">
+                <div id="main-content" class="main-content" tabindex="-1">
+                    <main class="main-primary">
+                        <div id="class-intro" class="border-bottom border-info">
+
+<h1>CAWeb_Nav_Menu</h1>
+
+    <p class="text-muted mb-0">extends Walker_Nav_Menu</p>
+
+
+    <p class="text-muted mb-0">in package CAWeb</p>
+
+<i class="d-block">Core class used to implement an HTML list of nav menu items.</i>
+
+                    <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+</div>
+                        
+                        
+<div id="class-toc" class="mt-3 border-bottom border-info">
+    <h2>Table of Contents</h2>
+            
+            <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method___construct">__construct()</a> : void</p>
+        <i class="small text-muted">Attach Filters/Hooks</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_edit_nav_menu_walker">caweb_edit_nav_menu_walker()</a> : string</p>
+        <i class="small text-muted">Filters the Walker class used when adding nav menu items.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_menu_fail">caweb_menu_fail()</a> : string</p>
+        <i class="small text-muted">If the menu doesn&#039;t exists, this callback function will fire. Default is &#039;wp_page_menu&#039;.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_nav_menu">caweb_nav_menu()</a> : string</p>
+        <i class="small text-muted">Filters the HTML content for navigation menus.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_nav_menu_args">caweb_nav_menu_args()</a> : array</p>
+        <i class="small text-muted">Filters the arguments used to display a navigation menu.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_nav_menu_item_custom_fields">caweb_nav_menu_item_custom_fields()</a> : void</p>
+        <i class="small text-muted">CAWeb wp nav menu item custom fields hook. Hooked from the CAWeb_Nav_Menu_Walker.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_update_nav_menu_item">caweb_update_nav_menu_item()</a> : int</p>
+        <i class="small text-muted">Fires after a navigation menu item has been updated.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_caweb_widget_nav_menu_args">caweb_widget_nav_menu_args()</a> : array</p>
+        <i class="small text-muted">Filters the arguments for the Navigation Menu widget.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_createFooterMenu">createFooterMenu()</a> : string</p>
+        <i class="small text-muted">HTML for the Footer Menu</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_createFooterSocialMenu">createFooterSocialMenu()</a> : string</p>
+        <i class="small text-muted">HTML for the Footer Social Menu</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_createNavMenu">createNavMenu()</a> : string</p>
+        <i class="small text-muted">HTML for the Navigation Menu (first-level-links)</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_createSubNavMenu">createSubNavMenu()</a> : string</p>
+        <i class="small text-muted">HTML for Sub Navigation Menu from the Top Level Nav Item (second-level-links)</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/CAWeb-Nav-Menu.html#method_createWidgetNavMenu">createWidgetNavMenu()</a> : string</p>
+        <i class="small text-muted">Begin Creation of the Widget Navigation Menu</i>
+    </div>
+    </div>
+
+                        
+<div>
+            <h2 id="functions">Methods</h2>
+        <div id="___construct" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L23">inc/class-caweb-nav-menu.php</a> : 23
+        </div>
+        <strong class="d-block">__construct()</strong>
+        <i class="small text-muted">Attach Filters/Hooks</i>
+    </div>
+
+    <pre>public __construct() : void</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">void</p>
+    </div>
+<div id="_caweb_edit_nav_menu_walker" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L78">inc/class-caweb-nav-menu.php</a> : 78
+        </div>
+        <strong class="d-block">caweb_edit_nav_menu_walker()</strong>
+        <i class="small text-muted">Filters the Walker class used when adding nav menu items.</i>
+    </div>
+
+    <pre>public caweb_edit_nav_menu_walker(string $current = &#039;Walker_Nav_Menu_Edit&#039;) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_caweb_menu_fail" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L144">inc/class-caweb-nav-menu.php</a> : 144
+        </div>
+        <strong class="d-block">caweb_menu_fail()</strong>
+        <i class="small text-muted">If the menu doesn&#039;t exists, this callback function will fire. Default is &#039;wp_page_menu&#039;.</i>
+    </div>
+
+    <pre>public caweb_menu_fail(array $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_caweb_nav_menu" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L95">inc/class-caweb-nav-menu.php</a> : 95
+        </div>
+        <strong class="d-block">caweb_nav_menu()</strong>
+        <i class="small text-muted">Filters the HTML content for navigation menus.</i>
+    </div>
+
+    <pre>public caweb_nav_menu(string $nav_menu, stdClass $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_caweb_nav_menu_args" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L44">inc/class-caweb-nav-menu.php</a> : 44
+        </div>
+        <strong class="d-block">caweb_nav_menu_args()</strong>
+        <i class="small text-muted">Filters the arguments used to display a navigation menu.</i>
+    </div>
+
+    <pre>public caweb_nav_menu_args(array $args) : array</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="_caweb_nav_menu_item_custom_fields" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L606">inc/class-caweb-nav-menu.php</a> : 606
+        </div>
+        <strong class="d-block">caweb_nav_menu_item_custom_fields()</strong>
+        <i class="small text-muted">CAWeb wp nav menu item custom fields hook. Hooked from the CAWeb_Nav_Menu_Walker.</i>
+    </div>
+
+    <pre>public caweb_nav_menu_item_custom_fields(mixed $item_id, mixed $item, mixed $depth, mixed $args) : void</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">void</p>
+    </div>
+<div id="_caweb_update_nav_menu_item" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L707">inc/class-caweb-nav-menu.php</a> : 707
+        </div>
+        <strong class="d-block">caweb_update_nav_menu_item()</strong>
+        <i class="small text-muted">Fires after a navigation menu item has been updated.</i>
+    </div>
+
+    <pre>public caweb_update_nav_menu_item(int $menu_id, int $menu_item_db_id, array $args) : int</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">int</p>
+    </div>
+<div id="_caweb_widget_nav_menu_args" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L61">inc/class-caweb-nav-menu.php</a> : 61
+        </div>
+        <strong class="d-block">caweb_widget_nav_menu_args()</strong>
+        <i class="small text-muted">Filters the arguments for the Navigation Menu widget.</i>
+    </div>
+
+    <pre>public caweb_widget_nav_menu_args(array $nav_menu_args, WP_Term $nav_menu, array $args, array $instance) : array</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="_createFooterMenu" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L533">inc/class-caweb-nav-menu.php</a> : 533
+        </div>
+        <strong class="d-block">createFooterMenu()</strong>
+        <i class="small text-muted">HTML for the Footer Menu</i>
+    </div>
+
+    <pre>public createFooterMenu(stdClass $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_createFooterSocialMenu" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L570">inc/class-caweb-nav-menu.php</a> : 570
+        </div>
+        <strong class="d-block">createFooterSocialMenu()</strong>
+        <i class="small text-muted">HTML for the Footer Social Menu</i>
+    </div>
+
+    <pre>public createFooterSocialMenu(stdClass $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_createNavMenu" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L255">inc/class-caweb-nav-menu.php</a> : 255
+        </div>
+        <strong class="d-block">createNavMenu()</strong>
+        <i class="small text-muted">HTML for the Navigation Menu (first-level-links)</i>
+    </div>
+
+    <pre>public createNavMenu(stdClass $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_createSubNavMenu" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L358">inc/class-caweb-nav-menu.php</a> : 358
+        </div>
+        <strong class="d-block">createSubNavMenu()</strong>
+        <i class="small text-muted">HTML for Sub Navigation Menu from the Top Level Nav Item (second-level-links)</i>
+    </div>
+
+    <pre>public createSubNavMenu(mixed $child_links, stdClass $args) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="_createWidgetNavMenu" class="mb-3">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/class-caweb-nav-menu.php#L177">inc/class-caweb-nav-menu.php</a> : 177
+        </div>
+        <strong class="d-block">createWidgetNavMenu()</strong>
+        <i class="small text-muted">Begin Creation of the Widget Navigation Menu</i>
+    </div>
+
+    <pre>public createWidgetNavMenu(WP_Term $nav_menu) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">link</p>
+            <p><a target="_blank" href="https://developer.wordpress.org/reference/classes/walker_nav_menu/">https://developer.wordpress.org/reference/classes/walker_nav_menu/</a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+
+</div>
+
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer" class="global-footer hidden-print">
+            <div class="container footer-menu">
+    <div class="group">
+        <div class="full-width">
+            <ul class="footer-links">
+                <li>
+                    <a href="#skip-to-content">Back to Top</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="copyright">
+    <div class="container">
+        <i class="text-muted">Generated on 06/01/2021 @ 12:37am</i>
+    </div> 
+</div>
+            <!-- Load template core -->
+            <script src="../js/caweb.core.js"></script>
+        </footer>
+    </body>
+</html>
