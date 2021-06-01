@@ -287,7 +287,7 @@ function caweb_get_attachment_post_meta( $image_url, $meta_key = '' ) {
 		$imgs       = array();
 
 		foreach ( $image_urls as $i => $img ) {
-			// phpcs:disable
+			// phpcs:disable -- Slow meta query ok.
 			$query['meta_query'] = array(
 				array(
 					'key'     => '_wp_attached_file',

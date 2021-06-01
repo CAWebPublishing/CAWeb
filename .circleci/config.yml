@@ -66,6 +66,7 @@ jobs:
         - run: 
             command: |
               declare -a files=( 
+                'divi/'
                 'inc/admin-bar.php'
                 'inc/admin-post.php'
                 'inc/branding.php'

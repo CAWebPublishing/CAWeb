@@ -2,7 +2,7 @@
 /**
  * CAWeb Module
  *
- * @package CAWeb Module Extension
+ * @package CAWebModuleExtension
  */
 
 /**
@@ -28,21 +28,6 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		'author'     => 'CAWeb Publishing',
 		'author_uri' => '',
 	);
-
-	/**
-	 * Wrap module's rendered output with proper module wrapper. Ensuring module has consistent
-	 * wrapper output which compatible with module attribute and background insertion.
-	 *
-	 * @since 3.1
-	 *
-	 * @param string $output      Module's rendered output.
-	 * @param string $render_slug Slug of module that is used for rendering output.
-	 *
-	 * @return string
-	 */
-	protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
-		return $output;
-	}
 
 	/**
 	 * Available module text sizes
@@ -272,7 +257,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 					$tags    = ! is_array( $tags ) ? explode( ',', $tags ) : $tags;
 					$has_tag = false;
 					foreach ( $tag_ids as $k ) {
-						if ( in_array( $k, $tags, false ) ) {
+						if ( in_array( $k, $tags, true ) ) {
 							$has_tag = true;
 						}
 					}

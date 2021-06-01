@@ -118,7 +118,7 @@ function caweb_tiny_mce_before_init( $init_array ) {
 	);
 
 	/* Insert the array, JSON ENCODED, into 'style_formats' */
-	$init_array['style_formats'] = wj_json_encode( $style_formats );
+	$init_array['style_formats'] = wp_json_encode( $style_formats );
 
 	/* TinyMCE default is 11pt but it doesnt appear in the font size box */
 	$font_sizes                     = caweb_font_sizes( array(), true );
