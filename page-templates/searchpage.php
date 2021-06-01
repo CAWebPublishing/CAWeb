@@ -13,7 +13,7 @@
 get_header();
 ?>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
-	<?php require_once( dirname(__DIR__) . '/partials/header.php' ); ?>
+	<?php require_once dirname( __DIR__ ) . '/partials/header.php'; ?>
 	<style>
 		#main-content .container {
 			padding-top: 0
@@ -37,7 +37,7 @@ get_header();
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once( dirname(__DIR__) . '/partials/content/search-form.php' );
+						require_once dirname( __DIR__ ) . '/partials/content/search-form.php';
 						?>
 					</div>
 					<div class="section">
