@@ -1,12 +1,11 @@
 <?php
 /**
- * The template for displaying 404 pages (not found)
+ * The template for displaying 404 pages (Page Not Found)
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
  * @package CAWeb
  */
-
 
 get_header();
 ?>
@@ -24,8 +23,6 @@ get_header();
 						<!-- Page Title-->
 						<h1>Page Not Found</h1>
 						<div class="description">The page you requested was not found.</div>
-						
-
 					</div>
 				</article> <!-- .et_pb_post -->
 
