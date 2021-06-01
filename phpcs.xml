@@ -34,6 +34,9 @@
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>.</file>
 
+    <exclude-pattern>fonts/*</exclude-pattern>
+    <exclude-pattern>images/*</exclude-pattern>
+    <exclude-pattern>js/*</exclude-pattern>
     <exclude-pattern>node_modules/*</exclude-pattern>
     <exclude-pattern>vendor/*</exclude-pattern>
 
@@ -46,6 +49,11 @@
 	-->
 
 	<rule ref="WordPress"/>
+
+	<!-- Set the minimum supported WP version. This is used by several sniffs.
+		 The minimum version set here should be in line with the minimum WP version
+		 as set in the "Requires at least" tag in the readme.txt file. -->
+	<config name="minimum_supported_wp_version" value="5.7"/>
 
 	<!--
 	#############################################################################
@@ -66,14 +74,28 @@
 	<rule ref="WordPress.Files.FileName">
 		<properties>
 			<property name="is_theme" value="true"/>
+			<property name="custom_test_class_whitelist" type="array">
+				<element value="ET_Builder_CAWeb_Module"/>
+			</property>
 		</properties>
 	</rule>
 
-	<!-- Set the minimum supported WP version. This is used by several sniffs.
-		 The minimum version set here should be in line with the minimum WP version
-		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="5.7"/>
+	<!-- 
+		Check for WordPress deprecations 
+		https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#minimum-wp-version-to-check-for-usage-of-deprecated-functions-classes-and-function-parameters
+	-->
+	<rule ref="WordPress.WP.DeprecatedFunctions">
+	</rule>
 
+	<rule ref="WordPress.WP.DeprecatedClasses">
+	</rule>
+
+	<rule ref="WordPress.WP.DeprecatedParameters">
+	</rule>
+
+	<rule ref="WordPress.WP.DeprecatedParameterValues">
+	</rule>
+	
 	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
 		<properties>
 			<!-- No need to adjust alignment of large arrays when the item with the largest key is removed. -->
