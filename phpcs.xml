@@ -26,7 +26,8 @@
 	<arg name="parallel" value="8"/>
 
 	<!-- Only check the PHP, CSS and SCSS files. JS files are checked separately with JSCS and JSHint. -->
-	<arg name="extensions" value="php,css,scss/css"/>
+	<!--arg name="extensions" value="php,css,scss/css"/-->
+	<arg name="extensions" value="php"/>
 
 	<!-- php.ini Settings -->
     <ini name="memory_limit" value="1024M" />
