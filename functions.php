@@ -320,7 +320,6 @@ function caweb_wp_enqueue_scripts() {
 	global $pagenow;
 	$cwes        = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
 	$verified    = isset( $cwes ) && wp_verify_nonce( sanitize_key( $cwes ), 'caweb_wp_enqueue_scripts' );
-	$vb_enabled  = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 	$ver         = caweb_template_version();
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme = caweb_color_schemes( $ver, 'filename', $color );
@@ -361,46 +360,42 @@ function caweb_wp_enqueue_scripts() {
 	/* This removes Divi Google Font CSS */
 	wp_deregister_style( 'divi-fonts' );
 
-	if ( ! $vb_enabled ) {
+	$localize_args = array(
+		'ca_site_version'             => $ver,
+		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
+		'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
+		'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
+		'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
+		'ajaxurl'                     => admin_url( 'admin-post.php' ),
+	);
 
-		$localize_args = array(
-			'ca_site_version'             => $ver,
-			'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
-			'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
-			'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
-			'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
-			'ajaxurl'                     => admin_url( 'admin-post.php' ),
-		);
-
-		if ( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ) {
-			$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
-		}
-
-		if ( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ) {
-			$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
-		}
-
-		$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
-
-		/* Register Scripts */
-		wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
-
-		wp_register_script( 'cagov-caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), CAWEB_VERSION, true );
-
-		wp_localize_script( 'cagov-caweb-script', 'args', $localize_args );
-
-		/* Enqueue Scripts */
-		wp_enqueue_script( 'cagov-caweb-script' );
-
-		/* Geo Locator */
-		$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
-
-		if ( $ca_geo_locator_enabled ) {
-			$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
-			wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
-		}
+	if ( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ) {
+		$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
 	}
 
+	if ( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ) {
+		$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
+	}
+
+	$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
+
+	/* Register Scripts */
+	wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
+
+	wp_register_script( 'cagov-caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), CAWEB_VERSION, true );
+
+	wp_localize_script( 'cagov-caweb-script', 'args', $localize_args );
+
+	/* Enqueue Scripts */
+	wp_enqueue_script( 'cagov-caweb-script' );
+
+	/* Geo Locator */
+	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
+
+	if ( $ca_geo_locator_enabled ) {
+		$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
+		wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
+	}
 }
 
 /**
