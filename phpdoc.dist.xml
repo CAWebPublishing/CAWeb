@@ -31,5 +31,7 @@
 	<setting name="github_branch" value="dev" />
 	<setting name="stable_version" value="1.5.3" /.
 	-->
-    <template name="." location="vendor/caweb/phpdoc/template.xml"></template>
+    <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
+    <template name="." location="." />
+
 </phpdocumentor>
