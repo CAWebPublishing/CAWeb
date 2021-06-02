@@ -11,7 +11,14 @@ workflows:
             branches:
               ignore:
                 - gh-pages
-
+      - autodoc:
+          filters:
+            branches:
+              only:
+                - dev 
+          requires:
+            - standard
+            
 working_directory: ~/repo
 
 jobs:
