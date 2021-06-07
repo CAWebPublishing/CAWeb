@@ -78,6 +78,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 					'image_fit'   => esc_html__( 'Image Fit', 'et_builder' ),
 					'media'       => esc_html__( 'Media', 'et_builder' ),
 				),
+				'default'         => 'content_fit',
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'style',
 			),
