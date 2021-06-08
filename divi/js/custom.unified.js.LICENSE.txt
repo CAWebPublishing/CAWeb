@@ -1,0 +1,58 @@
+/*!
+* SmoothScroll for websites v1.2.1
+* Licensed under the terms of the MIT license.
+*
+* People involved
+* - Balazs Galambosi (maintainer)
+* - Michael Herf     (Pulse Algorithm)
+*/
+
+/*!
+* Waypoints - 4.0.0
+* Copyright © 2011-2015 Caleb Troughton
+* Licensed under the MIT license.
+* https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
+*
+* Modified to adapt the latest jQuery version (v3 above) included on WordPress 5.6:
+* - (2020-12-15) - jQuery isFunction method is deprecated.
+*/
+
+/*!
+* easyPieChart
+* Lightweight plugin to render simple, animated and retina optimized pie charts
+*
+* @author Robert Fleischmann <rendro87@gmail.com> (http://robert-fleischmann.de)
+* @version 2.1.5
+*
+* Modified to adapt the latest jQuery version (v3 above) included on WordPress 5.6:
+* - (2020-12-15) - jQuery isFunction method is deprecated.
+*/
+
+/*!
+* jQuery Mobile v1.4.5
+* Copyright 2010, 2014 jQuery Foundation, Inc.
+* jquery.org/license
+*
+* Modified to adapt the latest jQuery version (v3 above) included on WordPress 5.6:
+* - (2020-12-11) - Try to access `.concat` of undefined `$.event.props` - removed.
+* - (2021-02-04) - jQuery bind method is deprecated.
+* - (2021-02-04) - jQuery unbind method is deprecated.
+*/
+
+/*!
+* jQuery hashchange event - v1.3 - 7/21/2010
+* http://benalman.com/projects/jquery-hashchange-plugin/
+*
+* Copyright (c) 2010 "Cowboy" Ben Alman
+* Dual licensed under the MIT and GPL licenses.
+* http://benalman.com/about/license/
+*
+* Modified to adapt the latest jQuery version (v3 above) included on WordPress 5.6:
+* - (2021-02-03) - jQuery bind method is deprecated.
+*/
+
+/*! ET custom.js */
+
+/*! ET et_shortcodes_frontend.js */
+
+/*! This minified app bundle contains open source software from several third party developers. Please review CREDITS.md in the root directory or LICENSE.md in the current directory for complete licensing, copyright and patent information. This file and the included code may not be redistributed without the attributions listed in LICENSE.md, including associate copyright notices and licensing information. */
