@@ -215,6 +215,9 @@ function caweb_setup_theme() {
 
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );
+
+	// Remove Divi favicon.
+	remove_action( 'wp_head', 'add_favicon' );
 }
 
 /**
