@@ -2,7 +2,7 @@
 /**
  * CAWeb Fullwidth Header Slideshow Banner Item Module (Fullwidth)
  *
- * @package CAWebModuleExtension
+ * @package CAWeb Module Extension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {

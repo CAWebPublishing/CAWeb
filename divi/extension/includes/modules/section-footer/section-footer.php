@@ -2,7 +2,7 @@
 /**
  * CAWeb Section Footer Module (Standard)
  *
- * @package CAWebModuleExtension
+ * @package CAWeb Module Extension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {

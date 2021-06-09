@@ -2,7 +2,7 @@
 /**
  * CAWeb Location Module Class (Standard)
  *
- * @package CAWebModuleExtension
+ * @package CAWeb Module Extension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {

@@ -2,7 +2,7 @@
 /**
  * CAWeb Section Primary Module (Fullwidth)
  *
- * @package CAWebModuleExtension
+ * @package CAWeb Module Extension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {

@@ -2,7 +2,7 @@
 /**
  * CAWeb Section Footer Group Module (Fullwidth)
  *
- * @package CAWebModuleExtension
+ * @package CAWeb Module Extension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
@@ -155,7 +155,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 				'label'             => esc_html__( 'Heading Size', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
-				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6' ) ),
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
 				'default'           => 'h4',
 				'description'       => esc_html__( 'Here you can choose the heading size for the group title.', 'et_builder' ),
 				'tab_slug'          => 'advanced',
@@ -248,7 +248,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function render( $unprocessed_props, $content = null, $render_slug ) {
-		$heading_size           = $this->props['heading_size'];
+		$heading_size          = $this->props['heading_size'];
 		$heading_color          = $this->props['heading_color'];
 		$group_show_more_button = $this->props['group_show_more_button'];
 		$group_url              = $this->props['group_url'];
