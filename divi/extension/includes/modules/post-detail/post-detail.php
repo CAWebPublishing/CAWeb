@@ -1538,7 +1538,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 
 		// Course Presenter Image.
 		if ( ! empty( $course_presenter_image ) ) {
-			$alt_text       = caweb_get_attachment_post_meta( $course_presenter_image, '_wp_attachment_image_alt' );
+			$alt_text               = caweb_get_attachment_post_meta( $course_presenter_image, '_wp_attachment_image_alt' );
 			$course_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image, $alt_text );
 		}
 
@@ -1558,9 +1558,9 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 
 		$location = 'on' === $show_course_address ? sprintf( '<span class="ca-gov-icon-road-pin"></span>%1$s', $this->caweb_get_google_map_place_link( $course_addr ) ) : '';
 
-		$course_start_date = ! empty( $course_start_date ) ? gmdate( $course_start_date_custom_format, strtotime( $course_start_date ) ) : '';
-		$course_end_date   = ! empty( $course_end_date ) ? gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) ) : '';
-		$organizer         = sprintf(
+		$course_start_date        = ! empty( $course_start_date ) ? gmdate( $course_start_date_custom_format, strtotime( $course_start_date ) ) : '';
+		$course_end_date          = ! empty( $course_end_date ) ? gmdate( $course_end_date_custom_format, strtotime( $course_end_date ) ) : '';
+		$organizer                = sprintf(
 			'<strong>Organizer</strong><br /><p class="date-time">%1$s%2$s<br />%3$s</p>',
 			$course_start_date,
 			! empty( $course_end_date ) ? sprintf( ' - %1$s', $course_end_date ) : '',
@@ -1620,7 +1620,7 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 
 		// Event Presenter Image.
 		if ( ! empty( $event_presenter_image ) ) {
-			$alt_text = caweb_get_attachment_post_meta( $event_presenter_image, '_wp_attachment_image_alt' );
+			$alt_text              = caweb_get_attachment_post_meta( $event_presenter_image, '_wp_attachment_image_alt' );
 			$event_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image, $alt_text );
 		}
 

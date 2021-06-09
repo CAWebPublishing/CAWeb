@@ -161,13 +161,13 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			),
 			'include_tags' => array(
 				'label'            => esc_html__( 'Tags', 'et_builder' ),
-				'type'         => 'categories',
+				'type'             => 'categories',
 				'option_category'  => 'basic_option',
-				'post_type'            => 'post',
-				'taxonomy_name'        => 'post_tag',
+				'post_type'        => 'post',
+				'taxonomy_name'    => 'post_tag',
 				'renderer_options' => array(
-					'use_terms' => true,
-					'term_name' => 'post_tag',
+					'use_terms'  => true,
+					'term_name'  => 'post_tag',
 					'field_name' => 'et_pb_include_tags',
 				),
 				'description'      => esc_html__( 'Choose which tags you would like to include in the list.', 'et_builder' ),
@@ -198,7 +198,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'label'             => esc_html__( 'Title Size', 'et_builder' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
-				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6') ),
+				'options'           => $this->caweb_get_text_sizes( array( 'p', 'h6' ) ),
 				'description'       => esc_html__( 'Select the size for the title of this module.', 'et_builder' ),
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'header',
@@ -282,8 +282,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		setlocale( LC_MONETARY, 'en_US.UTF-8' );
 
 		if ( ! empty( $list_title ) ) {
-			$title_size = str_replace('-', '', $title_size );
-			$list_title = "<$title_size>$list_title</$title_size>"; 
+			$title_size = str_replace( '-', '', $title_size );
+			$list_title = "<$title_size>$list_title</$title_size>";
 		}
 
 		$faqs   = 'faqs-list' === $style ? true : false;

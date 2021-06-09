@@ -143,7 +143,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		global $post;
 
-		if ( null === $post || (isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
+		if ( null === $post || ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
 			return;
 		}
 
@@ -174,12 +174,12 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 						// calculate top of screen on next repaint
 						window.setTimeout(function () {
 							// fill up the remaining heaight of this device
-							if( 'auto' !== '<?php print_r( $this->props['height'] ) ?>' )
-								banner.css({ 'height': '<?php print_r( $this->props['height'] ) ?>' });
-							if( 'auto' !== '<?php print_r( $this->props['min_height'] ) ?>' )
-								banner.css({ 'min-height': '<?php print_r( $this->props['min_height'] ) ?>' });
-							if( 'none' !== '<?php print_r( $this->props['max_height'] ) ?>' )
-								banner.css({ 'max-height': '<?php print_r( $this->props['max_height'] ) ?>' });
+							if( 'auto' !== '<?php print_r( $this->props['height'] ); ?>' )
+								banner.css({ 'height': '<?php print_r( $this->props['height'] ); ?>' });
+							if( 'auto' !== '<?php print_r( $this->props['min_height'] ); ?>' )
+								banner.css({ 'min-height': '<?php print_r( $this->props['min_height'] ); ?>' });
+							if( 'none' !== '<?php print_r( $this->props['max_height'] ); ?>' )
+								banner.css({ 'max-height': '<?php print_r( $this->props['max_height'] ); ?>' });
 						}, 250);
 						
 					});
@@ -189,7 +189,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 			<?php
 		endif;
 	}
-		
+
 }
 new CAWeb_Module_Fullwidth_Header_Slideshow_Banner();
 ?>
