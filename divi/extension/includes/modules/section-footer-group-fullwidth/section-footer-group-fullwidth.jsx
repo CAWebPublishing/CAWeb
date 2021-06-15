@@ -50,7 +50,7 @@ class CAWeb_Module_Fullwidth_Footer_Group extends CAWEeb_Component {
 	render() {
 		var moduleId = "" !== this.props.module_id ? this.props.module_id : ''
 		var classes = undefined !== this.props.module_class ? this.props.module_class : '';
-		var classList = "et_pb_ca_section_fullwidth_footer_group et_pb_module quarter " + classes;
+		var classList = "et_pb_ca_section_fullwidth_footer_group et_pb_module  " + classes;
 
 		var heading_color = "" !== this.props.heading_color ? {'color' : this.props.heading_color} : {'color' : 'inherit'};
 
