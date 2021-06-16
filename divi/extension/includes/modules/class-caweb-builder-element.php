@@ -30,6 +30,21 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	);
 
 	/**
+	 * Wrap module's rendered output with proper module wrapper. Ensuring module has consistent
+	 * wrapper output which compatible with module attribute and background insertion.
+	 *
+	 * @since 3.1
+	 *
+	 * @param string $output      Module's rendered output.
+	 * @param string $render_slug Slug of module that is used for rendering output.
+	 *
+	 * @return string
+	 */
+	protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
+		return $output;
+	}
+	
+	/**
 	 * Available module text sizes
 	 *
 	 * @param  array $exclude Text sizes to exclude.
