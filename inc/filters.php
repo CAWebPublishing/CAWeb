@@ -153,8 +153,8 @@ function caweb_wpforms_custom_capability( $cap ) {
 /**
  * CAWeb Disable XMLRPC
  *
- * @return void
+ * @return boolean
  */
-function caweb_xmlrpc_enabled(){
+function caweb_xmlrpc_enabled() {
 	return false;
 }
