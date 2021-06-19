@@ -18,8 +18,9 @@
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
 							$caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
+							$post_title_class = apply_filters('caweb_post_title_class', "page-title$caweb_padding" );
 
-							esc_html( the_title( sprintf( '<h1 class="page-title%1$s">', $caweb_padding ), '</h1>' ) );
+							esc_html( the_title( "<h1 class=\"$post_title_class\">", '</h1>' ) );
 						}
 
 						if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {
