@@ -6,6 +6,7 @@
  */
 
 add_action( 'caweb_category_main_primary', 'caweb_theme_category_template' );
+add_action( 'caweb_category_sidebar', 'caweb_theme_category_template_sidebar' );
 
 /**
  * CAWeb Category Template
@@ -93,6 +94,25 @@ function caweb_theme_category_template(){
     endif;
 
     $output = apply_filters( 'caweb_category_template', $output );
+    
+    print $output;
+}
+
+
+/**
+ * CAWeb Category Template Sidebar
+ *
+ * @return void
+ */
+function caweb_theme_category_template_sidebar(){
+    $output = '';
+
+    if ( is_active_sidebar( 'sidebar-1' ) ){
+        $output = sprintf('<aside id="non_divi_sidebar" class="col-lg-3">%1$s</aside>', esc_html( get_sidebar( 'sidebar-1' ) ));
+    }
+    
+
+    $output = apply_filters( 'caweb_category_template_sidebar', $output );
     
     print $output;
 }

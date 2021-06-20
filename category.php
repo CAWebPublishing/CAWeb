@@ -22,17 +22,7 @@ get_header();
 					<main class="main-primary">
 					<?php do_action( 'caweb_category_main_primary' ); ?>
 					</main>
-					<?php
-					if ( is_active_sidebar( 'sidebar-1' ) ) :
-						?>
-					<aside id="non_divi_sidebar" class="col-lg-3">
-						<?php
-						print esc_html( get_sidebar( 'sidebar-1' ) );
-						?>
-					</aside>
-						<?php
-					endif;
-					?>
+					<?php do_action( 'caweb_category_sidebar' ); ?>
 				</div> <!-- #main-content -->
 			</div>
 		</div>
