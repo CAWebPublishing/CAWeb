@@ -4,7 +4,7 @@ require_once 'header.php';
 // Page Classes.
 $page_title_class = apply_filters('caweb_page_title_class', 'page-title' );
 $page_container_class = apply_filters('caweb_page_container_class', 'page-container' );
-$page_main_content_class = apply_filters('caweb_main_content_class', 'main-content' );
+$page_main_content_class = apply_filters('caweb_page_main_content_class', 'main-content' );
 
 ?>
 
