@@ -730,6 +730,18 @@ jQuery(document).ready(function($) {
     
   });
 
+  /* New Row */
+  $(document).on('click', 'div .new-row', function(){
+    var menu_id = $(this).attr('id').substr(0, $(this).attr('id').indexOf('_') );
+    var border = $('#menu-item-settings-' + menu_id + ' .flexmega-border');
+
+    if( $(this).is(':checked') ){
+      $(border).removeClass('hidden');
+    }else{
+      $(border).addClass('hidden');
+    }
+  });
+
   /* Item Menu Editing */
   $(document).on('DOMSubtreeModified', '#menu-to-edit', function() {
     
@@ -754,6 +766,7 @@ jQuery(document).ready(function($) {
     var unit_selector = $('#menu-item-settings-' + menu_id + ' .unit-size-selector');
     var unit_size = $(unit_selector).val();
     var flex_border = $('#menu-item-settings-' + menu_id + ' .flexmega-border');
+    var flex_row = $('#menu-item-settings-' + menu_id + ' .flexmega-row');
 
     /*
     if the menu item is a top level menu item
@@ -771,6 +784,8 @@ jQuery(document).ready(function($) {
       $(unit_selector).parent().addClass('hidden');
       $(desc).addClass('hidden-field');
       $(flex_border).addClass('hidden');
+      $(flex_row).addClass('hidden');
+      
     }else{
       // Hide Mega Menu Options
       $(mega_menu_images).addClass('hidden');
@@ -778,8 +793,15 @@ jQuery(document).ready(function($) {
       // Show Unit Selector
       $(unit_selector).parent().removeClass('hidden');
 
-      // Show FlexBorder
-      $(flex_border).removeClass('hidden');
+      // Show Row and FlexBorder
+      $(flex_row).removeClass('hidden');
+
+      if( $(flex_row).find('input').is(':checked') ){
+        $(flex_border).removeClass('hidden');
+      }else{
+        $(flex_border).addClass('hidden');
+      }
+
       if( 'unit1' !== unit_size ){
         // Hide Description
         $(desc).addClass('hidden-field');
