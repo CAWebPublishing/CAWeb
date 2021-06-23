@@ -66,9 +66,7 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	if ( ! empty( CAWEB_EXTENSION ) && file_exists( sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION ) ) ) {
 		include sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
 	}
-} else {
-	include CAWEB_ABSPATH . '/divi/functions.php';
-}
+} 
 
 /*
 -------------------------------------
