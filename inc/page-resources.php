@@ -32,10 +32,11 @@ function caweb_theme_category_template(){
 
                 $post_thumbnail = the_post_thumbnail( 'medium', '', array( 'alt' => $caweb_thumb_alt ) );
             }
+
             $cat_link = sprintf('<a class="cat-link no-underline" href="%1$s">%2$s<span class="sr-only">Read more about %3$s</span></a>', 
                 get_permalink(),
                 $post_thumbnail,
-                the_title()
+                get_the_title()
             );
 
             $divi_post_format =  function_exists('et_divi_post_format_content') ? et_divi_post_format_content() : '';
@@ -58,7 +59,7 @@ function caweb_theme_category_template(){
 
             $cat_info = sprintf('<div class="cat-info"><a class="title" href="%1$s"><h2>%2$s</h2></a>%3$s</div>',
                 get_permalink(),
-                ! empty( the_title( '', '', false ) ) ? the_title() : 'No Title',
+                ! empty( get_the_title() ) ? get_the_title() : 'No Title',
                 $divi_post_meta
             );
 
@@ -66,11 +67,10 @@ function caweb_theme_category_template(){
                 $post_truncate = sprintf('<p>%1$s<a class="btn btn-default" href="%2$s">Read More<span class="sr-only">Read more about %3$s</span></a></p>', 
                     truncate_post( 270, false ),
                     get_permalink(),
-                    the_title()
+                    get_the_title()
                 );
             }
-            
-            
+
             $output .= sprintf('<article id="post-%1$s" class="et_pb_post %2$s">%3$s%4$s%5$s%6$s</article><!-- .et_pb_post -->', 
                 get_the_ID(),
                 esc_attr( implode( ' ', get_post_class( '', $post_id ) ) ),
