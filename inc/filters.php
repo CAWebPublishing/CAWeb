@@ -69,7 +69,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
  *
  * @link https://developer.wordpress.org/reference/hooks/post_class/
  * @param  array $classes An array of post class names.
- *
+ * @category add_filter( 'post_class','caweb_post_class' , 15 );
  * @return array
  */
 function caweb_post_class( $classes ) {

@@ -63,14 +63,12 @@ function caweb_page_identifier_metabox_callback( $post ) {
 		$custom_title = get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? ' checked' : '';
 	}
 
-	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); ?>
-
-<form action="#" method="post">
+	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); 
+	
+	?>
 
 	<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"<?php print $custom_title; ?>>
 	Display Title on Page
-
-</form>
 
 	<?php
 }
