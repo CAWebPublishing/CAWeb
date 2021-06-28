@@ -441,9 +441,10 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 				// if current user can't modify this setting, set to current saved value.
-				if ( ! current_user_can( $cap ) ){
+				if ( ! current_user_can( $cap ) ) {
 					$val = get_option( $opt, false );
 				}
+				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
