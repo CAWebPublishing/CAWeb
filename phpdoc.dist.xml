@@ -36,16 +36,24 @@
     <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
 
     <!-- State Template Settings -->
-	<setting name="state_version" value="5.5.22" />
-
-    <!-- Theme Settings -->
-	<setting name="is_theme" value="false" />
-	<setting name="stable_version" value="1.5.5" />
-
-    <!-- Plugin Settings -->
-	<setting name="is_plugin" value="false" />
+    <setting name="colorscheme" value="santa barbara" />
+	<!-- Colorscheme Options
+    <setting name="colorscheme" value="delta" />
+    <setting name="colorscheme" value="eureka" />
+    <setting name="colorscheme" value="mono" />
+    <setting name="colorscheme" value="oceanside" />
+    <setting name="colorscheme" value="orange county" />
+    <setting name="colorscheme" value="paso robles" />
+    <setting name="colorscheme" value="sacramento" />
+    <setting name="colorscheme" value="santa barbara" />
+    <setting name="colorscheme" value="santa cruz" />
+    <setting name="colorscheme" value="shasta" />
+    <setting name="colorscheme" value="sierra" />
+    <setting name="colorscheme" value="trinity" />
+    -->
 
     <!-- Github Settings -->
+	<setting name="stable_version" value="1.5.5a" />
 	<setting name="github_user" value="CA-CODE-Works" />
 	<setting name="github_repo" value="CAWeb" />
 	<setting name="github_branch" value="dev" />
