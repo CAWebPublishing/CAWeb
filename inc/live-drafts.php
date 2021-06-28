@@ -370,6 +370,10 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
  */
 function caweb_live_drafts_post_update( $post_id, $post ) {
 
+	if ( ! empty( $_POST['public_post_preview_wpnonce'] ) || wp_verify_nonce( $_POST['public_post_preview_wpnonce'], 'public-post-preview_' . $post_id ) ) {
+		return false;
+	}
+
 	// Check if this is an auto save routine. If it is we dont want to do anything.
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id;
