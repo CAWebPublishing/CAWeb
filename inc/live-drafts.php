@@ -370,6 +370,18 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
  */
 function caweb_live_drafts_post_update( $post_id, $post ) {
 
+	// This prevents saving if the Public Post Preview Plugin is active.
+	if ( is_plugin_active( 'public-post-preview/public-post-preview.php' ) ) {
+		if ( ! empty( $_POST['public_post_preview_wpnonce'] ) || wp_verify_nonce( sanitize_key( $_POST['public_post_preview_wpnonce'] ), 'public-post-preview_' . $post_id ) ) {
+			return false;
+		}
+	}
+
+	// Check if previewing.
+	if ( isset( $_POST['wp-preview'] ) && 'dopreview' === $_POST['wp-preview'] ) {
+		return $post_id;
+	}
+
 	// Check if this is an auto save routine. If it is we dont want to do anything.
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id;
@@ -482,7 +494,9 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		// Delete draft post, force delete since 2.9, no sending to trash.
 		wp_delete_post( $post_id, true );
 
-		unset( $_SESSION[ "post_$_pc_live_id" ] );
+		if ( isset( $_SESSION[ "post_$_pc_live_id" ] ) ) {
+			unset( $_SESSION[ "post_$_pc_live_id" ] );
+		}
 
 		// Send user to new edit page.
 		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_live_id ) );

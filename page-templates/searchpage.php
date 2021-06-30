@@ -10,6 +10,10 @@
  */
 
 
+// Page Classes.
+$page_container_class = apply_filters('caweb_page_container_class', 'page-container' );
+$page_main_content_class = apply_filters('caweb_page_main_content_class', 'main-content' );
+
 get_header();
 ?>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
@@ -29,10 +33,11 @@ get_header();
 		}
 	</style>
 
-	<div id="page-container">
+	<div id="page-container" class="<?php print esc_attr( $page_container_class ); ?>">
+		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
-
-			<div id="main-content" class="main-content" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( $page_main_content_class ); ?>" tabindex="-1">
+				<?php do_action( 'caweb_pre_main_primary' ); ?>
 				<main class="main-primary">
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
@@ -51,6 +56,9 @@ get_header();
 
 		</div>
 	</div>
+
+	<?php do_action( 'caweb_pre_footer' ); ?>
+
 	<?php get_footer(); ?>
 
 </body>
