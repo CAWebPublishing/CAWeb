@@ -9,8 +9,9 @@
 
 add_action( 'load-post.php', 'caweb_live_drafts_init' );
 add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
-
 add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
+
+add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
 
 /**
  * CAWeb Live Drafts Initialization
@@ -29,6 +30,9 @@ function caweb_live_drafts_init() {
 	add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
 
 	caweb_live_drafts_post_hooks();
+
+	// Trash post.
+	add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
 
 	// Admin footer.
 	add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer', 10 );
@@ -148,6 +152,24 @@ function caweb_live_drafts_admin_head() {
 			});
 
 		</script>
+		<?php
+		// if the Oasis WorkFlow Plugin is activated rename save draft button back to "Save Draft".
+	} elseif ( ( is_plugin_active( 'oasis-workflow/oasis-workflow.php' ) ||
+				is_plugin_active( 'oasis-workflow-pro/oasis-workflow-pro.php' ) ) &&
+			in_array( $post->post_type, array( 'post', 'page' ), true ) && 'draft' === $post->post_status ) {
+		?>
+			<script type="text/javascript">
+
+			jQuery(document).ready(function($) {
+
+				// Rename Save Draft Button.
+				setTimeout(() => {
+					$('#save-action #save-post').val('Save Draft');
+				}, 250);
+
+			});
+
+			</script>
 		<?php
 	}
 }
@@ -444,9 +466,9 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 			caweb_live_drafts_post_hooks();
 		}
 
-			// Send user to new edit page.
-			wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
-			exit();
+		// Send user to new edit page.
+		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
+		exit();
 
 	}
 
@@ -505,4 +527,59 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 
 }
 
-?>
+/**
+ * CAWeb Live Drafts Trash Post
+ *
+ * Fires before a post is sent to the Trash.
+ *
+ * @category add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
+ * @param int $post_id Post ID.
+ *
+ * @return void
+ */
+function caweb_live_drafts_wp_trash_post( $post_id ) {
+	// Check for post meta identifiers.
+	$_pc_live_id  = get_post_meta( $post_id, '_pc_liveId', true );
+	$_pc_draft_id = get_post_meta( $post_id, '_pc_draftId', true );
+
+	// if post is a draft of a live page.
+	if ( ! empty( $_pc_live_id ) ) {
+		// delete live drafts liveId meta.
+		delete_post_meta( $post_id, '_pc_liveId' );
+
+		// delete published page draftID meta.
+		delete_post_meta( $_pc_live_id, '_pc_draftId' );
+	}
+
+	// if post is a live page but has existing live drafts.
+	if ( ! empty( $_pc_draft_id ) ) {
+
+		// delete published page draftID meta.
+		delete_post_meta( $post_id, '_pc_draftId' );
+
+		// trash live drafts page.
+		wp_trash_post( $_pc_draft_id );
+
+	}
+}
+
+/**
+ * Filters the default post display states used in the posts list table.
+ *
+ * @category add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
+ * @param string[] $post_states An array of post display states.
+ * @param WP_Post  $post        The current post object.
+ */
+function caweb_live_drafts_display_post_states( $post_states, $post ) {
+
+	if ( isset( $post->ID ) ) {
+		$_pc_live_id = get_post_meta( $post->ID, '_pc_liveId', true );
+
+		// if post is a draft of a live page add Live Draft to post states.
+		if ( ! empty( $_pc_live_id ) ) {
+			$post_states[] = 'Live Draft';
+		}
+	}
+
+	return $post_states;
+}
