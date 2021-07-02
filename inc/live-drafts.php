@@ -56,14 +56,14 @@ function caweb_live_drafts_post_hooks( $add = true ) {
 		add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
 
 		// Save Post Action.
-		add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+		add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
 
 	} else {
 		// Pre-post update.
 		remove_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update' );
 
 		// Save Post Action.
-		remove_action( 'save_post', 'caweb_live_drafts_post_update' );
+		remove_action( 'save_post', 'caweb_live_drafts_save_post' );
 
 	}
 
@@ -385,19 +385,12 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
  *
  * Fires once a post has been saved.
  *
- * @category add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+ * @category add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
  * @return int
  */
-function caweb_live_drafts_post_update( $post_id, $post ) {
-
-	// This prevents saving if the Public Post Preview Plugin is active.
-	if ( is_plugin_active( 'public-post-preview/public-post-preview.php' ) ) {
-		if ( ! empty( $_POST['public_post_preview_wpnonce'] ) || wp_verify_nonce( sanitize_key( $_POST['public_post_preview_wpnonce'] ), 'public-post-preview_' . $post_id ) ) {
-			return false;
-		}
-	}
+function caweb_live_drafts_save_post( $post_id, $post ) {
 
 	// Check if previewing.
 	if ( isset( $_POST['wp-preview'] ) && 'dopreview' === $_POST['wp-preview'] ) {
@@ -473,10 +466,10 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 	}
 
 	$publish = isset( $_REQUEST['publish'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['publish'] ) ) : '';
-	$content = isset( $_REQUEST['content'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['content'] ) ) : $post->post_content;
+	$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), caweb_allowed_html( array(), true ) ) : $post->post_content;
 
 	// Catch when a draft is published.
-	if ( 'Schedule' !== $publish ) {
+	if ( ! empty( $publish ) && 'Schedule' !== $publish ) {
 		// Check for post meta that identifies this as a 'draft of a live page'.
 		$_pc_live_id = get_post_meta( $post_id, '_pc_liveId', true );
 
