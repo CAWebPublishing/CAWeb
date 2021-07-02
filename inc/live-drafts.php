@@ -552,7 +552,7 @@ function caweb_live_drafts_wp_trash_post( $post_id ) {
 
 		// unhook actions.
 		caweb_live_drafts_post_hooks( false );
-		
+
 		// trash live drafts page.
 		wp_trash_post( $_pc_draft_id );
 
