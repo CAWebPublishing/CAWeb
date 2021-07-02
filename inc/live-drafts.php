@@ -550,9 +550,14 @@ function caweb_live_drafts_wp_trash_post( $post_id ) {
 		// delete published page draftID meta.
 		delete_post_meta( $post_id, '_pc_draftId' );
 
+		// unhook actions.
+		caweb_live_drafts_post_hooks( false );
+		
 		// trash live drafts page.
 		wp_trash_post( $_pc_draft_id );
 
+		// hook actions.
+		caweb_live_drafts_post_hooks();
 	}
 }
 
