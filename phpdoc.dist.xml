@@ -28,10 +28,10 @@
     Settings Option not working properly in phpDocumentor v3.0.0,
     using nightly build https://github.com/phpDocumentor/phpDocumentor/actions/runs/991083623
     -->
-	<!--setting name="nav_menu" value="
-    Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library,View all available icons};
+	<setting name="nav_menu" value="
+    Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library.html,View all available icons};
     How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards}
-    " /-->
+    " />
 
     <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
 
@@ -58,7 +58,13 @@
 	<setting name="github_repo" value="CAWeb" />
 	<setting name="github_branch" value="dev" />
 
+    <!-- WordPress Settings -->
+
+	<!-- WordPress.NamingConventions.PrefixAllGlobals Rule.
+		 Multiple valid prefixes can be provided as a comma-delimited list. -->
+	<setting name="wp_prefixes" value="caweb_,et_,wp_" />
+
     <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
-    <!--template name="." location="." /-->
+    <template name="." location="." />
 
 </phpdocumentor>
