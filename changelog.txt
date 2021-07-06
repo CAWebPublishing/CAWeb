@@ -1,3 +1,9 @@
+CAWeb v1.5.5b
+- Fixed various issues related to plugin conflicts with live drafts
+
+CAWeb v1.5.5a
+- Fixed issue with Post List Module not rendering when tags were used
+
 CAWeb v1.5.5
 - Added function for xmlrpc_enabled filter
 - Added missing tabindex attribute to second level links
