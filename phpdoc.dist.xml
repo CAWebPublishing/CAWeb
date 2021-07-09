@@ -4,7 +4,7 @@
         <output>.docs</output>
     </paths>
     <title>CAWeb</title>
-    <version number="3.0.0">
+    <version number="3.1.0">
         <api>
             <default-package-name>CAWeb</default-package-name>
             <source dsn=".">
@@ -25,46 +25,47 @@
         </api>
     </version>
     <!-- 
-    Settings Option not working properly in phpDocumentor v3.0.0,
-    using nightly build https://github.com/phpDocumentor/phpDocumentor/actions/runs/991083623
+    Using phpDocumentor v3.1.0,
+    https://github.com/phpDocumentor/phpDocumentor/releases/tag/v3.1.0
     -->
-	<setting name="nav_menu" value="
-    Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library.html,View all available icons};
-    How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards}
-    " />
-
-    <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
-
-    <!-- State Template Settings -->
-    <setting name="colorscheme" value="santa barbara" />
-	<!-- Colorscheme Options
-    <setting name="colorscheme" value="delta" />
-    <setting name="colorscheme" value="eureka" />
-    <setting name="colorscheme" value="mono" />
-    <setting name="colorscheme" value="oceanside" />
-    <setting name="colorscheme" value="orange county" />
-    <setting name="colorscheme" value="paso robles" />
-    <setting name="colorscheme" value="sacramento" />
-    <setting name="colorscheme" value="santa barbara" />
-    <setting name="colorscheme" value="santa cruz" />
-    <setting name="colorscheme" value="shasta" />
-    <setting name="colorscheme" value="sierra" />
-    <setting name="colorscheme" value="trinity" />
-    -->
-
-    <!-- Github Settings -->
-	<setting name="stable_version" value="1.5.5a" />
-	<setting name="github_user" value="CA-CODE-Works" />
-	<setting name="github_repo" value="CAWeb" />
-	<setting name="github_branch" value="dev" />
-
-    <!-- WordPress Settings -->
-
-	<!-- WordPress.NamingConventions.PrefixAllGlobals Rule.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
-	<setting name="wp_prefixes" value="caweb_,et_,wp_" />
-
+	
+     <setting name="nav_menu" value="
+     Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library.html,View all available icons};
+     How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards}
+     " />
+ 
+     <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
+ 
+     <!-- State Template Settings -->
+     <setting name="colorscheme" value="santa barbara" />
+   <!-- Colorscheme Options
+     <setting name="colorscheme" value="delta" />
+     <setting name="colorscheme" value="eureka" />
+     <setting name="colorscheme" value="mono" />
+     <setting name="colorscheme" value="oceanside" />
+     <setting name="colorscheme" value="orange county" />
+     <setting name="colorscheme" value="paso robles" />
+     <setting name="colorscheme" value="sacramento" />
+     <setting name="colorscheme" value="santa barbara" />
+     <setting name="colorscheme" value="santa cruz" />
+     <setting name="colorscheme" value="shasta" />
+     <setting name="colorscheme" value="sierra" />
+     <setting name="colorscheme" value="trinity" />
+     -->
+ 
+     <!-- Github Settings -->
+   <setting name="stable_version" value="1.5.5a" />
+   <setting name="github_user" value="CA-CODE-Works" />
+   <setting name="github_repo" value="CAWeb" />
+   <setting name="github_branch" value="dev" />
+ 
+     <!-- WordPress Settings -->
+ 
+   <!-- WordPress.NamingConventions.PrefixAllGlobals Rule.
+      Multiple valid prefixes can be provided as a comma-delimited list. -->
+   <setting name="wp_prefixes" value="caweb_,et_,wp_" />
+      
     <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
-    <template name="." location="." />
+    <!--template name="." location="." /-->
 
 </phpdocumentor>
