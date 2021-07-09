@@ -1,6 +1,6 @@
 <?php
 /**
- * CAWeb Post Handler Module (Standard)
+ * CAWeb Post Detail Module (Standard)
  *
  * @package CAWebModuleExtension
  */
@@ -10,9 +10,9 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Post Handler Module Class (Standard)
+ * CAWeb Post Detail Module Class (Standard)
  */
-class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 	/**
 	 * Module Slug Name
 	 *
@@ -27,13 +27,19 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 	public $vb_support = 'on';
 
 	/**
+	 * Post Type
+	 *
+	 * @var array List of post types that this module should be available on.
+	 */
+	public $post_types = array( 'post' );
+
+	/**
 	 * Module Initialization
 	 *
 	 * @return void
 	 */
 	public function init() {
-		$this->name       = esc_html__( 'Post Detail', 'et_builder' );
-		$this->post_types = array( 'post' );
+		$this->name = esc_html__( 'Post Detail', 'et_builder' );
 
 		$this->main_css_element       = '%%order_class%%';
 		$this->settings_modal_toggles = array(
@@ -1966,5 +1972,6 @@ class CAWeb_Module_Post_Handler extends ET_Builder_CAWeb_Module {
 		return sprintf( '<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list );
 	}
 }
-new CAWeb_Module_Post_Handler();
+new CAWeb_Module_Post_Detail();
+
 ?>
