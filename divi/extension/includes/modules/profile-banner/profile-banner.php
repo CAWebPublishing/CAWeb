@@ -132,7 +132,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'toggle_slug'        => 'body',
 			),
 			'is_vertical' => array(
-				'label'              => esc_html__( 'Display Banner Vertically', 'et_builder' ),
+				'label'              => esc_html__( 'Display Vertically', 'et_builder' ),
 				'type'               => 'yes_no_button',
 				'option_category'    => 'configuration',
 				'options'            => array(
