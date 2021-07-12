@@ -462,7 +462,7 @@ function caweb_display_google_options() {
 	// Analytics ID.
 	$google_analytic_id = get_option( 'ca_google_analytic_id', '' );
 
-	// Tag Manager ID
+	// Tag Manager ID.
 	$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
 
 	// Meta ID.
@@ -889,11 +889,12 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
  * @return void
  */
 function caweb_display_additional_features_settings( $is_active = false ) {
-	$directory           = wp_upload_dir();
-	$file                = $directory['basedir'] . '/pdf-word-sitemap.xml';
-	$file_url            = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
-	$cap                 = is_multisite() ? 'manage_network_options' : 'manage_options';
-	$live_drafts_enabled = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
+	$directory                = wp_upload_dir();
+	$file                     = $directory['basedir'] . '/pdf-word-sitemap.xml';
+	$file_url                 = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
+	$cap                      = is_multisite() ? 'manage_network_options' : 'manage_options';
+	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
+	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
 
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-parent="#caweb-settings">
@@ -906,12 +907,23 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 		</div>
 		<?php if ( current_user_can( $cap ) ) : ?>
 		<div class="form-row">
+			<!-- Live Drafts Option -->
 			<div class="form-group col-sm-12">
 				<label for="caweb_live_drafts"><strong>Enable Live Drafts</strong></label>
 				<input type="checkbox" name="caweb_live_drafts" id="caweb_live_drafts" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $live_drafts_enabled ); ?>>
 				<small class="text-muted d-block">This will enable the live drafts functionality.</small>
 			</div>
 		</div>
+
+		<div class="form-row">
+			<!-- Enable Debug -->
+			<div class="form-group col-sm-12">
+				<label for="caweb_debug_mode"><strong>Enable Debug Mode</strong></label>
+				<input type="checkbox" name="caweb_debug_mode" id="caweb_debug_mode" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $caweb_debug_mode_enabled ); ?>>
+				<small class="text-muted d-block">This will enable debug mode.</small>
+			</div>
+		</div>
+
 		<?php endif; ?>
 	</div>
 	<?php
