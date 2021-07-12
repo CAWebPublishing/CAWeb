@@ -1,3 +1,6 @@
+CAWeb v1.5.6
+- Added new Enable Debug Mode option
+
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
 
