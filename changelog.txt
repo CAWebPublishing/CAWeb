@@ -1,3 +1,9 @@
+CAWeb v1.5.6
+- Added new Enable Debug Mode option
+- Updated State Template from v5.5.21 to v5.5.23
+- Added new vertical field for Profile Banners
+- Removed forced title attribute on Divi Image Modules
+
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
 

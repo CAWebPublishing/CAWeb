@@ -2,6 +2,8 @@
 /**
  * CAWeb Card Module (Standard)
  *
+ * A flexible and extensible content container, that includes options for headers, footers, a wide variety of content, contextual background colors, and powerful display options.
+ *
  * @package CAWebModuleExtension
  */
 

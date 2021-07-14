@@ -67,6 +67,15 @@ function caweb_nav_menu_theme_locations() {
 }
 
 /**
+ * Is CAWeb Theme is running in Debug Mode.
+ *
+ * @return boolean
+ */
+function caweb_is_debug_enabled() {
+	return get_option( 'caweb_debug_mode', false );
+}
+
+/**
  * Load Minified Version of a file
  *
  * @param  string $f File to load.
@@ -76,7 +85,7 @@ function caweb_nav_menu_theme_locations() {
  */
 function caweb_get_min_file( $f, $ext = 'css' ) {
 	/* if a minified version exists load it */
-	if ( file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+	if ( ! caweb_is_debug_enabled() && file_exists( CAWEB_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
 		return CAWEB_URI . str_replace( ".$ext", ".min.$ext", $f );
 	} else {
 		return CAWEB_URI . $f;
