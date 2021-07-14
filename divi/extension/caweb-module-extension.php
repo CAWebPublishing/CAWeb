@@ -79,31 +79,6 @@ if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 					$output = preg_replace( '/alt=""/', sprintf( 'alt="%1$s"', $alt ), $output );
 				}
 
-				// if no title assigned get the title text from the Media Library.
-				if ( preg_match( '/title=""/', $output ) && ! empty( $src ) ) {
-					// phpcs:disable -- Slow meta query ok.
-					$query = array(
-						'post_type'  => 'attachment',
-						'fields'     => 'ids',
-						'meta_query' => array(
-							array(
-								'key'     => '_wp_attached_file',
-								'value'   => basename( $src ),
-								'compare' => 'LIKE',
-							),
-						),
-					);
-					// phpcs:enable
-
-					$attachment    = get_posts( $query );
-					$attachment_id = ! empty( $attachment ) ? $attachment[0] : '';
-
-					if ( ! empty( $attachment_id ) ) {
-						$title  = get_the_title( $attachment_id );
-						$output = preg_replace( '/title=""/', sprintf( 'title="%1$s"', $title ), $output );
-					}
-				}
-
 				// if there is an anchor tag present.
 				if ( preg_match( '/<a href/', $output ) && ( ! empty( $alt ) || ! empty( $title ) ) ) {
 					$anchor = ! empty( $alt ) ? $alt : $title;
