@@ -4,6 +4,8 @@ CAWeb v1.5.6
 - Added new vertical field for Profile Banners
 - Removed forced title attribute on Divi Image Modules
 - Fixed footer structure and removed custom css
+- Fixed issue with Header Slideshow Banner Height
+- Removed some custom Google Translate CSS and added class names instead
 
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
