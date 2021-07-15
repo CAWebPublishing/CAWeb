@@ -91,7 +91,7 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				</a>
 				<?php endif; ?>
 				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
-				<div class="quarter standard-translate" id="google_translate_element"></div>
+				<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
 				<?php endif; ?>
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
