@@ -37,8 +37,10 @@ ol.breadcrumb{
     text-transform: capitalize;
     margin-bottom: 0;
 }
-ol:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]),
-ul:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]){
+/*
+ol:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]):not([class*="socialsharer-container"]),
+ul:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]):not([class*="socialsharer-container"]){
 	padding: 0 0 0 50px;
 	list-style-position: outside !important;
 }
+*/

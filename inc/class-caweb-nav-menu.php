@@ -121,13 +121,19 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				/* Footer Menu Construction */
 			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
 				$nav_menu   = $this->createFooterMenu( $args );
-				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<span class="pull-right">Powered by: CAWeb Publishing Service</span>' : '';
+				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<div class="half text-right"><span>Powered by: CAWeb Publishing Service</span></div>' : '';
+
+				$cc = sprintf( '<div class="half"><p class="d-inline">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p></div>', gmdate( 'Y' ) );
+
+				$copyright = sprintf( '<div class="copyright"><div class="container"><div class="row">%1$s%2$s</div></div></div>',
+					$cc,
+					$powered_by
+				);
 
 				$nav_menu = sprintf(
-					'<footer id="footer" class="global-footer hidden-print"><div class="container footer-menu"><div class="group">%1$s</div></div><!-- Copyright Statement --><div class="copyright"><div class="container"><p class="d-inline">Copyright <span aria-hidden="true">&copy;</span> %2$s State of California</p>%3$s</div></div></footer>',
+					'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="row">%1$s</div></div>%2$s</footer>',
 					$nav_menu,
-					gmdate( 'Y' ),
-					$powered_by
+					$copyright
 				);
 			}
 
@@ -591,7 +597,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			$social_links = ! empty( $social_links ) ? sprintf( '<ul class="socialsharer-container">%1$s</ul>', $social_links ) : '';
 
-			return ! empty( $social_links ) ? sprintf( '<div class="quarter">%1$s</div>', $social_links ) : $social_links;
+			return ! empty( $social_links ) ? sprintf( '<div class="quarter text-right">%1$s</div>', $social_links ) : $social_links;
 		}
 
 		/**
