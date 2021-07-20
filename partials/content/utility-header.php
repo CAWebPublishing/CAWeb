@@ -12,6 +12,7 @@ $caweb_google_trans_page            = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_enabled         = get_option( 'ca_google_trans_enabled', false );
 $caweb_google_trans_page_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? '_blank' : '_self';
 $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
+$caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabled', false ) || get_option( 'ca_geo_locator_enabled', false );
 
 ?>
 <!-- Utility Header -->
@@ -55,7 +56,6 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				?>
 			</div>
 			<div class="settings-links">
-				
 				<?php
 				for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) {
 					$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
@@ -79,6 +79,11 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 					}
 				}
 				?>
+
+				<?php if ( $caweb_geo_locator_enabled ) : ?>
+					<button type="button" class="btn btn-xs btn-primary collapsed" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>	
+				<?php endif; ?>
+
 				<?php if ( ! empty( $caweb_contact_us_link ) ) : ?>
 				<a class="utility-contact-us" href="<?php print esc_url( $caweb_contact_us_link ); ?>">Contact Us</a>
 				<?php endif; ?>
@@ -91,7 +96,7 @@ $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
 				</a>
 				<?php endif; ?>
 				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
-				<div class="quarter standard-translate" id="google_translate_element"></div>
+				<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
 				<?php endif; ?>
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
