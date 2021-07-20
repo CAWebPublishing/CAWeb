@@ -125,7 +125,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				$cc = sprintf( '<div class="half"><p class="d-inline">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p></div>', gmdate( 'Y' ) );
 
-				$copyright = sprintf( '<div class="copyright"><div class="container"><div class="row">%1$s%2$s</div></div></div>',
+				$copyright = sprintf(
+					'<div class="copyright"><div class="container"><div class="row">%1$s%2$s</div></div></div>',
 					$cc,
 					$powered_by
 				);

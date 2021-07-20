@@ -6,6 +6,7 @@ CAWeb v1.5.6
 - Fixed footer structure and removed custom css
 - Fixed issue with Header Slideshow Banner Height
 - Removed some custom Google Translate CSS and added class names instead
+- Fixed issue with Geo Locator not functioning
 
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
