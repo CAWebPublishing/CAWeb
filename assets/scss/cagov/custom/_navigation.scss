@@ -1,17 +1,3 @@
-.first-level-link{
-	height: $first-level-link-height;
-	/* Allows for the Navigation Top Level Links to wrap */
-	white-space: normal;
-}
-
-#nav_list{
-	width: $nav-list-width;
-}
-
-.sub-nav{
-	left: 0;
-	right: 0;
-}
 
 /* Styles for Second level navs not using flex */
 .second-level-nav:not(.flex) {

@@ -30133,10 +30133,6 @@ body:not(.sticky_nav) #main-content.main-content {
   white-space: normal;
 }
 
-#nav_list {
-  width: 100%;
-}
-
 .sub-nav {
   left: 0;
   right: 0;
