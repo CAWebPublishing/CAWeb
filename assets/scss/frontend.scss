@@ -1,4 +1,11 @@
 /*---------------
+ # Bootstrap
+---------------*/
+@import "bootstrap/functions";
+@import "caweb/variables";
+@import "bootstrap/utilities/sizing";
+
+/*---------------
  # CAWeb
 ---------------*/
 @import "caweb/a11y";
