@@ -440,8 +440,8 @@ function caweb_get_user_color() {
 /**
  * CAWeb Allowed HTML for wp_kses
  *
- * @link https://codex.wordpress.org/Function_Reference/wp_kses
-
+ * @link https://developer.wordpress.org/reference/functions/wp_kses/
+ *
  * @param  array   $exclude HTML tags to exclude.
  * @param  boolean $form Whether or not to include form fields.
  * @return array

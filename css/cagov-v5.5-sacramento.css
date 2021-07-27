@@ -29477,6 +29477,89 @@ li[class^="et_fb_profile_banner"]::before {
 }
 
 /*---------------
+ # Bootstrap
+---------------*/
+.w-25 {
+  width: 25% !important;
+}
+
+.w-33 {
+  width: 33% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-66 {
+  width: 66% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+.h-25 {
+  height: 25% !important;
+}
+
+.h-33 {
+  height: 33% !important;
+}
+
+.h-50 {
+  height: 50% !important;
+}
+
+.h-66 {
+  height: 66% !important;
+}
+
+.h-75 {
+  height: 75% !important;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.h-auto {
+  height: auto !important;
+}
+
+.mw-100 {
+  max-width: 100% !important;
+}
+
+.mh-100 {
+  max-height: 100% !important;
+}
+
+.min-vw-100 {
+  min-width: 100vw !important;
+}
+
+.min-vh-100 {
+  min-height: 100vh !important;
+}
+
+.vw-100 {
+  width: 100vw !important;
+}
+
+.vh-100 {
+  height: 100vh !important;
+}
+
+/*---------------
  # CAWeb
 ---------------*/
 /*------------------------
@@ -30127,22 +30210,8 @@ body:not(.sticky_nav) #main-content.main-content {
   color: #fee09c;
 }
 
-.first-level-link {
-  height: auto;
-  /* Allows for the Navigation Top Level Links to wrap */
-  white-space: normal;
-}
-
-#nav_list {
-  width: 100%;
-}
-
-.sub-nav {
-  left: 0;
-  right: 0;
-}
-
-/* Styles for Second level navs not using flex */
+/* Override styles applied by Divi */
+/* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
   display: block;
   position: relative !important;
@@ -30150,10 +30219,11 @@ body:not(.sticky_nav) #main-content.main-content {
   visibility: visible !important;
   width: auto !important;
   padding: 0 !important;
+  background: inherit;
 }
 
 .second-level-nav:not(.flex) li {
-  float: left;
+  display: inline-block;
 }
 
 .second-level-nav:not(.flex) .second-level-link {
@@ -30161,147 +30231,27 @@ body:not(.sticky_nav) #main-content.main-content {
   font-size: 1.1rem;
 }
 
-.second-level-nav:not(.flex) .unit2, .second-level-nav:not(.flex) .unit3, .second-level-nav:not(.flex) .unit3 .nav-media .media {
-  height: 130px;
-}
-
-nav li {
-  line-height: 1.45 !important;
-}
-
-@media (max-width: 767px) {
-  #nav_list {
-    width: 100%;
-    padding-left: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .top-level-nav .nav-item {
-    padding: 0 6px;
-  }
-}
-
-@media (min-width: 992px) {
-  .top-level-nav .nav-item {
-    padding: 0 8px;
-  }
-}
-
-/* Override Divi Nav Opacity */
-.et_mobile_menu li a:hover, .nav ul li a:hover {
+.second-level-nav:not(.flex) .second-level-link:hover {
+  background-color: inherit;
   opacity: 1;
+  transition: all 0.3s;
 }
 
-/* Dropdown Navigation Styles */
-.main-navigation.dropdown .sub-nav ul li {
-  width: 100%;
-  height: auto;
-}
-
-.main-navigation.dropdown .sub-nav ul li img {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .main-navigation.dropdown .sub-nav {
-    max-width: 250px;
-    left: auto;
-    /* IE does not recognize initial */
-    left: initial;
-    right: auto;
-    /* IE does not recognize initial */
-    right: initial;
-  }
+/* Override nav li line-height */
+nav li {
+  line-height: 1.5 !important;
 }
 
 /* MegaDropdown Navigation Styles */
-.main-navigation.megadropdown .unit1 .second-level-link {
-  height: 65px;
-}
-
-.full .second-level-nav .unit1 {
-  width: 25%;
-}
-
-.half .second-level-nav .unit3 .nav-media .media .unit2 {
-  width: 100%;
-}
-
-.full .second-level-nav .unit2,
-.full .second-level-nav .unit3,
-.half .second-level-nav .unit1,
-.half .second-level-nav .unit2,
-.three-quarters .second-level-nav li.unit2,
-.three-quarters .second-level-nav li.unit3 {
-  width: 50%;
-}
-
-.three-quarters .second-level-nav li.unit1 {
-  width: 33.3%;
-}
-
-/* MegaDropdown Columns*/
-.nav-item.two-columns .three-quarters .second-level-nav .unit1,
-.nav-item.two-columns .three-quarters .second-level-nav .unit2,
-.nav-item.two-columns .three-quarters .second-level-nav .unit3,
-.nav-item.two-columns .half .second-level-nav .unit1,
-.nav-item.two-columns .half .second-level-nav .unit2,
-.nav-item.two-columns .half .second-level-nav .unit3 {
-  width: 100%;
-}
-
-.nav-item.two-columns .full .second-level-nav .unit1,
-.nav-item.two-columns .full .second-level-nav .unit2,
-.nav-item.two-columns .full .second-level-nav .unit3,
-.nav-item.three-columns .half .second-level-nav .unit1,
-.nav-item.three-columns .half .second-level-nav .unit2,
-.nav-item.three-columns .half .second-level-nav .unit3 {
-  width: 50%;
-}
-
-.nav-item.three-columns .full .second-level-nav .unit1,
-.nav-item.three-columns .full .second-level-nav .unit2,
-.nav-item.three-columns .full .second-level-nav .unit3,
-.nav-item.four-columns .three-quarters .second-level-nav .unit2,
-.nav-item.four-columns .three-quarters .second-level-nav .unit3,
-.nav-item.four-columns .half .second-level-nav .unit1,
-.nav-item.four-columns .half .second-level-nav .unit2,
-.nav-item.four-columns .half .second-level-nav .unit3 {
-  width: 33.33%;
-  width: calc(100% /3);
-}
-
-.nav-item.four-columns .full .second-level-nav .unit1,
-.nav-item.four-columns .full .second-level-nav .unit2,
-.nav-item.four-columns .full .second-level-nav .unit3 {
-  width: 25%;
-}
-
-@media (max-width: 767px) {
-  .second-level-nav li {
-    float: none;
+@media (max-width: 991px) {
+  nav.megadropdown .second-level-nav:not(.flex) li {
     width: 100% !important;
   }
-  .second-level-nav .unit2 .link-description,
-  .second-level-nav .unit3 .link-description {
-    width: auto;
-    height: auto;
-    clip: auto;
+  nav.megadropdown div[class*="pull-"] {
+    width: 100% !important;
   }
-}
-
-@media (max-width: 991px) and (min-width: 768px) {
-  .sub-nav .three-quarters {
-    left: 0;
-    width: 50%;
-  }
-  .three-quarters .second-level-nav li.unit1 {
-    width: 100%;
-  }
-  .three-quarters .second-level-nav li.unit2,
-  .three-quarters .second-level-nav li.unit3 {
-    width: 100%;
+  nav.megadropdown div[class*="with-image-"] {
+    display: none;
   }
 }
 

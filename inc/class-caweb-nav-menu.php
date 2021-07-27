@@ -61,7 +61,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
 			if ( isset( $nav_menu_args['menu'] ) ) {
 				$args['echo'] = false;
-				print wp_kses( $this->createWidgetNavMenu( $nav_menu_args['menu'] ), caweb_allowed_html() );
+				print wp_kses( $this->create_widget_nav_menu( $nav_menu_args['menu'] ), caweb_allowed_html() );
 			}
 
 			return $args;
@@ -99,7 +99,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$theme_location = $args->theme_location;
 			/* Header Menu Construction */
 			if ( 'header-menu' === $theme_location && ! empty( $args->menu ) ) {
-				$nav_menu = $this->createNavMenu( $args );
+				$nav_menu = $this->create_nav_menu( $args );
 
 				/* If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link */
 				$home_link = ( isset( $args->home_link ) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
@@ -120,7 +120,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				/* Footer Menu Construction */
 			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
-				$nav_menu   = $this->createFooterMenu( $args );
+				$nav_menu   = $this->create_footer_menu( $args );
 				$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<div class="half text-right"><span>Powered by: CAWeb Publishing Service</span></div>' : '';
 
 				$cc = sprintf( '<div class="half"><p class="d-inline">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p></div>', gmdate( 'Y' ) );
@@ -181,7 +181,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 *
 		 * @return string
 		 */
-		public function createWidgetNavMenu( $nav_menu ) {
+		public function create_widget_nav_menu( $nav_menu ) {
 			$widget_nav_menu = '';
 
 			$menuitems = wp_get_nav_menu_items( $nav_menu->term_id, array( 'order' => 'DESC' ) );
@@ -259,7 +259,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 *
 		 * @return string
 		 */
-		public function createNavMenu( $args ) {
+		public function create_nav_menu( $args ) {
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
 			_wp_menu_item_classes_by_context( $menuitems );
@@ -287,62 +287,71 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '';
 
 					/* Get column count */
-					$item->classes[] = isset( $item_meta['_caweb_menu_column_count'] ) ? $item_meta['_caweb_menu_column_count'][0] : '';
-
-					$sub_nav_indicator = $child_count ? '<span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span>' : '';
+					$item->classes[] = isset( $args->style, $item_meta['_caweb_menu_column_count'] ) &&
+					'megadropdown' === $args->style ? $item_meta['_caweb_menu_column_count'][0] : '';
 
 					/* Create Link */
 					$nav_item .= sprintf(
-						'<li class="nav-item %1$s"%2$s title="%3$s"><a href="%4$s" class="first-level-link"%5$s>%6$s<span class="link-title">%7$s%8$s</span></a>',
-						implode( ' ', $item->classes ),
+						'<li class="nav-item %1$s"%2$s title="%3$s"><a href="%4$s" class="first-level-link"%5$s>%6$s<span class="link-title">%7$s</span></a>',
+						implode( ' ', array_filter( $item->classes ) ),
 						! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '',
 						$item->attr_title,
 						$item->url,
 						! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
 						$icon,
-						$item->title,
-						$sub_nav_indicator
+						$item->title
 					);
 
 					/* If there are child links create the sub-nav */
 					if ( 0 < $child_count && 'singlelevel' !== $args->style ) {
-						if ( in_array( $args->style, array( 'flexmega', 'megadropdown' ), true ) ) {
-							/* Sub nav image variables */
-							$sub_img_class = 'full';
-							$sub_img_div   = '';
-
-							// if there a sub nav image set.
-							if ( isset( $item_meta['_caweb_menu_image'][0] ) && ! empty( $item_meta['_caweb_menu_image'][0] ) ) {
-								$nav_img      = $item_meta['_caweb_menu_image'][0];
-								$nav_img_side = isset( $item_meta['_caweb_menu_image_side'][0] ) ? $item_meta['_caweb_menu_image_side'][0] : 'left';
-								$nav_img_size = isset( $item_meta['_caweb_menu_image_size'][0] ) ? $item_meta['_caweb_menu_image_size'][0] : 'quarter';
-
-								$sub_img_class = sprintf(
-									'%1$s %2$s',
-									( 'quarter' === $nav_img_size ? 'three-quarters' : 'half' ),
-									( 'left' === $nav_img_side ? 'offset-' . $nav_img_size : '' )
+						switch ( $args->style ) {
+							case 'flexmega':
+								$nav_item .= sprintf(
+									'<div class="sub-nav">%1$s</div></li>',
+									$this->create_flex_megadropdown_subnav( $child_links )
 								);
 
-								$sub_img_div = sprintf(
-									'<div class="%2$s with-image-%3$s" style="background: url(%1$s) no-repeat; background-size: 100%% 100%%;"></div>',
-									$nav_img,
-									$nav_img_size,
-									$nav_img_side
+								break;
+							case 'megadropdown':
+								// if there a sub nav image set.
+								if ( isset( $item_meta['_caweb_menu_image'][0] ) && ! empty( $item_meta['_caweb_menu_image'][0] ) ) {
+									$nav_img      = $item_meta['_caweb_menu_image'][0];
+									$nav_img_side = isset( $item_meta['_caweb_menu_image_side'][0] ) ? $item_meta['_caweb_menu_image_side'][0] : 'left';
+									$nav_img_size = isset( $item_meta['_caweb_menu_image_size'][0] ) ? $item_meta['_caweb_menu_image_size'][0] : 'quarter';
+
+									$sub_img_class = implode(
+										' ',
+										array_filter(
+											array(
+												'quarter' === $nav_img_size ? 'w-75' : 'w-50',
+												'left' === $nav_img_side ? 'pull-right' : 'pull-left',
+											)
+										)
+									);
+
+									$sub_img = sprintf(
+										'<div class="%1$s with-image-%2$s" style="background: url(%3$s) no-repeat; background-size: 100%% 100%%;"></div>',
+										'half' === $nav_img_size ? 'w-50' : 'w-25',
+										$nav_img_side,
+										$nav_img
+									);
+
+								}
+
+								$nav_item .= sprintf(
+									'<div class="sub-nav"><div class="%1$s">%2$s</div>%3$s</div></li>',
+									$sub_img_class,
+									$this->create_megadropdown_subnav( $child_links, array_merge( $item->classes, array( $sub_img_class ) ) ),
+									$sub_img
 								);
+								break;
 
-							}
-
-							$nav_item .= sprintf(
-								'<div class="sub-nav"><div class="%1$s">%2$s</div>%3$s</div></li>',
-								$sub_img_class,
-								$this->createSubNavMenu( $child_links, $args ),
-								$sub_img_div
-							);
-						} else {
-							$nav_item .= sprintf(
-								'<div class="sub-nav"><div>%1$s</div></div></li>',
-								$this->createSubNavMenu( $child_links, $args )
-							);
+							default:
+								$nav_item .= sprintf(
+									'<div class="sub-nav"><div>%1$s</div></div></li>',
+									$this->create_dropdown_subnav( $child_links )
+								);
+								break;
 						}
 					} else {
 						$nav_item .= '</li>';
@@ -355,26 +364,166 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		}
 
 		/**
-		 * HTML for Sub Navigation Menu from the Top Level Nav Item (second-level-links)
+		 * HTML for Dropdown Sub Navigation Menu
 		 *
-		 * @param  mixed    $child_links Array of Sub Nav Items (second-level-links).
-		 * @param  stdClass $args An object containing wp_nav_menu() arguments.
+		 * @param  mixed $child_links Array of Sub Nav Items (second-level-links).
 		 *
 		 * @return string
 		 */
-		public function createSubNavMenu( $child_links, $args ) {
+		private function create_dropdown_subnav( $child_links ) {
 
 			/* second-level-nav variables */
-			$class   = 'second-level-nav';
-			$element = 'ul';
-
-			if ( 'flexmega' === $args->style ) {
-				$class  .= ' flex';
-				$element = 'div';
-			}
-
 			$sub_nav = '';
 
+			/* Iterate thru $child_links create Sub Level (second-level-links) */
+			foreach ( $child_links as $i => $item ) {
+				$item_meta = get_post_meta( $item->ID );
+				$unit_size = isset( $item_meta['_caweb_menu_unit_size'][0] ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
+				$unit_size = 'unit3' === $unit_size ? 'unit1' : 'unit2';
+
+				/* Get icon if present */
+				$icon = '';
+				if ( isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+					$icon = sprintf(
+						'<span class="ca-gov-icon-%1$s" aria-hidden="true"></span>',
+						$item_meta['_caweb_menu_icon'][0]
+					);
+				}
+
+				/* Get desc if present */
+				$desc = in_array( $unit_size, array( 'unit2', 'unit3' ), true ) && ! empty( $item->description ) ? sprintf( '<div class="link-description">%1$s</div>', $item->description ) : '';
+
+				// Add additional item classes.
+				$item->classes = array_merge( array( $unit_size, 'w-100', 'p-0' ), $item->classes );
+
+				/* Create Link */
+				$link = sprintf(
+					'<a href="%1$s" class="second-level-link d-block"%2$s tabindex="-1">%3$s%4$s%5$s</a>',
+					$item->url,
+					! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
+					$icon,
+					$item->title,
+					$desc
+				);
+
+				$sub_nav .= sprintf(
+					'<li class="%1$s" title="%2$s" %3$s>%4$s</li>',
+					implode( ' ', array_filter( $item->classes ) ),
+					$item->attr_title,
+					! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '',
+					$link
+				);
+			}
+
+			/* Return the Sub Nav */
+			return sprintf( '<ul class="second-level-nav">%1$s</ul>', $sub_nav );
+		}
+
+		/**
+		 * HTML for Mega Dropdown Sub Navigation Menu
+		 *
+		 * @param  mixed $child_links Array of Sub Nav Items (second-level-links).
+		 * @param  mixed $parent_classes Array of Parent link classes.
+		 *
+		 * @return string
+		 */
+		private function create_megadropdown_subnav( $child_links, $parent_classes = array() ) {
+
+			/* second-level-nav variables */
+			$sub_nav = '';
+
+			/* Iterate thru $child_links create Sub Level (second-level-links) */
+			foreach ( $child_links as $i => $item ) {
+				$item_meta = get_post_meta( $item->ID );
+				$unit_size = isset( $item_meta['_caweb_menu_unit_size'][0] ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
+
+				/* Get icon if present */
+				$icon = '';
+				if ( isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+					$icon = sprintf(
+						'<span class="ca-gov-icon-%1$s" aria-hidden="true"></span>',
+						$item_meta['_caweb_menu_icon'][0]
+					);
+				}
+
+				/* Get desc if present */
+				$desc = in_array( $unit_size, array( 'unit2', 'unit3' ), true ) && ! empty( $item->description ) ? sprintf( '<div class="link-description">%1$s</div>', $item->description ) : '';
+
+				// Correct li size depending on parent column selection.
+				if ( in_array( 'two-columns', $parent_classes, true ) ) {
+					$li_size = 'w-50';
+				} elseif ( in_array( 'three-columns', $parent_classes, true ) ) {
+					$li_size = 'w-33';
+				} else {
+					$li_size = 'w-25';
+				}
+
+				// Add additional item classes.
+				$item->classes = array_merge( array( $unit_size, $li_size ), $item->classes );
+
+				if ( 'unit3' !== $unit_size ) {
+					/* Create Link */
+					$link = sprintf(
+						'<a href="%1$s" class="second-level-link"%2$s tabindex="-1">%3$s%4$s%5$s</a>',
+						$item->url,
+						! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
+						$icon,
+						$item->title,
+						$desc
+					);
+
+					$sub_nav .= sprintf(
+						'<li class="%1$s" title="%2$s" %3$s>%4$s</li>',
+						implode( ' ', array_filter( $item->classes ) ),
+						$item->attr_title,
+						( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
+						$link
+					);
+
+				} else {
+					/* Get nav media if present */
+					$nav_media_image    = isset( $item_meta['_caweb_menu_media_image'][0] ) ? $item_meta['_caweb_menu_media_image'][0] : '';
+					$nav_media_alt_text = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
+
+					// Add additional item classes.
+					$item->classes = array_merge( array( 'h-auto', 'px-0' ), $item->classes );
+
+					$nav_media = sprintf(
+						'<div class="media-left"><a class="second-level-link" href="%1$s" tabindex="-1"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
+						$item->url,
+						$nav_media_image,
+						$nav_media_alt_text
+					);
+
+					$sub_nav .= sprintf(
+						'<li class="%1$s" title="%2$s" %3$s><div class="nav-media">
+							<div class="media border-0">%4$s<div class="media-body"><div class="title"><a class="second-level-link" href="%5$s"%6$s tabindex="-1">%7$s</a></div>
+							<div class="teaser">%8$s</div></div></div></div></li>',
+						implode( ' ', array_filter( $item->classes ) ),
+						$item->attr_title,
+						! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '',
+						$nav_media,
+						$item->url,
+						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+						$item->title,
+						$desc
+					);
+				}
+			}
+
+			/* Return the Sub Nav */
+			return sprintf( '<ul class="second-level-nav">%1$s</ul>', $sub_nav );
+		}
+
+		/**
+		 * HTML for Flex Mega Dropdown Sub Navigation Menu
+		 *
+		 * @param  mixed $child_links Array of Sub Nav Items (second-level-links).
+		 *
+		 * @return string
+		 */
+		private function create_flex_megadropdown_subnav( $child_links ) {
+			$sub_nav             = '';
 			$border_first_subnav = false;
 
 			/* Iterate thru $child_links create Sub Level (second-level-links) */
@@ -389,143 +538,96 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$icon = sprintf(
 						'<span class="ca-gov-icon-%1$s%2$s" aria-hidden="true"></span>',
 						$item_meta['_caweb_menu_icon'][0],
-						'unit2' === $unit_size && 'flexmega' === $args->style ? ' font-size-40' : ''
+						'unit2' === $unit_size ? ' font-size-40' : ''
 					);
 				}
 
 				/* Get desc if present */
-				$desc = ! empty( $item->description ) ? $item->description : '&nbsp;';
-				$desc = 'unit3' !== $unit_size ? sprintf( '<div class="link-description">%1$s</div>', $desc ) : $desc;
+				$desc = 'unit2' === $unit_size && ! empty( $item->description ) ? sprintf( '<div class="link-description">%1$s</div>', $item->description ) : '';
 
-				if ( 'flexmega' === $args->style ) {
-					/* Get nav media if present */
-					$nav_media_image     = isset( $item_meta['_caweb_menu_media_image'][0] ) ? $item_meta['_caweb_menu_media_image'][0] : '';
-					$nav_media_alt_text  = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
-					$nav_media_alignment = isset( $item_meta['_caweb_menu_media_image_alignment'][0] ) ? $item_meta['_caweb_menu_media_image_alignment'][0] : 'left';
+				/* Get nav media if present */
+				$nav_media_image     = isset( $item_meta['_caweb_menu_media_image'][0] ) ? $item_meta['_caweb_menu_media_image'][0] : '';
+				$nav_media_alt_text  = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
+				$nav_media_alignment = isset( $item_meta['_caweb_menu_media_image_alignment'][0] ) ? $item_meta['_caweb_menu_media_image_alignment'][0] : 'left';
 
-					$body = 'unit1' !== $unit_size ? sprintf( '<p class="h3 sub-nav-link">%1$s</p>', $item->title ) : $item->title;
+				$body = 'unit1' !== $unit_size ? sprintf( '<p class="h3 sub-nav-link">%1$s</p>', $item->title ) : $item->title;
 
-					$body .= $desc;
+				$body .= $desc;
 
-					// Modify variables for unit3.
-					if ( 'unit3' === $unit_size ) {
-						$media_class = 'media-object width-80 height-80';
+				// Modify variables for unit3.
+				if ( 'unit3' === $unit_size ) {
+					$media_class = 'media-object width-80 height-80';
 
-						$media_class = 'image-icon rounded-50x m-b-md';
-						$media_wrap  = '';
+					$media_class = 'image-icon rounded-50x m-b-md';
+					$media_wrap  = '';
 
-						// if image is left aligned.
-						if ( 'left' === $nav_media_alignment ) {
-							if ( ! empty( $item->description ) ) {
-								$desc = sprintf( '<div class="teaser link-description text-left">%1$s</div>', $item->description );
-							}
-
-							$media_class = 'media-object width-80 height-80';
-							$media_wrap  = '<div class="media-left">';
-
-							$body = sprintf(
-								'<div class="media-body"><div class="title text-left">%1$s</div>%2$s</div>',
-								$item->title,
-								$desc
-							);
+					// if image is left aligned.
+					if ( 'left' === $nav_media_alignment ) {
+						if ( ! empty( $item->description ) ) {
+							$desc = sprintf( '<div class="teaser link-description text-left">%1$s</div>', $item->description );
 						}
 
-						$media = sprintf(
-							'%1$s<img class="%2$s" src="%3$s" alt="%4$s">%5$s',
-							$media_wrap,
-							$media_class,
-							$nav_media_image,
-							$nav_media_alt_text,
-							! empty( $media_wrap ) ? '</div>' : ''
-						);
-					} else {
-						$media = $icon;
-					}
+						$media_class = 'media-object width-80 height-80';
+						$media_wrap  = '<div class="media-left">';
 
-					/* Create Link */
-					$link = sprintf(
-						'<a href="%1$s" class="second-level-link"%2$s tabindex="-1">%3$s%4$s</a>',
-						$item->url,
-						( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
-						$media,
-						$body
-					);
-
-					$border = isset( $item_meta['_caweb_menu_flexmega_border'][0] ) ? $item_meta['_caweb_menu_flexmega_border'][0] : '';
-
-					// if first row has a border it will be added at the end since a new row isnt required.
-					if ( ! $i && ! empty( $border ) ) {
-						$border_first_subnav = true;
-					}
-
-					if ( $new_row ) {
-
-						$link = sprintf(
-							'</div><%1$s class="%2$s%3$s">%4$s',
-							$element,
-							$class,
-							! empty( $border ) ? ' with-border' : '',
-							$link
-						);
-					}
-					$sub_nav .= $link;
-				} else {
-					if ( 'unit3' !== $unit_size ) {
-						/* Create Link */
-						$link = sprintf(
-							'<a href="%1$s" class="second-level-link"%2$s tabindex="-1">%3$s%4$s%5$s</a>',
-							$item->url,
-							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
-							$icon,
-							$item->title,
-							'unit2' === $unit_size ? $desc : ''
-						);
-
-						$sub_nav .= sprintf(
-							'<li %1$s title="%2$s" %3$s>%4$s</li>',
-							sprintf( ' class="%1$s %2$s" ', $unit_size, implode( ' ', $item->classes ) ),
-							$item->attr_title,
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$link
-						);
-
-					} else {
-						/* Get nav media if present */
-						$nav_media_image    = isset( $item_meta['_caweb_menu_media_image'][0] ) ? $item_meta['_caweb_menu_media_image'][0] : '';
-						$nav_media_alt_text = isset( $item_meta['_caweb_nav_media_image_alt_text'][0] ) ? $item_meta['_caweb_nav_media_image_alt_text'][0] : '';
-
-						$nav_media = 'megadropdown' === $args->style ?
-							sprintf(
-								'<div class="media-left"><a class="second-level-link" href="%1$s" tabindex="-1"><img style="height: 77px; max-width: 77px;" src="%2$s" alt="%3$s"/></a></div>',
-								$item->url,
-								$nav_media_image,
-								$nav_media_alt_text
-							) : '';
-
-						$sub_nav .= sprintf(
-							'<li %1$s title="%2$s" %3$s><div class="nav-media">
-								<div class="media">%4$s<div class="media-body"><div class="title"><a class="second-level-link" href="%5$s"%6$s tabindex="-1">%7$s</a></div>
-								<div class="teaser">%8$s</div></div></div></div></li>',
-							sprintf( ' class="%1$s %2$s" ', $unit_size, implode( ' ', $item->classes ) ),
-							$item->attr_title,
-							( ! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '' ),
-							$nav_media,
-							$item->url,
-							( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+						$body = sprintf(
+							'<div class="media-body"><div class="title text-left">%1$s</div>%2$s</div>',
 							$item->title,
 							$desc
 						);
 					}
+
+					$media = sprintf(
+						'%1$s<img class="%2$s" src="%3$s" alt="%4$s">%5$s',
+						$media_wrap,
+						$media_class,
+						$nav_media_image,
+						$nav_media_alt_text,
+						! empty( $media_wrap ) ? '</div>' : ''
+					);
+				} else {
+					$media = $icon;
 				}
+
+				/* Create Link */
+				$link = sprintf(
+					'<a href="%1$s" class="second-level-link"%2$s tabindex="-1">%3$s%4$s</a>',
+					$item->url,
+					( ! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '' ),
+					$media,
+					$body
+				);
+
+				$border = isset( $item_meta['_caweb_menu_flexmega_border'][0] ) ? $item_meta['_caweb_menu_flexmega_border'][0] : '';
+
+				// if first row has a border it will be added at the end since a new row isnt required.
+				if ( ! $i && ! empty( $border ) ) {
+					$border_first_subnav = true;
+				}
+
+				if ( $new_row ) {
+
+					$link = sprintf(
+						'</div><div class="second-level-nav flex%1$s">%2$s',
+						! empty( $border ) ? ' with-border' : '',
+						$link
+					);
+				}
+
+				$sub_nav .= $link;
 			}
 
-			// if flex megamenu adjust class case first row had a border which doesn't require new row.
+			// if first row has a border which doesn't require new row.
 			if ( $border_first_subnav ) {
-				$class .= ' with-border';
+				$border_class = ' with-border';
 			}
 
 			/* Close .second-level-nav */
-			$output = sprintf( '<%1$s class="%2$s">%3$s</%1$s>', $element, $class, $sub_nav );
+			$output = sprintf(
+				'<div class="second-level-nav flex%1$s">%2$s</div>',
+				$border_class,
+				$sub_nav
+			);
 
 			/* Return the Sub Nav */
 			return $output;
@@ -538,7 +640,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 *
 		 * @return string
 		 */
-		public function createFooterMenu( $args ) {
+		public function create_footer_menu( $args ) {
 			$nav_links = '';
 
 			/* loop thru and create a link (parent nav item only) */
@@ -558,7 +660,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				}
 			}
 
-			$social_links = $this->createFooterSocialMenu( $args );
+			$social_links = $this->create_footer_social_menu( $args );
 
 			$class = ! empty( $social_links ) ? 'three-quarters' : 'full-width';
 			$style = '';
@@ -575,7 +677,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 *
 		 * @return string
 		 */
-		public function createFooterSocialMenu( $args ) {
+		public function create_footer_social_menu( $args ) {
 			$social_share = caweb_get_site_options( 'social' );
 			$social_links = '';
 
