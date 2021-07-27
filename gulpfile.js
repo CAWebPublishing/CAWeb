@@ -21,6 +21,8 @@ const config = require( './wpgulp.config.js' );
  * Load gulp plugins and passing them semantic names.
  */
 const gulp = require( 'gulp' ); // Gulp of-course.
+
+const watch = require('gulp-watch');
 var argv = require('yargs').argv;
 
 // CSS related plugins.
@@ -42,6 +44,13 @@ const fs = require('fs'); // File System
 
 const del = require('del'); // Delete plugin
 
+
+gulp.task('monitor', function(){
+
+	watch(['assets/**/*'], function(cb) {
+		buildAllAssets();
+	});
+});
 
 /*
 	CAWeb Admin Styles
@@ -219,6 +228,12 @@ gulp.task('beautify', async function() {
 	CAWeb Build All CSS/JS and Beautify
 */
 gulp.task('build', async function(){
+	buildAllAssets();
+} );
+
+
+// Gulp Task Functions
+async function buildAllAssets(){
 	var version = undefined !== argv.ver ? [ argv.ver ] : config.availableVers;
 
 	del( ['js/*.js', 'css/*.css'] );
@@ -308,10 +323,8 @@ gulp.task('build', async function(){
 
 	}
 
-});
+}
 
-
-// Gulp Task Functions
 async function buildAdminStyles( min = false){
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
