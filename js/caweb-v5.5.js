@@ -19371,7 +19371,7 @@ jQuery(document).ready(function() {
 			$(element).on('click keydown', function(e){
 				// Shows or hides content in accordion when Enter or Space key is pressed
 				if (e.type === 'keydown') {
-					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
+					var toggleKeys = [13, 32, 38, 40]; // key codes for enter and space, respectively
 					var toggleKeyPressed = toggleKeys.includes(e.which);
 
 					if (toggleKeyPressed) {
