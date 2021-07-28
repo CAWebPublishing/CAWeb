@@ -8,6 +8,7 @@ CAWeb v1.5.6
 - Removed some custom Google Translate CSS and added class names instead
 - Fixed issue with Geo Locator not functioning
 - Fixed various issues with navigation and removed custom css
+- Fixed color contrast ratio for Google Search URL Breadcrumb
 
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
