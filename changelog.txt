@@ -9,6 +9,8 @@ CAWeb v1.5.6
 - Fixed issue with Geo Locator not functioning
 - Fixed various issues with navigation and removed custom css
 - Fixed color contrast ratio for Google Search URL Breadcrumb
+- Removed bootstrap.css and combined with admin.css
+- Removed bootstrap.js and combined with admin.js
 
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts

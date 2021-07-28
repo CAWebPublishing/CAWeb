@@ -7,11 +7,6 @@
 * Divi Fullwidth Menu Module Rows
 */
 
-#main-content {
-    background-color: #fff !important;
-    overflow: hidden;
-}
-
 /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
 body:not(.sticky_nav) #main-content.main-content {
 	width: 100%;
