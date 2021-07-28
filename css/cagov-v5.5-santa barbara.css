@@ -30210,6 +30210,11 @@ body:not(.sticky_nav) #main-content.main-content {
   color: #fee09c;
 }
 
+/* Google Search */
+.gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
+
 /* Override styles applied by Divi */
 /* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
