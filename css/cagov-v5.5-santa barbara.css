@@ -29769,6 +29769,19 @@ p {
   margin-bottom: 30px;
 }
 
+.body:not(.page-template-searchpage) #main-content .container:before {
+  background: transparent;
+}
+
+.body:not(.page-template-searchpage) .search-container {
+  top: 0 !important;
+}
+
+.body:not(.page-template-searchpage) .mobile-controls .toggle-search,
+.body:not(.page-template-searchpage) form#Search .close-search {
+  display: none !important;
+}
+
 /* Print Formatting */
 @media print {
   body {

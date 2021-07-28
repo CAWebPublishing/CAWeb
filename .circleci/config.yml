@@ -58,6 +58,7 @@ jobs:
             command: |
               declare -a files=( 
                 'divi/'
+                'page-templates/'
                 'inc/admin-bar.php'
                 'inc/admin-post.php'
                 'inc/branding.php'
