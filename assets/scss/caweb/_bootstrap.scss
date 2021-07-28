@@ -1,7 +1,0 @@
-/*
- Bootstrap Overrides, these are added only because the 
- WordPress load-styles.php loads before our CSS.
-*/
-select.form-control{
-    height: calc(1.5em + .75rem + 2px) !important;
-}

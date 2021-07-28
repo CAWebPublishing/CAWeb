@@ -23,3 +23,7 @@
 
 @import "bootstrap/utilities";
 
+/* Overrides height applied by WordPress load-styles */
+select.form-control{
+    height: calc(1.5em + .75rem + 2px) !important;
+}

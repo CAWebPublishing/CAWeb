@@ -63,13 +63,13 @@ function caweb_page_identifier_metabox_callback( $post ) {
 		$custom_title = get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? ' checked' : '';
 	}
 
-	wp_nonce_field( basename( __FILE__ ), 'ca_page_meta_item_identifier_nonce' ); 
-	
+	wp_nonce_field( basename( __FILE__ ), 'caweb_metabox_nonce' );
+
 	?>
-
-	<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"<?php print $custom_title; ?>>
-	Display Title on Page
-
+	<label for="ca_custom_post_title_display">
+		<input type="checkbox" id="ca_custom_post_title_display" name="ca_custom_post_title_display"<?php print esc_attr( $custom_title ); ?>>
+		Display Title on Page
+	</label>
 	<?php
 }
 
@@ -86,8 +86,8 @@ function caweb_page_identifier_metabox_callback( $post ) {
  */
 function caweb_save_post( $post_id, $post ) {
 	/* Verify the nonce before proceeding. */
-	if ( ! isset( $_POST['ca_page_meta_item_identifier_nonce'] ) ||
-	! wp_verify_nonce( $_POST['ca_page_meta_item_identifier_nonce'], basename( __FILE__ ) ) ) {
+	if ( ! isset( $_POST['caweb_metabox_nonce'] ) ||
+	! wp_verify_nonce( sanitize_key( $_POST['caweb_metabox_nonce'] ), basename( __FILE__ ) ) ) {
 		return $post_id;
 	}
 
@@ -96,8 +96,9 @@ function caweb_save_post( $post_id, $post ) {
 		return $post_id;
 	}
 
-	$option_title_display = ( isset( $_POST['ca_custom_post_title_display'] ) ? $_POST['ca_custom_post_title_display'] : '' );
+	$option_title_display = isset( $_POST['ca_custom_post_title_display'] ) ? sanitize_text_field( wp_unslash( $_POST['ca_custom_post_title_display'] ) ) : '';
 	update_post_meta( $post->ID, 'ca_custom_post_title_display', $option_title_display );
 
 }
+
 ?>
