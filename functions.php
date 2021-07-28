@@ -527,7 +527,7 @@ function caweb_admin_init() {
 function caweb_admin_enqueue_scripts( $hook ) {
 	$pages = array( 'toplevel_page_caweb_options', 'caweb-options_page_caweb_multi_ga', 'caweb-options_page_caweb_api', 'nav-menus.php' );
 
-	$admin_css     = caweb_get_min_file( '/css/admin.css' );
+	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
 	$version     = caweb_template_version();
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
@@ -536,7 +536,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$editor_css = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
 
 	if ( in_array( $hook, $pages, true ) ) {
-		$admin_js     = caweb_get_min_file( '/js/admin.js', 'js' );
+		$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
 
 		/* Enqueue Scripts */
 		wp_enqueue_script( 'jquery' );
