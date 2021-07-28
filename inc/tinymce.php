@@ -26,18 +26,16 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 		$styles[ str_replace( ' ', '', strtolower( $style->name ) ) ] = $style;
 	}
 
-	$admin_css = caweb_get_min_file( '/css/admin.css' );
 	$color     = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$version     = caweb_template_version();
+	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
+
 	$css       = array(
 		includes_url( '/css/dashicons.min.css' ),
 		includes_url( '/js/tinymce/skins/wordpress/wp-content.css' ),
+		caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" ),
+		caweb_get_min_file( '/css/admin.css' ),
 	);
-
-	$version     = caweb_template_version();
-	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
-	$css[]       = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
-
-	$css[] = $admin_css;
 
 	$defaults_settings = array(
 		'media_buttons' => false,

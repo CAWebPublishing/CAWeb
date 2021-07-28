@@ -38,18 +38,13 @@ module.exports = {
 		'assets/scss/admin.scss',
 		'assets/css/cagov/cagov.font-only.css',
 	],
-	adminBootStrapCSS: [ // WP Backend Admin Bootstrap CSS
-		'assets/scss/bootstrap.scss'
-	],
 	adminJS: [ // WP Backend Admin JS
 		'assets/js/wp/browse-library.js',
 		'assets/js/caweb/options/*.js', 
 		'assets/js/caweb/nav-menu.js',
 		'assets/js/caweb/admin.js',
-	], 
-	adminBootStrapJS: [ // WP Backend Admin Bootstrap JS
 		'assets/js/bootstrap/bootstrap.bundle.js',
-	],
+	], 
 	frontendJS: [ // Common JS 
 		'assets/js/caweb/google.js',
 		'assets/js/caweb/AutoTracker.js',

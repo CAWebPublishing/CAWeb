@@ -1,16 +1,7 @@
 /* Location Bar Style */
-.location-settings #locationZipCode::-webkit-inner-spin-button,
-.location-settings #locationZipCode::-webkit-outer-spin-button{
-	-webkit-appearance: none; 
-	margin: 0; 
-}
 .location-settings button.close {
-	position: absolute;
-	right: 15px;
-	top: 10px;
-	opacity: 0.8;
 	font-size: 2.5em;
 }
-.location-settings button.close:focus {
+.location-settings button.close:hover {
 	color: #FDB81E !important;
 }

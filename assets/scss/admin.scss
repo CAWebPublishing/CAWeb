@@ -1,10 +1,19 @@
+/*----------------
+ # Bootstrap
+----------------*/
+body:not(.nav-menus-php){
+    @import "bootstrap";
+}
+
 /*---------------
  # CAWeb
 ---------------*/
-@import "caweb/options";
-@import "caweb/icons";
-@import "caweb/navigation";
-@import "caweb/login";
-@import "caweb/customizer";
+@import "caweb/admin/options";
+@import "caweb/admin/icon-menu";
+@import "caweb/admin/navigation";
 
-@import "caweb/bootstrap";
+/*---------------
+ # WordPress
+---------------*/
+@import "wp/login";
+@import "wp/customizer";

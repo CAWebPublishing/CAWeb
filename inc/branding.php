@@ -41,20 +41,15 @@ function caweb_branding_admin_head() {
  */
 function caweb_login_enqueue_scripts() {
 	$admin_css     = caweb_get_min_file( '/css/admin.css' );
-	$bootstrap_css = caweb_get_min_file( '/css/bootstrap.css' );
-
-	wp_enqueue_style( 'caweb-bootstrap-styles', $bootstrap_css, array(), CAWEB_VERSION );
 
 	/* CAWeb Admin CSS */
 	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 
 	$admin_js     = caweb_get_min_file( '/js/admin.js', 'js' );
-	$bootstrap_js = caweb_get_min_file( '/js/bootstrap.js', 'js' );
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );
 
-	wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
 	wp_enqueue_script( 'caweb-admin-scripts' );
