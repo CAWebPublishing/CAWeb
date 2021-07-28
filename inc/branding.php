@@ -40,12 +40,12 @@ function caweb_branding_admin_head() {
  * @return void
  */
 function caweb_login_enqueue_scripts() {
-	$admin_css     = caweb_get_min_file( '/css/admin.css' );
+	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
 	/* CAWeb Admin CSS */
 	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 
-	$admin_js     = caweb_get_min_file( '/js/admin.js', 'js' );
+	$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );

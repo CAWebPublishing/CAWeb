@@ -1,7 +1,8 @@
 /*----------------
- # Bootstrap
+ # Add Bootstrap only on CAWeb Options Page and wp-login.php
 ----------------*/
-body:not(.nav-menus-php){
+body.toplevel_page_caweb_options,
+body.login{
     @import "bootstrap";
 }
 

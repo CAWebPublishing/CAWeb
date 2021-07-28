@@ -44,7 +44,7 @@ function caweb_customize_preview_init() {
  * @return void
  */
 function caweb_customize_controls_enqueue_scripts() {
-	$admin_css     = caweb_get_min_file( '/css/admin.css' );
+	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
 	wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
