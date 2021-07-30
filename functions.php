@@ -242,11 +242,11 @@ function caweb_init() {
 	global $pagenow;
 
 	/**
-	 * Enqueues the default ThickBox js and css. (if not on the login page)
+	 * Enqueues the default ThickBox js and css. (if not on the login page or customizer page)
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/add_thickbox/
 	 */
-	if ( 'wp-login.php' !== $pagenow ) {
+	if ( ! in_array( $pagenow, array( 'wp-login.php', 'customize.php' ), true ) ) {
 		add_thickbox();
 	}
 
@@ -545,7 +545,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 
 		wp_enqueue_script( 'custom-header' );
 
-		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
+		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'thickbox' ), CAWEB_VERSION, true );
 
 		$schemes = array();
 		foreach ( caweb_template_versions() as $v => $label ) {
@@ -572,8 +572,8 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
 
 		/* Enqueue Styles */
-		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
+		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 	} elseif ( in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ) {
 		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 	}

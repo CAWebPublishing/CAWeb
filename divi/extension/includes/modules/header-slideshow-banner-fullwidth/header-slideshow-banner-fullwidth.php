@@ -189,7 +189,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 							}
 
 								// max-height.
-							if ( 'auto' !== $this->props['max_height'] ) {
+							if ( 'auto' !== $this->props['max_height'] && 'none' !== $this->props['max_height'] ) {
 								$current_height = preg_replace( '/(\d+)(\w+)/', '$1', $this->props['max_height'] );
 								$height         = str_replace( $current_height, $current_height + $admin_bar_height, $this->props['max_height'] );
 								?>
