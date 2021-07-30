@@ -214,7 +214,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $is_vertical ) {
 			$this->add_classname( 'text-center' );
-			$output = strip_tags( $output, array( 'figure', 'img', 'hr', 'h3', 'a', 'span' ) );
+			$output = strip_tags( $output, '<figure><img><hr><h3><a><span>' );
 		}
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
