@@ -11,6 +11,8 @@ CAWeb v1.5.6
 - Fixed color contrast ratio for Google Search URL Breadcrumb
 - Removed bootstrap.css and combined with admin.css
 - Removed bootstrap.js and combined with admin.js
+- Removed bootstrap from customizer pages
+- Enforced WPCS on login and password reset
 
 CAWeb v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
