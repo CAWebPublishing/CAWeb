@@ -1,7 +1,3 @@
-body{
-	background-color: #fff;
-}
-
 h1, h2, h3, h4, h5, h6{
 	color: inherit;
 	margin-top: 0;
@@ -24,23 +20,10 @@ h1, h2, h3, h4, h5, h6{
 	display: block;
 }
 
-body.page-template-searchpage.logged-in .gssb_c,
-body.v4.logged-in .gssb_c{
+body.page-template-searchpage.logged-in .gssb_c{
 	margin-top: 35px;
 }
 
 header {
     z-index: 15 !important;
 }
-
-ol.breadcrumb{
-    text-transform: capitalize;
-    margin-bottom: 0;
-}
-/*
-ol:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]):not([class*="socialsharer-container"]),
-ul:not([class*="menu"]):not([class*="nav"]):not([class*="footer-links"]):not([class*="socialsharer-container"]){
-	padding: 0 0 0 50px;
-	list-style-position: outside !important;
-}
-*/

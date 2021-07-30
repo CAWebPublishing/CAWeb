@@ -9,7 +9,6 @@
  */
 
 /* Actions */
-add_action( 'login_init', 'caweb_login_form_init' );
 add_action( 'lostpassword_form', 'caweb_lostpassword_form' );
 add_action( 'login_form_lostpassword', 'caweb_login_form_lostpassword' );
 add_action( 'login_form_rp', 'caweb_login_form_rp' );
@@ -18,29 +17,23 @@ add_action( 'validate_password_reset', 'caweb_validate_password_reset', 10, 2 );
 /* Filters */
 add_filter( 'lostpassword_url', 'caweb_lostpassword_url', 10, 2 );
 add_filter( 'lostpassword_redirect', 'caweb_lostpassword_redirect' );
-add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 11, 3 );
+add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 10, 3 );
 add_filter( 'retrieve_password_message', 'caweb_retrieve_password_message', 10, 4 );
 add_filter( 'wp_login_errors', 'caweb_wp_login_errors', 10, 2 );
 
-/**
- * CAWeb Login Form
- * Adds a nonce to the login form $_REQUEST array.
- *
- * @return void
- */
-function caweb_login_form_init() {
-	$_REQUEST['caweb_disclaimer_nonce'] = wp_create_nonce( 'caweb_disclaimer' );
-}
 
 /**
- * Add Site ID to lost password form
+ * Add Site ID and nonce to lost password form
  * Fires inside the lostpassword form tags, before the hidden fields.
  *
  * @link https://developer.wordpress.org/reference/hooks/lostpassword_form/
  * @return void
  */
 function caweb_lostpassword_form() {
-	printf( '<input type="hidden" name="siteid" value="%1$d" />', get_current_blog_id() );
+	wp_nonce_field( 'caweb_lost_password', 'caweb_lost_password_nonce' );
+	?>
+	<input type="hidden" name="siteid" value="<?php print esc_attr( get_current_blog_id() ); ?>" />
+	<?php
 }
 
 /**
@@ -51,30 +44,28 @@ function caweb_lostpassword_form() {
  * @return void
  */
 function caweb_login_form_lostpassword() {
-	/* Check if have submitted*/
-	$http_post = ( 'POST' === $_SERVER['REQUEST_METHOD'] );
-
-	if ( $http_post ) {
-		$errors = retrieve_password();
-		if ( ! is_wp_error( $errors ) ) {
-			$redirect_to = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : 'wp-login.php?checkemail=confirm';
-			/* wp_safe_redirect only works with local paths*/
-			wp_redirect( $redirect_to );
-			exit();
+	if ( isset( $_POST['caweb_lost_password_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['caweb_lost_password_nonce'] ), 'caweb_lost_password' ) ) {
+		/* Check if have submitted*/
+		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+			$errors = retrieve_password();
+			if ( ! is_wp_error( $errors ) ) {
+				$redirect_to = isset( $_REQUEST['redirect_to'] ) && ! empty( $_REQUEST['redirect_to'] ) ? esc_url_raw( wp_unslash( $_REQUEST['redirect_to'] ) ) : 'wp-login.php?checkemail=confirm';
+				wp_safe_redirect( $redirect_to );
+				exit();
+			}
 		}
 	}
+
 }
 
 /**
- * Hide the Confirm Weak Password on Reset Password
+ * Add filter to network site url on Login Form Reset Password
  * Fires before a specified login form action.
  *
  * @see https://developer.wordpress.org/reference/hooks/login_form_action/
  * @return void
  */
 function caweb_login_form_rp() {
-	print '<style>.pw-weak{display:none !important;}</style>';
-
 	add_filter( 'network_site_url', 'caweb_network_site_url', 10, 3 );
 }
 
@@ -84,32 +75,40 @@ function caweb_login_form_rp() {
  *
  * @link https://developer.wordpress.org/reference/hooks/validate_password_reset/
  *
- * @param  mixed $errors
- * @param  mixed $user
+ * @param  WP_Error $errors WP Error object.
+ * @param  WP_User  $user WP_User object if the login and reset key match. WP_Error object otherwise.
  *
  * @return void
  */
 function caweb_validate_password_reset( $errors, $user ) {
-	if ( isset( $_GET['action'] ) && 'rp' === $_GET['action'] ) {
-		if ( ! isset( $_POST['pass1'] ) ) {
+	$nonce    = wp_create_nonce( 'caweb_password_reset_validation' );
+	$verified = wp_verify_nonce( sanitize_key( $nonce ), 'caweb_password_reset_validation' );
+
+	$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+	$pass1  = isset( $_POST['pass1'] ) ? sanitize_text_field( wp_unslash( $_POST['pass1'] ) ) : '';
+	$uri    = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+
+	if ( 'rp' === $action ) {
+		if ( empty( $pass1 ) ) {
 			return;
 		}
 
-		$pass = $_POST['pass1'];
-		$exp  = '/^(?=.*\d)((?=.*[a-z])|(?=.*[A-Z])).{12,32}$/';
+		$exp = '/^(?=.*\d)((?=.*[a-z])|(?=.*[A-Z])).{12,32}$/';
 
-		if ( strlen( $pass ) < 12 || ! preg_match( $exp, $pass ) ) {
+		if ( strlen( $pass1 ) < 12 || ! preg_match( $exp, $pass1 ) ) {
 			$errors->add( 'error', 'Password must be alphanumeric and contain minimum 12 characters.', '' );
 		}
-	} elseif ( isset( $_GET['action'] ) && 'resetpass' === $_GET['action'] ) {
-		if ( ( ! $errors->get_error_code() ) && isset( $_POST['pass1'] ) && ! empty( $_POST['pass1'] ) ) {
-			reset_password( $user, $_POST['pass1'] );
+	} elseif ( 'resetpass' === $action ) {
+		if ( ( ! $errors->get_error_code() ) && isset( $pass1 ) && ! empty( $pass1 ) ) {
+			reset_password( $user, $pass1 );
 
-			list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
+			list( $rp_path ) = explode( '?', $uri );
+
+			$errors->add( 'updated', '<p class="caweb-resetpass">You have successfully reset your password.</p>' );
 
 			setcookie( 'caweb-resetpass-' . md5( site_url() ), ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
-			wp_redirect( site_url( '/wp-login.php?caweb=resetpass' ) );
-			exit;
+			wp_safe_redirect( site_url( '/wp-login.php?caweb=resetpass' ) );
+			exit();
 		}
 	}
 }
@@ -154,11 +153,19 @@ function caweb_lostpassword_redirect( $lostpassword_redirect ) {
  * @return string
  */
 function caweb_retrieve_password_title( $title, $user_login, $user_data ) {
-	$pattern  = '/\[.*\]/';
-	$siteid   = isset( $_POST['siteid'] ) ? $_POST['siteid'] : 1;
+	if ( ! isset( $_POST['caweb_lost_password_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['caweb_lost_password_nonce'] ), 'caweb_lost_password' ) ) {
+		return $title;
+	}
+
+	$site_id = isset( $_POST['siteid'] ) ? sanitize_text_field( wp_unslash( $_POST['siteid'] ) ) : 1;
+
+	switch_to_blog( $site_id );
+
 	$blogname = wp_specialchars_decode( get_bloginfo(), ENT_QUOTES );
 
-	return preg_replace( $pattern, sprintf( '[%1$s]', $blogname ), $title );
+	restore_current_blog();
+
+	return "$blogname Password Reset";
 }
 
 /**
@@ -175,10 +182,21 @@ function caweb_retrieve_password_title( $title, $user_login, $user_data ) {
  * @return string
  */
 function caweb_retrieve_password_message( $message, $key, $user_login, $user_data ) {
-	$pattern      = array( '/Site Name: .*/', '/<.*(\/wp-login.php)/' );
-	$siteid       = isset( $_POST['siteid'] ) ? $_POST['siteid'] : 1;
-	$blogname     = wp_specialchars_decode( get_bloginfo(), ENT_QUOTES );
-	$blogurl      = get_site_url( $siteid );
+
+	if ( ! isset( $_POST['caweb_lost_password_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['caweb_lost_password_nonce'] ), 'caweb_lost_password' ) ) {
+		return $message;
+	}
+
+	$site_id = isset( $_POST['siteid'] ) ? sanitize_text_field( wp_unslash( $_POST['siteid'] ) ) : 1;
+
+	switch_to_blog( $site_id );
+
+	$blogname = wp_specialchars_decode( get_bloginfo(), ENT_QUOTES );
+	$blogurl  = get_site_url();
+
+	restore_current_blog();
+
+	$pattern      = array( '/Site Name: .*/', '/.*(\/wp-login.php)/' );
 	$replacements = array( sprintf( 'Site Name: %1$s', $blogname ), sprintf( '%1$s$1', $blogurl ) );
 
 	$message = preg_replace( $pattern, $replacements, $message );
@@ -197,13 +215,10 @@ function caweb_retrieve_password_message( $message, $key, $user_login, $user_dat
  * @return string
  */
 function caweb_wp_login_errors( $errors, $redirect_to ) {
-	global $interim_login;
+	$nonce    = wp_create_nonce( 'caweb_password_reset' );
+	$verified = wp_verify_nonce( sanitize_key( $nonce ), 'caweb_password_reset' );
 
-	if ( headers_sent() ) {
-		print '<style>.caweb-resetpass{border-left:4px solid #00a0d2;display:inline-block;padding:12px !important;margin: -12px -16px !important; }</style>';
-	}
-
-	if ( ! $interim_login && isset( $_GET['caweb'] ) && 'resetpass' === $_GET['caweb'] ) {
+	if ( isset( $_GET['caweb'] ) && 'resetpass' === $_GET['caweb'] ) {
 		$errors->add( 'updated', '<p class="caweb-resetpass">You have successfully reset your password.</p>' );
 	}
 

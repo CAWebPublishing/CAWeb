@@ -20,6 +20,9 @@ add_action( 'wp_ajax_create_doc_sitemap', 'caweb_doc_create_xml' );
  * @return void
  */
 function caweb_fav_icon_checker() {
+	$nonce    = wp_create_nonce( 'caweb_fav_icon_check' );
+	$verified = wp_verify_nonce( sanitize_key( $nonce ), 'caweb_fav_icon_check' );
+
 	$url = isset( $_POST['icon_url'] ) ? sanitize_text_field( wp_unslash( $_POST['icon_url'] ) ) : '';
 
 	$arr_context_options = array(
@@ -52,9 +55,12 @@ function caweb_fav_icon_checker() {
  * @return void
  */
 function caweb_icon_menu_func() {
-	$input  = isset( $_POST['name'] ) ? $_POST['name'] : '';
-	$sel    = isset( $_POST['select'] ) ? $_POST['select'] : '';
-	$header = isset( $_POST['header'] ) ? $_POST['header'] : false;
+	$nonce    = wp_create_nonce( 'caweb_icon_menu' );
+	$verified = wp_verify_nonce( sanitize_key( $nonce ), 'caweb_icon_menu' );
+
+	$input  = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+	$sel    = isset( $_POST['select'] ) ? sanitize_text_field( wp_unslash( $_POST['select'] ) ) : '';
+	$header = isset( $_POST['header'] ) ? sanitize_text_field( wp_unslash( $_POST['header'] ) ) : false;
 
 	print wp_kses(
 		caweb_icon_menu(
@@ -79,32 +85,42 @@ function caweb_doc_create_xml() {
 	$site_id   = get_current_blog_id();
 	$directory = wp_upload_dir();
 
-	if ( 1 === $site_id ) {
-		$wp_posts_table = 'wp_posts';
-	} else {
-		$wp_posts_table = 'wp_' . $site_id . '_posts';
-	}
+	$wp_posts_table = 1 === $site_id ? 'wp_posts' : "wp_{$site_id}_posts";
 
-	global $wpdb;
+	$attachments = get_posts(
+		array(
+			'post_type'      => 'attachment',
+			'numberposts'    => '-1',
+			'post_mime_type' => array(
+				'application/pdf',
+				'application/msword',
+				'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+				'application/vnd.ms-excel',
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+			),
+		)
+	);
 
-	$count = 0;
+	$results = array_map(
+		function( $a ) {
+			return $a->guid;
+		},
+		$attachments
+	);
 
-	$results = $wpdb->get_results( "SELECT `guid` FROM {$wp_posts_table} WHERE `post_mime_type` IN ('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')", OBJECT );
-
-	$dom               = new DOMDocument( '1.0', 'UTF-8' );
-	$dom->formatOutput = true;
+	$dom = new DOMDocument( '1.0', 'UTF-8' );
 
 	$urlset = $dom->createElement( 'urlset' );
 	$urlset->setAttribute( 'xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9' );
 	$urlset->setAttribute( 'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance' );
 	$urlset->setAttribute( 'xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd' );
 
-	foreach ( $results as $result ) {
+	foreach ( $results as $guid ) {
 		$url = $dom->createElement( 'url' );
 		$urlset->appendChild( $url );
-		$url->appendChild( $dom->createElement( 'loc', $result->guid ) );
-		$count++;
+		$url->appendChild( $dom->createElement( 'loc', $guid ) );
 	}
+
 	$dom->appendChild( $urlset );
 
 	$output = $dom->saveXML();
@@ -115,6 +131,14 @@ function caweb_doc_create_xml() {
 
 	$href = $directory['baseurl'] . '/pdf-word-sitemap.xml';
 
-	print "Sitemap created with <strong>$count</strong> entries. File location: <a href=\"$href\" target=\"_blank\">SiteMap</a>";
+	print wp_kses(
+		sprintf(
+			'Sitemap created with <strong>%1$d</strong> entries. File location: <a href="%2$s" target="_blank">SiteMap</a>',
+			count( $results ),
+			esc_url( $href )
+		),
+		caweb_allowed_html()
+	);
+
 	wp_die(); // this is required to terminate immediately and return a proper response.
 }

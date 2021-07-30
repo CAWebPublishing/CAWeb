@@ -1,0 +1,47 @@
+// CAWeb Icon Menu Styles
+.caweb-icon-menu-group{
+    .caweb-icon-menu{
+        height: 306px;
+        overflow: auto;    
+    }
+
+    li{
+        float: left;
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    li,
+    span.reset-icon{
+        cursor: pointer;
+    }
+
+    li:hover{
+        background-color: #007bff;
+    }
+    
+    li.ca-gov-icon-caweb{
+        padding-right: 22px;
+    }
+    
+    li.ca-gov-icon-social_googleplus{
+        padding-right: 12px;
+    }
+}
+
+/* Navigation and Customizer Page Icon Menu Styles */
+body.nav-menus-php .caweb-icon-menu-group,
+body.wp-customizer .caweb-icon-menu-group {
+    
+    li {
+        padding: 0.75rem 1.25rem;
+        border: 1px solid rgba(0,0,0,.125);
+        line-height: 1.4em;
+    }
+
+    li.active{
+        color: #fff;
+        background-color: #046B99;
+        border-color: #046B99;
+    }
+}

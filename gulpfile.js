@@ -101,27 +101,6 @@ gulp.task('frontend-css', async function (_) {
 });
 
 /*
-	CAWeb BootStrap Admin Styles
-*/
-gulp.task('bootstrap-css', async function() {
-
-	del( ['css/bootstrap*.css'] );
-
-	if ( argv.prod ) {
-		buildBootStrapStyles(true);
-	}
-
-	if ( argv.dev ) {
-		buildBootStrapStyles(false);
-	}
-
-	if( buildAll(argv) ){
-		buildBootStrapStyles(true);
-		buildBootStrapStyles(false);
-	}
-});
-
-/*
 	CAWeb Admin JavaScript
 */
 gulp.task('admin-js', async function() {
@@ -165,27 +144,6 @@ gulp.task('caweb-js', async function() {
 		}
 	});
 	
-});
-
-/*
-	CAWeb BootStrap Admin Javascript
-*/
-gulp.task('bootstrap-js', async function() {
-
-	del( ['js/bootstrap*.js'] );
-
-	if ( argv.prod ) {
-		buildBootStrapJS(true);
-	}
-
-	if ( argv.dev ) {
-		buildBootStrapJS(false);
-	}
-
-	if( buildAll(argv) ){
-		buildBootStrapJS(true);
-		buildBootStrapJS(false);
-	}
 });
 
 /*
@@ -254,12 +212,6 @@ async function buildAllAssets(){
 			buildCAWebJS(true, v);
 		});
 
-		// Build Bootstrap Styles
-		buildBootStrapStyles(true);
-
-		// Build Admin Bootstrap JS
-		buildBootStrapJS(true);
-
 		// Build Theme Customizer JS
 		buildCustomizerJS(true);
 
@@ -279,12 +231,6 @@ async function buildAllAssets(){
 			// Build CAWeb JS
 			buildCAWebJS(false, v);
 		});
-
-		// Build Bootstrap Styles
-		buildBootStrapStyles(false);
-
-		// Build Admin Bootstrap JS
-		buildBootStrapJS(false);
 
 		// Build Theme Customizer JS
 		buildCustomizerJS(false);
@@ -309,14 +255,6 @@ async function buildAllAssets(){
 			buildCAWebJS(true, v);
 			buildCAWebJS(false, v);
 		});
-
-		// Build Bootstrap Styles
-		buildBootStrapStyles(true);
-		buildBootStrapStyles(false);
-
-		// Build Admin Bootstrap JS
-		buildBootStrapJS(true);
-		buildBootStrapJS(false);
 
 		// Build Theme Customizer JS
 		buildCustomizerJS(true);
@@ -388,29 +326,6 @@ async function buildFrontEndStyles( min = false, ver = config.templateVer){
 	});
 }
 
-async function buildBootStrapStyles( min = false ){
-	var buildOutputStyle = min ? 'compressed' : 'expanded';
-	var minified = min ? '.min' : '';
-	var t = minified ? ' Minified ] ' : ' ] ';
-	t = '[ ✅ CAWeb Admin Bootstrap Styles' + t;
-
-	if( ! config.adminBootStrapCSS.length )
-		return;
-
-	return gulp.src(config.adminBootStrapCSS)
-		.pipe(
-			sass({
-				outputStyle: buildOutputStyle,
-			})
-		)
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('bootstrap' + minified + '.css')) // compiled file
-		.pipe( tap(function(file) {
-			log(t + path.basename( file.path ) + ' was created successfully.' ); 
-		}) )
-		.pipe(gulp.dest('./css/'));
-}
-
 async function buildAdminJS( min = false){
 	var minified = min ? '.min' : '';
 	var t = minified ? ' Minified ] ' : ' ] ';
@@ -422,29 +337,6 @@ async function buildAdminJS( min = false){
 	let js = gulp.src(config.adminJS)
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe(concat('admin' + minified + '.js')) // compiled file
-		.pipe( tap(function(file) {
-			log(t + path.basename( file.path ) + ' was created successfully.' ); 
-		}) )
-
-
-	if( min ){
-		js = js.pipe(uglify());
-	}
-
-	return js.pipe(gulp.dest('./js/'));
-}
-
-async function buildBootStrapJS( min = false ){
-	var minified = min ? '.min' : '';
-	var t = minified ? ' Minified ] ' : ' ] ';
-	t = '[ ✅ CAWeb Admin Bootstrap JavaScript' + t;
-
-	if( ! config.adminBootStrapJS.length )
-		return;
-
-	let js = gulp.src(config.adminBootStrapJS)
-		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat('bootstrap' + minified + '.js')) // compiled file
 		.pipe( tap(function(file) {
 			log(t + path.basename( file.path ) + ' was created successfully.' ); 
 		}) )

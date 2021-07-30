@@ -40,21 +40,16 @@ function caweb_branding_admin_head() {
  * @return void
  */
 function caweb_login_enqueue_scripts() {
-	$admin_css     = caweb_get_min_file( '/css/admin.css' );
-	$bootstrap_css = caweb_get_min_file( '/css/bootstrap.css' );
-
-	wp_enqueue_style( 'caweb-bootstrap-styles', $bootstrap_css, array(), CAWEB_VERSION );
+	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
 	/* CAWeb Admin CSS */
 	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 
-	$admin_js     = caweb_get_min_file( '/js/admin.js', 'js' );
-	$bootstrap_js = caweb_get_min_file( '/js/bootstrap.js', 'js' );
+	$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );
 
-	wp_register_script( 'caweb-bootstrap-scripts', $bootstrap_js, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
 
 	wp_enqueue_script( 'caweb-admin-scripts' );
@@ -70,16 +65,16 @@ function caweb_login_enqueue_scripts() {
  * @return void
  */
 function caweb_disclaimer_message() {
-	$verified = isset( $_REQUEST['caweb_disclaimer_nonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['caweb_disclaimer_nonce'] ), 'caweb_disclaimer' );
-	$action   = isset( $_REQUEST['action'] );
 
-	if ( $action || ! $verified ) {
-		return;
-	}
+	$title      = 'UNAUTHORIZED ACCESS TO ANY STATE OF CALIFORNIA COMPUTING SYSTEM CONTAINING US GOVERNMENT OR STATE OF CALIFORNIA INFORMATION IS A CRIMINAL VIOLATION OF PENAL CODE SECTION 502 AND/OR APPLICABLE FEDERAL LAW AND IS SUBJECT TO CIVIL AND CRIMINAL SANCTIONS.';
+	$disclaimer = 'Whoever knowingly or intentionally accesses a computing system without authorization or exceeding authorized access, and by means of such conduct obtains, alters, damages, destroys or discloses information, or prevents authorized use of any data or computing resource owned by or operated for the State of California shall be subject to disciplinary action, prosecution or both. Use in a manner other than as intended by the State of California may result in the forfeiture of access privileges.  All computing system activities may be recorded and monitored.  Individuals using these systems expressly consent to such monitoring and shall have no expectation of privacy in their use. Evidence of possible misconduct or abuse may be provided to appropriate officials and/or law enforcement. No warranty is made for the computing resources that are subject to this policy.  Additionally, the State of California takes no responsibility of damages for the intentional misuse of these resources by any party.';
 
-	$disclaimer = '<strong class="d-block text-center">UNAUTHORIZED ACCESS TO ANY STATE OF CALIFORNIA COMPUTING SYSTEM CONTAINING US GOVERNMENT OR STATE OF CALIFORNIA INFORMATION IS A CRIMINAL VIOLATION OF PENAL CODE SECTION 502 AND/OR APPLICABLE FEDERAL LAW AND IS SUBJECT TO CIVIL AND CRIMINAL SANCTIONS.</strong><p>Whoever knowingly or intentionally accesses a computing system without authorization or exceeding authorized access, and by means of such conduct obtains, alters, damages, destroys or discloses information, or prevents authorized use of any data or computing resource owned by or operated for the State of California shall be subject to disciplinary action, prosecution or both. Use in a manner other than as intended by the State of California may result in the forfeiture of access privileges.  All computing system activities may be recorded and monitored.  Individuals using these systems expressly consent to such monitoring and shall have no expectation of privacy in their use. Evidence of possible misconduct or abuse may be provided to appropriate officials and/or law enforcement. No warranty is made for the computing resources that are subject to this policy.  Additionally, the State of California takes no responsibility of damages for the intentional misuse of these resources by any party.</p>';
-
-	printf( '<div class="caweb-disclaimer w-50 mx-auto mt-4 text-justify">%1$s</div>', wp_kses( $disclaimer, caweb_allowed_html() ) );
+	?>
+	<div class="caweb-disclaimer w-50 mx-auto mt-4 text-justify">
+		<strong class="d-block text-center"><?php print esc_html( $title ); ?></strong>
+		<p><?php print esc_html( $disclaimer ); ?></p>
+	</div>
+	<?php
 }
 
 /**

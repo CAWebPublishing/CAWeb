@@ -8,11 +8,14 @@
 /*---------------
  # CAWeb
 ---------------*/
-@import "caweb/a11y";
-@import "caweb/thickbox";
-@import "caweb/widgets";
-
-@import "caweb/divi";
-@import "caweb/wp";
+@import "caweb/a11y/a11y";
+@import "caweb/divi/divi";
+@import "caweb/search";
 @import "caweb/print";
+
+/*---------------
+ # WordPress
+---------------*/
+@import "wp/wp";
+
 

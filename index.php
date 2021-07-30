@@ -46,7 +46,9 @@ get_header();
 										$caweb_thumbnail = get_thumbnail( $caweb_width, $caweb_height, $caweb_classtext, $caweb_titletext, $caweb_titletext, false, 'Blogimage' );
 										$caweb_thumb     = $caweb_thumbnail['thumb'];
 
-										et_divi_post_format_content();
+										if ( function_exists( 'et_divi_post_format_content' ) ) {
+											et_divi_post_format_content();
+										}
 
 										if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) {
 											if ( 'video' === $caweb_post_format && false !== ( et_get_first_video() === $caweb_first_video ) ) :
@@ -68,8 +70,9 @@ get_header();
 							<?php endif; ?>
 
 									<?php
-									et_divi_post_meta();
-
+									if ( function_exists( 'et_divi_post_meta' ) ) {
+										et_divi_post_meta();
+									}
 									if ( function_exists( 'et_get_option' ) && 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
 										truncate_post( 270 );
 									} else {
