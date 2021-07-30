@@ -242,11 +242,11 @@ function caweb_init() {
 	global $pagenow;
 
 	/**
-	 * Enqueues the default ThickBox js and css. (if not on the login page)
+	 * Enqueues the default ThickBox js and css. (if not on the login page or customizer page)
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/add_thickbox/
 	 */
-	if ( 'wp-login.php' !== $pagenow ) {
+	if ( ! in_array( $pagenow, array( 'wp-login.php', 'customize.php' ), true ) ) {
 		add_thickbox();
 	}
 
