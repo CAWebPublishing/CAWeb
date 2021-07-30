@@ -1,8 +1,10 @@
 /*----------------
- # Add Bootstrap only on CAWeb Options Page and wp-login.php
+ # Add Bootstrap only on CAWeb Options Page, wp-login and customizer pages.
 ----------------*/
 body.toplevel_page_caweb_options,
-body.login{
+body.login, 
+body.wp-customizer
+{
     @import "bootstrap";
 }
 
