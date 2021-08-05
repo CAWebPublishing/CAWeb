@@ -30200,7 +30200,6 @@ header {
   color: #008A28 !important;
 }
 
-/* Override styles applied by Divi */
 /* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
   display: block;
@@ -30232,8 +30231,20 @@ nav li {
   line-height: 1.5 !important;
 }
 
-/* MegaDropdown Navigation Styles */
-@media (max-width: 991px) {
+nav.megadropdown .media-left .media-object {
+  max-width: inherit;
+}
+
+@media (max-width: 992px) {
+  nav {
+    /* MegaDropdown Navigation Styles */
+  }
+  nav .link-description,
+  nav .media-left,
+  nav .font-size-40,
+  nav .image-icon {
+    display: none;
+  }
   nav.megadropdown .second-level-nav:not(.flex) li {
     width: 100% !important;
   }
