@@ -107,7 +107,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$search_link = 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
 									'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
 
-				$nav_style = isset( $args->style ) ? ( 'flexmega' === $args->style ? 'megadropdown' : $args->style ) : 'megadropdown';
+				$nav_style = isset( $args->style ) ? ( 'flexmega' === $args->style ? 'megadropdown' : $args->style ) : 'singlelevel';
 
 				$nav_menu = sprintf(
 					'<nav id="navigation" class="main-navigation %1$s hidden-print nav">
@@ -556,8 +556,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				// Modify variables for unit3.
 				if ( 'unit3' === $unit_size ) {
-					$media_class = 'media-object width-80 height-80';
-
 					$media_class = 'image-icon rounded-50x m-b-md';
 					$media_wrap  = '';
 
@@ -770,11 +768,13 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				<input type="button" class="library-link" value="Browse" id="library-link-<?php print esc_attr( $item_id ); ?>" name="<?php print esc_attr( $item_id ); ?>_media_image" data-choose="Choose a Default Image" data-update="Set as Navigation Media Image" />
 				<p>Navigation Media Image Alt Text
 				<input name="<?php print esc_attr( $item_id ); ?>_media_image_alt_text" id="<?php print esc_attr( $item_id ); ?>_media_image_alt_text" value="<?php print esc_attr( $nav_media_image_alt_text ); ?>" type="text" /></p>
+				<?php if ( 'flexmega' === $nav_menu_style ) : ?>
 				<p>Navigation Media Image Alignment</p>
 				<label for="<?php print esc_attr( $item_id ); ?>_media_image_alignment_left">
 				<input name="<?php print esc_attr( $item_id ); ?>_media_image_alignment" id="<?php print esc_attr( $item_id ); ?>_media_image_alignment_left" value="left" type="radio"<?php print 'left' === $nav_media_image_alignment ? ' checked' : ''; ?>/>Left</label>
 				<label for="<?php print esc_attr( $item_id ); ?>_media_image_alignment_top">
 				<input name="<?php print esc_attr( $item_id ); ?>_media_image_alignment" id="<?php print esc_attr( $item_id ); ?>_media_image_alignment_top" value="top" type="radio"<?php print 'top' === $nav_media_image_alignment ? ' checked' : ''; ?>/>Top</label>
+				<?php endif; ?>
 			</div>
 			<?php if ( 'megadropdown' === $nav_menu_style ) : ?>
 			<div class="mega-menu-images<?php print $depth ? ' hidden' : ''; ?> description description-wide ">

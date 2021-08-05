@@ -1,5 +1,3 @@
-/* Override styles applied by Divi */
-
 /* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
 	display: block;
@@ -30,4 +28,41 @@
 /* Override nav li line-height */
 nav li{
 	line-height: 1.5 !important;
+}
+
+// Fix Divi adding max-width
+nav.megadropdown .media-left .media-object{
+	max-width: inherit;
+}
+
+// Change various navigation behavior when in mobile/tablet view
+@media (max-width: 992px){
+	nav {
+		// Hide link descriptions, large icons and media objects
+		.link-description,
+		.media-left,
+		.font-size-40,
+		.image-icon {
+			display: none;
+		}
+
+		/* MegaDropdown Navigation Styles */
+		&.megadropdown{
+			// make all subnav li's full width
+			.second-level-nav:not(.flex) li {
+				width: 100% !important;
+			}
+	
+			// make second-level-nav container full width
+			div[class*="pull-"]{
+				width: 100% !important;
+			}
+	
+			// hide all subnav images
+			div[class*="with-image-"]{
+				display: none;
+			}
+		}
+	}
+
 }
