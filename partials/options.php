@@ -575,7 +575,7 @@ function caweb_display_google_options() {
 							'header' => 'Icon',
 						)
 					),
-					caweb_allowed_html( array(), true )
+					'post'
 				);
 				?>
 				<small class="mb-2 text-muted d-block">Select an icon to display in front of the Google Translate Page link.</small>
@@ -865,7 +865,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 											'header' => 'Icon',
 										)
 									),
-									caweb_allowed_html( array(), true )
+									'post'
 								);
 								?>
 							</div>
