@@ -29744,6 +29744,10 @@ body:not(.sticky_nav) #main-content.main-content {
   background-image: none !important;
 }
 
+.et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
+  margin-right: 2px;
+}
+
 .et_pb_text ol, .et_pb_text ul {
   padding-bottom: 0;
 }
