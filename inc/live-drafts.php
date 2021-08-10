@@ -371,7 +371,7 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		$new_id = wp_insert_post( $draft_post );
 
 		// Divi saves the original even when a draft is created, revert to previous revision.
-		$old_content = isset( $_REQUEST['et_pb_old_content'] ) ? wp_kses( wp_unslash( $_REQUEST['et_pb_old_content'] ), caweb_allowed_html( array(), true ) ) : '';
+		$old_content = isset( $_REQUEST['et_pb_old_content'] ) ? wp_kses( wp_unslash( $_REQUEST['et_pb_old_content'] ), 'post' ) : '';
 
 		if ( ! empty( $old_content ) ) {
 
@@ -456,7 +456,7 @@ function caweb_live_drafts_save_post( $post_id, $post ) {
 			return;
 		}
 
-		$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), caweb_allowed_html( array(), true ) ) : $post->post_content;
+		$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), 'post' ) : $post->post_content;
 
 		// Duplicate post and replace live page.
 		$updated_post = caweb_live_drafts_duplicate_post(

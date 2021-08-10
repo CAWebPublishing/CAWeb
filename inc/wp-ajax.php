@@ -70,7 +70,7 @@ function caweb_icon_menu_func() {
 				'header' => $header,
 			)
 		),
-		caweb_allowed_html( array(), true )
+		'post'
 	);
 	wp_die(); // this is required to terminate immediately and return a proper response.
 
@@ -137,7 +137,7 @@ function caweb_doc_create_xml() {
 			count( $results ),
 			esc_url( $href )
 		),
-		caweb_allowed_html()
+		'post'
 	);
 
 	wp_die(); // this is required to terminate immediately and return a proper response.

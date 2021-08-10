@@ -27,7 +27,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						'header_class' => array( 'customize-control-title', 'd-inline' ),
 					)
 				),
-				caweb_allowed_html( array(), true )
+				'post'
 			);
 		}
 	}
