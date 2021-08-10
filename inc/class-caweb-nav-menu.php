@@ -61,7 +61,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance ) {
 			if ( isset( $nav_menu_args['menu'] ) ) {
 				$args['echo'] = false;
-				print wp_kses( $this->create_widget_nav_menu( $nav_menu_args['menu'] ), caweb_allowed_html() );
+				print wp_kses( $this->create_widget_nav_menu( $nav_menu_args['menu'] ), 'post' );
 			}
 
 			return $args;
@@ -168,7 +168,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			}
 
 			if ( isset( $args['echo'] ) && $args['echo'] ) {
-				print wp_kses( $nav_menu, caweb_allowed_html() );
+				print wp_kses( $nav_menu, 'post' );
 			} else {
 				return $nav_menu;
 			}
@@ -737,7 +737,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							'header' => 'Select an Icon',
 						)
 					),
-					caweb_allowed_html( array(), true )
+					'post'
 				);
 				?>
 			</div>
