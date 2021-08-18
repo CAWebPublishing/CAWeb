@@ -90,7 +90,7 @@
 					<?php
 					if ( is_active_sidebar( 'sidebar-1' ) ) :
 						?>
-					<aside id="non_divi_sidebar" class="col-lg-3">
+					<aside id="non_divi_sidebar" class="col-lg-3 pull-left">
 						<?php
 						print esc_html( get_sidebar( 'sidebar-1' ) );
 						?>

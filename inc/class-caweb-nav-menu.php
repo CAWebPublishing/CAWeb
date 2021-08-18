@@ -379,7 +379,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			foreach ( $child_links as $i => $item ) {
 				$item_meta = get_post_meta( $item->ID );
 				$unit_size = isset( $item_meta['_caweb_menu_unit_size'][0] ) ? $item_meta['_caweb_menu_unit_size'][0] : 'unit1';
-				$unit_size = 'unit3' === $unit_size ? 'unit1' : 'unit2';
+				$unit_size = 'unit1' === $unit_size ? 'unit1' : 'unit2';
 
 				/* Get icon if present */
 				$icon = '';

@@ -1,17 +1,28 @@
-<?php 
-require_once 'header.php'; 
+<?php
+/**
+ * This is a generic template for Pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
+ *
+ * @package CAWeb
+ */
+
+/**
+ * Loads CAWeb <header> tag.
+ */
+require_once 'header.php';
 
 // Page Classes.
-$page_title_class = apply_filters('caweb_page_title_class', 'page-title' );
-$page_container_class = apply_filters('caweb_page_container_class', 'page-container' );
-$page_main_content_class = apply_filters('caweb_page_main_content_class', 'main-content' );
+$caweb_page_title_class        = apply_filters( 'caweb_page_title_class', 'page-title' );
+$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
+$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
 
 ?>
 
-	<div id="page-container" class="<?php print esc_attr( $page_container_class ); ?>">
+	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
 		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
-			<div id="main-content" class="<?php print esc_attr( $page_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
 			<?php do_action( 'caweb_pre_main_primary' ); ?>
 				<main class="main-primary">
 
@@ -24,7 +35,7 @@ $page_main_content_class = apply_filters('caweb_page_main_content_class', 'main-
 
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							print esc_html( the_title( sprintf('<!-- Page Title--><h1 class="%1$s">', esc_attr($page_title_class) ), '</h1>' ) );
+							print esc_html( the_title( sprintf( '<!-- Page Title--><h1 class="%1$s">', esc_attr( $caweb_page_title_class ) ), '</h1>' ) );
 						}
 
 						print '<div class="entry-content">';
