@@ -726,6 +726,9 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$flex_row                  = isset( $tmp['_caweb_menu_flexmega_row'][0] ) ? $tmp['_caweb_menu_flexmega_row'][0] : '';
 
 			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
+
+			$unit_size = 'unit3' === $unit_size && ! in_array( $nav_menu_style, array( 'flexmega', 'megadropdown' ), true ) ? 'unit2' : $unit_size;
+			
 			?>
 			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
 				<?php
