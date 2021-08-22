@@ -12,12 +12,6 @@
  */
 require_once 'header.php';
 
-// Post Classes.
-$caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
-
-$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', "page-title$caweb_padding" );
-$caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
-$caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
 ?>
 
 	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?>">

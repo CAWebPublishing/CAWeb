@@ -12,17 +12,15 @@
  */
 require_once 'header.php';
 
-// Page Classes.
-$caweb_page_title_class        = apply_filters( 'caweb_page_title_class', 'page-title' );
-$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
-$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
-
 ?>
 
 	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
 		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
 			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
+			<?php if ( ! $caweb_is_page_builder_used ) : ?>
+			<div class="section">
+			<?php endif; ?>
 			<?php do_action( 'caweb_pre_main_primary' ); ?>
 				<main class="main-primary">
 
@@ -64,6 +62,9 @@ $caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class',
 					<?php endwhile; ?>
 					<span class="return-top hidden-print"></span>
 				</main>
+			<?php if ( ! $caweb_is_page_builder_used ) : ?>
+			</div>
+			<?php endif; ?>
 			</div> <!-- #main-content -->
 		</div>
 	</div>
