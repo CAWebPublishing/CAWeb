@@ -53,7 +53,8 @@ jobs:
         - image: circleci/php:7.4
       steps:
         - checkout
-        - run: composer update
+        - run: apt-get -y install gcc make autoconf libc-dev pkg-config libgpgme11-dev
+        - run: composer i --no-dev
         - run: 
             command: |
               declare -a files=( 
