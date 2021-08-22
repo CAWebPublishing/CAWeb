@@ -69,7 +69,6 @@ jobs:
             name: "Save Docker Image"
             command: |
               mkdir -p tmp
-              docker save -o tmp caweb_image
         - persist_to_workspace:
             root: /
             paths:
@@ -81,7 +80,7 @@ jobs:
           at: /tmp
       - run: 
           name: "Load Docker Image"
-          command: docker load -i tmp/caweb
+          command: env
       - sign-packages/install-deb-dependencies:
           use_sudo: true
       - sign-packages/setup-env
