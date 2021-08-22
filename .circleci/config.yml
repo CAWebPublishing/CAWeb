@@ -70,6 +70,8 @@ jobs:
               php -r "unlink('composer-setup.php');"
         - persist_to_workspace:
             root: /
+            paths: 
+              - /
   standard:
     executor: caweb-executor
     steps:
