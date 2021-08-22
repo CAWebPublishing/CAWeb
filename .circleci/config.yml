@@ -12,7 +12,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - gh-pages
+                - gh-page
 
 working_directory: ~/repo
 
