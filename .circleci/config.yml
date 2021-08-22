@@ -14,10 +14,7 @@ executors:
 workflows:
   verify_standards:
     jobs:
-      - build_env
       - standard:
-          requires:
-            - build_env
           filters:
             branches:
               ignore:
