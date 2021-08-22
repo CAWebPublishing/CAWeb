@@ -54,6 +54,7 @@ jobs:
       steps:
         - checkout
         - run: sudo apt-get -y install gcc make autoconf libc-dev pkg-config libgpgme11-dev
+        - run: sudo libgpgme11-dev
         - run: composer i --no-dev
         - run: 
             command: |
