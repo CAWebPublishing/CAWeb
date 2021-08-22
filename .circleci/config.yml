@@ -57,10 +57,8 @@ jobs:
         - sign-packages/install-deb-dependencies:
             use_sudo: true
         - run:
-            name: "Set GPG_SECRET_KEY & Configure GnuPG"
-            commmand: |
-              GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 )
-              sign-packages/setup-env
+            name: "Set GPG_SECRET_KEY"
+            commmand: echo -e "$GPG_KEY" | gpg --import
         - sign-packages/sign-debs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
