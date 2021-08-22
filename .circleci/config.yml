@@ -56,6 +56,7 @@ jobs:
         - checkout
         - run: composer update
         - run: 
+            name: "Verify WordPress Coding Standards"
             command: |
               declare -a files=( 
                 'divi/'
