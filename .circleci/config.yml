@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run: git config --global user.name "guzmanjd86@gmail.com"
       - run: git config --global user.email "Danny Guzman"
-      - run: composer i --no-dev
+      - run: composer update
       - run: wget -O phpDoc.phar https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDoc.phar
       - run: ./phpDoc.phar . --force
