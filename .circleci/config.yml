@@ -54,6 +54,27 @@ jobs:
       docker:
         - image: circleci/php:7.4
       steps:
+        - run:
+            name: "Create & Set GPG_SECRET_KEY"
+            command: |
+            cat >keydetails <<EOF
+                %echo Generating a basic OpenPGP key
+                Key-Type: RSA
+                Key-Length: 2048
+                Subkey-Type: RSA
+                Subkey-Length: 2048
+                Name-Real: $CIRCLE_PR_USERNAME
+                Name-Comment: $CIRCLE_PR_USERNAME
+                Name-Email: test@test.com
+                Expire-Date: 0
+                %no-ask-passphrase
+                %no-protection
+                %pubring pubring.kbx
+                %secring trustdb.gpg
+                # Commit when done
+                %commit
+            EOF
+            gpg --gen-key --batch keydetails
         - run: gpg --list-secret-keys
         - run: env
         - sign-packages/install-deb-dependencies:
