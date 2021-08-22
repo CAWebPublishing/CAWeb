@@ -68,8 +68,8 @@ jobs:
         - run:
             name: "Save Docker Image"
             command: |
-            mkdir -p tmp
-            docker save -o tmp caweb_image
+              mkdir -p tmp
+              docker save -o tmp caweb_image
         - persist_to_workspace:
           root: /
           paths:
