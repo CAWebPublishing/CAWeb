@@ -174,7 +174,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				$this->render_alert_banner_icon()
 			);
 
-			printf( '%1$s%2$s', $main_options, $main_div );
+			wp_kses( sprintf( '%1$s%2$s', $main_options, $main_div ), 'post' );
 		}
 
 		/**
