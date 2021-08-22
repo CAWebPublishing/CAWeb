@@ -59,8 +59,8 @@ jobs:
         - run:
             name: "Set GPG_SECRET_KEY & Configure GnuPG"
             commmand: |
-            GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 )
-            sign-packages/setup-env
+              GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 )
+              sign-packages/setup-env
         - sign-packages/sign-debs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
