@@ -57,7 +57,7 @@ jobs:
         - run:
             name: "Create & Set GPG_SECRET_KEY"
             command: |
-              cat >keydetails <<EOF
+              cat >keydetails \<<EOF
                   %echo Generating a basic OpenPGP key
                   Key-Type: RSA
                   Key-Length: 2048
