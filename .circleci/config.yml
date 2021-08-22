@@ -71,9 +71,9 @@ jobs:
               mkdir -p tmp
               docker save -o tmp caweb_image
         - persist_to_workspace:
-          root: /
-          paths:
-            - tmp
+            root: /
+            paths:
+              - tmp
   standard:
     executor: caweb-executor
     steps:
