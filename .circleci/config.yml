@@ -56,7 +56,7 @@ jobs:
       steps:
         - run: 
             name: "Set GPG_SECRET_KEY"
-            command: GPG_SECRET_KEY=$( gpg --export-secret-key $GPG_KEYS | base64 ) | env
+            command: GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 ) | env
         - run: env
         - sign-packages/install-deb-dependencies:
             use_sudo: true
