@@ -55,6 +55,7 @@ jobs:
         - image: circleci/php:7.4
       steps:
         - run: gpg --list-secret-keys
+        - run: env
         - sign-packages/install-deb-dependencies:
             use_sudo: true
         - sign-packages/setup-env
@@ -63,7 +64,6 @@ jobs:
             packages: '*.deb'
             type: maint
         - checkout
-        - run: sudo apt-get -y install libusb-dev
         - run: composer update
         - run: 
             command: |
