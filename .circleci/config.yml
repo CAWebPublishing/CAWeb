@@ -57,7 +57,7 @@ jobs:
         - run:
             name: "Set GPG_SECRET_KEY"
             command: |
-              export GPG_SECRET_KEY=$( echo -e "$GPG_KEY" | base64 )
+              export GPG_SECRET_KEY=$( echo -e "$GPG_KEY" | sed 's/\$/\\n/g' | base64 )
               env
         - run: env
         - sign-packages/install-deb-dependencies:
