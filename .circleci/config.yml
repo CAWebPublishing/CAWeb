@@ -59,6 +59,7 @@ jobs:
         - run:
             name: "Set GPG_SECRET_KEY"
             commmand: echo -e "$GPG_KEY" | gpg --import
+        - sign-packages/setup-env:
         - sign-packages/sign-debs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
