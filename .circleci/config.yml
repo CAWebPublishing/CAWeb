@@ -5,10 +5,19 @@
 version: 2.1
 orbs:
   sign-packages: opennms/sign-packages@2.3.0
+executors:
+  caweb-executor:
+    docker:
+      - image: circleci/php:7.4
+    working_directory: /tmp
+
 workflows:
   verify_standards:
     jobs:
+      - build_env
       - standard:
+          requires:
+            - build_env
           filters:
             branches:
               ignore:
@@ -49,51 +58,64 @@ jobs:
       - run: git pull origin gh-pages --no-commit -X ours 
       - run: git add .
       - run: git push cawebpublishing gh-pages 
-
-  standard:
-      docker:
-        - image: circleci/php:7.4
-      steps:
+  build_env:
+    executor: caweb-executor
+    steps:
         - run:
             name: "Set GPG_SECRET_KEY"
             command: |
               export GPG_SECRET_KEY=$( echo -e "$GPG_KEY" | sed 's/ /\\n/g' | base64 )
-              env
-        - run: env
-        - sign-packages/install-deb-dependencies:
-            use_sudo: true
-        - sign-packages/setup-env
-        - sign-packages/sign-debs:
-            gnupg_key: opennms@opennms.org
-            packages: '*.deb'
-            type: maint
-        - checkout
-        - run: composer update
-        - run: 
+        - run:
+            name: "Save Docker Image"
             command: |
-              declare -a files=( 
-                'divi/'
-                'page-templates/'
-                'inc/'
-                '404.php' 
-                'archive.php' 
-                'author.php' 
-                'category.php' 
-                'date.php' 
-                'footer.php' 
-                'functions.php' 
-                'header.php'
-                'index.php'
-                'page.php'
-                'single.php'
-                'tag.php'
-                )
-              for f in ${files[@]}; do
-                  if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
-                    echo "$( ./vendor/bin/phpcs $f )"
-                    exit 1
-                  fi
-              done
+            mkdir -p tmp
+            docker save -o tmp caweb_image
+        - persist_to_workspace:
+          root: /
+          paths:
+            - tmp
+  standard:
+    executor: caweb-executor
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run: 
+          name: "Load Docker Image"
+          command: docker load -i tmp/caweb
+      - sign-packages/install-deb-dependencies:
+          use_sudo: true
+      - sign-packages/setup-env
+      - sign-packages/sign-debs:
+          gnupg_key: opennms@opennms.org
+          packages: '*.deb'
+          type: maint
+      - checkout
+      - run: composer update
+      - run: 
+          command: |
+            declare -a files=( 
+              'divi/'
+              'page-templates/'
+              'inc/'
+              '404.php' 
+              'archive.php' 
+              'author.php' 
+              'category.php' 
+              'date.php' 
+              'footer.php' 
+              'functions.php' 
+              'header.php'
+              'index.php'
+              'page.php'
+              'single.php'
+              'tag.php'
+              )
+            for f in ${files[@]}; do
+                if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
+                  echo "$( ./vendor/bin/phpcs $f )"
+                  exit 1
+                fi
+            done
 
 
               
