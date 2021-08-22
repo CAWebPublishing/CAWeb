@@ -54,6 +54,7 @@ jobs:
       steps:
         - checkout
         - run: sudo apt-get -y install gcc make autoconf libc-dev pkg-config
+        - run: sudo cat /etc/os-release
         - run: composer update
         - run: 
             command: |
