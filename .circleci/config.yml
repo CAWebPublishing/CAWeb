@@ -54,13 +54,13 @@ jobs:
       docker:
         - image: circleci/php:7.4
       steps:
-        - run: 
-            name: "Set GPG_SECRET_KEY"
-            command: GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 ) | env
-        - run: env
         - sign-packages/install-deb-dependencies:
             use_sudo: true
-        - sign-packages/setup-env
+        - run:
+            name: "Set GPG_SECRET_KEY & Configure GnuPG"
+            commmand: |
+            GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 )
+            sign-packages/setup-env
         - sign-packages/sign-debs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
