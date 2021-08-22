@@ -71,7 +71,7 @@ jobs:
         - persist_to_workspace:
             root: /
             paths: 
-              - /
+              - /tmp
   standard:
     executor: caweb-executor
     steps:
