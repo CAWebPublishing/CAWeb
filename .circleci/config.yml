@@ -64,6 +64,7 @@ jobs:
       docker:
         - image: circleci/php:7.4
       steps:
+        - checkout
         - setup_remote_docker:
             docker_layer_caching: true
         - run: 
@@ -77,7 +78,6 @@ jobs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
             type: maint
-        - checkout
         - run: composer update
         - run: 
             command: |
