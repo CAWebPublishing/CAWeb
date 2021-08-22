@@ -5,10 +5,18 @@
 version: 2.1
 orbs:
   sign-packages: opennms/sign-packages@2.3.0
+executors:
+  caweb-executor:
+    docker:
+      - image: php:7.4-alpine
+
 workflows:
   verify_standards:
     jobs:
+      - build_env
       - standard:
+          requires:
+            - build_env
           filters:
             branches:
               ignore:
@@ -49,38 +57,59 @@ jobs:
       - run: git pull origin gh-pages --no-commit -X ours 
       - run: git add .
       - run: git push cawebpublishing gh-pages 
-
-  standard:
-      docker:
-        - image: php:7.4-alpine
-      steps:
-        - checkout
-        - run: composer update
+  build_env:
+    executor: caweb-executor
+    steps:
+        - run: apk add git
         - run: 
-            command: |
-              declare -a files=( 
-                'divi/'
-                'page-templates/'
-                'inc/'
-                '404.php' 
-                'archive.php' 
-                'author.php' 
-                'category.php' 
-                'date.php' 
-                'footer.php' 
-                'functions.php' 
-                'header.php'
-                'index.php'
-                'page.php'
-                'single.php'
-                'tag.php'
-                )
-              for f in ${files[@]}; do
-                  if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
-                    echo "$( ./vendor/bin/phpcs $f )"
-                    exit 1
-                  fi
-              done
+            name: "Install Composer"
+            command: 
+              php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+              php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+              php composer-setup.php
+              php -r "unlink('composer-setup.php');"
+  standard:
+    executor: caweb-executor
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run: 
+          name: "Load Docker Image"
+          command: env
+      - sign-packages/install-deb-dependencies:
+          use_sudo: true
+      - sign-packages/setup-env
+      - sign-packages/sign-debs:
+          gnupg_key: opennms@opennms.org
+          packages: '*.deb'
+          type: maint
+      - checkout
+      - run: composer update
+      - run: 
+          command: |
+            declare -a files=( 
+              'divi/'
+              'page-templates/'
+              'inc/'
+              '404.php' 
+              'archive.php' 
+              'author.php' 
+              'category.php' 
+              'date.php' 
+              'footer.php' 
+              'functions.php' 
+              'header.php'
+              'index.php'
+              'page.php'
+              'single.php'
+              'tag.php'
+              )
+            for f in ${files[@]}; do
+                if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
+                  echo "$( ./vendor/bin/phpcs $f )"
+                  exit 1
+                fi
+            done
 
 
               
