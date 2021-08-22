@@ -71,18 +71,6 @@ jobs:
   standard:
     executor: caweb-executor
     steps:
-      - attach_workspace:
-          at: /tmp
-      - run: 
-          name: "Load Docker Image"
-          command: env
-      - sign-packages/install-deb-dependencies:
-          use_sudo: true
-      - sign-packages/setup-env
-      - sign-packages/sign-debs:
-          gnupg_key: opennms@opennms.org
-          packages: '*.deb'
-          type: maint
       - checkout
       - run: composer update
       - run: 
