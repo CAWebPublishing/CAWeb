@@ -54,7 +54,9 @@ jobs:
       docker:
         - image: circleci/php:7.4
       steps:
-        - sign-packages/install-deb-dependencies
+        - run: gpg --list-secret-keys
+        - sign-packages/install-deb-dependencies:
+            use_sudo: true
         - sign-packages/setup-env
         - sign-packages/sign-debs:
           gnupg_key: opennms@opennms.org
