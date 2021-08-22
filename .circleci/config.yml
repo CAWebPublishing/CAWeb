@@ -53,7 +53,7 @@ jobs:
         - image: circleci/php:7.4
       steps:
         - checkout
-        - run: composer i --no-dev
+        - run: composer update
         - run: 
             command: |
               declare -a files=( 
