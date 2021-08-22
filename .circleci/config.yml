@@ -77,30 +77,30 @@ jobs:
             gnupg_key: opennms@opennms.org
             packages: '*.deb'
             type: maint
-          - checkout
-          - run: composer update
-          - run: 
-              command: |
-                declare -a files=( 
-                  'divi/'
-                  'page-templates/'
-                  'inc/'
-                  '404.php' 
-                  'archive.php' 
-                  'author.php' 
-                  'category.php' 
-                  'date.php' 
-                  'footer.php' 
-                  'functions.php' 
-                  'header.php'
-                  'index.php'
-                  'page.php'
-                  'single.php'
-                  'tag.php'
-                  )
-                for f in ${files[@]}; do
-                    if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
-                      echo "$( ./vendor/bin/phpcs $f )"
-                      exit 1
-                    fi
-                done
+        - checkout
+        - run: composer update
+        - run: 
+            command: |
+              declare -a files=( 
+                'divi/'
+                'page-templates/'
+                'inc/'
+                '404.php' 
+                'archive.php' 
+                'author.php' 
+                'category.php' 
+                'date.php' 
+                'footer.php' 
+                'functions.php' 
+                'header.php'
+                'index.php'
+                'page.php'
+                'single.php'
+                'tag.php'
+                )
+              for f in ${files[@]}; do
+                  if [ -n "$( ./vendor/bin/phpcs $f )" ]; then
+                    echo "$( ./vendor/bin/phpcs $f )"
+                    exit 1
+                  fi
+              done
