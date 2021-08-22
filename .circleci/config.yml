@@ -3,13 +3,6 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
-orbs:
-  sign-packages: opennms/sign-packages@2.3.0
-executors:
-  caweb-executor:
-    docker:
-      - image: circleci/php:7.4
-    working_directory: /tmp
 
 workflows:
   verify_standards:
@@ -18,7 +11,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - gh-page
+                - gh-pages
 
 working_directory: ~/repo
 
@@ -56,25 +49,11 @@ jobs:
       - run: git add .
       - run: git push cawebpublishing gh-pages 
 
-
   standard:
       docker:
         - image: circleci/php:7.4
       steps:
         - checkout
-        - setup_remote_docker:
-            docker_layer_caching: true
-        - run: 
-            name: "Set GPG_SECRET_KEY"
-            command: |
-              export GPG_SECRET_KEY=$( echo -e "$GPG_KEYS" | base64 )
-        - sign-packages/install-deb-dependencies:
-            use_sudo: true
-        - sign-packages/setup-env
-        - sign-packages/sign-debs:
-            gnupg_key: opennms@opennms.org
-            packages: '*.deb'
-            type: maint
         - run: composer update
         - run: 
             command: |
@@ -101,3 +80,6 @@ jobs:
                     exit 1
                   fi
               done
+
+
+              
