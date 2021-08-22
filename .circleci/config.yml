@@ -3,6 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
+orbs:
+  sign-packages: opennms/sign-packages@2.3.0
 workflows:
   verify_standards:
     jobs:
@@ -52,6 +54,12 @@ jobs:
       docker:
         - image: circleci/php:7.4
       steps:
+        - sign-packages/install-deb-dependencies
+        - sign-packages/setup-env
+        - sign-packages/sign-debs:
+          gnupg_key: opennms@opennms.org
+          packages: '*.deb'
+          type: maint
         - checkout
         - run: sudo apt-get -y install libusb-dev
         - run: composer update
