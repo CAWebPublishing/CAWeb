@@ -435,3 +435,27 @@ function caweb_get_user_color() {
 
 	return $_wp_admin_css_colors[ $admin_color ];
 }
+
+/**
+ * Checks if page/post is using Divi Builder.
+ *
+ * @return boolean
+ */
+function caweb_is_divi_used() {
+
+	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
+
+	// Default WordPress theme templates do not use the Divi Builder.
+	if ( is_tag() || is_archive() || is_category() || is_author() ) {
+		return false;
+	}
+
+	$tribe_events = get_post_meta( get_the_ID(), '_EventOrigin' );
+	// if The Events Calendar Plugin is using the layout it triggers the builder is enabled.
+	if ( ! empty( $tribe_events ) && in_array( 'event-calendar', $tribe_events, true ) ) {
+		return false;
+	};
+
+	return $builder_used;
+
+}

@@ -16,7 +16,8 @@
                 <path>fonts/**/*</path>
                 <path>images/**/*</path>
                 <path>js/**/*</path>
-                <path>node-modules/**/*</path>
+                <path>node_modules/**/*</path>
+                <path>divi/extension/node_modules/**/*</path>
                 <path>page-templates/**/*</path>
                 <path>partials/**/*</path>
                 <path>vendor/**/*</path>
@@ -55,7 +56,7 @@
      -->
  
     <!-- Github Settings -->
-    <setting name="stable_version" value="1.5.6a" />
+    <setting name="stable_version" value="1.5.6b" />
     <setting name="github_user" value="CA-CODE-Works" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="dev" />

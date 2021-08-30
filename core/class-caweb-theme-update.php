@@ -58,7 +58,8 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		public function __construct( $theme ) {
 			/* Don't allow more than one instance of the class */
 			if ( isset( self::$caweb_this ) ) {
-				wp_die( sprintf( esc_html__( '%s: You cannot create a second instance of this class.', 'et-core' ), get_class( $this ) ) );
+				/* translators: %s: Divi Core term */
+				wp_die( sprintf( esc_html__( '%s: You cannot create a second instance of this class.', 'et-core' ), esc_attr( get_class( $this ) ) ) );
 			}
 
 			self::$caweb_this = $this;
@@ -123,7 +124,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				$content = wp_remote_get( $caweb_update_themes->response[ $this->theme_name ]['changelog'], $this->args );
 
 				if ( ! is_wp_error( $content ) && 200 === wp_remote_retrieve_response_code( $content ) ) {
-					print '<pre>' . wp_remote_retrieve_body( $content ) . '</pre>';
+					printf( '<pre>%1$s</pre>', wp_kses( wp_remote_retrieve_body( $content ), 'post' ) );
 				} else {
 					print '<pre>No Changelog Available</pre>';
 				}
@@ -135,7 +136,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		/**
 		 * Alternative API for updating checking
 		 *
-		 * @param  array $update_transient Available updates.
+		 * @param  array|Object $update_transient Available updates.
 		 *
 		 * @return array
 		 */
@@ -228,7 +229,8 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			if ( isset( $upgrader->skin->theme_info ) && $upgrader->skin->theme_info->get( 'Name' ) === $this->theme_name ) {
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package, array_merge( $this->args, array( 'timeout' => 60 ) ) ) );
 
-				file_put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
+				global $wp_filesystem;
+				$wp_filesystem->put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );
 
 				/* Delete existing transient */
 				delete_site_transient( $this->transient_name );

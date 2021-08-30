@@ -10,4 +10,7 @@ body.page-template-searchpage{
     form#Search .close-search {
         display: none !important
     }
+    .gsc-cursor-page:focus{
+        outline: solid 2px #2ea3f2;
+    }
 }
