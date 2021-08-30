@@ -29786,6 +29786,10 @@ body.page-template-searchpage form#Search .close-search {
   display: none !important;
 }
 
+body.page-template-searchpage .gsc-cursor-page:focus {
+  outline: solid 2px #2ea3f2;
+}
+
 /* Print Formatting */
 @media print {
   body {

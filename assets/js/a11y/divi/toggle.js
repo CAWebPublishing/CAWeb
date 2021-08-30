@@ -17,58 +17,55 @@ jQuery(document).ready(function() {
 			// Events
 			$(element).on('click keydown', function(e){
 				// Shows or hides content in accordion when Enter or Space key is pressed
-				if (e.type === 'keydown') {
-					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
-					var toggleKeyPressed = toggleKeys.includes(e.which);
-					var toggleOpen = [40]; // down arrow to open
-					var toggleOpenPressed = toggleOpen.includes(e.which);
-					var toggleClose = [38] //up arrow to close
-					var toggleClosePressed = toggleClose.includes(e.which);
+				var toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
+				var toggleKeyPressed = toggleKeys.includes(e.which);
+				var toggleOpen = [40]; // down arrow to open
+				var toggleOpenPressed = toggleOpen.includes(e.which);
+				var toggleClose = [38] //up arrow to close
+				var toggleClosePressed = toggleClose.includes(e.which);
 
-					if (toggleKeyPressed) {
-						setTimeout( function(){
-							$(element).toggleClass('et_pb_toggle_open');
-							$(element).toggleClass('et_pb_toggle_close');
+				if (toggleKeyPressed) {
+					setTimeout( function(){
+						$(element).toggleClass('et_pb_toggle_open');
+						$(element).toggleClass('et_pb_toggle_close');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500);
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500);
+				}
 
-					if (toggleOpenPressed) {
-						setTimeout( function(){
-							$(element).addClass('et_pb_toggle_open');
-							$(element).removeClass('et_pb_toggle_close');
+				if (toggleOpenPressed) {
+					setTimeout( function(){
+						$(element).addClass('et_pb_toggle_open');
+						$(element).removeClass('et_pb_toggle_close');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500);
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500);
+				}
 
-					if (toggleClosePressed) {
-						setTimeout( function(){
-							$(element).addClass('et_pb_toggle_close');
-							$(element).removeClass('et_pb_toggle_open');
+				if (toggleClosePressed) {
+					setTimeout( function(){
+						$(element).addClass('et_pb_toggle_close');
+						$(element).removeClass('et_pb_toggle_open');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500)
-						
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500)
+				}
 					
-					// Prevents spacebar from scrolling page to the bottom
-					if (e.which === 32) {
-						e.preventDefault();
-					}
+				// Prevents spacebar from scrolling page to the bottom
+				if (e.which === 32) {
+					e.preventDefault();
 				}
 
 				// Modifies value for aria-expanded attribute
