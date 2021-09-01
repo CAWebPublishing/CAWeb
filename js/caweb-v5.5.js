@@ -19059,6 +19059,23 @@ jQuery(document).ready(function() {
 	
 });
 jQuery(document).ready(function() {
+	
+	
+	/*
+	WPForms Accessibility 
+	Give focus to confirmation message.
+	*/
+	var wpforms_confirmation_msg = $('div[id^="wpforms-confirmation-"] p');
+
+
+	if( wpforms_confirmation_msg.length ){
+		wpforms_confirmation_msg.each(function(index, element) {
+			$(element).attr('tabindex', '0');
+			
+			$(element).focus();
+		});
+	}
+
 	/*
 	WPForms Accessibility 
 	Retrieve radio field containers
