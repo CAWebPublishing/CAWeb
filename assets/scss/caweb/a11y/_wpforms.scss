@@ -2,6 +2,7 @@
 .wpforms-required-label{
 	color: #9B3022 !important;
   }
+  div[id^="wpforms-confirmation-"] p:focus,
   div.wpforms-container-full input:focus,
   div.wpforms-container-full textarea:focus,
   div.wpforms-container-full button[type="submit"]:focus,
