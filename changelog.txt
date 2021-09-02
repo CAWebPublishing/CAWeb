@@ -1,4 +1,6 @@
-CAWeb v1.5.6b
+CAWeb v1.5.7
+- Fixed various issues with JAWS not reading toggle expanded/collapsed
+- Fixed issue with WPForms Confirmation not receiving focus on form submission
 - Fixed issue with footer bleeding when using The Events Calendar Plugin
 - Fixed issue with Header not loading when using The Events Calendar Plugin
 
