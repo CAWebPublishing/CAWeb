@@ -320,12 +320,12 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		return $post_id;
 	}
 
-	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
-
 	// Check if this is an auto save routine. If it is we dont want to do anything.
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id;
 	}
+
+	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
 
 	$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
 
@@ -371,19 +371,22 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		$new_id = wp_insert_post( $draft_post );
 
 		// Divi saves the original even when a draft is created, revert to previous revision.
-		$old_content = isset( $_REQUEST['et_pb_old_content'] ) ? wp_kses( wp_unslash( $_REQUEST['et_pb_old_content'] ), 'post' ) : '';
+		$revisions = wp_get_post_revisions( $post_id );
 
-		if ( ! empty( $old_content ) ) {
+		if ( 2 <= count( $revisions ) ) {
+			array_shift( $revisions );
+		}
 
-			// unhook actions.
-			caweb_live_drafts_post_hooks( false );
+		$previous_content = array_shift( $revisions )->post_content;
+
+		if ( ! empty( $previous_content ) ) {
 
 			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
 			$rollback_post = caweb_live_drafts_duplicate_post(
 				$_REQUEST,
 				array(
 					'post_status'    => 'publish',
-					'post_content'   => $old_content,
+					'post_content'   => $previous_content,
 				)
 			);
 
