@@ -12,7 +12,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 /**
  * CAWeb Section Footer Module Class (Fullwidth)
  */
-class CAWeb_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module {
+class CAWeb_Module_Fullwidth_Section_Footer extends ET_Builder_CAWeb_Module {
 	/**
 	 * Module Slug Name
 	 *
@@ -107,5 +107,5 @@ class CAWeb_Module_FullWidth_Section_Footer extends ET_Builder_CAWeb_Module {
 		return $output;
 	}
 }
-new CAWeb_Module_FullWidth_Section_Footer();
+new CAWeb_Module_Fullwidth_Section_Footer();
 

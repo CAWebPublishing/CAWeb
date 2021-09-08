@@ -1,19 +1,4 @@
-.first-level-link{
-	height: $first-level-link-height;
-	/* Allows for the Navigation Top Level Links to wrap */
-	white-space: normal;
-}
-
-#nav_list{
-	width: $nav-list-width;
-}
-
-.sub-nav{
-	left: 0;
-	right: 0;
-}
-
-/* Styles for Second level navs not using flex */
+/* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
 	display: block;
 	position: relative !important;
@@ -21,46 +6,63 @@
 	visibility: visible !important;
 	width: auto !important;
 	padding: 0 !important;
+	background: inherit;
 
 	li{
-		float: left;
+		display: inline-block;
 	}
 
 	.second-level-link{
 		font-size: 17.6px;
 		font-size: 1.1rem;
 	}
-
-	.unit2 , .unit3, .unit3 .nav-media .media{
-		height: 130px;
+	
+	.second-level-link:hover{
+		background-color: inherit;
+    	opacity: 1;
+		transition: all 0.3s;
 	}
+	
 }
 
-
+/* Override nav li line-height */
 nav li{
-	line-height: 1.45 !important;
+	line-height: 1.5 !important;
 }
 
-@media (max-width: 767px) {
-	#nav_list{
-	  width: 100%;
-	  padding-left: 0;
+// Fix Divi adding max-width
+nav.megadropdown .media-left .media-object{
+	max-width: inherit;
+}
+
+// Change various navigation behavior when in mobile/tablet view
+@media (max-width: 992px){
+	nav {
+		// Hide link descriptions, large icons and media objects
+		.link-description,
+		.media-left,
+		.font-size-40,
+		.image-icon {
+			display: none;
+		}
+
+		/* MegaDropdown Navigation Styles */
+		&.megadropdown{
+			// make all subnav li's full width
+			.second-level-nav:not(.flex) li {
+				width: 100% !important;
+			}
+	
+			// make second-level-nav container full width
+			div[class*="pull-"]{
+				width: 100% !important;
+			}
+	
+			// hide all subnav images
+			div[class*="with-image-"]{
+				display: none;
+			}
+		}
 	}
-}
 
-@media (min-width: 768px){
-	.top-level-nav .nav-item {
-		padding: 0 6px;
-	}
-}
-
-@media (min-width: 992px){
-	.top-level-nav .nav-item {
-		padding: 0 8px;
-	}
-}
-
-/* Override Divi Nav Opacity */
-.et_mobile_menu li a:hover, .nav ul li a:hover {
-    opacity: 1;
 }

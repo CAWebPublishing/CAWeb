@@ -143,27 +143,22 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 		global $post;
 
-		if ( null === $post || ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
+		if ( null === $post || ! $verified || ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) ) {
 			return;
 		}
 
-		$nonce    = wp_create_nonce( 'caweb_slideshow_banner_removal' );
-		$verified = isset( $nonce ) && wp_verify_nonce( sanitize_key( $nonce ), 'caweb_slideshow_banner_removal' );
-		$con      = is_object( $post ) ? $post->post_content : $post['post_content'];
-		$module   = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
+		$con              = is_object( $post ) ? $post->post_content : $post['post_content'];
+		$module           = ! is_404() && ! empty( $con ) ? caweb_get_shortcode_from_content( $con, 'et_pb_ca_fullwidth_banner' ) : array();
+		$admin_bar_height = is_user_logged_in() ? 32 : 0;
 
-		if ( empty( $module ) ) :
+		if ( ! empty( $module ) ) :
 			?>
-			<script>
-				document.body.classList.remove('primary');
-			</script>
-		<?php else : ?>
 			<script>
 				(function( $ ) {
 					"use strict";
 
-					var section = $('#et_pb_ca_fullwidth_banner').parent();
-					var banner = section.find('#et_pb_ca_fullwidth_banner');
+					var banner = $('#et_pb_ca_fullwidth_banner');
+					var section = $(banner).parent();
 
 					$(document).ready(function () {
 						$('#main-content').prepend(banner);
@@ -173,15 +168,38 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 
 							// calculate top of screen on next repaint
 						window.setTimeout(function () {
-							// fill up the remaining heaight of this device
-							if( 'auto' !== '<?php print esc_attr( $this->props['height'] ); ?>' )
-								banner.css({ 'height': '<?php print esc_attr( $this->props['height'] ); ?>' });
-							if( 'auto' !== '<?php print esc_attr( $this->props['min_height'] ); ?>' )
-								banner.css({ 'min-height': '<?php print esc_attr( $this->props['min_height'] ); ?>' });
-							if( 'none' !== '<?php print esc_attr( $this->props['max_height'] ); ?>' )
-								banner.css({ 'max-height': '<?php print esc_attr( $this->props['max_height'] ); ?>' });
+							<?php
+								// fill up the remaining height of this device.
+								// height.
+							if ( 'auto' !== $this->props['height'] ) {
+								$current_height = preg_replace( '/(\d+)(\w+)/', '$1', $this->props['height'] );
+								$height         = str_replace( $current_height, $current_height + $admin_bar_height, $this->props['height'] );
+								?>
+									banner.css({ 'height': '<?php print esc_attr( $height ); ?>' });
+									<?php
+							}
+
+								// min-height.
+							if ( 'auto' !== $this->props['min_height'] ) {
+								$current_height = preg_replace( '/(\d+)(\w+)/', '$1', $this->props['min_height'] );
+								$height         = str_replace( $current_height, $current_height + $admin_bar_height, $this->props['min_height'] );
+								?>
+									banner.css({ 'min-height': '<?php print esc_attr( $height ); ?>' });
+									<?php
+							}
+
+								// max-height.
+							if ( 'auto' !== $this->props['max_height'] && 'none' !== $this->props['max_height'] ) {
+								$current_height = preg_replace( '/(\d+)(\w+)/', '$1', $this->props['max_height'] );
+								$height         = str_replace( $current_height, $current_height + $admin_bar_height, $this->props['max_height'] );
+								?>
+									banner.css({ 'max-height': '<?php print esc_attr( $height ); ?>' });
+									<?php
+							}
+							?>
 						}, 250);
 					});
+
 
 				})(jQuery);				
 			</script>

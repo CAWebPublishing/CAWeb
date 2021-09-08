@@ -84,14 +84,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		/**
 		 * Member Variable
 		 *
-		 * @var undefined $active Whether Alert Banner is active.
+		 * @var null|bool $active Whether Alert Banner is active.
 		 */
 		public $active = null;
 
 		/**
 		 * Member Variable
 		 *
-		 * @var undefined $alert_id Alert Banner Id
+		 * @var int $alert_id Alert Banner Id
 		 */
 		public $alert_id = -1;
 

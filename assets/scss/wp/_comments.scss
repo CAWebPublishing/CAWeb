@@ -1,0 +1,42 @@
+/* Comments on Posts */
+#comment-wrap{
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+#comment-wrap{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px){
+	#comment-wrap{
+		max-width: 750px !important;
+	}
+}
+
+@media (min-width: 992px){
+	#comment-wrap{
+		max-width: 970px !important;
+	}
+}
+
+@media (min-width: 1200px){
+	#comment-wrap{
+		max-width: 1200px !important;
+	}
+}
+
+@media (min-width: 1280px){
+    #comment-wrap{
+      max-width: 1280px!important;
+    }
+}
+
+@media (max-width: 767px){
+	#comment-wrap{
+		width: 100% !important;
+		margin: 0 auto;
+	}
+}

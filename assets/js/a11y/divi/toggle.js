@@ -20,6 +20,10 @@ jQuery(document).ready(function() {
 				if (e.type === 'keydown') {
 					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
 					var toggleKeyPressed = toggleKeys.includes(e.which);
+					var toggleOpen = [40]; // down arrow to open
+					var toggleOpenPressed = toggleOpen.includes(e.which);
+					var toggleClose = [38] //up arrow to close
+					var toggleClosePressed = toggleClose.includes(e.which);
 
 					if (toggleKeyPressed) {
 						setTimeout( function(){
@@ -34,6 +38,33 @@ jQuery(document).ready(function() {
 						}, 500);
 					}
 
+					if (toggleOpenPressed) {
+						setTimeout( function(){
+							$(element).addClass('et_pb_toggle_open');
+							$(element).removeClass('et_pb_toggle_close');
+
+							if ($(element).hasClass('et_pb_toggle_open')) {
+								$(element).find('.et_pb_toggle_content').css('display', 'block');
+							} else {
+								$(element).find('.et_pb_toggle_content').css('display', 'none')
+							}
+						}, 500);
+					}
+
+					if (toggleClosePressed) {
+						setTimeout( function(){
+							$(element).addClass('et_pb_toggle_close');
+							$(element).removeClass('et_pb_toggle_open');
+
+							if ($(element).hasClass('et_pb_toggle_open')) {
+								$(element).find('.et_pb_toggle_content').css('display', 'block');
+							} else {
+								$(element).find('.et_pb_toggle_content').css('display', 'none')
+							}
+						}, 500)
+						
+					}
+					
 					// Prevents spacebar from scrolling page to the bottom
 					if (e.which === 32) {
 						e.preventDefault();
@@ -42,12 +73,10 @@ jQuery(document).ready(function() {
 
 				// Modifies value for aria-expanded attribute
 				// when toggle is clicked or Enter/Space key is pressed
-				if (e.type === 'click' || toggleKeyPressed) {
-					setTimeout( function(){
-						var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-						$(element).attr('aria-expanded', expanded);
-					}, 1000 );
-				}
+				setTimeout( function(){
+					var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+					$(element).attr('aria-expanded', expanded);
+				}, 1000 );
 			});
 		});
 	}

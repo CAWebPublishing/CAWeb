@@ -39,20 +39,20 @@ function caweb_icon_menu( $atts ) {
 	/* Available Props */
 	$selected     = isset( $atts['select'] ) ? $atts['select'] : '';
 	$input        = isset( $atts['name'] ) ? $atts['name'] : '';
-	$header_class = isset( $atts['header_class'] ) ? is_array( $atts['header_class'] ) ? implode( ' ', $atts['header_class'] ) : $atts['header_class'] : '';
+	$header_class = isset( $atts['header_class'] ) ? ( is_array( $atts['header_class'] ) ? implode( ' ', $atts['header_class'] ) : $atts['header_class'] ) : '';
 	$header_class = ! empty( $header_class ) ? " class=\"$header_class\"" : '';
 	$label        = isset( $atts['header'] ) && $atts['header'] ? sprintf( ' <label%1$s%2$s>%3$s</label>', ! empty( $input ) ? " for=\"$input\"" : '', $header_class, $atts['header'] ) : '';
 
-	$header = sprintf( '<div class="caweb-icon-menu-header my-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 resetIcon"></span>%1$s</div>', $label );
+	$header = sprintf( '<div class="caweb-icon-menu-header my-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 reset-icon"></span>%1$s</div>', $label );
 	$input  = ! empty( $input ) ? sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" >', $input, $selected ) : '';
 
 	$icons     = caweb_get_icon_list( -1, '', true );
 	$icon_list = '';
 	foreach ( $icons as $i ) {
-		$icon_list .= sprintf( '<li class="list-group-item float-left ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $selected === $i ? ' active' : '' );
+		$icon_list .= sprintf( '<li class="list-group-item ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $selected === $i ? ' active' : '' );
 	}
 
-	return sprintf( '%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul>', $header, $input, $icon_list );
+	return sprintf( '<div class="caweb-icon-menu-group">%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul></div>', $header, $input, $icon_list );
 
 }
 

@@ -1,20 +1,35 @@
-<?php 
-require_once 'header.php'; 
+<?php
+/**
+ * This is a generic display for Posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package CAWeb
+ */
+
+/**
+ * Loads CAWeb <header> tag.
+ */
+require_once 'header.php';
 
 // Post Classes.
 $caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
 
-$post_title_class = apply_filters('caweb_post_title_class', "page-title$caweb_padding" );
-$post_container_class = apply_filters('caweb_post_container_class', 'page-container' );
-$post_main_content_class = apply_filters('caweb_post_main_content_class', 'main-content' );
+$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', "page-title$caweb_padding" );
+$caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
+$caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
 ?>
 
-	<div id="page-container" class="<?php print esc_attr( $post_container_class ); ?>">
+	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?>">
 	<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
 
-			<div id="main-content" class="<?php print esc_attr( $post_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?>" tabindex="-1">
+			<?php if ( ! $caweb_is_page_builder_used ) : ?>
+			<div class="section">
+			<?php endif; ?>
 			<?php do_action( 'caweb_pre_main_primary' ); ?>
+
 				<main class="main-primary">
 
 					<?php
@@ -27,7 +42,7 @@ $post_main_content_class = apply_filters('caweb_post_main_content_class', 'main-
 						<!-- Page Title-->
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							esc_html( the_title( "<h1 class=\"$post_title_class\">", '</h1>' ) );
+							esc_html( the_title( "<h1 class=\"$caweb_post_title_class\">", '</h1>' ) );
 						}
 
 						if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {
@@ -68,7 +83,7 @@ $post_main_content_class = apply_filters('caweb_post_main_content_class', 'main-
 				<?php
 				if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) ) :
 					?>
-					<aside id="non_divi_sidebar" class="col-lg-3">
+					<aside id="non_divi_sidebar" class="col-lg-3 pull-left">
 					<?php
 					print esc_html( get_sidebar( 'sidebar-1' ) );
 					?>
@@ -76,6 +91,10 @@ $post_main_content_class = apply_filters('caweb_post_main_content_class', 'main-
 					<?php
 					endif;
 				?>
+
+			<?php if ( ! $caweb_is_page_builder_used ) : ?>
+			</div>
+			<?php endif; ?>
 			</div> <!-- #main-content -->
 		</div>
 	</div>

@@ -1,0 +1,27 @@
+/* Divi Specific Overrides */
+@import "main-content";
+
+@import "modules/accordion";
+@import "modules/blurb";
+@import "modules/button";
+@import "modules/learn_more";
+@import "modules/person";
+@import "modules/tab";
+@import "modules/text";
+@import "modules/toggle";
+
+#page-container{
+	padding-top: 0px;
+}
+
+.et_section_regular{
+	padding: 0 !important;
+}
+
+p{
+	padding-bottom: 0;
+}
+
+.search-results .et_pb_post{
+	margin-bottom: 30px;
+}

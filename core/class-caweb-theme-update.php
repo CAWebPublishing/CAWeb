@@ -135,7 +135,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		/**
 		 * Alternative API for updating checking
 		 *
-		 * @param  array $update_transient Available updates.
+		 * @param  array|Object $update_transient Available updates.
 		 *
 		 * @return array
 		 */

@@ -165,7 +165,7 @@ function caweb_live_drafts_admin_head() {
 				// Rename Save Draft Button.
 				setTimeout(() => {
 					$('#save-action #save-post').val('Save Draft');
-				}, 250);
+				}, 1000);
 
 			});
 
@@ -315,6 +315,11 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		return $post_id;
 	}
 
+	// Check if previewing.
+	if ( isset( $_POST['wp-preview'] ) && 'dopreview' === $_POST['wp-preview'] ) {
+		return $post_id;
+	}
+
 	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
 
 	// Check if this is an auto save routine. If it is we dont want to do anything.
@@ -360,13 +365,33 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		);
 
 		// unhook action.
-		remove_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update' );
+		caweb_live_drafts_post_hooks( false );
 
 		// Insert the post into the database.
 		$new_id = wp_insert_post( $draft_post );
 
+		// Divi saves the original even when a draft is created, revert to previous revision.
+		$old_content = isset( $_REQUEST['et_pb_old_content'] ) ? wp_kses( wp_unslash( $_REQUEST['et_pb_old_content'] ), 'post' ) : '';
+
+		if ( ! empty( $old_content ) ) {
+
+			// unhook actions.
+			caweb_live_drafts_post_hooks( false );
+
+			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
+			$rollback_post = caweb_live_drafts_duplicate_post(
+				$_REQUEST,
+				array(
+					'post_status'    => 'publish',
+					'post_content'   => $old_content,
+				)
+			);
+
+			wp_update_post( $rollback_post );
+		}
+
 		// re-hook action.
-		add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
+		caweb_live_drafts_post_hooks();
 
 		// Migrate meta data.
 		caweb_live_drafts_migrate_post_meta( $post_id, $new_id, array( '_pc_liveId', '_pc_draftId' ) );
@@ -376,6 +401,10 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 
 		// Add a hidden meta data value to indicate the draft exist for a live page.
 		update_post_meta( $post_id, '_pc_draftId', $new_id );
+
+		// Send user to new edit page.
+		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $new_id ) );
+		exit();
 	}
 
 }
@@ -416,57 +445,7 @@ function caweb_live_drafts_save_post( $post_id, $post ) {
 		return $post_id;
 	}
 
-	$request_post_id = isset( $_REQUEST['post_ID'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_ID'] ) ) : '';
-	$save            = isset( $_REQUEST['save'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['save'] ) ) : '';
-	$post_status     = isset( $_REQUEST['post_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_status'] ) ) : '';
-	$caweb_draft     = isset( $_REQUEST['caweb_save_draft'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['caweb_save_draft'] ) ) : '';
-
-	// Catch when a draft is saved of a live page.
-	if ( 'Save Draft' === $save &&
-			'publish' === $post_status &&
-			'saving' === $caweb_draft &&
-			! wp_is_post_revision( $request_post_id )
-		) {
-
-		// Check for post meta that identifies this as a 'live draft'.
-		$_pc_draft_id = get_post_meta( $request_post_id, '_pc_draftId', true );
-
-		if ( empty( $_pc_draft_id ) ) {
-			return;
-		}
-
-		// Divi saves the original even when a draft is created, revert to previous revision.
-		$revs = wp_get_post_revisions( $request_post_id );
-
-		if ( ! empty( $revs ) ) {
-			array_shift( $revs );
-
-			// unhook actions.
-			caweb_live_drafts_post_hooks( false );
-
-			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
-			$rollback_post = caweb_live_drafts_duplicate_post(
-				$_REQUEST,
-				array(
-					'post_status'    => 'publish',
-					'post_content'   => array_shift( $revs )->post_content,
-				)
-			);
-
-			wp_update_post( $rollback_post );
-
-			// re-hook actions.
-			caweb_live_drafts_post_hooks();
-		}
-
-		// Send user to new edit page.
-		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
-		exit();
-
-	}
-
 	$publish = isset( $_REQUEST['publish'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['publish'] ) ) : '';
-	$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), caweb_allowed_html( array(), true ) ) : $post->post_content;
 
 	// Catch when a draft is published.
 	if ( ! empty( $publish ) && 'Schedule' !== $publish ) {
@@ -476,6 +455,8 @@ function caweb_live_drafts_save_post( $post_id, $post ) {
 		if ( empty( $_pc_live_id ) ) {
 			return;
 		}
+
+		$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), 'post' ) : $post->post_content;
 
 		// Duplicate post and replace live page.
 		$updated_post = caweb_live_drafts_duplicate_post(
@@ -550,9 +531,14 @@ function caweb_live_drafts_wp_trash_post( $post_id ) {
 		// delete published page draftID meta.
 		delete_post_meta( $post_id, '_pc_draftId' );
 
+		// unhook actions.
+		caweb_live_drafts_post_hooks( false );
+
 		// trash live drafts page.
 		wp_trash_post( $_pc_draft_id );
 
+		// hook actions.
+		caweb_live_drafts_post_hooks();
 	}
 }
 
