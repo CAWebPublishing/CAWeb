@@ -132,32 +132,44 @@ function caweb_live_drafts_publish_future_post( $post_id ) {
 function caweb_live_drafts_admin_head() {
 	global $post;
 
-	// Only show on published pages.
-	if ( in_array( $post->post_type, array( 'post', 'page' ), true ) && 'publish' === $post->post_status ) {
+	$draft_id = get_post_meta( $post->ID, '_pc_draftId', true );
 
-		?>
-		<script type="text/javascript">
+	// Only show on pages/posts.
+	if ( in_array( $post->post_type, array( 'post', 'page' ), true ) ) {
+		// Show Save Draft on Published Pages if live draft doesn't already exists.
+		if ( 'publish' === $post->post_status && empty( $draft_id ) ) {
+			?>
+			<script type="text/javascript">
 
-			// Add save draft button to live pages.
-			jQuery(document).ready(function($) {
+				jQuery(document).ready(function($) {
 
-				$('<input type="submit" class="button button-highlighted caweb-save-draft" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
+					setTimeout(function() {
+						// Add save draft button to live pages.
+						$('<input type="submit" class="button button-highlighted caweb-save-draft" tabindex="4" value="Save Draft" id="save-post" name="save"><input type="hidden" name="caweb_save_draft"/>').prependTo('#save-action');
 
-				$('#save-action .caweb-save-draft').on('click', function(e){
-					if( undefined !== e.originalEvent && e.originalEvent instanceof MouseEvent ){
-						$('#save-action input[name="caweb_save_draft"]').val('saving');
-					}
-				})
+						$('#save-action .caweb-save-draft').on('click', function(e){
+							if( undefined !== e.originalEvent && e.originalEvent instanceof MouseEvent ){
+								$('#save-action input[name="caweb_save_draft"]').val('saving');
+							}
+						})
 
-			});
+						// if changes are made to the builder, remove the Save Draft button.
+						$('#et-bfb-app-frame')[0].contentWindow.document.onclick = function(){
+							$('.caweb-save-draft').remove();
+						};
 
-		</script>
-		<?php
-		// if the Oasis WorkFlow Plugin is activated rename save draft button back to "Save Draft".
-	} elseif ( ( is_plugin_active( 'oasis-workflow/oasis-workflow.php' ) ||
+					}, 5000);
+
+				});
+
+			</script>
+			<?php
+
+			// Else if the Oasis WorkFlow Plugin is activated rename save draft button back to "Save Draft".
+		} elseif ( ( is_plugin_active( 'oasis-workflow/oasis-workflow.php' ) ||
 				is_plugin_active( 'oasis-workflow-pro/oasis-workflow-pro.php' ) ) &&
-			in_array( $post->post_type, array( 'post', 'page' ), true ) && 'draft' === $post->post_status ) {
-		?>
+				'draft' === $post->post_status ) {
+			?>
 			<script type="text/javascript">
 
 			jQuery(document).ready(function($) {
@@ -170,7 +182,8 @@ function caweb_live_drafts_admin_head() {
 			});
 
 			</script>
-		<?php
+			<?php
+		}
 	}
 }
 
@@ -367,31 +380,16 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		// unhook action.
 		caweb_live_drafts_post_hooks( false );
 
-		// Insert the post into the database.
+		// Insert the draft post into the database.
 		$new_id = wp_insert_post( $draft_post );
 
-		// Divi saves the original even when a draft is created, revert to previous revision.
-		$revisions = wp_get_post_revisions( $post_id );
-
-		if ( 2 <= count( $revisions ) ) {
-			array_shift( $revisions );
-		}
-
-		$previous_content = array_shift( $revisions )->post_content;
-
-		if ( ! empty( $previous_content ) ) {
-
-			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
-			$rollback_post = caweb_live_drafts_duplicate_post(
-				$_REQUEST,
-				array(
-					'post_status'    => 'publish',
-					'post_content'   => $previous_content,
-				)
-			);
-
-			wp_update_post( $rollback_post );
-		}
+		// Change original post status back to publish.
+		wp_update_post(
+			array(
+				'ID'          => $post_id,
+				'post_status' => 'publish',
+			)
+		);
 
 		// re-hook action.
 		caweb_live_drafts_post_hooks();
