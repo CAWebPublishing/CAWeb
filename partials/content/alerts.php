@@ -53,7 +53,7 @@ foreach ( $caweb_alerts as $caweb_a => $caweb_data ) {
 							</span>
 					<?php endif; ?>
 					<!-- Alert Text -->
-					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), caweb_allowed_html() ); ?></span>
+					<span class="alert-text"><?php print wp_kses( wp_unslash( $caweb_data['message'] ), 'post' ); ?></span>
 				</div>
 			</div>
 			<?php

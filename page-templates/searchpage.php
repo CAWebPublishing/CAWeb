@@ -9,30 +9,20 @@
  * @package CAWeb
  */
 
+// Page Classes.
+$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
+$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
 
 get_header();
 ?>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
 	<?php require_once dirname( __DIR__ ) . '/partials/header.php'; ?>
-	<style>
-		#main-content .container {
-			padding-top: 0
-		}
 
-		.search-container {
-			top: 0 !important;
-		}
-
-		.mobile-controls .toggle-search,
-		form#Search .close-search {
-			display: none !important
-		}
-	</style>
-
-	<div id="page-container">
+	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
+		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
-
-			<div id="main-content" class="main-content" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
+				<?php do_action( 'caweb_pre_main_primary' ); ?>
 				<main class="main-primary">
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
@@ -51,6 +41,9 @@ get_header();
 
 		</div>
 	</div>
+
+	<?php do_action( 'caweb_pre_footer' ); ?>
+
 	<?php get_footer(); ?>
 
 </body>

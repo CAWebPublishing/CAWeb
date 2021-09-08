@@ -437,6 +437,15 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				}
 				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
 				break;
+			case 'caweb_live_drafts':
+			case 'caweb_debug_mode':
+				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
+
+				// if current user can't modify this setting, set to current saved value.
+				if ( ! current_user_can( $cap ) ) {
+					$val = get_option( $opt, false );
+				}
+				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
@@ -575,7 +584,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_alert_options = array( 'caweb_alerts' );
 
-	$caweb_addtl_options = array( 'caweb_live_drafts' );
+	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
 
 	switch ( $group ) {
 		case 'general':

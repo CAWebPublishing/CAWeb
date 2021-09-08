@@ -2,6 +2,8 @@
 /**
  * CAWeb GitHub Module (Standard)
  *
+ * A list view display of a GitHub users/organizations repositories, that allow for various definitions to be displayed.
+ *
  * @package CAWebModuleExtension
  */
 

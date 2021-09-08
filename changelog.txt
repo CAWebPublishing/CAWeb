@@ -1,3 +1,25 @@
+CAWeb v1.5.6
+- Added new Enable Debug Mode option
+- Updated State Template from v5.5.21 to v5.5.23
+- Added new vertical field for Profile Banners
+- Removed forced title attribute on Divi Image Modules
+- Fixed footer structure and removed custom css
+- Fixed issue with Header Slideshow Banner Height
+- Removed some custom Google Translate CSS and added class names instead
+- Fixed issue with Geo Locator not functioning
+- Fixed various issues with navigation and removed custom css
+- Fixed color contrast ratio for Google Search URL Breadcrumb
+- Removed bootstrap.css and combined with admin.css
+- Removed bootstrap.js and combined with admin.js
+- Removed bootstrap from customizer pages
+- Enforced WPCS on login and password reset
+
+CAWeb v1.5.5b
+- Fixed various issues related to plugin conflicts with live drafts
+
+CAWeb v1.5.5a
+- Fixed issue with Post List Module not rendering when tags were used
+
 CAWeb v1.5.5
 - Added function for xmlrpc_enabled filter
 - Added missing tabindex attribute to second level links

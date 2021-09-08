@@ -1,20 +1,10 @@
-$first-level-link-height : auto;
-$nav-list-width: 100%;
-
 @import '../custom/template';
-@import '../custom/main-content';
 @import '../custom/page-margins';
-@import '../custom/utility-header';
 @import '../custom/location-bar';
 @import '../custom/google';
 @import '../custom/navigation';
-@import '../custom/nav/dropdown';
-@import '../custom/nav/mega-menu';
-@import '../custom/module/header-slideshow';
-@import '../custom/module/section-carousel';
-@import '../custom/footer';
 
-// Corrects Logo when navigation is compacted
+// Corrects Logo when navigation is compacted, in mobile view
 @media (min-width: 768px){
 	.fixed.compact .header-organization-banner a img{
 		max-height: 50px;

@@ -1,12 +1,4 @@
 /* Google Translate */
-#google_translate_element.standard-translate{
-	width: auto;
-	padding-left: 0;
-	text-align: right;
-}
-#google_translate_element .skiptranslate.goog-te-gadget div {
-	color: initial;
-}
 #google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
 	color: white;
 }
@@ -15,4 +7,9 @@
 }
 .skiptranslate.goog-te-gadget a:hover{
 	color:#fee09c;
+}
+
+/* Google Search */
+.gs-visibleUrl-breadcrumb{
+	color: #008A28 !important;
 }

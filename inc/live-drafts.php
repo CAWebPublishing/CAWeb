@@ -9,8 +9,9 @@
 
 add_action( 'load-post.php', 'caweb_live_drafts_init' );
 add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
-
 add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
+
+add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
 
 /**
  * CAWeb Live Drafts Initialization
@@ -29,6 +30,9 @@ function caweb_live_drafts_init() {
 	add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
 
 	caweb_live_drafts_post_hooks();
+
+	// Trash post.
+	add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
 
 	// Admin footer.
 	add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer', 10 );
@@ -52,14 +56,14 @@ function caweb_live_drafts_post_hooks( $add = true ) {
 		add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
 
 		// Save Post Action.
-		add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+		add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
 
 	} else {
 		// Pre-post update.
 		remove_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update' );
 
 		// Save Post Action.
-		remove_action( 'save_post', 'caweb_live_drafts_post_update' );
+		remove_action( 'save_post', 'caweb_live_drafts_save_post' );
 
 	}
 
@@ -148,6 +152,24 @@ function caweb_live_drafts_admin_head() {
 			});
 
 		</script>
+		<?php
+		// if the Oasis WorkFlow Plugin is activated rename save draft button back to "Save Draft".
+	} elseif ( ( is_plugin_active( 'oasis-workflow/oasis-workflow.php' ) ||
+				is_plugin_active( 'oasis-workflow-pro/oasis-workflow-pro.php' ) ) &&
+			in_array( $post->post_type, array( 'post', 'page' ), true ) && 'draft' === $post->post_status ) {
+		?>
+			<script type="text/javascript">
+
+			jQuery(document).ready(function($) {
+
+				// Rename Save Draft Button.
+				setTimeout(() => {
+					$('#save-action #save-post').val('Save Draft');
+				}, 1000);
+
+			});
+
+			</script>
 		<?php
 	}
 }
@@ -293,6 +315,11 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		return $post_id;
 	}
 
+	// Check if previewing.
+	if ( isset( $_POST['wp-preview'] ) && 'dopreview' === $_POST['wp-preview'] ) {
+		return $post_id;
+	}
+
 	$verified = isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'add-post' );
 
 	// Check if this is an auto save routine. If it is we dont want to do anything.
@@ -338,13 +365,33 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		);
 
 		// unhook action.
-		remove_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update' );
+		caweb_live_drafts_post_hooks( false );
 
 		// Insert the post into the database.
 		$new_id = wp_insert_post( $draft_post );
 
+		// Divi saves the original even when a draft is created, revert to previous revision.
+		$old_content = isset( $_REQUEST['et_pb_old_content'] ) ? wp_kses( wp_unslash( $_REQUEST['et_pb_old_content'] ), 'post' ) : '';
+
+		if ( ! empty( $old_content ) ) {
+
+			// unhook actions.
+			caweb_live_drafts_post_hooks( false );
+
+			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
+			$rollback_post = caweb_live_drafts_duplicate_post(
+				$_REQUEST,
+				array(
+					'post_status'    => 'publish',
+					'post_content'   => $old_content,
+				)
+			);
+
+			wp_update_post( $rollback_post );
+		}
+
 		// re-hook action.
-		add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
+		caweb_live_drafts_post_hooks();
 
 		// Migrate meta data.
 		caweb_live_drafts_migrate_post_meta( $post_id, $new_id, array( '_pc_liveId', '_pc_draftId' ) );
@@ -354,6 +401,10 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 
 		// Add a hidden meta data value to indicate the draft exist for a live page.
 		update_post_meta( $post_id, '_pc_draftId', $new_id );
+
+		// Send user to new edit page.
+		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $new_id ) );
+		exit();
 	}
 
 }
@@ -363,12 +414,17 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
  *
  * Fires once a post has been saved.
  *
- * @category add_action( 'save_post', 'caweb_live_drafts_post_update', 10, 2 );
+ * @category add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
  * @return int
  */
-function caweb_live_drafts_post_update( $post_id, $post ) {
+function caweb_live_drafts_save_post( $post_id, $post ) {
+
+	// Check if previewing.
+	if ( isset( $_POST['wp-preview'] ) && 'dopreview' === $_POST['wp-preview'] ) {
+		return $post_id;
+	}
 
 	// Check if this is an auto save routine. If it is we dont want to do anything.
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -389,66 +445,18 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		return $post_id;
 	}
 
-	$request_post_id = isset( $_REQUEST['post_ID'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_ID'] ) ) : '';
-	$save            = isset( $_REQUEST['save'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['save'] ) ) : '';
-	$post_status     = isset( $_REQUEST['post_status'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_status'] ) ) : '';
-	$caweb_draft     = isset( $_REQUEST['caweb_save_draft'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['caweb_save_draft'] ) ) : '';
-
-	// Catch when a draft is saved of a live page.
-	if ( 'Save Draft' === $save &&
-			'publish' === $post_status &&
-			'saving' === $caweb_draft &&
-			! wp_is_post_revision( $request_post_id )
-		) {
-
-		// Check for post meta that identifies this as a 'live draft'.
-		$_pc_draft_id = get_post_meta( $request_post_id, '_pc_draftId', true );
-
-		if ( empty( $_pc_draft_id ) ) {
-			return;
-		}
-
-		// Divi saves the original even when a draft is created, revert to previous revision.
-		$revs = wp_get_post_revisions( $request_post_id );
-
-		if ( ! empty( $revs ) ) {
-			array_shift( $revs );
-
-			// unhook actions.
-			caweb_live_drafts_post_hooks( false );
-
-			// Divi is saving the original page even if a draft is created, duplicate post, and rollback to previous post_content.
-			$rollback_post = caweb_live_drafts_duplicate_post(
-				$_REQUEST,
-				array(
-					'post_status'    => 'publish',
-					'post_content'   => array_shift( $revs )->post_content,
-				)
-			);
-
-			wp_update_post( $rollback_post );
-
-			// re-hook actions.
-			caweb_live_drafts_post_hooks();
-		}
-
-			// Send user to new edit page.
-			wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_draft_id ) );
-			exit();
-
-	}
-
 	$publish = isset( $_REQUEST['publish'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['publish'] ) ) : '';
-	$content = isset( $_REQUEST['content'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['content'] ) ) : $post->post_content;
 
 	// Catch when a draft is published.
-	if ( 'Schedule' !== $publish ) {
+	if ( ! empty( $publish ) && 'Schedule' !== $publish ) {
 		// Check for post meta that identifies this as a 'draft of a live page'.
 		$_pc_live_id = get_post_meta( $post_id, '_pc_liveId', true );
 
 		if ( empty( $_pc_live_id ) ) {
 			return;
 		}
+
+		$content = isset( $_REQUEST['content'] ) ? wp_kses( wp_unslash( $_REQUEST['content'] ), 'post' ) : $post->post_content;
 
 		// Duplicate post and replace live page.
 		$updated_post = caweb_live_drafts_duplicate_post(
@@ -482,7 +490,9 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 		// Delete draft post, force delete since 2.9, no sending to trash.
 		wp_delete_post( $post_id, true );
 
-		unset( $_SESSION[ "post_$_pc_live_id" ] );
+		if ( isset( $_SESSION[ "post_$_pc_live_id" ] ) ) {
+			unset( $_SESSION[ "post_$_pc_live_id" ] );
+		}
 
 		// Send user to new edit page.
 		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_live_id ) );
@@ -491,4 +501,64 @@ function caweb_live_drafts_post_update( $post_id, $post ) {
 
 }
 
-?>
+/**
+ * CAWeb Live Drafts Trash Post
+ *
+ * Fires before a post is sent to the Trash.
+ *
+ * @category add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
+ * @param int $post_id Post ID.
+ *
+ * @return void
+ */
+function caweb_live_drafts_wp_trash_post( $post_id ) {
+	// Check for post meta identifiers.
+	$_pc_live_id  = get_post_meta( $post_id, '_pc_liveId', true );
+	$_pc_draft_id = get_post_meta( $post_id, '_pc_draftId', true );
+
+	// if post is a draft of a live page.
+	if ( ! empty( $_pc_live_id ) ) {
+		// delete live drafts liveId meta.
+		delete_post_meta( $post_id, '_pc_liveId' );
+
+		// delete published page draftID meta.
+		delete_post_meta( $_pc_live_id, '_pc_draftId' );
+	}
+
+	// if post is a live page but has existing live drafts.
+	if ( ! empty( $_pc_draft_id ) ) {
+
+		// delete published page draftID meta.
+		delete_post_meta( $post_id, '_pc_draftId' );
+
+		// unhook actions.
+		caweb_live_drafts_post_hooks( false );
+
+		// trash live drafts page.
+		wp_trash_post( $_pc_draft_id );
+
+		// hook actions.
+		caweb_live_drafts_post_hooks();
+	}
+}
+
+/**
+ * Filters the default post display states used in the posts list table.
+ *
+ * @category add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
+ * @param string[] $post_states An array of post display states.
+ * @param WP_Post  $post        The current post object.
+ */
+function caweb_live_drafts_display_post_states( $post_states, $post ) {
+
+	if ( isset( $post->ID ) ) {
+		$_pc_live_id = get_post_meta( $post->ID, '_pc_liveId', true );
+
+		// if post is a draft of a live page add Live Draft to post states.
+		if ( ! empty( $_pc_live_id ) ) {
+			$post_states[] = 'Live Draft';
+		}
+	}
+
+	return $post_states;
+}
