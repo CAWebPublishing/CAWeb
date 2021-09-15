@@ -195,7 +195,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		) : '';
 
 		$job_title    = ! empty( $job_title ) ? sprintf( '<div class="d-block"><span class="font-size-13">%1$s</span></div>', $job_title ) : '';
-		$profile_link = ! empty( $profile_link ) ? sprintf( '<a href="%1$s" class="font-size-12" aria-label="Link to %2$s Website">%3$s</a>', $url, $name, $profile_link ) : '';
+		$profile_link = ! empty( $profile_link ) ? sprintf( '<a href="%1$s" class="font-size-12">%2$s</a>', $url, $profile_link ) : '';
 		$name         = ! empty( $name ) ? sprintf( '<h3 class="h4 m-0">%1$s</h3>', $name ) : '';
 
 		$media_body = sprintf(
