@@ -14,8 +14,8 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
-define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s%2$s%3$s-ext/', WP_CONTENT_DIR, get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
@@ -187,21 +187,16 @@ function caweb_setup_theme() {
 	 * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
 	 */
 	$locations = array(
-		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . '/css/',
-		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . '/js/',
-		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . '/css/',
-		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . '/js/',
+		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . 'css/',
+		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . 'js/',
+		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . 'css/',
+		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . 'js/',
 	);
 
-	foreach ( $old_location as $locations => $new_location ) {
+	foreach ( $locations as $old_location => $new_location ) {
 		if ( file_exists( $old_location ) ) {
-			if ( ! file_exists( $new_location ) ) {
-				mkdir( $new_location, 0777, true );
-				rename( $old_location, $new_location );
-			} else {
-				caweb_rrmdir( $old_location );
-				rmdir( $old_location );
-			}
+			rename( $old_location, $new_location );
+			rmdir( $old_location );
 		}
 	}
 
@@ -507,7 +502,7 @@ function caweb_admin_init() {
 	global $wp_filesystem;
 	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
 		$creds = request_filesystem_credentials( site_url() );
-		wp_filesystem( $creds );
+		WP_Filesystem( $creds );
 	}
 
 }
