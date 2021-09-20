@@ -14,17 +14,14 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
-define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
-define( 'WP_TEMP_DIR', WP_CONTENT_DIR . '/tmp' );
+define( 'WP_TEMP_DIR', get_temp_dir() );
 
-if ( ! file_exists( WP_TEMP_DIR ) ) {
-	mkdir( WP_TEMP_DIR );
-}
 
 /**
  * Plugin API/Action Reference
@@ -184,30 +181,27 @@ function caweb_setup_theme() {
 	}
 
 	/**
-	 * External CSS/JS files have been moved outside of the theme
+	 * External CSS/JS files have been moved to the temp directory.
 	 *
-	 * @since 1.4.23
+	 * @since 1.5.8 External CSS/JS files moved to wp-content/tmp/caweb-ext directory.
+	 * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
 	 */
-	$old_ext_css_dir = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
-	$old_ext_js_dir  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+	$locations = array(
+		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . '/css/',
+		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . '/js/',
+		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . '/css/',
+		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . '/js/',
+	);
 
-	if ( file_exists( $old_ext_css_dir ) ) {
-		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/css/' ) ) {
-			mkdir( CAWEB_EXTERNAL_DIR . '/css/', 0777, true );
-			rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
-		} else {
-			caweb_rrmdir( $old_ext_css_dir );
-			rmdir( $old_ext_css_dir );
-		}
-	}
-
-	if ( file_exists( $old_ext_js_dir ) ) {
-		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/js/' ) ) {
-			mkdir( CAWEB_EXTERNAL_DIR . '/js/', 0777, true );
-			rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
-		} else {
-			caweb_rrmdir( $old_ext_js_dir );
-			rmdir( $old_ext_js_dir );
+	foreach ( $old_location as $locations => $new_location ) {
+		if ( file_exists( $old_location ) ) {
+			if ( ! file_exists( $new_location ) ) {
+				mkdir( $new_location, 0777, true );
+				rename( $old_location, $new_location );
+			} else {
+				caweb_rrmdir( $old_location );
+				rmdir( $old_location );
+			}
 		}
 	}
 
@@ -510,8 +504,11 @@ function caweb_admin_init() {
 	 *
 	 * @link https://codex.wordpress.org/Filesystem_API
 	 */
-	$creds = request_filesystem_credentials( '', '', false, false, null );
-	WP_Filesystem( $creds );
+	global $wp_filesystem;
+	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
+		$creds = request_filesystem_credentials( site_url() );
+		wp_filesystem( $creds );
+	}
 
 }
 
