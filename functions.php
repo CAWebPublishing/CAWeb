@@ -20,11 +20,8 @@ define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
-define( 'WP_TEMP_DIR', WP_CONTENT_DIR . '/tmp' );
+define( 'WP_TEMP_DIR', get_temp_dir() );
 
-if ( ! file_exists( WP_TEMP_DIR ) ) {
-	mkdir( WP_TEMP_DIR );
-}
 
 /**
  * Plugin API/Action Reference
@@ -510,8 +507,11 @@ function caweb_admin_init() {
 	 *
 	 * @link https://codex.wordpress.org/Filesystem_API
 	 */
-	$creds = request_filesystem_credentials( '', '', false, false, null );
-	WP_Filesystem( $creds );
+	global $wp_filesystem;
+	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
+		$creds = request_filesystem_credentials( site_url() );
+		wp_filesystem( $creds );
+	}
 
 }
 
