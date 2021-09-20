@@ -14,8 +14,8 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
-define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s/%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s%2$s%3$s-ext/', WP_CONTENT_DIR, get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
@@ -34,7 +34,6 @@ add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'get_header', 'caweb_get_header' );
-add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
 add_action( 'wp_head', 'caweb_wp_head' );
@@ -187,21 +186,16 @@ function caweb_setup_theme() {
 	 * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
 	 */
 	$locations = array(
-		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . '/css/',
-		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . '/js/',
-		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . '/css/',
-		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . '/js/',
+		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . 'css/',
+		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . 'js/',
+		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . 'css/',
+		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . 'js/',
 	);
 
-	foreach ( $old_location as $locations => $new_location ) {
+	foreach ( $locations as $old_location => $new_location ) {
 		if ( file_exists( $old_location ) ) {
-			if ( ! file_exists( $new_location ) ) {
-				mkdir( $new_location, 0777, true );
-				rename( $old_location, $new_location );
-			} else {
-				caweb_rrmdir( $old_location );
-				rmdir( $old_location );
-			}
+			rename( $old_location, $new_location );
+			rmdir( $old_location );
 		}
 	}
 
@@ -210,6 +204,16 @@ function caweb_setup_theme() {
 
 	// Remove Divi favicon.
 	remove_action( 'wp_head', 'add_favicon' );
+
+	/**
+	 * All Child Theme .css files must be dequeued and re-queued so that we can control their order.
+	 * They must be queued below the parent stylesheet, which we have dequeued and re-queued in et_divi_replace_parent_stylesheet().
+	 *
+	 * Remove this action, otherwise the order of the styles is incorrect
+	 *
+	 * @since Divi 4.10.0
+	 */
+	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
 }
 
 /**
@@ -284,21 +288,6 @@ function caweb_get_header( $name = null ) {
 		locate_template( array( 'header.php' ), true );
 		locate_template( array( 'partials/header.php' ), true, true, array( 'loaded' => true ) );
 	}
-}
-
-/**
- * Register Parent Theme styles.css
- *
- * Fires when scripts and styles are enqueued.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
- *
- * @category add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
- * @return void
- */
-function caweb_wp_enqueue_parent_scripts() {
-	/* Required in order to inherit parent theme style.css */
-	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), CAWEB_DIVI_VERSION );
 }
 
 /**
@@ -507,7 +496,7 @@ function caweb_admin_init() {
 	global $wp_filesystem;
 	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
 		$creds = request_filesystem_credentials( site_url() );
-		wp_filesystem( $creds );
+		WP_Filesystem( $creds );
 	}
 
 }
