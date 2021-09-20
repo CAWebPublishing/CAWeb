@@ -226,7 +226,11 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
 			}
 
-			if ( isset( $upgrader->skin->theme_info ) && $upgrader->skin->theme_info->get( 'Name' ) === $this->theme_name ) {
+			if ( isset( $upgrader->skin->theme_info ) &&
+				is_object( $upgrader->skin->theme_info ) &&
+				method_exists( $upgrader->skin->theme_info, 'get' ) &&
+				$upgrader->skin->theme_info->get( 'Name' ) === $this->theme_name
+				) {
 				$theme = wp_remote_retrieve_body( wp_remote_get( $package, array_merge( $this->args, array( 'timeout' => 60 ) ) ) );
 
 				global $wp_filesystem;

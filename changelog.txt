@@ -3,6 +3,7 @@ CAWeb v1.5.8
 - Removed redundant Aria label from profile banner
 - Swapped to the VIP file system creds
 - Swapped to the proper function to get the tmp directory
+- Added more duck typing to WP_Upgrader_Skin which should resolve issue with BlogVault Plugin.
 
 CAWeb v1.5.7
 - Fixed various issues with JAWS not reading toggle expanded/collapsed
