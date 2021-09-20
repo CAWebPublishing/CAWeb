@@ -34,7 +34,6 @@ add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'get_header', 'caweb_get_header' );
-add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
 add_action( 'wp_head', 'caweb_wp_head' );
@@ -205,6 +204,16 @@ function caweb_setup_theme() {
 
 	// Remove Divi favicon.
 	remove_action( 'wp_head', 'add_favicon' );
+
+	/**
+	 * All Child Theme .css files must be dequeued and re-queued so that we can control their order.
+	 * They must be queued below the parent stylesheet, which we have dequeued and re-queued in et_divi_replace_parent_stylesheet().
+	 *
+	 * Remove this action, otherwise the order of the styles is incorrect
+	 *
+	 * @since Divi 4.10.0
+	 */
+	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
 }
 
 /**
@@ -279,21 +288,6 @@ function caweb_get_header( $name = null ) {
 		locate_template( array( 'header.php' ), true );
 		locate_template( array( 'partials/header.php' ), true, true, array( 'loaded' => true ) );
 	}
-}
-
-/**
- * Register Parent Theme styles.css
- *
- * Fires when scripts and styles are enqueued.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
- *
- * @category add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
- * @return void
- */
-function caweb_wp_enqueue_parent_scripts() {
-	/* Required in order to inherit parent theme style.css */
-	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), CAWEB_DIVI_VERSION );
 }
 
 /**
