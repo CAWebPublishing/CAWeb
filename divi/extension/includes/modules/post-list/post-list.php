@@ -192,8 +192,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'toggle_slug'       => 'style',
 			),
 			'display_excerpt' => array(
-			    'label'             => esc_html__( 'Display Excerpt', 'et_builder' ),
-			    'type'              => 'yes_no_button',
+                'label'            	=> esc_html__( 'Display Excerpt', 'et_builder' ),
+                'type'              => 'yes_no_button',
 				'option_category'   => 'configuration',
 				'options'           => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
