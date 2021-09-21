@@ -179,25 +179,8 @@ function caweb_setup_theme() {
 		}
 	}
 
-	/**
-	 * External CSS/JS files have been moved to the temp directory.
-	 *
-	 * @since 1.5.8 External CSS/JS files moved to wp-content/tmp/caweb-ext directory.
-	 * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
-	 */
-	$locations = array(
-		sprintf( '%1$s/css/external', CAWEB_ABSPATH )   => CAWEB_EXTERNAL_DIR . 'css/',
-		sprintf( '%1$s/js/external', CAWEB_ABSPATH )    => CAWEB_EXTERNAL_DIR . 'js/',
-		sprintf( '%1$s/caweb-ext/css', WP_CONTENT_DIR ) => CAWEB_EXTERNAL_DIR . 'css/',
-		sprintf( '%1$s/caweb-ext/js', WP_CONTENT_DIR )  => CAWEB_EXTERNAL_DIR . 'js/',
-	);
-
-	foreach ( $locations as $old_location => $new_location ) {
-		if ( file_exists( $old_location ) ) {
-			rename( $old_location, $new_location );
-			rmdir( $old_location );
-		}
-	}
+	// Move caweb-ext files/folder.
+	caweb_move_external_folder();
 
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );

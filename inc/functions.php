@@ -459,3 +459,45 @@ function caweb_is_divi_used() {
 	return $builder_used;
 
 }
+
+/**
+ * External CSS/JS files have been moved to the temp directory.
+ *
+ * @since 1.5.8 External CSS/JS files moved to wp-content/tmp/caweb-ext directory.
+ * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
+ */
+function caweb_move_external_folder() {
+	// prior to 1.4.23 locations.
+	$pre_1_4_23_css = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
+	$pre_1_4_23_js  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+
+	// 1.4.23 location.
+	$post_1_4_23 = sprintf( '%1$s/caweb-ext', WP_CONTENT_DIR );
+
+	$locations = array(
+		"$pre_1_4_23_css "  => CAWEB_EXTERNAL_DIR . 'css/',
+		"$pre_1_4_23_js"    => CAWEB_EXTERNAL_DIR . 'js/',
+		"$post_1_4_23/css"  => CAWEB_EXTERNAL_DIR . 'css/',
+		"$post_1_4_23/js"   => CAWEB_EXTERNAL_DIR . 'js/',
+	);
+
+	foreach ( $locations as $old_location => $new_location ) {
+		if ( file_exists( $old_location ) ) {
+			rename( $old_location, $new_location );
+			rmdir( $old_location );
+		}
+	}
+
+	$old_paths = array(
+		$pre_1_4_23_css => glob( "$pre_1_4_23_css/*" ),
+		$pre_1_4_23_js  => glob( "$pre_1_4_23_js/*" ),
+		$post_1_4_23    => glob( "$post_1_4_23/*" ),
+	);
+
+	foreach ( $old_paths as $path => $files ) {
+		if ( file_exists( $path ) && empty( $files ) ) {
+			rmdir( $path );
+		}
+	}
+
+}
