@@ -191,6 +191,17 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
 			),
+			'display_excerpt' => array(
+				'label' 			=> esc_html__( 'Display Excerpt', 'et_builder' ),
+				'type'				=> 'yes_no_button',
+				'option_category' 	=> 'configuration',
+				'options'         	=> array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'style',
+			),
 		);
 
 		$design_fields = array(
@@ -229,6 +240,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$all_tags_button     = $this->props['all_tags_button'];
 		$include_tags        = $this->props['include_tags'];
 		$orderby             = $this->props['orderby'];
+		$display_excerpt	 = $this->props['display_excerpt'];
 
 		$order = '';
 
