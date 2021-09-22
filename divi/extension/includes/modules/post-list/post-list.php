@@ -192,15 +192,21 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'toggle_slug'       => 'style',
 			),
 			'display_excerpt' => array(
-                'label'            	=> esc_html__( 'Display Excerpt', 'et_builder' ),
-                'type'              => 'yes_no_button',
+				'label'             => esc_html__( 'Display Excerpt', 'et_builder' ),
+				'type'              => 'yes_no_button',
 				'option_category'   => 'configuration',
 				'options'           => array(
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
-				'tab_slug'        => 'general',
-				'toggle_slug'     => 'style',
+				'show_if'           => array(
+					'style' => array( 'course-list', 'events-list', 'general-list', 'news-list' ),
+				),
+				'show_if_not'       => array(
+					'style' => array( 'exams-list', 'faqs-list', 'jobs-list', 'profile-list' ),
+				),
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'style',
 			),
 		);
 
