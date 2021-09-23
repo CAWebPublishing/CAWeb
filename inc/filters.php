@@ -185,15 +185,19 @@ function caweb_xmlrpc_enabled() {
  * @return array
  */
 function caweb_allowed_redirect_hosts( $hosts ) {
-	// Add all sites to list of allowed hosts.
-	$domains = array_map(
-		function( $s ) {
-			return $s->domain;
-		},
-		get_sites( array( 'deleted' => 0 ) )
-	);
+	// Add all sites to list of allowed hosts on multisite.
+	if ( is_multisite() ) {
+		$domains = array_map(
+			function( $s ) {
+				return $s->domain;
+			},
+			get_sites( array( 'deleted' => 0 ) )
+		);
 
-	return array_merge( $hosts, $domains );
+		$hosts = array_merge( $hosts, $domains );
+	}
+
+	return $hosts;
 };
 
 
