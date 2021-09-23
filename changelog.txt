@@ -5,6 +5,7 @@ CAWeb v1.5.8
 - Swapped to the proper function to get the tmp directory
 - Added more duck typing to WP_Upgrader_Skin which should resolve issue with BlogVault Plugin.
 - Added remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 ); Divi is not enquequing scripts in the same order.
+- Resolved Fatal error: Uncaught Error: Call to undefined function get_sites()
 
 CAWeb v1.5.7
 - Fixed various issues with JAWS not reading toggle expanded/collapsed
