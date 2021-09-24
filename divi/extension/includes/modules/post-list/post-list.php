@@ -87,6 +87,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					'news-list'    => esc_html__( 'News List', 'et_builder' ),
 					'profile-list' => esc_html__( 'Profile List', 'et_builder' ),
 				),
+				'default'           => 'course-list',
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
