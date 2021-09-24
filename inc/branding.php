@@ -50,7 +50,7 @@ function caweb_login_enqueue_scripts() {
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );
 
-	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery', 'caweb-bootstrap-scripts' ), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery' ), CAWEB_VERSION, true );
 
 	wp_enqueue_script( 'caweb-admin-scripts' );
 

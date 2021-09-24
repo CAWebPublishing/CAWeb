@@ -344,6 +344,12 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @return string
 	 */
 	public function caweb_get_excerpt( $con, $excerpt_length, $p = -1 ) {
+		$post_default_excerpt = get_the_excerpt( $p );
+
+		if ( ! empty( $post_default_excerpt ) ) {
+			return html_entity_decode( sprintf( '<div class="post-%1$s-excerpt">%2$s</div>', $p, $post_default_excerpt ) );
+		}
+
 		if ( empty( $con ) ) {
 			return $con;
 		}

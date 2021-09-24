@@ -19010,7 +19010,7 @@ jQuery(document).ready(function() {
 	Add aria labels to datatables search field 
 	*/
 	var dataTables_filter = $('.dataTables_filter')
-
+	
 	if( dataTables_filter.length ){
 		dataTables_filter.each(function(index, element) {
 			var l = $(element).find('label');
@@ -19020,8 +19020,62 @@ jQuery(document).ready(function() {
 			$(i).attr('id', $(i).attr('aria-controls') + '-search');
 		});
 	}
+
+	setTimeout( function(){
+		/* 
+		TablePress Accessibility 
+		Add missing aria-sort to headers
+		*/
+		var tablepress_headers = $('table[id^="tablepress-"] thead tr th');
+
+		if( tablepress_headers.length ){
+			add_aria_sort();
+
+			tablepress_headers.each(function(index, element) {
+				$(element).on('click', add_aria_sort );
+			});
+
+			function add_aria_sort(){
+				tablepress_headers.each(function(index, element) {
+					if( undefined == $(element).attr('aria-sort') ){
+						$(element).attr('aria-sort', 'none');
+					}
+				});
+			}
+		}
+
+		/* 
+		TablePress Accessibility 
+		Add href to pagination links
+		*/
+		var dataTables_pagination = $('.dataTables_paginate .paginate_button'); 
+
+		if( dataTables_pagination.length ){
+			dataTables_pagination.each(function(index, element){
+				$(element).attr('href', '#');
+			});
+		}
+	}, 500);
+	
 });
 jQuery(document).ready(function() {
+	
+	
+	/*
+	WPForms Accessibility 
+	Give focus to confirmation message.
+	*/
+	var wpforms_confirmation_msg = $('div[id^="wpforms-confirmation-"] p');
+
+
+	if( wpforms_confirmation_msg.length ){
+		wpforms_confirmation_msg.each(function(index, element) {
+			$(element).attr('tabindex', '0');
+			
+			$(element).focus();
+		});
+	}
+
 	/*
 	WPForms Accessibility 
 	Retrieve radio field containers
@@ -19370,58 +19424,55 @@ jQuery(document).ready(function() {
 			// Events
 			$(element).on('click keydown', function(e){
 				// Shows or hides content in accordion when Enter or Space key is pressed
-				if (e.type === 'keydown') {
-					var toggleKeys = [13, 32]; // key codes for enter and space, respectively
-					var toggleKeyPressed = toggleKeys.includes(e.which);
-					var toggleOpen = [40]; // down arrow to open
-					var toggleOpenPressed = toggleOpen.includes(e.which);
-					var toggleClose = [38] //up arrow to close
-					var toggleClosePressed = toggleClose.includes(e.which);
+				var toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
+				var toggleKeyPressed = toggleKeys.includes(e.which);
+				var toggleOpen = [40]; // down arrow to open
+				var toggleOpenPressed = toggleOpen.includes(e.which);
+				var toggleClose = [38] //up arrow to close
+				var toggleClosePressed = toggleClose.includes(e.which);
 
-					if (toggleKeyPressed) {
-						setTimeout( function(){
-							$(element).toggleClass('et_pb_toggle_open');
-							$(element).toggleClass('et_pb_toggle_close');
+				if (toggleKeyPressed) {
+					setTimeout( function(){
+						$(element).toggleClass('et_pb_toggle_open');
+						$(element).toggleClass('et_pb_toggle_close');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500);
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500);
+				}
 
-					if (toggleOpenPressed) {
-						setTimeout( function(){
-							$(element).addClass('et_pb_toggle_open');
-							$(element).removeClass('et_pb_toggle_close');
+				if (toggleOpenPressed) {
+					setTimeout( function(){
+						$(element).addClass('et_pb_toggle_open');
+						$(element).removeClass('et_pb_toggle_close');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500);
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500);
+				}
 
-					if (toggleClosePressed) {
-						setTimeout( function(){
-							$(element).addClass('et_pb_toggle_close');
-							$(element).removeClass('et_pb_toggle_open');
+				if (toggleClosePressed) {
+					setTimeout( function(){
+						$(element).addClass('et_pb_toggle_close');
+						$(element).removeClass('et_pb_toggle_open');
 
-							if ($(element).hasClass('et_pb_toggle_open')) {
-								$(element).find('.et_pb_toggle_content').css('display', 'block');
-							} else {
-								$(element).find('.et_pb_toggle_content').css('display', 'none')
-							}
-						}, 500)
-						
-					}
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						} else {
+							$(element).find('.et_pb_toggle_content').css('display', 'none')
+						}
+					}, 500)
+				}
 					
-					// Prevents spacebar from scrolling page to the bottom
-					if (e.which === 32) {
-						e.preventDefault();
-					}
+				// Prevents spacebar from scrolling page to the bottom
+				if (e.which === 32) {
+					e.preventDefault();
 				}
 
 				// Modifies value for aria-expanded attribute

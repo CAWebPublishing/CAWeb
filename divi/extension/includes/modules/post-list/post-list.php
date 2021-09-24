@@ -87,6 +87,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					'news-list'    => esc_html__( 'News List', 'et_builder' ),
 					'profile-list' => esc_html__( 'Profile List', 'et_builder' ),
 				),
+				'default'           => 'course-list',
 				'description'       => esc_html__( 'Here you can select the various list styles.', 'et_builder' ),
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
@@ -188,6 +189,24 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				),
 				'default'           => 'date_desc',
 				'description'       => esc_html__( 'Here you can adjust the order in which posts are displayed.', 'et_builder' ),
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'style',
+			),
+			'display_excerpt' => array(
+				'label'             => esc_html__( 'Display Excerpt', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'default'           => 'on',
+				'show_if'           => array(
+					'style' => array( 'course-list', 'events-list', 'general-list', 'news-list' ),
+				),
+				'show_if_not'       => array(
+					'style' => array( 'exams-list', 'faqs-list', 'jobs-list', 'profile-list' ),
+				),
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
 			),
@@ -294,16 +313,19 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				break;
 			}
 			// Get the CAWeb Post Handler.
-			$post_id = $p->ID;
-			$title   = $p->post_title;
-			$url     = get_permalink( $p->ID );
-			$content = $p->post_content;
+			$post_info = array(
+				'id'      => $p->ID,
+				'title'   => $p->post_title,
+				'url'     => get_permalink( $p->ID ),
+				'excerpt' => get_the_excerpt( $p->ID ),
+				'content' => $p->post_content,
+			);
 
-			$post_content_handler = caweb_get_shortcode_from_content( $content, 'et_pb_ca_post_handler' );
+			$post_content_handler = caweb_get_shortcode_from_content( $p->post_content, 'et_pb_ca_post_handler' );
 
 			// if the handler is an object, construct the appropriate list item.
 			if ( is_object( $post_content_handler ) ) {
-				$output .= $this->createListView( $style, $posts_number, $post_content_handler, $post_id, $url, $title, $view_featured_image, $faq_style );
+				$output .= $this->createListView( $style, $posts_number, $post_content_handler, $post_info, $view_featured_image, $faq_style );
 			} // end of if is_object check.
 		}
 
@@ -379,14 +401,12 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @param  string $list_style Post List style.
 	 * @param  int    $post_count Counter of posts to display.
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @param  string $faq_style Post List FAQs style.
 	 * @return string
 	 */
-	public function createListView( $list_style, &$post_count, $p_handler, $p_id, $p_url, $p_title, $featured_image = 'off', $faq_style = '' ) {
+	public function createListView( $list_style, &$post_count, $p_handler, $post_info, $featured_image = 'off', $faq_style = '' ) {
 		$layout = isset( $p_handler->post_type_layout ) ? $p_handler->post_type_layout : 'general';
 
 		// List Style.
@@ -396,7 +416,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					// if post contains a CAWeb News Post Handler.
 				if ( 'news' === $layout ) {
 					$post_count--;
-					return $this->createNews( $p_handler, $p_id, $p_url, $p_title, $featured_image );
+					return $this->createNews( $p_handler, $post_info, $featured_image );
 				}
 
 				break;
@@ -406,7 +426,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb Profile Post Handler.
 				if ( 'profile' === $layout ) {
 					$post_count--;
-					return $this->createProfile( $p_handler, $p_id, $p_url, $featured_image );
+					return $this->createProfile( $p_handler, $post_info, $featured_image );
 				}
 
 				break;
@@ -415,7 +435,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					// if post contains a CAWeb Job Post Handler.
 				if ( 'jobs' === $layout ) {
 					$post_count--;
-					return $this->createJob( $p_handler, $p_url, $p_title );
+					return $this->createJob( $p_handler, $post_info );
 				}
 
 				break;
@@ -425,7 +445,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 
 				if ( 'event' === $layout ) {
 					$post_count--;
-					return $this->createEvent( $p_handler, $p_id, $p_url, $p_title, $featured_image );
+					return $this->createEvent( $p_handler, $post_info, $featured_image );
 				}
 
 				break;
@@ -434,7 +454,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb Course Post Handler.
 				if ( 'course' === $layout ) {
 					$post_count--;
-					return $this->createCourse( $p_handler, $p_id, $p_url, $p_title, $featured_image );
+					return $this->createCourse( $p_handler, $post_info, $featured_image );
 				}
 
 				break;
@@ -443,7 +463,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb Course Post Handler.
 				if ( 'exam' === $layout ) {
 					$post_count--;
-					return $this->createExam( $p_handler, $p_url, $p_title );
+					return $this->createExam( $p_handler, $post_info );
 				}
 
 				break;
@@ -453,7 +473,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb FAQ Post Handler.
 				if ( 'faqs' === $layout ) {
 					$post_count--;
-					return $this->createFAQ( $p_handler, $faq_style, $post_count, $p_title );
+					return $this->createFAQ( $p_handler, $faq_style, $post_count, $post_info );
 				}
 
 				break;
@@ -464,7 +484,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					$list_types = array( 'news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs' );
 				if ( in_array( $layout, $list_types, true ) ) {
 					$post_count--;
-					return $this->createGeneral( $p_handler, $p_id, $p_url, $p_title, $featured_image );
+					return $this->createGeneral( $p_handler, $post_info, $featured_image );
 				}
 
 				break;
@@ -476,22 +496,22 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders Course Views
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @return string
 	 */
-	public function createCourse( $p_handler, $p_id, $p_url, $p_title, $featured_image ) {
-		$course_title  = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $p_url, $p_title );
-		$has_thumbnail = has_post_thumbnail( $p_id );
+	public function createCourse( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
+
+		$course_title  = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $post_info['url'], $post_info['title'] );
+		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
 
 		$image = 'on' === $featured_image && $has_thumbnail ?
-			sprintf( '<div class="thumbnail" >%1$s</div>', $this->caweb_get_the_post_thumbnail( $p_id, array( 70, 70 ) ) ) : '';
+			sprintf( '<div class="thumbnail" >%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 70, 70 ) ) ) : '';
 
-		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 20, $p_id );
-		$excerpt = ( ! empty( $excerpt ) ?
-								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '' );
+		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 20, $post_info['id'] );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '';
 
 		$tmp = array(
 			( ! empty( $p_handler->course_address ) ? $p_handler->course_address : '' ),
@@ -525,23 +545,23 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders Event View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @return string
 	 */
-	public function createEvent( $p_handler, $p_id, $p_url, $p_title, $featured_image ) {
-		$has_thumbnail = has_post_thumbnail( $p_id );
+	public function createEvent( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
+
+		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
 
 		$thumbnail = 'on' === $featured_image && $has_thumbnail ?
-			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $p_id, array( 150, 100 ) ) ) : '';
+			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 150, 100 ) ) ) : '';
 
-		$event_title = sprintf( '<h5 class="pb-0"><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $p_url, $p_title );
+		$event_title = sprintf( '<h5 class="pb-0"><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $post_info['url'], $post_info['title'] );
 
-		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 15, $p_id );
-		$excerpt = ( ! empty( $excerpt ) ?
-								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '' );
+		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 15, $post_info['id'] );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '';
 
 		$date = ( ! empty( $p_handler->event_start_date ) ? sprintf( '<div class="start-date"><time>%1$s</time></div>', gmdate( 'D, n/j/Y g:i a', strtotime( $p_handler->event_start_date ) ) ) : '' );
 
@@ -554,12 +574,12 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders Exam View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
+	 *
 	 * @return string
 	 */
-	public function createExam( $p_handler, $p_url, $p_title ) {
-		$exam_title = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $p_url, $p_title );
+	public function createExam( $p_handler, $post_info ) {
+		$exam_title = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $post_info['url'], $post_info['title'] );
 
 		$pub = ( ! empty( $p_handler->exam_published_date ) ?
 				sprintf( '<div class="published">Published: <time>%1$s</time></div>', gmdate( 'M j, Y', strtotime( $p_handler->exam_published_date ) ) ) : '' );
@@ -587,18 +607,18 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @param  object $p_handler Post Module Handler Object.
 	 * @param  string $style Post List FAQs style.
 	 * @param  int    $post_count Counter of posts to display.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @return string
 	 */
-	public function createFAQ( $p_handler, $style, $post_count, $p_title ) {
+	public function createFAQ( $p_handler, $style, $post_count, $post_info ) {
 		if ( 'toggle' === $style ) {
-			return sprintf( '<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $p_title, $p_handler->content );
+			return sprintf( '<li><a class="toggle">%1$s</a><div class="description">%2$s</div></li>', $post_info['title'], $p_handler->content );
 		}
 
 		if ( 'accordion' === $style ) {
 			$faqs = sprintf(
 				'<div class="panel panel-default et_pb_toggle et_pb_toggle_item et_pb_toggle_close p-0"><div class="et_pb_toggle_title panel-heading p-2"><h4 class="panel-title pb-0"><a>%1$s</a></h4><span class="ca-gov-icon-triangle-right ca-gov-icon-triangle-down float-right"></span></div>',
-				$p_title
+				$post_info['title']
 			);
 
 			$faqs .= sprintf( '<div class="et_pb_toggle_content clearfix panel-body">%1$s</div></div>', $p_handler->content );
@@ -611,19 +631,20 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders General View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @return string
 	 */
-	public function createGeneral( $p_handler, $p_id, $p_url, $p_title, $featured_image ) {
-		$image = 'on' === $featured_image ? sprintf( '<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', $this->caweb_get_the_post_thumbnail( $p_id, array( 150, 100 ) ) ) : '';
+	public function createGeneral( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
 
-		$general_title = sprintf( '<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca; background: none;">%2$s</a></h5>', $p_url, $p_title );
+		$image = 'on' === $featured_image ? sprintf( '<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 150, 100 ) ) ) : '';
 
-		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 45, $p_id );
-		$excerpt = sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' === $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt );
+		$general_title = sprintf( '<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca; background: none;">%2$s</a></h5>', $post_info['url'], $post_info['title'] );
+
+		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 45, $post_info['id'] );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+				sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' === $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt ) : '';
 
 		return sprintf( '<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt );
 	}
@@ -632,12 +653,11 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders Job View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @return string
 	 */
-	public function createJob( $p_handler, $p_url, $p_title ) {
-		$job_title = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $p_url, $p_title );
+	public function createJob( $p_handler, $post_info ) {
+		$job_title = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $post_info['url'], $post_info['title'] );
 
 		$addr  = ( ! empty( $p_handler->job_agency_address ) ? $p_handler->job_agency_address : '' );
 		$city  = ( ! empty( $p_handler->job_agency_city ) ? $p_handler->job_agency_city : '' );
@@ -698,27 +718,27 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders News View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
-	 * @param  string $p_title Post Title.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @return string
 	 */
-	public function createNews( $p_handler, $p_id, $p_url, $p_title, $featured_image ) {
-		$has_thumbnail = has_post_thumbnail( $p_id );
+	public function createNews( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
 
-		$news_title = sprintf( '<div class="headline"><a href="%1$s">%2$s</a></div>', $p_url, $p_title );
+		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
+
+		$news_title = sprintf( '<div class="headline"><a href="%1$s">%2$s</a></div>', $post_info['url'], $post_info['title'] );
 		if ( ! $has_thumbnail || 'off' === $featured_image ) {
 			$image = '';
 		} else {
 			$this->add_classname( 'indent' );
-			$thumbnail = $this->caweb_get_the_post_thumbnail( $p_id, array( 150, 100 ) );
+			$thumbnail = $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 150, 100 ) );
 			$image     = 'on' === $featured_image ? sprintf( '<div class="thumbnail">%1$s</div>', $thumbnail ) : '';
 		}
 
-		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 30, $p_id );
-		$excerpt = ( ! empty( $excerpt ) ?
-						sprintf( '<div class="description"><p>%1$s</p></div>', $excerpt ) : '' );
+		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 30, $post_info['id'] );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+						sprintf( '<div class="description"><p>%1$s</p></div>', $excerpt ) : '';
 
 		$author = ( ! empty( $p_handler->news_author ) ?
 						sprintf( 'Author: %1$s', $p_handler->news_author ) : '' );
@@ -737,16 +757,15 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * Renders Profile View
 	 *
 	 * @param  object $p_handler Post Module Handler Object.
-	 * @param  int    $p_id Post ID.
-	 * @param  string $p_url Post URL.
+	 * @param  array  $post_info Information about the Post.
 	 * @param  string $featured_image Post Featured Image.
 	 * @return string
 	 */
-	public function createProfile( $p_handler, $p_id, $p_url, $featured_image ) {
-		$no_thumbnail = ! has_post_thumbnail( $p_id ) || 'off' === $featured_image ? true : false;
+	public function createProfile( $p_handler, $post_info, $featured_image ) {
+		$no_thumbnail = ! has_post_thumbnail( $post_info['id'] ) || 'off' === $featured_image ? true : false;
 
 		$thumbnail = 'on' === $featured_image && ! $no_thumbnail ?
-			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $p_id, array( 75, 75 ) ) ) : '';
+			sprintf( '<div class="thumbnail">%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 75, 75 ) ) ) : '';
 
 		$t = sprintf(
 			'%1$s%2$s%3$s',
@@ -755,7 +774,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			( ! empty( $p_handler->profile_career_title ) ? sprintf( ', %1$s', $p_handler->profile_career_title ) : '' )
 		);
 
-		$profile_title = sprintf( '<div class="header%1$s"><div class="title"><a href="%2$s">%3$s</a></div></div>', $no_thumbnail ? ' ml-0' : '', $p_url, $t );
+		$profile_title = sprintf( '<div class="header%1$s"><div class="title"><a href="%2$s">%3$s</a></div></div>', $no_thumbnail ? ' ml-0' : '', $post_info['url'], $t );
 
 		$position = ( ! empty( $p_handler->profile_career_position ) ?
 						sprintf( '%1$s', $p_handler->profile_career_position ) : '' );

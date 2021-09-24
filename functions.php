@@ -14,17 +14,14 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext', WP_CONTENT_DIR, strtolower( wp_get_theme()->stylesheet ) ) );
-define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s-ext', strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s%2$s%3$s-ext/', WP_CONTENT_DIR, get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
-define( 'WP_TEMP_DIR', WP_CONTENT_DIR . '/tmp' );
+define( 'WP_TEMP_DIR', get_temp_dir() );
 
-if ( ! file_exists( WP_TEMP_DIR ) ) {
-	mkdir( WP_TEMP_DIR );
-}
 
 /**
  * Plugin API/Action Reference
@@ -37,7 +34,6 @@ add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'get_header', 'caweb_get_header' );
-add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
 add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
 add_action( 'wp_head', 'caweb_wp_head' );
@@ -183,39 +179,24 @@ function caweb_setup_theme() {
 		}
 	}
 
-	/**
-	 * External CSS/JS files have been moved outside of the theme
-	 *
-	 * @since 1.4.23
-	 */
-	$old_ext_css_dir = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
-	$old_ext_js_dir  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
-
-	if ( file_exists( $old_ext_css_dir ) ) {
-		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/css/' ) ) {
-			mkdir( CAWEB_EXTERNAL_DIR . '/css/', 0777, true );
-			rename( $old_ext_css_dir, CAWEB_EXTERNAL_DIR . '/css/' );
-		} else {
-			caweb_rrmdir( $old_ext_css_dir );
-			rmdir( $old_ext_css_dir );
-		}
-	}
-
-	if ( file_exists( $old_ext_js_dir ) ) {
-		if ( ! file_exists( CAWEB_EXTERNAL_DIR . '/js/' ) ) {
-			mkdir( CAWEB_EXTERNAL_DIR . '/js/', 0777, true );
-			rename( $old_ext_js_dir, CAWEB_EXTERNAL_DIR . '/js/' );
-		} else {
-			caweb_rrmdir( $old_ext_js_dir );
-			rmdir( $old_ext_js_dir );
-		}
-	}
+	// Move caweb-ext files/folder.
+	caweb_move_external_folder();
 
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );
 
 	// Remove Divi favicon.
 	remove_action( 'wp_head', 'add_favicon' );
+
+	/**
+	 * All Child Theme .css files must be dequeued and re-queued so that we can control their order.
+	 * They must be queued below the parent stylesheet, which we have dequeued and re-queued in et_divi_replace_parent_stylesheet().
+	 *
+	 * Remove this action, otherwise the order of the styles is incorrect
+	 *
+	 * @since Divi 4.10.0
+	 */
+	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
 }
 
 /**
@@ -286,25 +267,10 @@ function caweb_pre_get_posts( $query ) {
 function caweb_get_header( $name = null ) {
 	$post_type = get_post_type( get_the_ID() );
 
-	if ( 'project' === $post_type || empty( $post_type ) ) {
+	if ( in_array( $post_type, array( 'project', 'tribe_events' ), true ) || empty( $post_type ) ) {
 		locate_template( array( 'header.php' ), true );
-		require_once 'partials/header.php';
+		locate_template( array( 'partials/header.php' ), true, true, array( 'loaded' => true ) );
 	}
-}
-
-/**
- * Register Parent Theme styles.css
- *
- * Fires when scripts and styles are enqueued.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
- *
- * @category add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_parent_scripts' );
- * @return void
- */
-function caweb_wp_enqueue_parent_scripts() {
-	/* Required in order to inherit parent theme style.css */
-	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), CAWEB_DIVI_VERSION );
 }
 
 /**
@@ -510,8 +476,11 @@ function caweb_admin_init() {
 	 *
 	 * @link https://codex.wordpress.org/Filesystem_API
 	 */
-	$creds = request_filesystem_credentials( '', '', false, false, null );
-	WP_Filesystem( $creds );
+	global $wp_filesystem;
+	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
+		$creds = request_filesystem_credentials( site_url() );
+		WP_Filesystem( $creds );
+	}
 
 }
 

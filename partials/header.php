@@ -7,7 +7,8 @@
 
 global $post;
 
-$caweb_fixed_header = get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
+$caweb_loaded       = isset( $args['loaded'] ) && $args['loaded'];
+$caweb_fixed_header = ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
 $caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
 $caweb_schemes      = caweb_color_schemes( caweb_template_version(), 'filename' );
 $caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
@@ -22,17 +23,17 @@ $caweb_google_trans_page    = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
 
 /* Google Tag Manager */
-$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
+$caweb_google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
 
-if ( ! empty( $google_tag_manager_id ) ) :
-	$src = sprintf( 'https://www.googletagmanager.com/ns.html?id=%1$s', $google_tag_manager_id );
+if ( ! empty( $caweb_google_tag_manager_id ) ) :
+	$caweb_google_tag_src = sprintf( 'https://www.googletagmanager.com/ns.html?id=%1$s', $caweb_google_tag_manager_id );
 
 	?>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
-	<iframe src="<?php print $src; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	<iframe src="<?php print esc_url( $caweb_google_tag_srcrc ); ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
-			
+
 <?php endif; ?>
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">

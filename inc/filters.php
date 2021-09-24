@@ -15,8 +15,13 @@ add_filter( 'allowed_redirect_hosts', 'caweb_allowed_redirect_hosts' );
 add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
 add_filter( 'wp_kses_allowed_html', 'caweb_allowed_html', 10, 2 );
 
-/* Plugin Filters */
+/**
+ * Plugin Filters
+ */
+// WPForms.
 add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
+// The Events Calendar.
+add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_template_classes' );
 
 /**
  * CAWeb Page Body Class
@@ -44,12 +49,10 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 	/* List of extra classes that need to be added to the body */
 	if ( isset( $post->ID ) ) {
-		$divi              = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( $post->ID ) || strpos( $post->post_content, 'et_pb_section' ) || strpos( $post->post_content, 'et_pb_fullwidth_section' );
-		$sidebar_enabled   = ! is_page();
-		$special_templates = is_tag() || is_archive() || is_category() || is_author();
+		$sidebar_enabled = ! is_page();
 
 		$whitelist = array(
-			( $divi && ! $special_templates ? 'divi_builder' : 'non_divi_builder' ),
+			( caweb_is_divi_used() ? 'divi_builder' : 'non_divi_builder' ),
 			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
@@ -151,6 +154,20 @@ function caweb_wpforms_custom_capability( $cap ) {
 }
 
 /**
+ * Allows filtering the classes for the main element for the /events/ page.
+ *
+ * @since 5.8.0
+ *
+ * @param array<string> $classes An (unindexed) array of classes to apply.
+ */
+function caweb_default_events_template_classes( $classes ) {
+	$classes[] = 'main-content';
+
+	return $classes;
+}
+
+
+/**
  * CAWeb Disable XMLRPC
  *
  * @return boolean
@@ -168,15 +185,19 @@ function caweb_xmlrpc_enabled() {
  * @return array
  */
 function caweb_allowed_redirect_hosts( $hosts ) {
-	// Add all sites to list of allowed hosts.
-	$domains = array_map(
-		function( $s ) {
-			return $s->domain;
-		},
-		get_sites( array( 'deleted' => 0 ) )
-	);
+	// Add all sites to list of allowed hosts on multisite.
+	if ( is_multisite() ) {
+		$domains = array_map(
+			function( $s ) {
+				return $s->domain;
+			},
+			get_sites( array( 'deleted' => 0 ) )
+		);
 
-	return array_merge( $hosts, $domains );
+		$hosts = array_merge( $hosts, $domains );
+	}
+
+	return $hosts;
 };
 
 

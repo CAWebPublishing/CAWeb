@@ -1,3 +1,22 @@
+CAWeb v1.5.8
+- Fixed Live Drafts when using New Builder Experience
+- Removed redundant Aria label from profile banner
+- Swapped to the VIP file system creds
+- Swapped to the proper function to get the tmp directory
+- Added more duck typing to WP_Upgrader_Skin which should resolve issue with BlogVault Plugin.
+- Added remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 ); Divi is not enquequing scripts in the same order.
+- Resolved Fatal error: Uncaught Error: Call to undefined function get_sites()
+- Added Dispaly Excerpt Button to Post List Modules
+
+CAWeb v1.5.7
+- Fixed various issues with JAWS not reading toggle expanded/collapsed
+- Fixed issue with WPForms Confirmation not receiving focus on form submission
+- Fixed issue with footer bleeding when using The Events Calendar Plugin
+- Fixed issue with Header not loading when using The Events Calendar Plugin
+
+CAWeb v1.5.6a
+- Fixed issue with footer bleeding into content on Vanilla WP posts 
+
 CAWeb v1.5.6
 - Added new Enable Debug Mode option
 - Updated State Template from v5.5.21 to v5.5.23

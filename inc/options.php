@@ -337,8 +337,8 @@ function caweb_multi_ga_menu_option_setup() {
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
 	$site_id      = get_current_blog_id();
-	$ext_css_dir  = CAWEB_EXTERNAL_DIR . '/css';
-	$ext_js_dir   = CAWEB_EXTERNAL_DIR . '/js';
+	$ext_css_dir  = CAWEB_EXTERNAL_DIR . 'css';
+	$ext_js_dir   = CAWEB_EXTERNAL_DIR . 'js';
 
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
@@ -416,6 +416,10 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 	/* Save CAWeb Options */
 	global $wp_filesystem;
+	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
+		$creds = request_filesystem_credentials( site_url() );
+		wp_filesystem( $creds );
+	}
 
 	foreach ( $values as $opt => $val ) {
 		switch ( $opt ) {

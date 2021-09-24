@@ -435,3 +435,69 @@ function caweb_get_user_color() {
 
 	return $_wp_admin_css_colors[ $admin_color ];
 }
+
+/**
+ * Checks if page/post is using Divi Builder.
+ *
+ * @return boolean
+ */
+function caweb_is_divi_used() {
+
+	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
+
+	// Default WordPress theme templates do not use the Divi Builder.
+	if ( is_tag() || is_archive() || is_category() || is_author() ) {
+		return false;
+	}
+
+	$tribe_events = get_post_meta( get_the_ID(), '_EventOrigin' );
+	// if The Events Calendar Plugin is using the layout it triggers the builder is enabled.
+	if ( ! empty( $tribe_events ) && in_array( 'event-calendar', $tribe_events, true ) ) {
+		return false;
+	};
+
+	return $builder_used;
+
+}
+
+/**
+ * External CSS/JS files have been moved to the temp directory.
+ *
+ * @since 1.5.8 External CSS/JS files moved to wp-content/tmp/caweb-ext directory.
+ * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
+ */
+function caweb_move_external_folder() {
+	// prior to 1.4.23 locations.
+	$pre_1_4_23_css = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
+	$pre_1_4_23_js  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
+
+	// 1.4.23 location.
+	$post_1_4_23 = sprintf( '%1$s/caweb-ext', WP_CONTENT_DIR );
+
+	$locations = array(
+		"$pre_1_4_23_css "  => CAWEB_EXTERNAL_DIR . 'css/',
+		"$pre_1_4_23_js"    => CAWEB_EXTERNAL_DIR . 'js/',
+		"$post_1_4_23/css"  => CAWEB_EXTERNAL_DIR . 'css/',
+		"$post_1_4_23/js"   => CAWEB_EXTERNAL_DIR . 'js/',
+	);
+
+	foreach ( $locations as $old_location => $new_location ) {
+		if ( file_exists( $old_location ) ) {
+			rename( $old_location, $new_location );
+			rmdir( $old_location );
+		}
+	}
+
+	$old_paths = array(
+		$pre_1_4_23_css => glob( "$pre_1_4_23_css/*" ),
+		$pre_1_4_23_js  => glob( "$pre_1_4_23_js/*" ),
+		$post_1_4_23    => glob( "$post_1_4_23/*" ),
+	);
+
+	foreach ( $old_paths as $path => $files ) {
+		if ( file_exists( $path ) && empty( $files ) ) {
+			rmdir( $path );
+		}
+	}
+
+}
