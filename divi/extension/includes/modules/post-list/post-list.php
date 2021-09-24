@@ -199,6 +199,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					'on'  => esc_html__( 'Yes', 'et_builder' ),
 					'off' => esc_html__( 'No', 'et_builder' ),
 				),
+				'default'           => 'on',
 				'show_if'           => array(
 					'style' => array( 'course-list', 'events-list', 'general-list', 'news-list' ),
 				),
