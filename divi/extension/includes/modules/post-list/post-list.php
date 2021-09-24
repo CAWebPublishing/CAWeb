@@ -191,6 +191,24 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
 			),
+			'display_excerpt' => array(
+				'label'             => esc_html__( 'Display Excerpt', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'configuration',
+				'options'           => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'default'           => 'on',
+				'show_if'           => array(
+					'style' => array( 'course-list', 'events-list', 'general-list', 'news-list' ),
+				),
+				'show_if_not'       => array(
+					'style' => array( 'exams-list', 'faqs-list', 'jobs-list', 'profile-list' ),
+				),
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'style',
+			),
 		);
 
 		$design_fields = array(
@@ -482,6 +500,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function createCourse( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
+
 		$course_title  = sprintf( '<div class="title"><a href="%1$s">%2$s</a></div>', $post_info['url'], $post_info['title'] );
 		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
 
@@ -489,8 +509,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			sprintf( '<div class="thumbnail" >%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 70, 70 ) ) ) : '';
 
 		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 20, $post_info['id'] );
-		$excerpt = ( ! empty( $excerpt ) ?
-								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '' );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '';
 
 		$tmp = array(
 			( ! empty( $p_handler->course_address ) ? $p_handler->course_address : '' ),
@@ -529,6 +549,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function createEvent( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
+
 		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
 
 		$thumbnail = 'on' === $featured_image && $has_thumbnail ?
@@ -537,8 +559,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		$event_title = sprintf( '<h5 class="pb-0"><a href="%1$s" class="title" target="_blank">%2$s</a></h5>', $post_info['url'], $post_info['title'] );
 
 		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 15, $post_info['id'] );
-		$excerpt = ( ! empty( $excerpt ) ?
-								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '' );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+								sprintf( '<div class="description">%1$s</div>', $excerpt ) : '';
 
 		$date = ( ! empty( $p_handler->event_start_date ) ? sprintf( '<div class="start-date"><time>%1$s</time></div>', gmdate( 'D, n/j/Y g:i a', strtotime( $p_handler->event_start_date ) ) ) : '' );
 
@@ -613,12 +635,15 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function createGeneral( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
+
 		$image = 'on' === $featured_image ? sprintf( '<div class="thumbnail" style="width: 150px; height: 100px; margin-right:15px; float:left;">%1$s</div>', $this->caweb_get_the_post_thumbnail( $post_info['id'], array( 150, 100 ) ) ) : '';
 
 		$general_title = sprintf( '<h5 style="padding-bottom: 0!important;"><a href="%1$s" class="title" style="color: #428bca; background: none;">%2$s</a></h5>', $post_info['url'], $post_info['title'] );
 
 		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 45, $post_info['id'] );
-		$excerpt = sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' === $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+				sprintf( '<div class="description" %1$s>%2$s</div>', ( 'on' === $featured_image ? 'style="margin-left: 165px;"' : '' ), $excerpt ) : '';
 
 		return sprintf( '<article class="event-item" style="padding-left: 0px;">%1$s%2$s%3$s</article>', $image, $general_title, $excerpt );
 	}
@@ -697,6 +722,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function createNews( $p_handler, $post_info, $featured_image ) {
+		$display_excerpt = $this->props['display_excerpt'];
 
 		$has_thumbnail = has_post_thumbnail( $post_info['id'] );
 
@@ -710,8 +736,8 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 		}
 
 		$excerpt = $this->caweb_get_excerpt( $p_handler->content, 30, $post_info['id'] );
-		$excerpt = ( ! empty( $excerpt ) ?
-						sprintf( '<div class="description"><p>%1$s</p></div>', $excerpt ) : '' );
+		$excerpt = ! empty( $excerpt ) && 'on' === $display_excerpt ?
+						sprintf( '<div class="description"><p>%1$s</p></div>', $excerpt ) : '';
 
 		$author = ( ! empty( $p_handler->news_author ) ?
 						sprintf( 'Author: %1$s', $p_handler->news_author ) : '' );
