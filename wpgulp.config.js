@@ -48,6 +48,7 @@ module.exports = {
 	frontendJS: [ // Common JS 
 		'assets/js/caweb/google.js',
 		'assets/js/caweb/AutoTracker.js',
+		'assets/js/caweb/custom.js',
 	],  
 	a11yJS:[ // Accessibility JS
 		'assets/js/a11y/plugins/*.js',
