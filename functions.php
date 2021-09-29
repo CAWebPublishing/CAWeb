@@ -345,7 +345,7 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
-	
+
 	/* Geo Locator */
 	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
 
@@ -363,7 +363,6 @@ function caweb_wp_enqueue_scripts() {
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'cagov-caweb-script' );
-
 
 }
 
