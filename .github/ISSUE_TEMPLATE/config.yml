@@ -1,5 +1,4 @@
-blank_issues_enabled: true
-contact_links:
-  - name: CAWebPublishing Support
-    url: https://github.com/CA-CODE-Works/CAWeb/issues/new?template=bug-form.yml&labels=bug&assignees=Danny-Guzman
-    about: Please submit CAWeb related issues here.
+blank_issues_enabled: false
+  - name: Interested in getting CAWeb News & Alerts?
+    url: https://caweb.cdt.ca.gov/caweb-news-form/
+    about: Subscribe to the CAWeb News & Alerts
