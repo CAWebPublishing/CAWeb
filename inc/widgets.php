@@ -54,6 +54,10 @@ function caweb_refresh_news_feed() {
  * @return array Array of feeds data.
  */
 function caweb_retrieve_feeds_data( $body, $max = 5 ) {
+	if ( empty( $body ) ) {
+		return array();
+	}
+
 	$xml  = new SimpleXMLElement( $body );
 	$m    = $max > count( $xml->channel->item ) ? count( $xml->channel->item ) : $max;
 	$data = array();
