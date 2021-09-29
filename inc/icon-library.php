@@ -43,14 +43,14 @@ function caweb_icons() {
  * @return array
  */
 function caweb_get_icon_list( $index = -1, $name = '', $keys = false ) {
-	global $wp_filesystem;
 	$icons = array_flip( caweb_icons() );
 
 	$svg = CAWEB_ABSPATH . '/fonts/CaGov.svg';
 	// phpcs:disable
 	// doesn't work in the WPVIP environment?
+	// global $wp_filesystem;
 	// $con = $wp_filesystem->get_contents( $svg ); 
-	$con = file_get_contents( $con );
+	$con = file_get_contents( $svg );
 	// phpcs:enable
 
 	$xml   = new SimpleXMLElement( $con );
