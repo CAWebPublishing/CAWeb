@@ -9,6 +9,7 @@ CAWeb v1.5.8
 - Added Dispalay Excerpt Button to Post List Modules
 - Added sanity check for CAWeb Dashboard News Widget
 - $wp_filesystem not working for retrieving local file in WPVIP environment, using file_get_contents instead.
+- Fixed issued with Inacessible Deep Links and Bypass Links created by Divi
 
 CAWeb v1.5.7
 - Fixed various issues with JAWS not reading toggle expanded/collapsed

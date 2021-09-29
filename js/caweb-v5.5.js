@@ -451,6 +451,21 @@ function _tagLinks(evObj, evCat, evAct, evLbl, evVal, evNonInter, exisAttr)
 	}
 }
 
+function rgb2hex(rgb){
+	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+	return "#" +
+	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+}
+
+function stripeIframeAttributes(frame){
+	$(frame).removeAttr('frameborder');
+	$(frame).removeAttr('scrolling');
+	$(frame).removeAttr('allowtransparency');
+	$(frame).removeAttr('allowfullscreen');
+}
+
 /**
  * CA State Template v5.5 -  @version v5.5.23 -  8/2/2021 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
@@ -18680,22 +18695,6 @@ $(document).ready(function () {
 	
  });
 
-function rgb2hex(rgb){
-	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-	return "#" +
-	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
-}
-
-function stripeIframeAttributes(frame){
-	$(frame).removeAttr('frameborder');
-	$(frame).removeAttr('scrolling');
-	$(frame).removeAttr('allowtransparency');
-	$(frame).removeAttr('allowfullscreen');
-}
-
-
  function checkSize(){
 	var utility_container = $('.global-header .utility-header .container');
 	var translate = utility_container.find('#google_translate_element')[0];
@@ -19238,6 +19237,21 @@ jQuery(document).ready(function() {
 	 });
 }
 });
+jQuery(document).ready(function() {
+	/* 
+	Fixes Deep Links issue created by Divi
+    */
+    var links = $('a[href^="#"]:not([href="#"])')
+    
+    // Run only if there are deep links on the current page
+   if( links.length ){
+    	links.each(function(index, element) {
+	    	// Add et_smooth_scroll_disabled to each link
+		    $(element).addClass('et_smooth_scroll_disabled');
+        });
+    }
+    
+ });
 jQuery(document).ready(function() {
 	/*
     Divi Fullwidth Header Module Accessibility 
