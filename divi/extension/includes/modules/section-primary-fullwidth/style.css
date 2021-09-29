@@ -2,12 +2,6 @@
 .et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4 img.img-responsive {
     width: 100%;
 }
-.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4.pull-left {
-    padding-left: 0;
-}
-.et_pb_ca_fullwidth_section_primary.et_pb_module .col-md-4.pull-right {
-    padding-right: 0;
-}
 /* Adds padding under featured image when in tablet mode */
 @media (max-width: 991px){
   .et_pb_ca_fullwidth_section_primary .col-md-4 img.img-responsive{

@@ -323,7 +323,21 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
                     {% endset %}
 
-                    {% set section_banner_vars = {
+                    {% set section_banner_vars_left = {
+                        'section_heading' : 'Sample Heading',
+                        'section_link' : '#section_primary',
+                        'section_bg_color' : 'cornflowerblue',
+                        'section_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'section_image_alt' : 'Redwoods',
+                        'section_image_alignment' : 'left',
+                        'section_content' : section_content,
+                    } %}
+
+                    <div class="mb-3">
+                        {% include 'blocks/section-primary.html' with section_banner_vars_left %}
+                    </div>
+
+                    {% set section_banner_vars_right = {
                         'section_heading' : 'Sample Heading',
                         'section_link' : '#section_primary',
                         'section_bg_color' : 'cornflowerblue',
@@ -332,7 +346,7 @@
                         'section_content' : section_content,
                     } %}
 
-                    {% include 'blocks/section-primary.html' with section_banner_vars %}
+                    {% include 'blocks/section-primary.html' with section_banner_vars_right %}
 
                 </div>
                 {% endif %}
