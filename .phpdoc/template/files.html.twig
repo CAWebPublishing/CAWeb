@@ -1,0 +1,52 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    <title>{{ project.name }} Files</title>
+{% endblock head %}
+
+{% block introduction %}
+{% endblock introduction %}
+
+{% block table_of_contents %}
+<div class="offset-quarter">
+    <h2 class="my-0">Table of Contents</h2>
+    <ul class="list-overstated">
+        <li><a href="#theme-files">{{ project.name }} Theme Files</a></li>
+        <li><a href="#module-extension-files">{{ project.name }} Module Extension Files</a></li>
+    </ul>
+</div>
+<div class="offset-quarter">
+    <h2 id="theme-files" class="my-0">{{ project.name }} Theme Files</h2>
+    {% set __index = '' %}
+    {% for file in project.files|sort_asc %}
+        {% if 'divi/extension/' != file.path|slice(0, 15) %}
+            {% set __new_index = file.name|first matches '/[0-9]/' ? '#' : file.name|first|upper %}
+            {% if __index != __new_index %}
+            {% set __index = __new_index %}
+            <strong id="{{ '#' == __new_index ? 'Numbers' : __new_index }}">{{ __new_index }}</strong>
+            {% endif %}
+        <p><a href="{{ file|route(presentation = 'url') }}">{{ file.path }}</a></p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="offset-quarter">
+    <h2 id="module-extension-files" class="mb-0">{{ project.name }} Module Extension Files</h2>
+    {% set __index = '' %}
+    {% for file in project.files|sort_asc %}
+        {% if 'divi/extension/' == file.path|slice(0, 15) %}
+            {% set __new_index = file.name|first matches '/[0-9]/' ? '#' : file.name|first|upper %}
+            {% if __index != __new_index %}
+            {% set __index = __new_index %}
+            <strong id="{{ '#' == __new_index ? 'Numbers' : __new_index }}">{{ __new_index }}</strong>
+            {% endif %}
+        <p><a href="{{ file|route(presentation = 'url') }}">{{ file.path|replace({'divi/extension/':''}) }}</a></p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock table_of_contents %}
+
+{% block body %}
+
+{% endblock body %}

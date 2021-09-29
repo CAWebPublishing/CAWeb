@@ -1,0 +1,357 @@
+{% extends "layout.html.twig" %}
+{% import "macros.twig" as macros %}
+
+{% set all_modules =  [] %}
+{% set child_modules = [] %}
+{% set fullwidth_only_modules = [] %}
+
+{% for module in project.indexes.classes|filter(module => module.getName() starts with 'CAWeb_Module_' ) %}
+    {% set data = [ module ] %}
+    {# Child Modules, end with _Group, _Item, or _Slide #}
+    {% if module.getName() matches '/_Group$|_Item$|_Slide$/' %}
+        {% set child_modules = child_modules|merge(data) %}
+    {% else %}
+        {# Fullwidth Modules, start with Fullwidth_ #}
+        {% if module.getName() matches '/^CAWeb_Module_Fullwidth_/' %}
+            {% set fullwidth_only_modules = fullwidth_only_modules|merge(data) %}
+        {% endif %}
+
+        {# Check if standard module is already in list #}
+        {% set found = false %}
+        {% for m in all_modules %}
+            {% set name = m.getName()|replace({'CAWeb_Module_' : '', 'CAWeb_Module_Fullwidth_' : ''}) %}
+            {% set current_name = module.getName()|replace({'CAWeb_Module_' : '', 'CAWeb_Module_Fullwidth_' : ''}) %}
+
+            {% if not found and name == current_name %}
+                {% set found = true %}
+            {% endif %}
+        {% endfor %}
+
+        {% if not found %}
+            {% set all_modules = all_modules|merge(data) %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% block head %}
+<title>{{ project.name }}</title>
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter">
+    <p>Child Modules: {{ child_modules|length }}</p>
+    <p>Fullwidth Modules: {{ fullwidth_only_modules|length }}</p>
+    <p>Total Modules: {{ all_modules|length }}</p>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+<div class="offset-quarter clearfix">
+    <div class="pl-0 half">
+        <h2 class="my-0">Modules</h2>
+
+        <ul class="list-overstated">
+            {# iterate thru all modules #}
+            {% for module in all_modules %}
+            {% set display_name = module.getName()|replace({'CAWeb_Module_' : '', 'CAWeb_Module_Fullwidth_' : ''}) %}
+            {% set type = module.getProperties().post_types is not empty ? module.getProperties().post_types.getDefault()|replace({'array' : '', "'" : '', '(' : '', ')' : ''})|split(',') : '' %}
+            <li>
+                <a href="#{{ display_name|lower }}">{{ display_name|replace({'_':' '}) }}</a> 
+
+                {# Add standard module icon, if no type is set or if available on post and pages #}
+                {% if type is empty or 'post' in type or 'page' in type %}
+                    {{ macros.letter_icon('S', '', 'danger') }}
+                {% endif %}
+                
+                {# Check if there is also a fullwidth #}
+                {% set has_fullwidth = false %}
+
+                {% for full_module in fullwidth_only_modules %}
+                {% set full_module_display_name = full_module.getName()|replace({'CAWeb_Module_Fullwidth_' : ''}) %}
+                    {% if not has_fullwidth and display_name == full_module_display_name %}
+                        {# Add fullwidth module icon, if fullwidth version exists #}
+                        {% set has_fullwidth = true %}
+                        {{ macros.letter_icon('F', '', 'success') }}
+                    {% endif %}
+                {% endfor %}
+
+                
+                {# Add post specific icon, if available on posts only #}
+                {% if type is not empty and 'post' in type %}
+                    {{ macros.letter_icon('P', '', 'dark') }}
+                {% endif %}
+
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="half">
+        <h2 class="my-0">Legend</h2>
+        <small>
+            <p>{{ macros.letter_icon('S', '', 'danger') }} - Standard Module</p>
+            <p>{{ macros.letter_icon('F', '', 'success') }} - Fullwidth Module</p>
+            <p>{{ macros.letter_icon('P', '', 'dark') }} - Post Only Module</p>
+        </small>
+    </div>
+</div>
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter clearfix">
+    
+    {# iterate thru all modules #}
+    {% for module in all_modules %}
+    {% set display_name = module.getName()|replace({'CAWeb_Module_' : '', 'CAWeb_Module_Fullwidth_' : ''}) %}
+    <div class="row">
+        <div class="container">
+            <h3 id="{{ display_name|lower }}" class="my-0">{{ display_name|replace({'_':' '}) }}</h3>
+            <p>{{ module.getFile().getDescription() }}</p>
+                {% if 'Card' == display_name %}
+                <div class="offset-quarter half">
+                    {% set card_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+
+                    {% set card_vars = {
+                        'card_header_text' : 'Card Header Text',
+                        'card_footer_text' : 'Card Footer Text',
+                        'card_image_src' : path('/') ~ 'imgs/samples/bobcat.jpg',
+                        'card_image_alt_text' : 'Bobcat',
+                        'card_content' : card_content
+                    } %}
+
+                    {% include 'blocks/card.html' with card_vars %}
+                </div>
+                {% elseif 'GitHub' == display_name %}
+                <div class="offset-quarter half">
+                {% include "blocks/github.html" %}
+                </div>
+                {% elseif 'Panel' == display_name %}
+                <div class="offset-quarter half">
+                    {% set panel_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+
+                    {% set panel_vars = {
+                        'panel_header_text' : 'Panel Header Text',
+                        'panel_header_logo' : 'info',
+                        'panel_read_more_url' : '#panel',
+                        'panel_read_more_text' : 'Learn More',
+                        'panel_content' : panel_content
+                    } %}
+
+                    {% include "blocks/panel.html" with panel_vars %}
+                </div>
+                {% elseif 'Profile_Banner' == display_name %}
+                {# Squared Profile Banner #}
+                <div class="half">
+                    {% set profile_banner_vars = {
+                        'profile_banner_name' : 'Profile Name',
+                        'profile_banner_job_title' : 'Job Title',
+                        'profile_banner_url' : '#profile_banner',
+                        'profile_banner_url_text' : 'Profile Link',
+                        'profile_banner_image_src' : path('/') ~ 'imgs/samples/guy.jpg',
+                        'profile_banner_image_alt' : 'Male Portrait'
+                    } %}
+
+                    {% include "blocks/profile-banner.html" with profile_banner_vars %}
+                </div>
+                {# Rounded Profile Banner #}
+                <div class="half">
+                    {% set profile_banner_vars = {
+                        'layout' : 'round',
+                        'profile_banner_name' : 'Profile Name',
+                        'profile_banner_job_title' : 'Job Title',
+                        'profile_banner_url' : '#profile_banner',
+                        'profile_banner_url_text' : 'Profile Link',
+                        'profile_banner_image_src' : path('/') ~ 'imgs/samples/guy.jpg',
+                        'profile_banner_image_alt' : 'Male Portrait'
+                    } %}
+
+                    {% include "blocks/profile-banner.html" with profile_banner_vars %}
+                </div>
+                {% elseif 'Location' == display_name %}
+                {# Location Contact #}
+                <div class="full">
+                    {% set location_contact_vars = {
+                        'layout' : 'contact',
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_icon' : 'road-pin',
+                        'location_phone' : '916 123-4567',
+                        'location_fax' : '916 890-1234',
+                        'location_url' : '#location',
+                    } %}
+                    
+                    {% include 'blocks/location.html' with location_contact_vars %}
+                </div>
+                {# Location Mini #}
+                <div class="full">
+                    {% set location_mini_vars = {
+                        'layout' : 'mini',
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_url' : '#location',
+                        'location_icon' : 'road-pin',
+                    } %}
+                    
+                    {% include 'blocks/location.html' with location_mini_vars %}
+                </div>
+                {# Location Banner #}
+                <div class="full">
+                    {% set location_description %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+                    
+                    {% set location_banner_vars = {
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_view_more_url' : '#location',
+                        'location_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'location_image_alt' : 'Redwoods',
+                        'location_description' : location_description,
+                    } %}
+
+                    {% include 'blocks/location.html' with location_banner_vars %}
+                </div>
+                {% elseif 'Section_Footer' == display_name %}
+                {# Section Footer #}
+                <div class="full">
+                    
+                    {% set section_footer_group_1 = {
+                        'title' : 'CAWeb',
+                        'links' : [ 
+                            {
+                                'text' : 'Features',
+                                'url' : 'https://caweb.cdt.ca.gov/2017/09/29/features/',
+                            }, 
+                            {
+                                'text' : 'Training Resources',
+                                'url' : 'https://caweb.cdt.ca.gov/training-resources/',
+                            }, 
+                            {
+                                'text' : 'News & Alerts',
+                                'url' : 'https://caweb.cdt.ca.gov/caweb-publishing-news/',
+                            },
+                            {
+                                'text' : 'Help',
+                                'url' : 'https://caweb.cdt.ca.gov/help/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_2 = {
+                        'title' : 'CAWeb FAQ\'s',
+                        'icon' : 'info',
+                        'links' : [ 
+                            {
+                                'text' : 'Service Overview',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-service-overview/',
+                            }, 
+                            {
+                                'text' : 'Cost & Rates',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-costrates/',
+                            }, 
+                            {
+                                'text' : 'Support',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-support/',
+                            },
+                            {
+                                'text' : 'Technical',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-technical/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_3 = {
+                        'title' : 'CAWeb Help',
+                        'is_button' : true,
+                        'links' : [ 
+                            {
+                                'text' : 'Help',
+                                'url' : 'https://caweb.cdt.ca.gov/help/',
+                            }, 
+                            {
+                                'text' : 'On-Boarding',
+                                'url' : 'https://caweb.cdt.ca.gov/on-boarding/',
+                            }, 
+                            {
+                                'text' : 'Contact Us',
+                                'url' : 'https://caweb.cdt.ca.gov/contact-us/',
+                            },
+                            {
+                                'text' : 'Subscribe',
+                                'url' : 'https://caweb.cdt.ca.gov/caweb-news-form/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_4 = {
+                        'title' : 'CAWeb Docs',
+                        'icon' : 'page',
+                        'is_button' : true,
+                        'links' : [ 
+                            {
+                                'text' : 'Change Management Presentation',
+                                'url' : 'https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2018/08/WordPress-Framework-Mgmt-v1.1.pptx',
+                            }, 
+                            {
+                                'text' : 'WordPress Overview Presentation',
+                                'url' : 'https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2018/08/CAWeb-Publishing-Overview.pptx',
+                            } 
+                        ]
+                    } %}
+
+                    {% set section_footer_groups = [ 
+                        section_footer_group_1, 
+                        section_footer_group_2,
+                        section_footer_group_3, 
+                        section_footer_group_4
+                    ] %}
+
+                    {% set section_footer_vars = {
+                        'section_footer_groups' : section_footer_groups,
+                    } %}
+
+                    {% include 'blocks/section-footer.html' with section_footer_vars %}
+
+                </div>
+                {% elseif 'Section_Primary' == display_name %}
+                {# Section Primary #}
+                <div class="full">
+                    {% set section_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+
+                    {% set section_banner_vars_left = {
+                        'section_heading' : 'Sample Heading',
+                        'section_link' : '#section_primary',
+                        'section_bg_color' : 'cornflowerblue',
+                        'section_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'section_image_alt' : 'Redwoods',
+                        'section_image_alignment' : 'left',
+                        'section_content' : section_content,
+                    } %}
+
+                    <div class="mb-3">
+                        {% include 'blocks/section-primary.html' with section_banner_vars_left %}
+                    </div>
+
+                    {% set section_banner_vars_right = {
+                        'section_heading' : 'Sample Heading',
+                        'section_link' : '#section_primary',
+                        'section_bg_color' : 'cornflowerblue',
+                        'section_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'section_image_alt' : 'Redwoods',
+                        'section_content' : section_content,
+                    } %}
+
+                    {% include 'blocks/section-primary.html' with section_banner_vars_right %}
+
+                </div>
+                {% endif %}
+        </div>        
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

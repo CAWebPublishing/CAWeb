@@ -1,0 +1,78 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+<title>Enforce WordPress Coding Standards</title>
+
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter">
+    <p>{{ project.name }} utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.
+        Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
+    </p>
+    <div class="multi-terminal-commands">
+        <pre>composer --version</pre>
+        <pre>composer install --no-dev</pre>
+        <pre>.\vendor\bin\phpcs --version</pre>
+        <pre>.\vendor\bin\php-cs-fixer --version</pre>
+        <pre>.\vendor\bin\phpcbf --version</pre>
+    </div>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+    <strong>To run the PHP_CodeSniffer for WordPress Coding Violations</strong>
+    <div class="mb-4">
+        <p><span class="label label-info">Note:</span><span class="align-middle"> The following flag can be added when running the PHP_CodeSniffer.</span></p>
+        <div class="mb-4">
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--report-file=&lt;file location&gt;</pre>
+            <span class="align-top"> - Outputs the results to a file.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs &lt;file_name&gt;</pre>
+            <span class="align-top"> - Checks a specific file.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs *.php</pre>
+            <span class="align-top"> - Checks all PHP files.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcs &lt;directory_name&gt;</pre>
+            <span class="align-top"> - Checks all files in a given directory.</span>
+        </div>
+    </div>
+    
+    <strong>To run the PHP Code Beautifier and Fixer</strong>
+    <div class="mb-4">
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcbf &lt;file_name&gt;</pre>
+            <span class="align-top"> - Checks a specific file.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\phpcbf &lt;directory_name&gt;</pre>
+            <span class="align-top"> - Checks all files in a given directory.</span>
+        </div>
+    </div>
+    
+    <strong>To run the PHP CS Fixer</strong>
+    <div class="mb-4">
+        <p><span class="label label-info">Note:</span><span class="align-middle"> When using this tool please load the config file found in .circleci/caweb.php_cs</span></p>
+        <div class="mb-4">
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--config=.circleci/caweb.php_cs</pre>
+            <span class="align-top"> Load {{ project.name }} Theme PHP CS Fixer config file.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\php-cs-fixer &lt;file_name&gt;</pre>
+            <span class="align-top"> - Checks a specific file.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">.\vendor\bin\php-cs-fixer &lt;directory_name&gt;</pre>
+            <span class="align-top"> - Checks all files in a given directory.</span>
+        </div>
+    </div>
+</div>
+{% endblock body %}

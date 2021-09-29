@@ -1,0 +1,100 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+<title>How to Compile CSS/JS</title>
+
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter">
+    <p>{{ project.name }} utilizes <a href="https://gulpjs.com/" target="_blank">GULP</a> to compile all CSS & JS files for the theme, there are several gulp tasks available in the theme.
+        Make sure npm is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
+    </p>
+    <div class="multi-terminal-commands">
+        <pre>npm -v</pre>
+        <pre>npm install</pre>
+        <pre>gulp -v</pre>
+    </div>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+    <h2 class="mt-3 mb-2">gulp commands</h2>
+    <div class="mb-4">
+        <p><span class="label label-info">Note:</span><span class="align-middle"> The following commands allow for 2 parameters, if no parameter is supplied then both minified/unminified files are built.</span></p>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--dev</pre>
+            <span class="align-top"> - Builds unminified files.</span>
+        </div>
+        <div class="mb-4">
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--prod</pre>
+            <span class="align-top"> - Builds minified files.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp admin-css</pre>
+            <span class="align-top"> - Builds admin CSS files. This CSS file is used on the {{ project.name }} Theme administrative menus only.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp frontend-css</pre>
+            <span class="align-top"> - Builds individual cagov-version-colorscheme files.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp bootstrap-css</pre>
+            <span class="align-top"> - Builds admin bootstrap CSS file. This CSS file is used to style the {{ project.name }} Theme administrative menus only.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp admin-js</pre>
+            <span class="align-top"> - Builds admin JS file. This JS file is used on the {{ project.name }} Theme administrative menus only.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp caweb-js</pre>
+            <span class="align-top"> - Builds individual caweb-version JS files. Main JS file loaded when State CDN option is not enabled.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp bootstrap-js</pre>
+            <span class="align-top"> - Builds admin bootstrap JS file. This JS file is used to enable bootstrap scripts in the {{ project.name }} Theme administrative menus only.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp customizer-js</pre>
+            <span class="align-top"> - Builds theme customizer and theme customizer control JS file. These JS files are loaded when using the WordPress Appearance->Customize feature.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp build</pre>
+            <span class="align-top"> - Builds all of the CSS & JS theme asset files.</span>
+        </div>
+    </div>
+    <div class="mb-4">
+        <p><span class="label label-info">Note:</span><span class="align-middle"> The following commands do not accept parameters.</span></p>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp dev</pre>
+            <span class="align-top"> - Builds all of the CSS & JS theme asset files unminified.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp prod</pre>
+            <span class="align-top"> - Builds all of the CSS & JS theme asset files minified.</span>
+        </div>
+    </div>
+    <div class="mb-4">
+        <p><span class="label label-info">Note:</span><span class="align-middle"> The following commands allow for 1 parameter. If parameter is not passed then all PHP files will be beautified.</span></p>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">--file</pre>
+            <span class="align-top"> - HTML/PHP file to beautify.</span>
+        </div>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp beautify</pre>
+            <span class="align-top"> - Beautify specific file if parameter is passed, otherwise beautify all PHP files.</span>
+        </div>
+    </div>
+    <div class="mb-4">
+        <strong>View all gulp tasks</strong>
+        <div>
+            <pre class="d-inline-block d-inline-block mb-0 p-0 px-2">gulp --tasks</pre>
+        </div>
+        <img src="{{ path('/') }}imgs/gulp-tasks.png" title="{{ project.name }} Gulp Tasks" />
+    </div>
+</div>
+{% endblock body %}
