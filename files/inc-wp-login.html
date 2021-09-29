@@ -1,23 +1,29 @@
 
 
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <link rel="stylesheet" href="../css/cagov.core.css">
+
             <title>CAWeb inc/wp-login.php File</title>
         
-                            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                        <link rel="stylesheet" href="../css/colorscheme-santabarbara.css">
                         
         
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="../css/phpdoc.css">
 
+<!-- Iconify JS -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
 <!-- jQuery JS -->
-<script src="../js/jquery.js"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../imgs/favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +41,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
 
-        
-    </head>
+                <style>
+            /* Dynamic Styles */ 
+            .letter-icon:not(.diamond):before {
+                background-color: #834B1E;
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #834B1E;
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #834B1E;
+            }
+        </style>    </head>
     <body class="primary non_divi_builder">
         
 <header id="header" class="global-header fixed">
@@ -67,18 +83,11 @@
 	<div class="container">
 		<div class="group flex-row">
 			<div class="social-media-links">
-				<div class="header-cagov-logo">
-					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
-						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
-					</a>
-				</div>
-
                 <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
-				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
-
+								<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+				
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
@@ -108,7 +117,7 @@
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="../index.html">
-			<img src="../imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="../imgs/branding.png" alt="CAWeb Logo" />
 		</a>
 	</div>
 </div>
@@ -136,75 +145,110 @@
 
 	<div class="navigation-search">
 
-				
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+                                                    <li class="nav-item" title="      Examples">
+                <a class="first-level-link"><span class="ca-gov-icon-gears font-size-30 d-block"></span>
+<span class="link-title">      Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../examples/index.html" class="second-level-link" title="Examples">
+                                                            <span class="ca-gov-icon-gears font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Examples</p>
+                                                            <p class="link-description">View all available examples</p>
+                                                    </a>
+                                            
+                                        <a href="../examples/icon-library.html" class="second-level-link" title="Icon Font Library">
+                                                            <span class="ca-gov-icon-book font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Icon Font Library</p>
+                                                            <p class="link-description">View all available icons</p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
+                                        </li>
+                                            <li class="nav-item" title="      How To&#039;s">
+                <a class="first-level-link"><span class="ca-gov-icon-info-bubble font-size-30 d-block"></span>
+<span class="link-title">      How To&#039;s <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
+                                                            <span class="ca-gov-icon-code font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Compile CSS/JS</p>
+                                                            <p class="link-description">How to compile all CSS/JS files</p>
+                                                    </a>
+                                            
+                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                                        </li>
+                        <li class="nav-item" title="Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="../files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="../filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="../files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
+<span class="link-title">Download</span></a>
         </li>
     </ul>
-</nav>
-		
+</nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
-			
 		</div>
 	</div>
 	
 	</header>
 
-
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                        <div id="file-intro" class="border-bottom border-info">
-        <h1>inc/wp-login.php<a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php">
-                <span class="ca-gov-icon-link d-inline h4"></span>
+                        <div class="section">
+                            <div class="container">
+                                    <!-- Sidebar -->
+                                                                        <div class="quarter">
+                                                                                                <h2 class="my-0">Packages</h2>
+                <p><a href="../packages/CAWeb.html">CAWeb</a></p>
+                                                                                    <p><a href="../packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <h2 class="my-0">Reports</h2>
+    <p><a href="../reports/errors.html">Errors</a></p>
+    <p><a href="../reports/markers.html">Markers</a></p>
+
+    <h2 class="my-0">Indices</h2>
+    <p><a href="../files.html">Files</a></p>                                                                            </div>
+                                    
+                                    <!-- Introduction -->
+                                    <div id="file-intro" class="offset-quarter border-bottom border-info">
+        <h1 class="my-0">inc/wp-login.php<a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php">
+            <span class="ca-gov-icon-link h4 d-inline"></span>
+
             </a>
         </h1>
     <i class="d-block">CAWeb Login</i>
@@ -218,50 +262,55 @@
                     </div>
         
 </div>
+                                        
 
-
-                        
-                        <div id="file-toc" class="mt-3">
-    <h2>Table of Contents</h2>
+                                    <!-- Table of Contents -->
+                                    
+<div id="file-toc" class="mt-3 offset-quarter">
+    <h2 class="my-0">Table of Contents</h2>
     
     <ul class="list-overstated">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <li><a href="#functions">Functions</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <li><a href="#functions">Functions</a></li>
                     </ul>
 </div>
+                
+                                    <!-- Body Content -->
+                                    <div class="offset-quarter">
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+
+
+                                
+                                
+                                
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+
+                                
+                                
+                                
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
 <div>
-    <h2 id="functions">Functions</h2>
-    <div id="function_caweb_login_form_init" class="mb-3 border-bottom border-info">
+    <h2 id="functions" class="my-0">Functions</h2>
+    <div id="function_caweb_login_form_lostpassword" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L31">inc/wp-login.php</a> : 31
-        </div>
-        <strong class="d-block">caweb_login_form_init()</strong>
-        <i class="small text-muted">CAWeb Login Form
-Adds a nonce to the login form $_REQUEST array.</i>
-    </div>
-
-    <pre> caweb_login_form_init() : void</pre>
-
-                            <strong>Tags</strong>
-                <div>
-                        <p class="small mb-0">see</p>
-            <p><a target="_blank" href=""></a></p>
-                        <p class="small mb-0">see</p>
-            <p><a target="_blank" href=""></a></p>
-                    </div>
-        
-
-        <strong>Return values</strong>
-    <p class="small">void</p>
-    </div>
-<div id="function_caweb_login_form_lostpassword" class="mb-3 border-bottom border-info">
-    <div>
-        <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L53">inc/wp-login.php</a> : 53
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L46">inc/wp-login.php</a> : 46
         </div>
         <strong class="d-block">caweb_login_form_lostpassword()</strong>
         <i class="small text-muted">Login form for Lost Password
@@ -285,10 +334,10 @@ Fires before a specified login form action.</i>
 <div id="function_caweb_login_form_rp" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L75">inc/wp-login.php</a> : 75
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L68">inc/wp-login.php</a> : 68
         </div>
         <strong class="d-block">caweb_login_form_rp()</strong>
-        <i class="small text-muted">Hide the Confirm Weak Password on Reset Password
+        <i class="small text-muted">Add filter to network site url on Login Form Reset Password
 Fires before a specified login form action.</i>
     </div>
 
@@ -309,10 +358,10 @@ Fires before a specified login form action.</i>
 <div id="function_caweb_lostpassword_form" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L42">inc/wp-login.php</a> : 42
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L32">inc/wp-login.php</a> : 32
         </div>
         <strong class="d-block">caweb_lostpassword_form()</strong>
-        <i class="small text-muted">Add Site ID to lost password form
+        <i class="small text-muted">Add Site ID and nonce to lost password form
 Fires inside the lostpassword form tags, before the hidden fields.</i>
     </div>
 
@@ -333,14 +382,14 @@ Fires inside the lostpassword form tags, before the hidden fields.</i>
 <div id="function_caweb_lostpassword_redirect" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L140">inc/wp-login.php</a> : 140
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L139">inc/wp-login.php</a> : 139
         </div>
         <strong class="d-block">caweb_lostpassword_redirect()</strong>
         <i class="small text-muted">Redirect for after Lost your password has been generated
 Filters the URL redirected to after submitting the lostpassword/retrievepassword form.</i>
     </div>
 
-    <pre> caweb_lostpassword_redirect(string $lostpassword_redirect) : \URL</pre>
+    <pre> caweb_lostpassword_redirect( $lostpassword_redirect) : \URL</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -357,14 +406,14 @@ Filters the URL redirected to after submitting the lostpassword/retrievepassword
 <div id="function_caweb_lostpassword_url" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L127">inc/wp-login.php</a> : 127
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L126">inc/wp-login.php</a> : 126
         </div>
         <strong class="d-block">caweb_lostpassword_url()</strong>
         <i class="small text-muted">Lost your password? URL
 Filters the Lost Password URL.</i>
     </div>
 
-    <pre> caweb_lostpassword_url(string $lostpassword_url, string $redirect) : \URL</pre>
+    <pre> caweb_lostpassword_url( $lostpassword_url,  $redirect) : \URL</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -381,14 +430,14 @@ Filters the Lost Password URL.</i>
 <div id="function_caweb_network_site_url" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L225">inc/wp-login.php</a> : 225
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L240">inc/wp-login.php</a> : 240
         </div>
         <strong class="d-block">caweb_network_site_url()</strong>
         <i class="small text-muted">Change the Reset Password URL to use the site url instead of the network url
 Filters the network site URL.</i>
     </div>
 
-    <pre> caweb_network_site_url(string $url, string $path, string|null $scheme) : \URL</pre>
+    <pre> caweb_network_site_url( $url,  $path, string|null $scheme) : \URL</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -405,14 +454,14 @@ Filters the network site URL.</i>
 <div id="function_caweb_retrieve_password_message" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L177">inc/wp-login.php</a> : 177
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L184">inc/wp-login.php</a> : 184
         </div>
         <strong class="d-block">caweb_retrieve_password_message()</strong>
         <i class="small text-muted">Changes Blog Name in message to the correct site Blog Nameb_retrieve_password_message
 Filters the message body of the password reset mail.</i>
     </div>
 
-    <pre> caweb_retrieve_password_message(string $message, string $key, string $user_login, WP_User $user_data) : string</pre>
+    <pre> caweb_retrieve_password_message( $message,  $key,  $user_login, WP_User $user_data) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -429,14 +478,14 @@ Filters the message body of the password reset mail.</i>
 <div id="function_caweb_retrieve_password_title" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L156">inc/wp-login.php</a> : 156
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L155">inc/wp-login.php</a> : 155
         </div>
         <strong class="d-block">caweb_retrieve_password_title()</strong>
         <i class="small text-muted">Changes Blog Name in title to the correct site Blog Name
 Filters the subject of the password reset email.</i>
     </div>
 
-    <pre> caweb_retrieve_password_title(string $title, string $user_login, WP_User $user_data) : string</pre>
+    <pre> caweb_retrieve_password_title( $title,  $user_login, WP_User $user_data) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -453,14 +502,14 @@ Filters the subject of the password reset email.</i>
 <div id="function_caweb_validate_password_reset" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L92">inc/wp-login.php</a> : 92
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L83">inc/wp-login.php</a> : 83
         </div>
         <strong class="d-block">caweb_validate_password_reset()</strong>
         <i class="small text-muted">Password Reset Strength Validation
 Fires before the password reset procedure is validated.</i>
     </div>
 
-    <pre> caweb_validate_password_reset(mixed $errors, mixed $user) : void</pre>
+    <pre> caweb_validate_password_reset(WP_Error $errors, WP_User $user) : void</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -477,14 +526,14 @@ Fires before the password reset procedure is validated.</i>
 <div id="function_caweb_wp_login_errors" class="mb-3">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/wp-login.php#L199">inc/wp-login.php</a> : 199
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/wp-login.php#L217">inc/wp-login.php</a> : 217
         </div>
         <strong class="d-block">caweb_wp_login_errors()</strong>
         <i class="small text-muted">Add Reset Password Confirmation
 Filters the login page errors.</i>
     </div>
 
-    <pre> caweb_wp_login_errors(mixed $errors, mixed $redirect_to) : string</pre>
+    <pre> caweb_wp_login_errors( $errors,  $redirect_to) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -500,13 +549,15 @@ Filters the login page errors.</i>
     </div>
 
 </div>
-
-
-                    </main>
+</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             <div class="container footer-menu">
     <div class="group">
@@ -521,11 +572,10 @@ Filters the login page errors.</i>
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 06/02/2021 @ 02:23pm</i>
+        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
     </div> 
 </div>
-                            <!-- CAWeb Theme JS -->
-                <script src="../js/caweb-v5.5.js"></script>
-                    </footer>
+            <script src="../js/cagov.core.js"></script>
+        </footer>
     </body>
 </html>

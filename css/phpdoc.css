@@ -1,16 +1,74 @@
-.caweb-class:before {
-    content: "C";
-    background-color: cornflowerblue;
-    padding: 3px 5px;
-    margin-top: 3px;
-    border-radius: 50%;
-    line-height: 0.75rem;
-    font-size: 0.75rem;
-    position: absolute;
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
 }
 
-.section + .section {
-    padding-top: 0px;
+.letter-icon.danger:before{
+    background-color: var(--danger) !important;
+}
+.letter-icon.dark:before{
+    background-color: var(--dark) !important;
+}
+.letter-icon.success:before{
+    background-color: var(--success) !important;
+}
+
+/* Letter Icon General Styles */
+.letter-icon:before {
+    color: white;
+    content: attr(data-letter);
+    line-height: 0.75rem;
+    font-size: 0.75rem;
+    vertical-align: middle;
+    padding: 5px;
+}
+.letter-icon:not(.diamond) {
+    padding-bottom: 3px;
+}
+/* Circle Icon */
+.letter-icon.circle {
+    border-radius: 50%;
+}
+/* Diamond Icon */
+.letter-icon.diamond {
+    border: 12px solid transparent;
+    position: relative;
+    top: -22px;
+    left: -5px;
+}
+.letter-icon.diamond:before{
+    position: absolute;
+    top: 23px;
+    z-index: 2;
+    left: -7px;
+}
+.letter-icon.diamond:after {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 34px;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
 }
 
 .multi-terminal-commands {

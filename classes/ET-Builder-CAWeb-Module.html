@@ -1,23 +1,29 @@
 
 
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <link rel="stylesheet" href="../css/cagov.core.css">
+
             <title>CAWeb Classes Documentation</title>
         
-                            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                        <link rel="stylesheet" href="../css/colorscheme-santabarbara.css">
                         
         
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="../css/phpdoc.css">
 
+<!-- Iconify JS -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
 <!-- jQuery JS -->
-<script src="../js/jquery.js"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../imgs/favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +41,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
 
-        
-    </head>
+                <style>
+            /* Dynamic Styles */ 
+            .letter-icon:not(.diamond):before {
+                background-color: #834B1E;
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #834B1E;
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #834B1E;
+            }
+        </style>    </head>
     <body class="primary non_divi_builder">
         
 <header id="header" class="global-header fixed">
@@ -67,18 +83,11 @@
 	<div class="container">
 		<div class="group flex-row">
 			<div class="social-media-links">
-				<div class="header-cagov-logo">
-					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
-						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
-					</a>
-				</div>
-
                 <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
-				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
-
+								<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+				
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
@@ -108,7 +117,7 @@
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="../index.html">
-			<img src="../imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="../imgs/branding.png" alt="CAWeb Logo" />
 		</a>
 	</div>
 </div>
@@ -136,75 +145,109 @@
 
 	<div class="navigation-search">
 
-				
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+                                                    <li class="nav-item" title="      Examples">
+                <a class="first-level-link"><span class="ca-gov-icon-gears font-size-30 d-block"></span>
+<span class="link-title">      Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../examples/index.html" class="second-level-link" title="Examples">
+                                                            <span class="ca-gov-icon-gears font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Examples</p>
+                                                            <p class="link-description">View all available examples</p>
+                                                    </a>
+                                            
+                                        <a href="../examples/icon-library.html" class="second-level-link" title="Icon Font Library">
+                                                            <span class="ca-gov-icon-book font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Icon Font Library</p>
+                                                            <p class="link-description">View all available icons</p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
+                                        </li>
+                                            <li class="nav-item" title="      How To&#039;s">
+                <a class="first-level-link"><span class="ca-gov-icon-info-bubble font-size-30 d-block"></span>
+<span class="link-title">      How To&#039;s <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
+                                                            <span class="ca-gov-icon-code font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Compile CSS/JS</p>
+                                                            <p class="link-description">How to compile all CSS/JS files</p>
+                                                    </a>
+                                            
+                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                                        </li>
+                        <li class="nav-item" title="Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="../files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="../filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="../files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
+<span class="link-title">Download</span></a>
         </li>
     </ul>
-</nav>
-		
+</nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
-			
 		</div>
 	</div>
 	
 	</header>
 
-
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                        <div id="class-intro" class="border-bottom border-info">
+                        <div class="section">
+                            <div class="container">
+                                    <!-- Sidebar -->
+                                                                        <div class="quarter">
+                                                                                                <h2 class="my-0">Packages</h2>
+                <p><a href="../packages/CAWeb.html">CAWeb</a></p>
+                                                                                    <p><a href="../packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <h2 class="my-0">Reports</h2>
+    <p><a href="../reports/errors.html">Errors</a></p>
+    <p><a href="../reports/markers.html">Markers</a></p>
 
-<h1>ET_Builder_CAWeb_Module</h1>
+    <h2 class="my-0">Indices</h2>
+    <p><a href="../files.html">Files</a></p>                                                                            </div>
+                                    
+                                    <!-- Introduction -->
+                                    <div class="offset-quarter border-bottom border-info">
+
+<h1 class="my-0">ET_Builder_CAWeb_Module</h1>
 
     <p class="text-muted mb-0">extends ET_Builder_Module</p>
 
@@ -220,72 +263,94 @@
                     </div>
         
 </div>
-                        
-                        
-<div id="class-toc" class="mt-3 border-bottom border-info">
-    <h2>Table of Contents</h2>
+                                        
+
+                                    <!-- Table of Contents -->
+                                    
+<div class="offset-quarter mt-3 border-bottom border-info">
+    <h2 class="my-0">Table of Contents</h2>
                         <div class="mb-2">
-            <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#property_caweb_google_maps_embed_api_key">$caweb_google_maps_embed_api_key</a> : string</p>
+            <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#property_caweb_google_maps_embed_api_key">$caweb_google_maps_embed_api_key</a> : string</p>
             <i class="small text-muted">Member Variable</i>
         </div>
                 <div class="mb-2">
-            <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#property_module_credits">$module_credits</a> : array</p>
+            <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#property_module_credits">$module_credits</a> : array</p>
             <i class="small text-muted">Member Variable</i>
         </div>
                 
             <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_address">caweb_get_address()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method__render_module_wrapper">_render_module_wrapper()</a> : </p>
+        <i class="small text-muted">Wrap module&#039;s rendered output with proper module wrapper. Ensuring module has consistent
+wrapper output which compatible with module attribute and background insertion.</i>
+    </div>
+        <div class="mb-2">
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_address">caweb_get_address()</a> : </p>
         <i class="small text-muted">Returns address in CSV format</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_excerpt">caweb_get_excerpt()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_excerpt">caweb_get_excerpt()</a> : </p>
         <i class="small text-muted">Return an excerpt from the content of requested length.</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_google_map_place_link">caweb_get_google_map_place_link()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_google_map_place_link">caweb_get_google_map_place_link()</a> : </p>
         <i class="small text-muted">Create a GoogleMap Place Link/Embedded IFrame</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_icon_span">caweb_get_icon_span()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_icon_span">caweb_get_icon_span()</a> : </p>
         <i class="small text-muted">Create icon span</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_text_sizes">caweb_get_text_sizes()</a> : array</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_text_sizes">caweb_get_text_sizes()</a> : mixed||string|int</p>
         <i class="small text-muted">Available module text sizes</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_get_the_post_thumbnail">caweb_get_the_post_thumbnail()</a> : void</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_get_the_post_thumbnail">caweb_get_the_post_thumbnail()</a> : </p>
         <i class="small text-muted">CAWeb Get Post Thumbnail</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_is_money">caweb_is_money()</a> : bool|string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_is_money">caweb_is_money()</a> : bool|string</p>
         <i class="small text-muted">Validates if is a valid monetary value and return it if true.</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_caweb_return_posts">caweb_return_posts()</a> : array</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_caweb_return_posts">caweb_return_posts()</a> : mixed||string|int</p>
         <i class="small text-muted">Return posts based on parameters</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_create_inline_font_styles">create_inline_font_styles()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_create_inline_font_styles">create_inline_font_styles()</a> : </p>
         <i class="small text-muted">Create inline styles from Divi&#039;s Font Settings</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_parse_divi_font_settings">parse_divi_font_settings()</a> : array</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_parse_divi_font_settings">parse_divi_font_settings()</a> : mixed||string|int</p>
         <i class="small text-muted">Parse Divi&#039;s Font Settings into array</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module.html#method_process_icon">process_icon()</a> : string</p>
+        <p class="mb-0"><a href="../classes/ET-Builder-CAWeb-Module
+.html#method_process_icon">process_icon()</a> : </p>
         <i class="small text-muted">Processes modules icon selection</i>
     </div>
         
 </div>
-
-                        <div class="mt-3">
-    <h2>Properties</h2>
+                
+                                    <!-- Body Content -->
+                                    <div class="offset-quarter mt-3">
+    <h2 class="my-0">Properties</h2>
         <div id="property_caweb_google_maps_embed_api_key" class="border-bottom border-info">
         <div>
             <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L19">$caweb_google_maps_embed_api_key</a> : 19
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L19">$caweb_google_maps_embed_api_key</a> : 19
             </div>
             <strong class="d-block">$caweb_google_maps_embed_api_key</strong>
             <i class="small text-muted">Member Variable</i>
@@ -295,7 +360,7 @@
         <div id="property_module_credits" class="border-bottom border-info">
         <div>
             <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L26">$module_credits</a> : 26
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L26">$module_credits</a> : 26
             </div>
             <strong class="d-block">$module_credits</strong>
             <i class="small text-muted">Member Variable</i>
@@ -304,12 +369,34 @@
     </div>
     </div>
 
-<div>
-            <h2 id="functions">Methods</h2>
-        <div id="_caweb_get_address" class="mb-3 border-bottom border-info">
+<div class="offset-quarter mt-3">
+            <h2 class="my-0" id="functions">Methods</h2>
+        <div id="method__render_module_wrapper" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L64">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 64
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L44">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 44
+        </div>
+        <strong class="d-block">_render_module_wrapper()</strong>
+        <i class="small text-muted">Wrap module&#039;s rendered output with proper module wrapper. Ensuring module has consistent
+wrapper output which compatible with module attribute and background insertion.</i>
+    </div>
+
+    <pre>protected _render_module_wrapper( $output = &#039;&#039;,  $render_slug = &#039;&#039;) : string</pre>
+
+                            <strong>Tags</strong>
+                <div>
+                        <p class="small mb-0">see</p>
+            <p><a target="_blank" href=""></a></p>
+                    </div>
+        
+
+        <strong>Return values</strong>
+    <p class="small">string</p>
+    </div>
+<div id="method_caweb_get_address" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L81">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 81
         </div>
         <strong class="d-block">caweb_get_address()</strong>
         <i class="small text-muted">Returns address in CSV format</i>
@@ -327,16 +414,16 @@
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
-<div id="_caweb_get_excerpt" class="mb-3 border-bottom border-info">
+<div id="method_caweb_get_excerpt" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L329">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 329
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L346">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 346
         </div>
         <strong class="d-block">caweb_get_excerpt()</strong>
         <i class="small text-muted">Return an excerpt from the content of requested length.</i>
     </div>
 
-    <pre>public caweb_get_excerpt(string $con, int $excerpt_length, int $p = -1) : string</pre>
+    <pre>public caweb_get_excerpt( $con,  $excerpt_length,  $p = -1) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -348,16 +435,16 @@
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
-<div id="_caweb_get_google_map_place_link" class="mb-3 border-bottom border-info">
+<div id="method_caweb_get_google_map_place_link" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L86">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 86
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L103">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 103
         </div>
         <strong class="d-block">caweb_get_google_map_place_link()</strong>
         <i class="small text-muted">Create a GoogleMap Place Link/Embedded IFrame</i>
     </div>
 
-    <pre>public caweb_get_google_map_place_link(array|string $addr, mixed $embed = false, mixed $target = &#039;_blank&#039;, mixed $class = &#039;&#039;) : string</pre>
+    <pre>public caweb_get_google_map_place_link(array|string $addr,  $embed = false,  $target = &#039;_blank&#039;,  $class = &#039;&#039;) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -369,16 +456,16 @@
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
-<div id="_caweb_get_icon_span" class="mb-3 border-bottom border-info">
+<div id="method_caweb_get_icon_span" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L204">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 204
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L221">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 221
         </div>
         <strong class="d-block">caweb_get_icon_span()</strong>
         <i class="small text-muted">Create icon span</i>
     </div>
 
-    <pre>public caweb_get_icon_span(string $icon, string $classes = &#039;&#039;, string $styles = &#039;&#039;) : string</pre>
+    <pre>public caweb_get_icon_span( $icon,  $classes = &#039;&#039;,  $styles = &#039;&#039;) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -390,16 +477,16 @@
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
-<div id="_caweb_get_text_sizes" class="mb-3 border-bottom border-info">
+<div id="method_caweb_get_text_sizes" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L38">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 38
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L55">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 55
         </div>
         <strong class="d-block">caweb_get_text_sizes()</strong>
         <i class="small text-muted">Available module text sizes</i>
     </div>
 
-    <pre>public caweb_get_text_sizes(array $exclude = array()) : array</pre>
+    <pre>public caweb_get_text_sizes(mixed||string|int $exclude = array()) : array</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -411,16 +498,16 @@
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
-<div id="_caweb_get_the_post_thumbnail" class="mb-3 border-bottom border-info">
+<div id="method_caweb_get_the_post_thumbnail" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L284">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 284
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L301">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 301
         </div>
         <strong class="d-block">caweb_get_the_post_thumbnail()</strong>
         <i class="small text-muted">CAWeb Get Post Thumbnail</i>
     </div>
 
-    <pre>public caweb_get_the_post_thumbnail(int|WP_Post $post = null, string $size = &#039;thumbnail&#039;, string $attr = &#039;&#039;, array $pixel_size = array()) : void</pre>
+    <pre>public caweb_get_the_post_thumbnail(int|WP_Post $post = null,  $size = &#039;thumbnail&#039;,  $attr = &#039;&#039;, mixed||string|int $pixel_size = array()) : void</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -432,16 +519,16 @@
         <strong>Return values</strong>
     <p class="small">void</p>
     </div>
-<div id="_caweb_is_money" class="mb-3 border-bottom border-info">
+<div id="method_caweb_is_money" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L167">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 167
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L184">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 184
         </div>
         <strong class="d-block">caweb_is_money()</strong>
         <i class="small text-muted">Validates if is a valid monetary value and return it if true.</i>
     </div>
 
-    <pre>public caweb_is_money(mixed $checkmoney, string $pattern = &#039;%.2n&#039;) : bool|string</pre>
+    <pre>public caweb_is_money( $checkmoney,  $pattern = &#039;%.2n&#039;) : bool|string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -453,16 +540,16 @@
         <strong>Return values</strong>
     <p class="small">bool|string</p>
     </div>
-<div id="_caweb_return_posts" class="mb-3 border-bottom border-info">
+<div id="method_caweb_return_posts" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L230">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 230
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L247">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 247
         </div>
         <strong class="d-block">caweb_return_posts()</strong>
         <i class="small text-muted">Return posts based on parameters</i>
     </div>
 
-    <pre>public caweb_return_posts(array $cats = array(), array $tags = array(), int $post_amount = -1, string $orderby = &#039;post_date&#039;, string $order = &#039;DESC&#039;) : array</pre>
+    <pre>public caweb_return_posts(mixed||string|int $cats = array(), mixed||string|int $tags = array(),  $post_amount = -1,  $orderby = &#039;post_date&#039;,  $order = &#039;DESC&#039;) : array</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -474,16 +561,16 @@
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
-<div id="_create_inline_font_styles" class="mb-3 border-bottom border-info">
+<div id="method_create_inline_font_styles" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L123">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 123
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L140">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 140
         </div>
         <strong class="d-block">create_inline_font_styles()</strong>
         <i class="small text-muted">Create inline styles from Divi&#039;s Font Settings</i>
     </div>
 
-    <pre>public create_inline_font_styles(string $font_settings) : string</pre>
+    <pre>public create_inline_font_styles( $font_settings) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -495,16 +582,16 @@
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
-<div id="_parse_divi_font_settings" class="mb-3 border-bottom border-info">
+<div id="method_parse_divi_font_settings" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L108">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 108
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L125">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 125
         </div>
         <strong class="d-block">parse_divi_font_settings()</strong>
         <i class="small text-muted">Parse Divi&#039;s Font Settings into array</i>
     </div>
 
-    <pre>public parse_divi_font_settings(string $settings) : array</pre>
+    <pre>public parse_divi_font_settings( $settings) : array</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -516,16 +603,16 @@
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
-<div id="_process_icon" class="mb-3">
+<div id="method_process_icon" class="mb-3">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/class-caweb-builder-element.php#L182">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 182
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/class-caweb-builder-element.php#L199">divi/extension/includes/modules/class-caweb-builder-element.php</a> : 199
         </div>
         <strong class="d-block">process_icon()</strong>
         <i class="small text-muted">Processes modules icon selection</i>
     </div>
 
-    <pre>private process_icon(string $icon) : string</pre>
+    <pre>private process_icon( $icon) : string</pre>
 
                             <strong>Tags</strong>
                 <div>
@@ -539,12 +626,14 @@
     </div>
 
 </div>
-
-                    </main>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             <div class="container footer-menu">
     <div class="group">
@@ -559,11 +648,10 @@
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 06/02/2021 @ 02:23pm</i>
+        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
     </div> 
 </div>
-                            <!-- CAWeb Theme JS -->
-                <script src="../js/caweb-v5.5.js"></script>
-                    </footer>
+            <script src="../js/cagov.core.js"></script>
+        </footer>
     </body>
 </html>

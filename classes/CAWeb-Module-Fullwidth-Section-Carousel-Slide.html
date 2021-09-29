@@ -1,23 +1,29 @@
 
 
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <link rel="stylesheet" href="../css/cagov.core.css">
+
             <title>CAWeb Classes Documentation</title>
         
-                            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                        <link rel="stylesheet" href="../css/colorscheme-santabarbara.css">
                         
         
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="../css/phpdoc.css">
 
+<!-- Iconify JS -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
 <!-- jQuery JS -->
-<script src="../js/jquery.js"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../imgs/favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +41,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
 
-        
-    </head>
+                <style>
+            /* Dynamic Styles */ 
+            .letter-icon:not(.diamond):before {
+                background-color: #834B1E;
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #834B1E;
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #834B1E;
+            }
+        </style>    </head>
     <body class="primary non_divi_builder">
         
 <header id="header" class="global-header fixed">
@@ -67,18 +83,11 @@
 	<div class="container">
 		<div class="group flex-row">
 			<div class="social-media-links">
-				<div class="header-cagov-logo">
-					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
-						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
-					</a>
-				</div>
-
                 <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
-				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
-
+								<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+				
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
@@ -108,7 +117,7 @@
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="../index.html">
-			<img src="../imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="../imgs/branding.png" alt="CAWeb Logo" />
 		</a>
 	</div>
 </div>
@@ -136,75 +145,109 @@
 
 	<div class="navigation-search">
 
-				
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+                                                    <li class="nav-item" title="      Examples">
+                <a class="first-level-link"><span class="ca-gov-icon-gears font-size-30 d-block"></span>
+<span class="link-title">      Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../examples/index.html" class="second-level-link" title="Examples">
+                                                            <span class="ca-gov-icon-gears font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Examples</p>
+                                                            <p class="link-description">View all available examples</p>
+                                                    </a>
+                                            
+                                        <a href="../examples/icon-library.html" class="second-level-link" title="Icon Font Library">
+                                                            <span class="ca-gov-icon-book font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Icon Font Library</p>
+                                                            <p class="link-description">View all available icons</p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
+                                        </li>
+                                            <li class="nav-item" title="      How To&#039;s">
+                <a class="first-level-link"><span class="ca-gov-icon-info-bubble font-size-30 d-block"></span>
+<span class="link-title">      How To&#039;s <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
+                                                            <span class="ca-gov-icon-code font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Compile CSS/JS</p>
+                                                            <p class="link-description">How to compile all CSS/JS files</p>
+                                                    </a>
+                                            
+                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                                        </li>
+                        <li class="nav-item" title="Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="../files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="../filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="../files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
+<span class="link-title">Download</span></a>
         </li>
     </ul>
-</nav>
-		
+</nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
-			
 		</div>
 	</div>
 	
 	</header>
 
-
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                        <div id="class-intro" class="border-bottom border-info">
+                        <div class="section">
+                            <div class="container">
+                                    <!-- Sidebar -->
+                                                                        <div class="quarter">
+                                                                                                <h2 class="my-0">Packages</h2>
+                <p><a href="../packages/CAWeb.html">CAWeb</a></p>
+                                                                                    <p><a href="../packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <h2 class="my-0">Reports</h2>
+    <p><a href="../reports/errors.html">Errors</a></p>
+    <p><a href="../reports/markers.html">Markers</a></p>
 
-<h1>CAWeb_Module_Fullwidth_Section_Carousel_Slide</h1>
+    <h2 class="my-0">Indices</h2>
+    <p><a href="../files.html">Files</a></p>                                                                            </div>
+                                    
+                                    <!-- Introduction -->
+                                    <div class="offset-quarter border-bottom border-info">
+
+<h1 class="my-0">CAWeb_Module_Fullwidth_Section_Carousel_Slide</h1>
 
     <p class="text-muted mb-0">extends ET_Builder_CAWeb_Module</p>
 
@@ -215,50 +258,58 @@
 
     
 </div>
-                        
-                        
-<div id="class-toc" class="mt-3 border-bottom border-info">
-    <h2>Table of Contents</h2>
+                                        
+
+                                    <!-- Table of Contents -->
+                                    
+<div class="offset-quarter mt-3 border-bottom border-info">
+    <h2 class="my-0">Table of Contents</h2>
                         <div class="mb-2">
-            <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide.html#property_slug">$slug</a> : string</p>
+            <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide
+.html#property_slug">$slug</a> : string</p>
             <i class="small text-muted">Member Variable</i>
         </div>
                 <div class="mb-2">
-            <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide.html#property_vb_support">$vb_support</a> : string</p>
+            <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide
+.html#property_vb_support">$vb_support</a> : string</p>
             <i class="small text-muted">Member Variable</i>
         </div>
                 
             <div class="mb-2">
-        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide.html#method_get_fields">get_fields()</a> : array</p>
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide
+.html#method_get_fields">get_fields()</a> : mixed||string|int</p>
         <i class="small text-muted">Returns an array of all the Module Fields.</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide.html#method_init">init()</a> : void</p>
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide
+.html#method_init">init()</a> : </p>
         <i class="small text-muted">Module Initialization</i>
     </div>
         <div class="mb-2">
-        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide.html#method_render">render()</a> : string</p>
+        <p class="mb-0"><a href="../classes/CAWeb-Module-Fullwidth-Section-Carousel-Slide
+.html#method_render">render()</a> : </p>
         <i class="small text-muted">Renders the Module on the frontend</i>
     </div>
         
 </div>
-
-                        <div class="mt-3">
-    <h2>Properties</h2>
+                
+                                    <!-- Body Content -->
+                                    <div class="offset-quarter mt-3">
+    <h2 class="my-0">Properties</h2>
         <div id="property_slug" class="border-bottom border-info">
         <div>
             <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L21">$slug</a> : 21
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L21">$slug</a> : 21
             </div>
             <strong class="d-block">$slug</strong>
             <i class="small text-muted">Member Variable</i>
         </div>
-        <pre>public string $slug = &#039;et_pb_ca_fullwidth_section_carousel_slide&#039;;</pre>
+        <pre>public string $slug = null;</pre>
     </div>
         <div id="property_vb_support" class="border-bottom border-info">
         <div>
             <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L27">$vb_support</a> : 27
+                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L27">$vb_support</a> : 27
             </div>
             <strong class="d-block">$vb_support</strong>
             <i class="small text-muted">Member Variable</i>
@@ -267,12 +318,12 @@
     </div>
     </div>
 
-<div>
-            <h2 id="functions">Methods</h2>
-        <div id="_get_fields" class="mb-3 border-bottom border-info">
+<div class="offset-quarter mt-3">
+            <h2 class="my-0" id="functions">Methods</h2>
+        <div id="method_get_fields" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L71">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 71
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L71">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 71
         </div>
         <strong class="d-block">get_fields()</strong>
         <i class="small text-muted">Returns an array of all the Module Fields.</i>
@@ -285,10 +336,10 @@
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
-<div id="_init" class="mb-3 border-bottom border-info">
+<div id="method_init" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L34">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 34
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L34">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 34
         </div>
         <strong class="d-block">init()</strong>
         <i class="small text-muted">Module Initialization</i>
@@ -301,16 +352,16 @@
         <strong>Return values</strong>
     <p class="small">void</p>
     </div>
-<div id="_render" class="mb-3">
+<div id="method_render" class="mb-3">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L172">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 172
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php#L172">divi/extension/includes/modules/section-carousel-slide-fullwidth/section-carousel-slide-fullwidth.php</a> : 172
         </div>
         <strong class="d-block">render()</strong>
         <i class="small text-muted">Renders the Module on the frontend</i>
     </div>
 
-    <pre>public render(mixed $unprocessed_props, mixed $content = null, mixed $render_slug) : string</pre>
+    <pre>public render( $unprocessed_props,  $content = null,  $render_slug) : string</pre>
 
             
 
@@ -319,12 +370,14 @@
     </div>
 
 </div>
-
-                    </main>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             <div class="container footer-menu">
     <div class="group">
@@ -339,11 +392,10 @@
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 06/02/2021 @ 02:23pm</i>
+        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
     </div> 
 </div>
-                            <!-- CAWeb Theme JS -->
-                <script src="../js/caweb-v5.5.js"></script>
-                    </footer>
+            <script src="../js/cagov.core.js"></script>
+        </footer>
     </body>
 </html>

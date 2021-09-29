@@ -1,23 +1,29 @@
 
 
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <link rel="stylesheet" href="../css/cagov.core.css">
+
             <title>CAWeb inc/filters.php File</title>
         
-                            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="../css/cagov-v5.5-santa barbara.css">
+                        <link rel="stylesheet" href="../css/colorscheme-santabarbara.css">
                         
         
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="../css/phpdoc.css">
 
+<!-- Iconify JS -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
 <!-- jQuery JS -->
-<script src="../js/jquery.js"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../imgs/favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +41,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
 
-        
-    </head>
+                <style>
+            /* Dynamic Styles */ 
+            .letter-icon:not(.diamond):before {
+                background-color: #834B1E;
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #834B1E;
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #834B1E;
+            }
+        </style>    </head>
     <body class="primary non_divi_builder">
         
 <header id="header" class="global-header fixed">
@@ -67,18 +83,11 @@
 	<div class="container">
 		<div class="group flex-row">
 			<div class="social-media-links">
-				<div class="header-cagov-logo">
-					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
-						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="../imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
-					</a>
-				</div>
-
                 <a href="../" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
-				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
-
+								<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+				
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
@@ -108,7 +117,7 @@
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="../index.html">
-			<img src="../imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="../imgs/branding.png" alt="CAWeb Logo" />
 		</a>
 	</div>
 </div>
@@ -136,140 +145,263 @@
 
 	<div class="navigation-search">
 
-				
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="../examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+                                                    <li class="nav-item" title="      Examples">
+                <a class="first-level-link"><span class="ca-gov-icon-gears font-size-30 d-block"></span>
+<span class="link-title">      Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../examples/index.html" class="second-level-link" title="Examples">
+                                                            <span class="ca-gov-icon-gears font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Examples</p>
+                                                            <p class="link-description">View all available examples</p>
+                                                    </a>
+                                            
+                                        <a href="../examples/icon-library.html" class="second-level-link" title="Icon Font Library">
+                                                            <span class="ca-gov-icon-book font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Icon Font Library</p>
+                                                            <p class="link-description">View all available icons</p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="../how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="../how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
+                                        </li>
+                                            <li class="nav-item" title="      How To&#039;s">
+                <a class="first-level-link"><span class="ca-gov-icon-info-bubble font-size-30 d-block"></span>
+<span class="link-title">      How To&#039;s <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
+                                                            <span class="ca-gov-icon-code font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Compile CSS/JS</p>
+                                                            <p class="link-description">How to compile all CSS/JS files</p>
+                                                    </a>
+                                            
+                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                                        </li>
+                        <li class="nav-item" title="Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="../filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="../files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="../filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="../files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
+<span class="link-title">Download</span></a>
         </li>
     </ul>
-</nav>
-		
+</nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
-			
 		</div>
 	</div>
 	
 	</header>
 
-
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                        <div id="file-intro" class="border-bottom border-info">
-        <h1>inc/filters.php<a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php">
-                <span class="ca-gov-icon-link d-inline h4"></span>
+                        <div class="section">
+                            <div class="container">
+                                    <!-- Sidebar -->
+                                                                        <div class="quarter">
+                                                                                                <h2 class="my-0">Packages</h2>
+                <p><a href="../packages/CAWeb.html">CAWeb</a></p>
+                                                                                    <p><a href="../packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <h2 class="my-0">Reports</h2>
+    <p><a href="../reports/errors.html">Errors</a></p>
+    <p><a href="../reports/markers.html">Markers</a></p>
+
+    <h2 class="my-0">Indices</h2>
+    <p><a href="../files.html">Files</a></p>                                                                            </div>
+                                    
+                                    <!-- Introduction -->
+                                    <div id="file-intro" class="offset-quarter border-bottom border-info">
+        <h1 class="my-0">inc/filters.php<a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php">
+            <span class="ca-gov-icon-link h4 d-inline"></span>
+
             </a>
         </h1>
     <i class="d-block">CAWeb Theme Filters</i>
     
             
 </div>
+                                        
 
-
-                        
-                        <div id="file-toc" class="mt-3">
-    <h2>Table of Contents</h2>
+                                    <!-- Table of Contents -->
+                                    
+<div id="file-toc" class="mt-3 offset-quarter">
+    <h2 class="my-0">Table of Contents</h2>
     
     <ul class="list-overstated">
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                                         
-                                                                        <li><a href="#filter">Filters</a></li>
+                                                                                                    <li><a href="#filters">Filters</a></li>
                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <li><a href="#functions">Functions</a></li>
+                                                                                                                                                                                                                                                                                                                                    
+                                        
+                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li><a href="#functions">Functions</a></li>
                     </ul>
 </div>
+                
+                                    <!-- Body Content -->
+                                    <div class="offset-quarter">
 
 
-                                                                                                                                    
-                        
+
+
+
+                                
                                         
-                                                                                                                                                                                                                                                        
-                                                                                                            
-                        
-                                                                                                <h2 id="actions">Actions</h2>
+                                
+                                            
+                
+                            
+                
+                                
+                                            
+                
+                            
+                
                                         
+                                
+                                        
+                                                
+                        
 
 
 
 
+                                
+                                        
+                                
+                                            
+                
+                                                                    <h2 id="filters" class="my-0">Filters</h2>
+                                                                
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/body_class">body_class</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/body_class>body_class</a>
 </p>
 
-        <p>Description: Filters the list of CSS body class names for the current post or page.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_body_class">caweb_body_class</a></p>
-    
-    <p>Priority:  20 </p>
-    
-        <p>Arguments:  2 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L33">inc/filters.php</a> : 33</p>
-</div>
-                            
-                                                                                                                                                                                                                                                        
+                                        <p>Description: Filters the list of CSS body class names for the current post or page.</p>
+                                        
+                                        <p>Callback Function: <a href="#function_caweb_body_class">caweb_body_class</a></p>
+                                        <p>Priority:  20 </p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L38">inc/filters.php</a> : 38</p>
+                </div>
+                    
+                
+                                
+                                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/post_class>post_class</a>
+</p>
+
+                                        
+                                        <p>Callback Function: <a href="#function_caweb_post_class">caweb_post_class</a></p>
+                                        <p>Priority:  15 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L78">inc/filters.php</a> : 78</p>
+                </div>
+                    
+                
+                                        
+                                
+                                        
+                                                
+                        
 <div>
-    <h2 id="functions">Functions</h2>
+    <h2 id="functions" class="my-0">Functions</h2>
     <div id="function_caweb_add_unfiltered_html_capability" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L130">inc/filters.php</a> : 130
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L133">inc/filters.php</a> : 133
         </div>
         <strong class="d-block">caweb_add_unfiltered_html_capability()</strong>
         <i class="small text-muted">Enable unfiltered_html capability for Administrators.</i>
     </div>
 
-    <pre> caweb_add_unfiltered_html_capability(array $caps, string $cap, int $user_id) : array</pre>
+    <pre> caweb_add_unfiltered_html_capability(mixed||string|int $caps,  $cap,  $user_id) : array</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="function_caweb_allowed_html" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L210">inc/filters.php</a> : 210
+        </div>
+        <strong class="d-block">caweb_allowed_html()</strong>
+        <i class="small text-muted">CAWeb Allowed HTML for wp_kses</i>
+    </div>
+
+    <pre> caweb_allowed_html(mixed||string|int $allowedposttags, string|array $context) : array</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="function_caweb_allowed_redirect_hosts" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L187">inc/filters.php</a> : 187
+        </div>
+        <strong class="d-block">caweb_allowed_redirect_hosts()</strong>
+        <i class="small text-muted">CAWeb Allowed Redirected Hosts</i>
+    </div>
+
+    <pre> caweb_allowed_redirect_hosts(mixed||string|int $hosts) : array</pre>
 
             
 
@@ -279,29 +411,61 @@
 <div id="function_caweb_body_class" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L33">inc/filters.php</a> : 33
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L38">inc/filters.php</a> : 38
         </div>
         <strong class="d-block">caweb_body_class()</strong>
         <i class="small text-muted">CAWeb Page Body Class</i>
     </div>
 
-    <pre> caweb_body_class(array $wp_classes, array $extra_classes) : array</pre>
+    <pre> caweb_body_class(mixed||string|int $wp_classes, mixed||string|int $extra_classes) : array</pre>
 
             
 
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
+<div id="function_caweb_default_events_template_classes" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L163">inc/filters.php</a> : 163
+        </div>
+        <strong class="d-block">caweb_default_events_template_classes()</strong>
+        <i class="small text-muted">Allows filtering the classes for the main element for the /events/ page.</i>
+    </div>
+
+    <pre> caweb_default_events_template_classes(string||string|int $classes) : mixed</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">mixed</p>
+    </div>
 <div id="function_caweb_post_class" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L75">inc/filters.php</a> : 75
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L78">inc/filters.php</a> : 78
         </div>
         <strong class="d-block">caweb_post_class()</strong>
         <i class="small text-muted">CAWeb Post Body Class</i>
     </div>
 
-    <pre> caweb_post_class(array $classes) : array</pre>
+    <pre> caweb_post_class(mixed||string|int $classes) : array</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">array</p>
+    </div>
+<div id="function_caweb_safe_style_css" class="mb-3 border-bottom border-info">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L312">inc/filters.php</a> : 312
+        </div>
+        <strong class="d-block">caweb_safe_style_css()</strong>
+        <i class="small text-muted">Safe Style CSS</i>
+    </div>
+
+    <pre> caweb_safe_style_css(mixed||string|int $styles) : array</pre>
 
             
 
@@ -311,14 +475,14 @@
 <div id="function_caweb_script_loader_tag" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L111">inc/filters.php</a> : 111
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L114">inc/filters.php</a> : 114
         </div>
         <strong class="d-block">caweb_script_loader_tag()</strong>
         <i class="small text-muted">CAWeb Script Loader Tags
 Filters the HTML script tag of an enqueued script.</i>
     </div>
 
-    <pre> caweb_script_loader_tag(string $tag, string $handle, string $src) : string</pre>
+    <pre> caweb_script_loader_tag( $tag,  $handle,  $src) : string</pre>
 
             
 
@@ -328,45 +492,63 @@ Filters the HTML script tag of an enqueued script.</i>
 <div id="function_caweb_theme_page_templates" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L94">inc/filters.php</a> : 94
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L97">inc/filters.php</a> : 97
         </div>
         <strong class="d-block">caweb_theme_page_templates()</strong>
         <i class="small text-muted">CAWeb Theme Page Templates
 Filters list of page templates for a theme.</i>
     </div>
 
-    <pre> caweb_theme_page_templates(array $templates) : array</pre>
+    <pre> caweb_theme_page_templates(mixed||string|int $templates) : array</pre>
 
             
 
         <strong>Return values</strong>
     <p class="small">array</p>
     </div>
-<div id="function_caweb_wpforms_custom_capability" class="mb-3">
+<div id="function_caweb_wpforms_custom_capability" class="mb-3 border-bottom border-info">
     <div>
         <div class="pull-right">
-            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L147">inc/filters.php</a> : 147
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L150">inc/filters.php</a> : 150
         </div>
         <strong class="d-block">caweb_wpforms_custom_capability()</strong>
         <i class="small text-muted">Change WPForms capability requirement.</i>
     </div>
 
-    <pre> caweb_wpforms_custom_capability(string $cap) : string</pre>
+    <pre> caweb_wpforms_custom_capability( $cap) : string</pre>
 
             
 
         <strong>Return values</strong>
     <p class="small">string</p>
     </div>
+<div id="function_caweb_xmlrpc_enabled" class="mb-3">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L175">inc/filters.php</a> : 175
+        </div>
+        <strong class="d-block">caweb_xmlrpc_enabled()</strong>
+        <i class="small text-muted">CAWeb Disable XMLRPC</i>
+    </div>
+
+    <pre> caweb_xmlrpc_enabled() : bool</pre>
+
+            
+
+        <strong>Return values</strong>
+    <p class="small">bool</p>
+    </div>
 
 </div>
-
-
-                    </main>
+</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             <div class="container footer-menu">
     <div class="group">
@@ -381,11 +563,10 @@ Filters list of page templates for a theme.</i>
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 06/02/2021 @ 02:23pm</i>
+        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
     </div> 
 </div>
-                            <!-- CAWeb Theme JS -->
-                <script src="../js/caweb-v5.5.js"></script>
-                    </footer>
+            <script src="../js/cagov.core.js"></script>
+        </footer>
     </body>
 </html>

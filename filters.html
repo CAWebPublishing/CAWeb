@@ -1,24 +1,30 @@
 
 
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-        <title>CAWeb Theme Actions/Filters</title>
+        <link rel="stylesheet" href="css/cagov.core.css">
+
+        <title>CAWeb Actions/Filters</title>
 
         
-                            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="css/cagov-v5.5-santa barbara.css">
+                        <link rel="stylesheet" href="css/colorscheme-santabarbara.css">
                         
         
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="css/phpdoc.css">
 
+<!-- Iconify JS -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
 <!-- jQuery JS -->
-<script src="js/jquery.js"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="imgs/favicon.ico">
 
 <!-- Use highest compatibility mode -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,8 +42,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700" rel="stylesheet">
 
-        
-    </head>
+                <style>
+            /* Dynamic Styles */ 
+            .letter-icon:not(.diamond):before {
+                background-color: #834B1E;
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #834B1E;
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #834B1E;
+            }
+        </style>    </head>
     <body class="primary non_divi_builder">
         
 <header id="header" class="global-header fixed">
@@ -68,18 +84,11 @@
 	<div class="container">
 		<div class="group flex-row">
 			<div class="social-media-links">
-				<div class="header-cagov-logo">
-					<a href="https://caweb.cdt.ca.gov/" title="CAWeb Publishing Website">
-						<span class="sr-only">CAWeb Publishing</span>
-						<img style="height: 31px;" src="imgs/caweb-logo.png" class="pos-rel" alt="CAWeb Publishing Website" aria-hidden="true" />
-					</a>
-				</div>
-
                 <a href="" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
 			</div>
 			<div class="settings-links">
-				<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
-
+								<a class="utility-contact-us" href="https://caweb.cdt.ca.gov/contact-us/">Contact Us</a>
+				
 				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
@@ -109,7 +118,7 @@
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="index.html">
-			<img src="imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="imgs/branding.png" alt="CAWeb Logo" />
 		</a>
 	</div>
 </div>
@@ -137,950 +146,1498 @@
 
 	<div class="navigation-search">
 
-				
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+				<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+                                                    <li class="nav-item" title="      Examples">
+                <a class="first-level-link"><span class="ca-gov-icon-gears font-size-30 d-block"></span>
+<span class="link-title">      Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="examples/index.html" class="second-level-link" title="Examples">
+                                                            <span class="ca-gov-icon-gears font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Examples</p>
+                                                            <p class="link-description">View all available examples</p>
+                                                    </a>
+                                            
+                                        <a href="examples/icon-library.html" class="second-level-link" title="Icon Font Library">
+                                                            <span class="ca-gov-icon-book font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Icon Font Library</p>
+                                                            <p class="link-description">View all available icons</p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
+                                        </li>
+                                            <li class="nav-item" title="      How To&#039;s">
+                <a class="first-level-link"><span class="ca-gov-icon-info-bubble font-size-30 d-block"></span>
+<span class="link-title">      How To&#039;s <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
+                                                            <span class="ca-gov-icon-code font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Compile CSS/JS</p>
+                                                            <p class="link-description">How to compile all CSS/JS files</p>
+                                                    </a>
+                                            
+                                        <a href="how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                    </a>
+                                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                                        </li>
+                        <li class="nav-item" title="Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.3.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
+<span class="link-title">Download</span></a>
         </li>
     </ul>
-</nav>
-		
+</nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
-			
 		</div>
 	</div>
 	
 	</header>
 
-
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
                     <main class="main-primary">
-                        <h1>CAWeb Actions/Filters</h1>
-<p>This list should be viewed as a guide line or approximation of CAWeb Theme actions/filters.</p>
+                        <div class="section">
+                            <div class="container">
+                                    <!-- Sidebar -->
+                                                                        <div class="quarter">
+                                                                                                <h2 class="my-0">Packages</h2>
+                <p><a href="packages/CAWeb.html">CAWeb</a></p>
+                                                                                    <p><a href="packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <h2 class="my-0">Reports</h2>
+    <p><a href="reports/errors.html">Errors</a></p>
+    <p><a href="reports/markers.html">Markers</a></p>
+
+    <h2 class="my-0">Indices</h2>
+    <p><a href="files.html">Files</a></p>                                                                            </div>
+                                    
+                                    <!-- Introduction -->
+                                    <div class="offset-quarter">
+    <h1 class="my-0">Actions/Filters</h1>
+    <p>This list should be viewed as a guide or approximation of the CAWeb WordPress actions/filters.</p>
+</div>
+                                        
+
+                                    <!-- Table of Contents -->
+                                    <div class="offset-quarter">
+    <h2 class="my-0">Table of Contents</h2>
+    <ul class="list-overstated">
+        <li><a href="#actions">Actions</a></li>
+        <li><a href="#filters">Filters</a></li>
+    </ul>
+</div>
+                
+                                    <!-- Body Content -->
+                                    <div class="offset-quarter">
+        
+
+
 
                         
+                        
+                        
+                
+                                
+                
+                
+                
+                
+                
+                
                                 
                         
+                                
+                                
+                            
+                
+                                                                    <h2 id="actions" class="my-0">Actions</h2>
+                                                                
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_bar_menu>admin_bar_menu</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/inc-admin-bar.html#function_caweb_admin_bar_menu">caweb_admin_bar_menu</a>
+                    </p>
+                                        <p>Priority:  1000 </p>
                     
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/admin-bar.php#L18">inc/admin-bar.php</a> : 18</p>
+                </div>
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                    
+                        
+                                    
+                
                                                                                     
-                    
-                    
-                                                                                                
-                    
-                    
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                            
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                        
-                    
-                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                                                                                                                                                            
-                    
-                                                                                                                                                                                                                                                                                                                            
-                    
-                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                        
-                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                    
-                    
-                                                    
-                    
-                                                    
-                    
-                                                                                                                                                                                                                                                    
-                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                                                                                                
-                    
-                                                                                                
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                                                                                                                    
-                    
-                                                                                                                                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                                                                                                                                                                                                                    
-                    
-                                                                                                                                                    
-                    
-                                                                                                                                                                                                                                                    
-                    
-                                                                                                                    
-                    
-                                                                                                                                                                                                                                                                                                                                                                                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-    
-        <h2 id="actions">Actions</h2>
-                                                                                                                                                                                                                                                                                                                                                                                
                                 
-                                                    
-                                                                                                                                                                                                                                    
-                                
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/divi_extensions_init">divi_extensions_init</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts>admin_enqueue_scripts</a>
 </p>
 
-        
-    <p>Callback Function: <a href="#function_caweb_initialize_extension">caweb_initialize_extension</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/caweb-module-extension.php#L48">divi/extension/caweb-module-extension.php</a> : 48</p>
-</div>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_admin_enqueue_scripts">caweb_admin_enqueue_scripts</a>
+                    </p>
+                                        <p>Priority:  15 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L527">functions.php</a> : 527</p>
+                </div>
+                    
+                        
+                                
+                        
                                     
-                                                                                                                                
+                
+                                                                                    
                                 
-                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts">admin_enqueue_scripts</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_init>admin_init</a>
 </p>
 
-        
-    <p>Callback Function: <a href="#function_caweb_admin_enqueue_scripts">caweb_admin_enqueue_scripts</a></p>
-    
-    <p>Priority:  15 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L526">functions.php</a> : 526</p>
-</div>
-                                    
-                                                                                                                                                    
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_init">admin_init</a>
-</p>
-
-        <p>Description: Triggered before any other hook when a user accesses the admin area.
+                                        <p>Description: Triggered before any other hook when a user accesses the admin area.
 Note, this does not just run on user-facing admin screens.
 It runs on admin-ajax.php and admin-post.php as well.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_admin_init">caweb_admin_init</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L503">functions.php</a> : 503</p>
-</div>
-                                    
-                                                                                                            
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_admin_init">caweb_admin_init</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L504">functions.php</a> : 504</p>
+                </div>
+                    
+                
                                 
-                                                            
+                                        
+                                
+                        
+                                            
+                
+                            
+                
+                                
+                                
+                                        
+                        
+                                
+                        
+                                
+                                
+                                
+                                        
+                                        
+                                                
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                        
+                                        
+                        
+                                
+                        
+                                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/send_headers">send_headers</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/send_headers>send_headers</a>
 </p>
 
-        
-    <p>Callback Function: <a href="#function_caweb_enable_hsts">caweb_enable_hsts</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L226">functions.php</a> : 226</p>
-</div>
-                                    
-                                                                                                            
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_enable_hsts">caweb_enable_hsts</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L227">functions.php</a> : 227</p>
+                </div>
+                    
+                
+                                                
                                 
-                                                            
+                        
+                                
+                        
+                                
+                        
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/get_header">get_header</a>
+<a>get_header</a>
 </p>
 
-        
-    <p>Callback Function: <a href="#function_caweb_get_header">caweb_get_header</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L285">functions.php</a> : 285</p>
-</div>
-                                    
-                                                                                                                                                    
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_get_header">caweb_get_header</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L286">functions.php</a> : 286</p>
+                </div>
+                    
                                 
-                                                            
+                                
+                        
+                                
+                                        
+                                
+                                
+                        
+                                
+                
+                        
+                        
+                                
+                        
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/init">init</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/init>init</a>
 </p>
 
-        <p>Description: Note, this does not just run on user-facing admin screens.
+                                        <p>Description: Note, this does not just run on user-facing admin screens.
 It runs on admin-ajax.php and admin-post.php as well.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_init">caweb_init</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L240">functions.php</a> : 240</p>
-</div>
-                                    
-                                                                                                                                                    
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_init">caweb_init</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L241">functions.php</a> : 241</p>
+                </div>
+                    
+                        
+                            
+                
+                                                                                    
                                 
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts">wp_enqueue_scripts</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/divi_extensions_init>divi_extensions_init</a>
 </p>
 
-        <p>Description: Fires when scripts and styles are enqueued.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_late_wp_enqueue_scripts">caweb_late_wp_enqueue_scripts</a></p>
-    
-    <p>Priority:  115 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L410">functions.php</a> : 410</p>
-</div>
+                                        
+                                                            <p>Callback Function: <a href="files/divi-extension-caweb-module-extension.html#function_caweb_initialize_extension">caweb_initialize_extension</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/caweb-module-extension.php#L48">divi/extension/caweb-module-extension.php</a> : 48</p>
+                </div>
+                    
+                        
+                        
+                                        
+                        
+                        
+                        
                                     
-                                                                                                                                
+                
+                                                                                    
                                 
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/pre_get_posts">pre_get_posts</a>
+<a>wp_enqueue_scripts</a>
 </p>
 
-        <p>Description: Fires after the query variable object is created, but before the actual query is run.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_pre_get_posts">caweb_pre_get_posts</a></p>
-    
-    <p>Priority:  11 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L264">functions.php</a> : 264</p>
-</div>
-                                    
-                                                                                                                                                    
+                                        <p>Description: Fires when scripts and styles are enqueued.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_late_wp_enqueue_scripts">caweb_late_wp_enqueue_scripts</a>
+                    </p>
+                                        <p>Priority:  115 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L411">functions.php</a> : 411</p>
+                </div>
+                    
+                
+                            
+                
+                                                                                    
                                 
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/save_post">save_post</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_footer-globalshook_suffix>admin_footer-post.php</a>
 </p>
 
-        <p>Description: Fires once a post has been saved.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_save_post_list_meta">caweb_save_post_list_meta</a></p>
-    
-    <p>Priority:  10</p>
-    
-        <p>Arguments:  2 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L602">functions.php</a> : 602</p>
-</div>
-                                    
-                                                                                                                                                    
+                                        <p>Description: Fires in footer section for post and post new pages.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_admin_footer">caweb_live_drafts_admin_footer</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L227">inc/live-drafts.php</a> : 227</p>
+                </div>
+                    
+                
+                            
+                
+                                                                                    
                                 
-                                                            
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
 
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/after_setup_theme">after_setup_theme</a>
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_head-hook-suffix>admin_head-post.php</a>
 </p>
 
-        <p>Description: Sets up theme defaults and registers support for various WordPress features.
+                                        <p>Description: Fires in head section for post and post new pages.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_admin_head">caweb_live_drafts_admin_head</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L132">inc/live-drafts.php</a> : 132</p>
+                </div>
+                    
+                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/admin_notices>admin_notices</a>
+</p>
+
+                                        <p>Description: Prints admin screen notices.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_admin_notice">caweb_live_drafts_admin_notice</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L185">inc/live-drafts.php</a> : 185</p>
+                </div>
+                    
+                
+                            
+                
+                            
+                        
+                                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/load-pagenow>load-post.php</a>
+</p>
+
+                                        <p>Description: Fires before the post and post new pages are loaded.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_init">caweb_live_drafts_init</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L27">inc/live-drafts.php</a> : 27</p>
+                </div>
+                                                                                                
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/load-pagenow>load-post-new.php</a>
+</p>
+
+                                        <p>Description: Fires before the post and post new pages are loaded.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_init">caweb_live_drafts_init</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L27">inc/live-drafts.php</a> : 27</p>
+                </div>
+                    
+                
+                                
+                                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/pre_post_update>pre_post_update</a>
+</p>
+
+                                        <p>Description: Fires immediately before an existing post is updated in the database.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_pre_post_update">caweb_live_drafts_pre_post_update</a>
+                    </p>
+                                        <p>Priority:  10</p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L310">inc/live-drafts.php</a> : 310</p>
+                </div>
+                    
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+</p>
+
+                                        <p>Description: Invoked by cron ‘publish_future_post’ event.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_publish_future_post">caweb_live_drafts_publish_future_post</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L81">inc/live-drafts.php</a> : 81</p>
+                </div>
+                    
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/save_post>save_post</a>
+</p>
+
+                                        <p>Description: Fires once a post has been saved.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_save_post">caweb_live_drafts_save_post</a>
+                    </p>
+                                        <p>Priority:  10</p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L422">inc/live-drafts.php</a> : 422</p>
+                </div>
+                    
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>wp_trash_post</a>
+</p>
+
+                                        <p>Description: Fires before a post is sent to the Trash.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_wp_trash_post">caweb_live_drafts_wp_trash_post</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L514">inc/live-drafts.php</a> : 514</p>
+                </div>
+                    
+                        
+                        
+                                
+                                
+                                
+                                
+                        
+                                
+                                        
+                                        
+                                        
+                                        
+                        
+                            
+                
+                            
+                        
+                        
+                                
+                                
+                        
+                        
+                                        
+                        
+                        
+                                
+                                
+                                            
+                
+                            
+                
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>pre_get_posts</a>
+</p>
+
+                                        <p>Description: Fires after the query variable object is created, but before the actual query is run.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_pre_get_posts">caweb_pre_get_posts</a>
+                    </p>
+                                        <p>Priority:  11 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L265">functions.php</a> : 265</p>
+                </div>
+                    
+                        
+                                        
+                        
+                        
+                                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>admin_post_caweb_attachment_post_meta</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/inc-admin-post.html#function_caweb_retrieve_attachment_post_meta">caweb_retrieve_attachment_post_meta</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/admin-post.php#L21">inc/admin-post.php</a> : 21</p>
+                </div>
+                                                                                                
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>admin_post_nopriv_caweb_attachment_post_meta</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/inc-admin-post.html#function_caweb_retrieve_attachment_post_meta">caweb_retrieve_attachment_post_meta</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/admin-post.php#L21">inc/admin-post.php</a> : 21</p>
+                </div>
+                    
+                
+                                
+                                        
+                                        
+                                
+                        
+                                
+                                        
+                                        
+                                
+                                
+                                
+                                
+                                        
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/save_post>save_post</a>
+</p>
+
+                                        <p>Description: Fires once a post has been saved.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_save_post_list_meta">caweb_save_post_list_meta</a>
+                    </p>
+                                        <p>Priority:  10</p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L597">functions.php</a> : 597</p>
+                </div>
+                    
+                        
+                                
+                                
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/after_setup_theme>after_setup_theme</a>
+</p>
+
+                                        <p>Description: Sets up theme defaults and registers support for various WordPress features.
 
 Note that this function is hooked into the after_setup_theme hook, which
 runs before the init hook. The init hook is too late for some features, such
 as indicating support for post thumbnails.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_setup_theme">caweb_setup_theme</a></p>
-    
-    <p>Priority:  11 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L93">functions.php</a> : 93</p>
-</div>
-                                    
-                                                                                                                                
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_setup_theme">caweb_setup_theme</a>
+                    </p>
+                                        <p>Priority:  11 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L91">functions.php</a> : 91</p>
+                </div>
+                    
+                
                                 
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts">wp_enqueue_scripts</a>
-</p>
-
-        <p>Description: Fires when scripts and styles are enqueued.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_wp_enqueue_parent_scripts">caweb_wp_enqueue_parent_scripts</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L304">functions.php</a> : 304</p>
-</div>
-                                    
-                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts">wp_enqueue_scripts</a>
-</p>
-
-        <p>Description: Fires when scripts and styles are enqueued.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_wp_enqueue_scripts">caweb_wp_enqueue_scripts</a></p>
-    
-    <p>Priority:  15 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L319">functions.php</a> : 319</p>
-</div>
-                                    
-                                                                                                                                                    
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/wp_footer">wp_footer</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_caweb_wp_footer">caweb_wp_footer</a></p>
-    
-    <p>Priority:  11 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L475">functions.php</a> : 475</p>
-</div>
-                                    
-                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/wp_head">wp_head</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_caweb_wp_head">caweb_wp_head</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/functions.php#L457">functions.php</a> : 457</p>
-</div>
-                                    
-                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_bar_menu">admin_bar_menu</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_caweb_admin_bar_menu">caweb_admin_bar_menu</a></p>
-    
-    <p>Priority:  1000 </p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-bar.php#L18">inc/admin-bar.php</a> : 18</p>
-</div>
-                                    
-                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_post_action">admin_post_caweb_attachment_post_meta</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_caweb_retrieve_attachment_post_meta">caweb_retrieve_attachment_post_meta</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-post.php#L21">inc/admin-post.php</a> : 21</p>
-</div>
-                                                                                
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_post_nopriv_action">admin_post_nopriv_caweb_attachment_post_meta</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_caweb_retrieve_attachment_post_meta">caweb_retrieve_attachment_post_meta</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/admin-post.php#L21">inc/admin-post.php</a> : 21</p>
-</div>
-                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                
-                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_footer-globalshook_suffix">admin_footer-post.php</a>
-</p>
-
-        <p>Description: Fires in footer section for post and post new pages.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_admin_footer">caweb_live_drafts_admin_footer</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L205">inc/live-drafts.php</a> : 205</p>
-</div>
-                                    
-                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_head-hook-suffix">admin_head-post.php</a>
-</p>
-
-        <p>Description: Fires in head section for post and post new pages.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_admin_head">caweb_live_drafts_admin_head</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L128">inc/live-drafts.php</a> : 128</p>
-</div>
-                                    
-                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/admin_notices">admin_notices</a>
-</p>
-
-        <p>Description: Prints admin screen notices.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_admin_notice">caweb_live_drafts_admin_notice</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L163">inc/live-drafts.php</a> : 163</p>
-</div>
-                                    
-                                                                                                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/load-pagenow">load-post.php</a>
-</p>
-
-        <p>Description: Fires before the post and post new pages are loaded.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_init">caweb_live_drafts_init</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L26">inc/live-drafts.php</a> : 26</p>
-</div>
-                                                                                
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/load-pagenow">load-post-new.php</a>
-</p>
-
-        <p>Description: Fires before the post and post new pages are loaded.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_init">caweb_live_drafts_init</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L26">inc/live-drafts.php</a> : 26</p>
-</div>
-                                    
-                                                                                                                                                                                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/save_post">save_post</a>
-</p>
-
-        <p>Description: Fires once a post has been saved.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_post_update">caweb_live_drafts_post_update</a></p>
-    
-    <p>Priority:  10</p>
-    
-        <p>Arguments:  2 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L371">inc/live-drafts.php</a> : 371</p>
-</div>
-                                    
-                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/pre_post_update">pre_post_update</a>
-</p>
-
-        <p>Description: Fires immediately before an existing post is updated in the database.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_pre_post_update">caweb_live_drafts_pre_post_update</a></p>
-    
-    <p>Priority:  10</p>
-    
-        <p>Arguments:  2 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L288">inc/live-drafts.php</a> : 288</p>
-</div>
-                                    
-                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-</p>
-
-        <p>Description: Invoked by cron ‘publish_future_post’ event.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_live_drafts_publish_future_post">caweb_live_drafts_publish_future_post</a></p>
-    
-    <p>Priority: 10</p>
-    
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/live-drafts.php#L77">inc/live-drafts.php</a> : 77</p>
-</div>
-                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-    <h2 id="filters">Filters</h2>
-                                                                                                                                                                                                                                                                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/upgrader_pre_download">upgrader_pre_download</a>
-</p>
-
-        
-    <p>Callback Function: <a href="#function_array( $this, &#039;caweb_upgrader_pre_download&#039; )">array( $this, &#039;caweb_upgrader_pre_download&#039; )</a></p>
-    
-    <p>Priority: 10</p>
-    
-        <p>Arguments:  3 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/#L220"></a> : 220</p>
-</div>
-                                    
-                                                                                                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/et_module_shortcode_output">et_module_shortcode_output</a>
-</p>
-
-        <p>Description: Fixes various Divi Module Outputs</p>
-        
-    <p>Callback Function: <a href="#function_caweb_module_shortcode_output_fix">caweb_module_shortcode_output_fix</a></p>
-    
-    <p>Priority:  10</p>
-    
-        <p>Arguments:  3 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/divi/extension/caweb-module-extension.php#L65">divi/extension/caweb-module-extension.php</a> : 65</p>
-</div>
-                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                                                                    
-                                
-                                                    
-                                                                                                                                
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                                                
-                                
-                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                
-                                                            
-
-
-
-
-
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: 
-
-<a target="_blank" href="https://developer.wordpress.org/reference/hooks/body_class">body_class</a>
-</p>
-
-        <p>Description: Filters the list of CSS body class names for the current post or page.</p>
-        
-    <p>Callback Function: <a href="#function_caweb_body_class">caweb_body_class</a></p>
-    
-    <p>Priority:  20 </p>
-    
-        <p>Arguments:  2 </p>
-        
-    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/dev/inc/filters.php#L33">inc/filters.php</a> : 33</p>
-</div>
-                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                            
-                                
-                                                    
-                                                                                                                                                                                            
-                                
-                                                                                        
-                                                                                                                                                                                                                                                                                                
-                                
-                                                    
-                                                                                                                                
-                                
-                                                    
-                                                                                                                                
-                                
-                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                         
-                    </main>
+                                
+                                
+                                        
+                                
+                                
+                
+                        
+                                    
+                
+                            
+                
+                                
+                                
+                                        
+                                
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>wp_enqueue_scripts</a>
+</p>
+
+                                        <p>Description: Fires when scripts and styles are enqueued.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_wp_enqueue_parent_scripts">caweb_wp_enqueue_parent_scripts</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L305">functions.php</a> : 305</p>
+                </div>
+                    
+                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>wp_enqueue_scripts</a>
+</p>
+
+                                        <p>Description: Fires when scripts and styles are enqueued.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_wp_enqueue_scripts">caweb_wp_enqueue_scripts</a>
+                    </p>
+                                        <p>Priority:  15 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L320">functions.php</a> : 320</p>
+                </div>
+                    
+                        
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>wp_footer</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_wp_footer">caweb_wp_footer</a>
+                    </p>
+                                        <p>Priority:  11 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L476">functions.php</a> : 476</p>
+                </div>
+                    
+                
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>wp_head</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/functions.html#function_caweb_wp_head">caweb_wp_head</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L458">functions.php</a> : 458</p>
+                </div>
+                    
+                
+                                        
+                                                
+                                        
+                        
+                
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                        
+                        
+                
+                
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+                
+                        
+                
+                
+                        
+                        
+                        
+                
+                
+                        
+                        
+                        
+                        
+                
+                
+                
+                
+                
+                
+                        
+                        
+                
+                                                        
+        
+
+
+
+                        
+                        
+                        
+                
+                                
+                
+                
+                
+                
+                
+                
+                                
+                        
+                                
+                                
+                            
+                
+                            
+                        
+                                    
+                
+                            
+                        
+                                
+                        
+                                    
+                
+                            
+                
+                                
+                                        
+                                
+                        
+                                            
+                
+                                                                    <h2 id="filters" class="my-0">Filters</h2>
+                                                                
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/body_class>body_class</a>
+</p>
+
+                                        <p>Description: Filters the list of CSS body class names for the current post or page.</p>
+                                        
+                                                            <p>Callback Function: <a href="files/inc-filters.html#function_caweb_body_class">caweb_body_class</a>
+                    </p>
+                                        <p>Priority:  20 </p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L38">inc/filters.php</a> : 38</p>
+                </div>
+                    
+                
+                                
+                                
+                                        
+                        
+                                
+                        
+                                
+                                
+                                
+                                        
+                                        
+                                                
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                        
+                                        
+                        
+                                
+                        
+                                
+                            
+                
+                            
+                
+                                                
+                                
+                        
+                                
+                        
+                                
+                        
+                        
+                            
+                
+                            
+                                
+                                
+                        
+                                
+                                        
+                                
+                                
+                        
+                                
+                
+                        
+                        
+                                
+                        
+                        
+                            
+                
+                            
+                        
+                            
+                
+                            
+                        
+                        
+                                        
+                        
+                        
+                        
+                                    
+                
+                            
+                
+                            
+                
+                            
+                
+                            
+                
+                            
+                
+                            
+                
+                            
+                
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/display_post_states>display_post_states</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/inc-live-drafts.html#function_caweb_live_drafts_display_post_states">caweb_live_drafts_display_post_states</a>
+                    </p>
+                                        <p>Priority:  10</p>
+                    
+                                        <p>Arguments:  2 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/live-drafts.php#L552">inc/live-drafts.php</a> : 552</p>
+                </div>
+                    
+                        
+                                
+                            
+                
+                                                
+                
+                                
+                                        
+                            
+                
+                            
+                        
+                            
+                
+                            
+                        
+                            
+                
+                            
+                        
+                            
+                
+                            
+                        
+                        
+                                
+                                
+                                
+                                
+                        
+                                
+                                        
+                                        
+                                        
+                                        
+                        
+                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a>et_module_shortcode_output</a>
+</p>
+
+                                        <p>Description: Fixes various Divi Module Outputs</p>
+                                        
+                                                            <p>Callback Function: <a href="files/divi-extension-caweb-module-extension.html#function_caweb_module_shortcode_output_fix">caweb_module_shortcode_output_fix</a>
+                    </p>
+                                        <p>Priority:  10</p>
+                    
+                                        <p>Arguments:  3 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/divi/extension/caweb-module-extension.php#L65">divi/extension/caweb-module-extension.php</a> : 65</p>
+                </div>
+                    
+                        
+                        
+                                
+                                
+                        
+                        
+                                        
+                        
+                        
+                                
+                                
+                                            
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/post_class>post_class</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/inc-filters.html#function_caweb_post_class">caweb_post_class</a>
+                    </p>
+                                        <p>Priority:  15 </p>
+                    
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/inc/filters.php#L78">inc/filters.php</a> : 78</p>
+                </div>
+                    
+                
+                                    
+                
+                            
+                        
+                                        
+                        
+                        
+                                
+                            
+                
+                                                
+                
+                                
+                                        
+                                        
+                                
+                        
+                                
+                                        
+                                        
+                                
+                                
+                                
+                                
+                                        
+                                    
+                
+                            
+                        
+                                
+                                
+                                    
+                
+                            
+                
+                                
+                        
+                                
+                                
+                                        
+                                
+                                
+                
+                        
+                                    
+                
+                                                                                    
+                                
+                
+                                                
+                                                
+                <div class="border-bottom border-info mb-3">
+                    <p>WordPress Hook: 
+
+<a target=_blank href=https://developer.wordpress.org/reference/hooks/upgrader_pre_download>upgrader_pre_download</a>
+</p>
+
+                                        
+                                                            <p>Callback Function: <a href="files/#function_array( $this, &#039;caweb_upgrader_pre_download&#039; )">array( $this, &#039;caweb_upgrader_pre_download&#039; )</a>
+                    </p>
+                                        <p>Priority: 10</p>
+                    
+                                        <p>Arguments:  3 </p>
+                                        
+                    <p>Source: <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/#L221"></a> : 221</p>
+                </div>
+                    
+                
+                                
+                                
+                                        
+                                
+                                    
+                
+                            
+                
+                            
+                
+                            
+                        
+                                    
+                
+                            
+                
+                                    
+                
+                            
+                
+                                        
+                                                
+                                        
+                        
+                
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                        
+                        
+                
+                
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+                
+                        
+                
+                
+                        
+                        
+                        
+                
+                
+                        
+                        
+                        
+                        
+                
+                
+                
+                
+                
+                
+                        
+                        
+                
+                                                        </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             <div class="container footer-menu">
     <div class="group">
@@ -1095,11 +1652,10 @@ as indicating support for post thumbnails.</p>
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 06/02/2021 @ 02:23pm</i>
+        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
     </div> 
 </div>
-                            <!-- CAWeb Theme JS -->
-                <script src="js/caweb-v5.5.js"></script>
-                    </footer>
+            <script src="js/cagov.core.js"></script>
+        </footer>
     </body>
 </html>
