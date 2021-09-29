@@ -346,6 +346,14 @@ function caweb_wp_enqueue_scripts() {
 
 	$frontend_js_file = caweb_get_min_file( "/js/caweb-v$ver.js", 'js' );
 
+	/* Geo Locator */
+	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
+
+	if ( $ca_geo_locator_enabled ) {
+		$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
+		wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
+	}
+
 	/* Register Scripts */
 	wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
 
@@ -356,13 +364,6 @@ function caweb_wp_enqueue_scripts() {
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'cagov-caweb-script' );
 
-	/* Geo Locator */
-	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
-
-	if ( $ca_geo_locator_enabled ) {
-		$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
-		wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
-	}
 }
 
 /**
