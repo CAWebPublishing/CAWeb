@@ -1,0 +1,51 @@
+{% set colorscheme = _context.target_path|replace({'examples/colorscheme/':'', '.html' : '', '-' : ' '}) %}
+
+{% extends "layout.html.twig" %}
+
+{% block head %}
+<title>{{ project.name }} {{ colorscheme|title }} Colorscheme Example</title>
+{% endblock head %}
+
+
+{% block introduction %}
+<div class="offset-quarter">
+    <h1 class="mt-0 mb-2">{{ colorscheme|title }} Colorscheme</h1>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+    <h2 class="mt-0 mb-2">Main Colors</h2>
+    <div class="container mx-5">
+        <div class="row">
+            {% for data in colorschemes[ colorscheme|title ] %}
+            {% set cat = 'highlight' %}
+            {% set subcat = 'p1' %}
+            {% if 1 == loop.index0 %}
+                {% set cat = 'primary' %}
+                {% set subcat = 'p2' %}
+            {% elseif 2 == loop.index0 %}
+                {% set cat = 'standout' %}
+                {% set subcat = 'p3' %}
+            {% elseif 3 == loop.index0 %}
+                {% set cat = 's1' %}
+                {% set subcat = 's1' %}
+            {% endif %}
+            <div class="col-3 text-center">
+                <div class="m-auto height-80 width-80 shadow border" style="background-color: #{{ data.hex }};"></div>
+                <div class="caption">
+                    <p class="h4 mb-0 mt-3">.color-{{ cat }}</p>
+                    <p class="h4 my-0">@color-{{ subcat }}</p>
+                    <small class="d-block">HEX: {{ data.hex }}</small>
+                    <small class="d-block">RGB: {{ data.rgb }}</small>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}
