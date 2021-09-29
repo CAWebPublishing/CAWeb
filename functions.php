@@ -286,9 +286,9 @@ function caweb_pre_get_posts( $query ) {
 function caweb_get_header( $name = null ) {
 	$post_type = get_post_type( get_the_ID() );
 
-	if ( 'project' === $post_type || empty( $post_type ) ) {
+	if ( in_array( $post_type, array( 'project', 'tribe_events' ), true ) || empty( $post_type ) ) {
 		locate_template( array( 'header.php' ), true );
-		require_once 'partials/header.php';
+		locate_template( array( 'partials/header.php' ), true, true, array( 'loaded' => true ) );
 	}
 }
 

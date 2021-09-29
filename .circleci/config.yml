@@ -3,6 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
+
 workflows:
   verify_standards:
     jobs:
@@ -22,7 +23,7 @@ jobs:
       - checkout
       - run: git config --global user.name "guzmanjd86@gmail.com"
       - run: git config --global user.email "Danny Guzman"
-      - run: composer i --no-dev
+      - run: composer update
       - run: wget -O phpDoc.phar https://phpdoc.org/phpDocumentor.phar
       - run: chmod +x phpDoc.phar
       - run: ./phpDoc.phar . --force
@@ -53,27 +54,14 @@ jobs:
         - image: circleci/php:7.4
       steps:
         - checkout
-        - run: composer i --no-dev
+        - run: composer update
         - run: 
+            name: "Verify WordPress Coding Standards"
             command: |
               declare -a files=( 
                 'divi/'
                 'page-templates/'
-                'inc/admin-bar.php'
-                'inc/admin-post.php'
-                'inc/branding.php'
-                'inc/class-caweb-customize-icon-control.php'
-                'inc/class-caweb-nav-menu.php'
-                'inc/class-caweb-nav-menu-walker.php'
-                'inc/customizer.php'
-                'inc/filters.php'
-                'inc/functions.php'
-                'inc/icon-library.php'
-                'inc/live-drafts.php'
-                'inc/options.php'
-                'inc/shortcodes.php'
-                'inc/tinymce.php'
-                'inc/widgets.php'
+                'inc/'
                 '404.php' 
                 'archive.php' 
                 'author.php' 
