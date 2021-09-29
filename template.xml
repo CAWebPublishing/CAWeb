@@ -18,6 +18,36 @@
 
         <!-- Override Fonts -->
         <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
-        
+
+        <!-- Theme Specific Pages -->
+        <!-- How To Pages -->
+        <transformation writer="twig" source="enforce-wpcs.html.twig" artifact="/how-to/enforce-wpcs.html" />
+
+        <transformation writer="FileIo" query="copy" source=".phpdoc/template/imgs/gulp-tasks.png" artifact="imgs/gulp-tasks.png" />
+        <transformation writer="twig" source="gulp.html.twig" artifact="/how-to/gulp.html" />
+
+        <!-- Examples -->
+        <transformation writer="twig" source="examples.html.twig" artifact="examples/index.html" />
+
+        <!-- Icon Font Library -->
+        <transformation writer="twig" source="icons.html.twig" artifact="examples/icon-library.html" />
+
+        <!-- Colorscheme Examples -->
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/eureka.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/mono.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/oceanside.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/orange-county.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/paso-robles.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sacramento.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-barbara.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-cruz.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/shasta.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sierra.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/trinity.html" />
+
+        <!-- Modules -->
+        <transformation writer="twig" query="indexes.classes" source="modules.html.twig" artifact="examples/modules.html" />
+
     </transformations>
 </template>

@@ -11,4 +11,4 @@ composer.lock
 package-lock.json
 /log/
 /.docs/
-/.phpdoc/
+/.phpdoc/cache/
