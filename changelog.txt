@@ -1,5 +1,6 @@
 CAWeb v1.5.9
 - Added 111 new State Template Icons
+- Fixed issue with Divi Toggle Module, toggling when clicking on toggle content.
 
 CAWeb v1.5.8
 - Fixed Live Drafts when using New Builder Experience

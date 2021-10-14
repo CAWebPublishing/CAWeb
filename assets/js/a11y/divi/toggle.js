@@ -3,16 +3,17 @@ jQuery(document).ready(function() {
 	Divi Toggle Module Accessibility
 	Retrieve all Divi Toggle Modules
    */
-	var toggle_modules = $('div.et_pb_toggle');
+	var toggle_modules = $('div.et_pb_toggle .et_pb_toggle_title');
 
 	// Run only if there is a Toggle Module on the current page
 	if( toggle_modules.length  ){
 		toggle_modules.each(function(index, element) {
-			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+			var parent_module = $(element).parent();
+			var expanded = $(parent_module).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
 
-			$(element).attr('tabindex', 0);
-			$(element).attr('role', 'button');
-			$(element).attr('aria-expanded', expanded);
+			$(parent_module).attr('tabindex', 0);
+			$(parent_module).attr('role', 'button');
+			$(parent_module).attr('aria-expanded', expanded);
 
 			// Events
 			$(element).on('click keydown', function(e){
@@ -26,39 +27,39 @@ jQuery(document).ready(function() {
 
 				if (toggleKeyPressed) {
 					setTimeout( function(){
-						$(element).toggleClass('et_pb_toggle_open');
-						$(element).toggleClass('et_pb_toggle_close');
+						$(parent_module).toggleClass('et_pb_toggle_open');
+						$(parent_module).toggleClass('et_pb_toggle_close');
 
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						if ($(parent_module).hasClass('et_pb_toggle_open')) {
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'block');
 						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'none')
 						}
 					}, 500);
 				}
 
 				if (toggleOpenPressed) {
 					setTimeout( function(){
-						$(element).addClass('et_pb_toggle_open');
-						$(element).removeClass('et_pb_toggle_close');
+						$(parent_module).addClass('et_pb_toggle_open');
+						$(parent_module).removeClass('et_pb_toggle_close');
 
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						if ($(parent_module).hasClass('et_pb_toggle_open')) {
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'block');
 						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'none')
 						}
 					}, 500);
 				}
 
 				if (toggleClosePressed) {
 					setTimeout( function(){
-						$(element).addClass('et_pb_toggle_close');
-						$(element).removeClass('et_pb_toggle_open');
+						$(parent_module).addClass('et_pb_toggle_close');
+						$(parent_module).removeClass('et_pb_toggle_open');
 
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
+						if ($(parent_module).hasClass('et_pb_toggle_open')) {
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'block');
 						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
+							$(parent_module).find('.et_pb_toggle_content').css('display', 'none')
 						}
 					}, 500)
 				}
@@ -71,8 +72,8 @@ jQuery(document).ready(function() {
 				// Modifies value for aria-expanded attribute
 				// when toggle is clicked or Enter/Space key is pressed
 				setTimeout( function(){
-					var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-					$(element).attr('aria-expanded', expanded);
+					var expanded = $(parent_module).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+					$(parent_module).attr('aria-expanded', expanded);
 				}, 1000 );
 			});
 		});
