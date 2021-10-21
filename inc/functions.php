@@ -328,7 +328,7 @@ if ( ! function_exists( 'caweb_get_shortcode_from_content' ) ) {
 	 * @param  string $tag Shortcode tag to retrieve.
 	 * @param  bool   $all_matches Whether to retrieve all matches or just the first.
 	 *
-	 * @return array
+	 * @return array|Object
 	 */
 	function caweb_get_shortcode_from_content( $con = '', $tag = '', $all_matches = false ) {
 		if ( empty( $con ) || empty( $tag ) ) {
