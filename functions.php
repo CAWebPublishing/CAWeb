@@ -197,6 +197,9 @@ function caweb_setup_theme() {
 	 * @since Divi 4.10.0
 	 */
 	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
+
+	// Remove Divi replacement of parent style.css.
+	remove_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );
 }
 
 /**
