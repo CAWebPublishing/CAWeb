@@ -34,10 +34,11 @@ add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'get_header', 'caweb_get_header' );
-add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
-add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
 add_action( 'wp_head', 'caweb_wp_head' );
 add_action( 'wp_footer', 'caweb_wp_footer', 11 );
+// The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
+// add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
 
 /**
  * Plugin API/Action Reference
@@ -198,8 +199,6 @@ function caweb_setup_theme() {
 	 */
 	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
 
-	// Remove Divi replacement of parent style.css.
-	remove_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );
 }
 
 /**
@@ -277,11 +276,11 @@ function caweb_get_header( $name = null ) {
 }
 
 /**
- * Register CAWeb Theme scripts/styles with priority of 15
+ * Register CAWeb Theme scripts/styles with priority of 99999999
  *
  * Fires when scripts and styles are enqueued.
  *
- * @category add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 15 );
+ * @category add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
  * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
  *
  * @return void
@@ -367,20 +366,6 @@ function caweb_wp_enqueue_scripts() {
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'cagov-caweb-script' );
 
-}
-
-/**
- * Register CAWeb Theme scripts/styles with priority of 115
- *
- * Fires when scripts and styles are enqueued.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
- * @category add_action( 'wp_enqueue_scripts', 'caweb_late_wp_enqueue_scripts', 115 );
- * @return void
- */
-function caweb_late_wp_enqueue_scripts() {
-	$clwes      = wp_create_nonce( 'caweb_late_wp_enqueue_scripts' );
-	$verified   = isset( $clwes ) && wp_verify_nonce( sanitize_key( $clwes ), 'caweb_late_wp_enqueue_scripts' );
 	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 
 	if ( $vb_enabled ) {
