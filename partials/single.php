@@ -14,11 +14,11 @@ require_once 'header.php';
 
 ?>
 
-	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?>">
+	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?> page-container-ds">
 	<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
 
-			<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?> main-content-ds single-column landing">
 			<?php if ( ! $caweb_is_page_builder_used ) : ?>
 			<div class="section">
 			<?php endif; ?>

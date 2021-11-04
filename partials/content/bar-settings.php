@@ -7,7 +7,7 @@
 
 ?>
 
-<div class="site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">
+<div class="d-none site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">
 	<div class="container  p-y">
 		<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
 			<div class="btn-group"><button type="button" class="btn btn-standout disableHighContrastMode">Default</button></div>

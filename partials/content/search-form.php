@@ -11,20 +11,27 @@ $caweb_verified     = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_
 $caweb_keyword = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
-<div class="container">
-	<form id="Search" class="pos-rel" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
-		<span class="sr-only" id="SearchInput">Custom Google Search</span>
-		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield height-50 border-0 p-x-sm w-100" />
-		<button type="submit" class="pos-abs gsc-search-button top-0 width-50 height-50 border-0 bg-transparent">
-			<span class="ca-gov-icon-search font-size-30 color-gray" aria-hidden="true" ></span>
-			<span class="sr-only">Submit</span>
-		</button>
-		<div class="width-50 height-50 close-search-btn">
-			<!-- Some Google styles add an 'x' background image when button has 'gsc-clear-button' in the class -->
-			<button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset" tabindex="-1">
-				<span class="sr-only">Close Search</span>
-				<span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
-			</button>
-		</div>
-	</form> 
-</div>
+
+
+
+
+
+
+<div class="search-container search-container--small hidden-search">
+      <form class="site-search" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
+        <span class="sr-only" id="SearchInput2">Custom Google Search</span>
+        <input type="text" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput2" placeholder="Search this website"
+          class="search-textfield">
+        <button type="submit" class="search-submit">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="17px" height="17px" viewBox="0 0 17 17" style="enable-background:new 0 0 17 17;"
+            xml:space="preserve">
+            <path class="blue" d="M16.4,15.2l-4-4c2-2.6,1.8-6.5-0.6-8.9c-1.3-1.3-3-2-4.8-2S3.5,1,2.2,2.3c-2.6,2.6-2.6,6.9,0,9.6
+        c1.3,1.3,3,2,4.8,2c1.4,0,2.9-0.5,4.1-1.4l4.1,4c0.2,0.2,0.4,0.3,0.7,0.3c0.2,0,0.5-0.1,0.7-0.3C16.7,16.2,16.7,15.6,16.4,15.2
+        L16.4,15.2z M7,12c-1.3,0-2.6-0.5-3.5-1.4c-1.9-1.9-1.9-5.1,0-7C4.4,2.7,5.6,2.1,7,2.1s2.6,0.5,3.5,1.4c0.9,0.9,1.4,2.2,1.4,3.5
+        c0,1.3-0.5,2.6-1.4,3.5C9.5,11.5,8.3,12,7,12z" />
+          </svg>
+          <span class="sr-only">Submit</span>
+        </button>
+      </form>
+    </div>

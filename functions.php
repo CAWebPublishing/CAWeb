@@ -632,3 +632,10 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 	End of Admin Action Reference Functions
 --------------------------------------------
 */
+
+
+/** * Completely Remove jQuery From WordPress Admin Dashboard */
+add_action('wp_enqueue_scripts', 'no_more_jquery');
+function no_more_jquery(){
+    wp_deregister_script('jquery');
+}
