@@ -10,7 +10,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 }
 
 /**
- * CAWeb Section Footer Group Module Class (Standard)
+ * CAWeb Section Footer Group Module Class (Fullwidth)
  */
 class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 	/**

@@ -212,6 +212,11 @@ class CAWeb_Module_Section_Primary extends ET_Builder_CAWeb_Module {
 		$content = $this->content;
 
 		$this->add_classname( 'section' );
+
+		if ( 'on' === $this->props['left_right_button'] ) {
+			$this->add_classname( 'pl-3' );
+		}
+
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$section_bg_color = ! empty( $section_background_color ) ?
@@ -280,9 +285,14 @@ class CAWeb_Module_Section_Primary extends ET_Builder_CAWeb_Module {
 		$slide_image_button = $this->props['slide_image_button'];
 		$image_pos          = $this->props['left_right_button'];
 		$section_image      = $this->props['section_image'];
+		$class              = '';
 
-		$class  = 'on' === $slide_image_button ? ' animate-fadeInLeft' : '';
-		$class .= 'on' === $image_pos ? ' pull-right pr-0' : ' pull-left pl-0';
+		if ( 'off' === $this->props['background_enable_color'] ) {
+			$class .= 'on' === $image_pos ? ' pr-0' : ' pl-0';
+		}
+
+		$class .= 'on' === $slide_image_button ? ' animate-fadeInLeft' : '';
+		$class .= 'on' === $image_pos ? ' pull-right' : ' pull-left';
 
 		$alt_text      = caweb_get_attachment_post_meta( $section_image, '_wp_attachment_image_alt' );
 		$section_image = sprintf( '<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text );

@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+<title>{{ project.name }} Examples</title>
+
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter">
+<h1 class="my-0">Examples</h1>
+    <p>
+        The {{ project.name }} Theme is a child theme of <a target="_blank" href="https://www.elegantthemes.com/gallery/divi/">Divi</a>, and fully integrates the <a target="_blank" href="https://template.webtools.ca.gov/">California State Template</a>.
+        The following pages include various examples of the options available. 
+        </p>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+    <h2 class="my-0">Icon Font Library</h2>
+    <a href="{{ path('/') }}examples/icon-library.html">Icon Font Library</a>
+    <h2 class="mt-3 mb-0">ColorSchemes</h2>
+    <ol class="list-style-none mt-0">
+        {% for color in colorschemes|keys %}
+        <li><a href="{{ path('/') }}examples/colorscheme/{{ color|replace({' ' : '-'})|lower }}.html">{{ color }}</a></li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock body %}
