@@ -553,6 +553,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_google_meta_id',
 		'ca_google_trans_enabled',
 		'ca_google_trans_page',
+		'ca_google_trans_text',
 		'ca_google_trans_icon',
 		'ca_google_trans_page_new_window',
 	);
