@@ -1,3 +1,6 @@
+CAWeb v1.5.10
+- Added text option for the Google Translate Custom Link
+
 CAWeb v1.5.9a 
 - Fixed issue with removal of Divi parent replacement not loading styles when in preview mode
 
