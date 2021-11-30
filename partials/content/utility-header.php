@@ -9,6 +9,7 @@ $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true )
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );
 $caweb_google_trans_page            = get_option( 'ca_google_trans_page', '' );
+$caweb_google_trans_text            = get_option( 'ca_google_trans_text', '' );
 $caweb_google_trans_enabled         = get_option( 'ca_google_trans_enabled', false );
 $caweb_google_trans_page_new_window = get_option( 'ca_google_trans_page_new_window', true ) ? '_blank' : '_self';
 $caweb_google_trans_icon            = get_option( 'ca_google_trans_icon', '' );
@@ -90,8 +91,11 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 
 				<?php if ( 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) : ?>
 				<a id="caweb-gtrans-custom" target="<?php print esc_attr( $caweb_google_trans_page_new_window ); ?>" href="<?php print esc_url( $caweb_google_trans_page ); ?>">
-					<?php if ( ! empty( $caweb_google_trans_icon ) ) : ?>
+				<?php if ( ! empty( $caweb_google_trans_icon ) ) : ?>
 				<span class="ca-gov-icon-<?php print esc_attr( $caweb_google_trans_icon ); ?>"></span>
+				<?php endif; ?>
+				<?php if ( ! empty( $caweb_google_trans_text ) ) : ?>
+				<span><?php print esc_html( $caweb_google_trans_text ); ?></span>
 				<?php endif; ?>
 				</a>
 				<?php endif; ?>

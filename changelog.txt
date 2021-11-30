@@ -1,3 +1,9 @@
+CAWeb v1.5.10
+- Added text option for the Google Translate Custom Link
+
+CAWeb v1.5.9a 
+- Fixed issue with removal of Divi parent replacement not loading styles when in preview mode
+
 CAWeb v1.5.9
 - Added 111 new State Template Icons
 - Fixed issue with Divi Toggle Module, toggling when clicking on toggle content.
