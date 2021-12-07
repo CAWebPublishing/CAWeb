@@ -33,31 +33,37 @@ jQuery(document).ready(function($) {
 
 // Toggle CSS Colorscheme Options
 jQuery( document ).ready( function($) {
-	$('select[id$="ca_site_version"]').on("change", correct_colorscheme_visibility );
+	$('select[id$="ca_site_version"]').on("change", function(){
+		correct_colorscheme_visibility($(this).val());
+	} );
+});
 
-	function correct_colorscheme_visibility(){
-		var color_scheme_picker = $('select[id$="ca_site_color_scheme"]');
-		var current_color = color_scheme_picker.val();
-		var new_colors = caweb_admin_args.caweb_colorschemes[$(this).val()];
+// Toggle CSS Colorscheme Options
+function correct_colorscheme_visibility(version){
+	var color_scheme_picker = document.getElementById('ca_site_color_scheme');
+	var current_color = color_scheme_picker.value;
+	var new_colors = caweb_admin_args.caweb_colorschemes[version];
 
-		color_scheme_picker.empty();
-
-		$.each(new_colors, function(i, ele){
-			var o = document.createElement( 'OPTION' );
-
-			$(o).val( i );
-			$(o).html( ele.displayname );
-
-			if( i === current_color ){
-				$(o).attr('selected', 'selected');
-			}
-
-			color_scheme_picker.append( o );
-		});
-
+	for(i = color_scheme_picker.length; i >= 0; i--) {
+		color_scheme_picker.remove(i);
 	}
 
-});
+
+	for (const [i, ele] of Object.entries(new_colors)) {
+		var o = document.createElement( 'OPTION' );
+
+		o.value = i;
+		o.text = ele.displayname;
+
+		if( i === current_color ){
+			o.selected = true;
+		}
+
+		color_scheme_picker.append( o );
+	}
+
+}
+
 jQuery( document ).ready( function($) {
 	$('#_customize-input-caweb_add_alert_banner').click( add_alert_banner);
 	$('.caweb-toggle-alert').click( toggle_alert );
