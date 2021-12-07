@@ -13,7 +13,10 @@ module.exports = {
 	templateVer: '5.5', // Minimum CA State Template Version
 	availableVers: ['5.5'], // Available CA State Template Versions
 	availableColors: {
+		'cagov.css' : 'CAGov',
+		'cannabis.css' : 'Cannabis',
 		'delta.css' : 'Delta',
+		'drought.css' : 'Drought',
 		'eureka.css' : 'Eureka',
 		'mono.css' : 'Mono',
 		'oceanside.css' : 'Oceanside',
@@ -60,7 +63,7 @@ module.exports = {
 	],
 	themeCustomizerControlJS: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
-		'assets/js/caweb/options/toggle-colorschemes.js',
+		'assets/js/caweb/options/colorschemes.js',
 		'assets/js/wp/theme-customizer/controls/*.js',
 	],
 };
