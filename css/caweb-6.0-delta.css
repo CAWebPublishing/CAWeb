@@ -30761,7 +30761,179 @@ body.page-template-searchpage .gsc-cursor-page:focus {
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.list-standout,
+.list-understated,
+.list-overstated,
+.accordion-list {
+  list-style-type: none !important;
+  padding: 0 !important;
+}
+
+.list-standout {
+  padding-left: 1.5em !important;
+}
+
+.pagination {
+  display: block;
+}
+
+body.page-template-searchpage.logged-in .gssb_c {
+  margin-top: 35px;
+}
+
+header {
+  z-index: 15 !important;
+}
+
+/* Page Title & Date*/
+.page-title {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.page-title,
+.page-date {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.divi_builder .page-title,
+.divi_builder .page-date {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .page-title,
+  .page-date {
+    max-width: 750px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .page-title,
+  .page-date {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-title,
+  .page-date {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-title,
+  .page-date {
+    max-width: 1280px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-title,
+  .page-date {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .divi_builder .page-title {
+    padding-bottom: 30px !important;
+  }
+}
+
+/* Location Bar Style */
+.location-settings button.close {
+  font-size: 2.5em;
+}
+
+.location-settings button.close:hover {
+  color: #FDB81E !important;
+}
+
+/* Google Translate */
+#google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+
+#google_translate_element.custom-translate .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
+  color: inherit;
+}
+
+.skiptranslate.goog-te-gadget a:hover {
+  color: #fee09c;
+}
+
+/* Google Search */
+.gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
+
+/* Override styles for second level navs not using flex */
+.second-level-nav:not(.flex) {
+  display: block;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: inherit;
+}
+
+.second-level-nav:not(.flex) li {
+  display: inline-block;
+}
+
+.second-level-nav:not(.flex) .second-level-link {
+  font-size: 17.6px;
+  font-size: 1.1rem;
+}
+
+.second-level-nav:not(.flex) .second-level-link:hover {
+  background-color: inherit;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
 /* Override nav li line-height */
 nav li {
   line-height: 1.5 !important;
+}
+
+nav.megadropdown .media-left .media-object {
+  max-width: inherit;
+}
+
+@media (max-width: 992px) {
+  nav {
+    /* MegaDropdown Navigation Styles */
+  }
+  nav .link-description,
+  nav .media-left,
+  nav .font-size-40,
+  nav .image-icon {
+    display: none;
+  }
+  nav.megadropdown .second-level-nav:not(.flex) li {
+    width: 100% !important;
+  }
+  nav.megadropdown div[class*="pull-"] {
+    width: 100% !important;
+  }
+  nav.megadropdown div[class*="with-image-"] {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .fixed.compact .header-organization-banner a img {
+    max-height: 50px;
+  }
 }
