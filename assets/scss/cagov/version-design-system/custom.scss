@@ -1,3 +1,12 @@
+.global-header{
+  border-bottom: 1px solid #ededef;
+}
+cagov-navoverlay{
+  border-bottom: 0;
+}
+li .expanded-menu-section:not(.expanded) a{
+  display: none;
+}
 /* spasing, margin and padding values */
 /* Tablet and wider */
 /* Desktop and wider */
