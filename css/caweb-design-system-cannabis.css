@@ -7137,6 +7137,64 @@ body.page-template-searchpage .gsc-cursor-page:focus {
   }
 }
 
+/* Page Title & Date*/
+.page-title {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.page-title,
+.page-date {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.divi_builder .page-title,
+.divi_builder .page-date {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .page-title,
+  .page-date {
+    max-width: 750px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .page-title,
+  .page-date {
+    max-width: 970px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-title,
+  .page-date {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-title,
+  .page-date {
+    max-width: 1280px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-title,
+  .page-date {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .divi_builder .page-title {
+    padding-bottom: 30px !important;
+  }
+}
+
 body:not(.design-system) {
   /* Override styles for second level navs not using flex */
   /* Override nav li line-height */
@@ -7222,6 +7280,20 @@ body.design-system cagov-navoverlay li .expanded-menu-section:not(.expanded) a {
 
 .global-header {
   border-bottom: 1px solid #ededef;
+}
+
+/* Changing site's global max width */
+@media (min-width: 1280px) {
+  .container,
+  .main-content > .section,
+  .non_divi_builder .main-content,
+  #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
+  #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
+  #main-content .entry-content > .et_pb_section > .et_pb_row,
+  .et_pb_module.et_pb_fullwidth_menu .et_pb_row {
+    max-width: 1176px !important;
+    width: 100%;
+  }
 }
 
 /* spasing, margin and padding values */

@@ -1,7 +1,22 @@
+@import '../custom/_page-margins';
 @import '../custom/navigation';
 
 .global-header{
   border-bottom: 1px solid #ededef;
+}
+
+/* Changing site's global max width */
+@media (min-width: 1280px) {
+  .container,
+  .main-content > .section,
+  .non_divi_builder .main-content,
+  #main-content .entry-content .et_builder_inner_content > .et_pb_section > .et_pb_row,
+  #main-content .entry-content .et_builder_inner_content > #et-fb-app .et-fb-post-content > .et_pb_section > .et_pb_row,
+  #main-content .entry-content > .et_pb_section > .et_pb_row,
+  .et_pb_module.et_pb_fullwidth_menu .et_pb_row {
+    max-width: 1176px !important;
+    width: 100%;
+  }
 }
 
 /* spasing, margin and padding values */
