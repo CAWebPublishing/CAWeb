@@ -132,6 +132,16 @@ function caweb_display_general_options() {
 	// Legacy Browser Support.
 	$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
+	$menus = array(
+		'flexmega' => 'Flex Mega Menu',
+		'megadropdown' => 'Mega Drop',
+		'dropdown' => 'Drop Down',
+		'singlelevel' => 'Single Level'
+	);
+
+	if( $caweb_enable_design_system ){
+		unset( $menus['flexmega'], $menus['megadropdown'] );
+	}
 	?>
 	<!-- General Section -->
 	<div>
@@ -211,14 +221,13 @@ function caweb_display_general_options() {
 				<label for="ca_default_navigation_menu" class="d-block mb-0"><strong>Header Menu Type</strong></label>
 				<small class="mb-2 text-muted d-block">Set a menu style for all pages.</small>
 				<select id="ca_default_navigation_menu" name="ca_default_navigation_menu" class="w-50 form-control">
-					<option value="flexmega"
-					<?php print 'flexmega' === $navigation_menu ? 'selected="selected"' : ''; ?>>Flex Mega Menu</option>
-					<option value="megadropdown"
-					<?php print 'megadropdown' === $navigation_menu ? 'selected="selected"' : ''; ?>>Mega Drop</option>
-					<option value="dropdown"
-					<?php print 'dropdown' === $navigation_menu ? 'selected="selected"' : ''; ?>>Drop Down</option>
-					<option value="singlelevel"
-					<?php print 'singlelevel' === $navigation_menu ? 'selected="selected"' : ''; ?>>Single Level</option>
+					<?php
+						foreach($menus as $v => $t):
+					?>
+						<option value="<?php print esc_attr($v) ?>" <?php print $v === $navigation_menu ? 'selected="selected"' : ''; ?>><?php print esc_html( $t ) ?></option>
+					<?php 
+						endforeach;
+					?>
 				</select>
 			</div>
 		</div>

@@ -77,6 +77,10 @@ body.design-system{
 		}
 
 		li{
+			strong a{
+				padding-left: 0;
+			}
+
 			.expanded-menu-section{
 				position: absolute;
 				padding: 0 15px;

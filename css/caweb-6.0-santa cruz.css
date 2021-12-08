@@ -30943,6 +30943,10 @@ body.design-system cagov-navoverlay nav {
   max-height: 50px;
 }
 
+body.design-system cagov-navoverlay li strong a {
+  padding-left: 0;
+}
+
 body.design-system cagov-navoverlay li .expanded-menu-section {
   position: absolute;
   padding: 0 15px;
