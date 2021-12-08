@@ -98,9 +98,6 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 		<div class="container">
 
 		<?php
-		if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
-			require_once 'design-system/search-form.php';
-		}
 
 		/* Include Navigation */
 		wp_nav_menu(

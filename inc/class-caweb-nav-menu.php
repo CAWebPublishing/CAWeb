@@ -109,8 +109,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$mobile = '<div class="expanded-menu-section mobile-only"><strong class="expanded-menu-section-header"><a class="expanded-menu-section-header-link js-event-hm-menu" href="/">Home</a></strong></div>';
 
 					$nav_menu = sprintf(
-						'<div class="expanded-menu" role="navigation" aria-label="Site Navigation" aria-hidden="false" id="main-menu">
-					<ul class="expanded-menu-grid">%1$s%2$s</ul></div>',
+						'<nav id="navigation" class="main-navigation hidden-print nav"><div class="expanded-menu" role="navigation" aria-label="Site Navigation" aria-hidden="false" id="main-menu">
+					<ul class="expanded-menu-grid">%1$s%2$s</ul></div></nav>',
 						$mobile, $nav_menu
 					);
 
@@ -468,10 +468,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					/* Create Link */
 					$nav_item .= sprintf(
 						'<li class="expanded-menu-col js-cagov-navoverlay-expandable expanded-menu-section">
-					<div class="expanded-menu-section">
-					  <strong class="expanded-menu-section-header">%1$s
-					  </strong>%2$s
-					  </div>
+						<strong class="expanded-menu-section-header">%1$s</strong>
+						<div class="expanded-menu-section">%2$s</div>
 					  </li>',
 						$link,
 						$sub_nav

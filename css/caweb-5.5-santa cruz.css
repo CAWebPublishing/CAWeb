@@ -30660,8 +30660,12 @@ header {
   color: #008A28 !important;
 }
 
-/* Override styles for second level navs not using flex */
-.second-level-nav:not(.flex) {
+body:not(.design-system) {
+  /* Override styles for second level navs not using flex */
+  /* Override nav li line-height */
+}
+
+body:not(.design-system) .second-level-nav:not(.flex) {
   display: block;
   position: relative !important;
   opacity: 1 !important;
@@ -30671,49 +30675,72 @@ header {
   background: inherit;
 }
 
-.second-level-nav:not(.flex) li {
+body:not(.design-system) .second-level-nav:not(.flex) li {
   display: inline-block;
 }
 
-.second-level-nav:not(.flex) .second-level-link {
+body:not(.design-system) .second-level-nav:not(.flex) .second-level-link {
   font-size: 17.6px;
   font-size: 1.1rem;
 }
 
-.second-level-nav:not(.flex) .second-level-link:hover {
+body:not(.design-system) .second-level-nav:not(.flex) .second-level-link:hover {
   background-color: inherit;
   opacity: 1;
   transition: all 0.3s;
 }
 
-/* Override nav li line-height */
-nav li {
+body:not(.design-system) nav li {
   line-height: 1.5 !important;
 }
 
-nav.megadropdown .media-left .media-object {
+body:not(.design-system) nav.megadropdown .media-left .media-object {
   max-width: inherit;
 }
 
 @media (max-width: 992px) {
-  nav {
+  body:not(.design-system) nav {
     /* MegaDropdown Navigation Styles */
   }
-  nav .link-description,
-  nav .media-left,
-  nav .font-size-40,
-  nav .image-icon {
+  body:not(.design-system) nav .link-description,
+  body:not(.design-system) nav .media-left,
+  body:not(.design-system) nav .font-size-40,
+  body:not(.design-system) nav .image-icon {
     display: none;
   }
-  nav.megadropdown .second-level-nav:not(.flex) li {
+  body:not(.design-system) nav.megadropdown .second-level-nav:not(.flex) li {
     width: 100% !important;
   }
-  nav.megadropdown div[class*="pull-"] {
+  body:not(.design-system) nav.megadropdown div[class*="pull-"] {
     width: 100% !important;
   }
-  nav.megadropdown div[class*="with-image-"] {
+  body:not(.design-system) nav.megadropdown div[class*="with-image-"] {
     display: none;
   }
+}
+
+body.design-system cagov-navoverlay {
+  border-bottom: 0;
+}
+
+body.design-system cagov-navoverlay nav {
+  max-height: 50px;
+}
+
+body.design-system cagov-navoverlay li .expanded-menu-section {
+  position: absolute;
+  padding: 0 15px;
+  outline: 1px solid #efefef;
+  background: #fff;
+  box-shadow: 0px 4px 7px -1px black;
+}
+
+body.design-system cagov-navoverlay li .expanded-menu-section a {
+  white-space: nowrap;
+}
+
+body.design-system cagov-navoverlay li .expanded-menu-section:not(.expanded) a {
+  display: none;
 }
 
 @media (min-width: 768px) {
