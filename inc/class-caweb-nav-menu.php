@@ -431,7 +431,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$child_count = count( $child_links );
 					$sub_nav     = '';
 
-					if ( 0 < $child_count && 'singlelevel' === $args->style) {
+					if ( 0 < $child_count && 'singlelevel' !== $args->style) {
 						/* Arrow */
 						$arrow = '<span class="expanded-menu-section-header-arrow">
 							<svg width="11" height="7"
