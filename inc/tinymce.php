@@ -29,6 +29,7 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$version     = caweb_template_version();
 	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
+	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
 
 	$css = array(
 		includes_url( '/css/dashicons.min.css' ),
