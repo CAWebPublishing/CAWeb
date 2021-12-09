@@ -491,7 +491,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
 	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
-	
+
 	$editor_css = caweb_get_min_file( "/css/cagov-v$version-$colorscheme.css" );
 
 	if ( in_array( $hook, $pages, true ) ) {

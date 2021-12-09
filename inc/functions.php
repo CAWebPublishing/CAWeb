@@ -179,7 +179,7 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 	*/
 	$tmp = glob( sprintf( '%1$s/version%2$s/colorscheme/*.css', $css_dir, $version ) );
 
-	if( empty( $tmp ) ){
+	if ( empty( $tmp ) ) {
 		$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
 	}
 
