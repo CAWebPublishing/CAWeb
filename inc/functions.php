@@ -8,7 +8,7 @@
 /**
  * Returns the Site Wide Template Version Setting
  *
- * @param $exclude_design_system Whether or not to exlcude the fact that the Design System is on.
+ * @param bool $exclude_design_system Whether or not to exlcude the fact that the Design System is on.
  * @since 2.0.0 Introduced new Design System.
  * @since 1.5.4 Template Version 5 has been deprecated and all customers moved to 5.5.
  * @return int
@@ -186,7 +186,7 @@ function caweb_color_schemes( $version = -1, $field = '', $color = '' ) {
 	*/
 	$tmp = glob( sprintf( '%1$s/version-%2$s/colorscheme/*.css', $css_dir, $version ) );
 
-	if( empty( $tmp ) ){
+	if ( empty( $tmp ) ) {
 		$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
 	}
 

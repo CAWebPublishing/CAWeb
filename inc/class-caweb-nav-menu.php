@@ -111,7 +111,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$nav_menu = sprintf(
 						'<nav id="navigation" class="main-navigation hidden-print nav"><div class="expanded-menu" role="navigation" aria-label="Site Navigation" aria-hidden="false" id="main-menu">
 					<ul class="expanded-menu-grid">%1$s%2$s</ul></div></nav>',
-						$mobile, $nav_menu
+						$mobile,
+						$nav_menu
 					);
 
 				} else {
@@ -123,8 +124,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$search_link = 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
 										'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
 
-					$nav_style = isset( $args->style ) ? ( 'flexmega' === $args->style ? 'megadropdown' : $args->style ) : 'singlelevel';
-					$nav_style .= '6.0' >= get_option('ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION ) ? ' justify-content-end' : '';
+					$nav_style  = isset( $args->style ) ? ( 'flexmega' === $args->style ? 'megadropdown' : $args->style ) : 'singlelevel';
+					$nav_style .= '6.0' >= get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION ) ? ' justify-content-end' : '';
 
 					$nav_menu = sprintf(
 						'<nav id="navigation" class="main-navigation %1$s hidden-print nav">
@@ -374,9 +375,9 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 										$nav_img
 									);
 
-								}else{
+								} else {
 									$sub_img_class = '';
-									$sub_img = '';
+									$sub_img       = '';
 								}
 
 								$nav_item .= sprintf(
@@ -431,7 +432,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$child_count = count( $child_links );
 					$sub_nav     = '';
 
-					if ( 0 < $child_count && 'singlelevel' !== $args->style) {
+					if ( 0 < $child_count && 'singlelevel' !== $args->style ) {
 						/* Arrow */
 						$arrow = '<span class="expanded-menu-section-header-arrow">
 							<svg width="11" height="7"
