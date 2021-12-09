@@ -20,8 +20,8 @@ $caweb_post_title_class        = apply_filters( 'caweb_post_title_class', "page-
 $caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
 $caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
 
-if( $caweb_enable_design_system ){
-	$caweb_post_container_class .= ' page-container-ds';
+if ( $caweb_enable_design_system ) {
+	$caweb_post_container_class    .= ' page-container-ds';
 	$caweb_post_main_content_class .= '  main-content-ds';
 }
 
