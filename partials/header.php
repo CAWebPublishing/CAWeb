@@ -31,7 +31,7 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 	?>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
-	<iframe src="<?php print esc_url( $caweb_google_tag_srcrc ); ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	<iframe src="<?php print esc_url( $caweb_google_tag_src ); ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
 
 <?php endif; ?>
