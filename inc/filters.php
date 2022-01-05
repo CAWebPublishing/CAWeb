@@ -57,7 +57,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
 	}
-	$whitelist[] = sprintf( 'v%1$s', caweb_template_version() );
+	$whitelist[] = sprintf( '%1$s', caweb_template_version() );
 	$whitelist[] = get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '';
 
 	/* Remove any classes in the blacklist from the wp_classes */

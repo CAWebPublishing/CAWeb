@@ -10,11 +10,11 @@
         <transformation writer="FileIo" query="copy" source="images/system/caweb-logo.png" artifact="imgs/branding.png" />
 
         <!-- Override cagov.core.css and colorsheme-<color>.css -->
-        <transformation writer="FileIo" query="copy" source="css/cagov-v5.5-santa barbara.css" artifact="css/cagov.core.css" />
+        <transformation writer="FileIo" query="copy" source="css/caweb-5.5-santa barbara.css" artifact="css/cagov.core.css" />
         <transformation writer="FileIo" query="copy" source="style.css" artifact="css/colorscheme-santabarbara.css" />
 
         <!-- Override cagov.core.js -->
-        <transformation writer="FileIo" query="copy" source="js/caweb-v5.5.js" artifact="js/cagov.core.js" />
+        <transformation writer="FileIo" query="copy" source="js/caweb-5.5.js" artifact="js/cagov.core.js" />
 
         <!-- Override Fonts -->
         <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
