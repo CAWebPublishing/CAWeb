@@ -8,15 +8,22 @@
 /**
  * Returns the Site Wide Template Version Setting
  *
+ * @param bool $exclude_design_system Whether or not to exlcude the fact that the Design System is on.
+ * @since 2.0.0 Introduced new Design System.
  * @since 1.5.4 Template Version 5 has been deprecated and all customers moved to 5.5.
  * @return int
  */
-function caweb_template_version() {
-	$version       = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
-	$theme_version = wp_get_theme()->get( 'Version' );
+function caweb_template_version( $exclude_design_system = false ) {
+	$version                    = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
+	$theme_version              = wp_get_theme()->get( 'Version' );
+	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
 
 	if ( '1.5.4' <= $theme_version && '5.5' > $version ) {
 		return 5.5;
+	}
+
+	if ( ! $exclude_design_system && $caweb_enable_design_system ) {
+		return 'design-system';
 	}
 
 	return $version;
@@ -167,7 +174,7 @@ function caweb_template_colors() {
  *
  * @return array
  */
-function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
+function caweb_color_schemes( $version = -1, $field = '', $color = '' ) {
 	$css_dir = sprintf( '%1$s/assets/css/cagov', CAWEB_ABSPATH );
 	$pattern = '/.*\/([\w\s]*)\.css/';
 
@@ -177,13 +184,10 @@ function caweb_color_schemes( $version = 0, $field = '', $color = '' ) {
 	Get glob of colorschemes based on version,
 	if no version provided return all colors from all versions
 	*/
-	switch ( $version ) {
-		case 5.5:
-			$tmp = glob( sprintf( '%1$s/version5.5/colorscheme/*.css', $css_dir ) );
-			break;
-		default:
-			$tmp = glob( sprintf( '%1$s/version%2$s*/colorscheme/*.css', $css_dir, CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION ) );
-			break;
+	$tmp = glob( sprintf( '%1$s/version-%2$s/colorscheme/*.css', $css_dir, $version ) );
+
+	if ( empty( $tmp ) ) {
+		$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
 	}
 
 	/*

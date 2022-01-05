@@ -513,6 +513,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_general_options = array(
 		'ca_fav_ico',
+		'caweb_enable_design_system',
 		'ca_site_version',
 		'ca_default_navigation_menu',
 		'ca_menu_selector_enabled',
@@ -553,7 +554,6 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_google_meta_id',
 		'ca_google_trans_enabled',
 		'ca_google_trans_page',
-		'ca_google_trans_text',
 		'ca_google_trans_icon',
 		'ca_google_trans_page_new_window',
 	);
