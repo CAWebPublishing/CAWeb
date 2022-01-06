@@ -30408,6 +30408,14 @@ body:not(.sticky_nav) #main-content.main-content {
   background-image: none !important;
 }
 
+div.et_pb_module.et_pb_icon span.et-pb-icon {
+  font-family: 'CaGov' !important;
+}
+
+div.et_pb_module span.et-pb-icon {
+  font-family: 'CaGov' !important;
+}
+
 .et-learn-more h3.heading-more {
   color: black;
 }
