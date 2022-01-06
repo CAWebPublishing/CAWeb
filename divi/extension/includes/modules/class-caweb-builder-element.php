@@ -202,13 +202,13 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		}
 
 		// if Divi extended icon.
-		if( false !== strpos( $icon, '||' ) ){
+		if ( false !== strpos( $icon, '||' ) ) {
 			$icon = explode( '||', $icon );
 
 			// Get Icon by code.
-			$icon = caweb_symbols( -1,  htmlentities( $icon[0] ) );
-			
-		}else{
+			$icon = caweb_symbols( -1, htmlentities( $icon[0] ) );
+
+		} else {
 			$icon = preg_replace( '/%%/', '', $icon );
 
 			// Get Icon by index.
