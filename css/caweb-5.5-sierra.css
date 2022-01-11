@@ -30193,11 +30193,11 @@ body:not(.sticky_nav) #main-content.main-content {
 }
 
 div.et_pb_module.et_pb_icon span.et-pb-icon {
-  font-family: 'CaGov' !important;
+  font-family: 'CaGov', 'FontAwesome' !important;
 }
 
 div.et_pb_module span.et-pb-icon {
-  font-family: 'CaGov' !important;
+  font-family: 'CaGov', 'FontAwesome' !important;
 }
 
 .et-learn-more h3.heading-more {

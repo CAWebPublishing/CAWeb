@@ -49,7 +49,6 @@ add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
-add_filter( 'et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols' );
 
 /*
 ----------------------------
@@ -517,7 +516,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		$caweb_localize_args = array(
 			'defaultFavIcon'     => caweb_default_favicon_url(),
 			'changeCheck'        => $hook,
-			'caweb_icons'        => caweb_symbols(),
+			'caweb_icons'        => array_values( caweb_symbols(-1, '', '', false ) ),
 			'caweb_colors'       => caweb_template_colors(),
 			'tinymce_settings'   => caweb_tiny_mce_settings(),
 			'caweb_colorschemes' => $schemes,
