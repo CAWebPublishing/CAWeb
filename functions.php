@@ -208,7 +208,7 @@ function caweb_setup_theme() {
  * @return void
  */
 function caweb_enable_hsts() {
-	header( 'Strict-Transport-Security: max-age=10886400; includeSubDomains' );
+	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
 }
 
 /**
