@@ -51,6 +51,12 @@ if ( ! function_exists( 'et_pb_get_extended_font_icon_symbols' ) ) :
 						return in_array( 'fa', $icon['styles'], true );
 					}
 				);
+
+				// add glyph to font awesome icons.
+				foreach ( $fa_icons as $i => $icon ) {
+					$icon['glyph']  = $icon['name'];
+					$fa_icons[ $i ] = $icon;
+				}
 			}
 
 			if ( file_exists( $full_icons_list_path ) ) {
@@ -88,19 +94,24 @@ function caweb_symbols( $index = -1, $icon_code = '', $icon_name = '', $extended
 	$symbols = array();
 	$fa      = array();
 	foreach ( $icons as $i => $icon ) {
-		if ( ! isset( $icon['glyph'] ) ) {
-			$icon['glyph'] = $icon['name'];
-		}
+		$glyph = isset( $icon['glyph'] ) ? $icon['glyph'] : $icon['name'];
 
-		$glyph             = $icon['glyph'];
-		$symbols[ $glyph ] = ! $extended ? $icon['unicode'] : $icon;
+		// if symbol was not already added.
+		if ( ! isset( $symbols[ $glyph ] ) ) {
+			$symbols[ $glyph ] = $icon;
+
+			// if not extended, unicode is set, and remove font awesome icons.
+			if ( ! $extended && isset( $icon['unicode'] ) ) {
+				$symbols[ $glyph ] = ! in_array( 'fa', $icon['styles'], true ) ? $icon['unicode'] : '';
+			}
+		}
 	}
 
 	$symbols = array_filter( $symbols );
 
 	if ( 0 <= $index ) {
 		$values = array_values( $symbols );
-		return isset( $values[ $index ] ) ? $values[ $index ] : '';
+		return isset( $values[ $index ] ) ? $values[ $index ]['glyph'] : '';
 	}
 
 	if ( ! empty( $icon_code ) ) {
