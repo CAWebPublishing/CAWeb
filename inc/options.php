@@ -140,7 +140,7 @@ function caweb_remove_admin_menus() {
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
 		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
 
-		// Remove Disable Rest API setting
+		// Remove Disable Rest API setting.
 		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
 
 	}
