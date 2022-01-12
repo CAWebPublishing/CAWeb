@@ -206,7 +206,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 			$icon = explode( '||', $icon );
 
 			// Get Icon by code.
-			$icon = caweb_symbols( -1, htmlentities( $icon[0] ) );
+			$icon = caweb_symbols( -1, $icon[0] );
 
 		} else {
 			$icon = preg_replace( '/%%/', '', $icon );
