@@ -133,13 +133,13 @@ function caweb_display_general_options() {
 	$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
 	$menus = array(
-		'flexmega' => 'Flex Mega Menu',
+		'flexmega'     => 'Flex Mega Menu',
 		'megadropdown' => 'Mega Drop',
-		'dropdown' => 'Drop Down',
-		'singlelevel' => 'Single Level'
+		'dropdown'     => 'Drop Down',
+		'singlelevel'  => 'Single Level',
 	);
 
-	if( $caweb_enable_design_system ){
+	if ( $caweb_enable_design_system ) {
 		unset( $menus['flexmega'], $menus['megadropdown'] );
 	}
 	?>
@@ -222,10 +222,10 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Set a menu style for all pages.</small>
 				<select id="ca_default_navigation_menu" name="ca_default_navigation_menu" class="w-50 form-control">
 					<?php
-						foreach($menus as $v => $t):
-					?>
-						<option value="<?php print esc_attr($v) ?>" <?php print $v === $navigation_menu ? 'selected="selected"' : ''; ?>><?php print esc_html( $t ) ?></option>
-					<?php 
+					foreach ( $menus as $v => $t ) :
+						?>
+						<option value="<?php print esc_attr( $v ); ?>" <?php print $v === $navigation_menu ? 'selected="selected"' : ''; ?>><?php print esc_html( $t ); ?></option>
+						<?php
 						endforeach;
 					?>
 				</select>
