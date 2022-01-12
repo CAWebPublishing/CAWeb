@@ -5,6 +5,8 @@
  * @package CAWeb
  */
 
+add_filter( 'et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols' );
+
 /**
  * Merger of Divi and CAWeb Icon Font Library
  * This filter is applied by Divi
@@ -16,24 +18,133 @@
  * @return array
  */
 function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ) {
-	$symbols = caweb_symbols();
-
-	return array_values( $symbols );
+	$icons = caweb_symbols( -1, '', '', false );
+	return array_values( $icons );
 }
+
+
+if ( ! function_exists( 'et_pb_get_extended_font_icon_symbols' ) ) :
+	/**
+	 * Returns full list of all icons used in the Divi with ['search_terms'],
+	 * unicode icon value ['unicode'], icon name ['name']
+	 * groups in which the icon is included ['styles'],
+	 * bool flag which determined is this icon a divi icon or FontAwesome icon['is_divi_icon'].
+	 *
+	 * @since ?
+	 *
+	 * @return array
+	 */
+	function et_pb_get_extended_font_icon_symbols() {
+		$cache_key = 'et_pb_get_extended_font_icon_symbols';
+		if ( ! et_core_cache_has( $cache_key ) ) {
+			$full_icons_list_path = CAWEB_ABSPATH . '/assets/full_icons_list.json';
+			$divi_icons_list_path = get_template_directory() . '/includes/builder/feature/icon-manager/full_icons_list.json';
+			$fa_icons             = array();
+
+			if ( file_exists( $divi_icons_list_path ) ) {
+				// phpcs:disable
+				$divi_icons = json_decode( file_get_contents( $divi_icons_list_path ), true );
+				// phpcs:enable
+				$fa_icons = array_filter(
+					$divi_icons,
+					function( $icon ) {
+						return in_array( 'fa', $icon['styles'], true );
+					}
+				);
+			}
+
+			if ( file_exists( $full_icons_list_path ) ) {
+				// phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Can't use wp_remote_get() for local file
+				$icons_data = json_decode( file_get_contents( $full_icons_list_path ), true );
+
+				if ( ! empty( $fa_icons ) ) {
+					$icons_data = array_merge( $icons_data, $fa_icons );
+				}
+				// phpcs:enable
+				if ( JSON_ERROR_NONE === json_last_error() ) {
+					et_core_cache_set( $cache_key, $icons_data );
+					return $icons_data;
+				}
+			}
+			et_wrong( 'Problem with loading the icon data on this path: ' . $full_icons_list_path );
+		} else {
+			return et_core_cache_get( $cache_key );
+		}
+	}
+endif;
 
 /**
  * CA.gov Icon Library List
  *
- * This array is required and needs to be updated whenever new icons are added,
- * this ensures that icons appear in the list and in the correct order.
- *
  * @param  int    $index Icon index.
  * @param  string $icon_code Icon code.
+ * @param  string $icon_name Icon name.
+ * @param  bool   $extended Whether to include extended icons.
  *
  * @return array
  */
-function caweb_symbols( $index = -1, $icon_code = '' ) {
-	$symbols = array(
+function caweb_symbols( $index = -1, $icon_code = '', $icon_name = '', $extended = true ) {
+	$icons   = et_pb_get_extended_font_icon_symbols();
+	$symbols = array();
+	$fa      = array();
+	foreach ( $icons as $i => $icon ) {
+		if ( ! isset( $icon['glyph'] ) ) {
+			$icon['glyph'] = $icon['name'];
+		}
+
+		$glyph             = $icon['glyph'];
+		$symbols[ $glyph ] = ! $extended ? $icon['unicode'] : $icon;
+	}
+
+	$symbols = array_filter( $symbols );
+
+	if ( 0 <= $index ) {
+		$values = array_values( $symbols );
+		return isset( $values[ $index ] ) ? $values[ $index ] : '';
+	}
+
+	if ( ! empty( $icon_code ) ) {
+		$name = '';
+		foreach ( $symbols as $n => $icon ) {
+
+			if ( $extended ) {
+				if ( $icon_code === $icon['unicode'] ) {
+					$name = $n;
+					break;
+				}
+			} elseif ( $icon_code === $icon ) {
+				$name = $n;
+				break;
+			}
+		}
+
+		return $name;
+	}
+
+	if ( ! empty( $icon_name ) ) {
+		if ( isset( $symbols[ $icon_name ] ) ) {
+			return $extended ? $symbols[ $icon_name ]['unicode'] : $symbols[ $icon_name ];
+		}
+
+		return '';
+	}
+
+	return $symbols;
+
+}
+
+/**
+ * Looking for a way to automate everything below here by opening the SVG file.
+ */
+
+/**
+ * This array is required and needs to be updated whenever new icons are added,
+ * this ensures that icons appear in the list in the correct order
+ *
+ * @return array
+ */
+function caweb_icons() {
+	return array(
 		'logo'                      => '&#xe600;',
 		'home'                      => '&#xe601;',
 		'menu'                      => '&#xe602;',
@@ -781,24 +892,36 @@ function caweb_symbols( $index = -1, $icon_code = '' ) {
 		'zoo'                       => '&#xe9db;',
 		'zoo-alt'                   => '&#xe9dc;',
 	);
+}
 
-	foreach ( $symbols as $name => $code ) {
-		$symbols[ $name ] = htmlentities( $code );
-	}
+/**
+ * Generates the CA.gov Full Icon JSON File
+ *
+ * @return void
+ */
+function caweb_generate_icon_json() {
+	$svg = CAWEB_ABSPATH . '/fonts/CaGov.svg';
 
-	if ( 0 <= $index ) {
-		$values = array_values( array_flip( $symbols ) );
-		return isset( $values[ $index ] ) ? $values[ $index ] : '';
-	}
+	if ( file_exists( $svg ) ) {
+		$output = array();
 
-	if ( ! empty( $icon_code ) ) {
-		foreach ( $symbols as $name => $code ) {
-			if ( $icon_code === $code ) {
-				return $name;
-			}
+		$icons = caweb_icons();
+
+		foreach ( $icons as $i => $data ) {
+			$glyph  = $i;
+			$code   = $data;
+			$search = str_replace( array( '_', '-' ), ' ', $glyph );
+			$name   = ucwords( str_replace( array( ' line', ' alt' ), '', $search ) );
+			$style  = in_array( 'line', explode( ' ', $search ), true ) ? ', "line"' : ', "solid"';
+
+			$output[] = sprintf( '{"search_terms":"%1$s","unicode":"%2$s","name":"%3$s","glyph": "%4$s","styles":["divi"%5$s],"is_divi_icon":true,"font_weight":400}', $search, $code, $name, $glyph, $style );
 		}
-	}
 
-	return $symbols;
+		$json = implode( ',', $output );
+
+		// phpcs:disable
+		file_put_contents( CAWEB_ABSPATH . '/assets/full_icons_list.json', "[$json]" );
+		// phpcs:enable
+	}
 
 }

@@ -46,7 +46,7 @@ function caweb_icon_menu( $atts ) {
 	$header = sprintf( '<div class="caweb-icon-menu-header my-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 reset-icon"></span>%1$s</div>', $label );
 	$input  = ! empty( $input ) ? sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" >', $input, $selected ) : '';
 
-	$icons     = caweb_symbols();
+	$icons     = caweb_symbols( -1, '', '', false );
 	$icon_list = '';
 	foreach ( $icons as $name => $code ) {
 		$icon_list .= sprintf( '<li class="list-group-item ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $name, $selected === $name ? ' active' : '' );

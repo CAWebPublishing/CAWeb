@@ -8,6 +8,7 @@
 add_action( 'admin_menu', 'caweb_admin_menu' );
 add_action( 'admin_menu', 'caweb_remove_admin_menus', 15 );
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
+add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
 
@@ -132,12 +133,16 @@ function caweb_remove_admin_menus() {
 		remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
 		remove_submenu_page( 'tools.php', 'domainmapping' );
 
-			/* Removal of Divi Submenu Pages */
+		/* Removal of Divi Submenu Pages */
 		remove_submenu_page( 'et_divi_options', 'et_divi_options' );
 		remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
 		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
+
+		// Remove Disable Rest API setting.
+		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
+
 	}
 }
 
@@ -148,11 +153,11 @@ function caweb_remove_admin_menus() {
  * @return void
  */
 function caweb_load_themes_tools() {
-	$plugin_menus = array( '404pagesettings' );
+	$plugin_menus = array( '404pagesettings', 'disable_rest_api_settings' );
 	$nonce        = wp_create_nonce( 'caweb_load_themes_tools' );
 	$allowed      = wp_verify_nonce( $nonce, 'caweb_load_themes_tools' ) && isset( $_GET['page'] ) && in_array( $_GET['page'], $plugin_menus, true );
 
-	if ( $allowed || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+	if ( $allowed && is_multisite() && ! current_user_can( 'manage_network_options' ) ) {
 		wp_safe_redirect( get_admin_url() );
 		exit;
 	}
