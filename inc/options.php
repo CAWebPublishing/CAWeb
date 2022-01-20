@@ -143,6 +143,9 @@ function caweb_remove_admin_menus() {
 		// Remove Disable Rest API setting.
 		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
 
+		// Remove JetPack.
+		remove_submenu_page( 'jetpack', 'jetpack' );
+
 	}
 }
 
