@@ -38,34 +38,13 @@ if ( ! function_exists( 'et_pb_get_extended_font_icon_symbols' ) ) :
 		$cache_key = 'et_pb_get_extended_font_icon_symbols';
 		if ( ! et_core_cache_has( $cache_key ) ) {
 			$full_icons_list_path = CAWEB_ABSPATH . '/assets/full_icons_list.json';
-			$divi_icons_list_path = get_template_directory() . '/includes/builder/feature/icon-manager/full_icons_list.json';
-			$fa_icons             = array();
-
-			if ( file_exists( $divi_icons_list_path ) ) {
-				// phpcs:disable
-				$divi_icons = json_decode( file_get_contents( $divi_icons_list_path ), true );
-				// phpcs:enable
-				$fa_icons = array_filter(
-					$divi_icons,
-					function( $icon ) {
-						return in_array( 'fa', $icon['styles'], true );
-					}
-				);
-
-				// add glyph to font awesome icons.
-				foreach ( $fa_icons as $i => $icon ) {
-					$icon['glyph']  = $icon['name'];
-					$fa_icons[ $i ] = $icon;
-				}
-			}
-
+			// phpcs:disable
+			// $divi_icons_list_path = get_template_directory() . '/includes/builder/feature/icon-manager/full_icons_list.json';
+			// phpcs:enable
 			if ( file_exists( $full_icons_list_path ) ) {
 				// phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Can't use wp_remote_get() for local file
 				$icons_data = json_decode( file_get_contents( $full_icons_list_path ), true );
 
-				if ( ! empty( $fa_icons ) ) {
-					$icons_data = array_merge( $icons_data, $fa_icons );
-				}
 				// phpcs:enable
 				if ( JSON_ERROR_NONE === json_last_error() ) {
 					et_core_cache_set( $cache_key, $icons_data );
@@ -102,12 +81,10 @@ function caweb_symbols( $index = -1, $icon_code = '', $icon_name = '', $extended
 
 			// if not extended, unicode is set, and remove font awesome icons.
 			if ( ! $extended && isset( $icon['unicode'] ) ) {
-				$symbols[ $glyph ] = ! in_array( 'fa', $icon['styles'], true ) ? $icon['unicode'] : '';
+				$symbols[ $glyph ] = $icon['unicode'];
 			}
 		}
 	}
-
-	$symbols = array_filter( $symbols );
 
 	if ( 0 <= $index ) {
 		$values = array_values( $symbols );
