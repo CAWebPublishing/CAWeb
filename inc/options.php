@@ -145,7 +145,9 @@ function caweb_remove_admin_menus() {
 
 		// Remove JetPack.
 		remove_submenu_page( 'jetpack', 'jetpack', 999 );
-
+		// Remove JetPack Widget.
+		unregister_widget( 'Milestone_Widget' );
+		
 	}
 }
 
