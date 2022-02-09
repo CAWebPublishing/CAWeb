@@ -150,6 +150,9 @@ function caweb_display_general_options() {
 		</a>
 	</div>
 	<div class="collapse show" id="general-setting" data-parent="#general-settings">
+		<?php
+		if ( is_multisite() && current_user_can( 'manage_network_options' ) ) :
+			?>
 		<!-- Enable Design System -->
 		<div class="form-row">
 			<div class="form-group col-sm-12">
@@ -158,6 +161,7 @@ function caweb_display_general_options() {
 				<small class="text-muted d-block">This will enable the new design system.</small>
 			</div>
 		</div>
+		<?php endif; ?>
 		<!-- State Template Version Row -->
 		<div class="form-row<?php print $caweb_enable_design_system ? ' d-none' : ''; ?>">
 			<div class="form-group col-sm-5">
