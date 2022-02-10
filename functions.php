@@ -18,7 +18,7 @@ define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s%2$s%3$s-ext/', WP_CONTENT_DIR, get_
 define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
-define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array( '6.0' ) );
+define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
 define( 'WP_TEMP_DIR', get_temp_dir() );
 
