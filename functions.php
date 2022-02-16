@@ -624,7 +624,7 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 --------------------------------------------
 */
 
-/** Hide Content Author **/ 
+/** Hide Content Author **/
 function caweb_redirect_to_home_if_author_parameter() {
 
 	$is_author_set = get_query_var( 'author', '' );
