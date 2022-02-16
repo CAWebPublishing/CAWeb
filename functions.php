@@ -49,6 +49,7 @@ add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
+add_action( 'template_redirect', 'redirect_to_home_if_author_parameter' );
 
 /*
 ----------------------------
@@ -618,13 +619,11 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 	delete_post_meta( $post_id, 'nginx_cache_purge' );
 }
 
-/*
---------------------------------------------
-	End of Admin Action Reference Functions
---------------------------------------------
-*/
-
-/** Hide Content Author **/
+/**
+ * Hide Content Author
+ *
+ * @return void
+ */
 function caweb_redirect_to_home_if_author_parameter() {
 
 	$is_author_set = get_query_var( 'author', '' );
@@ -633,4 +632,9 @@ function caweb_redirect_to_home_if_author_parameter() {
 		exit;
 	}
 }
-add_action( 'template_redirect', 'redirect_to_home_if_author_parameter' );
+
+/*
+--------------------------------------------
+	End of Admin Action Reference Functions
+--------------------------------------------
+*/
