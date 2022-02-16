@@ -628,9 +628,9 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 function caweb_redirect_to_home_if_author_parameter() {
 
 	$is_author_set = get_query_var( 'author', '' );
-	if ( $is_author_set !== '' && ! is_admin() ) {
+	if ( '' !== $is_author_set && ! is_admin() ) {
 		wp_safe_redirect( home_url(), 301 );
-		return;
+		exit;
 	}
 }
 add_action( 'template_redirect', 'redirect_to_home_if_author_parameter' );
