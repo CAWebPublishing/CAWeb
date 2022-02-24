@@ -14,6 +14,8 @@ add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_opti
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
+// Disable non-mandatory Jetpack Modules.
+add_filter( 'option_jetpack_active_modules', 'caweb_disable_jetpack_modules' );
 
 $caweb_social    = caweb_get_site_options( 'social' );
 $caweb_sanitized = caweb_get_site_options( 'sanitized' );
@@ -144,7 +146,7 @@ function caweb_remove_admin_menus() {
 		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
 
 		// Remove JetPack.
-		remove_submenu_page( 'jetpack', 'jetpack', 999 );
+		remove_menu_page( 'jetpack' );
 		// Remove JetPack Widget.
 		unregister_widget( 'Milestone_Widget' );
 
@@ -774,4 +776,27 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
+}
+
+/**
+ * Disable non-mandatory Jetpack Modules
+ * note this disables the defaults `json-api`, `enhanced-distribution`, `notes`, `sso`, etc.
+ *
+ * @see https://jetpack.com/support/module-overrides/
+ *
+ * @param  array $modules JetPack Modules.
+ * @return array
+ */
+function caweb_disable_jetpack_modules( $modules ) {
+	// @see https://github.com/Automattic/vip-go-mu-plugins/blob/e1802e01acd8be4bf95b87fe6be55597bf7ad88f/vip-jetpack/jetpack-mandatory.php#L20-L21
+	$allowed_modules = array(
+		'vaultpress',
+		'stats',
+	);
+	foreach ( $modules as $module_key => $module_slug ) {
+		if ( ! in_array( $module_slug, $allowed_modules, true ) ) {
+			unset( $modules[ $module_key ] );
+		}
+	}
+	return $modules;
 }
