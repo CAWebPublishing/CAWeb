@@ -158,13 +158,6 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					);
 
 				} else {
-					/**
-					 * Detect plugin. For use on Front End only.
-					 *
-					 *  @link https://developer.wordpress.org/reference/functions/is_plugin_active/
-					 */
-					include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
 					$nav_menu   = $this->create_footer_menu( $args );
 					$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<div class="half text-right"><span>Powered by: CAWeb Publishing Service</span></div>' : '';
 

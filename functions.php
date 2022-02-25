@@ -14,13 +14,11 @@ define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
 define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
-define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s%2$s%3$s-ext/', WP_CONTENT_DIR, get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) );
-define( 'CAWEB_EXTERNAL_URI', content_url( sprintf( '%1$s%2$s-ext', get_temp_dir(), strtolower( wp_get_theme()->stylesheet ) ) ) );
+define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/tmp/%2$s-ext/', preg_replace( '/(.*uploads\\/).*/', '${1}', wp_get_upload_dir()['baseurl'] ), strtolower( wp_get_theme()->stylesheet ) ) );
+define( 'CAWEB_EXTERNAL_URI', sprintf( '%1$s/tmp/%2$s-ext', preg_replace( '/(.*uploads\\/).*/', '${1}', wp_get_upload_dir()['baseurl'] ), strtolower( wp_get_theme()->stylesheet ) ) );
 define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', 5.5 );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( 5.5 ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
-
-define( 'WP_TEMP_DIR', get_temp_dir() );
 
 
 /**
@@ -49,7 +47,6 @@ add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
 add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
-add_action( 'template_redirect', 'redirect_to_home_if_author_parameter' );
 
 /*
 ----------------------------
@@ -315,7 +312,7 @@ function caweb_wp_enqueue_scripts() {
 		}
 
 		if ( ! empty( get_option( 'ca_custom_css', '' ) ) ) {
-			$custom_css = sprintf( '%1$s/css/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
+			$custom_css = sprintf( '%1$scss/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
 
 			if ( ! file_exists( "$custom_css/caweb-custom.css" ) ) {
 				global $wp_filesystem;
@@ -387,7 +384,7 @@ function caweb_wp_enqueue_scripts() {
 
 	/* Custom JS */
 	if ( ! empty( get_option( 'ca_custom_js', '' ) ) ) {
-		$custom_js = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
+		$custom_js = sprintf( '%1$sjs/%2$s', CAWEB_EXTERNAL_DIR, get_current_blog_id() );
 
 		if ( ! file_exists( "$custom_js/caweb-custom.js" ) ) {
 			global $wp_filesystem;
@@ -617,20 +614,6 @@ function caweb_save_post_list_meta( $post_id, $post ) {
 		if the page/post has this field delete it.
 	*/
 	delete_post_meta( $post_id, 'nginx_cache_purge' );
-}
-
-/**
- * Hide Content Author
- *
- * @return void
- */
-function caweb_redirect_to_home_if_author_parameter() {
-
-	$is_author_set = get_query_var( 'author', '' );
-	if ( '' !== $is_author_set && ! is_admin() ) {
-		wp_safe_redirect( home_url(), 301 );
-		exit;
-	}
 }
 
 /*

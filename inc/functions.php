@@ -478,11 +478,16 @@ function caweb_move_external_folder() {
 	// 1.4.23 location.
 	$post_1_4_23 = sprintf( '%1$s/caweb-ext', WP_CONTENT_DIR );
 
+	// 1.5.8 location.
+	$post_1_5_8 = sprintf( '%1$s/tmp/caweb-ext', WP_CONTENT_DIR );
+
 	$locations = array(
 		"$pre_1_4_23_css "  => CAWEB_EXTERNAL_DIR . 'css/',
 		"$pre_1_4_23_js"    => CAWEB_EXTERNAL_DIR . 'js/',
 		"$post_1_4_23/css"  => CAWEB_EXTERNAL_DIR . 'css/',
 		"$post_1_4_23/js"   => CAWEB_EXTERNAL_DIR . 'js/',
+		"$post_1_5_8/css"   => CAWEB_EXTERNAL_DIR . 'css/',
+		"$post_1_5_8/js"    => CAWEB_EXTERNAL_DIR . 'js/',
 	);
 
 	foreach ( $locations as $old_location => $new_location ) {
@@ -496,6 +501,7 @@ function caweb_move_external_folder() {
 		$pre_1_4_23_css => glob( "$pre_1_4_23_css/*" ),
 		$pre_1_4_23_js  => glob( "$pre_1_4_23_js/*" ),
 		$post_1_4_23    => glob( "$post_1_4_23/*" ),
+		$post_1_5_8     => glob( "$post_1_5_8/*" ),
 	);
 
 	foreach ( $old_paths as $path => $files ) {
