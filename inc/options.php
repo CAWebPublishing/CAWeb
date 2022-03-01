@@ -6,7 +6,7 @@
  */
 
 add_action( 'admin_menu', 'caweb_admin_menu' );
-add_action( 'admin_menu', 'caweb_remove_admin_menus', 15 );
+add_action( 'admin_menu', 'caweb_remove_admin_menus', 999 );
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
@@ -14,8 +14,6 @@ add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_opti
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
-// Disable non-mandatory Jetpack Modules.
-add_filter( 'option_jetpack_active_modules', 'caweb_disable_jetpack_modules' );
 
 $caweb_social    = caweb_get_site_options( 'social' );
 $caweb_sanitized = caweb_get_site_options( 'sanitized' );
@@ -144,11 +142,6 @@ function caweb_remove_admin_menus() {
 
 		// Remove Disable Rest API setting.
 		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
-
-		// Remove JetPack.
-		remove_menu_page( 'jetpack' );
-		// Remove JetPack Widget.
-		unregister_widget( 'Milestone_Widget' );
 
 	}
 }
@@ -348,7 +341,6 @@ function caweb_multi_ga_menu_option_setup() {
  */
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
-	$site_id      = get_current_blog_id();
 	$ext_css_dir  = CAWEB_EXTERNAL_DIR . 'css';
 	$ext_js_dir   = CAWEB_EXTERNAL_DIR . 'js';
 
@@ -398,9 +390,9 @@ function caweb_save_options( $values = array(), $files = array() ) {
 		}
 	}
 
-	caweb_upload_external_files( $ext_css_dir, $site_id, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
+	caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
 
-	caweb_upload_external_files( $ext_js_dir, $site_id, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
+	caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 
 	/* Alert Banners */
 	$alerts = array();
@@ -440,18 +432,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				break;
 			case 'caweb_external_js':
 				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
-				break;
-			case 'ca_custom_css':
-				if ( ! file_exists( "$ext_css_dir/$site_id" ) ) {
-					mkdir( "$ext_css_dir/$site_id", 0777, true );
-				}
-				$wp_filesystem->put_contents( "$ext_css_dir/$site_id/caweb-custom.css", wp_unslash( $val ), FS_CHMOD_FILE );
-				break;
-			case 'ca_custom_js':
-				if ( ! file_exists( "$ext_js_dir/$site_id" ) ) {
-					mkdir( "$ext_js_dir/$site_id", 0777, true );
-				}
-				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
 				break;
 			case 'caweb_live_drafts':
 			case 'caweb_debug_mode':
@@ -675,56 +655,23 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 }
 
 /**
- * Recursively remove a directory (all files and folders in it)
- *
- * @param  string $path Path to directory.
- *
- * @return void
- */
-function caweb_rrmdir( $path ) {
-	if ( file_exists( $path ) ) {
-
-		$i = new DirectoryIterator( $path );
-		foreach ( $i as $f ) {
-			if ( $f->isFile() ) {
-				unlink( $f->getRealPath() );
-			} elseif ( ! $f->isDot() && $f->isDir() ) {
-				caweb_rrmdir( $f->getRealPath() );
-				rmdir( $f->getRealPath() );
-			}
-		}
-	}
-}
-
-/**
  * CAWeb upload CSS/JS files to the sites respective external directory
  *
  * @param  string $upload_path Path to upload directory.
- * @param  int    $site_id Site ID.
  * @param  array  $prev_files Sites previously saved uploaded files.
  * @param  array  $existing_files Sites currently uploaded files, case files have been deleted.
  * @param  array  $uploaded_files Sites files waiting to be uploaded.
  *
  * @return void
  */
-function caweb_upload_external_files( $upload_path, $site_id, $prev_files = array(), $existing_files = array(), $uploaded_files = array() ) {
-	$site_path = "$upload_path/$site_id/";
+function caweb_upload_external_files( $upload_path, $prev_files = array(), $existing_files = array(), $uploaded_files = array() ) {
+	$site_path = "$upload_path/";
 
 	/* External Upload */
 	$file_upload = array();
 
-	/*
-	If no files and all previously uploades files have been removed
-	delete the entire directory path
-	*/
-	if ( empty( $existing_files ) && empty( $uploaded_files ) ) {
-		caweb_rrmdir( $site_path );
-		if ( file_exists( $site_path ) ) {
-			rmdir( $site_path );
-		}
-
-		/* files are being uploaded */
-	} elseif ( ! empty( $uploaded_files ) ) {
+	/* files are being uploaded */
+	if ( ! empty( $uploaded_files ) ) {
 		/* create the external directory if its never been created */
 		if ( ! file_exists( $upload_path ) ) {
 			mkdir( $upload_path );
@@ -776,27 +723,4 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
-}
-
-/**
- * Disable non-mandatory Jetpack Modules
- * note this disables the defaults `json-api`, `enhanced-distribution`, `notes`, `sso`, etc.
- *
- * @see https://jetpack.com/support/module-overrides/
- *
- * @param  array $modules JetPack Modules.
- * @return array
- */
-function caweb_disable_jetpack_modules( $modules ) {
-	// @see https://github.com/Automattic/vip-go-mu-plugins/blob/e1802e01acd8be4bf95b87fe6be55597bf7ad88f/vip-jetpack/jetpack-mandatory.php#L20-L21
-	$allowed_modules = array(
-		'vaultpress',
-		'stats',
-	);
-	foreach ( $modules as $module_key => $module_slug ) {
-		if ( ! in_array( $module_slug, $allowed_modules, true ) ) {
-			unset( $modules[ $module_key ] );
-		}
-	}
-	return $modules;
 }
