@@ -471,6 +471,8 @@ function caweb_is_divi_used() {
  * @since 1.4.23 External CSS/JS files moved to wp-content/caweb-ext directory.
  */
 function caweb_move_external_folder() {
+	$blog_id = is_multisite() ? get_current_blog_id() : 1;
+
 	// prior to 1.4.23 locations.
 	$pre_1_4_23_css = sprintf( '%1$s/css/external', CAWEB_ABSPATH );
 	$pre_1_4_23_js  = sprintf( '%1$s/js/external', CAWEB_ABSPATH );
@@ -482,31 +484,22 @@ function caweb_move_external_folder() {
 	$post_1_5_8 = sprintf( '%1$s/tmp/caweb-ext', WP_CONTENT_DIR );
 
 	$locations = array(
-		"$pre_1_4_23_css "  => CAWEB_EXTERNAL_DIR . 'css/',
-		"$pre_1_4_23_js"    => CAWEB_EXTERNAL_DIR . 'js/',
-		"$post_1_4_23/css"  => CAWEB_EXTERNAL_DIR . 'css/',
-		"$post_1_4_23/js"   => CAWEB_EXTERNAL_DIR . 'js/',
-		"$post_1_5_8/css"   => CAWEB_EXTERNAL_DIR . 'css/',
-		"$post_1_5_8/js"    => CAWEB_EXTERNAL_DIR . 'js/',
+		"$pre_1_4_23_css "         => CAWEB_EXTERNAL_DIR . 'css/',
+		"$pre_1_4_23_js"           => CAWEB_EXTERNAL_DIR . 'js/',
+		"$post_1_4_23/css"         => CAWEB_EXTERNAL_DIR . 'css/',
+		"$post_1_4_23/js"          => CAWEB_EXTERNAL_DIR . 'js/',
+		"$post_1_5_8/css/$blog_id" => CAWEB_EXTERNAL_DIR . 'css/',
+		"$post_1_5_8/js/$blog_id"  => CAWEB_EXTERNAL_DIR . 'js/',
 	);
+
+	update_site_option( 'dev', $locations );
 
 	foreach ( $locations as $old_location => $new_location ) {
+
 		if ( file_exists( $old_location ) ) {
+			mkdir( $new_location, 0777, true );
 			rename( $old_location, $new_location );
 			rmdir( $old_location );
-		}
-	}
-
-	$old_paths = array(
-		$pre_1_4_23_css => glob( "$pre_1_4_23_css/*" ),
-		$pre_1_4_23_js  => glob( "$pre_1_4_23_js/*" ),
-		$post_1_4_23    => glob( "$post_1_4_23/*" ),
-		$post_1_5_8     => glob( "$post_1_5_8/*" ),
-	);
-
-	foreach ( $old_paths as $path => $files ) {
-		if ( file_exists( $path ) && empty( $files ) ) {
-			rmdir( $path );
 		}
 	}
 

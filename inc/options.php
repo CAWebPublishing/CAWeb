@@ -442,6 +442,10 @@ function caweb_save_options( $values = array(), $files = array() ) {
 					$val = get_option( $opt, false );
 				}
 				break;
+			case 'ca_custom_css':
+			case 'ca_custom_js':
+				$val = wp_filter_nohtml_kses( $val );
+				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
@@ -672,13 +676,9 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
 
 	/* files are being uploaded */
 	if ( ! empty( $uploaded_files ) ) {
-		/* create the external directory if its never been created */
-		if ( ! file_exists( $upload_path ) ) {
-			mkdir( $upload_path );
-		}
 		/* create the external site directory if its never been created */
 		if ( ! file_exists( $site_path ) ) {
-			mkdir( $site_path );
+			mkdir( $site_path, 0777, true );
 		}
 
 		foreach ( $uploaded_files as $key => $data ) {
