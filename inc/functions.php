@@ -492,8 +492,6 @@ function caweb_move_external_folder() {
 		"$post_1_5_8/js/$blog_id"  => CAWEB_EXTERNAL_DIR . 'js/',
 	);
 
-	update_site_option( 'dev', $locations );
-
 	foreach ( $locations as $old_location => $new_location ) {
 
 		if ( file_exists( $old_location ) ) {
