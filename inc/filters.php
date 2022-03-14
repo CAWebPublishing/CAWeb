@@ -14,6 +14,7 @@ add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 add_filter( 'allowed_redirect_hosts', 'caweb_allowed_redirect_hosts' );
 add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
 add_filter( 'wp_kses_allowed_html', 'caweb_allowed_html', 10, 2 );
+add_action( 'template_redirect', 'caweb_redirect_if_author_parameter' );
 
 /**
  * Plugin Filters
@@ -317,4 +318,20 @@ function caweb_safe_style_css( $styles ) {
 	$styles[] = 'list-style-position';
 
 	return $styles;
+}
+
+/**
+ * Redirects to home page if Author Parameter is in the URL
+ *
+ * @see https://www.wp-tweaks.com/hackers-can-find-your-wordpress-username/#fix-2-adding-a-code-snippet-to-wordpress
+ *
+ * @return void
+ */
+function caweb_redirect_if_author_parameter() {
+	$is_author_set = get_query_var( 'author', '' );
+
+	if ( ! empty( $is_author_set ) && ! is_admin() ) {
+		wp_safe_redirect( home_url(), 301 );
+		exit;
+	}
 }

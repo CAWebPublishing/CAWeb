@@ -695,7 +695,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
  */
 function caweb_display_custom_file_settings( $is_active = false, $file_type = 'css' ) {
 	// External File Directory URI.
-	$ext_file_dir = sprintf( '%1$s/%2$s/%3$s', CAWEB_EXTERNAL_URI, $file_type, get_current_blog_id() );
+	$ext_file_dir = sprintf( '%1$s/%2$s', CAWEB_EXTERNAL_URI, $file_type );
 
 	// Uploaded File.
 	$ext_files             = get_option( "caweb_external_$file_type", array() );
