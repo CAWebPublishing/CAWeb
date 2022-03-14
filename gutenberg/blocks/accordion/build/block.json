@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cagov-ds/accordion",
+	"version": "0.1.0",
+	"title": "Accordion",
+	"category": "ca-design-system",
+	"icon": "smiley",
+	"description": "An expandable section of content. Can be used on any standard content page. Allows information that is not applicable to the majority of readers to be initially hidden, and opened on demand. Includes accordion label, button, and body content. The label can be a question or a title.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "array",
+          "source": "children",
+          "selector": ".card-body"
+        }
+      },
+      "example": {
+        "attributes": {
+          "title": "Accordion Title",
+          "body": "Accordion Body"
+        }
+      },
+	"textdomain": "accordion",
+	"editorScript": "cagov-ds-accordion-js",
+	"editorStyle": "cagov-ds-accordion-layout"
+}
