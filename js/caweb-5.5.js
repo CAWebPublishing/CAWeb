@@ -18732,3 +18732,62 @@ $(document).ready(function () {
 
 	}
 }
+jQuery(document).ready(function() {
+	/* 
+	Button Element Accessibility 
+	*/
+	
+	var button_elements = $('button:not(.first-level-btn)[role="button"]');
+
+	if( button_elements.length ){
+		button_elements.each(function(index, element) {
+			$(element).removeAttr('role');
+		});
+	}
+});
+jQuery(document).ready(function() {
+	/*
+    Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
+    Retrieve all a[href="#main-content"]
+	*/
+	var main_content_anchors = $('a[href="#main-content"]');
+
+    // Run only if there is more than 1 a[href="#main-content"] on the current page
+    if( 1 < main_content_anchors.length  ){
+        main_content_anchors.each(function(index, element) {
+            // Remove all anchors not in the header
+            if( ! $($(element).parent().parent()).is('header') ){
+                $(element).remove();
+            }            
+        });
+    }
+
+});
+jQuery(document).ready(function() {
+	// Do this after the page has loaded
+	$(window).on('load', function(){
+		/*
+		Twitter Feed Accessibility 
+		IFrame html is used to format content
+		*/
+		var twitter_iframe = $('iframe[id^="twitter-widget-"], iframe[src^="https://platform.twitter.com"]'); 
+
+		if( twitter_iframe.length ){
+			twitter_iframe.each(function(index, element) {
+				stripeIframeAttributes(element);
+			});
+
+			setTimeout(function(){
+				var rufous_iframe = $('iframe[id="rufous-sandbox"]'); 
+				stripeIframeAttributes(rufous_iframe);
+			}, 1000);
+		}
+	});
+});
+jQuery(document).ready(function() {
+	/* -----------------------------------------
+	Utility Header
+	----------------------------------------- */
+	// removing role attribute to fix accessibilty error
+	$(".settings-links button[data-target='#locationSettings']").removeAttr("role");
+});
