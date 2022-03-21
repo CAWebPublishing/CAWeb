@@ -54,6 +54,8 @@ module.exports = {
 		'assets/js/caweb/custom.js',
 	],  
 	a11yJS:[ // Accessibility JS
+		'assets/js/a11y/divi/*.js',
+		'assets/js/a11y/plugins/*.js',
 		'assets/js/a11y/*.js',
 	],
 	themeCustomizerJS: [ // Theme Customizer JS 
