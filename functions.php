@@ -378,23 +378,11 @@ function caweb_wp_enqueue_scripts() {
  * @return void
  */
 function caweb_wp_head() {
-	$caweb_fav_ico    = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
-	$caweb_custom_css = get_option( 'ca_custom_css', '' );
-	$caweb_custom_js  = get_option( 'ca_custom_js', '' );
+	$caweb_fav_ico = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 	?>
-
-<link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
-<link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
-
-	<?php if ( ! empty( $caweb_custom_css ) ) : ?>
-	<style><?php print wp_kses( wp_unslash( $caweb_custom_css ), 'post' ); ?></style>
-		<?php endif; ?>
-
-		<?php if ( ! empty( $caweb_custom_js ) ) : ?>
-	<script><?php print wp_kses( wp_unslash( $caweb_custom_js ), 'post' ); ?></script>
-			<?php
-		endif;
-
+	<link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
+	<link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
+	<?php
 }
 
 /**
