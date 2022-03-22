@@ -702,9 +702,6 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 	$ext_file_input_name   = "caweb_external_${file_type}[]";
 	$ext_file_data_section = "custom-$file_type";
 
-	// Custom File.
-	$custom_file = get_option( "ca_custom_$file_type", '' );
-
 	// Descriptive.
 	$desc = 'css' === $file_type ? 'styles' : 'scripts';
 	?>
@@ -730,15 +727,6 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 						</li>
 					<?php endforeach; ?>
 				</ul>
-			</div>
-		</div>
-
-		<!-- Custom <?php print esc_attr( strtoupper( $file_type ) ); ?> -->
-		<div class="form-row">
-			<div class="form-group col-lg-12">
-				<h2 class="d-inline">Manual <?php print esc_attr( strtoupper( $file_type ) ); ?></h2>
-				<small class="form-text mb-2 text-muted">Any <?php print esc_attr( $desc ); ?> added will override any pre-existing <?php print esc_attr( $desc ); ?>.</small>
-				<textarea id="ca_custom_<?php print esc_attr( $file_type ); ?>" name="ca_custom_<?php print esc_attr( $file_type ); ?>" class="form-control" aria-label="Custom <?php print esc_attr( strtoupper( $file_type ) ); ?>"><?php print esc_html( wp_unslash( $custom_file ) ); ?></textarea>
 			</div>
 		</div>
 	</div>
@@ -810,7 +798,11 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					<div class="form-group col-sm-12">
 						<label for="alert-message-<?php print esc_attr( $count ); ?>"><strong>Message</strong></label>
 						<small class="text-muted d-block mb-2">Enter message for the alert</small>
-						<?php print wp_editor( stripslashes( $data['message'] ), "alert-message-$count", caweb_tiny_mce_settings() ); ?>
+						<?php
+							// phpcs:disable
+							print wp_editor( stripslashes( $data['message'] ), "alert-message-$count", caweb_tiny_mce_settings() ); 
+							// phpcs:enable
+						?>
 					</div>
 
 					<!-- Alert Banner Settings -->
