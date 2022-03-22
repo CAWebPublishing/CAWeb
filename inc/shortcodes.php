@@ -46,10 +46,10 @@ function caweb_icon_menu( $atts ) {
 	$header = sprintf( '<div class="caweb-icon-menu-header my-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 reset-icon"></span>%1$s</div>', $label );
 	$input  = ! empty( $input ) ? sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" >', $input, $selected ) : '';
 
-	$icons     = caweb_get_icon_list( -1, '', true );
+	$icons     = caweb_symbols( -1, '', '', false );
 	$icon_list = '';
-	foreach ( $icons as $i ) {
-		$icon_list .= sprintf( '<li class="list-group-item ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $i, $selected === $i ? ' active' : '' );
+	foreach ( $icons as $name => $code ) {
+		$icon_list .= sprintf( '<li class="list-group-item ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $name, $selected === $name ? ' active' : '' );
 	}
 
 	return sprintf( '<div class="caweb-icon-menu-group">%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul></div>', $header, $input, $icon_list );
@@ -62,7 +62,7 @@ function caweb_icon_menu( $atts ) {
  * @param  array       $atts Array of Settings for the Panel.
  *                     $atts['layout'] = various panel designs none, default, standout, standout highlight, overstated, and understated.
  *                     $atts['heading'] = Heading for the Panel.
- *                     $atts['heading_icon'] = Panel Icon for the Heading, can be numerical index or name of icon from caweb_get_icon_list().
+ *                     $atts['heading_icon'] = Panel Icon for the Heading, can be numerical index or name of icon from caweb_symbols().
  *                     $atts['button_url'] = Adds a button url to the Panel Heading
  *                     $atts['button_text'] = 'Read More' button text unless set.
  * @param  string|html $content Content to render inside Panel body.

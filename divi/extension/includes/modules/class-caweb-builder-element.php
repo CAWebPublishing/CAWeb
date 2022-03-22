@@ -201,13 +201,22 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 			return;
 		}
 
-		$icon = preg_replace( '/%%/', '', $icon );
+		// if Divi extended icon.
+		if ( false !== strpos( $icon, '||' ) ) {
+			$icon = explode( '||', $icon );
 
-		// get appropriate icon.
-		$tmp = caweb_get_icon_list( -1, '', true );
+			// Get Icon by code.
+			$icon = caweb_symbols( -1, $icon[0] );
 
-		$icon = isset( $tmp[ $icon ] ) ? 'ca-gov-icon-' . $tmp[ $icon ] : '';
-		return $icon;
+		} else {
+			$icon = preg_replace( '/%%/', '', $icon );
+
+			// Get Icon by index.
+			$icon = caweb_symbols( $icon );
+
+		}
+
+		return ! empty( $icon ) ? 'ca-gov-icon-' . $icon : '';
 	}
 
 	/**

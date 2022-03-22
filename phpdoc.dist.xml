@@ -54,7 +54,7 @@
      -->
  
     <!-- Github Settings -->
-    <setting name="stable_version" value="1.5.7" />
+    <setting name="stable_version" value="1.5.10" />
     <setting name="github_user" value="CA-CODE-Works" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="master" />

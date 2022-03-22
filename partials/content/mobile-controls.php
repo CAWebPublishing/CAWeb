@@ -9,7 +9,7 @@ $caweb_search = get_option( 'ca_google_search_id', '' );
 
 ?>
 <!-- mobile navigation controls -->
-<div class="mobile-controls">
+<div class="mobile-controls<?php print $caweb_enable_design_system ? ' d-none' : ''; ?>">
 	<span class="mobile-control-group mobile-header-icons">
 		<!-- Add more mobile controls here. These will be on the right side of the mobile page header section -->
 	</span>

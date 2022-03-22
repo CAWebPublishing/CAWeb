@@ -6,8 +6,9 @@
  */
 
 add_action( 'admin_menu', 'caweb_admin_menu' );
-add_action( 'admin_menu', 'caweb_remove_admin_menus', 15 );
+add_action( 'admin_menu', 'caweb_remove_admin_menus', 999 );
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
+add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
 
@@ -132,12 +133,16 @@ function caweb_remove_admin_menus() {
 		remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
 		remove_submenu_page( 'tools.php', 'domainmapping' );
 
-			/* Removal of Divi Submenu Pages */
+		/* Removal of Divi Submenu Pages */
 		remove_submenu_page( 'et_divi_options', 'et_divi_options' );
 		remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
 		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
 		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
+
+		// Remove Disable Rest API setting.
+		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
+
 	}
 }
 
@@ -148,11 +153,11 @@ function caweb_remove_admin_menus() {
  * @return void
  */
 function caweb_load_themes_tools() {
-	$plugin_menus = array( '404pagesettings' );
+	$plugin_menus = array( '404pagesettings', 'disable_rest_api_settings' );
 	$nonce        = wp_create_nonce( 'caweb_load_themes_tools' );
 	$allowed      = wp_verify_nonce( $nonce, 'caweb_load_themes_tools' ) && isset( $_GET['page'] ) && in_array( $_GET['page'], $plugin_menus, true );
 
-	if ( $allowed || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+	if ( $allowed && is_multisite() && ! current_user_can( 'manage_network_options' ) ) {
 		wp_safe_redirect( get_admin_url() );
 		exit;
 	}
@@ -336,7 +341,6 @@ function caweb_multi_ga_menu_option_setup() {
  */
 function caweb_save_options( $values = array(), $files = array() ) {
 	$site_options = caweb_get_site_options();
-	$site_id      = get_current_blog_id();
 	$ext_css_dir  = CAWEB_EXTERNAL_DIR . 'css';
 	$ext_js_dir   = CAWEB_EXTERNAL_DIR . 'js';
 
@@ -386,9 +390,9 @@ function caweb_save_options( $values = array(), $files = array() ) {
 		}
 	}
 
-	caweb_upload_external_files( $ext_css_dir, $site_id, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
+	caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
 
-	caweb_upload_external_files( $ext_js_dir, $site_id, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
+	caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 
 	/* Alert Banners */
 	$alerts = array();
@@ -429,18 +433,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 			case 'caweb_external_js':
 				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
 				break;
-			case 'ca_custom_css':
-				if ( ! file_exists( "$ext_css_dir/$site_id" ) ) {
-					mkdir( "$ext_css_dir/$site_id", 0777, true );
-				}
-				$wp_filesystem->put_contents( "$ext_css_dir/$site_id/caweb-custom.css", wp_unslash( $val ), FS_CHMOD_FILE );
-				break;
-			case 'ca_custom_js':
-				if ( ! file_exists( "$ext_js_dir/$site_id" ) ) {
-					mkdir( "$ext_js_dir/$site_id", 0777, true );
-				}
-				$wp_filesystem->put_contents( "$ext_js_dir/$site_id/caweb-custom.js", wp_unslash( $val ), FS_CHMOD_FILE );
-				break;
 			case 'caweb_live_drafts':
 			case 'caweb_debug_mode':
 				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
@@ -449,6 +441,10 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				if ( ! current_user_can( $cap ) ) {
 					$val = get_option( $opt, false );
 				}
+				break;
+			case 'ca_custom_css':
+			case 'ca_custom_js':
+				$val = wp_filter_nohtml_kses( $val );
 				break;
 			default:
 				if ( 'on' === $val ) {
@@ -513,6 +509,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_general_options = array(
 		'ca_fav_ico',
+		'caweb_enable_design_system',
 		'ca_site_version',
 		'ca_default_navigation_menu',
 		'ca_menu_selector_enabled',
@@ -553,7 +550,6 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_google_meta_id',
 		'ca_google_trans_enabled',
 		'ca_google_trans_page',
-		'ca_google_trans_text',
 		'ca_google_trans_icon',
 		'ca_google_trans_page_new_window',
 	);
@@ -663,63 +659,26 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 }
 
 /**
- * Recursively remove a directory (all files and folders in it)
- *
- * @param  string $path Path to directory.
- *
- * @return void
- */
-function caweb_rrmdir( $path ) {
-	if ( file_exists( $path ) ) {
-
-		$i = new DirectoryIterator( $path );
-		foreach ( $i as $f ) {
-			if ( $f->isFile() ) {
-				unlink( $f->getRealPath() );
-			} elseif ( ! $f->isDot() && $f->isDir() ) {
-				caweb_rrmdir( $f->getRealPath() );
-				rmdir( $f->getRealPath() );
-			}
-		}
-	}
-}
-
-/**
  * CAWeb upload CSS/JS files to the sites respective external directory
  *
  * @param  string $upload_path Path to upload directory.
- * @param  int    $site_id Site ID.
  * @param  array  $prev_files Sites previously saved uploaded files.
  * @param  array  $existing_files Sites currently uploaded files, case files have been deleted.
  * @param  array  $uploaded_files Sites files waiting to be uploaded.
  *
  * @return void
  */
-function caweb_upload_external_files( $upload_path, $site_id, $prev_files = array(), $existing_files = array(), $uploaded_files = array() ) {
-	$site_path = "$upload_path/$site_id/";
+function caweb_upload_external_files( $upload_path, $prev_files = array(), $existing_files = array(), $uploaded_files = array() ) {
+	$site_path = "$upload_path/";
 
 	/* External Upload */
 	$file_upload = array();
 
-	/*
-	If no files and all previously uploades files have been removed
-	delete the entire directory path
-	*/
-	if ( empty( $existing_files ) && empty( $uploaded_files ) ) {
-		caweb_rrmdir( $site_path );
-		if ( file_exists( $site_path ) ) {
-			rmdir( $site_path );
-		}
-
-		/* files are being uploaded */
-	} elseif ( ! empty( $uploaded_files ) ) {
-		/* create the external directory if its never been created */
-		if ( ! file_exists( $upload_path ) ) {
-			mkdir( $upload_path );
-		}
+	/* files are being uploaded */
+	if ( ! empty( $uploaded_files ) ) {
 		/* create the external site directory if its never been created */
 		if ( ! file_exists( $site_path ) ) {
-			mkdir( $site_path );
+			mkdir( $site_path, 0777, true );
 		}
 
 		foreach ( $uploaded_files as $key => $data ) {

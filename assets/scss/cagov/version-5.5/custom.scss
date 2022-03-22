@@ -1,0 +1,12 @@
+@import '../custom/template';
+@import '../custom/page-margins';
+@import '../custom/location-bar';
+@import '../custom/google';
+@import '../custom/navigation';
+
+// Corrects Logo when navigation is compacted, in mobile view
+@media (min-width: 768px){
+	.fixed.compact .header-organization-banner a img{
+		max-height: 50px;
+	}
+}
