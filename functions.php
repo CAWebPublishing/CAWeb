@@ -178,9 +178,6 @@ function caweb_setup_theme() {
 		}
 	}
 
-	// Move caweb-ext files/folder.
-	caweb_move_external_folder();
-
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );
 
