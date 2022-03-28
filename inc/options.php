@@ -442,10 +442,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 					$val = get_option( $opt, false );
 				}
 				break;
-			case 'ca_custom_css':
-			case 'ca_custom_js':
-				$val = wp_filter_nohtml_kses( $val );
-				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
@@ -579,11 +575,11 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		}
 	}
 
-	$caweb_custom_options = array( 'caweb_external_css', 'ca_custom_css', 'caweb_external_js', 'ca_custom_js' );
-
 	$caweb_special_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga' );
 
 	$caweb_alert_options = array( 'caweb_alerts' );
+
+	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
 
 	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
 
@@ -616,13 +612,12 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			$output = array_merge( $caweb_social_options, $caweb_social_extra_options );
 
 			break;
-		case 'custom':
-			$output = $caweb_custom_options;
-
-			break;
 		case 'special':
 			$output = $caweb_special_options;
+			break;
 
+		case 'custom':
+				$output = $caweb_custom_options;
 			break;
 		case 'sanitized':
 			$output = $caweb_sanitized_options;
