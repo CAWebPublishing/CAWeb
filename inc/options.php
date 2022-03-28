@@ -579,6 +579,8 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_alert_options = array( 'caweb_alerts' );
 
+	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
+
 	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
 
 	switch ( $group ) {
@@ -612,7 +614,10 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			break;
 		case 'special':
 			$output = $caweb_special_options;
+			break;
 
+		case 'custom':
+				$output = $caweb_custom_options;
 			break;
 		case 'sanitized':
 			$output = $caweb_sanitized_options;
@@ -633,6 +638,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 				$caweb_google_options,
 				$caweb_social_options,
 				$caweb_social_extra_options,
+				$caweb_custom_options,
 				$caweb_alert_options,
 				$caweb_addtl_options
 			);
