@@ -579,6 +579,8 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_alert_options = array( 'caweb_alerts' );
 
+	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
+
 	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
 
 	switch ( $group ) {
