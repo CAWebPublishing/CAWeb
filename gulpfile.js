@@ -363,7 +363,8 @@ async function buildCAWebJS(min = false, ver = config.templateVer) {
 	var versionDir = config.JSAssetDir + 'cagov/version-' + ver;
 	var f = config.frontendJS.concat(
 		[versionDir + '/cagov.core.js',
-		versionDir + '/custom.js'],
+		versionDir + '/custom.js' ],
+		config.a11yJS,
 	);
 	var t = minified ? ' Minified ] ' : ' ] ';
 

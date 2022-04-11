@@ -10,6 +10,12 @@ jQuery(document).ready(function() {
 	button_modules.each(function(index, element) {
 		// Add no-underline to each button module
 		$(element).addClass('no-underline');
+
+        // Divi has removed et_pb_custom_button_icon class from buttons.
+        // If Button is using a data-icon add the missing class.
+        if( '' !== $(element).attr('data-icon') ){
+    		$(element).addClass('et_pb_custom_button_icon');
+        }
 	 });
 }
 });
