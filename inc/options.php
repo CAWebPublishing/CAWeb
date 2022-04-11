@@ -419,12 +419,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	$values['caweb_alerts'] = $alerts;
 
 	/* Save CAWeb Options */
-	global $wp_filesystem;
-	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
-		$creds = request_filesystem_credentials( site_url() );
-		wp_filesystem( $creds );
-	}
-
 	foreach ( $values as $opt => $val ) {
 		switch ( $opt ) {
 			case 'caweb_external_css':
