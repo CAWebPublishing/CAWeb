@@ -63,6 +63,11 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	}
 }
 
+// Gutenberg is active.
+if ( function_exists('register_block_type')) {
+	require_once CAWEB_ABSPATH . '/gutenberg/plugin.php';
+}
+
 /*
 -------------------------------------
 	Typical Action Reference Functions
