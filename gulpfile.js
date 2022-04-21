@@ -20,7 +20,7 @@ const config = require('./wpgulp.config.js');
  *
  * Load gulp plugins and passing them semantic names.
  */
-const gulp = require('gulp'); // Gulp of-course.
+const gulp  = require('gulp'); // Gulp of-course.
 
 // Monitoring related plugins.
 const watch = require('gulp-watch');
@@ -190,6 +190,33 @@ gulp.task('build', async function () {
 	buildAllAssets();
 });
 
+/* 
+	CAWeb Build Design System JS
+*/
+gulp.task('design-system-assets', async function(){
+	buildDesignSystemAssets();
+});
+async function buildDesignSystemAssets(){
+	del(['assets/js/cagov/version-design-system/cagov.core.js']);
+	del(['assets/css/cagov/version-design-system/cagov.core.css']);
+
+	if (!config.designSystemJS.length)
+		return;
+
+	gulp.src(config.designSystemJS)
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('cagov.core.js')) // compiled file
+		.pipe(gulp.dest('assets/js/cagov/version-design-system/'));
+		
+	if (!config.designSystemCSS.length)
+		return;
+
+	gulp.src(config.designSystemCSS)
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat('cagov.core.css')) // compiled file
+		.pipe(gulp.dest('assets/css/cagov/version-design-system/'));
+
+}
 
 // Gulp Task Functions
 async function buildAllAssets() {

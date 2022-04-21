@@ -36,6 +36,9 @@ module.exports = {
 	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
 	frontendCSS: [ // Frontend CSS
 		'assets/scss/frontend.scss',
+	],
+	designSystemCSS: [ // Design Component CSS
+		'node_modules/@cagov/*/src/css/index.css'
 	], 
 	adminCSS:[ // WP Backend Admin CSS
 		'assets/scss/admin.scss',
@@ -53,6 +56,9 @@ module.exports = {
 		'assets/js/caweb/AutoTracker.js',
 		'assets/js/caweb/custom.js',
 	],  
+	designSystemJS: [ // Design Component JS
+		'node_modules/@cagov/*/dist/index.js'
+	],
 	a11yJS:[ // Accessibility JS
 		'assets/js/a11y/divi/*.js',
 		'assets/js/a11y/plugins/*.js',
