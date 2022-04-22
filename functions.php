@@ -351,7 +351,6 @@ function caweb_wp_enqueue_scripts() {
 
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
-	update_site_option('dev', $frontend_js_file );
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'caweb-script' );
 
