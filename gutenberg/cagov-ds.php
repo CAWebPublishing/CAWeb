@@ -4,7 +4,6 @@
  *
  * @source https://github.com/cagov/design-system/
  *
- * @package CAGov Design System
  *
  * @wordpress-plugin
  * Plugin Name: CAGov Design System Extension Plugin
@@ -17,6 +16,8 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: cagov-design-system
  * Domain Path: /languages
+ * 
+ * @package cagov-ds
  *
  */
 

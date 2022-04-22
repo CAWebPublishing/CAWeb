@@ -28,7 +28,7 @@ define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
  * @link https://codex.wordpress.org/Plugin_API/Action_Reference#Actions_Run_During_a_Typical_Request
  */
 add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
-add_action( 'send_headers', 'caweb_enable_hsts' );
+//add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'get_header', 'caweb_get_header' );
@@ -63,11 +63,6 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 	}
 }
 
-// Gutenberg is active.
-if ( function_exists('register_block_type')) {
-	require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
-}
-
 /*
 -------------------------------------
 	Typical Action Reference Functions
@@ -100,6 +95,11 @@ function caweb_setup_theme() {
 		} else {
 			require_once $file;
 		}
+	}
+		
+	// Gutenberg is active.
+	if ( function_exists('register_block_type')) {
+		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
 	}
 
 	/* Insert Parent Content Type Category */
