@@ -37,7 +37,7 @@ const {
  *
  * Load gulp plugins and passing them semantic names.
  */
-const {task,src, dest, parallel, series}  = require('gulp'); // Gulp of-course.
+const {task,src, dest, parallel}  = require('gulp'); // Gulp of-course.
 
 // Shell
 const shell = require('gulp-shell')
