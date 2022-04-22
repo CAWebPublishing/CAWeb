@@ -97,6 +97,11 @@ function caweb_setup_theme() {
 		}
 	}
 
+	// Gutenberg is active.
+	if ( function_exists( 'register_block_type' ) ) {
+		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
+	}
+
 	/* Insert Parent Content Type Category */
 	wp_insert_term( 'Content Types', 'category' );
 
