@@ -27,7 +27,6 @@
     "yargs": "^17.0.1"
   },
   "scripts": {
-    "prenew-block": "npm i",
     "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template ../template/index.js",
     "prebuild": "npm i && gulp build-blocks",
     "build": " gulp build",
