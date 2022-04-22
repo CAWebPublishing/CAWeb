@@ -50,7 +50,7 @@ function cagov_ds_enqueue_block_editor_assets(){
     wp_register_style( 'cagov-ds-gutenberg-style', CAGOV_DS_URI . '/css/cagov-design-system.css', array(), '1.0.0' );
 
     // CA Design System Gutenberg Blocks
-    foreach( glob(CAGOV_DS_ABSPATH . '/blocks/*') as $block ){
+    foreach( glob(CAGOV_DS_ABSPATH . '/blocks/*/') as $block ){
         $name = basename($block);
         
         register_block_type(strtolower(CAGOV_DS_ABSPATH . "/blocks/$name/build"));
