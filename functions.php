@@ -65,7 +65,7 @@ if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
 
 // Gutenberg is active.
 if ( function_exists('register_block_type')) {
-	require_once CAWEB_ABSPATH . '/gutenberg/plugin.php';
+	require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
 }
 
 /*
@@ -351,6 +351,7 @@ function caweb_wp_enqueue_scripts() {
 
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
+	update_site_option('dev', $frontend_js_file );
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'caweb-script' );
 

@@ -1,11 +1,11 @@
 {
-  "name": "caweb-publishing",
-  "description": "CA State Template WordPress, Divi Child Theme",
+  "name": "cagov",
+  "description": "CAGov Design System Gutenberg Implementation",
   "version": "1.0.0",
   "author": "Danny Guzman (https://github.com/Danny-Guzman/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Danny-Guzman/CAWeb/"
+    "url": "https://github.com/Danny-Guzman/"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,6 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-html-beautify": "^1.0.1",
     "gulp-line-ending-corrector": "^1.0.3",
+    "gulp-run-command": "^0.0.10",
     "gulp-sass": "^5.0.0",
     "gulp-shell": "^0.8.0",
     "gulp-tap": "^2.0.0",
@@ -26,8 +27,9 @@
     "yargs": "^17.0.1"
   },
   "scripts": {
-    "prebuild": "cd gutenberg/ && npm run build",
-    "build": "gulp build",
+    "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template index.js",
+    "prebuild": "gulp build-blocks",
+    "build": " gulp build",
     "postinstall": "npm config set gulp-cli --global && npm config set npm-check-updates --global"
   }
 }
