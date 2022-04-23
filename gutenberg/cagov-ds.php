@@ -44,10 +44,10 @@ function cagov_ds_enqueue_block_editor_assets(){
         'wp-rich-text'
     );
 
-    wp_register_script( 'cagov-ds-gutenberg', cagov_ds_get_min_file( CAGOV_DS_URI . '/js/gutenberg.js', 'js' ), $deps, '1.0.0', true );
+    wp_register_script( 'cagov-ds-gutenberg', cagov_ds_get_min_file( '/js/gutenberg.js', 'js' ), $deps, '1.0.0', true );
 
-    wp_register_style( 'cagov-ds-gutenberg', cagov_ds_get_min_file( CAGOV_DS_URI . '/css/gutenberg.css' ), array(), '1.0.0' );
-    wp_register_style( 'cagov-ds-gutenberg-style', cagov_ds_get_min_file( CAGOV_DS_URI . '/css/cagov-design-system.css' ), array(), '1.0.0' );
+    wp_register_style( 'cagov-ds-gutenberg', cagov_ds_get_min_file( '/css/gutenberg.css' ), array(), '1.0.0' );
+    wp_register_style( 'cagov-ds-gutenberg-style', cagov_ds_get_min_file( '/css/cagov-design-system.css' ), array(), '1.0.0' );
 
     // CA Design System Gutenberg Blocks
     foreach( glob(CAGOV_DS_ABSPATH . '/blocks/*/') as $block ){

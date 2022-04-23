@@ -27,7 +27,8 @@
     "yargs": "^17.0.1"
   },
   "scripts": {
-    "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template ../template/index.js",
+    "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template ../template/index.js && cd ../",
+    "postnew-block": "npm run build",
     "prebuild": "npm i && gulp build-blocks",
     "build": " gulp build",
     "postinstall": "npm config set gulp-cli --global && npm config set npm-check-updates --global"
