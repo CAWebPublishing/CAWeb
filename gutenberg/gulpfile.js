@@ -42,6 +42,7 @@ task('build', async function(){
 		fs.writeFileSync('css/gutenberg.css', '');
 		fs.writeFileSync('css/cagov-design-system.css', '');
 		fs.writeFileSync('js/gutenberg.js', '');
+		fs.writeFileSync('js/cagov-design-system.js', '');
 	}else{
 		parallel(
 			buildGutenberEditorCSS,
