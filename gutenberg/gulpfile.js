@@ -23,21 +23,34 @@ const concat = require('gulp-concat'); // Concatenates files.
 var tap = require('gulp-tap');
 var log = require('fancy-log');
 var path = require('path');
+const fs = require('fs'); // File System
+var glob = require("glob")
 
-task('test', async function(){
-	buildGutenbergBlocks()
-});
+const isNotFile = fileName => {
+	return ! fs.lstatSync(fileName).isFile()
+}
 
 /**
  * Task to build all CAGov Design System CSS/JS
  */
 task('build', async function(){
-	parallel(
-        buildGutenberEditorCSS,
-        buildGutenberEditorJS,
-        buildDesignSystemCSS,
-        buildDesignSystemJS		
-    )();
+	var blocks = fs.readdirSync('./blocks/').map(fileName => {
+			return path.join('./blocks/', fileName)
+		}).filter(isNotFile);
+
+	if ( !blocks.length ){
+		fs.writeFileSync('css/gutenberg.css', '');
+		fs.writeFileSync('css/cagov-design-system.css', '');
+		fs.writeFileSync('js/gutenberg.js', '');
+		fs.writeFileSync('js/cagov-design-system.js', '');
+	}else{
+		parallel(
+			buildGutenberEditorCSS,
+			buildGutenberEditorJS,
+			buildDesignSystemCSS,
+			buildDesignSystemJS		
+		)();
+	}
 	
 });
 
