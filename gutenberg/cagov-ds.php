@@ -44,10 +44,10 @@ function cagov_ds_enqueue_block_editor_assets(){
         'wp-rich-text'
     );
 
-    wp_register_script( 'cagov-ds-gutenberg', CAGOV_DS_URI . '/js/gutenberg.js', $deps, '1.0.0', true );
+    wp_register_script( 'cagov-ds-gutenberg', cagov_ds_get_min_file( '/js/gutenberg.js', 'js' ), $deps, '1.0.0', true );
 
-    wp_register_style( 'cagov-ds-gutenberg', CAGOV_DS_URI . '/css/gutenberg.css', array(), '1.0.0' );
-    wp_register_style( 'cagov-ds-gutenberg-style', CAGOV_DS_URI . '/css/cagov-design-system.css', array(), '1.0.0' );
+    wp_register_style( 'cagov-ds-gutenberg', cagov_ds_get_min_file( '/css/gutenberg.css' ), array(), '1.0.0' );
+    wp_register_style( 'cagov-ds-gutenberg-style', cagov_ds_get_min_file( '/css/cagov-design-system.css' ), array(), '1.0.0' );
 
     // CA Design System Gutenberg Blocks
     foreach( glob(CAGOV_DS_ABSPATH . '/blocks/*/') as $block ){
@@ -84,4 +84,22 @@ function cagov_ds_gutenberg_categories($categories, $post) {
         ),
         $categories,
     );
+}
+
+
+/**
+ * Load Minified Version of a file
+ *
+ * @param  string $f File to load.
+ * @param  mixed  $ext Extension of file, default css.
+ *
+ * @return string
+ */
+function cagov_ds_get_min_file( $f, $ext = 'css' ) {
+	/* if a minified version exists load it */
+	if ( file_exists( CAGOV_DS_ABSPATH . str_replace( ".$ext", ".min.$ext", $f ) ) ) {
+		return CAGOV_DS_URI . str_replace( ".$ext", ".min.$ext", $f );
+	} else {
+		return CAGOV_DS_URI . $f;
+	}
 }

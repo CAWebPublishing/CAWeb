@@ -6,9 +6,10 @@ module.exports = {
         category: "ca-design-system",
         textdomain: 'cagov-design-system',
         dashicon: 'smiley',
-		editorScript: "cagov-ds-gutenberg-js",
-		editorStyle: "cagov-ds-gutenberg-css",
-		style: "cagov-ds-gutenberg-style-css",
+		description: 'Design System Web Component Description',
+		editorScript: "cagov-ds-gutenberg",
+		editorStyle: "cagov-ds-gutenberg",
+		style: "cagov-ds-gutenberg-style",
 		supports: {
 			"html": true
 		},
