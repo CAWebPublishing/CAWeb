@@ -1,13 +1,17 @@
 _notes/*
 **/_notes/
+
 **/Thumbs.db
+
 **/.vscode/
 /.vscode/
-**/node_modules/
-/node_modules/
-**/vendor/
-/vendor/
+
+# Dependency directories
+node_modules/
+vendor/
 composer.lock
+
 /log/
+
 /.docs/
 /.phpdoc/cache/

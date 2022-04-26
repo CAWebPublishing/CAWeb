@@ -1,0 +1,56 @@
+{% extends "layout.html.twig" %}
+{% import "macros.twig" as macros %}
+
+{% block head %}
+<title>How to Build Gutenberg Blocks</title>
+
+{% endblock head %}
+
+
+{% block introduction %}
+<div class="offset-quarter">
+    <h1>How to Get Started Building Gutenberg Blocks</h1>
+    <p>Make sure npm is installed along with necessary packages, from a terminal in the projects root directory run the following command.</p>
+    {{ macros.terminal_command(['npm install']) }}
+
+    <h2 class="mt-4">Creating Blocks</h2>
+    <p>From a terminal in the projects root directory run the following command.</p>
+    {{ macros.terminal_command(['npm run new-block --name=`<block name>`']) }}
+    <p><span class="label label-info mr-1">Note: </span><span class="align-middle">It might take a couple of minutes for the block to build</span></p>
+
+    <h2 class="mt-4">Editing the block.json File</h2>
+
+    {{ macros.markup('`gutenberg/blocks/<block name>/src/block.json`', 'Modify the ', ' file') }}
+
+    <p>If necessary, update the following fields:</p>
+    <ul>
+        <li>title</li>
+        <li>description</li>
+        <li>add <a href="https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/" target="_blank">block attributes</a></li>
+    </ul>    
+
+    <h2 class="mt-4">Block Editor Styling</h2>
+    {{ macros.markup('`gutenberg/blocks/<block name>/src/editor.scss`', 'Modify the ', ' file to change the backend styling.') }}
+    {{ macros.markup('`gutenberg/blocks/<block name>/src/style.scss`', 'Modify the ', ' file to change the frontend styling.') }}
+
+    <h2 class="mt-4"><a href="https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/" target="_blank">Block Edit & Save</a></h2>
+    {{ macros.markup('`gutenberg/blocks/<block name>/src/edit.js`', 'Modify the ', ' file to change the edit functionality.') }}
+    {{ macros.markup('`gutenberg/blocks/<block name>/src/save.js`', 'Modify the ', ' file to change the save functionality.') }}
+
+    <h2 class="mt-4">Rebuild Block Code</h2>
+    <p>From a terminal in the projects root directory run the following command.</p>
+    {{ macros.terminal_command(['npm run build']) }}
+    <p><span class="label label-info mr-1">Note: </span><span class="align-middle">It might take a couple of minutes for the block to build</span></p>
+
+    
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+
+</div>
+{% endblock body %}
