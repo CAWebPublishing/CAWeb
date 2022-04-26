@@ -1,0 +1,82 @@
+/* initial styles */
+cagov-accordion details {
+  border-radius: var(--radius-2, 5px) !important;
+  margin-bottom: 0;
+  min-height: var(--s-5, 3rem);
+  margin-top: 0.5rem;
+  border: solid var(--border-1, 1px) var(--gray-200, #ededef) !important;
+}
+
+cagov-accordion details summary {
+  cursor: pointer;
+  padding: var(--s-1, 0.5rem) var(--s-5, 3rem) var(--s-1, 0.5rem) var(--s-2, 1rem);
+  background-color: var(--gray-200, #ededef);
+  position: relative;
+  line-height: var(--s-4, 2rem);
+  margin: 0;
+  color: var(--primary-color, #064e66);
+  font-size: var(--font-size-2, 1.125rem);
+  font-weight: bold;
+}
+
+cagov-accordion details .accordion-body {
+  padding: var(--s-2, 1rem);
+}
+
+/* styles applied after custom element javascript runs */
+cagov-accordion:defined {
+  /* let it be open initially if details has open attribute */
+}
+
+cagov-accordion:defined details {
+  transition: height var(--animation-duration-2, 0.2s);
+  height: var(--s-5, 3rem);
+  overflow: hidden;
+}
+
+cagov-accordion:defined details[open] {
+  height: auto;
+}
+
+cagov-accordion:defined summary::-webkit-details-marker {
+  display: none;
+}
+
+cagov-accordion:defined details summary {
+  list-style: none;
+  /* hide default expansion triangle after js executes */
+  border-radius: var(--border-5, 5px) var(--border-5, 5px) 0 0;
+}
+
+cagov-accordion:defined details summary:focus {
+  outline-offset: -2px;
+  outline: solid 2px var(--highlight-color, #fbad23) !important;
+}
+
+cagov-accordion:defined details .cagov-open-indicator {
+  background-color: var(--primary-color, #064e66);
+  height: 3px;
+  width: 15px;
+  border-radius: var(--border-3, 3px);
+  position: absolute;
+  right: var(--s-2, 1rem);
+  top: 1.4rem;
+}
+
+cagov-accordion:defined details .cagov-open-indicator:before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 3px;
+  width: 3px;
+  height: 15px;
+  border-radius: var(--border-3, 3px);
+  border: none;
+  box-shadow: 3px 0 0 0 var(--primary-color, #064e66);
+  background: none;
+}
+
+cagov-accordion:defined details[open] .cagov-open-indicator:before {
+  display: none;
+}

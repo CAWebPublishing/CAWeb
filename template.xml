@@ -22,8 +22,7 @@
         <!-- Theme Specific Pages -->
         <!-- How To Pages -->
         <transformation writer="twig" source="enforce-wpcs.html.twig" artifact="/how-to/enforce-wpcs.html" />
-
-        <transformation writer="FileIo" query="copy" source=".phpdoc/template/imgs/gulp-tasks.png" artifact="imgs/gulp-tasks.png" />
+        <transformation writer="twig" source="gutenberg.html.twig" artifact="/how-to/build-blocks.html" />
         <transformation writer="twig" source="gulp.html.twig" artifact="/how-to/gulp.html" />
 
         <!-- Examples -->

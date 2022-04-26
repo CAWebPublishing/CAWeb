@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cagov/ds-accordion",
+	"version": "0.1.0",
+	"title": "Ds Accordion",
+	"category": "ca-design-system",
+	"icon": "smiley",
+	"description": "Design System Web Component Description",
+	"supports": {
+		"html": true
+	},
+	"textdomain": "ds-accordion",
+	"editorScript": "cagov-ds-gutenberg",
+	"editorStyle": "cagov-ds-gutenberg",
+	"style": "cagov-ds-gutenberg-style"
+}
