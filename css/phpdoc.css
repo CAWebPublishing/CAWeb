@@ -81,3 +81,12 @@
 .multi-terminal-commands pre{
     display: table-row;
 }
+
+.markdown-text{
+    display: inline-block;
+}
+
+.markdown-text p{
+    margin: 0;
+    display: inline;
+}
