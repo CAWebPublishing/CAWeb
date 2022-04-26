@@ -23,15 +23,11 @@
             </ignore>
         </api>
     </version>
-    <!-- 
-    Using phpDocumentor v3.1.0,
-    https://github.com/phpDocumentor/phpDocumentor/releases/tag/v3.1.0
-    -->
-    <setting name="state_version" value="5.5.23" />
-	
+    
     <setting name="nav_menu" value="
      Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library.html,View all available icons};
-     How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards}
+     How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards};
+     Structure,flowchart,{Actions/Filters,filter,filters.html,View all available WordPress actions/filters},{All Files,file,files.html,View All Files};
      " />
  
     <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
