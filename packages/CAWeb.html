@@ -176,48 +176,52 @@
                             
                                 <div class="sub-nav">
                     <div class="second-level-nav flex">
+                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
+                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
+                                                            <p class="link-description">How to enforce the WordPress Coding Standards</p>
+                                                    </a>
+                                            
+                                        <a href="../how-to/build-blocks.html" class="second-level-link" title="Building Blocks">
+                                                            <span class="ca-gov-icon-cubes font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">Building Blocks</p>
+                                                            <p class="link-description">How to build Gutenberg Blocks</p>
+                                                    </a>
+                                            
                                         <a href="../how-to/gulp.html" class="second-level-link" title="Compile CSS/JS">
                                                             <span class="ca-gov-icon-code font-size-40 d-block"></span>
 
                                                         <p class="h3 sub-nav-link">Compile CSS/JS</p>
                                                             <p class="link-description">How to compile all CSS/JS files</p>
                                                     </a>
-                                            
-                                        <a href="../how-to/enforce-wpcs.html" class="second-level-link" title="Enforce WPCS">
-                                                            <span class="ca-gov-icon-shield font-size-40 d-block"></span>
+                                    </div>
+                </div>
+                                        </li>
+                                            <li class="nav-item" title="      Structure">
+                <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
+<span class="link-title">      Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+                            
+                                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                                        <a href="../filters.html" class="second-level-link" title="Actions/Filters">
+                                                            <span class="ca-gov-icon-filter font-size-40 d-block"></span>
 
-                                                        <p class="h3 sub-nav-link">Enforce WPCS</p>
-                                                            <p class="link-description">How to enforce the WordPress Coding Standards}     </p>
+                                                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                                                            <p class="link-description">View all available WordPress actions/filters</p>
+                                                    </a>
+                                            
+                                        <a href="../files.html" class="second-level-link" title="All Files">
+                                                            <span class="ca-gov-icon-file font-size-40 d-block"></span>
+
+                                                        <p class="h3 sub-nav-link">All Files</p>
+                                                            <p class="link-description">View All Files</p>
                                                     </a>
                                     </div>
                 </div>
                                         </li>
-                        <li class="nav-item" title="Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart font-size-30 d-block"></span>
-<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div class="second-level-nav flex">
-                    <a href="../filters.html" class="second-level-link" title="Actions and Filters">
-                        <span class="ca-gov-icon-filter font-size-40 d-block"></span>
-
-                        <p class="h3 sub-nav-link">Actions/Filters</p>
-                        <p class="link-description">View all available WordPress actions/filters</p>
-                    </a>
-
-                    <a href="../files.html" class="second-level-link" title="All Files">
-                        <span class="ca-gov-icon-file font-size-40 d-block"></span>
-
-                        <p class="h3 sub-nav-link">All Files</p>
-                        <p class="link-description">View all files</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Download">
-            <a href="https://github.com/CA-CODE-Works/CAWeb/archive/refs/tags/1.5.7.zip" class="first-level-link"><span class="ca-gov-icon-download font-size-30 d-block"></span>
-<span class="link-title">Download</span></a>
-        </li>
-    </ul>
+                    </ul>
 </nav>		
 		<div id="head-search" class="search-container hidden-print" role="region" aria-label="Search Expanded">
 		</div>
@@ -236,7 +240,8 @@
                                                                                                 <h2 class="my-0">Packages</h2>
                 <p><a href="../packages/CAWeb.html">CAWeb</a></p>
                                                                                     <p><a href="../packages/CAWebModuleExtension.html">CAWebModuleExtension</a></p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                            <p><a href="../packages/ds.html">ds</a></p>
+                                                                                                                                                                                                                                                                                                        
     <h2 class="my-0">Reports</h2>
     <p><a href="../reports/errors.html">Errors</a></p>
     <p><a href="../reports/markers.html">Markers</a></p>
@@ -312,9 +317,6 @@
         <p><span data-letter="C" class="letter-icon square ">
 </span>
  <a href="#constant_CAWEB_VERSION">CAWEB_VERSION</a></p>
-        <p><span data-letter="C" class="letter-icon square ">
-</span>
- <a href="#constant_WP_TEMP_DIR">WP_TEMP_DIR</a></p>
     </div>
 <div class="offset-quarter mt-3">
         <h2 class="my-0">Functions</h2>
@@ -493,16 +495,16 @@ This filter is applied by Divi</small>
     <small class="ml-4 font-italic">CAWeb Font Sizes</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
+ <a href="../files/inc-icon-library.html#function_caweb_generate_icon_json">caweb_generate_icon_json()</a></p>
+    <small class="ml-4 font-italic">Generates the CA.gov Full Icon JSON File</small>
+        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
+</span>
  <a href="../files/inc-functions.html#function_caweb_get_attachment_post_meta">caweb_get_attachment_post_meta()</a></p>
     <small class="ml-4 font-italic">Return CAWeb Attachment Meta Field for given urls</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
  <a href="../files/functions.html#function_caweb_get_header">caweb_get_header()</a></p>
     <small class="ml-4 font-italic">Add template header if using Divi Custom Type &#039;Project</small>
-        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
-</span>
- <a href="../files/inc-icon-library.html#function_caweb_get_icon_list">caweb_get_icon_list()</a></p>
-    <small class="ml-4 font-italic">CA.gov Icon Library List</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
  <a href="../files/inc-functions.html#function_caweb_get_min_file">caweb_get_min_file()</a></p>
@@ -562,10 +564,6 @@ Default callback used when invoking WP_Customize_Control::active().</small>
 </span>
  <a href="../files/inc-functions.html#function_caweb_is_divi_used">caweb_is_divi_used()</a></p>
     <small class="ml-4 font-italic">Checks if page/post is using Divi Builder.</small>
-        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
-</span>
- <a href="../files/functions.html#function_caweb_late_wp_enqueue_scripts">caweb_late_wp_enqueue_scripts()</a></p>
-    <small class="ml-4 font-italic">Register CAWeb Theme scripts/styles with priority of 115</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
  <a href="../files/inc-live-drafts.html#function_caweb_live_drafts_admin_footer">caweb_live_drafts_admin_footer()</a></p>
@@ -714,6 +712,10 @@ Filters the network site URL.</small>
     <small class="ml-4 font-italic">Render CAweb Recent Updates Widget</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
+ <a href="../files/inc-filters.html#function_caweb_redirect_if_author_parameter">caweb_redirect_if_author_parameter()</a></p>
+    <small class="ml-4 font-italic">Redirects to home page if Author Parameter is in the URL</small>
+        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
+</span>
  <a href="../files/inc-widgets.html#function_caweb_refresh_news_feed">caweb_refresh_news_feed()</a></p>
     <small class="ml-4 font-italic">Refreshes the caweb_news_feed site transient if necessary</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
@@ -743,10 +745,6 @@ Filters the subject of the password reset email.</small>
 </span>
  <a href="../files/inc-options.html#function_caweb_retrieve_various_sanitized_options">caweb_retrieve_various_sanitized_options()</a></p>
     <small class="ml-4 font-italic">Retrieves certain CAWeb Options that have been uniquely sanitized</small>
-        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
-</span>
- <a href="../files/inc-options.html#function_caweb_rrmdir">caweb_rrmdir()</a></p>
-    <small class="ml-4 font-italic">Recursively remove a directory (all files and folders in it)</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
  <a href="../files/inc-filters.html#function_caweb_safe_style_css">caweb_safe_style_css()</a></p>
@@ -799,6 +797,10 @@ Filters the HTML script tag of an enqueued script.</small>
     <small class="ml-4 font-italic">CAWeb Slide</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
+ <a href="../files/inc-icon-library.html#function_caweb_symbols">caweb_symbols()</a></p>
+    <small class="ml-4 font-italic">CA.gov Icon Library List</small>
+        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
+</span>
  <a href="../files/inc-functions.html#function_caweb_template_colors">caweb_template_colors()</a></p>
     <small class="ml-4 font-italic">CA.gov Template Colors</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
@@ -834,12 +836,8 @@ Attached callback to &#039;tiny_mce_before_init&#039;</small>
 Fires before the password reset procedure is validated.</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
- <a href="../files/functions.html#function_caweb_wp_enqueue_parent_scripts">caweb_wp_enqueue_parent_scripts()</a></p>
-    <small class="ml-4 font-italic">Register Parent Theme styles.css</small>
-        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
-</span>
  <a href="../files/functions.html#function_caweb_wp_enqueue_scripts">caweb_wp_enqueue_scripts()</a></p>
-    <small class="ml-4 font-italic">Register CAWeb Theme scripts/styles with priority of 15</small>
+    <small class="ml-4 font-italic">Register CAWeb Theme scripts/styles with priority of 99999999</small>
         <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
 </span>
  <a href="../files/functions.html#function_caweb_wp_footer">caweb_wp_footer()</a></p>
@@ -866,6 +864,13 @@ Filters the login page errors.</small>
 </span>
  <a href="../files/inc-filters.html#function_caweb_xmlrpc_enabled">caweb_xmlrpc_enabled()</a></p>
     <small class="ml-4 font-italic">CAWeb Disable XMLRPC</small>
+        <p class="mb-0 mt-2"><span data-letter="F" class="letter-icon diamond ">
+</span>
+ <a href="../files/inc-icon-library.html#function_et_pb_get_extended_font_icon_symbols">et_pb_get_extended_font_icon_symbols()</a></p>
+    <small class="ml-4 font-italic">Returns full list of all icons used in the Divi with [&#039;search_terms&#039;],
+unicode icon value [&#039;unicode&#039;], icon name [&#039;name&#039;]
+groups in which the icon is included [&#039;styles&#039;],
+bool flag which determined is this icon a divi icon or FontAwesome icon[&#039;is_divi_icon&#039;].</small>
     </div>
                 
                                     <!-- Body Content -->
@@ -879,7 +884,7 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_ABSPATH</strong>
         </div>
     
-        <pre>define( 'CAWEB_ABSPATH', get_stylesheet_directory() );</pre>
+        <pre>define( 'CAWEB_ABSPATH', \get_stylesheet_directory() );</pre>
     
     </div>
         <div id="constant_CAWEB_BETA_TEMPLATE_VERSIONS" class="mb-3 border-bottom border-info">
@@ -912,7 +917,7 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_DIVI_VERSION</strong>
         </div>
     
-        <pre>define( 'CAWEB_DIVI_VERSION', wp_get_theme(&#039;Divi&#039;)-&gt;get(&#039;Version&#039;) );</pre>
+        <pre>define( 'CAWEB_DIVI_VERSION', \wp_get_theme(&#039;Divi&#039;)-&gt;get(&#039;Version&#039;) );</pre>
     
     </div>
         <div id="constant_CAWEB_EXTENSION" class="mb-3 border-bottom border-info">
@@ -934,7 +939,7 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_EXTERNAL_DIR</strong>
         </div>
     
-        <pre>define( 'CAWEB_EXTERNAL_DIR', sprintf(&#039;%1$s/%2$s-ext&#039;, WP_CONTENT_DIR, strtolower(wp_get_theme()-&gt;stylesheet)) );</pre>
+        <pre>define( 'CAWEB_EXTERNAL_DIR', \sprintf(&#039;%1$s/%2$s-ext/&#039;, \wp_get_upload_dir()[&#039;basedir&#039;], \strtolower(\wp_get_theme()-&gt;stylesheet)) );</pre>
     
     </div>
         <div id="constant_CAWEB_EXTERNAL_URI" class="mb-3 border-bottom border-info">
@@ -945,7 +950,7 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_EXTERNAL_URI</strong>
         </div>
     
-        <pre>define( 'CAWEB_EXTERNAL_URI', content_url(sprintf(&#039;%1$s-ext&#039;, strtolower(wp_get_theme()-&gt;stylesheet))) );</pre>
+        <pre>define( 'CAWEB_EXTERNAL_URI', \sprintf(&#039;%1$s/%2$s-ext&#039;, \wp_get_upload_dir()[&#039;baseurl&#039;], \strtolower(\wp_get_theme()-&gt;stylesheet)) );</pre>
     
     </div>
         <div id="constant_CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION" class="mb-3 border-bottom border-info">
@@ -978,10 +983,10 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_URI</strong>
         </div>
     
-        <pre>define( 'CAWEB_URI', get_stylesheet_directory_uri() );</pre>
+        <pre>define( 'CAWEB_URI', \get_stylesheet_directory_uri() );</pre>
     
     </div>
-        <div id="constant_CAWEB_VERSION" class="mb-3 border-bottom border-info">
+        <div id="constant_CAWEB_VERSION" class="mb-3">
         <div>
             <div class="pull-right">
                 <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L13">functions.php</a> : 13
@@ -989,18 +994,7 @@ Filters the login page errors.</small>
             <strong class="d-block">CAWEB_VERSION</strong>
         </div>
     
-        <pre>define( 'CAWEB_VERSION', wp_get_theme(&#039;CAWeb&#039;)-&gt;get(&#039;Version&#039;) );</pre>
-    
-    </div>
-        <div id="constant_WP_TEMP_DIR" class="mb-3">
-        <div>
-            <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/functions.php#L23">functions.php</a> : 23
-            </div>
-            <strong class="d-block">WP_TEMP_DIR</strong>
-        </div>
-    
-        <pre>define( 'WP_TEMP_DIR', WP_CONTENT_DIR . &#039;/tmp&#039; );</pre>
+        <pre>define( 'CAWEB_VERSION', \wp_get_theme(&#039;CAWeb&#039;)-&gt;get(&#039;Version&#039;) );</pre>
     
     </div>
     </div>
@@ -1026,7 +1020,7 @@ Filters the login page errors.</small>
 </div>
 <div class="copyright">
     <div class="container">
-        <i class="text-muted">Generated on 09/29/2021 @ 11:29am</i>
+        <i class="text-muted">Generated on 04/26/2022 @ 11:23am</i>
     </div> 
 </div>
             <script src="../js/cagov.core.js"></script>

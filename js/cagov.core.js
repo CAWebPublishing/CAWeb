@@ -451,6 +451,21 @@ function _tagLinks(evObj, evCat, evAct, evLbl, evVal, evNonInter, exisAttr)
 	}
 }
 
+function rgb2hex(rgb){
+	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+	return "#" +
+	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+}
+
+function stripeIframeAttributes(frame){
+	$(frame).removeAttr('frameborder');
+	$(frame).removeAttr('scrolling');
+	$(frame).removeAttr('allowtransparency');
+	$(frame).removeAttr('allowfullscreen');
+}
+
 /**
  * CA State Template v5.5 -  @version v5.5.23 -  8/2/2021 
   STYLES COMPILED FROM SOURCE (source/js) DO NOT MODIFY */
@@ -18680,22 +18695,6 @@ $(document).ready(function () {
 	
  });
 
-function rgb2hex(rgb){
-	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-	return "#" +
-	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
-}
-
-function stripeIframeAttributes(frame){
-	$(frame).removeAttr('frameborder');
-	$(frame).removeAttr('scrolling');
-	$(frame).removeAttr('allowtransparency');
-	$(frame).removeAttr('allowfullscreen');
-}
-
-
  function checkSize(){
 	var utility_container = $('.global-header .utility-header .container');
 	var translate = utility_container.find('#google_translate_element')[0];
@@ -18733,6 +18732,412 @@ function stripeIframeAttributes(frame){
 
 	}
 }
+jQuery(document).ready(function() {
+	/*
+	Divi Blog Module Accessibility 
+	Retrieve all Divi Blog Modules
+	*/
+	
+	var blog_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_blog_\d\b/); });
+
+	// Run only if there is a Blog Module on the current page
+    if( blog_modules.length ){
+        blog_modules.each(function(index, element) {
+            // Grab each blog article
+            blog =  $(element).find('article');
+            blog.each(function(i) {
+             b =  $(blog[i]); 
+             // Grab the article title
+             title = b.children('.entry-title').text();
+			 
+			 // Add Aria-Label to Post Article
+			 b.attr('aria-label', title);
+			 
+             // Grab the More Information Button from the Post content
+             // Divi appends the More Information button as the last child of the content
+             read_more = b.children('.post-content').children('.more-link:last-child');
+      
+             // If there is a More Information Button append SR Tag with Title
+             if(read_more.length){
+                 read_more.append('<span class="sr-only">' + title + '</span>');
+             }
+            });
+         });      
+    }
+});
+jQuery(document).ready(function() {
+	/* 
+    Divi Blurb Module Accessibility 
+    Retrieve all Divi Blurb Modules
+    */
+   var blurb_modules = $('div.et_pb_blurb');
+
+   // Run only if there is a Blog Module on the current page
+   if( blurb_modules.length ){
+	blurb_modules.each(function(index, element) {
+		var header = $(element).find('.et_pb_module_header');
+		var header_title = header.length ?
+				 ( $(header).children('a').length ? $(header).children('a')[0].innerText : header[0].innerText ) : '';
+
+		var blurb_img = $(element).find('.et_pb_main_blurb_image');
+		var img_link = $(blurb_img).find('a');
+
+		if( blurb_img.length && img_link.length ){
+			$(img_link).attr('title', header_title);
+
+		}
+
+		$(element).children('a').on('focusin', function(){ 
+			$(this).parent().css('outline', "#2ea3f2 solid 2px");
+		 });
+		 
+		 $(element).children('a').on('focusout', function(){ 
+			$(this).parent().css('outline', '0');
+		 });
+	 });      
+	}
+});
+jQuery(document).ready(function() {
+	/* 
+    Divi Button Module Accessibility 
+    Retrieve all Divi Button Modules
+    */
+   var button_modules = $('a.et_pb_button');
+
+   // Run only if there is a Button Module on the current page
+   if( button_modules.length ){
+	button_modules.each(function(index, element) {
+		// Add no-underline to each button module
+		$(element).addClass('no-underline');
+
+        // Divi has removed et_pb_custom_button_icon class from buttons.
+        // If Button is using a data-icon add the missing class.
+        if( '' !== $(element).attr('data-icon') ){
+    		$(element).addClass('et_pb_custom_button_icon');
+        }
+	 });
+}
+});
+jQuery(document).ready(function() {
+	/* 
+	Fixes Deep Links issue created by Divi
+    */
+    var links = $('a[href^="#"]:not([href="#"])');
+    
+    // Run only if there are deep links on the current page
+   if( links.length ){
+    	links.each(function(index, element) {
+	    	// Add et_smooth_scroll_disabled to each link
+		    $(element).addClass('et_smooth_scroll_disabled');
+        });
+    }
+
+ });
+jQuery(document).ready(function() {
+	/*
+    Divi Fullwidth Header Module Accessibility 
+    Retrieve all Divi Fullwidth Header Modules
+	*/
+   var fullwidth_header_modules = $('section').filter(function(){ return this.className.match(/\bet_pb_fullwidth_header_\d\b/); });
+
+	// Run only if there is a Fullwidth Header Module on the current page
+    if( fullwidth_header_modules.length ){
+        fullwidth_header_modules.each(function(index, element) {
+            // Grab all More Buttons
+            more_buttons =  $(element).find('.et_pb_more_button');
+            more_buttons.each(function(i) {
+             m =  $(more_buttons[i]); 
+
+             m.addClass('no-underline');
+            });
+         });      
+    }
+});
+jQuery(document).ready(function() {
+   /* 
+   Retrieve all Divi Gallery Modules
+   */
+   var gallery_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_gallery\b/); });
+
+    // Run only if there is a Slider Module on the current page
+    if( gallery_modules.length ){
+
+        gallery_modules.each(function(index, element) {
+            // Grab all gallery images
+            var gallery_images = $(element).find('.et_pb_gallery_image img');
+            gallery_images.each(function(i, g){
+                // add the value of the anchors title to the alt text of the image
+                $(g).attr('alt',$(g).parent().attr('title') );
+            })
+        });      
+
+    }
+
+});
+jQuery(document).ready(function() {
+	/*
+	Divi Person Module Accessibility 
+	Retrieve all Divi Person Modules
+	*/
+	
+	var person_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_team_member_\d\b/); });
+
+	// Run only if there is a Person Module on the current page
+    if( person_modules.length ){
+        person_modules.each(function(index, element) {
+            // Grab each person header
+            person_name =  $(element).find('.et_pb_module_header').html();
+            social_links = $(element).find('.et_pb_member_social_links li a');
+
+            social_links.each( function(i, e){
+                social = $(e).html().replace( '<span>', '' ).replace( '</span>', '' );
+                $(e).attr('title', social + ' Profile for ' + person_name )
+            })
+            
+         });      
+    }
+});
+jQuery(document).ready(function() {
+    /*
+    Divi Search Module Form Accessibility
+    Retrieve all Divi Search Module Forms
+	*/
+	var search_modules = $('form.et_pb_searchform');
+
+	/*
+    Divi Search Module Accessibility
+    Retrieve all Divi Search Modules
+   */
+	var et_bocs = $('#et-boc.et-boc');
+
+	// Run only if there is a Search Module on the current page
+    if( search_modules.length  ){
+        search_modules.each(function(index, element) {
+            var searchInput = $(element).find('input[name="s"]');
+            var searchLabel = $(element).find('label');
+            
+            $(element).attr('aria-label', "Divi Search Form " + index);
+            $(searchInput).attr('id', 'divi-search-module-form-input-' + index);
+            $(searchLabel).attr('for', 'divi-search-module-form-input-' + index);
+        });
+	}
+	
+	// Run only if there is more than 1 #et-boc.et-boc element
+    if( et_bocs.length  ){
+        et_bocs.each(function(index, element) {
+            if( index ){
+                $(element).attr('id', $(element).attr('id') + '-' + index );
+            }
+        });
+    }
+});
+jQuery(document).ready(function() {
+   /* 
+   Retrieve all Divi Post Slider Modules
+   */
+   var slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_slider\b|\bet_pb_fullwidth_slider\d\b/); });
+
+    // Run only if there is a Slider Module on the current page
+    if( slider_modules.length ){
+
+        slider_modules.each(function(index, element) {
+            // Grab all slides in slider
+            var slide_modules = $(element).find('.et_pb_slide');
+
+            slide_modules.each(function(i, s){
+                // Grab the slide title and add the no-underline class
+                title = $(s).find('.et_pb_slide_title a');
+                title.addClass('no-underline');
+            })
+
+            // Grab Slider Arrows
+            var arrows = $(element).find('.et-pb-slider-arrows');
+            arrows.each(function(a, arrow){
+                // Grab each arrow control
+                var prev_button =  $(arrow).find('a.et-pb-arrow-prev');
+                var next_button =  $(arrow).find('a.et-pb-arrow-next');
+
+                prev_button.addClass('no-underline');
+                prev_button.attr('title', 'Previous Arrow');
+                prev_button.find('span').addClass('sr-only');
+    
+                next_button.addClass('no-underline');
+                next_button.attr('title', 'Next Arrow');
+                next_button.find('span').addClass('sr-only');
+            })
+
+            // Grab Slider Controllers
+            var controller = $(element).find('.et-pb-controllers a');
+            controller.each(function(i, c){
+                $(c).val('Slide ' + $(c).val() );
+            })
+
+        });      
+
+    }
+
+});
+jQuery(document).ready(function() {
+    /* 
+    Divi Tab Module Accessibility 
+    Retrieve all Divi Tab Modules
+    */
+   var tab_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_tabs_\d\b/); });
+
+    // Run only if there is a Tab Module on the current page
+    if( tab_modules.length ){
+        setTimeout(function(){
+            tab_modules.each(function(index, element) {
+                // Grab each tab control list
+                var tab_list =  $(element).find('.et_pb_tabs_controls');
+                
+                // Lowercase the Tab Control Role
+                $(tab_list).attr('role', 'tablist' );
+    
+            });  
+        }, 100);
+
+            
+    }
+});
+jQuery(document).ready(function() {
+	/*
+	Divi Toggle Module Accessibility
+	Retrieve all Divi Toggle Modules
+   */
+	var toggle_modules = $('div.et_pb_toggle');
+
+	// Run only if there is a Toggle Module on the current page
+	if( toggle_modules.length  ){
+		toggle_modules.each(function(index, element) {
+			var title = $(element).find('.et_pb_toggle_title');
+			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+
+			$(element).attr('tabindex', 0);
+			$(element).attr('role', 'button');
+			$(element).attr('aria-expanded', expanded);
+
+			// Events
+			$(title).on('click', function(e){
+				setTimeout( function(){
+					if ($(element).hasClass('et_pb_toggle_open')) {
+						toggleModule(element, false);
+					}else{
+						toggleModule(element);
+					}
+				}, 500);
+			});
+
+			$(element).on('keydown', function(e){
+				var toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
+				var toggleKeyPressed = toggleKeys.includes(e.which);
+				var toggleOpen = [40]; // down arrow to open
+				var toggleOpenPressed = toggleOpen.includes(e.which);
+				var toggleClose = [38] //up arrow to close
+				var toggleClosePressed = toggleClose.includes(e.which);
+
+				if (toggleKeyPressed) {
+					setTimeout( function(){
+						if ($(element).hasClass('et_pb_toggle_open')) {
+							toggleModule(element, false);
+						}else{
+							toggleModule(element);
+						}
+					}, 500);
+				}
+
+				if (toggleOpenPressed) {
+					setTimeout( function(){
+						toggleModule(element);
+					}, 500);
+				}
+
+				if (toggleClosePressed) {
+					setTimeout( function(){
+						toggleModule(element, false);
+					}, 500)
+				}
+
+				// Prevents spacebar from scrolling page to the bottom
+				if (e.which === 32) {
+					e.preventDefault();
+				}
+			});
+		});
+
+		function toggleModule( module, open = true ){
+			if( open ){
+				$(module).removeClass('et_pb_toggle_close')
+				$(module).addClass('et_pb_toggle_open');
+
+				$(module).find('.et_pb_toggle_content').css('display', 'block');
+
+			}else{
+				$(module).removeClass('et_pb_toggle_open')
+				$(module).addClass('et_pb_toggle_close');
+
+				$(module).find('.et_pb_toggle_content').css('display', 'none')
+
+			}
+
+			// Modifies value for aria-expanded attribute
+			// when toggle is clicked or Enter/Space key is pressed
+			setTimeout( function(){
+				var expanded = $(module).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
+				$(module).attr('aria-expanded', expanded);
+			}, 1000 );
+		}
+	}
+});
+
+jQuery(document).ready(function() {
+	/*
+    Divi Video Module Accessibility
+    Retrieve all Divi Video Modules
+    */
+	var video_modules = $('div.et_pb_video');
+
+    /*
+    Divi Video Slider Module Accessibility
+    Retrieve all Divi Video Modules
+    */
+    var video_slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_video_slider_\d\b/); });
+
+    // Run only if there is a Video Module on the current page
+    if( video_modules.length  ){
+        video_modules.each(function(index, element) {
+            var frame = $(element).find('iframe');
+            frame.attr('title', 'Divi Video Module IFrame ' + (index + 1));
+            $(frame).removeAttr('frameborder');
+            $(frame).attr('id', 'fitvid' + (index + 1));
+
+            var src = $(frame).attr('src');
+            $(frame).attr('src', src + '&amp;rel=0');
+
+        });      
+    }
+
+    
+    // Run only if there is a Video Slider Module Items on the current page
+    if( video_slider_modules.length  ){
+        video_slider_modules.each(function(index, element) {
+            var slides = $(element).find('.et_pb_slide');
+
+            slides.each(function(i, s){
+                play_button = $(s).find('.et_pb_video_play');
+                carousel_play = $(element).find('.et_pb_carousel_item.position_' + ( i + 1 ) ).find('.et_pb_video_play');
+                
+                $(play_button).addClass('no-underline');
+                $(play_button).attr('title', 'Play Video ' + ( i + 1 ) );
+
+                if( carousel_play.length ){
+                    $(carousel_play).addClass('no-underline');
+                    $(carousel_play).attr('title', 'Play Video ' + ( i + 1 ) );
+                }
+            })
+        });      
+    }
+});
 jQuery(document).ready(function() {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
@@ -19157,382 +19562,6 @@ jQuery(document).ready(function() {
 
 		});
 	}
-});
-jQuery(document).ready(function() {
-	/*
-	Divi Blog Module Accessibility 
-	Retrieve all Divi Blog Modules
-	*/
-	
-	var blog_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_blog_\d\b/); });
-
-	// Run only if there is a Blog Module on the current page
-    if( blog_modules.length ){
-        blog_modules.each(function(index, element) {
-            // Grab each blog article
-            blog =  $(element).find('article');
-            blog.each(function(i) {
-             b =  $(blog[i]); 
-             // Grab the article title
-             title = b.children('.entry-title').text();
-			 
-			 // Add Aria-Label to Post Article
-			 b.attr('aria-label', title);
-			 
-             // Grab the More Information Button from the Post content
-             // Divi appends the More Information button as the last child of the content
-             read_more = b.children('.post-content').children('.more-link:last-child');
-      
-             // If there is a More Information Button append SR Tag with Title
-             if(read_more.length){
-                 read_more.append('<span class="sr-only">' + title + '</span>');
-             }
-            });
-         });      
-    }
-});
-jQuery(document).ready(function() {
-	/* 
-    Divi Blurb Module Accessibility 
-    Retrieve all Divi Blurb Modules
-    */
-   var blurb_modules = $('div.et_pb_blurb');
-
-   // Run only if there is a Blog Module on the current page
-   if( blurb_modules.length ){
-	blurb_modules.each(function(index, element) {
-		var header = $(element).find('.et_pb_module_header');
-		var header_title = header.length ?
-				 ( $(header).children('a').length ? $(header).children('a')[0].innerText : header[0].innerText ) : '';
-
-		var blurb_img = $(element).find('.et_pb_main_blurb_image');
-		var img_link = $(blurb_img).find('a');
-
-		if( blurb_img.length && img_link.length ){
-			$(img_link).attr('title', header_title);
-
-		}
-
-		$(element).children('a').on('focusin', function(){ 
-			$(this).parent().css('outline', "#2ea3f2 solid 2px");
-		 });
-		 
-		 $(element).children('a').on('focusout', function(){ 
-			$(this).parent().css('outline', '0');
-		 });
-	 });      
-	}
-});
-jQuery(document).ready(function() {
-	/* 
-    Divi Button Module Accessibility 
-    Retrieve all Divi Button Modules
-    */
-   var button_modules = $('a.et_pb_button');
-
-   // Run only if there is a Button Module on the current page
-   if( button_modules.length ){
-	button_modules.each(function(index, element) {
-		// Add no-underline to each button module
-		$(element).addClass('no-underline');
-	 });
-}
-});
-jQuery(document).ready(function() {
-	/*
-    Divi Fullwidth Header Module Accessibility 
-    Retrieve all Divi Fullwidth Header Modules
-	*/
-   var fullwidth_header_modules = $('section').filter(function(){ return this.className.match(/\bet_pb_fullwidth_header_\d\b/); });
-
-	// Run only if there is a Fullwidth Header Module on the current page
-    if( fullwidth_header_modules.length ){
-        fullwidth_header_modules.each(function(index, element) {
-            // Grab all More Buttons
-            more_buttons =  $(element).find('.et_pb_more_button');
-            more_buttons.each(function(i) {
-             m =  $(more_buttons[i]); 
-
-             m.addClass('no-underline');
-            });
-         });      
-    }
-});
-jQuery(document).ready(function() {
-   /* 
-   Retrieve all Divi Gallery Modules
-   */
-   var gallery_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_gallery\b/); });
-
-    // Run only if there is a Slider Module on the current page
-    if( gallery_modules.length ){
-
-        gallery_modules.each(function(index, element) {
-            // Grab all gallery images
-            var gallery_images = $(element).find('.et_pb_gallery_image img');
-            gallery_images.each(function(i, g){
-                // add the value of the anchors title to the alt text of the image
-                $(g).attr('alt',$(g).parent().attr('title') );
-            })
-        });      
-
-    }
-
-});
-jQuery(document).ready(function() {
-	/*
-	Divi Person Module Accessibility 
-	Retrieve all Divi Person Modules
-	*/
-	
-	var person_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_team_member_\d\b/); });
-
-	// Run only if there is a Person Module on the current page
-    if( person_modules.length ){
-        person_modules.each(function(index, element) {
-            // Grab each person header
-            person_name =  $(element).find('.et_pb_module_header').html();
-            social_links = $(element).find('.et_pb_member_social_links li a');
-
-            social_links.each( function(i, e){
-                social = $(e).html().replace( '<span>', '' ).replace( '</span>', '' );
-                $(e).attr('title', social + ' Profile for ' + person_name )
-            })
-            
-         });      
-    }
-});
-jQuery(document).ready(function() {
-    /*
-    Divi Search Module Form Accessibility
-    Retrieve all Divi Search Module Forms
-	*/
-	var search_modules = $('form.et_pb_searchform');
-
-	/*
-    Divi Search Module Accessibility
-    Retrieve all Divi Search Modules
-   */
-	var et_bocs = $('#et-boc.et-boc');
-
-	// Run only if there is a Search Module on the current page
-    if( search_modules.length  ){
-        search_modules.each(function(index, element) {
-            var searchInput = $(element).find('input[name="s"]');
-            var searchLabel = $(element).find('label');
-            
-            $(element).attr('aria-label', "Divi Search Form " + index);
-            $(searchInput).attr('id', 'divi-search-module-form-input-' + index);
-            $(searchLabel).attr('for', 'divi-search-module-form-input-' + index);
-        });
-	}
-	
-	// Run only if there is more than 1 #et-boc.et-boc element
-    if( et_bocs.length  ){
-        et_bocs.each(function(index, element) {
-            if( index ){
-                $(element).attr('id', $(element).attr('id') + '-' + index );
-            }
-        });
-    }
-});
-jQuery(document).ready(function() {
-   /* 
-   Retrieve all Divi Post Slider Modules
-   */
-   var slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_slider\b|\bet_pb_fullwidth_slider\d\b/); });
-
-    // Run only if there is a Slider Module on the current page
-    if( slider_modules.length ){
-
-        slider_modules.each(function(index, element) {
-            // Grab all slides in slider
-            var slide_modules = $(element).find('.et_pb_slide');
-
-            slide_modules.each(function(i, s){
-                // Grab the slide title and add the no-underline class
-                title = $(s).find('.et_pb_slide_title a');
-                title.addClass('no-underline');
-            })
-
-            // Grab Slider Arrows
-            var arrows = $(element).find('.et-pb-slider-arrows');
-            arrows.each(function(a, arrow){
-                // Grab each arrow control
-                var prev_button =  $(arrow).find('a.et-pb-arrow-prev');
-                var next_button =  $(arrow).find('a.et-pb-arrow-next');
-
-                prev_button.addClass('no-underline');
-                prev_button.attr('title', 'Previous Arrow');
-                prev_button.find('span').addClass('sr-only');
-    
-                next_button.addClass('no-underline');
-                next_button.attr('title', 'Next Arrow');
-                next_button.find('span').addClass('sr-only');
-            })
-
-            // Grab Slider Controllers
-            var controller = $(element).find('.et-pb-controllers a');
-            controller.each(function(i, c){
-                $(c).val('Slide ' + $(c).val() );
-            })
-
-        });      
-
-    }
-
-});
-jQuery(document).ready(function() {
-    /* 
-    Divi Tab Module Accessibility 
-    Retrieve all Divi Tab Modules
-    */
-   var tab_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_tabs_\d\b/); });
-
-    // Run only if there is a Tab Module on the current page
-    if( tab_modules.length ){
-        setTimeout(function(){
-            tab_modules.each(function(index, element) {
-                // Grab each tab control list
-                var tab_list =  $(element).find('.et_pb_tabs_controls');
-                
-                // Lowercase the Tab Control Role
-                $(tab_list).attr('role', 'tablist' );
-    
-            });  
-        }, 100);
-
-            
-    }
-});
-jQuery(document).ready(function() {
-	/*
-	Divi Toggle Module Accessibility
-	Retrieve all Divi Toggle Modules
-   */
-	var toggle_modules = $('div.et_pb_toggle');
-
-	// Run only if there is a Toggle Module on the current page
-	if( toggle_modules.length  ){
-		toggle_modules.each(function(index, element) {
-			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-
-			$(element).attr('tabindex', 0);
-			$(element).attr('role', 'button');
-			$(element).attr('aria-expanded', expanded);
-
-			// Events
-			$(element).on('click keydown', function(e){
-				// Shows or hides content in accordion when Enter or Space key is pressed
-				var toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
-				var toggleKeyPressed = toggleKeys.includes(e.which);
-				var toggleOpen = [40]; // down arrow to open
-				var toggleOpenPressed = toggleOpen.includes(e.which);
-				var toggleClose = [38] //up arrow to close
-				var toggleClosePressed = toggleClose.includes(e.which);
-
-				if (toggleKeyPressed) {
-					setTimeout( function(){
-						$(element).toggleClass('et_pb_toggle_open');
-						$(element).toggleClass('et_pb_toggle_close');
-
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
-						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
-						}
-					}, 500);
-				}
-
-				if (toggleOpenPressed) {
-					setTimeout( function(){
-						$(element).addClass('et_pb_toggle_open');
-						$(element).removeClass('et_pb_toggle_close');
-
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
-						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
-						}
-					}, 500);
-				}
-
-				if (toggleClosePressed) {
-					setTimeout( function(){
-						$(element).addClass('et_pb_toggle_close');
-						$(element).removeClass('et_pb_toggle_open');
-
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							$(element).find('.et_pb_toggle_content').css('display', 'block');
-						} else {
-							$(element).find('.et_pb_toggle_content').css('display', 'none')
-						}
-					}, 500)
-				}
-					
-				// Prevents spacebar from scrolling page to the bottom
-				if (e.which === 32) {
-					e.preventDefault();
-				}
-
-				// Modifies value for aria-expanded attribute
-				// when toggle is clicked or Enter/Space key is pressed
-				setTimeout( function(){
-					var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-					$(element).attr('aria-expanded', expanded);
-				}, 1000 );
-			});
-		});
-	}
-});
-
-jQuery(document).ready(function() {
-	/*
-    Divi Video Module Accessibility
-    Retrieve all Divi Video Modules
-    */
-	var video_modules = $('div.et_pb_video');
-
-    /*
-    Divi Video Slider Module Accessibility
-    Retrieve all Divi Video Modules
-    */
-    var video_slider_modules = $('div').filter(function(){ return this.className.match(/\bet_pb_video_slider_\d\b/); });
-
-    // Run only if there is a Video Module on the current page
-    if( video_modules.length  ){
-        video_modules.each(function(index, element) {
-            var frame = $(element).find('iframe');
-            frame.attr('title', 'Divi Video Module IFrame ' + (index + 1));
-            $(frame).removeAttr('frameborder');
-            $(frame).attr('id', 'fitvid' + (index + 1));
-
-            var src = $(frame).attr('src');
-            $(frame).attr('src', src + '&amp;rel=0');
-
-        });      
-    }
-
-    
-    // Run only if there is a Video Slider Module Items on the current page
-    if( video_slider_modules.length  ){
-        video_slider_modules.each(function(index, element) {
-            var slides = $(element).find('.et_pb_slide');
-
-            slides.each(function(i, s){
-                play_button = $(s).find('.et_pb_video_play');
-                carousel_play = $(element).find('.et_pb_carousel_item.position_' + ( i + 1 ) ).find('.et_pb_video_play');
-                
-                $(play_button).addClass('no-underline');
-                $(play_button).attr('title', 'Play Video ' + ( i + 1 ) );
-
-                if( carousel_play.length ){
-                    $(carousel_play).addClass('no-underline');
-                    $(carousel_play).attr('title', 'Play Video ' + ( i + 1 ) );
-                }
-            })
-        });      
-    }
 });
 jQuery(document).ready(function() {
 	/* 
