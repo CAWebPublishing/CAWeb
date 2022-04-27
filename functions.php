@@ -2,7 +2,7 @@
 /**
  * CAWeb Theme Functions
  *
- * @author Jesus D. Guzman
+ * @author Danny Guzman
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package CAWeb

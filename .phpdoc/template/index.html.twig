@@ -1,4 +1,5 @@
 {% extends "layout.html.twig" %}
+{% set current_date = "now"|date("m/d/Y", 'America/Los_Angeles') %}
 
 {% block head %}
 <title>{{ project.name }} Theme Documentation</title>
@@ -7,20 +8,25 @@
 {% block introduction %}
 <div class="offset-quarter clearfix">
     <div class="three-quarters  pl-0">
+        <h1>{{ project.name }} Theme</h1>
         <p>The {{ project.name }} Theme is an open source WordPress Theme offered by the California Department of Technology to state agencies and departments within the State of California and fully integrates the <a href="https://template.webtools.ca.gov/" target="_blank">California State Template</a>.</p>
         <p>{{ project.name }} leverages <a href="https://github.com" target="_blank">GitHub</a> to provide for better collaboration and and encourages participation.</p>
-        <strong>Tools</strong>
+        <strong>Requirements </strong><small>( software versions as of {{ current_date }} )</small>
         <ul>
-            <li><a href="https://www.npmjs.com/" target="_blank">NPM</a>
-                <ul>
-                    <li><a href="https://gulpjs.com/" target="_blank">GULP</a> - used to compile all CSS & JS files for the theme.</li>
-                </ul>
+            <li>
+                <a href="{{ project.settings.custom.et_theme_url }}" target="_blank">ElegantThemes</a> Account Information
             </li>
-            <li><a href="https://getcomposer.org/" target="_blank">Composer</a>
-                <ul>
-                    <li><a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> - used to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.</li>
-                    <li><a href="https://www.phpdoc.org/" target="_blank">phpDocumentor</a> - used to document the theme.</li>
-                </ul>
+            <li>
+                <a href="{{ project.settings.custom.nodejs_url }}" target="_blank">NodeJS</a>
+                <small>v{{ project.settings.custom.nodejs_ver }}</small>
+            </li>
+            <li>
+                <a href="{{ project.settings.custom.npm_url }}" target="_blank">NPM</a>
+                <small>v{{ project.settings.custom.npm_ver }}</small>
+            </li>
+            <li>
+                <a href="{{ project.settings.custom.composer_url }}" target="_blank">Composer</a>
+                <small>v{{ project.settings.custom.composer_ver }}</small>
             </li>
         </ul>
     </div>
@@ -58,31 +64,4 @@
 {% endblock table_of_contents %}
 
 {% block body %}
-<div class="offset-quarter">
-    <strong>WordPress Code Enforcement</strong>
-    <p>{{ project.name }} utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.
-        Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
-        For information on how to enforce the standards, see <a href="{{ path('/') }}how-to/enforce-wpcs.html">here</a>.
-    </p>
-    <div class="multi-terminal-commands">
-        <pre>composer --version</pre>
-        <pre>composer install --no-dev</pre>
-        <pre>.\vendor\bin\phpcs --version</pre>
-        <pre>.\vendor\bin\php-cs-fixer --version</pre>
-        <pre>.\vendor\bin\phpcbf --version</pre>
-    </div>
-</div>
-
-<div class="offset-quarter">
-    <strong>Compiling CSS/JS</strong>
-    <p>{{ project.name }} utilizes GULP to compile all CSS & JS files for the theme.
-        Make sure npm is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
-        For more {{ project.name }} Theme gulp tasks, see <a href="{{ path('/') }}how-to/gulp.html">here</a>.
-    </p>
-    <div class="multi-terminal-commands">
-        <pre>npm -v</pre>
-        <pre>npm install</pre>
-        <pre>gulp -v</pre>
-    </div>
-</div>
 {% endblock body %}
