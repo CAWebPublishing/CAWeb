@@ -7,6 +7,7 @@
 
 {% block introduction %}
 <div class="offset-quarter">
+    <h1>Enforcing WordPress Coding Standards</h1>
     <p>{{ project.name }} utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.
         Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
     </p>
@@ -24,7 +25,7 @@
 {% endblock table_of_contents %}
 
 {% block body %}
-<div class="offset-quarter">
+<div class="offset-quarter mt-4">
     <strong>To run the PHP_CodeSniffer for WordPress Coding Violations</strong>
     <div class="mb-4">
         <p><span class="label label-info">Note:</span><span class="align-middle"> The following flag can be added when running the PHP_CodeSniffer.</span></p>

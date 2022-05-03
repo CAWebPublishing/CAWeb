@@ -2,7 +2,7 @@
 /**
  * CAWeb Theme Functions
  *
- * @author Jesus D. Guzman
+ * @author Danny Guzman
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package CAWeb
@@ -95,6 +95,11 @@ function caweb_setup_theme() {
 		} else {
 			require_once $file;
 		}
+	}
+
+	// Gutenberg is active.
+	if ( function_exists( 'register_block_type' ) ) {
+		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
 	}
 
 	/* Insert Parent Content Type Category */

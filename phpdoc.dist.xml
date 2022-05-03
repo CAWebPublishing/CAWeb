@@ -23,16 +23,11 @@
             </ignore>
         </api>
     </version>
-    <!-- 
-    Using phpDocumentor v3.1.0,
-    https://github.com/phpDocumentor/phpDocumentor/releases/tag/v3.1.0
-    -->
-    <setting name="state_version" value="5.5.23" />
-	
+    
     <setting name="nav_menu" value="
      Examples,gears,{Examples,gears,examples/index.html,View all available examples},{Icon Font Library,book,examples/icon-library.html,View all available icons};
-     How To's,info-bubble,{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files},{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards}
-     " />
+     How To's,info-bubble,{Enforce WPCS,shield,how-to/enforce-wpcs.html,How to enforce the WordPress Coding Standards},{Building Blocks,cubes,how-to/build-blocks.html,How to build Gutenberg Blocks},{Compile CSS/JS,code,how-to/gulp.html,How to compile all CSS/JS files};
+     Structure,flowchart,{Actions/Filters,filter,filters.html,View all available WordPress actions/filters},{All Files,file,files.html,View All Files}" />
  
     <setting name="contact_url" value="https://caweb.cdt.ca.gov/contact-us/" />
  
@@ -54,12 +49,26 @@
      -->
  
     <!-- Github Settings -->
-    <setting name="stable_version" value="1.5.10" />
+    <setting name="stable_version" value="1.6.1" />
     <setting name="github_user" value="CA-CODE-Works" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="master" />
  
-    <!-- WordPress Settings -->
+     <setting name="caweb_url" value="https://caweb.cdt.ca.gov/" />
+    <setting name="caweb_theme_url" value="https://github.com/CA-CODE-Works/CAWeb/" />
+
+    <setting name="et_theme_url" value="https://www.elegantthemes.com/" />
+
+    <setting name="nodejs_url" value="https://nodejs.org/en/" />
+    <setting name="nodejs_ver" value="16.14.2" />    
+
+    <setting name="npm_url" value="https://www.npmjs.com/" />
+    <setting name="npm_ver" value="8.3.1" />
+
+    <setting name="composer_url" value="https://getcomposer.org/" />
+    <setting name="composer_ver" value="2.2.3" />
+
+    <setting name="wp_cli_url" value="https://wp-cli.org/" />
  
     <!-- WordPress.NamingConventions.PrefixAllGlobals Rule.
       Multiple valid prefixes can be provided as a comma-delimited list. -->
