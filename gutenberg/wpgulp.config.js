@@ -13,12 +13,14 @@ module.exports = {
 		'blocks/*/build/index.css'
 	], 
 	designSystemCSS: [ // Design System Components CSS
+		'node_modules/@cagov/*/src/index.scss',
 		'blocks/*/node_modules/@cagov/*/src/index.scss'
 	], 
 	gutenbergEditorJS: [ // Gutenberg Editor JS
 		'blocks/*/build/index.js'
 	],  
 	designSystemJS: [ // Design Components JS
+		'node_modules/@cagov/*/dist/index.js',
 		'blocks/*/node_modules/@cagov/*/dist/index.js'
 	],
 };

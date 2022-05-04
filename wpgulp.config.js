@@ -69,4 +69,10 @@ module.exports = {
 		'assets/js/caweb/options/colorschemes.js',
 		'assets/js/wp/theme-customizer/controls/*.js',
 	],
+	designSystemCSS: [ // Design System Components CSS
+		'node_modules/@cagov/*/src/index.scss',
+	], 
+	designSystemJS: [ // Design Components JS
+		'node_modules/@cagov/*/dist/index.js',
+	],
 };

@@ -24,11 +24,22 @@ var tap = require('gulp-tap');
 var log = require('fancy-log');
 var path = require('path');
 const fs = require('fs'); // File System
+var argv = require('yargs').argv;
 var glob = require("glob")
 
 const isNotFile = fileName => {
 	return ! fs.lstatSync(fileName).isFile()
 }
+task('build-block', async function(){
+	if( '%npm_config_name%' == argv.name || undefined == argv.name ){
+		return;
+	}
+
+	src(['./blocks/' + argv.name + '/'])
+        .pipe(tap (function(file){
+			shell.task("cd " + file.path + " && npm run build")()
+        }))
+});
 
 /**
  * Task to build all CAGov Design System CSS/JS
@@ -44,14 +55,14 @@ task('build', async function(){
 		fs.writeFileSync('js/gutenberg.js', '');
 		fs.writeFileSync('js/cagov-design-system.js', '');
 	}else{
-		parallel(
-			buildGutenberEditorCSS,
-			buildGutenberEditorJS,
-			buildDesignSystemCSS,
-			buildDesignSystemJS		
-		)();
+		
 	}
-	
+	parallel(
+		buildGutenberEditorCSS,
+		buildGutenberEditorJS,
+		buildDesignSystemCSS,
+		buildDesignSystemJS		
+	)();
 });
 
 /**
@@ -79,6 +90,11 @@ async function buildGutenberEditorCSS(){
     // Gutenberg Block Editor CSS
     if (gutenbergEditorCSS.length){
 		src(gutenbergEditorCSS.concat(designSystemCSS))
+			.pipe(
+				sass({
+					outputStyle: 'expanded',
+				})
+			)
 			.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
 			.pipe(concat('gutenberg.css')) // compiled file
 			.pipe(dest('css/'))

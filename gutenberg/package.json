@@ -29,8 +29,9 @@
   "scripts": {
     "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template ../template/index.js && cd ../",
     "postnew-block": "npm run build",
-    "prebuild": "gulp build-blocks",
+    "prebuild": "npm i && gulp build-blocks",
     "build": " gulp build",
+    "build-block": "gulp build-block --name=%npm_config_name%",
     "install": "npm i -g npm-check-updates",
     "postinstall": "npm config set gulp-cli --global && npm rebuild node-sass"
   }

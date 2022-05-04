@@ -2,7 +2,7 @@ const { join } = require( 'path' );
 
 module.exports = {
     defaultValues: {
-        namespace: "cagov",
+        namespace: "ca-design-system",
         category: "ca-design-system",
         textdomain: 'cagov-design-system',
         dashicon: 'smiley',
