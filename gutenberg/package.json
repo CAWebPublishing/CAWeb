@@ -1,14 +1,41 @@
 {
-  "name": "cagov",
-  "description": "CAGov Design System Gutenberg Implementation",
-  "version": "1.0.0",
-  "author": "Danny Guzman (https://github.com/Danny-Guzman/)",
+  "name": "design-system-wordpress-gutenberg",
+  "version": "1.2.0",
+  "description": "Gutenberg Blocks integration for the California Design System",
+  "main": "index.js",
+  "scripts": {
+    "lint": "semistandard",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wp-scripts start",
+    "build": "gulp build",
+    "new-block": "cd blocks/ && npx @wordpress/create-block $npm_config_name --template ../template/index.js && cd ../",
+    "postnew-block": "npm run build",
+    "prebuild": "gulp build-blocks",
+    "install": "npm i -g npm-check-updates",
+    "postinstall": "npm config set gulp-cli --global && npm rebuild node-sass"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Danny-Guzman/"
+    "url": "git+https://github.com/cagov/design-system-wordpress-gutenberg.git"
   },
+  "keywords": [
+    "California Design System"
+  ],
+  "author": "Office of Digital Innovation",
   "license": "MIT",
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/cagov/design-system-wordpress-gutenberg/issues"
+  },
+  "homepage": "https://github.com/cagov/design-system-wordpress-gutenberg#README",
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "workspaces": [
+    "./blocks/*"
+  ],
+  "devDependencies": {
+    "semistandard": "^16.0.0",
     "del": "^6.0.0",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.2",
@@ -25,14 +52,5 @@
     "node-sass": "^7.0.1",
     "npm-check-updates": "^12.5.9",
     "yargs": "^17.4.1"
-  },
-  "scripts": {
-    "new-block": "cd blocks/ && npx @wordpress/create-block %npm_config_name% --template ../template/index.js && cd ../",
-    "postnew-block": "npm run build",
-    "prebuild": "npm i && gulp build-blocks",
-    "build": " gulp build",
-    "build-block": "gulp build-block --name=%npm_config_name%",
-    "install": "npm i -g npm-check-updates",
-    "postinstall": "npm config set gulp-cli --global && npm rebuild node-sass"
   }
 }

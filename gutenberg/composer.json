@@ -1,0 +1,24 @@
+{
+    "name": "cagov/cagov-design-system-gutenberg-blocks",
+    "description": "Packages to help enforce WordPress Coding Standards",
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.3",
+        "friendsofphp/php-cs-fixer": "^2.16.0",
+        "roave/security-advisories": "dev-master",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility "
+        ]
+    },
+    "require": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

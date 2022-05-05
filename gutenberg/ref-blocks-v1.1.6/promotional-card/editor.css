@@ -1,0 +1,33 @@
+/* Gutenberg interface overrides */
+/* Grid */
+.cagov-promotional-button-grid.cagov-grid .block-editor-block-list__layout {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-row-gap: 64px;
+}
+
+.cagov-promotional-button-grid .block-editor-rich-text__editable .rich-text {
+    margin-top: 16px;
+}
+
+@media (min-width: 719px) {
+    .cagov-promotional-card .cagov-card-image {
+        min-width: 550px;
+    }
+}
+
+.cagov-promotional-card.cagov-grid .block-editor-block-list__block {
+    margin: 0;
+    max-width: calc(576px - 48px);
+}
+
+.cagov-promotional-card .block-editor-inner-blocks p,
+.cagov-promotional-card .block-editor-inner-blocks .wp-block-button {
+    margin: 0 0 16px 0;
+}
+
+
+/* Buttons */
+.cagov-promotional-card .components-button {
+    display: block;
+}

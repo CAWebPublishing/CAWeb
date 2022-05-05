@@ -1,0 +1,124 @@
+.cagov-p-2 {
+  padding: 1rem;
+}
+.cagov-bkgrd-gry {
+  background-color: #F9F9FA;
+}q
+
+.cagov-featured-sidebar {
+  max-width: 400px;
+  margin-top: 0;
+}
+
+.cagov-featured-section {
+  margin: 0 0 3rem 0;
+}
+.cagov-featured-section .components-button.image-button {
+  display: block;
+  height: 100%;
+  margin: 0 0 3rem 0;
+  padding: 0;
+}
+.cagov-featured-image {
+  object-fit: cover;
+  width: 100%;
+  display: block;
+  height: 100%;
+  min-width: 18rem;
+  min-height: 20rem;
+  max-height: 420px;
+}
+
+/* call to action */
+/* this is some hacky css, need to figure out how to control the applied classes in the generated InnerBlocks */
+
+.cagov-feature-card-body-content {
+  margin-top: 16px;
+}
+
+.cagov-feature-card-body-content p {
+  margin-bottom: 16px
+}
+
+.cagov-feature-card-body-content .wp-block-button {
+  margin-bottom: 16px;
+}
+
+.cagov-feature-card-body-content .wp-block-button:not(.is-style-outline) .wp-block-button__link:not(:hover):not(:active):not(.has-background) {  
+  background-color: #33705B;
+  /* defined here for when css vars are not supported */
+  background-color: var(--primary-color, #33705B);
+  /* variable used with fallback in case it is not defined */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  display: inline-block;
+  border: none;
+  text-decoration: none;
+}
+.cagov-feature-card-body-content .wp-block-button:not(.is-style-outline) .wp-block-button__link:hover {
+  background-color: #33705B;
+  /* defined here for when css vars are not supported */
+  background-color: var(--primary-color, #33705B);
+  /* variable used with fallback in case it is not defined */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  display: inline-block;
+  border: none;
+  text-decoration: underline;
+}
+
+.cagov-feature-card-body-content .wp-block-button__link {
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
+/* sidebar layout */
+.cagov-with-sidebar {
+  overflow: hidden;
+}
+.cagov-with-sidebar > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.cagov-with-sidebar > * > * {
+  margin: 0;
+  flex-grow: 1;
+}
+.cagov-with-sidebar-left > * > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(30% - var(0px));
+}
+.cagov-with-sidebar-right > * > :first-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(30% - 0px);
+}
+
+/* feature-card sidebar swap image on left to go on top when it wraps */
+@media (max-width: 719px) {
+  .cagov-with-sidebar > * {
+    flex-direction: column-reverse;
+  }
+} 
+
+@media (min-width: 1200px) {
+  .cagov-featured-sidebar {
+    max-width: 34%;
+  }
+
+  .cagov-with-sidebar-left > * > :last-child {
+    /* min-width: calc(34% - 0px); */
+    max-width: calc(66% - 0px);
+  }
+  
+  .cagov-with-sidebar-right > * > :first-child {
+    /* min-width: calc(34% - 0px); */
+    max-width: calc(66% - 0px);
+  }
+}

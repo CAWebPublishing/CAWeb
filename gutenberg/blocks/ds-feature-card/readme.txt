@@ -6,7 +6,7 @@ Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Design System Web Component Description
+Design System component description, pull from design system website or project assets from PM
 
 == Description ==
 

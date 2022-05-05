@@ -1,0 +1,34 @@
+.editor-styles-wrapper cagov-accordion details {
+	max-width: 840px; // Match WordPress Gutenberg editor max width.
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 32px;
+}
+
+cagov-accordion:defined details .cagov-open-indicator {
+	background-color: var(--primary-color, #064e66);
+	height: 3px;
+	width: 15px;
+	border-radius: var(--border-3, 3px);
+	position: absolute;
+	right: var(--s-2, 1rem);
+	top: 1.4rem;
+}
+cagov-accordion:defined details .cagov-open-indicator:before {
+	display: block;
+	content: '';
+	position: absolute;
+	top: -6px;
+	left: 3px;
+	width: 3px;
+	height: 15px;
+	border-radius: var(--border-3, 3px);
+	border: none;
+	box-shadow: 3px 0 0 0 var(--primary-color, #064e66);
+	background: none;
+}
+cagov-accordion:defined details[open] .cagov-open-indicator:before {
+	display: none;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cagov/ds-link-grid",
+	"version": "0.1.0",
+	"title": "Link Grid",
+	"category": "cagov-design-system",
+	"icon": "format-aside",
+	"description": "The link grid organizes links that function as calls to action (CTAs) or highlight topics. It guides people to important services and topics",
+	"supports": {
+		"html": true
+	},
+	"textdomain": "ds-link-grid",
+	"editorScript": "cagov-design-system-gutenberg",
+	"editorStyle": "cagov-design-system-gutenberg",
+	"style": "cagov-design-system-gutenberg-style"
+}

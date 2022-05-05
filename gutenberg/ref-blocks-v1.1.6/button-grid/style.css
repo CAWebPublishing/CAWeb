@@ -1,0 +1,13 @@
+.cagov-button-grid.cagov-grid, .cagov-grid .block-editor-block-list__layout {
+  display: grid;
+  grid-gap: 1.5rem;
+}
+/* editor override */
+.cagov-button-grid.cagov-grid .block-editor-block-list__block {
+  margin: 0;
+}
+@supports (width: min(250px, 100%)) {
+  .cagov-button-grid.cagov-grid, .cagov-button-grid.cagov-grid .block-editor-block-list__layout {
+    grid-template-columns: repeat(auto-fit, minmax(min(376px, 100%), 1fr));
+  }
+}

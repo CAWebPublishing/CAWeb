@@ -1,0 +1,57 @@
+.no-deco {
+  text-decoration: none;
+}
+div[data-type="ca-design-system/card"] .cagov-card {
+  border: none;
+  padding: 0;
+  display: block;
+  justify-content: space-between;
+}
+div[data-type="ca-design-system/card"] .cagov-card:hover {
+  box-shadow: none;
+}
+div[data-type="ca-design-system/card"] {
+  border: 1px solid;
+  padding: 1rem;
+  border-bottom: 0.3rem solid #33705B;
+  border-radius: 0.3rem;
+  min-width: 250px;
+  min-height: 50px;
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+}
+div[data-type="ca-design-system/card"]:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cagov-card h3 {
+  color: #33705B !important;
+  margin-bottom: 0 !important;
+}
+.cagov-card svg {
+  min-width: 24px;
+  fill: #33705B;
+}
+
+.cagov-card .components-button.is-pressed {
+  background: none;
+}
+
+/*
+.block-editor-url-input__button {
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 0;
+}*/
+.components-button.has-icon .dashicon {
+  margin-right: 2px;
+}
+.disp-none {
+  display: none;
+}
+.url-input-form {
+  padding: 8px 8px 0 8px;
+}

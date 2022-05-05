@@ -1,0 +1,31 @@
+{
+  "name": "@cagov/ds-accordion",
+  "version": "1.0.6",
+  "description": "Accordions are expandable sections of content. Each section contains a heading (H2 or H3), a plus button (+), and more body text when opened.
+
+  Accordions hide information unless someone opens them. This requires an extra action, which means readers have to do extra work to get this information. People cannot scan for information that’s in an accordion.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha",
+    "build:js": "rollup --config rollup.config.js",
+    "build": "npm run build:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cagov/design-system/tree/main/components/accordion"
+  },
+  "keywords": [
+    "web component"
+  ],
+  "author": "ca.gov",
+  "license": "ISC",
+  "devDependencies": {
+    "@open-wc/testing": "^3.0.0-next.2",
+    "lit": "^2.0.0-rc.2",
+    "rollup": "^2.52.2",
+    "rollup-plugin-import-css": "^2.0.1"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

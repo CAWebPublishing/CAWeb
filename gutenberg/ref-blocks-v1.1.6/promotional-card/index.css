@@ -1,0 +1,137 @@
+/* Promotional card styles */
+
+/* Grid styles, layout */
+.cagov-promotional-button-grid.cagov-grid {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-row-gap: 64px;
+}
+
+@supports (width: min(250px, 100%)) {
+    .cagov-promotional-button-grid.cagov-grid {
+        grid-template-columns: repeat(auto-fit, minmax(576px, 576px));
+    }
+}
+
+@media (max-width: 719px) {
+    .cagov-promotional-card .cagov-card-body-content p {
+        max-width: 550px;
+    }
+}
+
+.cagov-promotional-button-grid {
+    margin-top: 48px;
+}
+
+.cagov-promotional-card {
+    height: 100%;
+    background-color: #F9F9FA;
+    border-radius: 5px;
+    max-width: 576px;
+    margin: 24px 0;
+/* 
+    margin-top: 0px;
+    margin-bottom: 64px; */
+    background-color: #F9F9FA;
+    border-radius: 5px;
+}
+
+.cagov-promotional-card .cagov-card-image {
+    height: auto;
+    min-height: 338px;
+}
+
+.cagov-promotional-card .cagov-card-content {
+    padding: 24px;
+}
+
+/* Card typography */
+.cagov-promotional-card h2,
+.cagov-promotional-card .card-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.cagov-promotional-card .cagov-card-body-content p {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 28.8px;
+}
+
+.cagov-promotional-card .cagov-card-content {
+    padding: 24px;
+}
+
+@media (max-width: 719px) {
+    .cagov-promotional-card .cagov-card-body-content p {
+        max-width: 550px;
+    }
+}
+
+/* General card styles (to consolidate) */
+.cagov-card-image .button-large {
+    margin: 24px;
+    padding: 0;
+    height: auto;
+    width: auto;
+    font-size: 18px;
+    display: inline-block !important;
+}
+
+.cagov-card-image .image-button {
+    margin: 0px;
+    padding: 0px;
+    height: auto;
+    width: auto;
+    font-size: 18px;
+    display: inline-block !important;
+}
+
+.cagov-card-body .block-list-appender  {
+    margin: 0 20px 0 0 !important;
+}
+
+.cagov-card-image .ui-label {
+    display: inline-block;
+    padding: 24px;
+}
+
+.cagov-card-image-set-link {
+    padding: 24px;
+}
+
+.cagov-date-range-container {
+    margin-bottom: 16px;
+    font-size: 23px;
+    line-height: 39px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.cagov-date-range-container .cagov-card-date  {
+    display: inline-block;
+
+}
+
+.cagov-date-range-container .cagov-card-start-date:after {
+    content: '–';   
+}
+
+/* UI Button */
+.cagov-promotional-card .wp-block-button {
+    background-color: transparent;
+}
+
+.cagov-promotional-card .block-editor-rich-text__editable wp-block-button__link.rich-text,
+.cagov-promotional-card .wp-block-button .wp-block-button__link {
+    background-color: #064E66;
+    padding: 24px 10px !important;
+    border-radius: 5px;
+}
+
+.cagov-promotional-card .block-editor-rich-text__editable wp-block-button__link.rich-text,
+.cagov-promotional-card .wp-block-button a.wp-block-button__link {
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 700 !important;
+}

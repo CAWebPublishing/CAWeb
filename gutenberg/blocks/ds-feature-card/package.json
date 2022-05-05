@@ -1,7 +1,7 @@
 {
 	"name": "ds-feature-card",
 	"version": "0.1.0",
-	"description": "Design System Web Component Description",
+	"description": "Design System component description, pull from design system website or project assets from PM",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
@@ -13,7 +13,7 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
-		"postbuild": "npm i @cagov/%npm_package_name%"
+		"postbuild": "npm i @cagov/$npm_package_name"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^22.5.0"

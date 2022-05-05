@@ -1,0 +1,13 @@
+.edit-post-visual-editor ol.steps li span.has-black-color,
+.edit-post-visual-editor ol.steps li .cagov-step-list-content, 
+.edit-post-visual-editor .cagov-step-list li span.has-black-color,
+.edit-post-visual-editor .cagov-step-list li .cagov-step-list-content,
+.edit-post-visual-editor li {
+  margin-top: 1rem;
+  padding-bottom: 2rem !important;
+}
+
+ol.steps li:last-child, .cagov-step-list li:last-child {
+    border-left: none;
+    margin-left: 5px;
+}
