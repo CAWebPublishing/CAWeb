@@ -34,7 +34,7 @@
   },
   "scripts": {
     "new-block": "cd gutenberg/ && npm run new-block",
-    "prebuild": "cd gutenberg/ && npm run build",
+    "prebuild": "npm i && cd gutenberg/ && npm run build",
     "build": "gulp build",
     "build-block": "cd gutenberg/ && gulp build-block --name=%npm_config_name%",
     "preinstall": "cd gutenberg/ && npm i",

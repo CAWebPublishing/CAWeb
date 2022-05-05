@@ -5,16 +5,11 @@
  * @package CAWeb
  */
 
-$caweb_search = get_option( 'ca_google_search_id', '' );
-
-$caweb_search_nonce = wp_create_nonce( 'caweb_google_cse' );
-$caweb_verified     = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_key( $caweb_search_nonce ), 'caweb_google_cse' );
-$caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 <!-- mobile navigation controls -->
 <div class="cagov-nav mobile-icons grid-mobile-icons">
-	<?php if ( ! empty( $caweb_search ) ) : ?>
+	<?php if ( ! empty( $caweb_google_search_id ) ) : ?>
 	<div class="cagov-nav mobile-search">
 		<button class="search-btn" aria-expanded="true">
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="17px"

@@ -98,7 +98,10 @@ function caweb_setup_theme() {
 	}
 
 	// Gutenberg is active.
-	if ( function_exists( 'register_block_type' ) ) {
+	// CAGov Design System Enabled */
+	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
+
+	if ( $caweb_enable_design_system && function_exists( 'register_block_type' ) ) {
 		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
 	}
 

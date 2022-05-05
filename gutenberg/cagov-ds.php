@@ -41,7 +41,8 @@ function cagov_ds_enqueue_block_editor_assets(){
         'wp-editor',
         'wp-i18n',
         'wp-block-editor',
-        'wp-rich-text'
+        'wp-rich-text',
+        'wp-components'
     );
 
     wp_register_script( 'cagov-ds-gutenberg', cagov_ds_get_min_file( '/js/gutenberg.js', 'js' ), $deps, '1.0.0', true );

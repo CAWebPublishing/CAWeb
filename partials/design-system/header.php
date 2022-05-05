@@ -5,20 +5,24 @@
  * @package CAWeb
  */
 
-global $post;
 
-$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
 $caweb_loaded               = isset( $args['loaded'] ) && $args['loaded'];
 $caweb_fixed_header         = ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
 $caweb_color                = get_option( 'ca_site_color_scheme', 'cagov' );
 $caweb_schemes              = caweb_color_schemes( caweb_template_version(), 'filename' );
 $caweb_colorscheme          = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'cagov';
 
+/* Branding */
+$caweb_logo          = '' !== esc_url( get_option( 'header_ca_branding' ) ) ? esc_url( get_option( 'header_ca_branding' ) ) : '';
+$caweb_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text' ) : caweb_get_attachment_post_meta( $caweb_logo, '_wp_attachment_image_alt' );
+
+
 /* Search */
+$caweb_google_search_id     = get_option( 'ca_google_search_id', '' );
 $caweb_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled' );
 
+
 /* Google Translate */
-$caweb_google_search_id     = get_option( 'ca_google_search_id', '' );
 $caweb_google_trans_enabled = get_option( 'ca_google_trans_enabled' );
 $caweb_google_trans_page    = get_option( 'ca_google_trans_page', '' );
 $caweb_google_trans_icon    = get_option( 'ca_google_trans_icon', '' );
@@ -51,25 +55,23 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 	// require_once 'content/bar-location.php';
 
 	// if not using new design system.
-	if ( ! $caweb_enable_design_system ) {
-		/* Include Settings Bar */
-		// require_once 'content/bar-settings.php';
-	}
+	/* Include Settings Bar */
+	// require_once 'content/bar-settings.php';
 
 	?>
 	<div class="site-header">
-		<div class="container with-logo">
-	<?php
-		/* Include Branding */
-		require_once 'branding.php';
+		<div class="container<?php echo ! empty( $caweb_logo ) ? ' with-logo': '' ?>">
+		<?php
+			/* Include Branding */
+			require_once 'branding.php';
 
-		// Include Mobile Controls.
-		require_once 'mobile-controls.php';
+			// Include Mobile Controls.
+			require_once 'mobile-controls.php';
 
-		// Include Search
-		require_once 'search-form.php';
+			// Include Search
+			require_once 'search-form.php';
 
-	?>
+		?>
 		</div>
 	</div>
 	<cagov-site-navigation>

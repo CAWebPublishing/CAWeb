@@ -7,6 +7,8 @@
  * @package CAWeb
  */
 
+global $post;
+
 get_header();
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
