@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -23,40 +23,32 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save(props) {
-
-    const attributes = props.attributes;
-    let { title, body, mediaURL, mediaAlt, mediaWidth, mediaHeight } = attributes;
-
-    // let titleTag = "h1"; // was h2 - @TODO update spec with this change - but block will need to search for text with a different attribute
-
-    // Try to remove these classes from main wrapper wp-block-ca-design-system-hero wp-block-cagov-hero
-    return (
-        <div
-            class="cagov-feature-card cagov-block cagov-with-sidebar cagov-with-sidebar-left cagov-bkgrd-gry"
-        >
-            <div>
-                <div class="cagov-stack cagov-p-2 cagov-featured-sidebar">
-                    <h1>{title}</h1>
-                    <div class="cagov-hero-body-content">
-                        <RichText.Content
-                            tagName="div"
-                            className="cagov-feature-card-body-content"
-                            value={ body }
-                        >
-                            {/*editor.InnerBlocks.Content*/}
-                        </RichText.Content> 
-                    </div>
-                </div>
-            </div>
-            {mediaURL && 
-						<img
-							class="cagov-featured-image"
-							src={ mediaURL }
-							alt={ mediaAlt }
-							width={ mediaWidth }
-							height={ mediaHeight }
-						/>
-					}
-       </div>
-    );
+	const blockProps = useBlockProps.save();
+	const {
+		attributes: { title, body, mediaURL },
+	} = props;
+	
+	return (
+		<div
+		  class="wp-block-ca-design-system-hero cagov-with-sidebar cagov-with-sidebar-left cagov-featured-section cagov-bkgrd-gry cagov-block wp-block-cagov-hero"
+		>
+		  <div>
+			<div class="cagov-stack cagov-p-2 cagov-featured-sidebar">
+			  <h1>{title}</h1>
+			  <div class="cagov-hero-body-content">
+				{body}
+			  </div>
+			</div>
+			<div>
+			  <img
+				class="cagov-featured-image"
+				src={mediaURL}
+				alt=""
+				width="1024"
+				height="683"
+			  />
+			</div>
+		  </div>
+		</div>
+	);
 }

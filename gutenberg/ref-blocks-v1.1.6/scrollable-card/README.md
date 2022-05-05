@@ -1,3 +1,0 @@
-# Scrollable Grid Card
-
-## Description

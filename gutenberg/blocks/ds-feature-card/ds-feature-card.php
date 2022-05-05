@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Ds Feature Card
- * Description:       Design System component description, pull from design system website or project assets from PM
+ * Description:       Design System Web Component Description
  * Requires at least: 5.8
  * Requires PHP:      7.0
  * Version:           0.1.0
@@ -10,7 +10,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       ds-feature-card
  *
- * @package           cagov-design-system
+ * @package           ca-design-system
  */
 
 /**
@@ -20,7 +20,7 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function cagov_design_system_ds_feature_card_block_init() {
+function ca_design_system_ds_feature_card_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'cagov_design_system_ds_feature_card_block_init' );
+add_action( 'init', 'ca_design_system_ds_feature_card_block_init' );

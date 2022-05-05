@@ -11,7 +11,21 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText, BlockControls, MediaUpload } from '@wordpress/block-editor';
+
+/**
+ * Add additional WordPress React Components
+ * 
+ * @see https://developer.wordpress.org/block-editor/reference-guides/components/
+ */
+ import { Toolbar, IconButton  } from '@wordpress/components';
+
+ /**
+  * Add additional WordPress React Components
+  * 
+  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-element/
+  */
+ import { Fragment  } from '@wordpress/element';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -20,13 +34,6 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-
-// https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/nested-blocks-inner-blocks/
-import { RichText, MediaUpload, InnerBlocks } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
-
-// https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/
-// https://github.com/WordPress/gutenberg/blob/HEAD/packages/block-editor/src/components/rich-text/README.md
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -37,80 +44,82 @@ import { Button } from '@wordpress/components';
  * @return {WPElement} Element to render.
  */
 export default function Edit(props) {
-	let { setAttributes } = props;
-	const attributes = props.attributes;
-	let {
-		title,
-		mediaID,
-		mediaURL,
-		mediaAlt,
-		mediaWidth,
-		mediaHeight,
-	} = attributes;
-	const ALLOWED_BLOCKS = ['core/button', 'core/paragraph'];
-
-	const onSelectImage = function (media) {
-		return props.setAttributes({
-			mediaURL: media.sizes.large.url,
-			mediaID: media.id,
-			mediaAlt: media.description,
-			mediaWidth: media.sizes.large.width,
-			mediaHeight: media.sizes.large.height,
-		});
+	const {
+		attributes: { title, body, mediaURL },
+		setAttributes
+	} = props;
+	const blockProps = useBlockProps();
+	const onChangeTitle = ( newTitle ) => {
+		setAttributes( { title: newTitle } );
+	};
+	
+	const onChangeBody = ( newBody ) => {
+		setAttributes( { body: newBody } );
 	};
 
-	return (
-		<div class="cagov-feature-card cagov-with-sidebar cagov-with-sidebar-start cagov-background-gray">
-			<div>
-				<div class="cagov-feature-card-sidebar">
-					<RichText
-						tagName="h2"
-						placeHolder={__('Write title…', 'cagov-design-system')}
-						value={title}
-						onChange={(title) => setAttributes({ title })}
-					/>
+	const onChangeImage = ( newImage ) => {
+		console.log(newImage);
+		setAttributes( { mediaURL: newImage.url } );
+	};
 
-					<div class="cagov-feature-card-body-content">
-						<InnerBlocks allowedBlocks={ALLOWED_BLOCKS} />
+	
+	return (
+		<Fragment>
+			<BlockControls>
+				<Toolbar>
+					<MediaUpload 
+						onSelect={onChangeImage}
+						allowedTypes={['image']}
+						labels={{
+							title: __('Featured Card Image'),
+						}}
+						render={ ( { open } ) => (
+							<IconButton 
+							className="components-toolbar__control"
+							label={__('Edit Featured Card Image')}
+							icon="format-image"
+							onClick={open}
+							/>
+						) }
+					/>
+				</Toolbar>
+			</BlockControls>
+			<div {...blockProps}
+		  class="wp-block-ca-design-system-hero cagov-with-sidebar cagov-with-sidebar-left cagov-featured-section cagov-bkgrd-gry cagov-block wp-block-cagov-hero"
+		>
+				<div>
+					<div class="cagov-stack cagov-p-2 cagov-featured-sidebar">
+					<RichText 
+						tagName="h1" 
+						value={title} 
+						onChange={ onChangeTitle }
+						placeholder="Featured Card Title"
+					/>
+					<RichText 
+						tagName="div" 
+						className='cagov-hero-body-content' 
+						value={body} 
+						onChange={ onChangeBody }
+						placeholder="Featured Card Body"
+					/>
 					</div>
+					{
+						mediaURL ?
+						<div>
+							<img
+								class="cagov-featured-image"
+								src={mediaURL}
+								alt=""
+								width="1024"
+								height="683"
+							/>
+						</div>
+						:
+						''
+					}
 				</div>
-			
-				<MediaUpload
-					onSelect={onSelectImage}
-					allowedTypes="image"
-					value={mediaID}
-					render={(obj) => {
-						return (
-							<div class="cagov-feature-card-image">
-								{mediaID && (
-									<img
-										class="cagov-featured-image"
-										src={mediaURL}
-										alt={mediaAlt}
-										width={mediaWidth}
-										height={mediaHeight}
-									/>
-									)
-								}
-								<Button
-									className={
-										attributes.mediaID
-											? 'image-button'
-											: 'button button-large'
-									}
-									onClick={obj.open}
-								>
-									{!mediaID ? 
-									__('Upload image', 'cagov-design-system')
-									 : __('Change image', 'cagov-design-system') 
-									}
-								</Button>
-							</div>
-						);
-					}}
-				/>
-				
 			</div>
-		</div>
+
+		</Fragment>
 	);
 }

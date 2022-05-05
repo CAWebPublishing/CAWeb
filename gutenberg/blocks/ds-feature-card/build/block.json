@@ -1,17 +1,41 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "cagov/ds-feature-card",
+	"name": "ca-design-system/feature-card",
 	"version": "0.1.0",
 	"title": "Feature Card",
-	"category": "cagov-design-system",
-	"icon": "format-aside",
-	"description": "The feature card highlights an action you want people to take or important information on the homepage. It is the first thing a visitor sees.",
+	"category": "ca-design-system",
+	"icon": "smiley",
+	"description": "Design System Web Component Description",
 	"supports": {
 		"html": true
 	},
+	"attributes": {
+        "title": {
+          "type": "string",
+          "source": "text",
+		  "selector": ".wp-block-ca-design-system-hero h1"
+        },
+        "body": {
+          "type": "string",
+          "source": "text",
+		  "selector": ".wp-block-ca-design-system-hero .cagov-hero-body-content"
+        },
+		"mediaURL": {
+		  "type": "string",
+		  "source": "attribute",
+		  "selector": ".wp-block-ca-design-system-hero img",
+		  "attribute": "src"
+		}
+      },
+      "example": {
+        "attributes": {
+          "title": "Accordion Title",
+          "content": "Accordion Body"
+        }
+      },
 	"textdomain": "ds-feature-card",
-	"editorScript": "cagov-design-system-gutenberg",
-	"editorStyle": "cagov-design-system-gutenberg",
-	"style": "cagov-design-system-gutenberg-style"
+	"editorScript": "cagov-ds-gutenberg",
+	"editorStyle": "cagov-ds-gutenberg",
+	"style": "cagov-ds-gutenberg-style"
 }

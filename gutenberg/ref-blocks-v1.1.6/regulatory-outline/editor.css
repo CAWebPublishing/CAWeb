@@ -1,7 +1,0 @@
-ol.cagov-regulatory-outline {
-    left: 15px
-}
-
-ol.cagov-regulatory-outline li::before, ol.cagov-regulatory-outline ol li::before {
-    left: -80px;
-}
