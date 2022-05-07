@@ -27,12 +27,12 @@ $caweb_header_file = 'partials/content/';
 if ( $caweb_enable_design_system ) {
 	$caweb_post_container_class    .= ' page-container-ds';
 	$caweb_post_main_content_class .= '  main-content-ds';
-	$caweb_header_file = 'partials/design-system/';
+	$caweb_header_file              = 'partials/design-system/';
 }
 
 ?>
 <body <?php body_class( 'primary' ); ?>>
-	<?php 
+	<?php
 		/**
 		 * Loads CAWeb <header> tag.
 		 */
@@ -41,7 +41,7 @@ if ( $caweb_enable_design_system ) {
 		/**
 		 * Loads the post container
 		 */
-		require_once 'partials/single.php'; 
+		require_once 'partials/single.php';
 	?>
 </body>
 </html>
