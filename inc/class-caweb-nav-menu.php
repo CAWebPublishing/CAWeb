@@ -462,7 +462,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 							$sub_nav .= sprintf( '<a class="expanded-menu-dropdown-link js-event-hm-menu" href="%1$s" tabindex="-1">%2$s</a>', $item->url, $item->title );
 						}
 
-						$sub_nav = sprintf('<div class="expanded-menu-dropdown">%1$s</div>', $sub_nav);
+						$sub_nav = sprintf( '<div class="expanded-menu-dropdown">%1$s</div>', $sub_nav );
 					} else {
 						$link = sprintf(
 							'<a class="expanded-menu-section-header-link js-event-hm-menu" href="%1$s">%2$s</a>',
