@@ -109,8 +109,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$mobile = '<div class="expanded-menu-section mobile-only"><strong class="expanded-menu-section-header"><a class="expanded-menu-section-header-link js-event-hm-menu" href="/">Home</a></strong></div>';
 
 					$nav_menu = sprintf(
-						'<nav id="navigation" class="main-navigation hidden-print nav"><div class="expanded-menu" role="navigation" aria-label="Site Navigation" aria-hidden="false" id="main-menu">
-					<ul class="expanded-menu-grid">%1$s%2$s</ul></div></nav>',
+						'<nav id="main-menu" class="expanded-menu" role="navigation" aria-hidden="false" aria-label="Site Navigation">
+					<div class="expanded-menu-grid">%1$s%2$s</div></nav>',
 						$mobile,
 						$nav_menu
 					);
@@ -442,18 +442,18 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					if ( 0 < $child_count && 'singlelevel' !== $args->style ) {
 						/* Arrow */
 						$arrow = '<span class="expanded-menu-section-header-arrow">
-							<svg width="11" height="7"
+							<svg width="11" height="7" aria-hidden="true" 
 							class="expanded-menu-section-header-arrow-svg" viewBox="0 0 11 7" fill="none"
 							xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd"
 								d="M1.15596 0.204797L5.49336 5.06317L9.8545 0.204797C10.4293 -0.452129 11.4124 0.625368 10.813 1.28143L5.90083 6.82273C5.68519 7.05909 5.32606 7.05909 5.1342 6.82273L0.174341 1.28143C-0.400433 0.6245 0.581838 -0.452151 1.15661 0.204797H1.15596Z"
-								fill="#064E66" />
+								/>
 							</svg>
 						</span>';
 
 						$link = sprintf(
-							'<button class="expanded-menu-section-header-link js-event-hm-menu" data-toggle="dropdown">
-						<span>%1$s</span>%2$s</button>',
+							'<strong class="expanded-menu-section-header"><button class="expanded-menu-section-header-link js-event-hm-menu">
+						<span>%1$s</span>%2$s</button></strong>',
 							$item->title,
 							$arrow
 						);
@@ -461,6 +461,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 						foreach ( $child_links as $i => $item ) {
 							$sub_nav .= sprintf( '<a class="expanded-menu-dropdown-link js-event-hm-menu" href="%1$s" tabindex="-1">%2$s</a>', $item->url, $item->title );
 						}
+
+						$sub_nav = sprintf( '<div class="expanded-menu-dropdown">%1$s</div>', $sub_nav );
 					} else {
 						$link = sprintf(
 							'<a class="expanded-menu-section-header-link js-event-hm-menu" href="%1$s">%2$s</a>',
@@ -475,10 +477,10 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 					/* Create Link */
 					$nav_item .= sprintf(
-						'<li class="expanded-menu-col js-cagov-navoverlay-expandable expanded-menu-section">
-						<strong class="expanded-menu-section-header">%1$s</strong>
-						<div class="expanded-menu-section">%2$s</div>
-					  </li>',
+						'<div class="expanded-menu-col js-cagov-navoverlay-expandable">
+						<div class="expanded-menu-section">%1$s%2$s
+						</div>
+					  </div>',
 						$link,
 						$sub_nav
 					);

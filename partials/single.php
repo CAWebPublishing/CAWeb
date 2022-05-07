@@ -7,11 +7,6 @@
  * @package CAWeb
  */
 
-/**
- * Loads CAWeb <header> tag.
- */
-require_once 'header.php';
-
 ?>
 
 	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?>">
