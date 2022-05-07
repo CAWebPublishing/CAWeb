@@ -97,11 +97,6 @@ function caweb_setup_theme() {
 		}
 	}
 
-	// Gutenberg is active.
-	if ( function_exists( 'register_block_type' ) ) {
-		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
-	}
-
 	/* Insert Parent Content Type Category */
 	wp_insert_term( 'Content Types', 'category' );
 
@@ -452,7 +447,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$pages     = array( 'toplevel_page_caweb_options', 'caweb-options_page_caweb_multi_ga', 'caweb-options_page_caweb_api', 'nav-menus.php' );
 	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
-	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
 	$version                    = caweb_template_version();
 	$color                      = get_option( 'ca_site_color_scheme', 'oceanside' );
 	$colorscheme                = caweb_color_schemes( $version, 'filename', $color );

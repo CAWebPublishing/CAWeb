@@ -451,6 +451,7 @@ function caweb_display_page_header_options() {
 							data-update="Set as Default Logo" 
 							data-uploader="false"
 							>Browse</button>
+						<button id="resetOrgLogo" class="btn btn-outline-primary" type="button">Reset</button>
 					</div>
 				</div>
 
