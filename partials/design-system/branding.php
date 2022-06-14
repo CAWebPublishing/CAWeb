@@ -15,6 +15,6 @@
 <?php else: ?>
 <a class="grid-org-name" href="/">
 	<span class="org-name-dept"><?php print esc_attr( get_bloginfo( 'name' ) ); ?></span>
-	<span class="org-name-state">California</span>
+	<span class="org-name-state">State of California</span>
 </a>
 <?php endif; ?>
