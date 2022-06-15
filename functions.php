@@ -127,13 +127,15 @@ function caweb_setup_theme() {
 	Content Categories under Content Types Category
 	*/
 	foreach ( $caweb_categories as $cat ) {
-		wp_insert_term(
-			$cat,
-			'category',
-			array(
-				'parent' => get_cat_ID( 'Content Types' ),
-			)
-		);
+		if( ! term_exists( $cat,'category', get_cat_ID( 'Content Types' ) ) ){
+			wp_insert_term(
+				$cat,
+				'category',
+				array(
+					'parent' => get_cat_ID( 'Content Types' ),
+				)
+			);
+		}
 	}
 
 	/**
