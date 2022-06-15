@@ -10,7 +10,7 @@
 /* CAGov Design System */
 $caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
 
-$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', "page-title" );
+$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', 'page-title' );
 $caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
 $caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
 
@@ -26,7 +26,7 @@ get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php 
+	<?php
 		/**
 		 * Loads CAWeb <header> tag.
 		 */
