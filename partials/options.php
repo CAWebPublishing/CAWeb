@@ -770,7 +770,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					$readmore        = 'on' === $data['button'] ? ' checked' : '';
 					$readmore_text   = isset( $data['text'] ) && ! empty( $data['text'] ) ? substr( $data['text'], 0, 16 ) : 'More Information';
 					$readmore_url    = $data['url'];
-					$readmore_target = '_blank' === $data['target'] ? ' checked' : '';
+					$readmore_target = '_blank' === $data['target'] || 'on' === $data['target'] ? ' checked' : '';
 
 					$alert_icon = $data['icon'];
 					?>

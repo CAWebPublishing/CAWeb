@@ -7,14 +7,35 @@
  * @package CAWeb
  */
 
+/* CAGov Design System */
+$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
+
+$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', 'page-title' );
+$caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
+$caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
+
+$caweb_header_file = 'partials/content/';
+
+if ( $caweb_enable_design_system ) {
+	$caweb_post_container_class    .= ' page-container-ds';
+	$caweb_post_main_content_class .= '  main-content-ds';
+	$caweb_header_file              = 'partials/design-system/';
+}
+
 get_header();
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once 'partials/header.php'; ?>
+	<?php
+		/**
+		 * Loads CAWeb <header> tag.
+		 */
+		require_once $caweb_header_file . 'header.php';
+
+	?>
 
 
-	<div id="main-content" class="main-content">
+	<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?>">
 		<div class="section">
 			<main class="main-primary">
 

@@ -127,13 +127,15 @@ function caweb_setup_theme() {
 	Content Categories under Content Types Category
 	*/
 	foreach ( $caweb_categories as $cat ) {
-		wp_insert_term(
-			$cat,
-			'category',
-			array(
-				'parent' => get_cat_ID( 'Content Types' ),
-			)
-		);
+		if ( ! term_exists( $cat, 'category', get_cat_ID( 'Content Types' ) ) ) {
+			wp_insert_term(
+				$cat,
+				'category',
+				array(
+					'parent' => get_cat_ID( 'Content Types' ),
+				)
+			);
+		}
 	}
 
 	/**
@@ -158,25 +160,6 @@ function caweb_setup_theme() {
 	 * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
 	 */
 	register_nav_menus( caweb_nav_menu_theme_locations() );
-
-	/**
-	 * This action hook is used to add additional headers to the outgoing HTTP response.
-	 * Add $_COOKIE variable for Alert Banners
-	 * Session variables used to be used but are no longer supported in WP since 4.9.
-	 *
-	 * @since WordPress 4.9
-	 * @see https://wordpress.org/support/topic/the-loopback-request-to-your-site-failed-4/page/2/
-	 */
-	$caweb_alerts = get_option( 'caweb_alerts', array() );
-
-	if ( ! empty( $caweb_alerts ) && ! headers_sent() ) {
-		foreach ( $caweb_alerts as $c => $data ) {
-			if ( ! isset( $_COOKIE[ "caweb-alert-id-$c" ] ) ) {
-				setcookie( "caweb-alert-id-$c", true );
-				$_COOKIE[ "caweb-alert-id-$c" ] = true;
-			}
-		}
-	}
 
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );
@@ -317,6 +300,8 @@ function caweb_wp_enqueue_scripts() {
 		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
 		'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
 		'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
+		'caweb_alerts'                => get_option( 'caweb_alerts', array() ),
+		'is_front'                    => is_front_page(),
 		'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
 	);
