@@ -43,10 +43,8 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
+	<div id="caweb_alerts"></div>
 	<?php
-
-	/* Alerts */
-	require_once 'alerts.php';
 
 	/* Include Utility Header */
 	require_once 'utility-header.php';
