@@ -27,6 +27,19 @@ if("" !== args.caweb_multi_ga){
   s.parentNode.insertBefore(ga, s);
 })();
 
+// Google Analytics4
+if("" !== args.ca_google_analytic4_id && undefined !== args.ca_google_analytic4_id){
+
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag(){dataLayer.push(arguments);}
+
+	gtag('js', new Date());
+	gtag('config', 'G-69TD0KNT0F'); // statewide
+	gtag('config', args.ca_google_analytic4_id); // individual agency
+	gtag('config', 'G-Y7T2KCM7P1'); // CAWeb multisite
+}
+
 // Google Tag Manager
 if("" !== args.ca_google_tag_manager_id && undefined !== args.ca_google_tag_manager_id){
 	(function(w,d,s,l,i){
@@ -111,7 +124,7 @@ if("" !== args.ca_google_search_id && undefined !== args.ca_google_search_id){
   })();
 }
 
-  /* Google Translate */
+/* Google Translate */
 if( args.ca_google_trans_enabled ){
   function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
