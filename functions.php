@@ -306,8 +306,8 @@ function caweb_wp_enqueue_scripts() {
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
 	);
 
-	$ga = get_option( 'ca_google_analytic_id', '' );
-	$ga4 = get_option( 'ca_google_analytic4_id', '' );
+	$ga   = get_option( 'ca_google_analytic_id', '' );
+	$ga4  = get_option( 'ca_google_analytic4_id', '' );
 	$gtag = get_option( 'ca_google_tag_manager_id', '' );
 
 	if ( ! empty( $gtag ) ) {

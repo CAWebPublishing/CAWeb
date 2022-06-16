@@ -485,7 +485,7 @@ function caweb_display_google_options() {
 	$google_search_id = get_option( 'ca_google_search_id', '' );
 
 	// Analytics ID.
-	$google_analytic_id = get_option( 'ca_google_analytic_id', '' );
+	$google_analytic_id  = get_option( 'ca_google_analytic_id', '' );
 	$google_analytic4_id = get_option( 'ca_google_analytic4_id', '' );
 
 	// Tag Manager ID.

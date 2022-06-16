@@ -50,7 +50,7 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 		// user can manage network options.
 		if ( current_user_can( 'manage_network_options' ) ) {
 			/* If on root site */
-			if( 1 === get_current_blog_id() ){
+			if ( 1 === get_current_blog_id() ) {
 				/* Add Multisite Google Analytics Menu */
 				$wp_admin_bar->add_node(
 					array(
@@ -65,7 +65,7 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 			/* Remove Visual Builder */
 			$wp_admin_bar->remove_node( 'et-use-visual-builder' );
 		}
-	}else{
+	} else {
 		/* Add GitHub API Key Menu */
 		$wp_admin_bar->add_node(
 			array(
