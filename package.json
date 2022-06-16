@@ -33,11 +33,7 @@
     "yargs": "^17.4.1"
   },
   "scripts": {
-    "new-block": "cd gutenberg/ && npm run new-block",
-    "prebuild": "npm i && cd gutenberg/ && npm run build",
     "build": "gulp build",
-    "build-block": "cd gutenberg/ && gulp build-block --name=%npm_config_name%",
-    "preinstall": "cd gutenberg/ && npm i",
     "install": "npm i -g npm-check-updates",
     "postinstall": "npm config set gulp-cli --global && npm rebuild node-sass"
   }

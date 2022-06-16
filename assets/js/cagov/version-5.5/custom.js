@@ -17,15 +17,13 @@
 	}
 
 	if( "" !== args.caweb_alerts && undefined !== args.caweb_alerts ){
-		args.caweb_alerts.forEach(function(obj, alert){
-			var display = null === getCookie('caweb-alert-id-' + alert) || "true" === getCookie('caweb-alert-id-' + alert);
-
-			display = 'active' == obj.status || 'on' == obj.status;
-
-			display = display && ( (args.is_front && 'home' === obj.page_display) || 'all' == obj.page_display );
+		args.caweb_alerts.forEach(function(obj, alert){			
 			
-			
-			if( display ){
+			if( 
+				( null === getCookie('caweb-alert-id-' + alert) || "true" === getCookie('caweb-alert-id-' + alert) ) &&
+				( 'active' == obj.status || 'on' == obj.status ) &&
+				( ( args.is_front && 'home' === obj.page_display ) || 'all' == obj.page_display  )
+			 ){
 				document.cookie = 'caweb-alert-id-' + alert + '=true';
 				createAlertBanner(obj, alert);
 			}
@@ -112,7 +110,7 @@
 
 	$('.caweb-alert-close').click( function(e){ 
 		var alert_id = this.dataset.id; 
-		document.cookie = 'caweb-alert-id-' + alert_id + '=';
+		document.cookie = 'caweb-alert-id-' + alert_id + '=false';
 	});
 	
 	/* Fixed padding for wp-activate.php page when Navigation is fixed */

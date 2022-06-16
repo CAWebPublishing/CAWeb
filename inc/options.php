@@ -535,6 +535,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 	$caweb_google_options = array(
 		'ca_google_search_id',
 		'ca_google_analytic_id',
+		'ca_google_analytic4_id',
 		'ca_google_tag_manager_id',
 		'ca_google_tag_manager_approved',
 		'ca_google_meta_id',

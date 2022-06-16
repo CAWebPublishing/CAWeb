@@ -306,12 +306,22 @@ function caweb_wp_enqueue_scripts() {
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
 	);
 
-	if ( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ) {
-		$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
+	$ga   = get_option( 'ca_google_analytic_id', '' );
+	$ga4  = get_option( 'ca_google_analytic4_id', '' );
+	$gtag = get_option( 'ca_google_tag_manager_id', '' );
+
+	if ( ! empty( $gtag ) ) {
+		$localize_args['ca_google_tag_manager_id'] = $gtag;
 	}
 
-	if ( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ) {
-		$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
+	if ( ! empty( $ga ) ) {
+		$localize_args['ca_google_analytic_id'] = $ga;
+	}
+
+	if ( ! empty( $ga4 ) ) {
+		wp_enqueue_script( 'google-tag-manager-gtag', 'https://www.googletagmanager.com/gtag/js?id=' . $ga4, array(), CAWEB_VERSION, true );
+
+		$localize_args['ca_google_analytic4_id'] = $ga4;
 	}
 
 	$frontend_js_file = caweb_get_min_file( "/js/caweb-$version.js", 'js' );
