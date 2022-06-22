@@ -315,7 +315,7 @@ function caweb_multi_ga_menu_option_setup() {
 	// CAWeb Multisite Google Analytics Nonce.
 	$caweb_nonce = wp_create_nonce( 'caweb_theme_multisite_ga_option' );
 	$mulit_ga    = get_site_option( 'caweb_multi_ga', '' );
-	$mulit_ga4    = get_site_option( 'caweb_multi_ga4', '' );
+	$mulit_ga4   = get_site_option( 'caweb_multi_ga4', '' );
 
 	?>
 	<form id="caweb-multi-ga-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_multi_ga' ) ); ?>" method="POST">
