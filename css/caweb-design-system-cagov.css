@@ -360,325 +360,6 @@ cagov-site-navigation .search-container--small.hidden-search {
   border: 0;
 }
 
-/* skip-to-content */
-#skip-to-content {
-  position: relative;
-  left: 50% !important;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  width: 1px;
-  height: 1px;
-  z-index: 999;
-}
-
-#skip-to-content a {
-  width: 1px;
-  height: 1px;
-  text-align: center;
-  position: absolute !important;
-  left: 50% !important;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  clip: unset;
-  background-color: white;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-  overflow: hidden;
-}
-
-#skip-to-content a:focus {
-  width: 160px;
-  height: 27px;
-}
-
-/* footer */
-footer {
-  font-size: 1rem;
-}
-
-footer .container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  box-sizing: border-box;
-  max-width: var(--w-lg, 1176px);
-  margin: 0 auto;
-  padding: var(--s-2, 1rem);
-}
-
-footer a:hover {
-  color: var(--primary-dark-color, #1e1569);
-}
-
-footer a:focus {
-  outline: 2px solid var(--highlight-color, #fec02f);
-}
-
-footer .footer-secondary-links {
-  display: flex;
-  flex-direction: column;
-}
-
-footer .footer-secondary-links a {
-  margin-right: var(--s-3, 1.5rem);
-  padding-top: var(--s-1, 0.5rem);
-  padding-bottom: var(--s-1, 0.5rem);
-}
-
-footer .footer-secondary-links a span.external-link-icon,
-footer .footer-secondary-links a span.ca-gov-icon-external-link {
-  display: none;
-}
-
-footer .footer-secondary-links a:hover {
-  text-decoration: none;
-}
-
-footer .bg-light-grey svg {
-  padding: 0;
-}
-
-footer .bg-light-grey svg .ca {
-  fill: var(--cagov-highlight, #fec02f);
-}
-
-footer .bg-light-grey svg .gov {
-  fill: var(--cagov-primary-dark, #003484);
-}
-
-footer .cagov-logo {
-  padding-top: var(--s-1, 0.5rem);
-  padding-bottom: var(--s-1, 0.5rem);
-}
-
-footer .footer-secondary-links a,
-footer .copyright {
-  color: var(--black, #000);
-  padding-top: var(--s-1, 0.5rem);
-  padding-bottom: var(--s-1, 0.5rem);
-}
-
-footer .copyright {
-  margin: 0;
-}
-
-.bg-light-grey {
-  background-color: var(--gray-100, #f9f9fa);
-}
-
-.pt-0 {
-  padding-top: 0 !important;
-}
-
-@media (min-width: 991px) {
-  footer .footer-secondary-links,
-  footer .container {
-    margin-right: auto;
-    flex-direction: row;
-    align-items: center;
-  }
-  footer .footer-secondary-links.flex-col-end,
-  footer .container.flex-col-end {
-    flex-direction: column;
-    align-items: end;
-  }
-}
-
-/* translate widget loader */
-#google_translate_element {
-  font-size: var(--font-size-sm, 0.875rem);
-}
-
-/*official*/
-.official-header {
-  background-color: var(--gray-50, #fafafa);
-  padding: 0;
-  width: 100%;
-  /* google translate */
-}
-
-@media (max-width: 767px) {
-  .official-header {
-    width: 100vw;
-    padding: var(--s-1, 0.5rem) 0;
-  }
-}
-
-.official-header .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  max-width: var(--w-lg, 1176px);
-  min-height: 40px;
-  margin: 0 auto;
-  padding: 0 var(--s-2, 1rem) 0 var(--s-2, 1rem);
-}
-
-.official-header .official-logo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.official-header .official-logo .cagov-logo {
-  margin: 0 0 0 0;
-  display: flex;
-}
-
-.official-header svg {
-  padding: 0;
-  width: 33px;
-}
-
-.official-header svg .ca {
-  fill: var(--cagov-highlight, #fec02f);
-}
-
-.official-header svg .gov {
-  fill: var(--cagov-primary-dark, #003484);
-}
-
-.official-header .official-tag {
-  margin: 0 var(--s-1, 0.5rem);
-  font-size: var(--font-size-sm, 0.875rem);
-  display: inherit;
-}
-
-.official-header .official-languages a {
-  color: var(--black, #000);
-  padding: 0 var(--s-1, 0.5rem) 0 var(--s-1, 0.5rem);
-  text-decoration: underline;
-}
-
-.official-header .official-languages a:hover {
-  color: var(--black, #000);
-  text-decoration: none;
-}
-
-.official-header .official-languages a:focus {
-  outline: 2px solid var(--accent2-500, #ac8226);
-}
-
-.official-header .official-languages {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.official-header .official-languages .dropdown {
-  position: relative;
-}
-
-.official-header .official-languages button.offcial-more {
-  padding-right: 0;
-  border: none;
-  text-decoration: underline;
-  color: var(--black, #000);
-  background-color: var(--white, #fff);
-  text-decoration: underline;
-  transition: transform 0.3s;
-}
-
-.official-header .official-languages button.offcial-more:hover {
-  color: var(--black, #000);
-  text-decoration: none;
-}
-
-.official-header .official-languages button.offcial-more:focus {
-  outline: 2px solid var(--accent2-500, #ac8226);
-}
-
-.official-header .official-languages button.offcial-more[aria-expanded="false"] .caret-down {
-  transition: all 0.3s;
-}
-
-.official-header .official-languages button.offcial-more[aria-expanded="false"] .caret-down svg {
-  padding: 0 0 0 0;
-  width: 20px;
-  height: 18px;
-  overflow: visible;
-  position: relative;
-  right: 5px;
-}
-
-.official-header .official-languages button.offcial-more[aria-expanded="true"] .caret-down {
-  transition: transform 0.3s;
-}
-
-.official-header .official-languages button.offcial-more[aria-expanded="true"] .caret-down svg {
-  padding: 0 0 0 0;
-  width: 20px;
-  height: 18px;
-  position: relative;
-  top: 8px;
-  left: 4px;
-  overflow: visible;
-  transform: rotate(180deg);
-}
-
-.official-header .official-languages .dropdown-content {
-  background-clip: padding-box;
-  background-color: var(--white, #fff);
-  border: 1px solid var(--gray-200, #d4d4d7);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: var(--radius-2, 4px);
-  padding: var(--s-2, 1rem);
-  position: absolute;
-  right: 0px;
-  top: 100%;
-  text-align: left;
-  z-index: 1000;
-  min-width: 150px;
-  display: none;
-}
-
-.official-header .official-languages .dropdown-content.show {
-  display: flex;
-  flex-direction: column;
-}
-
-.official-header .goog-te-gadget {
-  max-height: 42px;
-  overflow: hidden;
-}
-
-.official-header .goog-te-gadget .goog-te-combo {
-  /* hardcoded translate widget stuff from cannabis site */
-  background-color: #fff;
-  border: 1px solid #bbb;
-  padding: 0.25rem;
-  color: #4e4e4e;
-}
-
-.official-header .goog-logo-link {
-  display: none;
-}
-
-.official-header #google_translate_element .skiptranslate.goog-te-gadget,
-.official-header .skiptranslate.goog-te-gadget a {
-  color: white;
-}
-
-.official-header .goog-te-gadget {
-  margin-bottom: -10px;
-  font-size: 11px;
-  color: #666;
-  white-space: nowrap;
-}
-
-.desktop-only {
-  display: none;
-}
-
-@media screen and (min-width: 800px) {
-  .desktop-only {
-    display: inline;
-  }
-}
-
 /* agency footer */
 section.site-footer {
   border-top: solid 1px var(--gray-300, #e1e0e3);
@@ -778,6 +459,39 @@ section.site-footer .footer-social-links a:hover svg path {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* skip-to-content */
+#skip-to-content {
+  position: relative;
+  left: 50% !important;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+  z-index: 999;
+}
+
+#skip-to-content a {
+  width: 1px;
+  height: 1px;
+  text-align: center;
+  position: absolute !important;
+  left: 50% !important;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  clip: unset;
+  background-color: white;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  overflow: hidden;
+}
+
+#skip-to-content a:focus {
+  width: 160px;
+  height: 27px;
 }
 
 /* Tablet and wider */
@@ -1201,6 +915,292 @@ cagov-site-navigation .expanded-menu-close-mobile-svg {
 
 .expanded-menu-section-header-arrow-svg {
   max-width: 20px;
+}
+
+/* footer */
+footer {
+  font-size: 1rem;
+}
+
+footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: var(--w-lg, 1176px);
+  margin: 0 auto;
+  padding: var(--s-2, 1rem);
+}
+
+footer a:hover {
+  color: var(--primary-dark-color, #1e1569);
+}
+
+footer a:focus {
+  outline: 2px solid var(--highlight-color, #fec02f);
+}
+
+footer .footer-secondary-links {
+  display: flex;
+  flex-direction: column;
+}
+
+footer .footer-secondary-links a {
+  margin-right: var(--s-3, 1.5rem);
+  padding-top: var(--s-1, 0.5rem);
+  padding-bottom: var(--s-1, 0.5rem);
+}
+
+footer .footer-secondary-links a span.external-link-icon,
+footer .footer-secondary-links a span.ca-gov-icon-external-link {
+  display: none;
+}
+
+footer .footer-secondary-links a:hover {
+  text-decoration: none;
+}
+
+footer .bg-light-grey svg {
+  padding: 0;
+}
+
+footer .bg-light-grey svg .ca {
+  fill: var(--cagov-highlight, #fec02f);
+}
+
+footer .bg-light-grey svg .gov {
+  fill: var(--cagov-primary-dark, #003484);
+}
+
+footer .cagov-logo {
+  padding-top: var(--s-1, 0.5rem);
+  padding-bottom: var(--s-1, 0.5rem);
+}
+
+footer .footer-secondary-links a,
+footer .copyright {
+  color: var(--black, #000);
+  padding-top: var(--s-1, 0.5rem);
+  padding-bottom: var(--s-1, 0.5rem);
+}
+
+footer .copyright {
+  margin: 0;
+}
+
+.bg-light-grey {
+  background-color: var(--gray-100, #f9f9fa);
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+@media (min-width: 991px) {
+  footer .footer-secondary-links,
+  footer .container {
+    margin-right: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+  footer .footer-secondary-links.flex-col-end,
+  footer .container.flex-col-end {
+    flex-direction: column;
+    align-items: end;
+  }
+}
+
+/* translate widget loader */
+#google_translate_element {
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+/*official*/
+.official-header {
+  background-color: var(--gray-50, #fafafa);
+  padding: 0;
+  width: 100%;
+  /* google translate */
+}
+
+@media (max-width: 767px) {
+  .official-header {
+    width: 100vw;
+    padding: var(--s-1, 0.5rem) 0;
+  }
+}
+
+.official-header .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  max-width: var(--w-lg, 1176px);
+  min-height: 40px;
+  margin: 0 auto;
+  padding: 0 var(--s-2, 1rem) 0 var(--s-2, 1rem);
+}
+
+.official-header .official-logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.official-header .official-logo .cagov-logo {
+  margin: 0 0 0 0;
+  display: flex;
+}
+
+.official-header svg {
+  padding: 0;
+  width: 33px;
+}
+
+.official-header svg .ca {
+  fill: var(--cagov-highlight, #fec02f);
+}
+
+.official-header svg .gov {
+  fill: var(--cagov-primary-dark, #003484);
+}
+
+.official-header .official-tag {
+  margin: 0 var(--s-1, 0.5rem);
+  font-size: var(--font-size-sm, 0.875rem);
+  display: inherit;
+}
+
+.official-header .official-languages a {
+  color: var(--black, #000);
+  padding: 0 var(--s-1, 0.5rem) 0 var(--s-1, 0.5rem);
+  text-decoration: underline;
+}
+
+.official-header .official-languages a:hover {
+  color: var(--black, #000);
+  text-decoration: none;
+}
+
+.official-header .official-languages a:focus {
+  outline: 2px solid var(--accent2-500, #ac8226);
+}
+
+.official-header .official-languages {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.official-header .official-languages .dropdown {
+  position: relative;
+}
+
+.official-header .official-languages button.offcial-more {
+  padding-right: 0;
+  border: none;
+  text-decoration: underline;
+  color: var(--black, #000);
+  background-color: var(--white, #fff);
+  text-decoration: underline;
+  transition: transform 0.3s;
+}
+
+.official-header .official-languages button.offcial-more:hover {
+  color: var(--black, #000);
+  text-decoration: none;
+}
+
+.official-header .official-languages button.offcial-more:focus {
+  outline: 2px solid var(--accent2-500, #ac8226);
+}
+
+.official-header .official-languages button.offcial-more[aria-expanded="false"] .caret-down {
+  transition: all 0.3s;
+}
+
+.official-header .official-languages button.offcial-more[aria-expanded="false"] .caret-down svg {
+  padding: 0 0 0 0;
+  width: 20px;
+  height: 18px;
+  overflow: visible;
+  position: relative;
+  right: 5px;
+}
+
+.official-header .official-languages button.offcial-more[aria-expanded="true"] .caret-down {
+  transition: transform 0.3s;
+}
+
+.official-header .official-languages button.offcial-more[aria-expanded="true"] .caret-down svg {
+  padding: 0 0 0 0;
+  width: 20px;
+  height: 18px;
+  position: relative;
+  top: 8px;
+  left: 4px;
+  overflow: visible;
+  transform: rotate(180deg);
+}
+
+.official-header .official-languages .dropdown-content {
+  background-clip: padding-box;
+  background-color: var(--white, #fff);
+  border: 1px solid var(--gray-200, #d4d4d7);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-2, 4px);
+  padding: var(--s-2, 1rem);
+  position: absolute;
+  right: 0px;
+  top: 100%;
+  text-align: left;
+  z-index: 1000;
+  min-width: 150px;
+  display: none;
+}
+
+.official-header .official-languages .dropdown-content.show {
+  display: flex;
+  flex-direction: column;
+}
+
+.official-header .goog-te-gadget {
+  max-height: 42px;
+  overflow: hidden;
+}
+
+.official-header .goog-te-gadget .goog-te-combo {
+  /* hardcoded translate widget stuff from cannabis site */
+  background-color: #fff;
+  border: 1px solid #bbb;
+  padding: 0.25rem;
+  color: #4e4e4e;
+}
+
+.official-header .goog-logo-link {
+  display: none;
+}
+
+.official-header #google_translate_element .skiptranslate.goog-te-gadget,
+.official-header .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+
+.official-header .goog-te-gadget {
+  margin-bottom: -10px;
+  font-size: 11px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .desktop-only {
+    display: inline;
+  }
 }
 
 /* combined design system styles that based on cagov color scheme */
