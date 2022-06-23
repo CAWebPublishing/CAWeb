@@ -97,47 +97,6 @@ function caweb_setup_theme() {
 		}
 	}
 
-	/* Insert Parent Content Type Category */
-	wp_insert_term( 'Content Types', 'category' );
-
-	/* Rename Default Category to All */
-	wp_update_term(
-		get_option( 'default_category' ),
-		'category',
-		array(
-			'name' => 'All',
-			'slug' => 'all',
-		)
-	);
-
-	/* Set Up Predefined Category Content Types */
-	$caweb_categories = array(
-		'Courses',
-		'Events',
-		'Exams',
-		'FAQs',
-		'Jobs',
-		'News',
-		'Profiles',
-		'Publications',
-	);
-
-	/*
-	Loop thru Predefined Categories and create
-	Content Categories under Content Types Category
-	*/
-	foreach ( $caweb_categories as $cat ) {
-		if ( ! term_exists( $cat, 'category', get_cat_ID( 'Content Types' ) ) ) {
-			wp_insert_term(
-				$cat,
-				'category',
-				array(
-					'parent' => get_cat_ID( 'Content Types' ),
-				)
-			);
-		}
-	}
-
 	/**
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
@@ -426,6 +385,47 @@ function caweb_admin_init() {
 	if ( ! is_a( $wp_filesystem, 'WP_Filesystem_Base' ) ) {
 		$creds = request_filesystem_credentials( site_url() );
 		WP_Filesystem( $creds );
+	}
+
+	/* Insert Parent Content Type Category */
+	wp_insert_term( 'Content Types', 'category' );
+
+	/* Rename Default Category to All */
+	wp_update_term(
+		get_option( 'default_category' ),
+		'category',
+		array(
+			'name' => 'All',
+			'slug' => 'all',
+		)
+	);
+
+	/* Set Up Predefined Category Content Types */
+	$caweb_categories = array(
+		'Courses',
+		'Events',
+		'Exams',
+		'FAQs',
+		'Jobs',
+		'News',
+		'Profiles',
+		'Publications',
+	);
+
+	/*
+	Loop thru Predefined Categories and create
+	Content Categories under Content Types Category
+	*/
+	foreach ( $caweb_categories as $cat ) {
+		if ( ! term_exists( $cat, 'category', get_cat_ID( 'Content Types' ) ) ) {
+			wp_insert_term(
+				$cat,
+				'category',
+				array(
+					'parent' => get_cat_ID( 'Content Types' ),
+				)
+			);
+		}
 	}
 
 }
