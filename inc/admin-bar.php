@@ -56,6 +56,15 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 					array(
 						'id'     => 'caweb-multi-ga',
 						'title'  => 'Multisite GA',
+						'href'   => get_admin_url() . 'admin.php?page=caweb_multi_ga',
+						'parent' => 'site-name',
+					)
+				);
+				/* Add GitHub API Key Menu */
+				$wp_admin_bar->add_node(
+					array(
+						'id'     => 'caweb-api',
+						'title'  => 'GitHub API Key',
 						'href'   => get_admin_url() . 'admin.php?page=caweb_api',
 						'parent' => 'site-name',
 					)
