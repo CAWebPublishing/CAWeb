@@ -264,7 +264,7 @@ function caweb_wp_enqueue_scripts() {
 		'is_front'                    => is_front_page(),
 		'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
-		'path'						  => parse_url(get_site_url())['path'] ?? '/'
+		'path'                        => wp_parse_url( get_site_url() )['path'] ?? '/',
 	);
 
 	$ga   = get_option( 'ca_google_analytic_id', '' );
