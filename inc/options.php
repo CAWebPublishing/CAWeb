@@ -88,6 +88,17 @@ function caweb_admin_menu() {
 
 	/* If Multisite instance & user is a Network Admin */
 	if ( is_multisite() && current_user_can( 'manage_network_options' ) ) {
+		// Add Upload Files Organize my uploads into month- and year-based folders option for multisite.
+		register_setting(
+			'media',
+			'wpvip_uploads_use_yearmonth_folders',
+			array(
+				'type'    => 'boolean',
+				'default' => '1',
+			)
+		);
+		add_settings_field( 'wpvip_uploads_use_yearmonth_folders', 'Uploading Files', 'caweb_uploads_use_yearmonth_folders', 'media', 'default', array( 'label_for' => 'wpvip_uploads_use_yearmonth_folders' ) );
+
 		/* If on root site */
 		if ( 1 === get_current_blog_id() ) {
 			/* Multisite Google Analytics */
@@ -101,6 +112,21 @@ function caweb_admin_menu() {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 	}
+
+}
+
+/**
+ * Renders File Uploads by year/month option
+ *
+ * @return void
+ */
+function caweb_uploads_use_yearmonth_folders() {
+	?>
+<label for="wpvip_uploads_use_yearmonth_folders">
+<input name="wpvip_uploads_use_yearmonth_folders" type="checkbox" id="wpvip_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'wpvip_uploads_use_yearmonth_folders' ) ); ?> />
+	<?php 'Organize my uploads into month- and year-based folders'; ?>
+</label>
+	<?php
 }
 
 /**

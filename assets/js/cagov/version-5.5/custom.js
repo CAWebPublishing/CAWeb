@@ -24,7 +24,7 @@
 				( 'active' == obj.status || 'on' == obj.status ) &&
 				( ( args.is_front && 'home' === obj.page_display ) || 'all' == obj.page_display  )
 			 ){
-				document.cookie = 'caweb-alert-id-' + alert + '=true';
+				document.cookie = 'caweb-alert-id-' + alert + '=true;path=' + args.path;
 				createAlertBanner(obj, alert);
 			}
 		})
@@ -110,7 +110,7 @@
 
 	$('.caweb-alert-close').click( function(e){ 
 		var alert_id = this.dataset.id; 
-		document.cookie = 'caweb-alert-id-' + alert_id + '=false';
+		document.cookie = 'caweb-alert-id-' + alert_id + '=false;path=' + args.path;
 	});
 	
 	/* Fixed padding for wp-activate.php page when Navigation is fixed */
