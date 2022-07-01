@@ -950,6 +950,17 @@ jQuery(document).ready(function($) {
     changeMade = true;
   });
 
+  
+  // Reset Organization Logo-Brand
+  $('#resetOrgLogo').click(function() {
+
+    $('input[type="text"][name="header_ca_branding"]').val('');
+    $('input[type="hidden"][name="header_ca_branding"]').val('');
+    $('#header_ca_branding_img').attr('src', '');
+
+    changeMade = true;
+  });
+
   // If no Search Engine ID hide Search on Front Page Option
   $('#ca_google_search_id').on('input',function(e){
     var front_search_option = $('label[for="ca_frontpage_search_enabled"]').parent();

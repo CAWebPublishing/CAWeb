@@ -451,6 +451,7 @@ function caweb_display_page_header_options() {
 							data-update="Set as Default Logo" 
 							data-uploader="false"
 							>Browse</button>
+						<button id="resetOrgLogo" class="btn btn-outline-primary" type="button">Reset</button>
 					</div>
 				</div>
 
@@ -484,7 +485,8 @@ function caweb_display_google_options() {
 	$google_search_id = get_option( 'ca_google_search_id', '' );
 
 	// Analytics ID.
-	$google_analytic_id = get_option( 'ca_google_analytic_id', '' );
+	$google_analytic_id  = get_option( 'ca_google_analytic_id', '' );
+	$google_analytic4_id = get_option( 'ca_google_analytic4_id', '' );
 
 	// Tag Manager ID.
 	$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
@@ -525,6 +527,15 @@ function caweb_display_google_options() {
 				<input type="text" name="ca_google_analytic_id" id="ca_google_analytic_id" class="form-control w-25" value="<?php print esc_attr( $google_analytic_id ); ?>">
 			</div>
 		</div>
+		<!-- Analytics ID Row -->
+		<div class="form-row">
+			<div class="form-group col-sm-12">
+				<label for="ca_google_analytic4_id" class="d-block mb-0"><strong>Analytics 4 ID</strong></label>
+				<small class="mb-2 text-muted d-block">Enter your unique Google Analytics 4 ID, if you don't have one see an administrator.</small>
+				<!-- Analytics ID Field -->
+				<input type="text" name="ca_google_analytic4_id" id="ca_google_analytic4_id" class="form-control w-25" value="<?php print esc_attr( $google_analytic4_id ); ?>">
+			</div>
+		</div>		
 		<!-- Tag Manager ID Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-12">
@@ -769,7 +780,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					$readmore        = 'on' === $data['button'] ? ' checked' : '';
 					$readmore_text   = isset( $data['text'] ) && ! empty( $data['text'] ) ? substr( $data['text'], 0, 16 ) : 'More Information';
 					$readmore_url    = $data['url'];
-					$readmore_target = '_blank' === $data['target'] ? ' checked' : '';
+					$readmore_target = '_blank' === $data['target'] || 'on' === $data['target'] ? ' checked' : '';
 
 					$alert_icon = $data['icon'];
 					?>

@@ -97,50 +97,6 @@ function caweb_setup_theme() {
 		}
 	}
 
-	// Gutenberg is active.
-	if ( function_exists( 'register_block_type' ) ) {
-		require_once CAWEB_ABSPATH . '/gutenberg/cagov-ds.php';
-	}
-
-	/* Insert Parent Content Type Category */
-	wp_insert_term( 'Content Types', 'category' );
-
-	/* Rename Default Category to All */
-	wp_update_term(
-		get_option( 'default_category' ),
-		'category',
-		array(
-			'name' => 'All',
-			'slug' => 'all',
-		)
-	);
-
-	/* Set Up Predefined Category Content Types */
-	$caweb_categories = array(
-		'Courses',
-		'Events',
-		'Exams',
-		'FAQs',
-		'Jobs',
-		'News',
-		'Profiles',
-		'Publications',
-	);
-
-	/*
-	Loop thru Predefined Categories and create
-	Content Categories under Content Types Category
-	*/
-	foreach ( $caweb_categories as $cat ) {
-		wp_insert_term(
-			$cat,
-			'category',
-			array(
-				'parent' => get_cat_ID( 'Content Types' ),
-			)
-		);
-	}
-
 	/**
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
@@ -163,25 +119,6 @@ function caweb_setup_theme() {
 	 * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
 	 */
 	register_nav_menus( caweb_nav_menu_theme_locations() );
-
-	/**
-	 * This action hook is used to add additional headers to the outgoing HTTP response.
-	 * Add $_COOKIE variable for Alert Banners
-	 * Session variables used to be used but are no longer supported in WP since 4.9.
-	 *
-	 * @since WordPress 4.9
-	 * @see https://wordpress.org/support/topic/the-loopback-request-to-your-site-failed-4/page/2/
-	 */
-	$caweb_alerts = get_option( 'caweb_alerts', array() );
-
-	if ( ! empty( $caweb_alerts ) && ! headers_sent() ) {
-		foreach ( $caweb_alerts as $c => $data ) {
-			if ( ! isset( $_COOKIE[ "caweb-alert-id-$c" ] ) ) {
-				setcookie( "caweb-alert-id-$c", true );
-				$_COOKIE[ "caweb-alert-id-$c" ] = true;
-			}
-		}
-	}
 
 	// Remove Divi viewport meta.
 	remove_action( 'wp_head', 'et_add_viewport_meta' );
@@ -322,16 +259,30 @@ function caweb_wp_enqueue_scripts() {
 		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
 		'ca_google_search_id'         => get_option( 'ca_google_search_id' ),
 		'caweb_multi_ga'              => get_site_option( 'caweb_multi_ga' ),
+		'caweb_multi_ga4'             => get_site_option( 'caweb_multi_ga4' ),
+		'caweb_alerts'                => get_option( 'caweb_alerts', array() ),
+		'is_front'                    => is_front_page(),
 		'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
+		'path'                        => wp_parse_url( get_site_url() )['path'] ?? '/',
 	);
 
-	if ( ! empty( get_option( 'ca_google_tag_manager_id', '' ) ) ) {
-		$localize_args['ca_google_tag_manager_id'] = get_option( 'ca_google_tag_manager_id', '' );
+	$ga   = get_option( 'ca_google_analytic_id', '' );
+	$ga4  = get_option( 'ca_google_analytic4_id', '' );
+	$gtag = get_option( 'ca_google_tag_manager_id', '' );
+
+	if ( ! empty( $gtag ) ) {
+		$localize_args['ca_google_tag_manager_id'] = $gtag;
 	}
 
-	if ( ! empty( get_option( 'ca_google_analytic_id', '' ) ) ) {
-		$localize_args['ca_google_analytic_id'] = get_option( 'ca_google_analytic_id', '' );
+	if ( ! empty( $ga ) ) {
+		$localize_args['ca_google_analytic_id'] = $ga;
+	}
+
+	if ( ! empty( $ga4 ) ) {
+		wp_enqueue_script( 'google-tag-manager-gtag', 'https://www.googletagmanager.com/gtag/js?id=' . $ga4, array(), CAWEB_VERSION, true );
+
+		$localize_args['ca_google_analytic4_id'] = $ga4;
 	}
 
 	$frontend_js_file = caweb_get_min_file( "/js/caweb-$version.js", 'js' );
@@ -347,7 +298,7 @@ function caweb_wp_enqueue_scripts() {
 	/* Register Scripts */
 	wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
 
-	wp_register_script( 'caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), time(), true );
 
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
@@ -437,6 +388,47 @@ function caweb_admin_init() {
 		WP_Filesystem( $creds );
 	}
 
+	/* Insert Parent Content Type Category */
+	wp_insert_term( 'Content Types', 'category' );
+
+	/* Rename Default Category to All */
+	wp_update_term(
+		get_option( 'default_category' ),
+		'category',
+		array(
+			'name' => 'All',
+			'slug' => 'all',
+		)
+	);
+
+	/* Set Up Predefined Category Content Types */
+	$caweb_categories = array(
+		'Courses',
+		'Events',
+		'Exams',
+		'FAQs',
+		'Jobs',
+		'News',
+		'Profiles',
+		'Publications',
+	);
+
+	/*
+	Loop thru Predefined Categories and create
+	Content Categories under Content Types Category
+	*/
+	foreach ( $caweb_categories as $cat ) {
+		if ( ! term_exists( $cat, 'category', get_cat_ID( 'Content Types' ) ) ) {
+			wp_insert_term(
+				$cat,
+				'category',
+				array(
+					'parent' => get_cat_ID( 'Content Types' ),
+				)
+			);
+		}
+	}
+
 }
 
 /**
@@ -452,11 +444,10 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$pages     = array( 'toplevel_page_caweb_options', 'caweb-options_page_caweb_multi_ga', 'caweb-options_page_caweb_api', 'nav-menus.php' );
 	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
-	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
-	$version                    = caweb_template_version();
-	$color                      = get_option( 'ca_site_color_scheme', 'oceanside' );
-	$colorscheme                = caweb_color_schemes( $version, 'filename', $color );
-	$colorscheme                = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
+	$version     = caweb_template_version();
+	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
+	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
+	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
 
 	$editor_css = caweb_get_min_file( "/css/caweb-$version-$colorscheme.css" );
 

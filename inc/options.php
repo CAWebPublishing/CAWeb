@@ -88,6 +88,17 @@ function caweb_admin_menu() {
 
 	/* If Multisite instance & user is a Network Admin */
 	if ( is_multisite() && current_user_can( 'manage_network_options' ) ) {
+		// Add Upload Files Organize my uploads into month- and year-based folders option for multisite.
+		register_setting(
+			'media',
+			'wpvip_uploads_use_yearmonth_folders',
+			array(
+				'type'    => 'boolean',
+				'default' => '1',
+			)
+		);
+		add_settings_field( 'wpvip_uploads_use_yearmonth_folders', 'Uploading Files', 'caweb_uploads_use_yearmonth_folders', 'media', 'default', array( 'label_for' => 'wpvip_uploads_use_yearmonth_folders' ) );
+
 		/* If on root site */
 		if ( 1 === get_current_blog_id() ) {
 			/* Multisite Google Analytics */
@@ -101,6 +112,21 @@ function caweb_admin_menu() {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 	}
+
+}
+
+/**
+ * Renders File Uploads by year/month option
+ *
+ * @return void
+ */
+function caweb_uploads_use_yearmonth_folders() {
+	?>
+<label for="wpvip_uploads_use_yearmonth_folders">
+<input name="wpvip_uploads_use_yearmonth_folders" type="checkbox" id="wpvip_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'wpvip_uploads_use_yearmonth_folders' ) ); ?> />
+	<?php 'Organize my uploads into month- and year-based folders'; ?>
+</label>
+	<?php
 }
 
 /**
@@ -315,6 +341,7 @@ function caweb_multi_ga_menu_option_setup() {
 	// CAWeb Multisite Google Analytics Nonce.
 	$caweb_nonce = wp_create_nonce( 'caweb_theme_multisite_ga_option' );
 	$mulit_ga    = get_site_option( 'caweb_multi_ga', '' );
+	$mulit_ga4   = get_site_option( 'caweb_multi_ga4', '' );
 
 	?>
 	<form id="caweb-multi-ga-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_multi_ga' ) ); ?>" method="POST">
@@ -324,6 +351,12 @@ function caweb_multi_ga_menu_option_setup() {
 			<div class="form-group col-sm-5">
 				<label for="caweb_multi_ga" class="d-block mb-0">Analytics ID</label>
 				<input type="text" name="caweb_multi_ga" class="form-control" size="50" value="<?php print esc_attr( $mulit_ga ); ?>" />
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-sm-5">
+				<label for="caweb_multi_ga4" class="d-block mb-0">Analytics 4 ID</label>
+				<input type="text" name="caweb_multi_ga4" class="form-control" size="50" value="<?php print esc_attr( $mulit_ga4 ); ?>" />
 			</div>
 		</div>
 		<input type="submit" name="caweb_multi_ga_options_submit" id="submit" class="button button-primary" value="Save Changes" />
@@ -473,6 +506,7 @@ function caweb_save_api_options( $values = array() ) {
  */
 function caweb_save_multi_ga_options( $values = array() ) {
 	update_site_option( 'caweb_multi_ga', $values['caweb_multi_ga'] );
+	update_site_option( 'caweb_multi_ga4', $values['caweb_multi_ga4'] );
 
 	print '<div class="updated notice is-dismissible"><p><strong>Multisite Google Analytics ID</strong> has been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
@@ -535,6 +569,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 	$caweb_google_options = array(
 		'ca_google_search_id',
 		'ca_google_analytic_id',
+		'ca_google_analytic4_id',
 		'ca_google_tag_manager_id',
 		'ca_google_tag_manager_approved',
 		'ca_google_meta_id',
@@ -569,7 +604,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		}
 	}
 
-	$caweb_special_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga' );
+	$caweb_special_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga', 'caweb_multi_ga4' );
 
 	$caweb_alert_options = array( 'caweb_alerts' );
 

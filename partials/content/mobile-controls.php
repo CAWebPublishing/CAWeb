@@ -5,16 +5,15 @@
  * @package CAWeb
  */
 
-$caweb_search = get_option( 'ca_google_search_id', '' );
 
 ?>
 <!-- mobile navigation controls -->
-<div class="mobile-controls<?php print $caweb_enable_design_system ? ' d-none' : ''; ?>">
+<div class="mobile-controls">
 	<span class="mobile-control-group mobile-header-icons">
 		<!-- Add more mobile controls here. These will be on the right side of the mobile page header section -->
 	</span>
 	<div class="mobile-control-group main-nav-icons">
-		<?php if ( ! empty( $caweb_search ) ) : ?>
+		<?php if ( ! empty( $caweb_google_search_id ) ) : ?>
 		<button class="mobile-control toggle-search">
 			<span class="ca-gov-icon-search hidden-print" aria-hidden="true"></span><span class="sr-only">Search</span>
 		</button>

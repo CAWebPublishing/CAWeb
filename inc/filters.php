@@ -16,6 +16,11 @@ add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
 add_filter( 'wp_kses_allowed_html', 'caweb_allowed_html', 10, 2 );
 add_action( 'template_redirect', 'caweb_redirect_if_author_parameter' );
 
+if ( defined( 'PHP_INT_MAX' ) ) {
+	add_filter( 'pre_option_uploads_use_yearmonth_folders', 'caweb_pre_uploads_use_yearmonth_folders', PHP_INT_MAX );
+}
+
+
 /**
  * Plugin Filters
  */
@@ -175,6 +180,17 @@ function caweb_default_events_template_classes( $classes ) {
  */
 function caweb_xmlrpc_enabled() {
 	return false;
+}
+
+
+/**
+ * Override WPVIP hard coding this option.
+ *
+ * @param  string $value Whether to organize media files by yyyy/mm, Default 1.
+ * @return string
+ */
+function caweb_pre_uploads_use_yearmonth_folders( $value ) {
+	return get_option( 'wpvip_uploads_use_yearmonth_folders', '1' );
 }
 
 /**

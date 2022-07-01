@@ -1,22 +1,26 @@
 // Google Analytics
 var args = args || [];
-var _gaq = _gaq || [];
+
 if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
+	var _gaq = _gaq || [];
+
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 	_gaq.push(['_gat._anonymizeIp']);
 	_gaq.push(['_setDomainName', '.ca.gov']);
 	_gaq.push(['_trackPageview']);
+
+		
+	_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
+	_gaq.push(['b._setDomainName', '.ca.gov']);
+	_gaq.push(['b._trackPageview']);
+
+	if("" !== args.caweb_multi_ga){
+		_gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
+		_gaq.push(['b._setDomainName', '.ca.gov']);
+		_gaq.push(['b._trackPageview']);
+	}
 }
 	
-_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
-_gaq.push(['b._setDomainName', '.ca.gov']);
-_gaq.push(['b._trackPageview']);
-
-if("" !== args.caweb_multi_ga){
-  _gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
-  _gaq.push(['b._setDomainName', '.ca.gov']);
-  _gaq.push(['b._trackPageview']);
-}
 
 (function() {
   var ga = document.createElement('script');
@@ -26,6 +30,24 @@ if("" !== args.caweb_multi_ga){
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(ga, s);
 })();
+
+// Google Analytics4
+if("" !== args.ca_google_analytic4_id && undefined !== args.ca_google_analytic4_id){
+
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag(){dataLayer.push(arguments);}
+
+	gtag('js', new Date());
+
+	gtag('config', args.ca_google_analytic4_id); // individual agency - either from your own google account, or contact eServices to have one set up for you
+
+	gtag('config', 'G-69TD0KNT0F'); // statewide analytics - do not remove or change
+
+	if( "" !== args.caweb_multi_ga4 && undefined !== args.caweb_multi_ga4 ){
+		gtag('config', args.caweb_multi_ga4); // CAWeb multisite analytics - do not remove or change
+	}
+}
 
 // Google Tag Manager
 if("" !== args.ca_google_tag_manager_id && undefined !== args.ca_google_tag_manager_id){
@@ -111,7 +133,7 @@ if("" !== args.ca_google_search_id && undefined !== args.ca_google_search_id){
   })();
 }
 
-  /* Google Translate */
+/* Google Translate */
 if( args.ca_google_trans_enabled ){
   function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
@@ -466,95 +488,247 @@ function stripeIframeAttributes(frame){
 	$(frame).removeAttr('allowfullscreen');
 }
 
-var styles = "/* initial styles */\ncagov-accordion details {\n  border-radius: var(--radius-2, 5px) !important;\n  margin-bottom: 0;\n  min-height: var(--s-5, 3rem);\n  margin-top: 0.5rem;\n  border: solid var(--border-1, 1px) var(--gray-200, #ededef) !important;\n}\ncagov-accordion details summary {\n  cursor: pointer;\n  padding: var(--s-1, 0.5rem) var(--s-5, 3rem) var(--s-1, 0.5rem) var(--s-2, 1rem);\n  background-color: var(--gray-200, #ededef);\n  position: relative;\n  line-height: var(--s-4, 2rem);\n  margin: 0;\n  color: var(--primary-color, #064e66);\n  font-size: var(--font-size-2, 1.125rem);\n  font-weight: bold;\n}\ncagov-accordion details .accordion-body {\n  padding: var(--s-2, 1rem);\n}\n\n/* styles applied after custom element javascript runs */\ncagov-accordion:defined {\n  /* let it be open initially if details has open attribute */\n}\ncagov-accordion:defined details {\n  transition: height var(--animation-duration-2, 0.2s);\n  height: var(--s-5, 3rem);\n  overflow: hidden;\n}\ncagov-accordion:defined details[open] {\n  height: auto;\n}\ncagov-accordion:defined summary::-webkit-details-marker {\n  display: none;\n}\ncagov-accordion:defined details summary {\n  list-style: none;\n  /* hide default expansion triangle after js executes */\n  border-radius: var(--border-5, 5px) var(--border-5, 5px) 0 0;\n}\ncagov-accordion:defined details summary:focus {\n  outline-offset: -2px;\n  outline: solid 2px var(--highlight-color, #fbad23) !important;\n}\ncagov-accordion:defined details .cagov-open-indicator {\n  background-color: var(--primary-color, #064e66);\n  height: 3px;\n  width: 15px;\n  border-radius: var(--border-3, 3px);\n  position: absolute;\n  right: var(--s-2, 1rem);\n  top: 1.4rem;\n}\ncagov-accordion:defined details .cagov-open-indicator:before {\n  display: block;\n  content: \"\";\n  position: absolute;\n  top: -6px;\n  left: 3px;\n  width: 3px;\n  height: 15px;\n  border-radius: var(--border-3, 3px);\n  border: none;\n  box-shadow: 3px 0 0 0 var(--primary-color, #064e66);\n  background: none;\n}\ncagov-accordion:defined details[open] .cagov-open-indicator:before {\n  display: none;\n}\n\n/*# sourceMappingURL=index.css.map */\n";
-
 /**
- * Accordion web component that collapses and expands content inside itself on click.
+ * Dropdown menu web component
  *
- * @element cagov-accordion
+ * @element cagov-site-navigation
  *
- *
- * @fires click - Default events which may be listened to in order to discover most popular accordions
- *
- * @attr {string} open - set on the internal details element
- * If this is true the accordion will be open before any user interaction.
- *
- * @cssprop --primary-color - Default value of #1f2574, used for all colors of borders and fills
- * @cssprop --hover-color - Default value of #F9F9FA, used for background on hover
- *
+ * @cssprop --primary-color - Default value of #064E66, used for background
+ * @cssprop --gray-300 - #e1e0e3
+ * @cssprop --primary-dark-color - #064e66
+ * @cssprop --secondary-color - #fec02f
+ * @cssprop --w-lg - '1176px'
  */
-class CaGovAccordion extends window.HTMLElement {
-  connectedCallback() {
-    this.summaryEl = this.querySelector('summary');
-    // trigger the opening and closing height change animation on summary click
-    this.setHeight();
-    this.summaryEl.addEventListener('click', this.listen.bind(this));
-    this.summaryEl.insertAdjacentHTML(
-      'beforeend',
-      `<div class="cagov-open-indicator" aria-hidden="true" />`,
-    );
-    this.detailsEl = this.querySelector('details');
-    this.bodyEl = this.querySelector('.accordion-body');
 
-    window.addEventListener(
-      'resize',
-      this.debounce(() => this.setHeight()).bind(this),
+// Function determining if it's mobile view (max 767px)
+function mobileView() {
+  const mobileElement = document.querySelector(
+    '.site-header .grid-mobile-icons',
+  );
+  if (mobileElement) {
+    return getComputedStyle(mobileElement).display !== 'none';
+  }
+  return false;
+}
+class CAGovSiteNavigation extends window.HTMLElement {
+  connectedCallback() {
+    document
+      .querySelector('.cagov-nav.open-menu')
+      .addEventListener('click', this.toggleMainMenu.bind(this));
+
+    // Mobile search events
+    const mobileSearchBtn = document.querySelector(
+      '.cagov-nav.mobile-search .search-btn',
     );
+    if (mobileSearchBtn) {
+      mobileSearchBtn.setAttribute('aria-expanded', 'false');
+      document
+        .querySelector('.search-container--small .site-search input')
+        .setAttribute('tabindex', '-1');
+      document
+        .querySelector(
+          '.search-container--small .site-search button.search-submit',
+        )
+        .setAttribute('tabindex', '-1');
+      document
+        .querySelector('.search-container--small')
+        .setAttribute('aria-hidden', 'true');
+      if (mobileView()) {
+        mobileSearchBtn.addEventListener('click', () => {
+          document
+            .querySelector('.search-container--small')
+            .classList.toggle('hidden-search');
+          const searchactive = document
+            .querySelector('.search-container--small')
+            .classList.contains('hidden-search');
+          if (searchactive) {
+            mobileSearchBtn.setAttribute('aria-expanded', 'false');
+            document
+              .querySelector('.search-container--small .site-search input')
+              .setAttribute('tabindex', '-1');
+            document
+              .querySelector(
+                '.search-container--small .site-search button.search-submit',
+              )
+              .setAttribute('tabindex', '-1');
+            document
+              .querySelector('.search-container--small')
+              .setAttribute('aria-hidden', 'true');
+          } else {
+            mobileSearchBtn.setAttribute('aria-expanded', 'true');
+            document
+              .querySelector('.search-container--small .site-search input')
+              .focus();
+            document
+              .querySelector('.search-container--small .site-search input')
+              .removeAttribute('tabindex');
+            document
+              .querySelector(
+                '.search-container--small .site-search button.search-submit',
+              )
+              .removeAttribute('tabindex');
+            document
+              .querySelector('.search-container--small')
+              .setAttribute('aria-hidden', 'false');
+          }
+        });
+      }
+    }
+
+    // reset mobile search on resize
+    window.addEventListener('resize', () => {
+      document
+        .querySelector('.search-container--small')
+        .classList.add('hidden-search');
+      if (mobileSearchBtn) {
+        document
+          .querySelector('.cagov-nav.mobile-search .search-btn')
+          .setAttribute('aria-expanded', 'false');
+      }
+      document
+        .querySelector('.search-container--small .site-search input')
+        .setAttribute('tabindex', '-1');
+      document
+        .querySelector(
+          '.search-container--small .site-search button.search-submit',
+        )
+        .setAttribute('tabindex', '-1');
+      document
+        .querySelector('.search-container--small')
+        .setAttribute('aria-hidden', 'true');
+      // reset navigation on resize
+      this.closeAllMenus();
+      this.closeMainMenu();
+    });
+
+    this.expansionListeners();
+    document.addEventListener('keydown', this.escapeMainMenu.bind(this));
+    document.body.addEventListener('click', this.bodyClick.bind(this));
+    this.highlightCurrentPage();
   }
 
-  setHeight() {
-    requestAnimationFrame(() => {
-      // delay so the desired height is readable in all browsers
-      this.closedHeightInt = parseInt(this.summaryEl.scrollHeight + 2, 10);
-      this.closedHeight = `${this.closedHeightInt}px`;
+  toggleMainMenu() {
+    if (
+      document
+        .querySelector('.cagov-nav.hamburger')
+        .classList.contains('is-active')
+    ) {
+      this.closeMainMenu();
+    } else {
+      this.openMainMenu();
+    }
+  }
 
-      // apply initial height
-      if (this.detailsEl.hasAttribute('open')) {
-        // if open get scrollHeight
-        this.detailsEl.style.height = `${parseInt(
-          this.bodyEl.scrollHeight + this.closedHeightInt,
-          10,
-        )}px`;
-      } else {
-        // else apply closed height
-        this.detailsEl.style.height = this.closedHeight;
+  highlightCurrentPage() {
+    this.querySelectorAll('a.expanded-menu-dropdown-link').forEach((link) => {
+      if (link.href === window.location.href) {
+        link.classList.add('current-page-highlight');
       }
     });
   }
 
-  listen() {
-    if (this.detailsEl.hasAttribute('open')) {
-      // was open, now closing
-      this.detailsEl.style.height = this.closedHeight;
-    } else {
-      // was closed, opening
-      requestAnimationFrame(() => {
-        // delay so the desired height is readable in all browsers
-        this.detailsEl.style.height = `${parseInt(
-          this.bodyEl.scrollHeight + this.closedHeightInt,
-          10,
-        )}px`;
-      });
+  openMainMenu() {
+    document.querySelector('.mobile-icons').classList.add('display-menu');
+    this.classList.add('display-menu');
+    document.querySelector('.cagov-nav.hamburger').classList.add('is-active');
+    document.querySelector('.cagov-nav.menu-trigger').classList.add('is-fixed');
+    document
+      .querySelector('.cagov-nav.menu-trigger')
+      .setAttribute('aria-expanded', 'true');
+    const menLabel = document.querySelector('.cagov-nav.menu-trigger-label');
+    menLabel.innerHTML = menLabel.getAttribute('data-closelabel');
+  }
+
+  closeMainMenu() {
+    document.querySelector('.mobile-icons').classList.remove('display-menu');
+    this.classList.remove('display-menu');
+    document
+      .querySelector('.cagov-nav.hamburger')
+      .classList.remove('is-active');
+    document
+      .querySelector('.cagov-nav.menu-trigger')
+      .classList.remove('is-fixed');
+    document
+      .querySelector('.cagov-nav.menu-trigger')
+      .setAttribute('aria-expanded', 'false');
+    const menLabel = document.querySelector('.cagov-nav.menu-trigger-label');
+    menLabel.innerHTML = menLabel.getAttribute('data-openlabel');
+  }
+
+  escapeMainMenu(event) {
+    // Close menus if user presses escape key.
+    if (event.keyCode === 27) {
+      this.closeAllMenus();
     }
   }
 
-  debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(this, args);
-      }, timeout);
-    };
+  bodyClick(event) {
+    if (!event.target.closest('cagov-site-navigation')) {
+      this.closeAllMenus();
+    }
+  }
+
+  closeAllMenus() {
+    const allMenus = this.querySelectorAll('.js-cagov-navoverlay-expandable');
+    allMenus.forEach((menu) => {
+      const expandedEl = menu.querySelector('.expanded-menu-section');
+      expandedEl.classList.remove('expanded');
+      menu.setAttribute('aria-expanded', 'false');
+      const closestDropDown = menu.querySelector('.expanded-menu-dropdown');
+      if (closestDropDown) {
+        closestDropDown.setAttribute('aria-hidden', 'true');
+        const allLinks = closestDropDown.querySelectorAll('a');
+        allLinks.forEach((link) => {
+          link.setAttribute('tabindex', '-1'); // set tabindex to -1 so you cannot tab through these hidden links
+        });
+      }
+    });
+  }
+
+  expansionListeners() {
+    const allMenus = this.querySelectorAll('.js-cagov-navoverlay-expandable');
+    allMenus.forEach((menu) => {
+      const nearestMenu = menu.querySelector('.expanded-menu-section');
+      if (nearestMenu) {
+        const nearestMenuDropDown = nearestMenu.querySelector(
+          '.expanded-menu-dropdown',
+        );
+        if (nearestMenuDropDown) {
+          nearestMenuDropDown.setAttribute('aria-hidden', 'true');
+          menu.setAttribute('aria-expanded', 'false');
+        }
+      }
+      const menuComponent = this;
+      menu.addEventListener('click', function addingClickListener(event) {
+        if (event.target.nodeName !== 'A') {
+          event.preventDefault();
+        }
+        const expandedEl = this.querySelector('.expanded-menu-section');
+        if (expandedEl) {
+          if (expandedEl.classList.contains('expanded')) {
+            // closing an open menu
+            menuComponent.closeAllMenus();
+          } else {
+            menuComponent.closeAllMenus();
+            expandedEl.classList.add('expanded');
+            menu.setAttribute('aria-expanded', 'true');
+            const closestDropDown = this.querySelector(
+              '.expanded-menu-dropdown',
+            );
+            if (closestDropDown) {
+              closestDropDown.setAttribute('aria-hidden', 'false');
+              const allLinks = closestDropDown.querySelectorAll('a');
+              allLinks.forEach((link) => {
+                link.removeAttribute('tabindex'); // remove tabindex from all the links
+              });
+            }
+          }
+        }
+      });
+    });
   }
 }
-window.customElements.define('cagov-accordion', CaGovAccordion);
-
-const style = document.createElement('style');
-style.textContent = styles;
-document.querySelector('head').appendChild(style);
-
-export { CaGovAccordion };
+window.customElements.define('cagov-site-navigation', CAGovSiteNavigation);
 
 // Custom Js
 jQuery(document).ready(function() {

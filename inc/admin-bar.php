@@ -44,9 +44,37 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 	}
 
 	/*
-	If single site instance or user can manage network options
+	If multisite instance
 	*/
-	if ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) {
+	if ( is_multisite() ) {
+		// user can manage network options.
+		if ( current_user_can( 'manage_network_options' ) ) {
+			/* If on root site */
+			if ( 1 === get_current_blog_id() ) {
+				/* Add Multisite Google Analytics Menu */
+				$wp_admin_bar->add_node(
+					array(
+						'id'     => 'caweb-multi-ga',
+						'title'  => 'Multisite GA',
+						'href'   => get_admin_url() . 'admin.php?page=caweb_multi_ga',
+						'parent' => 'site-name',
+					)
+				);
+				/* Add GitHub API Key Menu */
+				$wp_admin_bar->add_node(
+					array(
+						'id'     => 'caweb-api',
+						'title'  => 'GitHub API Key',
+						'href'   => get_admin_url() . 'admin.php?page=caweb_api',
+						'parent' => 'site-name',
+					)
+				);
+			}
+		} else {
+			/* Remove Visual Builder */
+			$wp_admin_bar->remove_node( 'et-use-visual-builder' );
+		}
+	} else {
 		/* Add GitHub API Key Menu */
 		$wp_admin_bar->add_node(
 			array(
@@ -56,27 +84,6 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 				'parent' => 'site-name',
 			)
 		);
-	}
-
-	/*
-	If multisite instance
-	*/
-	if ( is_multisite() ) {
-		// user can manage network options.
-		if ( current_user_can( 'manage_network_options' ) ) {
-			/* Add Multisite Google Analytics Menu */
-			$wp_admin_bar->add_node(
-				array(
-					'id'     => 'caweb-multi-ga',
-					'title'  => 'Multisite GA',
-					'href'   => get_admin_url() . 'admin.php?page=caweb_api',
-					'parent' => 'site-name',
-				)
-			);
-		} else {
-			/* Remove Visual Builder */
-			$wp_admin_bar->remove_node( 'et-use-visual-builder' );
-		}
 	}
 
 	/*

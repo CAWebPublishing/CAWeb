@@ -196,6 +196,9 @@ async function buildAdminStyles(min = false) {
 
 }
 
+task('test', async function(){
+	buildFrontEndStyles(false, 'design-system')
+})
 /**
  * Build CAWeb Theme FrontEnd Styles
  * 
@@ -206,11 +209,14 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 	var versionDir = templateCSSAssetDir + 'version-' + ver;
+	//var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : 'node_modules/@cagov/ds-base-css/src/themes/';
+	//var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : 'node_modules/@cagov/ds-base-css/dist/themes/';
 	var versionColorschemesDir = versionDir + '/colorscheme/';
 	var colors = fs.readdirSync(versionColorschemesDir);
-
+	var core_css = 'design-system' != ver ? versionDir + '/cagov.core.css' : 'node_modules/@cagov/*/src/index.scss';
 	colors.forEach(function (e) {
-		var f = [versionDir + '/cagov.core.css',
+
+		var f = [core_css,
 		versionColorschemesDir + e,
 		templateCSSAssetDir + 'cagov.font-only.css'];
 		f = f.concat(frontendStyles);
@@ -220,9 +226,16 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 	
 		t = '[ ' + success + ' CAWeb ' + ver + ' ' + color + ' Colorscheme' + t;
 
+
 		if (f.length){
-			var fileName = 'caweb-' + ver + '-' +
-			(minified ? e.replace('.css', '.min.css') : e);
+			// if file is a scss change extension to css
+			// if file has _ remove it
+			// if minified add the .min
+			e = e.replace('.scss', '.css');
+			e = e.replace('_', '');
+			e = minified ? e.replace('.css', '.min.css') : e;
+			
+			var fileName = 'caweb-' + ver + '-' + e;
 
 			src(f)
 			.pipe(
@@ -279,11 +292,14 @@ async function buildAdminJS(min = false) {
 async function buildFrontendScripts(min = false, ver = templateVer) {
 	var minified = min ? '.min' : '';
 	var versionDir = JSAssetDir + 'cagov/version-' + ver;
+
+	var core_js = 'design-system' != ver ? versionDir + '/cagov.core.js' : 'node_modules/@cagov/*/dist/index.js';
 	var f = frontendScripts.concat(
-		[versionDir + '/cagov.core.js',
-		versionDir + '/custom.js' ],
-		a11yScripts,
+			[core_js,
+			versionDir + '/custom.js' ],
+			a11yScripts,
 	);
+
 	var t = minified ? ' Minified ] ' : ' ] ';
 
 	t = '[ ' + success + ' CAWeb ' + ver + ' JavaScript' + t;
