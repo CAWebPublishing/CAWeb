@@ -28,7 +28,7 @@ if ( $caweb_enable_design_system ) {
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once 'partials/header.php'; ?>
+	<?php require_once $caweb_header_file . 'header.php'; ?>
 
 
 	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
