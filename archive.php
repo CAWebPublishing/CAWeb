@@ -8,7 +8,6 @@
  */
 
 get_header();
-$caweb_is_page_builder_used = caweb_is_divi_used();
 
 /* CAGov Design System */
 $caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
@@ -36,9 +35,7 @@ if ( $caweb_enable_design_system ) {
 		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
 			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
-				<?php if ( ! $caweb_is_page_builder_used ) : ?>
 				<div class="section">
-				<?php endif; ?>
 					<?php do_action( 'caweb_pre_main_primary' ); ?>
 					<main class="main-primary">
 
@@ -110,11 +107,8 @@ if ( $caweb_enable_design_system ) {
 						<?php
 					endif;
 					?>
-				<?php if ( ! $caweb_is_page_builder_used ) : ?>
-				</div>
-				<?php endif; ?>
-				</div> <!-- #main-content -->
-			</div>
+				</div> 
+			</div> <!-- #main-content -->
 		</div>
 	</div>
 	<?php get_footer(); ?>

@@ -14,8 +14,6 @@
 
 get_header();
 
-$caweb_is_page_builder_used = caweb_is_divi_used();
-
 /* CAGov Design System */
 $caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
 
@@ -119,8 +117,8 @@ if ( $caweb_enable_design_system ) {
 				endif;
 							?>
 					</main>
-				</div> <!-- #main-content -->
-			</div>
+				</div> 
+			</div> <!-- #main-content -->
 		</div>
 	</div>
 	<style>
