@@ -13,10 +13,19 @@
 $caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
 $caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
 
+$caweb_header_file = dirname( __DIR__ ) . '/partials/content/';
+
+if ( $caweb_enable_design_system ) {
+	$caweb_page_container_class    .= ' page-container-ds';
+	$caweb_page_main_content_class .= '  main-content-ds';
+	$caweb_header_file              = dirname( __DIR__ ) . '/partials/design-system/';
+}
+
+
 get_header();
 ?>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
-	<?php require_once dirname( __DIR__ ) . '/partials/header.php'; ?>
+	<?php require_once $caweb_header_file . 'header.php'; ?>
 
 	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
 		<?php do_action( 'caweb_pre_main_area' ); ?>
@@ -27,7 +36,7 @@ get_header();
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once dirname( __DIR__ ) . '/partials/content/search-form.php';
+						require_once $caweb_header_file . 'search-form.php';
 						?>
 					</div>
 					<div class="section">

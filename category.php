@@ -12,17 +12,36 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <?php
-	get_header();
+get_header();
+
+/* CAGov Design System */
+$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
+
+// Page Classes.
+$caweb_page_title_class        = apply_filters( 'caweb_page_title_class', 'page-title' );
+$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
+$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
+
+$caweb_header_file = 'partials/content/';
+
+if ( $caweb_enable_design_system ) {
+	$caweb_page_container_class    .= ' page-container-ds';
+	$caweb_page_main_content_class .= '  main-content-ds';
+	$caweb_header_file              = 'partials/design-system/';
+}
+
 ?>
 
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once 'partials/header.php'; ?>
+	<?php require_once $caweb_header_file . 'header.php'; ?>
 
 
-	<div id="page-container">
+	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
+		<?php do_action( 'caweb_pre_main_area' ); ?>
 		<div id="et-main-area">
-			<div id="main-content" class="main-content">
+			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
 				<div class="section">
+					<?php do_action( 'caweb_pre_main_primary' ); ?>
 					<main class="main-primary">
 
 						<?php
@@ -98,8 +117,8 @@
 						<?php
 					endif;
 					?>
-				</div> <!-- #main-content -->
-			</div>
+				</div> 
+			</div> <!-- #main-content -->
 		</div>
 	</div>
 	<?php get_footer(); ?>
