@@ -36,7 +36,7 @@ get_header();
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once  $caweb_header_file . 'search-form.php';
+						require_once $caweb_header_file . 'search-form.php';
 						?>
 					</div>
 					<div class="section">
