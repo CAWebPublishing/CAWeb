@@ -1,24 +1,23 @@
 // Google Analytics
 var args = args || [];
+var _gaq = _gaq || [];
 
 if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){
-	var _gaq = _gaq || [];
 
 	_gaq.push(['_setAccount', args.ca_google_analytic_id]); // Step 4: your google analytics profile code, either from your own google account, or contact eServices to have one set up for you
 	_gaq.push(['_gat._anonymizeIp']);
 	_gaq.push(['_setDomainName', '.ca.gov']);
 	_gaq.push(['_trackPageview']);
-
+}
 		
-	_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
+_gaq.push(['b._setAccount', 'UA-3419582-2']); // statewide analytics - do not remove or change
+_gaq.push(['b._setDomainName', '.ca.gov']);
+_gaq.push(['b._trackPageview']);
+
+if("" !== args.caweb_multi_ga){
+	_gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
 	_gaq.push(['b._setDomainName', '.ca.gov']);
 	_gaq.push(['b._trackPageview']);
-
-	if("" !== args.caweb_multi_ga){
-		_gaq.push(['b._setAccount', args.caweb_multi_ga]); // CAWeb Multisite analytics - do not remove or change
-		_gaq.push(['b._setDomainName', '.ca.gov']);
-		_gaq.push(['b._trackPageview']);
-	}
 }
 	
 
@@ -32,21 +31,20 @@ if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id
 })();
 
 // Google Analytics4
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){dataLayer.push(arguments);}
+
+gtag('js', new Date());
+
 if("" !== args.ca_google_analytic4_id && undefined !== args.ca_google_analytic4_id){
-
-	window.dataLayer = window.dataLayer || [];
-
-	function gtag(){dataLayer.push(arguments);}
-
-	gtag('js', new Date());
-
 	gtag('config', args.ca_google_analytic4_id); // individual agency - either from your own google account, or contact eServices to have one set up for you
+}
 
-	gtag('config', 'G-69TD0KNT0F'); // statewide analytics - do not remove or change
+gtag('config', 'G-69TD0KNT0F'); // statewide analytics - do not remove or change
 
-	if( "" !== args.caweb_multi_ga4 && undefined !== args.caweb_multi_ga4 ){
-		gtag('config', args.caweb_multi_ga4); // CAWeb multisite analytics - do not remove or change
-	}
+if( "" !== args.caweb_multi_ga4 && undefined !== args.caweb_multi_ga4 ){
+	gtag('config', args.caweb_multi_ga4); // CAWeb multisite analytics - do not remove or change
 }
 
 // Google Tag Manager
