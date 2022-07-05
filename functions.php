@@ -340,7 +340,7 @@ function caweb_wp_enqueue_scripts() {
 	/* Register Scripts */
 	wp_register_script( 'cagov-modernizr-script', CAWEB_URI . '/js/libs/modernizr-3.6.0.min.js', array( 'jquery' ), CAWEB_VERSION, false );
 
-	wp_register_script( 'caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), time(), true );
+	wp_register_script( 'caweb-script', $frontend_js_file, array( 'cagov-modernizr-script' ), CAWEB_VERSION, true );
 
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
