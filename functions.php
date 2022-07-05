@@ -322,9 +322,11 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	if ( ! empty( $ga4 ) ) {
-		wp_enqueue_script( 'google-tag-manager-gtag', 'https://www.googletagmanager.com/gtag/js?id=' . $ga4, array(), CAWEB_VERSION, true );
-
 		$localize_args['ca_google_analytic4_id'] = $ga4;
+	}
+
+	if ( ! empty( $ga4 ) || ! empty( get_site_option( 'caweb_multi_ga4', '' ) ) ) {
+		wp_enqueue_script( 'google-tag-manager-gtag', 'https://www.googletagmanager.com/gtag/js?id=G-69TD0KNT0F', array(), CAWEB_VERSION, true );
 	}
 
 	$frontend_js_file = caweb_get_min_file( "/js/caweb-$version.js", 'js' );
