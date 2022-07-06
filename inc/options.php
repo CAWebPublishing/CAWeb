@@ -124,7 +124,7 @@ function caweb_uploads_use_yearmonth_folders() {
 	?>
 <label for="wpvip_uploads_use_yearmonth_folders">
 <input name="wpvip_uploads_use_yearmonth_folders" type="checkbox" id="wpvip_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'wpvip_uploads_use_yearmonth_folders' ) ); ?> />
-	<?php 'Organize my uploads into month- and year-based folders'; ?>
+	Organize my uploads into month- and year-based folders
 </label>
 	<?php
 }
