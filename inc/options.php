@@ -462,7 +462,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				break;
 			case 'caweb_live_drafts':
 			case 'caweb_debug_mode':
-			case 'caweb_enable_design_system';
+			case 'caweb_enable_design_system':
 				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 				// if current user can't modify this setting, set to current saved value.
