@@ -491,10 +491,9 @@ function stripeIframeAttributes(frame){
  *
  * @element cagov-site-navigation
  *
- * @cssprop --primary-color - Default value of #064E66, used for background
- * @cssprop --gray-300 - #e1e0e3
- * @cssprop --primary-dark-color - #064e66
- * @cssprop --secondary-color - #fec02f
+ * @cssprop --primary-700 - Default value of #165ac2, used for background
+ * @cssprop --primary-900 - #003588
+ * @cssprop --gray-200 - #d4d4d7
  * @cssprop --w-lg - '1176px'
  */
 
@@ -671,8 +670,16 @@ class CAGovSiteNavigation extends window.HTMLElement {
     allMenus.forEach((menu) => {
       const expandedEl = menu.querySelector('.expanded-menu-section');
       expandedEl.classList.remove('expanded');
-      menu.setAttribute('aria-expanded', 'false');
       const closestDropDown = menu.querySelector('.expanded-menu-dropdown');
+      if (
+        closestDropDown &&
+        closestDropDown.id &&
+        menu.querySelector(`button[aria-controls=${closestDropDown.id}]`)
+      ) {
+        menu
+          .querySelector(`button[aria-controls=${closestDropDown.id}]`)
+          .setAttribute('aria-expanded', 'false');
+      }
       if (closestDropDown) {
         closestDropDown.setAttribute('aria-hidden', 'true');
         const allLinks = closestDropDown.querySelectorAll('a');
@@ -693,7 +700,17 @@ class CAGovSiteNavigation extends window.HTMLElement {
         );
         if (nearestMenuDropDown) {
           nearestMenuDropDown.setAttribute('aria-hidden', 'true');
-          menu.setAttribute('aria-expanded', 'false');
+          if (
+            nearestMenuDropDown &&
+            nearestMenuDropDown.id &&
+            menu.querySelector(
+              `button[aria-controls=${nearestMenuDropDown.id}]`,
+            )
+          ) {
+            menu
+              .querySelector(`button[aria-controls=${nearestMenuDropDown.id}]`)
+              .setAttribute('aria-expanded', 'false');
+          }
         }
       }
       const menuComponent = this;
@@ -709,10 +726,18 @@ class CAGovSiteNavigation extends window.HTMLElement {
           } else {
             menuComponent.closeAllMenus();
             expandedEl.classList.add('expanded');
-            menu.setAttribute('aria-expanded', 'true');
             const closestDropDown = this.querySelector(
               '.expanded-menu-dropdown',
             );
+            if (
+              closestDropDown &&
+              closestDropDown.id &&
+              menu.querySelector(`button[aria-controls=${closestDropDown.id}]`)
+            ) {
+              menu
+                .querySelector(`button[aria-controls=${closestDropDown.id}]`)
+                .setAttribute('aria-expanded', 'true');
+            }
             if (closestDropDown) {
               closestDropDown.setAttribute('aria-hidden', 'false');
               const allLinks = closestDropDown.querySelectorAll('a');
