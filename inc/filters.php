@@ -190,7 +190,7 @@ function caweb_xmlrpc_enabled() {
  * @return string
  */
 function caweb_pre_uploads_use_yearmonth_folders( $value ) {
-	return get_option( 'wpvip_uploads_use_yearmonth_folders', '1' );
+	return get_option( 'caweb_uploads_use_yearmonth_folders', '1' );
 }
 
 /**
