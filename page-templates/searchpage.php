@@ -9,34 +9,28 @@
  * @package CAWeb
  */
 
-// Page Classes.
-$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
-$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
+$caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content';
 
-$caweb_header_file = dirname( __DIR__ ) . '/partials/content/';
-
-if ( $caweb_enable_design_system ) {
-	$caweb_page_container_class    .= ' page-container-ds';
-	$caweb_page_main_content_class .= '  main-content-ds';
-	$caweb_header_file              = dirname( __DIR__ ) . '/partials/design-system/';
-}
-
-
-get_header();
 ?>
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head><?php wp_head(); ?></head>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
-	<?php require_once $caweb_header_file . 'header.php'; ?>
+	<?php
+		/**
+		 * Loads header
+		 */
+		get_header();
+	?>
 
-	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
-		<?php do_action( 'caweb_pre_main_area' ); ?>
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
-				<?php do_action( 'caweb_pre_main_primary' ); ?>
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 				<main class="main-primary">
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once $caweb_header_file . 'search-form.php';
+						require_once "partials/$caweb_content_dir/search-form.php";
 						?>
 					</div>
 					<div class="section">
@@ -51,10 +45,12 @@ get_header();
 		</div>
 	</div>
 
-	<?php do_action( 'caweb_pre_footer' ); ?>
-
-	<?php get_footer(); ?>
+	<?php
+		/**
+		 * Loads footer
+		 */
+		get_footer();
+	?>
 
 </body>
-
 </html>

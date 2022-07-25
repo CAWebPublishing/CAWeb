@@ -31,7 +31,6 @@ add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
 add_action( 'send_headers', 'caweb_enable_hsts' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
-add_action( 'get_header', 'caweb_get_header' );
 add_action( 'wp_head', 'caweb_wp_head' );
 add_action( 'wp_footer', 'caweb_wp_footer', 11 );
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
@@ -237,24 +236,6 @@ function caweb_pre_get_posts( $query ) {
 }
 
 /**
- * Add template header if using Divi Custom Type 'Project
- *
- * @category add_action( 'get_header', 'caweb_get_header' );
- * @link https://developer.wordpress.org/reference/hooks/get_header/
- * @param  string $name Name of the specific header file to use. null for the default header.
- *
- * @return void
- */
-function caweb_get_header( $name = null ) {
-	$post_type = get_post_type( get_the_ID() );
-
-	if ( in_array( $post_type, array( 'project', 'tribe_events' ), true ) || empty( $post_type ) ) {
-		locate_template( array( 'header.php' ), true );
-		locate_template( array( 'partials/header.php' ), true, true, array( 'loaded' => true ) );
-	}
-}
-
-/**
  * Register CAWeb Theme scripts/styles with priority of 99999999
  *
  * Fires when scripts and styles are enqueued.
@@ -375,8 +356,52 @@ function caweb_wp_enqueue_scripts() {
  * @return void
  */
 function caweb_wp_head() {
-	$caweb_fav_ico = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
+	global $is_IE, $is_edge;
+
+	$caweb_fav_ico            = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
+	$caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
+	$caweb_x_ua_compatibility = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
+	$caweb_apple_icon         = CAWEB_URI . '/images/system/apple-touch-icon';
+
 	?>
+	<meta charset="utf-8">
+	<meta name="Author" content="State of California" />
+	<meta name="Description" content="State of California" />
+	<meta name="Keywords" content="California, government" />
+
+	<!-- http://t.co/dKP3o1e -->
+	<meta name="HandheldFriendly" content="True">
+
+	<!-- for Blackberry, AvantGo -->
+	<meta name="MobileOptimized" content="320">
+
+	<!-- for Windows mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+	<!-- Google Meta-->
+	<meta name="google-site-verification" content="<?php print esc_attr( $caweb_google_meta_id ); ?>" />
+
+	<?php if ( $is_IE ) : ?>
+	<!-- Activate ClearType for Mobile IE -->
+	<meta http-equiv="cleartype" content="on">
+	<?php endif; ?>
+
+	<?php if ( $is_IE && ! $is_edge && $caweb_x_ua_compatibility ) : ?>
+	<!-- Use highest compatibility mode -->
+	<meta http-equiv="X-UA-Compatible" content="IE=<?php print esc_attr( $caweb_x_ua_compatibility ); ?>">
+	<?php endif; ?>
+
+	<link rel="apple-touch-icon-precomposed" sizes="100x100" href="<?php print esc_url( $caweb_apple_icon ); ?>-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="192x192" href="<?php print esc_url( $caweb_apple_icon ); ?>-192x192.png">
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php print esc_url( $caweb_apple_icon ); ?>-180x180.png">
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php print esc_url( $caweb_apple_icon ); ?>-152x152.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php print esc_url( $caweb_apple_icon ); ?>-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php print esc_url( $caweb_apple_icon ); ?>-120x120.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php print esc_url( $caweb_apple_icon ); ?>-114x114.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php print esc_url( $caweb_apple_icon ); ?>-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php print esc_url( $caweb_apple_icon ); ?>-57x57.png">
+	<link rel="apple-touch-icon" href="<?php print esc_url( $caweb_apple_icon ); ?>.png">
+
 	<link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
 	<link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
 	<?php

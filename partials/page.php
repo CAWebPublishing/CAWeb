@@ -7,16 +7,17 @@
  * @package CAWeb
  */
 
+global $post;
+
+$caweb_is_page_builder_used = caweb_is_divi_used();
 ?>
 
-	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
-		<?php do_action( 'caweb_pre_main_area' ); ?>
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 			<?php if ( ! $caweb_is_page_builder_used ) : ?>
 			<div class="section">
 			<?php endif; ?>
-			<?php do_action( 'caweb_pre_main_primary' ); ?>
 				<main class="main-primary">
 
 					<?php
@@ -28,7 +29,7 @@
 
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							print esc_html( the_title( sprintf( '<!-- Page Title--><h1 class="%1$s">', esc_attr( $caweb_page_title_class ) ), '</h1>' ) );
+							print esc_html( the_title( '<!-- Page Title--><h1 class="page-title">', '</h1>' ) );
 						}
 
 						print '<div class="entry-content">';
@@ -63,7 +64,3 @@
 			</div> <!-- #main-content -->
 		</div>
 	</div>
-
-	<?php do_action( 'caweb_pre_footer' ); ?>
-
-	<?php get_footer(); ?>

@@ -12,40 +12,22 @@
  * @package CAWeb
  */
 
-get_header();
-
-/* CAGov Design System */
-$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
-
-// Page Classes.
-$caweb_page_title_class        = apply_filters( 'caweb_page_title_class', 'page-title' );
-$caweb_page_container_class    = apply_filters( 'caweb_page_container_class', 'page-container' );
-$caweb_page_main_content_class = apply_filters( 'caweb_page_main_content_class', 'main-content' );
-
-$caweb_header_file = 'partials/content/';
-
-if ( $caweb_enable_design_system ) {
-	$caweb_page_container_class    .= ' page-container-ds';
-	$caweb_page_main_content_class .= '  main-content-ds';
-	$caweb_header_file              = 'partials/design-system/';
-}
-
 ?>
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head><?php wp_head(); ?></head>
 <body <?php body_class( 'primary' ); ?>>
 	<?php
 		/**
-		 * Loads CAWeb <header> tag.
+		 * Loads header
 		 */
-		require_once $caweb_header_file . 'header.php';
+		get_header();
 	?>
 
-
-	<div id="page-container" class="<?php print esc_attr( $caweb_page_container_class ); ?>">
-		<?php do_action( 'caweb_pre_main_area' ); ?>
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-			<div id="main-content" class="<?php print esc_attr( $caweb_page_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 				<div class="section">
-				<?php do_action( 'caweb_pre_main_primary' ); ?>
 					<main class="main-primary">
 						<?php
 						global $wp_query;
@@ -156,8 +138,10 @@ if ( $caweb_enable_design_system ) {
 		}
 	</style>
 	<?php
-		do_action( 'caweb_pre_footer' );
+		/**
+		 * Loads footer
+		 */
 		get_footer();
-
 	?>
 </body>
+</html>

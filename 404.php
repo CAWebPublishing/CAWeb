@@ -7,51 +7,45 @@
  * @package CAWeb
  */
 
-/* CAGov Design System */
-$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
-
-$caweb_post_title_class        = apply_filters( 'caweb_post_title_class', 'page-title' );
-$caweb_post_container_class    = apply_filters( 'caweb_post_container_class', 'page-container' );
-$caweb_post_main_content_class = apply_filters( 'caweb_post_main_content_class', 'main-content' );
-
-$caweb_header_file = 'partials/content/';
-
-if ( $caweb_enable_design_system ) {
-	$caweb_post_container_class    .= ' page-container-ds';
-	$caweb_post_main_content_class .= '  main-content-ds';
-	$caweb_header_file              = 'partials/design-system/';
-}
-
-get_header();
 ?>
 
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head><?php wp_head(); ?></head>
 <body <?php body_class( 'primary' ); ?>>
 	<?php
 		/**
 		 * Loads CAWeb <header> tag.
 		 */
-		require_once $caweb_header_file . 'header.php';
+		get_header();
 
 	?>
 
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
+		<div id="et-main-area">
 
-	<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?>">
-		<div class="section">
-			<main class="main-primary">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>">
+				<div class="section">
+					<main class="main-primary">
 
-				<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
-					<div class="entry-content">
-						<!-- Page Title-->
-						<h1>Page Not Found</h1>
-						<div class="description">The page you requested was not found.</div>
-					</div>
-				</article> <!-- .et_pb_post -->
+						<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
+							<div class="entry-content">
+								<!-- Page Title-->
+								<h1>Page Not Found</h1>
+								<div class="description">The page you requested was not found.</div>
+							</div>
+						</article> <!-- .et_pb_post -->
 
-			</main>
+					</main>
+				</div>
+			</div> <!-- #main-content -->
 		</div>
-	</div> <!-- #main-content -->
-
-	<?php get_footer(); ?>
+	</div>
+	<?php
+		/**
+		 * Loads footer
+		 */
+		get_footer();
+	?>
 </body>
-
 </html>
