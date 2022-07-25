@@ -16,7 +16,7 @@
 function caweb_template_version( $exclude_design_system = false ) {
 	$version                    = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
 	$theme_version              = wp_get_theme()->get( 'Version' );
-	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
+	$caweb_enable_design_system = caweb_design_system_enabled();
 
 	if ( '1.5.4' <= $theme_version && '5.5' > $version ) {
 		return 5.5;
@@ -188,6 +188,10 @@ function caweb_color_schemes( $version = -1, $field = '', $color = '' ) {
 
 	if ( empty( $tmp ) ) {
 		$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
+	}
+
+	if ( 'design-system' === $version ) {
+		$tmp = array( 'cagov', 'cannabis', 'drought' );
 	}
 
 	/*
@@ -464,3 +468,11 @@ function caweb_is_divi_used() {
 
 }
 
+/**
+ * Whether or not the caGov Design System is enabled.
+ *
+ * @return bool
+ */
+function caweb_design_system_enabled() {
+	return get_option( 'caweb_enable_design_system', false );
+}

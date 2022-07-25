@@ -30,6 +30,7 @@ const {
 	a11yScripts,
 	themeCustomizerScripts,
 	themeCustomizerControlScripts,
+	designSystemThemeDir,
 	designSystemCSS,
 	designSystemJS
 } = require('./wpgulp.config.js');
@@ -212,17 +213,9 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 	var versionDir = templateCSSAssetDir + 'version-' + ver;
-	var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : 'node_modules/@cagov/ds-base-css/dist/themes/';
+	var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : designSystemThemeDir;
 
 	var colors = fs.readdirSync(versionColorschemesDir).filter(file => path.extname(file) === '.css');
-
-	var addtlStyles = [
-		templateCSSAssetDir + 'cagov.font-only.css',
-		]
-		.concat(
-			frontendStyles,
-			SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss'
-		);
 
 	var coreCSS = 'design-system' != ver ? [versionDir + '/cagov.core.css'] : [];
 	
@@ -231,10 +224,18 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 		
 		// include additional design system styles
 		if( 'design-system' === ver ){
-			f = f.concat(designSystemCSS);
+			f = f.concat(
+				designSystemCSS,
+				//SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss'
+			);
+		}else{
+			f =	f.concat(
+				templateCSSAssetDir + 'cagov.font-only.css',
+				frontendStyles, 
+				SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss');
+
 		}
 
-		f =	f.concat(addtlStyles);
 
 		var color = availableColors[e];
 		var t = minified ? ' Minified ] ' : ' ] ';

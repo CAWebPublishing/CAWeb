@@ -5,7 +5,6 @@
  * @package CAWeb
  */
 
-
 ?>
 <!-- mobile navigation controls -->
 <div class="mobile-controls">
