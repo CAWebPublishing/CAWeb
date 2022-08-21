@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@cagov/ds-base-css": "^1.0.19",
+    "@cagov/ds-link-icon": "^1.1.2",
     "@cagov/ds-site-footer": "^1.1.1",
     "@cagov/ds-site-header": "^1.1.1",
     "@cagov/ds-site-navigation": "^2.1.4",
