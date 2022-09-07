@@ -7,18 +7,21 @@
  * @package CAWeb
  */
 
+global $post;
+
+$caweb_is_page_builder_used = caweb_is_divi_used();
+
+// Post Classes.
+$caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
+
 ?>
 
-	<div id="page-container" class="<?php print esc_attr( $caweb_post_container_class ); ?>">
-	<?php do_action( 'caweb_pre_main_area' ); ?>
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-
-			<div id="main-content" class="<?php print esc_attr( $caweb_post_main_content_class ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 			<?php if ( ! $caweb_is_page_builder_used ) : ?>
 			<div class="section">
 			<?php endif; ?>
-			<?php do_action( 'caweb_pre_main_primary' ); ?>
-
 				<main class="main-primary">
 
 					<?php
@@ -28,10 +31,9 @@
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-						<!-- Page Title-->
 						<?php
 						if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-							esc_html( the_title( "<h1 class=\"$caweb_post_title_class\">", '</h1>' ) );
+							print esc_html( the_title( sprintf( '<!-- Page Title--><h1 class="page-title%1$s">', $caweb_padding ), '</h1>' ) );
 						}
 
 						if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {
@@ -87,7 +89,3 @@
 			</div> <!-- #main-content -->
 		</div>
 	</div>
-
-	<?php do_action( 'caweb_pre_footer' ); ?>
-
-	<?php get_footer(); ?>

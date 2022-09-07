@@ -5,7 +5,6 @@
  * @package CAWeb
  */
 
-
 ?>
 <!-- mobile navigation controls -->
 <div class="cagov-nav mobile-icons grid-mobile-icons">
@@ -23,13 +22,13 @@
 		</button>
 	</div>
 	<?php endif; ?>
-    <button class="menu-trigger cagov-nav open-menu" aria-label="Navigation menu" aria-haspopup="true" aria-expanded="false"
-        aria-owns="mainMenu" aria-controls="mainMenu">
-        <div class="cagov-nav hamburger">
-            <div class="hamburger-box">
-                <div class="hamburger-inner"></div>
-            </div>
-        </div>
- 	   <div class="cagov-nav menu-trigger-label menu-label" data-openlabel="Open" data-closelabel="Close">Menu</div>
-    </button>
+	<button class="menu-trigger cagov-nav open-menu" aria-label="Navigation menu" aria-haspopup="true" aria-expanded="false"
+		aria-owns="mainMenu" aria-controls="mainMenu">
+		<div class="cagov-nav hamburger">
+			<div class="hamburger-box">
+				<div class="hamburger-inner"></div>
+			</div>
+		</div>
+		<div class="cagov-nav menu-trigger-label menu-label" data-openlabel="Open" data-closelabel="Close">Menu</div>
+	</button>
 </div>

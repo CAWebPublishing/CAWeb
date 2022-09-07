@@ -44,7 +44,7 @@ if(isSubDomainTracker == true)
 
 
 var arr = document.getElementsByTagName("a");
-for(i=0; i < arr.length; i++)
+for(var i=0; i < arr.length; i++)
  {
 	var flag = 0;
 	var mDownAtt = arr[i].getAttribute("onmousedown");

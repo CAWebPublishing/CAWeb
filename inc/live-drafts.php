@@ -154,10 +154,11 @@ function caweb_live_drafts_admin_head() {
 						})
 
 						// if changes are made to the builder, remove the Save Draft button.
-						$('#et-bfb-app-frame')[0].contentWindow.document.onclick = function(){
-							$('.caweb-save-draft').remove();
-						};
-
+						if( undefined !== $('#et-bfb-app-frame') ){
+							$('#et-bfb-app-frame')[0].contentWindow.document.onclick = function(){
+								$('.caweb-save-draft').remove();
+							};
+						}
 					}, 5000);
 
 				});

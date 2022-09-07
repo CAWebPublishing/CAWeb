@@ -11,17 +11,18 @@
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<?php
-	get_header();
-?>
-
+<head><?php wp_head(); ?></head>
 <body <?php body_class( 'primary' ); ?>>
-	<?php require_once 'partials/header.php'; ?>
+	<?php
+		/**
+		 * Loads header
+		 */
+		get_header();
+	?>
 
-
-	<div id="page-container">
+	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-			<div id="main-content" class="main-content">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 				<div class="section">
 					<main class="main-primary">
 
@@ -98,11 +99,15 @@
 						<?php
 					endif;
 					?>
-				</div> <!-- #main-content -->
-			</div>
+				</div> 
+			</div> <!-- #main-content -->
 		</div>
 	</div>
-	<?php get_footer(); ?>
+	<?php
+		/**
+		 * Loads footer
+		 */
+		get_footer();
+	?>
 </body>
-
 </html>

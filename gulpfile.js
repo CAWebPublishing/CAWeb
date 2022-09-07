@@ -29,7 +29,10 @@ const {
 	frontendScripts,
 	a11yScripts,
 	themeCustomizerScripts,
-	themeCustomizerControlScripts
+	themeCustomizerControlScripts,
+	designSystemThemeDir,
+	designSystemCSS,
+	designSystemJS
 } = require('./wpgulp.config.js');
 
 /**
@@ -65,6 +68,7 @@ var path = require('path');
 var argv = require('yargs').argv;
 var log = require('fancy-log');
 var tap = require('gulp-tap');
+const { color } = require('gulp-cli/lib/shared/cli-options.js');
 
 task('monitor', function () {
 
@@ -197,7 +201,7 @@ async function buildAdminStyles(min = false) {
 }
 
 task('test', async function(){
-	buildFrontEndStyles(false, 'design-system')
+	buildFrontendScripts(false, 'design-system')
 })
 /**
  * Build CAWeb Theme FrontEnd Styles
@@ -209,18 +213,30 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
 	var versionDir = templateCSSAssetDir + 'version-' + ver;
-	//var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : 'node_modules/@cagov/ds-base-css/src/themes/';
-	//var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : 'node_modules/@cagov/ds-base-css/dist/themes/';
-	var versionColorschemesDir = versionDir + '/colorscheme/';
-	var colors = fs.readdirSync(versionColorschemesDir);
-	var core_css = 'design-system' != ver ? versionDir + '/cagov.core.css' : 'node_modules/@cagov/*/src/index.scss';
-	colors.forEach(function (e) {
+	var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : designSystemThemeDir;
 
-		var f = [core_css,
-		versionColorschemesDir + e,
-		templateCSSAssetDir + 'cagov.font-only.css'];
-		f = f.concat(frontendStyles);
-		f = f.concat( SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss' );
+	var colors = fs.readdirSync(versionColorschemesDir).filter(file => path.extname(file) === '.css');
+
+	var coreCSS = 'design-system' != ver ? [versionDir + '/cagov.core.css'] : [];
+	
+	colors.forEach(function (e) {
+		var f = coreCSS.concat(versionColorschemesDir + e);
+		
+		// include additional design system styles
+		if( 'design-system' === ver ){
+			f = f.concat(
+				designSystemCSS,
+				//SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss'
+			);
+		}else{
+			f =	f.concat(
+				templateCSSAssetDir + 'cagov.font-only.css',
+				frontendStyles, 
+				SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss');
+
+		}
+
+
 		var color = availableColors[e];
 		var t = minified ? ' Minified ] ' : ' ] ';
 	
@@ -293,10 +309,10 @@ async function buildFrontendScripts(min = false, ver = templateVer) {
 	var minified = min ? '.min' : '';
 	var versionDir = JSAssetDir + 'cagov/version-' + ver;
 
-	var core_js = 'design-system' != ver ? versionDir + '/cagov.core.js' : 'node_modules/@cagov/*/dist/index.js';
+	var coreJS = 'design-system' != ver ? [versionDir + '/cagov.core.js'] : designSystemJS;
 	var f = frontendScripts.concat(
-			[core_js,
-			versionDir + '/custom.js' ],
+			coreJS, 
+			versionDir + '/custom.js',
 			a11yScripts,
 	);
 

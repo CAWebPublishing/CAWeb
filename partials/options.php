@@ -108,7 +108,7 @@ function caweb_display_general_options() {
 	$navigation_menu = get_option( 'ca_default_navigation_menu', 'megadropdown' );
 
 	// Design System enabled.
-	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false );
+	$caweb_enable_design_system = caweb_design_system_enabled();
 
 	// Color Scheme.
 	$color_scheme      = get_option( 'ca_site_color_scheme', 'oceanside' );
@@ -151,7 +151,8 @@ function caweb_display_general_options() {
 	</div>
 	<div class="collapse show" id="general-setting" data-parent="#general-settings">
 		<?php
-		if ( is_multisite() && current_user_can( 'manage_network_options' ) ) :
+		$network = is_multisite() ? 'manage_network_options' : 'manage_options';
+		if ( current_user_can( $network ) ) :
 			?>
 		<!-- Enable Design System -->
 		<div class="form-row">
@@ -921,7 +922,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 	$cap                        = is_multisite() ? 'manage_network_options' : 'manage_options';
 	$live_drafts_enabled        = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 	$caweb_debug_mode_enabled   = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
-	$caweb_enable_design_system = get_option( 'caweb_enable_design_system', false ) ? ' checked' : '';
+	$caweb_enable_design_system = caweb_design_system_enabled() ? ' checked' : '';
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-parent="#caweb-settings">
 	<div class="form-row">
