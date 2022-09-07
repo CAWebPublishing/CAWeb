@@ -35,7 +35,7 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 					</div>
 					<div class="section">
 						<div class="container">
-							<h1>Search Results for: <?php print esc_attr( $keyword ); ?></h1>
+							<h1>Search Results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
 							<gcse:searchresults-only></gcse:searchresults-only>
 						</div>
 					</div>
