@@ -18,7 +18,7 @@ $caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
 
 	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
 		<div id="et-main-area">
-			<div id="main-content" class="main-content<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
+			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
 			<?php if ( ! $caweb_is_page_builder_used ) : ?>
 			<div class="section">
 			<?php endif; ?>
