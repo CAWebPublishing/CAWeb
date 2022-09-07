@@ -7,13 +7,13 @@
 
 $caweb_search_nonce    = wp_create_nonce( 'caweb_google_cse' );
 $caweb_search_verified = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_key( $caweb_search_nonce ), 'caweb_google_cse' );
-$caweb_search_keyword  = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+$caweb_keyword  = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 <div class="search-container search-container--small grid-search">
 	<form class="site-search" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
 		<span class="sr-only" id="SearchInput">Custom Google Search</span>
-		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_search_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search this website" class="search-textfield">
+		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search this website" class="search-textfield">
 		<button type="submit" class="search-submit">
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 					width="17px" height="17px" viewBox="0 0 17 17" style="enable-background:new 0 0 17 17;"

@@ -30,7 +30,7 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once "partials/$caweb_content_dir/search-form.php";
+						require_once dirname(__DIR__) . "/partials/$caweb_content_dir/search-form.php";
 						?>
 					</div>
 					<div class="section">
