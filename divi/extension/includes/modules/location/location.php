@@ -237,7 +237,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$location_layout = $this->props['location_layout'];
 
 		$this->add_classname( 'location' );

@@ -168,7 +168,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$slide_image            = $this->props['slide_image'];
 		$slide_title            = $this->props['slide_title'];
 		$slide_title_size       = $this->props['slide_title_size'];

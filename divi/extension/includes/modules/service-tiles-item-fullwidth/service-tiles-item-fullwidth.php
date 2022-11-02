@@ -165,7 +165,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles_Item extends ET_Builder_CAWeb_Module 
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return void
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		global $caweb_tile_count, $caweb_tiles;
 
 		$this->add_classname( 'service-tile-panel' );

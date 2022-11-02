@@ -1393,7 +1393,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		global $post;
 		$post_type_layout = $this->props['post_type_layout'];
 

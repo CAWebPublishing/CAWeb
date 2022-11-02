@@ -231,7 +231,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$carousel_style = $this->props['carousel_style'];
 		$in_panel       = $this->props['in_panel'];
 		$panel_layout   = $this->props['panel_layout'];
