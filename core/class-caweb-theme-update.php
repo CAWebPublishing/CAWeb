@@ -215,7 +215,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		 * @param  string      $package The package file name.
 		 * @param  WP_Upgrader $upgrader The WP_Upgrader instance.
 		 *
-		 * @category {add_filter( 'upgrader_pre_download' ,array( $this, 'caweb_upgrader_pre_download' ),10, 3 );}
+		 * @wp_filter {add_filter( 'upgrader_pre_download' ,array( $this, 'caweb_upgrader_pre_download' ),10, 3 );}
 		 * @return bool
 		 */
 		public function caweb_upgrader_pre_download( $reply, $package, $upgrader ) {

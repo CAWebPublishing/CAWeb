@@ -42,7 +42,7 @@ if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 	/**
 	 * Creates the CAWeb Module extension's main class instance.
 	 *
-	 * @category add_action( 'divi_extensions_init', 'caweb_initialize_extension' );
+	 * @wp_action add_action( 'divi_extensions_init', 'caweb_initialize_extension' );
 	 * @since 1.0.0
 	 */
 	function caweb_initialize_extension() {
@@ -56,7 +56,7 @@ if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 	 *
 	 * Fixes various Divi Module Outputs
 	 *
-	 * @category add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
+	 * @wp_filter add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
 	 * @param  string             $output Divi Module shortcode output.
 	 * @param  string             $render_slug Divi Module render_slug.
 	 * @param  ET_Builder_Element $module The Divi Builder Element Object.

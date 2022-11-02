@@ -12,7 +12,7 @@ add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_atta
 /**
  * Retrieve attachment post meta alt text
  *
- * @category {
+ * @wp_action {
  * add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
  * add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
  * }
