@@ -105,7 +105,7 @@ class CAWeb_Module_Fullwidth_Header_Slideshow_Banner extends ET_Builder_CAWeb_Mo
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$scroll_bar_text = $this->props['scroll_bar_text'];
 		$scroll_bar_icon = $this->props['font_icon'];
 

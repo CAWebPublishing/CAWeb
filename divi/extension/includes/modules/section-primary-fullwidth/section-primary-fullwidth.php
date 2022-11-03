@@ -206,7 +206,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$featured_image_button    = $this->props['featured_image_button'];
 		$show_more_button         = $this->props['show_more_button'];
 		$section_background_color = $this->props['section_background_color'];

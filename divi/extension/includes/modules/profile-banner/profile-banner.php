@@ -158,7 +158,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$name         = $this->props['name'];
 		$job_title    = $this->props['job_title'];
 		$profile_link = $this->props['profile_link'];

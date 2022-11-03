@@ -220,7 +220,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$panel_layout       = $this->props['panel_layout'];
 		$use_icon           = $this->props['use_icon'];
 		$icon               = $this->props['font_icon'];

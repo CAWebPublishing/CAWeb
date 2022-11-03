@@ -203,7 +203,7 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$title               = $this->props['title'];
 		$title_size          = $this->props['title_size'];
 		$username            = $this->props['username'];

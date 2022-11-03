@@ -91,7 +91,7 @@ class CAWeb_Module_Fullwidth_Section_Footer extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$section_bg_color = $this->props['section_background_color'];
 
 		$content = $this->content;
