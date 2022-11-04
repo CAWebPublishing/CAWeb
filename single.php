@@ -10,7 +10,13 @@
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head><?php wp_head(); ?></head>
+<head>
+	<?php 
+		if( function_exists( 'wp_head' ) ){
+			wp_head();
+		} 
+	?>
+</head>
 <body <?php body_class( 'primary' ); ?>>
 	<?php
 		/**
