@@ -14,7 +14,13 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head><?php wp_head(); ?></head>
+<head>
+	<?php 
+		if( function_exists( 'wp_head' ) ){
+			wp_head();
+		} 
+	?>
+</head>
 <body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
 	<?php
 		/**
