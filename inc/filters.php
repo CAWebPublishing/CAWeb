@@ -129,7 +129,7 @@ function caweb_script_loader_tag( $tag, $handle, $src ) {
 
 	// Register script as module.
 	if ( 'caweb-script' === $handle && caweb_design_system_enabled() ) {
-		$tag = sprintf('<script type="module" id="caweb-script" src="%1$s"></script>', $src);
+		$tag = sprintf( '<script type="module" id="caweb-script" src="%1$s"></script>', $src );
 	}
 
 	return $tag;
