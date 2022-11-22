@@ -25,7 +25,7 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 <?php
 if ( function_exists( 'body_class' ) ) {
 	body_class( 'primary et-tb et-tb-has-header' );
-};
+}
 ?>
 >
 	<?php

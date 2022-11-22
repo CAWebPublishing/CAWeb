@@ -18,7 +18,7 @@
 		} 
 	?>
 </head>
-<body <?php if( function_exists( 'body_class' ) ){ body_class( 'primary' ); }; ?>>
+<body <?php if( function_exists( 'body_class' ) ){ body_class( 'primary' ); } ?>>
 	<?php
 		/**
 		 * Loads CAWeb <header> tag.
