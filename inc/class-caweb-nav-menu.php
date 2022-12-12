@@ -7,6 +7,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 	/**
 	 * Core class used to implement an HTML list of nav menu items.

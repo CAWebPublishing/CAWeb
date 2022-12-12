@@ -7,18 +7,17 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-	<?php 
-		if( function_exists( 'wp_head' ) ){
-			wp_head();
-		} 
-	?>
+	<?php wp_head(); ?>
 </head>
-<body <?php if( function_exists( 'body_class' ) ){ body_class( 'primary' ); } ?>>
+<body <?php body_class( 'primary' ); ?>>
 	<?php
 		/**
 		 * Loads header

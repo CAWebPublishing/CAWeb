@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );

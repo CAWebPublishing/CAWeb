@@ -7,6 +7,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'customize_preview_init', 'caweb_customize_preview_init' );
 add_action( 'customize_controls_enqueue_scripts', 'caweb_customize_controls_enqueue_scripts' );
 add_action( 'customize_controls_print_styles', 'caweb_customize_controls_print_styles' );

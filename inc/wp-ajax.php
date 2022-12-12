@@ -6,6 +6,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker' );
 add_action( 'wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func' );
 add_action( 'wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func' );

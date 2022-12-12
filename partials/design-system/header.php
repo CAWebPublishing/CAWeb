@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $caweb_loaded       = isset( $args['loaded'] ) && $args['loaded'];
 $caweb_fixed_header = ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
 $caweb_color        = get_option( 'ca_site_color_scheme', 'cagov' );
