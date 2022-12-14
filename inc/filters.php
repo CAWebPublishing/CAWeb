@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /* WP Filters */
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
 add_filter( 'post_class', 'caweb_post_class', 15 );
@@ -129,7 +133,12 @@ function caweb_script_loader_tag( $tag, $handle, $src ) {
 
 	// Register script as module.
 	if ( 'caweb-script' === $handle && caweb_design_system_enabled() ) {
-		$tag = sprintf( '<script type="module" id="caweb-script" src="%1$s"></script>', $src );
+		$tag = str_replace( "type='text/javascript'", 'type="module"', $tag );
+
+		// force the type attribute if it doesn't exist.
+		if ( ! str_contains( $tag, 'type=' ) ) {
+			$tag = str_replace( 'src', 'type="module" src', $tag );
+		}
 	}
 
 	return $tag;

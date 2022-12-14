@@ -54,7 +54,7 @@
 	<!-- Set the minimum supported WP version. This is used by several sniffs.
 		 The minimum version set here should be in line with the minimum WP version
 		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="5.7"/>
+	<config name="minimum_supported_wp_version" value="6.0"/>
 
 	<!--
 	#############################################################################
@@ -135,12 +135,12 @@
 	USE THE PHPCompatibility RULESET
 	#############################################################################
 	-->
-    <config name="testVersion" value="5.7-"/>
+    <config name="testVersion" value="6.0-"/>
     <rule ref="PHPCompatibilityWP">
         <include-pattern>*\.php$</include-pattern>
     </rule>
 
-    <config name="testVersion" value="7.4-"/>
+    <config name="testVersion" value="8.0-"/>
 	<rule ref="PHPCompatibility">
 		<!-- Whitelist PHP native classes, interfaces, functions and constants which
 			 are back-filled by WP.

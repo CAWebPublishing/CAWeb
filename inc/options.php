@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'admin_menu', 'caweb_admin_menu' );
 add_action( 'admin_menu', 'caweb_remove_admin_menus', 999 );
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );

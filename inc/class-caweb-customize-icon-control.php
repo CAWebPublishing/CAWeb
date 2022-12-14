@@ -6,6 +6,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( class_exists( 'WP_Customize_Control' ) ) {
 	/**
 	 * CAWeb_Customize_Icon_Control

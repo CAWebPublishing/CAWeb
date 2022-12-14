@@ -9,6 +9,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( caweb_design_system_enabled() ) {
 	require_once 'partials/design-system/header.php';
 } else {

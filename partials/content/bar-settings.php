@@ -5,6 +5,9 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 
 <div class="site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">

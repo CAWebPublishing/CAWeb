@@ -7,6 +7,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 	/**
 	 * CAWeb Theme Upgrader
@@ -281,9 +285,11 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		 * @return void
 		 */
 		public function caweb_update_available() {
+			// phpcs:disable
 			if ( isset( $_POST['payload'] ) ) {
 				$this->check_update( null );
 			}
+			// phpcs:enable
 			exit();
 		}
 	}

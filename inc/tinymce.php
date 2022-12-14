@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_filter( 'tiny_mce_before_init', 'caweb_tiny_mce_before_init', 15 );
 add_filter( 'mce_buttons', 'caweb_mce_buttons', 15 );
 add_filter( 'mce_buttons_2', 'caweb_mce_buttons_2', 15 );

@@ -7,6 +7,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'load-post.php', 'caweb_live_drafts_init' );
 add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
 add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );

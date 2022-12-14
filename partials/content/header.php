@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 global $post;
 
 $caweb_loaded       = isset( $args['loaded'] ) && $args['loaded'];

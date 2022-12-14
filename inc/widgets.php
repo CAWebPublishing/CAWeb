@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'wp_dashboard_setup', 'caweb_add_dashboard_widgets' );
 add_action( 'widgets_init', 'caweb_custom_sidebar' );
 

@@ -6,6 +6,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
 
 /**

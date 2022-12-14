@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( 'off' === get_option( 'ca_geo_locator_enabled', false ) || ! get_option( 'ca_geo_locator_enabled', false ) ) {
 	return;
 }
