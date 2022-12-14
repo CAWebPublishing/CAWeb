@@ -136,7 +136,7 @@ function caweb_script_loader_tag( $tag, $handle, $src ) {
 		$tag = str_replace( "type='text/javascript'", 'type="module"', $tag );
 
 		// force the type attribute if it doesn't exist.
-		if ( ! str_contains( $tag, 'type=' ) ) {
+		if ( false === strpos( $tag, 'type=' ) ) {
 			$tag = str_replace( 'src', 'type="module" src', $tag );
 		}
 	}
