@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content';
+$caweb_keyword         = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 <!DOCTYPE html>
