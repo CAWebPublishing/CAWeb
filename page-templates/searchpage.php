@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content';
+$caweb_keyword         = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +41,7 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 						?>
 					</div>
 					<div class="section">
-						<div class="container">
+						<div class="<?php print esc_attr( ! caweb_design_system_enabled() ? 'container' : '' ) ?>">
 							<h1>Search Results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
 							<gcse:searchresults-only></gcse:searchresults-only>
 						</div>
