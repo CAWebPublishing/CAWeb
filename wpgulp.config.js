@@ -74,7 +74,7 @@ module.exports = {
 		'node_modules/@cagov/*/src/index.scss',
 	], 
 	designSystemJS: [ // Design Components JS
-		'node_modules/@cagov/ds-link-icon/src/index.js',
+		// 'node_modules/@cagov/ds-link-icon/src/index.js', waiting for export statement to be removed 1.1.2
 		'node_modules/@cagov/ds-site-navigation/src/index.js',
 		'node_modules/@cagov/ds-statewide-header/src/index.js',
 	],
