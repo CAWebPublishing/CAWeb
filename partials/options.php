@@ -173,9 +173,9 @@ function caweb_display_general_options() {
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
-					<option value="5.5"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>>Version 5.5</option>
+					<option value="5.5"<?php print "5.0" === "$ver" ? ' selected="selected"' : ''; ?>>Version 5.5</option>
 					<?php if ( current_user_can( $network ) ) : ?>
-						<option value="6.0"<?php print "$version" === "$ver" ? ' selected="selected"' : ''; ?>>Version 6.0</option>
+						<option value="6.0"<?php print "6.0" === "$ver" ? ' selected="selected"' : ''; ?>>Version 6.0</option>
 					<?php endif; ?>
 				</select>
 			</div>
