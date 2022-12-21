@@ -8,6 +8,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 wp_nav_menu(
 	array(
 		'theme_location' => 'footer-menu',

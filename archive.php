@@ -7,10 +7,15 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head><?php wp_head(); ?></head>
+<head>
+	<?php wp_head(); ?>
+</head>
 <body <?php body_class( 'primary' ); ?>>
 	<?php
 

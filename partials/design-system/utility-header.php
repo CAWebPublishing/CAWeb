@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );
@@ -51,7 +55,7 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 					</g>
 				</svg>
 			</a>
-			<p class="official-tag"><span class="desktop-only">Official website of the </span>State of California</p>
+			<p class="official-tag"><span class="desktop-only">Official website of the&nbsp;</span>State of California</p>
 		</div> <!-- official-logo -->
 
 		<div class="official-languages">

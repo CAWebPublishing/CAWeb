@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'add_meta_boxes', 'caweb_add_meta_boxes' );
 add_action( 'admin_head-nav-menus.php', 'caweb_admin_head_nav_menus' );
 add_action( 'save_post', 'caweb_save_post', 10, 2 );

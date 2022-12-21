@@ -5,6 +5,9 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 <!-- mobile navigation controls -->
 <div class="cagov-nav mobile-icons grid-mobile-icons">

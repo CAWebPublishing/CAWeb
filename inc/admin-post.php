@@ -6,13 +6,17 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
 add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
 
 /**
  * Retrieve attachment post meta alt text
  *
- * @category {
+ * @wp_action {
  * add_action( 'admin_post_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
  * add_action( 'admin_post_nopriv_caweb_attachment_post_meta', 'caweb_retrieve_attachment_post_meta' );
  * }

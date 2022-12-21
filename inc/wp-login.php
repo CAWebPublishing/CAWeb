@@ -8,13 +8,17 @@
  * @package CAWeb
  */
 
-/* Actions */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+// Actions.
 add_action( 'lostpassword_form', 'caweb_lostpassword_form' );
 add_action( 'login_form_lostpassword', 'caweb_login_form_lostpassword' );
 add_action( 'login_form_rp', 'caweb_login_form_rp' );
 add_action( 'validate_password_reset', 'caweb_validate_password_reset', 10, 2 );
 
-/* Filters */
+// Filters.
 add_filter( 'lostpassword_url', 'caweb_lostpassword_url', 10, 2 );
 add_filter( 'lostpassword_redirect', 'caweb_lostpassword_redirect' );
 add_filter( 'retrieve_password_title', 'caweb_retrieve_password_title', 10, 3 );

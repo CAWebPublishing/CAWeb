@@ -6,6 +6,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_shortcode( 'caweb_google_translate', 'caweb_google_translate_func' );
 add_shortcode( 'caweb_icon_menu', 'caweb_icon_menu' );
 

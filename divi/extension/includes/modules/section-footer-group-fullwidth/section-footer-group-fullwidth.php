@@ -247,7 +247,7 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$heading_size           = $this->props['heading_size'];
 		$heading_color          = $this->props['heading_color'];
 		$group_show_more_button = $this->props['group_show_more_button'];

@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Returns the Site Wide Template Version Setting
  *
@@ -102,67 +106,88 @@ function caweb_get_min_file( $f, $ext = 'css' ) {
 /**
  * CA.gov Template Colors
  *
+ * @link https://template.webstandards.ca.gov/sample/color-schemes.html
+ * 
  * @return array
  */
 function caweb_template_colors() {
-	$color['oceanside'] = array(
-		'highlight' => '#FDB81E',
-		'primary'   => '#046B99',
-		'standout'  => '#323A45',
-		's1'        => '#E1F2F7',
+
+	$colors = array(
+		'delta' => array(
+			'highlight' => '#A5BDC5',
+			'primary'   => '#577786',
+			'standout'  => '#46565E',
+			's1'        => '#F5F9FA',
+		),
+		'eureka' => array(
+			'highlight' => '#D9B295',
+			'primary'   => '#3E4B4D',
+			'standout'  => '#21272A',
+			's1'        => '#F9F8F8',
+		),
+		'mono' => array(
+			'highlight' => '#FFCE2B',
+			'primary'   => '#545351',
+			'standout'  => '#191919',
+			's1'        => '#F4F3EF',
+		),
+		'oceanside' => array(
+			'highlight' => '#FDB81E',
+			'primary'   => '#046B99',
+			'standout'  => '#323A45',
+			's1'        => '#E1F2F7',
+		),
+		'orangecounty' => array(
+			'highlight' => '#FBAD23',
+			'primary'   => '#A15801',
+			'standout'  => '#483723',
+			's1'        => '#F1EDE4',
+		),
+		'pasorobles' => array(
+			'highlight' => '#FBAD23',
+			'primary'   => '#9A0000',
+			'standout'  => '#313131',
+			's1'        => '#F5F5F5',
+		),
+		'sacramento' => array(
+			'highlight' => '#7BB0DA',
+			'primary'   => '#153554',
+			'standout'  => '#730000',
+			's1'        => '#E1ECF7',
+		),
+		'santabarbara' => array(
+			'highlight' => '#FF9B53',
+			'primary'   => '#60617D',
+			'standout'  => '#664945',
+			's1'        => '#FFEBD7',
+		),
+		'santacruz' => array(
+			'highlight' => '#F5811B',
+			'primary'   => '#0F4F94',
+			'standout'  => '#2C2C4F',
+			's1'        => '#E1ECF7',
+		),
+		'shasta' => array(
+			'highlight' => '#FBAD23',
+			'primary'   => '#336C39',
+			'standout'  => '#3C4543',
+			's1'        => '#EFFAF6',
+		),
+		'sierra' => array(
+			'highlight' => '#FBAD23',
+			'primary'   => '#447766',
+			'standout'  => '#194949',
+			's1'        => '#EFFAF6',
+		),
+		'trinity' => array(
+			'highlight' => '#C19E73',
+			'primary'   => '#446A7C',
+			'standout'  => '#21272A',
+			's1'        => '#F9F8F8',
+		)
 	);
 
-	$color['orangecounty'] = array(
-		'highlight' => '#FBAD23',
-		'primary'   => '#A15801',
-		'standout'  => '#483723',
-		's1'        => '#F1EDE4',
-	);
-
-	$color['pasorobles']   = array(
-		'highlight' => '#FBAD23',
-		'primary'   => '#9A0000',
-		'standout'  => '#313131',
-		's1'        => '#F5F5F5',
-	);
-	$color['santabarbara'] = array(
-		'highlight' => '#FF9B53',
-		'primary'   => '#60617D',
-		'standout'  => '#664945',
-		's1'        => '#FFEBD7',
-	);
-	$color['sierra']       = array(
-		'highlight' => '#FBAD23',
-		'primary'   => '#447766',
-		'standout'  => '#194949',
-		's1'        => '#EFFAF6',
-	);
-	$color['mono']         = array(
-		'highlight' => '#FFCE2B',
-		'primary'   => '#545351',
-		'standout'  => '#191919',
-		's1'        => '#F4F3EF',
-	);
-	$color['trinity']      = array(
-		'highlight' => '#C19E73',
-		'primary'   => '#446A7C',
-		'standout'  => '#21272A',
-		's1'        => '#F9F8F8',
-	);
-	$color['eureka']       = array(
-		'highlight' => '#D9B295',
-		'primary'   => '#3E4B4D',
-		'standout'  => '#21272A',
-		's1'        => '#F9F8F8',
-	);
-	$color['sacramento']   = array(
-		'highlight' => '#7BB0DA',
-		'primary'   => '#153554',
-		'standout'  => '#730000',
-		's1'        => '#E1ECF7',
-	);
-
-	return $color;
+	return $colors;
 }
 
 /**

@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_filter( 'et_pb_font_icon_symbols', 'caweb_et_pb_font_icon_symbols' );
 
 /**

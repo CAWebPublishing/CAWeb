@@ -9,13 +9,20 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content';
+$caweb_keyword         = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head><?php wp_head(); ?></head>
-<body <?php body_class( 'primary et-tb et-tb-has-header' ); ?>>
+<head>
+	<?php wp_head(); ?>
+</head>
+<body <?php body_class( 'primary' ); ?>>
 	<?php
 		/**
 		 * Loads header
@@ -30,11 +37,11 @@ $caweb_content_dir = caweb_design_system_enabled() ? 'design-system' : 'content'
 					<!--Search result section-->
 					<div class="section section-default search-container active px-0">
 						<?php
-						require_once dirname(__DIR__) . "/partials/$caweb_content_dir/search-form.php";
+						require_once dirname( __DIR__ ) . "/partials/$caweb_content_dir/search-form.php";
 						?>
 					</div>
 					<div class="section">
-						<div class="container">
+						<div class="<?php print esc_attr( ! caweb_design_system_enabled() ? 'container' : '' ) ?>">
 							<h1>Search Results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
 							<gcse:searchresults-only></gcse:searchresults-only>
 						</div>

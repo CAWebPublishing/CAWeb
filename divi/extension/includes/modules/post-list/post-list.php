@@ -237,7 +237,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$module_class        = $this->props['module_class'];
 		$list_title          = $this->props['title'];
 		$title_size          = $this->props['title_size'];

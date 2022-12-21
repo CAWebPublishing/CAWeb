@@ -8,7 +8,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit();
+	exit; // Exit if accessed directly.
 }
 
 require_once ABSPATH . 'wp-admin/includes/nav-menu.php';

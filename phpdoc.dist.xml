@@ -49,7 +49,7 @@
      -->
  
     <!-- Github Settings -->
-    <setting name="stable_version" value="1.6.1" />
+    <setting name="stable_version" value="1.6.5a" />
     <setting name="github_user" value="CA-CODE-Works" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="master" />

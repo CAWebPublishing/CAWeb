@@ -7,6 +7,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'load-post.php', 'caweb_live_drafts_init' );
 add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
 add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
@@ -18,7 +22,7 @@ add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 
  *
  * Fires before the post and post new pages are loaded.
  *
- * @category {
+ * @wp_action {
  * add_action( 'load-post.php', 'caweb_live_drafts_init' );
  * add_action( 'load-post-new.php', 'caweb_live_drafts_init' );
  * }
@@ -74,7 +78,7 @@ function caweb_live_drafts_post_hooks( $add = true ) {
  *
  * Invoked by cron ‘publish_future_post’ event.
  *
- * @category add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
+ * @wp_action add_action( 'publish_future_post', 'caweb_live_drafts_publish_future_post' );
  * @param  int|WP_Post $post_id Post ID or post object.
  * @return void
  */
@@ -126,7 +130,7 @@ function caweb_live_drafts_publish_future_post( $post_id ) {
  *
  * Fires in head section for post and post new pages.
  *
- * @category add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
+ * @wp_action add_action( 'admin_head-post.php', 'caweb_live_drafts_admin_head' );
  * @return void
  */
 function caweb_live_drafts_admin_head() {
@@ -193,7 +197,7 @@ function caweb_live_drafts_admin_head() {
  *
  * Prints admin screen notices.
  *
- * @category add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
+ * @wp_action add_action( 'admin_notices', 'caweb_live_drafts_admin_notice' );
  * @return void
  */
 function caweb_live_drafts_admin_notice() {
@@ -235,7 +239,7 @@ function caweb_live_drafts_admin_notice() {
  *
  * Fires in footer section for post and post new pages.
  *
- * @category add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer' );
+ * @wp_action add_action( 'admin_footer-post.php', 'caweb_live_drafts_admin_footer' );
  * @return void
  */
 function caweb_live_drafts_admin_footer() {
@@ -316,7 +320,7 @@ function caweb_live_drafts_migrate_post_meta( $from, $to, $exclude = array() ) {
  *
  * Fires immediately before an existing post is updated in the database.
  *
- * @category add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
+ * @wp_action add_action( 'pre_post_update', 'caweb_live_drafts_pre_post_update', 10, 2 );
  * @param  int   $post_id Post ID.
  * @param  array $post Array of unslashed post data.
  * @return int
@@ -416,7 +420,7 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
  *
  * Fires once a post has been saved.
  *
- * @category add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
+ * @wp_action add_action( 'save_post', 'caweb_live_drafts_save_post', 10, 2 );
  * @param  int     $post_id Post ID.
  * @param  WP_POST $post Post object.
  * @return int
@@ -508,7 +512,7 @@ function caweb_live_drafts_save_post( $post_id, $post ) {
  *
  * Fires before a post is sent to the Trash.
  *
- * @category add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
+ * @wp_action add_action( 'wp_trash_post', 'caweb_live_drafts_wp_trash_post' );
  * @param int $post_id Post ID.
  *
  * @return void
@@ -547,7 +551,7 @@ function caweb_live_drafts_wp_trash_post( $post_id ) {
 /**
  * Filters the default post display states used in the posts list table.
  *
- * @category add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
+ * @wp_filter add_filter( 'display_post_states', 'caweb_live_drafts_display_post_states', 10, 2 );
  * @param string[] $post_states An array of post display states.
  * @param WP_Post  $post        The current post object.
  */

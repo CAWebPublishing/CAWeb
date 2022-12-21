@@ -124,7 +124,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$view_more_on_off = $this->props['view_more_on_off'];
 		$view_more_text   = $this->props['view_more_text'];
 		$view_more_url    = $this->props['view_more_url'];

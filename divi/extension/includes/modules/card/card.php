@@ -247,7 +247,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 	 * @param  mixed $render_slug Module Slug Name.
 	 * @return string
 	 */
-	public function render( $unprocessed_props, $content = null, $render_slug ) {
+	public function render( $unprocessed_props, $content, $render_slug ) {
 		$card_layout = $this->props['card_layout'];
 		$card_color  = $this->props['card_color'];
 

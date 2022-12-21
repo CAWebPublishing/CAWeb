@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 add_action( 'admin_head', 'caweb_branding_admin_head' );
 add_action( 'login_enqueue_scripts', 'caweb_login_enqueue_scripts' );
 add_action( 'login_footer', 'caweb_disclaimer_message' );

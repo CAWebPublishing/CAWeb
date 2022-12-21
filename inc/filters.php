@@ -5,6 +5,10 @@
  * @package CAWeb
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /* WP Filters */
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
 add_filter( 'post_class', 'caweb_post_class', 15 );
@@ -40,7 +44,7 @@ add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_templ
  * @param  array $wp_classes An array of body class names.
  * @param  array $extra_classes An array of additional class names added to the body.
  *
- * @category add_filter( 'body_class','caweb_body_class' , 20 , 2 );
+ * @wp_filter add_filter( 'body_class','caweb_body_class' , 20 , 2 );
  * @return array
  */
 function caweb_body_class( $wp_classes, $extra_classes ) {
@@ -80,7 +84,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
  *
  * @link https://developer.wordpress.org/reference/hooks/post_class/
  * @param  array $classes An array of post class names.
- * @category add_filter( 'post_class','caweb_post_class' , 15 );
+ * @wp_filter add_filter( 'post_class','caweb_post_class' , 15 );
  * @return array
  */
 function caweb_post_class( $classes ) {
@@ -125,11 +129,6 @@ function caweb_script_loader_tag( $tag, $handle, $src ) {
 	/* deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag) */
 	if ( in_array( $handle, $js_scripts, true ) ) {
 		$tag = str_replace( 'src', 'defer src', $tag );
-	}
-
-	// Register script as module.
-	if ( 'caweb-script' === $handle && caweb_design_system_enabled() ) {
-		$tag = sprintf('<script type="module" id="caweb-script" src="%1$s"></script>', $src);
 	}
 
 	return $tag;
