@@ -338,7 +338,7 @@ function caweb_wp_enqueue_scripts() {
 	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 
 	/* If not on the activation page or Divi Visual Builder is enabled */
-	if ( $vb_enabled || 'wp-activate.php' !== $pagenow ) {
+	if ( $vb_enabled || 'wp-activate.php' === $pagenow ) {
 		return;
 	}
 
