@@ -32,7 +32,7 @@ define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
  * @link https://codex.wordpress.org/Plugin_API/Action_Reference#Actions_Run_During_a_Typical_Request
  */
 add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
-add_action( 'send_headers', 'caweb_enable_hsts' );
+add_action( 'send_headers', 'caweb_send_headers' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'wp_head', 'caweb_wp_head' );
@@ -187,11 +187,12 @@ function caweb_setup_theme() {
 /**
  * Enables the HTTP Strict Transport Security (HSTS) header in WordPress.
  *
- * @wp_action add_action( 'send_headers', 'caweb_enable_hsts' );
+ * @wp_action add_action( 'send_headers', 'caweb_send_headers' );
  * @return void
  */
-function caweb_enable_hsts() {
+function caweb_send_headers() {
 	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+	header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
 }
 
 /**
