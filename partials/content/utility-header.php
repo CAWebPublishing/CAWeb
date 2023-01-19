@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+$caweb_template_logo                = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, '5.5' < caweb_template_version() ? '-gold' : '');
+
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
 $caweb_contact_us_link              = get_option( 'ca_contact_us_link', '' );
@@ -28,7 +30,7 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 				<div class="header-cagov-logo">
 					<a href="https://www.ca.gov/" title="CA.gov website">
 						<span class="sr-only">CA.gov</span>
-						<img style="height: 31px;" src="<?php print esc_url( CAWEB_URI ); ?>/images/system/logo.svg" class="pos-rel" alt="CA.gov website" aria-hidden="true" />
+						<img style="height: 31px;" src="<?php print esc_url( $caweb_template_logo ); ?>" class="pos-rel" alt="CA.gov website" aria-hidden="true" />
 					</a>
 				</div>
 
