@@ -185,14 +185,19 @@ function caweb_setup_theme() {
 }
 
 /**
- * Enables the HTTP Strict Transport Security (HSTS) header in WordPress.
- *
+ * Adds additional headers
+ * 
+ * Adds Strict-Transport-Security (HSTS) header.
+ * Adds Content-Security-Policy header.
+ * Adds X-Content-Type-Options header.
+ * 
  * @wp_action add_action( 'send_headers', 'caweb_send_headers' );
  * @return void
  */
 function caweb_send_headers() {
 	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
 	header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
+	header( "X-Content-Type-Options: nosniff" );
 }
 
 /**
