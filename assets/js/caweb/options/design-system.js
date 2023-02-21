@@ -8,6 +8,9 @@ jQuery( document ).ready( function($) {
 
         // Change Colorscheme options.
         correct_colorscheme_visibility(version);
+        
+        // Toggle Social Media Links
+        correct_social_media_links(version);
 
         // Clear Menu Options
         for(i = menu_picker.length; i >= 0; i--) {

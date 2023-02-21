@@ -9,7 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$caweb_template_logo                = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, '5.5' < caweb_template_version() ? '-gold' : '');
+$deprecating = '5.5' === caweb_template_version();
+
+$caweb_template_logo                = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, ! $deprecating  ? '-gold' : '');
 
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
@@ -39,26 +41,28 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 					<?php
 				endif;
 
-				foreach ( $caweb_social_options as $caweb_opt ) {
-					$caweb_share_email = 'ca_social_email' === $caweb_opt ? true : false;
-					$caweb_sub         = rawurlencode( sprintf( '%1$s | %2$s', get_the_title(), get_bloginfo( 'name' ) ) );
-					$caweb_body        = rawurlencode( get_permalink() );
-					$caweb_mailto      = $caweb_share_email ? sprintf( 'mailto:?subject=%1$s&body=%2$s', $caweb_sub, $caweb_body ) : '';
+				if( $deprecating ){
+					foreach ( $caweb_social_options as $caweb_opt ) {
+						$caweb_share_email = 'ca_social_email' === $caweb_opt ? true : false;
+						$caweb_sub         = rawurlencode( sprintf( '%1$s | %2$s', get_the_title(), get_bloginfo( 'name' ) ) );
+						$caweb_body        = rawurlencode( get_permalink() );
+						$caweb_mailto      = $caweb_share_email ? sprintf( 'mailto:?subject=%1$s&body=%2$s', $caweb_sub, $caweb_body ) : '';
 
-					if ( get_option( "${caweb_opt}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_opt ) ) ) :
-						$caweb_share  = substr( $caweb_opt, 10 );
-						$caweb_share  = str_replace( '_', '-', $caweb_share );
-						$caweb_class  = "utility-social-$caweb_share ca-gov-icon-$caweb_share";
-						$caweb_title  = get_option( "${caweb_opt}_hover_text", 'Share via ' . ucwords( $caweb_share ) );
-						$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_opt );
-						$caweb_target = get_option( "${caweb_opt}_new_window" ) ? 'target="_blank"' : ''
-						?>
-						<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
-							<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
-						</a>
-						<?php
-					endif;
+						if ( get_option( "${caweb_opt}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_opt ) ) ) :
+							$caweb_share  = substr( $caweb_opt, 10 );
+							$caweb_share  = str_replace( '_', '-', $caweb_share );
+							$caweb_class  = "utility-social-$caweb_share ca-gov-icon-$caweb_share";
+							$caweb_title  = get_option( "${caweb_opt}_hover_text", 'Share via ' . ucwords( $caweb_share ) );
+							$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_opt );
+							$caweb_target = get_option( "${caweb_opt}_new_window" ) ? 'target="_blank"' : ''
+							?>
+							<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
+								<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
+							</a>
+							<?php
+						endif;
 
+					}
 				}
 				?>
 			</div>
