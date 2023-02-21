@@ -96,7 +96,7 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 				<?php endif; ?>
 
 				<?php if ( 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) : ?>
-				<a id="caweb-gtrans-custom" target="<?php print esc_attr( $caweb_google_trans_page_new_window ); ?>" href="<?php print esc_url( $caweb_google_trans_page ); ?>">
+				<a id="caweb-gtrans-custom" target="<?php print esc_attr( $caweb_google_trans_page_new_window ); ?>" href="<?php print esc_url( $caweb_google_trans_page ); ?>" aria-label="Google Custom Translate">
 					<?php if ( ! empty( $caweb_google_trans_icon ) ) : ?>
 				<span class="ca-gov-icon-<?php print esc_attr( $caweb_google_trans_icon ); ?>"></span>
 				<?php endif; ?>
