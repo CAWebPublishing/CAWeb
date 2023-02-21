@@ -40,7 +40,6 @@ add_action( 'wp_footer', 'caweb_wp_footer', 11 );
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
-add_action( 'activate_header', 'caweb_activate_header' );
 
 /**
  * Plugin API/Action Reference
