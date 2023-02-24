@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $deprecating = '5.5' === caweb_template_version();
+$btn_class = $deprecating ? ' btn-primary' : '';
 
 $caweb_template_logo                = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, ! $deprecating  ? '-gold' : '');
 
@@ -92,7 +93,7 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 				?>
 
 				<?php if ( $caweb_geo_locator_enabled ) : ?>
-					<button type="button" class="btn btn-xs btn-primary collapsed" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>	
+					<button type="button" class="btn btn-xs collapsed <?php print $btn_class ?>" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>	
 				<?php endif; ?>
 
 				<?php if ( ! empty( $caweb_contact_us_link ) ) : ?>
@@ -112,7 +113,14 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 				<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
 				<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
 				<?php endif; ?>
-				<button class="btn btn-xs btn-primary collapsed" data-toggle="collapse" data-target="#siteSettings" aria-controls="siteSettings">
+				<button 
+					class="btn btn-xs collapsed<?php print $btn_class ?>" 
+					<?php if($deprecating): ?>
+					data-toggle="collapse" data-target="#siteSettings" 
+					<?php else: ?>
+					data-bs-toggle="collapse" data-bs-target="#siteSettings" 
+					<?php endif; ?>
+					aria-controls="siteSettings">
 					<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings</button>
 			</div>
 		</div>
