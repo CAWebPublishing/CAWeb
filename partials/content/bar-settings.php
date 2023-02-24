@@ -19,43 +19,43 @@ $deprecating = '5.5' === caweb_template_version();
 		<?php if( ! $deprecating ) : ?>
 			<div class="settings-bar-buttons">
 
-			<div class="btn-group" aria-label="contrastMode">
-				<button type="button"
-				class="btn btn-default btn-lg bg-transparent bg-s1-hover disableHighContrastMode">Reset</button>
-			</div>
+				<div class="btn-group" aria-label="contrastMode">
+					<button type="button"
+					class="btn btn-default btn-lg bg-transparent bg-s1-hover disableHighContrastMode">Reset</button>
+				</div>
 
-			<div class="btn-group"><button type="button" class="btn btn-s1 btn-lg brd-s1 enableHighContrastMode">High
-				contrast</button>
-			</div>
+				<div class="btn-group"><button type="button" class="btn btn-s1 btn-lg brd-s1 enableHighContrastMode">High
+					contrast</button>
+				</div>
 
+				<div class="btn-group">
+					<button type="button" class="btn btn-s1 btn-lg brd-s1 increaseTextSize">
+					<span class="hidden-xs">Increase font size</span>
+					<span class="visible-xs">Font
+					<span class="sr-only">increase</span>
+					<span class="ca-gov-icon-plus-line small" aria-hidden="true"></span>
+					</span>
+					</button>
+				</div>
 
+				<div class="btn-group">
+					<button type="button" class="btn btn-s1 btn-lg brd-s1 decreaseTextSize">
+					<span class="hidden-xs">Decrease font size</span>
+					<span class="visible-xs">Font <span class="sr-only">decrease</span>
+					<span class="ca-gov-icon-minus-line small" aria-hidden="true"></span>
+					</span>
+					</button>
+				</div>
 
-			<div class="btn-group">
-				<button type="button" class="btn btn-s1 btn-lg brd-s1 increaseTextSize">
-				<span class="hidden-xs">Increase font size</span>
-				<span class="visible-xs">Font
-				<span class="sr-only">increase</span>
-				<span class="ca-gov-icon-plus-line small" aria-hidden="true"></span>
-				</span>
-				</button>
-			</div>
-
-			<div class="btn-group">
-				<button type="button" class="btn btn-s1 btn-lg brd-s1 decreaseTextSize">
-				<span class="hidden-xs">Decrease font size</span>
-				<span class="visible-xs">Font <span class="sr-only">decrease</span>
-				<span class="ca-gov-icon-minus-line small" aria-hidden="true"></span>
-				</span>
-				</button>
-			</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-s1 btn-lg brd-s1 dyslexicFont">Dyslexic font</button>
 				</div>
+
+				<button type="button" class="close ms-auto" data-bs-toggle="collapse" data-bs-target="#siteSettings" aria-label="Close">
+					<span aria-hidden="true" class=" ca-gov-icon-close-mark"></span>
+				</button>
 			</div>
 			
-			<button type="button" class="close ms-auto" data-bs-toggle="collapse" data-bs-target="#siteSettings" aria-label="Close">
-				<span aria-hidden="true" class=" ca-gov-icon-close-mark"></span>
-			</button>
 		<?php else: ?>
 			<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
 				<div class="btn-group"><button type="button" class="btn btn-primary disableHighContrastMode">Default</button></div>
