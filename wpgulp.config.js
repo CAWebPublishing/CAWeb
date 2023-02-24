@@ -66,7 +66,7 @@ module.exports = {
 	],
 	themeCustomizerControlScripts: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
-		'assets/js/caweb/options/colorschemes.js',
+		'assets/js/caweb/options/toggle-options.js',
 		'assets/js/wp/theme-customizer/controls/*.js',
 	],
 	designSystemThemeDir:  'node_modules/@cagov/ds-base-css/dist/themes/',
