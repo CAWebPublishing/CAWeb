@@ -46,6 +46,7 @@ $caweb_keyword         = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( 
 							<gcse:searchresults-only></gcse:searchresults-only>
 						</div>
 					</div>
+					<span class="return-top hidden-print"></span>
 				</main>
 			</div>
 

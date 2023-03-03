@@ -315,6 +315,8 @@ function caweb_display_general_options() {
  * @return void
  */
 function caweb_display_utility_header_options() {
+	$deprecating = '5.5' !== caweb_template_version() ? ' d-none' : '';
+	
 	// Contact Us Page.
 	$contact_us_link = get_option( 'ca_contact_us_link', '' );
 
@@ -326,12 +328,12 @@ function caweb_display_utility_header_options() {
 
 	?>
 	<!-- Utility Header Section -->
-	<div>
+	<div class="<?php print $deprecating; ?>">
 		<a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
 			<h2 class="mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse" id="utility-header-settings" data-parent="#general-settings">
+	<div class="collapse <?php print $deprecating; ?>" id="utility-header-settings" data-parent="#general-settings">
 		<!-- Contact Us Page Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -647,7 +649,14 @@ function caweb_display_social_media_settings( $is_active = false ) {
 		<?php
 			$social_options = caweb_get_site_options( 'social' );
 			$deprecating = '5.5' !== caweb_template_version();
-	
+			$exlusions = $deprecating ? array(
+				'ca_social_snapchat',
+				'ca_social_pinterest',
+				'ca_social_rss',
+				'ca_social_google_plus',
+				'ca_social_flickr'
+			 ) : array('ca_social_github');
+
 			foreach ( $social_options as $social => $option ) {
 				$share_email        = 'ca_social_email' === $option ? true : false;
 				$social             = $share_email ? "Share via $social" : $social;
@@ -655,13 +664,14 @@ function caweb_display_social_media_settings( $is_active = false ) {
 				$footer_checked     = get_option( sprintf( '%1$s_footer', $option ) ) ? ' checked' : '';
 				$new_window_checked = get_option( sprintf( '%1$s_new_window', $option ) ) ? ' checked' : '';
 				$hover_text         = get_option( sprintf( '%1$s_hover_text', $option ), "Share via $social" );
+				$hidden = in_array($option, $exlusions, true) ? ' d-none' : '';
 				?>
-					<div class="form-row">
+					<div class="form-row<?php print $hidden; ?>">
 						<a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
 							<h2 class="d-inline"><?php print esc_attr( $social ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 						</a>
 					</div>
-					<div class="form-row collapse pt-2" id="<?php print esc_attr( $option ); ?>-settings">
+					<div class="form-row collapse pt-2<?php print $hidden; ?>" id="<?php print esc_attr( $option ); ?>-settings">
 					<?php if ( ! $share_email ) : ?>
 						<!-- Option URL -->
 						<div class="form-group col-md-12">

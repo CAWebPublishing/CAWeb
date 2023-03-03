@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="description">The page you requested was not found.</div>
 							</div>
 						</article> <!-- .et_pb_post -->
-
+						<span class="return-top hidden-print"></span>
 					</main>
 				</div>
 			</div> <!-- #main-content -->

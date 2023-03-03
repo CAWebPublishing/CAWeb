@@ -73,6 +73,7 @@ $caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
 					</article> <!-- .et_pb_post -->
 
 					<?php endwhile; ?>
+					<span class="return-top hidden-print"></span>
 
 				</main>
 				<?php

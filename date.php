@@ -85,6 +85,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					get_template_part( 'includes/no-results', 'index' );
 				endif;
 				?>
+					<span class="return-top hidden-print"></span>
 					</main>
 
 					<?php
