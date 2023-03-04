@@ -9,14 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$deprecating = '5.5' === caweb_template_version();
+$caweb_deprecating = '5.5' === caweb_template_version();
 
 ?>
 
 <div class="site-settings section section-standout collapse collapsed" aria-atomic="true" role="alert" id="siteSettings">
 	<div class="container  p-y">
 
-		<?php if( ! $deprecating ) : ?>
+		<?php if ( ! $caweb_deprecating ) : ?>
 			<div class="settings-bar-buttons">
 
 				<div class="btn-group" aria-label="contrastMode">
@@ -55,8 +55,8 @@ $deprecating = '5.5' === caweb_template_version();
 					<span aria-hidden="true" class=" ca-gov-icon-close-mark"></span>
 				</button>
 			</div>
-			
-		<?php else: ?>
+
+		<?php else : ?>
 			<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
 				<div class="btn-group"><button type="button" class="btn btn-primary disableHighContrastMode">Default</button></div>
 				<div class="btn-group"><button type="button" class="btn btn-primary enableHighContrastMode">High Contrast</button></div>

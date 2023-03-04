@@ -107,7 +107,7 @@ function caweb_get_min_file( $f, $ext = 'css' ) {
  * CA.gov Template Colors
  *
  * @link https://template.webstandards.ca.gov/sample/color-schemes.html
- * 
+ *
  * @return array
  */
 function caweb_template_colors() {
@@ -184,7 +184,7 @@ function caweb_template_colors() {
 			'primary'   => '#446A7C',
 			'standout'  => '#21272A',
 			's1'        => '#F9F8F8',
-		)
+		),
 	);
 
 	return $colors;

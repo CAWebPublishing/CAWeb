@@ -147,8 +147,8 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				/* Footer Menu Construction */
 			} elseif ( 'footer-menu' === $theme_location && ! empty( $args->menu ) ) {
 				if ( $caweb_enable_design_system ) {
-					$nav_menu = $this->create_design_system_footer_menu( $args );
-					$logo = sprintf( '<a href="https://ca.gov" class="cagov-logo" title="ca.gov" target="_blank" rel="noopener">%1$s</a>', $this->design_system_footer_logo() );
+					$nav_menu    = $this->create_design_system_footer_menu( $args );
+					$logo        = sprintf( '<a href="https://ca.gov" class="cagov-logo" title="ca.gov" target="_blank" rel="noopener">%1$s</a>', $this->design_system_footer_logo() );
 					$back_to_top = '<cagov-back-to-top data-hide-after="7000" data-label="Back to top"></cagov-back-to-top>';
 
 					$cc = sprintf( '<div class="container pt-0"><p class="copyright">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p></div>', gmdate( 'Y' ) );
@@ -200,22 +200,22 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 */
 		public function caweb_menu_fail( $args ) {
 			$nav_menu = '';
-			
+
 			if ( 'header-menu' === $args['theme_location'] ) {
 				$nav_menu = '<nav id="navigation" class="main-navigation hidden-print nav"><ul id="nav_list" class="top-level-nav">
                         <li class="nav-item"><a href="#" class="first-level-link"><span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span><strong>There Is No Navigation Menu Set</strong></a></li></ul></nav>';
 			} elseif ( 'footer-menu' === $args['theme_location'] ) {
 				$deprecating = '5.5' === caweb_template_version();
-				$logo = sprintf( '<li class="me-0"><a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a></li>', CAWEB_URI );
-				$nav_menu     = sprintf('<ul class="footer-links">%1$s<li><a>There Is No Navigation Menu Set</a></li></ul>', ! $deprecating ? $logo : '');
+				$logo        = sprintf( '<li class="me-0"><a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a></li>', CAWEB_URI );
+				$nav_menu    = sprintf( '<ul class="footer-links">%1$s<li><a>There Is No Navigation Menu Set</a></li></ul>', ! $deprecating ? $logo : '' );
 
-				$nav_menu     = sprintf(
+				$nav_menu = sprintf(
 					'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="group">%1$s</div></div>
                             <!-- Copyright Statement -->
                       <div class="copyright">
                       <div class="container p-0"> &copy;
                       <script>document.write(new Date().getFullYear())</script> State of California </div></div></footer>',
-					  $nav_menu
+					$nav_menu
 				);
 			}
 
@@ -774,9 +774,9 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 * @return string
 		 */
 		public function create_footer_menu( $args ) {
-			$logo = sprintf( '<li class="me-0"><a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a></li>', CAWEB_URI );
+			$logo      = sprintf( '<li class="me-0"><a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a></li>', CAWEB_URI );
 			$nav_links = '';
-			
+
 			/* loop thru and create a link (parent nav item only) */
 			$menuitems = wp_get_nav_menu_items( $args->menu->term_id, array( 'order' => 'DESC' ) );
 
@@ -799,8 +799,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$class = ! empty( $social_links ) ? 'three-quarters' : 'full-width';
 			$style = '';
 
-			$nav_links = sprintf( '<div class="%1$s"><ul class="footer-links" %2$s>%3$s<li><a href="#skip-to-content">Back to Top</a></li>%4$s</ul></div>%5$s', 
-				$class, $style, '5.5' !== caweb_template_version() ? $logo : '', $nav_links, $social_links );
+			$nav_links = sprintf(
+				'<div class="%1$s"><ul class="footer-links" %2$s>%3$s<li><a href="#skip-to-content">Back to Top</a></li>%4$s</ul></div>%5$s',
+				$class,
+				$style,
+				caweb_template_version() !== '5.5' ? $logo : '',
+				$nav_links,
+				$social_links
+			);
 
 			return $nav_links;
 		}
@@ -877,14 +883,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		public function create_footer_social_menu( $args ) {
 			$social_share = caweb_get_site_options( 'social' );
 			$social_links = '';
-			$deprecating = '5.5' !== caweb_template_version();
-			$exlusions = $deprecating ? array(
+			$deprecating  = '5.5' !== caweb_template_version();
+			$exlusions    = $deprecating ? array(
 				'ca_social_snapchat',
 				'ca_social_pinterest',
 				'ca_social_rss',
 				'ca_social_google_plus',
-				'ca_social_flickr'
-			 ) : array('ca_social_github');
+				'ca_social_flickr',
+			) : array( 'ca_social_github' );
 
 			foreach ( $social_share as $opt ) {
 				$share_email = 'ca_social_email' === $opt ? true : false;
@@ -892,7 +898,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				$body        = rawurlencode( get_permalink() );
 				$mailto      = $share_email ? sprintf( 'mailto:?subject=%1$s&body=%2$s', $sub, $body ) : '';
 
-				if ( ! in_array($opt, $exlusions, true) && get_option( $opt . '_footer' ) && ( $share_email || '' !== get_option( $opt ) ) ) {
+				if ( ! in_array( $opt, $exlusions, true ) && get_option( $opt . '_footer' ) && ( $share_email || '' !== get_option( $opt ) ) ) {
 					$share         = substr( $opt, 10 );
 					$share         = str_replace( '_', '-', $share );
 					$title         = get_option( "${opt}_hover_text", 'Share via ' . ucwords( $share ) );

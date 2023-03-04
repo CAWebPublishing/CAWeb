@@ -88,7 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 					<span class="return-top hidden-print"></span>
 					</main>
-					
+
 					<?php
 					if ( is_active_sidebar( 'sidebar-1' ) ) :
 						?>
