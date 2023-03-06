@@ -35,6 +35,7 @@ jQuery(document).ready(function($) {
 jQuery( document ).ready( function($) {
 	$('select[id$="ca_site_version"]').on("change", function(){
 		correct_colorscheme_visibility($(this).val());
+		correct_social_media_links($(this).val());
 	} );
 });
 
@@ -64,6 +65,21 @@ function correct_colorscheme_visibility(version){
 
 }
 
+// Toggle Social Media Links
+function correct_social_media_links(version){
+
+	jQuery('div[id^="ca_social_"]').each(function(index) {
+		// Share via Email only has 2 options
+		// all other options have 5 options
+		var option = 2 === this.children.length ? this.children[0] : this.children[1];
+
+		if(  '5.5' !== version ){
+			jQuery(option).addClass('d-none');
+		}else{
+			jQuery(option).removeClass('d-none');
+		}
+	});
+}
 jQuery( document ).ready( function($) {
 	$('#_customize-input-caweb_add_alert_banner').click( add_alert_banner);
 	$('.caweb-toggle-alert').click( toggle_alert );

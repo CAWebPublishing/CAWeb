@@ -40,7 +40,6 @@ add_action( 'wp_footer', 'caweb_wp_footer', 11 );
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
-add_action( 'activate_header', 'caweb_activate_header' );
 
 /**
  * Plugin API/Action Reference
@@ -185,14 +184,19 @@ function caweb_setup_theme() {
 }
 
 /**
- * Enables the HTTP Strict Transport Security (HSTS) header in WordPress.
- *
+ * Adds additional headers
+ * 
+ * Adds Strict-Transport-Security (HSTS) header.
+ * Adds Content-Security-Policy header.
+ * Adds X-Content-Type-Options header.
+ * 
  * @wp_action add_action( 'send_headers', 'caweb_send_headers' );
  * @return void
  */
 function caweb_send_headers() {
 	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
 	header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
+	header( "X-Content-Type-Options: nosniff" );
 }
 
 /**
