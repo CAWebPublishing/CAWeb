@@ -633,6 +633,7 @@ jQuery( document ).ready( function($) {
 		correct_colorscheme_visibility($(this).val());
 		correct_social_media_links($(this).val());
 		correct_utility_header_options($(this).val());
+		correct_sticky_nav_option($(this).val());
 	} );
 });
 
@@ -709,6 +710,14 @@ function correct_utility_header_options(version){
 	}
 }
 
+// Toggle Sticky Nav
+function correct_sticky_nav_option(version){
+	if( '5.5' === version ){
+		jQuery('#ca_sticky_navigation').parent().parent().removeClass('d-none');
+	}else{
+		jQuery('#ca_sticky_navigation').parent().parent().addClass('d-none');
+	}
+}
 /* CAWeb Uploads Option */
 jQuery(document).ready(function($) {
 	

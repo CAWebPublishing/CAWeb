@@ -10,11 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $post;
+$caweb_version = caweb_template_version();
 
 $caweb_loaded       = isset( $args['loaded'] ) && $args['loaded'];
-$caweb_fixed_header = ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
+$caweb_fixed_header = '5.5' === $caweb_version && ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
 $caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
-$caweb_schemes      = caweb_color_schemes( caweb_template_version(), 'filename' );
+$caweb_schemes      = caweb_color_schemes( $caweb_version, 'filename' );
 $caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
 
 /* Branding */

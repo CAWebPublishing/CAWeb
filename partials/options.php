@@ -146,6 +146,7 @@ function caweb_display_general_options() {
 	if ( $caweb_enable_design_system ) {
 		unset( $menus['flexmega'], $menus['megadropdown'] );
 	}
+
 	?>
 	<!-- General Section -->
 	<div>
@@ -269,17 +270,17 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
-			<!-- Sticky Navigation -->
-			<div class="form-group col">
-				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
-				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
-				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
-			</div>
 			<!-- Menu Home Link -->
 			<div class="form-group col">
 				<label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
 				<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
 				<input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $home_nav_link_enabled ); ?>>
+			</div>
+			<!-- Sticky Navigation -->
+			<div class="form-group col<?php print '5.5' !== $ver ? ' d-none' : ''; ?>">
+				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
+				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
+				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
 			</div>
 		</div>
 
