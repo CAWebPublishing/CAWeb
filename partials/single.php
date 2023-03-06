@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $post;
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
+$caweb_deprecating          = '5.5' === caweb_template_version();
 
 // Post Classes.
 $caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
@@ -73,8 +74,13 @@ $caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
 					</article> <!-- .et_pb_post -->
 
 					<?php endwhile; ?>
+					<?php if ( $caweb_deprecating ) : ?>
 					<span class="return-top hidden-print"></span>
-
+					<?php else : ?>
+					<button class="return-top">
+						<span class="sr-only hidden-print">Back to top</span>
+					</button>
+					<?php endif; ?>
 				</main>
 				<?php
 				if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) ) :

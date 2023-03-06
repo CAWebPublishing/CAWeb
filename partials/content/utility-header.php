@@ -35,7 +35,9 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 						<span class="sr-only">CA.gov</span>
 						<img style="height: 31px;" src="<?php print esc_url( $caweb_template_logo ); ?>" class="pos-rel" alt="CA.gov website" aria-hidden="true" />
 					</a>
+					<?php if ( ! $caweb_deprecating ) : ?>
 					<span class="official-tag align-bottom"><span class="desktop-only">Official website of the&nbsp;</span>State of California</span>
+					<?php endif; ?>
 				</div>
 
 				<?php

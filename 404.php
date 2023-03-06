@@ -10,6 +10,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+$caweb_deprecating = '5.5' === caweb_template_version();
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +42,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="description">The page you requested was not found.</div>
 							</div>
 						</article> <!-- .et_pb_post -->
+						<?php if ( $caweb_deprecating ) : ?>
 						<span class="return-top hidden-print"></span>
+						<?php else : ?>
+						<button class="return-top">
+							<span class="sr-only hidden-print">Back to top</span>
+						</button>
+						<?php endif; ?>
 					</main>
 				</div>
 			</div> <!-- #main-content -->
