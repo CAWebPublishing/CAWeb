@@ -39,7 +39,7 @@ if ( $caweb_deprecating ) :
 	<form id="Search" class="pos-rel" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
 		<span class="sr-only" id="SearchInput">Custom Google Search</span>
 		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield" />
-		<button type="submit" class="gsc-search-button">
+		<button type="submit" class="gsc-search-button ms-0 w-auto">
 			<span class="ca-gov-icon-search" aria-hidden="true" ></span>
 			<span class="sr-only">Submit</span>
 		</button>
