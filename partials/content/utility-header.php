@@ -28,7 +28,7 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 <!-- Utility Header -->
 <div class="utility-header hidden-print">
 	<div class="container">
-		<div class="group flex-row">
+		<div class="<?php print $caweb_deprecating ? 'group ' : ''; ?>flex-row">
 			<div class="social-media-links">
 				<div class="header-cagov-logo">
 					<a href="https://www.ca.gov/" title="CA.gov website">
