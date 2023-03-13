@@ -32802,15 +32802,6 @@ header {
   }
 }
 
-/* Location Bar Style */
-.location-settings button.close {
-  font-size: 2.5em;
-}
-
-.location-settings button.close:hover {
-  color: #FDB81E !important;
-}
-
 /* Google Translate */
 #google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
   color: white;
@@ -32829,12 +32820,12 @@ header {
   color: #008A28 !important;
 }
 
-body:not(.design-system) {
+body[class*="5.5"] {
   /* Override styles for second level navs not using flex */
   /* Override nav li line-height */
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) {
+body[class*="5.5"] .second-level-nav:not(.flex) {
   display: block;
   position: relative !important;
   opacity: 1 !important;
@@ -32844,48 +32835,56 @@ body:not(.design-system) .second-level-nav:not(.flex) {
   background: inherit;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) li {
+body[class*="5.5"] .second-level-nav:not(.flex) li {
   display: inline-block;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) .second-level-link {
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
   font-size: 17.6px;
   font-size: 1.1rem;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) .second-level-link:hover {
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
   background-color: inherit;
   opacity: 1;
   transition: all 0.3s;
 }
 
-body:not(.design-system) nav li {
+body[class*="5.5"] nav li {
   line-height: 1.5 !important;
 }
 
-body:not(.design-system) nav.megadropdown .media-left .media-object {
+body[class*="5.5"] nav.megadropdown .media-left .media-object {
   max-width: inherit;
 }
 
 @media (max-width: 992px) {
-  body:not(.design-system) nav {
+  body[class*="5.5"] nav {
     /* MegaDropdown Navigation Styles */
   }
-  body:not(.design-system) nav .link-description,
-  body:not(.design-system) nav .media-left,
-  body:not(.design-system) nav .font-size-40,
-  body:not(.design-system) nav .image-icon {
+  body[class*="5.5"] nav .link-description,
+  body[class*="5.5"] nav .media-left,
+  body[class*="5.5"] nav .font-size-40,
+  body[class*="5.5"] nav .image-icon {
     display: none;
   }
-  body:not(.design-system) nav.megadropdown .second-level-nav:not(.flex) li {
+  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
     width: 100% !important;
   }
-  body:not(.design-system) nav.megadropdown div[class*="pull-"] {
+  body[class*="5.5"] nav.megadropdown div[class*="pull-"] {
     width: 100% !important;
   }
-  body:not(.design-system) nav.megadropdown div[class*="with-image-"] {
+  body[class*="5.5"] nav.megadropdown div[class*="with-image-"] {
     display: none;
   }
+}
+
+body[class*="6.0"] {
+  /* Override nav li line-height */
+}
+
+body[class*="6.0"] nav li {
+  line-height: 1.5 !important;
 }
 
 body.design-system cagov-navoverlay {
