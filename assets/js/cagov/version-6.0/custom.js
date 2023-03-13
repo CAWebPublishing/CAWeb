@@ -111,6 +111,8 @@ jQuery(document).ready(function() {
 	$('.caweb-alert-close').click( function(e){ 
 		var alert_id = this.dataset.id; 
 		document.cookie = 'caweb-alert-id-' + alert_id + '=false;path=' + args.path;
+	
+		$(`.alert-${alert_id}`)[0].remove();
 	});
 	
 	/* Fixed padding for wp-activate.php page when Navigation is fixed */
