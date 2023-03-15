@@ -125,9 +125,10 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$nav_menu = $this->create_nav_menu( $args );
 
 					/* If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link */
-					$home_link = ( isset( $args->home_link ) && $args->home_link ? '<li class="nav-item nav-item-home"><a href="/" class="first-level-link"><span class="ca-gov-icon-home"></span> Home</a></li>' : '' );
+					$home_icon = $deprecating ? '<span class="ca-gov-icon-home"></span> ' : '';
+					$home_link = isset( $args->home_link ) && $args->home_link ? sprintf( '<li class="nav-item nav-item-home"><a href="/" class="first-level-link">%1$sHome</a></li>', $home_icon ) : '';
 
-					$search_link = 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
+					$search_link = $deprecating && 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
 										'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
 
 					$nav_style = isset( $args->style ) ? ( 'flexmega' === $args->style ? 'megadropdown' : $args->style ) : 'singlelevel';
@@ -556,7 +557,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			}
 
 			/* Return the Sub Nav */
-			return sprintf( '<ul class="second-level-nav">%1$s</ul>', $sub_nav );
+			return sprintf( '<ul class="second-level-nav pos-rel opacity-100 visible">%1$s</ul>', $sub_nav );
 		}
 
 		/**
