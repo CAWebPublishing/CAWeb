@@ -31,7 +31,7 @@ if ( $caweb_deprecating ) :
 </div>
 <?php else : ?>
 <!-- Branding -->
-<div class="section-default">
+<div class="border-bottom">
 
 	<div class="branding">
 		<div class="header-organization-banner">
