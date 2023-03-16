@@ -207,7 +207,7 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 			'type'    => 'option',
 			'default' => get_option(
 				'ca_default_navigation_menu',
-				'megadropdown'
+				'singlelevel'
 			),
 		)
 	);

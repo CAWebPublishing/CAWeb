@@ -335,11 +335,15 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$child_count = count( $child_links );
 
 					/* Get icon if present */
-					$icon = '';
-					if ( $deprecating ) {
-						$icon = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
-						$icon = '<span class="ca-gov-icon-' . $icon . '"></span>';
+					$icon       = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+					$icon_style = '';
+
+					if ( ! $deprecating ) {
+						$icon      .= ' d-inline-block fs-5 me-2 align-bottom';
+						$icon_style = ' style="#046B99"';
 					}
+
+					$icon = sprintf( '<span class="ca-gov-icon-%1$s"></span>', $icon, $icon_style );
 
 					/* if is current menut item add .active */
 					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '';
@@ -964,7 +968,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$flex_border               = isset( $tmp['_caweb_menu_flexmega_border'][0] ) ? $tmp['_caweb_menu_flexmega_border'][0] : '';
 			$flex_row                  = isset( $tmp['_caweb_menu_flexmega_row'][0] ) ? $tmp['_caweb_menu_flexmega_row'][0] : '';
 
-			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'megadropdown' );
+			$nav_menu_style = get_option( 'ca_default_navigation_menu', 'singlelevel' );
 
 			$unit_size = 'unit3' === $unit_size && ! in_array( $nav_menu_style, array( 'flexmega', 'megadropdown' ), true ) ? 'unit2' : $unit_size;
 
