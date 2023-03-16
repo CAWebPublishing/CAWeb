@@ -512,6 +512,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 * @return string
 		 */
 		private function create_dropdown_subnav( $child_links ) {
+			$deprecating = '5.5' === caweb_template_version();
 
 			/* second-level-nav variables */
 			$sub_nav = '';
@@ -539,8 +540,9 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				/* Create Link */
 				$link = sprintf(
-					'<a href="%1$s" class="second-level-link d-block"%2$s tabindex="-1">%3$s%4$s%5$s</a>',
+					'<a href="%1$s" class="second-level-link d-block bg-0%2$s"%3$s tabindex="-1">%4$s%5$s%6$s</a>',
 					$item->url,
+					! $deprecating ? ' fs-5' : '',
 					! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
 					$icon,
 					$item->title,
@@ -557,7 +559,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			}
 
 			/* Return the Sub Nav */
-			return sprintf( '<ul class="second-level-nav pos-rel opacity-100 visible">%1$s</ul>', $sub_nav );
+			return sprintf( '<ul class="second-level-nav pos-rel opacity-100 visible p-0 w-100 border-0">%1$s</ul>', $sub_nav );
 		}
 
 		/**
