@@ -339,7 +339,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$icon_style = '';
 
 					if ( ! $deprecating ) {
-						$icon      .= ' d-inline-block fs-5 me-2 align-bottom';
+						$icon      .= ' d-inline fs-5 me-2 align-bottom';
 						$icon_style = ' style="#046B99"';
 					}
 
