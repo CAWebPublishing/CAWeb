@@ -7,6 +7,7 @@ jQuery( document ).ready( function($) {
 		correct_sticky_nav_option($(this).val());
 		correct_frontpage_search_option($(this).val());
 		correct_menu_types_option($(this).val());
+		correct_menu_home_link_option($(this).val());
 	} );
 });
 
@@ -125,5 +126,14 @@ function correct_menu_types_option(version){
 		}
 
 		menu_type_picker.append( o );
+	}
+}
+
+// Toggle Menu Home Link
+function correct_menu_home_link_option(version){
+	if( '5.5' === version ){
+		jQuery('#ca_home_nav_link').parent().parent().removeClass('d-none');
+	}else{
+		jQuery('#ca_home_nav_link').parent().parent().addClass('d-none');
 	}
 }

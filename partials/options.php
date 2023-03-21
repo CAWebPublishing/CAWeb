@@ -271,7 +271,7 @@ function caweb_display_general_options() {
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
 			<!-- Menu Home Link -->
-			<div class="form-group col">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
 				<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
 				<input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $home_nav_link_enabled ); ?>>
