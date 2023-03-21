@@ -92,14 +92,11 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 	<?php else : ?>
 
 	<div class="navigation-search full-width-nav container">
+		<?php if ( ! empty( $caweb_google_search_id ) && 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) : ?>
 		<div id="head-search" class="search-container hidden-print featured-search">
-			<?php
-			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
-				require_once 'search-form.php';
-			}
-			?>
+			<?php require_once 'search-form.php'; ?>
 		</div>
-
+		<?php endif; ?>
 		<!-- Include Navigation -->
 		<?php
 
