@@ -335,15 +335,12 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					$child_count = count( $child_links );
 
 					/* Get icon if present */
-					$icon       = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
-					$icon_style = '';
+					$icon = '';
 
-					if ( ! $deprecating ) {
-						$icon      .= ' d-inline fs-5 me-2 align-bottom';
-						$icon_style = ' style="#046B99"';
+					if ( $deprecating ) {
+						$icon = isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ? $item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+						$icon = sprintf( '<span class="ca-gov-icon-%1$s"></span>', $icon );
 					}
-
-					$icon = sprintf( '<span class="ca-gov-icon-%1$s"></span>', $icon, $icon_style );
 
 					/* if is current menut item add .active */
 					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '';
@@ -354,11 +351,12 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 					/* Create Link */
 					$nav_item .= sprintf(
-						'<li class="nav-item %1$s"%2$s title="%3$s"><a href="%4$s" class="first-level-link"%5$s>%6$s<span class="link-title">%7$s</span></a>',
+						'<li class="nav-item %1$s"%2$s title="%3$s"><a href="%4$s" class="first-level-link%5$s"%6$s>%7$s<span class="link-title">%8$s</span></a>',
 						implode( ' ', array_filter( $item->classes ) ),
 						! empty( $item->xfn ) ? sprintf( ' rel="%1$s" ', $item->xfn ) : '',
 						$item->attr_title,
 						$item->url,
+						! $deprecating ? ' text-left' : '',
 						! empty( $item->target ) ? sprintf( ' target="%1$s"', $item->target ) : '',
 						$icon,
 						$item->title
