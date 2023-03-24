@@ -185,18 +185,18 @@ function caweb_setup_theme() {
 
 /**
  * Adds additional headers
- * 
+ *
  * Adds Strict-Transport-Security (HSTS) header.
  * Adds Content-Security-Policy header.
  * Adds X-Content-Type-Options header.
- * 
+ *
  * @wp_action add_action( 'send_headers', 'caweb_send_headers' );
  * @return void
  */
 function caweb_send_headers() {
 	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
 	header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
-	header( "X-Content-Type-Options: nosniff" );
+	header( 'X-Content-Type-Options: nosniff' );
 }
 
 /**
@@ -514,6 +514,12 @@ function caweb_admin_enqueue_scripts( $hook ) {
 			'caweb_colors'       => caweb_template_colors(),
 			'tinymce_settings'   => caweb_tiny_mce_settings(),
 			'caweb_colorschemes' => $schemes,
+			'caweb_menus'        => array(
+				'dropdown'     => 'Drop Down',
+				'flexmega'     => 'Flex Mega Menu',
+				'megadropdown' => 'Mega Drop',
+				'singlelevel'  => 'Single Level',
+			),
 		);
 
 		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );

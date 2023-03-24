@@ -102,14 +102,14 @@ function caweb_display_general_settings( $is_active = false ) {
  */
 function caweb_display_general_options() {
 	// State Template Version variables.
-	$ver = caweb_template_version( true );
+	$deprecating = '5.5' === caweb_template_version();
 
 	// Fav Icon.
 	$fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 	$fav_icon_name = caweb_favicon_name();
 
 	// Header Menu.
-	$navigation_menu = get_option( 'ca_default_navigation_menu', 'megadropdown' );
+	$navigation_menu = get_option( 'ca_default_navigation_menu', 'singlelevel' );
 
 	// Design System enabled.
 	$caweb_enable_design_system = caweb_design_system_enabled();
@@ -137,15 +137,16 @@ function caweb_display_general_options() {
 	$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
 	$menus = array(
+		'dropdown'     => 'Drop Down',
 		'flexmega'     => 'Flex Mega Menu',
 		'megadropdown' => 'Mega Drop',
-		'dropdown'     => 'Drop Down',
 		'singlelevel'  => 'Single Level',
 	);
 
-	if ( $caweb_enable_design_system ) {
+	if ( $caweb_enable_design_system || ! $deprecating ) {
 		unset( $menus['flexmega'], $menus['megadropdown'] );
 	}
+
 	?>
 	<!-- General Section -->
 	<div>
@@ -173,9 +174,9 @@ function caweb_display_general_options() {
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
-					<option value="5.5"<?php print "5.0" === "$ver" ? ' selected="selected"' : ''; ?>>Version 5.5</option>
+					<option value="5.5"<?php print $deprecating ? ' selected="selected"' : ''; ?>>Version 5.5</option>
 					<?php if ( current_user_can( $network ) ) : ?>
-						<option value="6.0"<?php print "6.0" === "$ver" ? ' selected="selected"' : ''; ?>>Version 6.0</option>
+						<option value="6.0"<?php print ! $deprecating ? ' selected="selected"' : ''; ?>>Version 6.0</option>
 					<?php endif; ?>
 				</select>
 			</div>
@@ -269,17 +270,17 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
-			<!-- Sticky Navigation -->
-			<div class="form-group col">
-				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
-				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
-				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
-			</div>
 			<!-- Menu Home Link -->
-			<div class="form-group col">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
 				<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
 				<input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $home_nav_link_enabled ); ?>>
+			</div>
+			<!-- Sticky Navigation -->
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
+				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
+				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
+				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
 			</div>
 		</div>
 
@@ -299,7 +300,7 @@ function caweb_display_general_options() {
 				<small class="text-danger d-block"><?php print ! empty( $ua_compatibiliy ) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : ''; ?></small>
 			</div>
 			<!-- Search on FrontPage -->
-			<div class="form-group col">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_frontpage_search_enabled" class="d-block mb-0"><strong>Show Search on Front Page</strong></label>
 				<small class="mb-2 text-muted d-block">Enable Feature Search box on home page.</small>
 				<input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $frontpage_search_enabled ); ?> >
@@ -315,6 +316,8 @@ function caweb_display_general_options() {
  * @return void
  */
 function caweb_display_utility_header_options() {
+	$deprecating = '5.5' !== caweb_template_version() ? ' d-none' : '';
+
 	// Contact Us Page.
 	$contact_us_link = get_option( 'ca_contact_us_link', '' );
 
@@ -326,12 +329,12 @@ function caweb_display_utility_header_options() {
 
 	?>
 	<!-- Utility Header Section -->
-	<div>
+	<div class="<?php print esc_attr( $deprecating ); ?>">
 		<a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
 			<h2 class="mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse" id="utility-header-settings" data-parent="#general-settings">
+	<div class="collapse <?php print esc_attr( $deprecating ); ?>" id="utility-header-settings" data-parent="#general-settings">
 		<!-- Contact Us Page Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -646,8 +649,15 @@ function caweb_display_social_media_settings( $is_active = false ) {
 		</div>
 		<?php
 			$social_options = caweb_get_site_options( 'social' );
-			$deprecating = '5.5' !== caweb_template_version();
-	
+			$deprecating    = '5.5' !== caweb_template_version();
+			$exlusions      = $deprecating ? array(
+				'ca_social_snapchat',
+				'ca_social_pinterest',
+				'ca_social_rss',
+				'ca_social_google_plus',
+				'ca_social_flickr',
+			) : array( 'ca_social_github' );
+
 			foreach ( $social_options as $social => $option ) {
 				$share_email        = 'ca_social_email' === $option ? true : false;
 				$social             = $share_email ? "Share via $social" : $social;
@@ -655,13 +665,14 @@ function caweb_display_social_media_settings( $is_active = false ) {
 				$footer_checked     = get_option( sprintf( '%1$s_footer', $option ) ) ? ' checked' : '';
 				$new_window_checked = get_option( sprintf( '%1$s_new_window', $option ) ) ? ' checked' : '';
 				$hover_text         = get_option( sprintf( '%1$s_hover_text', $option ), "Share via $social" );
+				$hidden             = in_array( $option, $exlusions, true ) ? ' d-none' : '';
 				?>
-					<div class="form-row">
+					<div class="form-row<?php print esc_attr( $hidden ); ?>">
 						<a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
 							<h2 class="d-inline"><?php print esc_attr( $social ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 						</a>
 					</div>
-					<div class="form-row collapse pt-2" id="<?php print esc_attr( $option ); ?>-settings">
+					<div class="form-row collapse pt-2<?php print esc_attr( $hidden ); ?>" id="<?php print esc_attr( $option ); ?>-settings">
 					<?php if ( ! $share_email ) : ?>
 						<!-- Option URL -->
 						<div class="form-group col-md-12">
@@ -670,7 +681,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 						</div>
 						<?php endif; ?>
 						<!-- Show in header -->
-						<div class="form-group col-sm-3<?php print esc_attr($deprecating ? ' d-none' : '') ?>">
+						<div class="form-group col-sm-3<?php print esc_attr( $deprecating ? ' d-none' : '' ); ?>">
 							<label for="<?php print esc_attr( $option ); ?>_header" class="d-block"><strong>Show in header:</strong></label>
 							<small class="text-muted d-block">Display social link in the utility header.</small>
 							<input type="checkbox" id="<?php print esc_attr( $option ); ?>_header" name="<?php print esc_attr( $option ); ?>_header" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $header_checked ); ?>>
@@ -698,7 +709,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 					</div>
 					<?php
 			}
-		?>
+			?>
 	</div>
 	<?php
 }

@@ -10,6 +10,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+$caweb_deprecating = '5.5' === caweb_template_version();
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -86,7 +88,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 					get_template_part( 'includes/no-results', 'index' );
 				endif;
 				?>
+					<?php if ( $caweb_deprecating ) : ?>
+					<span class="return-top hidden-print"></span>
+					<?php else : ?>
+					<button class="return-top">
+						<span class="sr-only hidden-print">Back to top</span>
+					</button>
+					<?php endif; ?>
 					</main>
+
 					<?php
 					if ( is_active_sidebar( 'sidebar-1' ) ) :
 						?>

@@ -1,4 +1,4 @@
-body:not(.design-system){
+body[class*="5.5"]{
 	/* Override styles for second level navs not using flex */
 	.second-level-nav:not(.flex) {
 		display: block;
@@ -65,6 +65,13 @@ body:not(.design-system){
 				}
 			}
 		}
+	}
+}
+
+body[class*="6.0"]{
+	/* Override nav li line-height */
+	nav li{
+		line-height: 1.5 !important;
 	}
 }
 

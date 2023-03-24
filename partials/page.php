@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $post;
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
+$caweb_deprecating          = '5.5' === caweb_template_version();
+
 ?>
 
 	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
@@ -60,7 +62,13 @@ $caweb_is_page_builder_used = caweb_is_divi_used();
 					</article> <!-- .et_pb_post -->
 
 					<?php endwhile; ?>
+					<?php if ( $caweb_deprecating ) : ?>
 					<span class="return-top hidden-print"></span>
+					<?php else : ?>
+					<button class="return-top">
+						<span class="sr-only hidden-print">Back to top</span>
+					</button>
+					<?php endif; ?>
 				</main>
 			<?php if ( ! $caweb_is_page_builder_used ) : ?>
 			</div>

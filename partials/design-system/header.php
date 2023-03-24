@@ -75,7 +75,7 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 		wp_nav_menu(
 			array(
 				'theme_location'               => 'header-menu',
-				'style'                        => get_option( 'ca_default_navigation_menu' ),
+				'style'                        => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
 				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
 			)
 		);
