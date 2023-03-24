@@ -126,7 +126,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 					/* If not currently on the Front Page and Auto Home Nav Link option is true, create the Home Nav Link */
 					$home_icon = $deprecating ? '<span class="ca-gov-icon-home"></span> ' : '';
-					$home_link = isset( $args->home_link ) && $args->home_link ? sprintf( '<li class="nav-item nav-item-home"><a href="/" class="first-level-link">%1$sHome</a></li>', $home_icon ) : '';
+					$home_link = $deprecating && isset( $args->home_link ) && $args->home_link ? sprintf( '<li class="nav-item nav-item-home"><a href="/" class="first-level-link">%1$sHome</a></li>', $home_icon ) : '';
 
 					$search_link = $deprecating && 'page-templates/searchpage.php' !== get_page_template_slug( $post_id ) && '' !== get_option( 'ca_google_search_id', '' ) ?
 										'<li class="nav-item" id="nav-item-search" ><button class="first-level-link h-auto"><span class="ca-gov-icon-search" aria-hidden="true"></span> Search</button></li>' : '';
@@ -169,20 +169,21 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					 */
 					include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-					$nav_menu   = $this->create_footer_menu( $args );
-					$powered_by = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' ) ? '<div class="half text-right"><span>Powered by: CAWeb Publishing Service</span></div>' : '';
+					$is_plugin_active = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' );
 
-					$cc = sprintf( '<div class="half"><p class="d-inline">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p></div>', gmdate( 'Y' ) );
+					$powered_by = $is_plugin_active ? '<span>Powered by: CAWeb Publishing Service</span>' : '';
+					$cc         = sprintf( '<p class="mr-auto me-auto">Copyright <span aria-hidden="true">&copy;</span> %1$s State of California</p>', gmdate( 'Y' ) );
+
+					$nav_menu = sprintf( '<div class="d-flex">%1$s</div>', $this->create_footer_menu( $args ) );
 
 					$copyright = sprintf(
-						'<div class="copyright"><div class="container"><div class="row">%1$s%2$s</div></div></div>',
+						'<div class="copyright"><div class="container"><div class="d-flex">%1$s%2$s</div></div></div>',
 						$cc,
 						$powered_by
 					);
 
 					$nav_menu = sprintf(
-						'<footer id="footer" class="global-footer hidden-print"><div class="container"><div class="%1$s">%2$s</div></div>%3$s</footer>',
-						$deprecating ? 'row' : 'd-flex',
+						'<footer id="footer" class="global-footer hidden-print"><div class="container">%1$s</div>%2$s</footer>',
 						$nav_menu,
 						$copyright
 					);
@@ -806,27 +807,14 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			}
 
 			$social_links = $this->create_footer_social_menu( $args );
+			$logo         = ! $deprecating ? sprintf( '<a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a>', CAWEB_URI ) : '';
 
-			if ( $deprecating ) {
-
-				$class = ! empty( $social_links ) ? 'three-quarters' : 'full-width';
-
-				$nav_links = sprintf(
-					'<div class="%1$s"><ul class="footer-links"><li><a href="#skip-to-content">Back to Top</a></li>%2$s</ul></div>%3$s',
-					$class,
-					$nav_links,
-					$social_links
-				);
-			} else {
-				$logo = sprintf( '<a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener"><img src="%1$s/images/system/logo-gold.svg" style="height: 31px;"/></a>', CAWEB_URI );
-
-				$nav_links = sprintf(
-					'%1$s<ul class="footer-links"><li><a href="#skip-to-content">Back to Top</a></li>%2$s</ul>%3$s',
-					$logo,
-					$nav_links,
-					$social_links
-				);
-			}
+			$nav_links = sprintf(
+				'%1$s<ul class="footer-links mr-auto"><li><a href="#skip-to-content">Back to Top</a></li>%2$s</ul>%3$s',
+				$logo,
+				$nav_links,
+				$social_links
+			);
 
 			return $nav_links;
 		}
@@ -929,16 +917,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				}
 			}
 
-			if ( ! empty( $social_links ) ) {
-				$social_links = ! empty( $social_links ) ? sprintf( '<ul class="socialsharer-container">%1$s</ul>', $social_links ) : '';
-
-				if ( ! $deprecating ) {
-					return $social_links;
-				} else {
-
-					return sprintf( '<div class="quarter text-right">%1$s</div>', $social_links );
-				}
-			}
+			return ! empty( $social_links ) ? sprintf( '<ul class="socialsharer-container">%1$s</ul>', $social_links ) : '';
 
 		}
 
@@ -1064,17 +1043,17 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 			/* Check if element is properly sent */
 			if ( $verified && isset( $_POST['menu-item-db-id'] ) ) {
-				$icon                        = isset( $_POST[ $menu_item_db_id . '_icon' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_icon' ] ) ) : '';
-				$unit_size                   = isset( $_POST[ $menu_item_db_id . '_unit_size' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_unit_size' ] ) ) : 'unit1';
-				$item_image                  = isset( $_POST[ $menu_item_db_id . '_image' ] ) ? esc_url_raw( wp_unslash( $_POST[ $menu_item_db_id . '_image' ] ) ) : '';
-				$item_image_side             = isset( $_POST[ $menu_item_db_id . '_image_side' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_image_side' ] ) ) : 'left';
-				$item_image_size             = isset( $_POST[ $menu_item_db_id . '_image_size' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_image_size' ] ) ) : 'quarter';
-				$column_count                = isset( $_POST[ $menu_item_db_id . '_column_count' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_column_count' ] ) ) : '';
-				$item_media_image            = isset( $_POST[ $menu_item_db_id . '_media_image' ] ) ? esc_url_raw( wp_unslash( $_POST[ $menu_item_db_id . '_media_image' ] ) ) : '';
-				$item_media_image_alt_text   = isset( $_POST[ $menu_item_db_id . '_media_image_alt_text' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_media_image_alt_text' ] ) ) : '';
-				$item_media_image_aligntment = isset( $_POST[ $menu_item_db_id . '_media_image_alignment' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_media_image_alignment' ] ) ) : '';
-				$flexmega_border             = isset( $_POST[ $menu_item_db_id . '_flexmega_border' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_flexmega_border' ] ) ) : '';
-				$flexmega_row                = isset( $_POST[ $menu_item_db_id . '_flexmega_row' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_flexmega_row' ] ) ) : '';
+				$icon                       = isset( $_POST[ $menu_item_db_id . '_icon' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_icon' ] ) ) : '';
+				$unit_size                  = isset( $_POST[ $menu_item_db_id . '_unit_size' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_unit_size' ] ) ) : 'unit1';
+				$item_image                 = isset( $_POST[ $menu_item_db_id . '_image' ] ) ? esc_url_raw( wp_unslash( $_POST[ $menu_item_db_id . '_image' ] ) ) : '';
+				$item_image_side            = isset( $_POST[ $menu_item_db_id . '_image_side' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_image_side' ] ) ) : 'left';
+				$item_image_size            = isset( $_POST[ $menu_item_db_id . '_image_size' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_image_size' ] ) ) : 'quarter';
+				$column_count               = isset( $_POST[ $menu_item_db_id . '_column_count' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_column_count' ] ) ) : '';
+				$item_media_image           = isset( $_POST[ $menu_item_db_id . '_media_image' ] ) ? esc_url_raw( wp_unslash( $_POST[ $menu_item_db_id . '_media_image' ] ) ) : '';
+				$item_media_image_alt_text  = isset( $_POST[ $menu_item_db_id . '_media_image_alt_text' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_media_image_alt_text' ] ) ) : '';
+				$item_media_image_alignment = isset( $_POST[ $menu_item_db_id . '_media_image_alignment' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_media_image_alignment' ] ) ) : '';
+				$flexmega_border            = isset( $_POST[ $menu_item_db_id . '_flexmega_border' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_flexmega_border' ] ) ) : '';
+				$flexmega_row               = isset( $_POST[ $menu_item_db_id . '_flexmega_row' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_flexmega_row' ] ) ) : '';
 
 				update_post_meta( $menu_item_db_id, '_caweb_menu_icon', $icon );
 				update_post_meta( $menu_item_db_id, '_caweb_menu_unit_size', $unit_size );
@@ -1084,7 +1063,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 				update_post_meta( $menu_item_db_id, '_caweb_menu_column_count', $column_count );
 				update_post_meta( $menu_item_db_id, '_caweb_menu_media_image', $item_media_image );
 				update_post_meta( $menu_item_db_id, '_caweb_nav_media_image_alt_text', $item_media_image_alt_text );
-				update_post_meta( $menu_item_db_id, '_caweb_menu_media_image_alignment', $item_media_image_aligntment );
+				update_post_meta( $menu_item_db_id, '_caweb_menu_media_image_alignment', $item_media_image_alignment );
 				update_post_meta( $menu_item_db_id, '_caweb_menu_flexmega_border', $flexmega_border );
 				update_post_meta( $menu_item_db_id, '_caweb_menu_flexmega_row', $flexmega_row );
 
