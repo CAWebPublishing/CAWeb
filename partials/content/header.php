@@ -10,17 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $post;
-$caweb_version = caweb_template_version();
-
+$caweb_version      = caweb_template_version();
+$caweb_deprecating  = '5.5' === $caweb_version;
 $caweb_loaded       = isset( $args['loaded'] ) && $args['loaded'];
-$caweb_fixed_header = '5.5' === $caweb_version && ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
+$caweb_fixed_header = $caweb_deprecating && ! $caweb_loaded && get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '';
 $caweb_color        = get_option( 'ca_site_color_scheme', 'oceanside' );
 $caweb_schemes      = caweb_color_schemes( $caweb_version, 'filename' );
 $caweb_colorscheme  = isset( $caweb_schemes[ $caweb_color ] ) ? $caweb_color : 'oceanside';
-
-/* Branding */
-$caweb_logo          = '' !== esc_url( get_option( 'header_ca_branding' ) ) ? esc_url( get_option( 'header_ca_branding' ) ) : '';
-$caweb_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text' ) : caweb_get_attachment_post_meta( $caweb_logo, '_wp_attachment_image_alt' );
 
 
 /* Search */
@@ -54,8 +50,10 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 	/* Include Utility Header */
 	require_once 'utility-header.php';
 
-	/* Include Location Bar */
-	require_once 'bar-location.php';
+	if ( $caweb_deprecating ) {
+		/* Include Location Bar */
+		require_once 'bar-location.php';
+	}
 
 	/* Include Settings Bar */
 	require_once 'bar-settings.php';
@@ -65,7 +63,9 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 
 	/* Include Mobile Controls */
 	require_once 'mobile-controls.php';
-	?>
+
+	if ( $caweb_deprecating ) :
+		?>
 	<div class="navigation-search">
 
 	<!-- Include Navigation -->
@@ -73,7 +73,7 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 		wp_nav_menu(
 			array(
 				'theme_location'               => 'header-menu',
-				'style'                        => get_option( 'ca_default_navigation_menu' ),
+				'style'                        => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
 				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
 			)
 		);
@@ -89,5 +89,27 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 			?>
 		</div>
 	</div>
+	<?php else : ?>
 
+	<div class="navigation-search full-width-nav container">
+		<?php if ( ! empty( $caweb_google_search_id ) && 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) : ?>
+		<div id="head-search" class="search-container hidden-print featured-search">
+			<?php require_once 'search-form.php'; ?>
+		</div>
+		<?php endif; ?>
+		<!-- Include Navigation -->
+		<?php
+
+		wp_nav_menu(
+			array(
+				'theme_location'               => 'header-menu',
+				'style'                        => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
+				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
+			)
+		);
+
+		?>
+
+	</div>
+	<?php endif; ?>
 </header>

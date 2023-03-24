@@ -102,14 +102,14 @@ function caweb_display_general_settings( $is_active = false ) {
  */
 function caweb_display_general_options() {
 	// State Template Version variables.
-	$ver = caweb_template_version( true );
+	$deprecating = '5.5' === caweb_template_version();
 
 	// Fav Icon.
 	$fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 	$fav_icon_name = caweb_favicon_name();
 
 	// Header Menu.
-	$navigation_menu = get_option( 'ca_default_navigation_menu', 'megadropdown' );
+	$navigation_menu = get_option( 'ca_default_navigation_menu', 'singlelevel' );
 
 	// Design System enabled.
 	$caweb_enable_design_system = caweb_design_system_enabled();
@@ -137,13 +137,13 @@ function caweb_display_general_options() {
 	$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
 	$menus = array(
+		'dropdown'     => 'Drop Down',
 		'flexmega'     => 'Flex Mega Menu',
 		'megadropdown' => 'Mega Drop',
-		'dropdown'     => 'Drop Down',
 		'singlelevel'  => 'Single Level',
 	);
 
-	if ( $caweb_enable_design_system ) {
+	if ( $caweb_enable_design_system || ! $deprecating ) {
 		unset( $menus['flexmega'], $menus['megadropdown'] );
 	}
 
@@ -174,9 +174,9 @@ function caweb_display_general_options() {
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
-					<option value="5.5"<?php print '5.0' === "$ver" ? ' selected="selected"' : ''; ?>>Version 5.5</option>
+					<option value="5.5"<?php print $deprecating ? ' selected="selected"' : ''; ?>>Version 5.5</option>
 					<?php if ( current_user_can( $network ) ) : ?>
-						<option value="6.0"<?php print '6.0' === "$ver" ? ' selected="selected"' : ''; ?>>Version 6.0</option>
+						<option value="6.0"<?php print ! $deprecating ? ' selected="selected"' : ''; ?>>Version 6.0</option>
 					<?php endif; ?>
 				</select>
 			</div>
@@ -271,13 +271,13 @@ function caweb_display_general_options() {
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
 			<!-- Menu Home Link -->
-			<div class="form-group col">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
 				<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
 				<input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $home_nav_link_enabled ); ?>>
 			</div>
 			<!-- Sticky Navigation -->
-			<div class="form-group col<?php print '5.5' !== $ver ? ' d-none' : ''; ?>">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
 				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
 				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
@@ -300,7 +300,7 @@ function caweb_display_general_options() {
 				<small class="text-danger d-block"><?php print ! empty( $ua_compatibiliy ) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : ''; ?></small>
 			</div>
 			<!-- Search on FrontPage -->
-			<div class="form-group col">
+			<div class="form-group col<?php print ! $deprecating ? ' d-none' : ''; ?>">
 				<label for="ca_frontpage_search_enabled" class="d-block mb-0"><strong>Show Search on Front Page</strong></label>
 				<small class="mb-2 text-muted d-block">Enable Feature Search box on home page.</small>
 				<input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $frontpage_search_enabled ); ?> >

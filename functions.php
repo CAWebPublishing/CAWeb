@@ -514,6 +514,12 @@ function caweb_admin_enqueue_scripts( $hook ) {
 			'caweb_colors'       => caweb_template_colors(),
 			'tinymce_settings'   => caweb_tiny_mce_settings(),
 			'caweb_colorschemes' => $schemes,
+			'caweb_menus'        => array(
+				'dropdown'     => 'Drop Down',
+				'flexmega'     => 'Flex Mega Menu',
+				'megadropdown' => 'Mega Drop',
+				'singlelevel'  => 'Single Level',
+			),
 		);
 
 		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );
