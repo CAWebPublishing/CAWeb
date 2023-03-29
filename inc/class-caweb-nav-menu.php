@@ -528,7 +528,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				/* Get icon if present */
 				$icon = '';
-				if ( isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+				if ( $deprecating && isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
 					$icon = sprintf(
 						'<span class="ca-gov-icon-%1$s" aria-hidden="true"></span>',
 						$item_meta['_caweb_menu_icon'][0]
