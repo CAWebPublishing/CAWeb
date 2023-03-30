@@ -264,9 +264,9 @@ function caweb_display_general_options() {
 
 		<!-- Search on FrontPage, Sticky Navigation & Menu Home Link Row -->
 		<div class="form-row">
-			<!-- Title Display Default Off -->
+			<!-- Title Display Default -->
 			<div class="form-group col">
-				<label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default Off</strong></label>
+				<label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default</strong></label>
 				<small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
@@ -284,7 +284,7 @@ function caweb_display_general_options() {
 			</div>
 		</div>
 
-		<!-- Title Display Default Off, Display Date for Non-Divi Posts & Legacy Browser Support Row -->
+		<!-- Title Display Default, Display Date for Non-Divi Posts & Legacy Browser Support Row -->
 		<div class="form-row">
 			<!-- Display Date for Non-Divi Posts -->
 			<div class="form-group col">
