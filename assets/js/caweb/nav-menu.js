@@ -1,6 +1,8 @@
 /* nav-menus.php Javascript  */
 jQuery(document).ready(function($) {
   "use strict";
+
+
   /* Alt Text Check */
   $(document).on('click', 'input[name="save_menu"]', function(e){
 	  var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
@@ -48,6 +50,11 @@ jQuery(document).ready(function($) {
         $(icon_selector).removeClass('hidden');
     }
     
+    // remove icon selector if using version 6.0
+    if( '6.0' === caweb_admin_args.template_version ){
+      // Hide Icon Selector
+      $(icon_selector).addClass('hidden');
+    }
   });
 
   /* New Row */
@@ -146,6 +153,12 @@ jQuery(document).ready(function($) {
       }
 
       
+    }
+
+    // remove icon selector if using version 6.0
+    if( '6.0' === caweb_admin_args.template_version ){
+      // Hide Icon Selector
+      $(icon_selector).addClass('hidden');
     }
   }
 });

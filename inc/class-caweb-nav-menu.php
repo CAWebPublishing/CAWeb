@@ -528,7 +528,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 
 				/* Get icon if present */
 				$icon = '';
-				if ( isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
+				if ( $deprecating && isset( $item_meta['_caweb_menu_icon'] ) && ! empty( $item_meta['_caweb_menu_icon'][0] ) ) {
 					$icon = sprintf(
 						'<span class="ca-gov-icon-%1$s" aria-hidden="true"></span>',
 						$item_meta['_caweb_menu_icon'][0]
@@ -932,6 +932,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 		 * @return void
 		 */
 		public function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
+			$deprecating               = '5.5' === caweb_template_version();
 			$tmp                       = get_post_meta( $item->ID );
 			$icon                      = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
 			$unit_size                 = isset( $tmp['_caweb_menu_unit_size'][0] ) && ! empty( $tmp['_caweb_menu_unit_size'][0] ) ? $tmp['_caweb_menu_unit_size'][0] : 'unit1';
@@ -950,7 +951,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$unit_size = 'unit3' === $unit_size && ! in_array( $nav_menu_style, array( 'flexmega', 'megadropdown' ), true ) ? 'unit2' : $unit_size;
 
 			?>
-			<div class="icon-selector <?php print 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
+			<div class="icon-selector <?php print ! $deprecating || 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
 				<?php
 				print wp_kses(
 					caweb_icon_menu(
