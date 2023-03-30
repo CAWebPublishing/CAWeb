@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
   /* Unit Size Selector */
   $(document).on('change', 'div .unit-size-selector', function(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
     var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
     var unit_size = $(this).val();
@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
   function menu_selection(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
     var menu_li = $('#menu-item-' + menu_id);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
     var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
     var mega_menu_images = $('#menu-item-settings-' + menu_id + ' .mega-menu-images');
