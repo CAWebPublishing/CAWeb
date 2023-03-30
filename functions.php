@@ -508,6 +508,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		}
 
 		$caweb_localize_args = array(
+			'template_version'   => $version,
 			'defaultFavIcon'     => caweb_default_favicon_url(),
 			'changeCheck'        => $hook,
 			'caweb_icons'        => array_values( caweb_symbols( -1, '', '', false ) ),
