@@ -951,7 +951,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 			$unit_size = 'unit3' === $unit_size && ! in_array( $nav_menu_style, array( 'flexmega', 'megadropdown' ), true ) ? 'unit2' : $unit_size;
 
 			?>
-			<div class="icon-selector <?php print ! $deprecating || 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
+			<div class="caweb-icon-selector <?php print ! $deprecating || 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
 				<?php
 				print wp_kses(
 					caweb_icon_menu(
