@@ -344,7 +344,7 @@ if ( ! class_exists( 'CAWeb_Nav_Menu' ) ) {
 					}
 
 					/* if is current menut item add .active */
-					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) ? ' active ' : '';
+					$item->classes[] = in_array( 'current-menu-item', $item->classes, true ) || in_array( 'current-menu-parent', $item->classes, true ) ? ' active ' : '';
 
 					/* Get column count */
 					$item->classes[] = isset( $args->style, $item_meta['_caweb_menu_column_count'] ) &&
