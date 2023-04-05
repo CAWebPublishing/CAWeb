@@ -24,6 +24,59 @@ define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', '5.5' );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( '5.5', '6.0' ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
+add_action('wp_body_open', 'caweb_wp_body_open');
+add_action('caweb_search_form', 'caweb_search_form');
+
+function caweb_wp_body_open(){
+	$caweb_version      = caweb_template_version();
+	$caweb_logo          = get_option( 'header_ca_branding', '' );
+	$caweb_logo_alt_text = get_option( 'header_ca_branding_alt_text', '' );
+	
+	// Search.
+	$caweb_google_search_id         = get_option( 'ca_google_search_id', '' );
+	$caweb_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false );
+	$caweb_search_class  = is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade ' : '';
+	$caweb_search_class .= empty( $caweb_google_search_id ) ? ' hidden ' : '';
+
+	if ( ! empty( $caweb_logo ) && empty( $caweb_logo_alt_text ) ) {
+		$caweb_logo_alt_text = caweb_get_attachment_post_meta( $caweb_logo, '_wp_attachment_image_alt' );
+	}
+
+	$args = array(
+		'caweb_template_version' => $caweb_version,
+		'caweb_fixed_header' => get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '',
+		'caweb_utility_home_icon' => get_option( 'ca_utility_home_icon', true ),
+		'caweb_social_options' => caweb_get_site_options( 'social' ),
+		'caweb_geo_locator_enabled' => get_option( 'ca_geo_locator_enabled', false ),
+		'caweb_contact_us_link' => get_option( 'ca_contact_us_link', '' ),
+		'caweb_google_trans_enabled' => get_option( 'ca_google_trans_enabled', false ),
+		'caweb_google_trans_page' => get_option( 'ca_google_trans_page', '' ),
+		'caweb_google_trans_text' => get_option( 'ca_google_trans_text', '' ),
+		'caweb_google_trans_page_new_window' => get_option( 'ca_google_trans_page_new_window', '' ),
+		'caweb_google_trans_icon' => get_option( 'ca_google_trans_icon', '' ),
+		'caweb_logo' => $caweb_logo ,
+		'caweb_logo_alt_text' => $caweb_logo_alt_text,
+		'caweb_google_search_id' => $caweb_google_search_id,
+		'caweb_search_class' => $caweb_search_class,
+	);
+
+	get_template_part( "parts/$caweb_version/header", null, $args );
+	
+}
+
+function caweb_search_form(){
+	$caweb_version      = caweb_template_version();
+
+	$caweb_search_nonce = wp_create_nonce( 'caweb_google_cse' );
+	$caweb_verified     = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_key( $caweb_search_nonce ), 'caweb_google_cse' );
+	$caweb_keyword = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+	
+	$args = array(
+		'caweb_keyword' => $caweb_keyword
+	);
+
+	get_template_part( "parts/$caweb_version/search", null, $args );
+}
 
 /**
  * Plugin API/Action Reference
@@ -35,7 +88,6 @@ add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
 add_action( 'send_headers', 'caweb_send_headers' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
-add_action( 'wp_head', 'caweb_wp_head' );
 add_action( 'wp_footer', 'caweb_wp_footer', 11 );
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
@@ -356,66 +408,6 @@ function caweb_wp_enqueue_scripts() {
 		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . '-', true ), true );
 		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
 	}
-}
-
-/**
- * WP Head
- * Prints scripts or data in the head tag on the front end.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_head/
- * @wp_action add_action( 'wp_head', 'caweb_wp_head' );
- * @return void
- */
-function caweb_wp_head() {
-	global $is_IE, $is_edge;
-
-	$caweb_fav_ico            = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
-	$caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
-	$caweb_x_ua_compatibility = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
-	$caweb_apple_icon         = CAWEB_URI . '/images/system/apple-touch-icon';
-
-	?>
-	<meta charset="utf-8">
-	<meta name="Author" content="State of California" />
-	<meta name="Description" content="State of California" />
-	<meta name="Keywords" content="California, government" />
-
-	<!-- http://t.co/dKP3o1e -->
-	<meta name="HandheldFriendly" content="True">
-
-	<!-- for Blackberry, AvantGo -->
-	<meta name="MobileOptimized" content="320">
-
-	<!-- for Windows mobile -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-
-	<!-- Google Meta-->
-	<meta name="google-site-verification" content="<?php print esc_attr( $caweb_google_meta_id ); ?>" />
-
-	<?php if ( $is_IE ) : ?>
-	<!-- Activate ClearType for Mobile IE -->
-	<meta http-equiv="cleartype" content="on">
-	<?php endif; ?>
-
-	<?php if ( $is_IE && ! $is_edge && $caweb_x_ua_compatibility ) : ?>
-	<!-- Use highest compatibility mode -->
-	<meta http-equiv="X-UA-Compatible" content="IE=<?php print esc_attr( $caweb_x_ua_compatibility ); ?>">
-	<?php endif; ?>
-
-	<link rel="apple-touch-icon-precomposed" sizes="100x100" href="<?php print esc_url( $caweb_apple_icon ); ?>-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="192x192" href="<?php print esc_url( $caweb_apple_icon ); ?>-192x192.png">
-	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php print esc_url( $caweb_apple_icon ); ?>-180x180.png">
-	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php print esc_url( $caweb_apple_icon ); ?>-152x152.png">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php print esc_url( $caweb_apple_icon ); ?>-144x144.png">
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php print esc_url( $caweb_apple_icon ); ?>-120x120.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php print esc_url( $caweb_apple_icon ); ?>-114x114.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php print esc_url( $caweb_apple_icon ); ?>-72x72.png">
-	<link rel="apple-touch-icon-precomposed" href="<?php print esc_url( $caweb_apple_icon ); ?>-57x57.png">
-	<link rel="apple-touch-icon" href="<?php print esc_url( $caweb_apple_icon ); ?>.png">
-
-	<link title="Fav Icon" rel="icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
-	<link rel="shortcut icon" href="<?php print esc_url( $caweb_fav_ico ); ?>">
-	<?php
 }
 
 /**

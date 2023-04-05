@@ -1,0 +1,34 @@
+<?php 
+/**
+ * Loads CAWeb search form.
+ * php version 8.0.28
+ *
+ * @package CAWeb
+ * @version 1.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+extract( $args );
+
+?>
+
+<div class="container">
+	<form id="Search" class="pos-rel" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
+		<span class="sr-only" id="SearchInput">Custom Google Search</span>
+		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield" />
+		<button type="submit" class="gsc-search-button ms-0 w-auto">
+			<span class="ca-gov-icon-search" aria-hidden="true" ></span>
+			<span class="sr-only">Submit</span>
+		</button>
+		<div class="close-search-btn">
+			<!-- Some Google styles add an 'x' background image when button has 'gsc-clear-button' in the class -->
+			<button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset" tabindex="-1">
+				<span class="sr-only">Close Search</span>
+				<span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
+			</button>
+		</div>
+	</form> 
+</div>

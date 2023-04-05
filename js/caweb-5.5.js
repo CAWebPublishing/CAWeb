@@ -18789,7 +18789,7 @@ $(document).ready(function () {
 	}
 
 
-	$('.caweb-alert-close').click( function(e){ 
+	$('.caweb-alert-close').on( 'click', function(e){ 
 		var alert_id = this.dataset.id; 
 		document.cookie = 'caweb-alert-id-' + alert_id + '=false;path=' + args.path;
 
@@ -18802,10 +18802,10 @@ $(document).ready(function () {
 	}
 
 	// run test on initial page load
-	checkSize();
+	//checkSize();
 
 	// run test on resize of the window
-	$(window).resize(checkSize);
+	//$(window).on( 'resize', checkSize);
 
 	// This fixes anchor position when smooth scrolling
 	window.et_pb_smooth_scroll=function($target,$top_section,speed,easing){

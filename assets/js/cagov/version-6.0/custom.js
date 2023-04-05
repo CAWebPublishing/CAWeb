@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
 	}
 
 
-	$('.caweb-alert-close').click( function(e){ 
+	$('.caweb-alert-close').on( 'click', function(e){ 
 		var alert_id = this.dataset.id; 
 		document.cookie = 'caweb-alert-id-' + alert_id + '=false;path=' + args.path;
 	

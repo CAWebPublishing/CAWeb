@@ -15,147 +15,120 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+/**
+* Loads CAWeb <header> tag.
+*/
 
-$caweb_deprecating = '5.5' === caweb_template_version();
-?>
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-	<?php wp_head(); ?>
-</head>
-<body <?php body_class( 'primary' ); ?>>
-	<?php
-		/**
-		 * Loads header
-		 */
-		get_header();
-	?>
+get_header();
 
-	<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'page-container' ) ); ?>">
-		<div id="et-main-area">
-			<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_ds_suffix', 'main-content' ) ); ?>" tabindex="-1">
-				<div class="section">
-					<main class="main-primary">
-						<?php
-						global $wp_query;
+if ( have_posts() ) {
+	while ( have_posts() ){
+		the_post();
+		$caweb_post_format = et_pb_post_format();
 
-						if ( have_posts() ) :
-							while ( have_posts() ) :
-								the_post();
-								$caweb_post_format = et_pb_post_format();
-								?>
+		?>
+		<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 
-						<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
+			<?php
+				$caweb_thumb = '';
 
-										<?php
-										$caweb_thumb = '';
+				$caweb_width = (int) apply_filters( 'et_pb_index_blog_image_width', 1080 );
 
-										$caweb_width = (int) apply_filters( 'et_pb_index_blog_image_width', 1080 );
+				$caweb_height    = (int) apply_filters( 'et_pb_index_blog_image_height', 675 );
+				$caweb_classtext = 'et_pb_post_main_image';
+				$caweb_titletext = get_the_title();
+				$caweb_thumbnail = get_thumbnail( $caweb_width, $caweb_height, $caweb_classtext, $caweb_titletext, $caweb_titletext, false, 'Blogimage' );
+				$caweb_thumb     = $caweb_thumbnail['thumb'];
 
-										$caweb_height    = (int) apply_filters( 'et_pb_index_blog_image_height', 675 );
-										$caweb_classtext = 'et_pb_post_main_image';
-										$caweb_titletext = get_the_title();
-										$caweb_thumbnail = get_thumbnail( $caweb_width, $caweb_height, $caweb_classtext, $caweb_titletext, $caweb_titletext, false, 'Blogimage' );
-										$caweb_thumb     = $caweb_thumbnail['thumb'];
+				if ( function_exists( 'et_divi_post_format_content' ) ) {
+					et_divi_post_format_content();
+				}
 
-										if ( function_exists( 'et_divi_post_format_content' ) ) {
-											et_divi_post_format_content();
-										}
-
-										if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) {
-											if ( 'video' === $caweb_post_format && false !== ( et_get_first_video() === $caweb_first_video ) ) :
-												print esc_html( sprintf( '<div class="et_main_video_container">%1$s</div>', $caweb_first_video ) ); elseif ( ! in_array( $caweb_post_format, array( 'gallery' ), true ) && function_exists( 'et_get_option' ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $caweb_thumb ) :
-													?>
-							<a href="<?php the_permalink(); ?>">
-													<?php print_thumbnail( $caweb_thumb, $caweb_thumbnail['use_timthumb'], $caweb_titletext, $caweb_width, $caweb_height ); ?>
-							</a>
-													<?php
-										elseif ( 'gallery' === $caweb_post_format ) :
-											et_pb_gallery_images();
-											endif;
-										}
-										?>
-
-								<?php if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) : ?>
-									<?php if ( ! in_array( $caweb_post_format, array( 'link', 'audio' ), true ) ) : ?>
-							<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-							<?php endif; ?>
-
-									<?php
-									if ( function_exists( 'et_divi_post_meta' ) ) {
-										et_divi_post_meta();
-									}
-									if ( function_exists( 'et_get_option' ) && 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
-										truncate_post( 270 );
-									} else {
-										the_content();
-									}
-									?>
-							<?php endif; ?>
-
-						</article> <!-- .et_pb_post -->
-								<?php
-								endwhile;
-
-							if ( function_exists( 'wp_pagenavi' ) ) {
-								wp_pagenavi();
-							} else {
-								get_template_part( 'includes/navigation', 'index' );
-							} else :
-								get_template_part( 'includes/no-results', 'index' );
-				endif;
+				if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) {
+					if ( 'video' === $caweb_post_format && false !== ( et_get_first_video() === $caweb_first_video ) ) :
+						print esc_html( sprintf( '<div class="et_main_video_container">%1$s</div>', $caweb_first_video ) ); 
+					elseif ( ! in_array( $caweb_post_format, array( 'gallery' ), true ) && function_exists( 'et_get_option' ) && 'on' === et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $caweb_thumb ) :
 							?>
-					<?php if ( $caweb_deprecating ) : ?>
-					<span class="return-top hidden-print"></span>
-					<?php else : ?>
-					<button class="return-top">
-						<span class="sr-only hidden-print">Back to top</span>
-					</button>
-					<?php endif; ?>
-					</main>
-				</div> 
-			</div> <!-- #main-content -->
-		</div>
-	</div>
-	<style>
-		#searchform {
-			float: right;
-		}
+							<a href="<?php the_permalink(); ?>">
+								<?php print_thumbnail( $caweb_thumb, $caweb_thumbnail['use_timthumb'], $caweb_titletext, $caweb_width, $caweb_height ); ?>
+							</a>
+						<?php
+					elseif ( 'gallery' === $caweb_post_format ) :
+						et_pb_gallery_images();
+					endif;
+				}
+			?>
 
-		.entry-title a {
-			color: #428bca;
-		}
+			<?php if ( ! in_array( $caweb_post_format, array( 'link', 'audio', 'quote' ), true ) ) : ?>
+				<?php if ( ! in_array( $caweb_post_format, array( 'link', 'audio' ), true ) ) : ?>
+					<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+				<?php endif; ?>
 
-		.sform {
-			border-bottom: none;
-		}
+				<?php
+					if ( function_exists( 'et_divi_post_meta' ) ) {
+						et_divi_post_meta();
+					}
+					
+					if ( function_exists( 'et_get_option' ) && 'on' !== et_get_option( 'divi_blog_style', 'false' ) || ( is_search() && ( 'on' === get_post_meta( get_the_ID(), '_et_pb_use_builder', true ) ) ) ) {
+						truncate_post( 270 );
+					} else {
+						the_content();
+					}
+				?>
+			<?php endif; ?>
+		</article>
+		<?php
+	}
 
-		.searched-for {
-			margin-top: 5px;
-		}
+	if ( function_exists( 'wp_pagenavi' ) ) {
+		wp_pagenavi();
+	} else {
+		get_template_part( 'includes/navigation', 'index' );
+	}
+}else{
+	get_template_part( 'includes/no-results', 'index' );
+}
 
-		.query {
-			float: right;
-		}
+?>
 
-		.count {
-			float: left;
-		}
-		.divider {
-			display: block !important;
-			width: 100%;
-			height: 2px;
-			color: #e09900;
-			border-color: #e09900;
-			background-color: #e09900;
-			margin: 0;
-		}
-	</style>
-	<?php
-		/**
-		 * Loads footer
-		 */
-		get_footer();
-	?>
-</body>
-</html>
+<style>
+	#searchform {
+		float: right;
+	}
+
+	.entry-title a {
+		color: #428bca;
+	}
+
+	.sform {
+		border-bottom: none;
+	}
+
+	.searched-for {
+		margin-top: 5px;
+	}
+
+	.query {
+		float: right;
+	}
+
+	.count {
+		float: left;
+	}
+	.divider {
+		display: block !important;
+		width: 100%;
+		height: 2px;
+		color: #e09900;
+		border-color: #e09900;
+		background-color: #e09900;
+		margin: 0;
+	}
+</style>
+
+<?php
+
+/**
+ * Loads footer
+ */
+get_footer();

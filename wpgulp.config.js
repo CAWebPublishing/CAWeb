@@ -14,12 +14,8 @@ module.exports = {
 	outputJSDir: './js/',
 	// CA State Template Options
 	templateVer: '5.5', // Minimum CA State Template Version
-	availableVers: ['5.5', '6.0', 'design-system'], // Available CA State Template Versions
+	availableVers: ['5.5', '6.0'], // Available CA State Template Versions
 	availableColors: {
-		'cagov.css' : 'CAGov',
-		'cannabis.css' : 'Cannabis',
-		'delta.css' : 'Delta',
-		'drought.css' : 'Drought',
 		'eureka.css' : 'Eureka',
 		'mono.css' : 'Mono',
 		'oceanside.css' : 'Oceanside',
@@ -68,14 +64,5 @@ module.exports = {
 		'assets/js/caweb/options/icon.js',
 		'assets/js/caweb/options/toggle-options.js',
 		'assets/js/wp/theme-customizer/controls/*.js',
-	],
-	designSystemThemeDir:  'node_modules/@cagov/ds-base-css/dist/themes/',
-	designSystemCSS: [ // Design System Components CSS
-		'node_modules/@cagov/*/src/index.scss',
-	], 
-	designSystemJS: [ // Design Components JS
-		// 'node_modules/@cagov/ds-link-icon/src/index.js', waiting for export statement to be removed 1.1.2
-		'node_modules/@cagov/ds-site-navigation/src/index.js',
-		'node_modules/@cagov/ds-statewide-header/src/index.js',
 	],
 };

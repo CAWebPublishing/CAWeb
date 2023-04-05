@@ -30,9 +30,6 @@ const {
 	a11yScripts,
 	themeCustomizerScripts,
 	themeCustomizerControlScripts,
-	designSystemThemeDir,
-	designSystemCSS,
-	designSystemJS
 } = require('./wpgulp.config.js');
 
 /**
@@ -144,15 +141,15 @@ task('customizer-js', async function () {
  */
 task('beautify', async function () {
 	var options = { indentSize: 2 };
-	var src = ['**/*.php'];
+	//var src = ['**/*.php'];
 
 	if (argv.hasOwnProperty('file')) {
-		src = argv.file;
-	}
-
-	src(src, { base: './' })
+		//src = argv.file;
+	src(argv.file, { base: './' })
 		.pipe(htmlbeautify(options))
 		.pipe(dest('./'));
+	}
+
 
 });
 
@@ -200,9 +197,6 @@ async function buildAdminStyles(min = false) {
 
 }
 
-task('test', async function(){
-	buildFrontendScripts(false, 'design-system')
-})
 /**
  * Build CAWeb Theme FrontEnd Styles
  * 
@@ -212,29 +206,20 @@ task('test', async function(){
 async function buildFrontEndStyles(min = false, ver = templateVer) {
 	var buildOutputStyle = min ? 'compressed' : 'expanded';
 	var minified = min ? '.min' : '';
-	var versionDir = templateCSSAssetDir + 'version-' + ver;
-	var versionColorschemesDir = 'design-system' != ver ? versionDir + '/colorscheme/' : designSystemThemeDir;
+	var versionDir = `${templateCSSAssetDir}version-${ver}`;
+	var versionColorschemesDir = `${versionDir}/colorscheme/`;
 
 	var colors = fs.readdirSync(versionColorschemesDir).filter(file => path.extname(file) === '.css');
 
-	var coreCSS = 'design-system' != ver ? [versionDir + '/cagov.core.css'] : [];
+	var coreCSS = [versionDir + '/cagov.core.css'];
 	
 	colors.forEach(function (e) {
 		var f = coreCSS.concat(versionColorschemesDir + e);
 		
-		// include additional design system styles
-		if( 'design-system' === ver ){
-			f = f.concat(
-				designSystemCSS,
-				//SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss'
-			);
-		}else{
-			f =	f.concat(
-				templateCSSAssetDir + 'cagov.font-only.css',
-				frontendStyles, 
-				SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss');
-
-		}
+		f =	f.concat(
+			templateCSSAssetDir + 'cagov.font-only.css',
+			frontendStyles, 
+			SCSSAssetDir + 'cagov/version-' + ver + '/custom.scss');
 
 
 		var color = availableColors[e];
@@ -309,7 +294,7 @@ async function buildFrontendScripts(min = false, ver = templateVer) {
 	var minified = min ? '.min' : '';
 	var versionDir = JSAssetDir + 'cagov/version-' + ver;
 
-	var coreJS = 'design-system' != ver ? [versionDir + '/cagov.core.js'] : designSystemJS;
+	var coreJS = [versionDir + '/cagov.core.js'];
 	var f = frontendScripts.concat(
 			coreJS, 
 			versionDir + '/custom.js',
