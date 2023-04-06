@@ -24,58 +24,54 @@ define( 'CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION', '5.5' );
 define( 'CAWEB_SUPPORTED_TEMPLATE_VERSIONS', array( '5.5', '6.0' ) );
 define( 'CAWEB_BETA_TEMPLATE_VERSIONS', array() );
 
-add_action('wp_body_open', 'caweb_wp_body_open');
-add_action('caweb_search_form', 'caweb_search_form');
+add_action( 'wp_body_open', 'caweb_wp_body_open' );
 
-function caweb_wp_body_open(){
-	$caweb_version      = caweb_template_version();
+/**
+ * Triggered after the opening body tag.
+ *
+ * @since 1.10.0
+ *
+ * @link https://developer.wordpress.org/reference/functions/wp_body_open/
+ * @return void
+ */
+function caweb_wp_body_open() {
+	$caweb_version       = caweb_template_version();
 	$caweb_logo          = get_option( 'header_ca_branding', '' );
 	$caweb_logo_alt_text = get_option( 'header_ca_branding_alt_text', '' );
-	
+
 	// Search.
 	$caweb_google_search_id         = get_option( 'ca_google_search_id', '' );
 	$caweb_frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false );
-	$caweb_search_class  = is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade ' : '';
-	$caweb_search_class .= empty( $caweb_google_search_id ) ? ' hidden ' : '';
+	$caweb_search_class             = is_front_page() && $caweb_frontpage_search_enabled ? ' featured-search fade ' : '';
+	$caweb_search_class            .= empty( $caweb_google_search_id ) ? ' hidden ' : '';
 
 	if ( ! empty( $caweb_logo ) && empty( $caweb_logo_alt_text ) ) {
 		$caweb_logo_alt_text = caweb_get_attachment_post_meta( $caweb_logo, '_wp_attachment_image_alt' );
 	}
 
 	$args = array(
-		'caweb_template_version' => $caweb_version,
-		'caweb_fixed_header' => get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '',
-		'caweb_utility_home_icon' => get_option( 'ca_utility_home_icon', true ),
-		'caweb_social_options' => caweb_get_site_options( 'social' ),
-		'caweb_geo_locator_enabled' => get_option( 'ca_geo_locator_enabled', false ),
-		'caweb_contact_us_link' => get_option( 'ca_contact_us_link', '' ),
-		'caweb_google_trans_enabled' => get_option( 'ca_google_trans_enabled', false ),
-		'caweb_google_trans_page' => get_option( 'ca_google_trans_page', '' ),
-		'caweb_google_trans_text' => get_option( 'ca_google_trans_text', '' ),
+		'caweb_template_version'             => $caweb_version,
+		'caweb_fixed_header'                 => get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '',
+		'caweb_utility_home_icon'            => get_option( 'ca_utility_home_icon', true ),
+		'caweb_social_options'               => caweb_get_site_options( 'social' ),
+		'caweb_geo_locator_enabled'          => get_option( 'ca_geo_locator_enabled', false ),
+		'caweb_contact_us_link'              => get_option( 'ca_contact_us_link', '' ),
+		'caweb_google_trans_enabled'         => get_option( 'ca_google_trans_enabled', false ),
+		'caweb_google_trans_page'            => get_option( 'ca_google_trans_page', '' ),
+		'caweb_google_trans_text'            => get_option( 'ca_google_trans_text', '' ),
 		'caweb_google_trans_page_new_window' => get_option( 'ca_google_trans_page_new_window', '' ),
-		'caweb_google_trans_icon' => get_option( 'ca_google_trans_icon', '' ),
-		'caweb_logo' => $caweb_logo ,
-		'caweb_logo_alt_text' => $caweb_logo_alt_text,
-		'caweb_google_search_id' => $caweb_google_search_id,
-		'caweb_search_class' => $caweb_search_class,
+		'caweb_google_trans_icon'            => get_option( 'ca_google_trans_icon', '' ),
+		'caweb_logo'                         => $caweb_logo,
+		'caweb_logo_alt_text'                => $caweb_logo_alt_text,
+		'caweb_google_search_id'             => $caweb_google_search_id,
+		'caweb_search_class'                 => $caweb_search_class,
+		'caweb_menu_style'                   => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
+		'caweb_nav_home_link'                => ! is_front_page() && get_option( 'ca_home_nav_link', true ),
+
 	);
 
 	get_template_part( "parts/$caweb_version/header", null, $args );
-	
-}
 
-function caweb_search_form(){
-	$caweb_version      = caweb_template_version();
-
-	$caweb_search_nonce = wp_create_nonce( 'caweb_google_cse' );
-	$caweb_verified     = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_key( $caweb_search_nonce ), 'caweb_google_cse' );
-	$caweb_keyword = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
-	
-	$args = array(
-		'caweb_keyword' => $caweb_keyword
-	);
-
-	get_template_part( "parts/$caweb_version/search", null, $args );
 }
 
 /**

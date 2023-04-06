@@ -2,25 +2,26 @@
 /**
  * Loads CAWeb <header> tag.
  * php version 8.0.28
- * 
+ *
  * @package CAWeb
  * @version 1.0.0
  */
 
-if (! defined('ABSPATH') ) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
-global $post;
-
-extract($args);
+// phpcs:disable
+foreach ( $args as $var => $val ) {
+	$$var = $val;
+}
+// phpcs:enable
 
 ?>
 
-<header id="header" class="global-header<?php print esc_attr($caweb_fixed_header) ?>">
+<header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 	<div id="caweb_alerts"></div>
-
 
 	<!-- Utility Header -->
 	<div class="utility-header hidden-print">
@@ -41,7 +42,7 @@ extract($args);
 						</div>
 				</div>
 				<div class="settings-links">
-						
+
 					<?php if ( 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) : ?>
 						<a 
 							id="caweb-gtrans-custom" 
@@ -150,15 +151,15 @@ extract($args);
 
 	<!-- Include Navigation -->
 	<div class="navigation-search full-width-nav container">
-		<?php 
-			if ( ! empty( $caweb_google_search_id ) && 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) : 
-		?>
+		<?php
+		if ( ! empty( $caweb_google_search_id ) && 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) :
+			?>
 			<div id="head-search" class="search-container hidden-print featured-search">
-				<?php
-				if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ){
-					do_action('caweb_search_form');
-				} 
-				?>
+			<?php
+			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
+				get_template_part( "parts/$caweb_template_version/search" );
+			}
+			?>
 			</div>
 		<?php endif; ?>
 
@@ -167,14 +168,15 @@ extract($args);
 
 			wp_nav_menu(
 				array(
-					'theme_location'               => 'header-menu',
-					'style'                        => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
-					'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
+					'caweb_template_version'             => $caweb_template_version,
+					'caweb_theme_location'               => 'header-menu',
+					'caweb_nav_type'                     => $caweb_menu_style,
+					'caweb_home_link'                    => $caweb_nav_home_link,
 				)
 			);
 
-		?>
+			?>
 
 	</div>
-	
+
 </header>

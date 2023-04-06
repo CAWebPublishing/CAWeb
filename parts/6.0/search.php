@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Loads CAWeb search form.
  * php version 8.0.28
@@ -11,7 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-extract( $args );
+$caweb_search_nonce = wp_create_nonce( 'caweb_google_cse' );
+$caweb_verified     = isset( $caweb_search_nonce ) && wp_verify_nonce( sanitize_key( $caweb_search_nonce ), 'caweb_google_cse' );
+$caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 
 ?>
 

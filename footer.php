@@ -15,11 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 $caweb_deprecating          = '5.5' === caweb_template_version();
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
-if ( $caweb_deprecating ){
+if ( $caweb_deprecating ) {
 	?>
 	<span class="return-top hidden-print"></span>
 	<?php
-}else{
+} else {
 	?>
 	<button class="return-top">
 		<span class="sr-only hidden-print">Back to top</span>
@@ -33,18 +33,18 @@ if ( $caweb_deprecating ){
 			<?php
 				$caweb_sidebar_allowed = is_single() || is_date() || is_archive() || is_author() || is_category() || is_tag();
 
-				if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) && $caweb_sidebar_allowed ) :
-			?>
+			if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) && $caweb_sidebar_allowed ) :
+				?>
 				<aside id="non_divi_sidebar" class="col-lg-3 pull-left">
 				<?php
-					print esc_html( get_sidebar( 'sidebar-1' ) );
+				print esc_html( get_sidebar( 'sidebar-1' ) );
 				?>
 				</aside>
-			<?php
+				<?php
 				endif;
 
-				if ( ! $caweb_is_page_builder_used ) :
-			?>
+			if ( ! $caweb_is_page_builder_used ) :
+				?>
 				</div> <!-- .section -->
 			<?php endif; ?>
 			</div> <!-- #main-content -->
@@ -53,13 +53,14 @@ if ( $caweb_deprecating ){
 	<?php
 		wp_nav_menu(
 			array(
-				'theme_location' => 'footer-menu',
+				'caweb_theme_location' => 'footer-menu',
 			)
 		);
 
 		wp_footer();
 
-		if ( is_tag() || is_archive() || is_category() || is_author() ) : ?>
+		if ( is_tag() || is_archive() || is_category() || is_author() ) :
+			?>
 		<script>
 			jQuery(document).ready(function() {
 				var articles = document.getElementsByTagName('main')[0].getElementsByTagName('article');
@@ -88,7 +89,7 @@ if ( $caweb_deprecating ){
 		if ( is_active_sidebar( 'caweb-site-wide-widget' ) ) {
 			dynamic_sidebar( 'caweb-site-wide-widget' );
 		}
-	?>
+		?>
 	</body>
 </html>
 

@@ -11,16 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-global $post;
-
-extract( $args );
+// phpcs:disable
+foreach ( $args as $var => $val ) {
+	$$var = $val;
+}
+// phpcs:enable
 
 ?>
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
 	<div id="caweb_alerts"></div>
-
 
 	<!-- Utility Header -->
 	<div class="utility-header hidden-print">
@@ -202,17 +203,19 @@ extract( $args );
 		<?php
 		wp_nav_menu(
 			array(
-				'theme_location'               => 'header-menu',
-				'style'                        => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
-				'home_link'                    => ( ! is_front_page() && get_option( 'ca_home_nav_link', true ) ? true : false ),
+				'caweb_template_version'             => $caweb_template_version,
+				'caweb_theme_location'               => 'header-menu',
+				'caweb_nav_type'                     => $caweb_menu_style,
+				'caweb_home_link'                    => $caweb_nav_home_link,
+				'caweb_google_search_id'             => $caweb_google_search_id,
 			)
 		);
 		?>
 		<div id="head-search" class="search-container hidden-print<?php print esc_attr( $caweb_search_class ); ?>" role="region" aria-label="Search Expanded">
 			<?php
-			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ){
-				do_action('caweb_search_form');
-			} 
+			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
+				get_template_part( "parts/$caweb_template_version/search" );
+			}
 			?>
 		</div>
 	</div>
