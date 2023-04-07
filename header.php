@@ -1,6 +1,6 @@
 <?php
 /**
- * The header for our theme
+ * CAWeb Theme Header
  *
  * This is the template that displays all of the <header> section
  *
@@ -16,10 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $is_IE, $is_edge;
 
 $caweb_google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
-$caweb_google_meta_id     = get_option( 'ca_google_meta_id', '' );
-$caweb_x_ua_compatibility = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
-$caweb_apple_icon         = CAWEB_URI . '/images/system/apple-touch-icon';
-$caweb_fav_ico            = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
+$caweb_google_meta_id        = get_option( 'ca_google_meta_id', '' );
+$caweb_x_ua_compatibility    = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
+$caweb_apple_icon            = CAWEB_URI . '/images/system/apple-touch-icon';
+$caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
@@ -76,10 +76,10 @@ $caweb_is_page_builder_used = caweb_is_divi_used();
 </head>
 <body <?php body_class( 'primary' ); ?>>
 
-<?php 
+<?php
 if ( ! empty( $caweb_google_tag_manager_id ) ) :
 	$caweb_google_tag_src = sprintf( 'https://www.googletagmanager.com/ns.html?id=%1$s', $caweb_google_tag_manager_id );
-?>
+	?>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
 	<iframe src="<?php print esc_url( $caweb_google_tag_src ); ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>

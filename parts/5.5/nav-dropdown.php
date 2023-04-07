@@ -32,18 +32,19 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 		<?php endif; ?>
 
 		<?php
-		foreach ( $caweb_menuitems as $caweb_i => $caweb_item ) {
-			$caweb_item_meta = get_post_meta( $caweb_item->ID );
-
-			$caweb_item->classes[] = 'nav-item';
-
-			$caweb_item_icon = isset( $caweb_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_item_meta['_caweb_menu_icon'][0] ) ?
-				$caweb_item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+		foreach ( $caweb_menuitems as $caweb_item ) {
 
 			// If a top level nav item, menu_item_parent = 0.
 			if ( ! $caweb_item->menu_item_parent ) {
+				$caweb_item_meta = get_post_meta( $caweb_item->ID );
+
+				$caweb_item->classes[] = 'nav-item';
+
+				$caweb_item_icon = isset( $caweb_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_item_meta['_caweb_menu_icon'][0] ) ?
+					$caweb_item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+
 				// Get array of Sub Nav Items (second-level-links).
-				$caweb_item_child_items = caweb_get_nav_menu_item_children( $caweb_item->ID, $caweb_menuitems );
+				$caweb_child_items = caweb_get_nav_menu_item_children( $caweb_item->ID, $caweb_menuitems );
 
 				// if is menu item is the current menu item or menu parent, add .active to classes.
 				if ( in_array( 'current-menu-item', $caweb_item->classes, true ) || in_array( 'current-menu-parent', $caweb_item->classes, true ) ) {
@@ -52,23 +53,32 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 
 				?>
 						<li 
-							class="<?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>" 
+							<?php if ( ! empty( $caweb_item->classes ) ) : ?>
+							class="<?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>"
+							<?php endif; ?>
+							<?php if ( ! empty( $caweb_item->attr_title ) ) : ?>
 							title="<?php print esc_attr( $caweb_item->attr_title ); ?>"
+							<?php endif; ?>
 							>
 							<a 
 								href="<?php print esc_attr( $caweb_item->url ); ?>" 
 								class="first-level-link"
-								<?php print esc_attr( ! empty( $caweb_item->xfn ) ? sprintf( ' rel="%1$s" ', $caweb_item->xfn ) : '' ); ?>
+								<?php if ( ! empty( $caweb_item->xfn ) ) : ?>
+									rel="<?php print esc_attr( $caweb_item->xfn ); ?>"
+								<?php endif; ?>
+								<?php if ( ! empty( $caweb_item->target ) ) : ?>
+									target="<?php print esc_attr( $caweb_item->target ); ?>"
+								<?php endif; ?>
 							>
 								<span class="ca-gov-icon-<?php print esc_attr( $caweb_item_icon ); ?>"></span>
 								<span class="link-title"><?php print esc_attr( $caweb_item->title ); ?></span>
 							</a>
-							<?php if ( ! empty( $caweb_item_child_items ) ) : ?>
+							<?php if ( ! empty( $caweb_child_items ) ) : ?>
 								<div class="sub-nav">
 									<div>
 										<ul class="second-level-nav pos-rel opacity-100 visible p-0 w-100 border-0">
 										<?php
-										foreach ( $caweb_item_child_items as $caweb_c => $caweb_child_item ) {
+										foreach ( $caweb_child_items as $caweb_child_item ) {
 											$caweb_child_item_meta      = get_post_meta( $caweb_child_item->ID );
 											$caweb_child_item_unit_size = isset( $caweb_child_item_meta['_caweb_menu_unit_size'][0] ) ? $caweb_child_item_meta['_caweb_menu_unit_size'][0] : 'unit1';
 
@@ -84,15 +94,23 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 
 											?>
 												<li
-													class="<?php print esc_attr( implode( ' ', $caweb_child_item->classes ) ); ?>" 
+													<?php if ( ! empty( $caweb_child_item->classes ) ) : ?>
+													class="<?php print esc_attr( implode( ' ', $caweb_child_item->classes ) ); ?>"
+													<?php endif; ?> 
+													<?php if ( ! empty( $caweb_child_item->attr_title ) ) : ?>
 													title="<?php print esc_attr( $caweb_child_item->attr_title ); ?>"
+													<?php endif; ?>
 												>
 													<a 
 														href="<?php print esc_url( $caweb_child_item->url ); ?>" 
 														class="second-level-link d-block bg-0"
-														target="<?php print esc_attr( ! empty( $caweb_child_item->target ) ? $caweb_child_item->target : 'self' ); ?>"
 														tabindex="-1"
-														<?php print esc_attr( ! empty( $caweb_child_item->xfn ) ? sprintf( ' rel="%1$s" ', $caweb_child_item->xfn ) : '' ); ?>
+														<?php if ( ! empty( $caweb_child_item->target ) ) : ?>
+														target="<?php print esc_attr( $caweb_child_item->target ); ?>" 
+														<?php endif; ?>
+														<?php if ( ! empty( $caweb_child_item->xfn ) ) : ?>
+														rel="<?php print esc_attr( $caweb_child_item->xfn ); ?>"
+														<?php endif; ?>
 													>
 														<?php if ( ! empty( $caweb_child_item_icon ) ) : ?>
 															<span class="ca-gov-icon-<?php print esc_attr( $caweb_child_item_icon ); ?>" aria-hidden="true"></span>

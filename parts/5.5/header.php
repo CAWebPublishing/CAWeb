@@ -203,8 +203,8 @@ foreach ( $args as $var => $val ) {
 		<?php
 		wp_nav_menu(
 			array(
+				'theme_location'                     => 'header-menu',
 				'caweb_template_version'             => $caweb_template_version,
-				'caweb_theme_location'               => 'header-menu',
 				'caweb_nav_type'                     => $caweb_menu_style,
 				'caweb_home_link'                    => $caweb_nav_home_link,
 				'caweb_google_search_id'             => $caweb_google_search_id,

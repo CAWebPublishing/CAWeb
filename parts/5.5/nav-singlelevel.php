@@ -32,16 +32,16 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 		<?php endif; ?>
 
 		<?php
-		foreach ( $caweb_menuitems as $caweb_i => $caweb_item ) {
-			$caweb_item_meta = get_post_meta( $caweb_item->ID );
-
-			$caweb_item->classes[] = 'nav-item';
-
-			$caweb_item_icon = isset( $caweb_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_item_meta['_caweb_menu_icon'][0] ) ?
-				$caweb_item_meta['_caweb_menu_icon'][0] : 'logo invisible';
+		foreach ( $caweb_menuitems as $caweb_item ) {
 
 			// If a top level nav item, menu_item_parent = 0.
 			if ( ! $caweb_item->menu_item_parent ) {
+				$caweb_item_meta = get_post_meta( $caweb_item->ID );
+
+				$caweb_item->classes[] = 'nav-item';
+
+				$caweb_item_icon = isset( $caweb_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_item_meta['_caweb_menu_icon'][0] ) ?
+					$caweb_item_meta['_caweb_menu_icon'][0] : 'logo invisible';
 
 				// if is menu item is the current menu item or menu parent, add .active to classes.
 				if ( in_array( 'current-menu-item', $caweb_item->classes, true ) || in_array( 'current-menu-parent', $caweb_item->classes, true ) ) {
@@ -50,13 +50,22 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 
 				?>
 						<li 
-							class="<?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>" 
+							<?php if ( ! empty( $caweb_item->classes ) ) : ?>
+							class="<?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>"
+							<?php endif; ?>
+							<?php if ( ! empty( $caweb_item->attr_title ) ) : ?>
 							title="<?php print esc_attr( $caweb_item->attr_title ); ?>"
+							<?php endif; ?>
 							>
 							<a 
 								href="<?php print esc_url( $caweb_item->url ); ?>" 
 								class="first-level-link"
-								<?php print esc_attr( ! empty( $caweb_item->xfn ) ? sprintf( ' rel="%1$s" ', $caweb_item->xfn ) : '' ); ?>
+								<?php if ( ! empty( $caweb_item->xfn ) ) : ?>
+								rel="<?php print esc_attr( $caweb_item->xfn ); ?>"
+								<?php endif; ?>
+								<?php if ( ! empty( $caweb_item->target ) ) : ?>
+								target="<?php print esc_attr( $caweb_item->target ); ?>" 
+								<?php endif; ?>
 							>
 								<span class="ca-gov-icon-<?php print esc_attr( $caweb_item_icon ); ?>"></span>
 								<span class="link-title"><?php print esc_attr( $caweb_item->title ); ?></span>
