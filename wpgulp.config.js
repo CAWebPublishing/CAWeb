@@ -7,9 +7,9 @@
  * @package WPGulp
  */
 
-
-module.exports = {
+export default {
 	success: '✅',
+	assetDir: 'assets',
 	outputCSSDir: './css/',
 	outputJSDir: './js/',
 	// CA State Template Options
@@ -28,10 +28,6 @@ module.exports = {
 		'sierra.css' : 'Sierra',
 		'trinity.css' : 'Trinity',
 	},
-	// Asset Directories
-	templateCSSAssetDir: 'assets/css/cagov/', // State Template CSS 
-	JSAssetDir: 'assets/js/', // Main JS 
-	SCSSAssetDir: 'assets/scss/', // Main SCSS 
 	// Theme Styles
 	adminStyles:[ // WP Backend Admin Styles
 		'assets/scss/admin.scss',
@@ -57,10 +53,10 @@ module.exports = {
 		'assets/js/a11y/plugins/*.js',
 		'assets/js/a11y/*.js',
 	],
-	themeCustomizerScripts: [ // Theme Customizer JS 
+	customizerScripts: [ // Theme Customizer JS 
 		'assets/js/wp/theme-customizer/bindings/*.js',
 	],
-	themeCustomizerControlScripts: [ // Theme Customizer Control JS 
+	customizerControlScripts: [ // Theme Customizer Control JS 
 		'assets/js/caweb/options/icon.js',
 		'assets/js/caweb/options/toggle-options.js',
 		'assets/js/wp/theme-customizer/controls/*.js',

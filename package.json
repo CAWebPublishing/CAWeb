@@ -7,16 +7,10 @@
     "type": "git",
     "url": "https://github.com/Danny-Guzman/CAWeb/"
   },
+  "type": "module",
   "license": "MIT",
   "dependencies": {
-    "@cagov/ds-base-css": "^1.0.19",
-    "@cagov/ds-site-footer": "^1.1.1",
-    "@cagov/ds-site-header": "^1.1.1",
-    "@cagov/ds-site-navigation": "^2.1.4",
-    "@cagov/ds-skip-to-content": "^1.0.3",
-    "@cagov/ds-statewide-footer": "^1.0.10",
-    "@cagov/ds-statewide-header": "^1.0.16",
-    "del": "^6.1.1",
+    "del": "^7.0.0",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
@@ -28,9 +22,9 @@
     "gulp-tap": "^2.0.0",
     "gulp-uglify-es": "^3.0.0",
     "gulp-watch": "^5.0.1",
-    "node-sass": "^7.0.1",
-    "npm-check-updates": "^15.2.6",
-    "yargs": "^17.5.1"
+    "node-sass": "^8.0.0",
+    "npm-check-updates": "^16.10.7",
+    "yargs": "^17.7.1"
   },
   "scripts": {
     "build": "gulp build",
