@@ -267,7 +267,7 @@ function caweb_display_general_options() {
 			<!-- Title Display Default -->
 			<div class="form-group col">
 				<label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default</strong></label>
-				<small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
+				<small class="mb-2 text-muted d-block">Display the title for all new pages/posts.</small>
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
 			<!-- Menu Home Link -->
