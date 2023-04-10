@@ -33346,6 +33346,15 @@ body[class*="6.0"] nav li {
   line-height: 1.5 !important;
 }
 
+@media (max-width: 992px) {
+  body[class*="6.0"] nav .link-description,
+  body[class*="6.0"] nav .media-left,
+  body[class*="6.0"] nav .font-size-40,
+  body[class*="6.0"] nav .image-icon {
+    display: none;
+  }
+}
+
 body.design-system cagov-navoverlay {
   border-bottom: 0;
 }
