@@ -608,8 +608,8 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
    /source/scss/colortheme/cs-media.scss
 ----------------------------------------- */
 figure {
-  background-color: #eff5f8;
-  border-color: #e2dfda;
+  background-color: #fff;
+  border-color: #d4d4d7;
 }
 
 /* -----------------------------------------
@@ -1413,8 +1413,8 @@ fieldset[disabled] .card-inverted .btn-standout.active {
 }
 .section-danger,
 .card-danger {
-  background: #d24532;
-  color: #000000;
+  background: #cd402d;
+  color: #ffffff;
 }
 .section-danger a:not(.btn),
 .card-danger a:not(.btn) {
@@ -1747,8 +1747,8 @@ a.text-white:not(.btn):hover {
   color: #ffffff;
 }
 .testimonial-danger {
-  background: #d24532;
-  color: #000000;
+  background: #cd402d;
+  color: #ffffff;
 }
 .testimonial-danger a:not(.btn) {
   color: #000;
@@ -1767,7 +1767,7 @@ a.text-white:not(.btn):hover {
   text-decoration: underline;
 }
 .testimonial-danger footer {
-  color: #000000;
+  color: #ffffff;
 }
 
 /* -----------------------------------------
@@ -1925,9 +1925,9 @@ a.text-white:not(.btn):hover {
 }
 
 .card-danger {
-  background-color: #d24532;
-  border-color: #d24532;
-  color: #000000;
+  background-color: #cd402d;
+  border-color: #cd402d;
+  color: #ffffff;
 }
 .card-danger a:not(.btn) {
   color: #000;
@@ -1946,12 +1946,12 @@ a.text-white:not(.btn):hover {
   text-decoration: underline;
 }
 .card-danger .card-header {
-  border-bottom: 1px solid #d24532;
-  background-color: #c03c2a;
+  border-bottom: 1px solid #cd402d;
+  background-color: #b83928;
 }
 .card-danger .card-footer {
-  border-top: 1px solid #d24532;
-  background-color: #c03c2a;
+  border-top: 1px solid #cd402d;
+  background-color: #b83928;
 }
 
 .card-inverse .card-header, .card-inverted .card-header {
@@ -2986,16 +2986,16 @@ input[type=radio]:focus + div {
    PAGE NAVIGATION
    /source/scss/colortheme/cs-page-navigation.scss
 ----------------------------------------- */
-.list-navigation li a {
+.side-navigation ul li a, .list-navigation li a {
   color: #5e5e6a;
 }
-.list-navigation li a:hover, .list-navigation li a:hover {
+.side-navigation ul li a:hover, .side-navigation ul li a:hover, .list-navigation li a:hover, .list-navigation li a:hover {
   color: #3b3a48;
 }
-.list-navigation li a.active:before {
+.side-navigation ul li a.active:before, .list-navigation li a.active:before {
   border-left-color: #C19E73;
 }
-.list-navigation li ul li a.active::before {
+.side-navigation ul li ul li a.active::before, .list-navigation li ul li a.active::before {
   border-left-color: #C19E73;
 }
 
@@ -3145,27 +3145,27 @@ a.sidenav.active:before {
 
 .list-group.section-danger .list-group-item,
 .list-group.section-danger .list-group-item > button {
-  background: #d24532 !important;
-  color: #000000 !important;
+  background: #cd402d !important;
+  color: #ffffff !important;
 }
 .list-group.section-danger .list-group-item:hover, .list-group.section-danger .list-group-item:focus, .list-group.section-danger .list-group-item.open,
 .list-group.section-danger .list-group-item > button:hover,
 .list-group.section-danger .list-group-item > button:focus,
 .list-group.section-danger .list-group-item > button.open {
-  background: #b83928 !important;
-  color: #000000 !important;
+  background: #b03727 !important;
+  color: #ffffff !important;
 }
 .list-group.section-danger .list-group-item.active,
 .list-group.section-danger .list-group-item > button.active {
   background-color: #fff !important;
-  border-color: #d24532;
-  color: #d24532 !important;
+  border-color: #cd402d;
+  color: #cd402d !important;
 }
 .list-group.section-danger .list-group-item.active:hover, .list-group.section-danger .list-group-item.active:focus,
 .list-group.section-danger .list-group-item > button.active:hover,
 .list-group.section-danger .list-group-item > button.active:focus {
   background-color: #f8f9fa !important;
-  border-color: #d24532;
+  border-color: #cd402d;
 }
 
 .list-group.section-understated .list-group-item,
@@ -3230,14 +3230,13 @@ a.sidenav.active:before {
    /source/scss/colortheme/cs-accordion-sidenav.scss
 ----------------------------------------- */
 cagov-accordion.sidenav details summary {
-  color: #4a4958;
+  color: #5e5e6a;
 }
 cagov-accordion.sidenav details summary:hover, cagov-accordion.sidenav details summary:focus {
   color: #000;
 }
 cagov-accordion.sidenav details summary.active {
-  font-weight: 700;
-  color: #4a4958 !important;
+  color: #5e5e6a !important;
 }
 cagov-accordion.sidenav details summary.active:hover, cagov-accordion.sidenav details summary.active:focus {
   color: #000 !important;
@@ -3295,6 +3294,76 @@ cagov-accordion.sidenav details summary.active:before {
 }
 
 /* -----------------------------------------
+   ALERT
+   /source/scss/colortheme/cs-alert.scss
+----------------------------------------- */
+.alert-banner {
+  background-color: #21272A;
+  color: #fff;
+}
+.alert-banner a:not(.btn), .alert-banner .close {
+  color: #fff;
+}
+.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover, .alert-banner .close:focus, .alert-banner .close:hover {
+  color: #C19E73;
+}
+
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+.alert-warning a:not(.btn), .alert-warning .close {
+  color: #8a6d3b;
+}
+.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover, .alert-warning .close:focus, .alert-warning .close:hover {
+  color: #715930;
+}
+
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+}
+.alert-info a:not(.btn), .alert-info .close {
+  color: #31708f;
+}
+.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover, .alert-info .close:focus, .alert-info .close:hover {
+  color: #1f465a;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+}
+.alert-danger a:not(.btn), .alert-danger .close {
+  color: #a94442;
+}
+.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover, .alert-danger .close:focus, .alert-danger .close:hover {
+  color: #762f2e;
+}
+
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+.alert-success a:not(.btn), .alert-success .close {
+  color: #3c763d;
+}
+.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover, .alert-success .close:focus, .alert-success .close:hover {
+  color: #244725;
+}
+
+.alert-severe {
+  color: #4a4958 !important;
+  background-color: #C19E73;
+}
+.alert-severe a:not(.btn), .alert-severe .close {
+  color: #4a4958 !important;
+}
+.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover, .alert-severe .close:focus, .alert-severe .close:hover {
+  color: #000 !important;
+}
+
+/* -----------------------------------------
    LINK GRID
    /source/scss/colortheme/cs-link-grid.scss
 ----------------------------------------- */
@@ -3333,6 +3402,24 @@ blockquote.prominent::before {
 blockquote.prominent p,
 blockquote.prominent footer {
   color: #fff;
+}
+
+/* -----------------------------------------
+   CARDS
+   /source/scss/colortheme/cs-executive-profile.scss
+----------------------------------------- */
+.executive-profile {
+  background-color: #eff5f8;
+}
+
+.executive-profile.dark .executive-profile-body {
+  border-left-color: #fff;
+}
+.executive-profile.dark p, .executive-profile.dark .executive-name, .executive-profile.dark a {
+  color: #fff;
+}
+.executive-profile.dark a:hover, .executive-profile.dark a:focus {
+  color: #C19E73;
 }
 
 /* -----------------------------------------

@@ -49,6 +49,7 @@ add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_templ
  */
 function caweb_body_class( $wp_classes, $extra_classes ) {
 	global $post;
+	$template_version = caweb_template_version();
 
 	/* List of the classes that need to be removed */
 	$blacklist = array(
@@ -69,8 +70,8 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
 		);
 	}
-	$whitelist[] = sprintf( '%1$s', caweb_template_version() );
-	$whitelist[] = get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '';
+	$whitelist[] = sprintf( '%1$s', $template_version );
+	$whitelist[] = '5.5' === $template_version && get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '';
 
 	/* Remove any classes in the blacklist from the wp_classes */
 	$wp_classes = array_diff( $wp_classes, $blacklist );

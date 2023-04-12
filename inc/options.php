@@ -585,17 +585,18 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 	);
 
 	$caweb_social_options = array(
-		'Facebook'        => 'ca_social_facebook',
-		'Twitter'         => 'ca_social_twitter',
-		'Google Plus'     => 'ca_social_google_plus',
 		'Email'           => 'ca_social_email',
+		'Facebook'        => 'ca_social_facebook',
 		'Flickr'          => 'ca_social_flickr',
-		'Pinterest'       => 'ca_social_pinterest',
-		'YouTube'         => 'ca_social_youtube',
+		'Github'          => 'ca_social_github',
+		'Google Plus'     => 'ca_social_google_plus',
 		'Instagram'       => 'ca_social_instagram',
 		'LinkedIn'        => 'ca_social_linkedin',
+		'Pinterest'       => 'ca_social_pinterest',
 		'RSS'             => 'ca_social_rss',
 		'Snapchat'        => 'ca_social_snapchat',
+		'Twitter'         => 'ca_social_twitter',
+		'YouTube'         => 'ca_social_youtube',
 	);
 
 	$caweb_social_extra_options = array();

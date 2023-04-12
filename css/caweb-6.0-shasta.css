@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* State Web Template Version 6.0.8 */
+/* State Web Template Version 6.1.1 */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -606,7 +606,7 @@ progress {
 }
 
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
@@ -1761,15 +1761,15 @@ progress {
 .table {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
-  --bs-table-striped-color: #212529;
+  --bs-table-striped-color: #343a40;
   --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-  --bs-table-active-color: #212529;
+  --bs-table-active-color: #343a40;
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-  --bs-table-hover-color: #212529;
+  --bs-table-hover-color: #343a40;
   --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529;
+  color: #343a40;
   vertical-align: top;
   border-color: #dee2e6;
 }
@@ -10647,6 +10647,46 @@ textarea.form-control-lg {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ca-gov-icon-bullet:before {
+  content: "\ea32";
+}
+
+.ca-gov-icon-dot:before {
+  content: "\ea33";
+}
+
+.ca-gov-icon-water:before {
+  content: "\ea2a";
+}
+
+.ca-gov-icon-wind-power:before {
+  content: "\ea2b";
+}
+
+.ca-gov-icon-connection:before {
+  content: "\ea2c";
+}
+
+.ca-gov-icon-transport:before {
+  content: "\ea2d";
+}
+
+.ca-gov-icon-maintenance:before {
+  content: "\ea2e";
+}
+
+.ca-gov-icon-warning-diamond:before {
+  content: "\ea2f";
+}
+
+.ca-gov-icon-pipe-angle:before {
+  content: "\ea30";
+}
+
+.ca-gov-icon-pipe:before {
+  content: "\ea31";
+}
+
 .ca-gov-icon-quotation-mark:before {
   content: "\ea29";
 }
@@ -12869,13 +12909,14 @@ p {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 1.4375rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 @media (min-width: 576px) {
   .lead {
-    font-size: calc(1.25rem + 0.1vw);
+    font-size: calc(1.4375rem + 0.1vw);
     margin-bottom: calc(1rem + 0.1vw);
   }
 }
@@ -13052,7 +13093,7 @@ h6,
 }
 
 .subtitle {
-  font-size: 1.25rem;
+  font-size: 1.4375rem;
   margin-bottom: 3rem;
   font-weight: 600;
   color: #5e5e6a;
@@ -13060,7 +13101,7 @@ h6,
 
 @media (min-width: 576px) {
   .subtitle {
-    font-size: calc(1.25rem + 0.1vw);
+    font-size: calc(1.4375rem + 0.1vw);
     margin-bottom: calc(3rem + 0.1vw);
   }
 }
@@ -13201,7 +13242,12 @@ a.list-group-item {
   content: "\e9ed";
   font-family: "CaGov" !important;
   font-size: 75%;
-  margin-left: 1px;
+  margin-left: 3px;
+}
+
+.icon-abs-right .external-link-icon {
+  position: absolute;
+  right: 1.5rem;
 }
 
 /* external link exeptions */
@@ -13222,7 +13268,7 @@ svg ~ .external-link-icon,
    SocialSharer module Version Dec 09, 2014
 ----------------------------------------- */
 .socialsharer-container {
-  float: right;
+  float: left;
 }
 
 .socialsharer-container::after {
@@ -13731,6 +13777,10 @@ svg ~ .external-link-icon,
   }
 }
 
+.grid-columns-auto {
+  grid-template-columns: auto auto;
+}
+
 /* -----------------------------------------
    GLOBAL HEADER - /source/scss/cagov/global-header.scss
 ----------------------------------------- */
@@ -13778,12 +13828,24 @@ svg ~ .external-link-icon,
   background-color: #fff;
 }
 
+@media (min-width: 992px) {
+  .global-header .section-default {
+    border-bottom: 1px solid #d4d4d7;
+  }
+}
+
 .global-header .section-default:after {
   content: "";
   border-bottom: 1px solid #d4d4d7;
   position: absolute;
   width: 100%;
   left: 0;
+}
+
+@media (min-width: 992px) {
+  .global-header .section-default:after {
+    border-bottom: none;
+  }
 }
 
 @media (min-width: 992px) {
@@ -14095,10 +14157,10 @@ h2, .h2 {
 
 .branding .header-organization-banner a .logo-assets .logo-text .logo-state {
   font-size: 1rem;
-  font-family: "Asap Condensed", sans-serif;
+  font-family: "Public Sans", sans-serif;
   margin: 0;
   padding: 0;
-  color: #333333;
+  color: #3b3a48;
   height: 20px;
   line-height: 1.2em;
   transition: all 0.3s;
@@ -14106,12 +14168,12 @@ h2, .h2 {
 }
 
 .branding .header-organization-banner a .logo-assets .logo-text .logo-dept {
-  font-size: 1.54rem;
-  font-family: "Asap Condensed", sans-serif;
+  font-size: 1.75rem;
+  font-family: "Public Sans", sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 0;
-  color: #333333;
+  color: #323A45;
   height: 24px;
   line-height: 1.2em;
   transition: all 0.3s;
@@ -14820,6 +14882,7 @@ button.gsc-search-button {
   padding: 0px 12px 0px 12px;
   border: 1px solid;
   min-height: 38px;
+  margin-left: -1px;
 }
 
 /* ------------- Custom search box (not google) --------------*/
@@ -14844,6 +14907,7 @@ button.gsc-search-button {
   .search-container #Search .close-search {
     display: block;
     cursor: pointer;
+    min-height: 38px;
   }
   .search-container #Search .close-search .sr-only {
     height: unset !important;
@@ -15106,6 +15170,27 @@ table.gsc-search-box td {
   }
 }
 
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the ‘X’ from Chrome */
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+  display: none;
+}
+
 /* -----------------------------------------
    SITE SEARCH RESULTS - /source/scss/cagov/search-results.scss
 ----------------------------------------- */
@@ -15324,6 +15409,10 @@ table.gsc-search-box td {
   text-decoration: none;
 }
 
+.second-level-nav a:focus {
+  outline-offset: -2px;
+}
+
 .second-level-nav [class^=unit] .second-level-link {
   display: block;
 }
@@ -15364,6 +15453,7 @@ table.gsc-search-box td {
   font-family: "Public Sans", sans-serif;
   font-weight: 400;
   position: relative;
+  text-align: left;
   z-index: 1;
   height: 100%;
 }
@@ -15430,8 +15520,9 @@ table.gsc-search-box td {
   .full-width-nav .nav-item .first-level-link > span[class^=ca-gov-icon]:not(.carrot),
   .full-width-nav .nav-item .first-level-btn > span[class^=ca-gov-icon]:not(.carrot) {
     /* Navigation icons */
-    display: block;
-    font-size: 32px;
+    display: inline;
+    font-size: inherit;
+    color: inherit;
   }
 }
 
@@ -15778,13 +15869,14 @@ table.gsc-search-box td {
     min-height: 55px;
   }
   .full-width-nav .main-navigation .top-level-nav .first-level-btn.has-sub .carrot {
-    bottom: 0;
+    position: absolute;
+    right: 0.75rem;
     top: 0.35rem;
     transition: all 0.5s cubic-bezier(0.57, 0.2, 0.21, 0.89);
   }
   .full-width-nav .main-navigation .top-level-nav .first-level-btn[aria-expanded=true] .carrot {
     transform: rotate(180deg);
-    bottom: 0.35rem;
+    top: 0.6rem;
   }
   .full-width-nav .main-navigation .top-level-nav #nav-item-search button.first-level-link {
     background: none;
@@ -17016,6 +17108,14 @@ pre {
   padding: 1rem;
 }
 
+textarea.sourcecode {
+  font-family: var(--bs-font-monospace);
+  width: 100%;
+  height: 300px;
+  font-size: 0.875em;
+  white-space: pre;
+}
+
 .parallax-bg {
   position: relative;
   background-attachment: fixed;
@@ -17927,7 +18027,7 @@ html {
 ----------------------------------------- */
 .alert-banner {
   margin-bottom: 0;
-  padding: 5px 0;
+  padding: 0.6rem 0 0.5rem 0;
   border-radius: 0;
   -webkit-column-rule: rgba(255, 255, 255, 0.8);
   -moz-column-rule: rgba(255, 255, 255, 0.8);
@@ -17936,16 +18036,32 @@ html {
   transition: all 0.2s;
 }
 
+.alert-banner .alert-icon {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 5px;
+}
+
+.alert-banner .alert-icon ~ .alert-text {
+  margin-left: 2.5rem;
+}
+
+.alert-banner img, .alert-banner .alert-img {
+  max-width: 28px;
+  max-height: 28px;
+  margin-right: 0.5rem;
+  margin-top: -3px;
+}
+
 .alert-banner .close {
-  position: relative;
-  top: 4px;
-  right: -5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   padding: 0 10px;
   text-shadow: none;
   float: right;
   font-size: 1.5rem;
   font-weight: 700;
-  line-height: 1;
   border: none;
   background: none;
 }
@@ -17963,7 +18079,6 @@ html {
 
 .alert-banner .alert-text {
   position: relative;
-  top: 2px;
 }
 
 .alert-banner .btn {
@@ -18135,12 +18250,12 @@ html {
   background-color: transparent !important;
   border: none !important;
   cursor: default;
-  color: #000 !important;
+  color: #3b3a48 !important;
   position: relative;
 }
 
 .nav-tabs > li > a.active:hover {
-  color: #4a4958 !important;
+  color: #5e5e6a !important;
 }
 
 .nav-tabs > li > a.active::after {
@@ -18205,6 +18320,12 @@ html {
   .responsive.tab-group .card .collapse {
     display: block;
   }
+  .tabs.responsive .card-header {
+    display: none;
+  }
+  .tabs.responsive .collapse {
+    display: block;
+  }
 }
 
 /* Responsive tabs mobile view */
@@ -18213,6 +18334,7 @@ html {
     display: block !important;
     opacity: 1 !important;
     padding: 0 !important;
+    margin-bottom: 0.75rem;
   }
   .responsive .tab-pane .card-header {
     padding: 0;
@@ -18325,8 +18447,10 @@ html {
   outline-offset: -2px;
 }
 
-.tabs [role=tabpanel] * + * {
-  margin-top: 0.75rem;
+@media (max-width: 767px) {
+  .tabs.responsive [role=tabpanel] {
+    border: none;
+  }
 }
 
 /* -----------------------------------------
@@ -18380,16 +18504,21 @@ cagov-accordion details summary:after {
 
 cagov-accordion details summary .cagov-open-indicator {
   position: absolute;
-  left: 0.85rem;
-  top: 1.15rem;
-  border-right: 2px solid black;
-  border-top: 2px solid black;
-  border-radius: 2px;
-  width: 10px;
-  height: 10px;
-  transform: rotate(45deg);
+  left: 0.5rem;
+  top: 0.4rem;
+  width: 0;
+  height: 0;
   transition-property: transform;
-  transition: top 0.2s, left 0.2s, transform 0.2s;
+  transition: transform 0.2s;
+}
+
+cagov-accordion details summary .cagov-open-indicator::before {
+  font-family: "CaGov";
+  content: "5";
+  position: absolute;
+  font-size: 1.6rem;
+  transition-property: transform, left;
+  transition: transform 0.2s, 0.2s;
 }
 
 cagov-accordion details summary:hover {
@@ -18398,11 +18527,6 @@ cagov-accordion details summary:hover {
 
 cagov-accordion details summary:hover:before {
   background-color: #ededef;
-}
-
-cagov-accordion details summary:hover .cagov-open-indicator {
-  border-right: 3px solid black;
-  border-top: 3px solid black;
 }
 
 cagov-accordion details .accordion-body {
@@ -18447,12 +18571,8 @@ cagov-accordion:defined details[open] {
   height: auto;
 }
 
-cagov-accordion:defined details[open] .cagov-open-indicator {
-  border-right: 3px solid black;
-  border-top: 3px solid black;
-  transform: rotate(135deg);
-  top: 1rem;
-  left: 1rem;
+cagov-accordion:defined details[open] .cagov-open-indicator::before {
+  transform: rotate(90deg) translateY(-0.2rem);
 }
 
 cagov-accordion:defined details[open] summary {
@@ -18659,12 +18779,13 @@ cagov-accordion.sidenav details {
 
 cagov-accordion.sidenav details summary {
   border: none;
-  background: transparent;
+  background: #fff;
   padding-left: 1rem;
   padding: 0.7rem 2rem 0.7rem 1rem;
-  font-size: calc(1.125rem + 0.1vw);
+  font-size: calc(1rem + 0.1vw);
   font-weight: 400;
   text-decoration: none;
+  border-bottom: 1px solid #ededef;
 }
 
 cagov-accordion.sidenav details summary:before {
@@ -18679,6 +18800,7 @@ cagov-accordion.sidenav details summary::after {
 
 cagov-accordion.sidenav details summary:hover, cagov-accordion.sidenav details summary:focus {
   text-decoration: none;
+  background-color: #fafafa;
 }
 
 cagov-accordion.sidenav details summary:hover:before, cagov-accordion.sidenav details summary:focus:before {
@@ -18692,9 +18814,10 @@ cagov-accordion.sidenav details summary:focus {
 }
 
 cagov-accordion.sidenav details summary.active {
-  font-weight: 700;
   color: #000 !important;
   text-decoration: none;
+  background-color: #f3f3f4;
+  font-weight: 400;
 }
 
 cagov-accordion.sidenav details summary.active:before {
@@ -18706,6 +18829,7 @@ cagov-accordion.sidenav details summary.active:before {
 cagov-accordion.sidenav details summary.active:hover, cagov-accordion.sidenav details summary.active:focus {
   color: #5e5e6a !important;
   text-decoration: none;
+  background-color: #ededef;
 }
 
 cagov-accordion.sidenav details summary.active:focus {
@@ -18715,7 +18839,6 @@ cagov-accordion.sidenav details summary.active:focus {
 
 cagov-accordion.sidenav details summary[open] summary {
   color: #000;
-  font-weight: 700;
 }
 
 cagov-accordion.sidenav details summary[open] summary::after {
@@ -18724,14 +18847,18 @@ cagov-accordion.sidenav details summary[open] summary::after {
 
 cagov-accordion.sidenav details summary .cagov-open-indicator {
   left: unset !important;
-  right: 1rem;
-  top: 1.4rem !important;
+  right: 2.7rem;
+  top: 0.6rem !important;
+}
+
+cagov-accordion.sidenav details summary .cagov-open-indicator::before {
+  font-size: 2.4rem;
 }
 
 cagov-accordion.sidenav details .cagov-open-indicator {
   left: unset;
-  right: 1rem;
-  top: 1.4rem !important;
+  right: 2.7rem;
+  top: 0.6rem !important;
 }
 
 cagov-accordion.sidenav details .accordion-body {
@@ -18742,7 +18869,7 @@ cagov-accordion.sidenav details .accordion-body {
 
 cagov-accordion.sidenav details .accordion-body .side-subnav {
   margin-bottom: 0;
-  margin-left: 1rem;
+  margin-left: 0;
 }
 
 cagov-accordion.sidenav details .accordion-body .side-subnav li:first-child {
@@ -18769,13 +18896,15 @@ cagov-accordion.sidenav details .accordion-body .side-subnav li:last-child {
   display: block;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
-  padding-left: 1rem;
+  padding-left: 2.5rem;
   text-decoration: none !important;
+  border-bottom: 1px solid #ededef;
 }
 
 .side-subnav li a:hover, .side-subnav li a:focus {
   text-decoration: none;
   color: #000;
+  background-color: #fafafa;
 }
 
 .side-subnav li a:focus {
@@ -18784,9 +18913,9 @@ cagov-accordion.sidenav details .accordion-body .side-subnav li:last-child {
 }
 
 .side-subnav li a.active {
-  font-weight: 700;
-  color: #4a4958;
+  color: #5e5e6a;
   text-decoration: none;
+  background-color: #f3f3f4;
 }
 
 .side-subnav li a.active:before {
@@ -18803,35 +18932,39 @@ cagov-accordion.sidenav details .accordion-body .side-subnav li:last-child {
 .side-subnav li a.active:hover, .side-subnav li a.active:focus {
   color: #000;
   text-decoration: none;
+  background-color: #ededef;
 }
 
 /* -----------------------------------------
    BREADCRUMBS -  /source/scss/cagov/breadcrumbs.scss
 ----------------------------------------- */
-.breadcrumb {
+.breadcrumbs ol, .breadcrumbs ul, .breadcrumb {
   padding: 0.5em 1rem;
   padding-left: 0;
   margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
   font-size: 0.85rem;
 }
 
 @media (min-width: 576px) {
-  .breadcrumb {
+  .breadcrumbs ol, .breadcrumbs ul, .breadcrumb {
     font-size: calc(0.85rem + 0.1vw);
   }
 }
 
-.breadcrumb li {
+.breadcrumbs ol li, .breadcrumbs ul li, .breadcrumb li {
   position: relative;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
 
-.breadcrumb li:first-child {
+.breadcrumbs ol li:first-child, .breadcrumbs ul li:first-child, .breadcrumb li:first-child {
   padding-left: 0;
 }
 
-.breadcrumb li:after {
+.breadcrumbs ol li:after, .breadcrumbs ul li:after, .breadcrumb li:after {
   content: "";
   color: #bcbbc1;
   border: none;
@@ -18846,7 +18979,7 @@ cagov-accordion.sidenav details .accordion-body .side-subnav li:last-child {
   transform: rotate(15deg);
 }
 
-.breadcrumb li:last-child:after {
+.breadcrumbs ol li:last-child:after, .breadcrumbs ul li:last-child:after, .breadcrumb li:last-child:after {
   content: "";
   border-left: none;
   margin: 0 0;
@@ -18939,170 +19072,36 @@ hr.hr-light {
 /* -----------------------------------------
    PROFILE - /source/scss/cagov/profiles.scss
 ----------------------------------------- */
-.profile-item {
-  background: #f2f2f2;
-  padding: 0.75rem;
-  margin-bottom: 0.75rem;
-  position: relative;
-}
-
-.profile-item::after {
-  display: block;
-  clear: both;
-  content: "";
-}
-
-.profile-item .header {
-  margin-bottom: 0;
-}
-
-.profile-item .header::after {
-  display: block;
-  clear: both;
-  content: "";
-}
-
-.profile-item .header .title {
-  float: left;
-  margin-right: 0.75rem;
-  font-size: 1.5rem;
-  font-family: "Arial Narrow", "Helvetica Narrow", Arial, Helvetica, sans-serif;
-  font-stretch: condensed;
-}
-
-.profile-item .header .filing-date {
-  float: right;
-}
-
-.profile-item .header .start-date {
-  float: left;
-  margin-top: 8px;
-}
-
-.profile-item .footer {
-  position: relative;
-  clear: both;
-}
-
-.profile-item .footer::after {
-  display: block;
-  clear: both;
-  content: "";
-}
-
-.profile-item .footer a.btn {
-  float: right;
-  margin-top: 12px;
-  padding: 1px 5px;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  border-radius: 3px;
-}
-
-@media (max-width: 992px) {
-  .profile-item .footer a.btn {
-    float: left;
-  }
-}
-
-.profile-item .footer .published {
-  float: left;
-  margin-top: 10px;
-  font-style: italic;
-}
-
-.profile-item .thumbnail img {
-  position: absolute;
-}
-
-@media (max-width: 767px) {
-  .profile-item .exam-item .title,
-  .profile-item .exam-item .filing-date,
-  .profile-item .exam-item .start-date,
-  .profile-item .exam-item .published,
-  .profile-item .exam-item a.btn,
-  .profile-item .job-item .title,
-  .profile-item .job-item .filing-date,
-  .profile-item .job-item .start-date,
-  .profile-item .job-item .published,
-  .profile-item .job-item a.btn,
-  .profile-item .profile-item .title,
-  .profile-item .profile-item .filing-date,
-  .profile-item .profile-item .start-date,
-  .profile-item .profile-item .published,
-  .profile-item .profile-item a.btn,
-  .profile-item .course-item .title,
-  .profile-item .course-item .filing-date,
-  .profile-item .course-item .start-date,
-  .profile-item .course-item .published,
-  .profile-item .course-item a.btn {
-    float: none !important;
-  }
-}
-
-.profile-item .thumbnail {
-  position: absolute;
-}
-
-.profile-item .thumbnail img {
-  position: relative;
-  width: 70px;
-}
-
-.profile-item .header, .profile-item .body {
-  margin-left: 90px;
-}
-
-.profile-banner {
-  background: #fff;
-  background: rgba(255, 255, 255, 0.5);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#80ffffff", endColorstr="#80ffffff",GradientType=0 );
-  border: 1px solid #d6d6d6;
-  margin-bottom: 15px;
-  clear: both;
-}
-
-.main-secondary > .profile-banner {
-  margin-top: 24px;
-}
-
-.profile-banner .inner {
-  background-size: contain;
-}
-
-.banner-subtitle {
-  font-size: 0.9rem;
-  margin: 0 30px 0.2em 0;
-  padding: 4px 35px 2px 10px;
-  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#20000000",endColorStr="#00000000", GradientType="1");
-}
-
-.banner-title {
-  font-family: "Arial Narrow", "Helvetica Narrow", Arial, Helvetica, sans-serif;
-  font-stretch: condensed;
-  font-weight: bold;
-  color: #555555;
-  font-size: 1.2rem;
-  padding-right: 70px;
-  padding-left: 10px;
-}
-
-.banner-link {
-  font-size: 0.7rem;
+.executive-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
   margin: 0;
-  padding-left: 12px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  font-size: 1rem;
+  border: none;
 }
 
-.main-secondary .group .banner-subtitle {
-  padding-right: 5px;
-  margin-right: 0;
+.executive-profile img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.executive-profile .executive-profile-body {
+  padding-left: 1rem;
+  border-left: 1px solid #3b3a48;
+}
+
+.executive-profile p, .executive-profile .executive-name {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.executive-profile .executive-name {
+  font-size: 1.4375rem;
 }
 
 /* -----------------------------------------
@@ -19801,11 +19800,13 @@ figcaption {
 .custom-select {
   border-radius: 0;
   border-color: #ccc;
+  font-size: 1.375rem;
 }
 
 label {
   font-weight: 600;
   font-size: 1.125rem;
+  margin-bottom: 0.5rem;
 }
 
 .input-group-text {
@@ -19819,9 +19820,9 @@ label {
 }
 
 .input-group-text.is-invalid {
-  color: #d24532;
-  border-color: #d24532;
-  background-color: #f7ddd9;
+  color: #cd402d;
+  border-color: #cd402d;
+  background-color: #f5d5d1;
 }
 
 .custom-file-label:after {
@@ -19837,7 +19838,7 @@ label {
 }
 
 .required-label {
-  color: #d24532;
+  color: #cd402d;
 }
 
 .form-inline-columns .form-group {
@@ -19885,17 +19886,17 @@ label {
 }
 
 .has-error .feedback {
-  color: #c93f2c;
+  color: #c03c2a;
 }
 
 .has-error .input-group-addon {
-  color: #d24532;
-  border-color: #d24532;
-  background-color: #f7ddd9;
+  color: #cd402d;
+  border-color: #cd402d;
+  background-color: #f5d5d1;
 }
 
 .has-error .form-control {
-  border-color: #d24532;
+  border-color: #cd402d;
 }
 
 .has-success .feedback {
@@ -21634,18 +21635,26 @@ table.editor-table-striped > tbody > tr:nth-child(odd) > td {
 }
 
 /* End Rich Text Editor */
+.table {
+  color: #3b3a48;
+}
+
 .table.table-default {
   border: none;
 }
 
 .table.table-default > thead > tr > th, .table.table-default > thead > tr > td, .table.table-default > tbody > tr > th, .table.table-default > tbody > tr > td, .table.table-default > tfoot > tr > th, .table.table-default > tfoot > tr > td {
-  background: #f2f2f2;
+  background: #f3f3f4;
   border: 2px solid #fff;
 }
 
 .table.table-default > thead > tr > th, .table.table-default > thead > tr > td {
   background: #d9d9d9;
   border: 2px solid #fff;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) > * {
+  color: #3b3a48;
 }
 
 /* -----------------------------------------
@@ -21897,7 +21906,7 @@ blockquote footer {
 }
 
 blockquote footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 blockquote.no-quotation-mark::before {
@@ -21939,7 +21948,7 @@ blockquote.blockquote-reverse .small:before {
 blockquote.blockquote-reverse footer:after,
 blockquote.blockquote-reverse small:after,
 blockquote.blockquote-reverse .small:after {
-  content: " —";
+  content: " —";
 }
 
 /* -----------------------------------------
@@ -22644,7 +22653,7 @@ blockquote.blockquote-reverse .small:after {
 
 /* -----------------------------------------
    SITE SETTINGS
-   /source/scss/cagov/settings-bar.scss
+   /source/scss/cagov/settings.scss
 ----------------------------------------- */
 .site-settings .settings-bar-buttons {
   display: flex;
@@ -23329,90 +23338,124 @@ html:not(.ie8) .stats-highlight img {
 /* -----------------------------------------
    PAGE NAVIGATION - /source/scss/cagov/page-navigation.scss
 ----------------------------------------- */
-.list-navigation li {
-  list-style: none;
-  margin: 0;
-  font-size: 1.25rem;
-  padding-left: 1rem;
+.side-navigation ul, .list-navigation {
+  margin-left: 0;
+  padding-left: 0;
 }
 
-.list-navigation li a {
+.side-navigation ul li, .list-navigation li {
+  list-style: none;
+  margin: 0;
+  font-size: calc(1rem + 0.1vw);
+  padding-left: 0;
+}
+
+.side-navigation ul li a, .list-navigation li a {
   position: relative;
   display: block;
   text-decoration: none !important;
   color: #4a4958;
   padding-bottom: 0.7rem;
   padding-top: 0.7rem;
+  padding-left: 1rem;
+  border-bottom: 1px solid #ededef;
 }
 
-.list-navigation li a.active {
-  color: #4a4958;
-  text-decoration: none;
+.side-navigation ul li a.landing, .list-navigation li a.landing {
   font-weight: 700;
 }
 
-.list-navigation li a.active:hover, .list-navigation li a.active:focus {
-  color: #000;
-  text-decoration: none;
+.side-navigation ul li a.landing.active, .list-navigation li a.landing.active {
+  background-color: #f3f3f4;
 }
 
-.list-navigation li a.active:before {
+.side-navigation ul li a.landing.active:hover, .side-navigation ul li a.landing.active:focus, .list-navigation li a.landing.active:hover, .list-navigation li a.landing.active:focus {
+  background-color: #ededef;
+}
+
+.side-navigation ul li a.landing.back, .list-navigation li a.landing.back {
+  padding-left: 1.5rem;
+}
+
+.side-navigation ul li a.landing.back::after, .list-navigation li a.landing.back::after {
+  content: "\e668";
+  position: absolute;
+  font-family: "CaGov";
+  left: 0;
+  top: 0.65rem;
+}
+
+.side-navigation ul li a.active, .list-navigation li a.active {
+  color: #4a4958;
+  text-decoration: none;
+  background-color: #f3f3f4;
+}
+
+.side-navigation ul li a.active:hover, .side-navigation ul li a.active:focus, .list-navigation li a.active:hover, .list-navigation li a.active:focus {
+  color: #000;
+  text-decoration: none;
+  background-color: #ededef;
+}
+
+.side-navigation ul li a.active:before, .list-navigation li a.active:before {
   content: "";
   border-left: 3px solid;
   position: absolute;
   top: 0;
-  left: -1rem;
+  left: 0;
   width: 3px;
   height: 100%;
   border-radius: 0;
 }
 
-.list-navigation li a:hover,
+.side-navigation ul li a:hover,
+.side-navigation ul li a:focus, .list-navigation li a:hover,
 .list-navigation li a:focus {
   text-decoration: none;
+  background-color: #fafafa;
 }
 
-.list-navigation li a:focus {
+.side-navigation ul li a:focus, .list-navigation li a:focus {
   outline: solid 2px #2ea3f2 !important;
+  outline-offset: -2px;
 }
 
-.list-navigation li ul {
+.side-navigation ul li ul, .list-navigation li ul {
   padding-left: 0;
 }
 
-.list-navigation li ul li {
+.side-navigation ul li ul li, .list-navigation li ul li {
   margin: 0;
 }
 
-.list-navigation li ul li a.active {
-  color: #4a4958;
-  text-decoration: none;
-  font-weight: 700;
+.side-navigation ul li ul li a, .list-navigation li ul li a {
+  padding-left: 2.5rem;
 }
 
-.list-navigation li ul li a.active:hover, .list-navigation li ul li a.active:focus {
+.side-navigation ul li ul li a.active, .list-navigation li ul li a.active {
+  color: #4a4958;
+  text-decoration: none;
+}
+
+.side-navigation ul li ul li a.active:hover, .side-navigation ul li ul li a.active:focus, .list-navigation li ul li a.active:hover, .list-navigation li ul li a.active:focus {
   color: #000;
   text-decoration: none;
 }
 
-.list-navigation li ul li a.active:before {
-  content: "";
-  border-left: 3px solid;
-  position: absolute;
-  top: 0;
-  left: -1rem;
-  width: 3px;
-  height: 100%;
-  border-radius: 0;
+.page-navigation {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #d4d4d7;
 }
 
 .page-navigation .label {
+  color: #5e5e6a;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   line-height: 1.75;
   padding: 0;
   margin: 0;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
 }
 
 .page-navigation ul {
@@ -23421,40 +23464,39 @@ html:not(.ie8) .stats-highlight img {
   padding: 0;
 }
 
+.page-navigation ul.columns-2 {
+  columns: 2;
+}
+
+.page-navigation ul.columns-3 {
+  columns: 3;
+}
+
 .page-navigation ul li {
   list-style: none;
   padding: 0;
   margin: 0;
-  border-bottom: 1px solid #d4d4d7;
-}
-
-.page-navigation ul li:first-child {
-  border-top: 1px solid #d4d4d7;
+  margin-bottom: 0.3rem;
+  font-size: calc(0.85rem + 0.1vw);
 }
 
 .page-navigation ul li a {
-  color: #4a4958;
-  text-decoration: none !important;
-  padding-top: 1rem;
-  padding-bottom: 1.25rem;
-  display: block;
+  display: inline-block;
+  position: relative;
+  padding-left: 1.5rem;
 }
 
-.page-navigation ul li a:hover, .page-navigation ul li a:focus {
-  text-decoration: none !important;
-  color: #000;
-}
-
-.page-navigation ul li a:focus {
-  outline: solid 2px #2ea3f2 !important;
-}
-
-.page-navigation ul li a.active {
-  font-weight: 700;
+.page-navigation ul li a::before {
+  content: "\ea33";
+  font-family: "CaGov";
+  position: absolute;
+  font-size: 1.5rem;
+  left: 0;
+  top: -0.4rem;
 }
 
 a.sidenav {
-  font-size: calc(1.125rem + 0.1vw);
+  font-size: calc(1rem + 0.1vw);
   margin: 0;
   display: block;
   padding-top: 0.7rem;
@@ -23462,10 +23504,15 @@ a.sidenav {
   padding-left: 1rem;
   position: relative;
   text-decoration: none !important;
+  color: #5e5e6a;
+  border-bottom: 1px solid #ededef;
+  background-color: #fff;
 }
 
 a.sidenav:hover, a.sidenav:focus {
   text-decoration: none;
+  background-color: #fafafa;
+  color: #000;
 }
 
 a.sidenav:focus {
@@ -23473,14 +23520,15 @@ a.sidenav:focus {
 }
 
 a.sidenav.active {
-  color: #000;
-  font-weight: 700;
+  color: #5e5e6a;
   text-decoration: none;
+  background-color: #f3f3f4;
 }
 
 a.sidenav.active:hover, a.sidenav.active:focus {
   text-decoration: none !important;
-  color: #5e5e6a;
+  color: #000;
+  background-color: #ededef;
 }
 
 a.sidenav.active:before {
@@ -23492,6 +23540,26 @@ a.sidenav.active:before {
   width: 3px;
   height: 100%;
   border-radius: 0;
+}
+
+a.sidenav.landing {
+  font-weight: 700;
+}
+
+a.sidenav.subnav {
+  padding-left: 2.5rem;
+}
+
+a.sidenav.back {
+  padding-left: 1.5rem;
+}
+
+a.sidenav.back::after {
+  content: "\e668";
+  position: absolute;
+  font-family: "CaGov";
+  left: 0;
+  top: 0.65rem;
 }
 
 /* -----------------------------------------
@@ -23527,6 +23595,10 @@ a.sidenav.active:before {
 /* -----------------------------------------
    PROGRESS BLOCK - /source/scss/cagov/progress-block.scss
 ----------------------------------------- */
+.progress-text {
+  text-align: center;
+}
+
 .dot-line {
   position: relative;
   display: block;
@@ -23561,9 +23633,44 @@ a.sidenav.active:before {
 }
 
 @media (max-width: 575px) {
+  .progress-text {
+    text-align: left;
+    position: relative;
+  }
+  .progress-text p, .progress-text h2, .progress-text .h2, .progress-text h3, .progress-text .h3, .progress-text h4, .progress-text .h4, .progress-text h5, .progress-text .h5, .progress-text h6, .progress-text .h6 {
+    margin-left: 3rem !important;
+  }
   .dot-line::before,
   .dot-line::after {
     display: none;
+  }
+  .dot-line {
+    position: relative;
+    rotate: 0deg;
+    left: 0.9rem;
+    top: 0;
+    padding-right: 0;
+    width: 2rem;
+    z-index: 2;
+  }
+  .dot-text {
+    position: relative;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 2rem;
+    border-left: 1px solid #ddd;
+  }
+  .dot-text h3, .dot-text .h3 {
+    margin-top: 0;
+    margin-bottom: 0 !important;
+  }
+  .dot-text::before {
+    display: none;
+  }
+  .timeline-lines .col-sm-3:nth-last-of-type(2) .dot-text::before,
+  .timeline-lines .col-sm-3:last-of-type .dot-text::before {
+    background: #dddddd;
   }
 }
 
@@ -23600,7 +23707,7 @@ a.sidenav.active:before {
 .timeline-dot {
   left: -1rem;
   position: absolute;
-  top: 2.5rem;
+  top: 2.25rem;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -23664,7 +23771,7 @@ a.sidenav.active:before {
 
 .bg-danger-warning-gradient {
   background-repeat: repeat-x;
-  background-image: linear-gradient(225deg, #c2570f, #d24532);
+  background-image: linear-gradient(225deg, #c2570f, #cd402d);
 }
 
 .bg-info-success-gradient {
@@ -23713,7 +23820,7 @@ a.sidenav.active:before {
 ----------------------------------------- */
 .cagov-step-list {
   padding-left: 0 !important;
-  margin-left: 30px !important;
+  margin-left: 1.5rem !important;
   counter-reset: step-list-count;
 }
 
@@ -23732,14 +23839,14 @@ a.sidenav.active:before {
   content: "";
   font-size: 1.625rem;
   font-weight: 700;
-  padding: 0 13px 0 13px;
+  padding: 0 12px 0 12px;
   border: 5px solid;
   background-color: #fff;
   border-radius: 50%;
   text-align: center;
   position: absolute;
   left: -27px;
-  top: -5px;
+  top: -3px;
   margin-left: -1px;
 }
 
@@ -23753,7 +23860,8 @@ a.sidenav.active:before {
 }
 
 .cagov-step-list li:first-child:before {
-  padding: 0 13px 0 13px;
+  padding: 0 14px 0 14px;
+  margin-left: -1px;
 }
 
 .cagov-step-list li::before {
@@ -23773,8 +23881,42 @@ a.sidenav.active:before {
   border-left: none;
 }
 
+.cagov-step-list li:nth-child(3):before {
+  margin-left: -1px;
+}
+
+.cagov-step-list li:nth-child(10):before {
+  margin-left: -1px;
+}
+
+.cagov-step-list li:nth-child(11):before {
+  padding: 0 10px 0 10px;
+}
+
+.cagov-step-list li:nth-child(12):before {
+  padding: 0 8px 0 8px;
+  margin-left: -1px;
+}
+
+.cagov-step-list li:nth-child(21):before {
+  padding: 0 6px 0 6px;
+}
+
 .cagov-step-list li:last-child:before {
-  margin-left: 6px;
+  margin-left: 3px;
+}
+
+/* Make the list within the step list look normal */
+.cagov-step-list li ul li {
+  border: none;
+  font-size: calc(1.125rem + 0.1vw);
+  font-weight: normal;
+  list-style-type: disc;
+  padding-left: unset;
+}
+
+.cagov-step-list li ul li:before {
+  content: none;
 }
 
 /* -----------------------------------------
@@ -23850,7 +23992,6 @@ a.sidenav.active:before {
 
 .no-underline {
   text-decoration: none !important;
-  background-image: none !important;
 }
 
 .underline {
@@ -24293,7 +24434,7 @@ a.sidenav.active:before {
 }
 
 .gray-900, .gray-900-hover:hover, .gray-900-hover:focus {
-  color: #4a4958 !important;
+  color: #3b3a48 !important;
 }
 
 .color-light {
@@ -24326,6 +24467,10 @@ a.sidenav.active:before {
 
 .outline-color, .outline-color:hover, .outline-color:focus {
   color: #2ea3f2 !important;
+}
+
+.color-red {
+  color: #cd402d !important;
 }
 
 .bg-white {
@@ -24373,6 +24518,12 @@ a.sidenav.active:before {
 .bg-gray-50-hover:hover,
 .bg-gray-50-hover:focus {
   background-color: #fafafa !important;
+}
+
+.bg-gray-75,
+.bg-gray-75-hover:hover,
+.bg-gray-75-hover:focus {
+  background-color: #f3f3f4 !important;
 }
 
 .bg-gray-100,
@@ -24461,6 +24612,10 @@ a.sidenav.active:before {
   background-color: rgba(0, 0, 0, 0.9) !important;
 }
 
+.bg-red {
+  background-color: #cd402d !important;
+}
+
 /*------------------------------------
   borders colors and styles
 ------------------------------------*/
@@ -24491,8 +24646,48 @@ a.sidenav.active:before {
   border-color: transparent !important;
 }
 
+.brd-gray-100 {
+  border-color: #ededef !important;
+}
+
+.brd-gray-200 {
+  border-color: #d4d4d7 !important;
+}
+
+.brd-gray-300 {
+  border-color: #bcbbc1 !important;
+}
+
+.brd-gray-400 {
+  border-color: #a4a3ab !important;
+}
+
+.brd-gray-500 {
+  border-color: #898891 !important;
+}
+
+.brd-gray-600 {
+  border-color: #72717c !important;
+}
+
+.brd-gray-700 {
+  border-color: #5e5e6a !important;
+}
+
+.brd-gray-800 {
+  border-color: #4a4958 !important;
+}
+
+.brd-gray-900 {
+  border-color: #3b3a48 !important;
+}
+
+.brd-red {
+  border-color: #cd402d !important;
+}
+
 .brd-0 {
-  border: none;
+  border: none !important;
 }
 
 .brd-right {
@@ -24985,6 +25180,38 @@ a.sidenav.active:before {
   line-height: 1.6em !important;
 }
 
+.font-weight-200 {
+  font-weight: 200 !important;
+}
+
+.font-weight-300 {
+  font-weight: 300 !important;
+}
+
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+
+.font-weight-800 {
+  font-weight: 800 !important;
+}
+
+.font-weight-900 {
+  font-weight: 900 !important;
+}
+
 .bold,
 .text-bold {
   font-weight: 700 !important;
@@ -25125,6 +25352,11 @@ a.sidenav.active:before {
   position: sticky;
   top: 12.5rem;
 }
+
+/* -----------------------------------------
+   Global custom styles
+   /source/scss/custom/custom.scss
+----------------------------------------- */
 
 /* -----------------------------------------
    SHASTA
@@ -25772,8 +26004,8 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
    /source/scss/colortheme/cs-media.scss
 ----------------------------------------- */
 figure {
-  background-color: #e4f1e5;
-  border-color: #daefe8;
+  background-color: #fff;
+  border-color: #d4d4d7;
 }
 
 /* -----------------------------------------
@@ -26680,8 +26912,8 @@ fieldset[disabled] .card-inverted .btn-standout.active {
 
 .section-danger,
 .card-danger {
-  background: #d24532;
-  color: #000000;
+  background: #cd402d;
+  color: #ffffff;
 }
 
 .section-danger a:not(.btn),
@@ -27077,8 +27309,8 @@ a.text-white:not(.btn):hover {
 }
 
 .testimonial-danger {
-  background: #d24532;
-  color: #000000;
+  background: #cd402d;
+  color: #ffffff;
 }
 
 .testimonial-danger a:not(.btn) {
@@ -27102,7 +27334,7 @@ a.text-white:not(.btn):hover {
 }
 
 .testimonial-danger footer {
-  color: #000000;
+  color: #ffffff;
 }
 
 /* -----------------------------------------
@@ -27290,9 +27522,9 @@ a.text-white:not(.btn):hover {
 }
 
 .card-danger {
-  background-color: #d24532;
-  border-color: #d24532;
-  color: #000000;
+  background-color: #cd402d;
+  border-color: #cd402d;
+  color: #ffffff;
 }
 
 .card-danger a:not(.btn) {
@@ -27316,13 +27548,13 @@ a.text-white:not(.btn):hover {
 }
 
 .card-danger .card-header {
-  border-bottom: 1px solid #d24532;
-  background-color: #c03c2a;
+  border-bottom: 1px solid #cd402d;
+  background-color: #b83928;
 }
 
 .card-danger .card-footer {
-  border-top: 1px solid #d24532;
-  background-color: #c03c2a;
+  border-top: 1px solid #cd402d;
+  background-color: #b83928;
 }
 
 .card-inverse .card-header, .card-inverted .card-header {
@@ -28510,19 +28742,19 @@ input[type=radio]:focus + div {
    PAGE NAVIGATION
    /source/scss/colortheme/cs-page-navigation.scss
 ----------------------------------------- */
-.list-navigation li a {
+.side-navigation ul li a, .list-navigation li a {
   color: #5e5e6a;
 }
 
-.list-navigation li a:hover, .list-navigation li a:hover {
+.side-navigation ul li a:hover, .side-navigation ul li a:hover, .list-navigation li a:hover, .list-navigation li a:hover {
   color: #3b3a48;
 }
 
-.list-navigation li a.active:before {
+.side-navigation ul li a.active:before, .list-navigation li a.active:before {
   border-left-color: #fbad23;
 }
 
-.list-navigation li ul li a.active::before {
+.side-navigation ul li ul li a.active::before, .list-navigation li ul li a.active::before {
   border-left-color: #fbad23;
 }
 
@@ -28690,30 +28922,30 @@ a.sidenav.active:before {
 
 .list-group.section-danger .list-group-item,
 .list-group.section-danger .list-group-item > button {
-  background: #d24532 !important;
-  color: #000000 !important;
+  background: #cd402d !important;
+  color: #ffffff !important;
 }
 
 .list-group.section-danger .list-group-item:hover, .list-group.section-danger .list-group-item:focus, .list-group.section-danger .list-group-item.open,
 .list-group.section-danger .list-group-item > button:hover,
 .list-group.section-danger .list-group-item > button:focus,
 .list-group.section-danger .list-group-item > button.open {
-  background: #b83928 !important;
-  color: #000000 !important;
+  background: #b03727 !important;
+  color: #ffffff !important;
 }
 
 .list-group.section-danger .list-group-item.active,
 .list-group.section-danger .list-group-item > button.active {
   background-color: #fff !important;
-  border-color: #d24532;
-  color: #d24532 !important;
+  border-color: #cd402d;
+  color: #cd402d !important;
 }
 
 .list-group.section-danger .list-group-item.active:hover, .list-group.section-danger .list-group-item.active:focus,
 .list-group.section-danger .list-group-item > button.active:hover,
 .list-group.section-danger .list-group-item > button.active:focus {
   background-color: #f8f9fa !important;
-  border-color: #d24532;
+  border-color: #cd402d;
 }
 
 .list-group.section-understated .list-group-item,
@@ -28785,7 +29017,7 @@ a.sidenav.active:before {
    /source/scss/colortheme/cs-accordion-sidenav.scss
 ----------------------------------------- */
 cagov-accordion.sidenav details summary {
-  color: #4a4958;
+  color: #5e5e6a;
 }
 
 cagov-accordion.sidenav details summary:hover, cagov-accordion.sidenav details summary:focus {
@@ -28793,8 +29025,7 @@ cagov-accordion.sidenav details summary:hover, cagov-accordion.sidenav details s
 }
 
 cagov-accordion.sidenav details summary.active {
-  font-weight: 700;
-  color: #4a4958 !important;
+  color: #5e5e6a !important;
 }
 
 cagov-accordion.sidenav details summary.active:hover, cagov-accordion.sidenav details summary.active:focus {
@@ -28862,6 +29093,88 @@ cagov-accordion.sidenav details summary.active:before {
 }
 
 /* -----------------------------------------
+   ALERT
+   /source/scss/colortheme/cs-alert.scss
+----------------------------------------- */
+.alert-banner {
+  background-color: #3c4543;
+  color: #fff;
+}
+
+.alert-banner a:not(.btn), .alert-banner .close {
+  color: #fff;
+}
+
+.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover, .alert-banner .close:focus, .alert-banner .close:hover {
+  color: #fbad23;
+}
+
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+
+.alert-warning a:not(.btn), .alert-warning .close {
+  color: #8a6d3b;
+}
+
+.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover, .alert-warning .close:focus, .alert-warning .close:hover {
+  color: #715930;
+}
+
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.alert-info a:not(.btn), .alert-info .close {
+  color: #31708f;
+}
+
+.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover, .alert-info .close:focus, .alert-info .close:hover {
+  color: #1f465a;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+.alert-danger a:not(.btn), .alert-danger .close {
+  color: #a94442;
+}
+
+.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover, .alert-danger .close:focus, .alert-danger .close:hover {
+  color: #762f2e;
+}
+
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.alert-success a:not(.btn), .alert-success .close {
+  color: #3c763d;
+}
+
+.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover, .alert-success .close:focus, .alert-success .close:hover {
+  color: #244725;
+}
+
+.alert-severe {
+  color: #4a4958 !important;
+  background-color: #fbad23;
+}
+
+.alert-severe a:not(.btn), .alert-severe .close {
+  color: #4a4958 !important;
+}
+
+.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover, .alert-severe .close:focus, .alert-severe .close:hover {
+  color: #000 !important;
+}
+
+/* -----------------------------------------
    LINK GRID
    /source/scss/colortheme/cs-link-grid.scss
 ----------------------------------------- */
@@ -28906,6 +29219,26 @@ blockquote.prominent::before {
 blockquote.prominent p,
 blockquote.prominent footer {
   color: #fff;
+}
+
+/* -----------------------------------------
+   CARDS
+   /source/scss/colortheme/cs-executive-profile.scss
+----------------------------------------- */
+.executive-profile {
+  background-color: #e4f1e5;
+}
+
+.executive-profile.dark .executive-profile-body {
+  border-left-color: #fff;
+}
+
+.executive-profile.dark p, .executive-profile.dark .executive-name, .executive-profile.dark a {
+  color: #fff;
+}
+
+.executive-profile.dark a:hover, .executive-profile.dark a:focus {
+  color: #fbad23;
 }
 
 /* -----------------------------------------
@@ -29054,8 +29387,8 @@ html.high-contrast input[type=radio]:checked + * .color-white--checked {
 
 @font-face {
   font-family: 'CaGov';
-  src: url("../fonts/CaGov.eot?3fgl4k");
-  src: url("../fonts/CaGov.eot?3fgl4k#iefix") format("embedded-opentype"), url("../fonts/CaGov.ttf?3fgl4k") format("truetype"), url("../fonts/CaGov.woff?3fgl4k") format("woff"), url("../fonts/CaGov.svg?3fgl4k#CaGov") format("svg");
+  src: url("../fonts/CaGov.eot?nhapxo");
+  src: url("../fonts/CaGov.eot?nhapxo#iefix") format("embedded-opentype"), url("../fonts/CaGov.ttf?nhapxo") format("truetype"), url("../fonts/CaGov.woff?nhapxo") format("woff"), url("../fonts/CaGov.svg?nhapxo#CaGov") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -29107,6 +29440,50 @@ li[class^="et_fb_ca"]::before,
 li[class^="et_fb_profile_banner"]::before {
   font-family: 'CaGov' !important;
   content: '\c90b' !important;
+}
+
+.ca-gov-icon-quotation-mark:before {
+  content: "\ea29" !important;
+}
+
+.ca-gov-icon-water:before {
+  content: "\ea2a" !important;
+}
+
+.ca-gov-icon-wind-power:before {
+  content: "\ea2b" !important;
+}
+
+.ca-gov-icon-connection:before {
+  content: "\ea2c" !important;
+}
+
+.ca-gov-icon-transport:before {
+  content: "\ea2d" !important;
+}
+
+.ca-gov-icon-maintenance:before {
+  content: "\ea2e" !important;
+}
+
+.ca-gov-icon-warning-diamond:before {
+  content: "\ea2f" !important;
+}
+
+.ca-gov-icon-pipe-angle:before {
+  content: "\ea30" !important;
+}
+
+.ca-gov-icon-pipe:before {
+  content: "\ea31" !important;
+}
+
+.ca-gov-icon-bullet:before {
+  content: "\ea32" !important;
+}
+
+.ca-gov-icon-dot:before {
+  content: "\ea33" !important;
 }
 
 .ca-gov-icon-update:before {
@@ -32802,15 +33179,6 @@ header {
   }
 }
 
-/* Location Bar Style */
-.location-settings button.close {
-  font-size: 2.5em;
-}
-
-.location-settings button.close:hover {
-  color: #FDB81E !important;
-}
-
 /* Google Translate */
 #google_translate_element .skiptranslate.goog-te-gadget, .skiptranslate.goog-te-gadget a {
   color: white;
@@ -32829,12 +33197,12 @@ header {
   color: #008A28 !important;
 }
 
-body:not(.design-system) {
+body[class*="5.5"] {
   /* Override styles for second level navs not using flex */
   /* Override nav li line-height */
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) {
+body[class*="5.5"] .second-level-nav:not(.flex) {
   display: block;
   position: relative !important;
   opacity: 1 !important;
@@ -32844,46 +33212,63 @@ body:not(.design-system) .second-level-nav:not(.flex) {
   background: inherit;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) li {
+body[class*="5.5"] .second-level-nav:not(.flex) li {
   display: inline-block;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) .second-level-link {
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
   font-size: 17.6px;
   font-size: 1.1rem;
 }
 
-body:not(.design-system) .second-level-nav:not(.flex) .second-level-link:hover {
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
   background-color: inherit;
   opacity: 1;
   transition: all 0.3s;
 }
 
-body:not(.design-system) nav li {
+body[class*="5.5"] nav li {
   line-height: 1.5 !important;
 }
 
-body:not(.design-system) nav.megadropdown .media-left .media-object {
+body[class*="5.5"] nav.megadropdown .media-left .media-object {
   max-width: inherit;
 }
 
 @media (max-width: 992px) {
-  body:not(.design-system) nav {
+  body[class*="5.5"] nav {
     /* MegaDropdown Navigation Styles */
   }
-  body:not(.design-system) nav .link-description,
-  body:not(.design-system) nav .media-left,
-  body:not(.design-system) nav .font-size-40,
-  body:not(.design-system) nav .image-icon {
+  body[class*="5.5"] nav .link-description,
+  body[class*="5.5"] nav .media-left,
+  body[class*="5.5"] nav .font-size-40,
+  body[class*="5.5"] nav .image-icon {
     display: none;
   }
-  body:not(.design-system) nav.megadropdown .second-level-nav:not(.flex) li {
+  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
     width: 100% !important;
   }
-  body:not(.design-system) nav.megadropdown div[class*="pull-"] {
+  body[class*="5.5"] nav.megadropdown div[class*="pull-"] {
     width: 100% !important;
   }
-  body:not(.design-system) nav.megadropdown div[class*="with-image-"] {
+  body[class*="5.5"] nav.megadropdown div[class*="with-image-"] {
+    display: none;
+  }
+}
+
+body[class*="6.0"] {
+  /* Override nav li line-height */
+}
+
+body[class*="6.0"] nav li {
+  line-height: 1.5 !important;
+}
+
+@media (max-width: 992px) {
+  body[class*="6.0"] nav .link-description,
+  body[class*="6.0"] nav .media-left,
+  body[class*="6.0"] nav .font-size-40,
+  body[class*="6.0"] nav .image-icon {
     display: none;
   }
 }

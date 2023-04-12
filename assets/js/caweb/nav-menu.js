@@ -1,6 +1,8 @@
 /* nav-menus.php Javascript  */
 jQuery(document).ready(function($) {
   "use strict";
+
+
   /* Alt Text Check */
   $(document).on('click', 'input[name="save_menu"]', function(e){
 	  var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
@@ -20,7 +22,7 @@ jQuery(document).ready(function($) {
   /* Unit Size Selector */
   $(document).on('change', 'div .unit-size-selector', function(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
     var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
     var unit_size = $(this).val();
@@ -48,6 +50,11 @@ jQuery(document).ready(function($) {
         $(icon_selector).removeClass('hidden');
     }
     
+    // remove icon selector if using version 6.0
+    if( '6.0' === caweb_admin_args.template_version ){
+      // Hide Icon Selector
+      $(icon_selector).addClass('hidden');
+    }
   });
 
   /* New Row */
@@ -79,7 +86,7 @@ jQuery(document).ready(function($) {
   function menu_selection(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
     var menu_li = $('#menu-item-' + menu_id);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .icon-selector');
+    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
     var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
     var mega_menu_images = $('#menu-item-settings-' + menu_id + ' .mega-menu-images');
@@ -146,6 +153,12 @@ jQuery(document).ready(function($) {
       }
 
       
+    }
+
+    // remove icon selector if using version 6.0
+    if( '6.0' === caweb_admin_args.template_version ){
+      // Hide Icon Selector
+      $(icon_selector).addClass('hidden');
     }
   }
 });

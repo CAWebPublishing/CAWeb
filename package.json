@@ -35,6 +35,6 @@
   "scripts": {
     "build": "gulp build",
     "install": "npm i -g npm-check-updates",
-    "postinstall": "npm config set gulp-cli --global && npm rebuild node-sass"
+    "postinstall": "npm rebuild node-sass"
   }
 }

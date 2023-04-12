@@ -883,6 +883,17 @@ function caweb_icons() {
 		'yacht'                     => '&#xe9da;',
 		'zoo'                       => '&#xe9db;',
 		'zoo-alt'                   => '&#xe9dc;',
+		'quotation-mark'            => '&#xea29;',
+		'water'                     => '&#xea2a;',
+		'wind-power'                => '&#xea2b;',
+		'connection'                => '&#xea2c;',
+		'transport'                 => '&#xea2d;',
+		'maintenance'               => '&#xea2e;',
+		'warning-diamond'           => '&#xea2f;',
+		'pipe-angle'                => '&#xea30;',
+		'pipe'                      => '&#xea31;',
+		'bullet'                    => '&#xea32;',
+		'dot'                       => '&#xea33;',
 	);
 }
 
@@ -900,19 +911,28 @@ function caweb_generate_icon_json() {
 		$icons = caweb_icons();
 
 		foreach ( $icons as $i => $data ) {
-			$glyph  = $i;
-			$code   = $data;
-			$search = str_replace( array( '_', '-' ), ' ', $glyph );
+			$search = str_replace( array( '_', '-' ), ' ', $i );
 			$name   = ucwords( str_replace( array( ' line', ' alt' ), '', $search ) );
-			$style  = in_array( 'line', explode( ' ', $search ), true ) ? ', "line"' : ', "solid"';
 
-			$output[] = sprintf( '{"search_terms":"%1$s","unicode":"%2$s","name":"%3$s","glyph": "%4$s","styles":["divi"%5$s],"is_divi_icon":true,"font_weight":400}', $search, $code, $name, $glyph, $style );
+			$styles = array( 'divi' );
+
+			$styles[] = in_array( 'line', explode( ' ', $search ), true ) ? 'line' : 'solid';
+
+			$icon = array(
+				'glyph'        => $i,
+				'unicode'      => $data,
+				'name'         => $name,
+				'search_terms' => $search,
+				'styles'       => $styles,
+			);
+
+			$output[] = json_encode( $icon, JSON_PRETTY_PRINT );
 		}
 
-		$json = implode( ',', $output );
+		$json = implode( ',' . PHP_EOL, $output );
 
 		// phpcs:disable
-		file_put_contents( CAWEB_ABSPATH . '/assets/full_icons_list.json', "[$json]" );
+		file_put_contents( CAWEB_ABSPATH . '/assets/full_icons_list.json', "[\n$json\n]" );
 		// phpcs:enable
 	}
 

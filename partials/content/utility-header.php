@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$deprecating = '5.5' === caweb_template_version();
-$btn_class = $deprecating ? ' btn-primary' : '';
+$caweb_deprecating = '5.5' === caweb_template_version();
+$caweb_btn_class   = $caweb_deprecating ? ' btn-primary' : '';
 
-$caweb_template_logo                = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, ! $deprecating  ? '-gold' : '');
+$caweb_template_logo = sprintf( '%1$s/images/system/logo%2$s.svg', CAWEB_URI, ! $caweb_deprecating ? '-gold' : '' );
 
 $caweb_utility_home_icon            = get_option( 'ca_utility_home_icon', true );
 $caweb_social_options               = caweb_get_site_options( 'social' );
@@ -28,21 +28,27 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 <!-- Utility Header -->
 <div class="utility-header hidden-print">
 	<div class="container">
-		<div class="group flex-row">
+		<div class="<?php print $caweb_deprecating ? 'group ' : ''; ?>flex-row">
 			<div class="social-media-links">
 				<div class="header-cagov-logo">
 					<a href="https://www.ca.gov/" title="CA.gov website">
 						<span class="sr-only">CA.gov</span>
 						<img style="height: 31px;" src="<?php print esc_url( $caweb_template_logo ); ?>" class="pos-rel" alt="CA.gov website" aria-hidden="true" />
 					</a>
+					<?php if ( ! $caweb_deprecating ) : ?>
+					<span class="official-tag align-bottom"><span class="desktop-only">Official website of the&nbsp;</span>State of California</span>
+					<?php endif; ?>
 				</div>
 
-				<?php if ( $caweb_utility_home_icon ) : ?>
-					<a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
-					<?php
-				endif;
+				<?php
+				if ( $caweb_deprecating ) {
 
-				if( $deprecating ){
+					if ( $caweb_utility_home_icon ) {
+						?>
+								<a href="/" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+						<?php
+					}
+
 					foreach ( $caweb_social_options as $caweb_opt ) {
 						$caweb_share_email = 'ca_social_email' === $caweb_opt ? true : false;
 						$caweb_sub         = rawurlencode( sprintf( '%1$s | %2$s', get_the_title(), get_bloginfo( 'name' ) ) );
@@ -57,11 +63,11 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 							$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_opt );
 							$caweb_target = get_option( "${caweb_opt}_new_window" ) ? 'target="_blank"' : ''
 							?>
-							<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
-								<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
-							</a>
-							<?php
-						endif;
+								<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
+									<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
+								</a>
+								<?php
+							endif;
 
 					}
 				}
@@ -69,34 +75,36 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 			</div>
 			<div class="settings-links">
 				<?php
-				for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) {
-					$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
-					$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
-					$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? ' target="_blank"' : '';
-					$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", 'init' );
-					if ( ( 'init' === $caweb_enabled && ! empty( $url ) && ! empty( $name ) ) || $caweb_enabled ) {
-						$caweb_enabled = ' checked';
-					} else {
-						$caweb_enabled = '';
-					}
+				if ( $caweb_deprecating ) {
+					for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) {
+						$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
+						$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
+						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? ' target="_blank"' : '';
+						$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", 'init' );
+						if ( ( 'init' === $caweb_enabled && ! empty( $url ) && ! empty( $name ) ) || $caweb_enabled ) {
+							$caweb_enabled = ' checked';
+						} else {
+							$caweb_enabled = '';
+						}
 
-					if ( $caweb_enabled ) {
-						printf(
-							'<a class="utility-custom-%1$s" href="%2$s"%3$s>%4$s</a>',
-							esc_attr( $caweb_i ),
-							esc_url( $caweb_url ),
-							esc_attr( $caweb_target ),
-							esc_html( $caweb_text )
-						);
+						if ( $caweb_enabled ) {
+							printf(
+								'<a class="utility-custom-%1$s" href="%2$s"%3$s>%4$s</a>',
+								esc_attr( $caweb_i ),
+								esc_url( $caweb_url ),
+								esc_attr( $caweb_target ),
+								esc_html( $caweb_text )
+							);
+						}
 					}
 				}
 				?>
 
-				<?php if ( $caweb_geo_locator_enabled ) : ?>
-					<button type="button" class="btn btn-xs collapsed <?php print $btn_class ?>" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>	
+				<?php if ( $caweb_geo_locator_enabled && $caweb_deprecating ) : ?>
+					<button type="button" class="btn btn-xs collapsed <?php print esc_attr( $caweb_btn_class ); ?>" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>	
 				<?php endif; ?>
 
-				<?php if ( ! empty( $caweb_contact_us_link ) ) : ?>
+				<?php if ( ! empty( $caweb_contact_us_link ) && $caweb_deprecating ) : ?>
 				<a class="utility-contact-us" href="<?php print esc_url( $caweb_contact_us_link ); ?>">Contact Us</a>
 				<?php endif; ?>
 
@@ -114,10 +122,10 @@ $caweb_geo_locator_enabled          = 'on' === get_option( 'ca_geo_locator_enabl
 				<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
 				<?php endif; ?>
 				<button 
-					class="btn btn-xs collapsed<?php print $btn_class ?>" 
-					<?php if($deprecating): ?>
+					class="btn btn-xs collapsed<?php print esc_attr( $caweb_btn_class ); ?>" 
+					<?php if ( $caweb_deprecating ) : ?>
 					data-toggle="collapse" data-target="#siteSettings" 
-					<?php else: ?>
+					<?php else : ?>
 					data-bs-toggle="collapse" data-bs-target="#siteSettings" 
 					<?php endif; ?>
 					aria-controls="siteSettings">
