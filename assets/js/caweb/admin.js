@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
   $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-  $('#caweb-options-form').submit(function(e){ 
+  $('#caweb-options-form').on( 'submit', function(e){ 
 	  e.preventDefault();
 		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
 		var empty_file = false;
@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
   });
 
   // Reset Fav Icon
-  $('#resetFavIcon').click(function() {
+  $('#resetFavIcon').on( 'click', function() {
     var ico = caweb_admin_args.defaultFavIcon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
 
   
   // Reset Organization Logo-Brand
-  $('#resetOrgLogo').click(function() {
+  $('#resetOrgLogo').on( 'click', function() {
 
     $('input[type="text"][name="header_ca_branding"]').val('');
     $('input[type="hidden"][name="header_ca_branding"]').val('');
@@ -110,7 +110,7 @@ jQuery(document).ready(function($) {
     }
   });
   // If Google Translate is set to Custom, show extra options
-  $('input[name^="ca_google_trans_enabled"]').click(function(){
+  $('input[name^="ca_google_trans_enabled"]').on( 'click', function(){
     if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){
       $('#ca_google_trans_enabled_custom_extras').collapse('hide');
     }else{
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
   });
 
   // Generate Document Sitemap
-  $('button.doc-sitemap').click(function(e){
+  $('button.doc-sitemap').on( 'click', function(e){
     e.preventDefault();
     var data = {
       'action': 'create_doc_sitemap',

@@ -111,12 +111,9 @@ function caweb_display_general_options() {
 	// Header Menu.
 	$navigation_menu = get_option( 'ca_default_navigation_menu', 'singlelevel' );
 
-	// Design System enabled.
-	$caweb_enable_design_system = caweb_design_system_enabled();
-
 	// Color Scheme.
 	$color_scheme      = get_option( 'ca_site_color_scheme', 'oceanside' );
-	$available_schemes = caweb_color_schemes( caweb_template_version(), 'displayname' );
+	$available_schemes = caweb_template_colors();
 
 	// Show Search on FrontPage.
 	$frontpage_search_enabled = get_option( 'ca_frontpage_search_enabled', false ) ? ' checked' : '';
@@ -136,16 +133,13 @@ function caweb_display_general_options() {
 	// Legacy Browser Support.
 	$ua_compatibiliy = get_option( 'ca_x_ua_compatibility', false ) ? ' checked' : '';
 
-	$menus = array(
-		'dropdown'     => 'Drop Down',
-		'flexmega'     => 'Flex Mega Menu',
-		'megadropdown' => 'Mega Drop',
-		'singlelevel'  => 'Single Level',
-	);
+	$menus = caweb_nav_menu_types();
 
-	if ( $caweb_enable_design_system || ! $deprecating ) {
+	if ( ! $deprecating ) {
 		unset( $menus['flexmega'], $menus['megadropdown'] );
 	}
+
+	$network = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 	?>
 	<!-- General Section -->
@@ -155,21 +149,8 @@ function caweb_display_general_options() {
 		</a>
 	</div>
 	<div class="collapse show" id="general-setting" data-parent="#general-settings">
-		<?php
-		$network = is_multisite() ? 'manage_network_options' : 'manage_options';
-		if ( current_user_can( $network ) ) :
-			?>
-		<!-- Enable Design System -->
-		<div class="form-row">
-			<div class="form-group col-sm-12">
-				<label for="caweb_enable_design_system"><strong>Enable Design System</strong></label>
-				<input type="checkbox" name="caweb_enable_design_system" id="caweb_enable_design_system" data-toggle="toggle" data-onstyle="success" <?php print $caweb_enable_design_system ? ' checked' : ''; ?>>
-				<small class="text-muted d-block">This will enable the new design system.</small>
-			</div>
-		</div>
-		<?php endif; ?>
 		<!-- State Template Version Row -->
-		<div class="form-row<?php print $caweb_enable_design_system ? ' d-none' : ''; ?>">
+		<div class="form-row">
 			<div class="form-group col-sm-5">
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
@@ -248,12 +229,15 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Apply a site-wide color scheme.</small>
 				<select id="ca_site_color_scheme" name="ca_site_color_scheme" class="w-50 form-control">
 				<?php
-				foreach ( $available_schemes as $key => $data ) {
-					$selected = $key === $color_scheme ? ' selected="selected"' : '';
+				foreach ( array_keys( $available_schemes ) as $color ) {
 					?>
-					<option value="<?php print esc_attr( $key ); ?>"
-					<?php print esc_attr( $selected ); ?>>
-					<?php print esc_attr( $data ); ?>
+					<option value="<?php print esc_attr( str_replace( ' ', '', $color ) ); ?>"
+					<?php print esc_attr( $selected ); ?>
+					<?php if ( str_replace( ' ', '', $color ) === $color_scheme ) : ?>
+						selected="selected"
+					<?php endif; ?>
+					>
+					<?php print esc_attr( ucwords( $color ) ); ?>
 					</option>
 					<?php
 				}
@@ -267,7 +251,7 @@ function caweb_display_general_options() {
 			<!-- Title Display Default -->
 			<div class="form-group col">
 				<label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default</strong></label>
-				<small class="mb-2 text-muted d-block">Suppress the title for all new pages/posts.</small>
+				<small class="mb-2 text-muted d-block">Display the title for all new pages/posts.</small>
 				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
 			</div>
 			<!-- Menu Home Link -->
@@ -932,13 +916,12 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
  * @return void
  */
 function caweb_display_additional_features_settings( $is_active = false ) {
-	$directory                  = wp_upload_dir();
-	$file                       = $directory['basedir'] . '/pdf-word-sitemap.xml';
-	$file_url                   = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
-	$cap                        = is_multisite() ? 'manage_network_options' : 'manage_options';
-	$live_drafts_enabled        = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
-	$caweb_debug_mode_enabled   = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
-	$caweb_enable_design_system = caweb_design_system_enabled() ? ' checked' : '';
+	$directory                = wp_upload_dir();
+	$file                     = $directory['basedir'] . '/pdf-word-sitemap.xml';
+	$file_url                 = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
+	$cap                      = is_multisite() ? 'manage_network_options' : 'manage_options';
+	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
+	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-parent="#caweb-settings">
 	<div class="form-row">

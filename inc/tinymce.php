@@ -30,12 +30,10 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 		$styles[ str_replace( ' ', '', strtolower( $style->name ) ) ] = $style;
 	}
 
-	$version     = caweb_template_version();
-	$color       = get_option( 'ca_site_color_scheme', 'oceanside' );
-	$colorscheme = caweb_color_schemes( $version, 'filename', $color );
-	$colorscheme = is_array( $colorscheme ) ? array_shift( $colorscheme ) : $colorscheme;
+	$version = caweb_template_version();
+	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
-	$editor_css = caweb_get_min_file( "/css/caweb-$version-$colorscheme.css" );
+	$editor_css = caweb_get_min_file( "/css/cagov-$version-$color.css" );
 
 	$css = array(
 		includes_url( '/css/dashicons.min.css' ),
@@ -63,7 +61,9 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 		),
 	);
 
-	return is_array( $settings ) ? array_merge( $defaults_settings, $settings ) : $defaults_settings;
+	$tiny_mce_settings = is_array( $settings ) ? array_merge( $defaults_settings, $settings ) : $defaults_settings;
+
+	return apply_filters( 'caweb_tiny_mce_settings', $tiny_mce_settings );
 }
 
 /**

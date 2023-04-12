@@ -108,6 +108,7 @@ task('admin-js', async function () {
 task('frontend-css', async function () {
 	var version = undefined !== argv.ver ? [argv.ver] : availableVers;
 
+	await deleteAsync(['css/cagov-*.css']);
 	await deleteAsync(['css/caweb-*.css']);
 	
 	version.forEach(function (v) {
@@ -158,47 +159,49 @@ async function buildFrontEndStyles(min = false, ver = templateVer) {
 
 	var colors = fs.readdirSync(versionColorschemesDir).filter(file => path.extname(file) === '.css');
 
-	var coreCSS = [`${versionDir}/cagov.core.css`];
-	
+	// generate template core css.
 	colors.forEach(function (scheme) {
-		// file order is important here
-		// core template css, 1st 
-		// core colorscheme css, 2nd 
-		// font css, 3rd 
-		// theme frontend css, 3rd 
-		// template custom frontend css, 3rd 
-		var files = coreCSS.concat(
-			`${versionColorschemesDir}${scheme}`,
-			`${assetDir}/css/cagov/cagov.font-only.css`,
-			frontendStyles,
-			`${assetDir}/scss/cagov/version-${ver}/custom.scss`
-			);
-		
 		var color = availableColors[scheme];
-		var title = `[ ${success} CAWeb ${ver} ${color} Colorscheme` + (minified ? ' Minified ] ' : ' ] ');
+		var title = `[ ${success} CAgov ${ver} ${color} Colorscheme` + (minified ? ' Minified ] ' : ' ] ');
 
-		if (files.length){
-			// if file is a scss change extension to css
-			// if file has _ remove it
-			// if minified add the .min
-			scheme = scheme.replace('.scss', '.css').replace('_', '');
-			scheme = minified ? scheme.replace('.css', '.min.css') : scheme;
-			
-			src(files)
+		src([
+			`${versionDir}/cagov.core.css`,
+			`${versionColorschemesDir}${scheme}`,
+			`${assetDir}/scss/cagov/version-${ver}/custom.scss`
+		])
 			.pipe(
 				sass({
 					outputStyle: buildOutputStyle,
 				})
 			)
 			.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
-			.pipe(concat(`caweb-${ver}-${scheme}`)) // compiled file
+			.pipe(concat(`cagov-${ver}-${scheme.replace(' ', '')}`)) // compiled file
 			.pipe(dest(outputCSSDir))
 			.pipe(tap(function (file) {
 				log(title + path.basename(file.path) + ' was created successfully.');
 			}));
-		}
 
 	});
+
+	// generate caweb core css
+	var title = `[ ${success} CAWeb ` + (minified ? ' Minified ] ' : ' ] ');
+
+	src(frontendStyles.concat(
+			`${assetDir}/css/cagov/cagov.font-only.css`,
+			)
+		)
+		.pipe(
+			sass({
+				outputStyle: buildOutputStyle,
+			})
+		)
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat(`caweb${minified}.css`)) // compiled file
+		.pipe(dest(outputCSSDir))
+		.pipe(tap(function (file) {
+			log(title + path.basename(file.path) + ' was created successfully.');
+		}));
+
 }
 
 /**
@@ -211,35 +214,36 @@ async function buildFrontendScripts(min = false, ver = templateVer) {
 	var minified = min ? '.min' : '';
 	var versionDir = `${assetDir}/js/cagov/version-${ver}`;
 
-	var coreJS = [ `${versionDir}/cagov.core.js` ];
-	
-	// file order is important here
-	// frontend scripts, 1st 
-	// core template js, 2nd,
-	// the templates custom js, 3rd
-	// a11y js, last 
-	var files = frontendScripts.concat(
-			coreJS, 
-			versionDir + '/custom.js',
-			a11yScripts,
-	);
-
 	var title = `[ ${success} CAWeb ${ver} JavaScript` + (minified ? ' Minified ] ' : ' ] ');
 
-	if (files.length){
-		let js = src(files)
+	// generate template core js.
+	let coreJS = src([`${versionDir}/cagov.core.js`, versionDir + '/custom.js' ])
 		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
-		.pipe(concat(`caweb-${ver}${minified}.js`)) // compiled file
+		.pipe(concat(`cagov-${ver}${minified}.js`)) // compiled file
 		.pipe(tap(function (file) {
 			log(title + path.basename(file.path) + ' was created successfully.');
 		}));
 
-		if (min) {
-			js = js.pipe(uglify());
-		}
-
-		js.pipe(dest(outputJSDir));
+	if (min) {
+		coreJS = coreJS.pipe(uglify());
 	}
+
+	coreJS.pipe(dest(outputJSDir));
+
+	// generate caweb core js
+	var files = frontendScripts.concat( a11yScripts );
+	let themeJS = src(files)
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(concat(`caweb${minified}.js`)) // compiled file
+		.pipe(tap(function (file) {
+			log(title + path.basename(file.path) + ' was created successfully.');
+		}));
+
+	if (min) {
+		themeJS = themeJS.pipe(uglify());
+	}
+
+	themeJS.pipe(dest(outputJSDir));
 }
 
 /**

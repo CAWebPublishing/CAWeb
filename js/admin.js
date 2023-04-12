@@ -130,8 +130,8 @@ jQuery(document).ready(function($) {
 		$( "#caweb-alert-banners" ).disableSelection()
 	}
 
-	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
-	$('#add-alert').click( function(e){ e.preventDefault(); addAlert();});
+	$('.remove-alert').on( 'click', function(e){ removeAlertFunc(this);});
+	$('#add-alert').on( 'click', function(e){ e.preventDefault(); addAlert();});
 
 	var removeAlertFunc = function (s){
 		var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
@@ -393,7 +393,11 @@ jQuery(document).ready(function($) {
 		$(bannerColorInput).addClass('form-control-sm');
 
 		var color_scheme_picker = $('#ca_site_color_scheme')[0];
-		var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+		var current_color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+
+		var color = Object.keys(caweb_admin_args.caweb_colors).find( function(colors){
+			return colors.replace(' ', '') === current_color;
+		});
 
 		$(bannerColorInput).val(caweb_admin_args.caweb_colors[color]['highlight']);
 
@@ -536,64 +540,6 @@ jQuery(document).ready(function($) {
 	}
 });
 
-// Toggle CSS Colorscheme Options
-jQuery( document ).ready( function($) {
-
-	$('#caweb_enable_design_system').on("change", function(){
-		var version = document.getElementById('caweb_enable_design_system').checked ? 'design-system' : $('select[id$="ca_site_version"]').val(); 
-        var menu_picker = document.getElementById('ca_default_navigation_menu');
-    	var current_menu = menu_picker.value;
-
-        // Change Colorscheme options.
-        correct_colorscheme_visibility(version);
-        
-        // Toggle Social Media Links
-        correct_social_media_links(version);
-
-        // Clear Menu Options
-        for(i = menu_picker.length; i >= 0; i--) {
-            menu_picker.remove(i);
-        }
-
-        // Design System is on
-        if( document.getElementById('caweb_enable_design_system').checked ){
-            var menus = { 
-                'dropdown' : 'Drop Down' ,
-                'singlelevel' : 'Singe Level' ,
-            };
-
-            // Hide State Template Version option.
-            $('select[id$="ca_site_version"]').parent().parent().addClass('d-none');
-        }else{
-            var menus = { 
-                'flexmega' : 'Flex Mega Menu' ,
-                'megadropdown' : 'Mega Drop' ,
-                'dropdown' : 'Drop Down' ,
-                'singlelevel' : 'Singe Level' ,
-            };
-
-    
-            // Show State Template Version option.
-            $('select[id$="ca_site_version"]').parent().parent().removeClass('d-none');
-        }
-
-        // Change Menu Options
-        for (const [i, ele] of Object.entries(menus)) {
-            var o = document.createElement( 'OPTION' );
-    
-            o.value = i;
-            o.text = ele;
-    
-            if( i === current_menu ){
-                o.selected = true;
-            }
-    
-            menu_picker.append( o );
-        }
-
-	} );
-
-});
 /* CAWeb Icon Menu Javascript */
 jQuery(document).ready(function($) {
 	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
@@ -630,7 +576,6 @@ jQuery(document).ready(function($) {
 // Toggle CSS Colorscheme Options
 jQuery( document ).ready( function($) {
 	$('select[id$="ca_site_version"]').on("change", function(){
-		correct_colorscheme_visibility($(this).val());
 		correct_social_media_links($(this).val());
 		correct_utility_header_options($(this).val());
 		correct_sticky_nav_option($(this).val());
@@ -640,31 +585,6 @@ jQuery( document ).ready( function($) {
 	} );
 });
 
-// Toggle CSS Colorscheme Options
-function correct_colorscheme_visibility(version){
-	var color_scheme_picker = document.getElementById('ca_site_color_scheme');
-	var current_color = color_scheme_picker.value;
-	var new_colors = caweb_admin_args.caweb_colorschemes[version];
-
-	for(i = color_scheme_picker.length; i >= 0; i--) {
-		color_scheme_picker.remove(i);
-	}
-
-
-	for (const [i, ele] of Object.entries(new_colors)) {
-		var o = document.createElement( 'OPTION' );
-
-		o.value = i;
-		o.text = ele.displayname;
-
-		if( i === current_color ){
-			o.selected = true;
-		}
-
-		color_scheme_picker.append( o );
-	}
-
-}
 
 // Toggle Social Media Links
 function correct_social_media_links(version){
@@ -779,7 +699,7 @@ jQuery(document).ready(function($) {
   }
 
   // Remove Uploaded CSS/JS
-  $('.remove-css, .remove-js').click(function(e){
+  $('.remove-css, .remove-js').on( 'click', function(e){
     e.preventDefault();
     var r = confirm("Are you sure you want to remove " + this.title + "? This can not be undone.");
   
@@ -790,7 +710,7 @@ jQuery(document).ready(function($) {
   });
 
   // Add New CSS
-$('#add-css, #add-js').click(function(e){
+$('#add-css, #add-js').on( 'click', function(e){
 	e.preventDefault();
 	var ext =  $(this).attr('id').replace('add-', '');
 	var ulID = '#uploaded-' + ext;
@@ -931,7 +851,7 @@ jQuery(document).ready(function($) {
      });
   });
 
-  $('.item-edit').click(menu_selection);
+  $('.item-edit').on( 'click', menu_selection);
   
   function menu_selection(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
@@ -1028,7 +948,7 @@ jQuery(document).ready(function($) {
   $('#caweb-options-form input').on('input', function(){  changeMade = true;  });
   $('#caweb-options-form input[type="button"],#caweb-options-form button:not(.doc-sitemap)').on('click', function(){  changeMade = true;  });
 
-  $('#caweb-options-form').submit(function(e){ 
+  $('#caweb-options-form').on( 'submit', function(e){ 
 	  e.preventDefault();
 		var upload_files = $('input[name="caweb_external_css[]"], input[name="caweb_external_js[]"]');	
 		var empty_file = false;
@@ -1061,7 +981,7 @@ jQuery(document).ready(function($) {
   });
 
   // Reset Fav Icon
-  $('#resetFavIcon').click(function() {
+  $('#resetFavIcon').on( 'click', function() {
     var ico = caweb_admin_args.defaultFavIcon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
 
@@ -1074,7 +994,7 @@ jQuery(document).ready(function($) {
 
   
   // Reset Organization Logo-Brand
-  $('#resetOrgLogo').click(function() {
+  $('#resetOrgLogo').on( 'click', function() {
 
     $('input[type="text"][name="header_ca_branding"]').val('');
     $('input[type="hidden"][name="header_ca_branding"]').val('');
@@ -1125,7 +1045,7 @@ jQuery(document).ready(function($) {
     }
   });
   // If Google Translate is set to Custom, show extra options
-  $('input[name^="ca_google_trans_enabled"]').click(function(){
+  $('input[name^="ca_google_trans_enabled"]').on( 'click', function(){
     if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){
       $('#ca_google_trans_enabled_custom_extras').collapse('hide');
     }else{
@@ -1134,7 +1054,7 @@ jQuery(document).ready(function($) {
   });
 
   // Generate Document Sitemap
-  $('button.doc-sitemap').click(function(e){
+  $('button.doc-sitemap').on( 'click', function(e){
     e.preventDefault();
     var data = {
       'action': 'create_doc_sitemap',

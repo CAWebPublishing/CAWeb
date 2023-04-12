@@ -57,7 +57,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 								target="<?php print esc_attr( $caweb_item->target ); ?>" 
 								<?php endif; ?>
 							>
-								<span class="link-title"><?php print esc_attr( $caweb_item->title ); ?></span>
+								<span class="link-title"><?php print esc_html( $caweb_item->title ); ?></span>
 							</a>
 						</li>
 					<?php

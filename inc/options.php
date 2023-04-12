@@ -15,6 +15,7 @@ add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
+add_action( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme' );
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
@@ -466,14 +467,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				break;
 			case 'caweb_live_drafts':
 			case 'caweb_debug_mode':
-			case 'caweb_enable_design_system':
-				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
-
-				// if current user can't modify this setting, set to current saved value.
-				if ( ! current_user_can( $cap ) ) {
-					$val = get_option( $opt, false );
-				}
-				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
@@ -538,7 +531,6 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_general_options = array(
 		'ca_fav_ico',
-		'caweb_enable_design_system',
 		'ca_site_version',
 		'ca_default_navigation_menu',
 		'ca_menu_selector_enabled',
@@ -753,4 +745,21 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
+}
+
+
+/**
+ * Ensures the CAWeb Theme colorscheme is supported.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/option_option/
+ * @param  mixed $val Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * @return mixed
+ */
+function caweb_ca_site_color_scheme( $val ) {
+	foreach ( caweb_template_colors() as $color => $data ) {
+		if ( str_replace( ' ', '', $color ) === $val ) {
+			return $val;
+		}
+	}
+	return 'oceanside';
 }

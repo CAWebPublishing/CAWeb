@@ -50,7 +50,7 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 								<?php if ( ! empty( $caweb_item->target ) ) : ?>
 								target="<?php print esc_attr( $caweb_item->target ); ?>" 
 								<?php endif; ?>
-							><?php print esc_attr( $caweb_item->title ); ?></a>
+							><?php print esc_html( $caweb_item->title ); ?></a>
 						</li>
 					<?php
 				}

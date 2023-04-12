@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
   }
 
   // Remove Uploaded CSS/JS
-  $('.remove-css, .remove-js').click(function(e){
+  $('.remove-css, .remove-js').on( 'click', function(e){
     e.preventDefault();
     var r = confirm("Are you sure you want to remove " + this.title + "? This can not be undone.");
   
@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
   });
 
   // Add New CSS
-$('#add-css, #add-js').click(function(e){
+$('#add-css, #add-js').on( 'click', function(e){
 	e.preventDefault();
 	var ext =  $(this).attr('id').replace('add-', '');
 	var ulID = '#uploaded-' + ext;

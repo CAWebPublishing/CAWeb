@@ -18,7 +18,6 @@ add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 add_filter( 'allowed_redirect_hosts', 'caweb_allowed_redirect_hosts' );
 add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
 add_filter( 'wp_kses_allowed_html', 'caweb_allowed_html', 10, 2 );
-add_filter( 'caweb_ds_suffix', 'caweb_ds_suffix_check', 10 );
 
 add_action( 'template_redirect', 'caweb_redirect_if_author_parameter' );
 
@@ -357,18 +356,4 @@ function caweb_redirect_if_author_parameter() {
 		wp_safe_redirect( home_url(), 301 );
 		exit;
 	}
-}
-
-/**
- * Adds Design System suffix if required.
- *
- * @param  string $text String to append -ds suffix to.
- * @return string
- */
-function caweb_ds_suffix_check( $text ) {
-	if ( caweb_design_system_enabled() ) {
-		$text .= '-ds';
-	}
-
-	return $text;
 }

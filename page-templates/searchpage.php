@@ -26,7 +26,7 @@ get_header();
 <!--Search result section-->
 <div class="section section-default search-container active px-0">
 	<?php
-		do_action('caweb_search_form');
+		do_action( 'caweb_search_form' );
 	?>
 </div>
 <div class="section">
@@ -35,7 +35,6 @@ get_header();
 		<gcse:searchresults-only></gcse:searchresults-only>
 	</div>
 </div>
-	
 <?php
 
 /**

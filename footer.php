@@ -15,15 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 $caweb_sidebar_allowed      = is_single() || is_date() || is_archive() || is_author() || is_category() || is_tag();
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
-/**
- * Detect plugin. For use on Front End only.
- *
- *  @link https://developer.wordpress.org/reference/functions/is_plugin_active/
- */
-require_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-$caweb_plugin_active = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' );
-
 
 ?>
 			</main> <!-- .main-primary -->
@@ -44,34 +35,8 @@ $caweb_plugin_active = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_p
 				</div> <!-- .section -->
 			<?php endif; ?>
 			</div> <!-- #main-content -->
-			<?php wp_footer(); ?>
 		</div> <!-- #et-main-area -->
 	</div> <!-- #page-container -->
-
-	<!-- Footer -->
-	<footer id="footer" class="global-footer hidden-print">
-		<?php
-			wp_nav_menu(
-				array(
-					'theme_location'         => 'footer-menu',
-					'caweb_nav_type'         => 'footer',
-					'caweb_template_version' => caweb_template_version(),
-				)
-			);
-			?>
-		<!-- Copyright Statement -->
-		<div class="copyright">
-			<div class="container">
-				<div class="d-flex">
-					<p class="mr-auto me-auto">Copyright <span aria-hidden="true">&copy;</span> <script>document.write(new Date().getFullYear())</script> State of California</p>
-					<?php if ( $caweb_plugin_active ) : ?>
-						<span>Powered by: CAWeb Publishing Service</span>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-	</footer>
-
 	<?php
 
 	if ( is_tag() || is_archive() || is_category() || is_author() ) :
@@ -103,6 +68,8 @@ $caweb_plugin_active = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_p
 	if ( is_active_sidebar( 'caweb-site-wide-widget' ) ) {
 		dynamic_sidebar( 'caweb-site-wide-widget' );
 	}
+
+	wp_footer();
 	?>
 	</body>
 </html>

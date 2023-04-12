@@ -6,8 +6,8 @@ jQuery(document).ready(function($) {
 		$( "#caweb-alert-banners" ).disableSelection()
 	}
 
-	$('.remove-alert').click(function(e){ removeAlertFunc(this);});
-	$('#add-alert').click( function(e){ e.preventDefault(); addAlert();});
+	$('.remove-alert').on( 'click', function(e){ removeAlertFunc(this);});
+	$('#add-alert').on( 'click', function(e){ e.preventDefault(); addAlert();});
 
 	var removeAlertFunc = function (s){
 		var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
@@ -269,7 +269,11 @@ jQuery(document).ready(function($) {
 		$(bannerColorInput).addClass('form-control-sm');
 
 		var color_scheme_picker = $('#ca_site_color_scheme')[0];
-		var color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+		var current_color = color_scheme_picker.options[color_scheme_picker.selectedIndex].value;
+
+		var color = Object.keys(caweb_admin_args.caweb_colors).find( function(colors){
+			return colors.replace(' ', '') === current_color;
+		});
 
 		$(bannerColorInput).val(caweb_admin_args.caweb_colors[color]['highlight']);
 

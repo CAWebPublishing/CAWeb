@@ -23,23 +23,23 @@ if ( have_posts() ) :
 			<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 				<a class="cat-link no-underline" href="<?php the_permalink(); ?>">
 					<?php
-						if ( has_post_thumbnail() ){
-							$caweb_thumb_id  = get_post_thumbnail_id( get_the_ID() );
-							$caweb_thumb_alt = get_post_meta( $caweb_thumb_id, 'wp_attachment_image_alt', true );
-							the_post_thumbnail(
-								'medium',
-								array(
-									'class' => 'w-100 h-100',
-								)
-							);
-						}
+					if ( has_post_thumbnail() ) {
+						$caweb_thumb_id  = get_post_thumbnail_id( get_the_ID() );
+						$caweb_thumb_alt = get_post_meta( $caweb_thumb_id, 'wp_attachment_image_alt', true );
+						the_post_thumbnail(
+							'medium',
+							array(
+								'class' => 'w-100 h-100',
+							)
+						);
+					}
 					?>
 					<span class="sr-only">Read more about <?php the_title(); ?></span>
 				</a>
 				<?php
-					if ( function_exists( 'et_divi_post_format_content' ) ) {
-						et_divi_post_format_content();
-					}
+				if ( function_exists( 'et_divi_post_format_content' ) ) {
+					et_divi_post_format_content();
+				}
 				?>
 				<div class="cat-info">
 					<a class="title" href="<?php the_permalink(); ?>">

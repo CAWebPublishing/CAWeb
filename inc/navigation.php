@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_filter( 'wp_nav_menu', 'caweb_nav_menu', 10, 2 );
-add_filter( 'wp_nav_menu_args', 'caweb_nav_menu_args' );
 add_filter( 'widget_nav_menu_args', 'caweb_widget_nav_menu_args', 10, 4 );
 
 add_action( 'wp_nav_menu_item_custom_fields', 'caweb_nav_menu_item_custom_fields', 9, 4 );
@@ -43,33 +42,6 @@ function caweb_nav_menu( $nav_menu, $args ) {
 			get_template_part( "parts/$template_version/nav", $args->caweb_nav_type, $args );
 	}
 
-}
-
-/**
- * Filters the arguments used to display a navigation menu.
- *
- * @link https://developer.wordpress.org/reference/hooks/wp_nav_menu_args/
- * @param  array $args Array of wp_nav_menu() arguments.
- *               $args['fallback_cb'] = 'caweb_menu_fail'.
- * @return array
- */
-function caweb_nav_menu_args( $args ) {
-	$args['fallback_cb'] = 'caweb_menu_fail';
-
-	return $args;
-}
-
-/**
- * If the menu doesn't exists, this callback function will fire. Default is 'wp_page_menu'.
- *
- * @param  array $args Array of nav menu arguments.
- *
- * @return void
- */
-function caweb_menu_fail( $args ) {
-	if ( isset( $args['theme_location'] ) && in_array( $args['theme_location'], array( 'header-menu', 'footer-menu' ), true ) ) {
-		get_template_part( 'parts/nav', 'footer-menu' === $args['theme_location'] ? 'footer' : null );
-	}
 }
 
 /**

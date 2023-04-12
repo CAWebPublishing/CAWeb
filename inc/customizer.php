@@ -55,16 +55,11 @@ function caweb_customize_controls_enqueue_scripts() {
 
 	wp_register_script( 'caweb-customizer-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), CAWEB_VERSION, true );
 
-	$schemes = array();
-	foreach ( caweb_template_versions() as $v => $label ) {
-		$schemes[ "$v" ] = caweb_color_schemes( $v );
-	}
-
 	wp_localize_script(
 		'caweb-customizer-controls-script',
 		'caweb_admin_args',
 		array(
-			'caweb_colorschemes' => $schemes,
+			'caweb_colors' => caweb_template_colors(),
 		)
 	);
 
@@ -248,7 +243,7 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 			array(
 				'label'      => 'Color Scheme',
 				'type'       => 'select',
-				'choices'    => caweb_color_schemes( $site_version, 'displayname' ),
+				'choices'    => caweb_template_colors(),
 				'section'    => 'caweb_settings',
 			)
 		)

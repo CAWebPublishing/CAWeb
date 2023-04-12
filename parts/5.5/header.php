@@ -201,15 +201,30 @@ foreach ( $args as $var => $val ) {
 	<div class="navigation-search">
 		<!-- Include Navigation -->
 		<?php
-		wp_nav_menu(
-			array(
-				'theme_location'                     => 'header-menu',
-				'caweb_template_version'             => $caweb_template_version,
-				'caweb_nav_type'                     => $caweb_menu_style,
-				'caweb_home_link'                    => $caweb_nav_home_link,
-				'caweb_google_search_id'             => $caweb_google_search_id,
-			)
-		);
+		if ( has_nav_menu( 'header-menu' ) ) {
+			wp_nav_menu(
+				array(
+					'theme_location'                     => 'header-menu',
+					'caweb_template_version'             => $caweb_template_version,
+					'caweb_nav_type'                     => $caweb_menu_style,
+					'caweb_home_link'                    => $caweb_nav_home_link,
+					'caweb_google_search_id'             => $caweb_google_search_id,
+				)
+			);
+		} else {
+			?>
+				<nav id="navigation" class="main-navigation hidden-print nav">
+					<ul id="nav_list" class="top-level-nav">
+						<li class="nav-item">
+							<a href="#" class="first-level-link">
+								<span class="ca-gov-icon-warning-triangle" aria-hidden="true"></span>
+								<strong>There is no Navigation Menu set</strong>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			<?php
+		}
 		?>
 		<div id="head-search" class="search-container hidden-print<?php print esc_attr( $caweb_search_class ); ?>" role="region" aria-label="Search Expanded">
 			<?php

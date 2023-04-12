@@ -81,7 +81,7 @@ jQuery(document).ready(function($) {
      });
   });
 
-  $('.item-edit').click(menu_selection);
+  $('.item-edit').on( 'click', menu_selection);
   
   function menu_selection(){
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);

@@ -16,7 +16,8 @@
     },
     "config": {
         "allow-plugins": {
-            "phpdocumentor/shim": true
+            "phpdocumentor/shim": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

@@ -44,14 +44,14 @@ while ( have_posts() ) :
 
 			the_content();
 
-			if ( ! $caweb_is_page_builder_used ) {
-				wp_link_pages(
-					array(
-						'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ),
-						'after'  => '</div>',
-					)
-				);
-			}
+		if ( ! $caweb_is_page_builder_used ) {
+			wp_link_pages(
+				array(
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ),
+					'after'  => '</div>',
+				)
+			);
+		}
 		?>
 		</div>
 
@@ -65,7 +65,7 @@ while ( have_posts() ) :
 
 	</article>
 
-<?php
+	<?php
 endwhile;
 
 /**

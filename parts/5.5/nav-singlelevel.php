@@ -68,7 +68,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 								<?php endif; ?>
 							>
 								<span class="ca-gov-icon-<?php print esc_attr( $caweb_item_icon ); ?>"></span>
-								<span class="link-title"><?php print esc_attr( $caweb_item->title ); ?></span>
+								<span class="link-title"><?php print esc_html( $caweb_item->title ); ?></span>
 							</a>
 						</li>
 					<?php
