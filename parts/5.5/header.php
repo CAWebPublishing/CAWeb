@@ -54,10 +54,9 @@ foreach ( $args as $var => $val ) {
 							$caweb_mailto      = $caweb_share_email ? sprintf( 'mailto:?subject=%1$s&body=%2$s', $caweb_sub, $caweb_body ) : '';
 
 							if ( get_option( "${caweb_option}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_option ) ) ) :
-								$caweb_share  = substr( $caweb_option, 10 );
-								$caweb_share  = str_replace( '_', '-', $caweb_share );
-								$caweb_class  = "utility-social-$caweb_share ca-gov-icon-$caweb_share";
-								$caweb_title  = get_option( "${caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_share ) );
+								$caweb_icon   = str_replace( '_', '-', substr( $caweb_option, 10 ) );
+								$caweb_class  = "utility-social-$caweb_icon ca-gov-icon-$caweb_icon";
+								$caweb_title  = get_option( "${caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_icon ) );
 								$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_option );
 								$caweb_target = get_option( "${caweb_option}_new_window" ) ? 'target="_blank"' : ''
 								?>

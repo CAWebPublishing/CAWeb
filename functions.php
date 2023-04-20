@@ -273,7 +273,7 @@ function caweb_wp_body_open() {
 		'caweb_template_version'             => $caweb_version,
 		'caweb_fixed_header'                 => get_option( 'ca_sticky_navigation', false ) ? ' fixed' : '',
 		'caweb_utility_home_icon'            => get_option( 'ca_utility_home_icon', true ),
-		'caweb_social_options'               => caweb_get_site_options( 'social' ),
+		'caweb_social_options'               => caweb_get_social_media_links(),
 		'caweb_geo_locator_enabled'          => get_option( 'ca_geo_locator_enabled', false ),
 		'caweb_contact_us_link'              => get_option( 'ca_contact_us_link', '' ),
 		'caweb_google_trans_enabled'         => get_option( 'ca_google_trans_enabled', false ),

@@ -230,6 +230,7 @@ function caweb_display_general_options() {
 				<select id="ca_site_color_scheme" name="ca_site_color_scheme" class="w-50 form-control">
 				<?php
 				foreach ( array_keys( $available_schemes ) as $color ) {
+					$selected = $color === $color_scheme ? ' selected="selected"' : '';
 					?>
 					<option value="<?php print esc_attr( str_replace( ' ', '', $color ) ); ?>"
 					<?php print esc_attr( $selected ); ?>
@@ -632,32 +633,42 @@ function caweb_display_social_media_settings( $is_active = false ) {
 			</div>
 		</div>
 		<?php
-			$social_options = caweb_get_site_options( 'social' );
-			$deprecating    = '5.5' !== caweb_template_version();
-			$exlusions      = $deprecating ? array(
-				'ca_social_snapchat',
-				'ca_social_pinterest',
-				'ca_social_rss',
-				'ca_social_google_plus',
-				'ca_social_flickr',
-			) : array( 'ca_social_github' );
+			$social_options = caweb_get_social_media_links( true );
 
-			foreach ( $social_options as $social => $option ) {
-				$share_email        = 'ca_social_email' === $option ? true : false;
-				$social             = $share_email ? "Share via $social" : $social;
-				$header_checked     = get_option( sprintf( '%1$s_header', $option ) ) ? ' checked' : '';
-				$footer_checked     = get_option( sprintf( '%1$s_footer', $option ) ) ? ' checked' : '';
-				$new_window_checked = get_option( sprintf( '%1$s_new_window', $option ) ) ? ' checked' : '';
-				$hover_text         = get_option( sprintf( '%1$s_hover_text', $option ), "Share via $social" );
-				$hidden             = in_array( $option, $exlusions, true ) ? ' d-none' : '';
-				?>
+			/**
+			 * This is only here so that the Javascript works when toggling between template versions.
+			 *
+			 * @todo remove once version 5.5 is obsolete
+			 */
+			$deprecating = '5.5' !== caweb_template_version();
+
+			$exclusions = apply_filters(
+				'caweb_social_media_links_exclusions',
+				$deprecating ? array(
+					'ca_social_snapchat',
+					'ca_social_pinterest',
+					'ca_social_rss',
+					'ca_social_google_plus',
+					'ca_social_flickr',
+				) : array( 'ca_social_github' )
+			);
+
+		foreach ( $social_options as $social => $option ) {
+			$share_email        = 'ca_social_email' === $option ? true : false;
+			$social             = $share_email ? "Share via $social" : $social;
+			$header_checked     = get_option( sprintf( '%1$s_header', $option ) ) ? ' checked' : '';
+			$footer_checked     = get_option( sprintf( '%1$s_footer', $option ) ) ? ' checked' : '';
+			$new_window_checked = get_option( sprintf( '%1$s_new_window', $option ) ) ? ' checked' : '';
+			$hover_text         = get_option( sprintf( '%1$s_hover_text', $option ), "Share via $social" );
+			$hidden             = in_array( $option, $exclusions, true ) ? ' d-none' : '';
+			?>
 					<div class="form-row<?php print esc_attr( $hidden ); ?>">
 						<a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
 							<h2 class="d-inline"><?php print esc_attr( $social ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 						</a>
 					</div>
 					<div class="form-row collapse pt-2<?php print esc_attr( $hidden ); ?>" id="<?php print esc_attr( $option ); ?>-settings">
-					<?php if ( ! $share_email ) : ?>
+				<?php if ( ! $share_email ) : ?>
 						<!-- Option URL -->
 						<div class="form-group col-md-12">
 							<input type="text" class="form-control w-50" name="<?php print esc_attr( $option ); ?>" aria-label="<?php print esc_attr( $social ); ?>" value="<?php print esc_url( get_option( $option ) ); ?>" />
@@ -676,7 +687,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 							<small class="text-muted d-block">Display social link in the footer.</small>
 							<input type="checkbox" id="<?php print esc_attr( $option ); ?>_footer" name="<?php print esc_attr( $option ); ?>_footer" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $footer_checked ); ?>>
 						</div>
-					<?php if ( ! $share_email ) : ?>
+				<?php if ( ! $share_email ) : ?>
 						<!-- Open in New Tab -->
 						<div class="form-group col-sm-3">
 							<label for="<?php print esc_attr( $option ); ?>_new_window" class="d-block"><strong>Open in New Tab:</strong></label>
@@ -691,9 +702,9 @@ function caweb_display_social_media_settings( $is_active = false ) {
 						</div>
 						<?php endif; ?>
 					</div>
-					<?php
-			}
-			?>
+				<?php
+		}
+		?>
 	</div>
 	<?php
 }

@@ -60,7 +60,7 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 		<?php
 			// social media.
-			$caweb_social_media = caweb_get_site_options( 'social' );
+			$caweb_social_media = caweb_get_social_media_links();
 			$caweb_social_links = '';
 
 			$caweb_opened = false;
@@ -88,8 +88,8 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 				$caweb_social_default_title = "Share via $caweb_share";
 				$caweb_social_title         = get_option( "${caweb_option}_hover_text", $caweb_social_default_title );
-
-				$caweb_social_target = get_option( "${caweb_option}_new_window", true ) ? '_blank' : '_self';
+				$caweb_icon                 = str_replace( '_', '-', substr( $caweb_option, 10 ) );
+				$caweb_social_target        = get_option( "${caweb_option}_new_window", true ) ? '_blank' : '_self';
 				?>
 						<li>
 							<a 
@@ -98,7 +98,7 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 								target="<?php print esc_attr( $caweb_social_target ); ?>"
 							>
 							<?php if ( ! empty( $caweb_option ) ) : ?>
-									<span class="ca-gov-icon-<?php print esc_attr( substr( $caweb_option, 10 ) ); ?>"></span>
+									<span class="ca-gov-icon-<?php print esc_attr( $caweb_icon ); ?>"></span>
 								<?php endif; ?>
 								<span class="sr-only"><?php print esc_attr( $caweb_share ); ?></span>
 							</a>

@@ -512,13 +512,11 @@ function caweb_save_multi_ga_options( $values = array() ) {
 /**
  * Returns and array of just the CA Site Options
  *
- * @param  string  $group CAWeb group of options to retrieve.
- * @param  boolean $special Whether to include CAWeb special options.
- * @param  boolean $with_values Whether to include the options values.
+ * @param  string $group CAWeb group of options to retrieve.
  *
  * @return array
  */
-function caweb_get_site_options( $group = '', $special = false, $with_values = false ) {
+function caweb_get_site_options( $group = '' ) {
 	$caweb_sanitized_options = array(
 		'ca_utility_link_1_name',
 		'ca_utility_link_2_name',
@@ -576,20 +574,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_google_trans_page_new_window',
 	);
 
-	$caweb_social_options = array(
-		'Email'           => 'ca_social_email',
-		'Facebook'        => 'ca_social_facebook',
-		'Flickr'          => 'ca_social_flickr',
-		'Github'          => 'ca_social_github',
-		'Google Plus'     => 'ca_social_google_plus',
-		'Instagram'       => 'ca_social_instagram',
-		'LinkedIn'        => 'ca_social_linkedin',
-		'Pinterest'       => 'ca_social_pinterest',
-		'RSS'             => 'ca_social_rss',
-		'Snapchat'        => 'ca_social_snapchat',
-		'Twitter'         => 'ca_social_twitter',
-		'YouTube'         => 'ca_social_youtube',
-	);
+	$caweb_social_options = caweb_get_social_media_links();
 
 	$caweb_social_extra_options = array();
 
@@ -673,11 +658,56 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			break;
 	}
 
-	if ( $special ) {
-		array_merge( $output, $caweb_special_options );
+	return $output;
+}
+
+/**
+ * Returns an array of available social options.
+ *
+ * @param bool $obsolete Whether or not to return old links.
+ * @return array
+ */
+function caweb_get_social_media_links( $obsolete = false ) {
+	$caweb_social_options = array(
+		'Email'           => 'ca_social_email',
+		'Facebook'        => 'ca_social_facebook',
+		'Flickr'          => 'ca_social_flickr',
+		'Github'          => 'ca_social_github',
+		'Google Plus'     => 'ca_social_google_plus',
+		'Instagram'       => 'ca_social_instagram',
+		'LinkedIn'        => 'ca_social_linkedin',
+		'Pinterest'       => 'ca_social_pinterest',
+		'RSS'             => 'ca_social_rss',
+		'Snapchat'        => 'ca_social_snapchat',
+		'Twitter'         => 'ca_social_twitter',
+		'YouTube'         => 'ca_social_youtube',
+	);
+
+	if ( $obsolete ) {
+		return apply_filters( 'caweb_social_media_links', $caweb_social_options );
 	}
 
-	return $output;
+	/**
+	 * These are being removed
+	 *
+	 * @todo remove once version 5.5 is obsolete
+	 */
+	if ( '5.5' !== caweb_template_version() ) {
+		unset(
+			$caweb_social_options['Google Plus'],
+			$caweb_social_options['RSS'],
+			$caweb_social_options['Flickr'],
+			$caweb_social_options['Pinterest'],
+			$caweb_social_options['Snapchat']
+		);
+	} else {
+		unset(
+			$caweb_social_options['Github'],
+		);
+	}
+
+	return apply_filters( 'caweb_social_media_links', $caweb_social_options );
+
 }
 
 /**

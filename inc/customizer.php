@@ -746,7 +746,7 @@ function caweb_customize_register_social_media_settings( $wp_customize ) {
 		)
 	);
 
-	$social_options = caweb_get_site_options( 'social' );
+	$social_options = caweb_get_social_media_links( true );
 
 	foreach ( $social_options as $social => $option ) {
 		// Social Media Option.
