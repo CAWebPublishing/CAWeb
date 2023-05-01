@@ -151,21 +151,6 @@ function caweb_add_unfiltered_html_capability( $caps, $cap, $user_id ) {
 }
 
 /**
- * Change WPForms capability requirement.
- *
- * @link https://wpforms.com/developers/wpforms_manage_cap/
- * @see https://codex.wordpress.org/Roles_and_Capabilities
- * @param string $cap Capability required for user role to access WPForms.
- *
- * @return string
- */
-function caweb_wpforms_custom_capability( $cap ) {
-
-	// unfiltered_html by default means Editors and up.
-	return is_multisite() ? 'edit_posts' : 'unfiltered_html';
-}
-
-/**
  * Allows filtering the classes for the main element for the /events/ page.
  *
  * @since 5.8.0
@@ -178,7 +163,6 @@ function caweb_default_events_template_classes( $classes ) {
 	return $classes;
 }
 
-
 /**
  * CAWeb Disable XMLRPC
  *
@@ -187,7 +171,6 @@ function caweb_default_events_template_classes( $classes ) {
 function caweb_xmlrpc_enabled() {
 	return false;
 }
-
 
 /**
  * Override WPVIP hard coding this option.
