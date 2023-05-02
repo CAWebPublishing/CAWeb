@@ -29,8 +29,6 @@ if ( defined( 'PHP_INT_MAX' ) ) {
 /**
  * Plugin Filters
  */
-// WPForms.
-add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
 // The Events Calendar.
 add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_template_classes' );
 
