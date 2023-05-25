@@ -1,0 +1,40 @@
+/*
+  1. Add cursor utility classes
+  2. Add rotate utility classes
+  3. Adds super and super to align utility
+*/
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      class: cursor,
+      responsive: true,
+      values: pointer,
+    ),
+    "rotate": (
+      property: transform,
+      class: rotate,
+      responsive: true,
+      values: (
+        90: rotate(90deg),
+        180: rotate(180deg),
+        270: rotate(270deg)
+      )
+    ),
+    "page-title": (
+      responsive: true,
+      property: width,
+      values: (
+        null: 100%
+      )
+    ),
+    "align": map-merge(
+      map-get($utilities, 'align'),
+      (
+        values: baseline top middle bottom text-bottom text-top super sub
+      )
+    )
+  )
+);

@@ -1,0 +1,9 @@
+require('./alert-banners');
+require('./contact-us-link');
+require('./frontpage-search');
+require('./google-translate');
+require('./header-ca-branding');
+require('./home-nav-link');
+require('./sticky-navigation');
+require('./utility-header-custom-links');
+require('./utility-header-home-icon');

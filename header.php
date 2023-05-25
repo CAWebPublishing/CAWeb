@@ -18,7 +18,7 @@ global $is_IE, $is_edge;
 $caweb_google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
 $caweb_google_meta_id        = get_option( 'ca_google_meta_id', '' );
 $caweb_x_ua_compatibility    = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
-$caweb_apple_icon            = CAWEB_URI . '/images/system/apple-touch-icon';
+$caweb_apple_icon            = CAWEB_URI . '/src/images/system/apple-touch-icon';
 $caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
@@ -91,7 +91,4 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 <div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_page_container_class', 'page-container' ) ); ?>">
 	<div id="et-main-area">
 		<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_main_content_class', 'main-content' ) ); ?>" tabindex="-1">
-			<?php if ( ! $caweb_is_page_builder_used ) : ?>
-			<div class="section">
-			<?php endif; ?>
 			<main class="main-primary">

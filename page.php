@@ -28,7 +28,7 @@ while ( have_posts() ) :
 
 		<?php
 		if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-			print esc_html( the_title( sprintf( '<!-- Page Title--><h1 class="page-title%1$s">', $caweb_padding ), '</h1>' ) );
+			print esc_html( the_title( '<!-- Page Title--><h1 class="page-title">', '</h1>' ) );
 		}
 
 		?>

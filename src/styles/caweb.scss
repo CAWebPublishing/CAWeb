@@ -1,0 +1,18 @@
+@import './custom/variables';
+
+@import './custom/';
+@import 'divi';
+
+
+body[class*="6.0"] {
+	@import '../version-6.0/variables';
+
+    @import './custom/';
+    @import 'divi';
+
+}
+
+@import 'wp';
+@import 'a11y';
+
+@import 'font-only';

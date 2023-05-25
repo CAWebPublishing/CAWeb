@@ -241,7 +241,7 @@ class CAWeb_Module_Post_Handler extends CAWEeb_Component {
 		var reg = '' !== event_registration_type || '' !== event_cost ? <p>{event_registration_type}{event_cost}</p> : '';
 
 		// have to find a way to call WP Functions
-		//$this->caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left pr-3'))
+		//$this->caweb_get_the_post_thumbnail(null, 'thumbnail', array('class'=>'img-left pr-3 pe-3'))
 		return(
 			<Fragment>
 				{}

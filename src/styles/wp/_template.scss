@@ -1,0 +1,23 @@
+body {
+
+    &.home,
+    &.single,
+    &.search,
+    &.archive {
+        article {
+            display: inline-block;
+            width: 100%;
+            padding-bottom: 0 !important;
+            margin-bottom: 30px;
+
+            &.has-post-thumbnail > a.thumbnail-link {
+                width: 200px;
+                height: 150px;
+                padding-right: 20px;
+                padding-bottom:15px;
+                float:left;
+            }
+        }
+    }
+
+}

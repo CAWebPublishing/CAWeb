@@ -33,7 +33,7 @@ function caweb_branding_admin_head() {
 		}
 	</style>
 	<?php endif; ?>
-		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/images/system/caweb_logo.ico' ); ?>">
+		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/src/images/system/caweb_logo.ico' ); ?>">
 	<?php
 }
 

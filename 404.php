@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 ?>
-<article id="post-0" <?php post_class( 'et_pb_post not_found' ); ?>>
+<article id="post-0" <?php post_class( 'not_found' ); ?>>
 	<div class="entry-content">
 		<!-- Page Title-->
 		<h1>Page Not Found</h1>

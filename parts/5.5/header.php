@@ -33,7 +33,7 @@ foreach ( $args as $var => $val ) {
 								<span class="sr-only">CA.gov</span>
 								<img 
 									style="height: 31px;" 
-									src="<?php print esc_url( CAWEB_URI ); ?>/images/system/logo.svg" 
+									src="<?php print esc_url( CAWEB_URI ); ?>/src/images/system/logo.svg" 
 									class="pos-rel" 
 									alt="CA.gov website" 
 									aria-hidden="true" />

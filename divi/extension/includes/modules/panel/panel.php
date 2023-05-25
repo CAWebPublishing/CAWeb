@@ -254,7 +254,7 @@ class CAWeb_Module_Panel extends ET_Builder_CAWeb_Module {
 			$heading_size = $this->props['heading_size'];
 
 			$display_options = '';
-			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1', 'vertical-align:sub;' ) : '';
+			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1 pe-3', 'vertical-align:sub;' ) : '';
 
 			if ( 'on' === $show_button && ! empty( $button_link ) ) {
 				$button_text     = empty( $button_text ) ? 'Read More' : $button_text;

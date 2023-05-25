@@ -22,18 +22,14 @@ $caweb_is_page_builder_used = caweb_is_divi_used();
 			<?php
 			if ( ! $caweb_is_page_builder_used && is_active_sidebar( 'sidebar-1' ) && $caweb_sidebar_allowed ) :
 				?>
-			<aside id="non_divi_sidebar" class="col-lg-3 pull-left">
+				<aside id="caweb-sidebar">
 				<?php
 				print esc_html( get_sidebar( 'sidebar-1' ) );
 				?>
-			</aside>
-				<?php
+				</aside>
+			<?php
 				endif;
-
-			if ( ! $caweb_is_page_builder_used ) :
-				?>
-				</div> <!-- .section -->
-			<?php endif; ?>
+			?>
 			</div> <!-- #main-content -->
 		</div> <!-- #et-main-area -->
 	</div> <!-- #page-container -->

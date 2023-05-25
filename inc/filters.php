@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
 add_filter( 'post_class', 'caweb_post_class', 15 );
 add_filter( 'theme_page_templates', 'caweb_theme_page_templates', 15 );
-add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
 add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 add_filter( 'allowed_redirect_hosts', 'caweb_allowed_redirect_hosts' );
 add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
@@ -62,9 +61,9 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$sidebar_enabled = ! is_page();
 
 		$whitelist = array(
-			( caweb_is_divi_used() ? 'divi_builder' : 'non_divi_builder' ),
-			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
-			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
+			( caweb_is_divi_used() ? 'divi-built' : '' ),
+			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title-displayed' : '' ),
+			( ! caweb_is_divi_used() && is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar-displayed' : '' ),
 		);
 	}
 	$whitelist[] = sprintf( '%1$s', $template_version );
@@ -111,26 +110,6 @@ function caweb_theme_page_templates( $templates ) {
 	return $templates;
 }
 
-/**
- * CAWeb Script Loader Tags
- * Filters the HTML script tag of an enqueued script.
- *
- * @param  string $tag The <script> tag for the enqueued script.
- * @param  string $handle The script's registered handle.
- * @param  string $src The script's source URL.
- *
- * @return string
- */
-function caweb_script_loader_tag( $tag, $handle, $src ) {
-	/* Defer some scripts */
-	$js_scripts = array( 'cagov-modernizr-script', 'cagov-frontend-script', 'thickbox' );
-	/* deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag) */
-	if ( in_array( $handle, $js_scripts, true ) ) {
-		$tag = str_replace( 'src', 'defer src', $tag );
-	}
-
-	return $tag;
-}
 
 /**
  * Enable unfiltered_html capability for Administrators.

@@ -44,15 +44,15 @@ function caweb_display_options_page() {
 			<input type="submit" name="caweb_options_submit" class="button button-primary mb-2" value="Save Changes">
 			<div class="row">
 				<ul class="menu-list list-group list-group-horizontal">
-					<li class="list-group-item<?php print 'general' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#general" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'general' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>General Settings</a></li>
-					<li class="list-group-item<?php print 'social-share' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#social-share" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'social-share' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Social Media Links</a></li>
-					<li class="list-group-item<?php print 'custom-css' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'custom-css' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
-					<li class="list-group-item<?php print 'custom-js' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'custom-js' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
-					<li class="list-group-item<?php print 'alert-banners' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'alert-banners' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
-					<li class="list-group-item<?php print 'additional-features' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#additional-features" class="text-decoration-none text-white" data-toggle="collapse" <?php print 'additional-features' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Additional Features</a></li>
+					<li class="list-group-item<?php print 'general' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#general" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'general' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>General Settings</a></li>
+					<li class="list-group-item<?php print 'social-share' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#social-share" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'social-share' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Social Media Links</a></li>
+					<li class="list-group-item<?php print 'custom-css' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-css" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'custom-css' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom CSS</a></li>
+					<li class="list-group-item<?php print 'custom-js' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#custom-js" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'custom-js' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Custom JS</a></li>
+					<li class="list-group-item<?php print 'alert-banners' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#alert-banners" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'alert-banners' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Alert Banners</a></li>
+					<li class="list-group-item<?php print 'additional-features' === $caweb_selected_tab ? ' selected' : ''; ?>"><a href="#additional-features" class="text-decoration-none text-white" data-bs-toggle="collapse" <?php print 'additional-features' === $caweb_selected_tab ? ' aria-expanded="true"' : ''; ?>>Additional Features</a></li>
 				</ul>
 			</div>
-			<div class="row pr-3">
+			<div class="row pe-3">
 				<div class="col-12 bg-white border pt-2" id="caweb-settings">
 					<input type="hidden" id="tab_selected" name="tab_selected" value="<?php print esc_attr( $caweb_selected_tab ); ?>">
 					<input type="hidden" name="caweb_theme_options_nonce" value="<?php print esc_attr( $caweb_nonce ); ?>" />
@@ -82,7 +82,7 @@ function caweb_display_options_page() {
 function caweb_display_general_settings( $is_active = false ) {
 	?>
 	<!-- General Settings -->
-	<div id="general" class="collapse<?php print $is_active ? ' show' : ''; ?>" data-parent="#caweb-settings">
+	<div id="general" class="collapse<?php print $is_active ? ' show' : ''; ?>" data-bs-parent="#caweb-settings">
 		<div id="general-settings">
 		<?php
 			caweb_display_general_options();
@@ -144,11 +144,11 @@ function caweb_display_general_options() {
 	?>
 	<!-- General Section -->
 	<div>
-		<a class="d-inline-block text-decoration-none" aria-label="CAWeb General Settings" data-toggle="collapse" href="#general-setting" role="button" aria-expanded="true" aria-controls="general-settings">
+		<a class="d-inline-block text-decoration-none" aria-label="CAWeb General Settings" data-bs-toggle="collapse" href="#general-setting" role="button" aria-expanded="true" aria-controls="general-settings">
 			<h2 class="mb-0">General <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse show" id="general-setting" data-parent="#general-settings">
+	<div class="collapse show" id="general-setting" data-bs-parent="#general-settings">
 		<!-- State Template Version Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -313,11 +313,11 @@ function caweb_display_utility_header_options() {
 	?>
 	<!-- Utility Header Section -->
 	<div class="<?php print esc_attr( $deprecating ); ?>">
-		<a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
+		<a class="collapsed d-inline-block text-decoration-none" data-bs-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
 			<h2 class="mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse <?php print esc_attr( $deprecating ); ?>" id="utility-header-settings" data-parent="#general-settings">
+	<div class="collapse <?php print esc_attr( $deprecating ); ?>" id="utility-header-settings" data-bs-parent="#general-settings">
 		<!-- Contact Us Page Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -363,7 +363,7 @@ function caweb_display_utility_header_options() {
 			<div class="form-group col">
 				<label for="<?php print esc_attr( $p ); ?>_enable" class="d-block mb-0"><strong>Custom Link <?php print esc_attr( $i ); ?></strong></label>
 				<small class="mb-2 text-muted d-block">Enable a custom link.</small>
-				<a data-toggle="collapse" href="#custom_link_<?php print esc_attr( $i ); ?>" aria-expanded="<?php print ! empty( $enable ) ? 'true' : 'false'; ?>" aria-controls="custom_link_<?php print esc_attr( $i ); ?>" class="shadow-none">
+				<a data-bs-toggle="collapse" href="#custom_link_<?php print esc_attr( $i ); ?>" aria-expanded="<?php print ! empty( $enable ) ? 'true' : 'false'; ?>" aria-controls="custom_link_<?php print esc_attr( $i ); ?>" class="shadow-none">
 					<input type="checkbox" id="<?php print esc_attr( $p ); ?>_enable" name="<?php print esc_attr( $p ); ?>_enable" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $enable ); ?>>
 				</a> 
 				<div id="custom_link_<?php print esc_attr( $i ); ?>" class="collapse<?php print ! empty( $enable ) ? ' show' : ''; ?>">
@@ -409,11 +409,11 @@ function caweb_display_page_header_options() {
 	?>
 	<!-- Page Header Section -->
 	<div>
-		<a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
+		<a class="collapsed d-inline-block text-decoration-none" data-bs-toggle="collapse" href="#page-header-settings" role="button" aria-expanded="false" aria-controls="page-header-settings">
 			<h2 class="mb-0">Page Header <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse" id="page-header-settings" data-parent="#general-settings">
+	<div class="collapse" id="page-header-settings" data-bs-parent="#general-settings">
 		<!-- Organization Logo-Brand Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -493,11 +493,11 @@ function caweb_display_google_options() {
 	?>
 	<!-- Google Section -->
 	<div>
-		<a class="collapsed d-inline-block text-decoration-none" data-toggle="collapse" href="#google-settings" role="button" aria-expanded="false" aria-controls="google-settings">
+		<a class="collapsed d-inline-block text-decoration-none" data-bs-toggle="collapse" href="#google-settings" role="button" aria-expanded="false" aria-controls="google-settings">
 			<h2 class="mb-0">Google <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse" id="google-settings" data-parent="#general-settings">
+	<div class="collapse" id="google-settings" data-bs-parent="#general-settings">
 		<!-- Search Engine ID Row -->
 		<div class="form-row">
 			<div class="form-group col-sm-5">
@@ -624,7 +624,7 @@ function caweb_display_google_options() {
 function caweb_display_social_media_settings( $is_active = false ) {
 	?>
 	<!-- Social Media Links -->
-	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="social-share" data-parent="#caweb-settings">
+	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="social-share" data-bs-parent="#caweb-settings">
 		<div class="form-row">
 			<div class="form-group">
 				<h2 class="d-inline">Social Media Links</h2>
@@ -661,7 +661,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 			$hidden             = in_array( $option, $exclusions, true ) ? ' d-none' : '';
 			?>
 					<div class="form-row<?php print esc_attr( $hidden ); ?>">
-						<a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
+						<a class="collapsed d-block text-decoration-none" data-bs-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
 							<h2 class="d-inline"><?php print esc_attr( $social ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 						</a>
 					</div>
@@ -727,7 +727,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 	$desc = 'css' === $file_type ? 'styles' : 'scripts';
 	?>
 	<!-- Custom <?php print esc_attr( strtoupper( $file_type ) ); ?> Section -->
-	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="custom-<?php print esc_attr( $file_type ); ?>" data-parent="#caweb-settings">
+	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="custom-<?php print esc_attr( $file_type ); ?>" data-bs-parent="#caweb-settings">
 		<!-- Custom Uploaded <?php print esc_attr( strtoupper( $file_type ) ); ?> -->
 		<div class="form-row">
 			<div class="form-group">
@@ -765,7 +765,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 	$alerts = get_option( 'caweb_alerts', array() );
 	?>
 	<!-- Alert Banners -->
-	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="alert-banners" data-parent="#caweb-settings">
+	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="alert-banners" data-bs-parent="#caweb-settings">
 		<div class="form-row">
 			<div class="form-group">
 				<h2 class="d-inline">Create an Alert Banner </h2>
@@ -797,7 +797,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 			<li class="pl-2">
 				<!-- Alert Banner Row -->
 				<div class="form-row">
-					<a class="collapsed d-block text-decoration-none" data-toggle="collapse" href="#alert-banner-<?php print esc_attr( $count ); ?>" aria-expanded="false" aria-controls="alert-banner-<?php print esc_attr( $count ); ?>">
+					<a class="collapsed d-block text-decoration-none" data-bs-toggle="collapse" href="#alert-banner-<?php print esc_attr( $count ); ?>" aria-expanded="false" aria-controls="alert-banner-<?php print esc_attr( $count ); ?>">
 						<h2 class="d-inline"><?php print esc_attr( $default_header ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 					</a>
 					<!-- Alert Options -->
@@ -864,7 +864,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 							<!-- Read More Button -->
 							<div class="form-group pl-0">
 								<label for="alert-read-more-<?php print esc_attr( $count ); ?>" class="d-block mb-0"><strong>Read More Button</strong></label>
-								<a data-toggle="collapse" href="#alert-banner-read-more-<?php print esc_attr( $count ); ?>" class="shadow-none"> 
+								<a data-bs-toggle="collapse" href="#alert-banner-read-more-<?php print esc_attr( $count ); ?>" class="shadow-none"> 
 									<input type="checkbox" id="alert-read-more-<?php print esc_attr( $count ); ?>" name="alert-read-more-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $readmore ); ?> data-toggle="toggle" data-onstyle="success" class="form-control">
 								</a>
 							</div>
@@ -932,7 +932,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
 	?>
-	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-parent="#caweb-settings">
+	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
 	<div class="form-row">
 			<!-- Document Map -->
 			<div class="form-group col-sm-12">

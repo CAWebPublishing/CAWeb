@@ -15,8 +15,6 @@ global $post;
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
-// Post Classes.
-$caweb_padding = get_option( 'ca_default_post_date_display' ) ? ' pb-0' : '';
 
 /**
 * Loads CAWeb <header> tag.
@@ -31,7 +29,7 @@ while ( have_posts() ) :
 
 		<?php
 		if ( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ) {
-			print esc_html( the_title( sprintf( '<!-- Page Title--><h1 class="page-title%1$s">', $caweb_padding ), '</h1>' ) );
+			print esc_html( the_title( '<!-- Page Title--><h1 class="page-title">', '</h1>' ) );
 		}
 
 		if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {

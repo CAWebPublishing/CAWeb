@@ -82,7 +82,7 @@ function caweb_admin_menu() {
 		'manage_options',
 		'caweb_options',
 		'caweb_option_page',
-		sprintf( '%1$s/images/system/caweb_logo.png', CAWEB_URI ),
+		sprintf( '%1$s/src/images/system/caweb_logo.png', CAWEB_URI ),
 		6
 	);
 	add_submenu_page( 'caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page' );
@@ -763,7 +763,7 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
  * @return URI
  */
 function caweb_default_favicon_url() {
-	return site_url( 'wp-content/themes/CAWeb/images/system/favicon.ico' );
+	return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
 }
 
 /**

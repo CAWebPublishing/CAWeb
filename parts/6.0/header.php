@@ -26,14 +26,14 @@ foreach ( $args as $var => $val ) {
 	<!-- Utility Header -->
 	<div class="utility-header hidden-print">
 		<div class="container">
-			<div class="group flex-row">
+			<div class="flex-row">
 				<div class="social-media-links">
 						<div class="header-cagov-logo">
 							<a href="https://www.ca.gov/" title="CA.gov website">
 								<span class="sr-only">CA.gov</span>
 								<img 
 									style="height: 31px;" 
-									src="<?php print esc_url( CAWEB_URI ); ?>/images/system/logo-gold.svg" 
+									src="<?php print esc_url( CAWEB_URI ); ?>/src/images/system/logo-gold.svg" 
 									class="pos-rel" 
 									alt="CA.gov website" 
 									aria-hidden="true" />

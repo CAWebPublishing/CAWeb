@@ -39,7 +39,7 @@ add_action( 'wp_body_open', 'caweb_wp_body_open' );
 add_action( 'wp_footer', 'caweb_wp_footer' );
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
-add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
+add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 999999999 );
 
 /**
  * Plugin API/Action Reference
@@ -327,18 +327,11 @@ function caweb_wp_enqueue_scripts() {
 
 	$version = caweb_template_version();
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
-
-	$core_css_file     = caweb_get_min_file( "/css/cagov-$version-$color.css" );
-	$frontend_css_file = caweb_get_min_file( '/css/caweb.css' );
-
-	$core_js_file     = caweb_get_min_file( "/js/cagov-$version.js", 'js' );
-	$frontend_js_file = caweb_get_min_file( '/js/caweb.js', 'js' );
-
-	// Template Core CSS.
-	wp_enqueue_style( 'cagov-style', $core_css_file, array(), $version );
-
-	// CAWeb Core CSS.
-	wp_enqueue_style( 'caweb-style', $frontend_css_file, array(), CAWEB_VERSION );
+	
+	// Template Core File.
+	$core_color_file     = caweb_get_min_file( "/dist/$color-$version.js" , 'js');
+	$core_template_file     = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+	$caweb_core_file     = caweb_get_min_file( "/dist/caweb-core.js", 'js' );
 
 	/* Google Fonts */
 	wp_enqueue_style( 'caweb-google-font-style', 'https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
@@ -399,13 +392,16 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	// Register Scripts.
-	wp_register_script( 'caweb-script', $frontend_js_file, array( 'jquery' ), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-script', $caweb_core_file, array( 'jquery' ), CAWEB_VERSION, false );
 
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
 	/* Enqueue Scripts */
+	wp_enqueue_script( 'cagov-colorscheme', $core_color_file, array( 'jquery' ), $version );
+
+	wp_enqueue_script( 'cagov-template-core', $core_template_file, array( 'jquery' ), $version, true );
+
 	wp_enqueue_script( 'caweb-script' );
-	wp_enqueue_script( 'cagov-script', $core_js_file, array( 'jquery' ), $version, true );
 
 	$vb_enabled = isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ? true : false;
 
@@ -476,15 +472,14 @@ function caweb_admin_init() {
  */
 function caweb_admin_enqueue_scripts( $hook ) {
 	$pages     = array( 'toplevel_page_caweb_options', 'caweb-options_page_caweb_multi_ga', 'caweb-options_page_caweb_api', 'nav-menus.php' );
-	$admin_css = caweb_get_min_file( '/css/admin.css' );
 
 	$version = caweb_template_version();
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
-	$editor_css = caweb_get_min_file( "/css/cagov-$version-$color.css" );
+	$editor_css = caweb_get_min_file( "/dist/$color-$version.js", 'js' );
+	$caweb_admin_file = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
 
 	if ( in_array( $hook, $pages, true ) ) {
-		$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
 
 		/* Enqueue Scripts */
 		wp_enqueue_script( 'jquery' );
@@ -493,7 +488,19 @@ function caweb_admin_enqueue_scripts( $hook ) {
 
 		wp_enqueue_script( 'custom-header' );
 
-		wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery' ), CAWEB_VERSION, true );
+		/*
+		Bootstrap 4 Toggle
+		https://gitbrent.github.io/bootstrap4-toggle/
+		*/
+		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
+
+		/* Enqueue Styles */
+		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
+
+	} 
+	
+	if ( in_array( $hook, $pages, true ) || in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ) {
+		wp_register_script( 'caweb-admin-scripts', $caweb_admin_file, array( 'jquery', 'thickbox' ), CAWEB_VERSION );
 
 		$caweb_localize_args = array(
 			'template_version'   => $version,
@@ -513,18 +520,6 @@ function caweb_admin_enqueue_scripts( $hook ) {
 		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
-
-		/*
-		Bootstrap 4 Toggle
-		https://gitbrent.github.io/bootstrap4-toggle/
-		*/
-		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
-
-		/* Enqueue Styles */
-		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
-		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
-	} elseif ( in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ) {
-		wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 	}
 
 	/* Load editor styling */

@@ -19,8 +19,8 @@ add_action( 'widgets_init', 'caweb_custom_sidebar' );
  * @return void
  */
 function caweb_add_dashboard_widgets() {
-	wp_add_dashboard_widget( 'caweb_news_dashboard_widget', '<img class="caweb-dashboard-widget" src="' . CAWEB_URI . '/images/system/caweb_logo.png" />CAWeb News', 'caweb_news_dashboard_widget_function' );
-	wp_add_dashboard_widget( 'caweb_recent_updates_dashboard_widget', '<img class="caweb-dashboard-widget" src="' . CAWEB_URI . '/images/system/caweb_logo.png" />Recent CAWeb Help Updates', 'caweb_recent_updates_dashboard_widget_function' );
+	wp_add_dashboard_widget( 'caweb_news_dashboard_widget', '<img class="caweb-dashboard-widget" src="' . CAWEB_URI . '/src/images/system/caweb_logo.png" />CAWeb News', 'caweb_news_dashboard_widget_function' );
+	wp_add_dashboard_widget( 'caweb_recent_updates_dashboard_widget', '<img class="caweb-dashboard-widget" src="' . CAWEB_URI . '/src/images/system/caweb_logo.png" />Recent CAWeb Help Updates', 'caweb_recent_updates_dashboard_widget_function' );
 }
 
 /**
