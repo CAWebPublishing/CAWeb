@@ -7,7 +7,7 @@
     <version>1.0.0</version>
     <transformations>
         <!-- Change Branding Logo -->
-        <transformation writer="FileIo" query="copy" source="images/system/caweb-logo.png" artifact="imgs/branding.png" />
+        <transformation writer="FileIo" query="copy" source="src/images/system/caweb-logo.png" artifact="imgs/branding.png" />
 
         <!-- Override cagov.core.css and colorsheme-<color>.css -->
         <transformation writer="FileIo" query="copy" source="css/caweb-5.5-santa barbara.css" artifact="css/cagov.core.css" />

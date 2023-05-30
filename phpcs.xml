@@ -32,6 +32,12 @@
 	<!-- php.ini Settings -->
     <ini name="memory_limit" value="1024M" />
 
+	<!--
+	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
+	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
+	-->
+	<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
+
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>.</file>
 
@@ -54,7 +60,7 @@
 	<!-- Set the minimum supported WP version. This is used by several sniffs.
 		 The minimum version set here should be in line with the minimum WP version
 		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="6.0"/>
+	<config name="minimum_supported_wp_version" value="6.2"/>
 
 	<!--
 	#############################################################################

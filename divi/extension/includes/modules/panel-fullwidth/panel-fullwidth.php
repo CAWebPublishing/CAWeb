@@ -250,7 +250,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 			$heading_size = $this->props['heading_size'];
 
 			$display_options = '';
-			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1', 'vertical-align:sub;' ) : '';
+			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1 pe-3', 'vertical-align:sub;' ) : '';
 
 			if ( 'on' === $show_button ) {
 				$button_link     = ! empty( $button_link ) ? esc_url( $button_link ) : '';

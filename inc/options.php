@@ -15,6 +15,7 @@ add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
+add_action( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme' );
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
@@ -81,7 +82,7 @@ function caweb_admin_menu() {
 		'manage_options',
 		'caweb_options',
 		'caweb_option_page',
-		sprintf( '%1$s/images/system/caweb_logo.png', CAWEB_URI ),
+		sprintf( '%1$s/src/images/system/caweb_logo.png', CAWEB_URI ),
 		6
 	);
 	add_submenu_page( 'caweb_options', 'CAWeb Options', 'Settings', 'manage_options', 'caweb_options', 'caweb_option_page' );
@@ -466,14 +467,6 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				break;
 			case 'caweb_live_drafts':
 			case 'caweb_debug_mode':
-			case 'caweb_enable_design_system':
-				$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
-
-				// if current user can't modify this setting, set to current saved value.
-				if ( ! current_user_can( $cap ) ) {
-					$val = get_option( $opt, false );
-				}
-				break;
 			default:
 				if ( 'on' === $val ) {
 					$val = true;
@@ -519,13 +512,11 @@ function caweb_save_multi_ga_options( $values = array() ) {
 /**
  * Returns and array of just the CA Site Options
  *
- * @param  string  $group CAWeb group of options to retrieve.
- * @param  boolean $special Whether to include CAWeb special options.
- * @param  boolean $with_values Whether to include the options values.
+ * @param  string $group CAWeb group of options to retrieve.
  *
  * @return array
  */
-function caweb_get_site_options( $group = '', $special = false, $with_values = false ) {
+function caweb_get_site_options( $group = '' ) {
 	$caweb_sanitized_options = array(
 		'ca_utility_link_1_name',
 		'ca_utility_link_2_name',
@@ -538,7 +529,6 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 
 	$caweb_general_options = array(
 		'ca_fav_ico',
-		'caweb_enable_design_system',
 		'ca_site_version',
 		'ca_default_navigation_menu',
 		'ca_menu_selector_enabled',
@@ -584,20 +574,7 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 		'ca_google_trans_page_new_window',
 	);
 
-	$caweb_social_options = array(
-		'Email'           => 'ca_social_email',
-		'Facebook'        => 'ca_social_facebook',
-		'Flickr'          => 'ca_social_flickr',
-		'Github'          => 'ca_social_github',
-		'Google Plus'     => 'ca_social_google_plus',
-		'Instagram'       => 'ca_social_instagram',
-		'LinkedIn'        => 'ca_social_linkedin',
-		'Pinterest'       => 'ca_social_pinterest',
-		'RSS'             => 'ca_social_rss',
-		'Snapchat'        => 'ca_social_snapchat',
-		'Twitter'         => 'ca_social_twitter',
-		'YouTube'         => 'ca_social_youtube',
-	);
+	$caweb_social_options = caweb_get_social_media_links();
 
 	$caweb_social_extra_options = array();
 
@@ -681,11 +658,56 @@ function caweb_get_site_options( $group = '', $special = false, $with_values = f
 			break;
 	}
 
-	if ( $special ) {
-		array_merge( $output, $caweb_special_options );
+	return $output;
+}
+
+/**
+ * Returns an array of available social options.
+ *
+ * @param bool $obsolete Whether or not to return old links.
+ * @return array
+ */
+function caweb_get_social_media_links( $obsolete = false ) {
+	$caweb_social_options = array(
+		'Email'           => 'ca_social_email',
+		'Facebook'        => 'ca_social_facebook',
+		'Flickr'          => 'ca_social_flickr',
+		'Github'          => 'ca_social_github',
+		'Google Plus'     => 'ca_social_google_plus',
+		'Instagram'       => 'ca_social_instagram',
+		'LinkedIn'        => 'ca_social_linkedin',
+		'Pinterest'       => 'ca_social_pinterest',
+		'RSS'             => 'ca_social_rss',
+		'Snapchat'        => 'ca_social_snapchat',
+		'Twitter'         => 'ca_social_twitter',
+		'YouTube'         => 'ca_social_youtube',
+	);
+
+	if ( $obsolete ) {
+		return apply_filters( 'caweb_social_media_links', $caweb_social_options );
 	}
 
-	return $output;
+	/**
+	 * These are being removed
+	 *
+	 * @todo remove once version 5.5 is obsolete
+	 */
+	if ( '5.5' !== caweb_template_version() ) {
+		unset(
+			$caweb_social_options['Google Plus'],
+			$caweb_social_options['RSS'],
+			$caweb_social_options['Flickr'],
+			$caweb_social_options['Pinterest'],
+			$caweb_social_options['Snapchat']
+		);
+	} else {
+		unset(
+			$caweb_social_options['Github'],
+		);
+	}
+
+	return apply_filters( 'caweb_social_media_links', $caweb_social_options );
+
 }
 
 /**
@@ -741,7 +763,7 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
  * @return URI
  */
 function caweb_default_favicon_url() {
-	return site_url( 'wp-content/themes/CAWeb/images/system/favicon.ico' );
+	return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
 }
 
 /**
@@ -753,4 +775,21 @@ function caweb_favicon_name() {
 	$option = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
 
 	return preg_replace( '/(.*\.ico)(.*)/', '$1', substr( $option, strrpos( $option, '/' ) + 1 ) );
+}
+
+
+/**
+ * Ensures the CAWeb Theme colorscheme is supported.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/option_option/
+ * @param  mixed $val Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * @return mixed
+ */
+function caweb_ca_site_color_scheme( $val ) {
+	foreach ( caweb_template_colors() as $color => $data ) {
+		if ( str_replace( ' ', '', $color ) === $val ) {
+			return $val;
+		}
+	}
+	return 'oceanside';
 }

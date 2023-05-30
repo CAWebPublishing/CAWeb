@@ -24,7 +24,7 @@ add_action( 'customize_register', 'caweb_customize_register' );
  * @return void
  */
 function caweb_customize_preview_init() {
-	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/js/theme-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-customizer-script', caweb_get_min_file( '/dist/caweb-customizer.js', 'js' ), array( 'jquery', 'customize-preview' ), CAWEB_VERSION, true );
 
 	wp_localize_script(
 		'caweb-customizer-script',
@@ -48,27 +48,22 @@ function caweb_customize_preview_init() {
  * @return void
  */
 function caweb_customize_controls_enqueue_scripts() {
-	$admin_css = caweb_get_min_file( '/css/admin.css' );
+	$caweb_admin_file = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
+	$caweb_customizer_controls_file = caweb_get_min_file( '/dist/caweb-customizer.js', 'js' );
 
 	wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
-	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
 
-	wp_register_script( 'caweb-customizer-controls-script', caweb_get_min_file( '/js/theme-customizer-controls.js', 'js' ), array(), CAWEB_VERSION, true );
-
-	$schemes = array();
-	foreach ( caweb_template_versions() as $v => $label ) {
-		$schemes[ "$v" ] = caweb_color_schemes( $v );
-	}
+	wp_register_script( 'caweb-customizer-controls-script', $caweb_customizer_controls_file, array(), CAWEB_VERSION, true );
 
 	wp_localize_script(
 		'caweb-customizer-controls-script',
 		'caweb_admin_args',
 		array(
-			'caweb_colorschemes' => $schemes,
+			'caweb_colors' => caweb_template_colors(),
 		)
 	);
 
-	wp_enqueue_script( 'caweb-customizer-bootstrap-scripts', caweb_get_min_file( '/js/admin.js', 'js' ), array( 'jquery' ), CAWEB_VERSION, true );
+	wp_enqueue_script( 'caweb-admin-scripts', $caweb_admin_file, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_enqueue_script( 'caweb-customizer-controls-script' );
 
 	/*
@@ -248,7 +243,7 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 			array(
 				'label'      => 'Color Scheme',
 				'type'       => 'select',
-				'choices'    => caweb_color_schemes( $site_version, 'displayname' ),
+				'choices'    => caweb_template_colors(),
 				'section'    => 'caweb_settings',
 			)
 		)
@@ -751,7 +746,7 @@ function caweb_customize_register_social_media_settings( $wp_customize ) {
 		)
 	);
 
-	$social_options = caweb_get_site_options( 'social' );
+	$social_options = caweb_get_social_media_links( true );
 
 	foreach ( $social_options as $social => $option ) {
 		// Social Media Option.

@@ -894,6 +894,7 @@ function caweb_icons() {
 		'pipe'                      => '&#xea31;',
 		'bullet'                    => '&#xea32;',
 		'dot'                       => '&#xea33;',
+		'github'                    => '&#xea21;',
 	);
 }
 

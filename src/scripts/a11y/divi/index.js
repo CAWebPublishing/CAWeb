@@ -1,0 +1,12 @@
+require('./blog');
+require('./blurb');
+require('./button');
+require('./deep-links');
+require('./fullwidth-header');
+require('./gallery');
+require('./person');
+require('./search');
+require('./slider');
+require('./tab');
+require('./toggle');
+require('./video');

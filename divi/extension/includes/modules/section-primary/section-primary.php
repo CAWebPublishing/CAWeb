@@ -288,7 +288,7 @@ class CAWeb_Module_Section_Primary extends ET_Builder_CAWeb_Module {
 		$class              = '';
 
 		if ( 'off' === $this->props['background_enable_color'] ) {
-			$class .= 'on' === $image_pos ? ' pr-0' : ' pl-0';
+			$class .= 'on' === $image_pos ? ' pr-0 pe-0' : ' pl-0 ps-0';
 		}
 
 		$class .= 'on' === $slide_image_button ? ' animate-fadeInLeft' : '';
