@@ -407,7 +407,7 @@ function caweb_wp_enqueue_scripts() {
 	wp_localize_script( 'caweb-script', 'args', $localize_args );
 
 	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-template-core', $core_js_file, array( 'jquery' ), $version, true );
+	wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery' ), $version, true );
 
 	wp_enqueue_script( 'caweb-script' );
 
