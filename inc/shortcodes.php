@@ -53,10 +53,10 @@ function caweb_icon_menu( $atts ) {
 	$icons     = caweb_symbols( -1, '', '', false );
 	$icon_list = '';
 	foreach ( $icons as $name => $code ) {
-		$icon_list .= sprintf( '<li class="list-group-item ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $name, $selected === $name ? ' active' : '' );
+		$icon_list .= sprintf( '<li class="list-group-item mb-0 ca-gov-icon-%1$s%2$s" title="%1$s"></li>', $name, $selected === $name ? ' active' : '' );
 	}
 
-	return sprintf( '<div class="caweb-icon-menu-group">%1$s<ul class="caweb-icon-menu">%2$s%3$s</ul></div>', $header, $input, $icon_list );
+	return sprintf( '<div class="caweb-icon-menu-group">%1$s<ul class="caweb-icon-menu list-group list-group-horizontal flex-wrap">%2$s%3$s</ul></div>', $header, $input, $icon_list );
 
 }
 

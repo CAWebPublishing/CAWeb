@@ -42,6 +42,9 @@ function caweb_nav_menu( $nav_menu, $args ) {
 			get_template_part( "parts/$template_version/nav", $args->caweb_nav_type, $args );
 	}
 
+	if( ! isset( $args->echo  ) || ! ( (int)$args->echo ) ){
+		return $args;
+	}
 }
 
 /**

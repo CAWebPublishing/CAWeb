@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/Danny-Guzman/CAWeb/"
   },
+  "scripts": {
+    "build": "webpack-cli build"
+  },
   "license": "MIT",
   "devDependencies": {
     "@popperjs/core": "^2.11.7",
@@ -14,6 +17,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.5",
     "css-loader": "^6.7.4",
+    "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.0",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",

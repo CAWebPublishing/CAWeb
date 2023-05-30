@@ -1,9 +1,9 @@
 /**
  * 
- * @see https://getbootstrap.com/docs/5.3/getting-started/webpack/#import-bootstrap
- * @see https://www.toptal.com/react/webpack-react-tutorial-pt-1
+ * @link https://webpack.js.org/configuration/
  */
 const fs = require('fs'); // File System
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let entries = {
   'caweb-core': [
@@ -28,7 +28,7 @@ fs.readdirSync('./src/').filter(file => file.toString().startsWith('version-') )
 
   // add entries for each colorscheme 
   fs.readdirSync(`./src/${version}/colorscheme` ).forEach( (color) => {
-    var scheme = color.substring(0, color.indexOf('.'))
+    var scheme = color.substring(0, color.indexOf('.')).replace(' ', '');
     
     entries[`${scheme}-${ver}`] = [
       `./src/${version}/cagov.core.css`,
@@ -41,13 +41,20 @@ fs.readdirSync('./src/').filter(file => file.toString().startsWith('version-') )
 
 module.exports = {
   mode: 'none',
+  plugins: [new MiniCssExtractPlugin({
+    linkType: "text/css",
+  })],
   entry: entries,
+  output: {
+    clean: true
+  },
   module:{
       rules: [
         { 
           test: /\.[s]?css$/i, 
           use: [
-            'style-loader', // Adds CSS to the DOM by injecting a `<style>` tag
+            MiniCssExtractPlugin.loader,
+            //'style-loader', // Adds CSS to the DOM by injecting a `<style>` tag
             'css-loader', // Interprets `@import` and `url()` like `import/require()` and will resolve them
             {
               // Loader for webpack to process CSS with PostCSS
