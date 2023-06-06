@@ -1,8 +1,8 @@
-require('./google');
-require('./AutoTracker');
-require('./functions');
-
  jQuery(document).ready(function() {
+	require('./google');
+	require('./AutoTracker');
+	require('./functions');
+	
 	// from https://www.w3schools.com/js/js_cookies.asp
 	function getCookie(cname) {
 		let name = cname + "=";
