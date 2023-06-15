@@ -1,15 +1,13 @@
 /* Divi Specific Overrides */
-body.divi-built {
-	@import "builder";
-	@import "base";
+@import "builder";
+@import "base";
 
-	@import "modules/accordion";
-	@import "modules/blurb";
-	@import "modules/button";
-	@import "modules/icon";
-	@import "modules/learn_more";
-	@import "modules/person";
-	@import "modules/tab";
-	@import "modules/text";
-	@import "modules/toggle";
-}
+@import "modules/accordion";
+@import "modules/blurb";
+@import "modules/button";
+@import "modules/icon";
+@import "modules/learn_more";
+@import "modules/person";
+@import "modules/tab";
+@import "modules/text";
+@import "modules/toggle";

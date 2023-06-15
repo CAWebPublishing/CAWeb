@@ -29,7 +29,7 @@ add_action( 'wp_update_nav_menu_item', 'caweb_update_nav_menu_item', 10, 3 );
 function caweb_nav_menu( $nav_menu, $args ) {
 
 	/* Menu Construction */
-	if ( ! empty( $args->menu ) &&
+	if ( ! empty( $args->menu ) && $args->echo && 
 			isset(
 				$args->theme_location,
 				$args->caweb_nav_type,
@@ -40,11 +40,10 @@ function caweb_nav_menu( $nav_menu, $args ) {
 			$template_version = $args->caweb_template_version;
 
 			get_template_part( "parts/$template_version/nav", $args->caweb_nav_type, $args );
+	}else{
+		return $nav_menu;
 	}
 
-	if( ! isset( $args->echo  ) || ! ( (int)$args->echo ) ){
-		return $args;
-	}
 }
 
 /**
