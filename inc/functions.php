@@ -431,6 +431,11 @@ function caweb_is_divi_used($wp_classes = array()) {
 		return false;
 	}
 
+	// Default index.php (search) does not use the Divi Builder.
+	if( in_array('search', $wp_classes, true) ){
+		return false;
+	}
+
 	$tribe_events = get_post_meta( get_the_ID(), '_EventOrigin' );
 	// if The Events Calendar Plugin is using the layout it triggers the builder is enabled.
 	if ( ! empty( $tribe_events ) && in_array( 'event-calendar', $tribe_events, true ) ) {
