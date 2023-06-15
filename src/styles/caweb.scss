@@ -1,15 +1,20 @@
-@import './custom/variables';
 
-@import './custom/';
-@import 'divi';
-
-
-body[class*="6.0"] {
-	@import '../version-6.0/variables';
-
+body {
+    @import './custom/variables';
     @import './custom/';
-    @import 'divi';
 
+    &.divi-built{
+        @import 'divi';
+    }
+
+    &[class*="6.0"]{
+	    @import '../version-6.0/variables';
+            
+        &.divi-built{
+            @import 'divi';
+        }
+
+    }
 }
 
 @import 'wp';
