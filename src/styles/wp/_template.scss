@@ -2,13 +2,12 @@ body {
 
     &.home,
     &.single,
-    &.search,
+    &:not(.divi-built).search,
     &.archive {
         article {
             display: inline-block;
             width: 100%;
             padding-bottom: 0 !important;
-            margin-bottom: 30px;
 
             &.has-post-thumbnail > a.thumbnail-link {
                 width: 200px;

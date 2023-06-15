@@ -18,7 +18,34 @@
 
 @import '../font-only.css';
 
-/* Overrides height applied by WordPress load-styles */
-select.form-control{
-    height: calc(1.5em + .75rem + 2px) !important;
+/* Overrides styles applied by conflict between WordPress and Bootstrap */
+body.nav-menus-php,
+body.toplevel_page_caweb_options {
+    .menu-item-settings {
+        max-width: 382px;
+        label{
+            width: 100%;
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: initial;
+    }
+
+    ol, ul{
+        padding-left: initial;
+    }
+
+    legend{
+        font-size: initial;
+        margin-bottom: initial;
+    }
+
+    .form-check-input{
+        margin: .25em .25em 0 0;
+
+        &:checked{
+            background-color: initial;
+        }
+    }
 }

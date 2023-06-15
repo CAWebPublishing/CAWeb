@@ -26,8 +26,7 @@ jQuery(document).ready(function($) {
 		var row = document.createElement('DIV');
 
 		// Attributes
-		$(li).addClass('pl-2');
-		$(row).addClass('form-row');
+		$(row).addClass('row');
 
 		// Append 
 		$(row).append(addAlertAnchor(alertCount));
@@ -83,7 +82,7 @@ jQuery(document).ready(function($) {
 		$(alertStatus).addClass('form-control');
 
 
-		$(removeAlert).addClass('btn btn-danger remove-alert ml-1');
+		$(removeAlert).addClass('btn btn-danger remove-alert ms-1');
 		$(removeAlert).html('Remove');
 		removeAlert.addEventListener('click', function(e){ removeAlertFunc(this) } )
 		
@@ -101,7 +100,7 @@ jQuery(document).ready(function($) {
 		var alertFields = document.createElement('DIV');
 
 		$(alertFields).attr('id', 'alert-banner-' + c);
-		$(alertFields).addClass('form-row col-sm-12 p-2 collapse show');
+		$(alertFields).addClass('row col-sm-12 p-2 collapse show');
 
 		$(alertFields).append('<!-- Alert Banner Title -->');
 		$(alertFields).append(alertTitleField(c));
@@ -119,7 +118,7 @@ jQuery(document).ready(function($) {
 		var alertTitleSmall = document.createElement('SMALL');
 		var alertTitleInput = document.createElement('INPUT');
 		
-		$(alertTitle).addClass('form-group col-sm-7');
+		$(alertTitle).addClass('col-sm-7');
 		
 		$(alertTitleLabel).attr('for', 'alert-header-' + c);
 		$(alertTitleLabel).addClass('mb-0');
@@ -148,7 +147,7 @@ jQuery(document).ready(function($) {
 		var alertMsgSmall = document.createElement('SMALL');
 		var alertMsgTextarea = document.createElement('TEXTAREA');
 
-		$(alertMsg).addClass('form-group col-sm-12');
+		$(alertMsg).addClass('col-sm-12');
 
 		$(alertMsgLabel).attr('for', 'alert-message-' + c);
 		$(alertMsgLabel).html('<strong>Message</strong>');
@@ -171,7 +170,7 @@ jQuery(document).ready(function($) {
 	function alertSettings( c ){
 		var alertSettingsDiv = document.createElement('DIV');
 		
-		$(alertSettingsDiv).addClass('form-group col-sm-12');
+		$(alertSettingsDiv).addClass('col-sm-12');
 
 
 		$(alertSettingsDiv).append('<!-- Display On -->');
@@ -198,7 +197,7 @@ jQuery(document).ready(function($) {
 		var displayOnAllGroupInput = document.createElement('INPUT');
 		var displayOnAllGroupLabel = document.createElement('LABEL');
 
-		$(displayOnGroup).addClass('form-group col-sm pl-0');
+		$(displayOnGroup).addClass('col-sm');
 		$(displayOnGroup).attr('role', 'radiogroup');
 		$(displayOnGroup).attr('aria-label', 'Alert Display On Options');
 
@@ -208,7 +207,7 @@ jQuery(document).ready(function($) {
 		$(displayOnSmall).addClass('text-muted d-block mb-2');
 		$(displayOnSmall).html('Select whether alert should display on home page or on all pages.');
 
-		$(displayOnHomeGroup).addClass('form-check form-check-inline');
+		$(displayOnHomeGroup).addClass('form-check form-check-inline ps-0');
 
 		$(displayOnHomeGroupInput).attr('id', 'alert-display-home-' + c);
 		$(displayOnHomeGroupInput).attr('name', 'alert-display-' + c);
@@ -221,7 +220,7 @@ jQuery(document).ready(function($) {
 		$(displayOnHomeGroupLabel).attr('for', 'alert-display-home-' + c);
 		$(displayOnHomeGroupLabel).html('Home Page Only');
 
-		$(displayOnAllGroup).addClass('form-check form-check-inline');
+		$(displayOnAllGroup).addClass('form-check form-check-inline ps-0');
 		
 		$(displayOnAllGroupInput).attr('id', 'alert-display-all-' + c);
 		$(displayOnAllGroupInput).attr('name', 'alert-display-' + c);
@@ -254,7 +253,7 @@ jQuery(document).ready(function($) {
 		var bannerColorInput = document.createElement('INPUT');
 
 		
-		$(bannerColorGroup).addClass('form-group col-sm pl-0');
+		$(bannerColorGroup).addClass('col-sm');
 
 		$(bannerColorLabel).attr('for', 'alert-banner-color-' + c);
 		$(bannerColorLabel).addClass('d-block mb-0');
@@ -291,8 +290,6 @@ jQuery(document).ready(function($) {
 		var readMoreAnchor = document.createElement('A');
 		
 		var readMoreInput = document.createElement('INPUT');
-		
-		$(readMoreGroup).addClass('form-group pl-0');
 		
 		$(readMoreLabel).addClass('d-block mb-0');
 		$(readMoreLabel).html('<strong>Read More Button</strong>');
@@ -336,7 +333,7 @@ jQuery(document).ready(function($) {
 		$(readMoreSettings).addClass('collapse show');
 
 		// Read More Text Group
-		$(readMoreTextGroup).addClass('form-group col-sm-6 pl-0');
+		$(readMoreTextGroup).addClass('col-sm-6');
 
 		$(readMoreTextLabel).addClass('d-block mb-0');
 		$(readMoreTextLabel).html('<strong>Read More Button Text</strong>');
@@ -351,7 +348,7 @@ jQuery(document).ready(function($) {
 		$(readMoreTextSmall).html('(Max Characters: 16)');
 
 		// Read More URL Group
-		$(readMoreURLGroup).addClass('form-group col-sm-6 pl-0 d-inline-block');
+		$(readMoreURLGroup).addClass('col-sm-6 d-inline-block me-1');
 
 		$(readMoreURLLabel).addClass('d-block mb-0');
 		$(readMoreURLLabel).html('<strong>Read More Button Url</strong>');
@@ -362,7 +359,7 @@ jQuery(document).ready(function($) {
 		$(readMoreURLInput).addClass('form-control');
 		
 		// Read More Target Group
-		$(readMoreTargetGroup).addClass('form-group col-sm-4 pl-0 d-inline-block align-top');
+		$(readMoreTargetGroup).addClass('col-sm-4 d-inline-block align-top');
 
 		$(readMoreTargetLabel).addClass('d-block mb-0');
 		$(readMoreTargetLabel).html('<strong>Open link in New Tab</strong>')
@@ -370,6 +367,7 @@ jQuery(document).ready(function($) {
 		$(readMoreTargetInput).attr('type', 'checkbox');
 		$(readMoreTargetInput).attr('checked', 'true');
 		$(readMoreTargetInput).attr('data-toggle', 'toggle');
+		$(readMoreTargetInput).attr('data-size', 'sm');
 		$(readMoreTargetInput).attr('name', 'alert-read-more-target-' + c);
 		$(readMoreTargetInput).attr('id', 'alert-read-more-target-' + c);
 		$(readMoreTargetInput).addClass('form-control');
@@ -399,7 +397,7 @@ jQuery(document).ready(function($) {
 	function addIconField( c ){
 		var alertIconGroup = document.createElement('DIV');
 
-		$(alertIconGroup).addClass('form-group col-sm-12 d-inline-block pl-0');
+		$(alertIconGroup).addClass('col-sm-12 d-inline-block');
 
 		var data = {
 			'action': 'caweb_icon_menu',

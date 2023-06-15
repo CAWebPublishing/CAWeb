@@ -61,7 +61,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$sidebar_enabled = ! is_page();
 
 		$whitelist = array(
-			( caweb_is_divi_used() ? 'divi-built' : '' ),
+			( caweb_is_divi_used( $wp_classes ) ? 'divi-built' : '' ),
 			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title-displayed' : '' ),
 			( ! caweb_is_divi_used() && is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar-displayed' : '' ),
 		);

@@ -12107,20 +12107,6 @@ a[data-bs-toggle=collapse].collapsed label > span:after {
   cursor: pointer;
 }
 
-/* Navigation and Customizer Page Icon Menu Styles */
-body.nav-menus-php .caweb-icon-menu-group li,
-body.wp-customizer .caweb-icon-menu-group li {
-  padding: 0.75rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  line-height: 1.4em;
-}
-body.nav-menus-php .caweb-icon-menu-group li.active,
-body.wp-customizer .caweb-icon-menu-group li.active {
-  color: #fff;
-  background-color: #046B99;
-  border-color: #046B99;
-}
-
 /* CAWeb Navigation Page Styles */
 /* Remove Manage with Live Preview */
 .page-title-action {
@@ -12202,7 +12188,45 @@ li[id^=customize-control-caweb_alert_banner_] input[type=checkbox] {
   height: 1rem;
 }
 
-/* Overrides height applied by WordPress load-styles */
-select.form-control {
-  height: calc(1.5em + 0.75rem + 2px) !important;
+/* Overrides styles applied by conflict between WordPress and Bootstrap */
+body.nav-menus-php .menu-item-settings,
+body.toplevel_page_caweb_options .menu-item-settings {
+  max-width: 382px;
+}
+body.nav-menus-php .menu-item-settings label,
+body.toplevel_page_caweb_options .menu-item-settings label {
+  width: 100%;
+}
+body.nav-menus-php h1, body.nav-menus-php .h1, body.nav-menus-php h2, body.nav-menus-php .h2, body.nav-menus-php h3, body.nav-menus-php .h3, body.nav-menus-php h4, body.nav-menus-php .h4, body.nav-menus-php h5, body.nav-menus-php .h5, body.nav-menus-php h6, body.nav-menus-php .h6,
+body.toplevel_page_caweb_options h1,
+body.toplevel_page_caweb_options .h1,
+body.toplevel_page_caweb_options h2,
+body.toplevel_page_caweb_options .h2,
+body.toplevel_page_caweb_options h3,
+body.toplevel_page_caweb_options .h3,
+body.toplevel_page_caweb_options h4,
+body.toplevel_page_caweb_options .h4,
+body.toplevel_page_caweb_options h5,
+body.toplevel_page_caweb_options .h5,
+body.toplevel_page_caweb_options h6,
+body.toplevel_page_caweb_options .h6 {
+  font-size: initial;
+}
+body.nav-menus-php ol, body.nav-menus-php ul,
+body.toplevel_page_caweb_options ol,
+body.toplevel_page_caweb_options ul {
+  padding-left: initial;
+}
+body.nav-menus-php legend,
+body.toplevel_page_caweb_options legend {
+  font-size: initial;
+  margin-bottom: initial;
+}
+body.nav-menus-php .form-check-input,
+body.toplevel_page_caweb_options .form-check-input {
+  margin: 0.25em 0.25em 0 0;
+}
+body.nav-menus-php .form-check-input:checked,
+body.toplevel_page_caweb_options .form-check-input:checked {
+  background-color: initial;
 }

@@ -45,7 +45,7 @@ function caweb_icon_menu( $atts ) {
 	$input        = isset( $atts['name'] ) ? $atts['name'] : '';
 	$header_class = isset( $atts['header_class'] ) ? ( is_array( $atts['header_class'] ) ? implode( ' ', $atts['header_class'] ) : $atts['header_class'] ) : '';
 	$header_class = ! empty( $header_class ) ? " class=\"$header_class\"" : '';
-	$label        = isset( $atts['header'] ) && $atts['header'] ? sprintf( ' <label%1$s%2$s>%3$s</label>', ! empty( $input ) ? " for=\"$input\"" : '', $header_class, $atts['header'] ) : '';
+	$label        = isset( $atts['header'] ) && $atts['header'] ? sprintf( ' <span%1$s>%2$s</span>', $header_class, $atts['header'] ) : '';
 
 	$header = sprintf( '<div class="caweb-icon-menu-header my-2"><span class="dashicons dashicons-image-rotate align-middle mb-1 reset-icon"></span>%1$s</div>', $label );
 	$input  = ! empty( $input ) ? sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" >', $input, $selected ) : '';

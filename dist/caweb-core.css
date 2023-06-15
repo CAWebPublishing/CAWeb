@@ -220,8 +220,6 @@ body.divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .e
 body.divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 15px 0 0px !important;
 }
 @media (min-width: 768px) {
   body.divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
@@ -510,8 +508,6 @@ body[class*="6.0"] body.divi-built #main-content .entry-content > #et-fb-app .et
 body[class*="6.0"] body.divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 15px 0 0px !important;
 }
 @media (min-width: 768px) {
   body[class*="6.0"] body.divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
@@ -673,13 +669,12 @@ body[class*="6.0"] body.divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   padding-bottom: 0;
 }
 
-body.home article, body.single article, body.search article, body.archive article {
+body.home article, body.single article, body:not(.divi-built).search article, body.archive article {
   display: inline-block;
   width: 100%;
   padding-bottom: 0 !important;
-  margin-bottom: 30px;
 }
-body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has-post-thumbnail > a.thumbnail-link, body.search article.has-post-thumbnail > a.thumbnail-link, body.archive article.has-post-thumbnail > a.thumbnail-link {
+body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has-post-thumbnail > a.thumbnail-link, body:not(.divi-built).search article.has-post-thumbnail > a.thumbnail-link, body.archive article.has-post-thumbnail > a.thumbnail-link {
   width: 200px;
   height: 150px;
   padding-right: 20px;

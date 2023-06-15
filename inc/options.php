@@ -305,22 +305,22 @@ function caweb_api_menu_option_setup() {
 	<form id="caweb-api-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_api' ) ); ?>" method="POST">
 		<input type="hidden" name="caweb_theme_api_options_nonce" value="<?php print esc_attr( $caweb_nonce ); ?>" />
 		<h2>GitHub API Key</h2>
-		<div class="form-row">
-			<div class="form-group col-sm-5">
+		<div class="row">
+			<div class="mb-3 col-sm-5">
 				<label for="caweb_private_theme_enabled">Is Private?</label>
 				<input type="checkbox" name="caweb_private_theme_enabled" class="form-control" size="50"<?php print esc_attr( $privated_enabled ); ?>/>
 				<small class="text-muted d-block">Is this theme hosted as a private repo?</small>
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="form-group col-sm-5">
+		<div class="row">
+			<div class="mb-3 col-sm-5">
 				<label for="caweb_username" class="d-block mb-0">Username</label>
 				<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
 				<input type="text" name="caweb_username" class="form-control" size="50" value="<?php print esc_attr( $username ); ?>" placeholder="Default: CA-CODE-Works" />
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="form-group col-sm-5">
+		<div class="row">
+			<div class="mb-3 col-sm-5">
 				<label for="caweb_password" class="d-block mb-0">Token</label>
 				<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
 				<input type="password" class="form-control" name="caweb_password" size="50" value="<?php print esc_attr( $password ); ?>" />
@@ -352,14 +352,14 @@ function caweb_multi_ga_menu_option_setup() {
 	<form id="caweb-multi-ga-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_multi_ga' ) ); ?>" method="POST">
 		<input type="hidden" name="caweb_theme_multisite_ga_option_nonce" value="<?php print esc_attr( $caweb_nonce ); ?>" />
 		<h2>Multisite Google Analytics</h2>
-		<div class="form-row">
-			<div class="form-group col-sm-5">
+		<div class="row">
+			<div class="mb-3 col-sm-5">
 				<label for="caweb_multi_ga" class="d-block mb-0">Analytics ID</label>
 				<input type="text" name="caweb_multi_ga" class="form-control" size="50" value="<?php print esc_attr( $mulit_ga ); ?>" />
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="form-group col-sm-5">
+		<div class="row">
+			<div class="mb-3 col-sm-5">
 				<label for="caweb_multi_ga4" class="d-block mb-0">Analytics 4 ID</label>
 				<input type="text" name="caweb_multi_ga4" class="form-control" size="50" value="<?php print esc_attr( $mulit_ga4 ); ?>" />
 			</div>
