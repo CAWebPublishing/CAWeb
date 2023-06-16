@@ -1,14 +1,17 @@
+@import './custom/variables';
 
 body {
-    @import './custom/variables';
-    @import './custom/';
+    &[class*="5.5"]{
+        @import './custom/';
 
-    &.divi-built{
-        @import 'divi';
+        &.divi-built{
+            @import 'divi';
+        }
     }
 
     &[class*="6.0"]{
 	    @import '../version-6.0/variables';
+        @import './custom/';
             
         &.divi-built{
             @import 'divi';
