@@ -1,7 +1,7 @@
 .page-date {
 	margin: 0 auto;
 	width: 100%;
-	max-width: map-get($break-points, '1280')px;
+	max-width: #{map-get($break-points, 1280)}px;
 }
 
 @each $name, $value in $break-points {
