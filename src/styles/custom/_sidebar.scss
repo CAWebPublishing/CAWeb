@@ -1,16 +1,17 @@
-body.sidebar-displayed {
-    main {
-        width: 75%;
-        display: inline-block;
-    }
-    #caweb-sidebar {
-        padding: 0 28px;
-        width: 25%;
-        float: right;
+main {
+    width: 75%;
+    display: inline-block;
+}
+#caweb-sidebar {
+    padding: 0 28px;
+    width: 25%;
+    float: right;
 
-        #sidebar {
-            float: none;
-            width: 100%;
-        }
+    #sidebar {
+        float: none;
+        width: 100%;
     }
+}
+footer{
+    clear: both;
 }

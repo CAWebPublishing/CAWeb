@@ -11,4 +11,11 @@ jQuery(document).ready(function() {
 			$(element).attr('title', title);
 		});
 	}
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
