@@ -83,19 +83,6 @@ body[class*="5.5"] .page-date {
     max-width: 1280px !important;
   }
 }
-body[class*="5.5"] body.sidebar-displayed main {
-  width: 75%;
-  display: inline-block;
-}
-body[class*="5.5"] body.sidebar-displayed #caweb-sidebar {
-  padding: 0 28px;
-  width: 25%;
-  float: right;
-}
-body[class*="5.5"] body.sidebar-displayed #caweb-sidebar #sidebar {
-  float: none;
-  width: 100%;
-}
 @media print {
   body[class*="5.5"] {
     /* Main Content */
@@ -360,19 +347,6 @@ body[class*="6.0"] .page-date {
     max-width: 1176px !important;
   }
 }
-body[class*="6.0"] body.sidebar-displayed main {
-  width: 75%;
-  display: inline-block;
-}
-body[class*="6.0"] body.sidebar-displayed #caweb-sidebar {
-  padding: 0 28px;
-  width: 25%;
-  float: right;
-}
-body[class*="6.0"] body.sidebar-displayed #caweb-sidebar #sidebar {
-  float: none;
-  width: 100%;
-}
 @media print {
   body[class*="6.0"] {
     /* Main Content */
@@ -565,6 +539,22 @@ body.page-template-searchpage form#Search .close-search {
 }
 body.page-template-searchpage .gsc-cursor-page:focus {
   outline: solid 2px #2ea3f2;
+}
+body.sidebar-displayed main {
+  width: 75%;
+  display: inline-block;
+}
+body.sidebar-displayed #caweb-sidebar {
+  padding: 0 28px;
+  width: 25%;
+  float: right;
+}
+body.sidebar-displayed #caweb-sidebar #sidebar {
+  float: none;
+  width: 100%;
+}
+body.sidebar-displayed footer {
+  clear: both;
 }
 
 /* WordPress Specific Overrides */ /* Hide Activation Links on wp-activate.php */

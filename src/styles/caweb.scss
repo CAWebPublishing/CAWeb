@@ -23,6 +23,11 @@ body {
     &.page-template-searchpage{
         @import 'custom/search';
     }
+
+    // if sidebar is displayed
+    &.sidebar-displayed{
+        @import 'custom/sidebar';
+    }
 }
 
 @import 'wp';

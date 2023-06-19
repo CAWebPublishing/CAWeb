@@ -337,26 +337,6 @@ function _tagLinks(evObj, evCat, evAct, evLbl, evVal, evNonInter, exisAttr)
 /* 3 */
 /***/ (() => {
 
-function rgb2hex(rgb){
-	rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-	return "#" +
-	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
-}
-
-function stripeIframeAttributes(frame){
-	$(frame).removeAttr('frameborder');
-	$(frame).removeAttr('scrolling');
-	$(frame).removeAttr('allowtransparency');
-	$(frame).removeAttr('allowfullscreen');
-}
-
-
-/***/ }),
-/* 4 */
-/***/ (() => {
-
 // Google Analytics
 var _gaq = _gaq || [];
 
@@ -504,10 +484,11 @@ if( args.ca_google_trans_enabled ){
 
 
 /***/ }),
-/* 5 */,
-/* 6 */
+/* 4 */,
+/* 5 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(6);
 __webpack_require__(7);
 __webpack_require__(8);
 __webpack_require__(9);
@@ -519,11 +500,10 @@ __webpack_require__(14);
 __webpack_require__(15);
 __webpack_require__(16);
 __webpack_require__(17);
-__webpack_require__(18);
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -561,7 +541,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -598,7 +578,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -624,7 +604,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -644,7 +624,7 @@ jQuery(document).ready(function() {
  });
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -669,7 +649,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -695,7 +675,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -723,7 +703,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -762,7 +742,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -813,7 +793,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -841,7 +821,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -936,7 +916,7 @@ jQuery(document).ready(function() {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -989,9 +969,10 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(19);
 __webpack_require__(20);
 __webpack_require__(21);
 __webpack_require__(22);
@@ -1001,11 +982,10 @@ __webpack_require__(25);
 __webpack_require__(26);
 __webpack_require__(27);
 __webpack_require__(28);
-__webpack_require__(29);
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1023,10 +1003,17 @@ jQuery(document).ready(function() {
 			});
 		}
 	});
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1050,10 +1037,17 @@ jQuery(document).ready(function() {
 			}, 1000);
 		}
 	});
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1124,10 +1118,24 @@ jQuery(document).ready(function() {
 		}	
 	});
 	
+	function rgb2hex(rgb){
+		rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+		return "#" +
+		 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+	}
+	
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1143,10 +1151,17 @@ jQuery(document).ready(function() {
 			$(element).attr('title', title);
 		});
 	}
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1206,10 +1221,17 @@ jQuery(document).ready(function() {
 		}, 1000);
 
 	});
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1249,7 +1271,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1267,10 +1289,17 @@ jQuery(document).ready(function() {
 			});
 		}	
 	}, 1000);
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1316,7 +1345,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1375,7 +1404,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1480,7 +1509,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1498,7 +1527,7 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (() => {
 
 jQuery(document).ready(function() {
@@ -1521,8 +1550,10 @@ jQuery(document).ready(function() {
 });
 
 /***/ }),
-/* 32 */
-/***/ (() => {
+/* 31 */
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+__webpack_require__(32);
 
 jQuery(document).ready(function() {
 	// Do this after the page has loaded
@@ -1544,7 +1575,20 @@ jQuery(document).ready(function() {
 			}, 1000);
 		}
 	});
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
+
+/***/ }),
+/* 32 */
+/***/ (() => {
+
+
 
 /***/ }),
 /* 33 */
@@ -1613,7 +1657,6 @@ __webpack_require__.r(__webpack_exports__);
 jQuery(document).ready(function() {
 	__webpack_require__(2);
 	__webpack_require__(3);
-	__webpack_require__(4);
 	
 	// from https://www.w3schools.com/js/js_cookies.asp
 	function getCookie(cname) {
@@ -1759,12 +1802,12 @@ jQuery(document).ready(function() {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-__webpack_require__(6);
-__webpack_require__(19);
+__webpack_require__(5);
+__webpack_require__(18);
 
+__webpack_require__(29);
 __webpack_require__(30);
 __webpack_require__(31);
-__webpack_require__(32);
 __webpack_require__(33);
 })();
 
