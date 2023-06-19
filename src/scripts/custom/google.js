@@ -1,5 +1,4 @@
 // Google Analytics
-var args = args || [];
 var _gaq = _gaq || [];
 
 if("" !== args.ca_google_analytic_id && undefined !== args.ca_google_analytic_id){

@@ -18,6 +18,11 @@ body {
         }
 
     }
+
+    // Search Page Template Overrides
+    &.page-template-searchpage{
+        @import 'custom/search';
+    }
 }
 
 @import 'wp';
