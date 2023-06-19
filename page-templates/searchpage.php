@@ -21,16 +21,13 @@ $caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_G
 * Loads CAWeb <header> tag.
 */
 get_header();
+
+do_action( 'caweb_search_form' );
 ?>
 
 <!--Search result section-->
-<div class="section section-default search-container active px-0">
-	<?php
-		do_action( 'caweb_search_form' );
-	?>
-</div>
 <div class="section">
-	<div class="container">
+	<div class="container pt-0">
 		<h1>Search Results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
 		<gcse:searchresults-only></gcse:searchresults-only>
 	</div>
