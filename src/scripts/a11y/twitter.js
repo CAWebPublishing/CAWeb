@@ -1,3 +1,5 @@
+require('../custom/functions');
+
 jQuery(document).ready(function() {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
@@ -18,4 +20,11 @@ jQuery(document).ready(function() {
 			}, 1000);
 		}
 	});
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
