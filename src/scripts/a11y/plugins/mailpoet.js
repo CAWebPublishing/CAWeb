@@ -13,4 +13,11 @@ jQuery(document).ready(function() {
 			});
 		}	
 	}, 1000);
+
+	function stripeIframeAttributes(frame){
+		$(frame).removeAttr('frameborder');
+		$(frame).removeAttr('scrolling');
+		$(frame).removeAttr('allowtransparency');
+		$(frame).removeAttr('allowfullscreen');
+	}
 });
