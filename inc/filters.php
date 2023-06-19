@@ -13,12 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'body_class', 'caweb_body_class', 20, 2 );
 add_filter( 'post_class', 'caweb_post_class', 15 );
 add_filter( 'theme_page_templates', 'caweb_theme_page_templates', 15 );
-add_filter( 'script_loader_tag', 'caweb_script_loader_tag', 10, 3 );
 add_filter( 'map_meta_cap', 'caweb_add_unfiltered_html_capability', 1, 3 );
 add_filter( 'allowed_redirect_hosts', 'caweb_allowed_redirect_hosts' );
 add_filter( 'xmlrpc_enabled', 'caweb_xmlrpc_enabled' );
 add_filter( 'wp_kses_allowed_html', 'caweb_allowed_html', 10, 2 );
-add_filter( 'caweb_ds_suffix', 'caweb_ds_suffix_check', 10 );
 
 add_action( 'template_redirect', 'caweb_redirect_if_author_parameter' );
 
@@ -30,8 +28,6 @@ if ( defined( 'PHP_INT_MAX' ) ) {
 /**
  * Plugin Filters
  */
-// WPForms.
-add_filter( 'wpforms_manage_cap', 'caweb_wpforms_custom_capability' );
 // The Events Calendar.
 add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_template_classes' );
 
@@ -65,9 +61,9 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		$sidebar_enabled = ! is_page();
 
 		$whitelist = array(
-			( caweb_is_divi_used() ? 'divi_builder' : 'non_divi_builder' ),
-			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title_displayed' : 'title_not_displayed' ),
-			( is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar_displayed' : 'sidebar_not_displayed' ),
+			( caweb_is_divi_used( $wp_classes ) ? 'divi-built' : '' ),
+			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title-displayed' : '' ),
+			( ! caweb_is_divi_used() && is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar-displayed' : '' ),
 		);
 	}
 	$whitelist[] = sprintf( '%1$s', $template_version );
@@ -114,26 +110,6 @@ function caweb_theme_page_templates( $templates ) {
 	return $templates;
 }
 
-/**
- * CAWeb Script Loader Tags
- * Filters the HTML script tag of an enqueued script.
- *
- * @param  string $tag The <script> tag for the enqueued script.
- * @param  string $handle The script's registered handle.
- * @param  string $src The script's source URL.
- *
- * @return string
- */
-function caweb_script_loader_tag( $tag, $handle, $src ) {
-	/* Defer some scripts */
-	$js_scripts = array( 'cagov-modernizr-script', 'cagov-frontend-script', 'thickbox' );
-	/* deferring jQuery breaks other scripts preg_match('/(jquery)[^\/]*\.js/', $tag) */
-	if ( in_array( $handle, $js_scripts, true ) ) {
-		$tag = str_replace( 'src', 'defer src', $tag );
-	}
-
-	return $tag;
-}
 
 /**
  * Enable unfiltered_html capability for Administrators.
@@ -152,21 +128,6 @@ function caweb_add_unfiltered_html_capability( $caps, $cap, $user_id ) {
 }
 
 /**
- * Change WPForms capability requirement.
- *
- * @link https://wpforms.com/developers/wpforms_manage_cap/
- * @see https://codex.wordpress.org/Roles_and_Capabilities
- * @param string $cap Capability required for user role to access WPForms.
- *
- * @return string
- */
-function caweb_wpforms_custom_capability( $cap ) {
-
-	// unfiltered_html by default means Editors and up.
-	return is_multisite() ? 'edit_posts' : 'unfiltered_html';
-}
-
-/**
  * Allows filtering the classes for the main element for the /events/ page.
  *
  * @since 5.8.0
@@ -179,7 +140,6 @@ function caweb_default_events_template_classes( $classes ) {
 	return $classes;
 }
 
-
 /**
  * CAWeb Disable XMLRPC
  *
@@ -188,7 +148,6 @@ function caweb_default_events_template_classes( $classes ) {
 function caweb_xmlrpc_enabled() {
 	return false;
 }
-
 
 /**
  * Override WPVIP hard coding this option.
@@ -357,18 +316,4 @@ function caweb_redirect_if_author_parameter() {
 		wp_safe_redirect( home_url(), 301 );
 		exit;
 	}
-}
-
-/**
- * Adds Design System suffix if required.
- *
- * @param  string $text String to append -ds suffix to.
- * @return string
- */
-function caweb_ds_suffix_check( $text ) {
-	if ( caweb_design_system_enabled() ) {
-		$text .= '-ds';
-	}
-
-	return $text;
 }

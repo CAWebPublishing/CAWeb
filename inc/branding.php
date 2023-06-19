@@ -33,7 +33,7 @@ function caweb_branding_admin_head() {
 		}
 	</style>
 	<?php endif; ?>
-		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/images/system/caweb_logo.ico' ); ?>">
+		<link title="Fav Icon" rel="icon" href="<?php print esc_url( CAWEB_URI . '/src/images/system/caweb_logo.ico' ); ?>">
 	<?php
 }
 
@@ -44,17 +44,17 @@ function caweb_branding_admin_head() {
  * @return void
  */
 function caweb_login_enqueue_scripts() {
-	$admin_css = caweb_get_min_file( '/css/admin.css' );
+	$caweb_css_file = caweb_get_min_file( '/dist/caweb-admin.css');
 
 	/* CAWeb Admin CSS */
-	wp_enqueue_style( 'caweb-admin-styles', $admin_css, array(), CAWEB_VERSION );
+	wp_enqueue_style( 'caweb-admin-styles', $caweb_css_file, array(), CAWEB_VERSION );
 
-	$admin_js = caweb_get_min_file( '/js/admin.js', 'js' );
+	$caweb_js_file = caweb_get_min_file( '/js/caweb-admin.js', 'js' );
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'jquery' );
 
-	wp_register_script( 'caweb-admin-scripts', $admin_js, array( 'jquery' ), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-admin-scripts', $caweb_js_file, array( 'jquery' ), CAWEB_VERSION, true );
 
 	wp_enqueue_script( 'caweb-admin-scripts' );
 

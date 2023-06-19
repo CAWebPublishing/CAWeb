@@ -1,0 +1,10 @@
+/* Hide Activation Links on wp-activate.php */
+.wp-activate-container p.view{
+    display:none;
+}
+
+#signup-content{
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+}

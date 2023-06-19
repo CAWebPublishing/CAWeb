@@ -1,0 +1,22 @@
+// CAWeb Icon Menu Styles
+.caweb-icon-menu-group{
+
+    .caweb-icon-menu{
+        height: 306px;
+        overflow: auto;  
+
+        li{
+            cursor: pointer;
+            max-width: 48px;
+
+            &:hover{
+                background-color: #007bff;
+            }
+        }   
+    }
+
+    span.reset-icon{
+        cursor: pointer;
+    }
+
+}

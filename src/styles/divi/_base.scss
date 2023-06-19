@@ -1,0 +1,15 @@
+.page-title {
+	padding: $divi-page-title-padding;
+}
+
+.page-title + .entry-content div[class*="et_builder_inner_content"] > div[class*="et_pb_section"] > div[class*="et_pb_row"] {
+	padding-top: 0 !important;
+}
+
+.page-date {
+	padding: 0 15px;
+}
+
+article article.et_pb_post {
+	margin-bottom: 30px;
+}

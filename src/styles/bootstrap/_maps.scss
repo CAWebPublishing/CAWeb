@@ -1,0 +1,9 @@
+// Add custom colors to theme colors
+$wp-error: #ff8573 !default;
+
+$theme-colors: map-merge(
+  (
+  	"wp-error":   $wp-error
+  ),
+  $theme-colors
+);

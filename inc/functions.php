@@ -12,22 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Returns the Site Wide Template Version Setting
  *
- * @param bool $exclude_design_system Whether or not to exlcude the fact that the Design System is on.
- * @since 2.0.0 Introduced new Design System.
  * @since 1.5.4 Template Version 5 has been deprecated and all customers moved to 5.5.
  * @return int
  */
-function caweb_template_version( $exclude_design_system = false ) {
-	$version                    = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
-	$theme_version              = wp_get_theme()->get( 'Version' );
-	$caweb_enable_design_system = caweb_design_system_enabled();
+function caweb_template_version() {
+	$version       = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
+	$theme_version = wp_get_theme()->get( 'Version' );
 
 	if ( '1.5.4' <= $theme_version && '5.5' > $version ) {
 		return 5.5;
-	}
-
-	if ( ! $exclude_design_system && $caweb_enable_design_system ) {
-		return 'design-system';
 	}
 
 	return $version;
@@ -137,13 +130,13 @@ function caweb_template_colors() {
 			'standout'  => '#323A45',
 			's1'        => '#E1F2F7',
 		),
-		'orangecounty' => array(
+		'orange county' => array(
 			'highlight' => '#FBAD23',
 			'primary'   => '#A15801',
 			'standout'  => '#483723',
 			's1'        => '#F1EDE4',
 		),
-		'pasorobles' => array(
+		'paso robles' => array(
 			'highlight' => '#FBAD23',
 			'primary'   => '#9A0000',
 			'standout'  => '#313131',
@@ -155,13 +148,13 @@ function caweb_template_colors() {
 			'standout'  => '#730000',
 			's1'        => '#E1ECF7',
 		),
-		'santabarbara' => array(
+		'santa barbara' => array(
 			'highlight' => '#FF9B53',
 			'primary'   => '#60617D',
 			'standout'  => '#664945',
 			's1'        => '#FFEBD7',
 		),
-		'santacruz' => array(
+		'santa cruz' => array(
 			'highlight' => '#F5811B',
 			'primary'   => '#0F4F94',
 			'standout'  => '#2C2C4F',
@@ -187,74 +180,23 @@ function caweb_template_colors() {
 		),
 	);
 
-	return $colors;
+	return apply_filters( 'caweb_template_colors', $colors );
 }
 
 /**
- * Retrieve CAWeb Color Schemes
- *
- * @param  int    $version State Template Version.
- * @param  string $field Whether to return filename, displayname or both.
- * @param  string $color Retrieve information on a specific colorscheme.
+ * Returns array of CAWeb Menu Types
  *
  * @return array
  */
-function caweb_color_schemes( $version = -1, $field = '', $color = '' ) {
-	$css_dir = sprintf( '%1$s/assets/css/cagov', CAWEB_ABSPATH );
-	$pattern = '/.*\/([\w\s]*)\.css/';
+function caweb_nav_menu_types() {
+	$menu_types = array(
+		'dropdown'     => 'Drop Down',
+		'flexmega'     => 'Flex Mega Menu',
+		'megadropdown' => 'Mega Drop',
+		'singlelevel'  => 'Single Level',
+	);
 
-	$schemes = array();
-
-	/*
-	Get glob of colorschemes based on version,
-	if no version provided return all colors from all versions
-	*/
-	$tmp = glob( sprintf( '%1$s/version-%2$s/colorscheme/*.css', $css_dir, $version ) );
-
-	if ( empty( $tmp ) ) {
-		$tmp = glob( sprintf( '%1$s/*/colorscheme/*.css', $css_dir ) );
-	}
-
-	if ( 'design-system' === $version ) {
-		$tmp = array( 'cagov', 'cannabis', 'drought' );
-	}
-
-	/*
-	Iterate thru each colorscheme
-	*/
-	foreach ( $tmp as $css_file ) {
-		$filename    = preg_replace( $pattern, '\1', $css_file );
-		$displayname = ucwords( strtolower( $filename ) );
-
-		$schemekey = strtolower( str_replace( ' ', '', $displayname ) );
-
-		switch ( $field ) {
-			case 'filename':
-				$schemes[ $schemekey ] = $filename;
-
-				break;
-			case 'displayname':
-				$schemes[ $schemekey ] = $displayname;
-
-				break;
-			default:
-				$schemes[ $schemekey ] = array(
-					'filename'    => $filename,
-					'displayname' => $displayname,
-				);
-
-				break;
-
-		}
-
-		if ( ! empty( $color ) && $color === $schemekey && isset( $schemes[ $color ] ) ) {
-			return $schemes[ $color ];
-		}
-	}
-
-	ksort( $schemes );
-
-	return $schemes;
+	return apply_filters( 'caweb_nav_menu_types', $menu_types );
 }
 
 /**
@@ -471,15 +413,26 @@ function caweb_get_user_color() {
 
 /**
  * Checks if page/post is using Divi Builder.
- *
+ * @param array $wp_classes An array of classes used in the body.
+ *  
  * @return boolean
  */
-function caweb_is_divi_used() {
+function caweb_is_divi_used($wp_classes = array()) {
 
 	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
 
 	// Default WordPress theme templates do not use the Divi Builder.
 	if ( is_tag() || is_archive() || is_category() || is_author() ) {
+		return false;
+	}
+
+	// Default HomePage "Your latest posts" does not use the Divi Builder.
+	if( in_array('blog', $wp_classes, true) ){
+		return false;
+	}
+
+	// Default index.php (search) does not use the Divi Builder.
+	if( in_array('search', $wp_classes, true) ){
 		return false;
 	}
 
@@ -493,11 +446,3 @@ function caweb_is_divi_used() {
 
 }
 
-/**
- * Whether or not the caGov Design System is enabled.
- *
- * @return bool
- */
-function caweb_design_system_enabled() {
-	return get_option( 'caweb_enable_design_system', false );
-}

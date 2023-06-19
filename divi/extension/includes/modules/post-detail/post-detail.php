@@ -1661,7 +1661,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		return sprintf(
 			'%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s',
-			$this->caweb_get_the_post_thumbnail( null, 'thumbnail', array( 'class' => 'img-left pr-3' ) ),
+			$this->caweb_get_the_post_thumbnail( null, 'thumbnail', array( 'class' => 'img-left pr-3 pe-3' ) ),
 			$this->content,
 			$presenter,
 			$organizer,

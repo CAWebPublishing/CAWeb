@@ -67,7 +67,7 @@ class CAWeb_Module_Section_Primary extends CAWEeb_Component {
     var image_pos = this.props.left_right_button;
 
     var classes = "on" === slide_image_button ? ' animate-fadeInLeft' : '';
-    classes += "on" === image_pos ? ' pull-right pr-0' : ' pull-left pl-0';
+    classes += "on" === image_pos ? ' pull-right pr-0 pe-0' : ' pull-left pl-0 ps-0';
 
 	// caweb_get_attachment_post_meta need to figure away to run WP Functions
 	// alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
