@@ -37,6 +37,7 @@ add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'wp_body_open', 'caweb_wp_body_open' );
 add_action( 'wp_footer', 'caweb_wp_footer' );
+add_action( 'caweb_search_form', 'caweb_search_form');
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
 add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 999999999 );
@@ -308,6 +309,20 @@ function caweb_wp_footer() {
 
 	/* This removes Divi Builder Google Font CSS */
 	wp_deregister_style( 'et-builder-googlefonts' );
+}
+
+/**
+ * Render Search Form
+ *
+ * @return void
+ */
+function caweb_search_form(){
+	$caweb_version       = caweb_template_version();
+	?>
+	<div class="section section-default search-container active top-0">
+	<?php  get_template_part( "parts/$caweb_version/search" ) ?>
+	</div>
+	<?php
 }
 
 /**

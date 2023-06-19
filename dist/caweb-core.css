@@ -96,19 +96,6 @@ body[class*="5.5"] body.sidebar-displayed #caweb-sidebar #sidebar {
   float: none;
   width: 100%;
 }
-body[class*="5.5"] body.page-template-searchpage #main-content .container:before {
-  background: transparent;
-}
-body[class*="5.5"] body.page-template-searchpage .search-container {
-  top: 0 !important;
-}
-body[class*="5.5"] body.page-template-searchpage .mobile-controls .toggle-search,
-body[class*="5.5"] body.page-template-searchpage form#Search .close-search {
-  display: none !important;
-}
-body[class*="5.5"] body.page-template-searchpage .gsc-cursor-page:focus {
-  outline: solid 2px #2ea3f2;
-}
 @media print {
   body[class*="5.5"] {
     /* Main Content */
@@ -386,19 +373,6 @@ body[class*="6.0"] body.sidebar-displayed #caweb-sidebar #sidebar {
   float: none;
   width: 100%;
 }
-body[class*="6.0"] body.page-template-searchpage #main-content .container:before {
-  background: transparent;
-}
-body[class*="6.0"] body.page-template-searchpage .search-container {
-  top: 0 !important;
-}
-body[class*="6.0"] body.page-template-searchpage .mobile-controls .toggle-search,
-body[class*="6.0"] body.page-template-searchpage form#Search .close-search {
-  display: none !important;
-}
-body[class*="6.0"] body.page-template-searchpage .gsc-cursor-page:focus {
-  outline: solid 2px #2ea3f2;
-}
 @media print {
   body[class*="6.0"] {
     /* Main Content */
@@ -578,6 +552,19 @@ body[class*="6.0"].divi-built .et_pb_text ol, body[class*="6.0"].divi-built .et_
 }
 body[class*="6.0"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
+}
+body.page-template-searchpage #main-content .container:before {
+  background: transparent;
+}
+body.page-template-searchpage .search-container {
+  top: 0 !important;
+}
+body.page-template-searchpage .mobile-controls .toggle-search,
+body.page-template-searchpage form#Search .close-search {
+  display: none !important;
+}
+body.page-template-searchpage .gsc-cursor-page:focus {
+  outline: solid 2px #2ea3f2;
 }
 
 /* WordPress Specific Overrides */ /* Hide Activation Links on wp-activate.php */

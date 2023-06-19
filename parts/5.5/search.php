@@ -17,7 +17,7 @@ $caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_G
 
 ?>
 
-<div class="container">
+<div class="container py-3">
 	<form id="Search" class="pos-rel" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
 		<span class="sr-only" id="SearchInput">Custom Google Search</span>
 		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield height-50 border-0 p-x-sm w-100" />
