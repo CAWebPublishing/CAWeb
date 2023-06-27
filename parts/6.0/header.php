@@ -31,12 +31,7 @@ foreach ( $args as $var => $val ) {
 						<div class="header-cagov-logo">
 							<a href="https://www.ca.gov/" title="CA.gov website">
 								<span class="sr-only">CA.gov</span>
-								<img 
-									style="height: 31px;" 
-									src="<?php print esc_url( CAWEB_URI ); ?>/src/images/system/logo-gold.svg" 
-									class="pos-rel" 
-									alt="CA.gov website" 
-									aria-hidden="true" />
+								<span class="ca-gov-logo-svg"></span>
 							</a>
 							<span class="official-tag align-bottom"><span class="desktop-only">Official website of the&nbsp;</span>State of California</span>
 						</div>

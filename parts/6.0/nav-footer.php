@@ -26,8 +26,9 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 <div class="container">
 	<div class="d-flex">
 
-		<a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener">
-			<img src="<?php print esc_url( CAWEB_URI ); ?>/src/images/system/logo-gold.svg" style="height: 31px;"/>
+		<a href="https://ca.gov" class="cagov-logo" title="ca.gov" target="_blank" rel="noopener">
+			<span class="sr-only">CA.gov</span>
+			<span class="ca-gov-logo-svg"></span>
 		</a>
 
 		<ul class="footer-links mr-auto">

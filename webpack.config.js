@@ -6,11 +6,6 @@ const fs = require('fs'); // File System
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let entries = {
-  'caweb-core': [
-    './src/styles/caweb.scss',
-    './src/scripts/custom/',
-    './src/scripts/a11y/'
-  ],
   'caweb-admin':[
     './src/styles/admin/index.scss',
     './src/scripts/admin/',
@@ -33,7 +28,10 @@ fs.readdirSync('./src/').filter(file => file.toString().startsWith('version-') )
     entries[`${scheme}-${ver}`] = [
       `./src/${version}/cagov.core.css`,
       `./src/${version}/colorscheme/${color}`,
-      './src/styles/frontend.scss'
+      './src/styles/frontend.scss',
+      `./src/${version}/cagov.core.js`,
+      './src/scripts/custom/',
+      './src/scripts/a11y/'
     ]
   })
 
