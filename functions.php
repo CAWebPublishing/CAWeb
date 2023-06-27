@@ -398,7 +398,13 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	// Template JS File.
-	$core_js_file     = caweb_get_min_file( "/dist/$color-$version.js", 'js' );
+	$template_js_file     = caweb_get_min_file( "/dist/$color-$version.js", 'js' );
+
+	/**
+	 * Core JS File 
+	 * @todo Once 5.5 is completely removed the core file can be loaded with webpack instead.
+	 */
+	$core_js_file     = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
 
 	/* Geo Locator */
 	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
@@ -409,9 +415,11 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	// Register Scripts.
-	wp_register_script( 'cagov-core-script', $core_js_file, array( 'jquery' ), CAWEB_VERSION, true );
+	wp_register_script( 'cagov-core-template-script', $template_js_file, array( 'jquery' ), CAWEB_VERSION, true );
 
-	wp_localize_script( 'cagov-core-script', 'args', $localize_args );
+	wp_localize_script( 'cagov-core-template-script', 'args', $localize_args );
+	
+	wp_register_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script'), CAWEB_VERSION, true );
 
 	/* Enqueue Scripts */
 	wp_enqueue_script( 'cagov-core-script' );

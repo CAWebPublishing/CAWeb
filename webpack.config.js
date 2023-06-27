@@ -29,7 +29,7 @@ fs.readdirSync('./src/').filter(file => file.toString().startsWith('version-') )
       `./src/${version}/cagov.core.css`,
       `./src/${version}/colorscheme/${color}`,
       './src/styles/frontend.scss',
-      `./src/${version}/cagov.core.js`,
+      //`./src/${version}/cagov.core.js`,
       './src/scripts/custom/',
       './src/scripts/a11y/'
     ]
