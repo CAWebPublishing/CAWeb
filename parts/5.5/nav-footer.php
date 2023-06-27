@@ -27,6 +27,9 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 	<div class="d-flex">
 
 		<ul class="footer-links mr-auto">
+			<li class="d-none">
+				<a href="#skip-to-content">Back to Top</a>
+			</li>
 			<?php
 			foreach ( $caweb_menuitems as $caweb_item ) {
 				if ( ! $caweb_item->menu_item_parent ) {

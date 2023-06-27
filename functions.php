@@ -535,15 +535,8 @@ function caweb_admin_enqueue_scripts( $hook ) {
 
 		wp_enqueue_script( 'caweb-admin-scripts' );
 
-		/*
-		Bootstrap 4 Toggle
-		https://gitbrent.github.io/bootstrap4-toggle/
-		*/
-		wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
-
 		/* Enqueue Styles */
 		wp_enqueue_style( 'caweb-admin-styles', $caweb_css_file, array(), CAWEB_VERSION );
-		wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
 
 	}elseif( in_array( $hook, array( 'post.php', 'post-new.php', 'widgets.php' ), true ) ){
 		wp_enqueue_style( 'caweb-admin-styles', $caweb_css_file, array(), CAWEB_VERSION );

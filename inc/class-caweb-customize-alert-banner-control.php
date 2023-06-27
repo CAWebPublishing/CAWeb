@@ -160,7 +160,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$alert_status  = sprintf(
 				'<input type="checkbox" name="alert-status-%1$s"%2$s%3$s>',
 				$this->alert_id,
-				null !== $this->active ? ' data-toggle="toggle" data-onstyle="success" data-size="sm"' : '',
 				null === $this->active || in_array( $this->active, array( 'on', 'active' ), true ) ? ' checked="checked"' : ''
 			);
 			$remove_button = '<button class="caweb-remove-alert btn btn-danger btn-sm">Remove</button>';
@@ -227,7 +226,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return string
 		 */
 		private function render_alert_banner_read_more() {
-			$read_more       = sprintf( '<div><a href="#alert-read-more-options-%1$s" data-toggle="collapse"><input id="alert-read-more-%1$s" name="alert-read-more-%1$s" type="checkbox"%2$s/></a><label class="d-inline customize-control-title" for="alert-read-more-%1$s">Read More Button</label></div>', $this->alert_id, $this->read_more ? ' checked="checked"' : '' );
+			$read_more       = sprintf( '<div><a href="#alert-read-more-options-%1$s" data-bs-toggle="collapse"><input id="alert-read-more-%1$s" name="alert-read-more-%1$s" type="checkbox"%2$s/></a><label class="d-inline customize-control-title" for="alert-read-more-%1$s">Read More Button</label></div>', $this->alert_id, $this->read_more ? ' checked="checked"' : '' );
 			$read_more_text  = sprintf( '<div><label for="alert-read-more-text-%1$s" class="customize-control-title">Read More Button Text</label><input type="text" id="alert-read-more-text-%1$s" name="alert-read-more-text-%1$s" value="%2$s" /></div>', $this->alert_id, $this->read_more_text );
 			$read_more_url   = sprintf( '<div><label for="alert-read-more-url-%1$s" class="customize-control-title">Read More Button URL</label><input type="text" id="alert-read-more-url-%1$s" name="alert-read-more-url-%1$s" value="%2$s" /></div>', $this->alert_id, $this->read_more_url );
 			$open_in_new_tab = sprintf( '<div><input type="checkbox" id="alert-read-more-target-%1$s" name="alert-read-more-target-%1$s"%2$s/><label for="alert-read-more-target-%1$s" class="d-inline customize-control-title">Open Link in New Tab</label></div>', $this->alert_id, $this->read_more_target ? ' checked="checked"' : '' );

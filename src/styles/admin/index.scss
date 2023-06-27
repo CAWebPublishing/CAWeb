@@ -42,10 +42,14 @@ body.toplevel_page_caweb_options {
     }
 
     .form-check-input{
-        margin: .25em .25em 0 0;
+        background-repeat: no-repeat;
 
-        &:checked{
-            background-color: initial;
+        &[type="radio"] {
+            background: initial;
+        }
+
+        &:checked::before{
+            content: '' !important;
         }
     }
 }
