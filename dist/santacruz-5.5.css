@@ -26554,35 +26554,34 @@ header .full-width-nav {
     display: none;
   }
 }
-body:not(.divi-built) #main-content {
+body[class*="5.5"] {
+  /* Override styles for second level navs not using flex */
+}
+body[class*="5.5"]:not(.divi-built) #main-content {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 15px;
 }
 @media (min-width: 768px) {
-  body:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built) #main-content {
     max-width: 768px;
   }
 }
 @media (min-width: 992px) {
-  body:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built) #main-content {
     max-width: 992px;
   }
 }
 @media (min-width: 1200px) {
-  body:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built) #main-content {
     max-width: 1200px;
   }
 }
 @media (min-width: 1280px) {
-  body:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built) #main-content {
     max-width: 1280px;
   }
-}
-
-body[class*="5.5"] {
-  /* Override styles for second level navs not using flex */
 }
 body[class*="5.5"] .second-level-nav:not(.flex) {
   display: block;
@@ -26623,29 +26622,29 @@ body[class*="5.5"] nav.megadropdown .media-left .media-object {
   }
 }
 
-body[class*="6.0"] body:not(.divi-built) #main-content {
+body[class*="6.0"]:not(.divi-built) #main-content {
   width: 100%;
   max-width: 1176px;
   margin: 0 auto;
   padding: 15px;
 }
 @media (min-width: 768px) {
-  body[class*="6.0"] body:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built) #main-content {
     max-width: 768px;
   }
 }
 @media (min-width: 992px) {
-  body[class*="6.0"] body:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built) #main-content {
     max-width: 992px;
   }
 }
 @media (min-width: 1200px) {
-  body[class*="6.0"] body:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built) #main-content {
     max-width: 1140px;
   }
 }
 @media (min-width: 1280px) {
-  body[class*="6.0"] body:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built) #main-content {
     max-width: 1176px;
   }
 }

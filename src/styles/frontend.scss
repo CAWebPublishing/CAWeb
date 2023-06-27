@@ -5,16 +5,22 @@
 @import './custom/google';
 @import './custom/navigation';
 
-@import './custom/main-content';
 
 body[class*="5.5"] {
+
+	&:not(.divi-built){
+		@import './custom/main-content';
+	}
+
 	@import '../version-5.5/navigation';
 }
 
 body[class*="6.0"] {
 	@import '../version-6.0/variables';
 
-	@import './custom/main-content';
+	&:not(.divi-built){
+		@import './custom/main-content';
+	}
 }
 
 
