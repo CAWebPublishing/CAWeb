@@ -37,6 +37,7 @@ add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
 add_action( 'wp_body_open', 'caweb_wp_body_open' );
 add_action( 'wp_footer', 'caweb_wp_footer' );
+add_action( 'wp_footer', 'caweb_late_wp_footer', 999999999 );
 add_action( 'caweb_search_form', 'caweb_search_form');
 // The priority has to be 99999999 to allow Divi to run it's replacement of parent style.css.
 // add_action( 'wp_enqueue_scripts', 'et_divi_replace_parent_stylesheet', 99999998 );.
@@ -312,6 +313,33 @@ function caweb_wp_footer() {
 }
 
 /**
+ * Triggered before the closing body tag.
+ *
+ * @since 1.10.1
+ *
+ * @wp_action add_action( 'wp_footer', 'caweb_wp_footer', 11 );
+ * @link https://developer.wordpress.org/reference/functions/wp_body_open/
+ * @return void
+ */
+function caweb_late_wp_footer() {
+	/* This removes Divi Builder Google Font CSS */
+	wp_deregister_style( 'et-builder-googlefonts' );
+
+	/* Google Translate */
+	if ( 'none' !== get_option( 'ca_google_trans_enabled' ) ){
+		?>
+		<script>
+			function googleTranslateElementInit() {
+				new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, autoDisplay: false,  
+				layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
+			}
+		</script>
+		<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+		<?php
+	}
+}
+
+/**
  * Render Search Form
  *
  * @return void
@@ -372,7 +400,6 @@ function caweb_wp_enqueue_scripts() {
 		'caweb_multi_ga4'             => get_site_option( 'caweb_multi_ga4' ),
 		'caweb_alerts'                => get_option( 'caweb_alerts', array() ),
 		'is_front'                    => is_front_page(),
-		'ca_google_trans_enabled'     => 'none' !== get_option( 'ca_google_trans_enabled' ) ? true : false,
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
 		'path'                        => wp_parse_url( get_site_url() )['path'] ?? '/',
 	);
