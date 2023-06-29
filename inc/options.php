@@ -594,7 +594,7 @@ function caweb_get_site_options( $group = '' ) {
 
 	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
 
-	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
+	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode', 'caweb_body_classes', 'caweb_page_container_classes', 'caweb_main_content_classes' );
 
 	switch ( $group ) {
 		case 'general':

@@ -958,9 +958,14 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 	$cap                      = is_multisite() ? 'manage_network_options' : 'manage_options';
 	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
+	$caweb_body_classes = get_option( 'caweb_body_classes', '' );
+	$caweb_page_container_classes = get_option( 'caweb_page_container_classes', '' );
+	$caweb_main_content_classes = get_option( 'caweb_main_content_classes', '' );
+	
+	
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
-	<div class="row">
+		<div class="row">
 			<!-- Document Map -->
 			<div class="mb-3 col-sm-12">
 				<strong>Document Map</strong>
@@ -989,8 +994,31 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-
 		<?php endif; ?>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- body classes -->
+				<label for="caweb_body_classes" class="d-block mb-0"><strong>Body Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_body_classes" id="caweb_body_classes" value="<?php print esc_attr( $caweb_body_classes ); ?>" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- page container classes -->
+				<label for="caweb_page_container_classes" class="d-block mb-0"><strong>Page Container Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_page_container_classes" id="caweb_page_container_classes" value="<?php print esc_attr( $caweb_page_container_classes ); ?>" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- main content classes -->
+				<label for="caweb_main_content_classes" class="d-block mb-0"><strong>Main Content Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_main_content_classes" id="caweb_main_content_classes" value="<?php print esc_attr( $caweb_main_content_classes ); ?>" class="form-control">
+			</div>
+		</div>
 	</div>
 	<?php
 }

@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 4:
+/***/ 38:
 /***/ (() => {
 
 /* CAWeb Icon Menu Javascript */
@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 41:
 /***/ (() => {
 
 // Toggle CSS Colorscheme Options
@@ -159,7 +159,7 @@ function correct_menu_home_link_option(version){
 
 /***/ }),
 
-/***/ 21:
+/***/ 55:
 /***/ (() => {
 
 jQuery( document ).ready( function($) {
@@ -239,10 +239,10 @@ jQuery( document ).ready( function($) {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-__webpack_require__(4);
-__webpack_require__(7);
+__webpack_require__(38);
+__webpack_require__(41);
 
-__webpack_require__(21);
+__webpack_require__(55);
 
 })();
 

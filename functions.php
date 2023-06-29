@@ -374,6 +374,11 @@ function caweb_wp_enqueue_scripts() {
 
 	wp_enqueue_style( 'cagov-core-style', $template_css_file, array(), CAWEB_VERSION );
 
+	// CAWeb CSS File
+	$caweb_css_file = caweb_get_min_file( '/dist/caweb-core.css' );
+
+	wp_enqueue_style( 'caweb-core-style', $caweb_css_file, array(), CAWEB_VERSION );
+
 	/* Google Fonts */
 	wp_enqueue_style( 'caweb-google-font-style', 'https://fonts.googleapis.com/css?family=Asap+Condensed:400,600|Source+Sans+Pro:400,700', array(), CAWEB_VERSION );
 
@@ -433,6 +438,9 @@ function caweb_wp_enqueue_scripts() {
 	 */
 	$core_js_file     = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
 
+	// CAWeb JS File.
+	$caweb_js_file     = caweb_get_min_file( "/dist/caweb-core.js", 'js' );
+
 	/* Geo Locator */
 	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
 
@@ -444,12 +452,13 @@ function caweb_wp_enqueue_scripts() {
 	// Register Scripts.
 	wp_register_script( 'cagov-core-template-script', $template_js_file, array( 'jquery' ), CAWEB_VERSION, true );
 
-	wp_localize_script( 'cagov-core-template-script', 'args', $localize_args );
-	
-	wp_register_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script'), CAWEB_VERSION, true );
+	wp_register_script( 'caweb-core-script', $caweb_js_file, array( 'jquery' ), CAWEB_VERSION, true );
+	wp_localize_script( 'caweb-core-script', 'args', $localize_args );
 
 	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-core-script' );
+	wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script'), CAWEB_VERSION, true );
+
+	wp_enqueue_script( 'caweb-core-script' );
 
 	$cwes     = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
 	$verified = isset( $cwes ) && wp_verify_nonce( sanitize_key( $cwes ), 'caweb_wp_enqueue_scripts' );
