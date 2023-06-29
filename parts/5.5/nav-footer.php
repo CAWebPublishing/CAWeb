@@ -21,7 +21,6 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 ?>
 
-<span class="return-top hidden-print"></span>
 
 <div class="container">
 	<div class="d-flex">

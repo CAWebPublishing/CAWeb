@@ -21,9 +21,6 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 ?>
 
-<button class="return-top">
-	<span class="sr-only">Back to top</span>
-</button>
 
 <div class="container">
 	<div class="d-flex">
