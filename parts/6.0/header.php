@@ -54,11 +54,11 @@ foreach ( $args as $var => $val ) {
 					<?php endif; ?>
 
 					<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
-						<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
+						<div class="standard-translate" id="google_translate_element"></div>
 					<?php endif; ?>
 
 					<button 
-						class="btn btn-xs collapsed btn-primary" 
+						class="collapsed btn btn-xs" 
 						data-bs-toggle="collapse" data-bs-target="#siteSettings" 
 						aria-controls="siteSettings">
 						<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings
@@ -74,12 +74,11 @@ foreach ( $args as $var => $val ) {
 			<div class="settings-bar-buttons">
 				<div class="btn-group" aria-label="contrastMode">
 					<button type="button"
-						class="btn btn-default btn-lg bg-transparent bg-s1-hover disableHighContrastMode">Reset</button>
+						class="btn btn-s1 btn-lg disableHighContrastMode">Reset</button>
 				</div>
 
 				<div class="btn-group">
-					<button type="button" class="btn btn-s1 btn-lg brd-s1 enableHighContrastMode">High
-							contrast</button>
+					<button type="button" class="btn btn-s1 btn-lg brd-s1 enableHighContrastMode">High contrast</button>
 				</div>
 
 				<div class="btn-group">

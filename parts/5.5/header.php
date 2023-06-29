@@ -111,7 +111,7 @@ foreach ( $args as $var => $val ) {
 					<?php endif; ?>
 
 					<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
-						<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
+						<div class="standard-translate" id="google_translate_element"></div>
 					<?php endif; ?>
 
 					<button 
