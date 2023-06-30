@@ -21,19 +21,16 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 ?>
 
-<span class="return-top hidden-print"></span>
 
 <div class="container">
 	<div class="d-flex">
 
-		<a href="https://ca.gov" class="align-bottom" title="ca.gov" target="_blank" rel="noopener">
-			<img src="<?php print esc_url( CAWEB_URI ); ?>/src/images/system/logo-gold.svg" style="height: 31px;"/>
+		<a href="https://ca.gov" class="cagov-logo" title="ca.gov" target="_blank" rel="noopener">
+			<span class="sr-only">CA.gov</span>
+			<span class="ca-gov-logo-svg"></span>
 		</a>
 
 		<ul class="footer-links mr-auto">
-			<li>
-				<a href="#skip-to-content">Back to Top</a>
-			</li>
 			<?php
 			foreach ( $caweb_menuitems as $caweb_item ) {
 				if ( ! $caweb_item->menu_item_parent ) {

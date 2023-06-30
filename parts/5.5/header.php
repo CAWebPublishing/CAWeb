@@ -111,12 +111,12 @@ foreach ( $args as $var => $val ) {
 					<?php endif; ?>
 
 					<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
-						<div class="quarter standard-translate px-0 w-auto" id="google_translate_element"></div>
+						<div class="standard-translate" id="google_translate_element"></div>
 					<?php endif; ?>
 
 					<button 
 						class="btn btn-xs collapsed btn-primary" 
-						data-toggle="collapse" data-target="#siteSettings" 
+						data-bs-toggle="collapse" data-bs-target="#siteSettings" 
 						aria-controls="siteSettings">
 						<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings
 					</button>
@@ -163,8 +163,12 @@ foreach ( $args as $var => $val ) {
 				</div>
 
 			</div>
-
-			<button type="button" class="close" data-toggle="collapse" data-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dyslexicFont">Dyslexic font</button>
+			</div>
+			
+			<button type="button" class="close" data-bs-toggle="collapse" data-bs-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 	</div>
 
@@ -186,7 +190,7 @@ foreach ( $args as $var => $val ) {
 			<button class="mobile-control toggle-search">
 				<span class="ca-gov-icon-search hidden-print" aria-hidden="true"></span><span class="sr-only">Search</span>
 			</button>
-			<button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation" data-toggle="collapse" data-target="#navigation" data-toggle="collapse" data-target="#navigation">
+			<button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation" data-bs-toggle="collapse" data-bs-target="#navigation">
 				<span></span>
 				<span></span>
 				<span></span>

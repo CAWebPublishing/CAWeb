@@ -15,10 +15,11 @@ add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
 add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_option_caweb_password', 10, 3 );
-add_action( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme' );
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
+add_filter( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme', 10, 2 );
+add_filter( 'option_ca_fav_ico', 'caweb_pre_option_ca_fav_ico', 10, 2 );
 
 $caweb_social    = caweb_get_site_options( 'social' );
 $caweb_sanitized = caweb_get_site_options( 'sanitized' );
@@ -593,7 +594,7 @@ function caweb_get_site_options( $group = '' ) {
 
 	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
 
-	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode' );
+	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode', 'caweb_body_classes', 'caweb_page_container_classes', 'caweb_main_content_classes' );
 
 	switch ( $group ) {
 		case 'general':
@@ -782,14 +783,36 @@ function caweb_favicon_name() {
  * Ensures the CAWeb Theme colorscheme is supported.
  *
  * @link https://developer.wordpress.org/reference/hooks/option_option/
- * @param  mixed $val Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * 
+ * @param  mixed $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * @param  string $option Option name.
  * @return mixed
  */
-function caweb_ca_site_color_scheme( $val ) {
+function caweb_ca_site_color_scheme( $value, $option ) {
 	foreach ( caweb_template_colors() as $color => $data ) {
-		if ( str_replace( ' ', '', $color ) === $val ) {
-			return $val;
+		if ( str_replace( ' ', '', $color ) === $value ) {
+			return $value;
 		}
 	}
 	return 'oceanside';
+}
+
+/**
+ * Filters the value of the CAWeb Fav Icon.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/option_option/
+ * 
+ * @param  mixed $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * @param  string $option Option name.
+ * @return mixed
+ */
+function caweb_pre_option_ca_fav_ico($value, $option){
+	$old_file_path = 'CAWeb/images/system/favicon.ico';
+
+	// As of 1.10.0 favicon file was moved.
+	$new_file_path = 'CAWeb/src/images/system/favicon.ico';
+
+  	$ico = str_ends_with( $value, $old_file_path ) ? str_replace($old_file_path, $new_file_path, $value ): $value;
+
+  	return $ico;
 }

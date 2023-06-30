@@ -9,6 +9,12 @@ jQuery(document).ready(function($) {
 	$('.remove-alert').on( 'click', function(e){ removeAlertFunc(this);});
 	$('#add-alert').on( 'click', function(e){ e.preventDefault(); addAlert();});
 
+	$('input[type="checkbox"][name^="alert-read-more-"]').on('change', function(){
+		let readmore_id = $(this).attr('id');
+		$(`div#${readmore_id}`).toggle();
+	  })
+	 
+	  
 	var removeAlertFunc = function (s){
 		var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
 	  
@@ -55,7 +61,7 @@ jQuery(document).ready(function($) {
 		$(headerAnchor).attr('href', '#alert-banner-' + c);
 		$(headerAnchor).attr('aria-expanded', 'true');
 		$(headerAnchor).attr('aria-controls', 'alert-banner-' + c);
-		$(headerAnchor).attr('data-toggle', 'collapse');
+		$(headerAnchor).attr('data-bs-toggle', 'collapse');
 
 		$(header).addClass('d-inline');
 		$(header).html('Label');
@@ -72,26 +78,25 @@ jQuery(document).ready(function($) {
 	function addAlertControls( c ){
 		var alertOptions = document.createElement('DIV');
 		var alertStatus = document.createElement('INPUT');
+		var alertStatusLabel = document.createElement('LABEL');
 		var removeAlert = document.createElement('BUTTON');
 				
 		$(alertStatus).attr('type', 'checkbox');
-		$(alertStatus).attr('checked', 'true');
-		$(alertStatus).attr('data-toggle', 'toggle');
 		$(alertStatus).attr('name', 'alert-status-' + c);
 		$(alertStatus).attr('id', 'alert-status-' + c);
-		$(alertStatus).addClass('form-control');
+		$(alertStatus).addClass('btn-check');
 
+		$(alertStatusLabel).addClass('btn btn-success');
+		$(alertStatusLabel).attr('for', 'alert-status-' + c);
+		$(alertStatusLabel).html('Display');
 
 		$(removeAlert).addClass('btn btn-danger remove-alert ms-1');
 		$(removeAlert).html('Remove');
 		removeAlert.addEventListener('click', function(e){ removeAlertFunc(this) } )
 		
 		$(alertOptions).append(alertStatus);
+		$(alertOptions).append(alertStatusLabel);
 		$(alertOptions).append(removeAlert);
-
-		$(alertStatus).bootstrapToggle({
-			onstyle: 'success',
-		  });
 
 		return alertOptions;
 	}
@@ -118,7 +123,7 @@ jQuery(document).ready(function($) {
 		var alertTitleSmall = document.createElement('SMALL');
 		var alertTitleInput = document.createElement('INPUT');
 		
-		$(alertTitle).addClass('col-sm-7');
+		$(alertTitle).addClass('mb-3 col-sm-7');
 		
 		$(alertTitleLabel).attr('for', 'alert-header-' + c);
 		$(alertTitleLabel).addClass('mb-0');
@@ -147,7 +152,7 @@ jQuery(document).ready(function($) {
 		var alertMsgSmall = document.createElement('SMALL');
 		var alertMsgTextarea = document.createElement('TEXTAREA');
 
-		$(alertMsg).addClass('col-sm-12');
+		$(alertMsg).addClass('mb-3 col-sm-12');
 
 		$(alertMsgLabel).attr('for', 'alert-message-' + c);
 		$(alertMsgLabel).html('<strong>Message</strong>');
@@ -170,14 +175,14 @@ jQuery(document).ready(function($) {
 	function alertSettings( c ){
 		var alertSettingsDiv = document.createElement('DIV');
 		
-		$(alertSettingsDiv).addClass('col-sm-12');
+		$(alertSettingsDiv).addClass('mb-3 col-sm-12');
 
 
 		$(alertSettingsDiv).append('<!-- Display On -->');
 		$(alertSettingsDiv).append(addDisplayOnField(c));
 		$(alertSettingsDiv).append('<!-- Banner Color -->');
 		$(alertSettingsDiv).append(addBannerColorField(c));
-		$(alertSettingsDiv).append('<!-- Read More -->');
+		$(alertSettingsDiv).append('<!-- Read More Button -->');
 		$(alertSettingsDiv).append(addReadMoreFields(c));
 		$(alertSettingsDiv).append(addReadMoreSettings(c));
 		$(alertSettingsDiv).append('<!-- Banner Icon -->');
@@ -197,7 +202,7 @@ jQuery(document).ready(function($) {
 		var displayOnAllGroupInput = document.createElement('INPUT');
 		var displayOnAllGroupLabel = document.createElement('LABEL');
 
-		$(displayOnGroup).addClass('col-sm');
+		$(displayOnGroup).addClass('mb-3 col-sm');
 		$(displayOnGroup).attr('role', 'radiogroup');
 		$(displayOnGroup).attr('aria-label', 'Alert Display On Options');
 
@@ -207,26 +212,26 @@ jQuery(document).ready(function($) {
 		$(displayOnSmall).addClass('text-muted d-block mb-2');
 		$(displayOnSmall).html('Select whether alert should display on home page or on all pages.');
 
-		$(displayOnHomeGroup).addClass('form-check form-check-inline ps-0');
+		$(displayOnHomeGroup).addClass('form-check form-check-inline');
 
 		$(displayOnHomeGroupInput).attr('id', 'alert-display-home-' + c);
 		$(displayOnHomeGroupInput).attr('name', 'alert-display-' + c);
 		$(displayOnHomeGroupInput).attr('type', 'radio');
 		$(displayOnHomeGroupInput).val('home');
 		$(displayOnHomeGroupInput).attr('checked', 'true');
-		$(displayOnHomeGroupInput).addClass('form-check-input');
+		$(displayOnHomeGroupInput).addClass('form-check-input mt-1');
 
 		$(displayOnHomeGroupLabel).addClass('form-check-label');
 		$(displayOnHomeGroupLabel).attr('for', 'alert-display-home-' + c);
 		$(displayOnHomeGroupLabel).html('Home Page Only');
 
-		$(displayOnAllGroup).addClass('form-check form-check-inline ps-0');
+		$(displayOnAllGroup).addClass('form-check form-check-inline');
 		
 		$(displayOnAllGroupInput).attr('id', 'alert-display-all-' + c);
 		$(displayOnAllGroupInput).attr('name', 'alert-display-' + c);
 		$(displayOnAllGroupInput).attr('type', 'radio');
 		$(displayOnAllGroupInput).val('all');
-		$(displayOnAllGroupInput).addClass('form-check-input');
+		$(displayOnAllGroupInput).addClass('form-check-input mt-1');
 
 		$(displayOnAllGroupLabel).addClass('form-check-label');
 		$(displayOnAllGroupLabel).attr('for', 'alert-display-all-' + c);
@@ -253,7 +258,7 @@ jQuery(document).ready(function($) {
 		var bannerColorInput = document.createElement('INPUT');
 
 		
-		$(bannerColorGroup).addClass('col-sm');
+		$(bannerColorGroup).addClass('mb-3 col-sm');
 
 		$(bannerColorLabel).attr('for', 'alert-banner-color-' + c);
 		$(bannerColorLabel).addClass('d-block mb-0');
@@ -285,32 +290,28 @@ jQuery(document).ready(function($) {
 
 	function addReadMoreFields( c ){
 		var readMoreGroup = document.createElement('DIV');
-		var readMoreLabel = document.createElement('LABEL');
-
-		var readMoreAnchor = document.createElement('A');
-		
+		var readMoreSwitch = document.createElement('DIV');
 		var readMoreInput = document.createElement('INPUT');
+		var readMoreLabel = document.createElement('LABEL');
 		
-		$(readMoreLabel).addClass('d-block mb-0');
-		$(readMoreLabel).html('<strong>Read More Button</strong>');
+		
+		$(readMoreGroup).addClass('mb-3 col-sm');
 
-		$(readMoreAnchor).attr('data-toggle', 'collapse');
-		$(readMoreAnchor).attr('href', '#alert-banner-read-more-' + c);
-		$(readMoreAnchor).attr('aria-expanded', 'true');
-		$(readMoreAnchor).addClass('shadow-none');
+		$(readMoreSwitch).addClass('form-check form-switch');
 
 		$(readMoreInput).attr('type', 'checkbox');
 		$(readMoreInput).attr('checked', 'true');
 		$(readMoreInput).attr('name', 'alert-banner-read-more-' + c);
 		$(readMoreInput).attr('id', 'alert-banner-read-more-' + c);
-		$(readMoreInput).addClass('form-control');
+		$(readMoreInput).addClass('form-check-input mt-1');
 
-		$(readMoreAnchor).append(readMoreInput);
+		$(readMoreLabel).addClass('d-block mb-0 form-check-label');
+		$(readMoreLabel).html('<strong>Read More Button</strong>');
 
-		$(readMoreGroup).append(readMoreLabel);
-		$(readMoreGroup).append(readMoreAnchor);
+		$(readMoreSwitch).append(readMoreInput);
+		$(readMoreSwitch).append(readMoreLabel);
 
-		$(readMoreInput).bootstrapToggle();
+		$(readMoreGroup).append(readMoreSwitch);
 
 		return readMoreGroup;
 	}
@@ -325,6 +326,7 @@ jQuery(document).ready(function($) {
 		var readMoreURLInput = document.createElement('INPUT');
 		var readMoreURLLabel = document.createElement('LABEL');
 		var readMoreTargetGroup = document.createElement('DIV');
+		var readMoreTargetSwitchGroup = document.createElement('DIV');
 		var readMoreTargetInput = document.createElement('INPUT');
 		var readMoreTargetLabel = document.createElement('LABEL');
 
@@ -333,7 +335,7 @@ jQuery(document).ready(function($) {
 		$(readMoreSettings).addClass('collapse show');
 
 		// Read More Text Group
-		$(readMoreTextGroup).addClass('col-sm-6');
+		$(readMoreTextGroup).addClass('mb-3 col-sm-6');
 
 		$(readMoreTextLabel).addClass('d-block mb-0');
 		$(readMoreTextLabel).html('<strong>Read More Button Text</strong>');
@@ -348,7 +350,7 @@ jQuery(document).ready(function($) {
 		$(readMoreTextSmall).html('(Max Characters: 16)');
 
 		// Read More URL Group
-		$(readMoreURLGroup).addClass('col-sm-6 d-inline-block me-1');
+		$(readMoreURLGroup).addClass('mb-3 col-sm-6 d-inline-block');
 
 		$(readMoreURLLabel).addClass('d-block mb-0');
 		$(readMoreURLLabel).html('<strong>Read More Button Url</strong>');
@@ -359,38 +361,33 @@ jQuery(document).ready(function($) {
 		$(readMoreURLInput).addClass('form-control');
 		
 		// Read More Target Group
-		$(readMoreTargetGroup).addClass('col-sm-4 d-inline-block align-top');
-
-		$(readMoreTargetLabel).addClass('d-block mb-0');
+		$(readMoreTargetGroup).addClass('col-sm-4 d-inline-block');
+		$(readMoreTargetSwitchGroup).addClass('form-check form-switch ms-1');
+		
+		$(readMoreTargetLabel).addClass('d-block mb-0 form-check-label');
 		$(readMoreTargetLabel).html('<strong>Open link in New Tab</strong>')
 
 		$(readMoreTargetInput).attr('type', 'checkbox');
 		$(readMoreTargetInput).attr('checked', 'true');
-		$(readMoreTargetInput).attr('data-toggle', 'toggle');
-		$(readMoreTargetInput).attr('data-size', 'sm');
 		$(readMoreTargetInput).attr('name', 'alert-read-more-target-' + c);
 		$(readMoreTargetInput).attr('id', 'alert-read-more-target-' + c);
-		$(readMoreTargetInput).addClass('form-control');
+		$(readMoreTargetInput).addClass('form-check-input mt-1');
 
 		$(readMoreTextGroup).append(readMoreTextLabel);
 		$(readMoreTextGroup).append(readMoreTextInput);
-		$(readMoreTextGroup).append(readMoreTextSmall);
 
 		$(readMoreURLGroup).append(readMoreURLLabel);
 		$(readMoreURLGroup).append(readMoreURLInput);
 		
-		$(readMoreTargetGroup).append(readMoreTargetLabel);
-		$(readMoreTargetGroup).append(readMoreTargetInput);
+		$(readMoreTargetSwitchGroup).append(readMoreTargetInput);
+		$(readMoreTargetSwitchGroup).append(readMoreTargetLabel);		
+
+		$(readMoreTargetGroup).append(readMoreTargetSwitchGroup);
 
 		$(readMoreSettings).append(readMoreTextGroup);
 		$(readMoreSettings).append(readMoreURLGroup);
 		$(readMoreSettings).append(readMoreTargetGroup);
 		
-		$(readMoreTargetInput).bootstrapToggle({
-			on: 'Yes',
-			off: 'No'
-		});
-
 		return readMoreSettings;
 	}
 

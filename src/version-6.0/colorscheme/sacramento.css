@@ -38,18 +38,20 @@
 
 /*  SECONDARY THEME COLORS	*/
 .color-s1 {
-  color: #E1ECF7 !important;
+  color: #e1ecf7 !important;
 }
 
-.color-s1-hover:hover, .color-s1-hover:focus {
-  color: #E1ECF7 !important;
+.color-s1-hover:hover,
+.color-s1-hover:focus {
+  color: #e1ecf7 !important;
 }
 
 .color-s2 {
   color: #c7d9ea !important;
 }
 
-.color-s2-hover:hover, .color-s2-hover:focus {
+.color-s2-hover:hover,
+.color-s2-hover:focus {
   color: #c7d9ea !important;
 }
 
@@ -57,7 +59,8 @@
   color: #9bb8d3 !important;
 }
 
-.color-s3-hover:hover, .color-s3-hover:focus {
+.color-s3-hover:hover,
+.color-s3-hover:focus {
   color: #9bb8d3 !important;
 }
 
@@ -92,27 +95,39 @@
   background-color: #4f0000 !important;
 }
 
-.bg-s1, .bg-s1-hover:hover, .bg-s1-hover:focus {
-  background-color: #E1ECF7 !important;
+.bg-s1,
+.bg-s1-hover:hover,
+.bg-s1-hover:focus {
+  background-color: #e1ecf7 !important;
 }
 
-.bg-s1-hover-color, .bg-s1-hover-color:hover, .bg-s1-hover-color:focus {
+.bg-s1-hover-color,
+.bg-s1-hover-color:hover,
+.bg-s1-hover-color:focus {
   background-color: #c5daef !important;
 }
 
-.bg-s2, .bg-s2-hover:hover, .bg-s2-hover:focus {
+.bg-s2,
+.bg-s2-hover:hover,
+.bg-s2-hover:focus {
   background-color: #c7d9ea !important;
 }
 
-.bg-s2-hover-color, .bg-s2-hover-color:hover, .bg-s2-hover-color:focus {
+.bg-s2-hover-color,
+.bg-s2-hover-color:hover,
+.bg-s2-hover-color:focus {
   background-color: #adc7e0 !important;
 }
 
-.bg-s3, .bg-s3-hover:hover, .bg-s3-hover:focus {
+.bg-s3,
+.bg-s3-hover:hover,
+.bg-s3-hover:focus {
   background-color: #9bb8d3 !important;
 }
 
-.bg-s3-hover-color, .bg-s3-hover-color:hover, .bg-s3-hover-color:focus {
+.bg-s3-hover-color,
+.bg-s3-hover-color:hover,
+.bg-s3-hover-color:focus {
   background-color: #82a6c8 !important;
 }
 
@@ -210,7 +225,7 @@
 }
 
 .brd-s1 {
-  border-color: #E1ECF7 !important;
+  border-color: #e1ecf7 !important;
 }
 
 .brd-s2 {
@@ -324,7 +339,8 @@
 }
 
 @media (max-width: 767px) {
-  .nav-full-width-icons .settings-links .utility-links a, .nav-full-width-icons .settings-links .utility-links button {
+  .nav-full-width-icons .settings-links .utility-links a,
+  .nav-full-width-icons .settings-links .utility-links button {
     border: 1px solid #153554;
     color: #153554;
   }
@@ -353,30 +369,6 @@ h1 span[class^=ca-gov-icon-]:first-child {
    NAVIGATION
    /source/scss/colortheme/cs-navigation.scss
 ----------------------------------------- */
-.mobile-controls {
-  background: #fff;
-}
-
-.toggle-menu span {
-  background-color: #72717c !important;
-}
-
-.mobile-control {
-  color: #72717c;
-}
-.mobile-control a {
-  color: #72717c;
-  text-decoration: none;
-}
-.mobile-control.toggle-sub-nav {
-  color: #153554;
-  background-color: #f1f6fb;
-}
-.mobile-control.toggle-sub-nav:hover, .mobile-control.toggle-sub-nav:focus {
-  outline: none;
-  background-color: #f9fbfd;
-}
-
 .nav-item.active > a,
 .nav-item.active .first-level-btn,
 .nav-item.active .first-level-link,
@@ -445,10 +437,28 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
 .first-level-btn:focus {
   color: #3b3a48;
 }
-@media (max-width: 767px) {
-  .first-level-link,
-  .first-level-btn {
-    border-bottom: 1px solid #E1ECF7;
+@media (max-width: 991px) {
+  .first-level-link.active,
+  .first-level-btn.active {
+    background-color: #1c4771 !important;
+    color: #fff !important;
+  }
+  .first-level-link.active:hover, .first-level-link.active:focus,
+  .first-level-btn.active:hover,
+  .first-level-btn.active:focus {
+    background-color: #153554 !important;
+    color: #fff !important;
+  }
+  .first-level-link.active::before, .first-level-link.active::after,
+  .first-level-btn.active::before,
+  .first-level-btn.active::after {
+    border-left: none !important;
+  }
+  .first-level-link:hover, .first-level-link:focus,
+  .first-level-btn:hover,
+  .first-level-btn:focus {
+    background-color: #1c4771 !important;
+    color: #fff !important;
   }
 }
 
@@ -457,6 +467,17 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
 }
 .second-level-link [class^=ca-gov-icon-] {
   color: #5e5e6a;
+}
+@media (max-width: 991px) {
+  .second-level-link {
+    background-color: #153554;
+  }
+  .second-level-link.active {
+    background-color: #1c4771;
+  }
+  .second-level-link.active:hover, .second-level-link.active:focus {
+    background-color: #153554;
+  }
 }
 
 .second-level-nav > li {
@@ -467,10 +488,10 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
 .second-level-nav > li:hover, .second-level-nav > li:focus {
   background: #fff;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .second-level-nav > li {
-    border-right: none;
-    border-bottom: 1px solid #E1ECF7;
+    border: none;
+    border-top: 1px solid #d4d4d7;
   }
   .second-level-nav > li:hover, .second-level-nav > li:focus {
     background: white;
@@ -507,6 +528,7 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
     background: white;
   }
 }
+
 @media (min-width: 768px) {
   .nav-item::after {
     background-color: transparent;
@@ -527,10 +549,29 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
     background-color: #102840;
   }
 }
+@media (max-width: 991px) {
+  .nav-item.active .first-level-btn {
+    background-color: #1c4771 !important;
+    color: #fff !important;
+  }
+  .nav-item.active .first-level-btn:hover, .nav-item.active .first-level-btn:focus {
+    background-color: #153554 !important;
+    color: #fff !important;
+  }
+  .nav-item.active .first-level-btn::before, .nav-item.active .first-level-btn::after {
+    border-left: none !important;
+  }
+}
 .has-sub .rotate {
   color: #153554;
 }
 
+/* Dark Mobile menu */
+@media (max-width: 991px) {
+  .navigation-search {
+    background-color: #153554;
+  }
+}
 /* -----------------------------------------
    SEARCH
    /source/scss/colortheme/cs-search.scss
@@ -542,6 +583,11 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
 .search-container .search-textfield {
   border-color: #72717c !important;
 }
+@media (max-width: 991px) {
+  .search-container .search-textfield {
+    border-color: #fff !important;
+  }
+}
 .search-container .gsc-search-button {
   background-color: #72717c;
   border-color: #72717c;
@@ -552,6 +598,22 @@ nav-item-search:focus .first-level-link > span[class^=ca-gov-icon] {
 }
 .search-container .gsc-search-button .ca-gov-icon-search {
   color: #fff;
+}
+@media (max-width: 991px) {
+  .search-container .gsc-search-button {
+    background-color: #fff;
+    border-color: #fff;
+  }
+  .search-container .gsc-search-button:hover, .search-container .gsc-search-button:focus {
+    background-color: #fafafa;
+    border-color: #fafafa;
+  }
+  .search-container .gsc-search-button:hover .ca-gov-icon-search, .search-container .gsc-search-button:focus .ca-gov-icon-search {
+    color: #3b3a48;
+  }
+  .search-container .gsc-search-button .ca-gov-icon-search {
+    color: #5e5e6a;
+  }
 }
 .search-container:hover .search-textfield, .search-container:focus .search-textfield, .search-container.active .search-textfield {
   background-color: #fff;
@@ -653,7 +715,7 @@ a:focus {
 }
 .section-understated,
 .card-understated {
-  background: #E1ECF7;
+  background: #e1ecf7;
 }
 .section-overstated,
 .card-overstated {
@@ -668,7 +730,7 @@ a:focus {
 .section-overstated a:not(.btn):hover, .section-overstated a:not(.btn):focus,
 .card-overstated a:not(.btn):hover,
 .card-overstated a:not(.btn):focus {
-  color: #E1ECF7;
+  color: #e1ecf7;
   text-decoration: underline;
 }
 .section-overstated a:not(.btn):focus,
@@ -1156,7 +1218,7 @@ fieldset[disabled] .card-impact .btn-default.active {
 .section-primary a:not(.btn):hover, .section-primary a:not(.btn):focus,
 .card-primary a:not(.btn):hover,
 .card-primary a:not(.btn):focus {
-  color: #E1ECF7;
+  color: #e1ecf7;
   text-decoration: underline;
 }
 .section-primary a:not(.btn):focus,
@@ -1463,7 +1525,7 @@ fieldset[disabled] .card-inverted .btn-standout.active {
   text-decoration: none;
 }
 .bg-primary a:not(.btn):hover, .bg-primary a:not(.btn):focus {
-  color: #E1ECF7;
+  color: #e1ecf7;
   text-decoration: underline;
 }
 .bg-primary a:not(.btn):focus {
@@ -1530,7 +1592,7 @@ a.text-white:not(.btn):hover {
 }
 
 .progress-bar-understated {
-  background-color: #E1ECF7;
+  background-color: #e1ecf7;
 }
 .progress-striped .progress-bar-understated {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -1552,21 +1614,21 @@ a.text-white:not(.btn):hover {
 
 /* Accent Colors */
 .progress-bar-accent1 {
-  background-color: #1B79C0;
+  background-color: #1b79c0;
 }
 .progress-striped .progress-bar-accent1 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
 .progress-bar-accent1 {
-  background-color: #1B79C0;
+  background-color: #1b79c0;
 }
 .progress-striped .progress-bar-accent1 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
 .progress-bar-accent2 {
-  background-color: #077CBB;
+  background-color: #077cbb;
 }
 .progress-striped .progress-bar-accent2 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -1580,7 +1642,7 @@ a.text-white:not(.btn):hover {
 }
 
 .progress-bar-accent4 {
-  background-color: #32852E;
+  background-color: #32852e;
 }
 .progress-striped .progress-bar-accent4 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -1594,21 +1656,21 @@ a.text-white:not(.btn):hover {
 }
 
 .progress-bar-accent6 {
-  background-color: #BE37CD;
+  background-color: #be37cd;
 }
 .progress-striped .progress-bar-accent6 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
 .progress-bar-accent7 {
-  background-color: #C93E2C;
+  background-color: #c93e2c;
 }
 .progress-striped .progress-bar-accent7 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
 .progress-bar-accent8 {
-  background-color: #BB520C;
+  background-color: #bb520c;
 }
 .progress-striped .progress-bar-accent8 {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -1629,7 +1691,7 @@ a.text-white:not(.btn):hover {
   background: whitesmoke;
 }
 .testimonial-understated {
-  background: #E1ECF7;
+  background: #e1ecf7;
 }
 .testimonial-overstated {
   background: #9bb8d3;
@@ -1686,7 +1748,7 @@ a.text-white:not(.btn):hover {
   text-decoration: none;
 }
 .testimonial-primary a:not(.btn):hover, .testimonial-primary a:not(.btn):focus {
-  color: #E1ECF7;
+  color: #e1ecf7;
   text-decoration: underline;
 }
 .testimonial-primary a:not(.btn):focus {
@@ -1784,7 +1846,7 @@ a.text-white:not(.btn):hover {
   text-decoration: none;
 }
 .card-primary a:not(.btn):hover, .card-primary a:not(.btn):focus {
-  color: #E1ECF7;
+  color: #e1ecf7;
   text-decoration: underline;
 }
 .card-primary a:not(.btn):focus {
@@ -1804,32 +1866,40 @@ a.text-white:not(.btn):hover {
   background-color: #035a80;
 }
 
-.card-inverted, .card-inverse {
+.card-inverted,
+.card-inverse {
   background-color: #000000;
   border-color: #000000;
   color: #ffffff;
 }
-.card-inverted a:not(.btn), .card-inverse a:not(.btn) {
+.card-inverted a:not(.btn),
+.card-inverse a:not(.btn) {
   color: #9bb8d3;
   text-decoration: none;
 }
-.card-inverted a:not(.btn):hover, .card-inverted a:not(.btn):focus, .card-inverse a:not(.btn):hover, .card-inverse a:not(.btn):focus {
+.card-inverted a:not(.btn):hover, .card-inverted a:not(.btn):focus,
+.card-inverse a:not(.btn):hover,
+.card-inverse a:not(.btn):focus {
   color: #82a6c8;
   text-decoration: underline;
 }
-.card-inverted a:not(.btn):focus, .card-inverse a:not(.btn):focus {
+.card-inverted a:not(.btn):focus,
+.card-inverse a:not(.btn):focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.card-inverted a:not(.btn), .card-inverse a:not(.btn) {
+.card-inverted a:not(.btn),
+.card-inverse a:not(.btn) {
   text-decoration: underline;
 }
-.card-inverted .card-header, .card-inverse .card-header {
+.card-inverted .card-header,
+.card-inverse .card-header {
   border-bottom: 1px solid #000000;
   background-color: black;
 }
-.card-inverted .card-footer, .card-inverse .card-footer {
+.card-inverted .card-footer,
+.card-inverse .card-footer {
   border-top: 1px solid #000000;
   background-color: black;
 }
@@ -1954,10 +2024,12 @@ a.text-white:not(.btn):hover {
   background-color: #b83928;
 }
 
-.card-inverse .card-header, .card-inverted .card-header {
+.card-inverse .card-header,
+.card-inverted .card-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.card-inverse .card-footer, .card-inverted .card-footer {
+.card-inverse .card-footer,
+.card-inverted .card-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -1966,307 +2038,817 @@ a.text-white:not(.btn):hover {
    leaving .panel class for backward compatibility
 ----------------------------------------- */
 /* Default Cards */
-.panel-default, .card-default {
+.panel-default,
+.card-default {
   border-color: #ddd;
 }
-.panel-default > .panel-heading, .panel-default > .card-heading, .card-default > .panel-heading, .card-default > .card-heading {
+.panel-default > .panel-heading, .panel-default > .card-heading,
+.card-default > .panel-heading,
+.card-default > .card-heading {
   color: #3b3a48;
   background-color: #f5f5f5;
   border-color: #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body,
 .panel-default > .panel-heading + .card-collapse > .card-body, .panel-default > .card-heading + .panel-collapse > .panel-body,
-.panel-default > .card-heading + .card-collapse > .card-body, .card-default > .panel-heading + .panel-collapse > .panel-body,
-.card-default > .panel-heading + .card-collapse > .card-body, .card-default > .card-heading + .panel-collapse > .panel-body,
+.panel-default > .card-heading + .card-collapse > .card-body,
+.card-default > .panel-heading + .panel-collapse > .panel-body,
+.card-default > .panel-heading + .card-collapse > .card-body,
+.card-default > .card-heading + .panel-collapse > .panel-body,
 .card-default > .card-heading + .card-collapse > .card-body {
   border-top-color: #ddd;
 }
-.panel-default > .panel-heading .badge, .panel-default > .card-heading .badge, .card-default > .panel-heading .badge, .card-default > .card-heading .badge {
+.panel-default > .panel-heading .badge, .panel-default > .card-heading .badge,
+.card-default > .panel-heading .badge,
+.card-default > .card-heading .badge {
   color: #f5f5f5;
   background-color: #3b3a48;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body,
 .panel-default > .panel-footer + .card-collapse > .card-body, .panel-default > .card-footer + .panel-collapse > .panel-body,
-.panel-default > .card-footer + .card-collapse > .card-body, .card-default > .panel-footer + .panel-collapse > .panel-body,
-.card-default > .panel-footer + .card-collapse > .card-body, .card-default > .card-footer + .panel-collapse > .panel-body,
+.panel-default > .card-footer + .card-collapse > .card-body,
+.card-default > .panel-footer + .panel-collapse > .panel-body,
+.card-default > .panel-footer + .card-collapse > .card-body,
+.card-default > .card-footer + .panel-collapse > .panel-body,
 .card-default > .card-footer + .card-collapse > .card-body {
   border-bottom-color: #ddd;
 }
-.panel-default .panel-heading h2 span[class^=ca-gov-icon-], .panel-default .panel-heading h3 span[class^=ca-gov-icon-], .panel-default .panel-heading h4 span[class^=ca-gov-icon-], .panel-default .panel-heading h5 span[class^=ca-gov-icon-], .panel-default .card-heading h2 span[class^=ca-gov-icon-], .panel-default .card-heading h3 span[class^=ca-gov-icon-], .panel-default .card-heading h4 span[class^=ca-gov-icon-], .panel-default .card-heading h5 span[class^=ca-gov-icon-], .panel-default .card-header h2 span[class^=ca-gov-icon-], .panel-default .card-header h3 span[class^=ca-gov-icon-], .panel-default .card-header h4 span[class^=ca-gov-icon-], .panel-default .card-header h5 span[class^=ca-gov-icon-], .card-default .panel-heading h2 span[class^=ca-gov-icon-], .card-default .panel-heading h3 span[class^=ca-gov-icon-], .card-default .panel-heading h4 span[class^=ca-gov-icon-], .card-default .panel-heading h5 span[class^=ca-gov-icon-], .card-default .card-heading h2 span[class^=ca-gov-icon-], .card-default .card-heading h3 span[class^=ca-gov-icon-], .card-default .card-heading h4 span[class^=ca-gov-icon-], .card-default .card-heading h5 span[class^=ca-gov-icon-], .card-default .card-header h2 span[class^=ca-gov-icon-], .card-default .card-header h3 span[class^=ca-gov-icon-], .card-default .card-header h4 span[class^=ca-gov-icon-], .card-default .card-header h5 span[class^=ca-gov-icon-] {
+.panel-default .panel-heading h2 span[class^=ca-gov-icon-],
+.panel-default .panel-heading h3 span[class^=ca-gov-icon-],
+.panel-default .panel-heading h4 span[class^=ca-gov-icon-],
+.panel-default .panel-heading h5 span[class^=ca-gov-icon-],
+.panel-default .card-heading h2 span[class^=ca-gov-icon-],
+.panel-default .card-heading h3 span[class^=ca-gov-icon-],
+.panel-default .card-heading h4 span[class^=ca-gov-icon-],
+.panel-default .card-heading h5 span[class^=ca-gov-icon-],
+.panel-default .card-header h2 span[class^=ca-gov-icon-],
+.panel-default .card-header h3 span[class^=ca-gov-icon-],
+.panel-default .card-header h4 span[class^=ca-gov-icon-],
+.panel-default .card-header h5 span[class^=ca-gov-icon-],
+.card-default .panel-heading h2 span[class^=ca-gov-icon-],
+.card-default .panel-heading h3 span[class^=ca-gov-icon-],
+.card-default .panel-heading h4 span[class^=ca-gov-icon-],
+.card-default .panel-heading h5 span[class^=ca-gov-icon-],
+.card-default .card-heading h2 span[class^=ca-gov-icon-],
+.card-default .card-heading h3 span[class^=ca-gov-icon-],
+.card-default .card-heading h4 span[class^=ca-gov-icon-],
+.card-default .card-heading h5 span[class^=ca-gov-icon-],
+.card-default .card-header h2 span[class^=ca-gov-icon-],
+.card-default .card-header h3 span[class^=ca-gov-icon-],
+.card-default .card-header h4 span[class^=ca-gov-icon-],
+.card-default .card-header h5 span[class^=ca-gov-icon-] {
   color: #153554;
 }
-.panel-default .panel-heading .options .btn-default, .panel-default .card-heading .options .btn-default, .panel-default .card-header .options .btn-default, .card-default .panel-heading .options .btn-default, .card-default .card-heading .options .btn-default, .card-default .card-header .options .btn-default {
+.panel-default .panel-heading .options .btn-default,
+.panel-default .card-heading .options .btn-default,
+.panel-default .card-header .options .btn-default,
+.card-default .panel-heading .options .btn-default,
+.card-default .card-heading .options .btn-default,
+.card-default .card-header .options .btn-default {
   color: #000;
   background-color: #fcfcfc;
   border-color: #ddd;
 }
-.panel-default .panel-heading .options .btn-default:hover, .panel-default .card-heading .options .btn-default:hover, .panel-default .card-header .options .btn-default:hover, .card-default .panel-heading .options .btn-default:hover, .card-default .card-heading .options .btn-default:hover, .card-default .card-header .options .btn-default:hover {
+.panel-default .panel-heading .options .btn-default:hover,
+.panel-default .card-heading .options .btn-default:hover,
+.panel-default .card-header .options .btn-default:hover,
+.card-default .panel-heading .options .btn-default:hover,
+.card-default .card-heading .options .btn-default:hover,
+.card-default .card-header .options .btn-default:hover {
   color: #000;
   background-color: #fcfcfc;
   border-color: #e0e0e0;
 }
-.btn-check:focus + .panel-default .panel-heading .options .btn-default, .panel-default .panel-heading .options .btn-default:focus, .btn-check:focus + .panel-default .card-heading .options .btn-default, .panel-default .card-heading .options .btn-default:focus, .btn-check:focus + .panel-default .card-header .options .btn-default, .panel-default .card-header .options .btn-default:focus, .btn-check:focus + .card-default .panel-heading .options .btn-default, .card-default .panel-heading .options .btn-default:focus, .btn-check:focus + .card-default .card-heading .options .btn-default, .card-default .card-heading .options .btn-default:focus, .btn-check:focus + .card-default .card-header .options .btn-default, .card-default .card-header .options .btn-default:focus {
+.btn-check:focus + .panel-default .panel-heading .options .btn-default, .panel-default .panel-heading .options .btn-default:focus,
+.btn-check:focus + .panel-default .card-heading .options .btn-default,
+.panel-default .card-heading .options .btn-default:focus,
+.btn-check:focus + .panel-default .card-header .options .btn-default,
+.panel-default .card-header .options .btn-default:focus,
+.btn-check:focus + .card-default .panel-heading .options .btn-default,
+.card-default .panel-heading .options .btn-default:focus,
+.btn-check:focus + .card-default .card-heading .options .btn-default,
+.card-default .card-heading .options .btn-default:focus,
+.btn-check:focus + .card-default .card-header .options .btn-default,
+.card-default .card-header .options .btn-default:focus {
   color: #000;
   background-color: #fcfcfc;
   border-color: #e0e0e0;
   box-shadow: 0 0 0 0.25rem rgba(188, 188, 188, 0.5);
 }
-.btn-check:checked + .panel-default .panel-heading .options .btn-default, .btn-check:active + .panel-default .panel-heading .options .btn-default, .panel-default .panel-heading .options .btn-default:active, .panel-default .panel-heading .options .btn-default.active, .show > .panel-default .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-default .card-heading .options .btn-default, .btn-check:active + .panel-default .card-heading .options .btn-default, .panel-default .card-heading .options .btn-default:active, .panel-default .card-heading .options .btn-default.active, .show > .panel-default .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-default .card-header .options .btn-default, .btn-check:active + .panel-default .card-header .options .btn-default, .panel-default .card-header .options .btn-default:active, .panel-default .card-header .options .btn-default.active, .show > .panel-default .card-header .options .btn-default.dropdown-toggle, .btn-check:checked + .card-default .panel-heading .options .btn-default, .btn-check:active + .card-default .panel-heading .options .btn-default, .card-default .panel-heading .options .btn-default:active, .card-default .panel-heading .options .btn-default.active, .show > .card-default .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-default .card-heading .options .btn-default, .btn-check:active + .card-default .card-heading .options .btn-default, .card-default .card-heading .options .btn-default:active, .card-default .card-heading .options .btn-default.active, .show > .card-default .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-default .card-header .options .btn-default, .btn-check:active + .card-default .card-header .options .btn-default, .card-default .card-header .options .btn-default:active, .card-default .card-header .options .btn-default.active, .show > .card-default .card-header .options .btn-default.dropdown-toggle {
+.btn-check:checked + .panel-default .panel-heading .options .btn-default, .btn-check:active + .panel-default .panel-heading .options .btn-default, .panel-default .panel-heading .options .btn-default:active, .panel-default .panel-heading .options .btn-default.active, .show > .panel-default .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-default .card-heading .options .btn-default,
+.btn-check:active + .panel-default .card-heading .options .btn-default,
+.panel-default .card-heading .options .btn-default:active,
+.panel-default .card-heading .options .btn-default.active,
+.show > .panel-default .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-default .card-header .options .btn-default,
+.btn-check:active + .panel-default .card-header .options .btn-default,
+.panel-default .card-header .options .btn-default:active,
+.panel-default .card-header .options .btn-default.active,
+.show > .panel-default .card-header .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-default .panel-heading .options .btn-default,
+.btn-check:active + .card-default .panel-heading .options .btn-default,
+.card-default .panel-heading .options .btn-default:active,
+.card-default .panel-heading .options .btn-default.active,
+.show > .card-default .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-default .card-heading .options .btn-default,
+.btn-check:active + .card-default .card-heading .options .btn-default,
+.card-default .card-heading .options .btn-default:active,
+.card-default .card-heading .options .btn-default.active,
+.show > .card-default .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-default .card-header .options .btn-default,
+.btn-check:active + .card-default .card-header .options .btn-default,
+.card-default .card-header .options .btn-default:active,
+.card-default .card-header .options .btn-default.active,
+.show > .card-default .card-header .options .btn-default.dropdown-toggle {
   color: #000;
   background-color: #fdfdfd;
   border-color: #e0e0e0;
 }
-.btn-check:checked + .panel-default .panel-heading .options .btn-default:focus, .btn-check:active + .panel-default .panel-heading .options .btn-default:focus, .panel-default .panel-heading .options .btn-default:active:focus, .panel-default .panel-heading .options .btn-default.active:focus, .show > .panel-default .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-default .card-heading .options .btn-default:focus, .btn-check:active + .panel-default .card-heading .options .btn-default:focus, .panel-default .card-heading .options .btn-default:active:focus, .panel-default .card-heading .options .btn-default.active:focus, .show > .panel-default .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-default .card-header .options .btn-default:focus, .btn-check:active + .panel-default .card-header .options .btn-default:focus, .panel-default .card-header .options .btn-default:active:focus, .panel-default .card-header .options .btn-default.active:focus, .show > .panel-default .card-header .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-default .panel-heading .options .btn-default:focus, .btn-check:active + .card-default .panel-heading .options .btn-default:focus, .card-default .panel-heading .options .btn-default:active:focus, .card-default .panel-heading .options .btn-default.active:focus, .show > .card-default .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-default .card-heading .options .btn-default:focus, .btn-check:active + .card-default .card-heading .options .btn-default:focus, .card-default .card-heading .options .btn-default:active:focus, .card-default .card-heading .options .btn-default.active:focus, .show > .card-default .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-default .card-header .options .btn-default:focus, .btn-check:active + .card-default .card-header .options .btn-default:focus, .card-default .card-header .options .btn-default:active:focus, .card-default .card-header .options .btn-default.active:focus, .show > .card-default .card-header .options .btn-default.dropdown-toggle:focus {
+.btn-check:checked + .panel-default .panel-heading .options .btn-default:focus, .btn-check:active + .panel-default .panel-heading .options .btn-default:focus, .panel-default .panel-heading .options .btn-default:active:focus, .panel-default .panel-heading .options .btn-default.active:focus, .show > .panel-default .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-default .card-heading .options .btn-default:focus,
+.btn-check:active + .panel-default .card-heading .options .btn-default:focus,
+.panel-default .card-heading .options .btn-default:active:focus,
+.panel-default .card-heading .options .btn-default.active:focus,
+.show > .panel-default .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-default .card-header .options .btn-default:focus,
+.btn-check:active + .panel-default .card-header .options .btn-default:focus,
+.panel-default .card-header .options .btn-default:active:focus,
+.panel-default .card-header .options .btn-default.active:focus,
+.show > .panel-default .card-header .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-default .panel-heading .options .btn-default:focus,
+.btn-check:active + .card-default .panel-heading .options .btn-default:focus,
+.card-default .panel-heading .options .btn-default:active:focus,
+.card-default .panel-heading .options .btn-default.active:focus,
+.show > .card-default .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-default .card-heading .options .btn-default:focus,
+.btn-check:active + .card-default .card-heading .options .btn-default:focus,
+.card-default .card-heading .options .btn-default:active:focus,
+.card-default .card-heading .options .btn-default.active:focus,
+.show > .card-default .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-default .card-header .options .btn-default:focus,
+.btn-check:active + .card-default .card-header .options .btn-default:focus,
+.card-default .card-header .options .btn-default:active:focus,
+.card-default .card-header .options .btn-default.active:focus,
+.show > .card-default .card-header .options .btn-default.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(188, 188, 188, 0.5);
 }
-.panel-default .panel-heading .options .btn-default:disabled, .panel-default .panel-heading .options .btn-default.disabled, .panel-default .card-heading .options .btn-default:disabled, .panel-default .card-heading .options .btn-default.disabled, .panel-default .card-header .options .btn-default:disabled, .panel-default .card-header .options .btn-default.disabled, .card-default .panel-heading .options .btn-default:disabled, .card-default .panel-heading .options .btn-default.disabled, .card-default .card-heading .options .btn-default:disabled, .card-default .card-heading .options .btn-default.disabled, .card-default .card-header .options .btn-default:disabled, .card-default .card-header .options .btn-default.disabled {
+.panel-default .panel-heading .options .btn-default:disabled, .panel-default .panel-heading .options .btn-default.disabled,
+.panel-default .card-heading .options .btn-default:disabled,
+.panel-default .card-heading .options .btn-default.disabled,
+.panel-default .card-header .options .btn-default:disabled,
+.panel-default .card-header .options .btn-default.disabled,
+.card-default .panel-heading .options .btn-default:disabled,
+.card-default .panel-heading .options .btn-default.disabled,
+.card-default .card-heading .options .btn-default:disabled,
+.card-default .card-heading .options .btn-default.disabled,
+.card-default .card-header .options .btn-default:disabled,
+.card-default .card-header .options .btn-default.disabled {
   color: #000;
   background-color: #fcfcfc;
   border-color: #ddd;
 }
-.panel-default .panel-body, .panel-default .card-body, .card-default .panel-body, .card-default .card-body {
+.panel-default .panel-body,
+.panel-default .card-body,
+.card-default .panel-body,
+.card-default .card-body {
   background: #fff;
   color: #3b3a48;
 }
 
 /* Overstated Cards */
-.panel-overstated, .card-overstated {
+.panel-overstated,
+.card-overstated {
   border-color: #ddd;
 }
-.panel-overstated > .panel-heading, .panel-overstated > .card-heading, .card-overstated > .panel-heading, .card-overstated > .card-heading {
+.panel-overstated > .panel-heading, .panel-overstated > .card-heading,
+.card-overstated > .panel-heading,
+.card-overstated > .card-heading {
   color: #fff;
   background-color: #153554;
   border-color: #153554;
 }
 .panel-overstated > .panel-heading + .panel-collapse > .panel-body,
 .panel-overstated > .panel-heading + .card-collapse > .card-body, .panel-overstated > .card-heading + .panel-collapse > .panel-body,
-.panel-overstated > .card-heading + .card-collapse > .card-body, .card-overstated > .panel-heading + .panel-collapse > .panel-body,
-.card-overstated > .panel-heading + .card-collapse > .card-body, .card-overstated > .card-heading + .panel-collapse > .panel-body,
+.panel-overstated > .card-heading + .card-collapse > .card-body,
+.card-overstated > .panel-heading + .panel-collapse > .panel-body,
+.card-overstated > .panel-heading + .card-collapse > .card-body,
+.card-overstated > .card-heading + .panel-collapse > .panel-body,
 .card-overstated > .card-heading + .card-collapse > .card-body {
   border-top-color: #ddd;
 }
-.panel-overstated > .panel-heading .badge, .panel-overstated > .card-heading .badge, .card-overstated > .panel-heading .badge, .card-overstated > .card-heading .badge {
+.panel-overstated > .panel-heading .badge, .panel-overstated > .card-heading .badge,
+.card-overstated > .panel-heading .badge,
+.card-overstated > .card-heading .badge {
   color: #153554;
   background-color: #fff;
 }
 .panel-overstated > .panel-footer + .panel-collapse > .panel-body,
 .panel-overstated > .panel-footer + .card-collapse > .card-body, .panel-overstated > .card-footer + .panel-collapse > .panel-body,
-.panel-overstated > .card-footer + .card-collapse > .card-body, .card-overstated > .panel-footer + .panel-collapse > .panel-body,
-.card-overstated > .panel-footer + .card-collapse > .card-body, .card-overstated > .card-footer + .panel-collapse > .panel-body,
+.panel-overstated > .card-footer + .card-collapse > .card-body,
+.card-overstated > .panel-footer + .panel-collapse > .panel-body,
+.card-overstated > .panel-footer + .card-collapse > .card-body,
+.card-overstated > .card-footer + .panel-collapse > .panel-body,
 .card-overstated > .card-footer + .card-collapse > .card-body {
   border-bottom-color: #ddd;
 }
-.panel-overstated .panel-heading, .panel-overstated .card-heading, .panel-overstated .card-header, .card-overstated .panel-heading, .card-overstated .card-heading, .card-overstated .card-header {
+.panel-overstated .panel-heading,
+.panel-overstated .card-heading,
+.panel-overstated .card-header,
+.card-overstated .panel-heading,
+.card-overstated .card-heading,
+.card-overstated .card-header {
   border-bottom-width: 5px;
   border-bottom-style: solid;
 }
-.panel-overstated .panel-heading h2 span[class^=ca-gov-icon-], .panel-overstated .panel-heading h3 span[class^=ca-gov-icon-], .panel-overstated .panel-heading h4 span[class^=ca-gov-icon-], .panel-overstated .panel-heading h5 span[class^=ca-gov-icon-], .panel-overstated .card-heading h2 span[class^=ca-gov-icon-], .panel-overstated .card-heading h3 span[class^=ca-gov-icon-], .panel-overstated .card-heading h4 span[class^=ca-gov-icon-], .panel-overstated .card-heading h5 span[class^=ca-gov-icon-], .panel-overstated .card-header h2 span[class^=ca-gov-icon-], .panel-overstated .card-header h3 span[class^=ca-gov-icon-], .panel-overstated .card-header h4 span[class^=ca-gov-icon-], .panel-overstated .card-header h5 span[class^=ca-gov-icon-], .card-overstated .panel-heading h2 span[class^=ca-gov-icon-], .card-overstated .panel-heading h3 span[class^=ca-gov-icon-], .card-overstated .panel-heading h4 span[class^=ca-gov-icon-], .card-overstated .panel-heading h5 span[class^=ca-gov-icon-], .card-overstated .card-heading h2 span[class^=ca-gov-icon-], .card-overstated .card-heading h3 span[class^=ca-gov-icon-], .card-overstated .card-heading h4 span[class^=ca-gov-icon-], .card-overstated .card-heading h5 span[class^=ca-gov-icon-], .card-overstated .card-header h2 span[class^=ca-gov-icon-], .card-overstated .card-header h3 span[class^=ca-gov-icon-], .card-overstated .card-header h4 span[class^=ca-gov-icon-], .card-overstated .card-header h5 span[class^=ca-gov-icon-] {
+.panel-overstated .panel-heading h2 span[class^=ca-gov-icon-],
+.panel-overstated .panel-heading h3 span[class^=ca-gov-icon-],
+.panel-overstated .panel-heading h4 span[class^=ca-gov-icon-],
+.panel-overstated .panel-heading h5 span[class^=ca-gov-icon-],
+.panel-overstated .card-heading h2 span[class^=ca-gov-icon-],
+.panel-overstated .card-heading h3 span[class^=ca-gov-icon-],
+.panel-overstated .card-heading h4 span[class^=ca-gov-icon-],
+.panel-overstated .card-heading h5 span[class^=ca-gov-icon-],
+.panel-overstated .card-header h2 span[class^=ca-gov-icon-],
+.panel-overstated .card-header h3 span[class^=ca-gov-icon-],
+.panel-overstated .card-header h4 span[class^=ca-gov-icon-],
+.panel-overstated .card-header h5 span[class^=ca-gov-icon-],
+.card-overstated .panel-heading h2 span[class^=ca-gov-icon-],
+.card-overstated .panel-heading h3 span[class^=ca-gov-icon-],
+.card-overstated .panel-heading h4 span[class^=ca-gov-icon-],
+.card-overstated .panel-heading h5 span[class^=ca-gov-icon-],
+.card-overstated .card-heading h2 span[class^=ca-gov-icon-],
+.card-overstated .card-heading h3 span[class^=ca-gov-icon-],
+.card-overstated .card-heading h4 span[class^=ca-gov-icon-],
+.card-overstated .card-heading h5 span[class^=ca-gov-icon-],
+.card-overstated .card-header h2 span[class^=ca-gov-icon-],
+.card-overstated .card-header h3 span[class^=ca-gov-icon-],
+.card-overstated .card-header h4 span[class^=ca-gov-icon-],
+.card-overstated .card-header h5 span[class^=ca-gov-icon-] {
   color: #fff;
 }
-.panel-overstated .panel-heading .options .btn-default, .panel-overstated .card-heading .options .btn-default, .panel-overstated .card-header .options .btn-default, .card-overstated .panel-heading .options .btn-default, .card-overstated .card-heading .options .btn-default, .card-overstated .card-header .options .btn-default {
+.panel-overstated .panel-heading .options .btn-default,
+.panel-overstated .card-heading .options .btn-default,
+.panel-overstated .card-header .options .btn-default,
+.card-overstated .panel-heading .options .btn-default,
+.card-overstated .card-heading .options .btn-default,
+.card-overstated .card-header .options .btn-default {
   color: #fff;
   background-color: #0d2033;
   border-color: #153554;
 }
-.panel-overstated .panel-heading .options .btn-default:hover, .panel-overstated .card-heading .options .btn-default:hover, .panel-overstated .card-header .options .btn-default:hover, .card-overstated .panel-heading .options .btn-default:hover, .card-overstated .card-heading .options .btn-default:hover, .card-overstated .card-header .options .btn-default:hover {
+.panel-overstated .panel-heading .options .btn-default:hover,
+.panel-overstated .card-heading .options .btn-default:hover,
+.panel-overstated .card-header .options .btn-default:hover,
+.card-overstated .panel-heading .options .btn-default:hover,
+.card-overstated .card-heading .options .btn-default:hover,
+.card-overstated .card-header .options .btn-default:hover {
   color: #fff;
   background-color: #0b1b2b;
   border-color: #112a43;
 }
-.btn-check:focus + .panel-overstated .panel-heading .options .btn-default, .panel-overstated .panel-heading .options .btn-default:focus, .btn-check:focus + .panel-overstated .card-heading .options .btn-default, .panel-overstated .card-heading .options .btn-default:focus, .btn-check:focus + .panel-overstated .card-header .options .btn-default, .panel-overstated .card-header .options .btn-default:focus, .btn-check:focus + .card-overstated .panel-heading .options .btn-default, .card-overstated .panel-heading .options .btn-default:focus, .btn-check:focus + .card-overstated .card-heading .options .btn-default, .card-overstated .card-heading .options .btn-default:focus, .btn-check:focus + .card-overstated .card-header .options .btn-default, .card-overstated .card-header .options .btn-default:focus {
+.btn-check:focus + .panel-overstated .panel-heading .options .btn-default, .panel-overstated .panel-heading .options .btn-default:focus,
+.btn-check:focus + .panel-overstated .card-heading .options .btn-default,
+.panel-overstated .card-heading .options .btn-default:focus,
+.btn-check:focus + .panel-overstated .card-header .options .btn-default,
+.panel-overstated .card-header .options .btn-default:focus,
+.btn-check:focus + .card-overstated .panel-heading .options .btn-default,
+.card-overstated .panel-heading .options .btn-default:focus,
+.btn-check:focus + .card-overstated .card-heading .options .btn-default,
+.card-overstated .card-heading .options .btn-default:focus,
+.btn-check:focus + .card-overstated .card-header .options .btn-default,
+.card-overstated .card-header .options .btn-default:focus {
   color: #fff;
   background-color: #0b1b2b;
   border-color: #112a43;
   box-shadow: 0 0 0 0.25rem rgba(56, 83, 110, 0.5);
 }
-.btn-check:checked + .panel-overstated .panel-heading .options .btn-default, .btn-check:active + .panel-overstated .panel-heading .options .btn-default, .panel-overstated .panel-heading .options .btn-default:active, .panel-overstated .panel-heading .options .btn-default.active, .show > .panel-overstated .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-overstated .card-heading .options .btn-default, .btn-check:active + .panel-overstated .card-heading .options .btn-default, .panel-overstated .card-heading .options .btn-default:active, .panel-overstated .card-heading .options .btn-default.active, .show > .panel-overstated .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-overstated .card-header .options .btn-default, .btn-check:active + .panel-overstated .card-header .options .btn-default, .panel-overstated .card-header .options .btn-default:active, .panel-overstated .card-header .options .btn-default.active, .show > .panel-overstated .card-header .options .btn-default.dropdown-toggle, .btn-check:checked + .card-overstated .panel-heading .options .btn-default, .btn-check:active + .card-overstated .panel-heading .options .btn-default, .card-overstated .panel-heading .options .btn-default:active, .card-overstated .panel-heading .options .btn-default.active, .show > .card-overstated .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-overstated .card-heading .options .btn-default, .btn-check:active + .card-overstated .card-heading .options .btn-default, .card-overstated .card-heading .options .btn-default:active, .card-overstated .card-heading .options .btn-default.active, .show > .card-overstated .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-overstated .card-header .options .btn-default, .btn-check:active + .card-overstated .card-header .options .btn-default, .card-overstated .card-header .options .btn-default:active, .card-overstated .card-header .options .btn-default.active, .show > .card-overstated .card-header .options .btn-default.dropdown-toggle {
+.btn-check:checked + .panel-overstated .panel-heading .options .btn-default, .btn-check:active + .panel-overstated .panel-heading .options .btn-default, .panel-overstated .panel-heading .options .btn-default:active, .panel-overstated .panel-heading .options .btn-default.active, .show > .panel-overstated .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-overstated .card-heading .options .btn-default,
+.btn-check:active + .panel-overstated .card-heading .options .btn-default,
+.panel-overstated .card-heading .options .btn-default:active,
+.panel-overstated .card-heading .options .btn-default.active,
+.show > .panel-overstated .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-overstated .card-header .options .btn-default,
+.btn-check:active + .panel-overstated .card-header .options .btn-default,
+.panel-overstated .card-header .options .btn-default:active,
+.panel-overstated .card-header .options .btn-default.active,
+.show > .panel-overstated .card-header .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-overstated .panel-heading .options .btn-default,
+.btn-check:active + .card-overstated .panel-heading .options .btn-default,
+.card-overstated .panel-heading .options .btn-default:active,
+.card-overstated .panel-heading .options .btn-default.active,
+.show > .card-overstated .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-overstated .card-heading .options .btn-default,
+.btn-check:active + .card-overstated .card-heading .options .btn-default,
+.card-overstated .card-heading .options .btn-default:active,
+.card-overstated .card-heading .options .btn-default.active,
+.show > .card-overstated .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-overstated .card-header .options .btn-default,
+.btn-check:active + .card-overstated .card-header .options .btn-default,
+.card-overstated .card-header .options .btn-default:active,
+.card-overstated .card-header .options .btn-default.active,
+.show > .card-overstated .card-header .options .btn-default.dropdown-toggle {
   color: #fff;
   background-color: #0a1a29;
   border-color: #10283f;
 }
-.btn-check:checked + .panel-overstated .panel-heading .options .btn-default:focus, .btn-check:active + .panel-overstated .panel-heading .options .btn-default:focus, .panel-overstated .panel-heading .options .btn-default:active:focus, .panel-overstated .panel-heading .options .btn-default.active:focus, .show > .panel-overstated .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-overstated .card-heading .options .btn-default:focus, .btn-check:active + .panel-overstated .card-heading .options .btn-default:focus, .panel-overstated .card-heading .options .btn-default:active:focus, .panel-overstated .card-heading .options .btn-default.active:focus, .show > .panel-overstated .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-overstated .card-header .options .btn-default:focus, .btn-check:active + .panel-overstated .card-header .options .btn-default:focus, .panel-overstated .card-header .options .btn-default:active:focus, .panel-overstated .card-header .options .btn-default.active:focus, .show > .panel-overstated .card-header .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-overstated .panel-heading .options .btn-default:focus, .btn-check:active + .card-overstated .panel-heading .options .btn-default:focus, .card-overstated .panel-heading .options .btn-default:active:focus, .card-overstated .panel-heading .options .btn-default.active:focus, .show > .card-overstated .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-overstated .card-heading .options .btn-default:focus, .btn-check:active + .card-overstated .card-heading .options .btn-default:focus, .card-overstated .card-heading .options .btn-default:active:focus, .card-overstated .card-heading .options .btn-default.active:focus, .show > .card-overstated .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-overstated .card-header .options .btn-default:focus, .btn-check:active + .card-overstated .card-header .options .btn-default:focus, .card-overstated .card-header .options .btn-default:active:focus, .card-overstated .card-header .options .btn-default.active:focus, .show > .card-overstated .card-header .options .btn-default.dropdown-toggle:focus {
+.btn-check:checked + .panel-overstated .panel-heading .options .btn-default:focus, .btn-check:active + .panel-overstated .panel-heading .options .btn-default:focus, .panel-overstated .panel-heading .options .btn-default:active:focus, .panel-overstated .panel-heading .options .btn-default.active:focus, .show > .panel-overstated .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-overstated .card-heading .options .btn-default:focus,
+.btn-check:active + .panel-overstated .card-heading .options .btn-default:focus,
+.panel-overstated .card-heading .options .btn-default:active:focus,
+.panel-overstated .card-heading .options .btn-default.active:focus,
+.show > .panel-overstated .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-overstated .card-header .options .btn-default:focus,
+.btn-check:active + .panel-overstated .card-header .options .btn-default:focus,
+.panel-overstated .card-header .options .btn-default:active:focus,
+.panel-overstated .card-header .options .btn-default.active:focus,
+.show > .panel-overstated .card-header .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-overstated .panel-heading .options .btn-default:focus,
+.btn-check:active + .card-overstated .panel-heading .options .btn-default:focus,
+.card-overstated .panel-heading .options .btn-default:active:focus,
+.card-overstated .panel-heading .options .btn-default.active:focus,
+.show > .card-overstated .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-overstated .card-heading .options .btn-default:focus,
+.btn-check:active + .card-overstated .card-heading .options .btn-default:focus,
+.card-overstated .card-heading .options .btn-default:active:focus,
+.card-overstated .card-heading .options .btn-default.active:focus,
+.show > .card-overstated .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-overstated .card-header .options .btn-default:focus,
+.btn-check:active + .card-overstated .card-header .options .btn-default:focus,
+.card-overstated .card-header .options .btn-default:active:focus,
+.card-overstated .card-header .options .btn-default.active:focus,
+.show > .card-overstated .card-header .options .btn-default.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(56, 83, 110, 0.5);
 }
-.panel-overstated .panel-heading .options .btn-default:disabled, .panel-overstated .panel-heading .options .btn-default.disabled, .panel-overstated .card-heading .options .btn-default:disabled, .panel-overstated .card-heading .options .btn-default.disabled, .panel-overstated .card-header .options .btn-default:disabled, .panel-overstated .card-header .options .btn-default.disabled, .card-overstated .panel-heading .options .btn-default:disabled, .card-overstated .panel-heading .options .btn-default.disabled, .card-overstated .card-heading .options .btn-default:disabled, .card-overstated .card-heading .options .btn-default.disabled, .card-overstated .card-header .options .btn-default:disabled, .card-overstated .card-header .options .btn-default.disabled {
+.panel-overstated .panel-heading .options .btn-default:disabled, .panel-overstated .panel-heading .options .btn-default.disabled,
+.panel-overstated .card-heading .options .btn-default:disabled,
+.panel-overstated .card-heading .options .btn-default.disabled,
+.panel-overstated .card-header .options .btn-default:disabled,
+.panel-overstated .card-header .options .btn-default.disabled,
+.card-overstated .panel-heading .options .btn-default:disabled,
+.card-overstated .panel-heading .options .btn-default.disabled,
+.card-overstated .card-heading .options .btn-default:disabled,
+.card-overstated .card-heading .options .btn-default.disabled,
+.card-overstated .card-header .options .btn-default:disabled,
+.card-overstated .card-header .options .btn-default.disabled {
   color: #fff;
   background-color: #0d2033;
   border-color: #153554;
 }
-.panel-overstated .panel-body, .panel-overstated .card-body, .card-overstated .panel-body, .card-overstated .card-body {
+.panel-overstated .panel-body,
+.panel-overstated .card-body,
+.card-overstated .panel-body,
+.card-overstated .card-body {
   background: #fff;
   color: #3b3a48;
 }
-.panel-overstated .panel-body a:not(.btn), .panel-overstated .card-body a:not(.btn), .card-overstated .panel-body a:not(.btn), .card-overstated .card-body a:not(.btn) {
+.panel-overstated .panel-body a:not(.btn),
+.panel-overstated .card-body a:not(.btn),
+.card-overstated .panel-body a:not(.btn),
+.card-overstated .card-body a:not(.btn) {
   color: #046b99;
   text-decoration: none;
 }
-.panel-overstated .panel-body a:not(.btn):hover, .panel-overstated .panel-body a:not(.btn):focus, .panel-overstated .card-body a:not(.btn):hover, .panel-overstated .card-body a:not(.btn):focus, .card-overstated .panel-body a:not(.btn):hover, .card-overstated .panel-body a:not(.btn):focus, .card-overstated .card-body a:not(.btn):hover, .card-overstated .card-body a:not(.btn):focus {
+.panel-overstated .panel-body a:not(.btn):hover, .panel-overstated .panel-body a:not(.btn):focus,
+.panel-overstated .card-body a:not(.btn):hover,
+.panel-overstated .card-body a:not(.btn):focus,
+.card-overstated .panel-body a:not(.btn):hover,
+.card-overstated .panel-body a:not(.btn):focus,
+.card-overstated .card-body a:not(.btn):hover,
+.card-overstated .card-body a:not(.btn):focus {
   color: #02374e;
   text-decoration: underline;
 }
-.panel-overstated .panel-body a:not(.btn):focus, .panel-overstated .card-body a:not(.btn):focus, .card-overstated .panel-body a:not(.btn):focus, .card-overstated .card-body a:not(.btn):focus {
+.panel-overstated .panel-body a:not(.btn):focus,
+.panel-overstated .card-body a:not(.btn):focus,
+.card-overstated .panel-body a:not(.btn):focus,
+.card-overstated .card-body a:not(.btn):focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.panel-overstated .panel-body a:not(.btn), .panel-overstated .card-body a:not(.btn), .card-overstated .panel-body a:not(.btn), .card-overstated .card-body a:not(.btn) {
+.panel-overstated .panel-body a:not(.btn),
+.panel-overstated .card-body a:not(.btn),
+.card-overstated .panel-body a:not(.btn),
+.card-overstated .card-body a:not(.btn) {
   text-decoration: underline;
 }
 
 /* Uderstated Cards */
-.panel-understated, .card-understated {
+.panel-understated,
+.card-understated {
   border-color: #ddd;
 }
-.panel-understated > .panel-heading, .panel-understated > .card-heading, .card-understated > .panel-heading, .card-understated > .card-heading {
+.panel-understated > .panel-heading, .panel-understated > .card-heading,
+.card-understated > .panel-heading,
+.card-understated > .card-heading {
   color: #3b3a48;
-  background-color: #E1ECF7;
-  border-color: #E1ECF7;
+  background-color: #e1ecf7;
+  border-color: #e1ecf7;
 }
 .panel-understated > .panel-heading + .panel-collapse > .panel-body,
 .panel-understated > .panel-heading + .card-collapse > .card-body, .panel-understated > .card-heading + .panel-collapse > .panel-body,
-.panel-understated > .card-heading + .card-collapse > .card-body, .card-understated > .panel-heading + .panel-collapse > .panel-body,
-.card-understated > .panel-heading + .card-collapse > .card-body, .card-understated > .card-heading + .panel-collapse > .panel-body,
+.panel-understated > .card-heading + .card-collapse > .card-body,
+.card-understated > .panel-heading + .panel-collapse > .panel-body,
+.card-understated > .panel-heading + .card-collapse > .card-body,
+.card-understated > .card-heading + .panel-collapse > .panel-body,
 .card-understated > .card-heading + .card-collapse > .card-body {
   border-top-color: #ddd;
 }
-.panel-understated > .panel-heading .badge, .panel-understated > .card-heading .badge, .card-understated > .panel-heading .badge, .card-understated > .card-heading .badge {
-  color: #E1ECF7;
+.panel-understated > .panel-heading .badge, .panel-understated > .card-heading .badge,
+.card-understated > .panel-heading .badge,
+.card-understated > .card-heading .badge {
+  color: #e1ecf7;
   background-color: #3b3a48;
 }
 .panel-understated > .panel-footer + .panel-collapse > .panel-body,
 .panel-understated > .panel-footer + .card-collapse > .card-body, .panel-understated > .card-footer + .panel-collapse > .panel-body,
-.panel-understated > .card-footer + .card-collapse > .card-body, .card-understated > .panel-footer + .panel-collapse > .panel-body,
-.card-understated > .panel-footer + .card-collapse > .card-body, .card-understated > .card-footer + .panel-collapse > .panel-body,
+.panel-understated > .card-footer + .card-collapse > .card-body,
+.card-understated > .panel-footer + .panel-collapse > .panel-body,
+.card-understated > .panel-footer + .card-collapse > .card-body,
+.card-understated > .card-footer + .panel-collapse > .panel-body,
 .card-understated > .card-footer + .card-collapse > .card-body {
   border-bottom-color: #ddd;
 }
-.panel-understated .panel-heading, .panel-understated .card-heading, .panel-understated .card-header, .card-understated .panel-heading, .card-understated .card-heading, .card-understated .card-header {
+.panel-understated .panel-heading,
+.panel-understated .card-heading,
+.panel-understated .card-header,
+.card-understated .panel-heading,
+.card-understated .card-heading,
+.card-understated .card-header {
   border-bottom-width: 2px;
   border-bottom-style: solid;
 }
-.panel-understated .panel-heading h2 span[class^=ca-gov-icon-], .panel-understated .panel-heading h3 span[class^=ca-gov-icon-], .panel-understated .panel-heading h4 span[class^=ca-gov-icon-], .panel-understated .panel-heading h5 span[class^=ca-gov-icon-], .panel-understated .card-heading h2 span[class^=ca-gov-icon-], .panel-understated .card-heading h3 span[class^=ca-gov-icon-], .panel-understated .card-heading h4 span[class^=ca-gov-icon-], .panel-understated .card-heading h5 span[class^=ca-gov-icon-], .panel-understated .card-header h2 span[class^=ca-gov-icon-], .panel-understated .card-header h3 span[class^=ca-gov-icon-], .panel-understated .card-header h4 span[class^=ca-gov-icon-], .panel-understated .card-header h5 span[class^=ca-gov-icon-], .card-understated .panel-heading h2 span[class^=ca-gov-icon-], .card-understated .panel-heading h3 span[class^=ca-gov-icon-], .card-understated .panel-heading h4 span[class^=ca-gov-icon-], .card-understated .panel-heading h5 span[class^=ca-gov-icon-], .card-understated .card-heading h2 span[class^=ca-gov-icon-], .card-understated .card-heading h3 span[class^=ca-gov-icon-], .card-understated .card-heading h4 span[class^=ca-gov-icon-], .card-understated .card-heading h5 span[class^=ca-gov-icon-], .card-understated .card-header h2 span[class^=ca-gov-icon-], .card-understated .card-header h3 span[class^=ca-gov-icon-], .card-understated .card-header h4 span[class^=ca-gov-icon-], .card-understated .card-header h5 span[class^=ca-gov-icon-] {
+.panel-understated .panel-heading h2 span[class^=ca-gov-icon-],
+.panel-understated .panel-heading h3 span[class^=ca-gov-icon-],
+.panel-understated .panel-heading h4 span[class^=ca-gov-icon-],
+.panel-understated .panel-heading h5 span[class^=ca-gov-icon-],
+.panel-understated .card-heading h2 span[class^=ca-gov-icon-],
+.panel-understated .card-heading h3 span[class^=ca-gov-icon-],
+.panel-understated .card-heading h4 span[class^=ca-gov-icon-],
+.panel-understated .card-heading h5 span[class^=ca-gov-icon-],
+.panel-understated .card-header h2 span[class^=ca-gov-icon-],
+.panel-understated .card-header h3 span[class^=ca-gov-icon-],
+.panel-understated .card-header h4 span[class^=ca-gov-icon-],
+.panel-understated .card-header h5 span[class^=ca-gov-icon-],
+.card-understated .panel-heading h2 span[class^=ca-gov-icon-],
+.card-understated .panel-heading h3 span[class^=ca-gov-icon-],
+.card-understated .panel-heading h4 span[class^=ca-gov-icon-],
+.card-understated .panel-heading h5 span[class^=ca-gov-icon-],
+.card-understated .card-heading h2 span[class^=ca-gov-icon-],
+.card-understated .card-heading h3 span[class^=ca-gov-icon-],
+.card-understated .card-heading h4 span[class^=ca-gov-icon-],
+.card-understated .card-heading h5 span[class^=ca-gov-icon-],
+.card-understated .card-header h2 span[class^=ca-gov-icon-],
+.card-understated .card-header h3 span[class^=ca-gov-icon-],
+.card-understated .card-header h4 span[class^=ca-gov-icon-],
+.card-understated .card-header h5 span[class^=ca-gov-icon-] {
   color: #153554;
 }
-.panel-understated .panel-heading .options .btn-default, .panel-understated .card-heading .options .btn-default, .panel-understated .card-header .options .btn-default, .card-understated .panel-heading .options .btn-default, .card-understated .card-heading .options .btn-default, .card-understated .card-header .options .btn-default {
+.panel-understated .panel-heading .options .btn-default,
+.panel-understated .card-heading .options .btn-default,
+.panel-understated .card-header .options .btn-default,
+.card-understated .panel-heading .options .btn-default,
+.card-understated .card-heading .options .btn-default,
+.card-understated .card-header .options .btn-default {
   color: #000;
   background-color: #c1d8ee;
   border-color: #ddd;
 }
-.panel-understated .panel-heading .options .btn-default:hover, .panel-understated .card-heading .options .btn-default:hover, .panel-understated .card-header .options .btn-default:hover, .card-understated .panel-heading .options .btn-default:hover, .card-understated .card-heading .options .btn-default:hover, .card-understated .card-header .options .btn-default:hover {
+.panel-understated .panel-heading .options .btn-default:hover,
+.panel-understated .card-heading .options .btn-default:hover,
+.panel-understated .card-header .options .btn-default:hover,
+.card-understated .panel-heading .options .btn-default:hover,
+.card-understated .card-heading .options .btn-default:hover,
+.card-understated .card-header .options .btn-default:hover {
   color: #000;
   background-color: #cadef1;
   border-color: #e0e0e0;
 }
-.btn-check:focus + .panel-understated .panel-heading .options .btn-default, .panel-understated .panel-heading .options .btn-default:focus, .btn-check:focus + .panel-understated .card-heading .options .btn-default, .panel-understated .card-heading .options .btn-default:focus, .btn-check:focus + .panel-understated .card-header .options .btn-default, .panel-understated .card-header .options .btn-default:focus, .btn-check:focus + .card-understated .panel-heading .options .btn-default, .card-understated .panel-heading .options .btn-default:focus, .btn-check:focus + .card-understated .card-heading .options .btn-default, .card-understated .card-heading .options .btn-default:focus, .btn-check:focus + .card-understated .card-header .options .btn-default, .card-understated .card-header .options .btn-default:focus {
+.btn-check:focus + .panel-understated .panel-heading .options .btn-default, .panel-understated .panel-heading .options .btn-default:focus,
+.btn-check:focus + .panel-understated .card-heading .options .btn-default,
+.panel-understated .card-heading .options .btn-default:focus,
+.btn-check:focus + .panel-understated .card-header .options .btn-default,
+.panel-understated .card-header .options .btn-default:focus,
+.btn-check:focus + .card-understated .panel-heading .options .btn-default,
+.card-understated .panel-heading .options .btn-default:focus,
+.btn-check:focus + .card-understated .card-heading .options .btn-default,
+.card-understated .card-heading .options .btn-default:focus,
+.btn-check:focus + .card-understated .card-header .options .btn-default,
+.card-understated .card-header .options .btn-default:focus {
   color: #000;
   background-color: #cadef1;
   border-color: #e0e0e0;
   box-shadow: 0 0 0 0.25rem rgba(188, 188, 188, 0.5);
 }
-.btn-check:checked + .panel-understated .panel-heading .options .btn-default, .btn-check:active + .panel-understated .panel-heading .options .btn-default, .panel-understated .panel-heading .options .btn-default:active, .panel-understated .panel-heading .options .btn-default.active, .show > .panel-understated .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-understated .card-heading .options .btn-default, .btn-check:active + .panel-understated .card-heading .options .btn-default, .panel-understated .card-heading .options .btn-default:active, .panel-understated .card-heading .options .btn-default.active, .show > .panel-understated .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-understated .card-header .options .btn-default, .btn-check:active + .panel-understated .card-header .options .btn-default, .panel-understated .card-header .options .btn-default:active, .panel-understated .card-header .options .btn-default.active, .show > .panel-understated .card-header .options .btn-default.dropdown-toggle, .btn-check:checked + .card-understated .panel-heading .options .btn-default, .btn-check:active + .card-understated .panel-heading .options .btn-default, .card-understated .panel-heading .options .btn-default:active, .card-understated .panel-heading .options .btn-default.active, .show > .card-understated .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-understated .card-heading .options .btn-default, .btn-check:active + .card-understated .card-heading .options .btn-default, .card-understated .card-heading .options .btn-default:active, .card-understated .card-heading .options .btn-default.active, .show > .card-understated .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-understated .card-header .options .btn-default, .btn-check:active + .card-understated .card-header .options .btn-default, .card-understated .card-header .options .btn-default:active, .card-understated .card-header .options .btn-default.active, .show > .card-understated .card-header .options .btn-default.dropdown-toggle {
+.btn-check:checked + .panel-understated .panel-heading .options .btn-default, .btn-check:active + .panel-understated .panel-heading .options .btn-default, .panel-understated .panel-heading .options .btn-default:active, .panel-understated .panel-heading .options .btn-default.active, .show > .panel-understated .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-understated .card-heading .options .btn-default,
+.btn-check:active + .panel-understated .card-heading .options .btn-default,
+.panel-understated .card-heading .options .btn-default:active,
+.panel-understated .card-heading .options .btn-default.active,
+.show > .panel-understated .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-understated .card-header .options .btn-default,
+.btn-check:active + .panel-understated .card-header .options .btn-default,
+.panel-understated .card-header .options .btn-default:active,
+.panel-understated .card-header .options .btn-default.active,
+.show > .panel-understated .card-header .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-understated .panel-heading .options .btn-default,
+.btn-check:active + .card-understated .panel-heading .options .btn-default,
+.card-understated .panel-heading .options .btn-default:active,
+.card-understated .panel-heading .options .btn-default.active,
+.show > .card-understated .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-understated .card-heading .options .btn-default,
+.btn-check:active + .card-understated .card-heading .options .btn-default,
+.card-understated .card-heading .options .btn-default:active,
+.card-understated .card-heading .options .btn-default.active,
+.show > .card-understated .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-understated .card-header .options .btn-default,
+.btn-check:active + .card-understated .card-header .options .btn-default,
+.card-understated .card-header .options .btn-default:active,
+.card-understated .card-header .options .btn-default.active,
+.show > .card-understated .card-header .options .btn-default.dropdown-toggle {
   color: #000;
   background-color: #cde0f1;
   border-color: #e0e0e0;
 }
-.btn-check:checked + .panel-understated .panel-heading .options .btn-default:focus, .btn-check:active + .panel-understated .panel-heading .options .btn-default:focus, .panel-understated .panel-heading .options .btn-default:active:focus, .panel-understated .panel-heading .options .btn-default.active:focus, .show > .panel-understated .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-understated .card-heading .options .btn-default:focus, .btn-check:active + .panel-understated .card-heading .options .btn-default:focus, .panel-understated .card-heading .options .btn-default:active:focus, .panel-understated .card-heading .options .btn-default.active:focus, .show > .panel-understated .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-understated .card-header .options .btn-default:focus, .btn-check:active + .panel-understated .card-header .options .btn-default:focus, .panel-understated .card-header .options .btn-default:active:focus, .panel-understated .card-header .options .btn-default.active:focus, .show > .panel-understated .card-header .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-understated .panel-heading .options .btn-default:focus, .btn-check:active + .card-understated .panel-heading .options .btn-default:focus, .card-understated .panel-heading .options .btn-default:active:focus, .card-understated .panel-heading .options .btn-default.active:focus, .show > .card-understated .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-understated .card-heading .options .btn-default:focus, .btn-check:active + .card-understated .card-heading .options .btn-default:focus, .card-understated .card-heading .options .btn-default:active:focus, .card-understated .card-heading .options .btn-default.active:focus, .show > .card-understated .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-understated .card-header .options .btn-default:focus, .btn-check:active + .card-understated .card-header .options .btn-default:focus, .card-understated .card-header .options .btn-default:active:focus, .card-understated .card-header .options .btn-default.active:focus, .show > .card-understated .card-header .options .btn-default.dropdown-toggle:focus {
+.btn-check:checked + .panel-understated .panel-heading .options .btn-default:focus, .btn-check:active + .panel-understated .panel-heading .options .btn-default:focus, .panel-understated .panel-heading .options .btn-default:active:focus, .panel-understated .panel-heading .options .btn-default.active:focus, .show > .panel-understated .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-understated .card-heading .options .btn-default:focus,
+.btn-check:active + .panel-understated .card-heading .options .btn-default:focus,
+.panel-understated .card-heading .options .btn-default:active:focus,
+.panel-understated .card-heading .options .btn-default.active:focus,
+.show > .panel-understated .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-understated .card-header .options .btn-default:focus,
+.btn-check:active + .panel-understated .card-header .options .btn-default:focus,
+.panel-understated .card-header .options .btn-default:active:focus,
+.panel-understated .card-header .options .btn-default.active:focus,
+.show > .panel-understated .card-header .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-understated .panel-heading .options .btn-default:focus,
+.btn-check:active + .card-understated .panel-heading .options .btn-default:focus,
+.card-understated .panel-heading .options .btn-default:active:focus,
+.card-understated .panel-heading .options .btn-default.active:focus,
+.show > .card-understated .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-understated .card-heading .options .btn-default:focus,
+.btn-check:active + .card-understated .card-heading .options .btn-default:focus,
+.card-understated .card-heading .options .btn-default:active:focus,
+.card-understated .card-heading .options .btn-default.active:focus,
+.show > .card-understated .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-understated .card-header .options .btn-default:focus,
+.btn-check:active + .card-understated .card-header .options .btn-default:focus,
+.card-understated .card-header .options .btn-default:active:focus,
+.card-understated .card-header .options .btn-default.active:focus,
+.show > .card-understated .card-header .options .btn-default.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(188, 188, 188, 0.5);
 }
-.panel-understated .panel-heading .options .btn-default:disabled, .panel-understated .panel-heading .options .btn-default.disabled, .panel-understated .card-heading .options .btn-default:disabled, .panel-understated .card-heading .options .btn-default.disabled, .panel-understated .card-header .options .btn-default:disabled, .panel-understated .card-header .options .btn-default.disabled, .card-understated .panel-heading .options .btn-default:disabled, .card-understated .panel-heading .options .btn-default.disabled, .card-understated .card-heading .options .btn-default:disabled, .card-understated .card-heading .options .btn-default.disabled, .card-understated .card-header .options .btn-default:disabled, .card-understated .card-header .options .btn-default.disabled {
+.panel-understated .panel-heading .options .btn-default:disabled, .panel-understated .panel-heading .options .btn-default.disabled,
+.panel-understated .card-heading .options .btn-default:disabled,
+.panel-understated .card-heading .options .btn-default.disabled,
+.panel-understated .card-header .options .btn-default:disabled,
+.panel-understated .card-header .options .btn-default.disabled,
+.card-understated .panel-heading .options .btn-default:disabled,
+.card-understated .panel-heading .options .btn-default.disabled,
+.card-understated .card-heading .options .btn-default:disabled,
+.card-understated .card-heading .options .btn-default.disabled,
+.card-understated .card-header .options .btn-default:disabled,
+.card-understated .card-header .options .btn-default.disabled {
   color: #000;
   background-color: #c1d8ee;
   border-color: #ddd;
 }
-.panel-understated .panel-body, .panel-understated .card-body, .card-understated .panel-body, .card-understated .card-body {
+.panel-understated .panel-body,
+.panel-understated .card-body,
+.card-understated .panel-body,
+.card-understated .card-body {
   background: #fff;
   color: #3b3a48;
 }
 
 /* Standout Cards */
-.panel-standout, .card-standout {
+.panel-standout,
+.card-standout {
   border-color: #ddd;
 }
-.panel-standout > .panel-heading, .panel-standout > .card-heading, .card-standout > .panel-heading, .card-standout > .card-heading {
+.panel-standout > .panel-heading, .panel-standout > .card-heading,
+.card-standout > .panel-heading,
+.card-standout > .card-heading {
   color: #fff;
   background-color: #730000;
   border-color: #730000;
 }
 .panel-standout > .panel-heading + .panel-collapse > .panel-body,
 .panel-standout > .panel-heading + .card-collapse > .card-body, .panel-standout > .card-heading + .panel-collapse > .panel-body,
-.panel-standout > .card-heading + .card-collapse > .card-body, .card-standout > .panel-heading + .panel-collapse > .panel-body,
-.card-standout > .panel-heading + .card-collapse > .card-body, .card-standout > .card-heading + .panel-collapse > .panel-body,
+.panel-standout > .card-heading + .card-collapse > .card-body,
+.card-standout > .panel-heading + .panel-collapse > .panel-body,
+.card-standout > .panel-heading + .card-collapse > .card-body,
+.card-standout > .card-heading + .panel-collapse > .panel-body,
 .card-standout > .card-heading + .card-collapse > .card-body {
   border-top-color: #ddd;
 }
-.panel-standout > .panel-heading .badge, .panel-standout > .card-heading .badge, .card-standout > .panel-heading .badge, .card-standout > .card-heading .badge {
+.panel-standout > .panel-heading .badge, .panel-standout > .card-heading .badge,
+.card-standout > .panel-heading .badge,
+.card-standout > .card-heading .badge {
   color: #730000;
   background-color: #fff;
 }
 .panel-standout > .panel-footer + .panel-collapse > .panel-body,
 .panel-standout > .panel-footer + .card-collapse > .card-body, .panel-standout > .card-footer + .panel-collapse > .panel-body,
-.panel-standout > .card-footer + .card-collapse > .card-body, .card-standout > .panel-footer + .panel-collapse > .panel-body,
-.card-standout > .panel-footer + .card-collapse > .card-body, .card-standout > .card-footer + .panel-collapse > .panel-body,
+.panel-standout > .card-footer + .card-collapse > .card-body,
+.card-standout > .panel-footer + .panel-collapse > .panel-body,
+.card-standout > .panel-footer + .card-collapse > .card-body,
+.card-standout > .card-footer + .panel-collapse > .panel-body,
 .card-standout > .card-footer + .card-collapse > .card-body {
   border-bottom-color: #ddd;
 }
-.panel-standout .panel-heading, .panel-standout .card-heading, .panel-standout .card-header, .card-standout .panel-heading, .card-standout .card-heading, .card-standout .card-header {
+.panel-standout .panel-heading,
+.panel-standout .card-heading,
+.panel-standout .card-header,
+.card-standout .panel-heading,
+.card-standout .card-heading,
+.card-standout .card-header {
   border-bottom-width: 5px;
   border-bottom-style: solid;
 }
-.panel-standout .panel-heading h2 span[class^=ca-gov-icon-], .panel-standout .panel-heading h3 span[class^=ca-gov-icon-], .panel-standout .panel-heading h4 span[class^=ca-gov-icon-], .panel-standout .panel-heading h5 span[class^=ca-gov-icon-], .panel-standout .card-heading h2 span[class^=ca-gov-icon-], .panel-standout .card-heading h3 span[class^=ca-gov-icon-], .panel-standout .card-heading h4 span[class^=ca-gov-icon-], .panel-standout .card-heading h5 span[class^=ca-gov-icon-], .panel-standout .card-header h2 span[class^=ca-gov-icon-], .panel-standout .card-header h3 span[class^=ca-gov-icon-], .panel-standout .card-header h4 span[class^=ca-gov-icon-], .panel-standout .card-header h5 span[class^=ca-gov-icon-], .card-standout .panel-heading h2 span[class^=ca-gov-icon-], .card-standout .panel-heading h3 span[class^=ca-gov-icon-], .card-standout .panel-heading h4 span[class^=ca-gov-icon-], .card-standout .panel-heading h5 span[class^=ca-gov-icon-], .card-standout .card-heading h2 span[class^=ca-gov-icon-], .card-standout .card-heading h3 span[class^=ca-gov-icon-], .card-standout .card-heading h4 span[class^=ca-gov-icon-], .card-standout .card-heading h5 span[class^=ca-gov-icon-], .card-standout .card-header h2 span[class^=ca-gov-icon-], .card-standout .card-header h3 span[class^=ca-gov-icon-], .card-standout .card-header h4 span[class^=ca-gov-icon-], .card-standout .card-header h5 span[class^=ca-gov-icon-] {
+.panel-standout .panel-heading h2 span[class^=ca-gov-icon-],
+.panel-standout .panel-heading h3 span[class^=ca-gov-icon-],
+.panel-standout .panel-heading h4 span[class^=ca-gov-icon-],
+.panel-standout .panel-heading h5 span[class^=ca-gov-icon-],
+.panel-standout .card-heading h2 span[class^=ca-gov-icon-],
+.panel-standout .card-heading h3 span[class^=ca-gov-icon-],
+.panel-standout .card-heading h4 span[class^=ca-gov-icon-],
+.panel-standout .card-heading h5 span[class^=ca-gov-icon-],
+.panel-standout .card-header h2 span[class^=ca-gov-icon-],
+.panel-standout .card-header h3 span[class^=ca-gov-icon-],
+.panel-standout .card-header h4 span[class^=ca-gov-icon-],
+.panel-standout .card-header h5 span[class^=ca-gov-icon-],
+.card-standout .panel-heading h2 span[class^=ca-gov-icon-],
+.card-standout .panel-heading h3 span[class^=ca-gov-icon-],
+.card-standout .panel-heading h4 span[class^=ca-gov-icon-],
+.card-standout .panel-heading h5 span[class^=ca-gov-icon-],
+.card-standout .card-heading h2 span[class^=ca-gov-icon-],
+.card-standout .card-heading h3 span[class^=ca-gov-icon-],
+.card-standout .card-heading h4 span[class^=ca-gov-icon-],
+.card-standout .card-heading h5 span[class^=ca-gov-icon-],
+.card-standout .card-header h2 span[class^=ca-gov-icon-],
+.card-standout .card-header h3 span[class^=ca-gov-icon-],
+.card-standout .card-header h4 span[class^=ca-gov-icon-],
+.card-standout .card-header h5 span[class^=ca-gov-icon-] {
   color: #7bb0da;
 }
-.panel-standout .panel-heading .options .btn-default, .panel-standout .card-heading .options .btn-default, .panel-standout .card-header .options .btn-default, .card-standout .panel-heading .options .btn-default, .card-standout .card-heading .options .btn-default, .card-standout .card-header .options .btn-default {
+.panel-standout .panel-heading .options .btn-default,
+.panel-standout .card-heading .options .btn-default,
+.panel-standout .card-header .options .btn-default,
+.card-standout .panel-heading .options .btn-default,
+.card-standout .card-heading .options .btn-default,
+.card-standout .card-header .options .btn-default {
   color: #fff;
   background-color: #4a0000;
   border-color: #5a0000;
 }
-.panel-standout .panel-heading .options .btn-default:hover, .panel-standout .card-heading .options .btn-default:hover, .panel-standout .card-header .options .btn-default:hover, .card-standout .panel-heading .options .btn-default:hover, .card-standout .card-heading .options .btn-default:hover, .card-standout .card-header .options .btn-default:hover {
+.panel-standout .panel-heading .options .btn-default:hover,
+.panel-standout .card-heading .options .btn-default:hover,
+.panel-standout .card-header .options .btn-default:hover,
+.card-standout .panel-heading .options .btn-default:hover,
+.card-standout .card-heading .options .btn-default:hover,
+.card-standout .card-header .options .btn-default:hover {
   color: #fff;
   background-color: #3f0000;
   border-color: #480000;
 }
-.btn-check:focus + .panel-standout .panel-heading .options .btn-default, .panel-standout .panel-heading .options .btn-default:focus, .btn-check:focus + .panel-standout .card-heading .options .btn-default, .panel-standout .card-heading .options .btn-default:focus, .btn-check:focus + .panel-standout .card-header .options .btn-default, .panel-standout .card-header .options .btn-default:focus, .btn-check:focus + .card-standout .panel-heading .options .btn-default, .card-standout .panel-heading .options .btn-default:focus, .btn-check:focus + .card-standout .card-heading .options .btn-default, .card-standout .card-heading .options .btn-default:focus, .btn-check:focus + .card-standout .card-header .options .btn-default, .card-standout .card-header .options .btn-default:focus {
+.btn-check:focus + .panel-standout .panel-heading .options .btn-default, .panel-standout .panel-heading .options .btn-default:focus,
+.btn-check:focus + .panel-standout .card-heading .options .btn-default,
+.panel-standout .card-heading .options .btn-default:focus,
+.btn-check:focus + .panel-standout .card-header .options .btn-default,
+.panel-standout .card-header .options .btn-default:focus,
+.btn-check:focus + .card-standout .panel-heading .options .btn-default,
+.card-standout .panel-heading .options .btn-default:focus,
+.btn-check:focus + .card-standout .card-heading .options .btn-default,
+.card-standout .card-heading .options .btn-default:focus,
+.btn-check:focus + .card-standout .card-header .options .btn-default,
+.card-standout .card-header .options .btn-default:focus {
   color: #fff;
   background-color: #3f0000;
   border-color: #480000;
   box-shadow: 0 0 0 0.25rem rgba(115, 38, 38, 0.5);
 }
-.btn-check:checked + .panel-standout .panel-heading .options .btn-default, .btn-check:active + .panel-standout .panel-heading .options .btn-default, .panel-standout .panel-heading .options .btn-default:active, .panel-standout .panel-heading .options .btn-default.active, .show > .panel-standout .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-standout .card-heading .options .btn-default, .btn-check:active + .panel-standout .card-heading .options .btn-default, .panel-standout .card-heading .options .btn-default:active, .panel-standout .card-heading .options .btn-default.active, .show > .panel-standout .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .panel-standout .card-header .options .btn-default, .btn-check:active + .panel-standout .card-header .options .btn-default, .panel-standout .card-header .options .btn-default:active, .panel-standout .card-header .options .btn-default.active, .show > .panel-standout .card-header .options .btn-default.dropdown-toggle, .btn-check:checked + .card-standout .panel-heading .options .btn-default, .btn-check:active + .card-standout .panel-heading .options .btn-default, .card-standout .panel-heading .options .btn-default:active, .card-standout .panel-heading .options .btn-default.active, .show > .card-standout .panel-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-standout .card-heading .options .btn-default, .btn-check:active + .card-standout .card-heading .options .btn-default, .card-standout .card-heading .options .btn-default:active, .card-standout .card-heading .options .btn-default.active, .show > .card-standout .card-heading .options .btn-default.dropdown-toggle, .btn-check:checked + .card-standout .card-header .options .btn-default, .btn-check:active + .card-standout .card-header .options .btn-default, .card-standout .card-header .options .btn-default:active, .card-standout .card-header .options .btn-default.active, .show > .card-standout .card-header .options .btn-default.dropdown-toggle {
+.btn-check:checked + .panel-standout .panel-heading .options .btn-default, .btn-check:active + .panel-standout .panel-heading .options .btn-default, .panel-standout .panel-heading .options .btn-default:active, .panel-standout .panel-heading .options .btn-default.active, .show > .panel-standout .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-standout .card-heading .options .btn-default,
+.btn-check:active + .panel-standout .card-heading .options .btn-default,
+.panel-standout .card-heading .options .btn-default:active,
+.panel-standout .card-heading .options .btn-default.active,
+.show > .panel-standout .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .panel-standout .card-header .options .btn-default,
+.btn-check:active + .panel-standout .card-header .options .btn-default,
+.panel-standout .card-header .options .btn-default:active,
+.panel-standout .card-header .options .btn-default.active,
+.show > .panel-standout .card-header .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-standout .panel-heading .options .btn-default,
+.btn-check:active + .card-standout .panel-heading .options .btn-default,
+.card-standout .panel-heading .options .btn-default:active,
+.card-standout .panel-heading .options .btn-default.active,
+.show > .card-standout .panel-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-standout .card-heading .options .btn-default,
+.btn-check:active + .card-standout .card-heading .options .btn-default,
+.card-standout .card-heading .options .btn-default:active,
+.card-standout .card-heading .options .btn-default.active,
+.show > .card-standout .card-heading .options .btn-default.dropdown-toggle,
+.btn-check:checked + .card-standout .card-header .options .btn-default,
+.btn-check:active + .card-standout .card-header .options .btn-default,
+.card-standout .card-header .options .btn-default:active,
+.card-standout .card-header .options .btn-default.active,
+.show > .card-standout .card-header .options .btn-default.dropdown-toggle {
   color: #fff;
   background-color: #3b0000;
   border-color: #440000;
 }
-.btn-check:checked + .panel-standout .panel-heading .options .btn-default:focus, .btn-check:active + .panel-standout .panel-heading .options .btn-default:focus, .panel-standout .panel-heading .options .btn-default:active:focus, .panel-standout .panel-heading .options .btn-default.active:focus, .show > .panel-standout .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-standout .card-heading .options .btn-default:focus, .btn-check:active + .panel-standout .card-heading .options .btn-default:focus, .panel-standout .card-heading .options .btn-default:active:focus, .panel-standout .card-heading .options .btn-default.active:focus, .show > .panel-standout .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .panel-standout .card-header .options .btn-default:focus, .btn-check:active + .panel-standout .card-header .options .btn-default:focus, .panel-standout .card-header .options .btn-default:active:focus, .panel-standout .card-header .options .btn-default.active:focus, .show > .panel-standout .card-header .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-standout .panel-heading .options .btn-default:focus, .btn-check:active + .card-standout .panel-heading .options .btn-default:focus, .card-standout .panel-heading .options .btn-default:active:focus, .card-standout .panel-heading .options .btn-default.active:focus, .show > .card-standout .panel-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-standout .card-heading .options .btn-default:focus, .btn-check:active + .card-standout .card-heading .options .btn-default:focus, .card-standout .card-heading .options .btn-default:active:focus, .card-standout .card-heading .options .btn-default.active:focus, .show > .card-standout .card-heading .options .btn-default.dropdown-toggle:focus, .btn-check:checked + .card-standout .card-header .options .btn-default:focus, .btn-check:active + .card-standout .card-header .options .btn-default:focus, .card-standout .card-header .options .btn-default:active:focus, .card-standout .card-header .options .btn-default.active:focus, .show > .card-standout .card-header .options .btn-default.dropdown-toggle:focus {
+.btn-check:checked + .panel-standout .panel-heading .options .btn-default:focus, .btn-check:active + .panel-standout .panel-heading .options .btn-default:focus, .panel-standout .panel-heading .options .btn-default:active:focus, .panel-standout .panel-heading .options .btn-default.active:focus, .show > .panel-standout .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-standout .card-heading .options .btn-default:focus,
+.btn-check:active + .panel-standout .card-heading .options .btn-default:focus,
+.panel-standout .card-heading .options .btn-default:active:focus,
+.panel-standout .card-heading .options .btn-default.active:focus,
+.show > .panel-standout .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .panel-standout .card-header .options .btn-default:focus,
+.btn-check:active + .panel-standout .card-header .options .btn-default:focus,
+.panel-standout .card-header .options .btn-default:active:focus,
+.panel-standout .card-header .options .btn-default.active:focus,
+.show > .panel-standout .card-header .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-standout .panel-heading .options .btn-default:focus,
+.btn-check:active + .card-standout .panel-heading .options .btn-default:focus,
+.card-standout .panel-heading .options .btn-default:active:focus,
+.card-standout .panel-heading .options .btn-default.active:focus,
+.show > .card-standout .panel-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-standout .card-heading .options .btn-default:focus,
+.btn-check:active + .card-standout .card-heading .options .btn-default:focus,
+.card-standout .card-heading .options .btn-default:active:focus,
+.card-standout .card-heading .options .btn-default.active:focus,
+.show > .card-standout .card-heading .options .btn-default.dropdown-toggle:focus,
+.btn-check:checked + .card-standout .card-header .options .btn-default:focus,
+.btn-check:active + .card-standout .card-header .options .btn-default:focus,
+.card-standout .card-header .options .btn-default:active:focus,
+.card-standout .card-header .options .btn-default.active:focus,
+.show > .card-standout .card-header .options .btn-default.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(115, 38, 38, 0.5);
 }
-.panel-standout .panel-heading .options .btn-default:disabled, .panel-standout .panel-heading .options .btn-default.disabled, .panel-standout .card-heading .options .btn-default:disabled, .panel-standout .card-heading .options .btn-default.disabled, .panel-standout .card-header .options .btn-default:disabled, .panel-standout .card-header .options .btn-default.disabled, .card-standout .panel-heading .options .btn-default:disabled, .card-standout .panel-heading .options .btn-default.disabled, .card-standout .card-heading .options .btn-default:disabled, .card-standout .card-heading .options .btn-default.disabled, .card-standout .card-header .options .btn-default:disabled, .card-standout .card-header .options .btn-default.disabled {
+.panel-standout .panel-heading .options .btn-default:disabled, .panel-standout .panel-heading .options .btn-default.disabled,
+.panel-standout .card-heading .options .btn-default:disabled,
+.panel-standout .card-heading .options .btn-default.disabled,
+.panel-standout .card-header .options .btn-default:disabled,
+.panel-standout .card-header .options .btn-default.disabled,
+.card-standout .panel-heading .options .btn-default:disabled,
+.card-standout .panel-heading .options .btn-default.disabled,
+.card-standout .card-heading .options .btn-default:disabled,
+.card-standout .card-heading .options .btn-default.disabled,
+.card-standout .card-header .options .btn-default:disabled,
+.card-standout .card-header .options .btn-default.disabled {
   color: #fff;
   background-color: #4a0000;
   border-color: #5a0000;
 }
-.panel-standout .panel-body, .panel-standout .card-body, .card-standout .panel-body, .card-standout .card-body {
+.panel-standout .panel-body,
+.panel-standout .card-body,
+.card-standout .panel-body,
+.card-standout .card-body {
   background: #fff;
   color: #3b3a48;
 }
-.panel-standout .panel-body a:not(.btn), .panel-standout .card-body a:not(.btn), .card-standout .panel-body a:not(.btn), .card-standout .card-body a:not(.btn) {
+.panel-standout .panel-body a:not(.btn),
+.panel-standout .card-body a:not(.btn),
+.card-standout .panel-body a:not(.btn),
+.card-standout .card-body a:not(.btn) {
   color: #046b99;
   text-decoration: none;
 }
-.panel-standout .panel-body a:not(.btn):hover, .panel-standout .panel-body a:not(.btn):focus, .panel-standout .card-body a:not(.btn):hover, .panel-standout .card-body a:not(.btn):focus, .card-standout .panel-body a:not(.btn):hover, .card-standout .panel-body a:not(.btn):focus, .card-standout .card-body a:not(.btn):hover, .card-standout .card-body a:not(.btn):focus {
+.panel-standout .panel-body a:not(.btn):hover, .panel-standout .panel-body a:not(.btn):focus,
+.panel-standout .card-body a:not(.btn):hover,
+.panel-standout .card-body a:not(.btn):focus,
+.card-standout .panel-body a:not(.btn):hover,
+.card-standout .panel-body a:not(.btn):focus,
+.card-standout .card-body a:not(.btn):hover,
+.card-standout .card-body a:not(.btn):focus {
   color: #02374e;
   text-decoration: underline;
 }
-.panel-standout .panel-body a:not(.btn):focus, .panel-standout .card-body a:not(.btn):focus, .card-standout .panel-body a:not(.btn):focus, .card-standout .card-body a:not(.btn):focus {
+.panel-standout .panel-body a:not(.btn):focus,
+.panel-standout .card-body a:not(.btn):focus,
+.card-standout .panel-body a:not(.btn):focus,
+.card-standout .card-body a:not(.btn):focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.panel-standout .panel-body a:not(.btn), .panel-standout .card-body a:not(.btn), .card-standout .panel-body a:not(.btn), .card-standout .card-body a:not(.btn) {
+.panel-standout .panel-body a:not(.btn),
+.panel-standout .card-body a:not(.btn),
+.card-standout .panel-body a:not(.btn),
+.card-standout .card-body a:not(.btn) {
   text-decoration: underline;
 }
 
 /* Adds triangle to card */
-.panel-standout.highlight .panel-heading .triangle, .panel-standout.highlight .card-heading .triangle, .panel-standout.highlight .card-header .triangle, .card-standout.highlight .panel-heading .triangle, .card-standout.highlight .card-heading .triangle, .card-standout.highlight .card-header .triangle {
+.panel-standout.highlight .panel-heading .triangle,
+.panel-standout.highlight .card-heading .triangle,
+.panel-standout.highlight .card-header .triangle,
+.card-standout.highlight .panel-heading .triangle,
+.card-standout.highlight .card-heading .triangle,
+.card-standout.highlight .card-header .triangle {
   content: "";
   display: block;
   width: 0;
@@ -2281,28 +2863,28 @@ a.text-white:not(.btn):hover {
    /source/scss/colortheme/cs-text-accent.scss
 ----------------------------------------- */
 .text-accent1 {
-  color: #1B79C0 !important;
+  color: #1b79c0 !important;
 }
 .text-accent2 {
-  color: #077CBB !important;
+  color: #077cbb !important;
 }
 .text-accent3 {
   color: #258378 !important;
 }
 .text-accent4 {
-  color: #32852E !important;
+  color: #32852e !important;
 }
 .text-accent5 {
   color: #815ab4 !important;
 }
 .text-accent6 {
-  color: #BE37CD !important;
+  color: #be37cd !important;
 }
 .text-accent7 {
-  color: #C93E2C !important;
+  color: #c93e2c !important;
 }
 .text-accent8 {
-  color: #BB520C !important;
+  color: #bb520c !important;
 }
 .text-accent9 {
   color: #f7e455 !important;
@@ -2317,7 +2899,7 @@ a.text-white:not(.btn):hover {
   color: #730000 !important;
 }
 .text-accent-s1 {
-  color: #E1ECF7 !important;
+  color: #e1ecf7 !important;
 }
 .text-accent-s2 {
   color: #c7d9ea !important;
@@ -2352,7 +2934,7 @@ a.text-white:not(.btn):hover {
 
 .label-light {
   color: #3b3a48;
-  background-color: #E1ECF7;
+  background-color: #e1ecf7;
 }
 
 .label-dark {
@@ -2366,7 +2948,7 @@ a.text-white:not(.btn):hover {
 }
 
 .text-highlight-primary {
-  background-color: #E1ECF7;
+  background-color: #e1ecf7;
 }
 
 .text-highlight-warning {
@@ -2382,32 +2964,39 @@ a.text-white:not(.btn):hover {
    IMAGE HELPERS
    /source/scss/colortheme/cs-image.scss
 ----------------------------------------- */
-.section-understated .img-thumbnail, .card-understated .img-thumbnail {
+.section-understated .img-thumbnail,
+.card-understated .img-thumbnail {
   padding: 0.25rem;
   background-color: whitesmoke;
   border: 1px solid #c2c2c2;
 }
-.section-overstated .img-thumbnail, .card-overstated .img-thumbnail {
+.section-overstated .img-thumbnail,
+.card-overstated .img-thumbnail {
   padding: 0.25rem;
   background-color: #d7e3ed;
   border: 1px solid #7fa4c7;
 }
-.section-standout .img-thumbnail, .section-impact .img-thumbnail, .card-standout .img-thumbnail, .card-impact .img-thumbnail {
+.section-standout .img-thumbnail, .section-impact .img-thumbnail,
+.card-standout .img-thumbnail,
+.card-impact .img-thumbnail {
   padding: 0.25rem;
   background-color: #ab6666;
   border: 1px solid #4a0000;
 }
-.section-primary .img-thumbnail, .card-primary .img-thumbnail {
+.section-primary .img-thumbnail,
+.card-primary .img-thumbnail {
   padding: 0.25rem;
   background-color: #b9c2cc;
   border: 1px solid #0b1b2b;
 }
-.section-inverted .img-thumbnail, .card-inverted .img-thumbnail {
+.section-inverted .img-thumbnail,
+.card-inverted .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
   border: 1px solid #c2c2c2;
 }
-.section-danger .img-thumbnail, .card-danger .img-thumbnail {
+.section-danger .img-thumbnail,
+.card-danger .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
   border: 1px solid #c2c2c2;
@@ -2672,7 +3261,7 @@ a.text-white:not(.btn):hover {
 
 .btn-s1 {
   color: #555555;
-  background-color: #E1ECF7;
+  background-color: #e1ecf7;
   border-color: #555555;
   font-weight: 600;
 }
@@ -2690,11 +3279,11 @@ a.text-white:not(.btn):hover {
   background-image: none;
 }
 .btn-s1.disabled, .btn-s1.disabled:hover, .btn-s1.disabled:focus, .btn-s1.disabled:active, .btn-s1.disabled.active, .btn-s1[disabled], .btn-s1[disabled]:hover, .btn-s1[disabled]:focus, .btn-s1[disabled]:active, .btn-s1[disabled].active, fieldset[disabled] .btn-s1, fieldset[disabled] .btn-s1:hover, fieldset[disabled] .btn-s1:focus, fieldset[disabled] .btn-s1:active, fieldset[disabled] .btn-s1.active {
-  background-color: #E1ECF7 !important;
+  background-color: #e1ecf7 !important;
   border-color: #555555;
 }
 .btn-s1 .badge {
-  color: #E1ECF7;
+  color: #e1ecf7;
   background-color: #555555;
 }
 .btn-s1.active {
@@ -2892,7 +3481,7 @@ input[type=radio]:focus + div {
 }
 
 .icon-link:hover, .icon-link:focus {
-  color: #E1ECF7 !important;
+  color: #e1ecf7 !important;
 }
 
 .service-tile-empty {
@@ -2912,16 +3501,22 @@ input[type=radio]:focus + div {
    /source/scss/colortheme/cs-panes.scss
 ----------------------------------------- */
 @media (min-width: 768px) {
-  .bg-highlight.group-right:before, .bg-p1.group-right:before {
+  .bg-highlight.group-right:before,
+  .bg-p1.group-right:before {
     border-right-color: #7bb0da;
   }
-  .bg-highlight.group-left:after, .bg-p1.group-left:after {
+  .bg-highlight.group-left:after,
+  .bg-p1.group-left:after {
     border-left-color: #7bb0da;
   }
-  .section-primary.group-right:before, .bg-primary.group-right:before, .bg-p2.group-right:before {
+  .section-primary.group-right:before,
+  .bg-primary.group-right:before,
+  .bg-p2.group-right:before {
     border-right-color: #153554;
   }
-  .section-primary.group-left:after, .bg-primary.group-left:after, .bg-p2.group-left:after {
+  .section-primary.group-left:after,
+  .bg-primary.group-left:after,
+  .bg-p2.group-left:after {
     border-left-color: #153554;
   }
   .section-default.group-right:before {
@@ -2930,17 +3525,23 @@ input[type=radio]:focus + div {
   .section-default.group-left:after {
     border-left-color: whitesmoke;
   }
-  .section-standout.group-right:before, .bg-standout.group-right:before, .bg-p3.group-right:before {
+  .section-standout.group-right:before,
+  .bg-standout.group-right:before,
+  .bg-p3.group-right:before {
     border-right-color: #730000;
   }
-  .section-standout.group-left:after, .bg-standout.group-left:after, .bg-p3.group-left:after {
+  .section-standout.group-left:after,
+  .bg-standout.group-left:after,
+  .bg-p3.group-left:after {
     border-left-color: #730000;
   }
-  .section-understated.group-right:before, .bg-s1.group-right:before {
-    border-right-color: #E1ECF7;
+  .section-understated.group-right:before,
+  .bg-s1.group-right:before {
+    border-right-color: #e1ecf7;
   }
-  .section-understated.group-left:after, .bg-s1.group-left:after {
-    border-left-color: #E1ECF7;
+  .section-understated.group-left:after,
+  .bg-s1.group-left:after {
+    border-left-color: #e1ecf7;
   }
   .section-inverted.group-right:before {
     border-right-color: #222222;
@@ -2950,20 +3551,36 @@ input[type=radio]:focus + div {
   }
 }
 @media (max-width: 767px) {
-  .bg-highlight.group-right:before, .bg-p1.group-right:before, .bg-highlight.group-left:after, .bg-p1.group-left:after {
+  .bg-highlight.group-right:before,
+  .bg-p1.group-right:before,
+  .bg-highlight.group-left:after,
+  .bg-p1.group-left:after {
     border-bottom-color: #7bb0da;
   }
-  .section-primary.group-right:before, .bg-primary.group-right:before, .bg-p2.group-right:before, .section-primary.group-left:after, .bg-primary.group-left:after, .bg-p2.group-left:after {
+  .section-primary.group-right:before,
+  .bg-primary.group-right:before,
+  .bg-p2.group-right:before,
+  .section-primary.group-left:after,
+  .bg-primary.group-left:after,
+  .bg-p2.group-left:after {
     border-bottom-color: #153554;
   }
   .section-default.group-right:before, .section-default.group-left:after {
     border-bottom-color: whitesmoke;
   }
-  .section-standout.group-right:before, .bg-standout.group-right:before, .bg-p3.group-right:before, .section-standout.group-left:after, .bg-standout.group-left:after, .bg-p3.group-left:after {
+  .section-standout.group-right:before,
+  .bg-standout.group-right:before,
+  .bg-p3.group-right:before,
+  .section-standout.group-left:after,
+  .bg-standout.group-left:after,
+  .bg-p3.group-left:after {
     border-bottom-color: #730000;
   }
-  .section-understated.group-right:before, .bg-s1 .group-right:before, .section-understated.group-left:after, .bg-s1.group-left:after {
-    border-bottom-color: #E1ECF7;
+  .section-understated.group-right:before,
+  .bg-s1 .group-right:before,
+  .section-understated.group-left:after,
+  .bg-s1.group-left:after {
+    border-bottom-color: #e1ecf7;
   }
   .section-inverted.group-right:before, .section-inverted.group-left:after {
     border-bottom-color: #222222;
@@ -2983,33 +3600,89 @@ input[type=radio]:focus + div {
 }
 
 /* -----------------------------------------
-   PAGE NAVIGATION
-   /source/scss/colortheme/cs-page-navigation.scss
+   SIDE NAVIGATION
+   /source/scss/colortheme/cs-side-navigation.scss
 ----------------------------------------- */
-.side-navigation ul li a, .list-navigation li a {
-  color: #5e5e6a;
-}
-.side-navigation ul li a:hover, .side-navigation ul li a:hover, .list-navigation li a:hover, .list-navigation li a:hover {
-  color: #3b3a48;
-}
-.side-navigation ul li a.active:before, .list-navigation li a.active:before {
-  border-left-color: #7bb0da;
-}
-.side-navigation ul li ul li a.active::before, .list-navigation li ul li a.active::before {
+.side-navigation ul li a.active:before,
+.list-navigation li a.active:before {
   border-left-color: #7bb0da;
 }
 
-a.sidenav {
-  color: #5e5e6a;
+/* MOBILE */
+.sidenav-mobile-btn {
+  background-color: #e1ecf7;
 }
-a.sidenav:hover, a.sidenav:hover {
-  color: #3b3a48;
+.sidenav-mobile-btn .sidenav-toggle {
+  color: #153554;
 }
-a.sidenav.active:before {
+.sidenav-mobile-btn .sidenav-toggle:hover, .sidenav-mobile-btn .sidenav-toggle:focus {
+  color: #0e2337;
+}
+
+.mobile-sidenav {
+  background-color: #153554;
+}
+.mobile-sidenav .side-navigation ul li a,
+.mobile-sidenav .list-navigation li a {
+  color: #fff;
+  border-bottom-color: #153554;
+}
+.mobile-sidenav .side-navigation ul li a:hover, .mobile-sidenav .side-navigation ul li a:focus,
+.mobile-sidenav .list-navigation li a:hover,
+.mobile-sidenav .list-navigation li a:focus {
+  color: #fff;
+  background-color: #1c4771;
+}
+.mobile-sidenav .side-navigation ul li a.active,
+.mobile-sidenav .list-navigation li a.active {
+  background-color: #1c4771;
+}
+.mobile-sidenav .side-navigation ul li a.active:before,
+.mobile-sidenav .list-navigation li a.active:before {
+  color: #fff;
+  border-left-color: #7bb0da;
+}
+.mobile-sidenav .side-navigation ul li a.active:hover, .mobile-sidenav .side-navigation ul li a.active:focus,
+.mobile-sidenav .list-navigation li a.active:hover,
+.mobile-sidenav .list-navigation li a.active:focus {
+  color: #fff;
+  background-color: #153554;
+}
+.mobile-sidenav .side-navigation ul li a ul li a.active::before,
+.mobile-sidenav .list-navigation li a ul li a.active::before {
   border-left-color: #7bb0da;
 }
 
-/* side navigation */
+/* DESKTOP */
+@media (min-width: 992px) {
+  .side-navigation ul li a,
+  .list-navigation li a {
+    color: #5e5e6a;
+  }
+  .side-navigation ul li a:hover, .side-navigation ul li a:hover,
+  .list-navigation li a:hover,
+  .list-navigation li a:hover {
+    color: #3b3a48;
+  }
+  .side-navigation ul li a.active:before,
+  .list-navigation li a.active:before {
+    border-left-color: #7bb0da;
+  }
+  .side-navigation ul li ul li a.active::before,
+  .list-navigation li ul li a.active::before {
+    border-left-color: #7bb0da;
+  }
+  a.sidenav {
+    color: #5e5e6a;
+  }
+  a.sidenav:hover, a.sidenav:hover {
+    color: #3b3a48;
+  }
+  a.sidenav.active:before {
+    border-left-color: #7bb0da;
+  }
+}
+/* bootstrap side navigation */
 .list-group-item.active {
   background-color: #153554;
   border-color: #153554;
@@ -3170,7 +3843,7 @@ a.sidenav.active:before {
 
 .list-group.section-understated .list-group-item,
 .list-group.section-understated .list-group-item > button {
-  background: #E1ECF7 !important;
+  background: #e1ecf7 !important;
 }
 .list-group.section-understated .list-group-item:hover, .list-group.section-understated .list-group-item:focus, .list-group.section-understated .list-group-item.open,
 .list-group.section-understated .list-group-item > button:hover,
@@ -3301,10 +3974,13 @@ cagov-accordion.sidenav details summary.active:before {
   background-color: #730000;
   color: #fff;
 }
-.alert-banner a:not(.btn), .alert-banner .close {
+.alert-banner a:not(.btn),
+.alert-banner .close {
   color: #fff;
 }
-.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover, .alert-banner .close:focus, .alert-banner .close:hover {
+.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover,
+.alert-banner .close:focus,
+.alert-banner .close:hover {
   color: #7bb0da;
 }
 
@@ -3312,10 +3988,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #8a6d3b;
   background-color: #fcf8e3;
 }
-.alert-warning a:not(.btn), .alert-warning .close {
+.alert-warning a:not(.btn),
+.alert-warning .close {
   color: #8a6d3b;
 }
-.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover, .alert-warning .close:focus, .alert-warning .close:hover {
+.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover,
+.alert-warning .close:focus,
+.alert-warning .close:hover {
   color: #715930;
 }
 
@@ -3323,10 +4002,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #31708f;
   background-color: #d9edf7;
 }
-.alert-info a:not(.btn), .alert-info .close {
+.alert-info a:not(.btn),
+.alert-info .close {
   color: #31708f;
 }
-.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover, .alert-info .close:focus, .alert-info .close:hover {
+.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover,
+.alert-info .close:focus,
+.alert-info .close:hover {
   color: #1f465a;
 }
 
@@ -3334,10 +4016,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #a94442;
   background-color: #f2dede;
 }
-.alert-danger a:not(.btn), .alert-danger .close {
+.alert-danger a:not(.btn),
+.alert-danger .close {
   color: #a94442;
 }
-.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover, .alert-danger .close:focus, .alert-danger .close:hover {
+.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover,
+.alert-danger .close:focus,
+.alert-danger .close:hover {
   color: #762f2e;
 }
 
@@ -3345,10 +4030,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #3c763d;
   background-color: #dff0d8;
 }
-.alert-success a:not(.btn), .alert-success .close {
+.alert-success a:not(.btn),
+.alert-success .close {
   color: #3c763d;
 }
-.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover, .alert-success .close:focus, .alert-success .close:hover {
+.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover,
+.alert-success .close:focus,
+.alert-success .close:hover {
   color: #244725;
 }
 
@@ -3356,10 +4044,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #4a4958 !important;
   background-color: #7bb0da;
 }
-.alert-severe a:not(.btn), .alert-severe .close {
+.alert-severe a:not(.btn),
+.alert-severe .close {
   color: #4a4958 !important;
 }
-.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover, .alert-severe .close:focus, .alert-severe .close:hover {
+.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover,
+.alert-severe .close:focus,
+.alert-severe .close:hover {
   color: #000 !important;
 }
 
@@ -3371,10 +4062,13 @@ cagov-accordion.sidenav details summary.active:before {
   background-color: #730000;
   color: #fff;
 }
-.alert-banner a:not(.btn), .alert-banner .close {
+.alert-banner a:not(.btn),
+.alert-banner .close {
   color: #fff;
 }
-.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover, .alert-banner .close:focus, .alert-banner .close:hover {
+.alert-banner a:not(.btn):focus, .alert-banner a:not(.btn):hover,
+.alert-banner .close:focus,
+.alert-banner .close:hover {
   color: #7bb0da;
 }
 
@@ -3382,10 +4076,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #8a6d3b;
   background-color: #fcf8e3;
 }
-.alert-warning a:not(.btn), .alert-warning .close {
+.alert-warning a:not(.btn),
+.alert-warning .close {
   color: #8a6d3b;
 }
-.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover, .alert-warning .close:focus, .alert-warning .close:hover {
+.alert-warning a:not(.btn):focus, .alert-warning a:not(.btn):hover,
+.alert-warning .close:focus,
+.alert-warning .close:hover {
   color: #715930;
 }
 
@@ -3393,10 +4090,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #31708f;
   background-color: #d9edf7;
 }
-.alert-info a:not(.btn), .alert-info .close {
+.alert-info a:not(.btn),
+.alert-info .close {
   color: #31708f;
 }
-.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover, .alert-info .close:focus, .alert-info .close:hover {
+.alert-info a:not(.btn):focus, .alert-info a:not(.btn):hover,
+.alert-info .close:focus,
+.alert-info .close:hover {
   color: #1f465a;
 }
 
@@ -3404,10 +4104,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #a94442;
   background-color: #f2dede;
 }
-.alert-danger a:not(.btn), .alert-danger .close {
+.alert-danger a:not(.btn),
+.alert-danger .close {
   color: #a94442;
 }
-.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover, .alert-danger .close:focus, .alert-danger .close:hover {
+.alert-danger a:not(.btn):focus, .alert-danger a:not(.btn):hover,
+.alert-danger .close:focus,
+.alert-danger .close:hover {
   color: #762f2e;
 }
 
@@ -3415,10 +4118,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #3c763d;
   background-color: #dff0d8;
 }
-.alert-success a:not(.btn), .alert-success .close {
+.alert-success a:not(.btn),
+.alert-success .close {
   color: #3c763d;
 }
-.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover, .alert-success .close:focus, .alert-success .close:hover {
+.alert-success a:not(.btn):focus, .alert-success a:not(.btn):hover,
+.alert-success .close:focus,
+.alert-success .close:hover {
   color: #244725;
 }
 
@@ -3426,10 +4132,13 @@ cagov-accordion.sidenav details summary.active:before {
   color: #4a4958 !important;
   background-color: #7bb0da;
 }
-.alert-severe a:not(.btn), .alert-severe .close {
+.alert-severe a:not(.btn),
+.alert-severe .close {
   color: #4a4958 !important;
 }
-.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover, .alert-severe .close:focus, .alert-severe .close:hover {
+.alert-severe a:not(.btn):focus, .alert-severe a:not(.btn):hover,
+.alert-severe .close:focus,
+.alert-severe .close:hover {
   color: #000 !important;
 }
 
@@ -3479,16 +4188,19 @@ blockquote.prominent footer {
    /source/scss/colortheme/cs-executive-profile.scss
 ----------------------------------------- */
 .executive-profile {
-  background-color: #E1ECF7;
+  background-color: #e1ecf7;
 }
 
 .executive-profile.dark .executive-profile-body {
   border-left-color: #fff;
 }
-.executive-profile.dark p, .executive-profile.dark .executive-name, .executive-profile.dark a {
+.executive-profile.dark p,
+.executive-profile.dark .executive-name,
+.executive-profile.dark a {
   color: #fff;
 }
-.executive-profile.dark a:hover, .executive-profile.dark a:focus {
+.executive-profile.dark a:hover,
+.executive-profile.dark a:focus {
   color: #7bb0da;
 }
 
@@ -3497,7 +4209,7 @@ blockquote.prominent footer {
    /source/scss/colortheme/cs-utility.scss
 ----------------------------------------- */
 .utility-header {
-  background: #E1ECF7;
+  background: #e1ecf7;
   color: #000;
 }
 .utility-header .social-media-links a {
@@ -3529,8 +4241,32 @@ blockquote.prominent footer {
   color: #4a4958;
 }
 
-.site-settings {
-  background-color: #c5daef !important;
+/* -----------------------------------------
+   SITE HEADER
+   /source/scss/colortheme/cs-site-header.scss
+----------------------------------------- */
+.toggle-menu span {
+  background-color: #153554;
+}
+
+.mobile-controls {
+  background: #fff;
+}
+
+.mobile-control {
+  color: #72717c;
+}
+.mobile-control a {
+  color: #72717c;
+  text-decoration: none;
+}
+.mobile-control.toggle-sub-nav {
+  color: #153554;
+  background-color: #f1f6fb;
+}
+.mobile-control.toggle-sub-nav:hover, .mobile-control.toggle-sub-nav:focus {
+  outline: none;
+  background-color: #f9fbfd;
 }
 
 /* -----------------------------------------
@@ -3549,13 +4285,16 @@ html.high-contrast * {
   color: #ffd600 !important;
   text-shadow: none !important;
 }
-html.high-contrast .gauge-detail, html.high-contrast .gauge-number, html.high-contrast .percent-detail {
+html.high-contrast .gauge-detail,
+html.high-contrast .gauge-number,
+html.high-contrast .percent-detail {
   background: none !important;
 }
 html.high-contrast .service-tile .teaser:before {
   border: none !important;
 }
-html.high-contrast .enableHighContrastMode.active, html.high-contrast .disableHighContrastMode.active {
+html.high-contrast .enableHighContrastMode.active,
+html.high-contrast .disableHighContrastMode.active {
   background: #ffd600 !important;
   color: #000 !important;
 }

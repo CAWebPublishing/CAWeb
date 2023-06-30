@@ -20,24 +20,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 $caweb_plugin_active = is_plugin_active( 'caweb-admin/caweb-admin.php' ) || is_plugin_active_for_network( 'caweb-admin/caweb-admin.php' );
-
+$caweb_template_version = caweb_template_version();
 
 ?>
 <!-- Footer -->
 <footer id="footer" class="global-footer hidden-print">
+
 	<?php
+	
+	get_template_part( "parts/$caweb_template_version/back-to-top" );
+
 	if ( has_nav_menu( 'footer-menu' ) ) {
 		wp_nav_menu(
 			array(
 				'theme_location'         => 'footer-menu',
 				'caweb_nav_type'         => 'footer',
-				'caweb_template_version' => caweb_template_version(),
+				'caweb_template_version' => $caweb_template_version,
 			)
 		);
 	} else {
+		/**
+		 * @todo remove Back to Top link once 5.5 is completely removed.
+		 */
 		?>
 			<div class="container">
 				<ul class="footer-links">
+					<li class="d-none">
+						<a href="#skip-to-content">Back to Top</a>
+					</li>
 					<li><a>There Is No Navigation Menu Set</a></li>
 				</ul>
 			</div>

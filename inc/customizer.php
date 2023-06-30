@@ -51,8 +51,6 @@ function caweb_customize_controls_enqueue_scripts() {
 	$caweb_admin_file = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
 	$caweb_customizer_controls_file = caweb_get_min_file( '/dist/caweb-customizer.js', 'js' );
 
-	wp_enqueue_style( 'caweb-boot1-toggle', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css', array(), CAWEB_VERSION );
-
 	wp_register_script( 'caweb-customizer-controls-script', $caweb_customizer_controls_file, array(), CAWEB_VERSION, true );
 
 	wp_localize_script(
@@ -65,12 +63,6 @@ function caweb_customize_controls_enqueue_scripts() {
 
 	wp_enqueue_script( 'caweb-admin-scripts', $caweb_admin_file, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_enqueue_script( 'caweb-customizer-controls-script' );
-
-	/*
-	Bootstrap 4 Toggle
-	https://gitbrent.github.io/bootstrap4-toggle/
-	*/
-	wp_enqueue_script( 'caweb-boot1', 'https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js', array( 'jquery' ), '3.6.1', true );
 
 }
 

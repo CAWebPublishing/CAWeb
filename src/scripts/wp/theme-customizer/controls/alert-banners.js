@@ -15,7 +15,7 @@ jQuery( document ).ready( function($) {
 		$(alert_toggle).on( 'click', toggle_alert );
 		$(alert_remove).on( 'click', remove_alert );
 
-		$(alert_status).attr('data-toggle', 'toggle');
+		$(alert_status).attr('data-bs-toggle', 'toggle');
 		$(alert_status).attr('data-size', 'sm');
 
 		$(alert_list).append( $(new_li) );
