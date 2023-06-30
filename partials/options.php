@@ -167,7 +167,7 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Select a site fav icon (displays in browser tab).</small>
 				<div class="input-group">
 					<div class="input-group-prepend">
-						<span class="input-group-text">
+						<span class="input-group-text h-100">
 							<!-- Fav Icon Preview -->
 							<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php print esc_url( $fav_icon ); ?>"/> 
 						</span>
