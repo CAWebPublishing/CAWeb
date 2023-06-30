@@ -56,13 +56,6 @@ foreach ( $args as $var => $val ) {
 					<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
 						<div class="standard-translate" id="google_translate_element"></div>
 					<?php endif; ?>
-
-					<button 
-						class="collapsed btn btn-xs" 
-						data-bs-toggle="collapse" data-bs-target="#siteSettings" 
-						aria-controls="siteSettings">
-						<span class="ca-gov-icon-gear" aria-hidden="true"></span> Settings
-					</button>
 				</div>
 			</div>
 		</div>
