@@ -1,6 +1,12 @@
 @charset "UTF-8";
+/*
+Custom variables for the CAWeb Theme
+based off CA State Template v5.5.23
+*/
 body[class*="5.5"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Print Formatting */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Google Search */
+  /* Override styles for second level navs not using flex */
 }
 body[class*="5.5"] body:not(.sticky_nav) #main-content.main-content {
   width: 100%;
@@ -83,89 +89,75 @@ body[class*="5.5"] .page-date {
     max-width: 1280px !important;
   }
 }
-@media print {
-  body[class*="5.5"] {
-    /* Main Content */
-    /* Header Organization Banner */
-    /* Navigation Search */
-    /* Width */
-    /* Page Margins */
-    /* Max-Width */
-    /* Padding */
-    /* Padding-left */
-    /* Utility Header */
-    /* Hide the following elements */
+body[class*="5.5"] .location-settings button.close {
+  font-size: 2.5em;
+}
+body[class*="5.5"] .location-settings button.close:hover {
+  color: #FDB81E !important;
+}
+body[class*="5.5"] #google_translate_element .skiptranslate.goog-te-gadget, body[class*="5.5"] .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+body[class*="5.5"] #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body[class*="5.5"] .skiptranslate.goog-te-gadget a {
+  color: inherit;
+}
+body[class*="5.5"] .skiptranslate.goog-te-gadget a:hover {
+  color: #fee09c;
+}
+body[class*="5.5"] .gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
+body[class*="5.5"] nav {
+  /* Override nav li line-height */
+}
+body[class*="5.5"] nav li {
+  line-height: 1.5 !important;
+}
+body[class*="5.5"] header .full-width-nav {
+  padding: 0 15px;
+}
+@media (max-width: 992px) {
+  body[class*="5.5"] nav .link-description,
+  body[class*="5.5"] nav .media-left,
+  body[class*="5.5"] nav .font-size-40,
+  body[class*="5.5"] nav .image-icon {
+    display: none;
   }
-  body[class*="5.5"] body {
-    background: white !important;
+}
+body[class*="5.5"]:not(.divi-built) #main-content {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 15px;
+}
+@media (min-width: 768px) {
+  body[class*="5.5"]:not(.divi-built) #main-content {
+    max-width: 768px;
   }
-  body[class*="5.5"] #main-content {
-    padding-top: 0 !important;
-    outline: transparent !important;
+}
+@media (min-width: 992px) {
+  body[class*="5.5"]:not(.divi-built) #main-content {
+    max-width: 992px;
   }
-  body[class*="5.5"] .main-content {
-    background: transparent !important;
+}
+@media (min-width: 1200px) {
+  body[class*="5.5"]:not(.divi-built) #main-content {
+    max-width: 1200px;
   }
-  body[class*="5.5"] .header-organization-banner {
-    margin-left: -59px !important;
-  }
-  body[class*="5.5"] .navigation-search {
-    border: none !important;
-  }
-  body[class*="5.5"] .single.sidebar_displayed .main-content .main-primary,
-  body[class*="5.5"] .archive.sidebar_displayed .main-content .main-primary {
-    width: 100% !important;
-  }
-  body[class*="5.5"] .et_pb_row,
-  body[class*="5.5"] #main-content {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  body[class*="5.5"] .et_pb_row {
-    display: inline !important;
-  }
-  body[class*="5.5"] #main-content,
-  body[class*="5.5"] .et_pb_row,
-  body[class*="5.5"] .et_pb_row,
-  body[class*="5.5"] .main-content,
-  body[class*="5.5"] .page-title,
-  body[class*="5.5"] .et_pb_gutters3 .et_pb_column_2_3,
-  body[class*="5.5"] .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-  body[class*="5.5"] .et_pb_post_title, body[class*="5.5"] .et_pb_section, body[class*="5.5"] .et_pb_column_2_3 .et_pb_row_inner {
-    padding: 1em !important;
-  }
-  body[class*="5.5"] .mobile-control.cagov-logo {
-    padding-left: 0px !important;
-  }
-  body[class*="5.5"] .utility-header {
-    height: 45px !important;
-  }
-  body[class*="5.5"] header,
-  body[class*="5.5"] footer,
-  body[class*="5.5"] .return-top.is-visible,
-  body[class*="5.5"] .addtoany_share_save_container,
-  body[class*="5.5"] #ae_app,
-  body[class*="5.5"] .et_pb_fullwidth_section,
-  body[class*="5.5"] .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
-  body[class*="5.5"] .et_pb_column.et_pb_column_1_4,
-  body[class*="5.5"] aside#caweb-sidebar,
-  body[class*="5.5"] .si-toggle-container {
-    display: none !important;
-    visibility: hidden !important;
+}
+@media (min-width: 1280px) {
+  body[class*="5.5"]:not(.divi-built) #main-content {
+    max-width: 1280px;
   }
 }
 body[class*="5.5"].divi-built {
-  /* Divi Specific Overrides */
-  /**
-  * Page & Builder Width Styles
-  * 
-  * Divi Built Standard Section Rows
-  * Divi Built Standard Section Rows when using Visual Builder
-  * Divi Fullwidth Menu Module Rows
-  */
+  /* Divi Specific Overrides */ /**
+* Page & Builder Width Styles
+* 
+* Divi Built Standard Section Rows
+* Divi Built Standard Section Rows when using Visual Builder
+* Divi Fullwidth Menu Module Rows
+*/
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -263,8 +255,47 @@ body[class*="5.5"].divi-built .et_pb_text ol, body[class*="5.5"].divi-built .et_
 body[class*="5.5"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
+body[class*="5.5"] .second-level-nav:not(.flex) {
+  display: block;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: inherit;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li {
+  display: inline-block;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
+  font-size: 17.6px;
+  font-size: 1.1rem;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
+  background-color: inherit;
+  opacity: 1;
+  transition: all 0.3s;
+}
+body[class*="5.5"] nav.megadropdown .media-left .media-object {
+  max-width: inherit;
+}
+@media (max-width: 992px) {
+  body[class*="5.5"] nav {
+    /* MegaDropdown Navigation Styles */
+  }
+  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=pull-] {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=with-image-] {
+    display: none;
+  }
+}
 body[class*="6.0"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Print Formatting */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Google Search */
 }
 body[class*="6.0"] body:not(.sticky_nav) #main-content.main-content {
   width: 100%;
@@ -347,89 +378,75 @@ body[class*="6.0"] .page-date {
     max-width: 1176px !important;
   }
 }
-@media print {
-  body[class*="6.0"] {
-    /* Main Content */
-    /* Header Organization Banner */
-    /* Navigation Search */
-    /* Width */
-    /* Page Margins */
-    /* Max-Width */
-    /* Padding */
-    /* Padding-left */
-    /* Utility Header */
-    /* Hide the following elements */
+body[class*="6.0"] .location-settings button.close {
+  font-size: 2.5em;
+}
+body[class*="6.0"] .location-settings button.close:hover {
+  color: #FDB81E !important;
+}
+body[class*="6.0"] #google_translate_element .skiptranslate.goog-te-gadget, body[class*="6.0"] .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+body[class*="6.0"] #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body[class*="6.0"] .skiptranslate.goog-te-gadget a {
+  color: inherit;
+}
+body[class*="6.0"] .skiptranslate.goog-te-gadget a:hover {
+  color: #fee09c;
+}
+body[class*="6.0"] .gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
+body[class*="6.0"] nav {
+  /* Override nav li line-height */
+}
+body[class*="6.0"] nav li {
+  line-height: 1.5 !important;
+}
+body[class*="6.0"] header .full-width-nav {
+  padding: 0 15px;
+}
+@media (max-width: 992px) {
+  body[class*="6.0"] nav .link-description,
+  body[class*="6.0"] nav .media-left,
+  body[class*="6.0"] nav .font-size-40,
+  body[class*="6.0"] nav .image-icon {
+    display: none;
   }
-  body[class*="6.0"] body {
-    background: white !important;
+}
+body[class*="6.0"]:not(.divi-built) #main-content {
+  width: 100%;
+  max-width: 1176px;
+  margin: 0 auto;
+  padding: 15px;
+}
+@media (min-width: 768px) {
+  body[class*="6.0"]:not(.divi-built) #main-content {
+    max-width: 768px;
   }
-  body[class*="6.0"] #main-content {
-    padding-top: 0 !important;
-    outline: transparent !important;
+}
+@media (min-width: 992px) {
+  body[class*="6.0"]:not(.divi-built) #main-content {
+    max-width: 992px;
   }
-  body[class*="6.0"] .main-content {
-    background: transparent !important;
+}
+@media (min-width: 1200px) {
+  body[class*="6.0"]:not(.divi-built) #main-content {
+    max-width: 1140px;
   }
-  body[class*="6.0"] .header-organization-banner {
-    margin-left: -59px !important;
-  }
-  body[class*="6.0"] .navigation-search {
-    border: none !important;
-  }
-  body[class*="6.0"] .single.sidebar_displayed .main-content .main-primary,
-  body[class*="6.0"] .archive.sidebar_displayed .main-content .main-primary {
-    width: 100% !important;
-  }
-  body[class*="6.0"] .et_pb_row,
-  body[class*="6.0"] #main-content {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  body[class*="6.0"] .et_pb_row {
-    display: inline !important;
-  }
-  body[class*="6.0"] #main-content,
-  body[class*="6.0"] .et_pb_row,
-  body[class*="6.0"] .et_pb_row,
-  body[class*="6.0"] .main-content,
-  body[class*="6.0"] .page-title,
-  body[class*="6.0"] .et_pb_gutters3 .et_pb_column_2_3,
-  body[class*="6.0"] .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-  body[class*="6.0"] .et_pb_post_title, body[class*="6.0"] .et_pb_section, body[class*="6.0"] .et_pb_column_2_3 .et_pb_row_inner {
-    padding: 1em !important;
-  }
-  body[class*="6.0"] .mobile-control.cagov-logo {
-    padding-left: 0px !important;
-  }
-  body[class*="6.0"] .utility-header {
-    height: 45px !important;
-  }
-  body[class*="6.0"] header,
-  body[class*="6.0"] footer,
-  body[class*="6.0"] .return-top.is-visible,
-  body[class*="6.0"] .addtoany_share_save_container,
-  body[class*="6.0"] #ae_app,
-  body[class*="6.0"] .et_pb_fullwidth_section,
-  body[class*="6.0"] .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
-  body[class*="6.0"] .et_pb_column.et_pb_column_1_4,
-  body[class*="6.0"] aside#caweb-sidebar,
-  body[class*="6.0"] .si-toggle-container {
-    display: none !important;
-    visibility: hidden !important;
+}
+@media (min-width: 1280px) {
+  body[class*="6.0"]:not(.divi-built) #main-content {
+    max-width: 1176px;
   }
 }
 body[class*="6.0"].divi-built {
-  /* Divi Specific Overrides */
-  /**
-  * Page & Builder Width Styles
-  * 
-  * Divi Built Standard Section Rows
-  * Divi Built Standard Section Rows when using Visual Builder
-  * Divi Fullwidth Menu Module Rows
-  */
+  /* Divi Specific Overrides */ /**
+* Page & Builder Width Styles
+* 
+* Divi Built Standard Section Rows
+* Divi Built Standard Section Rows when using Visual Builder
+* Divi Fullwidth Menu Module Rows
+*/
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -450,7 +467,7 @@ body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-p
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1176px;
 }
 @media (min-width: 768px) {
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
@@ -540,6 +557,9 @@ body.page-template-searchpage form#Search .close-search {
 body.page-template-searchpage .gsc-cursor-page:focus {
   outline: solid 2px #2ea3f2;
 }
+body.page-template-searchpage.logged-in .gssb_c {
+  margin-top: 35px;
+}
 body.sidebar-displayed main {
   width: 75%;
   display: inline-block;
@@ -557,6 +577,79 @@ body.sidebar-displayed footer {
   clear: both;
 }
 
+/* Print Formatting */
+@media print {
+  body {
+    background: white !important;
+  }
+  /* Main Content */
+  #main-content {
+    padding-top: 0 !important;
+    outline: transparent !important;
+  }
+  .main-content {
+    background: transparent !important;
+  }
+  /* Header Organization Banner */
+  .header-organization-banner {
+    margin-left: -59px !important;
+  }
+  /* Navigation Search */
+  .navigation-search {
+    border: none !important;
+  }
+  /* Width */
+  .single.sidebar_displayed .main-content .main-primary,
+  .archive.sidebar_displayed .main-content .main-primary {
+    width: 100% !important;
+  }
+  /* Page Margins */
+  .et_pb_row,
+  #main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .et_pb_row {
+    display: inline !important;
+  }
+  /* Max-Width */
+  #main-content,
+  .et_pb_row,
+  .et_pb_row,
+  .main-content,
+  .page-title,
+  .et_pb_gutters3 .et_pb_column_2_3,
+  .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  /* Padding */
+  .et_pb_post_title, .et_pb_section, .et_pb_column_2_3 .et_pb_row_inner {
+    padding: 1em !important;
+  }
+  /* Padding-left */
+  .mobile-control.cagov-logo {
+    padding-left: 0px !important;
+  }
+  /* Utility Header */
+  .utility-header {
+    height: 45px !important;
+  }
+  /* Hide the following elements */
+  header,
+  footer,
+  .return-top.is-visible,
+  .addtoany_share_save_container,
+  #ae_app,
+  .et_pb_fullwidth_section,
+  .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
+  .et_pb_column.et_pb_column_1_4,
+  aside#caweb-sidebar,
+  .si-toggle-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
 /* WordPress Specific Overrides */ /* Hide Activation Links on wp-activate.php */
 .wp-activate-container p.view {
   display: none;
@@ -3794,4 +3887,10 @@ li[class^=et_fb_profile_banner]::before {
 
 .ca-gov-icon-github:before {
   content: "\ea21" !important;
+}
+
+@media (min-width: 768px) {
+  .fixed.compact .header-organization-banner a img {
+    max-height: 50px;
+  }
 }

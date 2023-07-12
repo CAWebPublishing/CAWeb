@@ -12046,8 +12046,7 @@ body#tinymce.mce-content-body {
 }
 
 /* Toggle Arrows when collapsed */
-a[data-bs-toggle=collapse] h2 > span:after, a[data-bs-toggle=collapse] .h2 > span:after,
-a[data-toggle=collapse] label > span:after {
+a[data-bs-toggle=collapse] h2 > span:after, a[data-bs-toggle=collapse] .h2 > span:after {
   content: "C";
 }
 
@@ -12058,7 +12057,7 @@ a[data-bs-toggle=collapse].collapsed label > span:after {
 
 /* Fav Icon Preview Height */
 .ca_fav_ico_option {
-  max-height: 30px;
+  max-height: 20px;
 }
 
 /* Image Preview Min/Max Height */
@@ -12224,9 +12223,13 @@ body.toplevel_page_caweb_options legend {
 }
 body.nav-menus-php .form-check-input,
 body.toplevel_page_caweb_options .form-check-input {
-  margin: 0.25em 0.25em 0 0;
+  background-repeat: no-repeat;
 }
-body.nav-menus-php .form-check-input:checked,
-body.toplevel_page_caweb_options .form-check-input:checked {
-  background-color: initial;
+body.nav-menus-php .form-check-input[type=radio],
+body.toplevel_page_caweb_options .form-check-input[type=radio] {
+  background: initial;
+}
+body.nav-menus-php .form-check-input:checked::before,
+body.toplevel_page_caweb_options .form-check-input:checked::before {
+  content: "" !important;
 }

@@ -13,8 +13,7 @@ body#tinymce.mce-content-body{
 }
 
 /* Toggle Arrows when collapsed */
-a[data-bs-toggle="collapse"] h2 > span:after,
-a[data-toggle="collapse"] label > span:after{
+a[data-bs-toggle="collapse"] h2 > span:after{
 	content: '\43'
 }
 a[data-bs-toggle="collapse"].collapsed h2 > span:after,
@@ -24,7 +23,7 @@ a[data-bs-toggle="collapse"].collapsed label > span:after{
 
 /* Fav Icon Preview Height */
 .ca_fav_ico_option{
-	max-height: 30px;
+	max-height: 20px;
 }
 
 /* Image Preview Min/Max Height */

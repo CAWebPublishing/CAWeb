@@ -23,6 +23,8 @@ $caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_o
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
+$caweb_page_container_classes = sprintf( 'page-container %1$s', get_option( 'caweb_page_container_classes', '' ));
+$caweb_main_content_classes = sprintf( 'main-content %1$s', get_option( 'caweb_main_content_classes', '' ));
 
 ?>
 <!DOCTYPE html>
@@ -88,7 +90,7 @@ if ( ! empty( $caweb_google_tag_manager_id ) ) :
 
 <?php wp_body_open(); ?>
 
-<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_page_container_class', 'page-container' ) ); ?>">
+<div id="page-container" class="<?php print esc_attr( apply_filters( 'caweb_page_container_class', $caweb_page_container_classes ) ); ?>">
 	<div id="et-main-area">
-		<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_main_content_class', 'main-content' ) ); ?>" tabindex="-1">
+		<div id="main-content" class="<?php print esc_attr( apply_filters( 'caweb_main_content_class', $caweb_main_content_classes ) ); ?>" tabindex="-1">
 			<main class="main-primary">

@@ -21,13 +21,12 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 
 ?>
 
-<span class="return-top hidden-print"></span>
 
 <div class="container">
 	<div class="d-flex">
 
 		<ul class="footer-links mr-auto">
-			<li>
+			<li class="d-none">
 				<a href="#skip-to-content">Back to Top</a>
 			</li>
 			<?php

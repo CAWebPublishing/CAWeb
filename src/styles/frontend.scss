@@ -1,23 +1,79 @@
+/*
+Custom variables for the CAWeb Theme
+based off CA State Template v5.5.23
+*/
 @import './custom/variables';
 
+body{
+	// State Template 5.5 specific styles
+	&[class*="5.5"]{
+        @import './custom/';
 
-@import './custom/location-bar';
-@import './custom/google';
-@import './custom/navigation';
+		// if page is a standard WordPress page
+		&:not(.divi-built){
+			@import './custom/main-content';
+		}
 
-@import './custom/main-content';
+		// if page was built using Divi
+        &.divi-built{
+            @import 'divi';
+        }
 
-body[class*="5.5"] {
-	@import '../version-5.5/navigation';
+		// Add any custom Version styles
+		@import '../version-5.5/navigation';
+
+    }
+
+	// State Template 6 specific styles
+	&[class*="6.0"]{
+		// Add any custom Version variables
+		@import '../version-6.0/variables';
+        @import './custom/';
+            
+		
+		// if page is a standard WordPress page
+		&:not(.divi-built){
+			@import './custom/main-content';
+		}
+		
+		// if page was built using Divi
+        &.divi-built{
+            @import 'divi';
+        }
+
+		// Add any custom Version styles
+
+    }
+	
+    // SERP Template Overrides
+    &.page-template-searchpage{
+        @import 'custom/search';
+		
+		&.logged-in .gssb_c{
+			margin-top: 35px;
+		}
+    }
+
+    // if sidebar is displayed
+    &.sidebar-displayed{
+        @import 'custom/sidebar';
+    }
 }
 
-body[class*="6.0"] {
-	@import '../version-6.0/variables';
+// Add print styles
+@import 'custom/print';
 
-	@import './custom/main-content';
-}
+// Add WordPress style overrides
+@import 'wp';
 
+// Add Accessibility styles
+@import 'a11y';
 
+// Add CAWeb font sheet 
+// This is a combination of the State Template and Divi icons.
+@import 'font-only';
+
+// @todo this needs to be verified to see if it's still needed
 // Corrects Logo when navigation is compacted, in mobile view
 @media (min-width: 768px){
 	.fixed.compact .header-organization-banner a img{

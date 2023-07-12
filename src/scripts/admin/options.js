@@ -57,6 +57,11 @@ jQuery(document).ready(function($) {
     changeMade = true;
   });
 
+  // Custom Utility Header Links Enabled
+  $('input[name^="ca_utility_link_"][name$="_enable"]').on('change', function(){
+    let link_id = $(this).attr('id').substring($(this).attr('id').lastIndexOf('_') - 1, $(this).attr('id').lastIndexOf('_'));
+    $(`#custom_link_${link_id}`).toggle();
+  })
   
   // Reset Organization Logo-Brand
   $('#resetOrgLogo').on( 'click', function() {
@@ -83,7 +88,7 @@ jQuery(document).ready(function($) {
   // Display warning if Legacy Browser Support Enabled
   $('#ca_x_ua_compatibility').on('change',function(e){
     var isChecked = this.checked;
-    var respSpan = $(this).parent().next();
+    var respSpan = $(this).parent().children().last();
   
     if(isChecked){
       respSpan.html('IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.')

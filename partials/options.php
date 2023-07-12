@@ -167,7 +167,7 @@ function caweb_display_general_options() {
 				<small class="mb-2 text-muted d-block">Select a site fav icon (displays in browser tab).</small>
 				<div class="input-group">
 					<div class="input-group-prepend">
-						<span class="input-group-text">
+						<span class="input-group-text h-100">
 							<!-- Fav Icon Preview -->
 							<img class="ca_fav_ico_option" id="ca_fav_ico_img" src="<?php print esc_url( $fav_icon ); ?>"/> 
 						</span>
@@ -249,21 +249,27 @@ function caweb_display_general_options() {
 		<div class="row">
 			<!-- Title Display Default -->
 			<div class="mb-3 col">
-				<label for="ca_default_post_title_display" class="d-block mb-0"><strong>Title Display Default</strong></label>
-				<small class="mb-2 text-muted d-block">Display the title for all new pages/posts.</small>
-				<input type="checkbox" name="ca_default_post_title_display" id="ca_default_post_title_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_title ); ?>>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_default_post_title_display" id="ca_default_post_title_display" <?php print esc_attr( $display_post_title ); ?>>
+					<label for="ca_default_post_title_display" class="d-block mb-0 form-check-label"><strong>Title Display Default</strong></label>
+					<small class="mb-2 text-muted d-block">Display the title for all new pages/posts.</small>
+				</div>
 			</div>
 			<!-- Menu Home Link -->
 			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
-				<label for="ca_home_nav_link" class="d-block mb-0"><strong>Menu Home Link</strong></label>
-				<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
-				<input type="checkbox" name="ca_home_nav_link" id="ca_home_nav_link" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $home_nav_link_enabled ); ?>>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_home_nav_link" id="ca_home_nav_link" <?php print esc_attr( $home_nav_link_enabled ); ?>>
+					<label for="ca_home_nav_link" class="d-block mb-0 form-check-label"><strong>Menu Home Link</strong></label>
+					<small class="mb-2 text-muted d-block">Add Home link to subpages header.</small>
+				</div>
 			</div>
 			<!-- Sticky Navigation -->
-			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
-				<label for="ca_sticky_navigation" class="d-block mb-0"><strong>Sticky Navigation</strong></label>
-				<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
-				<input type="checkbox" name="ca_sticky_navigation" id="ca_sticky_navigation" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $sticky_nav_enabled ); ?>>
+			<div class="mb-3 col">
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_sticky_navigation" id="ca_sticky_navigation" <?php print esc_attr( $sticky_nav_enabled ); ?>>
+					<label for="ca_sticky_navigation" class="d-block mb-0 form-check-label"><strong>Sticky Navigation</strong></label>
+					<small class="mb-2 text-muted d-block">Keep the navigation menu visibile when scrolling.</small>
+				</div>
 			</div>
 		</div>
 
@@ -271,22 +277,28 @@ function caweb_display_general_options() {
 		<div class="row">
 			<!-- Display Date for Non-Divi Posts -->
 			<div class="mb-3 col">
-				<label for="ca_default_post_date_display" class="d-block mb-0"><strong>Display Date for Non-Divi Posts</strong></label>
-				<small class="mb-2 text-muted d-block">Display the post published date for non-Divi posts.</small>
-				<input type="checkbox" name="ca_default_post_date_display" id="ca_default_post_date_display" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $display_post_date ); ?>>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_default_post_date_display" id="ca_default_post_date_display" <?php print esc_attr( $display_post_date ); ?>>
+					<label for="ca_default_post_date_display" class="d-block mb-0 form-check-label"><strong>Display Date for Non-Divi Posts</strong></label>
+					<small class="mb-2 text-muted d-block">Display the post published date for non-Divi posts.</small>
+				</div>
 			</div>
 			<!-- Legacy Browser Support -->
 			<div class="mb-3 col">
-				<label for="ca_x_ua_compatibility" class="d-block mb-0"><strong>Legacy Browser Support</strong></label>
-				<small class="mb-2 text-muted d-block">Creates tradeoff: IE works better but forces accessibility errors.</small>
-				<input type="checkbox" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $ua_compatibiliy ); ?> >
-				<small class="text-danger d-block"><?php print ! empty( $ua_compatibiliy ) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : ''; ?></small>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_x_ua_compatibility" id="ca_x_ua_compatibility" <?php print esc_attr( $ua_compatibiliy ); ?> >
+					<label for="ca_x_ua_compatibility" class="d-block mb-0 form-check-label"><strong>Legacy Browser Support</strong></label>
+					<small class="mb-2 text-muted d-block">Creates tradeoff: IE works better but forces accessibility errors.</small>
+					<small class="text-danger d-block"><?php print ! empty( $ua_compatibiliy ) ? 'IE 11 browser compatibility enabled. Warning: creates accessibility errors when using IE browsers.' : ''; ?></small>
+				</div>
 			</div>
 			<!-- Search on FrontPage -->
 			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
-				<label for="ca_frontpage_search_enabled" class="d-block mb-0"><strong>Show Search on Front Page</strong></label>
-				<small class="mb-2 text-muted d-block">Enable Feature Search box on home page.</small>
-				<input type="checkbox" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $frontpage_search_enabled ); ?> >
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?php print esc_attr( $frontpage_search_enabled ); ?> >
+					<label for="ca_frontpage_search_enabled" class="d-block mb-0 form-check-label"><strong>Show Search on Front Page</strong></label>
+					<small class="mb-2 text-muted d-block">Enable Feature Search box on home page.</small>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -331,15 +343,19 @@ function caweb_display_utility_header_options() {
 		<div class="row">
 			<!-- Enable Geo Locator -->
 			<div class="mb-3 col-4">
-				<label for="ca_geo_locator_enabled" class="d-block mb-0"><strong>Enable Geo Locator</strong></label>
-				<small class="mb-2 text-muted d-block">Displays a geo locator feature at the top right of each page.</small>
-				<input type="checkbox" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $geo_locator_enabled ); ?>> 
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?php print esc_attr( $geo_locator_enabled ); ?>> 
+					<label for="ca_geo_locator_enabled" class="d-block mb-0"><strong>Enable Geo Locator</strong></label>
+					<small class="mb-2 text-muted d-block">Displays a geo locator feature at the top right of each page.</small>
+				</div>
 			</div>
 			<!-- Home Link -->
 			<div class="mb-3 col-4">
-				<label for="ca_utility_home_icon" class="d-block mb-0"><strong>Home Link</strong></label>
-				<small class="mb-2 text-muted d-block">Put a home icon/link on the left side of the utility header.</small>
-				<input type="checkbox" name="ca_utility_home_icon" id="ca_utility_home_icon" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $utility_header_home_icon ); ?>>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="ca_utility_home_icon" id="ca_utility_home_icon" <?php print esc_attr( $utility_header_home_icon ); ?>>
+					<label for="ca_utility_home_icon" class="d-block mb-0 form-check-label"><strong>Home Link</strong></label>
+					<small class="mb-2 text-muted d-block">Put a home icon/link on the left side of the utility header.</small>
+				</div>
 			</div>
 		</div>
 
@@ -361,11 +377,11 @@ function caweb_display_utility_header_options() {
 				?>
 			<!-- Custom Link <?php print esc_attr( $i ); ?> -->
 			<div class="mb-3 col">
-				<label for="<?php print esc_attr( $p ); ?>_enable" class="d-block mb-0"><strong>Custom Link <?php print esc_attr( $i ); ?></strong></label>
-				<small class="mb-2 text-muted d-block">Enable a custom link.</small>
-				<a data-bs-toggle="collapse" href="#custom_link_<?php print esc_attr( $i ); ?>" aria-expanded="<?php print ! empty( $enable ) ? 'true' : 'false'; ?>" aria-controls="custom_link_<?php print esc_attr( $i ); ?>" class="shadow-none">
-					<input type="checkbox" id="<?php print esc_attr( $p ); ?>_enable" name="<?php print esc_attr( $p ); ?>_enable" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $enable ); ?>>
-				</a> 
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $p ); ?>_enable" name="<?php print esc_attr( $p ); ?>_enable" <?php print esc_attr( $enable ); ?>>
+					<label for="<?php print esc_attr( $p ); ?>_enable" class="d-block mb-0 form-check-label"><strong>Custom Link <?php print esc_attr( $i ); ?></strong></label>
+					<small class="mb-2 text-muted d-block">Enable a custom link.</small>
+				</div>
 				<div id="custom_link_<?php print esc_attr( $i ); ?>" class="collapse<?php print ! empty( $enable ) ? ' show' : ''; ?>">
 					<!-- Link Label -->
 					<label for="<?php print esc_attr( $p ); ?>_name" class="d-block mb-0"><strong>Custom Link <?php print esc_attr( $i ); ?> Label</strong></label>
@@ -552,20 +568,20 @@ function caweb_display_google_options() {
 				<label for="ca_google_trans_enabled" class="d-block mb-0"><strong>Enable Google Translate</strong></label>
 				<small class="mb-2 text-muted d-block">Displays the Google translate feature at the top right of each page.</small>
 				<!-- Google Translate None -->
-				<div class="form-check form-check-inline ps-0">
-					<input class="form-check-input" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print empty( $google_translate_mode ) || false === $google_translate_mode || 'none' === $google_translate_mode ? ' checked' : ''; ?>>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input mt-1" type="radio" name="ca_google_trans_enabled" id="ca_google_trans_enabled_none" value="none"<?php print empty( $google_translate_mode ) || false === $google_translate_mode || 'none' === $google_translate_mode ? ' checked' : ''; ?>>
 					<label class="form-check-label" for="ca_google_trans_enabled_none">None</label>
 				</div>
 
 				<!-- Google Translate Standard -->
-				<div class="form-check form-check-inline ps-0">
-					<input class="form-check-input" type="radio" value="standard" name="ca_google_trans_enabled" id="ca_google_trans_enabled_standard" <?php print true === $google_translate_mode || 'standard' === $google_translate_mode ? ' checked' : ''; ?>>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input mt-1" type="radio" value="standard" name="ca_google_trans_enabled" id="ca_google_trans_enabled_standard" <?php print true === $google_translate_mode || 'standard' === $google_translate_mode ? ' checked' : ''; ?>>
 					<label class="form-check-label" for="ca_google_trans_enabled_standard">Standard</label>
 				</div>
 
 				<!-- Google Translate Custom -->
-				<div class="form-check form-check-inline ps-0">
-					<input class="form-check-input" type="radio" id="ca_google_trans_enabled_custom" value="custom" name="ca_google_trans_enabled" <?php print 'custom' === $google_translate_mode ? ' checked' : ''; ?>>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input mt-1" type="radio" id="ca_google_trans_enabled_custom" value="custom" name="ca_google_trans_enabled" <?php print 'custom' === $google_translate_mode ? ' checked' : ''; ?>>
 					<label class="form-check-label" for="ca_google_trans_enabled_custom">Custom</label>
 				</div>
 			</div>
@@ -581,11 +597,13 @@ function caweb_display_google_options() {
 				<input type="text" name="ca_google_trans_page" id="ca_google_trans_page" class="form-control" value="<?php print esc_attr( $google_translate_page ); ?>" >
 			</div>
 
-			<div class="mb-3 col-sm-2">
-				<!-- Open Translate in New Page -->
-				<label for="ca_google_trans_page_new_window" class="d-block mb-0"><strong>Open in New Tab</strong></label>
-				<small class="mb-2 text-muted d-block">Open link in new tab.</small>
-				<input type="checkbox" id="ca_google_trans_page_new_window" name="ca_google_trans_page_new_window" data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $google_translate_new_window ); ?> />
+			<div class="col-sm-2 d-flex align-items-end">
+				<div class="form-check form-switch">
+					<!-- Open Translate in New Page -->
+					<input type="checkbox" class="form-check-input mt-1" id="ca_google_trans_page_new_window" name="ca_google_trans_page_new_window" <?php print esc_attr( $google_translate_new_window ); ?> />
+					<label for="ca_google_trans_page_new_window" class="d-block mb-0 form-check-label"><strong>Open in New Tab</strong></label>
+					<small class="mb-2 text-muted d-block">Open link in new tab.</small>
+				</div>
 			</div>
 
 			<!-- Google Translate Icon -->
@@ -675,22 +693,28 @@ function caweb_display_social_media_settings( $is_active = false ) {
 						<?php endif; ?>
 						<!-- Show in header -->
 						<div class="mb-3 col-sm-3<?php print esc_attr( $deprecating ? ' d-none' : '' ); ?>">
-							<label for="<?php print esc_attr( $option ); ?>_header" class="d-block"><strong>Show in header:</strong></label>
-							<small class="text-muted d-block">Display social link in the utility header.</small>
-							<input type="checkbox" id="<?php print esc_attr( $option ); ?>_header" name="<?php print esc_attr( $option ); ?>_header" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $header_checked ); ?>>
+							<div class="form-check form-switch">
+								<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $option ); ?>_header" name="<?php print esc_attr( $option ); ?>_header" <?php print esc_attr( $header_checked ); ?>>
+								<label for="<?php print esc_attr( $option ); ?>_header" class="d-block form-check-label"><strong>Show in header:</strong></label>
+								<small class="text-muted d-block">Display social link in the utility header.</small>
+							</div>
 						</div>
 						<!-- Show in footer -->
 						<div class="mb-3 col-sm-3">
-							<label for="<?php print esc_attr( $option ); ?>_footer" class="d-block"><strong>Show in footer:</strong></label>
-							<small class="text-muted d-block">Display social link in the footer.</small>
-							<input type="checkbox" id="<?php print esc_attr( $option ); ?>_footer" name="<?php print esc_attr( $option ); ?>_footer" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $footer_checked ); ?>>
+							<div class="form-check form-switch">
+								<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $option ); ?>_footer" name="<?php print esc_attr( $option ); ?>_footer" <?php print esc_attr( $footer_checked ); ?>>
+								<label for="<?php print esc_attr( $option ); ?>_footer" class="d-block form-check-label"><strong>Show in footer:</strong></label>
+								<small class="text-muted d-block">Display social link in the footer.</small>
+							</div>
 						</div>
 				<?php if ( ! $share_email ) : ?>
 						<!-- Open in New Tab -->
 						<div class="mb-3 col-sm-3">
-							<label for="<?php print esc_attr( $option ); ?>_new_window" class="d-block"><strong>Open in New Tab:</strong></label>
-							<small class="text-muted d-block">Open link in new tab.</small>
-							<input type="checkbox" id="<?php print esc_attr( $option ); ?>_new_window" name="<?php print esc_attr( $option ); ?>_new_window" data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $new_window_checked ); ?>>
+							<div class="form-check form-switch">
+								<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $option ); ?>_new_window" name="<?php print esc_attr( $option ); ?>_new_window" <?php print esc_attr( $new_window_checked ); ?>>
+								<label for="<?php print esc_attr( $option ); ?>_new_window" class="d-block form-check-label"><strong>Open in New Tab:</strong></label>
+								<small class="text-muted d-block">Open link in new tab.</small>
+							</div>
 						</div>
 						<!-- Hover Text -->
 						<div class="mb-3 col-sm-3">
@@ -781,7 +805,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					$header         = $data['header'];
 					$default_header = ! empty( $header ) ? $header : 'Label';
 					$count          = $a + 1;
-					$status         = ! empty( $data['status'] ) ? ' checked' : '';
+					$status         = empty( $data['status'] ) ? ' checked' : '';
 					$alert_home     = 'home' === $data['page_display'] ? ' checked' : '';
 					$alert_all      = 'all' === $data['page_display'] ? ' checked' : '';
 
@@ -802,7 +826,8 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					</a>
 					<!-- Alert Options -->
 					<div>
-						<input type="checkbox" name="alert-status-<?php print esc_attr( $count ); ?>" data-toggle="toggle" data-onstyle="success"<?php print esc_attr( $status ); ?>>
+						<input type="checkbox" class="btn-check" id="alert-status-<?php print esc_attr( $count ); ?>" name="alert-status-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $status ); ?>>
+						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>">Display</label>
 						<button class="btn btn-danger remove-alert">Remove</button>
 					</div>
 
@@ -829,14 +854,14 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					<!-- Alert Banner Settings -->
 					<div class="mb-3 col-sm-12">
 						<!-- Display On -->
-						<div class="mb-3 col-sm pl-0" role="radiogroup" aria-label="Alert Display On Options">
+						<div class="mb-3 col-sm" role="radiogroup" aria-label="Alert Display On Options">
 								<label class="d-block mb-0"><strong>Display on</strong></label>
 								<small class="text-muted d-block mb-2">Select whether alert should display on home page or on all pages.</small>
 								<div class="form-check form-check-inline">
 									<input 
 										id="alert-display-home-<?php print esc_attr( $count ); ?>" 
 										name="alert-display-<?php print esc_attr( $count ); ?>" 
-										class="form-check-input" 
+										class="form-check-input mt-1" 
 										type="radio" 
 										value="home"
 										<?php print esc_attr( $alert_home ); ?>>
@@ -846,7 +871,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 									<input 
 										id="alert-display-all-<?php print esc_attr( $count ); ?>" 
 										name="alert-display-<?php print esc_attr( $count ); ?>" 
-										class="form-check-input" 
+										class="form-check-input mt-1" 
 										type="radio" 
 										value="all"
 										<?php print esc_attr( $alert_all ); ?>>
@@ -855,43 +880,45 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 							</div>
 
 							<!-- Banner Color -->
-							<div class="mb-3 col-sm pl-0">
+							<div class="mb-3 col-sm">
 								<label for="alert-banner-color-<?php print esc_attr( $count ); ?>"><strong>Banner Color</strong></label>
 								<small class="text-muted d-block mb-2">Select a color for the alert banner.</small>
 								<input type="color" id="alert-banner-color-<?php print esc_attr( $count ); ?>" name="alert-banner-color-<?php print esc_attr( $count ); ?>" value="<?php print esc_attr( $banner_color ); ?>" class="form-control-sm">
 							</div>
 
 							<!-- Read More Button -->
-							<div class="mb-3 pl-0">
-								<label for="alert-read-more-<?php print esc_attr( $count ); ?>" class="d-block mb-0"><strong>Read More Button</strong></label>
-								<a data-bs-toggle="collapse" href="#alert-banner-read-more-<?php print esc_attr( $count ); ?>" class="shadow-none"> 
-									<input type="checkbox" id="alert-read-more-<?php print esc_attr( $count ); ?>" name="alert-read-more-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $readmore ); ?> data-toggle="toggle" data-onstyle="success" class="form-control">
-								</a>
+							<div class="mb-3 col-sm">
+								<div class="form-check form-switch">
+									<input type="checkbox" class="form-check-input mt-1" id="alert-read-more-<?php print esc_attr( $count ); ?>" name="alert-read-more-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $readmore ); ?> >
+									<label for="alert-read-more-<?php print esc_attr( $count ); ?>" class="d-block mb-0 form-check-label">Read More Button Text</label>
+								</div>
 							</div>
 
-							<div id="alert-banner-read-more-<?php print esc_attr( $count ); ?>" class="collapse<?php print ! empty( $readmore ) ? ' show' : ''; ?>">
+							<div id="alert-read-more-<?php print esc_attr( $count ); ?>" class="collapse<?php print ! empty( $readmore ) ? ' show' : ''; ?>">
 								<!-- Read More Button Text -->
-								<div class="mb-3 col-sm-6 pl-0">
+								<div class="mb-3 col-sm-6">
 									<label for="alert-read-more-text-<?php print esc_attr( $count ); ?>" class="d-block mb-0"><strong>Read More Button Text</strong></label>
 									<input type="text" id="alert-read-more-text-<?php print esc_attr( $count ); ?>" name="alert-read-more-text-<?php print esc_attr( $count ); ?>" maxlength="16" class="form-control" value="<?php print esc_attr( $readmore_text ); ?>">
 									<small class="text-muted">(Max Characters: 16)</small>
 								</div>
 
 								<!-- Read More Button URL -->
-								<div class="mb-3 col-sm-6 pl-0 d-inline-block">
+								<div class="mb-3 col-sm-6 d-inline-block">
 									<label for="alert-read-more-url-<?php print esc_attr( $count ); ?>" class="d-block mb-0"><strong>Read More Button URL</strong></label>
 									<input type="text" id="alert-read-more-url-<?php print esc_attr( $count ); ?>" name="alert-read-more-url-<?php print esc_attr( $count ); ?>" class="form-control" value="<?php print esc_url( $readmore_url ); ?>">
 								</div>
 
 								<!-- Read More Button Target -->
-								<div class="mb-3 col-sm-4 pl-0 d-inline-block align-top">
-									<label for="alert-read-more-target-<?php print esc_attr( $count ); ?>"class="d-block mb-0"><strong>Open link in New Tab</strong></label>
-									<input type="checkbox" id="alert-read-more-target-<?php print esc_attr( $count ); ?>" name="alert-read-more-target-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $readmore_target ); ?> data-on="Yes" data-off="No" data-toggle="toggle" data-onstyle="success" class="form-control">
+								<div class="col-sm-4 d-inline-block">
+									<div class="form-check form-switch">
+										<input type="checkbox" class="form-check-input mt-1" id="alert-read-more-target-<?php print esc_attr( $count ); ?>" name="alert-read-more-target-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $readmore_target ); ?>>
+										<label for="alert-read-more-target-<?php print esc_attr( $count ); ?>"class="d-block mb-0 form-check-label"><strong>Open link in New Tab</strong></label>
+									</div>
 								</div>
 							</div>
 
 							<!-- Banner Icon -->
-							<div class="mb-3 col-sm-12 d-inline-block pl-0">
+							<div class="mb-3 col-sm-12 d-inline-block">
 								<?php
 								print wp_kses(
 									caweb_icon_menu(
@@ -931,9 +958,14 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 	$cap                      = is_multisite() ? 'manage_network_options' : 'manage_options';
 	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
+	$caweb_body_classes = get_option( 'caweb_body_classes', '' );
+	$caweb_page_container_classes = get_option( 'caweb_page_container_classes', '' );
+	$caweb_main_content_classes = get_option( 'caweb_main_content_classes', '' );
+	
+	
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
-	<div class="row">
+		<div class="row">
 			<!-- Document Map -->
 			<div class="mb-3 col-sm-12">
 				<strong>Document Map</strong>
@@ -945,21 +977,48 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 		<div class="row">
 			<!-- Live Drafts Option -->
 			<div class="mb-3 col-sm-12">
-				<label for="caweb_live_drafts"><strong>Enable Live Drafts</strong></label>
-				<input type="checkbox" name="caweb_live_drafts" id="caweb_live_drafts" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $live_drafts_enabled ); ?>>
-				<small class="text-muted d-block">This will enable the live drafts functionality.</small>
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="caweb_live_drafts" id="caweb_live_drafts" <?php print esc_attr( $live_drafts_enabled ); ?>>
+					<label for="caweb_live_drafts" class="d-block mb-0 form-check-label"><strong>Enable Live Drafts</strong></label>
+					<small class="text-muted d-block">This will enable the live drafts functionality.</small>
+				</div>
 			</div>
 		</div>
 		<div class="row">
 			<!-- Enable Debug -->
 			<div class="mb-3 col-sm-12">
-				<label for="caweb_debug_mode"><strong>Enable Debug Mode</strong></label>
-				<input type="checkbox" name="caweb_debug_mode" id="caweb_debug_mode" data-toggle="toggle" data-onstyle="success" <?php print esc_attr( $caweb_debug_mode_enabled ); ?>>
-				<small class="text-muted d-block">This will enable debug mode.</small>
+				<div class="form-check form-switch">
+				<input type="checkbox" class="form-check-input mt-1" name="caweb_debug_mode" id="caweb_debug_mode" <?php print esc_attr( $caweb_debug_mode_enabled ); ?>>
+					<label for="caweb_debug_mode" class="d-block mb-0 form-check-label"><strong>Enable Debug Mode</strong></label>
+					<small class="text-muted d-block">This will enable debug mode.</small>
+				</div>
 			</div>
 		</div>
-
 		<?php endif; ?>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- body classes -->
+				<label for="caweb_body_classes" class="d-block mb-0"><strong>Body Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_body_classes" id="caweb_body_classes" value="<?php print esc_attr( $caweb_body_classes ); ?>" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- page container classes -->
+				<label for="caweb_page_container_classes" class="d-block mb-0"><strong>Page Container Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_page_container_classes" id="caweb_page_container_classes" value="<?php print esc_attr( $caweb_page_container_classes ); ?>" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-3 col-sm-12 col-md-6">
+				<!-- main content classes -->
+				<label for="caweb_main_content_classes" class="d-block mb-0"><strong>Main Content Classes</strong></label>
+				<small class="mb-2 text-muted d-block">Additional class names for the body tag. Separate class names by spaces.</small>
+				<input type="text" name="caweb_main_content_classes" id="caweb_main_content_classes" value="<?php print esc_attr( $caweb_main_content_classes ); ?>" class="form-control">
+			</div>
+		</div>
 	</div>
 	<?php
 }
