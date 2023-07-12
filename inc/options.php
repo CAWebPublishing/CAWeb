@@ -436,10 +436,13 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Alert Banners */
 	$alerts = array();
 
+	// Alert Status uses bootstrap input toggle checkboxes.
+	// For some reason, when checked it visually looks off.
+	// So we save the opposite, so that it displays correctly.
 	foreach ( preg_grep( '/alert-header-/', array_keys( $values ) ) as $k ) {
 		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
 		$data = array(
-			'status'       => isset( $values[ "alert-status-$i" ] ) ? $values[ "alert-status-$i" ] : '',
+			'status'       => isset( $values[ "alert-status-$i" ] ) ? '' : 'on',
 			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
 			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
 			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
