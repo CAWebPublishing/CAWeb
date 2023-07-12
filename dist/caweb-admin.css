@@ -12057,7 +12057,7 @@ a[data-bs-toggle=collapse].collapsed label > span:after {
 
 /* Fav Icon Preview Height */
 .ca_fav_ico_option {
-  max-height: 30px;
+  max-height: 20px;
 }
 
 /* Image Preview Min/Max Height */

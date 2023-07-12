@@ -264,7 +264,7 @@ function caweb_display_general_options() {
 				</div>
 			</div>
 			<!-- Sticky Navigation -->
-			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
+			<div class="mb-3 col">
 				<div class="form-check form-switch">
 					<input type="checkbox" class="form-check-input mt-1" name="ca_sticky_navigation" id="ca_sticky_navigation" <?php print esc_attr( $sticky_nav_enabled ); ?>>
 					<label for="ca_sticky_navigation" class="d-block mb-0 form-check-label"><strong>Sticky Navigation</strong></label>
@@ -805,7 +805,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					$header         = $data['header'];
 					$default_header = ! empty( $header ) ? $header : 'Label';
 					$count          = $a + 1;
-					$status         = ! empty( $data['status'] ) ? ' checked' : '';
+					$status         = empty( $data['status'] ) ? ' checked' : '';
 					$alert_home     = 'home' === $data['page_display'] ? ' checked' : '';
 					$alert_all      = 'all' === $data['page_display'] ? ' checked' : '';
 
@@ -826,7 +826,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					</a>
 					<!-- Alert Options -->
 					<div>
-						<input type="checkbox" class="btn-check" name="alert-status-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $status ); ?>>
+						<input type="checkbox" class="btn-check" id="alert-status-<?php print esc_attr( $count ); ?>" name="alert-status-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $status ); ?>>
 						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>">Display</label>
 						<button class="btn btn-danger remove-alert">Remove</button>
 					</div>

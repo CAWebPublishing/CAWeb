@@ -71,7 +71,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 		);
 	}
 	$whitelist[] = sprintf( '%1$s', $template_version );
-	$whitelist[] = '5.5' === $template_version && get_option( 'ca_sticky_navigation' ) ? 'sticky_nav' : '';
+	$whitelist[] = get_option( 'ca_sticky_navigation', false ) ? 'sticky_nav' : '';
 
 	// Merge any extra classes to the wp classes.
 	$wp_classes = array_merge($wp_classes, $extra_classes);

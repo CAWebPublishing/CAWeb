@@ -58,15 +58,6 @@ function correct_utility_header_options(version){
 	}
 }
 
-// Toggle Sticky Nav
-function correct_sticky_nav_option(version){
-	if( '5.5' === version ){
-		jQuery('#ca_sticky_navigation').parent().parent().removeClass('d-none');
-	}else{
-		jQuery('#ca_sticky_navigation').parent().parent().addClass('d-none');
-	}
-}
-
 // Toggle Search on Frontpage
 function correct_frontpage_search_option(version){
 	if( '5.5' === version ){
