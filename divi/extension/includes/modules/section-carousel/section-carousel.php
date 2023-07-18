@@ -57,8 +57,6 @@ class CAWeb_Module_Section_Carousel extends ET_Builder_CAWeb_Module {
 			),
 		);
 
-		// Custom handler: Output JS for editor preview in page footer.
-		add_action( 'wp_footer', array( $this, 'carousel_fix' ), 20 );
 	}
 
 	/**
@@ -240,20 +238,36 @@ class CAWeb_Module_Section_Carousel extends ET_Builder_CAWeb_Module {
 		$content = $this->content;
 
 		$section_bg_color = ! empty( $section_bg_color ) ? sprintf( ' style="background: %1$s;" ', $section_bg_color ) : '';
+		global $et_pb_slider_item_num;
 
-		if ( 'media' === $carousel_style && 'on' === $in_panel ) {
-			$this->add_classname( 'panel' );
-			$this->add_classname( sprintf( 'panel-%1$s', $panel_layout ) );
-			$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
+		$module_id = ! empty( $this->module_id(false) ) ? $this->module_id(false) : $this->slug . '-0';
 
-			$output = sprintf( '<div%1$s%2$s>%3$s</div></div>', $this->module_id(), $class, $this->renderPanelCarousel( $section_bg_color ) );
-		} else {
-			$this->add_classname( $carousel_style );
-			$this->add_classname( 'section' );
-			$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
+		$controls = sprintf('<button class="carousel-control-prev" type="button" data-bs-target="#%1$s" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#%1$s" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>', $module_id);
 
-			$output = sprintf( '<div%1$s%2$s%3$s>%4$s</div>', $this->module_id(), $class, $section_bg_color, $this->renderCarousel( $carousel_style ) );
+		$indicators = '';
+		
+		for($i = 0; $i < $et_pb_slider_item_num; $i++ ){
+			$indicators .= sprintf('<button type="button" data-bs-target="#%1$s" data-bs-slide-to="%2$s" aria-label="Slide %2$s"%3$s></button>', 
+				$module_id, $i, ! $i ? 'class="active" aria-current="true"' : '' );
+
 		}
+
+		if( ! empty( $indicators ) ){
+			$indicators = sprintf('<div class="carousel-indicators">%1$s</div>', $indicators);
+		}
+
+		$this->add_classname( $carousel_style );
+		$this->add_classname( 'carousel slide' );
+		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
+
+		$output = sprintf( '<div id="%1$s"%2$s%3$s>%4$s%5$s%6$s</div>', $module_id, $class, $section_bg_color, $indicators, $this->renderCarousel( $carousel_style ), $controls  );
 
 		return $output;
 	}
@@ -265,84 +279,8 @@ class CAWeb_Module_Section_Carousel extends ET_Builder_CAWeb_Module {
 	 * @return string
 	 */
 	public function renderCarousel( $style ) {
-		$style = in_array( $style, array( 'media', 'content' ), true ) ? $style : 'content';
-
-		return sprintf( '<div class="carousel carousel-%1$s owl-carousel">%2$s</div>', $style, $this->content );
+		return sprintf( '<div class="carousel-inner">%1$s</div>', $this->content );
 	}
 
-	/**
-	 * Renders the carousel inside a Panel Module with the appropriate bg color.
-	 *
-	 * @param  mixed $section_bg_color Panel background color.
-	 * @return string
-	 */
-	public function renderPanelCarousel( $section_bg_color ) {
-		$panel_title        = $this->props['panel_title'];
-		$panel_heading_size = $this->props['panel_heading_size'];
-		$panel_show_button  = $this->props['panel_show_button'];
-		$panel_button_text  = $this->props['panel_button_text'];
-		$panel_button_link  = $this->props['panel_button_link'];
-
-		$display_title  = '';
-		$display_button = '';
-
-		if ( 'on' === $panel_show_button && ! empty( $panel_button_link ) ) {
-			$display_button = sprintf(
-				'<div class="options"><a href="%1$s" class="btn btn-default" target="_blank">%2$s</a></div>',
-				esc_url( $panel_button_link ),
-				! empty( $panel_button_text ) ? $panel_button_text : 'Read More'
-			);
-		}
-
-		if ( ! empty( $panel_title ) ) {
-			$display_title = sprintf( '<div class="panel-heading"><%1$s>%2$s</%1$s>%3$s</div>', $panel_heading_size, $panel_title, $display_button );
-		}
-
-		return sprintf( '%1$s<div class="panel-body"%2$s>%3$s</div>', $display_title, $section_bg_color, $this->renderCarousel( 'media' ) );
-	}
-
-	/**
-	 * This is a non-standard function, it outputs JS code to change items amount for carousel-media.
-	 *
-	 * @return void
-	 */
-	public function carousel_fix() {
-		?>
-		<script>
-		$ = jQuery.noConflict();
-
-		var media_carousels = $('div[class*="<?php print esc_attr( $this->slug ); ?>_"]:not(".item")');
-
-		media_carousels.each(function(index, carousel) {
-			if( $(carousel).hasClass('media') || $(carousel).hasClass('panel') ){
-				$(carousel).find('.carousel-media').owlCarousel({
-					responsive : true,
-					responsive: {
-						0: {
-							items: 1,
-							nav: true
-						},
-						400: {
-							items: 1,
-							nav: true
-						},
-						768: {
-							items: undefined === carousel.slide_amount ? 4 : carousel.slide_amount,
-							nav: true
-						},
-					},
-					margin : 10,
-					nav : true,
-					dots : false,
-					navText: [
-						'<span class="ca-gov-icon-arrow-prev" aria-hidden="true"></span>',
-						'<span class="ca-gov-icon-arrow-next" aria-hidden="true"></span>'
-					],
-				});
-			}
-		})
-		</script>
-		<?php
-	}
 }
 new CAWeb_Module_Section_Carousel();
