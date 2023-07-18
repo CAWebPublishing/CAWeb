@@ -229,7 +229,7 @@ foreach ( $args as $var => $val ) {
 			<?php
 		}
 		?>
-		<div id="head-search" class="search-container hidden-print<?php print esc_attr( $caweb_search_class ); ?>" role="region" aria-label="Search Expanded">
+		<div id="head-search" class="search-container hidden-print in<?php print esc_attr( $caweb_search_class ); ?>" role="region" aria-label="Search Expanded">
 			<?php
 			if ( 'page-templates/searchpage.php' !== get_page_template_slug( get_the_ID() ) ) {
 				get_template_part( "parts/$caweb_template_version/search" );

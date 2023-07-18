@@ -181,7 +181,7 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_slider_item_num++;
-
+		
 		$this->add_classname( 'item' );
 
 		$slide_image_alt = sprintf( ' alt="%1$s" ', empty( $slide_alt_text ) ? caweb_get_attachment_post_meta( $slide_image, '_wp_attachment_image_alt' ) : $slide_alt_text );
@@ -207,17 +207,11 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 
 			$slide_title = ! empty( $slide_title ) ? "<$slide_title_size>$slide_title</$slide_title_size>" : '';
 
-			$hide = empty( $slide_title ) && empty( $slide_desc ) && empty( $display_button ) ? ' hidden' : '';
+			$caption = sprintf( '<div class="carousel-caption d-block">%1$s%2$s%3$s</div>', $slide_title, $slide_desc, $display_button );
 
-			$content = sprintf( '<div class="content%1$s">%2$s%3$s%4$s</div>', 'content_fit' === $et_pb_ca_section_carousel_style ? $hide : '', $slide_title, $slide_desc, $display_button );
+			$img = sprintf( '<img src="%1$s"%2$s class="d-block w-100"/>', $slide_image, $slide_image_alt );
 
-			$content_container = sprintf( '<div class="content-container%1$s">%2$s</div>', 'image_fit' === $et_pb_ca_section_carousel_style ? $hide : '', $content );
-
-			$content_fit = 'content_fit' === $et_pb_ca_section_carousel_style ? sprintf( ' style="background-image: url(%1$s);"', $slide_image ) : '';
-
-			$image_fit = 'image_fit' === $et_pb_ca_section_carousel_style ? sprintf( '<img src="%1$s"%2$s/>', $slide_image, $slide_image_alt ) : '';
-
-			$output = sprintf( '<div%1$s%2$s>%3$s%4$s</div>', $class, $content_fit, $image_fit, $content_container );
+			$output = sprintf( '<div class="carousel-item %1$s">%2$s%3$s</div>', 1 === $et_pb_slider_item_num ? ' active' : '', $img, $caption );
 		}
 
 		return $output;
