@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	TablePress Accessibility 
 	Add aria labels to datatables search field 

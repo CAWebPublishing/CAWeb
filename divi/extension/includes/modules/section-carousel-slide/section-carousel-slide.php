@@ -178,41 +178,26 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 		$slide_show_more_button = $this->props['slide_show_more_button'];
 
 		global $et_pb_slider_item_num;
-		global $et_pb_ca_section_carousel_style;
 
 		$et_pb_slider_item_num++;
 		
-		$this->add_classname( 'item' );
+		$this->add_classname( 'carousel-item' );
+
+		if( 1 === $et_pb_slider_item_num ){
+			$this->add_classname( 'active' );
+		}
 
 		$slide_image_alt = sprintf( ' alt="%1$s" ', empty( $slide_alt_text ) ? caweb_get_attachment_post_meta( $slide_image, '_wp_attachment_image_alt' ) : $slide_alt_text );
 
-		if ( 'media' === $et_pb_ca_section_carousel_style ) {
-			$class       = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
-			$slide_title = ! empty( $slide_title ) ? $slide_title : $this->name;
+		$display_button = 'on' === $slide_show_more_button && ! empty( $slide_url ) && ! empty( $slide_title ) ? sprintf( '<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information<span class="sr-only">More information about %2$s</span></strong></a>', esc_url( $slide_url ), $slide_title ) : '';
 
-			$button = 'on' === $slide_show_more_button && ! empty( $slide_url ) ? sprintf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( $slide_url ), $slide_title ) : '';
-			$button = ! empty( $button ) ? sprintf( '<div class="details text-center%1$s">%2$s</div>', empty( $slide_desc ) ? ' mt-3' : '', $button ) : '';
+		$slide_title = ! empty( $slide_title ) ? "<$slide_title_size>$slide_title</$slide_title_size>" : '';
 
-			$desc = ! empty( $slide_desc ) ? sprintf( '<div class="details mt-3">%1$s</div>', $slide_desc ) : '';
+		$caption = sprintf( '<div class="carousel-caption d-block">%1$s%2$s%3$s</div>', $slide_title, $slide_desc, $display_button );
 
-			$slide = ! empty( $slide_image ) ? sprintf( '<div class="preview-image"><img class="h-100" src="%1$s"%2$s/></div>%3$s', $slide_image, $slide_image_alt, $desc ) : '';
+		$img = sprintf( '<img src="%1$s"%2$s class="d-block w-100"/>', $slide_image, $slide_image_alt );
 
-			$output = sprintf( '<div%1$s>%2$s%3$s</div>', $class, $slide, $button );
-		} else {
-			$this->add_classname( $et_pb_ca_section_carousel_style );
-			$this->add_classname( 'backdrop' );
-			$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
-
-			$display_button = 'on' === $slide_show_more_button && ! empty( $slide_url ) && ! empty( $slide_title ) ? sprintf( '<br><a class="btn btn-primary" href="%1$s" target="_blank"><strong>More Information<span class="sr-only">More information about %2$s</span></strong></a>', esc_url( $slide_url ), $slide_title ) : '';
-
-			$slide_title = ! empty( $slide_title ) ? "<$slide_title_size>$slide_title</$slide_title_size>" : '';
-
-			$caption = sprintf( '<div class="carousel-caption d-block">%1$s%2$s%3$s</div>', $slide_title, $slide_desc, $display_button );
-
-			$img = sprintf( '<img src="%1$s"%2$s class="d-block w-100"/>', $slide_image, $slide_image_alt );
-
-			$output = sprintf( '<div class="carousel-item %1$s">%2$s%3$s</div>', 1 === $et_pb_slider_item_num ? ' active' : '', $img, $caption );
-		}
+		$output = sprintf( '<div class="%1$s">%2$s%3$s</div>', $this->module_classname( $render_slug ), $img, $caption );
 
 		return $output;
 	}

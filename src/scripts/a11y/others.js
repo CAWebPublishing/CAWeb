@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
     Retrieve all a[href="#main-content"]

@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
    MailChimp Accessibility 
    Retrieve radio field containers

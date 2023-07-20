@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	require('./AutoTracker');
 	require('./google');
 	

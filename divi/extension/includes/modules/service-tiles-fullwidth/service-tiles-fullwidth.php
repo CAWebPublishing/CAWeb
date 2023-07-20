@@ -319,8 +319,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 
 			}).call(this);
 
-			$(document).ready(function () {
-				$ = jQuery.noConflict();
+			jQuery(document).ready(function ($) {
 				// Create the needed js event listeners, set up classes, etc
 				$('.service-group').each(initServiceGroup);
 			});

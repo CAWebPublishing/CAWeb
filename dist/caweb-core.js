@@ -492,7 +492,7 @@ __webpack_require__(17);
 /* 6 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Blog Module Accessibility 
 	Retrieve all Divi Blog Modules
@@ -530,7 +530,7 @@ jQuery(document).ready(function() {
 /* 7 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
     Divi Blurb Module Accessibility 
     Retrieve all Divi Blurb Modules
@@ -567,7 +567,7 @@ jQuery(document).ready(function() {
 /* 8 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
     Divi Button Module Accessibility 
     Retrieve all Divi Button Modules
@@ -593,7 +593,7 @@ jQuery(document).ready(function() {
 /* 9 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	Fixes Deep Links issue created by Divi
     */
@@ -613,7 +613,7 @@ jQuery(document).ready(function() {
 /* 10 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Fullwidth Header Module Accessibility 
     Retrieve all Divi Fullwidth Header Modules
@@ -638,7 +638,7 @@ jQuery(document).ready(function() {
 /* 11 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
    /* 
    Retrieve all Divi Gallery Modules
    */
@@ -664,7 +664,7 @@ jQuery(document).ready(function() {
 /* 12 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Person Module Accessibility 
 	Retrieve all Divi Person Modules
@@ -692,7 +692,7 @@ jQuery(document).ready(function() {
 /* 13 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     /*
     Divi Search Module Form Accessibility
     Retrieve all Divi Search Module Forms
@@ -731,7 +731,7 @@ jQuery(document).ready(function() {
 /* 14 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
    /* 
    Retrieve all Divi Post Slider Modules
    */
@@ -782,7 +782,7 @@ jQuery(document).ready(function() {
 /* 15 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     /* 
     Divi Tab Module Accessibility 
     Retrieve all Divi Tab Modules
@@ -810,7 +810,7 @@ jQuery(document).ready(function() {
 /* 16 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Toggle Module Accessibility
 	Retrieve all Divi Toggle Modules
@@ -905,7 +905,7 @@ jQuery(document).ready(function() {
 /* 17 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Video Module Accessibility
     Retrieve all Divi Video Modules
@@ -974,7 +974,7 @@ __webpack_require__(28);
 /* 19 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
 		/*
@@ -1002,7 +1002,7 @@ jQuery(document).ready(function() {
 /* 20 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
 		/*
@@ -1036,7 +1036,7 @@ jQuery(document).ready(function() {
 /* 21 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	The Events Calendar Accessibility 
 	*/
@@ -1124,7 +1124,7 @@ jQuery(document).ready(function() {
 /* 22 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	Google Calendar Accessibility 
 	*/
@@ -1150,7 +1150,7 @@ jQuery(document).ready(function() {
 /* 23 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
 
 	// Do this after the page has loaded
@@ -1220,7 +1220,7 @@ jQuery(document).ready(function() {
 /* 24 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
    MailChimp Accessibility 
    Retrieve radio field containers
@@ -1260,7 +1260,7 @@ jQuery(document).ready(function() {
 /* 25 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	MailPoet Accessibility 
 	Retrieve recaptcha iFrame
@@ -1288,7 +1288,7 @@ jQuery(document).ready(function() {
 /* 26 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
         Tabby Response Accessibility 
         Retrieve tablist 
@@ -1334,7 +1334,7 @@ jQuery(document).ready(function() {
 /* 27 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	TablePress Accessibility 
 	Add aria labels to datatables search field 
@@ -1393,7 +1393,7 @@ jQuery(document).ready(function() {
 /* 28 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	
 	
 	/*
@@ -1498,7 +1498,7 @@ jQuery(document).ready(function() {
 /* 29 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	Button Element Accessibility 
 	*/
@@ -1516,7 +1516,7 @@ jQuery(document).ready(function() {
 /* 30 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Accessibility Plugin Adds a "Skip to Main Content" anchor tag
     Retrieve all a[href="#main-content"]
@@ -1541,7 +1541,7 @@ jQuery(document).ready(function() {
 
 __webpack_require__(32);
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
 		/*
@@ -1580,7 +1580,7 @@ jQuery(document).ready(function() {
 /* 33 */
 /***/ (() => {
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* -----------------------------------------
 	Utility Header
 	----------------------------------------- */
@@ -1640,7 +1640,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	__webpack_require__(2);
 	__webpack_require__(3);
 	
