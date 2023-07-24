@@ -559,12 +559,7 @@ function caweb_admin_enqueue_scripts( $hook ) {
 			'caweb_icons'        => array_values( caweb_symbols( -1, '', '', false ) ),
 			'caweb_colors'       => caweb_template_colors(),
 			'tinymce_settings'   => caweb_tiny_mce_settings(),
-			'caweb_menus'        => array(
-				'dropdown'     => 'Drop Down',
-				'flexmega'     => 'Flex Mega Menu',
-				'megadropdown' => 'Mega Drop',
-				'singlelevel'  => 'Single Level',
-			),
+			'caweb_menus'        => caweb_nav_menu_types(),
 		);
 
 		wp_localize_script( 'caweb-admin-scripts', 'caweb_admin_args', $caweb_localize_args );

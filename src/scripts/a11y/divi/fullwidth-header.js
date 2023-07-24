@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Fullwidth Header Module Accessibility 
     Retrieve all Divi Fullwidth Header Modules

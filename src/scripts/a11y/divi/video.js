@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
     Divi Video Module Accessibility
     Retrieve all Divi Video Modules

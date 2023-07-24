@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Toggle Module Accessibility
 	Retrieve all Divi Toggle Modules
