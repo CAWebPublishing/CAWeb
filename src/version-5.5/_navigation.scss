@@ -1,3 +1,7 @@
+#navigation .top-level.nav {
+    width: 100%;
+}
+
 /* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
     display: block;
