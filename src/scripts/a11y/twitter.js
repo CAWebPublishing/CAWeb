@@ -1,5 +1,3 @@
-require('../custom/functions');
-
 jQuery(document).ready(function($) {
 	// Do this after the page has loaded
 	$(window).on('load', function(){
