@@ -255,7 +255,7 @@ body[class*="5.5"].divi-built .et_pb_text ol, body[class*="5.5"].divi-built .et_
 body[class*="5.5"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
-body[class*="5.5"] #navigation .top-level.nav {
+body[class*="5.5"] #navigation .top-level-nav {
   width: 100%;
 }
 body[class*="5.5"] .second-level-nav:not(.flex) {
