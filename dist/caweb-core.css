@@ -276,6 +276,9 @@ body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
   opacity: 1;
   transition: all 0.3s;
 }
+body[class*="5.5"] .second-level-nav:not(.flex) li.w-25 {
+  width: 24.7% !important;
+}
 body[class*="5.5"] nav.megadropdown .media-left .media-object {
   max-width: inherit;
 }

@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 let entries = {
   'caweb-core':[
     './src/styles/frontend.scss',
+    './src/scripts/google/',
     './src/scripts/custom/',
     './src/scripts/a11y/'
   ],
