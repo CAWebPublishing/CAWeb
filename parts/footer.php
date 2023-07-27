@@ -40,8 +40,6 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 
 	<?php
 	
-	get_template_part( "parts/$caweb_template_version/back-to-top" );
-
 	if ( has_nav_menu( 'footer-menu' ) ) {
 		wp_nav_menu(
 			array(
@@ -79,4 +77,6 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 				</div>
 		</div>
 	</div>
+
+	<?php get_template_part( "parts/$caweb_template_version/back-to-top" ); ?>
 </footer>
