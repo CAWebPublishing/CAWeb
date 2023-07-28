@@ -126,7 +126,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 														<?php endif; ?>
 													>
 														<a 
-															class="second-level-link"
+															class="second-level-link d-block"
 															tabindex="-1"
 															href="<?php print esc_url( $caweb_child_item->url ); ?>" 
 															<?php if ( ! empty( $caweb_child_item->target ) ) : ?>
