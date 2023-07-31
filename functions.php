@@ -494,7 +494,7 @@ function caweb_enqueue_google_scripts( $localized ){
 		$localized['caweb_multi_ga4'] = $multi_ga4;
 			
 		// Enqueue script.
-		wp_enqueue_script( 'google-analytics4-caweb', "https://www.googletagmanager.com/gtag/js?id=$multi_ga", array(), null, true );
+		wp_enqueue_script( 'google-analytics4-caweb', "https://www.googletagmanager.com/gtag/js?id=$multi_ga4", array(), null, true );
 	}
 
 	// Google Analytic ID.
