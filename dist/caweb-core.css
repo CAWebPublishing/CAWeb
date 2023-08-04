@@ -550,6 +550,16 @@ body[class*="6.0"].divi-built .et_pb_text ol, body[class*="6.0"].divi-built .et_
 body[class*="6.0"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
+@media (max-width: 768px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 46px;
+  }
+}
+@media (max-width: 991px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 32px;
+  }
+}
 body.page-template-searchpage #main-content .container:before {
   background: transparent;
 }
