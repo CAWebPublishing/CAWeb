@@ -415,7 +415,7 @@ function caweb_display_page_header_options() {
 	// Organization Logo Alt Text.
 	$org_logo_alt_text = '';
 	if ( ! empty( $org_logo ) ) {
-		$org_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text' ) : caweb_get_attachment_post_meta( $org_logo, '_wp_attachment_image_alt' );
+		$org_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text', '' ) : caweb_get_attachment_post_meta( $org_logo, '_wp_attachment_image_alt' );
 	}
 	?>
 	<!-- Page Header Section -->
@@ -644,7 +644,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 			</div>
 		</div>
 		<?php
-			$social_options = caweb_get_social_media_links();
+		$social_options = caweb_get_social_media_links();
 
 		foreach ( $social_options as $social => $option ) {
 			$share_email        = 'ca_social_email' === $option ? true : false;
@@ -949,8 +949,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				<small class="doc-sitemap-update text-muted"><?php print esc_url( $file_url ); ?></small>
 			</div>
 		</div>
-		<?php if ( current_user_can( $cap ) ) : ?>
-		<div class="row">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
 			<!-- Live Drafts Option -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">
@@ -960,7 +959,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
 			<!-- Enable Debug -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">
@@ -970,7 +969,6 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-		<?php endif; ?>
 		<div class="row">
 			<div class="mb-3 col-sm-12 col-md-6">
 				<!-- body classes -->
