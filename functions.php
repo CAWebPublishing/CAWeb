@@ -148,7 +148,7 @@ function caweb_setup_theme() {
 
 		/* Rename Default Category to All */
 		wp_update_term(
-			get_option( 'default_category' ),
+			get_option( 'default_category', 'all' ),
 			'category',
 			array(
 				'name' => 'All',
@@ -326,7 +326,7 @@ function caweb_late_wp_footer() {
 	wp_deregister_style( 'et-builder-googlefonts' );
 
 	/* Google Translate */
-	if ( 'none' !== get_option( 'ca_google_trans_enabled' ) ){
+	if ( 'none' !== get_option( 'ca_google_trans_enabled', 'none' ) ){
 		?>
 		<script>
 			function googleTranslateElementInit() {
@@ -399,7 +399,7 @@ function caweb_wp_enqueue_scripts() {
 
 	$localize_args = array(
 		'ca_site_version'             => $version,
-		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled' ) && is_front_page(),
+		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled', false ) && is_front_page(),
 		'caweb_alerts'                => get_option( 'caweb_alerts', array() ),
 		'is_front'                    => is_front_page(),
 		'ajaxurl'                     => admin_url( 'admin-post.php' ),
@@ -422,7 +422,7 @@ function caweb_wp_enqueue_scripts() {
 	$caweb_js_file     = caweb_get_min_file( "/dist/caweb-core.js", 'js' );
 
 	/* Geo Locator */
-	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled' ) || get_option( 'ca_geo_locator_enabled' );
+	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled', false ) || get_option( 'ca_geo_locator_enabled', false );
 
 	if ( $ca_geo_locator_enabled ) {
 		$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
