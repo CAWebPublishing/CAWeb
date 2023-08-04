@@ -116,7 +116,7 @@ function caweb_admin_menu() {
 function caweb_uploads_use_yearmonth_folders() {
 	?>
 <label for="caweb_uploads_use_yearmonth_folders">
-<input name="caweb_uploads_use_yearmonth_folders" type="checkbox" id="caweb_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'caweb_uploads_use_yearmonth_folders' ) ); ?> />
+<input name="caweb_uploads_use_yearmonth_folders" type="checkbox" id="caweb_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'caweb_uploads_use_yearmonth_folders', true ) ); ?> />
 	Organize my uploads into YYYY/MM based folders
 </label>
 	<?php
@@ -315,17 +315,16 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
 
-	/* if site option isn't set, set it to default value */
+	// iterate over site options. * if site option isn't set, set it to default value */
 	foreach ( $site_options as $option_name => $default_value ) {
+		// if site option isn't set, set it to default value.
 		if ( ! array_key_exists( $option_name, $values ) ) {
-			$values[ $option_name ] = $default_value;
-		}
-
-		if ( empty( $values[ $option_name ] ) &&
-					( 'caweb_external_css' === $option_name || 'caweb_external_js' === $option_name ) ) {
-			$values[ $option_name ] = array();
+			// we don't set options with boolean defaults, otherwise there's no way to turn those options off.
+			// if the option was turned off then the option won't appear in the $values array.
+			$values[ $option_name ] = ! is_bool( $default_value ) ? $default_value : false;
 		}
 	}
+
 	/* External CSS */
 	$cssfiles = array();
 	if ( isset( $files['caweb_external_css'] ) ) {
@@ -340,6 +339,8 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 			$cssfiles[ $css['name'][ $c ] ] = $data;
 		}
+
+		caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
 	}
 
 	/* External JS */
@@ -356,11 +357,9 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 			$jsfiles[ $js['name'][ $j ] ] = $data;
 		}
+
+		caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 	}
-
-	caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
-
-	caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 
 	/* Alert Banners */
 	$alerts = array();
