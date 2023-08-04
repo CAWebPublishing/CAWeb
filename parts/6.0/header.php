@@ -123,7 +123,7 @@ foreach ( $args as $var => $val ) {
 			<!-- Add more mobile controls here. These will be on the right side of the mobile page header section -->
 		</span>
 		<div class="mobile-control-group main-nav-icons">
-			<button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation" data-bs-toggle="collapse" data-bs-target="#navigation" data-bs-toggle="collapse" data-bs-target="#navigation">
+			<button id="nav-icon3" class="mobile-control toggle-menu" aria-expanded="false" aria-controls="navigation">
 				<span></span>
 				<span></span>
 				<span></span>
