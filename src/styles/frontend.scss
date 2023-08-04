@@ -41,7 +41,21 @@ body{
             @import 'divi';
         }
 
-		// Add any custom Version styles
+		// mobile mode menu is hidden behind the wordpress admin bar when logged in
+		&.admin-bar{
+			// mobile devices
+			@media (max-width: 768px) {
+				header .navigation-search{
+					top: 46px
+				}
+			}
+			// tablet devices
+			@media (max-width: 991px) {
+				header .navigation-search{
+					top: 32px
+				}
+			}
+		}
 
     }
 	
