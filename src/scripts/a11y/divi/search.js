@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     /*
     Divi Search Module Form Accessibility
     Retrieve all Divi Search Module Forms

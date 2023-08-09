@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
     Divi Button Module Accessibility 
     Retrieve all Divi Button Modules

@@ -32,7 +32,7 @@ while ( have_posts() ) :
 			print esc_html( the_title( '<!-- Page Title--><h1 class="page-title">', '</h1>' ) );
 		}
 
-		if ( get_option( 'ca_default_post_date_display' ) && ! $caweb_is_page_builder_used ) {
+		if ( get_option( 'ca_default_post_date_display', false ) && ! $caweb_is_page_builder_used ) {
 			printf( '<p class="page-date published">Published: <time datetime="%1$s">%1$s</time></p>', get_the_date( 'M d, Y' ) );
 		}
 

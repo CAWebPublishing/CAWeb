@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/* 
 	Fixes Deep Links issue created by Divi
     */

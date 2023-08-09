@@ -255,6 +255,9 @@ body[class*="5.5"].divi-built .et_pb_text ol, body[class*="5.5"].divi-built .et_
 body[class*="5.5"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
+body[class*="5.5"] #navigation .top-level-nav {
+  width: 100%;
+}
 body[class*="5.5"] .second-level-nav:not(.flex) {
   display: block;
   position: relative !important;
@@ -264,9 +267,6 @@ body[class*="5.5"] .second-level-nav:not(.flex) {
   padding: 0 !important;
   background: inherit;
 }
-body[class*="5.5"] .second-level-nav:not(.flex) li {
-  display: inline-block;
-}
 body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
   font-size: 17.6px;
   font-size: 1.1rem;
@@ -275,6 +275,12 @@ body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
   background-color: inherit;
   opacity: 1;
   transition: all 0.3s;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li {
+  display: inline-block;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li.w-25 {
+  width: 24.6% !important;
 }
 body[class*="5.5"] nav.megadropdown .media-left .media-object {
   max-width: inherit;
@@ -543,6 +549,16 @@ body[class*="6.0"].divi-built .et_pb_text ol, body[class*="6.0"].divi-built .et_
 }
 body[class*="6.0"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
+}
+@media (max-width: 768px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 46px;
+  }
+}
+@media (max-width: 991px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 32px;
+  }
 }
 body.page-template-searchpage #main-content .container:before {
   background: transparent;

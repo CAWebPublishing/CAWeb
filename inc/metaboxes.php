@@ -53,7 +53,7 @@ function caweb_admin_head_nav_menus() {
 function caweb_page_identifier_metabox_callback( $post ) {
 	if ( '' === get_post_meta( $post->ID, 'ca_custom_initial_state', true ) ) {
 		update_post_meta( $post->ID, 'ca_custom_initial_state', true );
-		update_post_meta( $post->ID, 'ca_default_navigation_menu', get_option( 'ca_default_navigation_menu' ) );
+		update_post_meta( $post->ID, 'ca_default_navigation_menu', get_option( 'ca_default_navigation_menu', 'singlelevel' ) );
 	}
 
 	/*

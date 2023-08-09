@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Blog Module Accessibility 
 	Retrieve all Divi Blog Modules

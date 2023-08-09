@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	/*
 	Divi Person Module Accessibility 
 	Retrieve all Divi Person Modules

@@ -1,6 +1,4 @@
-jQuery(document).ready(function() {
-	require('./AutoTracker');
-	require('./google');
+jQuery(document).ready(function($) {
 	
 	// from https://www.w3schools.com/js/js_cookies.asp
 	function getCookie(cname) {

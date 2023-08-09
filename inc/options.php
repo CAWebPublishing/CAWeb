@@ -21,19 +21,6 @@ add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme', 10, 2 );
 add_filter( 'option_ca_fav_ico', 'caweb_pre_option_ca_fav_ico', 10, 2 );
 
-$caweb_social    = caweb_get_site_options( 'social' );
-$caweb_sanitized = caweb_get_site_options( 'sanitized' );
-
-$caweb_options = array_merge( $caweb_social, $caweb_sanitized );
-
-foreach ( $caweb_options as $caweb_name ) {
-	add_action( 'pre_update_option_' . $caweb_name, 'caweb_sanitize_various_options', 10, 3 );
-
-	if ( in_array( $caweb_name, $caweb_sanitized, true ) ) {
-		add_action( 'option_' . $caweb_name, 'caweb_retrieve_various_sanitized_options', 10, 3 );
-	}
-}
-
 /**
  * This filter is used to switch menu order.
  *
@@ -129,7 +116,7 @@ function caweb_admin_menu() {
 function caweb_uploads_use_yearmonth_folders() {
 	?>
 <label for="caweb_uploads_use_yearmonth_folders">
-<input name="caweb_uploads_use_yearmonth_folders" type="checkbox" id="caweb_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'caweb_uploads_use_yearmonth_folders' ) ); ?> />
+<input name="caweb_uploads_use_yearmonth_folders" type="checkbox" id="caweb_uploads_use_yearmonth_folders" value="1"<?php checked( '1', get_option( 'caweb_uploads_use_yearmonth_folders', true ) ); ?> />
 	Organize my uploads into YYYY/MM based folders
 </label>
 	<?php
@@ -214,64 +201,6 @@ function caweb_pre_update_site_option_caweb_password( $value, $old_value, $optio
 	}
 
 	return $pwd;
-}
-
-/**
- * Sanitize certain CAWeb Options that need to be uniquely sanitized
- *
- * @param  mixed  $value New value of the network option.
- * @param  mixed  $old_value Old value of the network option.
- * @param  string $option Option name.
- * @return string
- */
-function caweb_sanitize_various_options( $value, $old_value, $option ) {
-	$caweb_social    = caweb_get_site_options( 'social' );
-	$caweb_sanitized = caweb_get_site_options( 'sanitized' );
-
-	$caweb_options = array_merge( $caweb_social, $caweb_sanitized );
-
-	/* if fields contain a script or style remove it */
-	if ( in_array( $option, $caweb_options, true ) ) {
-		$value = wp_strip_all_tags( $value );
-	}
-
-	/*
-	If field is a url escape the url
-	$pattern = regex of fields to exclude
-	*/
-	$pattern = '/ca_utility_link_\d_name/';
-	if ( in_array( $option, $caweb_options, true ) &&
-		empty( preg_match( $pattern, $option ) ) ) {
-		$value = esc_url( $value );
-	}
-
-	/*
-		If field is a label replace all escape characters with something else to prevent WordPress escaping
-		single quote = caweb_apostrophe
-		backslash = caweb_backslash
-	 */
-	if ( in_array( $option, $caweb_sanitized, true ) ) {
-		$value = preg_replace( '/\\\\\'/', 'caweb_apostrophe', $value );
-		$value = preg_replace( '/\\"/', 'caweb_double_quote', $value );
-		$value = preg_replace( '/\\\/', 'caweb_backslash', $value );
-	}
-
-	return $value;
-}
-
-/**
- * Retrieves certain CAWeb Options that have been uniquely sanitized
- *
- * @param  string $value Option Value.
- *
- * @return string
- */
-function caweb_retrieve_various_sanitized_options( $value ) {
-	$value = preg_replace( '/caweb_apostrophe/', '&#39;', $value );
-	$value = preg_replace( '/caweb_backslashcaweb_double_quote/', '&#34;', $value );
-	$value = preg_replace( '/caweb_backslashcaweb_backslash/', '&#92;', $value );
-
-	return $value;
 }
 
 /**
@@ -386,17 +315,16 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
 
-	/* if site option isn't set, set it to empty string */
-	foreach ( $site_options as $opt ) {
-		if ( ! array_key_exists( $opt, $values ) ) {
-			$values[ $opt ] = '';
-		}
-
-		if ( empty( $values[ $opt ] ) &&
-					( 'caweb_external_css' === $opt || 'caweb_external_js' === $opt ) ) {
-			$values[ $opt ] = array();
+	// iterate over site options. * if site option isn't set, set it to default value */
+	foreach ( $site_options as $option_name => $default_value ) {
+		// if site option isn't set, set it to default value.
+		if ( ! array_key_exists( $option_name, $values ) ) {
+			// we don't set options with boolean defaults, otherwise there's no way to turn those options off.
+			// if the option was turned off then the option won't appear in the $values array.
+			$values[ $option_name ] = ! is_bool( $default_value ) ? $default_value : false;
 		}
 	}
+
 	/* External CSS */
 	$cssfiles = array();
 	if ( isset( $files['caweb_external_css'] ) ) {
@@ -411,6 +339,8 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 			$cssfiles[ $css['name'][ $c ] ] = $data;
 		}
+
+		caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
 	}
 
 	/* External JS */
@@ -427,11 +357,9 @@ function caweb_save_options( $values = array(), $files = array() ) {
 
 			$jsfiles[ $js['name'][ $j ] ] = $data;
 		}
+
+		caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 	}
-
-	caweb_upload_external_files( $ext_css_dir, get_option( 'caweb_external_css', array() ), $values['caweb_external_css'], $cssfiles );
-
-	caweb_upload_external_files( $ext_js_dir, get_option( 'caweb_external_js', array() ), $values['caweb_external_js'], $jsfiles );
 
 	/* Alert Banners */
 	$alerts = array();
@@ -521,83 +449,92 @@ function caweb_save_multi_ga_options( $values = array() ) {
  * @return array
  */
 function caweb_get_site_options( $group = '' ) {
-	$caweb_sanitized_options = array(
-		'ca_utility_link_1_name',
-		'ca_utility_link_2_name',
-		'ca_utility_link_3_name',
-		'ca_contact_us_link',
-		'ca_utility_link_1',
-		'ca_utility_link_2',
-		'ca_utility_link_3',
-	);
-
 	$caweb_general_options = array(
-		'ca_fav_ico',
-		'ca_site_version',
-		'ca_default_navigation_menu',
-		'ca_menu_selector_enabled',
-		'ca_site_color_scheme',
-		'ca_frontpage_search_enabled',
-		'ca_sticky_navigation',
-		'ca_home_nav_link',
-		'ca_default_post_title_display',
-		'ca_default_post_date_display',
-		'ca_x_ua_compatibility',
+		'ca_fav_ico' => caweb_default_favicon_url(),
+		'ca_site_version' => CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION,
+		'ca_default_navigation_menu' => 'singlelevel',
+		'ca_site_color_scheme' => 'oceanside',
+		'ca_frontpage_search_enabled' => false,
+		'ca_sticky_navigation' => false,
+		'ca_home_nav_link' => true,
+		'ca_default_post_title_display' => false,
+		'ca_default_post_date_display' => false,
+		'ca_x_ua_compatibility' => false,
 	);
 
 	$caweb_utility_header_options = array(
-		'ca_contact_us_link',
-		'ca_geo_locator_enabled',
-		'ca_utility_home_icon',
-		'ca_utility_link_1',
-		'ca_utility_link_1_name',
-		'ca_utility_link_1_new_window',
-		'ca_utility_link_1_enable',
-		'ca_utility_link_2',
-		'ca_utility_link_2_name',
-		'ca_utility_link_2_new_window',
-		'ca_utility_link_2_enable',
-		'ca_utility_link_3',
-		'ca_utility_link_3_name',
-		'ca_utility_link_3_new_window',
-		'ca_utility_link_3_enable',
+		'ca_contact_us_link' => '',
+		'ca_geo_locator_enabled' => false,
+		'ca_utility_home_icon' => true,
+		'ca_utility_link_1' => '',
+		'ca_utility_link_1_name' => '',
+		'ca_utility_link_1_new_window' => true,
+		'ca_utility_link_1_enable' => false,
+		'ca_utility_link_2' => '',
+		'ca_utility_link_2_name' => '',
+		'ca_utility_link_2_new_window' => true,
+		'ca_utility_link_2_enable' => false,
+		'ca_utility_link_3' => '',
+		'ca_utility_link_3_name' => '',
+		'ca_utility_link_3_new_window' => true,
+		'ca_utility_link_3_enable' => false,
 	);
 
-	$caweb_page_header_options = array( 'header_ca_branding', 'header_ca_branding_alt_text' );
+	$caweb_page_header_options = array( 
+		'header_ca_branding' => '', 
+		'header_ca_branding_alt_text' => '' 
+	);
 
 	$caweb_google_options = array(
-		'ca_google_search_id',
-		'ca_google_analytic_id',
-		'ca_google_analytic4_id',
-		'ca_google_tag_manager_id',
-		'ca_google_tag_manager_approved',
-		'ca_google_meta_id',
-		'ca_google_trans_enabled',
-		'ca_google_trans_page',
-		'ca_google_trans_icon',
-		'ca_google_trans_page_new_window',
+		'ca_google_search_id' => '',
+		'ca_google_analytic_id' => '',
+		'ca_google_analytic4_id' => '',
+		'ca_google_tag_manager_id' => '',
+		'ca_google_meta_id' => '',
+		'ca_google_trans_enabled' => false,
+		'ca_google_trans_page' => '',
+		'ca_google_trans_icon' => 'globe',
+		'ca_google_trans_page_new_window' => true,
 	);
 
-	$caweb_social_options = caweb_get_social_media_links();
+	$caweb_social_links = caweb_get_social_media_links();
 
-	$caweb_social_extra_options = array();
+	$caweb_social_options = array();
 
-	foreach ( $caweb_social_options as $social ) {
-		$caweb_social_extra_options[] = $social . '_header';
-		$caweb_social_extra_options[] = $social . '_footer';
-		if ( 'ca_social_email' !== $social ) {
-			$caweb_social_extra_options[] = $social . '_new_window';
-			$caweb_social_extra_options[] = $social . '_hover_text';
+	foreach ( $caweb_social_links as $social => $option) {
+		$caweb_social_options[$option] = '';
+		$caweb_social_options["${option}_header"] = true;
+		$caweb_social_options["${option}_footer"] = true;
+
+		if ( 'ca_social_email' !== $option ) {
+			$caweb_social_options["${option}_new_window"] = true;
+			$caweb_social_options["${option}_hover_text"] =  "Share via $social";
 		}
 	}
 
-	$caweb_special_options = array( 'caweb_username', 'caweb_password', 'caweb_multi_ga', 'caweb_multi_ga4' );
+	$caweb_special_options = array( 
+		'caweb_username' => 'CA-CODE-Works', 
+		'caweb_password' => '', 
+		'caweb_multi_ga' => '',
+		'caweb_multi_ga4' => '' 
+	);
 
-	$caweb_alert_options = array( 'caweb_alerts' );
+	$caweb_alert_options = array( 
+		'caweb_alerts' => array() 
+	);
 
-	$caweb_custom_options = array( 'caweb_external_css', 'caweb_external_js' );
+	$caweb_custom_options = array( 
+		'caweb_external_css' => array(), 
+		'caweb_external_js' => array() 
+	);
 
-	$caweb_addtl_options = array( 'caweb_live_drafts', 'caweb_debug_mode', 'caweb_body_classes', 'caweb_page_container_classes', 'caweb_main_content_classes' );
+	$caweb_addtl_options = array( 
+		'caweb_live_drafts' => false, 
+		'caweb_debug_mode' => false, 
+		'caweb_body_classes' => '', 
+		'caweb_page_container_classes' => '', 
+		'caweb_main_content_classes' => ''
+	);
 
 	switch ( $group ) {
 		case 'general':
@@ -620,24 +557,12 @@ function caweb_get_site_options( $group = '' ) {
 			$output = $caweb_social_options;
 
 			break;
-		case 'social-extra':
-			$output = $caweb_social_extra_options;
-
-			break;
-		case 'social-all':
-			$output = array_merge( $caweb_social_options, $caweb_social_extra_options );
-
-			break;
 		case 'special':
 			$output = $caweb_special_options;
 			break;
 
 		case 'custom':
 				$output = $caweb_custom_options;
-			break;
-		case 'sanitized':
-			$output = $caweb_sanitized_options;
-
 			break;
 		case 'alerts':
 			$output = $caweb_alert_options;
@@ -653,7 +578,6 @@ function caweb_get_site_options( $group = '' ) {
 				$caweb_page_header_options,
 				$caweb_google_options,
 				$caweb_social_options,
-				$caweb_social_extra_options,
 				$caweb_custom_options,
 				$caweb_alert_options,
 				$caweb_addtl_options
@@ -668,10 +592,9 @@ function caweb_get_site_options( $group = '' ) {
 /**
  * Returns an array of available social options.
  *
- * @param bool $obsolete Whether or not to return old links.
  * @return array
  */
-function caweb_get_social_media_links( $obsolete = false ) {
+function caweb_get_social_media_links() {
 	$caweb_social_options = array(
 		'Email'           => 'ca_social_email',
 		'Facebook'        => 'ca_social_facebook',
@@ -686,29 +609,6 @@ function caweb_get_social_media_links( $obsolete = false ) {
 		'Twitter'         => 'ca_social_twitter',
 		'YouTube'         => 'ca_social_youtube',
 	);
-
-	if ( $obsolete ) {
-		return apply_filters( 'caweb_social_media_links', $caweb_social_options );
-	}
-
-	/**
-	 * These are being removed
-	 *
-	 * @todo remove once version 5.5 is obsolete
-	 */
-	if ( '5.5' !== caweb_template_version() ) {
-		unset(
-			$caweb_social_options['Google Plus'],
-			$caweb_social_options['RSS'],
-			$caweb_social_options['Flickr'],
-			$caweb_social_options['Pinterest'],
-			$caweb_social_options['Snapchat']
-		);
-	} else {
-		unset(
-			$caweb_social_options['Github'],
-		);
-	}
 
 	return apply_filters( 'caweb_social_media_links', $caweb_social_options );
 

@@ -97,23 +97,6 @@ jQuery(document).ready(function($) {
     }	
   });
 
-  // If Google Tag Manager Preview approved, disable Analytics iD
-  $('#ca_google_tag_manager_approved').on('change', function(e){
-      if( this.checked ){
-        $('#ca_google_analytic_id').attr('readonly', true);
-        $('#ca_google_analytic_id').parent().addClass('hidden');
-      }else{
-        $('#ca_google_analytic_id').attr('readonly', false);
-        $('#ca_google_analytic_id').parent().removeClass('hidden');
-      }
-  });
-  // If no Tag Manager ID unapprove Preview
-  $('#ca_google_tag_manager_id').on('input',function(e){
-    // if theres no Tage Manager ID
-    if( !this.value.trim() ){
-		$('#ca_google_tag_manager_approved').bootstrapToggle('off');
-    }
-  });
   // If Google Translate is set to Custom, show extra options
   $('input[name^="ca_google_trans_enabled"]').on( 'click', function(){
     if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){

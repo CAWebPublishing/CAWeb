@@ -1,3 +1,7 @@
+#navigation .top-level-nav {
+    width: 100%;
+}
+
 /* Override styles for second level navs not using flex */
 .second-level-nav:not(.flex) {
     display: block;
@@ -7,10 +11,6 @@
     width: auto !important;
     padding: 0 !important;
     background: inherit;
-
-    li{
-        display: inline-block;
-    }
 
     .second-level-link{
         font-size: 17.6px;
@@ -22,7 +22,15 @@
         opacity: 1;
         transition: all 0.3s;
     }
-    
+
+    li{
+        display: inline-block;
+
+        &.w-25{
+            width: 24.6% !important;
+        }
+    }
+
 }
 
 // Fix Divi adding max-width

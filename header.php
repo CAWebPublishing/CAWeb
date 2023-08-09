@@ -19,7 +19,7 @@ $caweb_google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
 $caweb_google_meta_id        = get_option( 'ca_google_meta_id', '' );
 $caweb_x_ua_compatibility    = get_option( 'ca_x_ua_compatibility', false ) ? '11' : 'edge';
 $caweb_apple_icon            = CAWEB_URI . '/src/images/system/apple-touch-icon';
-$caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico' ) : caweb_default_favicon_url();
+$caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_option( 'ca_fav_ico', '' ) : caweb_default_favicon_url();
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
 

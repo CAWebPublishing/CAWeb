@@ -355,7 +355,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		'ca_geo_locator_enabled',
 		array(
 			'type'              => 'option',
-			'default'           => get_option( 'ca_geo_locator_enabled' ),
+			'default'           => get_option( 'ca_geo_locator_enabled', false ),
 			'sanitize_callback' => 'caweb_sanitize_customizer_checkbox',
 		)
 	);
@@ -629,7 +629,7 @@ function caweb_customize_register_google_settings( $wp_customize ) {
 		'ca_google_trans_enabled',
 		array(
 			'type'    => 'option',
-			'default' => get_option( 'ca_google_trans_enabled' ),
+			'default' => get_option( 'ca_google_trans_enabled', false ),
 		)
 	);
 
@@ -738,7 +738,7 @@ function caweb_customize_register_social_media_settings( $wp_customize ) {
 		)
 	);
 
-	$social_options = caweb_get_social_media_links( true );
+	$social_options = caweb_get_social_media_links();
 
 	foreach ( $social_options as $social => $option ) {
 		// Social Media Option.

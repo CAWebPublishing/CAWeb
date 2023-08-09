@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module) {
 
 /*!
@@ -7082,7 +7082,7 @@
 
 /***/ }),
 
-/***/ 37:
+/***/ 38:
 /***/ (() => {
 
 /* CAWeb Alert Option Javascript */
@@ -7501,7 +7501,7 @@ jQuery(document).ready(function($) {
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /***/ (() => {
 
 /* CAWeb Icon Menu Javascript */
@@ -7540,7 +7540,7 @@ jQuery(document).ready(function($) {
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /***/ (() => {
 
 /* nav-menus.php Javascript  */
@@ -7711,7 +7711,7 @@ jQuery(document).ready(function($) {
 
 /***/ }),
 
-/***/ 40:
+/***/ 41:
 /***/ (() => {
 
 /* CAWeb Options Javascript */
@@ -7813,23 +7813,6 @@ jQuery(document).ready(function($) {
     }	
   });
 
-  // If Google Tag Manager Preview approved, disable Analytics iD
-  $('#ca_google_tag_manager_approved').on('change', function(e){
-      if( this.checked ){
-        $('#ca_google_analytic_id').attr('readonly', true);
-        $('#ca_google_analytic_id').parent().addClass('hidden');
-      }else{
-        $('#ca_google_analytic_id').attr('readonly', false);
-        $('#ca_google_analytic_id').parent().removeClass('hidden');
-      }
-  });
-  // If no Tag Manager ID unapprove Preview
-  $('#ca_google_tag_manager_id').on('input',function(e){
-    // if theres no Tage Manager ID
-    if( !this.value.trim() ){
-		$('#ca_google_tag_manager_approved').bootstrapToggle('off');
-    }
-  });
   // If Google Translate is set to Custom, show extra options
   $('input[name^="ca_google_trans_enabled"]').on( 'click', function(){
     if( 'ca_google_trans_enabled_custom' !== $(this).attr('id') ){
@@ -7856,117 +7839,106 @@ jQuery(document).ready(function($) {
 
 /***/ }),
 
-/***/ 41:
+/***/ 42:
 /***/ (() => {
 
-// Toggle CSS Colorscheme Options
+// Toggle CAWeb Template Options
 jQuery( document ).ready( function($) {
+	let current_version = $('#ca_site_version option:selected').val();
+
+	// Correct Options. 
+	correct_options();
+
 	$('select[id$="ca_site_version"]').on("change", function(){
-		correct_social_media_links($(this).val());
-		correct_utility_header_options($(this).val());
-		correct_sticky_nav_option($(this).val());
-		correct_frontpage_search_option($(this).val());
-		correct_menu_types_option($(this).val());
-		correct_menu_home_link_option($(this).val());
+		current_version = $(this).val();
+		correct_options();
 	} );
-});
 
+	function correct_options(){
+		correct_template_options();
+		correct_social_media_links();
+	}
 
-// Toggle Social Media Links
-function correct_social_media_links(version){
-	var exlusions = '5.5' !== version ? [
-		'ca_social_snapchat-settings',
-		'ca_social_pinterest-settings',
-		'ca_social_rss-settings',
-		'ca_social_google_plus-settings',
-		'ca_social_flickr-settings'
-	] : ['ca_social_github-settings'];
+	// Toggle Template Options
+	function correct_template_options(){
+		var current_menu = $('#ca_default_navigation_menu option:selected').val();
 
-	jQuery('div[id^="ca_social_"]').each(function(index) {
-		// hide the entire option if not allowed for specified template version
-		if( exlusions.includes(this.id) ){
-			jQuery(this).addClass('d-none');
-			jQuery(this).prev().addClass('d-none');
-		}else{
-			jQuery(this).removeClass('d-none');
-			jQuery(this).prev().removeClass('d-none');
+		// Version 6.
+		if( '6.0' === current_version ){
+			// Drop support for mega menus.
+			$('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
+			$('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
 
-			// Share via Email only has 2 options
-			// all other options have 5 options
-			var headerOption = 2 === this.children.length ? this.children[0] : this.children[1];
-
-			// hide header option for all social link options
-			if(  '5.5' !== version ){
-				jQuery(headerOption).addClass('d-none');
-
-			}else{
-				jQuery(headerOption).removeClass('d-none');
+			// if current menu is no longer supported, set to singlelevel.
+			if( ['flexmega','megadropdown'].includes( current_menu ) ){
+				$(`#ca_default_navigation_menu option[value="${current_menu}"]`).attr('selected', false);
+				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', true);
 			}
+		
+			// Drop support for Menu Home Link.
+			$('#ca_home_nav_link').parent().parent().addClass('d-none');
+		
+			// Drop support for Search on Frontpage
+			$('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
+
+			// Drop support for Utility Header.
+			$('#utility-header-settings').prev().addClass('d-none');
+			$('#utility-header-settings').addClass('d-none');
+		// Version 5.
+		}else{
+			// Add support for mega menus.
+			$('#ca_default_navigation_menu option[value="flexmega"]').removeClass('d-none');
+			$('#ca_default_navigation_menu option[value="megadropdown"]').removeClass('d-none');
+
+			// Add support for Menu Home Link.
+			$('#ca_home_nav_link').parent().parent().removeClass('d-none');
+
+			// Add support for Search on Frontpage
+			$('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
+
+			// Drop support for Utility Header.
+			$('#utility-header-settings').prev().removeClass('d-none');
+			$('#utility-header-settings').removeClass('d-none');
 		}
-	});
-}
-
-// Toggle Utility Header Options
-function correct_utility_header_options(version){
-	var homeIcon = jQuery('#utility-header-settings');
-
-	if(  '5.5' !== version ){
-		jQuery(homeIcon).addClass('d-none');
-		jQuery(homeIcon).prev().addClass('d-none');
-	}else{
-		jQuery(homeIcon).removeClass('d-none');
-		jQuery(homeIcon).prev().removeClass('d-none');
-	}
-}
-
-// Toggle Search on Frontpage
-function correct_frontpage_search_option(version){
-	if( '5.5' === version ){
-		jQuery('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
-	}else{
-		jQuery('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
-	}
-}
-
-// Toggle Menu Types
-function correct_menu_types_option(version){
-	var menu_type_picker = document.getElementById('ca_default_navigation_menu');
-	var current_menu = menu_type_picker.value;
-	
-	for(i = menu_type_picker.length; i >= 0; i--) {
-		menu_type_picker.remove(i);
 	}
 
+	// Toggle Social Media Links
+	function correct_social_media_links(){
+		var exclusions = '6.0' === current_version ? [
+			'ca_social_snapchat-settings',
+			'ca_social_pinterest-settings',
+			'ca_social_rss-settings',
+			'ca_social_google_plus-settings',
+			'ca_social_flickr-settings'
+		] : ['ca_social_github-settings'];
 
-	for (const [i, ele] of Object.entries(caweb_admin_args.caweb_menus)) {
-		if( '6.0' === version && ['flexmega', 'megadropdown'].includes(i)){
-			continue;
-		}
-		var o = document.createElement( 'OPTION' );
+		$('div[id^="ca_social_"]').each(function(index) {
+			// hide the entire option if not allowed for specified template version
+			if( exclusions.includes(this.id) ){
+				$(this).addClass('d-none');
+				$(this).prev().addClass('d-none');
+			}else{
+				$(this).removeClass('d-none');
+				$(this).prev().removeClass('d-none');
+			}
 
-		o.value = i;
-		o.text = ele;
+			var optionName = this.id.substring(0, this.id.indexOf('-'));
 
-		if( i === current_menu ){
-			o.selected = true;
-		}
-
-		menu_type_picker.append( o );
+			// hide header option for all social link options when using version 6.
+			if(  '6.0' === current_version ){
+				$(`#${optionName}_header`).parent().parent().addClass('d-none');
+			}else{
+				$(`#${optionName}_header`).parent().parent().removeClass('d-none');
+			}
+		});
 	}
-}
 
-// Toggle Menu Home Link
-function correct_menu_home_link_option(version){
-	if( '5.5' === version ){
-		jQuery('#ca_home_nav_link').parent().parent().removeClass('d-none');
-	}else{
-		jQuery('#ca_home_nav_link').parent().parent().addClass('d-none');
-	}
-}
+
+});
 
 /***/ }),
 
-/***/ 42:
+/***/ 43:
 /***/ (() => {
 
 /* CAWeb Uploads Option */
@@ -8054,7 +8026,7 @@ function addExternal(ext_list, ext){
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /***/ (() => {
 
 /* Browse Library */
@@ -8235,16 +8207,16 @@ __webpack_require__.r(__webpack_exports__);
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-__webpack_require__(36);
-
 __webpack_require__(37);
+
 __webpack_require__(38);
 __webpack_require__(39);
 __webpack_require__(40);
 __webpack_require__(41);
 __webpack_require__(42);
+__webpack_require__(43);
 
-__webpack_require__(43)
+__webpack_require__(44)
 })();
 
 /******/ })()

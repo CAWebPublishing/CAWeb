@@ -102,7 +102,7 @@ function caweb_display_general_settings( $is_active = false ) {
  */
 function caweb_display_general_options() {
 	// State Template Version variables.
-	$deprecating = '5.5' === caweb_template_version();
+	$version = caweb_template_version();
 
 	// Fav Icon.
 	$fav_icon      = get_option( 'ca_fav_ico', caweb_default_favicon_url() );
@@ -135,10 +135,6 @@ function caweb_display_general_options() {
 
 	$menus = caweb_nav_menu_types();
 
-	if ( ! $deprecating ) {
-		unset( $menus['flexmega'], $menus['megadropdown'] );
-	}
-
 	$network = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 	?>
@@ -155,8 +151,8 @@ function caweb_display_general_options() {
 				<label for="ca_site_version" class="d-block mb-0"><strong>State Template Version</strong></label>
 				<small class="mb-2 text-muted d-block">Select a California State Template version.</small>
 				<select id="ca_site_version" name="ca_site_version" class="w-50 form-control">
-					<option value="5.5"<?php print $deprecating ? ' selected="selected"' : ''; ?>>Version 5.5</option>
-					<option value="6.0"<?php print ! $deprecating ? ' selected="selected"' : ''; ?>>Version 6.0</option>
+					<option value="5.5"<?php print '5.5' === $version ? ' selected="selected"' : ''; ?>>Version 5.5</option>
+					<option value="6.0"<?php print '6.0' === $version ? ' selected="selected"' : ''; ?>>Version 6.0</option>
 				</select>
 			</div>
 		</div>
@@ -256,7 +252,7 @@ function caweb_display_general_options() {
 				</div>
 			</div>
 			<!-- Menu Home Link -->
-			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
+			<div class="mb-3 col">
 				<div class="form-check form-switch">
 					<input type="checkbox" class="form-check-input mt-1" name="ca_home_nav_link" id="ca_home_nav_link" <?php print esc_attr( $home_nav_link_enabled ); ?>>
 					<label for="ca_home_nav_link" class="d-block mb-0 form-check-label"><strong>Menu Home Link</strong></label>
@@ -293,7 +289,7 @@ function caweb_display_general_options() {
 				</div>
 			</div>
 			<!-- Search on FrontPage -->
-			<div class="mb-3 col<?php print ! $deprecating ? ' d-none' : ''; ?>">
+			<div class="mb-3 col">
 				<div class="form-check form-switch">
 					<input type="checkbox" class="form-check-input mt-1" name="ca_frontpage_search_enabled" id="ca_frontpage_search_enabled" <?php print esc_attr( $frontpage_search_enabled ); ?> >
 					<label for="ca_frontpage_search_enabled" class="d-block mb-0 form-check-label"><strong>Show Search on Front Page</strong></label>
@@ -311,7 +307,6 @@ function caweb_display_general_options() {
  * @return void
  */
 function caweb_display_utility_header_options() {
-	$deprecating = '5.5' !== caweb_template_version() ? ' d-none' : '';
 
 	// Contact Us Page.
 	$contact_us_link = get_option( 'ca_contact_us_link', '' );
@@ -324,12 +319,12 @@ function caweb_display_utility_header_options() {
 
 	?>
 	<!-- Utility Header Section -->
-	<div class="<?php print esc_attr( $deprecating ); ?>">
+	<div>
 		<a class="collapsed d-inline-block text-decoration-none" data-bs-toggle="collapse" href="#utility-header-settings" role="button" aria-expanded="false" aria-controls="utility-header-settings">
 			<h2 class="mb-0">Utility Header <span class="text-secondary ca-gov-icon-"></span></h2>
 		</a>
 	</div>
-	<div class="collapse <?php print esc_attr( $deprecating ); ?>" id="utility-header-settings" data-bs-parent="#general-settings">
+	<div class="collapse" id="utility-header-settings" data-bs-parent="#general-settings">
 		<!-- Contact Us Page Row -->
 		<div class="row">
 			<div class="mb-3 col-sm-5">
@@ -420,7 +415,7 @@ function caweb_display_page_header_options() {
 	// Organization Logo Alt Text.
 	$org_logo_alt_text = '';
 	if ( ! empty( $org_logo ) ) {
-		$org_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text' ) : caweb_get_attachment_post_meta( $org_logo, '_wp_attachment_image_alt' );
+		$org_logo_alt_text = ! empty( get_option( 'header_ca_branding_alt_text', '' ) ) ? get_option( 'header_ca_branding_alt_text', '' ) : caweb_get_attachment_post_meta( $org_logo, '_wp_attachment_image_alt' );
 	}
 	?>
 	<!-- Page Header Section -->
@@ -565,7 +560,7 @@ function caweb_display_google_options() {
 		<!-- Google Translate Row -->
 		<div class="row">
 			<div class="mb-3" role="radiogroup" aria-label="Google Translate Modes">
-				<label for="ca_google_trans_enabled" class="d-block mb-0"><strong>Enable Google Translate</strong></label>
+				<strong>Enable Google Translate</strong>
 				<small class="mb-2 text-muted d-block">Displays the Google translate feature at the top right of each page.</small>
 				<!-- Google Translate None -->
 				<div class="form-check form-check-inline">
@@ -649,25 +644,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 			</div>
 		</div>
 		<?php
-			$social_options = caweb_get_social_media_links( true );
-
-			/**
-			 * This is only here so that the Javascript works when toggling between template versions.
-			 *
-			 * @todo remove once version 5.5 is obsolete
-			 */
-			$deprecating = '5.5' !== caweb_template_version();
-
-			$exclusions = apply_filters(
-				'caweb_social_media_links_exclusions',
-				$deprecating ? array(
-					'ca_social_snapchat',
-					'ca_social_pinterest',
-					'ca_social_rss',
-					'ca_social_google_plus',
-					'ca_social_flickr',
-				) : array( 'ca_social_github' )
-			);
+		$social_options = caweb_get_social_media_links();
 
 		foreach ( $social_options as $social => $option ) {
 			$share_email        = 'ca_social_email' === $option ? true : false;
@@ -676,15 +653,14 @@ function caweb_display_social_media_settings( $is_active = false ) {
 			$footer_checked     = get_option( sprintf( '%1$s_footer', $option ) ) ? ' checked' : '';
 			$new_window_checked = get_option( sprintf( '%1$s_new_window', $option ) ) ? ' checked' : '';
 			$hover_text         = get_option( sprintf( '%1$s_hover_text', $option ), "Share via $social" );
-			$hidden             = in_array( $option, $exclusions, true ) ? ' d-none' : '';
 			?>
-					<div class="row<?php print esc_attr( $hidden ); ?>">
+					<div class="row">
 						<a class="collapsed d-block text-decoration-none" data-bs-toggle="collapse" href="#<?php print esc_attr( $option ); ?>-settings" role="button" aria-expanded="false" aria-controls="<?php print esc_attr( $option ); ?>-settings">
 							<h2 class="d-inline"><?php print esc_attr( $social ); ?> <span class="text-secondary ca-gov-icon-"></span></h2>
 						</a>
 					</div>
-					<div class="row collapse pt-2<?php print esc_attr( $hidden ); ?>" id="<?php print esc_attr( $option ); ?>-settings">
-				<?php if ( ! $share_email ) : ?>
+					<div class="row collapse pt-2" id="<?php print esc_attr( $option ); ?>-settings">
+						<?php if ( ! $share_email ) : ?>
 						<!-- Option URL -->
 						<div class="mb-3 col-md-12">
 							<input type="text" class="form-control w-50" name="<?php print esc_attr( $option ); ?>" aria-label="<?php print esc_attr( $social ); ?>" value="<?php print esc_url( get_option( $option ) ); ?>" />
@@ -692,7 +668,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 						</div>
 						<?php endif; ?>
 						<!-- Show in header -->
-						<div class="mb-3 col-sm-3<?php print esc_attr( $deprecating ? ' d-none' : '' ); ?>">
+						<div class="mb-3 col-sm-3">
 							<div class="form-check form-switch">
 								<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $option ); ?>_header" name="<?php print esc_attr( $option ); ?>_header" <?php print esc_attr( $header_checked ); ?>>
 								<label for="<?php print esc_attr( $option ); ?>_header" class="d-block form-check-label"><strong>Show in header:</strong></label>
@@ -707,7 +683,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 								<small class="text-muted d-block">Display social link in the footer.</small>
 							</div>
 						</div>
-				<?php if ( ! $share_email ) : ?>
+						<?php if ( ! $share_email ) : ?>
 						<!-- Open in New Tab -->
 						<div class="mb-3 col-sm-3">
 							<div class="form-check form-switch">
@@ -973,8 +949,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				<small class="doc-sitemap-update text-muted"><?php print esc_url( $file_url ); ?></small>
 			</div>
 		</div>
-		<?php if ( current_user_can( $cap ) ) : ?>
-		<div class="row">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
 			<!-- Live Drafts Option -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">
@@ -984,7 +959,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
 			<!-- Enable Debug -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">
@@ -994,7 +969,6 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-		<?php endif; ?>
 		<div class="row">
 			<div class="mb-3 col-sm-12 col-md-6">
 				<!-- body classes -->
