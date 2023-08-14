@@ -531,7 +531,7 @@ function caweb_enqueue_google_scripts( $localized ){
 
 	// Statewide Analytics and Google Tag.
 	wp_enqueue_script( 'google-analytics-statewide', 'https://www.googletagmanager.com/gtag/js?id=UA-3419582-2', array(), null, true );
-	wp_enqueue_script( 'google-tag-manager-statewide', 'https://www.googletagmanager.com/gtm.js?id=G-69TD0KNT0F', array(), null, true );
+	wp_enqueue_script( 'google-analytics4-statewide', 'https://www.googletagmanager.com/gtag/js?id=G-69TD0KNT0F', array(), null, true );
 
 	return $localized;
 }
