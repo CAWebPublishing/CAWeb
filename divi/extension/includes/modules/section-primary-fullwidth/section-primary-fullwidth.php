@@ -229,7 +229,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $featured_image_button ) {
 			$body = sprintf(
-				'%1$s<div class="col-md-12">%2$s%3$s%4$s</div>',
+				'%1$s<div class="col-md-12 px-3">%2$s%3$s%4$s</div>',
 				$this->renderFeaturedImage(),
 				$header,
 				$content,
