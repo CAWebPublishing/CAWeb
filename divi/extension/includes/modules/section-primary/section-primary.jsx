@@ -98,7 +98,7 @@ class CAWeb_Module_Section_Primary extends CAWEeb_Component {
 				<Fragment>
 					<div id={moduleID} className={classList} style={section_background_color}>
 						{this.renderFeatureImage()}
-						<div class="col-md-12" >
+						<div class="col-md-12 px-3" >
 							{header}
 							{this.props.content()}
 							{display_button}
