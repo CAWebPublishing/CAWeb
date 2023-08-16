@@ -763,9 +763,20 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
  */
 function caweb_display_alert_banner_settings( $is_active = false ) {
 	$alerts = get_option( 'caweb_alerts', array() );
+	$statewide_alerts = get_option( 'caweb_statewide_alert_enabled', false ) ? ' checked' : '';
 	?>
 	<!-- Alert Banners -->
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="alert-banners" data-bs-parent="#caweb-settings">
+		<div class="row">
+			<!-- StateWide Alert -->
+			<div class="mb-3 col-sm-12">
+				<div class="form-check form-switch">
+					<input type="checkbox" class="form-check-input mt-1" name="caweb_statewide_alert_enabled" id="caweb_statewide_alert_enabled" <?php print esc_attr( $statewide_alerts ); ?>>
+					<label for="caweb_statewide_alert_enabled" class="d-block mb-0 form-check-label"><strong>Enable Statewide Alerts</strong></label>
+					<small class="text-muted d-block">This will enable the California Statewide alerts functionality.</small>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="mb-3">
 				<h2 class="d-inline">Create an Alert Banner </h2>
