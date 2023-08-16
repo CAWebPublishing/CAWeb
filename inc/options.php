@@ -533,7 +533,8 @@ function caweb_get_site_options( $group = '' ) {
 		'caweb_debug_mode' => false, 
 		'caweb_body_classes' => '', 
 		'caweb_page_container_classes' => '', 
-		'caweb_main_content_classes' => ''
+		'caweb_main_content_classes' => '',
+		'caweb_statewide_alert_enabled' => false
 	);
 
 	switch ( $group ) {
