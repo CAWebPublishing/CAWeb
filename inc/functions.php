@@ -413,11 +413,12 @@ function caweb_get_user_color() {
 
 /**
  * Checks if page/post is using Divi Builder.
+ *
  * @param array $wp_classes An array of classes used in the body.
- *  
+ *
  * @return boolean
  */
-function caweb_is_divi_used($wp_classes = array()) {
+function caweb_is_divi_used( $wp_classes = array() ) {
 
 	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
 
@@ -427,12 +428,12 @@ function caweb_is_divi_used($wp_classes = array()) {
 	}
 
 	// Default HomePage "Your latest posts" does not use the Divi Builder.
-	if( in_array('blog', $wp_classes, true) ){
+	if ( in_array( 'blog', $wp_classes, true ) ) {
 		return false;
 	}
 
 	// Default index.php (search) does not use the Divi Builder.
-	if( in_array('search', $wp_classes, true) ){
+	if ( in_array( 'search', $wp_classes, true ) ) {
 		return false;
 	}
 

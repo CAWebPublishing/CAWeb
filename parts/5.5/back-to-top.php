@@ -5,6 +5,6 @@
  * @package CAWeb
  */
 
- ?>
+?>
 
 <span class="return-top hidden-print"></span>

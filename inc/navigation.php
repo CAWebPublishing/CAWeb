@@ -24,12 +24,12 @@ add_action( 'wp_update_nav_menu_item', 'caweb_update_nav_menu_item', 10, 3 );
  * @param  string   $nav_menu The HTML content for the navigation menu.
  * @param  stdClass $args An object containing wp_nav_menu() arguments.
  *
- * @return void
+ * @return string
  */
 function caweb_nav_menu( $nav_menu, $args ) {
 
 	/* Menu Construction */
-	if ( ! empty( $args->menu ) && $args->echo && 
+	if ( ! empty( $args->menu ) && $args->echo &&
 			isset(
 				$args->theme_location,
 				$args->caweb_nav_type,
@@ -40,7 +40,7 @@ function caweb_nav_menu( $nav_menu, $args ) {
 			$template_version = $args->caweb_template_version;
 
 			get_template_part( "parts/$template_version/nav", $args->caweb_nav_type, $args );
-	}else{
+	} else {
 		return $nav_menu;
 	}
 

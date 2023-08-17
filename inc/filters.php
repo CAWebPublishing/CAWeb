@@ -46,10 +46,10 @@ add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_templ
 function caweb_body_class( $wp_classes, $extra_classes ) {
 	global $post;
 	$template_version = caweb_template_version();
-	$user_classes = get_option('caweb_body_classes', '');
+	$user_classes     = get_option( 'caweb_body_classes', '' );
 
 	// Add user body class names to extra classes.
-	$extra_classes = array_merge( $extra_classes, explode(' ', $user_classes) );
+	$extra_classes = array_merge( $extra_classes, explode( ' ', $user_classes ) );
 
 	/* List of the classes that need to be removed */
 	$blacklist = array(
@@ -74,7 +74,7 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 	$whitelist[] = get_option( 'ca_sticky_navigation', false ) ? 'sticky_nav' : '';
 
 	// Merge any extra classes to the wp classes.
-	$wp_classes = array_merge($wp_classes, $extra_classes);
+	$wp_classes = array_merge( $wp_classes, $extra_classes );
 
 	/* Remove any classes in the blacklist from the wp_classes */
 	$wp_classes = array_diff( $wp_classes, $blacklist );

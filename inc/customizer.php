@@ -48,7 +48,7 @@ function caweb_customize_preview_init() {
  * @return void
  */
 function caweb_customize_controls_enqueue_scripts() {
-	$caweb_admin_file = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
+	$caweb_admin_file               = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
 	$caweb_customizer_controls_file = caweb_get_min_file( '/dist/caweb-customizer.js', 'js' );
 
 	wp_register_script( 'caweb-customizer-controls-script', $caweb_customizer_controls_file, array(), CAWEB_VERSION, true );

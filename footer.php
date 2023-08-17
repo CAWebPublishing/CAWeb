@@ -27,7 +27,7 @@ $caweb_is_page_builder_used = caweb_is_divi_used();
 				print esc_html( get_sidebar( 'sidebar-1' ) );
 				?>
 				</aside>
-			<?php
+				<?php
 				endif;
 			?>
 			</div> <!-- #main-content -->
