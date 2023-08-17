@@ -56,7 +56,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 			),
 		);
 
-		add_action('wp_footer', array( $this, 'caweb_service_tiles_init' ), 20 );
+		add_action( 'wp_footer', array( $this, 'caweb_service_tiles_init' ), 20 );
 	}
 
 	/**
@@ -181,7 +181,13 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 		return $output;
 	}
 
-	public function caweb_service_tiles_init(){
+
+	/**
+	 * Service Tile script taken from State Template after it was removed.
+	 *
+	 * @return void
+	 */
+	public function caweb_service_tiles_init() {
 		?>
 		<script>
 			var __$currentRow = null;

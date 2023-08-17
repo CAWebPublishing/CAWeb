@@ -23,8 +23,8 @@ $caweb_fav_ico               = ! empty( get_option( 'ca_fav_ico', '' ) ) ? get_o
 
 $caweb_is_page_builder_used = caweb_is_divi_used();
 
-$caweb_page_container_classes = sprintf( 'page-container %1$s', get_option( 'caweb_page_container_classes', '' ));
-$caweb_main_content_classes = sprintf( 'main-content %1$s', get_option( 'caweb_main_content_classes', '' ));
+$caweb_page_container_classes = sprintf( 'page-container %1$s', get_option( 'caweb_page_container_classes', '' ) );
+$caweb_main_content_classes   = sprintf( 'main-content %1$s', get_option( 'caweb_main_content_classes', '' ) );
 
 ?>
 <!DOCTYPE html>

@@ -60,7 +60,7 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 			?>
 		</ul>
 
-		<?php get_template_part( "parts/socialshare", null, $caweb_social_exclusions ); ?>
+		<?php get_template_part( 'parts/socialshare', null, $caweb_social_exclusions ); ?>
 
 	</div>
 </div>
