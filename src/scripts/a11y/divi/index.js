@@ -8,5 +8,4 @@ require('./person');
 require('./search');
 require('./slider');
 require('./tab');
-require('./toggle');
 require('./video');
