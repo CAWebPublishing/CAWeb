@@ -165,7 +165,6 @@ __webpack_require__(15);
 __webpack_require__(16);
 __webpack_require__(17);
 __webpack_require__(18);
-__webpack_require__(19);
 
 
 /***/ }),
@@ -492,101 +491,6 @@ jQuery(document).ready(function($) {
 
 jQuery(document).ready(function($) {
 	/*
-	Divi Toggle Module Accessibility
-	Retrieve all Divi Toggle Modules
-   */
-	var toggle_modules = $('div.et_pb_toggle');
-
-	// Run only if there is a Toggle Module on the current page
-	if( toggle_modules.length  ){
-		toggle_modules.each(function(index, element) {
-			var title = $(element).find('.et_pb_toggle_title');
-			var expanded = $(element).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-
-			$(element).attr('tabindex', 0);
-			$(element).attr('role', 'button');
-			$(element).attr('aria-expanded', expanded);
-
-			// Events
-			$(title).on('click', function(e){
-				setTimeout( function(){
-					if ($(element).hasClass('et_pb_toggle_open')) {
-						toggleModule(element, false);
-					}else{
-						toggleModule(element);
-					}
-				}, 500);
-			});
-
-			$(element).on('keydown', function(e){
-				var toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
-				var toggleKeyPressed = toggleKeys.includes(e.which);
-				var toggleOpen = [40]; // down arrow to open
-				var toggleOpenPressed = toggleOpen.includes(e.which);
-				var toggleClose = [38] //up arrow to close
-				var toggleClosePressed = toggleClose.includes(e.which);
-
-				if (toggleKeyPressed) {
-					setTimeout( function(){
-						if ($(element).hasClass('et_pb_toggle_open')) {
-							toggleModule(element, false);
-						}else{
-							toggleModule(element);
-						}
-					}, 500);
-				}
-
-				if (toggleOpenPressed) {
-					setTimeout( function(){
-						toggleModule(element);
-					}, 500);
-				}
-
-				if (toggleClosePressed) {
-					setTimeout( function(){
-						toggleModule(element, false);
-					}, 500)
-				}
-
-				// Prevents spacebar from scrolling page to the bottom
-				if (e.which === 32) {
-					e.preventDefault();
-				}
-			});
-		});
-
-		function toggleModule( module, open = true ){
-			if( open ){
-				$(module).removeClass('et_pb_toggle_close')
-				$(module).addClass('et_pb_toggle_open');
-
-				$(module).find('.et_pb_toggle_content').css('display', 'block');
-
-			}else{
-				$(module).removeClass('et_pb_toggle_open')
-				$(module).addClass('et_pb_toggle_close');
-
-				$(module).find('.et_pb_toggle_content').css('display', 'none')
-
-			}
-
-			// Modifies value for aria-expanded attribute
-			// when toggle is clicked or Enter/Space key is pressed
-			setTimeout( function(){
-				var expanded = $(module).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
-				$(module).attr('aria-expanded', expanded);
-			}, 1000 );
-		}
-	}
-});
-
-
-/***/ }),
-/* 19 */
-/***/ (() => {
-
-jQuery(document).ready(function($) {
-	/*
     Divi Video Module Accessibility
     Retrieve all Divi Video Modules
     */
@@ -635,9 +539,10 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(20);
 __webpack_require__(21);
 __webpack_require__(22);
 __webpack_require__(23);
@@ -647,11 +552,10 @@ __webpack_require__(26);
 __webpack_require__(27);
 __webpack_require__(28);
 __webpack_require__(29);
-__webpack_require__(30);
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -679,7 +583,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -713,7 +617,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -801,7 +705,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -827,7 +731,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -897,7 +801,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -937,7 +841,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -965,7 +869,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1011,7 +915,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1070,7 +974,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1175,7 +1079,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1193,7 +1097,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1216,7 +1120,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1249,7 +1153,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1316,7 +1220,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(2);
 __webpack_require__(3);
 __webpack_require__(4);
-
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -1468,12 +1371,12 @@ jQuery(document).ready(function($) {
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 __webpack_require__(7);
-__webpack_require__(20);
+__webpack_require__(19);
 
+__webpack_require__(30);
 __webpack_require__(31);
 __webpack_require__(32);
 __webpack_require__(33);
-__webpack_require__(34);
 })();
 
 /******/ })()

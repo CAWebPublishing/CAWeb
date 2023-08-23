@@ -44,7 +44,7 @@ function caweb_branding_admin_head() {
  * @return void
  */
 function caweb_login_enqueue_scripts() {
-	$caweb_css_file = caweb_get_min_file( '/dist/caweb-admin.css');
+	$caweb_css_file = caweb_get_min_file( '/dist/caweb-admin.css' );
 
 	/* CAWeb Admin CSS */
 	wp_enqueue_style( 'caweb-admin-styles', $caweb_css_file, array(), CAWEB_VERSION );

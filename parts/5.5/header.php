@@ -163,11 +163,11 @@ foreach ( $args as $var => $val ) {
 				</div>
 
 			</div>
-			
+
 			<div class="btn-group">
 				<button type="button" class="btn btn-primary dyslexicFont">Dyslexic font</button>
 			</div>
-			
+
 			<button type="button" class="close" data-bs-toggle="collapse" data-bs-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 	</div>

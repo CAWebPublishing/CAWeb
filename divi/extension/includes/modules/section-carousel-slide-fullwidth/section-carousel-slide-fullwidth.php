@@ -184,7 +184,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
 
 		$this->add_classname( 'carousel-item' );
 
-		if( 1 === $et_pb_fullwidth_slider_item_num ){
+		if ( 1 === $et_pb_fullwidth_slider_item_num ) {
 			$this->add_classname( 'active' );
 		}
 
@@ -199,7 +199,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
 		$img = sprintf( '<img src="%1$s"%2$s class="d-block w-100"/>', $slide_image, $slide_image_alt );
 
 		$output = sprintf( '<div class="%1$s">%2$s%3$s</div>', $this->module_classname( $render_slug ), $img, $caption );
-		
+
 		return $output;
 	}
 }

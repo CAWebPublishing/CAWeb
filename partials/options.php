@@ -762,7 +762,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
  * @return void
  */
 function caweb_display_alert_banner_settings( $is_active = false ) {
-	$alerts = get_option( 'caweb_alerts', array() );
+	$alerts           = get_option( 'caweb_alerts', array() );
 	$statewide_alerts = get_option( 'caweb_statewide_alert_enabled', false ) ? ' checked' : '';
 	?>
 	<!-- Alert Banners -->
@@ -939,17 +939,16 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
  * @return void
  */
 function caweb_display_additional_features_settings( $is_active = false ) {
-	$directory                = wp_upload_dir();
-	$file                     = $directory['basedir'] . '/pdf-word-sitemap.xml';
-	$file_url                 = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
-	$cap                      = is_multisite() ? 'manage_network_options' : 'manage_options';
-	$live_drafts_enabled      = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
-	$caweb_debug_mode_enabled = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
-	$caweb_body_classes = get_option( 'caweb_body_classes', '' );
+	$directory                    = wp_upload_dir();
+	$file                         = $directory['basedir'] . '/pdf-word-sitemap.xml';
+	$file_url                     = file_exists( $file ) ? sprintf( 'File location: <a href="%1$s%2$s" target="_blank">Document Map</a>', $directory['baseurl'], '/pdf-word-sitemap.xml' ) : '';
+	$cap                          = is_multisite() ? 'manage_network_options' : 'manage_options';
+	$live_drafts_enabled          = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
+	$caweb_debug_mode_enabled     = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
+	$caweb_body_classes           = get_option( 'caweb_body_classes', '' );
 	$caweb_page_container_classes = get_option( 'caweb_page_container_classes', '' );
-	$caweb_main_content_classes = get_option( 'caweb_main_content_classes', '' );
-	
-	
+	$caweb_main_content_classes   = get_option( 'caweb_main_content_classes', '' );
+
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
 		<div class="row">
@@ -960,7 +959,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				<small class="doc-sitemap-update text-muted"><?php print esc_url( $file_url ); ?></small>
 			</div>
 		</div>
-		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''; ?>">
 			<!-- Live Drafts Option -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">
@@ -970,7 +969,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 				</div>
 			</div>
 		</div>
-		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''?>">
+		<div class="row<?php print ! current_user_can( $cap ) ? ' d-none' : ''; ?>">
 			<!-- Enable Debug -->
 			<div class="mb-3 col-sm-12">
 				<div class="form-check form-switch">

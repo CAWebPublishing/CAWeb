@@ -180,10 +180,10 @@ class CAWeb_Module_Section_Carousel_Slide extends ET_Builder_CAWeb_Module {
 		global $et_pb_slider_item_num;
 
 		$et_pb_slider_item_num++;
-		
+
 		$this->add_classname( 'carousel-item' );
 
-		if( 1 === $et_pb_slider_item_num ){
+		if ( 1 === $et_pb_slider_item_num ) {
 			$this->add_classname( 'active' );
 		}
 

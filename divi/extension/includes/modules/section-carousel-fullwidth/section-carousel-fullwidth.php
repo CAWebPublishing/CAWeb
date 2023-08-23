@@ -97,42 +97,49 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 
 		global $et_pb_fullwidth_slider_item_num;
 
-		$module_id = ! empty( $this->module_id(false) ) ? $this->module_id(false) : self::get_module_order_class( $render_slug );
+		$module_id = ! empty( $this->module_id( false ) ) ? $this->module_id( false ) : self::get_module_order_class( $render_slug );
 
 		$this->add_classname( 'carousel slide' );
 
-		if( ! empty( $section_bg_color ) ){
-			$section_bg_color =  sprintf( ' style="background: %1$s;" ', $section_bg_color );
+		if ( ! empty( $section_bg_color ) ) {
+			$section_bg_color = sprintf( ' style="background: %1$s;" ', $section_bg_color );
 			$this->add_classname( 'p-5' );
 		}
 
-		$controls = sprintf('<button class="carousel-control-prev" type="button" data-bs-target="#%1$s" data-bs-slide="prev">
+		$controls = sprintf(
+			'<button class="carousel-control-prev" type="button" data-bs-target="#%1$s" data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Previous</span>
 		</button>
 		<button class="carousel-control-next" type="button" data-bs-target="#%1$s" data-bs-slide="next">
 			<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Next</span>
-		</button>', $module_id);
+		</button>',
+			$module_id
+		);
 
 		$indicators = '';
-		
-		for($i = 0; $i < $et_pb_fullwidth_slider_item_num; $i++ ){
-			$indicators .= sprintf('<button type="button" data-bs-target="#%1$s" data-bs-slide-to="%2$s" aria-label="Slide %2$s"%3$s></button>', 
-				$module_id, $i, ! $i ? 'class="active" aria-current="true"' : '' );
+
+		for ( $i = 0; $i < $et_pb_fullwidth_slider_item_num; $i++ ) {
+			$indicators .= sprintf(
+				'<button type="button" data-bs-target="#%1$s" data-bs-slide-to="%2$s" aria-label="Slide %2$s"%3$s></button>',
+				$module_id,
+				$i,
+				! $i ? 'class="active" aria-current="true"' : ''
+			);
 
 		}
 
-		if( ! empty( $indicators ) ){
-			$indicators = sprintf('<div class="carousel-indicators">%1$s</div>', $indicators);
+		if ( ! empty( $indicators ) ) {
+			$indicators = sprintf( '<div class="carousel-indicators">%1$s</div>', $indicators );
 		}
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$output = sprintf( '<div id="%1$s"%2$s%3$s>%4$s<div class="carousel-inner">%5$s</div>%6$s</div>', $module_id, $class, $section_bg_color, $indicators, $this->content, $controls  );
+		$output = sprintf( '<div id="%1$s"%2$s%3$s>%4$s<div class="carousel-inner">%5$s</div>%6$s</div>', $module_id, $class, $section_bg_color, $indicators, $this->content, $controls );
 
 		$et_pb_fullwidth_slider_item_num = 0;
-		
+
 		return $output;
 	}
 
