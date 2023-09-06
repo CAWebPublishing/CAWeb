@@ -927,7 +927,7 @@ function caweb_generate_icon_json() {
 				'styles'       => $styles,
 			);
 
-			$output[] = json_encode( $icon, JSON_PRETTY_PRINT );
+			$output[] = wp_json_encode( $icon, JSON_PRETTY_PRINT );
 		}
 
 		$json = implode( ',' . PHP_EOL, $output );

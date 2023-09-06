@@ -216,7 +216,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 		$this->add_classname( 'section' );
 
 		if ( 'on' === $this->props['left_right_button'] ) {
-			$this->add_classname( 'pl-3' );
+			$this->add_classname( 'ps-3' );
 		}
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
@@ -229,7 +229,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $featured_image_button ) {
 			$body = sprintf(
-				'%1$s<div class="col-md-15">%2$s%3$s%4$s</div>',
+				'%1$s<div class="col-md-12 px-3">%2$s%3$s%4$s</div>',
 				$this->renderFeaturedImage(),
 				$header,
 				$content,
@@ -289,7 +289,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 		$class              = '';
 
 		if ( 'off' === $this->props['background_enable_color'] ) {
-			$class .= 'on' === $image_pos ? ' pr-0 pe-0' : ' pl-0 ps-0';
+			$class .= 'on' === $image_pos ? ' pe-0' : ' ps-0';
 		}
 
 		$class .= 'on' === $slide_image_button ? ' animate-fadeInLeft' : '';
@@ -298,7 +298,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 		$alt_text      = caweb_get_attachment_post_meta( $section_image, '_wp_attachment_image_alt' );
 		$section_image = sprintf( '<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text );
 
-		return sprintf( '<div class="col-md-4 col-md-offset-0%1$s">%2$s</div>', $class, $section_image );
+		return sprintf( '<div class="col-md-4 px-3%1$s">%2$s</div>', $class, $section_image );
 
 	}
 }

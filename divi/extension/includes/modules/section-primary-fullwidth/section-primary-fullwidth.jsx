@@ -67,7 +67,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends CAWEeb_Component {
     var image_pos = this.props.left_right_button;
 
     var classes = "on" === slide_image_button ? ' animate-fadeInLeft' : '';
-    classes += "on" === image_pos ? ' pull-right pr-0 pe-0' : ' pull-left pl-0 ps-0';
+    classes += "on" === image_pos ? ' pull-right pe-0' : ' pull-left ps-0';
 
 	// caweb_get_attachment_post_meta need to figure away to run WP Functions
 	// alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
@@ -75,7 +75,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends CAWEeb_Component {
 	var section_image = <img src={this.props.section_image} class="img-responsive w-100" alt=""/>;
 
     return (
-		<div className={"col-md-4 col-md-offset-0" + classes}>
+		<div className={"col-md-4 px-3" + classes}>
 			{section_image}
 		</div>
 	);
@@ -98,7 +98,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends CAWEeb_Component {
 				<Fragment>
 					<div id={moduleID} className={classList} style={section_background_color}>
 						{this.renderFeatureImage()}
-						<div class="col-md-15" >
+						<div class="col-md-12 px-3" >
 							{header}
 							{this.props.content()}
 							{display_button}

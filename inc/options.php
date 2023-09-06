@@ -315,7 +315,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 	/* Remove unneeded values */
 	unset( $values['tab_selected'], $values['caweb_options_submit'] );
 
-	// iterate over site options. * if site option isn't set, set it to default value */
+	// iterate over site options.
 	foreach ( $site_options as $option_name => $default_value ) {
 		// if site option isn't set, set it to default value.
 		if ( ! array_key_exists( $option_name, $values ) ) {
@@ -450,50 +450,50 @@ function caweb_save_multi_ga_options( $values = array() ) {
  */
 function caweb_get_site_options( $group = '' ) {
 	$caweb_general_options = array(
-		'ca_fav_ico' => caweb_default_favicon_url(),
-		'ca_site_version' => CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION,
-		'ca_default_navigation_menu' => 'singlelevel',
-		'ca_site_color_scheme' => 'oceanside',
-		'ca_frontpage_search_enabled' => false,
-		'ca_sticky_navigation' => false,
-		'ca_home_nav_link' => true,
+		'ca_fav_ico'                    => caweb_default_favicon_url(),
+		'ca_site_version'               => CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION,
+		'ca_default_navigation_menu'    => 'singlelevel',
+		'ca_site_color_scheme'          => 'oceanside',
+		'ca_frontpage_search_enabled'   => false,
+		'ca_sticky_navigation'          => false,
+		'ca_home_nav_link'              => true,
 		'ca_default_post_title_display' => false,
-		'ca_default_post_date_display' => false,
-		'ca_x_ua_compatibility' => false,
+		'ca_default_post_date_display'  => false,
+		'ca_x_ua_compatibility'         => false,
 	);
 
 	$caweb_utility_header_options = array(
-		'ca_contact_us_link' => '',
-		'ca_geo_locator_enabled' => false,
-		'ca_utility_home_icon' => true,
-		'ca_utility_link_1' => '',
-		'ca_utility_link_1_name' => '',
+		'ca_contact_us_link'           => '',
+		'ca_geo_locator_enabled'       => false,
+		'ca_utility_home_icon'         => true,
+		'ca_utility_link_1'            => '',
+		'ca_utility_link_1_name'       => '',
 		'ca_utility_link_1_new_window' => true,
-		'ca_utility_link_1_enable' => false,
-		'ca_utility_link_2' => '',
-		'ca_utility_link_2_name' => '',
+		'ca_utility_link_1_enable'     => false,
+		'ca_utility_link_2'            => '',
+		'ca_utility_link_2_name'       => '',
 		'ca_utility_link_2_new_window' => true,
-		'ca_utility_link_2_enable' => false,
-		'ca_utility_link_3' => '',
-		'ca_utility_link_3_name' => '',
+		'ca_utility_link_2_enable'     => false,
+		'ca_utility_link_3'            => '',
+		'ca_utility_link_3_name'       => '',
 		'ca_utility_link_3_new_window' => true,
-		'ca_utility_link_3_enable' => false,
+		'ca_utility_link_3_enable'     => false,
 	);
 
-	$caweb_page_header_options = array( 
-		'header_ca_branding' => '', 
-		'header_ca_branding_alt_text' => '' 
+	$caweb_page_header_options = array(
+		'header_ca_branding'          => '',
+		'header_ca_branding_alt_text' => '',
 	);
 
 	$caweb_google_options = array(
-		'ca_google_search_id' => '',
-		'ca_google_analytic_id' => '',
-		'ca_google_analytic4_id' => '',
-		'ca_google_tag_manager_id' => '',
-		'ca_google_meta_id' => '',
-		'ca_google_trans_enabled' => false,
-		'ca_google_trans_page' => '',
-		'ca_google_trans_icon' => 'globe',
+		'ca_google_search_id'             => '',
+		'ca_google_analytic_id'           => '',
+		'ca_google_analytic4_id'          => '',
+		'ca_google_tag_manager_id'        => '',
+		'ca_google_meta_id'               => '',
+		'ca_google_trans_enabled'         => false,
+		'ca_google_trans_page'            => '',
+		'ca_google_trans_icon'            => 'globe',
 		'ca_google_trans_page_new_window' => true,
 	);
 
@@ -501,39 +501,40 @@ function caweb_get_site_options( $group = '' ) {
 
 	$caweb_social_options = array();
 
-	foreach ( $caweb_social_links as $social => $option) {
-		$caweb_social_options[$option] = '';
-		$caweb_social_options["${option}_header"] = true;
-		$caweb_social_options["${option}_footer"] = true;
+	foreach ( $caweb_social_links as $social => $option ) {
+		$caweb_social_options[ $option ]            = '';
+		$caweb_social_options[ "${option}_header" ] = true;
+		$caweb_social_options[ "${option}_footer" ] = true;
 
 		if ( 'ca_social_email' !== $option ) {
-			$caweb_social_options["${option}_new_window"] = true;
-			$caweb_social_options["${option}_hover_text"] =  "Share via $social";
+			$caweb_social_options[ "${option}_new_window" ] = true;
+			$caweb_social_options[ "${option}_hover_text" ] = "Share via $social";
 		}
 	}
 
-	$caweb_special_options = array( 
-		'caweb_username' => 'CA-CODE-Works', 
-		'caweb_password' => '', 
-		'caweb_multi_ga' => '',
-		'caweb_multi_ga4' => '' 
+	$caweb_special_options = array(
+		'caweb_username'  => 'CA-CODE-Works',
+		'caweb_password'  => '',
+		'caweb_multi_ga'  => '',
+		'caweb_multi_ga4' => '',
 	);
 
-	$caweb_alert_options = array( 
-		'caweb_alerts' => array() 
+	$caweb_alert_options = array(
+		'caweb_alerts' => array(),
 	);
 
-	$caweb_custom_options = array( 
-		'caweb_external_css' => array(), 
-		'caweb_external_js' => array() 
+	$caweb_custom_options = array(
+		'caweb_external_css' => array(),
+		'caweb_external_js'  => array(),
 	);
 
-	$caweb_addtl_options = array( 
-		'caweb_live_drafts' => false, 
-		'caweb_debug_mode' => false, 
-		'caweb_body_classes' => '', 
-		'caweb_page_container_classes' => '', 
-		'caweb_main_content_classes' => ''
+	$caweb_addtl_options = array(
+		'caweb_live_drafts'             => false,
+		'caweb_debug_mode'              => false,
+		'caweb_body_classes'            => '',
+		'caweb_page_container_classes'  => '',
+		'caweb_main_content_classes'    => '',
+		'caweb_statewide_alert_enabled' => false,
 	);
 
 	switch ( $group ) {
@@ -686,8 +687,8 @@ function caweb_favicon_name() {
  * Ensures the CAWeb Theme colorscheme is supported.
  *
  * @link https://developer.wordpress.org/reference/hooks/option_option/
- * 
- * @param  mixed $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ *
+ * @param  mixed  $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
  * @param  string $option Option name.
  * @return mixed
  */
@@ -704,18 +705,18 @@ function caweb_ca_site_color_scheme( $value, $option ) {
  * Filters the value of the CAWeb Fav Icon.
  *
  * @link https://developer.wordpress.org/reference/hooks/option_option/
- * 
- * @param  mixed $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ *
+ * @param  mixed  $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
  * @param  string $option Option name.
  * @return mixed
  */
-function caweb_pre_option_ca_fav_ico($value, $option){
+function caweb_pre_option_ca_fav_ico( $value, $option ) {
 	$old_file_path = 'CAWeb/images/system/favicon.ico';
 
 	// As of 1.10.0 favicon file was moved.
 	$new_file_path = 'CAWeb/src/images/system/favicon.ico';
 
-  	$ico = str_ends_with( $value, $old_file_path ) ? str_replace($old_file_path, $new_file_path, $value ): $value;
+	$ico = str_ends_with( $value, $old_file_path ) ? str_replace( $old_file_path, $new_file_path, $value ) : $value;
 
-  	return $ico;
+	return $ico;
 }
