@@ -15,3 +15,13 @@ main {
 footer{
     clear: both;
 }
+
+@media screen and (max-width: 768px) {
+    main {
+        width: 100%;
+    }
+    #caweb-sidebar {
+        width: 100%;
+        float: none;
+    }
+}

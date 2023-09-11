@@ -592,6 +592,15 @@ body.sidebar-displayed #caweb-sidebar #sidebar {
 body.sidebar-displayed footer {
   clear: both;
 }
+@media screen and (max-width: 768px) {
+  body.sidebar-displayed main {
+    width: 100%;
+  }
+  body.sidebar-displayed #caweb-sidebar {
+    width: 100%;
+    float: none;
+  }
+}
 
 /* Print Formatting */
 @media print {

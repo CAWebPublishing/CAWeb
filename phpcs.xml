@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Theme Coding Standards">
-	<!-- See https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
-	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
-	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki -->
-	<!-- See https://github.com/wimg/PHPCompatibility -->
+	<!-- See https://github.com/WordPress/WordPress-Coding-Standards -->
+	<!-- See https://github.com/WordPress/WordPress-Coding-Standards/wiki -->
+	<!-- See https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
+
+	<!-- See https://github.com/PHPCompatibility/PHPCompatibility -->
+	<!-- See https://github.com/PHPCompatibility/PHPCompatibilityWP -->
 
 	<!-- Set a description for this ruleset. -->
 	<description>A custom set of code standard rules to check for WordPress themes.</description>
 
+	<config name="installed_paths" value="vendor/phpcsstandards/phpcsextra,vendor/phpcsstandards/phpcsutils,vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie,vendor/phpcompatibility/phpcompatibility-wp" />
+	
+	<config name="ignore_errors_on_exit" value="1" />
+	<config name="ignore_warnings_on_exit" value="1" />
 
-	<!--
-	#############################################################################
-	COMMAND LINE ARGUMENTS
-	https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
-	#############################################################################
-	-->
-
-    <!-- Use colors in output -->
-	<arg name="colors"/>
+	<!-- Only check the PHP, CSS and SCSS files. JS files are checked separately with JSCS and JSHint. -->
+	<!--arg name="extensions" value="php,css,scss/css"/-->
+	<arg name="extensions" value="php"/>
 
 	<!-- Strip the filepaths down to the relevant bit. -->
 	<arg name="basepath" value="./"/>
@@ -25,54 +25,58 @@
 	<!-- Check up to 8 files simultanously. -->
 	<arg name="parallel" value="8"/>
 
-	<!-- Only check the PHP, CSS and SCSS files. JS files are checked separately with JSCS and JSHint. -->
-	<!--arg name="extensions" value="php,css,scss/css"/-->
-	<arg name="extensions" value="php"/>
-
 	<!-- php.ini Settings -->
     <ini name="memory_limit" value="1024M" />
-
-	<!--
-	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
-	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
-	-->
-	<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
 
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>.</file>
 
-    <exclude-pattern>fonts/*</exclude-pattern>
-    <exclude-pattern>images/*</exclude-pattern>
-    <exclude-pattern>js/*</exclude-pattern>
-    <exclude-pattern>node_modules/*</exclude-pattern>
-    <exclude-pattern>vendor/*</exclude-pattern>
-
-	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie,vendor/phpcompatibility/phpcompatibility-wp" />
-
+	<exclude-pattern>*/.circleci/*</exclude-pattern>
+    <exclude-pattern>*/images/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+	
+	<!-- Set the minimum supported WP version. This is used by several sniffs.
+		 The minimum version set here should be in line with the minimum WP version
+		 as set in the "Requires at least" tag in the readme.txt file. -->
+	<config name="minimum_wp_version" value="6.2"/>
+	<config name="testVersion" value="8.2-"/>
+    
 	<!--
 	#############################################################################
 	USE THE WordPress RULESET
 	#############################################################################
 	-->
-
-	<rule ref="WordPress"/>
-
-	<!-- Set the minimum supported WP version. This is used by several sniffs.
-		 The minimum version set here should be in line with the minimum WP version
-		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="6.2"/>
+	<rule ref="WordPress">
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	</rule>
 
 	<!--
 	#############################################################################
 	SNIFF SPECIFIC CONFIGURATION
 	#############################################################################
 	-->
+	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="caweb_"/>
+				<element value="et_"/>
+				<element value="wp_"/>
+			</property>
+		</properties>
+	</rule>
 
-	<!-- Verify that the text_domain is set to the desired text-domain.
-		 Multiple valid text domains can be provided as a comma-delimited list. -->
+	<!-- Verify that the text_domain is set to the desired text-domain. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="CAWeb,caweb-divi-modules,Divi,et-core,et_builder"/>
+			<property name="text_domain" type="array">
+				<element value="caweb-divi-modules"/>
+				<element value="CAWeb"/>
+				<element value="Divi"/>
+				<element value="et_builder"/>
+				<element value="et-core"/>
+			</property>
 		</properties>
 	</rule>
 
@@ -81,28 +85,29 @@
 	<rule ref="WordPress.Files.FileName">
 		<properties>
 			<property name="is_theme" value="true"/>
-			<property name="custom_test_class_whitelist" type="array">
+			<property name="custom_test_classes" type="array">
 				<element value="ET_Builder_CAWeb_Module"/>
 			</property>
 		</properties>
 	</rule>
 
-	<!-- 
-		Check for WordPress deprecations 
-		https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#minimum-wp-version-to-check-for-usage-of-deprecated-functions-classes-and-function-parameters
+	<!--
+		Excludes obfuscation group of discouraged functions.
+		functions: base64_decode, base64_encode, convert_uudecode, convert_uuencode, str_rot13
+		https://github.com/WordPress/WordPress-Coding-Standards/blob/3.0.0/WordPress/Sniffs/PHP/DiscouragedPHPFunctionsSniff.php#L87
 	-->
-	<rule ref="WordPress.WP.DeprecatedFunctions">
-	</rule>
-
-	<rule ref="WordPress.WP.DeprecatedClasses">
-	</rule>
-
-	<rule ref="WordPress.WP.DeprecatedParameters">
-	</rule>
-
-	<rule ref="WordPress.WP.DeprecatedParameterValues">
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
+		<properties>
+			<property name="exclude" type="array">
+				<element value="obfuscation"/>
+			</property>
+		</properties>
 	</rule>
 	
+	<!-- 
+		Verifies that all array assignment operators in a multi-line, multi-statement array are aligned.
+		https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#wordpressarraysmultiplestatementalignment-allow-for-new-lines
+	-->
 	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
 		<properties>
 			<!-- No need to adjust alignment of large arrays when the item with the largest key is removed. -->
@@ -114,60 +119,28 @@
 		</properties>
 	</rule>
 
-	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<property name="prefixes" type="array" value="caweb_,et_,wp_" />
-		</properties>
-	</rule>
-
 	<!--
-		Exclude obfuscation group. 
-		functions affected:
-		'base64_decode', 'base64_encode', 'convert_uudecode',
-		'convert_uuencode', 'str_rot13'
+	#############################################################################
+	USE THE PHPCompatibilityWP RULESET
+	#############################################################################
 	-->
-	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
-		<properties>
-			<property name="exclude" type="array">
-				<element value="obfuscation"/>
-			</property>
-		</properties>
-	</rule>
+
+    <rule ref="PHPCompatibilityWP">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
 
 	<!--
 	#############################################################################
 	USE THE PHPCompatibility RULESET
 	#############################################################################
 	-->
-    <config name="testVersion" value="6.0-"/>
-    <rule ref="PHPCompatibilityWP">
-        <include-pattern>*\.php$</include-pattern>
-    </rule>
-
-    <config name="testVersion" value="8.0-"/>
-	<rule ref="PHPCompatibility">
-		<!-- Whitelist PHP native classes, interfaces, functions and constants which
-			 are back-filled by WP.
+    <rule ref="PHPCompatibility">
+        <!-- Whitelist PHP native classes, interfaces, functions and constants which are back-filled by WP.
 
 			 Based on:
 			 * /wp-includes/compat.php
 			 * /wp-includes/random_compat/random.php
 		-->
         <include-pattern>*\.php$</include-pattern>
-		<exclude name="PHPCompatibility.PHP.NewClasses.errorFound"/>
-		<exclude name="PHPCompatibility.PHP.NewClasses.typeerrorFound"/>
-
-		<exclude name="PHPCompatibility.PHP.NewConstants.json_pretty_printFound"/>
-		<exclude name="PHPCompatibility.PHP.NewConstants.php_version_idFound"/>
-
-		<exclude name="PHPCompatibility.PHP.NewFunctions.hash_equalsFound"/>
-		<exclude name="PHPCompatibility.PHP.NewFunctions.json_last_error_msgFound"/>
-		<exclude name="PHPCompatibility.PHP.NewFunctions.random_intFound"/>
-		<exclude name="PHPCompatibility.PHP.NewFunctions.random_bytesFound"/>
-		<exclude name="PHPCompatibility.PHP.NewFunctions.array_replace_recursiveFound"/>
-
-		<exclude name="PHPCompatibility.PHP.NewInterfaces.jsonserializableFound"/>
-	</rule>
+    </rule>
 </ruleset>

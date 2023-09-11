@@ -2,22 +2,27 @@
     "name": "cawebpublishing/caweb",
     "description": "Packages to help enforce WordPress Coding Standards",
     "scripts": {
-        "post-install-cmd": [
-            "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility "
+        "test": [
+            "phpcs -v ."
+        ],
+        "testa": [
+            "echo 'hi'"
         ]
+
+    },
+    "scripts-descriptions": {
+        "test": "Enforces WordPress PHP Coding Standards."
     },
     "require": {
-        "caweb/phpdoc": "dev-master",
-        "friendsofphp/php-cs-fixer": "^3.23",
+        "wp-coding-standards/wpcs": "3.0",
+        "phpcompatibility/php-compatibility": "^9.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "wp-coding-standards/wpcs": "^2.3.0",
-        "roave/security-advisories": "dev-master",
-        "phpdocumentor/shim": "^3.4"
+        "caweb/phpdoc": "dev-master"
     },
     "config": {
         "allow-plugins": {
-            "phpdocumentor/shim": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpdocumentor/shim": true
         }
     }
 }
