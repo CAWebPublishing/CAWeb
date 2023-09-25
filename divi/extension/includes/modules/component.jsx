@@ -1,7 +1,7 @@
 // External Dependencies
 // eslint-disable-next-line
 import React, {Component, Fragment} from 'react';
-import NumberFormat from 'react-number-format';
+import {NumericFormat} from 'react-number-format';
 import Moment from 'react-moment';
 import moment from 'moment';
 
@@ -781,7 +781,7 @@ class CAWeb_Component extends Component {
 			checkmoney = typeof val === 'string' ? checkmoney.replace(',', '') : checkmoney;
 
 			return(
-				<NumberFormat
+				<NumericFormat
 					value={checkmoney}
 					format={pattern}
 					prefix="$"

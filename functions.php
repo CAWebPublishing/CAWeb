@@ -60,13 +60,9 @@ add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 */
 
 /*
-If CAWeb is a child theme of Divi, include CAWeb Custom Modules and Functions
+Add CAWeb/Divi Extension
 */
-if ( is_child_theme() && 'Divi' === wp_get_theme()->get( 'Template' ) ) {
-	if ( ! empty( CAWEB_EXTENSION ) && file_exists( sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION ) ) ) {
-		include sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
-	}
-}
+require_once sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
 
 /*
 -------------------------------------

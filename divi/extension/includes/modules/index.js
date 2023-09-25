@@ -15,8 +15,6 @@ import CAWeb_Module_Section_Footer from './section-footer/section-footer';
 import CAWeb_Module_Section_Footer_Group from './section-footer-group/section-footer-group'; 
 
 // Fullwidth Modules
-import CAWeb_Module_Fullwidth_Header_Slideshow_Banner from './header-slideshow-banner-fullwidth/header-slideshow-banner-fullwidth'; 
-import CAWeb_Module_Fullwidth_Header_Slideshow_Banner_Item from './header-slideshow-banner-item-fullwidth/header-slideshow-banner-item-fullwidth'; 
 import CAWeb_Module_Fullwidth_Panel from './panel-fullwidth/panel-fullwidth';
 import CAWeb_Module_Fullwidth_Section_Primary from './section-primary-fullwidth/section-primary-fullwidth';
 import CAWeb_Module_Fullwidth_Section_Carousel from './section-carousel-fullwidth/section-carousel-fullwidth';
@@ -42,8 +40,6 @@ export default [
   CAWeb_Module_Section_Footer_Group,
 
   // Fullwidth 
-  CAWeb_Module_Fullwidth_Header_Slideshow_Banner,
-  CAWeb_Module_Fullwidth_Header_Slideshow_Banner_Item,
   CAWeb_Module_Fullwidth_Panel, 
   CAWeb_Module_Fullwidth_Section_Primary,
   CAWeb_Module_Fullwidth_Section_Carousel,
