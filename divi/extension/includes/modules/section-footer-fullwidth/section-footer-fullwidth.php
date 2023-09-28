@@ -108,4 +108,3 @@ class CAWeb_Module_Fullwidth_Section_Footer extends ET_Builder_CAWeb_Module {
 	}
 }
 new CAWeb_Module_Fullwidth_Section_Footer();
-

@@ -37,4 +37,3 @@ function caweb_retrieve_attachment_post_meta() {
 	print wp_json_encode( $alts );
 	exit();
 }
-

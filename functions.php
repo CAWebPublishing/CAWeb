@@ -178,7 +178,6 @@ function caweb_setup_theme() {
 				);
 		}
 	}
-
 }
 
 /**
@@ -192,9 +191,12 @@ function caweb_setup_theme() {
  * @return void
  */
 function caweb_send_headers() {
-	header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
-	header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
-	header( 'X-Content-Type-Options: nosniff' );
+	// set headers if not already sent.
+	if ( ! headers_sent() ) {
+		header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+		header( "Content-Security-Policy: frame-ancestors 'self' *.ca.gov" );
+		header( 'X-Content-Type-Options: nosniff' );
+	}
 }
 
 /**
@@ -218,7 +220,6 @@ function caweb_init() {
 	if ( ! in_array( $pagenow, array( 'wp-login.php', 'customize.php' ), true ) ) {
 		add_thickbox();
 	}
-
 }
 
 /**
@@ -289,7 +290,6 @@ function caweb_wp_body_open() {
 	);
 
 	get_template_part( "parts/$caweb_version/header", null, $args );
-
 }
 
 /**
@@ -424,7 +424,7 @@ function caweb_wp_enqueue_scripts() {
 
 	// Enable Statewide Alerts.
 	if ( get_option( 'caweb_statewide_alert_enabled', false ) ) {
-		wp_enqueue_script( 'cagov-statewide-alerts', 'https://alert.cdt.ca.gov/alert.js', array(), null, false );
+		wp_enqueue_script( 'cagov-statewide-alerts', 'https://alert.cdt.ca.gov/alert.js', array(), '1.0.0', false );
 	}
 
 	$cwes     = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
@@ -574,7 +574,6 @@ function caweb_admin_init() {
 		$creds = request_filesystem_credentials( site_url() );
 		WP_Filesystem( $creds );
 	}
-
 }
 
 /**

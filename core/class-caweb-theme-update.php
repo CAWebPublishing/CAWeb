@@ -295,5 +295,3 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 	}
 }
 new CAWeb_Theme_Update( wp_get_theme() );
-
-

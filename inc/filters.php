@@ -131,7 +131,7 @@ function caweb_theme_page_templates( $templates ) {
 function caweb_script_loader_tag( $tag, $handle, $src ) {
 	/* Defer some scripts */
 	$js_scripts = array( 'cagov-statewide-alerts' );
-	
+
 	if ( in_array( $handle, $js_scripts, true ) ) {
 		$tag = str_replace( 'src', 'defer crossorigin="anonymous" src', $tag );
 	}
@@ -199,7 +199,7 @@ function caweb_allowed_redirect_hosts( $hosts ) {
 	// Add all sites to list of allowed hosts on multisite.
 	if ( is_multisite() ) {
 		$domains = array_map(
-			function( $s ) {
+			function ( $s ) {
 				return $s->domain;
 			},
 			get_sites( array( 'deleted' => 0 ) )
@@ -209,7 +209,7 @@ function caweb_allowed_redirect_hosts( $hosts ) {
 	}
 
 	return $hosts;
-};
+}
 
 
 /**
@@ -313,7 +313,6 @@ function caweb_allowed_html( $allowedposttags, $context ) {
 	add_filter( 'safe_style_css', 'caweb_safe_style_css' );
 
 	return $allowedposttags;
-
 }
 
 /**

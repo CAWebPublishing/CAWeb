@@ -181,9 +181,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles_Item extends ET_Builder_CAWeb_Module 
 			'content'      => $this->content,
 		);
 
-		$caweb_tile_count++;
+		++$caweb_tile_count;
 	}
 }
 new CAWeb_Module_Fullwidth_Service_Tiles_Item();
-
-

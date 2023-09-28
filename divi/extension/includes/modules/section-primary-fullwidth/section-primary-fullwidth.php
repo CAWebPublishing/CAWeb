@@ -299,8 +299,6 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 		$section_image = sprintf( '<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text );
 
 		return sprintf( '<div class="col-md-4 px-3%1$s">%2$s</div>', $class, $section_image );
-
 	}
 }
 new CAWeb_Module_Fullwidth_Section_Primary();
-

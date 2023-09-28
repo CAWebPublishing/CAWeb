@@ -97,22 +97,22 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @param  array|string $addr Address to format.
 	 * @param  mixed        $embed Whether to create a link or embedded iframe.
 	 * @param  mixed        $target The links target, default _blank.
-	 * @param  mixed        $class Class for the link.
+	 * @param  mixed        $classes Class for the link.
 	 * @return string
 	 */
-	public function caweb_get_google_map_place_link( $addr, $embed = false, $target = '_blank', $class = '' ) {
+	public function caweb_get_google_map_place_link( $addr, $embed = false, $target = '_blank', $classes = '' ) {
 
 		$addr = $this->caweb_get_address( $addr );
 
-		$class = is_array( $class ) ? implode( ' ', $class ) : $class;
-		$class = sprintf( ' class="%1$s"', $class );
+		$classes = is_array( $classes ) ? implode( ' ', $classes ) : $classes;
+		$classes = sprintf( ' class="%1$s"', $classes );
 
 		if ( $embed ) {
 			$map_url = sprintf( 'https://www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=%2$s', $addr, $this->caweb_google_maps_embed_api_key );
 
 			return sprintf( '<iframe title="IFrame for Address %1$s" src="%2$s"></iframe>', $addr, $map_url );
 		} else {
-			return sprintf( '<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $class );
+			return sprintf( '<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $classes );
 		}
 	}
 
@@ -390,7 +390,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 
 			if ( $excerpt_length < $word_count ) {
 				do {
-					$word_count--;
+					--$word_count;
 
 					if ( ! isset( $cleaned[ count( $cleaned ) - 1 ] ) ) {
 						break;
@@ -418,5 +418,3 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		return html_entity_decode( $x->saveHTML( $element ) );
 	}
 }
-
-

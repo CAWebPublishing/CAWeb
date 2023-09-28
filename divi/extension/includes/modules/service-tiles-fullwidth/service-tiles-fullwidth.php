@@ -192,12 +192,8 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 	 *
 	 * @return void
 	 */
-	function caweb_service_tiles_wp_enqueue_scripts() {
+	public function caweb_service_tiles_wp_enqueue_scripts() {
 		wp_enqueue_script( 'caweb-service-tiles-script', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', __DIR__ . '/' ) ) . '/service-tiles.js', array( 'jquery' ), CAWEB_VERSION, true );
-
 	}
-
 }
 new CAWeb_Module_Fullwidth_Service_Tiles();
-
-

@@ -57,7 +57,6 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 				),
 			),
 		);
-
 	}
 
 	/**
@@ -142,6 +141,5 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 
 		return $output;
 	}
-
 }
 new CAWeb_Module_Fullwidth_Section_Carousel();

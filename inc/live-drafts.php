@@ -70,7 +70,6 @@ function caweb_live_drafts_post_hooks( $add = true ) {
 		remove_action( 'save_post', 'caweb_live_drafts_save_post' );
 
 	}
-
 }
 
 /**
@@ -122,7 +121,6 @@ function caweb_live_drafts_publish_future_post( $post_id ) {
 
 	// Delete draft post, force delete since 2.9, no sending to trash.
 	wp_delete_post( $post_id, true );
-
 }
 
 /**
@@ -261,11 +259,11 @@ function caweb_live_drafts_admin_footer() {
  * CAWeb Live Drafts Duplicate Post
  *
  * @param  array $post_data Post data to duplicate from.
- * @param  array $default Default post data. post_status = draft.
+ * @param  array $default_post_data Default post data. post_status = draft.
  * @param  bool  $use_post_id Whether to use the $post_data Post ID or leave blank.
  * @return array
  */
-function caweb_live_drafts_duplicate_post( $post_data, $default = array( 'post_status' => 'draft' ), $use_post_id = true ) {
+function caweb_live_drafts_duplicate_post( $post_data, $default_post_data = array( 'post_status' => 'draft' ), $use_post_id = true ) {
 	$dup_post = array(
 		'menu_order'     => $post_data['menu_order'],
 		'comment_status' => ( empty( $post_data['comment_status'] ) || 'open' === $post_data['comment_status'] ? 'open' : 'closed' ),
@@ -285,7 +283,7 @@ function caweb_live_drafts_duplicate_post( $post_data, $default = array( 'post_s
 		$dup_post['ID'] = $post_data['post_ID'];
 	}
 
-	return array_merge( $dup_post, $default );
+	return array_merge( $dup_post, $default_post_data );
 }
 
 /**
@@ -412,7 +410,6 @@ function caweb_live_drafts_pre_post_update( $post_id, $post ) {
 		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $new_id ) );
 		exit();
 	}
-
 }
 
 /**
@@ -504,7 +501,6 @@ function caweb_live_drafts_save_post( $post_id, $post ) {
 		wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $_pc_live_id ) );
 		exit();
 	}
-
 }
 
 /**

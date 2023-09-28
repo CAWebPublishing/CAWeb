@@ -39,8 +39,9 @@ define( 'CAWEB_EXT_DIR', str_replace( '\\', '/', __DIR__ . '/' ) );
 define( 'CAWEB_EXT_URL', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', CAWEB_EXT_DIR ) ) );
 
 add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
-//add_filter( 'et_builder_outer_content_class', 'caweb_et_builder_outer_content_class' );
-//add_filter( 'et_builder_outer_content_id', 'caweb_et_builder_outer_content_id' );
+
+// add_filter( 'et_builder_outer_content_class', 'caweb_et_builder_outer_content_class' );.
+// add_filter( 'et_builder_outer_content_id', 'caweb_et_builder_outer_content_id' );.
 
 if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 	/**
