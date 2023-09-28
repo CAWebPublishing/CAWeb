@@ -17,7 +17,7 @@
         "wp-coding-standards/wpcs": "3.0",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "caweb/phpdoc": "dev-master"
+        "caweb/phpdoc": "1.0.0"
     },
     "config": {
         "allow-plugins": {

@@ -74,7 +74,7 @@
       Multiple valid prefixes can be provided as a comma-delimited list. -->
     <setting name="wp_prefixes" value="caweb_,et_,wp_" />
       
-    <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
+    <template name="vendor/caweb/phpdoc/" location="." />
     <template name="." location="." />
 
 </phpdocumentor>

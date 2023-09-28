@@ -57,7 +57,6 @@ function caweb_icon_menu( $atts ) {
 	}
 
 	return sprintf( '<div class="caweb-icon-menu-group">%1$s<ul class="caweb-icon-menu list-group list-group-horizontal flex-wrap">%2$s%3$s</ul></div>', $header, $input, $icon_list );
-
 }
 
 /**
@@ -196,4 +195,3 @@ function caweb_slide_func( $atts, $content = '' ) {
 
 	return sprintf( '<div%1$s%2$s%3$s>%4$s</div>', $id, $class, $style, $content );
 }
-

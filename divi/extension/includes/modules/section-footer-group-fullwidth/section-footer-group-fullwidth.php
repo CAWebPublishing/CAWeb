@@ -321,4 +321,3 @@ class CAWeb_Module_FullWidth_Footer_Group extends ET_Builder_CAWeb_Module {
 	}
 }
 new CAWeb_Module_FullWidth_Footer_Group();
-

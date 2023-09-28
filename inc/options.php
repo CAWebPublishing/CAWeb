@@ -105,7 +105,6 @@ function caweb_admin_menu() {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 	}
-
 }
 
 /**
@@ -612,7 +611,6 @@ function caweb_get_social_media_links() {
 	);
 
 	return apply_filters( 'caweb_social_media_links', $caweb_social_options );
-
 }
 
 /**

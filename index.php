@@ -24,7 +24,7 @@ get_header();
 if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post();
-		$caweb_post_format = et_pb_post_format();
+		$caweb_post_format = function_exists( 'et_pb_post_format' ) ? et_pb_post_format() : get_post_format();
 
 		?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

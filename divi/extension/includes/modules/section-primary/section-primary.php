@@ -299,6 +299,5 @@ class CAWeb_Module_Section_Primary extends ET_Builder_CAWeb_Module {
 
 		return sprintf( '<div class="col-md-4 px-3%1$s">%2$s</div>', $class, $section_image );
 	}
-
 }
 new CAWeb_Module_Section_Primary();

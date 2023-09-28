@@ -1,0 +1,4 @@
+.service-tile:focus .teaser .title,
+.service-tile .teaser .title:hover{
+    color: #FDB81E !important;
+}

@@ -77,7 +77,6 @@ function caweb_icon_menu_func() {
 		'post'
 	);
 	wp_die(); // this is required to terminate immediately and return a proper response.
-
 }
 
 /**
@@ -106,7 +105,7 @@ function caweb_doc_create_xml() {
 	);
 
 	$results = array_map(
-		function( $a ) {
+		function ( $a ) {
 			return $a->guid;
 		},
 		$attachments

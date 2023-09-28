@@ -102,7 +102,6 @@ function caweb_save_post( $post_id, $post ) {
 
 	$option_title_display = isset( $_POST['ca_custom_post_title_display'] ) ? sanitize_text_field( wp_unslash( $_POST['ca_custom_post_title_display'] ) ) : '';
 	update_post_meta( $post->ID, 'ca_custom_post_title_display', $option_title_display );
-
 }
 
 ?>

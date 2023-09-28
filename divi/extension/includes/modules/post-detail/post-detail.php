@@ -1473,7 +1473,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 				return sprintf( '<article id="general_post_detail"%1$s></article>', $class );
 		}
-
 	}
 
 	/**
@@ -1594,7 +1593,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$course_map,
 			$this->renderFooter( $post_id )
 		);
-
 	}
 
 	/**
@@ -1668,7 +1666,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$reg,
 			$this->renderFooter( $post_id )
 		);
-
 	}
 
 	/**
@@ -1732,7 +1729,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$this->content,
 			$this->renderFooter( $post_id )
 		);
-
 	}
 
 	/**
@@ -1866,7 +1862,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$this->content,
 			$this->renderFooter( $post_id )
 		);
-
 	}
 
 	/**
@@ -1898,7 +1893,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		}
 
 		return sprintf( '%1$s%2$s%3$s%4$s', $date_city, $image, $this->content, $this->renderFooter( $post_id ) );
-
 	}
 
 	/**
@@ -1934,7 +1928,6 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		) : '';
 
 		return sprintf( '%1$s%2$s%3$s%4$s', ! empty( $title ) ? sprintf( '<h1>%1$s</h1>', $title ) : '', $image, $this->content, $this->renderFooter( $post_id ) );
-
 	}
 
 	/**

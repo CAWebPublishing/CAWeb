@@ -6,47 +6,6 @@
     <description>phpDocumentor Template Addon</description>
     <version>1.0.0</version>
     <transformations>
-        <!-- Change Branding Logo -->
-        <transformation writer="FileIo" query="copy" source="src/images/system/caweb-logo.png" artifact="imgs/branding.png" />
-
-        <!-- Override cagov.core.css and colorsheme-<color>.css -->
-        <transformation writer="FileIo" query="copy" source="css/caweb-5.5-santa barbara.css" artifact="css/cagov.core.css" />
-        <transformation writer="FileIo" query="copy" source="style.css" artifact="css/colorscheme-santabarbara.css" />
-
-        <!-- Override cagov.core.js -->
-        <transformation writer="FileIo" query="copy" source="js/caweb-5.5.js" artifact="js/cagov.core.js" />
-
-        <!-- Override Fonts -->
-        <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
-
-        <!-- Theme Specific Pages -->
-        <!-- How To Pages -->
-        <transformation writer="twig" source="enforce-wpcs.html.twig" artifact="/how-to/enforce-wpcs.html" />
-        <transformation writer="twig" source="gutenberg.html.twig" artifact="/how-to/build-blocks.html" />
-        <transformation writer="twig" source="gulp.html.twig" artifact="/how-to/gulp.html" />
-
-        <!-- Examples -->
-        <transformation writer="twig" source="examples.html.twig" artifact="examples/index.html" />
-
-        <!-- Icon Font Library -->
-        <transformation writer="twig" source="icons.html.twig" artifact="examples/icon-library.html" />
-
-        <!-- Colorscheme Examples -->
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/eureka.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/mono.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/oceanside.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/orange-county.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/paso-robles.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sacramento.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-barbara.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-cruz.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/shasta.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sierra.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/trinity.html" />
-
-        <!-- Modules -->
-        <transformation writer="twig" query="indexes.classes" source="modules.html.twig" artifact="examples/modules.html" />
-
+    
     </transformations>
 </template>

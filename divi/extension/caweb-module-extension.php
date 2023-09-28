@@ -38,6 +38,11 @@
 define( 'CAWEB_EXT_DIR', str_replace( '\\', '/', __DIR__ . '/' ) );
 define( 'CAWEB_EXT_URL', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', CAWEB_EXT_DIR ) ) );
 
+add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
+
+// add_filter( 'et_builder_outer_content_class', 'caweb_et_builder_outer_content_class' );.
+// add_filter( 'et_builder_outer_content_id', 'caweb_et_builder_outer_content_id' );.
+
 if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 	/**
 	 * Creates the CAWeb Module extension's main class instance.
@@ -46,49 +51,68 @@ if ( ! function_exists( 'caweb_initialize_extension' ) ) :
 	 * @since 1.0.0
 	 */
 	function caweb_initialize_extension() {
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-caweb-module-extension.php';
+		if ( class_exists( 'DiviExtension' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . 'includes/class-caweb-module-extension.php';
+		}
 	}
 	add_action( 'divi_extensions_init', 'caweb_initialize_extension' );
 
-
-	/**
-	 * Module Shortcode Output Fix
-	 *
-	 * Fixes various Divi Module Outputs
-	 *
-	 * @wp_filter add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
-	 * @param  string             $output Divi Module shortcode output.
-	 * @param  string             $render_slug Divi Module render_slug.
-	 * @param  ET_Builder_Element $module The Divi Builder Element Object.
-	 * @return string
-	 */
-	function caweb_module_shortcode_output_fix( $output, $render_slug, $module ) {
-		$module = (array) $module;
-
-		switch ( $render_slug ) {
-			// Fix Divi Image Output.
-			case 'et_pb_image':
-			case 'et_pb_fullwidth_image':
-				$src   = $module['props']['src'];
-				$alt   = '';
-				$title = '';
-
-				// if no alt assigned get the alt text from the Media Library.
-				if ( preg_match( '/alt=""/', $output ) && ! empty( $src ) ) {
-					$alt    = caweb_get_attachment_post_meta( $src, '_wp_attachment_image_alt' );
-					$output = preg_replace( '/alt=""/', sprintf( 'alt="%1$s"', $alt ), $output );
-				}
-
-				// if there is an anchor tag present.
-				if ( preg_match( '/<a href/', $output ) && ( ! empty( $alt ) || ! empty( $title ) ) ) {
-					$anchor = ! empty( $alt ) ? $alt : $title;
-					$output = preg_replace( '/<a href/', sprintf( '<a title="%1$s" href', $anchor ), $output );
-				}
-
-				break;
-		}
-
-		return $output;
-	}
-	add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
 endif;
+
+/**
+ * Module Shortcode Output Fix
+ *
+ * Fixes various Divi Module Outputs
+ *
+ * @wp_filter add_filter( 'et_module_shortcode_output', 'caweb_module_shortcode_output_fix', 10, 3 );
+ * @param  string             $output Divi Module shortcode output.
+ * @param  string             $render_slug Divi Module render_slug.
+ * @param  ET_Builder_Element $module The Divi Builder Element Object.
+ * @return string
+ */
+function caweb_module_shortcode_output_fix( $output, $render_slug, $module ) {
+	$module = (array) $module;
+
+	switch ( $render_slug ) {
+		// Fix Divi Image Output.
+		case 'et_pb_image':
+		case 'et_pb_fullwidth_image':
+			$src   = $module['props']['src'];
+			$alt   = '';
+			$title = '';
+
+			// if no alt assigned get the alt text from the Media Library.
+			if ( preg_match( '/alt=""/', $output ) && ! empty( $src ) ) {
+				$alt    = caweb_get_attachment_post_meta( $src, '_wp_attachment_image_alt' );
+				$output = preg_replace( '/alt=""/', sprintf( 'alt="%1$s"', $alt ), $output );
+			}
+
+			// if there is an anchor tag present.
+			if ( preg_match( '/<a href/', $output ) && ( ! empty( $alt ) || ! empty( $title ) ) ) {
+				$anchor = ! empty( $alt ) ? $alt : $title;
+				$output = preg_replace( '/<a href/', sprintf( '<a title="%1$s" href', $anchor ), $output );
+			}
+
+			break;
+	}
+
+	return $output;
+}
+
+/**
+ * Sets the class for the opening wrappers for builder-powered content.
+ *
+ * @return array
+ */
+function caweb_et_builder_outer_content_class() {
+	return array();
+}
+
+/**
+ * Sets the id for the opening wrappers for builder-powered content.
+ *
+ * @return sttring
+ */
+function caweb_et_builder_outer_content_id() {
+	return '';
+}

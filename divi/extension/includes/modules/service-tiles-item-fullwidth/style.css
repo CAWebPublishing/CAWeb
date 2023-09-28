@@ -1,0 +1,12 @@
+.service-tile-full.is-open .service-tile-panel{
+    position: relative !important;
+}
+.service-tile-panel{
+    position: absolute !important;
+}
+.service-tile-panel .section{
+    background:  whitesmoke !important;
+}
+.service-tile-panel .card{
+    border: 1px solid #ddd !important;
+}
