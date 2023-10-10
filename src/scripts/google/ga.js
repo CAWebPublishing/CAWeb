@@ -7,16 +7,16 @@ jQuery(document).ready(function($) {
 	gtag('js', new Date());
 
 	//Statewide UA property
-	gtag('config', 'UA-3419582-2', {cookie_flags:'samesite=lax;domain=.'+document.domain});
+	gtag('config', 'UA-3419582-2', {cookie_flags:'samesite=lax;domain='+document.domain});
 
 	// CAWeb Multisite analytics
 	if(undefined !== args.caweb_multi_ga){
-		gtag('config', args.caweb_multi_ga, {cookie_flags:'samesite=lax;domain=.'+document.domain});
+		gtag('config', args.caweb_multi_ga, {cookie_flags:'samesite=lax;domain='+document.domain});
 	}
 	
 	// Agency UA ID
 	if( undefined !== args.ca_google_analytic_id){
-		gtag('config', args.ca_google_analytic_id, {cookie_flags:'samesite=lax;domain=.'+document.domain});
+		gtag('config', args.ca_google_analytic_id, {cookie_flags:'samesite=lax;domain='+document.domain});
 	}
 
 	var getOutboundLink = function(url) {
