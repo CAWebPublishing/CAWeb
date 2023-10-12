@@ -1,0 +1,45 @@
+select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.et_font_icon li[class^="ca-gov-icon-"]:before,
+.et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'CaGov' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.et_font_icon li{
+  font-size: 17px;
+}
+
+.et_font_icon li:before, .et_pb_inline_icon:before,
+body #page-container .et_pb_section a.et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+.et-pb-icon,  .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after{
+    font-family: 'CaGov', 'ETModules' !important;
+		content: attr(data-icon);
+}
+
+/* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+li[class^="et_pb_ca"]::before, 
+li[class^="et_pb_profile_banner"]::before,
+li[class^="et_fb_ca"]::before,
+li[class^="et_fb_profile_banner"]::before{
+		font-family: 'CaGov' !important;
+		content: '\c90b' !important;
+}

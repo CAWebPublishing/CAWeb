@@ -606,7 +606,7 @@ function caweb_get_social_media_links() {
 		'Pinterest'       => 'ca_social_pinterest',
 		'RSS'             => 'ca_social_rss',
 		'Snapchat'        => 'ca_social_snapchat',
-		'Twitter'         => 'ca_social_twitter',
+		'X'         => 'ca_social_twitter',
 		'YouTube'         => 'ca_social_youtube',
 	);
 

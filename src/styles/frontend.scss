@@ -85,7 +85,8 @@ body{
 
 // Add CAWeb font sheet 
 // This is a combination of the State Template and Divi icons.
-@import 'font-only';
+@import 'font-only.css';
+@import 'divi-icon-override.css';
 
 // @todo this needs to be verified to see if it's still needed
 // Corrects Logo when navigation is compacted, in mobile view
