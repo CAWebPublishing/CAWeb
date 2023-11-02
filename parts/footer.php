@@ -70,7 +70,7 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 			<div class="d-flex">
 				<p>Copyright <span aria-hidden="true">&copy;</span> <script>document.write(new Date().getFullYear())</script> State of California</p>
 				<?php if ( $caweb_plugin_active ) : ?>
-					<span>Powered by: CAWeb Publishing Service</span>
+					<span class="ms-auto">Powered by: CAWeb Publishing Service</span>
 				<?php endif; ?>
 				</div>
 		</div>

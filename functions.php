@@ -428,7 +428,7 @@ function caweb_wp_enqueue_scripts() {
 
 	// Enable Statewide Alerts.
 	if ( get_option( 'caweb_statewide_alert_enabled', false ) ) {
-		wp_enqueue_script( 'cagov-statewide-alerts', 'https://alert.cdt.ca.gov/alert.js', array(), CAWEB_VERSION, false );
+		wp_enqueue_script( 'cagov-statewide-alerts', 'https://alert.cdt.ca.gov/alert.js', array(), null, false );
 	}
 
 	$cwes     = wp_create_nonce( 'caweb_wp_enqueue_scripts' );
