@@ -1,4 +1,5 @@
 /**
+ * WebPack Configuration for CAWeb Theme
  * 
  * @link https://webpack.js.org/configuration/
  */
