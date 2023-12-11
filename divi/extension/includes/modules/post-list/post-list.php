@@ -415,7 +415,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'news-list':
 					// if post contains a CAWeb News Post Handler.
 				if ( 'news' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createNews( $p_handler, $post_info, $featured_image );
 				}
 
@@ -425,7 +425,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'profile-list':
 				// if post contains a CAWeb Profile Post Handler.
 				if ( 'profile' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createProfile( $p_handler, $post_info, $featured_image );
 				}
 
@@ -434,7 +434,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'jobs-list':
 					// if post contains a CAWeb Job Post Handler.
 				if ( 'jobs' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createJob( $p_handler, $post_info );
 				}
 
@@ -444,7 +444,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 				// if post contains a CAWeb Event Post Handler.
 
 				if ( 'event' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createEvent( $p_handler, $post_info, $featured_image );
 				}
 
@@ -453,7 +453,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'course-list':
 				// if post contains a CAWeb Course Post Handler.
 				if ( 'course' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createCourse( $p_handler, $post_info, $featured_image );
 				}
 
@@ -462,7 +462,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'exams-list':
 				// if post contains a CAWeb Course Post Handler.
 				if ( 'exam' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createExam( $p_handler, $post_info );
 				}
 
@@ -472,7 +472,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 			case 'faqs-list':
 				// if post contains a CAWeb FAQ Post Handler.
 				if ( 'faqs' === $layout ) {
-					$post_count--;
+					--$post_count;
 					return $this->createFAQ( $p_handler, $faq_style, $post_count, $post_info );
 				}
 
@@ -483,7 +483,7 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 					// if post contains a CAWeb News Post Handler.
 					$list_types = array( 'news', 'profile', 'jobs', 'event', 'course', 'exam', 'general', 'faqs' );
 				if ( in_array( $layout, $list_types, true ) ) {
-					$post_count--;
+					--$post_count;
 					return $this->createGeneral( $p_handler, $post_info, $featured_image );
 				}
 
@@ -797,4 +797,3 @@ class CAWeb_Module_Post_List extends ET_Builder_CAWeb_Module {
 	}
 }
 new CAWeb_Module_Post_List();
-

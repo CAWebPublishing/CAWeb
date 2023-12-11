@@ -49,7 +49,7 @@
      -->
  
     <!-- Github Settings -->
-    <setting name="stable_version" value="1.6.5a" />
+    <setting name="stable_version" value="1.10.5" />
     <setting name="github_user" value="CA-CODE-Works" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="master" />
@@ -60,10 +60,10 @@
     <setting name="et_theme_url" value="https://www.elegantthemes.com/" />
 
     <setting name="nodejs_url" value="https://nodejs.org/en/" />
-    <setting name="nodejs_ver" value="16.14.2" />    
+    <setting name="nodejs_ver" value="18.18.0" />    
 
     <setting name="npm_url" value="https://www.npmjs.com/" />
-    <setting name="npm_ver" value="8.3.1" />
+    <setting name="npm_ver" value="9.8.1" />
 
     <setting name="composer_url" value="https://getcomposer.org/" />
     <setting name="composer_ver" value="2.2.3" />
@@ -74,7 +74,7 @@
       Multiple valid prefixes can be provided as a comma-delimited list. -->
     <setting name="wp_prefixes" value="caweb_,et_,wp_" />
       
-    <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
+    <template name="vendor/caweb/phpdoc/" location="." />
     <template name="." location="." />
 
 </phpdocumentor>

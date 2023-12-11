@@ -79,7 +79,6 @@ function caweb_retrieve_feeds_data( $body, $max = 5 ) {
 	}
 
 	return $data;
-
 }
 
 /**

@@ -3,23 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "divi-scripts": "1.0.2-rc.0",
-    "moment": "^2.29.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-moment": "^1.1.1",
-    "react-number-format": "^4.9.1",
+    "divi-scripts": "1.0.3",
+    "moment": "^2.29.4",
+    "react-moment": "^1.1.3",
+    "react-number-format": "^5.3.1",
     "react-owl-carousel": "^2.3.3",
-    "react-render-html": "^0.6.0",
-    "react-scripts": "^3.4.4",
-    "yarn": "^1.22.17"
+    "react-render-html": "^0.6.0"
   },
   "scripts": {
     "start": "divi-scripts start",
     "build": "divi-scripts build",
     "zip": "divi-scripts build && divi-scripts zip",
-    "eject": "divi-scripts eject",
-    "postinstall": "npm config set yarn --global"
+    "eject": "divi-scripts eject"
   },
   "browserslist": {
     "development": [

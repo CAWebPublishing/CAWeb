@@ -752,7 +752,6 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 		</div>
 	</div>
 	<?php
-
 }
 
 /**

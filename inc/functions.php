@@ -441,9 +441,7 @@ function caweb_is_divi_used( $wp_classes = array() ) {
 	// if The Events Calendar Plugin is using the layout it triggers the builder is enabled.
 	if ( ! empty( $tribe_events ) && in_array( 'event-calendar', $tribe_events, true ) ) {
 		return false;
-	};
+	}
 
 	return $builder_used;
-
 }
-

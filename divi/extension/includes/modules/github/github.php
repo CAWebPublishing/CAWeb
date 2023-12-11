@@ -309,5 +309,3 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 	}
 }
 new CAWeb_Module_GitHub();
-
-

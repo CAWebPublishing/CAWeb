@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'admin_menu', 'caweb_admin_menu' );
-add_action( 'admin_menu', 'caweb_remove_admin_menus', 999 );
 add_action( 'load-themes.php', 'caweb_load_themes_tools' );
 add_action( 'settings_page_disable_rest_api_settings', 'caweb_load_themes_tools' );
 add_action( 'load-tools.php', 'caweb_load_themes_tools' );
@@ -105,7 +104,6 @@ function caweb_admin_menu() {
 		/* GitHub API Key */
 		add_submenu_page( 'caweb_options', 'CAWeb Options', 'GitHub API Key', 'manage_options', 'caweb_api', 'caweb_api_menu_option_setup' );
 	}
-
 }
 
 /**
@@ -120,49 +118,6 @@ function caweb_uploads_use_yearmonth_folders() {
 	Organize my uploads into YYYY/MM based folders
 </label>
 	<?php
-}
-
-/**
- * CAWeb Administration Menu Setup
- * Fires before the administration menu loads in the admin.
- *
- * @link https://developer.wordpress.org/reference/hooks/admin_menu/
- * @return void
- */
-function caweb_remove_admin_menus() {
-	global $submenu;
-
-	/* If Multisite instance & user is not a Network Admin */
-	if ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) {
-		/* Remove Themes and Background option under Appearance menu */
-		if ( isset( $submenu['themes.php'] ) ) {
-			foreach ( $submenu['themes.php'] as $m => $menu_data ) {
-				if ( 'Background' === $menu_data[0] || preg_match( '/\bthemes.php\b|\bcustom-background\b/', $menu_data[2] ) ) {
-					unset( $submenu['themes.php'][ $m ] );
-				}
-			}
-		}
-
-		/* Remove WP-Forms Addons Menus */
-		remove_submenu_page( 'wpforms-overview', 'wpforms-addons' );
-
-		/* Removal of Tools Submenu Pages */
-		remove_submenu_page( 'tools.php', 'tools.php' );
-		remove_submenu_page( 'tools.php', 'import.php' );
-		remove_submenu_page( 'tools.php', 'ms-delete-site.php' );
-		remove_submenu_page( 'tools.php', 'domainmapping' );
-
-		/* Removal of Divi Submenu Pages */
-		remove_submenu_page( 'et_divi_options', 'et_divi_options' );
-		remove_submenu_page( 'et_divi_options', 'et_theme_builder' );
-		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=theme' );
-		remove_submenu_page( 'et_divi_options', 'customize.php?et_customizer_option_set=module' );
-		remove_submenu_page( 'et_divi_options', 'et_divi_role_editor' );
-
-		// Remove Disable Rest API setting.
-		remove_submenu_page( 'options-general.php', 'disable_rest_api_settings' );
-
-	}
 }
 
 /**
@@ -607,12 +562,11 @@ function caweb_get_social_media_links() {
 		'Pinterest'       => 'ca_social_pinterest',
 		'RSS'             => 'ca_social_rss',
 		'Snapchat'        => 'ca_social_snapchat',
-		'Twitter'         => 'ca_social_twitter',
+		'X'         => 'ca_social_twitter',
 		'YouTube'         => 'ca_social_youtube',
 	);
 
 	return apply_filters( 'caweb_social_media_links', $caweb_social_options );
-
 }
 
 /**

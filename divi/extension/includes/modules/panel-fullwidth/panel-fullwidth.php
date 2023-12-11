@@ -294,4 +294,3 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 	}
 }
 new CAWeb_Module_Fullwidth_Panel();
-

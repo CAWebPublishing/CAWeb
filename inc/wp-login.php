@@ -59,7 +59,6 @@ function caweb_login_form_lostpassword() {
 			}
 		}
 	}
-
 }
 
 /**

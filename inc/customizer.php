@@ -63,7 +63,6 @@ function caweb_customize_controls_enqueue_scripts() {
 
 	wp_enqueue_script( 'caweb-admin-scripts', $caweb_admin_file, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_enqueue_script( 'caweb-customizer-controls-script' );
-
 }
 
 /**
@@ -306,7 +305,6 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 			)
 		)
 	);
-
 }
 
 /**
@@ -494,7 +492,6 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 			)
 		);
 	}
-
 }
 
 /**
@@ -536,7 +533,6 @@ function caweb_customize_register_page_header_settings( $wp_customize ) {
 			)
 		)
 	);
-
 }
 
 /**
@@ -834,7 +830,6 @@ function caweb_customize_register_social_media_settings( $wp_customize ) {
 			);
 		}
 	}
-
 }
 
 /**
@@ -906,7 +901,6 @@ function caweb_customize_register_custom_file_settings( $wp_customize, $file_typ
 			)
 		)
 	);
-
 }
 
 /**
@@ -1000,7 +994,6 @@ function caweb_customize_register_alert_banner_settings( $wp_customize ) {
 		);
 
 	}
-
 }
 
 /**

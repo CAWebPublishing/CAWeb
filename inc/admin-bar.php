@@ -102,5 +102,4 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 			'title' => $newtext,
 		)
 	);
-
 }

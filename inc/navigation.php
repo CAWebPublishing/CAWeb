@@ -43,7 +43,6 @@ function caweb_nav_menu( $nav_menu, $args ) {
 	} else {
 		return $nav_menu;
 	}
-
 }
 
 /**
@@ -178,7 +177,6 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 		</div>
 			<?php
 		endif;
-
 }
 
 /**

@@ -180,7 +180,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
 
 		global $et_pb_fullwidth_slider_item_num;
 
-		$et_pb_fullwidth_slider_item_num++;
+		++$et_pb_fullwidth_slider_item_num;
 
 		$this->add_classname( 'carousel-item' );
 
@@ -204,5 +204,3 @@ class CAWeb_Module_Fullwidth_Section_Carousel_Slide extends ET_Builder_CAWeb_Mod
 	}
 }
 new CAWeb_Module_Fullwidth_Section_Carousel_Slide();
-
-

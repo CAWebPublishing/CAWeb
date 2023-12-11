@@ -122,7 +122,6 @@ function caweb_symbols( $index = -1, $icon_code = '', $icon_name = '', $extended
 	}
 
 	return $symbols;
-
 }
 
 /**
@@ -936,5 +935,4 @@ function caweb_generate_icon_json() {
 		file_put_contents( CAWEB_ABSPATH . '/assets/full_icons_list.json', "[\n$json\n]" );
 		// phpcs:enable
 	}
-
 }
