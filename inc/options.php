@@ -326,13 +326,13 @@ function caweb_save_options( $values = array(), $files = array() ) {
 		$i    = substr( $k, strrpos( $k, '-' ) + 1 );
 		$data = array(
 			'status'       => isset( $values[ "alert-status-$i" ] ) ? '' : 'on',
-			'header'       => isset( $values[ "alert-header-$i" ] ) ? $values[ "alert-header-$i" ] : '',
+			'header'       => isset( $values[ "alert-header-$i" ] ) ? wp_strip_all_tags( $values[ "alert-header-$i" ] ) : '',
 			'message'      => isset( $values[ "alert-message-$i" ] ) ? $values[ "alert-message-$i" ] : '',
 			'page_display' => isset( $values[ "alert-display-$i" ] ) ? $values[ "alert-display-$i" ] : 'home',
 			'color'        => isset( $values[ "alert-banner-color-$i" ] ) ? $values[ "alert-banner-color-$i" ] : '#FDB81E',
 			'button'       => isset( $values[ "alert-read-more-$i" ] ) ? $values[ "alert-read-more-$i" ] : '',
 			'url'          => isset( $values[ "alert-read-more-url-$i" ] ) ? $values[ "alert-read-more-url-$i" ] : '',
-			'text'         => isset( $values[ "alert-read-more-text-$i" ] ) ? $values[ "alert-read-more-text-$i" ] : '',
+			'text'         => isset( $values[ "alert-read-more-text-$i" ] ) ? wp_strip_all_tags( $values[ "alert-read-more-text-$i" ] ) : '',
 			'target'       => isset( $values[ "alert-read-more-target-$i" ] ) ? $values[ "alert-read-more-target-$i" ] : '',
 			'icon'         => isset( $values[ "alert-icon-$i" ] ) ? $values[ "alert-icon-$i" ] : '',
 		);
@@ -352,9 +352,40 @@ function caweb_save_options( $values = array(), $files = array() ) {
 			case 'caweb_external_js':
 				$val = array_merge( $val, array_diff( array_keys( $jsfiles ), $val ) );
 				break;
-			case 'caweb_live_drafts':
-			case 'caweb_debug_mode':
+
 			default:
+				/**
+				 * Strip tags for the following options:
+				 *
+				 * Utility Link Labels
+				 * Alert Banner Title
+				 * Alert Banner Read More Button Text
+				 * Social Media Hover Text
+				 * Page Header Organization Logo Alt Text
+				 * */
+				if ( in_array(
+					$val,
+					array(
+						'ca_utility_link_1_name',
+						'ca_utility_link_2_name',
+						'ca_utility_link_3_name',
+						'header_ca_branding_alt_text',
+						'ca_google_search_id',
+						'ca_google_analytic_id',
+						'ca_google_analytic4_id',
+						'ca_google_tag_manager_id',
+						'ca_google_meta_id',
+						'caweb_body_classes',
+						'caweb_page_container_classes',
+						'caweb_main_content_classes',
+					),
+					true
+				) ||
+					is_string( $val ) && str_ends_with( $val, '_hover_text' )
+				) {
+					$val = wp_strip_all_tags( $val );
+				}
+
 				if ( 'on' === $val ) {
 					$val = true;
 				}
@@ -562,7 +593,7 @@ function caweb_get_social_media_links() {
 		'Pinterest'       => 'ca_social_pinterest',
 		'RSS'             => 'ca_social_rss',
 		'Snapchat'        => 'ca_social_snapchat',
-		'X'         => 'ca_social_twitter',
+		'X'               => 'ca_social_twitter',
 		'YouTube'         => 'ca_social_youtube',
 	);
 
@@ -589,7 +620,7 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
 	if ( ! empty( $uploaded_files ) ) {
 		/* create the external site directory if its never been created */
 		if ( ! file_exists( $site_path ) ) {
-			mkdir( $site_path, 0777, true );
+			wp_mkdir_p( $site_path );
 		}
 
 		foreach ( $uploaded_files as $key => $data ) {
@@ -611,7 +642,7 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
 		if ( file_exists( "$site_path$filename" ) &&
 		! in_array( $filename, $existing_files, true ) &&
 		! in_array( $filename, $file_upload, true ) ) {
-			unlink( "$site_path$filename" );
+			wp_delete_file( "$site_path$filename" );
 		}
 	}
 }

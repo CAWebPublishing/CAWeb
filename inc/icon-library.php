@@ -29,6 +29,8 @@ function caweb_et_pb_font_icon_symbols( $divi_symbols = array() ) {
 
 if ( ! function_exists( 'et_pb_get_extended_font_icon_symbols' ) ) :
 	/**
+	 * CAWeb Overwrite of Divi Icons
+	 * 
 	 * Returns full list of all icons used in the Divi with ['search_terms'],
 	 * unicode icon value ['unicode'], icon name ['name']
 	 * groups in which the icon is included ['styles'],
@@ -42,9 +44,6 @@ if ( ! function_exists( 'et_pb_get_extended_font_icon_symbols' ) ) :
 		$cache_key = 'et_pb_get_extended_font_icon_symbols';
 		if ( ! et_core_cache_has( $cache_key ) ) {
 			$full_icons_list_path = CAWEB_ABSPATH . '/assets/full_icons_list.json';
-			// phpcs:disable
-			// $divi_icons_list_path = get_template_directory() . '/includes/builder/feature/icon-manager/full_icons_list.json';
-			// phpcs:enable
 			if ( file_exists( $full_icons_list_path ) ) {
 				// phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Can't use wp_remote_get() for local file
 				$icons_data = json_decode( file_get_contents( $full_icons_list_path ), true );
