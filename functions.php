@@ -372,7 +372,7 @@ function caweb_wp_enqueue_scripts() {
 		$ext_css_dir = sprintf( '%1$s/css', CAWEB_EXTERNAL_URI );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), uniqid( CAWEB_VERSION . '-', true ) );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
 		}
 	}
 
