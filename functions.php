@@ -434,7 +434,7 @@ function caweb_wp_enqueue_scripts() {
 	foreach ( $ext_js as $index => $name ) {
 		$location = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_URI, $name );
 		$i        = $index + 1;
-		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . '-', true ), true );
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), CAWEB_VERSION, true );
 		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
 	}
 }
