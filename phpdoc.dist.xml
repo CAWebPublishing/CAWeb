@@ -50,12 +50,12 @@
  
     <!-- Github Settings -->
     <setting name="stable_version" value="1.10.5" />
-    <setting name="github_user" value="CA-CODE-Works" />
+    <setting name="github_user" value="CAWebPublishing" />
     <setting name="github_repo" value="CAWeb" />
     <setting name="github_branch" value="master" />
  
      <setting name="caweb_url" value="https://caweb.cdt.ca.gov/" />
-    <setting name="caweb_theme_url" value="https://github.com/CA-CODE-Works/CAWeb/" />
+    <setting name="caweb_theme_url" value="https://github.com/CAWebPublishing/CAWeb/" />
 
     <setting name="et_theme_url" value="https://www.elegantthemes.com/" />
 

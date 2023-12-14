@@ -184,7 +184,7 @@ function caweb_api_menu_option_setup() {
 	// CAWeb API Nonce.
 	$caweb_nonce      = wp_create_nonce( 'caweb_theme_api_options' );
 	$privated_enabled = get_site_option( 'caweb_private_theme_enabled', false ) ? ' checked' : '';
-	$username         = get_site_option( 'caweb_username', 'CA-CODE-Works' );
+	$username         = get_site_option( 'caweb_username', 'CAWebPublishing' );
 	$password         = get_site_option( 'caweb_password', '' );
 	?>
 	<form id="caweb-api-options-form" action="<?php print esc_url( admin_url( 'admin.php?page=caweb_api' ) ); ?>" method="POST">
@@ -201,7 +201,7 @@ function caweb_api_menu_option_setup() {
 			<div class="mb-3 col-sm-5">
 				<label for="caweb_username" class="d-block mb-0">Username</label>
 				<small class="text-muted">Setting this feature enables us to update the theme through GitHub</small>
-				<input type="text" name="caweb_username" class="form-control" size="50" value="<?php print esc_attr( $username ); ?>" placeholder="Default: CA-CODE-Works" />
+				<input type="text" name="caweb_username" class="form-control" size="50" value="<?php print esc_attr( $username ); ?>" placeholder="Default: CAWebPublishing" />
 			</div>
 		</div>
 		<div class="row">
@@ -499,7 +499,7 @@ function caweb_get_site_options( $group = '' ) {
 	}
 
 	$caweb_special_options = array(
-		'caweb_username'  => 'CA-CODE-Works',
+		'caweb_username'  => 'CAWebPublishing',
 		'caweb_password'  => '',
 		'caweb_multi_ga'  => '',
 		'caweb_multi_ga4' => '',

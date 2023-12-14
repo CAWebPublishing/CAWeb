@@ -69,7 +69,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			self::$caweb_this = $this;
 
 			/* Set the class public variables */
-			$this->user            = get_site_option( 'caweb_username', 'CA-CODE-Works' );
+			$this->user            = get_site_option( 'caweb_username', 'CAWebPublishing' );
 			$this->theme_name      = $theme->name;
 			$this->current_version = $theme->version;
 
