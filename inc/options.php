@@ -364,7 +364,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 				 * Page Header Organization Logo Alt Text
 				 * */
 				if ( in_array(
-					$val,
+					$opt,
 					array(
 						'ca_utility_link_1_name',
 						'ca_utility_link_2_name',
@@ -381,7 +381,7 @@ function caweb_save_options( $values = array(), $files = array() ) {
 					),
 					true
 				) ||
-					is_string( $val ) && str_ends_with( $val, '_hover_text' )
+					str_ends_with($opt, '_hover_text' )
 				) {
 					$val = wp_strip_all_tags( $val );
 				}
