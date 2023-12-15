@@ -281,7 +281,7 @@ function caweb_wp_body_open() {
 		'caweb_google_trans_page_new_window' => get_option( 'ca_google_trans_page_new_window', '' ),
 		'caweb_google_trans_icon'            => get_option( 'ca_google_trans_icon', '' ),
 		'caweb_logo'                         => $caweb_logo,
-		'caweb_logo_alt_text'                => $caweb_logo_alt_text,
+		'caweb_logo_alt_text'                => wp_unslash( $caweb_logo_alt_text ),
 		'caweb_google_search_id'             => $caweb_google_search_id,
 		'caweb_search_class'                 => $caweb_search_class,
 		'caweb_menu_style'                   => get_option( 'ca_default_navigation_menu', 'singlelevel' ),
@@ -372,23 +372,14 @@ function caweb_wp_enqueue_scripts() {
 		$ext_css_dir = sprintf( '%1$s/css', CAWEB_EXTERNAL_URI );
 
 		foreach ( $ext_css as $index => $name ) {
-			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), uniqid( CAWEB_VERSION . '-', true ) );
+			wp_enqueue_style( sprintf( 'caweb-external-custom-%1$d', $index + 1 ), "$ext_css_dir/$name", array(), CAWEB_VERSION );
 		}
 	}
 
 	/* This removes Divi Google Font CSS */
 	wp_deregister_style( 'divi-fonts' );
 
-	$localize_args = array(
-		'ca_site_version'             => $version,
-		'ca_frontpage_search_enabled' => get_option( 'ca_frontpage_search_enabled', false ) && is_front_page(),
-		'caweb_alerts'                => get_option( 'caweb_alerts', array() ),
-		'is_front'                    => is_front_page(),
-		'ajaxurl'                     => admin_url( 'admin-post.php' ),
-		'path'                        => wp_parse_url( get_site_url() )['path'] ?? '/',
-	);
-
-	$localize_args = caweb_enqueue_google_scripts( $localize_args );
+	$localize_args = caweb_enqueue_google_scripts( array() );
 
 	// Template JS File.
 	$template_js_file = caweb_get_min_file( "/dist/$color-$version.js", 'js' );
@@ -443,7 +434,7 @@ function caweb_wp_enqueue_scripts() {
 	foreach ( $ext_js as $index => $name ) {
 		$location = sprintf( '%1$s/js/%2$s', CAWEB_EXTERNAL_URI, $name );
 		$i        = $index + 1;
-		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), uniqid( CAWEB_VERSION . '-', true ), true );
+		wp_register_script( "caweb-external-custom-$i-scripts", $location, array( 'jquery' ), CAWEB_VERSION, true );
 		wp_enqueue_script( "caweb-external-custom-$i-scripts" );
 	}
 }
@@ -456,13 +447,13 @@ function caweb_wp_enqueue_scripts() {
  */
 function caweb_enqueue_google_scripts( $localized ) {
 	// Multisite Google Options.
-	$multi_ga  = get_site_option( 'caweb_multi_ga' );
-	$multi_ga4 = get_site_option( 'caweb_multi_ga4' );
+	$multi_ga  = wp_unslash( get_site_option( 'caweb_multi_ga' ) );
+	$multi_ga4 = wp_unslash( get_site_option( 'caweb_multi_ga4' ) );
 
 	// Site Google Options.
-	$ga   = get_option( 'ca_google_analytic_id', '' );
-	$ga4  = get_option( 'ca_google_analytic4_id', '' );
-	$gtag = get_option( 'ca_google_tag_manager_id', '' );
+	$ga   = wp_unslash( get_option( 'ca_google_analytic_id', '' ) );
+	$ga4  = wp_unslash( get_option( 'ca_google_analytic4_id', '' ) );
+	$gtag = wp_unslash( get_option( 'ca_google_tag_manager_id', '' ) );
 	$gcse = get_option( 'ca_google_search_id', '' );
 
 	$translate = get_option( 'ca_google_trans_enabled', 'none' );

@@ -38,7 +38,7 @@ if ( ! empty( $caweb_social_media ) ) :
 		<li>
 			<a 
 				href="<?php print esc_url( $caweb_social_url ); ?>" 
-				title="<?php print esc_attr( $caweb_social_title ); ?>"
+				title="<?php print esc_attr( wp_unslash( $caweb_social_title ) ); ?>"
 				target="<?php print esc_attr( $caweb_social_target ); ?>"
 			>
 			<?php if ( ! empty( $caweb_option ) ) : ?>

@@ -1,10 +1,8 @@
 <?php
 /**
  * Loads CAWeb <header> tag.
- * php version 8.0.28
  *
  * @package CAWeb
- * @version 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +19,10 @@ foreach ( $args as $var => $val ) {
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
-	<div id="caweb_alerts"></div>
+	<?php
+	// Render Alert Banners.
+	caweb_render_alerts();
+	?>
 
 	<!-- Utility Header -->
 	<div class="utility-header hidden-print">
@@ -56,11 +57,11 @@ foreach ( $args as $var => $val ) {
 							if ( get_option( "${caweb_option}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_option ) ) ) :
 								$caweb_icon   = str_replace( '_', '-', substr( $caweb_option, 10 ) );
 								$caweb_class  = "utility-social-$caweb_icon ca-gov-icon-$caweb_icon";
-								$caweb_title  = get_option( "${caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_icon ) );
+								$caweb_title  = wp_unslash( get_option( "${caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_icon ) ) );
 								$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_option );
-								$caweb_target = get_option( "${caweb_option}_new_window" ) ? 'target="_blank"' : ''
+								$caweb_target = get_option( "${caweb_option}_new_window" ) ? '_blank' : '_self';
 								?>
-									<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" <?php print esc_attr( $caweb_target ); ?>>
+									<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" target="<?php print esc_attr( $caweb_target ); ?>">
 										<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
 									</a>
 								<?php
@@ -74,15 +75,15 @@ foreach ( $args as $var => $val ) {
 					for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) :
 						$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
 						$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
-						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? ' target="_blank"' : '';
+						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? '_blank' : '_self';
 						$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
 
 						if ( $caweb_enabled ) :
 							?>
 							<a 
 								class="utility-custom-<?php print esc_attr( $caweb_i ); ?>" 
-								href="<?php print esc_url( $caweb_url ); ?>"<?php print esc_attr( $caweb_target ); ?>>
-							<?php print esc_html( $caweb_text ); ?>
+								href="<?php print esc_url( $caweb_url ); ?>" target="<?php print esc_attr( $caweb_target ); ?>">
+							<?php print esc_html( wp_unslash( $caweb_text ) ); ?>
 							</a>
 						<?php endif; ?>
 					<?php endfor; ?>
