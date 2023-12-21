@@ -1,17 +1,14 @@
+# Development
 _notes/*
 **/_notes/
-
 **/Thumbs.db
-
 **/.vscode/
 /.vscode/
-
-# Dependency directories
 node_modules/
 vendor/
 composer.lock
-
 /log/
-
 /.docs/
 /.phpdoc/cache/
+\.wp-env\.json
+\.wp-env\.override\.json

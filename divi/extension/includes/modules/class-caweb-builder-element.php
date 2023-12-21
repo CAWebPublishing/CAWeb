@@ -197,7 +197,8 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @return string
 	 */
 	private function process_icon( $icon ) {
-		if ( empty( $icon ) ) {
+		// if empty icon or no icon was selected.
+		if ( empty( $icon ) || '%-1%' === $icon ) {
 			return;
 		}
 

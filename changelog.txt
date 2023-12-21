@@ -1,6 +1,8 @@
 CAWeb 1.10.6
 - Fixed issue with certain CAWeb Options not escaping/sanitizing properly
 - Removed unique version number from custom css/js
+- Fixed issue with automatic conversion of false to array when retrieving widget news feeds
+- Fixed issue with array to string conversion in CAWeb Module class
 
 CAWeb 1.10.5
 - Update Twitter logo to X
