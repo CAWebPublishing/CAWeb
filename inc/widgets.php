@@ -45,6 +45,7 @@ function caweb_refresh_news_feed() {
 			'crnf' => caweb_retrieve_feeds_data( $recent_news )
 		);
 
+
 		set_site_transient( 'caweb_news_feed', $caweb_news_feeds, 86400 );
 	}
 
