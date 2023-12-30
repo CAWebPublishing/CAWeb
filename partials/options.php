@@ -813,7 +813,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					<!-- Alert Options -->
 					<div>
 						<input type="checkbox" class="btn-check" id="alert-status-<?php print esc_attr( $count ); ?>" name="alert-status-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $status ); ?>>
-						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>">Display</label>
+						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>"></label>
 						<button class="btn btn-danger remove-alert">Remove</button>
 					</div>
 

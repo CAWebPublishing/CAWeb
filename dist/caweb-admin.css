@@ -12109,6 +12109,14 @@ a[data-bs-toggle=collapse].collapsed label > span:after {
   border-color: gray;
 }
 
+#caweb-alert-banners [id^=alert-status-] + .btn:before {
+  content: "Display On";
+}
+
+#caweb-alert-banners [id^=alert-status-]:checked + .btn:before {
+  content: "Display Off";
+}
+
 .caweb-icon-menu-group .caweb-icon-menu {
   height: 306px;
   overflow: auto;

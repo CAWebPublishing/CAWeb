@@ -3,7 +3,8 @@ CAWeb 1.10.6
 - Removed unique version number from custom css/js
 - Fixed issue with automatic conversion of false to array when retrieving widget news feeds
 - Fixed issue with array to string conversion in CAWeb Module class
-
+- Updated Alert Banner text and color for the Display option
+ 
 CAWeb 1.10.5
 - Update Twitter logo to X
 - Removed wildcard from GA samesite attribute 
