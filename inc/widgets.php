@@ -34,15 +34,17 @@ function caweb_refresh_news_feed() {
 	if ( false === $caweb_news_feeds ) {
 		// CAWeb News.
 		$feed_url  = 'https://caweb.cdt.ca.gov/category/caweb-news/feed/';
-		$feed_body = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
-
-		$caweb_news_feeds['cnf'] = caweb_retrieve_feeds_data( $feed_body );
+		$news_body = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
 
 		// Recent CAWeb Help Updates.
 		$feed_url  = 'https://caweb.cdt.ca.gov/category/all/feed/';
-		$feed_body = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
+		$recent_news = wp_remote_retrieve_body( wp_remote_get( $feed_url ) );
 
-		$caweb_news_feeds['crnf'] = caweb_retrieve_feeds_data( $feed_body );
+		$caweb_news_feeds = array(
+			'cnf' => caweb_retrieve_feeds_data( $news_body ),
+			'crnf' => caweb_retrieve_feeds_data( $recent_news )
+		);
+
 
 		set_site_transient( 'caweb_news_feed', $caweb_news_feeds, 86400 );
 	}

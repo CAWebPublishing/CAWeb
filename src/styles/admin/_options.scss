@@ -51,8 +51,18 @@ a[data-bs-toggle="collapse"].collapsed label > span:after{
 	cursor: pointer;
 }
 
-#caweb-alert-banners li,
-#uploaded-css li,
-#uploaded-js li{
+#caweb-alert-banners li{
 	cursor: grab;
+}
+
+#caweb-alert-banners [id^="alert-status-"]:checked + .btn{
+	background-color: gray;
+	border-color: gray;
+}
+
+#caweb-alert-banners [id^="alert-status-"] + .btn:before{
+	content: 'Display On';
+}
+#caweb-alert-banners [id^="alert-status-"]:checked + .btn:before{
+	content: 'Display Off';
 }
