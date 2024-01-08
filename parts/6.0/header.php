@@ -1,10 +1,8 @@
 <?php
 /**
  * Loads CAWeb <header> tag.
- * php version 8.0.28
  *
  * @package CAWeb
- * @version 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +19,10 @@ foreach ( $args as $var => $val ) {
 
 <header id="header" class="global-header<?php print esc_attr( $caweb_fixed_header ); ?>">
 	<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
-	<div id="caweb_alerts"></div>
+	<?php
+	// Render Alert Banners.
+	caweb_render_alerts();
+	?>
 
 	<!-- Utility Header -->
 	<div class="utility-header hidden-print">

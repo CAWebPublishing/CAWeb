@@ -88,7 +88,6 @@ jQuery(document).ready(function($) {
 
 		$(alertStatusLabel).addClass('btn btn-success');
 		$(alertStatusLabel).attr('for', 'alert-status-' + c);
-		$(alertStatusLabel).html('Display');
 
 		$(removeAlert).addClass('btn btn-danger remove-alert ms-1');
 		$(removeAlert).html('Remove');

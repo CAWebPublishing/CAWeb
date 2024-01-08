@@ -1,3 +1,104 @@
+CAWeb 1.10.6
+- Fixed issue with certain CAWeb Options not escaping/sanitizing properly
+- Removed unique version number from custom css/js
+- Fixed issue with automatic conversion of false to array when retrieving widget news feeds
+- Fixed issue with array to string conversion in CAWeb Module class
+- Updated Alert Banner text and color for the Display option
+ 
+CAWeb 1.10.5
+- Update Twitter logo to X
+- Removed wildcard from GA samesite attribute 
+- Fixed a11y with WPForms Date/Time pickers
+
+CAWeb 1.10.4
+- Added defer and crossorigin attributes to statewide alert script
+- Fixed Powered by alignment
+- Fixed issue with sidebar when in mobile
+
+CAWeb 1.10.3
+- Fixed issue with Toggle/Accordions no toggling correctly with enter key
+- Updated GA4 code
+- Added new CA Statewide Alert option
+- Fixed issues with module padding
+
+CAWeb 1.10.2
+- Fixed issue with Live Drafts option being reset
+
+CAWeb 1.10.1
+- Fixed issue with broken reference to default fav icon
+- Resize CA.gov logo for v6
+- Spelled out Back to top for v6
+- Added new body, page container, main content class options
+- Removed Settings Button for v6
+- Fixed issues with Google Translate when in Custom mode
+- Updated Google Analytics code
+
+CAWeb 1.10.0
+- Introduced State Template Version 6
+- Removed Design System Option 
+- Fixed a11y issue in utility header
+- Fixed issue with Organization Logo Alt Text not populating correct text
+- Fixed tab index for search
+- Fixed content/header alignment 
+
+CAWeb 1.9.0
+- Fixed issues related to version 6:
+  Site navigation
+  Updated  CA.gov icon
+  Added Official Website statement
+  Updated search
+  Updated available Social Icons
+  Updated Copyright notice in footer
+  Added new icons
+  Removed Sticky Navigation Option
+  Removed Home link option
+  Removed Geo locator option
+  Removed Menu home link option
+  Updated Powered by CAWebPublishing alignment in footer
+
+CAWeb 1.8.1
+- Added Web Headers for X-Content-Type-Options
+- Removed Storage Utilization Dashboard Widget since it no longer works on WPVIP
+- Fixed issue with ca.gov logo
+- Fixed a11y issue with Standard Google Translate
+- Removed Social Icons from Utility Header for V6
+- Fixed Settings button in Utility Header for V6
+
+CAWeb 1.8.0
+- Fixed issue with Homepage Search not rendering 
+- Added Web Headers for Strict-Transport-Securit and Content-Security-Policy 
+
+CAWeb v1.7.2
+- Added State Template 6.0 asset files
+
+CAWeb v1.7.1
+- Hiding File Upload Field in WPForms Plugin
+- Fixed issue with undefined function get_header
+
+CAWeb v1.7.0
+- Fixed issue with undefined function wp_head
+
+CAWeb v1.6.4
+- Fixed issue with Featured images not rendering on the front end
+
+CAWeb v1.6.3a
+- Resolved issue with GA4 ID not populating
+
+CAWeb v1.6.3
+- Added sanity check when inserting categories
+- Added new Google Analytics4 ID Option
+
+CAWeb v1.6.2
+- Add CAWeb Icons to Divi Button Module
+
+CAWeb v1.6.1
+- Removed Manual CSS/JS CAWeb Option
+- Fixed issue with undefined function reference
+
+CAWeb v1.6.0
+- Update Icon Library to incorporate changes from Divi v4.14.4
+- Added headers to resolve weak ciphers
+
 CAWeb v1.5.10
 - Added text option for the Google Translate Custom Link
 

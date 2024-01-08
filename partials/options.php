@@ -381,7 +381,7 @@ function caweb_display_utility_header_options() {
 					<!-- Link Label -->
 					<label for="<?php print esc_attr( $p ); ?>_name" class="d-block mb-0"><strong>Custom Link <?php print esc_attr( $i ); ?> Label</strong></label>
 					<small class="mb-2 text-muted d-block">Custom link label text.</small>
-					<input type="text" name="<?php print esc_attr( $p ); ?>_name" id="<?php print esc_attr( $p ); ?>_name" class="form-control w-75" value="<?php print esc_attr( $name ); ?>"/>
+					<input type="text" name="<?php print esc_attr( $p ); ?>_name" id="<?php print esc_attr( $p ); ?>_name" class="form-control w-75" value="<?php print esc_attr( wp_unslash( $name ) ); ?>"/>
 
 					<!-- Link Url -->
 					<label for="<?php print esc_attr( $p ); ?>" class="d-block mb-0"><strong>Custom Link <?php print esc_attr( $i ); ?> URL</strong></label>
@@ -469,7 +469,7 @@ function caweb_display_page_header_options() {
 				<label for="header_ca_branding_alt_text" class="d-block mb-0"><strong>Organization Logo-Alt Text</strong></label>
 				<small class="mb-2 text-muted d-block">Enter alternative text for the agency logo image.</small>
 				<!-- Organization Logo-Brand image alt text -->
-				<input type="text" name="header_ca_branding_alt_text" id="header_ca_branding_alt_text" value="<?php print esc_attr( $org_logo_alt_text ); ?>" class="form-control">
+				<input type="text" name="header_ca_branding_alt_text" id="header_ca_branding_alt_text" value="<?php print esc_attr( wp_unslash( $org_logo_alt_text ) ); ?>" class="form-control">
 			</div>
 		</div>
 	</div>
@@ -483,17 +483,17 @@ function caweb_display_page_header_options() {
  */
 function caweb_display_google_options() {
 	// Search ID.
-	$google_search_id = get_option( 'ca_google_search_id', '' );
+	$google_search_id = wp_unslash( get_option( 'ca_google_search_id', '' ) );
 
 	// Analytics ID.
-	$google_analytic_id  = get_option( 'ca_google_analytic_id', '' );
-	$google_analytic4_id = get_option( 'ca_google_analytic4_id', '' );
+	$google_analytic_id  = wp_unslash( get_option( 'ca_google_analytic_id', '' ) );
+	$google_analytic4_id = wp_unslash( get_option( 'ca_google_analytic4_id', '' ) );
 
 	// Tag Manager ID.
-	$google_tag_manager_id = get_option( 'ca_google_tag_manager_id', '' );
+	$google_tag_manager_id = wp_unslash( get_option( 'ca_google_tag_manager_id', '' ) );
 
 	// Meta ID.
-	$google_meta_id = get_option( 'ca_google_meta_id', '' );
+	$google_meta_id = wp_unslash( get_option( 'ca_google_meta_id', '' ) );
 
 	// Translate.
 	$google_translate_mode       = get_option( 'ca_google_trans_enabled', 'none' );
@@ -696,7 +696,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 						<div class="mb-3 col-sm-3">
 							<label for="<?php print esc_attr( $option ); ?>_hover_text" class="d-block"><strong>Hover Text:</strong></label>
 							<small class="text-muted d-block">Text displayed on mouse hover.</small>
-							<input type="text" id="<?php print esc_attr( $option ); ?>_hover_text" name="<?php print esc_attr( $option ); ?>_hover_text" value="<?php print esc_attr( $hover_text ); ?>">
+							<input type="text" id="<?php print esc_attr( $option ); ?>_hover_text" name="<?php print esc_attr( $option ); ?>_hover_text" value="<?php print esc_attr( wp_unslash( $hover_text ) ); ?>">
 						</div>
 						<?php endif; ?>
 					</div>
@@ -788,8 +788,8 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 			<?php
 			if ( ! empty( $alerts ) ) {
 				foreach ( $alerts as $a => $data ) :
-					$header         = $data['header'];
-					$default_header = ! empty( $header ) ? $header : 'Label';
+					$header         = wp_unslash( $data['header'] );
+					$default_header = ! empty( $header ) ? wp_unslash( $header ) : 'Label';
 					$count          = $a + 1;
 					$status         = empty( $data['status'] ) ? ' checked' : '';
 					$alert_home     = 'home' === $data['page_display'] ? ' checked' : '';
@@ -798,7 +798,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					$banner_color = $data['color'];
 
 					$readmore        = 'on' === $data['button'] ? ' checked' : '';
-					$readmore_text   = isset( $data['text'] ) && ! empty( $data['text'] ) ? substr( $data['text'], 0, 16 ) : 'More Information';
+					$readmore_text   = isset( $data['text'] ) && ! empty( $data['text'] ) ? wp_unslash( substr( $data['text'], 0, 16 ) ) : 'More Information';
 					$readmore_url    = $data['url'];
 					$readmore_target = '_blank' === $data['target'] || 'on' === $data['target'] ? ' checked' : '';
 
@@ -813,7 +813,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 					<!-- Alert Options -->
 					<div>
 						<input type="checkbox" class="btn-check" id="alert-status-<?php print esc_attr( $count ); ?>" name="alert-status-<?php print esc_attr( $count ); ?>" <?php print esc_attr( $status ); ?>>
-						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>">Display</label>
+						<label class="btn btn-success" for="alert-status-<?php print esc_attr( $count ); ?>"></label>
 						<button class="btn btn-danger remove-alert">Remove</button>
 					</div>
 
@@ -944,9 +944,9 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 	$cap                          = is_multisite() ? 'manage_network_options' : 'manage_options';
 	$live_drafts_enabled          = get_option( 'caweb_live_drafts', false ) ? ' checked' : '';
 	$caweb_debug_mode_enabled     = get_option( 'caweb_debug_mode', false ) ? ' checked' : '';
-	$caweb_body_classes           = get_option( 'caweb_body_classes', '' );
-	$caweb_page_container_classes = get_option( 'caweb_page_container_classes', '' );
-	$caweb_main_content_classes   = get_option( 'caweb_main_content_classes', '' );
+	$caweb_body_classes           = wp_unslash( get_option( 'caweb_body_classes', '' ) );
+	$caweb_page_container_classes = wp_unslash( get_option( 'caweb_page_container_classes', '' ) );
+	$caweb_main_content_classes   = wp_unslash( get_option( 'caweb_main_content_classes', '' ) );
 
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
