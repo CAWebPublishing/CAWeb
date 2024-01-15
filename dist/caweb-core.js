@@ -76,16 +76,16 @@ jQuery(document).ready(function($) {
 	gtag('js', new Date());
 
 	//Statewide UA property
-	gtag('config', 'UA-3419582-2', {cookie_flags:'secure;samesite=lax;domain='});
+	gtag('config', 'UA-3419582-2', {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
 
 	// CAWeb Multisite analytics
 	if(undefined !== args.caweb_multi_ga){
-		gtag('config', args.caweb_multi_ga, {cookie_flags:'secure;samesite=lax;domain='});
+		gtag('config', args.caweb_multi_ga, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
 	}
 	
 	// Agency UA ID
 	if( undefined !== args.ca_google_analytic_id){
-		gtag('config', args.ca_google_analytic_id, {cookie_flags:'secure;samesite=lax;domain='});
+		gtag('config', args.ca_google_analytic_id, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
 	}
 
 	var getOutboundLink = function(url) {
@@ -120,13 +120,13 @@ jQuery(document).ready(function($) {
 	gtag('js', new Date());
 
 	if( undefined !== args.ca_google_analytic4_id){
-		gtag('config', args.ca_google_analytic4_id, {cookie_flags:'secure;samesite=lax;domain='}); // individual agency - either from your own google account, or contact eServices to have one set up for you
+		gtag('config', args.ca_google_analytic4_id, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // individual agency - either from your own google account, or contact eServices to have one set up for you
 	}
 
-	gtag('config', 'G-69TD0KNT0F', {cookie_flags:'secure;samesite=lax;domain='}); // statewide analytics - do not remove or change
+	gtag('config', 'G-69TD0KNT0F', {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // statewide analytics - do not remove or change
 
 	if( undefined !== args.caweb_multi_ga4 ){
-		gtag('config', args.caweb_multi_ga4, {cookie_flags:'secure;samesite=lax;domain='}); // CAWeb multisite analytics - do not remove or change
+		gtag('config', args.caweb_multi_ga4, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // CAWeb multisite analytics - do not remove or change
 	}
 		
 	var getOutboundLink = function(url) {
