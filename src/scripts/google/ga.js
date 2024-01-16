@@ -9,14 +9,27 @@ jQuery(document).ready(function($) {
 	//Statewide UA property
 	gtag('config', 'UA-3419582-2', {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
 
-	// CAWeb Multisite analytics
+	// Statewide GA4 property
+	gtag('config', 'G-69TD0KNT0F', {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // statewide analytics - do not remove or change
+
+	// CAWeb Multisite UA property
 	if(undefined !== args.caweb_multi_ga){
 		gtag('config', args.caweb_multi_ga, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
 	}
 	
+	// CAWeb Multisite GA4 property
+	if( undefined !== args.caweb_multi_ga4 ){
+		gtag('config', args.caweb_multi_ga4, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // CAWeb multisite analytics - do not remove or change
+	}
+
 	// Agency UA ID
 	if( undefined !== args.ca_google_analytic_id){
 		gtag('config', args.ca_google_analytic_id, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true });
+	}
+
+	// Agency GA4 ID
+	if( undefined !== args.ca_google_analytic4_id){
+		gtag('config', args.ca_google_analytic4_id, {cookie_flags:'secure;samesite=lax;domain=', 'restricted_data_processing':true }); // individual agency - either from your own google account, or contact eServices to have one set up for you
 	}
 
 	var getOutboundLink = function(url) {
