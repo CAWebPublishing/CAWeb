@@ -1,6 +1,3 @@
-CAWeb 1.10.6a
-- Added restricted_data_processing to GA options
-
 CAWeb 1.10.6
 - Fixed issue with certain CAWeb Options not escaping/sanitizing properly
 - Removed unique version number from custom css/js
