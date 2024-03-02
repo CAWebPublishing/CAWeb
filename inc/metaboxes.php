@@ -9,9 +9,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+add_action( 'init', 'caweb_register_meta' );
 add_action( 'add_meta_boxes', 'caweb_add_meta_boxes' );
 add_action( 'admin_head-nav-menus.php', 'caweb_admin_head_nav_menus' );
 add_action( 'save_post', 'caweb_save_post', 10, 2 );
+
+/**
+ * Register Meta Data
+ * Editing a post meta via REST API is allowed by default unless its key is protected (starts with `_`)
+ * Protected meta keys are those that begin with an underscore. 
+ * 
+ * Protected Keys:
+ * - _caweb_menu_icon
+ * - _caweb_menu_unit_size
+ * - _caweb_menu_image
+ * - _caweb_menu_image_side
+ * - _caweb_menu_image_size
+ * - _caweb_menu_column_count
+ * - _caweb_menu_media_image
+ * - _caweb_nav_media_image_alt_text
+ * - _caweb_menu_media_image_alignment
+ * - _caweb_menu_flexmega_border
+ * - _caweb_menu_flexmega_row
+ * 
+ * @return void
+ */
+function caweb_register_meta() {
+	$nav_meta = array(
+		'_caweb_menu_icon' => 'Navigation Icon',
+		'_caweb_menu_unit_size' => 'Navigation Sub Link Unit Size',
+		'_caweb_menu_image' => 'Navigation Mega Menu Background Image',
+		'_caweb_menu_image_side' => 'Navigation Mega Menu Background Image Alignment',
+		'_caweb_menu_image_size' => 'Navigation Mega Menu Background Image Size',
+		'_caweb_menu_column_count' => 'Navigation Mega Menu Column Count',
+		'_caweb_menu_media_image' => 'Navigation Mega Menu Sub Link Image',
+		'_caweb_nav_media_image_alt_text' => 'Navigation Mega Menu Sub Link Image Alt Text',
+		'_caweb_menu_media_image_alignment' => 'Navigation Mega Menu Sub Link Image Image Alignment',
+		'_caweb_menu_flexmega_border' => 'Navigation Flex Mega Menu Border',
+		'_caweb_menu_flexmega_row' => 'Navigation Flex Mega Menu New Row'
+	);
+
+	// Register Navigation Meta.
+	foreach ( $nav_meta as $key => $label ) {
+		register_meta( 'post', $key, array(
+			'show_in_rest' => true,
+			'single' => true,
+			'type' => 'string',
+			'description' => $label
+		) );
+	}
+}
 
 /**
  * Add CAWeb Metaboxes
