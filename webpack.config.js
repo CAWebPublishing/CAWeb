@@ -4,6 +4,7 @@
  * @link https://webpack.js.org/configuration/
  */
 const fs = require('fs'); // File System
+const path = require('path'); // File System
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 let entries = {
@@ -48,6 +49,7 @@ module.exports = {
   })],
   entry: entries,
   output: {
+    path: path.resolve( process.cwd(), 'build' ),
     clean: true
   },
   module:{
