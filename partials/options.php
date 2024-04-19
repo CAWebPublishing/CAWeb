@@ -145,6 +145,7 @@ function caweb_display_general_options() {
 		</a>
 	</div>
 	<div class="collapse show" id="general-setting" data-bs-parent="#general-settings">
+		<?php do_action('caweb_options_general_custom_fields'); ?>
 		<!-- State Template Version Row -->
 		<div class="row">
 			<div class="mb-3 col-sm-5">
@@ -325,6 +326,7 @@ function caweb_display_utility_header_options() {
 		</a>
 	</div>
 	<div class="collapse" id="utility-header-settings" data-bs-parent="#general-settings">
+		<?php do_action('caweb_options_utility_header_custom_fields'); ?>
 		<!-- Contact Us Page Row -->
 		<div class="row">
 			<div class="mb-3 col-sm-5">
@@ -425,6 +427,7 @@ function caweb_display_page_header_options() {
 		</a>
 	</div>
 	<div class="collapse" id="page-header-settings" data-bs-parent="#general-settings">
+		<?php do_action('caweb_options_page_header_custom_fields'); ?>
 		<!-- Organization Logo-Brand Row -->
 		<div class="row">
 			<div class="mb-3 col-sm-5">
@@ -509,6 +512,7 @@ function caweb_display_google_options() {
 		</a>
 	</div>
 	<div class="collapse" id="google-settings" data-bs-parent="#general-settings">
+		<?php do_action('caweb_options_google_custom_fields'); ?> 
 		<!-- Search Engine ID Row -->
 		<div class="row">
 			<div class="mb-3 col-sm-5">
@@ -638,6 +642,7 @@ function caweb_display_social_media_settings( $is_active = false ) {
 	?>
 	<!-- Social Media Links -->
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="social-share" data-bs-parent="#caweb-settings">
+		<?php do_action('caweb_options_social_media_custom_fields'); ?>
 		<div class="row">
 			<div class="mb-3">
 				<h2 class="d-inline">Social Media Links</h2>
@@ -728,6 +733,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 	?>
 	<!-- Custom <?php print esc_attr( strtoupper( $file_type ) ); ?> Section -->
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="custom-<?php print esc_attr( $file_type ); ?>" data-bs-parent="#caweb-settings">
+		<?php do_action("caweb_options_custom_${file_type}_custom_fields"); ?>
 		<!-- Custom Uploaded <?php print esc_attr( strtoupper( $file_type ) ); ?> -->
 		<div class="row">
 			<div class="mb-3">
@@ -766,6 +772,7 @@ function caweb_display_alert_banner_settings( $is_active = false ) {
 	?>
 	<!-- Alert Banners -->
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="alert-banners" data-bs-parent="#caweb-settings">
+		<?php do_action('caweb_options_alert_banner_custom_fields'); ?>
 		<div class="row">
 			<!-- StateWide Alert -->
 			<div class="mb-3 col-sm-12">
@@ -950,6 +957,7 @@ function caweb_display_additional_features_settings( $is_active = false ) {
 
 	?>
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="additional-features" data-bs-parent="#caweb-settings">
+		<?php do_action('caweb_options_advanced_custom_fields'); ?>
 		<div class="row">
 			<!-- Document Map -->
 			<div class="mb-3 col-sm-12">
