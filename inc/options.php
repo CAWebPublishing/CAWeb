@@ -394,6 +394,8 @@ function caweb_save_options( $values = array(), $files = array() ) {
 		update_option( $opt, $val );
 	}
 
+	do_action('caweb_save_options');
+	
 	print '<div class="updated notice is-dismissible"><p><strong>CAWeb Options</strong> have been updated.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
 }
 
