@@ -76,59 +76,31 @@ jQuery(document).ready(function($) {
 	gtag('js', new Date());
 
 	//Statewide UA property
-	gtag('config', 'UA-3419582-2', {cookie_flags:'secure;samesite=lax;domain='});
+	gtag('config', 'UA-3419582-2', {cookie_flags:'secure;samesite=lax;domain=' });
 
-	// CAWeb Multisite analytics
+	// Statewide GA4 property
+	gtag('config', 'G-69TD0KNT0F', {cookie_flags:'secure;samesite=lax;domain=' }); // statewide analytics - do not remove or change
+
+	// CAWeb Multisite UA property
 	if(undefined !== args.caweb_multi_ga){
-		gtag('config', args.caweb_multi_ga, {cookie_flags:'secure;samesite=lax;domain='});
+		gtag('config', args.caweb_multi_ga, {cookie_flags:'secure;samesite=lax;domain=' });
 	}
 	
+	// CAWeb Multisite GA4 property
+	if( undefined !== args.caweb_multi_ga4 ){
+		gtag('config', args.caweb_multi_ga4, {cookie_flags:'secure;samesite=lax;domain=' }); // CAWeb multisite analytics - do not remove or change
+	}
+
 	// Agency UA ID
 	if( undefined !== args.ca_google_analytic_id){
-		gtag('config', args.ca_google_analytic_id, {cookie_flags:'secure;samesite=lax;domain='});
+		gtag('config', args.ca_google_analytic_id, {cookie_flags:'secure;samesite=lax;domain=' });
 	}
 
-	var getOutboundLink = function(url) {
-		gtag('event', 'click', {
-			'event_category': 'navigation',
-			'event_label': 'outbound link: ' + url,
-			'transport_type': 'beacon',
-			'event_callback': function(){document.location = url;}
-		});
-	}
-
-	var trackDownload = function(filename) {
-		gtag('event', 'click', {
-			'event_category': 'download',
-			'event_label': 'file: ' + filename,
-			'transport_type': 'beacon',
-			'event_callback': function(){document.location = url;}
-		});
-	}
-});
-
-/***/ }),
-/* 4 */
-/***/ (() => {
-
-// Google Tag Manager
-jQuery(document).ready(function($) {
-	window.dataLayer = window.dataLayer || [];
-
-	function gtag(){dataLayer.push(arguments);}
-
-	gtag('js', new Date());
-
+	// Agency GA4 ID
 	if( undefined !== args.ca_google_analytic4_id){
-		gtag('config', args.ca_google_analytic4_id, {cookie_flags:'secure;samesite=lax;domain='}); // individual agency - either from your own google account, or contact eServices to have one set up for you
+		gtag('config', args.ca_google_analytic4_id, {cookie_flags:'secure;samesite=lax;domain=' }); // individual agency - either from your own google account, or contact eServices to have one set up for you
 	}
 
-	gtag('config', 'G-69TD0KNT0F', {cookie_flags:'secure;samesite=lax;domain='}); // statewide analytics - do not remove or change
-
-	if( undefined !== args.caweb_multi_ga4 ){
-		gtag('config', args.caweb_multi_ga4, {cookie_flags:'secure;samesite=lax;domain='}); // CAWeb multisite analytics - do not remove or change
-	}
-		
 	var getOutboundLink = function(url) {
 		gtag('event', 'click', {
 			'event_category': 'navigation',
@@ -149,11 +121,12 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
+/* 4 */,
 /* 5 */,
-/* 6 */,
-/* 7 */
+/* 6 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(7);
 __webpack_require__(8);
 __webpack_require__(9);
 __webpack_require__(10);
@@ -164,11 +137,10 @@ __webpack_require__(14);
 __webpack_require__(15);
 __webpack_require__(16);
 __webpack_require__(17);
-__webpack_require__(18);
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -206,7 +178,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -243,7 +215,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -269,7 +241,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -289,7 +261,7 @@ jQuery(document).ready(function($) {
  });
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -314,7 +286,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -340,7 +312,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -368,7 +340,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -407,7 +379,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -458,7 +430,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -486,7 +458,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -539,9 +511,10 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(19);
 __webpack_require__(20);
 __webpack_require__(21);
 __webpack_require__(22);
@@ -551,11 +524,10 @@ __webpack_require__(25);
 __webpack_require__(26);
 __webpack_require__(27);
 __webpack_require__(28);
-__webpack_require__(29);
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -583,7 +555,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -617,7 +589,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -705,7 +677,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -731,7 +703,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -801,7 +773,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -841,7 +813,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -869,7 +841,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -915,7 +887,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -974,7 +946,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (() => {
 
 /*
@@ -1005,7 +977,7 @@ if( null !== wpforms_confirmation_msg ){
 }
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1023,7 +995,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1046,7 +1018,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1079,7 +1051,7 @@ jQuery(document).ready(function($) {
 });
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (() => {
 
 jQuery(document).ready(function($) {
@@ -1145,7 +1117,6 @@ __webpack_require__.r(__webpack_exports__);
 //require('./AutoTracker');
 __webpack_require__(2);
 __webpack_require__(3);
-__webpack_require__(4);
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -1181,13 +1152,13 @@ jQuery(document).ready(function($) {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-__webpack_require__(7);
-__webpack_require__(19);
+__webpack_require__(6);
+__webpack_require__(18);
 
+__webpack_require__(29);
 __webpack_require__(30);
 __webpack_require__(31);
 __webpack_require__(32);
-__webpack_require__(33);
 })();
 
 /******/ })()

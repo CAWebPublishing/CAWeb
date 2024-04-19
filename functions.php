@@ -353,12 +353,12 @@ function caweb_wp_enqueue_scripts() {
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
 	// Template CSS File.
-	$template_css_file = caweb_get_min_file( "/dist/$color-$version.css" );
+	$template_css_file = caweb_get_min_file( "/build/$color-$version.css" );
 
 	wp_enqueue_style( 'cagov-core-style', $template_css_file, array(), CAWEB_VERSION );
 
 	// CAWeb CSS File.
-	$caweb_css_file = caweb_get_min_file( '/dist/caweb-core.css' );
+	$caweb_css_file = caweb_get_min_file( '/build/caweb-core.css' );
 
 	wp_enqueue_style( 'caweb-core-style', $caweb_css_file, array(), CAWEB_VERSION );
 
@@ -382,7 +382,7 @@ function caweb_wp_enqueue_scripts() {
 	$localize_args = caweb_enqueue_google_scripts( array() );
 
 	// Template JS File.
-	$template_js_file = caweb_get_min_file( "/dist/$color-$version.js", 'js' );
+	$template_js_file = caweb_get_min_file( "/build/$color-$version.js", 'js' );
 
 	/**
 	 * Core JS File
@@ -392,7 +392,7 @@ function caweb_wp_enqueue_scripts() {
 	$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
 
 	// CAWeb JS File.
-	$caweb_js_file = caweb_get_min_file( '/dist/caweb-core.js', 'js' );
+	$caweb_js_file = caweb_get_min_file( '/build/caweb-core.js', 'js' );
 
 	/* Geo Locator */
 	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled', false ) || get_option( 'ca_geo_locator_enabled', false );
@@ -582,12 +582,12 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	$version = caweb_template_version();
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
-	$editor_css = caweb_get_min_file( "/dist/$color-$version.css" );
+	$editor_css = caweb_get_min_file( "/build/$color-$version.css" );
 
-	$caweb_css_file = caweb_get_min_file( '/dist/caweb-admin.css' );
+	$caweb_css_file = caweb_get_min_file( '/build/caweb-admin.css' );
 
 	if ( in_array( $hook, $pages, true ) ) {
-		$caweb_js_file = caweb_get_min_file( '/dist/caweb-admin.js', 'js' );
+		$caweb_js_file = caweb_get_min_file( '/build/caweb-admin.js', 'js' );
 
 		/* Enqueue Scripts */
 		wp_enqueue_script( 'jquery' );

@@ -33,13 +33,13 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 	$version = caweb_template_version();
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
-	$editor_css = caweb_get_min_file( "/dist/$color-$version.css" );
+	$editor_css = caweb_get_min_file( "/build/$color-$version.css" );
 
 	$css = array(
 		includes_url( '/css/dashicons.min.css' ),
 		includes_url( '/js/tinymce/skins/wordpress/wp-content.css' ),
 		$editor_css,
-		caweb_get_min_file( '/dist/caweb-admin.css' ),
+		caweb_get_min_file( '/build/caweb-admin.css' ),
 	);
 
 	$defaults_settings = array(

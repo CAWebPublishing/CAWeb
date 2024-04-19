@@ -1,3 +1,6 @@
+CAWeb 1.10.7
+- Added register_meta for the Navigation Meta Fields, allowing these fields to be editable via Rest API
+
 CAWeb 1.10.6
 - Fixed issue with certain CAWeb Options not escaping/sanitizing properly
 - Removed unique version number from custom css/js
