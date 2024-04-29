@@ -1,4 +1,4 @@
-CAWeb 1.10.8
+CAWeb 1.11.0
 - Added Custom Fields action 
 - Added Action during CAWeb Options
 
