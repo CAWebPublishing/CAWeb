@@ -1,3 +1,7 @@
+CAWeb 1.11.0
+- Added Custom Fields action 
+- Added Action during CAWeb Options
+
 CAWeb 1.10.7
 - Added register_meta for the Navigation Meta Fields, allowing these fields to be editable via Rest API
 
