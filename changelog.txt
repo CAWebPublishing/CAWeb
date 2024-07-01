@@ -1,6 +1,5 @@
 CAWeb 1.11.2
 - Updated alert cookie from 0 to false
-- Added filter for SearchWP Media Support
 
 CAWeb 1.11.0
 - Added Custom Fields action 
