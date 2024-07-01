@@ -32,11 +32,6 @@ if ( defined( 'PHP_INT_MAX' ) ) {
 // The Events Calendar.
 add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_template_classes' );
 
-// SearchWP.
-add_filter( 'the_permalink',   'caweb_search_media_direct_link', 99, 2 );
-add_filter( 'attachment_link', 'caweb_search_media_direct_link', 99, 2 );
-
-
 /**
  * CAWeb Page Body Class
  *
@@ -348,23 +343,4 @@ function caweb_redirect_if_author_parameter() {
 		wp_safe_redirect( home_url(), 301 );
 		exit;
 	}
-}
-
-/**
- * Link directly to Media files instead of Attachment pages in search results.
- * 
- * @link https://searchwp.com/documentation/knowledge-base/link-file-pdf/
- *
- * @param string 	  $permalink The permalink for the current post
- * @param int|WP_Post $post      Post ID, WP_Post object, or 0. Default 0.
- * @return string
- */
-function caweb_search_media_direct_link( $permalink, $post = null ) {
-	if ( ( is_search() || doing_action( 'wp_ajax_searchwp_live_search' )
-	      || doing_action( 'wp_ajax_nopriv_searchwp_live_search' ) )
-	    && 'attachment' === get_post_type( $post ) ) {
-		$permalink = wp_get_attachment_url( $post );
-	}
-
-	return esc_url( $permalink );
 }
