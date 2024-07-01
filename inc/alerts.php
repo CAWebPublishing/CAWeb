@@ -29,7 +29,7 @@ function caweb_alert_cookies() {
 				$cookie = isset( $_COOKIE[ "caweb-alert-$a" ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ "caweb-alert-$a" ] ) ) : true;
 
 				if ( 'on' !== $status ) {
-					$cookie = '0';
+					$cookie = false;
 				}
 
 				setcookie( "caweb-alert-$a", $cookie, 0, '/' );
@@ -59,7 +59,7 @@ function caweb_render_alerts() {
 		$display = $alert['page_display'];
 		$status  = $alert['status'];
 
-		if ( $cookie && 'on' === $status &&
+		if ( $cookie !== false && 'on' === $status &&
 			(
 				( is_front_page() && 'home' === $display ) ||
 				( 'all' === $display )
@@ -107,7 +107,7 @@ function caweb_render_alerts() {
 		jQuery(document).ready(function($) {
 			$('.caweb-alert-close').on( 'click', function(e){ 
 				var alert_id = this.dataset.alert; 
-				document.cookie = 'caweb-alert-' + alert_id + '=0;path=/';
+				document.cookie = 'caweb-alert-' + alert_id + '=false;path=/';
 
 				$(`#caweb-alert-${alert_id}`)[0].remove();
 			});
