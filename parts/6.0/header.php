@@ -38,7 +38,27 @@ foreach ( $args as $var => $val ) {
 						</div>
 				</div>
 				<div class="settings-links">
+					<?php
+					for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) :
+						$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
+						$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
+						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? '_blank' : '_self';
+						$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
 
+						if ( $caweb_enabled ) :
+							?>
+							<a 
+								class="utility-custom-<?php print esc_attr( $caweb_i ); ?>" 
+								href="<?php print esc_url( $caweb_url ); ?>" target="<?php print esc_attr( $caweb_target ); ?>">
+							<?php print esc_html( wp_unslash( $caweb_text ) ); ?>
+							</a>
+						<?php endif; ?>
+					<?php endfor; ?>
+
+					<?php if ( ! empty( $caweb_contact_us_link ) ) : ?>
+						<a class="utility-contact-us" href="<?php print esc_url( $caweb_contact_us_link ); ?>">Contact Us</a>
+					<?php endif; ?>
+					
 					<?php if ( 'custom' === $caweb_google_trans_enabled && ! empty( $caweb_google_trans_page ) ) : ?>
 						<a 
 							id="caweb-gtrans-custom" 
@@ -57,6 +77,7 @@ foreach ( $args as $var => $val ) {
 					<?php if ( true === $caweb_google_trans_enabled || 'standard' === $caweb_google_trans_enabled ) : ?>
 						<div class="standard-translate" id="google_translate_element"></div>
 					<?php endif; ?>
+					
 				</div>
 			</div>
 		</div>

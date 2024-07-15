@@ -7880,9 +7880,8 @@ jQuery( document ).ready( function($) {
 			// Drop support for Search on Frontpage
 			$('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
 
-			// Drop support for Utility Header.
-			$('#utility-header-settings').prev().addClass('d-none');
-			$('#utility-header-settings').addClass('d-none');
+			// Drop support for Utility Header Home Icon.
+			$('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
 		// Version 5.
 		}else{
 			// Add support for mega menus.
@@ -7896,8 +7895,7 @@ jQuery( document ).ready( function($) {
 			$('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
 
 			// Drop support for Utility Header.
-			$('#utility-header-settings').prev().removeClass('d-none');
-			$('#utility-header-settings').removeClass('d-none');
+			$('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
 		}
 	}
 
