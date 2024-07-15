@@ -191,8 +191,6 @@ function caweb_template_colors() {
 function caweb_nav_menu_types() {
 	$menu_types = array(
 		'dropdown'     => 'Drop Down',
-		'flexmega'     => 'Flex Mega Menu',
-		'megadropdown' => 'Mega Drop',
 		'singlelevel'  => 'Single Level',
 	);
 
