@@ -70,10 +70,10 @@ jQuery( document ).ready( function($) {
 			$('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
 			$('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
 
-			// if current menu is no longer supported, set to singlelevel.
+			// if current menu is no longer supported, set to dropdown.
 			if( ['flexmega','megadropdown'].includes( current_menu ) ){
-				$(`#ca_default_navigation_menu option[value="${current_menu}"]`).attr('selected', false);
-				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', true);
+				$(`#ca_default_navigation_menu option[value="dropdown"]`).attr('selected', true);
+				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', false);
 			}
 		
 			// Drop support for Menu Home Link.

@@ -21,7 +21,7 @@ add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 // Theme Option filters.
 add_filter( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme', 10, 2 );
 add_filter( 'option_ca_fav_ico', 'caweb_pre_option_ca_fav_ico', 10, 2 );
-add_filter( 'option_ca_default_navigation_menu', 'caweb_pre_ca_default_navigation_menu', 10, 2 );
+//add_filter( 'option_ca_default_navigation_menu', 'caweb_pre_ca_default_navigation_menu', 10, 2 );
 
 /**
  * This filter is used to switch menu order.
