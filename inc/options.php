@@ -17,8 +17,11 @@ add_action( 'pre_update_site_option_caweb_password', 'caweb_pre_update_site_opti
 
 add_filter( 'custom_menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
+
+// Theme Option filters.
 add_filter( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme', 10, 2 );
 add_filter( 'option_ca_fav_ico', 'caweb_pre_option_ca_fav_ico', 10, 2 );
+//add_filter( 'option_ca_default_navigation_menu', 'caweb_pre_ca_default_navigation_menu', 10, 2 );
 
 /**
  * This filter is used to switch menu order.
@@ -706,4 +709,23 @@ function caweb_pre_option_ca_fav_ico( $value, $option ) {
 	$ico = str_ends_with( $value, $old_file_path ) ? str_replace( $old_file_path, $new_file_path, $value ) : $value;
 
 	return $ico;
+}
+
+/**
+ * Filters the value of the CAWeb Navigation Menu Style.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/option_option/
+ *
+ * @since 1.12.0 Flex Mega and Mega Menu have been removed.
+ * @param  mixed  $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
+ * @param  string $option Option name.
+ * @return mixed
+ */
+function caweb_pre_ca_default_navigation_menu( $value, $option ) {
+	// if menu style has been deprecated fallback to dropdown
+	if( ! in_array( $value, caweb_nav_menu_types(), true ) ){
+		return 'dropdown';
+	}
+
+	return $value;
 }

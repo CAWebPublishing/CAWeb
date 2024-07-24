@@ -70,10 +70,10 @@ jQuery( document ).ready( function($) {
 			$('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
 			$('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
 
-			// if current menu is no longer supported, set to singlelevel.
+			// if current menu is no longer supported, set to dropdown.
 			if( ['flexmega','megadropdown'].includes( current_menu ) ){
-				$(`#ca_default_navigation_menu option[value="${current_menu}"]`).attr('selected', false);
-				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', true);
+				$(`#ca_default_navigation_menu option[value="dropdown"]`).attr('selected', true);
+				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', false);
 			}
 		
 			// Drop support for Menu Home Link.
@@ -82,9 +82,8 @@ jQuery( document ).ready( function($) {
 			// Drop support for Search on Frontpage
 			$('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
 
-			// Drop support for Utility Header.
-			$('#utility-header-settings').prev().addClass('d-none');
-			$('#utility-header-settings').addClass('d-none');
+			// Drop support for Utility Header Home Icon.
+			$('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
 		// Version 5.
 		}else{
 			// Add support for mega menus.
@@ -98,8 +97,7 @@ jQuery( document ).ready( function($) {
 			$('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
 
 			// Drop support for Utility Header.
-			$('#utility-header-settings').prev().removeClass('d-none');
-			$('#utility-header-settings').removeClass('d-none');
+			$('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
 		}
 	}
 
