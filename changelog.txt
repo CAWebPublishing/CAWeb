@@ -1,3 +1,6 @@
+CAWeb 1.11.3a
+- Increased admin_bar_menu priority due to 6.6.1 increase
+
 CAWeb 1.11.3
 - Added Utility Header Options back in for v6
 - Dropped Flex and Mega Menu Options
