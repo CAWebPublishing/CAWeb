@@ -97,7 +97,7 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 	*/
 	$my_account = $wp_admin_bar->get_node( 'my-account' );
 	$newtext    = str_replace( 'Howdy,', 'Logged in as:', $my_account->title );
-	update_site_option('dev', array($my_account, $wp_admin_bar) );
+	
 	$wp_admin_bar->add_node(
 		array(
 			'id'    => 'my-account',
