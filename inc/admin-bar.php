@@ -10,12 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
+add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 9999 );
 
 /**
  * Load all necessary CAWeb Admin Bar items.
  *
- * @wp_action add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 1000 );
+ * 
+ * @wp_action add_action( 'admin_bar_menu', 'caweb_admin_bar_menu', 9999 );
+ * @since 6.6.1 priorty was increased to 9999 so we bumped ours up as well.
  * @param  WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance, passed by reference.
  * @return void
  */
@@ -95,7 +97,7 @@ function caweb_admin_bar_menu( $wp_admin_bar ) {
 	*/
 	$my_account = $wp_admin_bar->get_node( 'my-account' );
 	$newtext    = str_replace( 'Howdy,', 'Logged in as:', $my_account->title );
-
+	
 	$wp_admin_bar->add_node(
 		array(
 			'id'    => 'my-account',
