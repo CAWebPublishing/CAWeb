@@ -389,7 +389,10 @@ function caweb_wp_enqueue_scripts() {
 	 *
 	 * @todo Once 5.5 is completely removed the core file can be loaded with webpack instead.
 	 */
-	$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+
+	if( 5.5 === $version ){
+		$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+	}
 
 	// CAWeb JS File.
 	$caweb_js_file = caweb_get_min_file( '/build/caweb-core.js', 'js' );
@@ -409,7 +412,9 @@ function caweb_wp_enqueue_scripts() {
 	wp_localize_script( 'caweb-core-script', 'args', $localize_args );
 
 	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script' ), CAWEB_VERSION, true );
+	if( 5.5 === $version ){
+		wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script' ), CAWEB_VERSION, true );
+	}
 
 	wp_enqueue_script( 'caweb-core-script' );
 
