@@ -254,6 +254,11 @@ function caweb_pre_get_posts( $query ) {
  * @return void
  */
 function caweb_wp_body_open() {
+	// don't load the header if on the backend
+	if( is_admin() ){
+		return;
+	}
+
 	$caweb_version       = caweb_template_version();
 	$caweb_logo          = get_option( 'header_ca_branding', '' );
 	$caweb_logo_alt_text = get_option( 'header_ca_branding_alt_text', '' );
@@ -302,7 +307,10 @@ function caweb_wp_body_open() {
  * @return void
  */
 function caweb_wp_footer() {
-	get_template_part( 'parts/footer' );
+	// don't load the footer if on the backend
+	if( ! is_admin() ){
+		get_template_part( 'parts/footer' );
+	}
 
 	/* This removes Divi Builder Google Font CSS */
 	wp_deregister_style( 'et-builder-googlefonts' );
@@ -389,7 +397,10 @@ function caweb_wp_enqueue_scripts() {
 	 *
 	 * @todo Once 5.5 is completely removed the core file can be loaded with webpack instead.
 	 */
-	$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+
+	if( 5.5 === $version ){
+		$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+	}
 
 	// CAWeb JS File.
 	$caweb_js_file = caweb_get_min_file( '/build/caweb-core.js', 'js' );
@@ -409,7 +420,9 @@ function caweb_wp_enqueue_scripts() {
 	wp_localize_script( 'caweb-core-script', 'args', $localize_args );
 
 	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script' ), CAWEB_VERSION, true );
+	if( 5.5 === $version ){
+		wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script' ), CAWEB_VERSION, true );
+	}
 
 	wp_enqueue_script( 'caweb-core-script' );
 
