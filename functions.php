@@ -254,6 +254,11 @@ function caweb_pre_get_posts( $query ) {
  * @return void
  */
 function caweb_wp_body_open() {
+	// don't load the header if on the backend
+	if( is_admin() ){
+		return;
+	}
+
 	$caweb_version       = caweb_template_version();
 	$caweb_logo          = get_option( 'header_ca_branding', '' );
 	$caweb_logo_alt_text = get_option( 'header_ca_branding_alt_text', '' );
@@ -302,7 +307,10 @@ function caweb_wp_body_open() {
  * @return void
  */
 function caweb_wp_footer() {
-	get_template_part( 'parts/footer' );
+	// don't load the footer if on the backend
+	if( ! is_admin() ){
+		get_template_part( 'parts/footer' );
+	}
 
 	/* This removes Divi Builder Google Font CSS */
 	wp_deregister_style( 'et-builder-googlefonts' );
