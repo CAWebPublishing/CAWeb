@@ -61,6 +61,9 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 				),
 			),
 		);
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'caweb_github_wp_enqueue_scripts' ) );
+
 	}
 
 	/**
@@ -221,12 +224,7 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 
 		$class = sprintf( ' class="%1$s"', $this->module_classname( $render_slug ) );
 
-		$content = $this->content;
-
-		$output = '';
-
-		if ( ! empty( $username ) ) {
-			$url = sprintf(
+		$url = ! empty( $username )  ? sprintf(
 				'https://api.github.com/orgs/%1$s/repos?per_page=%2$s%3$s&type=%4$s%5$s',
 				$username,
 				$per_page,
@@ -234,78 +232,34 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 					sprintf( '&client_id=%1$s&client_secret=%2$s', $client_id, $client_secret ) : '',
 				$repo_type,
 				! empty( $access_token ) ? sprintf( '&access_token=%1$s', $access_token ) : ''
-			);
-
-			$repos = wp_remote_get( $url );
-			$code  = wp_remote_retrieve_response_code( $repos );
-
-			if ( 200 === $code ) {
-				$repos     = json_decode( wp_remote_retrieve_body( $repos ) );
-				$repo_list = '';
-
-				foreach ( $repos as $r => $repo ) {
-					$request_link = ( ! empty( $request_email ) && $repo->private ?
-					sprintf(
-						'<p>* This is a Private Repository <a class="btn btn-default" href="mailto:%1$s?subject=%2$s&body=%3$s">Request Access</a></p>',
-						$request_email,
-						sprintf( '%1$s Repository Access Request', $repo->full_name ),
-						$email_body
-					) : '' );
-
-					if ( 'on' === $definitions[0] ) {
-						if ( 'on' !== $definitions[1] || $repo->private ) {
-							$name = sprintf( '<h3>%1$s</h3>', $repo->name );
-						} elseif ( 'on' === $definitions[1] ) {
-							$name = sprintf(
-								'<h3><a href="%1$s" target="blank">%2$s</a></h3>',
-								$repo->html_url,
-								$repo->name
-							);
-						}
-					}
-
-					$desc = ( 'on' === $definitions[2] && ! empty( $repo->description ) ?
-										sprintf( '<p>Project Description: %1$s</p>', $repo->description ) : '' );
-
-					$fork = ( 'on' === $definitions[3] ?
-							sprintf( '<p>Project forked by another organization: %1$s</p>', ( empty( $repo->fork ) ? 'False' : 'True' ) ) :
-									'' );
-
-					$created_at = ( 'on' === $definitions[4] ?
-												sprintf( '<p>Created on: %1$s</p>', gmdate( 'm/d/Y', strtotime( $repo->created_at ) ) ) : '' );
-
-					$updated_at = ( 'on' === $definitions[5] ?
-												sprintf( '<p>Updated on: %1$s</p>', gmdate( 'm/d/Y', strtotime( $repo->updated_at ) ) ) : '' );
-
-					$language = ( 'on' === $definitions[6] && ! empty( $repo->language ) ?
-											sprintf( '<p>Language: %1$s</p>', $repo->language ) : '' );
-
-					$repo_list .= sprintf(
-						'<li>%1$s%2$s%3$s%4$s%5$s%6$s%7$s<hr></li>',
-						( ! empty( $name ) ? $name : '' ),
-						$desc,
-						$fork,
-						$created_at,
-						$updated_at,
-						$language,
-						( ! empty( $request_link ) ? $request_link : '' )
-					);
-				}
-				$output = sprintf( '<ul class="pl-0">%1$s</ul>', $repo_list );
-			} else {
-				$output = '<strong>No GitHub Repository Found</strong>';
-			}
-		}
+			) : '';
 
 		$output = sprintf(
-			'<div%1$s%2$s>%3$s%4$s</div>',
+			'<div%1$s%2$s%3$s%4$s%5$s%6$s%7$s></div>',
 			$this->module_id(),
 			$class,
-			! empty( $title ) ? sprintf( '<%1$s>%2$s</%1$s>', $title_size, $title ) : '',
-			$output
+			! empty( $url ) ? sprintf(' data-url="%1$s"', $url ) : '',
+			! empty( $title ) ? sprintf( ' data-title="%1$s"', $title ) : '',
+			! empty( $title ) && ! empty( $title_size ) ? sprintf( ' data-title-size="%1$s"', $title_size ) : '',
+			$request_email ? sprintf( ' data-email="%1$s"', $request_email ) : '',
+			! empty( $definitions ) ? sprintf( ' data-definitions=%1$s', json_encode($definitions) ) : ''
 		);
 
 		return $output;
+	}
+
+	/**
+	 * Register CAWeb Github module scripts/styles with priority of 99999999
+	 *
+	 * Fires when scripts and styles are enqueued.
+	 *
+	 * @wp_action add_action( 'wp_enqueue_scripts', 'caweb_wp_enqueue_scripts', 99999999 );
+	 * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+	 *
+	 * @return void
+	 */
+	public function caweb_github_wp_enqueue_scripts() {
+		wp_enqueue_script( 'caweb-github-script', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', __DIR__ . '/' ) ) . '/github.js', array( 'jquery' ), CAWEB_VERSION, true );
 	}
 }
 new CAWeb_Module_GitHub();
