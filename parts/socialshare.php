@@ -13,11 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // social media.
 $caweb_social_media = caweb_get_social_media_links();
-$caweb_social_links = '';
+$caweb_social_opened = false;
 
 if ( ! empty( $caweb_social_media ) ) :
 	?>
-	<ul class="socialsharer-container">
 	<?php
 	foreach ( $caweb_social_media as $caweb_share => $caweb_option ) :
 		$caweb_share_email  = 'ca_social_email' === $caweb_option ? true : false;
@@ -27,13 +26,20 @@ if ( ! empty( $caweb_social_media ) ) :
 		if ( ! in_array( $caweb_option, $args, true ) &&
 			get_option( $caweb_option . '_footer' ) &&
 			( $caweb_share_email || ! empty( get_option( $caweb_option, '' ) ) )
-		) :
+		) {
 			$caweb_social_url = $caweb_share_email ? $caweb_mailto : get_option( $caweb_option );
 
 			$caweb_social_default_title = "Share via $caweb_share";
 			$caweb_social_title         = get_option( "${caweb_option}_hover_text", $caweb_social_default_title );
 			$caweb_icon                 = str_replace( '_', '-', substr( $caweb_option, 10 ) );
 			$caweb_social_target        = get_option( "${caweb_option}_new_window", true ) ? '_blank' : '_self';
+
+			if( ! $caweb_social_opened ){
+				$caweb_social_opened = true;
+				?>
+				<ul class="socialsharer-container">
+				<?php
+			}
 			?>
 		<li>
 			<a 
@@ -48,7 +54,13 @@ if ( ! empty( $caweb_social_media ) ) :
 			</a>
 		</li>
 
-	<?php endif; ?>
-	<?php endforeach; ?>
-	</ul>
+	<?php 
+		}
+	endforeach; 
+	if( $caweb_social_opened ){
+		?>
+		</ul>
+		<?php
+	}
+	?>
 <?php endif; ?>

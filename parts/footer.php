@@ -24,7 +24,6 @@ $caweb_template_version = caweb_template_version();
 
 // social media.
 $caweb_social_media      = caweb_get_social_media_links();
-$caweb_social_links      = '';
 $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 	array(
 		'ca_social_snapchat',
@@ -50,16 +49,14 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 			)
 		);
 	} else {
-		// @todo remove Back to Top link once 5.5 is completely removed.
 		?>
 			<div class="container">
-				<ul class="footer-links me-auto">
-					<li class="d-none">
-						<a href="#skip-to-content">Back to Top</a>
-					</li>
-					<li><a>There Is No Navigation Menu Set</a></li>
-				</ul>
-				<?php get_template_part( 'parts/socialshare', null, $caweb_social_exclusions ); ?>
+				<div class="d-flex">
+					<ul class="footer-links me-auto">
+						<li><a>There Is No Navigation Menu Set</a></li>
+					</ul>
+					<?php get_template_part( 'parts/socialshare', null, $caweb_social_exclusions ); ?>
+				</div>
 			</div>
 		<?php
 	}
@@ -72,7 +69,7 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 				<?php if ( $caweb_plugin_active ) : ?>
 					<span class="ms-auto">Powered by: CAWeb Publishing Service</span>
 				<?php endif; ?>
-				</div>
+			</div>
 		</div>
 	</div>
 
