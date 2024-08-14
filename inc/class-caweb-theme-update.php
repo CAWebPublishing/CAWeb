@@ -50,6 +50,13 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 		/**
 		 * Member Variable
 		 *
+		 * @var array $request_headers Headers used during theme request.
+		 */
+		protected $request_headers;
+
+		/**
+		 * Member Variable
+		 *
 		 * @var CAWeb_Theme_Update $caweb_this Self instance.
 		 */
 		private static $caweb_this;
@@ -73,7 +80,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			$this->theme_name      = $theme->name;
 			$this->current_version = $theme->version;
 
-			$this->args = array(
+			$this->request_headers = array(
 				'headers' => array(
 					'User-Agent' => 'WP-' . $this->theme_name,
 					'Accept:'    => 'application/vnd.github.v3+json',
@@ -83,7 +90,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			);
 
 			if ( true === get_site_option( 'caweb_private_theme_enabled', false ) ) {
-				$this->args['headers']['Authorization'] = 'Basic ' . base64_encode( ':' . get_site_option( 'caweb_password', '' ) );
+				$this->request_headers['headers']['Authorization'] = 'Basic ' . base64_encode( ':' . get_site_option( 'caweb_password', '' ) );
 			}
 
 			add_action( 'admin_post_nopriv_caweb_update_available', array( $this, 'caweb_update_available' ) );
@@ -125,7 +132,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 			$caweb_update_themes = get_site_transient( $this->transient_name );
 
 			if ( ! empty( $caweb_update_themes ) && isset( $caweb_update_themes->response[ $this->theme_name ]['changelog'] ) ) {
-				$content = wp_remote_get( $caweb_update_themes->response[ $this->theme_name ]['changelog'], $this->args );
+				$content = wp_remote_get( $caweb_update_themes->response[ $this->theme_name ]['changelog'], $this->request_headers );
 
 				if ( ! is_wp_error( $content ) && 200 === wp_remote_retrieve_response_code( $content ) ) {
 					printf( '<pre>%1$s</pre>', wp_kses( wp_remote_retrieve_body( $content ), 'post' ) );
@@ -153,7 +160,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 
 			$last_update = new stdClass();
 
-			$payload = wp_remote_get( sprintf( 'https://api.github.com/repos/%1$s/%2$s/releases/latest', $this->user, $this->theme_name ), $this->args );
+			$payload = wp_remote_get( sprintf( 'https://api.github.com/repos/%1$s/%2$s/releases/latest', $this->user, $this->theme_name ), $this->request_headers );
 
 			if ( ! is_wp_error( $payload ) && wp_remote_retrieve_response_code( $payload ) === 200 ) {
 				$payload = json_decode( wp_remote_retrieve_body( $payload ) );
@@ -235,7 +242,7 @@ if ( ! class_exists( 'CAWeb_Theme_Update' ) ) {
 				method_exists( $upgrader->skin->theme_info, 'get' ) &&
 				$upgrader->skin->theme_info->get( 'Name' ) === $this->theme_name
 				) {
-				$theme = wp_remote_retrieve_body( wp_remote_get( $package, array_merge( $this->args, array( 'timeout' => 60 ) ) ) );
+				$theme = wp_remote_retrieve_body( wp_remote_get( $package, array_merge( $this->request_headers, array( 'timeout' => 60 ) ) ) );
 
 				global $wp_filesystem;
 				$wp_filesystem->put_contents( sprintf( '%1$s/themes/%2$s.zip', WP_CONTENT_DIR, $this->theme_name ), $theme );

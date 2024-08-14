@@ -564,9 +564,6 @@ function caweb_enqueue_google_scripts( $localized ) {
  * @return void
  */
 function caweb_admin_init() {
-	/* Core Updater */
-	require_once CAWEB_ABSPATH . '/core/class-caweb-theme-update.php';
-
 	/**
 	 * Initialize the WP Filesystem Class
 	 *

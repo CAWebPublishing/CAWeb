@@ -8,6 +8,7 @@ CAWeb 1.12.0
 - Changed Search input type from text to search 
 - Updated font-icon reference
 - Resolved issue with Divi Toggle Icon not rendering
+- Resolved deprecation variable not defined in updater
 
 CAWeb 1.11.3a
 - Increased admin_bar_menu priority due to 6.6.1 increase
