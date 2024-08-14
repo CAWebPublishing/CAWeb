@@ -1,6 +1,13 @@
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/font-only.css ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
+  \******************************************************************************************************************************************************************************/
+/* -----------------------------------------
+   ICON FONTS - /source/scss/cagov/icon-font.scss
+----------------------------------------- */
+
 @font-face {
   font-family: 'CaGov';
   src:  url(fonts/CaGov.eot);
@@ -13,7 +20,8 @@
   font-display: block;
 }
 
-[class^="ca-gov-icon-"], [class*=" ca-gov-icon-"] {
+[class^="ca-gov-icon-"],
+[class*=" ca-gov-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'CaGov' !important;
   font-style: normal;
@@ -2303,10 +2311,9 @@
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
-
-/*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/divi-icon-override.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/divi-icon-override.css ***!
+  \***************************************************************************************************************************************************************************************/
 select[data-class-icon] {
   font-size: 20px;
   font-family: "CaGov";
@@ -2353,15 +2360,17 @@ li[class^="et_fb_profile_banner"]::before{
 		content: '\c90b' !important;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
 /*
 Custom variables for the CAWeb Theme
 based off CA State Template v5.5.23
 */
 body[class*="5.5"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+  /* Location Bar Style */
+  /* Google Translate */
   /* Google Search */
   /* Override styles for second level navs not using flex */
 }
@@ -2508,13 +2517,14 @@ body[class*="5.5"]:not(.divi-built) #main-content {
   }
 }
 body[class*="5.5"].divi-built {
-  /* Divi Specific Overrides */ /**
-* Page & Builder Width Styles
-* 
-* Divi Built Standard Section Rows
-* Divi Built Standard Section Rows when using Visual Builder
-* Divi Fullwidth Menu Module Rows
-*/
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -2522,7 +2532,10 @@ body[class*="5.5"].divi-built {
   * Divi Built Standard Section Rows when using Visual Builder
   * Divi Fullwidth Menu Module Rows
   */
-  /* Apply focus outline */ /* Remove the State Template background image from Divi Button */ /* Remove the State Template background image from Person Module Social Links */ /* Apply focus outline */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
+  /* Apply focus outline */
 }
 body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
 body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
@@ -2657,7 +2670,9 @@ body[class*="5.5"] nav.megadropdown .media-left .media-object {
   }
 }
 body[class*="6.0"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+  /* Location Bar Style */
+  /* Google Translate */
   /* Google Search */
 }
 body[class*="6.0"] body:not(.sticky_nav) #main-content.main-content {
@@ -2803,13 +2818,14 @@ body[class*="6.0"]:not(.divi-built) #main-content {
   }
 }
 body[class*="6.0"].divi-built {
-  /* Divi Specific Overrides */ /**
-* Page & Builder Width Styles
-* 
-* Divi Built Standard Section Rows
-* Divi Built Standard Section Rows when using Visual Builder
-* Divi Fullwidth Menu Module Rows
-*/
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -2817,7 +2833,10 @@ body[class*="6.0"].divi-built {
   * Divi Built Standard Section Rows when using Visual Builder
   * Divi Fullwidth Menu Module Rows
   */
-  /* Apply focus outline */ /* Remove the State Template background image from Divi Button */ /* Remove the State Template background image from Person Module Social Links */ /* Apply focus outline */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
+  /* Apply focus outline */
 }
 body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
 body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
@@ -3032,7 +3051,8 @@ body.sidebar-displayed footer {
     visibility: hidden !important;
   }
 }
-/* WordPress Specific Overrides */ /* Hide Activation Links on wp-activate.php */
+/* WordPress Specific Overrides */
+/* Hide Activation Links on wp-activate.php */
 .wp-activate-container p.view {
   display: none;
 }
