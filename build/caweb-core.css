@@ -1,6 +1,13 @@
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/font-only.css ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
+  \******************************************************************************************************************************************************************************/
+/* -----------------------------------------
+   ICON FONTS - /source/scss/cagov/icon-font.scss
+----------------------------------------- */
+
 @font-face {
   font-family: 'CaGov';
   src:  url(fonts/CaGov.eot);
@@ -13,7 +20,8 @@
   font-display: block;
 }
 
-[class^="ca-gov-icon-"], [class*=" ca-gov-icon-"] {
+[class^="ca-gov-icon-"],
+[class*=" ca-gov-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'CaGov' !important;
   font-style: normal;
@@ -2304,64 +2312,20 @@
   content: "\ea33" !important;
 }
 
-/*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/divi-icon-override.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************/
-select[data-class-icon] {
-  font-size: 20px;
-  font-family: "CaGov";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.et_font_icon li[class^="ca-gov-icon-"]:before,
-.et_font_icon li[class*=" ca-gov-icon-"]:before {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'CaGov' !important;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.et_font_icon li{
-  font-size: 17px;
-}
-
-.et_font_icon li:before, .et_pb_inline_icon:before,
-body #page-container .et_pb_section a.et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
-.et-pb-icon,  .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after{
-    font-family: 'CaGov', 'ETModules' !important;
-		content: attr(data-icon);
-}
-
-/* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
-li[class^="et_pb_ca"]::before, 
-li[class^="et_pb_profile_banner"]::before,
-li[class^="et_fb_ca"]::before,
-li[class^="et_fb_profile_banner"]::before{
-		font-family: 'CaGov' !important;
-		content: '\c90b' !important;
-}
-
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*# sourceMappingURL=font-only.css.map*/
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
 /*
 Custom variables for the CAWeb Theme
 based off CA State Template v5.5.23
 */
 body[class*="5.5"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+  /* Location Bar Style */
+  /* Google Translate */
   /* Google Search */
   /* Override styles for second level navs not using flex */
 }
@@ -2508,13 +2472,14 @@ body[class*="5.5"]:not(.divi-built) #main-content {
   }
 }
 body[class*="5.5"].divi-built {
-  /* Divi Specific Overrides */ /**
-* Page & Builder Width Styles
-* 
-* Divi Built Standard Section Rows
-* Divi Built Standard Section Rows when using Visual Builder
-* Divi Fullwidth Menu Module Rows
-*/
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -2522,7 +2487,10 @@ body[class*="5.5"].divi-built {
   * Divi Built Standard Section Rows when using Visual Builder
   * Divi Fullwidth Menu Module Rows
   */
-  /* Apply focus outline */ /* Remove the State Template background image from Divi Button */ /* Remove the State Template background image from Person Module Social Links */ /* Apply focus outline */
+  /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
 }
 body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
 body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
@@ -2581,6 +2549,47 @@ body[class*="5.5"].divi-built .page-date {
 body[class*="5.5"].divi-built article article.et_pb_post {
   margin-bottom: 30px;
 }
+body[class*="5.5"].divi-built select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="5.5"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,
+body[class*="5.5"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "CaGov" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="5.5"].divi-built .et_font_icon li {
+  font-size: 17px;
+}
+body[class*="5.5"].divi-built .et_font_icon li:before,
+body[class*="5.5"].divi-built .et_pb_inline_icon:before,
+body[class*="5.5"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:after,
+body[class*="5.5"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="5.5"].divi-built .et-pb-icon,
+body[class*="5.5"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
+  font-family: "CaGov", "ETModules" !important;
+  content: attr(data-icon);
+}
+body[class*="5.5"].divi-built li[class^=et_pb_ca]::before,
+body[class*="5.5"].divi-built li[class^=et_pb_profile_banner]::before,
+body[class*="5.5"].divi-built li[class^=et_fb_ca]::before,
+body[class*="5.5"].divi-built li[class^=et_fb_profile_banner]::before {
+  font-family: "CaGov" !important;
+  content: "줋" !important;
+}
 body[class*="5.5"].divi-built .et_pb_toggle.et_pb_accordion_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
@@ -2609,8 +2618,11 @@ body[class*="5.5"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
 body[class*="5.5"].divi-built .et_pb_text ol, body[class*="5.5"].divi-built .et_pb_text ul {
   padding-bottom: 0;
 }
-body[class*="5.5"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
+body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
+}
+body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
+  font-family: "CaGov" !important;
 }
 body[class*="5.5"] #navigation .top-level-nav {
   width: 100%;
@@ -2657,7 +2669,9 @@ body[class*="5.5"] nav.megadropdown .media-left .media-object {
   }
 }
 body[class*="6.0"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */ /* Location Bar Style */ /* Google Translate */
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+  /* Location Bar Style */
+  /* Google Translate */
   /* Google Search */
 }
 body[class*="6.0"] body:not(.sticky_nav) #main-content.main-content {
@@ -2803,13 +2817,14 @@ body[class*="6.0"]:not(.divi-built) #main-content {
   }
 }
 body[class*="6.0"].divi-built {
-  /* Divi Specific Overrides */ /**
-* Page & Builder Width Styles
-* 
-* Divi Built Standard Section Rows
-* Divi Built Standard Section Rows when using Visual Builder
-* Divi Fullwidth Menu Module Rows
-*/
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
   /**
   * Page & Builder Width Breakpoint Styles
   * 
@@ -2817,7 +2832,10 @@ body[class*="6.0"].divi-built {
   * Divi Built Standard Section Rows when using Visual Builder
   * Divi Fullwidth Menu Module Rows
   */
-  /* Apply focus outline */ /* Remove the State Template background image from Divi Button */ /* Remove the State Template background image from Person Module Social Links */ /* Apply focus outline */
+  /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
 }
 body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
 body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
@@ -2876,6 +2894,47 @@ body[class*="6.0"].divi-built .page-date {
 body[class*="6.0"].divi-built article article.et_pb_post {
   margin-bottom: 30px;
 }
+body[class*="6.0"].divi-built select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="6.0"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,
+body[class*="6.0"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "CaGov" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="6.0"].divi-built .et_font_icon li {
+  font-size: 17px;
+}
+body[class*="6.0"].divi-built .et_font_icon li:before,
+body[class*="6.0"].divi-built .et_pb_inline_icon:before,
+body[class*="6.0"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:after,
+body[class*="6.0"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="6.0"].divi-built .et-pb-icon,
+body[class*="6.0"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
+  font-family: "CaGov", "ETModules" !important;
+  content: attr(data-icon);
+}
+body[class*="6.0"].divi-built li[class^=et_pb_ca]::before,
+body[class*="6.0"].divi-built li[class^=et_pb_profile_banner]::before,
+body[class*="6.0"].divi-built li[class^=et_fb_ca]::before,
+body[class*="6.0"].divi-built li[class^=et_fb_profile_banner]::before {
+  font-family: "CaGov" !important;
+  content: "줋" !important;
+}
 body[class*="6.0"].divi-built .et_pb_toggle.et_pb_accordion_item:focus {
   outline: #2ea3f2 solid 2px !important;
 }
@@ -2904,8 +2963,11 @@ body[class*="6.0"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
 body[class*="6.0"].divi-built .et_pb_text ol, body[class*="6.0"].divi-built .et_pb_text ul {
   padding-bottom: 0;
 }
-body[class*="6.0"].divi-built .et_pb_toggle.et_pb_toggle_item:focus {
+body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
   outline: #2ea3f2 solid 2px !important;
+}
+body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
+  font-family: "CaGov" !important;
 }
 @media (max-width: 768px) {
   body[class*="6.0"].admin-bar header .navigation-search {
@@ -3032,7 +3094,8 @@ body.sidebar-displayed footer {
     visibility: hidden !important;
   }
 }
-/* WordPress Specific Overrides */ /* Hide Activation Links on wp-activate.php */
+/* WordPress Specific Overrides */
+/* Hide Activation Links on wp-activate.php */
 .wp-activate-container p.view {
   display: none;
 }

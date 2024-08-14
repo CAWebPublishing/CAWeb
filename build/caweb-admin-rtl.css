@@ -1,6 +1,6 @@
-/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/bootstrap-icons/font/bootstrap-icons.css ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/bootstrap-icons/font/bootstrap-icons.css ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*!
  * Bootstrap Icons v1.11.3 (https://icons.getbootstrap.com/)
  * Copyright 2019-2024 The Bootstrap Authors
@@ -2080,9 +2080,16 @@ url(fonts/bootstrap-icons.woff) format("woff");
 .bi-suitcase2::before { content: "\f902"; }
 .bi-vignette::before { content: "\f903"; }
 
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/font-only.css ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
+  \******************************************************************************************************************************************************************************/
+/* -----------------------------------------
+   ICON FONTS - /source/scss/cagov/icon-font.scss
+----------------------------------------- */
+
 @font-face {
   font-family: 'CaGov';
   src:  url(fonts/CaGov.eot);
@@ -2095,7 +2102,8 @@ url(fonts/bootstrap-icons.woff) format("woff");
   font-display: block;
 }
 
-[class^="ca-gov-icon-"], [class*=" ca-gov-icon-"] {
+[class^="ca-gov-icon-"],
+[class*=" ca-gov-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'CaGov' !important;
   font-style: normal;
@@ -4385,59 +4393,9 @@ url(fonts/bootstrap-icons.woff) format("woff");
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
-
-/*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./src/styles/divi-icon-override.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************/
-select[data-class-icon] {
-  font-size: 20px;
-  font-family: "CaGov";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.et_font_icon li[class^="ca-gov-icon-"]:before,
-.et_font_icon li[class*=" ca-gov-icon-"]:before {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'CaGov' !important;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.et_font_icon li{
-  font-size: 17px;
-}
-
-.et_font_icon li:before, .et_pb_inline_icon:before,
-body #page-container .et_pb_section a.et_pb_custom_button_icon:after, body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
-.et-pb-icon,  .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after{
-    font-family: 'CaGov', 'ETModules' !important;
-		content: attr(data-icon);
-}
-
-/* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
-li[class^="et_pb_ca"]::before, 
-li[class^="et_pb_profile_banner"]::before,
-li[class^="et_fb_ca"]::before,
-li[class^="et_fb_profile_banner"]::before{
-		font-family: 'CaGov' !important;
-		content: '\c90b' !important;
-}
-
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/admin/index.scss ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/admin/index.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*----------------
  # Bootstrap
@@ -13513,6 +13471,53 @@ li[id^=customize-control-ca_utility_link_][id$=new_window] {
 li[id^=customize-control-caweb_alert_banner_] input[type=radio],
 li[id^=customize-control-caweb_alert_banner_] input[type=checkbox] {
   height: 1rem;
+}
+
+select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.et_font_icon li[class^=ca-gov-icon-]:before,
+.et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "CaGov" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.et_font_icon li {
+  font-size: 17px;
+}
+
+.et_font_icon li:before,
+.et_pb_inline_icon:before,
+body #page-container .et_pb_section a.et_pb_custom_button_icon:after,
+body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+.et-pb-icon,
+.et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
+  font-family: "CaGov", "ETModules" !important;
+  content: attr(data-icon);
+}
+
+/* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+li[class^=et_pb_ca]::before,
+li[class^=et_pb_profile_banner]::before,
+li[class^=et_fb_ca]::before,
+li[class^=et_fb_profile_banner]::before {
+  font-family: "CaGov" !important;
+  content: "줋" !important;
 }
 
 /* Overrides styles applied by conflict between WordPress and Bootstrap */
