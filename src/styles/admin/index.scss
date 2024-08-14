@@ -16,8 +16,8 @@
 @import "../wp/login";
 @import "../wp/customizer";
 
-@import '../font-only.css';
-@import '../divi-icon-override.css';
+@import '@caweb/html-webpack-plugin/build/font-only.css';
+@import '../divi/icons';
 
 /* Overrides styles applied by conflict between WordPress and Bootstrap */
 body.nav-menus-php,

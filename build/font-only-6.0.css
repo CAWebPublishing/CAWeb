@@ -1,16 +1,27 @@
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
+  \******************************************************************************************************************************************************************************/
+/* -----------------------------------------
+   ICON FONTS - /source/scss/cagov/icon-font.scss
+----------------------------------------- */
+
 @font-face {
   font-family: 'CaGov';
-  src:  url('../fonts/CaGov.eot?lf5spa');
-  src:  url('../fonts/CaGov.eot?lf5spa#iefix') format('embedded-opentype'),
-    url('../fonts/CaGov.ttf?lf5spa') format('truetype'),
-    url('../fonts/CaGov.woff?lf5spa') format('woff'),
-    url('../fonts/CaGov.svg?lf5spa#CaGov') format('svg');
+  src:  url(fonts/CaGov.eot);
+  src:  url(fonts/CaGov.eot#iefix) format('embedded-opentype'),
+    url(fonts/CaGov.ttf) format('truetype'),
+    url(fonts/CaGov.woff) format('woff'),
+    url(fonts/CaGov.svg#CaGov) format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="ca-gov-icon-"], [class*=" ca-gov-icon-"] {
+[class^="ca-gov-icon-"],
+[class*=" ca-gov-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'CaGov' !important;
   font-style: normal;
@@ -2300,3 +2311,8 @@
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
+
+
+/*# sourceMappingURL=font-only.css.map*/
+
+/*# sourceMappingURL=font-only-6.0.css.map*/
