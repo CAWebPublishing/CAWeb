@@ -30,9 +30,9 @@ if ( ! empty( $caweb_social_media ) ) :
 			$caweb_social_url = $caweb_share_email ? $caweb_mailto : get_option( $caweb_option );
 
 			$caweb_social_default_title = "Share via $caweb_share";
-			$caweb_social_title         = get_option( "${caweb_option}_hover_text", $caweb_social_default_title );
+			$caweb_social_title         = get_option( "{$caweb_option}_hover_text", $caweb_social_default_title );
 			$caweb_icon                 = str_replace( '_', '-', substr( $caweb_option, 10 ) );
-			$caweb_social_target        = get_option( "${caweb_option}_new_window", true ) ? '_blank' : '_self';
+			$caweb_social_target        = get_option( "{$caweb_option}_new_window", true ) ? '_blank' : '_self';
 
 			if( ! $caweb_social_opened ){
 				$caweb_social_opened = true;

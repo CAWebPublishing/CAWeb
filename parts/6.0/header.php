@@ -41,9 +41,9 @@ foreach ( $args as $var => $val ) {
 					<?php
 					for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) :
 						$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
-						$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
-						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? '_blank' : '_self';
-						$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
+						$caweb_text    = get_option( "ca_utility_link_{$caweb_i}_name" );
+						$caweb_target  = get_option( "ca_utility_link_{$caweb_i}_new_window" ) ? '_blank' : '_self';
+						$caweb_enabled = get_option( "ca_utility_link_{$caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
 
 						if ( $caweb_enabled ) :
 							?>
