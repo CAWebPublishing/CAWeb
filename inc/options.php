@@ -494,12 +494,12 @@ function caweb_get_site_options( $group = '' ) {
 
 	foreach ( $caweb_social_links as $social => $option ) {
 		$caweb_social_options[ $option ]            = '';
-		$caweb_social_options[ "${option}_header" ] = true;
-		$caweb_social_options[ "${option}_footer" ] = true;
+		$caweb_social_options[ "{$option}_header" ] = true;
+		$caweb_social_options[ "{$option}_footer" ] = true;
 
 		if ( 'ca_social_email' !== $option ) {
-			$caweb_social_options[ "${option}_new_window" ] = true;
-			$caweb_social_options[ "${option}_hover_text" ] = "Share via $social";
+			$caweb_social_options[ "{$option}_new_window" ] = true;
+			$caweb_social_options[ "{$option}_hover_text" ] = "Share via $social";
 		}
 	}
 

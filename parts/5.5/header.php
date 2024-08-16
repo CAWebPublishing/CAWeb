@@ -54,12 +54,12 @@ foreach ( $args as $var => $val ) {
 							$caweb_body        = rawurlencode( get_permalink() );
 							$caweb_mailto      = $caweb_share_email ? sprintf( 'mailto:?subject=%1$s&body=%2$s', $caweb_sub, $caweb_body ) : '';
 
-							if ( get_option( "${caweb_option}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_option ) ) ) :
+							if ( get_option( "{$caweb_option}_header" ) && ( $caweb_share_email || '' !== get_option( $caweb_option ) ) ) :
 								$caweb_icon   = str_replace( '_', '-', substr( $caweb_option, 10 ) );
 								$caweb_class  = "utility-social-$caweb_icon ca-gov-icon-$caweb_icon";
-								$caweb_title  = wp_unslash( get_option( "${caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_icon ) ) );
+								$caweb_title  = wp_unslash( get_option( "{$caweb_option}_hover_text", 'Share via ' . ucwords( $caweb_icon ) ) );
 								$caweb_href   = $caweb_share_email ? $caweb_mailto : get_option( $caweb_option );
-								$caweb_target = get_option( "${caweb_option}_new_window" ) ? '_blank' : '_self';
+								$caweb_target = get_option( "{$caweb_option}_new_window" ) ? '_blank' : '_self';
 								?>
 									<a class="<?php print esc_attr( $caweb_class ); ?>" href="<?php print esc_url( $caweb_href ); ?>" title="<?php print esc_attr( $caweb_title ); ?>" target="<?php print esc_attr( $caweb_target ); ?>">
 										<span class="sr-only"><?php print esc_attr( $caweb_title ); ?></span>
@@ -74,9 +74,9 @@ foreach ( $args as $var => $val ) {
 					<?php
 					for ( $caweb_i = 1; $caweb_i < 4; $caweb_i++ ) :
 						$caweb_url     = get_option( "ca_utility_link_$caweb_i" );
-						$caweb_text    = get_option( "ca_utility_link_${caweb_i}_name" );
-						$caweb_target  = get_option( "ca_utility_link_${caweb_i}_new_window" ) ? '_blank' : '_self';
-						$caweb_enabled = get_option( "ca_utility_link_${caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
+						$caweb_text    = get_option( "ca_utility_link_{$caweb_i}_name" );
+						$caweb_target  = get_option( "ca_utility_link_{$caweb_i}_new_window" ) ? '_blank' : '_self';
+						$caweb_enabled = get_option( "ca_utility_link_{$caweb_i}_enable", false ) && ! empty( $caweb_url ) && ! empty( $caweb_text );
 
 						if ( $caweb_enabled ) :
 							?>

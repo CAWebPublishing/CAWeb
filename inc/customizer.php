@@ -394,15 +394,15 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 
 	// Custom Utility Links.
 	for ( $link = 1; $link < 4; $link++ ) {
-		$url    = get_option( "ca_utility_link_${link}", '' );
-		$label  = get_option( "ca_utility_link_${link}_name", '' );
-		$target = get_option( "ca_utility_link_${link}_new_window" );
-		$enable = get_option( "ca_utility_link_${link}_enable", 'init' );
+		$url    = get_option( "ca_utility_link_{$link}", '' );
+		$label  = get_option( "ca_utility_link_{$link}_name", '' );
+		$target = get_option( "ca_utility_link_{$link}_new_window" );
+		$enable = get_option( "ca_utility_link_{$link}_enable", 'init' );
 		$enable = 'init' === $enable && ! empty( $url ) && ! empty( $label ) || $enable ? true : false;
 
 		// Link Enabled.
 		$wp_customize->add_setting(
-			"ca_utility_link_${link}_enable",
+			"ca_utility_link_{$link}_enable",
 			array(
 				'type'              => 'option',
 				'default'           => $enable,
@@ -413,7 +413,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
-				"ca_utility_link_${link}_enable",
+				"ca_utility_link_{$link}_enable",
 				array(
 					'label'           => "Custom Link $link",
 					'type'            => 'checkbox',
@@ -424,7 +424,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 
 		// Link Label.
 		$wp_customize->add_setting(
-			"ca_utility_link_${link}_name",
+			"ca_utility_link_{$link}_name",
 			array(
 				'type'      => 'option',
 				'default'   => $label,
@@ -435,9 +435,9 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
-				"ca_utility_link_${link}_name",
+				"ca_utility_link_{$link}_name",
 				array(
-					'label'           => "Custom Link ${link} Label",
+					'label'           => "Custom Link {$link} Label",
 					'type'            => 'text',
 					'section'         => 'caweb_utility_header',
 					'active_callback' => 'caweb_is_custom_link_enabled',
@@ -447,7 +447,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 
 		// Link URL.
 		$wp_customize->add_setting(
-			"ca_utility_link_${link}",
+			"ca_utility_link_{$link}",
 			array(
 				'type'      => 'option',
 				'default'   => $url,
@@ -458,9 +458,9 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
-				"ca_utility_link_${link}",
+				"ca_utility_link_{$link}",
 				array(
-					'label'           => "Custom Link ${link} URL",
+					'label'           => "Custom Link {$link} URL",
 					'type'            => 'text',
 					'section'         => 'caweb_utility_header',
 					'active_callback' => 'caweb_is_custom_link_enabled',
@@ -470,7 +470,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 
 		/* Target */
 		$wp_customize->add_setting(
-			"ca_utility_link_${link}_new_window",
+			"ca_utility_link_{$link}_new_window",
 			array(
 				'type'              => 'option',
 				'default'           => $target,
@@ -482,7 +482,7 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
-				"ca_utility_link_${link}_new_window",
+				"ca_utility_link_{$link}_new_window",
 				array(
 					'label'           => 'Open in New Tab',
 					'type'            => 'checkbox',
@@ -1008,7 +1008,7 @@ function caweb_customize_register_alert_banner_settings( $wp_customize ) {
  */
 function caweb_is_custom_link_enabled( $customizer ) {
 	$parent_option = preg_replace( '/.*(ca_utility_link_\d).*/', '$1', $customizer->get_link() );
-	return '1' === $customizer->manager->get_control( "${parent_option}_enable" )->value() ? true : false;
+	return '1' === $customizer->manager->get_control( "{$parent_option}_enable" )->value() ? true : false;
 }
 
 /**
