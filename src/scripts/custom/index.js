@@ -22,5 +22,6 @@ jQuery(document).ready(function($) {
 		$("html, body").animate({scrollTop:$scroll_position},speed,easing);
 	}
 
-	
+	// this prevents Divi from adding classes to navigation.
+	window.et_pb_toggle_nav_menu = () => {}
  });

@@ -232,8 +232,8 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 		$button_text        = $this->props['button_text'];
 		$button_target      = $this->props['button_target'];
 
-		$this->add_classname( 'panel' );
-		$this->add_classname( sprintf( 'panel-%1$s', $panel_layout ) );
+		$this->add_classname( 'card' );
+		$this->add_classname( sprintf( 'card-%1$s', $panel_layout ) );
 
 		if ( 'none' === $panel_layout ) {
 			$this->add_classname( 'overflow-visible' );
@@ -250,19 +250,19 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 			$heading_size = $this->props['heading_size'];
 
 			$display_options = '';
-			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'pr-1 pe-3', 'vertical-align:sub;' ) : '';
+			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'me-2', 'vertical-align:sub;' ) : '';
 
 			if ( 'on' === $show_button ) {
 				$button_link     = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 				$button_text     = empty( $button_text ) ? 'Read More' : $button_text;
 				$button_target   = 'on' === $button_target ? '_blank' : '_self';
 				$option_classes  = 'right' === $heading_align ? ' pl-2' : '';
-				$option_classes .= ! empty( $display_icon ) ? ' mt-2' : '';
 
 				$display_options = sprintf(
-					'<div class="options%1$s"><a href="%2$s" class="btn btn-default" target="%3$s">%4$s</a></div>',
+					'<div class="options%1$s"><a href="%2$s" class="btn btn-%3$s" target="%4$s">%5$s</a></div>',
 					$option_classes,
 					$button_link,
+					$panel_layout,
 					$button_target,
 					$button_text
 				);
@@ -272,7 +272,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 				sprintf( ' style="color: %1$s;"', $heading_text_color ) : '';
 
 			$display_title = sprintf(
-				'<div class="panel-heading text-%2$s"><%1$s class="pb-0 pt-2" %3$s>%4$s%5$s</%1$s>%6$s</div>',
+				'<div class="card-header border-bottom-0 text-%2$s"><%1$s class="card-title pb-0" %3$s>%4$s%5$s</%1$s>%6$s</div>',
 				$heading_size,
 				$heading_align,
 				$heading_text_color,
@@ -283,7 +283,7 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 		}
 
 		$output = sprintf(
-			'<div%1$s%2$s>%3$s<div class="panel-body">%4$s</div></div> <!-- .et_pb_panel -->',
+			'<div%1$s%2$s>%3$s<div class="card-body">%4$s</div></div> <!-- .et_pb_panel -->',
 			$this->module_id(),
 			$class,
 			$display_title,
