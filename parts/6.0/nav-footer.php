@@ -20,31 +20,27 @@ foreach ( $args as $var => $val ) {
 $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
 
 ?>
+<ul class="nav footer-links ">
+	<li class="nav-item">
+        <a href="https://www.ca.gov" class="nav-link ps-0" title="CA.gov" target="_blank">
+            <span class="ca-gov-logo-svg"></span>
+        </a>
+    </li>
 
-
-<div class="container">
-	<div class="d-flex">
-
-		<a href="https://ca.gov" class="cagov-logo" title="ca.gov" target="_blank" rel="noopener">
-			<span class="sr-only">CA.gov</span>
-			<span class="ca-gov-logo-svg"></span>
-		</a>
-
-		<ul class="footer-links me-auto">
 			<?php
 			foreach ( $caweb_menuitems as $caweb_item ) {
 				if ( ! $caweb_item->menu_item_parent ) {
-
 					?>
 						<li
 							<?php if ( ! empty( $caweb_item->classes ) ) : ?>
-							class="<?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>"
+							class="nav-item <?php print esc_attr( implode( ' ', $caweb_item->classes ) ); ?>"
 							<?php endif; ?>
 							<?php if ( ! empty( $caweb_item->attr_title ) ) : ?>
 							title="<?php print esc_attr( $caweb_item->attr_title ); ?>"
 							<?php endif; ?>
 						>
 							<a 
+								class="nav-link"
 								href="<?php print esc_url( $caweb_item->url ); ?>"
 								<?php if ( ! empty( $caweb_item->xfn ) ) : ?>
 								rel="<?php print esc_attr( $caweb_item->xfn ); ?>"
@@ -60,7 +56,4 @@ $caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DES
 			?>
 		</ul>
 
-		<?php get_template_part( 'parts/socialshare', null, $caweb_social_exclusions ); ?>
-
-	</div>
-</div>
+		<?php get_template_part( "parts/$caweb_template_version/socialshare", null, $caweb_social_exclusions ); ?>

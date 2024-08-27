@@ -214,6 +214,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 		$content = $this->content;
 
 		$this->add_classname( 'section' );
+		$this->add_classname( 'p-3' );
 
 		if ( 'on' === $this->props['left_right_button'] ) {
 			$this->add_classname( 'ps-3' );
@@ -229,7 +230,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $featured_image_button ) {
 			$body = sprintf(
-				'%1$s<div class="col-md-12 px-3">%2$s%3$s%4$s</div>',
+				'%1$s<div class="px-3 clearfix">%2$s%3$s%4$s</div>',
 				$this->renderFeaturedImage(),
 				$header,
 				$content,
@@ -274,7 +275,7 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 			return;
 		}
 
-		return sprintf( '<div><a href="%1$s" class="btn btn-default" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url( $section_link ), $section_heading );
+		return sprintf( '<div><a href="%1$s" class="btn btn-outline-dark" target="_blank">More Information<span class="sr-only">More information about %2$s</span></a></div>', esc_url( $section_link ), $section_heading );
 	}
 
 	/**
@@ -292,13 +293,13 @@ class CAWeb_Module_Fullwidth_Section_Primary extends ET_Builder_CAWeb_Module {
 			$class .= 'on' === $image_pos ? ' pe-0' : ' ps-0';
 		}
 
-		$class .= 'on' === $slide_image_button ? ' animate-fadeInLeft' : '';
-		$class .= 'on' === $image_pos ? ' pull-right' : ' pull-left';
+		$class .= 'on' === $slide_image_button ? ' animate__animated  animate__fadeInLeft' : '';
+		$class .= 'on' === $image_pos ? ' float-end' : ' float-start';
 
 		$alt_text      = caweb_get_attachment_post_meta( $section_image, '_wp_attachment_image_alt' );
-		$section_image = sprintf( '<img src="%1$s" class="img-responsive w-100" alt="%2$s" />', $section_image, $alt_text );
+		$section_image = sprintf( '<img src="%1$s" class="mw-100 w-100 h-auto d-inline-block" alt="%2$s" />', $section_image, $alt_text );
 
-		return sprintf( '<div class="col-md-4 px-3%1$s">%2$s</div>', $class, $section_image );
+		return sprintf( '<div class="col-4 pe-3%1$s">%2$s</div>', $class, $section_image );
 	}
 }
 new CAWeb_Module_Fullwidth_Section_Primary();

@@ -35,8 +35,9 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 
 ?>
 <!-- Footer -->
-<footer id="footer" class="global-footer hidden-print">
-
+<footer class="global-footer">
+	<div class="container">
+		<div class="d-flex">
 	<?php
 
 	if ( has_nav_menu( 'footer-menu' ) ) {
@@ -49,18 +50,23 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 			)
 		);
 	} else {
+		/**
+		 * @todo Remove the Back to Top once 5.5 is completely removed.
+		 */
 		?>
-			<div class="container">
-				<div class="d-flex">
-					<ul class="footer-links me-auto">
+					<ul class="footer-links ps-0">
+						<li class="d-none">
+							<a href="#skip-to-content">Back to Top</a>
+						</li>
 						<li><a>There Is No Navigation Menu Set</a></li>
 					</ul>
-					<?php get_template_part( 'parts/socialshare', null, $caweb_social_exclusions ); ?>
-				</div>
-			</div>
+					<?php get_template_part( "parts/$caweb_template_version/socialshare", null, $caweb_social_exclusions ); ?>
+				
 		<?php
 	}
 	?>
+		</div>
+	</div>
 	<!-- Copyright Statement -->
 	<div class="copyright">
 		<div class="container">

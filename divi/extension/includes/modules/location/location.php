@@ -276,31 +276,32 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$display_other  = '';
 		$display_button = '';
 		$display_icon   = '';
-		$map_link       = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) );
+		$map_link = '';
 
 		if ( 'on' === $show_contact ) {
-			$phone         = ! empty( $phone ) ? "General Information: {$phone}<br />" : '';
-			$fax           = ! empty( $fax ) ? "FAX: {$fax}" : '';
-			$display_other = sprintf( '<p class="other">%1$s%2$s</p>', $phone, $fax );
+			$phone         = ! empty( $phone ) ? "<p class=\"mb-0\">General Information: {$phone}</p>" : '';
+			$fax           = ! empty( $fax ) ? "<p class=\"mb-0\">FAX: {$fax}</p>" : '';
+			$display_other = "{$phone}{$fax}";
 		}
 
 		if ( 'on' === $show_button && ! empty( $location_link ) ) {
-			$display_button = sprintf( '<a href="%1$s" class="btn" target="_blank">More</a>', $location_link );
+			$display_button = sprintf( '<a href="%1$s" class="btn btn-outline-dark mt-3" target="_blank">More</a>', $location_link );
 		}
 
 		if ( ! empty( $name ) ) {
-			$map_link = "$name<br />$map_link";
+			$map_link       = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) );
 		}
 
 		if ( 'on' === $show_icon ) {
-			$display_icon = $this->caweb_get_icon_span( $icon, 'mr-3' );
+			$display_icon = $this->caweb_get_icon_span( $icon );
 		}
 
 		return sprintf(
-			'<div%1$s class="%2$s">%3$s<div class="contact"><p class="address">%4$s</p>%5$s%6$s</div></div>',
+			'<div%1$s class="%2$s">%3$s<div class="contact"><p class="mb-0">%4$s</p>%5$s%6$s%7$s</div></div>',
 			$this->module_id(),
 			$this->module_classname( $this->slug ),
 			$display_icon,
+			$name,
 			$map_link,
 			$display_other,
 			$display_button
@@ -322,7 +323,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$show_icon     = $this->props['show_icon'];
 		$icon          = $this->props['font_icon'];
 
-		$map_link      = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) );
+		$map_link      = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ), false, '_blank', 'd-block' );
 		$location_link = ! empty( $location_link ) ? esc_url( $location_link ) : '';
 		$display_icon  = '';
 		$contact_class = '';
@@ -330,20 +331,17 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		if ( 'on' === $show_icon ) {
 			$display_icon = $this->caweb_get_icon_span( $icon );
 		} else {
-			$contact_class = ' ml-0';
+			$contact_class = ' ms-0';
 		}
 
-		if ( ! empty( $map_link ) ) {
-			$map_link = sprintf( '<div class="address">%1$s</div>', $map_link );
-		}
+		$name = ! empty( $location_link) ? sprintf('<a href="%1$s" target="_blank" class="d-block">%2$s</a>', $location_link, $name) : "<p class=\"mb-0\">{$name}</p>";
 
 		return sprintf(
-			'<div%1$s class="%2$s">%3$s<div class="contact%4$s"><div class="title"><a href="%5$s" target="_blank">%6$s</a></div>%7$s</div></div>',
+			'<div%1$s class="%2$s">%3$s<div class="contact%4$s">%5$s%6$s</div></div>',
 			$this->module_id(),
 			$this->module_classname( $this->slug ),
 			$display_icon,
 			$contact_class,
-			$location_link,
 			$name,
 			$map_link
 		);
@@ -366,10 +364,10 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$zip            = $this->props['zip'];
 
 		$display_button = '';
-		$map_link       = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ), false, '_blank', array( 'm-l-md', 'd-inline-block' ) );
+		$map_link       = $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ), false, '_blank' );
 
 		if ( 'on' === $show_button && ! empty( $location_link ) ) {
-			$display_button = sprintf( '<a href="%1$s" class="btn" target="_blank">View More Details</a>', $location_link );
+			$display_button = sprintf( '<a href="%1$s" class="btn btn-outline-dark" target="_blank">View More Details</a>', $location_link );
 		}
 
 		if ( ! empty( $featured_image ) ) {
@@ -378,7 +376,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		}
 
 		if ( ! empty( $desc ) ) {
-			$desc = sprintf( '<div class="title">Description</div><div class="description pb-2">%1$s</div>', $desc );
+			$desc = sprintf( '<p class="fw-bold mb-0">Description</p><div class="description pb-2">%1$s</div>', $desc );
 		}
 
 		if ( ! empty( $map_link ) ) {
@@ -386,7 +384,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		}
 
 		return sprintf(
-			'<div%1$s class="%2$s"><div class="thumbnail">%3$s</div><div class="contact"><div class="title">%4$s</div><div class="address">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
+			'<div%1$s class="%2$s"><div class="thumbnail">%3$s</div><div class="contact float-start w-25"><p class="fw-bold mb-0">%4$s</p><div class="address d-flex">%5$s</div></div><div class="summary">%6$s%7$s</div></div>',
 			$this->module_id(),
 			$this->module_classname( $this->slug ),
 			$featured_image,

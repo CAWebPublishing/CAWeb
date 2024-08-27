@@ -168,7 +168,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles_Item extends ET_Builder_CAWeb_Module 
 	public function render( $unprocessed_props, $content, $render_slug ) {
 		global $caweb_tile_count, $caweb_tiles;
 
-		$this->add_classname( 'service-tile-panel' );
+		$this->add_classname( 'collapse' );
 
 		$caweb_tiles[] = array(
 			'item_title'   => $this->props['item_title'],
