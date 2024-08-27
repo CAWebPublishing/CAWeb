@@ -7,6 +7,4 @@
 
 ?>
 
-<button class="return-top">
-	<span class="sr-only">Back to top</span>
-</button>
+<button class="return-top">Back to top</button>

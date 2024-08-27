@@ -413,7 +413,7 @@ function caweb_wp_enqueue_scripts() {
 	 *
 	 * @todo Once 5.5 is completely removed this can be removed.
 	 */
-	if( 5.5 === $version ){
+	if( '5.5' === $version ){
 		$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
 		wp_register_script( 'cagov-core-js-script', $core_js_file, $deps, CAWEB_VERSION, true );
 

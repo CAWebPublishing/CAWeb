@@ -256,7 +256,7 @@ class CAWeb_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 		$group_url              = $this->props['group_url'];
 		$group_title            = $this->props['group_title'];
 
-		$this->add_classname( 'quarter' );
+		$this->add_classname( 'col' );
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
@@ -295,7 +295,7 @@ class CAWeb_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 
 		// List Color Styles.
 		$text_color = ! empty( $text_color ) ? "color: $text_color" : '';
-		$icon       = 'on' === $group_icon_button ? $this->caweb_get_icon_span( $group_icon, 'mr-1', $text_color ) : '';
+		$icon       = 'on' === $group_icon_button ? $this->caweb_get_icon_span( $group_icon, 'me-1 align-middle', $text_color ) : '';
 
 		$link_as_button = 'on' === $display_link_as_button ? ' class="btn btn-default btn-xs"' : '';
 
@@ -309,11 +309,11 @@ class CAWeb_Module_Footer_Group extends ET_Builder_CAWeb_Module {
 
 			if ( 'on' === $group_link_show ) {
 				$group_links .= sprintf(
-					'<li class="mb-2"><a href="%1$s"%2$s%3$s target="_blank" title="Section Footer Group %5$s">%4$s%5$s</a></li>',
+					'<li class="mb-2">%1$s<a href="%2$s"%3$s%4$s target="_blank" title="Section Footer Group %5$s">%5$s</a></li>',
+					$icon,
 					esc_url( $group_link_url ),
 					$link_as_button,
 					$text_color,
-					$icon,
 					$group_link_text
 				);
 			}

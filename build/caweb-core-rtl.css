@@ -1,6 +1,6 @@
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../../../webpack/plugins/html/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!../../../../webpack/plugins/html/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!../../../../webpack/plugins/html/build/font-only.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************/
 /*!******************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
   \******************************************************************************************************************************************************************************/
@@ -2311,9 +2311,9 @@
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../../../webpack/plugins/html/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!../../../../webpack/plugins/html/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!../../../../webpack/plugins/html/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Custom variables for the CAWeb Theme
@@ -2573,8 +2573,8 @@ body[class*="5.5"].divi-built .et_font_icon li {
 }
 body[class*="5.5"].divi-built .et_font_icon li:before,
 body[class*="5.5"].divi-built .et_pb_inline_icon:before,
-body[class*="5.5"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:after,
-body[class*="5.5"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,
+body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,
 body[class*="5.5"].divi-built .et-pb-icon,
 body[class*="5.5"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
   font-family: "CaGov", "ETModules" !important;
@@ -2705,16 +2705,21 @@ body[class*="6.0"] .page-title {
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  max-width: 1176px;
+  max-width: px;
+}
+@media (min-width: 576px) {
+  body[class*="6.0"] .page-title {
+    max-width: 540px !important;
+  }
 }
 @media (min-width: 768px) {
   body[class*="6.0"] .page-title {
-    max-width: 768px !important;
+    max-width: 720px !important;
   }
 }
 @media (min-width: 992px) {
   body[class*="6.0"] .page-title {
-    max-width: 992px !important;
+    max-width: 960px !important;
   }
 }
 @media (min-width: 1200px) {
@@ -2722,24 +2727,29 @@ body[class*="6.0"] .page-title {
     max-width: 1140px !important;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1400px) {
   body[class*="6.0"] .page-title {
-    max-width: 1176px !important;
+    max-width: 1320px !important;
   }
 }
 body[class*="6.0"] .page-date {
   margin: 0 auto;
   width: 100%;
-  max-width: 1176px;
+  max-width: px;
+}
+@media (min-width: 576px) {
+  body[class*="6.0"] .page-date {
+    max-width: 540px !important;
+  }
 }
 @media (min-width: 768px) {
   body[class*="6.0"] .page-date {
-    max-width: 768px !important;
+    max-width: 720px !important;
   }
 }
 @media (min-width: 992px) {
   body[class*="6.0"] .page-date {
-    max-width: 992px !important;
+    max-width: 960px !important;
   }
 }
 @media (min-width: 1200px) {
@@ -2747,9 +2757,9 @@ body[class*="6.0"] .page-date {
     max-width: 1140px !important;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1400px) {
   body[class*="6.0"] .page-date {
-    max-width: 1176px !important;
+    max-width: 1320px !important;
   }
 }
 body[class*="6.0"] .location-settings button.close {
@@ -2789,18 +2799,23 @@ body[class*="6.0"] header .full-width-nav {
 }
 body[class*="6.0"]:not(.divi-built) #main-content {
   width: 100%;
-  max-width: 1176px;
+  max-width: px;
   margin: 0 auto;
   padding: 15px;
 }
+@media (min-width: 576px) {
+  body[class*="6.0"]:not(.divi-built) #main-content {
+    max-width: 540px;
+  }
+}
 @media (min-width: 768px) {
   body[class*="6.0"]:not(.divi-built) #main-content {
-    max-width: 768px;
+    max-width: 720px;
   }
 }
 @media (min-width: 992px) {
   body[class*="6.0"]:not(.divi-built) #main-content {
-    max-width: 992px;
+    max-width: 960px;
   }
 }
 @media (min-width: 1200px) {
@@ -2808,9 +2823,9 @@ body[class*="6.0"]:not(.divi-built) #main-content {
     max-width: 1140px;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1400px) {
   body[class*="6.0"]:not(.divi-built) #main-content {
-    max-width: 1176px;
+    max-width: 1320px;
   }
 }
 body[class*="6.0"].divi-built {
@@ -2845,14 +2860,22 @@ body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-p
   padding-right: 15px;
   padding-left: 15px;
   width: 100%;
-  max-width: 1176px;
+  max-width: px;
+}
+@media (min-width: 576px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 540px !important;
+  }
 }
 @media (min-width: 768px) {
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
-    max-width: 768px !important;
+    max-width: 720px !important;
   }
 }
 @media (min-width: 992px) {
@@ -2860,7 +2883,7 @@ body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-p
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
-    max-width: 992px !important;
+    max-width: 960px !important;
   }
 }
 @media (min-width: 1200px) {
@@ -2871,12 +2894,12 @@ body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-p
     max-width: 1140px !important;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1400px) {
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
   body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
-    max-width: 1176px !important;
+    max-width: 1320px !important;
   }
 }
 body[class*="6.0"].divi-built .page-title {
@@ -2918,8 +2941,8 @@ body[class*="6.0"].divi-built .et_font_icon li {
 }
 body[class*="6.0"].divi-built .et_font_icon li:before,
 body[class*="6.0"].divi-built .et_pb_inline_icon:before,
-body[class*="6.0"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:after,
-body[class*="6.0"].divi-built body #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,
+body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,
 body[class*="6.0"].divi-built .et-pb-icon,
 body[class*="6.0"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
   font-family: "CaGov", "ETModules" !important;

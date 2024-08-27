@@ -101,7 +101,7 @@ function caweb_panel_func( $atts, $content = '' ) {
 	}
 
 	$heading_size = ! isset( $atts['layout'] ) || 'none' === $atts['layout'] ? 'h1' : 'h2';
-	$heading_icon = isset( $atts['heading_icon'] ) ? "<span class=\"ca-gov-icon-${atts['heading_icon']}\"></span>" : '';
+	$heading_icon = isset( $atts['heading_icon'] ) ? sprintf('<span class="ca-gov-icon-%1$s"></span>', $atts['heading_icon'] ) : '';
 	$heading      = isset( $atts['heading'] ) ?
 		sprintf( '<div class="panel-heading"><%1$s>%2$s%3$s</%1$s>%4$s</div>', $heading_size, $heading_icon, $atts['heading'], $button ) : '';
 
