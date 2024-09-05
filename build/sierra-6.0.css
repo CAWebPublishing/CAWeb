@@ -4270,6 +4270,7 @@
   --bs-standout-dark: #143a3a;
   --bs-standout-darker: #102e2e;
   --bs-standout-darkest: #071414;
+  --bs-gray-50: #fafafa;
   --bs-gray-75: #f3f3f4;
   --bs-gray-100: #ededef;
   --bs-gray-200: #d4d4d7;
@@ -18031,6 +18032,9 @@ header.global-header .branding .header-organization-banner a img {
    FOOTER
    /src/styles/components/footer.scss
 ----------------------------------------- */
+footer.global-footer {
+  background-color: var(--bs-gray-50, #fafafa);
+}
 footer.global-footer .nav-item {
   line-height: var(--bs-body-line-height, 1.5);
 }
