@@ -267,6 +267,21 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 		$button_text = $this->props['button_text'];
 		$button_link = $this->props['button_link'];
 
+		switch( $card_layout ){
+			case 'overstated':
+				$button_class = 'main';
+				break;
+			case 'standout':
+				$button_class = 'standout';
+				break;
+			case 'understated':
+				$button_class = 'alt';
+				break;
+			default:
+				$button_class = 'light';
+				break;
+		}
+
 		$content = $this->content;
 
 		$this->add_classname( 'card' );
@@ -285,7 +300,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 
 		$display_header = 'on' === $include_header ? sprintf( '<div class="card-header"><%1$s class="card-title pb-0 mb-0 border-bottom-0"%2$s>%3$s</%1$s></div>', $heading_size, $text_color, $title ) : '';
 
-		$display_button = 'on' === $show_button ? sprintf( '<a href="%1$s" class="btn btn-default" target="_blank">%2$s</a>', $button_link, $button_text ) : '';
+		$display_button = 'on' === $show_button ? sprintf( '<a href="%1$s" class="btn btn-%2$s" target="_blank">%3$s</a>', $button_link, $button_class, $button_text ) : '';
 
 		$display_footer = 'on' === $include_footer ? sprintf( '<div class="card-footer"%1$s>%2$s</div>', $footer_color, $footer_text ) : '';
 
