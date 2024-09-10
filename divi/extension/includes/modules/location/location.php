@@ -328,6 +328,11 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$display_icon  = '';
 		$contact_class = '';
 
+		/**
+		 * @todo remove d-flex class name once 5.5 is removed.
+		 */
+		$this->add_classname( 'd-flex' );
+
 		if ( 'on' === $show_icon ) {
 			$display_icon = $this->caweb_get_icon_span( $icon );
 		} else {
@@ -380,7 +385,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		}
 
 		if ( ! empty( $map_link ) ) {
-			$map_link = sprintf( ' <span class="ca-gov-icon-road-pin"></span>%1$s', $map_link );
+			$map_link = sprintf( ' <span class="ca-gov-icon-road-pin me-2"></span>%1$s', $map_link );
 		}
 
 		return sprintf(
