@@ -4210,7 +4210,6 @@
 /* -----------------------------------------
    PASOROBLES
 ----------------------------------------- */
-/*! State Web Template Version 6.3.2 ( Revamped ) */
 /*!
  * Custom Bootstrap v5.3.3 (https://getbootstrap.com/)
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -18234,7 +18233,7 @@ header.global-header .navigation .container .nav-item a.dropdown-toggle.show::af
   transform: rotate(-180deg);
 }
 header.global-header .navigation .container .nav-item .dropdown-menu {
-  max-width: 250px;
+  width: auto;
   border-top: 0;
   border-radius: 0;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -18742,7 +18741,6 @@ figure.executive-profile.vertical .body {
   padding-bottom: 0.5rem;
 }
 .location.banner .summary .btn {
-  background-color: var(--bs-white, #fff);
   float: left;
 }
 
