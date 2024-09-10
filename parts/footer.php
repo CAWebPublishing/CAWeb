@@ -54,7 +54,7 @@ $caweb_social_exclusions = '6.0' === $caweb_template_version ?
 		 * @todo Remove the Back to Top once 5.5 is completely removed.
 		 */
 		?>
-					<ul class="footer-links ps-0">
+					<ul class="footer-links ps-0 me-auto">
 						<li class="d-none">
 							<a href="#skip-to-content">Back to Top</a>
 						</li>

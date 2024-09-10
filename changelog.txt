@@ -10,6 +10,9 @@ CAWeb 1.12.0
 - Resolved issue with Divi Toggle Icon not rendering
 - Resolved deprecation variable not defined in updater
 - Resolved PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead
+- Resolved issue with social share footer icons not being right aligned when no navigation set
+- Corrected alert banner sizing issue
+- Resolved issue with Post Detail Exam Layout
 
 CAWeb 1.11.3a
 - Increased admin_bar_menu priority due to 6.6.1 increase

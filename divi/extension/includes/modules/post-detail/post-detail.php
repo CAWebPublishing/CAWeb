@@ -1724,7 +1724,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		return sprintf(
 			'%1$s%2$s<div class="clearfix">%3$s</div>%4$s',
-			$this->caweb_get_the_post_thumbnail( null, 'medium', array( 'class' => 'float-start me-3 mb-3' ) ),
+			$this->caweb_get_the_post_thumbnail( null, 'medium', array( 'class' => 'me-3 mb-3' ) ),
 			$exam_info,
 			$this->content,
 			$this->renderFooter( $post_id )
