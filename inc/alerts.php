@@ -96,7 +96,7 @@ function caweb_render_alerts() {
 						print wp_kses( $msg, 'post' );
 					}
 					?>
-					<button data-alert="<?php print esc_attr( $a ); ?>" class="btn btn-alt btn-outline-dark ca-gov-icon-close-mark close caweb-alert-close position-relative ms-auto p-1" data-bs-dismiss="alert" aria-label="Close Alert <?php print esc_attr( $a ); ?>"><span class="sr-only">x</span></button>
+					<button data-alert="<?php print esc_attr( $a ); ?>" class="btn border-0 bg-transparent ca-gov-icon-close-mark close caweb-alert-close position-relative ms-auto p-1" data-bs-dismiss="alert" aria-label="Close Alert <?php print esc_attr( $a ); ?>"><span class="sr-only">x</span></button>
 				</div>
 			</div>
 			<?php
