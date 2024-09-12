@@ -69,6 +69,8 @@ function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance
 /**
  * CAWeb wp nav menu item custom fields.
  *
+ * @todo remove icon menu once 5.5 is completely removed.
+ * 
  * @param  mixed $item_id Not used.
  * @param  mixed $item Menu item data object.
  * @param  mixed $depth Depth of menu item. Used for padding.
@@ -77,6 +79,8 @@ function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance
  * @return void
  */
 function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
+	$deprecating               = '5.5' === caweb_template_version();
+	$icon                      = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
 	$unit_size                 = isset( $tmp['_caweb_menu_unit_size'][0] ) && ! empty( $tmp['_caweb_menu_unit_size'][0] ) ? $tmp['_caweb_menu_unit_size'][0] : 'unit1';
 
 	$nav_menu_style = get_option( 'ca_default_navigation_menu', 'singlelevel' );
@@ -84,7 +88,24 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 	// unit 3, fallback to unit 2.
 	$unit_size = 'unit3' === $unit_size ? 'unit2' : $unit_size;
 
+	$icon                      = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
+	
 	?>
+		<div class="caweb-icon-selector <?php print ! $deprecating || 'unit3' === $unit_size ? 'hidden' : ''; ?> description description-wide">
+			<?php
+			print wp_kses(
+				caweb_icon_menu(
+					array(
+						'select' => $icon,
+						'name'   => $item_id . '_icon',
+						'header' => 'Select an Icon',
+					)
+				),
+				'post'
+			);
+			?>
+		</div>
+
 		<div class="unit-selector<?php print ! $depth ? ' hidden' : ''; ?> description description-wide">
 			<p><strong>Select a height for the navigation item</strong></p>
 			<select name="<?php print esc_attr( $item_id ); ?>_unit_size" class="unit-size-selector" id="unit-size-selector-<?php print esc_attr( $item_id ); ?>">
