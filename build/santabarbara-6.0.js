@@ -6403,15 +6403,7 @@ __nested_webpack_require_209368__.r(__nested_webpack_exports__);
 
 /* EXTERNAL LINK ICON */
 window.addEventListener('load', () => {
-  const ext = '<span class="ca-gov-icon-external-link" aria-hidden="true"></span>';
-
-  // Check if link is external function
-  /**
-   * @param {HTMLAnchorElement} linkElement
-   */
-  function linkIsExternal(linkElement) {
-    return window.location.host.indexOf(linkElement.host) > -1;
-  }
+  const ext = '<span class="ca-gov-icon-external-link" aria-hidden="true"></span><span class="sr-only">opens in a new window</span>';
 
   // Add any exceptions to not render here
   const cssExceptions = `:not(code *):not(.cagov-logo)`;
@@ -6420,11 +6412,8 @@ window.addEventListener('load', () => {
   /** @type {NodeListOf<HTMLAnchorElement>} */
   const externalLink = document.querySelectorAll(`main a${cssExceptions}, .footer-links a${cssExceptions}`);
   externalLink.forEach(element => {
-    const anchorLink = element.href.indexOf('#') === 0;
-    const localHost = element.href.indexOf('localhost') > -1;
-    const localEmail = element.href.indexOf('@') > -1;
     const linkElement = element;
-    if (linkIsExternal(linkElement) === false && !anchorLink && !localEmail && !localHost) {
+    if ('_blank' === element.getAttribute('target')) {
       linkElement.innerHTML += ext; // += concatenates to external links
     }
   });
@@ -6436,10 +6425,10 @@ window.addEventListener('load', () => {
 /*!***************************************************!*\
   !*** ./src/scripts/components/mobile-controls.js ***!
   \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_210879__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_210510__) => {
 
 "use strict";
-__nested_webpack_require_210879__.r(__nested_webpack_exports__);
+__nested_webpack_require_210510__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6508,10 +6497,10 @@ window.addEventListener('load', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213337__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212968__) => {
 
 "use strict";
-__nested_webpack_require_213337__.r(__nested_webpack_exports__);
+__nested_webpack_require_212968__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6569,7 +6558,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_215263__(moduleId) {
+/******/ 	function __nested_webpack_require_214894__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6583,7 +6572,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_215263__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_214894__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6593,7 +6582,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_215263__.r = (exports) => {
+/******/ 		__nested_webpack_require_214894__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6610,7 +6599,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_215263__.r(__nested_webpack_exports__);
+__nested_webpack_require_214894__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6622,7 +6611,7 @@ var __nested_webpack_exports__ = {};
 /*!***************************************************!*\
   !*** ./src/styles/colorschemes/santabarbara.scss ***!
   \***************************************************/
-__nested_webpack_require_215263__.r(__nested_webpack_exports__);
+__nested_webpack_require_214894__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6633,12 +6622,12 @@ __nested_webpack_require_215263__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_215263__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_215263__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_215263__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_215263__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_215263__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
-/* harmony import */ var _components_dark_mode_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_215263__(/*! ./components/dark-mode.js */ "./src/scripts/components/dark-mode.js");
+__nested_webpack_require_214894__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_214894__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_214894__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_214894__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_214894__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+/* harmony import */ var _components_dark_mode_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_214894__(/*! ./components/dark-mode.js */ "./src/scripts/components/dark-mode.js");
 
 
 
