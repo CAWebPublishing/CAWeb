@@ -176,7 +176,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			$portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
 		}
 
-		$figure_class = 'row bg-white';
+		$figure_class = 'row';
 		$image_class  = 'me-3';
 
 		// Vertical Layout
@@ -209,18 +209,16 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			$profile_link
 		);
 
-		$output = sprintf('<figure class="executive-profile border-light p-3 d-flex flex-%1$s">%2$s%3$s</figure>',
+		$output = sprintf('<figure class="executive-profile p-3 d-flex flex-%1$s">%2$s%3$s</figure>',
 			$figure_class,
 			$image,
 			$media_body
 		);
 
-		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
-
 		return sprintf(
-			'<div%1$s%2$s>%3$s</div>',
+			'<div%1$s class="%2$s">%3$s</div>',
 			$this->module_id(),
-			$class,
+			$this->module_classname( $render_slug ),
 			$output
 		);
 	}
