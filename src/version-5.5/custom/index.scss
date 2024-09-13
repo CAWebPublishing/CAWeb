@@ -1,0 +1,17 @@
+@import 'variables';
+
+@import 'template';
+@import 'page-title';
+@import 'page-date';
+
+@import 'location-bar';
+@import 'navigation';
+
+.location.contact .btn-outline-dark{
+    color:black
+}
+
+.location.contact .btn-outline-dark:hover,
+.location.contact .btn-outline-dark:hover{
+    color: white;
+}

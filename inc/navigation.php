@@ -80,6 +80,8 @@ function caweb_widget_nav_menu_args( $nav_menu_args, $nav_menu, $args, $instance
  */
 function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 	$deprecating               = '5.5' === caweb_template_version();
+	$tmp                       = get_post_meta( $item->ID );
+
 	$icon                      = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
 	$unit_size                 = isset( $tmp['_caweb_menu_unit_size'][0] ) && ! empty( $tmp['_caweb_menu_unit_size'][0] ) ? $tmp['_caweb_menu_unit_size'][0] : 'unit1';
 
@@ -120,6 +122,8 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
  * Fires after a navigation menu item has been updated.
  * Save menu custom fields that are added on to ca_custom_nav_walker.
  *
+ * @todo remove icon menu once 5.5 is completely removed.
+ * 
  * @param  int   $menu_id ID of the updated menu.
  * @param  int   $menu_item_db_id ID of the updated menu item.
  * @param  array $args An array of arguments used to update a menu item.
@@ -135,6 +139,7 @@ function caweb_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
 		$icon                       = isset( $_POST[ $menu_item_db_id . '_icon' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_icon' ] ) ) : '';
 		$unit_size                  = isset( $_POST[ $menu_item_db_id . '_unit_size' ] ) ? sanitize_text_field( wp_unslash( $_POST[ $menu_item_db_id . '_unit_size' ] ) ) : 'unit1';
 
+		update_post_meta( $menu_item_db_id, '_caweb_menu_icon', $icon );
 		update_post_meta( $menu_item_db_id, '_caweb_menu_unit_size', $unit_size );
 
 	}
