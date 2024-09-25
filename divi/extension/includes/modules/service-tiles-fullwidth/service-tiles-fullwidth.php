@@ -181,7 +181,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 					<div class="teaser bg-black text-white py-1 text-center">
 						<a href="%1$s" data-bs-toggle="collapse" data-bs-target="#%2$s #card-%3$s" class="title h4 text-decoration-none text-white lh-base" aria-expanded="false">
 							%4$s
-							<span class="ca-gov-icon-plus-mark d-block"></span>
+							<span class="ca-gov-icon-plus-fill d-block"></span>
 						</a>
 					</div>', 
 					$caweb_tiles[ $i ]['tile_url'], 
@@ -201,7 +201,7 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 						<div class="card card-default py-4 mb-0">
 							<div class="container pt-0">
 								<div class="card card-block p-3 mb-0 bg-white">
-									<button type="button" data-bs-toggle="collapse" data-bs-target="#%3$s #card-%2$s" class="btn btn-sm btn-secondary ca-gov-icon-close-mark" aria-expanded="false"></button>
+									<button type="button" data-bs-toggle="collapse" data-bs-target="#%3$s #card-%2$s" class="btn btn-sm btn-secondary ca-gov-icon-close-mark float-end" aria-expanded="false"></button>
 									<div class="group">%4$s</div>
 								</div>
 							</div>

@@ -18863,6 +18863,7 @@ figure.executive-profile.vertical .body {
   color: var(--bs-white, #fff);
   text-decoration: none;
   display: block;
+  font-size: var(--bs-body-font-size, 1.125rem);
 }
 .service-tiles .more-button a span {
   display: block;
