@@ -1,188 +1,168 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 37:
+/***/ "./src/scripts/admin/icon.js":
+/*!***********************************!*\
+  !*** ./src/scripts/admin/icon.js ***!
+  \***********************************/
 /***/ (() => {
 
 /* CAWeb Icon Menu Javascript */
-jQuery(document).ready(function($) {
-	$(document).on('click', '.caweb-icon-menu li', function(e){cawebIconSelected(this);});
-	$(document).on('click', '.caweb-icon-menu-header .reset-icon', function(e){ resetIconSelect($(this).parent().next());});
-
-	function cawebIconSelected(iconLi){
-		resetIconSelect($(iconLi).parent());
-		$(iconLi).addClass('active');
-
-		var i = $(iconLi).parent().find('input');
-
-		if (i.length){
-			$(i).val($(iconLi).attr('title'));
-		}
-	}
-
-	function resetIconSelect(iconList){
-		var icon_list = $(iconList).find('LI');
-		
-		for(o = 0; o < icon_list.length - 1; o++){
-			$(icon_list[o]).removeClass('active');
-		}
-
-		var i = $(iconList).find('input');
-
-		if (i.length){
-			$(i).val('');
-		}
-	}
-	
+jQuery(document).ready(function ($) {
+  $(document).on('click', '.caweb-icon-menu li', function (e) {
+    cawebIconSelected(this);
+  });
+  $(document).on('click', '.caweb-icon-menu-header .reset-icon', function (e) {
+    resetIconSelect($(this).parent().next());
+  });
+  function cawebIconSelected(iconLi) {
+    resetIconSelect($(iconLi).parent());
+    $(iconLi).addClass('active');
+    var i = $(iconLi).parent().find('input');
+    if (i.length) {
+      $(i).val($(iconLi).attr('title'));
+    }
+  }
+  function resetIconSelect(iconList) {
+    var icon_list = $(iconList).find('LI');
+    for (o = 0; o < icon_list.length - 1; o++) {
+      $(icon_list[o]).removeClass('active');
+    }
+    var i = $(iconList).find('input');
+    if (i.length) {
+      $(i).val('');
+    }
+  }
 });
-  
-
 
 /***/ }),
 
-/***/ 40:
+/***/ "./src/scripts/admin/toggle-options.js":
+/*!*********************************************!*\
+  !*** ./src/scripts/admin/toggle-options.js ***!
+  \*********************************************/
 /***/ (() => {
 
 // Toggle CAWeb Template Options
-jQuery( document ).ready( function($) {
-	let current_version = $('#ca_site_version option:selected').val();
+jQuery(document).ready(function ($) {
+  let current_version = $('#ca_site_version option:selected').val();
 
-	// Correct Options. 
-	correct_options();
+  // Correct Options. 
+  correct_options();
+  $('select[id$="ca_site_version"]').on("change", function () {
+    current_version = $(this).val();
+    correct_options();
+  });
+  function correct_options() {
+    correct_template_options();
+    correct_social_media_links();
+  }
 
-	$('select[id$="ca_site_version"]').on("change", function(){
-		current_version = $(this).val();
-		correct_options();
-	} );
+  // Toggle Template Options
+  function correct_template_options() {
+    var current_menu = $('#ca_default_navigation_menu option:selected').val();
 
-	function correct_options(){
-		correct_template_options();
-		correct_social_media_links();
-	}
+    // Version 6.
+    if ('6.0' === current_version) {
+      // Drop support for mega menus.
+      $('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
+      $('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
 
-	// Toggle Template Options
-	function correct_template_options(){
-		var current_menu = $('#ca_default_navigation_menu option:selected').val();
+      // if current menu is no longer supported, set to dropdown.
+      if (['flexmega', 'megadropdown'].includes(current_menu)) {
+        $(`#ca_default_navigation_menu option[value="dropdown"]`).attr('selected', true);
+        $('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', false);
+      }
 
-		// Version 6.
-		if( '6.0' === current_version ){
-			// Drop support for mega menus.
-			$('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
-			$('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
+      // Drop support for Menu Home Link.
+      $('#ca_home_nav_link').parent().parent().addClass('d-none');
 
-			// if current menu is no longer supported, set to dropdown.
-			if( ['flexmega','megadropdown'].includes( current_menu ) ){
-				$(`#ca_default_navigation_menu option[value="dropdown"]`).attr('selected', true);
-				$('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', false);
-			}
-		
-			// Drop support for Menu Home Link.
-			$('#ca_home_nav_link').parent().parent().addClass('d-none');
-		
-			// Drop support for Search on Frontpage
-			$('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
+      // Drop support for Search on Frontpage
+      $('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
 
-			// Drop support for Utility Header Home Icon.
-			$('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
-		// Version 5.
-		}else{
-			// Add support for mega menus.
-			$('#ca_default_navigation_menu option[value="flexmega"]').removeClass('d-none');
-			$('#ca_default_navigation_menu option[value="megadropdown"]').removeClass('d-none');
+      // Drop support for Utility Header Home Icon.
+      $('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
+      // Version 5.
+    } else {
+      // Add support for mega menus.
+      $('#ca_default_navigation_menu option[value="flexmega"]').removeClass('d-none');
+      $('#ca_default_navigation_menu option[value="megadropdown"]').removeClass('d-none');
 
-			// Add support for Menu Home Link.
-			$('#ca_home_nav_link').parent().parent().removeClass('d-none');
+      // Add support for Menu Home Link.
+      $('#ca_home_nav_link').parent().parent().removeClass('d-none');
 
-			// Add support for Search on Frontpage
-			$('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
+      // Add support for Search on Frontpage
+      $('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
 
-			// Drop support for Utility Header.
-			$('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
-		}
-	}
+      // Drop support for Utility Header.
+      $('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
+    }
+  }
 
-	// Toggle Social Media Links
-	function correct_social_media_links(){
-		var exclusions = '6.0' === current_version ? [
-			'ca_social_snapchat-settings',
-			'ca_social_pinterest-settings',
-			'ca_social_rss-settings',
-			'ca_social_google_plus-settings',
-			'ca_social_flickr-settings'
-		] : ['ca_social_github-settings'];
+  // Toggle Social Media Links
+  function correct_social_media_links() {
+    var exclusions = '6.0' === current_version ? ['ca_social_snapchat-settings', 'ca_social_pinterest-settings', 'ca_social_rss-settings', 'ca_social_google_plus-settings', 'ca_social_flickr-settings'] : ['ca_social_github-settings'];
+    $('div[id^="ca_social_"]').each(function (index) {
+      // hide the entire option if not allowed for specified template version
+      if (exclusions.includes(this.id)) {
+        $(this).addClass('d-none');
+        $(this).prev().addClass('d-none');
+      } else {
+        $(this).removeClass('d-none');
+        $(this).prev().removeClass('d-none');
+      }
+      var optionName = this.id.substring(0, this.id.indexOf('-'));
 
-		$('div[id^="ca_social_"]').each(function(index) {
-			// hide the entire option if not allowed for specified template version
-			if( exclusions.includes(this.id) ){
-				$(this).addClass('d-none');
-				$(this).prev().addClass('d-none');
-			}else{
-				$(this).removeClass('d-none');
-				$(this).prev().removeClass('d-none');
-			}
-
-			var optionName = this.id.substring(0, this.id.indexOf('-'));
-
-			// hide header option for all social link options when using version 6.
-			if(  '6.0' === current_version ){
-				$(`#${optionName}_header`).parent().parent().addClass('d-none');
-			}else{
-				$(`#${optionName}_header`).parent().parent().removeClass('d-none');
-			}
-		});
-	}
-
-
+      // hide header option for all social link options when using version 6.
+      if ('6.0' === current_version) {
+        $(`#${optionName}_header`).parent().parent().addClass('d-none');
+      } else {
+        $(`#${optionName}_header`).parent().parent().removeClass('d-none');
+      }
+    });
+  }
 });
 
 /***/ }),
 
-/***/ 54:
+/***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js":
+/*!*******************************************************************!*\
+  !*** ./src/scripts/wp/theme-customizer/controls/alert-banners.js ***!
+  \*******************************************************************/
 /***/ (() => {
 
-jQuery( document ).ready( function($) {
-	$('#_customize-input-caweb_add_alert_banner').click( add_alert_banner);
-	$('.caweb-toggle-alert').click( toggle_alert );
-	$('.caweb-remove-alert').click( remove_alert );
+jQuery(document).ready(function ($) {
+  $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);
+  $('.caweb-toggle-alert').click(toggle_alert);
+  $('.caweb-remove-alert').click(remove_alert);
+  function add_alert_banner() {
+    var alert_list = $(this).parent().parent();
+    var new_li = $(this).parent().next().clone();
+    var alert_toggle = $(new_li).find('#caweb-toggle-alert');
+    var alert_status = $(new_li).find('input[name^="alert-status-"]');
+    var alert_remove = $(new_li).find('.caweb-remove-alert');
+    $(new_li).attr('id', '');
+    $(alert_toggle).on('click', toggle_alert);
+    $(alert_remove).on('click', remove_alert);
+    $(alert_status).attr('data-bs-toggle', 'toggle');
+    $(alert_status).attr('data-size', 'sm');
+    $(alert_list).append($(new_li));
+    $(alert_status).bootstrapToggle({
+      onstyle: 'success'
+    });
 
-	function add_alert_banner(){
-		var alert_list = $(this).parent().parent();
-		var new_li = $(this).parent().next().clone();
-		var alert_toggle = $(new_li).find('#caweb-toggle-alert');
-		var alert_status = $(new_li).find('input[name^="alert-status-"]');
-		var alert_remove = $(new_li).find('.caweb-remove-alert');
-
-		$(new_li).attr('id', '');
-
-		$(alert_toggle).on( 'click', toggle_alert );
-		$(alert_remove).on( 'click', remove_alert );
-
-		$(alert_status).attr('data-bs-toggle', 'toggle');
-		$(alert_status).attr('data-size', 'sm');
-
-		$(alert_list).append( $(new_li) );
-
-		$(alert_status).bootstrapToggle({
-			onstyle: 'success',
-		});
-
-		//wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
-		
-	}
-
-	function toggle_alert(){
-		$( '#' + $(this).attr('data-target') ).collapse('toggle');
-		$(this).find('span').toggleClass('dashicons-arrow-right');
-	}
-
-	function remove_alert(){
-		var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
-	  
-		if (r == true) {
-			$(this).parent().remove();
-		}
-	}
-
+    //wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
+  }
+  function toggle_alert() {
+    $('#' + $(this).attr('data-target')).collapse('toggle');
+    $(this).find('span').toggleClass('dashicons-arrow-right');
+  }
+  function remove_alert() {
+    var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
+    if (r == true) {
+      $(this).parent().remove();
+    }
+  }
 });
 
 /***/ })
@@ -214,15 +194,16 @@ jQuery( document ).ready( function($) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-__webpack_require__(37);
-__webpack_require__(40);
-
-__webpack_require__(54);
-
+/*!***********************************************************!*\
+  !*** ./src/scripts/wp/theme-customizer/controls/index.js ***!
+  \***********************************************************/
+__webpack_require__(/*! ../../../admin/icon */ "./src/scripts/admin/icon.js");
+__webpack_require__(/*! ../../../admin/toggle-options */ "./src/scripts/admin/toggle-options.js");
+__webpack_require__(/*! ./alert-banners */ "./src/scripts/wp/theme-customizer/controls/alert-banners.js");
 })();
 
 /******/ })()
 ;
+//# sourceMappingURL=caweb-customizer-controls.js.map

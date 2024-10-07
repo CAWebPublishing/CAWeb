@@ -1,0 +1,87 @@
+nav {
+    /* Override nav li line-height */
+    li {
+        line-height: 1.5 !important;
+    }
+}
+
+header .full-width-nav {
+    padding: 0 15px;
+}
+
+#navigation .top-level-nav {
+    width: 100%;
+}
+
+/* Override styles for second level navs not using flex */
+.second-level-nav:not(.flex) {
+    display: block;
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: auto !important;
+    padding: 0 !important;
+    background: inherit;
+
+    .second-level-link{
+        font-size: 17.6px;
+        font-size: 1.1rem;
+    }
+    
+    .second-level-link:hover{
+        background-color: inherit;
+        opacity: 1;
+        transition: all 0.3s;
+    }
+
+    li{
+        display: inline-block;
+
+        &.w-25{
+            width: 24.6% !important;
+        }
+    }
+
+}
+
+// Fix Divi adding max-width
+nav.megadropdown .media-left .media-object{
+    max-width: inherit;
+}
+
+// Change various navigation behavior when in mobile/tablet view
+@media (max-width: 992px){
+    nav {
+        /* MegaDropdown Navigation Styles */
+        &.megadropdown{
+            // make all subnav li's full width
+            .second-level-nav:not(.flex) li {
+                width: 100% !important;
+            }
+    
+            // make second-level-nav container full width
+            div[class*="pull-"]{
+                width: 100% !important;
+            }
+    
+            // hide all subnav images
+            div[class*="with-image-"]{
+                display: none;
+            }
+        }
+    }
+}
+
+// Change various navigation behavior when in mobile/tablet view
+@media (max-width: 992px){
+    nav {
+        // Hide link descriptions, large icons and media objects
+        .link-description,
+        .media-left,
+        .font-size-40,
+        .image-icon {
+            display: none;
+        }
+        
+    }
+}

@@ -168,7 +168,6 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		$url          = $this->props['url'];
 		$is_vertical  = $this->props['is_vertical'];
 
-		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$url = ! empty( $url ) ? esc_url( $url ) : '';
 
@@ -177,56 +176,51 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			$portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
 		}
 
+		$figure_class = 'row';
+		$image_class  = 'me-3';
+
+		// Vertical Layout
+		if( 'on' === $is_vertical ){
+			$figure_class = 'column bg-light vertical';
+			$image_class = 'align-self-center';
+		}
+
 		// Rounded Profile Banner.
 		if ( 'on' === $round ) {
-			$image_class  = ' rounded-circle';
-			$figure_class = ' border-0 bg-greylight-radialgradient';
-			// Squared Profile Banner.
-		} else {
-			$image_class  = '';
-			$figure_class = ' bg-white border rounded';
+			$image_class  .= ' rounded-circle';
 		}
 
 		$image = ! empty( $portrait_url ) ? sprintf(
-			'<div class="d-flex m-r-md"><img class="width-80 height-80%1$s" src="%2$s"%3$s></div>',
+			'<img class="width-80 height-80 %1$s" src="%2$s"%3$s>',
 			$image_class,
 			$portrait_url,
 			! empty( $portrait_alt ) ? sprintf( ' alt="%1$s"', $portrait_alt ) : ''
 		) : '';
 
-		$job_title    = ! empty( $job_title ) ? sprintf( '<div class="d-block"><span class="font-size-13">%1$s</span></div>', $job_title ) : '';
-		$profile_link = ! empty( $profile_link ) ? sprintf( '<a href="%1$s" class="font-size-12">%2$s</a>', $url, $profile_link ) : '';
-		$name         = ! empty( $name ) ? sprintf( '<h3 class="h4 m-0">%1$s</h3>', $name ) : '';
+		$name         = ! empty( $name ) ? sprintf( '<h4 class="pb-0">%1$s</h4>', $name ) : '';
+		$job_title    = ! empty( $job_title ) ? sprintf( '<span class="d-block">%1$s</span>', $job_title ) : '';
+		$profile_link = ! empty( $profile_link ) ? sprintf( '<a href="%1$s">%2$s</a>', $url, $profile_link ) : '';
 
 		$media_body = sprintf(
-			'<div class="media-body">%1$s%2$s<hr class ="m-t-sm m-b-0">%3$s</div>',
+			'<div class="body%1$s">%2$s%3$s%4$s</div>',
+			'on' === $is_vertical ? ' text-center' : '',
 			$name,
 			$job_title,
 			$profile_link
 		);
 
-		$output = sprintf(
-			'<figure class="p-a%1$s"><div class="media">%2$s%3$s</div></figure>',
+		$output = sprintf('<figure class="executive-profile p-3 d-flex flex-%1$s">%2$s%3$s</figure>',
 			$figure_class,
 			$image,
 			$media_body
 		);
 
-		if ( 'on' === $is_vertical ) {
-			$this->add_classname( 'text-center' );
-			$output = strip_tags( $output, '<figure><img><hr><h3><a><span>' );
-		}
-
-		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
-
-		$output = sprintf(
-			'<div%1$s%2$s>%3$s</div>',
+		return sprintf(
+			'<div%1$s class="%2$s">%3$s</div>',
 			$this->module_id(),
-			$class,
+			$this->module_classname( $render_slug ),
 			$output
 		);
-
-		return $output;
 	}
 }
 new CAWeb_Module_Profile_Banner();

@@ -131,52 +131,102 @@ class CAWeb_Module_Fullwidth_Service_Tiles extends ET_Builder_CAWeb_Module {
 		$view_more_text   = $this->props['view_more_text'];
 		$view_more_url    = $this->props['view_more_url'];
 
-		$this->add_classname( 'section-understated' );
-		$this->add_classname( 'collapsed' );
+		
+		$this->props['module_id'] = empty( $this->props['module_id'] ) ? 
+					$this->get_module_order_class( $this->slug )
+					: 
+					$this->props['module_id'];
+
+		$this->add_classname( 'service-tiles' );
+
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		global $caweb_tile_count, $caweb_tiles;
 
-		$view_more = 'on' === $view_more_on_off ? sprintf( '<div class="more-button"><div class="more-content"></div><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url( $view_more_url ), $view_more_text ) : '';
+		$view_more = 'on' === $view_more_on_off ? sprintf( '<div class="more-button"><a href="%1$s" class="btn-more inverse" target="_blanK"><span class="ca-gov-icon-plus-fill" aria-hidden="true"></span><span class="more-title">%2$s</span></a></div>', esc_url( $view_more_url ), $view_more_text ) : '';
 
 		$output = '';
 
+		$tile_contents = '';
+		$width = 0;
+
 		for ( $i = 0; $i < $caweb_tile_count; $i++ ) {
-			$title      = sprintf( '<div class="teaser bg-black text-white py-1 text-center"><h4 class="title mt-1 lh-base">%1$s</h4></div>', $caweb_tiles[ $i ]['item_title'] );
+			$title      = $caweb_tiles[ $i ]['item_title'];
 			$tile_size  = $caweb_tiles[ $i ]['tile_size'];
 			$item_image = $caweb_tiles[ $i ]['item_image'];
 
 			if ( 'half' === $tile_size ) {
 				$tile_size = 'w-50';
+				$width += 50;
 			} elseif ( 'full' === $tile_size ) {
 				$tile_size = 'w-100';
+				$width += 100;
+			}else{
+				$tile_size = 'w-25';
+				$width += 25;
+			}
+
+			if ( ! empty( $item_image ) ) {
+				$alt_text   = caweb_get_attachment_post_meta( $item_image, '_wp_attachment_image_alt' );
+				$item_image = sprintf( '<img src="%1$s" alt="%2$s" class="w-100" style="background-size: cover;height: 320px;" />', $item_image, ! empty( $alt_text ) ? $alt_text : ' ' );
 			}
 
 			if ( 'on' === $caweb_tiles[ $i ]['tile_link'] ) {
-				if ( ! empty( $item_image ) ) {
-					$alt_text   = caweb_get_attachment_post_meta( $item_image, '_wp_attachment_image_alt' );
-					$item_image = sprintf( '<img src="%1$s" alt="%2$s" class="w-100" style="background-size: cover;height: 320px;" />', $item_image, ! empty( $alt_text ) ? $alt_text : ' ' );
-				}
+				
+				$title = sprintf('<div class="teaser bg-black text-white py-1 text-center"><a href="%1$s" class="title h4 text-decoration-none text-white lh-base">%2$s<span class="ca-gov-icon-link d-block"></span></a></div>', $caweb_tiles[ $i ]['tile_url'], $title );
 
-				$output .= sprintf( '<div tabindex="0" class="service-tile service-tile-empty %1$s" data-url="%2$s" data-link-target="new" >%3$s%4$s</div>', $tile_size, $caweb_tiles[ $i ]['tile_url'], $item_image, $title );
+				$output .= sprintf( '<div tabindex="0" class="service-tile %1$s">%2$s%3$s</div>', $tile_size, $item_image, $title );
 			} else {
-				$output .= sprintf( '<div tabindex="0" class="service-tile %2$s" data-tile-id="panel-%1$s" style="background-image:url(%3$s); background-size: cover;">%4$s</div>', $i + 1, $tile_size, $item_image, $title );
-			}
-		}
-		for ( $i = 0; $i < $caweb_tile_count; $i++ ) {
-			if ( 'off' === $caweb_tiles[ $i ]['tile_link'] ) {
-				$output .= sprintf(
-					'<div %1$s data-tile-id="panel-%2$s"><div class="section section-default px-3 py-4"><div class="container pt-0 mx-auto"><div class="card card-block p-3 mb-3 bg-white"><button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><div class="group px-3">%3$s</div></div></div></div></div>',
+				$title = sprintf('
+					<div class="teaser bg-black text-white py-1 text-center">
+						<a href="%1$s" data-bs-toggle="collapse" data-bs-target="#%2$s #card-%3$s" class="title h4 text-decoration-none text-white lh-base" aria-expanded="false">
+							%4$s
+							<span class="ca-gov-icon-plus-fill d-block"></span>
+						</a>
+					</div>', 
+					$caweb_tiles[ $i ]['tile_url'], 
+					$this->module_id(false),
+					$i + 1, 
+					$title 
+				);
+
+				$output .= sprintf( '<div tabindex="0" class="service-tile %1$s">%2$s%3$s</div>', 
+					$tile_size, 
+					$item_image, 
+					$title 
+				);
+
+				$tile_contents .= sprintf(
+					'<div %1$s id="card-%2$s" data-bs-parent="#%3$s">
+						<div class="card card-default py-4 mb-0">
+							<div class="container pt-0">
+								<div class="card card-block p-3 mb-0 bg-white">
+									<button type="button" data-bs-toggle="collapse" data-bs-target="#%3$s #card-%2$s" class="btn btn-sm btn-secondary ca-gov-icon-close-mark float-end" aria-expanded="false"></button>
+									<div class="group">%4$s</div>
+								</div>
+							</div>
+						</div>
+					</div>',
 					$caweb_tiles[ $i ]['module_class'],
 					$i + 1,
+					$this->module_id(false),
 					$caweb_tiles[ $i ]['content']
 				);
+
 			}
+
+			// if width has reached 100%, print out any tile contents.
+			if( 100 === $width ){
+				$output .= $tile_contents;
+				$width = 0;
+				$tile_contents = '';
+			}
+
 		}
 
 		$output .= $this->content;
 
-		$output = sprintf( '<div%1$s%2$s><div class="service-group clearfix">%3$s</div>%4$s</div>', $this->module_id(), $class, $output, $view_more );
+		$output = sprintf( '<div%1$s%2$s><div class="row clearfix">%3$s</div>%4$s</div>', $this->module_id(), $class, $output, $view_more );
 
 		return $output;
 	}

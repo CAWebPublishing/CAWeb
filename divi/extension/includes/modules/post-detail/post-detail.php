@@ -1544,7 +1544,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		// Course Presenter Image.
 		if ( ! empty( $course_presenter_image ) ) {
 			$alt_text               = caweb_get_attachment_post_meta( $course_presenter_image, '_wp_attachment_image_alt' );
-			$course_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $course_presenter_image, $alt_text );
+			$course_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="me-3" style="height: 75px; width: 75px;">', $course_presenter_image, $alt_text );
 		}
 
 		// Display Course Presenter Information.
@@ -1552,7 +1552,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $show_course_presenter ) {
 			$presenter = sprintf(
-				'<div class="presenter mb-1 d-inline-block"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
+				'<div class="presenter"><p><strong>Presenter:</strong><br><strong class="presenter-name">%1$s</strong></p><p>%2$s%3$s</p></div>',
 				$course_presenter_name,
 				$course_presenter_image,
 				$course_presenter_bio
@@ -1579,13 +1579,13 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		if ( 'on' === $show_course_map ) {
 			$map_embed  = $this->caweb_get_google_map_place_link( $course_addr, true );
-			$course_map = sprintf( '<div class="third">%1$s</div>', $map_embed );
+			$course_map = sprintf( '<div class="col-3">%1$s</div>', $map_embed );
 		} else {
 			$course_map = '';
 		}
 
 		return sprintf(
-			'<div class="description">%1$s</div>%2$s<div class="group"><div class="two-thirds">%3$s%4$s</div>%5$s</div>%6$s',
+			'<div class="description">%1$s</div>%2$s<div class="row"><div class="col-9">%3$s%4$s</div>%5$s</div>%6$s',
 			$this->content,
 			$presenter,
 			$organizer,
@@ -1625,7 +1625,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		// Event Presenter Image.
 		if ( ! empty( $event_presenter_image ) ) {
 			$alt_text              = caweb_get_attachment_post_meta( $event_presenter_image, '_wp_attachment_image_alt' );
-			$event_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="img-left" style="height: 75px; width: 75px;">', $event_presenter_image, $alt_text );
+			$event_presenter_image = sprintf( '<img src="%1$s" alt="%2$s" class="me-3" style="height: 75px; width: 75px;">', $event_presenter_image, $alt_text );
 		}
 
 		// Display Event Presenter Information.
@@ -1658,8 +1658,8 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		$reg = ! empty( $reg ) ? sprintf( '<p>%1$s</p>', implode( '<br />', $reg ) ) : '';
 
 		return sprintf(
-			'%1$s<div class="description">%2$s</div>%3$s%4$s%5$s%6$s',
-			$this->caweb_get_the_post_thumbnail( null, 'thumbnail', array( 'class' => 'img-left pr-3 pe-3' ) ),
+			'%1$s<div class="description clearfix">%2$s</div>%3$s%4$s%5$s%6$s',
+			$this->caweb_get_the_post_thumbnail( null, 'thumbnail', array( 'class' => 'float-start mb-3 me-3' ) ),
 			$this->content,
 			$presenter,
 			$organizer,
@@ -1723,8 +1723,8 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		);
 
 		return sprintf(
-			'<div class="header">%1$s%2$s</div>%3$s%4$s',
-			$this->caweb_get_the_post_thumbnail( null, 'medium', array( 'class' => 'd-block mb-3' ) ),
+			'%1$s%2$s<div class="clearfix">%3$s</div>%4$s',
+			$this->caweb_get_the_post_thumbnail( null, 'medium', array( 'class' => 'me-3 mb-3' ) ),
 			$exam_info,
 			$this->content,
 			$this->renderFooter( $post_id )
@@ -1784,7 +1784,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$d2              = date_create_from_format( 'm/d/Y', ( new DateTime( 'NOW' ) )->format( 'm/d/Y' ) );
 			$tmp             = $d1->diff( $d2 )->format( '%a' );
 			$days_passed     = 0 !== (int) $tmp ? sprintf( '&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp ) : '';
-			$job_posted_date = sprintf( '<div class="published">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed );
+			$job_posted_date = sprintf( '<div class="published text-secondary">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed );
 		} else {
 			$job_posted_date = '';
 		}
@@ -1811,7 +1811,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		}
 
 		$job_info = sprintf(
-			'<div class="half"><div class="well"><div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p></div></div></div>',
+			'<div class="col-6"><div class="well"><div class="well-body"><p>%1$s%2$s%3$s%4$s%5$s</p></div></div></div>',
 			$job_hours,
 			$job_salary,
 			$job_position,
@@ -1844,16 +1844,16 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		$job_apply_info = ! empty( $job_apply_to_info ) || ! empty( $job_questions_info ) ?
 					sprintf(
-						'<div class="half"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
+						'<div class="col-6"><div class="well"><div class="well-body">%1$s%2$s</div></div></div>',
 						! empty( $job_apply_to_info ) ? sprintf( '<p>%1$s</p>', $job_apply_to_info ) : '',
 						! empty( $job_questions_info ) ? sprintf( '<p>%1$s</p>', $job_questions_info ) : ''
 					) : '';
 
 		$job_agency_about = 'on' === $show_about_agency && ! empty( $job_agency_about ) ?
-			sprintf( '<div class="panel panel-understated about-department"><div class="panel-heading"><h4>About this Department</h4></div><div class="panel-body"><p>%1$s</p></div></div> ', $job_agency_about ) : '';
+			sprintf( '<div class="card card-understated about-department"><div class="card-header"><h4>About this Department</h4></div><div class="card-body"><p>%1$s</p></div></div> ', $job_agency_about ) : '';
 
 		return sprintf(
-			'<div class="sub-header">%1$s%2$s</div><div class="group">%3$s%4$s</div>%5$s%6$s%7$s',
+			'<div class="sub-header mb-4">%1$s%2$s</div><div class="row">%3$s%4$s</div>%5$s%6$s%7$s',
 			! empty( $agency_info ) ? $agency_info : '',
 			$job_posted_date,
 			$job_info,
@@ -1879,7 +1879,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		$news_city                       = $this->props['news_city'];
 		$show_featured_image             = $this->props['show_featured_image'];
 
-		$image = 'on' === $show_featured_image ? $this->caweb_get_the_post_thumbnail( null, array( 150, 100 ), array( 'class' => 'img-left' ) ) : '';
+		$image = 'on' === $show_featured_image ? $this->caweb_get_the_post_thumbnail( null, array( 150, 100 ), array( 'class' => 'float-start me-3 mb-3' ) ) : '';
 
 		$date_city = '';
 
@@ -1892,7 +1892,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 
 		}
 
-		return sprintf( '%1$s%2$s%3$s%4$s', $date_city, $image, $this->content, $this->renderFooter( $post_id ) );
+		return sprintf( '%1$s%2$s<div class="clearfix">%3$s</div>%4$s', $date_city, $image, $this->content, $this->renderFooter( $post_id ) );
 	}
 
 	/**
@@ -1916,18 +1916,23 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			! empty( $profile_career_title ) ? ', ' . $profile_career_title : ''
 		);
 
-		$img_align = 'on' === $profile_image_align ? 'img-right' : 'img-left';
+		$img_align = 'on' === $profile_image_align ? 'float-end ms-3' : 'float-start me-3';
 
 		$image = 'on' === $show_featured_image ? $this->caweb_get_the_post_thumbnail(
 			null,
 			array( 150, 100 ),
 			array(
-				'class' => $img_align,
+				'class' => "mb-3 $img_align",
 				'alt'   => $profile_name,
 			)
 		) : '';
 
-		return sprintf( '%1$s%2$s%3$s%4$s', ! empty( $title ) ? sprintf( '<h1>%1$s</h1>', $title ) : '', $image, $this->content, $this->renderFooter( $post_id ) );
+		return sprintf( '%1$s%2$s<div class="clearfix">%3$s</div>%4$s', 
+			! empty( $title ) ? sprintf( '<h1>%1$s</h1>', $title ) : '', 
+			$image, 
+			$this->content, 
+			$this->renderFooter( $post_id ) 
+		);
 	}
 
 	/**
@@ -1945,7 +1950,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 		$tag_names = wp_get_post_tags( $post_id, array( 'fields' => 'names' ) );
 		$tag_list  = '';
 		if ( ! empty( $tag_names ) && 'on' === $show_tags_button ) {
-			$tag_list = '<div class="pull-left mr-4">Tags or Keywords<ul>';
+			$tag_list = '<div class="float-start me-4">Tags or Keywords<ul>';
 			foreach ( $tag_names as $n ) {
 				$tag_list .= sprintf( '<li>%1$s</li>', $n );
 			}
@@ -1962,7 +1967,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$cat_list .= '</ul>';
 		}
 
-		return sprintf( '<footer class="keywords">%1$s%2$s</footer>', $tag_list, $cat_list );
+		return sprintf( '<footer class="keywords mt-0">%1$s%2$s</footer>', $tag_list, $cat_list );
 	}
 }
 new CAWeb_Module_Post_Detail();

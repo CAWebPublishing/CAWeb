@@ -254,6 +254,11 @@ function caweb_pre_get_posts( $query ) {
  * @return void
  */
 function caweb_wp_body_open() {
+	// don't load the header if on the backend
+	if( is_admin() ){
+		return;
+	}
+
 	$caweb_version       = caweb_template_version();
 	$caweb_logo          = get_option( 'header_ca_branding', '' );
 	$caweb_logo_alt_text = get_option( 'header_ca_branding_alt_text', '' );
@@ -302,7 +307,10 @@ function caweb_wp_body_open() {
  * @return void
  */
 function caweb_wp_footer() {
-	get_template_part( 'parts/footer' );
+	// don't load the footer if on the backend
+	if( ! is_admin() ){
+		get_template_part( 'parts/footer' );
+	}
 
 	/* This removes Divi Builder Google Font CSS */
 	wp_deregister_style( 'et-builder-googlefonts' );
@@ -329,8 +337,10 @@ function caweb_late_wp_footer() {
  */
 function caweb_search_form() {
 	$caweb_version = caweb_template_version();
+	$class = '5.5' === $caweb_version ? 'section section-default search-container active top-0' : 'container pt-4';
+
 	?>
-	<div class="section section-default search-container active top-0">
+	<div class="<?php print esc_attr( $class ); ?>">
 	<?php get_template_part( "parts/$caweb_version/search" ); ?>
 	</div>
 	<?php
@@ -381,16 +391,6 @@ function caweb_wp_enqueue_scripts() {
 
 	$localize_args = caweb_enqueue_google_scripts( array() );
 
-	// Template JS File.
-	$template_js_file = caweb_get_min_file( "/build/$color-$version.js", 'js' );
-
-	/**
-	 * Core JS File
-	 *
-	 * @todo Once 5.5 is completely removed the core file can be loaded with webpack instead.
-	 */
-	$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
-
 	// CAWeb JS File.
 	$caweb_js_file = caweb_get_min_file( '/build/caweb-core.js', 'js' );
 
@@ -403,13 +403,27 @@ function caweb_wp_enqueue_scripts() {
 	}
 
 	// Register Scripts.
-	wp_register_script( 'cagov-core-template-script', $template_js_file, array( 'jquery' ), CAWEB_VERSION, true );
-
 	wp_register_script( 'caweb-core-script', $caweb_js_file, array( 'jquery' ), CAWEB_VERSION, true );
 	wp_localize_script( 'caweb-core-script', 'args', $localize_args );
 
-	/* Enqueue Scripts */
-	wp_enqueue_script( 'cagov-core-script', $core_js_file, array( 'jquery', 'cagov-core-template-script' ), CAWEB_VERSION, true );
+	// Template JS File.
+	$template_js_file = caweb_get_min_file( "/build/$color-$version.js", 'js' );
+	$deps = array( 'jquery' );
+
+	/**
+	 * Core JS File
+	 *
+	 * @todo Once 5.5 is completely removed this can be removed.
+	 */
+	if( '5.5' === $version ){
+		$core_js_file = caweb_get_min_file( "/src/version-$version/cagov.core.js", 'js' );
+		wp_register_script( 'cagov-core-js-script', $core_js_file, $deps, CAWEB_VERSION, true );
+
+		$deps = [ 'cagov-core-js-script' ];
+
+	}
+
+	wp_enqueue_script( 'cagov-core-script', $template_js_file, $deps, CAWEB_VERSION, true );
 
 	wp_enqueue_script( 'caweb-core-script' );
 
@@ -552,9 +566,6 @@ function caweb_enqueue_google_scripts( $localized ) {
  * @return void
  */
 function caweb_admin_init() {
-	/* Core Updater */
-	require_once CAWEB_ABSPATH . '/core/class-caweb-theme-update.php';
-
 	/**
 	 * Initialize the WP Filesystem Class
 	 *

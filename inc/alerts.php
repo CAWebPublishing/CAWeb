@@ -75,17 +75,16 @@ function caweb_render_alerts() {
 			$msg    = $alert['message'];
 
 			?>
-			<div  id="caweb-alert-<?php print esc_attr( $a ); ?>" style="background-color: <?php print esc_attr( $color ); ?>" class="alert alert-dismissible alert-banner border-top border-dark alert-<?php print esc_attr( $a ); ?>">
-				<div class="container">
-					<button data-alert="<?php print esc_attr( $a ); ?>" class="close caweb-alert-close" aria-label="Close Alert <?php print esc_attr( $a ); ?>"><span aria-hidden="true">&times;</span></button>
+			<div  id="caweb-alert-<?php print esc_attr( $a ); ?>" style="background-color: <?php print esc_attr( $color ); ?>" class="alert alert-dismissible mb-0 border-top border-dark py-2 alert-<?php print esc_attr( $a ); ?>">
+				<div class="container d-flex flex-row align-items-center">
 					
 					<?php if ( ! empty( $button ) && ! empty( $url ) ) : ?>
-					<a href="<?php print esc_url( $url ); ?>" target="<?php print empty( $target ) ? '_self' : '_blank'; ?>" class="alert-link btn btn-default btn-xs"><?php print esc_html( $text ); ?></a>
+					<a href="<?php print esc_url( $url ); ?>" target="<?php print empty( $target ) ? '_self' : '_blank'; ?>" class="alert-link btn btn-outline-dark btn-sm me-2"><?php print esc_html( $text ); ?></a>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $header ) ) : ?>
 						<span class="alert-level">
-							<?php if ( ! empty( $header ) ) : ?>
+							<?php if ( ! empty( $icon ) ) : ?>
 							<span class="ca-gov-icon-<?php print esc_attr( $icon ); ?>" aria-hidden="true"></span>
 							<?php endif; ?>
 							<?php print esc_html( $header ); ?>
@@ -97,6 +96,7 @@ function caweb_render_alerts() {
 						print wp_kses( $msg, 'post' );
 					}
 					?>
+					<button data-alert="<?php print esc_attr( $a ); ?>" class="btn border-0 bg-transparent ca-gov-icon-close-mark close caweb-alert-close position-relative ms-auto p-1" data-bs-dismiss="alert" aria-label="Close Alert <?php print esc_attr( $a ); ?>"><span class="sr-only">x</span></button>
 				</div>
 			</div>
 			<?php

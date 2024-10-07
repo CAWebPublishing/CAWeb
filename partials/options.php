@@ -725,7 +725,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 
 	// Uploaded File.
 	$ext_files             = get_option( "caweb_external_$file_type", array() );
-	$ext_file_input_name   = "caweb_external_${file_type}[]";
+	$ext_file_input_name   = "caweb_external_{$file_type}[]";
 	$ext_file_data_section = "custom-$file_type";
 
 	// Descriptive.
@@ -733,7 +733,7 @@ function caweb_display_custom_file_settings( $is_active = false, $file_type = 'c
 	?>
 	<!-- Custom <?php print esc_attr( strtoupper( $file_type ) ); ?> Section -->
 	<div class="p-2 collapse<?php print $is_active ? ' show' : ''; ?>" id="custom-<?php print esc_attr( $file_type ); ?>" data-bs-parent="#caweb-settings">
-		<?php do_action("caweb_options_custom_${file_type}_custom_fields"); ?>
+		<?php do_action("caweb_options_custom_{$file_type}_custom_fields"); ?>
 		<!-- Custom Uploaded <?php print esc_attr( strtoupper( $file_type ) ); ?> -->
 		<div class="row">
 			<div class="mb-3">

@@ -17,20 +17,15 @@ $caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_G
 
 ?>
 
-<div class="container py-3">
-	<form id="Search" class="pos-rel" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
-		<span class="sr-only" id="SearchInput">Custom Google Search</span>
-		<input type="text" id="q" name="q" value="<?php print esc_attr( $caweb_keyword ); ?>" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield" />
-		<button type="submit" class="gsc-search-button ms-0 w-auto">
-			<span class="ca-gov-icon-search" aria-hidden="true" ></span>
-			<span class="sr-only">Submit</span>
-		</button>
-		<div class="close-search-btn">
-			<!-- Some Google styles add an 'x' background image when button has 'gsc-clear-button' in the class -->
-			<button class="close-search gsc-clear-button width-50 height-50 border-0 bg-transparent pos-rel" type="reset" tabindex="-1">
-				<span class="sr-only">Close Search</span>
-				<span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
-			</button>
-		</div>
-	</form> 
+<div class="search-container">
+    <form id="Search" action="<?php print esc_url( site_url( 'serp' ) ); ?>">
+        <div class="input-group">
+            <span class="sr-only" id="SearchInput">Custom Google Search</span>
+            <input type="search" name="q" aria-labelledby="SearchInput" placeholder="Search" class="search-textfield form-control" value="<?php print esc_attr( $caweb_keyword ); ?>">
+            <button type="submit" class="search-button">
+                <span class="ca-gov-icon-search" aria-hidden="true"></span>
+                <span class="sr-only">Submit</span>
+            </button>
+        </div>
+    </form>
 </div>

@@ -49,14 +49,6 @@ function caweb_login_enqueue_scripts() {
 	/* CAWeb Admin CSS */
 	wp_enqueue_style( 'caweb-admin-styles', $caweb_css_file, array(), CAWEB_VERSION );
 
-	$caweb_js_file = caweb_get_min_file( '/js/caweb-admin.js', 'js' );
-
-	/* Enqueue Scripts */
-	wp_enqueue_script( 'jquery' );
-
-	wp_register_script( 'caweb-admin-scripts', $caweb_js_file, array( 'jquery' ), CAWEB_VERSION, true );
-
-	wp_enqueue_script( 'caweb-admin-scripts' );
 }
 
 

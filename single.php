@@ -33,7 +33,7 @@ while ( have_posts() ) :
 		}
 
 		if ( get_option( 'ca_default_post_date_display', false ) && ! $caweb_is_page_builder_used ) {
-			printf( '<p class="page-date published">Published: <time datetime="%1$s">%1$s</time></p>', get_the_date( 'M d, Y' ) );
+			printf( '<p class="page-date text-muted">Published: <time datetime="%1$s">%1$s</time></p>', get_the_date( 'M d, Y' ) );
 		}
 
 		?>

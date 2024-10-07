@@ -135,7 +135,7 @@ class CAWeb_Module_Fullwidth_Section_Carousel extends ET_Builder_CAWeb_Module {
 
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
-		$output = sprintf( '<div id="%1$s"%2$s%3$s>%4$s<div class="carousel-inner">%5$s</div>%6$s</div>', $module_id, $class, $section_bg_color, $indicators, $this->content, $controls );
+		$output = sprintf( '<div id="%1$s"%2$s%3$s data-bs-ride="carousel">%4$s<div class="carousel-inner">%5$s</div>%6$s</div>', $module_id, $class, $section_bg_color, $indicators, $this->content, $controls );
 
 		$et_pb_fullwidth_slider_item_num = 0;
 

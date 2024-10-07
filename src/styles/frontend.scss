@@ -5,12 +5,16 @@ based off CA State Template v5.5.23
 @import './custom/variables';
 
 body{
+
+	@import './custom/google';
+
 	// State Template 5.5 specific styles
 	&[class*="5.5"]{
-        @import './custom/';
+        @import '../version-5.5/custom/';
 
 		// if page is a standard WordPress page
-		&:not(.divi-built){
+		// and not SERP Template
+		&:not(.divi-built):not(.page-template-searchpage){
 			@import './custom/main-content';
 		}
 
@@ -19,20 +23,14 @@ body{
             @import 'divi';
         }
 
-		// Add any custom Version styles
-		@import '../version-5.5/navigation';
-
     }
 
 	// State Template 6 specific styles
 	&[class*="6.0"]{
-		// Add any custom Version variables
-		@import '../version-6.0/variables';
-        @import './custom/';
-            
 		
 		// if page is a standard WordPress page
-		&:not(.divi-built){
+		// and not SERP Template
+		&:not(.divi-built):not(.page-template-searchpage){
 			@import './custom/main-content';
 		}
 		
@@ -61,10 +59,18 @@ body{
 	
     // SERP Template Overrides
     &.page-template-searchpage{
-        @import 'custom/search';
-		
-		&.logged-in .gssb_c{
-			margin-top: 35px;
+        #main-content .container:before {
+			background: transparent;
+		}
+		#main-content .search-container{
+			width: 100%;
+		}
+		.gsc-cursor-page:focus{
+			outline: solid 2px #2ea3f2;
+		}
+		.mobile-controls .toggle-search,
+		form#Search .close-search {
+			display: none !important
 		}
     }
 
@@ -85,8 +91,7 @@ body{
 
 // Add CAWeb font sheet 
 // This is a combination of the State Template and Divi icons.
-@import 'font-only.css';
-@import 'divi-icon-override.css';
+@import '@caweb/html-webpack-plugin/build/font-only.css';
 
 // @todo this needs to be verified to see if it's still needed
 // Corrects Logo when navigation is compacted, in mobile view
