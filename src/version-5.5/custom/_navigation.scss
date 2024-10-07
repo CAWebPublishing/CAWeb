@@ -1,3 +1,14 @@
+nav {
+    /* Override nav li line-height */
+    li {
+        line-height: 1.5 !important;
+    }
+}
+
+header .full-width-nav {
+    padding: 0 15px;
+}
+
 #navigation .top-level-nav {
     width: 100%;
 }
@@ -58,5 +69,19 @@ nav.megadropdown .media-left .media-object{
                 display: none;
             }
         }
+    }
+}
+
+// Change various navigation behavior when in mobile/tablet view
+@media (max-width: 992px){
+    nav {
+        // Hide link descriptions, large icons and media objects
+        .link-description,
+        .media-left,
+        .font-size-40,
+        .image-icon {
+            display: none;
+        }
+        
     }
 }

@@ -337,8 +337,10 @@ function caweb_late_wp_footer() {
  */
 function caweb_search_form() {
 	$caweb_version = caweb_template_version();
+	$class = '5.5' === $caweb_version ? 'section section-default search-container active top-0' : 'container pt-4';
+
 	?>
-	<div class="section section-default search-container active top-0">
+	<div class="<?php print esc_attr( $class ); ?>">
 	<?php get_template_part( "parts/$caweb_version/search" ); ?>
 	</div>
 	<?php

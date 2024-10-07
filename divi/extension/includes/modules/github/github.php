@@ -76,8 +76,8 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 			'per_page' => array(
 				'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 				'type'        => 'text',
-				'description' => esc_html__( 'Enter amount to display. Default is 100.', 'et_builder' ),
-				'default'     => 100,
+				'description' => esc_html__( 'Enter amount to display per page. Default is 30, Max is 100.', 'et_builder' ),
+				'default'     => 30,
 				'tab_slug'    => 'general',
 				'toggle_slug' => 'style',
 			),

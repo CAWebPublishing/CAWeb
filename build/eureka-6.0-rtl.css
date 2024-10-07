@@ -1,7 +1,7 @@
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/@caweb/html-webpack-plugin/build/eureka.css ***!
   \**************************************************************************************************************************************************************************************************************/
-@import url(https://fonts.googleapis.com/css2?family=Public+Sans);
+@import url(https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;display=block);
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/@caweb/html-webpack-plugin/build/eureka.css (1) ***!
   \******************************************************************************************************************************************************************************************************************/
@@ -4228,6 +4228,7 @@
   3. Add 25%, 50%, 75%, 100% to rounded- utility
   4. Add dotted, solid, dashed, wavy to text-decoration- utility
   5. Add sm, md, lg to font-size- utility
+  6. Add default, pointer, grab, crosshair to cursor- utility classes
 */
 :root,
 [data-bs-theme=light] {
@@ -4294,7 +4295,7 @@
   --bs-standout: #21272a;
   --bs-facebook: #3d77ea;
   --bs-twitter: #000;
-  --bs-googleplus: #dc4a38;
+  --bs-google-plus: #dc4a38;
   --bs-flickr: #0063dc;
   --bs-linkedin: #0976b4;
   --bs-instagram: #e73476;
@@ -4318,7 +4319,7 @@
   --bs-standout-rgb: 33, 39, 42;
   --bs-facebook-rgb: 61, 119, 234;
   --bs-twitter-rgb: 0, 0, 0;
-  --bs-googleplus-rgb: 220, 74, 56;
+  --bs-google-plus-rgb: 220, 74, 56;
   --bs-flickr-rgb: 0, 99, 220;
   --bs-linkedin-rgb: 9, 118, 180;
   --bs-instagram-rgb: 231, 52, 118;
@@ -4410,18 +4411,18 @@
 
 [data-bs-theme=dark] {
   color-scheme: dark;
-  --bs-body-color: #bcbbc1;
-  --bs-body-color-rgb: 188, 187, 193;
+  --bs-body-color: #FFF;
+  --bs-body-color-rgb: 255, 255, 255;
   --bs-body-bg: #3b3a48;
   --bs-body-bg-rgb: 59, 58, 72;
   --bs-emphasis-color: #fff;
   --bs-emphasis-color-rgb: 255, 255, 255;
-  --bs-secondary-color: rgba(188, 187, 193, 0.75);
-  --bs-secondary-color-rgb: 188, 187, 193;
+  --bs-secondary-color: rgba(255, 255, 255, 0.75);
+  --bs-secondary-color-rgb: 255, 255, 255;
   --bs-secondary-bg: #4a4958;
   --bs-secondary-bg-rgb: 74, 73, 88;
-  --bs-tertiary-color: rgba(188, 187, 193, 0.5);
-  --bs-tertiary-color-rgb: 188, 187, 193;
+  --bs-tertiary-color: rgba(255, 255, 255, 0.5);
+  --bs-tertiary-color-rgb: 255, 255, 255;
   --bs-tertiary-bg: #434250;
   --bs-tertiary-bg-rgb: 67, 66, 80;
   --bs-primary-text-emphasis: #6ea8fe;
@@ -4454,7 +4455,7 @@
   --bs-link-color-rgb: 110, 168, 254;
   --bs-link-hover-color-rgb: 139, 185, 254;
   --bs-code-color: #e685b5;
-  --bs-highlight-color: #bcbbc1;
+  --bs-highlight-color: #FFF;
   --bs-highlight-bg: #664d03;
   --bs-border-color: #5e5e6a;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
@@ -4499,7 +4500,7 @@ hr {
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   font-weight: 700;
   line-height: 1.2;
   color: var(--bs-heading-color);
@@ -6633,7 +6634,7 @@ textarea.form-control-lg {
 }
 
 [data-bs-theme=dark] .form-select {
-  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23bcbbc1%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23FFF%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e");
 }
 
 .form-check {
@@ -7566,7 +7567,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #000;
 }
 
-.btn-googleplus {
+.btn-google-plus {
   --bs-btn-color: #000;
   --bs-btn-bg: #dc4a38;
   --bs-btn-border-color: #dc4a38;
@@ -7974,7 +7975,7 @@ textarea.form-control-lg {
   --bs-gradient: none;
 }
 
-.btn-outline-googleplus {
+.btn-outline-google-plus {
   --bs-btn-color: #dc4a38;
   --bs-btn-border-color: #dc4a38;
   --bs-btn-hover-color: #000;
@@ -9823,11 +9824,11 @@ textarea.form-control-lg {
   --bs-alert-link-color: var(--bs-twitter-text-emphasis);
 }
 
-.alert-googleplus {
-  --bs-alert-color: var(--bs-googleplus-text-emphasis);
-  --bs-alert-bg: var(--bs-googleplus-bg-subtle);
-  --bs-alert-border-color: var(--bs-googleplus-border-subtle);
-  --bs-alert-link-color: var(--bs-googleplus-text-emphasis);
+.alert-google-plus {
+  --bs-alert-color: var(--bs-google-plus-text-emphasis);
+  --bs-alert-bg: var(--bs-google-plus-bg-subtle);
+  --bs-alert-border-color: var(--bs-google-plus-border-subtle);
+  --bs-alert-link-color: var(--bs-google-plus-text-emphasis);
 }
 
 .alert-flickr {
@@ -10376,17 +10377,17 @@ textarea.form-control-lg {
   --bs-list-group-active-border-color: var(--bs-twitter-text-emphasis);
 }
 
-.list-group-item-googleplus {
-  --bs-list-group-color: var(--bs-googleplus-text-emphasis);
-  --bs-list-group-bg: var(--bs-googleplus-bg-subtle);
-  --bs-list-group-border-color: var(--bs-googleplus-border-subtle);
+.list-group-item-google-plus {
+  --bs-list-group-color: var(--bs-google-plus-text-emphasis);
+  --bs-list-group-bg: var(--bs-google-plus-bg-subtle);
+  --bs-list-group-border-color: var(--bs-google-plus-border-subtle);
   --bs-list-group-action-hover-color: var(--bs-emphasis-color);
-  --bs-list-group-action-hover-bg: var(--bs-googleplus-border-subtle);
+  --bs-list-group-action-hover-bg: var(--bs-google-plus-border-subtle);
   --bs-list-group-action-active-color: var(--bs-emphasis-color);
-  --bs-list-group-action-active-bg: var(--bs-googleplus-border-subtle);
-  --bs-list-group-active-color: var(--bs-googleplus-bg-subtle);
-  --bs-list-group-active-bg: var(--bs-googleplus-text-emphasis);
-  --bs-list-group-active-border-color: var(--bs-googleplus-text-emphasis);
+  --bs-list-group-action-active-bg: var(--bs-google-plus-border-subtle);
+  --bs-list-group-active-color: var(--bs-google-plus-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-google-plus-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-google-plus-text-emphasis);
 }
 
 .list-group-item-flickr {
@@ -12044,9 +12045,9 @@ textarea.form-control-lg {
   background-color: RGBA(var(--bs-twitter-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
-.text-bg-googleplus {
+.text-bg-google-plus {
   color: #000 !important;
-  background-color: RGBA(var(--bs-googleplus-rgb), var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(var(--bs-google-plus-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-flickr {
@@ -12220,11 +12221,11 @@ textarea.form-control-lg {
   text-decoration-color: RGBA(0, 0, 0, var(--bs-link-underline-opacity, 1)) !important;
 }
 
-.link-googleplus {
-  color: RGBA(var(--bs-googleplus-rgb), var(--bs-link-opacity, 1)) !important;
-  text-decoration-color: RGBA(var(--bs-googleplus-rgb), var(--bs-link-underline-opacity, 1)) !important;
+.link-google-plus {
+  color: RGBA(var(--bs-google-plus-rgb), var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(var(--bs-google-plus-rgb), var(--bs-link-underline-opacity, 1)) !important;
 }
-.link-googleplus:hover, .link-googleplus:focus {
+.link-google-plus:hover, .link-google-plus:focus {
   color: RGBA(227, 110, 96, var(--bs-link-opacity, 1)) !important;
   text-decoration-color: RGBA(227, 110, 96, var(--bs-link-underline-opacity, 1)) !important;
 }
@@ -12778,8 +12779,8 @@ textarea.form-control-lg {
   --bs-focus-ring-color: rgba(var(--bs-twitter-rgb), var(--bs-focus-ring-opacity));
 }
 
-.focus-ring-googleplus {
-  --bs-focus-ring-color: rgba(var(--bs-googleplus-rgb), var(--bs-focus-ring-opacity));
+.focus-ring-google-plus {
+  --bs-focus-ring-color: rgba(var(--bs-google-plus-rgb), var(--bs-focus-ring-opacity));
 }
 
 .focus-ring-flickr {
@@ -13969,9 +13970,9 @@ textarea.form-control-lg {
   color: rgba(var(--bs-twitter-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-googleplus {
+.text-google-plus {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-googleplus-rgb), var(--bs-text-opacity)) !important;
+  color: rgba(var(--bs-google-plus-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-flickr {
@@ -14344,9 +14345,9 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-twitter-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-googleplus {
+.bg-google-plus {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-googleplus-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--bs-google-plus-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-flickr {
@@ -14777,6 +14778,22 @@ textarea.form-control-lg {
 
 .text-decoration-wavy {
   text-decoration-style: wavy !important;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.cursor-grab {
+  cursor: grab !important;
+}
+
+.cursor-crosshair {
+  cursor: crosshair !important;
 }
 
 @media (min-width: 576px) {
@@ -17891,32 +17908,8 @@ textarea.form-control-lg {
    GLOBALS 
    /src/styles/components/globals.scss
 ----------------------------------------- */
-h1, .h1 {
-  line-height: 1.25;
-}
-
-h2, .h2 {
-  line-height: 1.375;
-}
-
-h3, .h3 {
-  line-height: 1.5;
-}
-
-h4, .h4 {
-  line-height: 1.625;
-}
-
-h5, .h5 {
-  line-height: 1.75;
-}
-
-h6, .h6 {
-  line-height: 1.75;
-}
-
 .ca-gov-logo-svg {
-  background: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 version=%271.1%27 viewBox=%270 0 1304 949%27><path fill=%27%23fdb71c%27 d=%27M799 398c3-11 12-42 27-91 3-13 12-38 27-77 14-40 26-71 34-95-28 19-53 42-76 67-92 100-200 220-238 283 14-4 43-34 136-66 29-11 59-18 90-21zm-16 64c-291 0-418 464-620 464-46 0-81-21-106-62-16-27-25-58-24-90 0-84 40-191 120-320 68-110 140-198 216-265 65-58 121-86 168-86 24-1 46 10 61 29 12 16 18 35 17 54 0 38-13 81-38 130-22 42-50 80-83 113-23 21-40 31-52 31-9-1-17-5-22-12-5-5-8-13-8-20 0-14 12-29 36-47 31-23 58-51 80-82 29-43 44-80 44-110 1-1-2-19-8-27-6-6-15-9-24-9-22 0-52 16-92 47-53 43-101 91-143 144-59 69-108 146-146 228-34 78-52 144-52 199-1 24 8 48 23 67 14 20 37 32 62 31 92-3 207-214 243-263C787 120 814 119 867 68c31-30 55-44 71-44 10 0 20 5 26 12s9 16 10 25c-2 20-8 39-16 58-19 48-37 100-54 155-15 49-25 86-30 112 5 0 9 0 14-1 11 0 21-1 29-1 23 0 34 9 34 26 0 8-3 16-7 22s-10 11-17 13c-6 1-13 1-19 1-17-1-33 1-50 4-4 12-15 117-31 121-49 43-45-95-44-109z%27/><path d=%27M495 779c12 0 24 5 33 14s14 20 14 33c0 26-21 46-46 46-26 0-46-21-46-46-1-26 19-47 45-47zm284-123-33 32c-18-21-44-33-72-33-22-1-44 8-60 24-16 15-25 36-24 58 0 22 9 44 25 59 16 16 39 25 62 24 14 0 28-3 40-10 12-8 21-19 26-31h-70v-43h122v10c0 21-6 42-17 60-10 18-25 33-43 44-19 10-40 16-62 15-24 0-47-5-67-16s-36-27-47-47-17-43-17-66c0-31 11-61 32-84 25-28 61-44 99-42 20 0 40 4 59 12 18 8 34 20 47 34zm159-45c33 0 65 13 89 37s38 57 37 91c1 34-12 66-36 90-50 49-130 49-179 0l-1-1c-49-50-49-131 1-180 23-24 55-37 89-37zm-1 45c-21 0-42 8-56 23-15 16-24 37-23 60-1 25 10 48 29 64 14 12 33 19 51 18 21 0 41-8 56-24 31-33 31-84 0-117-15-16-36-24-57-24zm118-36h47l61 172 62-172h47l-87 242h-45z%27 fill=%27%23003688%27/></svg>");
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201304%20949%22%3E%3Cpath%20fill%3D%22%23fdb71c%22%20d%3D%22M799%20398c3-11%2012-42%2027-91%203-13%2012-38%2027-77%2014-40%2026-71%2034-95-28%2019-53%2042-76%2067-92%20100-200%20220-238%20283%2014-4%2043-34%20136-66q43.5-16.5%2090-21m-16%2064c-291%200-418%20464-620%20464-46%200-81-21-106-62-16-27-25-58-24-90%200-84%2040-191%20120-320%2068-110%20140-198%20216-265%2065-58%20121-86%20168-86%2024-1%2046%2010%2061%2029%2012%2016%2018%2035%2017%2054%200%2038-13%2081-38%20130-22%2042-50%2080-83%20113-23%2021-40%2031-52%2031-9-1-17-5-22-12-5-5-8-13-8-20%200-14%2012-29%2036-47%2031-23%2058-51%2080-82%2029-43%2044-80%2044-110%201-1-2-19-8-27-6-6-15-9-24-9-22%200-52%2016-92%2047-53%2043-101%2091-143%20144-59%2069-108%20146-146%20228-34%2078-52%20144-52%20199-1%2024%208%2048%2023%2067%2014%2020%2037%2032%2062%2031%2092-3%20207-214%20243-263C787%20120%20814%20119%20867%2068c31-30%2055-44%2071-44%2010%200%2020%205%2026%2012s9%2016%2010%2025c-2%2020-8%2039-16%2058-19%2048-37%20100-54%20155-15%2049-25%2086-30%20112%205%200%209%200%2014-1%2011%200%2021-1%2029-1%2023%200%2034%209%2034%2026%200%208-3%2016-7%2022s-10%2011-17%2013c-6%201-13%201-19%201-17-1-33%201-50%204-4%2012-15%20117-31%20121-49%2043-45-95-44-109%22%2F%3E%3Cpath%20d%3D%22M495%20779c12%200%2024%205%2033%2014s14%2020%2014%2033c0%2026-21%2046-46%2046-26%200-46-21-46-46-1-26%2019-47%2045-47m284-123-33%2032c-18-21-44-33-72-33-22-1-44%208-60%2024-16%2015-25%2036-24%2058%200%2022%209%2044%2025%2059%2016%2016%2039%2025%2062%2024%2014%200%2028-3%2040-10%2012-8%2021-19%2026-31h-70v-43h122v10c0%2021-6%2042-17%2060-10%2018-25%2033-43%2044-19%2010-40%2016-62%2015-24%200-47-5-67-16s-36-27-47-47-17-43-17-66c0-31%2011-61%2032-84%2025-28%2061-44%2099-42%2020%200%2040%204%2059%2012%2018%208%2034%2020%2047%2034m159-45c33%200%2065%2013%2089%2037s38%2057%2037%2091c1%2034-12%2066-36%2090-50%2049-130%2049-179%200l-1-1c-49-50-49-131%201-180%2023-24%2055-37%2089-37m-1%2045c-21%200-42%208-56%2023-15%2016-24%2037-23%2060-1%2025%2010%2048%2029%2064%2014%2012%2033%2019%2051%2018%2021%200%2041-8%2056-24%2031-33%2031-84%200-117-15-16-36-24-57-24m118-36h47l61%20172%2062-172h47l-87%20242h-45z%22%20fill%3D%22%23003688%22%2F%3E%3C%2Fsvg%3E");
   aspect-ratio: 33/24;
   width: 33px;
   display: inline-block;
@@ -17947,29 +17940,84 @@ a .ca-gov-icon-external-link::before {
   border: 0 !important;
 }
 
-/* -----------------------------------------
-   ALERTS
-   /src/styles/components/alerts.scss
------------------------------------------ */
-header .alert {
-  border-radius: 0;
-  margin-bottom: 0;
-  padding: 0.5rem 0;
+.pagination {
+  display: block;
 }
 
-.alert .container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.alert .container .alert-level {
-  font-weight: bold;
-  margin: 0 5px;
-}
-.alert .container button[data-bs-dismiss=alert] {
-  position: relative;
+.page-title,
+.page-date {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  margin-left: auto;
   margin-right: auto;
-  padding: 0.05rem;
+}
+@media (min-width: 576px) {
+  .page-title,
+  .page-date {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .page-title,
+  .page-date {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .page-title,
+  .page-date {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .page-title,
+  .page-date {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .page-title,
+  .page-date {
+    max-width: 1320px;
+  }
+}
+
+.page-date {
+  color: var(--bs-secondary-color, #72717c);
+}
+
+/* -----------------------------------------
+   Typography 
+----------------------------------------- */
+h1, .h1 {
+  line-height: 1.25;
+}
+
+h2, .h2 {
+  line-height: 1.375;
+}
+
+h3, .h3 {
+  line-height: 1.5;
+}
+
+h4, .h4 {
+  line-height: 1.625;
+}
+
+h5, .h5 {
+  line-height: 1.75;
+}
+
+h6, .h6 {
+  line-height: 1.75;
+}
+
+p {
+  padding-bottom: 0;
 }
 
 /* -----------------------------------------
@@ -18002,8 +18050,7 @@ header.global-header .branding .header-organization-banner a img {
 }
 
 /* -----------------------------------------
-   FOOTER
-   /src/styles/components/footer.scss
+FOOTER - /src/styles/components/footer.scss
 ----------------------------------------- */
 footer.global-footer {
   background-color: var(--bs-gray-50, #fafafa);
@@ -18038,10 +18085,10 @@ footer.global-footer .nav-item a.ca-gov-icon-twitter, footer.global-footer .nav-
 footer.global-footer .nav-item a.ca-gov-icon-twitter:hover, footer.global-footer .nav-item a.ca-gov-icon-twitter:focus, footer.global-footer .nav-item a.ca-gov-icon-share-twitter:hover, footer.global-footer .nav-item a.ca-gov-icon-share-twitter:focus {
   color: black;
 }
-footer.global-footer .nav-item a.ca-gov-icon-googleplus, footer.global-footer .nav-item a.ca-gov-icon-share-googleplus {
+footer.global-footer .nav-item a.ca-gov-icon-google-plus, footer.global-footer .nav-item a.ca-gov-icon-share-google-plus {
   color: #dc4a38;
 }
-footer.global-footer .nav-item a.ca-gov-icon-googleplus:hover, footer.global-footer .nav-item a.ca-gov-icon-googleplus:focus, footer.global-footer .nav-item a.ca-gov-icon-share-googleplus:hover, footer.global-footer .nav-item a.ca-gov-icon-share-googleplus:focus {
+footer.global-footer .nav-item a.ca-gov-icon-google-plus:hover, footer.global-footer .nav-item a.ca-gov-icon-google-plus:focus, footer.global-footer .nav-item a.ca-gov-icon-share-google-plus:hover, footer.global-footer .nav-item a.ca-gov-icon-share-google-plus:focus {
   color: #bf3322;
 }
 footer.global-footer .nav-item a.ca-gov-icon-flickr, footer.global-footer .nav-item a.ca-gov-icon-share-flickr {
@@ -18197,554 +18244,6 @@ header.global-header .mobile-controlled.overlay {
 }
 
 /* -----------------------------------------
-   NAVIGATION 
-   /src/styles/components/navigation.scss
------------------------------------------ */
-header.global-header .navigation .container {
-  padding-right: 0;
-  padding-left: 0;
-}
-header.global-header .navigation .container .nav-item {
-  line-height: var(--bs-body-line-height, 1.5);
-}
-header.global-header .navigation .container .nav-item a {
-  color: var(--bs-main, #3e4b4d);
-}
-header.global-header .navigation .container .nav-item a[aria-current=page] {
-  color: var(--bs-black, #000);
-  border-right: 1px solid var(--bs-gray-100, #ededef);
-  border-left: 1px solid var(--bs-gray-100, #ededef);
-}
-header.global-header .navigation .container .nav-item a:hover, header.global-header .navigation .container .nav-item a:focus {
-  background-color: var(--bs-gray-75, #f3f3f4);
-}
-header.global-header .navigation .container .nav-item a:focus {
-  outline: solid 2px #2ea3f2 !important;
-  outline-offset: -2px;
-}
-header.global-header .navigation .container .nav-item a.dropdown-toggle::after {
-  font-family: "CaGov";
-  border: none;
-  vertical-align: baseline;
-  content: "3";
-  transition: all 0.5s cubic-bezier(0.57, 0.2, 0.21, 0.89);
-}
-header.global-header .navigation .container .nav-item a.dropdown-toggle.show::after {
-  transform: rotate(-180deg);
-}
-header.global-header .navigation .container .nav-item .dropdown-menu {
-  width: auto;
-  border-top: 0;
-  border-radius: 0;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  background: var(--bs-white, #fff);
-}
-header.global-header .navigation .container .nav-item .dropdown-menu a:active {
-  background-color: transparent;
-}
-header.global-header .navigation .container .nav-item .dropdown-menu.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* -----------------------------------------
-   RETURN TO TOP
-   /src/styles/components/return-top.scss
------------------------------------------ */
-.return-top {
-  z-index: 99999;
-  font-size: 1.125rem;
-  padding: 5px 10px 10px;
-  position: fixed;
-  left: -100px;
-  bottom: 90px;
-  visibility: hidden;
-  transition: all 0.5s ease;
-  background: var(--bs-white, #fff);
-  border-color: var(--bs-main, #3e4b4d);
-  color: var(--bs-main, #3e4b4d);
-  border: 1px solid;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-.return-top::before {
-  content: "2";
-  font-family: CaGov;
-  font-weight: 900;
-  padding-left: 3px;
-  font-size: 1.3rem;
-}
-.return-top:hover {
-  background-color: var(--bs-gray-100, #ededef);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-.return-top:hover, .return-top:focus {
-  color: var(--bs-main-darker, #3e4b4d);
-  border-color: var(--bs-main-darker, #3e4b4d);
-}
-.return-top.visible {
-  left: 0;
-}
-
-/* -----------------------------------------
-   SEARCH 
-   /src/styles/components/search.scss
------------------------------------------ */
-header.global-header .search-container {
-  align-self: center;
-  margin-right: auto;
-  width: 32%;
-}
-header.global-header .search-container form {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-header.global-header .search-container form .search-textfield {
-  max-height: 38px;
-  border-radius: 0 5px 5px 0 !important;
-  border: 1px solid var(--bs-gray-600, #72717c);
-}
-header.global-header .search-container form .search-textfield::-moz-placeholder {
-  color: var(--bs-black, #000);
-  opacity: 1;
-}
-header.global-header .search-container form .search-textfield::placeholder {
-  color: var(--bs-black, #000);
-  opacity: 1;
-}
-header.global-header .search-container form .search-textfield:focus {
-  outline: solid 2px #2ea3f2 !important;
-  outline-offset: -2px;
-  box-shadow: none;
-}
-header.global-header .search-container form .search-button {
-  padding: 0 12px;
-  border: 1px solid;
-  border-radius: 5px 0 0 5px;
-  min-height: 38px;
-  outline-offset: -2px;
-  color: #fff;
-  background-color: var(--bs-gray-600, #72717c);
-  border-color: var(--bs-gray-600, #72717c);
-}
-header.global-header .search-container form .search-button:hover, header.global-header .search-container form .search-button:focus {
-  outline: solid 2px #2ea3f2 !important;
-  background-color: var(--bs-gray-800, #4a4958);
-  border-color: var(--bs-gray-800, #4a4958);
-}
-
-/* -----------------------------------------
-   SECTIONS
-   /src/styles/components/sections.scss
------------------------------------------ */
-.section {
-  padding: 1rem;
-}
-
-/* -----------------------------------------
-   SERVICE TILES
-   /src/styles/components/service-tiles.scss
------------------------------------------ */
-.service-tiles .row {
-  margin-right: 0;
-  margin-left: 0;
-}
-.service-tiles .service-tile {
-  padding: 0;
-}
-.service-tiles .service-tile img {
-  height: 320px;
-  width: 100%;
-}
-.service-tiles .service-tile .teaser {
-  background-color: var(--bs-black, #000);
-  text-align: center;
-  color: var(--bs-white, #fff);
-  padding: 0.25rem 0;
-}
-.service-tiles .service-tile .teaser .title {
-  font-size: 1.6875rem;
-  text-decoration: none;
-  color: var(--bs-white, #fff);
-  line-height: 1.5;
-}
-.service-tiles .service-tile .teaser .ca-gov-icon-external-link {
-  display: none;
-}
-.service-tiles .collapse {
-  padding: 0;
-}
-.service-tiles .collapse .card {
-  margin-bottom: 0;
-  padding: 1.5rem 1rem;
-  display: block;
-}
-.service-tiles .collapse .card .card-block {
-  background-color: var(--bs-white, #fff);
-  padding: 1rem;
-  margin-bottom: 0;
-}
-.service-tiles .collapse .card .card-block .ca-gov-icon-close-mark {
-  float: left;
-}
-.service-tiles .collapse .card .card-block .group {
-  padding: 1rem 0;
-}
-
-/* -----------------------------------------
-   UTILITY HEADER
-   /src/styles/components/utility-header.scss
------------------------------------------ */
-header.global-header .utility-header {
-  width: 100%;
-  min-height: 42px;
-  transition: all 0.3s ease;
-  background: var(--bs-alt, #f9f4f0);
-  color: #000;
-}
-header.global-header .utility-header a {
-  display: inline-block;
-  padding: 0;
-  text-decoration: underline;
-  color: #000;
-}
-header.global-header .utility-header a:hover, header.global-header .utility-header a:focus, header.global-header .utility-header a.hovered {
-  text-decoration: none;
-  color: #4a4958;
-}
-header.global-header .utility-header .settings-links {
-  font-size: 1.125rem;
-  text-align: left;
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: auto;
-  align-items: center;
-  justify-content: flex-end;
-  min-height: 38px;
-}
-header.global-header .utility-header .settings-links a {
-  margin: 0;
-  margin-right: 1rem;
-  font-size: 0.95rem;
-}
-header.global-header .utility-header .settings-links a:last-child {
-  margin-left: 0;
-}
-header.global-header .utility-header .settings-links button {
-  margin: 0;
-  padding-left: 0;
-  font-size: 0.95rem;
-  color: #000;
-}
-header.global-header .utility-header .settings-links button:hover, header.global-header .utility-header .settings-links button:focus {
-  text-decoration: none;
-  color: #4a4958;
-}
-header.global-header .utility-header .social-media-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  min-height: 38px;
-  align-items: center;
-}
-header.global-header .utility-header .social-media-links a {
-  margin: 0 10px;
-  color: #000;
-  text-decoration: none;
-}
-header.global-header .utility-header .social-media-links a:hover, header.global-header .utility-header .social-media-links a:focus {
-  color: #4a4958;
-}
-header.global-header .utility-header .social-media-links .header-cagov-logo {
-  margin-left: 0.5rem;
-}
-header.global-header .utility-header .social-media-links .header-cagov-logo .ca-gov-logo-svg {
-  vertical-align: middle;
-}
-header.global-header .utility-header .social-media-links .header-cagov-logo a {
-  margin: 0;
-  padding-top: 0;
-}
-header.global-header .utility-header .social-media-links .official-tag {
-  margin: 0 0 0 1rem;
-  font-size: 0.95rem;
-  /*@media (max-width: $screen-xs-max) {
-    margin-right: 0;
-
-    .desktop-only {
-      display: none;
-    }
-  }*/
-}
-
-/* -----------------------------------------
-   BLOCKQUOTE
-   /src/styles/components/blockquote.scss
------------------------------------------ */
-blockquote {
-  font-size: 1.125rem;
-  padding: 11px 22px;
-  margin: 0 0 22px;
-  border-right: 4px solid;
-  border-color: #0d6efd;
-}
-blockquote footer {
-  display: block;
-  font-size: 80%;
-  color: #5e5e6a;
-  font-weight: 700;
-  margin-top: 1rem;
-}
-blockquote footer::before {
-  content: "— ";
-}
-
-/* -----------------------------------------
-   CARDS - /src/styles/components/cards.scss
------------------------------------------ */
-/*
-    Cards and Panels function the same way and utilize all the same classes
-*/
-.card {
-  margin-bottom: 1.5rem;
-}
-.card .card-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.card .card-header .card-title {
-  font-size: 1.25rem;
-  font-weight: normal;
-}
-.card .card-header .card-title > [class*=ca-gov-icon-] {
-  vertical-align: middle;
-  margin-left: 0.5rem;
-}
-.card .card-header .options {
-  margin-right: auto;
-}
-.card .card-header .options .btn {
-  border-color: var(--bs-border-color-translucent, #bcbbc1);
-  background-color: var(--bs-gray-75, #f3f3f4);
-}
-.card .card-header .options .btn:hover, .card .card-header .options .btn:focus {
-  background-color: var(--bs-gray-100, #ededef);
-}
-.card.card-standout.highlight .card-header:before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  border-right: 12px solid transparent;
-  border-left: 12px solid transparent;
-  border-top: 12px solid var(--bs-standout, #21272a);
-  bottom: 65px;
-  right: 50%;
-}
-.card.card-standout .card-header {
-  color: var(--bs-white, #fff);
-  background-color: var(--bs-standout, #21272a);
-}
-.card.card-standout .card-header .options .btn {
-  background-color: var(--bs-standout-dark, #21272a);
-}
-.card.card-standout .card-header .options .btn:hover, .card.card-standout .card-header .options .btn:focus {
-  background-color: var(--bs-standout-darker, #21272a);
-}
-.card.card-overstated .card-header {
-  color: var(--bs-white, #fff);
-  background-color: var(--bs-main, #3e4b4d);
-}
-.card.card-overstated .card-header .options .btn {
-  color: var(--bs-white, #fff);
-  background-color: var(--bs-main-dark, #3e4b4d);
-}
-.card.card-overstated .card-header .options .btn:hover, .card.card-overstated .card-header .options .btn:focus {
-  background-color: var(--bs-main-darker, #3e4b4d);
-}
-.card.card-understated .card-header {
-  color: inherit;
-  background-color: var(--bs-alt, #f9f4f0);
-}
-.card.card-understated .card-header .options .btn {
-  color: inherit;
-  background-color: var(--bs-alt-dark, #f9f4f0);
-}
-.card.card-understated .card-header .options .btn:hover, .card.card-understated .card-header .options .btn:focus {
-  background-color: var(--bs-alt-darker, #f9f4f0);
-}
-
-figure.executive-profile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--bs-alt, #f9f4f0);
-}
-figure.executive-profile img {
-  width: 80px;
-  height: 80px;
-  margin-left: 1rem;
-}
-figure.executive-profile .body {
-  padding-right: 1rem;
-  border-right: 1px solid var(--bs-gray-900, #3b3a48);
-}
-figure.executive-profile .body h4, figure.executive-profile .body .h4 {
-  margin-bottom: 0;
-}
-figure.executive-profile .body span {
-  display: block;
-}
-figure.executive-profile .body a {
-  font-size: 0.984375rem;
-}
-figure.executive-profile.vertical {
-  flex-direction: column;
-}
-figure.executive-profile.vertical img {
-  margin-left: 0;
-}
-figure.executive-profile.vertical .body {
-  text-align: center;
-  padding-right: 0;
-  border-right: 0;
-}
-
-/* -----------------------------------------
-   Featured Narrative
-   /src/styles/components/featured-narrative.scss
------------------------------------------ */
-.featured-narrative {
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem;
-  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
-  border-right: 0;
-  border-left: 0;
-}
-
-/* -----------------------------------------
-   LIST STYLES /src/styles/components/lists.scss
------------------------------------------ */
-.list-overstated li,
-.list-understated li {
-  list-style-type: "E";
-  margin: 10px 0;
-}
-.list-overstated li::marker,
-.list-understated li::marker {
-  font-family: "CaGov";
-}
-
-.list-overstated a {
-  font-weight: bold;
-}
-
-.list-standout li {
-  list-style-type: none;
-  margin: 10px 0;
-  margin-right: 2rem;
-}
-.list-standout li::before {
-  content: "5";
-  font-family: "CaGov";
-  font-size: 1.5rem;
-  font-weight: 900;
-  margin-right: -2.5rem;
-  width: 2.5rem;
-  display: inline-block;
-  vertical-align: -0.2rem;
-}
-
-.location {
-  display: flex;
-}
-.location > [class*=ca-gov-icon-]:first-child {
-  font-size: 3.5rem;
-  margin-left: 1rem;
-  color: var(--bs-gray-300, #bcbbc1);
-}
-.location .contact {
-  margin: 1rem;
-  margin-right: 0;
-}
-.location .contact p {
-  margin-bottom: 0;
-}
-.location .contact a:not(.btn) {
-  display: block;
-}
-.location .contact p:first-child, .location .summary p:first-child {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-.location.contact .btn {
-  margin-top: 1rem;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child {
-  background-color: var(--bs-black, #000);
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-facebook, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-facebook {
-  color: #3d77ea;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-twitter, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-twitter {
-  color: #000;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-googleplus, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-googleplus {
-  color: #dc4a38;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-flickr, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-flickr {
-  color: #0063dc;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-linkedin, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-linkedin {
-  color: #0976b4;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-instagram, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-instagram {
-  color: #e73476;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-snapchat, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-snapchat {
-  color: #fffc00;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-youtube, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-youtube {
-  color: #e73323;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-pinterest, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-pinterest {
-  color: #cc2127;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-vimeo, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-vimeo {
-  color: #1ab7ea;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-email, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-email {
-  color: #888;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-github, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-github {
-  color: #25292e;
-}
-.location.banner {
-  background-color: var(--bs-gray-75, #f3f3f4);
-}
-.location.banner .thumbnail {
-  width: 225px;
-  height: 100%;
-  margin: 1rem;
-}
-.location.banner .contact .address {
-  display: flex;
-}
-.location.banner .summary {
-  margin: 1rem;
-  width: 100%;
-}
-.location.banner .summary .description {
-  padding-bottom: 0.5rem;
-}
-.location.banner .summary .btn {
-  float: left;
-}
-
-/* -----------------------------------------
    MOBILE-CONTROLS
    /src/styles/components/mobile-controls.scss
 ----------------------------------------- */
@@ -18835,6 +18334,681 @@ figure.executive-profile.vertical .body {
   footer.global-footer .social-share-links {
     margin-right: 0;
   }
+}
+
+/* -----------------------------------------
+   NAVIGATION 
+   /src/styles/components/navigation.scss
+----------------------------------------- */
+header.global-header .navigation .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+header.global-header .navigation .container .nav-item {
+  line-height: var(--bs-body-line-height, 1.5);
+}
+header.global-header .navigation .container .nav-item a {
+  color: var(--bs-main, #3e4b4d);
+}
+header.global-header .navigation .container .nav-item a[aria-current=page] {
+  color: var(--bs-black, #000);
+  border-right: 1px solid var(--bs-gray-100, #ededef);
+  border-left: 1px solid var(--bs-gray-100, #ededef);
+}
+header.global-header .navigation .container .nav-item a:hover, header.global-header .navigation .container .nav-item a:focus {
+  background-color: var(--bs-gray-75, #f3f3f4);
+}
+header.global-header .navigation .container .nav-item a:focus {
+  outline: solid 2px #2ea3f2 !important;
+  outline-offset: -2px;
+}
+header.global-header .navigation .container .nav-item a.dropdown-toggle::after {
+  font-family: "CaGov";
+  border: none;
+  vertical-align: baseline;
+  content: "3";
+  transition: all 0.5s cubic-bezier(0.57, 0.2, 0.21, 0.89);
+}
+header.global-header .navigation .container .nav-item a.dropdown-toggle.show::after {
+  transform: rotate(-180deg);
+}
+header.global-header .navigation .container .nav-item .dropdown-menu {
+  width: auto;
+  border-top: 0;
+  border-radius: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background: var(--bs-white, #fff);
+}
+header.global-header .navigation .container .nav-item .dropdown-menu a:active {
+  background-color: transparent;
+}
+header.global-header .navigation .container .nav-item .dropdown-menu.show {
+  visibility: visible;
+  opacity: 1;
+}
+header.global-header .navigation .container .nav-item .dropdown-menu .link-description {
+  color: var(--bs-gray-700, #5e5e6a);
+  font-size: 0.85rem;
+}
+
+/* -----------------------------------------
+   RETURN TO TOP
+   /src/styles/components/return-top.scss
+----------------------------------------- */
+.return-top {
+  z-index: 99999;
+  font-size: 1.125rem;
+  padding: 5px 10px 10px;
+  position: fixed;
+  left: -100px;
+  bottom: 90px;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  background: var(--bs-white, #fff);
+  border-color: var(--bs-main, #3e4b4d);
+  color: var(--bs-main, #3e4b4d);
+  border: 1px solid;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.return-top::before {
+  content: "2";
+  font-family: CaGov;
+  font-weight: 900;
+  padding-left: 3px;
+  font-size: 1.3rem;
+}
+.return-top:hover {
+  background-color: var(--bs-gray-100, #ededef);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.return-top:hover, .return-top:focus {
+  color: var(--bs-main-darker, #3e4b4d);
+  border-color: var(--bs-main-darker, #3e4b4d);
+}
+.return-top.visible {
+  left: 0;
+}
+
+/* -----------------------------------------
+   SEARCH 
+   /src/styles/components/search.scss
+----------------------------------------- */
+.search-container {
+  align-self: center;
+  margin-right: auto;
+  width: 32%;
+}
+.search-container form {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.search-container form .search-textfield {
+  max-height: 38px;
+  border-radius: 0 5px 5px 0 !important;
+  border: 1px solid var(--bs-gray-600, #72717c);
+}
+.search-container form .search-textfield::-moz-placeholder {
+  color: var(--bs-black, #000);
+  opacity: 1;
+}
+.search-container form .search-textfield::placeholder {
+  color: var(--bs-black, #000);
+  opacity: 1;
+}
+.search-container form .search-textfield:focus {
+  outline: solid 2px #2ea3f2 !important;
+  outline-offset: -2px;
+  box-shadow: none;
+}
+.search-container form .search-button {
+  padding: 0 12px;
+  border: 1px solid;
+  border-radius: 5px 0 0 5px;
+  min-height: 38px;
+  outline-offset: -2px;
+  color: #fff;
+  background-color: var(--bs-gray-600, #72717c);
+  border-color: var(--bs-gray-600, #72717c);
+}
+.search-container form .search-button:hover, .search-container form .search-button:focus {
+  outline: solid 2px #2ea3f2 !important;
+  background-color: var(--bs-gray-800, #4a4958);
+  border-color: var(--bs-gray-800, #4a4958);
+}
+
+/* -----------------------------------------
+   UTILITY HEADER
+   /src/styles/components/utility-header.scss
+----------------------------------------- */
+header.global-header .utility-header {
+  width: 100%;
+  min-height: 42px;
+  transition: all 0.3s ease;
+  background: var(--bs-alt, #f9f4f0);
+  color: #000;
+}
+header.global-header .utility-header a {
+  display: inline-block;
+  padding: 0;
+  text-decoration: underline;
+  color: #000;
+}
+header.global-header .utility-header a:hover, header.global-header .utility-header a:focus, header.global-header .utility-header a.hovered {
+  text-decoration: none;
+  color: #4a4958;
+}
+header.global-header .utility-header .settings-links {
+  font-size: 1.125rem;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: auto;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 38px;
+}
+header.global-header .utility-header .settings-links a {
+  margin: 0;
+  margin-right: 1rem;
+  font-size: 0.95rem;
+}
+header.global-header .utility-header .settings-links a:last-child {
+  margin-left: 0;
+}
+header.global-header .utility-header .settings-links button {
+  margin: 0;
+  padding-left: 0;
+  font-size: 0.95rem;
+  color: #000;
+}
+header.global-header .utility-header .settings-links button:hover, header.global-header .utility-header .settings-links button:focus {
+  text-decoration: none;
+  color: #4a4958;
+}
+header.global-header .utility-header .social-media-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  min-height: 38px;
+  align-items: center;
+}
+header.global-header .utility-header .social-media-links a {
+  margin: 0 10px;
+  color: #000;
+  text-decoration: none;
+}
+header.global-header .utility-header .social-media-links a:hover, header.global-header .utility-header .social-media-links a:focus {
+  color: #4a4958;
+}
+header.global-header .utility-header .social-media-links .header-cagov-logo {
+  margin-left: 0.5rem;
+}
+header.global-header .utility-header .social-media-links .header-cagov-logo .ca-gov-logo-svg {
+  vertical-align: middle;
+}
+header.global-header .utility-header .social-media-links .header-cagov-logo a {
+  margin: 0;
+  padding-top: 0;
+}
+header.global-header .utility-header .social-media-links .official-tag {
+  margin: 0 0 0 1rem;
+  font-size: 0.95rem;
+  /*@media (max-width: $screen-xs-max) {
+    margin-right: 0;
+
+    .desktop-only {
+      display: none;
+    }
+  }*/
+}
+
+/* -----------------------------------------
+   ALERTS
+   /src/styles/components/alerts.scss
+----------------------------------------- */
+header .alert {
+  border-radius: 0;
+  margin-bottom: 0;
+  padding: 0.5rem 0;
+}
+
+.alert .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.alert .container .alert-level {
+  font-weight: bold;
+  margin: 0 5px;
+}
+.alert .container button[data-bs-dismiss=alert] {
+  position: relative;
+  margin-right: auto;
+  padding: 0.05rem;
+}
+
+/* -----------------------------------------
+   BLOCKQUOTE
+   /src/styles/components/blockquote.scss
+----------------------------------------- */
+blockquote {
+  font-size: 1.125rem;
+  padding: 11px 22px;
+  margin: 0 0 22px;
+  border-right: 4px solid;
+  border-color: #0d6efd;
+}
+blockquote footer {
+  display: block;
+  font-size: 80%;
+  color: #5e5e6a;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+blockquote footer::before {
+  content: "— ";
+}
+
+/* -----------------------------------------
+   CARDS - /src/styles/components/cards.scss
+----------------------------------------- */
+/*
+    Cards and Panels function the same way and utilize all the same classes
+*/
+.card {
+  margin-bottom: 1.5rem;
+}
+.card .card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.card .card-header .card-title {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+.card .card-header .card-title > [class*=ca-gov-icon-] {
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+.card .card-header .options {
+  margin-right: auto;
+}
+.card .card-header .options .btn {
+  border-color: var(--bs-border-color-translucent, #bcbbc1);
+  background-color: var(--bs-gray-75, #f3f3f4);
+}
+.card .card-header .options .btn:hover, .card .card-header .options .btn:focus {
+  background-color: var(--bs-gray-100, #ededef);
+}
+.card.card-standout.highlight .card-header:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+  border-top: 12px solid var(--bs-standout, #21272a);
+  bottom: 65px;
+  right: 50%;
+}
+.card.card-standout .card-header {
+  background-color: var(--bs-standout, #21272a);
+  color: var(--bs-white, #fff);
+}
+.card.card-standout .card-header .options .btn {
+  background-color: var(--bs-standout-dark, #21272a);
+}
+.card.card-standout .card-header .options .btn:hover, .card.card-standout .card-header .options .btn:focus {
+  background-color: var(--bs-standout-darker, #21272a);
+}
+.card.card-overstated .card-header {
+  background-color: var(--bs-main, #3e4b4d);
+  color: var(--bs-white, #fff);
+}
+.card.card-overstated .card-header .options .btn {
+  color: var(--bs-white, #fff);
+  background-color: var(--bs-main-dark, #3e4b4d);
+}
+.card.card-overstated .card-header .options .btn:hover, .card.card-overstated .card-header .options .btn:focus {
+  background-color: var(--bs-main-darker, #3e4b4d);
+}
+.card.card-understated .card-header {
+  background-color: var(--bs-alt, #f9f4f0);
+  color: inherit;
+}
+.card.card-understated .card-header .options .btn {
+  color: inherit;
+  background-color: var(--bs-alt-dark, #f9f4f0);
+}
+.card.card-understated .card-header .options .btn:hover, .card.card-understated .card-header .options .btn:focus {
+  background-color: var(--bs-alt-darker, #f9f4f0);
+}
+
+/* ---------------------------------------------------------------
+Profile Banners - /src/styles/components/executive-profiles.scss
+--------------------------------------------------------------- */
+figure.executive-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--bs-alt, #f9f4f0);
+}
+figure.executive-profile img {
+  width: 80px;
+  height: 80px;
+  margin-left: 1rem;
+}
+figure.executive-profile .body {
+  padding-right: 1rem;
+  border-right: 1px solid var(--bs-gray-900, #3b3a48);
+}
+figure.executive-profile .body h4, figure.executive-profile .body .h4 {
+  margin-bottom: 0;
+}
+figure.executive-profile .body span {
+  display: block;
+}
+figure.executive-profile .body a {
+  font-size: 0.984375rem;
+}
+figure.executive-profile.vertical {
+  flex-direction: column;
+}
+figure.executive-profile.vertical img {
+  margin-left: 0;
+}
+figure.executive-profile.vertical .body {
+  text-align: center;
+  padding-right: 0;
+  border-right: 0;
+}
+
+/* -----------------------------------------
+   Featured Narrative
+   /src/styles/components/featured-narrative.scss
+----------------------------------------- */
+.featured-narrative {
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+  border-right: 0;
+  border-left: 0;
+}
+
+/* -----------------------------------------
+   LIST STYLES /src/styles/components/lists.scss
+----------------------------------------- */
+.list-overstated,
+.list-understated {
+  padding-right: 0;
+}
+.list-overstated li,
+.list-understated li {
+  list-style-type: "E";
+  margin: 10px 0;
+}
+.list-overstated li::marker,
+.list-understated li::marker {
+  font-family: "CaGov";
+}
+
+.list-overstated a {
+  font-weight: bold;
+}
+
+.list-standout li {
+  list-style-type: none;
+  margin: 10px 0;
+  margin-right: 2rem;
+}
+.list-standout li::before {
+  content: "5";
+  font-family: "CaGov";
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: -2.5rem;
+  width: 2.5rem;
+  display: inline-block;
+  vertical-align: -0.2rem;
+}
+
+.location {
+  display: flex;
+}
+.location > [class*=ca-gov-icon-]:first-child {
+  font-size: 3.5rem;
+  margin-left: 1rem;
+  color: var(--bs-gray-300, #bcbbc1);
+}
+.location .contact {
+  margin: 1rem;
+  margin-right: 0;
+}
+.location .contact p {
+  margin-bottom: 0;
+}
+.location .contact a:not(.btn) {
+  display: block;
+}
+.location .contact p:first-child, .location .summary p:first-child {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.location.contact .btn {
+  margin-top: 1rem;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child {
+  background-color: var(--bs-black, #000);
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-facebook, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-facebook {
+  color: #3d77ea;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-twitter, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-twitter {
+  color: #000;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-google-plus, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-google-plus {
+  color: #dc4a38;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-flickr, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-flickr {
+  color: #0063dc;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-linkedin, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-linkedin {
+  color: #0976b4;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-instagram, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-instagram {
+  color: #e73476;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-snapchat, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-snapchat {
+  color: #fffc00;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-youtube, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-youtube {
+  color: #e73323;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-pinterest, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-pinterest {
+  color: #cc2127;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-vimeo, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-vimeo {
+  color: #1ab7ea;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-email, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-email {
+  color: #888;
+}
+.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-github, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-github {
+  color: #25292e;
+}
+.location.banner {
+  background-color: var(--bs-gray-75, #f3f3f4);
+}
+.location.banner .thumbnail {
+  width: 225px;
+  height: 100%;
+  margin: 1rem;
+}
+.location.banner .contact .address {
+  display: flex;
+}
+.location.banner .summary {
+  margin: 1rem;
+  width: 100%;
+}
+.location.banner .summary .description {
+  padding-bottom: 0.5rem;
+}
+.location.banner .summary .btn {
+  float: left;
+}
+
+/* -----------------------------------------
+   SECTIONS
+   /src/styles/components/sections.scss
+----------------------------------------- */
+.section {
+  padding: 1rem;
+}
+
+/* -----------------------------------------
+   SERVICE TILES
+   /src/styles/components/service-tiles.scss
+----------------------------------------- */
+.service-tiles .row {
+  margin-right: 0;
+  margin-left: 0;
+}
+.service-tiles .more-button {
+  background-color: var(--bs-black, #000);
+  text-align: center;
+}
+.service-tiles .more-button a {
+  color: var(--bs-white, #fff);
+  text-decoration: none;
+  display: block;
+  font-size: var(--bs-body-font-size, 1.125rem);
+}
+.service-tiles .more-button a span {
+  display: block;
+}
+.service-tiles .more-button a:hover, .service-tiles .more-button a:focus {
+  color: #FDB81E;
+  outline: solid 2px #2ea3f2 !important;
+}
+.service-tiles .service-tile {
+  padding: 0;
+}
+.service-tiles .service-tile img {
+  height: 320px;
+  width: 100%;
+}
+.service-tiles .service-tile .teaser {
+  background-color: var(--bs-black, #000);
+  text-align: center;
+  color: var(--bs-white, #fff);
+  padding: 0.25rem 0;
+}
+.service-tiles .service-tile .teaser a {
+  font-size: 1.6875rem;
+  text-decoration: none;
+  color: var(--bs-white, #fff);
+  line-height: 1.5;
+  display: block;
+}
+.service-tiles .service-tile .teaser a:hover, .service-tiles .service-tile .teaser a:focus {
+  color: #FDB81E;
+  outline: solid 2px #2ea3f2 !important;
+}
+.service-tiles .service-tile .teaser .ca-gov-icon-external-link {
+  display: none;
+}
+.service-tiles .service-tile:hover, .service-tiles .service-tile:focus {
+  outline: solid 2px #2ea3f2 !important;
+}
+.service-tiles .collapse {
+  padding: 0;
+}
+.service-tiles .collapse .card {
+  margin-bottom: 0;
+  padding: 1.5rem 1rem;
+  display: block;
+}
+.service-tiles .collapse .card .card-block {
+  background-color: var(--bs-white, #fff);
+  padding: 1rem;
+  margin-bottom: 0;
+}
+.service-tiles .collapse .card .card-block .ca-gov-icon-close-mark {
+  float: left;
+}
+.service-tiles .collapse .card .card-block .group {
+  padding: 1rem 0;
+}
+
+/* -----------------------------------------
+   Dark Theme 
+   /src/styles/theme/dark.scss
+----------------------------------------- */
+[data-bs-theme=dark] {
+  /* -----------------------------------------
+  GLOBALS - /src/styles/components/globals.scss
+  ----------------------------------------- */
+  /* -----------------------------------------
+  FOOTER - /src/styles/components/footer.scss
+  ----------------------------------------- */
+  /* -----------------------------------------
+  CARDS - /src/styles/components/cards.scss
+  ----------------------------------------- */
+  /* ---------------------------------------------------------------
+  Profile Banners - /src/styles/components/executive-profiles.scss
+  --------------------------------------------------------------- */
+}
+[data-bs-theme=dark] .ca-gov-logo-svg {
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201304%20949%22%3E%3Cpath%20fill%3D%22%23fdb71c%22%20d%3D%22M799%20398c3-11%2012-42%2027-91%203-13%2012-38%2027-77%2014-40%2026-71%2034-95-28%2019-53%2042-76%2067-92%20100-200%20220-238%20283%2014-4%2043-34%20136-66q43.5-16.5%2090-21m-16%2064c-291%200-418%20464-620%20464-46%200-81-21-106-62-16-27-25-58-24-90%200-84%2040-191%20120-320%2068-110%20140-198%20216-265%2065-58%20121-86%20168-86%2024-1%2046%2010%2061%2029%2012%2016%2018%2035%2017%2054%200%2038-13%2081-38%20130-22%2042-50%2080-83%20113-23%2021-40%2031-52%2031-9-1-17-5-22-12-5-5-8-13-8-20%200-14%2012-29%2036-47%2031-23%2058-51%2080-82%2029-43%2044-80%2044-110%201-1-2-19-8-27-6-6-15-9-24-9-22%200-52%2016-92%2047-53%2043-101%2091-143%20144-59%2069-108%20146-146%20228-34%2078-52%20144-52%20199-1%2024%208%2048%2023%2067%2014%2020%2037%2032%2062%2031%2092-3%20207-214%20243-263C787%20120%20814%20119%20867%2068c31-30%2055-44%2071-44%2010%200%2020%205%2026%2012s9%2016%2010%2025c-2%2020-8%2039-16%2058-19%2048-37%20100-54%20155-15%2049-25%2086-30%20112%205%200%209%200%2014-1%2011%200%2021-1%2029-1%2023%200%2034%209%2034%2026%200%208-3%2016-7%2022s-10%2011-17%2013c-6%201-13%201-19%201-17-1-33%201-50%204-4%2012-15%20117-31%20121-49%2043-45-95-44-109%22%2F%3E%3Cpath%20d%3D%22M495%20779c12%200%2024%205%2033%2014s14%2020%2014%2033c0%2026-21%2046-46%2046-26%200-46-21-46-46-1-26%2019-47%2045-47m284-123-33%2032c-18-21-44-33-72-33-22-1-44%208-60%2024-16%2015-25%2036-24%2058%200%2022%209%2044%2025%2059%2016%2016%2039%2025%2062%2024%2014%200%2028-3%2040-10%2012-8%2021-19%2026-31h-70v-43h122v10c0%2021-6%2042-17%2060-10%2018-25%2033-43%2044-19%2010-40%2016-62%2015-24%200-47-5-67-16s-36-27-47-47-17-43-17-66c0-31%2011-61%2032-84%2025-28%2061-44%2099-42%2020%200%2040%204%2059%2012%2018%208%2034%2020%2047%2034m159-45c33%200%2065%2013%2089%2037s38%2057%2037%2091c1%2034-12%2066-36%2090-50%2049-130%2049-179%200l-1-1c-49-50-49-131%201-180%2023-24%2055-37%2089-37m-1%2045c-21%200-42%208-56%2023-15%2016-24%2037-23%2060-1%2025%2010%2048%2029%2064%2014%2012%2033%2019%2051%2018%2021%200%2041-8%2056-24%2031-33%2031-84%200-117-15-16-36-24-57-24m118-36h47l61%20172%2062-172h47l-87%20242h-45z%22%20fill%3D%22%23FFF%22%2F%3E%3C%2Fsvg%3E");
+}
+[data-bs-theme=dark] footer.global-footer {
+  background-color: #24232c;
+}
+[data-bs-theme=dark] footer.global-footer .nav-link {
+  color: var(--bs-white, #fff);
+}
+[data-bs-theme=dark] footer.global-footer .nav-link:hover, [data-bs-theme=dark] footer.global-footer .nav-link:focus {
+  color: var(--bs-gray-300, #bcbbc1);
+}
+[data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-github, [data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-share-github {
+  color: var(--bs-gray-300, #bcbbc1);
+}
+[data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-github:hover, [data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-github:focus, [data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-share-github:hover, [data-bs-theme=dark] footer.global-footer .nav-link.ca-gov-icon-share-github:focus {
+  color: #a2a0a9;
+}
+[data-bs-theme=dark] .card .card-body {
+  color: var(--bs-white, #fff);
+}
+[data-bs-theme=dark] .card .options .btn {
+  background-color: var(--bs-gray-400, #a4a3ab);
+}
+[data-bs-theme=dark] .card .options .btn:hover, [data-bs-theme=dark] .card .options .btn:focus {
+  background-color: var(--bs-gray-75, #f3f3f4);
+}
+[data-bs-theme=dark] .card.card-standout.highlight .card-header:before {
+  border-top: 12px solid var(--bs-standout-lightest, #a6a9aa);
+}
+[data-bs-theme=dark] .card.card-standout .card-header {
+  background-color: var(--bs-standout-lightest, #a6a9aa);
+  color: var(--bs-black);
+}
+[data-bs-theme=dark] .card.card-standout .card-header .options .btn {
+  background-color: var(--bs-standout-light, #4d5255);
+}
+[data-bs-theme=dark] .card.card-standout .card-header .options .btn:hover, [data-bs-theme=dark] .card.card-standout .card-header .options .btn:focus {
+  background-color: var(--bs-standout-lighter, #7a7d7f t);
+}
+[data-bs-theme=dark] .card.card-understated .card-header {
+  background-color: var(--bs-alt-darkest, #e5cfbd);
+  color: var(--bs-black);
+}
+[data-bs-theme=dark] figure.executive-profile .body *:not(a) {
+  color: var(--bs-black, #000);
 }
 
 /*

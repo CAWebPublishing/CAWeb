@@ -336,6 +336,8 @@ jQuery(document).ready(function ($) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
 /*!***********************************************************!*\
   !*** ./src/scripts/wp/theme-customizer/bindings/index.js ***!
   \***********************************************************/
@@ -348,6 +350,8 @@ __webpack_require__(/*! ./home-nav-link */ "./src/scripts/wp/theme-customizer/bi
 __webpack_require__(/*! ./sticky-navigation */ "./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js");
 __webpack_require__(/*! ./utility-header-custom-links */ "./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js");
 __webpack_require__(/*! ./utility-header-home-icon */ "./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js");
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=caweb-customizer.js.map

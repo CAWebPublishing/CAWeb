@@ -313,7 +313,7 @@ class CAWeb_Module_Card extends ET_Builder_CAWeb_Module {
 		/**
 		 * @todo remove bg-white and text-dark once 5.5 is removed.
 		 */
-		$output = sprintf( '<div%1$s%2$s>%3$s%4$s<div class="card-block bg-white text-dark"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header, $card_color, $content, $display_button, $display_footer );
+		$output = sprintf( '<div%1$s%2$s>%3$s%4$s<div class="card-body"%5$s>%6$s%7$s</div>%8$s</div>', $this->module_id(), $class, $display_image, $display_header, $card_color, $content, $display_button, $display_footer );
 
 		return $output;
 	}

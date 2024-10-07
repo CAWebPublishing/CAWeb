@@ -54,6 +54,7 @@ window.addEventListener("load", (event) => {
 
         // make the request for the specific url
         $.get(url , function(repos, status, xhr) {
+            // if repose exists.
             if( repos.length  ){
                 repos.forEach(repo => {
                     let li = document.createElement('LI');
@@ -140,12 +141,19 @@ window.addEventListener("load", (event) => {
                     ul.append(li)
                 });
 
+         
+                const linkResponse = xhr.getResponseHeader('link');
+
+                if( ! linkResponse ){
+                    return;
+                }
+
                 let prevLinks = document.createElement('DIV');
                 let nextLinks = document.createElement('DIV');
 
                 prevLinks.classList.add('flex-fill');
 
-                xhr.getResponseHeader('link').split(',').forEach((data) => {
+                linkResponse.split(',').forEach((data) => {
                     // split the data at the semi colon,
                     // 0 element has the url, 1 has the relationship.
                     let links = data.split(';');
@@ -195,7 +203,7 @@ window.addEventListener("load", (event) => {
                 pagination.append(prevLinks, nextLinks );
 
             }else{
-
+                ul.append('<li>No Repositories Found</li>')
             }
 
             
