@@ -1,12 +1,4 @@
 /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
-body:not(.sticky_nav) #main-content.main-content {
-	width: 100%;
-}
-
-#page-container{
-	padding-top: 0px;
-}
-
 p{
 	padding-bottom: 0;
 }

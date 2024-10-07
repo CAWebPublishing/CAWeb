@@ -194,12 +194,16 @@ jQuery(document).ready(function ($) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
 /*!***********************************************************!*\
   !*** ./src/scripts/wp/theme-customizer/controls/index.js ***!
   \***********************************************************/
 __webpack_require__(/*! ../../../admin/icon */ "./src/scripts/admin/icon.js");
 __webpack_require__(/*! ../../../admin/toggle-options */ "./src/scripts/admin/toggle-options.js");
 __webpack_require__(/*! ./alert-banners */ "./src/scripts/wp/theme-customizer/controls/alert-banners.js");
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=caweb-customizer-controls.js.map

@@ -1784,7 +1784,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			$d2              = date_create_from_format( 'm/d/Y', ( new DateTime( 'NOW' ) )->format( 'm/d/Y' ) );
 			$tmp             = $d1->diff( $d2 )->format( '%a' );
 			$days_passed     = 0 !== (int) $tmp ? sprintf( '&mdash;<span class="fuzzy-date"> %1$s days ago</span>', $tmp ) : '';
-			$job_posted_date = sprintf( '<div class="published">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed );
+			$job_posted_date = sprintf( '<div class="published text-secondary">Published: <time>%1$s</time>%2$s</div>', $job_posted_date, $days_passed );
 		} else {
 			$job_posted_date = '';
 		}
@@ -1853,7 +1853,7 @@ class CAWeb_Module_Post_Detail extends ET_Builder_CAWeb_Module {
 			sprintf( '<div class="card card-understated about-department"><div class="card-header"><h4>About this Department</h4></div><div class="card-body"><p>%1$s</p></div></div> ', $job_agency_about ) : '';
 
 		return sprintf(
-			'<div class="sub-header">%1$s%2$s</div><div class="row">%3$s%4$s</div>%5$s%6$s%7$s',
+			'<div class="sub-header mb-4">%1$s%2$s</div><div class="row">%3$s%4$s</div>%5$s%6$s%7$s',
 			! empty( $agency_info ) ? $agency_info : '',
 			$job_posted_date,
 			$job_info,

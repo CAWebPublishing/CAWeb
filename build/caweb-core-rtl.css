@@ -2319,18 +2319,26 @@
 Custom variables for the CAWeb Theme
 based off CA State Template v5.5.23
 */
+body {
+  /* Google Translate */
+  /* Google Search */
+}
+body #google_translate_element .skiptranslate.goog-te-gadget, body .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+body #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body .skiptranslate.goog-te-gadget a {
+  color: inherit;
+}
+body .skiptranslate.goog-te-gadget a:hover {
+  color: #fee09c;
+}
+body .gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
 body[class*="5.5"] {
   /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
   /* Location Bar Style */
-  /* Google Translate */
-  /* Google Search */
   /* Override styles for second level navs not using flex */
-}
-body[class*="5.5"] body:not(.sticky_nav) #main-content.main-content {
-  width: 100%;
-}
-body[class*="5.5"] #page-container {
-  padding-top: 0px;
 }
 body[class*="5.5"] p {
   padding-bottom: 0;
@@ -2413,18 +2421,6 @@ body[class*="5.5"] .location-settings button.close {
 body[class*="5.5"] .location-settings button.close:hover {
   color: #FDB81E !important;
 }
-body[class*="5.5"] #google_translate_element .skiptranslate.goog-te-gadget, body[class*="5.5"] .skiptranslate.goog-te-gadget a {
-  color: white;
-}
-body[class*="5.5"] #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body[class*="5.5"] .skiptranslate.goog-te-gadget a {
-  color: inherit;
-}
-body[class*="5.5"] .skiptranslate.goog-te-gadget a:hover {
-  color: #fee09c;
-}
-body[class*="5.5"] .gs-visibleUrl-breadcrumb {
-  color: #008A28 !important;
-}
 body[class*="5.5"] nav {
   /* Override nav li line-height */
 }
@@ -2434,6 +2430,50 @@ body[class*="5.5"] nav li {
 body[class*="5.5"] header .full-width-nav {
   padding: 0 15px;
 }
+body[class*="5.5"] #navigation .top-level-nav {
+  width: 100%;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) {
+  display: block;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: inherit;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
+  font-size: 17.6px;
+  font-size: 1.1rem;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
+  background-color: inherit;
+  opacity: 1;
+  transition: all 0.3s;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li {
+  display: inline-block;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li.w-25 {
+  width: 24.6% !important;
+}
+body[class*="5.5"] nav.megadropdown .media-left .media-object {
+  max-width: inherit;
+}
+@media (max-width: 992px) {
+  body[class*="5.5"] nav {
+    /* MegaDropdown Navigation Styles */
+  }
+  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=pull-] {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=with-image-] {
+    display: none;
+  }
+}
 @media (max-width: 992px) {
   body[class*="5.5"] nav .link-description,
   body[class*="5.5"] nav .media-left,
@@ -2442,29 +2482,38 @@ body[class*="5.5"] header .full-width-nav {
     display: none;
   }
 }
-body[class*="5.5"]:not(.divi-built) #main-content {
+body[class*="5.5"] .location.contact .btn-outline-dark,
+body[class*="5.5"] .location.banner .btn-outline-dark {
+  color: black;
+}
+body[class*="5.5"] .location.contact .btn-outline-dark:hover,
+body[class*="5.5"] .location.contact .btn-outline-dark:hover,
+body[class*="5.5"] .location.banner .btn-outline-dark:hover,
+body[class*="5.5"] .location.banner .btn-outline-dark:hover {
+  color: white;
+}
+body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
   padding: 15px;
 }
 @media (min-width: 768px) {
-  body[class*="5.5"]:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 768px;
   }
 }
 @media (min-width: 992px) {
-  body[class*="5.5"]:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 992px;
   }
 }
 @media (min-width: 1200px) {
-  body[class*="5.5"]:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 1200px;
   }
 }
 @media (min-width: 1280px) {
-  body[class*="5.5"]:not(.divi-built) #main-content {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 1280px;
   }
 }
@@ -2621,210 +2670,33 @@ body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus
 body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
   font-family: "CaGov" !important;
 }
-body[class*="5.5"] #navigation .top-level-nav {
+body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
   width: 100%;
-}
-body[class*="5.5"] .second-level-nav:not(.flex) {
-  display: block;
-  position: relative !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  width: auto !important;
-  padding: 0 !important;
-  background: inherit;
-}
-body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
-  font-size: 17.6px;
-  font-size: 1.1rem;
-}
-body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
-  background-color: inherit;
-  opacity: 1;
-  transition: all 0.3s;
-}
-body[class*="5.5"] .second-level-nav:not(.flex) li {
-  display: inline-block;
-}
-body[class*="5.5"] .second-level-nav:not(.flex) li.w-25 {
-  width: 24.6% !important;
-}
-body[class*="5.5"] nav.megadropdown .media-left .media-object {
-  max-width: inherit;
-}
-@media (max-width: 992px) {
-  body[class*="5.5"] nav {
-    /* MegaDropdown Navigation Styles */
-  }
-  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
-    width: 100% !important;
-  }
-  body[class*="5.5"] nav.megadropdown div[class*=pull-] {
-    width: 100% !important;
-  }
-  body[class*="5.5"] nav.megadropdown div[class*=with-image-] {
-    display: none;
-  }
-}
-body[class*="6.0"] {
-  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
-  /* Location Bar Style */
-  /* Google Translate */
-  /* Google Search */
-}
-body[class*="6.0"] body:not(.sticky_nav) #main-content.main-content {
-  width: 100%;
-}
-body[class*="6.0"] #page-container {
-  padding-top: 0px;
-}
-body[class*="6.0"] p {
-  padding-bottom: 0;
-}
-body[class*="6.0"] h1, body[class*="6.0"] h2, body[class*="6.0"] h3, body[class*="6.0"] h4, body[class*="6.0"] h5, body[class*="6.0"] h6 {
-  color: inherit;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-body[class*="6.0"] header {
-  z-index: 15 !important;
-}
-body[class*="6.0"] .list-standout,
-body[class*="6.0"] .list-understated,
-body[class*="6.0"] .list-overstated,
-body[class*="6.0"] .accordion-list {
-  list-style-type: none !important;
-  padding: 0 !important;
-}
-body[class*="6.0"] .list-standout {
-  padding-right: 1.5em !important;
-}
-body[class*="6.0"] .pagination {
-  display: block;
-}
-body[class*="6.0"] .page-title {
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-  max-width: px;
-}
-@media (min-width: 576px) {
-  body[class*="6.0"] .page-title {
-    max-width: 540px !important;
-  }
-}
-@media (min-width: 768px) {
-  body[class*="6.0"] .page-title {
-    max-width: 720px !important;
-  }
-}
-@media (min-width: 992px) {
-  body[class*="6.0"] .page-title {
-    max-width: 960px !important;
-  }
-}
-@media (min-width: 1200px) {
-  body[class*="6.0"] .page-title {
-    max-width: 1140px !important;
-  }
-}
-@media (min-width: 1400px) {
-  body[class*="6.0"] .page-title {
-    max-width: 1320px !important;
-  }
-}
-body[class*="6.0"] .page-date {
-  margin: 0 auto;
-  width: 100%;
-  max-width: px;
-}
-@media (min-width: 576px) {
-  body[class*="6.0"] .page-date {
-    max-width: 540px !important;
-  }
-}
-@media (min-width: 768px) {
-  body[class*="6.0"] .page-date {
-    max-width: 720px !important;
-  }
-}
-@media (min-width: 992px) {
-  body[class*="6.0"] .page-date {
-    max-width: 960px !important;
-  }
-}
-@media (min-width: 1200px) {
-  body[class*="6.0"] .page-date {
-    max-width: 1140px !important;
-  }
-}
-@media (min-width: 1400px) {
-  body[class*="6.0"] .page-date {
-    max-width: 1320px !important;
-  }
-}
-body[class*="6.0"] .location-settings button.close {
-  font-size: 2.5em;
-}
-body[class*="6.0"] .location-settings button.close:hover {
-  color: #FDB81E !important;
-}
-body[class*="6.0"] #google_translate_element .skiptranslate.goog-te-gadget, body[class*="6.0"] .skiptranslate.goog-te-gadget a {
-  color: white;
-}
-body[class*="6.0"] #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body[class*="6.0"] .skiptranslate.goog-te-gadget a {
-  color: inherit;
-}
-body[class*="6.0"] .skiptranslate.goog-te-gadget a:hover {
-  color: #fee09c;
-}
-body[class*="6.0"] .gs-visibleUrl-breadcrumb {
-  color: #008A28 !important;
-}
-body[class*="6.0"] nav {
-  /* Override nav li line-height */
-}
-body[class*="6.0"] nav li {
-  line-height: 1.5 !important;
-}
-body[class*="6.0"] header .full-width-nav {
-  padding: 0 15px;
-}
-@media (max-width: 992px) {
-  body[class*="6.0"] nav .link-description,
-  body[class*="6.0"] nav .media-left,
-  body[class*="6.0"] nav .font-size-40,
-  body[class*="6.0"] nav .image-icon {
-    display: none;
-  }
-}
-body[class*="6.0"]:not(.divi-built) #main-content {
-  width: 100%;
-  max-width: px;
   margin: 0 auto;
   padding: 15px;
 }
 @media (min-width: 576px) {
-  body[class*="6.0"]:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 540px;
   }
 }
 @media (min-width: 768px) {
-  body[class*="6.0"]:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 720px;
   }
 }
 @media (min-width: 992px) {
-  body[class*="6.0"]:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 960px;
   }
 }
 @media (min-width: 1200px) {
-  body[class*="6.0"]:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 1140px;
   }
 }
 @media (min-width: 1400px) {
-  body[class*="6.0"]:not(.divi-built) #main-content {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
     max-width: 1320px;
   }
 }
@@ -3002,18 +2874,15 @@ body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:bef
 body.page-template-searchpage #main-content .container:before {
   background: transparent;
 }
-body.page-template-searchpage .search-container {
-  top: 0 !important;
-}
-body.page-template-searchpage .mobile-controls .toggle-search,
-body.page-template-searchpage form#Search .close-search {
-  display: none !important;
+body.page-template-searchpage #main-content .search-container {
+  width: 100%;
 }
 body.page-template-searchpage .gsc-cursor-page:focus {
   outline: solid 2px #2ea3f2;
 }
-body.page-template-searchpage.logged-in .gssb_c {
-  margin-top: 35px;
+body.page-template-searchpage .mobile-controls .toggle-search,
+body.page-template-searchpage form#Search .close-search {
+  display: none !important;
 }
 body.sidebar-displayed main {
   width: 75%;
