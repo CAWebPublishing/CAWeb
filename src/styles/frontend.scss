@@ -13,7 +13,8 @@ body{
         @import '../version-5.5/custom/';
 
 		// if page is a standard WordPress page
-		&:not(.divi-built){
+		// and not SERP Template
+		&:not(.divi-built):not(.page-template-searchpage){
 			@import './custom/main-content';
 		}
 
@@ -28,7 +29,8 @@ body{
 	&[class*="6.0"]{
 		
 		// if page is a standard WordPress page
-		&:not(.divi-built){
+		// and not SERP Template
+		&:not(.divi-built):not(.page-template-searchpage){
 			@import './custom/main-content';
 		}
 		
@@ -60,8 +62,15 @@ body{
         #main-content .container:before {
 			background: transparent;
 		}
+		#main-content .search-container{
+			width: 100%;
+		}
 		.gsc-cursor-page:focus{
 			outline: solid 2px #2ea3f2;
+		}
+		.mobile-controls .toggle-search,
+		form#Search .close-search {
+			display: none !important
 		}
     }
 

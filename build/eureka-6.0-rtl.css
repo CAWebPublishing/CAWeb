@@ -4228,6 +4228,7 @@
   3. Add 25%, 50%, 75%, 100% to rounded- utility
   4. Add dotted, solid, dashed, wavy to text-decoration- utility
   5. Add sm, md, lg to font-size- utility
+  6. Add default, pointer, grab, crosshair to cursor- utility classes
 */
 :root,
 [data-bs-theme=light] {
@@ -14779,6 +14780,22 @@ textarea.form-control-lg {
   text-decoration-style: wavy !important;
 }
 
+.cursor-default {
+  cursor: default !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.cursor-grab {
+  cursor: grab !important;
+}
+
+.cursor-crosshair {
+  cursor: crosshair !important;
+}
+
 @media (min-width: 576px) {
   .float-sm-start {
     float: right !important;
@@ -17931,12 +17948,41 @@ a .ca-gov-icon-external-link::before {
 .page-date {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-left: calc(-0.5 * var(--bs-gutter-x));
-  margin-right: calc(-0.5 * var(--bs-gutter-x));
-  margin: 0 auto;
+  width: 100%;
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 576px) {
+  .page-title,
+  .page-date {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .page-title,
+  .page-date {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .page-title,
+  .page-date {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .page-title,
+  .page-date {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .page-title,
+  .page-date {
+    max-width: 1320px;
+  }
 }
 
 .page-date {
@@ -18388,34 +18434,34 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
    SEARCH 
    /src/styles/components/search.scss
 ----------------------------------------- */
-header.global-header .search-container {
+.search-container {
   align-self: center;
   margin-right: auto;
   width: 32%;
 }
-header.global-header .search-container form {
+.search-container form {
   margin-top: 0;
   margin-bottom: 0;
 }
-header.global-header .search-container form .search-textfield {
+.search-container form .search-textfield {
   max-height: 38px;
   border-radius: 0 5px 5px 0 !important;
   border: 1px solid var(--bs-gray-600, #72717c);
 }
-header.global-header .search-container form .search-textfield::-moz-placeholder {
+.search-container form .search-textfield::-moz-placeholder {
   color: var(--bs-black, #000);
   opacity: 1;
 }
-header.global-header .search-container form .search-textfield::placeholder {
+.search-container form .search-textfield::placeholder {
   color: var(--bs-black, #000);
   opacity: 1;
 }
-header.global-header .search-container form .search-textfield:focus {
+.search-container form .search-textfield:focus {
   outline: solid 2px #2ea3f2 !important;
   outline-offset: -2px;
   box-shadow: none;
 }
-header.global-header .search-container form .search-button {
+.search-container form .search-button {
   padding: 0 12px;
   border: 1px solid;
   border-radius: 5px 0 0 5px;
@@ -18425,7 +18471,7 @@ header.global-header .search-container form .search-button {
   background-color: var(--bs-gray-600, #72717c);
   border-color: var(--bs-gray-600, #72717c);
 }
-header.global-header .search-container form .search-button:hover, header.global-header .search-container form .search-button:focus {
+.search-container form .search-button:hover, .search-container form .search-button:focus {
   outline: solid 2px #2ea3f2 !important;
   background-color: var(--bs-gray-800, #4a4958);
   border-color: var(--bs-gray-800, #4a4958);
@@ -18631,7 +18677,7 @@ blockquote footer::before {
 }
 .card.card-understated .card-header {
   background-color: var(--bs-alt, #f9f4f0);
-  color: var(--bs-white, #fff);
+  color: inherit;
 }
 .card.card-understated .card-header .options .btn {
   color: inherit;
@@ -18641,6 +18687,9 @@ blockquote footer::before {
   background-color: var(--bs-alt-darker, #f9f4f0);
 }
 
+/* ---------------------------------------------------------------
+Profile Banners - /src/styles/components/executive-profiles.scss
+--------------------------------------------------------------- */
 figure.executive-profile {
   display: flex;
   flex-direction: row;
@@ -18910,6 +18959,9 @@ figure.executive-profile.vertical .body {
   /* -----------------------------------------
   CARDS - /src/styles/components/cards.scss
   ----------------------------------------- */
+  /* ---------------------------------------------------------------
+  Profile Banners - /src/styles/components/executive-profiles.scss
+  --------------------------------------------------------------- */
 }
 [data-bs-theme=dark] .ca-gov-logo-svg {
   background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201304%20949%22%3E%3Cpath%20fill%3D%22%23fdb71c%22%20d%3D%22M799%20398c3-11%2012-42%2027-91%203-13%2012-38%2027-77%2014-40%2026-71%2034-95-28%2019-53%2042-76%2067-92%20100-200%20220-238%20283%2014-4%2043-34%20136-66q43.5-16.5%2090-21m-16%2064c-291%200-418%20464-620%20464-46%200-81-21-106-62-16-27-25-58-24-90%200-84%2040-191%20120-320%2068-110%20140-198%20216-265%2065-58%20121-86%20168-86%2024-1%2046%2010%2061%2029%2012%2016%2018%2035%2017%2054%200%2038-13%2081-38%20130-22%2042-50%2080-83%20113-23%2021-40%2031-52%2031-9-1-17-5-22-12-5-5-8-13-8-20%200-14%2012-29%2036-47%2031-23%2058-51%2080-82%2029-43%2044-80%2044-110%201-1-2-19-8-27-6-6-15-9-24-9-22%200-52%2016-92%2047-53%2043-101%2091-143%20144-59%2069-108%20146-146%20228-34%2078-52%20144-52%20199-1%2024%208%2048%2023%2067%2014%2020%2037%2032%2062%2031%2092-3%20207-214%20243-263C787%20120%20814%20119%20867%2068c31-30%2055-44%2071-44%2010%200%2020%205%2026%2012s9%2016%2010%2025c-2%2020-8%2039-16%2058-19%2048-37%20100-54%20155-15%2049-25%2086-30%20112%205%200%209%200%2014-1%2011%200%2021-1%2029-1%2023%200%2034%209%2034%2026%200%208-3%2016-7%2022s-10%2011-17%2013c-6%201-13%201-19%201-17-1-33%201-50%204-4%2012-15%20117-31%20121-49%2043-45-95-44-109%22%2F%3E%3Cpath%20d%3D%22M495%20779c12%200%2024%205%2033%2014s14%2020%2014%2033c0%2026-21%2046-46%2046-26%200-46-21-46-46-1-26%2019-47%2045-47m284-123-33%2032c-18-21-44-33-72-33-22-1-44%208-60%2024-16%2015-25%2036-24%2058%200%2022%209%2044%2025%2059%2016%2016%2039%2025%2062%2024%2014%200%2028-3%2040-10%2012-8%2021-19%2026-31h-70v-43h122v10c0%2021-6%2042-17%2060-10%2018-25%2033-43%2044-19%2010-40%2016-62%2015-24%200-47-5-67-16s-36-27-47-47-17-43-17-66c0-31%2011-61%2032-84%2025-28%2061-44%2099-42%2020%200%2040%204%2059%2012%2018%208%2034%2020%2047%2034m159-45c33%200%2065%2013%2089%2037s38%2057%2037%2091c1%2034-12%2066-36%2090-50%2049-130%2049-179%200l-1-1c-49-50-49-131%201-180%2023-24%2055-37%2089-37m-1%2045c-21%200-42%208-56%2023-15%2016-24%2037-23%2060-1%2025%2010%2048%2029%2064%2014%2012%2033%2019%2051%2018%2021%200%2041-8%2056-24%2031-33%2031-84%200-117-15-16-36-24-57-24m118-36h47l61%20172%2062-172h47l-87%20242h-45z%22%20fill%3D%22%23FFF%22%2F%3E%3C%2Fsvg%3E");
@@ -18954,6 +19006,9 @@ figure.executive-profile.vertical .body {
 [data-bs-theme=dark] .card.card-understated .card-header {
   background-color: var(--bs-alt-darkest, #e5cfbd);
   color: var(--bs-black);
+}
+[data-bs-theme=dark] figure.executive-profile .body *:not(a) {
+  color: var(--bs-black, #000);
 }
 
 /*
