@@ -53,6 +53,27 @@ add_action( 'admin_init', 'caweb_admin_init' );
 add_action( 'admin_enqueue_scripts', 'caweb_admin_enqueue_scripts', 15 );
 add_action( 'save_post', 'caweb_save_post_list_meta', 10, 2 );
 
+
+// SearchWP.
+add_filter( 'the_permalink',   'caweb_search_media_direct_link', 99, 2 );
+add_filter( 'attachment_link', 'caweb_search_media_direct_link', 99, 2 );
+
+/**
+ * SearchWP
+ * Link directly to Media files instead of Attachment pages in search results.
+ * 
+ * @link https://searchwp.com/documentation/knowledge-base/link-file-pdf/
+ */
+ function caweb_search_media_direct_link( $permalink, $post = null ) {
+
+	if ( ( is_search() || isset($_GET['swps']) || doing_action( 'wp_ajax_searchwp_live_search' )
+		  || doing_action( 'wp_ajax_nopriv_searchwp_live_search' ) )
+		&& 'attachment' === get_post_type( $post ) && is_plugin_active('searchwp/index.php') ) {
+	  $permalink = wp_get_attachment_url( $post );
+	}
+  
+	return esc_url( $permalink );
+}
 /*
 ----------------------------
 	End of Action References
@@ -104,6 +125,17 @@ function caweb_setup_theme() {
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
+
+	/**
+	 *
+	 *  Override _admin_bar_bump_cb - a default callback for WP_Admin_Bar
+	 *
+	 *  Prevents WP from adding a margin on top of page when logged in. 
+	 *  (Adding a dummy function as it has to contain something – WordPress adds the default one if callback is empty)
+	 *  It might render the admin bar invisible, in such case you can use your own CSS to make necessary adjustments.
+	 *
+	 */
+	add_theme_support('admin-bar', ['callback' => function() {} ]);
 
 	/**
 	 * Unregister Menu Navigation Settings

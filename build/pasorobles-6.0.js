@@ -6408,24 +6408,39 @@ window.addEventListener('load', () => {
   const toggleMenuCloseButton = mainHeader ? mainHeader.querySelector('.mobile-control.ca-gov-icon-close-mark') : null;
   const mobileCheck = () => {
     if (isDesktopWidth()) {
-      if (mainNavUl) {
-        mainNavUl.classList.remove('flex-column');
-      }
       if (mainNav) {
+        // navigation is always shown in desktop mode
         mainNav.classList.add('show');
+
+        // navigation ul should render as a row
+        if (mainNavUl) {
+          mainNavUl.classList.remove('flex-column');
+        }
       }
+      // if in desktop we append the search container after the branding logo
       if (searchContainer && mainHeader) {
         mainHeader.querySelector('.header-organization-banner')?.after(searchContainer);
       }
     } else {
-      if (mainNavUl) {
-        mainNavUl.classList.add('flex-column');
-      }
-      if (mainNav) {
-        mainNav.classList.remove('show');
-      }
-      if (searchContainer && mainHeader) {
-        mainHeader.querySelector('.mobile-controlled.overlay')?.append(searchContainer);
+      // if mobile menu is open
+      if ('true' === toggleMenuCloseButton.getAttribute('aria-expanded')) {
+        // we make sure to close the mobile menu.
+        toggleMenuCloseButton.click();
+      } else {
+        // we hide the main navigation in mobile
+        if (mainNav) {
+          mainNav.classList.remove('show');
+
+          // navigation ul should render as a column
+          if (mainNavUl) {
+            mainNavUl.classList.add('flex-column');
+          }
+        }
+
+        // if in mobile we append the search container to the mobile overlay
+        if (searchContainer && mainHeader) {
+          mainHeader.querySelector('.mobile-controlled.overlay')?.append(searchContainer);
+        }
       }
     }
   };
@@ -6449,6 +6464,8 @@ window.addEventListener('load', () => {
   if (mainNav) {
     mainNav.addEventListener('shown.bs.collapse', () => {
       mainHeader?.classList.add('overlay');
+      mainNav.classList.add('visible');
+      searchContainer?.classList.add('visible');
     });
     mainNav.addEventListener('hide.bs.collapse', () => {
       mainHeader?.classList.remove('overlay');
@@ -6466,10 +6483,10 @@ window.addEventListener('load', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211848__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212549__) => {
 
 "use strict";
-__nested_webpack_require_211848__.r(__nested_webpack_exports__);
+__nested_webpack_require_212549__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6527,7 +6544,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_213774__(moduleId) {
+/******/ 	function __nested_webpack_require_214475__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6541,7 +6558,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_213774__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_214475__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6551,7 +6568,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_213774__.r = (exports) => {
+/******/ 		__nested_webpack_require_214475__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6568,7 +6585,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_213774__.r(__nested_webpack_exports__);
+__nested_webpack_require_214475__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6580,7 +6597,7 @@ var __nested_webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./src/styles/colorschemes/pasorobles.scss ***!
   \*************************************************/
-__nested_webpack_require_213774__.r(__nested_webpack_exports__);
+__nested_webpack_require_214475__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6591,11 +6608,11 @@ __nested_webpack_require_213774__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_213774__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_213774__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_213774__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_213774__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_213774__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+__nested_webpack_require_214475__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_214475__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_214475__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_214475__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_214475__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
 
 
 
