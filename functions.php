@@ -127,17 +127,6 @@ function caweb_setup_theme() {
 	add_theme_support( 'post-thumbnails' );
 
 	/**
-	 *
-	 *  Override _admin_bar_bump_cb - a default callback for WP_Admin_Bar
-	 *
-	 *  Prevents WP from adding a margin on top of page when logged in. 
-	 *  (Adding a dummy function as it has to contain something – WordPress adds the default one if callback is empty)
-	 *  It might render the admin bar invisible, in such case you can use your own CSS to make necessary adjustments.
-	 *
-	 */
-	add_theme_support('admin-bar', ['callback' => function() {} ]);
-
-	/**
 	 * Unregister Menu Navigation Settings
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/unregister_nav_menu/
