@@ -29,7 +29,7 @@ foreach ( $args as $var => $val ) {
 		<div class="container d-flex flex-row">
 			<div class="social-media-links">
 				<div class="header-cagov-logo">
-					<a href="https://www.ca.gov/" title="CA.gov website">
+					<a href="https://www.ca.gov/" title="CA.gov website" target="_blank">
 						<span class="sr-only">CA.gov</span>
 						<span class="ca-gov-logo-svg"></span>
 					</a>
