@@ -1,3 +1,6 @@
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@caweb/html-webpack-plugin/build/font-only.css ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*!******************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/styles/font-only.css ***!
   \******************************************************************************************************************************************************************************/
@@ -2308,4 +2311,852 @@
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
-body #google_translate_element .skiptranslate.goog-te-gadget,body .skiptranslate.goog-te-gadget a{color:#fff}body #google_translate_element.custom-translate .skiptranslate.goog-te-gadget,body .skiptranslate.goog-te-gadget a{color:inherit}body .skiptranslate.goog-te-gadget a:hover{color:#fee09c}body .gs-visibleUrl-breadcrumb{color:#008a28 !important}body[class*="5.5"] p{padding-bottom:0}body[class*="5.5"] h1,body[class*="5.5"] h2,body[class*="5.5"] h3,body[class*="5.5"] h4,body[class*="5.5"] h5,body[class*="5.5"] h6{color:inherit;margin-top:0;margin-bottom:0}body[class*="5.5"] header{z-index:15 !important}body[class*="5.5"] .list-standout,body[class*="5.5"] .list-understated,body[class*="5.5"] .list-overstated,body[class*="5.5"] .accordion-list{list-style-type:none !important;padding:0 !important}body[class*="5.5"] .list-standout{padding-left:1.5em !important}body[class*="5.5"] .pagination{display:block}body[class*="5.5"] .page-title{margin:0 auto;padding:0;width:100%;max-width:1280px}@media(min-width: 768px){body[class*="5.5"] .page-title{max-width:768px !important}}@media(min-width: 992px){body[class*="5.5"] .page-title{max-width:992px !important}}@media(min-width: 1200px){body[class*="5.5"] .page-title{max-width:1200px !important}}@media(min-width: 1280px){body[class*="5.5"] .page-title{max-width:1280px !important}}body[class*="5.5"] .page-date{margin:0 auto;width:100%;max-width:1280px}@media(min-width: 768px){body[class*="5.5"] .page-date{max-width:768px !important}}@media(min-width: 992px){body[class*="5.5"] .page-date{max-width:992px !important}}@media(min-width: 1200px){body[class*="5.5"] .page-date{max-width:1200px !important}}@media(min-width: 1280px){body[class*="5.5"] .page-date{max-width:1280px !important}}body[class*="5.5"] .location-settings button.close{font-size:2.5em}body[class*="5.5"] .location-settings button.close:hover{color:#fdb81e !important}body[class*="5.5"] nav li{line-height:1.5 !important}body[class*="5.5"] header .full-width-nav{padding:0 15px}body[class*="5.5"] #navigation .top-level-nav{width:100%}body[class*="5.5"] .second-level-nav:not(.flex){display:block;position:relative !important;opacity:1 !important;visibility:visible !important;width:auto !important;padding:0 !important;background:inherit}body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link{font-size:17.6px;font-size:1.1rem}body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover{background-color:inherit;opacity:1;transition:all .3s}body[class*="5.5"] .second-level-nav:not(.flex) li{display:inline-block}body[class*="5.5"] .second-level-nav:not(.flex) li.w-25{width:24.6% !important}body[class*="5.5"] nav.megadropdown .media-left .media-object{max-width:inherit}@media(max-width: 992px){body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li{width:100% !important}body[class*="5.5"] nav.megadropdown div[class*=pull-]{width:100% !important}body[class*="5.5"] nav.megadropdown div[class*=with-image-]{display:none}}@media(max-width: 992px){body[class*="5.5"] nav .link-description,body[class*="5.5"] nav .media-left,body[class*="5.5"] nav .font-size-40,body[class*="5.5"] nav .image-icon{display:none}}body[class*="5.5"] .location.contact .btn-outline-dark,body[class*="5.5"] .location.banner .btn-outline-dark{color:#000}body[class*="5.5"] .location.contact .btn-outline-dark:hover,body[class*="5.5"] .location.contact .btn-outline-dark:hover,body[class*="5.5"] .location.banner .btn-outline-dark:hover,body[class*="5.5"] .location.banner .btn-outline-dark:hover{color:#fff}body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content{width:100%;margin:0 auto;padding:15px}@media(min-width: 768px){body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:768px}}@media(min-width: 992px){body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:992px}}@media(min-width: 1200px){body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:1200px}}@media(min-width: 1280px){body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:1280px}}body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_section_regular{padding:0 !important}body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{padding-left:15px;padding-right:15px;width:100%;max-width:1280px}@media(min-width: 768px){body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:768px !important}}@media(min-width: 992px){body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:992px !important}}@media(min-width: 1200px){body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:1200px !important}}@media(min-width: 1280px){body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="5.5"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:1280px !important}}body[class*="5.5"].divi-built .page-title{padding:15px}body[class*="5.5"].divi-built .page-title+.entry-content div[class*=et_builder_inner_content]+div[class*=et_pb_section]:not(.et_pb_fullwidth_section)>div[class*=et_pb_row]{padding-top:0 !important}body[class*="5.5"].divi-built .page-date{padding:0 15px}body[class*="5.5"].divi-built article article.et_pb_post{margin-bottom:30px}body[class*="5.5"].divi-built select[data-class-icon]{font-size:20px;font-family:"CaGov";font-style:normal;font-weight:normal;font-variant:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body[class*="5.5"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,body[class*="5.5"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before{font-family:"CaGov" !important;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body[class*="5.5"].divi-built .et_font_icon li{font-size:17px}body[class*="5.5"].divi-built .et_font_icon li:before,body[class*="5.5"].divi-built .et_pb_inline_icon:before,body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,body[class*="5.5"].divi-built .et-pb-icon,body[class*="5.5"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after{font-family:"CaGov","ETModules" !important;content:attr(data-icon)}body[class*="5.5"].divi-built li[class^=et_pb_ca]::before,body[class*="5.5"].divi-built li[class^=et_pb_profile_banner]::before,body[class*="5.5"].divi-built li[class^=et_fb_ca]::before,body[class*="5.5"].divi-built li[class^=et_fb_profile_banner]::before{font-family:"CaGov" !important;content:"줋" !important}body[class*="5.5"].divi-built .et_pb_toggle.et_pb_accordion_item:focus{outline:#2ea3f2 solid 2px !important}body[class*="5.5"].divi-built .et_pb_main_blurb_image a.keyboard-outline{display:-webkit-box;display:inline-block}body[class*="5.5"].divi-built .et_pb_button{background-image:none !important}body[class*="5.5"].divi-built #et-main-area div.et_pb_module span.et-pb-icon{font-family:"CaGov","FontAwesome" !important}body[class*="5.5"].divi-built .et-db #et-boc .et-l span.et-pb-icon{font-family:"CaGov","FontAwesome" !important}body[class*="5.5"].divi-built .et-learn-more h3.heading-more{color:#000}body[class*="5.5"].divi-built .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a{background-image:none !important}body[class*="5.5"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li{margin-right:2px}body[class*="5.5"].divi-built .et_pb_text ol,body[class*="5.5"].divi-built .et_pb_text ul{padding-bottom:0}body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus{outline:#2ea3f2 solid 2px !important}body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before{font-family:"CaGov" !important}body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{width:100%;margin:0 auto;padding:15px}@media(min-width: 576px){body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:540px}}@media(min-width: 768px){body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:720px}}@media(min-width: 992px){body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:960px}}@media(min-width: 1200px){body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:1140px}}@media(min-width: 1400px){body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content{max-width:1320px}}body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_section_regular{padding:0 !important}body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{padding-left:15px;padding-right:15px;width:100%;max-width:px}@media(min-width: 576px){body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:540px !important}}@media(min-width: 768px){body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:720px !important}}@media(min-width: 992px){body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:960px !important}}@media(min-width: 1200px){body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:1140px !important}}@media(min-width: 1400px){body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,body[class*="6.0"].divi-built #main-content .entry-content>#et-fb-app .et-fb-post-content .et_pb_row{max-width:1320px !important}}body[class*="6.0"].divi-built .page-title{padding:15px 15px 0}body[class*="6.0"].divi-built .page-title+.entry-content div[class*=et_builder_inner_content]+div[class*=et_pb_section]:not(.et_pb_fullwidth_section)>div[class*=et_pb_row]{padding-top:0 !important}body[class*="6.0"].divi-built .page-date{padding:0 15px}body[class*="6.0"].divi-built article article.et_pb_post{margin-bottom:30px}body[class*="6.0"].divi-built select[data-class-icon]{font-size:20px;font-family:"CaGov";font-style:normal;font-weight:normal;font-variant:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body[class*="6.0"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,body[class*="6.0"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before{font-family:"CaGov" !important;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body[class*="6.0"].divi-built .et_font_icon li{font-size:17px}body[class*="6.0"].divi-built .et_font_icon li:before,body[class*="6.0"].divi-built .et_pb_inline_icon:before,body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,body[class*="6.0"].divi-built .et-pb-icon,body[class*="6.0"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after{font-family:"CaGov","ETModules" !important;content:attr(data-icon)}body[class*="6.0"].divi-built li[class^=et_pb_ca]::before,body[class*="6.0"].divi-built li[class^=et_pb_profile_banner]::before,body[class*="6.0"].divi-built li[class^=et_fb_ca]::before,body[class*="6.0"].divi-built li[class^=et_fb_profile_banner]::before{font-family:"CaGov" !important;content:"줋" !important}body[class*="6.0"].divi-built .et_pb_toggle.et_pb_accordion_item:focus{outline:#2ea3f2 solid 2px !important}body[class*="6.0"].divi-built .et_pb_main_blurb_image a.keyboard-outline{display:-webkit-box;display:inline-block}body[class*="6.0"].divi-built .et_pb_button{background-image:none !important}body[class*="6.0"].divi-built #et-main-area div.et_pb_module span.et-pb-icon{font-family:"CaGov","FontAwesome" !important}body[class*="6.0"].divi-built .et-db #et-boc .et-l span.et-pb-icon{font-family:"CaGov","FontAwesome" !important}body[class*="6.0"].divi-built .et-learn-more h3.heading-more{color:#000}body[class*="6.0"].divi-built .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a{background-image:none !important}body[class*="6.0"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li{margin-right:2px}body[class*="6.0"].divi-built .et_pb_text ol,body[class*="6.0"].divi-built .et_pb_text ul{padding-bottom:0}body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus{outline:#2ea3f2 solid 2px !important}body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before{font-family:"CaGov" !important}@media(max-width: 768px){body[class*="6.0"].admin-bar header .navigation-search{top:46px}}@media(max-width: 991px){body[class*="6.0"].admin-bar header .navigation-search{top:32px}}body.page-template-searchpage #main-content .container:before{background:rgba(0,0,0,0)}body.page-template-searchpage #main-content .search-container{width:100%}body.page-template-searchpage .gsc-cursor-page:focus{outline:solid 2px #2ea3f2}body.page-template-searchpage .mobile-controls .toggle-search,body.page-template-searchpage form#Search .close-search{display:none !important}body.sidebar-displayed main{width:75%;display:inline-block}body.sidebar-displayed #caweb-sidebar{padding:0 28px;width:25%;float:right}body.sidebar-displayed #caweb-sidebar #sidebar{float:none;width:100%}body.sidebar-displayed footer{clear:both}@media screen and (max-width: 768px){body.sidebar-displayed main{width:100%}body.sidebar-displayed #caweb-sidebar{width:100%;float:none}}@media print{body{background:#fff !important}#main-content{padding-top:0 !important;outline:rgba(0,0,0,0) !important}.main-content{background:rgba(0,0,0,0) !important}.header-organization-banner{margin-left:-59px !important}.navigation-search{border:none !important}.single.sidebar_displayed .main-content .main-primary,.archive.sidebar_displayed .main-content .main-primary{width:100% !important}.et_pb_row,#main-content{margin-left:0 !important;margin-right:0 !important}.et_pb_row{display:inline !important}#main-content,.et_pb_row,.et_pb_row,.main-content,.page-title,.et_pb_gutters3 .et_pb_column_2_3,.et_pb_gutters3.et_pb_row .et_pb_column_2_3{max-width:100% !important;width:100% !important}.et_pb_post_title,.et_pb_section,.et_pb_column_2_3 .et_pb_row_inner{padding:1em !important}.mobile-control.cagov-logo{padding-left:0px !important}.utility-header{height:45px !important}header,footer,.return-top.is-visible,.addtoany_share_save_container,#ae_app,.et_pb_fullwidth_section,.et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),.et_pb_column.et_pb_column_1_4,aside#caweb-sidebar,.si-toggle-container{display:none !important;visibility:hidden !important}}.wp-activate-container p.view{display:none}#signup-content{width:100%;max-width:1280px;margin:0 auto}#caweb-sidebar .widget_nav_menu ul li{float:left;clear:both;border-top:1px solid #d7d7d7;margin-bottom:0 !important}#caweb-sidebar .widget_nav_menu ul li p{margin-bottom:0px !important}#caweb-sidebar .widget_nav_menu ul li:first-child{border-top:none}#caweb-sidebar .widget_nav_menu ul li.current-menu-item.active{border-left:4px solid #0071bc}#caweb-sidebar .widget_nav_menu ul li.current-menu-item.active a{color:#046b99;font-weight:700}#caweb-sidebar .widget_nav_menu ul li a{display:block;padding:.85rem 1rem .85rem 1.8rem}#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_icon,#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_img{position:absolute}#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_icon{font-size:35px}#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_img{width:50px;height:35px}#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_title{padding-left:45px;display:table-cell;vertical-align:middle;height:50px;margin-bottom:0px}#TB_closeWindow #TB_closeWindowButton .tb-close-icon{display:none}#TB_closeWindow #TB_closeWindowButton .screen-reader-text,#TB_title #TB_closeWindowButton .screen-reader-text{border:0;clip:rect(1px, 1px, 1px, 1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal !important}#comment-wrap{width:100%;max-width:1280px;margin:0 auto}#comment-wrap #commentform{padding-bottom:0}body.home article,body.single article,body:not(.divi-built).search article,body.archive article{display:inline-block;width:100%;padding-bottom:0 !important}body.home article.has-post-thumbnail>a.thumbnail-link,body.single article.has-post-thumbnail>a.thumbnail-link,body:not(.divi-built).search article.has-post-thumbnail>a.thumbnail-link,body.archive article.has-post-thumbnail>a.thumbnail-link{width:200px;height:150px;padding-right:20px;padding-bottom:15px;float:left}body.admin-bar header.global-header .mobile-controlled.overlay{margin-top:var(--wp-admin--admin-bar--height, 32px)}@media screen and (max-width: 782px){html{margin-top:0 !important}}.wpforms-required-label{color:#9b3022 !important}div[id^=wpforms-confirmation-] p:focus,div.wpforms-container-full input:focus,div.wpforms-container-full textarea:focus,div.wpforms-container-full button[type=submit]:focus,div.wpforms-container-full select:focus,div.wpforms-container-full .flag-container .selected-flag:focus{outline:#2ea3f2 solid 2px !important}div[id^=mailpoet_form_] input:focus{outline:#2ea3f2 solid 2px !important}#mc-embedded-subscribe-form span.asterisk,.mce_inline_error{color:#d24532 !important}#mc-embedded-subscribe-form input.required.mce_inline_error{border:2px solid #d24532 !important}li.responsive-tabs__list__item.keyboard-outline,li.responsive-tabs__list__item.responsive-tabs__list__item--active:focus{outline:#2ea3f2 solid 2px !important}li.responsive-tabs__list__item{color:#757575 !important}table[id^=tablepress-] thead tr th:focus{outline:#2ea3f2 solid 2px !important}div[id^=tablepress-].dataTables_filter input[type=search]:focus{outline:#2ea3f2 solid 2px !important}.dataTables_wrapper{overflow-x:auto}@media(min-width: 768px){.fixed.compact .header-organization-banner a img{max-height:50px}}
+
+
+/*# sourceMappingURL=font-only.css.map*/
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/frontend.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/*
+Custom variables for the CAWeb Theme
+based off CA State Template v5.5.23
+*/
+body {
+  /* Google Translate */
+  /* Google Search */
+}
+body #google_translate_element .skiptranslate.goog-te-gadget, body .skiptranslate.goog-te-gadget a {
+  color: white;
+}
+body #google_translate_element.custom-translate .skiptranslate.goog-te-gadget, body .skiptranslate.goog-te-gadget a {
+  color: inherit;
+}
+body .skiptranslate.goog-te-gadget a:hover {
+  color: #fee09c;
+}
+body .gs-visibleUrl-breadcrumb {
+  color: #008A28 !important;
+}
+body[class*="5.5"] {
+  /* Corrects issue when Global Header not being Fixed (Sticky Navigation), main-content doesnt go full width */
+  /* Location Bar Style */
+  /* Override styles for second level navs not using flex */
+}
+body[class*="5.5"] p {
+  padding-bottom: 0;
+}
+body[class*="5.5"] h1, body[class*="5.5"] h2, body[class*="5.5"] h3, body[class*="5.5"] h4, body[class*="5.5"] h5, body[class*="5.5"] h6 {
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+body[class*="5.5"] header {
+  z-index: 15 !important;
+}
+body[class*="5.5"] .list-standout,
+body[class*="5.5"] .list-understated,
+body[class*="5.5"] .list-overstated,
+body[class*="5.5"] .accordion-list {
+  list-style-type: none !important;
+  padding: 0 !important;
+}
+body[class*="5.5"] .list-standout {
+  padding-left: 1.5em !important;
+}
+body[class*="5.5"] .pagination {
+  display: block;
+}
+body[class*="5.5"] .page-title {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 1280px;
+}
+@media (min-width: 768px) {
+  body[class*="5.5"] .page-title {
+    max-width: 768px !important;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="5.5"] .page-title {
+    max-width: 992px !important;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="5.5"] .page-title {
+    max-width: 1200px !important;
+  }
+}
+@media (min-width: 1280px) {
+  body[class*="5.5"] .page-title {
+    max-width: 1280px !important;
+  }
+}
+body[class*="5.5"] .page-date {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+}
+@media (min-width: 768px) {
+  body[class*="5.5"] .page-date {
+    max-width: 768px !important;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="5.5"] .page-date {
+    max-width: 992px !important;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="5.5"] .page-date {
+    max-width: 1200px !important;
+  }
+}
+@media (min-width: 1280px) {
+  body[class*="5.5"] .page-date {
+    max-width: 1280px !important;
+  }
+}
+body[class*="5.5"] .location-settings button.close {
+  font-size: 2.5em;
+}
+body[class*="5.5"] .location-settings button.close:hover {
+  color: #FDB81E !important;
+}
+body[class*="5.5"] nav {
+  /* Override nav li line-height */
+}
+body[class*="5.5"] nav li {
+  line-height: 1.5 !important;
+}
+body[class*="5.5"] header .full-width-nav {
+  padding: 0 15px;
+}
+body[class*="5.5"] #navigation .top-level-nav {
+  width: 100%;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) {
+  display: block;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: inherit;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link {
+  font-size: 17.6px;
+  font-size: 1.1rem;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) .second-level-link:hover {
+  background-color: inherit;
+  opacity: 1;
+  transition: all 0.3s;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li {
+  display: inline-block;
+}
+body[class*="5.5"] .second-level-nav:not(.flex) li.w-25 {
+  width: 24.6% !important;
+}
+body[class*="5.5"] nav.megadropdown .media-left .media-object {
+  max-width: inherit;
+}
+@media (max-width: 992px) {
+  body[class*="5.5"] nav {
+    /* MegaDropdown Navigation Styles */
+  }
+  body[class*="5.5"] nav.megadropdown .second-level-nav:not(.flex) li {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=pull-] {
+    width: 100% !important;
+  }
+  body[class*="5.5"] nav.megadropdown div[class*=with-image-] {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  body[class*="5.5"] nav .link-description,
+  body[class*="5.5"] nav .media-left,
+  body[class*="5.5"] nav .font-size-40,
+  body[class*="5.5"] nav .image-icon {
+    display: none;
+  }
+}
+body[class*="5.5"] .location.contact .btn-outline-dark,
+body[class*="5.5"] .location.banner .btn-outline-dark {
+  color: black;
+}
+body[class*="5.5"] .location.contact .btn-outline-dark:hover,
+body[class*="5.5"] .location.contact .btn-outline-dark:hover,
+body[class*="5.5"] .location.banner .btn-outline-dark:hover,
+body[class*="5.5"] .location.banner .btn-outline-dark:hover {
+  color: white;
+}
+body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+}
+@media (min-width: 768px) {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 992px;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 1280px) {
+  body[class*="5.5"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 1280px;
+  }
+}
+body[class*="5.5"].divi-built {
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
+  /**
+  * Page & Builder Width Breakpoint Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
+  /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
+}
+body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
+body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
+  padding: 0 !important;
+}
+body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 1280px;
+}
+@media (min-width: 768px) {
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 768px !important;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 992px !important;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 1200px !important;
+  }
+}
+@media (min-width: 1280px) {
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="5.5"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 1280px !important;
+  }
+}
+body[class*="5.5"].divi-built .page-title {
+  padding: 15px;
+}
+body[class*="5.5"].divi-built .page-title + .entry-content div[class*=et_builder_inner_content] + div[class*=et_pb_section]:not(.et_pb_fullwidth_section) > div[class*=et_pb_row] {
+  padding-top: 0 !important;
+}
+body[class*="5.5"].divi-built .page-date {
+  padding: 0 15px;
+}
+body[class*="5.5"].divi-built article article.et_pb_post {
+  margin-bottom: 30px;
+}
+body[class*="5.5"].divi-built select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="5.5"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,
+body[class*="5.5"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "CaGov" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="5.5"].divi-built .et_font_icon li {
+  font-size: 17px;
+}
+body[class*="5.5"].divi-built .et_font_icon li:before,
+body[class*="5.5"].divi-built .et_pb_inline_icon:before,
+body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,
+body[class*="5.5"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="5.5"].divi-built .et-pb-icon,
+body[class*="5.5"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
+  font-family: "CaGov", "ETModules" !important;
+  content: attr(data-icon);
+}
+body[class*="5.5"].divi-built li[class^=et_pb_ca]::before,
+body[class*="5.5"].divi-built li[class^=et_pb_profile_banner]::before,
+body[class*="5.5"].divi-built li[class^=et_fb_ca]::before,
+body[class*="5.5"].divi-built li[class^=et_fb_profile_banner]::before {
+  font-family: "CaGov" !important;
+  content: "줋" !important;
+}
+body[class*="5.5"].divi-built .et_pb_toggle.et_pb_accordion_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+body[class*="5.5"].divi-built .et_pb_main_blurb_image a.keyboard-outline {
+  display: -webkit-box;
+  display: inline-block;
+}
+body[class*="5.5"].divi-built .et_pb_button {
+  background-image: none !important;
+}
+body[class*="5.5"].divi-built #et-main-area div.et_pb_module span.et-pb-icon {
+  font-family: "CaGov", "FontAwesome" !important;
+}
+body[class*="5.5"].divi-built .et-db #et-boc .et-l span.et-pb-icon {
+  font-family: "CaGov", "FontAwesome" !important;
+}
+body[class*="5.5"].divi-built .et-learn-more h3.heading-more {
+  color: black;
+}
+body[class*="5.5"].divi-built .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
+  background-image: none !important;
+}
+body[class*="5.5"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
+  margin-right: 2px;
+}
+body[class*="5.5"].divi-built .et_pb_text ol, body[class*="5.5"].divi-built .et_pb_text ul {
+  padding-bottom: 0;
+}
+body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+body[class*="5.5"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
+  font-family: "CaGov" !important;
+}
+body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+}
+@media (min-width: 576px) {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  body[class*="6.0"]:not(.divi-built):not(.page-template-searchpage) #main-content {
+    max-width: 1320px;
+  }
+}
+body[class*="6.0"].divi-built {
+  /* Divi Specific Overrides */
+  /**
+  * Page & Builder Width Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
+  /**
+  * Page & Builder Width Breakpoint Styles
+  * 
+  * Divi Built Standard Section Rows
+  * Divi Built Standard Section Rows when using Visual Builder
+  * Divi Fullwidth Menu Module Rows
+  */
+  /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
+  /* Apply focus outline */
+  /* Remove the State Template background image from Divi Button */
+  /* Remove the State Template background image from Person Module Social Links */
+}
+body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_section_regular,
+body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_section_regular {
+  padding: 0 !important;
+}
+body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: px;
+}
+@media (min-width: 576px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 540px !important;
+  }
+}
+@media (min-width: 768px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 720px !important;
+  }
+}
+@media (min-width: 992px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 960px !important;
+  }
+}
+@media (min-width: 1200px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 1140px !important;
+  }
+}
+@media (min-width: 1400px) {
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content .et_builder_inner_content .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
+  body[class*="6.0"].divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .et_pb_row {
+    max-width: 1320px !important;
+  }
+}
+body[class*="6.0"].divi-built .page-title {
+  padding: 15px 15px 0;
+}
+body[class*="6.0"].divi-built .page-title + .entry-content div[class*=et_builder_inner_content] + div[class*=et_pb_section]:not(.et_pb_fullwidth_section) > div[class*=et_pb_row] {
+  padding-top: 0 !important;
+}
+body[class*="6.0"].divi-built .page-date {
+  padding: 0 15px;
+}
+body[class*="6.0"].divi-built article article.et_pb_post {
+  margin-bottom: 30px;
+}
+body[class*="6.0"].divi-built select[data-class-icon] {
+  font-size: 20px;
+  font-family: "CaGov";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="6.0"].divi-built .et_font_icon li[class^=ca-gov-icon-]:before,
+body[class*="6.0"].divi-built .et_font_icon li[class*=" ca-gov-icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "CaGov" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body[class*="6.0"].divi-built .et_font_icon li {
+  font-size: 17px;
+}
+body[class*="6.0"].divi-built .et_font_icon li:before,
+body[class*="6.0"].divi-built .et_pb_inline_icon:before,
+body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon::after,
+body[class*="6.0"].divi-built #page-container .et_pb_section a.et_pb_custom_button_icon:before,
+body[class*="6.0"].divi-built .et-pb-icon,
+body[class*="6.0"].divi-built .et-db #et-boc .et-l ul.et-fb-font-icon-list li:after {
+  font-family: "CaGov", "ETModules" !important;
+  content: attr(data-icon);
+}
+body[class*="6.0"].divi-built li[class^=et_pb_ca]::before,
+body[class*="6.0"].divi-built li[class^=et_pb_profile_banner]::before,
+body[class*="6.0"].divi-built li[class^=et_fb_ca]::before,
+body[class*="6.0"].divi-built li[class^=et_fb_profile_banner]::before {
+  font-family: "CaGov" !important;
+  content: "줋" !important;
+}
+body[class*="6.0"].divi-built .et_pb_toggle.et_pb_accordion_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+body[class*="6.0"].divi-built .et_pb_main_blurb_image a.keyboard-outline {
+  display: -webkit-box;
+  display: inline-block;
+}
+body[class*="6.0"].divi-built .et_pb_button {
+  background-image: none !important;
+}
+body[class*="6.0"].divi-built #et-main-area div.et_pb_module span.et-pb-icon {
+  font-family: "CaGov", "FontAwesome" !important;
+}
+body[class*="6.0"].divi-built .et-db #et-boc .et-l span.et-pb-icon {
+  font-family: "CaGov", "FontAwesome" !important;
+}
+body[class*="6.0"].divi-built .et-learn-more h3.heading-more {
+  color: black;
+}
+body[class*="6.0"].divi-built .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
+  background-image: none !important;
+}
+body[class*="6.0"].divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
+  margin-right: 2px;
+}
+body[class*="6.0"].divi-built .et_pb_text ol, body[class*="6.0"].divi-built .et_pb_text ul {
+  padding-bottom: 0;
+}
+body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+body[class*="6.0"].divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
+  font-family: "CaGov" !important;
+}
+@media (max-width: 768px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 46px;
+  }
+}
+@media (max-width: 991px) {
+  body[class*="6.0"].admin-bar header .navigation-search {
+    top: 32px;
+  }
+}
+body.page-template-searchpage #main-content .container:before {
+  background: transparent;
+}
+body.page-template-searchpage #main-content .search-container {
+  width: 100%;
+}
+body.page-template-searchpage .gsc-cursor-page:focus {
+  outline: solid 2px #2ea3f2;
+}
+body.page-template-searchpage .mobile-controls .toggle-search,
+body.page-template-searchpage form#Search .close-search {
+  display: none !important;
+}
+body.sidebar-displayed main {
+  width: 75%;
+  display: inline-block;
+}
+body.sidebar-displayed #caweb-sidebar {
+  padding: 0 28px;
+  width: 25%;
+  float: right;
+}
+body.sidebar-displayed #caweb-sidebar #sidebar {
+  float: none;
+  width: 100%;
+}
+body.sidebar-displayed footer {
+  clear: both;
+}
+@media screen and (max-width: 768px) {
+  body.sidebar-displayed main {
+    width: 100%;
+  }
+  body.sidebar-displayed #caweb-sidebar {
+    width: 100%;
+    float: none;
+  }
+}
+
+/* Print Formatting */
+@media print {
+  body {
+    background: white !important;
+  }
+  /* Main Content */
+  #main-content {
+    padding-top: 0 !important;
+    outline: transparent !important;
+  }
+  .main-content {
+    background: transparent !important;
+  }
+  /* Header Organization Banner */
+  .header-organization-banner {
+    margin-left: -59px !important;
+  }
+  /* Navigation Search */
+  .navigation-search {
+    border: none !important;
+  }
+  /* Width */
+  .single.sidebar_displayed .main-content .main-primary,
+  .archive.sidebar_displayed .main-content .main-primary {
+    width: 100% !important;
+  }
+  /* Page Margins */
+  .et_pb_row,
+  #main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .et_pb_row {
+    display: inline !important;
+  }
+  /* Max-Width */
+  #main-content,
+  .et_pb_row,
+  .et_pb_row,
+  .main-content,
+  .page-title,
+  .et_pb_gutters3 .et_pb_column_2_3,
+  .et_pb_gutters3.et_pb_row .et_pb_column_2_3 {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  /* Padding */
+  .et_pb_post_title, .et_pb_section, .et_pb_column_2_3 .et_pb_row_inner {
+    padding: 1em !important;
+  }
+  /* Padding-left */
+  .mobile-control.cagov-logo {
+    padding-left: 0px !important;
+  }
+  /* Utility Header */
+  .utility-header {
+    height: 45px !important;
+  }
+  /* Hide the following elements */
+  header,
+  footer,
+  .return-top.is-visible,
+  .addtoany_share_save_container,
+  #ae_app,
+  .et_pb_fullwidth_section,
+  .et_pb_column.et_pb_column_1_3:not(.et_pb_column_inner),
+  .et_pb_column.et_pb_column_1_4,
+  aside#caweb-sidebar,
+  .si-toggle-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+/* WordPress Specific Overrides */
+/* Hide Activation Links on wp-activate.php */
+.wp-activate-container p.view {
+  display: none;
+}
+
+#signup-content {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Widget Menu Style */
+#caweb-sidebar .widget_nav_menu ul li {
+  float: left;
+  clear: both;
+  border-top: 1px solid #d7d7d7;
+  margin-bottom: 0 !important;
+}
+#caweb-sidebar .widget_nav_menu ul li p {
+  margin-bottom: 0px !important;
+}
+#caweb-sidebar .widget_nav_menu ul li:first-child {
+  border-top: none;
+}
+#caweb-sidebar .widget_nav_menu ul li.current-menu-item.active {
+  border-left: 4px solid #0071bc;
+}
+#caweb-sidebar .widget_nav_menu ul li.current-menu-item.active a {
+  color: #046B99;
+  font-weight: 700;
+}
+#caweb-sidebar .widget_nav_menu ul li a {
+  display: block;
+  padding: 0.85rem 1rem 0.85rem 1.8rem;
+}
+#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_icon,
+#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_img {
+  position: absolute;
+}
+#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_icon {
+  font-size: 35px;
+}
+#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_img {
+  width: 50px;
+  height: 35px;
+}
+#caweb-sidebar .widget_nav_menu ul li a.widget_nav_menu_a .widget_nav_menu_title {
+  padding-left: 45px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+  margin-bottom: 0px;
+}
+
+/* Thickbox Styles */
+#TB_closeWindow #TB_closeWindowButton .tb-close-icon {
+  display: none;
+}
+
+#TB_closeWindow #TB_closeWindowButton .screen-reader-text,
+#TB_title #TB_closeWindowButton .screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+/* Comments on Posts */
+#comment-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+#comment-wrap #commentform {
+  padding-bottom: 0;
+}
+
+body.home article, body.single article, body:not(.divi-built).search article, body.archive article {
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 0 !important;
+}
+body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has-post-thumbnail > a.thumbnail-link, body:not(.divi-built).search article.has-post-thumbnail > a.thumbnail-link, body.archive article.has-post-thumbnail > a.thumbnail-link {
+  width: 200px;
+  height: 150px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  float: left;
+}
+
+/*
+    Override _admin_bar_bump_cb - a default callback for WP_Admin_Bar
+    Remove margin on top of page when logged in added by WP
+ */
+body.admin-bar header.global-header .mobile-controlled.overlay {
+  margin-top: var(--wp-admin--admin-bar--height, 32px);
+}
+
+@media screen and (max-width: 782px) {
+  html {
+    margin-top: 0 !important;
+  }
+}
+/*------------------------
+ # CAWeb Accessibility
+------------------------*/
+/* WPForms correct required label color contrast ADA */
+.wpforms-required-label {
+  color: #9B3022 !important;
+}
+
+div[id^=wpforms-confirmation-] p:focus,
+div.wpforms-container-full input:focus,
+div.wpforms-container-full textarea:focus,
+div.wpforms-container-full button[type=submit]:focus,
+div.wpforms-container-full select:focus,
+div.wpforms-container-full .flag-container .selected-flag:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* MailPoet correct focus on inputs */
+div[id^=mailpoet_form_] input:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* MailChimp ADA Fixes */
+#mc-embedded-subscribe-form span.asterisk,
+.mce_inline_error {
+  color: #D24532 !important;
+}
+
+#mc-embedded-subscribe-form input.required.mce_inline_error {
+  border: 2px solid #D24532 !important;
+}
+
+/* Tabby Response ADA Fixes */
+li.responsive-tabs__list__item.keyboard-outline,
+li.responsive-tabs__list__item.responsive-tabs__list__item--active:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+li.responsive-tabs__list__item {
+  color: #757575 !important;
+}
+
+/* Add focus to TablePress Headers */
+table[id^=tablepress-] thead tr th:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* Add focus to TablePress Search Input Filter */
+div[id^=tablepress-].dataTables_filter input[type=search]:focus {
+  outline: #2ea3f2 solid 2px !important;
+}
+
+/* Makes TablePress Tables Responsive */
+.dataTables_wrapper {
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .fixed.compact .header-organization-banner a img {
+    max-height: 50px;
+  }
+}
+
+/*# sourceMappingURL=caweb-core.css.map*/
