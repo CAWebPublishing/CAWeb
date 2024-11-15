@@ -7260,7 +7260,7 @@ jQuery(document).ready(function ($) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 var __webpack_exports__ = {};
@@ -7272,7 +7272,7 @@ __webpack_require__.r(__webpack_exports__);
 
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 /*!************************************!*\
   !*** ./src/scripts/admin/index.js ***!

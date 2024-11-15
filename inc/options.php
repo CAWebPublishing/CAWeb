@@ -528,6 +528,7 @@ function caweb_get_site_options( $group = '' ) {
 		'ca_google_meta_id'               => '',
 		'ca_google_trans_enabled'         => false,
 		'ca_google_trans_page'            => '',
+		'ca_google_trans_text'            => '',
 		'ca_google_trans_icon'            => 'globe',
 		'ca_google_trans_page_new_window' => true,
 	);

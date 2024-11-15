@@ -3083,6 +3083,19 @@ body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has
   float: left;
 }
 
+/*
+    Override _admin_bar_bump_cb - a default callback for WP_Admin_Bar
+    Remove margin on top of page when logged in added by WP
+ */
+body.admin-bar header.global-header .mobile-controlled.overlay {
+  margin-top: var(--wp-admin--admin-bar--height, 32px);
+}
+
+@media screen and (max-width: 782px) {
+  html {
+    margin-top: 0 !important;
+  }
+}
 /*------------------------
  # CAWeb Accessibility
 ------------------------*/

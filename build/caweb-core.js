@@ -1150,7 +1150,7 @@ jQuery(document).ready(function ($) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 var __webpack_exports__ = {};
@@ -1162,7 +1162,7 @@ __webpack_require__.r(__webpack_exports__);
 
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 /*!*************************************!*\
   !*** ./src/scripts/google/index.js ***!
@@ -1172,7 +1172,7 @@ __webpack_require__(/*! ./cse */ "./src/scripts/google/cse.js");
 __webpack_require__(/*! ./ga */ "./src/scripts/google/ga.js");
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 /*!*************************************!*\
   !*** ./src/scripts/custom/index.js ***!
@@ -1204,7 +1204,7 @@ jQuery(document).ready(function ($) {
 });
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 /*!***********************************!*\
   !*** ./src/scripts/a11y/index.js ***!
