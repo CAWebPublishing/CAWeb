@@ -703,7 +703,13 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
  * @return URI
  */
 function caweb_default_favicon_url() {
-	return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
+	$version       = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
+
+	if( '5.5' === $version ){
+		return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
+	} else {
+		return site_url( 'wp-content/themes/CAWeb/src/images/system/bear.ico' );
+	}
 }
 
 /**

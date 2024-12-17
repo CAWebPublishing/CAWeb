@@ -6402,10 +6402,12 @@ window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
   const mainHeader = document.querySelector('header');
-  const searchContainer = mainHeader ? mainHeader.querySelector('.search-container') : null;
-  const mainNav = mainHeader ? mainHeader.querySelector('.navigation') : null;
-  const mainNavUl = mainNav ? mainNav.querySelector('.nav') : null;
-  const toggleMenuCloseButton = mainHeader ? mainHeader.querySelector('.mobile-control.ca-gov-icon-close-mark') : null;
+  const mobileOverlay = mainHeader.querySelector('.mobile-controlled.overlay');
+  const searchContainer = mainHeader.querySelector('.search-container');
+  const mainNav = mainHeader.querySelector('.navigation');
+  const mainNavUl = mainNav?.querySelector('.nav');
+  const toggleMenuOpenButton = mainHeader.querySelector('.mobile-control.ca-gov-icon-menu');
+  const toggleMenuCloseButton = mainHeader.querySelector('.mobile-control.ca-gov-icon-close-mark');
   const mobileCheck = () => {
     if (isDesktopWidth()) {
       /**
@@ -6422,7 +6424,7 @@ window.addEventListener('load', () => {
         if (mainNavUl) {
           mainNavUl.classList.remove('flex-column');
         }
-        mainHeader.querySelector('.mobile-controlled.overlay')?.after(mainNav);
+        mobileOverlay.after(mainNav);
       }
       // if in desktop we append the search container after the branding logo and the 
       if (searchContainer) {
@@ -6443,18 +6445,15 @@ window.addEventListener('load', () => {
 
         // append the search container to the mobile control overlay
         if (searchContainer) {
-          mainHeader.querySelector('.mobile-controlled.overlay')?.append(searchContainer);
+          mobileOverlay.append(searchContainer);
         }
 
         // we hide the main navigation in mobile
         if (mainNav) {
-          mainHeader.querySelector('.mobile-controlled.overlay')?.append(mainNav);
-          mainNav.classList.remove('show');
+          mobileOverlay.append(mainNav);
 
           // navigation ul should render as a column
-          if (mainNavUl) {
-            mainNavUl.classList.add('flex-column');
-          }
+          mainNavUl?.classList.add('flex-column');
         }
       }
     }
@@ -6476,16 +6475,22 @@ window.addEventListener('load', () => {
       toggleMenuCloseButton.click();
     }
   });
-  if (mainNav) {
-    mainNav.addEventListener('shown.bs.collapse', () => {
-      mainHeader?.classList.add('overlay');
-      mainNav.classList.add('visible');
-      searchContainer?.classList.add('visible');
-    });
-    mainNav.addEventListener('hide.bs.collapse', () => {
-      mainHeader?.classList.remove('overlay');
-    });
-  }
+
+  // Mobile Overlay is being shown
+  mobileOverlay.addEventListener('shown.bs.collapse', () => {
+    toggleMenuCloseButton.focus();
+    mainHeader.classList.add('overlay');
+    mainNav?.classList.add('visible');
+    searchContainer?.classList.add('visible');
+    document.body.classList.add('overflow-hidden');
+  });
+
+  // Mobile Overlay is hidden
+  mobileOverlay.addEventListener('hide.bs.collapse', () => {
+    toggleMenuOpenButton.focus();
+    mainHeader.classList.remove('overlay');
+    document.body.classList.remove('overflow-hidden');
+  });
 
   // ONLOAD
   // move duplicated logo to navigation drawer section
@@ -6498,10 +6503,10 @@ window.addEventListener('load', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213161__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213265__) => {
 
 "use strict";
-__nested_webpack_require_213161__.r(__nested_webpack_exports__);
+__nested_webpack_require_213265__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6559,7 +6564,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_215087__(moduleId) {
+/******/ 	function __nested_webpack_require_215191__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6573,7 +6578,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_215087__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_215191__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6583,7 +6588,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_215087__.r = (exports) => {
+/******/ 		__nested_webpack_require_215191__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6600,7 +6605,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_215087__.r(__nested_webpack_exports__);
+__nested_webpack_require_215191__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6612,7 +6617,7 @@ var __nested_webpack_exports__ = {};
 /*!*********************************************!*\
   !*** ./src/styles/colorschemes/eureka.scss ***!
   \*********************************************/
-__nested_webpack_require_215087__.r(__nested_webpack_exports__);
+__nested_webpack_require_215191__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6623,11 +6628,11 @@ __nested_webpack_require_215087__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_215087__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_215087__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_215087__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_215087__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_215087__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+__nested_webpack_require_215191__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_215191__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_215191__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_215191__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_215191__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
 
 
 

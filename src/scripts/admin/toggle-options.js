@@ -2,6 +2,10 @@
 jQuery( document ).ready( function($) {
 	let current_version = $('#ca_site_version option:selected').val();
 
+	if( ! current_version ){
+		return;
+	}
+
 	// Correct Options. 
 	correct_options();
 
@@ -39,6 +43,12 @@ jQuery( document ).ready( function($) {
 
 			// Drop support for Utility Header Home Icon.
 			$('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
+			
+			// Reset default favicon if needed
+			if( $('#ca_fav_ico').val().endsWith('CAWeb/src/images/system/favicon.ico') ){
+				$('#resetFavIcon').click();
+			}
+
 		// Version 5.
 		}else{
 			// Add support for mega menus.
@@ -53,6 +63,11 @@ jQuery( document ).ready( function($) {
 
 			// Drop support for Utility Header.
 			$('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
+
+			// Reset default favicon if needed
+			if( $('#ca_fav_ico').val().endsWith('CAWeb/src/images/system/bear.ico') ){
+				$('#resetFavIcon').click();
+			}
 		}
 	}
 

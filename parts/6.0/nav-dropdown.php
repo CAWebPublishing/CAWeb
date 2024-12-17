@@ -59,6 +59,7 @@ foreach ( $caweb_menuitems as $caweb_item ) {
 						<?php endif; ?>
 						<?php if ( $has_child_items ) : ?>
 						data-bs-toggle="dropdown"
+						data-bs-popper-config='{"placement": "bottom-start", "strategy": "fixed"}'
 						aria-expanded="false"
 						<?php endif; ?>
 						<?php if ( in_array( 'current-menu-item', $caweb_item->classes, true ) || in_array( 'current-menu-parent', $caweb_item->classes, true ) ) : ?>
@@ -95,7 +96,7 @@ foreach ( $caweb_menuitems as $caweb_item ) {
 										>
 											<a 
 												href="<?php print esc_url( $caweb_child_item->url ); ?>" 
-												class="dropdown-item"
+												class="dropdown-item nav-link"
 												tabindex="-1"
 												<?php if ( ! empty( $caweb_child_item->target ) ) : ?>
 												target="<?php print esc_attr( $caweb_child_item->target ); ?>" 
