@@ -227,6 +227,12 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 		)
 	);
 
+	$color_choices = array();
+
+	foreach( caweb_template_colors() as $k => $v ){
+		$color_choices[str_replace(' ', '', $k)] = ucwords($k);  
+	}
+
 	$wp_customize->add_control(
 		new WP_Customize_Control(
 			$wp_customize,
@@ -234,7 +240,7 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 			array(
 				'label'      => 'Color Scheme',
 				'type'       => 'select',
-				'choices'    => caweb_template_colors(),
+				'choices'    => $color_choices,
 				'section'    => 'caweb_settings',
 			)
 		)

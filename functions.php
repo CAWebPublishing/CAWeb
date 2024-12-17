@@ -632,7 +632,10 @@ function caweb_admin_enqueue_scripts( $hook ) {
 
 		$caweb_localize_args = array(
 			'template_version'   => $version,
-			'defaultFavIcon'     => caweb_default_favicon_url(),
+			'defaultFavIcon'     => array(
+				'5.5' => site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' ),
+				'6.0' => site_url( 'wp-content/themes/CAWeb/src/images/system/bear.ico' ),
+			),
 			'changeCheck'        => $hook,
 			'caweb_icons'        => array_values( caweb_symbols( -1, '', '', false ) ),
 			'caweb_colors'       => caweb_template_colors(),

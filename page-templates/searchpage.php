@@ -28,7 +28,7 @@ do_action( 'caweb_search_form' );
 <!--Search result section-->
 <div class="section">
 	<div class="container pt-0">
-		<h1>Search Results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
+		<h1>Search results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
 		<gcse:searchresults-only></gcse:searchresults-only>
 	</div>
 </div>

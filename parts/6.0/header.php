@@ -29,7 +29,7 @@ foreach ( $args as $var => $val ) {
 		<div class="container d-flex flex-row">
 			<div class="social-media-links">
 				<div class="header-cagov-logo">
-					<a href="https://www.ca.gov/" title="CA.gov website" target="_blank">
+					<a href="https://www.ca.gov/" title="CA.gov website">
 						<span class="sr-only">CA.gov</span>
 						<span class="ca-gov-logo-svg"></span>
 					</a>
@@ -94,19 +94,19 @@ foreach ( $args as $var => $val ) {
 				get_template_part( "parts/$caweb_template_version/search" );
 			}
 			?>
-			<button class="mobile-control toggle-menu ca-gov-icon-menu fs-2" data-bs-toggle="collapse" data-bs-target=".mobile-controlled" aria-expanded="false" aria-controls="mobile-controls">
+			<button class="mobile-control toggle-menu ca-gov-icon-menu fs-2" data-bs-toggle="collapse" data-bs-target=".mobile-controlled" aria-expanded="false" aria-controls="mobile-controls" aria-label="Open the navigation menu">
 	        </button>
 		</div>
 	</div>
 
 	<!-- Mobile Navigation Controls -->
 	<div class="mobile-controlled overlay collapse collapse-horizontal">
-		<button class="mobile-control toggle-menu ca-gov-icon-close-mark fs-1" data-bs-toggle="collapse" data-bs-target=".mobile-controlled" aria-expanded="false" aria-controls="mobile-controls">
+		<button class="mobile-control toggle-menu ca-gov-icon-close-mark fs-1" data-bs-toggle="collapse" data-bs-target=".mobile-controlled" aria-expanded="false" aria-controls="mobile-controls" aria-label="Closes the navigation menu">
 		</button>
 	</div>
 
 	<!-- Navigation -->
-	<div class="navigation border-bottom mobile-controlled collapse collapse-horizontal show">
+	<div class="navigation border-bottom">
 	    <div class="container">
 		<?php
 			if ( has_nav_menu( 'header-menu' ) ) {
