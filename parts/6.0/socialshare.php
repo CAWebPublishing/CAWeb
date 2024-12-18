@@ -46,7 +46,7 @@ if ( ! empty( $caweb_social_media ) ) :
 				class="nav-link ca-gov-icon-<?php print esc_attr( $caweb_icon ); ?>"
 				href="<?php print esc_url( $caweb_social_url ); ?>" 
 				title="<?php print esc_attr( wp_unslash( $caweb_social_title ) ); ?>"
-				target="_blank"
+				target="<?php print esc_attr( $caweb_social_target ) ;?>"
 			>
 			</a>
 		</li>
