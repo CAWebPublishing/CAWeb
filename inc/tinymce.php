@@ -30,10 +30,9 @@ function caweb_tiny_mce_settings( $settings = array() ) {
 		$styles[ str_replace( ' ', '', strtolower( $style->name ) ) ] = $style;
 	}
 
-	$version = caweb_template_version();
 	$color   = get_option( 'ca_site_color_scheme', 'oceanside' );
 
-	$editor_css = caweb_get_min_file( "/build/$color-$version.css" );
+	$editor_css = caweb_get_min_file( "/build/$color.css" );
 
 	$css = array(
 		includes_url( '/css/dashicons.min.css' ),

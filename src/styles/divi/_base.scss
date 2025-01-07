@@ -1,5 +1,5 @@
 .page-title {
-	padding: $divi-page-title-padding;
+	padding: 15px 15px 0;
 }
 
 .page-title + .entry-content div[class*="et_builder_inner_content"] + div[class*="et_pb_section"]:not(.et_pb_fullwidth_section) > div[class*="et_pb_row"] {
@@ -12,4 +12,16 @@
 
 article article.et_pb_post {
 	margin-bottom: 30px;
+}
+
+.entry-content ul {
+	list-style-type: disc;
+}
+
+.entry-content ul ul{
+	list-style-type: circle;
+}
+
+.entry-content ul ul ul {
+	list-style-type: square;
 }

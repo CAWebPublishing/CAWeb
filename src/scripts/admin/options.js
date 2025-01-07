@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 
   // Reset Fav Icon
   $('#resetFavIcon').on( 'click', function() {
-    var ico = caweb_admin_args.defaultFavIcon[$('select[id$="ca_site_version"]').val()];
+    var ico = caweb_admin_args.default_favicon;
     var icoName = ico.substring( ico.lastIndexOf('/') + 1 );
     $('input[type="text"][name="ca_fav_ico"]').val(icoName);
     $('input[type="hidden"][name="ca_fav_ico"]').val(ico);
