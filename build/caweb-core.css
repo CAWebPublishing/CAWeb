@@ -2353,6 +2353,18 @@ body.divi-built {
   * Divi Built Standard Section Rows when using Visual Builder
   * Divi Fullwidth Menu Module Rows
   */
+  /*
+  .entry-content ul {
+  	list-style-type: disc;
+  }
+
+  .entry-content ul ul{
+  	list-style-type: circle;
+  }
+
+  .entry-content ul ul ul {
+  	list-style-type: square;
+  }*/
   /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
   /* Apply focus outline */
   /* Remove the State Template background image from Divi Button */
@@ -2422,15 +2434,6 @@ body.divi-built .page-date {
 }
 body.divi-built article article.et_pb_post {
   margin-bottom: 30px;
-}
-body.divi-built .entry-content ul {
-  list-style-type: disc;
-}
-body.divi-built .entry-content ul ul {
-  list-style-type: circle;
-}
-body.divi-built .entry-content ul ul ul {
-  list-style-type: square;
 }
 body.divi-built select[data-class-icon] {
   font-size: 20px;
