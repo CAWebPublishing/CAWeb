@@ -261,9 +261,6 @@ function caweb_display_utility_header_options() {
 	// Contact Us Page.
 	$contact_us_link = get_option( 'ca_contact_us_link', '' );
 
-	// Geo Locator.
-	$geo_locator_enabled = get_option( 'ca_geo_locator_enabled', false ) ? ' checked' : '';
-
 	?>
 	<!-- Utility Header Section -->
 	<div>
@@ -279,18 +276,6 @@ function caweb_display_utility_header_options() {
 				<label for="ca_contact_us_link" class="d-block mb-0"><strong>Contact Us Page</strong></label>
 				<small class="mb-2 text-muted d-block">Enter the URL to your &quot;Contact Us&quot; page.</small>
 				<input type="text" name="ca_contact_us_link" id="ca_contact_us_link" class="form-control" value="<?php print esc_url( $contact_us_link ); ?>">
-			</div>
-		</div>
-
-		<!-- Enable Geo Locator & Menu Home Link Row -->
-		<div class="row">
-			<!-- Enable Geo Locator -->
-			<div class="mb-3 col-4">
-				<div class="form-check form-switch">
-					<input type="checkbox" class="form-check-input mt-1" name="ca_geo_locator_enabled" id="ca_geo_locator_enabled" <?php print esc_attr( $geo_locator_enabled ); ?>> 
-					<label for="ca_geo_locator_enabled" class="d-block mb-0"><strong>Enable Geo Locator</strong></label>
-					<small class="mb-2 text-muted d-block">Displays a geo locator feature at the top right of each page.</small>
-				</div>
 			</div>
 		</div>
 

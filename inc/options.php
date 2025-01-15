@@ -494,7 +494,6 @@ function caweb_get_site_options( $group = '' ) {
 
 	$caweb_utility_header_options = array(
 		'ca_contact_us_link'           => '',
-		'ca_geo_locator_enabled'       => false,
 		'ca_utility_link_1'            => '',
 		'ca_utility_link_1_name'       => '',
 		'ca_utility_link_1_new_window' => true,

@@ -4229,6 +4229,8 @@
   4. Add dotted, solid, dashed, wavy to text-decoration- utility
   5. Add sm, md, lg to font-size- utility
   6. Add default, pointer, grab, crosshair to cursor- utility classes
+  7. Add height 0 and width 0 to utility classes
+  7. Add min-vh 0 and min-vw 0 to utility classes
 */
 :root,
 [data-bs-theme=light] {
@@ -13081,6 +13083,10 @@ textarea.form-control-lg {
   width: auto !important;
 }
 
+.w-0 {
+  width: 0 !important;
+}
+
 .mw-100 {
   max-width: 100% !important;
 }
@@ -13113,6 +13119,10 @@ textarea.form-control-lg {
   height: auto !important;
 }
 
+.h-0 {
+  height: 0 !important;
+}
+
 .mh-100 {
   max-height: 100% !important;
 }
@@ -13123,6 +13133,10 @@ textarea.form-control-lg {
 
 .min-vh-100 {
   min-height: 100vh !important;
+}
+
+.min-vh-0 {
+  min-height: 0 !important;
 }
 
 .flex-fill {
@@ -14794,6 +14808,14 @@ textarea.form-control-lg {
 
 .cursor-crosshair {
   cursor: crosshair !important;
+}
+
+.min-vw-100 {
+  min-width: 100vw !important;
+}
+
+.min-vw-0 {
+  min-width: 0 !important;
 }
 
 @media (min-width: 576px) {
@@ -18062,8 +18084,8 @@ header.global-header .branding .header-organization-banner a img {
 /* -----------------------------------------
    BREADCRUMBS -  /source/scss/cagov/breadcrumbs.scss
 ----------------------------------------- */
-.breadcrumbs ul,
-.breadcrumbs ol {
+#page-container .breadcrumbs ul,
+#page-container .breadcrumbs ol {
   padding: 0.5em 1rem;
   padding-right: 0;
   margin-bottom: 2rem;
@@ -18073,23 +18095,23 @@ header.global-header .branding .header-organization-banner a img {
   font-size: 0.984375rem;
 }
 @media (min-width: 576px) {
-  .breadcrumbs ul,
-  .breadcrumbs ol {
+  #page-container .breadcrumbs ul,
+  #page-container .breadcrumbs ol {
     font-size: calc(0.984375rem + 0.1vw);
   }
 }
-.breadcrumbs ul li,
-.breadcrumbs ol li {
+#page-container .breadcrumbs ul li,
+#page-container .breadcrumbs ol li {
   position: relative;
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
-.breadcrumbs ul li:first-child,
-.breadcrumbs ol li:first-child {
+#page-container .breadcrumbs ul li:first-child,
+#page-container .breadcrumbs ol li:first-child {
   padding-right: 0;
 }
-.breadcrumbs ul li::after,
-.breadcrumbs ol li::after {
+#page-container .breadcrumbs ul li::after,
+#page-container .breadcrumbs ol li::after {
   content: "";
   color: var(--bs-gray-900, #3b3a48);
   border: none;
@@ -18103,8 +18125,8 @@ header.global-header .branding .header-organization-banner a img {
   left: -12px;
   transform: rotate(-15deg);
 }
-.breadcrumbs ul li:last-child::after,
-.breadcrumbs ol li:last-child::after {
+#page-container .breadcrumbs ul li:last-child::after,
+#page-container .breadcrumbs ol li:last-child::after {
   content: "";
   border-right: none;
   margin: 0;

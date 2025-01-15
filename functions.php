@@ -291,7 +291,6 @@ function caweb_wp_body_open() {
 
 	$args = array(
 		'caweb_social_options'               => caweb_get_social_media_links(),
-		'caweb_geo_locator_enabled'          => get_option( 'ca_geo_locator_enabled', false ),
 		'caweb_contact_us_link'              => get_option( 'ca_contact_us_link', '' ),
 		'caweb_google_trans_enabled'         => get_option( 'ca_google_trans_enabled', false ),
 		'caweb_google_trans_page'            => get_option( 'ca_google_trans_page', '' ),
@@ -388,14 +387,6 @@ function caweb_wp_enqueue_scripts() {
 
 	// CAWeb JS File.
 	$caweb_js_file = caweb_get_min_file( '/build/caweb-core.js', 'js' );
-
-	/* Geo Locator */
-	$ca_geo_locator_enabled = 'on' === get_option( 'ca_geo_locator_enabled', false ) || get_option( 'ca_geo_locator_enabled', false );
-
-	if ( $ca_geo_locator_enabled ) {
-		$jsv4geo = CAWEB_CA_STATE_PORTAL_CDN_URL . '/js/js4geo.js';
-		wp_enqueue_script( 'cagov-jsv4geo-script', $jsv4geo, array( 'jquery' ), CAWEB_VERSION, true );
-	}
 
 	// Register Scripts.
 	wp_register_script( 'caweb-core-script', $caweb_js_file, array( 'jquery' ), CAWEB_VERSION, true );

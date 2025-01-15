@@ -54,10 +54,6 @@ foreach ( $args as $var => $val ) {
 						<?php endif; ?>
 					<?php endfor; ?>
 
-					<?php if ( $caweb_geo_locator_enabled ) : ?>
-						<button type="button" class="btn btn-xs collapsed btn-primary" onclick="showAddLocation()" aria-expanded="false"><span class="ca-gov-icon-compass" aria-hidden="true"></span> <span class="located-city-name">Set Location</span></button>    
-					<?php endif; ?>
-
 					<?php if ( ! empty( $caweb_contact_us_link ) ) : ?>
 						<a class="utility-contact-us" href="<?php print esc_url( $caweb_contact_us_link ); ?>">Contact Us</a>
 					<?php endif; ?>
@@ -84,9 +80,6 @@ foreach ( $args as $var => $val ) {
 			</div>
 		</div>
 	</div>
-
-	<!-- Location Bar -->
-	<div id="locationSettings" class="location-settings section section-standout collapse collapsed"></div>
 
 	<!-- Branding -->
 	<div class="branding border-bottom">

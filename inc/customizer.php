@@ -262,28 +262,6 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 		)
 	);
 
-	// Enable Geo Locator.
-	$wp_customize->add_setting(
-		'ca_geo_locator_enabled',
-		array(
-			'type'              => 'option',
-			'default'           => get_option( 'ca_geo_locator_enabled', false ),
-			'sanitize_callback' => 'caweb_sanitize_customizer_checkbox',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_geo_locator_enabled',
-			array(
-				'label'           => 'Enable Geo Locator',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_utility_header',
-			)
-		)
-	);
-
 	// Custom Utility Links.
 	for ( $link = 1; $link < 4; $link++ ) {
 		$url    = get_option( "ca_utility_link_{$link}", '' );

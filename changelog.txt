@@ -9,6 +9,7 @@ CAWeb 1.13.0
 - Show Search on Frontpage has been removed
 - Utility Header Home link option has been removed
 - Social media show in header option has been removed
+- Geo Locator option has been removed
 
 CAWeb 1.12.4
 - Resolved issue with Colorscheme option when using Customizer
