@@ -388,8 +388,6 @@ jQuery(document).ready(function ($) {
   /* Unit Size Selector */
   $(document).on('change', 'div .unit-size-selector', function () {
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
-    var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
     var unit_size = $(this).val();
     if ('unit1' === unit_size) {
@@ -398,25 +396,6 @@ jQuery(document).ready(function ($) {
     } else {
       // Display Description
       $(desc).removeClass('hidden-field');
-    }
-    if ('unit3' === unit_size) {
-      // Display Navigation Media Image
-      $(media_image).removeClass('hidden');
-
-      // Hide Icon Selector
-      $(icon_selector).addClass('hidden');
-    } else {
-      // Hide Navigation Media Image
-      $(media_image).addClass('hidden');
-
-      // Display Icon Selector
-      $(icon_selector).removeClass('hidden');
-    }
-
-    // remove icon selector if using version 6.0
-    if ('6.0' === caweb_admin_args.template_version) {
-      // Hide Icon Selector
-      $(icon_selector).addClass('hidden');
     }
   });
 
@@ -444,46 +423,21 @@ jQuery(document).ready(function ($) {
   function menu_selection() {
     var menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
     var menu_li = $('#menu-item-' + menu_id);
-    var icon_selector = $('#menu-item-settings-' + menu_id + ' .caweb-icon-selector');
-    var media_image = $('#menu-item-settings-' + menu_id + ' .media-image');
     var desc = $('#menu-item-settings-' + menu_id + ' .field-description');
-    var mega_menu_images = $('#menu-item-settings-' + menu_id + ' .mega-menu-images');
     var unit_selector = $('#menu-item-settings-' + menu_id + ' .unit-size-selector');
     var unit_size = $(unit_selector).val();
-    var flex_border = $('#menu-item-settings-' + menu_id + ' .flexmega-border');
-    var flex_row = $('#menu-item-settings-' + menu_id + ' .flexmega-row');
 
     /*
     if the menu item is a top level menu item
     depth = 0
     */
     if ($(menu_li).hasClass('menu-item-depth-0')) {
-      // Show Mega Menu Options
-      $(mega_menu_images).removeClass('hidden');
-
-      // Show Icon Selector
-      $(icon_selector).removeClass('hidden');
-
-      // Hide Nav Media Images, Unit Size Selector, Description, FlexBorder
-      $(media_image).addClass('hidden');
+      // Hide Unit Size Selector, Description
       $(unit_selector).parent().addClass('hidden');
       $(desc).addClass('hidden-field');
-      $(flex_border).addClass('hidden');
-      $(flex_row).addClass('hidden');
     } else {
-      // Hide Mega Menu Options
-      $(mega_menu_images).addClass('hidden');
-
       // Show Unit Selector
       $(unit_selector).parent().removeClass('hidden');
-
-      // Show Row and FlexBorder
-      $(flex_row).removeClass('hidden');
-      if ($(flex_row).find('input').is(':checked')) {
-        $(flex_border).removeClass('hidden');
-      } else {
-        $(flex_border).addClass('hidden');
-      }
       if ('unit1' !== unit_size) {
         // Hide Description
         $(desc).addClass('hidden-field');
@@ -491,25 +445,6 @@ jQuery(document).ready(function ($) {
         // Show Description
         $(desc).removeClass('hidden-field');
       }
-      if ('unit3' === unit_size) {
-        // Hide Icon Selector
-        $(icon_selector).addClass('hidden');
-
-        // Show Nav Media Images
-        $(media_image).removeClass('hidden');
-      } else {
-        // Show Icon Selector
-        $(icon_selector).removeClass('hidden');
-
-        // Hide Nav Media Images
-        $(media_image).addClass('hidden');
-      }
-    }
-
-    // remove icon selector if using version 6.0
-    if ('6.0' === caweb_admin_args.template_version) {
-      // Hide Icon Selector
-      $(icon_selector).addClass('hidden');
     }
   }
 });
@@ -566,7 +501,7 @@ jQuery(document).ready(function ($) {
 
   // Reset Fav Icon
   $('#resetFavIcon').on('click', function () {
-    var ico = caweb_admin_args.defaultFavIcon[$('select[id$="ca_site_version"]').val()];
+    var ico = caweb_admin_args.default_favicon;
     var icoName = ico.substring(ico.lastIndexOf('/') + 1);
     $('input[type="text"][name="ca_fav_ico"]').val(icoName);
     $('input[type="hidden"][name="ca_fav_ico"]').val(ico);
@@ -630,108 +565,6 @@ jQuery(document).ready(function ($) {
       $('.doc-sitemap-update').html(response);
     });
   });
-});
-
-/***/ }),
-
-/***/ "./src/scripts/admin/toggle-options.js":
-/*!*********************************************!*\
-  !*** ./src/scripts/admin/toggle-options.js ***!
-  \*********************************************/
-/***/ (() => {
-
-// Toggle CAWeb Template Options
-jQuery(document).ready(function ($) {
-  let current_version = $('#ca_site_version option:selected').val();
-  if (!current_version) {
-    return;
-  }
-
-  // Correct Options. 
-  correct_options();
-  $('select[id$="ca_site_version"]').on("change", function () {
-    current_version = $(this).val();
-    correct_options();
-  });
-  function correct_options() {
-    correct_template_options();
-    correct_social_media_links();
-  }
-
-  // Toggle Template Options
-  function correct_template_options() {
-    var current_menu = $('#ca_default_navigation_menu option:selected').val();
-
-    // Version 6.
-    if ('6.0' === current_version) {
-      // Drop support for mega menus.
-      $('#ca_default_navigation_menu option[value="flexmega"]').addClass('d-none');
-      $('#ca_default_navigation_menu option[value="megadropdown"]').addClass('d-none');
-
-      // if current menu is no longer supported, set to dropdown.
-      if (['flexmega', 'megadropdown'].includes(current_menu)) {
-        $(`#ca_default_navigation_menu option[value="dropdown"]`).attr('selected', true);
-        $('#ca_default_navigation_menu option[value="singlelevel"]').attr('selected', false);
-      }
-
-      // Drop support for Menu Home Link.
-      $('#ca_home_nav_link').parent().parent().addClass('d-none');
-
-      // Drop support for Search on Frontpage
-      $('#ca_frontpage_search_enabled').parent().parent().addClass('d-none');
-
-      // Drop support for Utility Header Home Icon.
-      $('#utility-header-settings #ca_utility_home_icon').parent().addClass('d-none');
-
-      // Reset default favicon if needed
-      if ($('#ca_fav_ico').val().endsWith('CAWeb/src/images/system/favicon.ico')) {
-        $('#resetFavIcon').click();
-      }
-
-      // Version 5.
-    } else {
-      // Add support for mega menus.
-      $('#ca_default_navigation_menu option[value="flexmega"]').removeClass('d-none');
-      $('#ca_default_navigation_menu option[value="megadropdown"]').removeClass('d-none');
-
-      // Add support for Menu Home Link.
-      $('#ca_home_nav_link').parent().parent().removeClass('d-none');
-
-      // Add support for Search on Frontpage
-      $('#ca_frontpage_search_enabled').parent().parent().removeClass('d-none');
-
-      // Drop support for Utility Header.
-      $('#utility-header-settings #ca_utility_home_icon').parent().removeClass('d-none');
-
-      // Reset default favicon if needed
-      if ($('#ca_fav_ico').val().endsWith('CAWeb/src/images/system/bear.ico')) {
-        $('#resetFavIcon').click();
-      }
-    }
-  }
-
-  // Toggle Social Media Links
-  function correct_social_media_links() {
-    var exclusions = '6.0' === current_version ? ['ca_social_snapchat-settings', 'ca_social_pinterest-settings', 'ca_social_rss-settings', 'ca_social_google_plus-settings', 'ca_social_flickr-settings'] : ['ca_social_github-settings'];
-    $('div[id^="ca_social_"]').each(function (index) {
-      // hide the entire option if not allowed for specified template version
-      if (exclusions.includes(this.id)) {
-        $(this).addClass('d-none');
-        $(this).prev().addClass('d-none');
-      } else {
-        $(this).removeClass('d-none');
-        $(this).prev().removeClass('d-none');
-      }
-      var optionName = this.id.substring(0, this.id.indexOf('-'));
-
-      // hide header option for all social link options when using version 6.
-      if ('6.0' === current_version) {
-        $(`#${optionName}_header`).parent().parent().addClass('d-none');
-      } else {
-        $(`#${optionName}_header`).parent().parent().removeClass('d-none');
-      }
-    });
-  }
 });
 
 /***/ }),
@@ -7296,7 +7129,6 @@ __webpack_require__(/*! ./alerts */ "./src/scripts/admin/alerts.js");
 __webpack_require__(/*! ./icon */ "./src/scripts/admin/icon.js");
 __webpack_require__(/*! ./nav-menu */ "./src/scripts/admin/nav-menu.js");
 __webpack_require__(/*! ./options */ "./src/scripts/admin/options.js");
-__webpack_require__(/*! ./toggle-options */ "./src/scripts/admin/toggle-options.js");
 __webpack_require__(/*! ./uploads */ "./src/scripts/admin/uploads.js");
 __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
 })();

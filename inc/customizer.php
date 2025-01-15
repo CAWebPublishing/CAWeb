@@ -84,8 +84,6 @@ function caweb_customize_controls_print_styles() {
  * @return void
  */
 function caweb_customize_register( $wp_customize ) {
-	$site_version = caweb_template_version();
-
 	/* Remove Divi Customization Panels and Sections */
 	$divi_panels = array(
 		'et_divi_general_settings',
@@ -151,38 +149,12 @@ function caweb_customize_register( $wp_customize ) {
  * @return void
  */
 function caweb_customize_register_general_settings( $wp_customize ) {
-	$site_version = caweb_template_version();
-
 	$wp_customize->add_section(
 		'caweb_settings',
 		array(
 			'title'    => 'General Settings',
 			'priority' => 30,
 			'panel'    => 'caweb_options',
-		)
-	);
-
-	// Site Version.
-	$wp_customize->add_setting(
-		'ca_site_version',
-		array(
-			'type'    => 'option',
-			'default' => $site_version,
-		)
-	);
-
-	$versions = caweb_template_versions();
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_site_version',
-			array(
-				'label'      => 'State Template Version',
-				'type'       => 'select',
-				'choices'    => $versions,
-				'section'    => 'caweb_settings',
-			)
 		)
 	);
 
@@ -246,71 +218,7 @@ function caweb_customize_register_general_settings( $wp_customize ) {
 		)
 	);
 
-	// Show Search on Front Page.
-	$wp_customize->add_setting(
-		'ca_frontpage_search_enabled',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_frontpage_search_enabled', true ),
-			'transport' => 'postMessage',
-		)
-	);
 
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_frontpage_search_enabled',
-			array(
-				'label'           => 'Show Search on Front Page',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_settings',
-			)
-		)
-	);
-
-	// Sticky Navigation.
-	$wp_customize->add_setting(
-		'ca_sticky_navigation',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_sticky_navigation', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_sticky_navigation',
-			array(
-				'label'           => 'Sticky Navigation',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_settings',
-			)
-		)
-	);
-
-	// Menu Home Link.
-	$wp_customize->add_setting(
-		'ca_home_nav_link',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_home_nav_link', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_home_nav_link',
-			array(
-				'label'      => 'Menu Home Link',
-				'type'       => 'checkbox',
-				'section'    => 'caweb_settings',
-			)
-		)
-	);
 }
 
 /**
@@ -349,50 +257,6 @@ function caweb_customize_register_utility_header_settings( $wp_customize ) {
 			array(
 				'label'           => 'Contact Us Page',
 				'type'            => 'text',
-				'section'         => 'caweb_utility_header',
-			)
-		)
-	);
-
-	// Enable Geo Locator.
-	$wp_customize->add_setting(
-		'ca_geo_locator_enabled',
-		array(
-			'type'              => 'option',
-			'default'           => get_option( 'ca_geo_locator_enabled', false ),
-			'sanitize_callback' => 'caweb_sanitize_customizer_checkbox',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_geo_locator_enabled',
-			array(
-				'label'           => 'Enable Geo Locator',
-				'type'            => 'checkbox',
-				'section'         => 'caweb_utility_header',
-			)
-		)
-	);
-
-	// Home Link.
-	$wp_customize->add_setting(
-		'ca_utility_home_icon',
-		array(
-			'type'      => 'option',
-			'default'   => get_option( 'ca_utility_home_icon', true ),
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'ca_utility_home_icon',
-			array(
-				'label'           => 'Home Link',
-				'type'            => 'checkbox',
 				'section'         => 'caweb_utility_header',
 			)
 		)
@@ -763,28 +627,6 @@ function caweb_customize_register_social_media_settings( $wp_customize ) {
 					'label'      => $social,
 					'type'       => 'text',
 					'section'    => 'caweb_social_media',
-				)
-			)
-		);
-
-		// Social Media Header Option.
-		$wp_customize->add_setting(
-			sprintf( '%1$s_header', $option ),
-			array(
-				'type'              => 'option',
-				'default'           => get_option( sprintf( '%1$s_header', $option ) ),
-				'sanitize_callback' => 'caweb_sanitize_customizer_checkbox',
-			)
-		);
-
-		$wp_customize->add_control(
-			new WP_Customize_Control(
-				$wp_customize,
-				sprintf( '%1$s_header', $option ),
-				array(
-					'label'           => 'Show in Header',
-					'type'            => 'checkbox',
-					'section'         => 'caweb_social_media',
 				)
 			)
 		);

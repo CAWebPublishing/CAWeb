@@ -1,61 +1,32 @@
 /*
 Custom variables for the CAWeb Theme
-based off CA State Template v5.5.23
 */
 @import './custom/variables';
 
 body{
 
 	@import './custom/google';
+	
+	// if page was built using Divi
+	&.divi-built{
+		@import 'divi';
+	}
 
-	// State Template 5.5 specific styles
-	&[class*="5.5"]{
-        @import '../version-5.5/custom/';
-
-		// if page is a standard WordPress page
-		// and not SERP Template
-		&:not(.divi-built):not(.page-template-searchpage){
-			@import './custom/main-content';
-		}
-
-		// if page was built using Divi
-        &.divi-built{
-            @import 'divi';
-        }
-
-    }
-
-	// State Template 6 specific styles
-	&[class*="6.0"]{
-		
-		// if page is a standard WordPress page
-		// and not SERP Template
-		&:not(.divi-built):not(.page-template-searchpage){
-			@import './custom/main-content';
-		}
-		
-		// if page was built using Divi
-        &.divi-built{
-            @import 'divi';
-        }
-
-		// mobile mode menu is hidden behind the wordpress admin bar when logged in
-		&.admin-bar{
-			// mobile devices
-			@media (max-width: 768px) {
-				header .navigation-search{
-					top: 46px
-				}
-			}
-			// tablet devices
-			@media (max-width: 991px) {
-				header .navigation-search{
-					top: 32px
-				}
+	// mobile mode menu is hidden behind the wordpress admin bar when logged in
+	&.admin-bar{
+		// mobile devices
+		@media (max-width: 768px) {
+			header .navigation-search{
+				top: 46px
 			}
 		}
-
-    }
+		// tablet devices
+		@media (max-width: 991px) {
+			header .navigation-search{
+				top: 32px
+			}
+		}
+	}
 	
     // SERP Template Overrides
     &.page-template-searchpage{
@@ -92,11 +63,3 @@ body{
 // Add CAWeb font sheet 
 // This is a combination of the State Template and Divi icons.
 @import '@caweb/html-webpack-plugin/build/font-only.css';
-
-// @todo this needs to be verified to see if it's still needed
-// Corrects Logo when navigation is compacted, in mobile view
-@media (min-width: 768px){
-	.fixed.compact .header-organization-banner a img{
-		max-height: 50px;
-	}
-}

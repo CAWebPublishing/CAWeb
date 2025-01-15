@@ -22,7 +22,6 @@ add_filter( 'menu_order', 'caweb_wpse_custom_menu_order', 10, 1 );
 // Theme Option filters.
 add_filter( 'option_ca_site_color_scheme', 'caweb_ca_site_color_scheme', 10, 2 );
 add_filter( 'option_ca_fav_ico', 'caweb_pre_option_ca_fav_ico', 10, 2 );
-//add_filter( 'option_ca_default_navigation_menu', 'caweb_pre_ca_default_navigation_menu', 10, 2 );
 
 /**
  * This filter is used to switch menu order.
@@ -213,7 +212,7 @@ function caweb_pre_update_site_option_caweb_password( $value, $old_value, $optio
 function caweb_option_page() {
 
 	/* The actual menu file */
-	get_template_part( 'partials/options' );
+	get_template_part( 'parts/options' );
 }
 
 /**
@@ -486,12 +485,8 @@ function caweb_save_multi_ga_options( $values = array() ) {
 function caweb_get_site_options( $group = '' ) {
 	$caweb_general_options = array(
 		'ca_fav_ico'                    => caweb_default_favicon_url(),
-		'ca_site_version'               => CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION,
 		'ca_default_navigation_menu'    => 'singlelevel',
 		'ca_site_color_scheme'          => 'oceanside',
-		'ca_frontpage_search_enabled'   => false,
-		'ca_sticky_navigation'          => false,
-		'ca_home_nav_link'              => true,
 		'ca_default_post_title_display' => false,
 		'ca_default_post_date_display'  => false,
 		'ca_x_ua_compatibility'         => false,
@@ -499,8 +494,6 @@ function caweb_get_site_options( $group = '' ) {
 
 	$caweb_utility_header_options = array(
 		'ca_contact_us_link'           => '',
-		'ca_geo_locator_enabled'       => false,
-		'ca_utility_home_icon'         => true,
 		'ca_utility_link_1'            => '',
 		'ca_utility_link_1_name'       => '',
 		'ca_utility_link_1_new_window' => true,
@@ -539,7 +532,6 @@ function caweb_get_site_options( $group = '' ) {
 
 	foreach ( $caweb_social_links as $social => $option ) {
 		$caweb_social_options[ $option ]            = '';
-		$caweb_social_options[ "{$option}_header" ] = true;
 		$caweb_social_options[ "{$option}_footer" ] = true;
 
 		if ( 'ca_social_email' !== $option ) {
@@ -635,14 +627,9 @@ function caweb_get_social_media_links() {
 	$caweb_social_options = array(
 		'Email'           => 'ca_social_email',
 		'Facebook'        => 'ca_social_facebook',
-		'Flickr'          => 'ca_social_flickr',
 		'Github'          => 'ca_social_github',
-		'Google Plus'     => 'ca_social_google_plus',
 		'Instagram'       => 'ca_social_instagram',
 		'LinkedIn'        => 'ca_social_linkedin',
-		'Pinterest'       => 'ca_social_pinterest',
-		'RSS'             => 'ca_social_rss',
-		'Snapchat'        => 'ca_social_snapchat',
 		'X'               => 'ca_social_twitter',
 		'YouTube'         => 'ca_social_youtube',
 	);
@@ -703,13 +690,7 @@ function caweb_upload_external_files( $upload_path, $prev_files = array(), $exis
  * @return URI
  */
 function caweb_default_favicon_url() {
-	$version       = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
-
-	if( '5.5' === $version ){
-		return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
-	} else {
-		return site_url( 'wp-content/themes/CAWeb/src/images/system/bear.ico' );
-	}
+	return site_url( 'wp-content/themes/CAWeb/src/images/system/favicon.ico' );
 }
 
 /**
@@ -762,21 +743,3 @@ function caweb_pre_option_ca_fav_ico( $value, $option ) {
 	return $ico;
 }
 
-/**
- * Filters the value of the CAWeb Navigation Menu Style.
- *
- * @link https://developer.wordpress.org/reference/hooks/option_option/
- *
- * @since 1.12.0 Flex Mega and Mega Menu have been removed.
- * @param  mixed  $value Value of the option. If stored serialized, it will be unserialized prior to being returned.
- * @param  string $option Option name.
- * @return mixed
- */
-function caweb_pre_ca_default_navigation_menu( $value, $option ) {
-	// if menu style has been deprecated fallback to dropdown
-	if( ! in_array( $value, caweb_nav_menu_types(), true ) ){
-		return 'dropdown';
-	}
-
-	return $value;
-}
