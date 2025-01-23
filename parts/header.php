@@ -100,7 +100,7 @@ foreach ( $args as $var => $val ) {
 	</div>
 
 	<!-- Mobile Navigation Controls -->
-	<div class="mobile-controlled overlay collapse collapse-horizontal">
+	<div id="mobile-controls" class="mobile-controlled overlay collapse collapse-horizontal">
 		<button class="mobile-control toggle-menu ca-gov-icon-close-mark fs-1" data-bs-toggle="collapse" data-bs-target=".mobile-controlled" aria-expanded="false" aria-controls="mobile-controls" aria-label="Closes the navigation menu">
 		</button>
 	</div>

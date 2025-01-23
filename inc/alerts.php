@@ -52,7 +52,7 @@ function caweb_render_alerts() {
 	}
 
 	?>
-	<div id="caweb_alerts">
+	<div id="caweb_alerts" class="alerts">
 	<?php
 	foreach ( $alerts as $a => $alert ) {
 		$cookie  = isset( $_COOKIE[ "caweb-alert-$a" ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ "caweb-alert-$a" ] ) ) : true;

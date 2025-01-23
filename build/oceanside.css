@@ -18290,7 +18290,6 @@ header.global-header {
   background-color: var(--bs-white, #fff);
   z-index: 15;
   transition: all 0.3s ease;
-  top: 0;
   width: 100%;
 }
 header.global-header #skip-to-content {
