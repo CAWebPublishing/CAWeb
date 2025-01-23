@@ -23,7 +23,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 
 ?>
 
-<ul class="nav">
+<ul class="nav" aria-label="Main navigation">
 
 		<?php
 		foreach ( $caweb_menuitems as $caweb_item ) {
