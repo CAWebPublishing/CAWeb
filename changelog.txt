@@ -10,6 +10,7 @@ CAWeb 1.13.0
 - Utility Header Home link option has been removed
 - Social media show in header option has been removed
 - Geo Locator option has been removed
+- Added theme argument to wp_nav_menu filter to prevent duplicate menus from rendering
 
 CAWeb 1.12.4
 - Resolved issue with Colorscheme option when using Customizer

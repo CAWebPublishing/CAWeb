@@ -33,6 +33,7 @@ $caweb_social_media      = caweb_get_social_media_links();
 	if ( has_nav_menu( 'footer-menu' ) ) {
 		wp_nav_menu(
 			array(
+				'theme'                     => 'CAWeb',
 				'theme_location'          => 'footer-menu',
 				'caweb_nav_type'          => 'footer'
 			)
