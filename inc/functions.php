@@ -369,8 +369,6 @@ function caweb_get_user_color() {
  */
 function caweb_is_divi_used( $wp_classes = array() ) {
 
-	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
-
 	// Default WordPress theme templates do not use the Divi Builder.
 	if ( is_tag() || is_archive() || is_category() || is_author() ) {
 		return false;
@@ -392,5 +390,6 @@ function caweb_is_divi_used( $wp_classes = array() ) {
 		return false;
 	}
 
-	return $builder_used;
+	// if the builder is used return true.
+	return function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
 }

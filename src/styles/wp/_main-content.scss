@@ -1,7 +1,9 @@
 
-// if page is a standard WordPress page
-// and not SERP Template
-body:not(.divi-built):not(.page-template-searchpage){
+// if page is the old Classic WordPress Editor
+// Not using Divi Builder
+// Not a SERP Template
+// Not using Gutenberg
+body.classic-built:not(.page-template-searchpage){
 
 	#main-content {
 		width: 100%;
@@ -13,6 +15,27 @@ body:not(.divi-built):not(.page-template-searchpage){
 		@media (min-width: #{$name}px){
 			#main-content {
 				max-width: #{$value}px;
+			}
+		}
+	}
+}
+
+// if page was built with Gutenberg WordPress Editor
+body:not(.page-template-searchpage){
+	#main-content .entry-content {
+		// if row is after entry-content
+		& > .wp-block-group{
+			max-width: 100%;
+			margin-bottom: 1.5rem;
+
+			@each $name, $value in $break-points {
+				@media (min-width: #{$name}px){
+					// if row has columns
+					& > .wp-block-columns{
+						max-width: #{$value}px;
+						margin: 0 auto;
+					}
+				}
 			}
 		}
 	}

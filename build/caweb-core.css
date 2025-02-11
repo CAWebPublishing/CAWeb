@@ -2369,7 +2369,7 @@ body.divi-built #main-content .entry-content > #et-fb-app .et-fb-post-content .e
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
-  max-width: px;
+  max-width: 1320px;
 }
 @media (min-width: 576px) {
   body.divi-built #main-content .entry-content .et_builder_inner_content .et_pb_fullwidth_section .et_pb_module.et_pb_fullwidth_menu .et_pb_row,
@@ -2725,39 +2725,78 @@ body.admin-bar header.global-header .mobile-controlled.overlay {
   margin-top: var(--wp-admin--admin-bar--height, 32px);
 }
 
+html {
+  margin-top: 0 !important;
+}
+
 @media screen and (max-width: 782px) {
   html {
     margin-top: 0 !important;
   }
 }
-body:not(.divi-built):not(.page-template-searchpage) #main-content {
+body.classic-built:not(.page-template-searchpage) #main-content {
   width: 100%;
   margin: 0 auto;
   padding: 15px;
 }
 @media (min-width: 576px) {
-  body:not(.divi-built):not(.page-template-searchpage) #main-content {
+  body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 540px;
   }
 }
 @media (min-width: 768px) {
-  body:not(.divi-built):not(.page-template-searchpage) #main-content {
+  body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 720px;
   }
 }
 @media (min-width: 992px) {
-  body:not(.divi-built):not(.page-template-searchpage) #main-content {
+  body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 960px;
   }
 }
 @media (min-width: 1200px) {
-  body:not(.divi-built):not(.page-template-searchpage) #main-content {
+  body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 1140px;
   }
 }
 @media (min-width: 1400px) {
-  body:not(.divi-built):not(.page-template-searchpage) #main-content {
+  body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 1320px;
+  }
+}
+
+body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group {
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 576px) {
+  body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 768px) {
+  body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 992px) {
+  body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1200px) {
+  body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1400px) {
+  body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    max-width: 1320px;
+    margin: 0 auto;
   }
 }
 
