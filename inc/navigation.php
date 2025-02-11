@@ -27,13 +27,17 @@ add_action( 'wp_update_nav_menu_item', 'caweb_update_nav_menu_item', 10, 3 );
  * @return string
  */
 function caweb_nav_menu( $nav_menu, $args ) {
+	// In the event that a plugin is using the wp_nav_menu filter with the same arguments.
+	// we check for the $args->theme = 'CAWeb' to prevent duplicate menus from rendering.
 
 	/* Menu Construction */
 	if ( ! empty( $args->menu ) && $args->echo &&
 			isset(
+				$args->theme,
 				$args->theme_location,
 				$args->caweb_nav_type
-			)
+			) &&
+			'CAWeb' === $args->theme
 		) {
 
 		get_template_part( "parts/nav", $args->caweb_nav_type, $args );
