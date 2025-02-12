@@ -32,7 +32,13 @@ function caweb_alert_cookies() {
 					$cookie = false;
 				}
 
-				setcookie( "caweb-alert-$a", $cookie, 0, '/' );
+				setcookie( "caweb-alert-$a", $cookie, array(
+					'expires' => 0,
+					'path'    => '/',
+					'secure' => is_ssl(),
+					'httponly' => true,
+					'samesite' => 'Lax',
+				) );
 
 			}
 		}
