@@ -10,55 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Returns the Site Wide Template Version Setting
- *
- * @since 1.5.4 Template Version 5 has been deprecated and all customers moved to 5.5.
- * @return int
- */
-function caweb_template_version() {
-	$version       = get_option( 'ca_site_version', CAWEB_MINIMUM_SUPPORTED_TEMPLATE_VERSION );
-	$theme_version = wp_get_theme()->get( 'Version' );
-
-	if ( '1.5.4' <= $theme_version && '5.5' > $version ) {
-		return 5.5;
-	}
-
-	return $version;
-}
-
-/**
- * Returns all CAWeb State Template Versions
- *
- * @param boolean $include_beta Include beta versions.
- * @return array
- */
-function caweb_template_versions( $include_beta = true ) {
-	$tmp               = CAWEB_SUPPORTED_TEMPLATE_VERSIONS;
-	$template_versions = array();
-
-	if ( $include_beta ) {
-		$tmp = array_merge( $tmp, CAWEB_BETA_TEMPLATE_VERSIONS );
-	}
-
-	sort( $tmp );
-
-	foreach ( $tmp as $t ) {
-		$template_versions[ "$t" ] = "Version $t";
-	}
-
-	return $template_versions;
-}
-
-/**
- * Returns whether or not the Site Wide Template Version is a Beta
- *
- * @return boolean
- */
-function caweb_is_beta_version() {
-	return in_array( caweb_template_version(), CAWEB_BETA_TEMPLATE_VERSIONS, true );
-}
-
-/**
  * Returns array of CAWeb Menu Theme Locations
  *
  * @return array
@@ -107,76 +58,76 @@ function caweb_template_colors() {
 
 	$colors = array(
 		'delta' => array(
-			'highlight' => '#A5BDC5',
-			'primary'   => '#577786',
-			'standout'  => '#46565E',
-			's1'        => '#F5F9FA',
+			'main' => '#577786',
+			'alt'   => '#f5f9fa',
+			'highlight'  => '#a5bdc5',
+			'standout'        => '#46565e',
 		),
 		'eureka' => array(
-			'highlight' => '#D9B295',
-			'primary'   => '#3E4B4D',
-			'standout'  => '#21272A',
-			's1'        => '#F9F8F8',
+			'main' => '#3e4b4d',
+			'alt'   => '#f9f4f0',
+			'highlight'  => '#d9b295',
+			'standout'        => '#21272a',
 		),
 		'mono' => array(
-			'highlight' => '#FFCE2B',
-			'primary'   => '#545351',
-			'standout'  => '#191919',
-			's1'        => '#F4F3EF',
+			'main' => '#545351',
+			'alt'   => '#ededef',
+			'highlight'  => '#ffce2b',
+			'standout'        => '#191919',
 		),
 		'oceanside' => array(
-			'highlight' => '#FDB81E',
-			'primary'   => '#046B99',
-			'standout'  => '#323A45',
-			's1'        => '#E1F2F7',
+			'main' => '#046b99',
+			'alt'   => '#eef8fb',
+			'highlight'  => '#fdb81e',
+			'standout'        => '#323a45',
 		),
 		'orange county' => array(
-			'highlight' => '#FBAD23',
-			'primary'   => '#A15801',
-			'standout'  => '#483723',
-			's1'        => '#F1EDE4',
+			'main' => '#a15801',
+			'alt'   => '#fbf0e7',
+			'highlight'  => '#fbad23',
+			'standout'        => '#483723',
 		),
 		'paso robles' => array(
-			'highlight' => '#FBAD23',
-			'primary'   => '#9A0000',
-			'standout'  => '#313131',
-			's1'        => '#F5F5F5',
+			'main' => '#691808',
+			'alt'   => '#f5f5f5',
+			'highlight'  => '#fbad23',
+			'standout'        => '#313131',
 		),
 		'sacramento' => array(
-			'highlight' => '#7BB0DA',
-			'primary'   => '#153554',
-			'standout'  => '#730000',
-			's1'        => '#E1ECF7',
+			'main' => '#153554',
+			'alt'   => '#e1ecf7',
+			'highlight'  => '#7bb0da',
+			'standout'        => '#730000',
 		),
 		'santa barbara' => array(
-			'highlight' => '#FF9B53',
-			'primary'   => '#60617D',
-			'standout'  => '#664945',
-			's1'        => '#FFEBD7',
+			'main' => '#834b1e',
+			'alt'   => '#f8eee4',
+			'highlight'  => '#ff9b53',
+			'standout'        => '#664945',
 		),
 		'santa cruz' => array(
-			'highlight' => '#F5811B',
-			'primary'   => '#0F4F94',
-			'standout'  => '#2C2C4F',
-			's1'        => '#E1ECF7',
+			'main' => '#0f4f94',
+			'alt'   => '#eff4fa',
+			'highlight'  => '#f5811b',
+			'standout'        => '#2c2c4f',
 		),
 		'shasta' => array(
-			'highlight' => '#FBAD23',
-			'primary'   => '#336C39',
-			'standout'  => '#3C4543',
-			's1'        => '#EFFAF6',
+			'main' => '#336c39',
+			'alt'   => '#e4f1e5',
+			'highlight'  => '#fbad23',
+			'standout'        => '#3c4543',
 		),
 		'sierra' => array(
-			'highlight' => '#FBAD23',
-			'primary'   => '#447766',
-			'standout'  => '#194949',
-			's1'        => '#EFFAF6',
+			'main' => '#476476',
+			'alt'   => '#e8f1ee',
+			'highlight'  => '#fbad23',
+			'standout'        => '#194949',
 		),
 		'trinity' => array(
-			'highlight' => '#C19E73',
-			'primary'   => '#446A7C',
-			'standout'  => '#21272A',
-			's1'        => '#F9F8F8',
+			'main' => '#446a7c',
+			'alt'   => '#eff5f8',
+			'highlight'  => '#c19e73',
+			'standout'        => '#21272a',
 		),
 	);
 
@@ -191,8 +142,6 @@ function caweb_template_colors() {
 function caweb_nav_menu_types() {
 	$menu_types = array(
 		'dropdown'     => 'Drop Down',
-		'flexmega'     => 'Flex Mega Menu',
-		'megadropdown' => 'Mega Drop',
 		'singlelevel'  => 'Single Level',
 	);
 
@@ -420,8 +369,6 @@ function caweb_get_user_color() {
  */
 function caweb_is_divi_used( $wp_classes = array() ) {
 
-	$builder_used = function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
-
 	// Default WordPress theme templates do not use the Divi Builder.
 	if ( is_tag() || is_archive() || is_category() || is_author() ) {
 		return false;
@@ -443,5 +390,6 @@ function caweb_is_divi_used( $wp_classes = array() ) {
 		return false;
 	}
 
-	return $builder_used;
+	// if the builder is used return true.
+	return function_exists( 'et_pb_is_pagebuilder_used' ) && et_pb_is_pagebuilder_used( get_the_ID() );
 }

@@ -48,7 +48,6 @@ add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_templ
  */
 function caweb_body_class( $wp_classes, $extra_classes ) {
 	global $post;
-	$template_version = caweb_template_version();
 	$user_classes     = wp_unslash( get_option( 'caweb_body_classes', '' ) );
 
 	// Add user body class names to extra classes.
@@ -65,16 +64,26 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 
 	/* List of extra classes that need to be added to the body */
 	if ( isset( $post->ID ) ) {
-		$sidebar_enabled = ! is_page();
 
 		$whitelist = array(
-			( caweb_is_divi_used( $wp_classes ) ? 'divi-built' : '' ),
 			( 'on' === get_post_meta( $post->ID, 'ca_custom_post_title_display', true ) ? 'title-displayed' : '' ),
-			( ! caweb_is_divi_used() && is_active_sidebar( 'sidebar-1' ) && $sidebar_enabled ? 'sidebar-displayed' : '' ),
 		);
+
+		/* Add builder classes */
+		if ( caweb_is_divi_used( $wp_classes ) ) {
+			$whitelist[] = 'divi-built';
+		} else{
+			// if using Classic Editor ( tinyMCE not Gutenberg ) add this class.
+			if( is_plugin_active('classic-editor/classic-editor.php') || ! use_block_editor_for_post( $post ) ){
+				$whitelist[] = 'classic-built';
+			}
+
+			// if displaying sidebar not on pages.
+			if( ! is_page() && is_active_sidebar( 'sidebar-1' ) ){
+				$whitelist[] = 'sidebar-displayed';
+			}
+		}
 	}
-	$whitelist[] = sprintf( '%1$s', $template_version );
-	$whitelist[] = get_option( 'ca_sticky_navigation', false ) ? 'sticky_nav' : '';
 
 	// Merge any extra classes to the wp classes.
 	$wp_classes = array_merge( $wp_classes, $extra_classes );

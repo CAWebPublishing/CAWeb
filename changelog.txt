@@ -1,3 +1,18 @@
+CAWeb 1.13.0
+- Removed caweb_search_form action/function
+- All 5.5 assets have been removed
+- Icon menu no longer shows for navigation items
+- Megamenu and Flexmega menu options have been removed
+- State template version has been removed
+- Sticky Nav option has been removed
+- Menu home link option has been removed
+- Show Search on Frontpage has been removed
+- Utility Header Home link option has been removed
+- Social media show in header option has been removed
+- Geo Locator option has been removed
+- Added theme argument to wp_nav_menu filter to prevent duplicate menus from rendering
+- Added samesite, secure, httponly flags to Alerts
+
 CAWeb 1.12.4
 - Resolved issue with Colorscheme option when using Customizer
 - Changed Search Results to Search results in search page template

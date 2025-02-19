@@ -22,7 +22,8 @@ $caweb_keyword      = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_G
 */
 get_header();
 
-do_action( 'caweb_search_form' );
+// Add search form.
+get_template_part( "parts/search" );
 ?>
 
 <!--Search result section-->

@@ -32,7 +32,13 @@ function caweb_alert_cookies() {
 					$cookie = false;
 				}
 
-				setcookie( "caweb-alert-$a", $cookie, 0, '/' );
+				setcookie( "caweb-alert-$a", $cookie, array(
+					'expires' => 0,
+					'path'    => '/',
+					'secure' => is_ssl(),
+					'httponly' => true,
+					'samesite' => 'Lax',
+				) );
 
 			}
 		}
@@ -52,7 +58,7 @@ function caweb_render_alerts() {
 	}
 
 	?>
-	<div id="caweb_alerts">
+	<div id="caweb_alerts" class="alerts">
 	<?php
 	foreach ( $alerts as $a => $alert ) {
 		$cookie  = isset( $_COOKIE[ "caweb-alert-$a" ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ "caweb-alert-$a" ] ) ) : true;

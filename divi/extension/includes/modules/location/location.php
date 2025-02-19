@@ -328,11 +328,6 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$display_icon  = '';
 		$contact_class = '';
 
-		/**
-		 * @todo remove d-flex class name once 5.5 is removed.
-		 */
-		$this->add_classname( 'd-flex' );
-
 		if ( 'on' === $show_icon ) {
 			$display_icon = $this->caweb_get_icon_span( $icon );
 		} else {
