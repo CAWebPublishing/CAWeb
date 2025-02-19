@@ -6414,7 +6414,10 @@ window.addEventListener('load', () => {
     let current = header.previousElementSibling;
     let miscElementHeights = 0;
     while (current) {
-      miscElementHeights += current.clientHeight;
+      // if current is a div, add its height to the miscElementHeights.
+      if ('DIV' === current.tagName) {
+        miscElementHeights += current.clientHeight;
+      }
       current = current.previousElementSibling;
     }
 
@@ -6453,20 +6456,20 @@ window.addEventListener('load', () => {
 /*!***************************************************!*\
   !*** ./src/scripts/components/mobile-controls.js ***!
   \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211402__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211523__) => {
 
 "use strict";
-__nested_webpack_require_211402__.r(__nested_webpack_exports__);
+__nested_webpack_require_211523__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
   const mainHeader = document.querySelector('header');
-  const mobileOverlay = mainHeader.querySelector('.mobile-controlled.overlay');
-  const searchContainer = mainHeader.querySelector('.search-container');
-  const mainNav = mainHeader.querySelector('.navigation');
+  const mobileOverlay = mainHeader?.querySelector('.mobile-controlled.overlay');
+  const searchContainer = mainHeader?.querySelector('.search-container');
+  const mainNav = mainHeader?.querySelector('.navigation');
   const mainNavUl = mainNav?.querySelector('.nav');
-  const toggleMenuOpenButton = mainHeader.querySelector('.mobile-control.ca-gov-icon-menu');
-  const toggleMenuCloseButton = mainHeader.querySelector('.mobile-control.ca-gov-icon-close-mark');
+  const toggleMenuOpenButton = mainHeader?.querySelector('.mobile-control.ca-gov-icon-menu');
+  const toggleMenuCloseButton = mainHeader?.querySelector('.mobile-control.ca-gov-icon-close-mark');
   const mobileCheck = () => {
     if (isDesktopWidth()) {
       /**
@@ -6536,7 +6539,7 @@ window.addEventListener('load', () => {
   });
 
   // Mobile Overlay is being shown
-  mobileOverlay.addEventListener('shown.bs.collapse', () => {
+  mobileOverlay?.addEventListener('shown.bs.collapse', () => {
     toggleMenuCloseButton.focus();
     mainHeader.classList.add('overlay');
     mainNav?.classList.add('visible');
@@ -6545,7 +6548,7 @@ window.addEventListener('load', () => {
   });
 
   // Mobile Overlay is hidden
-  mobileOverlay.addEventListener('hide.bs.collapse', () => {
+  mobileOverlay?.addEventListener('hide.bs.collapse', () => {
     toggleMenuOpenButton.focus();
     mainHeader.classList.remove('overlay');
     document.body.classList.remove('overflow-hidden');
@@ -6562,10 +6565,10 @@ window.addEventListener('load', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215277__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215405__) => {
 
 "use strict";
-__nested_webpack_require_215277__.r(__nested_webpack_exports__);
+__nested_webpack_require_215405__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6621,18 +6624,22 @@ window.addEventListener('load', () => {
 /*!*****************************************************!*\
   !*** ./src/scripts/components/scroll-margin-top.js ***!
   \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217282__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217410__) => {
 
 "use strict";
-__nested_webpack_require_217282__.r(__nested_webpack_exports__);
+__nested_webpack_require_217410__.r(__nested_webpack_exports__);
 /**
  * This script is used to add the scroll-margin-top to each element with an id
  * This is used to ensure that the element is not hidden behind the header
  */
 window.addEventListener('load', () => {
+  let mainHeader = document.querySelector('header');
+  if (!mainHeader) {
+    return;
+  }
+
   // Function to update the scroll-margin-top for each element with an id    
   const updateScrollMarginTop = () => {
-    let mainHeader = document.querySelector('header');
     // for each element with an id we add the scroll-margin-top
     document.querySelectorAll('#page-container [id]').forEach(element => element.style.scrollMarginTop = `${mainHeader.offsetHeight}px`);
   };
@@ -6652,7 +6659,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_218371__(moduleId) {
+/******/ 	function __nested_webpack_require_218535__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6666,7 +6673,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218371__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218535__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6676,7 +6683,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_218371__.r = (exports) => {
+/******/ 		__nested_webpack_require_218535__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6693,7 +6700,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_218371__.r(__nested_webpack_exports__);
+__nested_webpack_require_218535__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6705,7 +6712,7 @@ var __nested_webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./src/styles/colorschemes/pasorobles.scss ***!
   \*************************************************/
-__nested_webpack_require_218371__.r(__nested_webpack_exports__);
+__nested_webpack_require_218535__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6716,13 +6723,13 @@ __nested_webpack_require_218371__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_218371__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218371__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218371__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218371__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218371__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218371__(/*! ./components/header.js */ "./src/scripts/components/header.js");
-/* harmony import */ var _components_scroll_margin_top_js__WEBPACK_IMPORTED_MODULE_5__ = __nested_webpack_require_218371__(/*! ./components/scroll-margin-top.js */ "./src/scripts/components/scroll-margin-top.js");
+__nested_webpack_require_218535__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218535__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218535__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218535__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218535__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218535__(/*! ./components/header.js */ "./src/scripts/components/header.js");
+/* harmony import */ var _components_scroll_margin_top_js__WEBPACK_IMPORTED_MODULE_5__ = __nested_webpack_require_218535__(/*! ./components/scroll-margin-top.js */ "./src/scripts/components/scroll-margin-top.js");
 
 
 
