@@ -21,7 +21,7 @@ if ( have_posts() ) :
 		the_post();
 		?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<a class="thumbnail-link no-underline" href="<?php the_permalink(); ?>">
+				<a class="thumbnail-link text-decoration-none" href="<?php the_permalink(); ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
 						$caweb_thumb_id  = get_post_thumbnail_id( get_the_ID() );

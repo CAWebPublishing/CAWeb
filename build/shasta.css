@@ -17990,7 +17990,7 @@ a:hover, a:focus {
   color: var(--bs-main-darker, #336c39);
 }
 a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 
 /* -----------------------------------------
@@ -18086,7 +18086,7 @@ header.global-header .branding .header-organization-banner {
   padding: 0.5rem 0;
 }
 header.global-header .branding .header-organization-banner a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 header.global-header .branding .header-organization-banner a img {
   max-width: 300px;
@@ -18173,7 +18173,7 @@ footer.global-footer .nav-item a {
 }
 footer.global-footer .nav-item a:hover, footer.global-footer .nav-item a:focus {
   color: var(--bs-gray-800, #4a4958);
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 footer.global-footer .nav-item a[class*=ca-gov-icon-] {
   font-size: calc(1.35rem + 0.1vw);
@@ -18289,6 +18289,7 @@ header.global-header {
   position: sticky;
   background-color: var(--bs-white, #fff);
   z-index: 15;
+  top: 0;
   transition: all 0.3s ease;
   width: 100%;
 }
@@ -18336,7 +18337,7 @@ header.global-header .mobile-control {
   color: var(--bs-main, #336c39);
 }
 header.global-header .mobile-control:focus, header.global-header .mobile-control:focus-visible {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 header.global-header .mobile-control.toggle-menu {
   margin-left: auto;
@@ -18489,7 +18490,7 @@ header.global-header .navigation .container .nav-item a:hover, header.global-hea
   background-color: var(--bs-gray-75, #f3f3f4);
 }
 header.global-header .navigation .container .nav-item a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
 }
 header.global-header .navigation .container .nav-item a.dropdown-toggle::after {
@@ -18588,7 +18589,7 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   opacity: 1;
 }
 .search-container form .search-textfield:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
   box-shadow: none;
 }
@@ -18603,7 +18604,7 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   border-color: var(--bs-gray-600, #72717c);
 }
 .search-container form .search-button:hover, .search-container form .search-button:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   background-color: var(--bs-gray-800, #4a4958);
   border-color: var(--bs-gray-800, #4a4958);
 }
@@ -19072,7 +19073,7 @@ figure.executive-profile.vertical .body {
 }
 .list-navigation li a:focus,
 .side-navigation ul li a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
 }
 .list-navigation li ul,
@@ -19125,7 +19126,7 @@ figure.executive-profile.vertical .body {
   color: var(--bs-main-darker, #336c39);
 }
 .link-grid:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .link-grid::after {
   font-family: CaGov;
@@ -19269,7 +19270,7 @@ figure.executive-profile.vertical .body {
 }
 .service-tiles .more-button a:hover, .service-tiles .more-button a:focus {
   color: #FDB81E;
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .service-tile {
   padding: 0;
@@ -19293,13 +19294,13 @@ figure.executive-profile.vertical .body {
 }
 .service-tiles .service-tile .teaser a:hover, .service-tiles .service-tile .teaser a:focus {
   color: #FDB81E;
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .service-tile .teaser .ca-gov-icon-external-link {
   display: none;
 }
 .service-tiles .service-tile:hover, .service-tiles .service-tile:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .collapse {
   padding: 0;

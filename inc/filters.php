@@ -49,7 +49,7 @@ add_filter( 'tribe_default_events_template_classes', 'caweb_default_events_templ
 function caweb_body_class( $wp_classes, $extra_classes ) {
 	global $post;
 	$user_classes     = wp_unslash( get_option( 'caweb_body_classes', '' ) );
-
+	$whitelist		= array();
 	// Add user body class names to extra classes.
 	$extra_classes = array_merge( $extra_classes, explode( ' ', $user_classes ) );
 
