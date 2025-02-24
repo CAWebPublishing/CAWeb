@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
             more_buttons.each(function(i) {
              m =  $(more_buttons[i]); 
 
-             m.addClass('no-underline');
+             m.addClass('text-decoration-none');
             });
          });      
     }
