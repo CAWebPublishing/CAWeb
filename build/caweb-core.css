@@ -2422,10 +2422,6 @@ body.divi-built .page-date {
 body.divi-built article article.et_pb_post {
   margin-bottom: 30px;
 }
-body.divi-built #main-content .container:before {
-  height: 0;
-  width: 0;
-}
 body.divi-built select[data-class-icon] {
   font-size: 20px;
   font-family: "CaGov";
@@ -2781,6 +2777,10 @@ body.classic-built:not(.page-template-searchpage) #main-content {
   body.classic-built:not(.page-template-searchpage) #main-content {
     max-width: 1320px;
   }
+}
+
+#main-content .container:before {
+  background: transparent;
 }
 
 body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group {

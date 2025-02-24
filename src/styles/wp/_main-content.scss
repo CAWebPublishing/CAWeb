@@ -20,8 +20,14 @@ body.classic-built:not(.page-template-searchpage){
 	}
 }
 
+#main-content .container:before {
+	background: transparent;
+}
+
 // if page was built with Gutenberg WordPress Editor
 body:not(.page-template-searchpage){
+	
+
 	#main-content .entry-content {
 		// if row is after entry-content
 		& > .wp-block-group{

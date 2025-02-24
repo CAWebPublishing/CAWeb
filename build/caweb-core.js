@@ -324,7 +324,7 @@ jQuery(document).ready(function ($) {
   /* 
   Retrieve all Divi Post Slider Modules
   */
-  var slider_modules = $('div').filter(function () {
+  let slider_modules = $('div').filter(function () {
     return this.className.match(/\bet_pb_slider\b|\bet_pb_fullwidth_slider\d\b/);
   });
 
@@ -332,7 +332,7 @@ jQuery(document).ready(function ($) {
   if (slider_modules.length) {
     slider_modules.each(function (index, slider) {
       // Grab all slides in slider
-      var slides = $(slider).find('.et_pb_slide');
+      let slides = $(slider).find('.et_pb_slide');
       slides.each(function (i, slide) {
         // Grab the slide title and add the text-decoration-none class
         title = $(slide).find('.et_pb_slide_title a');
@@ -340,11 +340,11 @@ jQuery(document).ready(function ($) {
       });
 
       // Grab Slider Arrows
-      var arrows = $(slider).find('.et-pb-slider-arrows');
+      let arrows = $(slider).find('.et-pb-slider-arrows');
       arrows.each(function (a, arrow) {
         // Grab each arrow control
-        var prev_button = $(arrow).find('a.et-pb-arrow-prev');
-        var next_button = $(arrow).find('a.et-pb-arrow-next');
+        let prev_button = $(arrow).find('a.et-pb-arrow-prev');
+        let next_button = $(arrow).find('a.et-pb-arrow-next');
         prev_button.addClass('text-decoration-none');
         prev_button.attr('title', 'Previous Arrow. To activate, press Enter key.');
         prev_button.find('span').addClass('sr-only');
@@ -354,7 +354,7 @@ jQuery(document).ready(function ($) {
       });
 
       // Grab Slider Controllers
-      var controllers = $(slider).find('.et-pb-controllers a');
+      let controllers = $(slider).find('.et-pb-controllers a');
       controllers.each(function (i, controller) {
         controller.title = `Slide ${controller.innerText} of ${controllers.length}. To activate, press Enter key.`;
       });
@@ -406,32 +406,43 @@ jQuery(document).ready(function ($) {
   Divi Toggle Module Accessibility
   Retrieve all Divi Toggle Modules
     */
-  var toggle_modules = $('div.et_pb_toggle');
+  let toggle_modules = $('div.et_pb_toggle');
 
   // Run only if there is a Toggle Module on the current page
   if (toggle_modules.length) {
     // Callback function to execute when accordion is interacted with
-    const callback = (mutationList, observer) => {
-      for (const mutation of mutationList) {
+    const callback = (toggle, observer) => {
+      for (const mutation of toggle) {
         if (mutation.type === "attributes" && mutation.attributeName === "class") {
           // Update the aria-expanded attribute
-          var expanded = $(mutation.target).hasClass('et_pb_toggle_open') ? 'true' : 'false';
-          console.log(mutation.target.classList);
+          let expanded = $(mutation.target).hasClass('et_pb_toggle_open') ? 'true' : 'false';
           $(mutation.target).attr('aria-expanded', expanded);
         }
       }
     };
-    toggle_modules.each(function (index, element) {
-      var expanded = $(element).hasClass('et_pb_toggle_open') ? 'true' : 'false';
-      $(element).attr('tabindex', 0);
-      $(element).attr('role', 'button');
-      $(element).attr('aria-expanded', expanded);
+    toggle_modules.each(function (index, toggle) {
+      let title = $(toggle).find('.et_pb_toggle_title');
+      let expanded = $(toggle).hasClass('et_pb_toggle_open') ? 'true' : 'false';
+      $(toggle).attr('tabindex', 0);
+      $(toggle).attr('role', 'button');
+      $(toggle).attr('aria-expanded', expanded);
+      toggle.addEventListener('keydown', function (e) {
+        let toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
 
+        if (toggleKeys.includes(e.which)) {
+          $(title).click();
+        }
+
+        // Prevents spacebar from scrolling page to the bottom
+        if (32 === e.which) {
+          e.preventDefault();
+        }
+      });
       // Create an observer instance linked to the callback function
       let observer = new MutationObserver(callback);
 
       // Start observing the target node for configured mutations
-      observer.observe(element, {
+      observer.observe(toggle, {
         attributes: true
       });
     });
