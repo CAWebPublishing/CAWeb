@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@caweb/cli": "^1.9.7",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3"
@@ -17,8 +18,5 @@
     "caweb": "caweb",
     "build": "caweb build --mode production && caweb build",
     "build:dev": "caweb build"
-  },
-  "dependencies": {
-    "@caweb/cli": "^1.9.3"
   }
 }
