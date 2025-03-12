@@ -1,0 +1,26 @@
+// Accessibility Fixes
+
+// Divi slider arrows dont show when using keyboard navigation. This will make the arrows visible when focused.
+// @see https://cawebpublishing.visualstudio.com/CAWeb/_workitems/edit/2725
+.et_pb_slider .et-pb-arrow-prev:focus{
+    left: 22px;
+    opacity: 1;
+}
+.et_pb_slider .et-pb-arrow-next:focus{
+    right: 22px;
+    opacity: 1;
+}
+
+// Divi slider dots need to be a minimum of 24px 
+// @see https://cawebpublishing.visualstudio.com/CAWeb/_workitems/edit/2725
+.et-pb-controllers a {
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+}
+
+@media (max-width: 767px) {
+    .et-pb-controllers {
+        bottom: 10%;
+    }
+}

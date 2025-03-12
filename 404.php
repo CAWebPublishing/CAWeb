@@ -19,9 +19,11 @@ get_header();
 ?>
 <article id="post-0" <?php post_class( 'not_found' ); ?>>
 	<div class="entry-content">
-		<!-- Page Title-->
-		<h1>Page Not Found</h1>
-		<div class="description">The page you requested was not found.</div>
+		<div class="container">
+			<!-- Page Title-->
+			<h1>Page Not Found</h1>
+			<div class="description">The page you requested was not found.</div>
+		</div>
 	</div>
 </article>
 <?php

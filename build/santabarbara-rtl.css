@@ -6908,6 +6908,10 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
+.form-floating > .form-control:not(:-moz-placeholder), .form-floating > .form-control-plaintext:not(:-moz-placeholder) {
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+}
 .form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown),
 .form-floating > .form-control-plaintext:focus,
 .form-floating > .form-control-plaintext:not(:placeholder-shown) {
@@ -6927,6 +6931,10 @@ textarea.form-control-lg {
   color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
+.form-floating > .form-control:not(:-moz-placeholder) ~ label {
+  color: rgba(var(--bs-body-color-rgb), 0.65);
+  transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
+}
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-control-plaintext ~ label,
@@ -6935,6 +6943,15 @@ textarea.form-control-lg {
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label::after {
+  position: absolute;
+  inset: 1rem 0.375rem;
+  z-index: -1;
+  height: 1.5em;
+  content: "";
+  background-color: var(--bs-body-bg);
+  border-radius: var(--bs-border-radius);
+}
+.form-floating > .form-control:not(:-moz-placeholder) ~ label::after {
   position: absolute;
   inset: 1rem 0.375rem;
   z-index: -1;
@@ -17964,7 +17981,7 @@ a:hover, a:focus {
   color: var(--bs-main-darker, #834b1e);
 }
 a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 
 /* -----------------------------------------
@@ -18060,7 +18077,7 @@ header.global-header .branding .header-organization-banner {
   padding: 0.5rem 0;
 }
 header.global-header .branding .header-organization-banner a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 header.global-header .branding .header-organization-banner a img {
   max-width: 300px;
@@ -18147,7 +18164,7 @@ footer.global-footer .nav-item a {
 }
 footer.global-footer .nav-item a:hover, footer.global-footer .nav-item a:focus {
   color: var(--bs-gray-800, #4a4958);
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 footer.global-footer .nav-item a[class*=ca-gov-icon-] {
   font-size: calc(1.35rem + 0.1vw);
@@ -18260,9 +18277,10 @@ footer.keywords ul li {
    /src/styles/components/header.scss
 ----------------------------------------- */
 header.global-header {
-  position: sticky;
+  position: fixed;
   background-color: var(--bs-white, #fff);
   z-index: 15;
+  top: 0;
   transition: all 0.3s ease;
   width: 100%;
 }
@@ -18289,16 +18307,16 @@ header.global-header #skip-to-content a:focus {
   height: 27px;
 }
 header.global-header::after {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.48);
+  /*content: "";
+  background-color: rgba(0,0,0,.48);
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: calc(100vh + 100px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;*/
 }
 header.global-header.overlay::after {
   opacity: 1;
@@ -18310,7 +18328,7 @@ header.global-header .mobile-control {
   color: var(--bs-main, #834b1e);
 }
 header.global-header .mobile-control:focus, header.global-header .mobile-control:focus-visible {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 header.global-header .mobile-control.toggle-menu {
   margin-right: auto;
@@ -18463,7 +18481,7 @@ header.global-header .navigation .container .nav-item a:hover, header.global-hea
   background-color: var(--bs-gray-75, #f3f3f4);
 }
 header.global-header .navigation .container .nav-item a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
 }
 header.global-header .navigation .container .nav-item a.dropdown-toggle::after {
@@ -18537,7 +18555,6 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
 
 /* -----------------------------------------
    SEARCH 
-   /src/styles/components/structural/search.scss
 ----------------------------------------- */
 .search-container {
   align-self: center;
@@ -18562,7 +18579,7 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   opacity: 1;
 }
 .search-container form .search-textfield:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
   box-shadow: none;
 }
@@ -18577,9 +18594,15 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   border-color: var(--bs-gray-600, #72717c);
 }
 .search-container form .search-button:hover, .search-container form .search-button:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   background-color: var(--bs-gray-800, #4a4958);
   border-color: var(--bs-gray-800, #4a4958);
+}
+
+body.page-template-searchpage .search-container {
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 /* -----------------------------------------
@@ -19046,7 +19069,7 @@ figure.executive-profile.vertical .body {
 }
 .list-navigation li a:focus,
 .side-navigation ul li a:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
   outline-offset: -2px;
 }
 .list-navigation li ul,
@@ -19099,7 +19122,7 @@ figure.executive-profile.vertical .body {
   color: var(--bs-main-darker, #834b1e);
 }
 .link-grid:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .link-grid::after {
   font-family: CaGov;
@@ -19243,7 +19266,7 @@ figure.executive-profile.vertical .body {
 }
 .service-tiles .more-button a:hover, .service-tiles .more-button a:focus {
   color: #FDB81E;
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .service-tile {
   padding: 0;
@@ -19267,13 +19290,13 @@ figure.executive-profile.vertical .body {
 }
 .service-tiles .service-tile .teaser a:hover, .service-tiles .service-tile .teaser a:focus {
   color: #FDB81E;
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .service-tile .teaser .ca-gov-icon-external-link {
   display: none;
 }
 .service-tiles .service-tile:hover, .service-tiles .service-tile:focus {
-  outline: solid 2px #2ea3f2 !important;
+  outline: solid 2px #0D81CE !important;
 }
 .service-tiles .collapse {
   padding: 0;

@@ -6371,7 +6371,7 @@ __nested_webpack_require_208248__.r(__nested_webpack_exports__);
 //@ts-check
 
 /* EXTERNAL LINK ICON */
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   const ext = '<span class="ca-gov-icon-external-link" aria-hidden="true"></span><span class="sr-only">opens in a new window</span>';
 
   // Add any exceptions to not render here
@@ -6394,23 +6394,34 @@ window.addEventListener('load', () => {
 /*!******************************************!*\
   !*** ./src/scripts/components/header.js ***!
   \******************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209354__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209366__) => {
 
 "use strict";
-__nested_webpack_require_209354__.r(__nested_webpack_exports__);
+__nested_webpack_require_209366__.r(__nested_webpack_exports__);
 //@ts-check
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
+  let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
   const header = document.querySelector('header');
-  const pageContainer = document.querySelector('#page-container');
+  const pageContainer = document.getElementById('page-container');
   const alerts = document.querySelector('.alerts');
   const utilityHeader = document.querySelector('.utility-header');
-  const resetPosition = () => {
-    if (!header) {
-      return;
-    }
+
+  // scroll to target
+  if (location_hash) {
+    let target = document.querySelector(location_hash);
+    setTimeout(() => {
+      target?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 1000);
+  }
+  if (!header) {
+    return;
+  }
+  const compactHeader = () => {
     let scrollHeights = 0;
 
-    // lets collect the scroll height of any elements above the header.
+    // lets collect the height of any elements above the header.
     let current = header.previousElementSibling;
     let miscElementHeights = 0;
     while (current) {
@@ -6425,29 +6436,40 @@ window.addEventListener('load', () => {
     if (document.body.scrollTop >= header.offsetHeight || document.documentElement.scrollTop >= header.offsetHeight) {
       // lets add the scroll heights of any alerts
       if (alerts) {
-        scrollHeights += alerts.scrollHeight;
+        scrollHeights += alerts.clientHeight;
       }
 
       // lets add the scroll heights of the utility header
       if (utilityHeader) {
-        scrollHeights += utilityHeader.scrollHeight;
+        scrollHeights += utilityHeader.clientHeight;
       }
 
       // move the header up to the scroll height, minus any elements above the header
       header.style.top = `-${scrollHeights - miscElementHeights}px`;
+
+      // we add the header height + misc element heights to the page container as margin-top, minus the scroll heights since those get hidden
+      if (pageContainer) {
+        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
+      }
     } else {
-      header.style.top = `${miscElementHeights}px`; // reset header top position
+      // reset header to initial position
+      header.style.top = `${miscElementHeights}px`;
+      if (pageContainer) {
+        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights}px`;
+      }
     }
 
-    // we add the misc element heights to the page container as margin-top
-    pageContainer?.setAttribute('style', `margin-top: ${miscElementHeights}px;`);
+    // for each element with an id we add the scroll-margin-top
+    document.querySelectorAll('#page-container [id]').forEach(element => {
+      if (element instanceof HTMLElement) {
+        element.style.scrollMarginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
+      }
+    });
   };
 
   // reset position on scroll
-  window.addEventListener('scroll', resetPosition);
-
-  // reset position on load
-  resetPosition();
+  window.addEventListener('scroll', compactHeader);
+  compactHeader();
 });
 
 /***/ }),
@@ -6456,11 +6478,11 @@ window.addEventListener('load', () => {
 /*!***************************************************!*\
   !*** ./src/scripts/components/mobile-controls.js ***!
   \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211523__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212352__) => {
 
 "use strict";
-__nested_webpack_require_211523__.r(__nested_webpack_exports__);
-window.addEventListener('load', () => {
+__nested_webpack_require_212352__.r(__nested_webpack_exports__);
+window.addEventListener('DOMContentLoaded', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
   const mainHeader = document.querySelector('header');
@@ -6565,12 +6587,12 @@ window.addEventListener('load', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215405__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_216246__) => {
 
 "use strict";
-__nested_webpack_require_215405__.r(__nested_webpack_exports__);
+__nested_webpack_require_216246__.r(__nested_webpack_exports__);
 //@ts-check
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -6618,39 +6640,6 @@ window.addEventListener('load', () => {
   });
 });
 
-/***/ }),
-
-/***/ "./src/scripts/components/scroll-margin-top.js":
-/*!*****************************************************!*\
-  !*** ./src/scripts/components/scroll-margin-top.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217410__) => {
-
-"use strict";
-__nested_webpack_require_217410__.r(__nested_webpack_exports__);
-/**
- * This script is used to add the scroll-margin-top to each element with an id
- * This is used to ensure that the element is not hidden behind the header
- */
-window.addEventListener('load', () => {
-  let mainHeader = document.querySelector('header');
-  if (!mainHeader) {
-    return;
-  }
-
-  // Function to update the scroll-margin-top for each element with an id    
-  const updateScrollMarginTop = () => {
-    // for each element with an id we add the scroll-margin-top
-    document.querySelectorAll('#page-container [id]').forEach(element => element.style.scrollMarginTop = `${mainHeader.offsetHeight}px`);
-  };
-
-  // on resize function (recalculate margin-top)
-  window.addEventListener('resize', updateScrollMarginTop);
-
-  // on load function (recalculate margin-top)
-  updateScrollMarginTop();
-});
-
 /***/ })
 
 /******/ 	});
@@ -6659,7 +6648,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_218535__(moduleId) {
+/******/ 	function __nested_webpack_require_218184__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6673,7 +6662,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218535__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218184__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6683,7 +6672,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_218535__.r = (exports) => {
+/******/ 		__nested_webpack_require_218184__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6700,7 +6689,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_218535__.r(__nested_webpack_exports__);
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6712,7 +6701,7 @@ var __nested_webpack_exports__ = {};
 /*!*********************************************!*\
   !*** ./src/styles/colorschemes/sierra.scss ***!
   \*********************************************/
-__nested_webpack_require_218535__.r(__nested_webpack_exports__);
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6723,14 +6712,12 @@ __nested_webpack_require_218535__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_218535__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218535__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218535__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218535__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218535__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218535__(/*! ./components/header.js */ "./src/scripts/components/header.js");
-/* harmony import */ var _components_scroll_margin_top_js__WEBPACK_IMPORTED_MODULE_5__ = __nested_webpack_require_218535__(/*! ./components/scroll-margin-top.js */ "./src/scripts/components/scroll-margin-top.js");
-
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218184__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218184__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218184__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218184__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218184__(/*! ./components/header.js */ "./src/scripts/components/header.js");
 
 
 

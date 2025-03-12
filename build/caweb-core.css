@@ -2354,7 +2354,6 @@ body.divi-built {
   * Divi Fullwidth Menu Module Rows
   */
   /* Use the CAWeb Logo for all Custom Modules and Visual Builder Modules. */
-  /* Apply focus outline */
   /* Remove the State Template background image from Divi Button */
   /* Remove the State Template background image from Person Module Social Links */
 }
@@ -2464,9 +2463,6 @@ body.divi-built li[class^=et_fb_profile_banner]::before {
   font-family: "CaGov" !important;
   content: "줋" !important;
 }
-body.divi-built .et_pb_toggle.et_pb_accordion_item:focus {
-  outline: #2ea3f2 solid 2px !important;
-}
 body.divi-built .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
@@ -2486,14 +2482,32 @@ body.divi-built .et-learn-more h3.heading-more {
 body.divi-built .et_pb_team_member .et_pb_team_member_description .et_pb_member_social_links li a {
   background-image: none !important;
 }
+body.divi-built .et_pb_slider .et-pb-arrow-prev:focus {
+  left: 22px;
+  opacity: 1;
+}
+body.divi-built .et_pb_slider .et-pb-arrow-next:focus {
+  right: 22px;
+  opacity: 1;
+}
+body.divi-built .et-pb-controllers a {
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+}
+@media (max-width: 767px) {
+  body.divi-built .et-pb-controllers {
+    bottom: 10%;
+  }
+}
 body.divi-built .et_pb_module.et_pb_tabs .et_pb_tabs_controls li {
   margin-right: 2px;
 }
 body.divi-built .et_pb_text ol, body.divi-built .et_pb_text ul {
   padding-bottom: 0;
 }
-body.divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
-  outline: #2ea3f2 solid 2px !important;
+body.divi-built .et_pb_module.et_pb_toggle.et_pb_accordion_item:focus, body.divi-built .et_pb_module.et_pb_toggle.et_pb_toggle_item:focus {
+  outline: #0D81CE solid 2px !important;
 }
 body.divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
   font-family: "CaGov" !important;
@@ -2510,9 +2524,6 @@ body.divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
 }
 body.page-template-searchpage #main-content .container:before {
   background: transparent;
-}
-body.page-template-searchpage #main-content .search-container {
-  width: 100%;
 }
 body.page-template-searchpage .gsc-cursor-page:focus {
   outline: solid 2px #2ea3f2;
@@ -2765,36 +2776,45 @@ body.classic-built:not(.page-template-searchpage) #main-content {
   }
 }
 
+#main-content .container:before {
+  background: transparent;
+}
+
 body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group {
   max-width: 100%;
   margin-bottom: 1.5rem;
 }
 @media (min-width: 576px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 540px;
     margin: 0 auto;
   }
 }
 @media (min-width: 768px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 720px;
     margin: 0 auto;
   }
 }
 @media (min-width: 992px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 960px;
     margin: 0 auto;
   }
 }
 @media (min-width: 1200px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 1140px;
     margin: 0 auto;
   }
 }
 @media (min-width: 1400px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 1320px;
     margin: 0 auto;
   }

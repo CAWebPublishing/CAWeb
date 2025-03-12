@@ -20,8 +20,14 @@ body.classic-built:not(.page-template-searchpage){
 	}
 }
 
+#main-content .container:before {
+	background: transparent;
+}
+
 // if page was built with Gutenberg WordPress Editor
 body:not(.page-template-searchpage){
+	
+
 	#main-content .entry-content {
 		// if row is after entry-content
 		& > .wp-block-group{
@@ -32,6 +38,7 @@ body:not(.page-template-searchpage){
 				@media (min-width: #{$name}px){
 					// if row has columns
 					& > .wp-block-columns{
+						width: 100%;
 						max-width: #{$value}px;
 						margin: 0 auto;
 					}

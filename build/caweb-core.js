@@ -117,8 +117,8 @@ jQuery(document).ready(function ($) {
   // Run only if there is a Button Module on the current page
   if (button_modules.length) {
     button_modules.each(function (index, element) {
-      // Add no-underline to each button module
-      $(element).addClass('no-underline');
+      // Add text-decoration-none to each button module
+      $(element).addClass('text-decoration-none');
 
       // Divi has removed et_pb_custom_button_icon class from buttons.
       // If Button is using a data-icon add the missing class.
@@ -176,7 +176,7 @@ jQuery(document).ready(function ($) {
       more_buttons = $(element).find('.et_pb_more_button');
       more_buttons.each(function (i) {
         m = $(more_buttons[i]);
-        m.addClass('no-underline');
+        m.addClass('text-decoration-none');
       });
     });
   }
@@ -229,7 +229,14 @@ __webpack_require__(/*! ./person */ "./src/scripts/a11y/divi/person.js");
 __webpack_require__(/*! ./search */ "./src/scripts/a11y/divi/search.js");
 __webpack_require__(/*! ./slider */ "./src/scripts/a11y/divi/slider.js");
 __webpack_require__(/*! ./tab */ "./src/scripts/a11y/divi/tab.js");
+__webpack_require__(/*! ./toggle */ "./src/scripts/a11y/divi/toggle.js");
 __webpack_require__(/*! ./video */ "./src/scripts/a11y/divi/video.js");
+
+// This prevents Divi from anchor positioning when smooth scrolling
+window.et_pb_smooth_scroll = () => {};
+
+// this prevents Divi from adding classes to navigation.
+window.et_pb_toggle_nav_menu = () => {};
 
 /***/ }),
 
@@ -317,39 +324,39 @@ jQuery(document).ready(function ($) {
   /* 
   Retrieve all Divi Post Slider Modules
   */
-  var slider_modules = $('div').filter(function () {
+  let slider_modules = $('div').filter(function () {
     return this.className.match(/\bet_pb_slider\b|\bet_pb_fullwidth_slider\d\b/);
   });
 
   // Run only if there is a Slider Module on the current page
   if (slider_modules.length) {
-    slider_modules.each(function (index, element) {
+    slider_modules.each(function (index, slider) {
       // Grab all slides in slider
-      var slide_modules = $(element).find('.et_pb_slide');
-      slide_modules.each(function (i, s) {
-        // Grab the slide title and add the no-underline class
-        title = $(s).find('.et_pb_slide_title a');
-        title.addClass('no-underline');
+      let slides = $(slider).find('.et_pb_slide');
+      slides.each(function (i, slide) {
+        // Grab the slide title and add the text-decoration-none class
+        title = $(slide).find('.et_pb_slide_title a');
+        title.addClass('text-decoration-none');
       });
 
       // Grab Slider Arrows
-      var arrows = $(element).find('.et-pb-slider-arrows');
+      let arrows = $(slider).find('.et-pb-slider-arrows');
       arrows.each(function (a, arrow) {
         // Grab each arrow control
-        var prev_button = $(arrow).find('a.et-pb-arrow-prev');
-        var next_button = $(arrow).find('a.et-pb-arrow-next');
-        prev_button.addClass('no-underline');
-        prev_button.attr('title', 'Previous Arrow');
+        let prev_button = $(arrow).find('a.et-pb-arrow-prev');
+        let next_button = $(arrow).find('a.et-pb-arrow-next');
+        prev_button.addClass('text-decoration-none');
+        prev_button.attr('title', 'Previous Arrow. To activate, press Enter key.');
         prev_button.find('span').addClass('sr-only');
-        next_button.addClass('no-underline');
-        next_button.attr('title', 'Next Arrow');
+        next_button.addClass('text-decoration-none');
+        next_button.attr('title', 'Next Arrow. To activate, press Enter key.');
         next_button.find('span').addClass('sr-only');
       });
 
       // Grab Slider Controllers
-      var controller = $(element).find('.et-pb-controllers a');
-      controller.each(function (i, c) {
-        $(c).val('Slide ' + $(c).val());
+      let controllers = $(slider).find('.et-pb-controllers a');
+      controllers.each(function (i, controller) {
+        controller.title = `Slide ${controller.innerText} of ${controllers.length}. To activate, press Enter key.`;
       });
     });
   }
@@ -383,6 +390,62 @@ jQuery(document).ready(function ($) {
         $(tab_list).attr('role', 'tablist');
       });
     }, 100);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/scripts/a11y/divi/toggle.js":
+/*!*****************************************!*\
+  !*** ./src/scripts/a11y/divi/toggle.js ***!
+  \*****************************************/
+/***/ (() => {
+
+jQuery(document).ready(function ($) {
+  /*
+  Divi Toggle Module Accessibility
+  Retrieve all Divi Toggle Modules
+    */
+  let toggle_modules = $('div.et_pb_toggle');
+
+  // Run only if there is a Toggle Module on the current page
+  if (toggle_modules.length) {
+    // Callback function to execute when accordion is interacted with
+    const callback = (toggle, observer) => {
+      for (const mutation of toggle) {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          // Update the aria-expanded attribute
+          let expanded = $(mutation.target).hasClass('et_pb_toggle_open') ? 'true' : 'false';
+          $(mutation.target).attr('aria-expanded', expanded);
+        }
+      }
+    };
+    toggle_modules.each(function (index, toggle) {
+      let title = $(toggle).find('.et_pb_toggle_title');
+      let expanded = $(toggle).hasClass('et_pb_toggle_open') ? 'true' : 'false';
+      $(toggle).attr('tabindex', 0);
+      $(toggle).attr('role', 'button');
+      $(toggle).attr('aria-expanded', expanded);
+      toggle.addEventListener('keydown', function (e) {
+        let toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
+
+        if (toggleKeys.includes(e.which)) {
+          $(title).click();
+        }
+
+        // Prevents spacebar from scrolling page to the bottom
+        if (32 === e.which) {
+          e.preventDefault();
+        }
+      });
+      // Create an observer instance linked to the callback function
+      let observer = new MutationObserver(callback);
+
+      // Start observing the target node for configured mutations
+      observer.observe(toggle, {
+        attributes: true
+      });
+    });
   }
 });
 
@@ -428,10 +491,10 @@ jQuery(document).ready(function ($) {
       slides.each(function (i, s) {
         play_button = $(s).find('.et_pb_video_play');
         carousel_play = $(element).find('.et_pb_carousel_item.position_' + (i + 1)).find('.et_pb_video_play');
-        $(play_button).addClass('no-underline');
+        $(play_button).addClass('text-decoration-none');
         $(play_button).attr('title', 'Play Video ' + (i + 1));
         if (carousel_play.length) {
-          $(carousel_play).addClass('no-underline');
+          $(carousel_play).addClass('text-decoration-none');
           $(carousel_play).attr('title', 'Play Video ' + (i + 1));
         }
       });
@@ -1182,25 +1245,6 @@ jQuery(document).ready(function ($) {
   if ($('header.fixed + #signup-content').length) {
     $('header.fixed + #signup-content').css('padding-top', $('header.fixed').outerHeight());
   }
-
-  // This fixes anchor position when smooth scrolling
-  window.et_pb_smooth_scroll = function ($target, $top_section, speed, easing) {
-    var $window_width = $(window).width();
-    $("header").hasClass("fixed") && $window_width > 768 ? $menu_offset = $("#header").outerHeight() - 1 : $menu_offset = -1, $("#wpadminbar").length && $window_width > 600 && ($menu_offset += $("#wpadminbar").outerHeight()), $scroll_position = $top_section ? 0 : $target.offset().top - $menu_offset, void 0 === easing && (easing = "swing");
-    var $skip_to_content = "skip-to-content" === $($target).attr('id');
-    if ($scroll_position < 220 && !$skip_to_content) {
-      // scrollDistanceToMakeCompactHeader from cagov.core.js
-      $scroll_position -= 36; // Height difference between normal and compact header
-    } else if ($skip_to_content) {
-      $scroll_position = 0;
-    }
-    $("html, body").animate({
-      scrollTop: $scroll_position
-    }, speed, easing);
-  };
-
-  // this prevents Divi from adding classes to navigation.
-  window.et_pb_toggle_nav_menu = () => {};
 });
 })();
 

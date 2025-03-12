@@ -35,11 +35,11 @@ jQuery(document).ready(function($) {
                 play_button = $(s).find('.et_pb_video_play');
                 carousel_play = $(element).find('.et_pb_carousel_item.position_' + ( i + 1 ) ).find('.et_pb_video_play');
                 
-                $(play_button).addClass('no-underline');
+                $(play_button).addClass('text-decoration-none');
                 $(play_button).attr('title', 'Play Video ' + ( i + 1 ) );
 
                 if( carousel_play.length ){
-                    $(carousel_play).addClass('no-underline');
+                    $(carousel_play).addClass('text-decoration-none');
                     $(carousel_play).attr('title', 'Play Video ' + ( i + 1 ) );
                 }
             })

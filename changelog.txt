@@ -1,4 +1,6 @@
-CAWeb 1.13.0a
+CAWeb 1.13.1
+- Added missing Divi accordion/toggle a11y scripts back
+- Fixed issue with 404 not adhering to margin constraints
 - Updated npm packages
 
 CAWeb 1.13.0
