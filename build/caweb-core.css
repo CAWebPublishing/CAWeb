@@ -2525,9 +2525,6 @@ body.divi-built .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
 body.page-template-searchpage #main-content .container:before {
   background: transparent;
 }
-body.page-template-searchpage #main-content .search-container {
-  width: 100%;
-}
 body.page-template-searchpage .gsc-cursor-page:focus {
   outline: solid 2px #2ea3f2;
 }
@@ -2789,30 +2786,35 @@ body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-gro
 }
 @media (min-width: 576px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 540px;
     margin: 0 auto;
   }
 }
 @media (min-width: 768px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 720px;
     margin: 0 auto;
   }
 }
 @media (min-width: 992px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 960px;
     margin: 0 auto;
   }
 }
 @media (min-width: 1200px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 1140px;
     margin: 0 auto;
   }
 }
 @media (min-width: 1400px) {
   body:not(.page-template-searchpage) #main-content .entry-content > .wp-block-group > .wp-block-columns {
+    width: 100%;
     max-width: 1320px;
     margin: 0 auto;
   }

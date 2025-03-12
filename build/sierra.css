@@ -6910,6 +6910,10 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
+.form-floating > .form-control:not(:-moz-placeholder), .form-floating > .form-control-plaintext:not(:-moz-placeholder) {
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+}
 .form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown),
 .form-floating > .form-control-plaintext:focus,
 .form-floating > .form-control-plaintext:not(:placeholder-shown) {
@@ -6929,6 +6933,10 @@ textarea.form-control-lg {
   color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
+.form-floating > .form-control:not(:-moz-placeholder) ~ label {
+  color: rgba(var(--bs-body-color-rgb), 0.65);
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-control-plaintext ~ label,
@@ -6937,6 +6945,15 @@ textarea.form-control-lg {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label::after {
+  position: absolute;
+  inset: 1rem 0.375rem;
+  z-index: -1;
+  height: 1.5em;
+  content: "";
+  background-color: var(--bs-body-bg);
+  border-radius: var(--bs-border-radius);
+}
+.form-floating > .form-control:not(:-moz-placeholder) ~ label::after {
   position: absolute;
   inset: 1rem 0.375rem;
   z-index: -1;
@@ -18286,7 +18303,7 @@ footer.keywords ul li {
    /src/styles/components/header.scss
 ----------------------------------------- */
 header.global-header {
-  position: sticky;
+  position: fixed;
   background-color: var(--bs-white, #fff);
   z-index: 15;
   top: 0;
@@ -18316,8 +18333,8 @@ header.global-header #skip-to-content a:focus {
   height: 27px;
 }
 header.global-header::after {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.48);
+  /*content: "";
+  background-color: rgba(0,0,0,.48);
   position: absolute;
   top: 0;
   left: 0;
@@ -18325,7 +18342,7 @@ header.global-header::after {
   height: calc(100vh + 100px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;*/
 }
 header.global-header.overlay::after {
   opacity: 1;
@@ -18564,7 +18581,6 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
 
 /* -----------------------------------------
    SEARCH 
-   /src/styles/components/structural/search.scss
 ----------------------------------------- */
 .search-container {
   align-self: center;
@@ -18607,6 +18623,12 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   outline: solid 2px #0D81CE !important;
   background-color: var(--bs-gray-800, #4a4958);
   border-color: var(--bs-gray-800, #4a4958);
+}
+
+body.page-template-searchpage .search-container {
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 /* -----------------------------------------

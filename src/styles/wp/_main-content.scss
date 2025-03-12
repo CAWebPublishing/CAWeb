@@ -38,6 +38,7 @@ body:not(.page-template-searchpage){
 				@media (min-width: #{$name}px){
 					// if row has columns
 					& > .wp-block-columns{
+						width: 100%;
 						max-width: #{$value}px;
 						margin: 0 auto;
 					}

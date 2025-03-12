@@ -6402,16 +6402,26 @@ __nested_webpack_require_209366__.r(__nested_webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
   const header = document.querySelector('header');
-  const pageContainer = document.querySelector('#page-container');
+  const pageContainer = document.getElementById('page-container');
   const alerts = document.querySelector('.alerts');
   const utilityHeader = document.querySelector('.utility-header');
+
+  // scroll to target
+  if (location_hash) {
+    let target = document.querySelector(location_hash);
+    setTimeout(() => {
+      target?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 1000);
+  }
+  if (!header) {
+    return;
+  }
   const compactHeader = () => {
-    if (!header) {
-      return;
-    }
     let scrollHeights = 0;
 
-    // lets collect the scroll height of any elements above the header.
+    // lets collect the height of any elements above the header.
     let current = header.previousElementSibling;
     let miscElementHeights = 0;
     while (current) {
@@ -6426,38 +6436,40 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.body.scrollTop >= header.offsetHeight || document.documentElement.scrollTop >= header.offsetHeight) {
       // lets add the scroll heights of any alerts
       if (alerts) {
-        scrollHeights += alerts.scrollHeight;
+        scrollHeights += alerts.clientHeight;
       }
 
       // lets add the scroll heights of the utility header
       if (utilityHeader) {
-        scrollHeights += utilityHeader.scrollHeight;
+        scrollHeights += utilityHeader.clientHeight;
       }
 
       // move the header up to the scroll height, minus any elements above the header
       header.style.top = `-${scrollHeights - miscElementHeights}px`;
 
       // we add the header height + misc element heights to the page container as margin-top, minus the scroll heights since those get hidden
-      pageContainer?.setAttribute('style', `margin-top: ${header.offsetHeight + miscElementHeights - scrollHeights}px;`);
+      if (pageContainer) {
+        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
+      }
     } else {
-      header.style.top = `${miscElementHeights}px`; // reset header top position
-
-      pageContainer?.setAttribute('style', `margin-top: ${miscElementHeights}px;`);
+      // reset header to initial position
+      header.style.top = `${miscElementHeights}px`;
+      if (pageContainer) {
+        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights}px`;
+      }
     }
+
+    // for each element with an id we add the scroll-margin-top
+    document.querySelectorAll('#page-container [id]').forEach(element => {
+      if (element instanceof HTMLElement) {
+        element.style.scrollMarginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
+      }
+    });
   };
 
   // reset position on scroll
   window.addEventListener('scroll', compactHeader);
-
-  // scroll to target
-  if (location_hash) {
-    let target = document.querySelector(location_hash);
-    setTimeout(() => {
-      target?.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }, 1000);
-  }
+  compactHeader();
 });
 
 /***/ }),
@@ -6466,10 +6478,10 @@ window.addEventListener('DOMContentLoaded', () => {
 /*!***************************************************!*\
   !*** ./src/scripts/components/mobile-controls.js ***!
   \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211971__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212352__) => {
 
 "use strict";
-__nested_webpack_require_211971__.r(__nested_webpack_exports__);
+__nested_webpack_require_212352__.r(__nested_webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6575,10 +6587,10 @@ window.addEventListener('DOMContentLoaded', () => {
 /*!**********************************************!*\
   !*** ./src/scripts/components/return-top.js ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215865__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_216246__) => {
 
 "use strict";
-__nested_webpack_require_215865__.r(__nested_webpack_exports__);
+__nested_webpack_require_216246__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6636,7 +6648,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_217803__(moduleId) {
+/******/ 	function __nested_webpack_require_218184__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6650,7 +6662,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_217803__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218184__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6660,7 +6672,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_217803__.r = (exports) => {
+/******/ 		__nested_webpack_require_218184__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6677,7 +6689,7 @@ var __nested_webpack_exports__ = {};
 /*!**********************************!*\
   !*** ./src/styles/font-only.css ***!
   \**********************************/
-__nested_webpack_require_217803__.r(__nested_webpack_exports__);
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6689,7 +6701,7 @@ var __nested_webpack_exports__ = {};
 /*!************************************************!*\
   !*** ./src/styles/colorschemes/santacruz.scss ***!
   \************************************************/
-__nested_webpack_require_217803__.r(__nested_webpack_exports__);
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6700,12 +6712,12 @@ __nested_webpack_require_217803__.r(__nested_webpack_exports__);
 /*!******************************!*\
   !*** ./src/scripts/index.js ***!
   \******************************/
-__nested_webpack_require_217803__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_217803__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_217803__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_217803__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_217803__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_217803__(/*! ./components/header.js */ "./src/scripts/components/header.js");
+__nested_webpack_require_218184__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218184__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218184__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218184__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218184__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218184__(/*! ./components/header.js */ "./src/scripts/components/header.js");
 
 
 
