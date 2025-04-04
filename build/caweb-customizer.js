@@ -2,9 +2,6 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/alert-banners.js":
-/*!*******************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/alert-banners.js ***!
-  \*******************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -18,9 +15,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/contact-us-link.js":
-/*!*********************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/contact-us-link.js ***!
-  \*********************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -53,9 +47,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/frontpage-search.js":
-/*!**********************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/frontpage-search.js ***!
-  \**********************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -78,9 +69,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/google-translate.js":
-/*!**********************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/google-translate.js ***!
-  \**********************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -112,9 +100,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js":
-/*!************************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js ***!
-  \************************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -133,9 +118,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/home-nav-link.js":
-/*!*******************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/home-nav-link.js ***!
-  \*******************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -162,9 +144,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js":
-/*!***********************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js ***!
-  \***********************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -189,9 +168,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js":
-/*!*********************************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js ***!
-  \*********************************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -284,9 +260,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js":
-/*!******************************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js ***!
-  \******************************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -338,18 +311,15 @@ jQuery(document).ready(function ($) {
 /************************************************************************/
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
-/*!***********************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/bindings/index.js ***!
-  \***********************************************************/
-__webpack_require__(/*! ./alert-banners */ "./src/scripts/wp/theme-customizer/bindings/alert-banners.js");
-__webpack_require__(/*! ./contact-us-link */ "./src/scripts/wp/theme-customizer/bindings/contact-us-link.js");
-__webpack_require__(/*! ./frontpage-search */ "./src/scripts/wp/theme-customizer/bindings/frontpage-search.js");
-__webpack_require__(/*! ./google-translate */ "./src/scripts/wp/theme-customizer/bindings/google-translate.js");
-__webpack_require__(/*! ./header-ca-branding */ "./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js");
-__webpack_require__(/*! ./home-nav-link */ "./src/scripts/wp/theme-customizer/bindings/home-nav-link.js");
-__webpack_require__(/*! ./sticky-navigation */ "./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js");
-__webpack_require__(/*! ./utility-header-custom-links */ "./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js");
-__webpack_require__(/*! ./utility-header-home-icon */ "./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/alert-banners.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/contact-us-link.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/frontpage-search.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/google-translate.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/home-nav-link.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js");
 })();
 
 /******/ })()

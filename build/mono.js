@@ -20,9 +20,6 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 var __webpack_exports__ = {};
-/*!****************************************************************!*\
-  !*** ./node_modules/@caweb/html-webpack-plugin/build/mono.css ***!
-  \****************************************************************/
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -30,22 +27,16 @@ __webpack_require__.r(__webpack_exports__);
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!***************************************************************!*\
-  !*** ./node_modules/@caweb/html-webpack-plugin/build/mono.js ***!
-  \***************************************************************/
 __webpack_require__.r(__webpack_exports__);
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js":
-/*!************************************************************!*\
-  !*** ./node_modules/bootstrap/dist/js/bootstrap.bundle.js ***!
-  \************************************************************/
 /***/ (function(module) {
 
 /*!
-  * Bootstrap v5.3.3 (https://getbootstrap.com/)
-  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap v5.3.4 (https://getbootstrap.com/)
+  * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
@@ -249,7 +240,7 @@ __webpack_require__.r(__webpack_exports__);
    * @param {HTMLElement} element
    * @return void
    *
-   * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+   * @see https://www.harrytheo.com/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
    */
   const reflow = element => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
@@ -294,7 +285,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   };
   const execute = (possibleCallback, args = [], defaultValue = possibleCallback) => {
-    return typeof possibleCallback === 'function' ? possibleCallback(...args) : defaultValue;
+    return typeof possibleCallback === 'function' ? possibleCallback.call(...args) : defaultValue;
   };
   const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
     if (!waitForTransition) {
@@ -616,7 +607,7 @@ __webpack_require__.r(__webpack_exports__);
       const bsKeys = Object.keys(element.dataset).filter(key => key.startsWith('bs') && !key.startsWith('bsConfig'));
       for (const key of bsKeys) {
         let pureKey = key.replace(/^bs/, '');
-        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1);
         attributes[pureKey] = normalizeData(element.dataset[key]);
       }
       return attributes;
@@ -691,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
    * Constants
    */
 
-  const VERSION = '5.3.3';
+  const VERSION = '5.3.4';
 
   /**
    * Class definition
@@ -2710,7 +2701,6 @@ __webpack_require__.r(__webpack_exports__);
     var popperOffsets = computeOffsets({
       reference: referenceClientRect,
       element: popperRect,
-      strategy: 'absolute',
       placement: placement
     });
     var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
@@ -3038,7 +3028,6 @@ __webpack_require__.r(__webpack_exports__);
     state.modifiersData[name] = computeOffsets({
       reference: state.rects.reference,
       element: state.rects.popper,
-      strategy: 'absolute',
       placement: state.placement
     });
   } // eslint-disable-next-line import/no-unused-modules
@@ -3745,7 +3734,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     _createPopper() {
       if (typeof Popper === 'undefined') {
-        throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
+        throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org/docs/v2/)');
       }
       let referenceElement = this._element;
       if (this._config.reference === 'parent') {
@@ -3824,7 +3813,7 @@ __webpack_require__.r(__webpack_exports__);
       }
       return {
         ...defaultBsPopperConfig,
-        ...execute(this._config.popperConfig, [defaultBsPopperConfig])
+        ...execute(this._config.popperConfig, [undefined, defaultBsPopperConfig])
       };
     }
     _selectMenuItem({
@@ -5011,7 +5000,7 @@ __webpack_require__.r(__webpack_exports__);
       return this._config.sanitize ? sanitizeHtml(arg, this._config.allowList, this._config.sanitizeFn) : arg;
     }
     _resolvePossibleFunction(arg) {
-      return execute(arg, [this]);
+      return execute(arg, [undefined, this]);
     }
     _putElementInTemplate(element, templateElement) {
       if (this._config.html) {
@@ -5110,7 +5099,7 @@ __webpack_require__.r(__webpack_exports__);
   class Tooltip extends BaseComponent {
     constructor(element, config) {
       if (typeof Popper === 'undefined') {
-        throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
+        throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org/docs/v2/)');
       }
       super(element, config);
 
@@ -5156,7 +5145,6 @@ __webpack_require__.r(__webpack_exports__);
       if (!this._isEnabled) {
         return;
       }
-      this._activeTrigger.click = !this._activeTrigger.click;
       if (this._isShown()) {
         this._leave();
         return;
@@ -5344,7 +5332,7 @@ __webpack_require__.r(__webpack_exports__);
       return offset;
     }
     _resolvePossibleFunction(arg) {
-      return execute(arg, [this._element]);
+      return execute(arg, [this._element, this._element]);
     }
     _getPopperConfig(attachment) {
       const defaultBsPopperConfig = {
@@ -5382,7 +5370,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       return {
         ...defaultBsPopperConfig,
-        ...execute(this._config.popperConfig, [defaultBsPopperConfig])
+        ...execute(this._config.popperConfig, [undefined, defaultBsPopperConfig])
       };
     }
     _setListeners() {
@@ -6361,13 +6349,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "./src/scripts/components/external-link.js":
-/*!*************************************************!*\
-  !*** ./src/scripts/components/external-link.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_208248__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_207824__) => {
 
 "use strict";
-__nested_webpack_require_208248__.r(__nested_webpack_exports__);
+__nested_webpack_require_207824__.r(__nested_webpack_exports__);
 //@ts-check
 
 /* EXTERNAL LINK ICON */
@@ -6391,13 +6376,10 @@ window.addEventListener('DOMContentLoaded', () => {
 /***/ }),
 
 /***/ "./src/scripts/components/header.js":
-/*!******************************************!*\
-  !*** ./src/scripts/components/header.js ***!
-  \******************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209366__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_208799__) => {
 
 "use strict";
-__nested_webpack_require_209366__.r(__nested_webpack_exports__);
+__nested_webpack_require_208799__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('DOMContentLoaded', () => {
   let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
@@ -6475,13 +6457,10 @@ window.addEventListener('DOMContentLoaded', () => {
 /***/ }),
 
 /***/ "./src/scripts/components/mobile-controls.js":
-/*!***************************************************!*\
-  !*** ./src/scripts/components/mobile-controls.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212352__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211615__) => {
 
 "use strict";
-__nested_webpack_require_212352__.r(__nested_webpack_exports__);
+__nested_webpack_require_211615__.r(__nested_webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6584,13 +6563,10 @@ window.addEventListener('DOMContentLoaded', () => {
 /***/ }),
 
 /***/ "./src/scripts/components/return-top.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/components/return-top.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_216246__) => {
+/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215354__) => {
 
 "use strict";
-__nested_webpack_require_216246__.r(__nested_webpack_exports__);
+__nested_webpack_require_215354__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6648,7 +6624,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_218184__(moduleId) {
+/******/ 	function __nested_webpack_require_217292__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6662,7 +6638,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218184__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_217292__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6672,7 +6648,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_218184__.r = (exports) => {
+/******/ 		__nested_webpack_require_217292__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6686,10 +6662,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-/*!**********************************!*\
-  !*** ./src/styles/font-only.css ***!
-  \**********************************/
-__nested_webpack_require_218184__.r(__nested_webpack_exports__);
+__nested_webpack_require_217292__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6697,27 +6670,12 @@ __nested_webpack_require_218184__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-var __nested_webpack_exports__ = {};
-/*!*******************************************!*\
-  !*** ./src/styles/colorschemes/mono.scss ***!
-  \*******************************************/
-__nested_webpack_require_218184__.r(__nested_webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-})();
-
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!******************************!*\
-  !*** ./src/scripts/index.js ***!
-  \******************************/
-__nested_webpack_require_218184__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218184__(/*! bootstrap/dist/js/bootstrap.bundle.js */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218184__(/*! ./components/mobile-controls.js */ "./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218184__(/*! ./components/return-top.js */ "./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218184__(/*! ./components/external-link.js */ "./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218184__(/*! ./components/header.js */ "./src/scripts/components/header.js");
+__nested_webpack_require_217292__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_217292__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_217292__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_217292__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_217292__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_217292__("./src/scripts/components/header.js");
 
 
 
