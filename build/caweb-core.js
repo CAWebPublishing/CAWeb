@@ -385,7 +385,6 @@ jQuery(document).ready(function ($) {
       let title = $(toggle).find('.et_pb_toggle_title');
       let expanded = $(toggle).hasClass('et_pb_toggle_open') ? 'true' : 'false';
       $(toggle).attr('tabindex', 0);
-      $(toggle).attr('role', 'button');
       $(toggle).attr('aria-expanded', expanded);
       toggle.addEventListener('keydown', function (e) {
         let toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1

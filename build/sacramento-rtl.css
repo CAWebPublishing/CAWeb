@@ -1891,7 +1891,7 @@
  * @see https://github.com/twbs/bootstrap/blob/main/scss/bootstrap.scss
  */
 /*!
- * Bootstrap  v5.3.4 (https://getbootstrap.com/)
+ * Bootstrap  v5.3.5 (https://getbootstrap.com/)
  * Copyright 2011-2025 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
@@ -15642,8 +15642,15 @@ a {
 a:hover, a:focus {
   color: var(--bs-main-darker, #153554);
 }
+a:hover:not(.btn), a:focus:not(.btn) {
+  text-decoration: underline;
+}
 a:focus {
   outline: solid 2px #0D81CE !important;
+}
+
+#page-container a {
+  padding: 0.5rem 0;
 }
 
 /* -----------------------------------------
@@ -16256,7 +16263,7 @@ header.global-header .navigation .container .nav-item .dropdown-menu .link-descr
   border-color: var(--bs-gray-600, #72717c);
 }
 .search-container form .search-button:hover, .search-container form .search-button:focus {
-  outline: solid 2px #0D81CE !important;
+  outline: solid 2px #72C2F8 !important;
   background-color: var(--bs-gray-800, #4a4958);
   border-color: var(--bs-gray-800, #4a4958);
 }

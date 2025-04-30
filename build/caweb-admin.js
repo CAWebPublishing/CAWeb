@@ -5,7 +5,7 @@
 /***/ (function(module) {
 
 /*!
-  * Bootstrap v5.3.4 (https://getbootstrap.com/)
+  * Bootstrap v5.3.5 (https://getbootstrap.com/)
   * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -652,7 +652,7 @@
    * Constants
    */
 
-  const VERSION = '5.3.4';
+  const VERSION = '5.3.5';
 
   /**
    * Class definition
