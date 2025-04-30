@@ -24,7 +24,6 @@ jQuery(document).ready(function($) {
 			let expanded = $(toggle).hasClass('et_pb_toggle_open') ?  'true' : 'false' ;
 
 			$(toggle).attr('tabindex', 0);
-			$(toggle).attr('role', 'button');
 			$(toggle).attr('aria-expanded', expanded);
 
 			toggle.addEventListener('keydown', function(e) {

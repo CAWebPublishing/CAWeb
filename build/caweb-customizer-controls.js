@@ -2,9 +2,6 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/scripts/admin/icon.js":
-/*!***********************************!*\
-  !*** ./src/scripts/admin/icon.js ***!
-  \***********************************/
 /***/ (() => {
 
 /* CAWeb Icon Menu Javascript */
@@ -38,9 +35,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js":
-/*!*******************************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/controls/alert-banners.js ***!
-  \*******************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -108,11 +102,8 @@ jQuery(document).ready(function ($) {
 /************************************************************************/
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
-/*!***********************************************************!*\
-  !*** ./src/scripts/wp/theme-customizer/controls/index.js ***!
-  \***********************************************************/
-__webpack_require__(/*! ../../../admin/icon */ "./src/scripts/admin/icon.js");
-__webpack_require__(/*! ./alert-banners */ "./src/scripts/wp/theme-customizer/controls/alert-banners.js");
+__webpack_require__("./src/scripts/admin/icon.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/controls/alert-banners.js");
 })();
 
 /******/ })()

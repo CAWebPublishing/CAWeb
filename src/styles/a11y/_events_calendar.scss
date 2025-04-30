@@ -1,0 +1,10 @@
+// Events Calendars sets the opacity of past events to 0.64 which creates a contrast issue with the background.
+// This rule sets the opacity to 1 for past events.
+.tribe-events .tribe-events-calendar-month__multiday-event--past .tribe-events-calendar-month__multiday-event-bar-title{
+    opacity: unset;
+}
+
+// We set our own list styles so we have to set the tribe styles to important to override our own styles.
+.tribe-common ul {
+    list-style: none !important;
+}

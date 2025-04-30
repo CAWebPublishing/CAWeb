@@ -1,9 +1,14 @@
-CAWeb 1.13.1
+v1.13.2
+- Using new @caweb/icon-libray package to bring in icons
+- Removed Events Calendar a11y scripts as they are no longer needed
+- Added Events Calendar a11y styles to correct contract issue
+
+v1.13.1
 - Added missing Divi accordion/toggle a11y scripts back
 - Fixed issue with 404 not adhering to margin constraints
 - Updated npm packages
 
-CAWeb 1.13.0
+v1.13.0
 - Removed caweb_search_form action/function
 - All 5.5 assets have been removed
 - Icon menu no longer shows for navigation items
@@ -18,25 +23,25 @@ CAWeb 1.13.0
 - Added theme argument to wp_nav_menu filter to prevent duplicate menus from rendering
 - Added samesite, secure, httponly flags to Alerts
 
-CAWeb 1.12.4
+v1.12.4
 - Resolved issue with Colorscheme option when using Customizer
 - Changed Search Results to Search results in search page template
 - Updated default favicon for v6 to the bear 
 - Updated npm pacakges
 
-CAWeb 1.12.3
+v1.12.3
 - Updated npm pacakges
 
-CAWeb 1.12.2
+v1.12.2
 - Updated npm pacakges
 - Fixed issue with Google Translate Custom Text option not rendering
 - Overriding _admin_bar_bump_cb prevents WP from adding a margin on top of page when logged in. 
 
-CAWeb 1.12.1
+v1.12.1
 - Updated npm pacakges
 - Added filter for SearchWP
 
-CAWeb 1.12.0
+v1.12.0
 - Updated build process to better align with upcoming CAWeb projects
 - Updated State Template 6.3.2 to new modified by version
 - Removed caweb-admin.js from loading on login screen
@@ -53,50 +58,50 @@ CAWeb 1.12.0
 - Resolved issue with Post Detail Exam Layout
 - Resolved issues with SERP
 
-CAWeb 1.11.3a
+v1.11.3a
 - Increased admin_bar_menu priority due to 6.6.1 increase
 
-CAWeb 1.11.3
+v1.11.3
 - Added Utility Header Options back in for v6
 - Dropped Flex and Mega Menu Options
 
-CAWeb 1.11.2
+v1.11.2
 - Updated alert cookie from 0 to false
 
-CAWeb 1.11.0
+v1.11.0
 - Added Custom Fields action 
 - Added Action during CAWeb Options
 
-CAWeb 1.10.7
+v1.10.7
 - Added register_meta for the Navigation Meta Fields, allowing these fields to be editable via Rest API
 
-CAWeb 1.10.6
+v1.10.6
 - Fixed issue with certain CAWeb Options not escaping/sanitizing properly
 - Removed unique version number from custom css/js
 - Fixed issue with automatic conversion of false to array when retrieving widget news feeds
 - Fixed issue with array to string conversion in CAWeb Module class
 - Updated Alert Banner text and color for the Display option
  
-CAWeb 1.10.5
+v1.10.5
 - Update Twitter logo to X
 - Removed wildcard from GA samesite attribute 
 - Fixed a11y with WPForms Date/Time pickers
 
-CAWeb 1.10.4
+v1.10.4
 - Added defer and crossorigin attributes to statewide alert script
 - Fixed Powered by alignment
 - Fixed issue with sidebar when in mobile
 
-CAWeb 1.10.3
+v1.10.3
 - Fixed issue with Toggle/Accordions no toggling correctly with enter key
 - Updated GA4 code
 - Added new CA Statewide Alert option
 - Fixed issues with module padding
 
-CAWeb 1.10.2
+v1.10.2
 - Fixed issue with Live Drafts option being reset
 
-CAWeb 1.10.1
+v1.10.1
 - Fixed issue with broken reference to default fav icon
 - Resize CA.gov logo for v6
 - Spelled out Back to top for v6
@@ -105,7 +110,7 @@ CAWeb 1.10.1
 - Fixed issues with Google Translate when in Custom mode
 - Updated Google Analytics code
 
-CAWeb 1.10.0
+v1.10.0
 - Introduced State Template Version 6
 - Removed Design System Option 
 - Fixed a11y issue in utility header
@@ -113,7 +118,7 @@ CAWeb 1.10.0
 - Fixed tab index for search
 - Fixed content/header alignment 
 
-CAWeb 1.9.0
+v1.9.0
 - Fixed issues related to version 6:
   Site navigation
   Updated  CA.gov icon
@@ -128,7 +133,7 @@ CAWeb 1.9.0
   Removed Menu home link option
   Updated Powered by CAWebPublishing alignment in footer
 
-CAWeb 1.8.1
+v1.8.1
 - Added Web Headers for X-Content-Type-Options
 - Removed Storage Utilization Dashboard Widget since it no longer works on WPVIP
 - Fixed issue with ca.gov logo
@@ -136,54 +141,54 @@ CAWeb 1.8.1
 - Removed Social Icons from Utility Header for V6
 - Fixed Settings button in Utility Header for V6
 
-CAWeb 1.8.0
+v1.8.0
 - Fixed issue with Homepage Search not rendering 
 - Added Web Headers for Strict-Transport-Securit and Content-Security-Policy 
 
-CAWeb v1.7.2
+v1.7.2
 - Added State Template 6.0 asset files
 
-CAWeb v1.7.1
+v1.7.1
 - Hiding File Upload Field in WPForms Plugin
 - Fixed issue with undefined function get_header
 
-CAWeb v1.7.0
+v1.7.0
 - Fixed issue with undefined function wp_head
 
-CAWeb v1.6.4
+v1.6.4
 - Fixed issue with Featured images not rendering on the front end
 
-CAWeb v1.6.3a
+v1.6.3a
 - Resolved issue with GA4 ID not populating
 
-CAWeb v1.6.3
+v1.6.3
 - Added sanity check when inserting categories
 - Added new Google Analytics4 ID Option
 
-CAWeb v1.6.2
+v1.6.2
 - Add CAWeb Icons to Divi Button Module
 
-CAWeb v1.6.1
+v1.6.1
 - Removed Manual CSS/JS CAWeb Option
 - Fixed issue with undefined function reference
 
-CAWeb v1.6.0
+v1.6.0
 - Update Icon Library to incorporate changes from Divi v4.14.4
 - Added headers to resolve weak ciphers
 
-CAWeb v1.5.10
+v1.5.10
 - Added text option for the Google Translate Custom Link
 
-CAWeb v1.5.9a 
+v1.5.9a 
 - Fixed issue with removal of Divi parent replacement not loading styles when in preview mode
 
-CAWeb v1.5.9
+v1.5.9
 - Added 111 new State Template Icons
 - Fixed issue with Divi Toggle Module, toggling when clicking on toggle content.
 - Removed action et_divi_replace_parent_stylesheet, prevents Divi replacement of parent style.css.
 
 
-CAWeb v1.5.8
+v1.5.8
 - Fixed Live Drafts when using New Builder Experience
 - Removed redundant Aria label from profile banner
 - Swapped to the VIP file system creds
@@ -196,16 +201,16 @@ CAWeb v1.5.8
 - $wp_filesystem not working for retrieving local file in WPVIP environment, using file_get_contents instead.
 - Fixed issued with Inacessible Deep Links and Bypass Links created by Divi
 
-CAWeb v1.5.7
+v1.5.7
 - Fixed various issues with JAWS not reading toggle expanded/collapsed
 - Fixed issue with WPForms Confirmation not receiving focus on form submission
 - Fixed issue with footer bleeding when using The Events Calendar Plugin
 - Fixed issue with Header not loading when using The Events Calendar Plugin
 
-CAWeb v1.5.6a
+v1.5.6a
 - Fixed issue with footer bleeding into content on Vanilla WP posts 
 
-CAWeb v1.5.6
+v1.5.6
 - Added new Enable Debug Mode option
 - Updated State Template from v5.5.21 to v5.5.23
 - Added new vertical field for Profile Banners
@@ -221,13 +226,13 @@ CAWeb v1.5.6
 - Removed bootstrap from customizer pages
 - Enforced WPCS on login and password reset
 
-CAWeb v1.5.5b
+v1.5.5b
 - Fixed various issues related to plugin conflicts with live drafts
 
-CAWeb v1.5.5a
+v1.5.5a
 - Fixed issue with Post List Module not rendering when tags were used
 
-CAWeb v1.5.5
+v1.5.5
 - Added function for xmlrpc_enabled filter
 - Added missing tabindex attribute to second level links
 - Enforced WPCS on inc/functions.php
@@ -248,43 +253,39 @@ CAWeb v1.5.5
 - Removed Divi viewport meta
 - Fixed Blurb Module hiding blurb image
 - Fixed Tab Module (Divi) changed tabList to tablist
-- Added missing title text to the following:
-        Section Footer Group (Standard/Fullwidth) links
-        Person Module (Divi) social links 
-        Slider Module (Divi) arrows 
-        Image Module (Divi) when used with link 
-- Added missing alt text to the following:
-        Organization Logo image 
-        Gallery Module (Divi) images
-        Course Post Detail Presenter image
-        Event Post Detail Presenter image
-        Image Module (Divi)  
-- Added missing title text to the following:
-        Course Post Detail map iframe
-        Event Post Detail map iframe 
-        Exam Post Detail map iframe
+- Added missing title text to the following:  
+-- Section Footer Group (Standard/Fullwidth) links  
+-- Person Module (Divi) social links  
+-- Slider Module (Divi) arrows  
+-- Image Module (Divi) when used with link  
+- Added missing alt text to the following:  
+-- Organization Logo image  
+-- Gallery Module (Divi) images  
+-- Course Post Detail Presenter image  
+-- Event Post Detail Presenter image  
+-- Image Module (Divi)  
+- Added missing title text to the following:  
+-- Course Post Detail map iframe  
+-- Event Post Detail map iframe  
+-- Exam Post Detail map iframe  
 
-CAWeb v1.5.4
-June 3, 2021
+v1.5.4
 - Deprecated Template version 5.0
 - Fixed navigation issue with description not rendering
 
-CAWeb v1.5.3
-May 20, 2021
+v1.5.3
 - Upgraded & sync formatting between template and theme
 - Added the Strict-Transport-Security Header
 - Added Heading Field to Post List, Section Footer, Card, Github, Section Carousel, Panel and Section Primary Modules
 - Added new live drafts feature
 
-CAWeb v1.5.1
-February 25, 2021
+v1.5.1
 - Grey out Google Analytics ID option when Google Tag Manager is used
 - Resolved TablePress-toggle-accordion conflicts
 - Updated Google Analytics code
 - Fixed Post Tags missing
 
-CAWeb v1.5.0
-November 5, 2020
+v1.5.0
 - Suppress the down carrot navigation item
 - Added Panel Heading Field to Panel Module
 - Enable new Google Tag Manager option 
@@ -292,8 +293,7 @@ November 5, 2020
 - Added WP_TEMP_DIR constant to Theme 
 - Added State Template 5.5
 
-CAWeb v1.4.1
-March 26, 2018
+v1.4.1
 - WordPress Thickbox function enabled 
 - Fixed issue with theme checking for updats on every page
 - Fixed issue with empty search results whenever Divi Search Module is used
@@ -303,8 +303,7 @@ March 26, 2018
 - Fixed issue with page title not being left aligned
 - Fixed issue with warnings display with GitHub Module when no repos are found
 
-CAWeb v1.4.0
-March 1, 2018
+v1.4.0
 - New Sacramento colorscheme added
 - New Custom CSS Upload feature
 - Prefixed function names
@@ -315,22 +314,19 @@ March 1, 2018
 - Added missing html tags
 - Fixed issue with Google Translate on Mobile Mode
 
-CAWeb v1.3.4
-January 30, 2018
+v1.3.4
 - CAWeb Options are now escaped when saved
 - Navigation Menu is now left justified in Mobile View
 - Fixed issue with pre_get_posts filter applying on backend
 - Background Appearance Menu has been removed
 - Read More button has been added to each post on an Archive, Date, Author, Category and Tag Template Page
 
-CAWeb v1.3.3
-December 19, 2017
+v1.3.3
 - WordPress Archive, Date, Author, Category and Tag Template have been created and styled
 - Fixed CAWeb Share Email Feature
 - Fixed issue with logo not adhering to margins- 
 
-CAWeb v1.3.2
-December 11, 2017
+v1.3.2
 - Template V5 updates have been merged
 - Introduced 3 New Color Schemes Eureka, Mono and Trinity
 - Added Multisite Google Analytics Option
@@ -339,15 +335,13 @@ December 11, 2017
 - Fixed issue with button icons not rendering correctly when left aligned
 - Fixed CSS for Post Detail Mobile View
 
-CAWeb v1.3.1
-November 14, 2017
+v1.3.1
 - TinyMCE toolbar default is expaned
 - New checkboxes for Social Media Links to open in new tab
 - Non-Divi Posts will now display the date
 - Non-Divi Posts will now display the Sidebar
 
-CAWeb v1.3.0
-October 30, 2017
+v1.3.0
 - Added spacing after icons in Section and Fullwidth Section Footers
 - Added search box to 404 Page Not Found
 - WordPress Customizer Feature has been enabled
@@ -355,8 +349,7 @@ October 30, 2017
 - Widget Custom Menu now displays icons/images
 - Private Repositories Request button has been added for each private repo when using GitHub Module
 
-CAWeb v1.2.3
-October 3, 2017
+v1.2.3
 - Icon field names have been changed in 6 modules to 'font_icon' matching Divi icon field names
 - Shortened Section/Fullwidth Section Footer Group link construction
 - Removed unneeded functions in ET_Builder_CAWeb_Module
@@ -364,8 +357,7 @@ October 3, 2017
 - Related videos have been removed when using Divi Video Module
 - Navigation Screen Options now apply to Header Sub Nav, Footer and Widget Menus
 
-CAWeb v1.2.2
-August 28, 2017
+v1.2.2
 - Google Fonts have all been removed except the CA State Google Font
 - Fixed js/libs javascripts from being linked incorrectly
 - Fixed issue with Custom CSS stripping single and double quotes out
@@ -376,14 +368,13 @@ August 28, 2017
 - Added less padding to Section Primary horizontal/vertical spacing
 - CSS and JS are now minified
 
-CAWeb v1.2.1a
+v1.2.1a
 August 18, 2017
 - New Carousel Media style added to Section Carousel and Fullwidth Section Carousel Modules
 - Anchors have been corrected and now land at the appropriate ID
 - Logo and Nav_list styles have been updated
 
-CAWeb v1.2.1
-August 4, 2017
+v1.2.1
 - Moved Google Scripts to the footer
 - CAWeb styles and scripts now include proper version number
 - Theme Description has been changed
@@ -394,42 +385,39 @@ August 4, 2017
 - Utility Header links are now vertically aligned
 - GitHub API Key menu added to allow for updates via GitHub
 
-CAWeb v1.2.0a
+v1.2.0a
 July 26, 2017
 - Change IE Compatibility from Edge to IE11 which caused some sites to crash when using IE
 
-CAWeb v1.2.0
-July 20, 2017
+v1.2.0
 - Added full support of all Navigation Menu Screen Options
 - All modules fields and labels have been mapped to match new Divi Labeling System
 - Google Analytics now tracks document downloads
 - Corrected styling and blank entries in Location Module
 
-CAWeb v1.1.4c
+v1.1.4c
 July 20, 2017
 - Removed Manage Live Preview Button from Navigation Menu
 
-CAWeb v1.1.4b
+v1.1.4b
 June 28, 2017
 - Added full icon class name for modules
 
-CAWeb v1.1.4a
+v1.1.4a
 June 28, 2017
 - Fixed navigation icons
 
-CAWeb v1.1.4
-June 19, 2017
+v1.1.4
 - GitHub module links open in separate table
 - Corrected Font Icon mismatching between various browsers
 - New Default Display Title Setting under CAWeb Options
 - Resolved various IE console errors
 
-CAWeb v1.1.3a
+v1.1.3a
 June 5, 2017
 - The home icon now displays on secondary pages/posts on the Header menu.
 
-CAWeb v1.1.3
-May 31, 2017
+v1.1.3
 - Profile Banner module now allows for disabling on various format types
 - Profile Banner Module is now expandable
 - Added the State Icons to the current Divi Icons.
@@ -440,8 +428,7 @@ May 31, 2017
 - Removed/Deactivated the Search Menu item from the Search Results Page
 - Fixed quotation marks for Version 4 Fullwidth Slideshow Banner
 
-CAWeb v1.1.2
-May 5, 2017
+v1.1.2
 - Search box layering is not correct.
 - Display the icon next to the URL
 - Use the CAWeb Publishing favicon for the backend
@@ -459,8 +446,7 @@ May 5, 2017
 - Format the Footer Menu
 - Create solution to mimic Word Press updates
 
-CAWeb v1.1.1
-Apr 21, 2017
+v1.1.1
 - Mega drop-down not displaying 4 and 7 page links properly in IE and Firefox
 - Invalid spacing of the Mega Dropdown
 - Enable a post heading to be H1, H2 or H3
@@ -492,11 +478,11 @@ Apr 21, 2017
 - Enable Media Replace
 - The banner pictures for version 4 homepage are not showing up.
 
-CAWeb v1.1.0b
+v1.1.0b
 Apr 14, 2017
 - Allow the web master to enter a URL for the contact page.
 
-CAWeb v1.1.0a
+v1.1.0a
 Apr 5, 2017
 - Accordion table is exceeding the page width
 - Enable location module
@@ -504,8 +490,7 @@ Apr 5, 2017
 - Excerpt formating is incorrect
 - Remove extra header and body line spacing
 
-CAWeb v1.1.0
-Mar 31, 2017
+v1.1.0
 - Enable an events list module and events detail module
 - Enable a jobs list module and jobs detail module
 - Enable an course list module, course panel and course detail module
@@ -519,7 +504,7 @@ Mar 31, 2017
 - Center the logo vertically while in mobile mode
 - Search for sub directory sites
 
-CAWeb v1.0.3c
+v1.0.3c
 Mar 24, 2017
 - Increase max width of agency logo for the v4 template from 355px to 475px.
 - Incorrect spacing in tablet and mobile
@@ -527,17 +512,16 @@ Mar 24, 2017
 - Enable the conversion of a standard section to a full width section
 - Mobile view margins are not correct
 
-CAWeb v1.0.3b
+v1.0.3b
 Feb 17, 2017
 - Add to the ability in CA Web Options to turn on or off a home Icon
 - Add the ability to add a home icon to the utility bar
 
-CAWeb v1.0.3a
+v1.0.3a
 Feb 14, 2017
 - Unable to update logo File
 
-CAWeb v1.0.3
-Feb 10, 2017
+v1.0.3
 - Ability to set and remove Favicon
 - Full width section carousel not displaying
 - Numbered list is left justified.
@@ -561,8 +545,7 @@ Feb 10, 2017
 - Cannot Select Menu icon after adding a page to a menu
 - Remove trailing spaces
 
-CAWeb v1.0.2
-Dec 30, 2016
+v1.0.2
 - Add image capability to megadropdown
 - Logo is not responsive vertically
 - Alignment of the CA.gov and the Logo should be the same for all pages
@@ -582,8 +565,7 @@ Dec 30, 2016
 - Select Language needs to be moved under the Search Box
 - Remove Breadcrumbs
 
-CAWeb v1.0.1
-Nov 30, 2016
+v1.0.1
 - Create space for Department Logo
 - Define the max length of each item and define how they will be displayed
 - Site and CA.Gov Icon placement

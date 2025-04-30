@@ -2,9 +2,6 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/scripts/a11y/button.js":
-/*!************************************!*\
-  !*** ./src/scripts/a11y/button.js ***!
-  \************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -23,9 +20,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/blog.js":
-/*!***************************************!*\
-  !*** ./src/scripts/a11y/divi/blog.js ***!
-  \***************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -67,9 +61,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/blurb.js":
-/*!****************************************!*\
-  !*** ./src/scripts/a11y/divi/blurb.js ***!
-  \****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -102,9 +93,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/button.js":
-/*!*****************************************!*\
-  !*** ./src/scripts/a11y/divi/button.js ***!
-  \*****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -132,9 +120,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/deep-links.js":
-/*!*********************************************!*\
-  !*** ./src/scripts/a11y/divi/deep-links.js ***!
-  \*********************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -155,9 +140,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/fullwidth-header.js":
-/*!***************************************************!*\
-  !*** ./src/scripts/a11y/divi/fullwidth-header.js ***!
-  \***************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -185,9 +167,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/gallery.js":
-/*!******************************************!*\
-  !*** ./src/scripts/a11y/divi/gallery.js ***!
-  \******************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -214,23 +193,20 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/index.js":
-/*!****************************************!*\
-  !*** ./src/scripts/a11y/divi/index.js ***!
-  \****************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./blog */ "./src/scripts/a11y/divi/blog.js");
-__webpack_require__(/*! ./blurb */ "./src/scripts/a11y/divi/blurb.js");
-__webpack_require__(/*! ./button */ "./src/scripts/a11y/divi/button.js");
-__webpack_require__(/*! ./deep-links */ "./src/scripts/a11y/divi/deep-links.js");
-__webpack_require__(/*! ./fullwidth-header */ "./src/scripts/a11y/divi/fullwidth-header.js");
-__webpack_require__(/*! ./gallery */ "./src/scripts/a11y/divi/gallery.js");
-__webpack_require__(/*! ./person */ "./src/scripts/a11y/divi/person.js");
-__webpack_require__(/*! ./search */ "./src/scripts/a11y/divi/search.js");
-__webpack_require__(/*! ./slider */ "./src/scripts/a11y/divi/slider.js");
-__webpack_require__(/*! ./tab */ "./src/scripts/a11y/divi/tab.js");
-__webpack_require__(/*! ./toggle */ "./src/scripts/a11y/divi/toggle.js");
-__webpack_require__(/*! ./video */ "./src/scripts/a11y/divi/video.js");
+__webpack_require__("./src/scripts/a11y/divi/blog.js");
+__webpack_require__("./src/scripts/a11y/divi/blurb.js");
+__webpack_require__("./src/scripts/a11y/divi/button.js");
+__webpack_require__("./src/scripts/a11y/divi/deep-links.js");
+__webpack_require__("./src/scripts/a11y/divi/fullwidth-header.js");
+__webpack_require__("./src/scripts/a11y/divi/gallery.js");
+__webpack_require__("./src/scripts/a11y/divi/person.js");
+__webpack_require__("./src/scripts/a11y/divi/search.js");
+__webpack_require__("./src/scripts/a11y/divi/slider.js");
+__webpack_require__("./src/scripts/a11y/divi/tab.js");
+__webpack_require__("./src/scripts/a11y/divi/toggle.js");
+__webpack_require__("./src/scripts/a11y/divi/video.js");
 
 // This prevents Divi from anchor positioning when smooth scrolling
 window.et_pb_smooth_scroll = () => {};
@@ -241,9 +217,6 @@ window.et_pb_toggle_nav_menu = () => {};
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/person.js":
-/*!*****************************************!*\
-  !*** ./src/scripts/a11y/divi/person.js ***!
-  \*****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -273,9 +246,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/search.js":
-/*!*****************************************!*\
-  !*** ./src/scripts/a11y/divi/search.js ***!
-  \*****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -315,9 +285,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/slider.js":
-/*!*****************************************!*\
-  !*** ./src/scripts/a11y/divi/slider.js ***!
-  \*****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -365,9 +332,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/tab.js":
-/*!**************************************!*\
-  !*** ./src/scripts/a11y/divi/tab.js ***!
-  \**************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -396,9 +360,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/toggle.js":
-/*!*****************************************!*\
-  !*** ./src/scripts/a11y/divi/toggle.js ***!
-  \*****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -424,7 +385,6 @@ jQuery(document).ready(function ($) {
       let title = $(toggle).find('.et_pb_toggle_title');
       let expanded = $(toggle).hasClass('et_pb_toggle_open') ? 'true' : 'false';
       $(toggle).attr('tabindex', 0);
-      $(toggle).attr('role', 'button');
       $(toggle).attr('aria-expanded', expanded);
       toggle.addEventListener('keydown', function (e) {
         let toggleKeys = [1, 13, 32]; // key codes for enter(13) and space(32), JAWS registers Enter keydown as click and e.which = 1
@@ -452,9 +412,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/divi/video.js":
-/*!****************************************!*\
-  !*** ./src/scripts/a11y/divi/video.js ***!
-  \****************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -505,9 +462,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/others.js":
-/*!************************************!*\
-  !*** ./src/scripts/a11y/others.js ***!
-  \************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -531,9 +485,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/add-to-any.js":
-/*!************************************************!*\
-  !*** ./src/scripts/a11y/plugins/add-to-any.js ***!
-  \************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -561,9 +512,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/constant-contact-forms.js":
-/*!************************************************************!*\
-  !*** ./src/scripts/a11y/plugins/constant-contact-forms.js ***!
-  \************************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -595,89 +543,7 @@ jQuery(document).ready(function ($) {
 
 /***/ }),
 
-/***/ "./src/scripts/a11y/plugins/events-calendar.js":
-/*!*****************************************************!*\
-  !*** ./src/scripts/a11y/plugins/events-calendar.js ***!
-  \*****************************************************/
-/***/ (() => {
-
-jQuery(document).ready(function ($) {
-  /* 
-  The Events Calendar Accessibility 
-  */
-
-  var event_calendar_form_element = $('#tribe-bar-form span[role="none"], #tribe-bar-form li[role="option"]');
-  if (event_calendar_form_element.length) {
-    event_calendar_form_element.each(function (index, element) {
-      $(element).removeAttr('role', '');
-    });
-  }
-  var event_calendar_element = $('.tribe-events-calendar');
-  var event_notices = $('.tribe-events-notices');
-  var event_pastmonth = $('.tribe-events-othermonth.tribe-events-past div');
-  if (event_calendar_element.length) {
-    event_calendar_element.each(function (index, element) {
-      var th = $(element).find('thead tr th');
-      var future_dates = $(element).find('tbody tr td.tribe-events-thismonth.tribe-events-future div');
-      var past_dates = $(element).find('tbody tr td.tribe-events-thismonth.tribe-events-past div');
-
-      // Tribe Event Display Contrast Fixes
-      if ("#666666" == rgb2hex($(th[0]).css("background-color"))) {
-        th.each(function (i, e) {
-          $(e).css("background-color", "#dddddd");
-        });
-        future_dates.each(function (i, e) {
-          $(e).css("background-color", "#f7f7f7");
-          $(e).css("color", "#707070");
-        });
-
-        // Full Style Display Contrast Fixes
-      } else if ("#dddddd" == rgb2hex($(th[0]).css("background-color"))) {
-        past_dates.each(function (i, e) {
-          $(e).css("color", "#333333");
-        });
-      }
-    });
-  }
-  if (event_notices.length) {
-    event_notices.each(function (index, element) {
-      $(element).css('color', '#307185');
-    });
-  }
-  if (event_pastmonth.length) {
-    event_pastmonth.each(function (index, element) {
-      $(element).css('color', '#707070');
-    });
-  }
-
-  // Do this after the page has loaded
-  $(window).on('load', function () {
-    var event_map_element = $('.tribe-events-venue-map').find('iframe');
-    if (event_map_element.length) {
-      event_map_element.each(function (index, element) {
-        $(element).attr('title', 'The Events Calendar Event Map');
-        stripeIframeAttributes(element);
-      });
-    }
-  });
-  function rgb2hex(rgb) {
-    rgb = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-    return "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2);
-  }
-  function stripeIframeAttributes(frame) {
-    $(frame).removeAttr('frameborder');
-    $(frame).removeAttr('scrolling');
-    $(frame).removeAttr('allowtransparency');
-    $(frame).removeAttr('allowfullscreen');
-  }
-});
-
-/***/ }),
-
 /***/ "./src/scripts/a11y/plugins/google-calendar.js":
-/*!*****************************************************!*\
-  !*** ./src/scripts/a11y/plugins/google-calendar.js ***!
-  \*****************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -703,9 +569,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/google-recaptcha.js":
-/*!******************************************************!*\
-  !*** ./src/scripts/a11y/plugins/google-recaptcha.js ***!
-  \******************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -769,28 +632,21 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/index.js":
-/*!*******************************************!*\
-  !*** ./src/scripts/a11y/plugins/index.js ***!
-  \*******************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./add-to-any */ "./src/scripts/a11y/plugins/add-to-any.js");
-__webpack_require__(/*! ./constant-contact-forms */ "./src/scripts/a11y/plugins/constant-contact-forms.js");
-__webpack_require__(/*! ./events-calendar */ "./src/scripts/a11y/plugins/events-calendar.js");
-__webpack_require__(/*! ./google-calendar */ "./src/scripts/a11y/plugins/google-calendar.js");
-__webpack_require__(/*! ./google-recaptcha */ "./src/scripts/a11y/plugins/google-recaptcha.js");
-__webpack_require__(/*! ./mailchimp */ "./src/scripts/a11y/plugins/mailchimp.js");
-__webpack_require__(/*! ./mailpoet */ "./src/scripts/a11y/plugins/mailpoet.js");
-__webpack_require__(/*! ./tabby-response */ "./src/scripts/a11y/plugins/tabby-response.js");
-__webpack_require__(/*! ./tablepress */ "./src/scripts/a11y/plugins/tablepress.js");
-__webpack_require__(/*! ./wpforms */ "./src/scripts/a11y/plugins/wpforms.js");
+__webpack_require__("./src/scripts/a11y/plugins/add-to-any.js");
+__webpack_require__("./src/scripts/a11y/plugins/constant-contact-forms.js");
+__webpack_require__("./src/scripts/a11y/plugins/google-calendar.js");
+__webpack_require__("./src/scripts/a11y/plugins/google-recaptcha.js");
+__webpack_require__("./src/scripts/a11y/plugins/mailchimp.js");
+__webpack_require__("./src/scripts/a11y/plugins/mailpoet.js");
+__webpack_require__("./src/scripts/a11y/plugins/tabby-response.js");
+__webpack_require__("./src/scripts/a11y/plugins/tablepress.js");
+__webpack_require__("./src/scripts/a11y/plugins/wpforms.js");
 
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/mailchimp.js":
-/*!***********************************************!*\
-  !*** ./src/scripts/a11y/plugins/mailchimp.js ***!
-  \***********************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -830,9 +686,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/mailpoet.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/a11y/plugins/mailpoet.js ***!
-  \**********************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -860,9 +713,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/tabby-response.js":
-/*!****************************************************!*\
-  !*** ./src/scripts/a11y/plugins/tabby-response.js ***!
-  \****************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -903,9 +753,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/tablepress.js":
-/*!************************************************!*\
-  !*** ./src/scripts/a11y/plugins/tablepress.js ***!
-  \************************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -958,9 +805,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/plugins/wpforms.js":
-/*!*********************************************!*\
-  !*** ./src/scripts/a11y/plugins/wpforms.js ***!
-  \*********************************************/
 /***/ (() => {
 
 /*
@@ -992,9 +836,6 @@ if (null !== wpforms_confirmation_msg) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/twitter.js":
-/*!*************************************!*\
-  !*** ./src/scripts/a11y/twitter.js ***!
-  \*************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -1026,9 +867,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/a11y/utility-header.js":
-/*!********************************************!*\
-  !*** ./src/scripts/a11y/utility-header.js ***!
-  \********************************************/
 /***/ (() => {
 
 jQuery(document).ready(function ($) {
@@ -1042,9 +880,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/google/cse.js":
-/*!***********************************!*\
-  !*** ./src/scripts/google/cse.js ***!
-  \***********************************/
 /***/ (() => {
 
 // Google Custom Search 
@@ -1099,9 +934,6 @@ jQuery(document).ready(function ($) {
 /***/ }),
 
 /***/ "./src/scripts/google/ga.js":
-/*!**********************************!*\
-  !*** ./src/scripts/google/ga.js ***!
-  \**********************************/
 /***/ (() => {
 
 // Google Analytics
@@ -1217,9 +1049,6 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 var __webpack_exports__ = {};
-/*!**********************************!*\
-  !*** ./src/styles/frontend.scss ***!
-  \**********************************/
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -1227,19 +1056,13 @@ __webpack_require__.r(__webpack_exports__);
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!*************************************!*\
-  !*** ./src/scripts/google/index.js ***!
-  \*************************************/
 //require('./AutoTracker');
-__webpack_require__(/*! ./cse */ "./src/scripts/google/cse.js");
-__webpack_require__(/*! ./ga */ "./src/scripts/google/ga.js");
+__webpack_require__("./src/scripts/google/cse.js");
+__webpack_require__("./src/scripts/google/ga.js");
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!*************************************!*\
-  !*** ./src/scripts/custom/index.js ***!
-  \*************************************/
 jQuery(document).ready(function ($) {
   /* Fixed padding for wp-activate.php page when Navigation is fixed */
   if ($('header.fixed + #signup-content').length) {
@@ -1250,15 +1073,12 @@ jQuery(document).ready(function ($) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!***********************************!*\
-  !*** ./src/scripts/a11y/index.js ***!
-  \***********************************/
-__webpack_require__(/*! ./divi/ */ "./src/scripts/a11y/divi/index.js");
-__webpack_require__(/*! ./plugins/ */ "./src/scripts/a11y/plugins/index.js");
-__webpack_require__(/*! ./button */ "./src/scripts/a11y/button.js");
-__webpack_require__(/*! ./others */ "./src/scripts/a11y/others.js");
-__webpack_require__(/*! ./twitter */ "./src/scripts/a11y/twitter.js");
-__webpack_require__(/*! ./utility-header */ "./src/scripts/a11y/utility-header.js");
+__webpack_require__("./src/scripts/a11y/divi/index.js");
+__webpack_require__("./src/scripts/a11y/plugins/index.js");
+__webpack_require__("./src/scripts/a11y/button.js");
+__webpack_require__("./src/scripts/a11y/others.js");
+__webpack_require__("./src/scripts/a11y/twitter.js");
+__webpack_require__("./src/scripts/a11y/utility-header.js");
 })();
 
 /******/ })()
