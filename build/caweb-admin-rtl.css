@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Icons v1.11.3 (https://icons.getbootstrap.com/)
+ * Bootstrap Icons v1.12.1 (https://icons.getbootstrap.com/)
  * Copyright 2019-2024 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/icons/blob/main/LICENSE)
  */
@@ -2076,6 +2076,7 @@ url(fonts/bootstrap-icons.woff) format("woff");
 .bi-suitcase2-fill::before { content: "\f901"; }
 .bi-suitcase2::before { content: "\f902"; }
 .bi-vignette::before { content: "\f903"; }
+.bi-bluesky::before { content: "\f7f9"; }
 
 /* -----------------------------------------
    ICON FONTS - /source/scss/cagov/icon-font.scss
@@ -4384,8 +4385,6 @@ url(fonts/bootstrap-icons.woff) format("woff");
 .ca-gov-icon-dot:before {
   content: "\ea33" !important;
 }
-
-
 @charset "UTF-8";
 /*----------------
  # Bootstrap
