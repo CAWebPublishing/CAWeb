@@ -36,11 +36,6 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 	public function init() {
 		$this->name = esc_html__( 'GitHub', 'et_builder' );
 
-		$this->fields_defaults = array(
-			'per_page'  => array( 100, 'add_default_setting' ),
-			'repo_type' => array( 'all', 'add_default_setting' ),
-		);
-
 		$this->main_css_element = '%%order_class%%';
 
 		$this->settings_modal_toggles = array(
@@ -77,7 +72,7 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 				'label'       => esc_html__( 'Maximum # of results', 'et_builder' ),
 				'type'        => 'text',
 				'description' => esc_html__( 'Enter amount to display per page. Default is 30, Max is 100.', 'et_builder' ),
-				'default'     => 30,
+				'default'     => 100,
 				'tab_slug'    => 'general',
 				'toggle_slug' => 'style',
 			),
