@@ -32,7 +32,7 @@ get_header();
 			get_template_part( "parts/search" );
 		?>
 		<h1>Search results for: <?php print esc_attr( $caweb_keyword ); ?></h1>
-		<gcse:searchresults-only></gcse:searchresults-only>
+		<gcse:searchresults-only enableHistory="false"></gcse:searchresults-only>
 	</div>
 </div>
 <?php

@@ -15649,7 +15649,7 @@ a:focus {
   outline: solid 2px #0D81CE !important;
 }
 
-#page-container a {
+#page-container a:not(.et_pb_button, .btn) {
   padding: 0.5rem 0;
 }
 
@@ -16669,9 +16669,9 @@ figure.executive-profile.vertical .body {
   word-break: break-word;
   text-decoration: none !important;
   color: var(--bs-gray-700, #5e5e6a);
-  padding-bottom: 0.7rem;
-  padding-top: 0.7rem;
-  padding-right: 1rem;
+  padding-bottom: 0.7rem !important;
+  padding-top: 0.7rem !important;
+  padding-right: 1.5rem !important;
   border-bottom: 1px solid var(--bs-gray-75, #f3f3f4);
 }
 .list-navigation li a:hover,
@@ -16779,7 +16779,7 @@ figure.executive-profile.vertical .body {
   border-radius: 5px;
   font-size: 1.4rem;
   font-weight: 700;
-  padding: 1rem 1rem 1rem 2.25rem;
+  padding: 1rem 1rem 1rem 2.25rem !important;
   position: relative;
   text-decoration: none !important;
   height: 100%;

@@ -1,3 +1,7 @@
+v1.13.2a
+- Updated npm packages
+- Disable Results Browsing History for Google Custom Search
+
 v1.13.2
 - Using new @caweb/icon-libray package to bring in icons
 - Removed Events Calendar a11y scripts as they are no longer needed

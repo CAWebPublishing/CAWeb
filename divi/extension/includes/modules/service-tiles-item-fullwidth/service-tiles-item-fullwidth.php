@@ -39,9 +39,6 @@ class CAWeb_Module_Fullwidth_Service_Tiles_Item extends ET_Builder_CAWeb_Module 
 		$this->child_title_var          = 'item_title';
 		$this->child_title_fallback_var = 'item_title';
 
-		$this->fields_defaults             = array(
-			'tile_link' => array( 'off', 'add_default_setting' ),
-		);
 		$this->advanced_setting_title_text = esc_html__( 'New Service Tile', 'et_builder' );
 		$this->settings_text               = esc_html__( 'Service Tile Settings', 'et_builder' );
 		$this->main_css_element            = '%%order_class%%';
