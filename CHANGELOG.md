@@ -1,3 +1,7 @@
+v1.13.3
+- Fixed issue with Panel Heading alignment not rendering properly
+- Fixed margins when homepage is set to Latest Post instead of static post
+
 v1.13.2a
 - Updated npm packages
 - Disable Results Browsing History for Google Custom Search

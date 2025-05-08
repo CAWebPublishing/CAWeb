@@ -235,11 +235,6 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 		$this->add_classname( 'card' );
 		$this->add_classname( sprintf( 'card-%1$s', $panel_layout ) );
 
-		if ( 'none' === $panel_layout ) {
-			$this->add_classname( 'overflow-visible' );
-			$this->add_classname( 'border-0' );
-		}
-
 		$class = sprintf( ' class="%1$s" ', $this->module_classname( $render_slug ) );
 
 		$content = $this->content;
@@ -250,17 +245,15 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 			$heading_size = $this->props['heading_size'];
 
 			$display_options = '';
-			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon, 'me-2', 'vertical-align:sub;' ) : '';
+			$display_icon    = 'on' === $use_icon ? $this->caweb_get_icon_span( $icon ) : '';
 
 			if ( 'on' === $show_button ) {
-				$button_link     = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 				$button_text     = empty( $button_text ) ? 'Read More' : $button_text;
+				$button_link     = ! empty( $button_link ) ? esc_url( $button_link ) : '';
 				$button_target   = 'on' === $button_target ? '_blank' : '_self';
-				$option_classes  = 'right' === $heading_align ? ' pl-2' : '';
 
 				$display_options = sprintf(
-					'<div class="options%1$s"><a href="%2$s" class="btn btn-%3$s" target="%4$s">%5$s</a></div>',
-					$option_classes,
+					'<div class="options"><a href="%1$s" class="btn btn-%2$s" target="%3$s">%4$s</a></div>',
 					$button_link,
 					$panel_layout,
 					$button_target,
@@ -272,9 +265,10 @@ class CAWeb_Module_Fullwidth_Panel extends ET_Builder_CAWeb_Module {
 				sprintf( ' style="color: %1$s;"', $heading_text_color ) : '';
 
 			$display_title = sprintf(
-				'<div class="card-header border-bottom-0 text-%2$s"><%1$s class="card-title pb-0" %3$s>%4$s%5$s</%1$s>%6$s</div>',
-				$heading_size,
+				'<div class="card-header %1$s%2$s"><%3$s class="card-title" %4$s>%5$s%6$s</%3$s>%7$s</div>',
 				$heading_align,
+				'none' === $panel_layout ? ' border-bottom-0' : '',
+				$heading_size,
 				$heading_text_color,
 				$display_icon,
 				$title,
