@@ -1,4 +1,5 @@
 /* Remove the State Template background image from Divi Button */
 .et_pb_button{
-	background-image: none !important;
+	background-image: none !important; // this can probably be removed in future versions of Divi
+	padding: .3em 1em; // As of Divi 4.27.4
 }

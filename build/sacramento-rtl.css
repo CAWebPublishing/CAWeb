@@ -15653,7 +15653,7 @@ a:focus {
   outline: solid 2px #0D81CE !important;
 }
 
-#page-container a:not(.et_pb_button, .btn) {
+#page-container a:not(.btn, .nav-link) {
   padding: 0.5rem 0;
 }
 
@@ -16571,26 +16571,26 @@ figure.executive-profile.vertical .body {
    LIST STYLES /src/styles/components/lists.scss
 ----------------------------------------- */
 /* We assign the specificity to the defaults as 1-1-1 */
-#page-container ul {
+/*
+  we don't want to mess with the following components:
+  - .nav
+*/
+#page-container ul:not(.nav) {
   list-style-type: disc;
 }
-
-#page-container ul ul {
+#page-container ul:not(.nav) ul {
   list-style-type: circle;
 }
-
-#page-container ul ul ul {
+#page-container ul:not(.nav) ul ul {
   list-style-type: square;
 }
 
 #page-container ol {
   list-style-type: decimal;
 }
-
 #page-container ol ol {
   list-style-type: lower-alpha;
 }
-
 #page-container ol ol ol {
   list-style-type: lower-roman;
 }

@@ -24,13 +24,13 @@ let entries = {
   ]
 };
 
-fs.readdirSync('node_modules/@caweb/html-webpack-plugin/build').filter(file => file.toString().endsWith('.css') && ! file.toString().includes('-rtl') ).forEach((color) => {
+fs.readdirSync('node_modules/@caweb/framework/build').filter(file => file.toString().endsWith('.css') && ! file.toString().includes('-rtl') ).forEach((color) => {
   // add entries for each colorscheme 
   var scheme = color.substring(0, color.indexOf('.')).replace(' ', '');
 
   entries[`${scheme}`] = [
-    `@caweb/html-webpack-plugin/build/${scheme}.css`,
-    `@caweb/html-webpack-plugin/build/${scheme}.js`
+    `@caweb/framework/build/${scheme}.css`,
+    `@caweb/framework/build/${scheme}.js`
   ]
 })
 

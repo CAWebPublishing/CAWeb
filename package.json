@@ -9,11 +9,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@caweb/cli": "^1.10.12",
+    "@caweb/cli": "^1.11.1",
     "@caweb/icon-library": "^1.1.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.6",
-    "bootstrap-icons": "^1.12.1"
+    "bootstrap-icons": "^1.13.1"
   },
   "scripts": {
     "caweb": "caweb",
