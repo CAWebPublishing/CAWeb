@@ -74,7 +74,9 @@ function caweb_body_class( $wp_classes, $extra_classes ) {
 			$whitelist[] = 'divi-built';
 		} else{
 			// if using Classic Editor ( tinyMCE not Gutenberg ) add this class.
-			if( is_plugin_active('classic-editor/classic-editor.php') || ! use_block_editor_for_post( $post ) ){
+			// if on homepage and homepage is set to latest posts.
+			if( ( is_plugin_active('classic-editor/classic-editor.php') || ! use_block_editor_for_post( $post ) ) ||
+				( is_front_page() && in_array( 'blog', $wp_classes, true ) ) ){
 				$whitelist[] = 'classic-built';
 			}
 
