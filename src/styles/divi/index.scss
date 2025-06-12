@@ -3,12 +3,17 @@
 @import "base";
 @import "icons";
 
-@import "modules/blurb";
-@import "modules/button";
-@import "modules/icon";
-@import "modules/learn_more";
-@import "modules/person";
-@import "modules/slider";
-@import "modules/tab";
-@import "modules/text";
-@import "modules/toggle";
+/* Divi modules only go in the #page-container */
+#page-container{ 
+
+    @import "modules/blurb";
+    @import "modules/button";
+    @import "modules/icon";
+    @import "modules/learn_more";
+    @import "modules/person";
+    @import "modules/slider";
+    @import "modules/tab";
+    @import "modules/text";
+    @import "modules/toggle";
+
+}
