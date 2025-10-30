@@ -1,8 +1,3 @@
-/*----------------
- # Bootstrap
-----------------*/
-@import "../bootstrap";
-
 /*---------------
  # Options
 ---------------*/
@@ -16,9 +11,7 @@
 @import "../wp/login";
 @import "../wp/customizer";
 
-// Add CAWeb Icon Library 
-@import '@caweb/icon-library/build/font-only.css';
-
+// Add Divi Icon Library 
 @import '../divi/icons';
 
 /* Overrides styles applied by conflict between WordPress and Bootstrap */

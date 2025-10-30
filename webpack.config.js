@@ -3,17 +3,20 @@
  * 
  * @link https://webpack.js.org/configuration/
  */
-const fs = require('fs'); // File System
+import fs from 'fs';
 
-let entries = {
+let entry = {
   'caweb-core':[
     './src/styles/frontend.scss',
+    '@caweb/icon-library/build/font-only.css',
     './src/scripts/google/',
     './src/scripts/custom/',
     './src/scripts/a11y/'
   ],
   'caweb-admin':[
     './src/styles/admin/index.scss',
+    'bootstrap-icons/font/bootstrap-icons.css',
+    '@caweb/icon-library/build/font-only.css',
     './src/scripts/admin/',
   ],
   'caweb-customizer': [
@@ -28,12 +31,12 @@ fs.readdirSync('node_modules/@caweb/framework/build').filter(file => file.toStri
   // add entries for each colorscheme 
   var scheme = color.substring(0, color.indexOf('.')).replace(' ', '');
 
-  entries[`${scheme}`] = [
+  entry[`${scheme}`] = [
     `@caweb/framework/build/${scheme}.css`,
     `@caweb/framework/build/${scheme}.js`
   ]
 })
 
-module.exports = {
-  entry: entries,
+export default {
+  entry
 }
