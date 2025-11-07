@@ -1,4 +1,5 @@
 v1.14.0
+- Transition from archived https://github.com/elegantthemes/create-divi-extension to new Divi 5 API https://devalpha.elegantthemes.com/
 - Updated npm packages
 - Updated webpack config
 - Updated import order of styles
