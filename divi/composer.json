@@ -1,0 +1,9 @@
+{
+    "name": "caweb/divi-extension-modules",
+    "autoload": {
+        "psr-4": {
+            "CAWeb\\Modules\\": "build/modules/"
+        }
+    },
+    "require": {}
+}

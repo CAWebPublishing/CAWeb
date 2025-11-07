@@ -1,4 +1,4 @@
-v1.13.4
+v1.14.0
 - Updated npm packages
 - Updated webpack config
 - Updated import order of styles
