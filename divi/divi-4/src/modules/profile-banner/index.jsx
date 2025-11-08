@@ -7,56 +7,35 @@ class CAWebModuleProfileBanner extends CAWeb_Component {
   static slug = 'et_pb_profile_banner';
 
   render() {
-   var moduleID = "" !== this.props.module_id ? this.props.module_id : ''
-		var classes = undefined !== this.props.module_class ? this.props.module_class : '';
-		var classList = "et_pb_profile_banner et_pb_module " + classes;
+    let { name, job_title, profile_link, url, portrait_url, portrait_alt, round_image, is_vertical } = this.props;
 
-    var image_class = '';
-    var figure_class = ' bg-white border rounded';
+		url = "" !== url ? encodeURIComponent( url ) : '';
 
-    if( 'on' === this.props.round_image ){
-      var image_class = ' rounded-circle';
-      var figure_class = ' border-0 bg-greylight-radialgradient';
-    }
-
-    var image = "" !== this.props.portrait_url ? 
+    var image = "" !== portrait_url ? 
         <img 
-          className={ 'width-80 height-80' + image_class } 
-          src={this.props.portrait_url} 
-          alt={ "" !== this.props.portrait_alt ? this.props.portrait_alt : '' } />
+          className={ 'on' === round_image ? 'rounded-circle' : '' } 
+          src={portrait_url} 
+          alt={ portrait_alt } />
          : '';
 
-    var job_title = "" !== this.props.job_title ? 
-      <div class="d-block">
-        <span class="font-size-13">{ this.props.job_title }</span></div> : '';
+    job_title = "" !== job_title ? 
+        <span>{ job_title }</span> : '';
 
-    var profile_link = "" !== this.props.profile_link && "" !== this.props.url ? 
-    <a href={this.props.url} class="font-size-12" aria-label={ "Link to " + this.props.name + " Website"}>{this.props.profile_link}</a> : '';
-		
-    var name         = "" !== this.props.name ? <h3 class="h4 m-0">{this.props.name}</h3> : '';
+    profile_link = "" !== profile_link && "" !== url ?
+    <a href={url}>{profile_link}</a> : '';
 
-    var media_body = <Fragment>{name}{job_title}<hr class ="m-t-sm m-b-0" />{profile_link}</Fragment>;
-
-    if( 'on' !== this.props.is_vertical ){
-      var body = <Fragment>
-        <div class="media">
-          <div class="d-flex m-r-md">{image}</div>
-          <div class="media-body">{media_body}</div>
-          </div>
-        </Fragment>
-    }else{
-      classList += ' text-center';
-
-      var body = <Fragment>{image}{media_body}</Fragment>;
-    }
+    name = "" !== name ? <h4>{name}</h4> : '';
 
     return (
 			<Fragment>
-        <div id={moduleID} className={classList}>
-          <figure className={'p-a' + figure_class}>
-              {body}
+        <figure className={'executive-profile' + ('on' === is_vertical ? ' vertical' : '')}>
+              {image}
+              <div className="body">
+                {name}
+                {job_title}
+                {profile_link}
+              </div>
           </figure>
-        </div>
      </Fragment>
 		);
   }

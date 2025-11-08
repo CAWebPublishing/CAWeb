@@ -9,7 +9,7 @@ if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
 	require_once dirname( __DIR__ ) . '/class-caweb-builder-element.php';
 }
 
-class CAWeb_Module_Profile_Banner extends ET_Builder_Module {
+class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug = 'et_pb_profile_banner';
 
@@ -176,51 +176,31 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_Module {
 			$portrait_alt = get_post_meta( $portrait_id, '_wp_attachment_image_alt', true );
 		}
 
-		$figure_class = 'row';
-		$image_class  = 'me-3';
-
-		// Vertical Layout
-		if( 'on' === $is_vertical ){
-			$figure_class = 'column bg-light vertical';
-			$image_class = 'align-self-center';
-		}
-
-		// Rounded Profile Banner.
-		if ( 'on' === $round ) {
-			$image_class  .= ' rounded-circle';
-		}
-
+		// Profile Banner.
 		$image = ! empty( $portrait_url ) ? sprintf(
-			'<img class="width-80 height-80 %1$s" src="%2$s"%3$s>',
-			$image_class,
+			'<img%1$ssrc="%2$s"%3$s>',
+			'on' === $round ? ' class="rounded-circle" ' : ' ',
 			$portrait_url,
 			! empty( $portrait_alt ) ? sprintf( ' alt="%1$s"', $portrait_alt ) : ''
 		) : '';
 
-		$name         = ! empty( $name ) ? sprintf( '<h4 class="pb-0">%1$s</h4>', $name ) : '';
-		$job_title    = ! empty( $job_title ) ? sprintf( '<span class="d-block">%1$s</span>', $job_title ) : '';
+		$name         = ! empty( $name ) ? sprintf( '<h4>%1$s</h4>', $name ) : '';
+		$job_title    = ! empty( $job_title ) ? sprintf( '<span>%1$s</span>', $job_title ) : '';
 		$profile_link = ! empty( $profile_link ) ? sprintf( '<a href="%1$s">%2$s</a>', $url, $profile_link ) : '';
 
 		$media_body = sprintf(
-			'<div class="body%1$s">%2$s%3$s%4$s</div>',
-			'on' === $is_vertical ? ' text-center' : '',
+			'<div class="body">%1$s%2$s%3$s</div>',
 			$name,
 			$job_title,
 			$profile_link
 		);
 
-		$output = sprintf('<figure class="executive-profile p-3 d-flex flex-%1$s">%2$s%3$s</figure>',
-			$figure_class,
+		return sprintf('<figure class="executive-profile%1$s">%2$s%3$s</figure>',
+			'on' === $is_vertical ? ' vertical' : '',
 			$image,
 			$media_body
 		);
 
-		return sprintf(
-			'<div%1$s class="%2$s">%3$s</div>',
-			$this->module_id(),
-			$this->module_classname( $render_slug ),
-			$output
-		);
 	}
 }
 

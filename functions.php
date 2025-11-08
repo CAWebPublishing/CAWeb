@@ -79,7 +79,7 @@ add_filter( 'attachment_link', 'caweb_search_media_direct_link', 99, 2 );
 /*
 Add CAWeb/Divi Extension
 */
-// require_once sprintf( '%1$s/divi/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
+require_once sprintf( '%1$s/divi/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
 
 /*
 -------------------------------------

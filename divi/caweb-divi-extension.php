@@ -41,11 +41,11 @@ require_once CAWEB_DIVI_EXT_DIR . 'divi-4/divi-4.php';
 /**
  * Requires Autoloader.
  */
-require CAWEB_DIVI_EXT_DIR . 'vendor/autoload.php';
-require CAWEB_DIVI_EXT_DIR . 'build/modules/modules.php';
+// require CAWEB_DIVI_EXT_DIR . 'vendor/autoload.php';
+// require CAWEB_DIVI_EXT_DIR . 'build/modules/modules.php';
 
 /** Divi 5 Actions */
-add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'caweb_divi_extension_module_enqueue_vb_scripts' );
+// add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'caweb_divi_extension_module_enqueue_vb_scripts' );
 
 /**
  * Enqueue style and scripts of Module Extension Example for Visual Builder.

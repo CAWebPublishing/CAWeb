@@ -203,69 +203,39 @@ __webpack_require__.r(__webpack_exports__);
 
 class CAWebModuleProfileBanner extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["default"] {
   render() {
-    var moduleID = "" !== this.props.module_id ? this.props.module_id : '';
-    var classes = undefined !== this.props.module_class ? this.props.module_class : '';
-    var classList = "et_pb_profile_banner et_pb_module " + classes;
-    var image_class = '';
-    var figure_class = ' bg-white border rounded';
-    if ('on' === this.props.round_image) {
-      var image_class = ' rounded-circle';
-      var figure_class = ' border-0 bg-greylight-radialgradient';
-    }
-    var image = "" !== this.props.portrait_url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-      className: 'width-80 height-80' + image_class,
-      src: this.props.portrait_url,
-      alt: "" !== this.props.portrait_alt ? this.props.portrait_alt : ''
+    let {
+      name,
+      job_title,
+      profile_link,
+      url,
+      portrait_url,
+      portrait_alt,
+      round_image,
+      is_vertical
+    } = this.props;
+    url = "" !== url ? encodeURIComponent(url) : '';
+    var image = "" !== portrait_url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+      className: 'on' === round_image ? 'rounded-circle' : '',
+      src: portrait_url,
+      alt: portrait_alt
     }) : '';
-    var job_title = "" !== this.props.job_title ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      class: "d-block",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-        class: "font-size-13",
-        children: this.props.job_title
-      })
+    job_title = "" !== job_title ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+      children: job_title
     }) : '';
-    var profile_link = "" !== this.props.profile_link && "" !== this.props.url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-      href: this.props.url,
-      class: "font-size-12",
-      "aria-label": "Link to " + this.props.name + " Website",
-      children: this.props.profile_link
+    profile_link = "" !== profile_link && "" !== url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+      href: url,
+      children: profile_link
     }) : '';
-    var name = "" !== this.props.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-      class: "h4 m-0",
-      children: this.props.name
+    name = "" !== name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+      children: name
     }) : '';
-    var media_body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: [name, job_title, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
-        class: "m-t-sm m-b-0"
-      }), profile_link]
-    });
-    if ('on' !== this.props.is_vertical) {
-      var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          class: "media",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            class: "d-flex m-r-md",
-            children: image
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            class: "media-body",
-            children: media_body
-          })]
-        })
-      });
-    } else {
-      classList += ' text-center';
-      var body = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-        children: [image, media_body]
-      });
-    }
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        id: moduleID,
-        className: classList,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
-          className: 'p-a' + figure_class,
-          children: body
-        })
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("figure", {
+        className: 'executive-profile' + ('on' === is_vertical ? ' vertical' : ''),
+        children: [image, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "body",
+          children: [name, job_title, profile_link]
+        })]
       })
     });
   }

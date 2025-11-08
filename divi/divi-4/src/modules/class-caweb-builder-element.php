@@ -41,10 +41,10 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @return string
 	 */
 	//phpcs:disable
-	protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
+	// protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
 	//phpcs:enable
-		return $output;
-	}
+		// return $output;
+	// }
 
 	/**
 	 * Available module text sizes
