@@ -59,9 +59,6 @@ trait RenderCallbackTrait {
 			'tag' => 'img',
 			'attributes' => array(
 				'class' => array(
-					'width-80',
-					'height-80',
-					$isVertical ? 'align-self-center' : 'me-3',
 					$isRounded ? 'rounded-circle' : '',
 				),
 				'src' => $portrait['src'] ?? '',
@@ -82,11 +79,10 @@ trait RenderCallbackTrait {
 			'attributes' => array(
 				'class' => array(
 					'body',
-					$isVertical ? 'text-center' : '',
 				),
 			),
 			'children' => array(
-				$elements->render( [ 'attrName' => 'name', 'class' => 'ok' ] ),
+				$elements->render( [ 'attrName' => 'name' ] ),
 				$elements->render( [ 'attrName' => 'job' ] ),
 				isset( $profile['url'], $profile['text'] ) ?
 					HTMLUtility::render(array(
@@ -104,9 +100,7 @@ trait RenderCallbackTrait {
 			'attributes'        => array(
 				'class' => array(
 					'executive-profile',
-					'p-3',
-					'd-flex',
-					$isVertical ? 'flex-column bg-light vertical' : 'flex-row'
+					$isVertical ? 'vertical' : ''
 				),
 			),
 			'childrenSanitizer' => 'et_core_esc_previously',

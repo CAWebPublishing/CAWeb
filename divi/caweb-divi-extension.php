@@ -34,18 +34,14 @@ define( 'CAWEB_DIVI_EXT_DIR', str_replace( '\\', '/', __DIR__ . '/' ) );
 define( 'CAWEB_DIVI_EXT_URL', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', CAWEB_DIVI_EXT_DIR ) ) );
 define( 'CAWEB_DIVI_EXT_MODULES_JSON_PATH', CAWEB_DIVI_EXT_DIR . 'src/modules/' );
 
-// Load Divi 4 modules.
-require_once CAWEB_DIVI_EXT_DIR . 'divi-4/divi-4.php';
-
+/** Divi 5 Actions */
+add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'caweb_divi_extension_module_enqueue_vb_scripts' );
 
 /**
  * Requires Autoloader.
  */
-// require CAWEB_DIVI_EXT_DIR . 'vendor/autoload.php';
-// require CAWEB_DIVI_EXT_DIR . 'build/modules/modules.php';
-
-/** Divi 5 Actions */
-// add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'caweb_divi_extension_module_enqueue_vb_scripts' );
+require CAWEB_DIVI_EXT_DIR . 'vendor/autoload.php';
+require CAWEB_DIVI_EXT_DIR . 'build/modules/modules.php';
 
 /**
  * Enqueue style and scripts of Module Extension Example for Visual Builder.
@@ -101,3 +97,6 @@ function caweb_divi_extension_module_enqueue_vb_scripts() {
 		// );
 	}
 }
+
+// Load Divi 4 modules.
+require_once CAWEB_DIVI_EXT_DIR . 'divi-4/divi-4.php';

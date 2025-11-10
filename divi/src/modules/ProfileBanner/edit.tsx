@@ -36,7 +36,7 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
 
   let profile = getAttrByMode(attrs?.profile?.innerContent);
   let portrait = getAttrByMode(attrs?.portrait?.advanced);
-  console.log( attrs)
+  console.log( props)
 
   console.log( portrait ) 
   return (
@@ -55,22 +55,18 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
         })
       }
       <figure className={
-        "executive-profile p-3 d-flex flex-" + 
-        ("on" === portrait?.vertical ? 'column bg-light vertical' : 'row')
+        "executive-profile" + 
+        ("on" === portrait?.vertical ? ' vertical' : '')
         }>
         {
           elements.render({
             attrName: 'portrait',
             attrSubName: 'src',
             className: 
-              ("on" === portrait?.rounded ? 'rounded-circle ' : '') + // rounded image +
-              ("on" === portrait?.vertical ? 'align-self-center ' : 'me-3 ') // vertical alignment
-              ,
+              ("on" === portrait?.rounded ? 'rounded-circle' : '') // rounded image 
           })
           }
-        <div className={"body" + ("on" === portrait?.vertical ? ' text-center' : '')}>
-          
-          
+        <div className="body">
           {
           elements.render({
             attrName: 'name',
@@ -83,7 +79,13 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
           }
           {
           profile?.text && profile?.url ? 
-          <a href={profile.url}>{profile.text}</a> : ''
+          elements.render({
+            attrName: 'profile',
+            attrSubName: 'text',
+            htmlAttributes: {
+              href: profile?.url,
+            }
+          }) : ''
           } 
         </div>
       </figure>

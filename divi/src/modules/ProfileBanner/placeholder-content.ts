@@ -6,18 +6,4 @@ import { ModuleAttrs } from './types';
 
 
 export const placeholderContent: ModuleAttrs = {
-  name: {
-    innerContent: {
-      desktop: {
-        value: 'placeholder.name',
-      },
-    }
-  },
-  job: {
-    innerContent: {
-      desktop: {
-        value: 'placeholder.job',
-      },
-    }
-  }
 };

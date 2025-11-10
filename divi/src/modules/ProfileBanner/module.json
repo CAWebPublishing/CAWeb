@@ -109,8 +109,19 @@
     "profile": {
       "type": "object",
       "inlineEditor": "plainText",
-      "elementType": "heading",
+      "tagName": "a",
+      "elementType": "element",
       "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "text": "Profile Link",
+              "url": "#"
+            }
+          }
+        }
+      },
       "settings": {
         "innerContent": {
           "groupType": "group-items",
