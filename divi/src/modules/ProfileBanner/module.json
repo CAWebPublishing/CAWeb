@@ -46,14 +46,11 @@
       "elementType": "heading",
       "childrenSanitizer": "et_core_esc_previously",
       "tagName": "h4",
-      "attributes": {
-        "class": "pb-0"
-      },
       "settings": {
         "innerContent": {
           "groupType": "group-item",
           "item": {
-            "groupSlug": "profileHeader",
+            "groupSlug": "header",
             "render": true,
             "attrName": "name.innerContent",
             "label": "Profile Name",
@@ -79,14 +76,11 @@
       "elementType": "heading",
       "childrenSanitizer": "et_core_esc_previously",
       "tagName": "span",
-      "attributes": {
-        "class": "d-block"
-      },
       "settings": {
         "innerContent": {
           "groupType": "group-item",
           "item": {
-            "groupSlug": "profileHeader",
+            "groupSlug": "header",
             "render": true,
             "attrName": "job.innerContent",
             "label": "Job Title",
@@ -116,7 +110,7 @@
         "innerContent": {
           "desktop": {
             "value": {
-              "text": "Profile Link",
+              "text": "Link",
               "url": "#"
             }
           }
@@ -127,11 +121,11 @@
           "groupType": "group-items",
           "items": {
             "text": {
-              "groupSlug": "profileBody",
+              "groupSlug": "profile",
               "render": true,
               "attrName": "profile.innerContent",
               "subName": "text",
-              "label": "Profile Link",
+              "label": "Link Text",
               "description": "Input the text for the profile link.",
               "features": {
                 "sticky": false,
@@ -145,11 +139,11 @@
               }
             },
             "url": {
-              "groupSlug": "profileBody",
+              "groupSlug": "profile",
               "render": true,
               "attrName": "profile.innerContent",
               "subName": "url",
-              "label": "Profile URL",
+              "label": "URL",
               "description": "Input the website of the profile.",
               "features": {
                 "sticky": false,
@@ -172,19 +166,16 @@
       "childrenSanitizer": "et_core_esc_previously",
       "tagName": "img",  
       "elementType": "image",
-      "attributes": {
-        "class": "width-80 height-80"
-      },
       "settings": {
         "innerContent": {
           "groupType": "group-items",
           "items": {
             "imgText": {
-              "groupSlug": "profileBody",
+              "groupSlug": "portrait",
               "render": true,
               "attrName": "portrait.innerContent",
               "subName": "src",
-              "label": "Portrait Image URL",
+              "label": "Image URL",
               "description": "Type in the URL to the image you would like to display, or upload your desired image below.",
               "features": {
                 "sticky": false,
@@ -206,11 +197,11 @@
               }
             },
             "img": {
-              "groupSlug": "profileBody",
+              "groupSlug": "portrait",
               "render": true,
               "attrName": "portrait.innerContent",
               "subName": "src",
-              "label": "Portrait Image",
+              "label": "Image",
               "description": "Upload your desired image, or type in the URL to the image you would like to display above.",
               "features": {
                 "sticky": false,
@@ -232,11 +223,11 @@
               }
             },
             "alt": {
-              "groupSlug": "profileBody",
+              "groupSlug": "portrait",
               "render": true,
               "attrName": "portrait.innerContent",
               "subName": "alt",
-              "label": "Portrait Image Alt Text",
+              "label": "Image Alt Text",
               "description": "Input the alt text for the portrait image.",
               "features": {
                 "sticky": false,
@@ -250,7 +241,7 @@
               }
             },
             "rounded": {
-              "groupSlug": "profileBodyDesign",
+              "groupSlug": "portraitDesign",
               "render": true,
               "label": "Round Image",
               "attrName": "portrait.advanced",
@@ -269,7 +260,7 @@
               }
             },
             "vertical": {
-              "groupSlug": "profileBodyDesign",
+              "groupSlug": "portraitDesign",
               "render": true,
               "label": "Display Vertically",
               "attrName": "portrait.advanced",
@@ -297,10 +288,10 @@
     "design": "auto",
     "advanced": "auto",
     "groups":{
-      "profileHeader": {
+      "header": {
         "panel": "content",
         "priority": 2,
-        "groupName": "profileHeader",
+        "groupName": "header",
         "component": {
             "name": "divi/composite",
             "props": {
@@ -308,26 +299,36 @@
             }
           }
       },
-      "profileBody": {
+      "profile": {
         "panel": "content",
         "priority": 2,
-        "groupName": "profileBody",
+        "groupName": "profile",
         "component": {
             "name": "divi/composite",
             "props": {
-              "groupLabel": "Body"
+              "groupLabel": "Profile"
             }
           }
       },
-      
-      "profileBodyDesign": {
-        "panel": "design",
+      "portrait": {
+        "panel": "content",
         "priority": 2,
-        "groupName": "profileBodyDesign",
+        "groupName": "portrait",
         "component": {
             "name": "divi/composite",
             "props": {
-              "groupLabel": "Body"
+              "groupLabel": "Portrait"
+            }
+          }
+      },
+      "portraitDesign": {
+        "panel": "design",
+        "priority": 2,
+        "groupName": "portraitDesign",
+        "component": {
+            "name": "divi/composite",
+            "props": {
+              "groupLabel": "Portrait"
             }
           }
       }

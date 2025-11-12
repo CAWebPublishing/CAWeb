@@ -1,12 +1,12 @@
 <?php
 /**
- * Test::custom_css().
+ * Location::custom_css().
  *
- * @package CAWeb\Modules\Test
+ * @package CAWeb\Modules\Location
  * @since ??
  */
 
-namespace CAWeb\Modules\Test\ModuleTrait;
+namespace CAWeb\Modules\Location\ModuleTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
@@ -17,15 +17,12 @@ trait CustomCssTrait {
 	/**
 	 * Custom CSS fields
 	 *
-	 * This function is equivalent of JS const cssFields located in
-	 * src/components/d4-module/custom-css.ts.
-	 *
 	 * A minor difference with the JS const cssFields, this function did not have `label` property on each array item.
 	 *
 	 * @since ??
 	 */
 	public static function custom_css() {
-		return \WP_Block_Type_Registry::get_instance()->get_registered( 'caweb/test' )->customCssFields;
+		return \WP_Block_Type_Registry::get_instance()->get_registered( 'caweb/profile-banner' )->customCssFields;
 	}
 
 }

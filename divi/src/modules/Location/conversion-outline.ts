@@ -51,8 +51,29 @@ export const conversionOutline: ModuleConversionOutline = {
     title:         'css.*.title',
   },
   module: {
-    title:         'title.innerContent.*',
+    location_layout: 'location.innerContent.*.layout',
+    featured_image: 'location.innerContent.*.featured_image.innerContent.*.src',
+    name:         'location.innerContent.*.name',
+    desc:    'location.innerContent.*.desc',
+    show_button:    'location.innerContent.*.desc',
+    location_link:    'location.innerContent.*.link',
+    addr:    'address.innerContent.*.addr',
+    city:    'address.innerContent.*.city',
+    state:    'address.innerContent.*.state',
+    zip:    'address.innerContent.*.zip',
+    show_contact:    'contact.innerContent.*.show_contact',
+    phone:    'contact.innerContent.*.phone',
+    fax:    'contact.innerContent.*.fax',
+    show_icon:    'icon.innerContent.*.show_icon',
+    font_icon:    'icon.innerContent.*.font_icon',
+    // module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
+    // module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
+    // module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur',
   },
   valueExpansionFunctionMap: {
+    font_icon: (value) => {
+
+      return value.replace(/%%/g, '');
+    }
   }
 };

@@ -85,7 +85,7 @@ class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     addr = addr.filter(w => w !== '');
     return addr.join(', ');
   }
-  caweb_get_google_map_place_link(addr, embed, classList = '') {
+  caweb_get_google_map_place_link(addr, embed = false, classList = '') {
     addr = this.caweb_return_address(addr);
     if (this.isEmpty(addr)) {
       return;
@@ -183,6 +183,229 @@ class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 /***/ }),
 
+/***/ "./divi-4/src/modules/location/index.jsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _component_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/react/jsx-runtime.js");
+
+// External Dependencies
+
+
+
+class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["default"] {
+  // Render Contact Layout
+  renderContactLocation() {
+    let {
+      addr,
+      city,
+      state,
+      zip,
+      show_contact,
+      phone,
+      fax,
+      show_button,
+      location_link,
+      name,
+      show_icon,
+      font_icon
+    } = this.props;
+    let display_other = "";
+    let display_button = "";
+
+    // If displaying an icon
+    let display_icon = "on" === show_icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      class: "thumbnail",
+      children: this.caweb_get_icon_span(font_icon)
+    }) : '';
+
+    // wrap name in strong tag
+    name = "" !== name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+      children: name
+    }) : '';
+
+    // get a map link if address info exists
+    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+
+    // show contact info if enabled
+    if ("on" === show_contact) {
+      phone = "" !== phone ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["General Information: ", phone]
+      }) : '';
+      fax = "" !== fax ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["FAX: ", fax]
+      }) : '';
+      display_other = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+        children: [phone, fax]
+      });
+    }
+
+    // if show button is enabled and location link exists
+    if ("on" === show_button && "" !== location_link) {
+      display_button = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        href: location_link,
+        class: "btn btn-outline-dark",
+        target: "_blank",
+        children: "More"
+      });
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: [display_icon, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "contact",
+        children: [name, address, display_other, display_button]
+      })]
+    });
+  }
+
+  // Render Mini Layout
+  renderMiniLocation() {
+    let {
+      addr,
+      city,
+      state,
+      zip,
+      location_link,
+      name,
+      show_icon,
+      font_icon
+    } = this.props;
+
+    // If displaying an icon
+    let display_icon = "on" === show_icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      class: "thumbnail",
+      children: this.caweb_get_icon_span(font_icon)
+    }) : '';
+
+    // if name exists
+    if ("" !== name) {
+      // if location link exists make a link, otherwise a strong tag
+      name = "" !== location_link ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        href: encodeURIComponent(location_link),
+        target: "_blank",
+        children: name
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+        children: name
+      });
+    }
+    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: [display_icon, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "contact",
+        children: [name, address]
+      })]
+    });
+  }
+
+  // Render Banner Layout
+  renderBannerLocation() {
+    let {
+      addr,
+      city,
+      state,
+      zip,
+      show_contact,
+      phone,
+      fax,
+      show_button,
+      location_link,
+      name,
+      featured_image,
+      desc
+    } = this.props;
+
+    // If displaying a featured image
+    // @todo: alt text for images
+    featured_image = "" !== featured_image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      class: "thumbnail",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: featured_image
+      })
+    }) : '';
+
+    // wrap name in strong tag
+    name = "" !== name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+      children: name
+    }) : '';
+
+    // get a map link if address info exists
+    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "address",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        class: "ca-gov-icon-road-pin"
+      }), this.caweb_get_google_map_place_link([addr, city, state, zip])]
+    }) : '';
+
+    // Add description markup
+    desc = "" !== desc ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+        children: "Description"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        class: "description",
+        children: desc
+      })]
+    }) : '';
+
+    // if show button is enabled and location link exists
+    let display_button = "on" === show_button && "" !== location_link ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+      href: location_link,
+      className: "btn btn-outline-dark",
+      target: "_blank",
+      children: "View More Details"
+    }) : '';
+
+    // contact info
+    let contact = "" !== name || "" !== address ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      class: "contact",
+      children: [name, address]
+    }) : '';
+
+    // summary info
+    let summary = "" !== desc || "" !== display_button ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      class: "summary",
+      children: [desc, display_button]
+    }) : '';
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: [featured_image, contact, summary]
+    });
+  }
+  render() {
+    let {
+      location_layout
+    } = this.props;
+    let output = "";
+    switch (location_layout) {
+      case "mini":
+        output = this.renderMiniLocation();
+        break;
+      case "banner":
+        output = this.renderBannerLocation();
+        break;
+      case "contact":
+      default:
+        output = this.renderContactLocation();
+        break;
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "location " + location_layout,
+        children: output
+      })
+    });
+  }
+}
+(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleLocation, "slug", 'et_pb_ca_location_widget');
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleLocation);
+
+/***/ }),
+
 /***/ "./divi-4/src/modules/profile-banner/index.jsx":
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -242,43 +465,6 @@ class CAWebModuleProfileBanner extends _component_jsx__WEBPACK_IMPORTED_MODULE_2
 }
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleProfileBanner, "slug", 'et_pb_profile_banner');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleProfileBanner);
-
-/***/ }),
-
-/***/ "./divi-4/src/modules/test/index.jsx":
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _component_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/component.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/react/jsx-runtime.js");
-
-// External Dependencies
-
-
-
-class CAWebModuleTest extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["default"] {
-  render() {
-    var moduleID = "" !== this.props.module_id ? this.props.module_id : '';
-    var classes = undefined !== this.props.module_class ? this.props.module_class : '';
-    var classList = "et_pb_ca_test et_pb_module " + classes;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        id: moduleID,
-        className: classList,
-        children: [this.props.title, this.props.content()]
-      })
-    });
-  }
-}
-(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleTest, "slug", 'et_pb_ca_test');
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleTest);
 
 /***/ }),
 
@@ -24756,7 +24942,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var _modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./divi-4/src/modules/profile-banner/index.jsx");
-/* harmony import */ var _modules_test_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/test/index.jsx");
+/* harmony import */ var _modules_location_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/location/index.jsx");
 
 
 
@@ -24768,7 +24954,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 jquery__WEBPACK_IMPORTED_MODULE_0__(window).on('et_builder_api_ready', (event, API) => {
   // Register modules.
-  API.registerModules([_modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _modules_test_index_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]]);
+  API.registerModules([_modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _modules_location_index_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]]);
 });
 })();
 

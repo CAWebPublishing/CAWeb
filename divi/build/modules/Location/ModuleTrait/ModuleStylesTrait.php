@@ -1,12 +1,12 @@
 <?php
 /**
- * Test::module_styles().
+ * Location::module_styles().
  *
- * @package CAWeb\Modules\Test
+ * @package CAWeb\Modules\Location
  * @since ??
  */
 
-namespace CAWeb\Modules\Test\ModuleTrait;
+namespace CAWeb\Modules\Location\ModuleTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
@@ -22,10 +22,10 @@ trait ModuleStylesTrait {
 	use CustomCssTrait;
 
 	/**
-	 * Test module's style components.
+	 * Location module's style components.
 	 *
 	 * This function is equivalent of JS function ModuleStyles located in
-	 * src/components/Test/styles.tsx.
+	 * src/components/Location/styles.tsx.
 	 *
 	 * @since ??
 	 *
@@ -70,58 +70,6 @@ trait ModuleStylesTrait {
 							],
 						]
 					),
-					TextStyle::style(
-						[
-							'selector' => $order_class . ' .example_d4_module_inner',
-							'attr'     => $attrs['module']['advanced']['text'] ?? [],
-						]
-					),
-					// Set the `.example_d4_module_inner` element `position` to `relative` if the background image has parallax enabled.
-					CommonStyle::style(
-						[
-							'selector'            => $order_class . ' .example_d4_module_inner',
-							'attr'                => $attrs['module']['decoration']['background'] ?? [],
-							'declarationFunction' => function ( $declaration_function_args ) {
-								$attr_value = $declaration_function_args['attrValue'] ?? [];
-
-								if ( 'on' === ( $attr_value['image']['parallax']['enabled'] ?? 'off' ) ) {
-									return 'position: relative;';
-								}
-
-								return 'position: relative;';
-							},
-						]
-					),
-
-					// Title.
-					$elements->style(
-						[
-							'attrName' => 'title',
-						]
-					),
-
-					// Content.
-					$elements->style(
-						[
-							'attrName' => 'content',
-						]
-					),
-
-					// ATTENTION: The code is intentionally added and commented in FE only as an example of expected value format.
-					// If you have custom style processing, the style output should be passed as an `array` of style declarations
-					// to the `styles` property of the `Style::add` method. For example:
-					// [
-					// 	[
-					// 		'atRules'     => false,
-					// 		'selector'    => $order_class . ' .example_d4_module_inner',
-					// 		'declaration' => 'color: red;'
-					// 	],
-					// 	[
-					// 		'atRules'     => '@media only screen and (max-width: 767px)',
-					// 		'selector'    => $order_class . ' .example_d4_module_inner',
-					// 		'declaration' => 'color: green;'
-					// 	],
-					// ],
 
 					// The code below is an example of how to use the `CssStyle::style` method to generate CSS style.
 					CssStyle::style(

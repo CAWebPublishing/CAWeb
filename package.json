@@ -17,12 +17,14 @@
   },
   "scripts": {
     "caweb": "caweb",
+    "reset-install": "rm -rf ./package-lock.json ./node_modules/",
+    "postinstall": "cd divi && npm install",
+    "postresetInstall": "cd divi && npm run reset-install",
     "build:all": "npm run build && npm run build:divi",
     "build:all:dev": "npm run build:dev && npm run build:divi:dev",
     "build": "caweb build --mode production && caweb build",
     "build:dev": "caweb build",
     "build:divi": "cd divi && npm run build",
-    "build:divi:dev": "cd divi && npm run build:dev",
-    "postinstall": "cd divi && npm install"
+    "build:divi:dev": "cd divi && npm run build:dev"
   }
 }

@@ -18,7 +18,7 @@ import { moduleClassnames } from './module-classnames';
 import { ModuleScriptData } from './module-script-data';
 
 /**
- * Divi 4 Module edit component of visual builder.
+ * Divi 5 Module edit component of visual builder.
  *
  * @since ??
  *
@@ -36,9 +36,7 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
 
   let profile = getAttrByMode(attrs?.profile?.innerContent);
   let portrait = getAttrByMode(attrs?.portrait?.advanced);
-  console.log( props)
-
-  console.log( portrait ) 
+  
   return (
     <ModuleContainer
       attrs={attrs}
@@ -54,16 +52,12 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
           attrName: 'module',
         })
       }
-      <figure className={
-        "executive-profile" + 
-        ("on" === portrait?.vertical ? ' vertical' : '')
-        }>
+      <figure className={`executive-profile${ ("on" === portrait?.vertical ? ' vertical' : '') }`}>
         {
           elements.render({
             attrName: 'portrait',
             attrSubName: 'src',
-            className: 
-              ("on" === portrait?.rounded ? 'rounded-circle' : '') // rounded image 
+            className: `${("on" === portrait?.rounded ? 'rounded-circle' : '')}` // rounded image
           })
           }
         <div className="body">

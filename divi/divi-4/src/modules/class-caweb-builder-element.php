@@ -105,7 +105,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 		$addr = $this->caweb_get_address( $addr );
 
 		$classes = is_array( $classes ) ? implode( ' ', $classes ) : $classes;
-		$classes = sprintf( ' class="%1$s"', $classes );
+		$classes = ! empty( $classes ) ? sprintf( ' class="%1$s"', $classes ) : '';
 
 		if ( $embed ) {
 			$map_url = sprintf( 'https://www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=%2$s', $addr, $this->caweb_google_maps_embed_api_key );

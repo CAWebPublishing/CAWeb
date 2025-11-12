@@ -10,7 +10,7 @@ import { ModuleAttrs } from './types';
 
 
 /**
- * Divi 4 module's script data component.
+ * Divi 5 module's script data component.
  *
  * @since ??
  *

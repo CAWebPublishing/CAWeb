@@ -1,12 +1,12 @@
 <?php
 /**
- * Module: Profile Banner Module class.
+ * Module: Location Module class.
  *
- * @package CAWeb\Modules\Test
+ * @package CAWeb\Modules\Location
  * @since ??
  */
 
-namespace CAWeb\Modules\Test;
+namespace CAWeb\Modules\Location;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
@@ -14,27 +14,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
-use CAWeb\Modules\Test\ModuleTrait;
+use CAWeb\Modules\Location\ModuleTrait;
 
 /**
- * `Test` is consisted of functions used for Divi 4 Module such as Front-End rendering, REST API Endpoints etc.
+ * `Location` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.
  *
  * This is a dependency class and can be used as a dependency for `DependencyTree`.
  *
  * @since ??
  */
-class Test implements DependencyInterface {
+class Location implements DependencyInterface {
 	use ModuleTrait\RenderCallbackTrait;
 
 	/**
-	 * Loads `Test` and registers Front-End render callback and REST API Endpoints.
+	 * Loads `Location` and registers Front-End render callback and REST API Endpoints.
 	 *
 	 * @since ??
 	 *
 	 * @return void
 	 */
 	public function load() {
-		$module_json_folder_path = CAWEB_DIVI_EXT_MODULES_JSON_PATH . 'Test/';
+		$module_json_folder_path = CAWEB_DIVI_EXT_MODULES_JSON_PATH . 'Location/';
 
 		add_action(
 			'init',
@@ -42,7 +42,7 @@ class Test implements DependencyInterface {
 				ModuleRegistration::register_module(
 					$module_json_folder_path,
 					[
-						'render_callback' => [ Test::class, 'render_callback' ],
+						'render_callback' => [ Location::class, 'render_callback' ],
 					]
 				);
 			}

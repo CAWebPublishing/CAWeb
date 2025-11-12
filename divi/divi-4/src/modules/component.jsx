@@ -834,7 +834,7 @@ class CAWeb_Component extends Component {
 		return addr.join(', ');
 	}
 	
-	caweb_get_google_map_place_link(addr, embed, classList = ''){
+	caweb_get_google_map_place_link(addr, embed = false, classList = ''){
 		addr = this.caweb_return_address(addr);
 
 		if( this.isEmpty(addr) ){

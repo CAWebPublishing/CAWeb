@@ -1,12 +1,12 @@
 <?php
 /**
- * Test::module_script_data()
+ * Location::module_script_data()
  *
- * @package CAWeb\Modules\Test
+ * @package CAWeb\Modules\Location
  * @since ??
  */
 
-namespace CAWeb\Modules\Test\ModuleTrait;
+namespace CAWeb\Modules\Location\ModuleTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );

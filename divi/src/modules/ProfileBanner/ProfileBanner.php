@@ -17,7 +17,7 @@ use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 use CAWeb\Modules\ProfileBanner\ModuleTrait;
 
 /**
- * `ProfileBanner` is consisted of functions used for Divi 4 Module such as Front-End rendering, REST API Endpoints etc.
+ * `ProfileBanner` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.
  *
  * This is a dependency class and can be used as a dependency for `DependencyTree`.
  *

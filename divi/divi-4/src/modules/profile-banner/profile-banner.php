@@ -34,17 +34,25 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 		$this->settings_modal_toggles = array(
 			'general'  => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style', 'et_builder' ),
-					'header' => esc_html__( 'Header', 'et_builder' ),
-					'body'   => esc_html__( 'Body', 'et_builder' ),
+					'header'  => array(
+						'title'    => esc_html__( 'Header', 'et_builder' ),
+						'priority' => 1,
+					),
+					'profile'  => array(
+						'title'    => esc_html__( 'Profile', 'et_builder' ),
+						'priority' => 2,
+					),
+					'portrait'   => array(
+						'title'    => esc_html__( 'Portrait', 'et_builder' ),
+						'priority' => 3,
+					),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'body' => esc_html__( 'Body', 'et_builder' ),
-					'text'  => array(
-						'title'    => et_builder_i18n( 'Text' ),
-						'priority' => 49,
+					'portrait'  => array(
+						'title'    => esc_html__( 'Portrait', 'et_builder' ),
+						'priority' => 1,
 					),
 				),
 			),
@@ -77,25 +85,25 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'toggle_slug'     => 'header',
 			),
 			'profile_link' => array(
-				'label'           => esc_html__( 'Profile Link', 'et_builder' ),
+				'label'           => esc_html__( 'Link Text', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Input the text for the profile link.', 'et_builder' ),
 				'tab_slug'        => 'general',
-				'toggle_slug'     => 'body',
-				'default'         => 'Profile Link',
+				'toggle_slug'     => 'profile',
+				'default'         => 'Link',
 			),
 			'url' => array(
-				'label'           => esc_html__( 'Profile URL', 'et_builder' ),
+				'label'           => esc_html__( 'URL', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'default'         => '#',
 				'description'     => esc_html__( 'Input the website of the profile.', 'et_builder' ),
 				'tab_slug'        => 'general',
-				'toggle_slug'     => 'body',
+				'toggle_slug'     => 'profile',
 			),
 			'portrait_url' => array(
-				'label'              => esc_html__( 'Portrait Image URL', 'et_builder' ),
+				'label'              => esc_html__( 'Image URL', 'et_builder' ),
 				'type'               => 'upload',
 				'option_category'    => 'basic_option',
 				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
@@ -103,15 +111,15 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
 				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder' ),
 				'tab_slug'           => 'general',
-				'toggle_slug'        => 'body',
+				'toggle_slug'        => 'portrait',
 			),
 			'portrait_alt' => array(
-				'label'           => esc_html__( 'Portrait Image Alt Text', 'et_builder' ),
+				'label'           => esc_html__( 'Image Alt Text', 'et_builder' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Input the alt text for the portrait image.', 'et_builder' ),
 				'tab_slug'        => 'general',
-				'toggle_slug'     => 'body',
+				'toggle_slug'     => 'portrait',
 			),
 		);
 
@@ -126,7 +134,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				),
 				'description'        => esc_html__( 'Switch to yes if you want round images in the profile banner.', 'et_builder' ),
 				'tab_slug'           => 'advanced',
-				'toggle_slug'        => 'body',
+				'toggle_slug'        => 'portrait',
 			),
 			'is_vertical' => array(
 				'label'              => esc_html__( 'Display Vertically', 'et_builder' ),
@@ -138,7 +146,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 				),
 				'description'        => esc_html__( 'Switch to yes if you want the profile banner to display vertically.', 'et_builder' ),
 				'tab_slug'           => 'advanced',
-				'toggle_slug'        => 'body',
+				'toggle_slug'        => 'portrait',
 			),
 		);
 

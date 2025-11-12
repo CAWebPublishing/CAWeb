@@ -47,7 +47,21 @@
     "title": "css.*.title"
   },
   "module": {
-    "title": "title.innerContent.*"
+    "location_layout": "location.innerContent.*.layout",
+    "featured_image": "location.innerContent.*.featured_image.innerContent.*.src",
+    "name": "location.innerContent.*.name",
+    "desc": "location.innerContent.*.desc",
+    "show_button": "location.innerContent.*.desc",
+    "location_link": "location.innerContent.*.link",
+    "addr": "address.innerContent.*.addr",
+    "city": "address.innerContent.*.city",
+    "state": "address.innerContent.*.state",
+    "zip": "address.innerContent.*.zip",
+    "show_contact": "contact.innerContent.*.show_contact",
+    "phone": "contact.innerContent.*.phone",
+    "fax": "contact.innerContent.*.fax",
+    "show_icon": "icon.innerContent.*.show_icon",
+    "font_icon": "icon.innerContent.*.font_icon"
   },
   "valueExpansionFunctionMap": {}
 }

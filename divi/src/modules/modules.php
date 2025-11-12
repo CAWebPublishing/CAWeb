@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use CAWeb\Modules\ProfileBanner\ProfileBanner;
-use CAWeb\Modules\Test\Test;
+use CAWeb\Modules\Location\Location;
 
 add_action(
 	'divi_module_library_modules_dependency_tree',
 	function ( $dependency_tree ) {
 		$dependency_tree->add_dependency( new ProfileBanner() );
-		$dependency_tree->add_dependency( new Test() );
+		$dependency_tree->add_dependency( new Location() );
 	}
 );

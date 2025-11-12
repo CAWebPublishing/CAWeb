@@ -25,7 +25,7 @@ trait RenderCallbackTrait {
 	use ModuleStylesTrait;
 	use ModuleScriptDataTrait;
 	/**
-	 * Divi 4 module render callback which outputs server side rendered HTML on the Front-End.
+	 * Divi 5 module render callback which outputs server side rendered HTML on the Front-End.
 	 *
 	 * @since ??
 	 *

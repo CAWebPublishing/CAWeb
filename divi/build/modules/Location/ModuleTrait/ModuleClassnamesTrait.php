@@ -1,12 +1,12 @@
 <?php
 /**
- * Test::module_classnames().
+ * Location::module_classnames().
  *
- * @package CAWeb\Modules\Test
+ * @package CAWeb\Modules\Location
  * @since ??
  */
 
-namespace CAWeb\Modules\Test\ModuleTrait;
+namespace CAWeb\Modules\Location\ModuleTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
@@ -17,10 +17,7 @@ use ET\Builder\Packages\Module\Options\Text\TextClassnames;
 trait ModuleClassnamesTrait {
 
 	/**
-	 * Module classnames function for Test module.
-	 *
-	 * This function is equivalent of JS function moduleClassnames located in
-	 * src/components/d4-module/module-classnames.ts.
+	 * Module classnames function for Location module.
 	 *
 	 * @since ??
 	 *

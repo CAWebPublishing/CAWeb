@@ -11,6 +11,33 @@ import {
 export interface ModuleCssAttr extends Module.Css.AttributeValue {
 }
 
+export type locationProps = FormatBreakpointStateAttr<{
+        layout?: string;
+        featured_image?: Element.Types.Image.InnerContent.Attributes;
+        name?: string;
+        desc?: string;
+        show_button?: OnOff;
+        link?:string, 
+      }>
+
+export type addressProps = FormatBreakpointStateAttr<{
+        addr?:string, 
+        city?:string
+        state?:string
+        zip?:string
+      }>
+
+export type contactProps = FormatBreakpointStateAttr<{
+        show_contact?: OnOff;
+        phone?:string, 
+        fax?:string,
+      }>;
+
+export type iconProps = FormatBreakpointStateAttr<{
+        show_icon?: OnOff;
+        font_icon?:string, 
+      }>;
+
 export type ModuleCssGroupAttr = FormatBreakpointStateAttr<ModuleCssAttr>;
 
 export interface ModuleAttrs extends InternalAttrs {
@@ -44,7 +71,22 @@ export interface ModuleAttrs extends InternalAttrs {
   };
 
   // Fields
-  title?: Element.Types.Title.Attributes;
+  location?: {
+      innerContent?: locationProps;
+  };
+
+  address?: {
+      innerContent?: addressProps;
+  };
+
+  contact?: {
+      innerContent?: contactProps;
+  };
+  
+  icon?: {
+      innerContent?: iconProps;
+  }
+  
 }
 
-export type ProfileBannerModuleEditProps = ModuleEditProps<ModuleAttrs>;
+export type LocationModuleEditProps = ModuleEditProps<ModuleAttrs>;

@@ -19,9 +19,6 @@ trait ModuleClassnamesTrait {
 	/**
 	 * Module classnames function for ProfileBanner module.
 	 *
-	 * This function is equivalent of JS function moduleClassnames located in
-	 * src/components/d4-module/module-classnames.ts.
-	 *
 	 * @since ??
 	 *
 	 * @param array $args {

@@ -6,11 +6,4 @@ import { ModuleAttrs } from './types';
 
 
 export const placeholderContent: ModuleAttrs = {
-  title: {
-    innerContent: {
-      desktop: {
-        value: 'placeholder.title',
-      },
-    }
-  }
 };

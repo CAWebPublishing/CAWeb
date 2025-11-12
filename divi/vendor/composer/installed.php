@@ -3,7 +3,7 @@
         'name' => 'caweb/divi-extension-modules',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '071cccb1b437d5691f5e761d5d4e2c46b49df13f',
+        'reference' => '1dc8fed9c368a394e1421e258a67b7eb19a31476',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'caweb/divi-extension-modules' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '071cccb1b437d5691f5e761d5d4e2c46b49df13f',
+            'reference' => '1dc8fed9c368a394e1421e258a67b7eb19a31476',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

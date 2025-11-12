@@ -15,7 +15,7 @@ import { placeholderContent } from './placeholder-content';
 import { conversionOutline } from './conversion-outline';
 
 
-export const CAWebModuleTest: ModuleLibrary.Module.RegisterDefinition<ModuleAttrs> = {
+export const CAWebModuleLocation: ModuleLibrary.Module.RegisterDefinition<ModuleAttrs> = {
   metadata: metadata as Metadata.Values<ModuleAttrs>,
   placeholderContent,
   conversionOutline,
