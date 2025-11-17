@@ -2,6 +2,88 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/Location/Settings/content.tsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SettingsContent: () => (/* binding */ SettingsContent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("@divi/module");
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_divi_module__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _divi_module_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("@divi/module-utils");
+/* harmony import */ var _divi_module_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__);
+// External dependencies.
+
+// Divi dependencies.
+
+
+var SettingsContent = function (_a) {
+  var _b, _c;
+  var defaultSettingsAttrs = _a.defaultSettingsAttrs,
+    parentAttrs = _a.parentAttrs,
+    groupConfiguration = _a.groupConfiguration;
+  var showFeaturedImage = function (params) {
+    var _a, _b;
+    var attrs = params.attrs;
+    var useStyleDefault = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = defaultSettingsAttrs === null || defaultSettingsAttrs === void 0 ? void 0 : defaultSettingsAttrs.icon) === null || _a === void 0 ? void 0 : _a.innerContent);
+    var useIcon = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.icon) === null || _b === void 0 ? void 0 : _b.innerContent);
+    // const showIcon       = 'on' === (useIcon.show ?? useIconDefault.show);
+    return false;
+  };
+  // console.log( groupConfiguration)
+  // Insert custom Icon default attribute value inherited from Parent Module if any.
+  if ((_c = (_b = groupConfiguration === null || groupConfiguration === void 0 ? void 0 : groupConfiguration.style) === null || _b === void 0 ? void 0 : _b.component) === null || _c === void 0 ? void 0 : _c.props) {
+    // const defaultIconAttrs = mergeAttrs({
+    //   defaultAttrs: defaultSettingsAttrs?.icon?.innerContent,
+    //   attrs:        parentAttrs?.asMutable({ deep: true })?.icon?.innerContent,
+    // });
+    // set(groupConfiguration, ['contentIcon', 'component', 'props', 'fields', 'iconInnercontent', 'defaultAttr'], defaultIconAttrs);
+  }
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.ModuleGroups, {
+    groups: groupConfiguration
+  });
+};
+
+/***/ }),
+
+/***/ "./src/modules/Location/Settings/design.tsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SettingsDesign: () => (/* binding */ SettingsDesign)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("@divi/module");
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_divi_module__WEBPACK_IMPORTED_MODULE_1__);
+// External dependencies.
+
+// Divi dependencies.
+
+var SettingsDesign = function (_a) {
+  var _b, _c;
+  var defaultSettingsAttrs = _a.defaultSettingsAttrs,
+    parentAttrs = _a.parentAttrs,
+    groupConfiguration = _a.groupConfiguration;
+  // Insert custom Icon default attribute value inherited from Parent Module if any.
+  if ((_c = (_b = groupConfiguration === null || groupConfiguration === void 0 ? void 0 : groupConfiguration.contentIcon) === null || _b === void 0 ? void 0 : _b.component) === null || _c === void 0 ? void 0 : _c.props) {
+    // const defaultIconAttrs = mergeAttrs({
+    //   defaultAttrs: defaultSettingsAttrs?.icon?.innerContent,
+    //   attrs:        parentAttrs?.asMutable({ deep: true })?.icon?.innerContent,
+    // });
+    // set(groupConfiguration, ['contentIcon', 'component', 'props', 'fields', 'iconInnercontent', 'defaultAttr'], defaultIconAttrs);
+  }
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.ModuleGroups, {
+    groups: groupConfiguration
+  });
+};
+
+/***/ }),
+
 /***/ "./src/modules/Location/conversion-outline.ts":
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -58,30 +140,23 @@ var conversionOutline = {
     title: 'css.*.title'
   },
   module: {
-    location_layout: 'location.innerContent.*.layout',
-    featured_image: 'location.innerContent.*.featured_image.innerContent.*.src',
-    name: 'location.innerContent.*.name',
-    desc: 'location.innerContent.*.desc',
-    show_button: 'location.innerContent.*.desc',
-    location_link: 'location.innerContent.*.link',
+    location_layout: 'layout.innerContent.*',
+    name: 'name.innerContent.*',
+    desc: 'desc.innerContent.*',
     addr: 'address.innerContent.*.addr',
     city: 'address.innerContent.*.city',
     state: 'address.innerContent.*.state',
     zip: 'address.innerContent.*.zip',
-    show_contact: 'contact.innerContent.*.show_contact',
+    show_contact: 'contact.innerContent.*.show',
     phone: 'contact.innerContent.*.phone',
     fax: 'contact.innerContent.*.fax',
-    show_icon: 'icon.innerContent.*.show_icon',
-    font_icon: 'icon.innerContent.*.font_icon'
-    // module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
-    // module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
-    // module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur',
+    show_button: 'link.innerContent.*.show',
+    location_link: 'link.innerContent.*.url',
+    show_icon: 'icon.innerContent.*.show',
+    font_icon: 'icon.innerContent.*.icon',
+    featured_image: 'image.innerContent.*.src'
   },
-  valueExpansionFunctionMap: {
-    font_icon: function (value) {
-      return value.replace(/%%/g, '');
-    }
-  }
+  valueExpansionFunctionMap: {}
 };
 
 /***/ }),
@@ -127,115 +202,58 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/**
-     * Renders Location (contact)
-     *
-     * @return string
-     */
 var contactLocation = function (props) {
-  var _a, _b, _c, _d;
-  var attrs = props.attrs;
-  var location = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.location) === null || _a === void 0 ? void 0 : _a.innerContent);
-  var address = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.address) === null || _b === void 0 ? void 0 : _b.innerContent);
-  var contact = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.contact) === null || _c === void 0 ? void 0 : _c.innerContent);
-  var icon = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_d = attrs === null || attrs === void 0 ? void 0 : attrs.icon) === null || _d === void 0 ? void 0 : _d.innerContent);
-  var display_other = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  var display_button = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  // If displaying an icon
-  var display_icon = 'on' === icon.show_icon ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "thumbnail"
-  }, (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon.font_icon)) : '';
-  // wrap name in strong tag
-  var name = "" !== location.name ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, location.name) : '';
+  var _a, _b, _c, _d, _e, _f;
+  var address = props.address,
+    contact = props.contact,
+    icon = props.icon,
+    link = props.link,
+    elements = props.elements;
   // get a map link if address info exists
-  var addr = "" !== address.addr || "" !== address.city || "" !== address.state || "" !== address.zip ? (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address.addr, address.city, address.state, address.zip]) : '';
+  var addressMapLink = (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address === null || address === void 0 ? void 0 : address.addr, address === null || address === void 0 ? void 0 : address.city, address === null || address === void 0 ? void 0 : address.state, address === null || address === void 0 ? void 0 : address.zip]);
+  // If displaying an icon
+  var displayIcon = 'on' === (icon === null || icon === void 0 ? void 0 : icon.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "thumbnail"
+  }, (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon === null || icon === void 0 ? void 0 : icon.icon)) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
   // show contact info if enabled
-  if ('on' === contact.show_contact) {
-    var phone = contact.phone ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "General Information: ", contact.phone) : '';
-    var fax = contact.fax ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "FAX: ", contact.fax) : '';
-    display_other = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, phone, fax);
+  var displayOther = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  if ('on' === (contact === null || contact === void 0 ? void 0 : contact.show)) {
+    if ('' !== (contact === null || contact === void 0 ? void 0 : contact.phone)) {
+      displayOther = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "General Information: ", contact === null || contact === void 0 ? void 0 : contact.phone));
+    }
+    // if( '' !== contact?.fax ) {
+    //   displayOther = <Fragment>
+    //     {
+    //       displayOther?.props?.children
+    //     }
+    //     <p>FAX: {contact?.fax}</p>
+    //   </Fragment>;
+    // }
   }
-  // if show button is enabled and location link exists
-  if ('on' === location.show_button && "" !== location.link) {
-    display_button = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: location.link,
-      className: "btn btn-outline-dark",
-      target: "_blank"
-    }, "More");
-  }
-  var contactInfo = "" !== location.name || "" !== address.addr || display_other || display_button ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  // we have to do this since elements.render children property isn't working as expected
+  var href = link === null || link === void 0 ? void 0 : link.url; // href to link value
+  var linkText = 'More'; // set link text to More for rendering
+  var linkElement = '' !== href && 'on' === (link === null || link === void 0 ? void 0 : link.show) ? elements.render({
+    attrName: 'link',
+    attrSubName: 'url',
+    className: 'btn btn-outline-dark',
+    htmlAttributes: {
+      href: href,
+      target: '_blank'
+    },
+    children: linkText
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  console.log(displayOther);
+  var contactInfo = ((_b = (_a = displayOther === null || displayOther === void 0 ? void 0 : displayOther.props) === null || _a === void 0 ? void 0 : _a.children) === null || _b === void 0 ? void 0 : _b.length) || ((_d = (_c = addressMapLink === null || addressMapLink === void 0 ? void 0 : addressMapLink.props) === null || _c === void 0 ? void 0 : _c.children) === null || _d === void 0 ? void 0 : _d.length) || ((_f = (_e = linkElement === null || linkElement === void 0 ? void 0 : linkElement.props) === null || _e === void 0 ? void 0 : _e.children) === null || _f === void 0 ? void 0 : _f.length) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "contact"
-  }, name, addr, display_other, display_button) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, display_icon, contactInfo);
+  }, addressMapLink, displayOther, linkElement) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, contactInfo);
 };
 var miniLocation = function (props) {
-  var _a, _b, _c;
-  var attrs = props.attrs;
-  var location = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.location) === null || _a === void 0 ? void 0 : _a.innerContent);
-  var address = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.address) === null || _b === void 0 ? void 0 : _b.innerContent);
-  var icon = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.icon) === null || _c === void 0 ? void 0 : _c.innerContent);
-  // If displaying an icon
-  var display_icon = 'on' === icon.show_icon ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "thumbnail"
-  }, (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon.font_icon)) : '';
-  // if name exists
-  var name = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  if ("" !== location.name) {
-    // if location link exists make a link, otherwise a strong tag
-    name = "" !== location.link ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: location.link,
-      target: "_blank"
-    }, location.name) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, location.name);
-  }
-  // get a map link if address info exists
-  var addr = "" !== address.addr || "" !== address.city || "" !== address.state || "" !== address.zip ? (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address.addr, address.city, address.state, address.zip]) : '';
-  var contactInfo = "" !== location.name || "" !== address.addr ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "contact"
-  }, name, addr) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, display_icon, contactInfo);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Mini");
 };
 var bannerLocation = function (props) {
-  var _a, _b;
-  var attrs = props.attrs,
-    elements = props.elements;
-  var location = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.location) === null || _a === void 0 ? void 0 : _a.innerContent);
-  var address = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.address) === null || _b === void 0 ? void 0 : _b.innerContent);
-  console.log(elements);
-  console.log(location);
-  // If displaying a featured image
-  var featuredImageElement = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "thumbnail"
-  }, elements.render({
-    attrName: 'location.innerContent'
-  }));
-  // get a map link if address info exists
-  var addr = "" !== address.addr || "" !== address.city || "" !== address.state || "" !== address.zip ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "address"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "ca-gov-icon-road-pin"
-  }), (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address.addr, address.city, address.state, address.zip])) : '';
-  // Add description markup
-  var desc = "" !== location.desc ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Description"), elements.render({
-    attrName: 'location',
-    attrSubName: 'desc'
-  })) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  // if show button is enabled and location link exists
-  var display_button = 'on' === location.show_button && "" !== location.link ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: location.link,
-    className: "btn btn-outline-dark",
-    target: "_blank"
-  }, "View More Details") : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  // let contactInfo = 
-  var contactInfo = "" !== location.name || "" !== address.addr ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "contact"
-  }, elements.render({
-    attrName: 'location',
-    attrSubName: 'name'
-  }), addr) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  var summary = desc || display_button ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "summary"
-  }, desc, display_button) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, featuredImageElement, contactInfo, summary);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Banner");
 };
 /**
  * Divi 5 Module edit component of visual builder.
@@ -247,19 +265,34 @@ var bannerLocation = function (props) {
  * @returns {ReactElement}
  */
 var ModuleEdit = function (props) {
-  var _a;
+  var _a, _b, _c, _d, _e;
   var attrs = props.attrs,
     id = props.id,
     name = props.name,
     elements = props.elements;
-  var location = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.location) === null || _a === void 0 ? void 0 : _a.innerContent);
-  var output;
-  if ('contact' === location.layout) {
-    output = contactLocation(props);
-  } else if ('mini' === location.layout) {
-    output = miniLocation(props);
-  } else {
-    output = bannerLocation(props);
+  var layout = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.layout) === null || _a === void 0 ? void 0 : _a.innerContent);
+  var address = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.address) === null || _b === void 0 ? void 0 : _b.innerContent);
+  var contact = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.contact) === null || _c === void 0 ? void 0 : _c.innerContent);
+  var icon = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_d = attrs === null || attrs === void 0 ? void 0 : attrs.icon) === null || _d === void 0 ? void 0 : _d.innerContent);
+  var link = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_e = attrs === null || attrs === void 0 ? void 0 : attrs.link) === null || _e === void 0 ? void 0 : _e.innerContent);
+  var output = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  switch (layout) {
+    case 'mini':
+      output = miniLocation(props);
+      break;
+    case 'banner':
+      output = bannerLocation(props);
+      break;
+    case 'contact':
+    default:
+      output = contactLocation({
+        elements: elements,
+        address: address,
+        contact: contact,
+        icon: icon,
+        link: link
+      });
+      break;
   }
   return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.ModuleContainer, {
     attrs: attrs,
@@ -269,12 +302,11 @@ var ModuleEdit = function (props) {
     stylesComponent: _styles__WEBPACK_IMPORTED_MODULE_3__.ModuleStyles,
     classnamesFunction: _module_classnames__WEBPACK_IMPORTED_MODULE_4__.moduleClassnames,
     scriptDataComponent: _module_script_data__WEBPACK_IMPORTED_MODULE_5__.ModuleScriptData
-  }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "location ".concat(location.layout)
-  }, elements.render({
-    attrName: 'location.innerContent',
-    attrSubName: 'name'
-  })));
+  }, elements.styleComponents({
+    attrName: 'module'
+  }), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "location ".concat(layout)
+  }, output));
 };
 
 
@@ -291,7 +323,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Location/edit.tsx");
 /* harmony import */ var _placeholder_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/Location/placeholder-content.ts");
 /* harmony import */ var _conversion_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/Location/conversion-outline.ts");
+/* harmony import */ var _Settings_content__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/Location/Settings/content.tsx");
+/* harmony import */ var _Settings_design__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./src/modules/Location/Settings/design.tsx");
 // Local dependencies.
+
+
 
 
 
@@ -302,6 +338,10 @@ var CAWebModuleLocation = {
   conversionOutline: _conversion_outline__WEBPACK_IMPORTED_MODULE_3__.conversionOutline,
   renderers: {
     edit: _edit__WEBPACK_IMPORTED_MODULE_1__.ModuleEdit
+  },
+  settings: {
+    content: _Settings_content__WEBPACK_IMPORTED_MODULE_4__.SettingsContent,
+    design: _Settings_design__WEBPACK_IMPORTED_MODULE_5__.SettingsDesign
   }
 };
 
@@ -365,7 +405,7 @@ var ModuleScriptData = function (_a) {
 /***/ "./src/modules/Location/module.json":
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"caweb/location","d4Shortcode":"et_pb_ca_location_widget","title":"Location","titles":"Locations","moduleIcon":"caweb/caweb","moduleClassName":"et_pb_ca_location_widget","moduleOrderClassName":"et_pb_ca_location_widget","category":"module","attributes":{"module":{"type":"object","settings":{"meta":{"adminLabel":{}},"advanced":{"link":{},"text":{},"htmlAttributes":{}},"decoration":{"background":{},"bodyFont":{},"sizing":{},"spacing":{},"border":{},"boxShadow":{},"filters":{},"transform":{},"animation":{},"overflow":{},"disabledOn":{},"transition":{},"position":{},"zIndex":{},"scroll":{},"sticky":{}}}},"location:layout":{"type":"object","inlineEditor":"plainText","elementType":"heading","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"style","attrName":"location.innerContent","subName":"layout","label":"Style","description":"Here you can choose the style in which to display the location.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/select","type":"field","props":{"options":{"contact":{"label":"Contact","value":"contact"},"mini":{"label":"Mini","value":"mini"},"banner":{"label":"Banner","value":"banner"}}}}}}}},"location:image":{"type":"object","tagName":"img","elementType":"image","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"style","label":"Set Featured Image","render":true,"attrName":"location.innerContent.desktop.value.featured_image.innerContent","subName":"src","description":"This image will be used as the featured image for this location.","features":{"sticky":false,"dynamicContent":{"type":"image"}},"component":{"name":"divi/upload","type":"field","props":{"syncImageData":{"src":true,"id":true,"alt":true,"titleText":false}}}}}}},"location:name":{"type":"object","inlineEditor":"plainText","tagName":"strong","elementType":"element","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"location","render":true,"attrName":"location.innerContent","subName":"name","label":"Name","description":"Here you can enter a name for the location.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}},"location:desc":{"type":"object","inlineEditor":"plainText","elementType":"heading","tagName":"div","attributes":{"class":"description"},"childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"location","render":true,"attrName":"location.innerContent","subName":"desc","label":"Description","description":"Here you can enter a description for the location.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}},"address":{"type":"object","inlineEditor":"plainText","elementType":"heading","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-items","items":{"addr":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"addr","label":"Address","description":"Enter an address.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"city":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"city","label":"City","description":"Enter a city.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"state":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"state","label":"State","description":"Enter a state.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"zip":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"zip","label":"Zip Code","description":"Enter a zip code.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}}}},"settings":{"content":"auto","design":"auto","advanced":"auto","groups":{"style":{"panel":"content","priority":2,"groupName":"style","component":{"name":"divi/composite","props":{"groupLabel":"Style"}}},"location":{"panel":"content","priority":2,"groupName":"location","component":{"name":"divi/composite","props":{"groupLabel":"Location"}}},"icon":{"panel":"design","priority":2,"groupName":"icon","component":{"name":"divi/composite","props":{"groupLabel":"Icon"}}}}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"caweb/location","d4Shortcode":"et_pb_ca_location_widget","title":"Location","titles":"Locations","moduleIcon":"caweb/caweb","moduleClassName":"et_pb_ca_location_widget","moduleOrderClassName":"et_pb_ca_location_widget","category":"module","attributes":{"module":{"type":"object","selector":"{{selector}}","settings":{"meta":{"adminLabel":{}},"advanced":{"link":{},"text":{},"htmlAttributes":{}},"decoration":{"background":{},"bodyFont":{},"sizing":{},"spacing":{},"border":{},"boxShadow":{},"filters":{},"transform":{},"animation":{},"overflow":{},"disabledOn":{},"transition":{},"position":{},"zIndex":{},"scroll":{},"sticky":{}}}},"layout":{"type":"object","inlineEditor":"plainText","elementType":"heading","childrenSanitizer":"et_core_esc_previously","default":{"innerContent":{"desktop":{"value":"contact"}}},"settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"style","render":true,"attrName":"layout.innerContent","label":"Style","description":"Here you can choose the style in which to display the location.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/select","type":"field","props":{"defaultValue":"contact","options":{"contact":{"label":"Contact","value":"contact"},"mini":{"label":"Mini","value":"mini"},"banner":{"label":"Banner","value":"banner"}}}}}}}},"image":{"type":"object","elementType":"image","tagName":"img","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-items","items":{"src":{"groupSlug":"style","render":true,"attrName":"image.innerContent","subName":"src","label":"Set Featured Image","description":"This image will be used as the main image for this location.","features":{"sticky":false,"dynamicContent":{"type":"image"}},"component":{"name":"divi/upload","type":"field","props":{"syncImageData":{"src":true,"id":true,"alt":true,"titleText":false}}}},"alt":{"groupSlug":"style","render":false,"attrName":"image.innerContent","subName":"alt","label":"Image Alt Text","description":"Input the alt text for the portrait image.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}}},"name":{"type":"object","inlineEditor":"plainText","elementType":"element","tagName":"strong","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"location","render":true,"attrName":"name.innerContent","label":"Name","description":"Here you can enter a name for the location.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}},"desc":{"type":"object","inlineEditor":"plainText","elementType":"element","tagName":"div","attributes":{"class":"description"},"childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-item","item":{"groupSlug":"location","render":true,"attrName":"desc.innerContent","label":"Description","description":"Here you can enter a description for the location.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/textarea","type":"field"}}}}},"address":{"type":"object","inlineEditor":"plainText","elementType":"heading","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-items","items":{"addr":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"addr","label":"Address","description":"Enter an address.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"city":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"city","label":"City","description":"Enter a city.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"state":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"state","label":"State","description":"Enter a state.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"zip":{"groupSlug":"location","render":true,"attrName":"address.innerContent","subName":"zip","label":"Zip Code","description":"Enter a zip code.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}}},"contact":{"type":"object","inlineEditor":"plainText","elementType":"heading","childrenSanitizer":"et_core_esc_previously","default":{"innerContent":{"desktop":{"value":{"show":"off","phone":"","fax":""}}}},"settings":{"innerContent":{"groupType":"group-items","items":{"showContact":{"groupSlug":"location","render":true,"label":"Contact Information","attrName":"contact.innerContent","subName":"show","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/toggle","type":"field","props":{"defaultValue":"off"}}},"phone":{"groupSlug":"location","render":true,"attrName":"contact.innerContent","subName":"phone","label":"Phone","description":"Enter a phone number.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"fax":{"groupSlug":"location","render":true,"attrName":"contact.innerContent","subName":"fax","label":"Fax","description":"Enter a fax number.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}}},"link":{"type":"object","inlineEditor":"plainText","elementType":"element","tagName":"a","childrenSanitizer":"et_core_esc_previously","default":{"innerContent":{"desktop":{"value":{"show":"off","url":"#"}}}},"settings":{"innerContent":{"groupType":"group-items","items":{"showLink":{"groupSlug":"location","render":true,"label":"Button","attrName":"link.innerContent","subName":"show","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/toggle","type":"field","props":{"defaultValue":"off"}}},"url":{"groupSlug":"location","render":true,"label":"URL","description":"Here you can enter the URL for the location.","attrName":"link.innerContent","subName":"url","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field","props":{"defaultValue":"#"}}}}}}},"icon":{"type":"object","inlineEditor":"plainText","elementType":"element","tagName":"span","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-items","items":{"showIcon":{"groupSlug":"icon","render":true,"label":"Use Icon","attrName":"icon.innerContent","subName":"show","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/toggle","type":"field","props":{"defaultValue":"off"}}},"icon":{"groupSlug":"icon","render":true,"label":"Icon","description":"Select an icon.","attrName":"icon.innerContent","subName":"icon","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}}}}}}},"settings":{"design":"auto","advanced":"auto","groups":{"style":{"panel":"content","priority":2,"groupName":"style","component":{"name":"divi/composite","props":{"groupLabel":"Style"}}},"location":{"panel":"content","priority":2,"groupName":"location","component":{"name":"divi/composite","props":{"groupLabel":"Location"}}},"icon":{"panel":"design","priority":2,"groupName":"icon","component":{"name":"divi/composite","props":{"groupLabel":"Icon"}}}}}}');
 
 /***/ }),
 
@@ -827,7 +867,7 @@ var get_address = function (address) {
     address = address.split(',');
   }
   return address.map(function (part) {
-    return part.trim();
+    return part === null || part === void 0 ? void 0 : part.trim();
   }).filter(Boolean).join(', ');
 };
 var get_google_map_place_link = function (address, embed, target, classes) {

@@ -10,6 +10,7 @@
   "attributes": {
     "module": {
       "type": "object",
+      "selector": "{{selector}}",
       "settings": {
         "meta": {
           "adminLabel": {}
@@ -18,6 +19,7 @@
           "link": {},
           "text": {},
           "htmlAttributes": {}
+          
         },
         "decoration": {
           "background": {},
@@ -39,31 +41,37 @@
         }
       }
     },
-
-    "location:layout": {
+    
+    "layout": {
       "type": "object",
       "inlineEditor": "plainText",
       "elementType": "heading",
       "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": "contact"
+          }
+        }
+      },
       "settings": {
         "innerContent": {
           "groupType": "group-item",
           "item": {
             "groupSlug": "style",
-            "attrName": "location.innerContent",
-            "subName": "layout",
+            "render": true,
+            "attrName": "layout.innerContent",
             "label": "Style",
             "description": "Here you can choose the style in which to display the location.",
             "features": {
               "sticky": false,
-              "dynamicContent": {
-                "type": "text"
-              }
+              "dynamicContent": false
             },
             "component": {
               "name": "divi/select",
               "type": "field",
               "props": {
+                "defaultValue": "contact",
                 "options": {
                   "contact": {
                     "label": "Contact",
@@ -85,49 +93,70 @@
       }
     },
     
-    "location:image": {
+    
+    "image": {
       "type": "object",
-      "tagName": "img",  
       "elementType": "image",
+      "tagName": "img",
       "childrenSanitizer": "et_core_esc_previously",
       "settings": {
         "innerContent": {
-          "groupType": "group-item",
-          "item": {
-            "groupSlug": "style",
-            "label": "Set Featured Image",
-            "render": true,
-            "attrName": "location.innerContent.desktop.value.featured_image.innerContent",
-            "subName": "src",
-            "description": "This image will be used as the featured image for this location.",
-            "features": {
-              "sticky": false,
-              "dynamicContent": {
-                "type": "image"
-              }
-            },
-            "component": {
-              "name": "divi/upload",
-              "type": "field",
-              "props": {
+          "groupType": "group-items",
+          "items": {
+            "src": {
+              "groupSlug": "style",
+              "render": true,
+              "attrName": "image.innerContent",
+              "subName": "src",
+              "label": "Set Featured Image",
+              "description": "This image will be used as the main image for this location.",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "image"
+                }
+              },
+              "component": {
+                "name": "divi/upload",
+                "type": "field",
+                "props": {
                   "syncImageData": {
                     "src": true,
                     "id": true,
                     "alt": true,
                     "titleText": false
                   }
+                }
+              }
+            },
+            "alt": {
+              "groupSlug": "style",
+              "render": false,
+              "attrName": "image.innerContent",
+              "subName": "alt",
+              "label": "Image Alt Text",
+              "description": "Input the alt text for the portrait image.",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
               }
             }
           }
         }
       }
-    }, 
+    },
 
-    "location:name": {
+    "name": {
       "type": "object",
       "inlineEditor": "plainText",
-      "tagName": "strong",
       "elementType": "element",
+      "tagName": "strong",
       "childrenSanitizer": "et_core_esc_previously",
       "settings": {
         "innerContent": {
@@ -135,8 +164,7 @@
           "item": {
               "groupSlug": "location",
               "render": true,
-              "attrName": "location.innerContent",
-              "subName": "name",
+              "attrName": "name.innerContent",
               "label": "Name",
               "description": "Here you can enter a name for the location.",
               "features": {
@@ -154,10 +182,10 @@
       }
     },
 
-    "location:desc": {
+    "desc": {
       "type": "object",
       "inlineEditor": "plainText",
-      "elementType": "heading",
+      "elementType": "element",
       "tagName": "div",
       "attributes": {
         "class": "description"
@@ -169,8 +197,7 @@
           "item": {
               "groupSlug": "location",
               "render": true,
-              "attrName": "location.innerContent",
-              "subName": "desc",
+              "attrName": "desc.innerContent",
               "label": "Description",
               "description": "Here you can enter a description for the location.",
               "features": {
@@ -180,7 +207,7 @@
                 }
               },
               "component": {
-                "name": "divi/text",
+                "name": "divi/textarea",
                 "type": "field"
               }
             }
@@ -275,11 +302,213 @@
           }
         }
       }
-    }
+    },
 
+    "contact": {
+      "type": "object",
+      "inlineEditor": "plainText",
+      "elementType": "heading",
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "show": "off",
+              "phone": "",
+              "fax": ""
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-items",
+          "items": {
+            "showContact": {
+              "groupSlug": "location",
+              "render": true,
+              "label": "Contact Information",
+              "attrName": "contact.innerContent",
+              "subName": "show",  
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/toggle",
+                "type": "field",
+                "props":{
+                  "defaultValue": "off"
+                }
+              }
+            },
+            
+            "phone": {
+              "groupSlug": "location",
+              "render": true,
+              "attrName": "contact.innerContent",
+              "subName": "phone",
+              "label": "Phone",
+              "description": "Enter a phone number.",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
+              }
+            },
+            
+            "fax": {
+              "groupSlug": "location",
+              "render": true,
+              "attrName": "contact.innerContent",
+              "subName": "fax",
+              "label": "Fax",
+              "description": "Enter a fax number.",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "link": {
+      "type": "object",
+      "inlineEditor": "plainText",
+      "elementType": "element",
+      "tagName": "a",
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "show": "off",
+              "url": "#"
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-items",
+          "items": {
+            "showLink": {
+              "groupSlug": "location",
+              "render": true,
+              "label": "Button",
+              "attrName": "link.innerContent",
+              "subName": "show",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/toggle",
+                "type": "field",
+                "props":{
+                  "defaultValue": "off"
+                }
+              }
+            },
+            
+            "url": {
+              "groupSlug": "location",
+              "render": true,
+              "label": "URL",
+              "description": "Here you can enter the URL for the location.",
+              "attrName": "link.innerContent",
+              "subName": "url",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field",
+                "props": {
+                  "defaultValue": "#"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "icon": {
+      "type": "object",
+      "inlineEditor": "plainText",
+      "elementType": "element",
+      "tagName": "span",
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-items",
+          "items": {
+            "showIcon": {
+              "groupSlug": "icon",
+              "render": true,
+              "label": "Use Icon",
+              "attrName": "icon.innerContent",
+              "subName": "show",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/toggle",
+                "type": "field",
+                "props":{
+                  "defaultValue": "off"
+                }
+              }
+            },
+            
+            "icon": {
+              "groupSlug": "icon",
+              "render": true,
+              "label": "Icon",
+              "description": "Select an icon.",
+              "attrName": "icon.innerContent",
+              "subName": "icon",
+              "features": {
+                "sticky": false,
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "settings": {
-    "content": "auto",
     "design": "auto",
     "advanced": "auto",
     "groups":{

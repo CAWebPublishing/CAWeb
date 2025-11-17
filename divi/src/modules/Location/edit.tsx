@@ -15,7 +15,7 @@ import {
   InternalAttrs,
   type Element,
   type Module,
-  type OnOff
+  type OnOff,
 } from '@divi/types';
 
 // Local Dependencies.
@@ -23,203 +23,88 @@ import { ModuleStyles } from './styles';
 import { moduleClassnames } from './module-classnames';
 import { ModuleScriptData } from './module-script-data';
 import { 
-  LocationModuleEditProps
+  LocationModuleEditProps,
+  addressProps,
+  iconProps,
+  contactProps,
+  linkProps
  } from './types';
 import { get_icon_span, get_google_map_place_link } from '../utils';
-import { get } from 'lodash';
 
-/**
-	 * Renders Location (contact)
-	 *
-	 * @return string
-	 */
-const contactLocation = (props: LocationModuleEditProps) => {
-  let { attrs } = props;
-  
-  let location = getAttrByMode(attrs?.location?.innerContent);
-  let address = getAttrByMode(attrs?.address?.innerContent);
-  let contact = getAttrByMode(attrs?.contact?.innerContent);
-  let icon = getAttrByMode(attrs?.icon?.innerContent);
-  
-  let display_other = <></>;
-	let display_button = <></>;
-  
-  // If displaying an icon
-  let display_icon   = 'on' === icon.show_icon ? <div className="thumbnail">{get_icon_span(icon.font_icon)}</div> : '';
-  
-  // wrap name in strong tag
-  let name = "" !== location.name ? <strong>{location.name}</strong> : '';
-  
+const contactLocation = (props: {
+  elements: Module.ModuleElements,
+  address?: addressProps,
+  contact?: contactProps,
+  icon?: iconProps,
+  link?: linkProps
+}): ReactElement => {
+  const { address, contact, icon, link, elements } = props;
+
   // get a map link if address info exists
-  let addr = (
-            "" !== address.addr ||
-            "" !== address.city ||
-            "" !== address.state ||
-            "" !== address.zip
-        ) ? get_google_map_place_link( [ address.addr, address.city, address.state, address.zip ] ) : '';
-        
-        
+  let addressMapLink = get_google_map_place_link( [ address?.addr, address?.city, address?.state, address?.zip ] );
+ 
+  // If displaying an icon
+	let displayIcon   = 'on' === icon?.show ? <div className="thumbnail">{get_icon_span(icon?.icon)}</div> : <></>;
+
   // show contact info if enabled
-  if ( 'on' === contact.show_contact ) {
-    let phone         = contact.phone ? <p>General Information: {contact.phone}</p> : '';
-    let fax           = contact.fax ? <p>FAX: {contact.fax}</p> : '';
-    display_other = <Fragment>{phone}{fax}</Fragment>;
-  }
-        
-  // if show button is enabled and location link exists
-  if ( 'on' === location.show_button && "" !== location.link ) {
-    display_button = <a href={location.link} className="btn btn-outline-dark" target="_blank">More</a>;
-  }
-
-  let contactInfo = (
-    "" !== location.name ||
-    "" !== address.addr ||
-    display_other || 
-    display_button
-  ) 
-  ? 
-  <div className="contact">
-    { name }
-    { addr }
-    { display_other }
-    { display_button }
-  </div>
-  : <></>
-
-  return (
-    <Fragment>
-      { display_icon }
-      { contactInfo }
-    </Fragment>
-  );
-}
-
-const miniLocation = (props: LocationModuleEditProps) => {
-  let { attrs } = props;
+  let displayOther = <></>;
   
-  let location = getAttrByMode(attrs?.location?.innerContent);
-  let address = getAttrByMode(attrs?.address?.innerContent);
-  let icon = getAttrByMode(attrs?.icon?.innerContent);
-  
-  // If displaying an icon
-	let display_icon   = 'on' === icon.show_icon ? <div className="thumbnail">{get_icon_span(icon.font_icon)}</div> : '';
-
-  // if name exists
-  let name = <></>;
-  if( "" !== location.name ){
-    // if location link exists make a link, otherwise a strong tag
-    name = "" !== location.link  ? <a href={ location.link } target="_blank">{location.name}</a> : <strong>{location.name}</strong>;
-  }
-
-  // get a map link if address info exists
-  let addr = (
-            "" !== address.addr ||
-            "" !== address.city ||
-            "" !== address.state ||
-            "" !== address.zip
-        ) ? get_google_map_place_link( [ address.addr, address.city, address.state, address.zip ] ) : '';
-  
-   let contactInfo = (
-    "" !== location.name ||
-    "" !== address.addr 
-  ) 
-  ? 
-  <div className="contact">
-    { name }
-    { addr }
-  </div>
-  : <></>
-
-  return (
-    <Fragment>
-      { display_icon }
-      { contactInfo }
-    </Fragment>
-  );
-}
-
-const bannerLocation = (props: LocationModuleEditProps) => {
-  let { attrs, elements } = props;
-  
-  let location = getAttrByMode(attrs?.location?.innerContent);
-  let address = getAttrByMode(attrs?.address?.innerContent);
-  console.log( elements)
-  console.log( location );
-
-  // If displaying a featured image
-  let featuredImageElement = <div className="thumbnail">
-        {
-          elements.render({
-            attrName: 'location.innerContent',
-          })
-        }
-        </div>;
-  
-// get a map link if address info exists
-  let addr = (
-            "" !== address.addr ||
-            "" !== address.city ||
-            "" !== address.state ||
-            "" !== address.zip
-        ) ? 
-        <div className="address">
-          <span className="ca-gov-icon-road-pin"></span>
-          {get_google_map_place_link( [ address.addr, address.city, address.state, address.zip ] )}
-        </div> 
-        : '';
-        
-  // Add description markup
-  let desc = "" !== location.desc ? 
-  <Fragment>
-    <strong>Description</strong>
-    { 
-        elements.render({
-          attrName: 'location', 
-          attrSubName: 'desc'
-        })
-      }
-  </Fragment> : <></>;
-
-  // if show button is enabled and location link exists
-  let display_button = 'on' === location.show_button && "" !== location.link ? 
-    <a href={location.link} className="btn btn-outline-dark" target="_blank">View More Details</a> : <></>;
-
-  // let contactInfo = 
-  let contactInfo = (
-    "" !== location.name ||
-    "" !== address.addr 
-  ) 
-  ? 
-  <div className="contact">
-    { 
-    elements.render({
-      attrName: 'location', 
-      attrSubName: 'name',
-      
-    })
+  if('on' === contact?.show) {
+    if( '' !== contact?.phone ) {
+      displayOther = <Fragment>
+        <p>General Information: {contact?.phone}</p>
+      </Fragment>;
     }
-    { addr }
-  </div>
-  : <></>;
+    // if( '' !== contact?.fax ) {
+    //   displayOther = <Fragment>
+    //     {
+    //       displayOther?.props?.children
+    //     }
+    //     <p>FAX: {contact?.fax}</p>
+    //   </Fragment>;
+    // }
+  }
 
-  let summary = (
-    desc ||
-    display_button 
-  ) 
-  ? 
-  <div className="summary">
-    { desc }
-    { display_button }
-  </div>
-  : <></>
+  // we have to do this since elements.render children property isn't working as expected
+  let href = link?.url; // href to link value
+  let linkText = 'More'; // set link text to More for rendering
 
-  return (
-    <Fragment>
-      { featuredImageElement }
-      { contactInfo }
-      { summary }
-    </Fragment>
-  );
+  let linkElement = '' !== href && 'on' === link?.show ?
+    elements.render({
+            attrName: 'link',
+            attrSubName: 'url',
+            className: 'btn btn-outline-dark',
+            htmlAttributes: {
+              href,
+              target: '_blank',
+            },
+            children: linkText,
+          }) : <></>;
+
+  console.log( displayOther );
+
+  let contactInfo = ( 
+    displayOther?.props?.children?.length ||
+    addressMapLink?.props?.children?.length ||
+    linkElement?.props?.children?.length
+  ) ? 
+  <div className="contact">
+    { addressMapLink }
+    { displayOther }
+    { linkElement }
+  </div> : <></>;
+
+  return(<Fragment>
+    { contactInfo}
+  </Fragment>)
+}
+const miniLocation = (props: LocationModuleEditProps): ReactElement => {
+
+  return(<Fragment>Mini</Fragment>)
+}
+const bannerLocation = (props: LocationModuleEditProps): ReactElement => {
+
+  return(<Fragment>Banner</Fragment>)
 }
 
 /**
@@ -239,18 +124,34 @@ const ModuleEdit = (props: LocationModuleEditProps): ReactElement => {
     elements,
   } = props;
 
-  let location = getAttrByMode(attrs?.location?.innerContent);
+  let layout = getAttrByMode(attrs?.layout?.innerContent);
+  
+  let address = getAttrByMode(attrs?.address?.innerContent);
+  let contact = getAttrByMode(attrs?.contact?.innerContent);
+  let icon = getAttrByMode(attrs?.icon?.innerContent);
+  let link = getAttrByMode(attrs?.link?.innerContent);
 
-  let output;
-
-  if ( 'contact' === location.layout ) {
-			output = contactLocation(props);
-	} else if ( 'mini' === location.layout ) {
-			output = miniLocation(props);
-	} else  {
-			output = bannerLocation(props);
-	}
-
+  let output = <></>;
+ 
+  switch ( layout ) {
+    case 'mini':
+      output = miniLocation( props );
+      break;
+      
+    case 'banner':
+        output = bannerLocation( props );
+        break;
+    case 'contact':
+    default:
+      output = contactLocation( {
+        elements,
+        address, 
+        contact, 
+        icon, 
+        link
+      } );
+      break;
+  }
   return (
     <ModuleContainer
       attrs={attrs}
@@ -261,13 +162,17 @@ const ModuleEdit = (props: LocationModuleEditProps): ReactElement => {
       classnamesFunction={moduleClassnames}
       scriptDataComponent={ModuleScriptData}
     >
-      {/* <div className={`location ${location.layout}`}>{ output }</div> */}
-      <div className={`location ${location.layout}`}>{
-        elements.render({
-          attrName: 'location.innerContent',
-          attrSubName: 'name'
+      {
+        elements.styleComponents({
+          attrName: 'module',
         })
-       }</div>
+      }
+      {
+      <div className={`location ${layout}`}>
+        { output }
+        </div> 
+      }
+      
     </ModuleContainer>
   );
 }

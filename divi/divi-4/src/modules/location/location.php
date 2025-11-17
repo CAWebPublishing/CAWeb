@@ -76,7 +76,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 				'upload_button_text' => esc_attr__( 'Upload an image', 'caweb-divi-modules' ),
 				'choose_text'        => esc_attr__( 'Choose a Background Image', 'caweb-divi-modules' ),
 				'update_text'        => esc_attr__( 'Set As Background', 'caweb-divi-modules' ),
-				'description'        => esc_html__( 'If defined, this image will be used as the background for this location. To remove a background image, simply delete the URL from the settings field.', 'caweb-divi-modules' ),
+				'description'        => esc_html__( 'This image will be used as the main image for this location.', 'caweb-divi-modules' ),
 				'show_if'            => array( 'location_layout' => 'banner' ),
 				'tab_slug'           => 'general',
 				'toggle_slug'        => 'style',
@@ -173,7 +173,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 				'toggle_slug'     => 'location',
 			),
 			'location_link' => array(
-				'label'           => esc_html__( 'Location URL', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'URL', 'caweb-divi-modules' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Here you can enter the URL for the location.', 'caweb-divi-modules' ),

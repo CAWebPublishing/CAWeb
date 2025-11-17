@@ -7,34 +7,37 @@ import {
   type Module,
   type OnOff
 } from '@divi/types';
-import { InnerContent } from '@divi/types/src/module/element/inner-content';
 
 export interface ModuleCssAttr extends Module.Css.AttributeValue {
 }
-export type addressProps = {
+
+export type locationProps = FormatBreakpointStateAttr<{
+        layout?: string;
+        featured_image?: Element.Types.Image.InnerContent.Attributes;
+        name?: string;
+        desc?: string;
+        show_button?: OnOff;
+        link?:string, 
+      }>
+
+export type addressProps = FormatBreakpointStateAttr<{
         addr?:string, 
         city?:string
         state?:string
         zip?:string
-      };
+      }>
 
-export type contactProps = {
-        show?: OnOff;
+export type contactProps = FormatBreakpointStateAttr<{
+        show_contact?: OnOff;
         phone?:string, 
-        fax?:string
-      }
+        fax?:string,
+      }>;
 
-export type iconProps = {
-        icon?:string, 
-        show?: OnOff;
-      }
+export type iconProps = FormatBreakpointStateAttr<{
+        show_icon?: OnOff;
+        font_icon?:string, 
+      }>;
 
-export type linkProps = {
-        text?:string, 
-        url?:string
-        show?: OnOff;
-      }
-      
 export type ModuleCssGroupAttr = FormatBreakpointStateAttr<ModuleCssAttr>;
 
 export interface ModuleAttrs extends InternalAttrs {
@@ -68,37 +71,22 @@ export interface ModuleAttrs extends InternalAttrs {
   };
 
   // Fields
-  layout?: {
-      innerContent?: FormatBreakpointStateAttr<string>
-  };
-
-  name?: {
-      innerContent?: FormatBreakpointStateAttr<string>
-  };
-
-  desc?: {
-      innerContent?: FormatBreakpointStateAttr<string>
+  location?: {
+      innerContent?: locationProps;
   };
 
   address?: {
-      innerContent?: FormatBreakpointStateAttr<addressProps>;
+      innerContent?: addressProps;
   };
 
   contact?: {
-      innerContent?: FormatBreakpointStateAttr<contactProps>;
+      innerContent?: contactProps;
   };
-
-  link?: {
-      innerContent?: FormatBreakpointStateAttr<linkProps>;
-  };
-
+  
   icon?: {
-      innerContent?: FormatBreakpointStateAttr<iconProps>;
-  };
-
-  image?: {
-    innerContent?: Element.Types.Image.InnerContent.Attributes;
+      innerContent?: iconProps;
   }
+  
 }
 
 export type LocationModuleEditProps = ModuleEditProps<ModuleAttrs>;

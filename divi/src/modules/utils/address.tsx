@@ -14,7 +14,7 @@ const get_address = (address: string|string[]) => {
        address = address.split( ',' );
    }
 
-   return address.map( (part) => part.trim() ).filter(Boolean).join(', ');
+   return address.map( (part) => part?.trim() ).filter(Boolean).join(', ');
 };
 
 const get_google_map_place_link = (address: string|string[], embed = false, target = '_blank', classes = ''): ReactElement => {

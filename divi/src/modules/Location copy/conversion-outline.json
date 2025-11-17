@@ -47,21 +47,21 @@
     "title": "css.*.title"
   },
   "module": {
-    "location_layout": "layout.innerContent.*",
-    "name": "name.innerContent.*",
-    "desc": "desc.innerContent.*",
+    "location_layout": "location.innerContent.*.layout",
+    "featured_image": "location.innerContent.*.featured_image.innerContent.*.src",
+    "name": "location.innerContent.*.name",
+    "desc": "location.innerContent.*.desc",
+    "show_button": "location.innerContent.*.desc",
+    "location_link": "location.innerContent.*.link",
     "addr": "address.innerContent.*.addr",
     "city": "address.innerContent.*.city",
     "state": "address.innerContent.*.state",
     "zip": "address.innerContent.*.zip",
-    "show_contact": "contact.innerContent.*.show",
+    "show_contact": "contact.innerContent.*.show_contact",
     "phone": "contact.innerContent.*.phone",
     "fax": "contact.innerContent.*.fax",
-    "show_button": "link.innerContent.*.show",
-    "location_link": "link.innerContent.*.url",
-    "show_icon": "icon.innerContent.*.show",
-    "font_icon": "icon.innerContent.*.icon",
-    "featured_image": "image.innerContent.*.src"
+    "show_icon": "icon.innerContent.*.show_icon",
+    "font_icon": "icon.innerContent.*.font_icon"
   },
   "valueExpansionFunctionMap": {}
 }

@@ -1,0 +1,126 @@
+{
+  "name": "caweb/location",
+  "d4Shortcode": "et_pb_ca_location_widget",
+  "title": "Location",
+  "titles": "Locations",
+  "moduleIcon": "caweb/caweb",
+  "moduleClassName": "et_pb_ca_location_widget",
+  "moduleOrderClassName": "et_pb_ca_location_widget",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "link": {},
+          "text": {},
+          "htmlAttributes": {}
+        },
+        "decoration": {
+          "background": {},
+          "bodyFont": {},
+          "sizing": {},
+          "spacing": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "transform": {},
+          "animation": {},
+          "overflow": {},
+          "disabledOn": {},
+          "transition": {},
+          "position": {},
+          "zIndex": {},
+          "scroll": {},
+          "sticky": {}
+        }
+      }
+    },
+
+    "name": {
+      "type": "object",
+      "inlineEditor": "plainText",
+      "elementType": "heading",
+      "childrenSanitizer": "et_core_esc_previously",
+      "tagName": "h4",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "header",
+            "render": true,
+            "attrName": "location.innerContent",
+            "subName": "name",
+            "label": "Name",
+            "description": "Input the name of the profile.",
+            "features": {
+              "sticky": false,
+              "dynamicContent": {
+                "type": "text"
+              }
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        }
+      }
+    }
+
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups":{
+      "header": {
+        "panel": "content",
+        "priority": 2,
+        "groupName": "header",
+        "component": {
+            "name": "divi/composite",
+            "props": {
+              "groupLabel": "Header"
+            }
+          }
+      },
+      "profile": {
+        "panel": "content",
+        "priority": 2,
+        "groupName": "profile",
+        "component": {
+            "name": "divi/composite",
+            "props": {
+              "groupLabel": "Profile"
+            }
+          }
+      },
+      "portrait": {
+        "panel": "content",
+        "priority": 2,
+        "groupName": "portrait",
+        "component": {
+            "name": "divi/composite",
+            "props": {
+              "groupLabel": "Portrait"
+            }
+          }
+      },
+      "portraitDesign": {
+        "panel": "design",
+        "priority": 2,
+        "groupName": "portraitDesign",
+        "component": {
+            "name": "divi/composite",
+            "props": {
+              "groupLabel": "Portrait"
+            }
+          }
+      }
+    }
+  }
+}
