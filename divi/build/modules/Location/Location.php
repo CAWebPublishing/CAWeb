@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
 }
 
+use CAWeb\Modules\Utils\Module as CAWebModule;
+
 use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 use CAWeb\Modules\Location\ModuleTrait;
@@ -23,7 +25,7 @@ use CAWeb\Modules\Location\ModuleTrait;
  *
  * @since ??
  */
-class Location implements DependencyInterface {
+class Location extends CAWebModule {
 	use ModuleTrait\RenderCallbackTrait;
 
 	/**

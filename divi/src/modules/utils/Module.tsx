@@ -17,12 +17,21 @@ const get_address = (address: string|string[]) => {
    return address.map( (part) => part?.trim() ).filter(Boolean).join(', ');
 };
 
+/**
+ * Create a GoogleMap Place Link/Embedded IFrame
+ *
+ * @param  array|string $addr Address to format.
+ * @param  mixed        $embed Whether to create a link or embedded iframe.
+ * @param  mixed        $target The links target, default _blank.
+ * @param  mixed        $classes Class for the link.
+ * @return string
+ */
 const get_google_map_place_link = (address: string|string[], embed = false, target = '_blank', classes = ''): ReactElement => {
     
     let addr = get_address(address);
 
     if( ! addr ){
-        return <></>;
+        return null;
     }
 
     if( embed ){
@@ -34,4 +43,20 @@ const get_google_map_place_link = (address: string|string[], embed = false, targ
     }
 };
 
-export { get_address, get_google_map_place_link };
+/**
+ * Create icon span
+ *
+ * @param  string $icon Icon to render.
+ * @param  string $classes Classes for the span.
+ * @param  string $styles Styles for the span.
+ * @return string
+ */
+const get_icon_span = (icon: string): ReactElement => {
+    if( "" === icon ){
+        return;
+    }
+
+    return(<span className={`ca-gov-icon-${icon}`}></span>);
+};
+
+export { get_icon_span, get_address, get_google_map_place_link };

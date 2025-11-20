@@ -191,7 +191,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/Location/styles.tsx");
 /* harmony import */ var _module_classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/Location/module-classnames.ts");
 /* harmony import */ var _module_script_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./src/modules/Location/module-script-data.tsx");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./src/modules/utils/index.ts");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./src/modules/Utils/index.ts");
+var __spreadArray = undefined && undefined.__spreadArray || function (to, from, pack) {
+  if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+    if (ar || !(i in from)) {
+      if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+      ar[i] = from[i];
+    }
+  }
+  return to.concat(ar || Array.prototype.slice.call(from));
+};
 // External Dependencies.
 
 // Divi Dependencies.
@@ -202,58 +211,111 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Renders Location (contact)
+ *
+ * @return ReactElement
+ */
 var contactLocation = function (props) {
-  var _a, _b, _c, _d, _e, _f;
+  var _a, _b;
   var address = props.address,
     contact = props.contact,
     icon = props.icon,
     link = props.link,
-    elements = props.elements;
+    elements = props.elements,
+    name = props.name;
   // get a map link if address info exists
-  var addressMapLink = (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address === null || address === void 0 ? void 0 : address.addr, address === null || address === void 0 ? void 0 : address.city, address === null || address === void 0 ? void 0 : address.state, address === null || address === void 0 ? void 0 : address.zip]);
+  var addressMapLink = (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address === null || address === void 0 ? void 0 : address.addr, address === null || address === void 0 ? void 0 : address.city, address === null || address === void 0 ? void 0 : address.state, address === null || address === void 0 ? void 0 : address.zip]);
   // If displaying an icon
   var displayIcon = 'on' === (icon === null || icon === void 0 ? void 0 : icon.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "thumbnail"
-  }, (0,_utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon === null || icon === void 0 ? void 0 : icon.icon)) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  }, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon === null || icon === void 0 ? void 0 : icon.icon)) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
   // show contact info if enabled
-  var displayOther = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  if ('on' === (contact === null || contact === void 0 ? void 0 : contact.show)) {
-    if ('' !== (contact === null || contact === void 0 ? void 0 : contact.phone)) {
-      displayOther = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "General Information: ", contact === null || contact === void 0 ? void 0 : contact.phone));
-    }
-    // if( '' !== contact?.fax ) {
-    //   displayOther = <Fragment>
-    //     {
-    //       displayOther?.props?.children
-    //     }
-    //     <p>FAX: {contact?.fax}</p>
-    //   </Fragment>;
-    // }
-  }
-  // we have to do this since elements.render children property isn't working as expected
-  var href = link === null || link === void 0 ? void 0 : link.url; // href to link value
-  var linkText = 'More'; // set link text to More for rendering
-  var linkElement = '' !== href && 'on' === (link === null || link === void 0 ? void 0 : link.show) ? elements.render({
-    attrName: 'link',
-    attrSubName: 'url',
+  var displayOther = 'on' === (contact === null || contact === void 0 ? void 0 : contact.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement.apply((react__WEBPACK_IMPORTED_MODULE_0___default()), __spreadArray([react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null], ['' !== (contact === null || contact === void 0 ? void 0 : contact.phone) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "General Information: ", contact === null || contact === void 0 ? void 0 : contact.phone) : null, '' !== (contact === null || contact === void 0 ? void 0 : contact.fax) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "FAX: ", contact === null || contact === void 0 ? void 0 : contact.fax) : null].filter(Boolean), false)) : null;
+  var linkElement = '' !== (link === null || link === void 0 ? void 0 : link.url) && 'on' === (link === null || link === void 0 ? void 0 : link.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: link === null || link === void 0 ? void 0 : link.url,
     className: 'btn btn-outline-dark',
-    htmlAttributes: {
-      href: href,
-      target: '_blank'
-    },
-    children: linkText
-  }) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  console.log(displayOther);
-  var contactInfo = ((_b = (_a = displayOther === null || displayOther === void 0 ? void 0 : displayOther.props) === null || _a === void 0 ? void 0 : _a.children) === null || _b === void 0 ? void 0 : _b.length) || ((_d = (_c = addressMapLink === null || addressMapLink === void 0 ? void 0 : addressMapLink.props) === null || _c === void 0 ? void 0 : _c.children) === null || _d === void 0 ? void 0 : _d.length) || ((_f = (_e = linkElement === null || linkElement === void 0 ? void 0 : linkElement.props) === null || _e === void 0 ? void 0 : _e.children) === null || _f === void 0 ? void 0 : _f.length) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    target: '_blank'
+  }, "More") : null;
+  // we combine all contact info elements here
+  var contactInfo = "" !== name || null !== displayOther && ((_a = displayOther === null || displayOther === void 0 ? void 0 : displayOther.props) === null || _a === void 0 ? void 0 : _a.children) || null !== addressMapLink || null !== linkElement && ((_b = linkElement === null || linkElement === void 0 ? void 0 : linkElement.props) === null || _b === void 0 ? void 0 : _b.children) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "contact"
-  }, addressMapLink, displayOther, linkElement) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  }, elements.render({
+    'attrName': 'name'
+  }), addressMapLink, displayOther, linkElement) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
   return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, contactInfo);
 };
+/**
+ * Renders Location (mini)
+ *
+ * @return ReactElement
+ */
 var miniLocation = function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Mini");
+  var address = props.address,
+    icon = props.icon,
+    link = props.link,
+    elements = props.elements,
+    name = props.name;
+  // get a map link if address info exists
+  var addressMapLink = (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address === null || address === void 0 ? void 0 : address.addr, address === null || address === void 0 ? void 0 : address.city, address === null || address === void 0 ? void 0 : address.state, address === null || address === void 0 ? void 0 : address.zip]);
+  // If displaying an icon
+  var displayIcon = 'on' === (icon === null || icon === void 0 ? void 0 : icon.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "thumbnail"
+  }, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)(icon === null || icon === void 0 ? void 0 : icon.icon)) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  // we wrap the name in a link if a link url is provided
+  var nameElement = '' !== name ? '' !== (link === null || link === void 0 ? void 0 : link.url) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: link === null || link === void 0 ? void 0 : link.url,
+    target: "_blank"
+  }, name) : elements.render({
+    'attrName': 'name'
+  }) : null;
+  // we combine all contact info elements here
+  var contactInfo = '' !== name || null !== addressMapLink ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "contact"
+  }, nameElement, addressMapLink) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, contactInfo);
 };
+/**
+ * Renders Location (banner)
+ *
+ * @return ReactElement
+ */
 var bannerLocation = function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Banner");
+  var address = props.address,
+    link = props.link,
+    elements = props.elements,
+    name = props.name,
+    image = props.image,
+    desc = props.desc;
+  var imageElement = '' !== (image === null || image === void 0 ? void 0 : image.src) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: 'thumbnail'
+  }, elements.render({
+    attrName: 'image'
+  })) : null;
+  // get a map link if address info exists
+  var addressMapLink = (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_google_map_place_link)([address === null || address === void 0 ? void 0 : address.addr, address === null || address === void 0 ? void 0 : address.city, address === null || address === void 0 ? void 0 : address.state, address === null || address === void 0 ? void 0 : address.zip]);
+  // Add description markup
+  var descElement = '' !== desc ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Description:"), elements.render({
+    attrName: 'desc'
+  })) : null;
+  var linkElement = '' !== (link === null || link === void 0 ? void 0 : link.url) && 'on' === (link === null || link === void 0 ? void 0 : link.show) ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: link === null || link === void 0 ? void 0 : link.url,
+    target: "_blank",
+    className: "btn btn-outline-dark"
+  }, "View More Details") : null;
+  // we combine all contact info elements here
+  var contactInfo = "" !== name || null !== addressMapLink ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "contact"
+  }, elements.render({
+    'attrName': 'name'
+  }), addressMapLink ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: 'address'
+  }, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.get_icon_span)('road-pin'), addressMapLink) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null)) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  // we combine all summary info elements here
+  var summaryInfo = "" !== desc || null !== linkElement ? react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "summary"
+  }, descElement, linkElement) : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, imageElement, contactInfo, summaryInfo);
 };
 /**
  * Divi 5 Module edit component of visual builder.
@@ -265,7 +327,7 @@ var bannerLocation = function (props) {
  * @returns {ReactElement}
  */
 var ModuleEdit = function (props) {
-  var _a, _b, _c, _d, _e;
+  var _a, _b, _c, _d, _e, _f, _g, _h;
   var attrs = props.attrs,
     id = props.id,
     name = props.name,
@@ -275,13 +337,29 @@ var ModuleEdit = function (props) {
   var contact = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.contact) === null || _c === void 0 ? void 0 : _c.innerContent);
   var icon = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_d = attrs === null || attrs === void 0 ? void 0 : attrs.icon) === null || _d === void 0 ? void 0 : _d.innerContent);
   var link = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_e = attrs === null || attrs === void 0 ? void 0 : attrs.link) === null || _e === void 0 ? void 0 : _e.innerContent);
+  var locationName = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_f = attrs === null || attrs === void 0 ? void 0 : attrs.name) === null || _f === void 0 ? void 0 : _f.innerContent);
+  var image = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_g = attrs === null || attrs === void 0 ? void 0 : attrs.image) === null || _g === void 0 ? void 0 : _g.innerContent);
+  var desc = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_h = attrs === null || attrs === void 0 ? void 0 : attrs.desc) === null || _h === void 0 ? void 0 : _h.innerContent);
   var output = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
   switch (layout) {
     case 'mini':
-      output = miniLocation(props);
+      output = miniLocation({
+        elements: elements,
+        address: address,
+        icon: icon,
+        link: link,
+        name: locationName
+      });
       break;
     case 'banner':
-      output = bannerLocation(props);
+      output = bannerLocation({
+        elements: elements,
+        address: address,
+        image: image,
+        link: link,
+        desc: desc,
+        name: locationName
+      });
       break;
     case 'contact':
     default:
@@ -290,7 +368,8 @@ var ModuleEdit = function (props) {
         address: address,
         contact: contact,
         icon: icon,
-        link: link
+        link: link,
+        name: locationName
       });
       break;
   }
@@ -826,29 +905,14 @@ var ModuleStyles = function (_a) {
 
 /***/ }),
 
-/***/ "./src/modules/index.ts":
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CAWebModuleLocation: () => (/* reexport safe */ _Location__WEBPACK_IMPORTED_MODULE_1__.CAWebModuleLocation),
-/* harmony export */   CAWebModuleProfileBanner: () => (/* reexport safe */ _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__.CAWebModuleProfileBanner)
-/* harmony export */ });
-/* harmony import */ var _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/ProfileBanner/index.ts");
-/* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Location/index.ts");
-
-
-
-
-/***/ }),
-
-/***/ "./src/modules/utils/address.tsx":
+/***/ "./src/modules/Utils/Module.tsx":
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   get_address: () => (/* binding */ get_address),
-/* harmony export */   get_google_map_place_link: () => (/* binding */ get_google_map_place_link)
+/* harmony export */   get_google_map_place_link: () => (/* binding */ get_google_map_place_link),
+/* harmony export */   get_icon_span: () => (/* binding */ get_icon_span)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -870,6 +934,15 @@ var get_address = function (address) {
     return part === null || part === void 0 ? void 0 : part.trim();
   }).filter(Boolean).join(', ');
 };
+/**
+ * Create a GoogleMap Place Link/Embedded IFrame
+ *
+ * @param  array|string $addr Address to format.
+ * @param  mixed        $embed Whether to create a link or embedded iframe.
+ * @param  mixed        $target The links target, default _blank.
+ * @param  mixed        $classes Class for the link.
+ * @return string
+ */
 var get_google_map_place_link = function (address, embed, target, classes) {
   if (embed === void 0) {
     embed = false;
@@ -882,7 +955,7 @@ var get_google_map_place_link = function (address, embed, target, classes) {
   }
   var addr = get_address(address);
   if (!addr) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+    return null;
   }
   if (embed) {
     var map_url = "https://www.google.com/maps/embed/v1/place?q=".concat(addr, "&zoom=10&key=key");
@@ -898,21 +971,14 @@ var get_google_map_place_link = function (address, embed, target, classes) {
     }, addr);
   }
 };
-
-
-/***/ }),
-
-/***/ "./src/modules/utils/icon.tsx":
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   get_icon_span: () => (/* binding */ get_icon_span)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-// External Dependencies.
-
+/**
+ * Create icon span
+ *
+ * @param  string $icon Icon to render.
+ * @param  string $classes Classes for the span.
+ * @param  string $styles Styles for the span.
+ * @return string
+ */
 var get_icon_span = function (icon) {
   if ("" === icon) {
     return;
@@ -925,17 +991,31 @@ var get_icon_span = function (icon) {
 
 /***/ }),
 
-/***/ "./src/modules/utils/index.ts":
+/***/ "./src/modules/Utils/index.ts":
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   get_address: () => (/* reexport safe */ _address__WEBPACK_IMPORTED_MODULE_1__.get_address),
-/* harmony export */   get_google_map_place_link: () => (/* reexport safe */ _address__WEBPACK_IMPORTED_MODULE_1__.get_google_map_place_link),
-/* harmony export */   get_icon_span: () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_0__.get_icon_span)
+/* harmony export */   get_address: () => (/* reexport safe */ _Module__WEBPACK_IMPORTED_MODULE_0__.get_address),
+/* harmony export */   get_google_map_place_link: () => (/* reexport safe */ _Module__WEBPACK_IMPORTED_MODULE_0__.get_google_map_place_link),
+/* harmony export */   get_icon_span: () => (/* reexport safe */ _Module__WEBPACK_IMPORTED_MODULE_0__.get_icon_span)
 /* harmony export */ });
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/utils/icon.tsx");
-/* harmony import */ var _address__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/utils/address.tsx");
+/* harmony import */ var _Module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/Utils/Module.tsx");
+
+
+
+/***/ }),
+
+/***/ "./src/modules/index.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CAWebModuleLocation: () => (/* reexport safe */ _Location__WEBPACK_IMPORTED_MODULE_1__.CAWebModuleLocation),
+/* harmony export */   CAWebModuleProfileBanner: () => (/* reexport safe */ _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__.CAWebModuleProfileBanner)
+/* harmony export */ });
+/* harmony import */ var _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/ProfileBanner/index.ts");
+/* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Location/index.ts");
 
 
 

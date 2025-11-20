@@ -29,16 +29,22 @@ import {
   contactProps,
   linkProps
  } from './types';
-import { get_icon_span, get_google_map_place_link } from '../utils';
+import { get_icon_span, get_google_map_place_link } from '../Utils';
 
+/**
+ * Renders Location (contact)
+ *
+ * @return ReactElement
+ */
 const contactLocation = (props: {
   elements: Module.ModuleElements,
   address?: addressProps,
   contact?: contactProps,
   icon?: iconProps,
-  link?: linkProps
+  link?: linkProps,
+  name?: string
 }): ReactElement => {
-  const { address, contact, icon, link, elements } = props;
+  const { address, contact, icon, link, elements, name } = props;
 
   // get a map link if address info exists
   let addressMapLink = get_google_map_place_link( [ address?.addr, address?.city, address?.state, address?.zip ] );
@@ -47,48 +53,28 @@ const contactLocation = (props: {
 	let displayIcon   = 'on' === icon?.show ? <div className="thumbnail">{get_icon_span(icon?.icon)}</div> : <></>;
 
   // show contact info if enabled
-  let displayOther = <></>;
+  let displayOther = 'on' === contact?.show ? <Fragment>
+      {
+        ...[
+              '' !== contact?.phone ? <p>General Information: {contact?.phone}</p> : null,
+              '' !== contact?.fax ? <p>FAX: {contact?.fax}</p> : null
+          ].filter(Boolean)
+      }
+    </Fragment> : null;
   
-  if('on' === contact?.show) {
-    if( '' !== contact?.phone ) {
-      displayOther = <Fragment>
-        <p>General Information: {contact?.phone}</p>
-      </Fragment>;
-    }
-    // if( '' !== contact?.fax ) {
-    //   displayOther = <Fragment>
-    //     {
-    //       displayOther?.props?.children
-    //     }
-    //     <p>FAX: {contact?.fax}</p>
-    //   </Fragment>;
-    // }
-  }
+  let linkElement = '' !== link?.url && 'on' === link?.show ?
+      <a href={ link?.url } className='btn btn-outline-dark' target='_blank'>More</a>
+      : null;
 
-  // we have to do this since elements.render children property isn't working as expected
-  let href = link?.url; // href to link value
-  let linkText = 'More'; // set link text to More for rendering
-
-  let linkElement = '' !== href && 'on' === link?.show ?
-    elements.render({
-            attrName: 'link',
-            attrSubName: 'url',
-            className: 'btn btn-outline-dark',
-            htmlAttributes: {
-              href,
-              target: '_blank',
-            },
-            children: linkText,
-          }) : <></>;
-
-  console.log( displayOther );
-
+  // we combine all contact info elements here
   let contactInfo = ( 
-    displayOther?.props?.children?.length ||
-    addressMapLink?.props?.children?.length ||
-    linkElement?.props?.children?.length
+    "" !== name ||
+    (null !== displayOther && displayOther?.props?.children) ||
+    null !== addressMapLink ||
+    (null !== linkElement && linkElement?.props?.children)
   ) ? 
   <div className="contact">
+    { elements.render({'attrName': 'name'}) }
     { addressMapLink }
     { displayOther }
     { linkElement }
@@ -98,13 +84,128 @@ const contactLocation = (props: {
     { contactInfo}
   </Fragment>)
 }
-const miniLocation = (props: LocationModuleEditProps): ReactElement => {
 
-  return(<Fragment>Mini</Fragment>)
+/**
+ * Renders Location (mini)
+ *
+ * @return ReactElement
+ */
+const miniLocation = (props: {
+  elements: Module.ModuleElements,
+  address?: addressProps,
+  icon?: iconProps,
+  link?: linkProps,
+  name?: string
+}): ReactElement => {
+const { address, icon, link, elements, name } = props;
+
+  // get a map link if address info exists
+  let addressMapLink = get_google_map_place_link( [ address?.addr, address?.city, address?.state, address?.zip ] );
+ 
+  // If displaying an icon
+	let displayIcon   = 'on' === icon?.show ? <div className="thumbnail">{get_icon_span(icon?.icon)}</div> : <></>;
+
+  // we wrap the name in a link if a link url is provided
+  let nameElement = '' !== name ?
+    '' !== link?.url ? 
+      <a href={link?.url} target="_blank">{ name }</a>
+      :
+    elements.render({'attrName': 'name' })
+     : null;
+
+  // we combine all contact info elements here
+  let contactInfo = ( 
+    '' !== name ||
+    null !== addressMapLink 
+  ) ? 
+  <div className="contact">
+    { nameElement }
+    { addressMapLink }
+  </div> : <></>;
+
+  return(<Fragment>
+    { contactInfo}
+  </Fragment>)
 }
-const bannerLocation = (props: LocationModuleEditProps): ReactElement => {
 
-  return(<Fragment>Banner</Fragment>)
+/**
+ * Renders Location (banner)
+ *
+ * @return ReactElement
+ */
+const bannerLocation = (props: {
+  elements: Module.ModuleElements,
+  address?: addressProps,
+  link?: linkProps,
+  name?: string,
+  image?: {
+    src?: string,
+    alt?: string,
+    itle?: string
+  },
+  desc?: string
+}): ReactElement => {
+  const { address, link, elements, name, image, desc } = props;
+
+  let imageElement = '' !== image?.src ?
+    <div className='thumbnail'>
+      {
+        elements.render({
+            attrName: 'image',
+        })
+      }
+    </div> : null;
+
+  // get a map link if address info exists
+  let addressMapLink = get_google_map_place_link( [ address?.addr, address?.city, address?.state, address?.zip ] );
+ 
+  // Add description markup
+  let descElement = '' !== desc ? 
+      <Fragment>
+        <strong>Description:</strong> 
+        {
+          elements.render({
+              attrName: 'desc',
+          })
+        }
+      </Fragment> : null
+
+  let linkElement = '' !== link?.url && 'on' === link?.show ?
+        <a href={ link?.url } target="_blank" className="btn btn-outline-dark">View More Details</a>
+        : null;
+
+  // we combine all contact info elements here
+  let contactInfo = ( 
+    "" !== name ||
+    null !== addressMapLink 
+  ) ? 
+  <div className="contact">
+    { elements.render({'attrName': 'name'}) }
+    { 
+      addressMapLink ? 
+      <div className='address'>
+        { get_icon_span('road-pin') }
+        {addressMapLink}
+      </div> 
+      : <></>
+    }
+  </div> : <></>;
+
+  // we combine all summary info elements here
+  let summaryInfo = ( 
+    "" !== desc ||
+    null !== linkElement 
+  ) ? 
+  <div className="summary">
+    { descElement }
+    { linkElement }
+  </div> : <></>;
+
+  return(<Fragment>
+    { imageElement }
+    { contactInfo }
+    { summaryInfo }
+  </Fragment>)
 }
 
 /**
@@ -130,16 +231,32 @@ const ModuleEdit = (props: LocationModuleEditProps): ReactElement => {
   let contact = getAttrByMode(attrs?.contact?.innerContent);
   let icon = getAttrByMode(attrs?.icon?.innerContent);
   let link = getAttrByMode(attrs?.link?.innerContent);
+  let locationName = getAttrByMode(attrs?.name?.innerContent);
+  let image = getAttrByMode(attrs?.image?.innerContent);
+  let desc = getAttrByMode(attrs?.desc?.innerContent);
 
   let output = <></>;
  
   switch ( layout ) {
     case 'mini':
-      output = miniLocation( props );
+      output = miniLocation( {
+        elements,
+        address, 
+        icon, 
+        link,
+        name: locationName
+      } );
       break;
       
     case 'banner':
-        output = bannerLocation( props );
+        output = bannerLocation( {
+        elements,
+        address, 
+        image,
+        link,
+        desc,
+        name: locationName
+      } );
         break;
     case 'contact':
     default:
@@ -148,7 +265,8 @@ const ModuleEdit = (props: LocationModuleEditProps): ReactElement => {
         address, 
         contact, 
         icon, 
-        link
+        link,
+        name: locationName
       } );
       break;
   }
