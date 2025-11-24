@@ -15,7 +15,6 @@ import { placeholderContent } from './placeholder-content';
 import { conversionOutline } from './conversion-outline';
 import { SettingsContent } from './Settings/content';
 import { SettingsDesign } from './Settings/design';
-import { last } from 'lodash';
 
 
 export const CAWebModuleLocation: ModuleLibrary.Module.RegisterDefinition<ModuleAttrs> = {

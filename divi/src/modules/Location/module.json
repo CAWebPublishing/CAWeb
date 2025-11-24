@@ -509,13 +509,13 @@
     }
   },
   "settings": {
-    "design": "auto",
     "advanced": "auto",
     "groups":{
       "style": {
         "panel": "content",
         "priority": 2,
         "groupName": "style",
+        "multiElements": true,
         "component": {
             "name": "divi/composite",
             "props": {
@@ -527,6 +527,7 @@
         "panel": "content",
         "priority": 2,
         "groupName": "location",
+        "multiElements": true,
         "component": {
             "name": "divi/composite",
             "props": {
@@ -539,6 +540,7 @@
         "panel": "design",
         "priority": 2,
         "groupName": "icon",
+        "multiElements": true,
         "component": {
             "name": "divi/composite",
             "props": {

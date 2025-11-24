@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import {
   ModuleGroups,
 } from '@divi/module';
-import { mergeAttrs } from '@divi/module-utils';
+import { getAttrByMode } from '@divi/module-utils';
 import {
   type Module,
 } from '@divi/types';
@@ -18,20 +18,18 @@ import {
 import {ModuleAttrs} from "../types";
 
 export const SettingsDesign = ({
+  attrs,
   defaultSettingsAttrs,
-  parentAttrs,
   groupConfiguration,
 }: Module.Settings.Panel.Props<ModuleAttrs>): ReactElement => {
 
-  // Insert custom Icon default attribute value inherited from Parent Module if any.
-  if (groupConfiguration?.contentIcon?.component?.props) {
-    // const defaultIconAttrs = mergeAttrs({
-    //   defaultAttrs: defaultSettingsAttrs?.icon?.innerContent,
-    //   attrs:        parentAttrs?.asMutable({ deep: true })?.icon?.innerContent,
-    // });
+  let layout = getAttrByMode(attrs?.layout?.innerContent);
+  let layoutDefault = getAttrByMode(defaultSettingsAttrs?.layout?.innerContent);
+  
+  layout = layout ?? layoutDefault;
 
-    // set(groupConfiguration, ['contentIcon', 'component', 'props', 'fields', 'iconInnercontent', 'defaultAttr'], defaultIconAttrs);
-  }
+  // Toggle Icon Design group visibility based on layout
+  set(groupConfiguration, ['icon', 'render'], 'banner' !== layout );
 
   return (
     <ModuleGroups

@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import {
   ModuleGroups,
 } from '@divi/module';
-import { mergeAttrs, getAttrByMode } from '@divi/module-utils';
+import { getAttrByMode } from '@divi/module-utils';
 import {
   type Module,
 } from '@divi/types';
@@ -18,30 +18,36 @@ import {
 import {ModuleAttrs} from "../types";
 
 export const SettingsContent = ({
+  attrs,
   defaultSettingsAttrs,
-  parentAttrs,
   groupConfiguration,
 }: Module.Settings.Panel.Props<ModuleAttrs>): ReactElement => {
 
-  const showFeaturedImage = (params: Module.Settings.Field.CallbackParams<ModuleAttrs>) => {
-    const { attrs }      = params;
-    const useStyleDefault = getAttrByMode(defaultSettingsAttrs?.icon?.innerContent);
-    const useIcon        = getAttrByMode(attrs?.icon?.innerContent);
-    // const showIcon       = 'on' === (useIcon.show ?? useIconDefault.show);
+  let layout = getAttrByMode(attrs?.layout?.innerContent);
+  let layoutDefault = getAttrByMode(defaultSettingsAttrs?.layout?.innerContent);
+  let contact = getAttrByMode(attrs?.contact?.innerContent);
+  let link = getAttrByMode(attrs?.link?.innerContent);
+  
+  layout = layout ?? layoutDefault
 
-    return false;
-  };
+  // Toggle Featured Image field visibility based on layout
+  set(groupConfiguration, ['style', 'component', 'props', 'fields', 'src', 'render'], 'banner' === layout );
 
-  // console.log( groupConfiguration)
-  // Insert custom Icon default attribute value inherited from Parent Module if any.
-  if (groupConfiguration?.style?.component?.props) {
-    // const defaultIconAttrs = mergeAttrs({
-    //   defaultAttrs: defaultSettingsAttrs?.icon?.innerContent,
-    //   attrs:        parentAttrs?.asMutable({ deep: true })?.icon?.innerContent,
-    // });
+  // Toggle Description field visibility based on layout
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'descInnercontent', 'render'], 'banner' === layout );
 
-    // set(groupConfiguration, ['contentIcon', 'component', 'props', 'fields', 'iconInnercontent', 'defaultAttr'], defaultIconAttrs);
-  }
+  // Toggle Show Contact Button field visibility based on layout
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'showContact', 'render'], 'contact' === layout );
+
+  // Toggle Phone/Fax fields visibility based on layout and Show Contact Button
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'phone', 'render'], 'contact' === layout && 'on' === contact?.show );
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'fax', 'render'], 'contact' === layout && 'on' === contact?.show );
+
+  // Toggle Show Button field visibility based on layout
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'showLink', 'render'], 'mini' !== layout );
+
+  // Toggle URL field visibility based on Show Button
+  set(groupConfiguration, ['location', 'component', 'props', 'fields', 'url', 'render'], 'on' === link?.show );
 
   return (
     <ModuleGroups
