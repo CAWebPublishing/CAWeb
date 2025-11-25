@@ -60,8 +60,7 @@
     "show_button": "link.innerContent.*.show",
     "location_link": "link.innerContent.*.url",
     "show_icon": "icon.innerContent.*.show",
-    "font_icon": "icon.innerContent.*.icon",
+    "font_icon": "icon.innerContent.*.unicode",
     "featured_image": "image.innerContent.*.src"
-  },
-  "valueExpansionFunctionMap": {}
+  }
 }

@@ -2,7 +2,6 @@
 import { ModuleConversionOutline } from '@divi/types';
 
 // Compare this to wp.data.select('divi/settings').getSetting('shortcodeModuleDefinitions').et_pb_blurb.fields
-
 export const conversionOutline: ModuleConversionOutline = {
   advanced: {
     admin_label: 'module.meta.adminLabel',
@@ -64,9 +63,7 @@ export const conversionOutline: ModuleConversionOutline = {
     show_button:    'link.innerContent.*.show',
     location_link:    'link.innerContent.*.url',
     show_icon:    'icon.innerContent.*.show',
-    font_icon:    'icon.innerContent.*.icon',
+    font_icon:    'icon.innerContent.*.unicode',
     featured_image: 'image.innerContent.*.src',
-  },
-  valueExpansionFunctionMap: {
   }
 };

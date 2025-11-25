@@ -3,7 +3,7 @@
   "d4Shortcode": "et_pb_ca_location_widget",
   "title": "Location",
   "titles": "Locations",
-  "moduleIcon": "caweb/caweb",
+  "moduleIcon": "caweb/module-logo",
   "moduleClassName": "et_pb_ca_location_widget",
   "moduleOrderClassName": "et_pb_ca_location_widget",
   "category": "module",
@@ -491,7 +491,6 @@
               "label": "Icon",
               "description": "Select an icon.",
               "attrName": "icon.innerContent",
-              "subName": "icon",
               "features": {
                 "sticky": false,
                 "dynamicContent": {
@@ -499,7 +498,7 @@
                 }
               },
               "component": {
-                "name": "divi/text",
+                "name": "divi/icon-picker",
                 "type": "field"
               }
             }

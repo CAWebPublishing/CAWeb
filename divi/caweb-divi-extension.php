@@ -83,18 +83,18 @@ function caweb_divi_extension_module_enqueue_vb_scripts() {
 			]
 		);
 
-		// \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
-		// 	[
-		// 		'name'   => 'd5-extension-example-modules-builder-vb-bundle-style',
-		// 		'version' => '1.0.0',
-		// 		'style' => [
-		// 			'src' => "{$plugin_dir_url}styles/vb-bundle.css",
-		// 			'deps'               => [],
-		// 			'enqueue_top_window' => false,
-		// 			'enqueue_app_window' => true,
-		// 		],
-		// 	]
-		// );
+		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+			[
+				'name'   => 'caweb-divi-extension-modules-builder-vb-bundle-style',
+				'version' => '1.0.0',
+				'style' => [
+					'src' => CAWEB_DIVI_EXT_URL . "build/admin.css",
+					'deps'               => [],
+					'enqueue_top_window' => true,
+					'enqueue_app_window' => false,
+				],
+			]
+		);
 	}
 }
 

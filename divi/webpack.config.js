@@ -6,6 +6,7 @@ export default {
     entry: {
         bundle4: './divi-4/src/index.js',
         bundle: './src/index.ts',
+        admin: './src/styles/_icons.scss',
     },
     
     externals: {

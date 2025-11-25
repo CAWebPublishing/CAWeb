@@ -5,9 +5,9 @@ import {
   InternalAttrs,
   type Element,
   type Module,
-  type OnOff
+  type OnOff,
+  Icon
 } from '@divi/types';
-import { InnerContent } from '@divi/types/src/module/element/inner-content';
 
 export interface ModuleCssAttr extends Module.Css.AttributeValue {
 }
@@ -93,7 +93,8 @@ export interface ModuleAttrs extends InternalAttrs {
   };
 
   icon?: {
-      innerContent?: FormatBreakpointStateAttr<iconProps>;
+      // innerContent?: FormatBreakpointStateAttr<iconProps>;
+      innerContent?: Icon.Font.Attributes;
   };
 
   image?: {

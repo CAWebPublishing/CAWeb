@@ -14,11 +14,11 @@ import {
   CAWebModuleLocation 
 } from './modules';
 
-// import './module-icons';
+// import icon-library integration
+import './icons';
 
 // Register modules.
 addAction('divi.moduleLibrary.registerModuleLibraryStore.after', 'cawebDiviExtension', () => {
-  console.log( 'Registering Modules');
   registerModule(CAWebModuleProfileBanner.metadata, omit(CAWebModuleProfileBanner, 'metadata'));
   registerModule(CAWebModuleLocation.metadata, omit(CAWebModuleLocation, 'metadata'));
 });

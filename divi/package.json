@@ -14,6 +14,7 @@
     "prebuild": "composer i",
     "build": "caweb build --mode production && caweb build",
     "build:dev": "caweb build",
+    "icons": "node ./lib/scripts/icon.js",
     "test": "wp-scripts test-unit-js --config ./test-config/jest.config.js",
     "zip": "gulp zip",
     "reset-install": "rm -rf ./package-lock.json ./node_modules/ && npm install"
@@ -69,7 +70,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.3.1",
     "react-moment": "^1.1.3",
-    "react-number-format": "^5.3.1"
+    "react-number-format": "^5.3.1",
+    "svgo": "^4.0.0",
+    "svgson": "^5.3.1"
   },
   "msw": {
     "workerDirectory": "storybook-assets"
