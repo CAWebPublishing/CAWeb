@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+class CAWebComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.caweb_google_maps_embed_api_key = '';
@@ -85,7 +85,7 @@ class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     addr = addr.filter(w => w !== '');
     return addr.join(', ');
   }
-  caweb_get_google_map_place_link(addr, embed = false, classList = '') {
+  get_google_map_place_link(addr, embed = false, classList = '') {
     addr = this.caweb_return_address(addr);
     if (this.isEmpty(addr)) {
       return;
@@ -108,7 +108,7 @@ class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       });
     }
   }
-  caweb_get_icon_span(font, styles = {}, classes = '') {
+  get_icon_span(font, styles = {}, classes = '') {
     // if Divi extended icon.
     if (font.includes('||')) {
       var icon_index = font.replace(new RegExp(/\|\|.*/, 'g'), '');
@@ -179,7 +179,7 @@ class CAWeb_Component extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
   }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWeb_Component);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebComponent);
 
 /***/ }),
 
@@ -224,7 +224,7 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
     // If displaying an icon
     let display_icon = "on" === show_icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       class: "thumbnail",
-      children: this.caweb_get_icon_span(font_icon)
+      children: this.get_icon_span(font_icon)
     }) : '';
 
     // wrap name in strong tag
@@ -233,7 +233,7 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
     }) : '';
 
     // get a map link if address info exists
-    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.get_google_map_place_link([addr, city, state, zip]) : '';
 
     // show contact info if enabled
     if ("on" === show_contact) {
@@ -281,7 +281,7 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
     // If displaying an icon
     let display_icon = "on" === show_icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       class: "thumbnail",
-      children: this.caweb_get_icon_span(font_icon)
+      children: this.get_icon_span(font_icon)
     }) : '';
 
     // if name exists
@@ -295,7 +295,7 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
         children: name
       });
     }
-    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+    let address = "" !== addr || "" !== city || "" !== state || "" !== zip ? this.get_google_map_place_link([addr, city, state, zip]) : '';
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
       children: [display_icon, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "contact",
@@ -340,7 +340,7 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
       className: "address",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         class: "ca-gov-icon-road-pin"
-      }), this.caweb_get_google_map_place_link([addr, city, state, zip])]
+      }), this.get_google_map_place_link([addr, city, state, zip])]
     }) : '';
 
     // Add description markup
@@ -393,11 +393,9 @@ class CAWebModuleLocation extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["d
         output = this.renderContactLocation();
         break;
     }
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "location " + location_layout,
-        children: output
-      })
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "location " + location_layout,
+      children: output
     });
   }
 }
@@ -465,6 +463,150 @@ class CAWebModuleProfileBanner extends _component_jsx__WEBPACK_IMPORTED_MODULE_2
 }
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleProfileBanner, "slug", 'et_pb_profile_banner');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleProfileBanner);
+
+/***/ }),
+
+/***/ "./divi-4/src/modules/section-primary-fullwidth/section-primary-fullwidth.jsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _section_primary_section_primary_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./divi-4/src/modules/section-primary/section-primary.jsx");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/section-primary-fullwidth/styles.css");
+
+// External Dependencies
+
+
+// import styles
+
+class CAWebModuleFullwidthSectionPrimary extends _section_primary_section_primary_jsx__WEBPACK_IMPORTED_MODULE_1__["default"] {
+  render() {
+    return super.render();
+  }
+}
+(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleFullwidthSectionPrimary, "slug", 'et_pb_ca_fullwidth_section_primary');
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleFullwidthSectionPrimary);
+
+/***/ }),
+
+/***/ "./divi-4/src/modules/section-primary-fullwidth/styles.css":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./divi-4/src/modules/section-primary/section-primary.jsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _component_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/component.jsx");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./divi-4/src/modules/section-primary/styles.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/react/jsx-runtime.js");
+
+// External Dependencies
+
+
+
+// import styles
+
+
+class CAWebModuleSectionPrimary extends _component_jsx__WEBPACK_IMPORTED_MODULE_2__["default"] {
+  renderHeader(featured_image_button = 'on') {
+    let {
+      heading_size: Tag,
+      heading_text_color,
+      heading_align
+    } = this.props;
+    var heading_style = undefined !== heading_text_color ? {
+      'color': heading_text_color
+    } : {};
+    var heading_class = "off" === featured_image_button ? 'text-' + heading_align : '';
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Tag, {
+      style: heading_style,
+      className: heading_class,
+      children: this.props.section_heading
+    });
+    // removed by dead control flow
+
+  }
+  renderMoreButton() {
+    let {
+      section_link,
+      section_heading
+    } = this.props;
+    if ("" !== section_link) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("a", {
+          href: encodeURIComponent(section_link),
+          className: "btn btn-outline-dark",
+          target: "_blank",
+          children: ["More Information", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+            className: "sr-only",
+            children: ["More information about ", section_heading]
+          })]
+        })
+      });
+    }
+  }
+  renderFeatureImage() {
+    let {
+      slide_image_button,
+      image_pos,
+      section_image
+    } = this.props;
+    var classes = "on" === slide_image_button ? ' animate__animated  animate__fadeInLeft' : '';
+    classes += "on" === image_pos ? ' ps-3 float-end' : ' pe-3 float-start';
+
+    // caweb_get_attachment_post_meta need to figure away to run WP Functions
+    // alt_text = caweb_get_attachment_post_meta($section_image, '_wp_attachment_image_alt');
+
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "col-4" + classes,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: this.props.section_image,
+        alt: ""
+      })
+    });
+  }
+  render() {
+    let {
+      featured_image_button,
+      show_more_button
+    } = this.props;
+    let header = this.renderHeader(featured_image_button);
+    let display_button = "on" === show_more_button ? this.renderMoreButton() : '';
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: ['on' === featured_image_button ? this.renderFeatureImage() : null, header, this.props.content(), display_button]
+    });
+  }
+}
+(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(CAWebModuleSectionPrimary, "slug", 'et_pb_ca_section_primary');
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CAWebModuleSectionPrimary);
+
+/***/ }),
+
+/***/ "./divi-4/src/modules/section-primary/styles.css":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -24943,6 +25085,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var _modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./divi-4/src/modules/profile-banner/index.jsx");
 /* harmony import */ var _modules_location_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./divi-4/src/modules/location/index.jsx");
+/* harmony import */ var _modules_section_primary_section_primary_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./divi-4/src/modules/section-primary/section-primary.jsx");
+/* harmony import */ var _modules_section_primary_fullwidth_section_primary_fullwidth_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./divi-4/src/modules/section-primary-fullwidth/section-primary-fullwidth.jsx");
+
+
 
 
 
@@ -24954,7 +25100,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 jquery__WEBPACK_IMPORTED_MODULE_0__(window).on('et_builder_api_ready', (event, API) => {
   // Register modules.
-  API.registerModules([_modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _modules_location_index_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]]);
+  API.registerModules([_modules_profile_banner_index_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _modules_location_index_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], _modules_section_primary_section_primary_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], _modules_section_primary_fullwidth_section_primary_fullwidth_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]]);
 });
 })();
 

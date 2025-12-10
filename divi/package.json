@@ -23,7 +23,7 @@
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
-    "@caweb/cli": "^1.14.11",
+    "@caweb/cli": "^1.15.1",
     "@divi/types": "npm:divi-types@^1.0.10",
     "@tinymce/tinymce-react": "^5.0.1",
     "@types/divi__app-preferences": "npm:divi-types-app-preferences@^1.0.10",

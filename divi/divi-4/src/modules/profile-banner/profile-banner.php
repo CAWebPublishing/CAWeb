@@ -2,7 +2,7 @@
 /**
  * CAWeb Profile Banner Module (Standard)
  *
- * @package CAWeb\Modules\ProfileBanner
+ * @package CAWebModuleExtension
  */
 
 if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
@@ -23,7 +23,8 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	 */
 	function init() {
 		// Module name
-		$this->name = esc_html__( 'Profile Banner', 'et_builder' );
+		$this->name = esc_html__( 'Profile Banner', 'caweb' );
+		$this->main_css_element = '%%order_class%%';
 
 		// Module Icon
 		// Load customized svg icon and use it on builder as module icon. If you don't have svg icon, you can use
@@ -35,15 +36,15 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'general'  => array(
 				'toggles' => array(
 					'header'  => array(
-						'title'    => esc_html__( 'Header', 'et_builder' ),
+						'title'    => esc_html__( 'Header', 'caweb' ),
 						'priority' => 1,
 					),
 					'profile'  => array(
-						'title'    => esc_html__( 'Profile', 'et_builder' ),
+						'title'    => esc_html__( 'Profile', 'caweb' ),
 						'priority' => 2,
 					),
 					'portrait'   => array(
-						'title'    => esc_html__( 'Portrait', 'et_builder' ),
+						'title'    => esc_html__( 'Portrait', 'caweb' ),
 						'priority' => 3,
 					),
 				),
@@ -51,7 +52,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'portrait'  => array(
-						'title'    => esc_html__( 'Portrait', 'et_builder' ),
+						'title'    => esc_html__( 'Portrait', 'caweb' ),
 						'priority' => 1,
 					),
 				),
@@ -69,55 +70,55 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	function get_fields() {
 		$general_fields = array(
 			'name' => array(
-				'label'           => esc_html__( 'Profile Name', 'et_builder' ),
+				'label'           => esc_html__( 'Profile Name', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Input the name of the profile.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the name of the profile.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'header',
 			),
 			'job_title' => array(
-				'label'           => esc_html__( 'Job Title', 'et_builder' ),
+				'label'           => esc_html__( 'Job Title', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Input the job title.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the job title.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'header',
 			),
 			'profile_link' => array(
-				'label'           => esc_html__( 'Link Text', 'et_builder' ),
+				'label'           => esc_html__( 'Link Text', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Input the text for the profile link.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the text for the profile link.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'profile',
 				'default'         => 'Link',
 			),
 			'url' => array(
-				'label'           => esc_html__( 'URL', 'et_builder' ),
+				'label'           => esc_html__( 'URL', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'default'         => '#',
-				'description'     => esc_html__( 'Input the website of the profile.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the website of the profile.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'profile',
 			),
 			'portrait_url' => array(
-				'label'              => esc_html__( 'Image URL', 'et_builder' ),
+				'label'              => esc_html__( 'Image URL', 'caweb' ),
 				'type'               => 'upload',
 				'option_category'    => 'basic_option',
-				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
-				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
-				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
-				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder' ),
+				'upload_button_text' => esc_attr__( 'Upload an image', 'caweb' ),
+				'choose_text'        => esc_attr__( 'Choose an Image', 'caweb' ),
+				'update_text'        => esc_attr__( 'Set As Image', 'caweb' ),
+				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'caweb' ),
 				'tab_slug'           => 'general',
 				'toggle_slug'        => 'portrait',
 			),
 			'portrait_alt' => array(
-				'label'           => esc_html__( 'Image Alt Text', 'et_builder' ),
+				'label'           => esc_html__( 'Image Alt Text', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Input the alt text for the portrait image.', 'et_builder' ),
+				'description'     => esc_html__( 'Input the alt text for the portrait image.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'portrait',
 			),
@@ -125,26 +126,26 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 
 		$design_fields = array(
 			'round_image' => array(
-				'label'              => esc_html__( 'Round Image', 'et_builder' ),
+				'label'              => esc_html__( 'Round Image', 'caweb' ),
 				'type'               => 'yes_no_button',
 				'option_category'    => 'configuration',
 				'options'            => array(
-					'off' => esc_html__( 'No', 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'caweb' ),
+					'on'  => esc_html__( 'Yes', 'caweb' ),
 				),
-				'description'        => esc_html__( 'Switch to yes if you want round images in the profile banner.', 'et_builder' ),
+				'description'        => esc_html__( 'Switch to yes if you want round images in the profile banner.', 'caweb' ),
 				'tab_slug'           => 'advanced',
 				'toggle_slug'        => 'portrait',
 			),
 			'is_vertical' => array(
-				'label'              => esc_html__( 'Display Vertically', 'et_builder' ),
+				'label'              => esc_html__( 'Display Vertically', 'caweb' ),
 				'type'               => 'yes_no_button',
 				'option_category'    => 'configuration',
 				'options'            => array(
-					'off' => esc_html__( 'No', 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'caweb' ),
+					'on'  => esc_html__( 'Yes', 'caweb' ),
 				),
-				'description'        => esc_html__( 'Switch to yes if you want the profile banner to display vertically.', 'et_builder' ),
+				'description'        => esc_html__( 'Switch to yes if you want the profile banner to display vertically.', 'caweb' ),
 				'tab_slug'           => 'advanced',
 				'toggle_slug'        => 'portrait',
 			),

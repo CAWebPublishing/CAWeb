@@ -30,29 +30,12 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	);
 
 	/**
-	 * Wrap module's rendered output with proper module wrapper. Ensuring module has consistent
-	 * wrapper output which compatible with module attribute and background insertion.
-	 *
-	 * @since 3.1
-	 *
-	 * @param string $output      Module's rendered output.
-	 * @param string $render_slug Slug of module that is used for rendering output.
-	 *
-	 * @return string
-	 */
-	//phpcs:disable
-	// protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
-	//phpcs:enable
-		// return $output;
-	// }
-
-	/**
 	 * Available module text sizes
 	 *
 	 * @param  array $exclude Text sizes to exclude.
 	 * @return array
 	 */
-	public function caweb_get_text_sizes( $exclude = array() ) {
+	public function get_text_sizes( $exclude = array() ) {
 		$default_text_size = array(
 			'p'  => 'Paragraph',
 			'h1' => 'H1',
@@ -78,7 +61,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @param  array|string $addr Address to format.
 	 * @return string
 	 */
-	public function caweb_get_address( $addr ) {
+	public function get_address( $addr ) {
 		if ( empty( $addr ) ) {
 			return;
 		} elseif ( is_string( $addr ) ) {
@@ -100,9 +83,9 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @param  mixed        $classes Class for the link.
 	 * @return string
 	 */
-	public function caweb_get_google_map_place_link( $addr, $embed = false, $target = '_blank', $classes = '' ) {
+	public function get_google_map_place_link( $addr, $embed = false, $target = '_blank', $classes = '' ) {
 
-		$addr = $this->caweb_get_address( $addr );
+		$addr = $this->get_address( $addr );
 
 		$classes = is_array( $classes ) ? implode( ' ', $classes ) : $classes;
 		$classes = ! empty( $classes ) ? sprintf( ' class="%1$s"', $classes ) : '';
@@ -228,7 +211,7 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	 * @param  string $styles Styles for the span.
 	 * @return string
 	 */
-	public function caweb_get_icon_span( $icon, $classes = '', $styles = '' ) {
+	public function get_icon_span( $icon, $classes = '', $styles = '' ) {
 		$icon = $this->process_icon( $icon );
 
 		if ( empty( $icon ) ) {

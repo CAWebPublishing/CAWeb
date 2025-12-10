@@ -29,6 +29,7 @@ import {
   contactProps,
   linkProps
  } from './types';
+
 import { get_icon_span, get_google_map_place_link } from '../Utils';
 
 /**
@@ -141,7 +142,7 @@ const bannerLocation = (props: {
   image?: {
     src?: string,
     alt?: string,
-    itle?: string
+    title?: string
   },
   desc?: string
 }): ReactElement => {

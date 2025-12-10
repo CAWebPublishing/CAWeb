@@ -11,14 +11,16 @@ import { registerModule, getPossibleModuleConversionOutline } from '@divi/module
 // modules
 import { 
   CAWebModuleProfileBanner,
-  CAWebModuleLocation 
+  CAWebModuleLocation,
+  CAWebModuleSectionPrimary 
 } from './modules';
 
 // import icon-library integration
-import './icons';
+// import './icons';
 
 // Register modules.
 addAction('divi.moduleLibrary.registerModuleLibraryStore.after', 'cawebDiviExtension', () => {
   registerModule(CAWebModuleProfileBanner.metadata, omit(CAWebModuleProfileBanner, 'metadata'));
   registerModule(CAWebModuleLocation.metadata, omit(CAWebModuleLocation, 'metadata'));
+  registerModule(CAWebModuleSectionPrimary.metadata, omit(CAWebModuleSectionPrimary, 'metadata'));
 });

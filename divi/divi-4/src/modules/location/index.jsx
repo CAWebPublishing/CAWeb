@@ -1,9 +1,9 @@
 // External Dependencies
 import React, { Fragment } from 'react';
-import  CAWEeb_Component from '../component.jsx';
+import CAWebComponent from '../component.jsx';
 
 
-class CAWebModuleLocation extends CAWEeb_Component {
+class CAWebModuleLocation extends CAWebComponent {
 
   static slug = 'et_pb_ca_location_widget';
 
@@ -21,7 +21,7 @@ class CAWebModuleLocation extends CAWEeb_Component {
     let display_button = "";
     
     // If displaying an icon
-    let display_icon = "on" === show_icon ? <div class="thumbnail">{this.caweb_get_icon_span(font_icon)}</div> : '';
+    let display_icon = "on" === show_icon ? <div class="thumbnail">{this.get_icon_span(font_icon)}</div> : '';
     
     // wrap name in strong tag
     name = "" !== name ? <strong>{name}</strong> : '';
@@ -33,7 +33,7 @@ class CAWebModuleLocation extends CAWEeb_Component {
       "" !== state ||
       "" !== zip
     ) ?
-    this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+    this.get_google_map_place_link([addr, city, state, zip]) : '';
 
     // show contact info if enabled
     if( "on" === show_contact ){
@@ -69,7 +69,7 @@ class CAWebModuleLocation extends CAWEeb_Component {
     } = this.props;
     
      // If displaying an icon
-     let display_icon = "on" === show_icon ? <div class="thumbnail">{this.caweb_get_icon_span(font_icon)}</div> : '';
+     let display_icon = "on" === show_icon ? <div class="thumbnail">{this.get_icon_span(font_icon)}</div> : '';
      
      // if name exists
      if( "" !== name ){
@@ -83,7 +83,7 @@ class CAWebModuleLocation extends CAWEeb_Component {
       "" !== state ||
       "" !== zip
     ) ?
-    this.caweb_get_google_map_place_link([addr, city, state, zip]) : '';
+    this.get_google_map_place_link([addr, city, state, zip]) : '';
 
 
     return (
@@ -122,7 +122,7 @@ class CAWebModuleLocation extends CAWEeb_Component {
     ) ?
     <div className="address">
       <span class="ca-gov-icon-road-pin"></span>
-      {this.caweb_get_google_map_place_link([addr, city, state, zip])}
+      {this.get_google_map_place_link([addr, city, state, zip])}
     </div>
     : '';
 
@@ -182,11 +182,11 @@ class CAWebModuleLocation extends CAWEeb_Component {
         break;
     }
 
-    return(<Fragment>
+    return(
       <div className={"location " + location_layout}>
         { output }
       </div>
-    </Fragment>);
+    );
 
   }
 

@@ -5,7 +5,7 @@ import {NumericFormat} from 'react-number-format';
 import Moment from 'react-moment';
 import moment from 'moment';
 
-class CAWeb_Component extends Component {
+class CAWebComponent extends Component {
 	
 	constructor(props) {
 		super(props);
@@ -834,7 +834,7 @@ class CAWeb_Component extends Component {
 		return addr.join(', ');
 	}
 	
-	caweb_get_google_map_place_link(addr, embed = false, classList = ''){
+	get_google_map_place_link(addr, embed = false, classList = ''){
 		addr = this.caweb_return_address(addr);
 
 		if( this.isEmpty(addr) ){
@@ -855,7 +855,7 @@ class CAWeb_Component extends Component {
 		}
 	}
 	
-	caweb_get_icon_span( font, styles = {}, classes = ''){
+	get_icon_span( font, styles = {}, classes = ''){
 
 		// if Divi extended icon.
 		if ( font.includes('||') ) {
@@ -931,5 +931,5 @@ class CAWeb_Component extends Component {
 	
 }
 
-export default CAWeb_Component;
+export default CAWebComponent;
 

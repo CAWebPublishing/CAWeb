@@ -1,5 +1,45 @@
 // External Dependencies.
-import React, { ReactElement } from 'react';
+import { set } from 'lodash';
+import React, { ReactElement, CSSProperties } from 'react';
+
+/**
+ * Process Divi Color Picker Value
+ *
+ * @param  string $color Color value from color picker.
+ * @return string
+ */
+const processColorPickerValue = ( color: string ): CSSProperties => {
+    let colorProp: CSSProperties = {
+        color
+    };
+
+    if( color.startsWith('$variable(') && color.endsWith(')$') ){
+        try{
+            let colorString = color.slice(10, -2);
+            let colorObj = JSON.parse( colorString );
+
+            // if object is a color type
+            if( 'color' === colorObj?.type ){
+                // if opacity has been set
+                if( colorObj?.value?.settings?.opacity ){
+                    // divide the opacity by 100
+                    colorObj.value.settings.opacity = colorObj.value.settings.opacity / 100;
+                }
+
+                // add color and any settings to the CSSProperty
+                colorProp = {
+                    color: `var(--${colorObj?.value?.name})`,
+                    ...colorObj.value.settings
+                }
+            }
+
+        }catch(e){
+            // color isn't valid JSON
+        }
+    }
+
+    return colorProp;
+}
 
 /**
  * Returns address in CSV format
@@ -59,4 +99,9 @@ const get_icon_span = (icon: string): ReactElement => {
     return(<span className={`ca-gov-icon-${icon}`}></span>);
 };
 
-export { get_icon_span, get_address, get_google_map_place_link };
+export { 
+    get_icon_span, 
+    get_address, 
+    get_google_map_place_link, 
+    processColorPickerValue 
+};

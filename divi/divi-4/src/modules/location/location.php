@@ -32,18 +32,19 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 	 * @return void
 	 */
 	public function init() {
-		$this->name             = esc_html__( 'Location', 'caweb-divi-modules' );
+		$this->name             = esc_html__( 'Location', 'caweb' );
+		$this->main_css_element = '%%order_class%%';
 
 		$this->settings_modal_toggles = array(
 			'general' => array(
 				'toggles' => array(
-					'style'  => esc_html__( 'Style', 'caweb-divi-modules' ),
-					'location'   => esc_html__( 'Location', 'caweb-divi-modules' ),
+					'style'  => esc_html__( 'Style', 'caweb' ),
+					'location'   => esc_html__( 'Location', 'caweb' ),
 				),
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'icon' => esc_html__( 'Icon', 'caweb-divi-modules' ),
+					'icon' => esc_html__( 'Icon', 'caweb' ),
 				),
 			),
 		);
@@ -57,126 +58,126 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 	public function get_fields() {
 		$general_fields = array(
 			'location_layout' => array(
-				'label'             => esc_html__( 'Style', 'caweb-divi-modules' ),
+				'label'             => esc_html__( 'Style', 'caweb' ),
 				'type'              => 'select',
 				'option_category'   => 'configuration',
 				'options'           => array(
-					'contact' => esc_html__( 'Contact', 'caweb-divi-modules' ),
-					'mini'    => esc_html__( 'Mini', 'caweb-divi-modules' ),
-					'banner'  => esc_html__( 'Banner', 'caweb-divi-modules' ),
+					'contact' => esc_html__( 'Contact', 'caweb' ),
+					'mini'    => esc_html__( 'Mini', 'caweb' ),
+					'banner'  => esc_html__( 'Banner', 'caweb' ),
 				),
-				'description'       => esc_html__( 'Here you can choose the style in which to display the location', 'caweb-divi-modules' ),
+				'description'       => esc_html__( 'Here you can choose the style in which to display the location', 'caweb' ),
 				'tab_slug'          => 'general',
 				'toggle_slug'       => 'style',
 			),
 			'featured_image' => array(
-				'label'              => esc_html__( 'Set Featured Image', 'caweb-divi-modules' ),
+				'label'              => esc_html__( 'Set Featured Image', 'caweb' ),
 				'type'               => 'upload',
 				'option_category'    => 'basic_option',
-				'upload_button_text' => esc_attr__( 'Upload an image', 'caweb-divi-modules' ),
-				'choose_text'        => esc_attr__( 'Choose a Background Image', 'caweb-divi-modules' ),
-				'update_text'        => esc_attr__( 'Set As Background', 'caweb-divi-modules' ),
-				'description'        => esc_html__( 'This image will be used as the main image for this location.', 'caweb-divi-modules' ),
+				'upload_button_text' => esc_attr__( 'Upload an image', 'caweb' ),
+				'choose_text'        => esc_attr__( 'Choose a Background Image', 'caweb' ),
+				'update_text'        => esc_attr__( 'Set As Background', 'caweb' ),
+				'description'        => esc_html__( 'This image will be used as the main image for this location.', 'caweb' ),
 				'show_if'            => array( 'location_layout' => 'banner' ),
 				'tab_slug'           => 'general',
 				'toggle_slug'        => 'style',
 			),
 			'name' => array(
-				'label'           => esc_html__( 'Name', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Name', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter a name for the location.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Here you can enter a name for the location.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'desc' => array(
-				'label'           => esc_html__( 'Description', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Description', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter a description of the location.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Here you can enter a description of the location.', 'caweb' ),
 				'show_if'         => array( 'location_layout' => 'banner' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'addr' => array(
-				'label'           => esc_html__( 'Address', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Address', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter an address.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter an address.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'city' => array(
-				'label'           => esc_html__( 'City', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'City', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter a city.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter a city.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'state' => array(
-				'label'           => esc_html__( 'State', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'State', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter a state.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter a state.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'zip' => array(
-				'label'           => esc_html__( 'Zip', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Zip', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter an zip.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter an zip.', 'caweb' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'show_contact' => array(
-				'label'           => esc_html__( 'Contact information', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Contact information', 'caweb' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
-					'off' => esc_html__( 'No', 'caweb-divi-modules' ),
-					'on'  => esc_html__( 'Yes', 'caweb-divi-modules' ),
+					'off' => esc_html__( 'No', 'caweb' ),
+					'on'  => esc_html__( 'Yes', 'caweb' ),
 				),
 				'show_if'         => array( 'location_layout' => 'contact' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'phone' => array(
-				'label'           => esc_html__( 'Phone Number', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Phone Number', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter a phone number.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter a phone number.', 'caweb' ),
 				'show_if'         => array( 'location_layout' => 'contact', 'show_contact' => 'on' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'fax' => array(
-				'label'           => esc_html__( 'Fax Number', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Fax Number', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Enter a fax number.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Enter a fax number.', 'caweb' ),
 				'show_if'         => array( 'location_layout' => 'contact', 'show_contact' => 'on' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'show_button' => array(
-				'label'           => esc_html__( 'Button', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Button', 'caweb' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
-					'off' => esc_html__( 'No', 'caweb-divi-modules' ),
-					'on'  => esc_html__( 'Yes', 'caweb-divi-modules' ),
+					'off' => esc_html__( 'No', 'caweb' ),
+					'on'  => esc_html__( 'Yes', 'caweb' ),
 				),
 				'show_if_not'     => array( 'location_layout' => 'mini' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
 			),
 			'location_link' => array(
-				'label'           => esc_html__( 'URL', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'URL', 'caweb' ),
 				'type'            => 'text',
 				'option_category' => 'basic_option',
-				'description'     => esc_html__( 'Here you can enter the URL for the location.', 'caweb-divi-modules' ),
+				'description'     => esc_html__( 'Here you can enter the URL for the location.', 'caweb' ),
 				'show_if'         => array( 'show_button' => 'on' ),
 				'tab_slug'        => 'general',
 				'toggle_slug'     => 'location',
@@ -185,26 +186,26 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 
 		$design_fields = array(
 			'show_icon' => array(
-				'label'           => esc_html__( 'Use Icon', 'caweb-divi-modules' ),
+				'label'           => esc_html__( 'Use Icon', 'caweb' ),
 				'type'            => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options'         => array(
-					'off' => esc_html__( 'No', 'caweb-divi-modules' ),
-					'on'  => esc_html__( 'Yes', 'caweb-divi-modules' ),
+					'off' => esc_html__( 'No', 'caweb' ),
+					'on'  => esc_html__( 'Yes', 'caweb' ),
 				),
 				'show_if_not'     => array( 'location_layout' => 'banner' ),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'icon',
 			),
 			'font_icon' => array(
-				'label'               => esc_html__( 'Icon', 'caweb-divi-modules' ),
+				'label'               => esc_html__( 'Icon', 'caweb' ),
 				'type'                => 'text',
 				'option_category'     => 'configuration',
 				'class'               => array( 'et-pb-font-icon' ),
 				'renderer'            => 'select_icon',
 				'renderer_with_field' => true,
 				'default'             => '%-1%',
-				'description'         => esc_html__( 'Select an icon.', 'caweb-divi-modules' ),
+				'description'         => esc_html__( 'Select an icon.', 'caweb' ),
 				'show_if'             => array( 'show_icon' => 'on' ),
 				'tab_slug'            => 'advanced',
 				'toggle_slug'         => 'icon',
@@ -261,7 +262,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$display_button = '';
         
         // If displaying an icon
-		$display_icon   = 'on' === $show_icon ? sprintf('<div class="thumbnail">%1$s</div>', $this->caweb_get_icon_span( $icon )) : '';
+		$display_icon   = 'on' === $show_icon ? sprintf('<div class="thumbnail">%1$s</div>', $this->get_icon_span( $icon )) : '';
 
         // wrap name in strong tag
         $name = ! empty( $name ) ? sprintf('<strong>%1$s</strong>', $name) : '';
@@ -272,7 +273,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
             ! empty( $city ) ||
             ! empty( $state ) ||
             ! empty( $zip )
-        ) ? $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) ) : '';
+        ) ? $this->get_google_map_place_link( array( $addr, $city, $state, $zip ) ) : '';
 
         // show contact info if enabled
 		if ( 'on' === $show_contact ) {
@@ -321,7 +322,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 		$icon          = $this->props['font_icon'];
 
         // If displaying an icon
-		$display_icon   = 'on' === $show_icon ? sprintf('<div class="thumbnail">%1$s</div>', $this->caweb_get_icon_span( $icon )) : '';
+		$display_icon   = 'on' === $show_icon ? sprintf('<div class="thumbnail">%1$s</div>', $this->get_icon_span( $icon )) : '';
 
         // if name exists
         if( ! empty( $name ) ){
@@ -335,7 +336,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
             ! empty( $city ) ||
             ! empty( $state ) ||
             ! empty( $zip )
-        ) ? $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) ) : '';
+        ) ? $this->get_google_map_place_link( array( $addr, $city, $state, $zip ) ) : '';
 
         $contact = (
             ! empty( $name ) ||
@@ -385,7 +386,7 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
             ! empty( $state ) ||
             ! empty( $zip )
         ) ? 
-        sprintf('<div class="address"><span class="ca-gov-icon-road-pin"></span>%1$s</div>', $this->caweb_get_google_map_place_link( array( $addr, $city, $state, $zip ) )) 
+        sprintf('<div class="address"><span class="ca-gov-icon-road-pin"></span>%1$s</div>', $this->get_google_map_place_link( array( $addr, $city, $state, $zip ) )) 
         : '';
 
         // Add description markup
