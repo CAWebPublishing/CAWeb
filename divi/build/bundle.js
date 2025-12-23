@@ -2,6 +2,50 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/FullwidthSectionPrimary/index.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CAWebModuleFullwidthSectionPrimary: () => (/* binding */ CAWebModuleFullwidthSectionPrimary)
+/* harmony export */ });
+/* harmony import */ var _SectionPrimary_module_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/SectionPrimary/module.json");
+/* harmony import */ var _module_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/FullwidthSectionPrimary/module.json");
+/* harmony import */ var _SectionPrimary_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/SectionPrimary/edit.tsx");
+/* harmony import */ var _SectionPrimary_placeholder_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/SectionPrimary/placeholder-content.ts");
+/* harmony import */ var _SectionPrimary_conversion_outline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/SectionPrimary/conversion-outline.ts");
+/* harmony import */ var _SectionPrimary_Settings_content__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./src/modules/SectionPrimary/Settings/content.tsx");
+// Local dependencies.
+
+
+// Fullwidth Modules use everything from the standard modules
+
+
+
+
+// Merged metadata 
+var metadata = Object.assign(_SectionPrimary_module_json__WEBPACK_IMPORTED_MODULE_0__, _module_json__WEBPACK_IMPORTED_MODULE_1__);
+var CAWebModuleFullwidthSectionPrimary = {
+  metadata: metadata,
+  placeholderContent: _SectionPrimary_placeholder_content__WEBPACK_IMPORTED_MODULE_3__.placeholderContent,
+  conversionOutline: _SectionPrimary_conversion_outline__WEBPACK_IMPORTED_MODULE_4__.conversionOutline,
+  renderers: {
+    edit: _SectionPrimary_edit__WEBPACK_IMPORTED_MODULE_2__.ModuleEdit
+  },
+  settings: {
+    content: _SectionPrimary_Settings_content__WEBPACK_IMPORTED_MODULE_5__.SettingsContent
+  }
+};
+
+/***/ }),
+
+/***/ "./src/modules/FullwidthSectionPrimary/module.json":
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"name":"caweb/fullwidth-section-primary","d4Shortcode":"et_pb_ca_fullwidth_section_primary","title":"Fullwidth Section Primary","titles":"Fullwidth Section Primaries","moduleClassName":"et_pb_ca_fullwidth_section_primary","moduleOrderClassName":"et_pb_ca_fullwidth_section_primary"}');
+
+/***/ }),
+
 /***/ "./src/modules/Location/Settings/content.tsx":
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1162,6 +1206,7 @@ var ModuleEdit = function (props) {
     id = props.id,
     name = props.name,
     elements = props.elements;
+  console.log(props);
   var title = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.title) === null || _a === void 0 ? void 0 : _a.innerContent);
   var image = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.image) === null || _b === void 0 ? void 0 : _b.innerContent);
   var link = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.link) === null || _c === void 0 ? void 0 : _c.innerContent);
@@ -1515,6 +1560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CAWebModuleFullwidthSectionPrimary: () => (/* reexport safe */ _FullwidthSectionPrimary__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleFullwidthSectionPrimary),
 /* harmony export */   CAWebModuleLocation: () => (/* reexport safe */ _Location__WEBPACK_IMPORTED_MODULE_1__.CAWebModuleLocation),
 /* harmony export */   CAWebModuleProfileBanner: () => (/* reexport safe */ _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__.CAWebModuleProfileBanner),
 /* harmony export */   CAWebModuleSectionPrimary: () => (/* reexport safe */ _SectionPrimary__WEBPACK_IMPORTED_MODULE_2__.CAWebModuleSectionPrimary)
@@ -1522,6 +1568,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/ProfileBanner/index.ts");
 /* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Location/index.ts");
 /* harmony import */ var _SectionPrimary__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/SectionPrimary/index.ts");
+/* harmony import */ var _FullwidthSectionPrimary__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/FullwidthSectionPrimary/index.ts");
+
 
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Module: Profile Banner Module class.
+ * Module: Section Primary Module class.
  *
  * @package CAWeb\Modules\SectionPrimary
  * @since ??

@@ -157,7 +157,6 @@ const ModuleEdit = (props: SectionPrimaryModuleEditProps): ReactElement => {
     elements,
   } = props;
 
-    
   let title = getAttrByMode(attrs?.title?.innerContent);
   let image = getAttrByMode(attrs?.image?.innerContent);
   let link = getAttrByMode(attrs?.link?.innerContent);
