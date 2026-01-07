@@ -57,7 +57,7 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 			),
 		);
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'caweb_github_wp_enqueue_scripts' ) );
+		// add_action( 'wp_enqueue_scripts', array( $this, 'caweb_github_wp_enqueue_scripts' ) );
 
 	}
 
@@ -221,9 +221,8 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 		}
 
 		// get generated request url
-		$url = $this->create_request_url();
+		$url = '';//$this->create_request_url();
 
-			
 		if( ! empty( $url ) ){
 			$access_token        = $this->props['access_token'];
 			$args = array(
@@ -408,6 +407,9 @@ class CAWeb_Module_GitHub extends ET_Builder_CAWeb_Module {
 			
 		}
 
+		// add spinner to ajax
+		$output .= '<div class="caweb-github-spinner d-none text-center my-3"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+		
 		return $output;
 	}
 

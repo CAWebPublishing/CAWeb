@@ -46,21 +46,5 @@
     "content": "css.*.content",
     "title": "css.*.title"
   },
-  "module": {
-    "section_heading": "title.innerContent.*.text",
-    "heading_text_color": "title.innerContent.*.color",
-    "heading_align": "title.innerContent.*.alignment",
-    "heading_size": "title.innerContent.*.level",
-    "content": "content.innerContent.*",
-    "section_background_color": "module.decoration.background.*.color",
-    "show_more_button": "link.innerContent.*.show",
-    "section_link": "link.innerContent.*.url",
-    "featured_image_button": "image.innerContent.*.show",
-    "left_right_button": "image.innerContent.*.alignment",
-    "section_image": "image.innerContent.*.src",
-    "slide_image_button": "image.innerContent.*.fade",
-    "module_text_shadow_horizontal_length": "module.advanced.text.textShadow.*.horizontal",
-    "module_text_shadow_vertical_length": "module.advanced.text.textShadow.*.vertical",
-    "module_text_shadow_blur_strength": "module.advanced.text.textShadow.*.blur"
-  }
+  "module": {}
 }

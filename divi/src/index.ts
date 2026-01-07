@@ -12,7 +12,9 @@ import { registerModule, getPossibleModuleConversionOutline } from '@divi/module
 import { 
   CAWebModuleProfileBanner,
   CAWebModuleLocation,
-  CAWebModuleSectionPrimary 
+  CAWebModuleSectionPrimary,
+  CAWebModuleFullwidthSectionPrimary,
+  CAWebModuleGithub
 } from './modules';
 
 // import icon-library integration
@@ -23,4 +25,6 @@ addAction('divi.moduleLibrary.registerModuleLibraryStore.after', 'cawebDiviExten
   registerModule(CAWebModuleProfileBanner.metadata, omit(CAWebModuleProfileBanner, 'metadata'));
   registerModule(CAWebModuleLocation.metadata, omit(CAWebModuleLocation, 'metadata'));
   registerModule(CAWebModuleSectionPrimary.metadata, omit(CAWebModuleSectionPrimary, 'metadata'));
+  registerModule(CAWebModuleFullwidthSectionPrimary.metadata, omit(CAWebModuleFullwidthSectionPrimary, 'metadata'));
+  registerModule(CAWebModuleGithub.metadata, omit(CAWebModuleGithub, 'metadata'));
 });

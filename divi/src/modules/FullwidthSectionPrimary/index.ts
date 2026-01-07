@@ -19,7 +19,10 @@ import { conversionOutline } from '../SectionPrimary/conversion-outline';
 import { SettingsContent } from '../SectionPrimary/Settings/content';
 
 // Merged metadata 
-const metadata = Object.assign( standardMetadata, fullwidthMetadata );
+const metadata = {
+  ...standardMetadata, 
+  ...fullwidthMetadata
+};
 
 export const CAWebModuleFullwidthSectionPrimary: ModuleLibrary.Module.RegisterDefinition<ModuleAttrs> = {
   metadata: metadata as Metadata.Values<ModuleAttrs>,

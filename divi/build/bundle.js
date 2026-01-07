@@ -15,6 +15,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SectionPrimary_placeholder_content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/SectionPrimary/placeholder-content.ts");
 /* harmony import */ var _SectionPrimary_conversion_outline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/SectionPrimary/conversion-outline.ts");
 /* harmony import */ var _SectionPrimary_Settings_content__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./src/modules/SectionPrimary/Settings/content.tsx");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
 // Local dependencies.
 
 
@@ -24,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Merged metadata 
-var metadata = Object.assign(_SectionPrimary_module_json__WEBPACK_IMPORTED_MODULE_0__, _module_json__WEBPACK_IMPORTED_MODULE_1__);
+var metadata = __assign(__assign({}, _SectionPrimary_module_json__WEBPACK_IMPORTED_MODULE_0__), _module_json__WEBPACK_IMPORTED_MODULE_1__);
 var CAWebModuleFullwidthSectionPrimary = {
   metadata: metadata,
   placeholderContent: _SectionPrimary_placeholder_content__WEBPACK_IMPORTED_MODULE_3__.placeholderContent,
@@ -43,6 +53,310 @@ var CAWebModuleFullwidthSectionPrimary = {
 /***/ ((module) => {
 
 module.exports = /*#__PURE__*/JSON.parse('{"name":"caweb/fullwidth-section-primary","d4Shortcode":"et_pb_ca_fullwidth_section_primary","title":"Fullwidth Section Primary","titles":"Fullwidth Section Primaries","moduleClassName":"et_pb_ca_fullwidth_section_primary","moduleOrderClassName":"et_pb_ca_fullwidth_section_primary"}');
+
+/***/ }),
+
+/***/ "./src/modules/Github/conversion-outline.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   conversionOutline: () => (/* binding */ conversionOutline)
+/* harmony export */ });
+// Compare this to wp.data.select('divi/settings').getSetting('shortcodeModuleDefinitions').et_pb_blurb.fields
+var conversionOutline = {
+  advanced: {
+    admin_label: 'module.meta.adminLabel',
+    animation: 'module.decoration.animation',
+    background: 'module.decoration.background',
+    borders: {
+      default: 'module.decoration.border'
+    },
+    box_shadow: {
+      default: 'module.decoration.boxShadow'
+    },
+    disabled_on: 'module.decoration.disabledOn',
+    filters: {
+      default: 'module.decoration.filters'
+    },
+    fonts: {
+      body: 'content.decoration.bodyFont.body',
+      body_link: 'content.decoration.bodyFont.link',
+      body_ol: 'content.decoration.bodyFont.ol',
+      body_quote: 'content.decoration.bodyFont.quote',
+      body_ul: 'content.decoration.bodyFont.ul',
+      header: 'title.decoration.font'
+    },
+    height: 'module.decoration.sizing',
+    link_options: 'module.advanced.link',
+    margin_padding: 'module.decoration.spacing',
+    max_width: 'module.decoration.sizing',
+    module: 'module.advanced.htmlAttributes',
+    overflow: 'module.decoration.overflow',
+    position_fields: 'module.decoration.position',
+    scroll: 'module.decoration.scroll',
+    sticky: 'module.decoration.sticky',
+    text: 'module.advanced.text',
+    text_shadow: {
+      default: 'module.advanced.text.textShadow'
+    },
+    transform: 'module.decoration.transform',
+    transition: 'module.decoration.transition',
+    z_index: 'module.decoration.zIndex'
+  },
+  css: {
+    after: 'css.*.after',
+    before: 'css.*.before',
+    main_element: 'css.*.mainElement',
+    content: 'css.*.content',
+    title: 'css.*.title'
+  },
+  module: {
+    title: 'title.innerContent.*.text',
+    title_size: 'title.innerContent.*.level',
+    per_page: 'request.innerContent.*.per_page',
+    repo_type: 'request.innerContent.*.repo_type',
+    access_token: 'request.innerContent.*.access_token',
+    username: 'request.innerContent.*.username',
+    increase_rate_limit: 'request.innerContent.*.rate_limit',
+    client_id: 'request.innerContent.*.client_id',
+    client_secret: 'request.innerContent.*.client_secret',
+    request_email: 'request.innerContent.*.email',
+    email_body: 'request.innerContent.*.email_body',
+    definitions: 'definition.innerContent.*'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/modules/Github/custom-css.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cssFields: () => (/* binding */ cssFields)
+/* harmony export */ });
+// const customCssFields = metadata.customCssFields as Record<'name', { subName: string, selectorSuffix: string, label: string }>;
+// customCssFields.name.label            = __('Name', 'd5-extension-example-modules');
+var cssFields = {};
+// export const cssFields = { ...customCssFields };
+
+/***/ }),
+
+/***/ "./src/modules/Github/edit.tsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModuleEdit: () => (/* binding */ ModuleEdit)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("@divi/module");
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_divi_module__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _divi_module_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("@divi/module-utils");
+/* harmony import */ var _divi_module_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/Github/styles.tsx");
+/* harmony import */ var _module_classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/Github/module-classnames.ts");
+/* harmony import */ var _module_script_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./src/modules/Github/module-script-data.tsx");
+// External Dependencies.
+
+// Divi Dependencies.
+
+
+
+
+
+/**
+ * Divi 5 Module edit component of visual builder.
+ *
+ * @since ??
+ *
+ * @param {SectionPrimaryModuleEditProps} props React component props.
+ *
+ * @returns {ReactElement}
+ */
+var ModuleEdit = function (props) {
+  var _a;
+  var attrs = props.attrs,
+    id = props.id,
+    name = props.name,
+    elements = props.elements;
+  var title = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.title) === null || _a === void 0 ? void 0 : _a.innerContent);
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.ModuleContainer, {
+    attrs: attrs,
+    elements: elements,
+    id: id,
+    name: name,
+    stylesComponent: _styles__WEBPACK_IMPORTED_MODULE_3__.ModuleStyles,
+    classnamesFunction: _module_classnames__WEBPACK_IMPORTED_MODULE_4__.moduleClassnames,
+    scriptDataComponent: _module_script_data__WEBPACK_IMPORTED_MODULE_5__.ModuleScriptData
+  }, elements.styleComponents({
+    attrName: 'module'
+  }), elements.render({
+    attrName: 'title'
+  }));
+};
+
+
+/***/ }),
+
+/***/ "./src/modules/Github/index.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CAWebModuleGithub: () => (/* binding */ CAWebModuleGithub)
+/* harmony export */ });
+/* harmony import */ var _module_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./src/modules/Github/module.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Github/edit.tsx");
+/* harmony import */ var _placeholder_content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/Github/placeholder-content.ts");
+/* harmony import */ var _conversion_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/Github/conversion-outline.ts");
+// Local dependencies.
+
+
+
+
+// import { SettingsContent } from './Settings/content';
+var CAWebModuleGithub = {
+  metadata: _module_json__WEBPACK_IMPORTED_MODULE_0__,
+  placeholderContent: _placeholder_content__WEBPACK_IMPORTED_MODULE_2__.placeholderContent,
+  conversionOutline: _conversion_outline__WEBPACK_IMPORTED_MODULE_3__.conversionOutline,
+  renderers: {
+    edit: _edit__WEBPACK_IMPORTED_MODULE_1__.ModuleEdit
+  },
+  settings: {}
+};
+
+/***/ }),
+
+/***/ "./src/modules/Github/module-classnames.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   moduleClassnames: () => (/* binding */ moduleClassnames)
+/* harmony export */ });
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("@divi/module");
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_divi_module__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * Module classnames function for Dynamic Module.
+ *
+ * @since ??
+ *
+ * @param {ModuleClassnamesParams<ModuleAttrs>} param0 Function parameters.
+ */
+var moduleClassnames = function (_a) {
+  var _b, _c;
+  var classnamesInstance = _a.classnamesInstance,
+    attrs = _a.attrs;
+  // Text Options.
+  classnamesInstance.add((0,_divi_module__WEBPACK_IMPORTED_MODULE_0__.textOptionsClassnames)((_c = (_b = attrs === null || attrs === void 0 ? void 0 : attrs.module) === null || _b === void 0 ? void 0 : _b.advanced) === null || _c === void 0 ? void 0 : _c.text));
+};
+
+/***/ }),
+
+/***/ "./src/modules/Github/module-script-data.tsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModuleScriptData: () => (/* binding */ ModuleScriptData)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * Divi 5 module's script data component.
+ *
+ * @since ??
+ *
+ * @param {ModuleScriptDataProps<ModuleAttrs>} props React component props.
+ *
+ * @returns {ReactElement}
+ */
+var ModuleScriptData = function (_a) {
+  var elements = _a.elements;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, elements.scriptData({
+    attrName: 'module'
+  }));
+};
+
+/***/ }),
+
+/***/ "./src/modules/Github/module.json":
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"name":"caweb/github","d4Shortcode":"et_pb_ca_github","title":"Github","titles":"Githubs","moduleIcon":"caweb/module-logo","moduleClassName":"et_pb_ca_github","moduleOrderClassName":"et_pb_ca_github","category":"module","attributes":{"module":{"type":"object","selector":"{{selector}}","settings":{"meta":{"adminLabel":{}},"advanced":{"link":{},"text":{},"htmlAttributes":{}},"decoration":{"background":{},"bodyFont":{},"sizing":{},"spacing":{},"border":{},"boxShadow":{},"filters":{},"transform":{},"animation":{},"overflow":{},"disabledOn":{},"transition":{},"position":{},"zIndex":{},"scroll":{},"sticky":{}},"innerContent":{"groupType":"group-item","item":{"groupSlug":"style","render":true,"attrName":"module.decoration.background","subName":"color","label":"Background Color","description":"Here you can define a custom background color for the section.","features":{"responsive":false},"component":{"type":"field","name":"divi/color-picker"}}}}},"title":{"type":"object","inlineEditor":"plainText","elementType":"heading","selector":"{{selector}} .title","childrenSanitizer":"et_core_esc_previously","default":{"innerContent":{"desktop":{"value":{"text":"","level":"h2"}}}},"settings":{"innerContent":{"groupType":"group-items","items":{"text":{"groupSlug":"header","render":true,"attrName":"title.innerContent","subName":"text","label":"Title","description":"Enter a title for the list.","features":{"sticky":false,"dynamicContent":{"type":"text"}},"component":{"name":"divi/text","type":"field"}},"level":{"groupSlug":"headerDesign","render":true,"attrName":"title.innerContent","subName":"level","label":"Size","description":"Here you can choose the size for the panel header.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/select","type":"field","props":{"options":{"h1":{"label":"H1","value":"h1"},"h2":{"label":"H2","value":"h2"},"h3":{"label":"H3","value":"h3"},"h4":{"label":"H4","value":"h4"},"h5":{"label":"H5","value":"h5"}}}}}}}}},"request":{"type":"object","childrenSanitizer":"et_core_esc_previously","settings":{"innerContent":{"groupType":"group-items","items":{"username":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"username","label":"Username","description":"Enter GitHub Username.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/text","type":"field"}},"results":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"per_page","label":"Maximum # of results","description":"Enter amount to display per page. Default is 30, Max is 100.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/common-numeric-input","type":"field","props":{"defaultValue":100,"min":1,"max":100,"step":1}}},"repo_type":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"repo_type","label":"Repository Type","description":"Choose repository type you wish to display.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/select","type":"field","props":{"defaultValue":"all","options":{"all":{"label":"All","value":"all"},"public":{"label":"Public","value":"public"},"private":{"label":"Private","value":"private"},"forks":{"label":"Forks","value":"forks"}}}}},"pat":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"access_token","label":"Personal Access Token","description":"This is required for Private Repositories to display.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/text","type":"field"}},"rate_limit":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"increase_rate_limit","label":"Increase Rate Limit","description":"Increase the maximum number of requests users are permitted to make per hour. <a href=\\"https://developer.github.com/v3/#rate-limiting\\" target=\\"_blank\\">Rate Limiting</a>.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/toggle","type":"field","props":{"defaultValue":"on"}}},"client_id":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"client_id","label":"Client ID","description":"Enter GitHub Client ID.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/text","type":"field"}},"client_secret":{"groupSlug":"organization","render":true,"attrName":"request.innerContent","subName":"client_secret","label":"Client Secret","description":"Enter GitHub Client Secret.","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/text","type":"field"}},"test":{"groupSlug":"organization","render":true,"label":"Definitions","attrName":"definitions","features":{"sticky":false,"dynamicContent":false},"component":{"name":"divi/checkboxes","type":"field","props":{"options":[{"label":"Project Title","value":"name"},{"label":"Add Link to repositories (Public Repositories Only)","value":"url"},{"label":"Description","value":"desc"},{"label":"Fork","value":"fork"},{"label":"Creation Date","value":"created_at"},{"label":"Updated Date","value":"updated_at"},{"label":"Language","value":"language"}]}}}}}}}},"settings":{"design":"auto","advanced":"auto","content":"auto","groups":{"header":{"panel":"content","priority":2,"groupName":"header","multiElements":true,"component":{"name":"divi/composite","props":{"groupLabel":"Header"}}},"headerDesign":{"panel":"design","priority":2,"groupName":"headerDesign","multiElements":true,"component":{"name":"divi/composite","props":{"groupLabel":"Header"}}},"organization":{"panel":"content","priority":2,"groupName":"organization","multiElements":true,"component":{"name":"divi/composite","props":{"groupLabel":"Organization"}}}}}}');
+
+/***/ }),
+
+/***/ "./src/modules/Github/placeholder-content.ts":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   placeholderContent: () => (/* binding */ placeholderContent)
+/* harmony export */ });
+// Divi dependencies.
+// import { placeholderContent as placeholder } from '@divi/module-utils';
+var placeholderContent = {};
+
+/***/ }),
+
+/***/ "./src/modules/Github/styles.tsx":
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModuleStyles: () => (/* binding */ ModuleStyles)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("@divi/module");
+/* harmony import */ var _divi_module__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_divi_module__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _custom_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/Github/custom-css.ts");
+// External dependencies.
+
+// Divi dependencies.
+
+
+/**
+ * Module's style components.
+ *
+ * @since ??
+ */
+var ModuleStyles = function (_a) {
+  var attrs = _a.attrs,
+    settings = _a.settings,
+    orderClass = _a.orderClass,
+    mode = _a.mode,
+    state = _a.state,
+    noStyleTag = _a.noStyleTag,
+    elements = _a.elements;
+  return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.StyleContainer, {
+    mode: mode,
+    state: state,
+    noStyleTag: noStyleTag
+  }, elements.style({
+    attrName: 'module',
+    styleProps: {
+      disabledOn: {
+        disabledModuleVisibility: settings === null || settings === void 0 ? void 0 : settings.disabledModuleVisibility
+      }
+    }
+  }), elements.style({
+    attrName: 'title'
+  }), elements.style({
+    attrName: 'content'
+  }), react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_divi_module__WEBPACK_IMPORTED_MODULE_1__.CssStyle, {
+    selector: orderClass,
+    attr: attrs === null || attrs === void 0 ? void 0 : attrs.css,
+    cssFields: _custom_css__WEBPACK_IMPORTED_MODULE_2__.cssFields
+  }));
+};
+
 
 /***/ }),
 
@@ -1063,7 +1377,10 @@ var conversionOutline = {
     featured_image_button: 'image.innerContent.*.show',
     left_right_button: 'image.innerContent.*.alignment',
     section_image: 'image.innerContent.*.src',
-    slide_image_button: 'image.innerContent.*.fade'
+    slide_image_button: 'image.innerContent.*.fade',
+    module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
+    module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
+    module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur'
   }
 };
 
@@ -1206,7 +1523,6 @@ var ModuleEdit = function (props) {
     id = props.id,
     name = props.name,
     elements = props.elements;
-  console.log(props);
   var title = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_a = attrs === null || attrs === void 0 ? void 0 : attrs.title) === null || _a === void 0 ? void 0 : _a.innerContent);
   var image = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_b = attrs === null || attrs === void 0 ? void 0 : attrs.image) === null || _b === void 0 ? void 0 : _b.innerContent);
   var link = (0,_divi_module_utils__WEBPACK_IMPORTED_MODULE_2__.getAttrByMode)((_c = attrs === null || attrs === void 0 ? void 0 : attrs.link) === null || _c === void 0 ? void 0 : _c.innerContent);
@@ -1561,6 +1877,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CAWebModuleFullwidthSectionPrimary: () => (/* reexport safe */ _FullwidthSectionPrimary__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleFullwidthSectionPrimary),
+/* harmony export */   CAWebModuleGithub: () => (/* reexport safe */ _Github__WEBPACK_IMPORTED_MODULE_4__.CAWebModuleGithub),
 /* harmony export */   CAWebModuleLocation: () => (/* reexport safe */ _Location__WEBPACK_IMPORTED_MODULE_1__.CAWebModuleLocation),
 /* harmony export */   CAWebModuleProfileBanner: () => (/* reexport safe */ _ProfileBanner__WEBPACK_IMPORTED_MODULE_0__.CAWebModuleProfileBanner),
 /* harmony export */   CAWebModuleSectionPrimary: () => (/* reexport safe */ _SectionPrimary__WEBPACK_IMPORTED_MODULE_2__.CAWebModuleSectionPrimary)
@@ -1569,10 +1886,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./src/modules/Location/index.ts");
 /* harmony import */ var _SectionPrimary__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./src/modules/SectionPrimary/index.ts");
 /* harmony import */ var _FullwidthSectionPrimary__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./src/modules/FullwidthSectionPrimary/index.ts");
+/* harmony import */ var _Github__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./src/modules/Github/index.ts");
 
 
 
 
+
+// This is base module for testing purposes only.
+// import { CAWebModuleBase } from './Base';
 
 
 /***/ }),
@@ -1713,6 +2034,8 @@ __webpack_require__.r(__webpack_exports__);
   (0,_divi_module_library__WEBPACK_IMPORTED_MODULE_2__.registerModule)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleProfileBanner.metadata, (0,lodash__WEBPACK_IMPORTED_MODULE_0__.omit)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleProfileBanner, 'metadata'));
   (0,_divi_module_library__WEBPACK_IMPORTED_MODULE_2__.registerModule)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleLocation.metadata, (0,lodash__WEBPACK_IMPORTED_MODULE_0__.omit)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleLocation, 'metadata'));
   (0,_divi_module_library__WEBPACK_IMPORTED_MODULE_2__.registerModule)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleSectionPrimary.metadata, (0,lodash__WEBPACK_IMPORTED_MODULE_0__.omit)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleSectionPrimary, 'metadata'));
+  (0,_divi_module_library__WEBPACK_IMPORTED_MODULE_2__.registerModule)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleFullwidthSectionPrimary.metadata, (0,lodash__WEBPACK_IMPORTED_MODULE_0__.omit)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleFullwidthSectionPrimary, 'metadata'));
+  (0,_divi_module_library__WEBPACK_IMPORTED_MODULE_2__.registerModule)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleGithub.metadata, (0,lodash__WEBPACK_IMPORTED_MODULE_0__.omit)(_modules__WEBPACK_IMPORTED_MODULE_3__.CAWebModuleGithub, 'metadata'));
 });
 })();
 

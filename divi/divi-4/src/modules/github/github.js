@@ -6,11 +6,18 @@ window.addEventListener("load", (event) => {
          e.preventDefault();
 
         let paginationContainer = this.parentElement.parentElement;
+        let spinner = paginationContainer.parentElement.querySelector('.caweb-github-spinner');
         let ulContainer = paginationContainer.previousElementSibling;
         let definitions = ulContainer.dataset.definitions.split('|');
         
         let currentPage = new URL(this.dataset.url ).searchParams.get('page');
 
+        // show spinner
+        ulContainer.classList.add('d-none');
+        paginationContainer.classList.add('d-none');
+        spinner.classList.remove('d-none');
+
+        // make ajax request
         $.get(caweb_github_params.ajax_url, {
             action: 'caweb_github_request_url',
             data: this.parentElement.parentElement.dataset.info,
@@ -139,7 +146,14 @@ window.addEventListener("load", (event) => {
                 // add the links to the pagination container
                 paginationContainer.append(prevLinks, nextLinks);
             }
+        } )
+        .done( () => {
+            // hide spinner
+            spinner.classList.add('d-none');
+            ulContainer.classList.remove('d-none');
+            paginationContainer.classList.remove('d-none');
         } );
+
     }
 
 });

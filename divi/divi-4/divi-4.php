@@ -51,10 +51,6 @@ function caweb_github_request_url(){
 	wp_die();
 }
 
-function test(){
-	header('link', 'testheader' );
-}
-
 /**
  * Register all Divi 4 modules.
  *
