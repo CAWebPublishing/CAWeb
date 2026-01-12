@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'CAWEB_ABSPATH', get_stylesheet_directory() );
 define( 'CAWEB_URI', get_stylesheet_directory_uri() );
 define( 'CAWEB_VERSION', wp_get_theme( 'CAWeb' )->get( 'Version' ) );
-define( 'CAWEB_EXTENSION', 'caweb-module-extension' );
+define( 'CAWEB_EXTENSION', 'caweb-divi-extension' );
 define( 'CAWEB_DIVI_VERSION', wp_get_theme( 'Divi' )->get( 'Version' ) );
 define( 'CAWEB_CA_STATE_PORTAL_CDN_URL', 'https://california.azureedge.net/cdt/CAgovPortal' );
 define( 'CAWEB_EXTERNAL_DIR', sprintf( '%1$s/%2$s-ext/', wp_get_upload_dir()['basedir'], strtolower( wp_get_theme()->stylesheet ) ) );
@@ -28,7 +28,7 @@ define( 'CAWEB_EXTERNAL_URI', sprintf( '%1$s/%2$s-ext', wp_get_upload_dir()['bas
  *
  * @link https://codex.wordpress.org/Plugin_API/Action_Reference#Actions_Run_During_a_Typical_Request
  */
-add_action( 'after_setup_theme', 'caweb_setup_theme', 11 );
+add_action( 'after_setup_theme', 'caweb_setup_theme', 15 );
 add_action( 'send_headers', 'caweb_send_headers' );
 add_action( 'init', 'caweb_init' );
 add_action( 'pre_get_posts', 'caweb_pre_get_posts', 11 );
@@ -79,7 +79,7 @@ add_filter( 'attachment_link', 'caweb_search_media_direct_link', 99, 2 );
 /*
 Add CAWeb/Divi Extension
 */
-require_once sprintf( '%1$s/divi/extension/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
+require_once sprintf( '%1$s/divi/%2$s.php', CAWEB_ABSPATH, CAWEB_EXTENSION );
 
 /*
 -------------------------------------
@@ -138,22 +138,6 @@ function caweb_setup_theme() {
 	 */
 	register_nav_menus( caweb_nav_menu_theme_locations() );
 
-	// Remove Divi viewport meta.
-	remove_action( 'wp_head', 'et_add_viewport_meta' );
-
-	// Remove Divi favicon.
-	remove_action( 'wp_head', 'add_favicon' );
-
-	/**
-	 * All Child Theme .css files must be dequeued and re-queued so that we can control their order.
-	 * They must be queued below the parent stylesheet, which we have dequeued and re-queued in et_divi_replace_parent_stylesheet().
-	 *
-	 * Remove this action, otherwise the order of the styles is incorrect
-	 *
-	 * @since Divi 4.10.0
-	 */
-	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
-
 	// Add CAWeb Categories if they don't already exists.
 	if ( ! term_exists( 'Content Types', 'category' ) ) {
 		/* Insert Parent Content Type Category */
@@ -195,6 +179,31 @@ function caweb_setup_theme() {
 				);
 		}
 	}
+
+	// Remove Divi viewport meta.
+	remove_action( 'wp_head', 'et_add_viewport_meta' );
+
+	// Remove Divi favicon.
+	remove_action( 'wp_head', 'add_favicon' );
+
+	/**
+	 * All Child Theme .css files must be dequeued and re-queued so that we can control their order.
+	 * They must be queued below the parent stylesheet, which we have dequeued and re-queued in et_divi_replace_parent_stylesheet().
+	 *
+	 * Remove this action, otherwise the order of the styles is incorrect
+	 *
+	 * @since Divi 4.10.0
+	 */
+	remove_action( 'wp_enqueue_scripts', 'et_requeue_child_theme_styles', 99999999 );
+
+	
+	/**
+	 * Disables Divi Cloud App in the admin area.
+	 * This is a temporary fix since they are still using react 17 which breaks due WP using react 18
+	 * 
+	 * @since beta.2
+	 */
+	remove_action('admin_enqueue_scripts', 'et_code_snippets_admin_enqueue_scripts');
 }
 
 /**
@@ -603,6 +612,8 @@ function caweb_admin_enqueue_scripts( $hook ) {
 	/* Load editor styling */
 	wp_dequeue_style( get_template_directory_uri() . 'css/editor-style.css' );
 	add_editor_style( $editor_css );
+
+
 }
 
 /**
