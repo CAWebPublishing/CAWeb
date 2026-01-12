@@ -604,14 +604,6 @@ function caweb_display_social_media_settings( $is_active = false ) {
 							<small class="text-muted d-block">Enter social media URL share link.</small>
 						</div>
 						<?php endif; ?>
-						<!-- Show in header -->
-						<div class="mb-3 col-sm-3">
-							<div class="form-check form-switch">
-								<input type="checkbox" class="form-check-input mt-1" id="<?php print esc_attr( $option ); ?>_header" name="<?php print esc_attr( $option ); ?>_header" <?php print esc_attr( $header_checked ); ?>>
-								<label for="<?php print esc_attr( $option ); ?>_header" class="d-block form-check-label"><strong>Show in header:</strong></label>
-								<small class="text-muted d-block">Display social link in the utility header.</small>
-							</div>
-						</div>
 						<!-- Show in footer -->
 						<div class="mb-3 col-sm-3">
 							<div class="form-check form-switch">
