@@ -1054,6 +1054,15 @@ __webpack_require__.r(__webpack_exports__);
 
 })();
 
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+var __webpack_exports__ = {};
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+})();
+
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 //require('./AutoTracker');

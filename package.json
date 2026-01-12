@@ -1,7 +1,7 @@
 {
   "name": "@caweb/theme",
   "description": "CA State Template WordPress, Divi Child Theme",
-  "version": "1.13.3",
+  "version": "1.13.4",
   "author": "Danny Guzman (https://github.com/Danny-Guzman/)",
   "repository": {
     "type": "git",
@@ -9,10 +9,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@caweb/cli": "^1.11.1",
-    "@caweb/icon-library": "^1.1.0",
+    "@caweb/cli": "^1.14.7",
+    "@caweb/icon-library": "^1.1.3",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.6",
+    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1"
   },
   "scripts": {
