@@ -31,8 +31,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js":
-/***/ (function(module) {
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+(module) {
 
 /*!
   * Bootstrap v5.3.8 (https://getbootstrap.com/)
@@ -6347,13 +6347,13 @@ __webpack_require__.r(__webpack_exports__);
 //# sourceMappingURL=bootstrap.bundle.js.map
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/external-link.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_207904__) => {
+/***/ "./src/scripts/components/external-link.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_207879__) {
 
 "use strict";
-__nested_webpack_require_207904__.r(__nested_webpack_exports__);
+__nested_webpack_require_207879__.r(__nested_webpack_exports__);
 //@ts-check
 
 /* EXTERNAL LINK ICON */
@@ -6378,13 +6378,13 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/header.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209042__) => {
+/***/ "./src/scripts/components/header.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209005__) {
 
 "use strict";
-__nested_webpack_require_209042__.r(__nested_webpack_exports__);
+__nested_webpack_require_209005__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('DOMContentLoaded', () => {
   let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
@@ -6436,17 +6436,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // move the header up to the scroll height, minus any elements above the header
       header.style.top = `-${scrollHeights - miscElementHeights}px`;
-
-      // we add the header height + misc element heights to the page container as margin-top, minus the scroll heights since those get hidden
-      if (pageContainer) {
-        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
-      }
     } else {
       // reset header to initial position
       header.style.top = `${miscElementHeights}px`;
-      if (pageContainer) {
-        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights}px`;
-      }
     }
 
     // for each element with an id we add the scroll-margin-top
@@ -6462,13 +6454,13 @@ window.addEventListener('DOMContentLoaded', () => {
   compactHeader();
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/mobile-controls.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211999__) => {
+/***/ "./src/scripts/components/mobile-controls.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_211543__) {
 
 "use strict";
-__nested_webpack_require_211999__.r(__nested_webpack_exports__);
+__nested_webpack_require_211543__.r(__nested_webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6568,13 +6560,13 @@ window.addEventListener('DOMContentLoaded', () => {
   mobileCheck();
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/return-top.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215738__) => {
+/***/ "./src/scripts/components/return-top.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215270__) {
 
 "use strict";
-__nested_webpack_require_215738__.r(__nested_webpack_exports__);
+__nested_webpack_require_215270__.r(__nested_webpack_exports__);
 //@ts-check
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
@@ -6624,7 +6616,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -6632,7 +6624,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_217676__(moduleId) {
+/******/ 	function __nested_webpack_require_217204__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6646,7 +6638,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_217676__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_217204__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6656,7 +6648,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_217676__.r = (exports) => {
+/******/ 		__nested_webpack_require_217204__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6670,7 +6662,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-__nested_webpack_require_217676__.r(__nested_webpack_exports__);
+__nested_webpack_require_217204__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6678,12 +6670,12 @@ __nested_webpack_require_217676__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-__nested_webpack_require_217676__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_217676__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_217676__("./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_217676__("./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_217676__("./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_217676__("./src/scripts/components/header.js");
+__nested_webpack_require_217204__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_217204__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_217204__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_217204__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_217204__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_217204__("./src/scripts/components/header.js");
 
 
 

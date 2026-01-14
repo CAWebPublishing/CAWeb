@@ -81,8 +81,8 @@ function caweb_render_alerts() {
 			$msg    = $alert['message'];
 
 			?>
-			<div  id="caweb-alert-<?php print esc_attr( $a ); ?>" style="background-color: <?php print esc_attr( $color ); ?>" class="alert alert-dismissible mb-0 border-top border-dark py-2 alert-<?php print esc_attr( $a ); ?>">
-				<div class="container d-flex flex-row align-items-center">
+			<div  id="caweb-alert-<?php print esc_attr( $a ); ?>" style="background-color: <?php print esc_attr( $color ); ?>" class="alert alert-dismissible border-top border-dark alert-<?php print esc_attr( $a ); ?>">
+				<div class="container">
 					
 					<?php if ( ! empty( $header ) ) : ?>
 						<span class="alert-level">

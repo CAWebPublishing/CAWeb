@@ -1,8 +1,8 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/a11y/button.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/button.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -17,10 +17,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/blog.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/blog.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -58,10 +58,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/blurb.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/blurb.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -90,10 +90,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/button.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/button.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -117,10 +117,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/deep-links.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/deep-links.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -137,10 +137,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/fullwidth-header.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/fullwidth-header.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -164,10 +164,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/gallery.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/gallery.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -190,10 +190,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/index.js":
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/scripts/a11y/divi/index.js"
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 __webpack_require__("./src/scripts/a11y/divi/blog.js");
 __webpack_require__("./src/scripts/a11y/divi/blurb.js");
@@ -214,10 +214,10 @@ window.et_pb_smooth_scroll = () => {};
 // this prevents Divi from adding classes to navigation.
 window.et_pb_toggle_nav_menu = () => {};
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/person.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/person.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -243,10 +243,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/search.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/search.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -282,10 +282,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/slider.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/slider.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -329,10 +329,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/tab.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/tab.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -357,10 +357,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/toggle.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/toggle.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -409,10 +409,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/divi/video.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/divi/video.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -459,10 +459,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/others.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/others.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -482,10 +482,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/add-to-any.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/add-to-any.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Do this after the page has loaded
@@ -509,10 +509,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/constant-contact-forms.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/constant-contact-forms.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Do this after the page has loaded
@@ -541,10 +541,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/google-calendar.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/google-calendar.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -566,10 +566,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/google-recaptcha.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/google-recaptcha.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Do this after the page has loaded
@@ -629,10 +629,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/index.js":
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/scripts/a11y/plugins/index.js"
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 __webpack_require__("./src/scripts/a11y/plugins/add-to-any.js");
 __webpack_require__("./src/scripts/a11y/plugins/constant-contact-forms.js");
@@ -644,10 +644,10 @@ __webpack_require__("./src/scripts/a11y/plugins/tabby-response.js");
 __webpack_require__("./src/scripts/a11y/plugins/tablepress.js");
 __webpack_require__("./src/scripts/a11y/plugins/wpforms.js");
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/mailchimp.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/mailchimp.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -683,10 +683,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/mailpoet.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/mailpoet.js"
+() {
 
 jQuery(document).ready(function ($) {
   /*
@@ -710,10 +710,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/tabby-response.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/tabby-response.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -750,10 +750,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/tablepress.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/tablepress.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* 
@@ -802,10 +802,10 @@ jQuery(document).ready(function ($) {
   }, 500);
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/plugins/wpforms.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/plugins/wpforms.js"
+() {
 
 /*
 	WPForms v1.8.3.2 Accessibility 
@@ -833,10 +833,10 @@ if (null !== wpforms_confirmation_msg) {
   wpforms_confirmation_msg.focus();
 }
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/twitter.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/twitter.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Do this after the page has loaded
@@ -864,10 +864,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/a11y/utility-header.js":
-/***/ (() => {
+/***/ "./src/scripts/a11y/utility-header.js"
+() {
 
 jQuery(document).ready(function ($) {
   /* -----------------------------------------
@@ -877,10 +877,10 @@ jQuery(document).ready(function ($) {
   $(".settings-links button[data-target='#locationSettings']").removeAttr("role");
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/google/cse.js":
-/***/ (() => {
+/***/ "./src/scripts/google/cse.js"
+() {
 
 // Google Custom Search 
 jQuery(document).ready(function ($) {
@@ -931,10 +931,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/google/ga.js":
-/***/ (() => {
+/***/ "./src/scripts/google/ga.js"
+() {
 
 // Google Analytics
 jQuery(document).ready(function ($) {
@@ -1003,7 +1003,7 @@ jQuery(document).ready(function ($) {
   };
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/

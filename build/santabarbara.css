@@ -14958,10 +14958,9 @@ footer.keywords ul li {
    /src/styles/components/header.scss
 ----------------------------------------- */
 header.global-header {
-  position: fixed;
+  position: sticky;
   background-color: var(--bs-white, #fff);
   z-index: 15;
-  top: 0;
   transition: all 0.3s ease;
   width: 100%;
 }
@@ -15375,6 +15374,9 @@ header .alert {
   border-radius: 0;
   margin-bottom: 0;
   padding: 0.5rem 0;
+}
+header .alert * {
+  font-size: 14px;
 }
 header .alert .alert-link {
   margin-left: auto;

@@ -1,8 +1,8 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/admin/icon.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/icon.js"
+() {
 
 /* CAWeb Icon Menu Javascript */
 jQuery(document).ready(function ($) {
@@ -32,10 +32,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js"
+() {
 
 jQuery(document).ready(function ($) {
   $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);
@@ -71,7 +71,7 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
