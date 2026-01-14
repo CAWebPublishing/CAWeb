@@ -14942,10 +14942,9 @@ footer.keywords ul li {
    /src/styles/components/header.scss
 ----------------------------------------- */
 header.global-header {
-  position: fixed;
+  position: sticky;
   background-color: var(--bs-white, #fff);
   z-index: 15;
-  top: 0;
   transition: all 0.3s ease;
   width: 100%;
 }
@@ -15359,6 +15358,9 @@ header .alert {
   border-radius: 0;
   margin-bottom: 0;
   padding: 0.5rem 0;
+}
+header .alert * {
+  font-size: 14px;
 }
 header .alert .alert-link {
   margin-right: auto;
@@ -15814,10 +15816,13 @@ figure.executive-profile.vertical .body {
 .location {
   display: flex;
 }
-.location > [class*=ca-gov-icon-]:first-child {
+.location.contact .thumbnail [class*=ca-gov-icon-] {
   font-size: 3.5rem;
   margin-left: 1rem;
   color: var(--bs-gray-300, #bcbbc1);
+}
+.location.contact .btn {
+  margin-top: 1rem;
 }
 .location .contact {
   margin: 1rem;
@@ -15828,51 +15833,47 @@ figure.executive-profile.vertical .body {
 }
 .location .contact a:not(.btn) {
   display: block;
+  padding: 0 !important;
 }
-.location .contact p:first-child, .location .summary p:first-child {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-.location.contact .btn {
-  margin-top: 1rem;
-}
-.location.mini > [class*=ca-gov-icon-]:first-child {
+.location.mini .thumbnail [class*=ca-gov-icon-] {
+  font-size: 3.5rem;
+  margin-left: 1rem;
   background-color: var(--bs-black, #000);
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-facebook, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-facebook {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-facebook, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-facebook {
   color: #3d77ea;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-twitter, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-twitter {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-twitter, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-twitter {
   color: #000;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-google-plus, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-google-plus {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-google-plus, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-google-plus {
   color: #dc4a38;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-flickr, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-flickr {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-flickr, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-flickr {
   color: #0063dc;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-linkedin, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-linkedin {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-linkedin, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-linkedin {
   color: #0976b4;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-instagram, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-instagram {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-instagram, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-instagram {
   color: #e73476;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-snapchat, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-snapchat {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-snapchat, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-snapchat {
   color: #fffc00;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-youtube, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-youtube {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-youtube, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-youtube {
   color: #e73323;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-pinterest, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-pinterest {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-pinterest, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-pinterest {
   color: #cc2127;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-vimeo, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-vimeo {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-vimeo, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-vimeo {
   color: #1ab7ea;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-email, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-email {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-email, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-email {
   color: #888;
 }
-.location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-github, .location.mini > [class*=ca-gov-icon-]:first-child.ca-gov-icon-share-github {
+.location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-github, .location.mini .thumbnail [class*=ca-gov-icon-].ca-gov-icon-share-github {
   color: #25292e;
 }
 .location.banner {

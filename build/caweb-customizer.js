@@ -1,8 +1,8 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/alert-banners.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/alert-banners.js"
+() {
 
 jQuery(document).ready(function ($) {
   wp.customize('caweb_alert_banner_0', function (value) {
@@ -12,10 +12,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/contact-us-link.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/contact-us-link.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Utility Header Contact Us Link
@@ -44,10 +44,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/frontpage-search.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/frontpage-search.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Search on Front Page
@@ -66,10 +66,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/google-translate.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/google-translate.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Bind to Google Translate Custom Translate Page 
@@ -97,10 +97,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/header-ca-branding.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Organization Logo Brand
@@ -115,10 +115,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/home-nav-link.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/home-nav-link.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Menu Home Link
@@ -141,10 +141,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/sticky-navigation.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Sticky Navigation
@@ -165,10 +165,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-custom-links.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Utility Header Custom Link 1 Text
@@ -257,10 +257,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/theme-customizer/bindings/utility-header-home-icon.js"
+() {
 
 jQuery(document).ready(function ($) {
   // Utility Header Home Link
@@ -280,7 +280,7 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
