@@ -1,3 +1,10 @@
+v1.13.4
+- Removed Show in Header option from Social Media Links
+- Removed unneeded classes from alert
+- Updated npm packages
+- Updated webpack config
+- Updated import order of styles
+
 v1.13.3
 - Fixed issue with Divi button and tab links being extra padded
 - Fixed issue with Panel Heading alignment not rendering properly

@@ -1,8 +1,8 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js":
-/***/ (function(module) {
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+(module) {
 
 /*!
   * Bootstrap v5.3.6 (https://getbootstrap.com/)
@@ -6320,10 +6320,10 @@
 //# sourceMappingURL=bootstrap.bundle.js.map
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/admin/alerts.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/alerts.js"
+() {
 
 /* CAWeb Alert Option Javascript */
 jQuery(document).ready(function ($) {
@@ -6642,10 +6642,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/admin/icon.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/icon.js"
+() {
 
 /* CAWeb Icon Menu Javascript */
 jQuery(document).ready(function ($) {
@@ -6675,10 +6675,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/admin/nav-menu.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/nav-menu.js"
+() {
 
 /* nav-menus.php Javascript  */
 jQuery(document).ready(function ($) {
@@ -6761,10 +6761,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/admin/options.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/options.js"
+() {
 
 /* CAWeb Options Javascript */
 jQuery(document).ready(function ($) {
@@ -6876,10 +6876,10 @@ jQuery(document).ready(function ($) {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/admin/uploads.js":
-/***/ (() => {
+/***/ "./src/scripts/admin/uploads.js"
+() {
 
 /* CAWeb Uploads Option */
 jQuery(document).ready(function ($) {
@@ -6949,10 +6949,10 @@ jQuery(document).ready(function ($) {
   }
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/wp/browse-library.js":
-/***/ (() => {
+/***/ "./src/scripts/wp/browse-library.js"
+() {
 
 /* Browse Library */
 (function ($) {
@@ -7045,7 +7045,7 @@ jQuery(document).ready(function ($) {
   });
 })(jQuery);
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -7087,6 +7087,24 @@ jQuery(document).ready(function ($) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+var __webpack_exports__ = {};
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+var __webpack_exports__ = {};
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+})();
+
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
