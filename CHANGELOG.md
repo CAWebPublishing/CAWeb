@@ -4,6 +4,7 @@ v1.14.0
 v1.13.4
 - Removed Show in Header option from Social Media Links
 - Removed unneeded classes from alert
+- Removed styles that undid the 32px margin-top added by WordPress when logged in
 - Updated npm packages
 - Updated webpack config
 - Updated import order of styles
