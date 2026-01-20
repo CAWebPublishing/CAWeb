@@ -151,6 +151,11 @@ body.divi-built li[class^=et_fb_profile_banner]::before {
 body.divi-built {
   /* Divi modules only go in the #page-container */
 }
+@media (max-width: 980px) {
+  body.divi-built #page-container {
+    padding-top: 0;
+  }
+}
 body.divi-built #page-container .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
