@@ -5,6 +5,9 @@
 
 /* Divi modules only go in the #page-container */
 #page-container{ 
+    @media (max-width: 980px) {
+        padding-top: 0;
+    }
 
     @import "modules/blurb";
     @import "modules/button";
