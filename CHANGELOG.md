@@ -8,6 +8,7 @@ v1.13.4
 - Updated npm packages
 - Updated webpack config
 - Updated import order of styles
+- Removed padding-top added by Divi to the #page-container when screen in max-width: 980px
 
 v1.13.3
 - Fixed issue with Divi button and tab links being extra padded
