@@ -32,7 +32,7 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	 * @return void
 	 */
 	public function init() {
-		$this->name = esc_html__( 'Profile Banner', 'et_builder' );
+		$this->name = esc_html__( 'Executive Profile', 'et_builder' );
 
 		$this->main_css_element = '%%order_class%%';
 
