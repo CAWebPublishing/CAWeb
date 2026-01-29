@@ -1,75 +1,32 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/scripts/admin/icon.js"
 () {
 
-/* CAWeb Icon Menu Javascript */
-jQuery(document).ready(function ($) {
-  $(document).on('click', '.caweb-icon-menu li', function (e) {
-    cawebIconSelected(this);
-  });
-  $(document).on('click', '.caweb-icon-menu-header .reset-icon', function (e) {
-    resetIconSelect($(this).parent().next());
-  });
-  function cawebIconSelected(iconLi) {
-    resetIconSelect($(iconLi).parent());
-    $(iconLi).addClass('active');
-    var i = $(iconLi).parent().find('input');
-    if (i.length) {
-      $(i).val($(iconLi).attr('title'));
-    }
-  }
-  function resetIconSelect(iconList) {
-    var icon_list = $(iconList).find('LI');
-    for (o = 0; o < icon_list.length - 1; o++) {
-      $(icon_list[o]).removeClass('active');
-    }
-    var i = $(iconList).find('input');
-    if (i.length) {
-      $(i).val('');
-    }
-  }
-});
+eval("{/* CAWeb Icon Menu Javascript */\njQuery(document).ready(function ($) {\n  $(document).on('click', '.caweb-icon-menu li', function (e) {\n    cawebIconSelected(this);\n  });\n  $(document).on('click', '.caweb-icon-menu-header .reset-icon', function (e) {\n    resetIconSelect($(this).parent().next());\n  });\n  function cawebIconSelected(iconLi) {\n    resetIconSelect($(iconLi).parent());\n    $(iconLi).addClass('active');\n    var i = $(iconLi).parent().find('input');\n    if (i.length) {\n      $(i).val($(iconLi).attr('title'));\n    }\n  }\n  function resetIconSelect(iconList) {\n    var icon_list = $(iconList).find('LI');\n    for (o = 0; o < icon_list.length - 1; o++) {\n      $(icon_list[o]).removeClass('active');\n    }\n    var i = $(iconList).find('input');\n    if (i.length) {\n      $(i).val('');\n    }\n  }\n});\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/admin/icon.js?\n}");
 
 /***/ },
 
 /***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js"
 () {
 
-jQuery(document).ready(function ($) {
-  $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);
-  $('.caweb-toggle-alert').click(toggle_alert);
-  $('.caweb-remove-alert').click(remove_alert);
-  function add_alert_banner() {
-    var alert_list = $(this).parent().parent();
-    var new_li = $(this).parent().next().clone();
-    var alert_toggle = $(new_li).find('#caweb-toggle-alert');
-    var alert_status = $(new_li).find('input[name^="alert-status-"]');
-    var alert_remove = $(new_li).find('.caweb-remove-alert');
-    $(new_li).attr('id', '');
-    $(alert_toggle).on('click', toggle_alert);
-    $(alert_remove).on('click', remove_alert);
-    $(alert_status).attr('data-bs-toggle', 'toggle');
-    $(alert_status).attr('data-size', 'sm');
-    $(alert_list).append($(new_li));
-    $(alert_status).bootstrapToggle({
-      onstyle: 'success'
-    });
+eval("{jQuery(document).ready(function ($) {\n  $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);\n  $('.caweb-toggle-alert').click(toggle_alert);\n  $('.caweb-remove-alert').click(remove_alert);\n  function add_alert_banner() {\n    var alert_list = $(this).parent().parent();\n    var new_li = $(this).parent().next().clone();\n    var alert_toggle = $(new_li).find('#caweb-toggle-alert');\n    var alert_status = $(new_li).find('input[name^=\"alert-status-\"]');\n    var alert_remove = $(new_li).find('.caweb-remove-alert');\n    $(new_li).attr('id', '');\n    $(alert_toggle).on('click', toggle_alert);\n    $(alert_remove).on('click', remove_alert);\n    $(alert_status).attr('data-bs-toggle', 'toggle');\n    $(alert_status).attr('data-size', 'sm');\n    $(alert_list).append($(new_li));\n    $(alert_status).bootstrapToggle({\n      onstyle: 'success'\n    });\n\n    //wp.editor.initialize(\"alertmessage-\" + alertCount, caweb_admin_args.tinymce_settings);\n  }\n  function toggle_alert() {\n    $('#' + $(this).attr('data-target')).collapse('toggle');\n    $(this).find('span').toggleClass('dashicons-arrow-right');\n  }\n  function remove_alert() {\n    var r = confirm(\"Are you sure you want to remove this alert? This can not be undone.\");\n    if (r == true) {\n      $(this).parent().remove();\n    }\n  }\n});\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/wp/theme-customizer/controls/alert-banners.js?\n}");
 
-    //wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
-  }
-  function toggle_alert() {
-    $('#' + $(this).attr('data-target')).collapse('toggle');
-    $(this).find('span').toggleClass('dashicons-arrow-right');
-  }
-  function remove_alert() {
-    var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
-    if (r == true) {
-      $(this).parent().remove();
-    }
-  }
-});
+/***/ },
+
+/***/ "./src/scripts/wp/theme-customizer/controls/index.js"
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+eval("{__webpack_require__(\"./src/scripts/admin/icon.js\");\n__webpack_require__(\"./src/scripts/wp/theme-customizer/controls/alert-banners.js\");\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/wp/theme-customizer/controls/index.js?\n}");
 
 /***/ }
 
@@ -100,12 +57,11 @@ jQuery(document).ready(function ($) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
-(() => {
-__webpack_require__("./src/scripts/admin/icon.js");
-__webpack_require__("./src/scripts/wp/theme-customizer/controls/alert-banners.js");
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/scripts/wp/theme-customizer/controls/index.js");
+/******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=caweb-customizer-controls.js.map
