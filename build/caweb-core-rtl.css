@@ -151,6 +151,11 @@ body.divi-built li[class^=et_fb_profile_banner]::before {
 body.divi-built {
   /* Divi modules only go in the #page-container */
 }
+@media (max-width: 980px) {
+  body.divi-built #page-container {
+    padding-top: 0;
+  }
+}
 body.divi-built #page-container .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
@@ -419,19 +424,11 @@ body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has
   float: right;
 }
 /*
-    Override _admin_bar_bump_cb - a default callback for WP_Admin_Bar
-    Remove margin on top of page when logged in added by WP
+    _admin_bar_bump_cb - a default callback for WP_Admin_Bar
+    Adds 32px margin-top to the html of the page when logged in added by WP
  */
 body.admin-bar header.global-header .mobile-controlled.overlay {
   margin-top: var(--wp-admin--admin-bar--height, 32px);
-}
-html {
-  margin-top: 0 !important;
-}
-@media screen and (max-width: 782px) {
-  html {
-    margin-top: 0 !important;
-  }
 }
 body.classic-built:not(.page-template-searchpage) #main-content {
   width: 100%;
