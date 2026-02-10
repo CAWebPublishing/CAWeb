@@ -14959,6 +14959,7 @@ footer.keywords ul li {
 ----------------------------------------- */
 header.global-header {
   position: sticky;
+  top: 0;
   background-color: var(--bs-white, #fff);
   z-index: 15;
   transition: all 0.3s ease;
