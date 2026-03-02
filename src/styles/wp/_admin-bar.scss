@@ -5,3 +5,10 @@
 body.admin-bar header.global-header .mobile-controlled.overlay {
     margin-top: var( --wp-admin--admin-bar--height, 32px );
 }
+
+// on really small screens, the admin bar adds a 46px margin-top to the html of the page, so we need to remove that as well
+@media screen and (max-width: 782px) {
+    html {
+        margin-top: 0 !important;
+    }
+}
