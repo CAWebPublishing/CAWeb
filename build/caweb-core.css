@@ -435,6 +435,7 @@ body.admin-bar header.global-header .mobile-controlled.overlay {
 @media screen and (max-width: 782px) {
   html {
     margin-top: 0 !important;
+    padding-top: var(--wp-admin--admin-bar--height, 32px);
   }
 }
 body.classic-built:not(.page-template-searchpage) #main-content {
