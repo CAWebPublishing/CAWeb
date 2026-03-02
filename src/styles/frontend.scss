@@ -7,10 +7,7 @@ body{
 
 	@import './custom/google';
 	
-	// if page was built using Divi
-	&.divi-built{
-		@import 'divi';
-	}
+	@import 'divi';
 
 	// mobile mode menu is hidden behind the wordpress admin bar when logged in
 	&.admin-bar{

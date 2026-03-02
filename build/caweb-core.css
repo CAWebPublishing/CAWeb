@@ -20,8 +20,10 @@ body {
 body .gs-visibleUrl-breadcrumb {
   color: #008A28 !important;
 }
-body.divi-built {
+body {
   /* Divi Specific Overrides */
+}
+body.divi-built {
   /**
   * Page & Builder Width Styles
   * 
@@ -151,11 +153,6 @@ body.divi-built li[class^=et_fb_profile_banner]::before {
 body.divi-built {
   /* Divi modules only go in the #page-container */
 }
-@media (max-width: 980px) {
-  body.divi-built #page-container {
-    padding-top: 0;
-  }
-}
 body.divi-built #page-container .et_pb_main_blurb_image a.keyboard-outline {
   display: -webkit-box;
   display: inline-block;
@@ -214,6 +211,11 @@ body.divi-built #page-container .et_pb_module.et_pb_toggle.et_pb_accordion_item:
 }
 body.divi-built #page-container .et_pb_module.et_pb_toggle .et_pb_toggle_title:before {
   font-family: "CaGov" !important;
+}
+@media (max-width: 980px) {
+  body #page-container {
+    padding-top: 0 !important;
+  }
 }
 @media (max-width: 768px) {
   body.admin-bar header .navigation-search {
@@ -429,6 +431,11 @@ body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has
  */
 body.admin-bar header.global-header .mobile-controlled.overlay {
   margin-top: var(--wp-admin--admin-bar--height, 32px);
+}
+@media screen and (max-width: 782px) {
+  html {
+    margin-top: 0 !important;
+  }
 }
 body.classic-built:not(.page-template-searchpage) #main-content {
   width: 100%;
@@ -3621,3 +3628,5 @@ div[id^=tablepress-].dataTables_filter input[type=search]:focus {
 }
 
 
+
+/*# sourceMappingURL=caweb-core.css.map*/
