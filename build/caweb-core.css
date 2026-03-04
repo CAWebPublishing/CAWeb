@@ -217,16 +217,6 @@ body.divi-built #page-container .et_pb_module.et_pb_toggle .et_pb_toggle_title:b
     padding-top: 0 !important;
   }
 }
-@media (max-width: 768px) {
-  body.admin-bar header .navigation-search {
-    top: 46px;
-  }
-}
-@media (max-width: 991px) {
-  body.admin-bar header .navigation-search {
-    top: 32px;
-  }
-}
 body.page-template-searchpage #main-content .container:before {
   background: transparent;
 }
@@ -278,10 +268,6 @@ body.sidebar-displayed footer {
   /* Header Organization Banner */
   .header-organization-banner {
     margin-left: -59px !important;
-  }
-  /* Navigation Search */
-  .navigation-search {
-    border: none !important;
   }
   /* Width */
   .single.sidebar_displayed .main-content .main-primary,
@@ -427,16 +413,22 @@ body.home article.has-post-thumbnail > a.thumbnail-link, body.single article.has
 }
 /*
     _admin_bar_bump_cb - a default callback for WP_Admin_Bar
-    Adds 32px margin-top to the html of the page when logged in added by WP
+    Adds 32px margin-top to the html of the page when logged in added by WP, 
+    we remove that and add the margin to the header instead, so that the admin bar doesn't overlap the header.
  */
+html {
+  margin-top: 0 !important;
+}
+@media screen and (max-width: 600px) {
+  body.admin-bar #wpadminbar {
+    position: fixed;
+  }
+}
+body.admin-bar header.global-header {
+  padding-top: var(--wp-admin--admin-bar--height, 32px);
+}
 body.admin-bar header.global-header .mobile-controlled.overlay {
   margin-top: var(--wp-admin--admin-bar--height, 32px);
-}
-@media screen and (max-width: 782px) {
-  html {
-    margin-top: 0 !important;
-    padding-top: var(--wp-admin--admin-bar--height, 32px);
-  }
 }
 body.classic-built:not(.page-template-searchpage) #main-content {
   width: 100%;
