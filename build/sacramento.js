@@ -6457,6 +6457,7 @@ window.addEventListener('load', () => {
 
   // for each element with an id we add the scroll-margin-top
   const updateScrollMarginTop = (/** @type Element */element) => {
+    let scrollMarginHeight = header?.clientHeight;
     if (element instanceof HTMLElement) {
       // if the elements offsetTop is greater than twice the header size, 
       // we can assume the header is compacted
@@ -6479,10 +6480,10 @@ window.addEventListener('load', () => {
 /***/ },
 
 /***/ "./src/scripts/components/mobile-controls.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213031__) {
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213082__) {
 
 "use strict";
-__nested_webpack_require_213031__.r(__nested_webpack_exports__);
+__nested_webpack_require_213082__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6585,10 +6586,10 @@ window.addEventListener('load', () => {
 /***/ },
 
 /***/ "./src/scripts/components/return-top.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_216746__) {
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_216797__) {
 
 "use strict";
-__nested_webpack_require_216746__.r(__nested_webpack_exports__);
+__nested_webpack_require_216797__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
@@ -6645,7 +6646,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_218656__(moduleId) {
+/******/ 	function __nested_webpack_require_218707__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6659,7 +6660,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218656__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_218707__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6669,7 +6670,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_218656__.r = (exports) => {
+/******/ 		__nested_webpack_require_218707__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6683,7 +6684,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-__nested_webpack_require_218656__.r(__nested_webpack_exports__);
+__nested_webpack_require_218707__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6691,12 +6692,12 @@ __nested_webpack_require_218656__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-__nested_webpack_require_218656__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218656__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218656__("./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218656__("./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218656__("./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218656__("./src/scripts/components/header.js");
+__nested_webpack_require_218707__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_218707__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_218707__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_218707__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_218707__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_218707__("./src/scripts/components/header.js");
 
 
 
