@@ -15932,10 +15932,6 @@ header.global-header .mobile-controlled.overlay {
   header.global-header .mobile-controlled .navigation .container .nav-item .link-description {
     color: #fff !important;
   }
-  header.global-header .alerts,
-  header.global-header .alert {
-    display: none;
-  }
 }
 @media (max-width: 992px) {
   footer.global-footer a {
