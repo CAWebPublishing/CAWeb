@@ -6386,7 +6386,6 @@ __nested_webpack_require_208980__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
   const header = document.querySelector('header');
-  const pageContainer = document.querySelector('#page-container');
   const alerts = header?.querySelector('.alerts');
   const utilityHeader = header?.querySelector('.utility-header');
 
@@ -6395,7 +6394,10 @@ window.addEventListener('load', () => {
   const getCompactedElementsHeight = () => {
     return compactedElements.reduce((total, element) => {
       if (element instanceof HTMLElement) {
-        return total + element.clientHeight;
+        // only if the element is visible, we include its height in the total compacted elements height, otherwise we ignore it, since it won't affect the header's position when compacted.
+        if (window.getComputedStyle(element).display !== 'none') {
+          return total + element.clientHeight;
+        }
       }
       return total;
     }, 0);
@@ -6433,6 +6435,8 @@ window.addEventListener('load', () => {
   if (!header) {
     return;
   }
+
+  // compact header on scroll
   const compactHeader = () => {
     // downscroll code passed the header height
     if (document.body.scrollTop >= header.offsetHeight || document.documentElement.scrollTop >= header.offsetHeight) {
@@ -6447,59 +6451,59 @@ window.addEventListener('load', () => {
     }
   };
 
-  // we need to update the compacted elements height if an alert is closed, so we listen for the alert close event and update the compacted elements height.
-  document.querySelectorAll('header .alerts [data-bs-dismiss="alert"]').forEach(closeButton => {
-    closeButton.addEventListener('click', () => {
-      compactedElementsHeight = getCompactedElementsHeight();
-      document.querySelectorAll('#page-container [id]').forEach(updateScrollMarginTop);
-    });
-  });
-
   // for each element with an id we add the scroll-margin-top
-  const updateScrollMarginTop = (/** @type Element */element) => {
-    // lets collect the height of any fixed elements above the header.
-    let current = header?.previousElementSibling;
-    let topOffset = 0;
-    while (current) {
-      // if current element has a fixed/absolute position, add its height to the topOffset.
-      if (current instanceof HTMLElement && ['fixed', 'absolute'].includes(window.getComputedStyle(current).position)) {
-        topOffset += current.clientHeight;
-      }
-      current = current.previousElementSibling;
-    }
-    if (element instanceof HTMLElement) {
-      let scrollMarginHeight = header.clientHeight + topOffset;
+  const updateScrollMarginTop = () => {
+    // for each element with an id we add the scroll-margin-top
+    document.querySelectorAll('#page-container [id]').forEach(element => {
+      if (element instanceof HTMLElement) {
+        let scrollMarginHeight = header?.clientHeight;
 
-      // if the elements offsetTop is greater than twice the header size, 
-      // we can assume the header is compacted
-      // so we need to subtract the compacted elements height from the scroll margin.
-      if (element.offsetTop > scrollMarginHeight + scrollMarginHeight / 2) {
-        scrollMarginHeight -= compactedElementsHeight;
+        // if the elements offsetTop is greater than twice the header size, 
+        // we can assume the header is compacted
+        // so we need to subtract the compacted elements height from the scroll margin.
+        if (element.offsetTop > scrollMarginHeight + scrollMarginHeight / 2) {
+          scrollMarginHeight -= compactedElementsHeight;
+        }
+        element.style.scrollMarginTop = `${scrollMarginHeight}px`;
       }
-      element.style.scrollMarginTop = `${scrollMarginHeight}px`;
-    }
+    });
   };
 
-  // add scroll margin top to all elements with an id, so that when we scroll to them, they are not hidden behind the header.
-  document.querySelectorAll('#page-container [id]').forEach(updateScrollMarginTop);
+  // if there are alerts add a mutation observer to watch for changes in the alerts container, 
+  if (alerts) {
+    // so we can update the compacted elements height when an alert is closed or a new alert is added.
+    new MutationObserver((mutationList, observer) => {
+      compactedElementsHeight = getCompactedElementsHeight();
+      updateScrollMarginTop();
+    }).observe(alerts, {
+      attributes: true,
+      childList: true
+    });
+  }
 
-  // reset position on scroll
+  // add scroll event listener to compact the header on scroll
   window.addEventListener('scroll', compactHeader);
+
+  // add scroll margin top to all elements with an id, so that when we scroll to them, they are not hidden behind the header.
+  updateScrollMarginTop();
+
+  // compact header on page load in case the page is loaded with a scroll position past the header height.
   compactHeader();
 });
 
 /***/ },
 
 /***/ "./src/scripts/components/mobile-controls.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213580__) {
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213519__) {
 
 "use strict";
-__nested_webpack_require_213580__.r(__nested_webpack_exports__);
+__nested_webpack_require_213519__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
   const mainHeader = document.querySelector('header');
   const mobileOverlay = mainHeader?.querySelector('.mobile-controlled.overlay');
+  const alerts = mainHeader?.querySelector('.alerts');
   const searchContainer = mainHeader?.querySelector('.search-container');
   const mainNav = mainHeader?.querySelector('.navigation');
   const mainNavUl = mainNav?.querySelector('.nav');
@@ -6527,6 +6531,11 @@ window.addEventListener('load', () => {
       if (searchContainer) {
         mainHeader.querySelector('.header-organization-banner')?.after(searchContainer);
       }
+
+      // alerts are always shown in desktop mode
+      if (alerts) {
+        alerts.classList.remove('d-none');
+      }
     } else {
       // if mobile menu is open
       if ('true' === toggleMenuCloseButton.getAttribute('aria-expanded')) {
@@ -6552,6 +6561,11 @@ window.addEventListener('load', () => {
           // navigation ul should render as a column
           mainNavUl?.classList.add('flex-column');
         }
+      }
+
+      // alerts are hidden in mobile mode
+      if (alerts) {
+        alerts.classList.add('d-none');
       }
     }
   };
@@ -6597,10 +6611,10 @@ window.addEventListener('load', () => {
 /***/ },
 
 /***/ "./src/scripts/components/return-top.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217295__) {
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217521__) {
 
 "use strict";
-__nested_webpack_require_217295__.r(__nested_webpack_exports__);
+__nested_webpack_require_217521__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
@@ -6657,7 +6671,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_219205__(moduleId) {
+/******/ 	function __nested_webpack_require_219431__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6671,7 +6685,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_219205__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_219431__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6681,7 +6695,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_219205__.r = (exports) => {
+/******/ 		__nested_webpack_require_219431__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6695,7 +6709,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-__nested_webpack_require_219205__.r(__nested_webpack_exports__);
+__nested_webpack_require_219431__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6703,12 +6717,12 @@ __nested_webpack_require_219205__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-__nested_webpack_require_219205__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_219205__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_219205__("./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_219205__("./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_219205__("./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_219205__("./src/scripts/components/header.js");
+__nested_webpack_require_219431__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_219431__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_219431__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_219431__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_219431__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_219431__("./src/scripts/components/header.js");
 
 
 
