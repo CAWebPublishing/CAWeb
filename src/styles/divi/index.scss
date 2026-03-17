@@ -1,19 +1,29 @@
 /* Divi Specific Overrides */
-@import "builder";
-@import "base";
-@import "icons";
+// if page was built using Divi
+&.divi-built{
 
-/* Divi modules only go in the #page-container */
-#page-container{ 
-
-    @import "modules/blurb";
-    @import "modules/button";
-    @import "modules/icon";
-    @import "modules/learn_more";
-    @import "modules/person";
-    @import "modules/slider";
-    @import "modules/tab";
-    @import "modules/text";
-    @import "modules/toggle";
-
+    @import "builder";
+    @import "base";
+    @import "icons";
+    
+    /* Divi modules only go in the #page-container */
+    #page-container{ 
+    
+        @import "modules/blurb";
+        @import "modules/button";
+        @import "modules/icon";
+        @import "modules/learn_more";
+        @import "modules/person";
+        @import "modules/slider";
+        @import "modules/tab";
+        @import "modules/text";
+        @import "modules/toggle";
+    
+    }
+}
+// remove the padding-top on #page-container when in mobile mode
+@media (max-width: 980px) {
+    #page-container{ 
+        padding-top: 0 !important;
+    }
 }

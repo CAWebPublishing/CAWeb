@@ -500,7 +500,7 @@ function caweb_enqueue_google_scripts( $localized ) {
 
 	// Google Translate.
 	if ( 'none' !== get_option( 'ca_google_trans_enabled', 'none' ) ) {
-		wp_enqueue_script( 'google-translate-caweb', 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', array(), CAWEB_VERSION, true );
+		wp_enqueue_script( 'google-translate-caweb', 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', array(), CAWEB_VERSION, array('in_footer' => true) );
 
 		wp_add_inline_script(
 			'google-translate-caweb',

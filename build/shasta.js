@@ -31,11 +31,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js":
-/***/ (function(module) {
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+(module) {
 
 /*!
-  * Bootstrap v5.3.6 (https://getbootstrap.com/)
+  * Bootstrap v5.3.8 (https://getbootstrap.com/)
   * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -682,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
    * Constants
    */
 
-  const VERSION = '5.3.6';
+  const VERSION = '5.3.8';
 
   /**
    * Class definition
@@ -3725,9 +3725,6 @@ __webpack_require__.r(__webpack_exports__);
       this._element.setAttribute('aria-expanded', 'false');
       Manipulator.removeDataAttribute(this._menu, 'popper');
       EventHandler.trigger(this._element, EVENT_HIDDEN$5, relatedTarget);
-
-      // Explicitly return focus to the trigger element
-      this._element.focus();
     }
     _getConfig(config) {
       config = super._getConfig(config);
@@ -4840,7 +4837,6 @@ __webpack_require__.r(__webpack_exports__);
    *
    * Shout-out to Angular https://github.com/angular/angular/blob/15.2.8/packages/core/src/sanitization/url_sanitizer.ts#L38
    */
-  // eslint-disable-next-line unicorn/better-regex
   const SAFE_URL_PATTERN = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i;
   const allowedAttribute = (attribute, allowedAttributeList) => {
     const attributeName = attribute.nodeName.toLowerCase();
@@ -5384,6 +5380,7 @@ __webpack_require__.r(__webpack_exports__);
         if (trigger === 'click') {
           EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, event => {
             const context = this._initializeOnDelegatedTarget(event);
+            context._activeTrigger[TRIGGER_CLICK] = !(context._isShown() && context._activeTrigger[TRIGGER_CLICK]);
             context.toggle();
           });
         } else if (trigger !== TRIGGER_MANUAL) {
@@ -6350,17 +6347,15 @@ __webpack_require__.r(__webpack_exports__);
 //# sourceMappingURL=bootstrap.bundle.js.map
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/external-link.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_207925__) => {
+/***/ "./src/scripts/components/external-link.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_207879__) {
 
 "use strict";
-__nested_webpack_require_207925__.r(__nested_webpack_exports__);
-//@ts-check
-
+__nested_webpack_require_207879__.r(__nested_webpack_exports__);
 /* EXTERNAL LINK ICON */
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   const ext = '<span class="ca-gov-icon-external-link" aria-hidden="true"></span><span class="sr-only">opens in a new window</span>';
 
   // Add any exceptions to not render here
@@ -6381,20 +6376,49 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/header.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_209063__) => {
+/***/ "./src/scripts/components/header.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_208980__) {
 
 "use strict";
-__nested_webpack_require_209063__.r(__nested_webpack_exports__);
-//@ts-check
-window.addEventListener('DOMContentLoaded', () => {
+__nested_webpack_require_208980__.r(__nested_webpack_exports__);
+window.addEventListener('load', () => {
   let location_hash = window.location.hash.replace(/(\|)/g, "\\$1");
   const header = document.querySelector('header');
-  const pageContainer = document.getElementById('page-container');
-  const alerts = document.querySelector('.alerts');
-  const utilityHeader = document.querySelector('.utility-header');
+  const alerts = header?.querySelector('.alerts');
+  const utilityHeader = header?.querySelector('.utility-header');
+
+  // array of elements that are compacted
+  const compactedElements = [alerts, utilityHeader].filter(Boolean);
+  const getCompactedElementsHeight = () => {
+    return compactedElements.reduce((total, element) => {
+      if (element instanceof HTMLElement) {
+        // only if the element is visible, we include its height in the total compacted elements height, otherwise we ignore it, since it won't affect the header's position when compacted.
+        if (window.getComputedStyle(element).display !== 'none') {
+          return total + element.clientHeight;
+        }
+      }
+      return total;
+    }, 0);
+  };
+  let compactedElementsHeight = getCompactedElementsHeight();
+
+  // resize observer function to watch if compacted elements change height, so we can update the compacted elements height when they change.
+  const clientHeightObserver = entries => {
+    for (const entry of entries) {
+      // update the compacted elements height when the compacted entry changes., which can happen when google translate loads and changes the height of the utility header or when items wrap
+      compactedElementsHeight = getCompactedElementsHeight();
+    }
+  };
+
+  // observe compacted elements for height changes, so we can update the compacted elements height when they change.
+  compactedElements.forEach(element => {
+    if (element instanceof HTMLElement) {
+      const observer = new ResizeObserver(clientHeightObserver);
+      observer.observe(element);
+    }
+  });
 
   // scroll to target
   if (location_hash) {
@@ -6402,81 +6426,84 @@ window.addEventListener('DOMContentLoaded', () => {
     let target = document.getElementById(location_hash.substring(1));
 
     // if the location hash is not empty, we scroll to the target element
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       target?.scrollIntoView({
         behavior: 'smooth'
       });
-    }, 1000);
+    });
   }
   if (!header) {
     return;
   }
+
+  // compact header on scroll
   const compactHeader = () => {
-    let scrollHeights = 0;
-
-    // lets collect the height of any elements above the header.
-    let current = header.previousElementSibling;
-    let miscElementHeights = 0;
-    while (current) {
-      // if current is a div, add its height to the miscElementHeights.
-      if ('DIV' === current.tagName) {
-        miscElementHeights += current.clientHeight;
-      }
-      current = current.previousElementSibling;
-    }
-
     // downscroll code passed the header height
     if (document.body.scrollTop >= header.offsetHeight || document.documentElement.scrollTop >= header.offsetHeight) {
-      // lets add the scroll heights of any alerts
-      if (alerts) {
-        scrollHeights += alerts.clientHeight;
-      }
-
-      // lets add the scroll heights of the utility header
-      if (utilityHeader) {
-        scrollHeights += utilityHeader.clientHeight;
-      }
-
-      // move the header up to the scroll height, minus any elements above the header
-      header.style.top = `-${scrollHeights - miscElementHeights}px`;
-
-      // we add the header height + misc element heights to the page container as margin-top, minus the scroll heights since those get hidden
-      if (pageContainer) {
-        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
-      }
+      // move the header up to hide the compacted elements height, minus the top offset.
+      header.style.top = `-${compactedElementsHeight}px`;
     } else {
       // reset header to initial position
-      header.style.top = `${miscElementHeights}px`;
-      if (pageContainer) {
-        pageContainer.style.marginTop = `${header.clientHeight + miscElementHeights}px`;
+      // we need to set the header's top to the offset.
+      if (header) {
+        header.style.top = 0;
       }
     }
+  };
 
+  // for each element with an id we add the scroll-margin-top
+  const updateScrollMarginTop = () => {
     // for each element with an id we add the scroll-margin-top
     document.querySelectorAll('#page-container [id]').forEach(element => {
       if (element instanceof HTMLElement) {
-        element.style.scrollMarginTop = `${header.clientHeight + miscElementHeights - scrollHeights}px`;
+        let scrollMarginHeight = header?.clientHeight;
+
+        // if the elements offsetTop is greater than twice the header size, 
+        // we can assume the header is compacted
+        // so we need to subtract the compacted elements height from the scroll margin.
+        if (element.offsetTop > scrollMarginHeight + scrollMarginHeight / 2) {
+          scrollMarginHeight -= compactedElementsHeight;
+        }
+        element.style.scrollMarginTop = `${scrollMarginHeight}px`;
       }
     });
   };
 
-  // reset position on scroll
+  // if there are alerts add a mutation observer to watch for changes in the alerts container, 
+  if (alerts) {
+    // so we can update the compacted elements height when an alert is closed or a new alert is added.
+    new MutationObserver((mutationList, observer) => {
+      compactedElementsHeight = getCompactedElementsHeight();
+      updateScrollMarginTop();
+    }).observe(alerts, {
+      attributes: true,
+      childList: true
+    });
+  }
+
+  // add scroll event listener to compact the header on scroll
   window.addEventListener('scroll', compactHeader);
+
+  // add scroll margin top to all elements with an id, so that when we scroll to them, they are not hidden behind the header.
+  updateScrollMarginTop();
+
+  // compact header on page load in case the page is loaded with a scroll position past the header height.
   compactHeader();
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/mobile-controls.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_212020__) => {
+/***/ "./src/scripts/components/mobile-controls.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213519__) {
 
 "use strict";
-__nested_webpack_require_212020__.r(__nested_webpack_exports__);
-window.addEventListener('DOMContentLoaded', () => {
+__nested_webpack_require_213519__.r(__nested_webpack_exports__);
+window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
   const mainHeader = document.querySelector('header');
   const mobileOverlay = mainHeader?.querySelector('.mobile-controlled.overlay');
+  const alerts = mainHeader?.querySelector('.alerts');
   const searchContainer = mainHeader?.querySelector('.search-container');
   const mainNav = mainHeader?.querySelector('.navigation');
   const mainNavUl = mainNav?.querySelector('.nav');
@@ -6504,6 +6531,11 @@ window.addEventListener('DOMContentLoaded', () => {
       if (searchContainer) {
         mainHeader.querySelector('.header-organization-banner')?.after(searchContainer);
       }
+
+      // alerts are always shown in desktop mode
+      if (alerts) {
+        alerts.classList.remove('d-none');
+      }
     } else {
       // if mobile menu is open
       if ('true' === toggleMenuCloseButton.getAttribute('aria-expanded')) {
@@ -6529,6 +6561,11 @@ window.addEventListener('DOMContentLoaded', () => {
           // navigation ul should render as a column
           mainNavUl?.classList.add('flex-column');
         }
+      }
+
+      // alerts are hidden in mobile mode
+      if (alerts) {
+        alerts.classList.add('d-none');
       }
     }
   };
@@ -6571,15 +6608,14 @@ window.addEventListener('DOMContentLoaded', () => {
   mobileCheck();
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./src/scripts/components/return-top.js":
-/***/ ((__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215759__) => {
+/***/ "./src/scripts/components/return-top.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217521__) {
 
 "use strict";
-__nested_webpack_require_215759__.r(__nested_webpack_exports__);
-//@ts-check
-window.addEventListener('DOMContentLoaded', () => {
+__nested_webpack_require_217521__.r(__nested_webpack_exports__);
+window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -6627,7 +6663,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -6635,7 +6671,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_217697__(moduleId) {
+/******/ 	function __nested_webpack_require_219431__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6649,7 +6685,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_217697__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_219431__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6659,7 +6695,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_217697__.r = (exports) => {
+/******/ 		__nested_webpack_require_219431__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6673,7 +6709,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-__nested_webpack_require_217697__.r(__nested_webpack_exports__);
+__nested_webpack_require_219431__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6681,12 +6717,12 @@ __nested_webpack_require_217697__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-__nested_webpack_require_217697__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_217697__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_217697__("./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_217697__("./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_217697__("./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_217697__("./src/scripts/components/header.js");
+__nested_webpack_require_219431__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_219431__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_219431__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_219431__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_219431__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_219431__("./src/scripts/components/header.js");
 
 
 

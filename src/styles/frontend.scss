@@ -7,26 +7,7 @@ body{
 
 	@import './custom/google';
 	
-	// if page was built using Divi
-	&.divi-built{
-		@import 'divi';
-	}
-
-	// mobile mode menu is hidden behind the wordpress admin bar when logged in
-	&.admin-bar{
-		// mobile devices
-		@media (max-width: 768px) {
-			header .navigation-search{
-				top: 46px
-			}
-		}
-		// tablet devices
-		@media (max-width: 991px) {
-			header .navigation-search{
-				top: 32px
-			}
-		}
-	}
+	@import 'divi';
 	
     // SERP Template Overrides
     &.page-template-searchpage{
@@ -58,4 +39,4 @@ body{
 @import 'a11y';
 
 // Add CAWeb Icon Library 
-@import '@caweb/icon-library/build/font-only.css';
+// @import '@caweb/icon-library/build/font-only.css';
