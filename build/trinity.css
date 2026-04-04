@@ -15932,6 +15932,15 @@ header.global-header .mobile-controlled.overlay {
   header.global-header .mobile-controlled .navigation .container .nav-item .link-description {
     color: #fff !important;
   }
+  header.global-header .mobile-controlled .navigation .container .megadropdown .submenu {
+    flex-direction: column;
+  }
+  header.global-header .mobile-controlled .navigation .container .megadropdown .submenu .dropdown-item > img, header.global-header .mobile-controlled .navigation .container .megadropdown .submenu .dropdown-item > span {
+    display: none;
+  }
+  header.global-header .mobile-controlled .navigation .container .megadropdown .submenu .dropdown-item div span {
+    font-size: var(--bs-nav-link-font-size, 1rem) !important;
+  }
 }
 @media (max-width: 992px) {
   footer.global-footer a {
@@ -16008,6 +16017,37 @@ header.global-header .navigation .container .nav-item .dropdown-menu.show {
 header.global-header .navigation .container .nav-item .dropdown-menu .link-description {
   color: var(--bs-gray-700, #5e5e6a);
   font-size: 0.85rem;
+}
+header.global-header .navigation .container .megadropdown .dropdown-menu.show {
+  width: 100% !important;
+  overflow: visible;
+}
+header.global-header .navigation .container .megadropdown .dropdown-menu.show .submenu {
+  display: flex;
+  align-items: flex-end;
+}
+header.global-header .navigation .container .megadropdown .dropdown-menu.show .submenu .dropdown-item.with-media-left > span, header.global-header .navigation .container .megadropdown .dropdown-menu.show .submenu .dropdown-item.with-media-left > img {
+  margin-right: 10px;
+  float: left;
+}
+header.global-header .navigation .container .megadropdown .dropdown-menu.show .submenu .dropdown-item img {
+  width: 75px;
+  height: 75px;
+}
+@media (min-width: 992px) {
+  header.global-header .navigation .container .megadropdown .dropdown-menu.show {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  header.global-header .navigation .container .megadropdown .dropdown-menu.show {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  header.global-header .navigation .container .megadropdown .dropdown-menu.show {
+    max-width: 1320px;
+  }
 }
 /* -----------------------------------------
    RETURN TO TOP

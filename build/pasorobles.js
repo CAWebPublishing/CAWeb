@@ -6402,23 +6402,76 @@ window.addEventListener('load', () => {
       return total;
     }, 0);
   };
-  let compactedElementsHeight = getCompactedElementsHeight();
 
-  // resize observer function to watch if compacted elements change height, so we can update the compacted elements height when they change.
+  // get the total height of all elements above the header with a fixed position.
+  const getTopOffset = () => {
+    let current = header;
+    let offset = 0;
+    while (current) {
+      // if current element has a fixed position, add its height to the topOffset.
+      if (current instanceof HTMLElement && window.getComputedStyle(current).position === 'fixed') {
+        offset += current.clientHeight;
+      }
+      current = current.previousElementSibling;
+    }
+    return offset;
+  };
+  let compactedElementsHeight = getCompactedElementsHeight();
+  let topOffset = getTopOffset();
+
+  // resize observer function to watch if compacted elements were resized, 
+  // so we can update variables when they change.
+  let observedElements = [];
   const clientHeightObserver = entries => {
-    for (const entry of entries) {
-      // update the compacted elements height when the compacted entry changes., which can happen when google translate loads and changes the height of the utility header or when items wrap
+    let hasChanges = false;
+
+    // The callback receives an array of entries, one for each element that resized
+    for (let entry of entries) {
+      // we check if the entry was already saved once
+      if (entry.target.dataset.observer) {
+        let previousEntryIndex = observedElements.findIndex(observedEntry => observedEntry.target.dataset.observer === entry.target.dataset.observer);
+        let previousEntry = observedElements[previousEntryIndex];
+        let previousHeight = previousEntry instanceof ResizeObserverEntry ? previousEntry.contentBoxSize[0].blockSize : previousEntry.target.style.height;
+        let currentHeight = entry instanceof ResizeObserverEntry ? entry.contentBoxSize[0].blockSize : entry.target.style.height;
+
+        // if the entry's height has changed, we set hasChanges to true, so we can update the compacted elements height and top offset.
+        if (previousHeight !== currentHeight) {
+          observedElements[previousEntryIndex] = entry;
+          hasChanges = true;
+        }
+      } else {
+        // if not, we save the entry in a data attribute, so we can identify it in future callbacks and avoid unnecessary calculations when an entry changes.
+        entry.target.dataset.observer = crypto.randomUUID();
+
+        // save the entry
+        observedElements.push(entry);
+      }
+    }
+
+    // if changes detected, we perform updates
+    if (hasChanges) {
+      topOffset = getTopOffset();
       compactedElementsHeight = getCompactedElementsHeight();
+      updateScrollMarginTop();
+      compactHeader();
     }
   };
 
   // observe compacted elements for height changes, so we can update the compacted elements height when they change.
   compactedElements.forEach(element => {
     if (element instanceof HTMLElement) {
-      const observer = new ResizeObserver(clientHeightObserver);
-      observer.observe(element);
+      // we add a data-observer attribute to the element, so we can identify it in the callback and avoid unnecessary calculations when an entry changes.
+      new ResizeObserver(clientHeightObserver).observe(element);
     }
   });
+  let current = header;
+  while (current) {
+    // if current element has a fixed position add a resize observer
+    if (current instanceof HTMLElement && window.getComputedStyle(current).position === 'fixed') {
+      new ResizeObserver(clientHeightObserver).observe(current);
+    }
+    current = current.previousElementSibling;
+  }
 
   // scroll to target
   if (location_hash) {
@@ -6441,12 +6494,12 @@ window.addEventListener('load', () => {
     // downscroll code passed the header height
     if (document.body.scrollTop >= header.offsetHeight || document.documentElement.scrollTop >= header.offsetHeight) {
       // move the header up to hide the compacted elements height, minus the top offset.
-      header.style.top = `-${compactedElementsHeight}px`;
+      header.style.top = `-${compactedElementsHeight - topOffset}px`;
     } else {
       // reset header to initial position
       // we need to set the header's top to the offset.
       if (header) {
-        header.style.top = 0;
+        header.style.top = `${topOffset}px`;
       }
     }
   };
@@ -6464,18 +6517,16 @@ window.addEventListener('load', () => {
         if (element.offsetTop > scrollMarginHeight + scrollMarginHeight / 2) {
           scrollMarginHeight -= compactedElementsHeight;
         }
-        element.style.scrollMarginTop = `${scrollMarginHeight}px`;
+        element.style.scrollMarginTop = `${scrollMarginHeight + topOffset}px`;
       }
     });
   };
 
-  // if there are alerts add a mutation observer to watch for changes in the alerts container, 
+  // if there are alerts add a mutation observer to watch for changes in the alerts
   if (alerts) {
-    // so we can update the compacted elements height when an alert is closed or a new alert is added.
-    new MutationObserver((mutationList, observer) => {
-      compactedElementsHeight = getCompactedElementsHeight();
-      updateScrollMarginTop();
-    }).observe(alerts, {
+    // so we can update the compacted elements height when an alert is closed or 
+    // when entering mobile ( class .d-none is added/removed).
+    new MutationObserver(clientHeightObserver).observe(alerts, {
       attributes: true,
       childList: true
     });
@@ -6494,10 +6545,10 @@ window.addEventListener('load', () => {
 /***/ },
 
 /***/ "./src/scripts/components/mobile-controls.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_213519__) {
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_215745__) {
 
 "use strict";
-__nested_webpack_require_213519__.r(__nested_webpack_exports__);
+__nested_webpack_require_215745__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   const isDesktopWidth = () => window.innerWidth > 992; //Maximum px for mobile width
 
@@ -6610,11 +6661,47 @@ window.addEventListener('load', () => {
 
 /***/ },
 
-/***/ "./src/scripts/components/return-top.js"
-(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_217521__) {
+/***/ "./src/scripts/components/navigation.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_219747__) {
 
 "use strict";
-__nested_webpack_require_217521__.r(__nested_webpack_exports__);
+__nested_webpack_require_219747__.r(__nested_webpack_exports__);
+window.addEventListener('load', () => {
+  document.querySelectorAll('header .nav.megadropdown .dropdown').forEach((element, i) => {
+    element.addEventListener('shown.bs.dropdown', async event => {
+      let dropdown = bootstrap.Dropdown.getInstance(event.srcElement);
+      if (dropdown && dropdown._popper) {
+        await dropdown._popper.setOptions({
+          modifiers: [{
+            name: "offset",
+            options: {
+              offset: ({
+                placement,
+                reference,
+                popper
+              }) => {
+                if ('bottom-start' !== placement) {
+                  return [0, 0];
+                }
+                let reset = 0 - reference.x; // reset spacing back to 0;
+                let availableSpace = document.documentElement.clientWidth - popper.width;
+                return [reset + availableSpace / 2, 0];
+              }
+            }
+          }]
+        });
+      }
+    });
+  });
+});
+
+/***/ },
+
+/***/ "./src/scripts/components/return-top.js"
+(__unused_webpack___webpack_module__, __nested_webpack_exports__, __nested_webpack_require_220904__) {
+
+"use strict";
+__nested_webpack_require_220904__.r(__nested_webpack_exports__);
 window.addEventListener('load', () => {
   document.querySelectorAll('.return-top').forEach(returnTop => returnTop.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
@@ -6671,7 +6758,7 @@ window.addEventListener('load', () => {
 /******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_219431__(moduleId) {
+/******/ 	function __nested_webpack_require_222814__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -6685,7 +6772,7 @@ window.addEventListener('load', () => {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_219431__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_222814__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -6695,7 +6782,7 @@ window.addEventListener('load', () => {
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_219431__.r = (exports) => {
+/******/ 		__nested_webpack_require_222814__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -6709,7 +6796,7 @@ var __nested_webpack_exports__ = {};
 (() => {
 "use strict";
 var __nested_webpack_exports__ = {};
-__nested_webpack_require_219431__.r(__nested_webpack_exports__);
+__nested_webpack_require_222814__.r(__nested_webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 })();
@@ -6717,12 +6804,15 @@ __nested_webpack_require_219431__.r(__nested_webpack_exports__);
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-__nested_webpack_require_219431__.r(__nested_webpack_exports__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_219431__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_219431__("./src/scripts/components/mobile-controls.js");
-/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_219431__("./src/scripts/components/return-top.js");
-/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_219431__("./src/scripts/components/external-link.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_219431__("./src/scripts/components/header.js");
+__nested_webpack_require_222814__.r(__nested_webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_222814__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var _components_mobile_controls_js__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_222814__("./src/scripts/components/mobile-controls.js");
+/* harmony import */ var _components_return_top_js__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_222814__("./src/scripts/components/return-top.js");
+/* harmony import */ var _components_external_link_js__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_222814__("./src/scripts/components/external-link.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_222814__("./src/scripts/components/header.js");
+/* harmony import */ var _components_navigation_js__WEBPACK_IMPORTED_MODULE_5__ = __nested_webpack_require_222814__("./src/scripts/components/navigation.js");
+
+window.bootstrap = bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__;
 
 
 
