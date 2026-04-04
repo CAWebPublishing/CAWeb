@@ -1,3 +1,8 @@
+v1.13.5
+- Added Mega Drop navigation menu back
+- Fixed issue with navigation menu styles
+- Advanced Menu Screen Options are now hidden
+
 v1.13.4
 - Removed Show in Header option from Social Media Links
 - Removed unneeded classes from alert

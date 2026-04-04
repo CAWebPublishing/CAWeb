@@ -17,11 +17,11 @@ body.admin-bar {
         }
     }
 
-    header.global-header{
-        padding-top: var( --wp-admin--admin-bar--height, 32px );
-        
-        & .mobile-controlled.overlay {
-            margin-top: var( --wp-admin--admin-bar--height, 32px );
-        }
+    header.global-header .mobile-controlled.overlay{
+        margin-top: var( --wp-admin--admin-bar--height, 32px );
+    }
+
+    #page-container {
+        padding-top: var(--wp-admin--admin-bar--height, 32px) !important;
     }
 }
