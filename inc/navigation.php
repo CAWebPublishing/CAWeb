@@ -16,7 +16,40 @@ add_filter( 'widget_nav_menu_args', 'caweb_widget_nav_menu_args', 10, 4 );
 
 add_action( 'wp_nav_menu_item_custom_fields', 'caweb_nav_menu_item_custom_fields', 9, 4 );
 add_action( 'wp_update_nav_menu_item', 'caweb_update_nav_menu_item', 10, 3 );
+// add_action( 'admin_footer', 'caweb_nav_menu_icon_modal' );
+add_action( 'admin_footer-nav-menus.php', 'caweb_nav_menu_icon_modal' );
 
+
+function caweb_nav_menu_icon_modal() {
+	?>
+	<div id="caweb-icon-menu-modal" class="modal fade" tabindex="-1" aria-hidden="true" aria-modal="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Select an Icon</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>													
+				<div class="modal-body">
+					<?php
+						print wp_kses(
+							caweb_icon_menu(
+								array(
+									'name'   => 'nav-menu-icon-selector',
+								)
+							),
+							'post'
+						);
+					?>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-bs-save="modal">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}
 /**
  * Filters the HTML content for navigation menus.
  *
@@ -83,7 +116,7 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 	$mega_menu_row              = isset( $tmp['_caweb_menu_mega_row'][0] ) ? $tmp['_caweb_menu_mega_row'][0] : false;
 	$mega_menu_border           = isset( $tmp['_caweb_menu_mega_border'][0] ) ? $tmp['_caweb_menu_mega_border'][0] : false;
 	$nav_media_alignment       = isset( $tmp['_caweb_menu_media_alignment'][0] ) ? $tmp['_caweb_menu_media_alignment'][0] : 'left';
-	$nav_media_type 			= isset( $tmp['_caweb_menu_media_type'][0] ) ? $tmp['_caweb_menu_media_type'][0] : 'icon';
+	$nav_media_type 			= isset( $tmp['_caweb_menu_media_type'][0] ) ? $tmp['_caweb_menu_media_type'][0] : 'none';
 	$nav_media_img             = isset( $tmp['_caweb_menu_media_image'][0] ) ? $tmp['_caweb_menu_media_image'][0] : '';
 	$nav_media_image_alt_text  = isset( $tmp['_caweb_menu_media_image_alt_text'][0] ) && ! empty( $tmp['_caweb_menu_media_image_alt_text'][0] ) ? $tmp['_caweb_menu_media_image_alt_text'][0] : '';
 	$icon                      = isset( $tmp['_caweb_menu_icon'][0] ) && ! empty( $tmp['_caweb_menu_icon'][0] ) ? $tmp['_caweb_menu_icon'][0] : '';
@@ -91,20 +124,8 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 	$is_mega = 'megadropdown' === get_option( 'ca_default_navigation_menu', 'singlelevel' );
 
 	// unit 3 is only for mega menus, fallback to unit 2.
-	$unit_size = 'unit3' === $unit_size && ! $is_mega ? 'unit2' : $unit_size;
+	// $unit_size = 'unit3' === $unit_size && ! $is_mega ? 'unit2' : $unit_size;
 	
-	?>
-		<p class="description description-wide">
-			<label for="field-unit-size-selector-<?php print esc_attr( $item_id ); ?>">Select a height for the navigation item</label>
-			<select name="<?php print esc_attr( $item_id ); ?>_unit_size" class="field-unit-size-selector" id="field-unit-size-selector-<?php print esc_attr( $item_id ); ?>">
-				<option value="unit1"<?php print 'unit1' === $unit_size ? ' selected' : ''; ?>>Unit 1 - 50px height</option>
-				<option value="unit2"<?php print 'unit2' === $unit_size ? ' selected' : ''; ?>>Unit 2 - 100px height</option>
-				<?php if ( $is_mega ) : ?>
-					<option value="unit3"<?php print 'unit3' === $unit_size ? ' selected' : ''; ?>>Unit 3 - 100px height w/ Image</option>
-				<?php endif; ?>
-			</select>
-		</p>
-	<?php
 	if( $is_mega ) :
 	?>
 		<div class="megamenu-description-group">
@@ -143,6 +164,12 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 			<p class="mb-0">Type</p>
 			<div class="d-flex">
 				<p class="description description-wide flex-grow-1">
+					<label for="media-type-none-<?php print esc_attr( $item_id ); ?>" class="cursor-pointer">
+						<input type="radio" name="<?php print esc_attr( $item_id ); ?>_media_type" id="media-type-none-<?php print esc_attr( $item_id ); ?>" value="none"<?php print 'none' === $nav_media_type ? ' checked' : ''; ?> class="field-media-type-selector"/> 
+						None
+					</label>
+				</p>
+				<p class="description description-wide flex-grow-1">
 					<label for="media-type-icon-<?php print esc_attr( $item_id ); ?>" class="cursor-pointer">
 						<input type="radio" name="<?php print esc_attr( $item_id ); ?>_media_type" id="media-type-icon-<?php print esc_attr( $item_id ); ?>" value="icon"<?php print 'icon' === $nav_media_type ? ' checked' : ''; ?> class="field-media-type-selector"/> 
 						Icon
@@ -157,18 +184,10 @@ function caweb_nav_menu_item_custom_fields( $item_id, $item, $depth, $args ) {
 			</div>
 
 			<div class="field-icon-selector<?php print 'icon' === $nav_media_type ? '' : ' hidden-field'; ?>">
-				<?php
-					print wp_kses(
-						caweb_icon_menu(
-							array(
-								'select' => $icon,
-								'name'   => "{$item_id}_icon",
-								'header' => 'Select an Icon',
-							)
-						),
-						'post'
-					);
-				?>
+				<div class="input-group">
+					<input readonly name="<?php print esc_attr( $item_id ); ?>_icon" id="icon-<?php print esc_attr( $item_id ); ?>" type="text" class="form-control" value="<?php print esc_attr( $icon ); ?>" />
+					<button type="button" class="btn btn-outline-secondary" data-icon="<?php print esc_attr( $item_id ); ?>_icon" data-bs-toggle="modal" data-bs-target="#caweb-icon-menu-modal">Browse</button>
+				</div>
 			</div>
 			<div class="field-image-selector<?php print 'image' === $nav_media_type ? '' : ' hidden-field'; ?>">
 				<label for="media-image-<?php print esc_attr( $item_id ); ?>">Select an Image</label>
@@ -201,7 +220,7 @@ function caweb_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
 
 	/* Check if element is properly sent */
 	if ( $verified && isset( $_POST['menu-item-db-id'] ) ) {
-		$unit_size = isset( $_POST[ "{$menu_item_db_id}_unit_size" ] ) ? sanitize_text_field( wp_unslash( $_POST[ "{$menu_item_db_id}_unit_size" ] ) ) : 'unit1';
+		// $unit_size = isset( $_POST[ "{$menu_item_db_id}_unit_size" ] ) ? sanitize_text_field( wp_unslash( $_POST[ "{$menu_item_db_id}_unit_size" ] ) ) : 'unit1';
 		$mega_menu_row = isset( $_POST[ "{$menu_item_db_id}_mega_row" ] ) ? sanitize_text_field( wp_unslash( $_POST[ "{$menu_item_db_id}_mega_row" ] ) ) : false;
 		$mega_menu_border = isset( $_POST[ "{$menu_item_db_id}_mega_border" ] ) ? sanitize_text_field( wp_unslash( $_POST[ "{$menu_item_db_id}_mega_border" ] ) ) : false;
 		$nav_media_alignment       = isset( $_POST["{$menu_item_db_id}_media_alignment"] ) ? sanitize_text_field( wp_unslash( $_POST["{$menu_item_db_id}_media_alignment"] ) ) : 'left';
@@ -210,7 +229,7 @@ function caweb_update_nav_menu_item( $menu_id, $menu_item_db_id, $args ) {
 		$nav_media_image_alt_text       = isset( $_POST["{$menu_item_db_id}_media_image_alt_text"] ) ? sanitize_text_field( wp_unslash( $_POST["{$menu_item_db_id}_media_image_alt_text"] ) ) : '';
 		$icon       = isset( $_POST["{$menu_item_db_id}_icon"] ) ? sanitize_text_field( wp_unslash( $_POST["{$menu_item_db_id}_icon"] ) ) : '';
 		
-		update_post_meta( $menu_item_db_id, '_caweb_menu_unit_size', $unit_size );
+		// update_post_meta( $menu_item_db_id, '_caweb_menu_unit_size', $unit_size );
 		update_post_meta( $menu_item_db_id, '_caweb_menu_mega_row', $mega_menu_row );
 		update_post_meta( $menu_item_db_id, '_caweb_menu_mega_border', $mega_menu_border );
 		update_post_meta( $menu_item_db_id, '_caweb_menu_media_alignment', $nav_media_alignment );

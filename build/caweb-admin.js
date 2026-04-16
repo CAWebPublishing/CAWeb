@@ -6645,30 +6645,91 @@ jQuery(document).ready(function ($) {
 () {
 
 /* CAWeb Icon Menu Javascript */
-jQuery(document).ready(function ($) {
-  $(document).on('click', '.caweb-icon-menu li', function (e) {
-    cawebIconSelected(this);
-  });
-  $(document).on('click', '.caweb-icon-menu-header .reset-icon', function (e) {
-    resetIconSelect($(this).parent().next());
-  });
-  function cawebIconSelected(iconLi) {
-    resetIconSelect($(iconLi).parent());
-    $(iconLi).addClass('active');
-    var i = $(iconLi).parent().find('input');
-    if (i.length) {
-      $(i).val($(iconLi).attr('title'));
+window.addEventListener('load', () => {
+  // Get the icon menu modal element
+  let iconMenuModal = document.getElementById('caweb-icon-menu-modal');
+  let iconMenus = document.querySelectorAll('.caweb-icon-menu');
+
+  // get the input value from the icon menu
+  const getSelectedIcon = iconMenu => {
+    // get the input value from the icon menu.
+    let selectedIcon = iconMenu.querySelector('input').value;
+
+    // return the selected icon value
+    return selectedIcon;
+  };
+
+  // reset the icon menu selection
+  const resetIcon = iconMenu => {
+    let iconList = iconMenu.querySelectorAll('li');
+    let iconInput = iconMenu.querySelector('input');
+    iconList.forEach(li => {
+      li.classList.remove('active');
+    });
+    iconInput.value = '';
+  };
+  const selectIcon = iconLi => {
+    resetIcon(iconLi.parentElement);
+    iconLi.classList.add('active');
+    let iconInput = iconLi.parentElement.querySelector('input');
+    if (iconInput) {
+      iconInput.value = iconLi.getAttribute('title');
     }
+  };
+
+  // attach functionality to the icon menus
+  if (iconMenus) {
+    iconMenus.forEach(menu => {
+      menu.getSelectedIcon = () => getSelectedIcon(menu);
+      menu.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', e => {
+          selectIcon(li);
+        });
+      });
+      menu.parentElement.querySelectorAll('.reset-icon').forEach(resetButton => {
+        resetButton.addEventListener('click', e => {
+          resetIcon(menu);
+        });
+      });
+    });
   }
-  function resetIconSelect(iconList) {
-    var icon_list = $(iconList).find('LI');
-    for (o = 0; o < icon_list.length - 1; o++) {
-      $(icon_list[o]).removeClass('active');
-    }
-    var i = $(iconList).find('input');
-    if (i.length) {
-      $(i).val('');
-    }
+
+  // if the icon menu modal exists, add event listener to the save button	
+  if (iconMenuModal) {
+    // modal save button 
+    let saveButton = iconMenuModal.querySelector('[data-bs-save="modal"]');
+
+    // Get the icon menu element used inside the modal for selecting icons
+    iconMenus = iconMenuModal.querySelector('.caweb-icon-menu');
+
+    // modal show event listener 
+    iconMenuModal.addEventListener('show.bs.modal', e => {
+      // the modal may be triggered by multiple buttons, 
+      // so we need to get the data-icon attribute from the relatedTarget and assign it to the modal's dataset for use when saving
+      iconMenuModal.dataset.icon = e.relatedTarget.dataset.icon;
+    });
+
+    // modal save button click event listener
+    saveButton.addEventListener('click', e => {
+      // Get the data-icon attribute from the modal's dataset to know which input to update with the selected icon value
+      let inputId = iconMenuModal.dataset.icon;
+      let inputElement = document.querySelector(`[name="${inputId}"]`);
+
+      // Update the input value with the selected icon value
+      if (inputElement) {
+        // Get the selected icon from the icon menu 
+        inputElement.value = getSelectedIcon(iconMenus);
+      }
+
+      // close the modal after saving	
+      let modal = bootstrap.Modal.getInstance(iconMenuModal);
+      modal.hide();
+
+      // give the focus back to the button that triggered the modal after saving
+      document.querySelector(`[data-icon="${inputId}"]`).focus({
+        focusVisible: true
+      });
+    });
   }
 });
 
@@ -6678,146 +6739,167 @@ jQuery(document).ready(function ($) {
 () {
 
 /* nav-menus.php Javascript  */
-jQuery(document).ready(function ($) {
-  "use strict";
-
-  // // Alt Text Check 
-  // $(document).on('click', 'input[name="save_menu"]', function(e){
-  //   var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
-
-  //   nav_menu_alt_texts.each(function(i,ele) {
-  // 	  if( "" === $(ele).val().trim() ){
-  //       var menu_id = $(ele).attr('id').substring(0, $(ele).attr('id').indexOf("_") );
-  // 		  var title = $("#edit-menu-item-title-" + menu_id).val();
-  // 		  alert(title + " Navigation Media Image Alt Text can not be blank.")
-  // 		  e.preventDefault();
-  // 	  }
-  //   });
-
-  // });
-
-  // Unit Size Selector
-  $(document).on('change', '.field-unit-size-selector', function () {
-    let menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
-    let unit_size = $(this).val();
-    let desc = $(`#menu-item-${menu_id}`).find('.field-description');
-    let megamenu_options = $(`#menu-item-${menu_id}`).find('.megamenu-description-group');
-    switch (unit_size) {
-      case 'unit1':
-        // Hide Description
-        $(desc).addClass('hidden-field');
-
-        // Hide Megamenu Options
-        $(megamenu_options).addClass('hidden-field');
-        break;
-      case 'unit2':
-        // Show Description
-        $(desc).removeClass('hidden-field');
-
-        // Hide Megamenu Options
-        $(megamenu_options).addClass('hidden-field');
-        break;
-      case 'unit3':
-        // Show Description
-        $(desc).removeClass('hidden-field');
-
-        // Show Megamenu Options
-        $(megamenu_options).removeClass('hidden-field');
-        break;
-    }
-  });
-
-  // Media Type Selector
-  $(document).on('change', '.field-media-type-selector', function () {
-    let menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
-    let media_type = $(this).val();
-    let icon_options = $(`#menu-item-${menu_id}`).find('.field-icon-selector');
-    let image_options = $(`#menu-item-${menu_id}`).find('.field-image-selector');
-    if ('icon' === media_type) {
-      // Show Icon Options
-      $(icon_options).removeClass('hidden-field');
-
-      // Hide Image Options
-      $(image_options).addClass('hidden-field');
-    } else if ('image' === media_type) {
-      // Show Image Options
-      $(image_options).removeClass('hidden-field');
-
-      // Hide Icon Options
-      $(icon_options).addClass('hidden-field');
-    }
-  });
-
-  // if the menu tree has been modified
-  new MutationObserver(menuEdit => {
-    // array of entries
-    for (let entry of menuEdit) {
-      // if a new menu item has been added
-      if (entry.addedNodes.length) {
-        // get the .item-edit element of the new menu item
-        let itemEdit = entry.addedNodes[0].querySelector('.item-edit');
-        if (entry.addedNodes[0].classList.contains('pending')) {
-          // attach click event to the .item-edit element of the new menu item, so when it's clicked, it will toggle available options based on menu item selection
-          $(itemEdit).on('click', nav_menu_edit_options);
-        } else {
-          // simulate clicking the .item-edit element of the new menu item, so it will toggle available options based on menu item selection case the menu items are dragged while in an open state.
-          nav_menu_edit_options.call(itemEdit);
-        }
-      }
-    }
-  }).observe($('#menu-to-edit')[0], {
-    childList: true
-  });
-
-  // if menu item option is clicked, toggle available options based on menu item selection
-  $('.item-edit').on('click', nav_menu_edit_options);
+window.addEventListener('load', () => {
+  let menuToEdit = document.getElementById('menu-to-edit');
 
   // Toggles available options based on menu item selection
-  function nav_menu_edit_options() {
-    let menu_id = null !== this && this.hasAttribute('id') ? $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1) : undefined;
-    let menu_li = $(`#menu-item-${menu_id}`);
-    if ($(menu_li).hasClass('menu-item-edit-active') || !menu_id) {
+  const nav_menu_edit_options = itemEdit => {
+    let menu_id = itemEdit && itemEdit.hasAttribute('id') ? itemEdit.getAttribute('id').substr(itemEdit.getAttribute('id').lastIndexOf('-') + 1) : undefined;
+    let menu_li = document.getElementById(`menu-item-${menu_id}`);
+
+    // if( menu_li.classList.contains('menu-item-edit-active') || ! menu_id ){
+    if (!menu_id) {
       return;
     }
 
     // top level items are depth 0
-    let is_top_level = $(menu_li).hasClass('menu-item-depth-0');
+    let is_top_level = menu_li.classList.contains('menu-item-depth-0');
     let always_allowed_options = [
     // the Title Attribute
-    ...$(menu_li).find('.field-title-attribute'),
+    menu_li.querySelector('.field-title-attribute'),
     // the Link Target
-    ...$(menu_li).find('.field-link-target'),
+    menu_li.querySelector('.field-link-target'),
     // description groups are always allowed
     // by default this is the CSS Classes and Link Relationship groups
     // and the Field Move Groups
-    ...$(menu_li).find('.description-group .description')].filter(Boolean);
-    let description = $(menu_li).find('.field-description');
-    let unit_size_selector = $(menu_li).find('.field-unit-size-selector');
-    let unit_size = $(unit_size_selector).val();
-    // let unit_size = $(unit_size_selector).find('select').val();
-    let megamenu_options = $(menu_li).find('.megamenu-description-group');
+    ...menu_li.querySelectorAll('.description-group .description')].filter(Boolean);
+    let description = menu_li.querySelector('.field-description');
+
+    // // let unit_size_selector = $(menu_li).find('.field-unit-size-selector');
+    // // let unit_size = $(unit_size_selector).val();
+    // // let unit_size = $(unit_size_selector).find('select').val();
+    let megamenu_options = menu_li.querySelector('.megamenu-description-group');
 
     // these fields are always visible
-    $(always_allowed_options).each(function (g, ele) {
-      $(ele).removeClass('hidden-field');
+    always_allowed_options.forEach(ele => {
+      ele.classList.remove('hidden-field');
     });
 
     // Description is only allowed for non top level menu items and if unit size is not 'unit1'
-    $(description)[!is_top_level && 'unit1' !== unit_size ? 'removeClass' : 'addClass']('hidden-field');
+    description.classList[!is_top_level ? 'remove' : 'add']('hidden-field');
 
-    // Unit Selector is only allowed for non top level menu items
-    $(unit_size_selector)[is_top_level ? 'addClass' : 'removeClass']('hidden-field');
+    // // Unit Selector is only allowed for non top level menu items
+    // // $(unit_size_selector)[is_top_level ? 'addClass' : 'removeClass']('hidden-field');
 
-    // Megamenu options are only allowed if unit size is 'unit3'
-    if ('unit3' === unit_size) {
-      let media_type = $(megamenu_options).find(`[name="${menu_id}_media_type"]`).val();
-      console.log(media_type);
-      $(megamenu_options).removeClass('hidden-field');
-    } else {
-      $(megamenu_options).addClass('hidden-field');
+    // Megamenu options are only allowed for non top level menu items
+    // if( 'unit3' === unit_size ){
+    if (megamenu_options) {
+      megamenu_options.classList[megamenu_options && !is_top_level ? 'remove' : 'add']('hidden-field');
     }
+  };
+  const media_type_selection = selector => {
+    let menu_id = selector.getAttribute('id').substr(selector.getAttribute('id').lastIndexOf('-') + 1);
+    let media_type = selector.value;
+    let icon_options = document.querySelector(`#menu-item-${menu_id} .field-icon-selector`);
+    let image_options = document.querySelector(`#menu-item-${menu_id} .field-image-selector`);
+    if ('icon' === media_type) {
+      // Show Icon Options
+      icon_options.classList.remove('hidden-field');
+
+      // Hide Image Options
+      image_options.classList.add('hidden-field');
+    } else if ('image' === media_type) {
+      // Show Image Options
+      image_options.classList.remove('hidden-field');
+
+      // Hide Icon Options
+      icon_options.classList.add('hidden-field');
+    } else {
+      // Hide all media options
+      icon_options.classList.add('hidden-field');
+      image_options.classList.add('hidden-field');
+    }
+  };
+
+  // Toggles available media options based on menu item selection 
+
+  // if the menu tree exists, attach functionality to show/hide menu item options based on menu item selection
+  if (menuToEdit) {
+    // if menu item option is clicked, toggle available options based on menu item selection
+    menuToEdit.querySelectorAll('.item-edit').forEach(itemEdit => {
+      itemEdit.addEventListener('click', () => nav_menu_edit_options(itemEdit));
+    });
+    menuToEdit.querySelectorAll('.field-media-type-selector').forEach(selector => {
+      selector.addEventListener('change', () => media_type_selection(selector));
+    });
+    new MutationObserver(menuEdit => {
+      // array of entries
+      for (let entry of menuEdit) {
+        // if a new menu item has been added
+        if (entry.addedNodes.length) {
+          // get the .item-edit element of the new menu item
+          let itemEdit = entry.addedNodes[0].querySelector('.item-edit');
+          if (entry.addedNodes[0].classList.contains('pending') && !itemEdit.hasClickListener) {
+            let mediaTypeSelector = entry.addedNodes[0].querySelectorAll('.field-media-type-selector');
+
+            // attach click event to the .item-edit element of the new menu item, so when it's clicked, it will toggle available options based on menu item selection
+            itemEdit.addEventListener('click', () => nav_menu_edit_options(itemEdit));
+            itemEdit.hasClickListener = true;
+            if (mediaTypeSelector) {
+              mediaTypeSelector.forEach(selector => {
+                selector.addEventListener('change', () => media_type_selection(selector));
+              });
+            }
+
+            // menu item is being moved while active
+          } else if (itemEdit && entry.addedNodes[0].classList.contains('menu-item-edit-active')) {
+            // reset the state of the menu item options, 
+            nav_menu_edit_options(itemEdit);
+          }
+        }
+      }
+    }).observe(menuToEdit, {
+      childList: true
+    });
   }
 });
+
+// // Alt Text Check 
+// $(document).on('click', 'input[name="save_menu"]', function(e){
+//   var nav_menu_alt_texts = $('.media-image:not(.hidden) input[name$="_caweb_nav_media_image_alt_text"]');
+
+//   nav_menu_alt_texts.each(function(i,ele) {
+// 	  if( "" === $(ele).val().trim() ){
+//       var menu_id = $(ele).attr('id').substring(0, $(ele).attr('id').indexOf("_") );
+// 		  var title = $("#edit-menu-item-title-" + menu_id).val();
+// 		  alert(title + " Navigation Media Image Alt Text can not be blank.")
+// 		  e.preventDefault();
+// 	  }
+//   });
+
+// });
+
+// Unit Size Selector
+// $(document).on('change', '.field-unit-size-selector', function(){
+//   let menu_id = $(this).attr('id').substr($(this).attr('id').lastIndexOf('-') + 1);
+//   let unit_size = $(this).val();
+//   let desc = $( `#menu-item-${menu_id}` ).find('.field-description');
+//   let megamenu_options = $( `#menu-item-${menu_id}` ).find('.megamenu-description-group');
+
+//   switch( unit_size ){
+//     case 'unit1':
+//       // Hide Description
+//       $(desc).addClass('hidden-field');
+
+//       // Hide Megamenu Options
+//       $(megamenu_options).addClass('hidden-field');
+//       break;
+//     case 'unit2':
+//       // Show Description
+//       $(desc).removeClass('hidden-field');
+
+//       // Hide Megamenu Options
+//       $(megamenu_options).addClass('hidden-field');
+//       break;
+//     case 'unit3':
+//       // Show Description
+//       $(desc).removeClass('hidden-field');
+
+//       // Show Megamenu Options
+//       $(megamenu_options).removeClass('hidden-field');
+//       break;
+//   }
+// });
 
 /***/ },
 
@@ -7132,6 +7214,35 @@ jQuery(document).ready(function ($) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -7172,15 +7283,20 @@ __webpack_require__.r(__webpack_exports__);
 
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+/* harmony import */ var bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__("./src/scripts/wp/browse-library.js");
 __webpack_require__("./src/scripts/admin/alerts.js");
 __webpack_require__("./src/scripts/admin/icon.js");
 __webpack_require__("./src/scripts/admin/nav-menu.js");
 __webpack_require__("./src/scripts/admin/options.js");
 __webpack_require__("./src/scripts/admin/uploads.js");
-__webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
+
+window.bootstrap = (bootstrap_dist_js_bootstrap_bundle_js__WEBPACK_IMPORTED_MODULE_0___default());
 })();
 
 /******/ })()

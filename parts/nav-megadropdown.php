@@ -89,21 +89,32 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 						</a>
 						<?php if ( ! empty( $caweb_child_items ) ) : ?>
 						<ul class="dropdown-menu">
-							<div class="submenu">
 							<?php
-								foreach ( $caweb_child_items as $caweb_child_item ) {
+								foreach ( $caweb_child_items as $c => $caweb_child_item ) {
 									$caweb_child_item_meta      = get_post_meta( $caweb_child_item->ID );
+
+									// if the child item has the mega menu border option enabled, add class to submenu
+									$caweb_border = isset( $caweb_child_item_meta['_caweb_menu_mega_border'][0] ) ? ' border border-1' : '';
+
+									// on first loop, if there are child items, it opens a div with class .submenu that wraps the second level nav items. 
+									// If there are mega menu rows, the .submenu divs will be closed and opened accordingly to wrap each mega menu row.
+									if( 0 === $c ){
+										?>
+										<div class="submenu<?php print esc_attr( $caweb_border ); ?>">
+										<?php
+									}
+
 									
 									// new row is determined by the _caweb_menu_mega_row meta value, if true, it closes the current second-level-nav div and opens a new one.
 									$caweb_new_row = isset( $caweb_child_item_meta['_caweb_menu_mega_row'][0] ) ? $caweb_child_item_meta['_caweb_menu_mega_row'][0] : '';
-									
+
 									$caweb_child_item_unit_size = isset( $caweb_child_item_meta['_caweb_menu_unit_size'][0] ) ? $caweb_child_item_meta['_caweb_menu_unit_size'][0] : 'unit1';
 
 									// Add additional item classes.
 									$caweb_child_item->classes = array_merge( array( $caweb_child_item_unit_size ), $caweb_child_item->classes );
 	
-									// nav media type (icon or image).
-									$nav_media_type= isset( $caweb_child_item_meta['_caweb_menu_media_type'][0] ) ? $caweb_child_item_meta['_caweb_menu_media_type'][0] : 'icon';
+									// nav media type (none, icon or image).
+									$nav_media_type= isset( $caweb_child_item_meta['_caweb_menu_media_type'][0] ) ? $caweb_child_item_meta['_caweb_menu_media_type'][0] : 'none';
 
 									// Get icon if present.
 									$caweb_child_item_icon = isset( $caweb_child_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_child_item_meta['_caweb_menu_icon'][0] ) ?
@@ -113,7 +124,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 										// close the open second-level-nav and open another for the new row.
 										?>
 											</div>
-											<div class="submenu">
+											<div class="submenu<?php print esc_attr( $caweb_border ); ?>">
 										<?php
 									}
 									?>
@@ -135,7 +146,7 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 												$icon = isset( $caweb_child_item_meta['_caweb_menu_icon'][0] ) && ! empty( $caweb_child_item_meta['_caweb_menu_icon'][0] ) ? $caweb_child_item_meta['_caweb_menu_icon'][0] : '';
 												if( ! empty( $icon ) ){
 													?>
-													<span class="ca-gov-icon-<?php print esc_attr( $icon ); ?>" aria-hidden="true"></span>
+													<span class="fs-1 ca-gov-icon-<?php print esc_attr( $icon ); ?>" aria-hidden="true"></span>
 													<?php
 												}
 											} else if ( 'image' === $nav_media_type ) {
@@ -164,9 +175,14 @@ _wp_menu_item_classes_by_context( $caweb_menuitems );
 										</a>
 									<?php
 
+									// close the .submenu div if it's the last child item
+									if( $c === count( $caweb_child_items ) - 1 ){
+										?>
+										</div>
+										<?php
+									}
 								}
 							?>
-							</div>
 						</ul>
 						<?php endif; ?>
 					</li>
