@@ -22,7 +22,7 @@ trait CustomCssTrait {
 	 * @since ??
 	 */
 	public static function custom_css() {
-		return \WP_Block_Type_Registry::get_instance()->get_registered( 'caweb/profile-banner' )->customCssFields;
+		return \WP_Block_Type_Registry::get_instance()->get_registered( 'caweb/github' )->customCssFields;
 	}
 
 }

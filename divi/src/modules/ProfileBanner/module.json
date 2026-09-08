@@ -56,10 +56,7 @@
             "label": "Profile Name",
             "description": "Input the name of the profile.",
             "features": {
-              "sticky": false,
-              "dynamicContent": {
-                "type": "text"
-              }
+              "responsive": false
             },
             "component": {
               "name": "divi/text",
@@ -86,10 +83,7 @@
             "label": "Job Title",
             "description": "Input the job title.",
             "features": {
-              "sticky": false,
-              "dynamicContent": {
-                "type": "text"
-              }
+              "responsive": false
             },
             "component": {
               "name": "divi/text",
@@ -128,10 +122,7 @@
               "label": "Link Text",
               "description": "Input the text for the profile link.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -146,10 +137,7 @@
               "label": "URL",
               "description": "Input the website of the profile.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -166,6 +154,15 @@
       "childrenSanitizer": "et_core_esc_previously",
       "tagName": "img",  
       "elementType": "image",
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "rounded": "on"
+            }
+          }
+        }
+      },
       "settings": {
         "innerContent": {
           "groupType": "group-items",
@@ -178,10 +175,7 @@
               "label": "Image URL",
               "description": "Type in the URL to the image you would like to display, or upload your desired image below.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "image"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -204,10 +198,7 @@
               "label": "Image",
               "description": "Upload your desired image, or type in the URL to the image you would like to display above.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "image"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/upload",
@@ -230,10 +221,7 @@
               "label": "Image Alt Text",
               "description": "Input the alt text for the portrait image.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -243,20 +231,16 @@
             "rounded": {
               "groupSlug": "portraitDesign",
               "render": true,
-              "label": "Round Image",
               "attrName": "portrait.advanced",
               "subName": "rounded",
+              "label": "Round Image",
               "description": "Switch to yes if you want the profile banner to display vertically.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
-                "type": "field",
-                "props": {
-                  "defaultValue": "off"
-                }
+                "type": "field"
               }
             },
             "vertical": {
@@ -267,14 +251,13 @@
               "subName": "vertical",
               "description": "Switch to yes if you want the profile banner to display vertically.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
                 "type": "field",
                 "props": {
-                  "defaultValue": "off"
+                  "defaultValue": "on"
                 }
               }
             }

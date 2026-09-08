@@ -13,10 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use CAWeb\Modules\Utils\Module as CAWebModule;
-
-use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
-use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 use CAWeb\Modules\Location\ModuleTrait;
+
+use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 
 /**
  * `Location` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.

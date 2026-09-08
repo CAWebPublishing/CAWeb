@@ -89,10 +89,7 @@
               "label": "Title",
               "description": "Define the title for the section.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -107,8 +104,7 @@
               "label": "Size",
               "description": "Here you can choose the size for the panel header.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/select",
@@ -148,8 +144,7 @@
               "label": "Alignment",
               "description": "Here you can choose the alignment for the panel header.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/select",
@@ -206,10 +201,7 @@
             "description": "Here you can create the content that will be used within the module.",
             "render": true,
             "features": {
-              "sticky": false,
-              "dynamicContent": {
-                "type": "text"
-              }
+              "responsive": false
             },
             "component": {
               "type": "field",
@@ -236,8 +228,7 @@
               "attrName": "image.innerContent",
               "subName": "show",  
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -255,8 +246,7 @@
               "attrName": "image.innerContent",
               "subName": "alignment",  
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -274,8 +264,7 @@
               "attrName": "image.innerContent",
               "subName": "fade",  
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -294,10 +283,7 @@
               "label": "Image",
               "description": "If defined, this image will be used as the background for this module.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "image"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/upload",
@@ -332,8 +318,7 @@
               "attrName": "link.innerContent",
               "subName": "show",  
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -352,8 +337,7 @@
               "attrName": "link.innerContent",
               "subName": "url",  
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",

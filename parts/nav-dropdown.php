@@ -17,7 +17,7 @@ foreach ( $args as $var => $val ) {
 }
 // phpcs:enable
 
-$caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
+$caweb_menuitems = wp_get_nav_menu_items( $menu, array( 'order' => 'DESC' ) );
 
 _wp_menu_item_classes_by_context( $caweb_menuitems );
 
@@ -77,10 +77,6 @@ foreach ( $caweb_menuitems as $caweb_item ) {
 
 									// this prevents any unit3 from attempting to render.
 									$caweb_child_item_unit_size = 'unit1' === $caweb_child_item_unit_size ? 'unit1' : 'unit2';
-
-									// Get icon if present.
-									$caweb_child_item_icon = isset( $caweb_child_item_meta['_caweb_menu_icon'] ) && ! empty( $caweb_child_item_meta['_caweb_menu_icon'][0] ) ?
-										$caweb_child_item_meta['_caweb_menu_icon'][0] : '';
 
 									// Add additional item classes.
 									$caweb_child_item->classes = array_merge( array( $caweb_child_item_unit_size, 'w-100', 'p-0' ), $caweb_child_item->classes );

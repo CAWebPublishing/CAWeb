@@ -17,7 +17,7 @@ foreach ( $args as $var => $val ) {
 }
 // phpcs:enable
 
-$caweb_menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
+$caweb_menuitems = wp_get_nav_menu_items( $menu, array( 'order' => 'DESC' ) );
 
 _wp_menu_item_classes_by_context( $caweb_menuitems );
 

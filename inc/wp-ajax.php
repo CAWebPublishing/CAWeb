@@ -14,6 +14,24 @@ add_action( 'wp_ajax_caweb_fav_icon_check', 'caweb_fav_icon_checker' );
 add_action( 'wp_ajax_caweb_icon_menu', 'caweb_icon_menu_func' );
 add_action( 'wp_ajax_nopriv_caweb_icon_menu', 'caweb_icon_menu_func' );
 add_action( 'wp_ajax_create_doc_sitemap', 'caweb_doc_create_xml' );
+add_action( 'wp_ajax_render_shortcode_via_js', 'js_render_shortcode_handler');
+
+function js_render_shortcode_handler() {
+    // Security check (Verify the nonce sent from JS)
+    check_ajax_referer('js_shortcode_nonce', 'security');
+	
+    // Ensure the shortcode string was provided
+    if (!isset($_POST['shortcode'])) {
+		wp_send_json_error('No shortcode provided.');
+	}
+		
+    // Sanitize and process the shortcode
+    $shortcode_string = wp_kses($_POST['shortcode'], 'post');
+    $rendered_html = do_shortcode($shortcode_string);
+	
+    // Return the executed HTML
+    wp_send_json_success($rendered_html);
+}
 
 /**
  * Check the Binary Signature of a file, currently only icons

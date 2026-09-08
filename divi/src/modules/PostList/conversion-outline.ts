@@ -1,0 +1,78 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ModuleConversionOutline } from '@divi/types';
+
+// Compare this to wp.data.select('divi/settings').getSetting('shortcodeModuleDefinitions').et_pb_blurb.fields
+
+export const conversionOutline: ModuleConversionOutline = {
+  advanced: {
+    admin_label: 'module.meta.adminLabel',
+    animation:   'module.decoration.animation',
+    background:  'module.decoration.background',
+    borders:     {
+      default: 'module.decoration.border',
+    },
+    box_shadow: {
+      default: 'module.decoration.boxShadow',
+    },
+    disabled_on: 'module.decoration.disabledOn',
+    filters:     {
+      default: 'module.decoration.filters',
+    },
+    fonts: {
+      body:       'content.decoration.bodyFont.body',
+      body_link:  'content.decoration.bodyFont.link',
+      body_ol:    'content.decoration.bodyFont.ol',
+      body_quote: 'content.decoration.bodyFont.quote',
+      body_ul:    'content.decoration.bodyFont.ul',
+      header:     'title.decoration.font',
+    },
+    height:          'module.decoration.sizing',
+    link_options:    'module.advanced.link',
+    margin_padding:  'module.decoration.spacing',
+    max_width:       'module.decoration.sizing',
+    module:          'module.advanced.htmlAttributes',
+    overflow:        'module.decoration.overflow',
+    position_fields: 'module.decoration.position',
+    scroll:          'module.decoration.scroll',
+    sticky:          'module.decoration.sticky',
+    text:            'module.advanced.text',
+    text_shadow:     {
+      default: 'module.advanced.text.textShadow',
+    },
+    transform:  'module.decoration.transform',
+    transition: 'module.decoration.transition',
+    z_index:    'module.decoration.zIndex',
+  },
+  css: {
+    after:         'css.*.after',
+    before:        'css.*.before',
+    main_element:  'css.*.mainElement',
+    content:       'css.*.content',
+    title:         'css.*.title',
+  },
+  module: {
+    title: 'title.innerContent.*',
+    title_size: 'title.advanced.*.size',
+
+    style: 'style.innerContent.*',
+    faq_style: 'style.advanced.*.faq',
+    
+    posts_number: 'posts.innerContent.*',
+
+    view_featured_image: 'image.innerContent.*',
+
+    include_categories: 'categories.innerContent.*',
+    all_categories_button: 'categories.advanced.*.all',
+
+    include_tags: 'tags.innerContent.*',
+    all_tags_button: 'tags.advanced.*.all',
+
+    orderby: 'orderby.innerContent.*',
+    display_excerpt: 'excerpt.innerContent.*'
+  },
+  valueExpansionFunctionMap:{
+    include_categories: 'includedCategories',
+    include_tags: 'CAWeb\\Modules\\Utils\\ValueExpansion::includedTags',
+    style: 'CAWeb\\Modules\\Utils\\ValueExpansion::replacePostListStyle'
+  }
+};

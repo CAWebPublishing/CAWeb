@@ -89,7 +89,7 @@ function caweb_divi_extension_enqueue_d4_vb_scripts() {
 	// Enqueue Frontend and Visual Builder Styles
 	wp_enqueue_style(
 		'caweb-divi4-vb',
-		CAWEB_DIVI_EXT_URL . "build/bundle4.css",
+		CAWEB_DIVI_EXT_URL . "build/style-bundle4.css",
 		array(),
 		'1.0.0'
 	);
@@ -105,4 +105,22 @@ function caweb_divi_extension_et_fb_enqueue_assets(){
 		array(),
 		'1.0.0'
 	);
+}
+
+/**
+ * Sets the class for the opening wrappers for builder-powered content.
+ *
+ * @return array
+ */
+function caweb_et_builder_outer_content_class() {
+	return array();
+}
+
+/**
+ * Sets the id for the opening wrappers for builder-powered content.
+ *
+ * @return sttring
+ */
+function caweb_et_builder_outer_content_id() {
+	return '';
 }

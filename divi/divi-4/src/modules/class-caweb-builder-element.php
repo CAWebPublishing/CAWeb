@@ -174,6 +174,67 @@ class ET_Builder_CAWeb_Module extends ET_Builder_Module {
 	}
 
 	/**
+	 * Wrap module's rendered output with proper module wrapper. Ensuring module has consistent
+	 * wrapper output which compatible with module attribute and background insertion.
+	 *
+	 * @since 3.1
+	 *
+	 * @param string $output      Module's rendered output.
+	 * @param string $render_slug Slug of module that is used for rendering output.
+	 *
+	 * @return string
+	 */
+	//phpcs:disable
+	protected function _render_module_wrapper( $output = '', $render_slug = '' ) {
+	//phpcs:enable
+		return $output;
+	}
+
+	/**
+	 * Returns address in CSV format
+	 *
+	 * @param  array|string $addr Address to format.
+	 * @return string
+	 */
+	public function caweb_get_address( $addr ) {
+		if ( empty( $addr ) ) {
+			return;
+		} elseif ( is_string( $addr ) ) {
+			$addr = preg_split( '/,/', $addr );
+		}
+
+		$addr = array_filter( $addr );
+		$addr = implode( ', ', $addr );
+
+		return $addr;
+	}
+
+	/**
+	 * Create a GoogleMap Place Link/Embedded IFrame
+	 *
+	 * @param  array|string $addr Address to format.
+	 * @param  mixed        $embed Whether to create a link or embedded iframe.
+	 * @param  mixed        $target The links target, default _blank.
+	 * @param  mixed        $classes Class for the link.
+	 * @return string
+	 */
+	public function caweb_get_google_map_place_link( $addr, $embed = false, $target = '_blank', $classes = '' ) {
+
+		$addr = $this->caweb_get_address( $addr );
+
+		$classes = is_array( $classes ) ? implode( ' ', $classes ) : $classes;
+		$classes = sprintf( ' class="%1$s"', $classes );
+
+		if ( $embed ) {
+			$map_url = sprintf( 'https://www.google.com/maps/embed/v1/place?q=%1$s&zoom=10&key=%2$s', $addr, $this->caweb_google_maps_embed_api_key );
+
+			return sprintf( '<iframe title="IFrame for Address %1$s" src="%2$s"></iframe>', $addr, $map_url );
+		} else {
+			return sprintf( '<a href="https://www.google.com/maps/place/%1$s" target="%2$s"%3$s>%1$s</a>', $addr, $target, $classes );
+		}
+	}
+
+	/**
 	 * Processes modules icon selection
 	 *
 	 * @param  string $icon Selected icon.

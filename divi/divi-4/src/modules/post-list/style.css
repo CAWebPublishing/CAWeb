@@ -1,0 +1,39 @@
+/* Post List (News,Event) */
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"],
+.et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
+  white-space: pre-line;
+}
+
+/* Post List (Events) */
+.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 a{
+	color: #347AB7;
+}
+
+/* Post List (News) */
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
+	width: auto;
+}
+.et_pb_module.et_pb_ca_post_list.indent.news-list .info{
+	padding-left: 175px;
+}
+
+/* Post List (Profile) */
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item{
+	min-height: 105px;
+}
+
+/* Post List (FAQs) */
+/* Remove Divi minus icon */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading:before,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading:before {
+	content: '';
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
+	border-bottom: inherit;
+}
+
+/* Post List (General) */
+.et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before{
+	content: '';
+}

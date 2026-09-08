@@ -13,9 +13,13 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_CAWeb_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug = 'et_pb_profile_banner';
 
-	// Visual Builder support (off|partial|on)
+	/**
+	 * Even tho we dont support the Visual Builder Support
+	 * we dont' want the warning message that the module doesn't support the Visual Builder, so we set this to on.
+	 * @var string Whether or not this module supports Divi's Visual Builder.
+	 */
 	public $vb_support = 'on';
-
+	
 	/**
 	 * Module properties initialization
 	 *

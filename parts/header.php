@@ -110,14 +110,10 @@ foreach ( $args as $var => $val ) {
 	    <div class="container">
 		<?php
 			if ( has_nav_menu( 'header-menu' ) ) {
-				wp_nav_menu(
-					array(
-						'theme'                     => 'CAWeb',
-						'theme_location'                     => 'header-menu',
-						'caweb_nav_type'                     => $caweb_menu_style,
-						'caweb_google_search_id'             => $caweb_google_search_id,
-					)
-				);
+				get_template_part( "parts/nav", $caweb_menu_style, array(
+					'menu' => get_nav_menu_locations()['header-menu'],
+					'caweb_google_search_id'             => $caweb_google_search_id,
+				));
 			} else {
 				?>
 					<ul class="nav">

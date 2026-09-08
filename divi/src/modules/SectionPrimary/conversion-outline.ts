@@ -64,9 +64,10 @@ export const conversionOutline: ModuleConversionOutline = {
     section_image:          'image.innerContent.*.src',
     slide_image_button: 'image.innerContent.*.fade',
 
+    module_text_shadow_style: 'module.advanced.text.textShadow.*.style',
     module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
     module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
-    module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur',
+    module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur'
 
   }
 };

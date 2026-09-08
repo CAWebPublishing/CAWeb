@@ -12,9 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
 }
 
-use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
-use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
+use CAWeb\Modules\Utils\Module as CAWebModule;
 use CAWeb\Modules\ProfileBanner\ModuleTrait;
+
+use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 
 /**
  * `ProfileBanner` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.
@@ -23,7 +24,7 @@ use CAWeb\Modules\ProfileBanner\ModuleTrait;
  *
  * @since ??
  */
-class ProfileBanner implements DependencyInterface {
+class ProfileBanner extends CAWebModule {
 	use ModuleTrait\RenderCallbackTrait;
 
 	/**

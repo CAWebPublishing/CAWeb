@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@caweb/cli": "^1.15.12",
+    "@caweb/cli": "^1.17.2",
     "@caweb/icon-library": "^1.1.7",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
@@ -23,8 +23,19 @@
     "build:all": "npm run build && npm run build:divi",
     "build:all:dev": "npm run build:dev && npm run build:divi:dev",
     "build": "caweb build --mode production && caweb build",
+    "build:prod": "caweb build --mode production",
     "build:dev": "caweb build",
     "build:divi": "cd divi && npm run build",
     "build:divi:dev": "cd divi && npm run build:dev"
+  },
+  "allowScripts": {
+    "@caweb/css-audit-webpack-plugin@2.1.5": true,
+    "@parcel/watcher@2.5.6": true,
+    "accessibility-checker@4.0.17": true,
+    "chromedriver@148.0.1": true,
+    "core-js@3.49.0": true,
+    "fs-ext-extra-prebuilt@2.2.7": true,
+    "puppeteer@22.15.0": true,
+    "fsevents@2.3.3": true
   }
 }

@@ -17,8 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\ModuleUtils\ModuleUtils;
 use ET\Builder\Framework\Utility\HTMLUtility;
-use ET\Builder\FrontEnd\BlockParser\BlockParserStore;
-use ET\Builder\Packages\Module\Options\Element\ElementComponents;
+use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 
 trait RenderCallbackTrait {
 	

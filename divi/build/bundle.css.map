@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.css","mappings":"AAAA;EACI;AACJ;;AACA;EACI;EACA;AAEJ,C","sources":["webpack://caweb-divi-extension/./src/styles/_builder.scss"],"sourcesContent":[".row > .et-vb-module-options {\n    width: auto;\n}\n.row > .et-vb-module-highlight {\n    margin: 0;\n    padding: 0;\n}"],"names":[],"sourceRoot":""}

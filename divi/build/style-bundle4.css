@@ -1,0 +1,117 @@
+/* Cards */
+.et_pb_ca_card.et_pb_module .card-header,
+.et_pb_ca_card.et_pb_module .card-footer{
+	padding: 10px 15px;
+}
+.et_pb_ca_card.et_pb_module .card-block {
+	padding: 15px;
+}
+
+/* Panel and Fullwidth Panel */
+.et_pb_module.et_pb_ca_panel .panel-body ul,
+.et_pb_module.et_pb_ca_panel .panel-body ol{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+/* Panel and Fullwidth Panel */
+.et_pb_module.et_pb_ca_fullwidth_panel .panel-body ul,
+.et_pb_module.et_pb_ca_fullwidth_panel .panel-body ol{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+
+
+/* Post List (News,Event) */
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .info .description [id$="excerpt"],
+.et_pb_module.et_pb_ca_post_list.general-list .event-item .description [id$="excerpt"] {
+  white-space: pre-line;
+}
+
+/* Post List (Events) */
+.et_pb_module.et_pb_ca_post_list.events-list .event-item .info h5 a{
+	color: #347AB7;
+}
+
+/* Post List (News) */
+.et_pb_module.et_pb_ca_post_list.news-list .news-item .thumbnail {
+	width: auto;
+}
+.et_pb_module.et_pb_ca_post_list.indent.news-list .info{
+	padding-left: 175px;
+}
+
+/* Post List (Profile) */
+.et_pb_module.et_pb_ca_post_list.profile-list .profile-item{
+	min-height: 105px;
+}
+
+/* Post List (FAQs) */
+/* Remove Divi minus icon */
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading:before,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading:before {
+	content: '';
+}
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_open .panel-heading ,
+.et_pb_module.et_pb_ca_post_list.faqs-list .et_pb_toggle_close .panel-heading {
+	border-bottom: inherit;
+}
+
+/* Post List (General) */
+.et_pb_module.et_pb_ca_post_list.general-list .event-item h5 a:before{
+	content: '';
+}
+
+/* Section Carousel Slide */
+.et_pb_ca_section_carousel .carousel-media .item .preview-image{
+	height: 150px;
+}
+
+/* Section Carousel Slide */
+.et_pb_ca_section_carousel .carousel-media .item .preview-image{
+	height: 150px;
+}
+
+
+
+/* Section Carousel Slide */
+.et_pb_ca_fullwidth_section_carousel .carousel-media .item .preview-image{
+	height: 150px;
+}
+
+/* Section - Footer Group */
+.et_pb_ca_section_footer_group.et_pb_module [class^=list-]{
+	list-style-type: none !important;
+}
+
+/* Section - Footer Group */
+.et_pb_ca_fullwidth_section_footer.et_pb_module [class^=list-]{
+	list-style-type: none !important;
+}
+
+.et_pb_ca_section_primary {
+    overflow: hidden;
+}
+.et_pb_ca_fullwidth_section_primary {
+    overflow: hidden;
+}
+.service-tile:focus .teaser .title,
+.service-tile .teaser .title:hover{
+    color: #FDB81E !important;
+}
+
+.service-tile-full.is-open .service-tile-panel{
+    position: relative !important;
+}
+.service-tile-panel{
+    position: absolute !important;
+}
+.service-tile-panel .section{
+    background:  whitesmoke !important;
+}
+.service-tile-panel .card{
+    border: 1px solid #ddd !important;
+}
+
+/*# sourceMappingURL=style-bundle4.css.map*/

@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined -- undefined value is needed for JSON creation and AST exploring to be done correctly */
 /* eslint-disable no-use-before-define -- function declarations are hoisted so it allows for cross calling functions */
-// import { reduce, map, isUndefined, filter } from 'lodash';
+// const { reduce, map, isUndefined, filter } = require('lodash');
 import reduce from 'lodash/reduce.js';
 import map from 'lodash/map.js';
 import isUndefined from 'lodash/isUndefined.js';
@@ -12,6 +12,7 @@ import filter from 'lodash/filter.js';
  * @param {Array} properties The AST properties to extract data from.
  * @returns {object} The extracted static properties.
  */
+// module.exports = function extractStaticProperties(properties) {
 export default function extractStaticProperties(properties) {
   /**
    * Returns the first defined (non-undefined) value from an array.

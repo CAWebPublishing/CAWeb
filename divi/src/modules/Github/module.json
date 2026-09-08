@@ -87,10 +87,7 @@
               "label": "Title",
               "description": "Enter a title for the list.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -105,8 +102,7 @@
               "label": "Size",
               "description": "Here you can choose the size for the panel header.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/select",
@@ -158,8 +154,7 @@
               "label": "Username",
               "description": "Enter GitHub Username.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -175,8 +170,7 @@
               "label": "Maximum # of results",
               "description": "Enter amount to display per page. Default is 30, Max is 100.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/common-numeric-input",
@@ -198,8 +192,7 @@
               "label": "Repository Type",
               "description": "Choose repository type you wish to display.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/select",
@@ -236,8 +229,7 @@
               "label": "Personal Access Token",
               "description": "This is required for Private Repositories to display.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -253,8 +245,7 @@
               "label": "Increase Rate Limit",
               "description": "Increase the maximum number of requests users are permitted to make per hour. <a href=\"https://developer.github.com/v3/#rate-limiting\" target=\"_blank\">Rate Limiting</a>.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -273,8 +264,7 @@
               "label": "Client ID",
               "description": "Enter GitHub Client ID.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -290,8 +280,7 @@
               "label": "Client Secret",
               "description": "Enter GitHub Client Secret.",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -299,15 +288,14 @@
               }
             },
 
-            "test": {
+            "definitions": {
               "groupSlug": "organization",
               "render": true,
               "label": "Select which information for each repository you would like to display.",
               "description": "Definitions",
               "attrName": "definitions",
               "features": {
-                "sticky": false,
-                "dynamicContent": false
+                "responsive": false
               },
               "component": {
                 "name": "divi/checkboxes",
@@ -356,7 +344,6 @@
   "settings": {
     "design": "auto",
     "advanced": "auto",
-    "content": "auto",
     "groups":{
       "header": {
         "panel": "content",

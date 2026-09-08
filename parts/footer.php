@@ -31,13 +31,10 @@ $caweb_social_media      = caweb_get_social_media_links();
 	<?php
 
 	if ( has_nav_menu( 'footer-menu' ) ) {
-		wp_nav_menu(
-			array(
-				'theme'                     => 'CAWeb',
-				'theme_location'          => 'footer-menu',
-				'caweb_nav_type'          => 'footer'
-			)
-		);
+
+		get_template_part( "parts/nav", 'footer', array(
+				'menu' => get_nav_menu_locations()['footer-menu']
+		));
 	} else {
 		?>
 					<ul class="footer-links ps-0 me-auto">

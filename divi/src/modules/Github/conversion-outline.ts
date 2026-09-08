@@ -63,8 +63,11 @@ export const conversionOutline: ModuleConversionOutline = {
     client_secret:  'request.innerContent.*.client_secret',
     request_email: 'request.innerContent.*.email',
     email_body:    'request.innerContent.*.email_body',
-    
     definitions:          'definition.innerContent.*',
 
+    module_text_shadow_style: 'module.advanced.text.textShadow.*.style',
+    module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
+    module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
+    module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur'
   }
 };

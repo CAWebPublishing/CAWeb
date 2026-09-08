@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "outDir": "./scripts/",
+    "rootDir": "./",
+    "outDir": "./build/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    "module": "nodenext",
+    "target": "es6",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "noEmit": true

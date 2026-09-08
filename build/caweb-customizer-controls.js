@@ -1,32 +1,136 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/scripts/admin/icon.js"
 () {
 
-eval("{/* CAWeb Icon Menu Javascript */\njQuery(document).ready(function ($) {\n  $(document).on('click', '.caweb-icon-menu li', function (e) {\n    cawebIconSelected(this);\n  });\n  $(document).on('click', '.caweb-icon-menu-header .reset-icon', function (e) {\n    resetIconSelect($(this).parent().next());\n  });\n  function cawebIconSelected(iconLi) {\n    resetIconSelect($(iconLi).parent());\n    $(iconLi).addClass('active');\n    var i = $(iconLi).parent().find('input');\n    if (i.length) {\n      $(i).val($(iconLi).attr('title'));\n    }\n  }\n  function resetIconSelect(iconList) {\n    var icon_list = $(iconList).find('LI');\n    for (o = 0; o < icon_list.length - 1; o++) {\n      $(icon_list[o]).removeClass('active');\n    }\n    var i = $(iconList).find('input');\n    if (i.length) {\n      $(i).val('');\n    }\n  }\n});\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/admin/icon.js?\n}");
+/* CAWeb Icon Menu Javascript */
+window.addEventListener('load', () => {
+  // Get the icon menu modal element
+  let iconMenuModal = document.getElementById('caweb-icon-menu-modal');
+  let iconMenus = document.querySelectorAll('.caweb-icon-menu');
+
+  // get the input value from the icon menu
+  const getSelectedIcon = iconMenu => {
+    // get the input value from the icon menu.
+    let selectedIcon = iconMenu.querySelector('input').value;
+
+    // return the selected icon value
+    return selectedIcon;
+  };
+
+  // reset the icon menu selection
+  const resetIcon = iconMenu => {
+    let iconList = iconMenu.querySelectorAll('li');
+    let iconInput = iconMenu.querySelector('input');
+    iconList.forEach(li => {
+      li.classList.remove('active');
+    });
+    iconInput.value = '';
+  };
+  const selectIcon = iconLi => {
+    resetIcon(iconLi.parentElement);
+    iconLi.classList.add('active');
+    let iconInput = iconLi.parentElement.querySelector('input');
+    if (iconInput) {
+      iconInput.value = iconLi.getAttribute('title');
+    }
+  };
+
+  // attach functionality to the icon menus
+  if (iconMenus) {
+    iconMenus.forEach(menu => {
+      menu.getSelectedIcon = () => getSelectedIcon(menu);
+      menu.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', e => {
+          selectIcon(li);
+        });
+      });
+      menu.parentElement.querySelectorAll('.reset-icon').forEach(resetButton => {
+        resetButton.addEventListener('click', e => {
+          resetIcon(menu);
+        });
+      });
+    });
+  }
+
+  // if the icon menu modal exists, add event listener to the save button	
+  if (iconMenuModal) {
+    // modal save button 
+    let saveButton = iconMenuModal.querySelector('[data-bs-save="modal"]');
+
+    // Get the icon menu element used inside the modal for selecting icons
+    iconMenus = iconMenuModal.querySelector('.caweb-icon-menu');
+
+    // modal show event listener 
+    iconMenuModal.addEventListener('show.bs.modal', e => {
+      // the modal may be triggered by multiple buttons, 
+      // so we need to get the data-icon attribute from the relatedTarget and assign it to the modal's dataset for use when saving
+      iconMenuModal.dataset.icon = e.relatedTarget.dataset.icon;
+    });
+
+    // modal save button click event listener
+    saveButton.addEventListener('click', e => {
+      // Get the data-icon attribute from the modal's dataset to know which input to update with the selected icon value
+      let inputId = iconMenuModal.dataset.icon;
+      let inputElement = document.querySelector(`[name="${inputId}"]`);
+
+      // Update the input value with the selected icon value
+      if (inputElement) {
+        // Get the selected icon from the icon menu 
+        inputElement.value = getSelectedIcon(iconMenus);
+      }
+
+      // close the modal after saving	
+      let modal = bootstrap.Modal.getInstance(iconMenuModal);
+      modal.hide();
+
+      // give the focus back to the button that triggered the modal after saving
+      document.querySelector(`[data-icon="${inputId}"]`).focus({
+        focusVisible: true
+      });
+    });
+  }
+});
 
 /***/ },
 
 /***/ "./src/scripts/wp/theme-customizer/controls/alert-banners.js"
 () {
 
-eval("{jQuery(document).ready(function ($) {\n  $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);\n  $('.caweb-toggle-alert').click(toggle_alert);\n  $('.caweb-remove-alert').click(remove_alert);\n  function add_alert_banner() {\n    var alert_list = $(this).parent().parent();\n    var new_li = $(this).parent().next().clone();\n    var alert_toggle = $(new_li).find('#caweb-toggle-alert');\n    var alert_status = $(new_li).find('input[name^=\"alert-status-\"]');\n    var alert_remove = $(new_li).find('.caweb-remove-alert');\n    $(new_li).attr('id', '');\n    $(alert_toggle).on('click', toggle_alert);\n    $(alert_remove).on('click', remove_alert);\n    $(alert_status).attr('data-bs-toggle', 'toggle');\n    $(alert_status).attr('data-size', 'sm');\n    $(alert_list).append($(new_li));\n    $(alert_status).bootstrapToggle({\n      onstyle: 'success'\n    });\n\n    //wp.editor.initialize(\"alertmessage-\" + alertCount, caweb_admin_args.tinymce_settings);\n  }\n  function toggle_alert() {\n    $('#' + $(this).attr('data-target')).collapse('toggle');\n    $(this).find('span').toggleClass('dashicons-arrow-right');\n  }\n  function remove_alert() {\n    var r = confirm(\"Are you sure you want to remove this alert? This can not be undone.\");\n    if (r == true) {\n      $(this).parent().remove();\n    }\n  }\n});\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/wp/theme-customizer/controls/alert-banners.js?\n}");
+jQuery(document).ready(function ($) {
+  $('#_customize-input-caweb_add_alert_banner').click(add_alert_banner);
+  $('.caweb-toggle-alert').click(toggle_alert);
+  $('.caweb-remove-alert').click(remove_alert);
+  function add_alert_banner() {
+    var alert_list = $(this).parent().parent();
+    var new_li = $(this).parent().next().clone();
+    var alert_toggle = $(new_li).find('#caweb-toggle-alert');
+    var alert_status = $(new_li).find('input[name^="alert-status-"]');
+    var alert_remove = $(new_li).find('.caweb-remove-alert');
+    $(new_li).attr('id', '');
+    $(alert_toggle).on('click', toggle_alert);
+    $(alert_remove).on('click', remove_alert);
+    $(alert_status).attr('data-bs-toggle', 'toggle');
+    $(alert_status).attr('data-size', 'sm');
+    $(alert_list).append($(new_li));
+    $(alert_status).bootstrapToggle({
+      onstyle: 'success'
+    });
 
-/***/ },
-
-/***/ "./src/scripts/wp/theme-customizer/controls/index.js"
-(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
-
-eval("{__webpack_require__(\"./src/scripts/admin/icon.js\");\n__webpack_require__(\"./src/scripts/wp/theme-customizer/controls/alert-banners.js\");\n\n//# sourceURL=webpack://@caweb/theme/./src/scripts/wp/theme-customizer/controls/index.js?\n}");
+    //wp.editor.initialize("alertmessage-" + alertCount, caweb_admin_args.tinymce_settings);
+  }
+  function toggle_alert() {
+    $('#' + $(this).attr('data-target')).collapse('toggle');
+    $(this).find('span').toggleClass('dashicons-arrow-right');
+  }
+  function remove_alert() {
+    var r = confirm("Are you sure you want to remove this alert? This can not be undone.");
+    if (r == true) {
+      $(this).parent().remove();
+    }
+  }
+});
 
 /***/ }
 
@@ -57,11 +161,12 @@ eval("{__webpack_require__(\"./src/scripts/admin/icon.js\");\n__webpack_require_
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/scripts/wp/theme-customizer/controls/index.js");
-/******/ 	
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+__webpack_require__("./src/scripts/admin/icon.js");
+__webpack_require__("./src/scripts/wp/theme-customizer/controls/alert-banners.js");
+})();
+
 /******/ })()
 ;
+//# sourceMappingURL=caweb-customizer-controls.js.map

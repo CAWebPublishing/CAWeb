@@ -1,0 +1,230 @@
+{
+    "title": {
+        "innerContent": {
+            "desktop": {
+                "value": "Group Title"
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "size": "h4",
+                    "color": ""
+                }
+            }
+        }
+    },
+    "content": {
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "color": "",
+                    "displayLink": "off"
+                }
+            }
+        }
+    },
+    "button": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "",
+                    "linkUrl": ""
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "icon": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "icon": ""
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link1": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link1",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link2": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link2",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link3": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link3",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link4": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link4",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link5": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link5",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link6": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link6",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link7": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link7",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link8": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link8",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link9": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link9",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "link10": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Link10",
+                    "linkUrl": "#"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    }
+}

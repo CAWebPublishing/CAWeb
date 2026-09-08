@@ -1,0 +1,50 @@
+{
+    "title": {
+        "innerContent": {
+            "desktop": {
+                "value": "Item Title"
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "size": "h2"
+                }
+            }
+        }
+    },
+    "desc": {
+        "innerContent": {
+            "desktop": {
+                "value": "Item Description"
+            }
+        }
+    },
+    "button": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "",
+                    "linkUrl": ""
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "image": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "src": "",
+                    "alt": ""
+                }
+            }
+        }
+    }
+}

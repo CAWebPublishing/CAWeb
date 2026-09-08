@@ -1,0 +1,86 @@
+{
+    "title": {
+        "innerContent": {
+            "desktop": {
+                "value": ""
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "size": "h1"
+                }
+            }
+        }
+    },
+    "style": {
+        "innerContent": {
+            "desktop": {
+                "value": "courses-list"
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "faq": "accordion"
+                }
+            }
+        }
+    },
+    "posts": {
+        "innerContent": {
+            "desktop": {
+                "value": "-1"
+            }
+        }
+    },
+    "image": {
+        "innerContent": {
+            "desktop": {
+                "value": "on"
+            }
+        }
+    },
+    "categories": {
+        "innerContent": {
+            "desktop": {
+                "value": ""
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "all": "on"
+                }
+            }
+        }
+    },
+    "tags": {
+        "innerContent": {
+            "desktop": {
+                "value": ""
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "all": "on"
+                }
+            }
+        }
+    },
+    "orderby": {
+        "innerContent": {
+            "desktop": {
+                "value": "date_desc"
+            }
+        }
+    },
+    "excerpt": {
+        "innerContent": {
+            "desktop": {
+                "value": "on"
+            }
+        }
+    }
+}

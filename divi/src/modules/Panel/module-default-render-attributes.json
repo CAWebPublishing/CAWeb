@@ -1,0 +1,58 @@
+{
+    "layout": {
+        "innerContent": {
+            "desktop": {
+                "value": "default"
+            }
+        }
+    },
+    "title": {
+        "innerContent": {
+            "desktop": {
+                "value": "Header"
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "align": "left",
+                    "size": "h4"
+                }
+            }
+        }
+    },
+    "content": {
+        "innerContent": {
+            "desktop": {
+                "value": "Add content here"
+            }
+        }
+    },
+    "button": {
+        "innerContent": {
+            "desktop": {
+                "value": {
+                    "text": "Read More",
+                    "linkUrl": "#",
+                    "linkTarget": "_blank"
+                }
+            }
+        },
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "icon": {
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    }
+}

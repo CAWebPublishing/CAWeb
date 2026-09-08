@@ -58,40 +58,50 @@ function caweb_divi_extension_module_enqueue_vb_scripts() {
 				'script' => [
 					'src' => CAWEB_DIVI_EXT_URL . "build/bundle.js",
 					'deps'               => [
-						'wp-hooks',
-						'wp-i18n',
-						'wp-element',
-						'lodash',
-						'jquery',
-						'react',
-						'react-dom',
+						// 'lodash', 'react', 'wp-api-fetch', 'wp-hooks', 'wp-i18n', 'wp-url',
+						// 'wp-hooks',
+						// 'wp-i18n',
+						// 'wp-element',
+						// 'wp-data',
+						// 'wp-api-fetch',
+						// 'lodash',
+						// 'jquery',
+						// 'react',
+						// 'react-dom',
 						'divi-vendor-wp-hooks',
-						'divi-rest',
-						'divi-data',
-						'divi-module',
-						'divi-module-utils',
-						'divi-modal',
-						'divi-field-library',
-						'divi-icon-library',
+						// 'divi-vendor-wp-data',
+						// 'divi-rest',
+						// 'divi-data',
+						// 'divi-module',
+						// 'divi-module-utils',
+						// 'divi-modal',
+						// 'divi-field-library',
+						// 'divi-icon-library',
 						'divi-module-library',
-						'divi-style-library',
-						'divi-shortcode-module'
+						// 'divi-style-library',
+						// 'divi-shortcode-module'
 					],
 					'enqueue_top_window' => false,
 					'enqueue_app_window' => true,
+					'data_app_window' => [
+						'ajax_url' => admin_url('admin-ajax.php'),
+						'js_shortcode_nonce'    => wp_create_nonce('js_shortcode_nonce')
+					],
 				],
 			]
 		);
 
+			// 'ajax_url' => admin_url('admin-ajax.php'),
+			// 'js_shortcode_nonce'    => wp_create_nonce('js_shortcode_nonce')
 		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
 			[
 				'name'   => 'caweb-divi-extension-modules-builder-vb-bundle-style',
 				'version' => '1.0.0',
 				'style' => [
-					'src' => CAWEB_DIVI_EXT_URL . "build/admin.css",
+					'src' => CAWEB_DIVI_EXT_URL . "build/bundle.css",
 					'deps'               => [],
-					'enqueue_top_window' => true,
-					'enqueue_app_window' => false,
+					'enqueue_top_window' => false,
+					'enqueue_app_window' => true,
 				],
 			]
 		);

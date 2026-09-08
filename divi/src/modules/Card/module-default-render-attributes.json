@@ -1,0 +1,46 @@
+{
+    "layout": {
+        "innerContent": {
+            "desktop": {
+                "value": "default"
+            }
+        }
+    },
+    "image":{
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "title": {
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off",
+                    "size": "h4"
+                }
+            }
+        }
+    },
+    "button": {
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    },
+    "footer": {
+        "advanced": {
+            "desktop": {
+                "value": {
+                    "show": "off"
+                }
+            }
+        }
+    }
+}

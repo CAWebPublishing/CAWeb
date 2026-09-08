@@ -1,0 +1,8 @@
+/* Cards */
+.et_pb_ca_card.et_pb_module .card-header,
+.et_pb_ca_card.et_pb_module .card-footer{
+	padding: 10px 15px;
+}
+.et_pb_ca_card.et_pb_module .card-block {
+	padding: 15px;
+}

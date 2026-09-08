@@ -12,5 +12,6 @@ composer.lock
 /.phpdoc/cache/
 \.wp-env\.json
 \.wp-env\.override\.json
+.DS_Store
 
 !divi/vendor

@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this */
 import jscodeshift from "jscodeshift";
-import fs from "fs";
 import fsp from "fs/promises";
 import path from "path";
 import glob from "glob";
@@ -76,8 +75,20 @@ class ConversionOutlineJsonPlugin {
                   "conversion-outline.json"
                 );
 
-                // Write the JSON content to a `conversion-outline.json` file in the same directory
-                await fsp.writeFile(outputPath, jsonContent);
+                // Avoid rewriting when unchanged so watch mode does not retrigger on this file.
+                let shouldWrite = true;
+                try {
+                  const existing = await fsp.readFile(outputPath, "utf8");
+                  if (existing === jsonContent) {
+                    shouldWrite = false;
+                  }
+                } catch {
+                  // Missing file: write.
+                }
+
+                if (shouldWrite) {
+                  await fsp.writeFile(outputPath, jsonContent);
+                }
               } catch (fsError) {
                 // Propagate error to Promise.all
                 throw fsError;
@@ -99,4 +110,5 @@ class ConversionOutlineJsonPlugin {
   }
 }
 
+// module.exports = ConversionOutlineJsonPlugin;
 export default ConversionOutlineJsonPlugin;

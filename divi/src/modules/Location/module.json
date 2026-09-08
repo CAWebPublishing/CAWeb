@@ -64,8 +64,7 @@
             "label": "Style",
             "description": "Here you can choose the style in which to display the location.",
             "features": {
-              "sticky": false,
-              "dynamicContent": false
+              "responsive": false
             },
             "component": {
               "name": "divi/select",
@@ -111,10 +110,7 @@
               "label": "Set Featured Image",
               "description": "This image will be used as the main image for this location.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "image"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/upload",
@@ -137,10 +133,7 @@
               "label": "Image Alt Text",
               "description": "Input the alt text for the portrait image.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -168,10 +161,7 @@
               "label": "Name",
               "description": "Here you can enter a name for the location.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -201,10 +191,7 @@
               "label": "Description",
               "description": "Here you can enter a description for the location.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/textarea",
@@ -232,10 +219,7 @@
               "label": "Address",
               "description": "Enter an address.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -251,10 +235,7 @@
               "label": "City",
               "description": "Enter a city.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -270,10 +251,7 @@
               "label": "State",
               "description": "Enter a state.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -289,10 +267,7 @@
               "label": "Zip Code",
               "description": "Enter a zip code.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -331,10 +306,7 @@
               "attrName": "contact.innerContent",
               "subName": "show",  
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -353,10 +325,7 @@
               "label": "Phone",
               "description": "Enter a phone number.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -372,10 +341,7 @@
               "label": "Fax",
               "description": "Enter a fax number.",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -414,10 +380,7 @@
               "attrName": "link.innerContent",
               "subName": "show",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -436,10 +399,7 @@
               "attrName": "link.innerContent",
               "subName": "url",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/text",
@@ -471,10 +431,7 @@
               "attrName": "icon.innerContent",
               "subName": "show",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/toggle",
@@ -492,10 +449,7 @@
               "description": "Select an icon.",
               "attrName": "icon.innerContent",
               "features": {
-                "sticky": false,
-                "dynamicContent": {
-                  "type": "text"
-                }
+                "responsive": false
               },
               "component": {
                 "name": "divi/icon-picker",

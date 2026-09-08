@@ -6,4 +6,5 @@ require('./nav-menu');
 require('./options');
 require('./uploads');
 
-require('bootstrap/dist/js/bootstrap.bundle')
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js';
+window.bootstrap = bootstrap;

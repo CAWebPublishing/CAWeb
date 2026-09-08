@@ -7,13 +7,15 @@
  */
 
 namespace CAWeb\Modules\FullwidthSectionPrimary;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
 }
 
-use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
+use CAWeb\Modules\Utils\Module as CAWebModule;
+use CAWeb\Modules\FullwidthSectionPrimary\ModuleTrait;
+
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
-use CAWeb\Modules\SectionPrimary\ModuleTrait;
 
 /**
  * `FullwidthSectionPrimary` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.
@@ -22,7 +24,7 @@ use CAWeb\Modules\SectionPrimary\ModuleTrait;
  *
  * @since ??
  */
-class FullwidthSectionPrimary implements DependencyInterface {
+class FullwidthSectionPrimary extends CAWebModule {
 	use ModuleTrait\RenderCallbackTrait;
 
 	/**

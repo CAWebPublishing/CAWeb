@@ -12,9 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
 }
 
-use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
-use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
+use CAWeb\Modules\Utils\Module as CAWebModule;
 use CAWeb\Modules\Github\ModuleTrait;
+
+use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 
 /**
  * `Github` is consisted of functions used for Divi 5 Module such as Front-End rendering, REST API Endpoints etc.
@@ -23,7 +24,7 @@ use CAWeb\Modules\Github\ModuleTrait;
  *
  * @since ??
  */
-class Github implements DependencyInterface {
+class Github extends CAWebModule {
 	use ModuleTrait\RenderCallbackTrait;
 
 	/**

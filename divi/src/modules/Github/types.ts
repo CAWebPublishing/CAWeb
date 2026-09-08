@@ -72,4 +72,4 @@ export interface ModuleAttrs extends InternalAttrs {
 
 }
 
-export type SectionPrimaryModuleEditProps = ModuleEditProps<ModuleAttrs>;
+export type GithubModuleEditProps = ModuleEditProps<ModuleAttrs>;

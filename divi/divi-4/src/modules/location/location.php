@@ -19,13 +19,14 @@ class CAWeb_Module_Location extends ET_Builder_CAWeb_Module {
 	 * @var string Module slug name.
 	 */
 	public $slug = 'et_pb_ca_location_widget';
+	
 	/**
-	 * Visual Builder Support
-	 *
+	 * Even tho we dont support the Visual Builder Support
+	 * we dont' want the warning message that the module doesn't support the Visual Builder, so we set this to on.
 	 * @var string Whether or not this module supports Divi's Visual Builder.
 	 */
 	public $vb_support = 'on';
-
+	
 	/**
 	 * Module Initialization
 	 *
